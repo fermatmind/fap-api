@@ -64,7 +64,7 @@ final class CareerFullDatasetAuthorityBuilder
     public function build(): CareerFullDatasetAuthority
     {
         $ledger = $this->fullReleaseLedgerService->build()->toArray();
-        $strongIndex = $this->strongIndexEligibilityService->build()->toArray();
+        $strongIndex = $this->strongIndexEligibilityService->buildFromReleaseLedger($ledger)->toArray();
         $trackingCounts = (array) ($ledger['tracking_counts'] ?? []);
 
         $ledgerMembers = array_values(array_filter(

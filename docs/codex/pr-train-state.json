@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-31T09:35:00+08:00",
+  "updated_at": "2026-05-31T10:20:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -33315,6 +33315,55 @@
     ],
     "notes": [
       "career warm cache deploy hook is non-blocking by default; strict mode remains available via DEPLOY_CAREER_WARM_CACHE_STRICT=true"
+    ]
+  },
+  "OPS-CAREER-WARM-CACHE-PERF-01": {
+    "id": "OPS-CAREER-WARM-CACHE-PERF-01",
+    "repo": "fap-api",
+    "branch": "ops/career-warm-cache-perf-01",
+    "title": "OPS-CAREER-WARM-CACHE-PERF-01 reduce career warm cache authority rebuilds",
+    "status": "validated",
+    "authorized_at": "2026-05-31T10:05:00+08:00",
+    "authorization": "User authorized adding OPS-CAREER-WARM-CACHE-PERF-01 to docs/codex/pr-train.yaml and docs/codex/pr-train-state.json, then implementing scoped career warm cache performance optimization.",
+    "scope": [
+      "Memoize repeated first-wave readiness, lifecycle, launch-tier, discoverability, and next-step-link builders within one PHP process.",
+      "Reuse the already-built full release ledger when building strong-index data for dataset authority.",
+      "Keep deploy hook behavior unchanged and keep career authority backend-owned."
+    ],
+    "blocked_items_deferred": [
+      "No SQL index migration in this PR unless later evidence shows a single missing index is the dominant bottleneck.",
+      "No production warm command or deploy retry in this PR."
+    ],
+    "validation": [
+      {
+        "command": "php -l changed PHP files",
+        "result": "passed"
+      },
+      {
+        "command": "php artisan test --filter=CareerWarmPublicAuthorityCache --no-ansi",
+        "result": "passed_with_phpunit_warnings"
+      },
+      {
+        "command": "php artisan route:list --no-ansi",
+        "result": "passed"
+      },
+      {
+        "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-career-warm-perf.sqlite php artisan migrate --force --no-ansi",
+        "result": "passed"
+      },
+      {
+        "command": "bash backend/scripts/ci_verify_mbti.sh",
+        "result": "passed"
+      },
+      {
+        "command": "git diff --check",
+        "result": "passed"
+      }
+    ],
+    "implementation_summary": [
+      "CareerFullDatasetAuthorityBuilder reuses the already-built full release ledger for strong-index calculation.",
+      "First-wave readiness, lifecycle, launch-tier, discoverability, and next-step-link builders now memoize repeated work within one PHP process.",
+      "Deploy hook behavior remains unchanged; production mutation was not performed."
     ]
   }
 }

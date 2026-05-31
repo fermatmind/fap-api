@@ -11,6 +11,8 @@ final class CareerFirstWaveLaunchTierSummaryService
 {
     public const SUMMARY_VERSION = 'career.launch_tier.first_wave.v1';
 
+    private static ?CareerFirstWaveLaunchTierSummary $summaryMemo = null;
+
     public const SCOPE = 'career_first_wave_10';
 
     /**
@@ -31,6 +33,10 @@ final class CareerFirstWaveLaunchTierSummaryService
 
     public function build(): CareerFirstWaveLaunchTierSummary
     {
+        if (self::$summaryMemo instanceof CareerFirstWaveLaunchTierSummary) {
+            return self::$summaryMemo;
+        }
+
         $manifest = $this->manifestReader->read();
         $report = $this->validator->validate();
         $lifecycleSummary = $this->lifecycleSummaryService->build()->toArray();
@@ -117,7 +123,7 @@ final class CareerFirstWaveLaunchTierSummaryService
             ];
         }
 
-        return new CareerFirstWaveLaunchTierSummary(
+        return self::$summaryMemo = new CareerFirstWaveLaunchTierSummary(
             summaryVersion: self::SUMMARY_VERSION,
             scope: self::SCOPE,
             counts: $counts,

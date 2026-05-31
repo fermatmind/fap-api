@@ -12,6 +12,8 @@ final class CareerFirstWaveDiscoverabilityManifestService
 {
     public const MANIFEST_VERSION = 'career.discoverability.first_wave.v1';
 
+    private static ?CareerFirstWaveDiscoverabilityManifest $manifestMemo = null;
+
     public const SCOPE = 'career_first_wave_10';
 
     public function __construct(
@@ -22,6 +24,10 @@ final class CareerFirstWaveDiscoverabilityManifestService
 
     public function build(): CareerFirstWaveDiscoverabilityManifest
     {
+        if (self::$manifestMemo instanceof CareerFirstWaveDiscoverabilityManifest) {
+            return self::$manifestMemo;
+        }
+
         $manifest = $this->manifestReader->read();
         $launchTierSummary = $this->launchTierSummaryService->build()->toArray();
 
@@ -37,7 +43,7 @@ final class CareerFirstWaveDiscoverabilityManifestService
             return strcmp($leftKey, $rightKey);
         });
 
-        return new CareerFirstWaveDiscoverabilityManifest(
+        return self::$manifestMemo = new CareerFirstWaveDiscoverabilityManifest(
             manifestVersion: self::MANIFEST_VERSION,
             scope: self::SCOPE,
             routes: $routes,
