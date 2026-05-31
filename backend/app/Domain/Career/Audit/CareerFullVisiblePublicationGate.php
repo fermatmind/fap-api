@@ -35,6 +35,7 @@ final class CareerFullVisiblePublicationGate
             'found_published_locale_rows' => $this->foundPublishedLocaleRows($liveAcceptance),
             'release_gate_pass_count' => $this->releaseGatePassCount($liveAcceptance),
             'forbidden_exposure_counts' => $this->forbiddenExposureCounts($liveAcceptance),
+            'forbidden_exposure_evidence_present' => $this->forbiddenExposureEvidencePresent($liveAcceptance),
             'product_claim' => $this->productClaim($liveAcceptance, $targetPublicTotal, $expectedLocaleRows),
         ];
     }
@@ -102,6 +103,14 @@ final class CareerFullVisiblePublicationGate
             if ($count > 0) {
                 $blockers[] = $this->blocker('product_forbidden_'.$key.'_present', [
                     'actual' => $count,
+                ]);
+            }
+        }
+
+        foreach ($summary['forbidden_exposure_evidence_present'] as $surface => $present) {
+            if (! $present) {
+                $blockers[] = $this->blocker('product_forbidden_'.$surface.'_evidence_missing', [
+                    'message' => 'Full visible publication claims require explicit forbidden URL evidence for sitemap, llms, and llms_full surfaces.',
                 ]);
             }
         }
@@ -243,6 +252,8 @@ final class CareerFullVisiblePublicationGate
         $publicDetailIndexableCount = $this->publicDetailIndexableCount($payload);
         $foundPublishedLocaleRows = $this->foundPublishedLocaleRows($payload);
         $releaseGatePassCount = $this->releaseGatePassCount($payload);
+        $forbiddenExposureCounts = $this->forbiddenExposureCounts($payload);
+        $forbiddenExposureEvidencePresent = $this->forbiddenExposureEvidencePresent($payload);
         $partitionAccountingTotal = $this->intAtAny($payload, [
             'partition_accounting.final_public_accounted_total',
             'final_public_accounted_total',
@@ -253,7 +264,9 @@ final class CareerFullVisiblePublicationGate
             && $detailReadyCount === $targetPublicTotal
             && $publicDetailIndexableCount === $targetPublicTotal
             && $foundPublishedLocaleRows === $expectedLocaleRows
-            && $releaseGatePassCount === $expectedLocaleRows;
+            && $releaseGatePassCount === $expectedLocaleRows
+            && ! in_array(false, $forbiddenExposureEvidencePresent, true)
+            && array_sum($forbiddenExposureCounts) === 0;
 
         return [
             'claim_policy_version' => 'career_product_visible_claim.v1',
@@ -274,6 +287,8 @@ final class CareerFullVisiblePublicationGate
                 'found_published_locale_rows' => $foundPublishedLocaleRows,
                 'release_gate_pass_count' => $releaseGatePassCount,
                 'partition_accounting_total' => $partitionAccountingTotal,
+                'forbidden_exposure_counts' => $forbiddenExposureCounts,
+                'forbidden_exposure_evidence_present' => $forbiddenExposureEvidencePresent,
             ],
             'blocked_claims' => $visibleDetailClaimAllowed ? [] : [
                 $targetPublicTotal.'_visible_directory_members',
@@ -290,7 +305,7 @@ final class CareerFullVisiblePublicationGate
     private function forbiddenExposureCounts(array $payload): array
     {
         return [
-            'sitemap_noindex_urls' => $this->intAtAny($payload, [
+            'sitemap_noindex_urls' => $this->countAtAny($payload, [
                 'product_surface.sitemap_noindex_url_count',
                 'product_surface.sitemap_noindex_urls',
                 'sitemap.noindex_url_count',
@@ -298,7 +313,7 @@ final class CareerFullVisiblePublicationGate
                 'forbidden_exposure.sitemap_noindex_urls',
                 'validation.full_visible_publication_gate.forbidden_exposure_counts.sitemap_noindex_urls',
             ]) ?? 0,
-            'sitemap_404_urls' => $this->intAtAny($payload, [
+            'sitemap_404_urls' => $this->countAtAny($payload, [
                 'product_surface.sitemap_404_url_count',
                 'product_surface.sitemap_404_urls',
                 'sitemap.not_found_url_count',
@@ -306,7 +321,7 @@ final class CareerFullVisiblePublicationGate
                 'forbidden_exposure.sitemap_404_urls',
                 'validation.full_visible_publication_gate.forbidden_exposure_counts.sitemap_404_urls',
             ]) ?? 0,
-            'sitemap_redirect_source_urls' => $this->intAtAny($payload, [
+            'sitemap_redirect_source_urls' => $this->countAtAny($payload, [
                 'product_surface.sitemap_redirect_source_url_count',
                 'product_surface.sitemap_redirect_source_urls',
                 'sitemap.redirect_source_url_count',
@@ -314,7 +329,7 @@ final class CareerFullVisiblePublicationGate
                 'forbidden_exposure.sitemap_redirect_source_urls',
                 'validation.full_visible_publication_gate.forbidden_exposure_counts.sitemap_redirect_source_urls',
             ]) ?? 0,
-            'llms_noindex_urls' => $this->intAtAny($payload, [
+            'llms_noindex_urls' => $this->countAtAny($payload, [
                 'product_surface.llms_noindex_url_count',
                 'product_surface.llms_noindex_urls',
                 'llms.noindex_url_count',
@@ -322,7 +337,7 @@ final class CareerFullVisiblePublicationGate
                 'forbidden_exposure.llms_noindex_urls',
                 'validation.full_visible_publication_gate.forbidden_exposure_counts.llms_noindex_urls',
             ]) ?? 0,
-            'llms_404_urls' => $this->intAtAny($payload, [
+            'llms_404_urls' => $this->countAtAny($payload, [
                 'product_surface.llms_404_url_count',
                 'product_surface.llms_404_urls',
                 'llms.not_found_url_count',
@@ -330,7 +345,7 @@ final class CareerFullVisiblePublicationGate
                 'forbidden_exposure.llms_404_urls',
                 'validation.full_visible_publication_gate.forbidden_exposure_counts.llms_404_urls',
             ]) ?? 0,
-            'llms_redirect_source_urls' => $this->intAtAny($payload, [
+            'llms_redirect_source_urls' => $this->countAtAny($payload, [
                 'product_surface.llms_redirect_source_url_count',
                 'product_surface.llms_redirect_source_urls',
                 'llms.redirect_source_url_count',
@@ -338,7 +353,7 @@ final class CareerFullVisiblePublicationGate
                 'forbidden_exposure.llms_redirect_source_urls',
                 'validation.full_visible_publication_gate.forbidden_exposure_counts.llms_redirect_source_urls',
             ]) ?? 0,
-            'llms_full_noindex_urls' => $this->intAtAny($payload, [
+            'llms_full_noindex_urls' => $this->countAtAny($payload, [
                 'product_surface.llms_full_noindex_url_count',
                 'product_surface.llms_full_noindex_urls',
                 'llms_full.noindex_url_count',
@@ -346,7 +361,7 @@ final class CareerFullVisiblePublicationGate
                 'forbidden_exposure.llms_full_noindex_urls',
                 'validation.full_visible_publication_gate.forbidden_exposure_counts.llms_full_noindex_urls',
             ]) ?? 0,
-            'llms_full_404_urls' => $this->intAtAny($payload, [
+            'llms_full_404_urls' => $this->countAtAny($payload, [
                 'product_surface.llms_full_404_url_count',
                 'product_surface.llms_full_404_urls',
                 'llms_full.not_found_url_count',
@@ -354,7 +369,7 @@ final class CareerFullVisiblePublicationGate
                 'forbidden_exposure.llms_full_404_urls',
                 'validation.full_visible_publication_gate.forbidden_exposure_counts.llms_full_404_urls',
             ]) ?? 0,
-            'llms_full_redirect_source_urls' => $this->intAtAny($payload, [
+            'llms_full_redirect_source_urls' => $this->countAtAny($payload, [
                 'product_surface.llms_full_redirect_source_url_count',
                 'product_surface.llms_full_redirect_source_urls',
                 'llms_full.redirect_source_url_count',
@@ -362,6 +377,76 @@ final class CareerFullVisiblePublicationGate
                 'forbidden_exposure.llms_full_redirect_source_urls',
                 'validation.full_visible_publication_gate.forbidden_exposure_counts.llms_full_redirect_source_urls',
             ]) ?? 0,
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $payload
+     * @return array{sitemap: bool, llms: bool, llms_full: bool}
+     */
+    private function forbiddenExposureEvidencePresent(array $payload): array
+    {
+        return [
+            'sitemap' => $this->hasAny($payload, [
+                'product_surface.sitemap_noindex_url_count',
+                'product_surface.sitemap_noindex_urls',
+                'product_surface.sitemap_404_url_count',
+                'product_surface.sitemap_404_urls',
+                'product_surface.sitemap_redirect_source_url_count',
+                'product_surface.sitemap_redirect_source_urls',
+                'sitemap.noindex_url_count',
+                'sitemap.noindex_urls',
+                'sitemap.not_found_url_count',
+                'sitemap.404_urls',
+                'sitemap.redirect_source_url_count',
+                'sitemap.redirect_source_urls',
+                'forbidden_exposure.sitemap_noindex_urls',
+                'forbidden_exposure.sitemap_404_urls',
+                'forbidden_exposure.sitemap_redirect_source_urls',
+                'validation.full_visible_publication_gate.forbidden_exposure_counts.sitemap_noindex_urls',
+                'validation.full_visible_publication_gate.forbidden_exposure_counts.sitemap_404_urls',
+                'validation.full_visible_publication_gate.forbidden_exposure_counts.sitemap_redirect_source_urls',
+            ]),
+            'llms' => $this->hasAny($payload, [
+                'product_surface.llms_noindex_url_count',
+                'product_surface.llms_noindex_urls',
+                'product_surface.llms_404_url_count',
+                'product_surface.llms_404_urls',
+                'product_surface.llms_redirect_source_url_count',
+                'product_surface.llms_redirect_source_urls',
+                'llms.noindex_url_count',
+                'llms.noindex_urls',
+                'llms.not_found_url_count',
+                'llms.404_urls',
+                'llms.redirect_source_url_count',
+                'llms.redirect_source_urls',
+                'forbidden_exposure.llms_noindex_urls',
+                'forbidden_exposure.llms_404_urls',
+                'forbidden_exposure.llms_redirect_source_urls',
+                'validation.full_visible_publication_gate.forbidden_exposure_counts.llms_noindex_urls',
+                'validation.full_visible_publication_gate.forbidden_exposure_counts.llms_404_urls',
+                'validation.full_visible_publication_gate.forbidden_exposure_counts.llms_redirect_source_urls',
+            ]),
+            'llms_full' => $this->hasAny($payload, [
+                'product_surface.llms_full_noindex_url_count',
+                'product_surface.llms_full_noindex_urls',
+                'product_surface.llms_full_404_url_count',
+                'product_surface.llms_full_404_urls',
+                'product_surface.llms_full_redirect_source_url_count',
+                'product_surface.llms_full_redirect_source_urls',
+                'llms_full.noindex_url_count',
+                'llms_full.noindex_urls',
+                'llms_full.not_found_url_count',
+                'llms_full.404_urls',
+                'llms_full.redirect_source_url_count',
+                'llms_full.redirect_source_urls',
+                'forbidden_exposure.llms_full_noindex_urls',
+                'forbidden_exposure.llms_full_404_urls',
+                'forbidden_exposure.llms_full_redirect_source_urls',
+                'validation.full_visible_publication_gate.forbidden_exposure_counts.llms_full_noindex_urls',
+                'validation.full_visible_publication_gate.forbidden_exposure_counts.llms_full_404_urls',
+                'validation.full_visible_publication_gate.forbidden_exposure_counts.llms_full_redirect_source_urls',
+            ]),
         ];
     }
 
@@ -379,6 +464,40 @@ final class CareerFullVisiblePublicationGate
         }
 
         return null;
+    }
+
+    /**
+     * @param  array<string, mixed>  $payload
+     * @param  list<string>  $paths
+     */
+    private function countAtAny(array $payload, array $paths): ?int
+    {
+        foreach ($paths as $path) {
+            $value = data_get($payload, $path);
+            if (is_numeric($value)) {
+                return (int) $value;
+            }
+            if (is_array($value) && array_is_list($value)) {
+                return count($value);
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @param  array<string, mixed>  $payload
+     * @param  list<string>  $paths
+     */
+    private function hasAny(array $payload, array $paths): bool
+    {
+        foreach ($paths as $path) {
+            if (data_get($payload, $path) !== null) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**

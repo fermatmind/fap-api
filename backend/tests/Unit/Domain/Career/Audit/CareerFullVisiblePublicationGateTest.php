@@ -18,6 +18,9 @@ final class CareerFullVisiblePublicationGateTest extends TestCase
                 'career_jobs_item_count' => 2786,
                 'detail_ready_count' => 2786,
                 'canonical_public_slug_count' => 2786,
+                'sitemap_noindex_url_count' => 0,
+                'llms_noindex_url_count' => 0,
+                'llms_full_noindex_url_count' => 0,
             ],
             'found_published' => 5572,
             'release_gate' => [
@@ -43,6 +46,9 @@ final class CareerFullVisiblePublicationGateTest extends TestCase
                 'detail_ready_count' => 2786,
                 'public_detail_indexable_count' => 2786,
                 'canonical_public_slug_count' => 2786,
+                'sitemap_noindex_url_count' => 0,
+                'llms_noindex_url_count' => 0,
+                'llms_full_noindex_url_count' => 0,
             ],
             'found_published' => 5572,
             'release_gate' => [
@@ -67,6 +73,9 @@ final class CareerFullVisiblePublicationGateTest extends TestCase
                 'detail_ready_count' => 1048,
                 'public_detail_indexable_count' => 1048,
                 'canonical_public_slug_count' => 1048,
+                'sitemap_noindex_url_count' => 0,
+                'llms_noindex_url_count' => 0,
+                'llms_full_noindex_url_count' => 0,
             ],
             'found_published' => 2096,
             'release_gate' => [
@@ -110,5 +119,37 @@ final class CareerFullVisiblePublicationGateTest extends TestCase
         $this->assertContains('product_forbidden_sitemap_noindex_urls_present', $reasons);
         $this->assertContains('product_forbidden_llms_404_urls_present', $reasons);
         $this->assertContains('product_forbidden_llms_full_redirect_source_urls_present', $reasons);
+    }
+
+    public function test_1048_gate_counts_forbidden_url_lists_and_requires_evidence(): void
+    {
+        $gate = new CareerFullVisiblePublicationGate;
+        $liveAcceptance = [
+            'product_surface' => [
+                'directory_member_count' => 1048,
+                'career_jobs_item_count' => 1048,
+                'detail_ready_count' => 1048,
+                'public_detail_indexable_count' => 1048,
+                'canonical_public_slug_count' => 1048,
+                'sitemap_noindex_urls' => [
+                    'https://example.test/noindex',
+                    'https://example.test/noindex-2',
+                ],
+            ],
+            'found_published' => 2096,
+            'release_gate' => [
+                'pass_count' => 2096,
+            ],
+        ];
+
+        $summary = $gate->summary($liveAcceptance, 1048, 2);
+        $reasons = array_column($gate->blockers($liveAcceptance, 1048, 2), 'reason');
+
+        $this->assertSame(2, $summary['forbidden_exposure_counts']['sitemap_noindex_urls']);
+        $this->assertContains('product_forbidden_sitemap_noindex_urls_present', $reasons);
+        $this->assertContains('product_forbidden_llms_evidence_missing', $reasons);
+        $this->assertContains('product_forbidden_llms_full_evidence_missing', $reasons);
+        $this->assertFalse($summary['forbidden_exposure_evidence_present']['llms']);
+        $this->assertFalse($summary['product_claim']['visible_detail_claim_allowed']);
     }
 }

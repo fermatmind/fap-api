@@ -544,13 +544,18 @@ final class CareerRuntimeCandidatePrepPlanner
      */
     private function slugSetAtAny(array $payload, array $paths): array
     {
+        $slugs = [];
+
         foreach ($paths as $path) {
             $value = data_get($payload, $path);
             if (is_array($value) && array_is_list($value)) {
-                return $this->normalizedUniqueStrings($value, str_replace('.', '_', $path), allowEmpty: true);
+                $slugs = [
+                    ...$slugs,
+                    ...$this->normalizedUniqueStrings($value, str_replace('.', '_', $path), allowEmpty: true),
+                ];
             }
         }
 
-        return [];
+        return $this->normalizedUniqueStrings($slugs, 'gated_slug_set', allowEmpty: true);
     }
 }
