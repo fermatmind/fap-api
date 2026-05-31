@@ -16177,6 +16177,59 @@ prs:
     frontend_fallback_authority: false
     next_task: BACKEND-DEPLOY-READINESS for ANALYTICS-FUNNEL-REFRESH-DRY-RUN-SQL-FIX-02
 
+  - id: ANALYTICS-FUNNEL-CONTROLLED-REFRESH-WRITE-GUARD-01
+    repo: fap-api
+    branch: codex/analytics-funnel-controlled-refresh-write-guard-01
+    base: main
+    title: "ANALYTICS-FUNNEL-CONTROLLED-REFRESH-WRITE-GUARD-01 add controlled analytics funnel refresh write guard"
+    train_scope: analytics_funnel_controlled_refresh_write_guard
+    risk_level: p1_analytics_funnel_observability
+    depends_on:
+      - ANALYTICS-FUNNEL-REFRESH-DRY-RUN-SQL-FIX-02
+    allowed_paths:
+      - backend/app/Console/Commands/RefreshAnalyticsFunnelDailyCommand.php
+      - backend/docs/seo/analytics-funnel-controlled-refresh-write-guard-01.md
+      - backend/docs/seo/generated/analytics-funnel-controlled-refresh-write-guard-01.v1.json
+      - backend/tests/Feature/Analytics/RefreshAnalyticsFunnelDailyCommandTest.php
+      - backend/tests/Feature/SeoIntel/AnalyticsFunnelControlledRefreshWriteGuard01Test.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Add fail-closed non-dry-run write guard to analytics:refresh-funnel-daily.
+      - Require explicit from/to, explicit org scope, bounded date range, and exact --confirm-write token before DB writes.
+      - Emit before_count, after_count, attempted_rows, deleted_rows, upserted_rows, and write_guard audit fields.
+      - Preserve dry-run/no-write production review path.
+      - Document that no production refresh write, migration, scheduler enablement, GA/Baidu setting change, CMS mutation, Search Channel action, URL submission, deploy, or fap-web change is performed in this PR.
+    validation:
+      - cd backend && php artisan test --filter=AnalyticsFunnelControlledRefreshWriteGuard01 --no-ansi
+      - cd backend && php artisan test --filter=RefreshAnalyticsFunnelDailyCommand --no-ansi
+      - cd backend && php artisan test --filter=AnalyticsFunnelDailyBuilder --no-ansi
+      - cd backend && php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_analytics_funnel_refresh_command_guard_changes --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/analytics-funnel-controlled-refresh-write-guard-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: BACKEND-DEPLOY-READINESS for ANALYTICS-FUNNEL-CONTROLLED-REFRESH-WRITE-GUARD-01
+
+
   - id: CONTENT-PACKS-INDEX-ARTIFACT-01
     repo: fap-api
     branch: fix/content-packs-index-artifact-01

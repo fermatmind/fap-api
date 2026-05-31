@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0",
+  "task": "ANALYTICS-FUNNEL-CONTROLLED-REFRESH-WRITE-GUARD-01",
+  "final_decision": "analytics_funnel_write_guard_ready_for_deploy_readiness",
+  "command": "analytics:refresh-funnel-daily",
+  "write_guard_enabled": true,
+  "non_dry_run_default_blocked": true,
+  "dry_run_allowed_without_confirm_write": true,
+  "required_write_options": [
+    "--from",
+    "--to",
+    "--org",
+    "--confirm-write"
+  ],
+  "max_write_range_days": 31,
+  "confirmation_token_template": "analytics_funnel_daily:write:{from}:{to}:org={org_scope}:scale={scale_scope}",
+  "r3_production_scope": {
+    "from": "2026-05-25",
+    "to": "2026-05-31",
+    "org_scope": [
+      0
+    ],
+    "scale_scope": "all",
+    "expected_confirm_write": "analytics_funnel_daily:write:2026-05-25:2026-05-31:org=0:scale=all",
+    "last_dry_run_attempted_rows": 38,
+    "last_dry_run_deleted_rows": 0,
+    "last_dry_run_upserted_rows": 0
+  },
+  "audit_output_fields": [
+    "before_count",
+    "after_count",
+    "attempted_rows",
+    "deleted_rows",
+    "upserted_rows",
+    "write_guard",
+    "write_guard_reason",
+    "expected_confirm_write"
+  ],
+  "production_write_performed": false,
+  "production_db_mutation_performed": false,
+  "migration_added": false,
+  "scheduler_enabled": false,
+  "ga_baidu_setting_changed": false,
+  "cms_mutation_performed": false,
+  "search_channel_action_performed": false,
+  "url_submission_performed": false,
+  "fap_web_modified": false,
+  "deferred_followups": [
+    "backend deploy readiness for the write guard",
+    "production dry-run with deployed write guard",
+    "human-approved controlled write only after preflight evidence"
+  ],
+  "next_task": "BACKEND-DEPLOY-READINESS｜Deploy analytics funnel controlled refresh write guard"
+}
