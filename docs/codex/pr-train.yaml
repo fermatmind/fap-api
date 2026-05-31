@@ -16612,6 +16612,54 @@ prs:
     frontend_fallback_authority: false
     next_task: deploy-readiness and production scheduler runner verification required after merge
 
+  - id: PAYMENT-ALIPAY-OWNER-MISMATCH-REVIEW-03
+    repo: fap-api
+    branch: codex/payment-alipay-owner-mismatch-review-03
+    base: main
+    title: "PAYMENT-ALIPAY-OWNER-MISMATCH-REVIEW-03 classify Alipay owner mismatch paid orders"
+    train_scope: payment_alipay_owner_mismatch_review
+    risk_level: p1_payment_fulfillment_reliability
+    depends_on:
+      - PAYMENT-ALIPAY-SCHEDULER-BOOTSTRAP-02
+    allowed_paths:
+      - backend/docs/runbooks/alipay-owner-mismatch-review.md
+      - backend/docs/commerce/alipay-owner-mismatch-review-03.md
+      - backend/docs/commerce/generated/alipay-owner-mismatch-review-03.v1.json
+      - backend/tests/Feature/Commerce/AlipayOwnerMismatchReview03Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Produce a read-only owner-mismatch review packet for the eight current Alipay paid/no-grant orders blocked by ATTEMPT_OWNER_MISMATCH.
+      - Classify one historical state-inconsistency item as safe for future order grant_state sync only after a separate controlled repair approval.
+      - Classify seven items as requiring human ownership review before any controlled repair.
+      - Document that true or unresolved owner mismatch must not be repaired by the automatic pending compensation scheduler.
+      - Do not execute production repair, production compensation, raw log reads, production env changes, deploy, CMS/content mutation, Search Channel action, URL submission, or fap-web changes in this PR.
+    validation:
+      - cd backend && php artisan test --filter=AlipayOwnerMismatchReview03 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/commerce/generated/alipay-owner-mismatch-review-03.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: controlled owner-mismatch repair only after explicit future approval
+
+
   - id: ANALYTICS-FUNNEL-EVENT-TAXONOMY-01
     repo: fap-api
     branch: codex/analytics-funnel-event-taxonomy-01

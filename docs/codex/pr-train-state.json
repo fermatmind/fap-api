@@ -33515,5 +33515,134 @@
         "notes": "Local verify-bigfive equivalent passed after allowing scoped career warm-cache performance files in the BigFive runtime freeze classifier. Existing PHPUnit warnings remain non-failing."
       }
     ]
+  },
+  "PAYMENT-ALIPAY-OWNER-MISMATCH-REVIEW-03": {
+    "id": "PAYMENT-ALIPAY-OWNER-MISMATCH-REVIEW-03",
+    "repo": "fap-api",
+    "branch": "codex/payment-alipay-owner-mismatch-review-03",
+    "base": "main",
+    "status": "github_checks_passed",
+    "title": "PAYMENT-ALIPAY-OWNER-MISMATCH-REVIEW-03 classify Alipay owner mismatch paid orders",
+    "commit_sha": "341d53c0e0a1fffbe3fcba82fe35a29cad5217d4",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1777",
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding PAYMENT-ALIPAY-OWNER-MISMATCH-REVIEW-03 to fap-api pr-train manifest/state."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "PAYMENT-ALIPAY-SCHEDULER-BOOTSTRAP-02 is merged as PR #1774 with merge commit 498363c648ff363c106275677a8205472c0631ea, and origin/main contains it."
+      },
+      "scope_boundaries": {
+        "status": "pass",
+        "evidence": "Scope is limited to owner-mismatch review runbook/report/generated JSON/focused test and pr-train metadata; no production repair, manual compensation, raw log read, deploy, CMS/content mutation, Search Channel action, URL submission, or fap-web change."
+      },
+      "focused_test": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=AlipayOwnerMismatchReview03 --no-ansi",
+        "evidence": "PASS after rebase: 1 test, 43 assertions."
+      },
+      "route_list": {
+        "status": "pass",
+        "command": "cd backend && php artisan route:list --no-ansi",
+        "evidence": "PASS after rebase: route:list rendered successfully."
+      },
+      "pint": {
+        "status": "pass",
+        "command": "cd backend && vendor/bin/pint --test",
+        "evidence": "PASS after rebase: 3650 files."
+      },
+      "composer_validate": {
+        "status": "pass",
+        "command": "cd backend && composer validate --strict",
+        "evidence": "PASS after rebase: composer.json is valid."
+      },
+      "composer_audit": {
+        "status": "pass",
+        "command": "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+        "evidence": "PASS after rebase: no security vulnerability advisories found."
+      },
+      "json_yaml_parse": {
+        "status": "pass",
+        "command": "python3 -m json.tool backend/docs/commerce/generated/alipay-owner-mismatch-review-03.v1.json >/dev/null && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+        "evidence": "PASS after rebase: generated JSON, state JSON, and manifest YAML parsed."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check && git diff --cached --check",
+        "evidence": "PASS after rebase: git diff --check and git diff --cached --check passed."
+      },
+      "fap_web_reference_status": {
+        "status": "pass",
+        "command": "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short",
+        "evidence": "PASS: no fap-web changes reported."
+      },
+      "pr_created": {
+        "status": "pass",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/1777",
+        "title": "PAYMENT-ALIPAY-OWNER-MISMATCH-REVIEW-03 classify Alipay owner mismatch paid orders"
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "PR #1777 GitHub checks passed after rebase: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, and Code Scanning checks reported success."
+      },
+      "rebase_latest_main": {
+        "status": "pass",
+        "evidence": "Rebased onto latest origin/main 85ab91f1eac80ba50b0960a129567d78afeced56 after PR mergeStateStatus showed DIRTY; conflicts resolved by preserving latest ledger/manifest and scoped owner-mismatch entry."
+      },
+      "merge_state": {
+        "status": "pass",
+        "evidence": "PR #1777 mergeStateStatus was CLEAN before this ledger update."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "git_diff_check": "passed",
+      "git_diff_cached_check": "passed"
+    },
+    "transitions": [
+      {
+        "status": "authorized",
+        "at": "2026-05-31T12:40:00+08:00",
+        "summary": "User authorized manifest/state update for PAYMENT-ALIPAY-OWNER-MISMATCH-REVIEW-03."
+      },
+      {
+        "status": "in_progress",
+        "at": "2026-05-31T12:40:00+08:00",
+        "summary": "Implementing read-only owner-mismatch review artifacts and focused validation."
+      },
+      {
+        "status": "local_checks_passed",
+        "at": "2026-05-31T12:55:00+08:00",
+        "summary": "Read-only owner-mismatch review artifacts, focused test, route list, Pint, Composer validate/audit, JSON/YAML parse, fap-web reference status, and diff checks passed."
+      },
+      {
+        "status": "committed",
+        "at": "2026-05-31T12:58:00+08:00",
+        "summary": "Committed scoped read-only owner-mismatch review at 17604356e7eee000c86b4b7070413ad508fcf1a1."
+      },
+      {
+        "status": "pr_open",
+        "at": "2026-05-31T13:02:00+08:00",
+        "summary": "Opened PR https://github.com/fermatmind/fap-api/pull/1777 after scoped local validation passed."
+      },
+      {
+        "status": "rebased_local_checks_passed",
+        "at": "2026-05-31T13:10:00+08:00",
+        "summary": "Rebased onto latest origin/main and reran scoped local validation at 404d2cc77747f8c2f70a81f88ac969423f01d5ca."
+      },
+      {
+        "status": "github_checks_passed",
+        "at": "2026-05-31T13:37:00+08:00",
+        "summary": "GitHub checks passed and mergeStateStatus was CLEAN for PR #1777."
+      }
+    ],
+    "sidecars": [],
+    "next_task": "Controlled owner-mismatch repair only after explicit future approval."
   }
 }
