@@ -43,6 +43,12 @@ ALLOWED_COMPONENTS = {"backend", "frontend", "both", "docs", "ops"}
 ALLOWED_RISK = {"low", "medium", "high"}
 ALLOWED_DEPLOY_ORDER = {"backend_first", "frontend_first", "none"}
 ALLOWED_CHECK_POLICIES = {"required_only", "all_checks"}
+FORBIDDEN_DEPLOY_OVERRIDE_FIELDS = {
+    "deployer_bin",
+    "deployer_file",
+    "DEPLOYER_BIN",
+    "DEPLOYER_FILE",
+}
 
 
 def _load_json(path: str) -> dict:
@@ -106,6 +112,9 @@ def validate_schema(manifest: dict) -> tuple[bool, list[str]]:
         for key in sorted(required_item_fields):
             if key not in item:
                 errors.append(f"item[{index}] missing field {key}")
+        for key in sorted(FORBIDDEN_DEPLOY_OVERRIDE_FIELDS):
+            if key in item:
+                errors.append(f"item[{index}] forbidden deploy override field {key}")
         if item.get("repo") not in ALLOWED_REPOS:
             errors.append(f"item[{index}] has unsupported repo {item.get('repo')}")
         if item.get("component") not in ALLOWED_COMPONENTS:
@@ -206,6 +215,13 @@ def evaluate_item(
         "failures": [],
         "sidecars": [],
     }
+
+    override_fields = sorted(key for key in FORBIDDEN_DEPLOY_OVERRIDE_FIELDS if key in item)
+    if override_fields:
+        result["status"] = "blocked"
+        result["failures"].append("deployer_override_forbidden")
+        result["checks"]["deployer_override_forbidden"] = override_fields
+        return result
 
     pr_data = github.get_pull_request(f"fermatmind/{repo}", pr_number)
     if pr_data is None:
@@ -313,12 +329,6 @@ def evaluate_item(
             "ALLOW_PRODUCTION_DEPLOY": "true" if _bool_from_str(os.environ.get("RELEASE_TRAIN_ALLOW_DEPLOY", "false")) else "false",
             "ALLOW_REAL_DEPLOY": "true" if allow_deploy else "false",
         })
-        deployer_bin = item.get("deployer_bin") or item.get("DEPLOYER_BIN")
-        deployer_file = item.get("deployer_file") or item.get("DEPLOYER_FILE")
-        if deployer_bin:
-            cmd_env["DEPLOYER_BIN"] = str(deployer_bin)
-        if deployer_file:
-            cmd_env["DEPLOYER_FILE"] = str(deployer_file)
         deployment = _run_command(
             ["bash", str(CURRENT_DIR.parent.parent / "backend/scripts/deploy/deploy_backend.sh")],
             env=cmd_env,

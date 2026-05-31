@@ -86,8 +86,6 @@
         "risk_level": { "type": "string", "enum": ["low", "medium", "high"] },
         "deploy_required": { "type": "boolean" },
         "deploy_target": { "type": "string", "enum": ["production", "staging"] },
-        "deployer_bin": { "type": "string" },
-        "deployer_file": { "type": "string" },
         "deploy_order": { "type": "string", "enum": ["backend_first", "frontend_first", "none"] },
         "required_checks_policy": { "type": "string", "enum": ["required_only", "all_checks"] },
         "allowed_files": { "type": "array", "items": { "type": "string" } },
@@ -96,6 +94,14 @@
         "smoke_checks": { "type": "array", "items": { "$ref": "#/$defs/smoke" } },
         "rollback": { "$ref": "#/$defs/rollback" },
         "sidecar_policy": { "$ref": "#/$defs/sidecar" }
+      },
+      "not": {
+        "anyOf": [
+          { "required": ["deployer_bin"] },
+          { "required": ["deployer_file"] },
+          { "required": ["DEPLOYER_BIN"] },
+          { "required": ["DEPLOYER_FILE"] }
+        ]
       },
       "additionalProperties": true
     }

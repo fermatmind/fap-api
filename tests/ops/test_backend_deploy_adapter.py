@@ -240,6 +240,84 @@ class ReleaseTrainDeployAdapterIntegrationTest(unittest.TestCase):
         self.assertEqual(env["BACKEND_DEPLOY_SHA"], _head_sha())
         self.assertEqual(env["RELEASE_NAME"], "adapter-release-name")
         self.assertNotIn("ROLLBACK_COMMAND", env)
+        self.assertNotIn("DEPLOYER_BIN", env)
+        self.assertNotIn("DEPLOYER_FILE", env)
+
+    def test_release_train_blocks_manifest_controlled_deployer_override(self):
+        module = _load_release_train_module()
+
+        result = module.evaluate_item(
+            {
+                "id": "adapter-run",
+                "release_name": "adapter-release-name",
+                "repo": "fap-api",
+                "pr_number": 1,
+                "expected_head_sha": _head_sha(),
+                "component": "backend",
+                "risk_level": "medium",
+                "deploy_required": True,
+                "deploy_target": "production",
+                "deployer_bin": "/tmp/dep",
+                "deploy_order": "backend_first",
+                "required_checks_policy": "required_only",
+                "allowed_files": ["backend/scripts/deploy/deploy_backend.sh"],
+                "allowed_generated_paths": [],
+                "scope_validation": "required_scope_only",
+                "smoke_checks": [],
+                "rollback": {"enabled": False, "wrapper": "backend/scripts/deploy/rollback_backend.sh"},
+                "sidecar_policy": {"allow_nonblocking_sidecars": False},
+            },
+            manifest={"train_id": "adapter-test"},
+            github=_FakeGitHub(),
+            execute_smoke=False,
+            allow_deploy=True,
+            mode="run",
+        )
+
+        self.assertEqual(result["status"], "blocked")
+        self.assertIn("deployer_override_forbidden", result["failures"])
+        self.assertEqual(result["checks"]["deployer_override_forbidden"], ["deployer_bin"])
+
+    def test_release_train_schema_rejects_deployer_override_fields(self):
+        module = _load_release_train_module()
+
+        manifest = {
+            "schema_version": "1.0",
+            "train_id": "adapter-test",
+            "environment": "production",
+            "mode": "dry_run",
+            "stop_on_failure": True,
+            "rollback_on_failed_smoke": True,
+            "allow_merge": False,
+            "allow_deploy": False,
+            "allow_rollback": False,
+            "items": [
+                {
+                    "id": "adapter-run",
+                    "repo": "fap-api",
+                    "pr_number": 1,
+                    "expected_head_sha": _head_sha(),
+                    "component": "backend",
+                    "risk_level": "medium",
+                    "deploy_required": True,
+                    "deploy_target": "production",
+                    "DEPLOYER_FILE": "/tmp/deploy.php",
+                    "deploy_order": "backend_first",
+                    "required_checks_policy": "required_only",
+                    "allowed_files": ["backend/scripts/deploy/deploy_backend.sh"],
+                    "allowed_generated_paths": [],
+                    "scope_validation": "required_scope_only",
+                    "smoke_checks": [],
+                    "rollback": {"enabled": False, "wrapper": "backend/scripts/deploy/rollback_backend.sh"},
+                    "sidecar_policy": {"allow_nonblocking_sidecars": False},
+                }
+            ],
+        }
+
+        ok, errors = module.validate_schema(manifest)
+
+        self.assertFalse(ok)
+        self.assertIn("item[1] forbidden deploy override field DEPLOYER_FILE", errors)
 
 
 class DeployPhpCareerWarmCachePolicyTest(unittest.TestCase):
