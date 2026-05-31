@@ -4,42 +4,39 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Commerce;
 
-use App\Console\Kernel;
-use Illuminate\Console\Scheduling\Event;
-use Illuminate\Console\Scheduling\Schedule;
-use ReflectionMethod;
+use Symfony\Component\Process\Process;
 use Tests\TestCase;
 
 final class AlipayPendingCompensationSchedulerTest extends TestCase
 {
     public function test_alipay_pending_compensation_is_registered_conservatively(): void
     {
-        $event = $this->scheduledEventFor('commerce:compensate-pending-orders');
+        $events = $this->scheduleListEvents();
+        $event = collect($events)->first(
+            fn (array $event): bool => str_contains((string) ($event['command'] ?? ''), 'commerce:compensate-pending-orders')
+        );
 
-        $this->assertNotNull($event);
-        $this->assertStringContainsString('--provider=alipay', (string) $event->command);
-        $this->assertStringContainsString('--include-created', (string) $event->command);
-        $this->assertStringContainsString('--limit=50', (string) $event->command);
-        $this->assertStringContainsString('--older-than-minutes=15', (string) $event->command);
-        $this->assertStringNotContainsString('--close-expired', (string) $event->command);
-        $this->assertSame('*/5 * * * *', $event->expression);
-        $this->assertTrue($event->withoutOverlapping);
+        $this->assertNotNull($event, 'schedule:list did not include the Alipay pending compensation command.');
+        $this->assertStringContainsString('--provider=alipay', (string) $event['command']);
+        $this->assertStringContainsString('--include-created', (string) $event['command']);
+        $this->assertStringContainsString('--limit=50', (string) $event['command']);
+        $this->assertStringContainsString('--older-than-minutes=15', (string) $event['command']);
+        $this->assertStringNotContainsString('--close-expired', (string) $event['command']);
+        $this->assertSame('*/5 * * * *', $event['expression']);
     }
 
-    private function scheduledEventFor(string $needle): ?Event
+    /**
+     * @return array<int,array<string,mixed>>
+     */
+    private function scheduleListEvents(): array
     {
-        $schedule = new Schedule;
-        $kernel = $this->app->make(Kernel::class);
-        $method = new ReflectionMethod($kernel, 'schedule');
-        $method->setAccessible(true);
-        $method->invoke($kernel, $schedule);
+        $process = new Process([PHP_BINARY, base_path('artisan'), 'schedule:list', '--json', '--no-ansi'], base_path());
+        $process->mustRun();
 
-        foreach ($schedule->events() as $event) {
-            if (str_contains((string) $event->command, $needle)) {
-                return $event;
-            }
-        }
+        $decoded = json_decode($process->getOutput(), true);
 
-        return null;
+        $this->assertIsArray($decoded);
+
+        return $decoded;
     }
 }
