@@ -1,0 +1,186 @@
+{
+  "schema_version": "alipay-owner-mismatch-review-03.v1",
+  "task": "PAYMENT-ALIPAY-OWNER-MISMATCH-REVIEW-03",
+  "final_decision": "owner_mismatch_review_completed_ready_for_controlled_repair_planning",
+  "production_revision_observed": "498363c648ff363c106275677a8205472c0631ea",
+  "checked_at": "2026-05-31T04:31:33Z",
+  "read_only": true,
+  "raw_logs_read": false,
+  "manual_compensation_executed": false,
+  "manual_repair_executed": false,
+  "owner_mismatch_error_code": "ATTEMPT_OWNER_MISMATCH",
+  "paid_no_grant_current_count": 8,
+  "classification_summary": {
+    "safe_order_grant_state_sync_after_approval": 1,
+    "human_ownership_review_required": 7,
+    "automatic_repair_forbidden": 7,
+    "confirmed_true_owner_mismatch_repair_forbidden": true
+  },
+  "classification_rules": [
+    {
+      "classification": "safe_order_grant_state_sync_after_approval",
+      "required_evidence": [
+        "payment_state=paid",
+        "grant_state is not granted",
+        "active benefit_grants evidence exists by approved non-PII linkage",
+        "unified_access_projection is ready",
+        "result exists"
+      ],
+      "allowed_future_action": "state_sync_only_after_explicit_controlled_repair_approval",
+      "automatic_scheduler_allowed": false
+    },
+    {
+      "classification": "human_ownership_review_required",
+      "required_evidence": [
+        "payment_state=paid",
+        "result exists",
+        "no active benefit grant",
+        "missing unified_access_projection",
+        "payment event rejected with ATTEMPT_OWNER_MISMATCH"
+      ],
+      "allowed_future_action": "human_review_before_any_controlled_repair",
+      "automatic_scheduler_allowed": false
+    },
+    {
+      "classification": "automatic_repair_forbidden",
+      "required_evidence": [
+        "confirmed or unresolved owner mismatch",
+        "payment event rejected with ATTEMPT_OWNER_MISMATCH"
+      ],
+      "allowed_future_action": "none_until_human_owner_review_confirms_safe_repair",
+      "automatic_scheduler_allowed": false
+    }
+  ],
+  "classified_items": [
+    {
+      "item_ref": "owner_mismatch_01",
+      "classification": "safe_order_grant_state_sync_after_approval",
+      "payment_state": "paid",
+      "grant_state": "not_started",
+      "result_exists": true,
+      "active_benefit_grant_exists": true,
+      "unified_access_projection_ready": true,
+      "payment_event_status": "rejected",
+      "payment_event_error_code": "ATTEMPT_OWNER_MISMATCH",
+      "future_write_allowed_without_new_approval": false,
+      "notes": "Historical lifecycle state inconsistency candidate; future repair should sync order grant_state/status only after explicit approval."
+    },
+    {
+      "item_ref": "owner_mismatch_02",
+      "classification": "human_ownership_review_required",
+      "payment_state": "paid",
+      "grant_state": "not_started",
+      "result_exists": true,
+      "active_benefit_grant_exists": false,
+      "unified_access_projection_ready": false,
+      "payment_event_status": "rejected",
+      "payment_event_error_code": "ATTEMPT_OWNER_MISMATCH",
+      "future_write_allowed_without_new_approval": false
+    },
+    {
+      "item_ref": "owner_mismatch_03",
+      "classification": "human_ownership_review_required",
+      "payment_state": "paid",
+      "grant_state": "not_started",
+      "result_exists": true,
+      "active_benefit_grant_exists": false,
+      "unified_access_projection_ready": false,
+      "payment_event_status": "rejected",
+      "payment_event_error_code": "ATTEMPT_OWNER_MISMATCH",
+      "future_write_allowed_without_new_approval": false
+    },
+    {
+      "item_ref": "owner_mismatch_04",
+      "classification": "human_ownership_review_required",
+      "payment_state": "paid",
+      "grant_state": "not_started",
+      "result_exists": true,
+      "active_benefit_grant_exists": false,
+      "unified_access_projection_ready": false,
+      "payment_event_status": "rejected",
+      "payment_event_error_code": "ATTEMPT_OWNER_MISMATCH",
+      "future_write_allowed_without_new_approval": false
+    },
+    {
+      "item_ref": "owner_mismatch_05",
+      "classification": "human_ownership_review_required",
+      "payment_state": "paid",
+      "grant_state": "not_started",
+      "result_exists": true,
+      "active_benefit_grant_exists": false,
+      "unified_access_projection_ready": false,
+      "payment_event_status": "rejected",
+      "payment_event_error_code": "ATTEMPT_OWNER_MISMATCH",
+      "future_write_allowed_without_new_approval": false
+    },
+    {
+      "item_ref": "owner_mismatch_06",
+      "classification": "human_ownership_review_required",
+      "payment_state": "paid",
+      "grant_state": "not_started",
+      "result_exists": true,
+      "active_benefit_grant_exists": false,
+      "unified_access_projection_ready": false,
+      "payment_event_status": "rejected",
+      "payment_event_error_code": "ATTEMPT_OWNER_MISMATCH",
+      "future_write_allowed_without_new_approval": false
+    },
+    {
+      "item_ref": "owner_mismatch_07",
+      "classification": "human_ownership_review_required",
+      "payment_state": "paid",
+      "grant_state": "not_started",
+      "result_exists": true,
+      "active_benefit_grant_exists": false,
+      "unified_access_projection_ready": false,
+      "payment_event_status": "rejected",
+      "payment_event_error_code": "ATTEMPT_OWNER_MISMATCH",
+      "future_write_allowed_without_new_approval": false
+    },
+    {
+      "item_ref": "owner_mismatch_08",
+      "classification": "human_ownership_review_required",
+      "payment_state": "paid",
+      "grant_state": "not_started",
+      "result_exists": true,
+      "active_benefit_grant_exists": false,
+      "unified_access_projection_ready": false,
+      "payment_event_status": "rejected",
+      "payment_event_error_code": "ATTEMPT_OWNER_MISMATCH",
+      "future_write_allowed_without_new_approval": false
+    }
+  ],
+  "pending_compensation_context": {
+    "reconciled_pending_sample_count": 300,
+    "orders_with_external_trade_no": 0,
+    "orders_with_provider_trade_no": 0,
+    "attempts_with_external_trade_no": 0,
+    "attempts_with_provider_trade_no": 0,
+    "attempts_with_provider_session_ref": 0,
+    "with_any_payment_event": 0,
+    "attempts_query_unknown": 300,
+    "interpretation": "Scheduler can mark these pending orders as reconciled, but provider lookup lacks trade/session identifiers and returns query_unknown."
+  },
+  "future_controlled_repair_requirements": [
+    "explicit future approval phrase",
+    "fresh read-only snapshot before any write",
+    "state-sync-only item must still have active grant and ready projection",
+    "human-review items require approved ownership comparison before repair",
+    "stop if an item appears to be a real cross-owner mismatch"
+  ],
+  "automatic_scheduler_policy": {
+    "owner_mismatch_auto_grant_allowed": false,
+    "owner_mismatch_auto_projection_allowed": false,
+    "owner_mismatch_auto_state_sync_allowed": false,
+    "reason": "ATTEMPT_OWNER_MISMATCH is a semantic ownership guard and must not be bypassed by automatic pending compensation."
+  },
+  "no_production_repair": true,
+  "no_manual_compensation": true,
+  "no_raw_log_read": true,
+  "no_cms_mutation": true,
+  "no_deploy": true,
+  "no_search_channel_action": true,
+  "no_url_submission": true,
+  "no_fap_web_change": true,
+  "next_task": "PAYMENT-ALIPAY-OWNER-MISMATCH-CONTROLLED-REPAIR-04"
+}
