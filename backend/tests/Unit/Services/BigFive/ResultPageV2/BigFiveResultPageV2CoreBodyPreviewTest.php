@@ -418,6 +418,33 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_eq_journey_state_contract_changes(): void
+    {
+        $changed = [
+            'backend/app/Models/EqJourneyState.php',
+            'backend/app/Services/Eq/EqJourneyStateService.php',
+            'backend/database/migrations/2026_05_31_083300_create_eq_journey_states_table.php',
+            'backend/routes/api.php',
+        ];
+        $routeChangedLines = [
+            "+            Route::get('/attempts/{id}/eq/journey', [AttemptReadController::class, 'eqJourney'])",
+            "+                ->middleware([\\App\\Http\\Middleware\\FmTokenAuth::class, 'uuid:id'])",
+            "+                ->defaults('public_realm', true)",
+            "+                ->name('api.v0_3.attempts.eq.journey.show');",
+            "+            Route::post('/attempts/{id}/eq/journey', [AttemptReadController::class, 'submitEqJourney'])",
+            "+                ->middleware([\\App\\Http\\Middleware\\FmTokenAuth::class, 'uuid:id'])",
+            "+                ->defaults('public_realm', true)",
+            "+                ->name('api.v0_3.attempts.eq.journey.submit');",
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            routeChangedLines: $routeChangedLines
+        ));
+    }
+
     public function test_runtime_freeze_classifier_ignores_public_content_release_guard_command_changes(): void
     {
         $changed = [
@@ -2883,7 +2910,18 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isEq60JourneyStateContractChange($file)) {
+                continue;
+            }
+
             if ($this->isEq60FreeReportContractChange($file, $repoRoot, $baseRef)) {
+                continue;
+            }
+
+            if (
+                $file === 'backend/routes/api.php'
+                && $this->routeDiffIsEq60JourneyStateContractOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
+            ) {
                 continue;
             }
 
@@ -3928,6 +3966,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ], true);
     }
 
+    private function isEq60JourneyStateContractChange(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Models/EqJourneyState.php',
+            'backend/app/Services/Eq/EqJourneyStateService.php',
+            'backend/database/migrations/2026_05_31_083300_create_eq_journey_states_table.php',
+        ], true);
+    }
+
     private function isCiAuthBypassHardeningFile(string $file): bool
     {
         return in_array($file, [
@@ -4689,6 +4736,32 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
 
         foreach ($changedLines as $line) {
             if (! in_array($line, $allowedLines, true)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function routeDiffIsEq60JourneyStateContractOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            if (str_starts_with($line, '-')) {
+                return false;
+            }
+
+            if (preg_match('/^\+\s*$/u', $line) === 1) {
+                continue;
+            }
+
+            if (preg_match('/eq\\/journey|eqJourney|submitEqJourney|api\\.v0_3\\.attempts\\.eq\\.journey|FmTokenAuth|uuid:id|public_realm/u', $line) !== 1) {
                 return false;
             }
         }
