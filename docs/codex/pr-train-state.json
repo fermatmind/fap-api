@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-31T16:21:14.932455Z",
+  "updated_at": "2026-05-31T16:22:06.368532Z",
   "items": {
     "PR-EQ-PER-01": {
       "repo": "fap-api",
@@ -22859,7 +22859,7 @@
       "branch": "codex/iq-cms-media-01-authority-metadata",
       "base": "main",
       "title": "IQ-CMS-MEDIA-01 register CMS media authority metadata",
-      "status": "local_checks_passed",
+      "status": "pr_opened",
       "depends_on": [
         "IQ-PAID-REPORT-02"
       ],
@@ -22906,11 +22906,18 @@
           "from": "implementation_in_progress",
           "to": "local_checks_passed",
           "note": "Changed files stayed within IQ-CMS-MEDIA-01 allowed_paths; manifest local validation commands passed."
+        },
+        {
+          "at": "2026-05-31T16:22:06.368532Z",
+          "from": "local_checks_passed",
+          "to": "pr_opened",
+          "note": "Opened GitHub PR #1817 after local validation passed."
         }
       ],
-      "commit_sha": null,
-      "pr_url": null,
-      "updated_at": "2026-05-31T16:21:14.932455Z"
+      "commit_sha": "bea2250c268bbea96ee2304fa823c1d6e5468472",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1817",
+      "updated_at": "2026-05-31T16:22:06.368532Z",
+      "pr_number": 1817
     },
     "IQ-CMS-MEDIA-02": {
       "id": "IQ-CMS-MEDIA-02",
@@ -30488,12 +30495,12 @@
       "branch": "codex/iq-cms-media-01-authority-metadata",
       "base": "main",
       "title": "IQ-CMS-MEDIA-01 register CMS media authority metadata",
-      "status": "local_checks_passed",
+      "status": "pr_opened",
       "depends_on": [
         "IQ-PAID-REPORT-02"
       ],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "bea2250c268bbea96ee2304fa823c1d6e5468472",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1817",
       "checks": {
         "dependency_iq_paid_report_02": "passed: fermatmind/fap-web#943 merged at 2026-05-31T16:12:12Z",
         "workspace_safety": "using isolated worktree /private/tmp/fap-api-iq-cms-media-01; primary worktree untouched",
@@ -30521,7 +30528,8 @@
         "github_checks_green": null,
         "post_merge_revalidated": null
       },
-      "updated_at": "2026-05-31T16:21:14.932455Z"
+      "updated_at": "2026-05-31T16:22:06.368532Z",
+      "pr_number": 1817
     }
   },
   "RESULT-EN-PARITY-04": {
