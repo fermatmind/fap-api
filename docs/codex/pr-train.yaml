@@ -17453,6 +17453,58 @@ prs:
     frontend_fallback_authority: false
     next_task: post-merge cleanup only after PR-POL-01 merge
 
+  - id: PR-POL-01-LEDGER-RECONCILE-AND-SMOKE
+    repo: fap-api
+    branch: codex/pr-pol-01-ledger-reconcile-and-smoke
+    base: main
+    title: "PR-POL-01-LEDGER-RECONCILE-AND-SMOKE policies runtime reconcile and smoke"
+    train_scope: content_pages_policies_dashboard_post_publish_smoke
+    risk_level: p2_read_only_runtime_smoke
+    depends_on:
+      - PR-POL-01
+    allowed_paths:
+      - backend/docs/seo/pr-pol-01-ledger-reconcile-and-smoke.md
+      - backend/docs/seo/generated/pr-pol-01-ledger-reconcile-and-smoke.v1.json
+      - backend/tests/Feature/SeoIntel/PrPol01LedgerReconcileAndSmokeTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Reconcile PR-POL-01 merged state and verify production policies content page runtime.
+      - Verify EN/ZH policies CMS rows remain published, public, and indexable.
+      - Verify public runtime 200, exact canonicals, index/follow robots, sitemap/llms/footer exposure, and no staging canonical or frontend fallback marker.
+      - Verify no policies Search Channel queue item exists and protected queue item 2/3 states remain unchanged.
+    do_not:
+      - Mutate CMS or production data.
+      - Publish or unpublish pages.
+      - Deploy backend or frontend.
+      - Enqueue Search Channel, submit URLs, or call external search APIs.
+      - Edit env, DNS, nginx, or read raw logs.
+      - Modify fap-web.
+    validation:
+      - cd backend && php artisan test --filter=PrPol01LedgerReconcileAndSmoke --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/pr-pol-01-ledger-reconcile-and-smoke.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: PR-HIRING-01-POST-PUBLISH-SMOKE
+
   - id: PAYMENT-ALIPAY-PENDING-COMPENSATION-SCHEDULER-01
     repo: fap-api
     branch: codex/payment-alipay-pending-compensation-scheduler-01

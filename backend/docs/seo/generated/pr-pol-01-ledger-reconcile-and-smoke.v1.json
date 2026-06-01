@@ -1,0 +1,136 @@
+{
+  "schema_version": "pr_pol_01_ledger_reconcile_and_smoke.v1",
+  "task": "PR-POL-01-LEDGER-RECONCILE-AND-SMOKE",
+  "final_decision": "pr_pol_01_ledger_reconcile_and_smoke_completed_stable",
+  "source_pr": {
+    "id": "PR-POL-01",
+    "github_pr": "https://github.com/fermatmind/fap-api/pull/1769",
+    "github_state": "merged",
+    "merged_at": "2026-05-30T23:21:04Z"
+  },
+  "target_pages": [
+    "policies"
+  ],
+  "locales": [
+    "en",
+    "zh-CN"
+  ],
+  "cms_record_state": {
+    "en": {
+      "slug": "policies",
+      "locale": "en",
+      "status": "published",
+      "is_public": true,
+      "is_indexable": true,
+      "published_at": "2026-04-21",
+      "updated_at": "2026-05-31 00:07:08"
+    },
+    "zh-CN": {
+      "slug": "policies",
+      "locale": "zh-CN",
+      "status": "published",
+      "is_public": true,
+      "is_indexable": true,
+      "published_at": "2026-04-19",
+      "updated_at": "2026-05-31 00:07:08"
+    }
+  },
+  "api_runtime_check": {
+    "apex_same_origin": {
+      "en": {
+        "url": "https://fermatmind.com/api/v0.5/content-pages/policies?locale=en&org_id=0",
+        "http_status": 200
+      },
+      "zh-CN": {
+        "url": "https://fermatmind.com/api/v0.5/content-pages/policies?locale=zh-CN&org_id=0",
+        "http_status": 200
+      }
+    },
+    "api_host": {
+      "en": {
+        "url": "https://api.fermatmind.com/api/v0.5/content-pages/policies?locale=en&org_id=0",
+        "http_status": 200
+      },
+      "zh-CN": {
+        "url": "https://api.fermatmind.com/api/v0.5/content-pages/policies?locale=zh-CN&org_id=0",
+        "http_status": 200
+      }
+    }
+  },
+  "public_runtime_check": {
+    "en": {
+      "url": "https://fermatmind.com/en/policies",
+      "http_status": 200,
+      "title": "Policies Overview | FermatMind",
+      "h1": "Policies Overview",
+      "canonical": "https://fermatmind.com/en/policies",
+      "robots": "index, follow",
+      "noindex_detected": false,
+      "staging_canonical_detected": false,
+      "frontend_fallback_marker_detected": false
+    },
+    "zh-CN": {
+      "url": "https://fermatmind.com/zh/policies",
+      "http_status": 200,
+      "title": "政策总览 | FermatMind",
+      "h1": "政策总览",
+      "canonical": "https://fermatmind.com/zh/policies",
+      "robots": "index, follow",
+      "noindex_detected": false,
+      "staging_canonical_detected": false,
+      "frontend_fallback_marker_detected": false
+    }
+  },
+  "discoverability_check": {
+    "sitemap_xml": {
+      "http_status": 200,
+      "en_policies_present": true,
+      "zh_policies_present": true
+    },
+    "llms_txt": {
+      "http_status": 200,
+      "en_policies_present": true,
+      "zh_policies_present": true
+    },
+    "llms_full_txt": {
+      "http_status": 200,
+      "en_policies_present": true,
+      "zh_policies_present": true
+    },
+    "footer_nav": {
+      "en_policies_present": true,
+      "zh_policies_present": true
+    }
+  },
+  "search_channel_check": {
+    "policies_queue_items": {
+      "https://fermatmind.com/en/policies": 0,
+      "https://fermatmind.com/zh/policies": 0
+    },
+    "queue_item_2_state": {
+      "id": 2,
+      "canonical_url": "https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types",
+      "channel": "indexnow",
+      "approval_state": "approved",
+      "execution_state": "submitted"
+    },
+    "queue_item_3_state": {
+      "id": 3,
+      "canonical_url": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+      "channel": "indexnow",
+      "approval_state": "approved",
+      "execution_state": "submitted"
+    },
+    "search_channel_action_performed": false
+  },
+  "no_cms_mutation": true,
+  "no_publish": true,
+  "no_deploy": true,
+  "no_search_channel_action": true,
+  "no_url_submission": true,
+  "no_external_search_api_call": true,
+  "no_env_dns_nginx_edit": true,
+  "no_raw_log_read": true,
+  "no_fap_web_mutation": true,
+  "next_task": "PR-HIRING-01-POST-PUBLISH-SMOKE"
+}
