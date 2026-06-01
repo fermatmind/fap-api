@@ -16777,6 +16777,53 @@ prs:
     frontend_fallback_authority: false
     next_task: BACKEND-DEPLOY-READINESS for ANALYTICS-FUNNEL-REPORT-READY-PROJECTION-MAPPING-02
 
+  - id: ANALYTICS-FUNNEL-REPORT-READY-MERGE-TIMESTAMP-03
+    repo: fap-api
+    branch: codex/analytics-funnel-report-ready-merge-timestamp-03
+    base: main
+    title: "ANALYTICS-FUNNEL-REPORT-READY-MERGE-TIMESTAMP-03 fix report_ready timestamp merge"
+    train_scope: analytics_funnel_report_ready_merge_timestamp
+    risk_level: p1_analytics_funnel_observability
+    depends_on:
+      - ANALYTICS-FUNNEL-REPORT-READY-PROJECTION-MAPPING-02
+    allowed_paths:
+      - backend/app/Services/Analytics/AnalyticsFunnelDailyBuilder.php
+      - backend/tests/Feature/Analytics/AnalyticsFunnelDailyBuilderTest.php
+      - backend/tests/Feature/Analytics/RefreshAnalyticsFunnelDailyCommandTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Fix report_ready timestamp merging so projection-ready access is not overridden by stale snapshot-ready timestamps on the same attempt.
+      - Prefer projection-ready time when projection truth represents actual paid access readiness while preserving snapshot-only report_ready behavior.
+      - Preserve de-duplication, org/date/scale/locale scoping, payment_success semantics, and report_unlock semantics.
+      - Do not run analytics refresh, mutate production DB, repair payments, create benefit grants, call payment providers, deploy, mutate CMS, change GA/Baidu settings, enqueue Search Channel, or submit URLs.
+    validation:
+      - cd backend && php artisan test --filter=AnalyticsFunnelDailyBuilder --no-ansi
+      - cd backend && php artisan test --filter=RefreshAnalyticsFunnelDailyCommand --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    payment_repair_allowed: false
+    payment_provider_call: false
+    analytics_refresh_allowed: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: BACKEND-DEPLOY-READINESS for ANALYTICS-FUNNEL-REPORT-READY-MERGE-TIMESTAMP-03
+
 
   - id: CONTENT-PACKS-INDEX-ARTIFACT-01
     repo: fap-api

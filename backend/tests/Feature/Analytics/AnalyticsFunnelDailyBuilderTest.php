@@ -166,12 +166,38 @@ final class AnalyticsFunnelDailyBuilderTest extends TestCase
         $this->assertSame(1, (int) ($row['report_ready_attempts'] ?? 0));
     }
 
+    public function test_projection_ready_time_wins_over_stale_snapshot_time(): void
+    {
+        $day = CarbonImmutable::parse('2026-02-07 09:00:00');
+
+        $this->seedProjectionAccessAttempt(
+            orgId: 105,
+            day: $day,
+            withSnapshot: true,
+            snapshotAt: $day->addMinutes(12)
+        );
+
+        $payload = app(AnalyticsFunnelDailyBuilder::class)->build(
+            new \DateTimeImmutable($day->toDateString()),
+            new \DateTimeImmutable($day->toDateString()),
+            [105],
+        );
+
+        $row = collect($payload['rows'])->firstWhere('locale', 'en');
+
+        $this->assertNotNull($row);
+        $this->assertSame(1, (int) ($row['paid_attempts'] ?? 0));
+        $this->assertSame(1, (int) ($row['unlocked_attempts'] ?? 0));
+        $this->assertSame(1, (int) ($row['report_ready_attempts'] ?? 0));
+    }
+
     private function seedProjectionAccessAttempt(
         int $orgId,
         CarbonImmutable $day,
         bool $withProjection = true,
         bool $withGrant = true,
-        bool $withSnapshot = false
+        bool $withSnapshot = false,
+        ?CarbonImmutable $snapshotAt = null
     ): string {
         $attemptId = (string) Str::uuid();
         $orderNo = 'ord_projection_'.$orgId;
@@ -193,7 +219,7 @@ final class AnalyticsFunnelDailyBuilderTest extends TestCase
         }
 
         if ($withSnapshot) {
-            $this->insertReportSnapshot($attemptId, $orderNo, $orgId, $day->addMinutes(45));
+            $this->insertReportSnapshot($attemptId, $orderNo, $orgId, $snapshotAt ?? $day->addMinutes(45));
         }
 
         return $attemptId;

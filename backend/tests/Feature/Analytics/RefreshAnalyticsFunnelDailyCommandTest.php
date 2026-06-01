@@ -63,7 +63,7 @@ final class RefreshAnalyticsFunnelDailyCommandTest extends TestCase
     {
         $day = CarbonImmutable::parse('2026-02-06 09:00:00');
 
-        $this->seedProjectionAccessAttempt(92, $day);
+        $this->seedProjectionAccessAttempt(92, $day, withStaleSnapshot: true);
 
         $this->artisan('analytics:refresh-funnel-daily', [
             '--from' => $day->toDateString(),
@@ -89,7 +89,7 @@ final class RefreshAnalyticsFunnelDailyCommandTest extends TestCase
         $this->assertSame(1, (int) ($row['report_ready_attempts'] ?? 0));
     }
 
-    private function seedProjectionAccessAttempt(int $orgId, CarbonImmutable $day): string
+    private function seedProjectionAccessAttempt(int $orgId, CarbonImmutable $day, bool $withStaleSnapshot = false): string
     {
         $attemptId = (string) Str::uuid();
         $orderNo = 'ord_projection_refresh_'.$orgId;
@@ -102,6 +102,10 @@ final class RefreshAnalyticsFunnelDailyCommandTest extends TestCase
         $this->insertBenefitGrant($attemptId, $orderNo, $orgId, $day->addMinutes(30));
         $this->insertAttemptReceipt($attemptId, $day->addMinutes(35));
         $this->insertUnifiedAccessProjection($attemptId, $day->addMinutes(40));
+
+        if ($withStaleSnapshot) {
+            $this->insertReportSnapshot($attemptId, $orderNo, $orgId, $day->addMinutes(12));
+        }
 
         return $attemptId;
     }
@@ -140,6 +144,25 @@ final class RefreshAnalyticsFunnelDailyCommandTest extends TestCase
             'refreshed_at' => $readyAt,
             'created_at' => $readyAt,
             'updated_at' => $readyAt,
+        ]);
+    }
+
+    private function insertReportSnapshot(string $attemptId, string $orderNo, int $orgId, CarbonImmutable $updatedAt): void
+    {
+        DB::table('report_snapshots')->insert([
+            'org_id' => $orgId,
+            'attempt_id' => $attemptId,
+            'order_no' => $orderNo,
+            'scale_code' => 'MBTI',
+            'pack_id' => 'MBTI',
+            'dir_version' => 'mbti_dir_2026_01',
+            'scoring_spec_version' => 'scoring_2026_01',
+            'report_engine_version' => 'report_2026_01',
+            'snapshot_version' => 'v1',
+            'report_json' => json_encode(['summary' => 'stale-ready'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'status' => 'ready',
+            'created_at' => $updatedAt->subMinutes(2),
+            'updated_at' => $updatedAt,
         ]);
     }
 }
