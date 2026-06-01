@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "task": "CAREER-DIRECTORY-AUTHORITY-ARTIFACT-API-01",
+  "final_decision": "career_directory_authority_artifact_api_completed_ready_for_sitemap_authority_alignment",
+  "repo": "fap-api",
+  "branch": "codex/career-directory-authority-artifact-api-01",
+  "authority_version": "career.directory_authority.v1",
+  "endpoint_added": "/api/v0.5/career/directory",
+  "existing_jobs_contract_preserved": true,
+  "directory_contract_fields": [
+    "authority_version",
+    "bundle_kind",
+    "public_truth",
+    "pagination",
+    "filters",
+    "facets",
+    "items"
+  ],
+  "item_fields": [
+    "slug",
+    "title_en",
+    "title_zh",
+    "title",
+    "family",
+    "canonical_path",
+    "indexability_state",
+    "robots_policy",
+    "indexable",
+    "detail_ready",
+    "updated_at"
+  ],
+  "excluded_slugs": [
+    "software-developers",
+    "digital-forensics-analysts",
+    "computer-occupations-all-other"
+  ],
+  "future_scale_ready": true,
+  "sitemap_exposure_changed": false,
+  "llms_exposure_changed": false,
+  "frontend_changed": false,
+  "career_cohort_mutation_performed": false,
+  "runtime_promotion_performed": false,
+  "cms_mutation_performed": false,
+  "deploy_performed": false,
+  "search_channel_action_performed": false,
+  "url_submission_performed": false,
+  "external_search_api_call_performed": false,
+  "next_task": "CAREER-SITEMAP-EXPOSURE-DIRECTORY-AUTHORITY-01"
+}

@@ -37966,5 +37966,80 @@
         "summary": "GitHub verify-bigfive failed only because the runtime-freeze classifier flagged the new analytics diagnostic service. Added a narrow classifier exemption and local focused validation passed."
       }
     ]
+  },
+  "CAREER-DIRECTORY-AUTHORITY-ARTIFACT-API-01": {
+    "id": "CAREER-DIRECTORY-AUTHORITY-ARTIFACT-API-01",
+    "repo": "fap-api",
+    "branch": "codex/career-directory-authority-artifact-api-01",
+    "base": "main",
+    "status": "in_progress",
+    "title": "CAREER-DIRECTORY-AUTHORITY-ARTIFACT-API-01 career directory authority artifact API",
+    "depends_on": [],
+    "commit_sha": "d578a78516fca7cb271f172c8a077c13ecf178c2",
+    "pr_url": null,
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User approved the five-PR career directory 10k-scale train and requested starting with PR1."
+      },
+      "scope_boundaries": {
+        "status": "pass",
+        "evidence": "Scope is limited to a new backend career directory authority API, report, focused test, and current PR ledger entries."
+      },
+      "php artisan test --filter=CareerDirectoryAuthorityApiTest --no-ansi": {
+        "status": "pass",
+        "evidence": "Focused career directory authority API test passed: 3 tests, 32 assertions."
+      },
+      "php artisan route:list --no-ansi": {
+        "status": "pass",
+        "evidence": "Route listing completed successfully and includes GET api/v0.5/career/directory."
+      },
+      "vendor/bin/pint --test app/Http/Controllers/API/V0_5/Career/CareerDirectoryController.php app/Services/Career/CareerDirectoryAuthorityService.php tests/Feature/Career/CareerDirectoryAuthorityApiTest.php": {
+        "status": "pass",
+        "evidence": "Scoped Pint passed for all PHP files touched by this PR."
+      },
+      "vendor/bin/pint --test": {
+        "status": "sidecar_external_failure",
+        "evidence": "Full Pint reports out-of-scope new_with_parentheses issues in tests/Unit/Eq/EqSjtValidationTelemetryContractTest.php and tests/Unit/Report/EqIntegratedReportComposerTest.php. Current PR does not touch those files; scoped Pint passed after removing the current PR unused import."
+      },
+      "composer validate --strict": {
+        "status": "pass",
+        "evidence": "Composer schema validation passed."
+      },
+      "composer audit --locked --no-interaction --ignore-unreachable": {
+        "status": "pass",
+        "evidence": "No locked dependency advisories reported."
+      },
+      "json_yaml_parse": {
+        "status": "pass",
+        "evidence": "Generated JSON and pr-train-state JSON parse; pr-train YAML parses."
+      },
+      "git diff --check && git diff --cached --check": {
+        "status": "pass",
+        "evidence": "Whitespace checks passed before staging."
+      }
+    },
+    "failure_reason": "Sidecar only: full Pint reports out-of-scope EQ test formatting issues; scoped current PR files passed.",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "next_task": "CAREER-SITEMAP-EXPOSURE-DIRECTORY-AUTHORITY-01",
+    "history": [
+      {
+        "at": "2026-06-01T02:57:03Z",
+        "status": "in_progress",
+        "summary": "Initialized PR1 after user authorization; started from latest origin/main and added the career directory authority API scope."
+      },
+      {
+        "at": "2026-06-01T03:09:00Z",
+        "status": "local_checks_passed_with_sidecar",
+        "summary": "Focused test, route:list, scoped Pint, composer validate, composer audit, JSON/YAML parsing, and diff checks passed. Full Pint has unrelated EQ test formatting sidecars."
+      },
+      {
+        "at": "2026-06-01T03:15:00Z",
+        "status": "committed",
+        "summary": "Committed scoped PR1 changes locally as d578a785."
+      }
+    ]
   }
 }
