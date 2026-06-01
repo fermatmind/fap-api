@@ -8,6 +8,7 @@ use App\Services\BigFive\BigFivePublicFormSummaryBuilder;
 use App\Services\Commerce\Checkout\AlipayCheckoutService;
 use App\Services\Commerce\Checkout\LemonSqueezyCheckoutService;
 use App\Services\Commerce\Checkout\WechatPayCheckoutService;
+use App\Services\Commerce\Compensation\PendingOrderCompensationService;
 use App\Services\Commerce\MbtiAccessHubBuilder;
 use App\Services\Commerce\OrderManager;
 use App\Services\Commerce\SkuCatalog;
@@ -45,6 +46,7 @@ class CommerceController extends Controller
         private WechatPayCheckoutService $wechatPayCheckout,
         private AlipayCheckoutService $alipayCheckout,
         private ResultAccessTokenService $resultAccessTokens,
+        private PendingOrderCompensationService $pendingOrderCompensation,
     ) {}
 
     /**
@@ -326,6 +328,9 @@ class CommerceController extends Controller
             ], $bindingError['status']);
         }
 
+        $this->compensateAlipayReturnOrder($normalizedRouteOrderNo);
+        $order = $this->orders->findOrderByOrderNo($normalizedRouteOrderNo, $this->orgContext->orgId()) ?? $order;
+
         $paymentRecoveryToken = $this->orders->issuePaymentRecoveryToken($order);
         $recoveryUrls = $this->orders->presentPaymentRecoveryUrls(
             $order,
@@ -340,6 +345,37 @@ class CommerceController extends Controller
             'wait_url' => $recoveryUrls['wait_url'],
             'result_url' => $recoveryUrls['result_url'],
         ]);
+    }
+
+    private function compensateAlipayReturnOrder(string $orderNo): void
+    {
+        try {
+            $summary = $this->pendingOrderCompensation->compensate([
+                'provider' => 'alipay',
+                'order' => $orderNo,
+                'limit' => 1,
+                'older_than_minutes' => 0,
+                'include_created' => true,
+                'only_stale' => false,
+                'close_expired' => false,
+                'dry_run' => false,
+            ]);
+
+            Log::info('ALIPAY_RETURN_RECOVERY_COMPENSATED', [
+                'order_no' => $orderNo,
+                'candidate_count' => (int) ($summary['candidate_count'] ?? 0),
+                'queried_count' => (int) ($summary['queried_count'] ?? 0),
+                'paid_count' => (int) ($summary['paid_count'] ?? 0),
+                'repair_candidate_count' => (int) ($summary['repair_candidate_count'] ?? 0),
+                'repair_repaired_count' => (int) ($summary['repair_repaired_count'] ?? 0),
+                'unresolved_count' => (int) ($summary['unresolved_count'] ?? 0),
+            ]);
+        } catch (\Throwable $e) {
+            Log::warning('ALIPAY_RETURN_RECOVERY_COMPENSATION_FAILED', [
+                'order_no' => $orderNo,
+                'exception' => mb_substr($e->getMessage(), 0, 255),
+            ]);
+        }
     }
 
     /**

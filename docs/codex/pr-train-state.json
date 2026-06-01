@@ -31103,6 +31103,132 @@
           "note": "Recorded cross-repo fap-web IQ-RELEASE-01 completion in fap-api state because fap-api manifest also declares this train item."
         }
       ]
+    },
+    "PAYMENT-ALIPAY-RETURN-IMMEDIATE-COMPENSATION-05": {
+      "id": "PAYMENT-ALIPAY-RETURN-IMMEDIATE-COMPENSATION-05",
+      "repo": "fap-api",
+      "branch": "codex/payment-alipay-return-immediate-compensation-05",
+      "base": "main",
+      "status": "pr_open",
+      "title": "PAYMENT-ALIPAY-RETURN-IMMEDIATE-COMPENSATION-05 compensate Alipay return immediately",
+      "depends_on": [
+        "PAYMENT-ALIPAY-SCHEDULER-BOOTSTRAP-02"
+      ],
+      "commit_sha": "a843d4f1",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1834",
+      "checks": {
+        "manifest_registration": {
+          "status": "pass",
+          "evidence": "User requested the three-PR payment/result train and authorized implementing PAYMENT-ALIPAY-RETURN-IMMEDIATE-COMPENSATION-05 under one-PR-one-scope discipline."
+        },
+        "scope_boundaries": {
+          "status": "pass",
+          "evidence": "Scope is limited to Alipay return recovery immediate compensation in CommerceController, focused Alipay return recovery coverage, and pr-train metadata; no production env, deploy, CMS/content, Search Channel, URL submission, or fap-web changes."
+        },
+        "alipay_return_recovery_endpoint": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=AlipayReturnRecoveryEndpoint --no-ansi",
+          "evidence": "PASS: 13 tests, 45 assertions; includes immediate provider query + paid/grant repair on signed Alipay return."
+        },
+        "pending_order_lifecycle_compensation": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=PendingOrderLifecycleCompensation --no-ansi",
+          "evidence": "PASS: 2 tests, 15 assertions."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "cd backend && php artisan route:list --no-ansi",
+          "evidence": "PASS: route:list rendered 210 routes."
+        },
+        "pint_full": {
+          "status": "external_sidecar",
+          "command": "cd backend && vendor/bin/pint --test",
+          "evidence": "FAILED only on pre-existing out-of-scope style issues in tests/Unit/Eq/EqSjtValidationTelemetryContractTest.php and tests/Unit/Report/EqIntegratedReportComposerTest.php."
+        },
+        "pint_scoped": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test app/Http/Controllers/API/V0_3/CommerceController.php tests/Feature/V0_3/AlipayReturnRecoveryEndpointTest.php",
+          "evidence": "PASS: 2 scoped files."
+        },
+        "composer_validate": {
+          "status": "pass",
+          "command": "cd backend && composer validate --strict",
+          "evidence": "PASS: composer.json is valid."
+        },
+        "composer_audit": {
+          "status": "pass",
+          "command": "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+          "evidence": "PASS: no security vulnerability advisories found."
+        },
+        "json_yaml_parse": {
+          "status": "pass",
+          "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "evidence": "PASS: JSON and YAML parsed."
+        },
+        "diff_check": {
+          "status": "pass",
+          "command": "git diff --check && git diff --cached --check",
+          "evidence": "PASS: working and cached diff whitespace checks passed."
+        },
+        "fap_web_reference_status": {
+          "status": "pass",
+          "command": "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short",
+          "evidence": "PASS: fap-web reference worktree clean."
+        },
+        "pr_created": {
+          "status": "pass",
+          "pr_url": "https://github.com/fermatmind/fap-api/pull/1834",
+          "title": "PAYMENT-ALIPAY-RETURN-IMMEDIATE-COMPENSATION-05 compensate Alipay return immediately"
+        },
+        "github_checks": {
+          "status": "pending",
+          "evidence": "PR opened; remote checks pending."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "scope_validation": {
+        "allowed_paths_only": true,
+        "git_diff_check": "passed",
+        "git_diff_cached_check": "passed"
+      },
+      "transitions": [
+        {
+          "status": "authorized",
+          "at": "2026-06-01T12:21:00+08:00",
+          "summary": "User authorized a three-PR train and requested PAYMENT-ALIPAY-RETURN-IMMEDIATE-COMPENSATION-05 as the second scoped PR."
+        },
+        {
+          "status": "in_progress",
+          "at": "2026-06-01T12:21:00+08:00",
+          "summary": "Implementing immediate targeted Alipay pending compensation after signed return recovery binding passes."
+        },
+        {
+          "status": "local_checks_passed_with_sidecar",
+          "at": "2026-06-01T12:52:00+08:00",
+          "summary": "Focused Alipay return recovery, pending compensation lifecycle, route:list, scoped Pint, composer validate/audit, JSON/YAML parse, fap-web reference status, and diff checks passed. Full Pint external sidecar recorded for out-of-scope pre-existing style issues."
+        },
+        {
+          "status": "committed",
+          "at": "2026-06-01T13:02:00+08:00",
+          "summary": "Committed scoped Alipay return immediate compensation at a843d4f1."
+        },
+        {
+          "status": "pr_open",
+          "at": "2026-06-01T13:04:00+08:00",
+          "summary": "Opened PR https://github.com/fermatmind/fap-api/pull/1834 after scoped local validation."
+        }
+      ],
+      "sidecars": [
+        {
+          "id": "FAP-API-PINT-EXTERNAL-EQ-REPORT-STYLE",
+          "status": "open_external",
+          "summary": "Full vendor/bin/pint --test currently fails on two pre-existing out-of-scope unit test style issues unrelated to this Alipay return compensation PR; scoped Pint on changed files passes."
+        }
+      ],
+      "next_task": "PAYMENT-WAIT-PAID-REDIRECT-CONTRACT-06"
     }
   },
   "RESULT-EN-PARITY-04": {
@@ -38268,5 +38394,131 @@
         "summary": "Inspected GitHub failures in verify-mbti-legacy and verify-mbti-v2; both failed because SitemapXmlTest expected a career detail URL without binding runtime projection truth. Added the fixture binding in current scope and validated SitemapXmlTest plus focused sitemap checks locally."
       }
     ]
+  },
+  "PAYMENT-ALIPAY-RETURN-IMMEDIATE-COMPENSATION-05": {
+    "id": "PAYMENT-ALIPAY-RETURN-IMMEDIATE-COMPENSATION-05",
+    "repo": "fap-api",
+    "branch": "codex/payment-alipay-return-immediate-compensation-05",
+    "base": "main",
+    "status": "pr_open",
+    "title": "PAYMENT-ALIPAY-RETURN-IMMEDIATE-COMPENSATION-05 compensate Alipay return immediately",
+    "depends_on": [
+      "PAYMENT-ALIPAY-SCHEDULER-BOOTSTRAP-02"
+    ],
+    "commit_sha": "a843d4f1",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1834",
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User requested the three-PR payment/result train and authorized implementing PAYMENT-ALIPAY-RETURN-IMMEDIATE-COMPENSATION-05 under one-PR-one-scope discipline."
+      },
+      "scope_boundaries": {
+        "status": "pass",
+        "evidence": "Scope is limited to Alipay return recovery immediate compensation in CommerceController, focused Alipay return recovery coverage, and pr-train metadata; no production env, deploy, CMS/content, Search Channel, URL submission, or fap-web changes."
+      },
+      "alipay_return_recovery_endpoint": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=AlipayReturnRecoveryEndpoint --no-ansi",
+        "evidence": "PASS: 13 tests, 45 assertions; includes immediate provider query + paid/grant repair on signed Alipay return."
+      },
+      "pending_order_lifecycle_compensation": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=PendingOrderLifecycleCompensation --no-ansi",
+        "evidence": "PASS: 2 tests, 15 assertions."
+      },
+      "route_list": {
+        "status": "pass",
+        "command": "cd backend && php artisan route:list --no-ansi",
+        "evidence": "PASS: route:list rendered 210 routes."
+      },
+      "pint_full": {
+        "status": "external_sidecar",
+        "command": "cd backend && vendor/bin/pint --test",
+        "evidence": "FAILED only on pre-existing out-of-scope style issues in tests/Unit/Eq/EqSjtValidationTelemetryContractTest.php and tests/Unit/Report/EqIntegratedReportComposerTest.php."
+      },
+      "pint_scoped": {
+        "status": "pass",
+        "command": "cd backend && vendor/bin/pint --test app/Http/Controllers/API/V0_3/CommerceController.php tests/Feature/V0_3/AlipayReturnRecoveryEndpointTest.php",
+        "evidence": "PASS: 2 scoped files."
+      },
+      "composer_validate": {
+        "status": "pass",
+        "command": "cd backend && composer validate --strict",
+        "evidence": "PASS: composer.json is valid."
+      },
+      "composer_audit": {
+        "status": "pass",
+        "command": "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+        "evidence": "PASS: no security vulnerability advisories found."
+      },
+      "json_yaml_parse": {
+        "status": "pass",
+        "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+        "evidence": "PASS: JSON and YAML parsed."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check && git diff --cached --check",
+        "evidence": "PASS: working and cached diff whitespace checks passed."
+      },
+      "fap_web_reference_status": {
+        "status": "pass",
+        "command": "cd /Users/rainie/Desktop/GitHub/fap-web && git status --short",
+        "evidence": "PASS: fap-web reference worktree clean."
+      },
+      "pr_created": {
+        "status": "pass",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/1834",
+        "title": "PAYMENT-ALIPAY-RETURN-IMMEDIATE-COMPENSATION-05 compensate Alipay return immediately"
+      },
+      "github_checks": {
+        "status": "pending",
+        "evidence": "PR opened; remote checks pending."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "git_diff_check": "passed",
+      "git_diff_cached_check": "passed"
+    },
+    "transitions": [
+      {
+        "status": "authorized",
+        "at": "2026-06-01T12:21:00+08:00",
+        "summary": "User authorized a three-PR train and requested PAYMENT-ALIPAY-RETURN-IMMEDIATE-COMPENSATION-05 as the second scoped PR."
+      },
+      {
+        "status": "in_progress",
+        "at": "2026-06-01T12:21:00+08:00",
+        "summary": "Implementing immediate targeted Alipay pending compensation after signed return recovery binding passes."
+      },
+      {
+        "status": "local_checks_passed_with_sidecar",
+        "at": "2026-06-01T12:52:00+08:00",
+        "summary": "Focused Alipay return recovery, pending compensation lifecycle, route:list, scoped Pint, composer validate/audit, JSON/YAML parse, fap-web reference status, and diff checks passed. Full Pint external sidecar recorded for out-of-scope pre-existing style issues."
+      },
+      {
+        "status": "committed",
+        "at": "2026-06-01T13:02:00+08:00",
+        "summary": "Committed scoped Alipay return immediate compensation at a843d4f1."
+      },
+      {
+        "status": "pr_open",
+        "at": "2026-06-01T13:04:00+08:00",
+        "summary": "Opened PR https://github.com/fermatmind/fap-api/pull/1834 after scoped local validation."
+      }
+    ],
+    "sidecars": [
+      {
+        "id": "FAP-API-PINT-EXTERNAL-EQ-REPORT-STYLE",
+        "status": "open_external",
+        "summary": "Full vendor/bin/pint --test currently fails on two pre-existing out-of-scope unit test style issues unrelated to this Alipay return compensation PR; scoped Pint on changed files passes."
+      }
+    ],
+    "next_task": "PAYMENT-WAIT-PAID-REDIRECT-CONTRACT-06"
   }
 }

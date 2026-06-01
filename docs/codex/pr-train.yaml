@@ -17543,6 +17543,50 @@ prs:
     frontend_fallback_authority: false
     next_task: deploy-readiness and production scheduler runner verification required after merge
 
+  - id: PAYMENT-ALIPAY-RETURN-IMMEDIATE-COMPENSATION-05
+    repo: fap-api
+    branch: codex/payment-alipay-return-immediate-compensation-05
+    base: main
+    title: "PAYMENT-ALIPAY-RETURN-IMMEDIATE-COMPENSATION-05 compensate Alipay return immediately"
+    train_scope: payment_alipay_return_immediate_compensation
+    risk_level: p1_payment_fulfillment_reliability
+    depends_on:
+      - PAYMENT-ALIPAY-SCHEDULER-BOOTSTRAP-02
+    allowed_paths:
+      - backend/app/Http/Controllers/API/V0_3/CommerceController.php
+      - backend/tests/Feature/V0_3/AlipayReturnRecoveryEndpointTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - After Alipay return/recovery signature validation and order binding succeed, immediately run the existing targeted Alipay pending-order compensation service for that order.
+      - Reuse the existing provider query, paid transition, grant repair, and projection repair chain instead of adding a new payment repair path.
+      - Keep the return recovery response available even if the provider query has a transient failure; record bounded compensation telemetry without printing secrets.
+      - Do not change production env, deploy, mutate CMS/content, submit URLs, enqueue Search Channel actions, or modify fap-web in this PR.
+    validation:
+      - cd backend && php artisan test --filter=AlipayReturnRecoveryEndpoint --no-ansi
+      - cd backend && php artisan test --filter=PendingOrderLifecycleCompensation --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: PAYMENT-WAIT-PAID-REDIRECT-CONTRACT-06
+
   - id: PAYMENT-ALIPAY-OWNER-MISMATCH-REVIEW-03
     repo: fap-api
     branch: codex/payment-alipay-owner-mismatch-review-03
