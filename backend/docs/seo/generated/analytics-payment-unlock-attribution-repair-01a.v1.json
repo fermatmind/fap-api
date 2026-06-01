@@ -1,0 +1,52 @@
+{
+  "schema_version": "analytics_payment_unlock_attribution_repair_01a.v1",
+  "task": "ANALYTICS-PAYMENT-UNLOCK-ATTRIBUTION-REPAIR-01A",
+  "final_decision": "analytics_payment_unlock_attribution_diagnostics_completed_ready_for_readonly_ops_exposure",
+  "diagnostic_service": "App\\Services\\Analytics\\PaymentUnlockAttributionDiagnostics",
+  "read_only": true,
+  "mutation_attempted": false,
+  "production_write_performed": false,
+  "analytics_refresh_performed": false,
+  "payment_provider_call_performed": false,
+  "cms_mutation_performed": false,
+  "search_channel_action_performed": false,
+  "url_submission_performed": false,
+  "source_tables": [
+    "orders",
+    "skus",
+    "benefit_grants",
+    "payment_events",
+    "unified_access_projections"
+  ],
+  "diagnostic_categories": [
+    "paid_granted_projection_ready",
+    "paid_granted_projection_missing",
+    "paid_granted_projection_not_ready",
+    "paid_no_grant_owner_or_scale_mismatch",
+    "paid_no_grant_post_commit_failed",
+    "paid_no_grant_repairable_candidate",
+    "payment_pending_client_presented",
+    "payment_not_paid_other"
+  ],
+  "authority_boundary": {
+    "payment_success_truth": "orders/payment_events",
+    "report_unlock_truth": "active benefit_grants",
+    "report_entry_truth": "unified_access_projections",
+    "frontend_authority_allowed": false,
+    "ga_baidu_authority_allowed": false,
+    "crawler_log_authority_allowed": false,
+    "sitemap_llms_authority_allowed": false
+  },
+  "sample_privacy": {
+    "raw_order_numbers_in_samples": false,
+    "sample_ref_format": "sha256-prefix"
+  },
+  "deferred_followups": [
+    "production read-only diagnostic run",
+    "optional Ops UI exposure",
+    "Alipay return/provider verification repair",
+    "owner mismatch human review",
+    "report_unlock taxonomy alias review for entitlement_granted"
+  ],
+  "next_task": "ANALYTICS-PAYMENT-UNLOCK-ATTRIBUTION-REPAIR-01B｜Expose or run read-only payment-to-unlock attribution diagnostics"
+}
