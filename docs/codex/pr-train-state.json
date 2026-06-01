@@ -39325,10 +39325,10 @@
     "repo": "fap-api",
     "branch": "codex/career-legacy-full-jobs-index-consumer-audit-01",
     "base": "main",
-    "status": "pr_open_checks_pending",
+    "status": "merged",
     "title": "CAREER-LEGACY-FULL-JOBS-INDEX-CONSUMER-AUDIT-01 legacy full jobs index consumer audit",
     "depends_on": [],
-    "commit_sha": "pending_remote_pr_head",
+    "commit_sha": "24288ec8713900f6709cd472b51f2d097ef263af",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1845",
     "checks": {
       "manifest_registration": {
@@ -39370,17 +39370,25 @@
       "scope_validation": {
         "status": "pass",
         "evidence": "Changed files are limited to the current report, generated JSON, focused test, and train metadata."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "PR #1845 checks passed: hygiene, supply-chain, content-pack-build-validate, Semgrep blocking secrets, verify-mbti-legacy, verify-mbti-v2, verify-bigfive."
+      },
+      "post_merge_revalidate": {
+        "status": "pass",
+        "evidence": "php artisan test --filter=CareerLegacyFullJobsIndexConsumerAudit01 --no-ansi passed after merge."
       }
     },
     "failure_reason": "Sidecar only: full Pint reports pre-existing out-of-scope EQ test formatting issues; current PR focused test, route:list, scoped Pint, composer validate/audit, JSON/YAML, and diff checks pass.",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-01T17:04:38Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null
+      "github_checks_green": true,
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -39406,6 +39414,12 @@
         "from": "committed_pending_pr",
         "to": "pr_open_checks_pending",
         "note": "Opened GitHub PR #1845 after scoped local validation passed with an external full-Pint sidecar."
+      },
+      {
+        "at": "2026-06-01T17:04:38Z",
+        "from": "pr_open_checks_pending",
+        "to": "merged",
+        "note": "PR #1845 squash merged with merge commit 1716749dc17db1fb86a9d9e929a5d9af8dda4244; remote branch deleted and post-merge focused test passed."
       }
     ],
     "sidecars": [
@@ -39428,21 +39442,66 @@
     "repo": "fap-api",
     "branch": "codex/career-directory-authority-drift-gate-01",
     "base": "main",
-    "status": "planned",
+    "status": "pr_open_checks_pending",
     "title": "CAREER-DIRECTORY-AUTHORITY-DRIFT-GATE-01 directory authority drift gate",
     "depends_on": [
       "CAREER-LEGACY-FULL-JOBS-INDEX-CONSUMER-AUDIT-01"
     ],
-    "commit_sha": null,
-    "pr_url": null,
-    "checks": {},
-    "failure_reason": null,
+    "commit_sha": "pending_remote_pr_head",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1846",
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User authorized all eight career 10k scale train entries; this branch starts the fap-api drift gate after PR #1845 merged."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "CAREER-LEGACY-FULL-JOBS-INDEX-CONSUMER-AUDIT-01 merged in PR #1845 and origin/main contains merge commit 1716749dc17db1fb86a9d9e929a5d9af8dda4244."
+      },
+      "scope_boundaries": {
+        "status": "pass",
+        "evidence": "Current PR scope is limited to drift gate report, generated JSON, focused test, and train metadata."
+      },
+      "php artisan test --filter=CareerDirectoryAuthorityDriftGate01 --no-ansi": {
+        "status": "pass",
+        "evidence": "Focused SeoIntel drift gate artifact test passed: 1 test, 45 assertions."
+      },
+      "php artisan route:list --no-ansi": {
+        "status": "pass",
+        "evidence": "Route list completed successfully with 210 routes; no route changes were made."
+      },
+      "vendor/bin/pint --test tests/Feature/SeoIntel/CareerDirectoryAuthorityDriftGate01Test.php": {
+        "status": "pass",
+        "evidence": "Scoped Pint passed for the only PHP file touched by this PR."
+      },
+      "vendor/bin/pint --test": {
+        "status": "sidecar_external_failure",
+        "evidence": "Full Pint reports pre-existing out-of-scope new_with_parentheses issues in tests/Unit/Eq/EqSjtValidationTelemetryContractTest.php and tests/Unit/Report/EqIntegratedReportComposerTest.php. Current PR does not touch those files; scoped Pint passed."
+      },
+      "composer validate --strict": {
+        "status": "pass",
+        "evidence": "composer.json is valid."
+      },
+      "composer audit --locked --no-interaction --ignore-unreachable": {
+        "status": "pass",
+        "evidence": "No security vulnerability advisories found."
+      },
+      "json_yaml_diff": {
+        "status": "pass",
+        "evidence": "Generated JSON, pr-train-state JSON, and pr-train YAML parse successfully; git diff --check passed."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to the current drift gate report, generated JSON, focused test, and train metadata."
+      }
+    },
+    "failure_reason": "Sidecar only: full Pint reports pre-existing out-of-scope EQ test formatting issues; current PR focused drift gate test, route:list, scoped Pint, composer validate/audit, JSON/YAML, and diff checks pass.",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": null,
       "post_merge_revalidated": null
     },
@@ -39452,9 +39511,45 @@
         "from": "missing",
         "to": "planned",
         "note": "Initialized by user authorization for the career 10k scale train."
+      },
+      {
+        "at": "2026-06-01T17:04:38Z",
+        "from": "planned",
+        "to": "implementation_in_progress",
+        "note": "Started scoped career directory authority drift gate after PR #1845 post-merge revalidation passed."
+      },
+      {
+        "at": "2026-06-01T17:04:38Z",
+        "from": "implementation_in_progress",
+        "to": "local_checks_passed_with_sidecar",
+        "note": "Focused drift gate test, route:list, scoped Pint, composer validate/audit, JSON/YAML parsing, and diff checks passed. Full Pint sidecar remains out-of-scope in EQ tests."
+      },
+      {
+        "at": "2026-06-01T17:04:38Z",
+        "from": "local_checks_passed_with_sidecar",
+        "to": "committed_pending_pr",
+        "note": "Committed scoped drift gate locally after validation passed with an external full-Pint sidecar."
+      },
+      {
+        "at": "2026-06-01T17:04:38Z",
+        "from": "committed_pending_pr",
+        "to": "pr_open_checks_pending",
+        "note": "Opened GitHub PR #1846 after scoped local validation passed with an external full-Pint sidecar."
       }
     ],
-    "sidecars": [],
+    "sidecars": [
+      {
+        "id": "out_of_scope_eq_pint_new_with_parentheses",
+        "status": "open_external_sidecar",
+        "summary": "Full vendor/bin/pint --test reports pre-existing new_with_parentheses style issues in EQ unit tests outside this career drift gate scope.",
+        "files": [
+          "backend/tests/Unit/Eq/EqSjtValidationTelemetryContractTest.php",
+          "backend/tests/Unit/Report/EqIntegratedReportComposerTest.php"
+        ],
+        "impact_on_current_pr": "No runtime, report, or drift gate impact; scoped Pint and focused artifact test pass.",
+        "follow_up_recommendation": "Resolve in a separate scoped EQ Pint cleanup PR."
+      }
+    ],
     "next_task": "CAREER-LLMS-FULL-10K-BUDGET-GATE-01"
   },
   "CAREER-SEARCH-CHANNEL-READINESS-GATE-01": {

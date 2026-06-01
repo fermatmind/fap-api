@@ -19339,7 +19339,7 @@ prs:
     base: main
     title: "CAREER-LEGACY-FULL-JOBS-INDEX-CONSUMER-AUDIT-01 legacy full jobs index consumer audit"
     train_scope: career_10k_scale
-    status: in_progress
+    status: merged
     scope:
       - Audit remaining backend consumers of /api/v0.5/career/jobs and reference-only fap-web full jobs index consumers.
       - Produce report-only consumer list, risk classification, and migration plan.
@@ -19377,7 +19377,7 @@ prs:
     base: main
     title: "CAREER-DIRECTORY-AUTHORITY-DRIFT-GATE-01 directory authority drift gate"
     train_scope: career_10k_scale
-    status: planned
+    status: in_progress
     scope:
       - Add a backend gate that compares directory count, public detail indexable count, sitemap career URL count, llms career URL count, and held slug exclusions.
       - Produce artifact report proving directory/detail/sitemap/llms truth cannot drift silently.

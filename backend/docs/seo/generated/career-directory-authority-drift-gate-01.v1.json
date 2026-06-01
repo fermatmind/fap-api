@@ -1,0 +1,59 @@
+{
+  "schema_version": "career_directory_authority_drift_gate.v1",
+  "task": "CAREER-DIRECTORY-AUTHORITY-DRIFT-GATE-01",
+  "mode": "drift_gate_artifact",
+  "final_decision": "career_directory_authority_drift_gate_completed_ready_for_llms_full_10k_budget_gate",
+  "authority_source": "career.directory_authority.v1",
+  "directory_public_detail_count": 1046,
+  "public_detail_indexable_count": 1046,
+  "locale_count": 2,
+  "localized_public_career_url_count": 2092,
+  "sitemap_career_detail_url_count": 2092,
+  "llms_career_detail_url_count_expected": 2092,
+  "llms_full_career_detail_url_count_expected": 2092,
+  "count_invariants": {
+    "directory_equals_public_detail_indexable": true,
+    "localized_urls_equal_directory_times_locale_count": true,
+    "sitemap_equals_localized_public_career_urls": true,
+    "llms_equals_sitemap_career_urls": true,
+    "llms_full_equals_sitemap_career_urls_when_complete_artifact_is_warm": true
+  },
+  "held_slugs": [
+    "software-developers",
+    "digital-forensics-analysts",
+    "computer-occupations-all-other"
+  ],
+  "held_slug_absence": {
+    "directory": true,
+    "detail_runtime": true,
+    "sitemap": true,
+    "llms": true,
+    "llms_full": true,
+    "footer": true,
+    "search_channel": true
+  },
+  "drift_gate_fails_on": [
+    "directory_public_detail_count_mismatch",
+    "public_detail_indexable_count_mismatch",
+    "sitemap_career_detail_url_count_mismatch",
+    "llms_career_detail_url_count_mismatch",
+    "held_slug_exposure",
+    "frontend_fallback_authority",
+    "runtime_fanout_authority"
+  ],
+  "safety_boundaries": {
+    "production_write_performed": false,
+    "database_mutation_performed": false,
+    "cms_mutation_performed": false,
+    "runtime_promotion_performed": false,
+    "sitemap_mutation_performed": false,
+    "llms_mutation_performed": false,
+    "deploy_performed": false,
+    "fap_web_change_performed": false,
+    "frontend_fallback_authority_used": false,
+    "search_channel_action_performed": false,
+    "url_submission_performed": false,
+    "external_search_api_call_performed": false
+  },
+  "next_task": "CAREER-LLMS-FULL-10K-BUDGET-GATE-01"
+}
