@@ -16693,6 +16693,7 @@ prs:
     allowed_paths:
       - backend/app/Services/Analytics/PaymentUnlockAttributionDiagnostics.php
       - backend/tests/Feature/Analytics/PaymentUnlockAttributionDiagnosticsTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - backend/docs/seo/analytics-payment-unlock-attribution-repair-01a.md
       - backend/docs/seo/generated/analytics-payment-unlock-attribution-repair-01a.v1.json
       - docs/codex/pr-train.yaml
@@ -16702,11 +16703,13 @@ prs:
       - Classify report unlock orders into safe categories without creating grants, refreshing projections, calling providers, or mutating production data.
       - Use backend authority tables only; keep frontend, GA/Baidu, sitemap, llms, crawler logs, and local copies out of the authority path.
       - Redact sampled order references in diagnostic output.
+      - Add a narrow Big Five runtime-freeze classifier exemption for this analytics-only diagnostic service.
       - Document deferred followups for production read-only execution, Ops exposure, Alipay return/provider verification, owner mismatch review, and taxonomy alias review.
     validation:
       - cd backend && php artisan test --filter=PaymentUnlockAttributionDiagnostics --no-ansi
+      - cd backend && php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_payment_unlock_attribution_diagnostics' --no-ansi
       - cd backend && php artisan route:list --no-ansi
-      - cd backend && vendor/bin/pint --test app/Services/Analytics/PaymentUnlockAttributionDiagnostics.php tests/Feature/Analytics/PaymentUnlockAttributionDiagnosticsTest.php
+      - cd backend && vendor/bin/pint --test app/Services/Analytics/PaymentUnlockAttributionDiagnostics.php tests/Feature/Analytics/PaymentUnlockAttributionDiagnosticsTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - cd backend && composer validate --strict
       - python3 -m json.tool backend/docs/seo/generated/analytics-payment-unlock-attribution-repair-01a.v1.json >/dev/null
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null

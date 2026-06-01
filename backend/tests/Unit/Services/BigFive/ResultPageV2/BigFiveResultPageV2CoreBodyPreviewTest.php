@@ -2185,6 +2185,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_payment_unlock_attribution_diagnostics(): void
+    {
+        $changed = [
+            'backend/app/Services/Analytics/PaymentUnlockAttributionDiagnostics.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_content_packs_index_phase3_responsibility_shrink(): void
     {
         $changed = [
@@ -3006,6 +3015,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isAnalyticsFunnelOpsReadModelFile($file)) {
+                continue;
+            }
+
+            if ($this->isPaymentUnlockAttributionDiagnosticsFile($file)) {
                 continue;
             }
 
@@ -4633,6 +4646,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Filament/Ops/Pages/FunnelConversionPage.php',
             'backend/app/Filament/Ops/Widgets/FunnelWidget.php',
         ], true);
+    }
+
+    private function isPaymentUnlockAttributionDiagnosticsFile(string $file): bool
+    {
+        return $file === 'backend/app/Services/Analytics/PaymentUnlockAttributionDiagnostics.php';
     }
 
     private function isAnalyticsFunnelRefreshCommandFile(string $file): bool
