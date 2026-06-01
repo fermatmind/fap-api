@@ -18044,7 +18044,7 @@ prs:
     branch: ops/career-warm-cache-perf-01
     title: "OPS-CAREER-WARM-CACHE-PERF-01 reduce career warm cache authority rebuilds"
     train_scope: career_warm_cache_authority_performance
-    status: in_progress
+    status: merged
     allowed_paths:
       - backend/app/Domain/Career/Publish/**
       - backend/app/Services/Career/Dataset/CareerFullDatasetAuthorityBuilder.php
@@ -19447,7 +19447,7 @@ prs:
     base: main
     title: "CAREER-10K-ROLLOUT-ARCHITECTURE-SPEC-01 career 10k rollout architecture spec"
     train_scope: career_10k_scale
-    status: planned
+    status: in_progress
     scope:
       - Produce the backend-owned 10k career rollout architecture specification.
       - Cover authority source, rollout gates, held slug policy, directory API budget, sitemap/llms policy, smoke/SLO, rollback, and future PR boundaries.

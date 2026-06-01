@@ -100,6 +100,13 @@ the public Career system spans both repositories.
 | 2026-06-01 | fap-web | [#967](https://github.com/fermatmind/fap-web/pull/967) | `a218ace5b76f` | Convert Career jobs index to paginated directory shell. |
 | 2026-06-01 | fap-web | [#970](https://github.com/fermatmind/fap-web/pull/970) | `2ea27cae88af` | Align Career LLM surfaces to directory/sitemap authority. |
 | 2026-06-01 | fap-api | [#1835](https://github.com/fermatmind/fap-api/pull/1835) | `9257a57f6dd9` | Add 10k directory warm/validate ops gate. |
+| 2026-06-01 | fap-web | [#982](https://github.com/fermatmind/fap-web/pull/982) | `3907e7aaa09a` | Add Career detail P95/P99 latency scan artifact. |
+| 2026-06-01 | fap-web | [#984](https://github.com/fermatmind/fap-web/pull/984) | `bf6bc6d42664` | Repair Career detail cache/render budget. |
+| 2026-06-01 | fap-api | [#1845](https://github.com/fermatmind/fap-api/pull/1845) | `1716749dc17d` | Audit legacy full jobs index consumers. |
+| 2026-06-01 | fap-api | [#1846](https://github.com/fermatmind/fap-api/pull/1846) | `aa5b54b395ff` | Add directory/detail/sitemap/LLM drift gate. |
+| 2026-06-01 | fap-web | [#986](https://github.com/fermatmind/fap-web/pull/986) | `a237fa67e1cf` | Add `llms-full` 10k budget gate. |
+| 2026-06-01 | fap-web | [#987](https://github.com/fermatmind/fap-web/pull/987) | `7f1c0de41f2f` | Improve Career directory UX facet parity. |
+| 2026-06-01 | fap-api | [#1847](https://github.com/fermatmind/fap-api/pull/1847) | `5ef46feea558` | Add read-only Search Channel readiness gate with HOLD decision. |
 
 ### Related fap-web Technical Notes
 
@@ -386,6 +393,60 @@ Current expected Career discoverability counts:
 
 `llms-full.txt` must be artifact/cache-first. Request-time full fanout across
 thousands of Career details is not acceptable at 10k scale.
+
+### 10k Target Architecture Contract
+
+The 10k Career architecture is a scale posture, not a permission to publish
+10,000 new occupations. Runtime expansion still requires separate authority
+manifests, dry-runs, controlled apply approval, and post-deploy smoke.
+
+Target data flow:
+
+```text
+Occupation authority / content assets
+  -> runtime projection and release gates
+  -> Career directory authority service
+  -> public directory API, detail API, sitemap source, LLM source
+  -> fap-web paginated directory shell and detail rendering
+```
+
+Hard invariants:
+
+- one backend directory authority source feeds public directory, detail
+  eligibility, sitemap Career URLs, and LLM Career URLs;
+- `/api/v0.5/career/jobs` may remain as legacy compatibility, but new
+  directory surfaces must consume `/api/v0.5/career/directory`;
+- `/career/jobs` renders a bounded first page and facets, never the complete
+  occupation database;
+- query and filter URLs remain noindex/canonicalized unless a future SEO
+  authority decision explicitly promotes a facet page;
+- sitemap owns full URL discovery for public detail pages;
+- `llms.txt` may enumerate public URL/title/type records, but must not fetch
+  every detail bundle at request time;
+- `llms-full.txt` must be artifact-first, cache-first, and bounded on request;
+- held, conflict, draft, private, noindex, fallback-only, and not-runtime-ready
+  slugs stay absent from public APIs and discoverability surfaces.
+
+Scale budgets:
+
+| Surface | 1046 state | 10k posture |
+| --- | --- | --- |
+| Directory API first page | 50 items | 50 to 100 bounded items |
+| Directory API payload | card/list fields only | no detail bundle, FAQ, snapshots, or markdown |
+| Frontend SSR | first page + facets | first page + facets only |
+| Sitemap | 2092 Career detail URLs | full public detail URL coverage from authority artifact |
+| `llms.txt` | 2092 Career detail URLs | URL/title/type records from sitemap/directory authority |
+| `llms-full.txt` | 2092 when complete artifact warm | precomputed artifact or last-known-good, degraded 200 if needed |
+| Search Channel | HOLD | staged only after explicit approval and readiness gate |
+
+Rollback posture:
+
+- every rollout apply needs a batch id, rollback group, and exact slug manifest;
+- rollback reverses only the approved runtime promotion batch;
+- rollback must not alter held slugs, conflict slugs, content imports, or Search
+  Channel state;
+- after rollback, rerun directory count, sitemap/LLM count, sample detail,
+  claim-boundary, and staging containment checks.
 
 ## 1046 Rollout Policy
 
