@@ -18868,3 +18868,49 @@ prs:
       - git diff --cached --check
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
     next_task: PR-FDN-SOCIAL-LINK-DISPLAY-REVIEW-01
+
+  - id: CAREER-DIRECTORY-AUTHORITY-ARTIFACT-API-01
+    repo: fap-api
+    depends_on: []
+    branch: codex/career-directory-authority-artifact-api-01
+    base: main
+    title: "CAREER-DIRECTORY-AUTHORITY-ARTIFACT-API-01 career directory authority artifact API"
+    train_scope: career_directory_10k_scale
+    status: in_progress
+    scope:
+      - Add a lightweight backend career directory authority service and API for paginated public career detail discovery.
+      - Preserve the existing /api/v0.5/career/jobs contract.
+      - Return only directory-card fields, pagination, facets, filters, and public truth counts.
+      - Exclude held, noindex, conflict, and non-public career slugs.
+    allowed_paths:
+      - backend/routes/api.php
+      - backend/docs/contracts/openapi.snapshot.json
+      - backend/app/Http/Controllers/API/V0_5/Career/CareerDirectoryController.php
+      - backend/app/Services/Career/CareerDirectoryAuthorityService.php
+      - backend/tests/Feature/Career/CareerDirectoryAuthorityApiTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/docs/seo/career-directory-authority-artifact-api-01.md
+      - backend/docs/seo/generated/career-directory-authority-artifact-api-01.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change sitemap, llms, frontend rendering, Search Channel, URL submission, or deployment behavior.
+      - Mutate production CMS, production DB, career cohort state, runtime promotion state, or held slug policy.
+      - Release software-developers, digital-forensics-analysts, or computer-occupations-all-other.
+      - Add frontend fallback career content.
+    validation:
+      - cd backend && php artisan test --filter=CareerDirectoryAuthorityApiTest --no-ansi
+      - cd backend && php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_career_directory_authority_api_changes' --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && bash scripts/export_openapi.sh --check
+      - cd backend && vendor/bin/pint --test
+      - cd backend && vendor/bin/pint --test app/Http/Controllers/API/V0_5/Career/CareerDirectoryController.php app/Services/Career/CareerDirectoryAuthorityService.php tests/Feature/Career/CareerDirectoryAuthorityApiTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/career-directory-authority-artifact-api-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: CAREER-SITEMAP-EXPOSURE-DIRECTORY-AUTHORITY-01
