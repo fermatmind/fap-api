@@ -1,0 +1,123 @@
+{
+  "schema_version": "career_10k_rollout_architecture_spec.v1",
+  "task": "CAREER-10K-ROLLOUT-ARCHITECTURE-SPEC-01",
+  "final_decision": "career_10k_rollout_architecture_spec_completed_ready_for_future_scoped_prs",
+  "current_public_detail_count": 1046,
+  "current_localized_detail_url_count": 2092,
+  "target_scale": 10000,
+  "authority_source": {
+    "owner": "fap-api",
+    "truth_boundary": "backend_runtime_projection_release_gate_directory_authority",
+    "frontend_fallback_allowed": false
+  },
+  "held_slug_policy": {
+    "held_slugs": [
+      "software-developers",
+      "digital-forensics-analysts",
+      "computer-occupations-all-other"
+    ],
+    "release_allowed_in_this_task": false,
+    "must_remain_absent_from_public_runtime": true,
+    "must_remain_absent_from_sitemap_llms_search_channel": true
+  },
+  "rollout_gates": [
+    "authority_manifest_schema_validation",
+    "held_conflict_manual_review_exclusion",
+    "display_content_readiness",
+    "runtime_projection_dry_run",
+    "candidate_prep_dry_run_if_needed",
+    "runtime_promotion_dry_run",
+    "explicit_apply_approval",
+    "post_apply_cache_warm",
+    "post_deploy_smoke"
+  ],
+  "directory_api_budget": {
+    "default_first_page_size": 50,
+    "maximum_page_size_without_future_benchmark": 100,
+    "allowed_item_fields": [
+      "slug",
+      "localized_title",
+      "family",
+      "canonical_path",
+      "robots_policy",
+      "indexable",
+      "detail_ready",
+      "updated_at"
+    ],
+    "forbidden_item_fields": [
+      "full_sections",
+      "long_markdown",
+      "faq_bodies",
+      "recommendation_snapshots",
+      "personalized_recommendation_text",
+      "private_provenance",
+      "structured_data_blobs"
+    ]
+  },
+  "frontend_directory_policy": {
+    "ssr_full_database_allowed": false,
+    "ssr_first_page_and_facets_only": true,
+    "query_filter_pages_noindex": true,
+    "query_filter_pages_canonical_to_directory_root": true,
+    "frontend_editorial_fallback_allowed": false
+  },
+  "sitemap_llms_policy": {
+    "sitemap_source": "backend_public_directory_or_sitemap_authority",
+    "sitemap_full_public_detail_coverage_required": true,
+    "llms_txt_allowed_shape": "url_title_type_records",
+    "llms_full_generation": "precomputed_artifact_or_last_known_good_cache",
+    "runtime_detail_fanout_allowed": false,
+    "degraded_200_preferred_over_504": true
+  },
+  "observability_slo": {
+    "track_directory_count_parity": true,
+    "track_public_detail_indexable_count": true,
+    "track_sitemap_career_url_count": true,
+    "track_llms_career_url_count": true,
+    "track_llms_full_complete_or_degraded_state": true,
+    "track_held_slug_absence": true,
+    "track_sampled_detail_status_canonical_robots": true,
+    "track_cache_warm_duration_and_payload_size": true,
+    "track_legacy_full_jobs_index_consumers": true,
+    "track_search_channel_gate_state": true,
+    "recommended_directory_first_page_p95_ms_after_warm": 800,
+    "recommended_detail_page_p95_ms_before_edge_optimization": 2500
+  },
+  "search_channel_policy": {
+    "current_decision": "HOLD",
+    "future_explicit_approval_required": true,
+    "recommended_canary_pair_count": 10,
+    "recommended_observation_window_hours": 24,
+    "search_channel_action_performed": false,
+    "url_submission_performed": false,
+    "external_search_api_call_performed": false
+  },
+  "rollback_policy": {
+    "requires_batch_id": true,
+    "requires_slug_manifest": true,
+    "requires_rollback_group": true,
+    "rollback_scope": "approved_runtime_promotion_batch_only",
+    "must_not_alter_held_slugs": true,
+    "must_not_alter_search_channel_queue": true
+  },
+  "future_pr_boundaries": [
+    "authority_source_import_and_review_package",
+    "candidate_prep_runtime_support",
+    "rollout_dry_run_artifact",
+    "rollout_apply_with_explicit_approval",
+    "directory_api_performance_cache",
+    "frontend_directory_ux",
+    "sitemap_llms_artifact_budget",
+    "search_channel_readiness_or_staged_submission"
+  ],
+  "no_runtime_change": true,
+  "no_cms_mutation": true,
+  "no_database_mutation": true,
+  "no_deploy": true,
+  "no_fap_web_change": true,
+  "no_search_channel_action": true,
+  "no_url_submission": true,
+  "no_external_search_api_call": true,
+  "held_slug_release_performed": false,
+  "next_task": "none"
+}
