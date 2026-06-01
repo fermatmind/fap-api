@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-01T04:19:00Z",
+  "updated_at": "2026-06-01T04:22:00Z",
   "items": {
     "PR-EQ-PER-01": {
       "repo": "fap-api",
@@ -38083,13 +38083,13 @@
     "repo": "fap-api",
     "branch": "codex/career-sitemap-exposure-directory-authority-01",
     "base": "main",
-    "status": "committed",
+    "status": "pr_opened_with_sidecar",
     "title": "CAREER-SITEMAP-EXPOSURE-DIRECTORY-AUTHORITY-01 sitemap career exposure directory authority",
     "depends_on": [
       "CAREER-DIRECTORY-AUTHORITY-ARTIFACT-API-01"
     ],
     "commit_sha": "568c88a837b8dc2c66c67815d6c68dd260c4b8aa",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1832",
     "checks": {
       "manifest_registration": {
         "status": "pass",
@@ -38169,6 +38169,11 @@
         "at": "2026-06-01T04:18:00Z",
         "status": "committed",
         "summary": "Committed scoped PR2 changes locally as 568c88a8."
+      },
+      {
+        "at": "2026-06-01T04:22:00Z",
+        "status": "pr_opened_with_sidecar",
+        "summary": "Opened PR #1832. Local scoped validation passed; full Pint sidecar remains out-of-scope."
       }
     ]
   }
