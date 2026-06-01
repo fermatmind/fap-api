@@ -35131,7 +35131,7 @@
     "branch": "codex/analytics-funnel-refresh-dry-run-sql-fix-01",
     "base": "main",
     "title": "ANALYTICS-FUNNEL-REFRESH-DRY-RUN-SQL-FIX-01 fix production dry-run SQL compatibility",
-    "status": "committed_pending_pr",
+    "status": "pr_open_checks_pending",
     "depends_on": [
       "ANALYTICS-FUNNEL-OPS-READ-MODEL-REPAIR-01"
     ],
@@ -37823,7 +37823,7 @@
       "PR-FDN-SOCIAL-SYNC-READINESS"
     ],
     "commit_sha": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1829",
     "checks": {
       "manifest_registration": {
         "status": "pass",
@@ -37924,6 +37924,10 @@
       "json_yaml_diff_validation": {
         "status": "pass",
         "evidence": "Generated JSON, pr-train-state JSON, pr-train YAML, and git diff --check all passed."
+      },
+      "github_pr": {
+        "status": "created",
+        "evidence": "https://github.com/fermatmind/fap-api/pull/1829"
       }
     },
     "failure_reason": null,
@@ -37946,6 +37950,11 @@
         "at": "2026-06-01T03:02:27Z",
         "status": "committed_pending_pr",
         "summary": "Committed scoped diagnostics implementation at a547cf12."
+      },
+      {
+        "at": "2026-06-01T03:02:27Z",
+        "status": "pr_open_checks_pending",
+        "summary": "Opened GitHub PR #1829 for the scoped read-only payment unlock attribution diagnostics."
       }
     ]
   }
