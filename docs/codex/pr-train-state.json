@@ -35838,7 +35838,7 @@
     "branch": "codex/pr-hiring-01-post-publish-smoke",
     "base": "main",
     "title": "PR-HIRING-01-POST-PUBLISH-SMOKE careers runtime smoke",
-    "status": "pr_opened_with_sidecar",
+    "status": "merged_with_sidecar",
     "depends_on": [
       "PR-HIRING-01"
     ],
@@ -35909,12 +35909,17 @@
         "command": "git diff --check",
         "status": "passed",
         "summary": "PASS: no whitespace errors."
+      },
+      {
+        "command": "ledger reconciliation scan for PR #1839",
+        "status": "passed",
+        "summary": "GitHub reports PR #1839 merged at 2026-06-01T12:12:39Z with merge commit 02a0c610b53d906a8846d4a14810348ce46f9d1a; all GitHub checks succeeded; origin/main and local main contain the merge commit; remote and local task branches are absent; post-merge focused test passed."
       }
     ],
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-01T12:12:39Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "status": "authorized",
@@ -35935,18 +35940,24 @@
         "status": "pr_opened_with_sidecar",
         "at": "2026-06-01T20:24:00+08:00",
         "summary": "Committed, pushed, and opened PR #1839 with external sidecars recorded."
+      },
+      {
+        "status": "merged_reconciled",
+        "at": "2026-06-01T13:25:00Z",
+        "summary": "Reconciled stale ledger state after GitHub showed PR #1839 merged, checks green, origin/main contains merge commit 02a0c610b53d906a8846d4a14810348ce46f9d1a, remote branch deleted, local cleanup completed, and post-merge focused test passed."
       }
     ],
     "scope_validation": {
       "allowed_paths_only": true,
       "git_diff_check": true,
-      "git_diff_cached_check": null
+      "git_diff_cached_check": true
     },
     "sidecars": [
       "llms.txt does not include Careers pages while sitemap.xml and llms-full.txt do include them; recorded as read-only observation.",
       "Full Pint is blocked by pre-existing out-of-scope EQ style issues in tests/Unit/Eq/EqSjtValidationTelemetryContractTest.php and tests/Unit/Report/EqIntegratedReportComposerTest.php."
     ],
-    "next_task": null
+    "next_task": null,
+    "merge_sha": "02a0c610b53d906a8846d4a14810348ce46f9d1a"
   },
   "OPS-API-INTERNAL-RESOLVE-PROOF": {
     "id": "OPS-API-INTERNAL-RESOLVE-PROOF",
