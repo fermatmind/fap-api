@@ -35838,12 +35838,12 @@
     "branch": "codex/pr-hiring-01-post-publish-smoke",
     "base": "main",
     "title": "PR-HIRING-01-POST-PUBLISH-SMOKE careers runtime smoke",
-    "status": "local_checks_passed_with_sidecar",
+    "status": "pr_opened_with_sidecar",
     "depends_on": [
       "PR-HIRING-01"
     ],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "92d4ae4d8f8c922089ae8bb41450e4da11db3a3e",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1839",
     "checks": [
       {
         "command": "manifest/state authorization",
@@ -35930,6 +35930,11 @@
         "status": "local_checks_passed_with_sidecar",
         "at": "2026-06-01T20:20:00+08:00",
         "summary": "Focused tests, route list, scoped Pint, composer validate/audit, JSON/YAML parsing, and diff checks passed. Full Pint failure is limited to pre-existing out-of-scope EQ test files and recorded as a sidecar."
+      },
+      {
+        "status": "pr_opened_with_sidecar",
+        "at": "2026-06-01T20:24:00+08:00",
+        "summary": "Committed, pushed, and opened PR #1839 with external sidecars recorded."
       }
     ],
     "scope_validation": {
