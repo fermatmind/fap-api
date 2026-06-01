@@ -35,9 +35,9 @@ final class DirectMailSmtpReadinessTest extends TestCase
         $this->assertDoesNotMatchRegularExpression('/^MAIL_PASSWORD=(?!null$).+/m', $env);
     }
 
-    public function test_runbook_records_directmail_dns_smtp_and_smoke_readiness(): void
+    public function test_technical_index_records_directmail_dns_smtp_and_smoke_readiness(): void
     {
-        $runbook = $this->repoFile('docs/RUNBOOK_SMTP_DNS.md');
+        $runbook = $this->repoFile('docs/commerce/payment-email-result-access-technical-index.md');
 
         foreach ([
             'mail.fermatmind.com',

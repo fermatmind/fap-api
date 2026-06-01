@@ -12,13 +12,15 @@ final class AlipayOwnerMismatchControlledRepair04Test extends TestCase
     #[Test]
     public function controlled_repair_artifacts_record_state_sync_only_boundaries(): void
     {
-        $reportPath = base_path('docs/commerce/alipay-owner-mismatch-controlled-repair-04.md');
-        $runbookPath = base_path('docs/runbooks/alipay-owner-mismatch-controlled-repair.md');
+        $technicalIndexPath = dirname(base_path()).'/docs/commerce/payment-email-result-access-technical-index.md';
         $generatedPath = base_path('docs/commerce/generated/alipay-owner-mismatch-controlled-repair-04.v1.json');
 
-        $this->assertFileExists($reportPath);
-        $this->assertFileExists($runbookPath);
+        $this->assertFileExists($technicalIndexPath);
         $this->assertFileExists($generatedPath);
+        $technicalIndex = (string) file_get_contents($technicalIndexPath);
+        $this->assertStringContainsString('PAYMENT-ALIPAY-OWNER-MISMATCH-CONTROLLED-REPAIR-04', $technicalIndex);
+        $this->assertStringContainsString('state-sync-only repair', $technicalIndex);
+        $this->assertStringContainsString('did not create grants', $technicalIndex);
 
         $generated = json_decode((string) file_get_contents($generatedPath), true, 512, JSON_THROW_ON_ERROR);
 

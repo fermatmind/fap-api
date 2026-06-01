@@ -9,8 +9,8 @@
   - 已有 webhook mock + 幂等概念，供本 PR webhook 设计参考。
 - backend/app/Http/Controllers/EventController.php
   - 现有事件 ingestion 入口，需避免与新 /integrations 路由冲突。
-- docs/payments/webhook-idempotency.md
-  - 支付幂等/重放约束文档，可复用在数据回放的规则描述。
+- docs/commerce/payment-email-result-access-technical-index.md
+  - 支付幂等/重放约束已合并到总技术入口，可复用在数据回放的规则描述。
 
 ## 相关 DB 表/迁移
 - 现有关键表/迁移：
