@@ -1,0 +1,188 @@
+{
+  "schema_version": "pr_hiring_01_post_publish_smoke.v1",
+  "task": "PR-HIRING-01-POST-PUBLISH-SMOKE",
+  "final_decision": "pr_hiring_01_post_publish_smoke_completed_stable",
+  "source_prs": [
+    {
+      "number": 1760,
+      "title": "PR-HIRING-01A: Align EN careers content authority",
+      "state": "merged",
+      "merge_commit": "a2b24d6c0bb93895c88615cfd15942931ddc00e6"
+    },
+    {
+      "number": 1762,
+      "title": "PR-HIRING-01: Add open roles to careers pages",
+      "state": "merged",
+      "merge_commit": "afb66d2a670fda1a1ac91d6043ee9a4eef65ebc7"
+    },
+    {
+      "number": 1795,
+      "title": "PR-HIRING-01 hiring content authority package",
+      "state": "merged",
+      "merge_commit": "6b50e9ab5ed00c2bfc0365d0d4ffc48a8696f58e"
+    }
+  ],
+  "target_pages": [
+    "careers"
+  ],
+  "locales": [
+    "en",
+    "zh-CN"
+  ],
+  "role_draft_keys": [
+    "technical-partner-engineering-lead",
+    "product-design-brand-systems-lead",
+    "growth-seo-content-operations-lead"
+  ],
+  "cms_record_state": {
+    "en": {
+      "slug": "careers",
+      "locale": "en",
+      "status": "published",
+      "is_public": true,
+      "is_indexable": true,
+      "published_at": "2026-05-30",
+      "updated_at": "2026-05-31 00:07:07"
+    },
+    "zh-CN": {
+      "slug": "careers",
+      "locale": "zh-CN",
+      "status": "published",
+      "is_public": true,
+      "is_indexable": true,
+      "published_at": "2026-04-19",
+      "updated_at": "2026-05-31 00:07:08"
+    }
+  },
+  "api_runtime_check": {
+    "apex_same_origin": {
+      "en": {
+        "url": "https://fermatmind.com/api/v0.5/content-pages/careers?locale=en&org_id=0",
+        "http_status": 200
+      },
+      "zh-CN": {
+        "url": "https://fermatmind.com/api/v0.5/content-pages/careers?locale=zh-CN&org_id=0",
+        "http_status": 200
+      }
+    },
+    "api_host": {
+      "en": {
+        "url": "https://api.fermatmind.com/api/v0.5/content-pages/careers?locale=en&org_id=0",
+        "http_status": 200
+      },
+      "zh-CN": {
+        "url": "https://api.fermatmind.com/api/v0.5/content-pages/careers?locale=zh-CN&org_id=0",
+        "http_status": 200
+      }
+    }
+  },
+  "public_runtime_check": {
+    "en": {
+      "url": "https://fermatmind.com/en/careers",
+      "http_status": 200,
+      "title": "Work With FermatMind | FermatMind | FermatMind",
+      "h1": "Work With FermatMind",
+      "canonical": "https://fermatmind.com/en/careers",
+      "robots": "index, follow",
+      "staging_canonical_detected": false
+    },
+    "zh-CN": {
+      "url": "https://fermatmind.com/zh/careers",
+      "http_status": 200,
+      "title": "加入费马测试 | FermatMind",
+      "h1": "加入费马测试",
+      "canonical": "https://fermatmind.com/zh/careers",
+      "robots": "index, follow",
+      "staging_canonical_detected": false
+    }
+  },
+  "role_draft_runtime_check": {
+    "technical-partner-engineering-lead": {
+      "url": "https://fermatmind.com/en/careers/technical-partner-engineering-lead",
+      "http_status": 404,
+      "runtime_exposed": false
+    },
+    "product-design-brand-systems-lead": {
+      "url": "https://fermatmind.com/en/careers/product-design-brand-systems-lead",
+      "http_status": 404,
+      "runtime_exposed": false
+    },
+    "growth-seo-content-operations-lead": {
+      "url": "https://fermatmind.com/en/careers/growth-seo-content-operations-lead",
+      "http_status": 404,
+      "runtime_exposed": false
+    }
+  },
+  "discoverability_check": {
+    "sitemap_xml": {
+      "careers_en_present": true,
+      "careers_zh_present": true,
+      "role_draft_hits": 0
+    },
+    "llms_txt": {
+      "careers_en_present": false,
+      "careers_zh_present": false,
+      "role_draft_hits": 0
+    },
+    "llms_full_txt": {
+      "careers_en_present": true,
+      "careers_zh_present": true,
+      "role_draft_hits": 0
+    },
+    "footer_nav": {
+      "careers_en_present": true,
+      "careers_zh_present": true,
+      "role_draft_hits": 0
+    }
+  },
+  "search_channel_check": {
+    "queue_counts": {
+      "https://fermatmind.com/en/careers": 0,
+      "https://fermatmind.com/zh/careers": 0,
+      "https://fermatmind.com/en/careers/technical-partner-engineering-lead": 0,
+      "https://fermatmind.com/en/careers/product-design-brand-systems-lead": 0,
+      "https://fermatmind.com/en/careers/growth-seo-content-operations-lead": 0
+    },
+    "queue_item_2_state": {
+      "id": 2,
+      "canonical_url": "https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types",
+      "channel": "indexnow",
+      "approval_state": "approved",
+      "execution_state": "submitted"
+    },
+    "queue_item_3_state": {
+      "id": 3,
+      "canonical_url": "https://fermatmind.com/zh/tests/mbti-personality-test-16-personality-types",
+      "channel": "indexnow",
+      "approval_state": "approved",
+      "execution_state": "submitted"
+    },
+    "search_channel_action_performed": false
+  },
+  "claim_boundary_check": {
+    "role_package_status": "draft_review_only",
+    "role_package_runtime_exposed": false,
+    "forbidden_claim_hits": [],
+    "blocked_claim_classes": [
+      "hiring_suitability_guarantee",
+      "salary_guarantee",
+      "career_success_guarantee",
+      "diagnosis",
+      "treatment",
+      "cure"
+    ]
+  },
+  "sidecars": [
+    "llms.txt does not include Careers pages while sitemap.xml and llms-full.txt do include them; recorded as read-only observation, not changed in this task."
+  ],
+  "no_cms_mutation": true,
+  "no_publish": true,
+  "no_deploy": true,
+  "no_search_channel_action": true,
+  "no_url_submission": true,
+  "no_external_search_api_call": true,
+  "no_env_dns_nginx_edit": true,
+  "no_raw_log_read": true,
+  "no_fap_web_mutation": true,
+  "next_task": "none_foundation_hiring_smoke_train_complete"
+}

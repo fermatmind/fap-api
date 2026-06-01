@@ -35103,7 +35103,7 @@
     "scope_validation": {
       "allowed_paths_only": true,
       "git_diff_check": "passed",
-      "git_diff_cached_check": null
+      "git_diff_cached_check": true
     },
     "sidecars": [],
     "next_task": "Phase 3 ContentPacksIndex responsibility shrink requires explicit authorization"
@@ -35728,11 +35728,11 @@
     "branch": "codex/pr-pol-01-ledger-reconcile-and-smoke",
     "base": "main",
     "title": "PR-POL-01-LEDGER-RECONCILE-AND-SMOKE policies runtime reconcile and smoke",
-    "status": "pr_opened_with_sidecar",
+    "status": "merged_with_sidecar",
     "depends_on": [
       "PR-POL-01"
     ],
-    "commit_sha": "4fcf6043",
+    "commit_sha": "9453a65a2ad98ce99694fa6b8685ad6f4678b0c4",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1838",
     "checks": [
       {
@@ -35792,8 +35792,8 @@
       }
     ],
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
+    "merged_at": "2026-06-01T19:55:15+08:00",
+    "remote_branch_deleted": true,
     "local_cleanup_executed": false,
     "transitions": [
       {
@@ -35815,6 +35815,11 @@
         "status": "pr_opened_with_sidecar",
         "at": "2026-06-01T20:00:00+08:00",
         "summary": "Committed, pushed, and opened PR #1838 with the external Pint sidecar recorded."
+      },
+      {
+        "status": "merged_with_sidecar",
+        "at": "2026-06-01T19:55:15+08:00",
+        "summary": "PR #1838 passed GitHub required checks and was squash merged at 49427b78cf8dda30d74243fcae83141300583aca. Remote branch was deleted; local cleanup script was unavailable in this repository."
       }
     ],
     "scope_validation": {
@@ -35826,6 +35831,117 @@
       "Full vendor/bin/pint --test fails on pre-existing out-of-scope EQ test files not touched by this PR."
     ],
     "next_task": "PR-HIRING-01-POST-PUBLISH-SMOKE"
+  },
+  "PR-HIRING-01-POST-PUBLISH-SMOKE": {
+    "id": "PR-HIRING-01-POST-PUBLISH-SMOKE",
+    "repo": "fap-api",
+    "branch": "codex/pr-hiring-01-post-publish-smoke",
+    "base": "main",
+    "title": "PR-HIRING-01-POST-PUBLISH-SMOKE careers runtime smoke",
+    "status": "local_checks_passed_with_sidecar",
+    "depends_on": [
+      "PR-HIRING-01"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": [
+      {
+        "command": "manifest/state authorization",
+        "status": "passed",
+        "summary": "User explicitly authorized updating fap-api docs/codex/pr-train.yaml and docs/codex/pr-train-state.json for PR-HIRING-01-POST-PUBLISH-SMOKE."
+      },
+      {
+        "command": "source PR verification",
+        "status": "passed",
+        "summary": "PR #1760, PR #1762, and PR #1795 are merged with green GitHub checks."
+      },
+      {
+        "command": "read-only production CMS/API/runtime/Search Channel verification",
+        "status": "passed",
+        "summary": "Careers EN/ZH API and runtime checks returned 200; CMS rows are published/public/indexable; role draft paths return 404; Search Channel queue count for Careers and role draft URLs is zero; queue items 2 and 3 remain approved/submitted."
+      },
+      {
+        "command": "php artisan test --filter=PrHiring01PostPublishSmoke --no-ansi",
+        "status": "passed",
+        "summary": "PASS: 2 tests, 55 assertions."
+      },
+      {
+        "command": "php artisan route:list --no-ansi",
+        "status": "passed",
+        "summary": "PASS: route list rendered 210 routes."
+      },
+      {
+        "command": "vendor/bin/pint --test tests/Feature/SeoIntel/PrHiring01PostPublishSmokeTest.php",
+        "status": "passed",
+        "summary": "PASS: scoped Pint check passed for the focused test file."
+      },
+      {
+        "command": "vendor/bin/pint --test",
+        "status": "failed_external_sidecar",
+        "summary": "Full Pint remains blocked by two pre-existing out-of-scope EQ files: tests/Unit/Eq/EqSjtValidationTelemetryContractTest.php and tests/Unit/Report/EqIntegratedReportComposerTest.php."
+      },
+      {
+        "command": "composer validate --strict",
+        "status": "passed",
+        "summary": "PASS: composer.json is valid."
+      },
+      {
+        "command": "composer audit --locked --no-interaction --ignore-unreachable",
+        "status": "passed",
+        "summary": "PASS: no security vulnerability advisories found."
+      },
+      {
+        "command": "python3 -m json.tool backend/docs/seo/generated/pr-hiring-01-post-publish-smoke.v1.json >/dev/null",
+        "status": "passed",
+        "summary": "PASS: generated JSON parses."
+      },
+      {
+        "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+        "status": "passed",
+        "summary": "PASS: PR train state JSON parses."
+      },
+      {
+        "command": "python3 - <<'PY'\nimport yaml, pathlib\nyaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\nprint('yaml ok')\nPY",
+        "status": "passed",
+        "summary": "PASS: PR train manifest YAML parses."
+      },
+      {
+        "command": "git diff --check",
+        "status": "passed",
+        "summary": "PASS: no whitespace errors."
+      }
+    ],
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "status": "authorized",
+        "at": "2026-06-01T20:03:00+08:00",
+        "summary": "User authorized adding and executing PR-HIRING-01-POST-PUBLISH-SMOKE as a read-only post-publish smoke report."
+      },
+      {
+        "status": "in_progress",
+        "at": "2026-06-01T20:04:00+08:00",
+        "summary": "Started from latest origin/main on codex/pr-hiring-01-post-publish-smoke after PR-POL-01-LEDGER-RECONCILE-AND-SMOKE merged."
+      },
+      {
+        "status": "local_checks_passed_with_sidecar",
+        "at": "2026-06-01T20:20:00+08:00",
+        "summary": "Focused tests, route list, scoped Pint, composer validate/audit, JSON/YAML parsing, and diff checks passed. Full Pint failure is limited to pre-existing out-of-scope EQ test files and recorded as a sidecar."
+      }
+    ],
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "git_diff_check": true,
+      "git_diff_cached_check": null
+    },
+    "sidecars": [
+      "llms.txt does not include Careers pages while sitemap.xml and llms-full.txt do include them; recorded as read-only observation.",
+      "Full Pint is blocked by pre-existing out-of-scope EQ style issues in tests/Unit/Eq/EqSjtValidationTelemetryContractTest.php and tests/Unit/Report/EqIntegratedReportComposerTest.php."
+    ],
+    "next_task": null
   },
   "PAYMENT-ALIPAY-PENDING-COMPENSATION-SCHEDULER-01": {
     "id": "PAYMENT-ALIPAY-PENDING-COMPENSATION-SCHEDULER-01",

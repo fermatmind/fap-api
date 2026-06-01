@@ -18088,6 +18088,58 @@ prs:
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
     next_task: CAREER-1046-INTERNAL-LINKING-AUTHORITY-01
 
+  - id: PR-HIRING-01-POST-PUBLISH-SMOKE
+    repo: fap-api
+    depends_on:
+      - PR-HIRING-01
+    branch: codex/pr-hiring-01-post-publish-smoke
+    base: main
+    title: "PR-HIRING-01-POST-PUBLISH-SMOKE careers runtime smoke"
+    train_scope: career_1046_growth_foundation
+    risk_level: p2_read_only_runtime_smoke
+    allowed_paths:
+      - backend/docs/seo/pr-hiring-01-post-publish-smoke.md
+      - backend/docs/seo/generated/pr-hiring-01-post-publish-smoke.v1.json
+      - backend/tests/Feature/SeoIntel/PrHiring01PostPublishSmokeTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Verify production Careers content page runtime after PR-HIRING-01 related content authority work.
+      - Confirm EN/ZH Careers CMS rows are published, public, and indexable.
+      - Confirm public runtime 200, exact canonicals, index/follow robots, no staging canonical, and expected sitemap/llms/footer exposure.
+      - Confirm PR-HIRING-01 role drafts remain non-runtime, absent from sitemap/llms/footer, and absent from Search Channel.
+    do_not:
+      - Mutate CMS or production data.
+      - Publish pages or role drafts.
+      - Deploy backend or frontend.
+      - Enqueue Search Channel, submit URLs, or call external search APIs.
+      - Edit env, DNS, nginx, or read raw logs.
+      - Modify fap-web.
+    validation:
+      - cd backend && php artisan test --filter=PrHiring01PostPublishSmoke --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/pr-hiring-01-post-publish-smoke.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: null
+
   - id: CAREER-1046-INTERNAL-LINKING-AUTHORITY-01
     repo: fap-api
     depends_on:
