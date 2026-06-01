@@ -37746,7 +37746,7 @@
     "repo": "fap-api",
     "branch": "codex/pr-fdn-social-sync-readiness",
     "base": "main",
-    "status": "pr_opened_with_sidecar",
+    "status": "ci_fix_validated_with_sidecar",
     "title": "docs(foundation): add Daily Giving social sync readiness",
     "commit_sha": "25e47f6b7dff748935293e5600d10046d9673e6d",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1819",
@@ -38111,6 +38111,10 @@
         "status": "pass",
         "evidence": "Sitemap generator regression tests passed after updating the old CMS-only career detail expectation: 6 tests, 90 assertions."
       },
+      "php artisan test --filter=SitemapXmlTest --no-ansi": {
+        "status": "pass",
+        "evidence": "Sitemap XML regression test now binds runtime projection truth for the public career detail fixture and passed: 4 tests, 77 assertions."
+      },
       "php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff' --no-ansi": {
         "status": "pass",
         "evidence": "Big Five runtime freeze branch-diff guard passed with the sitemap/directory authority diff."
@@ -38119,7 +38123,7 @@
         "status": "pass",
         "evidence": "Route list completed successfully; no route changes were made in this PR."
       },
-      "vendor/bin/pint --test app/Services/Career/CareerDirectoryAuthorityService.php app/Services/SEO/SitemapGenerator.php tests/Feature/SEO/CareerSitemapExposureDirectoryAuthorityTest.php tests/Feature/SEO/SitemapGeneratorTest.php": {
+      "vendor/bin/pint --test app/Services/Career/CareerDirectoryAuthorityService.php app/Services/SEO/SitemapGenerator.php tests/Feature/SEO/CareerSitemapExposureDirectoryAuthorityTest.php tests/Feature/SEO/SitemapGeneratorTest.php tests/Feature/SEO/SitemapXmlTest.php": {
         "status": "pass",
         "evidence": "Scoped Pint passed for current PR PHP files."
       },
@@ -38174,6 +38178,11 @@
         "at": "2026-06-01T04:22:00Z",
         "status": "pr_opened_with_sidecar",
         "summary": "Opened PR #1832. Local scoped validation passed; full Pint sidecar remains out-of-scope."
+      },
+      {
+        "at": "2026-06-01T04:23:00Z",
+        "status": "ci_fix_validated_with_sidecar",
+        "summary": "Inspected GitHub failures in verify-mbti-legacy and verify-mbti-v2; both failed because SitemapXmlTest expected a career detail URL without binding runtime projection truth. Added the fixture binding in current scope and validated SitemapXmlTest plus focused sitemap checks locally."
       }
     ]
   }

@@ -18933,6 +18933,7 @@ prs:
       - backend/app/Services/SEO/SitemapGenerator.php
       - backend/tests/Feature/SEO/CareerSitemapExposureDirectoryAuthorityTest.php
       - backend/tests/Feature/SEO/SitemapGeneratorTest.php
+      - backend/tests/Feature/SEO/SitemapXmlTest.php
       - backend/docs/seo/career-sitemap-exposure-directory-authority-01.md
       - backend/docs/seo/generated/career-sitemap-exposure-directory-authority-01.v1.json
       - docs/codex/pr-train.yaml
@@ -18945,9 +18946,11 @@ prs:
     validation:
       - cd backend && php artisan test --filter=CareerSitemapExposureDirectoryAuthorityTest --no-ansi
       - cd backend && php artisan test --filter=SitemapSourceApiTest --no-ansi
+      - cd backend && php artisan test --filter=SitemapGeneratorTest --no-ansi
+      - cd backend && php artisan test --filter=SitemapXmlTest --no-ansi
       - cd backend && php artisan route:list --no-ansi
       - cd backend && vendor/bin/pint --test
-      - cd backend && vendor/bin/pint --test app/Services/Career/CareerDirectoryAuthorityService.php app/Services/SEO/SitemapGenerator.php tests/Feature/SEO/CareerSitemapExposureDirectoryAuthorityTest.php
+      - cd backend && vendor/bin/pint --test app/Services/Career/CareerDirectoryAuthorityService.php app/Services/SEO/SitemapGenerator.php tests/Feature/SEO/CareerSitemapExposureDirectoryAuthorityTest.php tests/Feature/SEO/SitemapGeneratorTest.php tests/Feature/SEO/SitemapXmlTest.php
       - cd backend && composer validate --strict
       - cd backend && composer audit --locked --no-interaction --ignore-unreachable
       - python3 -m json.tool backend/docs/seo/generated/career-sitemap-exposure-directory-authority-01.v1.json >/dev/null
