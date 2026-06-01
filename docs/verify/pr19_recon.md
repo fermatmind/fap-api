@@ -17,8 +17,8 @@
   - v0.3 请求注入 org_id。
 - backend/app/Http/Middleware/FmTokenAuth.php
   - token 解析与 user_id/anon_id 注入（v0.3 org 私有接口使用）。
-- docs/payments/webhook-idempotency.md
-  - webhook 幂等/重放约束文档参考。
+- docs/commerce/payment-email-result-access-technical-index.md
+  - webhook 幂等/重放约束已合并到总技术入口，可作为参考。
 
 ## 相关 DB 表/迁移
 - 已存在（v0.2 语义）：

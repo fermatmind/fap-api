@@ -12,13 +12,15 @@ final class AlipayOwnerMismatchReview03Test extends TestCase
     #[Test]
     public function owner_mismatch_review_artifacts_exist_with_closed_write_gates(): void
     {
-        $reportPath = base_path('docs/commerce/alipay-owner-mismatch-review-03.md');
-        $runbookPath = base_path('docs/runbooks/alipay-owner-mismatch-review.md');
+        $technicalIndexPath = dirname(base_path()).'/docs/commerce/payment-email-result-access-technical-index.md';
         $generatedPath = base_path('docs/commerce/generated/alipay-owner-mismatch-review-03.v1.json');
 
-        $this->assertFileExists($reportPath);
-        $this->assertFileExists($runbookPath);
+        $this->assertFileExists($technicalIndexPath);
         $this->assertFileExists($generatedPath);
+        $technicalIndex = (string) file_get_contents($technicalIndexPath);
+        $this->assertStringContainsString('PAYMENT-ALIPAY-OWNER-MISMATCH-REVIEW-03', $technicalIndex);
+        $this->assertStringContainsString('ATTEMPT_OWNER_MISMATCH', $technicalIndex);
+        $this->assertStringContainsString('automatic_repair_forbidden', $technicalIndex);
 
         $generated = json_decode((string) file_get_contents($generatedPath), true, 512, JSON_THROW_ON_ERROR);
 
