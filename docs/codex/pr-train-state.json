@@ -37972,11 +37972,11 @@
     "repo": "fap-api",
     "branch": "codex/career-directory-authority-artifact-api-01",
     "base": "main",
-    "status": "in_progress",
+    "status": "pr_opened_with_sidecar",
     "title": "CAREER-DIRECTORY-AUTHORITY-ARTIFACT-API-01 career directory authority artifact API",
     "depends_on": [],
-    "commit_sha": "d578a78516fca7cb271f172c8a077c13ecf178c2",
-    "pr_url": null,
+    "commit_sha": "cd77fa222ccd4eb0b12be78720800718b4df9c8e",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1830",
     "checks": {
       "manifest_registration": {
         "status": "pass",
@@ -38039,6 +38039,11 @@
         "at": "2026-06-01T03:15:00Z",
         "status": "committed",
         "summary": "Committed scoped PR1 changes locally as d578a785."
+      },
+      {
+        "at": "2026-06-01T03:18:00Z",
+        "status": "pr_opened_with_sidecar",
+        "summary": "Opened PR #1830. Local scoped validation passed; full Pint sidecar remains out-of-scope."
       }
     ]
   }
