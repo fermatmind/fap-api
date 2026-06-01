@@ -38281,7 +38281,7 @@
     "repo": "fap-api",
     "branch": "codex/pr-fdn-02a-post-deploy-runtime-validation",
     "base": "main",
-    "status": "committed_pending_pr",
+    "status": "pr_open_checks_pending",
     "title": "docs(foundation): validate Daily Giving backend runtime",
     "depends_on": [],
     "commit_sha": "322bf0d8f0884c48730fc23c2713710315d19863",
@@ -38509,7 +38509,7 @@
       "ANALYTICS-FUNNEL-OPS-GLOBAL-SCOPE-ENTRY-01"
     ],
     "commit_sha": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1844",
     "checks": {
       "manifest_registration": {
         "status": "pass",
@@ -39297,6 +39297,12 @@
         "from": "local_checks_passed_with_sidecar",
         "to": "committed_pending_pr",
         "note": "Committed scoped implementation locally and set commit_sha to pending_remote_pr_head before PR creation to avoid amend hash churn."
+      },
+      {
+        "at": "2026-06-01T16:21:17Z",
+        "from": "committed_pending_pr",
+        "to": "pr_open_checks_pending",
+        "note": "Opened GitHub PR #1844 after scoped local validation passed with an external full-Pint sidecar."
       }
     ],
     "sidecars": [
