@@ -37972,7 +37972,7 @@
     "repo": "fap-api",
     "branch": "codex/career-directory-authority-artifact-api-01",
     "base": "main",
-    "status": "pr_opened_with_sidecar",
+    "status": "ci_fix_validated_with_sidecar",
     "title": "CAREER-DIRECTORY-AUTHORITY-ARTIFACT-API-01 career directory authority artifact API",
     "depends_on": [],
     "commit_sha": "cd77fa222ccd4eb0b12be78720800718b4df9c8e",
@@ -37994,9 +37994,25 @@
         "status": "pass",
         "evidence": "Route listing completed successfully and includes GET api/v0.5/career/directory."
       },
+      "bash scripts/export_openapi.sh --check": {
+        "status": "pass",
+        "evidence": "OpenAPI route contract snapshot is up to date and includes GET /api/v0.5/career/directory."
+      },
+      "php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_career_directory_authority_api_changes' --no-ansi": {
+        "status": "pass",
+        "evidence": "Focused Big Five runtime freeze classifier test passed for the career directory authority API route/service diff."
+      },
+      "php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff' --no-ansi": {
+        "status": "pass",
+        "evidence": "Big Five runtime freeze branch-diff guard passed after adding the narrow career directory authority API classifier."
+      },
       "vendor/bin/pint --test app/Http/Controllers/API/V0_5/Career/CareerDirectoryController.php app/Services/Career/CareerDirectoryAuthorityService.php tests/Feature/Career/CareerDirectoryAuthorityApiTest.php": {
         "status": "pass",
         "evidence": "Scoped Pint passed for all PHP files touched by this PR."
+      },
+      "vendor/bin/pint --test app/Http/Controllers/API/V0_5/Career/CareerDirectoryController.php app/Services/Career/CareerDirectoryAuthorityService.php tests/Feature/Career/CareerDirectoryAuthorityApiTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php": {
+        "status": "pass",
+        "evidence": "Scoped Pint passed for the current PR PHP files, including the Big Five classifier fixture."
       },
       "vendor/bin/pint --test": {
         "status": "sidecar_external_failure",
@@ -38019,7 +38035,7 @@
         "evidence": "Whitespace checks passed before staging."
       }
     },
-    "failure_reason": "Sidecar only: full Pint reports out-of-scope EQ test formatting issues; scoped current PR files passed.",
+    "failure_reason": "Sidecar only: full Pint reports out-of-scope EQ test formatting issues; scoped current PR files and current-scope CI fixes passed locally.",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -38044,6 +38060,11 @@
         "at": "2026-06-01T03:18:00Z",
         "status": "pr_opened_with_sidecar",
         "summary": "Opened PR #1830. Local scoped validation passed; full Pint sidecar remains out-of-scope."
+      },
+      {
+        "at": "2026-06-01T03:39:00Z",
+        "status": "ci_fix_validated_with_sidecar",
+        "summary": "Addressed current-scope GitHub failures locally by updating the OpenAPI snapshot and adding a narrow Big Five runtime freeze classifier exception for the career directory authority API. Focused tests, route:list, OpenAPI check, scoped Pint, composer validation, composer audit, JSON/YAML parsing, and diff checks passed. Full Pint still fails only on out-of-scope EQ test formatting files."
       }
     ]
   }

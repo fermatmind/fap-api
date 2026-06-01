@@ -18884,9 +18884,11 @@ prs:
       - Exclude held, noindex, conflict, and non-public career slugs.
     allowed_paths:
       - backend/routes/api.php
+      - backend/docs/contracts/openapi.snapshot.json
       - backend/app/Http/Controllers/API/V0_5/Career/CareerDirectoryController.php
       - backend/app/Services/Career/CareerDirectoryAuthorityService.php
       - backend/tests/Feature/Career/CareerDirectoryAuthorityApiTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - backend/docs/seo/career-directory-authority-artifact-api-01.md
       - backend/docs/seo/generated/career-directory-authority-artifact-api-01.v1.json
       - docs/codex/pr-train.yaml
@@ -18898,8 +18900,11 @@ prs:
       - Add frontend fallback career content.
     validation:
       - cd backend && php artisan test --filter=CareerDirectoryAuthorityApiTest --no-ansi
+      - cd backend && php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_career_directory_authority_api_changes' --no-ansi
       - cd backend && php artisan route:list --no-ansi
+      - cd backend && bash scripts/export_openapi.sh --check
       - cd backend && vendor/bin/pint --test
+      - cd backend && vendor/bin/pint --test app/Http/Controllers/API/V0_5/Career/CareerDirectoryController.php app/Services/Career/CareerDirectoryAuthorityService.php tests/Feature/Career/CareerDirectoryAuthorityApiTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - cd backend && composer validate --strict
       - cd backend && composer audit --locked --no-interaction --ignore-unreachable
       - python3 -m json.tool backend/docs/seo/generated/career-directory-authority-artifact-api-01.v1.json >/dev/null
