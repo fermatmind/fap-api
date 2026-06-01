@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "task": "CAREER-SITEMAP-EXPOSURE-DIRECTORY-AUTHORITY-01",
+  "final_decision": "career_sitemap_exposure_directory_authority_completed_ready_for_frontend_paginated_directory_shell",
+  "authority_source": "career.directory_authority.v1",
+  "sitemap_career_detail_source": "CareerDirectoryAuthorityService::indexableItems",
+  "runtime_projection_filter_preserved": true,
+  "expected_current_public_detail_count": 1046,
+  "expected_current_sitemap_career_detail_url_count": 2092,
+  "held_slugs_excluded": [
+    "software-developers",
+    "digital-forensics-analysts",
+    "computer-occupations-all-other"
+  ],
+  "display_asset_only_rows_excluded": true,
+  "frontend_changed": false,
+  "cms_mutation_performed": false,
+  "db_mutation_performed": false,
+  "deploy_performed": false,
+  "search_channel_action_performed": false,
+  "url_submission_performed": false,
+  "external_search_api_call_performed": false,
+  "next_task": "CAREER-JOBS-PAGINATED-DIRECTORY-SHELL-01"
+}

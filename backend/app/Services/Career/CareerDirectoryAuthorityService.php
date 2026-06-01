@@ -88,6 +88,17 @@ final class CareerDirectoryAuthorityService
     /**
      * @return list<array<string, mixed>>
      */
+    public function indexableItems(string $locale): array
+    {
+        $publicLocale = $this->normalizePublicLocale($locale);
+        $localePrefix = $publicLocale === 'zh-CN' ? 'zh' : 'en';
+
+        return $this->directoryItems($publicLocale, $localePrefix);
+    }
+
+    /**
+     * @return list<array<string, mixed>>
+     */
     private function directoryItems(string $publicLocale, string $localePrefix): array
     {
         $payload = $this->responseCache->jobIndexPayload($publicLocale);

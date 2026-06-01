@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\SEO;
 
+use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Models\Article;
 use App\Models\CareerGuide;
 use App\Models\CareerJob;
@@ -15,7 +16,9 @@ use App\Models\PersonalityProfileVariantSeoMeta;
 use App\Models\TopicProfile;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture;
 use Tests\TestCase;
 
 class SitemapXmlTest extends TestCase
@@ -385,6 +388,7 @@ class SitemapXmlTest extends TestCase
             $this->createOccupation('software-developers', 'Software Developers'),
             ['updated_at' => Carbon::create(2026, 1, 31, 12, 56, 0)]
         );
+        $this->publishRuntimeProjection(['agricultural-inspectors', 'software-developers']);
 
         $guideEn = $this->createCareerGuide([
             'guide_code' => 'career-planning-101',
@@ -751,6 +755,40 @@ class SitemapXmlTest extends TestCase
             'created_at' => Carbon::create(2026, 1, 31, 12, 55, 0),
             'updated_at' => Carbon::create(2026, 1, 31, 12, 55, 0),
         ], $overrides));
+    }
+
+    /**
+     * @param  list<string>  $slugs
+     */
+    private function publishRuntimeProjection(array $slugs): void
+    {
+        $items = [];
+        foreach ($slugs as $slug) {
+            $items[$slug.'|en'] = [
+                'slug' => $slug,
+                'locale' => 'en',
+                'dataset_visible' => true,
+                'search_visible' => true,
+                'detail_route_enabled' => true,
+                'robots_indexable' => true,
+                'release_gate_pass' => true,
+                'runtime_publish_state' => 'published',
+            ];
+        }
+
+        $this->app->instance(
+            CareerRuntimePublishProjectionVisibility::class,
+            new CareerRuntimePublishProjectionVisibilityFixture(
+                defaultDatasetVisible: false,
+                defaultSearchVisible: false,
+                defaultDetailRouteEnabled: false,
+                defaultRobotsIndexable: false,
+                defaultReleaseGatePass: false,
+                items: $items,
+            ),
+        );
+
+        Cache::flush();
     }
 
     /**

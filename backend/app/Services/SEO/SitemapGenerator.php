@@ -9,6 +9,7 @@ use App\Models\CareerJobDisplayAsset;
 use App\Models\ContentPage;
 use App\Models\PersonalityProfileVariant;
 use App\Models\TopicProfile;
+use App\Services\Career\CareerDirectoryAuthorityService;
 use App\Services\Career\Dataset\CareerDatasetPublicationMetadataService;
 use App\Services\Cms\ArticleSeoService;
 use App\Services\Cms\CareerGuideSeoService;
@@ -46,6 +47,7 @@ class SitemapGenerator
         private readonly TopicProfileSeoService $topicProfileSeoService,
         private readonly ScaleRegistry $scaleRegistry,
         private readonly CareerDatasetPublicationMetadataService $datasetPublicationMetadataService,
+        private readonly CareerDirectoryAuthorityService $careerDirectoryAuthorityService,
     ) {
         $configuredPrefix = trim((string) config('services.seo.tests_url_prefix', ''));
         if ($configuredPrefix === '') {
@@ -118,7 +120,7 @@ class SitemapGenerator
 
     public function generateApprovedCareerJobDetailUrls(): array
     {
-        return $this->getDisplayAssetCareerJobDetailUrls();
+        return $this->getDirectoryAuthorityCareerJobDetailUrls();
     }
 
     private function getScaleUrls(string $locale): array
@@ -430,10 +432,40 @@ class SitemapGenerator
 
     private function getCareerJobDetailUrls(): array
     {
-        return array_merge(
-            $this->getCmsCareerJobDetailUrls(),
-            $this->getDisplayAssetCareerJobDetailUrls()
-        );
+        return $this->getDirectoryAuthorityCareerJobDetailUrls();
+    }
+
+    private function getDirectoryAuthorityCareerJobDetailUrls(): array
+    {
+        $baseUrl = rtrim((string) config('app.frontend_url', config('app.url', '')), '/');
+        if ($baseUrl === '') {
+            return [];
+        }
+
+        $urls = [];
+        foreach ([
+            'en' => 'en',
+            'zh-CN' => 'zh',
+        ] as $locale => $segment) {
+            foreach ($this->careerDirectoryAuthorityService->indexableItems($locale) as $item) {
+                $slug = strtolower(trim((string) ($item['slug'] ?? '')));
+                $path = trim((string) ($item['canonical_path'] ?? ''));
+                if ($slug === '' || $path === '') {
+                    continue;
+                }
+
+                $updatedAt = $this->parseUpdatedAt((string) ($item['updated_at'] ?? '')) ?? now('UTC');
+
+                $urls[] = [
+                    'loc' => $baseUrl.$path,
+                    'lastmod' => $updatedAt->toAtomString(),
+                    'slug' => 'career-jobs:'.$segment.':'.$slug,
+                    'updated_at' => $updatedAt->toDateTimeString(),
+                ];
+            }
+        }
+
+        return $urls;
     }
 
     private function getCmsCareerJobDetailUrls(): array

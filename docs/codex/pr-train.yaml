@@ -18914,3 +18914,49 @@ prs:
       - git diff --cached --check
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
     next_task: CAREER-SITEMAP-EXPOSURE-DIRECTORY-AUTHORITY-01
+
+  - id: CAREER-SITEMAP-EXPOSURE-DIRECTORY-AUTHORITY-01
+    repo: fap-api
+    depends_on: [CAREER-DIRECTORY-AUTHORITY-ARTIFACT-API-01]
+    branch: codex/career-sitemap-exposure-directory-authority-01
+    base: main
+    title: "CAREER-SITEMAP-EXPOSURE-DIRECTORY-AUTHORITY-01 sitemap career exposure directory authority"
+    train_scope: career_directory_10k_scale
+    status: in_progress
+    scope:
+      - Make backend sitemap career detail URL enumeration consume the career directory authority service.
+      - Preserve the sitemap source runtime projection safety filter.
+      - Preserve current 1046 public details / 2092 EN/ZH career detail URL truth.
+      - Exclude held, noindex, display-asset-only, draft, private, and fallback-only career slugs.
+    allowed_paths:
+      - backend/app/Services/Career/CareerDirectoryAuthorityService.php
+      - backend/app/Services/SEO/SitemapGenerator.php
+      - backend/tests/Feature/SEO/CareerSitemapExposureDirectoryAuthorityTest.php
+      - backend/tests/Feature/SEO/SitemapGeneratorTest.php
+      - backend/tests/Feature/SEO/SitemapXmlTest.php
+      - backend/docs/seo/career-sitemap-exposure-directory-authority-01.md
+      - backend/docs/seo/generated/career-sitemap-exposure-directory-authority-01.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change frontend rendering, llms, Search Channel, URL submission, or deployment behavior.
+      - Mutate production CMS, production DB, career cohort state, runtime promotion state, or held slug policy.
+      - Release software-developers, digital-forensics-analysts, or computer-occupations-all-other.
+      - Add frontend fallback career content.
+    validation:
+      - cd backend && php artisan test --filter=CareerSitemapExposureDirectoryAuthorityTest --no-ansi
+      - cd backend && php artisan test --filter=SitemapSourceApiTest --no-ansi
+      - cd backend && php artisan test --filter=SitemapGeneratorTest --no-ansi
+      - cd backend && php artisan test --filter=SitemapXmlTest --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && vendor/bin/pint --test app/Services/Career/CareerDirectoryAuthorityService.php app/Services/SEO/SitemapGenerator.php tests/Feature/SEO/CareerSitemapExposureDirectoryAuthorityTest.php tests/Feature/SEO/SitemapGeneratorTest.php tests/Feature/SEO/SitemapXmlTest.php
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/career-sitemap-exposure-directory-authority-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: CAREER-JOBS-PAGINATED-DIRECTORY-SHELL-01
