@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-01T04:22:00Z",
+  "updated_at": "2026-06-01T06:19:00Z",
   "items": {
     "PR-EQ-PER-01": {
       "repo": "fap-api",
@@ -38292,12 +38292,12 @@
     "repo": "fap-api",
     "branch": "codex/career-sitemap-exposure-directory-authority-01",
     "base": "main",
-    "status": "pr_opened_with_sidecar",
+    "status": "merged",
     "title": "CAREER-SITEMAP-EXPOSURE-DIRECTORY-AUTHORITY-01 sitemap career exposure directory authority",
     "depends_on": [
       "CAREER-DIRECTORY-AUTHORITY-ARTIFACT-API-01"
     ],
-    "commit_sha": "568c88a837b8dc2c66c67815d6c68dd260c4b8aa",
+    "commit_sha": "dd68b36ef2e6bcf577ab6110858a702f67a32a38",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1832",
     "checks": {
       "manifest_registration": {
@@ -38358,9 +38358,9 @@
       }
     },
     "failure_reason": "Sidecar only: full Pint reports pre-existing out-of-scope EQ test formatting issues; scoped current PR files and required focused checks passed locally.",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-01T04:29:13Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "next_task": "CAREER-JOBS-PAGINATED-DIRECTORY-SHELL-01",
     "history": [
       {
@@ -38392,8 +38392,14 @@
         "at": "2026-06-01T04:23:00Z",
         "status": "ci_fix_validated_with_sidecar",
         "summary": "Inspected GitHub failures in verify-mbti-legacy and verify-mbti-v2; both failed because SitemapXmlTest expected a career detail URL without binding runtime projection truth. Added the fixture binding in current scope and validated SitemapXmlTest plus focused sitemap checks locally."
+      },
+      {
+        "at": "2026-06-01T06:08:20Z",
+        "status": "reconciled_merged",
+        "summary": "GitHub PR #1832 is merged and origin/main contains merge commit dd68b36ef2e6bcf577ab6110858a702f67a32a38; reconciled before PR5."
       }
-    ]
+    ],
+    "merge_commit": "dd68b36ef2e6bcf577ab6110858a702f67a32a38"
   },
   "PAYMENT-ALIPAY-RETURN-IMMEDIATE-COMPENSATION-05": {
     "id": "PAYMENT-ALIPAY-RETURN-IMMEDIATE-COMPENSATION-05",
@@ -38520,5 +38526,139 @@
       }
     ],
     "next_task": "PAYMENT-WAIT-PAID-REDIRECT-CONTRACT-06"
+  },
+  "CAREER-DIRECTORY-10K-OPS-WARM-VALIDATE-01": {
+    "id": "CAREER-DIRECTORY-10K-OPS-WARM-VALIDATE-01",
+    "repo": "fap-api",
+    "branch": "codex/career-directory-10k-ops-warm-validate-01",
+    "base": "main",
+    "status": "open_checks_passed",
+    "title": "CAREER-DIRECTORY-10K-OPS-WARM-VALIDATE-01 directory warm validate 10k ops gate",
+    "depends_on": [
+      "CAREER-SITEMAP-EXPOSURE-DIRECTORY-AUTHORITY-01"
+    ],
+    "commit_sha": "e1a66823fad576ad61ac61f0aa8f9da5d81e28f7",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1835",
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User approved the five-PR career directory 10k-scale train; this entry adds only PR5 after backend PR2 and fap-web PR3/PR4 completed."
+      },
+      "scope_boundaries": {
+        "status": "pass",
+        "evidence": "Scope is limited to backend directory warm/readiness validation, report artifacts, focused tests, and train metadata."
+      },
+      "php artisan test --filter=CareerDirectory10kOpsWarmValidateCommandTest --no-ansi": {
+        "status": "pass",
+        "evidence": "Focused 10k ops warm/validate command test passed: 2 tests, 19 assertions; PHPUnit emitted non-fatal file_get_contents warnings."
+      },
+      "php artisan test --filter=CareerWarmPublicAuthorityCacheCommandTest --no-ansi": {
+        "status": "pass",
+        "evidence": "Existing public authority warm cache test passed after adding EN job-index warm coverage: 2 tests, 35 assertions; PHPUnit emitted non-fatal file_get_contents warnings."
+      },
+      "php artisan route:list --no-ansi": {
+        "status": "pass",
+        "evidence": "Route list completed successfully with 210 routes; no HTTP route changes were made."
+      },
+      "vendor/bin/pint --test scoped": {
+        "status": "pass",
+        "evidence": "Scoped Pint passed for current PR command/service/test files."
+      },
+      "vendor/bin/pint --test": {
+        "status": "sidecar_external_failure",
+        "evidence": "Full Pint still reports pre-existing out-of-scope new_with_parentheses issues in tests/Unit/Eq/EqSjtValidationTelemetryContractTest.php and tests/Unit/Report/EqIntegratedReportComposerTest.php. Current PR does not touch those files; scoped Pint passed."
+      },
+      "composer validate --strict": {
+        "status": "pass",
+        "evidence": "Composer schema validation passed."
+      },
+      "composer audit --locked --no-interaction --ignore-unreachable": {
+        "status": "pass",
+        "evidence": "No locked dependency advisories reported."
+      },
+      "json_yaml_parse": {
+        "status": "pass",
+        "evidence": "Generated JSON, pr-train-state JSON, and pr-train YAML parse successfully."
+      },
+      "git diff --check && git diff --cached --check": {
+        "status": "pass",
+        "evidence": "Whitespace checks passed before staging."
+      },
+      "php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff' --no-ansi": {
+        "status": "pass",
+        "evidence": "Big Five runtime branch-diff guard passed with 1 warning and 3 assertions; warning is non-fatal file_get_contents output."
+      }
+    },
+    "failure_reason": "Sidecar only: full Pint reports pre-existing out-of-scope EQ test formatting issues; scoped current PR files and required focused checks passed locally.",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "git_diff_name_only_origin_main_head": [
+        "backend/app/Console/Commands/CareerValidateDirectory10kScaleReadiness.php",
+        "backend/app/Services/Career/CareerDirectoryAuthorityService.php",
+        "backend/app/Services/Career/PublicCareerAuthorityResponseCache.php",
+        "backend/docs/seo/career-directory-10k-ops-warm-validate-01.md",
+        "backend/docs/seo/generated/career-directory-10k-ops-warm-validate-01.v1.json",
+        "backend/tests/Feature/Console/CareerDirectory10kOpsWarmValidateCommandTest.php",
+        "backend/tests/Feature/Console/CareerWarmPublicAuthorityCacheCommandTest.php",
+        "docs/codex/pr-train-state.json",
+        "docs/codex/pr-train.yaml"
+      ],
+      "git_diff_check": "pass",
+      "git_diff_cached_check": "pass",
+      "github_checks": "pass",
+      "merge_state_status": "CLEAN"
+    },
+    "sidecars": [
+      {
+        "source_pr": "CAREER-DIRECTORY-10K-OPS-WARM-VALIDATE-01",
+        "repo": "fap-api",
+        "branch": "codex/career-directory-10k-ops-warm-validate-01",
+        "command_or_check": "cd backend && vendor/bin/pint --test",
+        "evidence": "Full Pint fails only on tests/Unit/Eq/EqSjtValidationTelemetryContractTest.php and tests/Unit/Report/EqIntegratedReportComposerTest.php new_with_parentheses style issues.",
+        "failure_summary": "Out-of-scope EQ Pint formatting issues remain on main.",
+        "why_external_to_current_pr": "Current PR changes career directory ops validation, public authority warm cache, docs, focused tests, and ledger only; it does not touch EQ test files.",
+        "impact_on_current_pr": "No impact on career directory 10k ops command behavior; scoped Pint and focused tests passed.",
+        "owner": "EQ/report test owners",
+        "follow_up_recommendation": "Handle in a separate scoped EQ Pint cleanup PR.",
+        "required_checks_status": "github_checks_passed",
+        "scope_validation_status": "local_scope_validation_passed",
+        "continue_train_decision": "continue_current_pr_with_sidecar"
+      }
+    ],
+    "next_task": "deploy_readiness_after_career_directory_10k_train_if_required",
+    "history": [
+      {
+        "at": "2026-06-01T06:08:20Z",
+        "status": "in_progress",
+        "summary": "Initialized PR5 after user authorization; started from latest origin/main and added career directory 10k ops warm/validate scope."
+      },
+      {
+        "at": "2026-06-01T06:15:30Z",
+        "status": "local_validated_with_sidecar",
+        "summary": "Focused tests, route:list, scoped Pint, composer validate/audit, JSON/YAML parsing, and diff checks passed. Full Pint sidecar remains out-of-scope in EQ tests."
+      },
+      {
+        "at": "2026-06-01T06:16:30Z",
+        "status": "runtime_freeze_guard_passed",
+        "summary": "Ran the focused Big Five runtime path guard; it passed for the PR5 diff."
+      },
+      {
+        "at": "2026-06-01T06:18:00Z",
+        "status": "committed",
+        "summary": "Committed PR5 locally as e5109c6405835981d0c7974d56ebc001904af428."
+      },
+      {
+        "at": "2026-06-01T06:19:00Z",
+        "status": "commit_sha_pending_remote_head",
+        "summary": "Set ledger commit_sha to pending_remote_pr_head to avoid amend hash churn before PR creation."
+      },
+      {
+        "at": "2026-06-01T06:31:00Z",
+        "status": "open_checks_passed",
+        "summary": "Opened PR #1835; GitHub checks passed and mergeStateStatus is CLEAN."
+      }
+    ]
   }
 }

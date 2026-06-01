@@ -1,0 +1,36 @@
+{
+  "schema_version": "career.directory_10k_ops_warm_validate_report.v1",
+  "task": "CAREER-DIRECTORY-10K-OPS-WARM-VALIDATE-01",
+  "final_decision": "career_directory_10k_ops_warm_validate_ready_for_pr",
+  "implementation_summary": {
+    "warm_public_authority_cache_locales": [
+      "en",
+      "zh-CN"
+    ],
+    "readiness_command": "career:validate-directory-10k-scale-readiness",
+    "synthetic_scale_target": 10000,
+    "synthetic_bilingual_detail_url_target": 20000
+  },
+  "validated_invariants": [
+    "directory_count_parity_en_zh",
+    "sitemap_career_url_count_equals_public_count_times_two",
+    "excluded_slugs_absent",
+    "first_page_payload_budget",
+    "no_full_detail_fields_in_directory_items",
+    "no_full_directory_ssr_rendering"
+  ],
+  "excluded_slugs": [
+    "software-developers",
+    "digital-forensics-analysts",
+    "computer-occupations-all-other"
+  ],
+  "production_write_performed": false,
+  "cms_mutation_performed": false,
+  "runtime_promotion_performed": false,
+  "sitemap_llms_footer_exposure_performed": false,
+  "search_channel_action_performed": false,
+  "url_submission_performed": false,
+  "external_search_api_call_performed": false,
+  "deploy_performed": false,
+  "next_task": "deploy_readiness_after_career_directory_10k_train_if_required"
+}
