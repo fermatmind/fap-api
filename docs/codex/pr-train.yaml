@@ -19331,3 +19331,146 @@ prs:
       - git diff --cached --check
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
     next_task: none
+
+  - id: CAREER-LEGACY-FULL-JOBS-INDEX-CONSUMER-AUDIT-01
+    repo: fap-api
+    depends_on: []
+    branch: codex/career-legacy-full-jobs-index-consumer-audit-01
+    base: main
+    title: "CAREER-LEGACY-FULL-JOBS-INDEX-CONSUMER-AUDIT-01 legacy full jobs index consumer audit"
+    train_scope: career_10k_scale
+    status: in_progress
+    scope:
+      - Audit remaining backend consumers of /api/v0.5/career/jobs and reference-only fap-web full jobs index consumers.
+      - Produce report-only consumer list, risk classification, and migration plan.
+      - Do not change runtime behavior, frontend code, career cohort state, sitemap, llms, Search Channel, or URL submission.
+    allowed_paths:
+      - backend/docs/seo/career-legacy-full-jobs-index-consumer-audit-01.md
+      - backend/docs/seo/generated/career-legacy-full-jobs-index-consumer-audit-01.v1.json
+      - backend/tests/Feature/SeoIntel/CareerLegacyFullJobsIndexConsumerAudit01Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Mutate production CMS, production DB, career cohort state, runtime projection, or held slug policy.
+      - Change fap-web, sitemap, llms, frontend rendering, Search Channel, URL submission, or deployment behavior.
+      - Release software-developers, digital-forensics-analysts, or computer-occupations-all-other.
+      - Add frontend fallback career content.
+    validation:
+      - cd backend && php artisan test --filter=CareerLegacyFullJobsIndexConsumerAudit01 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && vendor/bin/pint --test tests/Feature/SeoIntel/CareerLegacyFullJobsIndexConsumerAudit01Test.php
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/career-legacy-full-jobs-index-consumer-audit-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: CAREER-DIRECTORY-AUTHORITY-DRIFT-GATE-01
+
+  - id: CAREER-DIRECTORY-AUTHORITY-DRIFT-GATE-01
+    repo: fap-api
+    depends_on: [CAREER-LEGACY-FULL-JOBS-INDEX-CONSUMER-AUDIT-01]
+    branch: codex/career-directory-authority-drift-gate-01
+    base: main
+    title: "CAREER-DIRECTORY-AUTHORITY-DRIFT-GATE-01 directory authority drift gate"
+    train_scope: career_10k_scale
+    status: planned
+    scope:
+      - Add a backend gate that compares directory count, public detail indexable count, sitemap career URL count, llms career URL count, and held slug exclusions.
+      - Produce artifact report proving directory/detail/sitemap/llms truth cannot drift silently.
+      - Do not mutate production state or expose new URLs.
+    allowed_paths:
+      - backend/docs/seo/career-directory-authority-drift-gate-01.md
+      - backend/docs/seo/generated/career-directory-authority-drift-gate-01.v1.json
+      - backend/tests/Feature/SeoIntel/CareerDirectoryAuthorityDriftGate01Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Mutate production CMS, production DB, career cohort state, runtime projection, sitemap, llms, Search Channel, or URL submission.
+      - Release software-developers, digital-forensics-analysts, or computer-occupations-all-other.
+    validation:
+      - cd backend && php artisan test --filter=CareerDirectoryAuthorityDriftGate01 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/career-directory-authority-drift-gate-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: CAREER-LLMS-FULL-10K-BUDGET-GATE-01
+
+  - id: CAREER-SEARCH-CHANNEL-READINESS-GATE-01
+    repo: fap-api
+    depends_on: [CAREER-DIRECTORY-AUTHORITY-DRIFT-GATE-01]
+    branch: codex/career-search-channel-readiness-gate-01
+    base: main
+    title: "CAREER-SEARCH-CHANNEL-READINESS-GATE-01 career Search Channel readiness gate"
+    train_scope: career_10k_scale
+    status: planned
+    scope:
+      - Add a read-only Search Channel readiness gate for the 2092 career detail URLs.
+      - Produce GO/HOLD decision and staged rollout proposal without enqueueing or submitting URLs.
+      - Verify sitemap, llms, held slug exclusions, robots, and claim-boundary readiness inputs.
+    allowed_paths:
+      - backend/docs/seo/career-search-channel-readiness-gate-01.md
+      - backend/docs/seo/generated/career-search-channel-readiness-gate-01.v1.json
+      - backend/tests/Feature/SeoIntel/CareerSearchChannelReadinessGate01Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Enqueue Search Channel, submit URLs, call external search APIs, mutate CMS/DB, deploy, or change frontend behavior.
+      - Release held slugs or expand career claims.
+    validation:
+      - cd backend && php artisan test --filter=CareerSearchChannelReadinessGate01 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/career-search-channel-readiness-gate-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: CAREER-10K-ROLLOUT-ARCHITECTURE-SPEC-01
+
+  - id: CAREER-10K-ROLLOUT-ARCHITECTURE-SPEC-01
+    repo: fap-api
+    depends_on: [CAREER-SEARCH-CHANNEL-READINESS-GATE-01]
+    branch: codex/career-10k-rollout-architecture-spec-01
+    base: main
+    title: "CAREER-10K-ROLLOUT-ARCHITECTURE-SPEC-01 career 10k rollout architecture spec"
+    train_scope: career_10k_scale
+    status: planned
+    scope:
+      - Produce the backend-owned 10k career rollout architecture specification.
+      - Cover authority source, rollout gates, held slug policy, directory API budget, sitemap/llms policy, smoke/SLO, rollback, and future PR boundaries.
+      - Do not implement runtime changes or expose new URLs.
+    allowed_paths:
+      - backend/docs/career/README.md
+      - backend/docs/seo/career-10k-rollout-architecture-spec-01.md
+      - backend/docs/seo/generated/career-10k-rollout-architecture-spec-01.v1.json
+      - backend/tests/Feature/SeoIntel/Career10kRolloutArchitectureSpec01Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Mutate CMS/DB, deploy, change fap-web, enqueue Search Channel, submit URLs, or release held slugs.
+    validation:
+      - cd backend && php artisan test --filter=Career10kRolloutArchitectureSpec01 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/career-10k-rollout-architecture-spec-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: none

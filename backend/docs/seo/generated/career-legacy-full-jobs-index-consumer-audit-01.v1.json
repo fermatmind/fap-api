@@ -1,0 +1,103 @@
+{
+  "schema_version": "career_legacy_full_jobs_index_consumer_audit.v1",
+  "task": "CAREER-LEGACY-FULL-JOBS-INDEX-CONSUMER-AUDIT-01",
+  "mode": "report_only",
+  "final_decision": "career_legacy_full_jobs_index_consumer_audit_completed_ready_for_directory_authority_drift_gate",
+  "legacy_endpoint": {
+    "method": "GET",
+    "path": "/api/v0.5/career/jobs",
+    "status": "compatibility_surface_keep_stable",
+    "ten_k_directory_authority": false
+  },
+  "backend_consumers": [
+    {
+      "file": "backend/routes/api.php",
+      "consumer": "Route::get('/career/jobs', [CareerJobListController::class, 'index'])",
+      "risk": "compatibility_surface",
+      "recommendation": "keep_stable_until_all_consumers_migrated"
+    },
+    {
+      "file": "backend/app/Http/Controllers/API/V0_5/Career/CareerJobListController.php",
+      "consumer": "CareerJobListController@index",
+      "risk": "full_index_response_budget",
+      "recommendation": "do_not_expand_for_10k_directory_shell"
+    },
+    {
+      "file": "backend/app/Console/Commands/ReleaseVerifyPublicContent.php",
+      "consumer": "career jobs public count verification",
+      "risk": "ops_verification_only",
+      "recommendation": "eventually_compare_against_directory_authority_count"
+    },
+    {
+      "file": "backend/app/Console/Commands/CareerValidateDisplayBatch.php",
+      "consumer": "PUBLIC_CAREER_JOB_API",
+      "risk": "batch_validation_dependency",
+      "recommendation": "keep_as_validation_or_migrate_to_directory_authority_when_batch_checks_need_pagination"
+    },
+    {
+      "file": "backend/app/Console/Commands/CareerImportSelectedDisplayAssets.php",
+      "consumer": "PUBLIC_CAREER_JOB_API",
+      "risk": "import_validation_dependency",
+      "recommendation": "keep_out_of_runtime_request_path"
+    },
+    {
+      "file": "backend/app/Console/Commands/CareerAlignSelectedOnetCrosswalks.php",
+      "consumer": "PUBLIC_CAREER_JOB_API",
+      "risk": "ops_alignment_dependency",
+      "recommendation": "keep_out_of_runtime_request_path"
+    }
+  ],
+  "frontend_reference_consumers": [
+    {
+      "file": "lib/career/api/fetchCareerJobIndex.ts",
+      "consumer": "legacy full jobs index fetcher",
+      "risk": "p1_legacy_fetcher_can_be_reused",
+      "recommendation": "restrict new consumers and migrate industry pages"
+    },
+    {
+      "file": "app/(localized)/[locale]/career/industries/page.tsx",
+      "consumer": "fetchCareerJobIndex({ locale })",
+      "risk": "p1_industry_index_full_collection_render_cost",
+      "recommendation": "migrate_to_directory_or_family_authority_endpoint"
+    },
+    {
+      "file": "app/(localized)/[locale]/career/industries/[slug]/page.tsx",
+      "consumer": "fetchCareerJobIndex({ locale })",
+      "risk": "p1_industry_detail_full_collection_render_cost",
+      "recommendation": "migrate_to_directory_family_filter_or_family_authority_endpoint"
+    }
+  ],
+  "non_consumers_confirmed": {
+    "frontend_career_jobs_page_uses_directory_endpoint": true,
+    "sitemap_should_not_depend_on_legacy_full_index": true,
+    "llms_should_not_depend_on_legacy_full_index": true
+  },
+  "risk_summary": {
+    "p0": [],
+    "p1": [
+      "frontend_industry_pages_still_consume_full_jobs_index",
+      "legacy_fetcher_can_be_reintroduced_into_directory_or_llms_paths"
+    ],
+    "p2": [
+      "ops_scripts_reference_public_full_jobs_api_for_validation"
+    ]
+  },
+  "migration_plan": [
+    "keep_legacy_endpoint_stable",
+    "migrate_industry_pages_to_directory_or_family_authority",
+    "add_directory_detail_sitemap_llms_drift_gate",
+    "document_deprecation_or_budget_constraints_after_consumers_migrate"
+  ],
+  "safety_boundaries": {
+    "production_write_performed": false,
+    "database_mutation_performed": false,
+    "cms_mutation_performed": false,
+    "runtime_promotion_performed": false,
+    "deploy_performed": false,
+    "fap_web_change_performed": false,
+    "search_channel_action_performed": false,
+    "url_submission_performed": false,
+    "external_search_api_call_performed": false
+  },
+  "next_task": "CAREER-DIRECTORY-AUTHORITY-DRIFT-GATE-01"
+}
