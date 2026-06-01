@@ -38532,13 +38532,13 @@
     "repo": "fap-api",
     "branch": "codex/career-directory-10k-ops-warm-validate-01",
     "base": "main",
-    "status": "committed",
+    "status": "open_checks_passed",
     "title": "CAREER-DIRECTORY-10K-OPS-WARM-VALIDATE-01 directory warm validate 10k ops gate",
     "depends_on": [
       "CAREER-SITEMAP-EXPOSURE-DIRECTORY-AUTHORITY-01"
     ],
-    "commit_sha": "pending_remote_pr_head",
-    "pr_url": null,
+    "commit_sha": "e1a66823fad576ad61ac61f0aa8f9da5d81e28f7",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1835",
     "checks": {
       "manifest_registration": {
         "status": "pass",
@@ -38593,7 +38593,23 @@
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
-    "scope_validation": {},
+    "scope_validation": {
+      "git_diff_name_only_origin_main_head": [
+        "backend/app/Console/Commands/CareerValidateDirectory10kScaleReadiness.php",
+        "backend/app/Services/Career/CareerDirectoryAuthorityService.php",
+        "backend/app/Services/Career/PublicCareerAuthorityResponseCache.php",
+        "backend/docs/seo/career-directory-10k-ops-warm-validate-01.md",
+        "backend/docs/seo/generated/career-directory-10k-ops-warm-validate-01.v1.json",
+        "backend/tests/Feature/Console/CareerDirectory10kOpsWarmValidateCommandTest.php",
+        "backend/tests/Feature/Console/CareerWarmPublicAuthorityCacheCommandTest.php",
+        "docs/codex/pr-train-state.json",
+        "docs/codex/pr-train.yaml"
+      ],
+      "git_diff_check": "pass",
+      "git_diff_cached_check": "pass",
+      "github_checks": "pass",
+      "merge_state_status": "CLEAN"
+    },
     "sidecars": [
       {
         "source_pr": "CAREER-DIRECTORY-10K-OPS-WARM-VALIDATE-01",
@@ -38606,7 +38622,7 @@
         "impact_on_current_pr": "No impact on career directory 10k ops command behavior; scoped Pint and focused tests passed.",
         "owner": "EQ/report test owners",
         "follow_up_recommendation": "Handle in a separate scoped EQ Pint cleanup PR.",
-        "required_checks_status": "pending_github_checks",
+        "required_checks_status": "github_checks_passed",
         "scope_validation_status": "local_scope_validation_passed",
         "continue_train_decision": "continue_current_pr_with_sidecar"
       }
@@ -38637,6 +38653,11 @@
         "at": "2026-06-01T06:19:00Z",
         "status": "commit_sha_pending_remote_head",
         "summary": "Set ledger commit_sha to pending_remote_pr_head to avoid amend hash churn before PR creation."
+      },
+      {
+        "at": "2026-06-01T06:31:00Z",
+        "status": "open_checks_passed",
+        "summary": "Opened PR #1835; GitHub checks passed and mergeStateStatus is CLEAN."
       }
     ]
   }
