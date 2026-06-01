@@ -39557,13 +39557,13 @@
     "repo": "fap-api",
     "branch": "codex/career-search-channel-readiness-gate-01",
     "base": "main",
-    "status": "implementation_in_progress",
+    "status": "pr_open",
     "title": "CAREER-SEARCH-CHANNEL-READINESS-GATE-01 career Search Channel readiness gate",
     "depends_on": [
       "CAREER-DIRECTORY-AUTHORITY-DRIFT-GATE-01"
     ],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "a948adc520215d52d51cfc63ee0728c9e4642903",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1847",
     "checks": {
       "manifest_registration": {
         "status": "pass",
@@ -39630,6 +39630,12 @@
         "from": "planned",
         "to": "implementation_in_progress",
         "note": "Started read-only career Search Channel readiness gate."
+      },
+      {
+        "at": "2026-06-01T18:10:30Z",
+        "from": "implementation_in_progress",
+        "to": "pr_open",
+        "note": "Opened PR #1847 with scoped report, generated artifact, test, and ledger update."
       }
     ],
     "sidecars": [
