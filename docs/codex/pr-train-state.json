@@ -35728,12 +35728,12 @@
     "branch": "codex/pr-pol-01-ledger-reconcile-and-smoke",
     "base": "main",
     "title": "PR-POL-01-LEDGER-RECONCILE-AND-SMOKE policies runtime reconcile and smoke",
-    "status": "local_checks_passed_with_sidecar",
+    "status": "pr_opened_with_sidecar",
     "depends_on": [
       "PR-POL-01"
     ],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "4fcf6043",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1838",
     "checks": [
       {
         "command": "manifest/state authorization",
@@ -35784,6 +35784,11 @@
         "command": "git diff --cached --check",
         "status": "passed",
         "summary": "Cached diff whitespace check passed after path-limited staging."
+      },
+      {
+        "command": "gh pr create --title \"PR-POL-01-LEDGER-RECONCILE-AND-SMOKE policies runtime reconcile and smoke\" --base main --head codex/pr-pol-01-ledger-reconcile-and-smoke",
+        "status": "passed",
+        "summary": "Opened PR #1838."
       }
     ],
     "failure_reason": null,
@@ -35805,6 +35810,11 @@
         "status": "local_checks_passed_with_sidecar",
         "at": "2026-06-01T19:57:00+08:00",
         "summary": "Focused PHPUnit, route list, scoped Pint, Composer validate/audit, JSON/YAML parse, and diff check passed; full Pint failure is external to current PR scope."
+      },
+      {
+        "status": "pr_opened_with_sidecar",
+        "at": "2026-06-01T20:00:00+08:00",
+        "summary": "Committed, pushed, and opened PR #1838 with the external Pint sidecar recorded."
       }
     ],
     "scope_validation": {
