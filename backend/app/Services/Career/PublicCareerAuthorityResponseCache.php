@@ -115,8 +115,12 @@ final class PublicCareerAuthorityResponseCache
         [$datasetHub, $datasetMethod] = $this->refreshDatasetPayloads();
         $reporter?->__invoke('dataset_payloads', 'finished');
 
+        $reporter?->__invoke('job_index_en', 'starting');
+        $jobIndexEn = $this->refreshJobIndexPayload('en');
+        $reporter?->__invoke('job_index_en', 'finished');
+
         $reporter?->__invoke('job_index_zh_cn', 'starting');
-        $jobIndex = $this->refreshJobIndexPayload('zh-CN');
+        $jobIndexZhCn = $this->refreshJobIndexPayload('zh-CN');
         $reporter?->__invoke('job_index_zh_cn', 'finished');
 
         $reporter?->__invoke('launch_governance_closure', 'starting');
@@ -134,10 +138,15 @@ final class PublicCareerAuthorityResponseCache
                 'status' => 'cached',
                 'member_count' => (int) data_get($datasetMethod, 'scope_summary.member_count', 0),
             ],
-            'job_index' => [
+            'job_index_en' => [
+                'cache_key' => $this->jobIndexCacheKey('en', false),
+                'status' => 'cached',
+                'member_count' => count((array) data_get($jobIndexEn, 'items', [])),
+            ],
+            'job_index_zh_cn' => [
                 'cache_key' => $this->jobIndexCacheKey('zh-CN', false),
                 'status' => 'cached',
-                'member_count' => count((array) data_get($jobIndex, 'items', [])),
+                'member_count' => count((array) data_get($jobIndexZhCn, 'items', [])),
             ],
             'launch_governance_closure' => [
                 'cache_key' => self::LAUNCH_GOVERNANCE_CLOSURE_CACHE_KEY,

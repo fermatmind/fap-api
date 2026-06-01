@@ -97,6 +97,14 @@ final class CareerDirectoryAuthorityService
     }
 
     /**
+     * @return list<string>
+     */
+    public static function excludedSlugs(): array
+    {
+        return self::EXCLUDED_SLUGS;
+    }
+
+    /**
      * @return list<array<string, mixed>>
      */
     private function directoryItems(string $publicLocale, string $localePrefix): array
