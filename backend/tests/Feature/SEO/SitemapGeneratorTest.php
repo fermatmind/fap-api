@@ -431,7 +431,7 @@ class SitemapGeneratorTest extends TestCase
         $this->assertStringContainsString(data_get($seoService->buildMeta($eligibleZh, 'zh-CN'), 'canonical'), $xml);
     }
 
-    public function test_generate_includes_only_indexable_global_career_job_urls_with_locale_aware_paths(): void
+    public function test_generate_includes_career_job_list_urls_without_cms_only_detail_urls(): void
     {
         config(['app.frontend_url' => 'https://staging.fermatmind.com']);
 
@@ -538,10 +538,10 @@ class SitemapGeneratorTest extends TestCase
         $xml = (string) ($payload['xml'] ?? '');
 
         $this->assertStringContainsString('https://staging.fermatmind.com/zh/career/jobs', $xml);
-        $this->assertStringContainsString('https://staging.fermatmind.com/zh/career/jobs/product-manager', $xml);
 
         $this->assertStringNotContainsString('https://staging.fermatmind.com/en/career/jobs', $xml);
         $this->assertStringNotContainsString('https://staging.fermatmind.com/en/career/jobs/product-manager', $xml);
+        $this->assertStringNotContainsString('https://staging.fermatmind.com/zh/career/jobs/product-manager', $xml);
         $this->assertStringNotContainsString('https://staging.fermatmind.com/zh/career/jobs/robots-noindex', $xml);
         $this->assertStringNotContainsString('https://staging.fermatmind.com/en/career/jobs/draft-role', $xml);
         $this->assertStringNotContainsString('https://staging.fermatmind.com/en/career/jobs/private-role', $xml);
@@ -560,7 +560,6 @@ class SitemapGeneratorTest extends TestCase
             data_get($seoService->buildJsonLd($eligibleZh, 'zh-CN'), 'mainEntityOfPage')
         );
         $this->assertSame('Occupation', data_get($seoService->buildJsonLd($eligibleZh, 'zh-CN'), '@type'));
-        $this->assertStringContainsString(data_get($seoService->buildMeta($eligibleZh, 'zh-CN'), 'canonical'), $xml);
     }
 
     public function test_generate_includes_only_indexable_global_career_guide_urls_with_locale_aware_paths_and_lastmod(): void

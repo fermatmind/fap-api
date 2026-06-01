@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-01T03:02:27Z",
+  "updated_at": "2026-06-01T04:19:00Z",
   "items": {
     "PR-EQ-PER-01": {
       "repo": "fap-api",
@@ -37972,10 +37972,10 @@
     "repo": "fap-api",
     "branch": "codex/career-directory-authority-artifact-api-01",
     "base": "main",
-    "status": "ci_fix_validated_with_sidecar",
+    "status": "merged",
     "title": "CAREER-DIRECTORY-AUTHORITY-ARTIFACT-API-01 career directory authority artifact API",
     "depends_on": [],
-    "commit_sha": "22c84ad5c11fe0bf5d547bcf9fa587a1b71f6369",
+    "commit_sha": "68f2b2dfc0b3b587a53ad85dc52a4b0f4b2eabcf",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1830",
     "checks": {
       "manifest_registration": {
@@ -38036,9 +38036,9 @@
       }
     },
     "failure_reason": "Sidecar only: full Pint reports out-of-scope EQ test formatting issues; scoped current PR files and current-scope CI fixes passed locally.",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-01T03:48:22Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "next_task": "CAREER-SITEMAP-EXPOSURE-DIRECTORY-AUTHORITY-01",
     "history": [
       {
@@ -38070,6 +38070,105 @@
         "at": "2026-06-01T03:43:00Z",
         "status": "ci_fix_committed",
         "summary": "Committed current-scope CI fixes as 22c84ad5c11fe0bf5d547bcf9fa587a1b71f6369."
+      },
+      {
+        "at": "2026-06-01T03:55:00Z",
+        "status": "merged",
+        "summary": "Reconciled PR1 after GitHub confirmed PR #1830 merged, origin/main contains merge commit 68f2b2d, and local/remote branches were cleaned up."
+      }
+    ]
+  },
+  "CAREER-SITEMAP-EXPOSURE-DIRECTORY-AUTHORITY-01": {
+    "id": "CAREER-SITEMAP-EXPOSURE-DIRECTORY-AUTHORITY-01",
+    "repo": "fap-api",
+    "branch": "codex/career-sitemap-exposure-directory-authority-01",
+    "base": "main",
+    "status": "committed",
+    "title": "CAREER-SITEMAP-EXPOSURE-DIRECTORY-AUTHORITY-01 sitemap career exposure directory authority",
+    "depends_on": [
+      "CAREER-DIRECTORY-AUTHORITY-ARTIFACT-API-01"
+    ],
+    "commit_sha": "568c88a837b8dc2c66c67815d6c68dd260c4b8aa",
+    "pr_url": null,
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User approved the five-PR career directory 10k-scale train; this entry adds only PR2 after PR1 merged."
+      },
+      "scope_boundaries": {
+        "status": "pass",
+        "evidence": "Changed files are limited to directory authority service, sitemap generator, focused sitemap tests/report, and current PR ledger metadata."
+      },
+      "php artisan test --filter=CareerSitemapExposureDirectoryAuthorityTest --no-ansi": {
+        "status": "pass",
+        "evidence": "Focused directory-authority sitemap exposure test passed: 1 test, 5 assertions."
+      },
+      "php artisan test --filter=SitemapSourceApiTest --no-ansi": {
+        "status": "pass",
+        "evidence": "Sitemap source API contract and runtime projection filtering tests passed: 7 tests, 316 assertions."
+      },
+      "php artisan test --filter=SitemapGeneratorTest --no-ansi": {
+        "status": "pass",
+        "evidence": "Sitemap generator regression tests passed after updating the old CMS-only career detail expectation: 6 tests, 90 assertions."
+      },
+      "php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff' --no-ansi": {
+        "status": "pass",
+        "evidence": "Big Five runtime freeze branch-diff guard passed with the sitemap/directory authority diff."
+      },
+      "php artisan route:list --no-ansi": {
+        "status": "pass",
+        "evidence": "Route list completed successfully; no route changes were made in this PR."
+      },
+      "vendor/bin/pint --test app/Services/Career/CareerDirectoryAuthorityService.php app/Services/SEO/SitemapGenerator.php tests/Feature/SEO/CareerSitemapExposureDirectoryAuthorityTest.php tests/Feature/SEO/SitemapGeneratorTest.php": {
+        "status": "pass",
+        "evidence": "Scoped Pint passed for current PR PHP files."
+      },
+      "vendor/bin/pint --test": {
+        "status": "sidecar_external_failure",
+        "evidence": "Full Pint still reports the pre-existing out-of-scope new_with_parentheses issues in tests/Unit/Eq/EqSjtValidationTelemetryContractTest.php and tests/Unit/Report/EqIntegratedReportComposerTest.php. Current PR does not touch those files; scoped Pint passed."
+      },
+      "composer validate --strict": {
+        "status": "pass",
+        "evidence": "Composer schema validation passed."
+      },
+      "composer audit --locked --no-interaction --ignore-unreachable": {
+        "status": "pass",
+        "evidence": "No locked dependency advisories reported."
+      },
+      "json_yaml_parse": {
+        "status": "pass",
+        "evidence": "Generated JSON, pr-train-state JSON, and pr-train YAML parse successfully."
+      },
+      "git diff --check && git diff --cached --check": {
+        "status": "pass",
+        "evidence": "Both unstaged and cached whitespace checks passed after path-limited staging."
+      }
+    },
+    "failure_reason": "Sidecar only: full Pint reports pre-existing out-of-scope EQ test formatting issues; scoped current PR files and required focused checks passed locally.",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "next_task": "CAREER-JOBS-PAGINATED-DIRECTORY-SHELL-01",
+    "history": [
+      {
+        "at": "2026-06-01T04:02:00Z",
+        "status": "in_progress",
+        "summary": "Initialized PR2 after user authorization; started from latest origin/main and added sitemap career exposure directory authority scope."
+      },
+      {
+        "at": "2026-06-01T04:15:00Z",
+        "status": "local_checks_passed_with_sidecar",
+        "summary": "Focused sitemap/directory authority tests, SitemapSourceApiTest, SitemapGeneratorTest, route:list, scoped Pint, composer validation, composer audit, JSON/YAML parsing, and diff checks passed. Full Pint sidecar remains limited to out-of-scope EQ test formatting files."
+      },
+      {
+        "at": "2026-06-01T04:17:00Z",
+        "status": "scope_validation_passed",
+        "summary": "Path-limited staging includes only PR2 allowed files; git diff --cached --check passed."
+      },
+      {
+        "at": "2026-06-01T04:18:00Z",
+        "status": "committed",
+        "summary": "Committed scoped PR2 changes locally as 568c88a8."
       }
     ]
   }
