@@ -36523,7 +36523,7 @@
     "repo": "fap-api",
     "branch": "codex/payment-alipay-owner-mismatch-controlled-repair-04",
     "base": "main",
-    "status": "local_checks_passed_with_sidecar",
+    "status": "pr_opened_with_sidecar",
     "title": "PAYMENT-ALIPAY-OWNER-MISMATCH-CONTROLLED-REPAIR-04 state-sync owner mismatch candidate",
     "commit_sha": "a547cf12",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1815",
@@ -37738,6 +37738,89 @@
         "at": "2026-05-31T15:18:00Z",
         "status": "pr_opened_with_sidecar",
         "summary": "Opened PR #1809 and rebased onto latest origin/main from implementation commit c240dd9468f99a4c3411dd2d5e669f50694edca4; GitHub checks must rerun after force-push."
+      }
+    ]
+  },
+  "PR-FDN-02A-POST-DEPLOY-RUNTIME-VALIDATION": {
+    "id": "PR-FDN-02A-POST-DEPLOY-RUNTIME-VALIDATION",
+    "repo": "fap-api",
+    "branch": "codex/pr-fdn-02a-post-deploy-runtime-validation",
+    "base": "main",
+    "status": "local_checks_passed_with_sidecar",
+    "title": "docs(foundation): validate Daily Giving backend runtime",
+    "depends_on": [],
+    "commit_sha": "322bf0d8f0884c48730fc23c2713710315d19863",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1833",
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding PR-FDN-02A-POST-DEPLOY-RUNTIME-VALIDATION to fap-api pr-train manifest/state."
+      },
+      "scope_boundaries": {
+        "status": "pass",
+        "evidence": "Scope is limited to a read-only post-deploy runtime validation report, generated JSON, focused test, and pr-train metadata. No production mutation, CMS mutation, deploy, Search Channel action, URL submission, external API call, credential handling, or env/DNS/nginx edit is performed."
+      },
+      "backend_mvp_source": {
+        "status": "pass",
+        "evidence": "fap-api PR #1758 merged at dc51d31168027a105b644da5e6e85338cbbb4277 with GitHub checks green."
+      },
+      "public_runtime_observation": {
+        "status": "pass_with_sidecar",
+        "evidence": "Node HTTPS direct API and apex same-origin API returned HTTP 200 for Foundation Daily Giving records and months endpoints. Direct macOS curl to api.fermatmind.com remains an OPS TLS path sidecar."
+      },
+      "php artisan test --filter=PrFdn02aPostDeployRuntimeValidation --no-ansi": {
+        "status": "pass",
+        "evidence": "Focused generated-artifact boundary test passed: 1 test, 24 assertions, after initializing local .env in the isolated worktree."
+      },
+      "php artisan route:list --path=foundation --no-ansi": {
+        "status": "pass",
+        "evidence": "Route listing completed successfully and shows four Foundation Daily Giving public API routes."
+      },
+      "vendor/bin/pint --test tests/Feature/Foundation/PrFdn02aPostDeployRuntimeValidationTest.php": {
+        "status": "pass",
+        "evidence": "Scoped formatting check passed for the only PHP file touched by this PR."
+      },
+      "composer validate --strict": {
+        "status": "pass",
+        "evidence": "Composer schema validation passed."
+      },
+      "composer audit --locked --no-interaction --ignore-unreachable": {
+        "status": "pass",
+        "evidence": "No locked dependency advisories reported."
+      },
+      "json_yaml_parse": {
+        "status": "pass",
+        "evidence": "Generated report JSON, pr-train-state JSON, and pr-train YAML parsed successfully."
+      },
+      "git diff --check": {
+        "status": "pass",
+        "evidence": "Whitespace diff check passed before staging."
+      },
+      "reference_fap_web_status": {
+        "status": "pass",
+        "evidence": "Reference-only fap-web worktree is clean and was not modified."
+      }
+    },
+    "failure_reason": "Sidecar only: direct macOS curl to api.fermatmind.com still reports LibreSSL SSL_ERROR_SYSCALL; Node HTTPS and apex same-origin public API reads are healthy.",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "next_task": "PR-FDN-02B-POST-DEPLOY-RUNTIME-SMOKE",
+    "history": [
+      {
+        "at": "2026-06-01T04:27:53Z",
+        "status": "in_progress",
+        "summary": "Initialized after user authorization; using isolated worktree from latest origin/main and recording read-only Foundation Daily Giving backend MVP runtime evidence."
+      },
+      {
+        "at": "2026-06-01T04:27:53Z",
+        "status": "local_checks_passed_with_sidecar",
+        "summary": "Focused test, route:list, scoped Pint, composer validate, composer audit, JSON/YAML parsing, and diff checks passed. Direct API curl TLS reset remains an external OPS sidecar."
+      },
+      {
+        "at": "2026-06-01T04:27:53Z",
+        "status": "pr_opened_with_sidecar",
+        "summary": "Opened PR #1833 for the read-only runtime validation report. GitHub checks are pending."
       }
     ]
   },

@@ -18831,6 +18831,42 @@ prs:
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
     next_task: PR-FDN-SOCIAL-SYNC-MVP-01
 
+  - id: PR-FDN-02A-POST-DEPLOY-RUNTIME-VALIDATION
+    repo: fap-api
+    depends_on: []
+    branch: codex/pr-fdn-02a-post-deploy-runtime-validation
+    base: main
+    title: "docs(foundation): validate Daily Giving backend runtime"
+    train_scope: foundation_daily_giving_backend_mvp
+    status: in_progress
+    scope:
+      - Produce a read-only post-deploy runtime validation report for the Foundation Daily Giving backend MVP.
+      - Verify public API route registration, runtime response shape, publication gates, privacy boundary, and known OPS sidecars.
+      - Confirm no production mutation, CMS mutation, deploy, Search Channel action, URL submission, external API call, credential handling, or env/DNS/nginx edit is performed.
+    allowed_paths:
+      - backend/docs/seo/pr-fdn-02a-post-deploy-runtime-validation.md
+      - backend/docs/seo/generated/pr-fdn-02a-post-deploy-runtime-validation.v1.json
+      - backend/tests/Feature/Foundation/PrFdn02aPostDeployRuntimeValidationTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Mutate production data or CMS records.
+      - Deploy, submit URLs, enqueue Search Channel, or call external search/social APIs.
+      - Handle credentials or edit env, DNS, or nginx.
+    validation:
+      - cd backend && php artisan test --filter=PrFdn02aPostDeployRuntimeValidation --no-ansi
+      - cd backend && php artisan route:list --path=foundation --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Feature/Foundation/PrFdn02aPostDeployRuntimeValidationTest.php
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/pr-fdn-02a-post-deploy-runtime-validation.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    next_task: PR-FDN-02B-POST-DEPLOY-RUNTIME-SMOKE
+
   - id: PR-FDN-SOCIAL-SYNC-MVP-01
     repo: fap-api
     depends_on: [PR-FDN-SOCIAL-SYNC-READINESS]
