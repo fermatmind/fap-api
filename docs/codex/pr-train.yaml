@@ -16729,6 +16729,54 @@ prs:
     frontend_fallback_authority: false
     next_task: ANALYTICS-PAYMENT-UNLOCK-ATTRIBUTION-REPAIR-01B
 
+  - id: ANALYTICS-FUNNEL-REPORT-READY-PROJECTION-MAPPING-02
+    repo: fap-api
+    branch: codex/analytics-funnel-report-ready-projection-mapping-02
+    base: main
+    title: "ANALYTICS-FUNNEL-REPORT-READY-PROJECTION-MAPPING-02 map report_ready to projection truth"
+    train_scope: analytics_funnel_report_ready_projection_mapping
+    risk_level: p1_analytics_funnel_observability
+    depends_on:
+      - ANALYTICS-FUNNEL-CONTROLLED-REFRESH-WRITE-GUARD-01
+    allowed_paths:
+      - backend/app/Services/Analytics/AnalyticsFunnelDailyBuilder.php
+      - backend/tests/Feature/Analytics/AnalyticsFunnelDailyBuilderTest.php
+      - backend/tests/Feature/Analytics/RefreshAnalyticsFunnelDailyCommandTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Map analytics_funnel_daily report_ready_attempts to the current paid report access truth from active benefit grants, ready unified access projections, attempt receipts, attempts, and results.
+      - Preserve existing ready report snapshot support and avoid duplicate attempt counting across ready sources.
+      - Preserve org/date/scale/locale scoping through attempt-led analytics rows.
+      - Do not change payment_success or report_unlock semantics.
+      - Do not run analytics refresh, mutate production DB, repair payments, create benefit grants, call payment providers, deploy, mutate CMS, change GA/Baidu settings, enqueue Search Channel, or submit URLs.
+    validation:
+      - cd backend && php artisan test --filter=AnalyticsFunnelDailyBuilder --no-ansi
+      - cd backend && php artisan test --filter=RefreshAnalyticsFunnelDailyCommand --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    payment_repair_allowed: false
+    payment_provider_call: false
+    analytics_refresh_allowed: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: BACKEND-DEPLOY-READINESS for ANALYTICS-FUNNEL-REPORT-READY-PROJECTION-MAPPING-02
+
 
   - id: CONTENT-PACKS-INDEX-ARTIFACT-01
     repo: fap-api

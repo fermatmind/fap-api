@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-01T06:19:00Z",
+  "updated_at": "2026-06-01T13:33:00Z",
   "items": {
     "PR-EQ-PER-01": {
       "repo": "fap-api",
@@ -24026,6 +24026,74 @@
       "transitions": [],
       "sidecars": [],
       "next_task": "CLINICAL-MH-LAUNCH-TRAIN-CLOSEOUT"
+    },
+    "ANALYTICS-FUNNEL-REPORT-READY-PROJECTION-MAPPING-02": {
+      "repo": "fap-api",
+      "branch": "codex/analytics-funnel-report-ready-projection-mapping-02",
+      "status": "pr_open_checks_pending",
+      "depends_on": [
+        "ANALYTICS-FUNNEL-CONTROLLED-REFRESH-WRITE-GUARD-01"
+      ],
+      "commit_sha": "pending_remote_pr_head",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1842",
+      "checks": {
+        "manifest_registration": {
+          "status": "pass",
+          "evidence": "User explicitly authorized adding ANALYTICS-FUNNEL-REPORT-READY-PROJECTION-MAPPING-02 to fap-api docs/codex/pr-train.yaml and docs/codex/pr-train-state.json."
+        },
+        "workspace_safety": {
+          "status": "pass",
+          "evidence": "Implementation is isolated in /private/tmp/fap-api-analytics-funnel-report-ready-projection-mapping-02; the dirty primary fap-api worktree is not used."
+        },
+        "scope_boundaries": {
+          "status": "pass",
+          "evidence": "Changed files are limited to AnalyticsFunnelDailyBuilder, focused analytics tests, and PR train metadata. No production DB mutation, analytics refresh, payment repair, benefit grant creation, payment provider call, CMS mutation, GA/Baidu setting change, Search Channel action, URL submission, deploy, or fap-web change was performed."
+        },
+        "analytics_builder": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=AnalyticsFunnelDailyBuilder --no-ansi",
+          "evidence": "PASS with existing PHPUnit warnings: 6 tests, 39 assertions."
+        },
+        "refresh_command": {
+          "status": "pass",
+          "command": "cd backend && php artisan test --filter=RefreshAnalyticsFunnelDailyCommand --no-ansi",
+          "evidence": "PASS with existing PHPUnit warnings: 2 tests, 18 assertions."
+        },
+        "route_list": {
+          "status": "pass",
+          "command": "cd backend && php artisan route:list --no-ansi",
+          "evidence": "Route list rendered successfully with 210 routes."
+        },
+        "scoped_pint": {
+          "status": "pass",
+          "command": "cd backend && vendor/bin/pint --test app/Services/Analytics/AnalyticsFunnelDailyBuilder.php tests/Feature/Analytics/AnalyticsFunnelDailyBuilderTest.php tests/Feature/Analytics/RefreshAnalyticsFunnelDailyCommandTest.php",
+          "evidence": "Scoped Pint passed for the three PHP files touched by this PR."
+        },
+        "full_pint": {
+          "status": "sidecar_external_failure",
+          "command": "cd backend && vendor/bin/pint --test",
+          "evidence": "Full Pint still reports pre-existing out-of-scope new_with_parentheses style issues in tests/Unit/Eq/EqSjtValidationTelemetryContractTest.php and tests/Unit/Report/EqIntegratedReportComposerTest.php. Current PR does not touch those files."
+        },
+        "composer_validate": {
+          "status": "pass",
+          "command": "cd backend && composer validate --strict",
+          "evidence": "composer.json is valid."
+        },
+        "composer_audit": {
+          "status": "pass",
+          "command": "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+          "evidence": "No security vulnerability advisories found."
+        },
+        "json_yaml_diff": {
+          "status": "pass",
+          "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\" && git diff --check",
+          "evidence": "State JSON parsed, train YAML parsed, and unstaged diff whitespace check passed."
+        }
+      },
+      "failure_reason": "Sidecar only: full Pint reports pre-existing out-of-scope EQ test formatting issues; scoped current PR files and required focused analytics checks passed locally.",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
     }
   },
   "SEO-DASH-PROD-03D-FIX": {
@@ -39001,5 +39069,128 @@
         "summary": "Opened PR #1835; GitHub checks passed and mergeStateStatus is CLEAN."
       }
     ]
+  },
+  "ANALYTICS-FUNNEL-REPORT-READY-PROJECTION-MAPPING-02": {
+    "id": "ANALYTICS-FUNNEL-REPORT-READY-PROJECTION-MAPPING-02",
+    "repo": "fap-api",
+    "branch": "codex/analytics-funnel-report-ready-projection-mapping-02",
+    "base": "main",
+    "title": "ANALYTICS-FUNNEL-REPORT-READY-PROJECTION-MAPPING-02 map report_ready to projection truth",
+    "status": "pr_open_checks_pending",
+    "depends_on": [
+      "ANALYTICS-FUNNEL-CONTROLLED-REFRESH-WRITE-GUARD-01"
+    ],
+    "commit_sha": "pending_remote_pr_head",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1842",
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding ANALYTICS-FUNNEL-REPORT-READY-PROJECTION-MAPPING-02 to fap-api docs/codex/pr-train.yaml and docs/codex/pr-train-state.json."
+      },
+      "workspace_safety": {
+        "status": "pass",
+        "evidence": "Implementation is isolated in /private/tmp/fap-api-analytics-funnel-report-ready-projection-mapping-02; the dirty primary fap-api worktree is not used."
+      },
+      "scope_boundaries": {
+        "status": "pass",
+        "evidence": "Changed files are limited to AnalyticsFunnelDailyBuilder, focused analytics tests, and PR train metadata. No production DB mutation, analytics refresh, payment repair, benefit grant creation, payment provider call, CMS mutation, GA/Baidu setting change, Search Channel action, URL submission, deploy, or fap-web change was performed."
+      },
+      "analytics_builder": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=AnalyticsFunnelDailyBuilder --no-ansi",
+        "evidence": "PASS with existing PHPUnit warnings: 6 tests, 39 assertions."
+      },
+      "refresh_command": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=RefreshAnalyticsFunnelDailyCommand --no-ansi",
+        "evidence": "PASS with existing PHPUnit warnings: 2 tests, 18 assertions."
+      },
+      "route_list": {
+        "status": "pass",
+        "command": "cd backend && php artisan route:list --no-ansi",
+        "evidence": "Route list rendered successfully with 210 routes."
+      },
+      "scoped_pint": {
+        "status": "pass",
+        "command": "cd backend && vendor/bin/pint --test app/Services/Analytics/AnalyticsFunnelDailyBuilder.php tests/Feature/Analytics/AnalyticsFunnelDailyBuilderTest.php tests/Feature/Analytics/RefreshAnalyticsFunnelDailyCommandTest.php",
+        "evidence": "Scoped Pint passed for the three PHP files touched by this PR."
+      },
+      "full_pint": {
+        "status": "sidecar_external_failure",
+        "command": "cd backend && vendor/bin/pint --test",
+        "evidence": "Full Pint still reports pre-existing out-of-scope new_with_parentheses style issues in tests/Unit/Eq/EqSjtValidationTelemetryContractTest.php and tests/Unit/Report/EqIntegratedReportComposerTest.php. Current PR does not touch those files."
+      },
+      "composer_validate": {
+        "status": "pass",
+        "command": "cd backend && composer validate --strict",
+        "evidence": "composer.json is valid."
+      },
+      "composer_audit": {
+        "status": "pass",
+        "command": "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+        "evidence": "No security vulnerability advisories found."
+      },
+      "json_yaml_diff": {
+        "status": "pass",
+        "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\" && git diff --check",
+        "evidence": "State JSON parsed, train YAML parsed, and unstaged diff whitespace check passed."
+      }
+    },
+    "failure_reason": "Sidecar only: full Pint reports pre-existing out-of-scope EQ test formatting issues; scoped current PR files and required focused analytics checks passed locally.",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-06-01T12:46:21Z",
+        "from": "authorized",
+        "to": "implementation_in_progress",
+        "note": "Started scoped analytics funnel report_ready projection mapping PR from latest origin/main in an isolated worktree."
+      },
+      {
+        "at": "2026-06-01T13:18:00Z",
+        "from": "implementation_in_progress",
+        "to": "local_checks_passed_with_sidecar",
+        "note": "Focused analytics tests, route:list, scoped Pint, composer validate/audit, JSON/YAML parsing, and diff checks passed. Full Pint sidecar remains out-of-scope in EQ tests."
+      },
+      {
+        "at": "2026-06-01T13:23:00Z",
+        "from": "local_checks_passed_with_sidecar",
+        "to": "committed_pending_pr",
+        "note": "Committed scoped implementation locally at cf3d6daf7413f38b67f6bfd872e3e65d5959aade."
+      },
+      {
+        "at": "2026-06-01T13:26:00Z",
+        "from": "committed_pending_pr",
+        "to": "commit_sha_pending_remote_head",
+        "note": "Set ledger commit_sha to pending_remote_pr_head to avoid amend hash churn before PR creation."
+      },
+      {
+        "at": "2026-06-01T13:33:00Z",
+        "from": "commit_sha_pending_remote_head",
+        "to": "pr_open_checks_pending",
+        "note": "Opened GitHub PR #1842 after scoped local validation passed with an external full-Pint sidecar."
+      }
+    ],
+    "sidecars": [
+      {
+        "id": "out_of_scope_eq_pint_new_with_parentheses",
+        "status": "open_external_sidecar",
+        "summary": "Full vendor/bin/pint --test reports pre-existing new_with_parentheses style issues in EQ unit tests outside this analytics funnel scope.",
+        "files": [
+          "backend/tests/Unit/Eq/EqSjtValidationTelemetryContractTest.php",
+          "backend/tests/Unit/Report/EqIntegratedReportComposerTest.php"
+        ],
+        "impact_on_current_pr": "No runtime or read-model impact; scoped Pint and focused analytics tests pass.",
+        "follow_up_recommendation": "Resolve in a separate scoped EQ Pint cleanup PR."
+      }
+    ],
+    "next_task": "BACKEND-DEPLOY-READINESS for ANALYTICS-FUNNEL-REPORT-READY-PROJECTION-MAPPING-02"
   }
 }
