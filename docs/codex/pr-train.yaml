@@ -18140,6 +18140,54 @@ prs:
     frontend_fallback_authority: false
     next_task: null
 
+  - id: OPS-API-INTERNAL-RESOLVE-PROOF
+    repo: fap-api
+    depends_on: []
+    branch: codex/ops-api-internal-resolve-proof
+    base: main
+    title: "OPS-API-INTERNAL-RESOLVE-PROOF Node1 API access stability proof"
+    train_scope: ops_api_internal_resolve_proof
+    risk_level: p2_read_only_ops_proof
+    allowed_paths:
+      - backend/docs/seo/ops-api-internal-resolve-proof.md
+      - backend/docs/seo/generated/ops-api-internal-resolve-proof.v1.json
+      - backend/tests/Feature/SeoIntel/OpsApiInternalResolveProofTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Produce a read-only internal API access proof for Node1/fap-web to api.fermatmind.com.
+      - Verify Node1 direct DNS/HTTPS, Node1 Node.js HTTPS, apex same-origin API, Node2, and API host read paths.
+      - Record old forced-resolve path and PM2 restart count observations as sidecars without mutating infrastructure.
+    do_not:
+      - Mutate production data, CMS records, Search Channel queues, or URL submission state.
+      - Deploy backend or frontend.
+      - Edit env, DNS, nginx, certificates, edge bindings, or security groups.
+      - Restart services or read raw logs.
+    validation:
+      - cd backend && php artisan test --filter=OpsApiInternalResolveProof --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Feature/SeoIntel/OpsApiInternalResolveProofTest.php
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/ops-api-internal-resolve-proof.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    broad_pseo_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: LEGACY-SEO-RECONCILIATION-SCAN
+
   - id: CAREER-1046-INTERNAL-LINKING-AUTHORITY-01
     repo: fap-api
     depends_on:
