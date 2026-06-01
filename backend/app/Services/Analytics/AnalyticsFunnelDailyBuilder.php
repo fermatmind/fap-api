@@ -708,7 +708,7 @@ final class AnalyticsFunnelDailyBuilder
         $map = $this->collectReportSnapshotReadyMap($from, $to, $orgIds);
 
         foreach ($this->collectProjectionAccessReadyMap($from, $to, $orgIds) as $attemptId => $stageAt) {
-            $map[$attemptId] = $this->minTimestamp($map[$attemptId] ?? null, $stageAt);
+            $map[$attemptId] = $stageAt;
         }
 
         ksort($map);
