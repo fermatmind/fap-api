@@ -1,0 +1,127 @@
+{
+  "schema_version": "pr-fdn-02a-post-deploy-runtime-validation.v1",
+  "task": "PR-FDN-02A-POST-DEPLOY-RUNTIME-VALIDATION",
+  "final_decision": "pr_fdn_02a_post_deploy_runtime_validation_completed_with_ops_sidecar",
+  "validated_at": "2026-06-01T04:27:53Z",
+  "backend_mvp_pr": {
+    "number": 1758,
+    "title": "PR-FDN-02A: Add daily giving ledger backend MVP",
+    "merge_commit": "dc51d31168027a105b644da5e6e85338cbbb4277",
+    "merged_at": "2026-05-30T02:10:57Z",
+    "github_checks": "success"
+  },
+  "route_contract": {
+    "registered": true,
+    "routes": [
+      "GET /api/v0.5/foundation/giving-records",
+      "GET /api/v0.5/foundation/giving-records/{recordCode}",
+      "GET /api/v0.5/foundation/giving-records/months",
+      "GET /api/v0.5/foundation/giving-records/months/{yearMonth}"
+    ]
+  },
+  "runtime_state": {
+    "direct_api_node_https": {
+      "records_endpoint": {
+        "status": 200,
+        "content_type": "application/json",
+        "keys": [
+          "ok",
+          "items",
+          "pagination"
+        ],
+        "item_count": 0
+      },
+      "months_endpoint": {
+        "status": 200,
+        "content_type": "application/json",
+        "keys": [
+          "ok",
+          "months"
+        ],
+        "month_count": 0
+      }
+    },
+    "direct_api_curl": {
+      "status": "ops_sidecar_ssl_error_syscall",
+      "http_code": "000",
+      "ssl_verify_result": 1
+    },
+    "apex_same_origin": {
+      "records_endpoint": {
+        "status": 200,
+        "content_type": "application/json",
+        "keys": [
+          "ok",
+          "items",
+          "pagination"
+        ],
+        "item_count": 0,
+        "pagination_total": 0
+      },
+      "months_endpoint": {
+        "status": 200,
+        "content_type": "application/json",
+        "keys": [
+          "ok",
+          "months"
+        ],
+        "month_count": 0
+      }
+    },
+    "www_same_origin": {
+      "records_endpoint": {
+        "status": 200,
+        "after_redirect": true
+      }
+    }
+  },
+  "api_contract_state": {
+    "list_shape": [
+      "ok",
+      "items",
+      "pagination"
+    ],
+    "months_shape": [
+      "ok",
+      "months"
+    ],
+    "current_public_record_count": 0,
+    "current_public_month_count": 0,
+    "empty_public_ledger_response_expected": true
+  },
+  "privacy_boundary_state": {
+    "private_fields_excluded_by_contract": true,
+    "private_fields": [
+      "proof_private_path",
+      "receipt_reference_private",
+      "internal_notes",
+      "proof_redaction_notes",
+      "created_by_admin_user_id",
+      "updated_by_admin_user_id"
+    ],
+    "live_payload_private_field_check": "not_applicable_empty_public_items",
+    "source_and_focused_tests_verify_boundary": true
+  },
+  "publication_gate_state": {
+    "published_public_scope_present": true,
+    "planned_records_excluded": true,
+    "voided_records_excluded": true,
+    "non_public_records_excluded": true
+  },
+  "sidecars": [
+    {
+      "id": "api_direct_curl_tls_reset",
+      "status": "open",
+      "description": "Direct macOS curl to api.fermatmind.com returns LibreSSL SSL_ERROR_SYSCALL, while Node HTTPS and apex same-origin reads return HTTP 200."
+    }
+  ],
+  "no_production_mutation": true,
+  "no_cms_mutation": true,
+  "no_deploy": true,
+  "no_search_channel_action": true,
+  "no_url_submission": true,
+  "no_external_api_call": true,
+  "no_credentials_handled": true,
+  "no_env_dns_nginx_edit": true,
+  "next_task": "PR-FDN-02B-POST-DEPLOY-RUNTIME-SMOKE"
+}
