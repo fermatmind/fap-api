@@ -39319,5 +39319,210 @@
       }
     ],
     "next_task": "BACKEND-DEPLOY-READINESS for ANALYTICS-FUNNEL-REPORT-READY-MERGE-TIMESTAMP-03"
+  },
+  "CAREER-LEGACY-FULL-JOBS-INDEX-CONSUMER-AUDIT-01": {
+    "id": "CAREER-LEGACY-FULL-JOBS-INDEX-CONSUMER-AUDIT-01",
+    "repo": "fap-api",
+    "branch": "codex/career-legacy-full-jobs-index-consumer-audit-01",
+    "base": "main",
+    "status": "pr_open_checks_pending",
+    "title": "CAREER-LEGACY-FULL-JOBS-INDEX-CONSUMER-AUDIT-01 legacy full jobs index consumer audit",
+    "depends_on": [],
+    "commit_sha": "pending_remote_pr_head",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1845",
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User explicitly authorized manifest/state updates for all eight PRs in the career 10k scale train."
+      },
+      "scope_boundaries": {
+        "status": "pass",
+        "evidence": "Current PR scope is report-only: docs/generated/test/state for legacy full jobs index consumer audit."
+      },
+      "php artisan test --filter=CareerLegacyFullJobsIndexConsumerAudit01 --no-ansi": {
+        "status": "pass",
+        "evidence": "Focused SeoIntel artifact test passed: 1 test, 30 assertions."
+      },
+      "php artisan route:list --no-ansi": {
+        "status": "pass",
+        "evidence": "Route list completed successfully with 210 routes; no route changes were made."
+      },
+      "vendor/bin/pint --test tests/Feature/SeoIntel/CareerLegacyFullJobsIndexConsumerAudit01Test.php": {
+        "status": "pass",
+        "evidence": "Scoped Pint passed for the only PHP file touched by this PR."
+      },
+      "vendor/bin/pint --test": {
+        "status": "sidecar_external_failure",
+        "evidence": "Full Pint reports pre-existing out-of-scope new_with_parentheses issues in tests/Unit/Eq/EqSjtValidationTelemetryContractTest.php and tests/Unit/Report/EqIntegratedReportComposerTest.php. Current PR does not touch those files; scoped Pint passed."
+      },
+      "composer validate --strict": {
+        "status": "pass",
+        "evidence": "composer.json is valid."
+      },
+      "composer audit --locked --no-interaction --ignore-unreachable": {
+        "status": "pass",
+        "evidence": "No security vulnerability advisories found."
+      },
+      "json_yaml_diff": {
+        "status": "pass",
+        "evidence": "Generated JSON, pr-train-state JSON, and pr-train YAML parse successfully; git diff --check passed."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to the current report, generated JSON, focused test, and train metadata."
+      }
+    },
+    "failure_reason": "Sidecar only: full Pint reports pre-existing out-of-scope EQ test formatting issues; current PR focused test, route:list, scoped Pint, composer validate/audit, JSON/YAML, and diff checks pass.",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-06-01T16:53:26Z",
+        "from": "authorized",
+        "to": "implementation_in_progress",
+        "note": "Started scoped report-only legacy full jobs index consumer audit."
+      },
+      {
+        "at": "2026-06-01T16:53:26Z",
+        "from": "implementation_in_progress",
+        "to": "local_checks_passed_with_sidecar",
+        "note": "Focused test, route:list, scoped Pint, composer validate/audit, JSON/YAML parsing, and diff checks passed. Full Pint sidecar remains out-of-scope in EQ tests."
+      },
+      {
+        "at": "2026-06-01T16:53:26Z",
+        "from": "local_checks_passed_with_sidecar",
+        "to": "committed_pending_pr",
+        "note": "Committed scoped report-only audit locally after validation passed with an external full-Pint sidecar."
+      },
+      {
+        "at": "2026-06-01T16:53:26Z",
+        "from": "committed_pending_pr",
+        "to": "pr_open_checks_pending",
+        "note": "Opened GitHub PR #1845 after scoped local validation passed with an external full-Pint sidecar."
+      }
+    ],
+    "sidecars": [
+      {
+        "id": "out_of_scope_eq_pint_new_with_parentheses",
+        "status": "open_external_sidecar",
+        "summary": "Full vendor/bin/pint --test reports pre-existing new_with_parentheses style issues in EQ unit tests outside this report-only career audit scope.",
+        "files": [
+          "backend/tests/Unit/Eq/EqSjtValidationTelemetryContractTest.php",
+          "backend/tests/Unit/Report/EqIntegratedReportComposerTest.php"
+        ],
+        "impact_on_current_pr": "No runtime, report, or audit impact; scoped Pint and focused artifact test pass.",
+        "follow_up_recommendation": "Resolve in a separate scoped EQ Pint cleanup PR."
+      }
+    ],
+    "next_task": "CAREER-DIRECTORY-AUTHORITY-DRIFT-GATE-01"
+  },
+  "CAREER-DIRECTORY-AUTHORITY-DRIFT-GATE-01": {
+    "id": "CAREER-DIRECTORY-AUTHORITY-DRIFT-GATE-01",
+    "repo": "fap-api",
+    "branch": "codex/career-directory-authority-drift-gate-01",
+    "base": "main",
+    "status": "planned",
+    "title": "CAREER-DIRECTORY-AUTHORITY-DRIFT-GATE-01 directory authority drift gate",
+    "depends_on": [
+      "CAREER-LEGACY-FULL-JOBS-INDEX-CONSUMER-AUDIT-01"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-06-01T16:53:26Z",
+        "from": "missing",
+        "to": "planned",
+        "note": "Initialized by user authorization for the career 10k scale train."
+      }
+    ],
+    "sidecars": [],
+    "next_task": "CAREER-LLMS-FULL-10K-BUDGET-GATE-01"
+  },
+  "CAREER-SEARCH-CHANNEL-READINESS-GATE-01": {
+    "id": "CAREER-SEARCH-CHANNEL-READINESS-GATE-01",
+    "repo": "fap-api",
+    "branch": "codex/career-search-channel-readiness-gate-01",
+    "base": "main",
+    "status": "planned",
+    "title": "CAREER-SEARCH-CHANNEL-READINESS-GATE-01 career Search Channel readiness gate",
+    "depends_on": [
+      "CAREER-DIRECTORY-AUTHORITY-DRIFT-GATE-01"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-06-01T16:53:26Z",
+        "from": "missing",
+        "to": "planned",
+        "note": "Initialized by user authorization for the career 10k scale train."
+      }
+    ],
+    "sidecars": [],
+    "next_task": "CAREER-10K-ROLLOUT-ARCHITECTURE-SPEC-01"
+  },
+  "CAREER-10K-ROLLOUT-ARCHITECTURE-SPEC-01": {
+    "id": "CAREER-10K-ROLLOUT-ARCHITECTURE-SPEC-01",
+    "repo": "fap-api",
+    "branch": "codex/career-10k-rollout-architecture-spec-01",
+    "base": "main",
+    "status": "planned",
+    "title": "CAREER-10K-ROLLOUT-ARCHITECTURE-SPEC-01 career 10k rollout architecture spec",
+    "depends_on": [
+      "CAREER-SEARCH-CHANNEL-READINESS-GATE-01"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "local_validation_passed": null,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-06-01T16:53:26Z",
+        "from": "missing",
+        "to": "planned",
+        "note": "Initialized by user authorization for the career 10k scale train."
+      }
+    ],
+    "sidecars": [],
+    "next_task": "none"
   }
 }
