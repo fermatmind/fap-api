@@ -35954,10 +35954,10 @@
     "branch": "codex/ops-api-internal-resolve-proof",
     "base": "main",
     "title": "OPS-API-INTERNAL-RESOLVE-PROOF Node1 API access stability proof",
-    "status": "local_checks_passed_with_sidecars",
+    "status": "pr_opened_with_sidecars",
     "depends_on": [],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "93556a55fbcf71aa998566eb4f276218cda48788",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1840",
     "checks": [
       {
         "command": "manifest/state authorization",
@@ -36034,6 +36034,11 @@
         "status": "local_checks_passed_with_sidecars",
         "at": "2026-06-01T20:29:00+08:00",
         "summary": "Focused test, route list, scoped Pint, composer validate, composer audit, JSON/YAML parsing, and diff checks passed. Old forced-resolve path and PM2 restart count remain recorded sidecars."
+      },
+      {
+        "status": "pr_opened_with_sidecars",
+        "at": "2026-06-01T20:33:00+08:00",
+        "summary": "Committed, pushed, and opened PR #1840 with sidecars recorded."
       }
     ],
     "scope_validation": {
