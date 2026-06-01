@@ -35595,7 +35595,7 @@
     "scope_validation": {
       "allowed_paths_only": true,
       "git_diff_check": "passed",
-      "git_diff_cached_check": null
+      "git_diff_cached_check": true
     },
     "sidecars": [
       "Primary fap-api worktree has unrelated dirty changes; this task uses an isolated worktree from origin/main."
@@ -35947,6 +35947,105 @@
       "Full Pint is blocked by pre-existing out-of-scope EQ style issues in tests/Unit/Eq/EqSjtValidationTelemetryContractTest.php and tests/Unit/Report/EqIntegratedReportComposerTest.php."
     ],
     "next_task": null
+  },
+  "OPS-API-INTERNAL-RESOLVE-PROOF": {
+    "id": "OPS-API-INTERNAL-RESOLVE-PROOF",
+    "repo": "fap-api",
+    "branch": "codex/ops-api-internal-resolve-proof",
+    "base": "main",
+    "title": "OPS-API-INTERNAL-RESOLVE-PROOF Node1 API access stability proof",
+    "status": "local_checks_passed_with_sidecars",
+    "depends_on": [],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": [
+      {
+        "command": "manifest/state authorization",
+        "status": "passed",
+        "summary": "User explicitly authorized updating fap-api docs/codex/pr-train.yaml and docs/codex/pr-train-state.json for OPS-API-INTERNAL-RESOLVE-PROOF."
+      },
+      {
+        "command": "read-only SSH and public HTTPS verification",
+        "status": "passed_with_sidecars",
+        "summary": "Node1 direct DNS/HTTPS, Node1 Node.js HTTPS, Node1 apex same-origin API, Node2 direct HTTPS, API host direct HTTPS, and local direct HTTPS returned stable 200 responses with matching body hashes. The old forced 198.18.14.180 path timed out and PM2 restart_time remains high; both are recorded as sidecars."
+      },
+      {
+        "command": "php artisan test --filter=OpsApiInternalResolveProof --no-ansi",
+        "status": "passed",
+        "summary": "PASS: 2 tests, 45 assertions."
+      },
+      {
+        "command": "php artisan route:list --no-ansi",
+        "status": "passed",
+        "summary": "PASS: route list rendered 210 routes."
+      },
+      {
+        "command": "vendor/bin/pint --test tests/Feature/SeoIntel/OpsApiInternalResolveProofTest.php",
+        "status": "passed",
+        "summary": "PASS: scoped Pint check passed for the focused test file."
+      },
+      {
+        "command": "composer validate --strict",
+        "status": "passed",
+        "summary": "PASS: composer.json is valid."
+      },
+      {
+        "command": "composer audit --locked --no-interaction --ignore-unreachable",
+        "status": "passed",
+        "summary": "PASS: no security vulnerability advisories found."
+      },
+      {
+        "command": "python3 -m json.tool backend/docs/seo/generated/ops-api-internal-resolve-proof.v1.json >/dev/null",
+        "status": "passed",
+        "summary": "PASS: generated JSON parses."
+      },
+      {
+        "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+        "status": "passed",
+        "summary": "PASS: PR train state JSON parses."
+      },
+      {
+        "command": "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+        "status": "passed",
+        "summary": "PASS: PR train manifest YAML parses."
+      },
+      {
+        "command": "git diff --check",
+        "status": "passed",
+        "summary": "PASS: no whitespace errors."
+      }
+    ],
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "status": "authorized",
+        "at": "2026-06-01T20:18:00+08:00",
+        "summary": "User authorized the read-only Node1/fap-web API access stability proof and fap-api PR train manifest/state updates."
+      },
+      {
+        "status": "in_progress",
+        "at": "2026-06-01T20:19:00+08:00",
+        "summary": "Created codex/ops-api-internal-resolve-proof from latest origin/main and started read-only SSH/API sampling."
+      },
+      {
+        "status": "local_checks_passed_with_sidecars",
+        "at": "2026-06-01T20:29:00+08:00",
+        "summary": "Focused test, route list, scoped Pint, composer validate, composer audit, JSON/YAML parsing, and diff checks passed. Old forced-resolve path and PM2 restart count remain recorded sidecars."
+      }
+    ],
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "git_diff_check": true,
+      "git_diff_cached_check": null
+    },
+    "sidecars": [
+      "Node1 forced resolve to api.fermatmind.com:443:198.18.14.180 timed out in 3/3 attempts; current stable route resolves to 49.235.131.248.",
+      "Node1 PM2 fap-web instances are online with unstable_restarts=0, but restart_time=188 remains high."
+    ],
+    "next_task": "LEGACY-SEO-RECONCILIATION-SCAN"
   },
   "PAYMENT-ALIPAY-PENDING-COMPENSATION-SCHEDULER-01": {
     "id": "PAYMENT-ALIPAY-PENDING-COMPENSATION-SCHEDULER-01",

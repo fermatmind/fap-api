@@ -1,0 +1,240 @@
+{
+  "schema_version": "ops-api-internal-resolve-proof.v1",
+  "task": "OPS-API-INTERNAL-RESOLVE-PROOF",
+  "final_decision": "ops_api_internal_resolve_proof_completed_with_sidecars",
+  "review_started_at": "2026-06-01T20:19:49+08:00",
+  "target_url": "https://api.fermatmind.com/api/v0.5/foundation/giving-records?locale=en",
+  "apex_same_origin_url": "https://fermatmind.com/api/v0.5/foundation/giving-records?locale=en",
+  "read_only_ssh_verification": true,
+  "node1_host": {
+    "ssh_alias": "fap-web-node1",
+    "hostname": "VM-4-7-ubuntu",
+    "role": "production fap-web Node1"
+  },
+  "node2_host": {
+    "ssh_alias": "fap-node2",
+    "hostname": "VM-4-14-ubuntu",
+    "role": "API edge observation node"
+  },
+  "api_host": {
+    "ssh_alias": "fap-api-prod",
+    "hostname": "iZuf644iq7ee8g87y6pi7wZ",
+    "role": "production backend API host"
+  },
+  "local_direct_check": {
+    "attempt_count": 1,
+    "success_count": 1,
+    "http_statuses": [
+      200
+    ],
+    "remote_ips": [
+      "198.18.0.106"
+    ],
+    "body_size_bytes": 92,
+    "body_sha256": "a2ed867b5370d429815f17789722880516b11c9627aecf9e4454f4f163a4dbd2"
+  },
+  "node1_direct_dns_check": {
+    "dns_resolution": [
+      "49.235.131.248 api.fermatmind.com"
+    ],
+    "attempt_count": 5,
+    "success_count": 5,
+    "http_statuses": [
+      200,
+      200,
+      200,
+      200,
+      200
+    ],
+    "remote_ips": [
+      "49.235.131.248"
+    ],
+    "time_total_seconds": [
+      0.174924,
+      0.173686,
+      0.260438,
+      0.17278,
+      0.178776
+    ],
+    "body_size_bytes": 92,
+    "body_sha256_counts": {
+      "a2ed867b5370d429815f17789722880516b11c9627aecf9e4454f4f163a4dbd2": 5
+    },
+    "stable": true
+  },
+  "node1_node_https_check": {
+    "attempt_count": 5,
+    "success_count": 5,
+    "http_statuses": [
+      200,
+      200,
+      200,
+      200,
+      200
+    ],
+    "time_ms": [
+      192,
+      150,
+      181,
+      170,
+      256
+    ],
+    "body_size_bytes": 92,
+    "body_sha256_counts": {
+      "a2ed867b5370d429815f17789722880516b11c9627aecf9e4454f4f163a4dbd2": 5
+    },
+    "stable": true
+  },
+  "node1_apex_same_origin_check": {
+    "attempt_count": 3,
+    "success_count": 3,
+    "http_statuses": [
+      200,
+      200,
+      200
+    ],
+    "remote_ips": [
+      "49.235.131.248"
+    ],
+    "time_total_seconds": [
+      0.284091,
+      0.237751,
+      0.263454
+    ],
+    "body_size_bytes": 92,
+    "body_sha256_counts": {
+      "a2ed867b5370d429815f17789722880516b11c9627aecf9e4454f4f163a4dbd2": 3
+    },
+    "stable": true
+  },
+  "node1_resolve_current_public_entry_check": {
+    "forced_resolve": "api.fermatmind.com:443:49.235.131.248",
+    "attempt_count": 5,
+    "success_count": 5,
+    "http_statuses": [
+      200,
+      200,
+      200,
+      200,
+      200
+    ],
+    "remote_ips": [
+      "49.235.131.248"
+    ],
+    "time_total_seconds": [
+      0.201811,
+      0.172892,
+      0.171469,
+      0.172978,
+      0.217619
+    ],
+    "body_size_bytes": 92,
+    "body_sha256_counts": {
+      "a2ed867b5370d429815f17789722880516b11c9627aecf9e4454f4f163a4dbd2": 5
+    },
+    "stable": true
+  },
+  "node2_direct_check": {
+    "attempt_count": 5,
+    "success_count": 5,
+    "http_statuses": [
+      200,
+      200,
+      200,
+      200,
+      200
+    ],
+    "remote_ips": [
+      "49.235.131.248"
+    ],
+    "time_total_seconds": [
+      0.222158,
+      0.169005,
+      0.21628,
+      0.17003,
+      0.165135
+    ],
+    "body_size_bytes": 92,
+    "body_sha256_counts": {
+      "a2ed867b5370d429815f17789722880516b11c9627aecf9e4454f4f163a4dbd2": 5
+    },
+    "stable": true
+  },
+  "api_host_direct_check": {
+    "attempt_count": 3,
+    "success_count": 3,
+    "http_statuses": [
+      200,
+      200,
+      200
+    ],
+    "remote_ips": [
+      "49.235.131.248"
+    ],
+    "time_total_seconds": [
+      0.24501,
+      0.191889,
+      0.203366
+    ],
+    "body_size_bytes": 92,
+    "body_sha256_counts": {
+      "a2ed867b5370d429815f17789722880516b11c9627aecf9e4454f4f163a4dbd2": 3
+    },
+    "stable": true
+  },
+  "legacy_internal_resolve_sidecar": {
+    "forced_resolve": "api.fermatmind.com:443:198.18.14.180",
+    "attempt_count": 3,
+    "success_count": 0,
+    "result": "timeout",
+    "curl_statuses": [
+      "000",
+      "000",
+      "000"
+    ],
+    "stable": false,
+    "recommendation": "Do not use the old forced 198.18.14.180 path as the current fap-web API access path until a separate OPS task proves or repairs it."
+  },
+  "pm2_sidecar": {
+    "fap_web_instances": 4,
+    "statuses": [
+      "online",
+      "online",
+      "online",
+      "online"
+    ],
+    "restart_time_per_instance": [
+      188,
+      188,
+      188,
+      188
+    ],
+    "unstable_restarts_per_instance": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "observation": "All fap-web PM2 instances are online with unstable_restarts=0, but restart_time=188 remains high and should stay recorded as an operational sidecar."
+  },
+  "proof_summary": {
+    "node1_fap_web_to_api_current_path_stable": true,
+    "node1_node_https_runtime_stable": true,
+    "apex_same_origin_api_stable_from_node1": true,
+    "node2_api_path_stable": true,
+    "legacy_198_18_14_180_forced_path_stable": false,
+    "response_hash_consistent_across_successful_checks": true
+  },
+  "safety_boundaries": {
+    "no_production_mutation": true,
+    "no_deploy": true,
+    "no_cms_mutation": true,
+    "no_search_channel_action": true,
+    "no_url_submission": true,
+    "no_external_search_api_call": true,
+    "no_env_dns_nginx_edit": true,
+    "no_service_restart": true,
+    "no_raw_log_access": true
+  },
+  "next_task": "LEGACY-SEO-RECONCILIATION-SCAN"
+}
