@@ -457,3 +457,98 @@ Reason:
 - commerce contract is not yet IQ-specific
 - SVG provenance is not production-safe
 - frontend source authority is missing from this repo
+
+## H. 2026-05 IQ Train Technical Closeout
+
+Date window: 2026-05-12 through 2026-06-01.
+
+This section is the consolidated IQ technical summary for the recent frontend/backend PR train. It supersedes separate one-off summaries: the canonical IQ technical document for this train is this backend product foundation plan.
+
+### H.1 Shipped PR train summary
+
+| Phase | Key PRs | Technical outcome |
+| --- | --- | --- |
+| Frontend scan and train registration | fap-web #763, #764 | Audited IQ routes, API reuse, SVG renderer readiness, result/report gaps, deferred commerce boundaries, and PR split. |
+| Frontend API and identity contracts | fap-web #766 | Added canonical IQ constants, typed IQ API adapters, and explicit compatibility between `IQ_INTELLIGENCE_QUOTIENT` and legacy `IQ_RAVEN`. |
+| Structured question rendering | fap-web #767 | Formalized structured SVG rendering through native SVG elements and typed renderer helpers. Raw SVG string rendering remains unsupported. |
+| Take-page lifecycle | fap-web #768 | Wired IQ take flow around shared attempt start, submit, result redirect, and localized route behavior. |
+| Result rendering | fap-web #769, #869 | Added IQ summary and three-dimension rendering, then hardened dimension array/null handling. |
+| Report shell and deferred commerce | fap-web #771, #773 | Added IQ report module shell, locked/deferred-commerce-safe states, mobile layout polish, accessible loading states, and explicit non-inferential empty/error states. |
+| Generic take locale hardening | fap-web #919 | Fixed generic scale take request locale propagation, reducing cross-locale drift risk for IQ and other tests. |
+| Train registration and reconciliation | fap-web #932, #937, #948, #949 | Reconciled IQ launch train state, final release ledger, and closeout. |
+| Original 30-item bank and scoring foundation | fap-api #1782, #1787, #1788, #1789 | Defined the original 30-item beta bank specification, generated structured SVG item data, added provenance/redaction gates, and hardened scoring quality/stability. |
+| Claim and SEO launch guard | fap-web #935 | Added IQ claim safety guards for SEO exposure. Official IQ, certified IQ, diagnostic IQ, population percentile, and equivalent Chinese claims remain blocked unless backend authority allows them. |
+| CMS landing authority | fap-api #1790 | Kept IQ landing placement and metadata backend/CMS-authoritative instead of frontend editorial fallback content. |
+| Production-like smoke | fap-web #936, #947 | Added launch readiness smoke and authenticated operator fixture gates. Defaults remain plan-only unless explicit operator env and mutation approval are supplied. |
+| Norm and calibration authority | fap-api #1799, #1802, #1810 | Established backend-only norm authority, dry-run importer validation, and public claim eligibility gates for score/percentile exposure. |
+| Paid report entitlement | fap-api #1812, fap-web #943 | Backend owns entitlement contract. Frontend renders locked/full entitlement states from API payloads without becoming payment authority. |
+| CMS media authority | fap-api #1817, fap-web #944 | Backend owns IQ media metadata. Frontend renders CMS media references and avoids public static media fallbacks. |
+| SEO ramp authority | fap-api #1821, fap-web #946 | SEO ramp is gated by backend `iq_ramp_authority`, claim policy, norm authority, and media authority. Sitemap, llms, llms-full, and JSON-LD exposure cannot expand from frontend-only logic. |
+| Observability guardrails | fap-api #1823 | Added aggregate production guards for completion, norm miss, entitlement miss, scoring anomaly, and version drift without logging answer keys, answers, tokens, or paid private fields. |
+| Backend deployment closeout | fap-api #1828 | Closed the backend release state needed by the web release ledger and production readiness checks. |
+
+### H.2 Current technical baseline
+
+| Area | Current position |
+| --- | --- |
+| Public IA | Canonical public slug remains `/tests/iq-test-intelligence-quotient-assessment` with localized `/en` and `/zh` routes. |
+| Runtime identity | `IQ_INTELLIGENCE_QUOTIENT` is the formal identity; `IQ_RAVEN` remains compatibility/legacy-only. |
+| Question bank | `IQ_BETA_30_ORIGINAL` is FermatMind-original structured SVG content. Third-party IQ item replication remains forbidden. |
+| MyIQ.Science boundary | MyIQ.Science or similar sources require a license verification gate before any use. No question, explanation, wording, or structure may be copied into production without that gate. |
+| Frontend rendering | Frontend can render structured SVG IQ stems/options, the take flow, summary metrics, dimension cards, locked/full report states, and mobile-safe loading/error states. |
+| Scoring and claims | Backend remains source of truth for score, norm, percentile, confidence, claim eligibility, and report entitlement. Frontend must not infer or upgrade score claims. |
+| CMS and media | IQ landing placement, editorial metadata, SEO fields, media references, and publication state remain backend/CMS-owned. Frontend must not add static editorial or public image fallbacks. |
+| SEO/GEO exposure | IQ sitemap/llms/JSON-LD exposure remains gated by backend authority fields and claim safety. |
+| Commerce | IQ commerce unlock remains deferred until backend commerce authority and stable unlock contract exist. |
+| Production smoke | Authenticated production smoke requires operator-supplied environment values and explicit mutation approval; repo defaults do not perform live mutations. |
+
+### H.3 Authority checklist after PR train
+
+| Gate | Required production position | Current status |
+| --- | --- | --- |
+| Norm authority | Norm authority remains backend-only. Frontend and CMS must not infer formal IQ estimates or population percentiles. | Satisfied by `IQ-NORM-01` through `IQ-NORM-03`; real production norm import remains separately gated. |
+| Claim policy | Public IQ estimate and percentile claims require backend claim-eligible norm authority. | Satisfied; SEO expansion remains gated. |
+| Question provenance | FermatMind original IQ item bank only. MyIQ.Science remains behind license verification gate before any use. | Satisfied; no third-party IQ question replication. |
+| Paid report | Entitlement is backend-defined; frontend only renders locked/full states from API payloads. | Satisfied for entitlement state rendering; checkout/unlock remains deferred. |
+| CMS media | Mutable marketing/editorial media must come from CMS media metadata. | Satisfied; no public static media fallback. |
+| SEO ramp | Sitemap, llms, llms-full, and JSON-LD exposure must not bypass backend claim policy, norm authority, or IQ ramp authority. | Satisfied; full expansion remains controlled by backend flags. |
+| Smoke safety | Authenticated live submit/result/report checks require operator-provided env variables. | Satisfied; CI/local default remains plan-only. |
+| Observability safety | Events may contain aggregate guard status only. | Satisfied; no answer keys, answer text, tokens, real user data, or paid report private fields. |
+
+### H.4 External sidecar incident
+
+| Incident | Status | Train impact |
+| --- | --- | --- |
+| `api.fermatmind.com` TLS/SNI reset on Web Node1 path | Registered as fap-web issue #955. API node health, apex `/api`, and public IQ pages remain healthy. | External cloud/network incident; not introduced by IQ PRs and does not block IQ train continuation while known-good apex `/api` path remains healthy. |
+
+## I. Next-Phase IQ Plan
+
+The next IQ train should not reopen the completed launch baseline. It should be split into focused PRs that preserve backend/CMS authority and expand production capability only when the controlling backend contract exists.
+
+### I.1 Paid report deepening
+
+| Workstream | Required authority | Notes |
+| --- | --- | --- |
+| Paid report content depth | fap-api report service and entitlement contract | Add deeper paid sections only from backend report payloads. Frontend renders sections but does not generate paid interpretation locally. |
+| PDF/certificate delivery | backend report file service | Must remain entitlement-gated and must not expose answer keys, raw answers, tokens, or private paid fields. |
+| Unlock UX | backend commerce authority plus stable frontend contract | Resume `IQ-FE-7` only after backend commerce unlock is merged. Until then, keep deferred-commerce-safe copy. |
+| Refund/support hooks | backend order/support authority | Frontend may link or render support state only from backend/public API fields. |
+
+### I.2 CMS media assets
+
+| Workstream | Required authority | Notes |
+| --- | --- | --- |
+| IQ landing imagery | CMS Media Library | Upload mutable marketing/editorial images to CMS media and reference them from CMS metadata. Do not add new public static image assets for publishable IQ content. |
+| Social preview variants | backend media metadata and SEO authority | OG/Twitter images should enumerate from CMS media variants, with missing media producing a safe empty/minimal state. |
+| Report visual assets | backend report/media contract | Product-code-only icons are allowed; mutable report illustrations must come from CMS/media metadata or backend report payloads. |
+| Asset validation | backend import/validation tooling | Enforce dimensions, MIME type, alt text, locale metadata, and publication state before SEO exposure. |
+
+### I.3 SEO ramp
+
+| Workstream | Required authority | Notes |
+| --- | --- | --- |
+| Sitemap expansion | backend `iq_ramp_authority` and `sitemap_eligible` | Add or expand IQ URLs only when backend flags, claim policy, norm authority, and media authority all pass. |
+| `llms.txt` / `llms-full.txt` | backend public enumeration | Do not enumerate IQ pages from frontend local content. |
+| JSON-LD exposure | backend `jsonld_eligible` and claim policy | SoftwareApplication or test schema must stay disabled if official score, percentile, diagnostic, or certification claims are not backend-approved. |
+| GEO/search snippets | CMS SEO metadata | Keep wording claim-safe: original reasoning practice, beta/internal validation, raw score, nullable IQ estimate only when backend marks it eligible. |
+| Monitoring | backend observability and web smoke | Track indexation, organic entry quality, norm miss, scoring anomaly, entitlement miss, and media fallback rate without logging private payloads. |
