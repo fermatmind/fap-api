@@ -39669,13 +39669,13 @@
     "repo": "fap-api",
     "branch": "codex/career-10k-rollout-architecture-spec-01",
     "base": "main",
-    "status": "implementation_in_progress",
+    "status": "pr_open",
     "title": "CAREER-10K-ROLLOUT-ARCHITECTURE-SPEC-01 career 10k rollout architecture spec",
     "depends_on": [
       "CAREER-SEARCH-CHANNEL-READINESS-GATE-01"
     ],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "8662cf8e92fce12fcc0095534472054252e6ec55",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1848",
     "checks": {
       "manifest_registration": {
         "status": "pass",
@@ -39742,6 +39742,12 @@
         "from": "planned",
         "to": "implementation_in_progress",
         "note": "Started backend-owned Career 10k rollout architecture specification PR."
+      },
+      {
+        "at": "2026-06-01T18:24:15Z",
+        "from": "implementation_in_progress",
+        "to": "pr_open",
+        "note": "Opened PR #1848 with Career 10k rollout architecture spec, generated artifact, focused test, handbook update, and ledger reconciliation."
       }
     ],
     "sidecars": [
