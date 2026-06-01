@@ -38508,7 +38508,7 @@
     "depends_on": [
       "ANALYTICS-FUNNEL-OPS-GLOBAL-SCOPE-ENTRY-01"
     ],
-    "commit_sha": null,
+    "commit_sha": "c7d8b38be1abdc982b4272c98b96fb49f6ea1364",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1844",
     "checks": {
       "manifest_registration": {
@@ -39557,21 +39557,64 @@
     "repo": "fap-api",
     "branch": "codex/career-search-channel-readiness-gate-01",
     "base": "main",
-    "status": "planned",
+    "status": "implementation_in_progress",
     "title": "CAREER-SEARCH-CHANNEL-READINESS-GATE-01 career Search Channel readiness gate",
     "depends_on": [
       "CAREER-DIRECTORY-AUTHORITY-DRIFT-GATE-01"
     ],
     "commit_sha": null,
     "pr_url": null,
-    "checks": {},
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User authorized all eight career 10k scale train entries; this fap-api entry exists in manifest/state."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "CAREER-DIRECTORY-AUTHORITY-DRIFT-GATE-01 is merged in fap-api main."
+      },
+      "scope_boundaries": {
+        "status": "pass",
+        "evidence": "Scope is limited to read-only Search Channel readiness report, generated JSON, focused SeoIntel test, and train metadata."
+      },
+      "focused_phpunit": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=CareerSearchChannelReadinessGate01 --no-ansi",
+        "evidence": "PASS, 1 test / 46 assertions."
+      },
+      "route_list": {
+        "status": "pass",
+        "command": "cd backend && php artisan route:list --no-ansi",
+        "evidence": "PASS, 210 routes."
+      },
+      "scoped_pint": {
+        "status": "pass",
+        "command": "cd backend && vendor/bin/pint --test tests/Feature/SeoIntel/CareerSearchChannelReadinessGate01Test.php",
+        "evidence": "PASS, focused PR test file is formatted."
+      },
+      "composer_validate": {
+        "status": "pass",
+        "command": "cd backend && composer validate --strict",
+        "evidence": "PASS."
+      },
+      "composer_audit": {
+        "status": "pass",
+        "command": "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+        "evidence": "PASS, no security vulnerability advisories found."
+      },
+      "json_yaml_diff": {
+        "status": "pass",
+        "command": "python3 -m json.tool backend/docs/seo/generated/career-search-channel-readiness-gate-01.v1.json >/dev/null && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\" && git diff --check",
+        "evidence": "PASS."
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "scope_validation": {
-      "allowed_paths_only": null,
-      "local_validation_passed": null,
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
       "github_checks_green": null,
       "post_merge_revalidated": null
     },
@@ -39581,9 +39624,32 @@
         "from": "missing",
         "to": "planned",
         "note": "Initialized by user authorization for the career 10k scale train."
+      },
+      {
+        "at": "2026-06-01T18:01:05Z",
+        "from": "planned",
+        "to": "implementation_in_progress",
+        "note": "Started read-only career Search Channel readiness gate."
       }
     ],
-    "sidecars": [],
+    "sidecars": [
+      {
+        "id": "career-search-channel-readiness-gate-01-full-pint-existing-eq-style",
+        "source_pr": "CAREER-SEARCH-CHANNEL-READINESS-GATE-01",
+        "repo": "fap-api",
+        "branch": "codex/career-search-channel-readiness-gate-01",
+        "command_or_check": "cd backend && vendor/bin/pint --test",
+        "evidence": "Full Pint reports existing new_with_parentheses style issues in backend/tests/Unit/Eq/EqSjtValidationTelemetryContractTest.php and backend/tests/Unit/Report/EqIntegratedReportComposerTest.php.",
+        "failure_summary": "Out-of-scope EQ unit test style failures in files not changed by this PR.",
+        "why_external_to_current_pr": "Current PR changes only career Search Channel readiness docs/generated artifact/focused SeoIntel test/train metadata; it does not touch EQ test files.",
+        "impact_on_current_pr": "Scoped Pint for the PR test file passes and scope validation is clean.",
+        "owner": "fap-api EQ test owner",
+        "follow_up_recommendation": "Run a separate scoped EQ Pint cleanup PR or fold the formatting cleanup into the owning EQ task.",
+        "required_checks_status": "pending GitHub checks",
+        "scope_validation_status": "passed",
+        "continue_train_decision": "continue if GitHub required checks are green"
+      }
+    ],
     "next_task": "CAREER-10K-ROLLOUT-ARCHITECTURE-SPEC-01"
   },
   "CAREER-10K-ROLLOUT-ARCHITECTURE-SPEC-01": {

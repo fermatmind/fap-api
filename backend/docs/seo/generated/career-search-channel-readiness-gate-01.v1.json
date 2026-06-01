@@ -1,0 +1,69 @@
+{
+  "schema_version": "career_search_channel_readiness_gate.v1",
+  "task": "CAREER-SEARCH-CHANNEL-READINESS-GATE-01",
+  "final_decision": "career_search_channel_readiness_gate_completed_hold_submission_ready_for_staged_plan",
+  "authority_source": "backend career directory/detail/sitemap/llms authority artifacts",
+  "search_channel_decision": "HOLD",
+  "public_detail_count": 1046,
+  "locales": [
+    "en",
+    "zh"
+  ],
+  "public_career_detail_url_count": 2092,
+  "sitemap_career_detail_url_count": 2092,
+  "llms_career_detail_url_count": 2092,
+  "llms_full_complete_career_detail_url_count": 2092,
+  "readiness_inputs": {
+    "directory_authority_aligned": true,
+    "sitemap_aligned": true,
+    "llms_aligned": true,
+    "llms_full_complete_artifact_aligned": true,
+    "robots_index_follow_expected": true,
+    "canonical_exact_expected": true,
+    "claim_boundary_review_required": true,
+    "claim_boundary_current_sample_state": "bounded_occupation_information_and_decision_support"
+  },
+  "held_slugs": [
+    "software-developers",
+    "digital-forensics-analysts",
+    "computer-occupations-all-other"
+  ],
+  "held_slug_absence": {
+    "runtime_detail": true,
+    "sitemap": true,
+    "llms": true,
+    "llms_full": true,
+    "search_channel_candidate_batch": true
+  },
+  "staged_rollout_proposal": {
+    "canary_size": 20,
+    "canary_shape": "10 EN + 10 ZH paired career detail URLs",
+    "observation_window_hours": 24,
+    "batch_1_size": 100,
+    "batch_expansion": "bounded daily batches only after canary remains stable",
+    "requires_explicit_future_approval": true
+  },
+  "stop_conditions": [
+    "held_slug_exposure",
+    "noindex_or_canonical_drift",
+    "search_channel_queue_anomaly",
+    "claim_boundary_regression",
+    "staging_contamination",
+    "external_search_api_failure"
+  ],
+  "safety_boundaries": {
+    "search_channel_enqueue_performed": false,
+    "live_submission_performed": false,
+    "url_submission_performed": false,
+    "external_search_api_call_performed": false,
+    "cms_mutation_performed": false,
+    "database_mutation_performed": false,
+    "runtime_promotion_performed": false,
+    "sitemap_mutation_performed": false,
+    "llms_mutation_performed": false,
+    "deploy_performed": false,
+    "fap_web_change_performed": false,
+    "held_slug_release_performed": false
+  },
+  "next_task": "CAREER-10K-ROLLOUT-ARCHITECTURE-SPEC-01"
+}
