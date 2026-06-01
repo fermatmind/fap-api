@@ -705,6 +705,23 @@ final class AnalyticsFunnelDailyBuilder
      */
     private function collectReportReadyMap(CarbonImmutable $from, CarbonImmutable $to, array $orgIds): array
     {
+        $map = $this->collectReportSnapshotReadyMap($from, $to, $orgIds);
+
+        foreach ($this->collectProjectionAccessReadyMap($from, $to, $orgIds) as $attemptId => $stageAt) {
+            $map[$attemptId] = $this->minTimestamp($map[$attemptId] ?? null, $stageAt);
+        }
+
+        ksort($map);
+
+        return $map;
+    }
+
+    /**
+     * @param  list<int>  $orgIds
+     * @return array<string,string>
+     */
+    private function collectReportSnapshotReadyMap(CarbonImmutable $from, CarbonImmutable $to, array $orgIds): array
+    {
         if (! SchemaBaseline::hasTable('report_snapshots')) {
             return [];
         }
@@ -743,6 +760,86 @@ final class AnalyticsFunnelDailyBuilder
             ]);
 
             if ($attemptId === '' || $stageAt === null) {
+                continue;
+            }
+
+            $map[$attemptId] = $this->minTimestamp($map[$attemptId] ?? null, $stageAt);
+        }
+
+        ksort($map);
+
+        return $map;
+    }
+
+    /**
+     * @param  list<int>  $orgIds
+     * @return array<string,string>
+     */
+    private function collectProjectionAccessReadyMap(CarbonImmutable $from, CarbonImmutable $to, array $orgIds): array
+    {
+        foreach (['attempts', 'benefit_grants', 'results', 'unified_access_projections', 'attempt_receipts'] as $table) {
+            if (! SchemaBaseline::hasTable($table)) {
+                return [];
+            }
+        }
+
+        if (! SchemaBaseline::hasColumn('benefit_grants', 'attempt_id')) {
+            return [];
+        }
+
+        $receiptAttempts = DB::table('attempt_receipts')
+            ->whereNotNull('attempt_id')
+            ->where('attempt_id', '!=', '')
+            ->select('attempt_id')
+            ->selectRaw('MIN(COALESCE(recorded_at, occurred_at, created_at, updated_at)) as receipt_at')
+            ->groupBy('attempt_id');
+
+        $query = DB::table('unified_access_projections')
+            ->join('attempts', 'attempts.id', '=', 'unified_access_projections.attempt_id')
+            ->join('benefit_grants', 'benefit_grants.attempt_id', '=', 'attempts.id')
+            ->join('results', 'results.attempt_id', '=', 'attempts.id')
+            ->joinSub($receiptAttempts, 'ready_receipts', function ($join): void {
+                $join->on('ready_receipts.attempt_id', '=', 'attempts.id');
+            })
+            ->whereRaw("lower(coalesce(unified_access_projections.access_state, '')) = ?", ['ready'])
+            ->whereRaw("lower(coalesce(unified_access_projections.report_state, '')) = ?", ['ready'])
+            ->whereRaw("lower(coalesce(benefit_grants.status, '')) = ?", ['active'])
+            ->whereNotNull('unified_access_projections.attempt_id')
+            ->where('unified_access_projections.attempt_id', '!=', '')
+            ->select('attempts.id as attempt_id')
+            ->selectRaw('MIN(benefit_grants.created_at) as grant_at')
+            ->selectRaw('MAX(COALESCE(unified_access_projections.refreshed_at, unified_access_projections.produced_at, unified_access_projections.updated_at, unified_access_projections.created_at)) as projection_at')
+            ->selectRaw('MIN(ready_receipts.receipt_at) as receipt_at')
+            ->selectRaw('MAX(COALESCE(results.computed_at, results.updated_at, results.created_at)) as result_at')
+            ->groupBy('attempts.id');
+
+        if (SchemaBaseline::hasColumn('benefit_grants', 'revoked_at')) {
+            $query->whereNull('benefit_grants.revoked_at');
+        }
+
+        if (SchemaBaseline::hasColumn('benefit_grants', 'expires_at')) {
+            $query->where(function (QueryBuilder $query): void {
+                $query->whereNull('benefit_grants.expires_at')
+                    ->orWhere('benefit_grants.expires_at', '>', now());
+            });
+        }
+
+        if ($orgIds !== []) {
+            $query->whereIn('attempts.org_id', $orgIds);
+        }
+
+        $map = [];
+
+        foreach ($query->get() as $row) {
+            $attemptId = trim((string) ($row->attempt_id ?? ''));
+            $stageAt = $this->maxTimestamp([
+                $row->grant_at ?? null,
+                $row->projection_at ?? null,
+                $row->receipt_at ?? null,
+                $row->result_at ?? null,
+            ]);
+
+            if ($attemptId === '' || $stageAt === null || ! $this->timestampBetween($stageAt, $from, $to)) {
                 continue;
             }
 
@@ -1169,6 +1266,13 @@ final class AnalyticsFunnelDailyBuilder
         return CarbonImmutable::parse($left)->lessThan(CarbonImmutable::parse($right));
     }
 
+    private function timestampBetween(string $timestamp, CarbonImmutable $from, CarbonImmutable $to): bool
+    {
+        $parsed = CarbonImmutable::parse($timestamp);
+
+        return $parsed->greaterThanOrEqualTo($from) && $parsed->lessThanOrEqualTo($to);
+    }
+
     /**
      * @param  list<string>  $eventAliases
      */
@@ -1322,5 +1426,27 @@ final class AnalyticsFunnelDailyBuilder
         return CarbonImmutable::parse($left)->lessThanOrEqualTo(CarbonImmutable::parse($right))
             ? $left
             : $right;
+    }
+
+    /**
+     * @param  array<int,mixed>  $candidates
+     */
+    private function maxTimestamp(array $candidates): ?string
+    {
+        $max = null;
+
+        foreach ($candidates as $candidate) {
+            $timestamp = $this->resolveTimestamp([$candidate]);
+
+            if ($timestamp === null) {
+                continue;
+            }
+
+            if ($max === null || $this->timestampBefore($max, $timestamp)) {
+                $max = $timestamp;
+            }
+        }
+
+        return $max;
     }
 }
