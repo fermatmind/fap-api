@@ -1,14 +1,14 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-02T11:20:10Z",
+  "updated_at": "2026-06-02T11:21:50Z",
   "items": {
     "SEO-CMS-CANARY-BE-01": {
       "repo": "fap-api",
       "branch": "codex/seo-cms-canary-be-01-hreflang-cta-surfaces",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "depends_on": [],
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "686c2799487b48d0b75f9de983f87c61884f9391",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1852",
       "checks": {
         "local": {
           "status": "passed",
@@ -47,6 +47,12 @@
           "from": "in_progress",
           "to": "local_checks_passed",
           "note": "Composer/phpunit config inspected; targeted Article public API, editorial package import, controlled publish dry-run, translation contract, scoped Pint, and git diff checks passed."
+        },
+        {
+          "at": "2026-06-02T11:21:50Z",
+          "from": "local_checks_passed",
+          "to": "pr_open",
+          "note": "Opened https://github.com/fermatmind/fap-api/pull/1852 for GitHub checks and merge review."
         }
       ],
       "sidecars": [],
