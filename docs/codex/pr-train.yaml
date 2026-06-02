@@ -19710,3 +19710,52 @@ prs:
     fap_web_commit_allowed: false
     frontend_fallback_authority: false
     next_task: SEO-CONTENT-P1-08 remains blocked unless this task returns GO and user separately authorizes draft-only execution
+
+  - id: SEO-CONTENT-CANARY-PACKAGE-01
+    repo: fap-api
+    depends_on:
+      - SEO-CMS-CANARY-DRAFT-VERIFY-01
+    branch: codex/seo-content-canary-package-01
+    title: "docs(content): add approved bilingual SEO canary CMS package"
+    train_scope: seo_cms_canary
+    scope:
+      - Package the user-approved GPT-5.5 Pro bilingual V2 canary content artifacts for controlled importer consumption.
+      - Preserve approved title, H1, SEO fields, body, FAQ, CTA labels, category, tags, and claim boundary content without Codex authorship or rewriting.
+      - Produce docs-only CMS-ready package artifacts and notes for future dry-run and draft-only validation.
+    allowed_paths:
+      - backend/docs/seo/canary-packages/**
+      - backend/docs/seo/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Execute SEO-CONTENT-P1-08.
+      - Run the controlled importer dry-run.
+      - Create CMS drafts, save CMS forms, publish, or call production write APIs.
+      - Generate or edit canary title, H1, meta, body, FAQ, CTA, or GPT content package prose.
+      - Modify runtime code, routes, migrations, tests, package files, sitemap runtime, analytics runtime, or frontend files.
+      - Submit sitemap, Baidu push, IndexNow, or any search-channel live action.
+    validation:
+      - python3 -m json.tool backend/docs/seo/canary-packages/mbti-vs-holland-career-choice.zh-CN.json >/dev/null
+      - python3 -m json.tool backend/docs/seo/canary-packages/mbti-vs-holland-code-career-choice.en.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - python3 -c "import json,pathlib,re; paths=[pathlib.Path('backend/docs/seo/canary-packages/mbti-vs-holland-career-choice.zh-CN.json'),pathlib.Path('backend/docs/seo/canary-packages/mbti-vs-holland-code-career-choice.en.json')]; data=[json.loads(p.read_text()) for p in paths]; forbidden=re.compile(r'(result|orders|share|pay|payment|history|token)',re.I); ctas=[s['href'] for d in data for s in d['cta_slots']]; assert {d['translation_group_id'] for d in data} == {'article_mbti_vs_holland_career_choice_v1'}; assert all(d['publish_gate']['publish_allowed'] is False for d in data); assert all(h.startswith(('/zh/tests/','/en/tests/')) for h in ctas); assert not any(forbidden.search(h) for h in ctas); print('canary package checks ok')"
+      - git diff --check -- backend/docs/seo docs/codex
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: SEO-CMS-CANARY-IMPORT-DRYRUN-01 should verify these package artifacts before any draft-only execution
