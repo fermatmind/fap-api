@@ -21195,8 +21195,8 @@
         "GLOBAL-EN-ZH-MEDIA-ALT-VISUAL-REVIEW-BATCH-07"
       ],
       "title": "GLOBAL-EN-ZH-GLOBAL-UI-I18N-BATCH-08 global UI i18n parity review and frontend consumer follow-up",
-  "commit_sha": "ca0c77ca",
-  "pr_url": "https://github.com/fermatmind/fap-api/pull/1851",
+      "commit_sha": "ca0c77ca",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1851",
       "checks": {
         "manifest_registration": {
           "status": "pass",
@@ -24294,7 +24294,7 @@
       },
       {
         "at": "2026-05-19T03:38:09.440Z",
-  "status": "open",
+        "status": "open",
         "summary": "Added fap-api CodeQL workflow and train metadata. YAML/JSON validation, git diff checks, and scope validation passed."
       },
       {
@@ -31297,6 +31297,62 @@
         }
       ],
       "next_task": "PAYMENT-WAIT-PAID-REDIRECT-CONTRACT-06"
+    },
+    "IQ-BANK-50-01": {
+      "id": "IQ-BANK-50-01",
+      "repo": "fap-api",
+      "branch": "codex/iq-bank-50-01",
+      "base": "main",
+      "title": "IQ-BANK-50-01 define beta50 bank manifest spec",
+      "status": "local_checks_passed",
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "cd backend && php artisan test --filter=IqBeta50BankSpec --no-ansi": {
+          "status": "passed"
+        },
+        "cd backend && vendor/bin/pint --test tests/Feature/Content/IqBeta50BankSpecTest.php": {
+          "status": "passed"
+        },
+        "python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_BETA_50_ORIGINAL/manifest.json >/dev/null": {
+          "status": "passed"
+        },
+        "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null": {
+          "status": "passed"
+        },
+        "python3 -c yaml.safe_load docs/codex/pr-train.yaml": {
+          "status": "passed"
+        },
+        "git diff --check": {
+          "status": "passed"
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "events": [
+        {
+          "at": "2026-06-02T19:49:40+08:00",
+          "status": "started",
+          "summary": "Started backend beta50 placeholder bank manifest/spec PR with no runtime item import."
+        },
+        {
+          "at": "2026-06-02T19:50:02+08:00",
+          "status": "local_check_failed",
+          "summary": "Stopped before PR creation because backend Composer dependencies are missing in the isolated worktree."
+        },
+        {
+          "at": "2026-06-02T19:50:57+08:00",
+          "status": "retry_authorized",
+          "summary": "User authorized Composer dependency install and local check retry for IQ-BANK-50-01."
+        },
+        {
+          "at": "2026-06-02T19:52:27+08:00",
+          "status": "local_checks_passed",
+          "summary": "Composer dependencies installed in ignored vendor directory; backend beta50 manifest/spec checks passed."
+        }
+      ]
     }
   },
   "RESULT-EN-PARITY-04": {
@@ -39935,19 +39991,19 @@
         "to": "implementation_in_progress",
         "note": "Initialized by user authorization for purchase/report truth bridge policy."
       },
-    {
-      "at": "2026-06-02T05:28:00Z",
-      "from": "implementation_in_progress",
-      "to": "local_checks_passed",
-      "note": "Focused PHPUnit, route list, scoped Pint, composer validate/audit, JSON/YAML parse, and diff checks passed."
-    },
-    {
-      "at": "2026-06-02T05:34:00Z",
-      "from": "local_checks_passed",
-      "to": "open",
-      "note": "Opened https://github.com/fermatmind/fap-api/pull/1851 for GitHub checks and merge review."
-    }
-  ],
+      {
+        "at": "2026-06-02T05:28:00Z",
+        "from": "implementation_in_progress",
+        "to": "local_checks_passed",
+        "note": "Focused PHPUnit, route list, scoped Pint, composer validate/audit, JSON/YAML parse, and diff checks passed."
+      },
+      {
+        "at": "2026-06-02T05:34:00Z",
+        "from": "local_checks_passed",
+        "to": "open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/1851 for GitHub checks and merge review."
+      }
+    ],
     "sidecars": [],
     "next_task": "ANALYTICS-FUNNEL-GA4-PUBLIC-EVENT-SMOKE-01"
   }

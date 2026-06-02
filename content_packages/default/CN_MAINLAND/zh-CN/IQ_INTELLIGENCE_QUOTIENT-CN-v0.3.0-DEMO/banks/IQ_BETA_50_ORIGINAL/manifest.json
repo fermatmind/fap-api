@@ -1,0 +1,55 @@
+{
+  "schema_version": "fm.iq.item_bank_manifest.v1",
+  "bank_id": "IQ_BETA_50_ORIGINAL",
+  "scale_code": "IQ_INTELLIGENCE_QUOTIENT",
+  "legacy_compatibility": {
+    "accepts_legacy_scale_code_alias": "IQ_RAVEN",
+    "legacy_alias_user_facing": false
+  },
+  "status": "future_placeholder_spec_only",
+  "runtime_bound": false,
+  "public_take_enabled": false,
+  "item_count_target": 50,
+  "item_count_imported": 0,
+  "option_count": 6,
+  "option_codes": ["A", "B", "C", "D", "E", "F"],
+  "dimension_targets": {
+    "VSPR": 22,
+    "VSI": 16,
+    "NPR": 12
+  },
+  "item_family_targets": {
+    "matrix_3x3": 16,
+    "matrix_2x2": 6,
+    "series": 8,
+    "odd_one_out": 6,
+    "rotation": 5,
+    "overlay": 5,
+    "numeric_pattern": 4
+  },
+  "launch_gates": {
+    "items_import_required": true,
+    "answer_key_required": true,
+    "scoring_spec_required": true,
+    "norm_authority_required": true,
+    "copyright_gate_required": true,
+    "ambiguity_gate_required": true,
+    "provenance_gate_required": true
+  },
+  "public_payload_policy": {
+    "may_emit_items": false,
+    "may_emit_answer_key": false,
+    "may_emit_solution_rule": false,
+    "may_emit_generator_metadata": false
+  },
+  "norm_policy": {
+    "iq_claims_enabled": false,
+    "percentile_claims_enabled": false,
+    "population_norm_table_required_before_production": true
+  },
+  "notes": {
+    "frontend_display_key": "beta_50",
+    "beta_30_current_bank_id": "IQ_BETA_30_ORIGINAL",
+    "reason": "future beta50 placeholder only; no runtime item import in IQ-BANK-50-01"
+  }
+}
