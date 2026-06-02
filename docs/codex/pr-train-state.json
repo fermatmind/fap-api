@@ -1,13 +1,13 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-02T11:39:52Z",
+  "updated_at": "2026-06-02T14:21:21Z",
   "items": {
     "SEO-CMS-CANARY-BE-01": {
       "repo": "fap-api",
       "branch": "codex/seo-cms-canary-be-01-hreflang-cta-surfaces",
-      "status": "local_checks_passed_after_ci_fix",
+      "status": "merged",
       "depends_on": [],
-      "commit_sha": "0bccc4b3a9febc9c2fcb9c19715ff63845fa4561",
+      "commit_sha": "dc96157c0c226ed39c2036a27670c092bc54013f",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1852",
       "checks": {
         "local": {
@@ -25,7 +25,7 @@
           "notes": "All targeted checks exited 0. PHPUnit emitted existing file_get_contents warnings. ArticleTranslationContractTest failed on origin/main with the same public-org fixture issue before this branch aligned the scoped fixture to ArticleResource's public content org."
         },
         "github": {
-          "status": "failed",
+          "status": "passed_after_ci_fix",
           "failed_checks": [
             {
               "name": "verify-mbti-legacy",
@@ -64,14 +64,14 @@
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-06-02T11:46:03Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "scope_validation": {
         "allowed_paths_only": true,
         "local_validation_passed": true,
-        "github_checks_green": null,
-        "post_merge_revalidated": null
+        "github_checks_green": true,
+        "post_merge_revalidated": true
       },
       "transitions": [
         {
@@ -103,6 +103,12 @@
           "from": "github_checks_failed",
           "to": "local_checks_passed_after_ci_fix",
           "note": "Fixed CI sitemap fixtures to create published revisions under the new article sitemap gate; targeted SitemapXmlTest, CI personality authority gate, ArticlePublicApiTest, scoped Pint, and git diff checks passed locally."
+        },
+        {
+          "at": "2026-06-02T14:16:10Z",
+          "from": "local_checks_passed_after_ci_fix",
+          "to": "merged",
+          "note": "Reconciled before SEO-CMS-CANARY-DRAFT-PATH-01: GitHub PR #1852 is MERGED with merge commit dc96157c0c226ed39c2036a27670c092bc54013f, and origin/main contains that commit."
         }
       ],
       "sidecars": [],
@@ -38675,7 +38681,7 @@
     "repo": "fap-api",
     "branch": "codex/analytics-payment-unlock-attribution-repair-01a",
     "base": "main",
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "title": "ANALYTICS-PAYMENT-UNLOCK-ATTRIBUTION-REPAIR-01A add read-only payment unlock diagnostics",
     "depends_on": [
       "ANALYTICS-FUNNEL-OPS-GLOBAL-SCOPE-ENTRY-01"
@@ -40048,8 +40054,8 @@
       "ANALYTICS-FUNNEL-GA4-BAIDU-MAPPING-SCAN-01",
       "ANALYTICS-FUNNEL-WEB-EVENT-NAME-ALIGNMENT-02"
     ],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "c3ffcee3a505e5b8f86e7c32a9ad0f85511646ba",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1855",
     "checks": {
       "manifest_registration": {
         "status": "pass",
@@ -40122,5 +40128,114 @@
     ],
     "sidecars": [],
     "next_task": "ANALYTICS-FUNNEL-GA4-PUBLIC-EVENT-SMOKE-01"
+  },
+  "SEO-CMS-CANARY-PREFLIGHT-LEDGER-01": {
+    "repo": "fap-web",
+    "branch": "codex/seo-cms-canary-preflight-ledger-01",
+    "status": "merged_external_dependency",
+    "depends_on": [
+      "SEO-CMS-CANARY-PREFLIGHT-SCAN"
+    ],
+    "commit_sha": "52247a648702e97eb7e601e94f75338ba1b12f18",
+    "pr_url": "https://github.com/fermatmind/fap-web/pull/1004",
+    "checks": {
+      "github": {
+        "status": "passed",
+        "repository": "fap-web",
+        "state": "MERGED",
+        "merged_at": "2026-06-02T14:01:06Z"
+      },
+      "dependency_verification": {
+        "status": "passed",
+        "commands": [
+          "gh pr view 1004 --repo fermatmind/fap-web --json state,mergedAt,mergeCommit,headRefName,baseRefName,url,title"
+        ],
+        "notes": "External fap-web ledger dependency is merged; no fap-web files were modified in this fap-api PR."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": "2026-06-02T14:01:06Z",
+    "remote_branch_deleted": null,
+    "local_cleanup_executed": null,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": null,
+      "github_checks_green": true,
+      "post_merge_revalidated": true
+    },
+    "transitions": [
+      {
+        "at": "2026-06-02T14:16:10Z",
+        "from": "external_dependency",
+        "to": "merged_external_dependency",
+        "note": "Registered only to satisfy SEO-CMS-CANARY-DRAFT-PATH-01 dependency bookkeeping in fap-api; fap-web PR #1004 is the owning PR."
+      }
+    ],
+    "sidecars": [],
+    "next_task": "SEO-CMS-CANARY-DRAFT-PATH-01"
+  },
+  "SEO-CMS-CANARY-DRAFT-PATH-01": {
+    "repo": "fap-api",
+    "branch": "codex/seo-cms-canary-draft-path-01",
+    "status": "local_checks_passed",
+    "depends_on": [
+      "SEO-CMS-CANARY-BE-01",
+      "SEO-CMS-CANARY-PREFLIGHT-LEDGER-01"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "dependency_verification": {
+        "status": "passed",
+        "commands": [
+          "gh pr view 1852 --repo fermatmind/fap-api --json state,mergedAt,mergeCommit,headRefName,baseRefName,url,title",
+          "git merge-base --is-ancestor dc96157c0c226ed39c2036a27670c092bc54013f origin/main",
+          "gh pr view 1004 --repo fermatmind/fap-web --json state,mergedAt,mergeCommit,headRefName,baseRefName,url,title"
+        ],
+        "notes": "BE-01 and fap-web preflight ledger dependencies are merged before this docs-only scan."
+      },
+      "local": {
+        "status": "passed",
+        "commands": [
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "git diff --check -- docs/codex backend/docs/seo",
+          "git diff --cached --check"
+        ],
+        "notes": "Docs-only JSON/YAML/diff checks passed; cached diff check passed after path-limited staging."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-06-02T14:16:10Z",
+        "from": "missing",
+        "to": "in_progress",
+        "note": "User explicitly authorized adding SEO-CMS-CANARY-DRAFT-PATH-01 to fap-api manifest/state and executing the docs-only draft path verification report. CMS draft, publish, runtime code, tests, frontend, and GPT content edits remain forbidden."
+      },
+      {
+        "at": "2026-06-02T14:18:48Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "note": "Created docs-only draft path verification report, registered manifest/state, and passed JSON parse, YAML parse, and docs diff whitespace checks. No CMS draft, publish, runtime code, tests, frontend, or GPT content edits were performed."
+      },
+      {
+        "at": "2026-06-02T14:21:21Z",
+        "from": "local_checks_passed",
+        "to": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/1855 for docs-only review. No CMS draft, publish, runtime code, tests, frontend, or GPT content edits were performed."
+      }
+    ],
+    "sidecars": [],
+    "next_task": "Authorized importer dry-run and read-only collision check, or SEO-CMS-CANARY-PREVIEW-01 only if no safe preview alternative exists."
   }
 }

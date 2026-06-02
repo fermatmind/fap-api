@@ -19619,3 +19619,48 @@ prs:
     fap_web_commit_allowed: false
     frontend_fallback_authority: false
     next_task: IQ-FE-BETA50-TEASER-01
+
+  - id: SEO-CMS-CANARY-DRAFT-PATH-01
+    repo: fap-api
+    depends_on:
+      - SEO-CMS-CANARY-BE-01
+      - SEO-CMS-CANARY-PREFLIGHT-LEDGER-01
+    branch: codex/seo-cms-canary-draft-path-01
+    title: "docs(cms): verify canary draft creation path and preview alternative"
+    train_scope: seo_cms_canary
+    scope:
+      - Verify the authorized path for creating the bilingual CMS canary draft without publish.
+      - Confirm CMS operator role requirements, hidden slug collision check path, translation_group_id collision check path, controlled importer dry-run path, and accepted preview/noindex alternative.
+      - Produce a docs-only GO/NO-GO report for the next canary action.
+    allowed_paths:
+      - backend/docs/seo/**
+      - backend/docs/operations/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Execute SEO-CONTENT-P1-08.
+      - Create CMS drafts, save CMS forms, publish, or call production write APIs.
+      - Generate or edit canary title, H1, meta, body, FAQ, CTA, or GPT content packages.
+      - Modify runtime code, routes, migrations, tests, package files, sitemap runtime, analytics runtime, or frontend files.
+      - Submit sitemap, Baidu push, IndexNow, or any search-channel live action.
+    validation:
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- docs/codex backend/docs/seo
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: SEO-CMS-CANARY-DRAFT-PATH-01 authorized dry-run/collision check or SEO-CMS-CANARY-PREVIEW-01 only if no safe preview alternative exists
