@@ -19915,3 +19915,51 @@ prs:
     frontend_fallback_authority: false
     content_authority: CMS/backend
     next_task: SEO-CONTENT-P1-08 remains blocked until hidden CMS/DB collision is operator-verified by readonly path
+
+  - id: SEO-CMS-CANARY-OPERATOR-COLLISION-01
+    repo: fap-api
+    depends_on:
+      - SEO-CMS-CANARY-IMPORTER-GATE-01
+    branch: codex/seo-cms-canary-operator-collision-01
+    title: "docs(cms): verify canary hidden collision check path"
+    train_scope: seo_cms_canary
+    scope:
+      - Verify the public absence signals for the first bilingual SEO canary target slugs.
+      - Document the authorized operator readonly CMS/DB hidden collision check path for slug and translation_group_id collisions before any CMS draft creation.
+      - Keep hidden collision Unknown when no authorized production CMS/DB readonly access is available.
+      - Create the SEO-CMS-CANARY-HIDDEN-COLLISION-SIDECAR-01 blocker when hidden collision remains Unknown.
+      - Reconcile SEO-CMS-CANARY-IMPORTER-GATE-01 train state as merged before continuing.
+    allowed_paths:
+      - backend/docs/seo/**
+      - backend/docs/operations/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Execute SEO-CONTENT-P1-08.
+      - Create CMS drafts, save CMS forms, create Articles, publish, or call production write APIs.
+      - Run destructive migrations or any production write command.
+      - Read or expose env, cookies, tokens, or real result/order/share/payment IDs.
+      - Modify backend/app/**, backend/routes/**, backend/database/**, backend/tests/**, frontend fap-web, GPT content packages, sitemap runtime, analytics runtime, or production config.
+      - Submit sitemap, Baidu push, IndexNow, or any search-channel live action.
+    validation:
+      - git diff --check -- backend/docs/seo backend/docs/operations docs/codex
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: SEO-CONTENT-P1-08 remains blocked unless hidden CMS/DB collision is operator-verified as PASS or the user explicitly authorizes operator verification before P1-08

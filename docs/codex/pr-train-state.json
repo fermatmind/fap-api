@@ -40591,11 +40591,11 @@
   "SEO-CMS-CANARY-IMPORTER-GATE-01": {
     "repo": "fap-api",
     "branch": "codex/seo-cms-canary-importer-gate-01",
-    "status": "local_checks_passed",
+    "status": "merged",
     "depends_on": [
       "SEO-CMS-CANARY-PACKAGE-ADAPTER-01"
     ],
-    "commit_sha": null,
+    "commit_sha": "26f4fec3b7112acff6d3276613b1cd57744350f9",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1860",
     "checks": {
       "dependency_verification": {
@@ -40639,14 +40639,14 @@
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-02T16:51:37Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null
+      "github_checks_green": true,
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -40660,9 +40660,93 @@
         "from": "local_checks_passed",
         "to": "pr_open",
         "note": "Opened https://github.com/fermatmind/fap-api/pull/1860 for importer gate review. SEO-CONTENT-P1-08 remains blocked until this PR is merged and hidden CMS/DB collision is operator-verified by readonly path."
+      },
+      {
+        "at": "2026-06-02T16:56:10Z",
+        "from": "pr_open",
+        "to": "merged",
+        "note": "Reconciled before SEO-CMS-CANARY-OPERATOR-COLLISION-01: GitHub PR #1860 is MERGED with merge commit 26f4fec3b7112acff6d3276613b1cd57744350f9, origin/main contains the merge commit, local main equals origin/main, and local/remote task branch cleanup was completed."
       }
     ],
     "sidecars": [],
     "next_task": "SEO-CMS-CANARY-OPERATOR-COLLISION-01 may proceed only after this PR is merged; SEO-CONTENT-P1-08 remains blocked until hidden CMS/DB collision is operator-verified by readonly path."
+  },
+  "SEO-CMS-CANARY-OPERATOR-COLLISION-01": {
+    "repo": "fap-api",
+    "branch": "codex/seo-cms-canary-operator-collision-01",
+    "status": "local_checks_passed",
+    "depends_on": [
+      "SEO-CMS-CANARY-IMPORTER-GATE-01"
+    ],
+    "commit_sha": "pending_remote_pr_head",
+    "pr_url": null,
+    "checks": {
+      "dependency_verification": {
+        "status": "passed",
+        "commands": [
+          "gh pr view 1860 --repo fermatmind/fap-api --json state,mergedAt,mergeCommit,url",
+          "git fetch origin main --prune",
+          "git merge-base --is-ancestor 26f4fec3b7112acff6d3276613b1cd57744350f9 origin/main",
+          "git rev-parse main origin/main",
+          "git ls-remote --heads origin codex/seo-cms-canary-operator-collision-01"
+        ],
+        "notes": "SEO-CMS-CANARY-IMPORTER-GATE-01 is merged as PR #1860 and origin/main contains merge commit 26f4fec3b7112acff6d3276613b1cd57744350f9. Local main equals origin/main. The operator collision branch did not exist before this task."
+      },
+      "public_absence": {
+        "status": "passed_public_only",
+        "commands": [
+          "python3 public article detail/SEO API 404 checks for both target slugs",
+          "python3/curl sitemap.xml, llms.txt, and llms-full.txt absence checks for both target slugs"
+        ],
+        "notes": "Both public detail APIs returned 404, both public SEO APIs returned 404, and sitemap.xml, llms.txt, and llms-full.txt do not contain either target slug."
+      },
+      "hidden_collision": {
+        "status": "unknown_sidecar_created",
+        "commands": [
+          "readonly repository scan of Article model, SoftDeletes, importer org_id=0 existingArticle lookup, and article visibility/indexability fields"
+        ],
+        "notes": "No authorized production CMS/DB readonly private-record query was provided or executed. Hidden slug, private/unpublished/draft/review_pending/published/noindex, soft-deleted, and translation_group_id collisions therefore remain Unknown. Sidecar SEO-CMS-CANARY-HIDDEN-COLLISION-SIDECAR-01 is recorded and blocks SEO-CONTENT-P1-08."
+      },
+      "local": {
+        "status": "passed",
+        "commands": [
+          "git diff --check -- backend/docs/seo backend/docs/operations docs/codex",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "git diff --cached --check"
+        ],
+        "notes": "Docs-only report and train metadata checks passed. Cached diff check is run after path-limited staging."
+      }
+    },
+    "failure_reason": "NO-GO for SEO-CONTENT-P1-08: public absence checks pass, but hidden production CMS/DB slug and translation_group_id collision remains Unknown because no authorized readonly private-record check was executed.",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-06-02T16:56:10Z",
+        "from": "missing",
+        "to": "local_checks_passed",
+        "note": "User-provided train prompt authorized SEO-CMS-CANARY-OPERATOR-COLLISION-01 after importer gate merge. Created docs-only operator readonly collision check path, verified public absence, recorded hidden collision Unknown, and created SEO-CMS-CANARY-HIDDEN-COLLISION-SIDECAR-01. No CMS draft, publish, production write action, env/cookie/token access, GPT content edit, runtime code edit, test edit, frontend change, or search submission was performed."
+      }
+    ],
+    "sidecars": [
+      {
+        "id": "SEO-CMS-CANARY-HIDDEN-COLLISION-SIDECAR-01",
+        "status": "open",
+        "blocks": [
+          "SEO-CONTENT-P1-08"
+        ],
+        "reason": "Production CMS/DB hidden/private/unpublished/soft-deleted slug and translation_group_id collision remains Unknown until an authorized operator runs the documented readonly check path.",
+        "required_resolution": "Authorized operator must report PASS for the documented readonly production CMS/DB Article collision query before any CMS draft creation."
+      }
+    ],
+    "next_task": "SEO-CONTENT-P1-08 remains blocked. Next action is authorized operator readonly hidden collision verification; publish remains forbidden."
   }
 }
