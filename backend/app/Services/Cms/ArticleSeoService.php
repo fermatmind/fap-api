@@ -151,6 +151,14 @@ final class ArticleSeoService
 
         if ($seo instanceof ArticleSeoMeta && is_array($seo->schema_json)) {
             $jsonLd = array_replace_recursive($jsonLd, $seo->schema_json);
+            unset($jsonLd['editorial_package_v1']);
+        }
+
+        $faqPage = $this->buildVisibleFaqPage($article, $seo, $canonical);
+        if ($faqPage !== null) {
+            $hasPart = is_array($jsonLd['hasPart'] ?? null) ? $jsonLd['hasPart'] : [];
+            $hasPart[] = $faqPage;
+            $jsonLd['hasPart'] = array_values($hasPart);
         }
 
         return PublicMediaUrlGuard::sanitizeJsonLdImageFields(
@@ -256,22 +264,137 @@ final class ArticleSeoService
     }
 
     /**
+     * @return array<string,mixed>|null
+     */
+    private function buildVisibleFaqPage(Article $article, ?ArticleSeoMeta $seo, ?string $canonical): ?array
+    {
+        $metadata = $this->editorialPackageMetadata($article, $seo);
+        if ($metadata === []) {
+            return null;
+        }
+
+        $policy = $this->normalizeString($metadata['answer_surface_policy'] ?? null);
+        $visibility = $this->normalizeString($metadata['answer_surface_visibility'] ?? null);
+        if ($policy !== 'editor_supplied' || $visibility === null || $visibility === 'disabled') {
+            return null;
+        }
+
+        $answerSurface = is_array($metadata['answer_surface_v1'] ?? null) ? $metadata['answer_surface_v1'] : [];
+        $faqItems = is_array($answerSurface['faq_items'] ?? null) ? $answerSurface['faq_items'] : [];
+
+        $mainEntity = [];
+        foreach ($faqItems as $index => $item) {
+            if (! is_array($item) || $this->isHiddenFaqItem($item)) {
+                continue;
+            }
+
+            $question = $this->normalizeString($item['question'] ?? $item['q'] ?? null);
+            $answer = $this->normalizeString($item['answer'] ?? $item['a'] ?? null);
+            if ($question === null || $answer === null) {
+                continue;
+            }
+
+            $mainEntity[] = [
+                '@type' => 'Question',
+                'name' => $question,
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => $answer,
+                ],
+            ];
+
+            if (count($mainEntity) >= 8) {
+                break;
+            }
+        }
+
+        if ($mainEntity === []) {
+            return null;
+        }
+
+        return array_filter([
+            '@type' => 'FAQPage',
+            '@id' => $canonical !== null ? $canonical.'#faq' : null,
+            'mainEntity' => $mainEntity,
+        ], static fn (mixed $value): bool => $value !== null);
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function editorialPackageMetadata(Article $article, ?ArticleSeoMeta $seo): array
+    {
+        $schemaPackage = is_array($seo?->schema_json)
+            && is_array($seo->schema_json['editorial_package_v1'] ?? null)
+                ? $seo->schema_json['editorial_package_v1']
+                : [];
+
+        if ($schemaPackage !== []) {
+            return $schemaPackage;
+        }
+
+        $variants = is_array($article->cover_image_variants) ? $article->cover_image_variants : [];
+
+        return is_array($variants['editorial_package_v1'] ?? null)
+            ? $variants['editorial_package_v1']
+            : [];
+    }
+
+    /**
+     * @param  array<string,mixed>  $item
+     */
+    private function isHiddenFaqItem(array $item): bool
+    {
+        if (($item['hidden'] ?? false) === true || ($item['is_visible'] ?? true) === false) {
+            return true;
+        }
+
+        $visibility = strtolower((string) ($item['visibility'] ?? 'visible'));
+
+        return in_array($visibility, ['hidden', 'disabled', 'private'], true);
+    }
+
+    /**
      * @return array<string, string>
      */
     private function buildAlternates(Article $article): array
     {
-        $variants = Article::query()
+        $variants = [];
+        $translationGroupId = trim((string) ($article->translation_group_id ?? ''));
+
+        if ($translationGroupId !== '') {
+            $variants = Article::query()
+                ->withoutGlobalScopes()
+                ->where('org_id', (int) $article->org_id)
+                ->where('translation_group_id', $translationGroupId)
+                ->publiclyIndexable()
+                ->whereIn('locale', self::SUPPORTED_LOCALES)
+                ->get(['slug', 'locale'])
+                ->all();
+        }
+
+        $legacySameSlugVariants = Article::query()
             ->withoutGlobalScopes()
             ->where('org_id', (int) $article->org_id)
             ->where('slug', (string) $article->slug)
-            ->publiclyReadable()
+            ->publiclyIndexable()
             ->whereIn('locale', self::SUPPORTED_LOCALES)
-            ->pluck('locale')
+            ->get(['slug', 'locale'])
             ->all();
 
         $availableLocales = [];
-        foreach ($variants as $variantLocale) {
-            $availableLocales[$this->normalizeLocale((string) $variantLocale)] = true;
+        foreach (array_merge($variants, $legacySameSlugVariants) as $variant) {
+            if (! $variant instanceof Article) {
+                continue;
+            }
+
+            $locale = $this->normalizeLocale((string) $variant->locale);
+            $slug = trim((string) $variant->slug);
+            if ($slug === '') {
+                continue;
+            }
+
+            $availableLocales[$locale] = $slug;
         }
 
         $alternates = [];
@@ -280,7 +403,7 @@ final class ArticleSeoService
                 continue;
             }
 
-            $canonical = $this->buildCanonicalUrl((string) $article->slug, $supportedLocale);
+            $canonical = $this->buildCanonicalUrl((string) $availableLocales[$supportedLocale], $supportedLocale);
             if ($canonical === null) {
                 continue;
             }

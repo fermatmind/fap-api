@@ -184,16 +184,10 @@ class SitemapGenerator
         $rows = Article::query()
             ->withoutGlobalScopes()
             ->where('org_id', 0)
-            ->where('status', 'published')
-            ->where('is_public', true)
-            ->where('is_indexable', true)
+            ->publiclyIndexable()
             ->whereIn('locale', ArticleSeoService::SUPPORTED_LOCALES)
             ->whereNotNull('slug')
             ->where('slug', '<>', '')
-            ->where(static function ($query): void {
-                $query->whereNull('published_at')
-                    ->orWhere('published_at', '<=', now());
-            })
             ->select(['slug', 'locale', 'updated_at', 'published_at'])
             ->orderBy('locale')
             ->orderBy('slug')

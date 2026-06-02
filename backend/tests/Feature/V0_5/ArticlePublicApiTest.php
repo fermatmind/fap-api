@@ -9,6 +9,7 @@ use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Cache;
 use Tests\TestCase;
 
 final class ArticlePublicApiTest extends TestCase
@@ -151,6 +152,83 @@ final class ArticlePublicApiTest extends TestCase
         $this->assertStringNotContainsString($legacyCanonical, (string) $response->getContent());
     }
 
+    public function test_article_seo_alternates_use_translation_group_id_for_different_slugs(): void
+    {
+        config([
+            'app.url' => 'https://api.staging.fermatmind.com',
+            'app.frontend_url' => 'https://staging.fermatmind.com',
+        ]);
+
+        $groupId = 'article_mbti_vs_holland_career_choice_v1';
+        $this->createArticle([
+            'slug' => 'mbti-vs-holland-code-career-choice',
+            'locale' => 'en',
+            'title' => 'MBTI vs Holland Code career choice',
+            'translation_group_id' => $groupId,
+        ]);
+        $this->createArticle([
+            'slug' => 'mbti-vs-holland-career-choice',
+            'locale' => 'zh-CN',
+            'title' => 'MBTI vs Holland career choice',
+            'translation_group_id' => $groupId,
+        ]);
+
+        $response = $this->getJson('/api/v0.5/articles/mbti-vs-holland-code-career-choice/seo?locale=en');
+
+        $response->assertOk()
+            ->assertJsonPath('meta.alternates.en', 'https://staging.fermatmind.com/en/articles/mbti-vs-holland-code-career-choice')
+            ->assertJsonPath('meta.alternates.zh', 'https://staging.fermatmind.com/zh/articles/mbti-vs-holland-career-choice')
+            ->assertJsonPath('meta.alternates.zh-CN', 'https://staging.fermatmind.com/zh/articles/mbti-vs-holland-career-choice');
+
+        $this->assertNull(data_get($response->json(), 'meta.alternates.x-default'));
+    }
+
+    public function test_article_seo_alternates_exclude_draft_and_noindex_siblings(): void
+    {
+        config(['app.frontend_url' => 'https://staging.fermatmind.com']);
+
+        $draftGroup = 'article_draft_sibling_exclusion_v1';
+        $this->createArticle([
+            'slug' => 'draft-sibling-source',
+            'locale' => 'en',
+            'translation_group_id' => $draftGroup,
+        ]);
+        $this->createArticle([
+            'slug' => 'draft-sibling-zh',
+            'locale' => 'zh-CN',
+            'translation_group_id' => $draftGroup,
+            'status' => 'draft',
+            'is_public' => false,
+            'is_indexable' => false,
+            'published_at' => null,
+        ], [], false);
+
+        $draftResponse = $this->getJson('/api/v0.5/articles/draft-sibling-source/seo?locale=en');
+        $draftResponse->assertOk()
+            ->assertJsonPath('meta.alternates.en', 'https://staging.fermatmind.com/en/articles/draft-sibling-source');
+        $this->assertNull(data_get($draftResponse->json(), 'meta.alternates.zh'));
+        $this->assertNull(data_get($draftResponse->json(), 'meta.alternates.zh-CN'));
+
+        $noindexGroup = 'article_noindex_sibling_exclusion_v1';
+        $this->createArticle([
+            'slug' => 'noindex-sibling-source',
+            'locale' => 'en',
+            'translation_group_id' => $noindexGroup,
+        ]);
+        $this->createArticle([
+            'slug' => 'noindex-sibling-zh',
+            'locale' => 'zh-CN',
+            'translation_group_id' => $noindexGroup,
+            'is_indexable' => false,
+        ]);
+
+        $noindexResponse = $this->getJson('/api/v0.5/articles/noindex-sibling-source/seo?locale=en');
+        $noindexResponse->assertOk()
+            ->assertJsonPath('meta.alternates.en', 'https://staging.fermatmind.com/en/articles/noindex-sibling-source');
+        $this->assertNull(data_get($noindexResponse->json(), 'meta.alternates.zh'));
+        $this->assertNull(data_get($noindexResponse->json(), 'meta.alternates.zh-CN'));
+    }
+
     public function test_article_detail_includes_landing_and_answer_surfaces(): void
     {
         config(['app.frontend_url' => 'https://www.fermatmind.com']);
@@ -197,6 +275,142 @@ final class ArticlePublicApiTest extends TestCase
             ->assertJsonPath('answer_surface_v1.next_step_blocks.0.href', '/en/articles');
 
         $this->assertStringNotContainsString('www.fermatmind.com', (string) $response->getContent());
+    }
+
+    public function test_article_detail_projects_cms_cta_slots_and_visible_faq_without_private_targets(): void
+    {
+        config(['app.frontend_url' => 'https://www.fermatmind.com']);
+
+        $editorialPackage = [
+            'answer_surface_policy' => 'editor_supplied',
+            'answer_surface_visibility' => 'below_intro',
+            'answer_surface_v1' => [
+                'faq_items' => [
+                    ['key' => 'visible_faq', 'question' => 'Visible FAQ?', 'answer' => 'Visible answer.'],
+                    ['key' => 'hidden_faq', 'question' => 'Hidden FAQ?', 'answer' => 'Hidden answer.', 'visibility' => 'hidden'],
+                ],
+            ],
+            'cta_slots' => [
+                ['slot_id' => 'primary_riasec', 'label' => 'Start RIASEC', 'href' => '/en/tests/holland-career-interest-test-riasec'],
+                ['slot_id' => 'secondary_mbti', 'label' => 'Start MBTI', 'href' => '/en/tests/mbti-personality-test-16-personality-types'],
+                ['slot_id' => 'tertiary_big_five', 'label' => 'Start Big Five', 'href' => '/en/tests/big-five-personality-test'],
+                ['slot_id' => 'private_result', 'label' => 'Private result', 'href' => '/en/result/private-attempt'],
+            ],
+        ];
+
+        $article = $this->createArticle([
+            'slug' => 'cms-cta-faq-article',
+            'locale' => 'en',
+            'title' => 'CMS CTA FAQ Article',
+            'cover_image_variants' => ['editorial_package_v1' => $editorialPackage],
+            'related_test_slug' => 'mbti-personality-test-16-personality-types',
+        ]);
+        $this->createSeoMeta($article, [
+            'schema_json' => ['editorial_package_v1' => $editorialPackage],
+        ]);
+
+        $detail = $this->getJson('/api/v0.5/articles/cms-cta-faq-article?locale=en');
+
+        $detail->assertOk()
+            ->assertJsonPath('landing_surface_v1.start_test_target', '/en/tests/holland-career-interest-test-riasec')
+            ->assertJsonPath('landing_surface_v1.cta_bundle.0.key', 'primary_riasec')
+            ->assertJsonPath('landing_surface_v1.cta_bundle.0.href', '/en/tests/holland-career-interest-test-riasec')
+            ->assertJsonPath('landing_surface_v1.cta_bundle.1.key', 'secondary_mbti')
+            ->assertJsonPath('landing_surface_v1.cta_bundle.2.key', 'tertiary_big_five')
+            ->assertJsonPath('answer_surface_v1.faq_blocks.0.key', 'visible_faq')
+            ->assertJsonPath('answer_surface_v1.faq_blocks.0.question', 'Visible FAQ?')
+            ->assertJsonPath('answer_surface_v1.next_step_blocks.0.href', '/en/tests/holland-career-interest-test-riasec');
+
+        $this->assertContains('FAQPage', $detail->json('seo_surface_v1.structured_data_keys'));
+
+        $this->assertStringNotContainsString('private-attempt', (string) $detail->getContent());
+        $this->assertStringNotContainsString('Hidden FAQ?', (string) $detail->getContent());
+
+        $seo = $this->getJson('/api/v0.5/articles/cms-cta-faq-article/seo?locale=en');
+        $seo->assertOk()
+            ->assertJsonPath('jsonld.hasPart.0.@type', 'FAQPage')
+            ->assertJsonPath('jsonld.hasPart.0.mainEntity.0.name', 'Visible FAQ?');
+
+        $this->assertStringNotContainsString('Hidden FAQ?', (string) $seo->getContent());
+    }
+
+    public function test_article_detail_uses_locale_specific_cms_faq_blocks(): void
+    {
+        $groupId = 'article_locale_specific_faq_v1';
+        $enPackage = [
+            'answer_surface_policy' => 'editor_supplied',
+            'answer_surface_visibility' => 'below_intro',
+            'answer_surface_v1' => [
+                'faq_items' => [
+                    ['key' => 'en_visible_faq', 'question' => 'English visible FAQ?', 'answer' => 'English visible answer.'],
+                ],
+            ],
+        ];
+        $zhPackage = [
+            'answer_surface_policy' => 'editor_supplied',
+            'answer_surface_visibility' => 'below_intro',
+            'answer_surface_v1' => [
+                'faq_items' => [
+                    ['key' => 'zh_visible_faq', 'question' => 'Chinese visible FAQ?', 'answer' => 'Chinese visible answer.'],
+                ],
+            ],
+        ];
+
+        $enArticle = $this->createArticle([
+            'slug' => 'locale-specific-faq-en',
+            'locale' => 'en',
+            'translation_group_id' => $groupId,
+            'cover_image_variants' => ['editorial_package_v1' => $enPackage],
+        ]);
+        $this->createSeoMeta($enArticle, [
+            'schema_json' => ['editorial_package_v1' => $enPackage],
+        ]);
+
+        $zhArticle = $this->createArticle([
+            'slug' => 'locale-specific-faq-zh',
+            'locale' => 'zh-CN',
+            'translation_group_id' => $groupId,
+            'cover_image_variants' => ['editorial_package_v1' => $zhPackage],
+        ]);
+        $this->createSeoMeta($zhArticle, [
+            'schema_json' => ['editorial_package_v1' => $zhPackage],
+        ]);
+
+        $enDetail = $this->getJson('/api/v0.5/articles/locale-specific-faq-en?locale=en');
+        $enDetail->assertOk()
+            ->assertJsonPath('answer_surface_v1.faq_blocks.0.question', 'English visible FAQ?');
+        $this->assertStringNotContainsString('Chinese visible FAQ?', (string) $enDetail->getContent());
+
+        $zhDetail = $this->getJson('/api/v0.5/articles/locale-specific-faq-zh?locale=zh-CN');
+        $zhDetail->assertOk()
+            ->assertJsonPath('answer_surface_v1.faq_blocks.0.question', 'Chinese visible FAQ?');
+        $this->assertStringNotContainsString('English visible FAQ?', (string) $zhDetail->getContent());
+
+        $enSeo = $this->getJson('/api/v0.5/articles/locale-specific-faq-en/seo?locale=en');
+        $enSeo->assertOk()
+            ->assertJsonPath('jsonld.hasPart.0.mainEntity.0.name', 'English visible FAQ?');
+        $this->assertStringNotContainsString('Chinese visible FAQ?', (string) $enSeo->getContent());
+
+        $zhSeo = $this->getJson('/api/v0.5/articles/locale-specific-faq-zh/seo?locale=zh-CN');
+        $zhSeo->assertOk()
+            ->assertJsonPath('jsonld.hasPart.0.mainEntity.0.name', 'Chinese visible FAQ?');
+        $this->assertStringNotContainsString('English visible FAQ?', (string) $zhSeo->getContent());
+    }
+
+    public function test_article_detail_fallback_uses_related_public_test_before_mbti_default(): void
+    {
+        $this->createArticle([
+            'slug' => 'riasec-fallback-article',
+            'locale' => 'en',
+            'related_test_slug' => 'holland-career-interest-test-riasec',
+        ]);
+
+        $response = $this->getJson('/api/v0.5/articles/riasec-fallback-article?locale=en');
+
+        $response->assertOk()
+            ->assertJsonPath('landing_surface_v1.start_test_target', '/en/tests/holland-career-interest-test-riasec')
+            ->assertJsonPath('landing_surface_v1.cta_bundle.2.href', '/en/tests/holland-career-interest-test-riasec')
+            ->assertJsonPath('answer_surface_v1.next_step_blocks.2.href', '/en/tests/holland-career-interest-test-riasec');
     }
 
     public function test_public_reads_require_published_revision_and_hide_human_review(): void
@@ -392,6 +606,38 @@ final class ArticlePublicApiTest extends TestCase
             $this->getJson('/api/v0.5/articles/'.$slug.'?locale=zh-CN')->assertNotFound();
             $this->getJson('/api/v0.5/articles/'.$slug.'?locale=en')->assertNotFound();
         }
+    }
+
+    public function test_sitemap_source_uses_public_readable_and_indexable_article_gate(): void
+    {
+        Cache::flush();
+        config(['app.frontend_url' => 'https://staging.fermatmind.com']);
+
+        $this->createArticle([
+            'slug' => 'sitemap-visible-article',
+            'locale' => 'en',
+        ]);
+        $this->createArticle([
+            'slug' => 'sitemap-draft-article',
+            'locale' => 'en',
+            'status' => 'draft',
+            'is_public' => false,
+            'is_indexable' => false,
+            'published_at' => null,
+        ], [], false);
+        $this->createArticle([
+            'slug' => 'sitemap-noindex-article',
+            'locale' => 'en',
+            'is_indexable' => false,
+        ]);
+
+        $response = $this->getJson('/api/v0.5/seo/sitemap-source');
+
+        $response->assertOk();
+        $locations = collect($response->json('items'))->pluck('loc')->all();
+        $this->assertContains('https://staging.fermatmind.com/en/articles/sitemap-visible-article', $locations);
+        $this->assertNotContains('https://staging.fermatmind.com/en/articles/sitemap-draft-article', $locations);
+        $this->assertNotContains('https://staging.fermatmind.com/en/articles/sitemap-noindex-article', $locations);
     }
 
     public function test_article_seo_does_not_fake_missing_locale_alternates(): void

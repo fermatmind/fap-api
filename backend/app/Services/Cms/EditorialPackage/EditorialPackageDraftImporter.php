@@ -204,6 +204,7 @@ final class EditorialPackageDraftImporter
             $tags = $this->resolveTags($package['tags']);
             $article = $this->existingArticle($package);
             $primaryTestSlug = $this->primaryTestSlug($package);
+            $translationGroupId = $this->nullableString($package['translation_group_id']);
 
             if ($article instanceof Article && $this->isPublishedOrPublic($article)) {
                 throw new RuntimeException('Existing published/public articles cannot be mutated by editorial package draft import.');
@@ -218,6 +219,7 @@ final class EditorialPackageDraftImporter
                     'reading_minutes' => $this->readingMinutes((string) $package['body_markdown']),
                     'slug' => (string) $package['slug'],
                     'locale' => (string) $package['locale'],
+                    ...($translationGroupId !== null ? ['translation_group_id' => $translationGroupId] : []),
                     'title' => (string) $package['title'],
                     'excerpt' => (string) $package['excerpt'],
                     'content_md' => (string) $package['body_markdown'],
@@ -230,7 +232,7 @@ final class EditorialPackageDraftImporter
                     'related_test_slug' => $primaryTestSlug,
                     'status' => 'draft',
                     'is_public' => false,
-                    'is_indexable' => (bool) $package['indexability'],
+                    'is_indexable' => false,
                     'published_at' => null,
                     'scheduled_at' => null,
                     'published_revision_id' => null,
@@ -242,6 +244,7 @@ final class EditorialPackageDraftImporter
                     'reading_minutes' => $this->readingMinutes((string) $package['body_markdown']),
                     'slug' => (string) $package['slug'],
                     'locale' => (string) $package['locale'],
+                    ...($translationGroupId !== null ? ['translation_group_id' => $translationGroupId] : []),
                     'title' => (string) $package['title'],
                     'excerpt' => (string) $package['excerpt'],
                     'content_md' => (string) $package['body_markdown'],
@@ -252,7 +255,7 @@ final class EditorialPackageDraftImporter
                     'related_test_slug' => $primaryTestSlug,
                     'status' => 'draft',
                     'is_public' => false,
-                    'is_indexable' => (bool) $package['indexability'],
+                    'is_indexable' => false,
                     'published_at' => null,
                     'scheduled_at' => null,
                     'published_revision_id' => null,
@@ -285,11 +288,11 @@ final class EditorialPackageDraftImporter
                     'og_title' => (string) $package['seo_title'],
                     'og_description' => (string) $package['meta_description'],
                     'og_image_url' => (string) $package['cover_image'],
-                    'robots' => (bool) $package['indexability'] ? 'index,follow' : 'noindex,nofollow',
+                    'robots' => 'noindex,nofollow',
                     'schema_json' => [
                         'editorial_package_v1' => $this->editorialMetadata($package, $plan)['editorial_package_v1'],
                     ],
-                    'is_indexable' => (bool) $package['indexability'],
+                    'is_indexable' => false,
                 ],
             );
 
@@ -347,6 +350,7 @@ final class EditorialPackageDraftImporter
             'title' => trim((string) ($package['title'] ?? '')),
             'slug' => Str::slug(trim((string) ($package['slug'] ?? ''))),
             'locale' => trim((string) ($localeOverride ?: ($package['locale'] ?? 'en'))),
+            'translation_group_id' => trim((string) ($package['translation_group_id'] ?? '')),
             'author' => trim((string) ($package['author'] ?? 'Fermat Institute')),
             'intended_status' => trim((string) ($package['intended_status'] ?? 'draft')),
             'body_markdown' => trim($body),
@@ -468,6 +472,10 @@ final class EditorialPackageDraftImporter
 
         $this->trackSpecificValidation($package, $errors);
         $this->answerSurfaceBoundaryValidation($package, $errors);
+
+        if (mb_strlen((string) $package['translation_group_id']) > 64) {
+            $errors[] = $this->issue('translation_group_id', 'translation_group_id_too_long', 'translation_group_id must be 64 characters or fewer.');
+        }
 
         $claimMatches = $this->claimMatches($package);
         foreach ($claimMatches as $match) {
@@ -1047,6 +1055,7 @@ final class EditorialPackageDraftImporter
             'hero' => (string) $package['cover_image'],
             'editorial_package_v1' => [
                 'package_version' => $package['package_version'],
+                'translation_group_id' => $package['translation_group_id'],
                 'content_track' => $package['content_track'],
                 'topic_cluster' => $package['topic_cluster'],
                 'content_series' => $package['content_series'],
@@ -1120,6 +1129,13 @@ final class EditorialPackageDraftImporter
         if (! in_array($package[$field] ?? null, $allowed, true)) {
             $errors[] = $this->issue($field, 'invalid_enum', $field.' is invalid.');
         }
+    }
+
+    private function nullableString(mixed $value): ?string
+    {
+        $normalized = trim((string) $value);
+
+        return $normalized === '' ? null : $normalized;
     }
 
     /**

@@ -1,7 +1,57 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-01T13:33:00Z",
+  "updated_at": "2026-06-02T11:20:10Z",
   "items": {
+    "SEO-CMS-CANARY-BE-01": {
+      "repo": "fap-api",
+      "branch": "codex/seo-cms-canary-be-01-hreflang-cta-surfaces",
+      "status": "local_checks_passed",
+      "depends_on": [],
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "local": {
+          "status": "passed",
+          "commands": [
+            "cd backend && rg -n \"phpunit|artisan test|scripts|require\" composer.json phpunit.xml",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_5/ArticlePublicApiTest.php --no-ansi",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php --no-ansi",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Console/ArticlePublishControlledCommandTest.php --no-ansi",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Ops/ArticleTranslationContractTest.php --no-ansi",
+            "cd backend && vendor/bin/pint --test app/Models/Article.php app/Services/Cms/ArticleSeoService.php app/Http/Controllers/API/V0_5/Cms/ArticleController.php app/Services/Cms/ArticleService.php app/Services/Cms/EditorialPackage/EditorialPackageDraftImporter.php app/Services/SEO/SitemapGenerator.php app/Filament/Ops/Resources/ArticleResource.php tests/Feature/V0_5/ArticlePublicApiTest.php tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php tests/Feature/Ops/ArticleTranslationContractTest.php",
+            "git diff --check"
+          ],
+          "scope_validation": "passed",
+          "notes": "All targeted checks exited 0. PHPUnit emitted existing file_get_contents warnings. ArticleTranslationContractTest failed on origin/main with the same public-org fixture issue before this branch aligned the scoped fixture to ArticleResource's public content org."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "scope_validation": {
+        "allowed_paths_only": true,
+        "local_validation_passed": true,
+        "github_checks_green": null,
+        "post_merge_revalidated": null
+      },
+      "transitions": [
+        {
+          "at": "2026-06-02T11:00:00Z",
+          "from": "planned_external_manifest",
+          "to": "in_progress",
+          "note": "Started after fap-web SEO-CMS-CANARY-TRAIN-00 merged and cleanup completed."
+        },
+        {
+          "at": "2026-06-02T11:20:10Z",
+          "from": "in_progress",
+          "to": "local_checks_passed",
+          "note": "Composer/phpunit config inspected; targeted Article public API, editorial package import, controlled publish dry-run, translation contract, scoped Pint, and git diff checks passed."
+        }
+      ],
+      "sidecars": [],
+      "next_task": "SEO-CMS-CANARY-WEB-01"
+    },
     "PR-EQ-PER-01": {
       "repo": "fap-api",
       "branch": "codex/pr-eq-per-01-all-free-copy-contract-cleanup",

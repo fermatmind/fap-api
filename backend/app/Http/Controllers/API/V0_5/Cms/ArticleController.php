@@ -319,6 +319,12 @@ class ArticleController extends Controller
     {
         $segment = $this->frontendLocaleSegment($locale);
         $slug = trim((string) $article->slug);
+        $cmsCtas = $this->publicArticleCtaBundle($article, $locale);
+        $ctaBundle = $cmsCtas !== []
+            ? $cmsCtas
+            : $this->fallbackArticleCtaBundle($article, $locale);
+        $startTestTarget = $this->firstStartTestTarget($ctaBundle)
+            ?? $this->articleTestTarget($article, $locale);
 
         return $this->landingSurfaceContractService->build([
             'landing_scope' => 'public_indexable_detail',
@@ -334,28 +340,9 @@ class ArticleController extends Controller
             ],
             'discoverability_keys' => ['article_index', 'topic_hub', 'personality_hub', 'career_recommendations'],
             'continue_reading_keys' => ['article_index', 'topic_hub'],
-            'start_test_target' => '/'.$segment.'/tests/mbti-personality-test-16-personality-types',
+            'start_test_target' => $startTestTarget,
             'content_continue_target' => '/'.$segment.'/articles',
-            'cta_bundle' => [
-                [
-                    'key' => 'back_to_articles',
-                    'label' => $locale === 'zh-CN' ? '返回文章列表' : 'Back to articles',
-                    'href' => '/'.$segment.'/articles',
-                    'kind' => 'content_continue',
-                ],
-                [
-                    'key' => 'topic_hub',
-                    'label' => $locale === 'zh-CN' ? '查看主题聚合' : 'Browse topic hubs',
-                    'href' => '/'.$segment.'/topics',
-                    'kind' => 'discover',
-                ],
-                [
-                    'key' => 'start_test',
-                    'label' => $locale === 'zh-CN' ? '开始测试' : 'Take the test',
-                    'href' => '/'.$segment.'/tests/mbti-personality-test-16-personality-types',
-                    'kind' => 'start_test',
-                ],
-            ],
+            'cta_bundle' => $ctaBundle,
             'indexability_state' => $article->is_indexable ? 'indexable' : 'noindex',
             'attribution_scope' => 'public_article_detail',
             'surface_family' => 'article',
@@ -383,7 +370,8 @@ class ArticleController extends Controller
                 $article->tags->all()
             )))
             : [];
-        $faqBlocks = [
+        $cmsFaqBlocks = $this->publicArticleFaqBlocks($article);
+        $faqBlocks = $cmsFaqBlocks !== [] ? $cmsFaqBlocks : [
             [
                 'key' => 'article_use',
                 'question' => $locale === 'zh-CN' ? '什么时候适合阅读这篇文章？' : 'When should I use this article?',
@@ -419,7 +407,10 @@ class ArticleController extends Controller
                 : null,
         ]));
 
-        $nextStepBlocks = [
+        $cmsNextStepBlocks = $this->answerSurfaceContractService->buildNextStepBlocksFromCtas(
+            $this->publicArticleCtaBundle($article, $locale)
+        );
+        $nextStepBlocks = $cmsNextStepBlocks !== [] ? $cmsNextStepBlocks : [
             [
                 'key' => 'articles_index',
                 'title' => $locale === 'zh-CN' ? '继续浏览文章' : 'Continue with articles',
@@ -438,7 +429,7 @@ class ArticleController extends Controller
                 'key' => 'start_test',
                 'title' => $locale === 'zh-CN' ? '开始测试' : 'Take the test',
                 'body' => $locale === 'zh-CN' ? '如果你想把阅读转成自我测量，可以从测试入口开始。' : 'If you want to turn reading into self-measurement, continue into an assessment.',
-                'href' => '/'.$segment.'/tests/mbti-personality-test-16-personality-types',
+                'href' => $this->articleTestTarget($article, $locale),
                 'kind' => 'start_test',
             ],
         ];
@@ -473,6 +464,213 @@ class ArticleController extends Controller
                 'tag_count' => count($tagNames),
             ],
         ]);
+    }
+
+    /**
+     * @return list<array<string,string>>
+     */
+    private function publicArticleCtaBundle(Article $article, string $locale): array
+    {
+        $metadata = $this->editorialPackageMetadata($article);
+        $slots = is_array($metadata['cta_slots'] ?? null) ? $metadata['cta_slots'] : [];
+        $ctas = [];
+
+        foreach ($slots as $slot) {
+            if (! is_array($slot)) {
+                continue;
+            }
+
+            $label = $this->normalizeString($slot['label'] ?? $slot['title'] ?? null);
+            $href = $this->normalizePublicTestHref($slot['href'] ?? $slot['url'] ?? null);
+            if ($label === null || $href === null) {
+                continue;
+            }
+
+            $key = $this->normalizeString($slot['key'] ?? $slot['slot_id'] ?? $slot['id'] ?? null)
+                ?? 'article_cta_'.(count($ctas) + 1);
+            $kind = $this->normalizeString($slot['kind'] ?? null) ?? 'start_test';
+
+            $ctas[] = [
+                'key' => $key,
+                'label' => $label,
+                'href' => $href,
+                'kind' => $kind,
+            ];
+
+            if (count($ctas) >= 3) {
+                break;
+            }
+        }
+
+        return $ctas;
+    }
+
+    /**
+     * @return list<array<string,string|null>>
+     */
+    private function publicArticleFaqBlocks(Article $article): array
+    {
+        $metadata = $this->editorialPackageMetadata($article);
+        $policy = $this->normalizeString($metadata['answer_surface_policy'] ?? null);
+        $visibility = $this->normalizeString($metadata['answer_surface_visibility'] ?? null);
+        if ($policy !== 'editor_supplied' || $visibility === null || $visibility === 'disabled') {
+            return [];
+        }
+
+        $answerSurface = is_array($metadata['answer_surface_v1'] ?? null) ? $metadata['answer_surface_v1'] : [];
+        $faqItems = is_array($answerSurface['faq_items'] ?? null) ? $answerSurface['faq_items'] : [];
+        $blocks = [];
+
+        foreach ($faqItems as $index => $item) {
+            if (! is_array($item) || $this->isHiddenFaqItem($item)) {
+                continue;
+            }
+
+            $question = $this->normalizeString($item['question'] ?? $item['q'] ?? null);
+            $answer = $this->normalizeString($item['answer'] ?? $item['a'] ?? null);
+            if ($question === null || $answer === null) {
+                continue;
+            }
+
+            $blocks[] = [
+                'key' => $this->normalizeString($item['key'] ?? $item['id'] ?? null) ?? 'article_faq_'.$index,
+                'question' => $question,
+                'answer' => $answer,
+            ];
+
+            if (count($blocks) >= 6) {
+                break;
+            }
+        }
+
+        return $blocks;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function editorialPackageMetadata(Article $article): array
+    {
+        $seoMeta = $article->relationLoaded('seoMeta') ? $article->seoMeta : null;
+        if (is_array($seoMeta?->schema_json) && is_array($seoMeta->schema_json['editorial_package_v1'] ?? null)) {
+            return $seoMeta->schema_json['editorial_package_v1'];
+        }
+
+        $variants = is_array($article->cover_image_variants) ? $article->cover_image_variants : [];
+
+        return is_array($variants['editorial_package_v1'] ?? null)
+            ? $variants['editorial_package_v1']
+            : [];
+    }
+
+    /**
+     * @return list<array<string,string>>
+     */
+    private function fallbackArticleCtaBundle(Article $article, string $locale): array
+    {
+        $segment = $this->frontendLocaleSegment($locale);
+
+        return [
+            [
+                'key' => 'back_to_articles',
+                'label' => $locale === 'zh-CN' ? '返回文章列表' : 'Back to articles',
+                'href' => '/'.$segment.'/articles',
+                'kind' => 'content_continue',
+            ],
+            [
+                'key' => 'topic_hub',
+                'label' => $locale === 'zh-CN' ? '查看主题聚合' : 'Browse topic hubs',
+                'href' => '/'.$segment.'/topics',
+                'kind' => 'discover',
+            ],
+            [
+                'key' => 'start_test',
+                'label' => $locale === 'zh-CN' ? '开始测试' : 'Take the test',
+                'href' => $this->articleTestTarget($article, $locale),
+                'kind' => 'start_test',
+            ],
+        ];
+    }
+
+    private function articleTestTarget(Article $article, string $locale): string
+    {
+        $segment = $this->frontendLocaleSegment($locale);
+        foreach ($this->publicRelatedTestSlugs($article) as $slug) {
+            $href = $this->normalizePublicTestHref('/'.$segment.'/tests/'.$slug);
+            if ($href !== null) {
+                return $href;
+            }
+        }
+
+        return '/'.$segment.'/tests/mbti-personality-test-16-personality-types';
+    }
+
+    /**
+     * @param  list<array<string,string>>  $ctas
+     */
+    private function firstStartTestTarget(array $ctas): ?string
+    {
+        foreach ($ctas as $cta) {
+            $href = $this->normalizePublicTestHref($cta['href'] ?? null);
+            if ($href !== null) {
+                return $href;
+            }
+        }
+
+        return null;
+    }
+
+    private function normalizePublicTestHref(mixed $href): ?string
+    {
+        if (! is_scalar($href)) {
+            return null;
+        }
+
+        $value = trim((string) $href);
+        if ($value === '' || ! str_starts_with($value, '/')) {
+            return null;
+        }
+
+        $parts = parse_url($value);
+        if (! is_array($parts) || isset($parts['query']) || isset($parts['fragment'])) {
+            return null;
+        }
+
+        $path = (string) ($parts['path'] ?? '');
+        if (preg_match('#/(result|orders?|share|pay|payment|history|take)(/|$)#i', $path) === 1) {
+            return null;
+        }
+
+        if (preg_match('#^/(en|zh)/tests/[a-z0-9][a-z0-9-]*$#i', $path) !== 1) {
+            return null;
+        }
+
+        return $path;
+    }
+
+    private function normalizeString(mixed $value): ?string
+    {
+        if (! is_scalar($value)) {
+            return null;
+        }
+
+        $normalized = trim((string) $value);
+
+        return $normalized === '' ? null : $normalized;
+    }
+
+    /**
+     * @param  array<string,mixed>  $item
+     */
+    private function isHiddenFaqItem(array $item): bool
+    {
+        if (($item['hidden'] ?? false) === true || ($item['is_visible'] ?? true) === false) {
+            return true;
+        }
+
+        $visibility = strtolower((string) ($item['visibility'] ?? 'visible'));
+
+        return in_array($visibility, ['hidden', 'disabled', 'private'], true);
     }
 
     /**
@@ -860,7 +1058,7 @@ class ArticleController extends Controller
             'cover_image_alt' => $article->cover_image_alt,
             'cover_image_width' => $article->cover_image_width !== null ? (int) $article->cover_image_width : null,
             'cover_image_height' => $article->cover_image_height !== null ? (int) $article->cover_image_height : null,
-            'cover_image_variants' => PublicMediaUrlGuard::sanitizeArrayFields($article->cover_image_variants, ['url']),
+            'cover_image_variants' => $this->publicCoverImageVariants($article),
             'related_test_slug' => $article->related_test_slug,
             'related_test_slugs' => $this->publicRelatedTestSlugs($article),
             'test_edges' => $this->publicTestEdges($article),
@@ -904,9 +1102,25 @@ class ArticleController extends Controller
             $seoMeta['schema_json'] = PublicMediaUrlGuard::sanitizeJsonLdImageFields(
                 CanonicalFrontendUrl::normalizeNestedUrls($seoMeta['schema_json'])
             );
+            unset($seoMeta['schema_json']['editorial_package_v1']);
         }
 
         return $seoMeta;
+    }
+
+    /**
+     * @return array<string,mixed>|null
+     */
+    private function publicCoverImageVariants(Article $article): ?array
+    {
+        $variants = PublicMediaUrlGuard::sanitizeArrayFields($article->cover_image_variants, ['url']);
+        if (! is_array($variants)) {
+            return null;
+        }
+
+        unset($variants['editorial_package_v1']);
+
+        return $variants;
     }
 
     /**
