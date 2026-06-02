@@ -19576,3 +19576,46 @@ prs:
     fap_web_commit_allowed: false
     frontend_fallback_authority: false
     next_task: ANALYTICS-FUNNEL-GA4-PUBLIC-EVENT-SMOKE-01
+  - id: IQ-BANK-50-01
+    repo: fap-api
+    branch: codex/iq-bank-50-01
+    base: main
+    title: "IQ-BANK-50-01 define beta50 bank manifest spec"
+    train_scope: iq_beta_bank_display_model
+    risk_level: p2_iq_beta50_placeholder_spec
+    depends_on:
+      - IQ-FE-BANK-SWITCH-01
+    scope:
+      - Define IQ_BETA_50_ORIGINAL future placeholder manifest/spec.
+      - Keep runtime_bound=false and public_take_enabled=false.
+      - Add a focused contract test proving no items, answer key, or scoring spec are imported.
+    allowed_paths:
+      - backend/docs/iq/iq-beta-50-bank-spec.md
+      - backend/tests/Feature/Content/IqBeta50BankSpecTest.php
+      - content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_BETA_50_ORIGINAL/manifest.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - cd backend && php artisan test --filter=IqBeta50BankSpec --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Feature/Content/IqBeta50BankSpecTest.php
+      - python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_BETA_50_ORIGINAL/manifest.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: IQ-FE-BETA50-TEASER-01
