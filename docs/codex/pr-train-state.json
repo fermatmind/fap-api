@@ -40409,12 +40409,12 @@
   "SEO-CMS-CANARY-IMPORT-DRYRUN-01": {
     "repo": "fap-api",
     "branch": "codex/seo-cms-canary-import-dryrun-01",
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "depends_on": [
       "SEO-CONTENT-CANARY-PACKAGE-01"
     ],
     "commit_sha": "pending_remote_pr_head",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1858",
     "checks": {
       "dependency_verification": {
         "status": "passed",
@@ -40481,6 +40481,12 @@
         "from": "missing",
         "to": "local_checks_passed",
         "note": "User authorized adding SEO-CMS-CANARY-IMPORT-DRYRUN-01 to fap-api manifest/state and executing docs-only importer dry-run verification. Package validation and public absence checks passed, but importer dry-run failed with schema mismatch and hidden CMS/DB collision remains Unknown. No CMS draft, publish, runtime code, tests, frontend, GPT content edit, production write action, or search submission was performed."
+      },
+      {
+        "at": "2026-06-02T15:59:45Z",
+        "from": "local_checks_passed",
+        "to": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/1858 for docs-only review. NO-GO remains recorded; no CMS draft, publish, runtime code, tests, frontend, GPT content edit, production write action, or search submission was performed."
       }
     ],
     "sidecars": [],
