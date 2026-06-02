@@ -31304,9 +31304,9 @@
       "branch": "codex/iq-bank-50-01",
       "base": "main",
       "title": "IQ-BANK-50-01 define beta50 bank manifest spec",
-      "status": "committed",
-      "commit_sha": "50948b17c22c66e07a40534d4a86f4fc0b3ec75b",
-      "pr_url": null,
+      "status": "pr_open",
+      "commit_sha": "c02723c6102ce0d1422979e90eb745788cb628fe",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1853",
       "checks": {
         "cd backend && php artisan test --filter=IqBeta50BankSpec --no-ansi": {
           "status": "passed"
@@ -31356,6 +31356,11 @@
           "at": "2026-06-02T19:52:49+08:00",
           "status": "committed",
           "summary": "Committed backend beta50 placeholder bank manifest/spec implementation."
+        },
+        {
+          "at": "2026-06-02T19:53:12+08:00",
+          "status": "pr_open",
+          "summary": "Opened fap-api PR #1853 for IQ-BANK-50-01."
         }
       ]
     }
