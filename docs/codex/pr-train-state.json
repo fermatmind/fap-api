@@ -1,13 +1,13 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-02T11:26:10Z",
+  "updated_at": "2026-06-02T11:39:52Z",
   "items": {
     "SEO-CMS-CANARY-BE-01": {
       "repo": "fap-api",
       "branch": "codex/seo-cms-canary-be-01-hreflang-cta-surfaces",
-      "status": "github_checks_failed",
+      "status": "local_checks_passed_after_ci_fix",
       "depends_on": [],
-      "commit_sha": "94c3133853cbadda740da4478d5efbb909bfaa03",
+      "commit_sha": "0bccc4b3a9febc9c2fcb9c19715ff63845fa4561",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1852",
       "checks": {
         "local": {
@@ -50,16 +50,27 @@
             "Semgrep OSS",
             "semgrep sarif non-blocking upload"
           ]
+        },
+        "local_ci_fix": {
+          "status": "passed",
+          "commands": [
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/SEO/SitemapXmlTest.php --no-ansi",
+            "cd backend && vendor/bin/pint --test tests/Feature/SEO/SitemapGeneratorTest.php tests/Feature/SEO/SitemapXmlTest.php",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php vendor/phpunit/phpunit/phpunit --configuration phpunit.xml tests/Feature/V0_5/CareerRecommendationPublicApiTest.php tests/Feature/PersonalityCms/PersonalityBaselineImportTest.php tests/Feature/PersonalityCms/PersonalityVariantAuthorityTest.php tests/Unit/Services/Mbti/MbtiPublicProjectionServiceTest.php tests/Feature/V0_5/PersonalityPublicApiTest.php tests/Feature/SEO/SitemapGeneratorTest.php tests/Feature/SEO/SitemapXmlTest.php tests/Feature/V0_3/MbtiReportHttpContractRegressionTest.php tests/Feature/V0_3/ShareSummaryContractTest.php tests/Feature/V0_3/MbtiCompareInviteContractTest.php",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_5/ArticlePublicApiTest.php --no-ansi",
+            "git diff --check"
+          ],
+          "notes": "GitHub verify-mbti failures were caused by sitemap test fixtures that did not create published article revisions after the production sitemap source began using the public article readable/indexable gate. Updated SitemapGeneratorTest and SitemapXmlTest fixtures to create published revisions for public article URLs."
         }
       },
-      "failure_reason": "GitHub checks failed on 2026-06-02: verify-mbti-legacy and verify-mbti-v2 failed on the current PR check run; verify-bigfive was still pending when execution stopped per PR-train failure policy.",
+      "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
       "scope_validation": {
         "allowed_paths_only": true,
         "local_validation_passed": true,
-        "github_checks_green": false,
+        "github_checks_green": null,
         "post_merge_revalidated": null
       },
       "transitions": [
@@ -86,6 +97,12 @@
           "from": "pr_open",
           "to": "github_checks_failed",
           "note": "Stopped after GitHub checks failed: verify-mbti-legacy and verify-mbti-v2. No merge, cleanup, WEB-01, CMS draft, or publish action was executed."
+        },
+        {
+          "at": "2026-06-02T11:39:52Z",
+          "from": "github_checks_failed",
+          "to": "local_checks_passed_after_ci_fix",
+          "note": "Fixed CI sitemap fixtures to create published revisions under the new article sitemap gate; targeted SitemapXmlTest, CI personality authority gate, ArticlePublicApiTest, scoped Pint, and git diff checks passed locally."
         }
       ],
       "sidecars": [],
