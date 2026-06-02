@@ -101,12 +101,42 @@ the public Career system spans both repositories.
 | 2026-06-01 | fap-web | [#970](https://github.com/fermatmind/fap-web/pull/970) | `2ea27cae88af` | Align Career LLM surfaces to directory/sitemap authority. |
 | 2026-06-01 | fap-api | [#1835](https://github.com/fermatmind/fap-api/pull/1835) | `9257a57f6dd9` | Add 10k directory warm/validate ops gate. |
 | 2026-06-01 | fap-web | [#982](https://github.com/fermatmind/fap-web/pull/982) | `3907e7aaa09a` | Add Career detail P95/P99 latency scan artifact. |
+| 2026-06-01 | fap-web | [#983](https://github.com/fermatmind/fap-web/pull/983) | `14b068e68dc9` | Follow-up reconciliation for Career detail P95/P99 latency scan. |
 | 2026-06-01 | fap-web | [#984](https://github.com/fermatmind/fap-web/pull/984) | `bf6bc6d42664` | Repair Career detail cache/render budget. |
+| 2026-06-01 | fap-web | [#985](https://github.com/fermatmind/fap-web/pull/985) | `be9d63dde181` | Follow-up reconciliation for Career detail cache/render budget. |
 | 2026-06-01 | fap-api | [#1845](https://github.com/fermatmind/fap-api/pull/1845) | `1716749dc17d` | Audit legacy full jobs index consumers. |
 | 2026-06-01 | fap-api | [#1846](https://github.com/fermatmind/fap-api/pull/1846) | `aa5b54b395ff` | Add directory/detail/sitemap/LLM drift gate. |
 | 2026-06-01 | fap-web | [#986](https://github.com/fermatmind/fap-web/pull/986) | `a237fa67e1cf` | Add `llms-full` 10k budget gate. |
 | 2026-06-01 | fap-web | [#987](https://github.com/fermatmind/fap-web/pull/987) | `7f1c0de41f2f` | Improve Career directory UX facet parity. |
 | 2026-06-01 | fap-api | [#1847](https://github.com/fermatmind/fap-api/pull/1847) | `5ef46feea558` | Add read-only Search Channel readiness gate with HOLD decision. |
+| 2026-06-01 | fap-api | [#1848](https://github.com/fermatmind/fap-api/pull/1848) | `0cd32b66091d` | Add Career 10k rollout architecture spec and close this train. |
+
+### Career 10k Scale PR Train Closeout
+
+This train converts the post-1046 Career surface from a successfully launched
+large cohort into a 10k-ready architecture. The train did not publish new
+occupations, mutate CMS/DB state, deploy production, enqueue Search Channel, or
+submit URLs. It established performance scans, cache budgets, authority drift
+gates, LLM artifact budgets, UX parity, Search Channel readiness, and final
+10k rollout architecture.
+
+| Train item | Repo | PRs | Merge commit(s) | Result |
+| --- | --- | --- | --- | --- |
+| `CAREER-DETAIL-P95-LATENCY-SCAN-01` | fap-web | [#982](https://github.com/fermatmind/fap-web/pull/982), [#983](https://github.com/fermatmind/fap-web/pull/983) | `3907e7aaa09a`, `14b068e68dc9` | Added read-only latency scan artifacts for sampled Career detail pages and reconciled the scoped train ledger. |
+| `CAREER-DETAIL-CACHE-BUDGET-REPAIR-01` | fap-web | [#984](https://github.com/fermatmind/fap-web/pull/984), [#985](https://github.com/fermatmind/fap-web/pull/985) | `bf6bc6d42664`, `be9d63dde181` | Repaired detail fetch/cache/render budget without changing backend authority or exposing held slugs. |
+| `CAREER-LEGACY-FULL-JOBS-INDEX-CONSUMER-AUDIT-01` | fap-api | [#1845](https://github.com/fermatmind/fap-api/pull/1845) | `1716749dc17d` | Identified remaining legacy `/api/v0.5/career/jobs` full-index consumers and migration risks. |
+| `CAREER-DIRECTORY-AUTHORITY-DRIFT-GATE-01` | fap-api | [#1846](https://github.com/fermatmind/fap-api/pull/1846) | `aa5b54b395ff` | Added directory/detail/sitemap/LLM count and held-slug drift gate artifacts. |
+| `CAREER-LLMS-FULL-10K-BUDGET-GATE-01` | fap-web | [#986](https://github.com/fermatmind/fap-web/pull/986) | `a237fa67e1cf` | Added synthetic 10k/20k URL budget tests proving `llms-full` stays artifact-first and avoids detail fanout. |
+| `CAREER-DIRECTORY-UX-FACETS-PARITY-01` | fap-web | [#987](https://github.com/fermatmind/fap-web/pull/987) | `7f1c0de41f2f` | Improved EN/ZH directory facet parity, pagination copy, mobile states, empty/error states, and query canonical/noindex behavior. |
+| `CAREER-SEARCH-CHANNEL-READINESS-GATE-01` | fap-api | [#1847](https://github.com/fermatmind/fap-api/pull/1847) | `5ef46feea558` | Produced Search Channel readiness gate with explicit HOLD decision and future staged canary plan; no queue or submission action. |
+| `CAREER-10K-ROLLOUT-ARCHITECTURE-SPEC-01` | fap-api | [#1848](https://github.com/fermatmind/fap-api/pull/1848) | `0cd32b66091d` | Established the backend-owned 10k rollout architecture spec, rollback posture, SLO surface, and future PR boundaries. |
+
+Train sidecar:
+
+- fap-api full Pint still reports existing EQ style issues in
+  `backend/tests/Unit/Eq/EqSjtValidationTelemetryContractTest.php` and
+  `backend/tests/Unit/Report/EqIntegratedReportComposerTest.php`. Scoped
+  Career PR checks passed; the EQ files are outside this train's changed scope.
 
 ### Related fap-web Technical Notes
 
