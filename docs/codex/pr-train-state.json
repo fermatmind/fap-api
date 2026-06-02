@@ -21195,8 +21195,8 @@
         "GLOBAL-EN-ZH-MEDIA-ALT-VISUAL-REVIEW-BATCH-07"
       ],
       "title": "GLOBAL-EN-ZH-GLOBAL-UI-I18N-BATCH-08 global UI i18n parity review and frontend consumer follow-up",
-      "commit_sha": null,
-      "pr_url": null,
+  "commit_sha": "ca0c77ca",
+  "pr_url": "https://github.com/fermatmind/fap-api/pull/1851",
       "checks": {
         "manifest_registration": {
           "status": "pass",
@@ -24294,7 +24294,7 @@
       },
       {
         "at": "2026-05-19T03:38:09.440Z",
-        "status": "local_checks_passed",
+  "status": "open",
         "summary": "Added fap-api CodeQL workflow and train metadata. YAML/JSON validation, git diff checks, and scope validation passed."
       },
       {
@@ -39935,13 +39935,19 @@
         "to": "implementation_in_progress",
         "note": "Initialized by user authorization for purchase/report truth bridge policy."
       },
-      {
-        "at": "2026-06-02T05:28:00Z",
-        "from": "implementation_in_progress",
-        "to": "local_checks_passed",
-        "note": "Focused PHPUnit, route list, scoped Pint, composer validate/audit, JSON/YAML parse, and diff checks passed."
-      }
-    ],
+    {
+      "at": "2026-06-02T05:28:00Z",
+      "from": "implementation_in_progress",
+      "to": "local_checks_passed",
+      "note": "Focused PHPUnit, route list, scoped Pint, composer validate/audit, JSON/YAML parse, and diff checks passed."
+    },
+    {
+      "at": "2026-06-02T05:34:00Z",
+      "from": "local_checks_passed",
+      "to": "open",
+      "note": "Opened https://github.com/fermatmind/fap-api/pull/1851 for GitHub checks and merge review."
+    }
+  ],
     "sidecars": [],
     "next_task": "ANALYTICS-FUNNEL-GA4-PUBLIC-EVENT-SMOKE-01"
   }
