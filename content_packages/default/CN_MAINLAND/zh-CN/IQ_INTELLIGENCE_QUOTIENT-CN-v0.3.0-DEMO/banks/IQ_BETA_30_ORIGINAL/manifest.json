@@ -45,10 +45,26 @@
         "third_party_license_required": false,
         "myiq_science_requires_license_verification_gate_before_use": true
     },
+    "generation_policy": {
+        "wave_1_formal_original_item_count": 12,
+        "beta30_formal_original_extension_item_count": 18,
+        "formal_original_item_count": 30,
+        "competitor_item_capture_allowed": false,
+        "competitor_item_rewrite_allowed": false,
+        "formal_item_source_mode": "repo_generated_original",
+        "required_item_metadata": [
+            "source_mode",
+            "seed",
+            "rule",
+            "difficulty",
+            "reviewer"
+        ]
+    },
     "public_payload_policy": {
         "may_emit_items": true,
         "may_emit_answer_key": false,
-        "may_emit_solution_rule": false
+        "may_emit_solution_rule": false,
+        "may_emit_generator_metadata": false
     },
     "norm_policy": {
         "iq_claims_enabled": false,
