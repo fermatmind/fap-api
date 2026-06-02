@@ -1,0 +1,117 @@
+{
+  "schema_version": "1.0",
+  "task": "ANALYTICS-FUNNEL-PURCHASE-REPORT-TRUTH-BRIDGE-03",
+  "final_decision": "analytics_funnel_purchase_report_truth_bridge_completed_backend_ops_truth_ga4_public_auxiliary",
+  "source_of_truth": {
+    "payment_success": "backend_orders_payment_events_provider_reconciliation",
+    "report_unlock": "active_backend_benefit_grants",
+    "report_ready": "ready_unified_access_projection_with_attempt_receipt_and_result",
+    "ops_read_model": "analytics_funnel_daily",
+    "ga4_role": "public_funnel_reporting_auxiliary_only",
+    "baidu_role": "public_traffic_and_page_observation_only",
+    "frontend_role": "ux_and_public_interaction_observation_only"
+  },
+  "backend_truth_events": [
+    {
+      "event": "payment_success",
+      "authority": "orders.payment_state plus provider reconciliation or payment event authority",
+      "ga4_strategy": "do_not_use_browser_ga4_as_truth",
+      "baidu_strategy": "not_supported_as_truth"
+    },
+    {
+      "event": "report_unlock",
+      "authority": "active benefit_grants for the target attempt/result",
+      "ga4_strategy": "do_not_use_browser_ga4_as_truth",
+      "baidu_strategy": "not_supported_as_truth"
+    },
+    {
+      "event": "report_ready",
+      "authority": "unified_access_projections access_state=ready and report_state=ready with required attempt receipt/result",
+      "ga4_strategy": "do_not_use_browser_ga4_as_truth",
+      "baidu_strategy": "not_supported_as_truth"
+    }
+  ],
+  "ga4_public_auxiliary_events": [
+    "test_start",
+    "test_submit",
+    "result_view",
+    "checkout_start",
+    "order_created"
+  ],
+  "ga4_conditional_server_side_events": [
+    "payment_success",
+    "report_unlock",
+    "report_ready"
+  ],
+  "ga4_conditional_server_side_requirements": {
+    "separate_pr_required": true,
+    "measurement_protocol_not_enabled_in_this_pr": true,
+    "server_side_only": true,
+    "privacy_safe_payload_only": true,
+    "no_raw_order_no": true,
+    "no_raw_user_id": true,
+    "no_raw_email": true,
+    "no_provider_payload": true,
+    "dedupe_event_id_required": true,
+    "dry_run_and_smoke_required": true,
+    "explicit_admin_and_env_approval_required": true
+  },
+  "baidu_allowed_scope": [
+    "public_page_pv_uv_ip",
+    "public_source_entrance_page_observation",
+    "public_landing_or_test_page_element_observation"
+  ],
+  "baidu_forbidden_truth_scope": [
+    "payment_success",
+    "report_unlock",
+    "report_ready",
+    "email_lookup_success",
+    "result_access_token",
+    "private_result_or_order_route_conversion"
+  ],
+  "analytics_funnel_daily_policy": {
+    "remains_backend_truth_for_ops": true,
+    "refresh_not_run_in_this_pr": true,
+    "payment_success_source": "backend payment truth",
+    "report_unlock_source": "active benefit grant truth",
+    "report_ready_source": "projection-ready report access truth"
+  },
+  "implementation_actions": {
+    "production_db_mutation": false,
+    "analytics_refresh": false,
+    "payment_repair": false,
+    "benefit_grant_creation": false,
+    "payment_provider_call": false,
+    "cms_mutation": false,
+    "ga4_admin_change": false,
+    "baidu_admin_change": false,
+    "measurement_protocol_export": false,
+    "search_channel_action": false,
+    "url_submission": false,
+    "deploy": false,
+    "fap_web_change": false
+  },
+  "recommended_next_steps": [
+    {
+      "task": "ANALYTICS-FUNNEL-GA4-PUBLIC-EVENT-SMOKE-01",
+      "scope": "Read-only browser and GA4 DebugView smoke for public auxiliary events only."
+    },
+    {
+      "task": "ANALYTICS-FUNNEL-SERVER-SIDE-GA4-BRIDGE-SPEC-04",
+      "scope": "Optional future spec for privacy-safe server-side Measurement Protocol export of payment/report truth; requires explicit approval before implementation."
+    }
+  ],
+  "no_production_db_mutation": true,
+  "no_analytics_refresh": true,
+  "no_payment_repair": true,
+  "no_benefit_grant_creation": true,
+  "no_payment_provider_call": true,
+  "no_cms_mutation": true,
+  "no_ga4_admin_change": true,
+  "no_baidu_admin_change": true,
+  "no_measurement_protocol_export": true,
+  "no_search_channel_action": true,
+  "no_url_submission": true,
+  "no_deploy": true,
+  "next_task": "ANALYTICS-FUNNEL-GA4-PUBLIC-EVENT-SMOKE-01"
+}
