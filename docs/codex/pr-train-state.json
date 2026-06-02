@@ -1,13 +1,13 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-02T11:21:50Z",
+  "updated_at": "2026-06-02T11:26:10Z",
   "items": {
     "SEO-CMS-CANARY-BE-01": {
       "repo": "fap-api",
       "branch": "codex/seo-cms-canary-be-01-hreflang-cta-surfaces",
-      "status": "pr_open",
+      "status": "github_checks_failed",
       "depends_on": [],
-      "commit_sha": "686c2799487b48d0b75f9de983f87c61884f9391",
+      "commit_sha": "94c3133853cbadda740da4478d5efbb909bfaa03",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1852",
       "checks": {
         "local": {
@@ -23,16 +23,43 @@
           ],
           "scope_validation": "passed",
           "notes": "All targeted checks exited 0. PHPUnit emitted existing file_get_contents warnings. ArticleTranslationContractTest failed on origin/main with the same public-org fixture issue before this branch aligned the scoped fixture to ArticleResource's public content org."
+        },
+        "github": {
+          "status": "failed",
+          "failed_checks": [
+            {
+              "name": "verify-mbti-legacy",
+              "url": "https://github.com/fermatmind/fap-api/actions/runs/26816454211/job/79059557105"
+            },
+            {
+              "name": "verify-mbti-v2",
+              "url": "https://github.com/fermatmind/fap-api/actions/runs/26816454211/job/79059557191"
+            }
+          ],
+          "pending_checks": [
+            {
+              "name": "verify-bigfive",
+              "url": "https://github.com/fermatmind/fap-api/actions/runs/26816454211/job/79059557228"
+            }
+          ],
+          "passed_checks": [
+            "hygiene",
+            "supply-chain",
+            "content-pack-build-validate",
+            "Semgrep blocking secrets",
+            "Semgrep OSS",
+            "semgrep sarif non-blocking upload"
+          ]
         }
       },
-      "failure_reason": null,
+      "failure_reason": "GitHub checks failed on 2026-06-02: verify-mbti-legacy and verify-mbti-v2 failed on the current PR check run; verify-bigfive was still pending when execution stopped per PR-train failure policy.",
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
       "scope_validation": {
         "allowed_paths_only": true,
         "local_validation_passed": true,
-        "github_checks_green": null,
+        "github_checks_green": false,
         "post_merge_revalidated": null
       },
       "transitions": [
@@ -53,6 +80,12 @@
           "from": "local_checks_passed",
           "to": "pr_open",
           "note": "Opened https://github.com/fermatmind/fap-api/pull/1852 for GitHub checks and merge review."
+        },
+        {
+          "at": "2026-06-02T11:26:10Z",
+          "from": "pr_open",
+          "to": "github_checks_failed",
+          "note": "Stopped after GitHub checks failed: verify-mbti-legacy and verify-mbti-v2. No merge, cleanup, WEB-01, CMS draft, or publish action was executed."
         }
       ],
       "sidecars": [],
