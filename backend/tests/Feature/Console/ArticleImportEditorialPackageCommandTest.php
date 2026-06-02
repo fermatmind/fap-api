@@ -297,6 +297,72 @@ final class ArticleImportEditorialPackageCommandTest extends TestCase
         $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
     }
 
+    public function test_canary_importer_adapters_dry_run_pass_without_database_writes(): void
+    {
+        $this->assertCanaryAdapterPreservesSource(
+            base_path('docs/seo/canary-packages/mbti-vs-holland-career-choice.zh-CN.json'),
+            base_path('docs/seo/canary-packages/mbti-vs-holland-career-choice.zh-CN.importer-adapter.json'),
+        );
+        $this->assertCanaryAdapterPreservesSource(
+            base_path('docs/seo/canary-packages/mbti-vs-holland-code-career-choice.en.json'),
+            base_path('docs/seo/canary-packages/mbti-vs-holland-code-career-choice.en.importer-adapter.json'),
+        );
+
+        $this->artisan('articles:import-editorial-package', [
+            '--file' => base_path('docs/seo/canary-packages/mbti-vs-holland-career-choice.zh-CN.importer-adapter.json'),
+            '--locale' => 'zh-CN',
+            '--dry-run' => true,
+        ])
+            ->expectsOutputToContain('dry_run=1')
+            ->expectsOutputToContain('action=will_create')
+            ->expectsOutputToContain('content_track=evergreen_knowledge')
+            ->expectsOutputToContain('target_tests=holland-career-interest-test-riasec,mbti-personality-test-16-personality-types,big-five-personality-test-ocean-model')
+            ->expectsOutputToContain('target_topics=riasec,mbti')
+            ->expectsOutputToContain('errors_count=0')
+            ->expectsOutputToContain('claim_warning=body_markdown:claim_boundary_forbidden_phrase')
+            ->assertExitCode(0);
+
+        $this->artisan('articles:import-editorial-package', [
+            '--file' => base_path('docs/seo/canary-packages/mbti-vs-holland-code-career-choice.en.importer-adapter.json'),
+            '--locale' => 'en',
+            '--dry-run' => true,
+        ])
+            ->expectsOutputToContain('dry_run=1')
+            ->expectsOutputToContain('action=will_create')
+            ->expectsOutputToContain('content_track=evergreen_knowledge')
+            ->expectsOutputToContain('target_tests=holland-career-interest-test-riasec,mbti-personality-test-16-personality-types,big-five-personality-test-ocean-model')
+            ->expectsOutputToContain('target_topics=riasec,mbti')
+            ->expectsOutputToContain('errors_count=0')
+            ->assertExitCode(0);
+
+        $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
+        $this->assertSame(0, ArticleTranslationRevision::query()->withoutGlobalScopes()->count());
+        $this->assertSame(0, ArticleSeoMeta::query()->withoutGlobalScopes()->count());
+        $this->assertSame(0, ArticleEditorialPackageImport::query()->withoutGlobalScopes()->count());
+    }
+
+    public function test_positive_forbidden_claims_still_block_canary_importer_validation(): void
+    {
+        $path = $this->writePackage($this->evergreenPackage([
+            'slug' => 'positive-forbidden-claim-draft',
+            'title' => '官方 MBTI 最准测试保证找到职业',
+            'meta_description' => '这是医学诊断和心理诊断。',
+        ]));
+
+        $this->artisan('articles:import-editorial-package', [
+            '--file' => $path,
+            '--locale' => 'zh-CN',
+            '--dry-run' => true,
+        ])
+            ->expectsOutputToContain('claim_boundary_forbidden_phrase')
+            ->expectsOutputToContain('errors_count=5')
+            ->expectsOutputToContain('claim_matches_count=5')
+            ->assertExitCode(1);
+
+        $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
+        $this->assertSame(0, ArticleEditorialPackageImport::query()->withoutGlobalScopes()->count());
+    }
+
     public function test_existing_published_article_slug_is_reported_and_not_mutated(): void
     {
         $category = ArticleCategory::query()->withoutGlobalScopes()->create([
@@ -524,6 +590,33 @@ final class ArticleImportEditorialPackageCommandTest extends TestCase
         file_put_contents($path, json_encode($package, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
 
         return $path;
+    }
+
+    private function assertCanaryAdapterPreservesSource(string $sourcePath, string $adapterPath): void
+    {
+        $source = json_decode((string) file_get_contents($sourcePath), true);
+        $adapter = json_decode((string) file_get_contents($adapterPath), true);
+        $this->assertIsArray($source);
+        $this->assertIsArray($adapter);
+
+        foreach (['title', 'h1', 'seo_title', 'seo_description', 'excerpt', 'body_markdown', 'faq', 'cta_slots'] as $field) {
+            $this->assertSame($source[$field], $adapter[$field], $field.' should be mechanically preserved.');
+        }
+
+        $this->assertSame($source['seo_description'], $adapter['meta_description']);
+        $this->assertSame('https://fermatmind.com'.$source['canonical_path'], $adapter['canonical']);
+        $this->assertSame($source['faq'], data_get($adapter, 'answer_surface_v1.faq_items'));
+        $this->assertFalse((bool) data_get($adapter, 'publish_gate.publish_allowed'));
+        $this->assertFalse((bool) data_get($adapter, 'adapter_publish_gate.publish_allowed'));
+        $this->assertSame('draft', (string) $adapter['intended_status']);
+        $this->assertFalse((bool) $adapter['indexability']);
+
+        foreach ($adapter['cta_slots'] as $slot) {
+            $href = (string) ($slot['href'] ?? '');
+            $this->assertTrue(str_starts_with($href, '/zh/tests/') || str_starts_with($href, '/en/tests/'));
+            $this->assertMatchesRegularExpression('/^\\/(zh|en)\\/tests\\/[a-z0-9-]+$/', $href);
+            $this->assertDoesNotMatchRegularExpression('/(result|orders|share|pay|payment|history|take|token|^https?:\\/\\/)/i', $href);
+        }
     }
 
     private function normalizedBodyHash(string $body): string

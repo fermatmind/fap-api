@@ -39387,7 +39387,7 @@
     "depends_on": [
       "ANALYTICS-FUNNEL-REPORT-READY-PROJECTION-MAPPING-02"
     ],
-    "commit_sha": null,
+    "commit_sha": "pending_remote_pr_head",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1850",
     "checks": {
       "manifest_registration": {
@@ -39953,7 +39953,7 @@
     "repo": "fap-api",
     "branch": "codex/analytics-funnel-ga4-baidu-mapping-scan-01",
     "base": "main",
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "title": "ANALYTICS-FUNNEL-GA4-BAIDU-MAPPING-SCAN-01 freeze GA4 Baidu funnel mapping",
     "depends_on": [
       "ANALYTICS-FUNNEL-REPORT-READY-MERGE-TIMESTAMP-03"
@@ -40501,11 +40501,11 @@
   "SEO-CMS-CANARY-PACKAGE-ADAPTER-01": {
     "repo": "fap-api",
     "branch": "codex/seo-cms-canary-package-adapter-01",
-    "status": "pr_open",
+    "status": "merged",
     "depends_on": [
       "SEO-CMS-CANARY-IMPORT-DRYRUN-01"
     ],
-    "commit_sha": "pending_remote_pr_head",
+    "commit_sha": "2c0cf1bf81b3ff751d75112914863850c5bacf15",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1859",
     "checks": {
       "dependency_verification": {
@@ -40556,14 +40556,14 @@
       }
     },
     "failure_reason": "NO-GO for SEO-CONTENT-P1-08: adapter artifacts were created and English adapter dry-run passed, but Chinese adapter dry-run still fails current importer body/claim gates and hidden CMS/DB collision remains Unknown.",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-02T16:23:49Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null
+      "github_checks_green": true,
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -40577,9 +40577,92 @@
         "from": "local_checks_passed",
         "to": "pr_open",
         "note": "Opened https://github.com/fermatmind/fap-api/pull/1859 for docs-only review. NO-GO remains recorded for SEO-CONTENT-P1-08; no CMS draft, publish, production write action, runtime code, tests, frontend, GPT content rewrite, or search submission was performed."
+      },
+      {
+        "at": "2026-06-02T16:41:50Z",
+        "from": "pr_open",
+        "to": "merged",
+        "note": "Reconciled before SEO-CMS-CANARY-IMPORTER-GATE-01: GitHub PR #1859 is MERGED with merge commit 2c0cf1bf81b3ff751d75112914863850c5bacf15, origin/main contains the merge commit, and the remote task branch is no longer present."
       }
     ],
     "sidecars": [],
     "next_task": "SEO-CONTENT-P1-08 remains blocked. Next step is either importer rule/schema mapping for the Chinese package gates or authorized operator readonly hidden collision verification after adapter/importer gates pass."
+  },
+  "SEO-CMS-CANARY-IMPORTER-GATE-01": {
+    "repo": "fap-api",
+    "branch": "codex/seo-cms-canary-importer-gate-01",
+    "status": "local_checks_passed",
+    "depends_on": [
+      "SEO-CMS-CANARY-PACKAGE-ADAPTER-01"
+    ],
+    "commit_sha": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1860",
+    "checks": {
+      "dependency_verification": {
+        "status": "passed",
+        "commands": [
+          "gh pr view 1859 --repo fermatmind/fap-api --json state,mergedAt,mergeCommit,headRefName,headRepositoryOwner,baseRefName,url,headRefOid",
+          "git fetch origin main --prune",
+          "git merge-base --is-ancestor 2c0cf1bf81b3ff751d75112914863850c5bacf15 origin/main",
+          "git ls-remote --heads origin codex/seo-cms-canary-package-adapter-01 codex/seo-cms-canary-importer-gate-01"
+        ],
+        "notes": "SEO-CMS-CANARY-PACKAGE-ADAPTER-01 is merged as PR #1859 and origin/main contains merge commit 2c0cf1bf81b3ff751d75112914863850c5bacf15. The adapter remote branch is absent."
+      },
+      "importer_gate_validation": {
+        "status": "passed",
+        "commands": [
+          "cd backend && php artisan test tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php",
+          "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap_canary_adapter.sqlite php backend/artisan articles:import-editorial-package --file=docs/seo/canary-packages/mbti-vs-holland-career-choice.zh-CN.importer-adapter.json --locale=zh-CN --dry-run --json",
+          "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap_canary_adapter.sqlite php backend/artisan articles:import-editorial-package --file=docs/seo/canary-packages/mbti-vs-holland-code-career-choice.en.importer-adapter.json --locale=en --dry-run --json"
+        ],
+        "notes": "Targeted console tests passed. Both zh-CN and en adapter dry-runs returned ok=true/action=will_create/errors=[] against local testing SQLite, and table counts stayed zero for articles, article_translation_revisions, article_seo_meta, and article_editorial_package_imports. Positive unsupported claims still fail validation."
+      },
+      "package_artifacts": {
+        "status": "passed",
+        "commands": [
+          "python3 -m json.tool backend/docs/seo/canary-packages/mbti-vs-holland-career-choice.zh-CN.json >/dev/null",
+          "python3 -m json.tool backend/docs/seo/canary-packages/mbti-vs-holland-code-career-choice.en.json >/dev/null",
+          "python3 -m json.tool backend/docs/seo/canary-packages/mbti-vs-holland-career-choice.zh-CN.importer-adapter.json >/dev/null",
+          "python3 -m json.tool backend/docs/seo/canary-packages/mbti-vs-holland-code-career-choice.en.importer-adapter.json >/dev/null"
+        ],
+        "notes": "Source and adapter artifacts remain parseable. The test suite verifies adapter/source equivalence for the fields that must be mechanically preserved."
+      },
+      "local": {
+        "status": "passed",
+        "commands": [
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "git diff --check -- backend/app/Services/Cms/EditorialPackage backend/tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php backend/docs/seo docs/codex",
+          "git diff --cached --check"
+        ],
+        "notes": "Train metadata parse checks and whitespace checks pass. Cached diff check is run after path-limited staging."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-06-02T16:41:50Z",
+        "from": "missing",
+        "to": "local_checks_passed",
+        "note": "User authorized SEO-CMS-CANARY-IMPORTER-GATE-01 to fix the Chinese adapter importer gates. Updated evergreen and claim-boundary importer validation, added targeted no-write dry-run tests for both adapter artifacts, and kept SEO-CONTENT-P1-08 blocked because hidden CMS/DB collision remains Unknown. No CMS draft, publish, production write action, GPT content rewrite, frontend change, or search submission was performed."
+      },
+      {
+        "at": "2026-06-02T16:45:11Z",
+        "from": "local_checks_passed",
+        "to": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/1860 for importer gate review. SEO-CONTENT-P1-08 remains blocked until this PR is merged and hidden CMS/DB collision is operator-verified by readonly path."
+      }
+    ],
+    "sidecars": [],
+    "next_task": "SEO-CMS-CANARY-OPERATOR-COLLISION-01 may proceed only after this PR is merged; SEO-CONTENT-P1-08 remains blocked until hidden CMS/DB collision is operator-verified by readonly path."
   }
 }

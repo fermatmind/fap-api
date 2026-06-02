@@ -19860,3 +19860,58 @@ prs:
     frontend_fallback_authority: false
     content_authority: CMS/backend
     next_task: SEO-CONTENT-P1-08 remains blocked unless adapter/importer dry-run fully passes and hidden collision is operator-verified
+
+  - id: SEO-CMS-CANARY-IMPORTER-GATE-01
+    repo: fap-api
+    depends_on:
+      - SEO-CMS-CANARY-PACKAGE-ADAPTER-01
+    branch: codex/seo-cms-canary-importer-gate-01
+    title: "fix(cms): allow boundary-safe SEO canary importer dry-run"
+    train_scope: seo_cms_canary
+    scope:
+      - Tune the controlled editorial package importer evergreen and claim-boundary gates so the mechanically preserved bilingual SEO canary adapter package can dry-run safely.
+      - Preserve strict blocking for positive unsupported claims while allowing explicitly boundary-safe negative phrasing as dry-run warnings.
+      - Add targeted console tests proving both adapter artifacts dry-run without CMS table writes.
+      - Reconcile SEO-CMS-CANARY-PACKAGE-ADAPTER-01 train state as merged before continuing.
+    allowed_paths:
+      - backend/app/Services/Cms/EditorialPackage/**
+      - backend/tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php
+      - backend/docs/seo/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Execute SEO-CONTENT-P1-08.
+      - Create CMS drafts, save CMS forms, create Articles, publish, or call production write APIs.
+      - Modify original GPT-5.5 Pro title, H1, meta, body, FAQ, CTA labels, CTA hrefs, or prose.
+      - Modify routes, migrations, package files, sitemap runtime, analytics runtime, frontend files, or production configuration.
+      - Submit sitemap, Baidu push, IndexNow, or any search-channel live action.
+      - Read or expose env, cookies, tokens, or real result/order/share/payment IDs.
+    validation:
+      - cd backend && php artisan test tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php
+      - python3 -m json.tool backend/docs/seo/canary-packages/mbti-vs-holland-career-choice.zh-CN.json >/dev/null
+      - python3 -m json.tool backend/docs/seo/canary-packages/mbti-vs-holland-code-career-choice.en.json >/dev/null
+      - python3 -m json.tool backend/docs/seo/canary-packages/mbti-vs-holland-career-choice.zh-CN.importer-adapter.json >/dev/null
+      - python3 -m json.tool backend/docs/seo/canary-packages/mbti-vs-holland-code-career-choice.en.importer-adapter.json >/dev/null
+      - APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap_canary_adapter.sqlite php backend/artisan articles:import-editorial-package --file=docs/seo/canary-packages/mbti-vs-holland-career-choice.zh-CN.importer-adapter.json --locale=zh-CN --dry-run --json
+      - APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap_canary_adapter.sqlite php backend/artisan articles:import-editorial-package --file=docs/seo/canary-packages/mbti-vs-holland-code-career-choice.en.importer-adapter.json --locale=en --dry-run --json
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- backend/app/Services/Cms/EditorialPackage backend/tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php backend/docs/seo docs/codex
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: SEO-CONTENT-P1-08 remains blocked until hidden CMS/DB collision is operator-verified by readonly path
