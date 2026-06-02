@@ -19474,3 +19474,52 @@ prs:
       - git diff --cached --check
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
     next_task: none
+
+  - id: ANALYTICS-FUNNEL-GA4-BAIDU-MAPPING-SCAN-01
+    repo: fap-api
+    branch: codex/analytics-funnel-ga4-baidu-mapping-scan-01
+    base: main
+    title: "ANALYTICS-FUNNEL-GA4-BAIDU-MAPPING-SCAN-01 freeze GA4 Baidu funnel mapping"
+    train_scope: analytics_funnel_ga4_baidu_alignment
+    risk_level: p1_analytics_funnel_observability
+    depends_on:
+      - ANALYTICS-FUNNEL-REPORT-READY-MERGE-TIMESTAMP-03
+    scope:
+      - Produce backend-owned mapping artifacts that align backend funnel truth with GA4 key event recommendations and Baidu observable boundaries.
+      - Document that backend orders, benefit grants, unified access projections, and analytics_funnel_daily remain payment/unlock/report-ready truth.
+      - Document that GA4 and Baidu are reporting surfaces only and cannot decide paid, unlock, report-ready, email lookup, or result access truth.
+      - Do not change GA4 admin settings, Baidu settings, production analytics refresh, production DB, payment state, CMS, Search Channel, URL submission, deploy, or fap-web runtime.
+    allowed_paths:
+      - backend/docs/seo/analytics-funnel-ga4-baidu-mapping-scan-01.md
+      - backend/docs/seo/generated/analytics-funnel-ga4-baidu-mapping-scan-01.v1.json
+      - backend/tests/Feature/SeoIntel/AnalyticsFunnelGa4BaiduMappingScan01Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - cd backend && php artisan test --filter=AnalyticsFunnelGa4BaiduMappingScan01 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Feature/SeoIntel/AnalyticsFunnelGa4BaiduMappingScan01Test.php
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/analytics-funnel-ga4-baidu-mapping-scan-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    payment_repair_allowed: false
+    payment_provider_call: false
+    analytics_refresh_allowed: false
+    ga_admin_change: false
+    baidu_admin_change: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: ANALYTICS-FUNNEL-WEB-EVENT-NAME-ALIGNMENT-02

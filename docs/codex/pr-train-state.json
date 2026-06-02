@@ -37977,7 +37977,7 @@
     "branch": "codex/analytics-funnel-ops-org0-visibility-repair-01",
     "base": "main",
     "title": "ANALYTICS-FUNNEL-OPS-ORG0-VISIBILITY-REPAIR-01 show global org0 funnel rows",
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "depends_on": [
       "ANALYTICS-FUNNEL-CONTROLLED-REFRESH-WRITE-GUARD-01"
     ],
@@ -39210,7 +39210,7 @@
       "ANALYTICS-FUNNEL-REPORT-READY-PROJECTION-MAPPING-02"
     ],
     "commit_sha": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1850",
     "checks": {
       "manifest_registration": {
         "status": "pass",
@@ -39769,5 +39769,94 @@
       }
     ],
     "next_task": "none"
+  },
+  "ANALYTICS-FUNNEL-GA4-BAIDU-MAPPING-SCAN-01": {
+    "id": "ANALYTICS-FUNNEL-GA4-BAIDU-MAPPING-SCAN-01",
+    "repo": "fap-api",
+    "branch": "codex/analytics-funnel-ga4-baidu-mapping-scan-01",
+    "base": "main",
+    "status": "local_checks_passed",
+    "title": "ANALYTICS-FUNNEL-GA4-BAIDU-MAPPING-SCAN-01 freeze GA4 Baidu funnel mapping",
+    "depends_on": [
+      "ANALYTICS-FUNNEL-REPORT-READY-MERGE-TIMESTAMP-03"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding ANALYTICS-FUNNEL-GA4-BAIDU-MAPPING-SCAN-01 to fap-api docs/codex/pr-train.yaml and docs/codex/pr-train-state.json."
+      },
+      "scope_boundaries": {
+        "status": "pass",
+        "evidence": "Scope is limited to backend-owned GA4/Baidu mapping docs, generated JSON, focused SeoIntel test, and PR train metadata. No GA4 admin setting, Baidu setting, production analytics refresh, production DB mutation, payment repair, payment provider call, CMS mutation, Search Channel action, URL submission, deploy, or fap-web runtime change is allowed."
+      },
+      "focused_phpunit": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=AnalyticsFunnelGa4BaiduMappingScan01 --no-ansi",
+        "evidence": "PASS, 1 test / 21 assertions."
+      },
+      "route_list": {
+        "status": "pass",
+        "command": "cd backend && php artisan route:list --no-ansi",
+        "evidence": "PASS, route list rendered successfully with 210 routes."
+      },
+      "scoped_pint": {
+        "status": "pass",
+        "command": "cd backend && vendor/bin/pint --test tests/Feature/SeoIntel/AnalyticsFunnelGa4BaiduMappingScan01Test.php",
+        "evidence": "PASS, focused PR test file is formatted."
+      },
+      "composer_validate": {
+        "status": "pass",
+        "command": "cd backend && composer validate --strict",
+        "evidence": "PASS, composer.json is valid."
+      },
+      "composer_audit": {
+        "status": "pass",
+        "command": "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+        "evidence": "PASS, no security vulnerability advisories found."
+      },
+      "json_yaml_diff": {
+        "status": "pass",
+        "command": "python3 -m json.tool backend/docs/seo/generated/analytics-funnel-ga4-baidu-mapping-scan-01.v1.json >/dev/null && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\" && git diff --check && git diff --cached --check",
+        "evidence": "PASS."
+      },
+      "career_10k_rollout_architecture_spec_01_reconciliation": {
+        "status": "pass",
+        "evidence": "GitHub PR #1848 is MERGED at 0cd32b66091d9d324322170b04f3f7a49d032bde with required checks green; stale ledger pr_open state is treated as bookkeeping only and not a retry."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-06-02T00:00:00Z",
+        "from": "missing",
+        "to": "implementation_in_progress",
+        "note": "Initialized by user authorization for GA4/Baidu event mapping alignment."
+      },
+      {
+        "at": "2026-06-02T00:00:00Z",
+        "from": "implementation_in_progress",
+        "to": "local_checks_passed",
+        "note": "Focused PHPUnit, route list, scoped Pint, composer validate/audit, JSON/YAML parse, and diff checks passed."
+      },
+      {
+        "at": "2026-06-02T00:00:00Z",
+        "from": "local_checks_passed",
+        "to": "pr_open",
+        "note": "Opened PR #1850 for GA4/Baidu funnel mapping scan."
+      }
+    ],
+    "sidecars": [],
+    "next_task": "ANALYTICS-FUNNEL-WEB-EVENT-NAME-ALIGNMENT-02"
   }
 }
