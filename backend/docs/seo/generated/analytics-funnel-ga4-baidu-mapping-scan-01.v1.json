@@ -1,0 +1,164 @@
+{
+  "schema_version": "1.0",
+  "task": "ANALYTICS-FUNNEL-GA4-BAIDU-MAPPING-SCAN-01",
+  "final_decision": "analytics_funnel_ga4_baidu_mapping_scan_completed_ready_for_web_event_alignment",
+  "source_of_truth": {
+    "payment_truth": "backend_orders_payment_events_provider_reconciliation",
+    "unlock_truth": "active_backend_benefit_grants",
+    "report_ready_truth": "ready_unified_access_projection_with_receipt_and_result",
+    "ops_read_model_truth": "analytics_funnel_daily",
+    "ga4_truth_role": "reporting_and_attribution_only",
+    "baidu_truth_role": "traffic_and_public_page_observation_only",
+    "frontend_truth_role": "ux_state_only"
+  },
+  "canonical_event_mapping": [
+    {
+      "backend_event": "page_view",
+      "ga4_event": "page_view",
+      "ga4_key_event": false,
+      "baidu_observable": true,
+      "backend_truth_required": false,
+      "notes": "Public page PV only; private routes and sensitive query params must remain suppressed."
+    },
+    {
+      "backend_event": "test_start",
+      "legacy_frontend_aliases": ["start_attempt"],
+      "ga4_event": "test_start",
+      "ga4_key_event": true,
+      "baidu_observable": true,
+      "backend_truth_required": true
+    },
+    {
+      "backend_event": "question_answer",
+      "ga4_event": "question_answer",
+      "ga4_key_event": false,
+      "baidu_observable": false,
+      "backend_truth_required": true
+    },
+    {
+      "backend_event": "test_submit",
+      "legacy_frontend_aliases": ["submit_attempt"],
+      "ga4_event": "test_submit",
+      "ga4_key_event": true,
+      "baidu_observable": true,
+      "backend_truth_required": true
+    },
+    {
+      "backend_event": "result_view",
+      "legacy_frontend_aliases": ["view_result"],
+      "ga4_event": "result_view",
+      "ga4_key_event": true,
+      "baidu_observable": true,
+      "backend_truth_required": true
+    },
+    {
+      "backend_event": "checkout_start",
+      "legacy_frontend_aliases": ["begin_checkout"],
+      "ga4_event": "checkout_start",
+      "ga4_key_event": true,
+      "baidu_observable": false,
+      "backend_truth_required": false,
+      "notes": "Checkout intent is not payment truth."
+    },
+    {
+      "backend_event": "order_created",
+      "legacy_frontend_aliases": ["create_order"],
+      "ga4_event": "order_created",
+      "ga4_key_event": true,
+      "baidu_observable": false,
+      "backend_truth_required": true
+    },
+    {
+      "backend_event": "payment_success",
+      "legacy_frontend_aliases": ["purchase_success", "pay_success", "payment_confirmed"],
+      "ga4_event": "payment_success",
+      "ga4_key_event": "conditional_privacy_safe_bridge_required",
+      "baidu_observable": false,
+      "backend_truth_required": true,
+      "notes": "Backend payment truth must remain authoritative; browser-only GA4 must not decide paid state."
+    },
+    {
+      "backend_event": "report_unlock",
+      "legacy_frontend_aliases": ["unlock_success", "clinical_unlock_success"],
+      "ga4_event": "report_unlock",
+      "ga4_key_event": "conditional_privacy_safe_bridge_required",
+      "baidu_observable": false,
+      "backend_truth_required": true
+    },
+    {
+      "backend_event": "report_ready",
+      "ga4_event": "report_ready",
+      "ga4_key_event": "conditional_privacy_safe_bridge_required",
+      "baidu_observable": false,
+      "backend_truth_required": true,
+      "notes": "Ready unified access projection with receipt/result is the current report-ready truth."
+    },
+    {
+      "backend_event": "pdf_download",
+      "legacy_frontend_aliases": ["report_pdf_view"],
+      "ga4_event": "pdf_download",
+      "ga4_key_event": "optional",
+      "baidu_observable": false,
+      "backend_truth_required": true
+    },
+    {
+      "backend_event": "share_generate",
+      "ga4_event": "share_generate",
+      "ga4_key_event": "optional",
+      "baidu_observable": false,
+      "backend_truth_required": true
+    },
+    {
+      "backend_event": "share_click",
+      "ga4_event": "share_click",
+      "ga4_key_event": "optional",
+      "baidu_observable": true,
+      "backend_truth_required": true
+    }
+  ],
+  "recommended_ga4_key_events": [
+    "test_start",
+    "test_submit",
+    "result_view",
+    "checkout_start",
+    "order_created"
+  ],
+  "conditional_ga4_key_events": [
+    "payment_success",
+    "report_unlock",
+    "report_ready"
+  ],
+  "baidu_observable_scope": [
+    "public_page_pv_uv_ip",
+    "source_and_entrance_page",
+    "visited_page_diagnostics",
+    "public_landing_or_test_page_conversion_observation"
+  ],
+  "baidu_forbidden_truth_scope": [
+    "payment_success",
+    "report_unlock",
+    "report_ready",
+    "result_access_token",
+    "email_lookup_success",
+    "private_route_conversion"
+  ],
+  "privacy_requirements": {
+    "suppress_private_routes": true,
+    "suppress_sensitive_query_keys": true,
+    "no_raw_order_no": true,
+    "no_raw_user_id": true,
+    "no_raw_email": true,
+    "no_provider_payload": true
+  },
+  "no_ga_admin_change": true,
+  "no_baidu_admin_change": true,
+  "no_production_refresh": true,
+  "no_production_db_mutation": true,
+  "no_payment_repair": true,
+  "no_payment_provider_call": true,
+  "no_cms_mutation": true,
+  "no_search_channel_action": true,
+  "no_url_submission": true,
+  "no_deploy": true,
+  "next_task": "ANALYTICS-FUNNEL-WEB-EVENT-NAME-ALIGNMENT-02"
+}
