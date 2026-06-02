@@ -3,6 +3,7 @@
 namespace Tests\Feature\SEO;
 
 use App\Models\Article;
+use App\Models\ArticleTranslationRevision;
 use App\Models\CareerGuide;
 use App\Models\CareerJob;
 use App\Models\CareerJobSeoMeta;
@@ -782,7 +783,7 @@ class SitemapGeneratorTest extends TestCase
     private function createArticle(array $overrides = []): Article
     {
         /** @var Article */
-        return Article::query()->create(array_merge([
+        $article = Article::query()->create(array_merge([
             'org_id' => 0,
             'category_id' => null,
             'author_admin_user_id' => null,
@@ -801,6 +802,31 @@ class SitemapGeneratorTest extends TestCase
             'created_at' => Carbon::create(2026, 3, 6, 8, 0, 0, 'UTC'),
             'updated_at' => Carbon::create(2026, 3, 6, 8, 0, 0, 'UTC'),
         ], $overrides));
+
+        /** @var ArticleTranslationRevision */
+        $revision = ArticleTranslationRevision::query()->create([
+            'org_id' => (int) $article->org_id,
+            'article_id' => (int) $article->id,
+            'source_article_id' => (int) ($article->source_article_id ?: $article->id),
+            'translation_group_id' => (string) $article->translation_group_id,
+            'locale' => (string) $article->locale,
+            'source_locale' => (string) ($article->source_locale ?: $article->locale),
+            'revision_number' => 1,
+            'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
+            'source_version_hash' => $article->source_version_hash,
+            'translated_from_version_hash' => $article->translated_from_version_hash ?: $article->source_version_hash,
+            'supersedes_revision_id' => null,
+            'title' => (string) $article->title,
+            'excerpt' => $article->excerpt,
+            'content_md' => (string) $article->content_md,
+            'seo_title' => null,
+            'seo_description' => null,
+            'published_at' => $article->published_at,
+        ]);
+
+        $article->forceFill(['published_revision_id' => $revision->id])->save();
+
+        return $article->fresh(['publishedRevision']) ?? $article;
     }
 
     /**

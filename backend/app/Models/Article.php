@@ -187,6 +187,13 @@ class Article extends Model
             });
     }
 
+    public function scopePubliclyIndexable($query)
+    {
+        return $query
+            ->publiclyReadable()
+            ->where('is_indexable', true);
+    }
+
     public function revisions(): HasMany
     {
         return $this->hasMany(ArticleRevision::class, 'article_id', 'id');

@@ -1,7 +1,113 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-01T13:33:00Z",
+  "updated_at": "2026-06-02T11:39:52Z",
   "items": {
+    "SEO-CMS-CANARY-BE-01": {
+      "repo": "fap-api",
+      "branch": "codex/seo-cms-canary-be-01-hreflang-cta-surfaces",
+      "status": "local_checks_passed_after_ci_fix",
+      "depends_on": [],
+      "commit_sha": "0bccc4b3a9febc9c2fcb9c19715ff63845fa4561",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1852",
+      "checks": {
+        "local": {
+          "status": "passed",
+          "commands": [
+            "cd backend && rg -n \"phpunit|artisan test|scripts|require\" composer.json phpunit.xml",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_5/ArticlePublicApiTest.php --no-ansi",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php --no-ansi",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Console/ArticlePublishControlledCommandTest.php --no-ansi",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Ops/ArticleTranslationContractTest.php --no-ansi",
+            "cd backend && vendor/bin/pint --test app/Models/Article.php app/Services/Cms/ArticleSeoService.php app/Http/Controllers/API/V0_5/Cms/ArticleController.php app/Services/Cms/ArticleService.php app/Services/Cms/EditorialPackage/EditorialPackageDraftImporter.php app/Services/SEO/SitemapGenerator.php app/Filament/Ops/Resources/ArticleResource.php tests/Feature/V0_5/ArticlePublicApiTest.php tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php tests/Feature/Ops/ArticleTranslationContractTest.php",
+            "git diff --check"
+          ],
+          "scope_validation": "passed",
+          "notes": "All targeted checks exited 0. PHPUnit emitted existing file_get_contents warnings. ArticleTranslationContractTest failed on origin/main with the same public-org fixture issue before this branch aligned the scoped fixture to ArticleResource's public content org."
+        },
+        "github": {
+          "status": "failed",
+          "failed_checks": [
+            {
+              "name": "verify-mbti-legacy",
+              "url": "https://github.com/fermatmind/fap-api/actions/runs/26816454211/job/79059557105"
+            },
+            {
+              "name": "verify-mbti-v2",
+              "url": "https://github.com/fermatmind/fap-api/actions/runs/26816454211/job/79059557191"
+            }
+          ],
+          "pending_checks": [
+            {
+              "name": "verify-bigfive",
+              "url": "https://github.com/fermatmind/fap-api/actions/runs/26816454211/job/79059557228"
+            }
+          ],
+          "passed_checks": [
+            "hygiene",
+            "supply-chain",
+            "content-pack-build-validate",
+            "Semgrep blocking secrets",
+            "Semgrep OSS",
+            "semgrep sarif non-blocking upload"
+          ]
+        },
+        "local_ci_fix": {
+          "status": "passed",
+          "commands": [
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/SEO/SitemapXmlTest.php --no-ansi",
+            "cd backend && vendor/bin/pint --test tests/Feature/SEO/SitemapGeneratorTest.php tests/Feature/SEO/SitemapXmlTest.php",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php vendor/phpunit/phpunit/phpunit --configuration phpunit.xml tests/Feature/V0_5/CareerRecommendationPublicApiTest.php tests/Feature/PersonalityCms/PersonalityBaselineImportTest.php tests/Feature/PersonalityCms/PersonalityVariantAuthorityTest.php tests/Unit/Services/Mbti/MbtiPublicProjectionServiceTest.php tests/Feature/V0_5/PersonalityPublicApiTest.php tests/Feature/SEO/SitemapGeneratorTest.php tests/Feature/SEO/SitemapXmlTest.php tests/Feature/V0_3/MbtiReportHttpContractRegressionTest.php tests/Feature/V0_3/ShareSummaryContractTest.php tests/Feature/V0_3/MbtiCompareInviteContractTest.php",
+            "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_5/ArticlePublicApiTest.php --no-ansi",
+            "git diff --check"
+          ],
+          "notes": "GitHub verify-mbti failures were caused by sitemap test fixtures that did not create published article revisions after the production sitemap source began using the public article readable/indexable gate. Updated SitemapGeneratorTest and SitemapXmlTest fixtures to create published revisions for public article URLs."
+        }
+      },
+      "failure_reason": null,
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "scope_validation": {
+        "allowed_paths_only": true,
+        "local_validation_passed": true,
+        "github_checks_green": null,
+        "post_merge_revalidated": null
+      },
+      "transitions": [
+        {
+          "at": "2026-06-02T11:00:00Z",
+          "from": "planned_external_manifest",
+          "to": "in_progress",
+          "note": "Started after fap-web SEO-CMS-CANARY-TRAIN-00 merged and cleanup completed."
+        },
+        {
+          "at": "2026-06-02T11:20:10Z",
+          "from": "in_progress",
+          "to": "local_checks_passed",
+          "note": "Composer/phpunit config inspected; targeted Article public API, editorial package import, controlled publish dry-run, translation contract, scoped Pint, and git diff checks passed."
+        },
+        {
+          "at": "2026-06-02T11:21:50Z",
+          "from": "local_checks_passed",
+          "to": "pr_open",
+          "note": "Opened https://github.com/fermatmind/fap-api/pull/1852 for GitHub checks and merge review."
+        },
+        {
+          "at": "2026-06-02T11:26:10Z",
+          "from": "pr_open",
+          "to": "github_checks_failed",
+          "note": "Stopped after GitHub checks failed: verify-mbti-legacy and verify-mbti-v2. No merge, cleanup, WEB-01, CMS draft, or publish action was executed."
+        },
+        {
+          "at": "2026-06-02T11:39:52Z",
+          "from": "github_checks_failed",
+          "to": "local_checks_passed_after_ci_fix",
+          "note": "Fixed CI sitemap fixtures to create published revisions under the new article sitemap gate; targeted SitemapXmlTest, CI personality authority gate, ArticlePublicApiTest, scoped Pint, and git diff checks passed locally."
+        }
+      ],
+      "sidecars": [],
+      "next_task": "SEO-CMS-CANARY-WEB-01"
+    },
     "PR-EQ-PER-01": {
       "repo": "fap-api",
       "branch": "codex/pr-eq-per-01-all-free-copy-contract-cleanup",

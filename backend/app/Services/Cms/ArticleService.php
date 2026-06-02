@@ -68,7 +68,7 @@ final class ArticleService
                 'content_md' => $normalizedContentMd,
                 'status' => 'draft',
                 'is_public' => false,
-                'is_indexable' => true,
+                'is_indexable' => false,
             ]);
 
             $this->syncArticleTags($article, $tagIds, $normalizedOrgId);

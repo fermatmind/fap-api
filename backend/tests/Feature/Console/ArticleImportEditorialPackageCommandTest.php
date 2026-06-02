@@ -97,6 +97,7 @@ final class ArticleImportEditorialPackageCommandTest extends TestCase
         $package = $this->editorialPackage([
             'slug' => 'ai-personality-editorial-draft',
             'intended_status' => 'review_pending',
+            'translation_group_id' => 'article_mbti_vs_holland_career_choice_v1',
         ]);
         $path = $this->writePackage($package);
         $sensitiveCounts = $this->sensitiveTableCounts();
@@ -121,7 +122,9 @@ final class ArticleImportEditorialPackageCommandTest extends TestCase
 
         $this->assertSame('draft', (string) $article->status);
         $this->assertFalse((bool) $article->is_public);
+        $this->assertFalse((bool) $article->is_indexable);
         $this->assertNull($article->published_revision_id);
+        $this->assertSame('article_mbti_vs_holland_career_choice_v1', (string) $article->translation_group_id);
         $this->assertSame($package['title'], (string) $article->title);
         $this->assertSame($package['body_markdown'], (string) $article->content_md);
         $this->assertSame($package['cover_image'], (string) $article->cover_image_url);
@@ -142,9 +145,11 @@ final class ArticleImportEditorialPackageCommandTest extends TestCase
         $this->assertSame($package['seo_title'], (string) $article->seoMeta?->seo_title);
         $this->assertSame($package['meta_description'], (string) $article->seoMeta?->seo_description);
         $this->assertSame($package['canonical'], (string) $article->seoMeta?->canonical_url);
-        $this->assertSame('index,follow', (string) $article->seoMeta?->robots);
+        $this->assertSame('noindex,nofollow', (string) $article->seoMeta?->robots);
+        $this->assertFalse((bool) $article->seoMeta?->is_indexable);
 
         $metadata = $article->cover_image_variants['editorial_package_v1'] ?? [];
+        $this->assertSame('article_mbti_vs_holland_career_choice_v1', $metadata['translation_group_id'] ?? null);
         $this->assertSame('editorial_journal', $metadata['content_track'] ?? null);
         $this->assertSame($package['references'], $metadata['references'] ?? []);
         $this->assertSame($package['answer_surface_v1']['quick_answer'], data_get($metadata, 'answer_surface_v1.quick_answer'));

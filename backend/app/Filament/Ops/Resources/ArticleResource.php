@@ -228,7 +228,7 @@ class ArticleResource extends Resource
                                     ->helperText(__('ops.resources.articles.helpers.is_public')),
                                 Forms\Components\Toggle::make('is_indexable')
                                     ->label(__('ops.resources.articles.fields.search_indexable'))
-                                    ->default(true)
+                                    ->default(false)
                                     ->helperText(__('ops.resources.articles.helpers.is_indexable')),
                                 Forms\Components\DateTimePicker::make('published_at')
                                     ->label(__('ops.resources.articles.fields.published'))
