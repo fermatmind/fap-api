@@ -40048,7 +40048,7 @@
     "repo": "fap-api",
     "branch": "codex/analytics-funnel-purchase-report-truth-bridge-03",
     "base": "main",
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "title": "ANALYTICS-FUNNEL-PURCHASE-REPORT-TRUTH-BRIDGE-03 freeze purchase report truth bridge",
     "depends_on": [
       "ANALYTICS-FUNNEL-GA4-BAIDU-MAPPING-SCAN-01",
@@ -40679,7 +40679,7 @@
       "SEO-CMS-CANARY-IMPORTER-GATE-01"
     ],
     "commit_sha": "pending_remote_pr_head",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1861",
     "checks": {
       "dependency_verification": {
         "status": "passed",
@@ -40734,6 +40734,12 @@
         "from": "missing",
         "to": "local_checks_passed",
         "note": "User-provided train prompt authorized SEO-CMS-CANARY-OPERATOR-COLLISION-01 after importer gate merge. Created docs-only operator readonly collision check path, verified public absence, recorded hidden collision Unknown, and created SEO-CMS-CANARY-HIDDEN-COLLISION-SIDECAR-01. No CMS draft, publish, production write action, env/cookie/token access, GPT content edit, runtime code edit, test edit, frontend change, or search submission was performed."
+      },
+      {
+        "at": "2026-06-02T16:59:24Z",
+        "from": "local_checks_passed",
+        "to": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/1861 for docs-only operator collision path review. SEO-CONTENT-P1-08 remains blocked because hidden CMS/DB collision remains Unknown."
       }
     ],
     "sidecars": [
