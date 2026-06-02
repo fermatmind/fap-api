@@ -40329,11 +40329,11 @@
   "SEO-CONTENT-CANARY-PACKAGE-01": {
     "repo": "fap-api",
     "branch": "codex/seo-content-canary-package-01",
-    "status": "pr_open",
+    "status": "merged",
     "depends_on": [
       "SEO-CMS-CANARY-DRAFT-VERIFY-01"
     ],
-    "commit_sha": "pending_remote_pr_head",
+    "commit_sha": "e7d5f14d55be02bd9f74bb2a9fbdd9ccd0e30be4",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1857",
     "checks": {
       "dependency_verification": {
@@ -40368,14 +40368,14 @@
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-02T15:42:28Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null
+      "github_checks_green": true,
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -40395,9 +40395,101 @@
         "from": "local_checks_passed",
         "to": "pr_open",
         "note": "Opened https://github.com/fermatmind/fap-api/pull/1857 for docs-only review. No importer dry-run, CMS draft, publish, runtime code, tests, frontend, GPT content rewrite, or search submission was performed."
+      },
+      {
+        "at": "2026-06-02T15:55:37Z",
+        "from": "pr_open",
+        "to": "merged",
+        "note": "Reconciled before SEO-CMS-CANARY-IMPORT-DRYRUN-01: GitHub PR #1857 is MERGED with merge commit e7d5f14d55be02bd9f74bb2a9fbdd9ccd0e30be4, local main equals origin/main, and task branch cleanup was completed."
       }
     ],
     "sidecars": [],
     "next_task": "SEO-CMS-CANARY-IMPORT-DRYRUN-01 should run controlled importer dry-run and collision validation before any draft-only execution."
+  },
+  "SEO-CMS-CANARY-IMPORT-DRYRUN-01": {
+    "repo": "fap-api",
+    "branch": "codex/seo-cms-canary-import-dryrun-01",
+    "status": "pr_open",
+    "depends_on": [
+      "SEO-CONTENT-CANARY-PACKAGE-01"
+    ],
+    "commit_sha": "pending_remote_pr_head",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1858",
+    "checks": {
+      "dependency_verification": {
+        "status": "passed",
+        "commands": [
+          "gh pr view 1857 --repo fermatmind/fap-api --json state,mergedAt,mergeCommit,headRefName,url,title",
+          "git merge-base --is-ancestor e7d5f14d55be02bd9f74bb2a9fbdd9ccd0e30be4 origin/main"
+        ],
+        "notes": "SEO-CONTENT-CANARY-PACKAGE-01 is merged as PR #1857 and origin/main contains merge commit e7d5f14d55be02bd9f74bb2a9fbdd9ccd0e30be4."
+      },
+      "package_artifact_validation": {
+        "status": "passed",
+        "commands": [
+          "python3 -m json.tool backend/docs/seo/canary-packages/mbti-vs-holland-career-choice.zh-CN.json >/dev/null",
+          "python3 -m json.tool backend/docs/seo/canary-packages/mbti-vs-holland-code-career-choice.en.json >/dev/null",
+          "python3 - <<'PY' ... locale, slug, canonical_path, translation_group_id, publish gate, CTA route, FAQ, body_markdown, and claim boundary validation ... PY"
+        ],
+        "notes": "Both package artifacts are valid JSON, contain expected locale/slug/canonical_path values, share translation_group_id article_mbti_vs_holland_career_choice_v1, set publish_allowed=false, include FAQ/body/claim boundary checklist, and use only public canonical test CTA routes without forbidden route patterns."
+      },
+      "hidden_collision_public_absence": {
+        "status": "partial_pass_unknown_private",
+        "commands": [
+          "curl -sS -o /tmp/fm-canary-api.out -w '%{http_code}' https://api.fermatmind.com/api/v0.5/articles/mbti-vs-holland-career-choice?locale=zh-CN",
+          "curl -sS -o /tmp/fm-canary-api.out -w '%{http_code}' https://api.fermatmind.com/api/v0.5/articles/mbti-vs-holland-career-choice/seo?locale=zh-CN",
+          "curl -sS -o /tmp/fm-canary-api.out -w '%{http_code}' https://api.fermatmind.com/api/v0.5/articles/mbti-vs-holland-code-career-choice?locale=en",
+          "curl -sS -o /tmp/fm-canary-api.out -w '%{http_code}' https://api.fermatmind.com/api/v0.5/articles/mbti-vs-holland-code-career-choice/seo?locale=en",
+          "python3 sitemap/llms absence check for sitemap.xml, llms.txt, and llms-full.txt"
+        ],
+        "notes": "Public detail and SEO APIs returned 404 for both slugs; sitemap.xml, llms.txt, and llms-full.txt do not contain either slug. Production CMS/DB readonly hidden draft/private collision remains Unknown because no verified readonly path was provided and env/cookies/tokens were not read."
+      },
+      "importer_dry_run": {
+        "status": "failed_no_write",
+        "commands": [
+          "php backend/artisan articles:import-editorial-package --file=docs/seo/canary-packages/mbti-vs-holland-career-choice.zh-CN.json --locale=zh-CN --dry-run --json",
+          "php backend/artisan articles:import-editorial-package --file=docs/seo/canary-packages/mbti-vs-holland-code-career-choice.en.json --locale=en --dry-run --json"
+        ],
+        "notes": "Both dry-run attempts returned ok=false/action=will_skip with unexpected_error Array to string conversion. This is a package schema mismatch between the approved V2 docs artifacts and the current editorial_package.v1 importer shape. Dry-run used planFromFile and did not create CMS data."
+      },
+      "local": {
+        "status": "passed",
+        "commands": [
+          "python3 -m json.tool backend/docs/seo/canary-packages/mbti-vs-holland-career-choice.zh-CN.json >/dev/null",
+          "python3 -m json.tool backend/docs/seo/canary-packages/mbti-vs-holland-code-career-choice.en.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "git diff --check -- backend/docs/seo docs/codex",
+          "git diff --cached --check"
+        ],
+        "notes": "Docs-only report and train metadata checks passed. Cached diff check is run after path-limited staging."
+      }
+    },
+    "failure_reason": "NO-GO: controlled importer dry-run failed with package schema mismatch and hidden CMS/DB collision remains Unknown. Do not create CMS draft yet.",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-06-02T15:55:37Z",
+        "from": "missing",
+        "to": "local_checks_passed",
+        "note": "User authorized adding SEO-CMS-CANARY-IMPORT-DRYRUN-01 to fap-api manifest/state and executing docs-only importer dry-run verification. Package validation and public absence checks passed, but importer dry-run failed with schema mismatch and hidden CMS/DB collision remains Unknown. No CMS draft, publish, runtime code, tests, frontend, GPT content edit, production write action, or search submission was performed."
+      },
+      {
+        "at": "2026-06-02T15:59:45Z",
+        "from": "local_checks_passed",
+        "to": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/1858 for docs-only review. NO-GO remains recorded; no CMS draft, publish, runtime code, tests, frontend, GPT content edit, production write action, or search submission was performed."
+      }
+    ],
+    "sidecars": [],
+    "next_task": "SEO-CONTENT-P1-08 remains blocked. Next authorization should address package/importer schema mapping and hidden CMS/DB readonly collision verification."
   }
 }
