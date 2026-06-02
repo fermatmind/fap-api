@@ -21195,8 +21195,8 @@
         "GLOBAL-EN-ZH-MEDIA-ALT-VISUAL-REVIEW-BATCH-07"
       ],
       "title": "GLOBAL-EN-ZH-GLOBAL-UI-I18N-BATCH-08 global UI i18n parity review and frontend consumer follow-up",
-      "commit_sha": null,
-      "pr_url": null,
+  "commit_sha": "ca0c77ca",
+  "pr_url": "https://github.com/fermatmind/fap-api/pull/1851",
       "checks": {
         "manifest_registration": {
           "status": "pass",
@@ -24294,7 +24294,7 @@
       },
       {
         "at": "2026-05-19T03:38:09.440Z",
-        "status": "local_checks_passed",
+  "status": "open",
         "summary": "Added fap-api CodeQL workflow and train metadata. YAML/JSON validation, git diff checks, and scope validation passed."
       },
       {
@@ -38094,7 +38094,7 @@
     "branch": "codex/analytics-funnel-ops-global-scope-entry-01",
     "base": "main",
     "title": "ANALYTICS-FUNNEL-OPS-GLOBAL-SCOPE-ENTRY-01 allow global org0 funnel scope entry",
-    "status": "local_checks_passed",
+    "status": "merged",
     "depends_on": [
       "ANALYTICS-FUNNEL-OPS-ORG0-VISIBILITY-REPAIR-01"
     ],
@@ -39780,8 +39780,8 @@
     "depends_on": [
       "ANALYTICS-FUNNEL-REPORT-READY-MERGE-TIMESTAMP-03"
     ],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "d176ddc4",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1850",
     "checks": {
       "manifest_registration": {
         "status": "pass",
@@ -39827,9 +39827,9 @@
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-02T00:52:00Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
@@ -39854,9 +39854,101 @@
         "from": "local_checks_passed",
         "to": "pr_open",
         "note": "Opened PR #1850 for GA4/Baidu funnel mapping scan."
+      },
+      {
+        "at": "2026-06-02T05:18:00Z",
+        "from": "pr_open",
+        "to": "merged",
+        "note": "Ledger reconciled: PR #1850 is merged, origin/main contains merge commit d176ddc4, remote branch is deleted, and post-merge focused test passed."
       }
     ],
     "sidecars": [],
     "next_task": "ANALYTICS-FUNNEL-WEB-EVENT-NAME-ALIGNMENT-02"
+  },
+  "ANALYTICS-FUNNEL-PURCHASE-REPORT-TRUTH-BRIDGE-03": {
+    "id": "ANALYTICS-FUNNEL-PURCHASE-REPORT-TRUTH-BRIDGE-03",
+    "repo": "fap-api",
+    "branch": "codex/analytics-funnel-purchase-report-truth-bridge-03",
+    "base": "main",
+    "status": "local_checks_passed",
+    "title": "ANALYTICS-FUNNEL-PURCHASE-REPORT-TRUTH-BRIDGE-03 freeze purchase report truth bridge",
+    "depends_on": [
+      "ANALYTICS-FUNNEL-GA4-BAIDU-MAPPING-SCAN-01",
+      "ANALYTICS-FUNNEL-WEB-EVENT-NAME-ALIGNMENT-02"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "manifest_registration": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding ANALYTICS-FUNNEL-PURCHASE-REPORT-TRUTH-BRIDGE-03 to fap-api docs/codex/pr-train.yaml and docs/codex/pr-train-state.json."
+      },
+      "scope_boundaries": {
+        "status": "pass",
+        "evidence": "Scope is limited to backend-owned purchase/report truth bridge docs, generated JSON, focused SeoIntel test, and PR train metadata. No production DB mutation, analytics refresh, payment repair, benefit grant creation, payment provider call, CMS mutation, GA4/Baidu admin change, Measurement Protocol export, Search Channel action, URL submission, deploy, or fap-web runtime change is allowed."
+      },
+      "focused_phpunit": {
+        "status": "pass",
+        "command": "cd backend && php artisan test --filter=AnalyticsFunnelPurchaseReportTruthBridge03 --no-ansi",
+        "evidence": "PASS, 1 test / 37 assertions."
+      },
+      "route_list": {
+        "status": "pass",
+        "command": "cd backend && php artisan route:list --no-ansi",
+        "evidence": "PASS, route list rendered successfully with 210 routes."
+      },
+      "scoped_pint": {
+        "status": "pass",
+        "command": "cd backend && vendor/bin/pint --test tests/Feature/SeoIntel/AnalyticsFunnelPurchaseReportTruthBridge03Test.php",
+        "evidence": "PASS, focused PR test file is formatted."
+      },
+      "composer_validate": {
+        "status": "pass",
+        "command": "cd backend && composer validate --strict",
+        "evidence": "PASS, composer.json is valid."
+      },
+      "composer_audit": {
+        "status": "pass",
+        "command": "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
+        "evidence": "PASS, no security vulnerability advisories found."
+      },
+      "json_yaml_diff": {
+        "status": "pass",
+        "command": "python3 -m json.tool backend/docs/seo/generated/analytics-funnel-purchase-report-truth-bridge-03.v1.json >/dev/null && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\" && git diff --check && git diff --cached --check",
+        "evidence": "PASS."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-06-02T05:18:00Z",
+        "from": "missing",
+        "to": "implementation_in_progress",
+        "note": "Initialized by user authorization for purchase/report truth bridge policy."
+      },
+    {
+      "at": "2026-06-02T05:28:00Z",
+      "from": "implementation_in_progress",
+      "to": "local_checks_passed",
+      "note": "Focused PHPUnit, route list, scoped Pint, composer validate/audit, JSON/YAML parse, and diff checks passed."
+    },
+    {
+      "at": "2026-06-02T05:34:00Z",
+      "from": "local_checks_passed",
+      "to": "open",
+      "note": "Opened https://github.com/fermatmind/fap-api/pull/1851 for GitHub checks and merge review."
+    }
+  ],
+    "sidecars": [],
+    "next_task": "ANALYTICS-FUNNEL-GA4-PUBLIC-EVENT-SMOKE-01"
   }
 }

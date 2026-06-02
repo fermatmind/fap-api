@@ -19523,3 +19523,56 @@ prs:
     fap_web_commit_allowed: false
     frontend_fallback_authority: false
     next_task: ANALYTICS-FUNNEL-WEB-EVENT-NAME-ALIGNMENT-02
+
+  - id: ANALYTICS-FUNNEL-PURCHASE-REPORT-TRUTH-BRIDGE-03
+    repo: fap-api
+    branch: codex/analytics-funnel-purchase-report-truth-bridge-03
+    base: main
+    title: "ANALYTICS-FUNNEL-PURCHASE-REPORT-TRUTH-BRIDGE-03 freeze purchase report truth bridge"
+    train_scope: analytics_funnel_ga4_baidu_alignment
+    risk_level: p1_analytics_funnel_truth_boundary
+    depends_on:
+      - ANALYTICS-FUNNEL-GA4-BAIDU-MAPPING-SCAN-01
+      - ANALYTICS-FUNNEL-WEB-EVENT-NAME-ALIGNMENT-02
+    scope:
+      - Freeze the paid/report analytics truth bridge policy after backend payment unlock repair.
+      - Document that backend Ops/analytics_funnel_daily remains truth for payment_success, report_unlock, and report_ready.
+      - Document that GA4 is public-funnel auxiliary unless a separate privacy-safe server-side bridge is explicitly approved.
+      - Document that Baidu remains public traffic/page observation only and cannot be paid/report truth.
+      - Do not implement Measurement Protocol export, analytics refresh, payment repair, provider call, CMS mutation, Search Channel action, URL submission, deploy, or fap-web runtime change.
+    allowed_paths:
+      - backend/docs/seo/analytics-funnel-purchase-report-truth-bridge-03.md
+      - backend/docs/seo/generated/analytics-funnel-purchase-report-truth-bridge-03.v1.json
+      - backend/tests/Feature/SeoIntel/AnalyticsFunnelPurchaseReportTruthBridge03Test.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - cd backend && php artisan test --filter=AnalyticsFunnelPurchaseReportTruthBridge03 --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Feature/SeoIntel/AnalyticsFunnelPurchaseReportTruthBridge03Test.php
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - python3 -m json.tool backend/docs/seo/generated/analytics-funnel-purchase-report-truth-bridge-03.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    payment_repair_allowed: false
+    benefit_grant_creation_allowed: false
+    payment_provider_call: false
+    analytics_refresh_allowed: false
+    measurement_protocol_export: false
+    ga_admin_change: false
+    baidu_admin_change: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    next_task: ANALYTICS-FUNNEL-GA4-PUBLIC-EVENT-SMOKE-01
