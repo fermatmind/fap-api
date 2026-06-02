@@ -53,7 +53,30 @@ Beta50 must stay unavailable until all gates pass:
 - public payload redaction gate
 - frontend renderer contract gate
 
-## 5. Explicit non-goals for this PR
+## 5. V1 transition strategy: competitor structure benchmarking, no copied item assets
+
+Current phase allows:
+
+- Benchmark 123test, Mensa, Cambridge, Creyos, and similar sites for item-type structure, item count, difficulty gradient, interaction flow, and report module boundaries.
+- Record competitor item-family categories such as matrix reasoning, series, rotation, overlay, odd-one-out, and numeric pattern.
+- Generate FermatMind-owned items from abstract rule grammars.
+- Record internal "competitor structure observations" in research documentation, but do not save, reproduce, transcribe, or rewrite concrete competitor items.
+
+Current phase forbids:
+
+- Copying competitor questions, diagrams, options, answer keys, explanations, or report copy.
+- Lightly rewriting competitor items, swapping visuals, changing order, or changing answers.
+- Feeding competitor screenshots, item text, answer keys, or explanations into the item-bank generator.
+- Using any third-party item bank before the license verification gate is complete.
+
+V2 staffing iteration:
+
+- Hire psychometrics / cognitive assessment advisors and item-design reviewers.
+- Establish the FermatMind original item grammar.
+- Record generator seed, rule, reviewer, ambiguity check, and copyright check for every item.
+- Run beta pilot analysis, difficulty calibration, CTT/IRT review, and backend norm authority gating.
+
+## 6. Explicit non-goals for this PR
 
 - no `items.json`
 - no `answer_key.json`
@@ -64,6 +87,6 @@ Beta50 must stay unavailable until all gates pass:
 - no CMS editorial copy
 - no payment or entitlement change
 
-## 6. Frontend handoff
+## 7. Frontend handoff
 
 Frontend may render `beta_50` as a coming-soon or future validation placeholder only. It must not expose a start/take CTA until backend imports the final bank and marks the form take-enabled through an explicit follow-up PR.

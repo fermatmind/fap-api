@@ -23,17 +23,17 @@ final class IqBeta50BankSpecTest extends TestCase
     }
 
     #[Test]
-    public function manifest_defines_beta50_as_future_placeholder_only(): void
+    public function manifest_defines_beta50_as_generated_future_bank_only(): void
     {
         $manifest = $this->readManifest();
 
         $this->assertSame('IQ_BETA_50_ORIGINAL', $manifest['bank_id']);
         $this->assertSame('IQ_INTELLIGENCE_QUOTIENT', $manifest['scale_code']);
-        $this->assertSame('future_placeholder_spec_only', $manifest['status']);
+        $this->assertSame('generated_formal_original_pending_norms', $manifest['status']);
         $this->assertFalse($manifest['runtime_bound']);
         $this->assertFalse($manifest['public_take_enabled']);
         $this->assertSame(50, $manifest['item_count_target']);
-        $this->assertSame(0, $manifest['item_count_imported']);
+        $this->assertSame(50, $manifest['item_count_imported']);
         $this->assertSame(['VSPR' => 22, 'VSI' => 16, 'NPR' => 12], $manifest['dimension_targets']);
     }
 
@@ -43,9 +43,6 @@ final class IqBeta50BankSpecTest extends TestCase
         $manifest = $this->readManifest();
 
         foreach ([
-            'items_import_required',
-            'answer_key_required',
-            'scoring_spec_required',
             'norm_authority_required',
             'copyright_gate_required',
             'ambiguity_gate_required',
@@ -54,18 +51,41 @@ final class IqBeta50BankSpecTest extends TestCase
             $this->assertTrue((bool) $manifest['launch_gates'][$gate], $gate.' should remain required');
         }
 
+        foreach ([
+            'items_import_required',
+            'answer_key_required',
+            'scoring_spec_required',
+        ] as $gate) {
+            $this->assertFalse((bool) $manifest['launch_gates'][$gate], $gate.' should be satisfied by generated bank artifacts');
+        }
+
         $this->assertFalse($manifest['public_payload_policy']['may_emit_items']);
         $this->assertFalse($manifest['public_payload_policy']['may_emit_answer_key']);
+        $this->assertFalse($manifest['public_payload_policy']['may_emit_solution_rule']);
+        $this->assertFalse($manifest['public_payload_policy']['may_emit_generator_metadata']);
         $this->assertFalse($manifest['norm_policy']['iq_claims_enabled']);
         $this->assertFalse($manifest['norm_policy']['percentile_claims_enabled']);
     }
 
     #[Test]
-    public function beta50_pr_does_not_import_runtime_items_answer_key_or_scoring_spec(): void
+    public function beta50_bank_imports_generated_assets_but_remains_runtime_disabled(): void
     {
         $this->assertFileExists($this->bankDir().'/manifest.json');
-        $this->assertFileDoesNotExist($this->bankDir().'/items.json');
-        $this->assertFileDoesNotExist($this->bankDir().'/answer_key.json');
-        $this->assertFileDoesNotExist($this->bankDir().'/scoring_spec.json');
+        $this->assertFileExists($this->bankDir().'/items.json');
+        $this->assertFileExists($this->bankDir().'/answer_key.json');
+        $this->assertFileExists($this->bankDir().'/scoring_spec.json');
+
+        $items = json_decode((string) file_get_contents($this->bankDir().'/items.json'), true);
+        $answerKey = json_decode((string) file_get_contents($this->bankDir().'/answer_key.json'), true);
+        $scoring = json_decode((string) file_get_contents($this->bankDir().'/scoring_spec.json'), true);
+
+        $this->assertIsArray($items);
+        $this->assertIsArray($answerKey);
+        $this->assertIsArray($scoring);
+        $this->assertSame(50, $items['item_count']);
+        $this->assertCount(50, $items['items']);
+        $this->assertFalse($answerKey['public_payload']);
+        $this->assertSame('backend_only_never_emit_to_public_api', $answerKey['storage_policy']);
+        $this->assertFalse($scoring['runtime_binding']['enabled']);
     }
 }

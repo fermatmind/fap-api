@@ -85,6 +85,29 @@ FermatMind may reproduce item archetypes, not third-party items.
 
 Every final item must be marked with `source_mode: repo_generated` unless a separate license-verification PR explicitly authorizes a different source mode.
 
+### V1 transition strategy: competitor structure benchmarking, no copied item assets
+
+Current phase allows:
+
+- Benchmark 123test, Mensa, Cambridge, Creyos, and similar sites for item-type structure, item count, difficulty gradient, interaction flow, and report module boundaries.
+- Record competitor item-family categories such as matrix reasoning, series, rotation, overlay, odd-one-out, and numeric pattern.
+- Generate FermatMind-owned items from abstract rule grammars.
+- Record internal "competitor structure observations" in research documentation, but do not save, reproduce, transcribe, or rewrite concrete competitor items.
+
+Current phase forbids:
+
+- Copying competitor questions, diagrams, options, answer keys, explanations, or report copy.
+- Lightly rewriting competitor items, swapping visuals, changing order, or changing answers.
+- Feeding competitor screenshots, item text, answer keys, or explanations into the item-bank generator.
+- Using any third-party item bank before the license verification gate is complete.
+
+V2 staffing iteration:
+
+- Hire psychometrics / cognitive assessment advisors and item-design reviewers.
+- Establish the FermatMind original item grammar.
+- Record generator seed, rule, reviewer, ambiguity check, and copyright check for every item.
+- Run beta pilot analysis, difficulty calibration, CTT/IRT review, and backend norm authority gating.
+
 ## 7. Review gates
 
 | Gate | Required result before runtime enablement |
