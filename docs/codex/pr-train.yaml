@@ -19808,3 +19808,55 @@ prs:
     frontend_fallback_authority: false
     content_authority: CMS/backend
     next_task: SEO-CONTENT-P1-08 remains blocked unless importer dry-run and hidden collision gates pass
+
+  - id: SEO-CMS-CANARY-PACKAGE-ADAPTER-01
+    repo: fap-api
+    depends_on:
+      - SEO-CMS-CANARY-IMPORT-DRYRUN-01
+    branch: codex/seo-cms-canary-package-adapter-01
+    title: "docs(cms): add bilingual SEO canary importer adapter package"
+    train_scope: seo_cms_canary
+    scope:
+      - Create docs-only mechanical importer adapter artifacts for the approved GPT-5.5 Pro bilingual V2 canary package artifacts.
+      - Preserve approved title, H1, SEO fields, body, FAQ, CTA labels, and CTA hrefs without Codex authorship or rewriting.
+      - Run existing controlled editorial package importer dry-run against adapter artifacts and record GO/NO-GO.
+      - Keep production CMS/DB hidden collision Unknown unless a verified readonly path is provided.
+    allowed_paths:
+      - backend/docs/seo/canary-packages/**
+      - backend/docs/seo/**
+      - backend/docs/operations/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Execute SEO-CONTENT-P1-08.
+      - Create CMS drafts, save CMS forms, create Articles, publish, or call production write APIs.
+      - Modify original GPT-5.5 Pro title, H1, meta, body, FAQ, CTA labels, CTA hrefs, or prose.
+      - Modify runtime code, routes, migrations, tests, package files, sitemap runtime, analytics runtime, or frontend files.
+      - Submit sitemap, Baidu push, IndexNow, or any search-channel live action.
+      - Read or expose env, cookies, tokens, or real result/order/share/payment IDs.
+    validation:
+      - python3 -m json.tool backend/docs/seo/canary-packages/mbti-vs-holland-career-choice.zh-CN.json >/dev/null
+      - python3 -m json.tool backend/docs/seo/canary-packages/mbti-vs-holland-code-career-choice.en.json >/dev/null
+      - python3 -m json.tool backend/docs/seo/canary-packages/mbti-vs-holland-career-choice.zh-CN.importer-adapter.json >/dev/null
+      - python3 -m json.tool backend/docs/seo/canary-packages/mbti-vs-holland-code-career-choice.en.importer-adapter.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- backend/docs/seo docs/codex
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: SEO-CONTENT-P1-08 remains blocked unless adapter/importer dry-run fully passes and hidden collision is operator-verified

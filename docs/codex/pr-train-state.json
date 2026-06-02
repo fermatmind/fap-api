@@ -40409,11 +40409,11 @@
   "SEO-CMS-CANARY-IMPORT-DRYRUN-01": {
     "repo": "fap-api",
     "branch": "codex/seo-cms-canary-import-dryrun-01",
-    "status": "pr_open",
+    "status": "merged",
     "depends_on": [
       "SEO-CONTENT-CANARY-PACKAGE-01"
     ],
-    "commit_sha": "pending_remote_pr_head",
+    "commit_sha": "6b0e6584c6ed9a47b023479130c4332127f79042",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1858",
     "checks": {
       "dependency_verification": {
@@ -40466,14 +40466,14 @@
       }
     },
     "failure_reason": "NO-GO: controlled importer dry-run failed with package schema mismatch and hidden CMS/DB collision remains Unknown. Do not create CMS draft yet.",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-02T16:05:29Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null
+      "github_checks_green": true,
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -40487,9 +40487,99 @@
         "from": "local_checks_passed",
         "to": "pr_open",
         "note": "Opened https://github.com/fermatmind/fap-api/pull/1858 for docs-only review. NO-GO remains recorded; no CMS draft, publish, runtime code, tests, frontend, GPT content edit, production write action, or search submission was performed."
+      },
+      {
+        "at": "2026-06-02T16:16:08Z",
+        "from": "pr_open",
+        "to": "merged",
+        "note": "Reconciled before SEO-CMS-CANARY-PACKAGE-ADAPTER-01: GitHub PR #1858 is MERGED with merge commit 6b0e6584c6ed9a47b023479130c4332127f79042, local main equals origin/main, and task branch cleanup was completed."
       }
     ],
     "sidecars": [],
     "next_task": "SEO-CONTENT-P1-08 remains blocked. Next authorization should address package/importer schema mapping and hidden CMS/DB readonly collision verification."
+  },
+  "SEO-CMS-CANARY-PACKAGE-ADAPTER-01": {
+    "repo": "fap-api",
+    "branch": "codex/seo-cms-canary-package-adapter-01",
+    "status": "pr_open",
+    "depends_on": [
+      "SEO-CMS-CANARY-IMPORT-DRYRUN-01"
+    ],
+    "commit_sha": "pending_remote_pr_head",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1859",
+    "checks": {
+      "dependency_verification": {
+        "status": "passed",
+        "commands": [
+          "gh pr view 1858 --repo fermatmind/fap-api --json state,mergedAt,mergeCommit,headRefName,url,title,statusCheckRollup",
+          "git merge-base --is-ancestor 6b0e6584c6ed9a47b023479130c4332127f79042 origin/main"
+        ],
+        "notes": "SEO-CMS-CANARY-IMPORT-DRYRUN-01 is merged as PR #1858 and origin/main contains merge commit 6b0e6584c6ed9a47b023479130c4332127f79042."
+      },
+      "adapter_equivalence_validation": {
+        "status": "passed",
+        "commands": [
+          "python3 -m json.tool source and adapter package artifacts",
+          "python3 adapter equivalence check for title, H1, SEO fields, body_markdown, FAQ, CTA labels/hrefs, canonical, publish gate, intended_status, and indexability"
+        ],
+        "notes": "Both adapter artifacts parse as JSON. body_markdown is copied exactly from source artifacts; title, h1, seo_title, seo_description, excerpt, FAQ, and CTA slots are preserved or mechanically aliased. CTA hrefs remain public canonical test routes and exclude forbidden result/order/share/pay/payment/history/take/token/external URL patterns."
+      },
+      "hidden_collision_public_absence": {
+        "status": "partial_pass_unknown_private",
+        "commands": [
+          "curl --retry 2 --retry-delay 1 -sS -o /tmp/fm-canary-adapter-api.out -w '%{http_code}' public detail/SEO API checks for both target slugs",
+          "python3 sitemap/llms absence check for sitemap.xml, llms.txt, and llms-full.txt"
+        ],
+        "notes": "Public detail and SEO APIs returned 404 for both slugs; sitemap.xml, llms.txt, and llms-full.txt do not contain either slug. Production CMS/DB readonly hidden draft/private collision remains Unknown because this PR does not read env/cookies/tokens or access private CMS records."
+      },
+      "adapter_importer_dry_run": {
+        "status": "partial_failed_no_write",
+        "commands": [
+          "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap_canary_adapter.sqlite php backend/artisan articles:import-editorial-package --file=docs/seo/canary-packages/mbti-vs-holland-career-choice.zh-CN.importer-adapter.json --locale=zh-CN --dry-run --json",
+          "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap_canary_adapter.sqlite php backend/artisan articles:import-editorial-package --file=docs/seo/canary-packages/mbti-vs-holland-code-career-choice.en.importer-adapter.json --locale=en --dry-run --json"
+        ],
+        "notes": "English adapter passed with ok=true/action=will_create/would_write=true. Chinese adapter failed with evergreen_definition_required, evergreen_method_required, and claim_boundary_forbidden_phrase for the sentence containing 一定适合. Dry-run table counts stayed zero for articles, article_translation_revisions, article_seo_meta, and article_editorial_package_imports."
+      },
+      "local": {
+        "status": "passed",
+        "commands": [
+          "python3 -m json.tool backend/docs/seo/canary-packages/mbti-vs-holland-career-choice.zh-CN.json >/dev/null",
+          "python3 -m json.tool backend/docs/seo/canary-packages/mbti-vs-holland-code-career-choice.en.json >/dev/null",
+          "python3 -m json.tool backend/docs/seo/canary-packages/mbti-vs-holland-career-choice.zh-CN.importer-adapter.json >/dev/null",
+          "python3 -m json.tool backend/docs/seo/canary-packages/mbti-vs-holland-code-career-choice.en.importer-adapter.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "git diff --check -- backend/docs/seo docs/codex",
+          "git diff --cached --check"
+        ],
+        "notes": "Docs-only adapter artifacts and train metadata checks passed. Cached diff check is run after path-limited staging."
+      }
+    },
+    "failure_reason": "NO-GO for SEO-CONTENT-P1-08: adapter artifacts were created and English adapter dry-run passed, but Chinese adapter dry-run still fails current importer body/claim gates and hidden CMS/DB collision remains Unknown.",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-06-02T16:16:08Z",
+        "from": "missing",
+        "to": "local_checks_passed",
+        "note": "User authorized docs-only mechanical adapter artifacts and allowed hidden collision to remain Unknown until authorized operator readonly verification before P1-08. Adapter artifacts were created without GPT content rewrite; English adapter dry-run passed, Chinese adapter dry-run failed current importer gates, and no CMS draft, publish, production write action, runtime code, tests, frontend, or search submission was performed."
+      },
+      {
+        "at": "2026-06-02T16:18:24Z",
+        "from": "local_checks_passed",
+        "to": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/1859 for docs-only review. NO-GO remains recorded for SEO-CONTENT-P1-08; no CMS draft, publish, production write action, runtime code, tests, frontend, GPT content rewrite, or search submission was performed."
+      }
+    ],
+    "sidecars": [],
+    "next_task": "SEO-CONTENT-P1-08 remains blocked. Next step is either importer rule/schema mapping for the Chinese package gates or authorized operator readonly hidden collision verification after adapter/importer gates pass."
   }
 }
