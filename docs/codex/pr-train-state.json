@@ -40501,12 +40501,12 @@
   "SEO-CMS-CANARY-PACKAGE-ADAPTER-01": {
     "repo": "fap-api",
     "branch": "codex/seo-cms-canary-package-adapter-01",
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "depends_on": [
       "SEO-CMS-CANARY-IMPORT-DRYRUN-01"
     ],
     "commit_sha": "pending_remote_pr_head",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1859",
     "checks": {
       "dependency_verification": {
         "status": "passed",
@@ -40571,6 +40571,12 @@
         "from": "missing",
         "to": "local_checks_passed",
         "note": "User authorized docs-only mechanical adapter artifacts and allowed hidden collision to remain Unknown until authorized operator readonly verification before P1-08. Adapter artifacts were created without GPT content rewrite; English adapter dry-run passed, Chinese adapter dry-run failed current importer gates, and no CMS draft, publish, production write action, runtime code, tests, frontend, or search submission was performed."
+      },
+      {
+        "at": "2026-06-02T16:18:24Z",
+        "from": "local_checks_passed",
+        "to": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/1859 for docs-only review. NO-GO remains recorded for SEO-CONTENT-P1-08; no CMS draft, publish, production write action, runtime code, tests, frontend, GPT content rewrite, or search submission was performed."
       }
     ],
     "sidecars": [],
