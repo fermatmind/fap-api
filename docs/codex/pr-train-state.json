@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-02T14:18:48Z",
+  "updated_at": "2026-06-02T14:21:21Z",
   "items": {
     "SEO-CMS-CANARY-BE-01": {
       "repo": "fap-api",
@@ -38681,7 +38681,7 @@
     "repo": "fap-api",
     "branch": "codex/analytics-payment-unlock-attribution-repair-01a",
     "base": "main",
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "title": "ANALYTICS-PAYMENT-UNLOCK-ATTRIBUTION-REPAIR-01A add read-only payment unlock diagnostics",
     "depends_on": [
       "ANALYTICS-FUNNEL-OPS-GLOBAL-SCOPE-ENTRY-01"
@@ -40054,8 +40054,8 @@
       "ANALYTICS-FUNNEL-GA4-BAIDU-MAPPING-SCAN-01",
       "ANALYTICS-FUNNEL-WEB-EVENT-NAME-ALIGNMENT-02"
     ],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "c3ffcee3a505e5b8f86e7c32a9ad0f85511646ba",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1855",
     "checks": {
       "manifest_registration": {
         "status": "pass",
@@ -40227,6 +40227,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "note": "Created docs-only draft path verification report, registered manifest/state, and passed JSON parse, YAML parse, and docs diff whitespace checks. No CMS draft, publish, runtime code, tests, frontend, or GPT content edits were performed."
+      },
+      {
+        "at": "2026-06-02T14:21:21Z",
+        "from": "local_checks_passed",
+        "to": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/1855 for docs-only review. No CMS draft, publish, runtime code, tests, frontend, or GPT content edits were performed."
       }
     ],
     "sidecars": [],
