@@ -31304,8 +31304,8 @@
       "branch": "codex/iq-bank-50-01",
       "base": "main",
       "title": "IQ-BANK-50-01 define beta50 bank manifest spec",
-      "status": "local_checks_passed",
-      "commit_sha": null,
+      "status": "committed",
+      "commit_sha": "50948b17c22c66e07a40534d4a86f4fc0b3ec75b",
       "pr_url": null,
       "checks": {
         "cd backend && php artisan test --filter=IqBeta50BankSpec --no-ansi": {
@@ -31351,6 +31351,11 @@
           "at": "2026-06-02T19:52:27+08:00",
           "status": "local_checks_passed",
           "summary": "Composer dependencies installed in ignored vendor directory; backend beta50 manifest/spec checks passed."
+        },
+        {
+          "at": "2026-06-02T19:52:49+08:00",
+          "status": "committed",
+          "summary": "Committed backend beta50 placeholder bank manifest/spec implementation."
         }
       ]
     }
