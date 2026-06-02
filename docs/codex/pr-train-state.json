@@ -40329,12 +40329,12 @@
   "SEO-CONTENT-CANARY-PACKAGE-01": {
     "repo": "fap-api",
     "branch": "codex/seo-content-canary-package-01",
-    "status": "in_progress",
+    "status": "pr_open",
     "depends_on": [
       "SEO-CMS-CANARY-DRAFT-VERIFY-01"
     ],
     "commit_sha": "pending_remote_pr_head",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1857",
     "checks": {
       "dependency_verification": {
         "status": "passed",
@@ -40389,6 +40389,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "note": "Copied the user-provided bilingual package artifacts into backend docs, added package notes, registered manifest/state, and passed JSON parse, YAML parse, package CTA/publish-gate validation, and docs diff whitespace checks. No importer dry-run, CMS draft, publish, runtime code, tests, frontend, GPT content rewrite, or search submission was performed."
+      },
+      {
+        "at": "2026-06-02T15:21:59Z",
+        "from": "local_checks_passed",
+        "to": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/1857 for docs-only review. No importer dry-run, CMS draft, publish, runtime code, tests, frontend, GPT content rewrite, or search submission was performed."
       }
     ],
     "sidecars": [],
