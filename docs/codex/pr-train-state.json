@@ -42672,7 +42672,7 @@
     },
     "failure_reason": null,
     "pr_url": null,
-    "commit_sha": "83bc213ca32b3d50c6ba3ef66cfb8e98ac48ff13",
+    "commit_sha": "5bd61c4ce39995af3c5ac67a2c346e8b613eca14",
     "merged_at": null,
     "remote_branch_deleted": null,
     "local_cleanup_executed": null,
@@ -42716,6 +42716,12 @@
         "from": "local_validation_passed",
         "to": "committed",
         "note": "Created local implementation commit 83bc213ca32b3d50c6ba3ef66cfb8e98ac48ff13 for the SEO-DASH-MIGRATION-01 readiness contract scope; this amended commit records the SHA in the ledger."
+      },
+      {
+        "at": "2026-06-03T16:03:00Z",
+        "from": "committed",
+        "to": "ledger_commit_sha_recorded",
+        "note": "Recorded implementation commit 5bd61c4ce39995af3c5ac67a2c346e8b613eca14 in the SEO-DASH-MIGRATION-01 ledger before push."
       }
     ],
     "sidecars": [],
