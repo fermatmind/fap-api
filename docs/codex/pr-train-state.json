@@ -42080,11 +42080,11 @@
   "SEO-SEARCH-SUBMISSION-BAIDU-MANUAL-ZH-CANARY-CONFIRM-01": {
     "repo": "fap-api",
     "branch": "codex/seo-search-submission-baidu-manual-zh-confirm-01",
-    "status": "pr_open_baidu_zh_submission_confirmed",
+    "status": "merged_baidu_zh_submission_confirmed",
     "depends_on": [
       "SEO-SEARCH-SUBMISSION-BAIDU-MANUAL-ZH-CANARY-01"
     ],
-    "commit_sha": "1f37b84cb642a40a78fc8a9383f956d73aff2c68",
+    "commit_sha": "39d75a476ba09b8175861a61438ea988eb0afafd",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1871",
     "checks": {
       "dependency_reconciliation": {
@@ -42132,17 +42132,32 @@
           "gh pr create --repo fermatmind/fap-api --base main --head codex/seo-search-submission-baidu-manual-zh-confirm-01 --title \"docs(seo): confirm Baidu Chinese canary URL submission\""
         ],
         "notes": "Opened https://github.com/fermatmind/fap-api/pull/1871 after local checks passed. No additional search submission action was performed during PR creation."
+      },
+      "github": {
+        "status": "passed",
+        "commands": [
+          "gh pr checks 1871 --repo fermatmind/fap-api --watch --interval 20"
+        ],
+        "notes": "GitHub checks passed before squash merge."
+      },
+      "merge_reconciliation": {
+        "status": "passed",
+        "commands": [
+          "gh pr view 1871 --repo fermatmind/fap-api --json number,state,mergedAt,mergeCommit,url",
+          "git merge-base --is-ancestor 39d75a476ba09b8175861a61438ea988eb0afafd origin/main"
+        ],
+        "notes": "GitHub reports PR #1871 merged at 2026-06-03T11:37:09Z with merge commit 39d75a476ba09b8175861a61438ea988eb0afafd, and origin/main contains the merge commit."
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-03T11:37:09Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null,
+      "github_checks_green": true,
+      "post_merge_revalidated": true,
       "baidu_zh_submission_confirmed": true,
       "english_url_submission_performed": false,
       "gsc_url_inspection_performed": false,
@@ -42178,6 +42193,12 @@
         "from": "local_checks_passed_baidu_zh_submission_confirmed",
         "to": "pr_open_baidu_zh_submission_confirmed",
         "note": "Opened https://github.com/fermatmind/fap-api/pull/1871. No English URL submission, Baidu API token usage, IndexNow, Search Channel write, CMS mutation, publish, runtime edit, or deploy was performed."
+      },
+      {
+        "at": "2026-06-03T11:37:09Z",
+        "from": "pr_open_baidu_zh_submission_confirmed",
+        "to": "merged_baidu_zh_submission_confirmed",
+        "note": "PR #1871 passed GitHub checks, was squash merged, and the remote/local task branches were cleaned up."
       }
     ],
     "sidecars": [
@@ -42197,6 +42218,158 @@
         "note": "Post-submit signals review should wait for separate authorization and a reasonable search-platform processing window."
       }
     ],
-    "next_task": "SEO-SEARCH-SUBMISSION-CANARY-POSTSUBMIT-SIGNALS-01 after separate authorization."
+    "next_task": "SEO-SEARCH-SUBMISSION-CANARY-POSTSUBMIT-SIGNALS-01."
+  },
+  "SEO-SEARCH-SUBMISSION-CANARY-POSTSUBMIT-SIGNALS-01": {
+    "repo": "fap-api",
+    "branch": "codex/seo-search-submission-canary-postsubmit-signals-01",
+    "status": "pr_open_postsubmit_signals_reviewed",
+    "depends_on": [
+      "SEO-SEARCH-SUBMISSION-BAIDU-MANUAL-ZH-CANARY-CONFIRM-01"
+    ],
+    "commit_sha": "0836478273f53271e68efb18319bfaa2f9f44e11",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1872",
+    "checks": {
+      "dependency_reconciliation": {
+        "status": "passed",
+        "commands": [
+          "gh pr view 1871 --repo fermatmind/fap-api --json number,state,mergedAt,mergeCommit,url",
+          "git merge-base --is-ancestor 39d75a476ba09b8175861a61438ea988eb0afafd origin/main"
+        ],
+        "notes": "Dependency SEO-SEARCH-SUBMISSION-BAIDU-MANUAL-ZH-CANARY-CONFIRM-01 is merged and origin/main contains merge commit 39d75a476ba09b8175861a61438ea988eb0afafd."
+      },
+      "authorization": {
+        "status": "passed",
+        "commands": [
+          "user explicit authorization in chat"
+        ],
+        "notes": "User explicitly authorized adding and executing SEO-SEARCH-SUBMISSION-CANARY-POSTSUBMIT-SIGNALS-01 as read-only GSC/Baidu post-submit signals review and docs-only report, updating docs/codex/pr-train.yaml and docs/codex/pr-train-state.json, with no search submission, no IndexNow, no Search Channel records, no CMS mutation, no publish, no runtime code edits, and no deploy."
+      },
+      "public_surface_checks": {
+        "status": "passed",
+        "commands": [
+          "python3 inline urllib page/sitemap/llms/robots check at 2026-06-03T11:41:57Z"
+        ],
+        "notes": "zh/en article pages returned 200 with self canonical, no robots noindex, three hreflang entries, Article schema, FAQPage schema, and Breadcrumb schema. sitemap.xml, llms.txt, and llms-full.txt returned 200 and contained both canary slugs."
+      },
+      "public_api_checks": {
+        "status": "passed",
+        "commands": [
+          "python3 inline urllib article/detail/SEO/list API check at 2026-06-03T11:44:13Z"
+        ],
+        "notes": "zh/en article detail APIs and SEO APIs returned 200 and did not expose noindex/private/draft markers for canary detail payloads. Article list APIs include article 37 zh-CN and article 39 en as published, public, and indexable."
+      },
+      "gsc_readonly": {
+        "status": "passed",
+        "commands": [
+          "Chrome read-only Google Search Console sitemap page check"
+        ],
+        "notes": "GSC property sc-domain:fermatmind.com shows https://fermatmind.com/sitemap.xml status 成功, submitted/read dates 2026年6月3日, discovered pages 2,272, discovered videos 0. No URL Inspection request indexing was performed."
+      },
+      "baidu_readonly": {
+        "status": "passed_with_no_public_index_yet",
+        "commands": [
+          "Chrome read-only Baidu Search Resource Platform link submission page check",
+          "Chrome read-only public Baidu search query site:fermatmind.com/zh/articles/mbti-vs-holland-career-choice"
+        ],
+        "notes": "Baidu manual zh-CN submission was confirmed by the prior confirmation report. The link submission page does not show a durable submitted-history state on fresh visit. Public Baidu search returned 抱歉，未找到相关结果, so indexing/organic discovery is not yet visible."
+      },
+      "report": {
+        "status": "created",
+        "commands": [
+          "created backend/docs/seo/seo-search-submission-canary-postsubmit-signals-2026-06-03.md"
+        ],
+        "notes": "Docs-only post-submit signals report records public/GSC/Baidu signal state and all forbidden actions not performed."
+      },
+      "local": {
+        "status": "passed",
+        "commands": [
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "git diff --check -- backend/docs/seo docs/codex",
+          "git diff --cached --check"
+        ],
+        "notes": "JSON parse, YAML parse, scoped diff whitespace check, and cached diff whitespace check passed. Staged files are limited to the post-submit signals report and PR train metadata."
+      },
+      "pr": {
+        "status": "opened",
+        "commands": [
+          "gh pr create --repo fermatmind/fap-api --base main --head codex/seo-search-submission-canary-postsubmit-signals-01 --title \"docs(seo): review SEO canary post-submit signals\""
+        ],
+        "notes": "Opened https://github.com/fermatmind/fap-api/pull/1872 after local checks passed. No additional search submission action was performed during PR creation."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": null,
+      "public_pages_stable": true,
+      "public_apis_stable": true,
+      "sitemap_contains_canary": true,
+      "llms_contains_canary": true,
+      "llms_full_contains_canary": true,
+      "gsc_sitemap_success": true,
+      "baidu_zh_submission_confirmed": true,
+      "baidu_public_index_visible": false,
+      "search_submission_performed": false,
+      "english_url_submission_performed": false,
+      "gsc_url_inspection_performed": false,
+      "indexnow_submission_performed": false,
+      "baidu_api_token_used": false,
+      "search_channel_records_created": false,
+      "cms_mutation": false,
+      "publish_performed": false,
+      "runtime_code_edit_performed": false,
+      "deploy_performed": false
+    },
+    "transitions": [
+      {
+        "at": "2026-06-03T11:44:49Z",
+        "from": "missing",
+        "to": "executing",
+        "note": "Started read-only post-submit signals review after explicit user authorization. Scope is docs-only report plus PR train metadata."
+      },
+      {
+        "at": "2026-06-03T11:44:49Z",
+        "from": "executing",
+        "to": "postsubmit_signals_reviewed_report_created_local_checks_pending",
+        "note": "Public page/API/sitemap/llms checks passed, GSC sitemap remains successful, Baidu zh manual submission is confirmed by prior report, and public Baidu search does not yet show the zh URL. No search submission, IndexNow, Search Channel write, CMS mutation, publish, runtime edit, or deploy was performed."
+      },
+      {
+        "at": "2026-06-03T11:44:49Z",
+        "from": "postsubmit_signals_reviewed_report_created_local_checks_pending",
+        "to": "local_checks_passed_postsubmit_signals_reviewed",
+        "note": "JSON/YAML parse and scoped diff checks passed for the docs-only post-submit signals report and PR train metadata."
+      },
+      {
+        "at": "2026-06-03T11:44:49Z",
+        "from": "local_checks_passed_postsubmit_signals_reviewed",
+        "to": "pr_open_postsubmit_signals_reviewed",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/1872. No search submission, IndexNow, Search Channel write, CMS mutation, publish, runtime edit, or deploy was performed."
+      }
+    ],
+    "sidecars": [
+      {
+        "id": "baidu_public_index_not_visible_yet",
+        "status": "monitor",
+        "note": "Public Baidu search did not show the zh-CN canary URL immediately after submission; review after a processing window."
+      },
+      {
+        "id": "indexnow_still_not_executed",
+        "status": "active",
+        "note": "IndexNow remains unexecuted and requires separate authorization."
+      },
+      {
+        "id": "search_channel_still_not_used",
+        "status": "active",
+        "note": "Search Channel records were not created; CMS article candidacy remains a separate follow-up if automation is needed."
+      }
+    ],
+    "next_task": "SEO-SEARCH-SUBMISSION-CANARY-BASELINE-REVIEW-01 after 7-day/14-day processing window, or SEO-SEARCH-CHANNEL-CMS-ARTICLE-CANDIDACY-01 if automation is needed."
   }
 }

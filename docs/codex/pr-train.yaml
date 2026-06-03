@@ -20513,7 +20513,7 @@ prs:
     branch: codex/seo-search-submission-baidu-manual-zh-confirm-01
     title: "docs(seo): confirm Baidu Chinese canary URL submission"
     train_scope: seo_cms_canary
-    status: executing
+    status: completed
     scope:
       - Record the post-operator visible Baidu success state for the zh-CN canary manual URL submission.
       - Update PR train ledger so the current state no longer remains NO-GO after the human-completed Baidu verification.
@@ -20546,3 +20546,45 @@ prs:
     frontend_fallback_authority: false
     content_authority: CMS/backend
     next_task: SEO-SEARCH-SUBMISSION-CANARY-POSTSUBMIT-SIGNALS-01 after separate authorization
+
+  - id: SEO-SEARCH-SUBMISSION-CANARY-POSTSUBMIT-SIGNALS-01
+    repo: fap-api
+    depends_on:
+      - SEO-SEARCH-SUBMISSION-BAIDU-MANUAL-ZH-CANARY-CONFIRM-01
+    branch: codex/seo-search-submission-canary-postsubmit-signals-01
+    title: "docs(seo): review SEO canary post-submit signals"
+    train_scope: seo_cms_canary
+    status: executing
+    scope:
+      - Run read-only post-submit signals review after GSC sitemap submission and Baidu zh-CN manual URL submission.
+      - Confirm public article pages, public article APIs, public SEO APIs, sitemap.xml, llms.txt, and llms-full.txt remain converged and indexable.
+      - Read visible GSC sitemap status and Baidu/Search public signals without submitting any URL or sitemap.
+      - Create a docs-only report with GO/NO-GO for further action.
+    allowed_paths:
+      - backend/docs/seo/seo-search-submission-canary-postsubmit-signals-2026-06-03.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Submit any search platform, call IndexNow, create Search Channel queue records, mutate CMS, publish, unpublish, modify content, modify runtime code, deploy, edit production configuration, or use/expose Baidu API token, GSC credentials, cookies, browser storage, or secrets.
+    validation:
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- backend/docs/seo docs/codex
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: SEO-SEARCH-SUBMISSION-CANARY-BASELINE-REVIEW-01 after a 7-day/14-day processing window, or SEO-SEARCH-CHANNEL-CMS-ARTICLE-CANDIDACY-01 if Search Channel automation is needed
