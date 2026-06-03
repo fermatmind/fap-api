@@ -20768,7 +20768,7 @@ prs:
     branch: codex/freemium-locale-policy-scan-01
     title: "docs(monetization): scan locale freemium policy readiness"
     train_scope: commercial_readiness_day1
-    status: executing
+    status: merged
     depends_on: []
     scope:
       - Run a read-only scan of backend commerce, report access, SKU, entitlement, locale, and fap-web checkout/unlock wiring evidence.
@@ -20810,9 +20810,9 @@ prs:
   - id: DAILY-GIVING-OPS-READINESS-SCAN-01
     repo: fap-api
     branch: codex/daily-giving-ops-readiness-scan-01
-    title: "docs(ops): scan daily giving readiness"
+    title: "docs(benefit): scan daily giving operations readiness"
     train_scope: commercial_readiness_day1
-    status: planned
+    status: executing
     depends_on:
       - FREEMIUM-LOCALE-POLICY-SCAN-01
     scope:
@@ -20823,11 +20823,12 @@ prs:
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
-      - Modify backend runtime code, routes, database, tests, frontend code, CMS data, production config, payment provider state, donation/order records, result/share/payment/history private URLs, GPT content assets, or deploy.
+      - Modify backend runtime code, routes, database, tests, frontend code, CMS data, production config, payment provider state, donation/order records, proof files, result/share/payment/history private URLs, GPT content assets, or deploy.
       - Publish, submit search, create Search Channel queue records, or call production write APIs.
     validation:
       - git status --short --branch
       - git log -n 5 --oneline
+      - php backend/artisan route:list | grep -i "giving\|foundation" || true
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
       - git diff --check -- backend/docs/operations docs/codex
