@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-03T15:33:00Z",
+  "updated_at": "2026-06-03T16:10:00Z",
   "items": {
     "SEO-CMS-CANARY-BE-01": {
       "repo": "fap-api",
@@ -42514,7 +42514,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-dash-api-01-readonly-contract",
     "base": "main",
-    "status": "local_checks_passed_after_ci_fix",
+    "status": "merged",
     "train_scope": "seo_intel_read_only_dashboard_api",
     "title": "feat(seo): add seo_intel read-only dashboard API contract",
     "checks": {
@@ -42549,21 +42549,25 @@
         "notes": "After GitHub verify-bigfive failure, added a focused SEO-DASH-API-01 runtime freeze classifier test and route diff predicate. BigFiveResultPageV2CoreBodyPreviewTest, SeoDashApi01ReadOnlyApiContractTest, scoped Pint, route list, migration pretend, OpenAPI snapshot check, JSON/YAML checks, scoped diff check, and bash backend/scripts/ci_verify_mbti.sh all passed. ci_verify_mbti.sh regenerated BIG5_OCEAN compiled artifacts as local side effects; those files were restored because they are outside this PR scope."
       },
       "github": {
-        "status": "retry_pending",
-        "evidence": "Local scoped CI fix passed; waiting for GitHub checks after push."
+        "status": "passed",
+        "evidence": "GitHub PR #1875 is MERGED; required checks passed after the verify-bigfive classifier fix."
+      },
+      "merge_reconciliation": {
+        "status": "pass",
+        "evidence": "GitHub PR #1875 is MERGED at merge commit cf1488e4aeccee8b6a54686d731e5f1a19ecf279; origin/main contains the merge commit; remote task branch is absent; local cleanup was executed after merge."
       }
     },
     "failure_reason": null,
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1875",
-    "commit_sha": null,
-    "merged_at": null,
-    "remote_branch_deleted": null,
-    "local_cleanup_executed": null,
+    "commit_sha": "4198c378bef86c35f161fc47209ff58504dd5252",
+    "merged_at": "2026-06-03T15:37:03Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null,
+      "github_checks_green": true,
+      "post_merge_revalidated": true,
       "api_route_added": true,
       "read_only_api": true,
       "migration_changed": false,
@@ -42613,9 +42617,126 @@
         "from": "ci_fix_in_progress",
         "to": "local_checks_passed_after_ci_fix",
         "note": "Focused Big Five runtime freeze guard test, SEO-DASH-API-01 contract test, scoped Pint, route/migration/OpenAPI/JSON/YAML/diff checks, and full backend/scripts/ci_verify_mbti.sh passed after the CI fix."
+      },
+      {
+        "at": "2026-06-03T15:42:00Z",
+        "from": "local_checks_passed_after_ci_fix",
+        "to": "merged",
+        "note": "Reconciled merged ledger for SEO-DASH-API-01 while starting SEO-DASH-MIGRATION-01. PR #1875 merged at cf1488e4aeccee8b6a54686d731e5f1a19ecf279 and branch cleanup was complete."
       }
     ],
     "sidecars": [],
     "next_task": "SEO-DASH-MIGRATION-01 after separate authorization."
+  },
+  "SEO-DASH-MIGRATION-01": {
+    "repo": "fap-api",
+    "branch": "codex/seo-dash-migration-01-readiness",
+    "base": "main",
+    "status": "executing",
+    "train_scope": "seo_intel_migration_readiness_gate",
+    "title": "docs(seo): define seo_intel migration readiness gate",
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized entering and completing SEO-DASH-MIGRATION-01 after SEO-DASH-API-01."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "SEO-DASH-00-RECONCILE is merged at 4fa540738eb90b9777cade2da6d3c9d43feb70a5 and SEO-DASH-API-01 is merged at cf1488e4aeccee8b6a54686d731e5f1a19ecf279."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to seo_intel migration readiness docs/artifact, focused contract test, and PR train metadata. No runtime route, migration file, production DB, collector, external API, CMS, search submission, fap-web, or deploy change was made."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoDashMigration01ReadinessTest --no-ansi",
+          "cd backend && vendor/bin/pint --test tests/Feature/SeoIntel/SeoDashMigration01ReadinessTest.php",
+          "cd backend && php artisan route:list --path=api/v0.5/ops/seo-intel --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoIntelMigrationIsolationTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi",
+          "python3 -m json.tool backend/docs/seo/generated/seo-dash-migration-01-readiness.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "git diff --check -- backend/docs/seo/seo-dash-migration-01-readiness.md backend/docs/seo/generated/seo-dash-migration-01-readiness.v1.json backend/tests/Feature/SeoIntel/SeoDashMigration01ReadinessTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+          "bash backend/scripts/ci_verify_mbti.sh",
+          "git diff --cached --check"
+        ],
+        "notes": "Focused readiness test, migration isolation test, Pint, seo-intel route list, default sqlite migrate --pretend, JSON/YAML parsing, scoped diff check, and bash backend/scripts/ci_verify_mbti.sh all passed. Actual seo_intel production migration remains a separate approval-gated command template and was not run locally or remotely."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "GitHub checks for PR #1876 all passed and mergeStateStatus was CLEAN before recording this ledger update."
+      }
+    },
+    "failure_reason": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1876",
+    "commit_sha": "9f44a06f286b1ce9f7fc9010d09138eed292b49b",
+    "merged_at": null,
+    "remote_branch_deleted": null,
+    "local_cleanup_executed": null,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": true,
+      "post_merge_revalidated": null,
+      "runtime_route_changed": false,
+      "migration_files_changed": false,
+      "production_migration_executed": false,
+      "production_db_created": false,
+      "collector_enabled": false,
+      "external_api_connected": false,
+      "cms_mutation": false,
+      "search_submission_performed": false,
+      "fap_web_modified": false,
+      "deploy_performed": false
+    },
+    "transitions": [
+      {
+        "at": "2026-06-03T15:42:00Z",
+        "from": "missing",
+        "to": "executing",
+        "note": "Started authorized SEO-DASH-MIGRATION-01 readiness contract PR. Scope is limited to migration readiness docs, generated artifact, focused contract test, and PR train metadata; no production migration or runtime change is allowed."
+      },
+      {
+        "at": "2026-06-03T15:48:00Z",
+        "from": "executing",
+        "to": "local_validation_adjusted",
+        "note": "Local seo_intel production migrate --database=seo_intel --path=database/migrations/seo_intel cannot run without a real configured production seo_intel DB host/user. Kept that as a production command template in the artifact and added SeoIntelMigrationIsolationTest plus default sqlite migrate --pretend as local validation."
+      },
+      {
+        "at": "2026-06-03T16:00:00Z",
+        "from": "local_validation_adjusted",
+        "to": "local_validation_passed",
+        "note": "All local validation passed, including bash backend/scripts/ci_verify_mbti.sh. BIG5_OCEAN compiled artifacts regenerated by CI were restored because they are outside this PR scope."
+      },
+      {
+        "at": "2026-06-03T16:02:00Z",
+        "from": "local_validation_passed",
+        "to": "committed",
+        "note": "Created local implementation commit 83bc213ca32b3d50c6ba3ef66cfb8e98ac48ff13 for the SEO-DASH-MIGRATION-01 readiness contract scope; this amended commit records the SHA in the ledger."
+      },
+      {
+        "at": "2026-06-03T16:03:00Z",
+        "from": "committed",
+        "to": "ledger_commit_sha_recorded",
+        "note": "Recorded implementation commit 5bd61c4ce39995af3c5ac67a2c346e8b613eca14 in the SEO-DASH-MIGRATION-01 ledger before push."
+      },
+      {
+        "at": "2026-06-03T16:04:00Z",
+        "from": "ledger_commit_sha_recorded",
+        "to": "pr_open",
+        "note": "Opened PR #1876 and recorded PR URL before GitHub checks."
+      },
+      {
+        "at": "2026-06-03T16:10:00Z",
+        "from": "pr_open",
+        "to": "github_checks_passed",
+        "note": "All GitHub checks passed for PR #1876 and mergeStateStatus was CLEAN before this ledger update."
+      }
+    ],
+    "sidecars": [],
+    "next_task": "SEO-DASH-COLLECTOR-01 after separate production migration readiness/deploy approval"
   }
 }
