@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-03T16:10:00Z",
+  "updated_at": "2026-06-04T00:25:00+08:00",
   "items": {
     "SEO-CMS-CANARY-BE-01": {
       "repo": "fap-api",
@@ -42632,7 +42632,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-dash-migration-01-readiness",
     "base": "main",
-    "status": "executing",
+    "status": "merged",
     "train_scope": "seo_intel_migration_readiness_gate",
     "title": "docs(seo): define seo_intel migration readiness gate",
     "checks": {
@@ -42667,20 +42667,24 @@
       },
       "github": {
         "status": "pass",
-        "evidence": "GitHub checks for PR #1876 all passed and mergeStateStatus was CLEAN before recording this ledger update."
+        "evidence": "PR #1876 merged on 2026-06-03T16:13:36Z at merge commit 09286a347cc8788ac8626c476f386da2086b6e94; origin/main contains the merge commit and GitHub checks were green before merge."
+      },
+      "post_merge_cleanup": {
+        "status": "pass",
+        "evidence": "After PR #1876 merge, local main matched origin/main, worktree was clean, and local/remote task branches were absent."
       }
     },
     "failure_reason": null,
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1876",
-    "commit_sha": "9f44a06f286b1ce9f7fc9010d09138eed292b49b",
-    "merged_at": null,
-    "remote_branch_deleted": null,
-    "local_cleanup_executed": null,
+    "commit_sha": "09286a347cc8788ac8626c476f386da2086b6e94",
+    "merged_at": "2026-06-03T16:13:36Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": null,
+      "post_merge_revalidated": true,
       "runtime_route_changed": false,
       "migration_files_changed": false,
       "production_migration_executed": false,
@@ -42734,9 +42738,16 @@
         "from": "pr_open",
         "to": "github_checks_passed",
         "note": "All GitHub checks passed for PR #1876 and mergeStateStatus was CLEAN before this ledger update."
+      },
+      {
+        "at": "2026-06-04T00:25:00+08:00",
+        "from": "github_checks_passed",
+        "to": "merged",
+        "note": "Ledger reconciliation only: PR #1876 is merged at 09286a347cc8788ac8626c476f386da2086b6e94; branch cleanup and post-merge revalidation were already completed."
       }
     ],
     "sidecars": [],
-    "next_task": "SEO-DASH-COLLECTOR-01 after separate production migration readiness/deploy approval"
+    "next_task": "SEO-DASH-COLLECTOR-01 after separate production migration readiness/deploy approval",
+    "merge_commit_sha": "09286a347cc8788ac8626c476f386da2086b6e94"
   }
 }
