@@ -41497,12 +41497,12 @@
   "SEO-REVIEW-P1-10": {
     "repo": "fap-api",
     "branch": "codex/seo-review-p1-10",
-    "status": "local_checks_passed_sitemap_llms_full_not_converged",
+    "status": "pr_open_sitemap_llms_full_not_converged",
     "depends_on": [
       "SEO-CONTENT-P1-09-PUBLISH-PREFLIGHT-01"
     ],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "bd7ab47af4c458918e669598fafc8514abe48861",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1867",
     "checks": {
       "production_db_state": {
         "status": "passed",
@@ -41541,6 +41541,13 @@
           "git diff --cached --check"
         ],
         "notes": "JSON parse, YAML parse, scoped whitespace diff check, and cached diff check passed before commit after path-limited staging."
+      },
+      "pr": {
+        "status": "opened",
+        "commands": [
+          "gh pr create --repo fermatmind/fap-api --base main --head codex/seo-review-p1-10 --title \"docs(cms): review SEO canary post-publish signals\""
+        ],
+        "notes": "Opened https://github.com/fermatmind/fap-api/pull/1867. Result remains NO-GO for search submission because sitemap.xml and llms-full.txt have not converged."
       }
     },
     "failure_reason": "NO-GO for search submission: sitemap.xml and llms-full.txt did not enumerate the published canary slugs during the review window.",
@@ -41584,6 +41591,12 @@
         "from": "local_checks_pending",
         "to": "local_checks_passed_sitemap_llms_full_not_converged",
         "note": "Created the post-publish signals review report, reconciled P1-09 publish completion, and passed JSON/YAML/scoped diff validation. Search submission remains NO-GO because sitemap.xml and llms-full.txt have not converged."
+      },
+      {
+        "at": "2026-06-03T13:02:00+08:00",
+        "from": "local_checks_passed_sitemap_llms_full_not_converged",
+        "to": "pr_open_sitemap_llms_full_not_converged",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/1867. No search submission, CMS mutation, publish, runtime edit, test edit, frontend edit, or GPT content edit was performed."
       }
     ],
     "sidecars": [
