@@ -41775,11 +41775,11 @@
   "SEO-SEARCH-SUBMISSION-GSC-SITEMAP-CANARY-01": {
     "repo": "fap-api",
     "branch": "codex/seo-search-submission-gsc-sitemap-canary-01",
-    "status": "pr_open_gsc_sitemap_submitted",
+    "status": "merged_gsc_sitemap_submitted",
     "depends_on": [
       "SEO-REVIEW-P1-10-SITEMAP-LLMS-ENUMERATION-01"
     ],
-    "commit_sha": "pending_remote_pr_head",
+    "commit_sha": "e7ed36c49a47d3ed9d272e62677f65babdf0e0c9",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1869",
     "checks": {
       "dependency_reconciliation": {
@@ -41834,17 +41834,32 @@
           "gh pr create --repo fermatmind/fap-api --base main --head codex/seo-search-submission-gsc-sitemap-canary-01 --title \"ops(seo): submit canary sitemap in GSC\""
         ],
         "notes": "Opened https://github.com/fermatmind/fap-api/pull/1869 after local checks passed. GSC sitemap submission was already completed and archived; no additional search submission action was performed during PR creation."
+      },
+      "github": {
+        "status": "passed",
+        "commands": [
+          "gh pr checks 1869 --repo fermatmind/fap-api --watch --interval 20"
+        ],
+        "notes": "GitHub checks passed before squash merge."
+      },
+      "merge_reconciliation": {
+        "status": "passed",
+        "commands": [
+          "gh pr view 1869 --repo fermatmind/fap-api --json number,state,mergedAt,mergeCommit,headRefName,url",
+          "git merge-base --is-ancestor e7ed36c49a47d3ed9d272e62677f65babdf0e0c9 origin/main"
+        ],
+        "notes": "GitHub reports PR #1869 merged at 2026-06-03T07:33:15Z with merge commit e7ed36c49a47d3ed9d272e62677f65babdf0e0c9, and origin/main contains the merge commit."
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-03T07:33:15Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null,
+      "github_checks_green": true,
+      "post_merge_revalidated": true,
       "gsc_sitemap_submission_performed": true,
       "individual_url_submission_performed": false,
       "baidu_submission_performed": false,
@@ -41880,6 +41895,12 @@
         "from": "local_checks_passed_gsc_sitemap_submitted",
         "to": "pr_open_gsc_sitemap_submitted",
         "note": "Opened https://github.com/fermatmind/fap-api/pull/1869. No additional URL submission, Baidu, IndexNow, Search Channel write, CMS mutation, publish, runtime edit, or deploy was performed."
+      },
+      {
+        "at": "2026-06-03T07:33:15Z",
+        "from": "pr_open_gsc_sitemap_submitted",
+        "to": "merged_gsc_sitemap_submitted",
+        "note": "PR #1869 passed GitHub checks, was squash merged, and the remote/local task branches were cleaned up. No Baidu, IndexNow, individual URL indexing, CMS mutation, publish, runtime edit, or deploy was performed."
       }
     ],
     "sidecars": [
@@ -41894,6 +41915,117 @@
         "note": "Backend Search Channel remains out of scope and blocked by canonical_url_not_found for the CMS article URLs."
       }
     ],
-    "next_task": "SEO-SEARCH-SUBMISSION-BAIDU-MANUAL-ZH-CANARY-01 after GSC sitemap result is archived and merged."
+    "next_task": "SEO-SEARCH-SUBMISSION-BAIDU-MANUAL-ZH-CANARY-01."
+  },
+  "SEO-SEARCH-SUBMISSION-BAIDU-MANUAL-ZH-CANARY-01": {
+    "repo": "fap-api",
+    "branch": "codex/seo-search-submission-baidu-manual-zh-canary-01",
+    "status": "local_checks_passed_baidu_security_verification_blocked",
+    "depends_on": [
+      "SEO-SEARCH-SUBMISSION-GSC-SITEMAP-CANARY-01"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "dependency_reconciliation": {
+        "status": "passed",
+        "commands": [
+          "gh pr view 1869 --repo fermatmind/fap-api --json number,state,mergedAt,mergeCommit,headRefName,url",
+          "git merge-base --is-ancestor e7ed36c49a47d3ed9d272e62677f65babdf0e0c9 origin/main"
+        ],
+        "notes": "Dependency SEO-SEARCH-SUBMISSION-GSC-SITEMAP-CANARY-01 is merged and origin/main contains merge commit e7ed36c49a47d3ed9d272e62677f65babdf0e0c9."
+      },
+      "authorization": {
+        "status": "passed",
+        "commands": [
+          "user explicit authorization in chat"
+        ],
+        "notes": "User explicitly authorized adding and executing SEO-SEARCH-SUBMISSION-BAIDU-MANUAL-ZH-CANARY-01, updating docs/codex/pr-train.yaml and docs/codex/pr-train-state.json, using logged-in Chrome Baidu Search Resource Platform only for manual zh-CN canary URL submission, and forbade English URL submission, Baidu API token usage, IndexNow, Search Channel queue records, CMS mutation, publish/unpublish, runtime code edits, and deploy."
+      },
+      "baidu_manual_submission_attempt": {
+        "status": "blocked_by_baidu_security_verification",
+        "commands": [
+          "Chrome Baidu Search Resource Platform link submission UI for https://fermatmind.com/zh/articles/mbti-vs-holland-career-choice"
+        ],
+        "notes": "The Baidu UI accepted the zh-CN canary URL in the manual link submission input, but after submit displayed a Baidu security verification slider challenge. No visible success state, submitted timestamp, or accepted-result confirmation was observed. Codex did not solve or bypass the security verification."
+      },
+      "report": {
+        "status": "created",
+        "commands": [
+          "created backend/docs/seo/seo-search-submission-baidu-manual-zh-canary-2026-06-03.md"
+        ],
+        "notes": "Docs-only result report records the Baidu platform, zh-CN submitted URL attempt, visible security verification block, no English submission, no Baidu API token usage, no IndexNow, no Search Channel records, no CMS mutation, no publish, and no deploy."
+      },
+      "local": {
+        "status": "passed",
+        "commands": [
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "git diff --check -- backend/docs/seo docs/codex",
+          "git diff --cached --check"
+        ],
+        "notes": "JSON parse, YAML parse, scoped diff whitespace check, and cached diff whitespace check passed. Staged files are limited to the Baidu manual zh result report and PR train metadata."
+      }
+    },
+    "failure_reason": "NO-GO for confirmed Baidu submission: Baidu displayed a security verification challenge after the zh-CN URL submit action, and no visible success state was observed.",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": null,
+      "baidu_manual_submission_attempted": true,
+      "baidu_submission_confirmed": false,
+      "baidu_security_verification_blocked": true,
+      "english_url_submission_performed": false,
+      "gsc_url_inspection_performed": false,
+      "indexnow_submission_performed": false,
+      "baidu_api_token_used": false,
+      "search_channel_records_created": false,
+      "cms_mutation": false,
+      "publish_performed": false,
+      "runtime_code_edit_performed": false,
+      "deploy_performed": false
+    },
+    "transitions": [
+      {
+        "at": "2026-06-03T11:07:20Z",
+        "from": "missing",
+        "to": "executing",
+        "note": "Started Baidu manual zh-CN canary submission PR train item after explicit user authorization. Scope is Baidu manual UI attempt plus docs-only result report and train metadata. English URL submission, Baidu API token usage, IndexNow, Search Channel queue records, CMS mutation, publish, runtime edits, and deploy are forbidden."
+      },
+      {
+        "at": "2026-06-03T11:07:20Z",
+        "from": "executing",
+        "to": "baidu_security_verification_blocked_report_created_local_checks_pending",
+        "note": "Submitted the zh-CN canary URL through the Baidu manual link submission UI, but Baidu displayed a security verification slider challenge and no visible success state was observed. Created docs-only blocked result report. Codex did not solve or bypass the security verification."
+      },
+      {
+        "at": "2026-06-03T11:07:20Z",
+        "from": "baidu_security_verification_blocked_report_created_local_checks_pending",
+        "to": "local_checks_passed_baidu_security_verification_blocked",
+        "note": "JSON/YAML parse and scoped diff checks passed for the docs-only blocked result report and PR train metadata. Baidu submission remains unconfirmed because the security verification gate blocked completion."
+      }
+    ],
+    "sidecars": [
+      {
+        "id": "human_operator_security_verification_required",
+        "status": "active",
+        "note": "A human operator must complete Baidu security verification before a confirmed Baidu manual zh-CN URL submission can be recorded."
+      },
+      {
+        "id": "baidu_api_token_boundary",
+        "status": "active",
+        "note": "Baidu API token was not used, printed, recorded, or exposed."
+      },
+      {
+        "id": "english_canary_boundary",
+        "status": "active",
+        "note": "English canary URL submission to Baidu remains out of scope and was not performed."
+      }
+    ],
+    "next_task": "A human operator must complete Baidu security verification and then rerun/continue Baidu manual zh-CN URL submission confirmation, or separately authorize a different search submission path."
   }
 }
