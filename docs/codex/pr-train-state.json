@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-03T07:26:01Z",
+  "updated_at": "2026-06-03T13:54:11Z",
   "items": {
     "SEO-CMS-CANARY-BE-01": {
       "repo": "fap-api",
@@ -42371,5 +42371,82 @@
       }
     ],
     "next_task": "SEO-SEARCH-SUBMISSION-CANARY-BASELINE-REVIEW-01 after 7-day/14-day processing window, or SEO-SEARCH-CHANNEL-CMS-ARTICLE-CANDIDACY-01 if automation is needed."
+  },
+  "SEO-DASH-00-RECONCILE": {
+    "repo": "fap-api",
+    "branch": "codex/seo-dash-00-reconcile-schema-api-contract",
+    "base": "main",
+    "status": "executing",
+    "train_scope": "search_intelligence_schema_api_contract",
+    "title": "docs(seo): reconcile seo_intel schema and read-only API contract",
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding SEO-DASH-00-RECONCILE to fap-api docs/codex/pr-train.yaml and docs/codex/pr-train-state.json and executing a docs/contract PR."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are confined to the SEO-DASH-00-RECONCILE docs, generated artifact, focused contract test, and PR train metadata. No runtime route, controller, service, migration, collector, CMS mutation, fap-web edit, deploy, or search submission file was changed."
+      },
+      "local": {
+        "status": "passed",
+        "commands": [
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoDash00ReconcileSchemaApiContractTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoIntelLogicalDbFoundationTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoIntelCmsIssueQueueSummaryTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoIntelIssueSeverityGovernanceContractTest --no-ansi",
+          "cd backend && vendor/bin/pint --test tests/Feature/SeoIntel/SeoDash00ReconcileSchemaApiContractTest.php",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -m json.tool backend/docs/seo/generated/seo-dash-00-reconcile-schema-api-contract.v1.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "git diff --check -- backend/docs/seo/seo-dash-00-reconcile-schema-api-contract.md backend/docs/seo/generated/seo-dash-00-reconcile-schema-api-contract.v1.json backend/tests/Feature/SeoIntel/SeoDash00ReconcileSchemaApiContractTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+          "git diff --cached --check"
+        ],
+        "notes": "Focused contract test passed: 6 tests, 113 assertions. Existing SeoIntelLogicalDbFoundationTest, SeoIntelCmsIssueQueueSummaryTest, and SeoIntelIssueSeverityGovernanceContractTest passed. Scoped Pint check passed for the new PHP test. JSON/YAML parse checks, scoped git diff whitespace check, and cached diff whitespace check passed."
+      },
+      "github": {
+        "status": "pending",
+        "required_checks": []
+      }
+    },
+    "failure_reason": null,
+    "pr_url": null,
+    "commit_sha": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": null,
+      "runtime_code_edit_performed": false,
+      "api_route_added": false,
+      "migration_changed": false,
+      "production_migration_executed": false,
+      "production_db_created": false,
+      "collector_enabled": false,
+      "external_api_connected": false,
+      "cms_mutation": false,
+      "search_submission_performed": false,
+      "fap_web_modified": false,
+      "deploy_performed": false
+    },
+    "transitions": [
+      {
+        "at": "2026-06-03T13:51:11Z",
+        "from": "missing",
+        "to": "executing",
+        "note": "Started authorized docs/contract PR to reconcile seo_intel schema, PII/consent, source-of-truth, and read-only API contract. Scope excludes runtime API routes, migrations, production DB activation, collectors, CMS mutations, fap-web edits, URL submission, and deploy."
+      },
+      {
+        "at": "2026-06-03T13:53:18Z",
+        "from": "executing",
+        "to": "local_checks_passed",
+        "note": "Focused SEO-DASH-00-RECONCILE contract test, existing seo_intel foundation/issue queue/severity governance tests, JSON/YAML parse checks, and scoped diff whitespace check passed."
+      }
+    ],
+    "sidecars": [],
+    "next_task": "SEO-DASH-API-01 after separate authorization."
   }
 }
