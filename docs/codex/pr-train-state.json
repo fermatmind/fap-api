@@ -41010,11 +41010,11 @@
   "SEO-CONTENT-P1-08-POSTCHECK-ARCHIVE-01": {
     "repo": "fap-api",
     "branch": "codex/seo-content-p1-08-postcheck-archive-01",
-    "status": "pr_open",
+    "status": "merged",
     "depends_on": [
       "SEO-CONTENT-P1-08"
     ],
-    "commit_sha": "b59a7c3ab3a8206b5cb9f5cd20001c80aa060e8e",
+    "commit_sha": "5b34332c7791d9900f73e4be5138c47d1518d0a4",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1864",
     "checks": {
       "report_archive": {
@@ -41036,22 +41036,33 @@
         "notes": "JSON parse, YAML parse, scoped whitespace diff check, and report marker validation passed. No draft creation, publish, importer execution, production write API, content asset edit, runtime code edit, tests edit, frontend edit, sitemap submission, Baidu push, IndexNow, or search submission was performed."
       },
       "pr": {
-        "status": "opened",
+        "status": "merged",
         "commands": [
           "gh pr create --repo fermatmind/fap-api --title \"docs(cms): archive bilingual SEO canary draft postcheck\" --body-file /tmp/seo-content-p1-08-postcheck-archive-pr-body.md --base main --head codex/seo-content-p1-08-postcheck-archive-01"
         ],
-        "notes": "Opened PR #1864 after local docs/codex validation passed. GitHub checks are pending; merge remains blocked until required checks pass."
+        "notes": "PR #1864 merged as 5b34332c7791d9900f73e4be5138c47d1518d0a4 on 2026-06-03T03:45:55Z."
+      },
+      "post_merge_reconciliation": {
+        "status": "passed",
+        "commands": [
+          "gh pr view 1864 --repo fermatmind/fap-api --json state,mergeCommit,mergedAt,headRefName,baseRefName,url,title",
+          "git fetch origin main --prune",
+          "git merge-base --is-ancestor 5b34332c7791d9900f73e4be5138c47d1518d0a4 origin/main",
+          "git branch --list codex/seo-content-p1-08-postcheck-archive-01",
+          "git branch -r --list origin/codex/seo-content-p1-08-postcheck-archive-01"
+        ],
+        "notes": "GitHub shows PR #1864 merged, origin/main contains the merge commit, and the local/remote task branches are absent. This reconciliation is bookkeeping only to unblock SEO-CMS-CANARY-EDITORIAL-REVIEW-01."
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-03T03:45:55Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null
+      "github_checks_green": true,
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -41071,6 +41082,12 @@
         "from": "local_checks_passed",
         "to": "pr_open",
         "note": "Opened https://github.com/fermatmind/fap-api/pull/1864. GitHub checks are pending. No draft creation, publish, importer run, CMS mutation, runtime code change, content asset edit, sitemap submission, Baidu push, IndexNow, or search submission was performed."
+      },
+      {
+        "at": "2026-06-03T12:05:10+08:00",
+        "from": "pr_open",
+        "to": "merged",
+        "note": "Reconciled before SEO-CMS-CANARY-EDITORIAL-REVIEW-01: GitHub PR #1864 is merged, origin/main contains merge commit 5b34332c7791d9900f73e4be5138c47d1518d0a4, and local/remote task branches are absent."
       }
     ],
     "sidecars": [
@@ -41095,20 +41112,98 @@
   "SEO-CMS-CANARY-EDITORIAL-REVIEW-01": {
     "repo": "fap-api",
     "branch": "codex/seo-cms-canary-editorial-review-01",
-    "status": "planned",
+    "status": "pr_open",
     "depends_on": [
       "SEO-CONTENT-P1-08-POSTCHECK-ARCHIVE-01"
     ],
-    "commit_sha": null,
-    "pr_url": null,
-    "checks": {},
+    "commit_sha": "11d13f6f65f05d5bb8493feb82385a0e7a40ee38",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1865",
+    "checks": {
+      "dependency_reconciliation": {
+        "status": "passed",
+        "commands": [
+          "gh pr view 1864 --repo fermatmind/fap-api --json state,mergeCommit,mergedAt,headRefName,baseRefName,url,title",
+          "git merge-base --is-ancestor 5b34332c7791d9900f73e4be5138c47d1518d0a4 origin/main"
+        ],
+        "notes": "Dependency SEO-CONTENT-P1-08-POSTCHECK-ARCHIVE-01 is merged and origin/main contains merge commit 5b34332c7791d9900f73e4be5138c47d1518d0a4."
+      },
+      "editorial_review": {
+        "status": "passed",
+        "commands": [
+          "Manual/operator review of production draft state and importer adapter artifacts",
+          "python3 inline adapter structure and CTA placeholder inspection"
+        ],
+        "notes": "Codex acted as the operator/editorial reviewer at the user's request. Both locales passed title/H1 intent, structure, FAQ, CTA, bilingual parity, and non-deterministic framing review. No content rewrite was performed."
+      },
+      "production_draft_state": {
+        "status": "passed",
+        "commands": [
+          "ssh \"$API_SSH_ALIAS\" 'cd /var/www/fap-api/current/backend && php artisan tinker --execute=\"...\"'"
+        ],
+        "notes": "Production read-only checks confirmed zh-CN article 37 and en article 39 remain status=draft, is_public=false, is_indexable=false, published_revision_id=null, robots=noindex,nofollow, and the translation group count is 2. Public/indexable/published count for the two slugs is 0."
+      },
+      "claim_boundary_review": {
+        "status": "passed_with_publish_acknowledgement_still_required",
+        "commands": [
+          "ssh \"$API_SSH_ALIAS\" 'cd /var/www/fap-api/current/backend && php artisan tinker --execute=\"...\"'"
+        ],
+        "notes": "English has 0 claim warnings. Chinese has 2 boundary_context=true warnings for boundary/disclaimer sentences: 医学诊断 and 一定适合. These are acceptable for editorial review but may require explicit acknowledgement in a later controlled publish preflight. Publish remains forbidden."
+      },
+      "cta_review": {
+        "status": "passed",
+        "commands": [
+          "python3 inline adapter CTA placeholder and target route validation"
+        ],
+        "notes": "CTA placeholders match adapter CTA slots. CTA targets are public canonical test routes and do not include result, orders, share, pay, payment, history, take, tokenized, external, or unsafe URLs."
+      },
+      "public_exposure_review": {
+        "status": "passed",
+        "commands": [
+          "python3 inline public page/API/sitemap/llms absence checks"
+        ],
+        "notes": "Public article pages and public article/SEO APIs still return 404 for both target slugs. sitemap.xml, llms.txt, and llms-full.txt do not contain either slug. No publish or search submission was performed."
+      },
+      "cms_only_inspection": {
+        "status": "accepted_for_current_canary",
+        "commands": [
+          "Manual/operator decision recorded in backend/docs/seo/seo-cms-canary-editorial-review-2026-06-03.md"
+        ],
+        "notes": "CMS-only inspection is accepted as the editorial/operator review path and preview substitute for this bilingual canary unless a later publish preflight or reviewer explicitly requires rendered preview. This does not authorize publish."
+      },
+      "local": {
+        "status": "passed",
+        "commands": [
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "git diff --check -- backend/docs/seo docs/codex",
+          "git diff --cached --check"
+        ],
+        "notes": "JSON parse, YAML parse, scoped whitespace diff check, and cached diff check passed after path-limited staging. No publish, search submission, importer execution, new draft creation, CMS mutation, runtime code edit, test edit, frontend edit, or GPT content asset edit was performed."
+      },
+      "pr": {
+        "status": "opened",
+        "commands": [
+          "gh pr create --repo fermatmind/fap-api --base main --head codex/seo-cms-canary-editorial-review-01 --title \"docs(cms): record bilingual SEO canary editorial review\""
+        ],
+        "notes": "Opened PR #1865 after local docs/codex validation passed. GitHub checks are pending; merge remains blocked until required checks pass. Publish remains forbidden."
+      }
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": null,
       "publish_blocked": true,
-      "search_submission_forbidden": true
+      "search_submission_forbidden": true,
+      "cms_only_inspection_accepted_for_current_canary": true,
+      "cms_mutation_performed": false,
+      "importer_run_performed": false,
+      "content_asset_edit_performed": false,
+      "runtime_code_edit_performed": false
     },
     "transitions": [
       {
@@ -41116,15 +41211,54 @@
         "from": "missing",
         "to": "planned",
         "note": "Next planned task: editorial/operator review of the bilingual canary drafts. Do not publish. Publish remains forbidden; search submission remains forbidden."
+      },
+      {
+        "at": "2026-06-03T12:05:10+08:00",
+        "from": "planned",
+        "to": "local_checks_pending",
+        "note": "Recorded bilingual canary editorial/operator review. CMS-only inspection is accepted for this canary; publish, search submission, importer execution, new draft creation, CMS mutation, runtime code edits, tests edits, frontend edits, and GPT content asset edits remain forbidden."
+      },
+      {
+        "at": "2026-06-03T12:11:00+08:00",
+        "from": "local_checks_pending",
+        "to": "local_checks_passed",
+        "note": "Created the docs-only editorial review report, reconciled #1864 as merged, updated preview/P1-09 ledger state, and passed local JSON/YAML/diff validation. CMS-only inspection is accepted for the current canary; publish remains forbidden."
+      },
+      {
+        "at": "2026-06-03T12:15:00+08:00",
+        "from": "local_checks_passed",
+        "to": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/1865. GitHub checks are pending. No publish, search submission, importer execution, new draft creation, CMS mutation, runtime code change, test change, frontend change, or GPT content asset edit was performed."
       }
     ],
-    "sidecars": [],
-    "next_task": null
+    "sidecars": [
+      {
+        "id": "cms_only_inspection_accepted_current_canary",
+        "status": "accepted",
+        "note": "Accepted as the editorial/operator inspection path and preview substitute for this bilingual canary unless a later publish preflight or reviewer explicitly requires rendered preview."
+      },
+      {
+        "id": "claim_warning_acknowledgement_required_if_publish",
+        "status": "active_publish_gate",
+        "note": "Chinese article 37 has two boundary_context=true claim warnings. They are acceptable for editorial review, but a later controlled publish preflight may require explicit acknowledgement before publish."
+      },
+      {
+        "id": "publish_requires_separate_explicit_approval",
+        "status": "active",
+        "note": "Publish remains blocked and requires separate exact approval plus controlled publish preflight. This review does not authorize publish."
+      },
+      {
+        "id": "search_submission_remains_forbidden",
+        "status": "active",
+        "note": "Sitemap submission, Baidu push, IndexNow, and search submission remain forbidden."
+      }
+    ],
+    "next_task": "SEO-CONTENT-P1-09 publish-readiness planning only after separate authorization; publish remains forbidden."
   },
   "SEO-CMS-CANARY-PREVIEW-01": {
     "repo": "fap-api",
     "branch": "codex/seo-cms-canary-preview-01",
-    "status": "conditional_blocked_until_preview_required",
+    "status": "conditional_not_required_for_current_canary_cms_only_accepted",
     "depends_on": [
       "SEO-CMS-CANARY-EDITORIAL-REVIEW-01"
     ],
@@ -41137,7 +41271,8 @@
     "local_cleanup_executed": false,
     "scope_validation": {
       "publish_blocked": true,
-      "search_submission_forbidden": true
+      "search_submission_forbidden": true,
+      "cms_only_inspection_accepted_for_current_canary": true
     },
     "transitions": [
       {
@@ -41145,15 +41280,27 @@
         "from": "missing",
         "to": "conditional_blocked_until_preview_required",
         "note": "Conditional task only if rendered preview is required before publish and CMS-only inspection is not accepted. Publish remains forbidden; search submission remains forbidden."
+      },
+      {
+        "at": "2026-06-03T12:05:10+08:00",
+        "from": "conditional_blocked_until_preview_required",
+        "to": "conditional_not_required_for_current_canary_cms_only_accepted",
+        "note": "SEO-CMS-CANARY-EDITORIAL-REVIEW-01 accepted CMS-only inspection for the current bilingual canary. Preview implementation is not required for this canary unless a later publish preflight or reviewer explicitly rejects CMS-only inspection. Publish remains forbidden."
       }
     ],
-    "sidecars": [],
+    "sidecars": [
+      {
+        "id": "not_required_for_current_canary",
+        "status": "active",
+        "note": "CMS-only inspection was accepted for the current bilingual canary; this preview implementation task remains conditional for future canaries or later reviewer/preflight rejection."
+      }
+    ],
     "next_task": null
   },
   "SEO-CONTENT-P1-09": {
     "repo": "fap-api",
     "branch": "codex/seo-content-p1-09",
-    "status": "blocked_until_editorial_review_and_publish_approval",
+    "status": "planned_publish_readiness_only_publish_blocked",
     "depends_on": [
       "SEO-CMS-CANARY-EDITORIAL-REVIEW-01"
     ],
@@ -41166,7 +41313,9 @@
     "local_cleanup_executed": false,
     "scope_validation": {
       "publish_blocked": true,
-      "search_submission_forbidden": true
+      "search_submission_forbidden": true,
+      "editorial_review_passed": true,
+      "cms_only_inspection_accepted_for_current_canary": true
     },
     "transitions": [
       {
@@ -41174,10 +41323,22 @@
         "from": "missing",
         "to": "blocked_until_editorial_review_and_publish_approval",
         "note": "Blocked until editorial/operator review passes and separate publish approval is granted. Publish remains forbidden; search submission remains forbidden."
+      },
+      {
+        "at": "2026-06-03T12:05:10+08:00",
+        "from": "blocked_until_editorial_review_and_publish_approval",
+        "to": "planned_publish_readiness_only_publish_blocked",
+        "note": "Editorial/operator review passed and CMS-only inspection was accepted for the current bilingual canary. SEO-CONTENT-P1-09 may be separately authorized for publish-readiness planning only. Actual publish remains blocked until separate exact approval and controlled publish preflight pass."
       }
     ],
-    "sidecars": [],
-    "next_task": null
+    "sidecars": [
+      {
+        "id": "publish_still_requires_exact_approval",
+        "status": "active",
+        "note": "This readiness task must not publish by implication. Controlled publish requires a later exact approval and preflight."
+      }
+    ],
+    "next_task": "SEO-REVIEW-P1-10 only after controlled publish with separate exact approval"
   },
   "SEO-REVIEW-P1-10": {
     "repo": "fap-api",

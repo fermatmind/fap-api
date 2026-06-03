@@ -20147,6 +20147,7 @@ prs:
     branch: codex/seo-content-p1-08-postcheck-archive-01
     title: "docs(cms): archive bilingual SEO canary draft postcheck"
     train_scope: seo_cms_canary
+    status: merged
     scope:
       - Archive the existing SEO-CONTENT-P1-08 draft-only post-create validation report.
       - Reconcile PR train manifest/state to record that both canary CMS drafts exist and postcheck passed.
@@ -20192,10 +20193,10 @@ prs:
     branch: codex/seo-cms-canary-editorial-review-01
     title: "docs(cms): record bilingual SEO canary editorial review"
     train_scope: seo_cms_canary
-    status: planned
+    status: editorial_review_passed_cms_only_accepted_publish_blocked
     scope:
       - Record authorized editorial/operator review results for the bilingual SEO canary CMS drafts.
-      - Keep publish blocked until review, preview/noindex or accepted CMS-only substitute, claim review, and explicit publish approval pass.
+      - Record CMS-only inspection acceptance for this canary while keeping publish blocked until controlled publish preflight, any required claim-warning acknowledgement, and separate explicit publish approval pass.
     allowed_paths:
       - backend/docs/seo/**
       - docs/codex/pr-train.yaml
@@ -20220,7 +20221,7 @@ prs:
     fap_web_commit_allowed: false
     frontend_fallback_authority: false
     content_authority: CMS/backend
-    next_task: SEO-CMS-CANARY-PREVIEW-01 or SEO-CONTENT-P1-09 only after review gates pass
+    next_task: SEO-CONTENT-P1-09 publish-readiness planning only after separate authorization; publish remains forbidden
 
   - id: SEO-CMS-CANARY-PREVIEW-01
     repo: fap-api
@@ -20229,10 +20230,11 @@ prs:
     branch: codex/seo-cms-canary-preview-01
     title: "fix(cms): add safe article draft preview gate"
     train_scope: seo_cms_canary
-    status: conditional_blocked_until_preview_required
+    status: conditional_not_required_for_current_canary_cms_only_accepted
     scope:
       - Add or document a safe auth/token-gated article draft preview only if rendered preview is required before publish and CMS-only inspection is not accepted.
       - Ensure preview is noindex, excluded from sitemap and llms, excluded from public article APIs, and safe for pre-publish rendering validation.
+      - Current bilingual canary accepted CMS-only inspection, so this task is not required for the current canary unless a later publish preflight or reviewer explicitly rejects that substitute.
     allowed_paths:
       - backend/app/Http/Controllers/**
       - backend/app/Services/Cms/**
@@ -20262,7 +20264,7 @@ prs:
     fap_web_commit_allowed: false
     frontend_fallback_authority: false
     content_authority: CMS/backend
-    next_task: SEO-CONTENT-P1-09 only after preview/CMS-only substitute and publish approval gates pass
+    next_task: None for current canary unless preview is later explicitly required
 
   - id: SEO-CONTENT-P1-09
     repo: fap-api
@@ -20271,9 +20273,10 @@ prs:
     branch: codex/seo-content-p1-09
     title: "docs(cms): prepare SEO canary publish readiness"
     train_scope: seo_cms_canary
-    status: blocked_until_editorial_review_and_publish_approval
+    status: planned_publish_readiness_only_publish_blocked
     scope:
-      - Prepare publish-readiness evidence only after editorial/operator review and explicit publish approval.
+      - Prepare publish-readiness evidence after editorial/operator review passed and CMS-only inspection was accepted for this canary.
+      - Actual publish remains blocked until a separate exact approval and controlled publish preflight pass.
     allowed_paths:
       - backend/docs/seo/**
       - docs/codex/pr-train.yaml
@@ -20298,7 +20301,7 @@ prs:
     fap_web_commit_allowed: false
     frontend_fallback_authority: false
     content_authority: CMS/backend
-    next_task: SEO-REVIEW-P1-10 after publish
+    next_task: SEO-REVIEW-P1-10 only after controlled publish with separate exact approval
 
   - id: SEO-REVIEW-P1-10
     repo: fap-api
