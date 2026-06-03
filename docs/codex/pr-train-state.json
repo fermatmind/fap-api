@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-02T14:43:50Z",
+  "updated_at": "2026-06-03T07:24:09Z",
   "items": {
     "SEO-CMS-CANARY-BE-01": {
       "repo": "fap-api",
@@ -41628,11 +41628,11 @@
   "SEO-REVIEW-P1-10-SITEMAP-LLMS-ENUMERATION-01": {
     "repo": "fap-api",
     "branch": "codex/seo-review-p1-10-sitemap-llms-enumeration-01",
-    "status": "pr_open_no_go_search_submission",
+    "status": "merged_no_go_search_submission",
     "depends_on": [
       "SEO-REVIEW-P1-10"
     ],
-    "commit_sha": "385b58c4cd21df412fc455e7cfa7307107c05bfd",
+    "commit_sha": "8da3405f75ca779e27b10c01f0db2157d0ea3cb0",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1868",
     "checks": {
       "dependency_reconciliation": {
@@ -41684,22 +41684,30 @@
         "notes": "JSON parse, YAML parse, scoped whitespace diff check, and cached diff check passed before commit after path-limited staging."
       },
       "pr": {
-        "status": "opened",
+        "status": "merged",
         "commands": [
           "gh pr create --repo fermatmind/fap-api --base main --head codex/seo-review-p1-10-sitemap-llms-enumeration-01 --title \"docs(seo): investigate SEO canary sitemap and llms-full enumeration gap\""
         ],
-        "notes": "Opened https://github.com/fermatmind/fap-api/pull/1868. Search submission remains NO-GO."
+        "notes": "Opened https://github.com/fermatmind/fap-api/pull/1868. Search submission remained NO-GO until the later sitemap/llms convergence fix and frontend deploy."
+      },
+      "merge_reconciliation": {
+        "status": "passed",
+        "commands": [
+          "gh pr view 1868 --repo fermatmind/fap-api --json number,state,mergedAt,mergeCommit,url,headRefName,title",
+          "git merge-base --is-ancestor 8da3405f75ca779e27b10c01f0db2157d0ea3cb0 origin/main"
+        ],
+        "notes": "GitHub reports PR #1868 merged at 2026-06-03T05:21:44Z with merge commit 8da3405f75ca779e27b10c01f0db2157d0ea3cb0, and origin/main contains the merge commit."
       }
     },
     "failure_reason": "NO-GO for search submission: sitemap.xml and llms-full.txt still do not enumerate the canary URLs. Backend sitemap-source is serving stale cache, frontend sitemap.xml is a static build artifact, and llms-full is blocked by response cache/revalidation gap.",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-03T05:21:44Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null,
+      "github_checks_green": true,
+      "post_merge_revalidated": true,
       "production_write_execution": false,
       "database_mutation": false,
       "cms_mutation": false,
@@ -41732,6 +41740,12 @@
         "from": "local_checks_passed_no_go_search_submission",
         "to": "pr_open_no_go_search_submission",
         "note": "Opened https://github.com/fermatmind/fap-api/pull/1868. No search submission, publish, CMS mutation, runtime edit, fap-web edit, test edit, or GPT content edit was performed."
+      },
+      {
+        "at": "2026-06-03T07:20:22Z",
+        "from": "pr_open_no_go_search_submission",
+        "to": "merged_no_go_search_submission",
+        "note": "Reconciled ledger: PR #1868 is merged and origin/main contains merge commit 8da3405f75ca779e27b10c01f0db2157d0ea3cb0."
       }
     ],
     "sidecars": [
@@ -41757,5 +41771,116 @@
       }
     ],
     "next_task": "SEO-REVIEW-P1-10-SITEMAP-LLMS-FIX-01 proposed in fap-web; search submission remains forbidden."
+  },
+  "SEO-SEARCH-SUBMISSION-GSC-SITEMAP-CANARY-01": {
+    "repo": "fap-api",
+    "branch": "codex/seo-search-submission-gsc-sitemap-canary-01",
+    "status": "local_checks_passed_gsc_sitemap_submitted",
+    "depends_on": [
+      "SEO-REVIEW-P1-10-SITEMAP-LLMS-ENUMERATION-01"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "dependency_reconciliation": {
+        "status": "passed",
+        "commands": [
+          "gh pr view 1868 --repo fermatmind/fap-api --json number,state,mergedAt,mergeCommit,url,headRefName,title",
+          "git merge-base --is-ancestor 8da3405f75ca779e27b10c01f0db2157d0ea3cb0 origin/main"
+        ],
+        "notes": "Dependency SEO-REVIEW-P1-10-SITEMAP-LLMS-ENUMERATION-01 is merged and origin/main contains merge commit 8da3405f75ca779e27b10c01f0db2157d0ea3cb0."
+      },
+      "authorization": {
+        "status": "passed",
+        "commands": [
+          "user explicit authorization in chat"
+        ],
+        "notes": "User explicitly authorized adding and executing SEO-SEARCH-SUBMISSION-GSC-SITEMAP-CANARY-01, updating docs/codex/pr-train.yaml and docs/codex/pr-train-state.json, archiving the execution-plan report, submitting only https://fermatmind.com/sitemap.xml to GSC property sc-domain:fermatmind.com through logged-in Chrome, and creating a docs-only result report. URL Inspection request indexing, Baidu, IndexNow, Baidu API token usage, Search Channel queue records, CMS mutation, publish/unpublish, content edits, runtime code edits, and deploy remain forbidden."
+      },
+      "gsc_submission": {
+        "status": "passed",
+        "commands": [
+          "Chrome Google Search Console sitemap page submission for https://fermatmind.com/sitemap.xml"
+        ],
+        "notes": "GSC displayed '已成功提交站点地图'. After a read-only refresh, the submitted sitemap table showed https://fermatmind.com/sitemap.xml, type 站点地图, date 2026年6月3日, status 成功, discovered pages 2,272, discovered videos 0. No URL Inspection request indexing or individual URL submission was performed."
+      },
+      "public_sitemap_cross_check": {
+        "status": "passed",
+        "commands": [
+          "python3 inline urllib check for https://fermatmind.com/sitemap.xml"
+        ],
+        "notes": "Public sitemap returned 200, response length 333760 bytes, Cache-Control public max-age=0, and contained both bilingual canary slugs."
+      },
+      "report": {
+        "status": "created",
+        "commands": [
+          "created backend/docs/seo/seo-search-submission-gsc-sitemap-canary-2026-06-03.md"
+        ],
+        "notes": "Docs-only result report records the GSC property, submitted sitemap URL, visible success state, submitted/read date, no individual URL submission, no Baidu/IndexNow, no CMS mutation, no Search Channel records, and next Baidu manual zh URL submission readiness."
+      },
+      "local": {
+        "status": "passed",
+        "commands": [
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "git diff --check -- backend/docs/seo docs/codex",
+          "git diff --cached --check"
+        ],
+        "notes": "JSON parse, YAML parse, scoped diff whitespace check, and cached diff whitespace check passed. Staged files were limited to the execution-plan archive, GSC sitemap result report, and PR train metadata."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": null,
+      "gsc_sitemap_submission_performed": true,
+      "individual_url_submission_performed": false,
+      "baidu_submission_performed": false,
+      "indexnow_submission_performed": false,
+      "baidu_api_token_used": false,
+      "search_channel_records_created": false,
+      "cms_mutation": false,
+      "publish_performed": false,
+      "runtime_code_edit_performed": false,
+      "deploy_performed": false
+    },
+    "transitions": [
+      {
+        "at": "2026-06-03T07:16:36Z",
+        "from": "missing",
+        "to": "executing",
+        "note": "Started GSC sitemap-only submission PR train item after explicit user authorization. Scope is GSC sitemap submission plus docs-only archive/report and train metadata. No URL Inspection request indexing, Baidu, IndexNow, CMS mutation, publish, Search Channel queue write, runtime edit, or deploy is allowed."
+      },
+      {
+        "at": "2026-06-03T07:20:22Z",
+        "from": "executing",
+        "to": "gsc_sitemap_submitted_report_created_local_checks_pending",
+        "note": "Submitted only https://fermatmind.com/sitemap.xml in GSC. Final visible GSC table state after refresh was 成功 with 2,272 discovered pages. Created docs-only result report. No individual URL request indexing, Baidu, IndexNow, Search Channel write, CMS mutation, publish, runtime edit, or deploy was performed."
+      },
+      {
+        "at": "2026-06-03T07:24:09Z",
+        "from": "gsc_sitemap_submitted_report_created_local_checks_pending",
+        "to": "local_checks_passed_gsc_sitemap_submitted",
+        "note": "JSON/YAML parse, scoped diff check, cached diff check, and path-limited staging passed. Staged scope is docs-only plus train metadata."
+      }
+    ],
+    "sidecars": [
+      {
+        "id": "baidu_api_token_boundary",
+        "status": "active",
+        "note": "Baidu API token must not be recorded, printed, used, or submitted in this PR."
+      },
+      {
+        "id": "search_channel_candidacy_still_blocked",
+        "status": "active",
+        "note": "Backend Search Channel remains out of scope and blocked by canonical_url_not_found for the CMS article URLs."
+      }
+    ],
+    "next_task": "SEO-SEARCH-SUBMISSION-BAIDU-MANUAL-ZH-CANARY-01 after GSC sitemap result is archived and merged."
   }
 }
