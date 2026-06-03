@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-03T14:12:03Z",
+  "updated_at": "2026-06-03T14:24:00Z",
   "items": {
     "SEO-CMS-CANARY-BE-01": {
       "repo": "fap-api",
@@ -42376,7 +42376,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-dash-00-reconcile-schema-api-contract",
     "base": "main",
-    "status": "executing",
+    "status": "merged",
     "train_scope": "search_intelligence_schema_api_contract",
     "title": "docs(seo): reconcile seo_intel schema and read-only API contract",
     "checks": {
@@ -42409,41 +42409,20 @@
         "notes": "Composer validate passed. Composer audit now reports no advisories after updating laravel/framework from v12.48.1 to v12.61.0 in backend/composer.lock. Focused SEO-DASH-00-RECONCILE contract test, existing SeoIntelLogicalDbFoundationTest, SeoIntelCmsIssueQueueSummaryTest, SeoIntelIssueSeverityGovernanceContractTest, scoped Pint, route:list, JSON/YAML parse checks, scoped diff whitespace check, and bash backend/scripts/ci_verify_mbti.sh passed after the lockfile fix. ci_verify_mbti.sh regenerated BIG5_OCEAN compiled artifacts as local side effects; those files were restored because they are outside this PR scope."
       },
       "github": {
-        "status": "rerun_pending_after_supply_chain_fix",
-        "required_checks": [
-          "hygiene",
-          "supply-chain",
-          "content-pack-build-validate",
-          "verify-mbti-${{ matrix.mode }}",
-          "verify-bigfive",
-          "Semgrep blocking secrets"
-        ],
-        "failed_checks": [
-          {
-            "name": "supply-chain",
-            "url": "https://github.com/fermatmind/fap-api/actions/runs/26889576685/job/79311555731",
-            "reason": "composer audit reported laravel/framework advisory PKSA-mdq4-51ck-6kdq / CVE-2026-48019 / GHSA-5vg9-5847-vvmq."
-          }
-        ],
-        "passed_checks": [
-          "hygiene",
-          "Semgrep blocking secrets",
-          "Semgrep OSS",
-          "semgrep sarif non-blocking upload"
-        ],
-        "skipped_checks": [
-          "content-pack-build-validate",
-          "verify-mbti-${{ matrix.mode }}",
-          "verify-bigfive"
-        ]
+        "status": "passed",
+        "evidence": "GitHub PR #1873 is MERGED; required checks passed before merge, including supply-chain after the Laravel lockfile update."
+      },
+      "merge_reconciliation": {
+        "status": "pass",
+        "evidence": "GitHub PR #1873 is MERGED at merge commit 4fa540738eb90b9777cade2da6d3c9d43feb70a5; origin/main contains that merge commit; remote task branch is absent; local task branch cleanup was executed."
       }
     },
     "failure_reason": null,
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1873",
-    "commit_sha": "2a5f86b68861bc9727e67ab396798432ad3a1d3f",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "commit_sha": "ad4d78bb65e3e33da359490ad0389c024641503e",
+    "merged_at": "2026-06-03T14:19:44Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
@@ -42519,9 +42498,16 @@
         "from": "full_local_ci_passed_after_ci_fix",
         "to": "ci_fix_pushed",
         "note": "Pushed commit 2a5f86b68861bc9727e67ab396798432ad3a1d3f to PR #1873 for GitHub checks rerun."
+      },
+      {
+        "at": "2026-06-03T14:24:00Z",
+        "from": "executing",
+        "to": "merged",
+        "note": "Ledger reconciliation only: PR #1873 is merged, origin/main contains merge commit 4fa540738eb90b9777cade2da6d3c9d43feb70a5, remote branch is absent, and local cleanup was executed. No runtime files changed."
       }
     ],
     "sidecars": [],
-    "next_task": "SEO-DASH-API-01 after separate authorization."
+    "next_task": "SEO-DASH-API-01 after separate authorization.",
+    "merge_commit": "4fa540738eb90b9777cade2da6d3c9d43feb70a5"
   }
 }
