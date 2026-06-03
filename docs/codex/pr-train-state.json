@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-03T13:54:55Z",
+  "updated_at": "2026-06-03T13:56:18Z",
   "items": {
     "SEO-CMS-CANARY-BE-01": {
       "repo": "fap-api",
@@ -40929,7 +40929,7 @@
       "SEO-CONTENT-CANARY-EN-METADATA-01"
     ],
     "commit_sha": "be48917d18c2fb2003c3b77e877e2b9bb89c373d",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1873",
     "checks": {
       "draft_execution": {
         "status": "passed",
@@ -42450,6 +42450,12 @@
         "from": "local_checks_passed",
         "to": "commit_created",
         "note": "Created local commit be48917d18c2fb2003c3b77e877e2b9bb89c373d for the docs/contract scope."
+      },
+      {
+        "at": "2026-06-03T13:56:18Z",
+        "from": "commit_created",
+        "to": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/1873 for GitHub checks and merge review."
       }
     ],
     "sidecars": [],
