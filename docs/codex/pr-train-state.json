@@ -41920,12 +41920,12 @@
   "SEO-SEARCH-SUBMISSION-BAIDU-MANUAL-ZH-CANARY-01": {
     "repo": "fap-api",
     "branch": "codex/seo-search-submission-baidu-manual-zh-canary-01",
-    "status": "local_checks_passed_baidu_security_verification_blocked",
+    "status": "pr_open_baidu_security_verification_blocked",
     "depends_on": [
       "SEO-SEARCH-SUBMISSION-GSC-SITEMAP-CANARY-01"
     ],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "22a4a04cfa8a657fa1cbbefbbffe90d9949d6732",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1870",
     "checks": {
       "dependency_reconciliation": {
         "status": "passed",
@@ -41965,6 +41965,13 @@
           "git diff --cached --check"
         ],
         "notes": "JSON parse, YAML parse, scoped diff whitespace check, and cached diff whitespace check passed. Staged files are limited to the Baidu manual zh result report and PR train metadata."
+      },
+      "pr": {
+        "status": "opened",
+        "commands": [
+          "gh pr create --repo fermatmind/fap-api --base main --head codex/seo-search-submission-baidu-manual-zh-canary-01 --title \"ops(seo): submit Chinese canary URL in Baidu\""
+        ],
+        "notes": "Opened https://github.com/fermatmind/fap-api/pull/1870 after local checks passed. No additional Baidu submission action was performed during PR creation."
       }
     },
     "failure_reason": "NO-GO for confirmed Baidu submission: Baidu displayed a security verification challenge after the zh-CN URL submit action, and no visible success state was observed.",
@@ -42007,6 +42014,12 @@
         "from": "baidu_security_verification_blocked_report_created_local_checks_pending",
         "to": "local_checks_passed_baidu_security_verification_blocked",
         "note": "JSON/YAML parse and scoped diff checks passed for the docs-only blocked result report and PR train metadata. Baidu submission remains unconfirmed because the security verification gate blocked completion."
+      },
+      {
+        "at": "2026-06-03T11:07:20Z",
+        "from": "local_checks_passed_baidu_security_verification_blocked",
+        "to": "pr_open_baidu_security_verification_blocked",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/1870. Baidu submission remains unconfirmed because security verification blocked completion. No English URL submission, Baidu API token usage, IndexNow, Search Channel write, CMS mutation, publish, runtime edit, or deploy was performed."
       }
     ],
     "sidecars": [
