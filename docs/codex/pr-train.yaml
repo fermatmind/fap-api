@@ -20193,7 +20193,7 @@ prs:
     branch: codex/seo-cms-canary-editorial-review-01
     title: "docs(cms): record bilingual SEO canary editorial review"
     train_scope: seo_cms_canary
-    status: editorial_review_passed_cms_only_accepted_publish_blocked
+    status: merged
     scope:
       - Record authorized editorial/operator review results for the bilingual SEO canary CMS drafts.
       - Record CMS-only inspection acceptance for this canary while keeping publish blocked until controlled publish preflight, any required claim-warning acknowledgement, and separate explicit publish approval pass.
@@ -20273,7 +20273,7 @@ prs:
     branch: codex/seo-content-p1-09
     title: "docs(cms): prepare SEO canary publish readiness"
     train_scope: seo_cms_canary
-    status: planned_publish_readiness_only_publish_blocked
+    status: blocked_revision_approval_required_publish_blocked
     scope:
       - Prepare publish-readiness evidence after editorial/operator review passed and CMS-only inspection was accepted for this canary.
       - Actual publish remains blocked until a separate exact approval and controlled publish preflight pass.
@@ -20301,12 +20301,53 @@ prs:
     fap_web_commit_allowed: false
     frontend_fallback_authority: false
     content_authority: CMS/backend
-    next_task: SEO-REVIEW-P1-10 only after controlled publish with separate exact approval
+    next_task: SEO-CONTENT-P1-09-PUBLISH-PREFLIGHT-01 documents current NO-GO; operator revision approval required before publish can be retried
+
+  - id: SEO-CONTENT-P1-09-PUBLISH-PREFLIGHT-01
+    repo: fap-api
+    depends_on:
+      - SEO-CMS-CANARY-EDITORIAL-REVIEW-01
+    branch: codex/seo-content-p1-09-publish-preflight-01
+    title: "docs(cms): run SEO canary publish preflight"
+    train_scope: seo_cms_canary
+    status: no_go_blocked_revision_approval_required
+    scope:
+      - Run controlled publish preflight only for the bilingual SEO canary drafts.
+      - Validate production draft state, controlled publish dry-run behavior, no-write guarantee, public absence, and publish blockers.
+      - Output GO/NO-GO and do not publish.
+    allowed_paths:
+      - backend/docs/seo/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Publish, submit sitemap, call Baidu push, call IndexNow, call production write APIs, create new drafts, run importer, modify GPT content assets, modify runtime code, modify tests, or modify frontend fap-web.
+    validation:
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- backend/docs/seo docs/codex
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: Authorized operator approval of working revisions 42 and 44 without publish, then rerun controlled publish preflight
 
   - id: SEO-REVIEW-P1-10
     repo: fap-api
     depends_on:
-      - SEO-CONTENT-P1-09
+      - SEO-CONTENT-P1-09-PUBLISH-PREFLIGHT-01
     branch: codex/seo-review-p1-10
     title: "docs(cms): review SEO canary post-publish signals"
     train_scope: seo_cms_canary
