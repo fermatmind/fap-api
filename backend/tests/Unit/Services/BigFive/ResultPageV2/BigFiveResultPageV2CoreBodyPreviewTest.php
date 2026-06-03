@@ -829,6 +829,48 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_seo_dash_api_read_only_contract_files(): void
+    {
+        $changed = [
+            'backend/app/Http/Controllers/API/V0_5/Ops/SeoIntel/SeoIntelDashboardController.php',
+            'backend/app/Http/Middleware/EnsureSeoIntelReadAuthorized.php',
+            'backend/app/Services/SeoIntel/OpsDashboard/SeoDashboardApiReadService.php',
+            'backend/app/Support/Rbac/PermissionNames.php',
+            'backend/routes/api.php',
+        ];
+
+        $routeChangedLines = [
+            '+use App\\Http\\Controllers\\API\\V0_5\\Ops\\SeoIntel\\SeoIntelDashboardController;',
+            '+use App\\Http\\Middleware\\EnsureSeoIntelReadAuthorized;',
+            '+',
+            "+    Route::prefix('ops/seo-intel')",
+            '+        ->middleware([',
+            '+            ...$cmsAdminMiddleware,',
+            '+            EnsureSeoIntelReadAuthorized::class,',
+            '+        ])',
+            '+        ->group(function () {',
+            "+            Route::get('/overview', [SeoIntelDashboardController::class, 'overview'])",
+            "+                ->name('api.v0_5.ops.seo_intel.overview');",
+            "+            Route::get('/url-truth', [SeoIntelDashboardController::class, 'urlTruth'])",
+            "+                ->name('api.v0_5.ops.seo_intel.url_truth');",
+            "+            Route::get('/issues', [SeoIntelDashboardController::class, 'issues'])",
+            "+                ->name('api.v0_5.ops.seo_intel.issues');",
+            "+            Route::get('/trends', [SeoIntelDashboardController::class, 'trends'])",
+            "+                ->name('api.v0_5.ops.seo_intel.trends');",
+            "+            Route::get('/page-performance', [SeoIntelDashboardController::class, 'pagePerformance'])",
+            "+                ->name('api.v0_5.ops.seo_intel.page_performance');",
+            '+        });',
+            '+',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            routeChangedLines: $routeChangedLines,
+        ));
+    }
+
     public function test_runtime_freeze_classifier_ignores_seo_intel_search_channel_queue_runtime_files(): void
     {
         $changed = [
@@ -2734,6 +2776,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSeoDashApiReadOnlyContractFile($file)) {
+                continue;
+            }
+
             if ($this->isSeoIntelSearchChannelQueueRuntimeFile($file)) {
                 continue;
             }
@@ -2981,6 +3027,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             if (
                 $file === 'backend/routes/api.php'
                 && $this->routeDiffIsDailyGivingLedgerOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
+            ) {
+                continue;
+            }
+
+            if (
+                $file === 'backend/routes/api.php'
+                && $this->routeDiffIsSeoDashApiReadOnlyContractOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
             ) {
                 continue;
             }
@@ -3632,6 +3685,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/SeoIntel/SeoIssueSanitizer.php',
             'backend/app/Services/SeoIntel/SeoIssueSummaryService.php',
             'backend/database/migrations/2026_05_17_001700_create_seo_issue_queue_table.php',
+        ], true);
+    }
+
+    private function isSeoDashApiReadOnlyContractFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Http/Controllers/API/V0_5/Ops/SeoIntel/SeoIntelDashboardController.php',
+            'backend/app/Http/Middleware/EnsureSeoIntelReadAuthorized.php',
+            'backend/app/Services/SeoIntel/OpsDashboard/SeoDashboardApiReadService.php',
+            'backend/app/Support/Rbac/PermissionNames.php',
         ], true);
     }
 
@@ -4759,7 +4822,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 return false;
             }
 
-            if (preg_match('/^\+\s*$/u', $line) === 1) {
+            if (preg_match('/^\+\s*[\[\]{}(),;>\-]*\s*$/u', $line) === 1) {
                 continue;
             }
 
@@ -5038,6 +5101,32 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
 
         foreach ($changedLines as $line) {
             if (! in_array($line, $allowedLines, true)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function routeDiffIsSeoDashApiReadOnlyContractOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            if (str_starts_with($line, '-')) {
+                return false;
+            }
+
+            if (preg_match('/^\+\s*[\[\]{}(),;>\-]*\s*$/u', $line) === 1) {
+                continue;
+            }
+
+            if (preg_match('/^\+.*(SeoIntelDashboardController|EnsureSeoIntelReadAuthorized|ops\\/seo-intel|api\\.v0_5\\.ops\\.seo_intel|overview|urlTruth|url-truth|issues|trends|pagePerformance|page-performance|cmsAdminMiddleware|Route::prefix|Route::get|middleware|group|name)/u', $line) !== 1) {
                 return false;
             }
         }

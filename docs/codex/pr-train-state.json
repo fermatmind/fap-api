@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-03T14:24:00Z",
+  "updated_at": "2026-06-03T15:33:00Z",
   "items": {
     "SEO-CMS-CANARY-BE-01": {
       "repo": "fap-api",
@@ -42514,7 +42514,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-dash-api-01-readonly-contract",
     "base": "main",
-    "status": "pr_open",
+    "status": "local_checks_passed_after_ci_fix",
     "train_scope": "seo_intel_read_only_dashboard_api",
     "title": "feat(seo): add seo_intel read-only dashboard API contract",
     "checks": {
@@ -42531,25 +42531,26 @@
         "evidence": "Changed files are confined to the SEO-DASH-API-01 route, permission middleware, sanitized read service, focused contract artifact/test, OpenAPI snapshot, and PR train metadata. No migration, collector, CMS mutation, fap-web edit, deploy, or search submission file was changed."
       },
       "local": {
-        "status": "passed",
+        "status": "passed_after_ci_fix",
         "commands": [
           "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoDashApi01ReadOnlyApiContractTest --no-ansi",
-          "cd backend && vendor/bin/pint --test app/Http/Middleware/EnsureSeoIntelReadAuthorized.php app/Http/Controllers/API/V0_5/Ops/SeoIntel/SeoIntelDashboardController.php app/Services/SeoIntel/OpsDashboard/SeoDashboardApiReadService.php app/Services/SeoIntel/OpsDashboard/AbstractSeoDashboardReadService.php app/Support/Rbac/PermissionNames.php tests/Feature/SeoIntel/SeoDashApi01ReadOnlyApiContractTest.php",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest --no-ansi",
+          "cd backend && vendor/bin/pint --test app/Http/Middleware/EnsureSeoIntelReadAuthorized.php app/Http/Controllers/API/V0_5/Ops/SeoIntel/SeoIntelDashboardController.php app/Services/SeoIntel/OpsDashboard/SeoDashboardApiReadService.php app/Services/SeoIntel/OpsDashboard/AbstractSeoDashboardReadService.php app/Support/Rbac/PermissionNames.php tests/Feature/SeoIntel/SeoDashApi01ReadOnlyApiContractTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
           "cd backend && php artisan route:list --path=api/v0.5/ops/seo-intel --no-ansi",
           "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi",
           "cd backend && bash scripts/export_openapi.sh --check",
           "python3 -m json.tool backend/docs/seo/generated/seo-dash-api-01-readonly-api-contract.v1.json >/dev/null",
           "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
           "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
-          "git diff --check -- backend/routes/api.php backend/app/Http/Middleware/EnsureSeoIntelReadAuthorized.php backend/app/Http/Controllers/API/V0_5/Ops/SeoIntel/SeoIntelDashboardController.php backend/app/Services/SeoIntel/OpsDashboard/AbstractSeoDashboardReadService.php backend/app/Services/SeoIntel/OpsDashboard/SeoDashboardApiReadService.php backend/app/Support/Rbac/PermissionNames.php backend/docs/contracts/openapi.snapshot.json backend/docs/seo/generated/seo-dash-api-01-readonly-api-contract.v1.json backend/tests/Feature/SeoIntel/SeoDashApi01ReadOnlyApiContractTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+          "git diff --check -- backend/routes/api.php backend/app/Http/Middleware/EnsureSeoIntelReadAuthorized.php backend/app/Http/Controllers/API/V0_5/Ops/SeoIntel/SeoIntelDashboardController.php backend/app/Services/SeoIntel/OpsDashboard/AbstractSeoDashboardReadService.php backend/app/Services/SeoIntel/OpsDashboard/SeoDashboardApiReadService.php backend/app/Support/Rbac/PermissionNames.php backend/docs/contracts/openapi.snapshot.json backend/docs/seo/generated/seo-dash-api-01-readonly-api-contract.v1.json backend/tests/Feature/SeoIntel/SeoDashApi01ReadOnlyApiContractTest.php backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
           "bash backend/scripts/ci_verify_mbti.sh",
           "git diff --cached --check"
         ],
-        "notes": "Focused SEO-DASH-API-01 contract test, scoped Pint, route list, migration pretend, OpenAPI snapshot check, JSON/YAML parse checks, scoped diff whitespace check, and bash backend/scripts/ci_verify_mbti.sh passed. The first full CI run found expected OpenAPI snapshot drift from the new routes; the snapshot was updated in scope and the second full CI run passed. ci_verify_mbti.sh regenerated BIG5_OCEAN compiled artifacts as local side effects; those files were restored because they are outside this PR scope."
+        "notes": "After GitHub verify-bigfive failure, added a focused SEO-DASH-API-01 runtime freeze classifier test and route diff predicate. BigFiveResultPageV2CoreBodyPreviewTest, SeoDashApi01ReadOnlyApiContractTest, scoped Pint, route list, migration pretend, OpenAPI snapshot check, JSON/YAML checks, scoped diff check, and bash backend/scripts/ci_verify_mbti.sh all passed. ci_verify_mbti.sh regenerated BIG5_OCEAN compiled artifacts as local side effects; those files were restored because they are outside this PR scope."
       },
       "github": {
-        "status": "pending",
-        "evidence": null
+        "status": "retry_pending",
+        "evidence": "Local scoped CI fix passed; waiting for GitHub checks after push."
       }
     },
     "failure_reason": null,
@@ -42573,7 +42574,8 @@
       "cms_mutation": false,
       "search_submission_performed": false,
       "fap_web_modified": false,
-      "deploy_performed": false
+      "deploy_performed": false,
+      "bigfive_runtime_freeze_guard_updated": true
     },
     "transitions": [
       {
@@ -42599,6 +42601,18 @@
         "from": "commit_created",
         "to": "pr_open",
         "note": "Opened https://github.com/fermatmind/fap-api/pull/1875 for GitHub checks and merge review."
+      },
+      {
+        "at": "2026-06-03T15:22:00Z",
+        "from": "pr_open",
+        "to": "ci_fix_in_progress",
+        "note": "GitHub verify-bigfive failed because the Big Five runtime freeze classifier had no SEO-DASH-API-01 allowlist. Added a focused guard test and manifest/state scope for that CI fix."
+      },
+      {
+        "at": "2026-06-03T15:33:00Z",
+        "from": "ci_fix_in_progress",
+        "to": "local_checks_passed_after_ci_fix",
+        "note": "Focused Big Five runtime freeze guard test, SEO-DASH-API-01 contract test, scoped Pint, route/migration/OpenAPI/JSON/YAML/diff checks, and full backend/scripts/ci_verify_mbti.sh passed after the CI fix."
       }
     ],
     "sidecars": [],
