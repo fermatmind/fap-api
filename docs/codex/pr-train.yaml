@@ -20097,3 +20097,241 @@ prs:
     frontend_fallback_authority: false
     content_authority: CMS/backend
     next_task: After merge and production deploy of this metadata artifact, rerun SEO-CONTENT-P1-08 preflight; if dry-run and absence gates pass, EN draft-only creation may be retried with separate explicit authorization.
+
+  - id: SEO-CONTENT-P1-08
+    repo: fap-api
+    depends_on:
+      - SEO-CONTENT-CANARY-EN-METADATA-01
+    branch: production-controlled-importer-execution
+    title: "ops(cms): execute bilingual SEO canary draft-only import"
+    train_scope: seo_cms_canary
+    status: draft_created_postcheck_passed_publish_blocked
+    scope:
+      - Record the controlled production importer draft-only execution for the first bilingual SEO canary.
+      - Record that zh-CN article 37 and en article 39 were created as non-public, non-indexable CMS drafts.
+      - Record that SEO-CONTENT-P1-08-POSTCHECK-01 passed and the next step is editorial/operator review.
+      - Keep publish, search submission, sitemap submission, Baidu push, and IndexNow blocked.
+    allowed_paths:
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - backend/docs/seo/**
+    do_not:
+      - Create additional CMS drafts, save CMS forms, publish, or call production write APIs.
+      - Modify GPT-5.5 Pro content packages, canary source artifacts, importer adapter artifacts, runtime code, routes, migrations, tests, or frontend fap-web.
+      - Submit sitemap, Baidu push, IndexNow, or any search-channel live action.
+      - Read or expose env, cookies, tokens, or real result/order/share/payment IDs.
+    validation:
+      - Archived by SEO-CONTENT-P1-08-POSTCHECK-ARCHIVE-01.
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_write_execution: true
+    database_mutation: true
+    payment_provider_call: false
+    cms_mutation: true
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: SEO-CMS-CANARY-EDITORIAL-REVIEW-01
+
+  - id: SEO-CONTENT-P1-08-POSTCHECK-ARCHIVE-01
+    repo: fap-api
+    depends_on:
+      - SEO-CONTENT-P1-08
+    branch: codex/seo-content-p1-08-postcheck-archive-01
+    title: "docs(cms): archive bilingual SEO canary draft postcheck"
+    train_scope: seo_cms_canary
+    scope:
+      - Archive the existing SEO-CONTENT-P1-08 draft-only post-create validation report.
+      - Reconcile PR train manifest/state to record that both canary CMS drafts exist and postcheck passed.
+      - Record that editorial/operator review is next while publish remains blocked.
+      - Record that the preview gap remains and must be resolved or explicitly accepted as CMS-only inspection before publish.
+    allowed_paths:
+      - backend/docs/seo/seo-content-p1-08-postcheck-2026-06-03.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Create CMS drafts, save CMS forms, publish, run importer, or call production write APIs.
+      - Modify GPT-5.5 Pro content packages, canary source artifacts, importer adapter artifacts, runtime code, routes, migrations, tests, package files, production config, or frontend fap-web.
+      - Submit sitemap, Baidu push, IndexNow, or any search-channel live action.
+      - Read or expose env, cookies, tokens, or real result/order/share/payment IDs.
+      - Modify title, H1, meta, body, FAQ, CTA labels, CTA hrefs, or any content prose.
+    validation:
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- backend/docs/seo docs/codex
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: SEO-CMS-CANARY-EDITORIAL-REVIEW-01
+
+  - id: SEO-CMS-CANARY-EDITORIAL-REVIEW-01
+    repo: fap-api
+    depends_on:
+      - SEO-CONTENT-P1-08-POSTCHECK-ARCHIVE-01
+    branch: codex/seo-cms-canary-editorial-review-01
+    title: "docs(cms): record bilingual SEO canary editorial review"
+    train_scope: seo_cms_canary
+    status: planned
+    scope:
+      - Record authorized editorial/operator review results for the bilingual SEO canary CMS drafts.
+      - Keep publish blocked until review, preview/noindex or accepted CMS-only substitute, claim review, and explicit publish approval pass.
+    allowed_paths:
+      - backend/docs/seo/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Publish, submit sitemap, call Baidu push, call IndexNow, create new drafts, run importer, or modify GPT content assets.
+    validation:
+      - git diff --check -- backend/docs/seo docs/codex
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: SEO-CMS-CANARY-PREVIEW-01 or SEO-CONTENT-P1-09 only after review gates pass
+
+  - id: SEO-CMS-CANARY-PREVIEW-01
+    repo: fap-api
+    depends_on:
+      - SEO-CMS-CANARY-EDITORIAL-REVIEW-01
+    branch: codex/seo-cms-canary-preview-01
+    title: "fix(cms): add safe article draft preview gate"
+    train_scope: seo_cms_canary
+    status: conditional_blocked_until_preview_required
+    scope:
+      - Add or document a safe auth/token-gated article draft preview only if rendered preview is required before publish and CMS-only inspection is not accepted.
+      - Ensure preview is noindex, excluded from sitemap and llms, excluded from public article APIs, and safe for pre-publish rendering validation.
+    allowed_paths:
+      - backend/app/Http/Controllers/**
+      - backend/app/Services/Cms/**
+      - backend/app/Policies/**
+      - backend/tests/Feature/**
+      - backend/docs/seo/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Publish, submit sitemap, call Baidu push, call IndexNow, modify GPT content assets, or create new CMS drafts.
+      - Execute this task unless preview is explicitly required before publish and separately authorized.
+    validation:
+      - To be defined when preview implementation is explicitly authorized.
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: SEO-CONTENT-P1-09 only after preview/CMS-only substitute and publish approval gates pass
+
+  - id: SEO-CONTENT-P1-09
+    repo: fap-api
+    depends_on:
+      - SEO-CMS-CANARY-EDITORIAL-REVIEW-01
+    branch: codex/seo-content-p1-09
+    title: "docs(cms): prepare SEO canary publish readiness"
+    train_scope: seo_cms_canary
+    status: blocked_until_editorial_review_and_publish_approval
+    scope:
+      - Prepare publish-readiness evidence only after editorial/operator review and explicit publish approval.
+    allowed_paths:
+      - backend/docs/seo/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Publish or submit search surfaces without separate exact approval.
+    validation:
+      - git diff --check -- backend/docs/seo docs/codex
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: SEO-REVIEW-P1-10 after publish
+
+  - id: SEO-REVIEW-P1-10
+    repo: fap-api
+    depends_on:
+      - SEO-CONTENT-P1-09
+    branch: codex/seo-review-p1-10
+    title: "docs(cms): review SEO canary post-publish signals"
+    train_scope: seo_cms_canary
+    status: blocked_until_publish
+    scope:
+      - Review post-publish public/search signals only after controlled publish occurs.
+    allowed_paths:
+      - backend/docs/seo/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Publish, submit search surfaces, or mutate CMS state unless a separate exact authorization allows that specific action.
+    validation:
+      - git diff --check -- backend/docs/seo docs/codex
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: none
