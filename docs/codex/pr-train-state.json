@@ -41112,11 +41112,11 @@
   "SEO-CMS-CANARY-EDITORIAL-REVIEW-01": {
     "repo": "fap-api",
     "branch": "codex/seo-cms-canary-editorial-review-01",
-    "status": "pr_open",
+    "status": "merged",
     "depends_on": [
       "SEO-CONTENT-P1-08-POSTCHECK-ARCHIVE-01"
     ],
-    "commit_sha": "11d13f6f65f05d5bb8493feb82385a0e7a40ee38",
+    "commit_sha": "765baf1fb9a8861efc37b525d35bc5c0cc8a1528",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1865",
     "checks": {
       "dependency_reconciliation": {
@@ -41181,22 +41181,30 @@
         "notes": "JSON parse, YAML parse, scoped whitespace diff check, and cached diff check passed after path-limited staging. No publish, search submission, importer execution, new draft creation, CMS mutation, runtime code edit, test edit, frontend edit, or GPT content asset edit was performed."
       },
       "pr": {
-        "status": "opened",
+        "status": "merged",
         "commands": [
           "gh pr create --repo fermatmind/fap-api --base main --head codex/seo-cms-canary-editorial-review-01 --title \"docs(cms): record bilingual SEO canary editorial review\""
         ],
-        "notes": "Opened PR #1865 after local docs/codex validation passed. GitHub checks are pending; merge remains blocked until required checks pass. Publish remains forbidden."
+        "notes": "PR #1865 merged as 765baf1fb9a8861efc37b525d35bc5c0cc8a1528 on 2026-06-03T04:15:49Z. Publish remains forbidden."
+      },
+      "post_merge_reconciliation": {
+        "status": "passed",
+        "commands": [
+          "gh pr view 1865 --repo fermatmind/fap-api --json state,mergeCommit,mergedAt,headRefName,url,title",
+          "git merge-base --is-ancestor 765baf1fb9a8861efc37b525d35bc5c0cc8a1528 origin/main"
+        ],
+        "notes": "GitHub shows PR #1865 merged and origin/main contains merge commit 765baf1fb9a8861efc37b525d35bc5c0cc8a1528. This reconciliation is bookkeeping only to unblock SEO-CONTENT-P1-09-PUBLISH-PREFLIGHT-01."
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-03T04:15:49Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null,
+      "github_checks_green": true,
+      "post_merge_revalidated": true,
       "publish_blocked": true,
       "search_submission_forbidden": true,
       "cms_only_inspection_accepted_for_current_canary": true,
@@ -41229,6 +41237,12 @@
         "from": "local_checks_passed",
         "to": "pr_open",
         "note": "Opened https://github.com/fermatmind/fap-api/pull/1865. GitHub checks are pending. No publish, search submission, importer execution, new draft creation, CMS mutation, runtime code change, test change, frontend change, or GPT content asset edit was performed."
+      },
+      {
+        "at": "2026-06-03T12:24:51+08:00",
+        "from": "pr_open",
+        "to": "merged",
+        "note": "Reconciled before SEO-CONTENT-P1-09-PUBLISH-PREFLIGHT-01: GitHub PR #1865 is merged, origin/main contains merge commit 765baf1fb9a8861efc37b525d35bc5c0cc8a1528, and publish remains forbidden."
       }
     ],
     "sidecars": [
@@ -41253,7 +41267,7 @@
         "note": "Sitemap submission, Baidu push, IndexNow, and search submission remain forbidden."
       }
     ],
-    "next_task": "SEO-CONTENT-P1-09 publish-readiness planning only after separate authorization; publish remains forbidden."
+    "next_task": "SEO-CONTENT-P1-09-PUBLISH-PREFLIGHT-01"
   },
   "SEO-CMS-CANARY-PREVIEW-01": {
     "repo": "fap-api",
@@ -41300,7 +41314,7 @@
   "SEO-CONTENT-P1-09": {
     "repo": "fap-api",
     "branch": "codex/seo-content-p1-09",
-    "status": "planned_publish_readiness_only_publish_blocked",
+    "status": "blocked_revision_approval_required_publish_blocked",
     "depends_on": [
       "SEO-CMS-CANARY-EDITORIAL-REVIEW-01"
     ],
@@ -41315,7 +41329,9 @@
       "publish_blocked": true,
       "search_submission_forbidden": true,
       "editorial_review_passed": true,
-      "cms_only_inspection_accepted_for_current_canary": true
+      "cms_only_inspection_accepted_for_current_canary": true,
+      "publish_preflight_ran": true,
+      "publish_preflight_passed": false
     },
     "transitions": [
       {
@@ -41329,6 +41345,12 @@
         "from": "blocked_until_editorial_review_and_publish_approval",
         "to": "planned_publish_readiness_only_publish_blocked",
         "note": "Editorial/operator review passed and CMS-only inspection was accepted for the current bilingual canary. SEO-CONTENT-P1-09 may be separately authorized for publish-readiness planning only. Actual publish remains blocked until separate exact approval and controlled publish preflight pass."
+      },
+      {
+        "at": "2026-06-03T12:24:51+08:00",
+        "from": "planned_publish_readiness_only_publish_blocked",
+        "to": "blocked_revision_approval_required_publish_blocked",
+        "note": "Controlled publish dry-run preflight was NO-GO because working revisions 42 and 44 remain machine_draft rather than approved. zh-CN article 37 also requires explicit boundary-context claim-warning acknowledgement during a later publish attempt. Publish remains forbidden."
       }
     ],
     "sidecars": [
@@ -41336,16 +41358,142 @@
         "id": "publish_still_requires_exact_approval",
         "status": "active",
         "note": "This readiness task must not publish by implication. Controlled publish requires a later exact approval and preflight."
+      },
+      {
+        "id": "revision_approval_required_before_publish",
+        "status": "active_blocker",
+        "note": "Working revisions 42 and 44 must be approved through an authorized operator workflow before controlled publish can pass."
       }
     ],
-    "next_task": "SEO-REVIEW-P1-10 only after controlled publish with separate exact approval"
+    "next_task": "Authorized operator approval of working revisions 42 and 44 without publish, then rerun controlled publish preflight"
+  },
+  "SEO-CONTENT-P1-09-PUBLISH-PREFLIGHT-01": {
+    "repo": "fap-api",
+    "branch": "codex/seo-content-p1-09-publish-preflight-01",
+    "status": "local_checks_passed_no_go",
+    "depends_on": [
+      "SEO-CMS-CANARY-EDITORIAL-REVIEW-01"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "dependency_reconciliation": {
+        "status": "passed",
+        "commands": [
+          "gh pr view 1865 --repo fermatmind/fap-api --json state,mergeCommit,mergedAt,headRefName,url,title",
+          "git merge-base --is-ancestor 765baf1fb9a8861efc37b525d35bc5c0cc8a1528 origin/main"
+        ],
+        "notes": "Dependency SEO-CMS-CANARY-EDITORIAL-REVIEW-01 is merged and origin/main contains merge commit 765baf1fb9a8861efc37b525d35bc5c0cc8a1528."
+      },
+      "command_discovery": {
+        "status": "passed",
+        "commands": [
+          "php backend/artisan articles:publish-controlled --help",
+          "sed -n '1,620p' backend/app/Console/Commands/ArticlePublishControlled.php"
+        ],
+        "notes": "Controlled article publish command supports --dry-run, --json, --make-indexable, and --ack-claim-warning. The publish branch is skipped when dry_run=true."
+      },
+      "production_no_write": {
+        "status": "passed",
+        "commands": [
+          "ssh \"$API_SSH_ALIAS\" 'cd /var/www/fap-api/current/backend && php artisan tinker --execute=\"... before counts ...\"'",
+          "ssh \"$API_SSH_ALIAS\" 'cd /var/www/fap-api/current/backend && php artisan tinker --execute=\"... after counts ...\"'"
+        ],
+        "notes": "Before and after counts matched: articles=36, article_translation_revisions=43, article_seo_meta=32, article_editorial_package_imports=10, publish audit events for target articles=0. Both target articles remained draft, not public, not indexable, and unpublished."
+      },
+      "controlled_publish_dry_run_without_ack": {
+        "status": "failed_expected_gate",
+        "commands": [
+          "ssh \"$API_SSH_ALIAS\" 'cd /var/www/fap-api/current/backend && php artisan articles:publish-controlled --article=37 --article=39 --dry-run --make-indexable --json'"
+        ],
+        "notes": "Dry-run returned ok=false. Article 37 failed revision_not_editorially_approved and claim_warning_ack_required. Article 39 failed revision_not_editorially_approved. published_article_ids was empty."
+      },
+      "controlled_publish_dry_run_with_ack": {
+        "status": "failed_revision_approval_gate",
+        "commands": [
+          "ssh \"$API_SSH_ALIAS\" 'cd /var/www/fap-api/current/backend && php artisan articles:publish-controlled --article=37 --article=39 --dry-run --make-indexable --ack-claim-warning=37 --json'"
+        ],
+        "notes": "Dry-run returned ok=false. The zh-CN claim warning acknowledgement blocker was cleared, but both articles still failed revision_not_editorially_approved because working revisions 42 and 44 are machine_draft."
+      },
+      "public_absence": {
+        "status": "passed",
+        "commands": [
+          "python3 inline public page/API/sitemap/llms absence checks"
+        ],
+        "notes": "Public pages still return 404, public article and SEO APIs still return 404, and sitemap.xml, llms.txt, and llms-full.txt do not contain target slugs. Generic 404 pages may echo the requested path only."
+      },
+      "local": {
+        "status": "passed",
+        "commands": [
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "git diff --check -- backend/docs/seo docs/codex",
+          "git diff --cached --check"
+        ],
+        "notes": "JSON parse, YAML parse, scoped whitespace diff check, and cached diff check passed after path-limited staging. Preflight remains NO-GO; publish remains forbidden."
+      }
+    },
+    "failure_reason": "NO-GO: working revisions 42 and 44 are machine_draft, not approved. zh-CN article 37 also requires explicit boundary-context claim-warning acknowledgement for any later publish attempt.",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": null,
+      "publish_blocked": true,
+      "search_submission_forbidden": true,
+      "cms_mutation_performed": false,
+      "new_draft_created": false,
+      "importer_run_performed": false,
+      "content_asset_edit_performed": false,
+      "runtime_code_edit_performed": false,
+      "controlled_publish_dry_run_ok": false,
+      "dry_run_no_db_write": true,
+      "public_absence_passed": true,
+      "zh_claim_warning_ack_required": true,
+      "revision_approval_required": true
+    },
+    "transitions": [
+      {
+        "at": "2026-06-03T12:24:51+08:00",
+        "from": "missing",
+        "to": "local_checks_pending",
+        "note": "User explicitly authorized adding and executing SEO-CONTENT-P1-09-PUBLISH-PREFLIGHT-01. Controlled publish preflight ran in dry-run only and returned NO-GO because working revisions 42 and 44 are machine_draft. No publish, CMS mutation, new draft creation, importer run, search submission, runtime code edit, test edit, frontend edit, or GPT content asset edit was performed."
+      },
+      {
+        "at": "2026-06-03T12:29:00+08:00",
+        "from": "local_checks_pending",
+        "to": "local_checks_passed_no_go",
+        "note": "Created the docs-only publish preflight report, added manifest/state entries, reconciled #1865 as merged, and passed local JSON/YAML/diff validation. Result remains NO-GO because working revisions 42 and 44 require authorized approval before publish preflight can pass."
+      }
+    ],
+    "sidecars": [
+      {
+        "id": "publish_no_go_revision_approval_required",
+        "status": "active_blocker",
+        "note": "Working revisions 42 and 44 must be approved through an authorized operator workflow before controlled publish preflight can pass."
+      },
+      {
+        "id": "zh_claim_warning_ack_required",
+        "status": "active_publish_gate",
+        "note": "Article 37 has boundary-context claim warnings. A later publish attempt must explicitly acknowledge them with --ack-claim-warning=37 or an equivalent controlled publish acknowledgement."
+      },
+      {
+        "id": "publish_confirmation_not_actionable",
+        "status": "active",
+        "note": "The dry-run emitted expected confirmation phrase 'I explicitly approve Codex to publish article ids 37,39 after preflight passes.', but it must not be used until preflight returns ok=true after revision approval."
+      }
+    ],
+    "next_task": "Authorized operator approval of working revisions 42 and 44 without publish, then rerun controlled publish preflight."
   },
   "SEO-REVIEW-P1-10": {
     "repo": "fap-api",
     "branch": "codex/seo-review-p1-10",
     "status": "blocked_until_publish",
     "depends_on": [
-      "SEO-CONTENT-P1-09"
+      "SEO-CONTENT-P1-09-PUBLISH-PREFLIGHT-01"
     ],
     "commit_sha": null,
     "pr_url": null,
