@@ -40674,11 +40674,11 @@
   "SEO-CMS-CANARY-OPERATOR-COLLISION-01": {
     "repo": "fap-api",
     "branch": "codex/seo-cms-canary-operator-collision-01",
-    "status": "local_checks_passed",
+    "status": "merged",
     "depends_on": [
       "SEO-CMS-CANARY-IMPORTER-GATE-01"
     ],
-    "commit_sha": "pending_remote_pr_head",
+    "commit_sha": "d919e9009c270ed344301f2f8b3fd1c6487e093f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1861",
     "checks": {
       "dependency_verification": {
@@ -40719,14 +40719,14 @@
       }
     },
     "failure_reason": "NO-GO for SEO-CONTENT-P1-08: public absence checks pass, but hidden production CMS/DB slug and translation_group_id collision remains Unknown because no authorized readonly private-record check was executed.",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-02T17:05:22Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null
+      "github_checks_green": true,
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -40740,6 +40740,12 @@
         "from": "local_checks_passed",
         "to": "pr_open",
         "note": "Opened https://github.com/fermatmind/fap-api/pull/1861 for docs-only operator collision path review. SEO-CONTENT-P1-08 remains blocked because hidden CMS/DB collision remains Unknown."
+      },
+      {
+        "at": "2026-06-03T09:45:00+08:00",
+        "from": "pr_open",
+        "to": "merged",
+        "note": "Reconciled before SEO-CMS-CANARY-IMPORTER-SCHEMA-GATE-01: GitHub PR #1861 is merged with merge commit d919e9009c270ed344301f2f8b3fd1c6487e093f, origin/main/local main are at that SHA, and the prior operator collision path is available on main."
       }
     ],
     "sidecars": [
@@ -40753,6 +40759,73 @@
         "required_resolution": "Authorized operator must report PASS for the documented readonly production CMS/DB Article collision query before any CMS draft creation."
       }
     ],
-    "next_task": "SEO-CONTENT-P1-08 remains blocked. Next action is authorized operator readonly hidden collision verification; publish remains forbidden."
+    "next_task": "SEO-CMS-CANARY-IMPORTER-SCHEMA-GATE-01 adds importer schema-length preflight after partial SEO-CONTENT-P1-08 EN draft failure; publish remains forbidden."
+  },
+  "SEO-CMS-CANARY-IMPORTER-SCHEMA-GATE-01": {
+    "repo": "fap-api",
+    "branch": "codex/seo-cms-canary-importer-schema-gate-01",
+    "status": "pr_open",
+    "depends_on": [
+      "SEO-CMS-CANARY-OPERATOR-COLLISION-01"
+    ],
+    "commit_sha": "710b1b362e10424a7958a6c86f1c1cd40e69340c",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1862",
+    "checks": {
+      "dependency_verification": {
+        "status": "passed",
+        "commands": [
+          "git fetch origin main --prune",
+          "git pull --ff-only origin main",
+          "gh pr view 1861 --repo fermatmind/fap-api --json state,mergedAt,mergeCommit,url",
+          "git rev-parse HEAD origin/main main"
+        ],
+        "notes": "User explicitly authorized adding SEO-CMS-CANARY-IMPORTER-SCHEMA-GATE-01. SEO-CMS-CANARY-OPERATOR-COLLISION-01 is reconciled as merged at d919e9009c270ed344301f2f8b3fd1c6487e093f before this scoped fix."
+      },
+      "local": {
+        "status": "passed",
+        "commands": [
+          "cd backend && php artisan test tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php",
+          "rm -f /tmp/seo-cms-canary-schema-gate.sqlite && touch /tmp/seo-cms-canary-schema-gate.sqlite && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/seo-cms-canary-schema-gate.sqlite php backend/artisan migrate --force --no-interaction >/dev/null && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/seo-cms-canary-schema-gate.sqlite php backend/artisan articles:import-editorial-package --file=docs/seo/canary-packages/mbti-vs-holland-code-career-choice.en.importer-adapter.json --locale=en --dry-run --json >/tmp/seo-cms-canary-en-schema-gate.json; test $? -eq 1; python3 -c \"import json; d=json.load(open('/tmp/seo-cms-canary-en-schema-gate.json')); codes=[e.get('code') for e in d.get('errors', [])]; fields=[e.get('field') for e in d.get('errors', [])]; assert d.get('ok') is False and d.get('action') == 'will_skip' and d.get('would_write') is False and 'schema_length_exceeded' in codes and 'seo_title' in fields and 'meta_description' in fields; print('en schema gate ok')\"",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "git diff --check -- backend/app/Services/Cms/EditorialPackage backend/tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php backend/docs/seo docs/codex",
+          "git diff --cached --check"
+        ],
+        "notes": "Focused importer console test passed. EN canary adapter dry-run against an isolated testing SQLite database now fails before writes with schema_length_exceeded for seo_title and meta_description, action=will_skip, would_write=false. JSON/YAML parse and scoped diff whitespace checks passed.",
+        "commit_sha": "710b1b362e10424a7958a6c86f1c1cd40e69340c"
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": "pending",
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-06-03T09:45:00+08:00",
+        "from": "missing",
+        "to": "local_checks_pending",
+        "note": "User authorized a scoped importer schema-length preflight gate after SEO-CONTENT-P1-08 partially created the zh-CN draft and EN draft creation failed on article_seo_meta.seo_title length. Scope excludes CMS draft creation, publish, production writes, GPT content edits, frontend, sitemap, Baidu, and IndexNow."
+      },
+      {
+        "at": "2026-06-03T09:58:00+08:00",
+        "from": "local_checks_pending",
+        "to": "local_checks_passed",
+        "note": "Added importer schema-length preflight validation for fixed DB-backed Article/SEO fields and updated canary adapter test expectations. No CMS draft, publish, production write action, GPT content edit, frontend change, sitemap submission, Baidu, or IndexNow action was performed."
+      },
+      {
+        "at": "2026-06-03T10:08:00+08:00",
+        "from": "local_checks_passed",
+        "to": "pr_open",
+        "note": "Opened GitHub PR #1862 after local validation passed. GitHub checks are pending; merge remains blocked until required checks pass. No CMS draft, publish, production write action, GPT content edit, frontend change, sitemap submission, Baidu, or IndexNow action was performed."
+      }
+    ],
+    "sidecars": [],
+    "next_task": "After this PR is merged and deployed, rerun SEO-CONTENT-P1-08 preflight. EN draft remains blocked until approved adapter/schema handling satisfies schema-length gates."
   }
 }

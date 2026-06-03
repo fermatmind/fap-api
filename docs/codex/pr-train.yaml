@@ -19963,3 +19963,52 @@ prs:
     frontend_fallback_authority: false
     content_authority: CMS/backend
     next_task: SEO-CONTENT-P1-08 remains blocked unless hidden CMS/DB collision is operator-verified as PASS or the user explicitly authorizes operator verification before P1-08
+
+  - id: SEO-CMS-CANARY-IMPORTER-SCHEMA-GATE-01
+    repo: fap-api
+    depends_on:
+      - SEO-CMS-CANARY-OPERATOR-COLLISION-01
+    branch: codex/seo-cms-canary-importer-schema-gate-01
+    title: "fix(cms): validate article SEO field lengths before draft import"
+    train_scope: seo_cms_canary
+    scope:
+      - Add a controlled editorial package importer schema-length preflight gate for DB-backed Article SEO fields.
+      - Ensure overlong seo_title and meta_description values fail during dry-run before any draft Article write is attempted.
+      - Keep the approved GPT-5.5 Pro content package and mechanical adapter content unchanged.
+      - Record the production EN draft blocker and retry requirements without creating CMS drafts or publishing.
+    allowed_paths:
+      - backend/app/Services/Cms/EditorialPackage/**
+      - backend/tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php
+      - backend/docs/seo/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Create CMS drafts, save CMS forms, create Articles, publish, or call production write APIs.
+      - Modify original GPT-5.5 Pro title, H1, meta, body, FAQ, CTA labels, CTA hrefs, or prose.
+      - Modify routes, migrations, package files, sitemap runtime, analytics runtime, frontend files, or production configuration.
+      - Submit sitemap, Baidu push, IndexNow, or any search-channel live action.
+      - Read or expose env, cookies, tokens, or real result/order/share/payment IDs.
+    validation:
+      - cd backend && php artisan test tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php
+      - rm -f /tmp/seo-cms-canary-schema-gate.sqlite && touch /tmp/seo-cms-canary-schema-gate.sqlite && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/seo-cms-canary-schema-gate.sqlite php backend/artisan migrate --force --no-interaction >/dev/null && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/seo-cms-canary-schema-gate.sqlite php backend/artisan articles:import-editorial-package --file=docs/seo/canary-packages/mbti-vs-holland-code-career-choice.en.importer-adapter.json --locale=en --dry-run --json >/tmp/seo-cms-canary-en-schema-gate.json; test $? -eq 1; python3 -c "import json; d=json.load(open('/tmp/seo-cms-canary-en-schema-gate.json')); codes=[e.get('code') for e in d.get('errors', [])]; fields=[e.get('field') for e in d.get('errors', [])]; assert d.get('ok') is False and d.get('action') == 'will_skip' and d.get('would_write') is False and 'schema_length_exceeded' in codes and 'seo_title' in fields and 'meta_description' in fields; print('en schema gate ok')"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- backend/app/Services/Cms/EditorialPackage backend/tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php backend/docs/seo docs/codex
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: After merge and deploy, rerun SEO-CONTENT-P1-08 preflight; EN draft creation remains blocked until the approved adapter content satisfies schema-length gates.

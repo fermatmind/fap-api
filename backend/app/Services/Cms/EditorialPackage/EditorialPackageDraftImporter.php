@@ -81,6 +81,25 @@ final class EditorialPackageDraftImporter
 
     private const REVIEWERS = ['editor', 'psychometrics', 'legal', 'founder'];
 
+    /**
+     * Fixed DB column limits that the draft importer writes directly. Keep this
+     * guard ahead of writes so dry-run sees the same schema blockers as import.
+     *
+     * @var array<string, int>
+     */
+    private const FIELD_LENGTH_LIMITS = [
+        'author' => 128,
+        'title' => 255,
+        'slug' => 127,
+        'locale' => 16,
+        'translation_group_id' => 64,
+        'cover_image' => 255,
+        'cover_image_alt' => 255,
+        'seo_title' => 60,
+        'meta_description' => 160,
+        'canonical' => 255,
+    ];
+
     private const FORBIDDEN_CLAIMS = [
         '最准' => '可作为参考',
         '官方 MBTI' => 'MBTI 相关',
@@ -485,12 +504,9 @@ final class EditorialPackageDraftImporter
             $errors[] = $this->issue('ability_disclaimer_required', 'ability_disclaimer_required', 'ability_sensitive content requires an ability disclaimer.');
         }
 
+        $this->schemaLengthValidation($package, $errors);
         $this->trackSpecificValidation($package, $errors);
         $this->answerSurfaceBoundaryValidation($package, $errors);
-
-        if (mb_strlen((string) $package['translation_group_id']) > 64) {
-            $errors[] = $this->issue('translation_group_id', 'translation_group_id_too_long', 'translation_group_id must be 64 characters or fewer.');
-        }
 
         $claimMatches = $this->claimMatches($package);
         foreach ($claimMatches as $match) {
@@ -506,6 +522,39 @@ final class EditorialPackageDraftImporter
             'warnings' => $warnings,
             'claim_matches' => $claimMatches,
         ];
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $errors
+     */
+    private function schemaLengthValidation(array $package, array &$errors): void
+    {
+        foreach (self::FIELD_LENGTH_LIMITS as $field => $limit) {
+            $value = (string) ($package[$field] ?? '');
+            if ($value !== '' && mb_strlen($value) > $limit) {
+                $errors[] = $this->issue(
+                    $field,
+                    'schema_length_exceeded',
+                    "{$field} exceeds database column limit of {$limit} characters."
+                ) + [
+                    'max_length' => $limit,
+                    'actual_length' => mb_strlen($value),
+                ];
+            }
+        }
+
+        foreach ($this->stringList($package['target_tests'] ?? []) as $testSlug) {
+            if (mb_strlen($testSlug) > 127) {
+                $errors[] = $this->issue(
+                    'target_tests',
+                    'schema_length_exceeded',
+                    'target_tests contains a test slug longer than related_test_slug column limit of 127 characters.'
+                ) + [
+                    'max_length' => 127,
+                    'actual_length' => mb_strlen($testSlug),
+                ];
+            }
+        }
     }
 
     /**
