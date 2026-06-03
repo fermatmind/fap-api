@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-03T13:58:44Z",
+  "updated_at": "2026-06-03T14:11:09Z",
   "items": {
     "SEO-CMS-CANARY-BE-01": {
       "repo": "fap-api",
@@ -42386,26 +42386,30 @@
       },
       "scope_validation": {
         "status": "pass",
-        "evidence": "Changed files are confined to the SEO-DASH-00-RECONCILE docs, generated artifact, focused contract test, and PR train metadata. No runtime route, controller, service, migration, collector, CMS mutation, fap-web edit, deploy, or search submission file was changed."
+        "evidence": "Changed files are confined to the SEO-DASH-00-RECONCILE docs, generated artifact, focused contract test, PR train metadata, and backend/composer.lock supply-chain unblocker. No runtime route, controller, service, migration, collector, CMS mutation, fap-web edit, deploy, or search submission file was changed."
       },
       "local": {
-        "status": "passed",
+        "status": "passed_after_ci_fix",
         "commands": [
+          "cd backend && composer validate --strict",
+          "cd backend && composer audit --locked --no-interaction --ignore-unreachable",
           "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoDash00ReconcileSchemaApiContractTest --no-ansi",
           "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoIntelLogicalDbFoundationTest --no-ansi",
           "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoIntelCmsIssueQueueSummaryTest --no-ansi",
           "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoIntelIssueSeverityGovernanceContractTest --no-ansi",
           "cd backend && vendor/bin/pint --test tests/Feature/SeoIntel/SeoDash00ReconcileSchemaApiContractTest.php",
+          "cd backend && php artisan route:list --no-ansi",
+          "bash backend/scripts/ci_verify_mbti.sh",
           "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
           "python3 -m json.tool backend/docs/seo/generated/seo-dash-00-reconcile-schema-api-contract.v1.json >/dev/null",
           "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
-          "git diff --check -- backend/docs/seo/seo-dash-00-reconcile-schema-api-contract.md backend/docs/seo/generated/seo-dash-00-reconcile-schema-api-contract.v1.json backend/tests/Feature/SeoIntel/SeoDash00ReconcileSchemaApiContractTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+          "git diff --check -- backend/composer.lock backend/docs/seo/seo-dash-00-reconcile-schema-api-contract.md backend/docs/seo/generated/seo-dash-00-reconcile-schema-api-contract.v1.json backend/tests/Feature/SeoIntel/SeoDash00ReconcileSchemaApiContractTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
           "git diff --cached --check"
         ],
-        "notes": "Focused contract test passed: 6 tests, 113 assertions. Existing SeoIntelLogicalDbFoundationTest, SeoIntelCmsIssueQueueSummaryTest, and SeoIntelIssueSeverityGovernanceContractTest passed. Scoped Pint check passed for the new PHP test. JSON/YAML parse checks, scoped git diff whitespace check, and cached diff whitespace check passed."
+        "notes": "Composer validate passed. Composer audit now reports no advisories after updating laravel/framework from v12.48.1 to v12.61.0 in backend/composer.lock. Focused SEO-DASH-00-RECONCILE contract test, existing SeoIntelLogicalDbFoundationTest, SeoIntelCmsIssueQueueSummaryTest, SeoIntelIssueSeverityGovernanceContractTest, scoped Pint, route:list, JSON/YAML parse checks, scoped diff whitespace check, and bash backend/scripts/ci_verify_mbti.sh passed after the lockfile fix. ci_verify_mbti.sh regenerated BIG5_OCEAN compiled artifacts as local side effects; those files were restored because they are outside this PR scope."
       },
       "github": {
-        "status": "failed_external_supply_chain",
+        "status": "rerun_pending_after_supply_chain_fix",
         "required_checks": [
           "hygiene",
           "supply-chain",
@@ -42434,9 +42438,9 @@
         ]
       }
     },
-    "failure_reason": "GitHub required supply-chain check failed because composer audit reported a laravel/framework security advisory. This is outside the docs/contract scope and must be handled by a separate dependency/supply-chain PR before this PR can merge.",
-    "pr_url": null,
-    "commit_sha": null,
+    "failure_reason": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1873",
+    "commit_sha": "06f4a6d777db045c3255d1cfaa6997b3fa06e184",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -42445,6 +42449,10 @@
       "local_validation_passed": true,
       "github_checks_green": false,
       "post_merge_revalidated": null,
+      "composer_lock_changed": true,
+      "composer_json_changed": false,
+      "laravel_framework_updated_from": "v12.48.1",
+      "laravel_framework_updated_to": "v12.61.0",
       "runtime_code_edit_performed": false,
       "api_route_added": false,
       "migration_changed": false,
@@ -42487,6 +42495,24 @@
         "from": "pr_open",
         "to": "github_checks_failed",
         "note": "Stopped before merge because required supply-chain failed: composer audit reported laravel/framework advisory PKSA-mdq4-51ck-6kdq / CVE-2026-48019 / GHSA-5vg9-5847-vvmq. No out-of-scope composer dependency change was made in this docs/contract PR."
+      },
+      {
+        "at": "2026-06-03T14:04:43Z",
+        "from": "github_checks_failed",
+        "to": "ci_fix_in_progress",
+        "note": "User requested CI fix. Updated backend/composer.lock only via composer update laravel/framework --with-dependencies --no-interaction --no-audit; laravel/framework moved from v12.48.1 to v12.61.0 and local composer audit now reports no advisories."
+      },
+      {
+        "at": "2026-06-03T14:06:29Z",
+        "from": "ci_fix_in_progress",
+        "to": "local_checks_passed_after_ci_fix",
+        "note": "Composer validate, composer audit, focused SEO-DASH-00-RECONCILE test, existing seo_intel foundation/issue queue/severity governance tests, scoped Pint, route:list, JSON/YAML parse checks, and scoped diff whitespace check passed after the lockfile fix."
+      },
+      {
+        "at": "2026-06-03T14:11:09Z",
+        "from": "local_checks_passed_after_ci_fix",
+        "to": "full_local_ci_passed_after_ci_fix",
+        "note": "bash backend/scripts/ci_verify_mbti.sh exited 0 after the Laravel lockfile update. Generated BIG5_OCEAN compiled artifact side effects were restored as out-of-scope files."
       }
     ],
     "sidecars": [],

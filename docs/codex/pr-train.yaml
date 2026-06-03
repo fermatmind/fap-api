@@ -20600,7 +20600,9 @@ prs:
       - Lock the distinction between CMS/backend authority, seo_intel observation, and fap-web dashboard shell.
       - Define issue queue and consent compatibility mapping before runtime API implementation.
       - Keep the read-only API as design-only; do not add runtime routes or enable production data access.
+      - Unblock the required GitHub supply-chain check by updating the locked Laravel framework patch version for CVE-2026-48019.
     allowed_paths:
+      - backend/composer.lock
       - backend/docs/seo/seo-dash-00-reconcile-schema-api-contract.md
       - backend/docs/seo/generated/seo-dash-00-reconcile-schema-api-contract.v1.json
       - backend/tests/Feature/SeoIntel/SeoDash00ReconcileSchemaApiContractTest.php
@@ -20612,16 +20614,20 @@ prs:
       - Run production migrations or create a production seo_intel database.
       - Enable collectors, scheduler jobs, queue workers, live GSC/Baidu/GA4 integrations, or URL submissions.
       - Mutate CMS records, publish, unpublish, rollback, or generate content.
+      - Change composer.json requirements or add new runtime dependencies.
       - Modify fap-web, deploy, SSH, edit env, or expose Metabase publicly.
     validation:
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoDash00ReconcileSchemaApiContractTest --no-ansi
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoIntelLogicalDbFoundationTest --no-ansi
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoIntelCmsIssueQueueSummaryTest --no-ansi
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoIntelIssueSeverityGovernanceContractTest --no-ansi
+      - cd backend && php artisan route:list --no-ansi
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - python3 -m json.tool backend/docs/seo/generated/seo-dash-00-reconcile-schema-api-contract.v1.json >/dev/null
       - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
-      - git diff --check -- backend/docs/seo/seo-dash-00-reconcile-schema-api-contract.md backend/docs/seo/generated/seo-dash-00-reconcile-schema-api-contract.v1.json backend/tests/Feature/SeoIntel/SeoDash00ReconcileSchemaApiContractTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --check -- backend/composer.lock backend/docs/seo/seo-dash-00-reconcile-schema-api-contract.md backend/docs/seo/generated/seo-dash-00-reconcile-schema-api-contract.v1.json backend/tests/Feature/SeoIntel/SeoDash00ReconcileSchemaApiContractTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json
       - git diff --cached --check
     merge_policy:
       github_checks_required: true
