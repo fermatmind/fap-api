@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-03T14:11:09Z",
+  "updated_at": "2026-06-03T14:12:03Z",
   "items": {
     "SEO-CMS-CANARY-BE-01": {
       "repo": "fap-api",
@@ -42440,7 +42440,7 @@
     },
     "failure_reason": null,
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1873",
-    "commit_sha": "06f4a6d777db045c3255d1cfaa6997b3fa06e184",
+    "commit_sha": "2a5f86b68861bc9727e67ab396798432ad3a1d3f",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -42513,6 +42513,12 @@
         "from": "local_checks_passed_after_ci_fix",
         "to": "full_local_ci_passed_after_ci_fix",
         "note": "bash backend/scripts/ci_verify_mbti.sh exited 0 after the Laravel lockfile update. Generated BIG5_OCEAN compiled artifact side effects were restored as out-of-scope files."
+      },
+      {
+        "at": "2026-06-03T14:12:03Z",
+        "from": "full_local_ci_passed_after_ci_fix",
+        "to": "ci_fix_pushed",
+        "note": "Pushed commit 2a5f86b68861bc9727e67ab396798432ad3a1d3f to PR #1873 for GitHub checks rerun."
       }
     ],
     "sidecars": [],
