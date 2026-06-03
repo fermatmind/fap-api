@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-03T07:24:09Z",
+  "updated_at": "2026-06-03T07:26:01Z",
   "items": {
     "SEO-CMS-CANARY-BE-01": {
       "repo": "fap-api",
@@ -41775,12 +41775,12 @@
   "SEO-SEARCH-SUBMISSION-GSC-SITEMAP-CANARY-01": {
     "repo": "fap-api",
     "branch": "codex/seo-search-submission-gsc-sitemap-canary-01",
-    "status": "local_checks_passed_gsc_sitemap_submitted",
+    "status": "pr_open_gsc_sitemap_submitted",
     "depends_on": [
       "SEO-REVIEW-P1-10-SITEMAP-LLMS-ENUMERATION-01"
     ],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "pending_remote_pr_head",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1869",
     "checks": {
       "dependency_reconciliation": {
         "status": "passed",
@@ -41827,6 +41827,13 @@
           "git diff --cached --check"
         ],
         "notes": "JSON parse, YAML parse, scoped diff whitespace check, and cached diff whitespace check passed. Staged files were limited to the execution-plan archive, GSC sitemap result report, and PR train metadata."
+      },
+      "pr": {
+        "status": "opened",
+        "commands": [
+          "gh pr create --repo fermatmind/fap-api --base main --head codex/seo-search-submission-gsc-sitemap-canary-01 --title \"ops(seo): submit canary sitemap in GSC\""
+        ],
+        "notes": "Opened https://github.com/fermatmind/fap-api/pull/1869 after local checks passed. GSC sitemap submission was already completed and archived; no additional search submission action was performed during PR creation."
       }
     },
     "failure_reason": null,
@@ -41867,6 +41874,12 @@
         "from": "gsc_sitemap_submitted_report_created_local_checks_pending",
         "to": "local_checks_passed_gsc_sitemap_submitted",
         "note": "JSON/YAML parse, scoped diff check, cached diff check, and path-limited staging passed. Staged scope is docs-only plus train metadata."
+      },
+      {
+        "at": "2026-06-03T07:26:01Z",
+        "from": "local_checks_passed_gsc_sitemap_submitted",
+        "to": "pr_open_gsc_sitemap_submitted",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/1869. No additional URL submission, Baidu, IndexNow, Search Channel write, CMS mutation, publish, runtime edit, or deploy was performed."
       }
     ],
     "sidecars": [
