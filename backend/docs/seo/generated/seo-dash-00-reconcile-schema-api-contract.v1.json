@@ -1,0 +1,175 @@
+{
+  "version": "seo-dash-00-reconcile-schema-api-contract.v1",
+  "task": "SEO-DASH-00-RECONCILE",
+  "repo": "fap-api",
+  "contract_only": true,
+  "source_documents": [
+    "SEO-DASH-00B",
+    "SEO-DASH-01A",
+    "SEO-DASH-06",
+    "SEO-OBS-GOV-03",
+    "SEO-DASH-MVP-ONLINE-SUMMARY",
+    "BACKEND-RUNTIME-02D"
+  ],
+  "runtime_changes_allowed": false,
+  "api_route_added_in_this_pr": false,
+  "production_database_created": false,
+  "production_migration_executed": false,
+  "collector_writes_enabled": false,
+  "external_api_connected": false,
+  "cms_mutation_allowed": false,
+  "search_submission_allowed": false,
+  "deploy_allowed": false,
+  "fap_web_modified": false,
+  "authority": {
+    "cms_backend_content_authority": true,
+    "backend_orders_payments_benefits_purchase_truth": true,
+    "seo_intel_observation_only": true,
+    "fap_web_dashboard_shell_only": true,
+    "gsc_baidu_ga4_signal_only": true,
+    "crawler_logs_signal_only": true
+  },
+  "forbidden_authority_sources": [
+    "node2_local_laravel",
+    "node2_local_db",
+    "node2_local_queue",
+    "frontend_fallback",
+    "static_sitemap_fallback",
+    "static_llms_fallback",
+    "ga4_purchase_truth",
+    "baidu_purchase_truth",
+    "crawler_search_publish_truth"
+  ],
+  "read_model_tables": [
+    "seo_urls",
+    "seo_url_entities",
+    "seo_issue_queue",
+    "seo_gsc_daily",
+    "seo_baidu_landing_daily",
+    "seo_consent_daily",
+    "seo_event_funnel_daily",
+    "seo_landing_attribution_daily",
+    "seo_revenue_daily",
+    "seo_search_channel_queue_items",
+    "seo_crawler_log_daily_aggregates"
+  ],
+  "forbidden_sources": [
+    "business_db_raw_tables",
+    "cms_write_tables",
+    "raw_orders",
+    "raw_payments",
+    "raw_browser_event_payloads",
+    "raw_crawler_logs",
+    "provider_payloads",
+    "cookies",
+    "tokens",
+    "secrets"
+  ],
+  "forbidden_fields": [
+    "email",
+    "raw_email",
+    "raw_ip",
+    "raw_user_agent",
+    "cookie",
+    "token",
+    "api_key",
+    "secret",
+    "order_no",
+    "attempt_id",
+    "payment_id",
+    "provider_event_id",
+    "raw_payload",
+    "payment_payload",
+    "raw_crawler_log_line"
+  ],
+  "safe_evidence_fields": [
+    "canonical_url_hash",
+    "query_hash",
+    "evidence_hash",
+    "path_display_masked",
+    "aggregate_count",
+    "sanitized_summary",
+    "metadata_json_sanitized"
+  ],
+  "issue_queue_reconciliation": {
+    "storage_issue_id_field": "issue_uid",
+    "api_issue_id_field": "issue_id",
+    "issue_id_aliases_storage_issue_uid": true,
+    "source_signal_derivation": "source_system + source_engine",
+    "severity_mapping": {
+      "critical": "critical",
+      "high": "high",
+      "warning": "medium",
+      "info": "info"
+    },
+    "lifecycle_mapping": {
+      "open": "open",
+      "acknowledged": "triaged",
+      "resolved": "resolved_observed",
+      "ignored": "suppressed"
+    },
+    "required_future_fields": [
+      "dedupe_key",
+      "muted_until",
+      "mute_reason",
+      "muted_by",
+      "owner_team",
+      "sla_due_at",
+      "sla_policy",
+      "reopen_rule",
+      "reopened_at",
+      "last_seen_at",
+      "occurrence_count",
+      "closed_reason"
+    ]
+  },
+  "consent_reconciliation": {
+    "api_values": [
+      "analytics_granted",
+      "analytics_denied",
+      "unknown",
+      "not_applicable_backend_business_event"
+    ],
+    "current_backend_aliases": {
+      "granted": "analytics_granted",
+      "denied": "analytics_denied",
+      "unknown": "unknown",
+      "not_applicable": "not_applicable_backend_business_event"
+    },
+    "consent_can_override_purchase_truth": false,
+    "browser_analytics_is_behavior_telemetry_only": true
+  },
+  "read_only_api_contract": {
+    "status": "design_only_no_route_added",
+    "preferred_permission": "admin.seo_intel.read",
+    "current_private_filament_permissions": [
+      "admin.owner",
+      "admin.ops.read"
+    ],
+    "route_family": [
+      "GET /api/v0.5/ops/seo-intel/overview",
+      "GET /api/v0.5/ops/seo-intel/url-truth",
+      "GET /api/v0.5/ops/seo-intel/issues",
+      "GET /api/v0.5/ops/seo-intel/trends",
+      "GET /api/v0.5/ops/seo-intel/page-performance"
+    ],
+    "forbidden_behaviors": [
+      "cms_mutation",
+      "publish",
+      "unpublish",
+      "rollback",
+      "issue_row_mutation",
+      "url_submission",
+      "search_channel_retry",
+      "collector_write",
+      "production_raw_log_read",
+      "public_metabase_link"
+    ]
+  },
+  "next_tasks": [
+    "SEO-DASH-API-01",
+    "SEO-DASH-MIGRATION-01",
+    "SEO-DASH-COLLECTOR-01",
+    "SEO-DASH-WEB-API-ADAPTER-01"
+  ]
+}

@@ -20588,3 +20588,61 @@ prs:
     frontend_fallback_authority: false
     content_authority: CMS/backend
     next_task: SEO-SEARCH-SUBMISSION-CANARY-BASELINE-REVIEW-01 after a 7-day/14-day processing window, or SEO-SEARCH-CHANNEL-CMS-ARTICLE-CANDIDACY-01 if Search Channel automation is needed
+
+  - id: SEO-DASH-00-RECONCILE
+    repo: fap-api
+    branch: codex/seo-dash-00-reconcile-schema-api-contract
+    title: "docs(seo): reconcile seo_intel schema and read-only API contract"
+    train_scope: search_intelligence_schema_api_contract
+    status: executing
+    scope:
+      - Reconcile existing seo_intel foundation docs into one schema, PII, consent, source-of-truth, and read-only API contract.
+      - Lock the distinction between CMS/backend authority, seo_intel observation, and fap-web dashboard shell.
+      - Define issue queue and consent compatibility mapping before runtime API implementation.
+      - Keep the read-only API as design-only; do not add runtime routes or enable production data access.
+      - Unblock the required GitHub supply-chain check by updating the locked Laravel framework patch version for CVE-2026-48019.
+    allowed_paths:
+      - backend/composer.lock
+      - backend/docs/seo/seo-dash-00-reconcile-schema-api-contract.md
+      - backend/docs/seo/generated/seo-dash-00-reconcile-schema-api-contract.v1.json
+      - backend/tests/Feature/SeoIntel/SeoDash00ReconcileSchemaApiContractTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add runtime routes, controllers, middleware, services, or API adapters.
+      - Add or edit migrations.
+      - Run production migrations or create a production seo_intel database.
+      - Enable collectors, scheduler jobs, queue workers, live GSC/Baidu/GA4 integrations, or URL submissions.
+      - Mutate CMS records, publish, unpublish, rollback, or generate content.
+      - Change composer.json requirements or add new runtime dependencies.
+      - Modify fap-web, deploy, SSH, edit env, or expose Metabase publicly.
+    validation:
+      - cd backend && composer validate --strict
+      - cd backend && composer audit --locked --no-interaction --ignore-unreachable
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoDash00ReconcileSchemaApiContractTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoIntelLogicalDbFoundationTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoIntelCmsIssueQueueSummaryTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoIntelIssueSeverityGovernanceContractTest --no-ansi
+      - cd backend && php artisan route:list --no-ansi
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -m json.tool backend/docs/seo/generated/seo-dash-00-reconcile-schema-api-contract.v1.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- backend/composer.lock backend/docs/seo/seo-dash-00-reconcile-schema-api-contract.md backend/docs/seo/generated/seo-dash-00-reconcile-schema-api-contract.v1.json backend/tests/Feature/SeoIntel/SeoDash00ReconcileSchemaApiContractTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: SEO-DASH-API-01 after separate authorization
