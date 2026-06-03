@@ -20708,3 +20708,57 @@ prs:
     frontend_fallback_authority: false
     content_authority: CMS/backend
     next_task: SEO-DASH-MIGRATION-01 after separate authorization
+
+  - id: SEO-DASH-MIGRATION-01
+    repo: fap-api
+    branch: codex/seo-dash-migration-01-readiness
+    title: "docs(seo): define seo_intel migration readiness gate"
+    train_scope: seo_intel_migration_readiness_gate
+    status: executing
+    scope:
+      - Define production seo_intel migration readiness after the read-only API contract is merged.
+      - Lock dedicated migration path, pretend/status/actual command templates, human approval phrase, preflight checklist, post-migration validation, and no-go conditions.
+      - Reconcile SEO-DASH-API-01 merged ledger state needed to unblock this train item.
+      - Keep this PR contract-only; do not create a production DB, run production migrations, deploy, enable collectors, or edit runtime routes/services.
+    allowed_paths:
+      - backend/docs/seo/seo-dash-migration-01-readiness.md
+      - backend/docs/seo/generated/seo-dash-migration-01-readiness.v1.json
+      - backend/tests/Feature/SeoIntel/SeoDashMigration01ReadinessTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add, move, or edit migration files.
+      - Run production migrations or create a production seo_intel database.
+      - Add or edit runtime routes, controllers, middleware, services, collectors, scheduler jobs, queue workers, or env files.
+      - Connect live GSC, Baidu, GA4, crawler logs, Metabase, or external APIs.
+      - Mutate CMS records, publish, unpublish, rollback, generate content, submit URLs, or modify fap-web.
+      - Deploy, SSH, edit production env, print secrets, or touch Node2/Node3.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoDashMigration01ReadinessTest --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Feature/SeoIntel/SeoDashMigration01ReadinessTest.php
+      - cd backend && php artisan route:list --path=api/v0.5/ops/seo-intel --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoIntelMigrationIsolationTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi
+      - python3 -m json.tool backend/docs/seo/generated/seo-dash-migration-01-readiness.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- backend/docs/seo/seo-dash-migration-01-readiness.md backend/docs/seo/generated/seo-dash-migration-01-readiness.v1.json backend/tests/Feature/SeoIntel/SeoDashMigration01ReadinessTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - bash backend/scripts/ci_verify_mbti.sh
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: SEO-DASH-COLLECTOR-01 after separate production migration readiness/deploy approval
