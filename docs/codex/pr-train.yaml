@@ -20012,3 +20012,88 @@ prs:
     frontend_fallback_authority: false
     content_authority: CMS/backend
     next_task: After merge and deploy, rerun SEO-CONTENT-P1-08 preflight; EN draft creation remains blocked until the approved adapter content satisfies schema-length gates.
+
+  - id: SEO-CONTENT-CANARY-EN-METADATA-01
+    repo: fap-api
+    depends_on:
+      - SEO-CMS-CANARY-IMPORTER-SCHEMA-GATE-01
+    branch: codex/seo-content-canary-en-metadata-01
+    title: "docs(content): shorten English SEO canary metadata for CMS import"
+    train_scope: seo_cms_canary
+    scope:
+      - Mechanically apply GPT-5.5 Pro approved English SEO title and SEO description replacement values to the canary source artifact.
+      - Mechanically apply the same approved values to the English importer adapter SEO metadata aliases.
+      - Preserve English body_markdown, H1, FAQ, CTA labels, CTA hrefs, internal links, publish gate, slug, and translation_group_id.
+      - Keep CMS draft creation and publish forbidden; this PR only prepares metadata for a later dry-run and draft-only retry after deploy.
+    allowed_paths:
+      - backend/docs/seo/canary-packages/mbti-vs-holland-code-career-choice.en.json
+      - backend/docs/seo/canary-packages/mbti-vs-holland-code-career-choice.en.importer-adapter.json
+      - backend/docs/seo/canary-packages/mbti-vs-holland-career-choice.package-notes.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Create CMS drafts, save CMS forms, create Articles, publish, or call production write APIs.
+      - Modify English body_markdown, H1, FAQ, CTA labels, CTA hrefs, internal links, or any Chinese artifact.
+      - Modify backend app, routes, database, tests, runtime code, production config, frontend fap-web, sitemap runtime, or analytics runtime.
+      - Submit sitemap, Baidu push, IndexNow, or any search-channel live action.
+      - Read or expose env, cookies, tokens, or real result/order/share/payment IDs.
+    validation:
+      - python3 -m json.tool backend/docs/seo/canary-packages/mbti-vs-holland-code-career-choice.en.json >/dev/null
+      - python3 -m json.tool backend/docs/seo/canary-packages/mbti-vs-holland-code-career-choice.en.importer-adapter.json >/dev/null
+      - |
+        python3 - <<'PY'
+        import json
+        import subprocess
+        from pathlib import Path
+
+        source_path = Path('backend/docs/seo/canary-packages/mbti-vs-holland-code-career-choice.en.json')
+        adapter_path = Path('backend/docs/seo/canary-packages/mbti-vs-holland-code-career-choice.en.importer-adapter.json')
+        old_source = json.loads(subprocess.check_output(['git', 'show', f'origin/main:{source_path}']))
+        old_adapter = json.loads(subprocess.check_output(['git', 'show', f'origin/main:{adapter_path}']))
+        source = json.loads(source_path.read_text())
+        adapter = json.loads(adapter_path.read_text())
+        assert source['seo_title'] == 'MBTI vs Holland Code: Which Career Test? | FermatMind'
+        assert source['seo_description'] == 'Use Holland Code/RIASEC to explore interests and work environments; use MBTI to understand work style. Compare both for majors, jobs, and career change.'
+        assert adapter['seo_title'] == source['seo_title']
+        assert adapter['seo_description'] == source['seo_description']
+        assert adapter['meta_description'] == source['seo_description']
+        assert len(source['seo_title']) <= 60
+        assert len(source['seo_description']) <= 160
+        unchanged = ['body_markdown', 'h1', 'faq', 'cta_slots', 'internal_links', 'publish_gate', 'translation_group_id']
+        for key in unchanged:
+            assert source[key] == old_source[key], key
+        adapter_unchanged = ['body_markdown', 'h1', 'faq', 'answer_surface_v1', 'cta_slots', 'internal_links', 'publish_gate', 'translation_group_id']
+        for key in adapter_unchanged:
+            assert adapter[key] == old_adapter[key], key
+        forbidden = ['result', 'orders', 'share', 'pay', 'payment', 'history', 'take', 'token']
+        for slot in adapter['cta_slots']:
+            href = slot['href']
+            assert href.startswith('/en/tests/')
+            assert not href.startswith(('http://', 'https://', '//'))
+            assert not any(part in href for part in forbidden), href
+        assert source['publish_gate']['publish_allowed'] is False
+        assert adapter['publish_gate']['publish_allowed'] is False
+        print('metadata equivalence ok')
+        PY
+      - rm -f /tmp/seo-content-canary-en-metadata.sqlite /tmp/seo-content-canary-en-metadata-dryrun.json && touch /tmp/seo-content-canary-en-metadata.sqlite && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/seo-content-canary-en-metadata.sqlite php backend/artisan migrate --force --no-interaction >/dev/null && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/seo-content-canary-en-metadata.sqlite php backend/artisan articles:import-editorial-package --file=docs/seo/canary-packages/mbti-vs-holland-code-career-choice.en.importer-adapter.json --locale=en --dry-run --json >/tmp/seo-content-canary-en-metadata-dryrun.json && python3 -c "import json; d=json.load(open('/tmp/seo-content-canary-en-metadata-dryrun.json')); assert d.get('ok') is True and d.get('action') == 'will_create' and d.get('errors') == []; print('en metadata dry-run ok')"
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check -- backend/docs/seo docs/codex
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: After merge and production deploy of this metadata artifact, rerun SEO-CONTENT-P1-08 preflight; if dry-run and absence gates pass, EN draft-only creation may be retried with separate explicit authorization.
