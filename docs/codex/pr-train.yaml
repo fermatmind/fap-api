@@ -20471,7 +20471,7 @@ prs:
     branch: codex/seo-search-submission-baidu-manual-zh-canary-01
     title: "ops(seo): submit Chinese canary URL in Baidu"
     train_scope: seo_cms_canary
-    status: executing
+    status: completed_with_follow_up_confirmation
     scope:
       - Use the already logged-in Chrome Baidu Search Resource Platform session to submit only the zh-CN canary article URL.
       - Do not submit the English canary URL.
@@ -20504,4 +20504,45 @@ prs:
     fap_web_commit_allowed: false
     frontend_fallback_authority: false
     content_authority: CMS/backend
-    next_task: Retry Baidu manual zh URL submission only after a human operator completes Baidu security verification, or proceed to IndexNow planning only after separate authorization.
+    next_task: SEO-SEARCH-SUBMISSION-BAIDU-MANUAL-ZH-CANARY-CONFIRM-01 records the human-completed Baidu success state
+
+  - id: SEO-SEARCH-SUBMISSION-BAIDU-MANUAL-ZH-CANARY-CONFIRM-01
+    repo: fap-api
+    depends_on:
+      - SEO-SEARCH-SUBMISSION-BAIDU-MANUAL-ZH-CANARY-01
+    branch: codex/seo-search-submission-baidu-manual-zh-confirm-01
+    title: "docs(seo): confirm Baidu Chinese canary URL submission"
+    train_scope: seo_cms_canary
+    status: executing
+    scope:
+      - Record the post-operator visible Baidu success state for the zh-CN canary manual URL submission.
+      - Update PR train ledger so the current state no longer remains NO-GO after the human-completed Baidu verification.
+      - Keep the original blocked report as historical state and add a docs-only confirmation report.
+    allowed_paths:
+      - backend/docs/seo/seo-search-submission-baidu-manual-zh-canary-confirm-2026-06-03.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Submit the English canary URL, call Baidu API token, call IndexNow, execute Google URL Inspection request indexing, create Search Channel queue records, mutate CMS, publish, unpublish, modify content, modify runtime code, deploy, or edit production configuration.
+    validation:
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- backend/docs/seo docs/codex
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: SEO-SEARCH-SUBMISSION-CANARY-POSTSUBMIT-SIGNALS-01 after separate authorization

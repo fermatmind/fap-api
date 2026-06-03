@@ -41920,11 +41920,11 @@
   "SEO-SEARCH-SUBMISSION-BAIDU-MANUAL-ZH-CANARY-01": {
     "repo": "fap-api",
     "branch": "codex/seo-search-submission-baidu-manual-zh-canary-01",
-    "status": "pr_open_baidu_security_verification_blocked",
+    "status": "merged_then_baidu_zh_submission_confirmed_by_follow_up",
     "depends_on": [
       "SEO-SEARCH-SUBMISSION-GSC-SITEMAP-CANARY-01"
     ],
-    "commit_sha": "22a4a04cfa8a657fa1cbbefbbffe90d9949d6732",
+    "commit_sha": "85ba119344647aee51645fbddaa2f39a29605e0d",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1870",
     "checks": {
       "dependency_reconciliation": {
@@ -41972,19 +41972,41 @@
           "gh pr create --repo fermatmind/fap-api --base main --head codex/seo-search-submission-baidu-manual-zh-canary-01 --title \"ops(seo): submit Chinese canary URL in Baidu\""
         ],
         "notes": "Opened https://github.com/fermatmind/fap-api/pull/1870 after local checks passed. No additional Baidu submission action was performed during PR creation."
+      },
+      "github": {
+        "status": "passed",
+        "commands": [
+          "gh pr checks 1870 --repo fermatmind/fap-api --watch --interval 20"
+        ],
+        "notes": "GitHub checks passed before squash merge."
+      },
+      "merge_reconciliation": {
+        "status": "passed",
+        "commands": [
+          "gh pr view 1870 --repo fermatmind/fap-api --json number,state,mergedAt,mergeCommit,url,headRefName,title",
+          "git merge-base --is-ancestor 85ba119344647aee51645fbddaa2f39a29605e0d origin/main"
+        ],
+        "notes": "GitHub reports PR #1870 merged at 2026-06-03T11:16:57Z with merge commit 85ba119344647aee51645fbddaa2f39a29605e0d, and origin/main contains the merge commit."
+      },
+      "follow_up_baidu_success_confirmation": {
+        "status": "passed",
+        "commands": [
+          "Chrome visible Baidu Search Resource Platform page check after human operator completed verification/submission"
+        ],
+        "notes": "After human operator action, the visible Baidu dialog showed '完成 / 链接提交成功 / 确定' for input value fermatmind.com/zh/articles/mbti-vs-holland-career-choice. English URL submission, Baidu API token usage, IndexNow, Search Channel writes, CMS mutation, publish, runtime edit, and deploy were not performed."
       }
     },
-    "failure_reason": "NO-GO for confirmed Baidu submission: Baidu displayed a security verification challenge after the zh-CN URL submit action, and no visible success state was observed.",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "failure_reason": null,
+    "merged_at": "2026-06-03T11:16:57Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null,
+      "github_checks_green": true,
+      "post_merge_revalidated": true,
       "baidu_manual_submission_attempted": true,
-      "baidu_submission_confirmed": false,
+      "baidu_submission_confirmed": true,
       "baidu_security_verification_blocked": true,
       "english_url_submission_performed": false,
       "gsc_url_inspection_performed": false,
@@ -41994,7 +42016,9 @@
       "cms_mutation": false,
       "publish_performed": false,
       "runtime_code_edit_performed": false,
-      "deploy_performed": false
+      "deploy_performed": false,
+      "baidu_security_verification_blocked_initially": true,
+      "baidu_security_verification_resolved_by_human_operator": true
     },
     "transitions": [
       {
@@ -42020,6 +42044,18 @@
         "from": "local_checks_passed_baidu_security_verification_blocked",
         "to": "pr_open_baidu_security_verification_blocked",
         "note": "Opened https://github.com/fermatmind/fap-api/pull/1870. Baidu submission remains unconfirmed because security verification blocked completion. No English URL submission, Baidu API token usage, IndexNow, Search Channel write, CMS mutation, publish, runtime edit, or deploy was performed."
+      },
+      {
+        "at": "2026-06-03T11:16:57Z",
+        "from": "pr_open_baidu_security_verification_blocked",
+        "to": "merged_baidu_security_verification_blocked",
+        "note": "PR #1870 passed GitHub checks and was squash merged. At merge time, the archived state still recorded Baidu security verification blocking confirmed submission."
+      },
+      {
+        "at": "2026-06-03T11:27:42Z",
+        "from": "merged_baidu_security_verification_blocked",
+        "to": "merged_then_baidu_zh_submission_confirmed_by_follow_up",
+        "note": "Human operator completed Baidu verification/submission after #1870 merged. Codex rechecked the logged-in Baidu page and observed visible success dialog '完成 / 链接提交成功 / 确定' for the zh-CN canary URL."
       }
     ],
     "sidecars": [
@@ -42039,6 +42075,115 @@
         "note": "English canary URL submission to Baidu remains out of scope and was not performed."
       }
     ],
-    "next_task": "A human operator must complete Baidu security verification and then rerun/continue Baidu manual zh-CN URL submission confirmation, or separately authorize a different search submission path."
+    "next_task": "SEO-SEARCH-SUBMISSION-BAIDU-MANUAL-ZH-CANARY-CONFIRM-01 archives the successful post-operator confirmation; after merge, proceed only to post-submit signals review when separately authorized."
+  },
+  "SEO-SEARCH-SUBMISSION-BAIDU-MANUAL-ZH-CANARY-CONFIRM-01": {
+    "repo": "fap-api",
+    "branch": "codex/seo-search-submission-baidu-manual-zh-confirm-01",
+    "status": "local_checks_passed_baidu_zh_submission_confirmed",
+    "depends_on": [
+      "SEO-SEARCH-SUBMISSION-BAIDU-MANUAL-ZH-CANARY-01"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "dependency_reconciliation": {
+        "status": "passed",
+        "commands": [
+          "gh pr view 1870 --repo fermatmind/fap-api --json number,state,mergedAt,mergeCommit,url,headRefName,title",
+          "git merge-base --is-ancestor 85ba119344647aee51645fbddaa2f39a29605e0d origin/main"
+        ],
+        "notes": "Dependency SEO-SEARCH-SUBMISSION-BAIDU-MANUAL-ZH-CANARY-01 is merged and origin/main contains merge commit 85ba119344647aee51645fbddaa2f39a29605e0d."
+      },
+      "authorization": {
+        "status": "passed",
+        "commands": [
+          "user explicit authorization in chat"
+        ],
+        "notes": "User explicitly authorized a docs-only follow-up PR to record the true Baidu zh-CN canary URL submission success, update docs/codex/pr-train.yaml and docs/codex/pr-train-state.json, and add or supplement the result report. English URL submission, Baidu API token usage, IndexNow, CMS mutation, publish, runtime code edits, and deploy remain forbidden."
+      },
+      "baidu_success_confirmation": {
+        "status": "passed",
+        "commands": [
+          "Chrome visible Baidu Search Resource Platform page check after human operator completed verification/submission"
+        ],
+        "notes": "Visible Baidu dialog showed '完成 / 链接提交成功 / 确定' and the visible input value was fermatmind.com/zh/articles/mbti-vs-holland-career-choice."
+      },
+      "report": {
+        "status": "created",
+        "commands": [
+          "created backend/docs/seo/seo-search-submission-baidu-manual-zh-canary-confirm-2026-06-03.md"
+        ],
+        "notes": "Docs-only confirmation report records the Baidu zh-CN success state and all forbidden actions not performed."
+      },
+      "local": {
+        "status": "passed",
+        "commands": [
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "git diff --check -- backend/docs/seo docs/codex",
+          "git diff --cached --check"
+        ],
+        "notes": "JSON parse, YAML parse, scoped diff whitespace check, and cached diff whitespace check passed. Staged files are limited to the Baidu zh confirmation report and PR train metadata."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": null,
+      "baidu_zh_submission_confirmed": true,
+      "english_url_submission_performed": false,
+      "gsc_url_inspection_performed": false,
+      "indexnow_submission_performed": false,
+      "baidu_api_token_used": false,
+      "search_channel_records_created": false,
+      "cms_mutation": false,
+      "publish_performed": false,
+      "runtime_code_edit_performed": false,
+      "deploy_performed": false
+    },
+    "transitions": [
+      {
+        "at": "2026-06-03T11:27:42Z",
+        "from": "missing",
+        "to": "executing",
+        "note": "Started docs-only Baidu zh-CN success confirmation follow-up after explicit user authorization. Scope is confirmation report and train ledger only."
+      },
+      {
+        "at": "2026-06-03T11:27:42Z",
+        "from": "executing",
+        "to": "baidu_zh_success_confirmed_report_created_local_checks_pending",
+        "note": "Recorded visible Baidu success dialog '完成 / 链接提交成功 / 确定' after human operator completed verification/submission. No English URL submission, Baidu API token usage, IndexNow, Search Channel write, CMS mutation, publish, runtime edit, or deploy was performed."
+      },
+      {
+        "at": "2026-06-03T11:27:42Z",
+        "from": "baidu_zh_success_confirmed_report_created_local_checks_pending",
+        "to": "local_checks_passed_baidu_zh_submission_confirmed",
+        "note": "JSON/YAML parse and scoped diff checks passed for the docs-only confirmation report and PR train metadata."
+      }
+    ],
+    "sidecars": [
+      {
+        "id": "english_canary_boundary",
+        "status": "active",
+        "note": "English canary URL submission to Baidu remains out of scope and was not performed."
+      },
+      {
+        "id": "baidu_api_token_boundary",
+        "status": "active",
+        "note": "Baidu API token was not used, printed, recorded, or exposed."
+      },
+      {
+        "id": "post_submit_signals_follow_up",
+        "status": "planned_after_authorization",
+        "note": "Post-submit signals review should wait for separate authorization and a reasonable search-platform processing window."
+      }
+    ],
+    "next_task": "SEO-SEARCH-SUBMISSION-CANARY-POSTSUBMIT-SIGNALS-01 after separate authorization."
   }
 }
