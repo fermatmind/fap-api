@@ -42223,12 +42223,12 @@
   "SEO-SEARCH-SUBMISSION-CANARY-POSTSUBMIT-SIGNALS-01": {
     "repo": "fap-api",
     "branch": "codex/seo-search-submission-canary-postsubmit-signals-01",
-    "status": "local_checks_passed_postsubmit_signals_reviewed",
+    "status": "pr_open_postsubmit_signals_reviewed",
     "depends_on": [
       "SEO-SEARCH-SUBMISSION-BAIDU-MANUAL-ZH-CANARY-CONFIRM-01"
     ],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "0836478273f53271e68efb18319bfaa2f9f44e11",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1872",
     "checks": {
       "dependency_reconciliation": {
         "status": "passed",
@@ -42290,6 +42290,13 @@
           "git diff --cached --check"
         ],
         "notes": "JSON parse, YAML parse, scoped diff whitespace check, and cached diff whitespace check passed. Staged files are limited to the post-submit signals report and PR train metadata."
+      },
+      "pr": {
+        "status": "opened",
+        "commands": [
+          "gh pr create --repo fermatmind/fap-api --base main --head codex/seo-search-submission-canary-postsubmit-signals-01 --title \"docs(seo): review SEO canary post-submit signals\""
+        ],
+        "notes": "Opened https://github.com/fermatmind/fap-api/pull/1872 after local checks passed. No additional search submission action was performed during PR creation."
       }
     },
     "failure_reason": null,
@@ -42338,6 +42345,12 @@
         "from": "postsubmit_signals_reviewed_report_created_local_checks_pending",
         "to": "local_checks_passed_postsubmit_signals_reviewed",
         "note": "JSON/YAML parse and scoped diff checks passed for the docs-only post-submit signals report and PR train metadata."
+      },
+      {
+        "at": "2026-06-03T11:44:49Z",
+        "from": "local_checks_passed_postsubmit_signals_reviewed",
+        "to": "pr_open_postsubmit_signals_reviewed",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/1872. No search submission, IndexNow, Search Channel write, CMS mutation, publish, runtime edit, or deploy was performed."
       }
     ],
     "sidecars": [
