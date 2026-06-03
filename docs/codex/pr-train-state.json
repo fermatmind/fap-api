@@ -41628,12 +41628,12 @@
   "SEO-REVIEW-P1-10-SITEMAP-LLMS-ENUMERATION-01": {
     "repo": "fap-api",
     "branch": "codex/seo-review-p1-10-sitemap-llms-enumeration-01",
-    "status": "local_checks_passed_no_go_search_submission",
+    "status": "pr_open_no_go_search_submission",
     "depends_on": [
       "SEO-REVIEW-P1-10"
     ],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "385b58c4cd21df412fc455e7cfa7307107c05bfd",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1868",
     "checks": {
       "dependency_reconciliation": {
         "status": "passed",
@@ -41682,6 +41682,13 @@
           "git diff --cached --check"
         ],
         "notes": "JSON parse, YAML parse, scoped whitespace diff check, and cached diff check passed before commit after path-limited staging."
+      },
+      "pr": {
+        "status": "opened",
+        "commands": [
+          "gh pr create --repo fermatmind/fap-api --base main --head codex/seo-review-p1-10-sitemap-llms-enumeration-01 --title \"docs(seo): investigate SEO canary sitemap and llms-full enumeration gap\""
+        ],
+        "notes": "Opened https://github.com/fermatmind/fap-api/pull/1868. Search submission remains NO-GO."
       }
     },
     "failure_reason": "NO-GO for search submission: sitemap.xml and llms-full.txt still do not enumerate the canary URLs. Backend sitemap-source is serving stale cache, frontend sitemap.xml is a static build artifact, and llms-full is blocked by response cache/revalidation gap.",
@@ -41719,6 +41726,12 @@
         "from": "local_checks_pending",
         "to": "local_checks_passed_no_go_search_submission",
         "note": "Created the docs-only enumeration investigation report and passed JSON/YAML/scoped diff validation. Search submission remains NO-GO because sitemap.xml and llms-full.txt still do not enumerate the canary URLs."
+      },
+      {
+        "at": "2026-06-03T13:20:00+08:00",
+        "from": "local_checks_passed_no_go_search_submission",
+        "to": "pr_open_no_go_search_submission",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/1868. No search submission, publish, CMS mutation, runtime edit, fap-web edit, test edit, or GPT content edit was performed."
       }
     ],
     "sidecars": [
