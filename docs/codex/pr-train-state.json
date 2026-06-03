@@ -42080,12 +42080,12 @@
   "SEO-SEARCH-SUBMISSION-BAIDU-MANUAL-ZH-CANARY-CONFIRM-01": {
     "repo": "fap-api",
     "branch": "codex/seo-search-submission-baidu-manual-zh-confirm-01",
-    "status": "local_checks_passed_baidu_zh_submission_confirmed",
+    "status": "pr_open_baidu_zh_submission_confirmed",
     "depends_on": [
       "SEO-SEARCH-SUBMISSION-BAIDU-MANUAL-ZH-CANARY-01"
     ],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "1f37b84cb642a40a78fc8a9383f956d73aff2c68",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1871",
     "checks": {
       "dependency_reconciliation": {
         "status": "passed",
@@ -42125,6 +42125,13 @@
           "git diff --cached --check"
         ],
         "notes": "JSON parse, YAML parse, scoped diff whitespace check, and cached diff whitespace check passed. Staged files are limited to the Baidu zh confirmation report and PR train metadata."
+      },
+      "pr": {
+        "status": "opened",
+        "commands": [
+          "gh pr create --repo fermatmind/fap-api --base main --head codex/seo-search-submission-baidu-manual-zh-confirm-01 --title \"docs(seo): confirm Baidu Chinese canary URL submission\""
+        ],
+        "notes": "Opened https://github.com/fermatmind/fap-api/pull/1871 after local checks passed. No additional search submission action was performed during PR creation."
       }
     },
     "failure_reason": null,
@@ -42165,6 +42172,12 @@
         "from": "baidu_zh_success_confirmed_report_created_local_checks_pending",
         "to": "local_checks_passed_baidu_zh_submission_confirmed",
         "note": "JSON/YAML parse and scoped diff checks passed for the docs-only confirmation report and PR train metadata."
+      },
+      {
+        "at": "2026-06-03T11:27:42Z",
+        "from": "local_checks_passed_baidu_zh_submission_confirmed",
+        "to": "pr_open_baidu_zh_submission_confirmed",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/1871. No English URL submission, Baidu API token usage, IndexNow, Search Channel write, CMS mutation, publish, runtime edit, or deploy was performed."
       }
     ],
     "sidecars": [
