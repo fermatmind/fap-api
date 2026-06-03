@@ -40764,11 +40764,11 @@
   "SEO-CMS-CANARY-IMPORTER-SCHEMA-GATE-01": {
     "repo": "fap-api",
     "branch": "codex/seo-cms-canary-importer-schema-gate-01",
-    "status": "pr_open",
+    "status": "merged",
     "depends_on": [
       "SEO-CMS-CANARY-OPERATOR-COLLISION-01"
     ],
-    "commit_sha": "710b1b362e10424a7958a6c86f1c1cd40e69340c",
+    "commit_sha": "52a3efa1657244e61648875e31dd2fe97d1f195b",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1862",
     "checks": {
       "dependency_verification": {
@@ -40796,14 +40796,14 @@
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-03T01:46:13Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": "pending",
-      "post_merge_revalidated": null
+      "github_checks_green": true,
+      "post_merge_revalidated": true
     },
     "transitions": [
       {
@@ -40823,9 +40823,76 @@
         "from": "local_checks_passed",
         "to": "pr_open",
         "note": "Opened GitHub PR #1862 after local validation passed. GitHub checks are pending; merge remains blocked until required checks pass. No CMS draft, publish, production write action, GPT content edit, frontend change, sitemap submission, Baidu, or IndexNow action was performed."
+      },
+      {
+        "at": "2026-06-03T10:20:00+08:00",
+        "from": "pr_open",
+        "to": "merged",
+        "note": "Reconciled before SEO-CONTENT-CANARY-EN-METADATA-01: GitHub PR #1862 is merged with merge commit 52a3efa1657244e61648875e31dd2fe97d1f195b, origin/main/local main are at that SHA, and the local/remote task branches were cleaned up."
       }
     ],
     "sidecars": [],
-    "next_task": "After this PR is merged and deployed, rerun SEO-CONTENT-P1-08 preflight. EN draft remains blocked until approved adapter/schema handling satisfies schema-length gates."
+    "next_task": "SEO-CONTENT-CANARY-EN-METADATA-01 may proceed to apply GPT-5.5 Pro approved English SEO metadata replacements; publish remains forbidden."
+  },
+  "SEO-CONTENT-CANARY-EN-METADATA-01": {
+    "repo": "fap-api",
+    "branch": "codex/seo-content-canary-en-metadata-01",
+    "status": "local_checks_passed",
+    "depends_on": [
+      "SEO-CMS-CANARY-IMPORTER-SCHEMA-GATE-01"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "dependency_verification": {
+        "status": "passed",
+        "commands": [
+          "git fetch origin main --prune",
+          "git rev-parse HEAD origin/main main",
+          "gh pr view 1862 --repo fermatmind/fap-api --json state,mergedAt,mergeCommit,url,statusCheckRollup"
+        ],
+        "notes": "User explicitly authorized adding SEO-CONTENT-CANARY-EN-METADATA-01. SEO-CMS-CANARY-IMPORTER-SCHEMA-GATE-01 is reconciled as merged at 52a3efa1657244e61648875e31dd2fe97d1f195b before this docs/content metadata fix."
+      },
+      "local": {
+        "status": "passed",
+        "commands": [
+          "python3 -m json.tool backend/docs/seo/canary-packages/mbti-vs-holland-code-career-choice.en.json >/dev/null",
+          "python3 -m json.tool backend/docs/seo/canary-packages/mbti-vs-holland-code-career-choice.en.importer-adapter.json >/dev/null",
+          "python3 inline metadata equivalence validation against origin/main",
+          "rm -f /tmp/seo-content-canary-en-metadata.sqlite /tmp/seo-content-canary-en-metadata-dryrun.json && touch /tmp/seo-content-canary-en-metadata.sqlite && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/seo-content-canary-en-metadata.sqlite php backend/artisan migrate --force --no-interaction >/dev/null && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/seo-content-canary-en-metadata.sqlite php backend/artisan articles:import-editorial-package --file=docs/seo/canary-packages/mbti-vs-holland-code-career-choice.en.importer-adapter.json --locale=en --dry-run --json >/tmp/seo-content-canary-en-metadata-dryrun.json && python3 -c \"import json; d=json.load(open('/tmp/seo-content-canary-en-metadata-dryrun.json')); assert d.get('ok') is True and d.get('action') == 'will_create' and d.get('errors') == []; print('en metadata dry-run ok')\"",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "git diff --check -- backend/docs/seo docs/codex",
+          "git diff --cached --check"
+        ],
+        "notes": "English source artifact changed only seo_title and seo_description; English adapter changed only seo_title, seo_description, and meta_description. New lengths are seo_title=53 and seo_description=152. body_markdown, H1, FAQ, CTA labels/hrefs, internal links, publish_allowed=false, and translation_group_id remained unchanged. Isolated testing SQLite importer dry-run passed with ok=true, action=will_create, errors=[], and no real import/draft/publish was performed."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-06-03T10:20:00+08:00",
+        "from": "missing",
+        "to": "local_checks_pending",
+        "note": "User authorized SEO-CONTENT-CANARY-EN-METADATA-01 to mechanically apply GPT-5.5 Pro approved English SEO title and SEO description replacements to the source and importer adapter artifacts. Scope excludes CMS draft creation, publish, production writes, GPT body/H1/FAQ/CTA/internal link edits, Chinese artifact edits, runtime code, tests, database, routes, frontend, sitemap, Baidu, and IndexNow."
+      },
+      {
+        "at": "2026-06-03T10:28:00+08:00",
+        "from": "local_checks_pending",
+        "to": "local_checks_passed",
+        "note": "Local validation passed for JSON parse, YAML parse, field-level metadata equivalence, unchanged body/H1/FAQ/CTA/internal links/publish gate/translation_group_id, public canonical CTA targets, isolated importer dry-run, and scoped diff whitespace checks. No CMS draft, publish, production write action, runtime code, tests, database, routes, frontend, sitemap, Baidu, or IndexNow action was performed."
+      }
+    ],
+    "sidecars": [],
+    "next_task": "After merge and production deploy of this metadata artifact, rerun SEO-CONTENT-P1-08 preflight; if dry-run and absence gates pass, EN draft-only creation may be retried with separate explicit authorization. Publish remains forbidden."
   }
 }
