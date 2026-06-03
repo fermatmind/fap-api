@@ -20646,3 +20646,65 @@ prs:
     frontend_fallback_authority: false
     content_authority: CMS/backend
     next_task: SEO-DASH-API-01 after separate authorization
+
+  - id: SEO-DASH-API-01
+    repo: fap-api
+    branch: codex/seo-dash-api-01-readonly-contract
+    title: "feat(seo): add seo_intel read-only dashboard API contract"
+    train_scope: seo_intel_read_only_dashboard_api
+    status: executing
+    scope:
+      - Implement the authorized seo_intel read-only API route family from SEO-DASH-00-RECONCILE.
+      - Add the narrow admin.seo_intel.read permission while preserving admin.owner and admin.ops.read compatibility.
+      - Expose sanitized overview, URL Truth, issue queue, trend, and page performance read models only.
+      - Keep fap-api as the backend authority and keep fap-web as a future dashboard shell consumer.
+    allowed_paths:
+      - backend/routes/api.php
+      - backend/app/Http/Middleware/EnsureSeoIntelReadAuthorized.php
+      - backend/app/Http/Controllers/API/V0_5/Ops/SeoIntel/SeoIntelDashboardController.php
+      - backend/app/Services/SeoIntel/OpsDashboard/AbstractSeoDashboardReadService.php
+      - backend/app/Services/SeoIntel/OpsDashboard/SeoDashboardApiReadService.php
+      - backend/app/Support/Rbac/PermissionNames.php
+      - backend/docs/contracts/openapi.snapshot.json
+      - backend/docs/seo/generated/seo-dash-api-01-readonly-api-contract.v1.json
+      - backend/tests/Feature/SeoIntel/SeoDashApi01ReadOnlyApiContractTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add or edit migrations.
+      - Run production migrations or create a production seo_intel database.
+      - Enable collectors, scheduler jobs, queue workers, live GSC/Baidu/GA4 integrations, or URL submissions.
+      - Mutate CMS records, publish, unpublish, rollback, or generate content.
+      - Add write routes, issue mutation routes, queue retry routes, or URL submission routes.
+      - Modify fap-web, deploy, SSH, edit env, or expose Metabase publicly.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoDashApi01ReadOnlyApiContractTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest --no-ansi
+      - cd backend && vendor/bin/pint --test app/Http/Middleware/EnsureSeoIntelReadAuthorized.php app/Http/Controllers/API/V0_5/Ops/SeoIntel/SeoIntelDashboardController.php app/Services/SeoIntel/OpsDashboard/SeoDashboardApiReadService.php app/Services/SeoIntel/OpsDashboard/AbstractSeoDashboardReadService.php app/Support/Rbac/PermissionNames.php tests/Feature/SeoIntel/SeoDashApi01ReadOnlyApiContractTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - cd backend && php artisan route:list --path=api/v0.5/ops/seo-intel --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi
+      - cd backend && bash scripts/export_openapi.sh --check
+      - python3 -m json.tool backend/docs/seo/generated/seo-dash-api-01-readonly-api-contract.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- backend/routes/api.php backend/app/Http/Middleware/EnsureSeoIntelReadAuthorized.php backend/app/Http/Controllers/API/V0_5/Ops/SeoIntel/SeoIntelDashboardController.php backend/app/Services/SeoIntel/OpsDashboard/AbstractSeoDashboardReadService.php backend/app/Services/SeoIntel/OpsDashboard/SeoDashboardApiReadService.php backend/app/Support/Rbac/PermissionNames.php backend/docs/contracts/openapi.snapshot.json backend/docs/seo/generated/seo-dash-api-01-readonly-api-contract.v1.json backend/tests/Feature/SeoIntel/SeoDashApi01ReadOnlyApiContractTest.php backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - bash backend/scripts/ci_verify_mbti.sh
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: SEO-DASH-MIGRATION-01 after separate authorization
