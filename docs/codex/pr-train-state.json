@@ -41010,12 +41010,12 @@
   "SEO-CONTENT-P1-08-POSTCHECK-ARCHIVE-01": {
     "repo": "fap-api",
     "branch": "codex/seo-content-p1-08-postcheck-archive-01",
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "depends_on": [
       "SEO-CONTENT-P1-08"
     ],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "b59a7c3ab3a8206b5cb9f5cd20001c80aa060e8e",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1864",
     "checks": {
       "report_archive": {
         "status": "passed",
@@ -41034,6 +41034,13 @@
           "python3 inline required-marker validation for postcheck report"
         ],
         "notes": "JSON parse, YAML parse, scoped whitespace diff check, and report marker validation passed. No draft creation, publish, importer execution, production write API, content asset edit, runtime code edit, tests edit, frontend edit, sitemap submission, Baidu push, IndexNow, or search submission was performed."
+      },
+      "pr": {
+        "status": "opened",
+        "commands": [
+          "gh pr create --repo fermatmind/fap-api --title \"docs(cms): archive bilingual SEO canary draft postcheck\" --body-file /tmp/seo-content-p1-08-postcheck-archive-pr-body.md --base main --head codex/seo-content-p1-08-postcheck-archive-01"
+        ],
+        "notes": "Opened PR #1864 after local docs/codex validation passed. GitHub checks are pending; merge remains blocked until required checks pass."
       }
     },
     "failure_reason": null,
@@ -41058,6 +41065,12 @@
         "from": "local_checks_pending",
         "to": "local_checks_passed",
         "note": "Archived the existing postcheck report, added PR train manifest/state entries for P1-08, archive, editorial review, preview, P1-09, and P1-10, reconciled #1863 as merged, and passed local docs/codex validation. Publish and search submission remain forbidden."
+      },
+      {
+        "at": "2026-06-03T11:43:00+08:00",
+        "from": "local_checks_passed",
+        "to": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/1864. GitHub checks are pending. No draft creation, publish, importer run, CMS mutation, runtime code change, content asset edit, sitemap submission, Baidu push, IndexNow, or search submission was performed."
       }
     ],
     "sidecars": [
