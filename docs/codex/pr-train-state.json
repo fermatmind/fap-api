@@ -42514,7 +42514,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-dash-api-01-readonly-contract",
     "base": "main",
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "train_scope": "seo_intel_read_only_dashboard_api",
     "title": "feat(seo): add seo_intel read-only dashboard API contract",
     "checks": {
@@ -42553,7 +42553,7 @@
       }
     },
     "failure_reason": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1875",
     "commit_sha": null,
     "merged_at": null,
     "remote_branch_deleted": null,
@@ -42593,6 +42593,12 @@
         "from": "local_checks_passed",
         "to": "commit_created",
         "note": "Created local implementation commit 11e82c0c7000bc90f2ec550b83d80a9b941465dc for the SEO-DASH-API-01 read-only API scope; the following commit records this SHA in the ledger."
+      },
+      {
+        "at": "2026-06-03T15:12:00Z",
+        "from": "commit_created",
+        "to": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/1875 for GitHub checks and merge review."
       }
     ],
     "sidecars": [],
