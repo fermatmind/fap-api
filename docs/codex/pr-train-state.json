@@ -1,11 +1,11 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-04T01:13:52+08:00",
+  "updated_at": "2026-06-04T01:38:00+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
     "base": "main",
-    "status": "pr_open",
+    "status": "merged",
     "train_scope": "commercial_readiness_day1",
     "title": "docs(monetization): scan locale freemium policy readiness",
     "checks": {
@@ -42,9 +42,9 @@
     "failure_reason": null,
     "commit_sha": "944b2b029963fef53d2dfbf1a9c157bc3df7b8c4",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1878",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-03T17:26:34Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-04T01:13:52+08:00",
@@ -63,6 +63,12 @@
         "from": "local_checks_passed",
         "to": "pr_open",
         "notes": "Opened https://github.com/fermatmind/fap-api/pull/1878 for docs-only scan review."
+      },
+      {
+        "at": "2026-06-04T01:34:00+08:00",
+        "from": "pr_open",
+        "to": "merged",
+        "notes": "Reconciled after PR #1878 merge commit 7f788e39fbbbe3bc1ebb4f6865e024ab5548f648 was confirmed on origin/main, local main matched origin/main, worktree was clean, and local/remote task branches were absent."
       }
     ]
   },
@@ -70,9 +76,9 @@
     "repo": "fap-api",
     "branch": "codex/daily-giving-ops-readiness-scan-01",
     "base": "main",
-    "status": "planned",
+    "status": "local_checks_passed",
     "train_scope": "commercial_readiness_day1",
-    "title": "docs(ops): scan daily giving readiness",
+    "title": "docs(benefit): scan daily giving operations readiness",
     "depends_on": [
       "FREEMIUM-LOCALE-POLICY-SCAN-01"
     ],
@@ -82,9 +88,30 @@
         "evidence": "User explicitly authorized the Day 1 Commercial Readiness train, including DAILY-GIVING-OPS-READINESS-SCAN-01, with docs/codex manifest/state updates allowed."
       },
       "dependency": {
-        "status": "pending",
-        "evidence": "Must wait for FREEMIUM-LOCALE-POLICY-SCAN-01 to merge and clean up."
+        "status": "pass",
+        "evidence": "FREEMIUM-LOCALE-POLICY-SCAN-01 merged as https://github.com/fermatmind/fap-api/pull/1878 at 2026-06-03T17:26:34Z; origin/main contains merge commit 7f788e39fbbbe3bc1ebb4f6865e024ab5548f648 and cleanup was completed before this branch started."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are confined to backend/docs/operations/daily-giving-ops-readiness-scan-2026-06-03.md, docs/codex/pr-train.yaml, and docs/codex/pr-train-state.json."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "git status --short --branch",
+          "git log -n 5 --oneline",
+          "php backend/artisan route:list | grep -i \"giving\\|foundation\" || true",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "git diff --check -- backend/docs/operations docs/codex",
+          "git diff --cached --check"
+        ],
+        "notes": "JSON/YAML parse, route-list smoke, scoped diff check, and cached diff check passed for docs-only scan."
       }
+    },
+    "result": {
+      "go_no_go": "NO-GO for DailyGiving public amplification, paid-page trust badges, search submission, and social distribution; GO only for private operator-run ledger planning and docs-only readiness work.",
+      "highest_blocker": "Production public DailyGiving records/months are empty and proof storage privacy is Unknown at the storage-disk level."
     },
     "failure_reason": null,
     "commit_sha": null,
@@ -98,6 +125,18 @@
         "from": "missing_from_manifest",
         "to": "planned",
         "notes": "Initialized as the next Day 1 fap-api scan after FREEMIUM-LOCALE-POLICY-SCAN-01."
+      },
+      {
+        "at": "2026-06-04T01:34:00+08:00",
+        "from": "planned",
+        "to": "in_progress",
+        "notes": "Started docs-only Daily Giving operations readiness scan after FREEMIUM-LOCALE-POLICY-SCAN-01 merged and cleaned up."
+      },
+      {
+        "at": "2026-06-04T01:38:00+08:00",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "notes": "Docs-only scan report, manifest, and state parsed and passed scoped diff checks."
       }
     ]
   },
