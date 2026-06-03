@@ -20420,3 +20420,46 @@ prs:
     frontend_fallback_authority: false
     content_authority: CMS/backend
     next_task: SEO-REVIEW-P1-10-SITEMAP-LLMS-FIX-01 proposed in fap-web; search submission remains forbidden until sitemap.xml and llms-full.txt enumerate the canary URLs
+
+  - id: SEO-SEARCH-SUBMISSION-GSC-SITEMAP-CANARY-01
+    repo: fap-api
+    depends_on:
+      - SEO-REVIEW-P1-10-SITEMAP-LLMS-ENUMERATION-01
+    branch: codex/seo-search-submission-gsc-sitemap-canary-01
+    title: "ops(seo): submit canary sitemap in GSC"
+    train_scope: seo_cms_canary
+    status: executing
+    scope:
+      - Archive the GSC/Baidu execution planning report for the bilingual SEO canary.
+      - Use the already logged-in Chrome Google Search Console session to submit only `https://fermatmind.com/sitemap.xml` to property `sc-domain:fermatmind.com`.
+      - Record visible success or error state and whether any timestamp/status is visible.
+      - Create a docs-only execution result report.
+    allowed_paths:
+      - backend/docs/seo/seo-search-submission-canary-execution-plan-2026-06-03.md
+      - backend/docs/seo/seo-search-submission-gsc-sitemap-canary-2026-06-03.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Execute URL Inspection request indexing, submit Baidu, call IndexNow, use Baidu API token, create Search Channel queue records, mutate CMS, publish, unpublish, modify content, modify runtime code, or deploy.
+    validation:
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- backend/docs/seo docs/codex
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: true
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: SEO-SEARCH-SUBMISSION-BAIDU-MANUAL-ZH-CANARY-01 after GSC sitemap submission result is archived
