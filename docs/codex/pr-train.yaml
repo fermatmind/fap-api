@@ -20428,7 +20428,7 @@ prs:
     branch: codex/seo-search-submission-gsc-sitemap-canary-01
     title: "ops(seo): submit canary sitemap in GSC"
     train_scope: seo_cms_canary
-    status: executing
+    status: completed
     scope:
       - Archive the GSC/Baidu execution planning report for the bilingual SEO canary.
       - Use the already logged-in Chrome Google Search Console session to submit only `https://fermatmind.com/sitemap.xml` to property `sc-domain:fermatmind.com`.
@@ -20463,3 +20463,45 @@ prs:
     frontend_fallback_authority: false
     content_authority: CMS/backend
     next_task: SEO-SEARCH-SUBMISSION-BAIDU-MANUAL-ZH-CANARY-01 after GSC sitemap submission result is archived
+
+  - id: SEO-SEARCH-SUBMISSION-BAIDU-MANUAL-ZH-CANARY-01
+    repo: fap-api
+    depends_on:
+      - SEO-SEARCH-SUBMISSION-GSC-SITEMAP-CANARY-01
+    branch: codex/seo-search-submission-baidu-manual-zh-canary-01
+    title: "ops(seo): submit Chinese canary URL in Baidu"
+    train_scope: seo_cms_canary
+    status: executing
+    scope:
+      - Use the already logged-in Chrome Baidu Search Resource Platform session to submit only the zh-CN canary article URL.
+      - Do not submit the English canary URL.
+      - Do not use Baidu API token, IndexNow, Google URL Inspection request indexing, Search Channel queue records, CMS mutation, publish, runtime edits, or deploys.
+      - Record visible success, error, or blocking state in a docs-only result report.
+    allowed_paths:
+      - backend/docs/seo/seo-search-submission-baidu-manual-zh-canary-2026-06-03.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Submit the English canary URL, call Baidu API token, call IndexNow, execute Google URL Inspection request indexing, create Search Channel queue records, mutate CMS, publish, unpublish, modify content, modify runtime code, deploy, or bypass Baidu security verification.
+    validation:
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- backend/docs/seo docs/codex
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: false
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: true
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: Retry Baidu manual zh URL submission only after a human operator completes Baidu security verification, or proceed to IndexNow planning only after separate authorization.
