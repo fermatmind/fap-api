@@ -40837,12 +40837,12 @@
   "SEO-CONTENT-CANARY-EN-METADATA-01": {
     "repo": "fap-api",
     "branch": "codex/seo-content-canary-en-metadata-01",
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "depends_on": [
       "SEO-CMS-CANARY-IMPORTER-SCHEMA-GATE-01"
     ],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "0d8eeababcf6cdd25ab9206d21e4f3a94e2e951f",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1863",
     "checks": {
       "dependency_verification": {
         "status": "passed",
@@ -40875,7 +40875,7 @@
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
+      "github_checks_green": "pending",
       "post_merge_revalidated": null
     },
     "transitions": [
@@ -40890,6 +40890,12 @@
         "from": "local_checks_pending",
         "to": "local_checks_passed",
         "note": "Local validation passed for JSON parse, YAML parse, field-level metadata equivalence, unchanged body/H1/FAQ/CTA/internal links/publish gate/translation_group_id, public canonical CTA targets, isolated importer dry-run, and scoped diff whitespace checks. No CMS draft, publish, production write action, runtime code, tests, database, routes, frontend, sitemap, Baidu, or IndexNow action was performed."
+      },
+      {
+        "at": "2026-06-03T10:33:00+08:00",
+        "from": "local_checks_passed",
+        "to": "pr_open",
+        "note": "Opened GitHub PR #1863 after local validation passed. GitHub checks are pending; merge remains blocked until required checks pass. No CMS draft, publish, production write action, runtime code, tests, database, routes, frontend, sitemap, Baidu, or IndexNow action was performed."
       }
     ],
     "sidecars": [],
