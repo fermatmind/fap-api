@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-03T16:00:00Z",
+  "updated_at": "2026-06-03T16:04:00Z",
   "items": {
     "SEO-CMS-CANARY-BE-01": {
       "repo": "fap-api",
@@ -42671,8 +42671,8 @@
       }
     },
     "failure_reason": null,
-    "pr_url": null,
-    "commit_sha": "5bd61c4ce39995af3c5ac67a2c346e8b613eca14",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1876",
+    "commit_sha": "46b1a9482e2182f52791f12e09c6dda45f36f950",
     "merged_at": null,
     "remote_branch_deleted": null,
     "local_cleanup_executed": null,
@@ -42722,6 +42722,12 @@
         "from": "committed",
         "to": "ledger_commit_sha_recorded",
         "note": "Recorded implementation commit 5bd61c4ce39995af3c5ac67a2c346e8b613eca14 in the SEO-DASH-MIGRATION-01 ledger before push."
+      },
+      {
+        "at": "2026-06-03T16:04:00Z",
+        "from": "ledger_commit_sha_recorded",
+        "to": "pr_open",
+        "note": "Opened PR #1876 and recorded PR URL before GitHub checks."
       }
     ],
     "sidecars": [],
