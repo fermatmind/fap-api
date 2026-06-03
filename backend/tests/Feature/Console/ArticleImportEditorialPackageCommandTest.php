@@ -297,7 +297,7 @@ final class ArticleImportEditorialPackageCommandTest extends TestCase
         $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
     }
 
-    public function test_canary_importer_adapters_dry_run_pass_without_database_writes(): void
+    public function test_canary_importer_adapters_dry_run_schema_gate_blocks_oversized_english_seo_fields_without_database_writes(): void
     {
         $this->assertCanaryAdapterPreservesSource(
             base_path('docs/seo/canary-packages/mbti-vs-holland-career-choice.zh-CN.json'),
@@ -328,12 +328,14 @@ final class ArticleImportEditorialPackageCommandTest extends TestCase
             '--dry-run' => true,
         ])
             ->expectsOutputToContain('dry_run=1')
-            ->expectsOutputToContain('action=will_create')
+            ->expectsOutputToContain('action=will_skip')
             ->expectsOutputToContain('content_track=evergreen_knowledge')
             ->expectsOutputToContain('target_tests=holland-career-interest-test-riasec,mbti-personality-test-16-personality-types,big-five-personality-test-ocean-model')
             ->expectsOutputToContain('target_topics=riasec,mbti')
-            ->expectsOutputToContain('errors_count=0')
-            ->assertExitCode(0);
+            ->expectsOutputToContain('errors_count=2')
+            ->expectsOutputToContain('validation_error=seo_title:schema_length_exceeded')
+            ->expectsOutputToContain('validation_error=meta_description:schema_length_exceeded')
+            ->assertExitCode(1);
 
         $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
         $this->assertSame(0, ArticleTranslationRevision::query()->withoutGlobalScopes()->count());
