@@ -20762,3 +20762,90 @@ prs:
     frontend_fallback_authority: false
     content_authority: CMS/backend
     next_task: SEO-DASH-COLLECTOR-01 after separate production migration readiness/deploy approval
+
+  - id: FREEMIUM-LOCALE-POLICY-SCAN-01
+    repo: fap-api
+    branch: codex/freemium-locale-policy-scan-01
+    title: "docs(monetization): scan locale freemium policy readiness"
+    train_scope: commercial_readiness_day1
+    status: executing
+    depends_on: []
+    scope:
+      - Run a read-only scan of backend commerce, report access, SKU, entitlement, locale, and fap-web checkout/unlock wiring evidence.
+      - Determine whether English full-free through 2026-12-31 and Chinese free/partial plus CNY 1.99 unlock policy is currently backend-authoritative.
+      - Create a docs-only scan report with GO/NO-GO, blockers, and a follow-up PR scope.
+    allowed_paths:
+      - backend/docs/operations/freemium-locale-policy-scan-2026-06-03.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify backend runtime code, routes, database, tests, frontend code, CMS data, production config, payment provider state, orders, result/share/payment/history private URLs, GPT content assets, or deploy.
+      - Create CMS drafts, publish, unpublish, submit search, create Search Channel queue records, or call production write APIs.
+    validation:
+      - git status --short --branch
+      - git log -n 5 --oneline
+      - php backend/artisan list | grep -i "order\|payment\|report\|sku\|publish" || true
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- backend/docs/operations docs/codex
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: backend
+    next_task: DAILY-GIVING-OPS-READINESS-SCAN-01
+
+  - id: DAILY-GIVING-OPS-READINESS-SCAN-01
+    repo: fap-api
+    branch: codex/daily-giving-ops-readiness-scan-01
+    title: "docs(ops): scan daily giving readiness"
+    train_scope: commercial_readiness_day1
+    status: planned
+    depends_on:
+      - FREEMIUM-LOCALE-POLICY-SCAN-01
+    scope:
+      - Run a read-only scan of Daily Giving operations, foundation/public-benefit docs, donation/payment boundaries, and amplification readiness.
+      - Create a docs-only report with GO/NO-GO, blockers, and a follow-up PR scope.
+    allowed_paths:
+      - backend/docs/operations/daily-giving-ops-readiness-scan-2026-06-03.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify backend runtime code, routes, database, tests, frontend code, CMS data, production config, payment provider state, donation/order records, result/share/payment/history private URLs, GPT content assets, or deploy.
+      - Publish, submit search, create Search Channel queue records, or call production write APIs.
+    validation:
+      - git status --short --branch
+      - git log -n 5 --oneline
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- backend/docs/operations docs/codex
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: backend
+    next_task: Day 1 commercial readiness summary after merge
