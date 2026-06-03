@@ -26263,7 +26263,7 @@
   "SEARCH-CHANNEL-LIVE-01-PREFLIGHT": {
     "repo": "fap-api",
     "branch": "codex/search-channel-live-01-preflight",
-    "status": "pr_open",
+    "status": "github_checks_passed",
     "depends_on": [
       "INDEXNOW-LIVE-00"
     ],
@@ -40875,7 +40875,7 @@
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": "pending",
+      "github_checks_green": true,
       "post_merge_revalidated": null
     },
     "transitions": [
@@ -40896,6 +40896,12 @@
         "from": "local_checks_passed",
         "to": "pr_open",
         "note": "Opened GitHub PR #1863 after local validation passed. GitHub checks are pending; merge remains blocked until required checks pass. No CMS draft, publish, production write action, runtime code, tests, database, routes, frontend, sitemap, Baidu, or IndexNow action was performed."
+      },
+      {
+        "at": "2026-06-03T10:45:00+08:00",
+        "from": "pr_open",
+        "to": "github_checks_passed",
+        "note": "GitHub checks for PR #1863 passed with mergeStateStatus=CLEAN before ledger update. No CMS draft, publish, production write action, runtime code, tests, database, routes, frontend, sitemap, Baidu, or IndexNow action was performed."
       }
     ],
     "sidecars": [],
