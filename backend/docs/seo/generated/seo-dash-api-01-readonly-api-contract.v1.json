@@ -1,0 +1,96 @@
+{
+  "version": "seo-dash-api-01-readonly-api-contract.v1",
+  "task": "SEO-DASH-API-01",
+  "repo": "fap-api",
+  "runtime_api_added": true,
+  "read_only": true,
+  "route_family": [
+    "GET /api/v0.5/ops/seo-intel/overview",
+    "GET /api/v0.5/ops/seo-intel/url-truth",
+    "GET /api/v0.5/ops/seo-intel/issues",
+    "GET /api/v0.5/ops/seo-intel/trends",
+    "GET /api/v0.5/ops/seo-intel/page-performance"
+  ],
+  "route_names": [
+    "api.v0_5.ops.seo_intel.overview",
+    "api.v0_5.ops.seo_intel.url_truth",
+    "api.v0_5.ops.seo_intel.issues",
+    "api.v0_5.ops.seo_intel.trends",
+    "api.v0_5.ops.seo_intel.page_performance"
+  ],
+  "allowed_permissions": [
+    "admin.seo_intel.read",
+    "admin.owner",
+    "admin.ops.read"
+  ],
+  "denied_permissions": [
+    "admin.content.read"
+  ],
+  "read_model_tables": [
+    "seo_urls",
+    "seo_url_entities",
+    "seo_issue_queue",
+    "seo_gsc_daily",
+    "seo_baidu_landing_daily",
+    "seo_consent_daily",
+    "seo_event_funnel_daily",
+    "seo_landing_attribution_daily",
+    "seo_revenue_daily",
+    "seo_search_channel_queue_items",
+    "seo_search_channel_queue_batches",
+    "seo_search_channel_queue_events",
+    "seo_crawler_log_daily_aggregates"
+  ],
+  "issue_queue_api_mapping": {
+    "issue_uid_exposed": false,
+    "issue_id_aliases_issue_uid": true,
+    "warning_maps_to": "medium",
+    "acknowledged_maps_to": "triaged",
+    "ignored_maps_to": "suppressed",
+    "resolved_maps_to": "resolved_observed"
+  },
+  "consent_api_mapping": {
+    "granted": "analytics_granted",
+    "denied": "analytics_denied",
+    "unknown": "unknown",
+    "not_applicable": "not_applicable_backend_business_event"
+  },
+  "forbidden_behaviors": [
+    "cms_mutation",
+    "content_publish",
+    "content_unpublish",
+    "content_rollback",
+    "issue_row_mutation",
+    "url_submission",
+    "search_channel_retry",
+    "collector_write",
+    "production_raw_log_read",
+    "public_metabase_link"
+  ],
+  "forbidden_response_fields": [
+    "email",
+    "raw_email",
+    "raw_ip",
+    "raw_user_agent",
+    "cookie",
+    "token",
+    "api_key",
+    "secret",
+    "order_no",
+    "attempt_id",
+    "payment_id",
+    "provider_event_id",
+    "raw_payload",
+    "payment_payload",
+    "raw_crawler_log_line",
+    "metadata_json",
+    "evidence_hash"
+  ],
+  "production_operation_performed": false,
+  "migration_added": false,
+  "collector_enabled": false,
+  "cms_mutation_allowed": false,
+  "deploy_allowed": false,
+  "fap_web_modified": false,
+  "next_task": "SEO-DASH-MIGRATION-01"
+}

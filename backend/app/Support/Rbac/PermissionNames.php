@@ -34,6 +34,8 @@ final class PermissionNames
 
     public const ADMIN_FUNNEL_READ = 'admin.funnel.read';
 
+    public const ADMIN_SEO_INTEL_READ = 'admin.seo_intel.read';
+
     public const ADMIN_CACHE_INVALIDATE = 'admin.cache.invalidate';
 
     public const ADMIN_ORG_MANAGE = 'admin.org.manage';
@@ -88,6 +90,7 @@ final class PermissionNames
             self::ADMIN_AUDIT_EXPORT,
             self::ADMIN_EVENTS_READ,
             self::ADMIN_FUNNEL_READ,
+            self::ADMIN_SEO_INTEL_READ,
             self::ADMIN_CACHE_INVALIDATE,
             self::ADMIN_ORG_MANAGE,
             self::ADMIN_GLOBAL_SEARCH,

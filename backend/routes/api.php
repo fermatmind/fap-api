@@ -76,11 +76,13 @@ use App\Http\Controllers\API\V0_5\Foundation\DailyGivingRecordController;
 use App\Http\Controllers\API\V0_5\Internal\Career\CareerCrosswalkOverrideController;
 use App\Http\Controllers\API\V0_5\Internal\Career\CareerCrosswalkPatchController;
 use App\Http\Controllers\API\V0_5\Internal\Career\CareerCrosswalkReviewQueueController;
+use App\Http\Controllers\API\V0_5\Ops\SeoIntel\SeoIntelDashboardController;
 use App\Http\Controllers\API\V0_5\SEO\SitemapSourceController;
 use App\Http\Controllers\HealthzController;
 use App\Http\Middleware\AdminAuth;
 use App\Http\Middleware\EncryptCookies;
 use App\Http\Middleware\EnsureCmsAdminAuthorized;
+use App\Http\Middleware\EnsureSeoIntelReadAuthorized;
 use App\Http\Middleware\ForcePublicAttemptRealm;
 use App\Http\Middleware\HealthzAccessControl;
 use App\Http\Middleware\LimitWebhookPayloadSize;
@@ -527,6 +529,24 @@ Route::prefix('v0.5')->group(function () {
         AdminAuth::class,
         ResolveOrgContext::class,
     ];
+
+    Route::prefix('ops/seo-intel')
+        ->middleware([
+            ...$cmsAdminMiddleware,
+            EnsureSeoIntelReadAuthorized::class,
+        ])
+        ->group(function () {
+            Route::get('/overview', [SeoIntelDashboardController::class, 'overview'])
+                ->name('api.v0_5.ops.seo_intel.overview');
+            Route::get('/url-truth', [SeoIntelDashboardController::class, 'urlTruth'])
+                ->name('api.v0_5.ops.seo_intel.url_truth');
+            Route::get('/issues', [SeoIntelDashboardController::class, 'issues'])
+                ->name('api.v0_5.ops.seo_intel.issues');
+            Route::get('/trends', [SeoIntelDashboardController::class, 'trends'])
+                ->name('api.v0_5.ops.seo_intel.trends');
+            Route::get('/page-performance', [SeoIntelDashboardController::class, 'pagePerformance'])
+                ->name('api.v0_5.ops.seo_intel.page_performance');
+        });
 
     Route::middleware([
         ...$cmsAdminMiddleware,
