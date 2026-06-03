@@ -41497,11 +41497,11 @@
   "SEO-REVIEW-P1-10": {
     "repo": "fap-api",
     "branch": "codex/seo-review-p1-10",
-    "status": "pr_open_sitemap_llms_full_not_converged",
+    "status": "merged_sitemap_llms_full_not_converged",
     "depends_on": [
       "SEO-CONTENT-P1-09-PUBLISH-PREFLIGHT-01"
     ],
-    "commit_sha": "bd7ab47af4c458918e669598fafc8514abe48861",
+    "commit_sha": "c97974641c8e890b8671535fd7395a2f1ed355c1",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1867",
     "checks": {
       "production_db_state": {
@@ -41543,22 +41543,23 @@
         "notes": "JSON parse, YAML parse, scoped whitespace diff check, and cached diff check passed before commit after path-limited staging."
       },
       "pr": {
-        "status": "opened",
+        "status": "merged",
         "commands": [
-          "gh pr create --repo fermatmind/fap-api --base main --head codex/seo-review-p1-10 --title \"docs(cms): review SEO canary post-publish signals\""
+          "gh pr create --repo fermatmind/fap-api --base main --head codex/seo-review-p1-10 --title \"docs(cms): review SEO canary post-publish signals\"",
+          "gh pr merge 1867 --repo fermatmind/fap-api --squash --delete-branch"
         ],
-        "notes": "Opened https://github.com/fermatmind/fap-api/pull/1867. Result remains NO-GO for search submission because sitemap.xml and llms-full.txt have not converged."
+        "notes": "Opened and merged https://github.com/fermatmind/fap-api/pull/1867. Merge commit c97974641c8e890b8671535fd7395a2f1ed355c1 is on origin/main. Result remained NO-GO for search submission because sitemap.xml and llms-full.txt had not converged."
       }
     },
     "failure_reason": "NO-GO for search submission: sitemap.xml and llms-full.txt did not enumerate the published canary slugs during the review window.",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-03T05:03:23Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
-      "post_merge_revalidated": null,
+      "github_checks_green": true,
+      "post_merge_revalidated": true,
       "published_state_passed": true,
       "public_page_api_passed": true,
       "article_list_api_passed": true,
@@ -41597,6 +41598,12 @@
         "from": "local_checks_passed_sitemap_llms_full_not_converged",
         "to": "pr_open_sitemap_llms_full_not_converged",
         "note": "Opened https://github.com/fermatmind/fap-api/pull/1867. No search submission, CMS mutation, publish, runtime edit, test edit, frontend edit, or GPT content edit was performed."
+      },
+      {
+        "at": "2026-06-03T13:03:23+08:00",
+        "from": "pr_open_sitemap_llms_full_not_converged",
+        "to": "merged_sitemap_llms_full_not_converged",
+        "note": "Merged PR #1867 with green GitHub checks. Local cleanup completed, remote branch was deleted, main matched origin/main, and the worktree was clean."
       }
     ],
     "sidecars": [
@@ -41617,5 +41624,138 @@
       }
     ],
     "next_task": "SEO-REVIEW-P1-10-SITEMAP-LLMS-ENUMERATION-01 proposed; search submission remains forbidden until sitemap and llms-full enumeration are understood or resolved."
+  },
+  "SEO-REVIEW-P1-10-SITEMAP-LLMS-ENUMERATION-01": {
+    "repo": "fap-api",
+    "branch": "codex/seo-review-p1-10-sitemap-llms-enumeration-01",
+    "status": "pr_open_no_go_search_submission",
+    "depends_on": [
+      "SEO-REVIEW-P1-10"
+    ],
+    "commit_sha": "385b58c4cd21df412fc455e7cfa7307107c05bfd",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1868",
+    "checks": {
+      "dependency_reconciliation": {
+        "status": "passed",
+        "commands": [
+          "gh pr view 1867 --repo fermatmind/fap-api --json state,mergeCommit,mergedAt,headRefName,url,title",
+          "git merge-base --is-ancestor c97974641c8e890b8671535fd7395a2f1ed355c1 origin/main"
+        ],
+        "notes": "Dependency SEO-REVIEW-P1-10 is merged and origin/main contains merge commit c97974641c8e890b8671535fd7395a2f1ed355c1."
+      },
+      "public_signal_check": {
+        "status": "passed_with_gaps",
+        "commands": [
+          "python3 inline public API / sitemap / llms / llms-full signal check at 2026-06-03T13:10:09+08:00"
+        ],
+        "notes": "Article detail APIs and llms.txt contain both canary slugs. Backend sitemap-source, frontend sitemap.xml, and llms-full.txt do not contain the canary slugs."
+      },
+      "backend_sitemap_source_readonly": {
+        "status": "stale_cache_identified",
+        "commands": [
+          "ssh \"$API_SSH_ALIAS\" 'cd /var/www/fap-api/current/backend && php artisan tinker --execute=\"... read-only Cache::get and SitemapGenerator::generateUrls check ...\"'"
+        ],
+        "notes": "Fresh cache was absent, stale cache had count 2387 and did not contain the canary slugs. Direct SitemapGenerator::generateUrls returned count 2389 and contained both canary article URLs."
+      },
+      "frontend_readonly_code_inspection": {
+        "status": "passed",
+        "commands": [
+          "sed -n '620,900p' /Users/rainie/Desktop/GitHub/fap-web/next-sitemap.config.js",
+          "sed -n '995,1035p' /Users/rainie/Desktop/GitHub/fap-web/app/llms-full.txt/route.ts",
+          "sed -n '1,310p' /Users/rainie/Desktop/GitHub/fap-web/app/api/content-release/revalidate/route.ts"
+        ],
+        "notes": "fap-web was read only. next-sitemap builds article paths at build time; llms-full uses 60-minute fresh and 24-hour stale response cache; article revalidation derives article list/detail paths but not llms.txt or llms-full.txt by default."
+      },
+      "search_submission_boundary": {
+        "status": "passed",
+        "commands": [
+          "manual boundary verification"
+        ],
+        "notes": "No sitemap submission, Baidu push, IndexNow call, search console submission, publish, unpublish, CMS mutation, runtime edit, test edit, frontend edit, or GPT content edit was performed."
+      },
+      "local": {
+        "status": "passed",
+        "commands": [
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "git diff --check -- backend/docs/seo docs/codex",
+          "git diff --cached --check"
+        ],
+        "notes": "JSON parse, YAML parse, scoped whitespace diff check, and cached diff check passed before commit after path-limited staging."
+      },
+      "pr": {
+        "status": "opened",
+        "commands": [
+          "gh pr create --repo fermatmind/fap-api --base main --head codex/seo-review-p1-10-sitemap-llms-enumeration-01 --title \"docs(seo): investigate SEO canary sitemap and llms-full enumeration gap\""
+        ],
+        "notes": "Opened https://github.com/fermatmind/fap-api/pull/1868. Search submission remains NO-GO."
+      }
+    },
+    "failure_reason": "NO-GO for search submission: sitemap.xml and llms-full.txt still do not enumerate the canary URLs. Backend sitemap-source is serving stale cache, frontend sitemap.xml is a static build artifact, and llms-full is blocked by response cache/revalidation gap.",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": null,
+      "production_write_execution": false,
+      "database_mutation": false,
+      "cms_mutation": false,
+      "publish_performed": false,
+      "search_submission_performed": false,
+      "runtime_code_edit_performed": false,
+      "frontend_edit_performed": false,
+      "fap_web_readonly_inspection": true,
+      "backend_sitemap_generator_contains_canary": true,
+      "backend_sitemap_source_stale_cache_contains_canary": false,
+      "frontend_sitemap_contains_canary": false,
+      "llms_txt_contains_canary": true,
+      "llms_full_contains_canary": false
+    },
+    "transitions": [
+      {
+        "at": "2026-06-03T13:04:00+08:00",
+        "from": "missing",
+        "to": "local_checks_pending",
+        "note": "User explicitly authorized adding and executing SEO-REVIEW-P1-10-SITEMAP-LLMS-ENUMERATION-01, including manifest/state updates. Started docs-only investigation. Search submission, publish, CMS mutation, runtime code edits, and fap-web edits remain forbidden."
+      },
+      {
+        "at": "2026-06-03T13:16:00+08:00",
+        "from": "local_checks_pending",
+        "to": "local_checks_passed_no_go_search_submission",
+        "note": "Created the docs-only enumeration investigation report and passed JSON/YAML/scoped diff validation. Search submission remains NO-GO because sitemap.xml and llms-full.txt still do not enumerate the canary URLs."
+      },
+      {
+        "at": "2026-06-03T13:20:00+08:00",
+        "from": "local_checks_passed_no_go_search_submission",
+        "to": "pr_open_no_go_search_submission",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/1868. No search submission, publish, CMS mutation, runtime edit, fap-web edit, test edit, or GPT content edit was performed."
+      }
+    ],
+    "sidecars": [
+      {
+        "id": "search_submission_no_go",
+        "status": "active_blocker",
+        "note": "Do not submit sitemap, Baidu push, IndexNow, or search console URLs until sitemap.xml and llms-full.txt enumerate the canary URLs."
+      },
+      {
+        "id": "backend_sitemap_source_stale_cache",
+        "status": "active",
+        "note": "Direct backend SitemapGenerator includes the canary URLs, but live backend sitemap-source serves stale cache without them."
+      },
+      {
+        "id": "frontend_sitemap_static_build_artifact",
+        "status": "active",
+        "note": "Frontend sitemap.xml is a generated static artifact and cannot include post-build CMS publishes without rebuild/deploy or a runtime enumeration fix."
+      },
+      {
+        "id": "llms_full_response_cache_gap",
+        "status": "active",
+        "note": "llms-full.txt currently serves a cached artifact generated at 2026-06-03T04:43:43.012Z that does not contain the canary URLs."
+      }
+    ],
+    "next_task": "SEO-REVIEW-P1-10-SITEMAP-LLMS-FIX-01 proposed in fap-web; search submission remains forbidden."
   }
 }
