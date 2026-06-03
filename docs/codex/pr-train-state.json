@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-03T13:56:18Z",
+  "updated_at": "2026-06-03T13:58:44Z",
   "items": {
     "SEO-CMS-CANARY-BE-01": {
       "repo": "fap-api",
@@ -42405,11 +42405,36 @@
         "notes": "Focused contract test passed: 6 tests, 113 assertions. Existing SeoIntelLogicalDbFoundationTest, SeoIntelCmsIssueQueueSummaryTest, and SeoIntelIssueSeverityGovernanceContractTest passed. Scoped Pint check passed for the new PHP test. JSON/YAML parse checks, scoped git diff whitespace check, and cached diff whitespace check passed."
       },
       "github": {
-        "status": "pending",
-        "required_checks": []
+        "status": "failed_external_supply_chain",
+        "required_checks": [
+          "hygiene",
+          "supply-chain",
+          "content-pack-build-validate",
+          "verify-mbti-${{ matrix.mode }}",
+          "verify-bigfive",
+          "Semgrep blocking secrets"
+        ],
+        "failed_checks": [
+          {
+            "name": "supply-chain",
+            "url": "https://github.com/fermatmind/fap-api/actions/runs/26889576685/job/79311555731",
+            "reason": "composer audit reported laravel/framework advisory PKSA-mdq4-51ck-6kdq / CVE-2026-48019 / GHSA-5vg9-5847-vvmq."
+          }
+        ],
+        "passed_checks": [
+          "hygiene",
+          "Semgrep blocking secrets",
+          "Semgrep OSS",
+          "semgrep sarif non-blocking upload"
+        ],
+        "skipped_checks": [
+          "content-pack-build-validate",
+          "verify-mbti-${{ matrix.mode }}",
+          "verify-bigfive"
+        ]
       }
     },
-    "failure_reason": null,
+    "failure_reason": "GitHub required supply-chain check failed because composer audit reported a laravel/framework security advisory. This is outside the docs/contract scope and must be handled by a separate dependency/supply-chain PR before this PR can merge.",
     "pr_url": null,
     "commit_sha": null,
     "merged_at": null,
@@ -42418,7 +42443,7 @@
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": null,
+      "github_checks_green": false,
       "post_merge_revalidated": null,
       "runtime_code_edit_performed": false,
       "api_route_added": false,
@@ -42456,6 +42481,12 @@
         "from": "commit_created",
         "to": "pr_open",
         "note": "Opened https://github.com/fermatmind/fap-api/pull/1873 for GitHub checks and merge review."
+      },
+      {
+        "at": "2026-06-03T13:58:44Z",
+        "from": "pr_open",
+        "to": "github_checks_failed",
+        "note": "Stopped before merge because required supply-chain failed: composer audit reported laravel/framework advisory PKSA-mdq4-51ck-6kdq / CVE-2026-48019 / GHSA-5vg9-5847-vvmq. No out-of-scope composer dependency change was made in this docs/contract PR."
       }
     ],
     "sidecars": [],
