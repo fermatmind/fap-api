@@ -40837,11 +40837,11 @@
   "SEO-CONTENT-CANARY-EN-METADATA-01": {
     "repo": "fap-api",
     "branch": "codex/seo-content-canary-en-metadata-01",
-    "status": "pr_open",
+    "status": "merged",
     "depends_on": [
       "SEO-CMS-CANARY-IMPORTER-SCHEMA-GATE-01"
     ],
-    "commit_sha": "0d8eeababcf6cdd25ab9206d21e4f3a94e2e951f",
+    "commit_sha": "2b2be0c5c14ebe3b1bd5714a1789cce2193fbb6b",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1863",
     "checks": {
       "dependency_verification": {
@@ -40866,17 +40866,25 @@
           "git diff --cached --check"
         ],
         "notes": "English source artifact changed only seo_title and seo_description; English adapter changed only seo_title, seo_description, and meta_description. New lengths are seo_title=53 and seo_description=152. body_markdown, H1, FAQ, CTA labels/hrefs, internal links, publish_allowed=false, and translation_group_id remained unchanged. Isolated testing SQLite importer dry-run passed with ok=true, action=will_create, errors=[], and no real import/draft/publish was performed."
+      },
+      "github": {
+        "status": "passed",
+        "commands": [
+          "gh pr view 1863 --repo fermatmind/fap-api --json number,state,mergedAt,mergeCommit,url,headRefName,headRefOid,statusCheckRollup,mergeStateStatus"
+        ],
+        "notes": "GitHub PR #1863 is MERGED; all statusCheckRollup entries completed successfully before merge."
       }
     },
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-03T02:23:18Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": null
+      "post_merge_revalidated": true,
+      "origin_main_contains_merge_commit": true
     },
     "transitions": [
       {
@@ -40902,9 +40910,289 @@
         "from": "pr_open",
         "to": "github_checks_passed",
         "note": "GitHub checks for PR #1863 passed with mergeStateStatus=CLEAN before ledger update. No CMS draft, publish, production write action, runtime code, tests, database, routes, frontend, sitemap, Baidu, or IndexNow action was performed."
+      },
+      {
+        "at": "2026-06-03T11:36:00+08:00",
+        "from": "github_checks_passed",
+        "to": "merged",
+        "note": "Reconciled before SEO-CONTENT-P1-08-POSTCHECK-ARCHIVE-01: GitHub PR #1863 is merged with merge commit 76b40c07b5eb679e7b593aca2007a77e1e56d4d7, origin/main contains that commit, and the remote task branch is absent. Publish remains forbidden."
       }
     ],
     "sidecars": [],
-    "next_task": "After merge and production deploy of this metadata artifact, rerun SEO-CONTENT-P1-08 preflight; if dry-run and absence gates pass, EN draft-only creation may be retried with separate explicit authorization. Publish remains forbidden."
+    "next_task": "SEO-CONTENT-P1-08 draft-only execution has completed; SEO-CONTENT-P1-08-POSTCHECK-ARCHIVE-01 archives the passed postcheck report and keeps publish blocked."
+  },
+  "SEO-CONTENT-P1-08": {
+    "repo": "fap-api",
+    "branch": "production-controlled-importer-execution",
+    "status": "draft_created_postcheck_passed_publish_blocked_editorial_review_next",
+    "depends_on": [
+      "SEO-CONTENT-CANARY-EN-METADATA-01"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "draft_execution": {
+        "status": "passed",
+        "commands": [
+          "controlled production articles:import-editorial-package execution for zh-CN and en adapters after explicit user authorization"
+        ],
+        "notes": "SEO-CONTENT-P1-08 draft-only execution created zh-CN article 37 and en article 39 through the controlled editorial package importer. Both are status=draft, is_public=false, is_indexable=false, published_revision_id=null. No publish, sitemap submission, Baidu push, IndexNow, or search submission was performed."
+      },
+      "postcheck": {
+        "status": "passed",
+        "commands": [
+          "read-only production CMS/DB checks",
+          "read-only public page/API/sitemap/llms checks",
+          "deployed frontend SHA tracking readiness inspection"
+        ],
+        "notes": "SEO-CONTENT-P1-08-POSTCHECK-01 returned GO. Package equivalence, public absence, sitemap/llms absence, CTA safety, article_to_test_click readiness, and schema readiness passed. Preview gap remains."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": null,
+    "local_cleanup_executed": null,
+    "scope_validation": {
+      "drafts_created": true,
+      "postcheck_passed": true,
+      "publish_blocked": true,
+      "editorial_review_next": true,
+      "search_submission_forbidden": true
+    },
+    "drafts": {
+      "zh_CN": {
+        "article_id": 37,
+        "slug": "mbti-vs-holland-career-choice",
+        "locale": "zh-CN",
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "published_revision_id": null
+      },
+      "en": {
+        "article_id": 39,
+        "slug": "mbti-vs-holland-code-career-choice",
+        "locale": "en",
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "published_revision_id": null
+      },
+      "translation_group_id": "article_mbti_vs_holland_career_choice_v1"
+    },
+    "transitions": [
+      {
+        "at": "2026-06-03T11:36:00+08:00",
+        "from": "authorized_draft_only_execution",
+        "to": "draft_created_postcheck_passed_publish_blocked",
+        "note": "Recorded completed SEO-CONTENT-P1-08 draft-only execution and passed postcheck. Current next step is editorial/operator review. Publish remains blocked; preview gap remains; search submission remains forbidden."
+      }
+    ],
+    "sidecars": [
+      {
+        "id": "SEO-CMS-CANARY-PREVIEW-GAP",
+        "status": "open_publish_blocker",
+        "note": "Rendered safe preview route is not confirmed. Publish requires resolving preview/noindex validation or explicitly accepting CMS-only inspection as the publish-readiness substitute."
+      },
+      {
+        "id": "SEO-CONTENT-P1-08-PUBLISH-APPROVAL",
+        "status": "required_before_publish",
+        "note": "Publish requires separate explicit approval and must not be inferred from draft creation or postcheck archive."
+      },
+      {
+        "id": "SEO-CONTENT-P1-08-SEARCH-SUBMISSION-FORBIDDEN",
+        "status": "active",
+        "note": "Sitemap submission, Baidu push, IndexNow, and search submission remain forbidden."
+      }
+    ],
+    "next_task": "SEO-CMS-CANARY-EDITORIAL-REVIEW-01"
+  },
+  "SEO-CONTENT-P1-08-POSTCHECK-ARCHIVE-01": {
+    "repo": "fap-api",
+    "branch": "codex/seo-content-p1-08-postcheck-archive-01",
+    "status": "local_checks_passed",
+    "depends_on": [
+      "SEO-CONTENT-P1-08"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {
+      "report_archive": {
+        "status": "passed",
+        "commands": [
+          "test -f backend/docs/seo/seo-content-p1-08-postcheck-2026-06-03.md",
+          "python3 inline required-marker validation for postcheck report"
+        ],
+        "notes": "Existing postcheck report is present and contains required GO, draft state, public/API absence, sitemap/llms absence, CTA safety, article_to_test_click readiness, schema readiness, preview gap, editorial/operator review readiness, and publish-forbidden markers. Only a format marker summary line was added to satisfy exact archive wording; no content asset was rewritten."
+      },
+      "local": {
+        "status": "passed",
+        "commands": [
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "git diff --check -- backend/docs/seo docs/codex",
+          "python3 inline required-marker validation for postcheck report"
+        ],
+        "notes": "JSON parse, YAML parse, scoped whitespace diff check, and report marker validation passed. No draft creation, publish, importer execution, production write API, content asset edit, runtime code edit, tests edit, frontend edit, sitemap submission, Baidu push, IndexNow, or search submission was performed."
+      }
+    },
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": null,
+      "post_merge_revalidated": null
+    },
+    "transitions": [
+      {
+        "at": "2026-06-03T11:36:00+08:00",
+        "from": "missing",
+        "to": "local_checks_pending",
+        "note": "User authorized SEO-CONTENT-P1-08-POSTCHECK-ARCHIVE-01 as docs-only archive plus PR train ledger reconciliation. Scope is limited to the postcheck report and docs/codex manifest/state. No draft creation, publish, importer run, production write API, content asset edit, runtime code change, tests change, sitemap submission, Baidu push, IndexNow, or search submission is allowed."
+      },
+      {
+        "at": "2026-06-03T11:40:00+08:00",
+        "from": "local_checks_pending",
+        "to": "local_checks_passed",
+        "note": "Archived the existing postcheck report, added PR train manifest/state entries for P1-08, archive, editorial review, preview, P1-09, and P1-10, reconciled #1863 as merged, and passed local docs/codex validation. Publish and search submission remain forbidden."
+      }
+    ],
+    "sidecars": [
+      {
+        "id": "preview_gap_remains",
+        "status": "open_publish_blocker",
+        "note": "Preview gap remains. Publish requires a safe preview/noindex path or explicit acceptance of CMS-only inspection before publish readiness can pass."
+      },
+      {
+        "id": "publish_requires_separate_explicit_approval",
+        "status": "active",
+        "note": "Publish remains blocked and requires a separate exact approval after review gates pass."
+      },
+      {
+        "id": "search_submission_remains_forbidden",
+        "status": "active",
+        "note": "Search submission, sitemap submission, Baidu push, and IndexNow remain forbidden."
+      }
+    ],
+    "next_task": "SEO-CMS-CANARY-EDITORIAL-REVIEW-01"
+  },
+  "SEO-CMS-CANARY-EDITORIAL-REVIEW-01": {
+    "repo": "fap-api",
+    "branch": "codex/seo-cms-canary-editorial-review-01",
+    "status": "planned",
+    "depends_on": [
+      "SEO-CONTENT-P1-08-POSTCHECK-ARCHIVE-01"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "publish_blocked": true,
+      "search_submission_forbidden": true
+    },
+    "transitions": [
+      {
+        "at": "2026-06-03T11:36:00+08:00",
+        "from": "missing",
+        "to": "planned",
+        "note": "Next planned task: editorial/operator review of the bilingual canary drafts. Do not publish. Publish remains forbidden; search submission remains forbidden."
+      }
+    ],
+    "sidecars": [],
+    "next_task": null
+  },
+  "SEO-CMS-CANARY-PREVIEW-01": {
+    "repo": "fap-api",
+    "branch": "codex/seo-cms-canary-preview-01",
+    "status": "conditional_blocked_until_preview_required",
+    "depends_on": [
+      "SEO-CMS-CANARY-EDITORIAL-REVIEW-01"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "publish_blocked": true,
+      "search_submission_forbidden": true
+    },
+    "transitions": [
+      {
+        "at": "2026-06-03T11:36:00+08:00",
+        "from": "missing",
+        "to": "conditional_blocked_until_preview_required",
+        "note": "Conditional task only if rendered preview is required before publish and CMS-only inspection is not accepted. Publish remains forbidden; search submission remains forbidden."
+      }
+    ],
+    "sidecars": [],
+    "next_task": null
+  },
+  "SEO-CONTENT-P1-09": {
+    "repo": "fap-api",
+    "branch": "codex/seo-content-p1-09",
+    "status": "blocked_until_editorial_review_and_publish_approval",
+    "depends_on": [
+      "SEO-CMS-CANARY-EDITORIAL-REVIEW-01"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "publish_blocked": true,
+      "search_submission_forbidden": true
+    },
+    "transitions": [
+      {
+        "at": "2026-06-03T11:36:00+08:00",
+        "from": "missing",
+        "to": "blocked_until_editorial_review_and_publish_approval",
+        "note": "Blocked until editorial/operator review passes and separate publish approval is granted. Publish remains forbidden; search submission remains forbidden."
+      }
+    ],
+    "sidecars": [],
+    "next_task": null
+  },
+  "SEO-REVIEW-P1-10": {
+    "repo": "fap-api",
+    "branch": "codex/seo-review-p1-10",
+    "status": "blocked_until_publish",
+    "depends_on": [
+      "SEO-CONTENT-P1-09"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "checks": {},
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "publish_blocked": true,
+      "search_submission_forbidden": true
+    },
+    "transitions": [
+      {
+        "at": "2026-06-03T11:36:00+08:00",
+        "from": "missing",
+        "to": "blocked_until_publish",
+        "note": "Blocked until controlled publish occurs. Publish remains forbidden; search submission remains forbidden."
+      }
+    ],
+    "sidecars": [],
+    "next_task": null
   }
 }
