@@ -20310,7 +20310,7 @@ prs:
     branch: codex/seo-content-p1-09-publish-preflight-01
     title: "docs(cms): run SEO canary publish preflight"
     train_scope: seo_cms_canary
-    status: no_go_blocked_revision_approval_required
+    status: merged_then_controlled_publish_completed
     scope:
       - Run controlled publish preflight only for the bilingual SEO canary drafts.
       - Validate production draft state, controlled publish dry-run behavior, no-write guarantee, public absence, and publish blockers.
@@ -20342,7 +20342,7 @@ prs:
     fap_web_commit_allowed: false
     frontend_fallback_authority: false
     content_authority: CMS/backend
-    next_task: Authorized operator approval of working revisions 42 and 44 without publish, then rerun controlled publish preflight
+    next_task: SEO-REVIEW-P1-10 post-publish signals review
 
   - id: SEO-REVIEW-P1-10
     repo: fap-api
@@ -20351,7 +20351,7 @@ prs:
     branch: codex/seo-review-p1-10
     title: "docs(cms): review SEO canary post-publish signals"
     train_scope: seo_cms_canary
-    status: blocked_until_publish
+    status: completed_sitemap_and_llms_full_not_converged
     scope:
       - Review post-publish public/search signals only after controlled publish occurs.
     allowed_paths:
@@ -20378,4 +20378,4 @@ prs:
     fap_web_commit_allowed: false
     frontend_fallback_authority: false
     content_authority: CMS/backend
-    next_task: none
+    next_task: SEO-REVIEW-P1-10-SITEMAP-LLMS-ENUMERATION-01 proposed; search submission remains forbidden until sitemap and llms-full enumeration are understood or resolved
