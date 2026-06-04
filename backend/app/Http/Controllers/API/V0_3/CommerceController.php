@@ -9,6 +9,7 @@ use App\Services\Commerce\Checkout\AlipayCheckoutService;
 use App\Services\Commerce\Checkout\LemonSqueezyCheckoutService;
 use App\Services\Commerce\Checkout\WechatPayCheckoutService;
 use App\Services\Commerce\Compensation\PendingOrderCompensationService;
+use App\Services\Commerce\FreemiumLocalePolicy;
 use App\Services\Commerce\MbtiAccessHubBuilder;
 use App\Services\Commerce\OrderManager;
 use App\Services\Commerce\SkuCatalog;
@@ -47,6 +48,7 @@ class CommerceController extends Controller
         private AlipayCheckoutService $alipayCheckout,
         private ResultAccessTokenService $resultAccessTokens,
         private PendingOrderCompensationService $pendingOrderCompensation,
+        private FreemiumLocalePolicy $freemiumLocalePolicy,
     ) {}
 
     /**
@@ -59,11 +61,17 @@ class CommerceController extends Controller
             abort(400, 'scale is required.');
         }
 
+        $locale = $this->resolveExplicitRequestedLocale($request);
         $items = $this->skus->listActiveSkus($scale, $this->orgContext->orgId());
+        if ($locale !== null) {
+            $items = $this->freemiumLocalePolicy->filterSkuItems($items, $scale, $locale);
+        }
+        $localePolicy = $this->freemiumLocalePolicy->resolve($scale, $locale);
 
         return response()->json([
             'ok' => true,
             'items' => $items,
+            FreemiumLocalePolicy::PAYLOAD_KEY => $this->freemiumLocalePolicy->frontendPayload($localePolicy),
         ]);
     }
 
@@ -109,6 +117,15 @@ class CommerceController extends Controller
             $userId !== null ? (string) $userId : null,
             $anonId !== null ? (string) $anonId : null
         );
+        $localePolicyViolation = $this->freemiumLocalePolicyOrderViolation(
+            $request,
+            $payload,
+            $targetAttemptId,
+            $orgId
+        );
+        if ($localePolicyViolation !== null) {
+            return $localePolicyViolation;
+        }
 
         $result = $this->orders->createOrder(
             $orgId,
@@ -1536,6 +1553,108 @@ class CommerceController extends Controller
         }
 
         return null;
+    }
+
+    private function resolveExplicitRequestedLocale(Request $request): ?string
+    {
+        foreach ([
+            $request->query('locale'),
+            $request->header('X-Fap-Locale', ''),
+            $request->header('X-Locale', ''),
+        ] as $candidate) {
+            $normalized = $this->trimNullableString($candidate);
+            if ($normalized !== null) {
+                return $normalized;
+            }
+        }
+
+        return null;
+    }
+
+    private function freemiumLocalePolicyOrderViolation(
+        Request $request,
+        array $payload,
+        ?string $targetAttemptId,
+        int $orgId
+    ): ?JsonResponse {
+        $resolved = $this->skus->resolveSkuMeta((string) ($payload['sku'] ?? ''), null, $orgId);
+        $skuRow = $resolved['sku_row'] ?? null;
+        if (! $skuRow) {
+            return null;
+        }
+
+        $skuScaleCode = strtoupper(trim((string) ($skuRow->scale_code ?? '')));
+        $requestedLocale = $this->resolveExplicitRequestedLocale($request);
+        $policy = $this->freemiumLocalePolicy->resolve($skuScaleCode, $requestedLocale);
+        if (! (bool) ($policy['applies'] ?? false)) {
+            return null;
+        }
+
+        if ($targetAttemptId === null) {
+            return $this->freemiumLocalePolicyErrorResponse(
+                'LOCALE_POLICY_ATTEMPT_REQUIRED',
+                'target_attempt_id is required for this locale policy.',
+                $policy
+            );
+        }
+
+        $attempt = DB::table('attempts')
+            ->select(['id', 'org_id', 'scale_code', 'locale'])
+            ->where('org_id', $orgId)
+            ->where('id', $targetAttemptId)
+            ->first();
+        if (! $attempt) {
+            return null;
+        }
+
+        $attemptScaleCode = strtoupper(trim((string) ($attempt->scale_code ?? '')));
+        if ($attemptScaleCode !== '' && $skuScaleCode !== '' && $attemptScaleCode !== $skuScaleCode) {
+            return $this->freemiumLocalePolicyErrorResponse(
+                'LOCALE_POLICY_SCALE_MISMATCH',
+                'SKU scale does not match target attempt scale.',
+                $this->freemiumLocalePolicy->resolve($skuScaleCode, $requestedLocale)
+            );
+        }
+
+        $validation = $this->freemiumLocalePolicy->validateOrderRequest(
+            $attemptScaleCode !== '' ? $attemptScaleCode : $skuScaleCode,
+            is_string($attempt->locale ?? null) ? (string) $attempt->locale : null,
+            $requestedLocale,
+            (string) ($payload['sku'] ?? ''),
+            is_string($resolved['effective_sku'] ?? null) ? (string) $resolved['effective_sku'] : null,
+            is_string($skuRow->currency ?? null) ? (string) $skuRow->currency : null,
+            isset($skuRow->price_cents) ? (int) $skuRow->price_cents : null
+        );
+
+        if ((bool) ($validation['ok'] ?? false)) {
+            return null;
+        }
+
+        return $this->freemiumLocalePolicyErrorResponse(
+            (string) ($validation['error_code'] ?? 'LOCALE_POLICY_STOP_CONDITION'),
+            (string) ($validation['message'] ?? 'locale policy rejected order creation.'),
+            is_array($validation['policy'] ?? null) ? $validation['policy'] : $policy,
+            (int) ($validation['status'] ?? 422)
+        );
+    }
+
+    /**
+     * @param  array<string,mixed>  $policy
+     */
+    private function freemiumLocalePolicyErrorResponse(
+        string $errorCode,
+        string $message,
+        array $policy,
+        int $status = 422
+    ): JsonResponse {
+        return response()->json([
+            'ok' => false,
+            'error_code' => $errorCode,
+            'message' => $message,
+            'details' => [
+                FreemiumLocalePolicy::PAYLOAD_KEY => $this->freemiumLocalePolicy->frontendPayload($policy),
+            ],
+        ], $status);
     }
 
     /**

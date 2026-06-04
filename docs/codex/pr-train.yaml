@@ -20978,7 +20978,7 @@ prs:
     branch: codex/daily-giving-ops-readiness-scan-01
     title: "docs(benefit): scan daily giving operations readiness"
     train_scope: commercial_readiness_day1
-    status: executing
+    status: merged
     depends_on:
       - FREEMIUM-LOCALE-POLICY-SCAN-01
     scope:
@@ -21016,3 +21016,60 @@ prs:
     frontend_fallback_authority: false
     content_authority: backend
     next_task: Day 1 commercial readiness summary after merge
+
+  - id: FREEMIUM-LOCALE-POLICY-01
+    repo: fap-api
+    branch: codex/freemium-locale-policy-01
+    title: "feat(commerce): add backend-authoritative freemium locale policy"
+    train_scope: commercial_readiness_day1
+    status: executing
+    depends_on:
+      - FREEMIUM-LOCALE-POLICY-SCAN-01
+    scope:
+      - Add a backend-owned locale freemium policy source for MBTI English and Chinese commerce/report access.
+      - Encode English full/free handling through 2026-12-31 so English locale traffic cannot see or trigger the Chinese CNY paywall.
+      - Encode Chinese free module plus CNY 1.99 full-report unlock handling with explicit SKU, currency, price, and module matrix.
+      - Gate report offers, SKU discovery, and pre-order creation through the same backend policy.
+      - Document policy source, matrix, mismatch stops, and frontend consumption contract.
+    allowed_paths:
+      - backend/app/Http/Controllers/API/V0_3/CommerceController.php
+      - backend/app/Services/Commerce/FreemiumLocalePolicy.php
+      - backend/app/Services/Report/ReportGatekeeper.php
+      - backend/app/Services/Report/Resolvers/OfferResolver.php
+      - backend/config/freemium_locale_policy.php
+      - backend/docs/operations/freemium-locale-policy-01.md
+      - backend/tests/Feature/Commerce/FreemiumLocalePolicyTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change payment provider behavior, payment provider configuration, webhooks, provider SDK calls, checkout provider routing, or real payment behavior.
+      - Trigger real payments, create production orders, read secrets/tokens/orderNo/payment ids, publish, deploy, or mutate CMS content.
+      - Add landing page copy, CMS content, frontend fallback authority, or fap-web changes.
+      - Replace backend authority with frontend-inferred commercial rules.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Commerce/FreemiumLocalePolicyTest.php --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Commerce/MbtiCommerceConsolidationTest.php --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_3/ReportPaywallTeaserTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/Commerce/FreemiumLocalePolicy.php app/Services/Report/Resolvers/OfferResolver.php app/Services/Report/ReportGatekeeper.php app/Http/Controllers/API/V0_3/CommerceController.php tests/Feature/Commerce/FreemiumLocalePolicyTest.php config/freemium_locale_policy.php
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- backend/app/Http/Controllers/API/V0_3/CommerceController.php backend/app/Services/Commerce/FreemiumLocalePolicy.php backend/app/Services/Report/ReportGatekeeper.php backend/app/Services/Report/Resolvers/OfferResolver.php backend/config/freemium_locale_policy.php backend/docs/operations/freemium-locale-policy-01.md backend/tests/Feature/Commerce/FreemiumLocalePolicyTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: backend
+    repository_rule_impact: backend commerce/report policy authority now includes locale freemium policy source and frontend consumption contract.
+    next_task: fap-web consume backend locale freemium policy without frontend-inferred commercial rules
