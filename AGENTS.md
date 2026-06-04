@@ -38,6 +38,8 @@ C. Minimal acceptance commands set:
    - `curl` examples
    - `bash backend/scripts/ci_verify_mbti.sh`
 
+For docs-only, rules-only, and generated-contract-only changes, C may state that runtime commands are not applicable and list the lightweight checks that were actually run.
+
 If A/B/C is missing, the answer is incomplete.
 
 ### Extra constraint
@@ -74,6 +76,8 @@ Prefer a repo-compatible default implementation and mark options as optional.
 
 ### PR Train Manifest Discipline
 - If a requested PR train item is missing from `docs/codex/pr-train.yaml`, stop and report the gap unless the user explicitly authorizes updating the train manifest and state ledger.
+- This stop rule applies only when the user requested a PR-train item. It must not block an explicitly requested ad-hoc PR whose scope does not modify PR-train metadata.
+- Only PR-train work requires a PR id and PR-train metadata. Ordinary scoped PRs may be opened without a train id and must not touch PR-train metadata unless explicitly requested.
 - If the user explicitly authorizes proceeding with a missing PR train item, Codex may add the missing `docs/codex/pr-train.yaml` and `docs/codex/pr-train-state.json` entries first, then continue under the declared scope.
 - Never invent a PR id or scope that is not either:
   - already present in the manifest, or
@@ -88,6 +92,8 @@ Prefer a repo-compatible default implementation and mark options as optional.
   - a follow-up execution prompt that explicitly asks for manifest/state authorization
 - Scan/planning-only tasks must not modify `docs/codex/pr-train.yaml` or `docs/codex/pr-train-state.json` unless the user explicitly authorizes manifest/state updates in that same turn.
 - If the user provides a concrete `/goal` or equivalent execution request with an explicit PR id, title, and scope, Codex may treat those as user-provided manifest details. If the id is missing from the manifest, Codex may add the manifest/state entry before implementation only when the user also explicitly authorizes updating both files.
+- After merging a PR-train PR, close its state as `merged` in the same workflow whenever possible.
+- If branch protection prevents direct ledger closeout, use one ledger-only follow-up PR with no new train id.
 
 ### Controlled CMS Publish Discipline
 - Controlled Codex-assisted article publish is permitted only through the backend `articles:publish-controlled` command after exact user confirmation, successful preflight, explicit boundary-context claim-warning acknowledgement when needed, and audit logging.
