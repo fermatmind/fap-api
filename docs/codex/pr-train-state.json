@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-04T01:42:00+08:00",
+  "updated_at": "2026-06-04T10:30:20+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -76,7 +76,7 @@
     "repo": "fap-api",
     "branch": "codex/daily-giving-ops-readiness-scan-01",
     "base": "main",
-    "status": "pr_open",
+    "status": "merged",
     "train_scope": "commercial_readiness_day1",
     "title": "docs(benefit): scan daily giving operations readiness",
     "depends_on": [
@@ -43046,21 +43046,21 @@
         "evidence": "PR #1882 checks passed on GitHub before merge review: Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
       },
       "post_merge_cleanup": {
-        "status": "pending",
-        "evidence": null
+        "status": "pass",
+        "evidence": "Ledger reconciliation in SEO-DASH-COLLECTOR-02: PR #1882 is MERGED, origin/main contains merge commit 1b88323eb05d579e847d37b0e89ed24464b1924c, local main was clean before this task branch, and local/remote task branches were absent."
       }
     },
     "failure_reason": null,
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1882",
-    "commit_sha": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "commit_sha": "1b88323eb05d579e847d37b0e89ed24464b1924c",
+    "merged_at": "2026-06-04T01:38:00Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
       "github_checks_green": true,
-      "post_merge_revalidated": false,
+      "post_merge_revalidated": true,
       "runtime_route_changed": false,
       "migration_files_changed": false,
       "production_collector_smoke_executed_in_pr": false,
@@ -43102,9 +43102,98 @@
         "from": "pr_open",
         "to": "github_checks_green",
         "note": "GitHub checks passed for PR #1882 before merge review."
+      },
+      {
+        "at": "2026-06-04T02:20:36Z",
+        "from": "github_checks_green",
+        "to": "merged",
+        "note": "Ledger reconciliation only: PR #1882 is merged at 1b88323eb05d579e847d37b0e89ed24464b1924c; origin/main contains the merge commit and local/remote task branch cleanup was complete before SEO-DASH-COLLECTOR-02 started."
       }
     ],
     "sidecars": [],
     "next_task": "SEO-DASH-COLLECTOR-02 controlled collector runbook or write gate"
+  },
+  "SEO-DASH-COLLECTOR-02": {
+    "repo": "fap-api",
+    "branch": "codex/seo-dash-collector-02-write-gate",
+    "base": "main",
+    "status": "local_validation_passed",
+    "train_scope": "seo_intel_controlled_collector_write_gate",
+    "title": "docs(seo): define controlled collector write gate",
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding SEO-DASH-COLLECTOR-02 to docs/codex/pr-train.yaml and docs/codex/pr-train-state.json, reconciling SEO-DASH-COLLECTOR-01-SMOKE-RECONCILE as merged in the same PR, and executing a docs/contract PR without runtime, scheduler, production write, external API, or deploy changes."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "SEO-DASH-COLLECTOR-01-SMOKE-RECONCILE PR #1882 is merged at 1b88323eb05d579e847d37b0e89ed24464b1924c; older SEO-DASH-PROD-03A controlled write plan is merged at 11c68e408abd2b6c0102b0656c0598bc1dd0b677."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to backend/docs/seo/seo-dash-collector-02-controlled-write-gate.md, backend/docs/seo/generated/seo-dash-collector-02-controlled-write-gate.v1.json, backend/tests/Feature/SeoIntel/SeoDashCollector02ControlledWriteGateTest.php, docs/codex/pr-train.yaml, and docs/codex/pr-train-state.json. ci_verify_mbti.sh regenerated BIG5_OCEAN compiled artifacts during validation; those generated diffs were restored and are not included in this PR. No runtime, scheduler, production write, external API, CMS, search submission, deployment, production env, or fap-web changes were made."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoDashCollector02ControlledWriteGateTest --no-ansi",
+          "cd backend && vendor/bin/pint --test tests/Feature/SeoIntel/SeoDashCollector02ControlledWriteGateTest.php",
+          "cd backend && php artisan route:list --path=api/v0.5/ops/seo-intel --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi",
+          "python3 -m json.tool backend/docs/seo/generated/seo-dash-collector-02-controlled-write-gate.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "git diff --check -- backend/docs/seo/seo-dash-collector-02-controlled-write-gate.md backend/docs/seo/generated/seo-dash-collector-02-controlled-write-gate.v1.json backend/tests/Feature/SeoIntel/SeoDashCollector02ControlledWriteGateTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+          "bash backend/scripts/ci_verify_mbti.sh",
+          "git diff --cached --check"
+        ],
+        "notes": "PASS: focused SeoDashCollector02ControlledWriteGateTest, Pint check, seo-intel route list, sqlite migrate --pretend, generated JSON validation, pr-train-state JSON validation, pr-train YAML validation, scoped git diff --check, bash backend/scripts/ci_verify_mbti.sh, and git diff --cached --check."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": null
+      },
+      "post_merge_cleanup": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "failure_reason": null,
+    "pr_url": null,
+    "commit_sha": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false,
+      "runtime_route_changed": false,
+      "migration_files_changed": false,
+      "production_write_executed": false,
+      "scheduler_enabled": false,
+      "external_api_connected": false,
+      "cms_mutation": false,
+      "search_submission_performed": false,
+      "fap_web_modified": false,
+      "deploy_performed": false
+    },
+    "transitions": [
+      {
+        "at": "2026-06-04T02:20:36Z",
+        "from": "missing",
+        "to": "executing",
+        "note": "Started authorized SEO-DASH-COLLECTOR-02 docs/contract PR. Scope is limited to controlled collector write gate docs, generated artifact, focused contract test, and PR train metadata; no production write or runtime enablement is allowed."
+      },
+      {
+        "at": "2026-06-04T02:30:20Z",
+        "from": "executing",
+        "to": "local_validation_passed",
+        "note": "Local validation passed. Scope stayed within docs/generated/focused test/pr-train metadata; generated BIG5_OCEAN compiled diffs from ci_verify_mbti.sh were restored before staging."
+      }
+    ],
+    "sidecars": [],
+    "next_task": "approval-gated url_truth_inventory controlled write canary preflight"
   }
 }
