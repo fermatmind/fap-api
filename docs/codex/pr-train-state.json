@@ -42899,7 +42899,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-dash-collector-01-readiness",
     "base": "main",
-    "status": "pr_open",
+    "status": "merged",
     "train_scope": "seo_intel_collector_dry_run_readiness",
     "title": "docs(seo): define post-migration collector dry-run readiness",
     "checks": {
@@ -42932,25 +42932,25 @@
         "notes": "Focused readiness test, scoped Pint, seo-intel route list, default sqlite migrate --pretend, JSON/YAML parse checks, scoped diff check, and full bash backend/scripts/ci_verify_mbti.sh passed. ci_verify_mbti.sh regenerated BIG5_OCEAN compiled artifacts and they were restored because they are outside this PR scope."
       },
       "github": {
-        "status": "pending",
-        "evidence": "PR #1880 opened; GitHub checks pending."
+        "status": "pass",
+        "evidence": "PR #1880 merged on GitHub at merge commit eddebd8d2392f2416cbb1f00802a6002eed45fdf; origin/main contains the merge commit and GitHub checks were green before merge."
       },
       "post_merge_cleanup": {
-        "status": "pending",
-        "evidence": null
+        "status": "pass",
+        "evidence": "Post-merge reconciliation verified local main equals origin/main, origin/main contains merge commit eddebd8d2392f2416cbb1f00802a6002eed45fdf, worktree is clean, and local/remote task branches are absent."
       }
     },
     "failure_reason": null,
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1880",
-    "commit_sha": "cae01a41124ce461f94bcbc0743087bce9f05b08",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "commit_sha": "eddebd8d2392f2416cbb1f00802a6002eed45fdf",
+    "merged_at": "2026-06-04T00:47:44Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
-      "post_merge_revalidated": false,
+      "github_checks_green": true,
+      "post_merge_revalidated": true,
       "runtime_route_changed": false,
       "migration_files_changed": false,
       "production_migration_executed": false,
@@ -42993,9 +42993,16 @@
         "from": "ledger_commit_sha_recorded",
         "to": "pr_open",
         "note": "Opened https://github.com/fermatmind/fap-api/pull/1880 for GitHub checks and merge review."
+      },
+      {
+        "at": "2026-06-04T00:47:44Z",
+        "from": "pr_open",
+        "to": "merged",
+        "note": "Ledger reconciliation only: PR #1880 is merged at eddebd8d2392f2416cbb1f00802a6002eed45fdf; origin/main contains the merge commit and local/remote task branch cleanup is complete."
       }
     ],
     "sidecars": [],
-    "next_task": "approval-gated production collector dry-run/no-write smoke after separate authorization"
+    "next_task": "approval-gated production collector dry-run/no-write smoke after separate authorization",
+    "merge_commit_sha": "eddebd8d2392f2416cbb1f00802a6002eed45fdf"
   }
 }
