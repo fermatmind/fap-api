@@ -14,7 +14,7 @@
   - the unrelated changes are in files outside the declared PR scope, and the current PR can avoid touching them
   - the current PR can be staged with an explicit path-limited file list
   - the unrelated changes are already committed on another branch and are not part of the current branch diff
-- Stop if the worktree is dirty and the current PR scope cannot be isolated cleanly from those existing changes.
+- Dirty worktree is allowed when the current task can stage only explicit scoped paths. Stop only when scoped paths overlap unrelated dirty changes or cannot be isolated cleanly.
 - If scoped changes were made on `main` before a PR branch was created, Codex may still create the correct PR branch immediately, provided:
   - the changes are fully within the declared scope
   - the worktree contains no unrelated modifications
@@ -27,6 +27,7 @@
 
 ## Verification discipline
 - Run all local checks listed in the PR manifest before push.
+- For docs-only, rules-only, and generated-contract-only changes, use lightweight validation such as `git diff --check` plus JSON/YAML/focused contract checks when relevant. Do not require full runtime checks unless runtime, API, migration, or scheduler files changed.
 - If local checks fail, do not open a PR.
 - Record failed checks in `docs/codex/pr-train-state.json`.
 - Never continue to the next PR after a failed check.
@@ -35,7 +36,7 @@
 
 ## PR discipline
 - Open exactly one PR for the current task.
-- The PR title must match the PR id and scope from the manifest.
+- For PR-train PRs, the PR title must match the PR id and scope from the manifest.
 - The PR body must include:
   - what changed
   - why
@@ -45,10 +46,18 @@
 - Stacked draft PR exception: if the user explicitly asks to split the current task into multiple PRs, Codex may open multiple draft PRs for the same declared task only when each PR has a distinct scope, the dependency order is stated in every dependent PR body, and no PR contains files from another PR's scope.
 - This exception does not allow merging dependent PRs out of order or bypassing required checks.
 
+## Ad-hoc PR discipline
+- Not every PR needs a PR-train id.
+- Only PR-train work requires a PR id and PR-train metadata.
+- Ordinary scoped PRs, such as repository rule updates, documentation summaries, cleanup-only changes, CI fixes, and small emergency repairs, may be opened without a train id.
+- Ad-hoc PRs must not modify `docs/codex/pr-train.yaml` or `docs/codex/pr-train-state.json` unless the user explicitly asks for PR-train metadata updates.
+
 ## Merge discipline
 - Merge only when the current PR satisfies its `merge_policy`.
 - Use squash merge unless the manifest explicitly says otherwise.
 - After merge, delete the remote branch.
+- After merging a PR-train PR, close its state as `merged` in the same workflow whenever possible.
+- If branch protection prevents direct ledger closeout, use one ledger-only follow-up PR with no new train id.
 - If running in a local clone, run `scripts/post_merge_cleanup.sh <branch> [base]`.
 - If running outside a local clone, do not claim local cleanup was executed.
 
@@ -63,6 +72,7 @@
   - merged_at
   - remote_branch_deleted
   - local_cleanup_executed
+- Do not create a new PR-train task just to mark the previous task as `merged`.
 - Never continue after a failed PR unless the manifest explicitly allows retry.
 
 ## Failure policy
