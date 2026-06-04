@@ -43042,8 +43042,8 @@
         "notes": "All local validation commands passed on 2026-06-04T01:24:42Z. No runtime, scheduler, production write, external API, CMS, search submission, deployment, fap-web, route, or migration file changes were made."
       },
       "github": {
-        "status": "pending",
-        "evidence": null
+        "status": "pass",
+        "evidence": "PR #1882 checks passed on GitHub before merge review: Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
       },
       "post_merge_cleanup": {
         "status": "pending",
@@ -43059,7 +43059,7 @@
     "scope_validation": {
       "allowed_paths_only": true,
       "local_validation_passed": true,
-      "github_checks_green": false,
+      "github_checks_green": true,
       "post_merge_revalidated": false,
       "runtime_route_changed": false,
       "migration_files_changed": false,
@@ -43096,6 +43096,12 @@
         "from": "committed",
         "to": "pr_open",
         "note": "Opened PR https://github.com/fermatmind/fap-api/pull/1882."
+      },
+      {
+        "at": "2026-06-04T01:34:21Z",
+        "from": "pr_open",
+        "to": "github_checks_green",
+        "note": "GitHub checks passed for PR #1882 before merge review."
       }
     ],
     "sidecars": [],
