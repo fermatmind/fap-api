@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-04T10:30:20+08:00",
+  "updated_at": "2026-06-04T10:32:16+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -43117,7 +43117,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-dash-collector-02-write-gate",
     "base": "main",
-    "status": "local_validation_passed",
+    "status": "committed",
     "train_scope": "seo_intel_controlled_collector_write_gate",
     "title": "docs(seo): define controlled collector write gate",
     "checks": {
@@ -43160,7 +43160,7 @@
     },
     "failure_reason": null,
     "pr_url": null,
-    "commit_sha": null,
+    "commit_sha": "bfebe0a1d1219c5f373fc18504f777abc5b256a2",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -43191,6 +43191,12 @@
         "from": "executing",
         "to": "local_validation_passed",
         "note": "Local validation passed. Scope stayed within docs/generated/focused test/pr-train metadata; generated BIG5_OCEAN compiled diffs from ci_verify_mbti.sh were restored before staging."
+      },
+      {
+        "at": "2026-06-04T02:32:16Z",
+        "from": "local_validation_passed",
+        "to": "committed",
+        "note": "Committed scoped docs/contract implementation at bfebe0a1d1219c5f373fc18504f777abc5b256a2."
       }
     ],
     "sidecars": [],
