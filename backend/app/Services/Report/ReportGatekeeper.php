@@ -38,8 +38,12 @@ class ReportGatekeeper
         private CrisisPolicyResolver $crisisPolicyResolver,
         private ReportSubjectRepository $subjects,
         private OrgContext $orgContext,
-        private FreemiumLocalePolicy $freemiumLocalePolicy,
     ) {}
+
+    private function freemiumLocalePolicy(): FreemiumLocalePolicy
+    {
+        return app(FreemiumLocalePolicy::class);
+    }
 
     public function ensureAccess(
         int $orgId,
@@ -77,7 +81,7 @@ class ReportGatekeeper
         $commercial = $this->offerResolver->normalizeCommercial($registry['commercial_json'] ?? null);
         $paywallMode = ScaleRolloutGate::paywallMode($registry);
         $forceFreeOnly = $this->shouldForceFreeOnly($scaleCode, $paywallMode);
-        $localePolicy = $this->freemiumLocalePolicy->resolve(
+        $localePolicy = $this->freemiumLocalePolicy()->resolve(
             $scaleCode,
             (string) ($attempt->locale ?? config('content_packs.default_locale', 'zh-CN'))
         );
@@ -91,7 +95,7 @@ class ReportGatekeeper
             $forceFreeOnly
         );
         $hasAccess = (bool) ($accessState['has_full_access'] ?? false)
-            || $this->freemiumLocalePolicy->grantsFullFree($localePolicy);
+            || $this->freemiumLocalePolicy()->grantsFullFree($localePolicy);
 
         return [
             'ok' => true,
@@ -141,7 +145,7 @@ class ReportGatekeeper
         $commercialSpec = $isMbtiContract ? $this->loadCommercialSpecForAttempt($attempt, $result) : [];
         $paywallMode = ScaleRolloutGate::paywallMode($registry);
         $forceFreeOnly = $this->shouldForceFreeOnly($scaleCode, $paywallMode);
-        $localePolicy = $this->freemiumLocalePolicy->resolve(
+        $localePolicy = $this->freemiumLocalePolicy()->resolve(
             $scaleCode,
             (string) ($attempt->locale ?? config('content_packs.default_locale', 'zh-CN'))
         );
@@ -170,7 +174,7 @@ class ReportGatekeeper
             $forceFreeOnly
         );
         $hasFullAccess = (bool) ($accessState['has_full_access'] ?? false)
-            || $this->freemiumLocalePolicy->grantsFullFree($localePolicy);
+            || $this->freemiumLocalePolicy()->grantsFullFree($localePolicy);
 
         $modulesOffered = $this->offerResolver->collectModulesFromOffers((array) ($paywall['offers'] ?? []));
         if ($modulesOffered === []) {

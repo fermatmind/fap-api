@@ -21039,6 +21039,7 @@ prs:
       - backend/config/freemium_locale_policy.php
       - backend/docs/operations/freemium-locale-policy-01.md
       - backend/tests/Feature/Commerce/FreemiumLocalePolicyTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
@@ -21050,10 +21051,11 @@ prs:
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Commerce/FreemiumLocalePolicyTest.php --no-ansi
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Commerce/MbtiCommerceConsolidationTest.php --no-ansi
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_3/ReportPaywallTeaserTest.php --no-ansi
-      - cd backend && vendor/bin/pint --test app/Services/Commerce/FreemiumLocalePolicy.php app/Services/Report/Resolvers/OfferResolver.php app/Services/Report/ReportGatekeeper.php app/Http/Controllers/API/V0_3/CommerceController.php tests/Feature/Commerce/FreemiumLocalePolicyTest.php config/freemium_locale_policy.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=runtime_freeze_classifier_ignores_freemium_locale_policy_files --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/Commerce/FreemiumLocalePolicy.php app/Services/Report/Resolvers/OfferResolver.php app/Services/Report/ReportGatekeeper.php app/Http/Controllers/API/V0_3/CommerceController.php tests/Feature/Commerce/FreemiumLocalePolicyTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php config/freemium_locale_policy.php
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
-      - git diff --check -- backend/app/Http/Controllers/API/V0_3/CommerceController.php backend/app/Services/Commerce/FreemiumLocalePolicy.php backend/app/Services/Report/ReportGatekeeper.php backend/app/Services/Report/Resolvers/OfferResolver.php backend/config/freemium_locale_policy.php backend/docs/operations/freemium-locale-policy-01.md backend/tests/Feature/Commerce/FreemiumLocalePolicyTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --check -- backend/app/Http/Controllers/API/V0_3/CommerceController.php backend/app/Services/Commerce/FreemiumLocalePolicy.php backend/app/Services/Report/ReportGatekeeper.php backend/app/Services/Report/Resolvers/OfferResolver.php backend/config/freemium_locale_policy.php backend/docs/operations/freemium-locale-policy-01.md backend/tests/Feature/Commerce/FreemiumLocalePolicyTest.php backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json
       - git diff --cached --check
     merge_policy:
       github_checks_required: true

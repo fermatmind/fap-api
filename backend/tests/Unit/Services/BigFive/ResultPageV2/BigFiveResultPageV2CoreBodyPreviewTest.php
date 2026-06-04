@@ -1318,6 +1318,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_freemium_locale_policy_files(): void
+    {
+        $changed = [
+            'backend/app/Services/Commerce/FreemiumLocalePolicy.php',
+            'backend/app/Services/Report/Resolvers/OfferResolver.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_payment_webhook_digest_idempotency_changes(): void
     {
         $changed = [
@@ -2654,6 +2664,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isFreemiumLocalePolicyFile($file)) {
+                continue;
+            }
+
             if ($this->isCommercePaymentActionFile($file)) {
                 continue;
             }
@@ -3413,6 +3427,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Commerce/OrderManager.php',
             'backend/app/Services/Commerce/Webhook/WebhookEntitlementService.php',
             'backend/app/Jobs/Commerce/ReprocessPaymentEventJob.php',
+        ], true);
+    }
+
+    private function isFreemiumLocalePolicyFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Services/Commerce/FreemiumLocalePolicy.php',
+            'backend/app/Services/Report/Resolvers/OfferResolver.php',
         ], true);
     }
 
