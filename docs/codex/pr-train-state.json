@@ -42899,7 +42899,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-dash-collector-01-readiness",
     "base": "main",
-    "status": "local_validation_passed",
+    "status": "pr_open",
     "train_scope": "seo_intel_collector_dry_run_readiness",
     "title": "docs(seo): define post-migration collector dry-run readiness",
     "checks": {
@@ -42933,7 +42933,7 @@
       },
       "github": {
         "status": "pending",
-        "evidence": null
+        "evidence": "PR #1880 opened; GitHub checks pending."
       },
       "post_merge_cleanup": {
         "status": "pending",
@@ -42941,8 +42941,8 @@
       }
     },
     "failure_reason": null,
-    "pr_url": null,
-    "commit_sha": "6daec4ccde5bf1d365b295b52895388b46debe35",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1880",
+    "commit_sha": "cae01a41124ce461f94bcbc0743087bce9f05b08",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -42987,6 +42987,12 @@
         "from": "committed",
         "to": "ledger_commit_sha_recorded",
         "note": "Recorded implementation commit 6daec4ccde5bf1d365b295b52895388b46debe35 in the SEO-DASH-COLLECTOR-01 ledger before push."
+      },
+      {
+        "at": "2026-06-04T00:35:20Z",
+        "from": "ledger_commit_sha_recorded",
+        "to": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/1880 for GitHub checks and merge review."
       }
     ],
     "sidecars": [],
