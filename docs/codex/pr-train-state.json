@@ -41463,7 +41463,7 @@
     "depends_on": [
       "SEO-CMS-CANARY-EDITORIAL-REVIEW-01"
     ],
-    "commit_sha": null,
+    "commit_sha": "6547f4e08aebd665da98916dd5787a4a23adfed9",
     "pr_url": null,
     "checks": {},
     "failure_reason": null,
@@ -43084,6 +43084,12 @@
         "from": "executing",
         "to": "local_validation_passed",
         "note": "Focused contract test, Pint, route-list, migrate pretend, JSON/YAML validation, scoped diff check, full ci_verify_mbti.sh, and cached diff check passed. Scope remains evidence-only."
+      },
+      {
+        "at": "2026-06-04T01:27:09Z",
+        "from": "local_validation_passed",
+        "to": "committed",
+        "note": "Recorded implementation commit 6547f4e08aebd665da98916dd5787a4a23adfed9."
       }
     ],
     "sidecars": [],
