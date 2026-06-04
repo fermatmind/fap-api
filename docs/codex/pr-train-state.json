@@ -43004,5 +43004,89 @@
     "sidecars": [],
     "next_task": "approval-gated production collector dry-run/no-write smoke after separate authorization",
     "merge_commit_sha": "eddebd8d2392f2416cbb1f00802a6002eed45fdf"
+  },
+  "SEO-DASH-COLLECTOR-01-SMOKE-RECONCILE": {
+    "repo": "fap-api",
+    "branch": "codex/seo-dash-collector-01-smoke-reconcile",
+    "base": "main",
+    "status": "local_validation_passed",
+    "train_scope": "seo_intel_collector_dry_run_smoke_evidence",
+    "title": "docs(seo): record collector dry-run smoke evidence",
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding SEO-DASH-COLLECTOR-01-SMOKE-RECONCILE to docs/codex/pr-train.yaml and docs/codex/pr-train-state.json and executing the smoke evidence docs/contract PR."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "SEO-DASH-COLLECTOR-01 is merged and reconciled at eddebd8d2392f2416cbb1f00802a6002eed45fdf; production collector dry-run/no-write smoke was executed under separate exact approval."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to backend/docs/seo/seo-dash-collector-01-smoke-evidence.md, backend/docs/seo/generated/seo-dash-collector-01-smoke-evidence.v1.json, backend/tests/Feature/SeoIntel/SeoDashCollector01SmokeEvidenceTest.php, docs/codex/pr-train.yaml, and docs/codex/pr-train-state.json. Test-generated BIG5_OCEAN compiled artifacts were restored before staging."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoDashCollector01SmokeEvidenceTest --no-ansi",
+          "cd backend && vendor/bin/pint --test tests/Feature/SeoIntel/SeoDashCollector01SmokeEvidenceTest.php",
+          "cd backend && php artisan route:list --path=api/v0.5/ops/seo-intel --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi",
+          "python3 -m json.tool backend/docs/seo/generated/seo-dash-collector-01-smoke-evidence.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "git diff --check -- backend/docs/seo/seo-dash-collector-01-smoke-evidence.md backend/docs/seo/generated/seo-dash-collector-01-smoke-evidence.v1.json backend/tests/Feature/SeoIntel/SeoDashCollector01SmokeEvidenceTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+          "bash backend/scripts/ci_verify_mbti.sh",
+          "git diff --cached --check"
+        ],
+        "notes": "All local validation commands passed on 2026-06-04T01:24:42Z. No runtime, scheduler, production write, external API, CMS, search submission, deployment, fap-web, route, or migration file changes were made."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": null
+      },
+      "post_merge_cleanup": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "failure_reason": null,
+    "pr_url": null,
+    "commit_sha": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "local_validation_passed": true,
+      "github_checks_green": false,
+      "post_merge_revalidated": false,
+      "runtime_route_changed": false,
+      "migration_files_changed": false,
+      "production_collector_smoke_executed_in_pr": false,
+      "production_write_executed": false,
+      "scheduler_enabled": false,
+      "external_api_connected": false,
+      "cms_mutation": false,
+      "search_submission_performed": false,
+      "fap_web_modified": false,
+      "deploy_performed": false
+    },
+    "transitions": [
+      {
+        "at": "2026-06-04T01:00:00Z",
+        "from": "missing",
+        "to": "executing",
+        "note": "Started authorized SEO-DASH-COLLECTOR-01-SMOKE-RECONCILE evidence PR. Scope is limited to docs/generated/focused contract test/pr-train metadata; the production smoke was already completed under separate approval and is not rerun in this PR."
+      },
+      {
+        "at": "2026-06-04T01:24:42Z",
+        "from": "executing",
+        "to": "local_validation_passed",
+        "note": "Focused contract test, Pint, route-list, migrate pretend, JSON/YAML validation, scoped diff check, full ci_verify_mbti.sh, and cached diff check passed. Scope remains evidence-only."
+      }
+    ],
+    "sidecars": [],
+    "next_task": "SEO-DASH-COLLECTOR-02 controlled collector runbook or write gate"
   }
 }

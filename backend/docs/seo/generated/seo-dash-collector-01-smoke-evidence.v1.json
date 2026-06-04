@@ -1,0 +1,279 @@
+{
+  "version": "seo-dash-collector-01-smoke-evidence.v1",
+  "task": "SEO-DASH-COLLECTOR-01-SMOKE-RECONCILE",
+  "repo": "fap-api",
+  "evidence_only": true,
+  "runtime_changed": false,
+  "scheduler_enabled": false,
+  "production_writes_allowed": false,
+  "production_writes_attempted": false,
+  "production_writes_committed": false,
+  "external_api_calls_allowed": false,
+  "cms_mutation_allowed": false,
+  "search_submission_allowed": false,
+  "deployment_allowed": false,
+  "production_env_edit_allowed": false,
+  "fap_web_modified": false,
+  "approval_scope": {
+    "backend_production_sha": "619ce5881cbb63200568796c07467aacd66b52c2",
+    "collector_commands_must_include": [
+      "--dry-run",
+      "--no-write",
+      "--json"
+    ],
+    "scheduler_enablement_approved": false,
+    "production_writes_approved": false,
+    "external_api_calls_approved": false,
+    "cms_mutation_approved": false,
+    "search_submission_approved": false,
+    "deployment_approved": false,
+    "production_env_edits_approved": false
+  },
+  "pre_smoke": {
+    "production_backend_sha": "619ce5881cbb63200568796c07467aacd66b52c2",
+    "seo_intel_routes_present": 5,
+    "seo_intel_migrations_all_ran": true,
+    "seo_intel_migration_path": "database/migrations/seo_intel",
+    "collectors_enabled": false,
+    "write_enabled": false,
+    "dry_run_default": true,
+    "allow_external_api_calls": false,
+    "crawler_log_aggregate_write_enabled": false,
+    "scheduler_no_activation": true,
+    "seo_crawler_log_daily_aggregates_exists": true,
+    "seo_crawler_log_daily_aggregates_rows": 0,
+    "private_overview_without_token_http_status": 401,
+    "public_scale_lookup_http_status": 200
+  },
+  "collector_results": [
+    {
+      "collector": "noop",
+      "command": "php artisan seo-intel:collect --collector=noop --dry-run --no-write --json",
+      "status": "success",
+      "dry_run": true,
+      "writes_attempted": false,
+      "writes_committed": false,
+      "external_calls_attempted": false,
+      "items_seen": 0,
+      "issues": []
+    },
+    {
+      "collector": "url_truth_inventory",
+      "command": "php artisan seo-intel:collect --collector=url_truth_inventory --dry-run --no-write --json --canary",
+      "status": "success",
+      "dry_run": true,
+      "writes_attempted": false,
+      "writes_committed": false,
+      "external_calls_attempted": false,
+      "items_seen": 52,
+      "issues": []
+    },
+    {
+      "collector": "drift_foundation",
+      "command": "php artisan seo-intel:collect --collector=drift_foundation --dry-run --no-write --json --canary",
+      "status": "success",
+      "dry_run": true,
+      "writes_attempted": false,
+      "writes_committed": false,
+      "external_calls_attempted": false,
+      "items_seen": 12,
+      "issues": [
+        "missing_in_sitemap",
+        "extra_in_sitemap",
+        "missing_in_llms",
+        "private_flow_exposure_warning"
+      ]
+    },
+    {
+      "collector": "crawler_log_foundation",
+      "command": "php artisan seo-intel:collect --collector=crawler_log_foundation --dry-run --no-write --json --limit=5",
+      "status": "success",
+      "dry_run": true,
+      "writes_attempted": false,
+      "writes_committed": false,
+      "external_calls_attempted": false,
+      "items_seen": 1,
+      "issues": []
+    },
+    {
+      "collector": "attribution_revenue_foundation",
+      "command": "php artisan seo-intel:collect --collector=attribution_revenue_foundation --dry-run --no-write --json --limit=5",
+      "status": "success",
+      "dry_run": true,
+      "writes_attempted": false,
+      "writes_committed": false,
+      "external_calls_attempted": false,
+      "items_seen": 5,
+      "issues": [
+        "fixture_only_no_live_data_read",
+        "writes_blocked_by_default"
+      ]
+    },
+    {
+      "collector": "gsc_foundation",
+      "command": "php artisan seo-intel:collect --collector=gsc_foundation --dry-run --no-write --json --limit=5",
+      "status": "success",
+      "dry_run": true,
+      "writes_attempted": false,
+      "writes_committed": false,
+      "external_calls_attempted": false,
+      "items_seen": 2,
+      "issues": [
+        "fixture_only_no_live_gsc_api_call",
+        "writes_blocked_by_default"
+      ]
+    },
+    {
+      "collector": "baidu_foundation",
+      "command": "php artisan seo-intel:collect --collector=baidu_foundation --dry-run --no-write --json --limit=5",
+      "status": "success",
+      "dry_run": true,
+      "writes_attempted": false,
+      "writes_committed": false,
+      "external_calls_attempted": false,
+      "items_seen": 3,
+      "issues": [
+        "fixture_only_no_live_baidu_api_call",
+        "real_url_submission_blocked",
+        "draft_url_rejected",
+        "non_indexable_rejected"
+      ]
+    },
+    {
+      "collector": "indexnow_foundation",
+      "command": "php artisan seo-intel:collect --collector=indexnow_foundation --dry-run --no-write --json --limit=5",
+      "status": "success",
+      "dry_run": true,
+      "writes_attempted": false,
+      "writes_committed": false,
+      "external_calls_attempted": false,
+      "items_seen": 3,
+      "issues": [
+        "fixture_only_no_live_indexnow_api_call",
+        "real_url_submission_blocked",
+        "private_flow_rejected"
+      ]
+    },
+    {
+      "collector": "so360_foundation",
+      "command": "php artisan seo-intel:collect --collector=so360_foundation --dry-run --no-write --json --limit=5",
+      "status": "success",
+      "dry_run": true,
+      "writes_attempted": false,
+      "writes_committed": false,
+      "external_calls_attempted": false,
+      "items_seen": 4,
+      "issues": [
+        "fixture_only_no_live_so360_api_call",
+        "real_url_submission_blocked",
+        "engine_specific_page_generation_blocked",
+        "draft_url_rejected",
+        "non_indexable_rejected",
+        "private_flow_rejected",
+        "private_flow_entity_type_rejected"
+      ]
+    },
+    {
+      "collector": "sogou_foundation",
+      "command": "php artisan seo-intel:collect --collector=sogou_foundation --dry-run --no-write --json --limit=5",
+      "status": "success",
+      "dry_run": true,
+      "writes_attempted": false,
+      "writes_committed": false,
+      "external_calls_attempted": false,
+      "items_seen": 4,
+      "issues": [
+        "fixture_only_no_live_sogou_api_call",
+        "real_url_submission_blocked",
+        "engine_specific_page_generation_blocked",
+        "draft_url_rejected",
+        "non_indexable_rejected",
+        "private_flow_rejected",
+        "private_flow_entity_type_rejected"
+      ]
+    },
+    {
+      "collector": "shenma_foundation",
+      "command": "php artisan seo-intel:collect --collector=shenma_foundation --dry-run --no-write --json --limit=5",
+      "status": "success",
+      "dry_run": true,
+      "writes_attempted": false,
+      "writes_committed": false,
+      "external_calls_attempted": false,
+      "items_seen": 4,
+      "issues": [
+        "fixture_only_no_live_shenma_api_call",
+        "real_url_submission_blocked",
+        "engine_specific_page_generation_blocked",
+        "draft_url_rejected",
+        "non_indexable_rejected",
+        "private_flow_rejected",
+        "private_flow_entity_type_rejected"
+      ]
+    },
+    {
+      "collector": "chinese_crawler_log_foundation",
+      "command": "php artisan seo-intel:collect --collector=chinese_crawler_log_foundation --dry-run --no-write --json --limit=5",
+      "status": "success",
+      "dry_run": true,
+      "writes_attempted": false,
+      "writes_committed": false,
+      "external_calls_attempted": false,
+      "items_seen": 5,
+      "issues": [
+        "fixture_only_no_production_log_read",
+        "raw_ip_storage_blocked",
+        "raw_cookie_storage_blocked",
+        "raw_user_agent_storage_blocked",
+        "private_flow_crawler_hit_warning",
+        "noindex_crawler_hit_warning"
+      ]
+    },
+    {
+      "collector": "issue_queue_foundation",
+      "command": "php artisan seo-intel:collect --collector=issue_queue_foundation --dry-run --no-write --json --canary",
+      "status": "success",
+      "dry_run": true,
+      "writes_attempted": false,
+      "writes_committed": false,
+      "external_calls_attempted": false,
+      "items_seen": 3,
+      "issues": [
+        "fixture_only_no_live_data_read",
+        "cms_mutation_blocked",
+        "auto_publish_blocked",
+        "auto_pseo_blocked",
+        "raw_pii_blocked"
+      ]
+    }
+  ],
+  "post_smoke": {
+    "production_backend_sha": "619ce5881cbb63200568796c07467aacd66b52c2",
+    "collectors_enabled": false,
+    "write_enabled": false,
+    "dry_run_default": true,
+    "allow_external_api_calls": false,
+    "crawler_log_aggregate_write_enabled": false,
+    "seo_crawler_log_daily_aggregates_exists": true,
+    "seo_crawler_log_daily_aggregates_rows": 0
+  },
+  "outcome": {
+    "collector_count": 13,
+    "all_collectors_success": true,
+    "all_collectors_dry_run": true,
+    "any_writes_attempted": false,
+    "any_writes_committed": false,
+    "any_external_calls_attempted": false,
+    "scheduler_still_disabled": true,
+    "aggregate_rows_unchanged": true
+  },
+  "deferred": [
+    "scheduler_enablement",
+    "collector_write_enablement",
+    "live_gsc_baidu_ga4_or_domestic_search_api_connections",
+    "cms_issue_summary_writeback",
+    "search_platform_submission",
+    "production_data_ingestion"
+  ],
+  "next_task": "SEO-DASH-COLLECTOR-02 controlled collector runbook or write gate"
+}
