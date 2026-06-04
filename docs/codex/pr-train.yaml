@@ -20763,6 +20763,62 @@ prs:
     content_authority: CMS/backend
     next_task: SEO-DASH-COLLECTOR-01 after separate production migration readiness/deploy approval
 
+  - id: SEO-DASH-COLLECTOR-01
+    repo: fap-api
+    branch: codex/seo-dash-collector-01-readiness
+    title: "docs(seo): define post-migration collector dry-run readiness"
+    train_scope: seo_intel_collector_dry_run_readiness
+    status: executing
+    depends_on:
+      - SEO-DASH-00-RECONCILE
+      - SEO-DASH-API-01
+      - SEO-DASH-MIGRATION-01
+    scope:
+      - Define post-migration collector dry-run/no-write readiness after the read-only API and production seo_intel migration gates are complete.
+      - Lock allowed manual smoke commands, required dry-run/no-write/json flags, disabled config defaults, readiness checklist, no-go conditions, and next approval-gated production smoke boundary.
+      - Keep this PR contract-only; do not enable scheduler, write production, connect external APIs, mutate CMS records, submit URLs, deploy, or modify fap-web.
+    allowed_paths:
+      - backend/docs/seo/seo-dash-collector-01-readiness.md
+      - backend/docs/seo/generated/seo-dash-collector-01-readiness.v1.json
+      - backend/tests/Feature/SeoIntel/SeoDashCollector01ReadinessTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Enable scheduler jobs, queue workers, collectors, writes, crawler-log aggregate writes, or production log reads.
+      - Add or edit runtime routes, controllers, middleware, services, collectors, command behavior, migrations, or env files.
+      - Connect live GSC, Baidu, GA4, IndexNow, 360, Sogou, Shenma, Apify, ScreamingFrog, crawler logs, Metabase, or external APIs.
+      - Mutate CMS records, publish, unpublish, rollback, generate content, submit URLs, or modify fap-web.
+      - Deploy, SSH, edit production env, print secrets, or touch Node2/Node3.
+      - Run production collector smoke commands in this PR.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoDashCollector01ReadinessTest --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Feature/SeoIntel/SeoDashCollector01ReadinessTest.php
+      - cd backend && php artisan route:list --path=api/v0.5/ops/seo-intel --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi
+      - python3 -m json.tool backend/docs/seo/generated/seo-dash-collector-01-readiness.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- backend/docs/seo/seo-dash-collector-01-readiness.md backend/docs/seo/generated/seo-dash-collector-01-readiness.v1.json backend/tests/Feature/SeoIntel/SeoDashCollector01ReadinessTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - bash backend/scripts/ci_verify_mbti.sh
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: approval-gated production collector dry-run/no-write smoke
+
   - id: FREEMIUM-LOCALE-POLICY-SCAN-01
     repo: fap-api
     branch: codex/freemium-locale-policy-scan-01
