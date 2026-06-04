@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-04T17:02:49+08:00",
+  "updated_at": "2026-06-04T17:04:32+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -156,7 +156,7 @@
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-01",
     "base": "main",
-    "status": "in_progress",
+    "status": "pr_open",
     "train_scope": "commercial_readiness_day1",
     "title": "feat(commerce): add backend-authoritative freemium locale policy",
     "depends_on": [
@@ -191,7 +191,7 @@
           "git diff --check -- backend/app/Http/Controllers/API/V0_3/CommerceController.php backend/app/Services/Commerce/FreemiumLocalePolicy.php backend/app/Services/Report/ReportGatekeeper.php backend/app/Services/Report/Resolvers/OfferResolver.php backend/config/freemium_locale_policy.php backend/docs/operations/freemium-locale-policy-01.md backend/tests/Feature/Commerce/FreemiumLocalePolicyTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
           "git diff --cached --check"
         ],
-        "notes": "Focused policy tests, adjacent MBTI commerce/report regressions, Pint, JSON/YAML parse, and scoped diff check passed. Cached diff check will run after explicit staging."
+        "notes": "Focused policy tests, adjacent MBTI commerce/report regressions, Pint, JSON/YAML parse, scoped diff check, and cached diff check passed."
       }
     },
     "result": {
@@ -201,8 +201,8 @@
       "frontend_contract": "Frontend consumes locale_freemium_policy and must not infer commercial rules locally."
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "8a14cd25baf37a54be3bafe191a63917ef6402e5",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1886",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -218,6 +218,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "notes": "Backend locale policy implementation, docs, manifest/state, focused tests, adjacent MBTI regressions, Pint, JSON/YAML parse, and scoped diff check passed locally."
+      },
+      {
+        "at": "2026-06-04T17:04:32+08:00",
+        "from": "local_checks_passed",
+        "to": "pr_open",
+        "notes": "Opened https://github.com/fermatmind/fap-api/pull/1886 for FREEMIUM-LOCALE-POLICY-01."
       }
     ]
   },
