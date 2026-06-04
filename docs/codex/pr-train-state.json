@@ -43009,7 +43009,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-dash-collector-01-smoke-reconcile",
     "base": "main",
-    "status": "local_validation_passed",
+    "status": "pr_open",
     "train_scope": "seo_intel_collector_dry_run_smoke_evidence",
     "title": "docs(seo): record collector dry-run smoke evidence",
     "checks": {
@@ -43051,7 +43051,7 @@
       }
     },
     "failure_reason": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1882",
     "commit_sha": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -43090,6 +43090,12 @@
         "from": "local_validation_passed",
         "to": "committed",
         "note": "Recorded implementation commit 6547f4e08aebd665da98916dd5787a4a23adfed9."
+      },
+      {
+        "at": "2026-06-04T01:28:18Z",
+        "from": "committed",
+        "to": "pr_open",
+        "note": "Opened PR https://github.com/fermatmind/fap-api/pull/1882."
       }
     ],
     "sidecars": [],
