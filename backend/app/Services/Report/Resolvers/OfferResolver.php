@@ -2,6 +2,7 @@
 
 namespace App\Services\Report\Resolvers;
 
+use App\Services\Commerce\FreemiumLocalePolicy;
 use App\Services\Commerce\SkuCatalog;
 use App\Services\Report\ReportAccess;
 
@@ -27,7 +28,10 @@ class OfferResolver
         'target_sku_effective' => null,
     ];
 
-    public function __construct(private SkuCatalog $skus) {}
+    public function __construct(
+        private SkuCatalog $skus,
+        private FreemiumLocalePolicy $freemiumLocalePolicy,
+    ) {}
 
     public function normalizeViewPolicy(mixed $raw): array
     {
@@ -75,12 +79,40 @@ class OfferResolver
         array $commercialSpec,
         string $scaleCode,
         int $orgId,
-        bool $forceFreeOnly = false
+        bool $forceFreeOnly = false,
+        ?string $locale = null
     ): array {
         $scaleCode = strtoupper(trim($scaleCode));
+        $localePolicy = $this->freemiumLocalePolicy->resolve($scaleCode, $locale);
+        if ($this->freemiumLocalePolicy->grantsFullFree($localePolicy)
+            || ((bool) ($localePolicy['applies'] ?? false) && ! (bool) ($localePolicy['paywall_allowed'] ?? false))) {
+            $viewPolicy['upgrade_sku'] = null;
+            $viewPolicy['blur_others'] = false;
+            $viewPolicy['teaser_percent'] = 0.0;
+
+            return [
+                'upgrade_sku' => null,
+                'upgrade_sku_effective' => null,
+                'offers' => [],
+                'cta_copy' => null,
+                'view_policy' => $viewPolicy,
+                FreemiumLocalePolicy::PAYLOAD_KEY => $this->freemiumLocalePolicy->frontendPayload($localePolicy),
+            ];
+        }
+
+        $skuItems = $this->freemiumLocalePolicy->filterSkuItems(
+            $this->skus->listActiveSkus($scaleCode, $orgId),
+            $scaleCode,
+            $locale
+        );
+
         $effectiveSku = strtoupper(trim((string) ($viewPolicy['upgrade_sku'] ?? '')));
         if ($effectiveSku === '' || $this->skus->isAnchorSku($effectiveSku, $scaleCode, $orgId)) {
             $effectiveSku = $this->skus->defaultEffectiveSku($scaleCode, $orgId) ?? $effectiveSku;
+        }
+        $policyEffectiveSku = strtoupper(trim((string) ($localePolicy['sku'] ?? '')));
+        if ((bool) ($localePolicy['applies'] ?? false) && $policyEffectiveSku !== '') {
+            $effectiveSku = $policyEffectiveSku;
         }
 
         $viewPolicy['upgrade_sku'] = $effectiveSku !== '' ? $effectiveSku : null;
@@ -90,11 +122,14 @@ class OfferResolver
             $anchorSku = $this->skus->defaultAnchorSku($scaleCode, $orgId);
         }
 
-        $offers = $this->buildOffersFromSkus($this->skus->listActiveSkus($scaleCode, $orgId));
+        $offers = $this->buildOffersFromSkus($skuItems);
         if (count($offers) === 0) {
             $offers = $this->normalizeOffers($commercial['offers'] ?? null);
         }
         $offers = $this->filterOffersForScale($scaleCode, $offers);
+        if ((bool) ($localePolicy['applies'] ?? false)) {
+            $offers = $this->filterOffersForLocalePolicy($offers, $localePolicy);
+        }
 
         if ($forceFreeOnly && in_array($scaleCode, [ReportAccess::SCALE_BIG5_OCEAN, ReportAccess::SCALE_ENNEAGRAM, ReportAccess::SCALE_RIASEC], true)) {
             $viewPolicy['upgrade_sku'] = null;
@@ -105,7 +140,14 @@ class OfferResolver
                 'offers' => [],
                 'cta_copy' => null,
                 'view_policy' => $viewPolicy,
+                FreemiumLocalePolicy::PAYLOAD_KEY => $this->freemiumLocalePolicy->frontendPayload($localePolicy),
             ];
+        }
+
+        if ((bool) ($localePolicy['applies'] ?? false) && (bool) ($localePolicy['paywall_allowed'] ?? false) && $offers === []) {
+            $viewPolicy['upgrade_sku'] = null;
+            $anchorSku = null;
+            $effectiveSku = '';
         }
 
         return [
@@ -116,6 +158,7 @@ class OfferResolver
                 ? $this->resolveCtaCopy($commercialSpec, $anchorSku, $effectiveSku !== '' ? $effectiveSku : null)
                 : null,
             'view_policy' => $viewPolicy,
+            FreemiumLocalePolicy::PAYLOAD_KEY => $this->freemiumLocalePolicy->frontendPayload($localePolicy),
         ];
     }
 
@@ -313,6 +356,38 @@ class OfferResolver
         $filtered = array_values(array_filter($offers, fn (array $offer): bool => $this->isMbtiFullReportOffer($offer)));
 
         return $filtered !== [] ? $filtered : array_values($offers);
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $offers
+     * @param  array<string,mixed>  $localePolicy
+     * @return list<array<string,mixed>>
+     */
+    private function filterOffersForLocalePolicy(array $offers, array $localePolicy): array
+    {
+        if (! (bool) ($localePolicy['paywall_allowed'] ?? false)) {
+            return [];
+        }
+
+        $allowedSku = strtoupper(trim((string) ($localePolicy['sku'] ?? '')));
+        if ($allowedSku === '') {
+            return [];
+        }
+
+        $currency = strtoupper(trim((string) ($localePolicy['currency'] ?? '')));
+        $priceCents = isset($localePolicy['price_cents']) ? (int) $localePolicy['price_cents'] : null;
+
+        return array_values(array_filter($offers, static function (array $offer) use ($allowedSku, $currency, $priceCents): bool {
+            $sku = strtoupper(trim((string) ($offer['sku'] ?? $offer['sku_code'] ?? '')));
+            if ($sku !== $allowedSku) {
+                return false;
+            }
+            if ($currency !== '' && strtoupper(trim((string) ($offer['currency'] ?? ''))) !== $currency) {
+                return false;
+            }
+
+            return $priceCents === null || (int) ($offer['price_cents'] ?? -1) === $priceCents;
+        }));
     }
 
     /**

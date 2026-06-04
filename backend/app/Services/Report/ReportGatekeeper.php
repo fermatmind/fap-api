@@ -8,6 +8,7 @@ use App\Models\Attempt;
 use App\Models\Result;
 use App\Repositories\Report\ReportAccessActor;
 use App\Repositories\Report\ReportSubjectRepository;
+use App\Services\Commerce\FreemiumLocalePolicy;
 use App\Services\Content\ContentPack;
 use App\Services\Content\ContentStore;
 use App\Services\ContentPackResolver;
@@ -38,6 +39,11 @@ class ReportGatekeeper
         private ReportSubjectRepository $subjects,
         private OrgContext $orgContext,
     ) {}
+
+    private function freemiumLocalePolicy(): FreemiumLocalePolicy
+    {
+        return app(FreemiumLocalePolicy::class);
+    }
 
     public function ensureAccess(
         int $orgId,
@@ -75,6 +81,10 @@ class ReportGatekeeper
         $commercial = $this->offerResolver->normalizeCommercial($registry['commercial_json'] ?? null);
         $paywallMode = ScaleRolloutGate::paywallMode($registry);
         $forceFreeOnly = $this->shouldForceFreeOnly($scaleCode, $paywallMode);
+        $localePolicy = $this->freemiumLocalePolicy()->resolve(
+            $scaleCode,
+            (string) ($attempt->locale ?? config('content_packs.default_locale', 'zh-CN'))
+        );
         $accessState = $this->accessResolver->resolveAccess(
             $scaleCode,
             $effectiveOrgId,
@@ -84,7 +94,8 @@ class ReportGatekeeper
             $commercial,
             $forceFreeOnly
         );
-        $hasAccess = (bool) ($accessState['has_full_access'] ?? false);
+        $hasAccess = (bool) ($accessState['has_full_access'] ?? false)
+            || $this->freemiumLocalePolicy()->grantsFullFree($localePolicy);
 
         return [
             'ok' => true,
@@ -134,13 +145,18 @@ class ReportGatekeeper
         $commercialSpec = $isMbtiContract ? $this->loadCommercialSpecForAttempt($attempt, $result) : [];
         $paywallMode = ScaleRolloutGate::paywallMode($registry);
         $forceFreeOnly = $this->shouldForceFreeOnly($scaleCode, $paywallMode);
+        $localePolicy = $this->freemiumLocalePolicy()->resolve(
+            $scaleCode,
+            (string) ($attempt->locale ?? config('content_packs.default_locale', 'zh-CN'))
+        );
         $paywall = $this->offerResolver->buildPaywall(
             $viewPolicy,
             $commercial,
             $commercialSpec,
             $scaleCode,
             $effectiveOrgId,
-            $forceFreeOnly
+            $forceFreeOnly,
+            (string) ($attempt->locale ?? config('content_packs.default_locale', 'zh-CN'))
         );
         $viewPolicy = $paywall['view_policy'] ?? $viewPolicy;
         if ($scaleCode === ReportAccess::SCALE_EQ_60) {
@@ -157,7 +173,8 @@ class ReportGatekeeper
             $commercial,
             $forceFreeOnly
         );
-        $hasFullAccess = (bool) ($accessState['has_full_access'] ?? false);
+        $hasFullAccess = (bool) ($accessState['has_full_access'] ?? false)
+            || $this->freemiumLocalePolicy()->grantsFullFree($localePolicy);
 
         $modulesOffered = $this->offerResolver->collectModulesFromOffers((array) ($paywall['offers'] ?? []));
         if ($modulesOffered === []) {
@@ -875,6 +892,10 @@ class ReportGatekeeper
             'quality' => $quality,
             'report' => $report,
         ];
+
+        if (isset($paywall[FreemiumLocalePolicy::PAYLOAD_KEY]) && is_array($paywall[FreemiumLocalePolicy::PAYLOAD_KEY])) {
+            $payload[FreemiumLocalePolicy::PAYLOAD_KEY] = $paywall[FreemiumLocalePolicy::PAYLOAD_KEY];
+        }
 
         if ($isMbtiContract) {
             $payload['cta'] = $this->offerResolver->buildCtaPayload($paywall, $locked);
