@@ -1,0 +1,151 @@
+{
+  "version": "seo-dash-collector-02-controlled-write-gate.v1",
+  "task": "SEO-DASH-COLLECTOR-02",
+  "title": "docs(seo): define controlled collector write gate",
+  "docs_contract_only": true,
+  "source_documents": [
+    "SEO-DASH-COLLECTOR-01-SMOKE-RECONCILE",
+    "SEO-DASH-PROD-03A",
+    "url-truth-inventory-bounded-canary.v1.json",
+    "seo-dash-collector-01-smoke-evidence.v1.json"
+  ],
+  "reconciled_pr": {
+    "id": "SEO-DASH-COLLECTOR-01-SMOKE-RECONCILE",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1882",
+    "merge_commit": "1b88323eb05d579e847d37b0e89ed24464b1924c",
+    "state": "merged"
+  },
+  "runtime_changed": false,
+  "scheduler_enabled_in_this_pr": false,
+  "collector_write_enabled_in_this_pr": false,
+  "production_write_executed_in_this_pr": false,
+  "external_api_enabled_in_this_pr": false,
+  "external_api_calls_executed_in_this_pr": false,
+  "cms_mutation_allowed": false,
+  "search_submission_allowed": false,
+  "deployment_allowed": false,
+  "production_env_edit_allowed": false,
+  "fap_web_modified": false,
+  "first_controlled_write_candidate": "url_truth_inventory",
+  "first_canary_command_template": "SEO_INTEL_ENABLED=true SEO_INTEL_COLLECTORS_ENABLED=true SEO_INTEL_WRITE_ENABLED=true SEO_INTEL_DRY_RUN_DEFAULT=false SEO_INTEL_GSC_ENABLED=false SEO_INTEL_BAIDU_ENABLED=false SEO_INTEL_INDEXNOW_ENABLED=false SEO_INTEL_SO360_ENABLED=false SEO_INTEL_SOGOU_ENABLED=false SEO_INTEL_SHENMA_ENABLED=false SEO_INTEL_CHINESE_CRAWLER_LOGS_ENABLED=false php artisan seo-intel:collect --collector=url_truth_inventory --json --canary",
+  "first_canary_requires_separate_exact_approval": true,
+  "future_approval_phrase_must_include": [
+    "exact_backend_sha",
+    "collector=url_truth_inventory",
+    "--canary",
+    "no_scheduler",
+    "no_external_api",
+    "no_cms_mutation",
+    "no_search_submission",
+    "no_deployment",
+    "no_production_env_file_edit"
+  ],
+  "write_tiers": {
+    "tier_0_dry_run_only": [
+      "noop",
+      "any_collector_with_dry_run_and_no_write"
+    ],
+    "tier_1_first_controlled_write_candidate": [
+      "url_truth_inventory"
+    ],
+    "tier_2_requires_separate_bounded_write_or_read_model_gate": [
+      "issue_queue_foundation",
+      "drift_foundation",
+      "crawler_log_foundation",
+      "attribution_revenue_foundation",
+      "chinese_crawler_log_foundation"
+    ],
+    "tier_3_blocked_until_live_external_api_approval": [
+      "gsc_foundation",
+      "baidu_foundation",
+      "indexnow_foundation",
+      "so360_foundation",
+      "sogou_foundation",
+      "shenma_foundation"
+    ],
+    "tier_4_blocked_until_production_log_read_approval": [
+      "production_crawler_log_read",
+      "cdn_openresty_nginx_production_log_ingestion"
+    ]
+  },
+  "batch_limits": {
+    "first_canary_requires_canary": true,
+    "default_canary_limit": 10,
+    "hard_max_limit": 50,
+    "unbounded_write_forbidden": true,
+    "all_collectors_loop_forbidden": true,
+    "scheduler_trigger_forbidden": true,
+    "queue_worker_trigger_forbidden": true
+  },
+  "target_tables_for_first_canary": [
+    "seo_urls",
+    "seo_url_entities"
+  ],
+  "forbidden_target_tables_for_first_canary": [
+    "business_db_tables",
+    "cms_tables",
+    "payment_tables",
+    "orders_tables",
+    "events_detail_tables",
+    "crawler_log_raw_tables",
+    "search_submission_tables"
+  ],
+  "forbidden_fields": [
+    "email",
+    "raw_email",
+    "order_no",
+    "raw_order_no",
+    "attempt_id",
+    "raw_attempt_id",
+    "payment_id",
+    "provider_event_id",
+    "cookie",
+    "raw_cookie",
+    "raw_ip",
+    "raw_user_agent",
+    "raw_payload",
+    "payment_payload",
+    "provider_payload",
+    "token",
+    "api_key",
+    "secret"
+  ],
+  "verification_before_write": [
+    "confirm_exact_backend_sha",
+    "confirm_seo_intel_migrations_all_ran",
+    "confirm_scheduler_no_seo_intel_collect_activation",
+    "capture_seo_urls_row_count",
+    "capture_seo_url_entities_row_count",
+    "confirm_normal_service_write_enabled_false",
+    "confirm_external_api_flags_false"
+  ],
+  "verification_after_write": [
+    "only_seo_urls_and_seo_url_entities_changed",
+    "row_count_delta_within_canary_limit",
+    "no_business_db_tables_changed",
+    "no_forbidden_pii_or_raw_identifiers_stored",
+    "no_external_api_calls",
+    "no_url_submissions",
+    "no_cms_mutation",
+    "scheduler_still_disabled"
+  ],
+  "rollback_policy": {
+    "first_action": "set_SEO_INTEL_WRITE_ENABLED_false",
+    "schema_rollback_allowed": false,
+    "destructive_delete_requires_separate_approval": true,
+    "wrong_canary_rows_policy": "forward_cleanup_or_ignore_policy_with_named_owner_and_separate_approval"
+  },
+  "stop_conditions": [
+    "production_sha_not_approved",
+    "scheduler_enabled",
+    "external_api_flags_enabled",
+    "command_unbounded",
+    "collector_not_url_truth_inventory",
+    "unexpected_target_tables",
+    "external_calls_reported",
+    "cms_mutation_reported",
+    "search_submission_reported",
+    "pii_storage_reported"
+  ],
+  "next_task": "approval-gated url_truth_inventory controlled write canary preflight"
+}

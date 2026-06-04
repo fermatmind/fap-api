@@ -20873,6 +20873,62 @@ prs:
     content_authority: CMS/backend
     next_task: SEO-DASH-COLLECTOR-02 controlled collector runbook or write gate
 
+  - id: SEO-DASH-COLLECTOR-02
+    repo: fap-api
+    branch: codex/seo-dash-collector-02-write-gate
+    title: "docs(seo): define controlled collector write gate"
+    train_scope: seo_intel_controlled_collector_write_gate
+    status: executing
+    depends_on:
+      - SEO-DASH-COLLECTOR-01-SMOKE-RECONCILE
+    scope:
+      - Reconcile SEO-DASH-COLLECTOR-01-SMOKE-RECONCILE as merged after PR #1882.
+      - Define the controlled collector write gate after the approved production dry-run/no-write smoke.
+      - Reconcile the older SEO-DASH-PROD-03A controlled write enablement plan with the current SEO-DASH-COLLECTOR-* train naming.
+      - Lock first canary eligibility, allowlist, batch limits, rollback, audit/verification requirements, stop conditions, scheduler boundary, external API boundary, and exact approval phrase requirements.
+      - Keep this PR docs/contract only; do not enable scheduler, write production, connect external APIs, mutate CMS records, submit URLs, deploy, edit production env, or modify fap-web.
+    allowed_paths:
+      - backend/docs/seo/seo-dash-collector-02-controlled-write-gate.md
+      - backend/docs/seo/generated/seo-dash-collector-02-controlled-write-gate.v1.json
+      - backend/tests/Feature/SeoIntel/SeoDashCollector02ControlledWriteGateTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run production collector commands in this PR.
+      - Enable scheduler jobs, queue workers, collectors, writes, crawler-log aggregate writes, or production log reads.
+      - Add or edit runtime routes, controllers, middleware, services, collectors, command behavior, migrations, config, or env files.
+      - Connect live GSC, Baidu, GA4, IndexNow, 360, Sogou, Shenma, Apify, ScreamingFrog, crawler logs, Metabase, or external APIs.
+      - Mutate CMS records, publish, unpublish, rollback, generate content, submit URLs, or modify fap-web.
+      - Deploy, SSH, edit production env, print secrets, or touch Node2/Node3.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoDashCollector02ControlledWriteGateTest --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Feature/SeoIntel/SeoDashCollector02ControlledWriteGateTest.php
+      - cd backend && php artisan route:list --path=api/v0.5/ops/seo-intel --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi
+      - python3 -m json.tool backend/docs/seo/generated/seo-dash-collector-02-controlled-write-gate.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- backend/docs/seo/seo-dash-collector-02-controlled-write-gate.md backend/docs/seo/generated/seo-dash-collector-02-controlled-write-gate.v1.json backend/tests/Feature/SeoIntel/SeoDashCollector02ControlledWriteGateTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - bash backend/scripts/ci_verify_mbti.sh
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: approval-gated url_truth_inventory controlled write canary preflight
+
   - id: FREEMIUM-LOCALE-POLICY-SCAN-01
     repo: fap-api
     branch: codex/freemium-locale-policy-scan-01
