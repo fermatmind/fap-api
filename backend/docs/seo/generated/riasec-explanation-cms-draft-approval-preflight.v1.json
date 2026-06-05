@@ -1,0 +1,184 @@
+{
+  "schema": "riasec-explanation-cms-draft-approval-preflight.v1",
+  "task_id": "SEO-ARTICLE-RIASEC-V2-CMS-DRAFT-APPROVAL-PREFLIGHT-01",
+  "generated_at": "2026-06-05",
+  "source_gate": "SEO-ARTICLE-RIASEC-V2-REFERENCE-MEDIA-REVISION-APPROVAL-01",
+  "decision": "NO-GO_OPERATOR_INPUTS_REQUIRED",
+  "preflight_passed": false,
+  "operator_approval_claimed": false,
+  "cms_draft_approval_allowed": false,
+  "cms_mutation_performed": false,
+  "publish_allowed": false,
+  "search_submit_allowed": false,
+  "deploy_performed": false,
+  "content_rewrite_performed": false,
+  "private_url_accessed": false,
+  "inputs_reviewed": [
+    "backend/docs/seo/generated/riasec-explanation-reference-media-revision-approval.v1.json",
+    "backend/docs/seo/riasec-explanation-reference-media-revision-approval.md",
+    "docs/codex/pr-train-state.json"
+  ],
+  "draft_records": [
+    {
+      "locale": "zh",
+      "article_id": 40,
+      "working_revision_id": 45,
+      "slug": "riasec-holland-career-interest-test-explained",
+      "status": "draft",
+      "public": false,
+      "indexable": false,
+      "working_revision_status": "machine_draft",
+      "approved_at": null,
+      "approval_preflight_status": "blocked"
+    },
+    {
+      "locale": "en",
+      "article_id": 41,
+      "working_revision_id": 46,
+      "slug": "what-is-riasec-holland-code-career-interest-test",
+      "status": "draft",
+      "public": false,
+      "indexable": false,
+      "working_revision_status": "machine_draft",
+      "approved_at": null,
+      "approval_preflight_status": "blocked"
+    }
+  ],
+  "operator_input_readiness": {
+    "status": "blocked",
+    "unknown_fields_preserved": true,
+    "ready_field_count": "Unknown",
+    "missing_or_unknown_inputs": [
+      "accepted_source_urls",
+      "accepted_source_titles",
+      "citation_style",
+      "holland_hexagon_terms_acceptance",
+      "mbti_big_five_comparison_acceptance",
+      "no_official_affiliation_acknowledgement",
+      "cms_media_id",
+      "cover_image_url",
+      "cover_image_alt_reviewed",
+      "og_image_ready",
+      "twitter_image_ready",
+      "approved_by",
+      "approved_at",
+      "approval_notes",
+      "claim_warning_acknowledgement",
+      "gpt_revision_required",
+      "conditional_links_activation_decision",
+      "product_availability_confirmed",
+      "report_preview_language_confirmed",
+      "confirmed_by",
+      "confirmed_at"
+    ],
+    "blocked_gates": [
+      "reference_acceptance",
+      "media_resolution",
+      "revision_approval",
+      "claim_warning_acknowledgement",
+      "conditional_internal_link_decision",
+      "product_availability_confirmation",
+      "controlled_publish_preflight"
+    ]
+  },
+  "approval_preflight_checks": [
+    {
+      "id": "source_acceptance_ready",
+      "status": "blocked",
+      "evidence": "accepted_source_urls, accepted_source_titles, citation_style, Holland/RIASEC acceptance, MBTI/Big Five comparison acceptance, and no-official-affiliation acknowledgement remain Unknown."
+    },
+    {
+      "id": "media_ready",
+      "status": "blocked",
+      "evidence": "cms_media_id, cover_image_url, cover_image_alt_reviewed, og_image_ready, and twitter_image_ready remain Unknown."
+    },
+    {
+      "id": "revision_approval_ready",
+      "status": "blocked",
+      "evidence": "zh revision 45 and en revision 46 remain machine_draft; approved_by, approved_at, and approval_notes remain Unknown."
+    },
+    {
+      "id": "claim_warning_ready",
+      "status": "blocked",
+      "evidence": "zh claim warning count remains 2; claim_warning_acknowledgement and gpt_revision_required remain Unknown."
+    },
+    {
+      "id": "internal_links_ready",
+      "status": "blocked",
+      "evidence": "conditional_links_activation_decision remains Unknown for /zh/career/jobs and /en/career/jobs."
+    },
+    {
+      "id": "product_availability_ready",
+      "status": "blocked",
+      "evidence": "product_availability_confirmed and report_preview_language_confirmed remain Unknown."
+    },
+    {
+      "id": "draft_public_safety",
+      "status": "pass",
+      "evidence": "Draft records remain draft, non-public, non-indexable, and machine_draft in the approval artifact."
+    },
+    {
+      "id": "public_route_safety",
+      "status": "pass",
+      "evidence": "Safe public routes are limited to RIASEC test pages and conditional career jobs routes; no private route is introduced."
+    }
+  ],
+  "publish_blockers": [
+    {
+      "id": "draft_approval_preflight_failed",
+      "status": "blocked",
+      "owner": "operator_editor",
+      "required_input": "Resolve all blocked approval preflight checks before any CMS draft approval mutation."
+    },
+    {
+      "id": "operator_inputs_unknown",
+      "status": "blocked",
+      "owner": "editorial_operator",
+      "required_input": "Supply or explicitly defer required operator fields. Unknown must remain Unknown until supplied."
+    },
+    {
+      "id": "cms_mutation_not_authorized",
+      "status": "hard_gate",
+      "owner": "operator",
+      "required_input": "Separate CMS mutation authorization is required before any draft revision approval or draft update."
+    },
+    {
+      "id": "controlled_publish_not_authorized",
+      "status": "hard_gate",
+      "owner": "operator",
+      "required_input": "Exact controlled publish authorization is required before any publish command."
+    }
+  ],
+  "next_task_recommendation": {
+    "id": "SEO-ARTICLE-RIASEC-V2-PUBLISH-PREFLIGHT-01",
+    "status": "allowed_as_no_mutation_readiness_artifact_only_after_separate_authorization",
+    "expected_decision_without_operator_inputs": "NO-GO_OPERATOR_INPUTS_REQUIRED",
+    "cms_mutation_allowed": false,
+    "publish_allowed": false,
+    "search_submission_allowed": false,
+    "deploy_allowed": false
+  },
+  "sidecar_issues": [
+    {
+      "id": "RIASEC_V2_CMS_DRAFT_APPROVAL_PREFLIGHT_NO_GO",
+      "status": "blocked_external_operator_input",
+      "note": "CMS draft approval preflight cannot pass until reference, media, revision, claim, internal-link, and product-availability inputs are supplied."
+    },
+    {
+      "id": "RIASEC_V2_NO_CMS_MUTATION_AUTHORIZATION",
+      "status": "hard_gate",
+      "note": "This task was preflight-only. CMS draft approval mutation requires separate explicit authorization."
+    }
+  ],
+  "scope_validation": {
+    "cms_mutation_performed": false,
+    "publish_performed": false,
+    "search_submission_performed": false,
+    "deploy_performed": false,
+    "content_rewrite_performed": false,
+    "private_url_access_performed": false,
+    "secret_env_cookie_token_read": false,
+    "operator_approval_claimed": false,
+    "allowed_paths_only": true
+  }
+}

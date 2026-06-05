@@ -22851,3 +22851,45 @@ prs:
     content_rewrite_allowed: false
     content_authority: CMS/backend
     next_task: SEO-ARTICLE-RIASEC-V2-CMS-DRAFT-APPROVAL-PREFLIGHT-01 after operator inputs and separate authorization
+
+  - id: SEO-ARTICLE-RIASEC-V2-CMS-DRAFT-APPROVAL-PREFLIGHT-01
+    repo: fap-api
+    depends_on:
+      - SEO-ARTICLE-RIASEC-V2-REFERENCE-MEDIA-REVISION-APPROVAL-01
+    branch: codex/seo-article-riasec-v2-cms-draft-approval-preflight-01
+    title: "docs(seo): preflight RIASEC draft approval readiness"
+    train_scope: seo_article_content_package_riasec_explanation_v2
+    status: in_progress
+    scope:
+      - Check whether the RIASEC V2 zh/en CMS drafts have enough operator inputs to proceed toward CMS draft approval.
+      - Record operator input readiness, publish blockers, draft/public/indexing safety, and next-gate conditions without mutating CMS.
+      - Add a generated artifact, human-readable preflight report, focused artifact contract test, and necessary PR-train ledger updates.
+    allowed_paths:
+      - backend/docs/seo/riasec-explanation-cms-draft-approval-preflight.md
+      - backend/docs/seo/generated/riasec-explanation-cms-draft-approval-preflight.v1.json
+      - backend/tests/Feature/SEO/RiasecExplanationCmsDraftApprovalPreflightTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Rewrite article body/title/H1/meta/FAQ/CTA, mutate CMS, approve revisions, publish, submit search URLs, deploy, or access private result/orders/share/pay/payment/history/tokenized URLs.
+      - Convert Unknown operator inputs to false, 0, or pass.
+    validation:
+      - php -l backend/tests/Feature/SEO/RiasecExplanationCmsDraftApprovalPreflightTest.php
+      - python3 -m json.tool backend/docs/seo/generated/riasec-explanation-cms-draft-approval-preflight.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=RiasecExplanationCmsDraftApprovalPreflightTest --no-ansi
+      - git diff --check -- backend/docs/seo/riasec-explanation-cms-draft-approval-preflight.md backend/docs/seo/generated/riasec-explanation-cms-draft-approval-preflight.v1.json backend/tests/Feature/SEO/RiasecExplanationCmsDraftApprovalPreflightTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    content_rewrite_allowed: false
+    content_authority: CMS/backend
+    next_task: SEO-ARTICLE-RIASEC-V2-PUBLISH-PREFLIGHT-01 after separate authorization; expected NO-GO until operator inputs pass
