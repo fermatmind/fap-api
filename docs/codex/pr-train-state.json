@@ -45025,6 +45025,138 @@
       "review_rerun_report": "backend/docs/operations/help-content-draft-editorial-review-rerun-2026-06-05.md"
     }
   },
+  "HELP-CONTENT-DRAFT-OPERATOR-REVIEW-01": {
+    "repo": "fap-api",
+    "branch": "codex/help-content-draft-operator-review-01",
+    "base": "origin/main",
+    "status": "local_checks_passed",
+    "train_scope": "window_9_help_service_content",
+    "title": "docs(help): record Help draft operator review blockers",
+    "depends_on": [
+      "HELP-CONTENT-DRAFT-CMS-SYNC-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User authorized execution of HELP-CONTENT-DRAFT-OPERATOR-REVIEW-01. Codex did not treat execution authorization as publish approval or unblocked Operator approval."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "HELP-CONTENT-DRAFT-CMS-SYNC-01 is merged as PR #1927 and ledger closeout is merged through PR #1930."
+      },
+      "source_package": {
+        "status": "pass",
+        "sha256": "f971f5cd279018c2db469ccd87c43484c4983de5484e8c1e47343aa5813e6bb9",
+        "content_mode": "draft_only",
+        "publish_allowed": false,
+        "requires_operator_review": true
+      },
+      "cms_draft_postcheck": {
+        "status": "pass",
+        "record_count": 12,
+        "all_status_draft": true,
+        "all_non_public": true,
+        "all_non_indexable": true,
+        "all_unpublished": true,
+        "all_owner_review": true
+      },
+      "review": {
+        "status": "blocked_policy_owner_inputs_required",
+        "review_passed": false,
+        "operator_approval_claimed": false,
+        "notes": "Visible-body private URL/raw identifier checks passed, but refund exclusions, refund handling time, data deletion handling time, retained-data exceptions, privacy analytics wording confirmation, contact-support routing, and FAQ schema equality remain unresolved."
+      },
+      "public_surface": {
+        "status": "pass_with_contact_support_blocker",
+        "localized_help_routes_all_404": true,
+        "contact_support_routes_404": true,
+        "sitemap_llms_target_hits": 0
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          {
+            "command": "python3 -m json.tool backend/docs/help/generated/help-content-draft-operator-review-01.v1.json >/dev/null",
+            "status": "pass"
+          },
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "pass"
+          },
+          {
+            "command": "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+            "status": "pass"
+          },
+          {
+            "command": "git diff --check -- backend/docs/help/generated/help-content-draft-operator-review-01.v1.json backend/docs/operations/help-content-draft-operator-review-2026-06-05.md docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+            "status": "pass"
+          }
+        ]
+      }
+    },
+    "failure_reason": "Operator review not passed because policy-owner inputs and contact-support route/support_contact readiness remain unresolved.",
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "result": {
+      "decision": "REVIEW_BLOCKED_POLICY_OWNER_INPUTS_REQUIRED",
+      "review_passed": false,
+      "operator_approval_claimed": false,
+      "generated_artifact": "backend/docs/help/generated/help-content-draft-operator-review-01.v1.json",
+      "operations_report": "backend/docs/operations/help-content-draft-operator-review-2026-06-05.md",
+      "next_task_recommendation": "HELP-CONTENT-DRAFT-POLICY-OWNER-ANSWERS-01"
+    },
+    "scope_validation": {
+      "cms_mutation_performed": false,
+      "publish_performed": false,
+      "deploy_performed": false,
+      "search_submission_performed": false,
+      "payment_or_refund_performed": false,
+      "payment_provider_changed": false,
+      "private_url_access_performed": false,
+      "secret_env_cookie_token_read": false,
+      "operator_approval_claimed": false,
+      "content_rewrite_performed": false,
+      "allowed_paths_only": true
+    },
+    "sidecars": [
+      {
+        "id": "HELP-CONTENT-DRAFT-OPERATOR-REVIEW-POLICY-OWNER-FIELDS",
+        "status": "hard_gate",
+        "note": "Need refund exclusions, refund handling time, data deletion handling time, retained-data exceptions, and privacy analytics wording confirmation before review can pass."
+      },
+      {
+        "id": "HELP-CONTENT-DRAFT-CONTACT-SUPPORT-ROUTE",
+        "status": "hard_gate",
+        "note": "The package references contact-support internal links, but zh/en contact-support routes currently return 404."
+      },
+      {
+        "id": "HELP-CONTENT-DRAFT-PUBLISH-BLOCK",
+        "status": "hard_gate",
+        "note": "Publish remains blocked and requires separate exact approval after policy-owner fields, operator review, and publish preflight pass."
+      }
+    ],
+    "next_task": "HELP-CONTENT-DRAFT-POLICY-OWNER-ANSWERS-01",
+    "transitions": [
+      {
+        "at": "2026-06-05",
+        "status": "authorized",
+        "note": "User authorized execution of HELP-CONTENT-DRAFT-OPERATOR-REVIEW-01."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "local_artifacts_created_validation_pending",
+        "note": "Created blocked operator-review artifact and operations report; local validation pending."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "local_checks_passed",
+        "note": "Operator-review artifact, state JSON, manifest YAML, and scoped diff whitespace checks passed. Review remains blocked and Operator approval was not claimed."
+      }
+    ]
+  },
   "PUBLIC-BENEFIT-ASSET-PACKAGES-ARCHIVE-01": {
     "repo": "fap-api",
     "branch": "codex/public-benefit-asset-packages-archive-01",
