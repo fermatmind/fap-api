@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-05T03:26:07Z",
+  "updated_at": "2026-06-05T11:35:00+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -45818,11 +45818,11 @@
     "repo": "fap-api",
     "base": "main",
     "train_scope": "seo_article_content_package_riasec_explanation_v2",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-05T03:25:13Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "branch": "codex/seo-article-riasec-v2-package-validation-01",
-    "status": "ready_to_merge",
+    "status": "merged",
     "title": "test(seo): validate RIASEC explanation package v2 boundaries",
     "depends_on": [
       "SEO-ARTICLE-RIASEC-V2-PACKAGE-ARCHIVE-01"
@@ -45874,7 +45874,7 @@
       "search_submit_allowed": false
     },
     "failure_reason": null,
-    "commit_sha": null,
+    "commit_sha": "0d27ca62fde9a389eec97c95d9ba97b20dfc6546",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1911",
     "transitions": [
       {
@@ -45900,6 +45900,12 @@
         "from": "pr_open",
         "to": "ready_to_merge",
         "notes": "All required GitHub checks passed on PR #1911."
+      },
+      {
+        "at": "2026-06-05T11:26:00+08:00",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "notes": "Reconciled in PR3 after GitHub showed PR #1911 merged at 2026-06-05T03:25:13Z with merge commit 0d27ca62fde9a389eec97c95d9ba97b20dfc6546; origin/main contains the merge commit; remote task branch is deleted; local task branch is absent."
       }
     ]
   },
@@ -45911,7 +45917,7 @@
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "branch": "codex/seo-article-riasec-v2-reference-source-review-01",
-    "status": "planned",
+    "status": "ready_to_merge",
     "title": "docs(seo): verify reference needs for RIASEC explanation package",
     "depends_on": [
       "SEO-ARTICLE-RIASEC-V2-PACKAGE-VALIDATION-01"
@@ -45922,32 +45928,72 @@
         "evidence": "User provided an explicit /goal for the RIASEC explanation V2 SEO article PR train, including PR ids, branches, titles, scopes, allowed paths, and hard gates. Default execution is allowed only through CMS draft preflight."
       },
       "dependency": {
-        "status": "pending",
-        "evidence": "Waiting for SEO-ARTICLE-RIASEC-V2-PACKAGE-VALIDATION-01 to merge."
+        "status": "pass",
+        "evidence": "SEO-ARTICLE-RIASEC-V2-PACKAGE-VALIDATION-01 merged as PR #1911 at 2026-06-05T03:25:13Z; origin/main contains merge commit 0d27ca62fde9a389eec97c95d9ba97b20dfc6546."
       },
       "scope_validation": {
-        "status": "pending",
-        "evidence": null
+        "status": "pass",
+        "evidence": "Changed files are confined to backend/docs/seo/riasec-explanation-reference-source-review.md, backend/docs/seo/generated/riasec-explanation-reference-source-review.v1.json, and docs/codex PR-train metadata."
       },
       "local": {
-        "status": "pending",
-        "commands": []
+        "status": "pass",
+        "commands": [
+          "python3 -m json.tool backend/docs/seo/generated/riasec-explanation-reference-source-review.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "git diff --check -- backend/docs/seo/riasec-explanation-reference-source-review.md backend/docs/seo/generated/riasec-explanation-reference-source-review.v1.json docs/codex/pr-train.yaml docs/codex/pr-train-state.json"
+        ],
+        "notes": "Public source review ledger, JSON/YAML parse, and scoped diff check passed. Codex did not rewrite article copy."
       },
       "github": {
-        "status": "pending",
-        "evidence": null
+        "status": "pass",
+        "evidence": "GitHub checks passed on PR #1913: Semgrep, hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
       }
     },
-    "result": {},
+    "result": {
+      "review_path": "backend/docs/seo/riasec-explanation-reference-source-review.md",
+      "generated_review_path": "backend/docs/seo/generated/riasec-explanation-reference-source-review.v1.json",
+      "source_verification_status": "partially_verified_public_sources_with_publish_blockers",
+      "decision": "GO for CMS import package preparation; NO-GO for publish until source review is accepted.",
+      "publish_blockers": [
+        "operator_source_review_not_complete",
+        "psychometrics_review_not_complete",
+        "holland_hexagon_source_acceptance_needed",
+        "mbti_big_five_comparison_review_needed",
+        "report_preview_product_availability_unknown",
+        "cover_image_cms_media_placeholder_unresolved"
+      ],
+      "cms_draft_created": false,
+      "publish_allowed": false,
+      "search_submit_allowed": false
+    },
     "failure_reason": null,
     "commit_sha": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1913",
     "transitions": [
       {
         "at": "2026-06-05T10:52:00+08:00",
         "from": "missing_from_manifest",
         "to": "planned",
         "notes": "Initialized from explicit SEO-ARTICLE-CONTENT-PACKAGE-RIASEC-EXPLANATION-01 /goal. No CMS mutation, publish, search submission, deploy, private URL access, or content rewrite authorized."
+      },
+      {
+        "at": "2026-06-05T11:26:00+08:00",
+        "from": "planned",
+        "to": "local_checks_passed",
+        "notes": "Source review ledger recorded public O*NET sources and publish blockers. GO for CMS import package preparation only."
+      },
+      {
+        "at": "2026-06-05T11:29:00+08:00",
+        "from": "local_checks_passed",
+        "to": "pr_open",
+        "notes": "Opened https://github.com/fermatmind/fap-api/pull/1913."
+      },
+      {
+        "at": "2026-06-05T11:35:00+08:00",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "notes": "All required GitHub checks passed on PR #1913."
       }
     ]
   },

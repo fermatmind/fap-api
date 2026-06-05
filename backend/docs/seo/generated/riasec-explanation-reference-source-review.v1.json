@@ -1,0 +1,111 @@
+{
+  "task_id": "SEO-ARTICLE-RIASEC-V2-REFERENCE-SOURCE-REVIEW-01",
+  "source_package": "backend/docs/seo/article-packages/riasec-explanation-v2/riasec-explanation-v2.cms-import.json",
+  "generated_at": "2026-06-05",
+  "content_rewrite_performed": false,
+  "cms_draft_created": false,
+  "publish_allowed": false,
+  "search_submit_allowed": false,
+  "decision": "GO for CMS import package preparation; NO-GO for publish until operator/editor source review accepts or resolves listed sources.",
+  "source_verification_status": "partially_verified_public_sources_with_publish_blockers",
+  "sources": [
+    {
+      "category": "primary_model_background",
+      "status": "verified_public_source",
+      "title": "O*NET Interest Profiler Manual",
+      "url": "https://www.onetcenter.org/reports/IP_Manual.html",
+      "publisher": "National Center for O*NET Development / O*NET Resource Center",
+      "observed_support": [
+        "The O*NET Interest Profiler is described as a vocational interest inventory for educational planning, career exploration, and career guidance.",
+        "The manual states Holland’s RIASEC theoretical model is the basis of the Interest Profiler scales."
+      ],
+      "supports_article_claims": [
+        "RIASEC/Holland Code as vocational interest model background",
+        "Use as career exploration and guidance support, not deterministic career decision authority"
+      ],
+      "publish_notes": "Use as a background/reference source after editor verifies citation style. This does not imply FermatMind is affiliated with or endorsed by O*NET, DOL, Holland, or any official body."
+    },
+    {
+      "category": "six_interest_areas",
+      "status": "verified_public_source",
+      "title": "Browse by Career Interest Types",
+      "url": "https://www.onetonline.org/find/descriptor/browse/1.B.1/",
+      "publisher": "O*NET OnLine",
+      "observed_support": [
+        "O*NET describes career interest types as broad types of work users enjoy.",
+        "The page lists Realistic, Investigative, Artistic, Social, Enterprising, and Conventional interest types with work-activity descriptions."
+      ],
+      "supports_article_claims": [
+        "Six RIASEC areas exist and can be described through work activities/environments",
+        "Career interest framing for public user education"
+      ],
+      "publish_notes": "Suitable source category for six-area descriptions. Final article should not copy source wording."
+    },
+    {
+      "category": "career_information_system_context",
+      "status": "verified_public_source",
+      "title": "O*NET Services Reference Manual: O*NET Interest Profiler endpoints",
+      "url": "https://services.onetcenter.org/reference/mpp/ip/",
+      "publisher": "O*NET Web Services",
+      "observed_support": [
+        "The public services reference enumerates Interest Profiler results, matching careers, RIASEC interests, and careers related to interests as separate service surfaces."
+      ],
+      "supports_article_claims": [
+        "RIASEC interest results can be used as structured inputs for career exploration systems",
+        "Career matching/exploration should remain a system-assisted exploration path, not a promise of outcome"
+      ],
+      "publish_notes": "Use only to support system/context framing. Do not imply FermatMind uses O*NET APIs or data unless separately verified."
+    },
+    {
+      "category": "interests_vs_work_styles_context",
+      "status": "verified_public_source",
+      "title": "The O*NET Content Model",
+      "url": "https://www.onetcenter.org/content.html",
+      "publisher": "O*NET Resource Center",
+      "observed_support": [
+        "The O*NET Content Model separates Career Interests, Abilities, and Work Styles under Worker Characteristics.",
+        "The model frames Career Interests as broad work users enjoy and Work Styles as personality tendencies exhibited at work."
+      ],
+      "supports_article_claims": [
+        "Vocational interests are a different content category from work-style/personality-tendency signals",
+        "Comparison context between RIASEC and broader personality/work-style models can be framed conservatively"
+      ],
+      "publish_notes": "This supports a category distinction, not claims about MBTI or Big Five validity. MBTI/Big Five comparison wording still needs internal editorial review."
+    },
+    {
+      "category": "claim_boundary",
+      "status": "operator_review_required",
+      "title": "Claim-boundary acceptance for non-deterministic career language",
+      "url": "Unknown",
+      "publisher": "Unknown",
+      "observed_support": [
+        "The package already uses non-deterministic language and validation passed claim-boundary scan.",
+        "A source or editorial policy should still explicitly approve career exploration vs career guarantee language before publish."
+      ],
+      "supports_article_claims": [
+        "No career guarantee",
+        "No diagnosis",
+        "No official certification implication",
+        "No deterministic matching claim"
+      ],
+      "publish_notes": "Publish blocker until editor/psychometrics reviewer accepts source set and claim boundary."
+    }
+  ],
+  "unresolved_source_gaps": [
+    "Exact references for Holland hexagon concepts consistency, differentiation, and congruence need editor/psychometrics source acceptance before publish.",
+    "Comparison statements involving MBTI and Big Five should remain conservative and need internal editorial review before publish.",
+    "Report-preview language must be verified against actual FermatMind product module availability before publish.",
+    "No DOI, edition details, or exact publication facts were invented by Codex."
+  ],
+  "publish_blockers": [
+    "operator_source_review_not_complete",
+    "psychometrics_review_not_complete",
+    "holland_hexagon_source_acceptance_needed",
+    "mbti_big_five_comparison_review_needed",
+    "report_preview_product_availability_unknown",
+    "cover_image_cms_media_placeholder_unresolved"
+  ],
+  "go_for_next_pr": "SEO-ARTICLE-RIASEC-V2-CMS-IMPORT-PACKAGE-01",
+  "no_private_url_accessed": true,
+  "sources_public_only": true
+}
