@@ -209,6 +209,85 @@ final class ContentPagePublicApiTest extends TestCase
             ->assertJsonPath('page.canonical_path', '/help/contact');
     }
 
+    public function test_help_service_fields_are_first_class_content_page_contracts(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_READ,
+            PermissionNames::ADMIN_CONTENT_WRITE,
+        ]);
+
+        $payload = [
+            'title' => 'Help support',
+            'kicker' => 'Help',
+            'summary' => 'Help service support summary.',
+            'kind' => 'help',
+            'template' => 'help',
+            'animation_profile' => 'editorial',
+            'locale' => 'en',
+            'status' => ContentPage::STATUS_DRAFT,
+            'review_state' => 'owner_review',
+            'published_at' => null,
+            'updated_at' => '2026-06-05',
+            'effective_at' => null,
+            'source_doc' => 'help-service-content-drafts-01',
+            'is_public' => false,
+            'is_indexable' => false,
+            'content_md' => "## Support\n\nEmail support for help.",
+            'content_html' => '',
+            'seo_title' => 'Help support',
+            'meta_description' => 'Help support summary.',
+            'canonical_path' => '/help/support',
+            'support_contact' => 'support@fermatmind.com',
+            'policy_version' => 'help_service_policy.v1',
+            'reviewer' => 'operator_review',
+            'schema_enabled' => true,
+            'faq_items' => [
+                [
+                    'question' => 'How do I contact support?',
+                    'answer' => 'Email support.',
+                ],
+            ],
+        ];
+
+        $this->withSession(['ops_org_id' => 0])
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->putJson('/api/v0.5/internal/content-pages/help-support', $payload)
+            ->assertOk()
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('page.slug', 'help-support')
+            ->assertJsonPath('page.support_contact', 'support@fermatmind.com')
+            ->assertJsonPath('page.policy_version', 'help_service_policy.v1')
+            ->assertJsonPath('page.reviewer', 'operator_review')
+            ->assertJsonPath('page.schema_enabled', true)
+            ->assertJsonPath('page.faq_items.0.question', 'How do I contact support?')
+            ->assertJsonPath('page.faq_items.0.answer', 'Email support.');
+
+        $this->assertDatabaseHas('content_pages', [
+            'slug' => 'help-support',
+            'locale' => 'en',
+            'support_contact' => 'support@fermatmind.com',
+            'policy_version' => 'help_service_policy.v1',
+            'reviewer' => 'operator_review',
+            'schema_enabled' => true,
+            'is_public' => false,
+            'is_indexable' => false,
+            'status' => ContentPage::STATUS_DRAFT,
+        ]);
+
+        $page = ContentPage::query()
+            ->withoutGlobalScopes()
+            ->where('slug', 'help-support')
+            ->where('locale', 'en')
+            ->firstOrFail();
+
+        $this->assertSame([
+            [
+                'question' => 'How do I contact support?',
+                'answer' => 'Email support.',
+            ],
+        ], $page->faq_items);
+    }
+
     /**
      * @param  list<string>  $permissions
      */

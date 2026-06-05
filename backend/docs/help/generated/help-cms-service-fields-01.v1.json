@@ -1,0 +1,63 @@
+{
+  "schema_version": "help_cms_service_fields.v1",
+  "task": "HELP-CMS-SERVICE-FIELDS-01",
+  "generated_at": "2026-06-05",
+  "decision": "CONTENT_PAGE_HELP_SERVICE_FIELDS_ADDED_WITHOUT_CMS_MUTATION",
+  "source_context": {
+    "depends_on": "HELP-CONTENT-DRAFT-CONTACT-SUPPORT-DECISION-01",
+    "contact_support_decision_artifact": "backend/docs/help/generated/help-content-draft-contact-support-decision-01.v1.json",
+    "support_contact_mode": "email",
+    "support_contact": "support@fermatmind.com"
+  },
+  "content_page_fields": {
+    "support_contact": {
+      "type": "string_email",
+      "nullable": true,
+      "purpose": "First-class support contact authority for Help service pages."
+    },
+    "policy_version": {
+      "type": "string",
+      "nullable": true,
+      "purpose": "Policy/review version marker for Help service pages."
+    },
+    "reviewer": {
+      "type": "string",
+      "nullable": true,
+      "purpose": "Reviewer or review role marker for Help service pages."
+    },
+    "faq_items": {
+      "type": "json_list_question_answer",
+      "nullable": true,
+      "purpose": "Structured visible FAQ authority for later FAQPage schema equality checks."
+    },
+    "schema_enabled": {
+      "type": "boolean",
+      "nullable": false,
+      "default": false,
+      "purpose": "Explicit Help schema gate controlled by backend/CMS authority."
+    }
+  },
+  "runtime_contract": {
+    "public_content_page_payload_includes_fields": true,
+    "internal_content_page_summary_includes_fields": true,
+    "internal_update_accepts_fields": true,
+    "filament_editor_exposes_fields": true,
+    "translation_revision_payload_preserves_fields": true
+  },
+  "scope_validation": {
+    "cms_mutation_performed": false,
+    "publish_performed": false,
+    "deploy_performed": false,
+    "search_submission_performed": false,
+    "payment_or_refund_performed": false,
+    "payment_provider_changed": false,
+    "private_url_access_performed": false,
+    "secret_env_cookie_token_read": false,
+    "operator_approval_claimed": false,
+    "content_rewrite_performed": false,
+    "frontend_fallback_content_added": false,
+    "database_schema_changed": true,
+    "api_runtime_change": true
+  },
+  "next_task_recommendation": "HELP-CONTENT-DRAFT-POLICY-REVISION-APPLY-01"
+}

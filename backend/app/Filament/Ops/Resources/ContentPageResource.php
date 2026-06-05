@@ -126,7 +126,11 @@ class ContentPageResource extends Resource
                                                 Forms\Components\TextInput::make('template')->required()->maxLength(64)->default('company'),
                                                 Forms\Components\TextInput::make('animation_profile')->required()->maxLength(64)->default('none'),
                                                 Forms\Components\TextInput::make('owner')->maxLength(128),
+                                                Forms\Components\TextInput::make('support_contact')->email()->maxLength(255),
+                                                Forms\Components\TextInput::make('policy_version')->maxLength(128),
+                                                Forms\Components\TextInput::make('reviewer')->maxLength(128),
                                                 Forms\Components\TextInput::make('source_doc')->maxLength(255),
+                                                Forms\Components\Toggle::make('schema_enabled')->default(false),
                                             ])
                                             ->columns(2),
                                     ]),
@@ -138,6 +142,12 @@ class ContentPageResource extends Resource
                                                 Forms\Components\Toggle::make('science_review_required')->default(false),
                                                 Forms\Components\DateTimePicker::make('source_updated_at'),
                                                 Forms\Components\DateTimePicker::make('effective_at'),
+                                                Forms\Components\Repeater::make('faq_items')
+                                                    ->schema([
+                                                        Forms\Components\TextInput::make('question')->required()->maxLength(500),
+                                                        Forms\Components\Textarea::make('answer')->required()->rows(3)->maxLength(4000),
+                                                    ])
+                                                    ->columnSpanFull(),
                                             ])
                                             ->columns(2),
                                     ]),

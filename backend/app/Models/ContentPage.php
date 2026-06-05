@@ -108,6 +108,11 @@ final class ContentPage extends Model
         'meta_description',
         'seo_description',
         'canonical_path',
+        'support_contact',
+        'policy_version',
+        'reviewer',
+        'faq_items',
+        'schema_enabled',
         'status',
     ];
 
@@ -125,6 +130,8 @@ final class ContentPage extends Model
         'science_review_required' => 'boolean',
         'last_reviewed_at' => 'datetime',
         'headings_json' => 'array',
+        'faq_items' => 'array',
+        'schema_enabled' => 'boolean',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
@@ -214,6 +221,11 @@ final class ContentPage extends Model
             'seo_description' => (string) ($this->seo_description ?? ''),
             'meta_description' => (string) ($this->meta_description ?? ''),
             'canonical_path' => (string) ($this->canonical_path ?? ''),
+            'support_contact' => (string) ($this->support_contact ?? ''),
+            'policy_version' => (string) ($this->policy_version ?? ''),
+            'reviewer' => (string) ($this->reviewer ?? ''),
+            'faq_items' => $this->faq_items ?? [],
+            'schema_enabled' => (bool) ($this->schema_enabled ?? false),
         ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?: '');
     }
 }
