@@ -46474,11 +46474,11 @@
     "repo": "fap-api",
     "base": "main",
     "train_scope": "seo_article_content_package_riasec_explanation_v2",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-05T08:56:06Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "branch": "codex/seo-article-riasec-v2-importer-mapping-01",
-    "status": "pr_open",
+    "status": "merged",
     "title": "fix(cms): map RIASEC article target packages into editorial importer schema",
     "depends_on": [
       "SEO-ARTICLE-RIASEC-V2-CMS-DRAFT-PREFLIGHT-01"
@@ -46514,9 +46514,9 @@
       },
       "github": {
         "status": "pass",
-        "evidence": "PR #1923 checks passed: hygiene, supply-chain, content-pack-build-validate, Semgrep blocking secrets, Semgrep OSS, semgrep sarif non-blocking upload, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2.",
+        "evidence": "PR #1923 checks passed before merge: hygiene, supply-chain, content-pack-build-validate, Semgrep blocking secrets, Semgrep OSS, semgrep sarif non-blocking upload, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2.",
         "pr_url": "https://github.com/fermatmind/fap-api/pull/1923",
-        "commit_sha": "de420f0be1a9081c6c078d341e4e820e86b31ba4"
+        "commit_sha": "47c0c50d305c768725c6fa42ffa0db099631a6d0"
       }
     },
     "result": {
@@ -46545,7 +46545,7 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": "de420f0be1a9081c6c078d341e4e820e86b31ba4",
+    "commit_sha": "095a91ccd8d27c4ea9e9e1f490e992efd228c142",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1923",
     "transitions": [
       {
@@ -46576,6 +46576,12 @@
         "from": "pr_open",
         "to": "ready_to_merge",
         "notes": "GitHub checks passed for PR #1923; ready for squash merge after ledger update."
+      },
+      {
+        "at": "2026-06-05T08:56:06Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "notes": "PR #1923 squash-merged as 095a91ccd8d27c4ea9e9e1f490e992efd228c142. origin/main contains the merge commit; remote task branch is absent; local task branch was deleted after switching to detached origin/main."
       }
     ]
   },
