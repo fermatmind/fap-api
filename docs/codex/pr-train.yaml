@@ -21987,7 +21987,7 @@ prs:
     branch: codex/daily-giving-public-release-prereq-01
     title: "docs(benefit): define DailyGiving public release prerequisites"
     train_scope: window_7_public_benefit_trust_gate
-    status: in_progress
+    status: merged
     scope:
       - Define DailyGiving public release prerequisites for records API, months API, proof review, noindex, sitemap/llms exclusion, and claim lint.
       - Add generated prerequisite artifact and focused contract coverage.
@@ -22022,6 +22022,49 @@ prs:
     frontend_fallback_authority: false
     content_authority: CMS/backend
     next_task: DAILY-GIVING-PUBLIC-API-SMOKE-01
+
+  - id: DAILY-GIVING-PUBLIC-API-SMOKE-01
+    repo: fap-api
+    depends_on:
+      - DAILY-GIVING-PUBLIC-RELEASE-PREREQ-01
+    branch: codex/daily-giving-public-api-smoke-01
+    title: "test(benefit): add DailyGiving public API smoke gate"
+    train_scope: window_7_public_benefit_trust_gate
+    status: in_progress
+    scope:
+      - Add DailyGiving public API smoke coverage for records, months, show, and private-field exclusion using test fixtures only.
+      - Add generated public API smoke artifact.
+      - Keep real records, proof, CMS, publish, index, trust badge, search, social, and deploy actions non-mutating.
+    allowed_paths:
+      - backend/docs/operations/daily-giving-public-api-smoke.md
+      - backend/docs/operations/generated/daily-giving-public-api-smoke.v1.json
+      - backend/tests/Feature/Foundation/DailyGivingPublicApiSmokeTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Create production records, upload proof, process proof files, mutate CMS, publish, index DailyGiving, create trust badges, submit search URLs, run social distribution, deploy, or read secrets.
+    validation:
+      - php -l backend/tests/Feature/Foundation/DailyGivingPublicApiSmokeTest.php
+      - python3 -m json.tool backend/docs/operations/generated/daily-giving-public-api-smoke.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=DailyGivingPublicApiSmokeTest --no-ansi
+      - git diff --check -- backend/docs/operations/daily-giving-public-api-smoke.md backend/docs/operations/generated/daily-giving-public-api-smoke.v1.json backend/tests/Feature/Foundation/DailyGivingPublicApiSmokeTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: DAILY-GIVING-INDEXABILITY-GATE-01
 
   - id: SEO-ARTICLE-RIASEC-V2-PACKAGE-ARCHIVE-01
     repo: fap-api

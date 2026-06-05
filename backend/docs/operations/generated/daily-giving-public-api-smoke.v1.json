@@ -1,0 +1,36 @@
+{
+  "version": "daily_giving_public_api_smoke.v1",
+  "generated_at": "2026-06-05T00:00:00+08:00",
+  "mode": "backend_test_fixture_smoke",
+  "production_record_created": false,
+  "proof_uploaded": false,
+  "proof_processed": false,
+  "cms_mutation_performed": false,
+  "publish_performed": false,
+  "search_submission_performed": false,
+  "deploy_performed": false,
+  "smoke_endpoints": [
+    "/api/v0.5/foundation/giving-records",
+    "/api/v0.5/foundation/giving-records/months",
+    "/api/v0.5/foundation/giving-records/{record_code}"
+  ],
+  "fixture_expectations": {
+    "records_api_min_count": 1,
+    "months_api_min_count": 1,
+    "show_api_status": 200,
+    "fixture_is_indexable": false,
+    "fixture_donation_status": "verified",
+    "fixture_proof_status": "redacted_available"
+  },
+  "forbidden_public_fields": [
+    "proof_private_path",
+    "proof_redaction_notes",
+    "receipt_reference_private",
+    "internal_notes",
+    "created_by_admin_user_id",
+    "updated_by_admin_user_id"
+  ],
+  "trust_badge_allowed_now": false,
+  "public_amplification_allowed_now": false,
+  "next_pr": "DAILY-GIVING-INDEXABILITY-GATE-01"
+}
