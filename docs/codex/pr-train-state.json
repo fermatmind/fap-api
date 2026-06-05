@@ -35978,7 +35978,7 @@
   "CONTENT-PACKS-CI-ARTIFACT-CONSUMER-SPLIT-01": {
     "repo": "fap-api",
     "branch": "fix/content-packs-ci-artifact-consumer-split-01",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "commit_sha": "f42f3017987210b4b6ee9b002f90631ce861bc7e",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1768",
     "checks": {
@@ -45302,8 +45302,21 @@
         ]
       },
       "github": {
-        "status": "pending",
-        "commands": []
+        "status": "pass",
+        "commands": [
+          "gh pr checks 1907 --watch --interval 15"
+        ],
+        "jobs": [
+          "Semgrep OSS",
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "hygiene",
+          "supply-chain",
+          "content-pack-build-validate",
+          "verify-bigfive",
+          "verify-mbti-legacy",
+          "verify-mbti-v2"
+        ]
       }
     },
     "result": {
@@ -45363,6 +45376,11 @@
         "at": "2026-06-05",
         "status": "pr_open",
         "note": "Opened https://github.com/fermatmind/fap-api/pull/1907."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed for PR #1907."
       }
     ]
   }
