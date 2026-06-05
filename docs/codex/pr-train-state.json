@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-05T12:09:59Z",
+  "updated_at": "2026-06-05T12:17:44Z",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -47014,7 +47014,7 @@
     "repo": "fap-api",
     "branch": "codex/daily-giving-first-record-private-ledger-01",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "window_7_public_benefit_trust_gate",
     "title": "docs(benefit): record first DailyGiving private ledger gate",
     "depends_on": [
@@ -47052,7 +47052,7 @@
       },
       "github": {
         "status": "pass",
-        "evidence": "GitHub PR #1926 checks passed; mergeStateStatus=CLEAN; mergeable=MERGEABLE."
+        "evidence": "PR #1926 is MERGED; merge commit 7d21cdf9f28c234a2c3c5ff107db9627ba4adcc3 is contained in origin/main; remote task branch is absent."
       }
     },
     "result": {
@@ -47086,11 +47086,11 @@
       "next_authorization_required": "DAILY-GIVING-REDACTED-PUBLIC-PROOF-01"
     },
     "failure_reason": null,
-    "commit_sha": "50dee48190a592076814792289beef74134363e7",
+    "commit_sha": "7d21cdf9f28c234a2c3c5ff107db9627ba4adcc3",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1926",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-05T12:15:00Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "cms_write_performed": false,
@@ -47128,6 +47128,12 @@
         "from": "pr_open_github_checks_pending",
         "to": "ready_to_merge",
         "notes": "GitHub checks passed for PR #1926 and merge state was CLEAN. Pre-merge scope validation remained limited to PR13 docs/generated/test/ledger paths."
+      },
+      {
+        "at": "2026-06-05T12:17:44Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "notes": "Post-merge closeout: PR #1926 is MERGED at 2026-06-05T12:15:00Z, origin/main contains merge commit 7d21cdf9f28c234a2c3c5ff107db9627ba4adcc3, remote branch is deleted, and local task branch cleanup was executed after squash-merge verification."
       }
     ]
   },
