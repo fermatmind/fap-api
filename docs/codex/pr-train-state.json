@@ -47774,7 +47774,7 @@
     "repo": "fap-api",
     "base": "main",
     "branch": "codex/seo-article-riasec-v2-editorial-review-01",
-    "status": "local_validation_pending",
+    "status": "pr_open_github_checks_pending",
     "title": "docs(seo): record RIASEC draft editorial blockers",
     "train_scope": "seo_article_content_package_riasec_explanation_v2",
     "depends_on": [
@@ -47875,8 +47875,8 @@
         "note": "Publish, search submission, public indexability, sitemap/llms inclusion, and post-publish review remain forbidden until separate controlled publish preflight and exact publish authorization."
       }
     ],
-    "commit_sha": "23eb8e8f261e33ab7a62056e348ddd34bb07aa12",
-    "pr_url": null,
+    "commit_sha": "1fd67f12b602adbcf15ebd019e4e5e1d70fba2e3",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1937",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -47896,6 +47896,11 @@
         "at": "2026-06-05",
         "status": "local_checks_passed",
         "note": "Local JSON/YAML parsing, PHP lint, focused RiasecExplanationEditorialReviewTest, and scope diff checks passed."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "pr_open_github_checks_pending",
+        "note": "Opened PR #1937 for scoped RIASEC editorial review artifact, report, focused test, and PR-train metadata."
       }
     ]
   }
