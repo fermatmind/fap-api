@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use InvalidArgumentException;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -110,6 +111,17 @@ class DailyGivingRecord extends Model
         ];
     }
 
+    protected static function booted(): void
+    {
+        self::saving(function (self $record): void {
+            $violations = $record->proofStorageGateViolations();
+
+            if ($violations !== []) {
+                throw new InvalidArgumentException('DailyGiving proof storage gate failed: '.implode('; ', $violations));
+            }
+        });
+    }
+
     public function scopePublishedPublic(Builder $query): Builder
     {
         return $query
@@ -197,5 +209,80 @@ class DailyGivingRecord extends Model
             'public_notes' => $this->public_notes,
             'published_at' => $this->published_at?->toDateTimeString(),
         ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    public function proofStorageGateViolations(): array
+    {
+        $violations = [];
+        $privatePath = trim((string) ($this->proof_private_path ?? ''));
+        $publicUrl = trim((string) ($this->proof_public_url ?? ''));
+        $proofStatus = trim((string) ($this->proof_status ?? ''));
+
+        if ($privatePath !== '' && ! $this->looksLikePrivateProofPath($privatePath)) {
+            $violations[] = 'proof_private_path must point to a private disk/bucket path, not a public URL/path';
+        }
+
+        if ($publicUrl !== '' && ! $this->looksLikeReviewedPublicProofUrl($publicUrl)) {
+            $violations[] = 'proof_public_url must point to reviewed redacted public proof only';
+        }
+
+        if ($privatePath !== '' && $publicUrl !== '' && hash_equals($privatePath, $publicUrl)) {
+            $violations[] = 'proof_public_url must not equal proof_private_path';
+        }
+
+        if ($publicUrl !== '' && $proofStatus !== self::PROOF_REDACTED_AVAILABLE) {
+            $violations[] = 'proof_public_url requires proof_status=redacted_available';
+        }
+
+        if ($proofStatus === self::PROOF_WITHHELD && trim((string) ($this->proof_redaction_notes ?? '')) === '') {
+            $violations[] = 'withheld proof requires admin-only proof_redaction_notes reviewer reason';
+        }
+
+        return $violations;
+    }
+
+    private function looksLikePrivateProofPath(string $path): bool
+    {
+        $normalized = strtolower(trim($path));
+
+        if ($normalized === '') {
+            return false;
+        }
+
+        foreach (['http://', 'https://', '/storage/', 'storage/app/public/', 'public/', 'media/'] as $publicPrefix) {
+            if (str_starts_with($normalized, $publicPrefix)) {
+                return false;
+            }
+        }
+
+        foreach (['private://', 'private/', 'daily-giving/private/', 'foundation/private/', 'proofs/private/', 's3://private/', 'r2://private/'] as $privatePrefix) {
+            if (str_starts_with($normalized, $privatePrefix)) {
+                return true;
+            }
+        }
+
+        return str_contains($normalized, '/private/');
+    }
+
+    private function looksLikeReviewedPublicProofUrl(string $url): bool
+    {
+        $normalized = strtolower(trim($url));
+
+        if (! str_starts_with($normalized, 'https://')) {
+            return false;
+        }
+
+        foreach (['/private/', 'proof_private_path', 'receipt_reference_private', 'internal_notes', 'auth_token', 'session_id', 'raw-receipt', 'raw_receipt'] as $forbidden) {
+            if (str_contains($normalized, $forbidden)) {
+                return false;
+            }
+        }
+
+        return str_contains($normalized, 'redacted')
+            || str_contains($normalized, '/public/')
+            || str_contains($normalized, '/media/');
     }
 }
