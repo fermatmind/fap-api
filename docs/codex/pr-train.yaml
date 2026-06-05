@@ -22066,6 +22066,55 @@ prs:
     content_authority: CMS/backend
     next_task: DAILY-GIVING-INDEXABILITY-GATE-01
 
+  - id: DAILY-GIVING-FIRST-RECORD-REVIEW-TEMPLATE-01
+    repo: fap-api
+    depends_on:
+      - DAILY-GIVING-PUBLIC-API-SMOKE-01
+    external_prerequisites:
+      - repo: fap-web
+        id: DAILY-GIVING-INDEXABILITY-GATE-01
+        pr_url: https://github.com/fermatmind/fap-web/pull/1059
+        merge_commit_sha: e695916300581f2a9d1c4957b8cdbb20c51130fb
+    branch: codex/daily-giving-first-record-review-template-01
+    title: "docs(benefit): define DailyGiving first record review template"
+    train_scope: window_7_public_benefit_trust_gate
+    status: in_progress
+    scope:
+      - Add DailyGiving first-record review template for the later private-ledger authorization.
+      - Add generated first-record review template artifact.
+      - Add focused contract coverage for runtime-mutation blocks, private/noindex initial state, public-field exclusions, and claim boundaries.
+      - Keep real records, proof, CMS, publish, index, trust badge, search, social, payment-provider calls, and deploy actions non-mutating.
+    allowed_paths:
+      - backend/docs/operations/daily-giving-first-record-review-template.md
+      - backend/docs/operations/generated/daily-giving-first-record-review-template.v1.json
+      - backend/tests/Feature/Foundation/DailyGivingFirstRecordReviewTemplateTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Create production records, upload proof, process proof files, mutate CMS, publish, index DailyGiving, create trust badges, submit search URLs, run social distribution, call payment providers, deploy, or read secrets.
+    validation:
+      - php -l backend/tests/Feature/Foundation/DailyGivingFirstRecordReviewTemplateTest.php
+      - python3 -m json.tool backend/docs/operations/generated/daily-giving-first-record-review-template.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=DailyGivingFirstRecordReviewTemplateTest --no-ansi
+      - git diff --check -- backend/docs/operations/daily-giving-first-record-review-template.md backend/docs/operations/generated/daily-giving-first-record-review-template.v1.json backend/tests/Feature/Foundation/DailyGivingFirstRecordReviewTemplateTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: DAILY-GIVING-FIRST-RECORD-PRIVATE-LEDGER-01
+
   - id: SEO-ARTICLE-RIASEC-V2-PACKAGE-ARCHIVE-01
     repo: fap-api
     branch: codex/seo-article-riasec-v2-package-archive-01

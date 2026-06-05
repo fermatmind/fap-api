@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "id": "DAILY-GIVING-FIRST-RECORD-REVIEW-TEMPLATE-01",
+  "date": "2026-06-05",
+  "mode": "review_template_only",
+  "decision": "Prepare the first-record review template and stop before any production record or proof mutation.",
+  "production_record_created": false,
+  "proof_uploaded": false,
+  "proof_processed": false,
+  "private_proof_path_created": false,
+  "redacted_public_proof_created": false,
+  "cms_mutation_performed": false,
+  "publish_performed": false,
+  "search_submission_performed": false,
+  "social_distribution_performed": false,
+  "payment_provider_call_performed": false,
+  "deploy_performed": false,
+  "trust_badge_allowed_now": false,
+  "public_amplification_allowed_now": false,
+  "daily_giving_indexable_allowed_now": false,
+  "daily_giving_sitemap_inclusion_allowed_now": false,
+  "daily_giving_llms_inclusion_allowed_now": false,
+  "operator_intent": {
+    "planned_amount_minor": 1000,
+    "planned_currency": "CNY",
+    "recipient_name": "United Nations Foundation",
+    "recipient_role": "recipient_only",
+    "requires_receipt_confirmation": true,
+    "official_relationship_claim_allowed": false
+  },
+  "initial_private_record_state": {
+    "donation_status_allowed": [
+      "planned"
+    ],
+    "proof_status_allowed": [
+      "none",
+      "redacted_pending"
+    ],
+    "is_public": false,
+    "is_indexable": false,
+    "published_at": null
+  },
+  "public_activation_required_gates": [
+    "raw_proof_private_storage_confirmed",
+    "redacted_public_proof_reviewed_or_withheld_reason_recorded",
+    "recipient_amount_currency_date_verified_against_receipt",
+    "public_projection_private_fields_absent",
+    "claim_lint_clean",
+    "donation_status_completed_or_verified",
+    "is_public_true_after_review",
+    "is_indexable_false",
+    "daily_giving_page_noindex",
+    "sitemap_llms_daily_giving_absent",
+    "trust_badge_blocked"
+  ],
+  "forbidden_public_fields": [
+    "proof_private_path",
+    "proof_redaction_notes",
+    "receipt_reference_private",
+    "internal_notes",
+    "created_by_admin_user_id",
+    "updated_by_admin_user_id"
+  ],
+  "claim_boundary": {
+    "official_relationship_claim_allowed": false,
+    "endorsement_claim_allowed": false,
+    "certification_claim_allowed": false,
+    "guaranteed_impact_claim_allowed": false,
+    "unsupported_stable_daily_operation_claim_allowed": false
+  },
+  "next_authorization_required": "DAILY-GIVING-FIRST-RECORD-PRIVATE-LEDGER-01",
+  "authorization_prompt_required": true
+}
