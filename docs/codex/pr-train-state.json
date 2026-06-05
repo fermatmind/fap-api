@@ -46097,7 +46097,7 @@
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "branch": "codex/seo-article-riasec-v2-cms-import-package-01",
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "title": "docs(cms): prepare RIASEC explanation CMS import package",
     "depends_on": [
       "SEO-ARTICLE-RIASEC-V2-REFERENCE-SOURCE-REVIEW-01"
@@ -46129,7 +46129,9 @@
       },
       "github": {
         "status": "pending",
-        "evidence": null
+        "evidence": "PR opened; waiting for GitHub checks.",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/1915",
+        "commit_sha": "4184d74b860c0c494765659a39209e1952de9db4"
       }
     },
     "result": {
@@ -46144,8 +46146,8 @@
       "search_submit_allowed": false
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "4184d74b860c0c494765659a39209e1952de9db4",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1915",
     "transitions": [
       {
         "at": "2026-06-05T10:52:00+08:00",
@@ -46158,6 +46160,11 @@
         "from": "planned",
         "to": "local_checks_passed",
         "notes": "CMS import package generated with zh/en targets, draft defaults, noindex/nofollow, schema disabled until preview, and retained publish blockers."
+      },
+      {
+        "status": "pr_open",
+        "evidence": "https://github.com/fermatmind/fap-api/pull/1915",
+        "commit_sha": "4184d74b860c0c494765659a39209e1952de9db4"
       }
     ]
   },
