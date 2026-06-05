@@ -1,0 +1,71 @@
+{
+  "schema_version": "help-content-draft-create-01.v1",
+  "task": "HELP-CONTENT-DRAFT-CREATE-01",
+  "decision": "CMS_DRAFT_CREATE_COMPLETED_WITH_SIDECARS",
+  "ssh_alias": "fap-api-prod",
+  "password_used": false,
+  "secret_env_cookie_token_read": false,
+  "publish_performed": false,
+  "search_submission_performed": false,
+  "deploy_performed": false,
+  "private_url_access_performed": false,
+  "payment_or_refund_performed": false,
+  "payment_provider_changed": false,
+  "source": {
+    "package": "HELP-SERVICE-CONTENT-DRAFTS-01",
+    "local_source_file": "backend/docs/help/import-packages/content-pages-draft-source/content_pages.help_service_drafts_01.json",
+    "remote_temp_source_dir": "/tmp/fm-help-drafts.nnYsTB",
+    "remote_temp_source_removed": true
+  },
+  "dry_run": {
+    "passed": true,
+    "files_found": 1,
+    "pages_found": 12,
+    "will_create": 12,
+    "will_update": 0,
+    "will_skip": 0
+  },
+  "import": {
+    "performed": true,
+    "status_mode": "draft",
+    "upsert": false,
+    "files_found": 1,
+    "pages_found": 12,
+    "will_create": 12,
+    "will_update": 0,
+    "will_skip": 0
+  },
+  "created_records": [
+    {"id": 31, "slug": "help-unlock-failure", "locale": "zh-CN", "status": "draft", "is_public": false, "is_indexable": false, "published_revision_id": null, "published_at": null, "path": "/help/unlock-failure", "canonical_path": "/help/unlock-failure", "review_state": "owner_review", "translation_group_id": "content-page-help-unlock-failure"},
+    {"id": 32, "slug": "help-unlock-failure", "locale": "en", "status": "draft", "is_public": false, "is_indexable": false, "published_revision_id": null, "published_at": null, "path": "/help/unlock-failure", "canonical_path": "/help/unlock-failure", "review_state": "owner_review", "translation_group_id": "content-page-help-unlock-failure"},
+    {"id": 33, "slug": "help-payment-refund", "locale": "zh-CN", "status": "draft", "is_public": false, "is_indexable": false, "published_revision_id": null, "published_at": null, "path": "/help/payment-refund", "canonical_path": "/help/payment-refund", "review_state": "owner_review", "translation_group_id": "content-page-help-payment-refund"},
+    {"id": 34, "slug": "help-payment-refund", "locale": "en", "status": "draft", "is_public": false, "is_indexable": false, "published_revision_id": null, "published_at": null, "path": "/help/payment-refund", "canonical_path": "/help/payment-refund", "review_state": "owner_review", "translation_group_id": "content-page-help-payment-refund"},
+    {"id": 35, "slug": "help-result-recovery", "locale": "zh-CN", "status": "draft", "is_public": false, "is_indexable": false, "published_revision_id": null, "published_at": null, "path": "/help/result-recovery", "canonical_path": "/help/result-recovery", "review_state": "owner_review", "translation_group_id": "content-page-help-result-recovery"},
+    {"id": 36, "slug": "help-result-recovery", "locale": "en", "status": "draft", "is_public": false, "is_indexable": false, "published_revision_id": null, "published_at": null, "path": "/help/result-recovery", "canonical_path": "/help/result-recovery", "review_state": "owner_review", "translation_group_id": "content-page-help-result-recovery"},
+    {"id": 37, "slug": "help-privacy-data", "locale": "zh-CN", "status": "draft", "is_public": false, "is_indexable": false, "published_revision_id": null, "published_at": null, "path": "/help/privacy-data", "canonical_path": "/help/privacy-data", "review_state": "owner_review", "translation_group_id": "content-page-help-privacy-data"},
+    {"id": 38, "slug": "help-privacy-data", "locale": "en", "status": "draft", "is_public": false, "is_indexable": false, "published_revision_id": null, "published_at": null, "path": "/help/privacy-data", "canonical_path": "/help/privacy-data", "review_state": "owner_review", "translation_group_id": "content-page-help-privacy-data"},
+    {"id": 39, "slug": "help-use-boundaries", "locale": "zh-CN", "status": "draft", "is_public": false, "is_indexable": false, "published_revision_id": null, "published_at": null, "path": "/help/use-boundaries", "canonical_path": "/help/use-boundaries", "review_state": "owner_review", "translation_group_id": "content-page-help-use-boundaries"},
+    {"id": 40, "slug": "help-use-boundaries", "locale": "en", "status": "draft", "is_public": false, "is_indexable": false, "published_revision_id": null, "published_at": null, "path": "/help/use-boundaries", "canonical_path": "/help/use-boundaries", "review_state": "owner_review", "translation_group_id": "content-page-help-use-boundaries"},
+    {"id": 41, "slug": "help-data-deletion", "locale": "zh-CN", "status": "draft", "is_public": false, "is_indexable": false, "published_revision_id": null, "published_at": null, "path": "/help/data-deletion", "canonical_path": "/help/data-deletion", "review_state": "owner_review", "translation_group_id": "content-page-help-data-deletion"},
+    {"id": 42, "slug": "help-data-deletion", "locale": "en", "status": "draft", "is_public": false, "is_indexable": false, "published_revision_id": null, "published_at": null, "path": "/help/data-deletion", "canonical_path": "/help/data-deletion", "review_state": "owner_review", "translation_group_id": "content-page-help-data-deletion"}
+  ],
+  "public_surface": {
+    "all_target_routes_404": true,
+    "sitemap_target_hits": 0,
+    "llms_target_hits": 0,
+    "llms_full_target_hits": 0
+  },
+  "sidecars": [
+    {
+      "id": "HELP-CONTENT-DRAFT-CREATE-SUPPORT-CONTACT-FIELD",
+      "status": "needs_postcheck",
+      "note": "ContentPage has no first-class support_contact field; import package contains support@fermatmind.com, but CMS row-level support-contact authority needs PR5/PR6 verification before publish."
+    },
+    {
+      "id": "HELP-CONTENT-DRAFT-CREATE-TEMP-SOURCE",
+      "status": "closed",
+      "note": "Production release did not contain PR3 package files, so temporary source-dir import was used and removed. No deploy was performed."
+    }
+  ],
+  "next_task": "HELP-CONTENT-DRAFT-POSTCHECK-01"
+}

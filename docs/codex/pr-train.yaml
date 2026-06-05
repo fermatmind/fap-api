@@ -21477,6 +21477,46 @@ prs:
     content_authority: CMS/backend
     next_task: HELP-CONTENT-DRAFT-CREATE-01
 
+  - id: HELP-CONTENT-DRAFT-CREATE-01
+    repo: fap-api
+    branch: codex/help-content-draft-create-01
+    title: "ops(cms): create Help service content drafts"
+    train_scope: window_9_help_service_content
+    status: in_progress
+    depends_on:
+      - HELP-CMS-IMPORT-PACKAGE-01
+    scope:
+      - Create six bilingual Help service CMS drafts only through the controlled ContentPage importer.
+      - Keep every draft non-public, non-indexable, unpublished, and excluded from public routes, sitemap, llms, and search submission.
+      - Archive draft IDs, import output, public absence checks, and sidecar issues.
+    allowed_paths:
+      - backend/docs/help/generated/help-content-draft-create-01.v1.json
+      - backend/docs/operations/help-content-draft-create-2026-06-05.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Publish, make indexable, submit search URLs, deploy, access private result/order/share/pay/payment/history URLs, read secrets/env/cookies/tokens, run payment/refund flows, or change payment-provider behavior.
+    validation:
+      - python3 -m json.tool backend/docs/help/generated/help-content-draft-create-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- backend/docs/help/generated/help-content-draft-create-01.v1.json backend/docs/operations/help-content-draft-create-2026-06-05.md docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: true
+    database_mutation: true
+    payment_provider_call: false
+    cms_mutation: true
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: HELP-CONTENT-DRAFT-POSTCHECK-01
+
   - id: PUBLIC-BENEFIT-ASSET-PACKAGES-ARCHIVE-01
     repo: fap-api
     branch: codex/public-benefit-asset-packages-archive-01
