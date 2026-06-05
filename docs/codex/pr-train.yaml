@@ -20878,7 +20878,7 @@ prs:
     branch: codex/seo-dash-collector-02-write-gate
     title: "docs(seo): define controlled collector write gate"
     train_scope: seo_intel_controlled_collector_write_gate
-    status: executing
+    status: merged
     depends_on:
       - SEO-DASH-COLLECTOR-01-SMOKE-RECONCILE
     scope:
@@ -21398,7 +21398,7 @@ prs:
     branch: codex/seo-article-publish-hold-gate-01
     title: "docs(seo): define article publish hold gate"
     train_scope: seo_article_system_window_6
-    status: planned
+    status: executing
     depends_on:
       - ARTICLE-FAQ-SCHEMA-SMOKE-01
     scope:
