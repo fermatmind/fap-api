@@ -1,0 +1,217 @@
+{
+  "schema": "riasec-explanation-editorial-review.v1",
+  "task_id": "SEO-ARTICLE-RIASEC-V2-EDITORIAL-REVIEW-01",
+  "generated_at": "2026-06-05",
+  "decision": "REVIEW_BLOCKED_OPERATOR_INPUTS_REQUIRED",
+  "review_passed": false,
+  "operator_approval_claimed": false,
+  "publish_allowed": false,
+  "search_submit_allowed": false,
+  "cms_mutation_performed": false,
+  "deploy_performed": false,
+  "content_rewrite_performed": false,
+  "private_url_accessed": false,
+  "inputs_reviewed": [
+    "backend/docs/seo/generated/riasec-explanation-cms-draft-create.v1.json",
+    "backend/docs/seo/riasec-explanation-cms-draft-create-postcheck.md",
+    "backend/docs/seo/generated/riasec-explanation-reference-source-review.v1.json",
+    "backend/docs/seo/generated/riasec-explanation-content-package-v2.validation.json",
+    "read-only production Article draft status postcheck",
+    "public article/API/sitemap/llms absence checks"
+  ],
+  "cms_draft_state": {
+    "status": "pass",
+    "records_created_in_this_task": 0,
+    "records_updated_in_this_task": 0,
+    "articles": [
+      {
+        "id": 40,
+        "locale": "zh",
+        "slug": "riasec-holland-career-interest-test-explained",
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "robots": "noindex,nofollow",
+        "published_revision_id": null,
+        "working_revision_id": 45,
+        "working_revision_status": "machine_draft",
+        "approved_at": null
+      },
+      {
+        "id": 41,
+        "locale": "en",
+        "slug": "what-is-riasec-holland-code-career-interest-test",
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "robots": "noindex,nofollow",
+        "published_revision_id": null,
+        "working_revision_id": 46,
+        "working_revision_status": "machine_draft",
+        "approved_at": null
+      }
+    ],
+    "translation_group_id": "riasec-explanation-article-2026-06-v2",
+    "public_indexable_published_count": 0
+  },
+  "editorial_system_review": {
+    "draft_state": "pass",
+    "public_surface_absence": "pass",
+    "cta_route_safety": "pass",
+    "cta_routes_allowed": [
+      "/zh/tests/holland-career-interest-test-riasec",
+      "/en/tests/holland-career-interest-test-riasec"
+    ],
+    "faq_schema_status": "conditional_until_publish_preflight",
+    "package_faq_schema_count_match": true,
+    "public_article_schema_present": false,
+    "public_faq_schema_present": false,
+    "internal_link_status": "conditional",
+    "conditional_internal_links_held_for_operator_review": [
+      "/zh/career/jobs",
+      "/en/career/jobs"
+    ],
+    "claim_boundary_status": "conditional",
+    "zh_boundary_context_claim_warning_count": 2,
+    "en_boundary_context_claim_warning_count": 0,
+    "references_status": "blocked",
+    "accepted_references_count": 0,
+    "source_review_status": "partially_verified_public_sources_with_publish_blockers",
+    "media_status": "blocked",
+    "cover_image_cms_media_missing": true,
+    "revision_approval_status": "blocked",
+    "all_working_revisions_machine_draft": true,
+    "product_availability_status": "operator_confirmation_required"
+  },
+  "publish_blockers": [
+    {
+      "id": "accepted_references_missing",
+      "status": "blocked",
+      "owner": "editor_or_psychometrics_reviewer",
+      "required_input": "Accept final source set and supply accepted references before controlled publish.",
+      "evidence": "references_count remains 0; reference source review is partial and publish-blocking."
+    },
+    {
+      "id": "cms_media_cover_image_missing",
+      "status": "blocked",
+      "owner": "cms_operator_or_design_owner",
+      "required_input": "Upload/choose CMS Media Library cover image and replace placeholder before controlled publish.",
+      "evidence": "Importer media status remains missing with cover image placeholder."
+    },
+    {
+      "id": "working_revisions_not_approved",
+      "status": "blocked",
+      "owner": "operator_editor",
+      "required_input": "Approve working revisions only after editorial/source/media checks pass.",
+      "evidence": "zh revision 45 and en revision 46 remain machine_draft with approved_at=null."
+    },
+    {
+      "id": "claim_boundary_acknowledgement_required",
+      "status": "blocked",
+      "owner": "operator_editor_or_psychometrics_reviewer",
+      "required_input": "Explicitly acknowledge zh boundary-context claim warnings or send package back for GPT content revision.",
+      "evidence": "zh import preserved 2 boundary-context claim warnings; en preserved 0."
+    },
+    {
+      "id": "conditional_internal_links_not_activated",
+      "status": "blocked",
+      "owner": "seo_operator",
+      "required_input": "Decide whether career jobs links are eligible for activation before publish.",
+      "evidence": "conditional career jobs links remain held for operator review."
+    },
+    {
+      "id": "product_availability_confirmation_required",
+      "status": "blocked",
+      "owner": "product_operator",
+      "required_input": "Confirm report-preview/product-availability statements against actual FermatMind RIASEC module behavior.",
+      "evidence": "Reference review records report-preview product availability as Unknown before publish."
+    },
+    {
+      "id": "controlled_publish_preflight_required",
+      "status": "blocked",
+      "owner": "codex_after_separate_publish_authorization",
+      "required_input": "Run controlled publish preflight after all editorial blockers are resolved and before any publish command.",
+      "evidence": "No publish authorization was granted in this task."
+    }
+  ],
+  "public_surface_checks": {
+    "status": "pass",
+    "article_pages": [
+      {
+        "locale": "zh",
+        "status": 404,
+        "article_schema_present": false,
+        "faq_schema_present": false,
+        "target_canonical_present": false
+      },
+      {
+        "locale": "en",
+        "status": 404,
+        "article_schema_present": false,
+        "faq_schema_present": false,
+        "target_canonical_present": false
+      }
+    ],
+    "article_apis_all_404": true,
+    "sitemap_contains_target_slugs": false,
+    "llms_contains_target_slugs": false,
+    "llms_full_contains_target_slugs": false,
+    "search_submission_performed": false
+  },
+  "operator_input_request_card": {
+    "reference_acceptance": {
+      "required": true,
+      "fields": [
+        "accepted_source_urls",
+        "accepted_source_titles",
+        "citation_style",
+        "holland_hexagon_terms_acceptance",
+        "mbti_big_five_comparison_acceptance",
+        "no_official_affiliation_acknowledgement"
+      ]
+    },
+    "media_resolution": {
+      "required": true,
+      "fields": [
+        "cms_media_id",
+        "cover_image_url",
+        "cover_image_alt_reviewed",
+        "og_image_ready",
+        "twitter_image_ready"
+      ]
+    },
+    "revision_approval": {
+      "required": true,
+      "fields": [
+        "zh_revision_id",
+        "en_revision_id",
+        "approved_by",
+        "approved_at",
+        "approval_notes"
+      ]
+    },
+    "publish_preflight_inputs": {
+      "required_later": true,
+      "fields": [
+        "claim_warning_acknowledgement",
+        "faq_visible_schema_equality",
+        "public_canonical_routes_only",
+        "sitemap_llms_publish_eligibility",
+        "7_day_baseline_fields",
+        "14_day_baseline_fields"
+      ]
+    }
+  },
+  "scope_validation": {
+    "cms_mutation_performed": false,
+    "publish_performed": false,
+    "search_submission_performed": false,
+    "deploy_performed": false,
+    "content_rewrite_performed": false,
+    "private_url_access_performed": false,
+    "secret_env_cookie_token_read": false,
+    "operator_approval_claimed": false,
+    "allowed_paths_only": true
+  },
+  "next_task_recommendation": "SEO-ARTICLE-RIASEC-V2-REFERENCE-MEDIA-REVISION-APPROVAL-01"
+}
