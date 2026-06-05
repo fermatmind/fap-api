@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-05T00:00:00+08:00",
+  "updated_at": "2026-06-05T01:03:16Z",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -43823,11 +43823,11 @@
     ]
   },
   "HELP-CMS-IMPORT-PACKAGE-01": {
-    "status": "ready_to_merge",
+    "status": "merged",
     "branch": "codex/help-cms-import-package-01",
     "repo": "fap-api",
     "title": "docs(cms): add Help service CMS import package",
-    "commit_sha": "c40982ade18aadc4007c76e95a9b4e313a01306e",
+    "commit_sha": "d2d27e2f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1889",
     "checks": [
       {
@@ -43871,12 +43871,17 @@
         "command": "gh pr checks 1889 --watch --interval 15",
         "status": "passed",
         "note": "GitHub checks passed before ready-to-merge ledger update."
+      },
+      {
+        "command": "gh pr view 1889 --json state,mergedAt,mergeCommit,url",
+        "status": "passed",
+        "note": "GitHub reports PR #1889 MERGED at 2026-06-05T01:03:16Z with merge commit 8dcb7f38db21000271dee7ac45a92ca293c38a9d."
       }
     ],
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-05T01:03:16Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "cms_write_performed": false,
@@ -43896,6 +43901,11 @@
         "id": "HELP-EDITORIAL-REVIEW-GATE",
         "status": "required_before_publish_preflight_pass",
         "note": "Operator/editorial approval remains required."
+      },
+      {
+        "id": "HELP-CONTENT-DRAFT-CREATE-01-TARGET-ENV-GATE",
+        "status": "blocked_before_execution",
+        "note": "PR4 requires target CMS/DB draft-write path. Current rules forbid reading env/secret and no non-secret target connection method was provided; do not create drafts until operator provides an allowed execution path."
       }
     ],
     "next_task": "HELP-CONTENT-DRAFT-CREATE-01",
@@ -43914,7 +43924,14 @@
         "at": "2026-06-05",
         "status": "ready_to_merge",
         "note": "PR #1889 opened and GitHub checks passed; ready to merge after ledger update."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "merged",
+        "note": "Reconciled after PR #1889 squash merge; origin/main contains merge commit, remote task branch is absent, and local task worktree was removed after cleanup."
       }
-    ]
+    ],
+    "merge_commit": "8dcb7f38db21000271dee7ac45a92ca293c38a9d",
+    "merge_commit_sha": "8dcb7f38db21000271dee7ac45a92ca293c38a9d"
   }
 }
