@@ -48353,7 +48353,7 @@
     "repo": "fap-api",
     "base": "main",
     "branch": "codex/seo-article-riasec-v2-cms-draft-approval-preflight-01",
-    "status": "local_checks_passed",
+    "status": "pr_open_github_checks_pending",
     "title": "docs(seo): preflight RIASEC draft approval readiness",
     "train_scope": "seo_article_content_package_riasec_explanation_v2",
     "depends_on": [
@@ -48388,6 +48388,10 @@
           "git diff --cached --check"
         ],
         "notes": "PHP lint, JSON/YAML parsing, focused PHPUnit artifact contract, and scoped diff whitespace checks passed. Composer install and local .env setup were worktree-only and not staged."
+      },
+      "github": {
+        "status": "pending",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/1949"
       }
     },
     "result": {
@@ -48425,8 +48429,8 @@
         "note": "This task is preflight-only. CMS draft approval mutation requires separate explicit authorization."
       }
     ],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "45c317b8bf5fd397a7c6a64363bb18c5929c1708",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1949",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -48446,6 +48450,11 @@
         "at": "2026-06-05",
         "status": "local_checks_passed",
         "note": "Local validation passed with focused PHPUnit 6 tests / 52 assertions, JSON/YAML parse, PHP lint, and scoped diff checks."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "pr_open_github_checks_pending",
+        "note": "Opened PR #1949 after local checks and scoped staging passed."
       }
     ]
   }
