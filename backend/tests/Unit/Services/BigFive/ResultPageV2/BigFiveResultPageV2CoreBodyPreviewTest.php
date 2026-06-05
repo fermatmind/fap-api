@@ -938,6 +938,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_science_content_page_draft_dry_run_importer_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/ScienceContentPageDraftDryRunCommand.php',
+            'backend/app/Services/Cms/ScienceContentPageDraftDryRunService.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_content_pages_controlled_publish_runtime_files(): void
     {
         $changed = [
@@ -2818,6 +2828,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isScienceContentPageDraftDryRunImporterFile($file)) {
+                continue;
+            }
+
             if ($this->isContentPagesControlledPublishRuntimeFile($file)) {
                 continue;
             }
@@ -3769,6 +3783,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isContentPagesLocalBaselineImportPackageFile(string $file): bool
     {
         return $file === 'backend/app/Console/Commands/ContentPagesImportLocalBaseline.php';
+    }
+
+    private function isScienceContentPageDraftDryRunImporterFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/ScienceContentPageDraftDryRunCommand.php',
+            'backend/app/Services/Cms/ScienceContentPageDraftDryRunService.php',
+        ], true);
     }
 
     private function isContentPagesControlledPublishRuntimeFile(string $file): bool
