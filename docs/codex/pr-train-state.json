@@ -48348,5 +48348,105 @@
         "note": "PR #1943 was squash-merged at 2026-06-05T14:48:22Z with merge commit 6b94f5004df326f88d9617aa29b55f84f1b5bfd4; remote branch is deleted and local task branch is absent."
       }
     ]
+  },
+  "SEO-ARTICLE-RIASEC-V2-CMS-DRAFT-APPROVAL-PREFLIGHT-01": {
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/seo-article-riasec-v2-cms-draft-approval-preflight-01",
+    "status": "local_checks_passed",
+    "title": "docs(seo): preflight RIASEC draft approval readiness",
+    "train_scope": "seo_article_content_package_riasec_explanation_v2",
+    "depends_on": [
+      "SEO-ARTICLE-RIASEC-V2-REFERENCE-MEDIA-REVISION-APPROVAL-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User authorized SEO-ARTICLE-RIASEC-V2-CMS-DRAFT-APPROVAL-PREFLIGHT-01 with necessary manifest/state entries, limited to CMS draft approval preflight artifact, operator input readiness check, publish blockers, generated artifact/test/ledger. Content rewrite, CMS mutation, publish, search submission, deploy, and private URL access remain forbidden."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "SEO-ARTICLE-RIASEC-V2-REFERENCE-MEDIA-REVISION-APPROVAL-01 is merged as PR #1943 and closeout #1946 is merged on origin/main."
+      },
+      "preflight": {
+        "status": "blocked_external_operator_input",
+        "evidence": "Reference/media/revision approval artifact records Unknown operator inputs and blocked gates for references, media, revision approval, claim warning acknowledgement, conditional internal links, and product availability."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are confined to the RIASEC CMS draft approval preflight artifact/report/test and docs/codex PR-train metadata."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "php -l backend/tests/Feature/SEO/RiasecExplanationCmsDraftApprovalPreflightTest.php",
+          "python3 -m json.tool backend/docs/seo/generated/riasec-explanation-cms-draft-approval-preflight.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=RiasecExplanationCmsDraftApprovalPreflightTest --no-ansi",
+          "git diff --check -- backend/docs/seo/riasec-explanation-cms-draft-approval-preflight.md backend/docs/seo/generated/riasec-explanation-cms-draft-approval-preflight.v1.json backend/tests/Feature/SEO/RiasecExplanationCmsDraftApprovalPreflightTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+          "git diff --cached --check"
+        ],
+        "notes": "PHP lint, JSON/YAML parsing, focused PHPUnit artifact contract, and scoped diff whitespace checks passed. Composer install and local .env setup were worktree-only and not staged."
+      }
+    },
+    "result": {
+      "decision": "NO-GO_OPERATOR_INPUTS_REQUIRED",
+      "preflight_passed": false,
+      "cms_draft_approval_allowed": false,
+      "operator_approval_claimed": false,
+      "publish_allowed": false,
+      "search_submit_allowed": false,
+      "cms_mutation_performed": false,
+      "content_rewrite_performed": false,
+      "generated_artifact": "backend/docs/seo/generated/riasec-explanation-cms-draft-approval-preflight.v1.json",
+      "review_report": "backend/docs/seo/riasec-explanation-cms-draft-approval-preflight.md"
+    },
+    "scope_validation": {
+      "cms_mutation_performed": false,
+      "publish_performed": false,
+      "search_submission_performed": false,
+      "deploy_performed": false,
+      "content_rewrite_performed": false,
+      "private_url_access_performed": false,
+      "secret_env_cookie_token_read": false,
+      "operator_approval_claimed": false,
+      "allowed_paths_only": true
+    },
+    "sidecars": [
+      {
+        "id": "RIASEC_V2_CMS_DRAFT_APPROVAL_PREFLIGHT_NO_GO",
+        "status": "blocked_external_operator_input",
+        "note": "CMS draft approval preflight cannot pass until reference, media, revision, claim, internal-link, and product-availability inputs are supplied."
+      },
+      {
+        "id": "RIASEC_V2_NO_CMS_MUTATION_AUTHORIZATION",
+        "status": "hard_gate",
+        "note": "This task is preflight-only. CMS draft approval mutation requires separate explicit authorization."
+      }
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "failure_reason": null,
+    "transitions": [
+      {
+        "at": "2026-06-05",
+        "status": "authorized",
+        "note": "User authorized CMS draft approval preflight with no content rewrite, CMS mutation, publish, search submission, deploy, or private URL access."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "in_progress",
+        "note": "Added manifest entry, generated preflight artifact, operator input readiness report, and focused artifact contract test."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "local_checks_passed",
+        "note": "Local validation passed with focused PHPUnit 6 tests / 52 assertions, JSON/YAML parse, PHP lint, and scoped diff checks."
+      }
+    ]
   }
 }
