@@ -43484,7 +43484,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-article-performance-baseline-template-01",
     "base": "main",
-    "status": "pr_open",
+    "status": "merged",
     "train_scope": "seo_article_system_window_6",
     "title": "docs(seo): add article performance baseline template",
     "depends_on": [
@@ -43520,11 +43520,11 @@
       "next_task": "SEO-ARTICLE-TOPIC-PRIORITY-01"
     },
     "failure_reason": null,
-    "commit_sha": "06c06b2c",
+    "commit_sha": "c3afcd9a",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1890",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-05T01:03:47Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-05T00:00:00+08:00",
@@ -43549,6 +43549,12 @@
         "from": "local_checks_passed",
         "to": "pr_open",
         "notes": "Opened https://github.com/fermatmind/fap-api/pull/1890."
+      },
+      {
+        "at": "2026-06-05T00:00:00+08:00",
+        "from": "pr_open",
+        "to": "merged",
+        "notes": "Reconciled after PR #1890 merged with squash merge commit 073ba146a3909a0dadb09cb57900500fab29ec12; continued from detached origin/main because main is owned by another worktree."
       }
     ]
   },
@@ -43556,7 +43562,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-article-topic-priority-01",
     "base": "main",
-    "status": "planned",
+    "status": "pr_open",
     "train_scope": "seo_article_system_window_6",
     "title": "docs(seo): rank next article topics",
     "depends_on": [
@@ -43568,23 +43574,32 @@
         "evidence": "User explicitly authorized Window 6 SEO article system PR train execution with docs/contracts-only scope and no content, CMS, publish, search submission, deploy, or private URL actions."
       },
       "dependency": {
-        "status": "pending",
-        "evidence": "Depends on SEO-ARTICLE-PERFORMANCE-BASELINE-TEMPLATE-01."
+        "status": "pass",
+        "evidence": "SEO-ARTICLE-PERFORMANCE-BASELINE-TEMPLATE-01 merged as PR #1890 with merge commit 073ba146a3909a0dadb09cb57900500fab29ec12."
       },
       "scope_validation": {
-        "status": "not_started",
-        "evidence": null
+        "status": "pass",
+        "evidence": "Changed files are confined to the topic priority doc, generated JSON artifact, and docs/codex metadata."
       },
       "local": {
-        "status": "not_started",
-        "commands": [],
-        "notes": null
+        "status": "pass",
+        "commands": [
+          "python3 -m json.tool backend/docs/seo/generated/seo-article-topic-priority-01.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "git diff --check -- backend/docs/seo/seo-article-topic-priority-2026-06-05.md backend/docs/seo/generated/seo-article-topic-priority-01.v1.json docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+          "git diff --cached --check"
+        ],
+        "notes": "JSON artifact parse, ledger parse, manifest parse, and scoped diff checks passed."
       }
     },
-    "result": null,
+    "result": {
+      "go_no_go": "GO for next request-card planning; recommended next topic direction is RIASEC explanation.",
+      "next_task": "SEO-ARTICLE-REQUEST-CARDS-02"
+    },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "94d4e02a",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1891",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -43594,6 +43609,24 @@
         "from": "missing_from_manifest",
         "to": "planned",
         "notes": "Initialized as a planned Window 6 SEO article system task."
+      },
+      {
+        "at": "2026-06-05T00:00:00+08:00",
+        "from": "planned",
+        "to": "in_progress",
+        "notes": "Started after PR3 merge and cleanup."
+      },
+      {
+        "at": "2026-06-05T00:00:00+08:00",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "notes": "Topic priority doc and generated artifact passed local validation."
+      },
+      {
+        "at": "2026-06-05T00:00:00+08:00",
+        "from": "local_checks_passed",
+        "to": "pr_open",
+        "notes": "Opened https://github.com/fermatmind/fap-api/pull/1891."
       }
     ]
   },

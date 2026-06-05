@@ -20594,7 +20594,7 @@ prs:
     branch: codex/seo-dash-00-reconcile-schema-api-contract
     title: "docs(seo): reconcile seo_intel schema and read-only API contract"
     train_scope: search_intelligence_schema_api_contract
-    status: executing
+    status: merged
     scope:
       - Reconcile existing seo_intel foundation docs into one schema, PII, consent, source-of-truth, and read-only API contract.
       - Lock the distinction between CMS/backend authority, seo_intel observation, and fap-web dashboard shell.
@@ -21202,7 +21202,7 @@ prs:
     branch: codex/seo-article-topic-priority-01
     title: "docs(seo): rank next article topics"
     train_scope: seo_article_system_window_6
-    status: planned
+    status: executing
     depends_on:
       - SEO-ARTICLE-PERFORMANCE-BASELINE-TEMPLATE-01
     scope:
