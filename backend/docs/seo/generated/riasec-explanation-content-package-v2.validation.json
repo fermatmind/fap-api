@@ -1,0 +1,153 @@
+{
+  "task_id": "SEO-ARTICLE-RIASEC-V2-PACKAGE-VALIDATION-01",
+  "source_task_id": "SEO-ARTICLE-CONTENT-PACKAGE-RIASEC-EXPLANATION-01",
+  "source_package_version": "v2_truity_density_revision",
+  "generated_at": "2026-06-05",
+  "decision": "GO for reference/source review",
+  "content_safe": true,
+  "content_blocked": false,
+  "cms_draft_created": false,
+  "publish_allowed": false,
+  "search_submit_allowed": false,
+  "codex_content_rewrite_performed": false,
+  "checks": {
+    "package_contains_zh_en": true,
+    "locale_field_checks": [
+      {
+        "locale": "zh",
+        "title_exists": true,
+        "slug_exists": true,
+        "slug_length": 45,
+        "slug_length_pass": true,
+        "h1_exists": true,
+        "seo_title_length": 22,
+        "seo_title_length_pass": true,
+        "seo_description_length": 53,
+        "seo_description_length_pass": true,
+        "body_markdown_exists": true,
+        "faq_count": 6,
+        "visible_faq_count": 6,
+        "expected_faq_schema_mainEntity_count": 6,
+        "body_visible_faq_heading_count": 6,
+        "faq_count_matches_schema": true,
+        "primary_cta_href": "/zh/tests/holland-career-interest-test-riasec",
+        "primary_cta_public_canonical_pass": true,
+        "internal_links": [
+          {
+            "href": "/zh/articles/mbti-vs-holland-career-choice",
+            "status": "allowed",
+            "validation": "allowed"
+          },
+          {
+            "href": "/zh/tests/holland-career-interest-test-riasec",
+            "status": "allowed",
+            "validation": "allowed"
+          },
+          {
+            "href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "status": "allowed",
+            "validation": "allowed"
+          },
+          {
+            "href": "/zh/tests/big-five-personality-test-ocean-model",
+            "status": "allowed",
+            "validation": "allowed"
+          },
+          {
+            "href": "/zh/career/jobs",
+            "status": "conditional",
+            "validation": "conditional"
+          }
+        ],
+        "internal_links_pass": true,
+        "conditional_links": [
+          "/zh/career/jobs"
+        ],
+        "references_required": true,
+        "unresolved_references": [
+          "primary_model_background",
+          "holland_hexagon",
+          "career_information_systems",
+          "comparison_context",
+          "claim_boundary"
+        ],
+        "unknown_preserved": true
+      },
+      {
+        "locale": "en",
+        "title_exists": true,
+        "slug_exists": true,
+        "slug_length": 48,
+        "slug_length_pass": true,
+        "h1_exists": true,
+        "seo_title_length": 40,
+        "seo_title_length_pass": true,
+        "seo_description_length": 139,
+        "seo_description_length_pass": true,
+        "body_markdown_exists": true,
+        "faq_count": 6,
+        "visible_faq_count": 6,
+        "expected_faq_schema_mainEntity_count": 6,
+        "body_visible_faq_heading_count": 6,
+        "faq_count_matches_schema": true,
+        "primary_cta_href": "/en/tests/holland-career-interest-test-riasec",
+        "primary_cta_public_canonical_pass": true,
+        "internal_links": [
+          {
+            "href": "/en/articles/mbti-vs-holland-code-career-choice",
+            "status": "allowed",
+            "validation": "allowed"
+          },
+          {
+            "href": "/en/tests/holland-career-interest-test-riasec",
+            "status": "allowed",
+            "validation": "allowed"
+          },
+          {
+            "href": "/en/tests/mbti-personality-test-16-personality-types",
+            "status": "allowed",
+            "validation": "allowed"
+          },
+          {
+            "href": "/en/tests/big-five-personality-test-ocean-model",
+            "status": "allowed",
+            "validation": "allowed"
+          },
+          {
+            "href": "/en/career/jobs",
+            "status": "conditional",
+            "validation": "conditional"
+          }
+        ],
+        "internal_links_pass": true,
+        "conditional_links": [
+          "/en/career/jobs"
+        ],
+        "references_required": true,
+        "unresolved_references": [
+          "primary_model_background",
+          "holland_hexagon",
+          "career_information_systems",
+          "comparison_context",
+          "claim_boundary"
+        ],
+        "unknown_preserved": true
+      }
+    ],
+    "no_private_url": true,
+    "no_result_order_share_pay_payment_history_route": true,
+    "no_tokenized_url": true,
+    "no_raw_private_identifier": true,
+    "claim_boundary": "pass",
+    "claim_scan_notes": "Risk phrases are allowed only in explicit negation, limitation, or what-it-should-not-do contexts. General Chinese problem-diagnosis wording is not treated as medical or psychological diagnosis.",
+    "publish_hold_flags": "pass",
+    "references_required": true,
+    "unresolved_reference_fields_marked_needs_source_verification": true
+  },
+  "blockers": [],
+  "sidecar_issues": [
+    "References remain needs_source_verification and block publish until reviewed.",
+    "Career hub links are conditional and must not be activated in CMS body until route eligibility is confirmed.",
+    "Cover image remains __CMS_MEDIA_PLACEHOLDER_REQUIRED__ and needs CMS media replacement before publish."
+  ]
+}
