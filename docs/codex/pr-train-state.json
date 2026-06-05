@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-05T10:58:00+08:00",
+  "updated_at": "2026-06-05T11:00:00+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -45615,7 +45615,7 @@
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "branch": "codex/seo-article-riasec-v2-package-archive-01",
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "title": "docs(seo): archive RIASEC explanation article package v2",
     "depends_on": [],
     "checks": {
@@ -45665,7 +45665,7 @@
     },
     "failure_reason": null,
     "commit_sha": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1909",
     "transitions": [
       {
         "at": "2026-06-05T10:52:00+08:00",
@@ -45678,6 +45678,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "notes": "Archive files, generated archive summary, manifest/state initialization, and focused archive test passed local validation."
+      },
+      {
+        "at": "2026-06-05T11:00:00+08:00",
+        "from": "local_checks_passed",
+        "to": "pr_open",
+        "notes": "Opened https://github.com/fermatmind/fap-api/pull/1909."
       }
     ]
   },
