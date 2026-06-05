@@ -1,0 +1,39 @@
+{
+  "schema_version": "help-cms-import-package-01.generated.v1",
+  "task": "HELP-CMS-IMPORT-PACKAGE-01",
+  "decision": "PASS_DRAFT_ONLY_IMPORT_PACKAGE_READY",
+  "import_package": "backend/docs/help/import-packages/help-service-content-drafts-01.import.v1.json",
+  "baseline_source_dir": "backend/docs/help/import-packages/content-pages-draft-source",
+  "baseline_source_file": "backend/docs/help/import-packages/content-pages-draft-source/content_pages.help_service_drafts_01.json",
+  "dry_run_import_possible_with_existing_tooling": true,
+  "dry_run_command": "cd backend && php artisan content-pages:import-local-baseline --dry-run --status=draft --source-dir=docs/help/import-packages/content-pages-draft-source",
+  "target_count": 12,
+  "route_count": 12,
+  "support_contact": "support@fermatmind.com",
+  "gates": {
+    "draft_only": true,
+    "cms_write_performed": false,
+    "publish_allowed": false,
+    "runtime_changed": false,
+    "frontend_changed": false,
+    "search_submission_performed": false,
+    "payment_provider_changed": false,
+    "private_url_access_performed": false,
+    "requires_operator_review": true,
+    "schema_enabled": false,
+    "robots_default": "noindex,nofollow"
+  },
+  "required_next_gates": [
+    "HELP-CONTENT-DRAFT-CREATE-01 must be explicitly scoped before CMS draft writes.",
+    "Operator/editorial review remains required before publish preflight.",
+    "Publish remains blocked until exact publish authorization phrase is provided."
+  ],
+  "no_go_checks": {
+    "contains_private_full_url_examples": false,
+    "contains_raw_order_or_payment_identifier_examples": false,
+    "requires_secret_or_cookie_access": false,
+    "requires_real_payment_or_refund": false,
+    "requires_payment_provider_change": false,
+    "requires_search_submission": false
+  }
+}

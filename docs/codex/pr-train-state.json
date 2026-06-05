@@ -43788,5 +43788,100 @@
         "notes": "Initialized as a planned Window 6 SEO article system task."
       }
     ]
+  },
+  "HELP-CMS-IMPORT-PACKAGE-01": {
+    "status": "ready_to_merge",
+    "branch": "codex/help-cms-import-package-01",
+    "repo": "fap-api",
+    "title": "docs(cms): add Help service CMS import package",
+    "commit_sha": "c40982ade18aadc4007c76e95a9b4e313a01306e",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1889",
+    "checks": [
+      {
+        "command": "php -l backend/tests/Feature/Cms/HelpContentImportPackageTest.php",
+        "status": "passed"
+      },
+      {
+        "command": "python3 -m json.tool backend/docs/help/import-packages/help-service-content-drafts-01.import.v1.json >/dev/null",
+        "status": "passed"
+      },
+      {
+        "command": "python3 -m json.tool backend/docs/help/import-packages/content-pages-draft-source/content_pages.help_service_drafts_01.json >/dev/null",
+        "status": "passed"
+      },
+      {
+        "command": "python3 -m json.tool backend/docs/help/generated/help-cms-import-package-01.v1.json >/dev/null",
+        "status": "passed"
+      },
+      {
+        "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+        "status": "passed"
+      },
+      {
+        "command": "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+        "status": "passed"
+      },
+      {
+        "command": "cd backend && php artisan test --filter=HelpContentImportPackageTest --no-ansi",
+        "status": "passed",
+        "note": "Ran with local backend/vendor symlink to existing checkout dependencies."
+      },
+      {
+        "command": "git diff --check -- backend/docs/help backend/docs/operations/help-cms-import-package-2026-06-04.md backend/tests/Feature/Cms/HelpContentImportPackageTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+        "status": "passed"
+      },
+      {
+        "command": "git diff --cached --check",
+        "status": "passed"
+      },
+      {
+        "command": "gh pr checks 1889 --watch --interval 15",
+        "status": "passed",
+        "note": "GitHub checks passed before ready-to-merge ledger update."
+      }
+    ],
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "cms_write_performed": false,
+      "publish_performed": false,
+      "private_url_access_performed": false,
+      "payment_provider_changed": false,
+      "search_submission_performed": false,
+      "notes": "Changed paths limited to backend/docs/help/**, backend/docs/operations/help-cms-import-package-2026-06-04.md, backend/tests/Feature/Cms/HelpContentImportPackageTest.php, and docs/codex ledger files."
+    },
+    "sidecars": [
+      {
+        "id": "HELP-CONTENT-DRAFT-CREATE-01-AUTHORIZATION",
+        "status": "deferred_to_next_pr",
+        "note": "This PR prepares the package and existing importer source only; no CMS draft rows are created."
+      },
+      {
+        "id": "HELP-EDITORIAL-REVIEW-GATE",
+        "status": "required_before_publish_preflight_pass",
+        "note": "Operator/editorial approval remains required."
+      }
+    ],
+    "next_task": "HELP-CONTENT-DRAFT-CREATE-01",
+    "transitions": [
+      {
+        "at": "2026-06-05",
+        "status": "in_progress",
+        "note": "Initialized from explicit Window 9 Help service content PR train request using uploaded HELP-SERVICE-CONTENT-DRAFTS-01 package."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "local_checks_passed",
+        "note": "Draft-only Help CMS import package and source-dir adapter validated locally."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "ready_to_merge",
+        "note": "PR #1889 opened and GitHub checks passed; ready to merge after ledger update."
+      }
+    ]
   }
 }
