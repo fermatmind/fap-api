@@ -45474,7 +45474,7 @@
     "repo": "fap-api",
     "branch": "codex/help-cms-service-fields-01",
     "base": "origin/main",
-    "status": "local_checks_passed",
+    "status": "pr_opened",
     "train_scope": "window_9_help_service_content",
     "title": "feat(cms): add Help service ContentPage fields",
     "depends_on": [
@@ -45523,7 +45523,7 @@
     },
     "failure_reason": null,
     "commit_sha": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1947",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -45577,6 +45577,11 @@
         "at": "2026-06-05",
         "status": "local_checks_passed",
         "note": "PHP lint, JSON/YAML parse, ContentPagePublicApiTest, migration pretend, runtime-freeze gate, and scoped diff whitespace checks passed."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "pr_opened",
+        "note": "Opened PR #1947 for HELP-CMS-SERVICE-FIELDS-01."
       }
     ]
   },
