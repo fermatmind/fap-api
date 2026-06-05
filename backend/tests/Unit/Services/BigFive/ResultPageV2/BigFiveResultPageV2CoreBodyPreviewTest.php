@@ -938,11 +938,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
-    public function test_runtime_freeze_classifier_ignores_science_content_page_draft_dry_run_importer_files(): void
+    public function test_runtime_freeze_classifier_ignores_science_content_page_no_write_gate_files(): void
     {
         $changed = [
             'backend/app/Console/Commands/ScienceContentPageDraftDryRunCommand.php',
+            'backend/app/Console/Commands/ScienceContentPageOperatorReviewReadinessCommand.php',
             'backend/app/Services/Cms/ScienceContentPageDraftDryRunService.php',
+            'backend/app/Services/Cms/ScienceContentPageOperatorReviewReadinessService.php',
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
@@ -2828,7 +2830,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
-            if ($this->isScienceContentPageDraftDryRunImporterFile($file)) {
+            if ($this->isScienceContentPageNoWriteGateFile($file)) {
                 continue;
             }
 
@@ -3785,11 +3787,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return $file === 'backend/app/Console/Commands/ContentPagesImportLocalBaseline.php';
     }
 
-    private function isScienceContentPageDraftDryRunImporterFile(string $file): bool
+    private function isScienceContentPageNoWriteGateFile(string $file): bool
     {
         return in_array($file, [
             'backend/app/Console/Commands/ScienceContentPageDraftDryRunCommand.php',
+            'backend/app/Console/Commands/ScienceContentPageOperatorReviewReadinessCommand.php',
             'backend/app/Services/Cms/ScienceContentPageDraftDryRunService.php',
+            'backend/app/Services/Cms/ScienceContentPageOperatorReviewReadinessService.php',
         ], true);
     }
 
