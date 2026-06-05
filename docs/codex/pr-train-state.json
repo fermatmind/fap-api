@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-05T03:46:56Z",
+  "updated_at": "2026-06-05T04:01:49Z",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -46103,7 +46103,7 @@
     "repo": "fap-api",
     "branch": "codex/daily-giving-public-release-prereq-01",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "window_7_public_benefit_trust_gate",
     "title": "docs(benefit): define DailyGiving public release prerequisites",
     "depends_on": [
@@ -46152,11 +46152,11 @@
       "next_pr_supported": "DAILY-GIVING-PUBLIC-API-SMOKE-01"
     },
     "failure_reason": null,
-    "commit_sha": "53f289827d75c981dc1c568a4e727280e0c7dd86",
+    "commit_sha": "b8b77dfb8af895be3a13f9f8880a1e9cf41aabca",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1914",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-05T03:58:37Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "cms_write_performed": false,
@@ -46192,6 +46192,96 @@
         "from": "pr_open",
         "to": "ready_to_merge",
         "notes": "GitHub checks passed for PR #1914; ready for squash merge. No production writes or record/proof mutations performed."
+      },
+      {
+        "at": "2026-06-05T04:00:51Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "notes": "PR #1914 squash-merged at b8b77dfb8af895be3a13f9f8880a1e9cf41aabca; origin/main contains merge commit; remote and local task branches are absent."
+      }
+    ]
+  },
+  "DAILY-GIVING-PUBLIC-API-SMOKE-01": {
+    "repo": "fap-api",
+    "branch": "codex/daily-giving-public-api-smoke-01",
+    "base": "main",
+    "status": "local_checks_passed",
+    "train_scope": "window_7_public_benefit_trust_gate",
+    "title": "test(benefit): add DailyGiving public API smoke gate",
+    "depends_on": [
+      "DAILY-GIVING-PUBLIC-RELEASE-PREREQ-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User authorized Window 7 Public Benefit / Foundation / DailyGiving Trust Gate PR train through PR12 and required stopping before record/proof mutation steps."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "DAILY-GIVING-PUBLIC-RELEASE-PREREQ-01 merged as PR #1914 at b8b77dfb8af895be3a13f9f8880a1e9cf41aabca."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to DailyGiving public API smoke docs/generated artifact/test and docs/codex ledger paths. Test records are sqlite fixtures only; no production record/proof/CMS/publish/deploy/search/social/index/trust badge action was performed."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "php -l backend/tests/Feature/Foundation/DailyGivingPublicApiSmokeTest.php",
+          "python3 -m json.tool backend/docs/operations/generated/daily-giving-public-api-smoke.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=DailyGivingPublicApiSmokeTest --no-ansi",
+          "git diff --check -- backend/docs/operations/daily-giving-public-api-smoke.md backend/docs/operations/generated/daily-giving-public-api-smoke.v1.json backend/tests/Feature/Foundation/DailyGivingPublicApiSmokeTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json"
+        ],
+        "notes": "All commands exited 0. PHPUnit reported three warnings from the temporary checkout missing backend/.env; 36 assertions passed."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "result": {
+      "production_record_created": false,
+      "proof_uploaded": false,
+      "proof_processed": false,
+      "cms_mutation_performed": false,
+      "publish_performed": false,
+      "search_submission_performed": false,
+      "deploy_performed": false,
+      "trust_badge_allowed_now": false,
+      "public_amplification_allowed_now": false,
+      "next_pr_supported": "DAILY-GIVING-INDEXABILITY-GATE-01"
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "cms_write_performed": false,
+      "publish_performed": false,
+      "daily_giving_record_created": false,
+      "proof_file_processed": false,
+      "search_submission_performed": false,
+      "deploy_performed": false,
+      "notes": "Scope stayed within PR10 docs/generated/test/ledger paths. API smoke uses sqlite fixtures only."
+    },
+    "next_task": "DAILY-GIVING-INDEXABILITY-GATE-01",
+    "transitions": [
+      {
+        "at": "2026-06-05T04:00:51Z",
+        "from": "missing_from_manifest",
+        "to": "in_progress",
+        "notes": "Initialized PR10 after PR9 merge. No production record/proof/CMS/publish/deploy/search/social/index/trust badge action authorized."
+      },
+      {
+        "at": "2026-06-05T04:01:49Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "notes": "Local syntax, JSON/YAML, focused PHPUnit, and scoped diff checks passed. No production writes or record/proof mutations performed."
       }
     ]
   }
