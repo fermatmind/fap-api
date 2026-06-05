@@ -46556,7 +46556,7 @@
     "repo": "fap-api",
     "branch": "codex/daily-giving-first-record-review-template-01",
     "base": "main",
-    "status": "local_checks_passed",
+    "status": "pr_open_github_checks_pending",
     "train_scope": "window_7_public_benefit_trust_gate",
     "title": "docs(benefit): define DailyGiving first record review template",
     "depends_on": [
@@ -46599,7 +46599,7 @@
       },
       "github": {
         "status": "pending",
-        "evidence": null
+        "evidence": "Opened GitHub PR #1920 at https://github.com/fermatmind/fap-api/pull/1920. Required GitHub checks are pending."
       }
     },
     "result": {
@@ -46621,13 +46621,13 @@
       "next_authorization_required": "DAILY-GIVING-FIRST-RECORD-PRIVATE-LEDGER-01"
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "2113c42cc14ef48a80c0e194ff56e9e4956a895a",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1920",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "scope_validation": {
-      "allowed_paths_only": null,
+      "allowed_paths_only": true,
       "cms_write_performed": false,
       "publish_performed": false,
       "daily_giving_record_created": false,
@@ -46649,6 +46649,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "notes": "Local syntax, JSON/YAML, focused PHPUnit, and scoped diff checks passed. No production writes or record/proof mutations performed."
+      },
+      {
+        "at": "2026-06-05T04:37:24Z",
+        "from": "local_checks_passed",
+        "to": "pr_open_github_checks_pending",
+        "notes": "Opened https://github.com/fermatmind/fap-api/pull/1920 from branch codex/daily-giving-first-record-review-template-01. GitHub required checks are pending."
       }
     ]
   }
