@@ -34731,7 +34731,7 @@
     "branch": "codex/detail-ready-1048-replacement-authority-source-controlled-import-01",
     "base": "main",
     "title": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_SOURCE_CONTROLLED_IMPORT-01 controlled replacement authority source import path",
-    "status": "ready_to_merge",
+    "status": "merged",
     "depends_on": [
       "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_SOURCE_REPAIR-01"
     ],
@@ -44384,11 +44384,11 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": "6783dea9ac604a8d964a8120c559b5ed3ed3f2bd",
+    "commit_sha": "1796232f0f89f379d2ad1a0e0c6227e1ff8accb5",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1903",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-05T02:15:35Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "planned_outputs": {
       "generated_artifact": "backend/docs/help/generated/help-content-draft-postcheck-01.v1.json",
       "operations_report": "backend/docs/operations/help-content-draft-postcheck-2026-06-05.md",
@@ -44477,6 +44477,91 @@
         "at": "2026-06-05",
         "status": "ready_to_merge",
         "note": "PR #1903 GitHub checks passed and PR was CLEAN/MERGEABLE with four scoped files."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "merged",
+        "note": "Reconciled after PR #1903 squash merge; origin/main contains merge commit d2fbf99e2e2439ddbb0789b4207ff42c4a13d642, remote task branch is absent, and local cleanup was executed."
+      }
+    ],
+    "merge_commit": "d2fbf99e2e2439ddbb0789b4207ff42c4a13d642",
+    "merge_commit_sha": "d2fbf99e2e2439ddbb0789b4207ff42c4a13d642"
+  },
+  "HELP-CONTENT-DRAFT-REVIEW-PREFLIGHT-01": {
+    "repo": "fap-api",
+    "branch": "codex/help-content-draft-review-preflight-01",
+    "base": "origin/main",
+    "status": "pending",
+    "train_scope": "window_9_help_service_content",
+    "title": "docs(help): prepare Help CMS draft editorial review preflight",
+    "depends_on": [
+      "HELP-CONTENT-DRAFT-POSTCHECK-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding the HELP-CONTENT-DRAFT-REVIEW-PREFLIGHT-01 manifest/state entries."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "HELP-CONTENT-DRAFT-POSTCHECK-01 is merged as PR #1903; origin/main contains merge commit d2fbf99e2e2439ddbb0789b4207ff42c4a13d642."
+      },
+      "scope_preflight": {
+        "status": "pass",
+        "evidence": "Review preflight scope is read-only readiness and handoff only; no Operator editorial approval, CMS mutation, publish, deploy, private URL access, payment/refund flow, or secret/env/cookie/token read is allowed."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "planned_outputs": {
+      "generated_artifact": "backend/docs/help/generated/help-content-draft-review-preflight-01.v1.json",
+      "operations_report": "backend/docs/operations/help-content-draft-review-preflight-2026-06-05.md",
+      "operator_review_allowed_now": false,
+      "publish_allowed": false,
+      "cms_mutation_allowed": false
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "cms_write_performed": false,
+      "editorial_approval_performed": false,
+      "publish_performed": false,
+      "search_submission_performed": false,
+      "deploy_performed": false,
+      "private_url_access_performed": false,
+      "secret_env_cookie_token_read": false
+    },
+    "sidecars": [
+      {
+        "id": "HELP-CONTENT-DRAFT-REVIEW-PREFLIGHT-SUPPORT-CONTACT-FIELD",
+        "status": "open_from_postcheck",
+        "note": "Postcheck found support@fermatmind.com in the import package, but not in production ContentPage rows and no first-class support_contact field was verified."
+      },
+      {
+        "id": "HELP-CONTENT-DRAFT-REVIEW-PREFLIGHT-OPERATOR-APPROVAL",
+        "status": "blocked_until_operator_review",
+        "note": "Codex may prepare review handoff only; Operator editorial approval must be explicit and separate."
+      },
+      {
+        "id": "HELP-CONTENT-DRAFT-REVIEW-PREFLIGHT-PUBLISH-BLOCK",
+        "status": "hard_gate",
+        "note": "Publish, indexability, sitemap/llms inclusion, and search submission remain forbidden without separate explicit approval."
+      }
+    ],
+    "next_task": "HELP-CONTENT-DRAFT-EDITORIAL-REVIEW-01",
+    "transitions": [
+      {
+        "at": "2026-06-05",
+        "status": "manifest_state_authorized",
+        "note": "User authorized supplementing manifest/state entries for HELP-CONTENT-DRAFT-REVIEW-PREFLIGHT-01."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "pending",
+        "note": "Manifest/state entry added; implementation must run as a separate scoped read-only review-preflight PR."
       }
     ]
   },
