@@ -36707,7 +36707,7 @@
     "repo": "fap-api",
     "branch": "codex/payment-alipay-scheduler-bootstrap-02",
     "base": "main",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "title": "PAYMENT-ALIPAY-SCHEDULER-BOOTSTRAP-02 register Alipay compensation in runtime scheduler",
     "commit_sha": "fecc207643c37dba0d411eda305a376d6eb3a2db",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1774",
@@ -45442,8 +45442,21 @@
         ]
       },
       "github": {
-        "status": "pending",
-        "commands": []
+        "status": "pass",
+        "commands": [
+          "gh pr checks 1910 --watch --interval 15"
+        ],
+        "jobs": [
+          "Semgrep OSS",
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "hygiene",
+          "supply-chain",
+          "content-pack-build-validate",
+          "verify-bigfive",
+          "verify-mbti-legacy",
+          "verify-mbti-v2"
+        ]
       }
     },
     "result": {
@@ -45504,6 +45517,11 @@
         "at": "2026-06-05",
         "status": "pr_open",
         "note": "Opened https://github.com/fermatmind/fap-api/pull/1910."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed for PR #1910."
       }
     ]
   }
