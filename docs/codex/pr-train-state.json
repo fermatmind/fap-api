@@ -46721,11 +46721,11 @@
     "repo": "fap-api",
     "base": "main",
     "train_scope": "seo_article_content_package_riasec_explanation_v2",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-05T03:45:17Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "branch": "codex/seo-article-riasec-v2-reference-source-review-01",
-    "status": "ready_to_merge",
+    "status": "merged",
     "title": "docs(seo): verify reference needs for RIASEC explanation package",
     "depends_on": [
       "SEO-ARTICLE-RIASEC-V2-PACKAGE-VALIDATION-01"
@@ -46756,6 +46756,10 @@
       "github": {
         "status": "pass",
         "evidence": "GitHub checks passed on PR #1913: Semgrep, hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
+      },
+      "reconciliation": {
+        "status": "pass",
+        "evidence": "GitHub PR #1913 is MERGED with merge commit c9b4052705c902f3e718520d19b588a589a183e8; this PR reconciles stale ledger state needed for dependency resolution."
       }
     },
     "result": {
@@ -46802,6 +46806,11 @@
         "from": "pr_open",
         "to": "ready_to_merge",
         "notes": "All required GitHub checks passed on PR #1913."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "merged_reconciled",
+        "note": "Reconciled stale ready_to_merge ledger state after GitHub showed PR #1913 merged at 2026-06-05T03:45:17Z."
       }
     ]
   },
@@ -48036,7 +48045,7 @@
     "repo": "fap-api",
     "base": "main",
     "branch": "codex/seo-article-riasec-v2-editorial-review-01",
-    "status": "pr_open_github_checks_pending",
+    "status": "merged",
     "title": "docs(seo): record RIASEC draft editorial blockers",
     "train_scope": "seo_article_content_package_riasec_explanation_v2",
     "depends_on": [
@@ -48106,6 +48115,10 @@
         "status": "pass",
         "evidence": "PR #1937 checks passed: hygiene, supply-chain, content-pack-build-validate, Semgrep blocking secrets, Semgrep OSS, semgrep sarif non-blocking upload, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2.",
         "pr_url": "https://github.com/fermatmind/fap-api/pull/1937"
+      },
+      "reconciliation": {
+        "status": "pass",
+        "evidence": "GitHub PR #1937 is MERGED with merge commit cc1184a94d28f7a313c8296371f5989a92929fdf; closeout PR #1938 merged with bbf9b5de0529ac3514bc481e4fc5a49d706a7953."
       }
     },
     "result": {
@@ -48178,6 +48191,131 @@
         "at": "2026-06-05",
         "status": "merged",
         "note": "PR #1937 was squash-merged at 2026-06-05T13:33:02Z with merge commit cc1184a94d28f7a313c8296371f5989a92929fdf; origin/main contains the merge commit; remote task branch is absent; local task branch cleanup is complete."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "merged_reconciled",
+        "note": "Reconciled stale pr_open_github_checks_pending ledger state after GitHub showed PR #1937 merged and closeout #1938 merged."
+      }
+    ]
+  },
+  "SEO-ARTICLE-RIASEC-V2-REFERENCE-MEDIA-REVISION-APPROVAL-01": {
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/seo-article-riasec-v2-reference-media-revision-approval-01",
+    "status": "ready_to_merge",
+    "title": "docs(seo): record RIASEC reference media revision approval blockers",
+    "train_scope": "seo_article_content_package_riasec_explanation_v2",
+    "depends_on": [
+      "SEO-ARTICLE-RIASEC-V2-EDITORIAL-REVIEW-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User authorized SEO-ARTICLE-RIASEC-V2-REFERENCE-MEDIA-REVISION-APPROVAL-01 with necessary manifest/state entries, limited to reference/media/revision approval artifacts, publish blockers, operator input checklist, generated artifact/test/ledger. Content rewrite, CMS mutation, publish, search submission, deploy, and private URL access remain forbidden."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "SEO-ARTICLE-RIASEC-V2-EDITORIAL-REVIEW-01 is merged as PR #1937 and closeout #1938 is merged on origin/main."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are confined to the RIASEC approval artifact/report/test and docs/codex PR-train metadata, including stale dependency ledger reconciliation."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "php -l backend/tests/Feature/SEO/RiasecExplanationReferenceMediaRevisionApprovalTest.php",
+          "python3 -m json.tool backend/docs/seo/generated/riasec-explanation-reference-media-revision-approval.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=RiasecExplanationReferenceMediaRevisionApprovalTest --no-ansi",
+          "git diff --check -- backend/docs/seo/riasec-explanation-reference-media-revision-approval.md backend/docs/seo/generated/riasec-explanation-reference-media-revision-approval.v1.json backend/tests/Feature/SEO/RiasecExplanationReferenceMediaRevisionApprovalTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+          "git diff --cached --check"
+        ],
+        "notes": "PHP lint, JSON/YAML parsing, focused PHPUnit artifact contract, and scoped diff whitespace checks passed. Composer install and local .env setup were worktree-only and not staged."
+      },
+      "github": {
+        "status": "pass",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/1943",
+        "evidence": "GitHub checks passed on PR #1943: Semgrep, hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
+      }
+    },
+    "result": {
+      "decision": "NO-GO_OPERATOR_INPUTS_REQUIRED",
+      "approval_passed": false,
+      "operator_approval_claimed": false,
+      "publish_allowed": false,
+      "search_submit_allowed": false,
+      "cms_mutation_performed": false,
+      "content_rewrite_performed": false,
+      "generated_artifact": "backend/docs/seo/generated/riasec-explanation-reference-media-revision-approval.v1.json",
+      "review_report": "backend/docs/seo/riasec-explanation-reference-media-revision-approval.md"
+    },
+    "scope_validation": {
+      "cms_mutation_performed": false,
+      "publish_performed": false,
+      "search_submission_performed": false,
+      "deploy_performed": false,
+      "content_rewrite_performed": false,
+      "private_url_access_performed": false,
+      "secret_env_cookie_token_read": false,
+      "operator_approval_claimed": false,
+      "allowed_paths_only": true
+    },
+    "sidecars": [
+      {
+        "id": "RIASEC_V2_REFERENCE_ACCEPTANCE_REQUIRED",
+        "status": "blocked_external_operator_input",
+        "note": "Accepted references and claim-to-source mapping are required before CMS draft approval preflight can pass."
+      },
+      {
+        "id": "RIASEC_V2_CMS_MEDIA_REQUIRED",
+        "status": "blocked_external_operator_input",
+        "note": "Reviewed CMS Media Library cover image and alt decision are required before publish preflight can pass."
+      },
+      {
+        "id": "RIASEC_V2_REVISION_APPROVAL_REQUIRED",
+        "status": "blocked_external_operator_input",
+        "note": "zh/en working revisions remain machine_draft and require explicit operator approval or GPT revision loop."
+      },
+      {
+        "id": "RIASEC_V2_PRODUCT_AVAILABILITY_CONFIRMATION_REQUIRED",
+        "status": "blocked_external_operator_input",
+        "note": "Report-preview and product-availability statements remain Unknown until product confirmation."
+      }
+    ],
+    "commit_sha": "4a31ac4852973b8d12386d4e447f4705775d2f6d",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1943",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "failure_reason": null,
+    "transitions": [
+      {
+        "at": "2026-06-05",
+        "status": "authorized",
+        "note": "User authorized the approval-gate PR with no content rewrite, CMS mutation, publish, search submission, deploy, or private URL access."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "in_progress",
+        "note": "Added manifest entry, generated approval artifact, operator checklist report, focused artifact contract test, and dependency ledger reconciliation."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "local_checks_passed",
+        "note": "Local validation passed with 6 focused PHPUnit assertions groups / 77 assertions, JSON/YAML parse, PHP lint, and scoped diff checks."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "pr_open_github_checks_pending",
+        "note": "Opened PR #1943 after local checks and scoped staging passed."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "ready_to_merge",
+        "note": "All required GitHub checks passed and changed files remain confined to the approval gate artifact/report/test and docs/codex metadata."
       }
     ]
   }

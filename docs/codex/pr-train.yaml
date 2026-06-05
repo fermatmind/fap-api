@@ -22752,3 +22752,45 @@ prs:
     content_rewrite_allowed: false
     content_authority: CMS/backend
     next_task: SEO-ARTICLE-RIASEC-V2-REFERENCE-MEDIA-REVISION-APPROVAL-01 after separate authorization
+
+  - id: SEO-ARTICLE-RIASEC-V2-REFERENCE-MEDIA-REVISION-APPROVAL-01
+    repo: fap-api
+    depends_on:
+      - SEO-ARTICLE-RIASEC-V2-EDITORIAL-REVIEW-01
+    branch: codex/seo-article-riasec-v2-reference-media-revision-approval-01
+    title: "docs(seo): record RIASEC reference media revision approval blockers"
+    train_scope: seo_article_content_package_riasec_explanation_v2
+    status: in_progress
+    scope:
+      - Record the reference acceptance, CMS media, revision approval, claim-warning acknowledgement, conditional internal-link, and product-availability gates for the RIASEC V2 zh/en CMS drafts.
+      - Preserve a blocked/no-go publish status until operator/editor inputs are supplied and verified.
+      - Add a generated artifact, human-readable checklist, focused artifact contract test, and necessary PR-train ledger updates.
+    allowed_paths:
+      - backend/docs/seo/riasec-explanation-reference-media-revision-approval.md
+      - backend/docs/seo/generated/riasec-explanation-reference-media-revision-approval.v1.json
+      - backend/tests/Feature/SEO/RiasecExplanationReferenceMediaRevisionApprovalTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Rewrite article body/title/H1/meta/FAQ/CTA, mutate CMS, publish, submit search URLs, deploy, or access private result/orders/share/pay/payment/history/tokenized URLs.
+      - Claim operator/editor approval, source acceptance, media readiness, revision approval, or product-availability confirmation without supplied operator evidence.
+    validation:
+      - php -l backend/tests/Feature/SEO/RiasecExplanationReferenceMediaRevisionApprovalTest.php
+      - python3 -m json.tool backend/docs/seo/generated/riasec-explanation-reference-media-revision-approval.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=RiasecExplanationReferenceMediaRevisionApprovalTest --no-ansi
+      - git diff --check -- backend/docs/seo/riasec-explanation-reference-media-revision-approval.md backend/docs/seo/generated/riasec-explanation-reference-media-revision-approval.v1.json backend/tests/Feature/SEO/RiasecExplanationReferenceMediaRevisionApprovalTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    content_rewrite_allowed: false
+    content_authority: CMS/backend
+    next_task: SEO-ARTICLE-RIASEC-V2-CMS-DRAFT-APPROVAL-PREFLIGHT-01 after operator inputs and separate authorization

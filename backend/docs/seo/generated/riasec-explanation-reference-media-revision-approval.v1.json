@@ -1,0 +1,223 @@
+{
+  "schema": "riasec-explanation-reference-media-revision-approval.v1",
+  "task_id": "SEO-ARTICLE-RIASEC-V2-REFERENCE-MEDIA-REVISION-APPROVAL-01",
+  "generated_at": "2026-06-05",
+  "decision": "NO-GO_OPERATOR_INPUTS_REQUIRED",
+  "approval_passed": false,
+  "operator_approval_claimed": false,
+  "publish_allowed": false,
+  "search_submit_allowed": false,
+  "cms_mutation_performed": false,
+  "deploy_performed": false,
+  "content_rewrite_performed": false,
+  "private_url_accessed": false,
+  "inputs_reviewed": [
+    "backend/docs/seo/generated/riasec-explanation-editorial-review.v1.json",
+    "backend/docs/seo/generated/riasec-explanation-reference-source-review.v1.json",
+    "backend/docs/seo/generated/riasec-explanation-cms-draft-create.v1.json"
+  ],
+  "draft_records": [
+    {
+      "locale": "zh",
+      "article_id": 40,
+      "working_revision_id": 45,
+      "slug": "riasec-holland-career-interest-test-explained",
+      "status": "draft",
+      "public": false,
+      "indexable": false,
+      "working_revision_status": "machine_draft",
+      "approved_at": null
+    },
+    {
+      "locale": "en",
+      "article_id": 41,
+      "working_revision_id": 46,
+      "slug": "what-is-riasec-holland-code-career-interest-test",
+      "status": "draft",
+      "public": false,
+      "indexable": false,
+      "working_revision_status": "machine_draft",
+      "approved_at": null
+    }
+  ],
+  "approval_gates": [
+    {
+      "id": "reference_acceptance",
+      "status": "blocked",
+      "owner": "editor_or_psychometrics_reviewer",
+      "required_input": "Accepted final public source list, citation style, and source-to-claim acceptance for both locales.",
+      "evidence": "Reference source review remains partial; accepted references count is 0.",
+      "acceptance_criteria": [
+        "accepted_source_urls is non-empty and public",
+        "accepted_source_titles is non-empty",
+        "citation_style is selected",
+        "Holland/RIASEC model source acceptance is explicit",
+        "MBTI and Big Five comparison language is accepted or sent back for GPT revision",
+        "No official affiliation or certification implication is accepted"
+      ]
+    },
+    {
+      "id": "media_resolution",
+      "status": "blocked",
+      "owner": "cms_operator_or_design_owner",
+      "required_input": "CMS Media Library cover image, alt review, and social image readiness decision.",
+      "evidence": "CMS draft/import evidence still records cover image placeholder or missing CMS media.",
+      "acceptance_criteria": [
+        "cms_media_id is supplied",
+        "cover_image_url is a public CMS/media-library URL",
+        "cover_image_alt_reviewed is true",
+        "og_image_ready is true or explicitly deferred",
+        "twitter_image_ready is true or explicitly deferred"
+      ]
+    },
+    {
+      "id": "revision_approval",
+      "status": "blocked",
+      "owner": "operator_editor",
+      "required_input": "Explicit approval for zh revision 45 and en revision 46 after source/media/claim checks are resolved.",
+      "evidence": "Both working revisions remain machine_draft with approved_at=null.",
+      "acceptance_criteria": [
+        "zh_revision_id equals 45 or a newer reviewed revision id is supplied",
+        "en_revision_id equals 46 or a newer reviewed revision id is supplied",
+        "approved_by is non-empty",
+        "approved_at is non-empty and operator supplied",
+        "approval_notes confirm no content rewrite by Codex"
+      ]
+    },
+    {
+      "id": "claim_warning_acknowledgement",
+      "status": "blocked",
+      "owner": "operator_editor_or_psychometrics_reviewer",
+      "required_input": "Acknowledge the 2 zh boundary-context claim warnings or return the package to GPT for revision.",
+      "evidence": "Editorial review records zh_boundary_context_claim_warning_count=2 and en_boundary_context_claim_warning_count=0.",
+      "acceptance_criteria": [
+        "claim_warning_acknowledgement is true with owner and timestamp",
+        "or gpt_revision_required is true and publish remains blocked"
+      ]
+    },
+    {
+      "id": "conditional_internal_link_decision",
+      "status": "blocked",
+      "owner": "seo_operator",
+      "required_input": "Decide whether conditional career jobs internal links are eligible before publish.",
+      "evidence": "Conditional links to /zh/career/jobs and /en/career/jobs remain held for operator review.",
+      "acceptance_criteria": [
+        "conditional_links_activation_decision is activate or hold",
+        "activated links remain public canonical routes only",
+        "held links remain excluded or marked deferred before publish"
+      ]
+    },
+    {
+      "id": "product_availability_confirmation",
+      "status": "blocked",
+      "owner": "product_operator",
+      "required_input": "Confirm report-preview and product-availability statements against the live FermatMind RIASEC product module.",
+      "evidence": "Reference review records report-preview product availability as Unknown before publish.",
+      "acceptance_criteria": [
+        "product_availability_confirmed is true with owner and timestamp",
+        "or product availability language is sent back for GPT/package revision",
+        "no career-result promise, diagnosis, official certification, or deterministic job-decision claim is introduced"
+      ]
+    },
+    {
+      "id": "controlled_publish_preflight",
+      "status": "blocked",
+      "owner": "codex_after_separate_authorization",
+      "required_input": "Run publish preflight only after all prior gates pass and separate publish-preflight authorization is granted.",
+      "evidence": "This task has no publish authorization and does not perform CMS mutation.",
+      "acceptance_criteria": [
+        "all approval gates are pass",
+        "FAQ/schema visible equality is verified",
+        "canonical/noindex/indexable transition is verified before publish",
+        "sitemap and llms eligibility are verified before exposure",
+        "exact controlled publish authorization is still required for publish"
+      ]
+    }
+  ],
+  "operator_input_card": {
+    "reference_acceptance": {
+      "accepted_source_urls": "Unknown",
+      "accepted_source_titles": "Unknown",
+      "citation_style": "Unknown",
+      "holland_hexagon_terms_acceptance": "Unknown",
+      "mbti_big_five_comparison_acceptance": "Unknown",
+      "no_official_affiliation_acknowledgement": "Unknown"
+    },
+    "media_resolution": {
+      "cms_media_id": "Unknown",
+      "cover_image_url": "Unknown",
+      "cover_image_alt_reviewed": "Unknown",
+      "og_image_ready": "Unknown",
+      "twitter_image_ready": "Unknown"
+    },
+    "revision_approval": {
+      "zh_revision_id": 45,
+      "en_revision_id": 46,
+      "approved_by": "Unknown",
+      "approved_at": "Unknown",
+      "approval_notes": "Unknown"
+    },
+    "claim_and_link_decisions": {
+      "zh_claim_warning_count": 2,
+      "claim_warning_acknowledgement": "Unknown",
+      "gpt_revision_required": "Unknown",
+      "conditional_links_activation_decision": "Unknown",
+      "career_jobs_links": [
+        "/zh/career/jobs",
+        "/en/career/jobs"
+      ]
+    },
+    "product_availability": {
+      "product_availability_confirmed": "Unknown",
+      "report_preview_language_confirmed": "Unknown",
+      "confirmed_by": "Unknown",
+      "confirmed_at": "Unknown"
+    }
+  },
+  "safe_public_routes": [
+    "/zh/tests/holland-career-interest-test-riasec",
+    "/en/tests/holland-career-interest-test-riasec",
+    "/zh/career/jobs",
+    "/en/career/jobs"
+  ],
+  "sidecar_issues": [
+    {
+      "id": "RIASEC_V2_REFERENCE_ACCEPTANCE_REQUIRED",
+      "status": "blocked_external_operator_input",
+      "note": "Accepted references and claim-to-source mapping are required before CMS draft approval preflight can pass."
+    },
+    {
+      "id": "RIASEC_V2_CMS_MEDIA_REQUIRED",
+      "status": "blocked_external_operator_input",
+      "note": "A reviewed CMS Media Library cover image and alt decision are required before publish preflight can pass."
+    },
+    {
+      "id": "RIASEC_V2_REVISION_APPROVAL_REQUIRED",
+      "status": "blocked_external_operator_input",
+      "note": "The zh/en working revisions remain machine_draft and require explicit operator approval or GPT revision loop."
+    },
+    {
+      "id": "RIASEC_V2_PRODUCT_AVAILABILITY_CONFIRMATION_REQUIRED",
+      "status": "blocked_external_operator_input",
+      "note": "Report-preview and product-availability statements remain Unknown until a product operator confirms them."
+    }
+  ],
+  "next_task_recommendation": {
+    "id": "SEO-ARTICLE-RIASEC-V2-CMS-DRAFT-APPROVAL-PREFLIGHT-01",
+    "status": "blocked_until_operator_inputs_supplied",
+    "cms_mutation_allowed": false,
+    "publish_allowed": false,
+    "search_submission_allowed": false
+  },
+  "scope_validation": {
+    "cms_mutation_performed": false,
+    "publish_performed": false,
+    "search_submission_performed": false,
+    "deploy_performed": false,
+    "content_rewrite_performed": false,
+    "private_url_access_performed": false,
+    "secret_env_cookie_token_read": false,
+    "operator_approval_claimed": false,
+    "allowed_paths_only": true
+  }
+}
