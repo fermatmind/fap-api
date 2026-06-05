@@ -44658,7 +44658,7 @@
     "repo": "fap-api",
     "branch": "codex/help-content-draft-editorial-review-01",
     "base": "origin/main",
-    "status": "pending_operator_review_request",
+    "status": "blocked_private_identifier_guard",
     "train_scope": "window_9_help_service_content",
     "title": "docs(help): prepare Help CMS draft editorial review request",
     "depends_on": [
@@ -44676,9 +44676,35 @@
       "scope_preflight": {
         "status": "pass",
         "evidence": "Editorial-review PR scope is review request and decision-capture only; Codex must not claim Operator editorial approval, mutate CMS, publish, deploy, access private URLs, run payment/refund flows, or read secrets/env/cookies/tokens."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          {
+            "command": "python3 -m json.tool backend/docs/help/generated/help-content-draft-editorial-review-01.v1.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+            "status": "passed"
+          },
+          {
+            "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=HelpContentImportPackageTest --no-ansi",
+            "status": "passed",
+            "evidence": "1 test passed, 454 assertions."
+          },
+          {
+            "command": "git diff --check -- backend/docs/help/generated/help-content-draft-editorial-review-01.v1.json backend/docs/operations/help-content-draft-editorial-review-2026-06-05.md docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+            "status": "passed"
+          }
+        ]
       }
     },
-    "failure_reason": null,
+    "failure_reason": "Visible draft content fields in the v01 package hit private-identifier/result-link guard categories; Operator editorial review request was not made.",
     "commit_sha": null,
     "pr_url": null,
     "merged_at": null,
@@ -44702,6 +44728,18 @@
       "private_url_access_performed": false,
       "secret_env_cookie_token_read": false
     },
+    "result": {
+      "review_status": "blocked",
+      "decision": "BLOCKED_PRIVATE_IDENTIFIER_AND_RESULT_URL_GUARD",
+      "generated_artifact": "backend/docs/help/generated/help-content-draft-editorial-review-01.v1.json",
+      "operations_report": "backend/docs/operations/help-content-draft-editorial-review-2026-06-05.md",
+      "zip_sha256_checked": true,
+      "draft_count_checked": 12,
+      "operator_review_requested": false,
+      "operator_editorial_approval_present": false,
+      "publish_allowed_now": false,
+      "next_task_recommendation": "HELP-CONTENT-DRAFT-REVISION-REQUEST-01"
+    },
     "sidecars": [
       {
         "id": "HELP-CONTENT-DRAFT-EDITORIAL-REVIEW-OPERATOR-APPROVAL",
@@ -44717,9 +44755,14 @@
         "id": "HELP-CONTENT-DRAFT-EDITORIAL-REVIEW-SUPPORT-CONTACT-FIELD",
         "status": "open",
         "note": "support@fermatmind.com exists in the import package, but prior postcheck did not verify a first-class support_contact field on production ContentPage rows."
+      },
+      {
+        "id": "HELP-CONTENT-DRAFT-EDITORIAL-REVIEW-PRIVATE-ID-GUARD",
+        "status": "blocked",
+        "note": "Visible draft fields contain payment_id and/or result_url guard categories; no Operator review request was made."
       }
     ],
-    "next_task": null,
+    "next_task": "HELP-CONTENT-DRAFT-REVISION-REQUEST-01",
     "transitions": [
       {
         "at": "2026-06-05",
@@ -44730,6 +44773,11 @@
         "at": "2026-06-05",
         "status": "pending_operator_review_request",
         "note": "Manifest/state entry added; implementation must run as a separate scoped PR and stop before claiming Operator editorial approval."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "blocked_private_identifier_guard",
+        "note": "Zip SHA and file list passed, 12 draft rows matched merged import/postcheck/preflight evidence, but visible package draft fields hit private identifier/result-link guard categories. Review request was not made."
       }
     ]
   },
