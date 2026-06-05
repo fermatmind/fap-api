@@ -48203,7 +48203,7 @@
     "repo": "fap-api",
     "base": "main",
     "branch": "codex/seo-article-riasec-v2-reference-media-revision-approval-01",
-    "status": "ready_to_merge",
+    "status": "merged",
     "title": "docs(seo): record RIASEC reference media revision approval blockers",
     "train_scope": "seo_article_content_package_riasec_explanation_v2",
     "depends_on": [
@@ -48239,6 +48239,10 @@
         "status": "pass",
         "pr_url": "https://github.com/fermatmind/fap-api/pull/1943",
         "evidence": "GitHub checks passed on PR #1943: Semgrep, hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
+      },
+      "post_merge": {
+        "status": "pass",
+        "evidence": "GitHub PR #1943 is MERGED with merge commit 6b94f5004df326f88d9617aa29b55f84f1b5bfd4; HEAD equals origin/main in the local closeout worktree; remote task branch is absent."
       }
     },
     "result": {
@@ -48285,11 +48289,11 @@
         "note": "Report-preview and product-availability statements remain Unknown until product confirmation."
       }
     ],
-    "commit_sha": "4a31ac4852973b8d12386d4e447f4705775d2f6d",
+    "commit_sha": "6b94f5004df326f88d9617aa29b55f84f1b5bfd4",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1943",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-05T14:48:22Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "failure_reason": null,
     "transitions": [
       {
@@ -48316,6 +48320,11 @@
         "at": "2026-06-05",
         "status": "ready_to_merge",
         "note": "All required GitHub checks passed and changed files remain confined to the approval gate artifact/report/test and docs/codex metadata."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "merged",
+        "note": "PR #1943 was squash-merged at 2026-06-05T14:48:22Z with merge commit 6b94f5004df326f88d9617aa29b55f84f1b5bfd4; remote branch is deleted and local task branch is absent."
       }
     ]
   }
