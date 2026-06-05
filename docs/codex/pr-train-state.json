@@ -24800,7 +24800,7 @@
     "merge_commit": "29ec08275027a517993a7cea0fdc6c117bc85c87"
   },
   "OPS-RELEASE-WORKFLOW-01": {
-    "status": "ready_to_merge",
+    "status": "merged",
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
     "branch": "codex/ops-release-workflow-01",
@@ -45262,11 +45262,11 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": "704e0ba4353dbac90e647420d937f951659661a6",
+    "commit_sha": "00ec9ac269ac64e2f6de06cfcc3cd71f8d37f4f5",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1936",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-05T13:38:04Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "result": {
       "decision": "POLICY_OWNER_ANSWERS_RECORDED_WITH_PUBLISH_STILL_BLOCKED",
       "generated_artifact": "backend/docs/help/generated/help-content-draft-policy-owner-answers-01.v1.json",
@@ -45329,6 +45329,11 @@
         "at": "2026-06-05",
         "status": "ready_to_merge",
         "note": "GitHub checks passed and merge state was CLEAN. Publish remains blocked; Operator approval was not claimed."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "merged_closeout_reconciled",
+        "note": "PR #1936 merged on GitHub at 2026-06-05T13:38:04Z with merge commit 00ec9ac269ac64e2f6de06cfcc3cd71f8d37f4f5; origin/main contains the merge commit; remote branch was deleted and local task branch cleanup was completed."
       }
     ]
   },
