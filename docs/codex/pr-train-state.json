@@ -44658,7 +44658,7 @@
     "repo": "fap-api",
     "branch": "codex/help-content-draft-editorial-review-01",
     "base": "origin/main",
-    "status": "ready_to_merge_blocked_review_artifact",
+    "status": "merged",
     "train_scope": "window_9_help_service_content",
     "title": "docs(help): prepare Help CMS draft editorial review request",
     "depends_on": [
@@ -44722,9 +44722,9 @@
     "failure_reason": "Visible draft content fields in the v01 package hit private-identifier/result-link guard categories; Operator editorial review request was not made.",
     "commit_sha": "702f64ec56f6da3e56d4f320108cbf44d63f7e32",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1919",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-05T04:31:34Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "planned_outputs": {
       "generated_artifact": "backend/docs/help/generated/help-content-draft-editorial-review-01.v1.json",
       "operations_report": "backend/docs/operations/help-content-draft-editorial-review-2026-06-05.md",
@@ -44803,6 +44803,122 @@
         "at": "2026-06-05",
         "status": "ready_to_merge_blocked_review_artifact",
         "note": "PR #1919 GitHub checks passed and changed files remained within the four allowed paths. Editorial review status remains blocked."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "merged",
+        "note": "Reconciled after PR #1919 squash merge; origin/main contains merge commit 78a8432b690827a2741f39efedb734d3140fc91c, remote task branch is absent, and local cleanup was executed."
+      }
+    ],
+    "merge_commit": "78a8432b690827a2741f39efedb734d3140fc91c",
+    "merge_commit_sha": "78a8432b690827a2741f39efedb734d3140fc91c"
+  },
+  "HELP-CONTENT-DRAFT-REVISION-REQUEST-01": {
+    "repo": "fap-api",
+    "branch": "codex/help-content-draft-revision-request-01",
+    "base": "origin/main",
+    "status": "ready_to_merge",
+    "train_scope": "window_9_help_service_content",
+    "title": "docs(help): revise v01 Help content package and rerun review request",
+    "depends_on": [
+      "HELP-CONTENT-DRAFT-EDITORIAL-REVIEW-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding HELP-CONTENT-DRAFT-REVISION-REQUEST-01 manifest/state entries and scoped the task to revising the local v01 Help package, then rerunning review request."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "HELP-CONTENT-DRAFT-EDITORIAL-REVIEW-01 is merged as PR #1919; origin/main contains merge commit 78a8432b690827a2741f39efedb734d3140fc91c."
+      },
+      "scope_preflight": {
+        "status": "pass",
+        "evidence": "Task may revise only the local v01 package draft fields needed to clear #1919 guard findings and may write review/revision artifacts. CMS mutation, publish, deploy, private URL access, payment/refund actions, and secret/env/cookie/token reads are forbidden."
+      },
+      "github": {
+        "status": "pass",
+        "commands": [
+          "gh pr checks 1921 --watch --interval 15"
+        ],
+        "jobs": [
+          "hygiene",
+          "supply-chain",
+          "content-pack-build-validate",
+          "verify-bigfive",
+          "verify-mbti-legacy",
+          "verify-mbti-v2",
+          "Semgrep blocking secrets"
+        ]
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": "44963cc25081001c33eac973cc67333975475fc9",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1921",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "external_asset_paths": [
+      "/Users/rainie/Desktop/费马资料文件/fermatmind-help-service-content-drafts-01.zip",
+      "/Users/rainie/Desktop/fermatmind-help-service-content-drafts-01"
+    ],
+    "planned_outputs": {
+      "revision_artifact": "backend/docs/help/generated/help-content-draft-revision-request-01.v1.json",
+      "revision_report": "backend/docs/operations/help-content-draft-revision-request-2026-06-05.md",
+      "review_rerun_artifact": "backend/docs/help/generated/help-content-draft-editorial-review-rerun-01.v1.json",
+      "review_rerun_report": "backend/docs/operations/help-content-draft-editorial-review-rerun-2026-06-05.md",
+      "operator_approval_allowed_for_codex": false,
+      "publish_allowed": false,
+      "cms_mutation_allowed": false
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "cms_write_performed": false,
+      "editorial_approval_performed": false,
+      "publish_performed": false,
+      "search_submission_performed": false,
+      "deploy_performed": false,
+      "private_url_access_performed": false,
+      "secret_env_cookie_token_read": false
+    },
+    "sidecars": [
+      {
+        "id": "HELP-CONTENT-DRAFT-REVISION-REQUEST-OPERATOR-APPROVAL",
+        "status": "hard_gate",
+        "note": "Codex may rerun review request after revision, but Operator editorial approval must remain explicit and separate."
+      },
+      {
+        "id": "HELP-CONTENT-DRAFT-REVISION-REQUEST-PUBLISH-BLOCK",
+        "status": "hard_gate",
+        "note": "Publish, indexability, sitemap/llms inclusion, search submission, CMS mutation, and deploy remain forbidden."
+      },
+      {
+        "id": "HELP-CONTENT-DRAFT-REVISION-REQUEST-LOCAL-PACKAGE",
+        "status": "external_asset",
+        "note": "The v01 zip/folder are local external assets outside the git repository; the PR records hashes and review artifacts, not a CMS write."
+      }
+    ],
+    "next_task": null,
+    "transitions": [
+      {
+        "at": "2026-06-05",
+        "status": "manifest_state_authorized",
+        "note": "User authorized supplementing manifest/state entries for HELP-CONTENT-DRAFT-REVISION-REQUEST-01."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "pending_revision_request",
+        "note": "Manifest/state entry added; implementation must run as a separate scoped PR and preserve no CMS mutation, no publish, no deploy, no private URL access, and no secret/env/cookie/token reads."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/1921 with manifest/state commit 44963cc25081001c33eac973cc67333975475fc9; GitHub checks are pending."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "ready_to_merge",
+        "note": "PR #1921 GitHub checks passed and changed files remained limited to manifest/state."
       }
     ]
   },

@@ -21602,7 +21602,7 @@ prs:
     branch: codex/help-content-draft-editorial-review-01
     title: "docs(help): prepare Help CMS draft editorial review request"
     train_scope: window_9_help_service_content
-    status: blocked_private_identifier_guard
+    status: merged
     depends_on:
       - HELP-CONTENT-DRAFT-REVIEW-PREFLIGHT-01
     scope:
@@ -21622,6 +21622,55 @@ prs:
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
       - git diff --check -- backend/docs/help/generated/help-content-draft-editorial-review-01.v1.json backend/docs/operations/help-content-draft-editorial-review-2026-06-05.md docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: HELP-CONTENT-DRAFT-REVISION-REQUEST-01
+
+  - id: HELP-CONTENT-DRAFT-REVISION-REQUEST-01
+    repo: fap-api
+    branch: codex/help-content-draft-revision-request-01
+    title: "docs(help): revise v01 Help content package and rerun review request"
+    train_scope: window_9_help_service_content
+    status: pending_revision_request
+    depends_on:
+      - HELP-CONTENT-DRAFT-EDITORIAL-REVIEW-01
+    scope:
+      - Use the existing v01 Help service content package at `/Users/rainie/Desktop/费马资料文件/fermatmind-help-service-content-drafts-01.zip`.
+      - Revise only the local v01 package draft fields needed to clear the #1919 private-identifier/result-link guard findings.
+      - Recompute package hash and rerun the editorial review request scan against the revised local v01 package.
+      - Archive revision evidence, guard-scan result, review request status, package hash delta, and sidecar issues.
+      - Do not claim Operator editorial approval; approval remains a separate hard gate.
+    external_asset_paths:
+      - /Users/rainie/Desktop/费马资料文件/fermatmind-help-service-content-drafts-01.zip
+      - /Users/rainie/Desktop/fermatmind-help-service-content-drafts-01
+    allowed_paths:
+      - backend/docs/help/generated/help-content-draft-revision-request-01.v1.json
+      - backend/docs/operations/help-content-draft-revision-request-2026-06-05.md
+      - backend/docs/help/generated/help-content-draft-editorial-review-rerun-01.v1.json
+      - backend/docs/operations/help-content-draft-editorial-review-rerun-2026-06-05.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Mutate CMS, publish, deploy, submit search URLs, access private result/order/share/pay/payment/history URLs, read secrets/env/cookies/tokens, run payment/refund flows, change payment-provider behavior, or approve editorial review on Operator's behalf.
+    validation:
+      - python3 -m json.tool backend/docs/help/generated/help-content-draft-revision-request-01.v1.json >/dev/null
+      - python3 -m json.tool backend/docs/help/generated/help-content-draft-editorial-review-rerun-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=HelpContentImportPackageTest --no-ansi
+      - git diff --check -- backend/docs/help/generated/help-content-draft-revision-request-01.v1.json backend/docs/operations/help-content-draft-revision-request-2026-06-05.md backend/docs/help/generated/help-content-draft-editorial-review-rerun-01.v1.json backend/docs/operations/help-content-draft-editorial-review-rerun-2026-06-05.md docs/codex/pr-train.yaml docs/codex/pr-train-state.json
       - git diff --cached --check
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
     production_write_execution: false
