@@ -44817,7 +44817,7 @@
     "repo": "fap-api",
     "branch": "codex/help-content-draft-revision-request-01",
     "base": "origin/main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "window_9_help_service_content",
     "title": "docs(help): revise v01 Help content package and rerun review request",
     "depends_on": [
@@ -44897,11 +44897,11 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": "e13a893f864dbdb148e9fa95e72d9fe6a003a05e",
+    "commit_sha": "df144673921fcdd3470653ee974ea5f13af6dc41",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1925",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-05T09:23:17Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "external_asset_paths": [
       "/Users/rainie/Desktop/费马资料文件/fermatmind-help-service-content-drafts-01.zip",
       "/Users/rainie/Desktop/fermatmind-help-service-content-drafts-01"
@@ -44988,6 +44988,11 @@
         "at": "2026-06-05",
         "status": "ready_to_merge",
         "note": "PR #1925 GitHub checks passed and changed files remained within the allowed revision/review artifact and PR-train state paths. Review status remains review_requested; Operator approval remains unclaimed."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "merged_reconciled",
+        "note": "Reconciled while starting HELP-CONTENT-DRAFT-CMS-SYNC-01: PR #1925 is merged, origin/main contains df144673921fcdd3470653ee974ea5f13af6dc41, and local/remote task branch cleanup was completed."
       }
     ],
     "result": {
@@ -46981,6 +46986,157 @@
         "from": "pr_open_github_checks_pending",
         "to": "ready_to_merge",
         "notes": "GitHub checks passed and merge state was CLEAN. Pre-merge scope validation remained limited to PR12 docs/generated/test/ledger paths."
+      }
+    ]
+  },
+  "HELP-CONTENT-DRAFT-CMS-SYNC-01": {
+    "repo": "fap-api",
+    "branch": "codex/help-content-draft-cms-sync-01",
+    "base": "origin/main",
+    "status": "local_checks_passed",
+    "train_scope": "window_9_help_service_content",
+    "title": "ops(help): sync revised Help content package to CMS drafts",
+    "depends_on": [
+      "HELP-CONTENT-DRAFT-REVISION-REQUEST-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User authorized Codex to execute HELP-CONTENT-DRAFT-CMS-SYNC-01, limited to syncing revised v01 Help content to existing 12 Help CMS drafts while preserving draft/non-public/non-indexable/unpublished state."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "HELP-CONTENT-DRAFT-REVISION-REQUEST-01 is merged as PR #1925 and origin/main contains df144673921fcdd3470653ee974ea5f13af6dc41."
+      },
+      "package_hash": {
+        "status": "pass",
+        "revised_sha256": "f971f5cd279018c2db469ccd87c43484c4983de5484e8c1e47343aa5813e6bb9"
+      },
+      "production_dry_run": {
+        "status": "pass",
+        "files_found": 1,
+        "pages_found": 12,
+        "will_create": 0,
+        "will_update": 12,
+        "will_skip": 0
+      },
+      "production_sync": {
+        "status": "pass",
+        "performed": true,
+        "will_create": 0,
+        "will_update": 12,
+        "will_skip": 0
+      },
+      "postcheck": {
+        "status": "pass",
+        "record_count": 12,
+        "all_status_draft": true,
+        "all_non_public": true,
+        "all_non_indexable": true,
+        "all_unpublished": true
+      },
+      "public_surface": {
+        "status": "pass",
+        "routes_all_404": true,
+        "sitemap_llms_hits": 0
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          {
+            "command": "python3 -m json.tool backend/docs/help/generated/help-content-draft-cms-sync-01.v1.json >/dev/null",
+            "status": "pass"
+          },
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "pass"
+          },
+          {
+            "command": "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+            "status": "pass"
+          },
+          {
+            "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=HelpContentImportPackageTest --no-ansi",
+            "status": "passed_with_warning",
+            "notes": "Exited 0 with 454 assertions and one Laravel warning in the temporary worktree."
+          },
+          {
+            "command": "git diff --check -- backend/docs/help/generated/help-content-draft-cms-sync-01.v1.json backend/docs/operations/help-content-draft-cms-sync-2026-06-05.md docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+            "status": "pass"
+          }
+        ]
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "result": {
+      "decision": "CMS_DRAFT_SYNC_COMPLETED_WITH_PUBLISH_BLOCKED",
+      "cms_mutation_performed": true,
+      "records_created": 0,
+      "records_updated": 12,
+      "record_count_checked": 12,
+      "publish_performed": false,
+      "operator_approval_claimed": false,
+      "revised_sha256": "f971f5cd279018c2db469ccd87c43484c4983de5484e8c1e47343aa5813e6bb9",
+      "generated_artifact": "backend/docs/help/generated/help-content-draft-cms-sync-01.v1.json",
+      "operations_report": "backend/docs/operations/help-content-draft-cms-sync-2026-06-05.md"
+    },
+    "scope_validation": {
+      "cms_mutation_performed": true,
+      "cms_mutation_scope": "existing 12 Help ContentPage draft rows only",
+      "records_created": 0,
+      "publish_performed": false,
+      "deploy_performed": false,
+      "search_submission_performed": false,
+      "payment_or_refund_performed": false,
+      "payment_provider_changed": false,
+      "private_url_access_performed": false,
+      "secret_env_cookie_token_read": false,
+      "operator_approval_claimed": false,
+      "allowed_paths_only": true
+    },
+    "sidecars": [
+      {
+        "id": "HELP-CONTENT-DRAFT-CMS-SYNC-OPERATOR-APPROVAL",
+        "status": "hard_gate",
+        "note": "Operator editorial approval remains separate and was not claimed."
+      },
+      {
+        "id": "HELP-CONTENT-DRAFT-CMS-SYNC-PUBLISH-BLOCK",
+        "status": "hard_gate",
+        "note": "Publish, indexability, sitemap/llms inclusion, deploy, and search submission remain forbidden."
+      },
+      {
+        "id": "HELP-CONTENT-DRAFT-CMS-SYNC-SUPPORT-CONTACT-FIELD",
+        "status": "open_publish_preflight",
+        "note": "support@fermatmind.com exists in the import package layer; a first-class ContentPage support_contact field is still not verified."
+      }
+    ],
+    "next_task": "HELP-CONTENT-DRAFT-OPERATOR-REVIEW-01 after separate authorization",
+    "transitions": [
+      {
+        "at": "2026-06-05",
+        "status": "authorized",
+        "note": "User authorized syncing revised v01 Help content to existing 12 CMS draft rows only."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "production_sync_completed",
+        "note": "Dry-run passed with will_create=0 and will_update=12; executed importer with --upsert --status=draft; postcheck confirmed 12 rows remain draft, non-public, non-indexable, unpublished, and owner_review."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "local_artifacts_created_validation_pending",
+        "note": "Archived CMS sync artifact and operations report; local repo checks are pending."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "local_checks_passed",
+        "note": "JSON/YAML parses passed, scoped diff whitespace check passed, and HelpContentImportPackageTest exited 0 with 454 assertions and one Laravel warning."
       }
     ]
   }
