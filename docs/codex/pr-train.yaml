@@ -22173,7 +22173,7 @@ prs:
     branch: codex/daily-giving-first-record-review-template-01
     title: "docs(benefit): define DailyGiving first record review template"
     train_scope: window_7_public_benefit_trust_gate
-    status: in_progress
+    status: merged
     scope:
       - Add DailyGiving first-record review template for the later private-ledger authorization.
       - Add generated first-record review template artifact.
@@ -22209,6 +22209,50 @@ prs:
     frontend_fallback_authority: false
     content_authority: CMS/backend
     next_task: DAILY-GIVING-FIRST-RECORD-PRIVATE-LEDGER-01
+
+  - id: DAILY-GIVING-FIRST-RECORD-PRIVATE-LEDGER-01
+    repo: fap-api
+    depends_on:
+      - DAILY-GIVING-FIRST-RECORD-REVIEW-TEMPLATE-01
+    branch: codex/daily-giving-first-record-private-ledger-01
+    title: "docs(benefit): record first DailyGiving private ledger gate"
+    train_scope: window_7_public_benefit_trust_gate
+    status: in_progress
+    scope:
+      - Record the first DailyGiving private ledger execution with redacted committed docs and artifact only.
+      - Confirm raw transaction proof, raw receipt proof, and the full private ledger were created outside the repository.
+      - Add focused contract coverage proving no raw proof, private ledger, receipt ID, transaction serial, account details, balance, public proof, publish, index, trust badge, search, social, CMS mutation, production DB record, or deploy action is committed or allowed.
+      - Supersede the earlier planned CNY 10 / United Nations Foundation intent with actual proof values: UNICEF, CNY 75, private completed draft, not verified, not public, not indexable.
+    allowed_paths:
+      - backend/docs/operations/daily-giving-first-record-private-ledger.md
+      - backend/docs/operations/generated/daily-giving-first-record-private-ledger.v1.json
+      - backend/tests/Feature/Foundation/DailyGivingFirstRecordPrivateLedgerTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Commit raw proof, local private ledger contents, receipt ID, transaction serial, account details, balance, private proof path, redaction notes, public proof URL, production database record, CMS mutation, publish, index DailyGiving, create trust badges, submit search URLs, run social distribution, call payment providers, deploy, or read secrets.
+    validation:
+      - php -l backend/tests/Feature/Foundation/DailyGivingFirstRecordPrivateLedgerTest.php
+      - python3 -m json.tool backend/docs/operations/generated/daily-giving-first-record-private-ledger.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=DailyGivingFirstRecordPrivateLedgerTest --no-ansi
+      - git diff --check -- backend/docs/operations/daily-giving-first-record-private-ledger.md backend/docs/operations/generated/daily-giving-first-record-private-ledger.v1.json backend/tests/Feature/Foundation/DailyGivingFirstRecordPrivateLedgerTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: private operator ledger outside repository
+    next_task: DAILY-GIVING-REDACTED-PUBLIC-PROOF-01
 
   - id: SEO-ARTICLE-RIASEC-V2-PACKAGE-ARCHIVE-01
     repo: fap-api

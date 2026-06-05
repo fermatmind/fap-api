@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "id": "DAILY-GIVING-FIRST-RECORD-PRIVATE-LEDGER-01",
+  "date": "2026-06-05",
+  "mode": "private_ledger_redacted_artifact",
+  "decision": "First DailyGiving private ledger created outside the repository with transaction and receipt proofs; committed artifact remains redacted and non-public.",
+  "supersedes_prior_operator_intent": {
+    "planned_amount_minor": 1000,
+    "planned_currency": "CNY",
+    "planned_recipient_name": "United Nations Foundation",
+    "reason": "Actual proof shows completed CNY 75 UNICEF transaction."
+  },
+  "private_draft_record": {
+    "record_code": "FM-GIVING-2026-06-001",
+    "donation_date": "2026-06-05",
+    "donation_time_local": "18:52:53",
+    "recipient_name": "联合国儿童基金会（UNICEF）",
+    "recipient_official_url": "https://www.unicef.cn/",
+    "recipient_role": "recipient_only",
+    "amount_minor": 7500,
+    "currency": "CNY",
+    "donation_status": "completed",
+    "verified": false,
+    "proof_status": "redacted_pending",
+    "proof_public_url": null,
+    "is_public": false,
+    "is_indexable": false,
+    "published_at": null
+  },
+  "private_execution": {
+    "raw_proof_copied_to_private_local_storage": true,
+    "raw_transaction_proof_copied_to_private_local_storage": true,
+    "raw_receipt_proof_copied_to_private_local_storage": true,
+    "private_ledger_created_outside_repository": true,
+    "raw_proof_committed": false,
+    "raw_receipt_proof_committed": false,
+    "private_ledger_committed": false,
+    "receipt_id_committed": false,
+    "transaction_serial_committed": false,
+    "account_details_committed": false,
+    "balance_committed": false,
+    "local_device_metadata_committed": false,
+    "production_database_record_created": false,
+    "cms_mutation_performed": false,
+    "deploy_performed": false
+  },
+  "public_release": {
+    "redacted_public_proof_created": false,
+    "publish_performed": false,
+    "search_submission_performed": false,
+    "social_distribution_performed": false,
+    "trust_badge_allowed_now": false,
+    "public_amplification_allowed_now": false,
+    "daily_giving_indexable_allowed_now": false,
+    "daily_giving_sitemap_inclusion_allowed_now": false,
+    "daily_giving_llms_inclusion_allowed_now": false
+  },
+  "claim_boundary": {
+    "official_partner_claim_allowed": false,
+    "endorsement_claim_allowed": false,
+    "certification_claim_allowed": false,
+    "guaranteed_impact_claim_allowed": false,
+    "unsupported_stable_daily_operation_claim_allowed": false
+  },
+  "next_authorization_required": "DAILY-GIVING-REDACTED-PUBLIC-PROOF-01"
+}
