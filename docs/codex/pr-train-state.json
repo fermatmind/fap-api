@@ -33311,7 +33311,7 @@
     ]
   },
   "GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVISION-R2": {
-    "status": "pr_open",
+    "status": "merged",
     "repo": "fap-api",
     "branch": "codex/global-en-zh-content-pages-human-revision-r2",
     "base": "main",
@@ -43760,11 +43760,11 @@
       "next_task": "ARTICLE-CTA-ROUTE-GATE-01"
     },
     "failure_reason": null,
-    "commit_sha": "b19732a3c0d67616705c8c88ac317989f8864130",
+    "commit_sha": "cd51c29ce0c8a4bc1760ffb75a1aac2eb7f95ec0",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1895",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-05T01:32:19Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-05T00:00:00+08:00",
@@ -43789,6 +43789,12 @@
         "from": "local_checks_passed",
         "to": "pr_open",
         "notes": "Opened https://github.com/fermatmind/fap-api/pull/1895."
+      },
+      {
+        "at": "2026-06-05T00:00:00+08:00",
+        "from": "pr_open",
+        "to": "merged",
+        "notes": "Reconciled after PR #1895 merged with squash merge commit 6e0c78e7b2a2ff258597ebf9b079ab2bf14495fb and cleanup completed."
       }
     ]
   },
@@ -43796,7 +43802,7 @@
     "repo": "fap-api",
     "branch": "codex/article-cta-route-gate-01",
     "base": "main",
-    "status": "planned",
+    "status": "local_checks_passed",
     "train_scope": "seo_article_system_window_6",
     "title": "docs(seo): gate article CTA routes",
     "depends_on": [
@@ -43808,20 +43814,30 @@
         "evidence": "User explicitly authorized Window 6 SEO article system PR train execution with docs/contracts-only scope and no content, CMS, publish, search submission, deploy, or private URL actions."
       },
       "dependency": {
-        "status": "pending",
-        "evidence": "Depends on ARTICLE-INTERNAL-LINK-PLAN-01."
+        "status": "pass",
+        "evidence": "ARTICLE-INTERNAL-LINK-PLAN-01 merged as PR #1895 with merge commit 6e0c78e7b2a2ff258597ebf9b079ab2bf14495fb."
       },
       "scope_validation": {
-        "status": "not_started",
-        "evidence": null
+        "status": "pass",
+        "evidence": "Changed files are confined to the CTA route gate doc, generated JSON artifact, and docs/codex metadata."
       },
       "local": {
-        "status": "not_started",
-        "commands": [],
-        "notes": null
+        "status": "pass",
+        "commands": [
+          "python3 -m json.tool backend/docs/seo/generated/article-cta-route-gate-01.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "git diff --check -- backend/docs/seo/article-cta-route-gate-2026-06-05.md backend/docs/seo/generated/article-cta-route-gate-01.v1.json docs/codex docs/codex/sidecar",
+          "git diff --cached --check"
+        ],
+        "notes": "JSON artifact parse, ledger parse, manifest parse, and scoped diff checks passed."
       }
     },
-    "result": null,
+    "result": {
+      "go_no_go": "GO for public canonical article-to-test CTAs; CONDITIONAL for career CTAs; NO-GO for private or tokenized CTA routes.",
+      "tracking": "article_to_test_click is supported by fap-web contracts; production ingestion visibility remains Unknown until baseline review.",
+      "next_task": "ARTICLE-FAQ-SCHEMA-SMOKE-01"
+    },
     "failure_reason": null,
     "commit_sha": null,
     "pr_url": null,
@@ -43834,6 +43850,18 @@
         "from": "missing_from_manifest",
         "to": "planned",
         "notes": "Initialized as a planned Window 6 SEO article system task."
+      },
+      {
+        "at": "2026-06-05T00:00:00+08:00",
+        "from": "planned",
+        "to": "in_progress",
+        "notes": "Started after PR6 merge and cleanup."
+      },
+      {
+        "at": "2026-06-05T00:00:00+08:00",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "notes": "CTA route gate doc and generated artifact passed local validation."
       }
     ]
   },
