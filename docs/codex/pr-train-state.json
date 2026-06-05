@@ -31923,7 +31923,7 @@
   "MARKETINGSKILLS-FERMATMIND-FIT-SCAN-00": {
     "repo": "fap-api",
     "branch": "codex/marketingskills-fermatmind-fit-scan-00",
-    "status": "pr_opened",
+    "status": "merged",
     "depends_on": [],
     "commit_sha": "2d08bb46555389226adf6dbce80dcc9111e2b82a",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1680",
@@ -47210,11 +47210,11 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": "fef2189cccb002b0fc57931ea600b03c018bdceb",
+    "commit_sha": "fcce4e3a6b76d47a746dcd321c6acdd0cdab0713",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1927",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-05T12:13:59Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "result": {
       "decision": "CMS_DRAFT_SYNC_COMPLETED_WITH_PUBLISH_BLOCKED",
       "cms_mutation_performed": true,
@@ -47289,6 +47289,11 @@
         "at": "2026-06-05",
         "status": "ready_to_merge",
         "note": "GitHub checks passed and merge state was CLEAN. Changed files remained limited to the CMS sync generated artifact, operations report, manifest, and state ledger."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "merged_closeout_reconciled",
+        "note": "PR #1927 merged on GitHub at 2026-06-05T12:13:59Z with merge commit fcce4e3a6b76d47a746dcd321c6acdd0cdab0713; origin/main contains the merge commit; remote branch was deleted and local task worktree/branch cleanup was completed."
       }
     ]
   }
