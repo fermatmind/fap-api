@@ -46993,7 +46993,7 @@
     "repo": "fap-api",
     "branch": "codex/help-content-draft-cms-sync-01",
     "base": "origin/main",
-    "status": "local_checks_passed",
+    "status": "pr_opened",
     "train_scope": "window_9_help_service_content",
     "title": "ops(help): sync revised Help content package to CMS drafts",
     "depends_on": [
@@ -47068,8 +47068,8 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "305bb45e02c74c2a3dbeab704ff78a6a3c072ed5",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1927",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -47137,6 +47137,11 @@
         "at": "2026-06-05",
         "status": "local_checks_passed",
         "note": "JSON/YAML parses passed, scoped diff whitespace check passed, and HelpContentImportPackageTest exited 0 with 454 assertions and one Laravel warning."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "pr_opened",
+        "note": "Opened PR #1927 with scoped CMS sync artifacts and PR-train metadata."
       }
     ]
   }
