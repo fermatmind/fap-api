@@ -24800,7 +24800,7 @@
     "merge_commit": "29ec08275027a517993a7cea0fdc6c117bc85c87"
   },
   "OPS-RELEASE-WORKFLOW-01": {
-    "status": "pr_open_github_checks_pending",
+    "status": "ready_to_merge",
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
     "branch": "codex/ops-release-workflow-01",
@@ -47174,8 +47174,8 @@
         "notes": "Passed syntax, JSON/YAML parsing, focused DailyGivingRedactedPublicProofTest, scoped diff check, and focused committed-surface leakage scan. PHPUnit exited 0 with warnings from the temporary checkout missing backend/.env."
       },
       "github": {
-        "status": "pending",
-        "evidence": null
+        "status": "pass",
+        "evidence": "GitHub checks passed for PR #1932: hygiene, supply-chain, content-pack-build-validate, Semgrep blocking secrets, Semgrep OSS, semgrep sarif non-blocking upload, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
       }
     },
     "result": {
@@ -47236,6 +47236,12 @@
         "from": "local_checks_passed",
         "to": "pr_open_github_checks_pending",
         "notes": "Opened https://github.com/fermatmind/fap-api/pull/1932 from codex/daily-giving-redacted-public-proof-01. GitHub required checks are pending."
+      },
+      {
+        "at": "2026-06-05T13:02:00Z",
+        "from": "pr_open_github_checks_pending",
+        "to": "ready_to_merge",
+        "notes": "GitHub checks passed for PR #1932 and merge state can be rechecked before squash merge."
       }
     ]
   },
