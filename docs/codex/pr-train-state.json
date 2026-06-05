@@ -44817,7 +44817,7 @@
     "repo": "fap-api",
     "branch": "codex/help-content-draft-revision-request-01",
     "base": "origin/main",
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "train_scope": "window_9_help_service_content",
     "title": "docs(help): revise v01 Help content package and rerun review request",
     "depends_on": [
@@ -44837,18 +44837,9 @@
         "evidence": "Task may revise only the local v01 package draft fields needed to clear #1919 guard findings and may write review/revision artifacts. CMS mutation, publish, deploy, private URL access, payment/refund actions, and secret/env/cookie/token reads are forbidden."
       },
       "github": {
-        "status": "pass",
+        "status": "pending",
         "commands": [
-          "gh pr checks 1921 --watch --interval 15"
-        ],
-        "jobs": [
-          "hygiene",
-          "supply-chain",
-          "content-pack-build-validate",
-          "verify-bigfive",
-          "verify-mbti-legacy",
-          "verify-mbti-v2",
-          "Semgrep blocking secrets"
+          "gh pr checks 1925 --watch --interval 15"
         ]
       },
       "package_revision": {
@@ -44896,8 +44887,8 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "7d611361e12aea67fec4718c36976046e8bb2e5e",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1925",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -44977,6 +44968,11 @@
         "at": "2026-06-05",
         "status": "rebased_local_checks_still_passed",
         "note": "Rebased the task branch onto the latest origin/main after main advanced by one commit; JSON/YAML parse, scoped diff check, and HelpContentImportPackageTest still passed."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/1925 for HELP-CONTENT-DRAFT-REVISION-REQUEST-01 after local validation passed. GitHub checks are pending."
       }
     ],
     "result": {
