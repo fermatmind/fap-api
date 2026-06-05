@@ -22254,6 +22254,54 @@ prs:
     content_authority: private operator ledger outside repository
     next_task: DAILY-GIVING-REDACTED-PUBLIC-PROOF-01
 
+  - id: DAILY-GIVING-REDACTED-PUBLIC-PROOF-01
+    repo: fap-api
+    depends_on:
+      - DAILY-GIVING-FIRST-RECORD-PRIVATE-LEDGER-01
+    branch: codex/daily-giving-redacted-public-proof-01
+    title: "docs(benefit): gate DailyGiving redacted public proof"
+    train_scope: window_7_public_benefit_trust_gate
+    status: in_progress
+    scope:
+      - Define the reviewed redacted public proof gate for the first DailyGiving record.
+      - Add required redaction checklist, URL-shape requirements, claim boundaries, and generated artifact.
+      - Add focused contract coverage for runtime-action blocks, sensitive-field redaction, public URL gate shape, public API private-field exclusions, and endorsement claim boundaries.
+      - Keep the actual proof artifact, public media URL, production record activation, publish, index, trust badge, social/search, CMS mutation, and deploy actions blocked.
+    allowed_paths:
+      - backend/docs/operations/daily-giving-redacted-public-proof.md
+      - backend/docs/operations/generated/daily-giving-redacted-public-proof.v1.json
+      - backend/tests/Feature/Foundation/DailyGivingRedactedPublicProofTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Create, edit, upload, or commit proof files, raw receipts, redacted images, public media URLs, private local paths, receipt IDs, transaction serials, account details, balances, production database records, CMS mutations, publish/index changes, trust badges, search submissions, social distribution, deploys, or endorsement/official-partnership claims.
+    validation:
+      - php -l backend/tests/Feature/Foundation/DailyGivingRedactedPublicProofTest.php
+      - python3 -m json.tool backend/docs/operations/generated/daily-giving-redacted-public-proof.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=DailyGivingRedactedPublicProofTest --no-ansi
+      - git diff --check -- backend/docs/operations/daily-giving-redacted-public-proof.md backend/docs/operations/generated/daily-giving-redacted-public-proof.v1.json backend/tests/Feature/Foundation/DailyGivingRedactedPublicProofTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    sidecar_issues:
+      - id: REDACTED_PUBLIC_MEDIA_URL
+        status: blocked_external_operator_input
+        note: Reviewed redacted public media URL is required before production record activation.
+    next_task: DAILY-GIVING-PROOF-PUBLIC-URL-FRONTEND-ADAPTER-01
+
   - id: SEO-ARTICLE-RIASEC-V2-PACKAGE-ARCHIVE-01
     repo: fap-api
     branch: codex/seo-article-riasec-v2-package-archive-01
