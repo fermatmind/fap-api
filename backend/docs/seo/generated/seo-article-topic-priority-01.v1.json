@@ -1,0 +1,132 @@
+{
+  "artifact_id": "seo-article-topic-priority-01",
+  "artifact_version": "v1",
+  "generated_at": "2026-06-05T00:00:00+08:00",
+  "scope": "topic_priority_without_article_copy",
+  "content_generation": false,
+  "cms_mutation": false,
+  "publish_action": false,
+  "search_submission": false,
+  "private_url_access": false,
+  "decision": {
+    "recommended_next_topic_direction": "RIASEC explanation",
+    "recommendation_status": "GO for request-card planning",
+    "default_confirmed": true
+  },
+  "topics": [
+    {
+      "priority": 1,
+      "topic_direction": "RIASEC explanation",
+      "search_intent": "explanation / career exploration",
+      "user_problem": "understand what RIASEC is for before taking or interpreting a career-interest test",
+      "primary_cta": [
+        "/zh/tests/holland-career-interest-test-riasec",
+        "/en/tests/holland-career-interest-test-riasec"
+      ],
+      "secondary_cta": [
+        "MBTI public test route",
+        "Big Five public test route"
+      ],
+      "internal_links": [
+        "first_canary",
+        "riasec_test_page",
+        "mbti_test_page",
+        "big_five_test_page"
+      ],
+      "claim_boundary": "interest_exploration_only",
+      "publish_risk": "low_medium"
+    },
+    {
+      "priority": 2,
+      "topic_direction": "Career uncertainty",
+      "search_intent": "career guidance",
+      "user_problem": "feels stuck choosing majors, jobs, or career direction",
+      "primary_cta": [
+        "/zh/tests/holland-career-interest-test-riasec",
+        "/en/tests/holland-career-interest-test-riasec"
+      ],
+      "secondary_cta": [
+        "MBTI or Big Five public test route"
+      ],
+      "internal_links": [
+        "first_canary",
+        "future_riasec_explanation",
+        "approved_public_career_hub_if_available"
+      ],
+      "claim_boundary": "exploration_support_only",
+      "publish_risk": "medium"
+    },
+    {
+      "priority": 3,
+      "topic_direction": "Big Five career use",
+      "search_intent": "personality-to-work-style explanation",
+      "user_problem": "understand how Big Five traits can inform work-style reflection",
+      "primary_cta": [
+        "/zh/tests/big-five-personality-test-ocean-model",
+        "/en/tests/big-five-personality-test-ocean-model"
+      ],
+      "secondary_cta": [
+        "RIASEC public test route"
+      ],
+      "internal_links": [
+        "first_canary",
+        "future_riasec_explanation",
+        "big_five_test_page"
+      ],
+      "claim_boundary": "work_style_tendency_only",
+      "publish_risk": "medium"
+    },
+    {
+      "priority": 4,
+      "topic_direction": "MBTI vs RIASEC vs Big Five",
+      "search_intent": "comparison / framework selection",
+      "user_problem": "choose which assessment to use for career exploration",
+      "primary_cta": [
+        "/zh/tests/holland-career-interest-test-riasec",
+        "/en/tests/holland-career-interest-test-riasec"
+      ],
+      "secondary_cta": [
+        "MBTI public test route",
+        "Big Five public test route"
+      ],
+      "internal_links": [
+        "first_canary",
+        "future_riasec_explanation",
+        "future_big_five_career_use"
+      ],
+      "claim_boundary": "limited_use_cases_no_framework_superiority",
+      "publish_risk": "medium"
+    },
+    {
+      "priority": 5,
+      "topic_direction": "Result/career-library internal-link article",
+      "search_intent": "navigation / next-step guidance",
+      "user_problem": "needs safe next steps after public article/test discovery",
+      "primary_cta": [
+        "public_canonical_article_test_or_career_route_only"
+      ],
+      "secondary_cta": [
+        "Unknown"
+      ],
+      "internal_links": [
+        "approved_public_articles",
+        "approved_public_tests",
+        "career_pages_only_after_tier_a_or_hub_eligibility"
+      ],
+      "claim_boundary": "no_private_result_or_career_certainty",
+      "publish_risk": "medium_high"
+    }
+  ],
+  "forbidden_confirmed": {
+    "final_title_generated": false,
+    "h1_generated": false,
+    "meta_copy_generated": false,
+    "body_copy_generated": false,
+    "faq_copy_generated": false,
+    "cta_copy_generated": false,
+    "cms_draft_created": false,
+    "publish_performed": false,
+    "search_submit_performed": false
+  },
+  "next_task": "SEO-ARTICLE-REQUEST-CARDS-02"
+}
