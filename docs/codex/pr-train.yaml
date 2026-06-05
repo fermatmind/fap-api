@@ -21558,3 +21558,44 @@ prs:
     frontend_fallback_authority: false
     content_authority: CMS/backend
     next_task: FOUNDATION-TRUST-PAGE-ASSET-INVENTORY-01
+
+  - id: FOUNDATION-TRUST-PAGE-ASSET-INVENTORY-01
+    repo: fap-api
+    depends_on:
+      - PUBLIC-BENEFIT-ASSET-PACKAGES-ARCHIVE-01
+    branch: codex/foundation-trust-page-asset-inventory-01
+    title: "docs(benefit): inventory Foundation trust page assets"
+    train_scope: window_7_public_benefit_trust_gate
+    status: in_progress
+    scope:
+      - Inventory current `/zh/foundation` and `/en/foundation` as public brand trust assets.
+      - Verify public routes, robots, sitemap, llms, CMS authority, public API state, claim lint, and missing asset gaps.
+      - Keep DailyGiving as a noindex gated ledger and not a trust badge or amplification asset.
+    allowed_paths:
+      - backend/docs/operations/foundation-trust-page-asset-inventory-2026-06-04.md
+      - backend/docs/operations/generated/foundation-trust-page-asset-inventory.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Rewrite content, mutate CMS, create DailyGiving records, process proof files, publish, distribute social content, create trust badges, submit search URLs, deploy, or read secrets.
+    validation:
+      - public HTTP checks for Foundation pages, DailyGiving pages, CMS content page API, giving records API, months API, sitemap, llms, and llms-full
+      - python3 -m json.tool backend/docs/operations/generated/foundation-trust-page-asset-inventory.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- backend/docs/operations/foundation-trust-page-asset-inventory-2026-06-04.md backend/docs/operations/generated/foundation-trust-page-asset-inventory.v1.json docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: FOUNDATION-CLAIM-BOUNDARY-CONTRACT-01

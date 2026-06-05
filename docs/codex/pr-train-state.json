@@ -44237,7 +44237,7 @@
     "repo": "fap-api",
     "branch": "codex/public-benefit-asset-packages-archive-01",
     "base": "origin/main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "window_7_public_benefit_trust_gate",
     "title": "docs(benefit): archive public benefit content asset packages",
     "checks": {
@@ -44311,11 +44311,11 @@
       "next_pr_supported": "FOUNDATION-TRUST-PAGE-ASSET-INVENTORY-01"
     },
     "failure_reason": null,
-    "commit_sha": "e3246bb32d54f43bc12292a8eaf466ff4fa126ad",
+    "commit_sha": "ef9fb099052f05d935b15e1b30671d4ed85aa091",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1893",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-05T01:32:57Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "cms_write_performed": false,
@@ -44359,6 +44359,144 @@
         "at": "2026-06-05",
         "status": "ready_to_merge",
         "note": "GitHub checks passed for PR #1893 before rebase; PR rebased after resolving ledger conflicts against latest main."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "merged",
+        "note": "PR #1893 squash-merged at ef9fb099052f05d935b15e1b30671d4ed85aa091; remote branch deleted; local task branch absent after merge."
+      }
+    ]
+  },
+  "FOUNDATION-TRUST-PAGE-ASSET-INVENTORY-01": {
+    "repo": "fap-api",
+    "branch": "codex/foundation-trust-page-asset-inventory-01",
+    "base": "main",
+    "status": "ready_to_merge",
+    "train_scope": "window_7_public_benefit_trust_gate",
+    "title": "docs(benefit): inventory Foundation trust page assets",
+    "depends_on": [
+      "PUBLIC-BENEFIT-ASSET-PACKAGES-ARCHIVE-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly provided PR2 id, branch, title, allowed paths, and execution order in the Window 7 PR train request."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "PUBLIC-BENEFIT-ASSET-PACKAGES-ARCHIVE-01 merged as PR #1893 at ef9fb099052f05d935b15e1b30671d4ed85aa091."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed paths are confined to PR2 allowed docs/generated/ledger paths."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          {
+            "command": "public HTTP checks for Foundation pages, DailyGiving pages, CMS content page API, giving records API, months API, sitemap, llms, and llms-full",
+            "status": "passed"
+          },
+          {
+            "command": "python3 -m json.tool backend/docs/operations/generated/foundation-trust-page-asset-inventory.v1.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check -- backend/docs/operations/foundation-trust-page-asset-inventory-2026-06-04.md backend/docs/operations/generated/foundation-trust-page-asset-inventory.v1.json docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+            "status": "passed"
+          }
+        ]
+      },
+      "github": {
+        "status": "pass",
+        "commands": [
+          "gh pr checks 1898 --watch --interval 15"
+        ],
+        "jobs": [
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "hygiene",
+          "supply-chain",
+          "content-pack-build-validate",
+          "verify-bigfive",
+          "verify-mbti-legacy",
+          "verify-mbti-v2"
+        ]
+      }
+    },
+    "result": {
+      "foundation_public_brand_trust_page": "CONDITIONAL_GO",
+      "daily_giving_public_trust_asset": "NO_GO",
+      "foundation_routes_200": true,
+      "foundation_robots_index_follow": true,
+      "daily_giving_noindex": true,
+      "daily_giving_records_count": 0,
+      "daily_giving_months_count": 0,
+      "trust_badge_allowed": false,
+      "next_pr_supported": "FOUNDATION-CLAIM-BOUNDARY-CONTRACT-01"
+    },
+    "failure_reason": null,
+    "commit_sha": "9a55fe83a813f28d053ddf9ad0f0dfa19b91b6f8",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1898",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "cms_write_performed": false,
+      "publish_performed": false,
+      "daily_giving_record_created": false,
+      "proof_file_processed": false,
+      "search_submission_performed": false,
+      "deploy_performed": false,
+      "notes": "Changed files are limited to the PR2 inventory doc, generated artifact, and codex ledger paths."
+    },
+    "sidecars": [
+      {
+        "id": "STORAGE_PRIVATE_CONFIRMED",
+        "status": "Unknown",
+        "note": "PR2 public inventory does not prove private disk or bucket."
+      },
+      {
+        "id": "PUBLIC_DAILY_GIVING_RECORD",
+        "status": "missing",
+        "note": "Public records API returned 0 records and 0 months."
+      },
+      {
+        "id": "TRUST_BADGE",
+        "status": "blocked",
+        "note": "DailyGiving cannot be used as trust badge while records/proof gates are incomplete."
+      }
+    ],
+    "next_task": "FOUNDATION-CLAIM-BOUNDARY-CONTRACT-01",
+    "transitions": [
+      {
+        "at": "2026-06-05",
+        "status": "in_progress",
+        "note": "Initialized after PR1 merge for read-only Foundation trust page asset inventory."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "local_checks_passed",
+        "note": "Foundation trust page inventory validated with public checks, JSON/YAML parse, and scoped diff check."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/1898."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed for PR #1898."
       }
     ]
   }

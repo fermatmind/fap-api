@@ -1,0 +1,149 @@
+{
+  "version": "foundation_trust_page_asset_inventory.v1",
+  "generated_at": "2026-06-05T00:00:00+08:00",
+  "mode": "read_only_inventory",
+  "decisions": {
+    "foundation_public_brand_trust_page": "CONDITIONAL_GO",
+    "daily_giving_public_trust_asset": "NO_GO",
+    "daily_giving_trust_badge_allowed": false,
+    "daily_giving_noindex_required": true
+  },
+  "foundation_routes": [
+    {
+      "locale": "zh",
+      "url": "https://fermatmind.com/zh/foundation",
+      "status": 200,
+      "robots": "index, follow",
+      "canonical": "https://fermatmind.com/zh/foundation",
+      "risky_claim_hits": []
+    },
+    {
+      "locale": "en",
+      "url": "https://fermatmind.com/en/foundation",
+      "status": 200,
+      "robots": "index, follow",
+      "canonical": "https://fermatmind.com/en/foundation",
+      "risky_claim_hits": []
+    }
+  ],
+  "daily_giving_routes": [
+    {
+      "locale": "zh",
+      "url": "https://fermatmind.com/zh/foundation/daily-giving",
+      "status": 200,
+      "robots": "noindex, nofollow, noarchive, nocache",
+      "canonical": "https://fermatmind.com/zh/foundation/daily-giving",
+      "risky_claim_hits": []
+    },
+    {
+      "locale": "en",
+      "url": "https://fermatmind.com/en/foundation/daily-giving",
+      "status": 200,
+      "robots": "noindex, nofollow, noarchive, nocache",
+      "canonical": "https://fermatmind.com/en/foundation/daily-giving",
+      "risky_claim_hits": []
+    }
+  ],
+  "cms_authority": [
+    {
+      "locale": "en",
+      "api_url": "https://fermatmind.com/api/v0.5/content-pages/foundation?locale=en",
+      "status": 200,
+      "slug": "foundation",
+      "cms_status": "published",
+      "is_public": true,
+      "is_indexable": true,
+      "review_state": "approved",
+      "legal_review_required": false,
+      "science_review_required": false,
+      "updated_at": "2026-05-31",
+      "has_content_md": true,
+      "has_content_html": false,
+      "has_seo_title": true,
+      "has_meta_description": true
+    },
+    {
+      "locale": "zh-CN",
+      "api_url": "https://fermatmind.com/api/v0.5/content-pages/foundation?locale=zh-CN",
+      "status": 200,
+      "slug": "foundation",
+      "cms_status": "published",
+      "is_public": true,
+      "is_indexable": true,
+      "review_state": "approved",
+      "legal_review_required": false,
+      "science_review_required": false,
+      "updated_at": "2026-05-31",
+      "has_content_md": true,
+      "has_content_html": false,
+      "has_seo_title": true,
+      "has_meta_description": true
+    }
+  ],
+  "daily_giving_public_api": {
+    "records_count": 0,
+    "months_count": 0,
+    "pagination_total": 0,
+    "private_key_leak_observed": false,
+    "private_or_draft_records_exist": "Unknown"
+  },
+  "discoverability": {
+    "sitemap": {
+      "status": 200,
+      "foundation_present": true,
+      "daily_giving_present": false
+    },
+    "llms_txt": {
+      "status": 200,
+      "foundation_present": false,
+      "daily_giving_present": false
+    },
+    "llms_full_txt": {
+      "status": 200,
+      "foundation_present": false,
+      "daily_giving_present": false
+    }
+  },
+  "claim_lint": {
+    "scanned_terms": [
+      "UN official partner",
+      "联合国官方合作",
+      "官方认证",
+      "官方背书",
+      "背书",
+      "guaranteed impact",
+      "official endorsement",
+      "official partner",
+      "certified by",
+      "authorized by UN",
+      "registered foundation"
+    ],
+    "live_html_hits": []
+  },
+  "missing_assets": [
+    "foundation_reviewed_content_asset_package",
+    "foundation_claim_boundary_contract",
+    "foundation_cms_field_map",
+    "foundation_faq_schema_gate",
+    "daily_giving_proof_storage_gate",
+    "daily_giving_public_release_prerequisites",
+    "daily_giving_public_api_smoke",
+    "daily_giving_indexability_gate",
+    "daily_giving_first_record_review_template",
+    "storage_private_confirmed",
+    "public_daily_giving_record",
+    "public_daily_giving_proof"
+  ],
+  "forbidden_in_this_pr": [
+    "content_rewrite",
+    "cms_mutation",
+    "daily_giving_record_creation",
+    "proof_upload",
+    "publish",
+    "social_distribution",
+    "trust_badge",
+    "search_submission",
+    "deploy"
+  ],
+  "next_pr_supported": "FOUNDATION-CLAIM-BOUNDARY-CONTRACT-01"
+}
