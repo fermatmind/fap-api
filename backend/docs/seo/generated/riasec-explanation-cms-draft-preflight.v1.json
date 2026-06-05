@@ -1,0 +1,238 @@
+{
+  "task_id": "SEO-ARTICLE-RIASEC-V2-CMS-DRAFT-PREFLIGHT-01",
+  "source_task_id": "SEO-ARTICLE-RIASEC-V2-CMS-IMPORT-PACKAGE-01",
+  "source_import_package_path": "backend/docs/seo/generated/riasec-explanation-cms-import-package.v1.json",
+  "generated_at": "2026-06-05",
+  "cms_draft_created": false,
+  "cms_draft_create_allowed": false,
+  "publish_allowed": false,
+  "search_submit_allowed": false,
+  "deploy_allowed": false,
+  "content_rewrite_performed": false,
+  "private_url_accessed": false,
+  "production_write_performed": false,
+  "preflight_decision": "NO-GO for CMS draft creation; GO for documenting draft preflight blockers.",
+  "stop_reason": "Controlled importer dry-run fails for both locales, hidden CMS slug and translation-group collisions remain Unknown, and operator write permission is Unknown.",
+  "targets": [
+    {
+      "locale": "zh",
+      "slug": "riasec-holland-career-interest-test-explained",
+      "canonical_path": "/zh/articles/riasec-holland-career-interest-test-explained",
+      "translation_group_id": "riasec-explanation-article-2026-06-v2",
+      "draft_defaults": {
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "robots": "noindex,nofollow",
+        "published_at": null,
+        "published_revision_id": null,
+        "publish_allowed": false,
+        "search_submit_allowed": false,
+        "schema_enabled": false,
+        "schema_enabled_reason": "disabled until visible FAQ preview and CMS draft postcheck verify FAQ/schema alignment",
+        "requires_operator_review": true
+      },
+      "package_shape": {
+        "package_version": "editorial_package.v1",
+        "body_markdown_present": true,
+        "body_markdown_chars": 5788,
+        "faq_count": 6,
+        "internal_link_count": 5,
+        "conditional_internal_links": [
+          "/zh/career/jobs"
+        ],
+        "title_chars": 25,
+        "h1_chars": 28,
+        "seo_title_chars": 22,
+        "seo_description_chars": 53,
+        "excerpt_chars": 67
+      },
+      "cta_route_gate": {
+        "status": "pass",
+        "primary_cta_href": "/zh/tests/holland-career-interest-test-riasec",
+        "public_canonical_route_only": true,
+        "forbidden_private_route_seen": false
+      },
+      "faq_schema_gate": {
+        "status": "conditional_pass_for_preflight",
+        "faq_visible_ready_count": 6,
+        "schema_enabled_before_preview": false,
+        "requirement": "Enable FAQ/schema only after visible FAQ preview matches schema entries."
+      },
+      "public_exposure_absence": {
+        "article_api_status": 404,
+        "article_seo_api_status": 404,
+        "web_route_status": 404,
+        "sitemap_xml": "absent",
+        "llms_txt": "absent",
+        "llms_full_txt": "absent"
+      },
+      "draft_create_preflight": {
+        "status": "blocked",
+        "hidden_cms_slug_collision": "Unknown",
+        "hidden_translation_group_collision": "Unknown",
+        "operator_write_permission": "Unknown",
+        "importer_dry_run_status": "fail",
+        "importer_dry_run_error": "Array to string conversion",
+        "importer_dry_run_would_write": false
+      }
+    },
+    {
+      "locale": "en",
+      "slug": "what-is-riasec-holland-code-career-interest-test",
+      "canonical_path": "/en/articles/what-is-riasec-holland-code-career-interest-test",
+      "translation_group_id": "riasec-explanation-article-2026-06-v2",
+      "draft_defaults": {
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "robots": "noindex,nofollow",
+        "published_at": null,
+        "published_revision_id": null,
+        "publish_allowed": false,
+        "search_submit_allowed": false,
+        "schema_enabled": false,
+        "schema_enabled_reason": "disabled until visible FAQ preview and CMS draft postcheck verify FAQ/schema alignment",
+        "requires_operator_review": true
+      },
+      "package_shape": {
+        "package_version": "editorial_package.v1",
+        "body_markdown_present": true,
+        "body_markdown_chars": 15759,
+        "faq_count": 6,
+        "internal_link_count": 5,
+        "conditional_internal_links": [
+          "/en/career/jobs"
+        ],
+        "title_chars": 59,
+        "h1_chars": 64,
+        "seo_title_chars": 40,
+        "seo_description_chars": 139,
+        "excerpt_chars": 158
+      },
+      "cta_route_gate": {
+        "status": "pass",
+        "primary_cta_href": "/en/tests/holland-career-interest-test-riasec",
+        "public_canonical_route_only": true,
+        "forbidden_private_route_seen": false
+      },
+      "faq_schema_gate": {
+        "status": "conditional_pass_for_preflight",
+        "faq_visible_ready_count": 6,
+        "schema_enabled_before_preview": false,
+        "requirement": "Enable FAQ/schema only after visible FAQ preview matches schema entries."
+      },
+      "public_exposure_absence": {
+        "article_api_status": 404,
+        "article_seo_api_status": 404,
+        "web_route_status": 404,
+        "sitemap_xml": "absent",
+        "llms_txt": "absent",
+        "llms_full_txt": "absent"
+      },
+      "draft_create_preflight": {
+        "status": "blocked",
+        "hidden_cms_slug_collision": "Unknown",
+        "hidden_translation_group_collision": "Unknown",
+        "operator_write_permission": "Unknown",
+        "importer_dry_run_status": "fail",
+        "importer_dry_run_error": "Array to string conversion",
+        "importer_dry_run_would_write": false
+      }
+    }
+  ],
+  "checks": {
+    "package_integrity": "pass",
+    "draft_defaults_noindex": "pass",
+    "public_absence": "pass",
+    "sitemap_llms_absence": "pass",
+    "cta_public_canonical_only": "pass",
+    "forbidden_private_routes": "pass",
+    "faq_visible_schema_alignment": "conditional_pass_for_preflight",
+    "reference_source_review": "publish_blocking_operator_acceptance_required",
+    "cover_image_media": "blocked_placeholder_required",
+    "importer_dry_run": "fail",
+    "hidden_cms_collision_check": "Unknown",
+    "operator_permission_check": "Unknown"
+  },
+  "dry_run_commands": [
+    {
+      "locale": "zh",
+      "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan articles:import-editorial-package --file=docs/seo/cms-import-packages/riasec-explanation-v2/zh.article-target.json --locale=zh --dry-run --allow-claim-warnings --json",
+      "ok": false,
+      "action": "will_skip",
+      "error_code": "unexpected_error",
+      "error_message": "Array to string conversion"
+    },
+    {
+      "locale": "en",
+      "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan articles:import-editorial-package --file=docs/seo/cms-import-packages/riasec-explanation-v2/en.article-target.json --locale=en --dry-run --allow-claim-warnings --json",
+      "ok": false,
+      "action": "will_skip",
+      "error_code": "unexpected_error",
+      "error_message": "Array to string conversion"
+    }
+  ],
+  "public_http_checks": {
+    "article_api": [
+      {
+        "url": "https://api.fermatmind.com/api/v0.5/articles/riasec-holland-career-interest-test-explained?locale=zh",
+        "status": 404
+      },
+      {
+        "url": "https://api.fermatmind.com/api/v0.5/articles/riasec-holland-career-interest-test-explained/seo?locale=zh",
+        "status": 404
+      },
+      {
+        "url": "https://api.fermatmind.com/api/v0.5/articles/what-is-riasec-holland-code-career-interest-test?locale=en",
+        "status": 404
+      },
+      {
+        "url": "https://api.fermatmind.com/api/v0.5/articles/what-is-riasec-holland-code-career-interest-test/seo?locale=en",
+        "status": 404
+      }
+    ],
+    "web_routes": [
+      {
+        "url": "https://fermatmind.com/zh/articles/riasec-holland-career-interest-test-explained",
+        "status": 404
+      },
+      {
+        "url": "https://fermatmind.com/en/articles/what-is-riasec-holland-code-career-interest-test",
+        "status": 404
+      }
+    ],
+    "discovery_surfaces": [
+      {
+        "url": "https://fermatmind.com/sitemap.xml",
+        "target_slugs": "absent"
+      },
+      {
+        "url": "https://fermatmind.com/llms.txt",
+        "target_slugs": "absent"
+      },
+      {
+        "url": "https://fermatmind.com/llms-full.txt",
+        "target_slugs": "absent"
+      }
+    ]
+  },
+  "hard_gates": {
+    "draft_create_requires_exact_user_authorization": true,
+    "exact_draft_authorization_present": false,
+    "exact_publish_authorization_present": false,
+    "exact_search_submission_authorization_present": false,
+    "draft_authorization_alone_is_sufficient_now": false,
+    "additional_blockers_before_draft_create": [
+      "Resolve importer dry-run Array to string conversion for zh/en target packages.",
+      "Verify hidden CMS slug collisions via authorized read-only CMS/DB path or operator UI evidence.",
+      "Verify hidden translation_group_id collision via authorized read-only CMS/DB path or operator UI evidence.",
+      "Confirm operator has draft/import write permission without invoking publish/release."
+    ]
+  },
+  "next_step_request": {
+    "status": "blocked_before_draft_create",
+    "recommended_next_task": "Fix or adapt importer schema mapping, then rerun CMS draft preflight; do not create draft yet.",
+    "draft_create_task": "SEO-ARTICLE-RIASEC-V2-CMS-DRAFT-CREATE-01 remains blocked."
+  }
+}
