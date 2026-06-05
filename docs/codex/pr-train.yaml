@@ -21522,7 +21522,7 @@ prs:
     branch: codex/help-content-draft-postcheck-01
     title: "docs(help): archive Help CMS draft postcheck"
     train_scope: window_9_help_service_content
-    status: pending
+    status: postcheck_passed_publish_blocked
     depends_on:
       - HELP-CONTENT-DRAFT-CREATE-01
     scope:
