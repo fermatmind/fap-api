@@ -35526,7 +35526,7 @@
   "CONTENT-PACKS-INDEX-ARTIFACT-01": {
     "repo": "fap-api",
     "branch": "fix/content-packs-index-artifact-01",
-    "status": "ready_to_merge",
+    "status": "merged",
     "commit_sha": "7e0cc715e03b105e51c9556596212c48bb962868",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1763",
     "checks": {
@@ -37086,7 +37086,7 @@
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "scope_validation": {
-      "allowed_paths_only": null,
+      "allowed_paths_only": true,
       "git_diff_check": null,
       "git_diff_cached_check": null
     },
@@ -46505,9 +46505,9 @@
     "failure_reason": null,
     "commit_sha": "cac138c18d4573e9ae9f7d15e884f6fdb0f19aa0",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1917",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-05T04:12:52Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "cms_write_performed": false,
@@ -46543,6 +46543,112 @@
         "from": "pr_open",
         "to": "ready_to_merge",
         "notes": "GitHub checks passed for PR #1917; ready for squash merge. No production writes or record/proof mutations performed."
+      },
+      {
+        "at": "2026-06-05T04:31:28Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "notes": "Reconciled stale PR10 ledger while starting PR12: GitHub PR #1917 is MERGED at 3c15a7f8f43ac46f4f04b0b1b46a5266da093151, origin/main contains the merge commit, the remote branch is deleted, and the local task branch is absent."
+      }
+    ]
+  },
+  "DAILY-GIVING-FIRST-RECORD-REVIEW-TEMPLATE-01": {
+    "repo": "fap-api",
+    "branch": "codex/daily-giving-first-record-review-template-01",
+    "base": "main",
+    "status": "local_checks_passed",
+    "train_scope": "window_7_public_benefit_trust_gate",
+    "title": "docs(benefit): define DailyGiving first record review template",
+    "depends_on": [
+      "DAILY-GIVING-PUBLIC-API-SMOKE-01"
+    ],
+    "external_prerequisites": [
+      {
+        "repo": "fap-web",
+        "id": "DAILY-GIVING-INDEXABILITY-GATE-01",
+        "pr_url": "https://github.com/fermatmind/fap-web/pull/1059",
+        "merge_commit_sha": "e695916300581f2a9d1c4957b8cdbb20c51130fb",
+        "merged_at": "2026-06-05T04:27:29Z"
+      }
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User authorized Window 7 Public Benefit / Foundation / DailyGiving Trust Gate PR train through PR12 and required stopping before record/proof mutation steps."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "DAILY-GIVING-PUBLIC-API-SMOKE-01 merged as fap-api PR #1917 at 3c15a7f8f43ac46f4f04b0b1b46a5266da093151. DAILY-GIVING-INDEXABILITY-GATE-01 merged as fap-web PR #1059 at e695916300581f2a9d1c4957b8cdbb20c51130fb."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to the DailyGiving first-record review template doc, generated artifact, focused contract test, and docs/codex manifest/state. No production record/proof/CMS/publish/deploy/search/social/index/trust badge/payment action was performed."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "php -l backend/tests/Feature/Foundation/DailyGivingFirstRecordReviewTemplateTest.php",
+          "python3 -m json.tool backend/docs/operations/generated/daily-giving-first-record-review-template.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=DailyGivingFirstRecordReviewTemplateTest --no-ansi",
+          "git diff --check -- backend/docs/operations/daily-giving-first-record-review-template.md backend/docs/operations/generated/daily-giving-first-record-review-template.v1.json backend/tests/Feature/Foundation/DailyGivingFirstRecordReviewTemplateTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+          "git diff --cached --check"
+        ],
+        "notes": "All local checks exited 0 after installing dependencies in the temporary worktree. Focused PHPUnit passed 50 assertions with warnings from the temporary checkout missing backend/.env."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "result": {
+      "review_template_created": true,
+      "production_record_created": false,
+      "proof_uploaded": false,
+      "proof_processed": false,
+      "private_proof_path_created": false,
+      "redacted_public_proof_created": false,
+      "cms_mutation_performed": false,
+      "publish_performed": false,
+      "search_submission_performed": false,
+      "social_distribution_performed": false,
+      "payment_provider_call_performed": false,
+      "deploy_performed": false,
+      "trust_badge_allowed_now": false,
+      "public_amplification_allowed_now": false,
+      "daily_giving_indexable_allowed_now": false,
+      "next_authorization_required": "DAILY-GIVING-FIRST-RECORD-PRIVATE-LEDGER-01"
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": null,
+      "cms_write_performed": false,
+      "publish_performed": false,
+      "daily_giving_record_created": false,
+      "proof_file_processed": false,
+      "search_submission_performed": false,
+      "deploy_performed": false,
+      "notes": "Scope stayed within PR12 docs/generated/test/ledger paths. PR12 is template-only and must hard stop before DAILY-GIVING-FIRST-RECORD-PRIVATE-LEDGER-01."
+    },
+    "next_task": "DAILY-GIVING-FIRST-RECORD-PRIVATE-LEDGER-01",
+    "transitions": [
+      {
+        "at": "2026-06-05T04:31:28Z",
+        "from": "missing_from_manifest",
+        "to": "in_progress",
+        "notes": "Initialized PR12 after fap-api PR10 and fap-web PR11 merge verification. No production record/proof/CMS/publish/deploy/search/social/index/trust badge action authorized."
+      },
+      {
+        "at": "2026-06-05T04:34:20Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "notes": "Local syntax, JSON/YAML, focused PHPUnit, and scoped diff checks passed. No production writes or record/proof mutations performed."
       }
     ]
   }
