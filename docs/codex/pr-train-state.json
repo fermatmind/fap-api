@@ -32072,7 +32072,7 @@
   "FERMAT-MARKETING-SKILLS-ADAPTATION-02": {
     "repo": "fap-api",
     "branch": "codex/fermat-marketing-skills-adaptation-02",
-    "status": "pr_opened",
+    "status": "ready_to_merge",
     "depends_on": [
       "FERMAT-MARKETING-SKILLS-ADAPTATION-01"
     ],
@@ -45184,6 +45184,151 @@
         "at": "2026-06-05",
         "status": "merged_closeout_reconciled",
         "note": "PR #1933 merged on GitHub at 2026-06-05T12:58:40Z with merge commit 8ffc8f36c7f6b52987d586e8b06cf88636cafe8c; origin/main contains the merge commit; remote branch was deleted and local task branch cleanup was completed."
+      }
+    ]
+  },
+  "HELP-CONTENT-DRAFT-POLICY-OWNER-ANSWERS-01": {
+    "repo": "fap-api",
+    "branch": "codex/help-content-draft-policy-owner-answers-01",
+    "base": "origin/main",
+    "status": "pr_opened",
+    "train_scope": "window_9_help_service_content",
+    "title": "docs(help): record Help policy owner answers",
+    "depends_on": [
+      "HELP-CONTENT-DRAFT-OPERATOR-REVIEW-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User authorized supplementing manifest/state entries for HELP-CONTENT-DRAFT-POLICY-OWNER-ANSWERS-01 with read-only/docs-only scope."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "HELP-CONTENT-DRAFT-OPERATOR-REVIEW-01 is merged as PR #1933 and closed through PR #1935."
+      },
+      "policy_owner_answers": {
+        "status": "recorded",
+        "answers": {
+          "refund_exclusions": "非“费马测试”原因",
+          "refund_handling_time": "三个工作日",
+          "data_deletion_handling_time": "两年",
+          "retained_data_exceptions_after_deletion": "无",
+          "privacy_analytics_wording_confirmation": "正确"
+        }
+      },
+      "scope_preflight": {
+        "status": "pass",
+        "evidence": "Current scope records policy owner answers and follow-up PR train only; no CMS mutation, publish, deploy, search submission, private URL access, payment/refund action, payment-provider change, content rewrite, or secret/env/cookie/token read is allowed."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          {
+            "command": "shasum -a 256 /Users/rainie/Desktop/费马资料文件/fermatmind-help-service-content-drafts-01.zip",
+            "status": "pass"
+          },
+          {
+            "command": "python3 -m json.tool backend/docs/help/generated/help-content-draft-policy-owner-answers-01.v1.json >/dev/null",
+            "status": "pass"
+          },
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "pass"
+          },
+          {
+            "command": "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+            "status": "pass"
+          },
+          {
+            "command": "git diff --check -- backend/docs/help/generated/help-content-draft-policy-owner-answers-01.v1.json backend/docs/operations/help-content-draft-policy-owner-answers-2026-06-05.md docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+            "status": "pass"
+          }
+        ]
+      },
+      "github": {
+        "status": "pass",
+        "checks": [
+          "hygiene",
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "supply-chain",
+          "content-pack-build-validate",
+          "verify-bigfive",
+          "verify-mbti-legacy",
+          "verify-mbti-v2",
+          "Semgrep OSS"
+        ],
+        "merge_state": "CLEAN"
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": "704e0ba4353dbac90e647420d937f951659661a6",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1936",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "result": {
+      "decision": "POLICY_OWNER_ANSWERS_RECORDED_WITH_PUBLISH_STILL_BLOCKED",
+      "generated_artifact": "backend/docs/help/generated/help-content-draft-policy-owner-answers-01.v1.json",
+      "operations_report": "backend/docs/operations/help-content-draft-policy-owner-answers-2026-06-05.md",
+      "next_task_recommendation": "HELP-CONTENT-DRAFT-CONTACT-SUPPORT-DECISION-01"
+    },
+    "scope_validation": {
+      "cms_mutation_performed": false,
+      "publish_performed": false,
+      "deploy_performed": false,
+      "search_submission_performed": false,
+      "payment_or_refund_performed": false,
+      "payment_provider_changed": false,
+      "private_url_access_performed": false,
+      "secret_env_cookie_token_read": false,
+      "operator_approval_claimed": false,
+      "content_rewrite_performed": false,
+      "allowed_paths_only": true
+    },
+    "sidecars": [
+      {
+        "id": "HELP-CONTENT-DRAFT-CONTACT-SUPPORT-DECISION",
+        "status": "open_followup",
+        "note": "Decide whether Help content should use the existing public canonical /support route or a new CMS-backed contact-support Help route."
+      },
+      {
+        "id": "HELP-CMS-SERVICE-FIELDS",
+        "status": "open_followup",
+        "note": "First-class support_contact, policy_version, reviewer, faq_items, and schema_enabled authority remains a later CMS/backend task."
+      },
+      {
+        "id": "HELP-CONTENT-DRAFT-PUBLISH-BLOCK",
+        "status": "hard_gate",
+        "note": "Publish remains blocked and requires separate exact authorization after policy answers are applied, Operator review passes, and publish preflight passes."
+      }
+    ],
+    "next_task": "HELP-CONTENT-DRAFT-CONTACT-SUPPORT-DECISION-01",
+    "transitions": [
+      {
+        "at": "2026-06-05",
+        "status": "authorized",
+        "note": "User provided policy owner answers and authorized supplementing manifest/state entries for HELP-CONTENT-DRAFT-POLICY-OWNER-ANSWERS-01."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "local_artifacts_created_validation_pending",
+        "note": "Created policy-owner answer artifact and operations report; local validation pending."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "local_checks_passed",
+        "note": "Policy-owner answer artifact, state JSON, manifest YAML, package hash, and scoped diff whitespace checks passed."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "pr_opened",
+        "note": "Opened PR #1936 for HELP-CONTENT-DRAFT-POLICY-OWNER-ANSWERS-01."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed and merge state was CLEAN. Publish remains blocked; Operator approval was not claimed."
       }
     ]
   },

@@ -18474,7 +18474,7 @@ prs:
     base: main
     title: "IQ-NORM-03 unlock IQ score claims through norm authority"
     train_scope: iq_production_launch
-    status: in_progress
+    status: ready_to_merge
     scope:
       - Wire IQ scoring/report claim fields to backend norm authority only.
     allowed_paths:
@@ -21774,6 +21774,49 @@ prs:
     frontend_fallback_authority: false
     content_authority: CMS/backend
     next_task: HELP-CONTENT-DRAFT-POLICY-OWNER-ANSWERS-01
+
+  - id: HELP-CONTENT-DRAFT-POLICY-OWNER-ANSWERS-01
+    repo: fap-api
+    branch: codex/help-content-draft-policy-owner-answers-01
+    title: "docs(help): record Help policy owner answers"
+    train_scope: window_9_help_service_content
+    status: in_progress
+    depends_on:
+      - HELP-CONTENT-DRAFT-OPERATOR-REVIEW-01
+    scope:
+      - Record the policy-owner answers needed to unblock the Help service draft review train after HELP-CONTENT-DRAFT-OPERATOR-REVIEW-01.
+      - Map the answers to prior blockers and list the follow-up PR train without applying content revisions, mutating CMS, publishing, deploying, submitting search URLs, accessing private URLs, reading secrets, or claiming Operator approval.
+      - Preserve publish and Operator review gates for later explicitly authorized tasks.
+    external_asset_paths:
+      - /Users/rainie/Desktop/费马资料文件/fermatmind-help-service-content-drafts-01.zip
+    allowed_paths:
+      - backend/docs/help/generated/help-content-draft-policy-owner-answers-01.v1.json
+      - backend/docs/operations/help-content-draft-policy-owner-answers-2026-06-05.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Publish, deploy, submit search URLs, mutate CMS, access private result/order/share/pay/payment/history URLs, read secrets/env/cookies/tokens, run payment/refund flows, change payment-provider behavior, rewrite content, or claim Operator approval.
+    validation:
+      - shasum -a 256 /Users/rainie/Desktop/费马资料文件/fermatmind-help-service-content-drafts-01.zip
+      - python3 -m json.tool backend/docs/help/generated/help-content-draft-policy-owner-answers-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- backend/docs/help/generated/help-content-draft-policy-owner-answers-01.v1.json backend/docs/operations/help-content-draft-policy-owner-answers-2026-06-05.md docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: HELP-CONTENT-DRAFT-CONTACT-SUPPORT-DECISION-01
 
   - id: PUBLIC-BENEFIT-ASSET-PACKAGES-ARCHIVE-01
     repo: fap-api
