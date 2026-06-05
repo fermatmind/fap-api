@@ -36818,7 +36818,7 @@
     "id": "OPS-RELEASE-TRAIN-BACKEND-DEPLOY-ADAPTER-01",
     "repo": "fap-api",
     "branch": "ops/release-train-backend-deploy-adapter-01",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "commit_sha": "81a620782cce73544c8cee13e581137123c2bfc1",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1770",
     "checks": {
@@ -46397,10 +46397,10 @@
         "notes": "All local checks passed. RIASEC zh/en article-target dry-runs now return ok=true/action=will_create/errors_count=0 in dry-run mode only; references_count remains 0 and CMS media placeholder remains a publish blocker."
       },
       "github": {
-        "status": "pending",
-        "evidence": "PR #1923 opened; GitHub checks are queued/in progress.",
+        "status": "pass",
+        "evidence": "PR #1923 checks passed: hygiene, supply-chain, content-pack-build-validate, Semgrep blocking secrets, Semgrep OSS, semgrep sarif non-blocking upload, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2.",
         "pr_url": "https://github.com/fermatmind/fap-api/pull/1923",
-        "commit_sha": "88d1f6b529eb8c00036cb04847d7537085cf6e31"
+        "commit_sha": "de420f0be1a9081c6c078d341e4e820e86b31ba4"
       }
     },
     "result": {
@@ -46429,7 +46429,7 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": "88d1f6b529eb8c00036cb04847d7537085cf6e31",
+    "commit_sha": "de420f0be1a9081c6c078d341e4e820e86b31ba4",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1923",
     "transitions": [
       {
@@ -46454,6 +46454,12 @@
         "from": "local_checks_passed",
         "to": "pr_open",
         "notes": "Opened PR #1923 at https://github.com/fermatmind/fap-api/pull/1923. GitHub checks are queued/in progress."
+      },
+      {
+        "at": "2026-06-05T08:50:34Z",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "notes": "GitHub checks passed for PR #1923; ready for squash merge after ledger update."
       }
     ]
   },
