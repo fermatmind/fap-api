@@ -21431,3 +21431,48 @@ prs:
     frontend_fallback_authority: false
     content_authority: CMS/backend
     next_task: GPT-5.5 Pro content package request for RIASEC article after separate authorization
+
+  - id: HELP-CMS-IMPORT-PACKAGE-01
+    repo: fap-api
+    branch: codex/help-cms-import-package-01
+    title: "docs(cms): add Help service CMS import package"
+    train_scope: window_9_help_service_content
+    status: in_progress
+    depends_on:
+      - HELP-SERVICE-CONTENT-DRAFTS-VALIDATION-01
+    scope:
+      - Convert the validated Help service content drafts into a backend-owned ContentPage import package.
+      - Provide a draft-only source-dir adapter for the existing content-pages:import-local-baseline dry-run flow.
+      - Preserve operator review, noindex, non-public, non-indexable, schema-disabled, and no-publish gates.
+    allowed_paths:
+      - backend/docs/help/**
+      - backend/docs/operations/help-cms-import-package-2026-06-04.md
+      - backend/tests/Feature/Cms/HelpContentImportPackageTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Create CMS records, publish, mutate production APIs, modify frontend runtime, submit search URLs, inspect private URLs, read secrets, run payment/refund flows, or change payment-provider behavior.
+    validation:
+      - php -l backend/tests/Feature/Cms/HelpContentImportPackageTest.php
+      - python3 -m json.tool backend/docs/help/import-packages/help-service-content-drafts-01.import.v1.json >/dev/null
+      - python3 -m json.tool backend/docs/help/import-packages/content-pages-draft-source/content_pages.help_service_drafts_01.json >/dev/null
+      - python3 -m json.tool backend/docs/help/generated/help-cms-import-package-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - cd backend && php artisan test --filter=HelpContentImportPackageTest --no-ansi
+      - git diff --check -- backend/docs/help backend/docs/operations/help-cms-import-package-2026-06-04.md backend/tests/Feature/Cms/HelpContentImportPackageTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: HELP-CONTENT-DRAFT-CREATE-01
