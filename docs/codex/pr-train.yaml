@@ -21075,3 +21075,359 @@ prs:
     content_authority: backend
     repository_rule_impact: backend commerce/report policy authority now includes locale freemium policy source and frontend consumption contract.
     next_task: fap-web consume backend locale freemium policy without frontend-inferred commercial rules
+
+  - id: SEO-ARTICLE-SYSTEM-TRAIN-01
+    repo: fap-api
+    branch: codex/seo-article-system-train-01
+    title: "docs(seo): define article system PR train"
+    train_scope: seo_article_system_window_6
+    status: executing
+    depends_on: []
+    scope:
+      - Register Window 6 SEO article system tasks and boundaries.
+      - Define the docs/contracts-only queue that turns the first canary into a repeatable production mechanism.
+      - Initialize planned entries for canary quality review, baseline template, topic priority, request cards, internal links, CTA route gate, FAQ/schema smoke, and publish hold gate.
+    allowed_paths:
+      - backend/docs/seo/seo-article-system-pr-train-2026-06-05.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Write second-article body copy, title, H1, meta, FAQ, CTA, social, ad, or publication copy.
+      - Create CMS drafts, publish, unpublish, submit search, run GSC URL Inspection, call Baidu, call IndexNow, or deploy.
+      - Access result, order, share, pay, payment, history, private, tokenized, or user-specific URLs.
+    validation:
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- backend/docs/seo/seo-article-system-pr-train-2026-06-05.md docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy:
+      github_checks_required: true
+      squash: true
+      auto_merge: true
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: SEO-ARTICLE-CANARY-QUALITY-REVIEW-01
+
+  - id: SEO-ARTICLE-CANARY-QUALITY-REVIEW-01
+    repo: fap-api
+    branch: codex/seo-article-canary-quality-review-01
+    title: "docs(seo): review article canary quality gates"
+    train_scope: seo_article_system_window_6
+    status: planned
+    depends_on:
+      - SEO-ARTICLE-SYSTEM-TRAIN-01
+    scope:
+      - Review the first bilingual canary as a process template, not a content template.
+      - Inspect public pages, Article/FAQ/Breadcrumb schema, CTA targets, internal links, sitemap/llms inclusion, title duplication, claim boundaries, public API, and SEO API.
+      - Record what is reusable and what is not reusable.
+    allowed_paths:
+      - backend/docs/seo/seo-article-canary-quality-review-2026-06-05.md
+      - backend/docs/seo/generated/seo-article-canary-quality-review-01.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Rewrite content, create CMS drafts, publish, submit search, or access private URLs.
+    validation:
+      - python3 -m json.tool backend/docs/seo/generated/seo-article-canary-quality-review-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- backend/docs/seo/seo-article-canary-quality-review-2026-06-05.md backend/docs/seo/generated/seo-article-canary-quality-review-01.v1.json docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: SEO-ARTICLE-PERFORMANCE-BASELINE-TEMPLATE-01
+
+  - id: SEO-ARTICLE-PERFORMANCE-BASELINE-TEMPLATE-01
+    repo: fap-api
+    branch: codex/seo-article-performance-baseline-template-01
+    title: "docs(seo): add article performance baseline template"
+    train_scope: seo_article_system_window_6
+    status: planned
+    depends_on:
+      - SEO-ARTICLE-CANARY-QUALITY-REVIEW-01
+    scope:
+      - Create an article-specific 7-day and 14-day baseline template.
+      - Preserve Unknown as Unknown, mark private_url_seen=Yes as P0, and keep purchase truth backend-only.
+    allowed_paths:
+      - backend/docs/seo/seo-article-performance-baseline-template-2026-06-05.md
+      - backend/docs/seo/generated/seo-article-performance-baseline-template-01.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Query private URLs, dashboard secrets, CMS data mutations, publish actions, or search submission surfaces.
+    validation:
+      - python3 -m json.tool backend/docs/seo/generated/seo-article-performance-baseline-template-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- backend/docs/seo/seo-article-performance-baseline-template-2026-06-05.md backend/docs/seo/generated/seo-article-performance-baseline-template-01.v1.json docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: SEO-ARTICLE-TOPIC-PRIORITY-01
+
+  - id: SEO-ARTICLE-TOPIC-PRIORITY-01
+    repo: fap-api
+    branch: codex/seo-article-topic-priority-01
+    title: "docs(seo): rank next article topics"
+    train_scope: seo_article_system_window_6
+    status: planned
+    depends_on:
+      - SEO-ARTICLE-PERFORMANCE-BASELINE-TEMPLATE-01
+    scope:
+      - Rank next article topics without writing article content.
+      - Compare RIASEC explanation, career uncertainty, Big Five career use, MBTI vs RIASEC vs Big Five, and result/career-library internal-link article candidates.
+    allowed_paths:
+      - backend/docs/seo/seo-article-topic-priority-2026-06-05.md
+      - backend/docs/seo/generated/seo-article-topic-priority-01.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Write final title, H1, meta, body, FAQ, CTA, ad, social, or publication copy.
+    validation:
+      - python3 -m json.tool backend/docs/seo/generated/seo-article-topic-priority-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- backend/docs/seo/seo-article-topic-priority-2026-06-05.md backend/docs/seo/generated/seo-article-topic-priority-01.v1.json docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: SEO-ARTICLE-REQUEST-CARDS-02
+
+  - id: SEO-ARTICLE-REQUEST-CARDS-02
+    repo: fap-api
+    branch: codex/seo-article-request-cards-02
+    title: "docs(seo): add next article request cards"
+    train_scope: seo_article_system_window_6
+    status: planned
+    depends_on:
+      - SEO-ARTICLE-TOPIC-PRIORITY-01
+    scope:
+      - Add next-batch request cards only for RIASEC explanation, career uncertainty, Big Five career use, and article/career internal linking.
+      - Keep request cards as routing, measurement, CMS-field, and boundary inputs for GPT content packages.
+    allowed_paths:
+      - backend/docs/seo/seo-article-request-cards-02-2026-06-05.md
+      - backend/docs/seo/generated/seo-article-request-cards-02.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Include final title, H1, meta copy, outline, body copy, FAQ copy, CTA copy, or publishable article text.
+    validation:
+      - python3 -m json.tool backend/docs/seo/generated/seo-article-request-cards-02.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- backend/docs/seo/seo-article-request-cards-02-2026-06-05.md backend/docs/seo/generated/seo-article-request-cards-02.v1.json docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: ARTICLE-INTERNAL-LINK-PLAN-01
+
+  - id: ARTICLE-INTERNAL-LINK-PLAN-01
+    repo: fap-api
+    branch: codex/article-internal-link-plan-01
+    title: "docs(seo): define article internal link plan"
+    train_scope: seo_article_system_window_6
+    status: planned
+    depends_on:
+      - SEO-ARTICLE-REQUEST-CARDS-02
+    scope:
+      - Create an internal link matrix, allowed target registry, blocked target registry, and sidecar dependencies for career Tier A and hub strategy.
+      - Restrict link targets to public canonical routes.
+    allowed_paths:
+      - backend/docs/seo/article-internal-link-plan-2026-06-05.md
+      - backend/docs/seo/generated/article-internal-link-plan-01.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Link to result, order, share, pay, payment, history, private take/session/result/order/payment/share, or tokenized URLs.
+    validation:
+      - python3 -m json.tool backend/docs/seo/generated/article-internal-link-plan-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- backend/docs/seo/article-internal-link-plan-2026-06-05.md backend/docs/seo/generated/article-internal-link-plan-01.v1.json docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: ARTICLE-CTA-ROUTE-GATE-01
+
+  - id: ARTICLE-CTA-ROUTE-GATE-01
+    repo: fap-api
+    branch: codex/article-cta-route-gate-01
+    title: "docs(seo): gate article CTA routes"
+    train_scope: seo_article_system_window_6
+    status: planned
+    depends_on:
+      - ARTICLE-INTERNAL-LINK-PLAN-01
+    scope:
+      - Verify that article CTA targets are public canonical routes and do not point to private or user-specific routes.
+      - Document article_to_test_click tracking expectation and record a sidecar issue if runtime uses start_attempt plus attribution.
+    allowed_paths:
+      - backend/docs/seo/article-cta-route-gate-2026-06-05.md
+      - backend/docs/seo/generated/article-cta-route-gate-01.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - docs/codex/sidecar/**
+    do_not:
+      - Mutate CMS, publish, refactor runtime event tracking, or generate article content.
+    validation:
+      - python3 -m json.tool backend/docs/seo/generated/article-cta-route-gate-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- backend/docs/seo/article-cta-route-gate-2026-06-05.md backend/docs/seo/generated/article-cta-route-gate-01.v1.json docs/codex docs/codex/sidecar
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: ARTICLE-FAQ-SCHEMA-SMOKE-01
+
+  - id: ARTICLE-FAQ-SCHEMA-SMOKE-01
+    repo: fap-api
+    branch: codex/article-faq-schema-smoke-01
+    title: "docs(seo): define article FAQ schema smoke"
+    train_scope: seo_article_system_window_6
+    status: planned
+    depends_on:
+      - ARTICLE-CTA-ROUTE-GATE-01
+    scope:
+      - Define smoke checks for Article, FAQ, and Breadcrumb schema consistency.
+      - Require FAQ schema only when visible FAQ is CMS/backend sourced and prevent generated fallback FAQ from becoming SEO authority.
+    allowed_paths:
+      - backend/docs/seo/article-faq-schema-smoke-2026-06-05.md
+      - backend/docs/seo/generated/article-faq-schema-smoke-01.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Generate article content, mutate CMS, publish, submit search, or add frontend fallback authority.
+    validation:
+      - python3 -m json.tool backend/docs/seo/generated/article-faq-schema-smoke-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- backend/docs/seo/article-faq-schema-smoke-2026-06-05.md backend/docs/seo/generated/article-faq-schema-smoke-01.v1.json docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: SEO-ARTICLE-PUBLISH-HOLD-GATE-01
+
+  - id: SEO-ARTICLE-PUBLISH-HOLD-GATE-01
+    repo: fap-api
+    branch: codex/seo-article-publish-hold-gate-01
+    title: "docs(seo): define article publish hold gate"
+    train_scope: seo_article_system_window_6
+    status: planned
+    depends_on:
+      - ARTICLE-FAQ-SCHEMA-SMOKE-01
+    scope:
+      - Define publish hold checklist and exact next authorization prompt for GPT content package intake.
+      - Keep publish forbidden unless all gates pass and the user gives separate exact approval.
+    allowed_paths:
+      - backend/docs/seo/seo-article-publish-hold-gate-2026-06-05.md
+      - backend/docs/seo/generated/seo-article-publish-hold-gate-01.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Publish, create CMS drafts, generate article content, submit search, call IndexNow, call Baidu, or inspect private URLs.
+    validation:
+      - python3 -m json.tool backend/docs/seo/generated/seo-article-publish-hold-gate-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- backend/docs/seo/seo-article-publish-hold-gate-2026-06-05.md backend/docs/seo/generated/seo-article-publish-hold-gate-01.v1.json docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: GPT-5.5 Pro content package request for RIASEC article after separate authorization
