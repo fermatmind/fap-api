@@ -22,7 +22,7 @@ final class DailyGivingFirstRecordPrivateLedgerTest extends TestCase
         $this->assertSame('CNY', $record['currency']);
         $this->assertSame('completed', $record['donation_status']);
         $this->assertFalse($record['verified']);
-        $this->assertSame('redacted_pending', $record['proof_status']);
+        $this->assertSame('operator_approved_pending', $record['proof_status']);
         $this->assertNull($record['proof_public_url']);
         $this->assertFalse($record['is_public']);
         $this->assertFalse($record['is_indexable']);
@@ -68,7 +68,7 @@ final class DailyGivingFirstRecordPrivateLedgerTest extends TestCase
             $this->assertFalse($value, $field);
         }
 
-        $this->assertSame('DAILY-GIVING-REDACTED-PUBLIC-PROOF-01', $artifact['next_authorization_required']);
+        $this->assertSame('DAILY-GIVING-ORIGINAL-PUBLIC-PROOF-01', $artifact['next_authorization_required']);
     }
 
     public function test_committed_documents_do_not_leak_private_transaction_details(): void

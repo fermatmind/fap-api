@@ -9,12 +9,12 @@ use Tests\TestCase;
 
 final class DailyGivingProofStorageGateTest extends TestCase
 {
-    public function test_storage_gate_accepts_private_raw_proof_and_reviewed_redacted_public_proof(): void
+    public function test_storage_gate_accepts_private_raw_proof_and_operator_approved_original_public_proof(): void
     {
         $record = new DailyGivingRecord([
-            'proof_status' => DailyGivingRecord::PROOF_REDACTED_AVAILABLE,
+            'proof_status' => DailyGivingRecord::PROOF_OPERATOR_APPROVED_AVAILABLE,
             'proof_private_path' => 'daily-giving/private/2026-06-05/raw-receipt.pdf',
-            'proof_public_url' => 'https://media.fermatmind.com/foundation/daily-giving/public/redacted-2026-06-05.pdf',
+            'proof_public_url' => 'https://media.fermatmind.com/foundation/daily-giving/public/original-2026-06-05.png',
         ]);
 
         $this->assertSame([], $record->proofStorageGateViolations());
@@ -23,7 +23,7 @@ final class DailyGivingProofStorageGateTest extends TestCase
     public function test_storage_gate_rejects_public_raw_proof_paths_and_private_public_urls(): void
     {
         $record = new DailyGivingRecord([
-            'proof_status' => DailyGivingRecord::PROOF_REDACTED_AVAILABLE,
+            'proof_status' => DailyGivingRecord::PROOF_OPERATOR_APPROVED_AVAILABLE,
             'proof_private_path' => 'https://media.fermatmind.com/raw-receipt.pdf',
             'proof_public_url' => 'https://media.fermatmind.com/foundation/daily-giving/private/raw-receipt.pdf',
         ]);
@@ -31,17 +31,17 @@ final class DailyGivingProofStorageGateTest extends TestCase
         $violations = $record->proofStorageGateViolations();
 
         $this->assertContains('proof_private_path must point to a private disk/bucket path, not a public URL/path', $violations);
-        $this->assertContains('proof_public_url must point to reviewed redacted public proof only', $violations);
+        $this->assertContains('proof_public_url must point to operator-approved public proof media only', $violations);
     }
 
-    public function test_public_url_requires_redacted_available_and_withheld_requires_reason(): void
+    public function test_public_url_requires_operator_approved_available_and_withheld_requires_reason(): void
     {
         $recordWithPublicUrl = new DailyGivingRecord([
-            'proof_status' => DailyGivingRecord::PROOF_REDACTED_PENDING,
-            'proof_public_url' => 'https://media.fermatmind.com/foundation/daily-giving/public/redacted-2026-06-05.pdf',
+            'proof_status' => DailyGivingRecord::PROOF_OPERATOR_APPROVED_PENDING,
+            'proof_public_url' => 'https://media.fermatmind.com/foundation/daily-giving/public/original-2026-06-05.png',
         ]);
 
-        $this->assertContains('proof_public_url requires proof_status=redacted_available', $recordWithPublicUrl->proofStorageGateViolations());
+        $this->assertContains('proof_public_url requires proof_status=operator_approved_available', $recordWithPublicUrl->proofStorageGateViolations());
 
         $withheld = new DailyGivingRecord([
             'proof_status' => DailyGivingRecord::PROOF_WITHHELD,
@@ -54,8 +54,8 @@ final class DailyGivingProofStorageGateTest extends TestCase
     {
         $record = new DailyGivingRecord([
             'record_code' => 'FM-GIVING-2026-06-001',
-            'proof_status' => DailyGivingRecord::PROOF_REDACTED_AVAILABLE,
-            'proof_public_url' => 'https://media.fermatmind.com/foundation/daily-giving/public/redacted-2026-06-05.pdf',
+            'proof_status' => DailyGivingRecord::PROOF_OPERATOR_APPROVED_AVAILABLE,
+            'proof_public_url' => 'https://media.fermatmind.com/foundation/daily-giving/public/original-2026-06-05.png',
             'proof_private_path' => 'daily-giving/private/2026-06-05/raw-receipt.pdf',
             'proof_redaction_notes' => 'Private reviewer note.',
             'receipt_reference_private' => 'private-receipt-id',

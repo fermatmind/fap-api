@@ -1,4 +1,4 @@
-# DailyGiving Proof Redaction SOP
+# DailyGiving Proof Public Approval SOP
 
 Date: 2026-06-05
 
@@ -8,31 +8,28 @@ Mode: SOP, generated artifact, and contract test only. This PR does not create r
 
 ## Decision
 
-Raw proof must stay private. Public proof may exist only as a separate redacted public artifact after review. Withheld proof is allowed only as a reviewer-approved privacy or safety exception, and cannot power a trust badge or public amplification claim.
+Raw private storage paths, admin-only notes, backend-only ledger fields, tokens, private URLs, secrets, and credentials must stay private. Public proof may be the original charity donation proof image when the operator approves that image for public media use. A separate redacted derivative is not required. Withheld proof is allowed only as a reviewer-approved privacy or safety exception, and cannot power a trust badge or public amplification claim.
 
 ## Storage Classes
 
 | Proof class | Storage rule | Public access |
 | --- | --- | --- |
-| raw receipt / raw proof | private disk or private bucket only | forbidden |
+| private raw proof path / private ledger proof | private disk or private bucket only | forbidden |
 | admin proof access | private storage driver or short-TTL signed admin URL | admin-only |
-| redacted public proof | public-safe media path or public signed URL after review | allowed after review |
+| operator-approved public proof | public media URL after operator review | allowed after review |
 | withheld proof | private raw proof retained with reviewer reason | public proof unavailable |
 
-## Redaction Standard
+## Public Approval Standard
 
-No redaction is allowed only when reviewer inspection confirms no sensitive fields exist.
+The original charity donation proof image may be public when the operator approves it for public use. Review focuses on URL and system-boundary safety, not on creating a mandatory derivative.
 
-Fields that must be redacted if present:
+Fields that must never be exposed through public API, frontend rendering, sitemap, llms, social distribution, or search submission:
 
-- donor legal name unless explicitly approved;
-- donor email, phone, address;
-- bank account, card number, payment account id;
-- full transaction number or full order number;
-- payment provider user id;
-- billing or invoice address;
-- QR payment token;
+- private storage path;
+- backend-only ledger field;
+- proof redaction notes;
 - session id, auth token, private receipt URL, browser URL with private token;
+- secret, credential, or signed private URL;
 - internal admin comments.
 
 Fields that may remain visible after review:
@@ -42,7 +39,7 @@ Fields that may remain visible after review:
 - amount and currency;
 - non-sensitive receipt issuer name;
 - proof status;
-- short masked public reference.
+- operator-approved public receipt context.
 
 ## Withheld Proof Rule
 
@@ -61,15 +58,15 @@ Public API must not expose:
 - payment account details
 - private sync diagnostics
 
-Public API may expose only reviewed public fields such as recipient, date, amount, currency, proof status, redacted proof URL, redacted receipt reference, social links after review, and public notes after claim lint.
+Public API may expose only reviewed public fields such as recipient, date, amount, currency, proof status, `proof_public_url`, public receipt reference if approved, social links after review, and public notes after claim lint.
 
 ## Review Checklist
 
 Before `is_public=true`:
 
 - raw proof is private;
-- public proof URL, if present, points only to redacted proof;
-- sensitive fields are redacted or reviewer confirms none exist;
+- public proof URL, if present, points only to operator-approved public media;
+- private storage path, token, private URL, secret, credential, and backend-only fields are absent from the public API;
 - withheld proof has reviewer reason;
 - recipient/date/amount are verified;
 - public notes pass claim lint;

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use InvalidArgumentException;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use InvalidArgumentException;
 
 class DailyGivingRecord extends Model
 {
@@ -27,6 +27,10 @@ class DailyGivingRecord extends Model
 
     public const PROOF_NONE = 'none';
 
+    public const PROOF_OPERATOR_APPROVED_PENDING = 'operator_approved_pending';
+
+    public const PROOF_OPERATOR_APPROVED_AVAILABLE = 'operator_approved_available';
+
     public const PROOF_REDACTED_PENDING = 'redacted_pending';
 
     public const PROOF_REDACTED_AVAILABLE = 'redacted_available';
@@ -42,6 +46,8 @@ class DailyGivingRecord extends Model
 
     public const PROOF_STATUSES = [
         self::PROOF_NONE,
+        self::PROOF_OPERATOR_APPROVED_PENDING,
+        self::PROOF_OPERATOR_APPROVED_AVAILABLE,
         self::PROOF_REDACTED_PENDING,
         self::PROOF_REDACTED_AVAILABLE,
         self::PROOF_WITHHELD,
@@ -53,9 +59,15 @@ class DailyGivingRecord extends Model
     ];
 
     public const PUBLISHABLE_PROOF_STATUSES = [
+        self::PROOF_OPERATOR_APPROVED_AVAILABLE,
         self::PROOF_REDACTED_AVAILABLE,
         self::PROOF_WITHHELD,
         self::PROOF_NONE,
+    ];
+
+    public const PUBLIC_PROOF_AVAILABLE_STATUSES = [
+        self::PROOF_OPERATOR_APPROVED_AVAILABLE,
+        self::PROOF_REDACTED_AVAILABLE,
     ];
 
     public const MANUAL_SOCIAL_SYNC_FIELDS = [
@@ -225,16 +237,16 @@ class DailyGivingRecord extends Model
             $violations[] = 'proof_private_path must point to a private disk/bucket path, not a public URL/path';
         }
 
-        if ($publicUrl !== '' && ! $this->looksLikeReviewedPublicProofUrl($publicUrl)) {
-            $violations[] = 'proof_public_url must point to reviewed redacted public proof only';
+        if ($publicUrl !== '' && ! $this->looksLikeOperatorApprovedPublicProofUrl($publicUrl)) {
+            $violations[] = 'proof_public_url must point to operator-approved public proof media only';
         }
 
         if ($privatePath !== '' && $publicUrl !== '' && hash_equals($privatePath, $publicUrl)) {
             $violations[] = 'proof_public_url must not equal proof_private_path';
         }
 
-        if ($publicUrl !== '' && $proofStatus !== self::PROOF_REDACTED_AVAILABLE) {
-            $violations[] = 'proof_public_url requires proof_status=redacted_available';
+        if ($publicUrl !== '' && ! in_array($proofStatus, self::PUBLIC_PROOF_AVAILABLE_STATUSES, true)) {
+            $violations[] = 'proof_public_url requires proof_status=operator_approved_available';
         }
 
         if ($proofStatus === self::PROOF_WITHHELD && trim((string) ($this->proof_redaction_notes ?? '')) === '') {
@@ -267,7 +279,7 @@ class DailyGivingRecord extends Model
         return str_contains($normalized, '/private/');
     }
 
-    private function looksLikeReviewedPublicProofUrl(string $url): bool
+    private function looksLikeOperatorApprovedPublicProofUrl(string $url): bool
     {
         $normalized = strtolower(trim($url));
 
@@ -275,14 +287,13 @@ class DailyGivingRecord extends Model
             return false;
         }
 
-        foreach (['/private/', 'proof_private_path', 'receipt_reference_private', 'internal_notes', 'auth_token', 'session_id', 'raw-receipt', 'raw_receipt'] as $forbidden) {
+        foreach (['/private/', 'proof_private_path', 'receipt_reference_private', 'internal_notes', 'auth_token', 'session_id', 'token=', 'secret', 'private_url'] as $forbidden) {
             if (str_contains($normalized, $forbidden)) {
                 return false;
             }
         }
 
-        return str_contains($normalized, 'redacted')
-            || str_contains($normalized, '/public/')
+        return str_contains($normalized, '/public/')
             || str_contains($normalized, '/media/');
     }
 }

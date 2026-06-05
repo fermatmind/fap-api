@@ -15,7 +15,7 @@ The first real DailyGiving record must be created only after a separate private-
 - Proof storage gate is deployed and active for every save path.
 - Raw receipt storage location is confirmed private at the disk or bucket level.
 - Operator has the real receipt/proof in hand.
-- Redaction reviewer is assigned.
+- Operator proof reviewer is assigned.
 - DailyGiving remains `noindex`.
 - DailyGiving remains absent from sitemap, `llms.txt`, and `llms-full.txt`.
 - Foundation page is complete enough to explain plan boundaries without relying on DailyGiving as a trust badge.
@@ -34,9 +34,9 @@ The first record must start as private draft state:
 | `amount_minor` | receipt amount in minor units | for planned first donation, CNY 10 means `1000` only after receipt supports it |
 | `currency` | receipt currency | ISO code, expected `CNY` only after receipt supports it |
 | `donation_status` | `planned` or private draft equivalent before review | may become `completed` only after receipt review |
-| `proof_status` | `none` or `redacted_pending` before redaction | `redacted_available` only after public proof review |
+| `proof_status` | `none` or `operator_approved_pending` before public proof approval | `operator_approved_available` only after public proof review |
 | `proof_private_path` | private disk/bucket path only | never a public URL |
-| `proof_public_url` | blank until redacted proof is approved | must be reviewed redacted public media if present |
+| `proof_public_url` | blank until public proof is approved | must be operator-approved public media if present |
 | `proof_redaction_notes` | admin-only reviewer notes | required when proof is withheld |
 | `receipt_reference_private` | private reference if needed | never public |
 | `receipt_reference_redacted` | masked public reference if safe | reviewer-approved only |
@@ -49,7 +49,7 @@ The first record must start as private draft state:
 ## Review Gates Before Public Visibility
 
 - Raw proof is stored privately and not exposed as URL, public media, or tokenized path.
-- Public proof is either a reviewed redacted public media URL or withheld with admin-only reviewer reason.
+- Public proof is either an operator-approved original charity donation proof media URL or withheld with admin-only reviewer reason.
 - Public projection does not expose private proof path, redaction notes, private receipt reference, internal notes, or admin user ids.
 - Recipient, amount, currency, and date match the receipt.
 - `donation_status` is `completed` or `verified`.
@@ -75,4 +75,4 @@ After the separately authorized first record is reviewed and activated:
 
 ## Hard Stop
 
-The next step is `DAILY-GIVING-FIRST-RECORD-PRIVATE-LEDGER-01`. It must be separately authorized before any production record, raw proof, private proof path, redacted proof, public record activation, CMS mutation, publish, search submission, social distribution, trust badge, or deploy action.
+The next step is `DAILY-GIVING-FIRST-RECORD-PRIVATE-LEDGER-01`. It must be separately authorized before any production record, raw proof, private proof path, public proof URL binding, public record activation, CMS mutation, publish, search submission, social distribution, trust badge, or deploy action.

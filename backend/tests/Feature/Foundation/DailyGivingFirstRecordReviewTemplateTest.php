@@ -17,7 +17,7 @@ final class DailyGivingFirstRecordReviewTemplateTest extends TestCase
             'proof_uploaded',
             'proof_processed',
             'private_proof_path_created',
-            'redacted_public_proof_created',
+            'operator_approved_public_proof_url_bound',
             'cms_mutation_performed',
             'publish_performed',
             'search_submission_performed',
@@ -39,7 +39,7 @@ final class DailyGivingFirstRecordReviewTemplateTest extends TestCase
         $artifact = $this->artifact();
 
         $this->assertSame(['planned'], $artifact['initial_private_record_state']['donation_status_allowed']);
-        $this->assertSame(['none', 'redacted_pending'], $artifact['initial_private_record_state']['proof_status_allowed']);
+        $this->assertSame(['none', 'operator_approved_pending'], $artifact['initial_private_record_state']['proof_status_allowed']);
         $this->assertFalse($artifact['initial_private_record_state']['is_public']);
         $this->assertFalse($artifact['initial_private_record_state']['is_indexable']);
         $this->assertNull($artifact['initial_private_record_state']['published_at']);

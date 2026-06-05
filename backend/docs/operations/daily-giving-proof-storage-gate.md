@@ -14,10 +14,11 @@ DailyGiving records now have a model-level proof storage gate. Any save path mus
 
 - `proof_private_path` must look like a private disk or private bucket path.
 - `proof_private_path` must not be a public URL or public media path.
-- `proof_public_url` must be an HTTPS reviewed public proof URL.
-- `proof_public_url` must not contain private/admin/raw receipt indicators.
+- `proof_public_url` must be an HTTPS operator-approved public media URL.
+- `proof_public_url` may point to the original charity donation proof image; a separate redacted derivative is not required.
+- `proof_public_url` must not contain private/admin/token/secret indicators.
 - `proof_public_url` must not equal `proof_private_path`.
-- `proof_public_url` requires `proof_status=redacted_available`.
+- `proof_public_url` requires `proof_status=operator_approved_available`.
 - `proof_status=withheld` requires admin-only `proof_redaction_notes`.
 
 ## Public Projection Boundary

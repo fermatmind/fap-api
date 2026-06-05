@@ -17,7 +17,7 @@ DailyGiving is not ready for public trust amplification until the public release
 - At least one public record is completed or verified.
 - At least one public record is verified before any trust badge or high-amplification claim is considered.
 - Public records remain `is_indexable=false` during first-record review.
-- Each public record has a reviewed proof state: redacted public proof URL, or withheld proof with admin-only reviewer reason.
+- Each public record has a reviewed proof state: operator-approved public proof media URL, or withheld proof with admin-only reviewer reason.
 - Public API never returns raw proof paths, private receipt references, redaction notes, internal notes, or admin user ids.
 - DailyGiving pages remain `noindex`.
 - DailyGiving routes remain absent from sitemap, `llms.txt`, and `llms-full.txt`.
@@ -29,4 +29,4 @@ The release gate allows only controlled public record visibility after review. I
 
 ## Deferred Until First Record Authorization
 
-The first real record requires a separate private-ledger authorization. Raw receipt storage, redacted proof creation, record review, and public record activation are intentionally outside this PR.
+The first real record requires a separate private-ledger authorization. Raw receipt storage, operator-approved public media upload, record review, and public record activation are intentionally outside this PR.

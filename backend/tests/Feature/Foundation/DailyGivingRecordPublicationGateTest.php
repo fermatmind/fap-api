@@ -202,10 +202,10 @@ class DailyGivingRecordPublicationGateTest extends TestCase
         $this->assertArrayHasKey('published_at', $public);
     }
 
-    public function test_redacted_pending_proof_status_is_not_publishable(): void
+    public function test_operator_approved_pending_proof_status_is_not_publishable(): void
     {
         $record = DailyGivingRecord::factory()->completed()->make([
-            'proof_status' => DailyGivingRecord::PROOF_REDACTED_PENDING,
+            'proof_status' => DailyGivingRecord::PROOF_OPERATOR_APPROVED_PENDING,
             'is_public' => true,
             'published_at' => now(),
         ]);
