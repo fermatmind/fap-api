@@ -44756,7 +44756,7 @@
     "repo": "fap-api",
     "branch": "codex/foundation-claim-boundary-contract-01",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "window_7_public_benefit_trust_gate",
     "title": "docs(benefit): define Foundation public benefit claim boundary",
     "depends_on": [
@@ -44833,11 +44833,11 @@
       "next_pr_supported": "FOUNDATION-CONTENT-REQUEST-CARD-01"
     },
     "failure_reason": null,
-    "commit_sha": "60736dc9f079db642907cd8003f34c4e022402e9",
+    "commit_sha": "7bd4989ebaaf2e53b70dc6202ff821c2c4f66a36",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1901",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-05T02:01:14Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "cms_write_performed": false,
@@ -44881,6 +44881,111 @@
         "at": "2026-06-05",
         "status": "ready_to_merge",
         "note": "GitHub checks passed for PR #1901."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "merged",
+        "note": "PR #1901 squash-merged at 7bd4989ebaaf2e53b70dc6202ff821c2c4f66a36; remote branch absent; local branch deleted after detached origin/main sync."
+      }
+    ]
+  },
+  "FOUNDATION-CONTENT-REQUEST-CARD-01": {
+    "repo": "fap-api",
+    "branch": "codex/foundation-content-request-card-01",
+    "base": "main",
+    "status": "in_progress",
+    "train_scope": "window_7_public_benefit_trust_gate",
+    "title": "docs(benefit): add Foundation content request card",
+    "depends_on": [
+      "FOUNDATION-CLAIM-BOUNDARY-CONTRACT-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly requested GPT input requirements for Foundation/DailyGiving content assets and authorized PR train execution through PR12."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "FOUNDATION-CLAIM-BOUNDARY-CONTRACT-01 merged as PR #1901 at 7bd4989ebaaf2e53b70dc6202ff821c2c4f66a36."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed paths are confined to PR4 request-card docs, generated artifact, and codex ledger paths."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          {
+            "command": "python3 -m json.tool backend/docs/operations/generated/foundation-content-request-card.v1.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check -- backend/docs/operations/foundation-content-request-card.md backend/docs/operations/generated/foundation-content-request-card.v1.json docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+            "status": "passed"
+          }
+        ]
+      },
+      "github": {
+        "status": "pending",
+        "commands": []
+      }
+    },
+    "result": {
+      "gpt_input_requirements_created": true,
+      "publishable_copy_created": false,
+      "cms_mutation_performed": false,
+      "daily_giving_record_created": false,
+      "proof_file_processed": false,
+      "trust_badge_copy_created": false,
+      "next_pr_supported": "FOUNDATION-CMS-FIELD-MAP-01"
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "cms_write_performed": false,
+      "publish_performed": false,
+      "daily_giving_record_created": false,
+      "proof_file_processed": false,
+      "search_submission_performed": false,
+      "deploy_performed": false,
+      "notes": "Changed files are intended to stay within PR4 docs/generated/ledger paths."
+    },
+    "sidecars": [
+      {
+        "id": "FOUNDATION_PUBLIC_COPY",
+        "status": "not_created",
+        "note": "Request card defines GPT inputs only."
+      },
+      {
+        "id": "DAILY_GIVING_TRUST_BADGE",
+        "status": "blocked",
+        "note": "Trust badge remains blocked by zero public records and claim boundary."
+      }
+    ],
+    "next_task": "FOUNDATION-CMS-FIELD-MAP-01",
+    "transitions": [
+      {
+        "at": "2026-06-05",
+        "status": "in_progress",
+        "note": "Initialized after PR3 merge for GPT input request-card artifact."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "local_checks_passed",
+        "note": "Request-card artifact validated with JSON/YAML parse, scoped diff check, and allowed-path review."
       }
     ]
   }

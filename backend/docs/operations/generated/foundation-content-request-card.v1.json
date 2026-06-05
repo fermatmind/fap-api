@@ -1,0 +1,107 @@
+{
+  "version": "foundation_content_request_card.v1",
+  "generated_at": "2026-06-05T00:00:00+08:00",
+  "mode": "gpt_input_requirements_only",
+  "publishable_copy_created": false,
+  "cms_mutation_allowed": false,
+  "final_authority": "CMS/backend content_pages",
+  "evidence_inputs": {
+    "foundation_routes": {
+      "en_status": 200,
+      "zh_status": 200,
+      "indexable": true,
+      "sitemap_included": true
+    },
+    "daily_giving_public_state": {
+      "records_count": 0,
+      "months_count": 0,
+      "indexability": "noindex",
+      "sitemap_included": false,
+      "llms_included": false
+    },
+    "claim_boundary_version": "foundation_claim_boundary.v1",
+    "operator_policy": {
+      "daily_amount": {
+        "amount": 10,
+        "currency": "CNY",
+        "frequency": "daily"
+      },
+      "recipient": "United Nations Foundation",
+      "relationship_boundary": "recipient_only_no_official_partnership"
+    },
+    "unknowns": [
+      "private_draft_record_count",
+      "storage_level_private_disk_or_bucket_configuration",
+      "future_public_proof_availability"
+    ]
+  },
+  "required_output_sections": [
+    "content_objective",
+    "source_evidence_table",
+    "module_inventory",
+    "cms_field_requirements",
+    "claim_boundary_matrix",
+    "privacy_and_proof_requirements",
+    "daily_giving_relationship",
+    "faq_question_inventory",
+    "operator_review_checklist",
+    "codex_validation_handoff"
+  ],
+  "required_modules": [
+    "project_identity",
+    "independent_giving_plan",
+    "evidence_before_public_records",
+    "privacy_and_proof_handling",
+    "non_claims",
+    "daily_giving_future_ledger"
+  ],
+  "cms_field_groups": [
+    "route_and_locale",
+    "status_and_indexability",
+    "body_or_module_structure",
+    "claim_boundary_version",
+    "public_benefit_policy_version",
+    "proof_policy_summary",
+    "review_owner_and_timestamp",
+    "optional_faq_question_inventory",
+    "faq_schema_gate"
+  ],
+  "forbidden_outputs": [
+    "publishable_foundation_copy",
+    "final_h1",
+    "final_meta_title",
+    "final_meta_description",
+    "final_faq_answers",
+    "cta_copy",
+    "social_copy",
+    "trust_badge_copy",
+    "cms_draft_creation",
+    "daily_giving_record_creation",
+    "proof_upload",
+    "search_submission",
+    "deploy"
+  ],
+  "claim_constraints": {
+    "recipient_only_reference": true,
+    "official_partnership_allowed": false,
+    "official_cooperation_allowed": false,
+    "endorsement_allowed": false,
+    "certification_allowed": false,
+    "authorization_claim_allowed": false,
+    "fundraising_authority_claim_allowed": false,
+    "guaranteed_impact_allowed": false,
+    "trust_badge_allowed_now": false,
+    "stable_daily_giving_claim_allowed_before_public_records": false,
+    "public_ledger_claim_requires_records": true,
+    "proof_availability_claim_requires_reviewed_public_proof_or_withheld_reason": true
+  },
+  "codex_validation_handoff": [
+    "cms_backend_source_of_truth",
+    "no_frontend_editorial_fallback",
+    "claim_lint_pass",
+    "daily_giving_noindex_retained",
+    "daily_giving_absent_from_sitemap_and_llms_while_gated",
+    "faq_schema_disabled_unless_visible_approved_faq_exists",
+    "public_api_not_used_to_infer_private_records"
+  ]
+}

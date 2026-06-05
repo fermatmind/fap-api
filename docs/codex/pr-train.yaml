@@ -21647,7 +21647,7 @@ prs:
     branch: codex/foundation-claim-boundary-contract-01
     title: "docs(benefit): define Foundation public benefit claim boundary"
     train_scope: window_7_public_benefit_trust_gate
-    status: in_progress
+    status: merged
     scope:
       - Define allowed, forbidden, and evidence-required claim categories for Foundation and DailyGiving public-benefit language.
       - Cover before-public-record and after-public-record rules, social sync constraints, and proof-withheld constraints.
@@ -21682,3 +21682,43 @@ prs:
     frontend_fallback_authority: false
     content_authority: CMS/backend
     next_task: FOUNDATION-CONTENT-REQUEST-CARD-01
+
+  - id: FOUNDATION-CONTENT-REQUEST-CARD-01
+    repo: fap-api
+    depends_on:
+      - FOUNDATION-CLAIM-BOUNDARY-CONTRACT-01
+    branch: codex/foundation-content-request-card-01
+    title: "docs(benefit): add Foundation content request card"
+    train_scope: window_7_public_benefit_trust_gate
+    status: in_progress
+    scope:
+      - Add a GPT input request card for Foundation plan-page content preparation.
+      - Ground the request card in scanned Foundation, DailyGiving, operator-decision, proof-policy, and claim-boundary evidence.
+      - Keep the artifact non-publishable and CMS/backend-authoritative.
+    allowed_paths:
+      - backend/docs/operations/foundation-content-request-card.md
+      - backend/docs/operations/generated/foundation-content-request-card.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Create publishable Foundation copy, final H1, final metadata, FAQ answers, CTA copy, social copy, trust badge copy, CMS records, DailyGiving records, proof files, search submissions, runtime changes, or deploys.
+    validation:
+      - python3 -m json.tool backend/docs/operations/generated/foundation-content-request-card.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- backend/docs/operations/foundation-content-request-card.md backend/docs/operations/generated/foundation-content-request-card.v1.json docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: FOUNDATION-CMS-FIELD-MAP-01
