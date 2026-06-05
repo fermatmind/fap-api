@@ -22193,25 +22193,25 @@ prs:
     branch: codex/seo-article-riasec-v2-cms-import-package-01
     title: "docs(cms): prepare RIASEC explanation CMS import package"
     train_scope: seo_article_content_package_riasec_explanation_v2
-    status: in_progress
+    status: merged
     scope:
       - Convert the validated content package into backend/CMS import package format without writing CMS records.
       - Preserve draft defaults, noindex/nofollow, operator review requirement, CTA safety, FAQ/schema alignment, and baseline placeholders.
     allowed_paths:
       - backend/docs/seo/cms-import-packages/riasec-explanation-v2/**
       - backend/docs/seo/generated/riasec-explanation-cms-import-package.v1.json
-      - backend/tests/Feature/Seo/RiasecExplanationCmsImportPackageTest.php
+      - backend/tests/Feature/SEO/RiasecExplanationCmsImportPackageTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
       - Rewrite article content, create CMS drafts, publish, submit search URLs, deploy, or access private URLs.
     validation:
-      - php -l backend/tests/Feature/Seo/RiasecExplanationCmsImportPackageTest.php
+      - php -l backend/tests/Feature/SEO/RiasecExplanationCmsImportPackageTest.php
       - python3 -m json.tool backend/docs/seo/generated/riasec-explanation-cms-import-package.v1.json >/dev/null
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=RiasecExplanationCmsImportPackageTest --no-ansi
-      - git diff --check -- backend/docs/seo/cms-import-packages/riasec-explanation-v2 backend/docs/seo/generated/riasec-explanation-cms-import-package.v1.json backend/tests/Feature/Seo/RiasecExplanationCmsImportPackageTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --check -- backend/docs/seo/cms-import-packages/riasec-explanation-v2 backend/docs/seo/generated/riasec-explanation-cms-import-package.v1.json backend/tests/Feature/SEO/RiasecExplanationCmsImportPackageTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json
       - git diff --cached --check
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
     production_write_execution: false
@@ -22232,7 +22232,7 @@ prs:
     branch: codex/seo-article-riasec-v2-cms-draft-preflight-01
     title: "docs(cms): preflight RIASEC explanation draft creation"
     train_scope: seo_article_content_package_riasec_explanation_v2
-    status: planned
+    status: in_progress
     scope:
       - Run dry-run/preflight checks for creating zh/en CMS draft records without creating drafts.
       - Confirm slugs, translation group, importer readiness, draft defaults, noindex, sitemap/llms absence, CTA safety, and unresolved publish blockers.
@@ -22240,18 +22240,18 @@ prs:
     allowed_paths:
       - backend/docs/seo/riasec-explanation-cms-draft-preflight.md
       - backend/docs/seo/generated/riasec-explanation-cms-draft-preflight.v1.json
-      - backend/tests/Feature/Seo/RiasecExplanationDraftPreflightTest.php
+      - backend/tests/Feature/SEO/RiasecExplanationDraftPreflightTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
       - Create CMS draft records, publish, submit search URLs, deploy, rewrite content, or access private URLs.
     validation:
-      - php -l backend/tests/Feature/Seo/RiasecExplanationDraftPreflightTest.php
+      - php -l backend/tests/Feature/SEO/RiasecExplanationDraftPreflightTest.php
       - python3 -m json.tool backend/docs/seo/generated/riasec-explanation-cms-draft-preflight.v1.json >/dev/null
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=RiasecExplanationDraftPreflightTest --no-ansi
-      - git diff --check -- backend/docs/seo/riasec-explanation-cms-draft-preflight.md backend/docs/seo/generated/riasec-explanation-cms-draft-preflight.v1.json backend/tests/Feature/Seo/RiasecExplanationDraftPreflightTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --check -- backend/docs/seo/riasec-explanation-cms-draft-preflight.md backend/docs/seo/generated/riasec-explanation-cms-draft-preflight.v1.json backend/tests/Feature/SEO/RiasecExplanationDraftPreflightTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json
       - git diff --cached --check
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
     production_write_execution: false
