@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-05T00:00:00+08:00",
+  "updated_at": "2026-06-05T11:06:00+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -45604,6 +45604,284 @@
         "at": "2026-06-05",
         "status": "ready_to_merge",
         "note": "GitHub checks passed for PR #1910."
+      }
+    ]
+  },
+  "SEO-ARTICLE-RIASEC-V2-PACKAGE-ARCHIVE-01": {
+    "repo": "fap-api",
+    "base": "main",
+    "train_scope": "seo_article_content_package_riasec_explanation_v2",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "branch": "codex/seo-article-riasec-v2-package-archive-01",
+    "status": "ready_to_merge",
+    "title": "docs(seo): archive RIASEC explanation article package v2",
+    "depends_on": [],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User provided an explicit /goal for the RIASEC explanation V2 SEO article PR train, including PR ids, branches, titles, scopes, allowed paths, and hard gates. Default execution is allowed only through CMS draft preflight."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "No dependency for the archive PR."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are confined to backend/docs/seo/article-packages/riasec-explanation-v2/**, backend/docs/seo/generated/riasec-explanation-content-package-v2.json, backend/tests/Feature/Seo/RiasecArticlePackageV2ArchiveTest.php, and docs/codex PR-train metadata."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "php -l backend/tests/Feature/Seo/RiasecArticlePackageV2ArchiveTest.php",
+          "python3 -m json.tool backend/docs/seo/article-packages/riasec-explanation-v2/index.json >/dev/null",
+          "python3 -m json.tool backend/docs/seo/article-packages/riasec-explanation-v2/riasec-explanation-v2.cms-import.json >/dev/null",
+          "python3 -m json.tool backend/docs/seo/article-packages/riasec-explanation-v2/riasec-explanation-v2.zh.meta.json >/dev/null",
+          "python3 -m json.tool backend/docs/seo/article-packages/riasec-explanation-v2/riasec-explanation-v2.en.meta.json >/dev/null",
+          "python3 -m json.tool backend/docs/seo/article-packages/riasec-explanation-v2/riasec-explanation-v2.self-check.json >/dev/null",
+          "python3 -m json.tool backend/docs/seo/generated/riasec-explanation-content-package-v2.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=RiasecArticlePackageV2ArchiveTest --no-ansi",
+          "git diff --check -- backend/docs/seo/article-packages/riasec-explanation-v2 backend/docs/seo/generated/riasec-explanation-content-package-v2.json backend/tests/Feature/Seo/RiasecArticlePackageV2ArchiveTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+          "git diff --cached --check"
+        ],
+        "notes": "Archive test, JSON/YAML parse, scoped diff check, and cached diff check passed. The test only validates package boundaries and does not rewrite GPT content."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "GitHub checks passed on PR #1909: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
+      }
+    },
+    "result": {
+      "archive_path": "backend/docs/seo/article-packages/riasec-explanation-v2",
+      "generated_summary": "backend/docs/seo/generated/riasec-explanation-content-package-v2.json",
+      "package_version": "v2_truity_density_revision",
+      "cms_draft_created": false,
+      "publish_allowed": false,
+      "search_submit_allowed": false,
+      "go_no_go": "GO for package validation; no CMS draft, publish, search submission, deploy, private URL access, or content rewrite performed."
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1909",
+    "transitions": [
+      {
+        "at": "2026-06-05T10:52:00+08:00",
+        "from": "missing_from_manifest",
+        "to": "in_progress",
+        "notes": "Initialized from explicit SEO-ARTICLE-CONTENT-PACKAGE-RIASEC-EXPLANATION-01 /goal. No CMS mutation, publish, search submission, deploy, private URL access, or content rewrite authorized."
+      },
+      {
+        "at": "2026-06-05T10:56:00+08:00",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "notes": "Archive files, generated archive summary, manifest/state initialization, and focused archive test passed local validation."
+      },
+      {
+        "at": "2026-06-05T11:00:00+08:00",
+        "from": "local_checks_passed",
+        "to": "pr_open",
+        "notes": "Opened https://github.com/fermatmind/fap-api/pull/1909."
+      },
+      {
+        "at": "2026-06-05T11:06:00+08:00",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "notes": "All required GitHub checks passed on PR #1909."
+      }
+    ]
+  },
+  "SEO-ARTICLE-RIASEC-V2-PACKAGE-VALIDATION-01": {
+    "repo": "fap-api",
+    "base": "main",
+    "train_scope": "seo_article_content_package_riasec_explanation_v2",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "branch": "codex/seo-article-riasec-v2-package-validation-01",
+    "status": "planned",
+    "title": "test(seo): validate RIASEC explanation package v2 boundaries",
+    "depends_on": [
+      "SEO-ARTICLE-RIASEC-V2-PACKAGE-ARCHIVE-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User provided an explicit /goal for the RIASEC explanation V2 SEO article PR train, including PR ids, branches, titles, scopes, allowed paths, and hard gates. Default execution is allowed only through CMS draft preflight."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Waiting for SEO-ARTICLE-RIASEC-V2-PACKAGE-ARCHIVE-01 to merge."
+      },
+      "scope_validation": {
+        "status": "pending",
+        "evidence": null
+      },
+      "local": {
+        "status": "pending",
+        "commands": []
+      },
+      "github": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "result": {},
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "transitions": [
+      {
+        "at": "2026-06-05T10:52:00+08:00",
+        "from": "missing_from_manifest",
+        "to": "planned",
+        "notes": "Initialized from explicit SEO-ARTICLE-CONTENT-PACKAGE-RIASEC-EXPLANATION-01 /goal. No CMS mutation, publish, search submission, deploy, private URL access, or content rewrite authorized."
+      }
+    ]
+  },
+  "SEO-ARTICLE-RIASEC-V2-REFERENCE-SOURCE-REVIEW-01": {
+    "repo": "fap-api",
+    "base": "main",
+    "train_scope": "seo_article_content_package_riasec_explanation_v2",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "branch": "codex/seo-article-riasec-v2-reference-source-review-01",
+    "status": "planned",
+    "title": "docs(seo): verify reference needs for RIASEC explanation package",
+    "depends_on": [
+      "SEO-ARTICLE-RIASEC-V2-PACKAGE-VALIDATION-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User provided an explicit /goal for the RIASEC explanation V2 SEO article PR train, including PR ids, branches, titles, scopes, allowed paths, and hard gates. Default execution is allowed only through CMS draft preflight."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Waiting for SEO-ARTICLE-RIASEC-V2-PACKAGE-VALIDATION-01 to merge."
+      },
+      "scope_validation": {
+        "status": "pending",
+        "evidence": null
+      },
+      "local": {
+        "status": "pending",
+        "commands": []
+      },
+      "github": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "result": {},
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "transitions": [
+      {
+        "at": "2026-06-05T10:52:00+08:00",
+        "from": "missing_from_manifest",
+        "to": "planned",
+        "notes": "Initialized from explicit SEO-ARTICLE-CONTENT-PACKAGE-RIASEC-EXPLANATION-01 /goal. No CMS mutation, publish, search submission, deploy, private URL access, or content rewrite authorized."
+      }
+    ]
+  },
+  "SEO-ARTICLE-RIASEC-V2-CMS-IMPORT-PACKAGE-01": {
+    "repo": "fap-api",
+    "base": "main",
+    "train_scope": "seo_article_content_package_riasec_explanation_v2",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "branch": "codex/seo-article-riasec-v2-cms-import-package-01",
+    "status": "planned",
+    "title": "docs(cms): prepare RIASEC explanation CMS import package",
+    "depends_on": [
+      "SEO-ARTICLE-RIASEC-V2-REFERENCE-SOURCE-REVIEW-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User provided an explicit /goal for the RIASEC explanation V2 SEO article PR train, including PR ids, branches, titles, scopes, allowed paths, and hard gates. Default execution is allowed only through CMS draft preflight."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Waiting for SEO-ARTICLE-RIASEC-V2-REFERENCE-SOURCE-REVIEW-01 to merge."
+      },
+      "scope_validation": {
+        "status": "pending",
+        "evidence": null
+      },
+      "local": {
+        "status": "pending",
+        "commands": []
+      },
+      "github": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "result": {},
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "transitions": [
+      {
+        "at": "2026-06-05T10:52:00+08:00",
+        "from": "missing_from_manifest",
+        "to": "planned",
+        "notes": "Initialized from explicit SEO-ARTICLE-CONTENT-PACKAGE-RIASEC-EXPLANATION-01 /goal. No CMS mutation, publish, search submission, deploy, private URL access, or content rewrite authorized."
+      }
+    ]
+  },
+  "SEO-ARTICLE-RIASEC-V2-CMS-DRAFT-PREFLIGHT-01": {
+    "repo": "fap-api",
+    "base": "main",
+    "train_scope": "seo_article_content_package_riasec_explanation_v2",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "branch": "codex/seo-article-riasec-v2-cms-draft-preflight-01",
+    "status": "planned",
+    "title": "docs(cms): preflight RIASEC explanation draft creation",
+    "depends_on": [
+      "SEO-ARTICLE-RIASEC-V2-CMS-IMPORT-PACKAGE-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User provided an explicit /goal for the RIASEC explanation V2 SEO article PR train, including PR ids, branches, titles, scopes, allowed paths, and hard gates. Default execution is allowed only through CMS draft preflight."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Waiting for SEO-ARTICLE-RIASEC-V2-CMS-IMPORT-PACKAGE-01 to merge."
+      },
+      "scope_validation": {
+        "status": "pending",
+        "evidence": null
+      },
+      "local": {
+        "status": "pending",
+        "commands": []
+      },
+      "github": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "result": {},
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "transitions": [
+      {
+        "at": "2026-06-05T10:52:00+08:00",
+        "from": "missing_from_manifest",
+        "to": "planned",
+        "notes": "Initialized from explicit SEO-ARTICLE-CONTENT-PACKAGE-RIASEC-EXPLANATION-01 /goal. No CMS mutation, publish, search submission, deploy, private URL access, or content rewrite authorized."
       }
     ]
   }
