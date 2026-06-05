@@ -44010,7 +44010,7 @@
     "repo": "fap-api",
     "branch": "codex/public-benefit-asset-packages-archive-01",
     "base": "origin/main",
-    "status": "local_checks_passed",
+    "status": "ready_to_merge",
     "train_scope": "window_7_public_benefit_trust_gate",
     "title": "docs(benefit): archive public benefit content asset packages",
     "checks": {
@@ -44058,6 +44058,20 @@
             "status": "passed"
           }
         ]
+      },
+      "github": {
+        "status": "pass",
+        "commands": [
+          "gh pr checks 1893 --watch --interval 15"
+        ],
+        "jobs": [
+          "hygiene",
+          "supply-chain",
+          "content-pack-build-validate",
+          "verify-bigfive",
+          "verify-mbti-legacy",
+          "verify-mbti-v2"
+        ]
       }
     },
     "result": {
@@ -44070,8 +44084,8 @@
       "next_pr_supported": "FOUNDATION-TRUST-PAGE-ASSET-INVENTORY-01"
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "e3246bb32d54f43bc12292a8eaf466ff4fa126ad",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1893",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -44108,6 +44122,16 @@
         "at": "2026-06-05",
         "status": "local_checks_passed",
         "note": "Draft-only public benefit content asset archive validated locally with focused PHPUnit, JSON/YAML parse, and scoped diff check."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/1893."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed for PR #1893 before rebase; PR rebased after resolving ledger conflicts against latest main."
       }
     ]
   }
