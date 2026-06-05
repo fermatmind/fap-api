@@ -24800,7 +24800,7 @@
     "merge_commit": "29ec08275027a517993a7cea0fdc6c117bc85c87"
   },
   "OPS-RELEASE-WORKFLOW-01": {
-    "status": "ready_to_merge",
+    "status": "merged",
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
     "branch": "codex/ops-release-workflow-01",
@@ -48025,11 +48025,11 @@
         "note": "Publish, search submission, public indexability, sitemap/llms inclusion, and post-publish review remain forbidden until separate controlled publish preflight and exact publish authorization."
       }
     ],
-    "commit_sha": "1fd67f12b602adbcf15ebd019e4e5e1d70fba2e3",
+    "commit_sha": "cc1184a94d28f7a313c8296371f5989a92929fdf",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1937",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-05T13:33:02Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "failure_reason": null,
     "transitions": [
       {
@@ -48056,6 +48056,11 @@
         "at": "2026-06-05",
         "status": "ready_to_merge",
         "note": "GitHub checks passed for PR #1937 and changed files remain confined to the RIASEC editorial review artifact/report/test and docs/codex metadata."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "merged",
+        "note": "PR #1937 was squash-merged at 2026-06-05T13:33:02Z with merge commit cc1184a94d28f7a313c8296371f5989a92929fdf; origin/main contains the merge commit; remote task branch is absent; local task branch cleanup is complete."
       }
     ]
   }
