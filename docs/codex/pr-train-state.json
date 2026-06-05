@@ -44838,17 +44838,16 @@
       },
       "github": {
         "status": "pass",
-        "commands": [
-          "gh pr checks 1925 --watch --interval 15"
-        ],
-        "jobs": [
+        "merge_state": "CLEAN",
+        "checks": [
           "hygiene",
+          "Semgrep blocking secrets",
           "supply-chain",
+          "semgrep sarif non-blocking upload",
           "content-pack-build-validate",
           "verify-bigfive",
           "verify-mbti-legacy",
           "verify-mbti-v2",
-          "Semgrep blocking secrets",
           "Semgrep OSS"
         ]
       },
@@ -44893,21 +44892,6 @@
             "command": "git diff --check -- backend/docs/help/generated/help-content-draft-revision-request-01.v1.json backend/docs/operations/help-content-draft-revision-request-2026-06-05.md backend/docs/help/generated/help-content-draft-editorial-review-rerun-01.v1.json backend/docs/operations/help-content-draft-editorial-review-rerun-2026-06-05.md docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
             "status": "passed"
           }
-        ]
-      },
-      "github": {
-        "status": "pass",
-        "merge_state": "CLEAN",
-        "checks": [
-          "hygiene",
-          "Semgrep blocking secrets",
-          "supply-chain",
-          "semgrep sarif non-blocking upload",
-          "content-pack-build-validate",
-          "verify-bigfive",
-          "verify-mbti-legacy",
-          "verify-mbti-v2",
-          "Semgrep OSS"
         ]
       }
     },
@@ -45191,7 +45175,7 @@
     "repo": "fap-api",
     "branch": "codex/help-content-draft-policy-owner-answers-01",
     "base": "origin/main",
-    "status": "pr_opened",
+    "status": "merged",
     "train_scope": "window_9_help_service_content",
     "title": "docs(help): record Help policy owner answers",
     "depends_on": [
@@ -45334,6 +45318,11 @@
         "at": "2026-06-05",
         "status": "merged_closeout_reconciled",
         "note": "PR #1936 merged on GitHub at 2026-06-05T13:38:04Z with merge commit 00ec9ac269ac64e2f6de06cfcc3cd71f8d37f4f5; origin/main contains the merge commit; remote branch was deleted and local task branch cleanup was completed."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "merged_status_reconciled",
+        "note": "Follow-up ledger closeout corrected status fields after PR #1939 recorded merge facts but left status as pr_opened/in_progress."
       }
     ]
   },
