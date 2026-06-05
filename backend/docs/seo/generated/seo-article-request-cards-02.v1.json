@@ -1,0 +1,200 @@
+{
+  "artifact_id": "seo-article-request-cards-02",
+  "artifact_version": "v1",
+  "generated_at": "2026-06-05T00:00:00+08:00",
+  "scope": "request_cards_only_no_article_copy",
+  "content_generation": false,
+  "cms_mutation": false,
+  "publish_action": false,
+  "search_submission": false,
+  "private_url_access": false,
+  "shared_forbidden_routes": [
+    "/result/**",
+    "/orders/**",
+    "/share/**",
+    "/pay/**",
+    "/payment/**",
+    "/history/**",
+    "private_take_session_result_order_payment_share_urls",
+    "tokenized_urls",
+    "user_specific_urls"
+  ],
+  "shared_required_measurement_events": [
+    "article_to_test_click_or_approved_article_attribution_equivalent",
+    "start_test",
+    "complete_test",
+    "view_result"
+  ],
+  "request_cards": [
+    {
+      "request_id": "RIASEC-EXPLANATION-ARTICLE-REQ-01",
+      "topic_direction": "RIASEC explanation",
+      "business_goal": "Expand from the first canary into a test-explanation asset that supports career-interest discovery",
+      "target_user_problem": "Understand what RIASEC is for before taking or interpreting a career-interest assessment",
+      "primary_search_intent": "explanation / career exploration",
+      "target_page_placeholder": "/{locale}/articles/{gpt-proposed-slug-after-review}",
+      "primary_cta_target": [
+        "/zh/tests/holland-career-interest-test-riasec",
+        "/en/tests/holland-career-interest-test-riasec"
+      ],
+      "secondary_cta_target": [
+        "MBTI public test route",
+        "Big Five public test route"
+      ],
+      "required_internal_links": [
+        "first canary",
+        "RIASEC public test page",
+        "MBTI public test page",
+        "Big Five public test page"
+      ],
+      "required_claim_boundaries": [
+        "interest exploration only",
+        "no diagnosis",
+        "no hiring fit",
+        "no guaranteed career outcome",
+        "no ability claim"
+      ]
+    },
+    {
+      "request_id": "CAREER-UNCERTAINTY-ARTICLE-REQ-02",
+      "topic_direction": "Career uncertainty",
+      "business_goal": "Support broad career-direction uncertainty and route users to public career-interest exploration",
+      "target_user_problem": "Feels stuck choosing majors, jobs, or career direction",
+      "primary_search_intent": "career guidance / exploration",
+      "target_page_placeholder": "/{locale}/articles/{gpt-proposed-slug-after-review}",
+      "primary_cta_target": [
+        "/zh/tests/holland-career-interest-test-riasec",
+        "/en/tests/holland-career-interest-test-riasec"
+      ],
+      "secondary_cta_target": [
+        "MBTI or Big Five public test route"
+      ],
+      "required_internal_links": [
+        "first canary",
+        "future RIASEC explanation",
+        "public test pages",
+        "approved public career hub only after link-plan approval"
+      ],
+      "required_claim_boundaries": [
+        "exploration support only",
+        "no deterministic advice",
+        "no counseling replacement",
+        "no guaranteed outcome"
+      ]
+    },
+    {
+      "request_id": "BIG-FIVE-CAREER-ARTICLE-REQ-01",
+      "topic_direction": "Big Five career use",
+      "business_goal": "Fill the Big Five career-use asset gap without making job-performance or hiring claims",
+      "target_user_problem": "Understand how Big Five traits can inform work-style reflection",
+      "primary_search_intent": "personality-to-work-style explanation",
+      "target_page_placeholder": "/{locale}/articles/{gpt-proposed-slug-after-review}",
+      "primary_cta_target": [
+        "/zh/tests/big-five-personality-test-ocean-model",
+        "/en/tests/big-five-personality-test-ocean-model"
+      ],
+      "secondary_cta_target": [
+        "RIASEC public test route"
+      ],
+      "required_internal_links": [
+        "first canary",
+        "future RIASEC explanation",
+        "Big Five public test page",
+        "RIASEC public test page"
+      ],
+      "required_claim_boundaries": [
+        "work-style tendency only",
+        "no job performance prediction",
+        "no hiring fit",
+        "no competency claim",
+        "no clinical claim"
+      ]
+    },
+    {
+      "request_id": "ARTICLE-CAREER-INTERNAL-LINKING-REQ-01",
+      "topic_direction": "Article and career internal-linking support",
+      "business_goal": "Plan safe public-canonical article-to-test and article-to-career discovery",
+      "target_user_problem": "Needs safe next steps after discovering an article or public test page",
+      "primary_search_intent": "navigation / next-step guidance",
+      "target_page_placeholder": "/{locale}/articles/{gpt-proposed-slug-after-review}",
+      "primary_cta_target": [
+        "public canonical test route selected by approved package"
+      ],
+      "secondary_cta_target": [
+        "public canonical career route only after ARTICLE-INTERNAL-LINK-PLAN-01 approval"
+      ],
+      "required_internal_links": [
+        "approved public articles",
+        "approved public tests",
+        "career hub or Tier A career pages only after eligibility is recorded"
+      ],
+      "required_claim_boundaries": [
+        "no private result reference",
+        "no personalized report URL",
+        "no career certainty",
+        "no guaranteed outcome"
+      ]
+    }
+  ],
+  "cms_fields_gpt_must_fill_later": [
+    "title",
+    "slug",
+    "locale",
+    "excerpt",
+    "body_markdown",
+    "seo_title",
+    "meta_description",
+    "FAQ items",
+    "CTA slot labels",
+    "CTA slot hrefs",
+    "claim boundary notes",
+    "references",
+    "category",
+    "tags",
+    "cover metadata"
+  ],
+  "publish_prerequisites": [
+    "content package review",
+    "CMS draft authorization",
+    "draft noindex",
+    "sitemap and llms absence before publish",
+    "CTA route gate",
+    "FAQ schema smoke",
+    "baseline owner",
+    "controlled publish preflight",
+    "exact publish approval"
+  ],
+  "metrics": {
+    "day_7": [
+      "in_sitemap",
+      "indexed_google",
+      "indexed_baidu",
+      "google_impressions",
+      "google_clicks",
+      "landing_pv",
+      "article_to_test_click",
+      "start_test",
+      "complete_test",
+      "view_result",
+      "private_url_seen"
+    ],
+    "day_14": [
+      "day_7_fields",
+      "internal_link_clicks",
+      "content_update_decision"
+    ]
+  },
+  "forbidden_confirmed": {
+    "final_title_generated": false,
+    "h1_generated": false,
+    "meta_copy_generated": false,
+    "outline_generated": false,
+    "body_copy_generated": false,
+    "faq_copy_generated": false,
+    "cta_copy_generated": false,
+    "cms_draft_created": false,
+    "publish_performed": false,
+    "search_submit_performed": false
+  },
+  "next_task": "ARTICLE-INTERNAL-LINK-PLAN-01"
+}

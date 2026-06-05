@@ -20652,7 +20652,7 @@ prs:
     branch: codex/seo-dash-api-01-readonly-contract
     title: "feat(seo): add seo_intel read-only dashboard API contract"
     train_scope: seo_intel_read_only_dashboard_api
-    status: executing
+    status: merged
     scope:
       - Implement the authorized seo_intel read-only API route family from SEO-DASH-00-RECONCILE.
       - Add the narrow admin.seo_intel.read permission while preserving admin.owner and admin.ops.read compatibility.
@@ -21241,7 +21241,7 @@ prs:
     branch: codex/seo-article-request-cards-02
     title: "docs(seo): add next article request cards"
     train_scope: seo_article_system_window_6
-    status: planned
+    status: executing
     depends_on:
       - SEO-ARTICLE-TOPIC-PRIORITY-01
     scope:
