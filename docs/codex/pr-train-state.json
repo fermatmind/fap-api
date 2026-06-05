@@ -45187,11 +45187,11 @@
       "next_pr_supported": "FOUNDATION-FAQ-SCHEMA-GATE-01"
     },
     "failure_reason": null,
-    "commit_sha": "29402eea664022f2e988098ed3afb07d974801cf",
+    "commit_sha": "624782eb52ff98cf9bcc98514de1e59168328bf8",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1905",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-05T02:37:48Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "schema_change_performed": false,
@@ -45241,6 +45241,118 @@
         "at": "2026-06-05",
         "status": "ready_to_merge",
         "note": "GitHub checks passed for PR #1905."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "merged",
+        "note": "PR #1905 squash-merged at 624782eb52ff98cf9bcc98514de1e59168328bf8; remote branch absent; local branch deleted after detached origin/main sync."
+      }
+    ]
+  },
+  "FOUNDATION-FAQ-SCHEMA-GATE-01": {
+    "repo": "fap-api",
+    "branch": "codex/foundation-faq-schema-gate-01",
+    "base": "main",
+    "status": "in_progress",
+    "train_scope": "window_7_public_benefit_trust_gate",
+    "title": "docs(benefit): gate Foundation FAQ schema",
+    "depends_on": [
+      "FOUNDATION-CMS-FIELD-MAP-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User authorized the Window 7 train and required GPT input requirements without final FAQ copy."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "FOUNDATION-CMS-FIELD-MAP-01 merged as PR #1905 at 624782eb52ff98cf9bcc98514de1e59168328bf8."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed paths are confined to PR6 FAQ schema gate docs, generated artifact, focused test, and codex ledger paths."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          {
+            "command": "php -l backend/tests/Feature/Foundation/FoundationFaqSchemaGateTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "python3 -m json.tool backend/docs/operations/generated/foundation-faq-schema-gate.v1.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+            "status": "passed"
+          },
+          {
+            "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=FoundationFaqSchemaGateTest --no-ansi",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check -- backend/docs/operations/foundation-faq-schema-gate.md backend/docs/operations/generated/foundation-faq-schema-gate.v1.json backend/tests/Feature/Foundation/FoundationFaqSchemaGateTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+            "status": "passed"
+          }
+        ]
+      },
+      "github": {
+        "status": "pending",
+        "commands": []
+      }
+    },
+    "result": {
+      "faq_schema_allowed_now": false,
+      "faq_answers_created": false,
+      "jsonld_runtime_change_performed": false,
+      "cms_mutation_performed": false,
+      "publishable_copy_created": false,
+      "next_pr_supported": "DAILY-GIVING-PROOF-REDACTION-SOP-01"
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "cms_write_performed": false,
+      "publish_performed": false,
+      "daily_giving_record_created": false,
+      "proof_file_processed": false,
+      "search_submission_performed": false,
+      "deploy_performed": false,
+      "notes": "Changed files are intended to stay within PR6 docs/generated/test/ledger paths."
+    },
+    "sidecars": [
+      {
+        "id": "FOUNDATION_FAQ_ANSWERS",
+        "status": "not_created",
+        "note": "FAQ question inventory is allowed; final answers remain blocked."
+      },
+      {
+        "id": "FOUNDATION_FAQ_SCHEMA",
+        "status": "blocked",
+        "note": "FAQPage schema remains blocked until visible approved CMS FAQ answers exist."
+      }
+    ],
+    "next_task": "DAILY-GIVING-PROOF-REDACTION-SOP-01",
+    "transitions": [
+      {
+        "at": "2026-06-05",
+        "status": "in_progress",
+        "note": "Initialized after PR5 merge for Foundation FAQ schema gate."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "local_checks_passed",
+        "note": "Foundation FAQ schema gate validated with focused PHPUnit, JSON/YAML parse, scoped diff check, and allowed-path review."
       }
     ]
   }
