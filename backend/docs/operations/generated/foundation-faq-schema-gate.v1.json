@@ -1,0 +1,53 @@
+{
+  "version": "foundation_faq_schema_gate.v1",
+  "generated_at": "2026-06-05T00:00:00+08:00",
+  "mode": "faq_schema_gate_only",
+  "faq_schema_allowed_now": false,
+  "faq_answers_created": false,
+  "jsonld_runtime_change_performed": false,
+  "cms_mutation_performed": false,
+  "publishable_copy_created": false,
+  "gate_requirements": [
+    "visible_cms_backend_authoritative_faq_answers_exist",
+    "faq_answers_reviewed_and_approved",
+    "schema_entries_match_visible_answers",
+    "foundation_claim_lint_passed",
+    "daily_giving_noindex_retained",
+    "daily_giving_records_and_proof_not_inferred_from_unknown_private_data"
+  ],
+  "current_state": {
+    "faq_question_inventory_allowed": true,
+    "faq_answers_available_from_this_train": false,
+    "faq_schema_source_available": false,
+    "daily_giving_noindex_required": true,
+    "daily_giving_public_records_count": 0,
+    "daily_giving_public_months_count": 0
+  },
+  "gpt_allowed_outputs": [
+    "faq_question_inventory",
+    "risk_tags_per_question",
+    "required_evidence_per_question",
+    "reviewer_checklist",
+    "codex_validation_handoff"
+  ],
+  "gpt_forbidden_outputs": [
+    "final_faq_answers",
+    "final_faqpage_jsonld",
+    "final_h1",
+    "final_metadata",
+    "cta_copy",
+    "social_copy",
+    "trust_badge_copy",
+    "official_partnership_claim",
+    "endorsement_claim",
+    "certification_claim",
+    "guaranteed_impact_claim",
+    "stable_daily_giving_operation_claim"
+  ],
+  "schema_activation_policy": {
+    "question_inventory_unlocks_schema": false,
+    "frontend_fallback_unlocks_schema": false,
+    "visible_approved_cms_answers_required": true,
+    "claim_lint_required": true
+  }
+}

@@ -21770,7 +21770,7 @@ prs:
     branch: codex/foundation-cms-field-map-01
     title: "docs(benefit): map Foundation CMS fields"
     train_scope: window_7_public_benefit_trust_gate
-    status: in_progress
+    status: merged
     scope:
       - Map Foundation plan-page requirements to existing CMS content_pages fields.
       - Identify missing dedicated governance fields without changing schema.
@@ -21805,3 +21805,46 @@ prs:
     frontend_fallback_authority: false
     content_authority: CMS/backend
     next_task: FOUNDATION-FAQ-SCHEMA-GATE-01
+
+  - id: FOUNDATION-FAQ-SCHEMA-GATE-01
+    repo: fap-api
+    depends_on:
+      - FOUNDATION-CMS-FIELD-MAP-01
+    branch: codex/foundation-faq-schema-gate-01
+    title: "docs(benefit): gate Foundation FAQ schema"
+    train_scope: window_7_public_benefit_trust_gate
+    status: in_progress
+    scope:
+      - Define Foundation FAQPage schema activation gates.
+      - Keep FAQ question inventory allowed but final FAQ answers and JSON-LD blocked.
+      - Add generated gate artifact and focused contract coverage.
+    allowed_paths:
+      - backend/docs/operations/foundation-faq-schema-gate.md
+      - backend/docs/operations/generated/foundation-faq-schema-gate.v1.json
+      - backend/tests/Feature/Foundation/FoundationFaqSchemaGateTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Create FAQ answers, JSON-LD runtime output, CMS records, publishable copy, DailyGiving records, proof files, search submissions, runtime changes, or deploys.
+    validation:
+      - php -l backend/tests/Feature/Foundation/FoundationFaqSchemaGateTest.php
+      - python3 -m json.tool backend/docs/operations/generated/foundation-faq-schema-gate.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=FoundationFaqSchemaGateTest --no-ansi
+      - git diff --check -- backend/docs/operations/foundation-faq-schema-gate.md backend/docs/operations/generated/foundation-faq-schema-gate.v1.json backend/tests/Feature/Foundation/FoundationFaqSchemaGateTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: DAILY-GIVING-PROOF-REDACTION-SOP-01
