@@ -20824,7 +20824,7 @@ prs:
     branch: codex/seo-dash-collector-01-smoke-reconcile
     title: "docs(seo): record collector dry-run smoke evidence"
     train_scope: seo_intel_collector_dry_run_smoke_evidence
-    status: executing
+    status: merged
     depends_on:
       - SEO-DASH-COLLECTOR-01
     scope:
@@ -21359,7 +21359,7 @@ prs:
     branch: codex/article-faq-schema-smoke-01
     title: "docs(seo): define article FAQ schema smoke"
     train_scope: seo_article_system_window_6
-    status: planned
+    status: executing
     depends_on:
       - ARTICLE-CTA-ROUTE-GATE-01
     scope:

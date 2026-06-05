@@ -1,0 +1,94 @@
+{
+  "artifact_id": "ARTICLE-FAQ-SCHEMA-SMOKE-01",
+  "date": "2026-06-05",
+  "scope": "seo_article_faq_schema_smoke",
+  "boundaries": {
+    "faq_copy_written": false,
+    "article_copy_written": false,
+    "title_h1_meta_cta_copy_written": false,
+    "cms_draft_created": false,
+    "publish_executed": false,
+    "search_submission_executed": false,
+    "private_url_accessed": false,
+    "runtime_changed": false
+  },
+  "decision": {
+    "article_schema": "GO",
+    "breadcrumb_schema": "GO",
+    "faq_schema_with_visible_cms_faq": "GO",
+    "faq_schema_without_visible_cms_faq": "NO-GO",
+    "hidden_or_frontend_fallback_faq_schema": "NO-GO"
+  },
+  "required_smoke_checks": [
+    {
+      "schema_type": "Article",
+      "required_when": "published_indexable_article_detail",
+      "source_authority": "cms_article_or_approved_cms_seo_jsonld",
+      "expectation": "one Article JSON-LD object with canonical URL, headline, description, language, author, dates, and mainEntityOfPage"
+    },
+    {
+      "schema_type": "BreadcrumbList",
+      "required_when": "article_detail_rendered",
+      "source_authority": "public_locale_route_and_article_title",
+      "expectation": "one BreadcrumbList matching Home > Articles > article"
+    },
+    {
+      "schema_type": "FAQPage",
+      "required_when": "visible_article_faq_exists",
+      "source_authority": "answer_surface_v1.faq_blocks_or_approved_cms_backend_visible_faq",
+      "expectation": "mainEntity count equals visible FAQ count"
+    }
+  ],
+  "faq_schema_rules": [
+    "faq_schema_only_from_visible_content",
+    "visible_faq_source_must_be_cms_backend_owned",
+    "no_hidden_html_schema",
+    "no_frontend_fallback_faq_authority",
+    "no_article_body_heuristic_faq",
+    "no_faq_schema_when_visible_faq_absent",
+    "unknown_source_or_visibility_blocks_faq_schema"
+  ],
+  "runtime_evidence": [
+    "fap-web app/(localized)/[locale]/articles/[slug]/page.tsx builds Article and BreadcrumbList JSON-LD",
+    "fap-web app/(localized)/[locale]/articles/[slug]/page.tsx maps article.answerSurface.faqBlocks into FAQPage only when question and answer exist",
+    "fap-web tests/contracts/article-answer-surface.contract.test.ts verifies FAQPage is emitted only from visible answer-surface FAQ",
+    "fap-web tests/contracts/fixtures/discoverability-foundation/structured-data-contract.v1.json limits article_detail schema to Article, BreadcrumbList, and FAQPage"
+  ],
+  "cms_package_required_fields": [
+    "article_locale",
+    "article_slug_placeholder",
+    "schema_intent_article",
+    "schema_intent_breadcrumb",
+    "faq_intended_state",
+    "faq_source_authority",
+    "visible_faq_count",
+    "expected_faqpage_main_entity_count",
+    "article_schema_source",
+    "breadcrumb_canonical_path",
+    "claim_boundary_notes",
+    "unresolved_unknown_fields"
+  ],
+  "draft_rules": [
+    "draft_route_noindex_or_absent_from_sitemap_llms",
+    "authorized_preview_required_for_draft_schema_smoke",
+    "preview_not_authorized_means_unknown_not_zero"
+  ],
+  "publish_smoke": [
+    "public_page_200",
+    "article_jsonld_exists_unless_authority_blocks",
+    "breadcrumb_jsonld_exists",
+    "faqpage_exists_only_when_visible_faq_exists",
+    "faqpage_main_entity_count_matches_visible_faq_count",
+    "sitemap_llms_checked_after_publish",
+    "no_private_or_tokenized_url_used"
+  ],
+  "failure_conditions": [
+    "faqpage_without_visible_faq",
+    "faqpage_count_mismatch",
+    "schema_contains_private_url",
+    "schema_contains_frontend_local_editorial_fallback",
+    "article_or_breadcrumb_missing_on_published_indexable_article",
+    "schema_source_authority_unknown"
+  ],
+  "next_task": "SEO-ARTICLE-PUBLISH-HOLD-GATE-01"
+}
