@@ -44107,11 +44107,11 @@
     "merge_commit_sha": "8dcb7f38db21000271dee7ac45a92ca293c38a9d"
   },
   "HELP-CONTENT-DRAFT-CREATE-01": {
-    "status": "ready_to_merge",
+    "status": "merged",
     "branch": "codex/help-content-draft-create-01",
     "repo": "fap-api",
     "title": "ops(cms): create Help service content drafts",
-    "commit_sha": "734404e332b3c0c00648589ceca4064d47aa2151",
+    "commit_sha": "e4b10c1f854821ee2e25948b63dd7b57dc2af792",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1896",
     "checks": [
       {
@@ -44166,9 +44166,9 @@
       }
     ],
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-05T01:42:09Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "drafts": {
       "created_count": 12,
       "ids": [
@@ -44263,6 +44263,91 @@
         "at": "2026-06-05",
         "status": "ready_to_merge",
         "note": "Ledger records PR URL and rebased implementation commit; merge remains gated on post-rebase GitHub checks."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "merged",
+        "note": "Reconciled after PR #1896 squash merge; origin/main contains merge commit afbb44da192dda038a5e87874d1717f8c16d6d18, the remote task branch is absent, and local task cleanup was executed."
+      }
+    ],
+    "merge_commit": "afbb44da192dda038a5e87874d1717f8c16d6d18",
+    "merge_commit_sha": "afbb44da192dda038a5e87874d1717f8c16d6d18"
+  },
+  "HELP-CONTENT-DRAFT-POSTCHECK-01": {
+    "repo": "fap-api",
+    "branch": "codex/help-content-draft-postcheck-01",
+    "base": "origin/main",
+    "status": "pending",
+    "train_scope": "window_9_help_service_content",
+    "title": "docs(help): archive Help CMS draft postcheck",
+    "depends_on": [
+      "HELP-CONTENT-DRAFT-CREATE-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding the HELP-CONTENT-DRAFT-POSTCHECK-01 manifest/state entries."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "HELP-CONTENT-DRAFT-CREATE-01 is merged as PR #1896; origin/main contains merge commit afbb44da192dda038a5e87874d1717f8c16d6d18."
+      },
+      "scope_preflight": {
+        "status": "pass",
+        "evidence": "POSTCHECK scope is read-only archive and verification only; no CMS mutation, publish, deploy, private URL access, payment/refund flow, or secret/env/cookie/token read is allowed."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "planned_outputs": {
+      "generated_artifact": "backend/docs/help/generated/help-content-draft-postcheck-01.v1.json",
+      "operations_report": "backend/docs/operations/help-content-draft-postcheck-2026-06-05.md",
+      "draft_count_expected": 12,
+      "public_visibility_expected": false,
+      "publish_allowed": false,
+      "cms_mutation_allowed": false
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "cms_write_performed": false,
+      "publish_performed": false,
+      "search_submission_performed": false,
+      "deploy_performed": false,
+      "private_url_access_performed": false,
+      "secret_env_cookie_token_read": false
+    },
+    "sidecars": [
+      {
+        "id": "HELP-CONTENT-DRAFT-POSTCHECK-SUPPORT-CONTACT-FIELD",
+        "status": "must_verify",
+        "note": "Postcheck must verify how support_contact is represented because ContentPage has no first-class support_contact field."
+      },
+      {
+        "id": "HELP-CONTENT-DRAFT-POSTCHECK-EDITORIAL-APPROVAL",
+        "status": "blocked_until_operator_review",
+        "note": "Operator editorial approval remains a hard gate; this PR may request or archive readiness only, not approve content."
+      },
+      {
+        "id": "HELP-CONTENT-DRAFT-POSTCHECK-PUBLISH-BLOCK",
+        "status": "hard_gate",
+        "note": "Publish, indexability, sitemap/llms inclusion, and search submission remain forbidden without separate explicit approval."
+      }
+    ],
+    "next_task": "HELP-CONTENT-DRAFT-REVIEW-PREFLIGHT-01",
+    "transitions": [
+      {
+        "at": "2026-06-05",
+        "status": "manifest_state_authorized",
+        "note": "User authorized supplementing manifest/state entries for HELP-CONTENT-DRAFT-POSTCHECK-01."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "pending",
+        "note": "Manifest/state entry added; implementation must run as a separate scoped read-only postcheck PR."
       }
     ]
   },
