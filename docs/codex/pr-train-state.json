@@ -43756,12 +43756,12 @@
     ]
   },
   "HELP-CMS-IMPORT-PACKAGE-01": {
-    "status": "local_checks_passed",
+    "status": "ready_to_merge",
     "branch": "codex/help-cms-import-package-01",
     "repo": "fap-api",
     "title": "docs(cms): add Help service CMS import package",
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "c40982ade18aadc4007c76e95a9b4e313a01306e",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1889",
     "checks": [
       {
         "command": "php -l backend/tests/Feature/Cms/HelpContentImportPackageTest.php",
@@ -43799,6 +43799,11 @@
       {
         "command": "git diff --cached --check",
         "status": "passed"
+      },
+      {
+        "command": "gh pr checks 1889 --watch --interval 15",
+        "status": "passed",
+        "note": "GitHub checks passed before ready-to-merge ledger update."
       }
     ],
     "failure_reason": null,
@@ -43837,6 +43842,11 @@
         "at": "2026-06-05",
         "status": "local_checks_passed",
         "note": "Draft-only Help CMS import package and source-dir adapter validated locally."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "ready_to_merge",
+        "note": "PR #1889 opened and GitHub checks passed; ready to merge after ledger update."
       }
     ]
   }
