@@ -44509,7 +44509,7 @@
     "repo": "fap-api",
     "branch": "codex/foundation-claim-boundary-contract-01",
     "base": "main",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "train_scope": "window_7_public_benefit_trust_gate",
     "title": "docs(benefit): define Foundation public benefit claim boundary",
     "depends_on": [
@@ -44555,6 +44555,22 @@
             "command": "git diff --check -- backend/docs/operations/foundation-claim-boundary-contract.md backend/docs/operations/generated/foundation-claim-boundary.v1.json backend/tests/Feature/Foundation/FoundationClaimBoundaryTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
             "status": "passed"
           }
+        ]
+      },
+      "github": {
+        "status": "pass",
+        "commands": [
+          "gh pr checks 1901 --watch --interval 15"
+        ],
+        "jobs": [
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "hygiene",
+          "supply-chain",
+          "content-pack-build-validate",
+          "verify-bigfive",
+          "verify-mbti-legacy",
+          "verify-mbti-v2"
         ]
       }
     },
@@ -44613,6 +44629,11 @@
         "at": "2026-06-05",
         "status": "pr_open",
         "note": "Opened https://github.com/fermatmind/fap-api/pull/1901."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed for PR #1901."
       }
     ]
   }
