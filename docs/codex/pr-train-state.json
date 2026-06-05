@@ -46097,7 +46097,7 @@
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "branch": "codex/seo-article-riasec-v2-cms-import-package-01",
-    "status": "planned",
+    "status": "ready_to_merge",
     "title": "docs(cms): prepare RIASEC explanation CMS import package",
     "depends_on": [
       "SEO-ARTICLE-RIASEC-V2-REFERENCE-SOURCE-REVIEW-01"
@@ -46108,32 +46108,73 @@
         "evidence": "User provided an explicit /goal for the RIASEC explanation V2 SEO article PR train, including PR ids, branches, titles, scopes, allowed paths, and hard gates. Default execution is allowed only through CMS draft preflight."
       },
       "dependency": {
-        "status": "pending",
-        "evidence": "Waiting for SEO-ARTICLE-RIASEC-V2-REFERENCE-SOURCE-REVIEW-01 to merge."
+        "status": "pass",
+        "evidence": "SEO-ARTICLE-RIASEC-V2-REFERENCE-SOURCE-REVIEW-01 merged as PR #1913 at 2026-06-05T03:45:17Z; origin/main contains merge commit c9b4052705c902f3e718520d19b588a589a183e8."
       },
       "scope_validation": {
-        "status": "pending",
-        "evidence": null
+        "status": "pass",
+        "evidence": "Changed files are confined to backend/docs/seo/cms-import-packages/riasec-explanation-v2/**, backend/docs/seo/generated/riasec-explanation-cms-import-package.v1.json, backend/tests/Feature/SEO/RiasecExplanationCmsImportPackageTest.php, and docs/codex PR-train metadata."
       },
       "local": {
-        "status": "pending",
-        "commands": []
+        "status": "pass",
+        "commands": [
+          "php -l backend/tests/Feature/SEO/RiasecExplanationCmsImportPackageTest.php",
+          "python3 -m json.tool backend/docs/seo/generated/riasec-explanation-cms-import-package.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=RiasecExplanationCmsImportPackageTest --no-ansi",
+          "git diff --check -- backend/docs/seo/cms-import-packages/riasec-explanation-v2 backend/docs/seo/generated/riasec-explanation-cms-import-package.v1.json backend/tests/Feature/SEO/RiasecExplanationCmsImportPackageTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json"
+        ],
+        "notes": "CMS import package test, JSON/YAML parse, and scoped diff check passed. No CMS write performed."
       },
       "github": {
         "status": "pending",
-        "evidence": null
+        "evidence": "PR rebased onto latest origin/main; waiting for GitHub checks on rebased head.",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/1915",
+        "commit_sha": "fdb6b1e1b840fdc4ddeeefde7813d120c4b38a95"
       }
     },
-    "result": {},
+    "result": {
+      "import_package_path": "backend/docs/seo/generated/riasec-explanation-cms-import-package.v1.json",
+      "targets": [
+        "/zh/articles/riasec-holland-career-interest-test-explained",
+        "/en/articles/what-is-riasec-holland-code-career-interest-test"
+      ],
+      "decision": "GO for CMS draft preflight; NO-GO for CMS draft creation without exact draft-only authorization.",
+      "cms_draft_created": false,
+      "publish_allowed": false,
+      "search_submit_allowed": false
+    },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "fdb6b1e1b840fdc4ddeeefde7813d120c4b38a95",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1915",
     "transitions": [
       {
         "at": "2026-06-05T10:52:00+08:00",
         "from": "missing_from_manifest",
         "to": "planned",
         "notes": "Initialized from explicit SEO-ARTICLE-CONTENT-PACKAGE-RIASEC-EXPLANATION-01 /goal. No CMS mutation, publish, search submission, deploy, private URL access, or content rewrite authorized."
+      },
+      {
+        "at": "2026-06-05T11:47:00+08:00",
+        "from": "planned",
+        "to": "local_checks_passed",
+        "notes": "CMS import package generated with zh/en targets, draft defaults, noindex/nofollow, schema disabled until preview, and retained publish blockers."
+      },
+      {
+        "status": "pr_open",
+        "evidence": "https://github.com/fermatmind/fap-api/pull/1915",
+        "commit_sha": "4184d74b860c0c494765659a39209e1952de9db4"
+      },
+      {
+        "status": "ready_to_merge",
+        "evidence": "GitHub checks passed; PR is ready for merge after ledger update checks pass.",
+        "commit_sha": "a9b39402db0d617dd13f76d8abe738f90ef4fc1a"
+      },
+      {
+        "status": "rebased_ready_to_merge",
+        "evidence": "PR rebased onto latest origin/main after main moved during checks.",
+        "commit_sha": "fdb6b1e1b840fdc4ddeeefde7813d120c4b38a95"
       }
     ]
   },

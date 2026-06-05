@@ -22114,7 +22114,7 @@ prs:
     branch: codex/seo-article-riasec-v2-reference-source-review-01
     title: "docs(seo): verify reference needs for RIASEC explanation package"
     train_scope: seo_article_content_package_riasec_explanation_v2
-    status: in_progress
+    status: merged
     scope:
       - Prepare a reference/source verification ledger for the RIASEC explanation package without fabricating citations or editing article copy.
       - Record authoritative source categories, verified URLs when available, unresolved source gaps, and publish blockers.
@@ -22150,7 +22150,7 @@ prs:
     branch: codex/seo-article-riasec-v2-cms-import-package-01
     title: "docs(cms): prepare RIASEC explanation CMS import package"
     train_scope: seo_article_content_package_riasec_explanation_v2
-    status: planned
+    status: in_progress
     scope:
       - Convert the validated content package into backend/CMS import package format without writing CMS records.
       - Preserve draft defaults, noindex/nofollow, operator review requirement, CTA safety, FAQ/schema alignment, and baseline placeholders.
