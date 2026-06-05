@@ -32072,7 +32072,7 @@
   "FERMAT-MARKETING-SKILLS-ADAPTATION-02": {
     "repo": "fap-api",
     "branch": "codex/fermat-marketing-skills-adaptation-02",
-    "status": "pr_opened",
+    "status": "ready_to_merge",
     "depends_on": [
       "FERMAT-MARKETING-SKILLS-ADAPTATION-01"
     ],
@@ -45244,6 +45244,21 @@
             "status": "pass"
           }
         ]
+      },
+      "github": {
+        "status": "pass",
+        "checks": [
+          "hygiene",
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "supply-chain",
+          "content-pack-build-validate",
+          "verify-bigfive",
+          "verify-mbti-legacy",
+          "verify-mbti-v2",
+          "Semgrep OSS"
+        ],
+        "merge_state": "CLEAN"
       }
     },
     "failure_reason": null,
@@ -45309,6 +45324,11 @@
         "at": "2026-06-05",
         "status": "pr_opened",
         "note": "Opened PR #1936 for HELP-CONTENT-DRAFT-POLICY-OWNER-ANSWERS-01."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed and merge state was CLEAN. Publish remains blocked; Operator approval was not claimed."
       }
     ]
   },
