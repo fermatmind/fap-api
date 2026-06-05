@@ -21522,7 +21522,7 @@ prs:
     branch: codex/help-content-draft-postcheck-01
     title: "docs(help): archive Help CMS draft postcheck"
     train_scope: window_9_help_service_content
-    status: postcheck_passed_publish_blocked
+    status: merged
     depends_on:
       - HELP-CONTENT-DRAFT-CREATE-01
     scope:
@@ -21556,6 +21556,46 @@ prs:
     frontend_fallback_authority: false
     content_authority: CMS/backend
     next_task: HELP-CONTENT-DRAFT-REVIEW-PREFLIGHT-01
+
+  - id: HELP-CONTENT-DRAFT-REVIEW-PREFLIGHT-01
+    repo: fap-api
+    branch: codex/help-content-draft-review-preflight-01
+    title: "docs(help): prepare Help CMS draft editorial review preflight"
+    train_scope: window_9_help_service_content
+    status: pending
+    depends_on:
+      - HELP-CONTENT-DRAFT-POSTCHECK-01
+    scope:
+      - Run read-only preflight over Help service draft/postcheck artifacts before Operator editorial review.
+      - Archive the review-readiness checklist, support-contact sidecar status, publish/search/deploy hard gates, and exact Operator review handoff requirements.
+      - Keep editorial approval, CMS mutation, publish, deployment, search submission, and private URL access out of scope.
+    allowed_paths:
+      - backend/docs/help/generated/help-content-draft-review-preflight-01.v1.json
+      - backend/docs/operations/help-content-draft-review-preflight-2026-06-05.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Approve editorial review, publish, mutate CMS, create/update/delete drafts, deploy, submit search URLs, access private result/order/share/pay/payment/history URLs, read secrets/env/cookies/tokens, run payment/refund flows, or change payment-provider behavior.
+    validation:
+      - python3 -m json.tool backend/docs/help/generated/help-content-draft-review-preflight-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- backend/docs/help/generated/help-content-draft-review-preflight-01.v1.json backend/docs/operations/help-content-draft-review-preflight-2026-06-05.md docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: HELP-CONTENT-DRAFT-EDITORIAL-REVIEW-01
 
   - id: PUBLIC-BENEFIT-ASSET-PACKAGES-ARCHIVE-01
     repo: fap-api
