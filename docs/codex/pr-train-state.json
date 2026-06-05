@@ -31994,7 +31994,7 @@
   "FERMAT-MARKETING-SKILLS-ADAPTATION-01": {
     "repo": "fap-api",
     "branch": "codex/fermat-marketing-skills-adaptation-01",
-    "status": "pr_opened",
+    "status": "ready_to_merge",
     "depends_on": [
       "MARKETINGSKILLS-FERMATMIND-FIT-SCAN-00"
     ],
@@ -45092,10 +45092,25 @@
             "status": "pass"
           }
         ]
+      },
+      "github": {
+        "status": "pass",
+        "checks": [
+          "hygiene",
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "supply-chain",
+          "content-pack-build-validate",
+          "verify-bigfive",
+          "verify-mbti-legacy",
+          "verify-mbti-v2",
+          "Semgrep OSS"
+        ],
+        "merge_state": "CLEAN"
       }
     },
-    "failure_reason": "Operator review not passed because policy-owner inputs and contact-support route/support_contact readiness remain unresolved.",
-    "commit_sha": "40931a5dd0c1efa81024fa8b0eaa7dc3e6df845c",
+    "failure_reason": null,
+    "commit_sha": "73512455e27d35a380a02526c02acb0c5818c05a",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1933",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -45159,6 +45174,11 @@
         "at": "2026-06-05",
         "status": "pr_opened",
         "note": "Opened PR #1933. Review remains blocked; publish and Operator approval remain unclaimed."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed and merge state was CLEAN. PR result remains review blocked because policy-owner fields and contact-support readiness are unresolved."
       }
     ]
   },
