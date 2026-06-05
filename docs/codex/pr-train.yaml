@@ -21896,7 +21896,7 @@ prs:
     branch: codex/seo-article-riasec-v2-package-archive-01
     title: "docs(seo): archive RIASEC explanation article package v2"
     train_scope: seo_article_content_package_riasec_explanation_v2
-    status: in_progress
+    status: merged
     scope:
       - Archive the uploaded GPT-5.5 Pro RIASEC explanation V2 content package as draft-only CMS input.
       - Preserve package files exactly without creating CMS drafts, publishing, search submission, deploy, or article copy edits.
@@ -21942,7 +21942,7 @@ prs:
     branch: codex/seo-article-riasec-v2-package-validation-01
     title: "test(seo): validate RIASEC explanation package v2 boundaries"
     train_scope: seo_article_content_package_riasec_explanation_v2
-    status: planned
+    status: in_progress
     scope:
       - Validate the archived package against request-card, CTA route, FAQ/schema, publish-hold, claim-boundary, and privacy route restrictions.
       - Produce generated validation evidence and a short validation report.
