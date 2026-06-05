@@ -47307,7 +47307,7 @@
     "repo": "fap-api",
     "base": "main",
     "branch": "codex/seo-article-riasec-v2-cms-draft-create-01",
-    "status": "draft_created_postcheck_passed_publish_blocked_local_validation_pending",
+    "status": "pr_open_github_checks_pending",
     "title": "ops(cms): create RIASEC explanation article drafts",
     "train_scope": "seo_article_content_package_riasec_explanation_v2",
     "depends_on": [
@@ -47451,8 +47451,8 @@
         "note": "Publish, public indexability, sitemap/llms inclusion, search submission, and post-publish baseline review remain forbidden until separate controlled publish authorization."
       }
     ],
-    "commit_sha": "83aaca47f9e04150aa8dbc0dbd26fed8716f6b58",
-    "pr_url": null,
+    "commit_sha": "f9d2eb1c1c0c630a3e567d1d9e2eac25b87b2234",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1931",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -47477,6 +47477,11 @@
         "at": "2026-06-05",
         "status": "local_checks_passed",
         "note": "Local JSON/YAML parsing, PHP lint, focused RiasecExplanationCmsDraftCreateTest, and scope diff checks passed."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "pr_open_github_checks_pending",
+        "note": "Opened PR #1931 for scoped draft-create artifact, postcheck report, focused test, and PR-train metadata."
       }
     ]
   }
