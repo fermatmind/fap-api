@@ -44040,12 +44040,12 @@
     "merge_commit_sha": "8dcb7f38db21000271dee7ac45a92ca293c38a9d"
   },
   "HELP-CONTENT-DRAFT-CREATE-01": {
-    "status": "local_checks_passed",
+    "status": "ready_to_merge",
     "branch": "codex/help-content-draft-create-01",
     "repo": "fap-api",
     "title": "ops(cms): create Help service content drafts",
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "734404e332b3c0c00648589ceca4064d47aa2151",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1896",
     "checks": [
       {
         "command": "ssh -o BatchMode=yes fap-api-prod ... content-pages:import-local-baseline --dry-run --status=draft --source-dir=/tmp/fm-help-drafts.nnYsTB --no-ansi",
@@ -44186,6 +44186,16 @@
         "at": "2026-06-05",
         "status": "local_checks_passed",
         "note": "Docs/generated/state validation passed; changed paths limited to PR4 allowed paths."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "pr_open_rebased",
+        "note": "PR #1896 was opened and rebased onto latest origin/main after resolving docs/codex ledger conflicts."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "ready_to_merge",
+        "note": "Ledger records PR URL and rebased implementation commit; merge remains gated on post-rebase GitHub checks."
       }
     ]
   },
