@@ -45506,15 +45506,45 @@
       "local": {
         "status": "pass",
         "commands": [
-          {"command": "php -l backend/app/Models/ContentPage.php && php -l backend/app/Http/Controllers/API/V0_5/Cms/ContentPageController.php && php -l backend/app/Services/Cms/ContentPageTranslationAdapter.php && php -l backend/app/Filament/Ops/Resources/ContentPageResource.php && php -l backend/database/migrations/2026_06_05_150000_add_help_service_fields_to_content_pages.php && php -l backend/tests/Feature/ContentPages/ContentPagePublicApiTest.php", "status": "pass"},
-          {"command": "python3 -m json.tool backend/docs/help/generated/help-cms-service-fields-01.v1.json >/dev/null", "status": "pass"},
-          {"command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null", "status": "pass"},
-          {"command": "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"", "status": "pass"},
-          {"command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=ContentPagePublicApiTest --no-ansi", "status": "passed_with_warning", "notes": "Exited 0 with 77 assertions and existing Laravel file_get_contents warnings."},
-          {"command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force", "status": "pass"},
-          {"command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff' --no-ansi", "status": "passed_with_warning", "notes": "Exited 0 with 3 assertions and existing Laravel file_get_contents warning."},
-          {"command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_content_page_help_service_field_contract_files|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff' --no-ansi", "status": "passed_with_warning", "notes": "Exited 0 with 4 assertions and existing Laravel file_get_contents warnings."},
-          {"command": "git diff --check -- backend/app/Models/ContentPage.php backend/app/Http/Controllers/API/V0_5/Cms/ContentPageController.php backend/app/Services/Cms/ContentPageTranslationAdapter.php backend/app/Filament/Ops/Resources/ContentPageResource.php backend/database/migrations/2026_06_05_150000_add_help_service_fields_to_content_pages.php backend/tests/Feature/ContentPages/ContentPagePublicApiTest.php backend/docs/help/generated/help-cms-service-fields-01.v1.json backend/docs/operations/help-cms-service-fields-2026-06-05.md docs/codex/pr-train.yaml docs/codex/pr-train-state.json", "status": "pass"}
+          {
+            "command": "php -l backend/app/Models/ContentPage.php && php -l backend/app/Http/Controllers/API/V0_5/Cms/ContentPageController.php && php -l backend/app/Services/Cms/ContentPageTranslationAdapter.php && php -l backend/app/Filament/Ops/Resources/ContentPageResource.php && php -l backend/database/migrations/2026_06_05_150000_add_help_service_fields_to_content_pages.php && php -l backend/tests/Feature/ContentPages/ContentPagePublicApiTest.php",
+            "status": "pass"
+          },
+          {
+            "command": "python3 -m json.tool backend/docs/help/generated/help-cms-service-fields-01.v1.json >/dev/null",
+            "status": "pass"
+          },
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "pass"
+          },
+          {
+            "command": "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+            "status": "pass"
+          },
+          {
+            "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=ContentPagePublicApiTest --no-ansi",
+            "status": "passed_with_warning",
+            "notes": "Exited 0 with 77 assertions and existing Laravel file_get_contents warnings."
+          },
+          {
+            "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force",
+            "status": "pass"
+          },
+          {
+            "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff' --no-ansi",
+            "status": "passed_with_warning",
+            "notes": "Exited 0 with 3 assertions and existing Laravel file_get_contents warning."
+          },
+          {
+            "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_content_page_help_service_field_contract_files|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff' --no-ansi",
+            "status": "passed_with_warning",
+            "notes": "Exited 0 with 4 assertions and existing Laravel file_get_contents warnings."
+          },
+          {
+            "command": "git diff --check -- backend/app/Models/ContentPage.php backend/app/Http/Controllers/API/V0_5/Cms/ContentPageController.php backend/app/Services/Cms/ContentPageTranslationAdapter.php backend/app/Filament/Ops/Resources/ContentPageResource.php backend/database/migrations/2026_06_05_150000_add_help_service_fields_to_content_pages.php backend/tests/Feature/ContentPages/ContentPagePublicApiTest.php backend/docs/help/generated/help-cms-service-fields-01.v1.json backend/docs/operations/help-cms-service-fields-2026-06-05.md docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+            "status": "pass"
+          }
         ]
       },
       "github": {
@@ -45614,6 +45644,170 @@
         "at": "2026-06-05",
         "status": "merged_closeout_reconciled",
         "note": "PR #1947 merged on GitHub at 2026-06-05T15:09:05Z with merge commit 6527cc9265f88bfd1bb281d6ae88f2f3bb7e2e05; origin/main contains the merge commit; remote branch was deleted and local cleanup was complete."
+      }
+    ]
+  },
+  "HELP-CONTENT-DRAFT-POLICY-REVISION-APPLY-01": {
+    "repo": "fap-api",
+    "branch": "codex/help-content-draft-policy-revision-apply-01",
+    "base": "origin/main",
+    "status": "ready_to_merge",
+    "train_scope": "window_9_help_service_content",
+    "title": "docs(help): apply Help policy answers to draft package",
+    "depends_on": [
+      "HELP-CMS-SERVICE-FIELDS-01",
+      "HELP-CONTENT-DRAFT-POLICY-OWNER-ANSWERS-01",
+      "HELP-CONTENT-DRAFT-CONTACT-SUPPORT-DECISION-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User requested completing the Help service PR train and listed HELP-CONTENT-DRAFT-POLICY-REVISION-APPLY-01 as the local revised content package/import package application PR."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "HELP-CMS-SERVICE-FIELDS-01, HELP-CONTENT-DRAFT-POLICY-OWNER-ANSWERS-01, and HELP-CONTENT-DRAFT-CONTACT-SUPPORT-DECISION-01 are merged and reconciled on origin/main."
+      },
+      "policy_revision_apply": {
+        "status": "applied_local",
+        "applied_policy_answers": {
+          "refund_exclusions": "非“费马测试”原因",
+          "refund_handling_time": "三个工作日",
+          "data_deletion_handling_time": "两年",
+          "retained_data_exceptions_after_deletion": "无",
+          "privacy_analytics_wording_confirmation": "正确"
+        },
+        "support_contact": "support@fermatmind.com",
+        "policy_version": "help_service_policy.v1",
+        "targets": 12,
+        "content_page_source_rows": 12
+      },
+      "scope_preflight": {
+        "status": "pass",
+        "evidence": "Current scope revises the local package/import source only; no CMS mutation, publish, deploy, search submission, private URL access, payment/refund action, payment-provider change, frontend fallback content, Operator approval claim, or secret/env/cookie/token read is allowed."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          {
+            "command": "python3 -m json.tool backend/docs/help/import-packages/help-service-content-drafts-01.import.v1.json >/dev/null",
+            "status": "pass"
+          },
+          {
+            "command": "python3 -m json.tool backend/docs/help/import-packages/content-pages-draft-source/content_pages.help_service_drafts_01.json >/dev/null",
+            "status": "pass"
+          },
+          {
+            "command": "python3 -m json.tool backend/docs/help/generated/help-content-draft-policy-revision-apply-01.v1.json >/dev/null",
+            "status": "pass"
+          },
+          {
+            "command": "php -l backend/tests/Feature/Cms/HelpContentImportPackageTest.php",
+            "status": "pass"
+          },
+          {
+            "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=HelpContentImportPackageTest --no-ansi",
+            "status": "passed_with_warning",
+            "notes": "Exited 0 with 524 assertions and existing Laravel file_get_contents warning."
+          },
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "pass"
+          },
+          {
+            "command": "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+            "status": "pass"
+          },
+          {
+            "command": "git diff --check -- backend/docs/help/import-packages/help-service-content-drafts-01.import.v1.json backend/docs/help/import-packages/content-pages-draft-source/content_pages.help_service_drafts_01.json backend/docs/help/generated/help-content-draft-policy-revision-apply-01.v1.json backend/docs/operations/help-content-draft-policy-revision-apply-2026-06-05.md backend/tests/Feature/Cms/HelpContentImportPackageTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+            "status": "pass"
+          }
+        ]
+      },
+      "github": {
+        "status": "pass",
+        "checks": [
+          "hygiene",
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "supply-chain",
+          "content-pack-build-validate",
+          "verify-bigfive",
+          "verify-mbti-legacy",
+          "verify-mbti-v2",
+          "Semgrep OSS"
+        ],
+        "merge_state": "CLEAN"
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": "65b4971023b99af993011894b4684ae8896d41d3",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1954",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "result": {
+      "decision": "LOCAL_IMPORT_PACKAGE_REVISED_WITH_CMS_SYNC_AND_PUBLISH_BLOCKED",
+      "generated_artifact": "backend/docs/help/generated/help-content-draft-policy-revision-apply-01.v1.json",
+      "operations_report": "backend/docs/operations/help-content-draft-policy-revision-apply-2026-06-05.md",
+      "next_task_recommendation": "HELP-CONTENT-DRAFT-POLICY-CMS-SYNC-01"
+    },
+    "scope_validation": {
+      "cms_mutation_performed": false,
+      "publish_performed": false,
+      "deploy_performed": false,
+      "search_submission_performed": false,
+      "payment_or_refund_performed": false,
+      "payment_provider_changed": false,
+      "private_url_access_performed": false,
+      "secret_env_cookie_token_read": false,
+      "operator_approval_claimed": false,
+      "frontend_fallback_content_added": false,
+      "allowed_paths_only": true
+    },
+    "sidecars": [
+      {
+        "id": "HELP-CONTENT-DRAFT-POLICY-CMS-SYNC-01-AUTHORIZATION",
+        "status": "hard_gate",
+        "note": "Syncing revised package fields into the 12 existing CMS draft rows requires separate explicit CMS mutation authorization."
+      },
+      {
+        "id": "HELP-CONTENT-DRAFT-OPERATOR-REVIEW-R2-01",
+        "status": "open_followup",
+        "note": "Operator review R2 can be requested after the revised package is synced to CMS drafts; Codex must not claim review passed."
+      },
+      {
+        "id": "HELP-CONTENT-DRAFT-PUBLISH-BLOCK",
+        "status": "hard_gate",
+        "note": "Publish remains blocked until Operator review passes, publish preflight passes, and exact publish authorization is provided."
+      }
+    ],
+    "next_task": "HELP-CONTENT-DRAFT-POLICY-CMS-SYNC-01",
+    "transitions": [
+      {
+        "at": "2026-06-05",
+        "status": "authorized",
+        "note": "User requested the Help service PR train and listed HELP-CONTENT-DRAFT-POLICY-REVISION-APPLY-01 as the local revised package/import package PR."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "local_artifacts_created_validation_pending",
+        "note": "Applied policy-owner answers, direct-email support contact, first-class ContentPage source fields, generated artifact, operations report, and PR-train metadata; local validation pending."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "local_checks_passed",
+        "note": "JSON/YAML parse, PHP lint, focused HelpContentImportPackageTest, and scoped diff whitespace checks passed."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "pr_opened",
+        "note": "Opened PR #1954 for HELP-CONTENT-DRAFT-POLICY-REVISION-APPLY-01."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "ready_to_merge",
+        "note": "All GitHub checks passed and merge state was CLEAN. Scope remained local package/import artifact, docs, focused package contract, and PR-train metadata only."
       }
     ]
   },
