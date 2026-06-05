@@ -1,0 +1,93 @@
+{
+  "version": "daily_giving_proof_redaction_sop.v1",
+  "generated_at": "2026-06-05T00:00:00+08:00",
+  "mode": "sop_only",
+  "record_created": false,
+  "proof_uploaded": false,
+  "proof_processed": false,
+  "cms_mutation_performed": false,
+  "publish_performed": false,
+  "trust_badge_allowed": false,
+  "storage_classes": {
+    "raw_proof": {
+      "storage": "private_disk_or_private_bucket",
+      "public_access": false,
+      "sitemap_or_llms_allowed": false
+    },
+    "admin_access": {
+      "mode": "private_storage_driver_or_short_ttl_signed_admin_url",
+      "public_access": false
+    },
+    "redacted_public_proof": {
+      "storage": "public_safe_media_or_public_signed_url",
+      "public_access": "allowed_after_review",
+      "must_be_separate_from_raw_proof": true
+    },
+    "withheld_proof": {
+      "reviewer_reason_required": true,
+      "can_power_trust_badge": false,
+      "can_support_high_amplification": false
+    }
+  },
+  "redaction_required_fields": [
+    "donor_legal_name_unless_approved",
+    "donor_email",
+    "donor_phone",
+    "donor_address",
+    "bank_account",
+    "card_number",
+    "payment_account_id",
+    "full_transaction_number",
+    "full_order_number",
+    "payment_provider_user_id",
+    "billing_or_invoice_address",
+    "qr_payment_token",
+    "session_id",
+    "auth_token",
+    "private_receipt_url",
+    "browser_url_with_private_token",
+    "internal_admin_comments"
+  ],
+  "public_visible_after_review": [
+    "recipient_name",
+    "donation_date",
+    "amount",
+    "currency",
+    "non_sensitive_receipt_issuer_name",
+    "proof_status",
+    "short_masked_public_reference"
+  ],
+  "public_api_forbidden_fields": [
+    "proof_private_path",
+    "proof_redaction_notes",
+    "receipt_reference_private",
+    "internal_notes",
+    "created_by_admin_user_id",
+    "updated_by_admin_user_id",
+    "raw_transaction_id",
+    "payment_account",
+    "private_sync_diagnostics"
+  ],
+  "public_api_allowed_fields_after_gates": [
+    "record_code",
+    "recipient_name",
+    "recipient_official_url",
+    "donation_date",
+    "amount_minor",
+    "currency",
+    "donation_status",
+    "proof_status",
+    "proof_public_url",
+    "receipt_reference_redacted",
+    "manual_social_links_after_review",
+    "public_notes"
+  ],
+  "release_review_required": [
+    "raw_proof_private",
+    "public_proof_redacted_or_withheld_reason_present",
+    "recipient_date_amount_verified",
+    "public_notes_claim_linted",
+    "is_indexable_false_retained",
+    "trust_badge_disabled"
+  ]
+}
