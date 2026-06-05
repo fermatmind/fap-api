@@ -45393,7 +45393,7 @@
     "repo": "fap-api",
     "branch": "codex/daily-giving-proof-redaction-sop-01",
     "base": "main",
-    "status": "in_progress",
+    "status": "pr_open",
     "train_scope": "window_7_public_benefit_trust_gate",
     "title": "docs(benefit): define DailyGiving proof redaction SOP",
     "depends_on": [
@@ -45457,7 +45457,7 @@
     },
     "failure_reason": null,
     "commit_sha": "7c20a2e5d952b9c34139e2f9a294830a71be41b2",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1910",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -45499,6 +45499,11 @@
         "at": "2026-06-05",
         "status": "commit_recorded",
         "note": "Implementation commit 7c20a2e5d952b9c34139e2f9a294830a71be41b2 recorded before push."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/1910."
       }
     ]
   }
