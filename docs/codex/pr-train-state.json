@@ -44177,7 +44177,7 @@
     "repo": "fap-api",
     "branch": "codex/foundation-trust-page-asset-inventory-01",
     "base": "main",
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "train_scope": "window_7_public_benefit_trust_gate",
     "title": "docs(benefit): inventory Foundation trust page assets",
     "depends_on": [
@@ -44234,8 +44234,8 @@
       "next_pr_supported": "FOUNDATION-CLAIM-BOUNDARY-CONTRACT-01"
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "9a55fe83a813f28d053ddf9ad0f0dfa19b91b6f8",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1898",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -44277,6 +44277,11 @@
         "at": "2026-06-05",
         "status": "local_checks_passed",
         "note": "Foundation trust page inventory validated with public checks, JSON/YAML parse, and scoped diff check."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/1898."
       }
     ]
   }
