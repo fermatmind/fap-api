@@ -45089,7 +45089,7 @@
       "next_pr_supported": "FOUNDATION-FAQ-SCHEMA-GATE-01"
     },
     "failure_reason": null,
-    "commit_sha": null,
+    "commit_sha": "29402eea664022f2e988098ed3afb07d974801cf",
     "pr_url": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -45128,6 +45128,11 @@
         "at": "2026-06-05",
         "status": "local_checks_passed",
         "note": "Foundation CMS field map validated with focused PHPUnit, JSON/YAML parse, scoped diff check, and allowed-path review."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "commit_recorded",
+        "note": "Implementation commit 29402eea664022f2e988098ed3afb07d974801cf recorded before push."
       }
     ]
   }
