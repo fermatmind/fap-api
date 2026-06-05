@@ -44311,7 +44311,7 @@
     "repo": "fap-api",
     "branch": "codex/help-content-draft-postcheck-01",
     "base": "origin/main",
-    "status": "local_checks_passed",
+    "status": "github_checks_pending",
     "train_scope": "window_9_help_service_content",
     "title": "docs(help): archive Help CMS draft postcheck",
     "depends_on": [
@@ -44369,8 +44369,8 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "2ce4ffbc710b0bd01d371cc12aa8e1b4a0583a46",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1903",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -44452,6 +44452,11 @@
         "at": "2026-06-05",
         "status": "local_checks_passed",
         "note": "Generated artifact, state JSON, manifest YAML, and scoped diff checks passed."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/1903 with implementation commit 2ce4ffbc710b0bd01d371cc12aa8e1b4a0583a46; GitHub checks are pending."
       }
     ]
   },
