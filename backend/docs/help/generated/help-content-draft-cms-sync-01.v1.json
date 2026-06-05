@@ -1,0 +1,364 @@
+{
+  "schema": "help-content-draft-cms-sync-01.v1",
+  "task": "HELP-CONTENT-DRAFT-CMS-SYNC-01",
+  "generated_at": "2026-06-05",
+  "decision": "CMS_DRAFT_SYNC_COMPLETED_WITH_PUBLISH_BLOCKED",
+  "source_package": {
+    "zip_path": "/Users/rainie/Desktop/费马资料文件/fermatmind-help-service-content-drafts-01.zip",
+    "revised_sha256": "f971f5cd279018c2db469ccd87c43484c4983de5484e8c1e47343aa5813e6bb9",
+    "expected_revised_sha256": "f971f5cd279018c2db469ccd87c43484c4983de5484e8c1e47343aa5813e6bb9",
+    "sha256_match": true,
+    "local_source_file": "/private/tmp/help-content-draft-cms-sync-01-source/content_pages.help_service_drafts_01.revised.json",
+    "local_source_sha256": "911ee53b6e4f8d4bb8ca368fa9e0ffccd6c6ef10a11e06385dc9e8faa17e5128",
+    "local_source_rows": 12,
+    "remote_temp_source_dir": "/tmp/fm-help-cms-sync.Ln1ubI",
+    "remote_temp_source_removed": true
+  },
+  "dry_run": {
+    "command": "php artisan content-pages:import-local-baseline --dry-run --upsert --status=draft --source-dir=/tmp/fm-help-cms-sync.Ln1ubI --no-ansi",
+    "passed": true,
+    "files_found": 1,
+    "pages_found": 12,
+    "will_create": 0,
+    "will_update": 12,
+    "will_skip": 0
+  },
+  "sync": {
+    "command": "php artisan content-pages:import-local-baseline --upsert --status=draft --source-dir=/tmp/fm-help-cms-sync.Ln1ubI --no-ansi",
+    "performed": true,
+    "files_found": 1,
+    "pages_found": 12,
+    "will_create": 0,
+    "will_update": 12,
+    "will_skip": 0,
+    "status_mode": "draft",
+    "upsert": true
+  },
+  "cms_postcheck": {
+    "count": 12,
+    "all_status_draft": true,
+    "all_non_public": true,
+    "all_non_indexable": true,
+    "all_unpublished": true,
+    "all_owner_review": true,
+    "rows": [
+      {
+        "id": 42,
+        "locale": "en",
+        "slug": "help-data-deletion",
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "published_revision_id": null,
+        "published_at": null,
+        "path": "/help/data-deletion",
+        "canonical_path": "/help/data-deletion",
+        "review_state": "owner_review",
+        "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:DATA-DELETION-REQUEST-FAQ-01",
+        "source_updated_at": "2026-06-05T00:00:00.000000Z",
+        "summary_sha256": "0db5493cc1f2621040e76c8f1af09d4473849af182fb9870f18ce0e43ad33cea",
+        "content_md_sha256": "edf811aca0acacb468c5ab1a090c0a21f5c15377588e6a96443809de5c73c292"
+      },
+      {
+        "id": 41,
+        "locale": "zh-CN",
+        "slug": "help-data-deletion",
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "published_revision_id": null,
+        "published_at": null,
+        "path": "/help/data-deletion",
+        "canonical_path": "/help/data-deletion",
+        "review_state": "owner_review",
+        "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:DATA-DELETION-REQUEST-FAQ-01",
+        "source_updated_at": "2026-06-05T00:00:00.000000Z",
+        "summary_sha256": "079e387425c0100e5011c5fdc16c3849fdad7b4b60203f73d6a3140c9c45f463",
+        "content_md_sha256": "f39bc87b2ae05e3b7e756521b0ccbbff97086ae8c8110a9c262e2f39cb4552b8"
+      },
+      {
+        "id": 34,
+        "locale": "en",
+        "slug": "help-payment-refund",
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "published_revision_id": null,
+        "published_at": null,
+        "path": "/help/payment-refund",
+        "canonical_path": "/help/payment-refund",
+        "review_state": "owner_review",
+        "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:PAYMENT-REFUND-FAQ-PACKAGE-01",
+        "source_updated_at": "2026-06-05T00:00:00.000000Z",
+        "summary_sha256": "2dfe2110c45b2c01bb3ceab94aad4259d088d9959f606254366d990c40e58ce6",
+        "content_md_sha256": "1565371ab1a3aab602673993d38a16d9c338f6c227322c908e96cbb845a460d9"
+      },
+      {
+        "id": 33,
+        "locale": "zh-CN",
+        "slug": "help-payment-refund",
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "published_revision_id": null,
+        "published_at": null,
+        "path": "/help/payment-refund",
+        "canonical_path": "/help/payment-refund",
+        "review_state": "owner_review",
+        "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:PAYMENT-REFUND-FAQ-PACKAGE-01",
+        "source_updated_at": "2026-06-05T00:00:00.000000Z",
+        "summary_sha256": "3fe66c055be88eb35b3b433f6a19275fe9a8e2ed60127368b1b1581c9bb7052a",
+        "content_md_sha256": "d1eb540b5e981e196571f035427a43933a8348ea9f279547d00ae8b4b60ecbd2"
+      },
+      {
+        "id": 38,
+        "locale": "en",
+        "slug": "help-privacy-data",
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "published_revision_id": null,
+        "published_at": null,
+        "path": "/help/privacy-data",
+        "canonical_path": "/help/privacy-data",
+        "review_state": "owner_review",
+        "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:PRIVACY-FAQ-PACKAGE-01",
+        "source_updated_at": "2026-06-05T00:00:00.000000Z",
+        "summary_sha256": "4f7b27a41da6793ad0157cbb39823b9998f69ea6326d83080e915961666f2c7a",
+        "content_md_sha256": "b166b946f388099214b7dfbbad5a957da539336de1786822ebd0def033234be8"
+      },
+      {
+        "id": 37,
+        "locale": "zh-CN",
+        "slug": "help-privacy-data",
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "published_revision_id": null,
+        "published_at": null,
+        "path": "/help/privacy-data",
+        "canonical_path": "/help/privacy-data",
+        "review_state": "owner_review",
+        "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:PRIVACY-FAQ-PACKAGE-01",
+        "source_updated_at": "2026-06-05T00:00:00.000000Z",
+        "summary_sha256": "476a53ad52b682bb92c03c4a34cc7d19343d6f4ee2f2557b4580334e596f4713",
+        "content_md_sha256": "b7657b8ecf9d795f88eba1b43541d19cbc93680b5ed866dcc862ee1f903897ee"
+      },
+      {
+        "id": 36,
+        "locale": "en",
+        "slug": "help-result-recovery",
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "published_revision_id": null,
+        "published_at": null,
+        "path": "/help/result-recovery",
+        "canonical_path": "/help/result-recovery",
+        "review_state": "owner_review",
+        "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:RESULT-RECOVERY-FAQ-01",
+        "source_updated_at": "2026-06-05T00:00:00.000000Z",
+        "summary_sha256": "215161a1da66ad71307b1d267562df59ecd46e7d142f79e44c40a7660f9514e6",
+        "content_md_sha256": "fd01919ef2252a950cd5d64a12ecb27864d1f771024c4a0892a5f40d7d77c2af"
+      },
+      {
+        "id": 35,
+        "locale": "zh-CN",
+        "slug": "help-result-recovery",
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "published_revision_id": null,
+        "published_at": null,
+        "path": "/help/result-recovery",
+        "canonical_path": "/help/result-recovery",
+        "review_state": "owner_review",
+        "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:RESULT-RECOVERY-FAQ-01",
+        "source_updated_at": "2026-06-05T00:00:00.000000Z",
+        "summary_sha256": "c75ddf9a55f35259eac08f9ff9fc7497ce0c4839e849fac61fbc7038a54b38fd",
+        "content_md_sha256": "022b325d11acaf5a30ee6f47b0e2bf7a39091e10481299474e6a9835d2d61aec"
+      },
+      {
+        "id": 32,
+        "locale": "en",
+        "slug": "help-unlock-failure",
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "published_revision_id": null,
+        "published_at": null,
+        "path": "/help/unlock-failure",
+        "canonical_path": "/help/unlock-failure",
+        "review_state": "owner_review",
+        "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:UNLOCK-FAILURE-HELP-CARD-01",
+        "source_updated_at": "2026-06-05T00:00:00.000000Z",
+        "summary_sha256": "51e99ccfe5e3dd558401cd7741bfd0667b94eec8732744021b2cd509c7a570ca",
+        "content_md_sha256": "5ef02631889fd9d4e81a0d53c0428150e6ca1361bf9c2d6b5eddd576b6222410"
+      },
+      {
+        "id": 31,
+        "locale": "zh-CN",
+        "slug": "help-unlock-failure",
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "published_revision_id": null,
+        "published_at": null,
+        "path": "/help/unlock-failure",
+        "canonical_path": "/help/unlock-failure",
+        "review_state": "owner_review",
+        "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:UNLOCK-FAILURE-HELP-CARD-01",
+        "source_updated_at": "2026-06-05T00:00:00.000000Z",
+        "summary_sha256": "8432ddf4a18aa3c5a023ca7f82840940040511f59e638f71ccc0a58fc4f0fc94",
+        "content_md_sha256": "e277080867fca7c0c32a4271a89c0b9eb6a0cf91d868bf460fdf290e512dbbd6"
+      },
+      {
+        "id": 40,
+        "locale": "en",
+        "slug": "help-use-boundaries",
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "published_revision_id": null,
+        "published_at": null,
+        "path": "/help/use-boundaries",
+        "canonical_path": "/help/use-boundaries",
+        "review_state": "owner_review",
+        "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:NONDIAGNOSTIC-HELP-COPY-01",
+        "source_updated_at": "2026-06-04T00:00:00.000000Z",
+        "summary_sha256": "80e2320d18f233f4f8ba4b50b8a2485aa947e772104383e649caad5e2f477a41",
+        "content_md_sha256": "cd2c1c2fb428c65d633ec84915d926128c725851655df5f414ea36a13d47796a"
+      },
+      {
+        "id": 39,
+        "locale": "zh-CN",
+        "slug": "help-use-boundaries",
+        "status": "draft",
+        "is_public": false,
+        "is_indexable": false,
+        "published_revision_id": null,
+        "published_at": null,
+        "path": "/help/use-boundaries",
+        "canonical_path": "/help/use-boundaries",
+        "review_state": "owner_review",
+        "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:NONDIAGNOSTIC-HELP-COPY-01",
+        "source_updated_at": "2026-06-04T00:00:00.000000Z",
+        "summary_sha256": "6681f38e73e4ca9023f781cfb6a8bc5a71c329f56d2569a18cacad67bc7a123b",
+        "content_md_sha256": "6fe8a97d4b7691a5265a8b4cb12a0a823f6ebd09624eedae2265c022f42815b2"
+      }
+    ]
+  },
+  "public_surface_checks": {
+    "localized_routes": {
+      "checked_count": 12,
+      "all_404": true,
+      "routes": [
+        {
+          "url": "https://fermatmind.com/zh/help/unlock-failure",
+          "status": 404
+        },
+        {
+          "url": "https://fermatmind.com/zh/help/payment-refund",
+          "status": 404
+        },
+        {
+          "url": "https://fermatmind.com/zh/help/result-recovery",
+          "status": 404
+        },
+        {
+          "url": "https://fermatmind.com/zh/help/privacy-data",
+          "status": 404
+        },
+        {
+          "url": "https://fermatmind.com/zh/help/use-boundaries",
+          "status": 404
+        },
+        {
+          "url": "https://fermatmind.com/zh/help/data-deletion",
+          "status": 404
+        },
+        {
+          "url": "https://fermatmind.com/en/help/unlock-failure",
+          "status": 404
+        },
+        {
+          "url": "https://fermatmind.com/en/help/payment-refund",
+          "status": 404
+        },
+        {
+          "url": "https://fermatmind.com/en/help/result-recovery",
+          "status": 404
+        },
+        {
+          "url": "https://fermatmind.com/en/help/privacy-data",
+          "status": 404
+        },
+        {
+          "url": "https://fermatmind.com/en/help/use-boundaries",
+          "status": 404
+        },
+        {
+          "url": "https://fermatmind.com/en/help/data-deletion",
+          "status": 404
+        }
+      ]
+    },
+    "enumeration": [
+      {
+        "url": "https://fermatmind.com/sitemap.xml",
+        "status": 200,
+        "target_hits": 0,
+        "hits": []
+      },
+      {
+        "url": "https://fermatmind.com/llms.txt",
+        "status": 200,
+        "target_hits": 0,
+        "hits": []
+      },
+      {
+        "url": "https://fermatmind.com/llms-full.txt",
+        "status": 200,
+        "target_hits": 0,
+        "hits": []
+      }
+    ],
+    "all_target_hits_zero": true
+  },
+  "operator_review": {
+    "review_passed": false,
+    "operator_editorial_approval_present": false,
+    "approval_claimed_by_codex": false,
+    "next_gate": "Operator editorial review remains required before publish."
+  },
+  "scope_validation": {
+    "cms_mutation_performed": true,
+    "cms_mutation_scope": "existing 12 Help ContentPage draft rows only",
+    "records_created": 0,
+    "publish_performed": false,
+    "deploy_performed": false,
+    "search_submission_performed": false,
+    "payment_or_refund_performed": false,
+    "payment_provider_changed": false,
+    "private_url_access_performed": false,
+    "secret_env_cookie_token_read": false,
+    "operator_approval_claimed": false
+  },
+  "sidecars": [
+    {
+      "id": "HELP-CONTENT-DRAFT-CMS-SYNC-OPERATOR-APPROVAL",
+      "status": "hard_gate",
+      "note": "Operator editorial approval remains separate and was not claimed."
+    },
+    {
+      "id": "HELP-CONTENT-DRAFT-CMS-SYNC-PUBLISH-BLOCK",
+      "status": "hard_gate",
+      "note": "Publish, indexability, sitemap/llms inclusion, deploy, and search submission remain forbidden."
+    },
+    {
+      "id": "HELP-CONTENT-DRAFT-CMS-SYNC-SUPPORT-CONTACT-FIELD",
+      "status": "open_publish_preflight",
+      "note": "support@fermatmind.com exists in the import package layer; a first-class ContentPage support_contact field is still not verified."
+    }
+  ]
+}
