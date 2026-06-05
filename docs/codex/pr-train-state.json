@@ -44705,8 +44705,8 @@
       }
     },
     "failure_reason": "Visible draft content fields in the v01 package hit private-identifier/result-link guard categories; Operator editorial review request was not made.",
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "702f64ec56f6da3e56d4f320108cbf44d63f7e32",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1919",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -44778,6 +44778,11 @@
         "at": "2026-06-05",
         "status": "blocked_private_identifier_guard",
         "note": "Zip SHA and file list passed, 12 draft rows matched merged import/postcheck/preflight evidence, but visible package draft fields hit private identifier/result-link guard categories. Review request was not made."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/1919 with blocked review artifact commit 702f64ec56f6da3e56d4f320108cbf44d63f7e32; GitHub checks are pending."
       }
     ]
   },
