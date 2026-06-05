@@ -98,3 +98,10 @@ Prefer a repo-compatible default implementation and mark options as optional.
 ### Controlled CMS Publish Discipline
 - Controlled Codex-assisted article publish is permitted only through the backend `articles:publish-controlled` command after exact user confirmation, successful preflight, explicit boundary-context claim-warning acknowledgement when needed, and audit logging.
 - Codex must not use generic CMS UI publish clicks, uncontrolled API publish endpoints, or production content mutation outside that controlled SOP.
+
+### DailyGiving Proof Handling Discipline
+- Original charity donation receipt/proof images may be uploaded as the public proof media asset when the operator explicitly approves that original image for public use. A separate redacted derivative is not required for DailyGiving public proof.
+- Raw private storage paths, redaction notes, backend-only ledger fields, tokens, private URLs, secrets, and system credentials must never be exposed by public APIs, frontend rendering, sitemap, llms, social distribution, or search submission.
+- `proof_public_url` is the only public proof media field. It must point to the operator-approved public media URL for the original charity donation proof image and must be approved through the backend proof gate before a DailyGiving record can be public.
+- Backend authority may not be bypassed by frontend hardcoded URLs or CMS fallback copy.
+- DailyGiving records with `is_public=true` must remain `is_indexable=false` until a separate indexability gate explicitly approves sitemap and llms inclusion. Trust badges, official partnership/endorsement claims, and guaranteed-impact claims remain blocked unless separately source-backed and approved.

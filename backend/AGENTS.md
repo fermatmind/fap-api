@@ -105,6 +105,13 @@
 - Mutable editorial, marketing, social, article, landing page, and SEO images must be uploaded to Media Library and referenced by CMS metadata or generated variants.
 - Public APIs must not emit historical Tencent/COS media URLs or ad hoc raw media URLs for CMS-backed surfaces.
 
+## DailyGiving proof handling rules
+- Original charity donation receipt/proof images may be uploaded as the public proof media asset when the operator explicitly approves that original image for public use. A separate redacted derivative is not required for DailyGiving public proof.
+- Raw private storage paths, redaction notes, backend-only ledger fields, tokens, private URLs, secrets, and system credentials must never be exposed by public APIs, frontend rendering, sitemap, llms, social distribution, or search submission.
+- `proof_public_url` is the only public proof media field. It must point to the operator-approved public media URL for the original charity donation proof image and must pass the backend proof gate before a DailyGiving record can be public.
+- Backend authority may not be bypassed by frontend hardcoded URLs or CMS fallback copy.
+- DailyGiving records with `is_public=true` must remain `is_indexable=false` until a separate indexability gate explicitly approves sitemap and llms inclusion. Trust badges, official partnership/endorsement claims, and guaranteed-impact claims remain blocked unless separately source-backed and approved.
+
 ## Final V4 backend protocols
 - `content_baselines` may exist only for new environment initialization, DB recovery, baseline imports, disaster recovery, and dry-run validation. They must not be used as runtime page-rendering authority.
 - Large content imports must include schema validation and dry-run support before import, especially career DOCX conversion, slugs, sections, SEO fields, media references, and publication state.
