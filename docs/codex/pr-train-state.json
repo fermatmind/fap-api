@@ -45474,7 +45474,7 @@
     "repo": "fap-api",
     "branch": "codex/help-cms-service-fields-01",
     "base": "origin/main",
-    "status": "pr_opened",
+    "status": "merged",
     "train_scope": "window_9_help_service_content",
     "title": "feat(cms): add Help service ContentPage fields",
     "depends_on": [
@@ -45518,16 +45518,27 @@
         ]
       },
       "github": {
-        "status": "pending",
-        "checks": []
+        "status": "pass",
+        "checks": [
+          "hygiene",
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "supply-chain",
+          "content-pack-build-validate",
+          "verify-bigfive",
+          "verify-mbti-legacy",
+          "verify-mbti-v2",
+          "Semgrep OSS"
+        ],
+        "merge_state": "CLEAN"
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
+    "commit_sha": "6527cc9265f88bfd1bb281d6ae88f2f3bb7e2e05",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1947",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-05T15:09:05Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "result": {
       "decision": "CONTENT_PAGE_HELP_SERVICE_FIELDS_ADDED_WITHOUT_CMS_MUTATION",
       "generated_artifact": "backend/docs/help/generated/help-cms-service-fields-01.v1.json",
@@ -45593,6 +45604,16 @@
         "at": "2026-06-05",
         "status": "github_fix_local_checks_passed",
         "note": "Focused runtime-freeze classifier test and scoped diff whitespace checks passed after the narrow BigFive gate fix."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed after the scoped BigFive freeze-gate fix and merge state was CLEAN."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "merged_closeout_reconciled",
+        "note": "PR #1947 merged on GitHub at 2026-06-05T15:09:05Z with merge commit 6527cc9265f88bfd1bb281d6ae88f2f3bb7e2e05; origin/main contains the merge commit; remote branch was deleted and local cleanup was complete."
       }
     ]
   },
