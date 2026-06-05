@@ -46128,10 +46128,10 @@
         "notes": "CMS import package test, JSON/YAML parse, and scoped diff check passed. No CMS write performed."
       },
       "github": {
-        "status": "pass",
-        "evidence": "GitHub checks passed on PR #1915 before ready-to-merge ledger update.",
+        "status": "pending",
+        "evidence": "PR rebased onto latest origin/main; waiting for GitHub checks on rebased head.",
         "pr_url": "https://github.com/fermatmind/fap-api/pull/1915",
-        "commit_sha": "a9b39402db0d617dd13f76d8abe738f90ef4fc1a"
+        "commit_sha": "fdb6b1e1b840fdc4ddeeefde7813d120c4b38a95"
       }
     },
     "result": {
@@ -46146,7 +46146,7 @@
       "search_submit_allowed": false
     },
     "failure_reason": null,
-    "commit_sha": "a9b39402db0d617dd13f76d8abe738f90ef4fc1a",
+    "commit_sha": "fdb6b1e1b840fdc4ddeeefde7813d120c4b38a95",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1915",
     "transitions": [
       {
@@ -46170,6 +46170,11 @@
         "status": "ready_to_merge",
         "evidence": "GitHub checks passed; PR is ready for merge after ledger update checks pass.",
         "commit_sha": "a9b39402db0d617dd13f76d8abe738f90ef4fc1a"
+      },
+      {
+        "status": "rebased_ready_to_merge",
+        "evidence": "PR rebased onto latest origin/main after main moved during checks.",
+        "commit_sha": "fdb6b1e1b840fdc4ddeeefde7813d120c4b38a95"
       }
     ]
   },
