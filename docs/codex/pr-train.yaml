@@ -20768,7 +20768,7 @@ prs:
     branch: codex/seo-dash-collector-01-readiness
     title: "docs(seo): define post-migration collector dry-run readiness"
     train_scope: seo_intel_collector_dry_run_readiness
-    status: executing
+    status: merged
     depends_on:
       - SEO-DASH-00-RECONCILE
       - SEO-DASH-API-01
@@ -21319,7 +21319,7 @@ prs:
     branch: codex/article-cta-route-gate-01
     title: "docs(seo): gate article CTA routes"
     train_scope: seo_article_system_window_6
-    status: planned
+    status: executing
     depends_on:
       - ARTICLE-INTERNAL-LINK-PLAN-01
     scope:

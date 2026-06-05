@@ -1,0 +1,131 @@
+{
+  "artifact_id": "ARTICLE-CTA-ROUTE-GATE-01",
+  "date": "2026-06-05",
+  "scope": "seo_article_cta_route_gate",
+  "boundaries": {
+    "article_copy_written": false,
+    "title_h1_meta_faq_cta_copy_written": false,
+    "cms_draft_created": false,
+    "publish_executed": false,
+    "search_submission_executed": false,
+    "private_url_accessed": false,
+    "runtime_changed": false
+  },
+  "decision": {
+    "public_test_and_article_ctas": "GO",
+    "career_hub_or_career_page_ctas": "CONDITIONAL",
+    "private_tokenized_or_user_specific_ctas": "NO-GO"
+  },
+  "allowed_target_families": [
+    {
+      "family": "public_test_landing_page",
+      "status": "allowed",
+      "required_proof": [
+        "public_route",
+        "canonical",
+        "indexable",
+        "not_take_result_order_payment_share_history"
+      ]
+    },
+    {
+      "family": "published_article_page",
+      "status": "allowed",
+      "required_proof": [
+        "published",
+        "canonical",
+        "indexable",
+        "sitemap_llms_after_publish"
+      ]
+    },
+    {
+      "family": "career_hub",
+      "status": "conditional",
+      "required_proof": [
+        "career_hub_strategy_approved",
+        "public_canonical_eligibility"
+      ]
+    },
+    {
+      "family": "tier_a_career_page",
+      "status": "conditional",
+      "required_proof": [
+        "CAREER-TIER-A-LINK-ELIGIBILITY"
+      ]
+    }
+  ],
+  "blocked_route_patterns": [
+    "/result/**",
+    "/orders/**",
+    "/share/**",
+    "/pay/**",
+    "/payment/**",
+    "/history/**",
+    "private_take_session_result_order_payment_share_urls",
+    "tokenized_urls",
+    "user_specific_urls",
+    "dashboard_ops_admin_preview_draft_urls",
+    "external_competitor_pages"
+  ],
+  "route_validation_contract": [
+    "locale_route_shape",
+    "host",
+    "private_segment_scan",
+    "query_scan",
+    "indexability",
+    "canonical_match",
+    "tracking_params"
+  ],
+  "tracking": {
+    "preferred_event": "article_to_test_click",
+    "runtime_evidence": [
+      "fap-web components/cta/SeoTrackedCtaLink.tsx emits article_to_test_click for article_detail",
+      "fap-web tests/contracts/seo-ops-02-article-cta-attribution.contract.test.ts preserves safe article CTA context",
+      "fap-web lib/tracking/events.ts declares ARTICLE_TO_TEST_CLICK"
+    ],
+    "new_sidecar_opened": false,
+    "production_ingestion_visibility": "Unknown until performance baseline review"
+  },
+  "safe_attribution_fields": [
+    "source_route_family",
+    "source_page_type",
+    "source_slug",
+    "target_test_slug",
+    "target_action",
+    "cta_id",
+    "utm_source",
+    "utm_medium",
+    "utm_campaign",
+    "utm_term",
+    "utm_content",
+    "safe_click_ids_when_tracking_whitelist_accepts_them"
+  ],
+  "rejected_fields": [
+    "email",
+    "phone",
+    "name",
+    "address",
+    "order_no",
+    "attempt_id",
+    "payment_id",
+    "result_id",
+    "share_id",
+    "session_id",
+    "auth_token",
+    "arbitrary_unreviewed_query_parameters"
+  ],
+  "cms_draft_gate_required_fields": [
+    "source_article_locale",
+    "source_article_slug_placeholder",
+    "primary_cta_target_family",
+    "primary_cta_href",
+    "secondary_cta_hrefs",
+    "route_validation_result",
+    "blocked_route_scan_result",
+    "tracking_event_expectation",
+    "safe_attribution_field_list",
+    "unresolved_unknown_fields",
+    "approval_owner",
+    "approval_date"
+  ],
+  "next_task": "ARTICLE-FAQ-SCHEMA-SMOKE-01"
+}
