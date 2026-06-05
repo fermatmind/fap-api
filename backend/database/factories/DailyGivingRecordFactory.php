@@ -26,7 +26,7 @@ class DailyGivingRecordFactory extends Factory
             'amount_minor' => fake()->numberBetween(10000, 500000),
             'currency' => 'USD',
             'donation_status' => DailyGivingRecord::DONATION_COMPLETED,
-            'proof_status' => DailyGivingRecord::PROOF_REDACTED_AVAILABLE,
+            'proof_status' => DailyGivingRecord::PROOF_OPERATOR_APPROVED_AVAILABLE,
             'proof_public_url' => null,
             'proof_private_path' => null,
             'proof_redaction_notes' => null,

@@ -1,58 +1,47 @@
-# DailyGiving Redacted Public Proof Gate
+# DailyGiving Operator-Approved Public Proof Gate
 
 Date: 2026-06-05
 
 PR train item: `DAILY-GIVING-REDACTED-PUBLIC-PROOF-01`
 
-Mode: public-proof readiness gate, generated artifact, and focused contract test only. This PR does not create, edit, upload, or publish a proof file. It does not mutate production records, CMS, media library, search channels, social channels, deploy state, or indexability.
+Mode: public-proof readiness gate, generated artifact, and focused contract test only. This inherited file name still references the earlier redaction gate, but the current repository rule allows operator-approved original charity donation proof images as public proof media. This PR does not create, edit, upload, or publish a proof file. It does not mutate production records, CMS, media library, search channels, social channels, deploy state, or indexability.
 
 ## Decision
 
-The first DailyGiving record may not become public until a separate redacted public proof artifact exists, has been reviewed, and is bound through `proof_public_url` with `proof_status=redacted_available`. The raw transaction proof and raw receipt proof remain private-only operator assets.
+The first DailyGiving record may not become public until an operator-approved public media URL exists and is bound through `proof_public_url` with `proof_status=operator_approved_available`. A separate redacted derivative is not required when the operator approves the original charity donation receipt/proof image for public use.
 
 ## Source Selection
 
-Use the receipt or donor confirmation proof as the preferred source for the public proof artifact. Do not use a bank or wallet transaction detail screenshot as public proof unless a reviewer confirms all account, balance, transaction, and device metadata fields are fully removed.
+Use the charity donation receipt or donor confirmation proof as the preferred public proof source. Do not use a bank or wallet transaction detail screenshot as public proof. Raw private storage paths, admin-only ledger fields, tokens, private URLs, secrets, and credentials must remain private.
 
-## Required Redactions
+## Public Proof Boundary
 
-The redacted public proof must remove or mask every sensitive field if present:
+The operator-approved public proof media may show donation-facing receipt content needed to support the public record, including:
 
-- donor personal identifiers beyond the public brand name approved for display;
-- donor email, phone, address, account, card, wallet, or payment account details;
-- full receipt id, full transaction serial, full order id, and payment-provider user id;
-- balance, account/card tail data, billing metadata, QR token, session id, auth token, and private receipt URLs;
-- local device UI metadata, inbox UI, browser UI, private local paths, or admin comments.
-
-The reviewer may leave only public-safe fields needed to support the record:
-
-- recipient name;
-- recipient public website;
+- recipient name and public website;
 - donation date;
 - amount and currency;
-- non-sensitive issuer context;
-- short masked public reference if needed.
+- public receipt or donor-confirmation context approved by the operator.
+
+The public API and frontend must still never expose private storage paths, admin-only notes, backend-only ledger fields, tokens, private URLs, secrets, credentials, or system metadata.
 
 ## URL Gate
 
 `proof_public_url` may be set only after review. It must:
 
 - use `https://`;
-- point to the redacted artifact, not a raw receipt or transaction proof;
-- avoid private, raw, auth, session, token, account, order, or receipt-private indicators;
-- follow the existing storage gate shape such as a reviewed `/media/`, `/public/`, or `redacted` URL;
+- point to operator-approved public media for the original charity donation proof image;
+- avoid private, auth, session, token, secret, credential, or backend-only indicators;
+- follow the existing storage gate shape such as a reviewed `/media/` or `/public/` URL;
 - be different from `proof_private_path`.
 
 ## Release Blockers
 
 Before any later public activation:
 
-- raw proof is confirmed private-only;
-- redacted public proof exists as a separate reviewed artifact;
-- reviewer confirms no sensitive field remains visible;
-- `proof_status=redacted_available`;
-- `proof_public_url` points only to the reviewed public artifact;
-- `receipt_reference_redacted`, if used, is short and masked;
+- operator-approved public proof media URL exists;
+- `proof_status=operator_approved_available`;
+- `proof_public_url` points only to the operator-approved public media asset;
 - `proof_redaction_notes` and private receipt references remain admin-only;
 - claim lint rejects official partnership, endorsement, certification, guaranteed impact, or UNICEF/UN backing implications;
 - `is_indexable=false` remains set;
@@ -60,4 +49,4 @@ Before any later public activation:
 
 ## Deferred Sidecar
 
-This PR intentionally leaves the actual image redaction and public media URL creation outside the repository. The next production activation remains blocked until an operator supplies a reviewed public media URL and explicitly authorizes production record mutation.
+This PR intentionally leaves public media upload outside the repository. The next production activation remains blocked until an operator supplies the real public media URL and explicitly authorizes production record mutation.

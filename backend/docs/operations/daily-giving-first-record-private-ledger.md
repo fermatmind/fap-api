@@ -22,7 +22,7 @@ The first DailyGiving private draft record is ready for backend private storage 
 | `amount_minor` | `7500` |
 | `currency` | `CNY` |
 | `donation_status` | `completed` |
-| `proof_status` | `redacted_pending` |
+| `proof_status` | `operator_approved_pending` |
 | `is_public` | `false` |
 | `is_indexable` | `false` |
 | `published_at` | `null` |
@@ -37,7 +37,7 @@ The first DailyGiving private draft record is ready for backend private storage 
 - Transaction serial, masked account details, balance, and local device UI metadata are not committed.
 - The receipt donor-facing ID is not committed.
 - `proof_public_url` remains empty.
-- Redacted public proof has not been created.
+- Operator-approved public proof URL has not been bound.
 
 ## Claim Boundary
 
@@ -51,8 +51,8 @@ The first DailyGiving private draft record is ready for backend private storage 
 Before any public visibility:
 
 - Mirror or upload raw proof to a backend-confirmed private disk or bucket.
-- Create a separate redacted public proof artifact, likely from the receipt proof rather than the transaction screenshot.
-- Review the redacted artifact for receipt ID, transaction serial, account, balance, private URL, token, and local device metadata leakage.
+- Upload or select the original charity donation proof image as operator-approved public media.
+- Review the public media URL shape for private URL, token, secret, credential, and backend-only path leakage.
 - Create or update the production DailyGiving record only through an authorized private backend path.
 - Keep `is_public=false` until proof and claim review pass.
 - Keep `is_indexable=false`.

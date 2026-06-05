@@ -108,8 +108,10 @@ class DailyGivingRecordResource extends Resource
                                     ->native(false)
                                     ->options([
                                         DailyGivingRecord::PROOF_NONE => 'None',
-                                        DailyGivingRecord::PROOF_REDACTED_PENDING => 'Redacted Pending',
-                                        DailyGivingRecord::PROOF_REDACTED_AVAILABLE => 'Redacted Available',
+                                        DailyGivingRecord::PROOF_OPERATOR_APPROVED_PENDING => 'Operator Approval Pending',
+                                        DailyGivingRecord::PROOF_OPERATOR_APPROVED_AVAILABLE => 'Operator Approved Public Proof',
+                                        DailyGivingRecord::PROOF_REDACTED_PENDING => 'Legacy Redacted Pending',
+                                        DailyGivingRecord::PROOF_REDACTED_AVAILABLE => 'Legacy Redacted Available',
                                         DailyGivingRecord::PROOF_WITHHELD => 'Withheld',
                                     ])
                                     ->default(DailyGivingRecord::PROOF_NONE),
@@ -221,6 +223,8 @@ class DailyGivingRecordResource extends Resource
                 Tables\Columns\TextColumn::make('proof_status')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
+                        DailyGivingRecord::PROOF_OPERATOR_APPROVED_AVAILABLE => 'success',
+                        DailyGivingRecord::PROOF_OPERATOR_APPROVED_PENDING => 'warning',
                         DailyGivingRecord::PROOF_REDACTED_AVAILABLE => 'success',
                         DailyGivingRecord::PROOF_REDACTED_PENDING => 'warning',
                         DailyGivingRecord::PROOF_WITHHELD => 'gray',
@@ -258,8 +262,10 @@ class DailyGivingRecordResource extends Resource
                 Tables\Filters\SelectFilter::make('proof_status')
                     ->options([
                         DailyGivingRecord::PROOF_NONE => 'None',
-                        DailyGivingRecord::PROOF_REDACTED_PENDING => 'Redacted Pending',
-                        DailyGivingRecord::PROOF_REDACTED_AVAILABLE => 'Redacted Available',
+                        DailyGivingRecord::PROOF_OPERATOR_APPROVED_PENDING => 'Operator Approval Pending',
+                        DailyGivingRecord::PROOF_OPERATOR_APPROVED_AVAILABLE => 'Operator Approved Public Proof',
+                        DailyGivingRecord::PROOF_REDACTED_PENDING => 'Legacy Redacted Pending',
+                        DailyGivingRecord::PROOF_REDACTED_AVAILABLE => 'Legacy Redacted Available',
                         DailyGivingRecord::PROOF_WITHHELD => 'Withheld',
                     ]),
                 Tables\Filters\TernaryFilter::make('is_public'),

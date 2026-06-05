@@ -8,7 +8,7 @@
   "proof_uploaded": false,
   "proof_processed": false,
   "private_proof_path_created": false,
-  "redacted_public_proof_created": false,
+  "operator_approved_public_proof_url_bound": false,
   "cms_mutation_performed": false,
   "publish_performed": false,
   "search_submission_performed": false,
@@ -34,7 +34,7 @@
     ],
     "proof_status_allowed": [
       "none",
-      "redacted_pending"
+      "operator_approved_pending"
     ],
     "is_public": false,
     "is_indexable": false,
@@ -42,7 +42,7 @@
   },
   "public_activation_required_gates": [
     "raw_proof_private_storage_confirmed",
-    "redacted_public_proof_reviewed_or_withheld_reason_recorded",
+    "operator_approved_public_proof_media_or_withheld_reason_recorded",
     "recipient_amount_currency_date_verified_against_receipt",
     "public_projection_private_fields_absent",
     "claim_lint_clean",

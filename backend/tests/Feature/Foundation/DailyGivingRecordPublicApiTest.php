@@ -125,7 +125,7 @@ class DailyGivingRecordPublicApiTest extends TestCase
     public function test_show_exposes_allowed_public_fields(): void
     {
         $record = DailyGivingRecord::factory()->completed()->create([
-            'proof_public_url' => 'https://media.fermatmind.com/foundation/daily-giving/public/redacted-2026-06-05.pdf',
+            'proof_public_url' => 'https://media.fermatmind.com/foundation/daily-giving/public/original-2026-06-05.png',
             'receipt_reference_redacted' => 'REF-REDACTED',
             'social_x_url' => 'https://x.com/fermatmind/status/123',
             'social_linkedin_url' => 'https://linkedin.com/feed/update/456',

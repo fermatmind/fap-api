@@ -69,7 +69,9 @@ Remaining risk:
 - `proof_status=withheld` is publishable by current `isPublishable()` logic. That may be acceptable for privacy, but public amplification needs a clear policy for when withheld proof is allowed.
 - The public API scope does not include `proof_status` filtering. It relies on operator workflow and tests around `isPublishable()`, not on the API query itself.
 
-Conclusion: proof storage is field-separated, but the disk/privacy enforcement path is Unknown. Public amplification should remain blocked until a readiness gate proves proof originals are private and redacted public evidence is intentional.
+Conclusion: proof storage is field-separated, but the disk/privacy enforcement path is Unknown. Public amplification should remain blocked until a readiness gate proves proof originals are private and public evidence is intentional.
+
+2026-06-05 update: this scan's earlier redacted-public-evidence wording is superseded by the repository rule that operator-approved original charity donation proof images may be used as public proof media. The private-path, API-field, noindex, claim, and trust-badge blockers remain unchanged.
 
 ## 5. Public Page Indexability
 
@@ -144,7 +146,7 @@ Permitted later direction:
 Before Daily Giving can be publicly amplified, all of the following should pass:
 
 1. At least one production DailyGiving record is intentionally operator-created, completed or verified, review-approved, and safe for public display.
-2. The record is either backed by a redacted public proof URL or has an approved withheld-proof reason.
+2. The record is either backed by an operator-approved public proof URL or has an approved withheld-proof reason.
 3. Raw proof originals are proven private at the storage/path level.
 4. `proof_private_path`, redaction notes, private receipt references, internal notes, admin IDs, and private sync diagnostics remain absent from public API output.
 5. Public API records and months return the intended records.

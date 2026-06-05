@@ -14,7 +14,7 @@ final class DailyGivingRedactedPublicProofTest extends TestCase
         $artifact = $this->artifact();
 
         foreach ([
-            'redacted_public_proof_created',
+            'operator_approved_public_proof_url_bound',
             'proof_uploaded',
             'production_record_mutated',
             'cms_mutation_performed',
@@ -29,26 +29,22 @@ final class DailyGivingRedactedPublicProofTest extends TestCase
 
         $this->assertFalse($artifact['claim_boundaries']['trust_badge_allowed_now']);
         $this->assertFalse($artifact['claim_boundaries']['public_amplification_allowed_now']);
-        $this->assertSame('reviewed_redacted_public_media_url_exists', $artifact['blocked_until']);
+        $this->assertSame('operator_approved_public_media_url_exists', $artifact['blocked_until']);
     }
 
-    public function test_artifact_requires_redaction_of_sensitive_proof_fields(): void
+    public function test_artifact_forbids_private_and_system_proof_fields_publicly(): void
     {
         $artifact = $this->artifact();
 
         foreach ([
-            'full_receipt_id',
-            'full_transaction_serial',
-            'account_card_wallet_or_payment_account_details',
-            'balance',
             'auth_token',
             'session_id',
+            'private_storage_path',
             'private_receipt_url',
-            'local_device_ui_metadata',
             'private_local_paths',
             'admin_comments',
         ] as $field) {
-            $this->assertContains($field, $artifact['required_redactions']);
+            $this->assertContains($field, $artifact['forbidden_public_proof_fields']);
         }
     }
 
@@ -58,32 +54,31 @@ final class DailyGivingRedactedPublicProofTest extends TestCase
         $gate = $artifact['proof_public_url_gate'];
 
         $this->assertTrue($gate['requires_https']);
-        $this->assertTrue($gate['requires_reviewed_redacted_artifact']);
-        $this->assertSame(DailyGivingRecord::PROOF_REDACTED_AVAILABLE, $gate['requires_proof_status']);
+        $this->assertTrue($gate['requires_operator_approved_public_media']);
+        $this->assertSame(DailyGivingRecord::PROOF_OPERATOR_APPROVED_AVAILABLE, $gate['requires_proof_status']);
         $this->assertTrue($gate['must_not_equal_proof_private_path']);
-        $this->assertContains('redacted', $gate['accepted_shape_markers']);
         $this->assertContains('/media/', $gate['accepted_shape_markers']);
         $this->assertContains('/private/', $gate['forbidden_markers']);
-        $this->assertContains('raw-receipt', $gate['forbidden_markers']);
+        $this->assertContains('auth_token', $gate['forbidden_markers']);
     }
 
-    public function test_model_gate_accepts_reviewed_redacted_public_media_url_only(): void
+    public function test_model_gate_accepts_operator_approved_original_public_media_url_only(): void
     {
         $safeRecord = new DailyGivingRecord([
-            'proof_status' => DailyGivingRecord::PROOF_REDACTED_AVAILABLE,
+            'proof_status' => DailyGivingRecord::PROOF_OPERATOR_APPROVED_AVAILABLE,
             'proof_private_path' => 'daily-giving/private/2026-06-05/raw-receipt.pdf',
-            'proof_public_url' => 'https://media.fermatmind.com/foundation/daily-giving/public/redacted-2026-06-05.pdf',
+            'proof_public_url' => 'https://media.fermatmind.com/foundation/daily-giving/public/original-2026-06-05.png',
         ]);
 
         $this->assertSame([], $safeRecord->proofStorageGateViolations());
 
         $unsafeRecord = new DailyGivingRecord([
-            'proof_status' => DailyGivingRecord::PROOF_REDACTED_AVAILABLE,
+            'proof_status' => DailyGivingRecord::PROOF_OPERATOR_APPROVED_AVAILABLE,
             'proof_private_path' => 'daily-giving/private/2026-06-05/raw-receipt.pdf',
             'proof_public_url' => 'https://media.fermatmind.com/foundation/daily-giving/private/raw-receipt-2026-06-05.pdf',
         ]);
 
-        $this->assertContains('proof_public_url must point to reviewed redacted public proof only', $unsafeRecord->proofStorageGateViolations());
+        $this->assertContains('proof_public_url must point to operator-approved public proof media only', $unsafeRecord->proofStorageGateViolations());
     }
 
     public function test_public_api_forbidden_fields_remain_private_only(): void

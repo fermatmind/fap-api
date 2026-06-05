@@ -17,8 +17,8 @@ final class DailyGivingPublicApiSmokeTest extends TestCase
         $record = DailyGivingRecord::factory()->verified()->create([
             'record_code' => 'FM-GIVING-2026-06-SMOKE',
             'donation_date' => '2026-06-05',
-            'proof_status' => DailyGivingRecord::PROOF_REDACTED_AVAILABLE,
-            'proof_public_url' => 'https://media.fermatmind.com/foundation/daily-giving/public/redacted-smoke-2026-06-05.pdf',
+            'proof_status' => DailyGivingRecord::PROOF_OPERATOR_APPROVED_AVAILABLE,
+            'proof_public_url' => 'https://media.fermatmind.com/foundation/daily-giving/public/original-smoke-2026-06-05.png',
             'proof_private_path' => 'daily-giving/private/2026-06-05/raw-receipt-smoke.pdf',
             'proof_redaction_notes' => 'Test fixture reviewer note.',
             'receipt_reference_private' => 'PRIVATE-SMOKE-REF',
@@ -46,7 +46,7 @@ final class DailyGivingPublicApiSmokeTest extends TestCase
             ->assertJsonPath('ok', true)
             ->assertJsonPath('record.record_code', $record->record_code)
             ->assertJsonPath('record.donation_status', DailyGivingRecord::DONATION_VERIFIED)
-            ->assertJsonPath('record.proof_status', DailyGivingRecord::PROOF_REDACTED_AVAILABLE);
+            ->assertJsonPath('record.proof_status', DailyGivingRecord::PROOF_OPERATOR_APPROVED_AVAILABLE);
 
         $publicRecord = $show->json('record');
 

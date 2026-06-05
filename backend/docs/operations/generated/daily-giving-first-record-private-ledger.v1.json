@@ -21,7 +21,7 @@
     "currency": "CNY",
     "donation_status": "completed",
     "verified": false,
-    "proof_status": "redacted_pending",
+    "proof_status": "operator_approved_pending",
     "proof_public_url": null,
     "is_public": false,
     "is_indexable": false,
@@ -45,7 +45,7 @@
     "deploy_performed": false
   },
   "public_release": {
-    "redacted_public_proof_created": false,
+    "operator_approved_public_proof_url_bound": false,
     "publish_performed": false,
     "search_submission_performed": false,
     "social_distribution_performed": false,
@@ -62,5 +62,5 @@
     "guaranteed_impact_claim_allowed": false,
     "unsupported_stable_daily_operation_claim_allowed": false
   },
-  "next_authorization_required": "DAILY-GIVING-REDACTED-PUBLIC-PROOF-01"
+  "next_authorization_required": "DAILY-GIVING-ORIGINAL-PUBLIC-PROOF-01"
 }

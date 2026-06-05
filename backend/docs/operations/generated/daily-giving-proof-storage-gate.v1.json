@@ -10,10 +10,11 @@
   "enforced_rules": [
     "proof_private_path_requires_private_disk_or_bucket_shape",
     "proof_private_path_rejects_public_url_or_public_media_path",
-    "proof_public_url_requires_https_reviewed_public_proof_shape",
-    "proof_public_url_rejects_private_or_raw_receipt_indicators",
+    "proof_public_url_requires_https_operator_approved_public_media_shape",
+    "proof_public_url_allows_original_charity_donation_proof_image",
+    "proof_public_url_rejects_private_admin_token_or_secret_indicators",
     "proof_public_url_must_not_equal_proof_private_path",
-    "proof_public_url_requires_redacted_available_status",
+    "proof_public_url_requires_operator_approved_available_status",
     "withheld_proof_requires_admin_redaction_notes_reason"
   ],
   "public_projection_forbidden_fields": [
