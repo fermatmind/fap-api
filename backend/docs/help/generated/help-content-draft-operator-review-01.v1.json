@@ -1,0 +1,169 @@
+{
+  "schema": "help-content-draft-operator-review-01.v1",
+  "task": "HELP-CONTENT-DRAFT-OPERATOR-REVIEW-01",
+  "generated_at": "2026-06-05",
+  "decision": "REVIEW_BLOCKED_POLICY_OWNER_INPUTS_REQUIRED",
+  "review_passed": false,
+  "operator_approval_claimed": false,
+  "publish_allowed": false,
+  "source_package": {
+    "zip_path": "/Users/rainie/Desktop/费马资料文件/fermatmind-help-service-content-drafts-01.zip",
+    "sha256": "f971f5cd279018c2db469ccd87c43484c4983de5484e8c1e47343aa5813e6bb9",
+    "expected_sha256": "f971f5cd279018c2db469ccd87c43484c4983de5484e8c1e47343aa5813e6bb9",
+    "sha256_match": true,
+    "schema_version": "help_service_content_drafts.v1",
+    "content_mode": "draft_only",
+    "requires_operator_review": true,
+    "publish_allowed": false,
+    "asset_count": 6,
+    "locale_count": 2,
+    "expected_cms_draft_count": 12
+  },
+  "inputs_reviewed": [
+    "fermatmind-help-service-content-drafts-01/index.json",
+    "fermatmind-help-service-content-drafts-01/01_UNLOCK-FAILURE-HELP-CARD-01.yaml",
+    "fermatmind-help-service-content-drafts-01/02_PAYMENT-REFUND-FAQ-PACKAGE-01.yaml",
+    "fermatmind-help-service-content-drafts-01/03_RESULT-RECOVERY-FAQ-01.yaml",
+    "fermatmind-help-service-content-drafts-01/04_PRIVACY-FAQ-PACKAGE-01.yaml",
+    "fermatmind-help-service-content-drafts-01/05_NONDIAGNOSTIC-HELP-COPY-01.yaml",
+    "fermatmind-help-service-content-drafts-01/06_DATA-DELETION-REQUEST-FAQ-01.yaml",
+    "backend/docs/help/generated/help-content-draft-cms-sync-01.v1.json",
+    "read-only production ContentPage status/hash postcheck",
+    "public help route and sitemap/llms absence checks"
+  ],
+  "cms_draft_postcheck": {
+    "status": "pass",
+    "record_count": 12,
+    "all_status_draft": true,
+    "all_non_public": true,
+    "all_non_indexable": true,
+    "all_unpublished": true,
+    "all_owner_review": true,
+    "records_created": 0,
+    "records_updated_in_this_task": 0,
+    "local_sync_artifact": "backend/docs/help/generated/help-content-draft-cms-sync-01.v1.json",
+    "production_read_only_checked": true
+  },
+  "visible_content_review": {
+    "status": "conditional_pass",
+    "asset_count": 6,
+    "localized_draft_count": 12,
+    "faq_items_per_asset": 4,
+    "visible_body_private_route_hits": 0,
+    "visible_body_raw_identifier_hits": 0,
+    "policy_checklist_contains_forbidden_route_families": true,
+    "policy_checklist_hit_interpretation": "expected guardrail inventory, not visible body exposure",
+    "theme_coverage": {
+      "unlock_failure": "present",
+      "payment_refund": "present",
+      "result_recovery": "present",
+      "privacy_data": "present",
+      "non_diagnostic_boundary": "present",
+      "data_deletion_request": "present"
+    },
+    "private_url_boundary": "pass",
+    "raw_payment_or_order_identifier_boundary": "pass",
+    "medical_or_diagnostic_boundary": "pass_for_editorial_review",
+    "overclaim_boundary": "pass_for_editorial_review"
+  },
+  "public_surface_checks": {
+    "status": "pass",
+    "localized_help_routes_checked": 12,
+    "localized_help_routes_all_404": true,
+    "contact_support_routes": [
+      {
+        "url": "https://fermatmind.com/zh/help/contact-support",
+        "status": 404
+      },
+      {
+        "url": "https://fermatmind.com/en/help/contact-support",
+        "status": 404
+      }
+    ],
+    "sitemap_llms_target_hits": 0,
+    "search_submission_performed": false
+  },
+  "blockers": [
+    {
+      "id": "refund_policy_owner_fields",
+      "status": "blocked",
+      "details": [
+        "refund_exclusions remains operator_review_required",
+        "refund_handling_time remains operator_review_required"
+      ]
+    },
+    {
+      "id": "data_deletion_policy_owner_fields",
+      "status": "blocked",
+      "details": [
+        "data deletion handling_time remains operator_review_required",
+        "retained_data_exceptions remains operator_review_required"
+      ]
+    },
+    {
+      "id": "privacy_analytics_owner_confirmation",
+      "status": "blocked",
+      "details": [
+        "analytics wording still requires operator confirmation before publish",
+        "backend/source-of-truth privacy wording still requires review before publish"
+      ]
+    },
+    {
+      "id": "contact_support_route_and_support_contact",
+      "status": "blocked",
+      "details": [
+        "content package references /help/contact-support internal links",
+        "zh/en /help/contact-support public routes currently return 404",
+        "support@fermatmind.com is user-confirmed, but first-class ContentPage support_contact remains unverified"
+      ]
+    },
+    {
+      "id": "faq_schema_publish_gate",
+      "status": "blocked",
+      "details": [
+        "FAQPage schema remains conditional",
+        "visible FAQ to JSON-LD equality must be verified in a publish preflight after policy fields are finalized"
+      ]
+    }
+  ],
+  "non_blocking_passes": [
+    "Revised v01 package hash matched expected hash.",
+    "All six Help service asset categories are present.",
+    "Visible bodies do not include private result/order/share/pay/payment/history route examples.",
+    "Visible bodies do not request full order number, full payment id, full transaction id, full result URL, or full history URL.",
+    "Production ContentPage rows remain draft, non-public, non-indexable, unpublished, and owner_review.",
+    "Public localized Help routes remain absent from public surface.",
+    "sitemap.xml, llms.txt, and llms-full.txt target hits remain zero."
+  ],
+  "scope_validation": {
+    "cms_mutation_performed": false,
+    "publish_performed": false,
+    "deploy_performed": false,
+    "search_submission_performed": false,
+    "payment_or_refund_performed": false,
+    "payment_provider_changed": false,
+    "private_url_access_performed": false,
+    "secret_env_cookie_token_read": false,
+    "operator_approval_claimed": false,
+    "content_rewrite_performed": false,
+    "allowed_paths_only": true
+  },
+  "sidecars": [
+    {
+      "id": "HELP-CONTENT-DRAFT-OPERATOR-REVIEW-POLICY-OWNER-FIELDS",
+      "status": "hard_gate",
+      "note": "Policy owner must provide refund exclusions, refund handling time, data deletion handling time, retained-data exceptions, and privacy analytics wording confirmation before review can pass."
+    },
+    {
+      "id": "HELP-CONTENT-DRAFT-CONTACT-SUPPORT-ROUTE",
+      "status": "hard_gate",
+      "note": "The package references contact-support internal links, but zh/en public contact-support routes currently return 404."
+    },
+    {
+      "id": "HELP-CONTENT-DRAFT-PUBLISH-BLOCK",
+      "status": "hard_gate",
+      "note": "Publish remains blocked and requires separate explicit publish authorization after policy-owner review and publish preflight."
+    }
+  ],
+  "next_task_recommendation": "HELP-CONTENT-DRAFT-POLICY-OWNER-ANSWERS-01"
+}
