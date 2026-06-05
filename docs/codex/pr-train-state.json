@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-05T11:35:00+08:00",
+  "updated_at": "2026-06-05T03:41:48Z",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -46103,7 +46103,7 @@
     "repo": "fap-api",
     "branch": "codex/daily-giving-public-release-prereq-01",
     "base": "main",
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "train_scope": "window_7_public_benefit_trust_gate",
     "title": "docs(benefit): define DailyGiving public release prerequisites",
     "depends_on": [
@@ -46136,7 +46136,7 @@
       },
       "github": {
         "status": "pending",
-        "evidence": null
+        "evidence": "PR #1914 opened; GitHub checks pending."
       }
     },
     "result": {
@@ -46152,8 +46152,8 @@
       "next_pr_supported": "DAILY-GIVING-PUBLIC-API-SMOKE-01"
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "c832ce3c426fc4c1e51471e8207931a6944340d4",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1914",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -46180,6 +46180,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "notes": "Local syntax, JSON/YAML, focused PHPUnit, and scoped diff checks passed. No production writes or record/proof mutations performed."
+      },
+      {
+        "at": "2026-06-05T03:41:48Z",
+        "from": "local_checks_passed",
+        "to": "pr_open",
+        "notes": "Opened PR #1914 for DailyGiving public release prerequisite contract. No production writes or record/proof mutations performed."
       }
     ]
   }
