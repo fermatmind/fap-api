@@ -24800,7 +24800,7 @@
     "merge_commit": "29ec08275027a517993a7cea0fdc6c117bc85c87"
   },
   "OPS-RELEASE-WORKFLOW-01": {
-    "status": "pr_open_github_checks_pending",
+    "status": "ready_to_merge",
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
     "branch": "codex/ops-release-workflow-01",
@@ -47414,6 +47414,11 @@
           "git diff --cached --check"
         ],
         "notes": "PHP lint, JSON/YAML parsing, focused PHPUnit artifact contract, and scoped diff whitespace checks passed."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #1931 checks passed: hygiene, supply-chain, content-pack-build-validate, Semgrep blocking secrets, Semgrep OSS, semgrep sarif non-blocking upload, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2.",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/1931"
       }
     },
     "result": {
@@ -47482,6 +47487,11 @@
         "at": "2026-06-05",
         "status": "pr_open_github_checks_pending",
         "note": "Opened PR #1931 for scoped draft-create artifact, postcheck report, focused test, and PR-train metadata."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed for PR #1931 and changed files remain confined to draft-create artifact, postcheck report, focused test, and PR-train metadata."
       }
     ]
   }
