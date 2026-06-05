@@ -44491,7 +44491,7 @@
     "repo": "fap-api",
     "branch": "codex/help-content-draft-review-preflight-01",
     "base": "origin/main",
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "train_scope": "window_9_help_service_content",
     "title": "docs(help): prepare Help CMS draft editorial review preflight",
     "depends_on": [
@@ -44546,10 +44546,25 @@
             "status": "passed"
           }
         ]
+      },
+      "github": {
+        "status": "pass",
+        "commands": [
+          "gh pr checks 1908 --watch --interval 15"
+        ],
+        "jobs": [
+          "hygiene",
+          "supply-chain",
+          "content-pack-build-validate",
+          "verify-bigfive",
+          "verify-mbti-legacy",
+          "verify-mbti-v2",
+          "Semgrep blocking secrets"
+        ]
       }
     },
     "failure_reason": null,
-    "commit_sha": "9dc1117fb3d665439258b5378095e7f1199ea921",
+    "commit_sha": "f7dcd33b8832feb0c8da0bd18a96700158c04814",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1908",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -44624,6 +44639,11 @@
         "at": "2026-06-05",
         "status": "pr_open",
         "note": "Opened https://github.com/fermatmind/fap-api/pull/1908 with implementation commit 9dc1117fb3d665439258b5378095e7f1199ea921; GitHub checks are pending."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "ready_to_merge",
+        "note": "PR #1908 GitHub checks passed and PR was CLEAN/MERGEABLE with four scoped files."
       }
     ]
   },
