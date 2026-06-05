@@ -47137,6 +47137,108 @@
       }
     ]
   },
+  "DAILY-GIVING-REDACTED-PUBLIC-PROOF-01": {
+    "repo": "fap-api",
+    "branch": "codex/daily-giving-redacted-public-proof-01",
+    "base": "main",
+    "status": "pr_open_github_checks_pending",
+    "train_scope": "window_7_public_benefit_trust_gate",
+    "title": "docs(benefit): gate DailyGiving redacted public proof",
+    "depends_on": [
+      "DAILY-GIVING-FIRST-RECORD-PRIVATE-LEDGER-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User authorized DAILY-GIVING-REDACTED-PUBLIC-PROOF-01 as a fap-api gate PR defining redacted public proof requirements, checklist, generated artifact, and tests while forbidding real proof handling, publish, index, trust badge, social/search, CMS mutation, and endorsement implications."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "DAILY-GIVING-FIRST-RECORD-PRIVATE-LEDGER-01 merged as PR #1926 at 7d21cdf9f28c234a2c3c5ff107db9627ba4adcc3."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to the redacted public proof gate doc, generated artifact, focused contract test, and docs/codex ledger paths. No proof file, public media URL, production record, CMS mutation, publish, index, trust badge, search, social, or deploy action was performed."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "php -l backend/tests/Feature/Foundation/DailyGivingRedactedPublicProofTest.php",
+          "python3 -m json.tool backend/docs/operations/generated/daily-giving-redacted-public-proof.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=DailyGivingRedactedPublicProofTest --no-ansi",
+          "git diff --check -- backend/docs/operations/daily-giving-redacted-public-proof.md backend/docs/operations/generated/daily-giving-redacted-public-proof.v1.json backend/tests/Feature/Foundation/DailyGivingRedactedPublicProofTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+          "git diff --cached --check"
+        ],
+        "notes": "Passed syntax, JSON/YAML parsing, focused DailyGivingRedactedPublicProofTest, scoped diff check, and focused committed-surface leakage scan. PHPUnit exited 0 with warnings from the temporary checkout missing backend/.env."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "result": {
+      "redacted_public_proof_gate_defined": true,
+      "redacted_public_proof_created": false,
+      "proof_uploaded": false,
+      "production_database_record_mutated": false,
+      "cms_mutation_performed": false,
+      "publish_performed": false,
+      "indexability_enabled": false,
+      "search_submission_performed": false,
+      "social_distribution_performed": false,
+      "deploy_performed": false,
+      "trust_badge_allowed_now": false,
+      "public_amplification_allowed_now": false,
+      "next_pr_supported": "DAILY-GIVING-PROOF-PUBLIC-URL-FRONTEND-ADAPTER-01"
+    },
+    "failure_reason": null,
+    "commit_sha": "5421dbab5c1d466d613b682e6d6d22c51a5378e2",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1932",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "cms_write_performed": false,
+      "publish_performed": false,
+      "redacted_public_proof_created": false,
+      "proof_uploaded": false,
+      "production_database_record_mutated": false,
+      "search_submission_performed": false,
+      "deploy_performed": false,
+      "notes": "Scope stayed within the PR14 docs/generated/test/ledger paths. This PR defines the redacted public proof gate only and leaves actual public media URL creation as a sidecar."
+    },
+    "sidecars": [
+      {
+        "id": "REDACTED_PUBLIC_MEDIA_URL",
+        "status": "blocked_external_operator_input",
+        "note": "A reviewed redacted public media URL is required before production record activation. This is not introduced by the gate PR and must not stop the next adapter PR when local scope validation and required checks are green."
+      }
+    ],
+    "next_task": "DAILY-GIVING-PROOF-PUBLIC-URL-FRONTEND-ADAPTER-01",
+    "transitions": [
+      {
+        "at": "2026-06-05T12:40:00Z",
+        "from": "missing_from_manifest",
+        "to": "in_progress",
+        "notes": "Initialized from explicit user authorization. This PR is gate-only and does not create or upload proof, set proof_public_url, mutate production records, publish, index, create trust badges, submit search URLs, run social distribution, mutate CMS, deploy, or imply UNICEF/UN endorsement."
+      },
+      {
+        "at": "2026-06-05T12:48:00Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "notes": "Local manifest checks passed. The remaining reviewed redacted public media URL is recorded as an external sidecar and does not block the next frontend adapter PR."
+      },
+      {
+        "at": "2026-06-05T12:53:00Z",
+        "from": "local_checks_passed",
+        "to": "pr_open_github_checks_pending",
+        "notes": "Opened https://github.com/fermatmind/fap-api/pull/1932 from codex/daily-giving-redacted-public-proof-01. GitHub required checks are pending."
+      }
+    ]
+  },
   "HELP-CONTENT-DRAFT-CMS-SYNC-01": {
     "repo": "fap-api",
     "branch": "codex/help-content-draft-cms-sync-01",

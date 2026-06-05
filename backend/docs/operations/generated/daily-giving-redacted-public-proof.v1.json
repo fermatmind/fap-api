@@ -1,0 +1,109 @@
+{
+  "id": "DAILY-GIVING-REDACTED-PUBLIC-PROOF-01",
+  "date": "2026-06-05",
+  "mode": "public_proof_readiness_gate_only",
+  "record_code": "FM-GIVING-2026-06-001",
+  "source_selection": {
+    "preferred_public_source": "receipt_or_donor_confirmation_proof",
+    "bank_transaction_screenshot_public_use": "blocked_unless_all_account_balance_transaction_and_device_metadata_are_removed",
+    "raw_proof_storage": "private_only"
+  },
+  "required_redactions": [
+    "donor_personal_identifiers_beyond_approved_public_brand_name",
+    "donor_email_phone_address",
+    "account_card_wallet_or_payment_account_details",
+    "full_receipt_id",
+    "full_transaction_serial",
+    "full_order_id",
+    "payment_provider_user_id",
+    "balance",
+    "billing_metadata",
+    "qr_token",
+    "session_id",
+    "auth_token",
+    "private_receipt_url",
+    "local_device_ui_metadata",
+    "private_local_paths",
+    "admin_comments"
+  ],
+  "allowed_public_fields_after_review": [
+    "recipient_name",
+    "recipient_public_website",
+    "donation_date",
+    "amount_and_currency",
+    "non_sensitive_issuer_context",
+    "short_masked_public_reference"
+  ],
+  "proof_public_url_gate": {
+    "requires_https": true,
+    "requires_reviewed_redacted_artifact": true,
+    "requires_proof_status": "redacted_available",
+    "must_not_equal_proof_private_path": true,
+    "accepted_shape_markers": [
+      "redacted",
+      "/public/",
+      "/media/"
+    ],
+    "forbidden_markers": [
+      "/private/",
+      "raw-receipt",
+      "raw_receipt",
+      "auth_token",
+      "session_id",
+      "receipt_reference_private",
+      "proof_private_path",
+      "internal_notes"
+    ]
+  },
+  "public_api_forbidden_fields": [
+    "proof_private_path",
+    "proof_redaction_notes",
+    "receipt_reference_private",
+    "internal_notes",
+    "created_by_admin_user_id",
+    "updated_by_admin_user_id"
+  ],
+  "claim_boundaries": {
+    "unicef_or_un_endorsement": false,
+    "official_partnership": false,
+    "certification": false,
+    "guaranteed_impact": false,
+    "trust_badge_allowed_now": false,
+    "public_amplification_allowed_now": false
+  },
+  "runtime_actions": {
+    "redacted_public_proof_created": false,
+    "proof_uploaded": false,
+    "production_record_mutated": false,
+    "cms_mutation_performed": false,
+    "publish_performed": false,
+    "indexability_enabled": false,
+    "search_submission_performed": false,
+    "social_distribution_performed": false,
+    "deploy_performed": false
+  },
+  "required_before_public_activation": [
+    "reviewed_redacted_public_proof_artifact",
+    "public_media_url_supplied_by_operator",
+    "proof_status_redacted_available",
+    "proof_public_url_bound_to_reviewed_public_artifact",
+    "private_fields_absent_from_public_api",
+    "claim_lint_passed",
+    "is_indexable_false_retained",
+    "no_trust_badge"
+  ],
+  "sidecar_issues": [
+    {
+      "id": "REDACTED_PUBLIC_MEDIA_URL",
+      "status": "blocked_external_operator_input",
+      "note": "A reviewed redacted public media URL is required before production record activation."
+    },
+    {
+      "id": "FAP_WEB_PROOF_PUBLIC_URL_ADAPTER",
+      "status": "follow_up_pr_required",
+      "note": "The frontend should map proof_public_url to the DailyGiving Evidence link."
+    }
+  ],
+  "next_pr": "DAILY-GIVING-PROOF-PUBLIC-URL-FRONTEND-ADAPTER-01",
+  "blocked_until": "reviewed_redacted_public_media_url_exists"
+}
