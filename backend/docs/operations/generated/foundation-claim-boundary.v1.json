@@ -1,0 +1,125 @@
+{
+  "version": "foundation_claim_boundary.v1",
+  "generated_at": "2026-06-05T00:00:00+08:00",
+  "mode": "contract_only",
+  "publishable_copy_created": false,
+  "allowed_claims": [
+    "independent public-benefit plan",
+    "operator-reviewed record",
+    "redacted proof when available",
+    "public ledger when ready",
+    "DailyGiving remains noindex until release gates pass",
+    "recipient-only United Nations Foundation reference",
+    "proof withheld only with approved reviewer reason"
+  ],
+  "forbidden_claims": [
+    "UN official partner",
+    "联合国官方合作",
+    "official endorsement",
+    "官方背书",
+    "certified by",
+    "官方认证",
+    "guaranteed impact",
+    "formal affiliation",
+    "authorized by UN",
+    "approved by the UN",
+    "fundraising for UN",
+    "official fundraising partner",
+    "registered foundation",
+    "nonprofit unless legally confirmed",
+    "stable daily giving before public records exist",
+    "all records are public",
+    "trust badge without separate readiness"
+  ],
+  "evidence_required_claims": {
+    "daily_donation_is_active": [
+      "private_receipt_exists",
+      "date_verified",
+      "recipient_verified",
+      "amount_verified_or_variance_explained"
+    ],
+    "public_ledger_exists": [
+      "public_api_records_count_greater_than_zero",
+      "completed_or_verified_public_record_exists"
+    ],
+    "public_proof_available": [
+      "redacted_public_proof_url_reviewed",
+      "private_proof_not_public",
+      "proof_gate_passed"
+    ],
+    "amount_donated": [
+      "record_amount_matches_operator_policy_or_variance_documented"
+    ],
+    "continuous_streak": [
+      "multiple_dated_records_exist",
+      "public_api_supports_streak_without_gaps"
+    ],
+    "recipient_confirmation": [
+      "recipient_side_public_confirmation_exists"
+    ],
+    "social_sync_claim": [
+      "manual_social_url_exists",
+      "claim_lint_passed"
+    ]
+  },
+  "before_public_records": {
+    "allowed": [
+      "plan language",
+      "governance language",
+      "proof readiness language",
+      "noindex gated status"
+    ],
+    "forbidden": [
+      "public daily giving ledger is live",
+      "verified daily donation record",
+      "stable daily giving operation",
+      "trust badge",
+      "public amplification proof"
+    ]
+  },
+  "after_public_records": {
+    "allowed": [
+      "public record is available",
+      "record reviewed under release gate",
+      "public proof is redacted or withheld with approved reason",
+      "DailyGiving remains noindex until later indexability preflight"
+    ],
+    "still_forbidden": [
+      "official partnership",
+      "official endorsement",
+      "certification",
+      "authorization by United Nations Foundation or UN",
+      "guaranteed impact",
+      "trust badge without separate readiness",
+      "search submission without separate authorization"
+    ]
+  },
+  "social_sync_constraints": {
+    "mode": "manual_only",
+    "automatic_posting_allowed": false,
+    "credential_handling_allowed": false,
+    "safe_only_after_human_review": true,
+    "forbidden_implications": [
+      "official partnership",
+      "endorsement",
+      "certification",
+      "authorization",
+      "guaranteed impact",
+      "fundraising authority",
+      "trust badge readiness"
+    ]
+  },
+  "proof_withheld_constraints": {
+    "withheld_allowed": true,
+    "reviewer_reason_required": true,
+    "can_power_trust_badge": false,
+    "can_support_high_amplification": false,
+    "can_support_paid_page_proof": false
+  },
+  "validation": {
+    "no_publishable_copy": true,
+    "no_social_copy": true,
+    "no_trust_badge_copy": true,
+    "daily_giving_noindex_retained": true
+  }
+}
