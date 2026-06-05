@@ -1,0 +1,56 @@
+{
+  "version": "daily_giving_public_release_prereq.v1",
+  "generated_at": "2026-06-05T00:00:00+08:00",
+  "mode": "prerequisite_contract",
+  "record_created": false,
+  "proof_uploaded": false,
+  "proof_processed": false,
+  "cms_mutation_performed": false,
+  "publish_performed": false,
+  "search_submission_performed": false,
+  "deploy_performed": false,
+  "required_public_api_gates": {
+    "records_api_min_count": 1,
+    "months_api_min_count": 1,
+    "completed_or_verified_public_records_min_count": 1,
+    "verified_public_records_min_count_for_trust_badge_consideration": 1,
+    "forbidden_public_fields": [
+      "proof_private_path",
+      "proof_redaction_notes",
+      "receipt_reference_private",
+      "internal_notes",
+      "created_by_admin_user_id",
+      "updated_by_admin_user_id"
+    ]
+  },
+  "required_record_gates": {
+    "is_public": true,
+    "is_indexable": false,
+    "donation_status_allowed": [
+      "completed",
+      "verified"
+    ],
+    "proof_status_allowed": [
+      "redacted_available",
+      "withheld"
+    ],
+    "withheld_requires_admin_redaction_notes": true,
+    "redacted_public_proof_requires_proof_public_url": true
+  },
+  "required_indexability_gates": {
+    "daily_giving_page_noindex": true,
+    "daily_giving_sitemap_inclusion_allowed": false,
+    "daily_giving_llms_inclusion_allowed": false
+  },
+  "required_claim_lint_forbidden_claims": [
+    "UN official partner",
+    "联合国官方合作",
+    "official certification",
+    "official endorsement",
+    "guaranteed impact",
+    "stable daily giving operation without public records"
+  ],
+  "trust_badge_allowed_now": false,
+  "public_amplification_allowed_now": false,
+  "next_authorization_required": "DAILY-GIVING-FIRST-RECORD-PRIVATE-LEDGER-01"
+}
