@@ -1,0 +1,183 @@
+{
+  "schema": "help-content-draft-postcheck-01.v1",
+  "task": "HELP-CONTENT-DRAFT-POSTCHECK-01",
+  "generated_at": "2026-06-05",
+  "decision": "POSTCHECK_PASS_WITH_PUBLISH_BLOCKED_SIDECARS",
+  "source_package": {
+    "required_uploaded_zip": "/Users/rainie/Desktop/fermatmind-help-service-content-drafts-01.zip",
+    "zip_sha256": "2e3a947b3b59663e6f359de0237a4efe4e7dc2ec518be93b3bda15ffeb0aaae6",
+    "zip_file_count": 14,
+    "yaml_package_count": 6,
+    "index_schema_version": "help_service_content_drafts.v1",
+    "archive_import_package": "backend/docs/help/import-packages/help-service-content-drafts-01.import.v1.json",
+    "content_page_source": "backend/docs/help/import-packages/content-pages-draft-source/content_pages.help_service_drafts_01.json"
+  },
+  "expected_drafts": {
+    "count": 12,
+    "locales": [
+      "en",
+      "zh-CN"
+    ],
+    "slugs": [
+      "help-data-deletion",
+      "help-payment-refund",
+      "help-privacy-data",
+      "help-result-recovery",
+      "help-unlock-failure",
+      "help-use-boundaries"
+    ]
+  },
+  "cms_readonly_postcheck": {
+    "connection_method": "ssh_alias_fap-api-prod_batchmode_readonly_artisan_tinker",
+    "cms_mutation_performed": false,
+    "secret_env_cookie_token_read": false,
+    "private_url_access_performed": false,
+    "record_count": 12,
+    "all_status_draft": true,
+    "all_non_public": true,
+    "all_non_indexable": true,
+    "all_unpublished": true,
+    "all_review_state_owner_review": true,
+    "all_public_help_paths": true,
+    "private_route_pattern_seen": false,
+    "rows": [
+      {
+        "id": 42,
+        "locale": "en",
+        "slug": "help-data-deletion",
+        "path": "/help/data-deletion",
+        "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:DATA-DELETION-REQUEST-FAQ-01"
+      },
+      {
+        "id": 41,
+        "locale": "zh-CN",
+        "slug": "help-data-deletion",
+        "path": "/help/data-deletion",
+        "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:DATA-DELETION-REQUEST-FAQ-01"
+      },
+      {
+        "id": 34,
+        "locale": "en",
+        "slug": "help-payment-refund",
+        "path": "/help/payment-refund",
+        "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:PAYMENT-REFUND-FAQ-PACKAGE-01"
+      },
+      {
+        "id": 33,
+        "locale": "zh-CN",
+        "slug": "help-payment-refund",
+        "path": "/help/payment-refund",
+        "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:PAYMENT-REFUND-FAQ-PACKAGE-01"
+      },
+      {
+        "id": 38,
+        "locale": "en",
+        "slug": "help-privacy-data",
+        "path": "/help/privacy-data",
+        "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:PRIVACY-FAQ-PACKAGE-01"
+      },
+      {
+        "id": 37,
+        "locale": "zh-CN",
+        "slug": "help-privacy-data",
+        "path": "/help/privacy-data",
+        "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:PRIVACY-FAQ-PACKAGE-01"
+      },
+      {
+        "id": 36,
+        "locale": "en",
+        "slug": "help-result-recovery",
+        "path": "/help/result-recovery",
+        "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:RESULT-RECOVERY-FAQ-01"
+      },
+      {
+        "id": 35,
+        "locale": "zh-CN",
+        "slug": "help-result-recovery",
+        "path": "/help/result-recovery",
+        "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:RESULT-RECOVERY-FAQ-01"
+      },
+      {
+        "id": 32,
+        "locale": "en",
+        "slug": "help-unlock-failure",
+        "path": "/help/unlock-failure",
+        "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:UNLOCK-FAILURE-HELP-CARD-01"
+      },
+      {
+        "id": 31,
+        "locale": "zh-CN",
+        "slug": "help-unlock-failure",
+        "path": "/help/unlock-failure",
+        "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:UNLOCK-FAILURE-HELP-CARD-01"
+      },
+      {
+        "id": 40,
+        "locale": "en",
+        "slug": "help-use-boundaries",
+        "path": "/help/use-boundaries",
+        "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:NONDIAGNOSTIC-HELP-COPY-01"
+      },
+      {
+        "id": 39,
+        "locale": "zh-CN",
+        "slug": "help-use-boundaries",
+        "path": "/help/use-boundaries",
+        "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:NONDIAGNOSTIC-HELP-COPY-01"
+      }
+    ]
+  },
+  "public_surface_checks": {
+    "localized_routes": {
+      "checked_count": 12,
+      "all_404": true,
+      "private_pattern_seen": false
+    },
+    "sitemap_xml": {
+      "status": 200,
+      "target_hits": 0
+    },
+    "llms_txt": {
+      "status": 200,
+      "target_hits": 0
+    },
+    "llms_full_txt": {
+      "status": 200,
+      "target_hits": 0
+    }
+  },
+  "support_contact_check": {
+    "operator_contact": "support@fermatmind.com",
+    "import_package_contains_support_contact": true,
+    "content_page_rows_contain_support_contact": false,
+    "cms_first_class_support_contact_field_verified": false,
+    "status": "sidecar_required"
+  },
+  "publish_gates": {
+    "publish_performed": false,
+    "publish_allowed_now": false,
+    "operator_editorial_approval_present": false,
+    "search_submission_performed": false,
+    "deploy_performed": false,
+    "payment_or_refund_performed": false,
+    "payment_provider_changed": false
+  },
+  "sidecars": [
+    {
+      "id": "HELP-CONTENT-DRAFT-POSTCHECK-SUPPORT-CONTACT-FIELD",
+      "status": "open",
+      "note": "support@fermatmind.com exists in the import package, but the production ContentPage rows do not contain it and no first-class support_contact field was verified."
+    },
+    {
+      "id": "HELP-CONTENT-DRAFT-POSTCHECK-EDITORIAL-APPROVAL",
+      "status": "blocked_until_operator_review",
+      "note": "Operator editorial approval remains required before publish."
+    },
+    {
+      "id": "HELP-CONTENT-DRAFT-POSTCHECK-PUBLISH-BLOCK",
+      "status": "hard_gate",
+      "note": "Draft rows are hidden from public routes, sitemap, and llms surfaces; publish/search submission remains forbidden without separate explicit approval."
+    }
+  ],
+  "next_task": "HELP-CONTENT-DRAFT-REVIEW-PREFLIGHT-01"
+}
