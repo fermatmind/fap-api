@@ -45330,7 +45330,7 @@
     "repo": "fap-api",
     "branch": "codex/help-contact-support-decision-01",
     "base": "origin/main",
-    "status": "pr_opened",
+    "status": "merged",
     "train_scope": "window_9_help_service_content",
     "title": "docs(help): record Help direct email support decision",
     "depends_on": [
@@ -45378,16 +45378,27 @@
         ]
       },
       "github": {
-        "status": "pending",
-        "checks": []
+        "status": "pass",
+        "checks": [
+          "hygiene",
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "supply-chain",
+          "content-pack-build-validate",
+          "verify-bigfive",
+          "verify-mbti-legacy",
+          "verify-mbti-v2",
+          "Semgrep OSS"
+        ],
+        "merge_state": "CLEAN"
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
+    "commit_sha": "0ba72097997e920dd1c1c2e38a1158a6bf993c68",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1942",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-05T14:40:52Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "result": {
       "decision": "DIRECT_EMAIL_SUPPORT_CONTACT_SELECTED_WITH_PUBLISH_STILL_BLOCKED",
       "generated_artifact": "backend/docs/help/generated/help-content-draft-contact-support-decision-01.v1.json",
@@ -45446,6 +45457,16 @@
         "at": "2026-06-05",
         "status": "pr_opened",
         "note": "Opened PR #1942 for HELP-CONTENT-DRAFT-CONTACT-SUPPORT-DECISION-01."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed and merge state was CLEAN. Scope remained docs/ledger only; no CMS mutation or publish was performed."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "merged_closeout_reconciled",
+        "note": "PR #1942 merged on GitHub at 2026-06-05T14:40:52Z with merge commit 0ba72097997e920dd1c1c2e38a1158a6bf993c68; origin/main contains the merge commit; remote branch was deleted and local cleanup was complete."
       }
     ]
   },
