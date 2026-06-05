@@ -44073,6 +44073,166 @@
     "merge_commit": "8dcb7f38db21000271dee7ac45a92ca293c38a9d",
     "merge_commit_sha": "8dcb7f38db21000271dee7ac45a92ca293c38a9d"
   },
+  "HELP-CONTENT-DRAFT-CREATE-01": {
+    "status": "ready_to_merge",
+    "branch": "codex/help-content-draft-create-01",
+    "repo": "fap-api",
+    "title": "ops(cms): create Help service content drafts",
+    "commit_sha": "734404e332b3c0c00648589ceca4064d47aa2151",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1896",
+    "checks": [
+      {
+        "command": "ssh -o BatchMode=yes fap-api-prod ... content-pages:import-local-baseline --dry-run --status=draft --source-dir=/tmp/fm-help-drafts.nnYsTB --no-ansi",
+        "status": "passed",
+        "details": "files_found=1 pages_found=12 will_create=12 will_update=0 will_skip=0"
+      },
+      {
+        "command": "ssh -o BatchMode=yes fap-api-prod ... content-pages:import-local-baseline --status=draft --source-dir=/tmp/fm-help-drafts.nnYsTB --no-ansi",
+        "status": "passed",
+        "details": "files_found=1 pages_found=12 will_create=12 will_update=0 will_skip=0"
+      },
+      {
+        "command": "read-only ContentPage metadata query for target slugs",
+        "status": "passed",
+        "details": "12 records found; IDs 31-42; all draft, non-public, non-indexable, published_revision_id=null, published_at=null"
+      },
+      {
+        "command": "public route absence checks for 12 localized target routes",
+        "status": "passed",
+        "details": "all 12 routes returned 404"
+      },
+      {
+        "command": "sitemap.xml / llms.txt / llms-full.txt target absence checks",
+        "status": "passed",
+        "details": "0 target hits"
+      },
+      {
+        "command": "remote temporary source cleanup",
+        "status": "passed",
+        "details": "/tmp/fm-help-drafts.nnYsTB removed"
+      },
+      {
+        "command": "python3 -m json.tool backend/docs/help/generated/help-content-draft-create-01.v1.json >/dev/null",
+        "status": "passed"
+      },
+      {
+        "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+        "status": "passed"
+      },
+      {
+        "command": "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+        "status": "passed"
+      },
+      {
+        "command": "git diff --check -- backend/docs/help/generated/help-content-draft-create-01.v1.json backend/docs/operations/help-content-draft-create-2026-06-05.md docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+        "status": "passed"
+      },
+      {
+        "command": "git diff --cached --check",
+        "status": "passed"
+      }
+    ],
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "drafts": {
+      "created_count": 12,
+      "ids": [
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42
+      ],
+      "slugs": [
+        "help-unlock-failure",
+        "help-payment-refund",
+        "help-result-recovery",
+        "help-privacy-data",
+        "help-use-boundaries",
+        "help-data-deletion"
+      ],
+      "locales": [
+        "zh-CN",
+        "en"
+      ],
+      "status": "draft",
+      "is_public": false,
+      "is_indexable": false,
+      "published_revision_id": null,
+      "published_at": null
+    },
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "cms_write_performed": true,
+      "cms_write_scope": "create 12 ContentPage draft rows only",
+      "publish_performed": false,
+      "private_url_access_performed": false,
+      "payment_provider_changed": false,
+      "search_submission_performed": false,
+      "deploy_performed": false,
+      "secret_env_cookie_token_read": false,
+      "password_used": false
+    },
+    "sidecars": [
+      {
+        "id": "HELP-CONTENT-DRAFT-CREATE-SUPPORT-CONTACT-FIELD",
+        "status": "needs_postcheck",
+        "note": "ContentPage has no first-class support_contact field; import package contains support@fermatmind.com, but CMS row-level support-contact authority needs PR5/PR6 verification before publish."
+      },
+      {
+        "id": "HELP-CONTENT-DRAFT-CREATE-TEMP-SOURCE",
+        "status": "closed",
+        "note": "Production release did not contain PR3 package files, so temporary source-dir import was used and removed. No deploy was performed."
+      },
+      {
+        "id": "SERVER-PASSWORD-ROTATION-RECOMMENDED",
+        "status": "operator_followup",
+        "note": "A server password was pasted in chat. Codex did not use it; operator should rotate it if valid."
+      }
+    ],
+    "next_task": "HELP-CONTENT-DRAFT-POSTCHECK-01",
+    "transitions": [
+      {
+        "at": "2026-06-05",
+        "status": "authorized",
+        "note": "User authorized Codex to use SSH alias fap-api-prod for HELP-CONTENT-DRAFT-CREATE-01 with strict no-publish/no-search/no-secret/no-private-url boundaries."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "draft_create_completed",
+        "note": "Controlled ContentPage importer created 12 draft-only Help records after dry-run passed."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "post_import_absence_passed",
+        "note": "Read-only metadata check passed; public routes returned 404 and sitemap/llms/llms-full had zero target hits."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "local_checks_passed",
+        "note": "Docs/generated/state validation passed; changed paths limited to PR4 allowed paths."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "pr_open_rebased",
+        "note": "PR #1896 was opened and rebased onto latest origin/main after resolving docs/codex ledger conflicts."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "ready_to_merge",
+        "note": "Ledger records PR URL and rebased implementation commit; merge remains gated on post-rebase GitHub checks."
+      }
+    ]
+  },
   "PUBLIC-BENEFIT-ASSET-PACKAGES-ARCHIVE-01": {
     "repo": "fap-api",
     "branch": "codex/public-benefit-asset-packages-archive-01",
