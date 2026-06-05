@@ -46097,7 +46097,7 @@
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "branch": "codex/seo-article-riasec-v2-cms-import-package-01",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "title": "docs(cms): prepare RIASEC explanation CMS import package",
     "depends_on": [
       "SEO-ARTICLE-RIASEC-V2-REFERENCE-SOURCE-REVIEW-01"
@@ -46128,10 +46128,10 @@
         "notes": "CMS import package test, JSON/YAML parse, and scoped diff check passed. No CMS write performed."
       },
       "github": {
-        "status": "pending",
-        "evidence": "PR opened; waiting for GitHub checks.",
+        "status": "pass",
+        "evidence": "GitHub checks passed on PR #1915 before ready-to-merge ledger update.",
         "pr_url": "https://github.com/fermatmind/fap-api/pull/1915",
-        "commit_sha": "4184d74b860c0c494765659a39209e1952de9db4"
+        "commit_sha": "a9b39402db0d617dd13f76d8abe738f90ef4fc1a"
       }
     },
     "result": {
@@ -46146,7 +46146,7 @@
       "search_submit_allowed": false
     },
     "failure_reason": null,
-    "commit_sha": "4184d74b860c0c494765659a39209e1952de9db4",
+    "commit_sha": "a9b39402db0d617dd13f76d8abe738f90ef4fc1a",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1915",
     "transitions": [
       {
@@ -46165,6 +46165,11 @@
         "status": "pr_open",
         "evidence": "https://github.com/fermatmind/fap-api/pull/1915",
         "commit_sha": "4184d74b860c0c494765659a39209e1952de9db4"
+      },
+      {
+        "status": "ready_to_merge",
+        "evidence": "GitHub checks passed; PR is ready for merge after ledger update checks pass.",
+        "commit_sha": "a9b39402db0d617dd13f76d8abe738f90ef4fc1a"
       }
     ]
   },
