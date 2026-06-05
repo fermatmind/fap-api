@@ -1,0 +1,160 @@
+{
+  "schema_version": "help_content_draft_policy_owner_answers.v1",
+  "task": "HELP-CONTENT-DRAFT-POLICY-OWNER-ANSWERS-01",
+  "generated_at": "2026-06-05",
+  "decision": "POLICY_OWNER_ANSWERS_RECORDED_WITH_PUBLISH_STILL_BLOCKED",
+  "source_context": {
+    "depends_on": "HELP-CONTENT-DRAFT-OPERATOR-REVIEW-01",
+    "operator_review_artifact": "backend/docs/help/generated/help-content-draft-operator-review-01.v1.json",
+    "operator_review_decision": "REVIEW_BLOCKED_POLICY_OWNER_INPUTS_REQUIRED",
+    "source_package_path": "/Users/rainie/Desktop/费马资料文件/fermatmind-help-service-content-drafts-01.zip",
+    "source_package_sha256": "f971f5cd279018c2db469ccd87c43484c4983de5484e8c1e47343aa5813e6bb9"
+  },
+  "policy_owner_answers": {
+    "refund_exclusions": {
+      "answer": "非“费马测试”原因",
+      "normalized_meaning_for_followup": "Refund exclusion: reasons not caused by FermatMind/Fermat test service.",
+      "source": "user_policy_owner_answer_2026-06-05"
+    },
+    "refund_handling_time": {
+      "answer": "三个工作日",
+      "normalized_meaning_for_followup": "Refund handling time: three business days.",
+      "source": "user_policy_owner_answer_2026-06-05"
+    },
+    "data_deletion_handling_time": {
+      "answer": "两年",
+      "normalized_meaning_for_followup": "Data deletion handling time: two years, as provided by the policy owner.",
+      "source": "user_policy_owner_answer_2026-06-05"
+    },
+    "retained_data_exceptions_after_deletion": {
+      "answer": "无",
+      "normalized_meaning_for_followup": "No retained-data exceptions after completed deletion.",
+      "source": "user_policy_owner_answer_2026-06-05"
+    },
+    "privacy_analytics_wording_confirmation": {
+      "answer": "正确",
+      "normalized_meaning_for_followup": "GA4, Baidu analytics, and first-party analytics privacy wording is confirmed as correct by the policy owner.",
+      "source": "user_policy_owner_answer_2026-06-05"
+    }
+  },
+  "blocker_resolution_mapping": [
+    {
+      "blocker_id": "refund_policy_owner_fields",
+      "prior_status": "blocked",
+      "answer_status": "answered",
+      "remaining_gate": "Apply the answers to the draft content package/CMS draft fields in a separate authorized PR."
+    },
+    {
+      "blocker_id": "data_deletion_policy_owner_fields",
+      "prior_status": "blocked",
+      "answer_status": "answered",
+      "remaining_gate": "Apply the answers to the draft content package/CMS draft fields in a separate authorized PR."
+    },
+    {
+      "blocker_id": "privacy_analytics_owner_confirmation",
+      "prior_status": "blocked",
+      "answer_status": "answered",
+      "remaining_gate": "Apply the confirmation to the relevant draft metadata/content in a separate authorized PR."
+    },
+    {
+      "blocker_id": "contact_support_route_and_support_contact",
+      "prior_status": "blocked",
+      "answer_status": "not_addressed_in_this_task",
+      "remaining_gate": "Decide whether draft links should use the existing public canonical /support route or a new CMS-backed contact-support route."
+    },
+    {
+      "blocker_id": "faq_schema_publish_gate",
+      "prior_status": "blocked",
+      "answer_status": "not_addressed_in_this_task",
+      "remaining_gate": "Verify visible FAQ to JSON-LD equality only after policy fields are applied and public visibility is authorized."
+    }
+  ],
+  "scope_validation": {
+    "cms_mutation_performed": false,
+    "publish_performed": false,
+    "deploy_performed": false,
+    "search_submission_performed": false,
+    "payment_or_refund_performed": false,
+    "payment_provider_changed": false,
+    "private_url_access_performed": false,
+    "secret_env_cookie_token_read": false,
+    "operator_approval_claimed": false,
+    "content_rewrite_performed": false,
+    "policy_answers_recorded_only": true
+  },
+  "recommended_pr_train": [
+    {
+      "id": "HELP-CONTENT-DRAFT-CONTACT-SUPPORT-DECISION-01",
+      "repo": "fap-api/fap-web decision split",
+      "purpose": "Decide public canonical handling for contact support references before content revision.",
+      "mutation_allowed": false,
+      "publish_allowed": false,
+      "requires_user_authorization": true
+    },
+    {
+      "id": "HELP-CMS-SERVICE-FIELDS-01",
+      "repo": "fap-api",
+      "purpose": "Add or verify first-class CMS fields needed for support contact, policy version, reviewer, FAQ items, and schema gate authority.",
+      "mutation_allowed": false,
+      "publish_allowed": false,
+      "requires_user_authorization": true
+    },
+    {
+      "id": "HELP-CONTENT-DRAFT-POLICY-REVISION-APPLY-01",
+      "repo": "fap-api",
+      "purpose": "Apply policy owner answers to the local revised v01 Help content package or generated import package without CMS writes.",
+      "mutation_allowed": false,
+      "publish_allowed": false,
+      "requires_user_authorization": true
+    },
+    {
+      "id": "HELP-CONTENT-DRAFT-POLICY-CMS-SYNC-01",
+      "repo": "fap-api",
+      "purpose": "Sync the policy-updated package to the existing 12 Help CMS drafts while preserving draft/non-public/non-indexable/unpublished state.",
+      "mutation_allowed": true,
+      "publish_allowed": false,
+      "requires_user_authorization": true
+    },
+    {
+      "id": "HELP-CONTENT-DRAFT-OPERATOR-REVIEW-R2-01",
+      "repo": "fap-api",
+      "purpose": "Run second read-only operator review request after policy answers and contact-support handling are applied.",
+      "mutation_allowed": false,
+      "publish_allowed": false,
+      "requires_operator_review": true
+    },
+    {
+      "id": "HELP-SERVICE-FAQ-SCHEMA-RUNTIME-01",
+      "repo": "fap-web",
+      "purpose": "Enable or harden Help FAQ schema only from visible CMS/backend FAQ authority.",
+      "mutation_allowed": false,
+      "publish_allowed": false,
+      "requires_user_authorization": true
+    },
+    {
+      "id": "HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-01",
+      "repo": "fap-api/fap-web",
+      "purpose": "Run publish preflight over CMS draft state, support routes, schema, canonical paths, sitemap/llms, and private URL guards.",
+      "mutation_allowed": false,
+      "publish_allowed": false,
+      "requires_user_authorization": true
+    },
+    {
+      "id": "HELP-CONTENT-DRAFT-PUBLISH-EXECUTE-01",
+      "repo": "fap-api",
+      "purpose": "Publish the 12 Help ContentPage drafts only after exact publish authorization.",
+      "mutation_allowed": true,
+      "publish_allowed": true,
+      "requires_exact_publish_authorization": true
+    },
+    {
+      "id": "HELP-CONTENT-DRAFT-POST-PUBLISH-SMOKE-01",
+      "repo": "fap-api/fap-web",
+      "purpose": "Verify public 200s, canonical paths, schema, sitemap/llms exposure, and private URL guardrails after publish.",
+      "mutation_allowed": false,
+      "publish_allowed": false,
+      "requires_user_authorization": true
+    }
+  ],
+  "next_task_recommendation": "HELP-CONTENT-DRAFT-CONTACT-SUPPORT-DECISION-01"
+}
