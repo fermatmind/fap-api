@@ -21891,6 +21891,54 @@ prs:
     frontend_fallback_authority: false
     content_authority: CMS/backend
     next_task: DAILY-GIVING-PROOF-STORAGE-GATE-01
+
+  - id: DAILY-GIVING-PROOF-STORAGE-GATE-01
+    repo: fap-api
+    depends_on:
+      - DAILY-GIVING-PROOF-REDACTION-SOP-01
+    branch: codex/daily-giving-proof-storage-gate-01
+    title: "feat(benefit): gate DailyGiving proof storage fields"
+    train_scope: window_7_public_benefit_trust_gate
+    status: in_progress
+    scope:
+      - Add a model-level storage gate for DailyGiving proof private/public field boundaries.
+      - Verify public projection never returns private proof/admin fields.
+      - Add generated storage-gate artifact and focused tests.
+    allowed_paths:
+      - backend/app/Models/DailyGivingRecord.php
+      - backend/docs/operations/daily-giving-proof-storage-gate.md
+      - backend/docs/operations/generated/daily-giving-proof-storage-gate.v1.json
+      - backend/tests/Feature/Foundation/DailyGivingRecordPublicApiTest.php
+      - backend/tests/Feature/Foundation/DailyGivingProofStorageGateTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Create records, upload proof, process proof files, mutate CMS, publish, index DailyGiving, create trust badges, submit search URLs, deploy, or read secrets.
+    validation:
+      - php -l backend/app/Models/DailyGivingRecord.php
+      - php -l backend/tests/Feature/Foundation/DailyGivingProofStorageGateTest.php
+      - python3 -m json.tool backend/docs/operations/generated/daily-giving-proof-storage-gate.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=DailyGivingProofStorageGateTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=DailyGivingRecord --no-ansi
+      - git diff --check -- backend/app/Models/DailyGivingRecord.php backend/docs/operations/daily-giving-proof-storage-gate.md backend/docs/operations/generated/daily-giving-proof-storage-gate.v1.json backend/tests/Feature/Foundation/DailyGivingRecordPublicApiTest.php backend/tests/Feature/Foundation/DailyGivingProofStorageGateTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: DAILY-GIVING-PUBLIC-RELEASE-PREREQ-01
+
   - id: SEO-ARTICLE-RIASEC-V2-PACKAGE-ARCHIVE-01
     repo: fap-api
     branch: codex/seo-article-riasec-v2-package-archive-01

@@ -35103,7 +35103,7 @@
     "branch": "codex/detail-ready-1046-rollout-apply-preflight-01",
     "base": "main",
     "title": "DETAIL_READY_1046_ROLLOUT_APPLY_PREFLIGHT-01 production preflight for clean 1046 rollout apply",
-    "status": "ready_to_merge",
+    "status": "merged",
     "depends_on": [],
     "commit_sha": "67e95aac7a4344a407c5c1b563c4131a27d2d7aa",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1748",
@@ -45551,11 +45551,11 @@
       "next_pr_supported": "DAILY-GIVING-PROOF-STORAGE-GATE-01"
     },
     "failure_reason": null,
-    "commit_sha": "7c20a2e5d952b9c34139e2f9a294830a71be41b2",
+    "commit_sha": "4a75168e5e14aa7d5717752beeb5ea6f700ab10d",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1910",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-05T03:08:32Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "cms_write_performed": false,
@@ -45604,6 +45604,109 @@
         "at": "2026-06-05",
         "status": "ready_to_merge",
         "note": "GitHub checks passed for PR #1910."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "merged",
+        "note": "PR #1910 squash-merged at 4a75168e5e14aa7d5717752beeb5ea6f700ab10d; remote branch absent; local branch deleted after detached origin/main sync."
+      }
+    ]
+  },
+  "DAILY-GIVING-PROOF-STORAGE-GATE-01": {
+    "repo": "fap-api",
+    "branch": "codex/daily-giving-proof-storage-gate-01",
+    "base": "main",
+    "status": "local_checks_passed",
+    "train_scope": "window_7_public_benefit_trust_gate",
+    "title": "feat(benefit): gate DailyGiving proof storage fields",
+    "depends_on": [
+      "DAILY-GIVING-PROOF-REDACTION-SOP-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User requested DailyGiving proof storage gate and forbade record/proof mutations, deployment, and publish actions."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "DAILY-GIVING-PROOF-REDACTION-SOP-01 merged as PR #1910 at 4a75168e5e14aa7d5717752beeb5ea6f700ab10d."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to DailyGivingRecord model storage gate, proof storage docs/generated artifact, new storage gate test, existing DailyGivingRecordPublicApiTest fixture alignment, and docs/codex ledger paths. No record/proof/CMS/publish/deploy/search mutation was performed."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "php -l backend/app/Models/DailyGivingRecord.php",
+          "php -l backend/tests/Feature/Foundation/DailyGivingProofStorageGateTest.php",
+          "php -l backend/tests/Feature/Foundation/DailyGivingRecordPublicApiTest.php",
+          "python3 -m json.tool backend/docs/operations/generated/daily-giving-proof-storage-gate.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=DailyGivingProofStorageGateTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=DailyGivingRecord --no-ansi",
+          "git diff --check -- backend/app/Models/DailyGivingRecord.php backend/docs/operations/daily-giving-proof-storage-gate.md backend/docs/operations/generated/daily-giving-proof-storage-gate.v1.json backend/tests/Feature/Foundation/DailyGivingRecordPublicApiTest.php backend/tests/Feature/Foundation/DailyGivingProofStorageGateTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json"
+        ],
+        "notes": "All commands exited 0. PHPUnit reported warnings from the temporary checkout missing backend/.env; DailyGivingProofStorageGateTest passed 11 assertions and the broader DailyGivingRecord filter passed 110 assertions."
+      },
+      "github": {
+        "status": "pending",
+        "commands": []
+      }
+    },
+    "result": {
+      "storage_gate_added": true,
+      "public_projection_private_fields_blocked": true,
+      "record_created": false,
+      "proof_uploaded": false,
+      "proof_processed": false,
+      "cms_mutation_performed": false,
+      "publish_performed": false,
+      "next_pr_supported": "DAILY-GIVING-PUBLIC-RELEASE-PREREQ-01",
+      "existing_public_api_fixture_aligned": true
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "cms_write_performed": false,
+      "publish_performed": false,
+      "daily_giving_record_created": false,
+      "proof_file_processed": false,
+      "search_submission_performed": false,
+      "deploy_performed": false,
+      "notes": "Scope remained within PR8 model/docs/generated/test/ledger paths after adding existing public API fixture alignment for the new proof_public_url gate."
+    },
+    "sidecars": [
+      {
+        "id": "STORAGE_LEVEL_PRIVATE_DISK",
+        "status": "deferred",
+        "note": "The model gate rejects unsafe field shapes; deployment/configuration proof of private disk/bucket remains deferred."
+      }
+    ],
+    "next_task": "DAILY-GIVING-PUBLIC-RELEASE-PREREQ-01",
+    "transitions": [
+      {
+        "at": "2026-06-05",
+        "status": "in_progress",
+        "note": "Initialized after PR7 merge for DailyGiving proof storage gate."
+      },
+      {
+        "at": "2026-06-05T03:17:36Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "notes": "Local syntax, JSON/YAML, scoped diff, and focused PHPUnit checks passed. No production writes or record/proof mutations performed."
+      },
+      {
+        "at": "2026-06-05T03:20:00Z",
+        "from": "local_checks_passed",
+        "to": "local_checks_passed",
+        "notes": "Broader DailyGivingRecord test filter passed after aligning the existing public API proof_public_url fixture with the redacted public media gate."
       }
     ]
   },

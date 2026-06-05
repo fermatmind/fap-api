@@ -1,0 +1,30 @@
+{
+  "version": "daily_giving_proof_storage_gate.v1",
+  "generated_at": "2026-06-05T00:00:00+08:00",
+  "mode": "backend_contract",
+  "record_created": false,
+  "proof_uploaded": false,
+  "proof_processed": false,
+  "cms_mutation_performed": false,
+  "publish_performed": false,
+  "enforced_rules": [
+    "proof_private_path_requires_private_disk_or_bucket_shape",
+    "proof_private_path_rejects_public_url_or_public_media_path",
+    "proof_public_url_requires_https_reviewed_public_proof_shape",
+    "proof_public_url_rejects_private_or_raw_receipt_indicators",
+    "proof_public_url_must_not_equal_proof_private_path",
+    "proof_public_url_requires_redacted_available_status",
+    "withheld_proof_requires_admin_redaction_notes_reason"
+  ],
+  "public_projection_forbidden_fields": [
+    "proof_private_path",
+    "proof_redaction_notes",
+    "receipt_reference_private",
+    "internal_notes",
+    "created_by_admin_user_id",
+    "updated_by_admin_user_id"
+  ],
+  "storage_private_confirmed": false,
+  "storage_private_confirmation_deferred": true,
+  "trust_badge_allowed": false
+}
