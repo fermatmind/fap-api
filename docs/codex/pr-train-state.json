@@ -46189,7 +46189,7 @@
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "branch": "codex/seo-article-riasec-v2-cms-draft-preflight-01",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "title": "docs(cms): preflight RIASEC explanation draft creation",
     "depends_on": [
       "SEO-ARTICLE-RIASEC-V2-CMS-IMPORT-PACKAGE-01"
@@ -46220,10 +46220,10 @@
         "notes": "Draft preflight docs/generated artifact/test passed. Public absence checks passed. Controlled importer dry-run failed for zh/en with Array to string conversion, so draft creation remains blocked."
       },
       "github": {
-        "status": "pending",
-        "evidence": "PR opened; waiting for GitHub checks.",
+        "status": "pass",
+        "evidence": "GitHub checks passed on PR #1918 before ready-to-merge ledger update.",
         "pr_url": "https://github.com/fermatmind/fap-api/pull/1918",
-        "commit_sha": "f9be6642a997ef74e2c2542abf10ee0e0ee55d5b"
+        "commit_sha": "6cbdc628007ad271a6ece7b4524f0d3f8d6e3bf4"
       }
     },
     "result": {
@@ -46242,7 +46242,7 @@
       ]
     },
     "failure_reason": null,
-    "commit_sha": "f9be6642a997ef74e2c2542abf10ee0e0ee55d5b",
+    "commit_sha": "6cbdc628007ad271a6ece7b4524f0d3f8d6e3bf4",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1918",
     "transitions": [
       {
@@ -46267,6 +46267,11 @@
         "status": "pr_open",
         "evidence": "https://github.com/fermatmind/fap-api/pull/1918",
         "commit_sha": "f9be6642a997ef74e2c2542abf10ee0e0ee55d5b"
+      },
+      {
+        "status": "ready_to_merge",
+        "evidence": "GitHub checks passed; PR is ready for merge after ledger update checks pass.",
+        "commit_sha": "6cbdc628007ad271a6ece7b4524f0d3f8d6e3bf4"
       }
     ]
   },
