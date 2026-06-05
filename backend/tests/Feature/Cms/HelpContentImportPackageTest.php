@@ -27,8 +27,14 @@ final class HelpContentImportPackageTest extends TestCase
         $generated = json_decode((string) file_get_contents($generatedPath), true, 512, JSON_THROW_ON_ERROR);
 
         $this->assertSame('help-cms-import-package-01.v1', $package['schema_version'] ?? null);
-        $this->assertSame('HELP-CMS-IMPORT-PACKAGE-01', $package['task'] ?? null);
+        $this->assertContains($package['task'] ?? null, [
+            'HELP-CMS-IMPORT-PACKAGE-01',
+            'HELP-CONTENT-DRAFT-POLICY-REVISION-APPLY-01',
+        ]);
         $this->assertSame('support@fermatmind.com', data_get($package, 'target_summary.support_contact'));
+        $this->assertSame('help_service_policy.v1', data_get($package, 'target_summary.policy_version'));
+        $this->assertTrue((bool) data_get($package, 'target_summary.policy_owner_answers_applied'));
+        $this->assertTrue((bool) data_get($package, 'target_summary.direct_email_support_contact_applied'));
         $this->assertTrue((bool) data_get($package, 'authority.dry_run_import_possible_with_existing_tooling'));
         $this->assertSame('content-pages:import-local-baseline', data_get($package, 'authority.runtime_importer'));
 
@@ -43,6 +49,8 @@ final class HelpContentImportPackageTest extends TestCase
         $this->assertFalse((bool) ($gates['private_url_access_performed'] ?? true));
         $this->assertTrue((bool) ($gates['requires_operator_review'] ?? false));
         $this->assertFalse((bool) ($gates['schema_enabled'] ?? true));
+        $this->assertTrue((bool) ($gates['policy_owner_answers_applied'] ?? false));
+        $this->assertTrue((bool) ($gates['direct_email_support_contact_applied'] ?? false));
         $this->assertSame('noindex,nofollow', $gates['robots_default'] ?? null);
 
         $targets = $package['targets'] ?? [];
@@ -78,7 +86,7 @@ final class HelpContentImportPackageTest extends TestCase
             $this->assertNotEmpty($target['body'] ?? '');
             $this->assertNotEmpty($target['faq_items'] ?? []);
             $this->assertSame('support@fermatmind.com', $target['support_contact'] ?? null);
-            $this->assertSame('HELP-SERVICE-CONTENT-DRAFTS-01', $target['policy_version'] ?? null);
+            $this->assertSame('help_service_policy.v1', $target['policy_version'] ?? null);
             $this->assertSame('Unknown', $target['reviewer'] ?? null);
             $this->assertSame('2026-06-04', $target['updated_at_source'] ?? null);
             $this->assertSame('noindex,nofollow', $target['robots'] ?? null);
@@ -109,9 +117,15 @@ final class HelpContentImportPackageTest extends TestCase
             $this->assertStringStartsWith('/help/', (string) ($row['path'] ?? ''));
             $this->assertSame($row['path'] ?? null, $row['canonicalPath'] ?? null);
             $this->assertNotEmpty($row['contentMd'] ?? '');
+            $this->assertSame('support@fermatmind.com', $row['support_contact'] ?? null);
+            $this->assertSame('help_service_policy.v1', $row['policy_version'] ?? null);
+            $this->assertSame('Unknown', $row['reviewer'] ?? null);
+            $this->assertNotEmpty($row['faq_items'] ?? []);
+            $this->assertFalse((bool) ($row['schema_enabled'] ?? true));
         }
 
         $serialized = json_encode($package, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?: '';
+        $this->assertStringNotContainsString('/help/contact-support', $serialized);
         $this->assertStringNotContainsString('/orders/', $serialized);
         $this->assertStringNotContainsString('/pay/', $serialized);
         $this->assertStringNotContainsString('/payment/', $serialized);
@@ -119,6 +133,10 @@ final class HelpContentImportPackageTest extends TestCase
         $this->assertStringNotContainsString('token=', $serialized);
         $this->assertStringNotContainsString('payment_id=', $serialized);
         $this->assertStringNotContainsString('transaction_id=', $serialized);
+        $this->assertStringContainsString('非“费马测试”原因', $serialized);
+        $this->assertStringContainsString('三个工作日', $serialized);
+        $this->assertStringContainsString('两年', $serialized);
+        $this->assertStringContainsString('无额外保留数据例外', $serialized);
 
         $this->assertSame('PASS_DRAFT_ONLY_IMPORT_PACKAGE_READY', $generated['decision'] ?? null);
         $this->assertTrue((bool) ($generated['dry_run_import_possible_with_existing_tooling'] ?? false));

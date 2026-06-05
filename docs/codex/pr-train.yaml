@@ -21915,6 +21915,56 @@ prs:
     content_authority: CMS/backend
     next_task: HELP-CONTENT-DRAFT-POLICY-REVISION-APPLY-01
 
+  - id: HELP-CONTENT-DRAFT-POLICY-REVISION-APPLY-01
+    repo: fap-api
+    depends_on:
+      - HELP-CMS-SERVICE-FIELDS-01
+      - HELP-CONTENT-DRAFT-POLICY-OWNER-ANSWERS-01
+      - HELP-CONTENT-DRAFT-CONTACT-SUPPORT-DECISION-01
+    branch: codex/help-content-draft-policy-revision-apply-01
+    title: "docs(help): apply Help policy answers to draft package"
+    train_scope: window_9_help_service_content
+    status: in_progress
+    scope:
+      - Apply the policy-owner answers and direct-email support-contact decision to the local Help service import package and ContentPage source rows.
+      - Materialize support_contact, policy_version, reviewer, faq_items, and schema_enabled into the local source rows for the existing 12 Help draft pages.
+      - Preserve draft-only, non-public, non-indexable, unpublished, requires_operator_review, and publish_allowed=false gates.
+      - Do not mutate CMS rows, publish, deploy, submit search URLs, access private URLs, read secrets/env/cookies/tokens, run payment/refund actions, change payment-provider behavior, or claim Operator approval.
+    allowed_paths:
+      - backend/docs/help/import-packages/help-service-content-drafts-01.import.v1.json
+      - backend/docs/help/import-packages/content-pages-draft-source/content_pages.help_service_drafts_01.json
+      - backend/docs/help/generated/help-content-draft-policy-revision-apply-01.v1.json
+      - backend/docs/operations/help-content-draft-policy-revision-apply-2026-06-05.md
+      - backend/tests/Feature/Cms/HelpContentImportPackageTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Publish, deploy, submit search URLs, mutate CMS data, access private result/order/share/pay/payment/history URLs, read secrets/env/cookies/tokens, run payment/refund flows, change payment-provider behavior, add frontend fallback content, or claim Operator approval.
+    validation:
+      - python3 -m json.tool backend/docs/help/import-packages/help-service-content-drafts-01.import.v1.json >/dev/null
+      - python3 -m json.tool backend/docs/help/import-packages/content-pages-draft-source/content_pages.help_service_drafts_01.json >/dev/null
+      - python3 -m json.tool backend/docs/help/generated/help-content-draft-policy-revision-apply-01.v1.json >/dev/null
+      - php -l backend/tests/Feature/Cms/HelpContentImportPackageTest.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=HelpContentImportPackageTest --no-ansi
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- backend/docs/help/import-packages/help-service-content-drafts-01.import.v1.json backend/docs/help/import-packages/content-pages-draft-source/content_pages.help_service_drafts_01.json backend/docs/help/generated/help-content-draft-policy-revision-apply-01.v1.json backend/docs/operations/help-content-draft-policy-revision-apply-2026-06-05.md backend/tests/Feature/Cms/HelpContentImportPackageTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: HELP-CONTENT-DRAFT-POLICY-CMS-SYNC-01
+
   - id: PUBLIC-BENEFIT-ASSET-PACKAGES-ARCHIVE-01
     repo: fap-api
     branch: codex/public-benefit-asset-packages-archive-01

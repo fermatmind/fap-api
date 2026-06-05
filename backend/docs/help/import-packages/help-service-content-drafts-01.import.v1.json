@@ -1,13 +1,23 @@
 {
   "schema_version": "help-cms-import-package-01.v1",
-  "task": "HELP-CMS-IMPORT-PACKAGE-01",
+  "task": "HELP-CONTENT-DRAFT-POLICY-REVISION-APPLY-01",
   "generated_at": "2026-06-05",
   "source_package": {
     "artifact": "fermatmind-help-service-content-drafts-01.zip",
     "source_index_schema_version": "help_service_content_drafts.v1",
     "source_generated_at": "2026-06-04",
     "source_reference": "<uploaded_zip>/fermatmind-help-service-content-drafts-01",
-    "support_contact_injected_from_operator_decision": "support@fermatmind.com"
+    "support_contact_injected_from_operator_decision": "support@fermatmind.com",
+    "policy_owner_answers_applied": {
+      "refund_exclusions": "非“费马测试”原因",
+      "refund_handling_time": "三个工作日",
+      "refund_handling_time_en": "3 business days",
+      "data_deletion_handling_time": "两年",
+      "data_deletion_handling_time_en": "2 years",
+      "retained_data_exceptions_after_deletion": "无",
+      "privacy_analytics_wording_confirmation": "正确"
+    },
+    "direct_email_support_contact_applied": "support@fermatmind.com"
   },
   "authority": {
     "target_model": "ContentPage",
@@ -28,7 +38,9 @@
     "private_url_access_performed": false,
     "requires_operator_review": true,
     "schema_enabled": false,
-    "robots_default": "noindex,nofollow"
+    "robots_default": "noindex,nofollow",
+    "policy_owner_answers_applied": true,
+    "direct_email_support_contact_applied": true
   },
   "target_summary": {
     "packages": 6,
@@ -51,7 +63,10 @@
       "/en/help/use-boundaries",
       "/zh/help/data-deletion",
       "/en/help/data-deletion"
-    ]
+    ],
+    "policy_version": "help_service_policy.v1",
+    "policy_owner_answers_applied": true,
+    "direct_email_support_contact_applied": true
   },
   "targets": [
     {
@@ -84,7 +99,7 @@
         }
       ],
       "support_contact": "support@fermatmind.com",
-      "policy_version": "HELP-SERVICE-CONTENT-DRAFTS-01",
+      "policy_version": "help_service_policy.v1",
       "reviewer": "Unknown",
       "updated_at_source": "2026-06-04",
       "robots": "noindex,nofollow",
@@ -123,7 +138,29 @@
         "seoTitle": "付款后没有解锁报告怎么办？",
         "metaDescription": "如果你已经完成付款，但完整报告没有正常解锁，请先不要重复付款。你可以通过支持邮箱提交购买邮箱、测试名称、语言版本、付款的大致时间和问题描述。我们会在 24 小时内处理解锁异常或给出下一步说明。",
         "seoDescription": "如果你已经完成付款，但完整报告没有正常解锁，请先不要重复付款。你可以通过支持邮箱提交购买邮箱、测试名称、语言版本、付款的大致时间和问题描述。我们会在 24 小时内处理解锁异常或给出下一步说明。",
-        "canonicalPath": "/help/unlock-failure"
+        "canonicalPath": "/help/unlock-failure",
+        "support_contact": "support@fermatmind.com",
+        "policy_version": "help_service_policy.v1",
+        "reviewer": "Unknown",
+        "faq_items": [
+          {
+            "question": "付款后报告没有解锁，我应该重新付款吗？",
+            "answer": "不建议立即重复付款。请先联系支持邮箱，并提供购买邮箱、测试名称、语言版本、付款的大致时间和问题描述。"
+          },
+          {
+            "question": "我需要提供完整订单编号吗？",
+            "answer": "公开帮助页面不要求你提供完整订单编号。支持邮箱排查时，一般优先使用购买邮箱，也可以使用订单编号后 6 位或脱敏订单码辅助定位。"
+          },
+          {
+            "question": "多久会处理解锁失败？",
+            "answer": "解锁异常会在 24 小时内处理或给出下一步说明。"
+          },
+          {
+            "question": "如果最后仍无法获得完整报告，可以退款吗？",
+            "answer": "如果确认你无法获得完整报告，并且符合 7 天退款条件，可以进入退款处理流程。"
+          }
+        ],
+        "schema_enabled": false
       }
     },
     {
@@ -156,7 +193,7 @@
         }
       ],
       "support_contact": "support@fermatmind.com",
-      "policy_version": "HELP-SERVICE-CONTENT-DRAFTS-01",
+      "policy_version": "help_service_policy.v1",
       "reviewer": "Unknown",
       "updated_at_source": "2026-06-04",
       "robots": "noindex,nofollow",
@@ -195,7 +232,29 @@
         "seoTitle": "What to do if your report does not unlock after payment",
         "metaDescription": "If you completed payment but the full report did not unlock, do not pay again immediately. Contact support with your purchase email, test name, language, approximate payment time, and a short description of the issue. We will review unlock issues within 24 hours.",
         "seoDescription": "If you completed payment but the full report did not unlock, do not pay again immediately. Contact support with your purchase email, test name, language, approximate payment time, and a short description of the issue. We will review unlock issues within 24 hours.",
-        "canonicalPath": "/help/unlock-failure"
+        "canonicalPath": "/help/unlock-failure",
+        "support_contact": "support@fermatmind.com",
+        "policy_version": "help_service_policy.v1",
+        "reviewer": "Unknown",
+        "faq_items": [
+          {
+            "question": "Should I pay again if the report does not unlock?",
+            "answer": "No. Contact support first with your purchase email, test name, language version, approximate payment time, and a short issue description."
+          },
+          {
+            "question": "Do I need to provide the full order number?",
+            "answer": "Public Help pages do not require a full order number. Support usually starts from your purchase email and may use the last 6 characters of a masked order code if needed."
+          },
+          {
+            "question": "How long does unlock support take?",
+            "answer": "Unlock issues are reviewed within 24 hours, or we will provide the next step."
+          },
+          {
+            "question": "Can I get a refund if I still cannot access the report?",
+            "answer": "If we confirm that you cannot access the full report and the request is within the 7-day refund window, the case can enter the refund process."
+          }
+        ],
+        "schema_enabled": false
       }
     },
     {
@@ -207,8 +266,8 @@
       "path": "/help/payment-refund",
       "public_canonical_route": "/zh/help/payment-refund",
       "title": "支付与退款说明",
-      "summary": "费马测试的基础测评和部分结果可以免费使用。部分高阶报告模块可能需要付费解锁。若你付款后无法获得完整报告，并且在 7 天内联系支持邮箱，可以申请退款处理。",
-      "body": "费马测试的基础测评可以免费开始。部分测试会提供免费的基础结果；某些高阶报告模块可能需要付费解锁。\n\n在付款前，你应该能清楚看到：\n\n- 当前解锁对应的测试或报告；\n- 价格和币种；\n- 解锁后预计可以查看的内容范围；\n- 支付失败或未解锁时的支持路径；\n- 退款条件和申请窗口。\n\n如果你已经付款，但无法获得完整报告，可以在付款后 7 天内通过支持邮箱联系我们。我们会根据购买邮箱、测试名称、付款时间和问题描述进行核查。\n\n退款适用于确认无法获得完整报告的情况。退款不应用于已经正常获得完整报告后的主观不满意，除非后续政策另有说明并经过运营审核。\n\n请不要在公开页面、社交平台或截图中展示完整订单编号、支付流水号、完整结果链接或历史页面链接。",
+      "summary": "费马测试的基础测评和部分结果可以免费使用。部分高阶报告模块可能需要付费解锁。若你付款后无法获得完整报告，并且在 7 天内联系支持邮箱，可以申请退款处理；退款处理时限为三个工作日。",
+      "body": "费马测试的基础测评可以免费开始。部分测试会提供免费的基础结果；某些高阶报告模块可能需要付费解锁。\n\n在付款前，你应该能清楚看到：\n\n- 当前解锁对应的测试或报告；\n- 价格和币种；\n- 解锁后预计可以查看的内容范围；\n- 支付失败或未解锁时的支持路径；\n- 退款条件和申请窗口。\n\n如果你已经付款，但无法获得完整报告，可以在付款后 7 天内通过支持邮箱联系我们。我们会根据购买邮箱、测试名称、付款时间和问题描述进行核查。\n\n退款适用于确认无法获得完整报告的情况。退款不适用于非“费马测试”原因导致的问题。退款处理时限为三个工作日。\n\n请不要在公开页面、社交平台或截图中展示完整订单编号、支付流水号、完整结果链接或历史页面链接。",
       "faq_items": [
         {
           "question": "哪些内容是免费的？",
@@ -216,11 +275,11 @@
         },
         {
           "question": "什么情况下可以申请退款？",
-          "answer": "如果你付款后无法获得完整报告，并且在付款后 7 天内联系支持邮箱，可以申请退款处理。"
+          "answer": "如果你付款后无法获得完整报告，并且在付款后 7 天内联系支持邮箱，可以申请退款处理。退款处理时限为三个工作日。"
         },
         {
           "question": "如果我已经看到了完整报告，还可以退款吗？",
-          "answer": "如果完整报告已经正常交付，退款通常不适用于单纯主观不满意的情况。具体情况仍需由支持团队审核。"
+          "answer": "如果完整报告已经正常交付，或问题并非由“费马测试”原因导致，退款通常不适用。具体情况仍需由支持团队审核。"
         },
         {
           "question": "申请退款需要提供什么？",
@@ -228,7 +287,7 @@
         }
       ],
       "support_contact": "support@fermatmind.com",
-      "policy_version": "HELP-SERVICE-CONTENT-DRAFTS-01",
+      "policy_version": "help_service_policy.v1",
       "reviewer": "Unknown",
       "updated_at_source": "2026-06-04",
       "robots": "noindex,nofollow",
@@ -247,7 +306,7 @@
         "pageType": "refund",
         "title": "支付与退款说明",
         "kicker": "Help",
-        "summary": "费马测试的基础测评和部分结果可以免费使用。部分高阶报告模块可能需要付费解锁。若你付款后无法获得完整报告，并且在 7 天内联系支持邮箱，可以申请退款处理。",
+        "summary": "费马测试的基础测评和部分结果可以免费使用。部分高阶报告模块可能需要付费解锁。若你付款后无法获得完整报告，并且在 7 天内联系支持邮箱，可以申请退款处理；退款处理时限为三个工作日。",
         "template": "help",
         "animationProfile": "editorial",
         "locale": "zh-CN",
@@ -262,12 +321,34 @@
         "isIndexable": false,
         "reviewState": "owner_review",
         "headings": [],
-        "contentMd": "费马测试的基础测评可以免费开始。部分测试会提供免费的基础结果；某些高阶报告模块可能需要付费解锁。\n\n在付款前，你应该能清楚看到：\n\n- 当前解锁对应的测试或报告；\n- 价格和币种；\n- 解锁后预计可以查看的内容范围；\n- 支付失败或未解锁时的支持路径；\n- 退款条件和申请窗口。\n\n如果你已经付款，但无法获得完整报告，可以在付款后 7 天内通过支持邮箱联系我们。我们会根据购买邮箱、测试名称、付款时间和问题描述进行核查。\n\n退款适用于确认无法获得完整报告的情况。退款不应用于已经正常获得完整报告后的主观不满意，除非后续政策另有说明并经过运营审核。\n\n请不要在公开页面、社交平台或截图中展示完整订单编号、支付流水号、完整结果链接或历史页面链接。",
+        "contentMd": "费马测试的基础测评可以免费开始。部分测试会提供免费的基础结果；某些高阶报告模块可能需要付费解锁。\n\n在付款前，你应该能清楚看到：\n\n- 当前解锁对应的测试或报告；\n- 价格和币种；\n- 解锁后预计可以查看的内容范围；\n- 支付失败或未解锁时的支持路径；\n- 退款条件和申请窗口。\n\n如果你已经付款，但无法获得完整报告，可以在付款后 7 天内通过支持邮箱联系我们。我们会根据购买邮箱、测试名称、付款时间和问题描述进行核查。\n\n退款适用于确认无法获得完整报告的情况。退款不适用于非“费马测试”原因导致的问题。退款处理时限为三个工作日。\n\n请不要在公开页面、社交平台或截图中展示完整订单编号、支付流水号、完整结果链接或历史页面链接。",
         "contentHtml": "",
         "seoTitle": "支付与退款说明",
-        "metaDescription": "费马测试的基础测评和部分结果可以免费使用。部分高阶报告模块可能需要付费解锁。若你付款后无法获得完整报告，并且在 7 天内联系支持邮箱，可以申请退款处理。",
-        "seoDescription": "费马测试的基础测评和部分结果可以免费使用。部分高阶报告模块可能需要付费解锁。若你付款后无法获得完整报告，并且在 7 天内联系支持邮箱，可以申请退款处理。",
-        "canonicalPath": "/help/payment-refund"
+        "metaDescription": "费马测试的基础测评和部分结果可以免费使用。部分高阶报告模块可能需要付费解锁。若你付款后无法获得完整报告，并且在 7 天内联系支持邮箱，可以申请退款处理；退款处理时限为三个工作日。",
+        "seoDescription": "费马测试的基础测评和部分结果可以免费使用。部分高阶报告模块可能需要付费解锁。若你付款后无法获得完整报告，并且在 7 天内联系支持邮箱，可以申请退款处理；退款处理时限为三个工作日。",
+        "canonicalPath": "/help/payment-refund",
+        "support_contact": "support@fermatmind.com",
+        "policy_version": "help_service_policy.v1",
+        "reviewer": "Unknown",
+        "faq_items": [
+          {
+            "question": "哪些内容是免费的？",
+            "answer": "基础测评可以免费开始，部分基础结果也可以免费查看。某些高阶报告模块可能需要单独付费解锁。"
+          },
+          {
+            "question": "什么情况下可以申请退款？",
+            "answer": "如果你付款后无法获得完整报告，并且在付款后 7 天内联系支持邮箱，可以申请退款处理。"
+          },
+          {
+            "question": "如果我已经看到了完整报告，还可以退款吗？",
+            "answer": "如果完整报告已经正常交付，退款通常不适用于单纯主观不满意的情况。具体情况仍需由支持团队审核。"
+          },
+          {
+            "question": "申请退款需要提供什么？",
+            "answer": "请提供购买邮箱、测试名称、付款的大致时间和问题描述。公开页面不要求提供完整订单编号。"
+          }
+        ],
+        "schema_enabled": false
       }
     },
     {
@@ -279,8 +360,8 @@
       "path": "/help/payment-refund",
       "public_canonical_route": "/en/help/payment-refund",
       "title": "Payment and refund help",
-      "summary": "FermatMind provides free tests and selected free result views. Some advanced report modules may require paid unlock. If you paid but cannot access the full report, you may contact support within 7 days for refund review.",
-      "body": "FermatMind tests can be started for free. Some tests provide a free basic result view, while selected advanced report modules may require paid unlock.\n\nBefore payment, users should be able to see:\n\n- which test or report the unlock applies to;\n- the price and currency;\n- what the unlocked report is expected to include;\n- where to get support if payment or unlock fails;\n- the refund window and eligibility conditions.\n\nIf you paid but cannot access the full report, contact support by email within 7 days. We will review the case using your purchase email, test name, approximate payment time, and issue description.\n\nRefund review applies when we confirm that you cannot access the full report you purchased. It is not intended for cases where the full report was delivered normally and the user simply disagrees with the interpretation, unless a later reviewed policy states otherwise.\n\nDo not post full order numbers, payment identifiers, full result links, or history links on public pages, social platforms, or screenshots.",
+      "summary": "FermatMind provides free tests and selected free result views. Some advanced report modules may require paid unlock. If you paid but cannot access the full report, you may contact support within 7 days for refund review; refund processing time is 3 business days.",
+      "body": "FermatMind tests can be started for free. Some tests provide a free basic result view, while selected advanced report modules may require paid unlock.\n\nBefore payment, users should be able to see:\n\n- which test or report the unlock applies to;\n- the price and currency;\n- what the unlocked report is expected to include;\n- where to get support if payment or unlock fails;\n- the refund window and eligibility conditions.\n\nIf you paid but cannot access the full report, contact support by email within 7 days. We will review the case using your purchase email, test name, approximate payment time, and issue description.\n\nRefund review applies when we confirm that you cannot access the full report you purchased. Refunds do not apply to issues not caused by FermatMind. Refund processing time is 3 business days.\n\nDo not post full order numbers, payment identifiers, full result links, or history links on public pages, social platforms, or screenshots.",
       "faq_items": [
         {
           "question": "What is free?",
@@ -288,11 +369,11 @@
         },
         {
           "question": "When can I request a refund?",
-          "answer": "If you paid but cannot access the full report, you may contact support within 7 days for refund review."
+          "answer": "If you paid but cannot access the full report, you may contact support within 7 days for refund review. Refund processing time is 3 business days."
         },
         {
           "question": "Can I get a refund after viewing the full report?",
-          "answer": "If the full report was delivered normally, refund review usually does not apply to subjective dissatisfaction alone. Support will review any exceptional case."
+          "answer": "If the full report was delivered normally, or the issue was not caused by FermatMind, refund review usually does not apply. Support will review the case."
         },
         {
           "question": "What information is needed for a refund request?",
@@ -300,7 +381,7 @@
         }
       ],
       "support_contact": "support@fermatmind.com",
-      "policy_version": "HELP-SERVICE-CONTENT-DRAFTS-01",
+      "policy_version": "help_service_policy.v1",
       "reviewer": "Unknown",
       "updated_at_source": "2026-06-04",
       "robots": "noindex,nofollow",
@@ -319,7 +400,7 @@
         "pageType": "refund",
         "title": "Payment and refund help",
         "kicker": "Help",
-        "summary": "FermatMind provides free tests and selected free result views. Some advanced report modules may require paid unlock. If you paid but cannot access the full report, you may contact support within 7 days for refund review.",
+        "summary": "FermatMind provides free tests and selected free result views. Some advanced report modules may require paid unlock. If you paid but cannot access the full report, you may contact support within 7 days for refund review; refund processing time is 3 business days.",
         "template": "help",
         "animationProfile": "editorial",
         "locale": "en",
@@ -334,12 +415,34 @@
         "isIndexable": false,
         "reviewState": "owner_review",
         "headings": [],
-        "contentMd": "FermatMind tests can be started for free. Some tests provide a free basic result view, while selected advanced report modules may require paid unlock.\n\nBefore payment, users should be able to see:\n\n- which test or report the unlock applies to;\n- the price and currency;\n- what the unlocked report is expected to include;\n- where to get support if payment or unlock fails;\n- the refund window and eligibility conditions.\n\nIf you paid but cannot access the full report, contact support by email within 7 days. We will review the case using your purchase email, test name, approximate payment time, and issue description.\n\nRefund review applies when we confirm that you cannot access the full report you purchased. It is not intended for cases where the full report was delivered normally and the user simply disagrees with the interpretation, unless a later reviewed policy states otherwise.\n\nDo not post full order numbers, payment identifiers, full result links, or history links on public pages, social platforms, or screenshots.",
+        "contentMd": "FermatMind tests can be started for free. Some tests provide a free basic result view, while selected advanced report modules may require paid unlock.\n\nBefore payment, users should be able to see:\n\n- which test or report the unlock applies to;\n- the price and currency;\n- what the unlocked report is expected to include;\n- where to get support if payment or unlock fails;\n- the refund window and eligibility conditions.\n\nIf you paid but cannot access the full report, contact support by email within 7 days. We will review the case using your purchase email, test name, approximate payment time, and issue description.\n\nRefund review applies when we confirm that you cannot access the full report you purchased. Refunds do not apply to issues not caused by FermatMind. Refund processing time is 3 business days.\n\nDo not post full order numbers, payment identifiers, full result links, or history links on public pages, social platforms, or screenshots.",
         "contentHtml": "",
         "seoTitle": "Payment and refund help",
-        "metaDescription": "FermatMind provides free tests and selected free result views. Some advanced report modules may require paid unlock. If you paid but cannot access the full report, you may contact support within 7 days for refund review.",
-        "seoDescription": "FermatMind provides free tests and selected free result views. Some advanced report modules may require paid unlock. If you paid but cannot access the full report, you may contact support within 7 days for refund review.",
-        "canonicalPath": "/help/payment-refund"
+        "metaDescription": "FermatMind provides free tests and selected free result views. Some advanced report modules may require paid unlock. If you paid but cannot access the full report, you may contact support within 7 days for refund review; refund processing time is 3 business days.",
+        "seoDescription": "FermatMind provides free tests and selected free result views. Some advanced report modules may require paid unlock. If you paid but cannot access the full report, you may contact support within 7 days for refund review; refund processing time is 3 business days.",
+        "canonicalPath": "/help/payment-refund",
+        "support_contact": "support@fermatmind.com",
+        "policy_version": "help_service_policy.v1",
+        "reviewer": "Unknown",
+        "faq_items": [
+          {
+            "question": "What is free?",
+            "answer": "You can start the tests for free, and selected basic result views may also be free. Some advanced report modules may require paid unlock."
+          },
+          {
+            "question": "When can I request a refund?",
+            "answer": "If you paid but cannot access the full report, you may contact support within 7 days for refund review."
+          },
+          {
+            "question": "Can I get a refund after viewing the full report?",
+            "answer": "If the full report was delivered normally, refund review usually does not apply to subjective dissatisfaction alone. Support will review any exceptional case."
+          },
+          {
+            "question": "What information is needed for a refund request?",
+            "answer": "Provide the purchase email, test name, approximate payment time, and a short issue description. Public Help pages do not require a full order number."
+          }
+        ],
+        "schema_enabled": false
       }
     },
     {
@@ -372,7 +475,7 @@
         }
       ],
       "support_contact": "support@fermatmind.com",
-      "policy_version": "HELP-SERVICE-CONTENT-DRAFTS-01",
+      "policy_version": "help_service_policy.v1",
       "reviewer": "Unknown",
       "updated_at_source": "2026-06-04",
       "robots": "noindex,nofollow",
@@ -411,7 +514,29 @@
         "seoTitle": "如何找回测试结果？",
         "metaDescription": "费马测试的结果记录默认保存 2 年。你可以使用购买或测试时关联的邮箱联系支持团队找回结果。请不要在公开页面或社交平台发布完整结果链接、历史链接或截图中的私密地址。",
         "seoDescription": "费马测试的结果记录默认保存 2 年。你可以使用购买或测试时关联的邮箱联系支持团队找回结果。请不要在公开页面或社交平台发布完整结果链接、历史链接或截图中的私密地址。",
-        "canonicalPath": "/help/result-recovery"
+        "canonicalPath": "/help/result-recovery",
+        "support_contact": "support@fermatmind.com",
+        "policy_version": "help_service_policy.v1",
+        "reviewer": "Unknown",
+        "faq_items": [
+          {
+            "question": "测试结果会保存多久？",
+            "answer": "结果记录默认保存 2 年，除非你申请删除相关数据或后续政策另有说明。"
+          },
+          {
+            "question": "如何找回结果？",
+            "answer": "请通过支持邮箱联系我们，并提供测试或购买时关联的邮箱、测试名称、语言版本和大致完成时间。"
+          },
+          {
+            "question": "没有邮箱还能找回吗？",
+            "answer": "如果没有邮箱或足够信息，我们可能无法确认结果归属，也可能无法找回对应记录。"
+          },
+          {
+            "question": "我可以公开分享结果链接吗？",
+            "answer": "不建议公开分享完整结果链接或历史链接。它们可能包含只适合你本人访问的信息。"
+          }
+        ],
+        "schema_enabled": false
       }
     },
     {
@@ -444,7 +569,7 @@
         }
       ],
       "support_contact": "support@fermatmind.com",
-      "policy_version": "HELP-SERVICE-CONTENT-DRAFTS-01",
+      "policy_version": "help_service_policy.v1",
       "reviewer": "Unknown",
       "updated_at_source": "2026-06-04",
       "robots": "noindex,nofollow",
@@ -483,7 +608,29 @@
         "seoTitle": "How to recover your test result",
         "metaDescription": "FermatMind result records are retained for 2 years by default. You can contact support using the email associated with your test or purchase to recover a result. Do not post full result links, history links, or private URLs from screenshots on public pages or social platforms.",
         "seoDescription": "FermatMind result records are retained for 2 years by default. You can contact support using the email associated with your test or purchase to recover a result. Do not post full result links, history links, or private URLs from screenshots on public pages or social platforms.",
-        "canonicalPath": "/help/result-recovery"
+        "canonicalPath": "/help/result-recovery",
+        "support_contact": "support@fermatmind.com",
+        "policy_version": "help_service_policy.v1",
+        "reviewer": "Unknown",
+        "faq_items": [
+          {
+            "question": "How long are results retained?",
+            "answer": "Result records are retained for 2 years by default, unless you request deletion or a later reviewed policy states otherwise."
+          },
+          {
+            "question": "How can I recover a result?",
+            "answer": "Contact support by email with the email associated with your test or purchase, the test name, language version, and approximate completion time."
+          },
+          {
+            "question": "Can I recover a result without an email?",
+            "answer": "If no email or sufficient information is available, we may not be able to verify ownership or recover the result."
+          },
+          {
+            "question": "Can I publicly share my result link?",
+            "answer": "No. Do not publicly share full result or history links, because they may contain information intended only for personal access."
+          }
+        ],
+        "schema_enabled": false
       }
     },
     {
@@ -516,7 +663,7 @@
         }
       ],
       "support_contact": "support@fermatmind.com",
-      "policy_version": "HELP-SERVICE-CONTENT-DRAFTS-01",
+      "policy_version": "help_service_policy.v1",
       "reviewer": "Unknown",
       "updated_at_source": "2026-06-04",
       "robots": "noindex,nofollow",
@@ -555,7 +702,29 @@
         "seoTitle": "测试数据与隐私说明",
         "metaDescription": "费马测试会区分公开页面、测试结果、订单支持信息和统计数据。测试结果和订单相关链接不应进入公开搜索、社交平台或统计展示。你也可以申请删除数据或注销账号。",
         "seoDescription": "费马测试会区分公开页面、测试结果、订单支持信息和统计数据。测试结果和订单相关链接不应进入公开搜索、社交平台或统计展示。你也可以申请删除数据或注销账号。",
-        "canonicalPath": "/help/privacy-data"
+        "canonicalPath": "/help/privacy-data",
+        "support_contact": "support@fermatmind.com",
+        "policy_version": "help_service_policy.v1",
+        "reviewer": "Unknown",
+        "faq_items": [
+          {
+            "question": "我的测试结果会被公开吗？",
+            "answer": "测试结果不是公开搜索页面。请不要将完整结果链接或历史页面链接发布到公开平台。"
+          },
+          {
+            "question": "费马测试会使用统计工具吗？",
+            "answer": "可能会使用统计工具观察公开页面流量和测试入口行为，但统计数据不作为购买或解锁的最终事实来源。"
+          },
+          {
+            "question": "我可以申请删除数据吗？",
+            "answer": "可以。你可以通过支持邮箱提交删除请求。处理前可能需要验证请求邮箱与相关数据之间的关系。"
+          },
+          {
+            "question": "订单或结果链接可以发给别人吗？",
+            "answer": "不建议发送完整订单、结果或历史链接。它们可能包含只适合你本人访问的信息。"
+          }
+        ],
+        "schema_enabled": false
       }
     },
     {
@@ -588,7 +757,7 @@
         }
       ],
       "support_contact": "support@fermatmind.com",
-      "policy_version": "HELP-SERVICE-CONTENT-DRAFTS-01",
+      "policy_version": "help_service_policy.v1",
       "reviewer": "Unknown",
       "updated_at_source": "2026-06-04",
       "robots": "noindex,nofollow",
@@ -627,7 +796,29 @@
         "seoTitle": "Test data and privacy help",
         "metaDescription": "FermatMind separates public pages, test results, order support information, and analytics data. Result and order-related links should not appear in public search, social platforms, or public analytics surfaces. You may also request data deletion or account deletion.",
         "seoDescription": "FermatMind separates public pages, test results, order support information, and analytics data. Result and order-related links should not appear in public search, social platforms, or public analytics surfaces. You may also request data deletion or account deletion.",
-        "canonicalPath": "/help/privacy-data"
+        "canonicalPath": "/help/privacy-data",
+        "support_contact": "support@fermatmind.com",
+        "policy_version": "help_service_policy.v1",
+        "reviewer": "Unknown",
+        "faq_items": [
+          {
+            "question": "Will my test result be public?",
+            "answer": "Test results are not public search pages. Do not post full result or history links on public platforms."
+          },
+          {
+            "question": "Does FermatMind use analytics tools?",
+            "answer": "Analytics tools may be used to observe public page traffic and test-entry behavior, but analytics data is not the final source for payment or unlock status."
+          },
+          {
+            "question": "Can I request data deletion?",
+            "answer": "Yes. You can contact support by email. We may need to verify that the requesting email is associated with the relevant data."
+          },
+          {
+            "question": "Can I share order or result links with others?",
+            "answer": "Do not share full order, result, or history links. They may contain information intended only for personal access."
+          }
+        ],
+        "schema_enabled": false
       }
     },
     {
@@ -660,7 +851,7 @@
         }
       ],
       "support_contact": "support@fermatmind.com",
-      "policy_version": "HELP-SERVICE-CONTENT-DRAFTS-01",
+      "policy_version": "help_service_policy.v1",
       "reviewer": "Unknown",
       "updated_at_source": "2026-06-04",
       "robots": "noindex,nofollow",
@@ -699,7 +890,29 @@
         "seoTitle": "如何正确理解测评结果",
         "metaDescription": "费马测试的结果用于帮助你整理性格偏好、职业兴趣和行为倾向。它们适合做自我理解和决策辅助，不应被当作疾病判断、治疗建议、招聘筛选或职业结果承诺。",
         "seoDescription": "费马测试的结果用于帮助你整理性格偏好、职业兴趣和行为倾向。它们适合做自我理解和决策辅助，不应被当作疾病判断、治疗建议、招聘筛选或职业结果承诺。",
-        "canonicalPath": "/help/use-boundaries"
+        "canonicalPath": "/help/use-boundaries",
+        "support_contact": "support@fermatmind.com",
+        "policy_version": "help_service_policy.v1",
+        "reviewer": "Unknown",
+        "faq_items": [
+          {
+            "question": "测评结果是不是固定标签？",
+            "answer": "不是。测评结果更适合作为自我理解和决策辅助，不应被当作固定标签。"
+          },
+          {
+            "question": "我可以直接根据测评结果选职业吗？",
+            "answer": "不建议只根据测评结果做职业决定。你还需要结合技能、经验、行业信息和真实反馈。"
+          },
+          {
+            "question": "这些测试适合解决什么问题？",
+            "answer": "它们适合帮助你整理偏好、兴趣、行为倾向和职业探索方向。"
+          },
+          {
+            "question": "结果可以用于招聘或筛选别人吗？",
+            "answer": "不建议将个人测评结果作为招聘筛选或评价他人的唯一依据。"
+          }
+        ],
+        "schema_enabled": false
       }
     },
     {
@@ -732,7 +945,7 @@
         }
       ],
       "support_contact": "support@fermatmind.com",
-      "policy_version": "HELP-SERVICE-CONTENT-DRAFTS-01",
+      "policy_version": "help_service_policy.v1",
       "reviewer": "Unknown",
       "updated_at_source": "2026-06-04",
       "robots": "noindex,nofollow",
@@ -771,7 +984,29 @@
         "seoTitle": "How to interpret assessment results",
         "metaDescription": "FermatMind results are designed to support self-understanding, career-interest exploration, and reflection on behavioral tendencies. They should not be used as disease evaluation, treatment advice, hiring decisions, or career outcome promises.",
         "seoDescription": "FermatMind results are designed to support self-understanding, career-interest exploration, and reflection on behavioral tendencies. They should not be used as disease evaluation, treatment advice, hiring decisions, or career outcome promises.",
-        "canonicalPath": "/help/use-boundaries"
+        "canonicalPath": "/help/use-boundaries",
+        "support_contact": "support@fermatmind.com",
+        "policy_version": "help_service_policy.v1",
+        "reviewer": "Unknown",
+        "faq_items": [
+          {
+            "question": "Are assessment results fixed labels?",
+            "answer": "No. They are better treated as structured references for self-understanding and decision support."
+          },
+          {
+            "question": "Can I choose a career based only on the result?",
+            "answer": "No. Career decisions should also consider skills, experience, industry information, and real-world feedback."
+          },
+          {
+            "question": "What are these tests useful for?",
+            "answer": "They can help organize preferences, interests, behavioral tendencies, and career exploration directions."
+          },
+          {
+            "question": "Can results be used for hiring or screening others?",
+            "answer": "No. Individual assessment results should not be used as the sole basis for hiring or evaluating another person."
+          }
+        ],
+        "schema_enabled": false
       }
     },
     {
@@ -783,16 +1018,16 @@
       "path": "/help/data-deletion",
       "public_canonical_route": "/zh/help/data-deletion",
       "title": "如何申请删除数据或注销账号",
-      "summary": "你可以通过支持邮箱申请删除相关数据或注销账号。为了保护数据安全，我们可能需要通过邮箱确认请求人与相关记录的关系。删除完成后，相关结果可能无法再找回。",
-      "body": "如果你希望删除测试数据、相关记录或注销账号，可以通过支持邮箱提交请求。\n\n为了保护数据安全，我们通常需要确认请求邮箱与相关记录之间的关系。你可以提供：\n\n- 账号或测试时使用的邮箱；\n- 请求类型，例如删除测试数据、删除结果记录或注销账号；\n- 涉及的测试名称；\n- 大致完成测试或购买的时间。\n\n请不要在公开页面、评论区或社交平台发送完整订单编号、完整结果链接、支付流水号或历史页面链接。\n\n删除完成后，相关结果可能无法再找回。如果你的请求涉及付款、退款或服务履约记录，部分记录可能需要根据服务处理、退款核查或合规要求保留一段时间。具体处理范围需要由支持团队确认。",
+      "summary": "你可以通过支持邮箱申请删除相关数据或注销账号。为了保护数据安全，我们可能需要通过邮箱确认请求人与相关记录的关系。数据删除处理时限按政策答案记录为两年；删除完成后无额外保留数据例外。",
+      "body": "如果你希望删除测试数据、相关记录或注销账号，可以通过支持邮箱提交请求。\n\n为了保护数据安全，我们通常需要确认请求邮箱与相关记录之间的关系。你可以提供：\n\n- 账号或测试时使用的邮箱；\n- 请求类型，例如删除测试数据、删除结果记录或注销账号；\n- 涉及的测试名称；\n- 大致完成测试或购买的时间。\n\n请不要在公开页面、评论区或社交平台发送完整订单编号、完整结果链接、支付流水号或历史页面链接。\n\n删除请求的处理时限按政策答案记录为两年。删除完成后，相关结果可能无法再找回；删除后无额外保留数据例外。",
       "faq_items": [
         {
           "question": "我可以申请删除测试数据吗？",
-          "answer": "可以。你可以通过支持邮箱提交删除请求。处理前可能需要确认请求邮箱与相关记录的关系。"
+          "answer": "可以。你可以通过支持邮箱提交删除请求。处理前可能需要确认请求邮箱与相关记录的关系；处理时限按政策答案记录为两年。"
         },
         {
           "question": "我可以注销账号吗？",
-          "answer": "可以申请注销账号。账号相关处理范围需要根据你的记录状态和服务情况确认。"
+          "answer": "可以申请注销账号。账号相关处理范围需要根据你的记录状态和服务情况确认；处理时限按政策答案记录为两年。"
         },
         {
           "question": "删除后还能找回结果吗？",
@@ -800,11 +1035,11 @@
         },
         {
           "question": "哪些数据可能不能立即删除？",
-          "answer": "如果记录涉及付款、退款或服务履约，部分记录可能需要为服务处理、退款核查或合规原因保留一段时间。"
+          "answer": "删除后无额外保留数据例外。处理前仍可能需要完成邮箱关联验证。"
         }
       ],
       "support_contact": "support@fermatmind.com",
-      "policy_version": "HELP-SERVICE-CONTENT-DRAFTS-01",
+      "policy_version": "help_service_policy.v1",
       "reviewer": "Unknown",
       "updated_at_source": "2026-06-04",
       "robots": "noindex,nofollow",
@@ -823,7 +1058,7 @@
         "pageType": "support_static",
         "title": "如何申请删除数据或注销账号",
         "kicker": "Help",
-        "summary": "你可以通过支持邮箱申请删除相关数据或注销账号。为了保护数据安全，我们可能需要通过邮箱确认请求人与相关记录的关系。删除完成后，相关结果可能无法再找回。",
+        "summary": "你可以通过支持邮箱申请删除相关数据或注销账号。为了保护数据安全，我们可能需要通过邮箱确认请求人与相关记录的关系。数据删除处理时限按政策答案记录为两年；删除完成后无额外保留数据例外。",
         "template": "help",
         "animationProfile": "editorial",
         "locale": "zh-CN",
@@ -838,12 +1073,34 @@
         "isIndexable": false,
         "reviewState": "owner_review",
         "headings": [],
-        "contentMd": "如果你希望删除测试数据、相关记录或注销账号，可以通过支持邮箱提交请求。\n\n为了保护数据安全，我们通常需要确认请求邮箱与相关记录之间的关系。你可以提供：\n\n- 账号或测试时使用的邮箱；\n- 请求类型，例如删除测试数据、删除结果记录或注销账号；\n- 涉及的测试名称；\n- 大致完成测试或购买的时间。\n\n请不要在公开页面、评论区或社交平台发送完整订单编号、完整结果链接、支付流水号或历史页面链接。\n\n删除完成后，相关结果可能无法再找回。如果你的请求涉及付款、退款或服务履约记录，部分记录可能需要根据服务处理、退款核查或合规要求保留一段时间。具体处理范围需要由支持团队确认。",
+        "contentMd": "如果你希望删除测试数据、相关记录或注销账号，可以通过支持邮箱提交请求。\n\n为了保护数据安全，我们通常需要确认请求邮箱与相关记录之间的关系。你可以提供：\n\n- 账号或测试时使用的邮箱；\n- 请求类型，例如删除测试数据、删除结果记录或注销账号；\n- 涉及的测试名称；\n- 大致完成测试或购买的时间。\n\n请不要在公开页面、评论区或社交平台发送完整订单编号、完整结果链接、支付流水号或历史页面链接。\n\n删除请求的处理时限按政策答案记录为两年。删除完成后，相关结果可能无法再找回；删除后无额外保留数据例外。",
         "contentHtml": "",
         "seoTitle": "如何申请删除数据或注销账号",
-        "metaDescription": "你可以通过支持邮箱申请删除相关数据或注销账号。为了保护数据安全，我们可能需要通过邮箱确认请求人与相关记录的关系。删除完成后，相关结果可能无法再找回。",
-        "seoDescription": "你可以通过支持邮箱申请删除相关数据或注销账号。为了保护数据安全，我们可能需要通过邮箱确认请求人与相关记录的关系。删除完成后，相关结果可能无法再找回。",
-        "canonicalPath": "/help/data-deletion"
+        "metaDescription": "你可以通过支持邮箱申请删除相关数据或注销账号。为了保护数据安全，我们可能需要通过邮箱确认请求人与相关记录的关系。数据删除处理时限按政策答案记录为两年；删除完成后无额外保留数据例外。",
+        "seoDescription": "你可以通过支持邮箱申请删除相关数据或注销账号。为了保护数据安全，我们可能需要通过邮箱确认请求人与相关记录的关系。数据删除处理时限按政策答案记录为两年；删除完成后无额外保留数据例外。",
+        "canonicalPath": "/help/data-deletion",
+        "support_contact": "support@fermatmind.com",
+        "policy_version": "help_service_policy.v1",
+        "reviewer": "Unknown",
+        "faq_items": [
+          {
+            "question": "我可以申请删除测试数据吗？",
+            "answer": "可以。你可以通过支持邮箱提交删除请求。处理前可能需要确认请求邮箱与相关记录的关系。"
+          },
+          {
+            "question": "我可以注销账号吗？",
+            "answer": "可以申请注销账号。账号相关处理范围需要根据你的记录状态和服务情况确认。"
+          },
+          {
+            "question": "删除后还能找回结果吗？",
+            "answer": "删除完成后，相关结果可能无法再找回。"
+          },
+          {
+            "question": "哪些数据可能不能立即删除？",
+            "answer": "如果记录涉及付款、退款或服务履约，部分记录可能需要为服务处理、退款核查或合规原因保留一段时间。"
+          }
+        ],
+        "schema_enabled": false
       }
     },
     {
@@ -855,16 +1112,16 @@
       "path": "/help/data-deletion",
       "public_canonical_route": "/en/help/data-deletion",
       "title": "How to request data deletion or account deletion",
-      "summary": "You can request data deletion or account deletion by contacting support by email. To protect your data, we may need to verify that the requesting email is associated with the relevant records. After deletion is completed, related results may no longer be recoverable.",
-      "body": "If you want to delete test data, related records, or your account, contact support by email.\n\nTo protect your data, we usually need to verify that the requesting email is associated with the relevant records. You may provide:\n\n- the email used for the account or test;\n- the request type, such as deleting test data, deleting result records, or deleting an account;\n- the test name involved;\n- the approximate test completion or purchase time.\n\nDo not post full order numbers, full result links, payment identifiers, or history links on public pages, comment areas, or social platforms.\n\nAfter deletion is completed, related results may no longer be recoverable. If your request involves payment, refund, or service records, some records may need to be retained for service processing, refund review, or compliance reasons. Support will confirm the applicable scope.",
+      "summary": "You can request data deletion or account deletion by contacting support by email. To protect your data, we may need to verify that the requesting email is associated with the relevant records. The data-deletion handling time is recorded as 2 years; no retained-data exception is defined after deletion is completed.",
+      "body": "If you want to delete test data, related records, or your account, contact support by email.\n\nTo protect your data, we usually need to verify that the requesting email is associated with the relevant records. You may provide:\n\n- the email used for the account or test;\n- the request type, such as deleting test data, deleting result records, or deleting an account;\n- the test name involved;\n- the approximate test completion or purchase time.\n\nDo not post full order numbers, full result links, payment identifiers, or history links on public pages, comment areas, or social platforms.\n\nThe data-deletion handling time is recorded in the policy-owner answers as 2 years. After deletion is completed, related results may no longer be recoverable; no retained-data exception is defined after deletion is completed.",
       "faq_items": [
         {
           "question": "Can I request deletion of test data?",
-          "answer": "Yes. Contact support by email. We may need to verify that the requesting email is associated with the relevant records."
+          "answer": "Yes. Contact support by email. We may need to verify that the requesting email is associated with the relevant records. The handling time is recorded as 2 years."
         },
         {
           "question": "Can I request account deletion?",
-          "answer": "Yes. You can request account deletion. The scope depends on your record status and service context."
+          "answer": "Yes. You can request account deletion. The scope depends on your record status and service context. The handling time is recorded as 2 years."
         },
         {
           "question": "Can I recover results after deletion?",
@@ -872,11 +1129,11 @@
         },
         {
           "question": "What data may not be deleted immediately?",
-          "answer": "If records involve payment, refund, or service fulfillment, some data may need to be retained for service processing, refund review, or compliance reasons."
+          "answer": "No retained-data exception is defined after deletion is completed. Email association verification may still be needed before processing."
         }
       ],
       "support_contact": "support@fermatmind.com",
-      "policy_version": "HELP-SERVICE-CONTENT-DRAFTS-01",
+      "policy_version": "help_service_policy.v1",
       "reviewer": "Unknown",
       "updated_at_source": "2026-06-04",
       "robots": "noindex,nofollow",
@@ -895,7 +1152,7 @@
         "pageType": "support_static",
         "title": "How to request data deletion or account deletion",
         "kicker": "Help",
-        "summary": "You can request data deletion or account deletion by contacting support by email. To protect your data, we may need to verify that the requesting email is associated with the relevant records. After deletion is completed, related results may no longer be recoverable.",
+        "summary": "You can request data deletion or account deletion by contacting support by email. To protect your data, we may need to verify that the requesting email is associated with the relevant records. The data-deletion handling time is recorded as 2 years; no retained-data exception is defined after deletion is completed.",
         "template": "help",
         "animationProfile": "editorial",
         "locale": "en",
@@ -910,12 +1167,34 @@
         "isIndexable": false,
         "reviewState": "owner_review",
         "headings": [],
-        "contentMd": "If you want to delete test data, related records, or your account, contact support by email.\n\nTo protect your data, we usually need to verify that the requesting email is associated with the relevant records. You may provide:\n\n- the email used for the account or test;\n- the request type, such as deleting test data, deleting result records, or deleting an account;\n- the test name involved;\n- the approximate test completion or purchase time.\n\nDo not post full order numbers, full result links, payment identifiers, or history links on public pages, comment areas, or social platforms.\n\nAfter deletion is completed, related results may no longer be recoverable. If your request involves payment, refund, or service records, some records may need to be retained for service processing, refund review, or compliance reasons. Support will confirm the applicable scope.",
+        "contentMd": "If you want to delete test data, related records, or your account, contact support by email.\n\nTo protect your data, we usually need to verify that the requesting email is associated with the relevant records. You may provide:\n\n- the email used for the account or test;\n- the request type, such as deleting test data, deleting result records, or deleting an account;\n- the test name involved;\n- the approximate test completion or purchase time.\n\nDo not post full order numbers, full result links, payment identifiers, or history links on public pages, comment areas, or social platforms.\n\nThe data-deletion handling time is recorded in the policy-owner answers as 2 years. After deletion is completed, related results may no longer be recoverable; no retained-data exception is defined after deletion is completed.",
         "contentHtml": "",
         "seoTitle": "How to request data deletion or account deletion",
-        "metaDescription": "You can request data deletion or account deletion by contacting support by email. To protect your data, we may need to verify that the requesting email is associated with the relevant records. After deletion is completed, related results may no longer be recoverable.",
-        "seoDescription": "You can request data deletion or account deletion by contacting support by email. To protect your data, we may need to verify that the requesting email is associated with the relevant records. After deletion is completed, related results may no longer be recoverable.",
-        "canonicalPath": "/help/data-deletion"
+        "metaDescription": "You can request data deletion or account deletion by contacting support by email. To protect your data, we may need to verify that the requesting email is associated with the relevant records. The data-deletion handling time is recorded as 2 years; no retained-data exception is defined after deletion is completed.",
+        "seoDescription": "You can request data deletion or account deletion by contacting support by email. To protect your data, we may need to verify that the requesting email is associated with the relevant records. The data-deletion handling time is recorded as 2 years; no retained-data exception is defined after deletion is completed.",
+        "canonicalPath": "/help/data-deletion",
+        "support_contact": "support@fermatmind.com",
+        "policy_version": "help_service_policy.v1",
+        "reviewer": "Unknown",
+        "faq_items": [
+          {
+            "question": "Can I request deletion of test data?",
+            "answer": "Yes. Contact support by email. We may need to verify that the requesting email is associated with the relevant records."
+          },
+          {
+            "question": "Can I request account deletion?",
+            "answer": "Yes. You can request account deletion. The scope depends on your record status and service context."
+          },
+          {
+            "question": "Can I recover results after deletion?",
+            "answer": "After deletion is completed, related results may no longer be recoverable."
+          },
+          {
+            "question": "What data may not be deleted immediately?",
+            "answer": "If records involve payment, refund, or service fulfillment, some data may need to be retained for service processing, refund review, or compliance reasons."
+          }
+        ],
+        "schema_enabled": false
       }
     }
   ],
@@ -929,6 +1208,16 @@
       "id": "HELP-EDITORIAL-REVIEW-GATE",
       "status": "required",
       "reason": "Operator/editorial approval is still required before publish preflight can pass."
+    },
+    {
+      "id": "HELP-CONTENT-DRAFT-POLICY-CMS-SYNC-01-AUTHORIZATION",
+      "status": "hard_gate",
+      "reason": "Applying revised local package fields does not mutate CMS. A separate explicit CMS mutation authorization is required before syncing the 12 existing draft rows."
+    },
+    {
+      "id": "HELP-CONTENT-DRAFT-PUBLISH-BLOCK",
+      "status": "hard_gate",
+      "reason": "Publish remains forbidden until Operator review and exact publish authorization."
     }
   ]
 }

@@ -1,0 +1,82 @@
+{
+  "schema": "help-content-draft-policy-revision-apply-01.v1",
+  "task": "HELP-CONTENT-DRAFT-POLICY-REVISION-APPLY-01",
+  "generated_at": "2026-06-05",
+  "decision": "LOCAL_IMPORT_PACKAGE_REVISED_WITH_CMS_SYNC_AND_PUBLISH_BLOCKED",
+  "depends_on": [
+    "HELP-CMS-SERVICE-FIELDS-01",
+    "HELP-CONTENT-DRAFT-POLICY-OWNER-ANSWERS-01",
+    "HELP-CONTENT-DRAFT-CONTACT-SUPPORT-DECISION-01"
+  ],
+  "source_inputs": {
+    "policy_owner_answers_artifact": "backend/docs/help/generated/help-content-draft-policy-owner-answers-01.v1.json",
+    "contact_support_decision_artifact": "backend/docs/help/generated/help-content-draft-contact-support-decision-01.v1.json",
+    "import_package": "backend/docs/help/import-packages/help-service-content-drafts-01.import.v1.json",
+    "content_page_source": "backend/docs/help/import-packages/content-pages-draft-source/content_pages.help_service_drafts_01.json"
+  },
+  "applied_policy_answers": {
+    "refund_exclusions": "非“费马测试”原因",
+    "refund_handling_time": "三个工作日",
+    "data_deletion_handling_time": "两年",
+    "retained_data_exceptions_after_deletion": "无",
+    "privacy_analytics_wording_confirmation": "正确"
+  },
+  "applied_contact_support_decision": {
+    "mode": "direct_email",
+    "support_contact": "support@fermatmind.com",
+    "contact_support_route_required": false
+  },
+  "package_checks": {
+    "target_count": 12,
+    "content_page_source_rows": 12,
+    "locales": [
+      "zh-CN",
+      "en"
+    ],
+    "support_contact": "support@fermatmind.com",
+    "policy_version": "help_service_policy.v1",
+    "faq_items_materialized_into_source_rows": true,
+    "schema_enabled": false,
+    "all_draft_only": true,
+    "all_non_public": true,
+    "all_non_indexable": true,
+    "all_unpublished": true,
+    "requires_operator_review": true,
+    "publish_allowed": false
+  },
+  "hashes": {
+    "import_package_sha256": "82a0d495f3fdd21df35696950eaa0b0a6b12d224d5dc7a8f82c8fa3e49cdcb65",
+    "content_page_source_sha256": "7d034de0b0eb5dc2c78fbb0e1828f3820e36f1c1a03d8f1567722c336438b453"
+  },
+  "guard_checks": {
+    "cms_mutation_performed": false,
+    "publish_performed": false,
+    "deploy_performed": false,
+    "search_submission_performed": false,
+    "payment_or_refund_performed": false,
+    "payment_provider_changed": false,
+    "private_url_access_performed": false,
+    "secret_env_cookie_token_read": false,
+    "operator_approval_claimed": false,
+    "private_route_or_identifier_patterns_found": false,
+    "contact_support_404_route_dependency_removed": true
+  },
+  "sidecars": [
+    {
+      "id": "HELP-CONTENT-DRAFT-POLICY-CMS-SYNC-01-AUTHORIZATION",
+      "status": "hard_gate",
+      "note": "This PR updates the local package only. Syncing revised fields into the 12 existing CMS draft rows requires a separate explicit CMS mutation authorization."
+    },
+    {
+      "id": "HELP-CONTENT-DRAFT-OPERATOR-REVIEW-R2-01",
+      "status": "open_followup",
+      "note": "Operator review R2 can be requested after the revised local package is synced to CMS drafts. Codex must not claim review passed."
+    },
+    {
+      "id": "HELP-CONTENT-DRAFT-PUBLISH-BLOCK",
+      "status": "hard_gate",
+      "note": "Publish remains blocked until Operator review passes, publish preflight passes, and the user gives exact publish authorization."
+    }
+  ],
+  "next_task_recommendation": "HELP-CONTENT-DRAFT-POLICY-CMS-SYNC-01"
+}
