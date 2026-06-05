@@ -24627,7 +24627,7 @@
     "updated_at": "2026-05-17T10:36:34.999719Z"
   },
   "OPS-CI-CODESCAN-API-01": {
-    "status": "pr_open_github_checks_pending",
+    "status": "ready_to_merge",
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
     "branch": "codex/ops-ci-codescan-api-01",
@@ -46598,8 +46598,8 @@
         "notes": "All local checks exited 0 after installing dependencies in the temporary worktree. Focused PHPUnit passed 50 assertions with warnings from the temporary checkout missing backend/.env."
       },
       "github": {
-        "status": "pending",
-        "evidence": "Opened GitHub PR #1920 at https://github.com/fermatmind/fap-api/pull/1920. Required GitHub checks are pending."
+        "status": "pass",
+        "evidence": "GitHub checks passed for PR #1920 on head 48d9731a1116465f167d592f2f1b5455c99711aa: hygiene, supply-chain, content-pack-build-validate, Semgrep blocking secrets, Semgrep OSS, semgrep sarif non-blocking upload, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
       }
     },
     "result": {
@@ -46655,6 +46655,12 @@
         "from": "local_checks_passed",
         "to": "pr_open_github_checks_pending",
         "notes": "Opened https://github.com/fermatmind/fap-api/pull/1920 from branch codex/daily-giving-first-record-review-template-01. GitHub required checks are pending."
+      },
+      {
+        "at": "2026-06-05T08:26:15Z",
+        "from": "pr_open_github_checks_pending",
+        "to": "ready_to_merge",
+        "notes": "GitHub checks passed and merge state was CLEAN. Pre-merge scope validation remained limited to PR12 docs/generated/test/ledger paths."
       }
     ]
   }
