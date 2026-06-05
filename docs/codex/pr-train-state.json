@@ -44177,7 +44177,7 @@
     "repo": "fap-api",
     "branch": "codex/foundation-trust-page-asset-inventory-01",
     "base": "main",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "train_scope": "window_7_public_benefit_trust_gate",
     "title": "docs(benefit): inventory Foundation trust page assets",
     "depends_on": [
@@ -44219,6 +44219,22 @@
             "command": "git diff --check -- backend/docs/operations/foundation-trust-page-asset-inventory-2026-06-04.md backend/docs/operations/generated/foundation-trust-page-asset-inventory.v1.json docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
             "status": "passed"
           }
+        ]
+      },
+      "github": {
+        "status": "pass",
+        "commands": [
+          "gh pr checks 1898 --watch --interval 15"
+        ],
+        "jobs": [
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "hygiene",
+          "supply-chain",
+          "content-pack-build-validate",
+          "verify-bigfive",
+          "verify-mbti-legacy",
+          "verify-mbti-v2"
         ]
       }
     },
@@ -44282,6 +44298,11 @@
         "at": "2026-06-05",
         "status": "pr_open",
         "note": "Opened https://github.com/fermatmind/fap-api/pull/1898."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed for PR #1898."
       }
     ]
   }
