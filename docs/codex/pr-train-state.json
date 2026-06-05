@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-05T04:07:42Z",
+  "updated_at": "2026-06-05T11:57:13Z",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -46941,11 +46941,11 @@
       "next_authorization_required": "DAILY-GIVING-FIRST-RECORD-PRIVATE-LEDGER-01"
     },
     "failure_reason": null,
-    "commit_sha": "2113c42cc14ef48a80c0e194ff56e9e4956a895a",
+    "commit_sha": "79faa898df16edcfaaffd1a8dc488e6cb36effe0",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1920",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-05T08:31:53Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "cms_write_performed": false,
@@ -46981,6 +46981,121 @@
         "from": "pr_open_github_checks_pending",
         "to": "ready_to_merge",
         "notes": "GitHub checks passed and merge state was CLEAN. Pre-merge scope validation remained limited to PR12 docs/generated/test/ledger paths."
+      },
+      {
+        "at": "2026-06-05T11:49:26Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "notes": "Reconciled before DAILY-GIVING-FIRST-RECORD-PRIVATE-LEDGER-01: GitHub PR #1920 is MERGED, origin/main contains merge commit 79faa898df16edcfaaffd1a8dc488e6cb36effe0, and local/remote task branches are absent."
+      }
+    ]
+  },
+  "DAILY-GIVING-FIRST-RECORD-PRIVATE-LEDGER-01": {
+    "repo": "fap-api",
+    "branch": "codex/daily-giving-first-record-private-ledger-01",
+    "base": "main",
+    "status": "local_checks_passed",
+    "train_scope": "window_7_public_benefit_trust_gate",
+    "title": "docs(benefit): record first DailyGiving private ledger gate",
+    "depends_on": [
+      "DAILY-GIVING-FIRST-RECORD-REVIEW-TEMPLATE-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User authorized DAILY-GIVING-FIRST-RECORD-PRIVATE-LEDGER-01, manifest/state updates, and a private draft/proof ledger while forbidding publish, index, trust badge, social/search/deploy, public proof leakage, and public API private fields."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "DAILY-GIVING-FIRST-RECORD-REVIEW-TEMPLATE-01 merged as PR #1920 at 79faa898df16edcfaaffd1a8dc488e6cb36effe0."
+      },
+      "private_execution": {
+        "status": "pass",
+        "evidence": "Raw transaction proof and raw receipt proof were copied to local private operator storage and a local private ledger was created outside the repository. Committed PR files intentionally omit raw proofs, receipt ID, transaction serial, account details, balance, local private path, and private ledger contents."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to the PR13 allowed paths; committed docs/artifact omit private local paths, transaction serial, account details, balance, receipt ID, private proof path, and redaction notes."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "php -l backend/tests/Feature/Foundation/DailyGivingFirstRecordPrivateLedgerTest.php",
+          "python3 -m json.tool backend/docs/operations/generated/daily-giving-first-record-private-ledger.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=DailyGivingFirstRecordPrivateLedgerTest --no-ansi",
+          "git diff --check -- backend/docs/operations/daily-giving-first-record-private-ledger.md backend/docs/operations/generated/daily-giving-first-record-private-ledger.v1.json backend/tests/Feature/Foundation/DailyGivingFirstRecordPrivateLedgerTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+          "git diff --cached --check"
+        ],
+        "notes": "Passed php -l, JSON/YAML parsing, focused DailyGivingFirstRecordPrivateLedgerTest, git diff --check, and focused leakage scan over committed doc/artifact. No production DB, CMS, publish, index, trust badge, search, social, or deploy action was performed."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "result": {
+      "private_ledger_created_outside_repository": true,
+      "raw_proof_copied_to_private_local_storage": true,
+      "raw_receipt_proof_copied_to_private_local_storage": true,
+      "record_code": "FM-GIVING-2026-06-001",
+      "recipient_name": "联合国儿童基金会（UNICEF）",
+      "recipient_official_url": "https://www.unicef.cn/",
+      "amount_minor": 7500,
+      "currency": "CNY",
+      "donation_status": "completed",
+      "verified": false,
+      "proof_status": "redacted_pending",
+      "raw_proof_committed": false,
+      "raw_receipt_proof_committed": false,
+      "private_ledger_committed": false,
+      "receipt_id_committed": false,
+      "transaction_serial_committed": false,
+      "account_details_committed": false,
+      "balance_committed": false,
+      "production_database_record_created": false,
+      "cms_mutation_performed": false,
+      "publish_performed": false,
+      "search_submission_performed": false,
+      "social_distribution_performed": false,
+      "deploy_performed": false,
+      "trust_badge_allowed_now": false,
+      "public_amplification_allowed_now": false,
+      "daily_giving_indexable_allowed_now": false,
+      "next_authorization_required": "DAILY-GIVING-REDACTED-PUBLIC-PROOF-01"
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "cms_write_performed": false,
+      "publish_performed": false,
+      "daily_giving_public_record_created": false,
+      "raw_proof_committed": false,
+      "raw_receipt_proof_committed": false,
+      "private_ledger_committed": false,
+      "search_submission_performed": false,
+      "deploy_performed": false,
+      "notes": "PR13 commits only redacted docs/generated/test/ledger metadata. The raw proof and full private ledger remain outside the repository. Focused committed-doc leakage scan returned no matches."
+    },
+    "next_task": "DAILY-GIVING-REDACTED-PUBLIC-PROOF-01",
+    "transitions": [
+      {
+        "at": "2026-06-05T11:49:26Z",
+        "from": "missing_from_manifest",
+        "to": "in_progress",
+        "notes": "Initialized after user supplied real UNICEF transaction proof. No publish, index, trust badge, social/search/deploy, CMS mutation, public proof URL, production database record, or private field exposure authorized."
+      },
+      {
+        "at": "2026-06-05T11:57:13Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "notes": "Local manifest checks passed; raw proofs and private ledger remain outside repository; no publish/index/trust badge/social/search/deploy/CMS/production DB mutation performed."
       }
     ]
   }
