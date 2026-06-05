@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-05T11:57:13Z",
+  "updated_at": "2026-06-05T12:00:30Z",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -46994,7 +46994,7 @@
     "repo": "fap-api",
     "branch": "codex/daily-giving-first-record-private-ledger-01",
     "base": "main",
-    "status": "local_checks_passed",
+    "status": "pr_open_github_checks_pending",
     "train_scope": "window_7_public_benefit_trust_gate",
     "title": "docs(benefit): record first DailyGiving private ledger gate",
     "depends_on": [
@@ -47032,7 +47032,7 @@
       },
       "github": {
         "status": "pending",
-        "evidence": null
+        "evidence": "PR #1926 opened; GitHub checks pending."
       }
     },
     "result": {
@@ -47066,8 +47066,8 @@
       "next_authorization_required": "DAILY-GIVING-REDACTED-PUBLIC-PROOF-01"
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "d1e376b6ec6b4123cc1eb7f0fea61cc1e8ee2f13",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1926",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -47096,6 +47096,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "notes": "Local manifest checks passed; raw proofs and private ledger remain outside repository; no publish/index/trust badge/social/search/deploy/CMS/production DB mutation performed."
+      },
+      {
+        "at": "2026-06-05T12:00:30Z",
+        "from": "local_checks_passed",
+        "to": "pr_open_github_checks_pending",
+        "notes": "Opened https://github.com/fermatmind/fap-api/pull/1926 after local checks passed."
       }
     ]
   }
