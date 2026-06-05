@@ -36114,7 +36114,7 @@
     "branch": "content/pr-pol-01-policies-dashboard",
     "base": "main",
     "title": "PR-POL-01 add policies dashboard content",
-    "status": "pr_open",
+    "status": "merged",
     "depends_on": [
       "PR #1767 merged"
     ],
@@ -45328,11 +45328,11 @@
       "next_pr_supported": "DAILY-GIVING-PROOF-REDACTION-SOP-01"
     },
     "failure_reason": null,
-    "commit_sha": null,
+    "commit_sha": "05e1952f814bc589e6d785184e800f8d25e209b1",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1907",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-05T02:52:42Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "cms_write_performed": false,
@@ -45381,6 +45381,119 @@
         "at": "2026-06-05",
         "status": "ready_to_merge",
         "note": "GitHub checks passed for PR #1907."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "merged",
+        "note": "PR #1907 squash-merged at 05e1952f814bc589e6d785184e800f8d25e209b1; remote branch absent; local branch deleted after detached origin/main sync."
+      }
+    ]
+  },
+  "DAILY-GIVING-PROOF-REDACTION-SOP-01": {
+    "repo": "fap-api",
+    "branch": "codex/daily-giving-proof-redaction-sop-01",
+    "base": "main",
+    "status": "in_progress",
+    "train_scope": "window_7_public_benefit_trust_gate",
+    "title": "docs(benefit): define DailyGiving proof redaction SOP",
+    "depends_on": [
+      "FOUNDATION-FAQ-SCHEMA-GATE-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User authorized DailyGiving proof redaction SOP work while forbidding proof upload/processing and record creation."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "FOUNDATION-FAQ-SCHEMA-GATE-01 merged as PR #1907 at 05e1952f814bc589e6d785184e800f8d25e209b1."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed paths are confined to PR7 proof redaction SOP docs, generated artifact, focused test, and codex ledger paths."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          {
+            "command": "php -l backend/tests/Feature/Foundation/DailyGivingProofRedactionSopTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "python3 -m json.tool backend/docs/operations/generated/daily-giving-proof-redaction-sop.v1.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+            "status": "passed"
+          },
+          {
+            "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=DailyGivingProofRedactionSopTest --no-ansi",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check -- backend/docs/operations/daily-giving-proof-redaction-sop.md backend/docs/operations/generated/daily-giving-proof-redaction-sop.v1.json backend/tests/Feature/Foundation/DailyGivingProofRedactionSopTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+            "status": "passed"
+          }
+        ]
+      },
+      "github": {
+        "status": "pending",
+        "commands": []
+      }
+    },
+    "result": {
+      "redaction_sop_defined": true,
+      "record_created": false,
+      "proof_uploaded": false,
+      "proof_processed": false,
+      "cms_mutation_performed": false,
+      "publish_performed": false,
+      "next_pr_supported": "DAILY-GIVING-PROOF-STORAGE-GATE-01"
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "cms_write_performed": false,
+      "publish_performed": false,
+      "daily_giving_record_created": false,
+      "proof_file_processed": false,
+      "search_submission_performed": false,
+      "deploy_performed": false,
+      "notes": "Changed files are intended to stay within PR7 docs/generated/test/ledger paths."
+    },
+    "sidecars": [
+      {
+        "id": "RAW_PROOF_STORAGE",
+        "status": "documented_private_required",
+        "note": "PR7 documents private-only raw proof handling but does not verify storage implementation."
+      },
+      {
+        "id": "TRUST_BADGE",
+        "status": "blocked",
+        "note": "Redaction SOP does not unlock trust badge."
+      }
+    ],
+    "next_task": "DAILY-GIVING-PROOF-STORAGE-GATE-01",
+    "transitions": [
+      {
+        "at": "2026-06-05",
+        "status": "in_progress",
+        "note": "Initialized after PR6 merge for DailyGiving proof redaction SOP."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "local_checks_passed",
+        "note": "DailyGiving proof redaction SOP validated with focused PHPUnit, JSON/YAML parse, scoped diff check, and allowed-path review."
       }
     ]
   }
