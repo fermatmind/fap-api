@@ -44658,7 +44658,7 @@
     "repo": "fap-api",
     "branch": "codex/help-content-draft-editorial-review-01",
     "base": "origin/main",
-    "status": "blocked_private_identifier_guard",
+    "status": "ready_to_merge_blocked_review_artifact",
     "train_scope": "window_9_help_service_content",
     "title": "docs(help): prepare Help CMS draft editorial review request",
     "depends_on": [
@@ -44701,6 +44701,21 @@
             "command": "git diff --check -- backend/docs/help/generated/help-content-draft-editorial-review-01.v1.json backend/docs/operations/help-content-draft-editorial-review-2026-06-05.md docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
             "status": "passed"
           }
+        ]
+      },
+      "github": {
+        "status": "pass",
+        "commands": [
+          "gh pr checks 1919 --watch --interval 15"
+        ],
+        "jobs": [
+          "hygiene",
+          "supply-chain",
+          "content-pack-build-validate",
+          "verify-bigfive",
+          "verify-mbti-legacy",
+          "verify-mbti-v2",
+          "Semgrep blocking secrets"
         ]
       }
     },
@@ -44783,6 +44798,11 @@
         "at": "2026-06-05",
         "status": "pr_open",
         "note": "Opened https://github.com/fermatmind/fap-api/pull/1919 with blocked review artifact commit 702f64ec56f6da3e56d4f320108cbf44d63f7e32; GitHub checks are pending."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "ready_to_merge_blocked_review_artifact",
+        "note": "PR #1919 GitHub checks passed and changed files remained within the four allowed paths. Editorial review status remains blocked."
       }
     ]
   },
