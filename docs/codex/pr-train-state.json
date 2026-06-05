@@ -44838,8 +44838,8 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "44963cc25081001c33eac973cc67333975475fc9",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1921",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -44894,6 +44894,11 @@
         "at": "2026-06-05",
         "status": "pending_revision_request",
         "note": "Manifest/state entry added; implementation must run as a separate scoped PR and preserve no CMS mutation, no publish, no deploy, no private URL access, and no secret/env/cookie/token reads."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/1921 with manifest/state commit 44963cc25081001c33eac973cc67333975475fc9; GitHub checks are pending."
       }
     ]
   },
