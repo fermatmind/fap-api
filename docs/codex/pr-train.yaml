@@ -20554,7 +20554,7 @@ prs:
     branch: codex/seo-search-submission-canary-postsubmit-signals-01
     title: "docs(seo): review SEO canary post-submit signals"
     train_scope: seo_cms_canary
-    status: executing
+    status: merged
     scope:
       - Run read-only post-submit signals review after GSC sitemap submission and Baidu zh-CN manual URL submission.
       - Confirm public article pages, public article APIs, public SEO APIs, sitemap.xml, llms.txt, and llms-full.txt remain converged and indexable.
@@ -21163,7 +21163,7 @@ prs:
     branch: codex/seo-article-performance-baseline-template-01
     title: "docs(seo): add article performance baseline template"
     train_scope: seo_article_system_window_6
-    status: planned
+    status: executing
     depends_on:
       - SEO-ARTICLE-CANARY-QUALITY-REVIEW-01
     scope:
