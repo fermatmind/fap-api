@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-05T11:13:30+08:00",
+  "updated_at": "2026-06-05T11:15:30+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -45707,7 +45707,7 @@
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "branch": "codex/seo-article-riasec-v2-package-validation-01",
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "title": "test(seo): validate RIASEC explanation package v2 boundaries",
     "depends_on": [
       "SEO-ARTICLE-RIASEC-V2-PACKAGE-ARCHIVE-01"
@@ -45760,7 +45760,7 @@
     },
     "failure_reason": null,
     "commit_sha": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1911",
     "transitions": [
       {
         "at": "2026-06-05T10:52:00+08:00",
@@ -45773,6 +45773,12 @@
         "from": "planned",
         "to": "local_checks_passed",
         "notes": "Validation artifact and report passed local checks. Decision is GO for reference/source review, with publish blockers retained for references, conditional career hub links, and CMS media placeholder."
+      },
+      {
+        "at": "2026-06-05T11:15:30+08:00",
+        "from": "local_checks_passed",
+        "to": "pr_open",
+        "notes": "Opened https://github.com/fermatmind/fap-api/pull/1911."
       }
     ]
   },
