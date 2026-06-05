@@ -1,0 +1,83 @@
+{
+  "artifact_id": "seo-article-canary-quality-review-01",
+  "artifact_version": "v1",
+  "generated_at": "2026-06-05T00:00:00+08:00",
+  "scope": "read_only_canary_quality_review",
+  "content_generation": false,
+  "cms_mutation": false,
+  "publish_action": false,
+  "search_submission": false,
+  "private_url_access": false,
+  "target_articles": [
+    {
+      "locale": "zh-CN",
+      "article_id": 37,
+      "slug": "mbti-vs-holland-career-choice",
+      "public_url": "https://fermatmind.com/zh/articles/mbti-vs-holland-career-choice",
+      "page_status": 200,
+      "api_status": 200,
+      "seo_api_status": 200,
+      "published": true,
+      "indexable": true,
+      "schema_types": [
+        "Article",
+        "BreadcrumbList",
+        "FAQPage"
+      ],
+      "title_present": true,
+      "h1_present": true,
+      "title_h1_exact_duplicate": false,
+      "related_test_edges": 3,
+      "related_test_slugs": 3
+    },
+    {
+      "locale": "en",
+      "article_id": 39,
+      "slug": "mbti-vs-holland-code-career-choice",
+      "public_url": "https://fermatmind.com/en/articles/mbti-vs-holland-code-career-choice",
+      "page_status": 200,
+      "api_status": 200,
+      "seo_api_status": 200,
+      "published": true,
+      "indexable": true,
+      "schema_types": [
+        "Article",
+        "BreadcrumbList",
+        "FAQPage"
+      ],
+      "title_present": true,
+      "h1_present": true,
+      "title_h1_exact_duplicate": false,
+      "related_test_edges": 3,
+      "related_test_slugs": 3
+    }
+  ],
+  "enumeration": {
+    "sitemap_xml_contains_bilingual_canary": true,
+    "llms_txt_contains_bilingual_canary": true,
+    "llms_full_txt_contains_bilingual_canary": true
+  },
+  "route_safety": {
+    "article_cta_private_route_seen": false,
+    "page_wide_external_social_share_url_seen": true,
+    "note": "External social-share UI must be distinguished from private FermatMind result/share/order/payment routes by ARTICLE-CTA-ROUTE-GATE-01."
+  },
+  "reuse_decision": {
+    "process_template": "GO",
+    "field_completeness_template": "CONDITIONAL",
+    "copy_content_template": "NO-GO"
+  },
+  "required_followups": [
+    "SEO-ARTICLE-PERFORMANCE-BASELINE-TEMPLATE-01",
+    "ARTICLE-CTA-ROUTE-GATE-01",
+    "ARTICLE-FAQ-SCHEMA-SMOKE-01"
+  ],
+  "forbidden_confirmed": {
+    "second_article_copy_written": false,
+    "title_h1_meta_faq_cta_copy_generated": false,
+    "cms_draft_created": false,
+    "publish_performed": false,
+    "search_submit_performed": false,
+    "private_url_accessed": false
+  }
+}

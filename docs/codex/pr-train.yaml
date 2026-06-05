@@ -21081,7 +21081,7 @@ prs:
     branch: codex/seo-article-system-train-01
     title: "docs(seo): define article system PR train"
     train_scope: seo_article_system_window_6
-    status: executing
+    status: merged
     depends_on: []
     scope:
       - Register Window 6 SEO article system tasks and boundaries.
@@ -21123,7 +21123,7 @@ prs:
     branch: codex/seo-article-canary-quality-review-01
     title: "docs(seo): review article canary quality gates"
     train_scope: seo_article_system_window_6
-    status: planned
+    status: executing
     depends_on:
       - SEO-ARTICLE-SYSTEM-TRAIN-01
     scope:
