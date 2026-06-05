@@ -21891,3 +21891,201 @@ prs:
     frontend_fallback_authority: false
     content_authority: CMS/backend
     next_task: DAILY-GIVING-PROOF-STORAGE-GATE-01
+  - id: SEO-ARTICLE-RIASEC-V2-PACKAGE-ARCHIVE-01
+    repo: fap-api
+    branch: codex/seo-article-riasec-v2-package-archive-01
+    title: "docs(seo): archive RIASEC explanation article package v2"
+    train_scope: seo_article_content_package_riasec_explanation_v2
+    status: in_progress
+    scope:
+      - Archive the uploaded GPT-5.5 Pro RIASEC explanation V2 content package as draft-only CMS input.
+      - Preserve package files exactly without creating CMS drafts, publishing, search submission, deploy, or article copy edits.
+      - Add generated archive metadata and focused archive coverage for draft-only flags and forbidden route strings.
+    allowed_paths:
+      - backend/docs/seo/article-packages/riasec-explanation-v2/**
+      - backend/docs/seo/generated/riasec-explanation-content-package-v2.json
+      - backend/tests/Feature/Seo/RiasecArticlePackageV2ArchiveTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Rewrite article body, title, H1, meta, FAQ, CTA, or internal-link text.
+      - Create CMS draft records, publish content, submit search URLs, deploy, access private URLs, or touch payment/order/commerce logic.
+    validation:
+      - php -l backend/tests/Feature/Seo/RiasecArticlePackageV2ArchiveTest.php
+      - python3 -m json.tool backend/docs/seo/article-packages/riasec-explanation-v2/index.json >/dev/null
+      - python3 -m json.tool backend/docs/seo/article-packages/riasec-explanation-v2/riasec-explanation-v2.cms-import.json >/dev/null
+      - python3 -m json.tool backend/docs/seo/article-packages/riasec-explanation-v2/riasec-explanation-v2.zh.meta.json >/dev/null
+      - python3 -m json.tool backend/docs/seo/article-packages/riasec-explanation-v2/riasec-explanation-v2.en.meta.json >/dev/null
+      - python3 -m json.tool backend/docs/seo/article-packages/riasec-explanation-v2/riasec-explanation-v2.self-check.json >/dev/null
+      - python3 -m json.tool backend/docs/seo/generated/riasec-explanation-content-package-v2.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=RiasecArticlePackageV2ArchiveTest --no-ansi
+      - git diff --check -- backend/docs/seo/article-packages/riasec-explanation-v2 backend/docs/seo/generated/riasec-explanation-content-package-v2.json backend/tests/Feature/Seo/RiasecArticlePackageV2ArchiveTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+    next_task: SEO-ARTICLE-RIASEC-V2-PACKAGE-VALIDATION-01
+
+  - id: SEO-ARTICLE-RIASEC-V2-PACKAGE-VALIDATION-01
+    repo: fap-api
+    depends_on:
+      - SEO-ARTICLE-RIASEC-V2-PACKAGE-ARCHIVE-01
+    branch: codex/seo-article-riasec-v2-package-validation-01
+    title: "test(seo): validate RIASEC explanation package v2 boundaries"
+    train_scope: seo_article_content_package_riasec_explanation_v2
+    status: planned
+    scope:
+      - Validate the archived package against request-card, CTA route, FAQ/schema, publish-hold, claim-boundary, and privacy route restrictions.
+      - Produce generated validation evidence and a short validation report.
+      - Stop before import package if validation finds content issues requiring GPT/operator correction.
+    allowed_paths:
+      - backend/docs/seo/generated/riasec-explanation-content-package-v2.validation.json
+      - backend/tests/Feature/Seo/RiasecArticlePackageV2ValidationTest.php
+      - backend/docs/seo/riasec-explanation-content-package-v2-validation.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Rewrite article content, create CMS drafts, publish, submit search URLs, deploy, or access private URLs.
+    validation:
+      - php -l backend/tests/Feature/Seo/RiasecArticlePackageV2ValidationTest.php
+      - python3 -m json.tool backend/docs/seo/generated/riasec-explanation-content-package-v2.validation.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=RiasecArticlePackageV2ValidationTest --no-ansi
+      - git diff --check -- backend/docs/seo/generated/riasec-explanation-content-package-v2.validation.json backend/tests/Feature/Seo/RiasecArticlePackageV2ValidationTest.php backend/docs/seo/riasec-explanation-content-package-v2-validation.md docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+    next_task: SEO-ARTICLE-RIASEC-V2-REFERENCE-SOURCE-REVIEW-01
+
+  - id: SEO-ARTICLE-RIASEC-V2-REFERENCE-SOURCE-REVIEW-01
+    repo: fap-api
+    depends_on:
+      - SEO-ARTICLE-RIASEC-V2-PACKAGE-VALIDATION-01
+    branch: codex/seo-article-riasec-v2-reference-source-review-01
+    title: "docs(seo): verify reference needs for RIASEC explanation package"
+    train_scope: seo_article_content_package_riasec_explanation_v2
+    status: planned
+    scope:
+      - Prepare a reference/source verification ledger for the RIASEC explanation package without fabricating citations or editing article copy.
+      - Record authoritative source categories, verified URLs when available, unresolved source gaps, and publish blockers.
+    allowed_paths:
+      - backend/docs/seo/riasec-explanation-reference-source-review.md
+      - backend/docs/seo/generated/riasec-explanation-reference-source-review.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Rewrite article content, invent DOI/publication facts, create CMS drafts, publish, submit search URLs, deploy, or access private URLs.
+    validation:
+      - python3 -m json.tool backend/docs/seo/generated/riasec-explanation-reference-source-review.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- backend/docs/seo/riasec-explanation-reference-source-review.md backend/docs/seo/generated/riasec-explanation-reference-source-review.v1.json docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+    next_task: SEO-ARTICLE-RIASEC-V2-CMS-IMPORT-PACKAGE-01
+
+  - id: SEO-ARTICLE-RIASEC-V2-CMS-IMPORT-PACKAGE-01
+    repo: fap-api
+    depends_on:
+      - SEO-ARTICLE-RIASEC-V2-REFERENCE-SOURCE-REVIEW-01
+    branch: codex/seo-article-riasec-v2-cms-import-package-01
+    title: "docs(cms): prepare RIASEC explanation CMS import package"
+    train_scope: seo_article_content_package_riasec_explanation_v2
+    status: planned
+    scope:
+      - Convert the validated content package into backend/CMS import package format without writing CMS records.
+      - Preserve draft defaults, noindex/nofollow, operator review requirement, CTA safety, FAQ/schema alignment, and baseline placeholders.
+    allowed_paths:
+      - backend/docs/seo/cms-import-packages/riasec-explanation-v2/**
+      - backend/docs/seo/generated/riasec-explanation-cms-import-package.v1.json
+      - backend/tests/Feature/Seo/RiasecExplanationCmsImportPackageTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Rewrite article content, create CMS drafts, publish, submit search URLs, deploy, or access private URLs.
+    validation:
+      - php -l backend/tests/Feature/Seo/RiasecExplanationCmsImportPackageTest.php
+      - python3 -m json.tool backend/docs/seo/generated/riasec-explanation-cms-import-package.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=RiasecExplanationCmsImportPackageTest --no-ansi
+      - git diff --check -- backend/docs/seo/cms-import-packages/riasec-explanation-v2 backend/docs/seo/generated/riasec-explanation-cms-import-package.v1.json backend/tests/Feature/Seo/RiasecExplanationCmsImportPackageTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+    next_task: SEO-ARTICLE-RIASEC-V2-CMS-DRAFT-PREFLIGHT-01
+
+  - id: SEO-ARTICLE-RIASEC-V2-CMS-DRAFT-PREFLIGHT-01
+    repo: fap-api
+    depends_on:
+      - SEO-ARTICLE-RIASEC-V2-CMS-IMPORT-PACKAGE-01
+    branch: codex/seo-article-riasec-v2-cms-draft-preflight-01
+    title: "docs(cms): preflight RIASEC explanation draft creation"
+    train_scope: seo_article_content_package_riasec_explanation_v2
+    status: planned
+    scope:
+      - Run dry-run/preflight checks for creating zh/en CMS draft records without creating drafts.
+      - Confirm slugs, translation group, importer readiness, draft defaults, noindex, sitemap/llms absence, CTA safety, and unresolved publish blockers.
+      - Output exact draft-only authorization phrase if preflight is GO.
+    allowed_paths:
+      - backend/docs/seo/riasec-explanation-cms-draft-preflight.md
+      - backend/docs/seo/generated/riasec-explanation-cms-draft-preflight.v1.json
+      - backend/tests/Feature/Seo/RiasecExplanationDraftPreflightTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Create CMS draft records, publish, submit search URLs, deploy, rewrite content, or access private URLs.
+    validation:
+      - php -l backend/tests/Feature/Seo/RiasecExplanationDraftPreflightTest.php
+      - python3 -m json.tool backend/docs/seo/generated/riasec-explanation-cms-draft-preflight.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=RiasecExplanationDraftPreflightTest --no-ansi
+      - git diff --check -- backend/docs/seo/riasec-explanation-cms-draft-preflight.md backend/docs/seo/generated/riasec-explanation-cms-draft-preflight.v1.json backend/tests/Feature/Seo/RiasecExplanationDraftPreflightTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    content_authority: CMS/backend
+    next_task: SEO-ARTICLE-RIASEC-V2-CMS-DRAFT-CREATE-01

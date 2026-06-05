@@ -1,0 +1,192 @@
+{
+  "cms_import_fields": {
+    "package_version": "editorial_package.v1",
+    "locale": "en",
+    "translation_group_id_suggestion": "riasec-explanation-article-2026-06-v2",
+    "title": "What Is RIASEC? Understanding Holland Code Career Interests",
+    "slug_suggestion": "what-is-riasec-holland-code-career-interest-test",
+    "H1": "What Is RIASEC? How the Holland Code Supports Career Exploration",
+    "SEO_title": "What Is RIASEC? Holland Code Career Test",
+    "SEO_description": "Learn what RIASEC means, how Holland Code interests combine, and how the model can support career exploration without deciding your future.",
+    "excerpt": "RIASEC is a career-interest model that organizes work preferences into six areas. It can help you explore career environments, but it is not a career verdict.",
+    "category_suggestion": "career_exploration",
+    "tag_suggestions": [
+      "RIASEC",
+      "Holland Code",
+      "career interests",
+      "career exploration",
+      "vocational interests"
+    ],
+    "content_track": "evergreen_knowledge",
+    "audience_intent": "career_decision",
+    "signal_source": "RIASEC",
+    "signal_type": "interest",
+    "decision_domains": [
+      "career",
+      "self"
+    ],
+    "target_tests": [
+      "holland-career-interest-test-riasec"
+    ],
+    "target_topics_suggestions": [
+      {
+        "topic": "career-interest",
+        "requires_operator_mapping": true
+      },
+      {
+        "topic": "riasec",
+        "requires_operator_mapping": true
+      },
+      {
+        "topic": "holland-code",
+        "requires_operator_mapping": true
+      },
+      {
+        "topic": "career-exploration",
+        "requires_operator_mapping": true
+      }
+    ],
+    "claim_level": "exploratory",
+    "sensitivity_level": "career_sensitive",
+    "medical_disclaimer_required": false,
+    "ability_disclaimer_required": false,
+    "external_references_required": true,
+    "review_required_by": [
+      "editor",
+      "psychometrics"
+    ],
+    "cover_image": "__CMS_MEDIA_PLACEHOLDER_REQUIRED__",
+    "cover_image_alt": "RIASEC hexagon showing six Holland Code career-interest areas",
+    "cover_image_prompt": "A restrained editorial infographic showing a Holland RIASEC hexagon with six career-interest domains, subtle arrows for consistency/differentiation/congruence, dark grid, no people, no logos, no certification badges.",
+    "cover_image_style_tag": "editorial_infographic_dark_grid",
+    "competitor_parity_target": "truity_style_premium_density_without_copying",
+    "report_preview_hook_enabled": true,
+    "holland_indices_explained": [
+      "consistency",
+      "differentiation",
+      "congruence"
+    ],
+    "compound_code_breakdowns": [
+      "2_letter_chemistry",
+      "3_letter_code_context"
+    ],
+    "AEO_answer_block_structured": true,
+    "visible_matrix_count": 1,
+    "premium_report_preview_boundary": "report_preview_is_educational_anchor_not_purchase_promise"
+  },
+  "faq_entries": [
+    {
+      "question": "Is RIASEC a career test?",
+      "answer": "RIASEC is a career-interest model often used in career-interest assessments. It helps you understand preferred activities and work environments, but it does not decide your career outcome."
+    },
+    {
+      "question": "Is the Holland Code the same as RIASEC?",
+      "answer": "In common use, they are closely related. RIASEC refers to the six interest areas in the Holland career-interest model: Realistic, Investigative, Artistic, Social, Enterprising, and Conventional."
+    },
+    {
+      "question": "Can RIASEC tell me my best career?",
+      "answer": "No. It can help narrow your exploration, but it cannot guarantee that a specific career is right for you. Career decisions also require skills, experience, industry research, and real feedback."
+    },
+    {
+      "question": "What are consistency and differentiation in the Holland Code?",
+      "answer": "Consistency looks at whether your strongest interests are close together on the RIASEC hexagon. Differentiation looks at whether your highest interests stand out clearly from the rest."
+    },
+    {
+      "question": "Is RIASEC or MBTI better for career choice?",
+      "answer": "If your question is about career interests and work environments, RIASEC is usually more direct. If your question is about personality preference and interaction style, MBTI offers another angle."
+    },
+    {
+      "question": "Should I use Big Five together with RIASEC?",
+      "answer": "Not always. RIASEC can stand on its own for career-interest exploration. Big Five can add information about broader behavioral tendencies such as conscientiousness, extraversion, or emotional stability."
+    }
+  ],
+  "cta": {
+    "primary_cta_label_suggestion": "Start the Holland / RIASEC career-interest test",
+    "primary_cta_href": "/en/tests/holland-career-interest-test-riasec",
+    "cta_intent": "start_career_interest_assessment",
+    "target_test_slug": "holland-career-interest-test-riasec",
+    "tracking_expectation": "article_to_test_click",
+    "safety_check": "public canonical route only"
+  },
+  "internal_links": [
+    {
+      "anchor_suggestion": "MBTI vs Holland Code for career choice",
+      "href": "/en/articles/mbti-vs-holland-code-career-choice",
+      "purpose": "Connect to existing comparison canary.",
+      "status": "allowed"
+    },
+    {
+      "anchor_suggestion": "Holland / RIASEC career-interest test",
+      "href": "/en/tests/holland-career-interest-test-riasec",
+      "purpose": "Primary test path.",
+      "status": "allowed"
+    },
+    {
+      "anchor_suggestion": "MBTI personality test",
+      "href": "/en/tests/mbti-personality-test-16-personality-types",
+      "purpose": "Comparison context for personality preference.",
+      "status": "allowed"
+    },
+    {
+      "anchor_suggestion": "Big Five personality test",
+      "href": "/en/tests/big-five-personality-test-ocean-model",
+      "purpose": "Complementary behavioral-trait context.",
+      "status": "allowed"
+    },
+    {
+      "anchor_suggestion": "career library",
+      "href": "/en/career/jobs",
+      "purpose": "Conditional career exploration path.",
+      "status": "conditional",
+      "note": "Route eligibility and career hub strategy require operator/Codex confirmation before use in CMS body."
+    }
+  ],
+  "answer_schema_alignment": {
+    "answer_surface_policy": "editor_supplied",
+    "answer_surface_visibility_suggestion": "Use excerpt or a visible editor summary near the top; do not duplicate a Quick Answer heading inside body_markdown.",
+    "quick_answer_summary": "RIASEC is a career-interest model that describes six areas of work preference: Realistic, Investigative, Artistic, Social, Enterprising, and Conventional. It can support career exploration, but it does not decide a career outcome.",
+    "visible_faq_count": 6,
+    "expected_faq_schema_mainEntity_count": 6,
+    "Article_schema_source": "CMS article fields",
+    "Breadcrumb_canonical_path": "/en/articles/what-is-riasec-holland-code-career-interest-test"
+  },
+  "claim_boundary": {
+    "no_career_guarantee": "pass",
+    "no_diagnosis": "pass",
+    "no_official_certification_implication": "pass",
+    "no_deterministic_matching_claim": "pass",
+    "no_private_url": "pass",
+    "references_needed": true,
+    "unresolved_Unknown_fields": [
+      "target_topics mapping",
+      "cover_image CMS media asset",
+      "career hub eligibility",
+      "exact external references",
+      "final report module availability in product"
+    ]
+  },
+  "baseline": {
+    "publish_date": "Unknown",
+    "indexed_status": "Unknown",
+    "sitemap_seen": "Unknown",
+    "llms_seen": "Unknown",
+    "impressions_7d": "Unknown",
+    "clicks_7d": "Unknown",
+    "ctr_7d": "Unknown",
+    "average_position_7d": "Unknown",
+    "article_to_test_clicks_7d": "Unknown",
+    "impressions_14d": "Unknown",
+    "clicks_14d": "Unknown",
+    "ctr_14d": "Unknown",
+    "average_position_14d": "Unknown",
+    "article_to_test_clicks_14d": "Unknown",
+    "notes_for_operator": [
+      "Confirm CMS slug and canonical before draft creation.",
+      "Verify CTA target remains the public RIASEC test route.",
+      "Verify career hub link eligibility before using career hub link in body.",
+      "Confirm external references before publish.",
+      "Confirm final report module availability before using report-preview language as product promise.",
+      "Run article CTA route gate, FAQ/schema smoke, and publish hold gate before publish."
+    ]
+  }
+}
