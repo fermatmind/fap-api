@@ -20714,7 +20714,7 @@ prs:
     branch: codex/seo-dash-migration-01-readiness
     title: "docs(seo): define seo_intel migration readiness gate"
     train_scope: seo_intel_migration_readiness_gate
-    status: executing
+    status: merged
     scope:
       - Define production seo_intel migration readiness after the read-only API contract is merged.
       - Lock dedicated migration path, pretend/status/actual command templates, human approval phrase, preflight checklist, post-migration validation, and no-go conditions.
@@ -21280,7 +21280,7 @@ prs:
     branch: codex/article-internal-link-plan-01
     title: "docs(seo): define article internal link plan"
     train_scope: seo_article_system_window_6
-    status: planned
+    status: executing
     depends_on:
       - SEO-ARTICLE-REQUEST-CARDS-02
     scope:

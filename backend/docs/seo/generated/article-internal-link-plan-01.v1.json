@@ -1,0 +1,113 @@
+{
+  "artifact_id": "article-internal-link-plan-01",
+  "artifact_version": "v1",
+  "generated_at": "2026-06-05T00:00:00+08:00",
+  "scope": "public_canonical_internal_link_plan",
+  "content_generation": false,
+  "cms_mutation": false,
+  "publish_action": false,
+  "search_submission": false,
+  "private_url_access": false,
+  "allowed_target_registry": {
+    "published_article_canonical_urls": "allowed_after_public_200_and_indexability_checks",
+    "riasec_test": [
+      "/zh/tests/holland-career-interest-test-riasec",
+      "/en/tests/holland-career-interest-test-riasec"
+    ],
+    "mbti_test": [
+      "/zh/tests/mbti-personality-test-16-personality-types",
+      "/en/tests/mbti-personality-test-16-personality-types"
+    ],
+    "big_five_test": [
+      "/zh/tests/big-five-personality-test-ocean-model",
+      "/en/tests/big-five-personality-test-ocean-model"
+    ],
+    "career_hub": "conditional_after_career_hub_strategy_approval",
+    "tier_a_career_pages": "conditional_after_CAREER_TIER_A_LINK_ELIGIBILITY"
+  },
+  "blocked_target_registry": [
+    "/result/**",
+    "/orders/**",
+    "/share/**",
+    "/pay/**",
+    "/payment/**",
+    "/history/**",
+    "private_take_session_result_order_payment_share_urls",
+    "tokenized_urls",
+    "user_specific_urls",
+    "noindex_pages_without_explicit_non_seo_approval",
+    "external_competitor_pages_as_article_cta_targets"
+  ],
+  "matrix": [
+    {
+      "source_topic": "first_canary",
+      "allowed_primary_links": [
+        "riasec_test",
+        "mbti_test",
+        "big_five_test"
+      ],
+      "conditional_links": [
+        "future_riasec_explanation",
+        "career_hub_after_approval"
+      ]
+    },
+    {
+      "source_topic": "riasec_explanation",
+      "allowed_primary_links": [
+        "first_canary",
+        "riasec_test"
+      ],
+      "allowed_secondary_links": [
+        "mbti_test",
+        "big_five_test"
+      ],
+      "conditional_links": [
+        "career_hub_after_approval",
+        "tier_a_career_pages_after_eligibility"
+      ]
+    },
+    {
+      "source_topic": "career_uncertainty",
+      "allowed_primary_links": [
+        "riasec_explanation",
+        "riasec_test"
+      ],
+      "allowed_secondary_links": [
+        "first_canary",
+        "mbti_test",
+        "big_five_test"
+      ],
+      "conditional_links": [
+        "career_hub_after_approval",
+        "tier_a_career_pages_after_eligibility"
+      ]
+    },
+    {
+      "source_topic": "big_five_career_use",
+      "allowed_primary_links": [
+        "big_five_test",
+        "riasec_explanation"
+      ],
+      "allowed_secondary_links": [
+        "first_canary",
+        "riasec_test"
+      ],
+      "conditional_links": [
+        "tier_a_career_pages_after_eligibility"
+      ]
+    }
+  ],
+  "sidecar_dependencies": [
+    "CAREER-TIER-A-LINK-ELIGIBILITY",
+    "TEST-LANDING-PROOF-SURFACE follow-up",
+    "ARTICLE-TO-TEST-CLICK-TRACKING-RECONCILE-01",
+    "PRIVATE-URL-LIVE-REVIEW follow-up"
+  ],
+  "decision": {
+    "article_to_test_links": "GO",
+    "article_to_article_links": "GO",
+    "career_links": "CONDITIONAL",
+    "private_or_tokenized_links": "NO-GO"
+  },
+  "next_task": "ARTICLE-CTA-ROUTE-GATE-01"
+}
