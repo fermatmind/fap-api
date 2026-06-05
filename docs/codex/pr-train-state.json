@@ -35199,7 +35199,7 @@
     "branch": "codex/detail-ready-1046-rollout-no-audit-dry-run-01",
     "base": "main",
     "title": "DETAIL_READY_1046_ROLLOUT_NO_AUDIT_DRY_RUN-01 no-write career rollout dry-run",
-    "status": "pr_open",
+    "status": "merged",
     "depends_on": [],
     "commit_sha": "09ec7f599b05d7d555ad186af81633010f5c47f3",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1749",
@@ -44961,11 +44961,11 @@
       "next_pr_supported": "FOUNDATION-CMS-FIELD-MAP-01"
     },
     "failure_reason": null,
-    "commit_sha": "4ecb0a435fbf61d30f10df34ca2c5b6590f9b9f5",
+    "commit_sha": "8c772dc1d06de475f34982e4cf56e3e2dd5fd0b9",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1904",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-05T02:22:52Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "scope_validation": {
       "allowed_paths_only": true,
       "cms_write_performed": false,
@@ -45014,6 +45014,120 @@
         "at": "2026-06-05",
         "status": "ready_to_merge",
         "note": "GitHub checks passed for PR #1904."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "merged",
+        "note": "PR #1904 squash-merged at 8c772dc1d06de475f34982e4cf56e3e2dd5fd0b9; remote branch absent; local branch deleted after detached origin/main sync."
+      }
+    ]
+  },
+  "FOUNDATION-CMS-FIELD-MAP-01": {
+    "repo": "fap-api",
+    "branch": "codex/foundation-cms-field-map-01",
+    "base": "main",
+    "status": "in_progress",
+    "train_scope": "window_7_public_benefit_trust_gate",
+    "title": "docs(benefit): map Foundation CMS fields",
+    "depends_on": [
+      "FOUNDATION-CONTENT-REQUEST-CARD-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User authorized the Window 7 train through PR12 and requested evidence-backed GPT/CMS input requirements."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "FOUNDATION-CONTENT-REQUEST-CARD-01 merged as PR #1904 at 8c772dc1d06de475f34982e4cf56e3e2dd5fd0b9."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed paths are confined to PR5 field-map docs, generated artifact, focused test, and codex ledger paths."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          {
+            "command": "php -l backend/tests/Feature/Foundation/FoundationCmsFieldMapTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "python3 -m json.tool backend/docs/operations/generated/foundation-cms-field-map.v1.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+            "status": "passed"
+          },
+          {
+            "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=FoundationCmsFieldMapTest --no-ansi",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check -- backend/docs/operations/foundation-cms-field-map.md backend/docs/operations/generated/foundation-cms-field-map.v1.json backend/tests/Feature/Foundation/FoundationCmsFieldMapTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+            "status": "passed"
+          }
+        ]
+      },
+      "github": {
+        "status": "pending",
+        "commands": []
+      }
+    },
+    "result": {
+      "existing_content_page_fields_mapped": true,
+      "missing_governance_fields_identified": true,
+      "schema_change_performed": false,
+      "cms_mutation_performed": false,
+      "publishable_copy_created": false,
+      "daily_giving_record_created": false,
+      "next_pr_supported": "FOUNDATION-FAQ-SCHEMA-GATE-01"
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "schema_change_performed": false,
+      "cms_write_performed": false,
+      "publish_performed": false,
+      "daily_giving_record_created": false,
+      "proof_file_processed": false,
+      "search_submission_performed": false,
+      "deploy_performed": false,
+      "notes": "Changed files are intended to stay within PR5 docs/generated/test/ledger paths."
+    },
+    "sidecars": [
+      {
+        "id": "DEDICATED_GOVERNANCE_FIELDS",
+        "status": "missing",
+        "note": "Claim/proof/FAQ governance fields are documented as missing dedicated content_pages fields; no schema change in PR5."
+      },
+      {
+        "id": "FOUNDATION_CMS_COPY",
+        "status": "not_created",
+        "note": "PR5 does not create CMS copy or drafts."
+      }
+    ],
+    "next_task": "FOUNDATION-FAQ-SCHEMA-GATE-01",
+    "transitions": [
+      {
+        "at": "2026-06-05",
+        "status": "in_progress",
+        "note": "Initialized after PR4 merge for Foundation CMS field mapping."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "local_checks_passed",
+        "note": "Foundation CMS field map validated with focused PHPUnit, JSON/YAML parse, scoped diff check, and allowed-path review."
       }
     ]
   }

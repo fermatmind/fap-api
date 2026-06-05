@@ -1,0 +1,125 @@
+{
+  "version": "foundation_cms_field_map.v1",
+  "generated_at": "2026-06-05T00:00:00+08:00",
+  "mode": "field_map_only",
+  "schema_change_performed": false,
+  "cms_mutation_performed": false,
+  "publishable_copy_created": false,
+  "content_authority": "CMS/backend content_pages",
+  "content_pages_existing_fields": {
+    "route_identity": [
+      "slug",
+      "path",
+      "locale",
+      "canonical_path"
+    ],
+    "classification": [
+      "kind",
+      "page_type",
+      "template",
+      "animation_profile"
+    ],
+    "visible_body": [
+      "title",
+      "kicker",
+      "summary",
+      "content_md",
+      "content_html",
+      "headings_json"
+    ],
+    "seo": [
+      "seo_title",
+      "meta_description",
+      "seo_description",
+      "canonical_path"
+    ],
+    "visibility": [
+      "status",
+      "is_public",
+      "is_indexable",
+      "published_at",
+      "effective_at"
+    ],
+    "translation": [
+      "translation_group_id",
+      "source_locale",
+      "translation_status",
+      "source_content_id",
+      "source_version_hash",
+      "translated_from_version_hash"
+    ],
+    "review": [
+      "review_state",
+      "owner",
+      "legal_review_required",
+      "science_review_required",
+      "last_reviewed_at",
+      "source_doc",
+      "source_updated_at"
+    ]
+  },
+  "foundation_mapping": {
+    "route": {
+      "slug": "foundation",
+      "path": "localized_public_canonical",
+      "locale": "en_or_zh-CN"
+    },
+    "plan_modules": "content_md_or_content_html",
+    "module_headings": "headings_json_and_visible_body",
+    "review_owner": "owner",
+    "claim_review_state": [
+      "review_state",
+      "legal_review_required",
+      "last_reviewed_at"
+    ],
+    "foundation_indexability": "is_indexable_true_only_for_foundation",
+    "source_trace": "source_doc",
+    "seo": [
+      "seo_title",
+      "meta_description",
+      "seo_description"
+    ]
+  },
+  "missing_dedicated_governance_fields": [
+    "claim_boundary_version",
+    "public_benefit_policy_version",
+    "proof_policy_summary",
+    "daily_giving_state_summary",
+    "faq_items",
+    "faq_schema_enabled",
+    "faq_schema_review_state",
+    "operator_review_checklist"
+  ],
+  "daily_giving_boundary": {
+    "stored_in_content_pages": false,
+    "record_authority": "daily_giving_records",
+    "relevant_fields": [
+      "donation_status",
+      "proof_status",
+      "proof_public_url",
+      "proof_private_path",
+      "proof_redaction_notes",
+      "receipt_reference_redacted",
+      "receipt_reference_private",
+      "public_notes",
+      "internal_notes",
+      "is_public",
+      "is_indexable",
+      "published_at",
+      "manual_social_url_fields"
+    ],
+    "foundation_may_claim_public_ledger_now": false,
+    "foundation_may_claim_trust_badge_now": false
+  },
+  "gpt_constraints": {
+    "preserve_missing_fields_as_operator_requirements": true,
+    "faq_questions_only_until_cms_approved_answers_exist": true,
+    "daily_giving_noindex_state_required": true,
+    "zero_public_record_state_required": true,
+    "final_h1_allowed": false,
+    "final_metadata_allowed": false,
+    "cta_copy_allowed": false,
+    "social_copy_allowed": false,
+    "trust_badge_copy_allowed": false
+  }
+}
