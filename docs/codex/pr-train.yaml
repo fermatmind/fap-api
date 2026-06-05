@@ -22263,4 +22263,47 @@ prs:
     url_submission: false
     deploy_allowed: false
     content_authority: CMS/backend
+    next_task: SEO-ARTICLE-RIASEC-V2-IMPORTER-MAPPING-01
+
+  - id: SEO-ARTICLE-RIASEC-V2-IMPORTER-MAPPING-01
+    repo: fap-api
+    depends_on:
+      - SEO-ARTICLE-RIASEC-V2-CMS-DRAFT-PREFLIGHT-01
+    branch: codex/seo-article-riasec-v2-importer-mapping-01
+    title: "fix(cms): map RIASEC article target packages into editorial importer schema"
+    train_scope: seo_article_content_package_riasec_explanation_v2
+    status: in_progress
+    scope:
+      - Add a reusable article-target input normalizer for GPT/CMS content packages before editorial importer validation.
+      - Map safe public canonical routes, FAQ entries, CTA suggestions, internal-link plans, target topic objects, claim boundary checklist, and review metadata into the canonical editorial_package.v1 importer shape.
+      - Preserve draft-only behavior while keeping missing accepted references, CMS media placeholders, conditional links, and claim warnings as publish blockers.
+    allowed_paths:
+      - backend/app/Services/Cms/EditorialPackage/EditorialPackageInputNormalizer.php
+      - backend/app/Services/Cms/EditorialPackage/EditorialPackageDraftImporter.php
+      - backend/tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php
+      - backend/docs/seo/generated/riasec-explanation-importer-mapping-preflight.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Create CMS draft records, publish, submit search URLs, deploy, rewrite content, or access private URLs.
+    validation:
+      - php -l backend/app/Services/Cms/EditorialPackage/EditorialPackageInputNormalizer.php
+      - php -l backend/app/Services/Cms/EditorialPackage/EditorialPackageDraftImporter.php
+      - php -l backend/tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php
+      - python3 -m json.tool backend/docs/seo/generated/riasec-explanation-importer-mapping-preflight.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php --no-ansi
+      - git diff --check -- backend/app/Services/Cms/EditorialPackage/EditorialPackageInputNormalizer.php backend/app/Services/Cms/EditorialPackage/EditorialPackageDraftImporter.php backend/tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php backend/docs/seo/generated/riasec-explanation-importer-mapping-preflight.v1.json docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    content_authority: CMS/backend
     next_task: SEO-ARTICLE-RIASEC-V2-CMS-DRAFT-CREATE-01

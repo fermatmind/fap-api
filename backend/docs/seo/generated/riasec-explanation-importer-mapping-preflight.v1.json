@@ -1,0 +1,118 @@
+{
+  "task_id": "SEO-ARTICLE-RIASEC-V2-IMPORTER-MAPPING-01",
+  "source_task_id": "SEO-ARTICLE-RIASEC-V2-CMS-DRAFT-PREFLIGHT-01",
+  "generated_at": "2026-06-05",
+  "decision": "GO for importer mapping; CMS draft creation still requires exact draft-only authorization.",
+  "cms_draft_created": false,
+  "publish_allowed": false,
+  "search_submit_allowed": false,
+  "content_rewrite_performed": false,
+  "mapping_profile": "article_target_to_editorial_package.v1",
+  "scope": {
+    "normalizer_added": true,
+    "importer_draft_defaults_preserved": true,
+    "article_body_rewritten": false,
+    "private_url_accessed": false,
+    "production_write_performed": false
+  },
+  "field_mapping": {
+    "seo_description": "meta_description",
+    "canonical_path": "canonical",
+    "faq_entries": "answer_surface_v1.faq_items",
+    "cta_suggestions": "cta_slots",
+    "internal_link_plan": "internal_links for allowed links; conditional links preserved for operator review",
+    "target_topics[].topic": "target_topics",
+    "claim_boundary_checklist": "claim_boundary_notes with Unknown values preserved",
+    "references_needs": "review metadata only; not counted as accepted references"
+  },
+  "dry_run_results": [
+    {
+      "locale": "zh",
+      "file": "backend/docs/seo/cms-import-packages/riasec-explanation-v2/zh.article-target.json",
+      "ok": true,
+      "action": "will_create",
+      "errors_count": 0,
+      "warnings_count": 6,
+      "references_count": 0,
+      "would_write": true,
+      "canonical": "https://fermatmind.com/zh/articles/riasec-holland-career-interest-test-explained",
+      "target_tests": [
+        "holland-career-interest-test-riasec"
+      ],
+      "target_topics": [
+        "career-interest",
+        "riasec",
+        "holland-code",
+        "career-exploration"
+      ],
+      "active_internal_links": [
+        "/zh/articles/mbti-vs-holland-career-choice",
+        "/zh/tests/holland-career-interest-test-riasec",
+        "/zh/tests/mbti-personality-test-16-personality-types",
+        "/zh/tests/big-five-personality-test-ocean-model"
+      ],
+      "cta_routes": [
+        "/zh/tests/holland-career-interest-test-riasec"
+      ],
+      "warning_codes": [
+        "conditional_internal_link_held",
+        "cover_image_placeholder_required",
+        "references_need_operator_acceptance",
+        "evergreen_references_need_operator_acceptance",
+        "claim_boundary_forbidden_phrase",
+        "claim_boundary_forbidden_phrase"
+      ]
+    },
+    {
+      "locale": "en",
+      "file": "backend/docs/seo/cms-import-packages/riasec-explanation-v2/en.article-target.json",
+      "ok": true,
+      "action": "will_create",
+      "errors_count": 0,
+      "warnings_count": 4,
+      "references_count": 0,
+      "would_write": true,
+      "canonical": "https://fermatmind.com/en/articles/what-is-riasec-holland-code-career-interest-test",
+      "target_tests": [
+        "holland-career-interest-test-riasec"
+      ],
+      "target_topics": [
+        "career-interest",
+        "riasec",
+        "holland-code",
+        "career-exploration"
+      ],
+      "active_internal_links": [
+        "/en/articles/mbti-vs-holland-code-career-choice",
+        "/en/tests/holland-career-interest-test-riasec",
+        "/en/tests/mbti-personality-test-16-personality-types",
+        "/en/tests/big-five-personality-test-ocean-model"
+      ],
+      "cta_routes": [
+        "/en/tests/holland-career-interest-test-riasec"
+      ],
+      "warning_codes": [
+        "conditional_internal_link_held",
+        "cover_image_placeholder_required",
+        "references_need_operator_acceptance",
+        "evergreen_references_need_operator_acceptance"
+      ]
+    }
+  ],
+  "publish_blockers_preserved": [
+    "CMS draft creation requires exact draft-only authorization.",
+    "Accepted references are still missing and references_count remains 0.",
+    "Cover image is still a CMS Media Library placeholder.",
+    "Conditional career-library internal links are held for operator review.",
+    "Psychometrics/editorial review remains required.",
+    "Search submission and publish remain unauthorized."
+  ],
+  "hard_boundaries": {
+    "cms_draft_create_allowed": false,
+    "publish_allowed": false,
+    "search_submit_allowed": false,
+    "deploy_allowed": false,
+    "private_result_order_share_pay_payment_history_url_allowed": false,
+    "content_rewrite_allowed": false
+  }
+}

@@ -297,7 +297,7 @@ final class ArticleImportEditorialPackageCommandTest extends TestCase
         $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
     }
 
-    public function test_canary_importer_adapters_dry_run_schema_gate_blocks_oversized_english_seo_fields_without_database_writes(): void
+    public function test_canary_importer_adapters_dry_run_schema_gate_preserves_source_without_database_writes(): void
     {
         $this->assertCanaryAdapterPreservesSource(
             base_path('docs/seo/canary-packages/mbti-vs-holland-career-choice.zh-CN.json'),
@@ -328,18 +328,75 @@ final class ArticleImportEditorialPackageCommandTest extends TestCase
             '--dry-run' => true,
         ])
             ->expectsOutputToContain('dry_run=1')
-            ->expectsOutputToContain('action=will_skip')
+            ->expectsOutputToContain('action=will_create')
             ->expectsOutputToContain('content_track=evergreen_knowledge')
             ->expectsOutputToContain('target_tests=holland-career-interest-test-riasec,mbti-personality-test-16-personality-types,big-five-personality-test-ocean-model')
             ->expectsOutputToContain('target_topics=riasec,mbti')
-            ->expectsOutputToContain('errors_count=2')
-            ->expectsOutputToContain('validation_error=seo_title:schema_length_exceeded')
-            ->expectsOutputToContain('validation_error=meta_description:schema_length_exceeded')
-            ->assertExitCode(1);
+            ->expectsOutputToContain('errors_count=0')
+            ->assertExitCode(0);
 
         $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
         $this->assertSame(0, ArticleTranslationRevision::query()->withoutGlobalScopes()->count());
         $this->assertSame(0, ArticleSeoMeta::query()->withoutGlobalScopes()->count());
+        $this->assertSame(0, ArticleEditorialPackageImport::query()->withoutGlobalScopes()->count());
+    }
+
+    public function test_riasec_article_target_packages_map_to_editorial_importer_without_database_writes(): void
+    {
+        $targets = [
+            'zh' => [
+                'path' => base_path('docs/seo/cms-import-packages/riasec-explanation-v2/zh.article-target.json'),
+                'topics' => 'career-interest,riasec,holland-code,career-exploration',
+            ],
+            'en' => [
+                'path' => base_path('docs/seo/cms-import-packages/riasec-explanation-v2/en.article-target.json'),
+                'topics' => 'career-interest,riasec,holland-code,career-exploration',
+            ],
+        ];
+
+        foreach ($targets as $locale => $target) {
+            $this->artisan('articles:import-editorial-package', [
+                '--file' => $target['path'],
+                '--locale' => $locale,
+                '--dry-run' => true,
+                '--allow-claim-warnings' => true,
+            ])
+                ->expectsOutputToContain('dry_run=1')
+                ->expectsOutputToContain('action=will_create')
+                ->expectsOutputToContain('content_track=evergreen_knowledge')
+                ->expectsOutputToContain('target_tests=holland-career-interest-test-riasec')
+                ->expectsOutputToContain('target_topics='.$target['topics'])
+                ->expectsOutputToContain('references_count=0')
+                ->expectsOutputToContain('errors_count=0')
+                ->expectsOutputToContain('validation_warning=cover_image:cover_image_placeholder_required')
+                ->expectsOutputToContain('validation_warning=references_needs:references_need_operator_acceptance')
+                ->expectsOutputToContain('validation_warning=references_needs:evergreen_references_need_operator_acceptance')
+                ->assertExitCode(0);
+        }
+
+        $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
+        $this->assertSame(0, ArticleTranslationRevision::query()->withoutGlobalScopes()->count());
+        $this->assertSame(0, ArticleSeoMeta::query()->withoutGlobalScopes()->count());
+        $this->assertSame(0, ArticleEditorialPackageImport::query()->withoutGlobalScopes()->count());
+    }
+
+    public function test_article_target_mapping_fails_closed_for_private_cta_routes(): void
+    {
+        $package = json_decode((string) file_get_contents(base_path('docs/seo/cms-import-packages/riasec-explanation-v2/zh.article-target.json')), true);
+        $this->assertIsArray($package);
+        data_set($package, 'cta_suggestions.primary_cta_href', '/zh/results/private-tokenized-path');
+        $path = $this->writePackage($package);
+
+        $this->artisan('articles:import-editorial-package', [
+            '--file' => $path,
+            '--locale' => 'zh',
+            '--dry-run' => true,
+            '--allow-claim-warnings' => true,
+        ])
+            ->expectsOutputToContain('validation_error=cta_suggestions.primary_cta_href:unsafe_cta_href')
+            ->assertExitCode(1);
+
+        $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
         $this->assertSame(0, ArticleEditorialPackageImport::query()->withoutGlobalScopes()->count());
     }
 

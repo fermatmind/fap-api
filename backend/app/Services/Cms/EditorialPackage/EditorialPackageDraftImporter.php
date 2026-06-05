@@ -166,6 +166,7 @@ final class EditorialPackageDraftImporter
 
     public function __construct(
         private readonly ArticleTranslationRevisionWorkspace $revisionWorkspace,
+        private readonly EditorialPackageInputNormalizer $inputNormalizer,
     ) {}
 
     /**
@@ -376,6 +377,7 @@ final class EditorialPackageDraftImporter
      */
     private function normalize(array $package, ?string $localeOverride): array
     {
+        $package = $this->inputNormalizer->normalize($package);
         $body = (string) ($package['body_markdown'] ?? '');
         $answerSurface = is_array($package['answer_surface_v1'] ?? null) ? $package['answer_surface_v1'] : [];
 
@@ -389,6 +391,7 @@ final class EditorialPackageDraftImporter
             'intended_status' => trim((string) ($package['intended_status'] ?? 'draft')),
             'body_markdown' => trim($body),
             'references' => $this->stringList($package['references'] ?? []),
+            'references_needs' => $this->stringList($package['references_needs'] ?? []),
             'seo_title' => trim((string) ($package['seo_title'] ?? '')),
             'meta_description' => trim((string) ($package['meta_description'] ?? '')),
             'excerpt' => trim((string) ($package['excerpt'] ?? '')),
@@ -433,6 +436,11 @@ final class EditorialPackageDraftImporter
             'external_references_required' => (bool) ($package['external_references_required'] ?? false),
             'review_required_by' => $this->stringList($package['review_required_by'] ?? ['editor']),
             'standalone_editorial' => (bool) ($package['standalone_editorial'] ?? false),
+            'input_mapping_profile' => trim((string) ($package['input_mapping_profile'] ?? 'editorial_package.v1')),
+            'input_mapping_warnings' => $this->issueList($package['input_mapping_warnings'] ?? []),
+            'input_mapping_errors' => $this->issueList($package['input_mapping_errors'] ?? []),
+            'baseline_placeholders' => is_array($package['baseline_placeholders'] ?? null) ? $package['baseline_placeholders'] : [],
+            'draft_defaults' => is_array($package['draft_defaults'] ?? null) ? $package['draft_defaults'] : [],
         ];
     }
 
@@ -444,6 +452,12 @@ final class EditorialPackageDraftImporter
     {
         $errors = [];
         $warnings = [];
+        foreach ($this->issueList($package['input_mapping_errors'] ?? []) as $issue) {
+            $errors[] = $issue;
+        }
+        foreach ($this->issueList($package['input_mapping_warnings'] ?? []) as $issue) {
+            $warnings[] = $issue;
+        }
 
         foreach (['title', 'slug', 'locale', 'body_markdown', 'seo_title', 'meta_description', 'excerpt', 'content_track', 'category'] as $field) {
             if ((string) ($package[$field] ?? '') === '') {
@@ -486,6 +500,8 @@ final class EditorialPackageDraftImporter
 
         if ((string) $package['cover_image'] === '') {
             $errors[] = $this->issue('cover_image', 'missing_cover_image', 'cover_image or explicit placeholder is required.');
+        } elseif ($this->isCoverImagePlaceholder((string) $package['cover_image'])) {
+            $warnings[] = $this->issue('cover_image', 'cover_image_placeholder_required', 'Cover image placeholder requires CMS Media Library resolution before publish.');
         }
         foreach (['cover_image_alt', 'cover_image_prompt', 'cover_image_style_tag'] as $field) {
             if ((string) ($package[$field] ?? '') === '') {
@@ -494,7 +510,11 @@ final class EditorialPackageDraftImporter
         }
 
         if ((bool) $package['external_references_required'] && $package['references'] === []) {
-            $errors[] = $this->issue('references', 'references_required', 'external references are required for this package.');
+            if ($this->hasReferenceNeeds($package)) {
+                $warnings[] = $this->issue('references_needs', 'references_need_operator_acceptance', 'Reference needs are present, but accepted references must be supplied before controlled publish.');
+            } else {
+                $errors[] = $this->issue('references', 'references_required', 'external references are required for this package.');
+            }
         }
 
         if ($package['sensitivity_level'] === 'health_sensitive' && ! (bool) $package['medical_disclaimer_required']) {
@@ -505,7 +525,7 @@ final class EditorialPackageDraftImporter
         }
 
         $this->schemaLengthValidation($package, $errors);
-        $this->trackSpecificValidation($package, $errors);
+        $this->trackSpecificValidation($package, $errors, $warnings);
         $this->answerSurfaceBoundaryValidation($package, $errors);
 
         $claimMatches = $this->claimMatches($package);
@@ -560,7 +580,7 @@ final class EditorialPackageDraftImporter
     /**
      * @param  list<array<string,mixed>>  $errors
      */
-    private function trackSpecificValidation(array $package, array &$errors): void
+    private function trackSpecificValidation(array $package, array &$errors, array &$warnings): void
     {
         $body = (string) $package['body_markdown'];
         $headings = $this->headingSequence($body);
@@ -573,7 +593,7 @@ final class EditorialPackageDraftImporter
             if (! $this->matchesSemanticAnchor($headings, EvergreenAnchors::methodologyGateIntentGroups())) {
                 $errors[] = $this->issue('body_markdown', 'evergreen_method_required', 'evergreen_knowledge requires method or theory explanation.');
             }
-            if (! str_contains($headingText, 'faq') && ! str_contains($headingText, '常见问题') && ! str_contains($headingText, 'key questions')) {
+            if (! str_contains($headingText, 'faq') && ! str_contains($headingText, 'frequently asked questions') && ! str_contains($headingText, '常见问题') && ! str_contains($headingText, 'key questions')) {
                 $errors[] = $this->issue('body_markdown', 'evergreen_faq_required', 'evergreen_knowledge requires FAQ or key questions.');
             }
             if ($package['target_tests'] === []) {
@@ -583,7 +603,11 @@ final class EditorialPackageDraftImporter
                 $errors[] = $this->issue('target_topics', 'evergreen_topic_link_required', 'evergreen_knowledge requires at least one Topic link.');
             }
             if ($package['references'] === []) {
-                $errors[] = $this->issue('references', 'evergreen_references_required', 'evergreen_knowledge requires references or method sources.');
+                if ($this->hasReferenceNeeds($package)) {
+                    $warnings[] = $this->issue('references_needs', 'evergreen_references_need_operator_acceptance', 'evergreen_knowledge has reference needs, but accepted references must be supplied before controlled publish.');
+                } else {
+                    $errors[] = $this->issue('references', 'evergreen_references_required', 'evergreen_knowledge requires references or method sources.');
+                }
             }
         }
 
@@ -598,7 +622,11 @@ final class EditorialPackageDraftImporter
                 $errors[] = $this->issue('claim_boundary_notes', 'claim_boundary_required', 'editorial_journal requires claim boundary notes.');
             }
             if ($package['references'] === []) {
-                $errors[] = $this->issue('references', 'editorial_references_required', 'editorial_journal requires references for academic claims.');
+                if ($this->hasReferenceNeeds($package)) {
+                    $warnings[] = $this->issue('references_needs', 'editorial_references_need_operator_acceptance', 'editorial_journal has reference needs, but accepted references must be supplied before controlled publish.');
+                } else {
+                    $errors[] = $this->issue('references', 'editorial_references_required', 'editorial_journal requires references for academic claims.');
+                }
             }
             if ($package['target_tests'] === [] && (string) $package['primary_cta'] === '' && $package['cta_slots'] === []) {
                 $errors[] = $this->issue('cta_slots', 'editorial_cta_required', 'editorial_journal requires a related test CTA.');
@@ -798,6 +826,7 @@ final class EditorialPackageDraftImporter
         $coverPrompt = trim((string) ($package['cover_image_prompt'] ?? ''));
         $coverStyle = trim((string) ($package['cover_image_style_tag'] ?? ''));
         $references = $this->stringList($package['references'] ?? []);
+        $referencesNeeds = $this->stringList($package['references_needs'] ?? []);
         $answerSurface = is_array($package['answer_surface_v1'] ?? null) ? $package['answer_surface_v1'] : [];
 
         ArticleEditorialPackageImport::query()->withoutGlobalScopes()->create([
@@ -840,10 +869,12 @@ final class EditorialPackageDraftImporter
                 'status' => $references === [] ? 'missing' : 'complete',
                 'count' => count($references),
                 'items' => $references,
+                'needs' => $referencesNeeds,
             ],
             'media_json' => [
-                'status' => $coverImage !== '' && $coverAlt !== '' && $coverPrompt !== '' && $coverStyle !== '' ? 'complete' : 'missing',
-                'cover_image_present' => $coverImage !== '',
+                'status' => $coverImage !== '' && ! $this->isCoverImagePlaceholder($coverImage) && $coverAlt !== '' && $coverPrompt !== '' && $coverStyle !== '' ? 'complete' : 'missing',
+                'cover_image_present' => $coverImage !== '' && ! $this->isCoverImagePlaceholder($coverImage),
+                'cover_image_placeholder' => $this->isCoverImagePlaceholder($coverImage),
                 'cover_image_alt_present' => $coverAlt !== '',
                 'cover_image_prompt_present' => $coverPrompt !== '',
                 'cover_image_style_tag_present' => $coverStyle !== '',
@@ -1155,6 +1186,11 @@ final class EditorialPackageDraftImporter
                 'external_references_required' => $package['external_references_required'],
                 'review_required_by' => $package['review_required_by'],
                 'references' => $package['references'],
+                'references_needs' => $package['references_needs'] ?? [],
+                'input_mapping_profile' => $package['input_mapping_profile'] ?? 'editorial_package.v1',
+                'input_mapping_warnings' => $package['input_mapping_warnings'] ?? [],
+                'baseline_placeholders' => $package['baseline_placeholders'] ?? [],
+                'draft_defaults' => $package['draft_defaults'] ?? [],
                 'validation' => [
                     'body_hash' => $plan['body_hash'] ?? '',
                     'answer_surface_hash' => $plan['answer_surface_hash'] ?? '',
@@ -1179,6 +1215,9 @@ final class EditorialPackageDraftImporter
 
         $items = [];
         foreach ($value as $item) {
+            if (is_array($item)) {
+                continue;
+            }
             $normalized = trim((string) $item);
             if ($normalized !== '') {
                 $items[] = $normalized;
@@ -1200,6 +1239,22 @@ final class EditorialPackageDraftImporter
         $normalized = trim((string) $value);
 
         return $normalized === '' ? null : $normalized;
+    }
+
+    /**
+     * @param  array<string,mixed>  $package
+     */
+    private function hasReferenceNeeds(array $package): bool
+    {
+        return $this->stringList($package['references_needs'] ?? []) !== [];
+    }
+
+    private function isCoverImagePlaceholder(string $coverImage): bool
+    {
+        $normalized = trim($coverImage);
+
+        return $normalized === '__CMS_MEDIA_PLACEHOLDER_REQUIRED__'
+            || str_contains($normalized, 'CMS_MEDIA_PLACEHOLDER');
     }
 
     /**

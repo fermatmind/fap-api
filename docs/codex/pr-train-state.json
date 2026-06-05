@@ -225,9 +225,9 @@
     "failure_reason": null,
     "commit_sha": "b2d17375fc9f2bef0b18a5d10f2eed3cc0fa3b2a",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1886",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-05T04:28:00Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-04T17:00:31+08:00",
@@ -35526,7 +35526,7 @@
   "CONTENT-PACKS-INDEX-ARTIFACT-01": {
     "repo": "fap-api",
     "branch": "fix/content-packs-index-artifact-01",
-    "status": "ready_to_merge",
+    "status": "merged",
     "commit_sha": "7e0cc715e03b105e51c9556596212c48bb962868",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1763",
     "checks": {
@@ -46258,11 +46258,11 @@
     "repo": "fap-api",
     "base": "main",
     "train_scope": "seo_article_content_package_riasec_explanation_v2",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-05T04:28:00Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "branch": "codex/seo-article-riasec-v2-cms-draft-preflight-01",
-    "status": "ready_to_merge",
+    "status": "merged",
     "title": "docs(cms): preflight RIASEC explanation draft creation",
     "depends_on": [
       "SEO-ARTICLE-RIASEC-V2-CMS-IMPORT-PACKAGE-01"
@@ -46315,7 +46315,7 @@
       ]
     },
     "failure_reason": null,
-    "commit_sha": "6cbdc628007ad271a6ece7b4524f0d3f8d6e3bf4",
+    "commit_sha": "f85785fc795fa47574d05c355b79ccef7805d3cf",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1918",
     "transitions": [
       {
@@ -46345,6 +46345,102 @@
         "status": "ready_to_merge",
         "evidence": "GitHub checks passed; PR is ready for merge after ledger update checks pass.",
         "commit_sha": "6cbdc628007ad271a6ece7b4524f0d3f8d6e3bf4"
+      },
+      {
+        "at": "2026-06-05T08:38:49Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "notes": "Reconciled before SEO-ARTICLE-RIASEC-V2-IMPORTER-MAPPING-01: GitHub PR #1918 is MERGED, origin/main contains merge commit f85785fc795fa47574d05c355b79ccef7805d3cf, and local/remote task branches are absent."
+      }
+    ]
+  },
+  "SEO-ARTICLE-RIASEC-V2-IMPORTER-MAPPING-01": {
+    "repo": "fap-api",
+    "base": "main",
+    "train_scope": "seo_article_content_package_riasec_explanation_v2",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "branch": "codex/seo-article-riasec-v2-importer-mapping-01",
+    "status": "local_checks_passed",
+    "title": "fix(cms): map RIASEC article target packages into editorial importer schema",
+    "depends_on": [
+      "SEO-ARTICLE-RIASEC-V2-CMS-DRAFT-PREFLIGHT-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized SEO-ARTICLE-RIASEC-V2-IMPORTER-MAPPING-01, including PR train manifest/state entry updates, importer mapping, tests, and generated preflight docs. CMS draft creation, publish, search submission, content rewrite, deploy, and private URL access remain unauthorized."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "SEO-ARTICLE-RIASEC-V2-CMS-DRAFT-PREFLIGHT-01 merged as PR #1918 at 2026-06-05T04:28:00Z; origin/main contains merge commit f85785fc795fa47574d05c355b79ccef7805d3cf."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are confined to EditorialPackage importer mapping service/importer tests, the RIASEC importer mapping generated preflight artifact, and docs/codex PR-train metadata. No CMS draft, publish, search submission, deploy, content rewrite, or private URL access was performed."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "php -l backend/app/Services/Cms/EditorialPackage/EditorialPackageInputNormalizer.php",
+          "php -l backend/app/Services/Cms/EditorialPackage/EditorialPackageDraftImporter.php",
+          "php -l backend/tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php",
+          "python3 -m json.tool backend/docs/seo/generated/riasec-explanation-importer-mapping-preflight.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php --no-ansi",
+          "cd backend && vendor/bin/pint --test app/Services/Cms/EditorialPackage/EditorialPackageInputNormalizer.php app/Services/Cms/EditorialPackage/EditorialPackageDraftImporter.php tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php",
+          "git diff --check -- backend/app/Services/Cms/EditorialPackage/EditorialPackageInputNormalizer.php backend/app/Services/Cms/EditorialPackage/EditorialPackageDraftImporter.php backend/tests/Feature/Console/ArticleImportEditorialPackageCommandTest.php backend/docs/seo/generated/riasec-explanation-importer-mapping-preflight.v1.json docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+          "git diff --cached --check"
+        ],
+        "notes": "All local checks passed. RIASEC zh/en article-target dry-runs now return ok=true/action=will_create/errors_count=0 in dry-run mode only; references_count remains 0 and CMS media placeholder remains a publish blocker."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": ""
+      }
+    },
+    "result": {
+      "cms_draft_created": false,
+      "publish_allowed": false,
+      "search_submit_allowed": false,
+      "content_rewrite_performed": false,
+      "deploy_performed": false,
+      "private_url_accessed": false,
+      "preflight_artifact": "backend/docs/seo/generated/riasec-explanation-importer-mapping-preflight.v1.json",
+      "dry_run_results": {
+        "zh": {
+          "ok": true,
+          "action": "will_create",
+          "errors_count": 0,
+          "warnings_count": 6,
+          "references_count": 0
+        },
+        "en": {
+          "ok": true,
+          "action": "will_create",
+          "errors_count": 0,
+          "warnings_count": 4,
+          "references_count": 0
+        }
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "transitions": [
+      {
+        "at": "2026-06-05T08:38:49Z",
+        "from": "missing_from_manifest",
+        "to": "in_progress",
+        "notes": "Started importer mapping PR from explicit user authorization. Scope is limited to importer mapping, tests, generated preflight docs, and PR-train metadata."
+      },
+      {
+        "at": "2026-06-05T08:38:49Z",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "notes": "Syntax, JSON/YAML, focused PHPUnit, Pint, and scoped diff checks passed. No CMS draft creation, publish, search submission, deploy, content rewrite, or private URL access was performed."
       }
     ]
   },
