@@ -1,0 +1,29 @@
+asset_id: DAILY-GIVING-RECORD-REVIEW-TEMPLATE-01
+date: '2026-06-04'
+record_fields:
+  recipient_name: United Nations Foundation
+  donation_amount: 10
+  currency: CNY
+  donation_date: YYYY-MM-DD
+  raw_receipt_private_path: required
+  redacted_public_proof_url: required_or_withheld_reason
+  proof_status: pending_redaction|redacted|withheld
+  is_public: false
+  is_indexable: false
+  published_at: null
+review_steps:
+- confirm donation occurred
+- confirm recipient
+- confirm amount
+- confirm raw proof is private
+- confirm public proof redacted or withheld
+- confirm claim lint clean
+- confirm API public-safe
+- confirm noindex
+- confirm sitemap/llms absent
+- confirm social sync safe
+does_not_approve:
+- trust badge
+- indexability
+- search submission
+- official relationship claims

@@ -1,0 +1,102 @@
+asset_id: DAILY-GIVING-PROOF-REDACTION-SOP-01
+date: '2026-06-04'
+publish_allowed: false
+cms_draft_created: false
+requires_operator_review: true
+operator_decisions:
+  donation_start: today
+  daily_amount:
+    display_amount: true
+    amount: 10
+    currency: CNY
+    frequency: daily
+  recipient:
+    fixed: true
+    name: United Nations Foundation
+    claim_boundary: Recipient only. No UN/United Nations Foundation partnership, endorsement,
+      certification, authorization, or official relationship may be implied.
+  public_proof_policy:
+    public_proof_required_for_public_amplification: true
+    withheld_allowed: true
+    withheld_use: Allowed only as an approved privacy/safety exception; withheld proof
+      records must not be used for trust badge or high-amplification claims.
+  redaction_standard: Sensitive fields must be redacted. No redaction is allowed only
+    when a receipt/proof contains no sensitive fields after reviewer inspection.
+  proof_storage_strategy: Original receipt in private disk/bucket; redacted public
+    proof in separate public-safe media path or signed public URL after review; admin-only
+    signed URL for private proof if needed.
+  daily_giving_indexability: keep noindex
+  public_record_allowed: only after record exists and proof gate passes
+  trust_badge: not allowed now
+  social_sync: operator begins social videos/images today, but only with safe factual
+    language and no trust badge/official endorsement claims
+storage_strategy:
+  raw_proof:
+    storage: private_disk_or_private_bucket
+    public_access: false
+    admin_access: short_ttl_signed_url_or_private_storage_driver
+    must_not_enter_sitemap_or_llms: true
+  redacted_public_proof:
+    storage: public_safe_media_or_public_signed_url
+    public_access: allowed_after_review
+    proof_public_url_points_to: redacted_public_proof_only
+redaction_standard:
+  no_redaction_allowed_only_if: reviewer confirms no sensitive fields exist
+  redaction_required_if_sensitive_fields_exist: true
+  may_remain_visible:
+  - recipient_name
+  - donation_date
+  - donation_amount
+  - currency
+  - non-sensitive receipt issuer name
+  - proof_status
+  - short public reference code
+  must_redact:
+  - donor legal name unless approved
+  - donor email
+  - donor phone
+  - donor address
+  - bank account
+  - card number
+  - payment account id
+  - full transaction number
+  - full order number
+  - payment provider user id
+  - billing address
+  - QR payment token
+  - session id
+  - auth token
+  - receipt private URL
+  - browser URL with private token
+  - internal admin comments
+  transaction_identifier:
+    full_public_display: false
+    masked_short_reference_allowed: optional after reviewer approval
+withheld_proof_policy:
+  allowed: true
+  reason_required: true
+  can_power_trust_badge: false
+  can_support_public_amplification: false
+public_api_forbidden_fields:
+- proof_private_path
+- proof_redaction_notes
+- receipt_reference_private
+- internal_notes
+- admin_id
+- raw_transaction_id
+- payment_account
+- private_sync_diagnostics
+public_api_allowed_fields_after_gates:
+- record_public_id
+- recipient_name
+- donation_date
+- amount
+- currency
+- proof_status
+- proof_public_url_if_redacted_and_approved
+- public_note_if_claim_linted
+daily_giving_indexability:
+  current: noindex,nofollow
+  sitemap: absent
+  llms: absent
+  trust_badge: false

@@ -1,0 +1,65 @@
+asset_id: PUBLIC-BENEFIT-CLAIM-BOUNDARY-01
+date: '2026-06-04'
+publish_allowed: false
+cms_draft_created: false
+requires_operator_review: true
+allowed_claims:
+- independent public-benefit plan
+- intended recipient is United Nations Foundation
+- records require review before public display
+- original proof is private
+- public proof is redacted when sensitive fields are present
+- DailyGiving remains noindex until release gates pass
+- proof can be withheld under approved reason
+evidence_required_claims:
+  donated_today:
+  - private receipt exists
+  - date verified
+  - recipient verified
+  public_record_exists:
+  - record is completed/verified
+  - is_public=true
+  - published_at<=now
+  - API returns record
+  proof_available:
+  - redacted public proof URL
+  - review passed
+  - private proof not public
+  daily_amount:
+  - operator policy CNY 10
+  - record amount matches or variance explained
+forbidden_claims:
+- UN official partner
+- 联合国官方合作
+- official endorsement
+- 背书
+- 官方认证
+- certified by United Nations Foundation
+- authorized by the UN
+- approved by the UN
+- official fundraising partner
+- guaranteed impact
+- registered foundation
+- nonprofit organization unless documented
+- all records are public
+- stable daily giving operation until proven
+before_public_record:
+  allowed:
+  - plan language
+  - governance language
+  - proof readiness language
+  - noindex/gated status
+  forbidden:
+  - public daily giving ledger is live
+  - verified daily donation record
+  - trust badge
+after_public_record:
+  allowed:
+  - public record is available
+  - record reviewed under release gate
+  - public proof is redacted or withheld
+  still_forbidden:
+  - official partnership
+  - guaranteed impact
+  - trust badge without separate readiness
+trust_badge_allowed_now: false
