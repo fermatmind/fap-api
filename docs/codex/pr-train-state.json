@@ -31850,7 +31850,7 @@
   "RESULT-EN-PARITY-06": {
     "repo": "fap-api",
     "branch": "codex/result-en-parity-06-bigfive-v2-en-assets",
-    "status": "pr_opened",
+    "status": "ready_to_merge",
     "depends_on": [
       "RESULT-EN-PARITY-05"
     ],
@@ -44894,6 +44894,21 @@
             "status": "passed"
           }
         ]
+      },
+      "github": {
+        "status": "pass",
+        "merge_state": "CLEAN",
+        "checks": [
+          "hygiene",
+          "Semgrep blocking secrets",
+          "supply-chain",
+          "semgrep sarif non-blocking upload",
+          "content-pack-build-validate",
+          "verify-bigfive",
+          "verify-mbti-legacy",
+          "verify-mbti-v2",
+          "Semgrep OSS"
+        ]
       }
     },
     "failure_reason": null,
@@ -47068,7 +47083,7 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": "305bb45e02c74c2a3dbeab704ff78a6a3c072ed5",
+    "commit_sha": "fef2189cccb002b0fc57931ea600b03c018bdceb",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1927",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -47142,6 +47157,11 @@
         "at": "2026-06-05",
         "status": "pr_opened",
         "note": "Opened PR #1927 with scoped CMS sync artifacts and PR-train metadata."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed and merge state was CLEAN. Changed files remained limited to the CMS sync generated artifact, operations report, manifest, and state ledger."
       }
     ]
   }
