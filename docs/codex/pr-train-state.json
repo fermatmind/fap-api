@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-05T11:29:00+08:00",
+  "updated_at": "2026-06-05T11:35:00+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -45917,7 +45917,7 @@
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "branch": "codex/seo-article-riasec-v2-reference-source-review-01",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "title": "docs(seo): verify reference needs for RIASEC explanation package",
     "depends_on": [
       "SEO-ARTICLE-RIASEC-V2-PACKAGE-VALIDATION-01"
@@ -45946,8 +45946,8 @@
         "notes": "Public source review ledger, JSON/YAML parse, and scoped diff check passed. Codex did not rewrite article copy."
       },
       "github": {
-        "status": "pending",
-        "evidence": null
+        "status": "pass",
+        "evidence": "GitHub checks passed on PR #1913: Semgrep, hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
       }
     },
     "result": {
@@ -45988,6 +45988,12 @@
         "from": "local_checks_passed",
         "to": "pr_open",
         "notes": "Opened https://github.com/fermatmind/fap-api/pull/1913."
+      },
+      {
+        "at": "2026-06-05T11:35:00+08:00",
+        "from": "pr_open",
+        "to": "ready_to_merge",
+        "notes": "All required GitHub checks passed on PR #1913."
       }
     ]
   },
