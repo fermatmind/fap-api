@@ -48080,7 +48080,7 @@
     "repo": "fap-api",
     "base": "main",
     "branch": "codex/seo-article-riasec-v2-reference-media-revision-approval-01",
-    "status": "local_checks_passed",
+    "status": "pr_open_github_checks_pending",
     "title": "docs(seo): record RIASEC reference media revision approval blockers",
     "train_scope": "seo_article_content_package_riasec_explanation_v2",
     "depends_on": [
@@ -48111,6 +48111,10 @@
           "git diff --cached --check"
         ],
         "notes": "PHP lint, JSON/YAML parsing, focused PHPUnit artifact contract, and scoped diff whitespace checks passed. Composer install and local .env setup were worktree-only and not staged."
+      },
+      "github": {
+        "status": "pending",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/1943"
       }
     },
     "result": {
@@ -48157,8 +48161,8 @@
         "note": "Report-preview and product-availability statements remain Unknown until product confirmation."
       }
     ],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "ae47b780cf38eab5601d0d9e8feec8a11d5fecc3",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1943",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -48178,6 +48182,11 @@
         "at": "2026-06-05",
         "status": "local_checks_passed",
         "note": "Local validation passed with 6 focused PHPUnit assertions groups / 77 assertions, JSON/YAML parse, PHP lint, and scoped diff checks."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "pr_open_github_checks_pending",
+        "note": "Opened PR #1943 after local checks and scoped staging passed."
       }
     ]
   }
