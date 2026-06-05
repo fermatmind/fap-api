@@ -46189,7 +46189,7 @@
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "branch": "codex/seo-article-riasec-v2-cms-draft-preflight-01",
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "title": "docs(cms): preflight RIASEC explanation draft creation",
     "depends_on": [
       "SEO-ARTICLE-RIASEC-V2-CMS-IMPORT-PACKAGE-01"
@@ -46221,7 +46221,9 @@
       },
       "github": {
         "status": "pending",
-        "evidence": null
+        "evidence": "PR opened; waiting for GitHub checks.",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/1918",
+        "commit_sha": "f9be6642a997ef74e2c2542abf10ee0e0ee55d5b"
       }
     },
     "result": {
@@ -46240,8 +46242,8 @@
       ]
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "f9be6642a997ef74e2c2542abf10ee0e0ee55d5b",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1918",
     "transitions": [
       {
         "at": "2026-06-05T10:52:00+08:00",
@@ -46260,6 +46262,11 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "notes": "Draft preflight artifact/report/test passed local checks; draft creation remains blocked by importer dry-run failure and Unknown hidden CMS/operator checks."
+      },
+      {
+        "status": "pr_open",
+        "evidence": "https://github.com/fermatmind/fap-api/pull/1918",
+        "commit_sha": "f9be6642a997ef74e2c2542abf10ee0e0ee55d5b"
       }
     ]
   },
