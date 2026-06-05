@@ -24627,7 +24627,7 @@
     "updated_at": "2026-05-17T10:36:34.999719Z"
   },
   "OPS-CI-CODESCAN-API-01": {
-    "status": "ready_to_merge",
+    "status": "merged",
     "repo": "fap-api",
     "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
     "branch": "codex/ops-ci-codescan-api-01",
@@ -47456,11 +47456,11 @@
         "note": "Publish, public indexability, sitemap/llms inclusion, search submission, and post-publish baseline review remain forbidden until separate controlled publish authorization."
       }
     ],
-    "commit_sha": "f9d2eb1c1c0c630a3e567d1d9e2eac25b87b2234",
+    "commit_sha": "81451ae547e8899a498f7743a221c65e993df9f5",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1931",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-05T12:55:21Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "failure_reason": null,
     "transitions": [
       {
@@ -47492,6 +47492,11 @@
         "at": "2026-06-05",
         "status": "ready_to_merge",
         "note": "GitHub checks passed for PR #1931 and changed files remain confined to draft-create artifact, postcheck report, focused test, and PR-train metadata."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "merged",
+        "note": "PR #1931 was squash-merged at 2026-06-05T12:55:21Z with merge commit 81451ae547e8899a498f7743a221c65e993df9f5; origin/main contains the merge commit; remote task branch is absent; local task branch cleanup is complete."
       }
     ]
   }
