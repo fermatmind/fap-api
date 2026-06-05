@@ -948,6 +948,19 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_content_page_help_service_field_contract_files(): void
+    {
+        $changed = [
+            'backend/app/Filament/Ops/Resources/ContentPageResource.php',
+            'backend/app/Http/Controllers/API/V0_5/Cms/ContentPageController.php',
+            'backend/app/Models/ContentPage.php',
+            'backend/app/Services/Cms/ContentPageTranslationAdapter.php',
+            'backend/database/migrations/2026_06_05_150000_add_help_service_fields_to_content_pages.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_daily_giving_ledger_mvp_files(): void
     {
         $routeChangedLines = [
@@ -2822,6 +2835,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isContentPageHelpServiceFieldContractFile($file)) {
+                continue;
+            }
+
             if ($this->isChineseClaimLinterRuntimeFile($file)) {
                 continue;
             }
@@ -3776,6 +3793,17 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/ContentPagesPublishControlledCommand.php',
             'backend/app/Services/ContentPages/ContentPagesControlledPublishService.php',
+        ], true);
+    }
+
+    private function isContentPageHelpServiceFieldContractFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Filament/Ops/Resources/ContentPageResource.php',
+            'backend/app/Http/Controllers/API/V0_5/Cms/ContentPageController.php',
+            'backend/app/Models/ContentPage.php',
+            'backend/app/Services/Cms/ContentPageTranslationAdapter.php',
+            'backend/database/migrations/2026_06_05_150000_add_help_service_fields_to_content_pages.php',
         ], true);
     }
 

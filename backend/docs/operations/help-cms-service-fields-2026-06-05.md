@@ -23,6 +23,7 @@ This task adds first-class ContentPage fields required by the Help service conte
 - ContentPage translation revision payloads preserve the fields.
 - Filament ContentPage editor exposes the fields.
 - Focused ContentPage API test covers draft-only Help service field persistence.
+- BigFive runtime-freeze classifier explicitly ignores only the Help service ContentPage field-contract files changed in this PR.
 
 ## Remaining Hard Gates
 
@@ -41,11 +42,13 @@ php -l backend/app/Services/Cms/ContentPageTranslationAdapter.php
 php -l backend/app/Filament/Ops/Resources/ContentPageResource.php
 php -l backend/database/migrations/2026_06_05_150000_add_help_service_fields_to_content_pages.php
 php -l backend/tests/Feature/ContentPages/ContentPagePublicApiTest.php
+php -l backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
 python3 -m json.tool backend/docs/help/generated/help-cms-service-fields-01.v1.json >/dev/null
 python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
 python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
 cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=ContentPagePublicApiTest --no-ansi
 cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force
-git diff --check -- backend/app/Models/ContentPage.php backend/app/Http/Controllers/API/V0_5/Cms/ContentPageController.php backend/app/Services/Cms/ContentPageTranslationAdapter.php backend/app/Filament/Ops/Resources/ContentPageResource.php backend/database/migrations/2026_06_05_150000_add_help_service_fields_to_content_pages.php backend/tests/Feature/ContentPages/ContentPagePublicApiTest.php backend/docs/help/generated/help-cms-service-fields-01.v1.json backend/docs/operations/help-cms-service-fields-2026-06-05.md docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_content_page_help_service_field_contract_files|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff' --no-ansi
+git diff --check -- backend/app/Models/ContentPage.php backend/app/Http/Controllers/API/V0_5/Cms/ContentPageController.php backend/app/Services/Cms/ContentPageTranslationAdapter.php backend/app/Filament/Ops/Resources/ContentPageResource.php backend/database/migrations/2026_06_05_150000_add_help_service_fields_to_content_pages.php backend/tests/Feature/ContentPages/ContentPagePublicApiTest.php backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php backend/docs/help/generated/help-cms-service-fields-01.v1.json backend/docs/operations/help-cms-service-fields-2026-06-05.md docs/codex/pr-train.yaml docs/codex/pr-train-state.json
 git diff --cached --check
 ```

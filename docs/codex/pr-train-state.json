@@ -45513,6 +45513,7 @@
           {"command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=ContentPagePublicApiTest --no-ansi", "status": "passed_with_warning", "notes": "Exited 0 with 77 assertions and existing Laravel file_get_contents warnings."},
           {"command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force", "status": "pass"},
           {"command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff' --no-ansi", "status": "passed_with_warning", "notes": "Exited 0 with 3 assertions and existing Laravel file_get_contents warning."},
+          {"command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_content_page_help_service_field_contract_files|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff' --no-ansi", "status": "passed_with_warning", "notes": "Exited 0 with 4 assertions and existing Laravel file_get_contents warnings."},
           {"command": "git diff --check -- backend/app/Models/ContentPage.php backend/app/Http/Controllers/API/V0_5/Cms/ContentPageController.php backend/app/Services/Cms/ContentPageTranslationAdapter.php backend/app/Filament/Ops/Resources/ContentPageResource.php backend/database/migrations/2026_06_05_150000_add_help_service_fields_to_content_pages.php backend/tests/Feature/ContentPages/ContentPagePublicApiTest.php backend/docs/help/generated/help-cms-service-fields-01.v1.json backend/docs/operations/help-cms-service-fields-2026-06-05.md docs/codex/pr-train.yaml docs/codex/pr-train-state.json", "status": "pass"}
         ]
       },
@@ -45582,6 +45583,16 @@
         "at": "2026-06-05",
         "status": "pr_opened",
         "note": "Opened PR #1947 for HELP-CMS-SERVICE-FIELDS-01."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "github_checks_failed_fix_in_progress",
+        "note": "GitHub verify-bigfive failed because runtime-freeze branch diff detected the ContentPage Help service field-contract files. Added a narrow classifier exception and focused test for only those files."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "github_fix_local_checks_passed",
+        "note": "Focused runtime-freeze classifier test and scoped diff whitespace checks passed after the narrow BigFive gate fix."
       }
     ]
   },
