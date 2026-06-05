@@ -44817,7 +44817,7 @@
     "repo": "fap-api",
     "branch": "codex/help-content-draft-revision-request-01",
     "base": "origin/main",
-    "status": "ready_to_merge",
+    "status": "local_checks_passed",
     "train_scope": "window_9_help_service_content",
     "title": "docs(help): revise v01 Help content package and rerun review request",
     "depends_on": [
@@ -44850,11 +44850,54 @@
           "verify-mbti-v2",
           "Semgrep blocking secrets"
         ]
+      },
+      "package_revision": {
+        "status": "pass",
+        "original_sha256": "2e3a947b3b59663e6f359de0237a4efe4e7dc2ec518be93b3bda15ffeb0aaae6",
+        "revised_sha256": "f971f5cd279018c2db469ccd87c43484c4983de5484e8c1e47343aa5813e6bb9",
+        "changed_assets": [
+          "UNLOCK-FAILURE-HELP-CARD-01",
+          "PAYMENT-REFUND-FAQ-PACKAGE-01",
+          "RESULT-RECOVERY-FAQ-01",
+          "PRIVACY-FAQ-PACKAGE-01",
+          "DATA-DELETION-REQUEST-FAQ-01"
+        ],
+        "visible_guard_status": "pass"
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          {
+            "command": "python3 -m json.tool backend/docs/help/generated/help-content-draft-revision-request-01.v1.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "python3 -m json.tool backend/docs/help/generated/help-content-draft-editorial-review-rerun-01.v1.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+            "status": "passed"
+          },
+          {
+            "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=HelpContentImportPackageTest --no-ansi",
+            "status": "passed_with_warning",
+            "evidence": "Exit 0; 1 test warning, 454 assertions."
+          },
+          {
+            "command": "git diff --check -- backend/docs/help/generated/help-content-draft-revision-request-01.v1.json backend/docs/operations/help-content-draft-revision-request-2026-06-05.md backend/docs/help/generated/help-content-draft-editorial-review-rerun-01.v1.json backend/docs/operations/help-content-draft-editorial-review-rerun-2026-06-05.md docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+            "status": "passed"
+          }
+        ]
       }
     },
     "failure_reason": null,
-    "commit_sha": "44963cc25081001c33eac973cc67333975475fc9",
-    "pr_url": "https://github.com/fermatmind/fap-api/pull/1921",
+    "commit_sha": null,
+    "pr_url": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -44919,8 +44962,37 @@
         "at": "2026-06-05",
         "status": "ready_to_merge",
         "note": "PR #1921 GitHub checks passed and changed files remained limited to manifest/state."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "local_artifacts_created_validation_pending",
+        "note": "Revised the local v01 package at the approved zip path, recomputed SHA-256, and generated revision/review-rerun artifacts. No CMS mutation, publish, deploy, private URL access, or secret/env/cookie/token read was performed."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "local_checks_passed",
+        "note": "Generated artifacts parsed, manifest/state parsed, scoped diff check passed, and HelpContentImportPackageTest exited 0 with 454 assertions and one Laravel warning. Review rerun status is review_requested; Operator approval remains unclaimed."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "rebased_local_checks_still_passed",
+        "note": "Rebased the task branch onto the latest origin/main after main advanced by one commit; JSON/YAML parse, scoped diff check, and HelpContentImportPackageTest still passed."
       }
-    ]
+    ],
+    "result": {
+      "review_status": "review_requested",
+      "package_hash_checked": true,
+      "original_sha256": "2e3a947b3b59663e6f359de0237a4efe4e7dc2ec518be93b3bda15ffeb0aaae6",
+      "revised_sha256": "f971f5cd279018c2db469ccd87c43484c4983de5484e8c1e47343aa5813e6bb9",
+      "draft_count_checked": 12,
+      "cms_mutation_performed": false,
+      "publish_performed": false,
+      "operator_approval_claimed": false,
+      "revision_artifact": "backend/docs/help/generated/help-content-draft-revision-request-01.v1.json",
+      "revision_report": "backend/docs/operations/help-content-draft-revision-request-2026-06-05.md",
+      "review_rerun_artifact": "backend/docs/help/generated/help-content-draft-editorial-review-rerun-01.v1.json",
+      "review_rerun_report": "backend/docs/operations/help-content-draft-editorial-review-rerun-2026-06-05.md"
+    }
   },
   "PUBLIC-BENEFIT-ASSET-PACKAGES-ARCHIVE-01": {
     "repo": "fap-api",

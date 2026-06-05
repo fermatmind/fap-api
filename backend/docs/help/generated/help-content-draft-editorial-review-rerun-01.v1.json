@@ -1,0 +1,332 @@
+{
+  "generated_at": "2026-06-05",
+  "task": "HELP-CONTENT-DRAFT-REVISION-REQUEST-01",
+  "source_package": {
+    "zip_path": "/Users/rainie/Desktop/费马资料文件/fermatmind-help-service-content-drafts-01.zip",
+    "folder_path": "/Users/rainie/Desktop/fermatmind-help-service-content-drafts-01",
+    "original_sha256": "2e3a947b3b59663e6f359de0237a4efe4e7dc2ec518be93b3bda15ffeb0aaae6",
+    "revised_sha256": "f971f5cd279018c2db469ccd87c43484c4983de5484e8c1e47343aa5813e6bb9",
+    "sha256_changed": true,
+    "required_file_check": "pass",
+    "missing_files": [],
+    "unexpected_files": [],
+    "file_count": 14,
+    "content_mode": "draft_only",
+    "publish_allowed": false,
+    "requires_operator_review": true,
+    "cms_draft_created_by_this_pr": false
+  },
+  "package_assets": [
+    {
+      "asset_id": "UNLOCK-FAILURE-HELP-CARD-01",
+      "yaml": "01_UNLOCK-FAILURE-HELP-CARD-01.yaml",
+      "markdown": "01_UNLOCK-FAILURE-HELP-CARD-01.md",
+      "slug_zh": "/zh/help/unlock-failure",
+      "slug_en": "/en/help/unlock-failure",
+      "faq_items": 4,
+      "schema_eligible_after_review": true
+    },
+    {
+      "asset_id": "PAYMENT-REFUND-FAQ-PACKAGE-01",
+      "yaml": "02_PAYMENT-REFUND-FAQ-PACKAGE-01.yaml",
+      "markdown": "02_PAYMENT-REFUND-FAQ-PACKAGE-01.md",
+      "slug_zh": "/zh/help/payment-refund",
+      "slug_en": "/en/help/payment-refund",
+      "faq_items": 4,
+      "schema_eligible_after_review": true
+    },
+    {
+      "asset_id": "RESULT-RECOVERY-FAQ-01",
+      "yaml": "03_RESULT-RECOVERY-FAQ-01.yaml",
+      "markdown": "03_RESULT-RECOVERY-FAQ-01.md",
+      "slug_zh": "/zh/help/result-recovery",
+      "slug_en": "/en/help/result-recovery",
+      "faq_items": 4,
+      "schema_eligible_after_review": true
+    },
+    {
+      "asset_id": "PRIVACY-FAQ-PACKAGE-01",
+      "yaml": "04_PRIVACY-FAQ-PACKAGE-01.yaml",
+      "markdown": "04_PRIVACY-FAQ-PACKAGE-01.md",
+      "slug_zh": "/zh/help/privacy-data",
+      "slug_en": "/en/help/privacy-data",
+      "faq_items": 4,
+      "schema_eligible_after_review": true
+    },
+    {
+      "asset_id": "NONDIAGNOSTIC-HELP-COPY-01",
+      "yaml": "05_NONDIAGNOSTIC-HELP-COPY-01.yaml",
+      "markdown": "05_NONDIAGNOSTIC-HELP-COPY-01.md",
+      "slug_zh": "/zh/help/use-boundaries",
+      "slug_en": "/en/help/use-boundaries",
+      "faq_items": 4,
+      "schema_eligible_after_review": true
+    },
+    {
+      "asset_id": "DATA-DELETION-REQUEST-FAQ-01",
+      "yaml": "06_DATA-DELETION-REQUEST-FAQ-01.yaml",
+      "markdown": "06_DATA-DELETION-REQUEST-FAQ-01.md",
+      "slug_zh": "/zh/help/data-deletion",
+      "slug_en": "/en/help/data-deletion",
+      "faq_items": 4,
+      "schema_eligible_after_review": true
+    }
+  ],
+  "changed_assets": [
+    "UNLOCK-FAILURE-HELP-CARD-01",
+    "PAYMENT-REFUND-FAQ-PACKAGE-01",
+    "RESULT-RECOVERY-FAQ-01",
+    "PRIVACY-FAQ-PACKAGE-01",
+    "DATA-DELETION-REQUEST-FAQ-01"
+  ],
+  "unchanged_assets": [
+    "NONDIAGNOSTIC-HELP-COPY-01"
+  ],
+  "revision_summary": {
+    "UNLOCK-FAILURE-HELP-CARD-01": [
+      "visible_body_draft.zh",
+      "visible_body_draft.en"
+    ],
+    "PAYMENT-REFUND-FAQ-PACKAGE-01": [
+      "visible_body_draft.zh",
+      "visible_body_draft.en"
+    ],
+    "RESULT-RECOVERY-FAQ-01": [
+      "page_purpose",
+      "draft_summary.zh",
+      "draft_summary.en",
+      "visible_body_draft.zh",
+      "visible_body_draft.en",
+      "faq_draft_items[3]"
+    ],
+    "PRIVACY-FAQ-PACKAGE-01": [
+      "page_purpose",
+      "visible_body_draft.zh",
+      "visible_body_draft.en",
+      "faq_draft_items[0]",
+      "faq_draft_items[3]"
+    ],
+    "DATA-DELETION-REQUEST-FAQ-01": [
+      "visible_body_draft.zh",
+      "visible_body_draft.en"
+    ]
+  },
+  "visible_content_guard_scan": {
+    "scope": "draft_title, draft_summary, visible_body_draft, faq_draft_items from revised package YAML files",
+    "guard_metadata_fields_excluded_from_block_trigger": [
+      "forbidden_claims_checklist",
+      "global_forbidden_route_families",
+      "support_fields_required",
+      "cms_fields_to_fill",
+      "operator_policy"
+    ],
+    "status": "pass",
+    "blocked_assets": [],
+    "previous_blocked_assets": [
+      {
+        "asset_id": "UNLOCK-FAILURE-HELP-CARD-01",
+        "fields": [
+          "visible_body_draft"
+        ],
+        "hit_categories": [
+          "payment_id",
+          "result_url"
+        ]
+      },
+      {
+        "asset_id": "PAYMENT-REFUND-FAQ-PACKAGE-01",
+        "fields": [
+          "visible_body_draft"
+        ],
+        "hit_categories": [
+          "payment_id",
+          "result_url"
+        ]
+      },
+      {
+        "asset_id": "RESULT-RECOVERY-FAQ-01",
+        "fields": [
+          "draft_summary",
+          "visible_body_draft",
+          "faq_draft_items"
+        ],
+        "hit_categories": [
+          "result_url"
+        ]
+      },
+      {
+        "asset_id": "PRIVACY-FAQ-PACKAGE-01",
+        "fields": [
+          "visible_body_draft",
+          "faq_draft_items"
+        ],
+        "hit_categories": [
+          "result_url"
+        ]
+      },
+      {
+        "asset_id": "DATA-DELETION-REQUEST-FAQ-01",
+        "fields": [
+          "visible_body_draft"
+        ],
+        "hit_categories": [
+          "payment_id",
+          "result_url"
+        ]
+      }
+    ]
+  },
+  "cms_draft_evidence": {
+    "source": "merged postcheck artifact; no CMS read or mutation was performed in this PR",
+    "expected_target_count": 12,
+    "postcheck_record_count": 12,
+    "all_status_draft": true,
+    "all_non_public": true,
+    "all_non_indexable": true,
+    "all_unpublished": true,
+    "locales": [
+      "en",
+      "zh-CN"
+    ],
+    "slugs": [
+      "help-data-deletion",
+      "help-payment-refund",
+      "help-privacy-data",
+      "help-result-recovery",
+      "help-unlock-failure",
+      "help-use-boundaries"
+    ],
+    "rows_checked_from_artifact": [
+      {
+        "id": 42,
+        "locale": "en",
+        "slug": "help-data-deletion",
+        "path": "/help/data-deletion",
+        "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:DATA-DELETION-REQUEST-FAQ-01"
+      },
+      {
+        "id": 41,
+        "locale": "zh-CN",
+        "slug": "help-data-deletion",
+        "path": "/help/data-deletion",
+        "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:DATA-DELETION-REQUEST-FAQ-01"
+      },
+      {
+        "id": 34,
+        "locale": "en",
+        "slug": "help-payment-refund",
+        "path": "/help/payment-refund",
+        "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:PAYMENT-REFUND-FAQ-PACKAGE-01"
+      },
+      {
+        "id": 33,
+        "locale": "zh-CN",
+        "slug": "help-payment-refund",
+        "path": "/help/payment-refund",
+        "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:PAYMENT-REFUND-FAQ-PACKAGE-01"
+      },
+      {
+        "id": 38,
+        "locale": "en",
+        "slug": "help-privacy-data",
+        "path": "/help/privacy-data",
+        "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:PRIVACY-FAQ-PACKAGE-01"
+      },
+      {
+        "id": 37,
+        "locale": "zh-CN",
+        "slug": "help-privacy-data",
+        "path": "/help/privacy-data",
+        "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:PRIVACY-FAQ-PACKAGE-01"
+      },
+      {
+        "id": 36,
+        "locale": "en",
+        "slug": "help-result-recovery",
+        "path": "/help/result-recovery",
+        "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:RESULT-RECOVERY-FAQ-01"
+      },
+      {
+        "id": 35,
+        "locale": "zh-CN",
+        "slug": "help-result-recovery",
+        "path": "/help/result-recovery",
+        "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:RESULT-RECOVERY-FAQ-01"
+      },
+      {
+        "id": 32,
+        "locale": "en",
+        "slug": "help-unlock-failure",
+        "path": "/help/unlock-failure",
+        "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:UNLOCK-FAILURE-HELP-CARD-01"
+      },
+      {
+        "id": 31,
+        "locale": "zh-CN",
+        "slug": "help-unlock-failure",
+        "path": "/help/unlock-failure",
+        "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:UNLOCK-FAILURE-HELP-CARD-01"
+      },
+      {
+        "id": 40,
+        "locale": "en",
+        "slug": "help-use-boundaries",
+        "path": "/help/use-boundaries",
+        "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:NONDIAGNOSTIC-HELP-COPY-01"
+      },
+      {
+        "id": 39,
+        "locale": "zh-CN",
+        "slug": "help-use-boundaries",
+        "path": "/help/use-boundaries",
+        "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:NONDIAGNOSTIC-HELP-COPY-01"
+      }
+    ],
+    "cms_content_mutated_in_this_pr": false,
+    "revised_package_applied_to_cms_rows": false
+  },
+  "sidecars": [
+    {
+      "id": "HELP-CONTENT-DRAFT-REVISION-CMS-DRAFT-SYNC",
+      "status": "open_followup_or_operator_action",
+      "note": "The local v01 package was revised and rescanned, but this PR did not mutate existing CMS draft rows."
+    },
+    {
+      "id": "HELP-CONTENT-DRAFT-REVISION-SUPPORT-CONTACT-FIELD",
+      "status": "open_publish_preflight",
+      "note": "support@fermatmind.com exists in the import package layer, but prior postcheck did not verify it inside production ContentPage rows or a first-class support_contact field."
+    },
+    {
+      "id": "HELP-CONTENT-DRAFT-REVISION-PUBLISH-BLOCK",
+      "status": "hard_gate",
+      "note": "Publish, CMS mutation, deploy, search submission, payment/refund action, and private URL access remain forbidden."
+    },
+    {
+      "id": "HELP-CONTENT-DRAFT-REVISION-OPERATOR-APPROVAL",
+      "status": "hard_gate",
+      "note": "Operator editorial approval was not performed or claimed by Codex."
+    }
+  ],
+  "scope_validation": {
+    "cms_mutation_performed": false,
+    "publish_performed": false,
+    "deploy_performed": false,
+    "search_submission_performed": false,
+    "payment_or_refund_performed": false,
+    "payment_provider_changed": false,
+    "private_url_access_performed": false,
+    "secret_env_cookie_token_read": false,
+    "operator_approval_claimed": false
+  },
+  "schema": "help-content-draft-editorial-review-rerun-01.v1",
+  "review_status": "review_requested",
+  "decision": "REVIEW_REQUESTED_VISIBLE_GUARD_PASS_OPERATOR_APPROVAL_REQUIRED",
+  "operator_review": {
+    "review_requested": true,
+    "review_passed": false,
+    "operator_editorial_approval_present": false,
+    "approval_claimed_by_codex": false,
+    "block_reason": null
+  },
+  "next_task_recommendation": "HELP-CONTENT-DRAFT-CMS-SYNC-OR-OPERATOR-REVIEW-01"
+}
