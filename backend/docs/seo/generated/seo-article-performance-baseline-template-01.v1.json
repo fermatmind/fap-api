@@ -1,0 +1,75 @@
+{
+  "artifact_id": "seo-article-performance-baseline-template-01",
+  "artifact_version": "v1",
+  "generated_at": "2026-06-05T00:00:00+08:00",
+  "scope": "article_specific_7_14_day_baseline_template",
+  "unknown_policy": "Unknown is not zero",
+  "content_generation": false,
+  "cms_mutation": false,
+  "publish_action": false,
+  "search_submission": false,
+  "private_url_access": false,
+  "fields": [
+    "article_id",
+    "locale",
+    "slug",
+    "canonical_url",
+    "target_keyword",
+    "target_intent",
+    "primary_cta_target",
+    "secondary_cta_target",
+    "in_sitemap",
+    "indexed_google",
+    "indexed_baidu",
+    "google_impressions",
+    "google_clicks",
+    "google_ctr",
+    "google_avg_position",
+    "baidu_search_pv",
+    "landing_pv",
+    "article_to_test_click",
+    "start_test",
+    "complete_test",
+    "view_result",
+    "private_url_seen",
+    "internal_link_clicks",
+    "content_update_decision"
+  ],
+  "review_windows": [
+    "T+7",
+    "T+14"
+  ],
+  "rules": {
+    "private_url_seen_yes": "opens_P0_privacy_investigation",
+    "purchase_truth": "backend_only",
+    "analytics_purchase_truth": false,
+    "record_private_urls": false,
+    "record_raw_user_identifiers": false,
+    "search_submission_requires_separate_authorization": true
+  },
+  "allowed_content_update_decisions": [
+    "hold",
+    "update",
+    "expand",
+    "pause",
+    "rollback",
+    "Unknown"
+  ],
+  "canonical_url_policy": {
+    "allowed": [
+      "public_article_canonical_url",
+      "public_test_canonical_url",
+      "approved_public_career_url"
+    ],
+    "forbidden_fragments": [
+      "/result",
+      "/orders",
+      "/share",
+      "/pay",
+      "/payment",
+      "/history",
+      "token"
+    ]
+  },
+  "next_task": "SEO-ARTICLE-TOPIC-PRIORITY-01"
+}
