@@ -47058,7 +47058,7 @@
     "repo": "fap-api",
     "branch": "codex/daily-giving-first-record-review-template-01",
     "base": "main",
-    "status": "pr_open_github_checks_pending",
+    "status": "ready_to_merge",
     "train_scope": "window_7_public_benefit_trust_gate",
     "title": "docs(benefit): define DailyGiving first record review template",
     "depends_on": [
@@ -47839,6 +47839,11 @@
           "git diff --cached --check"
         ],
         "notes": "PHP lint, JSON/YAML parsing, focused PHPUnit artifact contract, and scoped diff whitespace checks passed."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #1937 checks passed: hygiene, supply-chain, content-pack-build-validate, Semgrep blocking secrets, Semgrep OSS, semgrep sarif non-blocking upload, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2.",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/1937"
       }
     },
     "result": {
@@ -47901,6 +47906,11 @@
         "at": "2026-06-05",
         "status": "pr_open_github_checks_pending",
         "note": "Opened PR #1937 for scoped RIASEC editorial review artifact, report, focused test, and PR-train metadata."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed for PR #1937 and changed files remain confined to the RIASEC editorial review artifact/report/test and docs/codex metadata."
       }
     ]
   }
