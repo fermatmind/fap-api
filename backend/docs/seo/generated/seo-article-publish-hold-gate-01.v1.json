@@ -1,0 +1,86 @@
+{
+  "artifact_id": "SEO-ARTICLE-PUBLISH-HOLD-GATE-01",
+  "date": "2026-06-05",
+  "scope": "seo_article_publish_hold_gate",
+  "boundaries": {
+    "article_copy_written": false,
+    "title_h1_meta_faq_cta_copy_written": false,
+    "cms_draft_created": false,
+    "publish_executed": false,
+    "search_submission_executed": false,
+    "private_url_accessed": false,
+    "runtime_changed": false,
+    "deploy_executed": false
+  },
+  "decision": {
+    "publish": "HOLD",
+    "cms_draft_creation": "HOLD",
+    "search_submission": "HOLD",
+    "next_gpt_content_package_request_input": "GO_AFTER_SEPARATE_AUTHORIZATION"
+  },
+  "required_gates_before_cms_draft_planning": [
+    "topic_priority_approved",
+    "request_card_complete_without_publishable_copy",
+    "claim_boundary_reviewed",
+    "cta_route_gate_pass",
+    "internal_link_plan_pass_or_explicit_conditional",
+    "faq_schema_smoke_pass",
+    "cms_field_map_known_or_unknown_marked",
+    "performance_baseline_owner_assigned",
+    "private_url_policy_pass"
+  ],
+  "required_gates_before_publish_preflight": [
+    "cms_draft_authorization",
+    "import_package_equivalence_pass",
+    "draft_non_public_non_indexable_no_published_revision",
+    "draft_public_absence_pass",
+    "editorial_review_approved",
+    "claim_warning_ack_only_when_preflight_reports_warning",
+    "media_graph_reference_cta_faq_completeness_pass_or_exception",
+    "controlled_publish_dry_run_pass_no_writes"
+  ],
+  "required_gates_before_publish_execution": [
+    "controlled_publish_preflight_ok_true",
+    "exact_article_ids_known",
+    "exact_locale_slug_list_known",
+    "target_revisions_approved",
+    "claim_warnings_acknowledged_for_affected_article_ids_only",
+    "cta_route_gate_still_pass",
+    "faq_schema_smoke_still_pass",
+    "draft_public_absence_still_pass",
+    "separate_exact_publish_authorization_after_successful_preflight"
+  ],
+  "post_publish_smoke": [
+    "public_page_200",
+    "public_article_api_200",
+    "public_seo_api_200",
+    "canonical_hreflang_present",
+    "article_breadcrumb_faq_schema_state_checked",
+    "cta_hrefs_public_canonical",
+    "sitemap_llms_llms_full_inclusion",
+    "no_private_url_exposure",
+    "baseline_row_initialized_with_unknown_preserved",
+    "t7_t14_review_owner_assigned"
+  ],
+  "next_authorization_prompt": "I authorize Codex to prepare the GPT-5.5 Pro content package request inputs for the next RIASEC explanation SEO article only. Do not create a CMS draft, do not write final article copy in Codex, do not publish, do not submit search URLs, and do not access private/result/order/share/pay/payment/history/tokenized URLs.",
+  "prompt_scope": {
+    "authorizes_request_input_preparation_only": true,
+    "authorizes_gpt_output_acceptance": false,
+    "authorizes_cms_import": false,
+    "authorizes_cms_draft_creation": false,
+    "authorizes_editorial_approval": false,
+    "authorizes_publish_preflight": false,
+    "authorizes_publish_execution": false,
+    "authorizes_search_submission": false
+  },
+  "stop_conditions": [
+    "codex_publishable_article_copy_requested",
+    "title_h1_meta_faq_cta_copy_requested_inside_codex",
+    "cms_mutation_without_separate_authorization",
+    "publish_or_search_submission_without_successful_preflight",
+    "private_or_tokenized_cta_or_canonical_url",
+    "unknown_metric_recorded_as_zero",
+    "purchase_order_payment_truth_inferred_from_analytics"
+  ],
+  "final_train_status": "ready_for_separately_authorized_gpt_content_package_request_input_not_publish"
+}
