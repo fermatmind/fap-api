@@ -34731,7 +34731,7 @@
     "branch": "codex/detail-ready-1048-replacement-authority-source-controlled-import-01",
     "base": "main",
     "title": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_SOURCE_CONTROLLED_IMPORT-01 controlled replacement authority source import path",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "depends_on": [
       "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_SOURCE_REPAIR-01"
     ],
@@ -35103,7 +35103,7 @@
     "branch": "codex/detail-ready-1046-rollout-apply-preflight-01",
     "base": "main",
     "title": "DETAIL_READY_1046_ROLLOUT_APPLY_PREFLIGHT-01 production preflight for clean 1046 rollout apply",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "depends_on": [],
     "commit_sha": "67e95aac7a4344a407c5c1b563c4131a27d2d7aa",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1748",
@@ -44934,8 +44934,21 @@
         ]
       },
       "github": {
-        "status": "pending",
-        "commands": []
+        "status": "pass",
+        "commands": [
+          "gh pr checks 1904 --watch --interval 15"
+        ],
+        "jobs": [
+          "Semgrep OSS",
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "hygiene",
+          "supply-chain",
+          "content-pack-build-validate",
+          "verify-bigfive",
+          "verify-mbti-legacy",
+          "verify-mbti-v2"
+        ]
       }
     },
     "result": {
@@ -44948,7 +44961,7 @@
       "next_pr_supported": "FOUNDATION-CMS-FIELD-MAP-01"
     },
     "failure_reason": null,
-    "commit_sha": null,
+    "commit_sha": "4ecb0a435fbf61d30f10df34ca2c5b6590f9b9f5",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1904",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -44990,12 +45003,17 @@
       {
         "at": "2026-06-05",
         "status": "commit_recorded",
-        "note": "Implementation commit ca883c865ecfdd8c920c8f448b40d400213bb4e5 recorded before push."
+        "note": "Implementation commit 4ecb0a435fbf61d30f10df34ca2c5b6590f9b9f5 recorded after rebase onto origin/main."
       },
       {
         "at": "2026-06-05",
         "status": "pr_open",
         "note": "Opened https://github.com/fermatmind/fap-api/pull/1904."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed for PR #1904."
       }
     ]
   }
