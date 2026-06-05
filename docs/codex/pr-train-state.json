@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-05T11:26:00+08:00",
+  "updated_at": "2026-06-05T11:29:00+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -45917,7 +45917,7 @@
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
     "branch": "codex/seo-article-riasec-v2-reference-source-review-01",
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "title": "docs(seo): verify reference needs for RIASEC explanation package",
     "depends_on": [
       "SEO-ARTICLE-RIASEC-V2-PACKAGE-VALIDATION-01"
@@ -45969,7 +45969,7 @@
     },
     "failure_reason": null,
     "commit_sha": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1913",
     "transitions": [
       {
         "at": "2026-06-05T10:52:00+08:00",
@@ -45982,6 +45982,12 @@
         "from": "planned",
         "to": "local_checks_passed",
         "notes": "Source review ledger recorded public O*NET sources and publish blockers. GO for CMS import package preparation only."
+      },
+      {
+        "at": "2026-06-05T11:29:00+08:00",
+        "from": "local_checks_passed",
+        "to": "pr_open",
+        "notes": "Opened https://github.com/fermatmind/fap-api/pull/1913."
       }
     ]
   },
