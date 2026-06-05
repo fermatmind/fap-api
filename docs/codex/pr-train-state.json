@@ -44491,7 +44491,7 @@
     "repo": "fap-api",
     "branch": "codex/help-content-draft-review-preflight-01",
     "base": "origin/main",
-    "status": "pending",
+    "status": "local_checks_passed",
     "train_scope": "window_9_help_service_content",
     "title": "docs(help): prepare Help CMS draft editorial review preflight",
     "depends_on": [
@@ -44509,6 +44509,43 @@
       "scope_preflight": {
         "status": "pass",
         "evidence": "Review preflight scope is read-only readiness and handoff only; no Operator editorial approval, CMS mutation, publish, deploy, private URL access, payment/refund flow, or secret/env/cookie/token read is allowed."
+      },
+      "source_package": {
+        "status": "pass",
+        "evidence": "Uploaded zip exists at /Users/rainie/Desktop/fermatmind-help-service-content-drafts-01.zip; SHA-256 2e3a947b3b59663e6f359de0237a4efe4e7dc2ec518be93b3bda15ffeb0aaae6; index publish_allowed=false and requires_operator_review=true."
+      },
+      "postcheck_dependency": {
+        "status": "pass",
+        "evidence": "Postcheck artifact decision is POSTCHECK_PASS_WITH_PUBLISH_BLOCKED_SIDECARS; it found 12 hidden draft rows and public/sitemap/llms absence."
+      },
+      "review_handoff": {
+        "status": "pass",
+        "evidence": "Review handoff requirements were archived; Operator editorial approval was not performed and remains required."
+      },
+      "support_contact": {
+        "status": "sidecar_open",
+        "evidence": "support@fermatmind.com exists in the import package, but not in production ContentPage rows and no first-class support_contact field was verified."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          {
+            "command": "python3 -m json.tool backend/docs/help/generated/help-content-draft-review-preflight-01.v1.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check -- backend/docs/help/generated/help-content-draft-review-preflight-01.v1.json backend/docs/operations/help-content-draft-review-preflight-2026-06-05.md docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+            "status": "passed"
+          }
+        ]
       }
     },
     "failure_reason": null,
@@ -44524,6 +44561,16 @@
       "publish_allowed": false,
       "cms_mutation_allowed": false
     },
+    "result": {
+      "decision": "REVIEW_PREFLIGHT_PASS_OPERATOR_REVIEW_REQUIRED_PUBLISH_BLOCKED",
+      "generated_artifact": "backend/docs/help/generated/help-content-draft-review-preflight-01.v1.json",
+      "operations_report": "backend/docs/operations/help-content-draft-review-preflight-2026-06-05.md",
+      "operator_review_handoff_ready": true,
+      "operator_editorial_approval_performed": false,
+      "operator_editorial_approval_present": false,
+      "publish_allowed_now": false,
+      "next_pr_supported": "HELP-CONTENT-DRAFT-EDITORIAL-REVIEW-01"
+    },
     "scope_validation": {
       "allowed_paths_only": true,
       "cms_write_performed": false,
@@ -44537,7 +44584,7 @@
     "sidecars": [
       {
         "id": "HELP-CONTENT-DRAFT-REVIEW-PREFLIGHT-SUPPORT-CONTACT-FIELD",
-        "status": "open_from_postcheck",
+        "status": "open",
         "note": "Postcheck found support@fermatmind.com in the import package, but not in production ContentPage rows and no first-class support_contact field was verified."
       },
       {
@@ -44562,6 +44609,16 @@
         "at": "2026-06-05",
         "status": "pending",
         "note": "Manifest/state entry added; implementation must run as a separate scoped read-only review-preflight PR."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "review_preflight_passed_operator_review_required",
+        "note": "Read-only review preflight passed and handoff requirements were archived. Operator editorial approval remains unperformed; publish/search/deploy/CMS mutation remain blocked."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "local_checks_passed",
+        "note": "Generated artifact, state JSON, manifest YAML, and scoped diff checks passed."
       }
     ]
   },

@@ -1,0 +1,111 @@
+{
+  "schema": "help-content-draft-review-preflight-01.v1",
+  "task": "HELP-CONTENT-DRAFT-REVIEW-PREFLIGHT-01",
+  "generated_at": "2026-06-05",
+  "decision": "REVIEW_PREFLIGHT_PASS_OPERATOR_REVIEW_REQUIRED_PUBLISH_BLOCKED",
+  "source_package": {
+    "required_uploaded_zip": "/Users/rainie/Desktop/fermatmind-help-service-content-drafts-01.zip",
+    "zip_sha256": "2e3a947b3b59663e6f359de0237a4efe4e7dc2ec518be93b3bda15ffeb0aaae6",
+    "zip_file_count": 14,
+    "index_schema_version": "help_service_content_drafts.v1",
+    "index_publish_allowed": false,
+    "index_requires_operator_review": true,
+    "index_cms_draft_created": false
+  },
+  "postcheck_sources": {
+    "generated_artifact": "backend/docs/help/generated/help-content-draft-postcheck-01.v1.json",
+    "generated_artifact_sha256": "476ab746a4d0c162f425c1bfcc220e1cc89d11eee25f4e5c7572448551e49d61",
+    "operations_report": "backend/docs/operations/help-content-draft-postcheck-2026-06-05.md",
+    "operations_report_sha256": "4520313c62d190296771283896e8c2d3051994824bd77cd192a5c286b4805e64",
+    "postcheck_decision": "POSTCHECK_PASS_WITH_PUBLISH_BLOCKED_SIDECARS"
+  },
+  "draft_inventory": {
+    "expected_content_page_rows": 12,
+    "draft_count_found_in_postcheck": 12,
+    "slugs": [
+      "help-data-deletion",
+      "help-payment-refund",
+      "help-privacy-data",
+      "help-result-recovery",
+      "help-unlock-failure",
+      "help-use-boundaries"
+    ],
+    "locales": [
+      "en",
+      "zh-CN"
+    ],
+    "all_draft": true,
+    "all_non_public": true,
+    "all_non_indexable": true,
+    "all_unpublished": true
+  },
+  "review_handoff": {
+    "operator_review_handoff_ready": true,
+    "operator_editorial_approval_performed": false,
+    "operator_editorial_approval_present": false,
+    "operator_review_required": true,
+    "reviewer_required": true,
+    "review_timestamp_required": true,
+    "policy_version_required": true,
+    "per_asset_decision_required": true,
+    "allowed_operator_outcomes": [
+      "approved_for_publish_preflight",
+      "revisions_required",
+      "rejected"
+    ],
+    "asset_ids_for_review": [
+      "UNLOCK-FAILURE-HELP-CARD-01",
+      "PAYMENT-REFUND-FAQ-PACKAGE-01",
+      "RESULT-RECOVERY-FAQ-01",
+      "PRIVACY-FAQ-PACKAGE-01",
+      "NONDIAGNOSTIC-HELP-COPY-01",
+      "DATA-DELETION-REQUEST-FAQ-01"
+    ],
+    "review_requirements": [
+      "Confirm each draft remains a help/service policy asset and not marketing copy.",
+      "Confirm payment, refund, unlock failure, result recovery, privacy, non-diagnostic, and deletion boundaries are acceptable for publication review.",
+      "Confirm FAQPage schema remains disabled or gated until visible FAQ and JSON-LD can be proven equivalent.",
+      "Confirm no raw order number, payment id, result token, private result/order/share/pay/payment/history URL, or public submission of private identifiers is requested.",
+      "Resolve or explicitly accept the support-contact sidecar before publish preflight.",
+      "Record reviewer, review timestamp, policy version, per-asset outcome, and any required revisions."
+    ]
+  },
+  "hard_gates": {
+    "publish_allowed_now": false,
+    "publish_performed": false,
+    "cms_mutation_performed": false,
+    "deploy_performed": false,
+    "search_submission_performed": false,
+    "private_url_access_performed": false,
+    "secret_env_cookie_token_read": false,
+    "payment_or_refund_performed": false,
+    "payment_provider_changed": false,
+    "operator_editorial_approval_required_before_publish": true
+  },
+  "support_contact": {
+    "operator_contact": "support@fermatmind.com",
+    "import_package_contains_support_contact": true,
+    "content_page_rows_contain_support_contact": false,
+    "cms_first_class_support_contact_field_verified": false,
+    "pre_publish_resolution_required": true,
+    "status": "sidecar_open"
+  },
+  "sidecars": [
+    {
+      "id": "HELP-CONTENT-DRAFT-REVIEW-PREFLIGHT-SUPPORT-CONTACT-FIELD",
+      "status": "open",
+      "note": "Postcheck found support@fermatmind.com in the import package, but not in production ContentPage rows and no first-class support_contact field was verified."
+    },
+    {
+      "id": "HELP-CONTENT-DRAFT-REVIEW-PREFLIGHT-OPERATOR-APPROVAL",
+      "status": "blocked_until_operator_review",
+      "note": "Review handoff is ready, but Codex did not perform or assert Operator editorial approval."
+    },
+    {
+      "id": "HELP-CONTENT-DRAFT-REVIEW-PREFLIGHT-PUBLISH-BLOCK",
+      "status": "hard_gate",
+      "note": "Publish, indexability, sitemap/llms inclusion, and search submission remain forbidden without separate explicit approval."
+    }
+  ],
+  "next_task": "HELP-CONTENT-DRAFT-EDITORIAL-REVIEW-01"
+}
