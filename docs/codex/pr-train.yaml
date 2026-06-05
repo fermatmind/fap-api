@@ -21858,6 +21858,60 @@ prs:
     content_authority: CMS/backend
     next_task: HELP-CMS-SERVICE-FIELDS-01
 
+  - id: HELP-CMS-SERVICE-FIELDS-01
+    repo: fap-api
+    branch: codex/help-cms-service-fields-01
+    title: "feat(cms): add Help service ContentPage fields"
+    train_scope: window_9_help_service_content
+    status: in_progress
+    depends_on:
+      - HELP-CONTENT-DRAFT-CONTACT-SUPPORT-DECISION-01
+    scope:
+      - Add or verify first-class ContentPage fields for support_contact, policy_version, reviewer, faq_items, and schema_enabled.
+      - Expose the fields through the backend ContentPage model, internal update API, public/internal payloads, Filament editor, and translation revision payloads.
+      - Add focused local contract coverage without mutating CMS data, publishing, deploying, submitting search URLs, accessing private URLs, reading secrets, or claiming Operator approval.
+    allowed_paths:
+      - backend/database/migrations/2026_06_05_150000_add_help_service_fields_to_content_pages.php
+      - backend/app/Models/ContentPage.php
+      - backend/app/Http/Controllers/API/V0_5/Cms/ContentPageController.php
+      - backend/app/Services/Cms/ContentPageTranslationAdapter.php
+      - backend/app/Filament/Ops/Resources/ContentPageResource.php
+      - backend/tests/Feature/ContentPages/ContentPagePublicApiTest.php
+      - backend/docs/help/generated/help-cms-service-fields-01.v1.json
+      - backend/docs/operations/help-cms-service-fields-2026-06-05.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Publish, deploy, submit search URLs, mutate CMS data, access private result/order/share/pay/payment/history URLs, read secrets/env/cookies/tokens, run payment/refund flows, change payment-provider behavior, rewrite Help content, add frontend fallback content, or claim Operator approval.
+    validation:
+      - php -l backend/app/Models/ContentPage.php
+      - php -l backend/app/Http/Controllers/API/V0_5/Cms/ContentPageController.php
+      - php -l backend/app/Services/Cms/ContentPageTranslationAdapter.php
+      - php -l backend/app/Filament/Ops/Resources/ContentPageResource.php
+      - php -l backend/database/migrations/2026_06_05_150000_add_help_service_fields_to_content_pages.php
+      - php -l backend/tests/Feature/ContentPages/ContentPagePublicApiTest.php
+      - python3 -m json.tool backend/docs/help/generated/help-cms-service-fields-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=ContentPagePublicApiTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force
+      - git diff --check -- backend/app/Models/ContentPage.php backend/app/Http/Controllers/API/V0_5/Cms/ContentPageController.php backend/app/Services/Cms/ContentPageTranslationAdapter.php backend/app/Filament/Ops/Resources/ContentPageResource.php backend/database/migrations/2026_06_05_150000_add_help_service_fields_to_content_pages.php backend/tests/Feature/ContentPages/ContentPagePublicApiTest.php backend/docs/help/generated/help-cms-service-fields-01.v1.json backend/docs/operations/help-cms-service-fields-2026-06-05.md docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: HELP-CONTENT-DRAFT-POLICY-REVISION-APPLY-01
+
   - id: PUBLIC-BENEFIT-ASSET-PACKAGES-ARCHIVE-01
     repo: fap-api
     branch: codex/public-benefit-asset-packages-archive-01

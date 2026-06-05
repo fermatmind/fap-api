@@ -45470,6 +45470,116 @@
       }
     ]
   },
+  "HELP-CMS-SERVICE-FIELDS-01": {
+    "repo": "fap-api",
+    "branch": "codex/help-cms-service-fields-01",
+    "base": "origin/main",
+    "status": "local_checks_passed",
+    "train_scope": "window_9_help_service_content",
+    "title": "feat(cms): add Help service ContentPage fields",
+    "depends_on": [
+      "HELP-CONTENT-DRAFT-CONTACT-SUPPORT-DECISION-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User requested the Help service PR train and listed HELP-CMS-SERVICE-FIELDS-01 as the backend CMS field/contract PR."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "HELP-CONTENT-DRAFT-CONTACT-SUPPORT-DECISION-01 is merged as PR #1942 and closed through PR #1945."
+      },
+      "service_fields": {
+        "status": "implemented_local",
+        "fields": [
+          "support_contact",
+          "policy_version",
+          "reviewer",
+          "faq_items",
+          "schema_enabled"
+        ]
+      },
+      "scope_preflight": {
+        "status": "pass",
+        "evidence": "Current scope changes backend ContentPage field/contracts only; no CMS data mutation, publish, deploy, search submission, private URL access, payment/refund action, payment-provider change, Help content rewrite, frontend fallback content, Operator approval claim, or secret/env/cookie/token read is allowed."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          {"command": "php -l backend/app/Models/ContentPage.php && php -l backend/app/Http/Controllers/API/V0_5/Cms/ContentPageController.php && php -l backend/app/Services/Cms/ContentPageTranslationAdapter.php && php -l backend/app/Filament/Ops/Resources/ContentPageResource.php && php -l backend/database/migrations/2026_06_05_150000_add_help_service_fields_to_content_pages.php && php -l backend/tests/Feature/ContentPages/ContentPagePublicApiTest.php", "status": "pass"},
+          {"command": "python3 -m json.tool backend/docs/help/generated/help-cms-service-fields-01.v1.json >/dev/null", "status": "pass"},
+          {"command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null", "status": "pass"},
+          {"command": "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"", "status": "pass"},
+          {"command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=ContentPagePublicApiTest --no-ansi", "status": "passed_with_warning", "notes": "Exited 0 with 77 assertions and existing Laravel file_get_contents warnings."},
+          {"command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi --force", "status": "pass"},
+          {"command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff' --no-ansi", "status": "passed_with_warning", "notes": "Exited 0 with 3 assertions and existing Laravel file_get_contents warning."},
+          {"command": "git diff --check -- backend/app/Models/ContentPage.php backend/app/Http/Controllers/API/V0_5/Cms/ContentPageController.php backend/app/Services/Cms/ContentPageTranslationAdapter.php backend/app/Filament/Ops/Resources/ContentPageResource.php backend/database/migrations/2026_06_05_150000_add_help_service_fields_to_content_pages.php backend/tests/Feature/ContentPages/ContentPagePublicApiTest.php backend/docs/help/generated/help-cms-service-fields-01.v1.json backend/docs/operations/help-cms-service-fields-2026-06-05.md docs/codex/pr-train.yaml docs/codex/pr-train-state.json", "status": "pass"}
+        ]
+      },
+      "github": {
+        "status": "pending",
+        "checks": []
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "result": {
+      "decision": "CONTENT_PAGE_HELP_SERVICE_FIELDS_ADDED_WITHOUT_CMS_MUTATION",
+      "generated_artifact": "backend/docs/help/generated/help-cms-service-fields-01.v1.json",
+      "operations_report": "backend/docs/operations/help-cms-service-fields-2026-06-05.md",
+      "next_task_recommendation": "HELP-CONTENT-DRAFT-POLICY-REVISION-APPLY-01"
+    },
+    "scope_validation": {
+      "cms_mutation_performed": false,
+      "publish_performed": false,
+      "deploy_performed": false,
+      "search_submission_performed": false,
+      "payment_or_refund_performed": false,
+      "payment_provider_changed": false,
+      "private_url_access_performed": false,
+      "secret_env_cookie_token_read": false,
+      "operator_approval_claimed": false,
+      "content_rewrite_performed": false,
+      "frontend_fallback_content_added": false,
+      "database_schema_changed": true,
+      "api_runtime_change": true,
+      "allowed_paths_only": true
+    },
+    "sidecars": [
+      {
+        "id": "HELP-CONTENT-DRAFT-POLICY-REVISION-APPLY",
+        "status": "open_followup",
+        "note": "Apply policy-owner answers and direct-email support contact to the local revised package/import artifact before CMS sync."
+      },
+      {
+        "id": "HELP-CONTENT-DRAFT-PUBLISH-BLOCK",
+        "status": "hard_gate",
+        "note": "Publish remains blocked and requires separate exact authorization after policy/contact revisions are applied, Operator review passes, and publish preflight passes."
+      }
+    ],
+    "next_task": "HELP-CONTENT-DRAFT-POLICY-REVISION-APPLY-01",
+    "transitions": [
+      {
+        "at": "2026-06-05",
+        "status": "authorized",
+        "note": "User requested HELP-CMS-SERVICE-FIELDS-01 in the Help service PR train."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "local_artifacts_created_validation_pending",
+        "note": "Added ContentPage service fields, focused contract coverage, generated artifact, operations report, and PR-train metadata; local validation pending."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "local_checks_passed",
+        "note": "PHP lint, JSON/YAML parse, ContentPagePublicApiTest, migration pretend, runtime-freeze gate, and scoped diff whitespace checks passed."
+      }
+    ]
+  },
   "PUBLIC-BENEFIT-ASSET-PACKAGES-ARCHIVE-01": {
     "repo": "fap-api",
     "branch": "codex/public-benefit-asset-packages-archive-01",

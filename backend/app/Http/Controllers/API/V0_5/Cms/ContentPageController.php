@@ -121,6 +121,13 @@ final class ContentPageController extends Controller
             'meta_description' => ['nullable', 'string', 'max:2000'],
             'seo_description' => ['nullable', 'string', 'max:2000'],
             'canonical_path' => ['nullable', 'string', 'max:255'],
+            'support_contact' => ['nullable', 'email', 'max:255'],
+            'policy_version' => ['nullable', 'string', 'max:128'],
+            'reviewer' => ['nullable', 'string', 'max:128'],
+            'faq_items' => ['nullable', 'array'],
+            'faq_items.*.question' => ['required_with:faq_items', 'string', 'max:500'],
+            'faq_items.*.answer' => ['required_with:faq_items', 'string', 'max:4000'],
+            'schema_enabled' => ['nullable', 'boolean'],
             'org_id' => ['nullable', 'integer', 'min:0'],
         ]);
 
@@ -158,6 +165,7 @@ final class ContentPageController extends Controller
         $pageType = (string) ($validated['page_type'] ?? $this->defaultPageType($kind, $normalizedSlug));
         $publicPath = $this->publicPathFor($normalizedSlug, $kind);
         $canonicalPath = $this->nullableString($validated['canonical_path'] ?? null) ?? $publicPath;
+        $faqItems = $this->normalizeFaqItems($validated['faq_items'] ?? []);
 
         $page = $existing ?? new ContentPage([
             'org_id' => $orgId,
@@ -192,6 +200,11 @@ final class ContentPageController extends Controller
             'meta_description' => $this->nullableString($validated['meta_description'] ?? null),
             'seo_description' => $this->nullableString($validated['seo_description'] ?? null) ?? $this->nullableString($validated['meta_description'] ?? null),
             'canonical_path' => $canonicalPath,
+            'support_contact' => $this->nullableString($validated['support_contact'] ?? null),
+            'policy_version' => $this->nullableString($validated['policy_version'] ?? null),
+            'reviewer' => $this->nullableString($validated['reviewer'] ?? null),
+            'faq_items' => $faqItems,
+            'schema_enabled' => (bool) ($validated['schema_enabled'] ?? false),
             'status' => (string) ($validated['status'] ?? ((bool) $validated['is_public'] ? ContentPage::STATUS_PUBLISHED : ContentPage::STATUS_DRAFT)),
         ]);
         $page->save();
@@ -216,6 +229,11 @@ final class ContentPageController extends Controller
             'headings_json' => $this->extractHeadings($contentMd),
             'meta_description' => $this->nullableString($validated['meta_description'] ?? null),
             'canonical_path' => $canonicalPath,
+            'support_contact' => $this->nullableString($validated['support_contact'] ?? null),
+            'policy_version' => $this->nullableString($validated['policy_version'] ?? null),
+            'reviewer' => $this->nullableString($validated['reviewer'] ?? null),
+            'faq_items' => $faqItems,
+            'schema_enabled' => (bool) ($validated['schema_enabled'] ?? false),
             'is_public' => (bool) $validated['is_public'],
             'is_indexable' => (bool) $validated['is_indexable'],
         ];
@@ -250,6 +268,11 @@ final class ContentPageController extends Controller
             'seo_title',
             'seo_description',
             'meta_description',
+            'support_contact',
+            'policy_version',
+            'reviewer',
+            'faq_items',
+            'schema_enabled',
             'kind',
             'page_type',
             'template',
@@ -323,6 +346,11 @@ final class ContentPageController extends Controller
             'meta_description' => $page->meta_description,
             'seo_description' => $page->seo_description ?: $page->meta_description,
             'canonical_path' => $page->canonical_path ?: (string) $page->path,
+            'support_contact' => $page->support_contact,
+            'policy_version' => $page->policy_version,
+            'reviewer' => $page->reviewer,
+            'faq_items' => is_array($page->faq_items) ? array_values($page->faq_items) : [],
+            'schema_enabled' => (bool) $page->schema_enabled,
         ];
     }
 
@@ -351,6 +379,11 @@ final class ContentPageController extends Controller
             'published_at',
             'updated_at',
             'effective_at',
+            'support_contact',
+            'policy_version',
+            'reviewer',
+            'faq_items',
+            'schema_enabled',
             'is_public',
             'is_indexable',
         ]));
@@ -409,6 +442,36 @@ final class ContentPageController extends Controller
             static fn (string $heading): string => trim($heading),
             $matches[1] ?? []
         )));
+    }
+
+    /**
+     * @return list<array{question:string,answer:string}>
+     */
+    private function normalizeFaqItems(mixed $items): array
+    {
+        if (! is_array($items)) {
+            return [];
+        }
+
+        $normalized = [];
+        foreach ($items as $item) {
+            if (! is_array($item)) {
+                continue;
+            }
+
+            $question = trim((string) ($item['question'] ?? ''));
+            $answer = trim((string) ($item['answer'] ?? ''));
+            if ($question === '' || $answer === '') {
+                continue;
+            }
+
+            $normalized[] = [
+                'question' => $question,
+                'answer' => $answer,
+            ];
+        }
+
+        return $normalized;
     }
 
     private function dateString(mixed $value): ?string

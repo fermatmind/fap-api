@@ -155,6 +155,11 @@ final class ContentPageTranslationAdapter extends AbstractSiblingTranslationAdap
             'is_indexable' => (bool) $source->is_indexable,
             'canonical_path' => $source->canonical_path,
             'meta_description' => $source->meta_description,
+            'support_contact' => $source->support_contact,
+            'policy_version' => $source->policy_version,
+            'reviewer' => $source->reviewer,
+            'faq_items' => is_array($source->faq_items) ? $source->faq_items : [],
+            'schema_enabled' => (bool) $source->schema_enabled,
         ];
     }
 
@@ -176,6 +181,11 @@ final class ContentPageTranslationAdapter extends AbstractSiblingTranslationAdap
             'canonical_path' => $record->canonical_path,
             'is_public' => (bool) $record->is_public,
             'is_indexable' => (bool) $record->is_indexable,
+            'support_contact' => $record->support_contact,
+            'policy_version' => $record->policy_version,
+            'reviewer' => $record->reviewer,
+            'faq_items' => is_array($record->faq_items) ? $record->faq_items : [],
+            'schema_enabled' => (bool) $record->schema_enabled,
         ];
     }
 
@@ -197,6 +207,11 @@ final class ContentPageTranslationAdapter extends AbstractSiblingTranslationAdap
             'canonical_path' => $payload['canonical_path'] ?? null,
             'is_public' => (bool) ($payload['is_public'] ?? false),
             'is_indexable' => (bool) ($payload['is_indexable'] ?? false),
+            'support_contact' => $payload['support_contact'] ?? null,
+            'policy_version' => $payload['policy_version'] ?? null,
+            'reviewer' => $payload['reviewer'] ?? null,
+            'faq_items' => array_values((array) ($payload['faq_items'] ?? [])),
+            'schema_enabled' => (bool) ($payload['schema_enabled'] ?? false),
         ]);
     }
 }
