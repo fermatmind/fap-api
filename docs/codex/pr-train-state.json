@@ -47577,7 +47577,7 @@
     "repo": "fap-api",
     "base": "main",
     "branch": "codex/seo-article-riasec-v2-cms-draft-create-01",
-    "status": "pr_open_github_checks_pending",
+    "status": "merged",
     "title": "ops(cms): create RIASEC explanation article drafts",
     "train_scope": "seo_article_content_package_riasec_explanation_v2",
     "depends_on": [
@@ -47767,6 +47767,135 @@
         "at": "2026-06-05",
         "status": "merged",
         "note": "PR #1931 was squash-merged at 2026-06-05T12:55:21Z with merge commit 81451ae547e8899a498f7743a221c65e993df9f5; origin/main contains the merge commit; remote task branch is absent; local task branch cleanup is complete."
+      }
+    ]
+  },
+  "SEO-ARTICLE-RIASEC-V2-EDITORIAL-REVIEW-01": {
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/seo-article-riasec-v2-editorial-review-01",
+    "status": "local_validation_pending",
+    "title": "docs(seo): record RIASEC draft editorial blockers",
+    "train_scope": "seo_article_content_package_riasec_explanation_v2",
+    "depends_on": [
+      "SEO-ARTICLE-RIASEC-V2-CMS-DRAFT-CREATE-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User authorized SEO-ARTICLE-RIASEC-V2-EDITORIAL-REVIEW-01, including necessary manifest/state entries, limited to editorial/operator review artifact, publish blockers, reference/media/revision approval checklist, generated artifact/test/ledger. Content rewrite, CMS mutation, publish, search submission, deploy, and private URL access remain forbidden."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "SEO-ARTICLE-RIASEC-V2-CMS-DRAFT-CREATE-01 is merged as PR #1931; origin/main contains merge commit 81451ae547e8899a498f7743a221c65e993df9f5. Closeout PR #1934 is also merged and origin/main contains 2bce0d086434754b268a28246541ec6271bffd4e."
+      },
+      "production_read_only_draft_state": {
+        "status": "pass",
+        "articles_status_draft": true,
+        "articles_non_public": true,
+        "articles_non_indexable": true,
+        "articles_unpublished": true,
+        "working_revisions_machine_draft": true,
+        "records_created_in_this_task": 0,
+        "records_updated_in_this_task": 0
+      },
+      "public_surface": {
+        "status": "pass",
+        "article_pages_404": true,
+        "article_apis_404": true,
+        "article_schema_absent": true,
+        "faq_schema_absent": true,
+        "target_canonical_absent": true,
+        "sitemap_contains_target_slugs": false,
+        "llms_contains_target_slugs": false,
+        "llms_full_contains_target_slugs": false,
+        "search_submission_performed": false
+      },
+      "editorial_review": {
+        "status": "blocked_operator_inputs_required",
+        "review_passed": false,
+        "operator_approval_claimed": false,
+        "publish_allowed": false,
+        "accepted_references_count": 0,
+        "cover_image_cms_media_missing": true,
+        "working_revisions_approved": false,
+        "zh_boundary_context_claim_warning_count": 2,
+        "conditional_internal_links_need_operator_decision": true,
+        "product_availability_confirmation_required": true
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are confined to the RIASEC editorial review artifact/report/test plus docs/codex PR-train metadata, including stale draft-create ledger reconciliation needed for dependency resolution."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "php -l backend/tests/Feature/SEO/RiasecExplanationEditorialReviewTest.php",
+          "python3 -m json.tool backend/docs/seo/generated/riasec-explanation-editorial-review.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=RiasecExplanationEditorialReviewTest --no-ansi",
+          "git diff --check -- backend/docs/seo/riasec-explanation-editorial-review.md backend/docs/seo/generated/riasec-explanation-editorial-review.v1.json backend/tests/Feature/SEO/RiasecExplanationEditorialReviewTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+          "git diff --cached --check"
+        ],
+        "notes": "PHP lint, JSON/YAML parsing, focused PHPUnit artifact contract, and scoped diff whitespace checks passed."
+      }
+    },
+    "result": {
+      "decision": "REVIEW_BLOCKED_OPERATOR_INPUTS_REQUIRED",
+      "review_passed": false,
+      "operator_approval_claimed": false,
+      "publish_allowed": false,
+      "search_submit_allowed": false,
+      "cms_mutation_performed": false,
+      "content_rewrite_performed": false,
+      "generated_artifact": "backend/docs/seo/generated/riasec-explanation-editorial-review.v1.json",
+      "review_report": "backend/docs/seo/riasec-explanation-editorial-review.md"
+    },
+    "scope_validation": {
+      "cms_mutation_performed": false,
+      "publish_performed": false,
+      "search_submission_performed": false,
+      "deploy_performed": false,
+      "content_rewrite_performed": false,
+      "private_url_access_performed": false,
+      "secret_env_cookie_token_read": false,
+      "operator_approval_claimed": false,
+      "allowed_paths_only": true
+    },
+    "sidecars": [
+      {
+        "id": "SEO-ARTICLE-RIASEC-V2-REFERENCE-MEDIA-REVISION-APPROVAL-01",
+        "status": "next_gate",
+        "note": "Operator/editor must supply accepted references, CMS media cover image, revision approval, claim-warning acknowledgement, conditional internal-link decision, and product-availability confirmation before publish preflight."
+      },
+      {
+        "id": "SEO-ARTICLE-RIASEC-V2-PUBLISH-BLOCK",
+        "status": "hard_gate",
+        "note": "Publish, search submission, public indexability, sitemap/llms inclusion, and post-publish review remain forbidden until separate controlled publish preflight and exact publish authorization."
+      }
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "failure_reason": null,
+    "transitions": [
+      {
+        "at": "2026-06-05",
+        "status": "authorized",
+        "note": "User authorized SEO-ARTICLE-RIASEC-V2-EDITORIAL-REVIEW-01 with manifest/state updates and no CMS mutation, publish, search submission, deploy, content rewrite, or private URL access."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "review_blocked_operator_inputs_required",
+        "note": "Editorial/system review recorded draft state pass and public absence pass, but review remains blocked on accepted references, CMS media, revision approval, claim-warning acknowledgement, conditional internal links, and product-availability confirmation."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "local_checks_passed",
+        "note": "Local JSON/YAML parsing, PHP lint, focused RiasecExplanationEditorialReviewTest, and scope diff checks passed."
       }
     ]
   }
