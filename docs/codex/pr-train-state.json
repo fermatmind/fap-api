@@ -45029,7 +45029,7 @@
     "repo": "fap-api",
     "branch": "codex/help-content-draft-operator-review-01",
     "base": "origin/main",
-    "status": "pr_opened",
+    "status": "merged",
     "train_scope": "window_9_help_service_content",
     "title": "docs(help): record Help draft operator review blockers",
     "depends_on": [
@@ -45110,11 +45110,11 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": "73512455e27d35a380a02526c02acb0c5818c05a",
+    "commit_sha": "8ffc8f36c7f6b52987d586e8b06cf88636cafe8c",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1933",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-05T12:58:40Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "result": {
       "decision": "REVIEW_BLOCKED_POLICY_OWNER_INPUTS_REQUIRED",
       "review_passed": false,
@@ -45179,6 +45179,11 @@
         "at": "2026-06-05",
         "status": "ready_to_merge",
         "note": "GitHub checks passed and merge state was CLEAN. PR result remains review blocked because policy-owner fields and contact-support readiness are unresolved."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "merged_closeout_reconciled",
+        "note": "PR #1933 merged on GitHub at 2026-06-05T12:58:40Z with merge commit 8ffc8f36c7f6b52987d586e8b06cf88636cafe8c; origin/main contains the merge commit; remote branch was deleted and local task branch cleanup was completed."
       }
     ]
   },
