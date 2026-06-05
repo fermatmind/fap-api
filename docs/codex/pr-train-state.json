@@ -48080,7 +48080,7 @@
     "repo": "fap-api",
     "base": "main",
     "branch": "codex/seo-article-riasec-v2-reference-media-revision-approval-01",
-    "status": "pr_open_github_checks_pending",
+    "status": "ready_to_merge",
     "title": "docs(seo): record RIASEC reference media revision approval blockers",
     "train_scope": "seo_article_content_package_riasec_explanation_v2",
     "depends_on": [
@@ -48113,8 +48113,9 @@
         "notes": "PHP lint, JSON/YAML parsing, focused PHPUnit artifact contract, and scoped diff whitespace checks passed. Composer install and local .env setup were worktree-only and not staged."
       },
       "github": {
-        "status": "pending",
-        "pr_url": "https://github.com/fermatmind/fap-api/pull/1943"
+        "status": "pass",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/1943",
+        "evidence": "GitHub checks passed on PR #1943: Semgrep, hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
       }
     },
     "result": {
@@ -48161,7 +48162,7 @@
         "note": "Report-preview and product-availability statements remain Unknown until product confirmation."
       }
     ],
-    "commit_sha": "ae47b780cf38eab5601d0d9e8feec8a11d5fecc3",
+    "commit_sha": "4a31ac4852973b8d12386d4e447f4705775d2f6d",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1943",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -48187,6 +48188,11 @@
         "at": "2026-06-05",
         "status": "pr_open_github_checks_pending",
         "note": "Opened PR #1943 after local checks and scoped staging passed."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "ready_to_merge",
+        "note": "All required GitHub checks passed and changed files remain confined to the approval gate artifact/report/test and docs/codex metadata."
       }
     ]
   }
