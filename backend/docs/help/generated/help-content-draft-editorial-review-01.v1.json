@@ -1,0 +1,247 @@
+{
+  "schema": "help-content-draft-editorial-review-01.v1",
+  "task": "HELP-CONTENT-DRAFT-EDITORIAL-REVIEW-01",
+  "generated_at": "2026-06-05",
+  "review_status": "blocked",
+  "decision": "BLOCKED_PRIVATE_IDENTIFIER_AND_RESULT_URL_GUARD",
+  "source_package": {
+    "zip_path": "/Users/rainie/Desktop/费马资料文件/fermatmind-help-service-content-drafts-01.zip",
+    "expected_sha256": "2e3a947b3b59663e6f359de0237a4efe4e7dc2ec518be93b3bda15ffeb0aaae6",
+    "actual_sha256": "2e3a947b3b59663e6f359de0237a4efe4e7dc2ec518be93b3bda15ffeb0aaae6",
+    "sha256_match": true,
+    "file_count": 14,
+    "required_file_check": "pass",
+    "content_mode": "draft_only",
+    "publish_allowed": false,
+    "requires_operator_review": true,
+    "cms_draft_created_by_package": false
+  },
+  "required_files": {
+    "missing": [],
+    "unexpected": [],
+    "files": [
+      "README.md",
+      "index.json",
+      "01_UNLOCK-FAILURE-HELP-CARD-01.md",
+      "01_UNLOCK-FAILURE-HELP-CARD-01.yaml",
+      "02_PAYMENT-REFUND-FAQ-PACKAGE-01.md",
+      "02_PAYMENT-REFUND-FAQ-PACKAGE-01.yaml",
+      "03_RESULT-RECOVERY-FAQ-01.md",
+      "03_RESULT-RECOVERY-FAQ-01.yaml",
+      "04_PRIVACY-FAQ-PACKAGE-01.md",
+      "04_PRIVACY-FAQ-PACKAGE-01.yaml",
+      "05_NONDIAGNOSTIC-HELP-COPY-01.md",
+      "05_NONDIAGNOSTIC-HELP-COPY-01.yaml",
+      "06_DATA-DELETION-REQUEST-FAQ-01.md",
+      "06_DATA-DELETION-REQUEST-FAQ-01.yaml"
+    ]
+  },
+  "asset_matrix": [
+    {
+      "asset_id": "UNLOCK-FAILURE-HELP-CARD-01",
+      "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:UNLOCK-FAILURE-HELP-CARD-01",
+      "source_yaml": "01_UNLOCK-FAILURE-HELP-CARD-01.yaml",
+      "slugs": {
+        "zh-CN": "help-unlock-failure",
+        "en": "help-unlock-failure"
+      },
+      "faq_items": 4,
+      "schema_eligible_after_review": true
+    },
+    {
+      "asset_id": "PAYMENT-REFUND-FAQ-PACKAGE-01",
+      "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:PAYMENT-REFUND-FAQ-PACKAGE-01",
+      "source_yaml": "02_PAYMENT-REFUND-FAQ-PACKAGE-01.yaml",
+      "slugs": {
+        "zh-CN": "help-payment-refund",
+        "en": "help-payment-refund"
+      },
+      "faq_items": 4,
+      "schema_eligible_after_review": true
+    },
+    {
+      "asset_id": "RESULT-RECOVERY-FAQ-01",
+      "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:RESULT-RECOVERY-FAQ-01",
+      "source_yaml": "03_RESULT-RECOVERY-FAQ-01.yaml",
+      "slugs": {
+        "zh-CN": "help-result-recovery",
+        "en": "help-result-recovery"
+      },
+      "faq_items": 4,
+      "schema_eligible_after_review": true
+    },
+    {
+      "asset_id": "PRIVACY-FAQ-PACKAGE-01",
+      "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:PRIVACY-FAQ-PACKAGE-01",
+      "source_yaml": "04_PRIVACY-FAQ-PACKAGE-01.yaml",
+      "slugs": {
+        "zh-CN": "help-privacy-data",
+        "en": "help-privacy-data"
+      },
+      "faq_items": 4,
+      "schema_eligible_after_review": true
+    },
+    {
+      "asset_id": "NONDIAGNOSTIC-HELP-COPY-01",
+      "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:NONDIAGNOSTIC-HELP-COPY-01",
+      "source_yaml": "05_NONDIAGNOSTIC-HELP-COPY-01.yaml",
+      "slugs": {
+        "zh-CN": "help-use-boundaries",
+        "en": "help-use-boundaries"
+      },
+      "faq_items": 4,
+      "schema_eligible_after_review": true
+    },
+    {
+      "asset_id": "DATA-DELETION-REQUEST-FAQ-01",
+      "source_doc": "HELP-SERVICE-CONTENT-DRAFTS-01:DATA-DELETION-REQUEST-FAQ-01",
+      "source_yaml": "06_DATA-DELETION-REQUEST-FAQ-01.yaml",
+      "slugs": {
+        "zh-CN": "help-data-deletion",
+        "en": "help-data-deletion"
+      },
+      "faq_items": 4,
+      "schema_eligible_after_review": true
+    }
+  ],
+  "import_and_cms_draft_evidence": {
+    "import_package": "backend/docs/help/import-packages/help-service-content-drafts-01.import.v1.json",
+    "content_page_source": "backend/docs/help/import-packages/content-pages-draft-source/content_pages.help_service_drafts_01.json",
+    "create_artifact": "backend/docs/help/generated/help-content-draft-create-01.v1.json",
+    "postcheck_artifact": "backend/docs/help/generated/help-content-draft-postcheck-01.v1.json",
+    "preflight_artifact": "backend/docs/help/generated/help-content-draft-review-preflight-01.v1.json",
+    "expected_target_count": 12,
+    "created_record_count": 12,
+    "postcheck_record_count": 12,
+    "locales": [
+      "zh-CN",
+      "en"
+    ],
+    "slugs": [
+      "help-data-deletion",
+      "help-payment-refund",
+      "help-privacy-data",
+      "help-result-recovery",
+      "help-unlock-failure",
+      "help-use-boundaries"
+    ],
+    "all_status_draft": true,
+    "all_non_public": true,
+    "all_non_indexable": true,
+    "all_unpublished": true,
+    "all_review_state_owner_review": true,
+    "live_cms_write_performed_in_this_pr": false
+  },
+  "visible_content_guard_scan": {
+    "scope": "draft_title, draft_summary, visible_body_draft, faq_draft_items from package YAML files",
+    "guard_metadata_fields_excluded_from_block_trigger": [
+      "forbidden_claims_checklist",
+      "global_forbidden_route_families",
+      "support_fields_required",
+      "cms_fields_to_fill"
+    ],
+    "status": "blocked",
+    "blocked_assets": [
+      {
+        "asset_id": "UNLOCK-FAILURE-HELP-CARD-01",
+        "fields": [
+          "visible_body_draft"
+        ],
+        "hit_categories": [
+          "payment_id",
+          "result_url"
+        ]
+      },
+      {
+        "asset_id": "PAYMENT-REFUND-FAQ-PACKAGE-01",
+        "fields": [
+          "visible_body_draft"
+        ],
+        "hit_categories": [
+          "payment_id",
+          "result_url"
+        ]
+      },
+      {
+        "asset_id": "RESULT-RECOVERY-FAQ-01",
+        "fields": [
+          "draft_summary",
+          "visible_body_draft",
+          "faq_draft_items"
+        ],
+        "hit_categories": [
+          "result_url"
+        ]
+      },
+      {
+        "asset_id": "PRIVACY-FAQ-PACKAGE-01",
+        "fields": [
+          "visible_body_draft",
+          "faq_draft_items"
+        ],
+        "hit_categories": [
+          "result_url"
+        ]
+      },
+      {
+        "asset_id": "DATA-DELETION-REQUEST-FAQ-01",
+        "fields": [
+          "visible_body_draft"
+        ],
+        "hit_categories": [
+          "payment_id",
+          "result_url"
+        ]
+      }
+    ],
+    "passing_assets": [
+      "NONDIAGNOSTIC-HELP-COPY-01"
+    ]
+  },
+  "operator_review": {
+    "review_requested": false,
+    "review_passed": false,
+    "operator_editorial_approval_present": false,
+    "block_reason": "Visible draft content fields contain private-identifier/result-link guard categories, so this PR cannot request or claim Operator editorial review."
+  },
+  "sidecars": [
+    {
+      "id": "HELP-CONTENT-DRAFT-EDITORIAL-REVIEW-PRIVATE-ID-GUARD",
+      "status": "blocked",
+      "note": "Visible draft fields contain payment_id and/or result_url guard categories. Content must be revised before Operator review can be requested."
+    },
+    {
+      "id": "HELP-CONTENT-DRAFT-EDITORIAL-REVIEW-SUPPORT-CONTACT-FIELD",
+      "status": "open_publish_preflight",
+      "note": "support@fermatmind.com exists in the import package layer, but prior postcheck did not verify it inside production ContentPage rows or a first-class support_contact field."
+    },
+    {
+      "id": "HELP-CONTENT-DRAFT-EDITORIAL-REVIEW-PUBLISH-BLOCK",
+      "status": "hard_gate",
+      "note": "Publish, CMS mutation, deploy, search submission, and private URL access remain forbidden."
+    }
+  ],
+  "scope_validation": {
+    "cms_mutation_performed": false,
+    "publish_performed": false,
+    "deploy_performed": false,
+    "search_submission_performed": false,
+    "payment_or_refund_performed": false,
+    "payment_provider_changed": false,
+    "private_url_access_performed": false,
+    "secret_env_cookie_token_read": false,
+    "operator_approval_claimed": false
+  },
+  "validation": {
+    "zip_sha_verification": "pass",
+    "json_parse": "pass",
+    "yaml_parse": "pass",
+    "focused_contract": {
+      "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=HelpContentImportPackageTest --no-ansi",
+      "status": "pass",
+      "result": "1 test passed, 454 assertions"
+    },
+    "diff_check": "pass"
+  },
+  "next_task_recommendation": "HELP-CONTENT-DRAFT-REVISION-REQUEST-01"
+}
