@@ -44817,7 +44817,7 @@
     "repo": "fap-api",
     "branch": "codex/help-content-draft-revision-request-01",
     "base": "origin/main",
-    "status": "pending_revision_request",
+    "status": "ready_to_merge",
     "train_scope": "window_9_help_service_content",
     "title": "docs(help): revise v01 Help content package and rerun review request",
     "depends_on": [
@@ -44835,6 +44835,21 @@
       "scope_preflight": {
         "status": "pass",
         "evidence": "Task may revise only the local v01 package draft fields needed to clear #1919 guard findings and may write review/revision artifacts. CMS mutation, publish, deploy, private URL access, payment/refund actions, and secret/env/cookie/token reads are forbidden."
+      },
+      "github": {
+        "status": "pass",
+        "commands": [
+          "gh pr checks 1921 --watch --interval 15"
+        ],
+        "jobs": [
+          "hygiene",
+          "supply-chain",
+          "content-pack-build-validate",
+          "verify-bigfive",
+          "verify-mbti-legacy",
+          "verify-mbti-v2",
+          "Semgrep blocking secrets"
+        ]
       }
     },
     "failure_reason": null,
@@ -44899,6 +44914,11 @@
         "at": "2026-06-05",
         "status": "pr_open",
         "note": "Opened https://github.com/fermatmind/fap-api/pull/1921 with manifest/state commit 44963cc25081001c33eac973cc67333975475fc9; GitHub checks are pending."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "ready_to_merge",
+        "note": "PR #1921 GitHub checks passed and changed files remained limited to manifest/state."
       }
     ]
   },
