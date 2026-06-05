@@ -45191,7 +45191,7 @@
     "repo": "fap-api",
     "branch": "codex/help-content-draft-policy-owner-answers-01",
     "base": "origin/main",
-    "status": "local_checks_passed",
+    "status": "pr_opened",
     "train_scope": "window_9_help_service_content",
     "title": "docs(help): record Help policy owner answers",
     "depends_on": [
@@ -45248,7 +45248,7 @@
     },
     "failure_reason": null,
     "commit_sha": "704e0ba4353dbac90e647420d937f951659661a6",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1936",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -45304,6 +45304,11 @@
         "at": "2026-06-05",
         "status": "local_checks_passed",
         "note": "Policy-owner answer artifact, state JSON, manifest YAML, package hash, and scoped diff whitespace checks passed."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "pr_opened",
+        "note": "Opened PR #1936 for HELP-CONTENT-DRAFT-POLICY-OWNER-ANSWERS-01."
       }
     ]
   },
