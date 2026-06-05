@@ -1,0 +1,120 @@
+{
+  "schema_version": "help_content_draft_contact_support_decision.v1",
+  "task": "HELP-CONTENT-DRAFT-CONTACT-SUPPORT-DECISION-01",
+  "generated_at": "2026-06-05",
+  "decision": "DIRECT_EMAIL_SUPPORT_CONTACT_SELECTED_WITH_PUBLISH_STILL_BLOCKED",
+  "source_context": {
+    "depends_on": "HELP-CONTENT-DRAFT-POLICY-OWNER-ANSWERS-01",
+    "policy_owner_answers_artifact": "backend/docs/help/generated/help-content-draft-policy-owner-answers-01.v1.json",
+    "prior_blocker_id": "contact_support_route_and_support_contact",
+    "user_decision": "direct email support contact",
+    "support_email": "support@fermatmind.com"
+  },
+  "contact_support_decision": {
+    "selected_contact_mode": "email",
+    "selected_contact_target": "support@fermatmind.com",
+    "selected_public_canonical": "mailto:support@fermatmind.com",
+    "new_help_contact_support_route_required": false,
+    "existing_support_route_required_for_this_decision": false,
+    "notes": [
+      "Help service content should direct users to email support@fermatmind.com for support contact.",
+      "This decision removes the /help/contact-support route as a publish-blocking requirement for the current Help service content train.",
+      "Any public route such as /support may remain a separate product navigation surface, but this task does not require or modify it."
+    ]
+  },
+  "blocker_resolution_mapping": [
+    {
+      "blocker_id": "contact_support_route_and_support_contact",
+      "prior_status": "blocked",
+      "decision_status": "resolved_by_email_contact_decision",
+      "remaining_gate": "Apply the email-contact decision to the revised local package/import package in HELP-CONTENT-DRAFT-POLICY-REVISION-APPLY-01, then sync CMS drafts only after explicit CMS mutation authorization."
+    },
+    {
+      "blocker_id": "support_contact_first_class_field",
+      "prior_status": "unverified",
+      "decision_status": "still_open",
+      "remaining_gate": "HELP-CMS-SERVICE-FIELDS-01 should add or verify first-class support_contact authority before publish preflight."
+    },
+    {
+      "blocker_id": "faq_schema_publish_gate",
+      "prior_status": "blocked",
+      "decision_status": "still_open",
+      "remaining_gate": "Verify visible FAQ to JSON-LD equality only after policy/contact revisions are applied and schema authority is available."
+    }
+  ],
+  "scope_validation": {
+    "cms_mutation_performed": false,
+    "publish_performed": false,
+    "deploy_performed": false,
+    "search_submission_performed": false,
+    "payment_or_refund_performed": false,
+    "payment_provider_changed": false,
+    "private_url_access_performed": false,
+    "secret_env_cookie_token_read": false,
+    "operator_approval_claimed": false,
+    "content_rewrite_performed": false,
+    "contact_support_decision_recorded_only": true
+  },
+  "recommended_pr_train": [
+    {
+      "id": "HELP-CMS-SERVICE-FIELDS-01",
+      "repo": "fap-api",
+      "purpose": "Add or verify first-class CMS fields needed for support_contact, policy_version, reviewer, faq_items, and schema_enabled authority.",
+      "mutation_allowed": false,
+      "publish_allowed": false
+    },
+    {
+      "id": "HELP-CONTENT-DRAFT-POLICY-REVISION-APPLY-01",
+      "repo": "fap-api",
+      "purpose": "Apply policy-owner answers and the direct-email support decision to the local revised v01 Help package/import artifact without CMS writes.",
+      "mutation_allowed": false,
+      "publish_allowed": false
+    },
+    {
+      "id": "HELP-CONTENT-DRAFT-POLICY-CMS-SYNC-01",
+      "repo": "fap-api",
+      "purpose": "Sync the policy/contact-updated package to the existing 12 Help CMS drafts while preserving draft/non-public/non-indexable/unpublished state.",
+      "mutation_allowed": true,
+      "publish_allowed": false,
+      "requires_explicit_cms_mutation_authorization": true
+    },
+    {
+      "id": "HELP-CONTENT-DRAFT-OPERATOR-REVIEW-R2-01",
+      "repo": "fap-api",
+      "purpose": "Run second read-only operator review request after policy answers and contact-support handling are applied.",
+      "mutation_allowed": false,
+      "publish_allowed": false,
+      "operator_approval_claimed_by_codex": false
+    },
+    {
+      "id": "HELP-SERVICE-FAQ-SCHEMA-RUNTIME-01",
+      "repo": "fap-web",
+      "purpose": "Enable or harden Help FAQ schema only from visible CMS/backend FAQ authority.",
+      "mutation_allowed": false,
+      "publish_allowed": false
+    },
+    {
+      "id": "HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-01",
+      "repo": "fap-api/fap-web",
+      "purpose": "Run publish preflight over CMS draft state, support contact, schema, canonical paths, sitemap/llms, and private URL guards.",
+      "mutation_allowed": false,
+      "publish_allowed": false
+    },
+    {
+      "id": "HELP-CONTENT-DRAFT-PUBLISH-EXECUTE-01",
+      "repo": "fap-api",
+      "purpose": "Publish the 12 Help ContentPage drafts only after exact publish authorization.",
+      "mutation_allowed": true,
+      "publish_allowed": true,
+      "requires_exact_publish_authorization": true
+    },
+    {
+      "id": "HELP-CONTENT-DRAFT-POST-PUBLISH-SMOKE-01",
+      "repo": "fap-api/fap-web",
+      "purpose": "Verify public 200s, canonical paths, schema, sitemap/llms exposure, and private URL guardrails after publish.",
+      "mutation_allowed": false,
+      "publish_allowed": false
+    }
+  ],
+  "next_task_recommendation": "HELP-CMS-SERVICE-FIELDS-01"
+}

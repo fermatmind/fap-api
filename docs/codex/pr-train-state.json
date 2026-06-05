@@ -45326,6 +45326,129 @@
       }
     ]
   },
+  "HELP-CONTENT-DRAFT-CONTACT-SUPPORT-DECISION-01": {
+    "repo": "fap-api",
+    "branch": "codex/help-contact-support-decision-01",
+    "base": "origin/main",
+    "status": "pr_opened",
+    "train_scope": "window_9_help_service_content",
+    "title": "docs(help): record Help direct email support decision",
+    "depends_on": [
+      "HELP-CONTENT-DRAFT-POLICY-OWNER-ANSWERS-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User requested the next Help service PR train and decided that support contact should be direct email contact."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "HELP-CONTENT-DRAFT-POLICY-OWNER-ANSWERS-01 is merged as PR #1936 and final status reconciliation is merged as PR #1940."
+      },
+      "contact_support_decision": {
+        "status": "recorded",
+        "selected_contact_mode": "email",
+        "support_email": "support@fermatmind.com",
+        "selected_public_canonical": "mailto:support@fermatmind.com",
+        "new_help_contact_support_route_required": false
+      },
+      "scope_preflight": {
+        "status": "pass",
+        "evidence": "Current scope records the direct-email support-contact decision only; no CMS mutation, publish, deploy, search submission, private URL access, payment/refund action, payment-provider change, content rewrite, frontend fallback content, Operator approval claim, or secret/env/cookie/token read is allowed."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          {
+            "command": "python3 -m json.tool backend/docs/help/generated/help-content-draft-contact-support-decision-01.v1.json >/dev/null",
+            "status": "pass"
+          },
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "pass"
+          },
+          {
+            "command": "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+            "status": "pass"
+          },
+          {
+            "command": "git diff --check -- backend/docs/help/generated/help-content-draft-contact-support-decision-01.v1.json backend/docs/operations/help-content-draft-contact-support-decision-2026-06-05.md docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+            "status": "pass"
+          }
+        ]
+      },
+      "github": {
+        "status": "pending",
+        "checks": []
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1942",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "result": {
+      "decision": "DIRECT_EMAIL_SUPPORT_CONTACT_SELECTED_WITH_PUBLISH_STILL_BLOCKED",
+      "generated_artifact": "backend/docs/help/generated/help-content-draft-contact-support-decision-01.v1.json",
+      "operations_report": "backend/docs/operations/help-content-draft-contact-support-decision-2026-06-05.md",
+      "next_task_recommendation": "HELP-CMS-SERVICE-FIELDS-01"
+    },
+    "scope_validation": {
+      "cms_mutation_performed": false,
+      "publish_performed": false,
+      "deploy_performed": false,
+      "search_submission_performed": false,
+      "payment_or_refund_performed": false,
+      "payment_provider_changed": false,
+      "private_url_access_performed": false,
+      "secret_env_cookie_token_read": false,
+      "operator_approval_claimed": false,
+      "content_rewrite_performed": false,
+      "frontend_fallback_content_added": false,
+      "allowed_paths_only": true
+    },
+    "sidecars": [
+      {
+        "id": "HELP-CMS-SERVICE-FIELDS",
+        "status": "open_followup",
+        "note": "First-class support_contact, policy_version, reviewer, faq_items, and schema_enabled authority remains a later CMS/backend task."
+      },
+      {
+        "id": "HELP-CONTENT-DRAFT-POLICY-REVISION-APPLY",
+        "status": "open_followup",
+        "note": "Apply policy-owner answers and direct-email support contact to the local revised package/import artifact before CMS sync."
+      },
+      {
+        "id": "HELP-CONTENT-DRAFT-PUBLISH-BLOCK",
+        "status": "hard_gate",
+        "note": "Publish remains blocked and requires separate exact authorization after policy/contact revisions are applied, Operator review passes, and publish preflight passes."
+      }
+    ],
+    "next_task": "HELP-CMS-SERVICE-FIELDS-01",
+    "transitions": [
+      {
+        "at": "2026-06-05",
+        "status": "authorized",
+        "note": "User requested the Help service content PR train and decided to use direct email contact support."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "local_artifacts_created_validation_pending",
+        "note": "Created direct-email support-contact decision artifact and operations report; local validation pending."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "local_checks_passed",
+        "note": "Contact-support decision artifact, state JSON, manifest YAML, and scoped diff whitespace checks passed."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "pr_opened",
+        "note": "Opened PR #1942 for HELP-CONTENT-DRAFT-CONTACT-SUPPORT-DECISION-01."
+      }
+    ]
+  },
   "PUBLIC-BENEFIT-ASSET-PACKAGES-ARCHIVE-01": {
     "repo": "fap-api",
     "branch": "codex/public-benefit-asset-packages-archive-01",

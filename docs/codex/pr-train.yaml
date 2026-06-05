@@ -21818,6 +21818,46 @@ prs:
     content_authority: CMS/backend
     next_task: HELP-CONTENT-DRAFT-CONTACT-SUPPORT-DECISION-01
 
+  - id: HELP-CONTENT-DRAFT-CONTACT-SUPPORT-DECISION-01
+    repo: fap-api
+    branch: codex/help-contact-support-decision-01
+    title: "docs(help): record Help direct email support decision"
+    train_scope: window_9_help_service_content
+    status: in_progress
+    depends_on:
+      - HELP-CONTENT-DRAFT-POLICY-OWNER-ANSWERS-01
+    scope:
+      - Record the policy-owner support-contact decision for the Help service draft train.
+      - Select direct email to support@fermatmind.com as the support contact path and remove the missing /help/contact-support route as a publish-blocking requirement for this train.
+      - Preserve publish, CMS mutation, deployment, search submission, private URL, secret, payment/refund, and Operator approval gates for later explicitly authorized tasks.
+    allowed_paths:
+      - backend/docs/help/generated/help-content-draft-contact-support-decision-01.v1.json
+      - backend/docs/operations/help-content-draft-contact-support-decision-2026-06-05.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Publish, deploy, submit search URLs, mutate CMS, access private result/order/share/pay/payment/history URLs, read secrets/env/cookies/tokens, run payment/refund flows, change payment-provider behavior, rewrite content, add frontend fallback content, or claim Operator approval.
+    validation:
+      - python3 -m json.tool backend/docs/help/generated/help-content-draft-contact-support-decision-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- backend/docs/help/generated/help-content-draft-contact-support-decision-01.v1.json backend/docs/operations/help-content-draft-contact-support-decision-2026-06-05.md docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: HELP-CMS-SERVICE-FIELDS-01
+
   - id: PUBLIC-BENEFIT-ASSET-PACKAGES-ARCHIVE-01
     repo: fap-api
     branch: codex/public-benefit-asset-packages-archive-01
