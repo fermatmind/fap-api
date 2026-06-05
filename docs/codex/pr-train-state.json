@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-05T01:03:16Z",
+  "updated_at": "2026-06-05T00:00:00+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -44005,5 +44005,110 @@
     ],
     "merge_commit": "8dcb7f38db21000271dee7ac45a92ca293c38a9d",
     "merge_commit_sha": "8dcb7f38db21000271dee7ac45a92ca293c38a9d"
+  },
+  "PUBLIC-BENEFIT-ASSET-PACKAGES-ARCHIVE-01": {
+    "repo": "fap-api",
+    "branch": "codex/public-benefit-asset-packages-archive-01",
+    "base": "origin/main",
+    "status": "local_checks_passed",
+    "train_scope": "window_7_public_benefit_trust_gate",
+    "title": "docs(benefit): archive public benefit content asset packages",
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly provided the Window 7 Public Benefit Trust Gate PR train with PR id, branch, title, allowed paths, operator decisions, and manifest/state paths."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "PR1 has no declared dependency. Existing Help CMS train state is not a dependency for Window 7 PR1."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed paths are confined to backend/docs/operations/public-benefit/**, backend/docs/operations/generated/public-benefit-content-assets.v1.json, backend/tests/Feature/Foundation/PublicBenefitContentAssetsTest.php, and docs/codex ledger files."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          {
+            "command": "php -l backend/tests/Feature/Foundation/PublicBenefitContentAssetsTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "python3 -m json.tool backend/docs/operations/generated/public-benefit-content-assets.v1.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+            "status": "passed"
+          },
+          {
+            "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=PublicBenefitContentAssetsTest --no-ansi",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check -- backend/docs/operations/public-benefit backend/docs/operations/generated/public-benefit-content-assets.v1.json backend/tests/Feature/Foundation/PublicBenefitContentAssetsTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --cached --check",
+            "status": "passed"
+          }
+        ]
+      }
+    },
+    "result": {
+      "archive_path": "backend/docs/operations/public-benefit/content-assets-2026-06-04",
+      "package_count": 6,
+      "publish_allowed": false,
+      "cms_draft_created": false,
+      "trust_badge_allowed_now": false,
+      "daily_giving_noindex": true,
+      "next_pr_supported": "FOUNDATION-TRUST-PAGE-ASSET-INVENTORY-01"
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "cms_write_performed": false,
+      "publish_performed": false,
+      "daily_giving_record_created": false,
+      "proof_file_processed": false,
+      "search_submission_performed": false,
+      "deploy_performed": false,
+      "notes": "Changed files are limited to the PR1 allowed archive, generated artifact, focused test, and codex ledger paths."
+    },
+    "sidecars": [
+      {
+        "id": "DAILY-GIVING-PRIVATE-PROOF-STORAGE",
+        "status": "not_proven_in_pr1",
+        "note": "PR1 archives draft-only assets and does not prove storage-level private disk or bucket."
+      },
+      {
+        "id": "DAILY-GIVING-PUBLIC-RECORD",
+        "status": "blocked_until_operator_authorization",
+        "note": "No DailyGiving record creation is allowed in PR1."
+      }
+    ],
+    "next_task": "FOUNDATION-TRUST-PAGE-ASSET-INVENTORY-01",
+    "transitions": [
+      {
+        "at": "2026-06-05",
+        "status": "in_progress",
+        "note": "Initialized from explicit Window 7 Public Benefit Trust Gate PR train request and uploaded content asset package."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "local_checks_passed",
+        "note": "Draft-only public benefit content asset archive validated locally with focused PHPUnit, JSON/YAML parse, and scoped diff check."
+      }
+    ]
   }
 }

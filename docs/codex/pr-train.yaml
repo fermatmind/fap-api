@@ -21476,3 +21476,45 @@ prs:
     frontend_fallback_authority: false
     content_authority: CMS/backend
     next_task: HELP-CONTENT-DRAFT-CREATE-01
+
+  - id: PUBLIC-BENEFIT-ASSET-PACKAGES-ARCHIVE-01
+    repo: fap-api
+    branch: codex/public-benefit-asset-packages-archive-01
+    title: "docs(benefit): archive public benefit content asset packages"
+    train_scope: window_7_public_benefit_trust_gate
+    status: in_progress
+    scope:
+      - Archive the uploaded GPT-5.5 Pro public benefit asset package as draft-only operator inputs.
+      - Preserve publish_allowed=false, requires_operator_review=true, cms_draft_created=false, content_owner=GPT-5.5 Pro, and final_authority=CMS/backend.
+      - Record operator decisions for CNY 10 daily giving, United Nations Foundation as recipient-only, DailyGiving noindex, manual-only social sync, proof redaction, and private raw receipt storage.
+      - Do not create CMS drafts, DailyGiving records, proof files, runtime surfaces, social posts, trust badges, search submissions, or publishable copy.
+    allowed_paths:
+      - backend/docs/operations/public-benefit/**
+      - backend/docs/operations/generated/public-benefit-content-assets.v1.json
+      - backend/tests/Feature/Foundation/PublicBenefitContentAssetsTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Publish, create CMS drafts, create DailyGiving records, process proof files, mutate production data, write social copy, create trust badges, submit search URLs, deploy, or read secrets.
+    validation:
+      - php -l backend/tests/Feature/Foundation/PublicBenefitContentAssetsTest.php
+      - python3 -m json.tool backend/docs/operations/generated/public-benefit-content-assets.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - cd backend && php artisan test --filter=PublicBenefitContentAssetsTest --no-ansi
+      - git diff --check -- backend/docs/operations/public-benefit backend/docs/operations/generated/public-benefit-content-assets.v1.json backend/tests/Feature/Foundation/PublicBenefitContentAssetsTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: FOUNDATION-TRUST-PAGE-ASSET-INVENTORY-01

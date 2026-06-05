@@ -1,0 +1,160 @@
+{
+  "version": "public_benefit_content_assets.v1",
+  "generated_at": "2026-06-05T00:00:00+08:00",
+  "source_package": {
+    "name": "fermatmind-public-benefit-content-assets-2026-06-04",
+    "date": "2026-06-04",
+    "archive_path": "backend/docs/operations/public-benefit/content-assets-2026-06-04",
+    "zip_source": "fermatmind-public-benefit-content-assets-2026-06-04.zip"
+  },
+  "global_policy": {
+    "publish_allowed": false,
+    "requires_operator_review": true,
+    "cms_draft_created": false,
+    "content_owner": "GPT-5.5 Pro",
+    "final_authority": "CMS/backend",
+    "runtime_used": false,
+    "search_submission_allowed": false,
+    "trust_badge_allowed_now": false,
+    "daily_giving_noindex": true
+  },
+  "operator_decisions": {
+    "donation_start": "today",
+    "donation_amount": {
+      "currency": "CNY",
+      "amount": 10,
+      "cadence": "daily"
+    },
+    "recipient": {
+      "canonical_name": "United Nations Foundation",
+      "fixed": true,
+      "claim_boundary": "Recipient only. No partnership, endorsement, certification, authorization, fundraising, or official relationship may be implied."
+    },
+    "daily_giving_indexability": {
+      "keep_noindex": true
+    },
+    "public_record_policy": {
+      "allowed_after_record_and_proof_gate": true
+    },
+    "trust_badge": {
+      "allowed_now": false
+    },
+    "social_sync": {
+      "starts_today": true,
+      "mode": "manual_only",
+      "paid_page_badge_allowed": false,
+      "official_endorsement_claim_allowed": false
+    },
+    "proof_policy": {
+      "public_proof_required": true,
+      "withheld_allowed": true,
+      "withheld_requires_reviewer_reason": true
+    },
+    "redaction_policy": {
+      "default": "redact_sensitive_fields",
+      "no_redaction_allowed_only_if_no_sensitive_fields": true,
+      "must_redact": [
+        "payment_account",
+        "full_transaction_number",
+        "email",
+        "phone",
+        "physical_address",
+        "card_or_bank_data",
+        "private_url",
+        "token",
+        "internal_notes"
+      ]
+    },
+    "storage_policy": {
+      "raw_receipt": "private_disk_or_private_bucket",
+      "public_proof": "redacted_public_media_or_public_safe_url",
+      "signed_url_allowed": true,
+      "signed_url_must_not_expose_raw_receipt": true
+    }
+  },
+  "assets": [
+    {
+      "id": "00_OPERATOR-DECISIONS",
+      "files": [
+        "00_OPERATOR-DECISIONS.md",
+        "00_OPERATOR-DECISIONS.yaml"
+      ],
+      "publish_allowed": false,
+      "requires_operator_review": true,
+      "cms_draft_created": false,
+      "content_owner": "GPT-5.5 Pro",
+      "final_authority": "CMS/backend"
+    },
+    {
+      "id": "FOUNDATION-TRUST-PAGE-CONTENT-ASSET-01",
+      "files": [
+        "01_FOUNDATION-TRUST-PAGE-CONTENT-ASSET-01.md",
+        "01_FOUNDATION-TRUST-PAGE-CONTENT-ASSET-01.yaml"
+      ],
+      "publish_allowed": false,
+      "requires_operator_review": true,
+      "cms_draft_created": false,
+      "content_owner": "GPT-5.5 Pro",
+      "final_authority": "CMS/backend"
+    },
+    {
+      "id": "PUBLIC-BENEFIT-CLAIM-BOUNDARY-01",
+      "files": [
+        "02_PUBLIC-BENEFIT-CLAIM-BOUNDARY-01.md",
+        "02_PUBLIC-BENEFIT-CLAIM-BOUNDARY-01.yaml"
+      ],
+      "publish_allowed": false,
+      "requires_operator_review": true,
+      "cms_draft_created": false,
+      "content_owner": "GPT-5.5 Pro",
+      "final_authority": "CMS/backend"
+    },
+    {
+      "id": "DAILY-GIVING-PROOF-REDACTION-SOP-01",
+      "files": [
+        "03_DAILY-GIVING-PROOF-REDACTION-SOP-01.md",
+        "03_DAILY-GIVING-PROOF-REDACTION-SOP-01.yaml"
+      ],
+      "publish_allowed": false,
+      "requires_operator_review": true,
+      "cms_draft_created": false,
+      "content_owner": "GPT-5.5 Pro",
+      "final_authority": "CMS/backend"
+    },
+    {
+      "id": "DAILY-GIVING-RECORD-REVIEW-TEMPLATE-01",
+      "files": [
+        "04_DAILY-GIVING-RECORD-REVIEW-TEMPLATE-01.md",
+        "04_DAILY-GIVING-RECORD-REVIEW-TEMPLATE-01.yaml"
+      ],
+      "publish_allowed": false,
+      "requires_operator_review": true,
+      "cms_draft_created": false,
+      "content_owner": "GPT-5.5 Pro",
+      "final_authority": "CMS/backend"
+    },
+    {
+      "id": "CODEX-HANDOFF",
+      "files": [
+        "05_CODEX-HANDOFF.md"
+      ],
+      "publish_allowed": false,
+      "requires_operator_review": true,
+      "cms_draft_created": false,
+      "content_owner": "GPT-5.5 Pro",
+      "final_authority": "CMS/backend"
+    }
+  ],
+  "forbidden_actions": [
+    "no_publishable_copy",
+    "no_cms_mutation",
+    "no_daily_giving_record_creation",
+    "no_social_post",
+    "no_trust_badge",
+    "no_runtime_change",
+    "no_search_submission",
+    "no_proof_upload",
+    "no_secret_read"
+  ],
+  "next_pr_supported": "FOUNDATION-TRUST-PAGE-ASSET-INVENTORY-01"
+}
