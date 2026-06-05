@@ -22495,3 +22495,46 @@ prs:
     deploy_allowed: false
     content_authority: CMS/backend
     next_task: SEO-ARTICLE-RIASEC-V2-CMS-DRAFT-CREATE-01
+
+  - id: SEO-ARTICLE-RIASEC-V2-CMS-DRAFT-CREATE-01
+    repo: fap-api
+    depends_on:
+      - SEO-ARTICLE-RIASEC-V2-IMPORTER-MAPPING-01
+    branch: codex/seo-article-riasec-v2-cms-draft-create-01
+    title: "ops(cms): create RIASEC explanation article drafts"
+    train_scope: seo_article_content_package_riasec_explanation_v2
+    status: draft_created_postcheck_passed_publish_blocked
+    scope:
+      - Record the backend production deploy precondition performed under separate exact user authorization because the previous production release lacked merged RIASEC importer mapping and package files.
+      - Execute production importer dry-run for zh/en RIASEC explanation V2 article target packages.
+      - Create zh/en CMS Article drafts only, preserving non-public, non-indexable, unpublished state.
+      - Record draft postcheck, public article/API absence, sitemap/llms absence, publish blockers, and next editorial review gates.
+    allowed_paths:
+      - backend/docs/seo/riasec-explanation-cms-draft-create-postcheck.md
+      - backend/docs/seo/generated/riasec-explanation-cms-draft-create.v1.json
+      - backend/tests/Feature/SEO/RiasecExplanationCmsDraftCreateTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Publish articles, submit search URLs, deploy frontend, rewrite content, or access private result/orders/share/pay/payment/history/tokenized URLs.
+    validation:
+      - php -l backend/tests/Feature/SEO/RiasecExplanationCmsDraftCreateTest.php
+      - python3 -m json.tool backend/docs/seo/generated/riasec-explanation-cms-draft-create.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=RiasecExplanationCmsDraftCreateTest --no-ansi
+      - git diff --check -- backend/docs/seo/riasec-explanation-cms-draft-create-postcheck.md backend/docs/seo/generated/riasec-explanation-cms-draft-create.v1.json backend/tests/Feature/SEO/RiasecExplanationCmsDraftCreateTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: true
+    database_mutation: true
+    cms_mutation: true
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    backend_deploy_precondition_performed: true
+    frontend_deploy_allowed: false
+    content_authority: CMS/backend
+    next_task: SEO-ARTICLE-RIASEC-V2-EDITORIAL-REVIEW-01 after separate authorization

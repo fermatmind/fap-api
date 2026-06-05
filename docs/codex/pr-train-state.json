@@ -47302,5 +47302,182 @@
         "note": "PR #1927 merged on GitHub at 2026-06-05T12:13:59Z with merge commit fcce4e3a6b76d47a746dcd321c6acdd0cdab0713; origin/main contains the merge commit; remote branch was deleted and local task worktree/branch cleanup was completed."
       }
     ]
+  },
+  "SEO-ARTICLE-RIASEC-V2-CMS-DRAFT-CREATE-01": {
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/seo-article-riasec-v2-cms-draft-create-01",
+    "status": "draft_created_postcheck_passed_publish_blocked_local_validation_pending",
+    "title": "ops(cms): create RIASEC explanation article drafts",
+    "train_scope": "seo_article_content_package_riasec_explanation_v2",
+    "depends_on": [
+      "SEO-ARTICLE-RIASEC-V2-IMPORTER-MAPPING-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User authorized SEO-ARTICLE-RIASEC-V2-CMS-DRAFT-CREATE-01 for draft-only CMS mutation, then separately authorized backend production deploy to unlock the missing importer mapping, and then accepted deployed release e812d6f87f8b84b45d2e900d9d3844a0402635bc for continuing importer dry-run, draft-only create, and draft postcheck. Publish, search submission, frontend deploy, content rewrite, and private URL access remain forbidden."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "SEO-ARTICLE-RIASEC-V2-IMPORTER-MAPPING-01 merged as PR #1923 and origin/main contains merge commit 095a91ccd8d27c4ea9e9e1f490e992efd228c142."
+      },
+      "backend_deploy_precondition": {
+        "status": "pass",
+        "performed": true,
+        "initial_approved_sha": "7d21cdf9f28c234a2c3c5ff107db9627ba4adcc3",
+        "initial_release_name": "backend-main-20260605-7d21cdf9",
+        "actual_deployed_revision": "e812d6f87f8b84b45d2e900d9d3844a0402635bc",
+        "actual_release_accepted_by_user": true,
+        "schema_verify": "pass",
+        "ops_healthz_snapshot": "pass",
+        "frontend_deploy_performed": false,
+        "notes": "Backend deploy was performed only as a precondition because production lacked the merged importer mapping and package files. No frontend deploy was performed."
+      },
+      "production_importer_dry_run": {
+        "status": "pass",
+        "zh": {
+          "ok": true,
+          "action": "will_create",
+          "would_write": true,
+          "errors_count": 0,
+          "warnings_count": 6,
+          "claim_matches_count": 2,
+          "references_count": 0,
+          "existing_article_id": null
+        },
+        "en": {
+          "ok": true,
+          "action": "will_create",
+          "would_write": true,
+          "errors_count": 0,
+          "warnings_count": 4,
+          "claim_matches_count": 0,
+          "references_count": 0,
+          "existing_article_id": null
+        }
+      },
+      "production_draft_create": {
+        "status": "pass",
+        "zh": {
+          "article_id": 40,
+          "working_revision_id": 45,
+          "working_revision_status": "machine_draft",
+          "published_revision_id": null,
+          "errors_count": 0,
+          "warnings_count": 6
+        },
+        "en": {
+          "article_id": 41,
+          "working_revision_id": 46,
+          "working_revision_status": "machine_draft",
+          "published_revision_id": null,
+          "errors_count": 0,
+          "warnings_count": 4
+        }
+      },
+      "production_postcheck": {
+        "status": "pass",
+        "articles_status_draft": true,
+        "articles_non_public": true,
+        "articles_non_indexable": true,
+        "articles_unpublished": true,
+        "robots_noindex_nofollow": true,
+        "translation_group_count": 2,
+        "slug_duplicate_counts_all_one": true,
+        "public_indexable_published_count": 0
+      },
+      "public_surface": {
+        "status": "pass",
+        "article_pages_404": true,
+        "article_apis_404": true,
+        "article_schema_absent": true,
+        "faq_schema_absent": true,
+        "target_canonical_absent": true,
+        "sitemap_contains_target_slugs": false,
+        "llms_contains_target_slugs": false,
+        "llms_full_contains_target_slugs": false
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are confined to RIASEC draft-create generated artifact, postcheck report, focused artifact contract test, and docs/codex PR-train metadata."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "php -l backend/tests/Feature/SEO/RiasecExplanationCmsDraftCreateTest.php",
+          "python3 -m json.tool backend/docs/seo/generated/riasec-explanation-cms-draft-create.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=RiasecExplanationCmsDraftCreateTest --no-ansi",
+          "git diff --check -- backend/docs/seo/riasec-explanation-cms-draft-create-postcheck.md backend/docs/seo/generated/riasec-explanation-cms-draft-create.v1.json backend/tests/Feature/SEO/RiasecExplanationCmsDraftCreateTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+          "git diff --cached --check"
+        ],
+        "notes": "PHP lint, JSON/YAML parsing, focused PHPUnit artifact contract, and scoped diff whitespace checks passed."
+      }
+    },
+    "result": {
+      "cms_draft_created": true,
+      "records_created": 2,
+      "zh_article_id": 40,
+      "en_article_id": 41,
+      "publish_allowed": false,
+      "search_submit_allowed": false,
+      "content_rewrite_performed": false,
+      "private_url_accessed": false,
+      "frontend_deploy_performed": false,
+      "generated_artifact": "backend/docs/seo/generated/riasec-explanation-cms-draft-create.v1.json",
+      "postcheck_report": "backend/docs/seo/riasec-explanation-cms-draft-create-postcheck.md"
+    },
+    "scope_validation": {
+      "cms_mutation_performed": true,
+      "cms_mutation_scope": "two RIASEC explanation Article draft rows only",
+      "publish_performed": false,
+      "search_submission_performed": false,
+      "frontend_deploy_performed": false,
+      "content_rewrite_performed": false,
+      "private_url_access_performed": false,
+      "allowed_paths_only": true
+    },
+    "sidecars": [
+      {
+        "id": "SEO-ARTICLE-RIASEC-V2-EDITORIAL-REVIEW-01",
+        "status": "next_gate",
+        "note": "Operator editorial review, accepted references, CMS media resolution, and revision approval remain required before any publish preflight."
+      },
+      {
+        "id": "SEO-ARTICLE-RIASEC-V2-PUBLISH-BLOCK",
+        "status": "hard_gate",
+        "note": "Publish, public indexability, sitemap/llms inclusion, search submission, and post-publish baseline review remain forbidden until separate controlled publish authorization."
+      }
+    ],
+    "commit_sha": "7f0eb94944a8dc71e192774c06447cbdb6783f25",
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "failure_reason": null,
+    "transitions": [
+      {
+        "at": "2026-06-05",
+        "status": "authorized",
+        "note": "User authorized draft-only CMS mutation and PR-train manifest/state entry updates for SEO-ARTICLE-RIASEC-V2-CMS-DRAFT-CREATE-01."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "backend_deploy_precondition_completed",
+        "note": "Backend deploy completed after separate exact authorization; deployed release e812d6f87f8b84b45d2e900d9d3844a0402635bc was accepted by the user for continuing draft create."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "draft_created_postcheck_passed_publish_blocked",
+        "note": "Production importer dry-run passed for zh/en and created article drafts 40 and 41 with working revisions 45 and 46. Postcheck confirmed draft/non-public/non-indexable/unpublished state and public absence."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "local_checks_passed",
+        "note": "Local JSON/YAML parsing, PHP lint, focused RiasecExplanationCmsDraftCreateTest, and scope diff checks passed."
+      }
+    ]
   }
 }
