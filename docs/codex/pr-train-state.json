@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-05T15:14:06Z",
+  "updated_at": "2026-06-05T15:21:53Z",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -48500,7 +48500,7 @@
     "repo": "fap-api",
     "base": "main",
     "branch": "codex/seo-article-riasec-v2-cms-draft-approval-preflight-01",
-    "status": "ready_to_merge",
+    "status": "merged",
     "title": "docs(seo): preflight RIASEC draft approval readiness",
     "train_scope": "seo_article_content_package_riasec_explanation_v2",
     "depends_on": [
@@ -48540,6 +48540,10 @@
         "status": "pass",
         "pr_url": "https://github.com/fermatmind/fap-api/pull/1949",
         "evidence": "GitHub checks passed for PR #1949: Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
+      },
+      "post_merge": {
+        "status": "pass",
+        "evidence": "GitHub PR #1949 is MERGED at 2026-06-05T15:19:11Z with merge commit 03caed48431f68fb4de90c3dec448b16969d03ab; origin/main contains the merge commit; remote task branch is absent after prune; local task branch was deleted from the temp worktree."
       }
     },
     "result": {
@@ -48577,11 +48581,11 @@
         "note": "This task is preflight-only. CMS draft approval mutation requires separate explicit authorization."
       }
     ],
-    "commit_sha": "1d65a9334c60a43778d8dcd6b2a86ce87730086c",
+    "commit_sha": "03caed48431f68fb4de90c3dec448b16969d03ab",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1949",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-05T15:19:11Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "failure_reason": null,
     "transitions": [
       {
@@ -48608,6 +48612,11 @@
         "at": "2026-06-05T15:14:06Z",
         "status": "ready_to_merge",
         "note": "GitHub checks passed for PR #1949; ready to merge subject to repo policy."
+      },
+      {
+        "at": "2026-06-05T15:21:53Z",
+        "status": "merged",
+        "note": "Closed out PR #1949 after squash merge, remote branch deletion, local branch cleanup, and origin/main containment verification."
       }
     ]
   }
