@@ -35526,7 +35526,7 @@
   "CONTENT-PACKS-INDEX-ARTIFACT-01": {
     "repo": "fap-api",
     "branch": "fix/content-packs-index-artifact-01",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "commit_sha": "7e0cc715e03b105e51c9556596212c48bb962868",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1763",
     "checks": {
@@ -45075,8 +45075,21 @@
         ]
       },
       "github": {
-        "status": "pending",
-        "commands": []
+        "status": "pass",
+        "commands": [
+          "gh pr checks 1905 --watch --interval 15"
+        ],
+        "jobs": [
+          "Semgrep OSS",
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "hygiene",
+          "supply-chain",
+          "content-pack-build-validate",
+          "verify-bigfive",
+          "verify-mbti-legacy",
+          "verify-mbti-v2"
+        ]
       }
     },
     "result": {
@@ -45138,6 +45151,11 @@
         "at": "2026-06-05",
         "status": "pr_open",
         "note": "Opened https://github.com/fermatmind/fap-api/pull/1905."
+      },
+      {
+        "at": "2026-06-05",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed for PR #1905."
       }
     ]
   }
