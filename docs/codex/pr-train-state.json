@@ -46133,7 +46133,7 @@
       "search_submit_allowed": false
     },
     "failure_reason": null,
-    "commit_sha": null,
+    "commit_sha": "a8a8a249b419b6075abac3cad8dbd644e357a21e",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1913",
     "transitions": [
       {
@@ -46441,6 +46441,11 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "notes": "Syntax, JSON/YAML, focused PHPUnit, Pint, and scoped diff checks passed. No CMS draft creation, publish, search submission, deploy, content rewrite, or private URL access was performed."
+      },
+      {
+        "at": "2026-06-05T08:38:49Z",
+        "status": "commit_created",
+        "evidence": "Local commit a8a8a249b419b6075abac3cad8dbd644e357a21e created for importer mapping PR."
       }
     ]
   },
