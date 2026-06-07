@@ -965,7 +965,35 @@
       "commit_sha": "cb500090d448aa50099fe03ba482656fd5f7fea3",
       "pr_url": "",
       "checks": {
-        "local": [],
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && ruby -e 'require \"yaml\"; YAML.load_file(\"docs/codex/pr-train.yaml\")'",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Console/Commands/ScienceContentPagePreImportQaCommand.php app/Services/Cms/ScienceContentPagePreImportQaService.php tests/Feature/Console/ScienceContentPagePreImportQaCommandTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Console/Commands/ScienceContentPagePreImportQaCommand.php app/Services/Cms/ScienceContentPagePreImportQaService.php app/Services/Cms/ScienceContentPageDraftDryRunService.php tests/Feature/Console/ScienceContentPagePreImportQaCommandTest.php tests/Feature/Console/ScienceContentPageDraftDryRunCommandTest.php",
+            "status": "passed",
+            "details": "Expanded scope-format check for the dry-run mapping files touched by the contract lock."
+          },
+          {
+            "command": "php artisan test tests/Feature/Console/ScienceContentPageDraftDryRunCommandTest.php tests/Feature/Console/ScienceContentPageOperatorReviewReadinessCommandTest.php tests/Feature/Console/ScienceContentPagePreImportQaCommandTest.php --no-ansi",
+            "status": "passed",
+            "details": "8 tests, 158 assertions."
+          },
+          {
+            "command": "php artisan content-pages:science-pre-import-qa --package='/Users/rainie/Desktop/science_contentpage_cms_draft_package 2'",
+            "status": "passed",
+            "details": "decision=NO-GO, non_public_draft_import_qa_passed=true, real_import_contract_locked=true, real_import_command_authorized=false, content_import_performed=false, publish_performed=false."
+          },
+          {
+            "command": "git diff --check && git diff --cached --check",
+            "status": "passed"
+          }
+        ],
         "github": []
       },
       "failure_reason": "",
@@ -4772,7 +4800,7 @@
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
       "status": "local_check_failed_out_of_scope",
       "branch": "codex/pr-d7b-crosswalk-mode-alias-policy",
-      "commit_sha": "",
+      "commit_sha": "854afe7a",
       "pr_url": "",
       "checks": {
         "local": [],
@@ -6062,7 +6090,7 @@
     "SCIENCE-CONTENTPAGE-PUBLISH-FIELDS-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "ready_to_merge",
+      "status": "merged",
       "branch": "codex/science-contentpage-publish-fields-01",
       "commit_sha": "ca055e0b",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1959",
@@ -6152,9 +6180,9 @@
       },
       "failure_reason": "",
       "resume_policy": "manual_only",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-06-08T05:29:17+08:00",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "history": [
         {
           "at": "2026-06-08T00:00:00+08:00",
@@ -6180,13 +6208,18 @@
           "at": "2026-06-08T05:35:00+08:00",
           "status": "ready_to_merge",
           "summary": "PR #1959 GitHub checks passed after the scoped BigFive freeze-classifier allowlist fix. Ready for squash merge after final metadata-only check cycle."
+        },
+        {
+          "at": "2026-06-08T05:45:00+08:00",
+          "status": "merged",
+          "summary": "GitHub PR #1959 was squash-merged as 13e62a0389124e4acb90f4b7467a26ea996cf24e; origin/main contains the merge commit, remote branch was deleted, local main was fast-forwarded, and post-merge operator review/pre-import QA/focused tests passed."
         }
       ]
     },
     "SCIENCE-CONTENTPAGE-REAL-IMPORT-DRY-RUN-LOCK-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "planned",
+      "status": "local_checks_passed",
       "branch": "codex/science-contentpage-real-import-dry-run-lock-01",
       "commit_sha": "",
       "pr_url": "",
@@ -6205,6 +6238,11 @@
           "at": "2026-06-08T00:00:00+08:00",
           "status": "planned",
           "summary": "Planned after explicit user authorization. Depends on SCIENCE-CONTENTPAGE-PUBLISH-FIELDS-01."
+        },
+        {
+          "at": "2026-06-08T06:05:00+08:00",
+          "status": "local_checks_passed",
+          "summary": "Locked the Science pre-real-import contract as dry-run-only, exposed the lock in CLI/service payloads, mapped publish safety defaults in dry-run normalized rows, and verified the real draft package remains non-writing with real import/publish blocked."
         }
       ]
     }
