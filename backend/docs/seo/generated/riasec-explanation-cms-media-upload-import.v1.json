@@ -1,0 +1,183 @@
+{
+  "schema": "riasec-explanation-cms-media-upload-import.v1",
+  "task_id": "RIASEC-EXPLANATION-CMS-MEDIA-UPLOAD-IMPORT-01",
+  "generated_at": "2026-06-08T06:10:00+08:00",
+  "decision": "CONDITIONAL_GO_CMS_MEDIA_IMPORTED_PUBLISH_STILL_BLOCKED",
+  "operator_authorization": "cms_media_upload_import_authorized_2026-06-08",
+  "cms_mutation_performed": true,
+  "media_upload_performed": true,
+  "article_revision_mutation_performed": false,
+  "article_content_rewrite_performed": false,
+  "publish_performed": false,
+  "search_submission_performed": false,
+  "deploy_performed": false,
+  "private_url_accessed": false,
+  "source_review": {
+    "source_file_sha256": "fe357787ce75635f38aeca7af3d46a9ece27d0074d9b4427e5149317d386a4fc",
+    "source_mime_type": "image/webp",
+    "source_width": 1672,
+    "source_height": 941,
+    "source_bytes": 261508,
+    "visual_review": {
+      "topically_appropriate_for_riasec_article": true,
+      "no_visible_competitor_branding": true,
+      "no_official_institution_branding": true,
+      "no_diagnostic_or_medical_imagery": true,
+      "no_career_guarantee_or_job_outcome_imagery": true
+    }
+  },
+  "production_media_asset": {
+    "asset_id": 6,
+    "asset_key": "article.riasec.explanation.cover.v1",
+    "org_id": 0,
+    "status": "published",
+    "is_public": true,
+    "sync_status": "skipped",
+    "cdn_status": "verified",
+    "url": "https://api.fermatmind.com/storage/media-library/sources/articleriasecexplanationcoverv1/source-20260607220639.webp",
+    "mime_type": "image/webp",
+    "width": 1672,
+    "height": 941,
+    "bytes": 261508,
+    "alt": "Abstract career-interest map with six work activity icons around a compass.",
+    "caption": "RIASEC / Holland career-interest article cover image.",
+    "credit": "FermatMind original editorial media",
+    "verified_at": "2026-06-07T22:06:41.000000Z",
+    "last_error": null,
+    "public_url_strategy": "api_storage_public_url_verified"
+  },
+  "variants": [
+    {
+      "variant_key": "hero",
+      "url": "https://api.fermatmind.com/storage/media-library/variants/articleriasecexplanationcoverv1/hero_1600x900.jpg",
+      "mime_type": "image/jpeg",
+      "width": 1600,
+      "height": 900,
+      "bytes": 232863,
+      "sync_status": "skipped",
+      "cdn_status": "verified",
+      "verified_at": "2026-06-07T22:06:40.000000Z",
+      "last_error": null
+    },
+    {
+      "variant_key": "card",
+      "url": "https://api.fermatmind.com/storage/media-library/variants/articleriasecexplanationcoverv1/card_800x450.jpg",
+      "mime_type": "image/jpeg",
+      "width": 800,
+      "height": 450,
+      "bytes": 61481,
+      "sync_status": "skipped",
+      "cdn_status": "verified",
+      "verified_at": "2026-06-07T22:06:40.000000Z",
+      "last_error": null
+    },
+    {
+      "variant_key": "thumbnail",
+      "url": "https://api.fermatmind.com/storage/media-library/variants/articleriasecexplanationcoverv1/thumbnail_400x225.jpg",
+      "mime_type": "image/jpeg",
+      "width": 400,
+      "height": 225,
+      "bytes": 17436,
+      "sync_status": "skipped",
+      "cdn_status": "verified",
+      "verified_at": "2026-06-07T22:06:41.000000Z",
+      "last_error": null
+    },
+    {
+      "variant_key": "og",
+      "url": "https://api.fermatmind.com/storage/media-library/variants/articleriasecexplanationcoverv1/og_1200x630.jpg",
+      "mime_type": "image/jpeg",
+      "width": 1200,
+      "height": 630,
+      "bytes": 133555,
+      "sync_status": "skipped",
+      "cdn_status": "verified",
+      "verified_at": "2026-06-07T22:06:40.000000Z",
+      "last_error": null
+    },
+    {
+      "variant_key": "preload",
+      "url": "https://api.fermatmind.com/storage/media-library/variants/articleriasecexplanationcoverv1/preload_64x36.jpg",
+      "mime_type": "image/jpeg",
+      "width": 64,
+      "height": 36,
+      "bytes": 1246,
+      "sync_status": "skipped",
+      "cdn_status": "verified",
+      "verified_at": "2026-06-07T22:06:41.000000Z",
+      "last_error": null
+    }
+  ],
+  "public_postcheck": {
+    "media_asset_api": {
+      "url": "https://api.fermatmind.com/api/v0.5/media-assets/article.riasec.explanation.cover.v1?org_id=0",
+      "http_status": 200,
+      "ok": true
+    },
+    "required_variant_urls_http_200_image": true,
+    "tmp_source_removed": true
+  },
+  "runtime_notes": [
+    "Production release already contained MediaLibraryController internal upload route, MediaVariantGenerator, and MediaAssetStorageSyncService.",
+    "Production FAP_MEDIA_CDN_VERIFY_ENABLED is disabled, while ArticleResource requires cdn_status=verified.",
+    "The import generated local public-storage files and verified api.fermatmind.com/storage URLs because assets.fermatmind.com/storage does not currently mirror these files.",
+    "The production media-library storage directory required an ownership/permission correction so the operator SSH user could create upload subdirectories."
+  ],
+  "article_targets": [
+    {
+      "locale": "zh",
+      "article_id": 40,
+      "working_revision_id": 45,
+      "slug": "riasec-holland-career-interest-test-explained",
+      "article_mutated": false
+    },
+    {
+      "locale": "en",
+      "article_id": 41,
+      "working_revision_id": 46,
+      "slug": "what-is-riasec-holland-code-career-interest-test",
+      "article_mutated": false
+    }
+  ],
+  "remaining_blockers": [
+    {
+      "id": "draft_revisions_not_approved",
+      "status": "blocked",
+      "owner": "operator_editor",
+      "required_input": "Approve zh revision 45 and en revision 46, or request a GPT revision loop."
+    },
+    {
+      "id": "article_cover_not_attached_to_drafts",
+      "status": "blocked",
+      "owner": "cms_operator",
+      "required_input": "Separately authorize attaching CMS media asset 6 to the zh/en Article draft cover fields."
+    },
+    {
+      "id": "publish_preflight_not_run",
+      "status": "blocked",
+      "owner": "codex_after_separate_authorization",
+      "required_input": "Run publish preflight only after media attachment and revision approval pass."
+    }
+  ],
+  "next_step": {
+    "id": "RIASEC_V2_ARTICLE_COVER_ATTACH_OR_DRAFT_APPROVAL_INPUT_REQUIRED",
+    "recommended_action": "Use CMS media asset 6 as the reviewed cover candidate, then separately authorize article draft cover attachment or draft approval preflight.",
+    "not_authorized_yet": [
+      "article draft mutation",
+      "revision approval",
+      "publish preflight",
+      "publish",
+      "search submission",
+      "deploy"
+    ]
+  },
+  "hard_boundaries": {
+    "no_article_body_title_h1_meta_faq_cta_rewrite": true,
+    "no_article_revision_mutation": true,
+    "no_publish": true,
+    "no_search_submission": true,
+    "no_deploy": true,
+    "public_canonical_routes_only": true,
+    "no_private_or_tokenized_url_access": true
+  }
+}
