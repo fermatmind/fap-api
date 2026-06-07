@@ -48982,7 +48982,7 @@
     "repo": "fap-api",
     "branch": "codex/help-cms-service-fields-prod-runtime-01",
     "base": "origin/main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "window_9_help_service_content",
     "title": "docs(help): verify Help service fields production runtime",
     "depends_on": [
@@ -49075,15 +49075,15 @@
           "verify-mbti-v2",
           "Semgrep OSS"
         ],
-        "merge_state": "CLEAN"
+        "merge_state": "MERGED"
       }
     },
     "failure_reason": null,
-    "commit_sha": "1868c6e1",
+    "commit_sha": "0dd12d8751b328cf502a28e586597d1ed4a4246f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1962",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-07T22:06:03Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "result": {
       "decision": "PRODUCTION_RUNTIME_SHA_UNKNOWN_DEPLOY_PROMPT_REQUIRED",
       "generated_artifact": "backend/docs/help/generated/help-cms-service-fields-prod-runtime-01.v1.json",
@@ -49147,6 +49147,11 @@
         "at": "2026-06-08",
         "status": "ready_to_merge",
         "note": "GitHub checks passed and merge state was clean. Scope remained docs-only runtime verification and PR-train metadata; production active SHA remains Unknown."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "merged_closeout_reconciled",
+        "note": "PR #1962 merged on GitHub at 2026-06-07T22:06:03Z with merge commit 0dd12d8751b328cf502a28e586597d1ed4a4246f; origin/main contains the merge commit; remote branch was already deleted and local task branch cleanup was completed."
       }
     ]
   }
