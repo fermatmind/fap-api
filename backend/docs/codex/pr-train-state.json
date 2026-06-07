@@ -6219,10 +6219,10 @@
     "SCIENCE-CONTENTPAGE-REAL-IMPORT-DRY-RUN-LOCK-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "pr_opened",
       "branch": "codex/science-contentpage-real-import-dry-run-lock-01",
       "commit_sha": "",
-      "pr_url": "",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1960",
       "title": "SCIENCE-CONTENTPAGE-REAL-IMPORT-DRY-RUN-LOCK-01: lock pre-import contract",
       "checks": {
         "local": [],
@@ -6243,6 +6243,11 @@
           "at": "2026-06-08T06:05:00+08:00",
           "status": "local_checks_passed",
           "summary": "Locked the Science pre-real-import contract as dry-run-only, exposed the lock in CLI/service payloads, mapped publish safety defaults in dry-run normalized rows, and verified the real draft package remains non-writing with real import/publish blocked."
+        },
+        {
+          "at": "2026-06-08T06:12:00+08:00",
+          "status": "pr_opened",
+          "summary": "Opened GitHub PR #1960 after required local checks passed. Waiting for GitHub checks before merge."
         }
       ]
     }
