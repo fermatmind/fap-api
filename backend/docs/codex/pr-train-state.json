@@ -6062,9 +6062,9 @@
     "SCIENCE-CONTENTPAGE-PUBLISH-FIELDS-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "ready_to_merge",
       "branch": "codex/science-contentpage-publish-fields-01",
-      "commit_sha": "c9ce5ca0",
+      "commit_sha": "ca055e0b",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1959",
       "title": "SCIENCE-CONTENTPAGE-PUBLISH-FIELDS-01: add publish safety fields",
       "checks": {
@@ -6113,13 +6113,44 @@
         ],
         "github": [
           {
+            "name": "Semgrep OSS",
+            "status": "passed"
+          },
+          {
+            "name": "Semgrep blocking secrets",
+            "status": "passed"
+          },
+          {
+            "name": "content-pack-build-validate",
+            "status": "passed"
+          },
+          {
+            "name": "hygiene",
+            "status": "passed"
+          },
+          {
+            "name": "semgrep sarif non-blocking upload",
+            "status": "passed"
+          },
+          {
+            "name": "supply-chain",
+            "status": "passed"
+          },
+          {
             "name": "verify-bigfive",
-            "status": "failed",
-            "details": "GitHub PR #1959 failed because the Big Five runtime freeze classifier treated ContentPage publish-safety CMS/EditPage/migration files as BigFive-impacting runtime files."
+            "status": "passed"
+          },
+          {
+            "name": "verify-mbti-legacy",
+            "status": "passed"
+          },
+          {
+            "name": "verify-mbti-v2",
+            "status": "passed"
           }
         ]
       },
-      "failure_reason": "verify-bigfive runtime freeze classifier allowlist did not cover scoped Science ContentPage publish safety fields; fixed within current PR scope by adding a narrow classifier exception and local regression test.",
+      "failure_reason": "",
       "resume_policy": "manual_only",
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -6144,6 +6175,11 @@
           "at": "2026-06-08T05:28:00+08:00",
           "status": "github_checks_failed_fix_applied",
           "summary": "Inspected verify-bigfive failure. BigFive content/runtime assertions passed; only the runtime freeze classifier flagged ContentPageResource/EditContentPage and the new content_pages migration. Added a narrow Science ContentPage publish-safety classifier exception and verified locally."
+        },
+        {
+          "at": "2026-06-08T05:35:00+08:00",
+          "status": "ready_to_merge",
+          "summary": "PR #1959 GitHub checks passed after the scoped BigFive freeze-classifier allowlist fix. Ready for squash merge after final metadata-only check cycle."
         }
       ]
     },
