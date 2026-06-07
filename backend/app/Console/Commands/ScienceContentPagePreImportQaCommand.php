@@ -43,6 +43,10 @@ final class ScienceContentPagePreImportQaCommand extends Command
             $this->line('real_import_allowed='.(($summary['real_import_allowed'] ?? true) ? 'true' : 'false'));
             $this->line('publish_allowed='.(($summary['publish_allowed'] ?? true) ? 'true' : 'false'));
             $this->line('natural_distribution_allowed='.(($summary['natural_distribution_allowed'] ?? true) ? 'true' : 'false'));
+            $this->line('real_import_contract_locked='.(data_get($summary, 'real_import_contract.locked') === true ? 'true' : 'false'));
+            $this->line('real_import_dry_run_only='.(data_get($summary, 'real_import_contract.dry_run_only') === true ? 'true' : 'false'));
+            $this->line('real_import_command_authorized='.(data_get($summary, 'real_import_contract.real_import_command_authorized') === true ? 'true' : 'false'));
+            $this->line('real_import_requires_separate_import_command_pr='.(data_get($summary, 'real_import_contract.requires_separate_import_command_pr') === true ? 'true' : 'false'));
             $this->line('package_pre_import_qa_issue_count='.$summary['package_pre_import_qa_issue_count']);
             $this->line('dry_run_pages_blocked='.data_get($summary, 'dry_run.pages_blocked', 'Unknown'));
             $this->line('operator_publish_decision_ready='.(data_get($summary, 'operator_review.operator_publish_decision_ready') === true ? 'true' : 'false'));

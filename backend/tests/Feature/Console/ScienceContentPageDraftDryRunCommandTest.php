@@ -65,6 +65,13 @@ final class ScienceContentPageDraftDryRunCommandTest extends TestCase
         $this->assertSame('draft', $scienceHub['normalized_content_page']['status']);
         $this->assertFalse($scienceHub['normalized_content_page']['is_public']);
         $this->assertFalse($scienceHub['normalized_content_page']['is_indexable']);
+        $this->assertFalse($scienceHub['normalized_content_page']['publish_allowed']);
+        $this->assertTrue($scienceHub['normalized_content_page']['operator_approval_required']);
+        $this->assertNull($scienceHub['normalized_content_page']['operator_approved_at']);
+        $this->assertSame('not_reviewed', $scienceHub['normalized_content_page']['claim_gate_status']);
+        $this->assertSame([], $scienceHub['normalized_content_page']['forbidden_claims']);
+        $this->assertFalse($scienceHub['normalized_content_page']['faq_schema_eligible']);
+        $this->assertNull($scienceHub['normalized_content_page']['schema_eligibility_reviewed_at']);
         $this->assertContains('visible_faq_items', $scienceHub['normalized_content_page']['metadata_only_not_content_page_fields']);
         $this->assertContains('sitemap_eligible', $scienceHub['normalized_content_page']['metadata_only_not_content_page_fields']);
 

@@ -33,12 +33,48 @@ final class ScienceContentPagePreImportQaCommandTest extends TestCase
             ->expectsOutputToContain('real_import_allowed=false')
             ->expectsOutputToContain('publish_allowed=false')
             ->expectsOutputToContain('natural_distribution_allowed=false')
+            ->expectsOutputToContain('real_import_contract_locked=true')
+            ->expectsOutputToContain('real_import_dry_run_only=true')
+            ->expectsOutputToContain('real_import_command_authorized=false')
+            ->expectsOutputToContain('real_import_requires_separate_import_command_pr=true')
             ->expectsOutputToContain('package_pre_import_qa_issue_count=0')
             ->expectsOutputToContain('dry_run_pages_blocked=0')
             ->expectsOutputToContain('operator_publish_decision_ready=false')
             ->expectsOutputToContain('blocking_reason=operator_publish_decision_not_ready')
+            ->expectsOutputToContain('blocking_reason=real_import_requires_separate_operator_approval_and_import_command')
             ->assertExitCode(0);
 
+        $this->assertSame(0, ContentPage::query()->count());
+    }
+
+    #[Test]
+    public function service_payload_locks_real_import_contract_even_when_non_public_draft_qa_passes(): void
+    {
+        $package = $this->writeSciencePackage();
+
+        $payload = app(ScienceContentPagePreImportQaService::class)->check($package);
+
+        $this->assertSame('NO-GO', $payload['decision']);
+        $this->assertTrue($payload['non_public_draft_import_qa_passed']);
+        $this->assertFalse($payload['real_import_allowed']);
+        $this->assertFalse($payload['publish_allowed']);
+        $this->assertTrue($payload['real_import_contract']['locked']);
+        $this->assertTrue($payload['real_import_contract']['dry_run_only']);
+        $this->assertFalse($payload['real_import_contract']['real_import_command_authorized']);
+        $this->assertFalse($payload['real_import_contract']['database_writes_allowed']);
+        $this->assertFalse($payload['real_import_contract']['cms_mutation_allowed']);
+        $this->assertFalse($payload['real_import_contract']['publish_authorized']);
+        $this->assertTrue($payload['real_import_contract']['requires_separate_operator_approval']);
+        $this->assertTrue($payload['real_import_contract']['requires_separate_import_command_pr']);
+        $this->assertContains('publish_safety_fields_present', $payload['real_import_contract']['required_gates']);
+        $this->assertTrue($payload['real_import_contract']['gate_status']['publish_safety_fields_present']);
+        $this->assertFalse($payload['real_import_contract']['gate_status']['operator_publish_decision_ready']);
+        $this->assertTrue($payload['real_import_contract']['gate_status']['claim_boundary_scan_passed']);
+        $this->assertTrue($payload['real_import_contract']['gate_status']['visible_faq_schema_gate_passed']);
+        $this->assertTrue($payload['real_import_contract']['gate_status']['public_canonical_routes_only']);
+        $this->assertTrue($payload['real_import_contract']['gate_status']['private_url_absent']);
+        $this->assertTrue($payload['real_import_contract']['gate_status']['sitemap_llms_footer_disabled']);
+        $this->assertContains('real_import_requires_separate_operator_approval_and_import_command', $payload['blocking_reasons']);
         $this->assertSame(0, ContentPage::query()->count());
     }
 

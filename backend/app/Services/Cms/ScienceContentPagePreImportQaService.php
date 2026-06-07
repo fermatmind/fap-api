@@ -75,6 +75,21 @@ final class ScienceContentPagePreImportQaService
         $nonPublicDraftImportQaPassed = $contentQaPassed && $operatorDraftReady;
         $realImportAllowed = false;
         $publishAllowed = false;
+        $guards = [
+            'forbidden_claims_absent' => ! $this->hasIssueCode($issues, 'forbidden_claim_pattern_present'),
+            'private_url_absent' => ! $this->hasIssueCode($issues, 'private_url_pattern_present'),
+            'faq_visible_only' => ! $this->hasIssueCode($issues, 'hidden_faq_or_schema_pattern_present'),
+            'cta_public_canonical_only' => ! $this->hasIssueCode($issues, 'unsafe_cta_or_internal_link_route'),
+            'draft_exposure_disabled' => ! $this->hasIssueCodePrefix($issues, 'unsafe_'),
+            'sitemap_llms_footer_disabled' => ! $this->hasAnyIssueCode($issues, [
+                'unsafe_default_sitemap_eligible',
+                'unsafe_default_llms_eligible',
+                'unsafe_default_footer_eligible',
+                'unsafe_sitemap_eligible',
+                'unsafe_llms_eligible',
+                'unsafe_footer_eligible',
+            ]),
+        ];
 
         $blockingReasons = [];
         if (! $contentQaPassed) {
@@ -86,6 +101,36 @@ final class ScienceContentPagePreImportQaService
         if (! $operatorPublishReady) {
             $blockingReasons[] = 'operator_publish_decision_not_ready';
         }
+        $blockingReasons[] = 'real_import_requires_separate_operator_approval_and_import_command';
+
+        $realImportContract = [
+            'locked' => true,
+            'dry_run_only' => true,
+            'real_import_command_authorized' => false,
+            'database_writes_allowed' => false,
+            'cms_mutation_allowed' => false,
+            'publish_authorized' => false,
+            'requires_separate_operator_approval' => true,
+            'requires_separate_import_command_pr' => true,
+            'required_gates' => [
+                'publish_safety_fields_present',
+                'operator_publish_decision_ready',
+                'claim_boundary_scan_passed',
+                'visible_faq_schema_gate_passed',
+                'public_canonical_routes_only',
+                'private_url_absent',
+                'sitemap_llms_footer_disabled',
+            ],
+            'gate_status' => [
+                'publish_safety_fields_present' => ($operator['missing_first_class_publish_safety_fields'] ?? []) === [],
+                'operator_publish_decision_ready' => $operatorPublishReady,
+                'claim_boundary_scan_passed' => $guards['forbidden_claims_absent'],
+                'visible_faq_schema_gate_passed' => $guards['faq_visible_only'],
+                'public_canonical_routes_only' => $guards['cta_public_canonical_only'],
+                'private_url_absent' => $guards['private_url_absent'],
+                'sitemap_llms_footer_disabled' => $guards['sitemap_llms_footer_disabled'],
+            ],
+        ];
 
         return [
             'task' => 'SCIENCE-CONTENTPAGE-PRE-IMPORT-QA-01',
@@ -100,6 +145,7 @@ final class ScienceContentPagePreImportQaService
             'real_import_allowed' => $realImportAllowed,
             'publish_allowed' => $publishAllowed,
             'natural_distribution_allowed' => false,
+            'real_import_contract' => $realImportContract,
             'package_pre_import_qa_issue_count' => count($issues),
             'blocking_reasons' => $blockingReasons,
             'dry_run' => [
@@ -115,21 +161,7 @@ final class ScienceContentPagePreImportQaService
                 'operator_publish_decision_ready' => $operatorPublishReady,
                 'missing_first_class_publish_safety_fields' => $operator['missing_first_class_publish_safety_fields'] ?? [],
             ],
-            'guards' => [
-                'forbidden_claims_absent' => ! $this->hasIssueCode($issues, 'forbidden_claim_pattern_present'),
-                'private_url_absent' => ! $this->hasIssueCode($issues, 'private_url_pattern_present'),
-                'faq_visible_only' => ! $this->hasIssueCode($issues, 'hidden_faq_or_schema_pattern_present'),
-                'cta_public_canonical_only' => ! $this->hasIssueCode($issues, 'unsafe_cta_or_internal_link_route'),
-                'draft_exposure_disabled' => ! $this->hasIssueCodePrefix($issues, 'unsafe_'),
-                'sitemap_llms_footer_disabled' => ! $this->hasAnyIssueCode($issues, [
-                    'unsafe_default_sitemap_eligible',
-                    'unsafe_default_llms_eligible',
-                    'unsafe_default_footer_eligible',
-                    'unsafe_sitemap_eligible',
-                    'unsafe_llms_eligible',
-                    'unsafe_footer_eligible',
-                ]),
-            ],
+            'guards' => $guards,
             'pages' => $pages,
             'issues' => $issues,
             'hard_no_go' => [
