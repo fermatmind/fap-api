@@ -1,0 +1,166 @@
+{
+  "schema": "riasec-explanation-media-selection-readiness.v1",
+  "task_id": "RIASEC-EXPLANATION-MEDIA-SELECTION-READINESS-01",
+  "generated_at": "2026-06-08T05:15:00+08:00",
+  "decision": "NO_GO_NO_REUSABLE_CMS_MEDIA_CANDIDATE",
+  "media_selection_ready": false,
+  "cms_media_id_ready": false,
+  "publish_preflight_allowed": false,
+  "cms_mutation_allowed": false,
+  "media_upload_allowed": false,
+  "publish_allowed": false,
+  "search_submission_allowed": false,
+  "deploy_allowed": false,
+  "content_rewrite_allowed": false,
+  "cms_mutation_performed": false,
+  "media_upload_performed": false,
+  "publish_performed": false,
+  "search_submission_performed": false,
+  "deploy_performed": false,
+  "content_rewrite_performed": false,
+  "private_url_accessed": false,
+  "inputs_reviewed": [
+    "backend/docs/seo/generated/riasec-explanation-operator-input-media-blocker.v1.json",
+    "backend/docs/seo/generated/riasec-explanation-cms-draft-approval-preflight.v1.json",
+    "content_baselines/media_assets/default_media_assets.json",
+    "backend/app/Filament/Ops/Resources/ArticleResource.php",
+    "backend/app/Models/MediaAsset.php",
+    "backend/app/Models/MediaVariant.php",
+    "backend/app/Services/Cms/MediaVariantGenerator.php"
+  ],
+  "article_targets": [
+    {
+      "locale": "zh",
+      "article_id": 40,
+      "working_revision_id": 45,
+      "slug": "riasec-holland-career-interest-test-explained",
+      "media_status": "blocked"
+    },
+    {
+      "locale": "en",
+      "article_id": 41,
+      "working_revision_id": 46,
+      "slug": "what-is-riasec-holland-code-career-interest-test",
+      "media_status": "blocked"
+    }
+  ],
+  "article_cover_runtime_requirements": {
+    "source": "ArticleResource mediaAssetOptions and articleCoverReadinessFailures",
+    "requirements": [
+      "MediaAsset exists in org_id 0 context",
+      "MediaAsset status is published",
+      "MediaAsset is_public is true",
+      "MediaAsset cdn_status is verified",
+      "MediaAsset source URL is accepted by PublicMediaUrlGuard",
+      "MediaAsset alt is non-empty and reviewed",
+      "All required generated variants exist: hero, card, thumbnail, og, preload",
+      "Each required variant cdn_status is verified",
+      "Each required variant URL is accepted by PublicMediaUrlGuard",
+      "Each required variant has positive width and height",
+      "Each required variant MIME type starts with image/",
+      "The image is topically appropriate for a RIASEC / Holland career-interest article",
+      "The image does not imply diagnosis, guaranteed career fit, official certification, or official endorsement"
+    ],
+    "required_variant_keys": [
+      "hero",
+      "card",
+      "thumbnail",
+      "og",
+      "preload"
+    ]
+  },
+  "repo_media_inventory_scan": {
+    "default_media_assets_count": 6,
+    "reusable_candidate_count": 0,
+    "candidate_decision": "no_existing_repo_baseline_asset_is_acceptable_for_riasec_article_cover",
+    "rejected_existing_assets": [
+      {
+        "asset_key": "share.mbti.default",
+        "reason": "MBTI-specific social cover; not topically appropriate for a RIASEC / Holland career-interest article."
+      },
+      {
+        "asset_key": "social.wechat.official_qr",
+        "reason": "QR code social asset; not an article cover and not a RIASEC career-interest visual."
+      },
+      {
+        "asset_key": "social.wechat.qr",
+        "reason": "QR code social asset; not an article cover and not a RIASEC career-interest visual."
+      },
+      {
+        "asset_key": "iq-beta30-original-card",
+        "reason": "IQ-specific landing card; not topically appropriate for a RIASEC / Holland career-interest article."
+      },
+      {
+        "asset_key": "iq-beta30-original-og",
+        "reason": "IQ-specific social preview; not topically appropriate for a RIASEC / Holland career-interest article."
+      },
+      {
+        "asset_key": "iq-full-report-cover",
+        "reason": "IQ-specific report cover; not topically appropriate for a RIASEC / Holland career-interest article."
+      }
+    ]
+  },
+  "recommended_media_request": {
+    "asset_key_suggestion": "article.riasec.explanation.cover.v1",
+    "surface": "article_cover",
+    "locale_strategy": "one bilingual-safe visual can serve zh and en if alt text is localized in CMS fields; otherwise supply locale variants after human visual review",
+    "visual_direction": [
+      "career-interest exploration",
+      "six-area structure or neutral work-environment exploration",
+      "no official O*NET, DOL, APA, Holland, or MBTI branding",
+      "no diagnostic or medical imagery",
+      "no guarantee, ranking, or job-outcome implication"
+    ],
+    "required_operator_inputs": [
+      "cms_media_id",
+      "cover_image_url",
+      "cover_image_alt_reviewed",
+      "og_image_ready",
+      "twitter_image_ready",
+      "media_reviewed_by",
+      "media_reviewed_at"
+    ],
+    "alt_review_boundary": "Alt text must describe the image plainly and must not promise career fit, diagnosis, certification, or official endorsement."
+  },
+  "remaining_blockers": [
+    {
+      "id": "cms_media_id_unknown",
+      "status": "blocked",
+      "owner": "cms_operator_or_design_owner",
+      "required_input": "Select or upload a CMS Media Library asset that satisfies ArticleResource cover readiness, then provide its CMS media ID."
+    },
+    {
+      "id": "cover_url_unknown",
+      "status": "blocked",
+      "owner": "cms_operator_or_design_owner",
+      "required_input": "Provide public cover URL resolved from the CMS MediaAsset payload."
+    },
+    {
+      "id": "alt_and_social_images_unknown",
+      "status": "blocked",
+      "owner": "cms_operator_or_design_owner",
+      "required_input": "Confirm reviewed alt text plus OG and Twitter image readiness."
+    },
+    {
+      "id": "revision_approval_held_until_media",
+      "status": "blocked",
+      "owner": "operator_editor",
+      "required_input": "Do not approve zh revision 45 or en revision 46 until media readiness is supplied."
+    }
+  ],
+  "next_step": {
+    "id": "RIASEC_V2_CMS_MEDIA_INPUT_REQUIRED",
+    "recommended_action": "Operator supplies a reviewed CMS Media Library asset ID and readiness fields, or separately authorizes a CMS media upload/import step.",
+    "not_recommended_yet": "SEO-ARTICLE-RIASEC-V2-PUBLISH-PREFLIGHT-01"
+  },
+  "hard_boundaries": {
+    "no_article_body_title_h1_meta_faq_cta_rewrite": true,
+    "no_cms_mutation": true,
+    "no_media_upload": true,
+    "no_publish": true,
+    "no_search_submission": true,
+    "no_deploy": true,
+    "public_canonical_routes_only": true,
+    "no_private_or_tokenized_url_access": true
+  }
+}
