@@ -48982,7 +48982,7 @@
     "repo": "fap-api",
     "branch": "codex/help-cms-service-fields-prod-runtime-01",
     "base": "origin/main",
-    "status": "local_checks_passed",
+    "status": "pr_opened",
     "train_scope": "window_9_help_service_content",
     "title": "docs(help): verify Help service fields production runtime",
     "depends_on": [
@@ -49023,14 +49023,14 @@
           {
             "command": "git rev-parse origin/main",
             "status": "pass",
-          "output": "b70cd7291810b7f13416c5e51cbcbd8daabaf0cd"
+            "output": "b70cd7291810b7f13416c5e51cbcbd8daabaf0cd"
           },
           {
             "command": "git merge-base --is-ancestor 9cae1f45ee55acf11df43376e80387957c2049a3 origin/main",
             "status": "pass"
           },
           {
-          "command": "git merge-base --is-ancestor b70cd7291810b7f13416c5e51cbcbd8daabaf0cd origin/main",
+            "command": "git merge-base --is-ancestor b70cd7291810b7f13416c5e51cbcbd8daabaf0cd origin/main",
             "status": "pass"
           },
           {
@@ -49068,8 +49068,8 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "e34465c8b20f395a8d354d12eaa47cdbfcbf4e38",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1962",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -49126,6 +49126,11 @@
         "at": "2026-06-08",
         "status": "local_checks_passed",
         "note": "JSON/YAML validation and public read-only runtime status checks passed. Production active SHA remains Unknown because public endpoints do not expose release SHA."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "pr_opened",
+        "note": "Opened PR #1962 for HELP-CMS-SERVICE-FIELDS-PROD-RUNTIME-01."
       }
     ]
   }
