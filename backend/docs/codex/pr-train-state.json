@@ -6219,14 +6219,79 @@
     "SCIENCE-CONTENTPAGE-REAL-IMPORT-DRY-RUN-LOCK-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_opened",
+      "status": "ready_to_merge",
       "branch": "codex/science-contentpage-real-import-dry-run-lock-01",
-      "commit_sha": "",
+      "commit_sha": "e1b0cc1a",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1960",
       "title": "SCIENCE-CONTENTPAGE-REAL-IMPORT-DRY-RUN-LOCK-01: lock pre-import contract",
       "checks": {
-        "local": [],
-        "github": []
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null && ruby -e 'require \"yaml\"; YAML.load_file(\"docs/codex/pr-train.yaml\")'",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Console/Commands/ScienceContentPagePreImportQaCommand.php app/Services/Cms/ScienceContentPagePreImportQaService.php tests/Feature/Console/ScienceContentPagePreImportQaCommandTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Console/Commands/ScienceContentPagePreImportQaCommand.php app/Services/Cms/ScienceContentPagePreImportQaService.php app/Services/Cms/ScienceContentPageDraftDryRunService.php tests/Feature/Console/ScienceContentPagePreImportQaCommandTest.php tests/Feature/Console/ScienceContentPageDraftDryRunCommandTest.php",
+            "status": "passed",
+            "details": "Expanded scope-format check for the dry-run mapping files touched by the contract lock."
+          },
+          {
+            "command": "php artisan test tests/Feature/Console/ScienceContentPageDraftDryRunCommandTest.php tests/Feature/Console/ScienceContentPageOperatorReviewReadinessCommandTest.php tests/Feature/Console/ScienceContentPagePreImportQaCommandTest.php --no-ansi",
+            "status": "passed",
+            "details": "8 tests, 158 assertions."
+          },
+          {
+            "command": "php artisan content-pages:science-pre-import-qa --package='/Users/rainie/Desktop/science_contentpage_cms_draft_package 2'",
+            "status": "passed",
+            "details": "decision=NO-GO, non_public_draft_import_qa_passed=true, real_import_contract_locked=true, real_import_command_authorized=false, content_import_performed=false, publish_performed=false."
+          },
+          {
+            "command": "git diff --check && git diff --cached --check",
+            "status": "passed"
+          }
+        ],
+        "github": [
+          {
+            "name": "Semgrep OSS",
+            "status": "passed"
+          },
+          {
+            "name": "Semgrep blocking secrets",
+            "status": "passed"
+          },
+          {
+            "name": "content-pack-build-validate",
+            "status": "passed"
+          },
+          {
+            "name": "hygiene",
+            "status": "passed"
+          },
+          {
+            "name": "semgrep sarif non-blocking upload",
+            "status": "passed"
+          },
+          {
+            "name": "supply-chain",
+            "status": "passed"
+          },
+          {
+            "name": "verify-bigfive",
+            "status": "passed"
+          },
+          {
+            "name": "verify-mbti-legacy",
+            "status": "passed"
+          },
+          {
+            "name": "verify-mbti-v2",
+            "status": "passed"
+          }
+        ]
       },
       "failure_reason": "",
       "resume_policy": "manual_only",
@@ -6248,6 +6313,11 @@
           "at": "2026-06-08T06:12:00+08:00",
           "status": "pr_opened",
           "summary": "Opened GitHub PR #1960 after required local checks passed. Waiting for GitHub checks before merge."
+        },
+        {
+          "at": "2026-06-08T06:20:00+08:00",
+          "status": "ready_to_merge",
+          "summary": "PR #1960 GitHub checks passed. Scope remains backend dry-run/pre-import contract lock only; no CMS mutation, real import, publish, sitemap, llms, footer, or distribution."
         }
       ]
     }
