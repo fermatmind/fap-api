@@ -45820,7 +45820,7 @@
     "repo": "fap-api",
     "branch": "codex/help-contentpage-importer-service-fields-01",
     "base": "origin/main",
-    "status": "local_checks_passed",
+    "status": "ready_to_merge",
     "train_scope": "window_9_help_service_content",
     "title": "feat(cms): map Help service fields in ContentPage importer",
     "depends_on": [
@@ -45882,11 +45882,26 @@
             "status": "pass"
           }
         ]
+      },
+      "github": {
+        "status": "pass",
+        "checks": [
+          "hygiene",
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "supply-chain",
+          "content-pack-build-validate",
+          "verify-bigfive",
+          "verify-mbti-legacy",
+          "verify-mbti-v2",
+          "Semgrep OSS"
+        ],
+        "merge_state": "CLEAN"
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "9fd75cfb04637e242fa33e3a8c4cac2c38a128dc",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1956",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -45942,6 +45957,16 @@
         "at": "2026-06-08",
         "status": "local_checks_passed",
         "note": "PHP lint, JSON/YAML parse, focused ContentPage importer contract, runtime-freeze scope guard, and scoped diff whitespace checks passed."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "pr_opened",
+        "note": "Opened PR #1956 for HELP-CONTENTPAGE-IMPORTER-SERVICE-FIELDS-01."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed and merge state was CLEAN. Scope remained importer mapping, focused contracts, generated artifact, operations report, and PR-train metadata only."
       }
     ]
   },
