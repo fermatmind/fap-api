@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\MediaLibrary;
 
 use App\Filament\Ops\Resources\ArticleResource;
+use App\Filament\Ops\Resources\MediaAssetResource\Pages\CreateMediaAsset;
 use App\Models\AdminUser;
 use App\Models\MediaAsset;
 use App\Models\MediaVariant;
@@ -12,16 +13,26 @@ use App\Models\Permission;
 use App\Models\Role;
 use App\Services\Cms\MediaVariantGenerator;
 use App\Support\Rbac\PermissionNames;
+use Filament\Facades\Filament;
+use Filament\PanelRegistry;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Livewire\Livewire;
 use ReflectionMethod;
 use Tests\TestCase;
 
 final class MediaLibraryPublicApiTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        Filament::setCurrentPanel(app(PanelRegistry::class)->get('ops'));
+    }
 
     public function test_baseline_import_creates_media_assets_and_variants(): void
     {
@@ -157,6 +168,56 @@ final class MediaLibraryPublicApiTest extends TestCase
             $this->assertStringStartsWith('https://assets.fermatmind.com/storage/media-library/variants/articleshero/', (string) $variant->url);
             Storage::disk('public')->assertExists((string) $variant->path);
         }
+    }
+
+    public function test_filament_upload_generates_public_media_path_instead_of_temporary_path(): void
+    {
+        Storage::fake('public');
+
+        $this->actingAsContentWriter();
+
+        Livewire::test(CreateMediaAsset::class)
+            ->fillForm([
+                'org_id' => 0,
+                'uploaded_source' => UploadedFile::fake()->image('receipt.png', 1239, 1280),
+                'asset_key' => 'daily-giving-unicef-receipt-2026-06-05',
+                'disk' => 'public_static',
+                'path' => null,
+                'url' => null,
+                'alt' => 'UNICEF donation receipt proof image',
+                'caption' => null,
+                'credit' => null,
+                'status' => MediaAsset::STATUS_DRAFT,
+                'is_public' => true,
+                'payload_json' => [],
+                'variants' => [],
+            ])
+            ->call('create')
+            ->assertHasNoFormErrors();
+
+        $asset = MediaAsset::query()
+            ->withoutGlobalScopes()
+            ->where('asset_key', 'daily-giving-unicef-receipt-2026-06-05')
+            ->firstOrFail();
+
+        $this->assertSame('public', (string) $asset->disk);
+        $this->assertStringStartsWith(
+            'media-library/sources/daily-giving-unicef-receipt-2026-06-05/source-',
+            (string) $asset->path
+        );
+        $this->assertFalse(str_starts_with((string) $asset->path, '/tmp/'));
+        $this->assertStringStartsWith(
+            'https://assets.fermatmind.com/storage/media-library/sources/daily-giving-unicef-receipt-2026-06-05/source-',
+            (string) $asset->url
+        );
+        $this->assertSame(1239, (int) $asset->width);
+        $this->assertSame(1280, (int) $asset->height);
+        $this->assertSame('image/png', (string) $asset->mime_type);
+        $this->assertSame(MediaAsset::SYNC_SKIPPED, (string) $asset->sync_status);
+        $this->assertSame(MediaAsset::CDN_SKIPPED, (string) $asset->cdn_status);
+        $this->assertSame(6, $asset->variants()->count());
+
+        Storage::disk('public')->assertExists((string) $asset->path);
     }
 
     public function test_article_cover_binding_requires_verified_public_standard_variants(): void
