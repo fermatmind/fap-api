@@ -3785,7 +3785,7 @@
             "result": "25 modifiers, 12 synergies, 30 facets, 23 precision rules, 40 action rules, 8 coverage profiles"
           },
           {
-            "command": "rg -n \"Profile Summary|Domain Deep Dive|Norms Comparison|Methodology and Access|A compact overview|Focused read|Near-term actions|assertiveness|\u4f60\u5929\u751f\u6ce8\u5b9a|\u4f60\u6c38\u8fdc\u90fd\u4f1a|\u4f60\u53ea\u80fd\u8fd9\u6837\u6d3b|\u4f60\u592a\u73bb\u7483\u5fc3|\u4f60\u6709\u95ee\u9898|\u4f60\u4e0d\u6b63\u5e38\" backend/content_assets/big5/v1/expanded || true",
+            "command": "rg -n \"Profile Summary|Domain Deep Dive|Norms Comparison|Methodology and Access|A compact overview|Focused read|Near-term actions|assertiveness|你天生注定|你永远都会|你只能这样活|你太玻璃心|你有问题|你不正常\" backend/content_assets/big5/v1/expanded || true",
             "status": "passed",
             "result": "no matches in expanded assets"
           },
@@ -4377,7 +4377,7 @@
             "status": "passed"
           },
           {
-            "command": "php artisan career:align-selected-authority-crosswalks --file=/Users/rainie/Desktop/\u7b2c\u516b\u7248_d5a_8_repaired.xlsx --slugs=actuaries,financial-analysts,high-school-teachers,market-research-analysts,architectural-and-engineering-managers,civil-engineers,biomedical-engineers,dentists --dry-run --json",
+            "command": "php artisan career:align-selected-authority-crosswalks --file=/Users/rainie/Desktop/第八版_d5a_8_repaired.xlsx --slugs=actuaries,financial-analysts,high-school-teachers,market-research-analysts,architectural-and-engineering-managers,civil-engineers,biomedical-engineers,dentists --dry-run --json",
             "status": "passed_local_db_unavailable_plan",
             "details": "Local authority DB is unavailable; dry-run completed read-only from the D5a repaired workbook, validated all 8 selected slugs, reported would_create_occupation_count=8 and would_create_crosswalk_count=16, and wrote no DB rows."
           },
@@ -4438,9 +4438,9 @@
             "status": "passed"
           },
           {
-            "command": "php artisan career:import-selected-display-assets --file=/Users/rainie/Desktop/\u7b2c\u4e5d\u7248.xlsx --slugs=actuaries,financial-analysts,high-school-teachers,market-research-analysts,architectural-and-engineering-managers,civil-engineers,biomedical-engineers,dentists --dry-run --json",
+            "command": "php artisan career:import-selected-display-assets --file=/Users/rainie/Desktop/第九版.xlsx --slugs=actuaries,financial-analysts,high-school-teachers,market-research-analysts,architectural-and-engineering-managers,civil-engineers,biomedical-engineers,dentists --dry-run --json",
             "status": "failed_workbook_contract_outside_scope",
-            "details": "Draft PR exception: unsupported slug error is gone; all 8 D5 slugs were requested, validated, and generated payload summaries, but \u7b2c\u4e5d\u7248.xlsx still fails workbook contract validation for CTA/source labels, CN job-posting sample terms, and biomedical Product substring. This PR is not mergeable until the workbook source passes or the manifest acceptance is updated."
+            "details": "Draft PR exception: unsupported slug error is gone; all 8 D5 slugs were requested, validated, and generated payload summaries, but 第九版.xlsx still fails workbook contract validation for CTA/source labels, CN job-posting sample terms, and biomedical Product substring. This PR is not mergeable until the workbook source passes or the manifest acceptance is updated."
           },
           {
             "command": "git diff --check && git diff --cached --check",
@@ -4476,17 +4476,17 @@
         {
           "at": "2026-05-03T18:33:57Z",
           "status": "failed_local_check",
-          "summary": "Updated D5c1 validation source to \u7b2c\u4e5d\u7248.xlsx. Scoped code checks passed and unsupported slug errors are gone, but real workbook dry-run fails due workbook contract blockers outside allowlist scope."
+          "summary": "Updated D5c1 validation source to 第九版.xlsx. Scoped code checks passed and unsupported slug errors are gone, but real workbook dry-run fails due workbook contract blockers outside allowlist scope."
         },
         {
           "at": "2026-05-03T18:36:47Z",
           "status": "draft_exception_ready",
-          "summary": "Review pass: scope limited to allowlist/tests/train metadata. Open draft PR under documented exception because \u7b2c\u4e5d\u7248 workbook dry-run fails only on data contract blockers outside this PR."
+          "summary": "Review pass: scope limited to allowlist/tests/train metadata. Open draft PR under documented exception because 第九版 workbook dry-run fails only on data contract blockers outside this PR."
         },
         {
           "at": "2026-05-03T18:38:31Z",
           "status": "draft_open_workbook_blocked",
-          "summary": "Opened draft PR #1114. GitHub checks are pending; mergeStateStatus is UNSTABLE because the PR is draft/pending and the real \u7b2c\u4e5d\u7248 workbook dry-run remains blocked by workbook contract data."
+          "summary": "Opened draft PR #1114. GitHub checks are pending; mergeStateStatus is UNSTABLE because the PR is draft/pending and the real 第九版 workbook dry-run remains blocked by workbook contract data."
         },
         {
           "at": "2026-05-03T18:40:10Z",
@@ -4674,12 +4674,12 @@
         {
           "at": "2026-05-04T05:20:00Z",
           "status": "in_progress",
-          "summary": "Initialized PR-D6 ledger entry for the read-only \u7b2c\u4e5d\u7248 full display workbook intake validator after D5e live validation passed."
+          "summary": "Initialized PR-D6 ledger entry for the read-only 第九版 full display workbook intake validator after D5e live validation passed."
         },
         {
           "at": "2026-05-04T05:45:00Z",
           "status": "scope_extended",
-          "summary": "Extended PR-D6 scope to include a read-only Strategic Architecture Gap Scan for protocol sections \u00a71 through \u00a75 without implementing architecture modules or changing release gates."
+          "summary": "Extended PR-D6 scope to include a read-only Strategic Architecture Gap Scan for protocol sections §1 through §5 without implementing architecture modules or changing release gates."
         },
         {
           "at": "2026-05-04T06:05:00Z",
@@ -5947,6 +5947,160 @@
           "at": "2026-05-23T23:58:00+08:00",
           "status": "pr_open",
           "summary": "Opened https://github.com/fermatmind/fap-api/pull/1624 from codex/pr-api-sec-09-docs-heredoc-guard after push; initial GitHub checks are pending."
+        }
+      ]
+    },
+    "SCIENCE-CONTENTPAGE-AUTHORITY-RECONCILIATION-01": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "ready_to_merge",
+      "branch": "codex/science-contentpage-authority-reconciliation-01",
+      "commit_sha": "4812c079",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1958",
+      "title": "SCIENCE-CONTENTPAGE-AUTHORITY-RECONCILIATION-01: reconcile method-boundaries authority",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "ruby -e 'require \"yaml\"; YAML.load_file(\"docs/codex/pr-train.yaml\")'",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Console/Commands/ScienceContentPageDraftDryRunCommand.php app/Console/Commands/ScienceContentPageOperatorReviewReadinessCommand.php app/Services/Cms/ScienceContentPageDraftDryRunService.php app/Services/Cms/ScienceContentPageOperatorReviewReadinessService.php app/Services/Cms/ScienceContentPagePreImportQaService.php tests/Feature/Console/ScienceContentPageDraftDryRunCommandTest.php tests/Feature/Console/ScienceContentPageOperatorReviewReadinessCommandTest.php tests/Feature/Console/ScienceContentPagePreImportQaCommandTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/Console/ScienceContentPageDraftDryRunCommandTest.php tests/Feature/Console/ScienceContentPageOperatorReviewReadinessCommandTest.php tests/Feature/Console/ScienceContentPagePreImportQaCommandTest.php --no-ansi",
+            "status": "passed",
+            "details": "7 tests, 117 assertions."
+          },
+          {
+            "command": "php artisan content-pages:science-draft-dry-run --package='/Users/rainie/Desktop/science_contentpage_cms_draft_package 2'",
+            "status": "passed",
+            "details": "pages_seen=6, pages_ready_for_non_public_draft_import=5, pages_reconciled_existing_authority=1, pages_blocked=0, would_write=false."
+          },
+          {
+            "command": "php artisan content-pages:science-pre-import-qa --package='/Users/rainie/Desktop/science_contentpage_cms_draft_package 2'",
+            "status": "passed",
+            "details": "decision=NO-GO, non_public_draft_import_qa_passed=true, real_import_allowed=false, blocking_reason=operator_publish_decision_not_ready."
+          },
+          {
+            "command": "git diff --check && git diff --cached --check",
+            "status": "passed"
+          }
+        ],
+        "github": [
+          {
+            "name": "Semgrep OSS",
+            "status": "passed"
+          },
+          {
+            "name": "Semgrep blocking secrets",
+            "status": "passed"
+          },
+          {
+            "name": "content-pack-build-validate",
+            "status": "passed"
+          },
+          {
+            "name": "hygiene",
+            "status": "passed"
+          },
+          {
+            "name": "semgrep sarif non-blocking upload",
+            "status": "passed"
+          },
+          {
+            "name": "supply-chain",
+            "status": "passed"
+          },
+          {
+            "name": "verify-bigfive",
+            "status": "passed"
+          },
+          {
+            "name": "verify-mbti-legacy",
+            "status": "passed"
+          },
+          {
+            "name": "verify-mbti-v2",
+            "status": "passed"
+          }
+        ]
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-06-08T00:00:00+08:00",
+          "status": "in_progress",
+          "summary": "Initialized after explicit user authorization to add and execute the Science ContentPage authority, publish-fields, real-import dry-run lock, and discoverability gate train sequence. Scope is backend-only method-boundaries authority reconciliation with no CMS mutation, real import, publish, sitemap, llms, footer, or production exposure."
+        },
+        {
+          "at": "2026-06-08T00:00:00+08:00",
+          "status": "local_checks_passed",
+          "summary": "Resolved method-boundaries as existing-authority revision-only in the Science dry-run contract. Focused Pint, PHPUnit, real package dry-run, pre-import QA, JSON/YAML, and diff checks passed with no writes, real import, publish, sitemap, llms, or footer changes."
+        },
+        {
+          "at": "2026-06-08T04:57:00+08:00",
+          "status": "ready_to_merge",
+          "summary": "PR #1958 is clean against latest origin/main and GitHub checks passed. Scope remains backend Science authority reconciliation only; no CMS mutation, real import, publish, sitemap, llms, footer, or production exposure."
+        }
+      ]
+    },
+    "SCIENCE-CONTENTPAGE-PUBLISH-FIELDS-01": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "planned",
+      "branch": "codex/science-contentpage-publish-fields-01",
+      "commit_sha": "",
+      "pr_url": "",
+      "title": "SCIENCE-CONTENTPAGE-PUBLISH-FIELDS-01: add publish safety fields",
+      "checks": {
+        "local": [],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-06-08T00:00:00+08:00",
+          "status": "planned",
+          "summary": "Planned after explicit user authorization. Depends on SCIENCE-CONTENTPAGE-AUTHORITY-RECONCILIATION-01."
+        }
+      ]
+    },
+    "SCIENCE-CONTENTPAGE-REAL-IMPORT-DRY-RUN-LOCK-01": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "planned",
+      "branch": "codex/science-contentpage-real-import-dry-run-lock-01",
+      "commit_sha": "",
+      "pr_url": "",
+      "title": "SCIENCE-CONTENTPAGE-REAL-IMPORT-DRY-RUN-LOCK-01: lock pre-import contract",
+      "checks": {
+        "local": [],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-06-08T00:00:00+08:00",
+          "status": "planned",
+          "summary": "Planned after explicit user authorization. Depends on SCIENCE-CONTENTPAGE-PUBLISH-FIELDS-01."
         }
       ]
     }

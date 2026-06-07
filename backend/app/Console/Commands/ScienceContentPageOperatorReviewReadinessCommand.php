@@ -40,6 +40,7 @@ final class ScienceContentPageOperatorReviewReadinessCommand extends Command
             $this->line('publish_allowed_default='.(($summary['publish_allowed_default'] ?? true) ? 'true' : 'false'));
             $this->line('draft_pages_reviewable='.data_get($summary, 'draft_package.pages_reviewable_as_non_public_draft', 'Unknown'));
             $this->line('draft_pages_requiring_authority_reconciliation='.data_get($summary, 'draft_package.pages_requiring_authority_reconciliation', 'Unknown'));
+            $this->line('draft_pages_reconciled_existing_authority='.data_get($summary, 'draft_package.pages_reconciled_existing_authority', 'Unknown'));
 
             foreach (($summary['missing_first_class_publish_safety_fields'] ?? []) as $field) {
                 $this->line('missing_first_class_publish_safety_field='.$field);

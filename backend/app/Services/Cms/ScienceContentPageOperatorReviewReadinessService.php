@@ -145,6 +145,9 @@ final class ScienceContentPageOperatorReviewReadinessService
         $reconciliationPages = $draftDryRun === null
             ? 'Unknown'
             : (int) ($draftDryRun['pages_blocked'] ?? 0);
+        $reconciledAuthorityPages = $draftDryRun === null
+            ? 'Unknown'
+            : (int) ($draftDryRun['pages_reconciled_existing_authority'] ?? 0);
 
         $coreReady = $this->allPresent($coreFields)
             && $this->allPresent($reviewStates)
@@ -166,6 +169,7 @@ final class ScienceContentPageOperatorReviewReadinessService
                 'pages_seen' => $draftDryRun['pages_seen'] ?? 'Unknown',
                 'pages_reviewable_as_non_public_draft' => $draftPagesReviewable,
                 'pages_requiring_authority_reconciliation' => $reconciliationPages,
+                'pages_reconciled_existing_authority' => $reconciledAuthorityPages,
                 'would_write' => $draftDryRun['would_write'] ?? false,
             ],
             'operator_review_ready_for_non_public_draft' => $coreReady,
