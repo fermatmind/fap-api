@@ -6065,7 +6065,7 @@
       "status": "local_checks_passed",
       "branch": "codex/science-contentpage-publish-fields-01",
       "commit_sha": "c9ce5ca0",
-      "pr_url": "",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1959",
       "title": "SCIENCE-CONTENTPAGE-PUBLISH-FIELDS-01: add publish safety fields",
       "checks": {
         "local": [
@@ -6119,6 +6119,11 @@
           "at": "2026-06-08T05:15:00+08:00",
           "status": "local_checks_passed",
           "summary": "Added first-class ContentPage publish safety fields, CMS/API editing persistence, revision payload support, and Science publish gate tests. No CMS mutation, real import, publish, sitemap, llms, footer, or production exposure performed."
+        },
+        {
+          "at": "2026-06-08T05:20:00+08:00",
+          "status": "pr_opened",
+          "summary": "Opened GitHub PR #1959 for the scoped publish safety fields implementation. Waiting for GitHub checks before merge."
         }
       ]
     },
