@@ -1822,7 +1822,7 @@
       "sidecar_issues": [
         {
           "sidecar_id": "IQ-SIDECAR-COMMERCE-DEFERRED-001",
-          "title": "defer(iq): commerce unlock ¥1.99 / ¥5 implementation",
+          "title": "defer(iq): commerce unlock \u00a51.99 / \u00a55 implementation",
           "owner_repo": "fap-api",
           "scope_relation": "external_to_current_pr",
           "introduced_by_current_pr": false,
@@ -1841,7 +1841,7 @@
             "api/v0.3/webhooks/payment/*"
           ],
           "evidence": [
-            "User intentionally deferred the ¥1.99 / ¥5 commerce PR.",
+            "User intentionally deferred the \u00a51.99 / \u00a55 commerce PR.",
             "Paid unlock is not required for identity/scoring/report/SVG provenance foundation.",
             "The train can continue without checkout/SKU/webhook changes."
           ],
@@ -5056,7 +5056,7 @@
         },
         "forbidden_runtime_claim_grep": {
           "status": "pass",
-          "command": "rg -n \"Matches|career recommendation|job fit|success prediction|success probability|hiring suitability|140Q more accurate|raw score delta|更准确|更准|岗位匹配|职业推荐|职业成功\" backend/app/Services/Riasec/RiasecPublicProjectionService.php backend/app/Services/Report/RiasecReportComposer.php || true",
+          "command": "rg -n \"Matches|career recommendation|job fit|success prediction|success probability|hiring suitability|140Q more accurate|raw score delta|\u66f4\u51c6\u786e|\u66f4\u51c6|\u5c97\u4f4d\u5339\u914d|\u804c\u4e1a\u63a8\u8350|\u804c\u4e1a\u6210\u529f\" backend/app/Services/Riasec/RiasecPublicProjectionService.php backend/app/Services/Report/RiasecReportComposer.php || true",
           "evidence": "No runtime service hits."
         },
         "diff_check": {
@@ -5993,7 +5993,7 @@
     "PR-CMS-04": {
       "repo": "fap-api",
       "branch": "codex/pr-cms-04-controlled-codex-publish-sop",
-      "title": "PR-CMS-04｜Controlled Codex-Assisted CMS Publish SOP",
+      "title": "PR-CMS-04\uff5cControlled Codex-Assisted CMS Publish SOP",
       "status": "pr_open",
       "depends_on": [
         "PR-CMS-01",
@@ -7865,7 +7865,7 @@
     "PR-CMS-FIX-MASTER": {
       "repo": "fap-api",
       "branch": "codex/pr-cms-fix-master-semantic-content-gate",
-      "title": "PR-CMS-FIX-MASTER｜Scalable Semantic Content Gate Architecture",
+      "title": "PR-CMS-FIX-MASTER\uff5cScalable Semantic Content Gate Architecture",
       "status": "pr_open",
       "depends_on": [
         "PR-CMS-01"
@@ -7953,7 +7953,7 @@
     "PR-GRAPH-01": {
       "repo": "fap-api",
       "branch": "codex/pr-graph-01-multi-test-edges",
-      "title": "PR-GRAPH-01｜Article Multi-Test Graph Edges",
+      "title": "PR-GRAPH-01\uff5cArticle Multi-Test Graph Edges",
       "status": "ci_fix_local_checks_passed",
       "depends_on": [
         "PR-CMS-01",
@@ -8053,7 +8053,7 @@
     "PR-MEDIA-01": {
       "repo": "fap-api",
       "branch": "codex/pr-media-01-oss-cdn",
-      "title": "PR-MEDIA-01｜CMS Media Library OSS/CDN Upload Automation",
+      "title": "PR-MEDIA-01\uff5cCMS Media Library OSS/CDN Upload Automation",
       "status": "pr_open",
       "depends_on": [
         "PR-CMS-01",
@@ -18228,7 +18228,7 @@
           "failed": [
             {
               "command": "cd backend && php artisan test --filter=PaymentWebhook",
-              "summary": "Sidecar only: Tests\\Feature\\V0_3\\PaymentWebhookCnCallbackTest::test_wechatpay_valid_callback_calls_processor_and_returns_success_ack fails on clean origin/main c87d9bc11f4e1cf90e60c06660b472e8afeb10a0 with the same 400 / 签名异常: 微信签名为空 error."
+              "summary": "Sidecar only: Tests\\Feature\\V0_3\\PaymentWebhookCnCallbackTest::test_wechatpay_valid_callback_calls_processor_and_returns_success_ack fails on clean origin/main c87d9bc11f4e1cf90e60c06660b472e8afeb10a0 with the same 400 / \u7b7e\u540d\u5f02\u5e38: \u5fae\u4fe1\u7b7e\u540d\u4e3a\u7a7a error."
             }
           ]
         },
@@ -18268,7 +18268,7 @@
           "branch": "codex/pr-audit-be-02-webhook-digest",
           "command_or_check": "php artisan test --filter=PaymentWebhook",
           "failing_test": "Tests\\Feature\\V0_3\\PaymentWebhookCnCallbackTest::test_wechatpay_valid_callback_calls_processor_and_returns_success_ack",
-          "evidence": "400 instead of 200; 签名异常: 微信签名为空",
+          "evidence": "400 instead of 200; \u7b7e\u540d\u5f02\u5e38: \u5fae\u4fe1\u7b7e\u540d\u4e3a\u7a7a",
           "baseline_verification": "Exact test also fails on clean origin/main",
           "baseline_commit": "c87d9bc11f4e1cf90e60c06660b472e8afeb10a0",
           "why_external_to_current_pr": "BE-02 diff only touches payload digest idempotency service/test and ledger; failure is in WeChatPay CN callback signature chain.",
@@ -18294,7 +18294,7 @@
         {
           "at": "2026-05-24T07:51:12.597Z",
           "status": "sidecar_verified",
-          "summary": "Verified WeChatPay CN callback exact failing test also fails on clean origin/main c87d9bc11f4e1cf90e60c06660b472e8afeb10a0 with the same 400 / 签名异常: 微信签名为空 error. Treating broad PaymentWebhook filter failure as sidecar per user authorization."
+          "summary": "Verified WeChatPay CN callback exact failing test also fails on clean origin/main c87d9bc11f4e1cf90e60c06660b472e8afeb10a0 with the same 400 / \u7b7e\u540d\u5f02\u5e38: \u5fae\u4fe1\u7b7e\u540d\u4e3a\u7a7a error. Treating broad PaymentWebhook filter failure as sidecar per user authorization."
         },
         {
           "at": "2026-05-24T07:55:33.131Z",
@@ -23032,7 +23032,7 @@
           "continue_train_decision": "continue_pr7"
         }
       ],
-      "next_task": "DEPLOY-READINESS｜Deploy CAREER 1046 growth foundation fixes"
+      "next_task": "DEPLOY-READINESS\uff5cDeploy CAREER 1046 growth foundation fixes"
     },
     "IQ-NORM-01": {
       "id": "IQ-NORM-01",
@@ -25207,7 +25207,7 @@
       },
       "forbidden_claim_scan": {
         "status": "pass",
-        "summary": "Imported PACK-08 assets scan found 0 forbidden user claims; 1 allowed boundary hit for negated near-tie “推翻” boundary."
+        "summary": "Imported PACK-08 assets scan found 0 forbidden user claims; 1 allowed boundary hit for negated near-tie \u201c\u63a8\u7ffb\u201d boundary."
       },
       "frontend_fallback_scan": {
         "status": "pass",
@@ -40798,7 +40798,7 @@
           "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap_canary_adapter.sqlite php backend/artisan articles:import-editorial-package --file=docs/seo/canary-packages/mbti-vs-holland-career-choice.zh-CN.importer-adapter.json --locale=zh-CN --dry-run --json",
           "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap_canary_adapter.sqlite php backend/artisan articles:import-editorial-package --file=docs/seo/canary-packages/mbti-vs-holland-code-career-choice.en.importer-adapter.json --locale=en --dry-run --json"
         ],
-        "notes": "English adapter passed with ok=true/action=will_create/would_write=true. Chinese adapter failed with evergreen_definition_required, evergreen_method_required, and claim_boundary_forbidden_phrase for the sentence containing 一定适合. Dry-run table counts stayed zero for articles, article_translation_revisions, article_seo_meta, and article_editorial_package_imports."
+        "notes": "English adapter passed with ok=true/action=will_create/would_write=true. Chinese adapter failed with evergreen_definition_required, evergreen_method_required, and claim_boundary_forbidden_phrase for the sentence containing \u4e00\u5b9a\u9002\u5408. Dry-run table counts stayed zero for articles, article_translation_revisions, article_seo_meta, and article_editorial_package_imports."
       },
       "local": {
         "status": "passed",
@@ -41407,7 +41407,7 @@
         "commands": [
           "ssh \"$API_SSH_ALIAS\" 'cd /var/www/fap-api/current/backend && php artisan tinker --execute=\"...\"'"
         ],
-        "notes": "English has 0 claim warnings. Chinese has 2 boundary_context=true warnings for boundary/disclaimer sentences: 医学诊断 and 一定适合. These are acceptable for editorial review but may require explicit acknowledgement in a later controlled publish preflight. Publish remains forbidden."
+        "notes": "English has 0 claim warnings. Chinese has 2 boundary_context=true warnings for boundary/disclaimer sentences: \u533b\u5b66\u8bca\u65ad and \u4e00\u5b9a\u9002\u5408. These are acceptable for editorial review but may require explicit acknowledgement in a later controlled publish preflight. Publish remains forbidden."
       },
       "cta_review": {
         "status": "passed",
@@ -42062,7 +42062,7 @@
         "commands": [
           "Chrome Google Search Console sitemap page submission for https://fermatmind.com/sitemap.xml"
         ],
-        "notes": "GSC displayed '已成功提交站点地图'. After a read-only refresh, the submitted sitemap table showed https://fermatmind.com/sitemap.xml, type 站点地图, date 2026年6月3日, status 成功, discovered pages 2,272, discovered videos 0. No URL Inspection request indexing or individual URL submission was performed."
+        "notes": "GSC displayed '\u5df2\u6210\u529f\u63d0\u4ea4\u7ad9\u70b9\u5730\u56fe'. After a read-only refresh, the submitted sitemap table showed https://fermatmind.com/sitemap.xml, type \u7ad9\u70b9\u5730\u56fe, date 2026\u5e746\u67083\u65e5, status \u6210\u529f, discovered pages 2,272, discovered videos 0. No URL Inspection request indexing or individual URL submission was performed."
       },
       "public_sitemap_cross_check": {
         "status": "passed",
@@ -42142,7 +42142,7 @@
         "at": "2026-06-03T07:20:22Z",
         "from": "executing",
         "to": "gsc_sitemap_submitted_report_created_local_checks_pending",
-        "note": "Submitted only https://fermatmind.com/sitemap.xml in GSC. Final visible GSC table state after refresh was 成功 with 2,272 discovered pages. Created docs-only result report. No individual URL request indexing, Baidu, IndexNow, Search Channel write, CMS mutation, publish, runtime edit, or deploy was performed."
+        "note": "Submitted only https://fermatmind.com/sitemap.xml in GSC. Final visible GSC table state after refresh was \u6210\u529f with 2,272 discovered pages. Created docs-only result report. No individual URL request indexing, Baidu, IndexNow, Search Channel write, CMS mutation, publish, runtime edit, or deploy was performed."
       },
       {
         "at": "2026-06-03T07:24:09Z",
@@ -42253,7 +42253,7 @@
         "commands": [
           "Chrome visible Baidu Search Resource Platform page check after human operator completed verification/submission"
         ],
-        "notes": "After human operator action, the visible Baidu dialog showed '完成 / 链接提交成功 / 确定' for input value fermatmind.com/zh/articles/mbti-vs-holland-career-choice. English URL submission, Baidu API token usage, IndexNow, Search Channel writes, CMS mutation, publish, runtime edit, and deploy were not performed."
+        "notes": "After human operator action, the visible Baidu dialog showed '\u5b8c\u6210 / \u94fe\u63a5\u63d0\u4ea4\u6210\u529f / \u786e\u5b9a' for input value fermatmind.com/zh/articles/mbti-vs-holland-career-choice. English URL submission, Baidu API token usage, IndexNow, Search Channel writes, CMS mutation, publish, runtime edit, and deploy were not performed."
       }
     },
     "failure_reason": null,
@@ -42315,7 +42315,7 @@
         "at": "2026-06-03T11:27:42Z",
         "from": "merged_baidu_security_verification_blocked",
         "to": "merged_then_baidu_zh_submission_confirmed_by_follow_up",
-        "note": "Human operator completed Baidu verification/submission after #1870 merged. Codex rechecked the logged-in Baidu page and observed visible success dialog '完成 / 链接提交成功 / 确定' for the zh-CN canary URL."
+        "note": "Human operator completed Baidu verification/submission after #1870 merged. Codex rechecked the logged-in Baidu page and observed visible success dialog '\u5b8c\u6210 / \u94fe\u63a5\u63d0\u4ea4\u6210\u529f / \u786e\u5b9a' for the zh-CN canary URL."
       }
     ],
     "sidecars": [
@@ -42367,7 +42367,7 @@
         "commands": [
           "Chrome visible Baidu Search Resource Platform page check after human operator completed verification/submission"
         ],
-        "notes": "Visible Baidu dialog showed '完成 / 链接提交成功 / 确定' and the visible input value was fermatmind.com/zh/articles/mbti-vs-holland-career-choice."
+        "notes": "Visible Baidu dialog showed '\u5b8c\u6210 / \u94fe\u63a5\u63d0\u4ea4\u6210\u529f / \u786e\u5b9a' and the visible input value was fermatmind.com/zh/articles/mbti-vs-holland-career-choice."
       },
       "report": {
         "status": "created",
@@ -42440,7 +42440,7 @@
         "at": "2026-06-03T11:27:42Z",
         "from": "executing",
         "to": "baidu_zh_success_confirmed_report_created_local_checks_pending",
-        "note": "Recorded visible Baidu success dialog '完成 / 链接提交成功 / 确定' after human operator completed verification/submission. No English URL submission, Baidu API token usage, IndexNow, Search Channel write, CMS mutation, publish, runtime edit, or deploy was performed."
+        "note": "Recorded visible Baidu success dialog '\u5b8c\u6210 / \u94fe\u63a5\u63d0\u4ea4\u6210\u529f / \u786e\u5b9a' after human operator completed verification/submission. No English URL submission, Baidu API token usage, IndexNow, Search Channel write, CMS mutation, publish, runtime edit, or deploy was performed."
       },
       {
         "at": "2026-06-03T11:27:42Z",
@@ -42524,7 +42524,7 @@
         "commands": [
           "Chrome read-only Google Search Console sitemap page check"
         ],
-        "notes": "GSC property sc-domain:fermatmind.com shows https://fermatmind.com/sitemap.xml status 成功, submitted/read dates 2026年6月3日, discovered pages 2,272, discovered videos 0. No URL Inspection request indexing was performed."
+        "notes": "GSC property sc-domain:fermatmind.com shows https://fermatmind.com/sitemap.xml status \u6210\u529f, submitted/read dates 2026\u5e746\u67083\u65e5, discovered pages 2,272, discovered videos 0. No URL Inspection request indexing was performed."
       },
       "baidu_readonly": {
         "status": "passed_with_no_public_index_yet",
@@ -42532,7 +42532,7 @@
           "Chrome read-only Baidu Search Resource Platform link submission page check",
           "Chrome read-only public Baidu search query site:fermatmind.com/zh/articles/mbti-vs-holland-career-choice"
         ],
-        "notes": "Baidu manual zh-CN submission was confirmed by the prior confirmation report. The link submission page does not show a durable submitted-history state on fresh visit. Public Baidu search returned 抱歉，未找到相关结果, so indexing/organic discovery is not yet visible."
+        "notes": "Baidu manual zh-CN submission was confirmed by the prior confirmation report. The link submission page does not show a durable submitted-history state on fresh visit. Public Baidu search returned \u62b1\u6b49\uff0c\u672a\u627e\u5230\u76f8\u5173\u7ed3\u679c, so indexing/organic discovery is not yet visible."
       },
       "report": {
         "status": "created",
@@ -44902,7 +44902,7 @@
     "remote_branch_deleted": true,
     "local_cleanup_executed": true,
     "external_asset_paths": [
-      "/Users/rainie/Desktop/费马资料文件/fermatmind-help-service-content-drafts-01.zip",
+      "/Users/rainie/Desktop/\u8d39\u9a6c\u8d44\u6599\u6587\u4ef6/fermatmind-help-service-content-drafts-01.zip",
       "/Users/rainie/Desktop/fermatmind-help-service-content-drafts-01"
     ],
     "planned_outputs": {
@@ -45193,11 +45193,11 @@
       "policy_owner_answers": {
         "status": "recorded",
         "answers": {
-          "refund_exclusions": "非“费马测试”原因",
-          "refund_handling_time": "三个工作日",
-          "data_deletion_handling_time": "两年",
-          "retained_data_exceptions_after_deletion": "无",
-          "privacy_analytics_wording_confirmation": "正确"
+          "refund_exclusions": "\u975e\u201c\u8d39\u9a6c\u6d4b\u8bd5\u201d\u539f\u56e0",
+          "refund_handling_time": "\u4e09\u4e2a\u5de5\u4f5c\u65e5",
+          "data_deletion_handling_time": "\u4e24\u5e74",
+          "retained_data_exceptions_after_deletion": "\u65e0",
+          "privacy_analytics_wording_confirmation": "\u6b63\u786e"
         }
       },
       "scope_preflight": {
@@ -45208,7 +45208,7 @@
         "status": "pass",
         "commands": [
           {
-            "command": "shasum -a 256 /Users/rainie/Desktop/费马资料文件/fermatmind-help-service-content-drafts-01.zip",
+            "command": "shasum -a 256 /Users/rainie/Desktop/\u8d39\u9a6c\u8d44\u6599\u6587\u4ef6/fermatmind-help-service-content-drafts-01.zip",
             "status": "pass"
           },
           {
@@ -45671,11 +45671,11 @@
       "policy_revision_apply": {
         "status": "applied_local",
         "applied_policy_answers": {
-          "refund_exclusions": "非“费马测试”原因",
-          "refund_handling_time": "三个工作日",
-          "data_deletion_handling_time": "两年",
-          "retained_data_exceptions_after_deletion": "无",
-          "privacy_analytics_wording_confirmation": "正确"
+          "refund_exclusions": "\u975e\u201c\u8d39\u9a6c\u6d4b\u8bd5\u201d\u539f\u56e0",
+          "refund_handling_time": "\u4e09\u4e2a\u5de5\u4f5c\u65e5",
+          "data_deletion_handling_time": "\u4e24\u5e74",
+          "retained_data_exceptions_after_deletion": "\u65e0",
+          "privacy_analytics_wording_confirmation": "\u6b63\u786e"
         },
         "support_contact": "support@fermatmind.com",
         "policy_version": "help_service_policy.v1",
@@ -45820,7 +45820,7 @@
     "repo": "fap-api",
     "branch": "codex/help-contentpage-importer-service-fields-01",
     "base": "origin/main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "window_9_help_service_content",
     "title": "feat(cms): map Help service fields in ContentPage importer",
     "depends_on": [
@@ -45900,11 +45900,11 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": "9fd75cfb04637e242fa33e3a8c4cac2c38a128dc",
+    "commit_sha": "9cae1f45ee55acf11df43376e80387957c2049a3",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1956",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-07T20:50:41Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "result": {
       "decision": "CONTENT_PAGE_BASELINE_IMPORTER_SUPPORTS_HELP_SERVICE_FIELDS_WITHOUT_CMS_MUTATION",
       "generated_artifact": "backend/docs/help/generated/help-contentpage-importer-service-fields-01.v1.json",
@@ -45967,6 +45967,11 @@
         "at": "2026-06-08",
         "status": "ready_to_merge",
         "note": "GitHub checks passed and merge state was CLEAN. Scope remained importer mapping, focused contracts, generated artifact, operations report, and PR-train metadata only."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "merged_closeout_reconciled",
+        "note": "Reconciled while preparing HELP-CMS-SERVICE-FIELDS-PROD-RUNTIME-01; PR #1956 merged on GitHub at 2026-06-07T20:50:41Z with merge commit 9cae1f45ee55acf11df43376e80387957c2049a3, origin/main contains it, and the remote/local task branches were cleaned up."
       }
     ]
   },
@@ -48014,7 +48019,7 @@
       "raw_proof_copied_to_private_local_storage": true,
       "raw_receipt_proof_copied_to_private_local_storage": true,
       "record_code": "FM-GIVING-2026-06-001",
-      "recipient_name": "联合国儿童基金会（UNICEF）",
+      "recipient_name": "\u8054\u5408\u56fd\u513f\u7ae5\u57fa\u91d1\u4f1a\uff08UNICEF\uff09",
       "recipient_official_url": "https://www.unicef.cn/",
       "amount_minor": 7500,
       "currency": "CNY",
@@ -48970,6 +48975,157 @@
         "at": "2026-06-05T15:21:53Z",
         "status": "merged",
         "note": "Closed out PR #1949 after squash merge, remote branch deletion, local branch cleanup, and origin/main containment verification."
+      }
+    ]
+  },
+  "HELP-CMS-SERVICE-FIELDS-PROD-RUNTIME-01": {
+    "repo": "fap-api",
+    "branch": "codex/help-cms-service-fields-prod-runtime-01",
+    "base": "origin/main",
+    "status": "local_checks_passed",
+    "train_scope": "window_9_help_service_content",
+    "title": "docs(help): verify Help service fields production runtime",
+    "depends_on": [
+      "HELP-CONTENTPAGE-IMPORTER-SERVICE-FIELDS-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User authorized supplementing and executing HELP-CMS-SERVICE-FIELDS-PROD-RUNTIME-01 as read-only runtime verification; no deploy, CMS mutation, publish, search submission, private URL access, secret/env/cookie/token read, payment/refund action, payment-provider change, or Operator approval claim is allowed."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "HELP-CONTENTPAGE-IMPORTER-SERVICE-FIELDS-01 is reconciled as merged with merge commit 9cae1f45ee55acf11df43376e80387957c2049a3; origin/main contains it."
+      },
+      "local_main": {
+        "status": "pass",
+        "origin_main_sha": "b70cd7291810b7f13416c5e51cbcbd8daabaf0cd",
+        "contains_pr_1956_merge": true,
+        "contains_pr_1959_merge": true,
+        "contains_pr_1960_merge": true,
+        "contains_pr_1961_merge": true,
+        "help_service_fields_migration_present": true,
+        "publish_safety_fields_migration_present": true,
+        "importer_service_field_mapping_present": true
+      },
+      "public_production_runtime": {
+        "status": "unknown",
+        "api_root_status": 200,
+        "healthz_status": 404,
+        "help_content_page_public_status": 404,
+        "production_active_sha": "Unknown",
+        "production_contains_target_sha": "Unknown",
+        "evidence": "Public unauthenticated production checks did not expose an active release SHA. Draft Help pages returning 404 is compatible with non-public draft status and does not prove runtime SHA."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          {
+            "command": "git rev-parse origin/main",
+            "status": "pass",
+          "output": "b70cd7291810b7f13416c5e51cbcbd8daabaf0cd"
+          },
+          {
+            "command": "git merge-base --is-ancestor 9cae1f45ee55acf11df43376e80387957c2049a3 origin/main",
+            "status": "pass"
+          },
+          {
+          "command": "git merge-base --is-ancestor b70cd7291810b7f13416c5e51cbcbd8daabaf0cd origin/main",
+            "status": "pass"
+          },
+          {
+            "command": "python3 -m json.tool backend/docs/help/generated/help-cms-service-fields-prod-runtime-01.v1.json >/dev/null",
+            "status": "pass"
+          },
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "pass"
+          },
+          {
+            "command": "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+            "status": "pass"
+          },
+          {
+            "command": "curl -sS -m 10 -o /tmp/fap-api-root-runtime-check.out -w '%{http_code}\\n' https://api.fermatmind.com/",
+            "status": "pass",
+            "output": "200"
+          },
+          {
+            "command": "curl -sS -m 10 -o /tmp/fap-api-healthz-runtime-check.out -w '%{http_code}\\n' https://api.fermatmind.com/api/healthz",
+            "status": "pass",
+            "output": "404"
+          },
+          {
+            "command": "curl -sS -m 10 -o /tmp/fap-api-help-page-runtime-check.out -w '%{http_code}\\n' 'https://api.fermatmind.com/api/v0.5/content-pages/help-payment-refund?locale=en'",
+            "status": "pass",
+            "output": "404"
+          }
+        ]
+      },
+      "github": {
+        "status": "pending",
+        "checks": []
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "result": {
+      "decision": "PRODUCTION_RUNTIME_SHA_UNKNOWN_DEPLOY_PROMPT_REQUIRED",
+      "generated_artifact": "backend/docs/help/generated/help-cms-service-fields-prod-runtime-01.v1.json",
+      "operations_report": "backend/docs/operations/help-cms-service-fields-prod-runtime-2026-06-08.md",
+      "exact_deploy_authorization_prompt": "I explicitly approve backend production deploy for exact SHA b70cd7291810b7f13416c5e51cbcbd8daabaf0cd release help-cms-service-fields-prod-runtime-20260608-b70cd729.",
+      "next_task_recommendation": "HELP-CMS-SERVICE-FIELDS-PROD-RELEASE-01"
+    },
+    "scope_validation": {
+      "cms_mutation_performed": false,
+      "publish_performed": false,
+      "deploy_performed": false,
+      "search_submission_performed": false,
+      "payment_or_refund_performed": false,
+      "payment_provider_changed": false,
+      "private_url_access_performed": false,
+      "secret_env_cookie_token_read": false,
+      "operator_approval_claimed": false,
+      "frontend_fallback_content_added": false,
+      "allowed_paths_only": true
+    },
+    "sidecars": [
+      {
+        "id": "HELP-CMS-SERVICE-FIELDS-PROD-RELEASE-01",
+        "status": "requires_exact_deploy_authorization",
+        "note": "Production active SHA is Unknown. If the operator wants to proceed, use the exact deploy authorization prompt recorded in the artifact."
+      },
+      {
+        "id": "HELP-CONTENT-DRAFT-POLICY-CMS-SYNC-01",
+        "status": "blocked_until_runtime_confirmed",
+        "note": "CMS draft sync should wait until production is confirmed to contain target SHA b70cd7291810b7f13416c5e51cbcbd8daabaf0cd or a newer SHA containing it."
+      },
+      {
+        "id": "HELP-CONTENT-DRAFT-PUBLISH-BLOCK",
+        "status": "hard_gate",
+        "note": "Publish remains blocked and requires Operator review, publish preflight, and exact publish authorization."
+      }
+    ],
+    "next_task": "HELP-CMS-SERVICE-FIELDS-PROD-RELEASE-01",
+    "transitions": [
+      {
+        "at": "2026-06-08",
+        "status": "authorized",
+        "note": "User authorized supplementing and executing HELP-CMS-SERVICE-FIELDS-PROD-RUNTIME-01 with read-only runtime verification scope."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "local_artifacts_created_validation_pending",
+        "note": "Created read-only runtime evidence artifact, operations report, and PR-train metadata; local validation pending."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "local_checks_passed",
+        "note": "JSON/YAML validation and public read-only runtime status checks passed. Production active SHA remains Unknown because public endpoints do not expose release SHA."
       }
     ]
   }
