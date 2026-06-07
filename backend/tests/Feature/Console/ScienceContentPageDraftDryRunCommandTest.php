@@ -27,8 +27,9 @@ final class ScienceContentPageDraftDryRunCommandTest extends TestCase
             ->expectsOutputToContain('would_write=false')
             ->expectsOutputToContain('pages_seen=6')
             ->expectsOutputToContain('pages_ready_for_non_public_draft_import=5')
-            ->expectsOutputToContain('pages_blocked=1')
-            ->expectsOutputToContain('page=METHOD-BOUNDARY-CONTENT-01 action=reconcile_existing_authority_only decision=blocked_existing_authority_reconciliation_required')
+            ->expectsOutputToContain('pages_reconciled_existing_authority=1')
+            ->expectsOutputToContain('pages_blocked=0')
+            ->expectsOutputToContain('page=METHOD-BOUNDARY-CONTENT-01 action=preserve_existing_authority_revision_only decision=existing_authority_reconciliation_ready')
             ->expectsOutputToContain('kind=policy status=draft public=false indexable=false')
             ->assertExitCode(0);
 
@@ -54,7 +55,8 @@ final class ScienceContentPageDraftDryRunCommandTest extends TestCase
         $this->assertFalse($payload['database_writes_allowed']);
         $this->assertSame(6, $payload['pages_seen']);
         $this->assertSame(5, $payload['pages_ready_for_non_public_draft_import']);
-        $this->assertSame(1, $payload['pages_blocked']);
+        $this->assertSame(1, $payload['pages_reconciled_existing_authority']);
+        $this->assertSame(0, $payload['pages_blocked']);
         $this->assertFalse($payload['non_runtime_guarantees']['cms_mutation_performed']);
 
         $scienceHub = collect($payload['pages'])->firstWhere('page_key', 'SCIENCE-HUB-CONTENT-01');
@@ -68,6 +70,11 @@ final class ScienceContentPageDraftDryRunCommandTest extends TestCase
 
         $dataNotes = collect($payload['pages'])->firstWhere('page_key', 'DATA-NOTES-CONTENT-01');
         $this->assertSame('data-privacy', $dataNotes['normalized_content_page']['slug']);
+
+        $methodBoundaries = collect($payload['pages'])->firstWhere('page_key', 'METHOD-BOUNDARY-CONTENT-01');
+        $this->assertSame('preserve_existing_authority_revision_only', $methodBoundaries['planned_action']);
+        $this->assertSame('existing_authority_reconciliation_ready', $methodBoundaries['draft_import_decision']);
+        $this->assertFalse($methodBoundaries['blocks_package_dry_run']);
 
         $this->assertSame(0, ContentPage::query()->count());
     }

@@ -3637,3 +3637,105 @@ prs:
     cleanup:
       delete_remote_branch: true
       run_local_cleanup: true
+
+  - id: SCIENCE-CONTENTPAGE-AUTHORITY-RECONCILIATION-01
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/science-contentpage-authority-reconciliation-01
+    base: main
+    depends_on: []
+    mode: execute
+    title: "SCIENCE-CONTENTPAGE-AUTHORITY-RECONCILIATION-01: reconcile method-boundaries authority"
+    scope: >
+      Backend-only Science ContentPage authority reconciliation. Treat
+      METHOD-BOUNDARY-CONTENT-01 as an existing /method-boundaries authority
+      revision-only input instead of a new ContentPage import blocker, while
+      preserving no-write dry-run behavior and keeping real import, publish,
+      sitemap, llms, footer, and CMS mutation blocked.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "ruby -e 'require \"yaml\"; YAML.load_file(\"docs/codex/pr-train.yaml\")'"
+      - "vendor/bin/pint --test app/Console/Commands/ScienceContentPageDraftDryRunCommand.php app/Console/Commands/ScienceContentPageOperatorReviewReadinessCommand.php app/Services/Cms/ScienceContentPageDraftDryRunService.php app/Services/Cms/ScienceContentPageOperatorReviewReadinessService.php app/Services/Cms/ScienceContentPagePreImportQaService.php tests/Feature/Console/ScienceContentPageDraftDryRunCommandTest.php tests/Feature/Console/ScienceContentPageOperatorReviewReadinessCommandTest.php tests/Feature/Console/ScienceContentPagePreImportQaCommandTest.php"
+      - "php artisan test tests/Feature/Console/ScienceContentPageDraftDryRunCommandTest.php tests/Feature/Console/ScienceContentPageOperatorReviewReadinessCommandTest.php tests/Feature/Console/ScienceContentPagePreImportQaCommandTest.php --no-ansi"
+      - "php artisan content-pages:science-draft-dry-run --package='/Users/rainie/Desktop/science_contentpage_cms_draft_package 2'"
+      - "php artisan content-pages:science-pre-import-qa --package='/Users/rainie/Desktop/science_contentpage_cms_draft_package 2'"
+      - "git diff --check"
+      - "git diff --cached --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
+  - id: SCIENCE-CONTENTPAGE-PUBLISH-FIELDS-01
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/science-contentpage-publish-fields-01
+    base: main
+    depends_on: ["SCIENCE-CONTENTPAGE-AUTHORITY-RECONCILIATION-01"]
+    mode: execute
+    title: "SCIENCE-CONTENTPAGE-PUBLISH-FIELDS-01: add publish safety fields"
+    scope: >
+      Backend-only ContentPage publish safety fields for Science pages. Add
+      first-class operator approval, publish permission, claim gate, forbidden
+      claims, and FAQ schema eligibility fields to the ContentPage model,
+      internal API, and Ops CMS resource, and prevent publication when required
+      publish safety gates are not satisfied. Do not import content, mutate CMS
+      records beyond schema support, publish pages, change fap-web, sitemap,
+      llms, footer, or generated public content.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "ruby -e 'require \"yaml\"; YAML.load_file(\"docs/codex/pr-train.yaml\")'"
+      - "vendor/bin/pint --test app/Models/ContentPage.php app/Http/Controllers/API/V0_5/Cms/ContentPageController.php app/Filament/Ops/Resources/ContentPageResource.php app/Services/Cms/ScienceContentPageOperatorReviewReadinessService.php tests/Feature/Console/ScienceContentPageOperatorReviewReadinessCommandTest.php tests/Feature/ContentPages/ContentPagePublicApiTest.php"
+      - "php artisan test tests/Feature/Console/ScienceContentPageOperatorReviewReadinessCommandTest.php tests/Feature/ContentPages/ContentPagePublicApiTest.php --no-ansi"
+      - "php artisan migrate --pretend --no-ansi --force"
+      - "php artisan route:list --path=content-pages --no-ansi"
+      - "git diff --check"
+      - "git diff --cached --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
+  - id: SCIENCE-CONTENTPAGE-REAL-IMPORT-DRY-RUN-LOCK-01
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/science-contentpage-real-import-dry-run-lock-01
+    base: main
+    depends_on: ["SCIENCE-CONTENTPAGE-PUBLISH-FIELDS-01"]
+    mode: execute
+    title: "SCIENCE-CONTENTPAGE-REAL-IMPORT-DRY-RUN-LOCK-01: lock pre-import contract"
+    scope: >
+      Backend-only real-import dry-run lock for Science ContentPages. Harden the
+      pre-real-import QA contract so the six-page Science draft package remains
+      dry-run/no-write until publish safety fields, operator approval, claim
+      gate, visible FAQ/schema gate, public canonical routes, and private URL
+      scans are satisfied. Do not perform real import, publish, CMS mutation,
+      fap-web changes, sitemap, llms, footer, search submission, or content
+      distribution.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "ruby -e 'require \"yaml\"; YAML.load_file(\"docs/codex/pr-train.yaml\")'"
+      - "vendor/bin/pint --test app/Console/Commands/ScienceContentPagePreImportQaCommand.php app/Services/Cms/ScienceContentPagePreImportQaService.php tests/Feature/Console/ScienceContentPagePreImportQaCommandTest.php"
+      - "php artisan test tests/Feature/Console/ScienceContentPageDraftDryRunCommandTest.php tests/Feature/Console/ScienceContentPageOperatorReviewReadinessCommandTest.php tests/Feature/Console/ScienceContentPagePreImportQaCommandTest.php --no-ansi"
+      - "php artisan content-pages:science-pre-import-qa --package='/Users/rainie/Desktop/science_contentpage_cms_draft_package 2'"
+      - "git diff --check"
+      - "git diff --cached --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true

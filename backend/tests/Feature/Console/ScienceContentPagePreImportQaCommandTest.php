@@ -34,9 +34,8 @@ final class ScienceContentPagePreImportQaCommandTest extends TestCase
             ->expectsOutputToContain('publish_allowed=false')
             ->expectsOutputToContain('natural_distribution_allowed=false')
             ->expectsOutputToContain('package_pre_import_qa_issue_count=0')
-            ->expectsOutputToContain('dry_run_pages_blocked=1')
+            ->expectsOutputToContain('dry_run_pages_blocked=0')
             ->expectsOutputToContain('operator_publish_decision_ready=false')
-            ->expectsOutputToContain('blocking_reason=authority_reconciliation_required')
             ->expectsOutputToContain('blocking_reason=operator_publish_decision_not_ready')
             ->assertExitCode(0);
 

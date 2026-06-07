@@ -33,7 +33,8 @@ final class ScienceContentPageOperatorReviewReadinessCommandTest extends TestCas
             ->expectsOutputToContain('operator_publish_decision_ready=false')
             ->expectsOutputToContain('publish_allowed_default=false')
             ->expectsOutputToContain('draft_pages_reviewable=5')
-            ->expectsOutputToContain('draft_pages_requiring_authority_reconciliation=1')
+            ->expectsOutputToContain('draft_pages_requiring_authority_reconciliation=0')
+            ->expectsOutputToContain('draft_pages_reconciled_existing_authority=1')
             ->expectsOutputToContain('missing_first_class_publish_safety_field=publish_allowed')
             ->expectsOutputToContain('missing_first_class_publish_safety_field=claim_gate_status')
             ->expectsOutputToContain('missing_first_class_publish_safety_field=faq_schema_eligible')
@@ -56,7 +57,8 @@ final class ScienceContentPageOperatorReviewReadinessCommandTest extends TestCas
         $this->assertFalse($payload['publish_allowed_default']);
         $this->assertFalse($payload['natural_distribution_allowed']);
         $this->assertSame(5, $payload['draft_package']['pages_reviewable_as_non_public_draft']);
-        $this->assertSame(1, $payload['draft_package']['pages_requiring_authority_reconciliation']);
+        $this->assertSame(0, $payload['draft_package']['pages_requiring_authority_reconciliation']);
+        $this->assertSame(1, $payload['draft_package']['pages_reconciled_existing_authority']);
         $this->assertFalse($payload['draft_package']['would_write']);
 
         foreach (['review_state', 'science_review_required', 'legal_review_required', 'is_public', 'is_indexable'] as $field) {

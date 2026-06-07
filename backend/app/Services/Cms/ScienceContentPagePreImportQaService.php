@@ -106,6 +106,7 @@ final class ScienceContentPagePreImportQaService
                 'status' => $dryRun['status'] ?? 'Unknown',
                 'pages_seen' => $dryRun['pages_seen'] ?? 'Unknown',
                 'pages_ready_for_non_public_draft_import' => $dryRun['pages_ready_for_non_public_draft_import'] ?? 'Unknown',
+                'pages_reconciled_existing_authority' => $dryRun['pages_reconciled_existing_authority'] ?? 'Unknown',
                 'pages_blocked' => $dryRunBlockers,
                 'would_write' => $dryRun['would_write'] ?? false,
             ],

@@ -7280,6 +7280,119 @@
           ]
         }
       }
+    },
+    "SCIENCE-CONTENTPAGE-AUTHORITY-RECONCILIATION-01": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "local_checks_passed",
+      "branch": "codex/science-contentpage-authority-reconciliation-01",
+      "commit_sha": "",
+      "pr_url": "",
+      "title": "SCIENCE-CONTENTPAGE-AUTHORITY-RECONCILIATION-01: reconcile method-boundaries authority",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "ruby -e 'require \"yaml\"; YAML.load_file(\"docs/codex/pr-train.yaml\")'",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Console/Commands/ScienceContentPageDraftDryRunCommand.php app/Console/Commands/ScienceContentPageOperatorReviewReadinessCommand.php app/Services/Cms/ScienceContentPageDraftDryRunService.php app/Services/Cms/ScienceContentPageOperatorReviewReadinessService.php app/Services/Cms/ScienceContentPagePreImportQaService.php tests/Feature/Console/ScienceContentPageDraftDryRunCommandTest.php tests/Feature/Console/ScienceContentPageOperatorReviewReadinessCommandTest.php tests/Feature/Console/ScienceContentPagePreImportQaCommandTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/Console/ScienceContentPageDraftDryRunCommandTest.php tests/Feature/Console/ScienceContentPageOperatorReviewReadinessCommandTest.php tests/Feature/Console/ScienceContentPagePreImportQaCommandTest.php --no-ansi",
+            "status": "passed",
+            "details": "7 tests, 117 assertions."
+          },
+          {
+            "command": "php artisan content-pages:science-draft-dry-run --package='/Users/rainie/Desktop/science_contentpage_cms_draft_package 2'",
+            "status": "passed",
+            "details": "pages_seen=6, pages_ready_for_non_public_draft_import=5, pages_reconciled_existing_authority=1, pages_blocked=0, would_write=false."
+          },
+          {
+            "command": "php artisan content-pages:science-pre-import-qa --package='/Users/rainie/Desktop/science_contentpage_cms_draft_package 2'",
+            "status": "passed",
+            "details": "decision=NO-GO, non_public_draft_import_qa_passed=true, real_import_allowed=false, blocking_reason=operator_publish_decision_not_ready."
+          },
+          {
+            "command": "git diff --check && git diff --cached --check",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-06-08T00:00:00+08:00",
+          "status": "in_progress",
+          "summary": "Initialized after explicit user authorization to add and execute the Science ContentPage authority, publish-fields, real-import dry-run lock, and discoverability gate train sequence. Scope is backend-only method-boundaries authority reconciliation with no CMS mutation, real import, publish, sitemap, llms, footer, or production exposure."
+        },
+        {
+          "at": "2026-06-08T00:00:00+08:00",
+          "status": "local_checks_passed",
+          "summary": "Resolved method-boundaries as existing-authority revision-only in the Science dry-run contract. Focused Pint, PHPUnit, real package dry-run, pre-import QA, JSON/YAML, and diff checks passed with no writes, real import, publish, sitemap, llms, or footer changes."
+        }
+      ]
+    },
+    "SCIENCE-CONTENTPAGE-PUBLISH-FIELDS-01": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "planned",
+      "branch": "codex/science-contentpage-publish-fields-01",
+      "commit_sha": "",
+      "pr_url": "",
+      "title": "SCIENCE-CONTENTPAGE-PUBLISH-FIELDS-01: add publish safety fields",
+      "checks": {
+        "local": [],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-06-08T00:00:00+08:00",
+          "status": "planned",
+          "summary": "Planned after explicit user authorization. Depends on SCIENCE-CONTENTPAGE-AUTHORITY-RECONCILIATION-01."
+        }
+      ]
+    },
+    "SCIENCE-CONTENTPAGE-REAL-IMPORT-DRY-RUN-LOCK-01": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "planned",
+      "branch": "codex/science-contentpage-real-import-dry-run-lock-01",
+      "commit_sha": "",
+      "pr_url": "",
+      "title": "SCIENCE-CONTENTPAGE-REAL-IMPORT-DRY-RUN-LOCK-01: lock pre-import contract",
+      "checks": {
+        "local": [],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-06-08T00:00:00+08:00",
+          "status": "planned",
+          "summary": "Planned after explicit user authorization. Depends on SCIENCE-CONTENTPAGE-PUBLISH-FIELDS-01."
+        }
+      ]
+
     }
   },
   "status": "initialized",

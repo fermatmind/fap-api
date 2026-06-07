@@ -90,7 +90,11 @@ final class ScienceContentPageDraftDryRunService
 
         $blockingPages = array_values(array_filter(
             $pages,
-            static fn (array $page): bool => ($page['draft_import_decision'] ?? '') !== 'draft_import_ready'
+            static fn (array $page): bool => ($page['blocks_package_dry_run'] ?? true) === true
+        ));
+        $reconciledAuthorityPages = array_values(array_filter(
+            $pages,
+            static fn (array $page): bool => ($page['draft_import_decision'] ?? '') === 'existing_authority_reconciliation_ready'
         ));
 
         return [
@@ -103,7 +107,11 @@ final class ScienceContentPageDraftDryRunService
             'package_status' => (string) ($manifest['status'] ?? 'Unknown'),
             'pages_seen' => count($pages),
             'pages_expected' => count(self::EXPECTED_PAGE_KEYS),
-            'pages_ready_for_non_public_draft_import' => count($pages) - count($blockingPages),
+            'pages_ready_for_non_public_draft_import' => count(array_filter(
+                $pages,
+                static fn (array $page): bool => ($page['draft_import_decision'] ?? '') === 'draft_import_ready'
+            )),
+            'pages_reconciled_existing_authority' => count($reconciledAuthorityPages),
             'pages_blocked' => count($blockingPages),
             'issue_count' => count($issues),
             'status' => $issues === [] ? 'pass_no_write_dry_run' : 'blocked_no_write_dry_run',
@@ -218,12 +226,14 @@ final class ScienceContentPageDraftDryRunService
 
         $action = 'create_non_public_draft';
         $decision = 'draft_import_ready';
+        $blocksPackageDryRun = false;
         if ($canonicalPath === '/method-boundaries') {
-            $action = 'reconcile_existing_authority_only';
-            $decision = 'blocked_existing_authority_reconciliation_required';
+            $action = 'preserve_existing_authority_revision_only';
+            $decision = 'existing_authority_reconciliation_ready';
         }
-        if ($issues !== [] && $decision === 'draft_import_ready') {
+        if ($issues !== []) {
             $decision = 'blocked_schema_or_package_validation';
+            $blocksPackageDryRun = true;
         }
 
         return [
@@ -232,6 +242,7 @@ final class ScienceContentPageDraftDryRunService
             'file' => $file,
             'draft_import_decision' => $decision,
             'planned_action' => $action,
+            'blocks_package_dry_run' => $blocksPackageDryRun,
             'normalized_content_page' => $normalized,
             'issues' => $issues,
         ];

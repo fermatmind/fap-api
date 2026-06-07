@@ -39,6 +39,7 @@ final class ScienceContentPageDraftDryRunCommand extends Command
             $this->line('pages_seen='.$summary['pages_seen']);
             $this->line('pages_expected='.$summary['pages_expected']);
             $this->line('pages_ready_for_non_public_draft_import='.$summary['pages_ready_for_non_public_draft_import']);
+            $this->line('pages_reconciled_existing_authority='.$summary['pages_reconciled_existing_authority']);
             $this->line('pages_blocked='.$summary['pages_blocked']);
             $this->line('issue_count='.$summary['issue_count']);
             $this->line('status='.$summary['status']);
