@@ -128,6 +128,14 @@ final class ContentPageController extends Controller
             'faq_items.*.question' => ['required_with:faq_items', 'string', 'max:500'],
             'faq_items.*.answer' => ['required_with:faq_items', 'string', 'max:4000'],
             'schema_enabled' => ['nullable', 'boolean'],
+            'publish_allowed' => ['nullable', 'boolean'],
+            'operator_approval_required' => ['nullable', 'boolean'],
+            'operator_approved_at' => ['nullable', 'date'],
+            'claim_gate_status' => ['nullable', Rule::in(ContentPage::CLAIM_GATE_STATUSES)],
+            'forbidden_claims' => ['nullable', 'array'],
+            'forbidden_claims.*' => ['string', 'max:160'],
+            'faq_schema_eligible' => ['nullable', 'boolean'],
+            'schema_eligibility_reviewed_at' => ['nullable', 'date'],
             'org_id' => ['nullable', 'integer', 'min:0'],
         ]);
 
@@ -166,6 +174,41 @@ final class ContentPageController extends Controller
         $publicPath = $this->publicPathFor($normalizedSlug, $kind);
         $canonicalPath = $this->nullableString($validated['canonical_path'] ?? null) ?? $publicPath;
         $faqItems = $this->normalizeFaqItems($validated['faq_items'] ?? []);
+        $status = (string) ($validated['status'] ?? ((bool) $validated['is_public'] ? ContentPage::STATUS_PUBLISHED : ContentPage::STATUS_DRAFT));
+        $reviewState = (string) ($validated['review_state'] ?? 'draft');
+        $schemaEnabled = (bool) ($validated['schema_enabled'] ?? false);
+        $publishAllowed = (bool) ($validated['publish_allowed'] ?? false);
+        $operatorApprovalRequired = (bool) ($validated['operator_approval_required'] ?? true);
+        $operatorApprovedAt = $validated['operator_approved_at'] ?? null;
+        $claimGateStatus = (string) ($validated['claim_gate_status'] ?? 'not_reviewed');
+        $forbiddenClaims = $this->normalizeForbiddenClaims($validated['forbidden_claims'] ?? []);
+        $faqSchemaEligible = (bool) ($validated['faq_schema_eligible'] ?? false);
+        $schemaEligibilityReviewedAt = $validated['schema_eligibility_reviewed_at'] ?? null;
+
+        $publishSafetyErrors = $this->publishSafetyErrors(
+            normalizedSlug: $normalizedSlug,
+            pageType: $pageType,
+            status: $status,
+            isPublic: (bool) $validated['is_public'],
+            reviewState: $reviewState,
+            legalReviewRequired: (bool) ($validated['legal_review_required'] ?? false),
+            scienceReviewRequired: (bool) ($validated['science_review_required'] ?? false),
+            schemaEnabled: $schemaEnabled,
+            publishAllowed: $publishAllowed,
+            operatorApprovalRequired: $operatorApprovalRequired,
+            operatorApprovedAt: $operatorApprovedAt,
+            claimGateStatus: $claimGateStatus,
+            forbiddenClaims: $forbiddenClaims,
+            faqSchemaEligible: $faqSchemaEligible,
+            schemaEligibilityReviewedAt: $schemaEligibilityReviewedAt,
+        );
+        if ($publishSafetyErrors !== []) {
+            return response()->json([
+                'ok' => false,
+                'error_code' => 'CONTENT_PAGE_PUBLISH_GATE_FAILED',
+                'errors' => $publishSafetyErrors,
+            ], 422);
+        }
 
         $page = $existing ?? new ContentPage([
             'org_id' => $orgId,
@@ -204,8 +247,15 @@ final class ContentPageController extends Controller
             'policy_version' => $this->nullableString($validated['policy_version'] ?? null),
             'reviewer' => $this->nullableString($validated['reviewer'] ?? null),
             'faq_items' => $faqItems,
-            'schema_enabled' => (bool) ($validated['schema_enabled'] ?? false),
-            'status' => (string) ($validated['status'] ?? ((bool) $validated['is_public'] ? ContentPage::STATUS_PUBLISHED : ContentPage::STATUS_DRAFT)),
+            'schema_enabled' => $schemaEnabled,
+            'publish_allowed' => $publishAllowed,
+            'operator_approval_required' => $operatorApprovalRequired,
+            'operator_approved_at' => $operatorApprovedAt,
+            'claim_gate_status' => $claimGateStatus,
+            'forbidden_claims' => $forbiddenClaims,
+            'faq_schema_eligible' => $faqSchemaEligible,
+            'schema_eligibility_reviewed_at' => $schemaEligibilityReviewedAt,
+            'status' => $status,
         ]);
         $page->save();
 
@@ -233,12 +283,17 @@ final class ContentPageController extends Controller
             'policy_version' => $this->nullableString($validated['policy_version'] ?? null),
             'reviewer' => $this->nullableString($validated['reviewer'] ?? null),
             'faq_items' => $faqItems,
-            'schema_enabled' => (bool) ($validated['schema_enabled'] ?? false),
+            'schema_enabled' => $schemaEnabled,
+            'publish_allowed' => $publishAllowed,
+            'operator_approval_required' => $operatorApprovalRequired,
+            'operator_approved_at' => $operatorApprovedAt,
+            'claim_gate_status' => $claimGateStatus,
+            'forbidden_claims' => $forbiddenClaims,
+            'faq_schema_eligible' => $faqSchemaEligible,
+            'schema_eligibility_reviewed_at' => $schemaEligibilityReviewedAt,
             'is_public' => (bool) $validated['is_public'],
             'is_indexable' => (bool) $validated['is_indexable'],
         ];
-        $status = (string) ($validated['status'] ?? ((bool) $validated['is_public'] ? ContentPage::STATUS_PUBLISHED : ContentPage::STATUS_DRAFT));
-        $reviewState = (string) ($validated['review_state'] ?? 'draft');
         $revisionStatus = $this->revisionStatus($status, $reviewState, $page->isSourceContent());
         $page = $this->workspace->saveWorkingDraft(
             'content_page',
@@ -273,6 +328,13 @@ final class ContentPageController extends Controller
             'reviewer',
             'faq_items',
             'schema_enabled',
+            'publish_allowed',
+            'operator_approval_required',
+            'operator_approved_at',
+            'claim_gate_status',
+            'forbidden_claims',
+            'faq_schema_eligible',
+            'schema_eligibility_reviewed_at',
             'kind',
             'page_type',
             'template',
@@ -351,6 +413,13 @@ final class ContentPageController extends Controller
             'reviewer' => $page->reviewer,
             'faq_items' => is_array($page->faq_items) ? array_values($page->faq_items) : [],
             'schema_enabled' => (bool) $page->schema_enabled,
+            'publish_allowed' => (bool) $page->publish_allowed,
+            'operator_approval_required' => (bool) $page->operator_approval_required,
+            'operator_approved_at' => $this->dateString($page->operator_approved_at),
+            'claim_gate_status' => (string) ($page->claim_gate_status ?: 'not_reviewed'),
+            'forbidden_claims' => is_array($page->forbidden_claims) ? array_values($page->forbidden_claims) : [],
+            'faq_schema_eligible' => (bool) $page->faq_schema_eligible,
+            'schema_eligibility_reviewed_at' => $this->dateString($page->schema_eligibility_reviewed_at),
         ];
     }
 
@@ -384,6 +453,13 @@ final class ContentPageController extends Controller
             'reviewer',
             'faq_items',
             'schema_enabled',
+            'publish_allowed',
+            'operator_approval_required',
+            'operator_approved_at',
+            'claim_gate_status',
+            'forbidden_claims',
+            'faq_schema_eligible',
+            'schema_eligibility_reviewed_at',
             'is_public',
             'is_indexable',
         ]));
@@ -472,6 +548,87 @@ final class ContentPageController extends Controller
         }
 
         return $normalized;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function normalizeForbiddenClaims(mixed $items): array
+    {
+        if (! is_array($items)) {
+            return [];
+        }
+
+        $normalized = [];
+        foreach ($items as $item) {
+            $claim = trim((string) $item);
+            if ($claim !== '') {
+                $normalized[] = $claim;
+            }
+        }
+
+        return array_values(array_unique($normalized));
+    }
+
+    /**
+     * @param  list<string>  $forbiddenClaims
+     * @return array<string, list<string>>
+     */
+    private function publishSafetyErrors(
+        string $normalizedSlug,
+        string $pageType,
+        string $status,
+        bool $isPublic,
+        string $reviewState,
+        bool $legalReviewRequired,
+        bool $scienceReviewRequired,
+        bool $schemaEnabled,
+        bool $publishAllowed,
+        bool $operatorApprovalRequired,
+        mixed $operatorApprovedAt,
+        string $claimGateStatus,
+        array $forbiddenClaims,
+        bool $faqSchemaEligible,
+        mixed $schemaEligibilityReviewedAt,
+    ): array {
+        if ($status !== ContentPage::STATUS_PUBLISHED || ! $isPublic || ! $this->isScienceControlledPage($normalizedSlug, $pageType, $scienceReviewRequired)) {
+            return [];
+        }
+
+        $errors = [];
+        if (! $publishAllowed) {
+            $errors['publish_allowed'][] = 'publish_allowed must be true before publishing a Science ContentPage.';
+        }
+        if ($operatorApprovalRequired && $operatorApprovedAt === null) {
+            $errors['operator_approved_at'][] = 'operator_approved_at is required while operator_approval_required is true.';
+        }
+        if ($reviewState !== 'approved') {
+            $errors['review_state'][] = 'review_state must be approved before publishing a Science ContentPage.';
+        }
+        if ($legalReviewRequired) {
+            $errors['legal_review_required'][] = 'legal_review_required must be resolved before publishing a Science ContentPage.';
+        }
+        if ($scienceReviewRequired) {
+            $errors['science_review_required'][] = 'science_review_required must be resolved before publishing a Science ContentPage.';
+        }
+        if ($claimGateStatus !== 'passed') {
+            $errors['claim_gate_status'][] = 'claim_gate_status must be passed before publishing a Science ContentPage.';
+        }
+        if ($forbiddenClaims !== []) {
+            $errors['forbidden_claims'][] = 'forbidden_claims must be empty before publishing a Science ContentPage.';
+        }
+        if ($schemaEnabled && (! $faqSchemaEligible || $schemaEligibilityReviewedAt === null)) {
+            $errors['faq_schema_eligible'][] = 'faq_schema_eligible and schema_eligibility_reviewed_at are required when schema_enabled is true.';
+        }
+
+        return $errors;
+    }
+
+    private function isScienceControlledPage(string $normalizedSlug, string $pageType, bool $scienceReviewRequired): bool
+    {
+        return $scienceReviewRequired
+            || in_array($pageType, ['science', 'methodology', 'boundary'], true)
+            || in_array($normalizedSlug, ['science', 'method-boundaries', 'item-design-notes', 'reliability-validity', 'data-privacy', 'common-misconceptions'], true);
     }
 
     private function dateString(mixed $value): ?string
