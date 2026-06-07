@@ -80,19 +80,11 @@ class MediaAssetResource extends Resource
                     Forms\Components\FileUpload::make('uploaded_source')
                         ->label('Upload source image')
                         ->disk('public')
-                        ->directory('media-library/sources/inbox')
-                        ->visibility('public')
+                        ->storeFiles(false)
                         ->image()
                         ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
                         ->maxSize(10240)
                         ->dehydrated(false)
-                        ->afterStateUpdated(function (mixed $state, Forms\Set $set): void {
-                            $path = is_array($state) ? (string) reset($state) : (string) $state;
-                            if ($path !== '') {
-                                $set('disk', 'public');
-                                $set('path', $path);
-                            }
-                        })
                         ->helperText('Uploading a source image generates hero, card, thumbnail, og, and preload variants after save.')
                         ->columnSpanFull(),
                     Forms\Components\TextInput::make('asset_key')

@@ -10,6 +10,7 @@ use App\Services\Cms\MediaAssetStorageSyncService;
 use App\Services\Cms\MediaVariantGenerator;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Illuminate\Http\UploadedFile;
 
 class EditMediaAsset extends EditRecord
 {
@@ -26,11 +27,36 @@ class EditMediaAsset extends EditRecord
     protected function afterSave(): void
     {
         if ($this->record instanceof MediaAsset) {
-            $generator = app(MediaVariantGenerator::class);
-            if ($generator->canGenerate($this->record)) {
-                $asset = $generator->generate($this->record);
-                app(MediaAssetStorageSyncService::class)->syncAndVerify($asset);
-            }
+            $this->processMediaAssetSourceUpload($this->record);
         }
+    }
+
+    private function processMediaAssetSourceUpload(MediaAsset $record): void
+    {
+        $generator = app(MediaVariantGenerator::class);
+        $uploadedSource = $this->uploadedSourceFile();
+
+        if ($uploadedSource instanceof UploadedFile) {
+            $asset = $generator->storeUploadAndGenerate($record, $uploadedSource);
+            app(MediaAssetStorageSyncService::class)->syncAndVerify($asset);
+
+            return;
+        }
+
+        if ($generator->canGenerate($record)) {
+            $asset = $generator->generate($record);
+            app(MediaAssetStorageSyncService::class)->syncAndVerify($asset);
+        }
+    }
+
+    private function uploadedSourceFile(): ?UploadedFile
+    {
+        $state = data_get($this->form->getRawState(), 'uploaded_source');
+
+        if (is_array($state)) {
+            $state = reset($state);
+        }
+
+        return $state instanceof UploadedFile ? $state : null;
     }
 }
