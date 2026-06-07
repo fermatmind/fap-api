@@ -1,0 +1,247 @@
+{
+  "schema": "riasec-explanation-operator-input-media-blocker.v1",
+  "task_id": "RIASEC-EXPLANATION-OPERATOR-INPUT-MEDIA-BLOCKER-01",
+  "generated_at": "2026-06-08T04:45:00+08:00",
+  "decision": "CONDITIONAL_GO_OPERATOR_INPUTS_RECORDED_MEDIA_BLOCKER",
+  "publish_preflight_allowed": false,
+  "cms_mutation_allowed": false,
+  "publish_allowed": false,
+  "search_submission_allowed": false,
+  "deploy_allowed": false,
+  "content_rewrite_allowed": false,
+  "operator_inputs_recorded_from_current_scan": true,
+  "operator_approval_claimed": false,
+  "content_rewrite_performed": false,
+  "cms_mutation_performed": false,
+  "publish_performed": false,
+  "search_submission_performed": false,
+  "deploy_performed": false,
+  "private_url_accessed": false,
+  "source_reviews_used": [
+    "backend/docs/seo/generated/riasec-explanation-reference-source-review.v1.json",
+    "backend/docs/seo/generated/riasec-explanation-content-package-v2.validation.json",
+    "backend/docs/seo/generated/riasec-explanation-cms-draft-approval-preflight.v1.json",
+    "public read-only HTTP checks on FermatMind canonical routes",
+    "public O*NET and APA source checks"
+  ],
+  "draft_records": [
+    {
+      "locale": "zh",
+      "article_id": 40,
+      "working_revision_id": 45,
+      "slug": "riasec-holland-career-interest-test-explained",
+      "status": "draft",
+      "public": false,
+      "indexable": false,
+      "working_revision_status": "machine_draft",
+      "approval_decision": "hold_until_media_supplied"
+    },
+    {
+      "locale": "en",
+      "article_id": 41,
+      "working_revision_id": 46,
+      "slug": "what-is-riasec-holland-code-career-interest-test",
+      "status": "draft",
+      "public": false,
+      "indexable": false,
+      "working_revision_status": "machine_draft",
+      "approval_decision": "hold_until_media_supplied"
+    }
+  ],
+  "operator_input_decisions": {
+    "reference_acceptance": {
+      "status": "accepted_for_operator_recording",
+      "citation_style": "cms_references_visible_reference_section",
+      "accepted_source_urls": [
+        "https://www.onetcenter.org/reports/IP_Manual.html",
+        "https://www.onetcenter.org/content.html",
+        "https://www.onetcenter.org/dictionary/20.2/text/interests.html",
+        "https://services.onetcenter.org/reference/mpp/ip",
+        "https://dictionary.apa.org/five-factor-personality-model"
+      ],
+      "accepted_source_titles": [
+        "O*NET Interest Profiler Manual",
+        "The O*NET Content Model",
+        "O*NET Interests Data Dictionary",
+        "O*NET Interest Profiler API Reference",
+        "APA Dictionary: Five-Factor Personality Model"
+      ],
+      "source_to_claim_acceptance": [
+        {
+          "source_url": "https://www.onetcenter.org/reports/IP_Manual.html",
+          "accepted_for": [
+            "RIASEC and Holland Code background",
+            "career exploration and career guidance context",
+            "non-deterministic vocational-interest framing"
+          ]
+        },
+        {
+          "source_url": "https://www.onetcenter.org/content.html",
+          "accepted_for": [
+            "career interests as broad types of work",
+            "distinction between career interests, abilities, and work styles"
+          ]
+        },
+        {
+          "source_url": "https://www.onetcenter.org/dictionary/20.2/text/interests.html",
+          "accepted_for": [
+            "RIASEC interest labels",
+            "occupation-to-interest data context"
+          ]
+        },
+        {
+          "source_url": "https://services.onetcenter.org/reference/mpp/ip",
+          "accepted_for": [
+            "career-exploration system context",
+            "Interest Profiler results and career-listing service categories"
+          ]
+        },
+        {
+          "source_url": "https://dictionary.apa.org/five-factor-personality-model",
+          "accepted_for": [
+            "Big Five comparison boundary only",
+            "no claim that Big Five replaces RIASEC"
+          ]
+        }
+      ],
+      "holland_hexagon_terms_acceptance": "accepted_with_exploratory_boundary",
+      "mbti_big_five_comparison_acceptance": "accepted_conservative_comparison_only",
+      "no_official_affiliation_acknowledgement": true,
+      "no_official_affiliation_note": "Do not imply endorsement, certification, partnership, licensing, or official association with O*NET, DOL, APA, Holland, MBTI publishers, or any official body."
+    },
+    "claim_warning_decision": {
+      "status": "acknowledged",
+      "zh_claim_warning_count": 2,
+      "en_claim_warning_count": 0,
+      "claim_warning_acknowledgement": true,
+      "gpt_revision_required": false,
+      "reason": "Current validation records claim_boundary=pass. Risk phrases are treated as limitation, negation, or boundary context rather than diagnosis, career guarantee, official certification, or deterministic matching."
+    },
+    "internal_link_decision": {
+      "status": "activate_public_canonical_links",
+      "conditional_links_activation_decision": "activate",
+      "activated_links": [
+        "/zh/career/jobs",
+        "/en/career/jobs"
+      ],
+      "reason": "Read-only production checks returned 200, canonical, indexable pages and sitemap plus llms enumeration for both career jobs index routes."
+    },
+    "cta_route_decision": {
+      "status": "accepted_public_canonical_routes_only",
+      "primary_cta_routes": [
+        "/zh/tests/holland-career-interest-test-riasec",
+        "/en/tests/holland-career-interest-test-riasec"
+      ],
+      "reason": "Read-only production checks returned 200, canonical, indexable pages and sitemap plus llms enumeration for both RIASEC test routes."
+    },
+    "product_availability_decision": {
+      "status": "conditional_pass",
+      "product_availability_confirmed": true,
+      "product_availability_scope": "public_riasec_cta_route_only",
+      "report_preview_language_confirmed": "conditional_pass_non_promissory",
+      "reason": "Article package language uses exploratory and non-promissory report framing. It must not be expanded into a guarantee that every report module is available or complete."
+    },
+    "media_resolution": {
+      "status": "blocked",
+      "cms_media_id": "Unknown",
+      "cover_image_url": "Unknown",
+      "cover_image_alt_reviewed": "Unknown",
+      "og_image_ready": "Unknown",
+      "twitter_image_ready": "Unknown",
+      "required_next_input": "Select or upload a CMS Media Library cover image, then record CMS media ID, public cover URL, reviewed alt, and social image readiness."
+    },
+    "revision_approval": {
+      "status": "hold",
+      "zh_revision_id": 45,
+      "en_revision_id": 46,
+      "approved_by": "Unknown",
+      "approved_at": "Unknown",
+      "approval_notes": "Hold revision approval until media_resolution status is no longer blocked. No Codex content rewrite was performed.",
+      "cms_draft_approval_allowed": false
+    }
+  },
+  "public_route_observations": {
+    "safe_public_routes": [
+      {
+        "route": "/zh/tests/holland-career-interest-test-riasec",
+        "http_status": 200,
+        "canonical": "https://fermatmind.com/zh/tests/holland-career-interest-test-riasec",
+        "robots": "index, follow",
+        "sitemap_count": 1,
+        "llms_count": 1
+      },
+      {
+        "route": "/en/tests/holland-career-interest-test-riasec",
+        "http_status": 200,
+        "canonical": "https://fermatmind.com/en/tests/holland-career-interest-test-riasec",
+        "robots": "index, follow",
+        "sitemap_count": 1,
+        "llms_count": 1
+      },
+      {
+        "route": "/zh/career/jobs",
+        "http_status": 200,
+        "canonical": "https://fermatmind.com/zh/career/jobs",
+        "robots": "index, follow",
+        "sitemap_count": "nonzero",
+        "llms_count": "nonzero"
+      },
+      {
+        "route": "/en/career/jobs",
+        "http_status": 200,
+        "canonical": "https://fermatmind.com/en/career/jobs",
+        "robots": "index, follow",
+        "sitemap_count": "nonzero",
+        "llms_count": "nonzero"
+      }
+    ],
+    "draft_route_exposure": [
+      {
+        "route": "/zh/articles/riasec-holland-career-interest-test-explained",
+        "http_status": 404,
+        "sitemap_count": 0,
+        "llms_count": 0
+      },
+      {
+        "route": "/en/articles/what-is-riasec-holland-code-career-interest-test",
+        "http_status": 404,
+        "sitemap_count": 0,
+        "llms_count": 0
+      }
+    ]
+  },
+  "remaining_blockers": [
+    {
+      "id": "cms_media_missing",
+      "status": "blocked",
+      "owner": "cms_operator_or_design_owner",
+      "required_input": "CMS Media Library cover image ID, public URL, reviewed alt text, OG image readiness, and Twitter image readiness."
+    },
+    {
+      "id": "revision_approval_held_until_media",
+      "status": "blocked",
+      "owner": "operator_editor",
+      "required_input": "Approve zh revision 45 and en revision 46 only after media_resolution is supplied."
+    },
+    {
+      "id": "publish_preflight_not_authorized",
+      "status": "hard_gate",
+      "owner": "operator",
+      "required_input": "Separate authorization is required before SEO-ARTICLE-RIASEC-V2-PUBLISH-PREFLIGHT-01."
+    }
+  ],
+  "next_step": {
+    "id": "RIASEC_V2_CMS_MEDIA_SELECTION_REQUIRED",
+    "recommended_action": "Supply CMS Media Library cover image inputs, then run a media-resolution recording PR or CMS draft approval update with separate explicit CMS mutation authorization if needed.",
+    "not_recommended_yet": "SEO-ARTICLE-RIASEC-V2-PUBLISH-PREFLIGHT-01"
+  },
+  "hard_boundaries": {
+    "no_article_body_title_h1_meta_faq_cta_rewrite": true,
+    "no_cms_mutation": true,
+    "no_publish": true,
+    "no_search_submission": true,
+    "no_deploy": true,
+    "public_canonical_routes_only": true,
+    "no_private_or_tokenized_url_access": true
+  }
+}
