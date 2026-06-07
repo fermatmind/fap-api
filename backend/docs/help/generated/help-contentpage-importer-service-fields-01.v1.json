@@ -1,0 +1,73 @@
+{
+  "schema": "help-contentpage-importer-service-fields-01.v1",
+  "task": "HELP-CONTENTPAGE-IMPORTER-SERVICE-FIELDS-01",
+  "generated_at": "2026-06-08",
+  "decision": "CONTENT_PAGE_BASELINE_IMPORTER_SUPPORTS_HELP_SERVICE_FIELDS_WITHOUT_CMS_MUTATION",
+  "depends_on": [
+    "HELP-CMS-SERVICE-FIELDS-01",
+    "HELP-CONTENT-DRAFT-POLICY-REVISION-APPLY-01"
+  ],
+  "implemented_fields": [
+    "support_contact",
+    "policy_version",
+    "reviewer",
+    "faq_items",
+    "schema_enabled"
+  ],
+  "runtime": {
+    "command": "content-pages:import-local-baseline",
+    "changed_file": "backend/app/Console/Commands/ContentPagesImportLocalBaseline.php",
+    "supports_dry_run": true,
+    "supports_upsert": true,
+    "supports_draft_status": true,
+    "cms_mutation_performed": false
+  },
+  "contract": {
+    "test_file": "backend/tests/Feature/ContentPages/ContentPagePublicApiTest.php",
+    "focused_test": "test_help_service_importer_materializes_service_fields_on_draft_rows",
+    "source_package": "backend/docs/help/import-packages/content-pages-draft-source/content_pages.help_service_drafts_01.json",
+    "expected_rows": 12,
+    "expected_support_contact": "support@fermatmind.com",
+    "expected_policy_version": "help_service_policy.v1",
+    "expected_reviewer": "Unknown",
+    "expected_faq_items_per_row": 4,
+    "expected_schema_enabled": false,
+    "expected_public_rows": 0,
+    "expected_indexable_rows": 0,
+    "expected_published_rows": 0
+  },
+  "runtime_freeze_scope_guard": {
+    "test_file": "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+    "existing_test": "test_runtime_freeze_classifier_ignores_content_pages_local_baseline_import_package_changes",
+    "changed_runtime_file_allowed": "backend/app/Console/Commands/ContentPagesImportLocalBaseline.php"
+  },
+  "no_go_checks": {
+    "cms_mutation_performed": false,
+    "publish_performed": false,
+    "deploy_performed": false,
+    "search_submission_performed": false,
+    "private_url_access_performed": false,
+    "secret_env_cookie_token_read": false,
+    "payment_or_refund_performed": false,
+    "payment_provider_changed": false,
+    "operator_approval_claimed": false
+  },
+  "sidecars": [
+    {
+      "id": "HELP-CMS-SERVICE-FIELDS-PROD-RUNTIME-01",
+      "status": "required_followup",
+      "note": "Production runtime must include this importer mapping before HELP-CONTENT-DRAFT-POLICY-CMS-SYNC-01 can write the revised fields into existing draft rows."
+    },
+    {
+      "id": "HELP-CONTENT-DRAFT-POLICY-CMS-SYNC-01",
+      "status": "blocked_until_runtime_synced",
+      "note": "CMS draft sync remains blocked until production runtime contains the importer service-field mapping."
+    },
+    {
+      "id": "HELP-CONTENT-DRAFT-PUBLISH-BLOCK",
+      "status": "hard_gate",
+      "note": "Publish remains blocked and requires Operator review, publish preflight, and exact publish authorization."
+    }
+  ],
+  "next_task_recommendation": "HELP-CMS-SERVICE-FIELDS-PROD-RUNTIME-01"
+}

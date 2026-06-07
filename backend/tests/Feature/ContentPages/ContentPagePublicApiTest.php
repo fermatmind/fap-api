@@ -288,6 +288,51 @@ final class ContentPagePublicApiTest extends TestCase
         ], $page->faq_items);
     }
 
+    public function test_help_service_importer_materializes_service_fields_on_draft_rows(): void
+    {
+        $this->artisan('content-pages:import-local-baseline', [
+            '--upsert' => true,
+            '--status' => ContentPage::STATUS_DRAFT,
+            '--source-dir' => 'docs/help/import-packages/content-pages-draft-source',
+        ])
+            ->expectsOutputToContain('files_found=1')
+            ->expectsOutputToContain('pages_found=12')
+            ->expectsOutputToContain('will_create=12')
+            ->assertExitCode(0);
+
+        $targetSlugs = [
+            'help-unlock-failure',
+            'help-payment-refund',
+            'help-result-recovery',
+            'help-privacy-data',
+            'help-use-boundaries',
+            'help-data-deletion',
+        ];
+
+        $rows = ContentPage::query()
+            ->withoutGlobalScopes()
+            ->whereIn('slug', $targetSlugs)
+            ->whereIn('locale', ['zh-CN', 'en'])
+            ->get();
+
+        $this->assertCount(12, $rows);
+
+        foreach ($rows as $row) {
+            $this->assertSame(ContentPage::STATUS_DRAFT, (string) $row->status);
+            $this->assertFalse((bool) $row->is_public);
+            $this->assertFalse((bool) $row->is_indexable);
+            $this->assertNull($row->published_at);
+            $this->assertSame('owner_review', (string) $row->review_state);
+            $this->assertSame('support@fermatmind.com', (string) $row->support_contact);
+            $this->assertSame('help_service_policy.v1', (string) $row->policy_version);
+            $this->assertSame('Unknown', (string) $row->reviewer);
+            $this->assertFalse((bool) $row->schema_enabled);
+            $this->assertCount(4, $row->faq_items ?? []);
+            $this->assertArrayHasKey('question', ($row->faq_items ?? [])[0] ?? []);
+            $this->assertArrayHasKey('answer', ($row->faq_items ?? [])[0] ?? []);
+        }
+    }
+
     /**
      * @param  list<string>  $permissions
      */
