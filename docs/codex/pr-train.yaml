@@ -22016,6 +22016,47 @@ prs:
     content_authority: CMS/backend
     next_task: HELP-CMS-SERVICE-FIELDS-PROD-RUNTIME-01
 
+  - id: HELP-CMS-SERVICE-FIELDS-PROD-RUNTIME-01
+    repo: fap-api
+    depends_on:
+      - HELP-CONTENTPAGE-IMPORTER-SERVICE-FIELDS-01
+    branch: codex/help-cms-service-fields-prod-runtime-01
+    title: "docs(help): verify Help service fields production runtime"
+    train_scope: window_9_help_service_content
+    status: in_progress
+    scope:
+      - Read-only confirm whether production runtime contains the merged ContentPage Help service fields migration, publish safety fields migration, and content-pages:import-local-baseline service-field mapping.
+      - If production does not expose enough evidence to confirm the target SHA, record Unknown and output an exact deploy authorization prompt only.
+      - Reconcile HELP-CONTENTPAGE-IMPORTER-SERVICE-FIELDS-01 merged state because it is the dependency for this runtime verification.
+      - Preserve no deploy, no CMS mutation, no publish, no search submission, no private URL access, no secret/env/cookie/token read, no payment/refund action, no payment-provider change, and no Operator approval claim.
+    allowed_paths:
+      - backend/docs/help/generated/help-cms-service-fields-prod-runtime-01.v1.json
+      - backend/docs/operations/help-cms-service-fields-prod-runtime-2026-06-08.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Deploy production, mutate CMS data, publish, submit search URLs, access private result/order/share/pay/payment/history URLs, read secrets/env/cookies/tokens, run payment/refund flows, change payment-provider behavior, add frontend fallback content, or claim Operator approval.
+    validation:
+      - python3 -m json.tool backend/docs/help/generated/help-cms-service-fields-prod-runtime-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- backend/docs/help/generated/help-cms-service-fields-prod-runtime-01.v1.json backend/docs/operations/help-cms-service-fields-prod-runtime-2026-06-08.md docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: HELP-CONTENT-DRAFT-POLICY-CMS-SYNC-01
+
   - id: PUBLIC-BENEFIT-ASSET-PACKAGES-ARCHIVE-01
     repo: fap-api
     branch: codex/public-benefit-asset-packages-archive-01

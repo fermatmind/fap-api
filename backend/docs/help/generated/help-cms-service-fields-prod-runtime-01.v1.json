@@ -1,0 +1,88 @@
+{
+  "schema": "help-cms-service-fields-prod-runtime-01.v1",
+  "task": "HELP-CMS-SERVICE-FIELDS-PROD-RUNTIME-01",
+  "generated_at": "2026-06-08",
+  "decision": "PRODUCTION_RUNTIME_SHA_UNKNOWN_DEPLOY_PROMPT_REQUIRED",
+  "scope": "Read-only production runtime verification for ContentPage Help service fields, publish safety fields, and local baseline importer service-field mapping.",
+  "target": {
+    "repo": "fermatmind/fap-api",
+    "target_sha": "b70cd7291810b7f13416c5e51cbcbd8daabaf0cd",
+    "target_sha_basis": "origin/main at scan time; includes PR #1956 importer mapping, PR #1959 publish safety fields, and newer PRs #1960 and #1961 already merged into main.",
+    "required_commits": [
+      {
+        "pr": 1956,
+        "sha": "9cae1f45ee55acf11df43376e80387957c2049a3",
+        "requirement": "content-pages:import-local-baseline maps support_contact, policy_version, reviewer, faq_items, and schema_enabled."
+      },
+      {
+        "pr": 1959,
+        "sha": "13e62a0389124e4acb90f4b7467a26ea996cf24e",
+        "requirement": "ContentPage publish safety fields are present in the runtime target."
+      },
+      {
+        "pr": 1960,
+        "sha": "d8550f1c689d051445b6ae1b67624222dda5ca1a",
+        "requirement": "Newer included main commit; deploying latest main includes this already-merged science dry-run lock PR."
+      },
+      {
+        "pr": 1961,
+        "sha": "b70cd7291810b7f13416c5e51cbcbd8daabaf0cd",
+        "requirement": "Newest origin/main commit at scan time; deploying latest main includes this already-merged RIASEC media selection blocker documentation PR."
+      }
+    ]
+  },
+  "local_main_evidence": {
+    "origin_main_sha": "b70cd7291810b7f13416c5e51cbcbd8daabaf0cd",
+    "origin_main_contains_pr_1956_merge": true,
+    "origin_main_contains_pr_1959_merge": true,
+    "origin_main_contains_pr_1960_merge": true,
+    "origin_main_contains_pr_1961_merge": true,
+    "help_service_fields_migration_present": true,
+    "publish_safety_fields_migration_present": true,
+    "importer_service_field_mapping_present": true
+  },
+  "public_production_evidence": {
+    "api_root_status": 200,
+    "healthz_status": 404,
+    "help_content_page_public_status": 404,
+    "release_sha_publicly_visible": false,
+    "production_active_sha": "Unknown",
+    "production_contains_target_sha": "Unknown",
+    "notes": [
+      "Public API root is online but does not expose a release SHA.",
+      "The restricted /api/healthz path returned 404 from public unauthenticated access.",
+      "Draft Help content page public routes returned 404, which is compatible with draft/non-public status and does not prove runtime SHA.",
+      "No SSH, secret, env, cookie, token, private URL, CMS mutation, deploy, publish, search submission, payment, or refund action was performed."
+    ]
+  },
+  "runtime_requirements": {
+    "content_pages_migration": "backend/database/migrations/2026_06_05_150000_add_help_service_fields_to_content_pages.php",
+    "publish_safety_migration": "backend/database/migrations/2026_06_08_010000_add_publish_safety_fields_to_content_pages.php",
+    "importer": "backend/app/Console/Commands/ContentPagesImportLocalBaseline.php",
+    "required_importer_fields": [
+      "support_contact",
+      "policy_version",
+      "reviewer",
+      "faq_items",
+      "schema_enabled"
+    ]
+  },
+  "go_no_go": {
+    "policy_cms_sync_go": false,
+    "reason": "Production active SHA is Unknown from public read-only evidence. HELP-CONTENT-DRAFT-POLICY-CMS-SYNC-01 should wait until production is confirmed to contain target SHA b70cd7291810b7f13416c5e51cbcbd8daabaf0cd or a newer SHA containing it."
+  },
+  "exact_deploy_authorization_prompt": "I explicitly approve backend production deploy for exact SHA b70cd7291810b7f13416c5e51cbcbd8daabaf0cd release help-cms-service-fields-prod-runtime-20260608-b70cd729.",
+  "scope_validation": {
+    "cms_mutation_performed": false,
+    "publish_performed": false,
+    "deploy_performed": false,
+    "search_submission_performed": false,
+    "private_url_access_performed": false,
+    "secret_env_cookie_token_read": false,
+    "payment_or_refund_performed": false,
+    "payment_provider_changed": false,
+    "operator_approval_claimed": false,
+    "frontend_fallback_content_added": false
+  },
+  "next_task_recommendation": "HELP-CMS-SERVICE-FIELDS-PROD-RELEASE-01"
+}
