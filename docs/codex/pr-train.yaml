@@ -21965,6 +21965,57 @@ prs:
     content_authority: CMS/backend
     next_task: HELP-CONTENT-DRAFT-POLICY-CMS-SYNC-01
 
+  - id: HELP-CONTENTPAGE-IMPORTER-SERVICE-FIELDS-01
+    repo: fap-api
+    depends_on:
+      - HELP-CMS-SERVICE-FIELDS-01
+      - HELP-CONTENT-DRAFT-POLICY-REVISION-APPLY-01
+    branch: codex/help-contentpage-importer-service-fields-01
+    title: "feat(cms): map Help service fields in ContentPage importer"
+    train_scope: window_9_help_service_content
+    status: in_progress
+    scope:
+      - Make content-pages:import-local-baseline materialize support_contact, policy_version, reviewer, faq_items, and schema_enabled from ContentPage source rows.
+      - Add focused contract coverage using the existing 12-row Help service source package.
+      - Preserve draft-only, non-public, non-indexable, unpublished, and schema_enabled=false gates for the Help service package.
+      - Reuse the existing runtime-freeze scope guard for ContentPagesImportLocalBaseline.php.
+      - Reconcile HELP-CONTENT-DRAFT-POLICY-REVISION-APPLY-01 merged state because it blocks this follow-up train item.
+    allowed_paths:
+      - backend/app/Console/Commands/ContentPagesImportLocalBaseline.php
+      - backend/tests/Feature/ContentPages/ContentPagePublicApiTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/docs/help/generated/help-contentpage-importer-service-fields-01.v1.json
+      - backend/docs/operations/help-contentpage-importer-service-fields-2026-06-08.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Mutate CMS data, publish, deploy, submit search URLs, access private result/order/share/pay/payment/history URLs, read secrets/env/cookies/tokens, run payment/refund flows, change payment-provider behavior, add frontend fallback content, or claim Operator approval.
+    validation:
+      - php -l backend/app/Console/Commands/ContentPagesImportLocalBaseline.php
+      - php -l backend/tests/Feature/ContentPages/ContentPagePublicApiTest.php
+      - php -l backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - python3 -m json.tool backend/docs/help/generated/help-contentpage-importer-service-fields-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='ContentPagePublicApiTest::test_help_service_importer_materializes_service_fields_on_draft_rows|ContentPagePublicApiTest::test_help_service_fields_are_first_class_content_page_contracts' --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_content_pages_local_baseline_import_package_changes|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff' --no-ansi
+      - git diff --check -- backend/app/Console/Commands/ContentPagesImportLocalBaseline.php backend/tests/Feature/ContentPages/ContentPagePublicApiTest.php backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php backend/docs/help/generated/help-contentpage-importer-service-fields-01.v1.json backend/docs/operations/help-contentpage-importer-service-fields-2026-06-08.md docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: HELP-CMS-SERVICE-FIELDS-PROD-RUNTIME-01
+
   - id: PUBLIC-BENEFIT-ASSET-PACKAGES-ARCHIVE-01
     repo: fap-api
     branch: codex/public-benefit-asset-packages-archive-01

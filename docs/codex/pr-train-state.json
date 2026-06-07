@@ -45651,7 +45651,7 @@
     "repo": "fap-api",
     "branch": "codex/help-content-draft-policy-revision-apply-01",
     "base": "origin/main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "window_9_help_service_content",
     "title": "docs(help): apply Help policy answers to draft package",
     "depends_on": [
@@ -45741,11 +45741,11 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": "65b4971023b99af993011894b4684ae8896d41d3",
+    "commit_sha": "bb0a3c1098060ae37dbde07fdb051ddb3d8fcf29",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1954",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-05T15:37:11Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "result": {
       "decision": "LOCAL_IMPORT_PACKAGE_REVISED_WITH_CMS_SYNC_AND_PUBLISH_BLOCKED",
       "generated_artifact": "backend/docs/help/generated/help-content-draft-policy-revision-apply-01.v1.json",
@@ -45808,6 +45808,140 @@
         "at": "2026-06-05",
         "status": "ready_to_merge",
         "note": "All GitHub checks passed and merge state was CLEAN. Scope remained local package/import artifact, docs, focused package contract, and PR-train metadata only."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "merged_status_reconciled",
+        "note": "Reconciled PR #1954 merge facts while preparing HELP-CONTENTPAGE-IMPORTER-SERVICE-FIELDS-01; GitHub reported merge commit bb0a3c1098060ae37dbde07fdb051ddb3d8fcf29 and origin/main contains it."
+      }
+    ]
+  },
+  "HELP-CONTENTPAGE-IMPORTER-SERVICE-FIELDS-01": {
+    "repo": "fap-api",
+    "branch": "codex/help-contentpage-importer-service-fields-01",
+    "base": "origin/main",
+    "status": "local_checks_passed",
+    "train_scope": "window_9_help_service_content",
+    "title": "feat(cms): map Help service fields in ContentPage importer",
+    "depends_on": [
+      "HELP-CMS-SERVICE-FIELDS-01",
+      "HELP-CONTENT-DRAFT-POLICY-REVISION-APPLY-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized supplementing and executing HELP-CONTENTPAGE-IMPORTER-SERVICE-FIELDS-01 with no CMS mutation, publish, deploy, search submission, private URL access, secret/env/cookie/token read, payment/refund action, payment-provider change, or Operator approval claim."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "HELP-CMS-SERVICE-FIELDS-01 is merged; HELP-CONTENT-DRAFT-POLICY-REVISION-APPLY-01 is reconciled as merged with merge commit bb0a3c1098060ae37dbde07fdb051ddb3d8fcf29 on origin/main."
+      },
+      "scope_preflight": {
+        "status": "pass",
+        "evidence": "Current scope changes importer field mapping, focused tests, runtime-freeze scope evidence, generated artifact, operations report, and PR-train metadata only. No CMS mutation, publish, deploy, search submission, private URL access, payment/refund action, payment-provider change, or secret/env/cookie/token read is allowed."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          {
+            "command": "php -l backend/app/Console/Commands/ContentPagesImportLocalBaseline.php",
+            "status": "pass"
+          },
+          {
+            "command": "php -l backend/tests/Feature/ContentPages/ContentPagePublicApiTest.php",
+            "status": "pass"
+          },
+          {
+            "command": "php -l backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+            "status": "pass"
+          },
+          {
+            "command": "python3 -m json.tool backend/docs/help/generated/help-contentpage-importer-service-fields-01.v1.json >/dev/null",
+            "status": "pass"
+          },
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "pass"
+          },
+          {
+            "command": "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+            "status": "pass"
+          },
+          {
+            "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='ContentPagePublicApiTest::test_help_service_importer_materializes_service_fields_on_draft_rows|ContentPagePublicApiTest::test_help_service_fields_are_first_class_content_page_contracts' --no-ansi",
+            "status": "passed_with_warning",
+            "notes": "Exited 0 with 160 assertions and existing Laravel file_get_contents warnings."
+          },
+          {
+            "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_content_pages_local_baseline_import_package_changes|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff' --no-ansi",
+            "status": "passed_with_warning",
+            "notes": "Exited 0 with 4 assertions and existing Laravel file_get_contents warnings."
+          },
+          {
+            "command": "git diff --check -- backend/app/Console/Commands/ContentPagesImportLocalBaseline.php backend/tests/Feature/ContentPages/ContentPagePublicApiTest.php backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php backend/docs/help/generated/help-contentpage-importer-service-fields-01.v1.json backend/docs/operations/help-contentpage-importer-service-fields-2026-06-08.md docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+            "status": "pass"
+          }
+        ]
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "result": {
+      "decision": "CONTENT_PAGE_BASELINE_IMPORTER_SUPPORTS_HELP_SERVICE_FIELDS_WITHOUT_CMS_MUTATION",
+      "generated_artifact": "backend/docs/help/generated/help-contentpage-importer-service-fields-01.v1.json",
+      "operations_report": "backend/docs/operations/help-contentpage-importer-service-fields-2026-06-08.md",
+      "next_task_recommendation": "HELP-CMS-SERVICE-FIELDS-PROD-RUNTIME-01"
+    },
+    "scope_validation": {
+      "cms_mutation_performed": false,
+      "publish_performed": false,
+      "deploy_performed": false,
+      "search_submission_performed": false,
+      "payment_or_refund_performed": false,
+      "payment_provider_changed": false,
+      "private_url_access_performed": false,
+      "secret_env_cookie_token_read": false,
+      "operator_approval_claimed": false,
+      "frontend_fallback_content_added": false,
+      "allowed_paths_only": true
+    },
+    "sidecars": [
+      {
+        "id": "HELP-CMS-SERVICE-FIELDS-PROD-RUNTIME-01",
+        "status": "required_followup",
+        "note": "Production runtime must include this importer mapping before policy CMS sync can write revised fields."
+      },
+      {
+        "id": "HELP-CONTENT-DRAFT-POLICY-CMS-SYNC-01",
+        "status": "blocked_until_runtime_synced",
+        "note": "CMS draft sync remains blocked until production runtime contains this importer service-field mapping."
+      },
+      {
+        "id": "HELP-CONTENT-DRAFT-PUBLISH-BLOCK",
+        "status": "hard_gate",
+        "note": "Publish remains blocked and requires Operator review, publish preflight, and exact publish authorization."
+      }
+    ],
+    "next_task": "HELP-CMS-SERVICE-FIELDS-PROD-RUNTIME-01",
+    "transitions": [
+      {
+        "at": "2026-06-08",
+        "status": "authorized",
+        "note": "User authorized HELP-CONTENTPAGE-IMPORTER-SERVICE-FIELDS-01 manifest/state entry and execution."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "local_artifacts_created_validation_pending",
+        "note": "Added importer field mapping, focused import contract, generated artifact, operations report, and PR-train metadata; local validation pending."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "local_checks_passed",
+        "note": "PHP lint, JSON/YAML parse, focused ContentPage importer contract, runtime-freeze scope guard, and scoped diff whitespace checks passed."
       }
     ]
   },

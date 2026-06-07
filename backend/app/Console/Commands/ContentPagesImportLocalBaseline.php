@@ -189,6 +189,11 @@ final class ContentPagesImportLocalBaseline extends Command
             'meta_description' => $this->nullableString($row['metaDescription'] ?? $row['meta_description'] ?? $row['summary'] ?? null),
             'seo_description' => $this->nullableString($row['seoDescription'] ?? $row['seo_description'] ?? $row['metaDescription'] ?? $row['meta_description'] ?? $row['summary'] ?? null),
             'canonical_path' => $this->nullableString($row['canonicalPath'] ?? $row['canonical_path'] ?? null),
+            'support_contact' => $this->nullableString($row['support_contact'] ?? $row['supportContact'] ?? null),
+            'policy_version' => $this->nullableString($row['policy_version'] ?? $row['policyVersion'] ?? null),
+            'reviewer' => $this->nullableString($row['reviewer'] ?? null),
+            'faq_items' => $this->normalizeFaqItems($row['faq_items'] ?? $row['faqItems'] ?? []),
+            'schema_enabled' => (bool) ($row['schema_enabled'] ?? $row['schemaEnabled'] ?? false),
             'status' => $status,
         ];
     }
@@ -299,6 +304,36 @@ final class ContentPagesImportLocalBaseline extends Command
         $trimmed = trim((string) $value);
 
         return $trimmed !== '' ? $trimmed : null;
+    }
+
+    /**
+     * @return list<array{question:string,answer:string}>
+     */
+    private function normalizeFaqItems(mixed $value): array
+    {
+        if (! is_array($value)) {
+            return [];
+        }
+
+        $items = [];
+        foreach ($value as $item) {
+            if (! is_array($item)) {
+                continue;
+            }
+
+            $question = trim((string) ($item['question'] ?? $item['q'] ?? ''));
+            $answer = trim((string) ($item['answer'] ?? $item['a'] ?? ''));
+            if ($question === '' || $answer === '') {
+                continue;
+            }
+
+            $items[] = [
+                'question' => $question,
+                'answer' => $answer,
+            ];
+        }
+
+        return $items;
     }
 
     /**
