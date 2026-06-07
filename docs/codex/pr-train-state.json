@@ -48982,7 +48982,7 @@
     "repo": "fap-api",
     "branch": "codex/help-cms-service-fields-prod-runtime-01",
     "base": "origin/main",
-    "status": "pr_opened",
+    "status": "ready_to_merge",
     "train_scope": "window_9_help_service_content",
     "title": "docs(help): verify Help service fields production runtime",
     "depends_on": [
@@ -49063,12 +49063,23 @@
         ]
       },
       "github": {
-        "status": "pending",
-        "checks": []
+        "status": "pass",
+        "checks": [
+          "hygiene",
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "supply-chain",
+          "content-pack-build-validate",
+          "verify-bigfive",
+          "verify-mbti-legacy",
+          "verify-mbti-v2",
+          "Semgrep OSS"
+        ],
+        "merge_state": "CLEAN"
       }
     },
     "failure_reason": null,
-    "commit_sha": "e34465c8b20f395a8d354d12eaa47cdbfcbf4e38",
+    "commit_sha": "1868c6e1",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1962",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -49131,6 +49142,11 @@
         "at": "2026-06-08",
         "status": "pr_opened",
         "note": "Opened PR #1962 for HELP-CMS-SERVICE-FIELDS-PROD-RUNTIME-01."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed and merge state was clean. Scope remained docs-only runtime verification and PR-train metadata; production active SHA remains Unknown."
       }
     ]
   }
