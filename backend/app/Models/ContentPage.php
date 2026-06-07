@@ -52,6 +52,13 @@ final class ContentPage extends Model
         'changes_requested',
     ];
 
+    public const CLAIM_GATE_STATUSES = [
+        'not_reviewed',
+        'passed',
+        'failed',
+        'not_applicable',
+    ];
+
     public const TRANSLATION_STATUS_SOURCE = 'source';
 
     public const TRANSLATION_STATUS_DRAFT = 'draft';
@@ -113,6 +120,13 @@ final class ContentPage extends Model
         'reviewer',
         'faq_items',
         'schema_enabled',
+        'publish_allowed',
+        'operator_approval_required',
+        'operator_approved_at',
+        'claim_gate_status',
+        'forbidden_claims',
+        'faq_schema_eligible',
+        'schema_eligibility_reviewed_at',
         'status',
     ];
 
@@ -132,6 +146,12 @@ final class ContentPage extends Model
         'headings_json' => 'array',
         'faq_items' => 'array',
         'schema_enabled' => 'boolean',
+        'publish_allowed' => 'boolean',
+        'operator_approval_required' => 'boolean',
+        'operator_approved_at' => 'datetime',
+        'forbidden_claims' => 'array',
+        'faq_schema_eligible' => 'boolean',
+        'schema_eligibility_reviewed_at' => 'datetime',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];

@@ -12,6 +12,7 @@ use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Validation\ValidationException;
 
 class EditContentPage extends EditRecord
 {
@@ -79,6 +80,13 @@ class EditContentPage extends EditRecord
             'last_reviewed_at' => $editor->last_reviewed_at,
             'source_updated_at' => $editor->source_updated_at,
             'effective_at' => $editor->effective_at,
+            'publish_allowed' => (bool) $editor->publish_allowed,
+            'operator_approval_required' => (bool) $editor->operator_approval_required,
+            'operator_approved_at' => $editor->operator_approved_at,
+            'claim_gate_status' => (string) ($editor->claim_gate_status ?: 'not_reviewed'),
+            'forbidden_claims' => is_array($editor->forbidden_claims) ? array_values($editor->forbidden_claims) : [],
+            'faq_schema_eligible' => (bool) $editor->faq_schema_eligible,
+            'schema_eligibility_reviewed_at' => $editor->schema_eligibility_reviewed_at,
             'source_doc' => $editor->source_doc,
             'content_md' => (string) ($editor->content_md ?? ''),
             'content_html' => (string) ($editor->content_html ?? ''),
@@ -96,6 +104,8 @@ class EditContentPage extends EditRecord
         $workspace = app(RowBackedRevisionWorkspace::class);
         $status = (string) $data['status'];
         $reviewState = (string) $data['review_state'];
+        $this->validatePublishSafety($record, $data, $status, $reviewState);
+
         $revisionStatus = $record->isSourceContent()
             ? ContentPage::TRANSLATION_STATUS_SOURCE
             : ($status === ContentPage::STATUS_PUBLISHED
@@ -131,6 +141,13 @@ class EditContentPage extends EditRecord
                 'canonical_path' => $data['canonical_path'] ?? null,
                 'is_public' => (bool) ($data['is_public'] ?? false),
                 'is_indexable' => (bool) ($data['is_indexable'] ?? false),
+                'publish_allowed' => (bool) ($data['publish_allowed'] ?? false),
+                'operator_approval_required' => (bool) ($data['operator_approval_required'] ?? true),
+                'operator_approved_at' => $data['operator_approved_at'] ?? null,
+                'claim_gate_status' => (string) ($data['claim_gate_status'] ?? 'not_reviewed'),
+                'forbidden_claims' => array_values((array) ($data['forbidden_claims'] ?? [])),
+                'faq_schema_eligible' => (bool) ($data['faq_schema_eligible'] ?? false),
+                'schema_eligibility_reviewed_at' => $data['schema_eligibility_reviewed_at'] ?? null,
             ],
             $revisionStatus,
             [
@@ -140,6 +157,13 @@ class EditContentPage extends EditRecord
                 'last_reviewed_at' => $data['last_reviewed_at'] ?? null,
                 'source_updated_at' => $data['source_updated_at'] ?? null,
                 'effective_at' => $data['effective_at'] ?? null,
+                'publish_allowed' => (bool) ($data['publish_allowed'] ?? false),
+                'operator_approval_required' => (bool) ($data['operator_approval_required'] ?? true),
+                'operator_approved_at' => $data['operator_approved_at'] ?? null,
+                'claim_gate_status' => (string) ($data['claim_gate_status'] ?? 'not_reviewed'),
+                'forbidden_claims' => array_values((array) ($data['forbidden_claims'] ?? [])),
+                'faq_schema_eligible' => (bool) ($data['faq_schema_eligible'] ?? false),
+                'schema_eligibility_reviewed_at' => $data['schema_eligibility_reviewed_at'] ?? null,
             ],
         );
 
@@ -166,8 +190,67 @@ class EditContentPage extends EditRecord
             'page_type',
             'template',
             'animation_profile',
+            'publish_allowed',
+            'operator_approval_required',
+            'operator_approved_at',
+            'claim_gate_status',
+            'forbidden_claims',
+            'faq_schema_eligible',
+            'schema_eligibility_reviewed_at',
         ])) {
             ContentReleaseAudit::log('content_page', $record, 'content_page_resource_edit');
         }
+    }
+
+    /**
+     * @param  array<string, mixed>  $data
+     */
+    private function validatePublishSafety(ContentPage $record, array $data, string $status, string $reviewState): void
+    {
+        $isPublic = (bool) ($data['is_public'] ?? false);
+        $pageType = (string) ($data['page_type'] ?? $record->page_type);
+        $slug = (string) $record->slug;
+        $scienceReviewRequired = (bool) ($data['science_review_required'] ?? false);
+
+        if ($status !== ContentPage::STATUS_PUBLISHED || ! $isPublic || ! $this->isScienceControlledPage($slug, $pageType, $scienceReviewRequired)) {
+            return;
+        }
+
+        $errors = [];
+        if (! (bool) ($data['publish_allowed'] ?? false)) {
+            $errors['publish_allowed'][] = 'publish_allowed must be true before publishing a Science ContentPage.';
+        }
+        if ((bool) ($data['operator_approval_required'] ?? true) && ($data['operator_approved_at'] ?? null) === null) {
+            $errors['operator_approved_at'][] = 'operator_approved_at is required while operator_approval_required is true.';
+        }
+        if ($reviewState !== 'approved') {
+            $errors['review_state'][] = 'review_state must be approved before publishing a Science ContentPage.';
+        }
+        if ((bool) ($data['legal_review_required'] ?? false)) {
+            $errors['legal_review_required'][] = 'legal_review_required must be resolved before publishing a Science ContentPage.';
+        }
+        if ($scienceReviewRequired) {
+            $errors['science_review_required'][] = 'science_review_required must be resolved before publishing a Science ContentPage.';
+        }
+        if ((string) ($data['claim_gate_status'] ?? 'not_reviewed') !== 'passed') {
+            $errors['claim_gate_status'][] = 'claim_gate_status must be passed before publishing a Science ContentPage.';
+        }
+        if (array_values(array_filter((array) ($data['forbidden_claims'] ?? []))) !== []) {
+            $errors['forbidden_claims'][] = 'forbidden_claims must be empty before publishing a Science ContentPage.';
+        }
+        if ((bool) ($data['schema_enabled'] ?? false) && (! (bool) ($data['faq_schema_eligible'] ?? false) || ($data['schema_eligibility_reviewed_at'] ?? null) === null)) {
+            $errors['faq_schema_eligible'][] = 'faq_schema_eligible and schema_eligibility_reviewed_at are required when schema_enabled is true.';
+        }
+
+        if ($errors !== []) {
+            throw ValidationException::withMessages($errors);
+        }
+    }
+
+    private function isScienceControlledPage(string $slug, string $pageType, bool $scienceReviewRequired): bool
+    {
+        return $scienceReviewRequired
+            || in_array($pageType, ['science', 'methodology', 'boundary'], true)
+            || in_array($slug, ['science', 'method-boundaries', 'item-design-notes', 'reliability-validity', 'data-privacy', 'common-misconceptions'], true);
     }
 }

@@ -160,6 +160,13 @@ final class ContentPageTranslationAdapter extends AbstractSiblingTranslationAdap
             'reviewer' => $source->reviewer,
             'faq_items' => is_array($source->faq_items) ? $source->faq_items : [],
             'schema_enabled' => (bool) $source->schema_enabled,
+            'publish_allowed' => false,
+            'operator_approval_required' => true,
+            'operator_approved_at' => null,
+            'claim_gate_status' => 'not_reviewed',
+            'forbidden_claims' => [],
+            'faq_schema_eligible' => false,
+            'schema_eligibility_reviewed_at' => null,
         ];
     }
 
@@ -186,6 +193,13 @@ final class ContentPageTranslationAdapter extends AbstractSiblingTranslationAdap
             'reviewer' => $record->reviewer,
             'faq_items' => is_array($record->faq_items) ? $record->faq_items : [],
             'schema_enabled' => (bool) $record->schema_enabled,
+            'publish_allowed' => (bool) $record->publish_allowed,
+            'operator_approval_required' => (bool) $record->operator_approval_required,
+            'operator_approved_at' => $record->operator_approved_at,
+            'claim_gate_status' => (string) ($record->claim_gate_status ?: 'not_reviewed'),
+            'forbidden_claims' => is_array($record->forbidden_claims) ? $record->forbidden_claims : [],
+            'faq_schema_eligible' => (bool) $record->faq_schema_eligible,
+            'schema_eligibility_reviewed_at' => $record->schema_eligibility_reviewed_at,
         ];
     }
 
@@ -212,6 +226,13 @@ final class ContentPageTranslationAdapter extends AbstractSiblingTranslationAdap
             'reviewer' => $payload['reviewer'] ?? null,
             'faq_items' => array_values((array) ($payload['faq_items'] ?? [])),
             'schema_enabled' => (bool) ($payload['schema_enabled'] ?? false),
+            'publish_allowed' => (bool) ($payload['publish_allowed'] ?? false),
+            'operator_approval_required' => (bool) ($payload['operator_approval_required'] ?? true),
+            'operator_approved_at' => $payload['operator_approved_at'] ?? null,
+            'claim_gate_status' => (string) ($payload['claim_gate_status'] ?? 'not_reviewed'),
+            'forbidden_claims' => array_values((array) ($payload['forbidden_claims'] ?? [])),
+            'faq_schema_eligible' => (bool) ($payload['faq_schema_eligible'] ?? false),
+            'schema_eligibility_reviewed_at' => $payload['schema_eligibility_reviewed_at'] ?? null,
         ]);
     }
 }

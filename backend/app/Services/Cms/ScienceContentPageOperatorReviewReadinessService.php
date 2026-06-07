@@ -47,6 +47,13 @@ final class ScienceContentPageOperatorReviewReadinessService
             'science_review_required',
             'last_reviewed_at',
             'published_at',
+            'publish_allowed',
+            'operator_approval_required',
+            'operator_approved_at',
+            'claim_gate_status',
+            'forbidden_claims',
+            'faq_schema_eligible',
+            'schema_eligibility_reviewed_at',
             'is_public',
             'is_indexable',
             'source_doc',
@@ -68,6 +75,9 @@ final class ScienceContentPageOperatorReviewReadinessService
         $booleanCasts = $this->fieldStatus([
             'legal_review_required',
             'science_review_required',
+            'publish_allowed',
+            'operator_approval_required',
+            'faq_schema_eligible',
             'is_public',
             'is_indexable',
         ], array_keys(array_filter(
@@ -84,6 +94,13 @@ final class ScienceContentPageOperatorReviewReadinessService
             'science_review_required',
             'last_reviewed_at',
             'published_at',
+            'publish_allowed',
+            'operator_approval_required',
+            'operator_approved_at',
+            'claim_gate_status',
+            'forbidden_claims',
+            'faq_schema_eligible',
+            'schema_eligibility_reviewed_at',
             'owner',
             'source_doc',
             'content_md',
@@ -103,6 +120,13 @@ final class ScienceContentPageOperatorReviewReadinessService
             'science_review_required',
             'last_reviewed_at',
             'published_at',
+            'publish_allowed',
+            'operator_approval_required',
+            'operator_approved_at',
+            'claim_gate_status',
+            'forbidden_claims',
+            'faq_schema_eligible',
+            'schema_eligibility_reviewed_at',
             'owner',
             'source_doc',
             'content_md',
@@ -121,6 +145,13 @@ final class ScienceContentPageOperatorReviewReadinessService
             'science_review_required',
             'last_reviewed_at',
             'published_at',
+            'publish_allowed',
+            'operator_approval_required',
+            'operator_approved_at',
+            'claim_gate_status',
+            'forbidden_claims',
+            'faq_schema_eligible',
+            'schema_eligibility_reviewed_at',
             'owner',
             'content_md',
             'seo_title',
@@ -129,7 +160,7 @@ final class ScienceContentPageOperatorReviewReadinessService
             'canonical_path',
         ], $controllerSource);
 
-        $missingFirstClass = [
+        $publishSafetyFields = $this->fieldStatus([
             'publish_allowed',
             'operator_approval_required',
             'operator_approved_at',
@@ -137,7 +168,11 @@ final class ScienceContentPageOperatorReviewReadinessService
             'forbidden_claims',
             'faq_schema_eligible',
             'schema_eligibility_reviewed_at',
-        ];
+        ], $fillable);
+        $missingFirstClass = array_keys(array_filter(
+            $publishSafetyFields,
+            static fn (array $status): bool => ($status['present'] ?? false) !== true,
+        ));
 
         $draftPagesReviewable = $draftDryRun === null
             ? 'Unknown'
@@ -152,6 +187,7 @@ final class ScienceContentPageOperatorReviewReadinessService
         $coreReady = $this->allPresent($coreFields)
             && $this->allPresent($reviewStates)
             && $this->allPresent($booleanCasts)
+            && $this->allPresent($publishSafetyFields)
             && $this->allPresent($resourceFields)
             && $this->allPresent($editPersistence)
             && $this->allPresent($internalApiFields);
@@ -178,7 +214,7 @@ final class ScienceContentPageOperatorReviewReadinessService
             'natural_distribution_allowed' => false,
             'decision' => $coreReady ? 'CONDITIONAL' : 'NO-GO',
             'reason' => $coreReady
-                ? 'Core ContentPage review fields and CMS/API editing surfaces exist, but publish/claim/schema approval remains metadata or external QA rather than first-class CMS fields.'
+                ? 'Core ContentPage review fields, publish safety fields, and CMS/API editing surfaces exist, but operator approval and final publish decision remain unset.'
                 : 'Core ContentPage review fields or editing surfaces are missing.',
             'capabilities' => [
                 'content_page_core_fields' => $coreFields,
@@ -187,6 +223,7 @@ final class ScienceContentPageOperatorReviewReadinessService
                 'filament_operator_fields' => $resourceFields,
                 'filament_edit_persistence' => $editPersistence,
                 'internal_api_fields' => $internalApiFields,
+                'publish_safety_fields' => $publishSafetyFields,
             ],
             'missing_first_class_publish_safety_fields' => $missingFirstClass,
             'operator_must_check_before_publish' => [

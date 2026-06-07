@@ -131,6 +131,16 @@ class ContentPageResource extends Resource
                                                 Forms\Components\TextInput::make('reviewer')->maxLength(128),
                                                 Forms\Components\TextInput::make('source_doc')->maxLength(255),
                                                 Forms\Components\Toggle::make('schema_enabled')->default(false),
+                                                Forms\Components\Toggle::make('publish_allowed')->default(false),
+                                                Forms\Components\Toggle::make('operator_approval_required')->default(true),
+                                                Forms\Components\DateTimePicker::make('operator_approved_at'),
+                                                Forms\Components\Select::make('claim_gate_status')
+                                                    ->native(false)
+                                                    ->options(array_combine(ContentPage::CLAIM_GATE_STATUSES, ContentPage::CLAIM_GATE_STATUSES))
+                                                    ->default('not_reviewed'),
+                                                Forms\Components\TagsInput::make('forbidden_claims')->separator(','),
+                                                Forms\Components\Toggle::make('faq_schema_eligible')->default(false),
+                                                Forms\Components\DateTimePicker::make('schema_eligibility_reviewed_at'),
                                             ])
                                             ->columns(2),
                                     ]),

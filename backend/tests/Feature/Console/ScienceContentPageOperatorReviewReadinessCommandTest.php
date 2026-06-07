@@ -35,9 +35,6 @@ final class ScienceContentPageOperatorReviewReadinessCommandTest extends TestCas
             ->expectsOutputToContain('draft_pages_reviewable=5')
             ->expectsOutputToContain('draft_pages_requiring_authority_reconciliation=0')
             ->expectsOutputToContain('draft_pages_reconciled_existing_authority=1')
-            ->expectsOutputToContain('missing_first_class_publish_safety_field=publish_allowed')
-            ->expectsOutputToContain('missing_first_class_publish_safety_field=claim_gate_status')
-            ->expectsOutputToContain('missing_first_class_publish_safety_field=faq_schema_eligible')
             ->assertExitCode(0);
 
         $this->assertSame(0, ContentPage::query()->count());
@@ -67,9 +64,12 @@ final class ScienceContentPageOperatorReviewReadinessCommandTest extends TestCas
             $this->assertTrue($payload['capabilities']['internal_api_fields'][$field]['present']);
         }
 
-        $this->assertContains('operator_approval_required', $payload['missing_first_class_publish_safety_fields']);
-        $this->assertContains('claim_gate_status', $payload['missing_first_class_publish_safety_fields']);
-        $this->assertContains('faq_schema_eligible', $payload['missing_first_class_publish_safety_fields']);
+        $this->assertSame([], $payload['missing_first_class_publish_safety_fields']);
+        foreach (['publish_allowed', 'operator_approval_required', 'claim_gate_status', 'faq_schema_eligible'] as $field) {
+            $this->assertTrue($payload['capabilities']['publish_safety_fields'][$field]['present']);
+            $this->assertTrue($payload['capabilities']['filament_operator_fields'][$field]['present']);
+            $this->assertTrue($payload['capabilities']['internal_api_fields'][$field]['present']);
+        }
         $this->assertContains('sitemap_llms_footer_remain_false_until_final_gate', $payload['operator_must_check_before_publish']);
         $this->assertContains('no_real_import', $payload['hard_no_go']);
         $this->assertSame(0, ContentPage::query()->count());

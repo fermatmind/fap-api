@@ -333,6 +333,105 @@ final class ContentPagePublicApiTest extends TestCase
         }
     }
 
+    public function test_science_content_page_publish_requires_first_class_safety_fields(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_READ,
+            PermissionNames::ADMIN_CONTENT_WRITE,
+        ]);
+
+        $basePayload = [
+            'title' => 'Science hub',
+            'kicker' => 'Science',
+            'summary' => 'Draft science hub.',
+            'kind' => 'policy',
+            'page_type' => 'science',
+            'template' => 'policy',
+            'animation_profile' => 'policy',
+            'locale' => 'en',
+            'status' => ContentPage::STATUS_PUBLISHED,
+            'review_state' => 'science_review',
+            'published_at' => '2026-06-08',
+            'updated_at' => '2026-06-08',
+            'effective_at' => null,
+            'source_doc' => 'science-contentpage-cms-draft-package',
+            'is_public' => true,
+            'is_indexable' => true,
+            'content_md' => "## Science\n\nDraft-only science content.",
+            'content_html' => '',
+            'seo_title' => 'Science hub',
+            'meta_description' => 'Draft science hub.',
+            'canonical_path' => '/science',
+            'science_review_required' => true,
+            'legal_review_required' => true,
+            'schema_enabled' => true,
+            'faq_items' => [
+                [
+                    'question' => 'Is this reviewed?',
+                    'answer' => 'Not yet.',
+                ],
+            ],
+        ];
+
+        $this->withSession(['ops_org_id' => 0])
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->putJson('/api/v0.5/internal/content-pages/science', $basePayload)
+            ->assertStatus(422)
+            ->assertJsonPath('ok', false)
+            ->assertJsonPath('error_code', 'CONTENT_PAGE_PUBLISH_GATE_FAILED')
+            ->assertJsonValidationErrors([
+                'publish_allowed',
+                'operator_approved_at',
+                'review_state',
+                'legal_review_required',
+                'science_review_required',
+                'claim_gate_status',
+                'faq_schema_eligible',
+            ]);
+
+        $this->assertDatabaseMissing('content_pages', [
+            'slug' => 'science',
+            'locale' => 'en',
+        ]);
+
+        $approvedPayload = array_merge($basePayload, [
+            'review_state' => 'approved',
+            'science_review_required' => false,
+            'legal_review_required' => false,
+            'publish_allowed' => true,
+            'operator_approval_required' => true,
+            'operator_approved_at' => '2026-06-08',
+            'claim_gate_status' => 'passed',
+            'forbidden_claims' => [],
+            'faq_schema_eligible' => true,
+            'schema_eligibility_reviewed_at' => '2026-06-08',
+        ]);
+
+        $this->withSession(['ops_org_id' => 0])
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->putJson('/api/v0.5/internal/content-pages/science', $approvedPayload)
+            ->assertOk()
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('page.slug', 'science')
+            ->assertJsonPath('page.status', ContentPage::STATUS_PUBLISHED)
+            ->assertJsonPath('page.publish_allowed', true)
+            ->assertJsonPath('page.operator_approval_required', true)
+            ->assertJsonPath('page.operator_approved_at', '2026-06-08')
+            ->assertJsonPath('page.claim_gate_status', 'passed')
+            ->assertJsonPath('page.faq_schema_eligible', true)
+            ->assertJsonPath('page.schema_eligibility_reviewed_at', '2026-06-08');
+
+        $this->assertDatabaseHas('content_pages', [
+            'slug' => 'science',
+            'locale' => 'en',
+            'status' => ContentPage::STATUS_PUBLISHED,
+            'is_public' => true,
+            'publish_allowed' => true,
+            'claim_gate_status' => 'passed',
+            'faq_schema_eligible' => true,
+        ]);
+    }
+
     /**
      * @param  list<string>  $permissions
      */
