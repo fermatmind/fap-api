@@ -50313,5 +50313,132 @@
         "note": "PR #1993 merged at 2026-06-08T08:00:46Z with merge commit 8570a335c5cc539507b3dad4d8659fc9c971d759; origin/main contains the merge commit, remote task branch is deleted, and the local task branch was deleted after switching this worktree to detached origin/main because local main is owned by another worktree."
       }
     ]
+  },
+  "HELP-CONTENT-DRAFT-PREFLIGHT-BLOCKER-REPAIR-01": {
+    "repo": "fap-api",
+    "branch": "codex/help-content-draft-preflight-blocker-repair-01",
+    "base": "origin/main",
+    "status": "pr_opened",
+    "train_scope": "window_9_help_service_content",
+    "title": "docs(help): repair Help preflight boundary phrase",
+    "depends_on": [
+      "HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User requested HELP-CONTENT-DRAFT-PREFLIGHT-BLOCKER-REPAIR-01 to fix the payment_id phrase gate, then handle schema runtime and controlled publish runtime separately."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-01 is merged with merge commit 8570a335c5cc539507b3dad4d8659fc9c971d759 and identified the payment_id phrase gate as a blocker."
+      },
+      "local_package_boundary_scan": {
+        "status": "pass",
+        "payment_id_hits": 0,
+        "transaction_id_hits": 0,
+        "private_order_route_hits": 0,
+        "private_result_route_hits": 0,
+        "private_pay_route_hits": 0,
+        "tokenized_url_hits": 0,
+        "raw_order_no_hits": 0
+      },
+      "cms_sync": {
+        "status": "deferred_requires_explicit_cms_mutation_authorization",
+        "evidence": "This PR repairs only local package/import source files. Production CMS draft rows were not mutated."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "python3 -m json.tool backend/docs/help/import-packages/help-service-content-drafts-01.import.v1.json >/dev/null",
+          "python3 -m json.tool backend/docs/help/import-packages/content-pages-draft-source/content_pages.help_service_drafts_01.json >/dev/null",
+          "python3 -m json.tool backend/docs/help/generated/help-content-draft-preflight-blocker-repair-01.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "python3 -c \"import json, pathlib, re; text='\\n'.join(pathlib.Path(p).read_text() for p in ['backend/docs/help/import-packages/help-service-content-drafts-01.import.v1.json','backend/docs/help/import-packages/content-pages-draft-source/content_pages.help_service_drafts_01.json']); assert not re.search(r'payment[_ -]?id|transaction[_ -]?id|/orders/|/result/|/pay/|[?&]token=', text, re.I)\"",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=HelpContentImportPackageTest --no-ansi",
+          "git diff --check -- backend/docs/help/import-packages/help-service-content-drafts-01.import.v1.json backend/docs/help/import-packages/content-pages-draft-source/content_pages.help_service_drafts_01.json backend/docs/help/generated/help-content-draft-preflight-blocker-repair-01.v1.json backend/docs/operations/help-content-draft-preflight-blocker-repair-2026-06-08.md backend/tests/Feature/Cms/HelpContentImportPackageTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+          "git diff --cached --check"
+        ]
+      },
+      "github": {
+        "status": "pending",
+        "head_sha": null,
+        "passed_checks": [],
+        "failure_reason": null,
+        "merge_commit": null
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1995",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "result": {
+      "decision": "LOCAL_PACKAGE_PAYMENT_ID_PHRASE_GATE_REPAIRED_CMS_SYNC_STILL_REQUIRED",
+      "generated_artifact": "backend/docs/help/generated/help-content-draft-preflight-blocker-repair-01.v1.json",
+      "operations_report": "backend/docs/operations/help-content-draft-preflight-blocker-repair-2026-06-08.md",
+      "local_package_repaired": true,
+      "production_cms_synced": false,
+      "publish_allowed": false,
+      "next_task_recommendation": "HELP-CONTENT-DRAFT-BLOCKER-CMS-SYNC-01"
+    },
+    "scope_validation": {
+      "cms_mutation_performed": false,
+      "publish_performed": false,
+      "deploy_performed": false,
+      "search_submission_performed": false,
+      "private_url_access_performed": false,
+      "secret_env_cookie_token_read": false,
+      "payment_or_refund_performed": false,
+      "payment_provider_changed": false,
+      "allowed_paths_only": true
+    },
+    "sidecars": [
+      {
+        "id": "HELP-CONTENT-DRAFT-BLOCKER-CMS-SYNC-01",
+        "status": "requires_explicit_cms_mutation_authorization",
+        "note": "Sync repaired local package to existing affected Help CMS draft rows while preserving draft/non-public/non-indexable/unpublished state."
+      },
+      {
+        "id": "HELP-SERVICE-FAQ-SCHEMA-RUNTIME-01",
+        "status": "required_before_publish_execute",
+        "note": "Separate fap-web runtime PR."
+      },
+      {
+        "id": "HELP-CONTENT-PAGES-CONTROLLED-PUBLISH-RUNTIME-01",
+        "status": "required_before_publish_execute",
+        "note": "Separate backend controlled publish runtime PR."
+      },
+      {
+        "id": "HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-R2-01",
+        "status": "required_after_repairs",
+        "note": "Rerun read-only publish preflight after CMS sync and runtime repairs."
+      }
+    ],
+    "next_task": "HELP-CONTENT-DRAFT-BLOCKER-CMS-SYNC-01",
+    "transitions": [
+      {
+        "at": "2026-06-08",
+        "status": "authorized",
+        "note": "User requested HELP-CONTENT-DRAFT-PREFLIGHT-BLOCKER-REPAIR-01 to fix the payment_id phrase gate."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "local_package_repaired",
+        "note": "Updated local Help import package and ContentPage source rows to remove payment_id phrase pattern hits. No CMS mutation was performed."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "local_checks_passed",
+        "note": "JSON, YAML, boundary pattern scan, HelpContentImportPackageTest, and path-limited diff checks passed."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "pr_opened",
+        "note": "Opened PR #1995 for HELP-CONTENT-DRAFT-PREFLIGHT-BLOCKER-REPAIR-01."
+      }
+    ]
   }
 }

@@ -1,0 +1,113 @@
+{
+  "schema_version": "help-content-draft-preflight-blocker-repair-01.v1",
+  "generated_at": "2026-06-08T08:20:00Z",
+  "task": {
+    "id": "HELP-CONTENT-DRAFT-PREFLIGHT-BLOCKER-REPAIR-01",
+    "repo": "fap-api",
+    "scope": "local_help_content_package_boundary_phrase_repair",
+    "status": "ready_for_pr"
+  },
+  "authorization": {
+    "user_requested_task": true,
+    "cms_mutation_allowed": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "search_submission_allowed": false,
+    "private_url_access_allowed": false,
+    "secret_env_cookie_token_read_allowed": false,
+    "payment_or_refund_allowed": false,
+    "payment_provider_change_allowed": false
+  },
+  "dependency_evidence": {
+    "publish_preflight_task": "HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-01",
+    "publish_preflight_status": "merged_blocked",
+    "publish_preflight_pr": "https://github.com/fermatmind/fap-api/pull/1993",
+    "publish_preflight_merge_commit": "8570a335c5cc539507b3dad4d8659fc9c971d759",
+    "blocked_reason_addressed_in_this_pr": "payment_id phrase gate in local package/import source only"
+  },
+  "repair_summary": {
+    "rows_changed": [
+      {
+        "slug": "help-unlock-failure",
+        "locale": "en",
+        "old_phrase": "payment identifier",
+        "new_phrase": "unmasked payment details"
+      },
+      {
+        "slug": "help-payment-refund",
+        "locale": "en",
+        "old_phrase": "payment identifiers",
+        "new_phrase": "unmasked payment details"
+      },
+      {
+        "slug": "help-data-deletion",
+        "locale": "en",
+        "old_phrase": "payment identifiers",
+        "new_phrase": "unmasked payment details"
+      }
+    ],
+    "policy_meaning_preserved": true,
+    "public_canonical_routes_changed": false,
+    "draft_safety_flags_changed": false,
+    "faq_items_changed": false,
+    "support_contact_changed": false,
+    "policy_version_changed": false
+  },
+  "local_package_evidence": {
+    "import_package": "backend/docs/help/import-packages/help-service-content-drafts-01.import.v1.json",
+    "import_package_sha256": "15843defa1d3925624a49844e0ff15244a6cdff6cbb7c93bd3eac3c7fa5bed44",
+    "content_page_source": "backend/docs/help/import-packages/content-pages-draft-source/content_pages.help_service_drafts_01.json",
+    "content_page_source_sha256": "af59792b896892fa308ccddab0915e72c565e3f696bc10feb0af2c96f6c54d6d",
+    "target_count": 12,
+    "source_row_count": 12,
+    "local_boundary_pattern_counts": {
+      "private_result_route": 0,
+      "private_order_route": 0,
+      "private_pay_route": 0,
+      "payment_id": 0,
+      "transaction_id": 0,
+      "tokenized_url": 0,
+      "raw_order_no": 0
+    }
+  },
+  "production_cms_state": {
+    "cms_mutation_performed": false,
+    "production_draft_rows_synced": false,
+    "note": "Production CMS draft rows were not changed in this PR. The payment_id phrase gate may still be present in production until a separately authorized CMS sync updates the affected draft rows."
+  },
+  "remaining_publish_blockers": [
+    {
+      "id": "HELP-CONTENT-DRAFT-BLOCKER-CMS-SYNC-01",
+      "status": "requires_explicit_cms_mutation_authorization",
+      "note": "Sync the repaired local package to the existing affected Help CMS draft rows while preserving draft/non-public/non-indexable/unpublished state."
+    },
+    {
+      "id": "HELP-SERVICE-FAQ-SCHEMA-RUNTIME-01",
+      "status": "required_before_publish_execute",
+      "note": "Connect Help detail runtime to CMS faq_items/schema_enabled while preserving visible FAQ and JSON-LD parity."
+    },
+    {
+      "id": "HELP-CONTENT-PAGES-CONTROLLED-PUBLISH-RUNTIME-01",
+      "status": "required_before_publish_execute",
+      "note": "Add a fail-closed controlled publish path for exactly the 12 approved Help service rows."
+    },
+    {
+      "id": "HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-R2-01",
+      "status": "required_after_repairs",
+      "note": "Rerun read-only publish preflight after CMS sync and runtime repairs."
+    }
+  ],
+  "scope_validation": {
+    "cms_mutation_performed": false,
+    "publish_performed": false,
+    "deploy_performed": false,
+    "search_submission_performed": false,
+    "private_url_access_performed": false,
+    "secret_env_cookie_token_read": false,
+    "payment_or_refund_performed": false,
+    "payment_provider_changed": false,
+    "allowed_paths_only": true
+  },
+  "decision": "LOCAL_PACKAGE_PAYMENT_ID_PHRASE_GATE_REPAIRED_CMS_SYNC_STILL_REQUIRED",
+  "next_task_recommendation": "HELP-CONTENT-DRAFT-BLOCKER-CMS-SYNC-01"
+}

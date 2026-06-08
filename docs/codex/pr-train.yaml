@@ -22345,6 +22345,54 @@ prs:
     content_authority: CMS/backend
     next_task: HELP-CONTENT-DRAFT-PREFLIGHT-BLOCKER-REPAIR-01
 
+  - id: HELP-CONTENT-DRAFT-PREFLIGHT-BLOCKER-REPAIR-01
+    repo: fap-api
+    depends_on:
+      - HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-01
+    branch: codex/help-content-draft-preflight-blocker-repair-01
+    title: "docs(help): repair Help preflight boundary phrase"
+    train_scope: window_9_help_service_content
+    status: in_progress
+    scope:
+      - Repair the local Help service content package and ContentPage import source so the blocked payment_id phrase gate no longer matches.
+      - Preserve Help service policy meaning, public canonical routes, draft-only safety flags, support contact, policy version, FAQ items, and CMS/backend authority.
+      - Add a focused package contract guard that rejects payment_id and transaction_id phrase regressions.
+      - Record that CMS draft rows are not mutated in this PR and require a separately authorized CMS sync before publish preflight can pass in production.
+    allowed_paths:
+      - backend/docs/help/import-packages/help-service-content-drafts-01.import.v1.json
+      - backend/docs/help/import-packages/content-pages-draft-source/content_pages.help_service_drafts_01.json
+      - backend/docs/help/generated/help-content-draft-preflight-blocker-repair-01.v1.json
+      - backend/docs/operations/help-content-draft-preflight-blocker-repair-2026-06-08.md
+      - backend/tests/Feature/Cms/HelpContentImportPackageTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Mutate CMS rows, publish, deploy, submit search URLs, access private result/order/share/pay/payment/history URLs, read secrets/env/cookies/tokens, run payment/refund flows, or change payment-provider behavior.
+    validation:
+      - python3 -m json.tool backend/docs/help/import-packages/help-service-content-drafts-01.import.v1.json >/dev/null
+      - python3 -m json.tool backend/docs/help/import-packages/content-pages-draft-source/content_pages.help_service_drafts_01.json >/dev/null
+      - python3 -m json.tool backend/docs/help/generated/help-content-draft-preflight-blocker-repair-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - python3 -c "import json, pathlib, re; text='\\n'.join(pathlib.Path(p).read_text() for p in ['backend/docs/help/import-packages/help-service-content-drafts-01.import.v1.json','backend/docs/help/import-packages/content-pages-draft-source/content_pages.help_service_drafts_01.json']); assert not re.search(r'payment[_ -]?id|transaction[_ -]?id|/orders/|/result/|/pay/|[?&]token=', text, re.I)"
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=HelpContentImportPackageTest --no-ansi
+      - git diff --check -- backend/docs/help/import-packages/help-service-content-drafts-01.import.v1.json backend/docs/help/import-packages/content-pages-draft-source/content_pages.help_service_drafts_01.json backend/docs/help/generated/help-content-draft-preflight-blocker-repair-01.v1.json backend/docs/operations/help-content-draft-preflight-blocker-repair-2026-06-08.md backend/tests/Feature/Cms/HelpContentImportPackageTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: HELP-CONTENT-DRAFT-BLOCKER-CMS-SYNC-01
+
   - id: PUBLIC-BENEFIT-ASSET-PACKAGES-ARCHIVE-01
     repo: fap-api
     branch: codex/public-benefit-asset-packages-archive-01
