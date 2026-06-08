@@ -50755,7 +50755,7 @@
     "repo": "fap-api",
     "branch": "codex/help-content-draft-publish-preflight-r2-01",
     "base": "origin/main",
-    "status": "in_progress",
+    "status": "github_checks_pending",
     "train_scope": "window_9_help_service_content",
     "title": "HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-R2-01: rerun Help publish preflight",
     "depends_on": [
@@ -50834,7 +50834,7 @@
       },
       "github": {
         "status": "pending",
-        "head_sha": null,
+        "head_sha": "114f80b6",
         "passed_checks": [],
         "merge_state": null,
         "failure_reason": null,
@@ -50842,8 +50842,8 @@
       }
     },
     "failure_reason": "Publish preflight R2 remains blocked because production backend active revision does not contain HELP-CONTENT-PAGES-CONTROLLED-PUBLISH-RUNTIME-01 and production fap-web FAQ schema runtime deployment status is Unknown.",
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "114f80b6",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2001",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -50877,6 +50877,11 @@
         "at": "2026-06-08",
         "status": "local_checks_passed",
         "note": "PHP lint, JSON/YAML parse, focused artifact contract, public HTTP checks, read-only production revision/artisan list check, path-limited git diff --check, and git diff --cached --check passed. No CMS mutation, publish, deploy, search submission, private URL access, secret/env/cookie/token read, payment/refund action, payment provider change, or Operator approval claim was performed."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "github_checks_pending",
+        "note": "Opened fap-api PR #2001 for HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-R2-01."
       }
     ]
   }
