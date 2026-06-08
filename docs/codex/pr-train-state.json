@@ -49523,7 +49523,7 @@
     "repo": "fap-api",
     "branch": "codex/help-cms-service-fields-prod-postdeploy-verify-01",
     "base": "origin/main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "window_9_help_service_content",
     "title": "docs(help): verify Help service fields production postdeploy",
     "depends_on": [
@@ -49572,7 +49572,7 @@
       },
       "github": {
         "status": "pass",
-        "head_sha": "8a29260158d85e1c7674ba84b66d4904799fed56",
+        "head_sha": "d19a413f2b6a9d351a21f6371853bdf76d68403b",
         "passed_checks": [
           "hygiene",
           "supply-chain",
@@ -49585,15 +49585,16 @@
           "verify-mbti-v2"
         ],
         "merge_state": "UNKNOWN",
-        "failure_reason": null
+        "failure_reason": null,
+        "merge_commit": "8a050d476f84929e8fedeca31030c06e89aae0e4"
       }
     },
     "failure_reason": null,
-    "commit_sha": "0ddbee354227d0d98a8e51ed3f1907cd8141a364",
+    "commit_sha": "8a050d476f84929e8fedeca31030c06e89aae0e4",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1984",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-08T05:08:15Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "result": {
       "decision": "POSTDEPLOY_READY_FOR_POLICY_CMS_SYNC",
       "generated_artifact": "backend/docs/help/generated/help-cms-service-fields-prod-postdeploy-verify-01.v1.json",
@@ -49647,6 +49648,155 @@
         "at": "2026-06-08",
         "status": "ready_to_merge",
         "note": "GitHub checks passed for PR #1984 head 8a29260158d85e1c7674ba84b66d4904799fed56; PR is ready for merge after final scope revalidation."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "merged_reconciled",
+        "note": "Reconciled during HELP-CONTENT-DRAFT-POLICY-CMS-SYNC-01: GitHub shows PR #1984 merged at 2026-06-08T05:08:15Z with merge commit 8a050d476f84929e8fedeca31030c06e89aae0e4; origin/main contains the merge commit and the remote branch is deleted."
+      }
+    ]
+  },
+  "HELP-CONTENT-DRAFT-POLICY-CMS-SYNC-01": {
+    "repo": "fap-api",
+    "branch": "codex/help-content-draft-policy-cms-sync-01",
+    "base": "origin/main",
+    "status": "local_checks_passed",
+    "train_scope": "window_9_help_service_content",
+    "title": "ops(help): sync Help policy fields to CMS drafts",
+    "depends_on": [
+      "HELP-CONTENT-DRAFT-POLICY-REVISION-APPLY-01",
+      "HELP-CMS-SERVICE-FIELDS-PROD-POSTDEPLOY-VERIFY-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User authorized HELP-CONTENT-DRAFT-POLICY-CMS-SYNC-01 with CMS mutation limited to the existing 12 Help CMS draft rows and support_contact, policy_version, reviewer, faq_items, schema_enabled, and revised local package content fields. Publish, deploy, search submission, private URL access, secret/env/cookie/token reads, payment/refund action, payment-provider change, and Operator approval claim are forbidden."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "HELP-CONTENT-DRAFT-POLICY-REVISION-APPLY-01 is merged. HELP-CMS-SERVICE-FIELDS-PROD-POSTDEPLOY-VERIFY-01 is reconciled as merged with merge commit 8a050d476f84929e8fedeca31030c06e89aae0e4, and production runtime was verified ready for policy CMS sync."
+      },
+      "source_package": {
+        "status": "pass",
+        "path": "backend/docs/help/import-packages/content-pages-draft-source/content_pages.help_service_drafts_01.json",
+        "sha256": "7d034de0b0eb5dc2c78fbb0e1828f3820e36f1c1a03d8f1567722c336438b453",
+        "rows": 12,
+        "private_boundary": "pass: keyword hits were boundary language advising users not to post private identifiers or URLs publicly; no raw private ID or private URL value was recorded."
+      },
+      "production_cms_sync": {
+        "status": "pass",
+        "connection_method": "ssh_alias_fap-api-prod_batchmode",
+        "runtime_revision_sha": "a98788512c1513750931504d4162d528ad19cc54",
+        "temporary_source_dir": "/tmp/fm-help-policy-cms-sync.IjY3nH",
+        "temporary_source_removed": true,
+        "dry_run": {
+          "files_found": 1,
+          "pages_found": 12,
+          "will_create": 0,
+          "will_update": 12,
+          "will_skip": 0
+        },
+        "import": {
+          "files_found": 1,
+          "pages_found": 12,
+          "will_create": 0,
+          "will_update": 12,
+          "will_skip": 0
+        }
+      },
+      "post_sync_cms_state": {
+        "status": "pass",
+        "checked_rows": 12,
+        "draft": 12,
+        "non_public": 12,
+        "non_indexable": 12,
+        "unpublished": 12,
+        "owner_review": 12,
+        "support_contact": 12,
+        "policy_version": 12,
+        "reviewer_unknown": 12,
+        "schema_disabled": 12,
+        "faq_items_4": 12
+      },
+      "public_absence": {
+        "status": "pass",
+        "routes_checked": 12,
+        "all_404": true
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "python3 -m json.tool backend/docs/help/generated/help-content-draft-policy-cms-sync-01.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=HelpContentImportPackageTest --no-ansi",
+          "git diff --check -- backend/docs/help/generated/help-content-draft-policy-cms-sync-01.v1.json backend/docs/operations/help-content-draft-policy-cms-sync-2026-06-08.md docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+          "git diff --cached --check"
+        ]
+      },
+      "github": {
+        "status": "pending",
+        "checks": []
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "result": {
+      "decision": "CMS_DRAFT_POLICY_SYNC_COMPLETE_PUBLISH_BLOCKED",
+      "generated_artifact": "backend/docs/help/generated/help-content-draft-policy-cms-sync-01.v1.json",
+      "operations_report": "backend/docs/operations/help-content-draft-policy-cms-sync-2026-06-08.md",
+      "next_task_recommendation": "HELP-CONTENT-DRAFT-OPERATOR-REVIEW-R2-01"
+    },
+    "scope_validation": {
+      "cms_mutation_performed": true,
+      "cms_mutation_limited_to_existing_12_help_drafts": true,
+      "publish_performed": false,
+      "deploy_performed": false,
+      "search_submission_performed": false,
+      "private_url_access_performed": false,
+      "secret_env_cookie_token_read": false,
+      "payment_or_refund_performed": false,
+      "payment_provider_changed": false,
+      "operator_approval_claimed": false,
+      "allowed_paths_only": true
+    },
+    "sidecars": [
+      {
+        "id": "HELP-CONTENT-DRAFT-OPERATOR-REVIEW-R2-01",
+        "status": "ready_for_separate_review_request",
+        "note": "The revised policy fields are now synced to CMS drafts; Operator review is still not passed."
+      },
+      {
+        "id": "HELP-CONTENT-DRAFT-PUBLISH-BLOCK",
+        "status": "hard_gate",
+        "note": "Publish remains blocked until Operator review passes, publish preflight passes, and exact publish authorization is provided."
+      }
+    ],
+    "next_task": "HELP-CONTENT-DRAFT-OPERATOR-REVIEW-R2-01",
+    "transitions": [
+      {
+        "at": "2026-06-08",
+        "status": "authorized",
+        "note": "User requested execution of HELP-CONTENT-DRAFT-POLICY-CMS-SYNC-01 with prior explicit CMS mutation authorization."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "production_dry_run_passed",
+        "note": "content-pages:import-local-baseline dry-run found 12 pages, will_create=0, will_update=12."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "cms_sync_complete",
+        "note": "Imported with --upsert --status=draft against the scoped 12-row source; post-sync CMS check kept all 12 rows draft, non-public, non-indexable, unpublished, owner_review, and schema_enabled=false."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "local_checks_passed",
+        "note": "JSON/YAML validation, HelpContentImportPackageTest, and scoped diff whitespace checks passed."
       }
     ]
   }
