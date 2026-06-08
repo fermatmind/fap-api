@@ -262,8 +262,32 @@ class SitemapSourceApiTest extends TestCase
         }
 
         $locs = collect($data['items'])->pluck('loc')->all();
+        $this->assertContains('https://fermatmind.com/', $locs);
+        $this->assertContains('https://fermatmind.com/en', $locs);
+        $this->assertContains('https://fermatmind.com/en/business', $locs);
+        $this->assertContains('https://fermatmind.com/en/career', $locs);
+        $this->assertContains('https://fermatmind.com/en/career/guides', $locs);
+        $this->assertContains('https://fermatmind.com/en/career/recommendations', $locs);
+        $this->assertContains('https://fermatmind.com/en/career/tests', $locs);
+        $this->assertContains('https://fermatmind.com/en/support', $locs);
+        $this->assertContains('https://fermatmind.com/en/tests', $locs);
+        $this->assertContains('https://fermatmind.com/en/tests/category/career', $locs);
+        $this->assertContains('https://fermatmind.com/en/tests/category/personality', $locs);
+        $this->assertContains('https://fermatmind.com/zh/business', $locs);
+        $this->assertContains('https://fermatmind.com/zh/career', $locs);
+        $this->assertContains('https://fermatmind.com/zh/career/guides', $locs);
+        $this->assertContains('https://fermatmind.com/zh/career/recommendations', $locs);
+        $this->assertContains('https://fermatmind.com/zh/career/tests', $locs);
+        $this->assertContains('https://fermatmind.com/zh/support', $locs);
+        $this->assertContains('https://fermatmind.com/zh/tests', $locs);
+        $this->assertContains('https://fermatmind.com/zh/tests/category/career', $locs);
+        $this->assertContains('https://fermatmind.com/zh/tests/category/personality', $locs);
         $this->assertContains('https://fermatmind.com/en/career/jobs/civil-engineers', $locs);
         $this->assertContains('https://fermatmind.com/zh/career/jobs/civil-engineers', $locs);
+        $this->assertNotContains('https://fermatmind.com/datasets/occupations', $locs);
+        $this->assertNotContains('https://fermatmind.com/datasets/occupations/method', $locs);
+        $this->assertNotContains('https://fermatmind.com/en/career/jobs', $locs);
+        $this->assertNotContains('https://fermatmind.com/zh/career/jobs', $locs);
     }
 
     public function test_sitemap_source_excludes_forbidden_url_patterns(): void

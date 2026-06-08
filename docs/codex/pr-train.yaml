@@ -23695,3 +23695,54 @@ prs:
       backend_only_root_test_aliases: 136
       live_only_localized_test_urls: 16
     next_task: SEO-SITEMAP-DIFF-03 in fap-api after this PR is merged
+
+  - id: SEO-SITEMAP-DIFF-03
+    repo: fap-api
+    depends_on:
+      - SEO-SITEMAP-DIFF-02
+    branch: codex/seo-sitemap-diff-03
+    title: "SEO-SITEMAP-DIFF-03: fix(seo): align non-scale sitemap static and index URLs"
+    train_scope: sitemap_diff_parity
+    status: in_progress
+    scope:
+      - Remove backend sitemap-source URLs that frontend authority explicitly excludes or marks noindex: dataset hub/method, help pages, and localized career jobs index pages.
+      - Add backend-authoritative core public static/index URLs needed for sitemap parity, including root/en, business, career, support, tests, test category, and career index surfaces.
+      - Preserve career job detail, article, topic, personality, career guide detail, and scale canonical URL behavior from prior PRs.
+    allowed_paths:
+      - backend/app/Services/SEO/SitemapGenerator.php
+      - backend/tests/Feature/SEO/SitemapGeneratorTest.php
+      - backend/tests/Feature/SEO/SitemapXmlTest.php
+      - backend/tests/Feature/SEO/SitemapSourceApiTest.php
+      - backend/tests/Feature/SEO/CareerDatasetSitemapDiscoverabilityTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change frontend sitemap behavior, scale sitemap URL generation, cache fallback behavior, CMS content, deploy state, or search URL submissions.
+      - Add private result/order/share/pay/payment/history/take URLs, dataset URLs, help URLs, or career jobs index URLs to sitemap source.
+    validation:
+      - php -l backend/app/Services/SEO/SitemapGenerator.php
+      - php -l backend/tests/Feature/SEO/SitemapGeneratorTest.php
+      - php -l backend/tests/Feature/SEO/SitemapXmlTest.php
+      - php -l backend/tests/Feature/SEO/SitemapSourceApiTest.php
+      - php -l backend/tests/Feature/SEO/CareerDatasetSitemapDiscoverabilityTest.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/SEO/SitemapGeneratorTest.php tests/Feature/SEO/SitemapXmlTest.php tests/Feature/SEO/SitemapSourceApiTest.php tests/Feature/SEO/CareerDatasetSitemapDiscoverabilityTest.php --no-ansi
+      - cd backend && ./vendor/bin/pint --test app/Services/SEO/SitemapGenerator.php tests/Feature/SEO/SitemapGeneratorTest.php tests/Feature/SEO/SitemapXmlTest.php tests/Feature/SEO/SitemapSourceApiTest.php tests/Feature/SEO/CareerDatasetSitemapDiscoverabilityTest.php
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- backend/app/Services/SEO/SitemapGenerator.php backend/tests/Feature/SEO/SitemapGeneratorTest.php backend/tests/Feature/SEO/SitemapXmlTest.php backend/tests/Feature/SEO/SitemapSourceApiTest.php backend/tests/Feature/SEO/CareerDatasetSitemapDiscoverabilityTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    content_rewrite_allowed: false
+    content_authority: backend
+    expected_diff_resolution:
+      backend_only_non_scale_excluded_or_noindex_urls: 12
+      live_only_static_index_urls: 15
+    next_task: SEO-SITEMAP-DIFF-04 in fap-web after this PR is merged

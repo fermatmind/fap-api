@@ -7,6 +7,7 @@ use App\Models\ArticleTranslationRevision;
 use App\Models\CareerGuide;
 use App\Models\CareerJob;
 use App\Models\CareerJobSeoMeta;
+use App\Models\ContentPage;
 use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileSeoMeta;
 use App\Models\PersonalityProfileVariant;
@@ -27,7 +28,7 @@ class SitemapGeneratorTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_generate_includes_dataset_urls_and_only_public_global_scales(): void
+    public function test_generate_excludes_dataset_urls_and_includes_only_public_global_scales(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);
 
@@ -100,16 +101,14 @@ class SitemapGeneratorTest extends TestCase
         $slugList = (array) ($payload['slug_list'] ?? []);
         sort($slugList, SORT_STRING);
 
-        $this->assertSame([
-            'career-dataset-hub',
-            'career-dataset-method',
-            'tests:en:public-global',
-            'tests:zh:public-global',
-        ], $slugList);
+        $this->assertContains('tests:en:public-global', $slugList);
+        $this->assertContains('tests:zh:public-global', $slugList);
+        $this->assertNotContains('career-dataset-hub', $slugList);
+        $this->assertNotContains('career-dataset-method', $slugList);
 
         $xml = (string) ($payload['xml'] ?? '');
-        $this->assertStringContainsString('https://www.fermatmind.com/datasets/occupations', $xml);
-        $this->assertStringContainsString('https://www.fermatmind.com/datasets/occupations/method', $xml);
+        $this->assertStringNotContainsString('https://www.fermatmind.com/datasets/occupations', $xml);
+        $this->assertStringNotContainsString('https://www.fermatmind.com/datasets/occupations/method', $xml);
         $this->assertStringContainsString('https://fermatmind.com/en/tests/public-global', $xml);
         $this->assertStringContainsString('https://fermatmind.com/zh/tests/public-global', $xml);
         $this->assertStringNotContainsString('https://fermatmind.com/tests/public-global', $xml);
@@ -123,6 +122,58 @@ class SitemapGeneratorTest extends TestCase
         $this->assertStringNotContainsString('https://fermatmind.com/zh/tests/tenant-public', $xml);
         $this->assertStringNotContainsString('https://fermatmind.com/en/tests/tenant-public-alt', $xml);
         $this->assertStringNotContainsString('https://fermatmind.com/zh/tests/tenant-public-alt', $xml);
+    }
+
+    public function test_generate_includes_core_static_index_urls_and_excludes_help_pages(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+
+        ContentPage::query()->create([
+            'org_id' => 0,
+            'slug' => 'help-about',
+            'path' => '/help/about',
+            'kind' => ContentPage::KIND_HELP,
+            'locale' => 'en',
+            'title' => 'About help',
+            'content_md' => '# About help',
+            'content_html' => null,
+            'status' => ContentPage::STATUS_PUBLISHED,
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => Carbon::create(2026, 3, 8, 9, 0, 0, 'UTC'),
+            'created_at' => Carbon::create(2026, 3, 8, 9, 0, 0, 'UTC'),
+            'updated_at' => Carbon::create(2026, 3, 8, 9, 0, 0, 'UTC'),
+        ]);
+
+        $payload = app(SitemapGenerator::class)->generate();
+        $xml = (string) ($payload['xml'] ?? '');
+
+        foreach ([
+            'https://fermatmind.com/',
+            'https://fermatmind.com/en',
+            'https://fermatmind.com/en/business',
+            'https://fermatmind.com/en/career',
+            'https://fermatmind.com/en/career/guides',
+            'https://fermatmind.com/en/career/recommendations',
+            'https://fermatmind.com/en/career/tests',
+            'https://fermatmind.com/en/support',
+            'https://fermatmind.com/en/tests',
+            'https://fermatmind.com/en/tests/category/career',
+            'https://fermatmind.com/en/tests/category/personality',
+            'https://fermatmind.com/zh/business',
+            'https://fermatmind.com/zh/career',
+            'https://fermatmind.com/zh/career/guides',
+            'https://fermatmind.com/zh/career/recommendations',
+            'https://fermatmind.com/zh/career/tests',
+            'https://fermatmind.com/zh/support',
+            'https://fermatmind.com/zh/tests',
+            'https://fermatmind.com/zh/tests/category/career',
+            'https://fermatmind.com/zh/tests/category/personality',
+        ] as $loc) {
+            $this->assertStringContainsString($loc, $xml);
+        }
+
+        $this->assertStringNotContainsString('https://fermatmind.com/en/help/about', $xml);
     }
 
     public function test_generate_includes_only_indexable_global_article_urls_with_locale_aware_paths(): void
@@ -549,9 +600,8 @@ class SitemapGeneratorTest extends TestCase
         $payload = app(SitemapGenerator::class)->generate();
         $xml = (string) ($payload['xml'] ?? '');
 
-        $this->assertStringContainsString('https://staging.fermatmind.com/zh/career/jobs', $xml);
-
         $this->assertStringNotContainsString('https://staging.fermatmind.com/en/career/jobs', $xml);
+        $this->assertStringNotContainsString('https://staging.fermatmind.com/zh/career/jobs', $xml);
         $this->assertStringNotContainsString('https://staging.fermatmind.com/en/career/jobs/product-manager', $xml);
         $this->assertStringNotContainsString('https://staging.fermatmind.com/zh/career/jobs/product-manager', $xml);
         $this->assertStringNotContainsString('https://staging.fermatmind.com/zh/career/jobs/robots-noindex', $xml);
