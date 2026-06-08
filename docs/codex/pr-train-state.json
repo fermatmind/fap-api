@@ -50000,7 +50000,7 @@
     "repo": "fap-api",
     "branch": "codex/help-content-draft-operator-approval-r2-01",
     "base": "origin/main",
-    "status": "pr_opened",
+    "status": "ready_to_merge",
     "train_scope": "window_9_help_service_content",
     "title": "docs(help): record Help draft operator approval R2",
     "depends_on": [
@@ -50033,15 +50033,25 @@
         ]
       },
       "github": {
-        "status": "pending",
-        "head_sha": "cca77dbc981f236553efea582af7d221ea01cdf7",
-        "passed_checks": [],
+        "status": "pass",
+        "head_sha": "28017c7be849cab616c5adc16a1df456836aac2b",
+        "passed_checks": [
+          "hygiene",
+          "supply-chain",
+          "content-pack-build-validate",
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "Semgrep OSS",
+          "verify-bigfive",
+          "verify-mbti-legacy",
+          "verify-mbti-v2"
+        ],
         "failure_reason": null,
         "merge_commit": null
       }
     },
     "failure_reason": null,
-    "commit_sha": "cca77dbc981f236553efea582af7d221ea01cdf7",
+    "commit_sha": "28017c7be849cab616c5adc16a1df456836aac2b",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1990",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -50095,6 +50105,11 @@
         "at": "2026-06-08",
         "status": "pr_opened",
         "note": "Opened PR #1990 for HELP-CONTENT-DRAFT-OPERATOR-APPROVAL-R2-01."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed for PR #1990 head 28017c7be849cab616c5adc16a1df456836aac2b; merge state CLEAN."
       }
     ]
   }
