@@ -49660,7 +49660,7 @@
     "repo": "fap-api",
     "branch": "codex/help-content-draft-policy-cms-sync-01",
     "base": "origin/main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "window_9_help_service_content",
     "title": "ops(help): sync Help policy fields to CMS drafts",
     "depends_on": [
@@ -49736,7 +49736,7 @@
       },
       "github": {
         "status": "pass",
-        "head_sha": "72eb488f00226832f9063fad154d42f284ec9eb7",
+        "head_sha": "7439690def326dee9f26bb5f91f231b037b7d021",
         "passed_checks": [
           "hygiene",
           "supply-chain",
@@ -49749,15 +49749,16 @@
           "verify-mbti-v2"
         ],
         "merge_state": "CLEAN",
-        "failure_reason": null
+        "failure_reason": null,
+        "merge_commit": "fedc82fd5c379e0e0c50547bc86b3f96acec89e3"
       }
     },
     "failure_reason": null,
-    "commit_sha": "72eb488f00226832f9063fad154d42f284ec9eb7",
+    "commit_sha": "fedc82fd5c379e0e0c50547bc86b3f96acec89e3",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1985",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-08T05:50:04Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "result": {
       "decision": "CMS_DRAFT_POLICY_SYNC_COMPLETE_PUBLISH_BLOCKED",
       "generated_artifact": "backend/docs/help/generated/help-content-draft-policy-cms-sync-01.v1.json",
@@ -49820,6 +49821,11 @@
         "at": "2026-06-08",
         "status": "ready_to_merge",
         "note": "GitHub checks passed for PR #1985 head 72eb488f00226832f9063fad154d42f284ec9eb7; merge state CLEAN."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "merged",
+        "note": "PR #1985 merged at 2026-06-08T05:50:04Z with merge commit fedc82fd5c379e0e0c50547bc86b3f96acec89e3; origin/main contains the merge commit, remote task branch is deleted, local task branch was deleted, and local main worktree is synced to origin/main."
       }
     ]
   }
