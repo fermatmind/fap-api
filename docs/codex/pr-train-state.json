@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-08T17:11:21Z",
+  "updated_at": "2026-06-08T17:15:12Z",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -51522,7 +51522,7 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
+    "commit_sha": "c4f13c29810c8d89beaaa880a397d16999962e7b",
     "pr_url": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -51552,6 +51552,11 @@
         "at": "2026-06-09",
         "status": "local_checks_passed",
         "note": "Non-scale sitemap source now excludes dataset/help/career-jobs index URLs and includes core public static/index URLs; focused tests, Pint, JSON/YAML parse, and scope diff checks passed."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "committed",
+        "note": "Created scoped implementation commit c4f13c29810c8d89beaaa880a397d16999962e7b."
       }
     ]
   }
