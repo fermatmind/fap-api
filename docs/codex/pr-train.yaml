@@ -22577,6 +22577,49 @@ prs:
     content_authority: CMS/backend
     next_task: HELP-CONTENT-DRAFT-PUBLISH-EXECUTE-01
 
+  - id: HELP-CONTENT-DRAFT-POST-PUBLISH-SMOKE-01
+    repo: fap-api
+    depends_on:
+      - HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-R3-01
+    branch: codex/help-content-draft-post-publish-smoke-01
+    title: "HELP-CONTENT-DRAFT-POST-PUBLISH-SMOKE-01: record Help post-publish runtime smoke"
+    train_scope: window_9_help_service_content
+    status: blocked_runtime_repair_required
+    scope:
+      - Record the exact post-publish smoke result after authorized Help service controlled publish execution.
+      - Confirm publish success for the 12 Help service ContentPage rows while preserving the observed frontend robots/schema runtime blockers.
+      - Keep this PR read-only after the already-authorized controlled publish command and do not repair frontend runtime here.
+    allowed_paths:
+      - backend/docs/help/generated/help-content-draft-post-publish-smoke-01.v1.json
+      - backend/docs/operations/help-content-draft-post-publish-smoke-2026-06-08.md
+      - backend/tests/Feature/Cms/HelpContentDraftPostPublishSmokeTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Mutate CMS rows, publish, deploy, submit search URLs, access private result/order/share/pay/payment/history URLs, read secrets/env/cookies/tokens, run payment/refund flows, change payment-provider behavior, or claim Operator approval.
+    validation:
+      - php -l backend/tests/Feature/Cms/HelpContentDraftPostPublishSmokeTest.php
+      - python3 -m json.tool backend/docs/help/generated/help-content-draft-post-publish-smoke-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=HelpContentDraftPostPublishSmokeTest --no-ansi
+      - git diff --check -- backend/docs/help/generated/help-content-draft-post-publish-smoke-01.v1.json backend/docs/operations/help-content-draft-post-publish-smoke-2026-06-08.md backend/tests/Feature/Cms/HelpContentDraftPostPublishSmokeTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: HELP-PAGES-NOINDEX-RUNTIME-01
+
   - id: PUBLIC-BENEFIT-ASSET-PACKAGES-ARCHIVE-01
     repo: fap-api
     branch: codex/public-benefit-asset-packages-archive-01
