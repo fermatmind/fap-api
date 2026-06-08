@@ -1,0 +1,127 @@
+{
+  "schema": "help-cms-service-fields-prod-sha-verify-01.v1",
+  "task": "HELP-CMS-SERVICE-FIELDS-PROD-SHA-VERIFY-01",
+  "generated_at": "2026-06-08",
+  "decision": "BLOCKED_RUNTIME_BEHIND_AND_PUBLISH_SAFETY_PENDING",
+  "scope": "Read-only production active SHA and migration-status verification only; no deploy, no migration execution, no CMS mutation, no publish.",
+  "authorization": {
+    "source": "user",
+    "allowed": "Approved read-only production method that reports only active release SHA and migration status for Help service field migrations.",
+    "forbidden": [
+      "deploy",
+      "CMS mutation",
+      "publish",
+      "search submission",
+      "private result/order/share/pay/payment/history URL access",
+      "secret/env/cookie/token value reading",
+      "payment/refund action",
+      "payment-provider behavior change",
+      "Operator approval claim"
+    ]
+  },
+  "local_target": {
+    "origin_main_sha": "87afe2dfddfab1f8533512b8a2bdf1c347626000",
+    "release_readiness_merge_commit": "b9279c12c1f40732bb9be8566f46b9515dcb02dd",
+    "required_help_runtime_commits": [
+      {
+        "id": "HELP-CMS-SERVICE-FIELDS-01",
+        "sha": "6527cc9265f88bfd1bb281d6ae88f2f3bb7e2e05",
+        "contains_on_production_revision": false
+      },
+      {
+        "id": "HELP-CONTENTPAGE-IMPORTER-SERVICE-FIELDS-01",
+        "sha": "9cae1f45ee55acf11df43376e80387957c2049a3",
+        "contains_on_production_revision": false
+      },
+      {
+        "id": "SCIENCE-CONTENTPAGE-PUBLISH-FIELDS-01",
+        "sha": "13e62a0389124e4acb90f4b7467a26ea996cf24e",
+        "contains_on_production_revision": false
+      },
+      {
+        "id": "HELP-CMS-SERVICE-FIELDS-PROD-RUNTIME-01",
+        "sha": "0dd12d8751b328cf502a28e586597d1ed4a4246f",
+        "contains_on_production_revision": false
+      }
+    ]
+  },
+  "production_read_only_evidence": {
+    "connection_method": "ssh_alias_fap-api-prod_batchmode_readonly",
+    "active_revision_source": "REVISION_FILE",
+    "active_revision_sha": "e812d6f87f8b84b45d2e900d9d3844a0402635bc",
+    "remote_git_head": "Unknown",
+    "active_revision_known_to_local_git": true,
+    "active_revision_is_ancestor_of_origin_main": true,
+    "commits_between_active_revision_and_origin_main": 45,
+    "migration_status": {
+      "2026_06_05_150000_add_help_service_fields_to_content_pages": {
+        "status": "Ran",
+        "batch": 45
+      },
+      "2026_06_08_010000_add_publish_safety_fields_to_content_pages": {
+        "status": "Pending",
+        "batch": null
+      }
+    },
+    "target_file_presence": {
+      "help_service_fields_migration": "present",
+      "publish_safety_fields_migration": "missing",
+      "content_pages_importer_command": "present",
+      "content_page_model": "present"
+    },
+    "importer_command": {
+      "present": true,
+      "options": {
+        "upsert": true,
+        "source_dir": true
+      },
+      "service_field_mapping_grep": {
+        "support_contact": "present",
+        "policy_version": "present",
+        "reviewer": "present",
+        "faq_items": "present",
+        "schema_enabled": "missing"
+      }
+    }
+  },
+  "assessment": {
+    "production_active_sha_verified": true,
+    "production_contains_current_origin_main": false,
+    "production_contains_full_help_service_runtime_by_revision_graph": false,
+    "production_runtime_identity_consistent": false,
+    "notes": [
+      "The REVISION file reports e812d6f87f8b84b45d2e900d9d3844a0402635bc, which is 45 commits behind origin/main.",
+      "The reported production revision does not contain the merged Help service field/model/importer/publish-safety commits by local git ancestry.",
+      "Remote file/status checks show a mixed runtime state: the Help service fields migration file is present and its migration is Ran, while the publish safety migration file is missing and its migration is Pending.",
+      "Importer CLI exists with --upsert and --source-dir, but read-only grep did not confirm schema_enabled mapping in the active runtime."
+    ]
+  },
+  "decision_detail": {
+    "deploy_needed_before_policy_cms_sync": true,
+    "cms_sync_allowed_now": false,
+    "publish_allowed_now": false,
+    "migration_execution_allowed_now": false,
+    "deploy_allowed_now": false,
+    "reason": "Current production active revision is known but does not prove full Help service runtime. Publish safety migration is pending and schema_enabled importer mapping is not confirmed in the active runtime."
+  },
+  "next_safe_authorization_prompt": "I explicitly approve backend production deploy for exact SHA 87afe2dfddfab1f8533512b8a2bdf1c347626000 release help-cms-service-fields-prod-20260608-87afe2df.",
+  "post_deploy_required_read_only_checks": [
+    "Confirm production REVISION equals 87afe2dfddfab1f8533512b8a2bdf1c347626000 or a newer explicitly approved SHA containing it.",
+    "Confirm Help service fields migration is Ran.",
+    "Confirm publish safety fields migration is Ran.",
+    "Confirm content-pages:import-local-baseline service-field mapping includes support_contact, policy_version, reviewer, faq_items, and schema_enabled."
+  ],
+  "scope_validation": {
+    "deploy_performed": false,
+    "migration_performed": false,
+    "cms_mutation_performed": false,
+    "publish_performed": false,
+    "search_submission_performed": false,
+    "private_url_access_performed": false,
+    "secret_env_cookie_token_read": false,
+    "payment_or_refund_performed": false,
+    "payment_provider_changed": false,
+    "operator_approval_claimed": false
+  },
+  "next_task_recommendation": "HELP-CMS-SERVICE-FIELDS-PROD-DEPLOY-AUTHORIZATION-01"
+}
