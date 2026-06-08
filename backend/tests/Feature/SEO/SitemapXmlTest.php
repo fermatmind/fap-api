@@ -507,8 +507,8 @@ class SitemapXmlTest extends TestCase
         $this->assertStringContainsString('<loc>https://staging.fermatmind.com/zh/articles/mbti-basics</loc>', $body);
         $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/articles/mbti-basics</loc>', $body);
         $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/en/articles/article-draft</loc>', $body);
-        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/career/jobs</loc>', $body);
-        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/zh/career/jobs</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/en/career/jobs</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/zh/career/jobs</loc>', $body);
         $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/career/jobs/agricultural-inspectors</loc>', $body);
         $this->assertStringContainsString('<loc>https://staging.fermatmind.com/zh/career/jobs/agricultural-inspectors</loc>', $body);
         $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/en/career/jobs/product-manager</loc>', $body);

@@ -12,7 +12,7 @@ final class CareerDatasetSitemapDiscoverabilityTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_backend_sitemap_generator_includes_dataset_hub_and_method_urls(): void
+    public function test_backend_sitemap_generator_excludes_dataset_hub_and_method_urls(): void
     {
         config([
             'app.frontend_url' => 'https://www.fermatmind.com',
@@ -21,7 +21,7 @@ final class CareerDatasetSitemapDiscoverabilityTest extends TestCase
         $payload = app(SitemapGenerator::class)->generate();
         $xml = (string) ($payload['xml'] ?? '');
 
-        $this->assertStringContainsString('https://www.fermatmind.com/datasets/occupations', $xml);
-        $this->assertStringContainsString('https://www.fermatmind.com/datasets/occupations/method', $xml);
+        $this->assertStringNotContainsString('https://www.fermatmind.com/datasets/occupations', $xml);
+        $this->assertStringNotContainsString('https://www.fermatmind.com/datasets/occupations/method', $xml);
     }
 }

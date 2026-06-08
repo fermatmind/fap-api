@@ -94,10 +94,10 @@ class SitemapGenerator
             $this->getArticleUrls(),
             $this->getCareerJobUrls(),
             $this->getCareerGuideUrls(),
-            $this->getCareerDatasetUrls(),
             $this->getPersonalityUrls(),
             $this->getTopicUrls(),
-            $this->getContentPageUrls()
+            $this->getContentPageUrls(),
+            $this->getStaticIndexUrls()
         );
 
         $urls = collect($urls)
@@ -309,42 +309,7 @@ class SitemapGenerator
 
     private function getCareerJobUrls(): array
     {
-        return array_merge(
-            $this->getCareerJobListUrls(),
-            $this->getCareerJobDetailUrls()
-        );
-    }
-
-    private function getCareerDatasetUrls(): array
-    {
-        $publication = $this->datasetPublicationMetadataService->build()->toArray();
-        $distribution = (array) ($publication['distribution'] ?? []);
-
-        $hubUrl = trim((string) ($distribution['documentation_url'] ?? ''));
-        $methodUrl = trim((string) ($distribution['methodology_url'] ?? ''));
-
-        $updatedAt = now('UTC');
-        $entries = [];
-
-        if ($hubUrl !== '') {
-            $entries[] = [
-                'loc' => $hubUrl,
-                'lastmod' => $updatedAt->toAtomString(),
-                'slug' => 'career-dataset-hub',
-                'updated_at' => $updatedAt->toDateTimeString(),
-            ];
-        }
-
-        if ($methodUrl !== '') {
-            $entries[] = [
-                'loc' => $methodUrl,
-                'lastmod' => $updatedAt->toAtomString(),
-                'slug' => 'career-dataset-method',
-                'updated_at' => $updatedAt->toDateTimeString(),
-            ];
-        }
-
-        return $entries;
+        return $this->getCareerJobDetailUrls();
     }
 
     private function getCareerJobListUrls(): array
@@ -785,6 +750,10 @@ class SitemapGenerator
                 continue;
             }
 
+            if ((string) $row->kind === ContentPage::KIND_HELP) {
+                continue;
+            }
+
             $path = $this->contentPageCanonicalPath($row);
             if ($path === null) {
                 continue;
@@ -804,6 +773,45 @@ class SitemapGenerator
         }
 
         return $urls;
+    }
+
+    private function getStaticIndexUrls(): array
+    {
+        $baseUrl = rtrim((string) config('app.frontend_url', config('app.url', '')), '/');
+        if ($baseUrl === '') {
+            return [];
+        }
+
+        $updatedAt = now('UTC');
+        $paths = [
+            '/',
+            '/en',
+            '/en/business',
+            '/en/career',
+            '/en/career/guides',
+            '/en/career/recommendations',
+            '/en/career/tests',
+            '/en/support',
+            '/en/tests',
+            '/en/tests/category/career',
+            '/en/tests/category/personality',
+            '/zh/business',
+            '/zh/career',
+            '/zh/career/guides',
+            '/zh/career/recommendations',
+            '/zh/career/tests',
+            '/zh/support',
+            '/zh/tests',
+            '/zh/tests/category/career',
+            '/zh/tests/category/personality',
+        ];
+
+        return array_map(static fn (string $path): array => [
+            'loc' => $baseUrl.$path,
+            'lastmod' => $updatedAt->toAtomString(),
+            'slug' => 'static-index:'.($path === '/' ? 'root' : trim(str_replace('/', ':', $path), ':')),
+            'updated_at' => $updatedAt->toDateTimeString(),
+        ], $paths);
     }
 
     private function contentPageCanonicalPath(ContentPage $page): ?string

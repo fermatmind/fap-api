@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-08T17:05:28Z",
+  "updated_at": "2026-06-08T17:11:21Z",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -51356,7 +51356,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-sitemap-diff-02",
     "base": "origin/main",
-    "status": "github_checks_passed_ready_to_merge",
+    "status": "merged",
     "train_scope": "sitemap_diff_parity",
     "title": "SEO-SITEMAP-DIFF-02: fix(seo): align scale sitemap source to localized canonical test URLs",
     "depends_on": [],
@@ -51399,7 +51399,7 @@
       },
       "github": {
         "status": "pass",
-        "head_sha": "7b1aba66f084a2cba6bd2e798e5823b979c0656f",
+        "head_sha": "70bce0cbc971fe52f85d49d338bf79b284806862",
         "passed_checks": [
           "hygiene",
           "supply-chain",
@@ -51413,15 +51413,27 @@
         ],
         "merge_state": "CLEAN",
         "pr_url": "https://github.com/fermatmind/fap-api/pull/2008",
-        "failure_reason": null
+        "failure_reason": null,
+        "merge_commit": "4693a7628df557bee64d6b4693a9bf5df733a1d9",
+        "merged_at": "2026-06-08T17:03:46Z",
+        "remote_branch_deleted": true,
+        "origin_main_contains_merge_commit": true
+      },
+      "post_merge": {
+        "status": "pass",
+        "merge_commit": "4693a7628df557bee64d6b4693a9bf5df733a1d9",
+        "origin_main_contains_merge_commit": true,
+        "main_synced_to_origin_main": true,
+        "local_cleanup_executed": true,
+        "evidence": "PR #2008 is MERGED on GitHub; origin/main contains merge commit 4693a7628df557bee64d6b4693a9bf5df733a1d9; remote branch codex/seo-sitemap-diff-02 is deleted; local main is synced to origin/main; task worktree and local branch were removed."
       }
     },
     "failure_reason": null,
-    "commit_sha": "33ebf1b1de68997f9ed65a8a10b6f1f4a5a5a0cd",
+    "commit_sha": "70bce0cbc971fe52f85d49d338bf79b284806862",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2008",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-08T17:03:46Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "result": {
       "expected_backend_only_root_test_aliases_resolved": 136,
       "expected_live_only_localized_test_urls_resolved": 16
@@ -51451,6 +51463,95 @@
         "at": "2026-06-09",
         "status": "github_checks_passed_ready_to_merge",
         "note": "GitHub checks passed for PR #2008 head 7b1aba66f084a2cba6bd2e798e5823b979c0656f: hygiene, supply-chain, content-pack-build-validate, Semgrep blocking, Semgrep OSS, semgrep sarif upload, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "merged",
+        "note": "PR #2008 squash-merged at 2026-06-08T17:03:46Z with merge commit 4693a7628df557bee64d6b4693a9bf5df733a1d9; origin/main contains the merge commit; local main synced; local and remote task branches cleaned up."
+      }
+    ]
+  },
+  "SEO-SITEMAP-DIFF-03": {
+    "repo": "fap-api",
+    "branch": "codex/seo-sitemap-diff-03",
+    "base": "origin/main",
+    "status": "local_checks_passed",
+    "train_scope": "sitemap_diff_parity",
+    "title": "SEO-SITEMAP-DIFF-03: fix(seo): align non-scale sitemap static and index URLs",
+    "depends_on": [
+      "SEO-SITEMAP-DIFF-02"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly provided SEO-SITEMAP-DIFF-03 fap-api goal, scope, expected diff resolution, and authorized docs/codex metadata updates as part of the sitemap diff PR train."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "SEO-SITEMAP-DIFF-02 merged as https://github.com/fermatmind/fap-api/pull/2008 at 2026-06-08T17:03:46Z with merge commit 4693a7628df557bee64d6b4693a9bf5df733a1d9 before this branch started."
+      },
+      "scope": {
+        "status": "pass",
+        "evidence": "Changed files are confined to backend/app/Services/SEO/SitemapGenerator.php, focused SEO sitemap tests, dataset sitemap regression test, and docs/codex PR-train metadata.",
+        "allowed_paths": [
+          "backend/app/Services/SEO/SitemapGenerator.php",
+          "backend/tests/Feature/SEO/SitemapGeneratorTest.php",
+          "backend/tests/Feature/SEO/SitemapXmlTest.php",
+          "backend/tests/Feature/SEO/SitemapSourceApiTest.php",
+          "backend/tests/Feature/SEO/CareerDatasetSitemapDiscoverabilityTest.php",
+          "docs/codex/pr-train.yaml",
+          "docs/codex/pr-train-state.json"
+        ]
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "php -l backend/app/Services/SEO/SitemapGenerator.php",
+          "php -l backend/tests/Feature/SEO/SitemapGeneratorTest.php",
+          "php -l backend/tests/Feature/SEO/SitemapXmlTest.php",
+          "php -l backend/tests/Feature/SEO/SitemapSourceApiTest.php",
+          "php -l backend/tests/Feature/SEO/CareerDatasetSitemapDiscoverabilityTest.php",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/SEO/SitemapGeneratorTest.php tests/Feature/SEO/SitemapXmlTest.php tests/Feature/SEO/SitemapSourceApiTest.php tests/Feature/SEO/CareerDatasetSitemapDiscoverabilityTest.php --no-ansi",
+          "cd backend && ./vendor/bin/pint --test app/Services/SEO/SitemapGenerator.php tests/Feature/SEO/SitemapGeneratorTest.php tests/Feature/SEO/SitemapXmlTest.php tests/Feature/SEO/SitemapSourceApiTest.php tests/Feature/SEO/CareerDatasetSitemapDiscoverabilityTest.php",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "git diff --check -- backend/app/Services/SEO/SitemapGenerator.php backend/tests/Feature/SEO/SitemapGeneratorTest.php backend/tests/Feature/SEO/SitemapXmlTest.php backend/tests/Feature/SEO/SitemapSourceApiTest.php backend/tests/Feature/SEO/CareerDatasetSitemapDiscoverabilityTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+          "git diff --cached --check"
+        ],
+        "evidence": "PHP lint passed for SitemapGenerator and focused SEO sitemap tests. Focused PHPUnit passed with 19 warnings and 600 assertions. Scoped Pint --test passed. JSON/YAML parse passed. Path-limited git diff --check passed."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "result": {
+      "excluded_backend_only_urls": [
+        "dataset hub/method URLs",
+        "help content page URLs",
+        "localized career jobs index URLs"
+      ],
+      "included_static_index_url_groups": [
+        "root/en",
+        "business",
+        "career",
+        "career guides/recommendations/tests",
+        "support",
+        "tests and tests category indexes"
+      ]
+    },
+    "transitions": [
+      {
+        "at": "2026-06-09",
+        "status": "in_progress",
+        "note": "Created isolated fap-api worktree from latest origin/main after SEO-SITEMAP-DIFF-02 merged and cleaned up."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "local_checks_passed",
+        "note": "Non-scale sitemap source now excludes dataset/help/career-jobs index URLs and includes core public static/index URLs; focused tests, Pint, JSON/YAML parse, and scope diff checks passed."
       }
     ]
   }
