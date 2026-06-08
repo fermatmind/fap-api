@@ -50920,7 +50920,7 @@
     "repo": "fap-api",
     "branch": "codex/help-content-draft-publish-preflight-r3-01",
     "base": "origin/main",
-    "status": "pr_open_github_checks_pending",
+    "status": "ready_to_merge",
     "train_scope": "window_9_help_service_content",
     "title": "HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-R3-01: record post-deploy Help publish preflight",
     "depends_on": [
@@ -51007,16 +51007,26 @@
         "evidence": "PHP lint passed; JSON/YAML parse passed; HelpContentDraftPublishPreflightR3Test passed with 1 test and 49 assertions; public HTTP checks passed; read-only production backend/frontend runtime checks passed; help-service controlled publish dry-run passed with target_count=12 and blocked_count=0; path-limited git diff --check and git diff --cached --check passed."
       },
       "github": {
-        "status": "pending",
-        "head_sha": "5d01682bbd442cee1b06cb3a3ab5259ce6904ac4",
-        "passed_checks": [],
-        "merge_state": null,
+        "status": "pass",
+        "head_sha": "368d962657225b4bfb8b9a655e2cc70f6244c6d1",
+        "passed_checks": [
+          "hygiene",
+          "supply-chain",
+          "content-pack-build-validate",
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "Semgrep OSS",
+          "verify-bigfive",
+          "verify-mbti-legacy",
+          "verify-mbti-v2"
+        ],
+        "merge_state": "CLEAN",
         "failure_reason": null,
         "merge_commit": null
       }
     },
     "failure_reason": null,
-    "commit_sha": "5d01682bbd442cee1b06cb3a3ab5259ce6904ac4",
+    "commit_sha": "368d962657225b4bfb8b9a655e2cc70f6244c6d1",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2002",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -51061,6 +51071,11 @@
         "at": "2026-06-08",
         "status": "pr_open_github_checks_pending",
         "note": "Opened fap-api PR #2002 for HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-R3-01 after local checks passed."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed for PR #2002 and pre-merge scope remains limited to R3 preflight artifact/report/test and docs/codex metadata."
       }
     ]
   }
