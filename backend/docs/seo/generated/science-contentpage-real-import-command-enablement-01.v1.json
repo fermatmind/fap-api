@@ -1,0 +1,65 @@
+{
+  "schema_version": "science-contentpage-real-import-command-enablement-01.v1",
+  "task": "SCIENCE-CONTENTPAGE-REAL-IMPORT-COMMAND-ENABLEMENT-01",
+  "mode": "controlled_command_enablement_only",
+  "created_at": "2026-06-08T00:00:00Z",
+  "command": "content-pages:science-import-drafts",
+  "approval_phrase_required": "SCIENCE_CONTENTPAGE_NON_PUBLIC_DRAFT_IMPORT_APPROVED",
+  "default_mode": {
+    "dry_run": true,
+    "writes_committed": false,
+    "requires_package": true
+  },
+  "execute_mode": {
+    "requires_execute_flag": true,
+    "requires_exact_approval_phrase": true,
+    "creates_missing_rows_only": true,
+    "upsert_existing_rows": false,
+    "publish_allowed": false,
+    "discoverability_allowed": false
+  },
+  "scope": {
+    "package": "backend/docs/seo/import-packages/science-contentpage-gpt55-review-draft-2026-06-08",
+    "candidate_pages": 6,
+    "create_missing_non_public_draft_candidates": 5,
+    "existing_authority_revision_only": [
+      "/method-boundaries"
+    ],
+    "cms_mutation_in_this_pr": false,
+    "production_import_executed": false
+  },
+  "runtime_guards": [
+    "dry-run is default when --execute is absent",
+    "--execute and --dry-run are mutually exclusive",
+    "--execute requires exact approval phrase",
+    "pre-import QA must pass with zero package issues",
+    "operator review must be ready for non-public draft import",
+    "dry-run can continue no-write with existing-row lookup marked Unknown when the local DB is unavailable",
+    "execute mode still requires a live database connection",
+    "existing ContentPage rows are skipped, not updated",
+    "/method-boundaries is skipped as existing authority revision-only",
+    "created rows are draft, non-public, non-indexable, publish_allowed=false",
+    "faq_schema_eligible remains false",
+    "published_at/operator_approved_at/schema_eligibility_reviewed_at remain null"
+  ],
+  "hard_no_go": [
+    "no production import in this PR",
+    "no publish",
+    "no sitemap",
+    "no llms",
+    "no footer",
+    "no private URL",
+    "no upsert of existing public authority rows",
+    "no DailyGiving amplification"
+  ],
+  "next_task": {
+    "id": "SCIENCE-CONTENTPAGE-CONTROLLED-CMS-DRAFT-IMPORT-01",
+    "requires": [
+      "GitHub checks green for command enablement PR",
+      "operator exact approval phrase",
+      "production no-write command output reviewed",
+      "controlled execution command scoped to non-public drafts"
+    ]
+  },
+  "final_decision": "GO_FOR_CONTROLLED_CMS_DRAFT_IMPORT_AFTER_MERGE_AND_EXACT_APPROVAL"
+}

@@ -3828,9 +3828,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return in_array($file, [
             'backend/app/Console/Commands/ScienceContentPageDraftDryRunCommand.php',
+            'backend/app/Console/Commands/ScienceContentPageImportDraftsCommand.php',
             'backend/app/Console/Commands/ScienceContentPageOperatorReviewReadinessCommand.php',
             'backend/app/Console/Commands/ScienceContentPagePreImportQaCommand.php',
             'backend/app/Services/Cms/ScienceContentPageDraftDryRunService.php',
+            'backend/app/Services/Cms/ScienceContentPageDraftImportService.php',
             'backend/app/Services/Cms/ScienceContentPageOperatorReviewReadinessService.php',
             'backend/app/Services/Cms/ScienceContentPagePreImportQaService.php',
         ], true);
