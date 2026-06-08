@@ -49995,5 +49995,102 @@
         "note": "PR #1987 merged at 2026-06-08T06:21:27Z with merge commit 61cb3b9ae539f0379801d0bf41406472eb81e3dd; origin/main contains the merge commit, remote task branch is deleted, local task branch was deleted, and this worktree was left clean on a detached origin/main-derived closeout branch because local main is owned by another worktree."
       }
     ]
+  },
+  "HELP-CONTENT-DRAFT-OPERATOR-APPROVAL-R2-01": {
+    "repo": "fap-api",
+    "branch": "codex/help-content-draft-operator-approval-r2-01",
+    "base": "origin/main",
+    "status": "in_progress",
+    "train_scope": "window_9_help_service_content",
+    "title": "docs(help): record Help draft operator approval R2",
+    "depends_on": [
+      "HELP-CONTENT-DRAFT-OPERATOR-REVIEW-R2-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User replied approve after HELP-CONTENT-DRAFT-OPERATOR-REVIEW-R2-01. This is recorded as external Operator approval for the 12 Help CMS draft rows, not publish authorization."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "HELP-CONTENT-DRAFT-OPERATOR-REVIEW-R2-01 is merged in PR #1987 with merge commit 61cb3b9ae539f0379801d0bf41406472eb81e3dd."
+      },
+      "approval_record": {
+        "status": "pass",
+        "operator_review_status": "approved",
+        "operator_approval_recorded": true,
+        "publish_preflight_allowed": true,
+        "publish_allowed": false
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "python3 -m json.tool backend/docs/help/generated/help-content-draft-operator-approval-r2-01.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "git diff --check -- backend/docs/help/generated/help-content-draft-operator-approval-r2-01.v1.json backend/docs/operations/help-content-draft-operator-approval-r2-2026-06-08.md docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+          "git diff --cached --check"
+        ]
+      },
+      "github": {
+        "status": "pending",
+        "head_sha": null,
+        "passed_checks": [],
+        "failure_reason": null,
+        "merge_commit": null
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "result": {
+      "decision": "OPERATOR_APPROVED_PUBLISH_PREFLIGHT_ALLOWED_NOT_PUBLISH",
+      "generated_artifact": "backend/docs/help/generated/help-content-draft-operator-approval-r2-01.v1.json",
+      "operations_report": "backend/docs/operations/help-content-draft-operator-approval-r2-2026-06-08.md",
+      "operator_review_status": "approved",
+      "operator_approval_recorded": true,
+      "publish_preflight_allowed": true,
+      "publish_allowed": false,
+      "next_task_recommendation": "HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-01"
+    },
+    "scope_validation": {
+      "cms_mutation_performed": false,
+      "publish_performed": false,
+      "deploy_performed": false,
+      "search_submission_performed": false,
+      "private_url_access_performed": false,
+      "secret_env_cookie_token_read": false,
+      "payment_or_refund_performed": false,
+      "payment_provider_changed": false,
+      "allowed_paths_only": true
+    },
+    "sidecars": [
+      {
+        "id": "HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-01",
+        "status": "ready_for_separate_read_only_preflight",
+        "note": "Operator approval is now recorded. Publish preflight may run separately, but publish still requires exact publish authorization."
+      },
+      {
+        "id": "HELP-CONTENT-DRAFT-PUBLISH-AUTHORIZATION",
+        "status": "not_provided",
+        "note": "The user approval was not interpreted as publish authorization."
+      }
+    ],
+    "next_task": "HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-01",
+    "transitions": [
+      {
+        "at": "2026-06-08",
+        "status": "authorized",
+        "note": "User replied approve, interpreted narrowly as external Operator approval for the R2 Help CMS draft review."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "approval_recorded",
+        "note": "Generated read-only approval record artifact. Publish remains blocked until publish preflight passes and exact publish authorization is provided."
+      }
+    ]
   }
 }
