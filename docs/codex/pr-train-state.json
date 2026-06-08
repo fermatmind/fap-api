@@ -49828,5 +49828,167 @@
         "note": "PR #1985 merged at 2026-06-08T05:50:04Z with merge commit fedc82fd5c379e0e0c50547bc86b3f96acec89e3; origin/main contains the merge commit, remote task branch is deleted, local task branch was deleted, and local main worktree is synced to origin/main."
       }
     ]
+  },
+  "HELP-CONTENT-DRAFT-OPERATOR-REVIEW-R2-01": {
+    "repo": "fap-api",
+    "branch": "codex/help-content-draft-operator-review-r2-01",
+    "base": "origin/main",
+    "status": "ready_to_merge",
+    "train_scope": "window_9_help_service_content",
+    "title": "docs(help): request Help draft operator review R2",
+    "depends_on": [
+      "HELP-CONTENT-DRAFT-POLICY-CMS-SYNC-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User authorized adding and executing HELP-CONTENT-DRAFT-OPERATOR-REVIEW-R2-01 as a read-only Operator review request artifact. CMS mutation, publish, deploy, search submission, private URL access, secret/env/cookie/token reads, payment/refund action, payment-provider change, and Operator approval claim are forbidden."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "HELP-CONTENT-DRAFT-POLICY-CMS-SYNC-01 is merged in PR #1985 with merge commit fedc82fd5c379e0e0c50547bc86b3f96acec89e3."
+      },
+      "source_package": {
+        "status": "pass",
+        "path": "backend/docs/help/import-packages/content-pages-draft-source/content_pages.help_service_drafts_01.json",
+        "sha256": "7d034de0b0eb5dc2c78fbb0e1828f3820e36f1c1a03d8f1567722c336438b453",
+        "rows": 12,
+        "support_contact": 12,
+        "policy_version": 12,
+        "reviewer_unknown": 12,
+        "schema_disabled": 12,
+        "faq_items_4": 12
+      },
+      "import_package": {
+        "status": "pass",
+        "path": "backend/docs/help/import-packages/help-service-content-drafts-01.import.v1.json",
+        "sha256": "82a0d495f3fdd21df35696950eaa0b0a6b12d224d5dc7a8f82c8fa3e49cdcb65"
+      },
+      "private_boundary": {
+        "status": "pass",
+        "concrete_private_url_or_route_hits": 0,
+        "raw_order_no_hits": 0,
+        "payment_id_hits": 0,
+        "transaction_id_hits": 0,
+        "tokenized_url_hits": 0
+      },
+      "production_cms_read_only": {
+        "status": "pass",
+        "checked_rows": 12,
+        "draft": 12,
+        "non_public": 12,
+        "non_indexable": 12,
+        "unpublished": 12,
+        "owner_review": 12,
+        "support_contact": 12,
+        "policy_version": 12,
+        "reviewer_unknown": 12,
+        "schema_disabled": 12,
+        "faq_items_4": 12
+      },
+      "public_routes": {
+        "status": "pass",
+        "help_draft_routes_checked": 12,
+        "help_draft_routes_all_404": true,
+        "support_routes_checked": 2,
+        "support_routes_all_200": true,
+        "www_to_apex_redirect": true
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "python3 -m json.tool backend/docs/help/generated/help-content-draft-operator-review-r2-01.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "git diff --check -- backend/docs/help/generated/help-content-draft-operator-review-r2-01.v1.json backend/docs/operations/help-content-draft-operator-review-r2-2026-06-08.md docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+          "git diff --cached --check"
+        ]
+      },
+      "github": {
+        "status": "pass",
+        "head_sha": "9626cf69d157c4ab1ef3fb1b0af2bc59de43ec15",
+        "passed_checks": [
+          "hygiene",
+          "supply-chain",
+          "content-pack-build-validate",
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "Semgrep OSS",
+          "verify-bigfive",
+          "verify-mbti-legacy",
+          "verify-mbti-v2"
+        ],
+        "failure_reason": null,
+        "merge_commit": null
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": "9626cf69d157c4ab1ef3fb1b0af2bc59de43ec15",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1987",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "result": {
+      "decision": "REVIEW_REQUESTED_OPERATOR_APPROVAL_REQUIRED",
+      "generated_artifact": "backend/docs/help/generated/help-content-draft-operator-review-r2-01.v1.json",
+      "operations_report": "backend/docs/operations/help-content-draft-operator-review-r2-2026-06-08.md",
+      "review_status": "review_requested",
+      "review_passed": false,
+      "operator_approval_claimed": false,
+      "publish_allowed": false,
+      "next_task_recommendation": "WAIT_FOR_OPERATOR_REVIEW_DECISION_THEN_HELP_CONTENT_DRAFT_PUBLISH_PREFLIGHT_01"
+    },
+    "scope_validation": {
+      "cms_mutation_performed": false,
+      "publish_performed": false,
+      "deploy_performed": false,
+      "search_submission_performed": false,
+      "private_url_access_performed": false,
+      "secret_env_cookie_token_read": false,
+      "payment_or_refund_performed": false,
+      "payment_provider_changed": false,
+      "operator_approval_claimed": false,
+      "allowed_paths_only": true
+    },
+    "sidecars": [
+      {
+        "id": "HELP-CONTENT-DRAFT-OPERATOR-APPROVAL-R2",
+        "status": "required_external_operator_input",
+        "note": "Operator must independently approve or reject the 12 synced CMS drafts. Codex did not claim approval."
+      },
+      {
+        "id": "HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-01",
+        "status": "blocked_until_operator_approval",
+        "note": "Publish preflight must wait for explicit Operator approval."
+      },
+      {
+        "id": "HELP-SERVICE-FAQ-SCHEMA-RUNTIME-01",
+        "status": "deferred_gate",
+        "note": "Current drafts keep schema_enabled=false; FAQ schema runtime enablement remains a separate gate."
+      }
+    ],
+    "next_task": "WAIT_FOR_OPERATOR_REVIEW_DECISION_THEN_HELP_CONTENT_DRAFT_PUBLISH_PREFLIGHT_01",
+    "transitions": [
+      {
+        "at": "2026-06-08",
+        "status": "authorized",
+        "note": "User authorized adding and executing HELP-CONTENT-DRAFT-OPERATOR-REVIEW-R2-01 with read-only scope."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "review_requested",
+        "note": "Generated second-round Operator review request artifact from synced 12 Help CMS drafts and revised v01 source package evidence. No Operator approval was claimed."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "pr_opened",
+        "note": "Opened PR #1987 for HELP-CONTENT-DRAFT-OPERATOR-REVIEW-R2-01."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed for PR #1987 head 9626cf69d157c4ab1ef3fb1b0af2bc59de43ec15; merge state CLEAN."
+      }
+    ]
   }
 }
