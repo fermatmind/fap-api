@@ -49159,7 +49159,7 @@
     "repo": "fap-api",
     "branch": "codex/help-cms-service-fields-prod-release-01",
     "base": "origin/main",
-    "status": "local_checks_passed",
+    "status": "pr_opened",
     "train_scope": "window_9_help_service_content",
     "title": "docs(help): refresh Help service fields production release readiness",
     "depends_on": [
@@ -49254,8 +49254,8 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "bbb2b77c19ee0f6a7ae4ae683c1c57f2463f642d",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1966",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -49314,6 +49314,11 @@
         "at": "2026-06-08",
         "status": "local_checks_passed",
         "note": "JSON/YAML validation, target containment checks, public read-only status checks, and scoped diff whitespace checks passed. Deploy remains blocked because production active SHA is Unknown."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "pr_opened",
+        "note": "Opened PR #1966 for HELP-CMS-SERVICE-FIELDS-PROD-RELEASE-01."
       }
     ]
   }
