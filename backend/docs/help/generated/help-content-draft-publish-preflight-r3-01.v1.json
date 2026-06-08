@@ -1,0 +1,216 @@
+{
+  "schema_version": "help-content-draft-publish-preflight-r3-01.v1",
+  "generated_at": "2026-06-08",
+  "task": {
+    "id": "HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-R3-01",
+    "type": "read_only_post_deploy_publish_preflight",
+    "scope": "window_9_help_service_content"
+  },
+  "authorization": {
+    "source": "user_authorized_manifest_state_and_read_only_r3_preflight",
+    "cms_mutation_allowed": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "search_submission_allowed": false,
+    "private_url_access_allowed": false,
+    "secret_env_cookie_token_read_allowed": false,
+    "payment_or_refund_allowed": false,
+    "payment_provider_change_allowed": false,
+    "operator_approval_claim_allowed": false
+  },
+  "dependency_evidence": {
+    "help_content_draft_blocker_cms_sync": {
+      "status": "merged",
+      "pr": "https://github.com/fermatmind/fap-api/pull/1998",
+      "merge_commit": "c468443998471ba2ad645476ad2389610f4c02b1"
+    },
+    "help_service_faq_schema_runtime": {
+      "status": "merged_and_deployed",
+      "repo": "fap-web",
+      "pr": "https://github.com/fermatmind/fap-web/pull/1072",
+      "merge_commit": "b9eb0593414a283a3ad02366e203378bb41c9f06",
+      "production_frontend_sha": "37299875412c68a39e2a096f1f797800b96ff92e"
+    },
+    "help_content_pages_controlled_publish_runtime": {
+      "status": "merged_and_deployed",
+      "repo": "fap-api",
+      "pr": "https://github.com/fermatmind/fap-api/pull/2000",
+      "merge_commit": "31f0ce4f9f3966719dfc93234b224ce8990871ff",
+      "production_backend_revision_sha": "bf937f67543dc9df656219e195e364d37c8bb63a"
+    },
+    "help_content_draft_publish_preflight_r2": {
+      "status": "merged",
+      "repo": "fap-api",
+      "pr": "https://github.com/fermatmind/fap-api/pull/2001",
+      "merge_commit": "bf937f67543dc9df656219e195e364d37c8bb63a"
+    }
+  },
+  "source_package": {
+    "import_package_path": "backend/docs/help/import-packages/help-service-content-drafts-01.import.v1.json",
+    "import_package_sha256": "15843defa1d3925624a49844e0ff15244a6cdff6cbb7c93bd3eac3c7fa5bed44",
+    "content_page_source_path": "backend/docs/help/import-packages/content-pages-draft-source/content_pages.help_service_drafts_01.json",
+    "content_page_source_sha256": "af59792b896892fa308ccddab0915e72c565e3f696bc10feb0af2c96f6c54d6d",
+    "rows": 12,
+    "slugs": [
+      "help-unlock-failure",
+      "help-payment-refund",
+      "help-result-recovery",
+      "help-privacy-data",
+      "help-use-boundaries",
+      "help-data-deletion"
+    ],
+    "private_boundary_pattern_hits": {
+      "payment_id": 0,
+      "transaction_id": 0,
+      "payment_identifier": 0,
+      "private_route": 0,
+      "token_param": 0
+    }
+  },
+  "cms_draft_evidence": {
+    "source": "HELP-CONTENT-DRAFT-BLOCKER-CMS-SYNC-01 post-sync artifact",
+    "artifact_path": "backend/docs/help/generated/help-content-draft-blocker-cms-sync-01.v1.json",
+    "artifact_sha256": "d017b1a5425656a18d25780a370427dbc368fd760b4e00cc51912007724b63b4",
+    "checked_rows": 12,
+    "draft": 12,
+    "non_public": 12,
+    "non_indexable": 12,
+    "unpublished": 12,
+    "owner_review": 12,
+    "support_contact_support_at_fermatmind": 12,
+    "policy_version_help_service_policy_v1": 12,
+    "reviewer_unknown": 12,
+    "schema_disabled": 12,
+    "faq_items_count_4": 12,
+    "private_boundary_pattern_hits": {
+      "payment_id": 0,
+      "transaction_id": 0,
+      "payment_identifier": 0,
+      "private_route": 0,
+      "token_param": 0
+    }
+  },
+  "production_runtime_checks": {
+    "backend": {
+      "connection_method": "ssh_alias_fap-api-prod_batchmode_readonly_no_env_output",
+      "active_backend_revision_sha": "bf937f67543dc9df656219e195e364d37c8bb63a",
+      "content_pages_publish_controlled_visible": true,
+      "help_service_scope_visible": true,
+      "dry_run_command_shape": "content-pages:publish-controlled --scope=help-service --locale=all --keys=<six-help-service-slugs> --dry-run --json",
+      "dry_run_ok": true,
+      "dry_run": true,
+      "execute": false,
+      "writes_committed": false,
+      "target_count": 12,
+      "would_publish_count": 12,
+      "would_update_count": 12,
+      "would_create_count": 0,
+      "blocked_count": 0,
+      "target_locales": [
+        "zh-CN",
+        "en"
+      ],
+      "pages_count": 12,
+      "actions": [
+        "publish"
+      ],
+      "before_statuses": [
+        "draft"
+      ],
+      "before_public": [
+        false
+      ],
+      "before_indexable": [
+        false
+      ],
+      "after_statuses": [
+        "published"
+      ],
+      "after_public": [
+        true
+      ],
+      "after_indexable": [
+        false
+      ],
+      "error_count": 0,
+      "search_channel_action_attempted": false,
+      "url_submission_attempted": false,
+      "deploy_attempted": false,
+      "discoverability_coupled": false,
+      "sitemap_llms_footer_explicit_enablement": false,
+      "no_record_creation": true,
+      "no_upsert_missing": true,
+      "no_out_of_scope_cms_write": true,
+      "read_secret_env_cookie_token": false
+    },
+    "frontend": {
+      "connection_method": "ssh_alias_web_node1_batchmode_readonly_no_env_output",
+      "active_frontend_sha": "37299875412c68a39e2a096f1f797800b96ff92e",
+      "worktree_status_count": 0,
+      "pm2_process_count": 4,
+      "pm2_statuses": [
+        "online"
+      ],
+      "help_faq_schema_runtime_source": "deployed_sha_contains_fap_web_pr_1072_merge_commit"
+    }
+  },
+  "public_route_checks": {
+    "checked_at": "2026-06-08",
+    "draft_routes_checked": 12,
+    "draft_routes_final_404": 12,
+    "draft_routes_noindex": 12,
+    "draft_routes_jsonld_zero": 12,
+    "draft_routes_faqpage_zero": 12,
+    "support_routes_200": 2,
+    "privacy_terms_routes_200": 4,
+    "help_faq_contact_routes_200": 4,
+    "orders_lookup_routes_200": 2,
+    "orders_lookup_robots": "noindex,nofollow,noarchive,nocache",
+    "public_canonical_routes_checked": 12,
+    "public_canonical_tags_present": 12,
+    "private_url_accessed": false
+  },
+  "sitemap_llms_checks": {
+    "checked_at": "2026-06-08",
+    "resources": [
+      "https://fermatmind.com/sitemap.xml",
+      "https://fermatmind.com/llms.txt",
+      "https://fermatmind.com/llms-full.txt"
+    ],
+    "all_status_200": true,
+    "help_service_slug_hits": 0,
+    "private_pattern_hits": 0,
+    "search_submission_attempted": false
+  },
+  "decision": {
+    "status": "ready_for_exact_publish_authorization",
+    "final_decision": "GO_FOR_EXACT_PUBLISH_AUTHORIZATION_PROMPT",
+    "publish_allowed_in_this_pr": false,
+    "publish_authorization_prompt_allowed": true,
+    "ready_for_exact_publish_authorization": true,
+    "blocking_reasons": [],
+    "required_exact_publish_scope": {
+      "command_shape": "content-pages:publish-controlled --scope=help-service --locale=all --keys=help-unlock-failure,help-payment-refund,help-result-recovery,help-privacy-data,help-use-boundaries,help-data-deletion --execute --json",
+      "target_count": 12,
+      "target_locales": [
+        "zh-CN",
+        "en"
+      ],
+      "keep_indexable_false": true,
+      "search_submission_allowed": false,
+      "sitemap_llms_footer_enablement_allowed": false
+    }
+  },
+  "scope_validation": {
+    "cms_mutation_performed": false,
+    "publish_performed": false,
+    "deploy_performed": false,
+    "search_submission_performed": false,
+    "private_url_access_performed": false,
+    "secret_env_cookie_token_read": false,
+    "payment_or_refund_performed": false,
+    "payment_provider_changed": false,
+    "operator_approval_claimed": false
+  },
+  "next_task_recommendation": "HELP-CONTENT-DRAFT-PUBLISH-EXECUTE-01"
+}
