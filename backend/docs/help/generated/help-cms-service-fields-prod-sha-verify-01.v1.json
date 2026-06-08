@@ -20,7 +20,7 @@
     ]
   },
   "local_target": {
-    "origin_main_sha": "92a94f0604adc14cad2d7b1f5a85a0ce91f0eeef",
+    "origin_main_sha": "87afe2dfddfab1f8533512b8a2bdf1c347626000",
     "release_readiness_merge_commit": "b9279c12c1f40732bb9be8566f46b9515dcb02dd",
     "required_help_runtime_commits": [
       {
@@ -52,7 +52,7 @@
     "remote_git_head": "Unknown",
     "active_revision_known_to_local_git": true,
     "active_revision_is_ancestor_of_origin_main": true,
-    "commits_between_active_revision_and_origin_main": 43,
+    "commits_between_active_revision_and_origin_main": 45,
     "migration_status": {
       "2026_06_05_150000_add_help_service_fields_to_content_pages": {
         "status": "Ran",
@@ -90,7 +90,7 @@
     "production_contains_full_help_service_runtime_by_revision_graph": false,
     "production_runtime_identity_consistent": false,
     "notes": [
-      "The REVISION file reports e812d6f87f8b84b45d2e900d9d3844a0402635bc, which is 43 commits behind origin/main.",
+      "The REVISION file reports e812d6f87f8b84b45d2e900d9d3844a0402635bc, which is 45 commits behind origin/main.",
       "The reported production revision does not contain the merged Help service field/model/importer/publish-safety commits by local git ancestry.",
       "Remote file/status checks show a mixed runtime state: the Help service fields migration file is present and its migration is Ran, while the publish safety migration file is missing and its migration is Pending.",
       "Importer CLI exists with --upsert and --source-dir, but read-only grep did not confirm schema_enabled mapping in the active runtime."
@@ -104,9 +104,9 @@
     "deploy_allowed_now": false,
     "reason": "Current production active revision is known but does not prove full Help service runtime. Publish safety migration is pending and schema_enabled importer mapping is not confirmed in the active runtime."
   },
-  "next_safe_authorization_prompt": "I explicitly approve backend production deploy for exact SHA 92a94f0604adc14cad2d7b1f5a85a0ce91f0eeef release help-cms-service-fields-prod-20260608-92a94f06.",
+  "next_safe_authorization_prompt": "I explicitly approve backend production deploy for exact SHA 87afe2dfddfab1f8533512b8a2bdf1c347626000 release help-cms-service-fields-prod-20260608-87afe2df.",
   "post_deploy_required_read_only_checks": [
-    "Confirm production REVISION equals 92a94f0604adc14cad2d7b1f5a85a0ce91f0eeef or a newer explicitly approved SHA containing it.",
+    "Confirm production REVISION equals 87afe2dfddfab1f8533512b8a2bdf1c347626000 or a newer explicitly approved SHA containing it.",
     "Confirm Help service fields migration is Ran.",
     "Confirm publish safety fields migration is Ran.",
     "Confirm content-pages:import-local-baseline service-field mapping includes support_contact, policy_version, reviewer, faq_items, and schema_enabled."

@@ -6,10 +6,10 @@ This is a read-only production verification for the Help service ContentPage fie
 
 ## Result
 
-- Current `origin/main`: `92a94f0604adc14cad2d7b1f5a85a0ce91f0eeef`
+- Current `origin/main`: `87afe2dfddfab1f8533512b8a2bdf1c347626000`
 - Production active revision from `REVISION`: `e812d6f87f8b84b45d2e900d9d3844a0402635bc`
 - Production active revision is an ancestor of `origin/main`: yes
-- Commits between production active revision and `origin/main`: `43`
+- Commits between production active revision and `origin/main`: `45`
 - Remote git HEAD: `Unknown`
 
 ## Migration Status
@@ -45,12 +45,12 @@ Do not proceed with CMS sync, publish, or production mutation from this state.
 If you decide to deploy the current latest backend main, use this exact approval phrase:
 
 ```text
-I explicitly approve backend production deploy for exact SHA 92a94f0604adc14cad2d7b1f5a85a0ce91f0eeef release help-cms-service-fields-prod-20260608-92a94f06.
+I explicitly approve backend production deploy for exact SHA 87afe2dfddfab1f8533512b8a2bdf1c347626000 release help-cms-service-fields-prod-20260608-87afe2df.
 ```
 
 After deploy, run a separate read-only post-deploy verification before CMS sync:
 
-- production `REVISION` equals `92a94f0604adc14cad2d7b1f5a85a0ce91f0eeef` or a newer explicitly approved SHA containing it
+- production `REVISION` equals `87afe2dfddfab1f8533512b8a2bdf1c347626000` or a newer explicitly approved SHA containing it
 - Help service fields migration is `Ran`
 - publish safety fields migration is `Ran`
 - importer mapping includes `support_contact`, `policy_version`, `reviewer`, `faq_items`, and `schema_enabled`

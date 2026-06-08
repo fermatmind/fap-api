@@ -49382,9 +49382,9 @@
         "active_revision_source": "REVISION_FILE",
         "active_revision_sha": "e812d6f87f8b84b45d2e900d9d3844a0402635bc",
         "remote_git_head": "Unknown",
-        "origin_main_sha": "92a94f0604adc14cad2d7b1f5a85a0ce91f0eeef",
+        "origin_main_sha": "87afe2dfddfab1f8533512b8a2bdf1c347626000",
         "active_revision_is_ancestor_of_origin_main": true,
-        "commits_between_active_revision_and_origin_main": 43,
+        "commits_between_active_revision_and_origin_main": 45,
         "contains_help_service_fields_commit": false,
         "contains_help_importer_service_fields_commit": false,
         "contains_publish_safety_fields_commit": false,
@@ -49431,8 +49431,8 @@
       "generated_artifact": "backend/docs/help/generated/help-cms-service-fields-prod-sha-verify-01.v1.json",
       "operations_report": "backend/docs/operations/help-cms-service-fields-prod-sha-verify-2026-06-08.md",
       "production_active_revision_sha": "e812d6f87f8b84b45d2e900d9d3844a0402635bc",
-      "origin_main_sha": "92a94f0604adc14cad2d7b1f5a85a0ce91f0eeef",
-      "next_safe_authorization_prompt": "I explicitly approve backend production deploy for exact SHA 92a94f0604adc14cad2d7b1f5a85a0ce91f0eeef release help-cms-service-fields-prod-20260608-92a94f06.",
+      "origin_main_sha": "87afe2dfddfab1f8533512b8a2bdf1c347626000",
+      "next_safe_authorization_prompt": "I explicitly approve backend production deploy for exact SHA 87afe2dfddfab1f8533512b8a2bdf1c347626000 release help-cms-service-fields-prod-20260608-87afe2df.",
       "next_task_recommendation": "HELP-CMS-SERVICE-FIELDS-PROD-DEPLOY-AUTHORIZATION-01"
     },
     "scope_validation": {
@@ -49486,6 +49486,11 @@
         "at": "2026-06-08",
         "status": "pr_opened",
         "note": "Opened PR #1975 for HELP-CMS-SERVICE-FIELDS-PROD-SHA-VERIFY-01."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "target_refreshed_after_main_advanced",
+        "note": "origin/main advanced to 87afe2dfddfab1f8533512b8a2bdf1c347626000 before merge, so the verification artifact and next deploy authorization prompt were refreshed. Production active revision remains e812d6f87f8b84b45d2e900d9d3844a0402635bc."
       }
     ]
   }
