@@ -24,42 +24,58 @@ final class WarmSitemapSourceCacheCommand extends Command
             $generator = app(\App\Services\SEO\SitemapGenerator::class);
             $projection = app(\App\Domain\Career\Publish\CareerRuntimePublishProjectionLookup::class);
 
-            $payload = $controller->buildPayload($generator, $projection);
-
-            $count = (int) ($payload['count'] ?? 0);
-            $elapsed = round(microtime(true) - $start, 3);
-
-            Cache::put(SitemapSourceController::CACHE_KEY_FRESH, $payload, SitemapSourceController::FRESH_TTL_SECONDS);
-            Cache::put(SitemapSourceController::CACHE_KEY_STALE, $payload, SitemapSourceController::STALE_TTL_SECONDS);
-
-            if ((bool) $this->option('json')) {
-                $this->line((string) json_encode([
-                    'status' => 'warmed',
-                    'count' => $count,
-                    'elapsed_seconds' => $elapsed,
-                ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
-
-                return self::SUCCESS;
+            $lock = Cache::lock(SitemapSourceController::CACHE_KEY_LOCK, SitemapSourceController::LOCK_TTL_SECONDS);
+            if (! $lock->get()) {
+                return $this->emitResult('locked', 0, round(microtime(true) - $start, 3));
             }
 
-            $this->line("status=warmed count={$count} elapsed={$elapsed}s");
+            try {
+                $payload = $controller->buildPayload($generator, $projection);
+                if ((int) ($payload['count'] ?? 0) < 1) {
+                    throw new \RuntimeException('Generated sitemap-source payload was empty.');
+                }
 
-            return self::SUCCESS;
+                $controller->storeCache($payload);
+
+                return $this->emitResult('warmed', (int) ($payload['count'] ?? 0), round(microtime(true) - $start, 3));
+            } finally {
+                $lock->release();
+            }
         } catch (\Throwable $throwable) {
             $elapsed = round(microtime(true) - $start, 3);
-            $message = $throwable->getMessage();
-
-            if ((bool) $this->option('json')) {
-                $this->line((string) json_encode([
-                    'status' => 'failed',
-                    'error' => $message,
-                    'elapsed_seconds' => $elapsed,
-                ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
-            } else {
-                $this->error("{$message} (elapsed={$elapsed}s)");
+            $stale = Cache::get(SitemapSourceController::CACHE_KEY_STALE);
+            if (is_array($stale)) {
+                return $this->emitResult('stale_retained', (int) ($stale['count'] ?? 0), $elapsed, $throwable->getMessage());
             }
 
-            return self::FAILURE;
+            $controller = app(SitemapSourceController::class);
+            $payload = $controller->fallbackPayload();
+            $controller->storeCache($payload);
+
+            return $this->emitResult('fallback_warmed', (int) ($payload['count'] ?? 0), $elapsed, $throwable->getMessage());
         }
+    }
+
+    private function emitResult(string $status, int $count, float $elapsed, ?string $error = null): int
+    {
+        if ((bool) $this->option('json')) {
+            $payload = [
+                'status' => $status,
+                'count' => $count,
+                'elapsed_seconds' => $elapsed,
+            ];
+            if ($error !== null && $error !== '') {
+                $payload['error'] = $error;
+            }
+
+            $this->line((string) json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+
+            return self::SUCCESS;
+        }
+
+        $suffix = $error === null || $error === '' ? '' : " error=\"{$error}\"";
+        $this->line("status={$status} count={$count} elapsed={$elapsed}s{$suffix}");
+
+        return self::SUCCESS;
     }
 }

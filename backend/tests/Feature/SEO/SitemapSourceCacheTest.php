@@ -10,14 +10,17 @@ use App\Domain\Career\Publish\CareerRuntimePublishProjectionService;
 use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
 use App\Models\OccupationFamily;
+use App\Services\SEO\SitemapGenerator;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
+use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Tests\TestCase;
 
 class SitemapSourceCacheTest extends TestCase
 {
+    use MockeryPHPUnitIntegration;
     use RefreshDatabase;
 
     protected function setUp(): void
@@ -26,33 +29,33 @@ class SitemapSourceCacheTest extends TestCase
         Cache::flush();
     }
 
-    public function test_cache_miss_generates_and_stores_payload(): void
+    public function test_empty_cache_returns_safe_fallback_without_http_regeneration(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);
         config(['app.url' => 'https://fermatmind.com']);
 
-        $this->createDisplayAsset(
-            $this->createOccupation('cache-test-slug', 'Cache Test'),
-        );
-        $this->writeProjectionArtifact([
-            $this->projectionItem('cache-test-slug', 'en'),
-            $this->projectionItem('cache-test-slug', 'zh'),
-        ]);
-
         $response = $this->getJson('/api/v0.5/seo/sitemap-source');
 
         $response->assertOk()
-            ->assertHeader('X-Fermat-Cache', 'miss')
+            ->assertHeader('X-Fermat-Cache', 'fallback')
             ->assertJsonPath('ok', true)
-            ->assertJsonPath('source', 'backend_sitemap_generator');
+            ->assertJsonPath('source', 'backend_sitemap_generator_fallback');
 
-        $firstCount = $response->json('count');
+        $locs = collect($response->json('items'))->pluck('loc')->all();
 
-        $response2 = $this->getJson('/api/v0.5/seo/sitemap-source');
+        $this->assertGreaterThan(10, $response->json('count'));
+        $this->assertContains('https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types', $locs);
+        $this->assertContains('https://fermatmind.com/zh/tests/holland-career-interest-test-riasec', $locs);
+        $this->assertNull(Cache::get('seo:sitemap-source:v1:fresh'));
+        $this->assertNull(Cache::get('seo:sitemap-source:v1:stale'));
 
-        $response2->assertOk()
-            ->assertHeader('X-Fermat-Cache', 'hit')
-            ->assertJsonPath('count', $firstCount);
+        foreach ($locs as $loc) {
+            $this->assertDoesNotMatchRegularExpression(
+                '#/(result|results|orders?|share|pay|payment|history)(/|$)|/tests/[^/]+/take(/|$)#i',
+                parse_url($loc, PHP_URL_PATH) ?: '',
+                "Fallback URL must not expose private route family: {$loc}"
+            );
+        }
     }
 
     public function test_cache_hit_returns_cached_payload_without_regenerating(): void
@@ -68,7 +71,8 @@ class SitemapSourceCacheTest extends TestCase
             $this->projectionItem('hit-test-slug', 'zh'),
         ]);
 
-        $this->getJson('/api/v0.5/seo/sitemap-source');
+        $this->artisan('seo:warm-sitemap-source-cache --json')
+            ->assertSuccessful();
 
         $response = $this->getJson('/api/v0.5/seo/sitemap-source');
 
@@ -152,6 +156,36 @@ class SitemapSourceCacheTest extends TestCase
         $this->assertSame($fresh['count'], $stale['count']);
     }
 
+    public function test_warm_command_writes_safe_fallback_when_generator_fails_without_stale_cache(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+        config(['app.url' => 'https://fermatmind.com']);
+
+        $this->mock(SitemapGenerator::class, function ($mock): void {
+            $mock->shouldReceive('generateUrls')
+                ->once()
+                ->andThrow(new \RuntimeException('simulated sitemap generator failure'));
+        });
+
+        $this->artisan('seo:warm-sitemap-source-cache --json')
+            ->assertSuccessful();
+
+        $fresh = Cache::get('seo:sitemap-source:v1:fresh');
+        $stale = Cache::get('seo:sitemap-source:v1:stale');
+
+        $this->assertIsArray($fresh);
+        $this->assertIsArray($stale);
+        $this->assertSame('backend_sitemap_generator_fallback', $fresh['source']);
+        $this->assertSame('backend_sitemap_generator_fallback', $stale['source']);
+        $this->assertGreaterThan(10, $fresh['count']);
+        $this->assertSame($fresh['items'], $stale['items']);
+
+        $response = $this->getJson('/api/v0.5/seo/sitemap-source');
+        $response->assertOk()
+            ->assertHeader('X-Fermat-Cache', 'hit')
+            ->assertJsonPath('source', 'backend_sitemap_generator_fallback');
+    }
+
     public function test_response_shape_remains_compatible(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);
@@ -164,6 +198,9 @@ class SitemapSourceCacheTest extends TestCase
             $this->projectionItem('shape-test', 'en'),
             $this->projectionItem('shape-test', 'zh'),
         ]);
+
+        $this->artisan('seo:warm-sitemap-source-cache --json')
+            ->assertSuccessful();
 
         $response = $this->getJson('/api/v0.5/seo/sitemap-source');
 
@@ -209,7 +246,8 @@ class SitemapSourceCacheTest extends TestCase
             ]),
         ]);
 
-        $this->getJson('/api/v0.5/seo/sitemap-source');
+        $this->artisan('seo:warm-sitemap-source-cache --json')
+            ->assertSuccessful();
 
         $cached = Cache::get('seo:sitemap-source:v1:fresh');
         $this->assertIsArray($cached);
@@ -233,7 +271,8 @@ class SitemapSourceCacheTest extends TestCase
             $this->projectionItem('clean-test', 'zh'),
         ]);
 
-        $this->getJson('/api/v0.5/seo/sitemap-source');
+        $this->artisan('seo:warm-sitemap-source-cache --json')
+            ->assertSuccessful();
 
         $cached = Cache::get('seo:sitemap-source:v1:fresh');
         $this->assertIsArray($cached);
@@ -267,7 +306,8 @@ class SitemapSourceCacheTest extends TestCase
             $this->projectionItem('cc-test', 'zh'),
         ]);
 
-        $this->getJson('/api/v0.5/seo/sitemap-source');
+        $this->artisan('seo:warm-sitemap-source-cache --json')
+            ->assertSuccessful();
         $response = $this->getJson('/api/v0.5/seo/sitemap-source');
 
         $response->assertHeader('X-Fermat-Cache', 'hit');
