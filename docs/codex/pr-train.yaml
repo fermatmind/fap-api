@@ -22304,6 +22304,47 @@ prs:
     content_authority: CMS/backend
     next_task: HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-01
 
+  - id: HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-01
+    repo: fap-api
+    depends_on:
+      - HELP-CONTENT-DRAFT-OPERATOR-APPROVAL-R2-01
+    branch: codex/help-content-draft-publish-preflight-01
+    title: "docs(help): run Help draft publish preflight"
+    train_scope: window_9_help_service_content
+    status: blocked
+    scope:
+      - Run a read-only publish preflight for the 12 Help ContentPage CMS drafts.
+      - Confirm draft row count, canonical public paths, support contact, policy fields, FAQ structure, schema readiness, robots/sitemap/llms behavior, and private URL/private ID boundaries.
+      - Record publish blockers and next remediation tasks; do not mutate CMS rows, publish, deploy, submit search URLs, or access private URLs.
+    allowed_paths:
+      - backend/docs/help/generated/help-content-draft-publish-preflight-01.v1.json
+      - backend/docs/operations/help-content-draft-publish-preflight-2026-06-08.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Mutate CMS rows, publish, deploy, submit search URLs, access private result/order/share/pay/payment/history URLs, read secrets/env/cookies/tokens, run payment/refund flows, or change payment-provider behavior.
+    validation:
+      - python3 -m json.tool backend/docs/help/generated/help-content-draft-publish-preflight-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - cd backend && php artisan list --no-ansi | rg "content-pages"
+      - git diff --check -- backend/docs/help/generated/help-content-draft-publish-preflight-01.v1.json backend/docs/operations/help-content-draft-publish-preflight-2026-06-08.md docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: HELP-CONTENT-DRAFT-PREFLIGHT-BLOCKER-REPAIR-01
+
   - id: PUBLIC-BENEFIT-ASSET-PACKAGES-ARCHIVE-01
     repo: fap-api
     branch: codex/public-benefit-asset-packages-archive-01

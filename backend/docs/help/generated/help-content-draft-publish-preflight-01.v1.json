@@ -1,0 +1,295 @@
+{
+  "schema_version": "help-content-draft-publish-preflight-01.v1",
+  "generated_at": "2026-06-08T07:49:40Z",
+  "task": {
+    "id": "HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-01",
+    "repo": "fap-api",
+    "scope": "read_only_publish_preflight_for_12_help_content_page_drafts",
+    "status": "blocked"
+  },
+  "authorization": {
+    "user_authorized_manifest_state_entry": true,
+    "user_authorized_read_only_publish_preflight": true,
+    "cms_mutation_allowed": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "search_submission_allowed": false,
+    "private_url_access_allowed": false,
+    "secret_env_cookie_token_read_allowed": false,
+    "payment_or_refund_allowed": false,
+    "payment_provider_change_allowed": false
+  },
+  "dependency_evidence": {
+    "operator_approval_task": "HELP-CONTENT-DRAFT-OPERATOR-APPROVAL-R2-01",
+    "operator_approval_status": "approved",
+    "operator_approval_pr": "https://github.com/fermatmind/fap-api/pull/1990",
+    "operator_approval_merge_commit": "9ba4edbe11382aeb29f1a9a53393137b5e7a2ae5",
+    "operator_approval_closeout_commit": "6d0b250bb56e0876f8d806652b547a2d971a7f01",
+    "publish_preflight_allowed": true,
+    "publish_authorization_provided": false
+  },
+  "source_package": {
+    "import_package": "backend/docs/help/import-packages/help-service-content-drafts-01.import.v1.json",
+    "import_package_sha256": "82a0d495f3fdd21df35696950eaa0b0a6b12d224d5dc7a8f82c8fa3e49cdcb65",
+    "draft_source": "backend/docs/help/import-packages/content-pages-draft-source/content_pages.help_service_drafts_01.json",
+    "draft_source_sha256": "7d034de0b0eb5dc2c78fbb0e1828f3820e36f1c1a03d8f1567722c336438b453",
+    "source_count": 12,
+    "locales": [
+      "en",
+      "zh-CN"
+    ],
+    "slugs": [
+      "help-data-deletion",
+      "help-payment-refund",
+      "help-privacy-data",
+      "help-result-recovery",
+      "help-unlock-failure",
+      "help-use-boundaries"
+    ],
+    "support_contact": "support@fermatmind.com",
+    "policy_version": "help_service_policy.v1",
+    "schema_enabled": false,
+    "robots": "noindex,nofollow"
+  },
+  "production_cms_read_only_check": {
+    "connection_method": "ssh_alias_fap-api-prod_batchmode_readonly_laravel_tinker_summary_without_body_output",
+    "content_body_output": false,
+    "checked_rows": 12,
+    "draft": 12,
+    "non_public": 12,
+    "non_indexable": 12,
+    "unpublished": 12,
+    "owner_review": 12,
+    "support_contact_support_at_fermatmind": 12,
+    "policy_version_help_service_policy_v1": 12,
+    "reviewer_unknown": 12,
+    "schema_disabled": 12,
+    "faq_schema_eligible_false": 12,
+    "publish_allowed_false": 12,
+    "operator_approval_required_true": 12,
+    "operator_approved_at_null": 12,
+    "faq_items_count_4": 12,
+    "locales": [
+      "en",
+      "zh-CN"
+    ],
+    "slugs": [
+      "help-data-deletion",
+      "help-payment-refund",
+      "help-privacy-data",
+      "help-result-recovery",
+      "help-unlock-failure",
+      "help-use-boundaries"
+    ],
+    "paths": [
+      "/help/data-deletion",
+      "/help/payment-refund",
+      "/help/privacy-data",
+      "/help/result-recovery",
+      "/help/unlock-failure",
+      "/help/use-boundaries"
+    ],
+    "canonical_paths": [
+      "/help/data-deletion",
+      "/help/payment-refund",
+      "/help/privacy-data",
+      "/help/result-recovery",
+      "/help/unlock-failure",
+      "/help/use-boundaries"
+    ]
+  },
+  "private_boundary_check": {
+    "status": "blocked",
+    "method": "Server-side text scan over title, summary, markdown/html body, SEO fields, and canonical path; output limited to counts and slug/locale hits, no body text.",
+    "production_hits": {
+      "private_result_route": 0,
+      "private_order_route": 0,
+      "payment_id": 3,
+      "transaction_id": 0,
+      "tokenized_url": 0,
+      "raw_order_no": 0
+    },
+    "production_hit_rows": [
+      {
+        "slug": "help-data-deletion",
+        "locale": "en",
+        "payment_id_phrase_hit": true
+      },
+      {
+        "slug": "help-payment-refund",
+        "locale": "en",
+        "payment_id_phrase_hit": true
+      },
+      {
+        "slug": "help-unlock-failure",
+        "locale": "en",
+        "payment_id_phrase_hit": true
+      }
+    ],
+    "local_package_hits": [
+      {
+        "slug": "help-unlock-failure",
+        "locale": "en",
+        "hits": [
+          "payment_id"
+        ]
+      },
+      {
+        "slug": "help-payment-refund",
+        "locale": "en",
+        "hits": [
+          "payment_id"
+        ]
+      },
+      {
+        "slug": "help-data-deletion",
+        "locale": "en",
+        "hits": [
+          "payment_id"
+        ]
+      }
+    ]
+  },
+  "public_route_checks": {
+    "base": "https://fermatmind.com",
+    "help_draft_routes_expected_404": {
+      "routes_checked": 12,
+      "all_404": true,
+      "results": [
+        { "route": "/zh/help/unlock-failure", "status": 404 },
+        { "route": "/en/help/unlock-failure", "status": 404 },
+        { "route": "/zh/help/payment-refund", "status": 404 },
+        { "route": "/en/help/payment-refund", "status": 404 },
+        { "route": "/zh/help/result-recovery", "status": 404 },
+        { "route": "/en/help/result-recovery", "status": 404 },
+        { "route": "/zh/help/privacy-data", "status": 404 },
+        { "route": "/en/help/privacy-data", "status": 404 },
+        { "route": "/zh/help/use-boundaries", "status": 404 },
+        { "route": "/en/help/use-boundaries", "status": 404 },
+        { "route": "/zh/help/data-deletion", "status": 404 },
+        { "route": "/en/help/data-deletion", "status": 404 }
+      ]
+    },
+    "support_policy_routes": {
+      "results": [
+        { "route": "/zh/support", "status": 200 },
+        { "route": "/en/support", "status": 200 },
+        { "route": "/zh/privacy", "status": 200 },
+        { "route": "/en/privacy", "status": 200 },
+        { "route": "/zh/terms", "status": 200 },
+        { "route": "/en/terms", "status": 200 }
+      ]
+    },
+    "help_index_routes": {
+      "results": [
+        { "route": "/zh/help", "status": 308 },
+        { "route": "/en/help", "status": 308 }
+      ]
+    }
+  },
+  "sitemap_llms_checks": {
+    "status": "pass_for_unpublished_drafts",
+    "routes_checked": [
+      "/sitemap.xml",
+      "/llms.txt",
+      "/llms-full.txt"
+    ],
+    "help_service_slug_hits": {
+      "/help/unlock-failure": false,
+      "/help/payment-refund": false,
+      "/help/result-recovery": false,
+      "/help/privacy-data": false,
+      "/help/use-boundaries": false,
+      "/help/data-deletion": false
+    },
+    "private_pattern_counts": {
+      "/result/[^\\s<]+": 0,
+      "/orders/[^\\s<]+": 0,
+      "/pay/[^\\s<]+": 0,
+      "payment_id": 0,
+      "transaction_id": 0,
+      "[?&]token=": 0
+    }
+  },
+  "schema_runtime_check": {
+    "status": "blocked_runtime_gap",
+    "fap_web_read_only_source_check": {
+      "file": "app/(localized)/[locale]/help/[slug]/page.tsx",
+      "uses_backend_content_page": true,
+      "service_slugs_not_in_static_params": true,
+      "faq_schema_only_for_slug_faq": true,
+      "does_not_consume_schema_enabled_field": true,
+      "cms_faq_items_first_class_runtime_unconfirmed": true
+    },
+    "note": "Current Help detail runtime emits FAQPage only for /help/faq from visible markdown extraction. It does not yet prove CMS faq_items/schema_enabled authority for these six Help service topics."
+  },
+  "publish_runtime_check": {
+    "status": "blocked_runtime_gap",
+    "local_artisan_list": [
+      "content-pages:import-local-baseline",
+      "content-pages:publish-controlled",
+      "content-pages:science-draft-dry-run",
+      "content-pages:science-import-drafts",
+      "content-pages:science-operator-review-readiness",
+      "content-pages:science-pre-import-qa"
+    ],
+    "content_pages_publish_controlled_scope": {
+      "allows_help_service_keys": false,
+      "allows_zh_cn": false,
+      "current_allowed_keys": [
+        "brand",
+        "charter",
+        "foundation",
+        "careers",
+        "policies"
+      ]
+    },
+    "note": "No bounded controlled publish runtime currently allows exactly these 12 Help service ContentPage rows."
+  },
+  "decision": {
+    "status": "blocked",
+    "publish_preflight_result": "NO_GO_FOR_PUBLISH_EXECUTE",
+    "draft_count_checked": 12,
+    "package_hash_checked": true,
+    "publish_authorization_prompt_allowed": false,
+    "reasons": [
+      "Three English Help draft rows contain the blocked payment_id phrase pattern.",
+      "Help FAQ schema runtime does not yet consume CMS faq_items/schema_enabled for these service topics.",
+      "Existing content-pages:publish-controlled runtime does not allow the 12 Help service keys or zh-CN locale."
+    ]
+  },
+  "scope_validation": {
+    "cms_mutation_performed": false,
+    "publish_performed": false,
+    "deploy_performed": false,
+    "search_submission_performed": false,
+    "private_url_access_performed": false,
+    "secret_env_cookie_token_read": false,
+    "payment_or_refund_performed": false,
+    "payment_provider_changed": false,
+    "allowed_paths_only": true
+  },
+  "sidecars": [
+    {
+      "id": "HELP-CONTENT-DRAFT-PREFLIGHT-BLOCKER-REPAIR-01",
+      "status": "required_before_publish_preflight_rerun",
+      "note": "Revise the local/import/CMS drafts to remove blocked payment_id phrase hits without changing policy meaning, then resync only the affected draft rows."
+    },
+    {
+      "id": "HELP-SERVICE-FAQ-SCHEMA-RUNTIME-01",
+      "status": "required_before_publish_execute",
+      "note": "Make Help detail runtime consume CMS faq_items/schema_enabled while preserving visible FAQ and JSON-LD parity."
+    },
+    {
+      "id": "HELP-CONTENT-PAGES-CONTROLLED-PUBLISH-RUNTIME-01",
+      "status": "required_before_publish_execute",
+      "note": "Add a bounded fail-closed controlled publish path for exactly the 12 approved Help service ContentPage draft rows."
+    },
+    {
+      "id": "HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-R2-01",
+      "status": "required_after_repairs",
+      "note": "Rerun read-only publish preflight after blocker repairs and before any exact publish authorization prompt."
+    }
+  ],
+  "next_task_recommendation": "HELP-CONTENT-DRAFT-PREFLIGHT-BLOCKER-REPAIR-01"
+}
