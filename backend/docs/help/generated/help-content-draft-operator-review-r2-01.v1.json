@@ -1,0 +1,172 @@
+{
+  "schema": "help-content-draft-operator-review-r2-01.v1",
+  "task": "HELP-CONTENT-DRAFT-OPERATOR-REVIEW-R2-01",
+  "generated_at": "2026-06-08",
+  "decision": "REVIEW_REQUESTED_OPERATOR_APPROVAL_REQUIRED",
+  "review_status": "review_requested",
+  "review_passed": false,
+  "operator_approval_claimed": false,
+  "publish_allowed": false,
+  "scope": "Read-only second-round Operator review request for the synced 12 Help ContentPage CMS drafts and revised v01 source package.",
+  "authorization": {
+    "source": "user",
+    "allowed": "Read-only generation of the second-round Help CMS draft Operator review request artifact and blocker checks.",
+    "forbidden": [
+      "CMS mutation",
+      "publish",
+      "deploy",
+      "search submission",
+      "private result/order/share/pay/payment/history URL access",
+      "secret/env/cookie/token value reading",
+      "payment/refund action",
+      "payment-provider behavior change",
+      "Operator approval claim"
+    ]
+  },
+  "dependency_evidence": {
+    "HELP_CONTENT_DRAFT_POLICY_CMS_SYNC_01": {
+      "status": "merged",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1985",
+      "merge_commit": "fedc82fd5c379e0e0c50547bc86b3f96acec89e3"
+    }
+  },
+  "source_package": {
+    "path": "backend/docs/help/import-packages/content-pages-draft-source/content_pages.help_service_drafts_01.json",
+    "sha256": "7d034de0b0eb5dc2c78fbb0e1828f3820e36f1c1a03d8f1567722c336438b453",
+    "rows": 12,
+    "locales": [
+      "en",
+      "zh-CN"
+    ],
+    "slugs": [
+      "help-data-deletion",
+      "help-payment-refund",
+      "help-privacy-data",
+      "help-result-recovery",
+      "help-unlock-failure",
+      "help-use-boundaries"
+    ],
+    "support_contact_support_at_fermatmind": 12,
+    "policy_version_help_service_policy_v1": 12,
+    "reviewer_unknown": 12,
+    "schema_disabled": 12,
+    "faq_items_count_4": 12
+  },
+  "import_package": {
+    "path": "backend/docs/help/import-packages/help-service-content-drafts-01.import.v1.json",
+    "sha256": "82a0d495f3fdd21df35696950eaa0b0a6b12d224d5dc7a8f82c8fa3e49cdcb65"
+  },
+  "private_boundary_check": {
+    "status": "pass",
+    "method": "JSON string walk for concrete disallowed private URL/path values plus raw ID regex checks; broad Help keyword hits were not treated as blockers unless they formed a concrete private route or raw identifier.",
+    "concrete_private_url_or_route_hits": 0,
+    "raw_order_no_hits": 0,
+    "payment_id_hits": 0,
+    "transaction_id_hits": 0,
+    "tokenized_url_hits": 0
+  },
+  "production_cms_read_only_check": {
+    "connection_method": "ssh_alias_fap-api-prod_batchmode",
+    "command_type": "read_only_laravel_tinker_summary_without_body_output",
+    "checked_rows": 12,
+    "draft": 12,
+    "non_public": 12,
+    "non_indexable": 12,
+    "unpublished": 12,
+    "owner_review": 12,
+    "support_contact_support_at_fermatmind": 12,
+    "policy_version_help_service_policy_v1": 12,
+    "reviewer_unknown": 12,
+    "schema_disabled": 12,
+    "faq_items_count_4": 12,
+    "field_hashes_recorded": [
+      "support_contact_sha256",
+      "policy_version_sha256",
+      "reviewer_sha256",
+      "faq_sha256"
+    ],
+    "content_body_output": false
+  },
+  "public_route_checks": {
+    "base": "https://fermatmind.com",
+    "www_to_apex_redirect": "pass: https://www.fermatmind.com returned 308 to public apex canonical routes only.",
+    "help_draft_routes": {
+      "expected_status": 404,
+      "routes_checked": 12,
+      "all_404": true,
+      "results": [
+        {"route": "/zh/help/unlock-failure", "status": 404},
+        {"route": "/en/help/unlock-failure", "status": 404},
+        {"route": "/zh/help/payment-refund", "status": 404},
+        {"route": "/en/help/payment-refund", "status": 404},
+        {"route": "/zh/help/result-recovery", "status": 404},
+        {"route": "/en/help/result-recovery", "status": 404},
+        {"route": "/zh/help/privacy-data", "status": 404},
+        {"route": "/en/help/privacy-data", "status": 404},
+        {"route": "/zh/help/use-boundaries", "status": 404},
+        {"route": "/en/help/use-boundaries", "status": 404},
+        {"route": "/zh/help/data-deletion", "status": 404},
+        {"route": "/en/help/data-deletion", "status": 404}
+      ]
+    },
+    "support_routes": {
+      "expected_status": 200,
+      "routes_checked": 2,
+      "all_200": true,
+      "results": [
+        {"route": "/zh/support", "status": 200},
+        {"route": "/en/support", "status": 200}
+      ]
+    }
+  },
+  "operator_review_request": {
+    "status": "review_requested",
+    "requested_scope": [
+      "Review the 12 Help CMS draft rows in zh-CN and en.",
+      "Confirm policy owner answers were applied correctly.",
+      "Confirm the drafts can remain draft, non-public, non-indexable, unpublished, and schema_enabled=false until publish preflight.",
+      "Approve or reject editorial readiness outside Codex."
+    ],
+    "codex_must_not_claim": [
+      "Operator review passed",
+      "publish approved",
+      "search submission approved"
+    ]
+  },
+  "publish_gates": {
+    "operator_review_required": true,
+    "publish_preflight_required": true,
+    "exact_publish_authorization_required": true,
+    "faq_schema_runtime_gate_required": true,
+    "current_publish_status": "blocked"
+  },
+  "scope_validation": {
+    "cms_mutation_performed": false,
+    "publish_performed": false,
+    "deploy_performed": false,
+    "search_submission_performed": false,
+    "private_url_access_performed": false,
+    "secret_env_cookie_token_read": false,
+    "payment_or_refund_performed": false,
+    "payment_provider_changed": false,
+    "operator_approval_claimed": false
+  },
+  "sidecars": [
+    {
+      "id": "HELP-CONTENT-DRAFT-OPERATOR-APPROVAL-R2",
+      "status": "required_external_operator_input",
+      "note": "Operator must review the 12 synced CMS drafts and provide explicit approval or rejection. Codex did not claim approval."
+    },
+    {
+      "id": "HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-01",
+      "status": "blocked_until_operator_approval",
+      "note": "Publish preflight should not start until Operator review is explicitly approved."
+    },
+    {
+      "id": "HELP-SERVICE-FAQ-SCHEMA-RUNTIME-01",
+      "status": "deferred_gate",
+      "note": "The current drafts keep schema_enabled=false; FAQ schema runtime enablement remains a separate gate."
+    }
+  ],
+  "next_task_recommendation": "WAIT_FOR_OPERATOR_REVIEW_DECISION_THEN_HELP_CONTENT_DRAFT_PUBLISH_PREFLIGHT_01"
+}
