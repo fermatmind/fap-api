@@ -49154,5 +49154,167 @@
         "note": "PR #1962 merged on GitHub at 2026-06-07T22:06:03Z with merge commit 0dd12d8751b328cf502a28e586597d1ed4a4246f; origin/main contains the merge commit; remote branch was already deleted and local task branch cleanup was completed."
       }
     ]
+  },
+  "HELP-CMS-SERVICE-FIELDS-PROD-RELEASE-01": {
+    "repo": "fap-api",
+    "branch": "codex/help-cms-service-fields-prod-release-01",
+    "base": "origin/main",
+    "status": "local_checks_passed",
+    "train_scope": "window_9_help_service_content",
+    "title": "docs(help): refresh Help service fields production release readiness",
+    "depends_on": [
+      "HELP-CMS-SERVICE-FIELDS-PROD-RUNTIME-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User requested HELP-CMS-SERVICE-FIELDS-PROD-RELEASE-01 fresh deploy readiness to refresh current exact SHA before deciding whether to authorize deploy. No deploy, migration, CMS mutation, publish, search submission, private URL access, secret/env/cookie/token read, payment/refund action, payment-provider change, or Operator approval claim is allowed."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "HELP-CMS-SERVICE-FIELDS-PROD-RUNTIME-01 is merged and reconciled on origin/main."
+      },
+      "target_resolution": {
+        "status": "pass",
+        "origin_main_sha": "01de36c41ff5180e269ca324bb5cc666eac2babf",
+        "contains_pr_1956": true,
+        "contains_pr_1959": true,
+        "contains_pr_1962": true,
+        "newer_main_commits_included": [
+          "a5509759 PR #1963",
+          "3acd4de7 PR #1965",
+          "01de36c41ff5180e269ca324bb5cc666eac2babf PR #1964"
+        ]
+      },
+      "public_production_runtime": {
+        "status": "blocked_unknown_active_sha",
+        "api_root_status": 200,
+        "healthz_status": 404,
+        "help_content_page_public_status": 404,
+        "production_active_sha": "Unknown",
+        "production_contains_target_sha": "Unknown",
+        "evidence": "Public unauthenticated checks did not expose production active release SHA; deploy authorization cannot be accepted under the production deploy targeting SOP."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          {
+            "command": "python3 -m json.tool backend/docs/help/generated/help-cms-service-fields-prod-release-01.v1.json >/dev/null",
+            "status": "pass"
+          },
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "pass"
+          },
+          {
+            "command": "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+            "status": "pass"
+          },
+          {
+            "command": "git rev-parse origin/main",
+            "status": "pass",
+            "output": "01de36c41ff5180e269ca324bb5cc666eac2babf"
+          },
+          {
+            "command": "git merge-base --is-ancestor 9cae1f45ee55acf11df43376e80387957c2049a3 origin/main",
+            "status": "pass"
+          },
+          {
+            "command": "git merge-base --is-ancestor 13e62a0389124e4acb90f4b7467a26ea996cf24e origin/main",
+            "status": "pass"
+          },
+          {
+            "command": "git merge-base --is-ancestor 0dd12d8751b328cf502a28e586597d1ed4a4246f origin/main",
+            "status": "pass"
+          },
+          {
+            "command": "curl -sS -m 10 -o /tmp/fap-api-release-root.out -w '%{http_code}\\n' https://api.fermatmind.com/",
+            "status": "pass",
+            "output": "200"
+          },
+          {
+            "command": "curl -sS -m 10 -o /tmp/fap-api-release-healthz.out -w '%{http_code}\\n' https://api.fermatmind.com/api/healthz",
+            "status": "pass",
+            "output": "404"
+          },
+          {
+            "command": "curl -sS -m 10 -o /tmp/fap-api-release-content-page.out -w '%{http_code}\\n' 'https://api.fermatmind.com/api/v0.5/content-pages/help-payment-refund?locale=en'",
+            "status": "pass",
+            "output": "404"
+          },
+          {
+            "command": "git diff --check -- backend/docs/help/generated/help-cms-service-fields-prod-release-01.v1.json backend/docs/operations/help-cms-service-fields-prod-release-2026-06-08.md docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+            "status": "pass"
+          }
+        ]
+      },
+      "github": {
+        "status": "pending",
+        "checks": []
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "result": {
+      "decision": "DEPLOY_AUTHORIZATION_BLOCKED_PRODUCTION_ACTIVE_SHA_UNKNOWN",
+      "generated_artifact": "backend/docs/help/generated/help-cms-service-fields-prod-release-01.v1.json",
+      "operations_report": "backend/docs/operations/help-cms-service-fields-prod-release-2026-06-08.md",
+      "current_origin_main_sha": "01de36c41ff5180e269ca324bb5cc666eac2babf",
+      "next_safe_authorization_prompt": "I authorize Codex to run HELP-CMS-SERVICE-FIELDS-PROD-SHA-VERIFY-01 using an approved read-only production method that reports only the active release SHA and migration status for the Help service field migrations, without reading secret/env/cookie/token values and without deploy, CMS mutation, publish, search submission, private URL access, payment/refund action, payment-provider change, or Operator approval claim.",
+      "next_task_recommendation": "HELP-CMS-SERVICE-FIELDS-PROD-SHA-VERIFY-01"
+    },
+    "scope_validation": {
+      "deploy_performed": false,
+      "migration_performed": false,
+      "cms_mutation_performed": false,
+      "publish_performed": false,
+      "search_submission_performed": false,
+      "private_url_access_performed": false,
+      "secret_env_cookie_token_read": false,
+      "payment_or_refund_performed": false,
+      "payment_provider_changed": false,
+      "operator_approval_claimed": false,
+      "frontend_fallback_content_added": false,
+      "allowed_paths_only": true
+    },
+    "sidecars": [
+      {
+        "id": "HELP-CMS-SERVICE-FIELDS-PROD-SHA-VERIFY-01",
+        "status": "required_before_deploy",
+        "note": "Need approved read-only production active SHA evidence before deploy authorization can be accepted."
+      },
+      {
+        "id": "HELP-CMS-SERVICE-FIELDS-PROD-DEPLOY-AUTHORIZATION",
+        "status": "blocked",
+        "note": "Do not deploy from this readiness pass because production active SHA is Unknown."
+      },
+      {
+        "id": "HELP-CONTENT-DRAFT-POLICY-CMS-SYNC-01",
+        "status": "blocked_until_runtime_deployed_or_confirmed",
+        "note": "CMS sync remains blocked until production runtime is confirmed to include the Help service fields target."
+      }
+    ],
+    "next_task": "HELP-CMS-SERVICE-FIELDS-PROD-SHA-VERIFY-01",
+    "transitions": [
+      {
+        "at": "2026-06-08",
+        "status": "authorized",
+        "note": "User requested fresh deploy readiness for HELP-CMS-SERVICE-FIELDS-PROD-RELEASE-01."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "local_artifacts_created_validation_pending",
+        "note": "Created release readiness artifact, operations report, manifest entry, and state entry; local validation pending."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "local_checks_passed",
+        "note": "JSON/YAML validation, target containment checks, public read-only status checks, and scoped diff whitespace checks passed. Deploy remains blocked because production active SHA is Unknown."
+      }
+    ]
   }
 }

@@ -1,0 +1,78 @@
+{
+  "schema": "help-cms-service-fields-prod-release-01.v1",
+  "task": "HELP-CMS-SERVICE-FIELDS-PROD-RELEASE-01",
+  "generated_at": "2026-06-08",
+  "decision": "DEPLOY_AUTHORIZATION_BLOCKED_PRODUCTION_ACTIVE_SHA_UNKNOWN",
+  "scope": "Fresh deploy readiness only; no deploy, no migration, no CMS mutation, no publish.",
+  "target_resolution": {
+    "repo": "fermatmind/fap-api",
+    "origin_main_sha": "01de36c41ff5180e269ca324bb5cc666eac2babf",
+    "deploy_class_if_active_sha_known": "deploy_latest_main",
+    "requested_target_is_latest_origin_main": true,
+    "included_required_help_runtime_prs": [
+      {
+        "pr": 1956,
+        "sha": "9cae1f45ee55acf11df43376e80387957c2049a3",
+        "reason": "ContentPage baseline importer maps Help service fields."
+      },
+      {
+        "pr": 1959,
+        "sha": "13e62a0389124e4acb90f4b7467a26ea996cf24e",
+        "reason": "ContentPage publish safety fields are present."
+      },
+      {
+        "pr": 1962,
+        "sha": "0dd12d8751b328cf502a28e586597d1ed4a4246f",
+        "reason": "Help service fields production runtime readiness was recorded."
+      }
+    ],
+    "newer_main_commits_included": [
+      {
+        "pr": 1963,
+        "sha": "a5509759",
+        "summary": "fix(media): persist Filament uploads through media library"
+      },
+      {
+        "pr": 1965,
+        "sha": "3acd4de7",
+        "summary": "docs(seo): record RIASEC CMS media import"
+      },
+      {
+        "pr": 1964,
+        "sha": "01de36c41ff5180e269ca324bb5cc666eac2babf",
+        "summary": "docs(codex): close HELP-CMS-SERVICE-FIELDS-PROD-RUNTIME-01 ledger"
+      }
+    ]
+  },
+  "production_readiness": {
+    "api_root_status": 200,
+    "healthz_status": 404,
+    "help_content_page_public_status": 404,
+    "production_active_sha": "Unknown",
+    "production_contains_target_sha": "Unknown",
+    "release_sha_publicly_visible": false,
+    "deploy_authorization_acceptable_now": false,
+    "blocker": "The production deploy targeting SOP requires current production release SHA. Public read-only checks did not expose it."
+  },
+  "required_before_deploy": [
+    "Obtain current production active SHA through an approved read-only operator method that does not expose secrets/env/cookies/tokens.",
+    "Confirm whether production already contains 01de36c41ff5180e269ca324bb5cc666eac2babf.",
+    "If production does not contain it, provide exact deploy authorization for the current latest origin/main SHA at that time."
+  ],
+  "stale_prompt_do_not_use_without_refresh": "I explicitly approve backend production deploy for exact SHA 01de36c41ff5180e269ca324bb5cc666eac2babf release help-cms-service-fields-prod-release-20260608-01de36c4.",
+  "safe_next_authorization_prompt": "I authorize Codex to run HELP-CMS-SERVICE-FIELDS-PROD-SHA-VERIFY-01 using an approved read-only production method that reports only the active release SHA and migration status for the Help service field migrations, without reading secret/env/cookie/token values and without deploy, CMS mutation, publish, search submission, private URL access, payment/refund action, payment-provider change, or Operator approval claim.",
+  "scope_validation": {
+    "deploy_performed": false,
+    "migration_performed": false,
+    "cms_mutation_performed": false,
+    "publish_performed": false,
+    "search_submission_performed": false,
+    "private_url_access_performed": false,
+    "secret_env_cookie_token_read": false,
+    "payment_or_refund_performed": false,
+    "payment_provider_changed": false,
+    "operator_approval_claimed": false,
+    "frontend_fallback_content_added": false
+  },
+  "next_task_recommendation": "HELP-CMS-SERVICE-FIELDS-PROD-SHA-VERIFY-01"
+}
