@@ -51109,5 +51109,152 @@
       }
     ],
     "merge_sha": "8c14006b101e7e22907f62d00543eb4fee418a4d"
+  },
+  "HELP-CONTENT-DRAFT-POST-PUBLISH-SMOKE-01": {
+    "id": "HELP-CONTENT-DRAFT-POST-PUBLISH-SMOKE-01",
+    "repo": "fap-api",
+    "branch": "codex/help-content-draft-post-publish-smoke-01",
+    "base": "origin/main",
+    "status": "blocked_runtime_repair_required",
+    "train_scope": "window_9_help_service_content",
+    "title": "HELP-CONTENT-DRAFT-POST-PUBLISH-SMOKE-01: record Help post-publish runtime smoke",
+    "depends_on": [
+      "HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-R3-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized the Help service controlled publish command and then requested HELP-CONTENT-DRAFT-POST-PUBLISH-SMOKE-01 to record publish success with robots/schema runtime blocked, followed by Help pages noindex runtime repair."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-R3-01 is merged in PR #2002 and ledger-closed in PR #2003. R3 decision was GO_FOR_EXACT_PUBLISH_AUTHORIZATION_PROMPT."
+      },
+      "controlled_publish_execute": {
+        "status": "pass",
+        "command_shape": "content-pages:publish-controlled --scope=help-service --locale=all --keys=<six-help-service-slugs> --execute --json",
+        "ok": true,
+        "writes_committed": true,
+        "target_count": 12,
+        "would_create_count": 0,
+        "blocked_count": 0,
+        "observed_action": "idempotent_confirm_already_published",
+        "published_state": {
+          "status": "published",
+          "is_public": true,
+          "is_indexable": false
+        },
+        "search_channel_action_attempted": false,
+        "url_submission_attempted": false,
+        "external_search_api_call_attempted": false,
+        "deploy_attempted": false,
+        "sitemap_llms_footer_explicit_enablement": false,
+        "no_record_creation": true,
+        "no_upsert_missing": true,
+        "no_out_of_scope_cms_write": true
+      },
+      "public_routes": {
+        "status": "blocked",
+        "apex_http_200_count": 12,
+        "www_redirects_to_apex": true,
+        "canonical_count_per_page": 1,
+        "private_pattern_hits": 0,
+        "robots_meta_observed": "index, follow",
+        "expected_robots_from_backend": "noindex because is_indexable=false",
+        "faqpage_hits_per_page": 0,
+        "failure_reason": "Published Help pages render index, follow and no FAQPage JSON-LD while backend rows are is_indexable=false and FAQ schema runtime was expected."
+      },
+      "sitemap_llms": {
+        "status": "pass",
+        "checked": [
+          "/sitemap.xml",
+          "/llms.txt",
+          "/llms-full.txt"
+        ],
+        "help_service_slug_hits": 0,
+        "private_pattern_hits": 0
+      },
+      "scope": {
+        "status": "pass",
+        "allowed_paths": [
+          "backend/docs/help/generated/help-content-draft-post-publish-smoke-01.v1.json",
+          "backend/docs/operations/help-content-draft-post-publish-smoke-2026-06-08.md",
+          "backend/tests/Feature/Cms/HelpContentDraftPostPublishSmokeTest.php",
+          "docs/codex/pr-train.yaml",
+          "docs/codex/pr-train-state.json"
+        ],
+        "evidence": "Changed and untracked paths are limited to the post-publish smoke generated artifact, operations report, focused contract test, and PR-train metadata."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "php -l backend/tests/Feature/Cms/HelpContentDraftPostPublishSmokeTest.php",
+          "python3 -m json.tool backend/docs/help/generated/help-content-draft-post-publish-smoke-01.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=HelpContentDraftPostPublishSmokeTest --no-ansi",
+          "git diff --check -- backend/docs/help/generated/help-content-draft-post-publish-smoke-01.v1.json backend/docs/operations/help-content-draft-post-publish-smoke-2026-06-08.md backend/tests/Feature/Cms/HelpContentDraftPostPublishSmokeTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+          "git diff --cached --check"
+        ],
+        "evidence": "PHP lint passed; JSON/YAML parse passed; focused PHPUnit passed with 1 warning and 16 assertions; path-limited git diff --check passed."
+      },
+      "github": {
+        "status": "pass",
+        "head_sha": "2a4a78cb5b5073a1df380f6ebb73ae6347f17bcf",
+        "passed_checks": [
+          "hygiene",
+          "supply-chain",
+          "content-pack-build-validate",
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "Semgrep OSS",
+          "verify-bigfive",
+          "verify-mbti-legacy",
+          "verify-mbti-v2"
+        ],
+        "merge_state": "CLEAN",
+        "failure_reason": null,
+        "merge_commit": null
+      }
+    },
+    "failure_reason": "Post-publish smoke blocked on frontend runtime: published Help pages render robots index, follow despite backend is_indexable=false, and FAQPage JSON-LD was not emitted in the smoke sample.",
+    "commit_sha": "2a4a78cb5b5073a1df380f6ebb73ae6347f17bcf",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2004",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "result": {
+      "decision": "BLOCKED_RUNTIME_REPAIR_REQUIRED",
+      "generated_artifact": "backend/docs/help/generated/help-content-draft-post-publish-smoke-01.v1.json",
+      "operations_report": "backend/docs/operations/help-content-draft-post-publish-smoke-2026-06-08.md",
+      "next_task_recommendation": "HELP-PAGES-NOINDEX-RUNTIME-01"
+    },
+    "transitions": [
+      {
+        "at": "2026-06-08",
+        "status": "initialized",
+        "note": "Initialized post-publish smoke record after authorized controlled publish execution."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "blocked_runtime_repair_required",
+        "note": "Publish command returned ok=true for 12 target rows with is_indexable=false, but public pages rendered index, follow and no FAQPage JSON-LD."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "local_checks_passed",
+        "note": "Local artifact, manifest/state, focused PHPUnit, and scope checks passed. Runtime blocker remains intentionally recorded as the smoke decision."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "committed",
+        "note": "Created scoped commit c7ebbc3d5aeb0c7b54fe4e19ef9f0aff6fb843d7 for post-publish smoke record."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "github_checks_passed_ready_to_merge",
+        "note": "GitHub checks passed for PR #2004; smoke decision remains blocked_runtime_repair_required by design."
+      }
+    ]
   }
 }
