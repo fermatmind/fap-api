@@ -50920,7 +50920,7 @@
     "repo": "fap-api",
     "branch": "codex/help-content-draft-publish-preflight-r3-01",
     "base": "origin/main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "window_9_help_service_content",
     "title": "HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-R3-01: record post-deploy Help publish preflight",
     "depends_on": [
@@ -51008,7 +51008,7 @@
       },
       "github": {
         "status": "pass",
-        "head_sha": "368d962657225b4bfb8b9a655e2cc70f6244c6d1",
+        "head_sha": "1c0c61ab6f61615f7ebb8d3cd79ec27e04c55f3d",
         "passed_checks": [
           "hygiene",
           "supply-chain",
@@ -51020,17 +51020,42 @@
           "verify-mbti-legacy",
           "verify-mbti-v2"
         ],
-        "merge_state": "CLEAN",
+        "merge_state": "MERGED",
         "failure_reason": null,
-        "merge_commit": null
+        "merge_commit": "8c14006b101e7e22907f62d00543eb4fee418a4d",
+        "merged_at": "2026-06-08T11:30:35Z",
+        "remote_branch_deleted": true,
+        "origin_main_contains_merge_commit": true
+      },
+      "post_merge": {
+        "status": "pass",
+        "merge_commit": "8c14006b101e7e22907f62d00543eb4fee418a4d",
+        "origin_main_contains_merge_commit": true,
+        "main_synced_to_origin_main": true,
+        "temporary_worktree_removed": true,
+        "local_cleanup_executed": true,
+        "commands": [
+          "git fetch origin main",
+          "git merge-base --is-ancestor 8c14006b101e7e22907f62d00543eb4fee418a4d origin/main",
+          "git ls-remote --heads origin codex/help-content-draft-publish-preflight-r3-01",
+          "git worktree remove /tmp/fap-api-help-publish-preflight-r3",
+          "git worktree prune",
+          "git pull --ff-only origin main",
+          "python3 -m json.tool backend/docs/help/generated/help-content-draft-publish-preflight-r3-01.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "php -l backend/tests/Feature/Cms/HelpContentDraftPublishPreflightR3Test.php",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=HelpContentDraftPublishPreflightR3Test --no-ansi"
+        ],
+        "evidence": "PR #2002 is MERGED on GitHub; origin/main contains merge commit 8c14006b101e7e22907f62d00543eb4fee418a4d; remote branch codex/help-content-draft-publish-preflight-r3-01 is deleted; temporary worktree cleanup and main sync were executed; post-merge JSON/YAML/PHP/focused PHPUnit checks passed."
       }
     },
     "failure_reason": null,
-    "commit_sha": "368d962657225b4bfb8b9a655e2cc70f6244c6d1",
+    "commit_sha": "1c0c61ab6f61615f7ebb8d3cd79ec27e04c55f3d",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2002",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-08T11:30:35Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "result": {
       "decision": "GO_FOR_EXACT_PUBLISH_AUTHORIZATION_PROMPT",
       "generated_artifact": "backend/docs/help/generated/help-content-draft-publish-preflight-r3-01.v1.json",
@@ -51076,7 +51101,13 @@
         "at": "2026-06-08",
         "status": "ready_to_merge",
         "note": "GitHub checks passed for PR #2002 and pre-merge scope remains limited to R3 preflight artifact/report/test and docs/codex metadata."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "merged",
+        "note": "PR #2002 squash-merged at 2026-06-08T11:30:35Z with merge commit 8c14006b101e7e22907f62d00543eb4fee418a4d; origin/main contains the merge commit, remote branch is deleted, temporary worktree cleanup and main sync were executed."
       }
-    ]
+    ],
+    "merge_sha": "8c14006b101e7e22907f62d00543eb4fee418a4d"
   }
 }
