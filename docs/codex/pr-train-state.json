@@ -31850,7 +31850,7 @@
   "RESULT-EN-PARITY-06": {
     "repo": "fap-api",
     "branch": "codex/result-en-parity-06-bigfive-v2-en-assets",
-    "status": "ready_to_merge",
+    "status": "merged",
     "depends_on": [
       "RESULT-EN-PARITY-05"
     ],
@@ -49906,7 +49906,7 @@
       },
       "github": {
         "status": "pass",
-        "head_sha": "9626cf69d157c4ab1ef3fb1b0af2bc59de43ec15",
+        "head_sha": "b3ec328a880fecd1b63df60f73e4ffb3f1aae519",
         "passed_checks": [
           "hygiene",
           "supply-chain",
@@ -49919,15 +49919,15 @@
           "verify-mbti-v2"
         ],
         "failure_reason": null,
-        "merge_commit": null
+        "merge_commit": "61cb3b9ae539f0379801d0bf41406472eb81e3dd"
       }
     },
     "failure_reason": null,
-    "commit_sha": "9626cf69d157c4ab1ef3fb1b0af2bc59de43ec15",
+    "commit_sha": "61cb3b9ae539f0379801d0bf41406472eb81e3dd",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1987",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-08T06:21:27Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "result": {
       "decision": "REVIEW_REQUESTED_OPERATOR_APPROVAL_REQUIRED",
       "generated_artifact": "backend/docs/help/generated/help-content-draft-operator-review-r2-01.v1.json",
@@ -49988,6 +49988,11 @@
         "at": "2026-06-08",
         "status": "ready_to_merge",
         "note": "GitHub checks passed for PR #1987 head 9626cf69d157c4ab1ef3fb1b0af2bc59de43ec15; merge state CLEAN."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "merged",
+        "note": "PR #1987 merged at 2026-06-08T06:21:27Z with merge commit 61cb3b9ae539f0379801d0bf41406472eb81e3dd; origin/main contains the merge commit, remote task branch is deleted, local task branch was deleted, and this worktree was left clean on a detached origin/main-derived closeout branch because local main is owned by another worktree."
       }
     ]
   }
