@@ -50000,7 +50000,7 @@
     "repo": "fap-api",
     "branch": "codex/help-content-draft-operator-approval-r2-01",
     "base": "origin/main",
-    "status": "in_progress",
+    "status": "pr_opened",
     "train_scope": "window_9_help_service_content",
     "title": "docs(help): record Help draft operator approval R2",
     "depends_on": [
@@ -50034,15 +50034,15 @@
       },
       "github": {
         "status": "pending",
-        "head_sha": null,
+        "head_sha": "cca77dbc981f236553efea582af7d221ea01cdf7",
         "passed_checks": [],
         "failure_reason": null,
         "merge_commit": null
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "cca77dbc981f236553efea582af7d221ea01cdf7",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1990",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -50090,6 +50090,11 @@
         "at": "2026-06-08",
         "status": "approval_recorded",
         "note": "Generated read-only approval record artifact. Publish remains blocked until publish preflight passes and exact publish authorization is provided."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "pr_opened",
+        "note": "Opened PR #1990 for HELP-CONTENT-DRAFT-OPERATOR-APPROVAL-R2-01."
       }
     ]
   }
