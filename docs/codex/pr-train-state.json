@@ -50750,5 +50750,134 @@
         "note": "Opened fap-api PR #2000 for HELP-CONTENT-PAGES-CONTROLLED-PUBLISH-RUNTIME-01."
       }
     ]
+  },
+  "HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-R2-01": {
+    "repo": "fap-api",
+    "branch": "codex/help-content-draft-publish-preflight-r2-01",
+    "base": "origin/main",
+    "status": "in_progress",
+    "train_scope": "window_9_help_service_content",
+    "title": "HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-R2-01: rerun Help publish preflight",
+    "depends_on": [
+      "HELP-CONTENT-PAGES-CONTROLLED-PUBLISH-RUNTIME-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User requested the three-PR sequence ending with HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-R2-01. CMS mutation, publish, deploy, search submission, private URL access, secret/env/cookie/token reads, payment/refund action, payment-provider change, and Operator approval claim are forbidden."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "HELP-CONTENT-PAGES-CONTROLLED-PUBLISH-RUNTIME-01 is merged in PR #2000 with merge commit 31f0ce4f9f3966719dfc93234b224ce8990871ff. HELP-SERVICE-FAQ-SCHEMA-RUNTIME-01 is merged in fap-web PR #1072."
+      },
+      "source_package": {
+        "status": "pass",
+        "import_package_sha256": "15843defa1d3925624a49844e0ff15244a6cdff6cbb7c93bd3eac3c7fa5bed44",
+        "content_page_source_sha256": "af59792b896892fa308ccddab0915e72c565e3f696bc10feb0af2c96f6c54d6d",
+        "rows": 12,
+        "private_boundary_pattern_hits": 0
+      },
+      "cms_draft_evidence": {
+        "status": "pass_from_prior_post_sync_artifact",
+        "source_artifact": "backend/docs/help/generated/help-content-draft-blocker-cms-sync-01.v1.json",
+        "checked_rows": 12,
+        "draft": 12,
+        "non_public": 12,
+        "non_indexable": 12,
+        "unpublished": 12,
+        "support_contact": 12,
+        "policy_version": 12,
+        "faq_items_count_4": 12
+      },
+      "public_routes": {
+        "status": "pass_for_unpublished_drafts",
+        "help_draft_routes_404": 12,
+        "support_routes_200": 2,
+        "privacy_terms_routes_200": 4,
+        "sitemap_llms_help_service_slug_hits": 0,
+        "sitemap_llms_private_pattern_hits": 0
+      },
+      "production_runtime": {
+        "status": "blocked_backend_runtime_not_deployed",
+        "connection_method": "ssh_alias_fap-api-prod_batchmode_readonly_no_env_output",
+        "active_backend_revision_sha": "8570a335c5cc539507b3dad4d8659fc9c971d759",
+        "origin_main_sha_at_check": "31f0ce4f9f3966719dfc93234b224ce8990871ff",
+        "commits_behind_origin_main": 7,
+        "contains_help_controlled_publish_runtime_merge": false,
+        "help_service_scope_confirmed_in_production": false
+      },
+      "scope": {
+        "status": "pass",
+        "allowed_paths": [
+          "backend/docs/help/generated/help-content-draft-publish-preflight-r2-01.v1.json",
+          "backend/docs/operations/help-content-draft-publish-preflight-r2-2026-06-08.md",
+          "backend/tests/Feature/Cms/HelpContentDraftPublishPreflightR2Test.php",
+          "docs/codex/pr-train.yaml",
+          "docs/codex/pr-train-state.json"
+        ],
+        "evidence": "Changed/untracked files are limited to the R2 preflight artifact, operations report, focused artifact contract, and PR-train metadata."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "php -l backend/tests/Feature/Cms/HelpContentDraftPublishPreflightR2Test.php",
+          "python3 -m json.tool backend/docs/help/generated/help-content-draft-publish-preflight-r2-01.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=HelpContentDraftPublishPreflightR2Test --no-ansi",
+          "public HTTP checks for Help draft routes, support/privacy/terms, sitemap.xml, llms.txt, llms-full.txt",
+          "ssh -o BatchMode=yes fap-api-prod 'cat /var/www/fap-api/current/REVISION; cd /var/www/fap-api/current/backend && php artisan list --no-ansi | grep -E \"content-pages:publish-controlled|content-pages\"'",
+          "git diff --check -- backend/docs/help/generated/help-content-draft-publish-preflight-r2-01.v1.json backend/docs/operations/help-content-draft-publish-preflight-r2-2026-06-08.md backend/tests/Feature/Cms/HelpContentDraftPublishPreflightR2Test.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+          "git diff --cached --check"
+        ],
+        "evidence": "PHP lint passed for the focused test; JSON/YAML parse passed; HelpContentDraftPublishPreflightR2Test passed with 1 test and 14 assertions; public HTTP checks passed; read-only production revision/artisan list check completed without env/secret output; path-limited git diff --check passed; git diff --cached --check passed."
+      },
+      "github": {
+        "status": "pending",
+        "head_sha": null,
+        "passed_checks": [],
+        "merge_state": null,
+        "failure_reason": null,
+        "merge_commit": null
+      }
+    },
+    "failure_reason": "Publish preflight R2 remains blocked because production backend active revision does not contain HELP-CONTENT-PAGES-CONTROLLED-PUBLISH-RUNTIME-01 and production fap-web FAQ schema runtime deployment status is Unknown.",
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "result": {
+      "decision": "NO_GO_FOR_PUBLISH_EXECUTE",
+      "generated_artifact": "backend/docs/help/generated/help-content-draft-publish-preflight-r2-01.v1.json",
+      "operations_report": "backend/docs/operations/help-content-draft-publish-preflight-r2-2026-06-08.md",
+      "publish_allowed": false,
+      "publish_authorization_prompt_allowed": false,
+      "next_task_recommendation": "HELP-RUNTIME-PROD-DEPLOY-READINESS-01"
+    },
+    "scope_validation": {
+      "cms_mutation_performed": false,
+      "publish_performed": false,
+      "deploy_performed": false,
+      "search_submission_performed": false,
+      "private_url_access_performed": false,
+      "secret_env_cookie_token_read": false,
+      "payment_or_refund_performed": false,
+      "payment_provider_changed": false,
+      "operator_approval_claimed": false,
+      "allowed_paths_only": true
+    },
+    "transitions": [
+      {
+        "at": "2026-06-08",
+        "status": "blocked_runtime_not_deployed",
+        "note": "R2 preflight completed read-only checks and remains blocked. Source/main blockers are repaired, but production backend active revision is 8570a335c5cc539507b3dad4d8659fc9c971d759 and does not contain PR #2000 merge commit 31f0ce4f9f3966719dfc93234b224ce8990871ff."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "local_checks_passed",
+        "note": "PHP lint, JSON/YAML parse, focused artifact contract, public HTTP checks, read-only production revision/artisan list check, path-limited git diff --check, and git diff --cached --check passed. No CMS mutation, publish, deploy, search submission, private URL access, secret/env/cookie/token read, payment/refund action, payment provider change, or Operator approval claim was performed."
+      }
+    ]
   }
 }
