@@ -32664,7 +32664,7 @@
     ]
   },
   "GLOBAL-EN-ZH-CONTENT-PAGES-HUMAN-REVISION-01A-FOUNDATION-GOVERNANCE-FACT-RECONCILE": {
-    "status": "pr_opened",
+    "status": "ready_to_merge",
     "repo": "fap-api",
     "branch": "codex/global-en-zh-content-pages-human-revision-01a-foundation-governance",
     "base": "main",
@@ -49249,12 +49249,24 @@
         ]
       },
       "github": {
-        "status": "pending",
-        "checks": []
+        "status": "pass",
+        "checks": [
+          "hygiene",
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "supply-chain",
+          "content-pack-build-validate",
+          "verify-bigfive",
+          "verify-mbti-legacy",
+          "verify-mbti-v2",
+          "Semgrep OSS"
+        ],
+        "merge_state": "CLEAN",
+        "head_ref_oid_checked": "c96dd45d8722d1d1eb6fd087c554ab16ac216b18"
       }
     },
     "failure_reason": null,
-    "commit_sha": "bbb2b77c19ee0f6a7ae4ae683c1c57f2463f642d",
+    "commit_sha": "c96dd45d8722d1d1eb6fd087c554ab16ac216b18",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1966",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -49319,6 +49331,11 @@
         "at": "2026-06-08",
         "status": "pr_opened",
         "note": "Opened PR #1966 for HELP-CMS-SERVICE-FIELDS-PROD-RELEASE-01."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed, merge state was clean, and origin/main had not advanced beyond the refreshed exact SHA 01de36c41ff5180e269ca324bb5cc666eac2babf. Deploy remains blocked because production active SHA is Unknown."
       }
     ]
   }
