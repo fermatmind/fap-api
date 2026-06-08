@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-08T17:18:04Z",
+  "updated_at": "2026-06-08T17:23:16Z",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -51475,7 +51475,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-sitemap-diff-03",
     "base": "origin/main",
-    "status": "github_checks_pending",
+    "status": "github_checks_passed_ready_to_merge",
     "train_scope": "sitemap_diff_parity",
     "title": "SEO-SITEMAP-DIFF-03: fix(seo): align non-scale sitemap static and index URLs",
     "depends_on": [
@@ -51521,9 +51521,22 @@
         "evidence": "PHP lint passed for SitemapGenerator and focused SEO sitemap tests. Focused PHPUnit passed with 19 warnings and 600 assertions. Scoped Pint --test passed. JSON/YAML parse passed. Path-limited git diff --check passed."
       },
       "github": {
-        "status": "pending",
-        "head_sha": "d5493b79a1e185920b3d1d0f8c0bc67cdc7a0c4a",
-        "pr_url": "https://github.com/fermatmind/fap-api/pull/2009"
+        "status": "pass",
+        "head_sha": "f775b00cbf94137dfe5c0832942d1afc6658bc4f",
+        "passed_checks": [
+          "hygiene",
+          "supply-chain",
+          "content-pack-build-validate",
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "Semgrep OSS",
+          "verify-bigfive",
+          "verify-mbti-legacy",
+          "verify-mbti-v2"
+        ],
+        "merge_state": "CLEAN",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/2009",
+        "failure_reason": null
       }
     },
     "failure_reason": null,
@@ -51567,6 +51580,11 @@
         "at": "2026-06-09",
         "status": "github_checks_pending",
         "note": "Opened https://github.com/fermatmind/fap-api/pull/2009 from head d5493b79a1e185920b3d1d0f8c0bc67cdc7a0c4a; GitHub checks pending."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "github_checks_passed_ready_to_merge",
+        "note": "GitHub checks passed for PR #2009 head f775b00cbf94137dfe5c0832942d1afc6658bc4f: hygiene, supply-chain, content-pack-build-validate, Semgrep blocking, Semgrep OSS, semgrep sarif upload, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
       }
     ]
   }
