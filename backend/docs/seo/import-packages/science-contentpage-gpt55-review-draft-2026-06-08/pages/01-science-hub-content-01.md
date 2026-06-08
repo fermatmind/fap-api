@@ -22,6 +22,7 @@ sitemap_eligible: false
 llms_eligible: false
 footer_eligible: false
 internal_links_allowed:
+  - /reliability-validity
   - /method-boundaries
   - /item-design-notes
   - /tests/holland-career-interest-test-riasec

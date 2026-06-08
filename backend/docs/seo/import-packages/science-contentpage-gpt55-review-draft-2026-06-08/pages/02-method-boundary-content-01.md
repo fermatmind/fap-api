@@ -23,6 +23,7 @@ llms_eligible: false
 footer_eligible: false
 revision_mode: existing_authority_revision_proposal
 internal_links_allowed:
+  - /reliability-validity
   - /science
   - /item-design-notes
 ---
