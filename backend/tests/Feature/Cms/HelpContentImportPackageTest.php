@@ -133,6 +133,8 @@ final class HelpContentImportPackageTest extends TestCase
         $this->assertStringNotContainsString('token=', $serialized);
         $this->assertStringNotContainsString('payment_id=', $serialized);
         $this->assertStringNotContainsString('transaction_id=', $serialized);
+        $this->assertDoesNotMatchRegularExpression('/payment[_ -]?id/i', $serialized);
+        $this->assertDoesNotMatchRegularExpression('/transaction[_ -]?id/i', $serialized);
         $this->assertStringContainsString('非“费马测试”原因', $serialized);
         $this->assertStringContainsString('三个工作日', $serialized);
         $this->assertStringContainsString('两年', $serialized);
