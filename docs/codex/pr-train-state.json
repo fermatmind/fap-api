@@ -34114,7 +34114,7 @@
     "repo": "fap-api",
     "branch": "codex/take-en-question-locale-scan-00",
     "base": "main",
-    "status": "pr_opened",
+    "status": "merged",
     "depends_on": [],
     "title": "TAKE-EN-QUESTION-LOCALE-SCAN-00 take flow EN/ZH question locale scan",
     "commit_sha": "75b26a54aa2e66cb892d58e88b526f7848d6ac4c",
@@ -49252,17 +49252,28 @@
         ]
       },
       "github": {
-        "status": "pending_after_rebase",
-        "checks": [],
-        "note": "PR rebased after origin/main advanced to 14f92cba66da60acf6c1bc5777058ceb33323319; GitHub checks must rerun before merge."
+        "status": "pass",
+        "checks": [
+          "hygiene",
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "supply-chain",
+          "content-pack-build-validate",
+          "verify-bigfive",
+          "verify-mbti-legacy",
+          "verify-mbti-v2",
+          "Semgrep OSS"
+        ],
+        "merge_state": "MERGED",
+        "head_ref_oid_checked": "063b52c3f505840f250f6758c0a5575be0112fcd"
       }
     },
     "failure_reason": null,
-    "commit_sha": "5746baec0c66fe1f05ffb0eec740c2c1cf7ec6fa",
+    "commit_sha": "b9279c12c1f40732bb9be8566f46b9515dcb02dd",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1966",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-08T02:09:49Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "result": {
       "decision": "DEPLOY_AUTHORIZATION_BLOCKED_PRODUCTION_ACTIVE_SHA_UNKNOWN",
       "generated_artifact": "backend/docs/help/generated/help-cms-service-fields-prod-release-01.v1.json",
@@ -49338,6 +49349,11 @@
         "at": "2026-06-08",
         "status": "target_refreshed_after_main_advanced",
         "note": "origin/main advanced again to 14f92cba66da60acf6c1bc5777058ceb33323319 before merge, so the PR was rebased and the release readiness target was refreshed again. Public checks still do not expose production active SHA."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "merged_closeout_reconciled",
+        "note": "PR #1966 merged on GitHub at 2026-06-08T02:09:49Z with merge commit b9279c12c1f40732bb9be8566f46b9515dcb02dd; origin/main contains the merge commit; the remote task branch is absent and the local task branch was deleted."
       }
     ]
   }
