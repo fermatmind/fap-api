@@ -49361,7 +49361,7 @@
     "repo": "fap-api",
     "branch": "codex/help-cms-service-fields-prod-sha-verify-01",
     "base": "origin/main",
-    "status": "local_checks_passed",
+    "status": "merged",
     "train_scope": "window_9_help_service_content",
     "title": "docs(help): verify Help service production active SHA",
     "depends_on": [
@@ -49431,11 +49431,11 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": "pending_remote_pr_head",
+    "commit_sha": "0b16e566de2bb6690d618f6622f2e321ab66465b",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1975",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-08T02:58:31Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "result": {
       "decision": "BLOCKED_RUNTIME_BEHIND_AND_PUBLISH_SAFETY_PENDING",
       "generated_artifact": "backend/docs/help/generated/help-cms-service-fields-prod-sha-verify-01.v1.json",
@@ -49511,6 +49511,11 @@
         "at": "2026-06-08",
         "status": "ready_to_merge",
         "note": "GitHub checks passed after refreshing the target to origin/main 87afe2dfddfab1f8533512b8a2bdf1c347626000; PR merge state was clean."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "merged_closeout_reconciled",
+        "note": "PR #1975 merged on GitHub at 2026-06-08T02:58:31Z with merge commit 0b16e566de2bb6690d618f6622f2e321ab66465b; origin/main contains the merge commit; the remote task branch is absent and the local task branch was deleted."
       }
     ]
   }
