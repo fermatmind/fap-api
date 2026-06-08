@@ -24,9 +24,35 @@ class SitemapSourceController extends Controller
 
     public const STALE_TTL_SECONDS = 86400;
 
-    private const LOCK_TTL_SECONDS = 120;
+    public const LOCK_TTL_SECONDS = 120;
 
-    public function index(SitemapGenerator $generator, CareerRuntimePublishProjectionLookup $projection): JsonResponse
+    private const FALLBACK_LASTMOD = '2026-06-08T00:00:00+00:00';
+
+    private const FALLBACK_PATHS = [
+        '/',
+        '/en',
+        '/zh',
+        '/en/tests',
+        '/zh/tests',
+        '/en/tests/mbti-personality-test-16-personality-types',
+        '/zh/tests/mbti-personality-test-16-personality-types',
+        '/en/tests/big-five-personality-test',
+        '/zh/tests/big-five-personality-test',
+        '/en/tests/enneagram-personality-test',
+        '/zh/tests/enneagram-personality-test',
+        '/en/tests/holland-career-interest-test-riasec',
+        '/zh/tests/holland-career-interest-test-riasec',
+        '/en/method-boundaries',
+        '/zh/method-boundaries',
+        '/en/reliability-validity',
+        '/zh/reliability-validity',
+        '/en/privacy',
+        '/zh/privacy',
+    ];
+
+    private const PRIVATE_PATH_PATTERN = '#^/(?:en|zh)?/?(?:result|results|orders?|share|pay|payment|history)(?:/|$)|^/(?:en|zh)/tests/[^/]+/take(?:/|$)#i';
+
+    public function index(): JsonResponse
     {
         $fresh = Cache::get(self::CACHE_KEY_FRESH);
         if (is_array($fresh)) {
@@ -38,34 +64,7 @@ class SitemapSourceController extends Controller
             return $this->cachedResponse($stale, 'stale');
         }
 
-        $lock = Cache::lock(self::CACHE_KEY_LOCK, self::LOCK_TTL_SECONDS);
-        if ($lock->get()) {
-            try {
-                $payload = $this->buildPayload($generator, $projection);
-                $this->storeCache($payload);
-
-                return $this->cachedResponse($payload, 'miss');
-            } catch (\Throwable $throwable) {
-                $staleRetry = Cache::get(self::CACHE_KEY_STALE);
-                if (is_array($staleRetry)) {
-                    return $this->cachedResponse($staleRetry, 'stale');
-                }
-
-                throw $throwable;
-            } finally {
-                $lock->release();
-            }
-        }
-
-        $staleRetry = Cache::get(self::CACHE_KEY_STALE);
-        if (is_array($staleRetry)) {
-            return $this->cachedResponse($staleRetry, 'stale');
-        }
-
-        $payload = $this->buildPayload($generator, $projection);
-        $this->storeCache($payload);
-
-        return $this->cachedResponse($payload, 'miss');
+        return $this->cachedResponse($this->fallbackPayload(), 'fallback');
     }
 
     /**
@@ -99,26 +98,53 @@ class SitemapSourceController extends Controller
     }
 
     /**
-     * @param  array{ok: bool, source: string, count: int, items: list<array{loc: string, lastmod: string}>}  $payload
+     * @return array{ok: bool, source: string, count: int, items: list<array{loc: string, lastmod: string}>}
      */
-    private function cachedResponse(array $payload, string $cacheState): JsonResponse
+    public function fallbackPayload(): array
     {
-        $cacheControl = $cacheState === 'stale'
-            ? 'public, max-age=60, s-maxage=120'
-            : 'public, max-age=300, s-maxage=600';
+        $baseUrl = $this->fallbackBaseUrl();
+        $items = collect(self::FALLBACK_PATHS)
+            ->map(fn (string $path): string => $this->normalizeFallbackPath($path))
+            ->unique()
+            ->filter(fn (string $path): bool => ! $this->isPrivateFallbackPath($path))
+            ->map(fn (string $path): array => [
+                'loc' => $path === '/' ? $baseUrl : $baseUrl.$path,
+                'lastmod' => self::FALLBACK_LASTMOD,
+            ])
+            ->values()
+            ->all();
 
-        return response()->json($payload)
-            ->header('X-Fermat-Cache', $cacheState)
-            ->header('Cache-Control', $cacheControl);
+        return [
+            'ok' => true,
+            'source' => 'backend_sitemap_generator_fallback',
+            'count' => count($items),
+            'items' => $items,
+        ];
     }
 
     /**
      * @param  array{ok: bool, source: string, count: int, items: list<array{loc: string, lastmod: string}>}  $payload
      */
-    private function storeCache(array $payload): void
+    public function storeCache(array $payload): void
     {
         Cache::put(self::CACHE_KEY_FRESH, $payload, self::FRESH_TTL_SECONDS);
         Cache::put(self::CACHE_KEY_STALE, $payload, self::STALE_TTL_SECONDS);
+    }
+
+    /**
+     * @param  array{ok: bool, source: string, count: int, items: list<array{loc: string, lastmod: string}>}  $payload
+     */
+    private function cachedResponse(array $payload, string $cacheState): JsonResponse
+    {
+        $cacheControl = match ($cacheState) {
+            'stale' => 'public, max-age=60, s-maxage=120',
+            'fallback' => 'public, max-age=30, s-maxage=60',
+            default => 'public, max-age=300, s-maxage=600',
+        };
+
+        return response()->json($payload)
+            ->header('X-Fermat-Cache', $cacheState)
+            ->header('Cache-Control', $cacheControl);
     }
 
     private function normalizeOwnedCanonicalUrl(string $loc): string
@@ -191,5 +217,44 @@ class SitemapSourceController extends Controller
             'locale' => strtolower((string) $matches[1]) === 'zh' ? 'zh' : 'en',
             'slug' => $slug,
         ];
+    }
+
+    private function fallbackBaseUrl(): string
+    {
+        $configured = rtrim((string) config('app.frontend_url', config('app.url', 'https://fermatmind.com')), '/');
+        if ($configured === '') {
+            $configured = 'https://fermatmind.com';
+        }
+
+        $parts = parse_url($configured);
+        if (! is_array($parts)) {
+            return 'https://fermatmind.com';
+        }
+
+        $scheme = strtolower((string) ($parts['scheme'] ?? 'https'));
+        $host = strtolower((string) ($parts['host'] ?? 'fermatmind.com'));
+        if ($host === 'www.fermatmind.com') {
+            $host = 'fermatmind.com';
+        }
+
+        if ($scheme !== 'http' && $scheme !== 'https') {
+            $scheme = 'https';
+        }
+
+        return $scheme.'://'.$host;
+    }
+
+    private function normalizeFallbackPath(string $path): string
+    {
+        $normalized = '/'.ltrim(trim($path), '/');
+
+        $trimmed = rtrim($normalized, '/');
+
+        return $trimmed === '' ? '/' : $trimmed;
+    }
+
+    private function isPrivateFallbackPath(string $path): bool
+    {
+        return preg_match(self::PRIVATE_PATH_PATTERN, $path) === 1;
     }
 }

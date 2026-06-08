@@ -49,10 +49,14 @@ class SitemapSourceApiTest extends TestCase
             ),
         ]);
 
+        $this->artisan('seo:warm-sitemap-source-cache --json')
+            ->assertSuccessful();
+
         $response = $this->getJson('/api/v0.5/seo/sitemap-source');
 
         $response
             ->assertOk()
+            ->assertHeader('X-Fermat-Cache', 'hit')
             ->assertJsonPath('ok', true)
             ->assertJsonPath('source', 'backend_sitemap_generator');
 
@@ -94,6 +98,9 @@ class SitemapSourceApiTest extends TestCase
                 ],
             ),
         ]);
+
+        $this->artisan('seo:warm-sitemap-source-cache --json')
+            ->assertSuccessful();
 
         $response = $this->getJson('/api/v0.5/seo/sitemap-source');
 
@@ -223,6 +230,9 @@ class SitemapSourceApiTest extends TestCase
             $this->projectionItem('civil-engineers', 'zh'),
         ]);
 
+        $this->artisan('seo:warm-sitemap-source-cache --json')
+            ->assertSuccessful();
+
         $response = $this->getJson('/api/v0.5/seo/sitemap-source');
         $response->assertOk();
 
@@ -269,6 +279,9 @@ class SitemapSourceApiTest extends TestCase
             $this->projectionItem('mechanical-engineers', 'en'),
             $this->projectionItem('mechanical-engineers', 'zh'),
         ]);
+
+        $this->artisan('seo:warm-sitemap-source-cache --json')
+            ->assertSuccessful();
 
         $response = $this->getJson('/api/v0.5/seo/sitemap-source');
         $response->assertOk();
@@ -323,6 +336,9 @@ class SitemapSourceApiTest extends TestCase
             ),
         ]);
 
+        $this->artisan('seo:warm-sitemap-source-cache --json')
+            ->assertSuccessful();
+
         $response = $this->getJson('/api/v0.5/seo/sitemap-source');
         $response->assertOk();
 
@@ -349,6 +365,9 @@ class SitemapSourceApiTest extends TestCase
             $this->projectionItem('chemical-engineers', 'en'),
             $this->projectionItem('chemical-engineers', 'zh'),
         ]);
+
+        $this->artisan('seo:warm-sitemap-source-cache --json')
+            ->assertSuccessful();
 
         $response = $this->getJson('/api/v0.5/seo/sitemap-source');
         $response->assertOk();
