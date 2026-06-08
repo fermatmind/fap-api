@@ -8,6 +8,63 @@ The Foundation / Daily Giving work moves FermatMind's public-benefit story from 
 
 This is not a Search Channel submission track. Indexing, URL submission, and external search API actions remain separate tasks that require explicit approval.
 
+## 2026-06-08 Line Review Update
+
+Decision: backend technical readiness is `CONDITIONAL COMPLETE`; production public activation is `NOT COMPLETE`.
+
+The recent PR line closed the backend contract needed for DailyGiving proof handling:
+
+- operator-approved original charity donation proof images are allowed as public proof media;
+- model-level proof storage gates reject obvious private/public proof boundary violations;
+- public API smoke fixtures prove records and months can return public data without private fields;
+- first-record private-ledger documentation records the real CNY 75 UNICEF proof review state without committing raw proof;
+- CMS Media Library Filament uploads now persist through the media generator instead of saving temporary `/tmp/...` paths;
+- repository rules now keep DailyGiving backend-authoritative, noindex, and blocked from trust badges or endorsement claims.
+
+The line is not fully operationally complete because the repository does not prove that a production DailyGiving record has been activated with a real public media URL. The remaining non-code gate is operator/CMS production activation.
+
+Production activation completion checklist:
+
+1. CMS / Media Library uploads or selects the operator-approved original public proof media URL.
+2. The production record binds `proof_public_url` and sets `proof_status=operator_approved_available`.
+3. Proof review and claim review pass before `is_public=true`.
+4. The record keeps `is_indexable=false`.
+5. Public records and months API smoke passes with production data and confirms no private fields leak.
+6. DailyGiving remains blocked from sitemap, `llms.txt`, `llms-full.txt`, trust badges, social distribution, paid-page trust claims, and search submission.
+
+Recent PR review: the broader DailyGiving / Foundation line spans dozens of backend PRs plus the cross-repo frontend rendering and indexability PRs. The current dialogue's direct DailyGiving closeout PRs include backend proof/storage/private-ledger/API/media PRs and frontend proof/noindex adapter PRs. Adjacent Help, Science content-page, and RIASEC media PRs do not change the DailyGiving completion state, except that fap-api #1963 fixes the shared Media Library upload path needed for proof media.
+
+Recent backend DailyGiving / public-benefit PR ledger:
+
+| PR | Status contribution |
+| --- | --- |
+| fap-api #1879 | DailyGiving operations readiness scan; established no-go for amplification until records/proof gates pass. |
+| fap-api #1893 | Public-benefit content asset packages archived for operator/GPT handoff. |
+| fap-api #1898 | Foundation trust page asset inventory. |
+| fap-api #1901 | Public-benefit claim boundary contract. |
+| fap-api #1904 | Foundation content request card. |
+| fap-api #1905 | Foundation CMS field map. |
+| fap-api #1907 | Foundation FAQ schema gate. |
+| fap-api #1910 | DailyGiving proof public approval SOP. |
+| fap-api #1912 | DailyGiving proof storage gate. |
+| fap-api #1914 | DailyGiving public release prerequisites. |
+| fap-api #1917 | DailyGiving public API smoke fixture. |
+| fap-api #1920 | First record review template. |
+| fap-api #1926 | First record private-ledger gate. |
+| fap-api #1929 | Private-ledger closeout. |
+| fap-api #1932 | Operator-approved public proof gate; inherited redaction file name but current rule allows approved original proof. |
+| fap-api #1941 | Repository rule alignment allowing original DailyGiving proof media. |
+| fap-api #1950 | Model/API gate for operator-approved public proof. |
+| fap-api #1963 | CMS Media Library upload path fix so Filament uploads do not persist `/tmp/...` paths. |
+
+Recent frontend DailyGiving proof/indexability PR ledger:
+
+| PR | Status contribution |
+| --- | --- |
+| fap-web #1059 | Keeps DailyGiving noindex and out of llms while gated. |
+| fap-web #1063 | Adapts `proof_public_url` to the frontend evidence link. |
+| fap-web #1067 | Aligns frontend DailyGiving proof rendering rules with original proof media policy. |
+
 ## System Boundary
 
 Backend source of truth:
@@ -56,6 +113,14 @@ Guardrails:
 | Social sync readiness | PR-FDN-SOCIAL-SYNC-READINESS | Complete | fap-api PR #1819 |
 | Manual social sync MVP | PR-FDN-SOCIAL-SYNC-MVP-01 | Complete | fap-api PR #1827 |
 | Social link frontend display | PR-FDN-SOCIAL-LINK-DISPLAY-IMPLEMENTATION-01 | Complete | fap-web PR #954 |
+| DailyGiving original proof media rule | DAILY-GIVING-ORIGINAL-PROOF-RULES | Complete | fap-api PR #1941 |
+| Operator-approved proof model gate and tests | DAILY-GIVING-REDACTED-PUBLIC-PROOF-01 / proof gate follow-up | Complete | fap-api PR #1950 |
+| First real record private-ledger documentation | DAILY-GIVING-FIRST-RECORD-PRIVATE-LEDGER-01 | Private-ledger complete; public activation still blocked | `backend/docs/operations/daily-giving-first-record-private-ledger.md` |
+| Public API smoke fixture for records/months | DAILY-GIVING-PUBLIC-API-SMOKE-01 | Complete for test fixture; production count still requires runtime smoke | `backend/docs/operations/daily-giving-public-api-smoke.md` |
+| CMS Media Library upload path repair | CMS Media Library Filament upload fix | Complete | fap-api PR #1963 |
+| DailyGiving frontend noindex / llms gate | DAILY-GIVING-INDEXABILITY-GATE-01 | Complete | fap-web PR #1059 |
+| DailyGiving frontend proof URL adapter | DAILY-GIVING-PROOF-PUBLIC-URL-FRONTEND-ADAPTER-01 | Complete | fap-web PR #1063 |
+| DailyGiving frontend original proof rendering rules | DAILY-GIVING-ORIGINAL-PROOF-WEB-RULES | Complete | fap-web PR #1067 |
 
 For `PR-07-GEO-SCHEMA-FAQ-EVIDENCE`, evidence means visible page content, backend-authoritative data, or an approved audit record that grounds schema, FAQ, llms, and public claims. It does not mean adding unsupported proof language to a page.
 
@@ -85,6 +150,11 @@ Public API response contract:
 - Pagination, limit, and month filtering behavior must remain explicit in tests.
 - Social URLs may be returned only when stored by backend authority and allowed for public display.
 - Admin notes, private sync diagnostics, credentials, internal-only IDs, and unpublished metadata must not be exposed.
+- `proof_public_url` is the only public proof media field.
+- `proof_private_path`, `proof_redaction_notes`, `receipt_reference_private`, `internal_notes`, and admin user ids must never be returned by public resources.
+- `proof_public_url` may point to an operator-approved original charity donation proof image; a separate redacted derivative is not required when the operator approves the original image for public use.
+- Public proof media must be an HTTPS public media URL and must not contain private/admin/token/secret/backend-only indicators.
+- Public records may remain `is_indexable=false`; indexability is a separate SEO gate and is not implied by `is_public=true`.
 
 Core backend implementation:
 
@@ -92,6 +162,7 @@ Core backend implementation:
 - `backend/app/Http/Controllers/API/V0_5/Foundation/DailyGivingRecordController.php`
 - `backend/app/Http/Resources/Foundation/DailyGivingRecordResource.php`
 - `backend/app/Filament/Ops/Resources/DailyGivingRecordResource.php`
+- `backend/app/Filament/Ops/Resources/MediaAssetResource.php`
 - `backend/database/migrations/2026_05_30_000100_create_daily_giving_records_table.php`
 
 Focused backend tests:
@@ -99,12 +170,24 @@ Focused backend tests:
 - `backend/tests/Feature/Foundation/DailyGivingRecordPublicApiTest.php`
 - `backend/tests/Feature/Foundation/DailyGivingRecordPublicationGateTest.php`
 - `backend/tests/Feature/Foundation/DailyGivingRecordManualSocialSyncTest.php`
+- `backend/tests/Feature/Foundation/DailyGivingPublicReleasePrereqTest.php`
+- `backend/tests/Feature/Foundation/DailyGivingProofStorageGateTest.php`
+- `backend/tests/Feature/Foundation/DailyGivingRedactedPublicProofTest.php`
+- `backend/tests/Feature/Foundation/DailyGivingFirstRecordPrivateLedgerTest.php`
+- `backend/tests/Feature/Foundation/DailyGivingPublicApiSmokeTest.php`
+- `backend/tests/Feature/MediaLibrary/MediaLibraryPublicApiTest.php`
 - `backend/tests/Feature/Foundation/PrFdn02aPostDeployRuntimeValidationTest.php`
 - `backend/tests/Feature/Foundation/PrFdnSocialSyncReadinessTest.php`
 - `backend/tests/Feature/ContentPages/FoundationGuardedPhraseRepairTest.php`
 
 Backend audit reports:
 
+- `backend/docs/operations/daily-giving-public-release-prereq.md`
+- `backend/docs/operations/daily-giving-proof-storage-gate.md`
+- `backend/docs/operations/daily-giving-redacted-public-proof.md`
+- `backend/docs/operations/daily-giving-first-record-private-ledger.md`
+- `backend/docs/operations/daily-giving-public-api-smoke.md`
+- `backend/docs/operations/daily-giving-first-record-review-template.md`
 - `backend/docs/seo/pr-fdn-02a-post-deploy-runtime-validation.md`
 - `backend/docs/seo/pr-fdn-social-sync-readiness.md`
 - `backend/docs/seo/pr-fdn-social-sync-mvp-01.md`
