@@ -30,7 +30,6 @@ class SitemapXmlTest extends TestCase
     {
         config([
             'services.seo.public_sitemap_authority' => 'backend',
-            'services.seo.tests_url_prefix' => 'https://fermatmind.com/tests/',
         ]);
         config(['app.frontend_url' => 'https://staging.fermatmind.com']);
 
@@ -478,13 +477,19 @@ class SitemapXmlTest extends TestCase
         $response->assertHeaderMissing('Set-Cookie');
 
         $body = (string) $response->getContent();
-        $prefix = rtrim((string) config('services.seo.tests_url_prefix'), '/').'/';
-        $this->assertStringContainsString('<loc>'.$prefix.'alpha</loc>', $body);
-        $this->assertStringContainsString('<loc>'.$prefix.'beta</loc>', $body);
-        $this->assertStringContainsString('<loc>'.$prefix.'gamma</loc>', $body);
-        $this->assertStringContainsString('<loc>'.$prefix.'delta</loc>', $body);
-        $this->assertStringNotContainsString('<loc>'.$prefix.'hidden</loc>', $body);
-        $this->assertStringNotContainsString('<loc>'.$prefix.'hidden-alt</loc>', $body);
+        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/tests/alpha</loc>', $body);
+        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/zh/tests/alpha</loc>', $body);
+        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/tests/gamma</loc>', $body);
+        $this->assertStringContainsString('<loc>https://staging.fermatmind.com/zh/tests/gamma</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/tests/alpha</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/en/tests/beta</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/zh/tests/beta</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/en/tests/delta</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/zh/tests/delta</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/en/tests/hidden</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/zh/tests/hidden</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/en/tests/hidden-alt</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://staging.fermatmind.com/zh/tests/hidden-alt</loc>', $body);
         $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/personality</loc>', $body);
         $this->assertStringContainsString('<loc>https://staging.fermatmind.com/zh/personality</loc>', $body);
         $this->assertStringContainsString('<loc>https://staging.fermatmind.com/en/personality/intj-a</loc>', $body);
@@ -526,7 +531,8 @@ class SitemapXmlTest extends TestCase
         $this->assertStringContainsString('<priority>0.7</priority>', $body);
         $this->assertStringContainsString('<lastmod>2026-01-30</lastmod>', $body);
         $this->assertStringContainsString('<lastmod>2026-01-31</lastmod>', $body);
-        $this->assertSame(1, substr_count($body, '<loc>'.$prefix.'alpha</loc>'));
+        $this->assertSame(1, substr_count($body, '<loc>https://staging.fermatmind.com/en/tests/alpha</loc>'));
+        $this->assertSame(1, substr_count($body, '<loc>https://staging.fermatmind.com/zh/tests/alpha</loc>'));
 
         $entries = $this->sitemapEntries($body);
         $this->assertSame(
@@ -561,11 +567,11 @@ class SitemapXmlTest extends TestCase
         $this->get('/sitemap.xml')->assertNotFound();
     }
 
-    public function test_sitemap_xml_defaults_tests_urls_to_frontend_host_when_prefix_is_not_explicitly_configured(): void
+    public function test_sitemap_xml_exports_localized_canonical_tests_urls_on_frontend_host(): void
     {
         config([
             'services.seo.public_sitemap_authority' => 'backend',
-            'services.seo.tests_url_prefix' => '',
+            'services.seo.tests_url_prefix' => 'https://legacy.fermatmind.com/tests/',
             'app.url' => 'https://api.fermatmind.com',
             'app.frontend_url' => 'https://fermatmind.com',
         ]);
@@ -592,17 +598,20 @@ class SitemapXmlTest extends TestCase
 
         $body = (string) $this->get('/sitemap.xml')->getContent();
 
-        $this->assertStringContainsString('<loc>https://fermatmind.com/tests/host-check</loc>', $body);
-        $this->assertStringContainsString('<loc>https://fermatmind.com/tests/host-check-alt</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://api.fermatmind.com/tests/host-check</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://api.fermatmind.com/tests/host-check-alt</loc>', $body);
+        $this->assertStringContainsString('<loc>https://fermatmind.com/en/tests/host-check</loc>', $body);
+        $this->assertStringContainsString('<loc>https://fermatmind.com/zh/tests/host-check</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://fermatmind.com/tests/host-check</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://fermatmind.com/en/tests/host-check-alt</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://fermatmind.com/zh/tests/host-check-alt</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://api.fermatmind.com/en/tests/host-check</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://legacy.fermatmind.com/tests/host-check</loc>', $body);
     }
 
     public function test_sitemap_xml_reads_public_tests_from_v2_registry_when_legacy_registry_is_empty(): void
     {
         config([
             'services.seo.public_sitemap_authority' => 'backend',
-            'services.seo.tests_url_prefix' => 'https://fermatmind.com/tests/',
+            'app.frontend_url' => 'https://fermatmind.com',
         ]);
 
         DB::table('scales_registry')->delete();
@@ -661,10 +670,15 @@ class SitemapXmlTest extends TestCase
 
         $body = (string) $this->get('/sitemap.xml')->getContent();
 
-        $this->assertStringContainsString('<loc>https://fermatmind.com/tests/v2-public</loc>', $body);
-        $this->assertStringContainsString('<loc>https://fermatmind.com/tests/v2-public-alt</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://fermatmind.com/tests/v2-noindex</loc>', $body);
-        $this->assertStringNotContainsString('<loc>https://fermatmind.com/tests/v2-noindex-alt</loc>', $body);
+        $this->assertStringContainsString('<loc>https://fermatmind.com/en/tests/v2-public</loc>', $body);
+        $this->assertStringContainsString('<loc>https://fermatmind.com/zh/tests/v2-public</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://fermatmind.com/tests/v2-public</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://fermatmind.com/en/tests/v2-public-alt</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://fermatmind.com/zh/tests/v2-public-alt</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://fermatmind.com/en/tests/v2-noindex</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://fermatmind.com/zh/tests/v2-noindex</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://fermatmind.com/en/tests/v2-noindex-alt</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://fermatmind.com/zh/tests/v2-noindex-alt</loc>', $body);
     }
 
     /**

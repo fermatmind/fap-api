@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-08T14:48:00Z",
+  "updated_at": "2026-06-08T16:52:18Z",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -51349,6 +51349,75 @@
         "at": "2026-06-08",
         "status": "github_checks_passed_pending_external_merge",
         "note": "GitHub checks passed for PR #2007 head fa36572b3540ce0175ad2afde845db82d056d766: hygiene, supply-chain, content-pack-build-validate, Semgrep blocking, Semgrep OSS, semgrep sarif upload, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
+      }
+    ]
+  },
+  "SEO-SITEMAP-DIFF-02": {
+    "repo": "fap-api",
+    "branch": "codex/seo-sitemap-diff-02",
+    "base": "origin/main",
+    "status": "in_progress",
+    "train_scope": "sitemap_diff_parity",
+    "title": "SEO-SITEMAP-DIFF-02: fix(seo): align scale sitemap source to localized canonical test URLs",
+    "depends_on": [],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly provided SEO-SITEMAP-DIFF-02 fap-api goal, scope, expected diff resolution, and authorized docs/codex metadata updates as part of the sitemap diff PR train."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "Started from fap-api origin/main at ac2af02543c6956b5bce8d03a65a2aa7969c98a4 after the previous backend sitemap stability merge was present on main; fap-web SEO-SITEMAP-DIFF-01 PR #1082 was merged before this branch started."
+      },
+      "scope": {
+        "status": "pass",
+        "evidence": "Changed files are confined to backend/app/Services/SEO/SitemapGenerator.php, focused SEO sitemap tests, and docs/codex PR-train metadata.",
+        "allowed_paths": [
+          "backend/app/Services/SEO/SitemapGenerator.php",
+          "backend/tests/Feature/SEO/SitemapGeneratorTest.php",
+          "backend/tests/Feature/SEO/SitemapXmlTest.php",
+          "backend/tests/Feature/SEO/SitemapSourceApiTest.php",
+          "docs/codex/pr-train.yaml",
+          "docs/codex/pr-train-state.json"
+        ]
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "php -l backend/app/Services/SEO/SitemapGenerator.php",
+          "php -l backend/tests/Feature/SEO/SitemapGeneratorTest.php",
+          "php -l backend/tests/Feature/SEO/SitemapXmlTest.php",
+          "php -l backend/tests/Feature/SEO/SitemapSourceApiTest.php",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/SEO/SitemapGeneratorTest.php tests/Feature/SEO/SitemapXmlTest.php tests/Feature/SEO/SitemapSourceApiTest.php --no-ansi",
+          "cd backend && ./vendor/bin/pint --test app/Services/SEO/SitemapGenerator.php tests/Feature/SEO/SitemapGeneratorTest.php tests/Feature/SEO/SitemapXmlTest.php tests/Feature/SEO/SitemapSourceApiTest.php",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "git diff --check -- backend/app/Services/SEO/SitemapGenerator.php backend/tests/Feature/SEO/SitemapGeneratorTest.php backend/tests/Feature/SEO/SitemapXmlTest.php backend/tests/Feature/SEO/SitemapSourceApiTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+          "git diff --cached --check"
+        ],
+        "evidence": "PHP lint passed for SitemapGenerator and focused SEO sitemap tests. Focused PHPUnit passed with 17 warnings and 406 assertions. Scoped Pint --test passed. JSON/YAML parse passed. Path-limited git diff --check passed."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "result": {
+      "expected_backend_only_root_test_aliases_resolved": 136,
+      "expected_live_only_localized_test_urls_resolved": 16
+    },
+    "transitions": [
+      {
+        "at": "2026-06-09",
+        "status": "in_progress",
+        "note": "Created isolated fap-api worktree from latest origin/main and started SEO-SITEMAP-DIFF-02 with only the authorized scale sitemap-source scope."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "local_checks_passed",
+        "note": "Scale sitemap source now emits localized canonical primary_slug URLs only; focused sitemap tests, Pint, JSON/YAML parse, and scope diff checks passed."
       }
     ]
   }

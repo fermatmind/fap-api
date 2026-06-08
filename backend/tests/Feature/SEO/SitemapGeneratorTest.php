@@ -29,7 +29,7 @@ class SitemapGeneratorTest extends TestCase
 
     public function test_generate_includes_dataset_urls_and_only_public_global_scales(): void
     {
-        config(['services.seo.tests_url_prefix' => 'https://fermatmind.com/tests/']);
+        config(['app.frontend_url' => 'https://fermatmind.com']);
 
         $now = now();
         // Isolate this test from migration-seeded default scales.
@@ -100,18 +100,29 @@ class SitemapGeneratorTest extends TestCase
         $slugList = (array) ($payload['slug_list'] ?? []);
         sort($slugList, SORT_STRING);
 
-        $this->assertSame(['career-dataset-hub', 'career-dataset-method', 'public-global', 'public-global-alt'], $slugList);
+        $this->assertSame([
+            'career-dataset-hub',
+            'career-dataset-method',
+            'tests:en:public-global',
+            'tests:zh:public-global',
+        ], $slugList);
 
         $xml = (string) ($payload['xml'] ?? '');
-        $prefix = rtrim((string) config('services.seo.tests_url_prefix'), '/').'/';
         $this->assertStringContainsString('https://www.fermatmind.com/datasets/occupations', $xml);
         $this->assertStringContainsString('https://www.fermatmind.com/datasets/occupations/method', $xml);
-        $this->assertStringContainsString($prefix.'public-global', $xml);
-        $this->assertStringContainsString($prefix.'public-global-alt', $xml);
-        $this->assertStringNotContainsString($prefix.'private-global', $xml);
-        $this->assertStringNotContainsString($prefix.'private-global-alt', $xml);
-        $this->assertStringNotContainsString($prefix.'tenant-public', $xml);
-        $this->assertStringNotContainsString($prefix.'tenant-public-alt', $xml);
+        $this->assertStringContainsString('https://fermatmind.com/en/tests/public-global', $xml);
+        $this->assertStringContainsString('https://fermatmind.com/zh/tests/public-global', $xml);
+        $this->assertStringNotContainsString('https://fermatmind.com/tests/public-global', $xml);
+        $this->assertStringNotContainsString('https://fermatmind.com/en/tests/public-global-alt', $xml);
+        $this->assertStringNotContainsString('https://fermatmind.com/zh/tests/public-global-alt', $xml);
+        $this->assertStringNotContainsString('https://fermatmind.com/en/tests/private-global', $xml);
+        $this->assertStringNotContainsString('https://fermatmind.com/zh/tests/private-global', $xml);
+        $this->assertStringNotContainsString('https://fermatmind.com/en/tests/private-global-alt', $xml);
+        $this->assertStringNotContainsString('https://fermatmind.com/zh/tests/private-global-alt', $xml);
+        $this->assertStringNotContainsString('https://fermatmind.com/en/tests/tenant-public', $xml);
+        $this->assertStringNotContainsString('https://fermatmind.com/zh/tests/tenant-public', $xml);
+        $this->assertStringNotContainsString('https://fermatmind.com/en/tests/tenant-public-alt', $xml);
+        $this->assertStringNotContainsString('https://fermatmind.com/zh/tests/tenant-public-alt', $xml);
     }
 
     public function test_generate_includes_only_indexable_global_article_urls_with_locale_aware_paths(): void

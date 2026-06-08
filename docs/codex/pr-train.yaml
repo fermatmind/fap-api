@@ -23647,3 +23647,51 @@ prs:
     content_rewrite_allowed: false
     content_authority: backend
     next_task: SEO-SITEMAP-STABILITY-03 in fap-web after this PR is merged
+
+  - id: SEO-SITEMAP-DIFF-02
+    repo: fap-api
+    depends_on: []
+    branch: codex/seo-sitemap-diff-02
+    title: "SEO-SITEMAP-DIFF-02: fix(seo): align scale sitemap source to localized canonical test URLs"
+    train_scope: sitemap_diff_parity
+    status: in_progress
+    scope:
+      - Change backend scale sitemap-source generation from root /tests/* aliases to frontend localized canonical /en/tests/* and /zh/tests/* URLs.
+      - Emit only scales_registry primary_slug values for public global indexable tests; keep slugs_json aliases out of the sitemap source.
+      - Preserve existing backend sitemap filtering for private, inactive, tenant, noindex, and view-policy excluded scales.
+    allowed_paths:
+      - backend/app/Services/SEO/SitemapGenerator.php
+      - backend/tests/Feature/SEO/SitemapGeneratorTest.php
+      - backend/tests/Feature/SEO/SitemapXmlTest.php
+      - backend/tests/Feature/SEO/SitemapSourceApiTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change frontend sitemap behavior, article/topic/career/content-page sitemap enumeration, cache fallback behavior, CMS content, deploy state, or search URL submissions.
+      - Reintroduce root /tests/* aliases, private result/order/share/pay/payment/history/take URLs, or frontend editorial fallback content.
+    validation:
+      - php -l backend/app/Services/SEO/SitemapGenerator.php
+      - php -l backend/tests/Feature/SEO/SitemapGeneratorTest.php
+      - php -l backend/tests/Feature/SEO/SitemapXmlTest.php
+      - php -l backend/tests/Feature/SEO/SitemapSourceApiTest.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/SEO/SitemapGeneratorTest.php tests/Feature/SEO/SitemapXmlTest.php tests/Feature/SEO/SitemapSourceApiTest.php --no-ansi
+      - cd backend && ./vendor/bin/pint --test app/Services/SEO/SitemapGenerator.php tests/Feature/SEO/SitemapGeneratorTest.php tests/Feature/SEO/SitemapXmlTest.php tests/Feature/SEO/SitemapSourceApiTest.php
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- backend/app/Services/SEO/SitemapGenerator.php backend/tests/Feature/SEO/SitemapGeneratorTest.php backend/tests/Feature/SEO/SitemapXmlTest.php backend/tests/Feature/SEO/SitemapSourceApiTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    content_rewrite_allowed: false
+    content_authority: backend
+    expected_diff_resolution:
+      backend_only_root_test_aliases: 136
+      live_only_localized_test_urls: 16
+    next_task: SEO-SITEMAP-DIFF-03 in fap-api after this PR is merged

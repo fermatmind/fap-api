@@ -36,7 +36,10 @@ class SitemapGenerator
         'software-developers',
     ];
 
-    private string $urlPrefix;
+    private const SCALE_FRONTEND_LOCALE_SEGMENTS = [
+        'en' => 'en',
+        'zh-CN' => 'zh',
+    ];
 
     public function __construct(
         private readonly ArticleSeoService $articleSeoService,
@@ -48,14 +51,7 @@ class SitemapGenerator
         private readonly ScaleRegistry $scaleRegistry,
         private readonly CareerDatasetPublicationMetadataService $datasetPublicationMetadataService,
         private readonly CareerDirectoryAuthorityService $careerDirectoryAuthorityService,
-    ) {
-        $configuredPrefix = trim((string) config('services.seo.tests_url_prefix', ''));
-        if ($configuredPrefix === '') {
-            $configuredPrefix = rtrim((string) config('app.frontend_url', config('app.url', 'http://localhost')), '/').'/tests/';
-        }
-
-        $this->urlPrefix = rtrim($configuredPrefix, '/').'/';
-    }
+    ) {}
 
     public function generate(): array
     {
@@ -93,10 +89,8 @@ class SitemapGenerator
 
     public function generateUrls(): array
     {
-        $locale = (string) config('app.locale', 'en');
-
         $urls = array_merge(
-            $this->getScaleUrls($locale),
+            $this->getScaleUrls(),
             $this->getArticleUrls(),
             $this->getCareerJobUrls(),
             $this->getCareerGuideUrls(),
@@ -123,8 +117,13 @@ class SitemapGenerator
         return $this->getDirectoryAuthorityCareerJobDetailUrls();
     }
 
-    private function getScaleUrls(string $locale): array
+    private function getScaleUrls(): array
     {
+        $baseUrl = rtrim((string) config('app.frontend_url', config('app.url', '')), '/');
+        if ($baseUrl === '') {
+            return [];
+        }
+
         $rows = $this->scaleRegistry->listActivePublic(0);
 
         $slugDates = [];
@@ -144,22 +143,19 @@ class SitemapGenerator
 
             $updatedAt = $this->parseUpdatedAt($row['updated_at'] ?? null);
 
-            $slugs = $this->collectSlugs($row['primary_slug'] ?? null, $row['slugs_json'] ?? null);
-            foreach ($slugs as $slug) {
-                $slug = trim((string) $slug);
-                if ($slug === '') {
-                    continue;
-                }
+            $slug = trim((string) ($row['primary_slug'] ?? ''));
+            if ($slug === '') {
+                continue;
+            }
 
-                if (! array_key_exists($slug, $slugDates)) {
-                    $slugDates[$slug] = $updatedAt;
+            if (! array_key_exists($slug, $slugDates)) {
+                $slugDates[$slug] = $updatedAt;
 
-                    continue;
-                }
+                continue;
+            }
 
-                if ($updatedAt && (! $slugDates[$slug] || $updatedAt->gt($slugDates[$slug]))) {
-                    $slugDates[$slug] = $updatedAt;
-                }
+            if ($updatedAt && (! $slugDates[$slug] || $updatedAt->gt($slugDates[$slug]))) {
+                $slugDates[$slug] = $updatedAt;
             }
         }
 
@@ -168,12 +164,14 @@ class SitemapGenerator
 
         $urls = [];
         foreach ($slugList as $slug) {
-            $urls[] = [
-                'loc' => $this->urlPrefix.rawurlencode($slug),
-                'lastmod' => $this->formatLastmod($slugDates[$slug] ?? null),
-                'slug' => $slug,
-                'updated_at' => ($slugDates[$slug] ?? null)?->toDateTimeString(),
-            ];
+            foreach (self::SCALE_FRONTEND_LOCALE_SEGMENTS as $segment) {
+                $urls[] = [
+                    'loc' => $baseUrl.'/'.$segment.'/tests/'.rawurlencode($slug),
+                    'lastmod' => $this->formatLastmod($slugDates[$slug] ?? null),
+                    'slug' => 'tests:'.$segment.':'.$slug,
+                    'updated_at' => ($slugDates[$slug] ?? null)?->toDateTimeString(),
+                ];
+            }
         }
 
         return $urls;
@@ -859,39 +857,6 @@ class SitemapGenerator
 
         return trim((string) $page->content_md) !== ''
             || trim((string) $page->content_html) !== '';
-    }
-
-    private function collectSlugs($primarySlug, $slugsJson): array
-    {
-        $slugs = [];
-
-        if ($primarySlug !== null) {
-            $slugs[] = (string) $primarySlug;
-        }
-
-        foreach ($this->decodeSlugsJson($slugsJson) as $slug) {
-            $slugs[] = $slug;
-        }
-
-        return $slugs;
-    }
-
-    private function decodeSlugsJson($slugsJson): array
-    {
-        if (is_array($slugsJson)) {
-            return $slugsJson;
-        }
-
-        if (! is_string($slugsJson) || trim($slugsJson) === '') {
-            return [];
-        }
-
-        $decoded = json_decode($slugsJson, true);
-        if (! is_array($decoded)) {
-            return [];
-        }
-
-        return $decoded;
     }
 
     private function parseUpdatedAt($updatedAt): ?Carbon
