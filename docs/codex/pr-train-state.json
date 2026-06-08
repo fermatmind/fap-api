@@ -50654,7 +50654,7 @@
     "repo": "fap-api",
     "branch": "codex/help-content-pages-controlled-publish-runtime-01",
     "base": "origin/main",
-    "status": "github_checks_pending",
+    "status": "merged",
     "train_scope": "window_9_help_service_content",
     "title": "HELP-CONTENT-PAGES-CONTROLLED-PUBLISH-RUNTIME-01: add Help service controlled publish runtime",
     "depends_on": [
@@ -50701,22 +50701,32 @@
         "evidence": "PHP lint passed for command/service/test; JSON/YAML parse passed; GlobalEnZhContentPagesControlledPublishRuntime01 passed with 13 tests and 310 assertions; BigFiveResultPageV2CoreBodyPreviewTest passed with 164 tests and 511 assertions; artisan list shows content-pages:publish-controlled; path-limited git diff --check passed; git diff --cached --check passed."
       },
       "github": {
-        "status": "pending",
-        "head_sha": "dd5df8eb",
-        "passed_checks": [],
-        "merge_state": null,
+        "status": "pass",
+        "head_sha": "6ffcab4f2f8c7f44e769384202f666f6371dfb15",
+        "passed_checks": [
+          "hygiene",
+          "supply-chain",
+          "content-pack-build-validate",
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "Semgrep OSS",
+          "verify-bigfive",
+          "verify-mbti-legacy",
+          "verify-mbti-v2"
+        ],
+        "merge_state": "MERGED",
         "failure_reason": null,
-        "merge_commit": null
+        "merge_commit": "31f0ce4f9f3966719dfc93234b224ce8990871ff"
       }
     },
     "failure_reason": null,
-    "commit_sha": "dd5df8eb",
+    "commit_sha": "31f0ce4f9f3966719dfc93234b224ce8990871ff",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2000",
-    "merged_at": null,
-    "remote_branch_deleted": false,
+    "merged_at": "2026-06-08T09:48:48Z",
+    "remote_branch_deleted": true,
     "local_cleanup_executed": false,
     "result": {
-      "decision": "pending",
+      "decision": "HELP_SERVICE_CONTROLLED_PUBLISH_RUNTIME_MERGED",
       "generated_artifact": "backend/docs/help/generated/help-content-pages-controlled-publish-runtime-01.v1.json",
       "operations_report": "backend/docs/operations/help-content-pages-controlled-publish-runtime-2026-06-08.md",
       "next_task_recommendation": "HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-R2-01"
@@ -50748,6 +50758,11 @@
         "at": "2026-06-08",
         "status": "github_checks_pending",
         "note": "Opened fap-api PR #2000 for HELP-CONTENT-PAGES-CONTROLLED-PUBLISH-RUNTIME-01."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "merged_reconciled_in_r3",
+        "note": "GitHub PR #2000 is merged at 2026-06-08T09:48:48Z with merge commit 31f0ce4f9f3966719dfc93234b224ce8990871ff; reconciled as bookkeeping for R3 preflight."
       }
     ]
   },
@@ -50755,7 +50770,7 @@
     "repo": "fap-api",
     "branch": "codex/help-content-draft-publish-preflight-r2-01",
     "base": "origin/main",
-    "status": "github_checks_pending",
+    "status": "merged",
     "train_scope": "window_9_help_service_content",
     "title": "HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-R2-01: rerun Help publish preflight",
     "depends_on": [
@@ -50833,19 +50848,29 @@
         "evidence": "PHP lint passed for the focused test; JSON/YAML parse passed; HelpContentDraftPublishPreflightR2Test passed with 1 test and 14 assertions; public HTTP checks passed; read-only production revision/artisan list check completed without env/secret output; path-limited git diff --check passed; git diff --cached --check passed."
       },
       "github": {
-        "status": "pending",
-        "head_sha": "114f80b6",
-        "passed_checks": [],
-        "merge_state": null,
+        "status": "pass",
+        "head_sha": "37b8188bf7ef806b65d846104ea0652f7c2e88a5",
+        "passed_checks": [
+          "hygiene",
+          "supply-chain",
+          "content-pack-build-validate",
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "Semgrep OSS",
+          "verify-bigfive",
+          "verify-mbti-legacy",
+          "verify-mbti-v2"
+        ],
+        "merge_state": "MERGED",
         "failure_reason": null,
-        "merge_commit": null
+        "merge_commit": "bf937f67543dc9df656219e195e364d37c8bb63a"
       }
     },
-    "failure_reason": "Publish preflight R2 remains blocked because production backend active revision does not contain HELP-CONTENT-PAGES-CONTROLLED-PUBLISH-RUNTIME-01 and production fap-web FAQ schema runtime deployment status is Unknown.",
-    "commit_sha": "114f80b6",
+    "failure_reason": "R2 was blocked at creation time because production runtime was not deployed; GitHub PR #2001 later merged, and R3 now supersedes the runtime-readiness decision after deployment.",
+    "commit_sha": "bf937f67543dc9df656219e195e364d37c8bb63a",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2001",
-    "merged_at": null,
-    "remote_branch_deleted": false,
+    "merged_at": "2026-06-08T10:01:19Z",
+    "remote_branch_deleted": true,
     "local_cleanup_executed": false,
     "result": {
       "decision": "NO_GO_FOR_PUBLISH_EXECUTE",
@@ -50882,6 +50907,155 @@
         "at": "2026-06-08",
         "status": "github_checks_pending",
         "note": "Opened fap-api PR #2001 for HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-R2-01."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "merged_reconciled_in_r3",
+        "note": "GitHub PR #2001 is merged at 2026-06-08T10:01:19Z with merge commit bf937f67543dc9df656219e195e364d37c8bb63a; R3 rechecks the post-deploy runtime state."
+      }
+    ],
+    "next_task": "HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-R3-01"
+  },
+  "HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-R3-01": {
+    "repo": "fap-api",
+    "branch": "codex/help-content-draft-publish-preflight-r3-01",
+    "base": "origin/main",
+    "status": "local_checks_passed",
+    "train_scope": "window_9_help_service_content",
+    "title": "HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-R3-01: record post-deploy Help publish preflight",
+    "depends_on": [
+      "HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-R2-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User authorized adding and executing HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-R3-01 as read-only post-deploy Help publish preflight. CMS mutation, publish, deploy, search submission, private URL access, secret/env/cookie/token reads, payment/refund action, payment-provider change, and Operator approval claim are forbidden."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-R2-01 is merged in PR #2001 with merge commit bf937f67543dc9df656219e195e364d37c8bb63a; HELP-CONTENT-PAGES-CONTROLLED-PUBLISH-RUNTIME-01 is merged in PR #2000; fap-web HELP-SERVICE-FAQ-SCHEMA-RUNTIME-01 is merged and deployed in frontend SHA 37299875412c68a39e2a096f1f797800b96ff92e."
+      },
+      "source_package": {
+        "status": "pass",
+        "import_package_sha256": "15843defa1d3925624a49844e0ff15244a6cdff6cbb7c93bd3eac3c7fa5bed44",
+        "content_page_source_sha256": "af59792b896892fa308ccddab0915e72c565e3f696bc10feb0af2c96f6c54d6d",
+        "rows": 12,
+        "private_boundary_pattern_hits": 0
+      },
+      "production_runtime": {
+        "status": "pass",
+        "backend_revision_sha": "bf937f67543dc9df656219e195e364d37c8bb63a",
+        "frontend_sha": "37299875412c68a39e2a096f1f797800b96ff92e",
+        "backend_help_service_scope_visible": true,
+        "frontend_pm2_online_processes": 4
+      },
+      "controlled_publish_dry_run": {
+        "status": "pass",
+        "command_shape": "content-pages:publish-controlled --scope=help-service --locale=all --keys=<six-help-service-slugs> --dry-run --json",
+        "target_count": 12,
+        "would_publish_count": 12,
+        "would_create_count": 0,
+        "blocked_count": 0,
+        "target_locales": [
+          "zh-CN",
+          "en"
+        ],
+        "writes_committed": false,
+        "after_indexable": [
+          false
+        ],
+        "search_channel_action_attempted": false,
+        "url_submission_attempted": false,
+        "deploy_attempted": false
+      },
+      "public_routes": {
+        "status": "pass",
+        "help_draft_routes_404": 12,
+        "help_draft_routes_noindex": 12,
+        "support_routes_200": 2,
+        "privacy_terms_routes_200": 4,
+        "help_faq_contact_routes_200": 4,
+        "orders_lookup_routes_200": 2,
+        "sitemap_llms_help_service_slug_hits": 0,
+        "sitemap_llms_private_pattern_hits": 0
+      },
+      "scope": {
+        "status": "pass",
+        "allowed_paths": [
+          "backend/docs/help/generated/help-content-draft-publish-preflight-r3-01.v1.json",
+          "backend/docs/operations/help-content-draft-publish-preflight-r3-2026-06-08.md",
+          "backend/tests/Feature/Cms/HelpContentDraftPublishPreflightR3Test.php",
+          "docs/codex/pr-train.yaml",
+          "docs/codex/pr-train-state.json"
+        ],
+        "evidence": "Changed/untracked files are limited to the R3 preflight artifact, operations report, focused artifact contract, and PR-train metadata."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "php -l backend/tests/Feature/Cms/HelpContentDraftPublishPreflightR3Test.php",
+          "python3 -m json.tool backend/docs/help/generated/help-content-draft-publish-preflight-r3-01.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=HelpContentDraftPublishPreflightR3Test --no-ansi",
+          "public HTTP checks for Help draft routes, support/privacy/terms/help FAQ/help contact/orders lookup, sitemap.xml, llms.txt, llms-full.txt",
+          "read-only production backend and frontend runtime checks without env/secret output",
+          "backend controlled publish dry-run with --scope=help-service --locale=all --keys=<six-help-service-slugs> --dry-run --json",
+          "git diff --check -- backend/docs/help/generated/help-content-draft-publish-preflight-r3-01.v1.json backend/docs/operations/help-content-draft-publish-preflight-r3-2026-06-08.md backend/tests/Feature/Cms/HelpContentDraftPublishPreflightR3Test.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+          "git diff --cached --check"
+        ],
+        "evidence": "PHP lint passed; JSON/YAML parse passed; HelpContentDraftPublishPreflightR3Test passed with 1 test and 49 assertions; public HTTP checks passed; read-only production backend/frontend runtime checks passed; help-service controlled publish dry-run passed with target_count=12 and blocked_count=0; path-limited git diff --check and git diff --cached --check passed."
+      },
+      "github": {
+        "status": "pending",
+        "head_sha": null,
+        "passed_checks": [],
+        "merge_state": null,
+        "failure_reason": null,
+        "merge_commit": null
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "result": {
+      "decision": "GO_FOR_EXACT_PUBLISH_AUTHORIZATION_PROMPT",
+      "generated_artifact": "backend/docs/help/generated/help-content-draft-publish-preflight-r3-01.v1.json",
+      "operations_report": "backend/docs/operations/help-content-draft-publish-preflight-r3-2026-06-08.md",
+      "publish_allowed": false,
+      "publish_authorization_prompt_allowed": true,
+      "next_task_recommendation": "HELP-CONTENT-DRAFT-PUBLISH-EXECUTE-01"
+    },
+    "scope_validation": {
+      "cms_mutation_performed": false,
+      "publish_performed": false,
+      "deploy_performed": false,
+      "search_submission_performed": false,
+      "private_url_access_performed": false,
+      "secret_env_cookie_token_read": false,
+      "payment_or_refund_performed": false,
+      "payment_provider_changed": false,
+      "operator_approval_claimed": false,
+      "allowed_paths_only": true
+    },
+    "transitions": [
+      {
+        "at": "2026-06-08",
+        "status": "in_progress",
+        "note": "Started read-only post-deploy R3 preflight from origin/main in an isolated fap-api worktree. No CMS mutation, publish, deploy, search submission, private URL access, secret/env/cookie/token read, payment/refund action, payment provider change, or Operator approval claim is authorized."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "runtime_preflight_passed_pending_local_checks",
+        "note": "Production backend revision bf937f67543dc9df656219e195e364d37c8bb63a exposes help-service controlled publish and dry-run passes for exactly 12 rows with blocked_count=0; frontend Node1 SHA 37299875412c68a39e2a096f1f797800b96ff92e is online; public draft routes remain 404/noindex and sitemap/llms private scans are clear."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "local_checks_passed",
+        "note": "PHP lint, JSON/YAML parse, focused artifact contract, public HTTP checks, read-only production runtime checks, help-service controlled publish dry-run, and scoped diff whitespace checks passed. No CMS mutation, publish, deploy, search submission, private URL access, secret/env/cookie/token read, payment/refund action, payment provider change, or Operator approval claim was performed."
       }
     ]
   }
