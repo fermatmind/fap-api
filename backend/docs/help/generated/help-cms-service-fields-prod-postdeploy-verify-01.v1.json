@@ -1,0 +1,85 @@
+{
+  "schema": "help-cms-service-fields-prod-postdeploy-verify-01.v1",
+  "task": "HELP-CMS-SERVICE-FIELDS-PROD-POSTDEPLOY-VERIFY-01",
+  "generated_at": "2026-06-08",
+  "decision": "POSTDEPLOY_READY_FOR_POLICY_CMS_SYNC",
+  "scope": "Read-only post-deploy production verification for Help service ContentPage fields readiness before HELP-CONTENT-DRAFT-POLICY-CMS-SYNC-01.",
+  "authorization": {
+    "source": "user",
+    "allowed": "Add manifest/state entries and record read-only production readiness evidence for Help service fields before CMS draft policy sync.",
+    "forbidden": [
+      "CMS mutation",
+      "publish",
+      "deploy",
+      "search submission",
+      "private result/order/share/pay/payment/history URL access",
+      "secret/env/cookie/token value reading",
+      "payment/refund action",
+      "payment-provider behavior change",
+      "Operator approval claim"
+    ]
+  },
+  "target": {
+    "repo": "fap-api",
+    "origin_main_sha": "a98788512c1513750931504d4162d528ad19cc54",
+    "production_revision_sha": "a98788512c1513750931504d4162d528ad19cc54",
+    "production_matches_origin_main": true
+  },
+  "production_read_only_evidence": {
+    "connection_method": "ssh_alias_fap-api-prod_batchmode_readonly",
+    "active_revision_source": "REVISION_FILE",
+    "active_revision_sha": "a98788512c1513750931504d4162d528ad19cc54",
+    "migration_status": {
+      "2026_06_05_150000_add_help_service_fields_to_content_pages": {
+        "status": "Ran",
+        "batch": 45
+      },
+      "2026_06_08_010000_add_publish_safety_fields_to_content_pages": {
+        "status": "Ran",
+        "batch": 46
+      }
+    },
+    "content_pages_importer": {
+      "command_present": true,
+      "service_field_mapping": {
+        "schema_enabled": "present",
+        "support_contact": "present",
+        "policy_version": "present",
+        "reviewer": "present",
+        "faq_items": "present"
+      }
+    },
+    "content_page_model": {
+      "schema_enabled_fillable": "present",
+      "schema_enabled_cast": "present",
+      "schema_enabled_public_mapping": "present"
+    }
+  },
+  "assessment": {
+    "help_service_fields_migration_ready": true,
+    "publish_safety_fields_migration_ready": true,
+    "importer_service_field_mapping_ready": true,
+    "production_runtime_ready_for_policy_cms_sync": true,
+    "cms_sync_allowed_by_this_artifact": false,
+    "publish_allowed_by_this_artifact": false,
+    "notes": [
+      "Production REVISION matches origin/main at a98788512c1513750931504d4162d528ad19cc54.",
+      "Help service fields migration and publish safety migration are both Ran.",
+      "content-pages:import-local-baseline is available in production runtime.",
+      "support_contact, policy_version, reviewer, faq_items, and schema_enabled importer/model mapping is visible in production runtime.",
+      "This artifact only clears runtime readiness evidence; it does not perform or authorize CMS mutation."
+    ]
+  },
+  "scope_validation": {
+    "cms_mutation_performed": false,
+    "publish_performed": false,
+    "deploy_performed_in_this_pr": false,
+    "search_submission_performed": false,
+    "private_url_access_performed": false,
+    "secret_env_cookie_token_read": false,
+    "payment_or_refund_performed": false,
+    "payment_provider_changed": false,
+    "operator_approval_claimed": false
+  },
+  "next_task_recommendation": "HELP-CONTENT-DRAFT-POLICY-CMS-SYNC-01"
+}
