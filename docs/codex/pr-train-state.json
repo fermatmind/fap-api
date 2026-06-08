@@ -49421,7 +49421,7 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": "3682e0957f4d552da27a45e740366bbbf47fb750",
+    "commit_sha": "pending_remote_pr_head",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1975",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -49491,6 +49491,11 @@
         "at": "2026-06-08",
         "status": "target_refreshed_after_main_advanced",
         "note": "origin/main advanced to 87afe2dfddfab1f8533512b8a2bdf1c347626000 before merge, so the verification artifact and next deploy authorization prompt were refreshed. Production active revision remains e812d6f87f8b84b45d2e900d9d3844a0402635bc."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "commit_sha_pending_remote_head",
+        "note": "After rebasing onto the refreshed origin/main target, commit_sha was set to pending_remote_pr_head to avoid self-referential amend hash churn before merge."
       }
     ]
   }
