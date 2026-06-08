@@ -49523,7 +49523,7 @@
     "repo": "fap-api",
     "branch": "codex/help-cms-service-fields-prod-postdeploy-verify-01",
     "base": "origin/main",
-    "status": "local_checks_passed",
+    "status": "pr_opened",
     "train_scope": "window_9_help_service_content",
     "title": "docs(help): verify Help service fields production postdeploy",
     "depends_on": [
@@ -49576,8 +49576,8 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "0ddbee354227d0d98a8e51ed3f1907cd8141a364",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1984",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -49624,6 +49624,11 @@
         "at": "2026-06-08",
         "status": "local_checks_passed",
         "note": "JSON/YAML validation and scoped diff whitespace checks passed. No CMS mutation, publish, deploy, search submission, private URL access, secret read, payment action, or Operator approval claim was performed."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "pr_opened",
+        "note": "Opened PR #1984 for HELP-CMS-SERVICE-FIELDS-PROD-POSTDEPLOY-VERIFY-01."
       }
     ]
   }
