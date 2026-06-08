@@ -49356,5 +49356,132 @@
         "note": "PR #1966 merged on GitHub at 2026-06-08T02:09:49Z with merge commit b9279c12c1f40732bb9be8566f46b9515dcb02dd; origin/main contains the merge commit; the remote task branch is absent and the local task branch was deleted."
       }
     ]
+  },
+  "HELP-CMS-SERVICE-FIELDS-PROD-SHA-VERIFY-01": {
+    "repo": "fap-api",
+    "branch": "codex/help-cms-service-fields-prod-sha-verify-01",
+    "base": "origin/main",
+    "status": "local_checks_passed",
+    "train_scope": "window_9_help_service_content",
+    "title": "docs(help): verify Help service production active SHA",
+    "depends_on": [
+      "HELP-CMS-SERVICE-FIELDS-PROD-RELEASE-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User authorized HELP-CMS-SERVICE-FIELDS-PROD-SHA-VERIFY-01 using an approved read-only production method that reports only active release SHA and migration status for Help service field migrations, without deploy, CMS mutation, publish, search submission, private URL access, secret/env/cookie/token reads, payment/refund action, payment-provider change, or Operator approval claim."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "HELP-CMS-SERVICE-FIELDS-PROD-RELEASE-01 is merged and reconciled on origin/main."
+      },
+      "production_read_only": {
+        "status": "blocked_runtime_behind_and_publish_safety_pending",
+        "connection_method": "ssh_alias_fap-api-prod_batchmode_readonly",
+        "active_revision_source": "REVISION_FILE",
+        "active_revision_sha": "e812d6f87f8b84b45d2e900d9d3844a0402635bc",
+        "remote_git_head": "Unknown",
+        "origin_main_sha": "92a94f0604adc14cad2d7b1f5a85a0ce91f0eeef",
+        "active_revision_is_ancestor_of_origin_main": true,
+        "commits_between_active_revision_and_origin_main": 43,
+        "contains_help_service_fields_commit": false,
+        "contains_help_importer_service_fields_commit": false,
+        "contains_publish_safety_fields_commit": false,
+        "migration_status": {
+          "2026_06_05_150000_add_help_service_fields_to_content_pages": "Ran batch 45",
+          "2026_06_08_010000_add_publish_safety_fields_to_content_pages": "Pending"
+        },
+        "runtime_file_presence": {
+          "help_service_fields_migration": "present",
+          "publish_safety_fields_migration": "missing",
+          "content_pages_importer_command": "present",
+          "content_page_model": "present"
+        },
+        "importer_mapping_grep": {
+          "support_contact": "present",
+          "policy_version": "present",
+          "reviewer": "present",
+          "faq_items": "present",
+          "schema_enabled": "missing"
+        }
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "python3 -m json.tool backend/docs/help/generated/help-cms-service-fields-prod-sha-verify-01.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "git diff --check -- backend/docs/help/generated/help-cms-service-fields-prod-sha-verify-01.v1.json backend/docs/operations/help-cms-service-fields-prod-sha-verify-2026-06-08.md docs/codex/pr-train.yaml docs/codex/pr-train-state.json"
+        ]
+      },
+      "github": {
+        "status": "pending",
+        "checks": []
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "result": {
+      "decision": "BLOCKED_RUNTIME_BEHIND_AND_PUBLISH_SAFETY_PENDING",
+      "generated_artifact": "backend/docs/help/generated/help-cms-service-fields-prod-sha-verify-01.v1.json",
+      "operations_report": "backend/docs/operations/help-cms-service-fields-prod-sha-verify-2026-06-08.md",
+      "production_active_revision_sha": "e812d6f87f8b84b45d2e900d9d3844a0402635bc",
+      "origin_main_sha": "92a94f0604adc14cad2d7b1f5a85a0ce91f0eeef",
+      "next_safe_authorization_prompt": "I explicitly approve backend production deploy for exact SHA 92a94f0604adc14cad2d7b1f5a85a0ce91f0eeef release help-cms-service-fields-prod-20260608-92a94f06.",
+      "next_task_recommendation": "HELP-CMS-SERVICE-FIELDS-PROD-DEPLOY-AUTHORIZATION-01"
+    },
+    "scope_validation": {
+      "deploy_performed": false,
+      "migration_performed": false,
+      "cms_mutation_performed": false,
+      "publish_performed": false,
+      "search_submission_performed": false,
+      "private_url_access_performed": false,
+      "secret_env_cookie_token_read": false,
+      "payment_or_refund_performed": false,
+      "payment_provider_changed": false,
+      "operator_approval_claimed": false,
+      "allowed_paths_only": true
+    },
+    "sidecars": [
+      {
+        "id": "HELP-CMS-SERVICE-FIELDS-PROD-RUNTIME-IDENTITY-MIXED",
+        "status": "blocked",
+        "note": "REVISION reports e812d6f87f8b84b45d2e900d9d3844a0402635bc, but remote file/migration evidence is mixed; do not treat production as containing full Help service runtime."
+      },
+      {
+        "id": "HELP-CMS-SERVICE-FIELDS-PUBLISH-SAFETY-MIGRATION",
+        "status": "pending_on_production",
+        "note": "2026_06_08_010000_add_publish_safety_fields_to_content_pages is Pending on production."
+      },
+      {
+        "id": "HELP-CONTENT-DRAFT-POLICY-CMS-SYNC-01",
+        "status": "blocked_until_runtime_deployed_or_confirmed",
+        "note": "CMS draft sync remains blocked until production runtime contains the full Help service field/importer/publish-safety target."
+      }
+    ],
+    "next_task": "HELP-CMS-SERVICE-FIELDS-PROD-DEPLOY-AUTHORIZATION-01",
+    "transitions": [
+      {
+        "at": "2026-06-08",
+        "status": "authorized",
+        "note": "User authorized read-only production active SHA and migration status verification."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "remote_read_only_verified_local_validation_pending",
+        "note": "Read-only production checks completed through SSH alias fap-api-prod. Active revision is e812d6f87f8b84b45d2e900d9d3844a0402635bc; Help service fields migration is Ran; publish safety migration is Pending; schema_enabled importer mapping was not confirmed."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "local_checks_passed",
+        "note": "JSON/YAML validation and scoped diff whitespace checks passed. No deploy, migration, CMS mutation, publish, private URL access, secret read, payment action, or Operator approval claim was performed."
+      }
+    ]
   }
 }
