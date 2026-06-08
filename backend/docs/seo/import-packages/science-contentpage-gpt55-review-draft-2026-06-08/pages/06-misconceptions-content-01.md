@@ -22,6 +22,7 @@ sitemap_eligible: false
 llms_eligible: false
 footer_eligible: false
 internal_links_allowed:
+  - /reliability-validity
   - /science
   - /method-boundaries
   - /tests/mbti-personality-test-16-personality-types

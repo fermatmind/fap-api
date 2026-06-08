@@ -89,7 +89,7 @@ blocking_reason=real_import_requires_separate_operator_approval_and_import_comma
 
 ## Route Mapping Note
 
-`/reliability-validity` remains the page slug in the manifest and dry-run output. It was removed from `internal_links_allowed` frontmatter fields because the current backend pre-import route allowlist does not accept it as an internal-link route field. Treat this as a route-governance follow-up before publish/discoverability, not as a blocker for no-write draft validation.
+`/reliability-validity` remains the page slug in the manifest and dry-run output. It is allowed as a public canonical route for Science ContentPage internal-link fields after the route governance update. Publish and discoverability still require separate operator approval and route smoke checks against real CMS content.
 
 ## Hard NO-GO
 

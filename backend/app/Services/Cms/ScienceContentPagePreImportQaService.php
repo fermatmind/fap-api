@@ -24,6 +24,7 @@ final class ScienceContentPagePreImportQaService
         '/item-design-notes',
         '/method-boundaries',
         '/privacy',
+        '/reliability-validity',
         '/science',
         '/support',
         '/tests',

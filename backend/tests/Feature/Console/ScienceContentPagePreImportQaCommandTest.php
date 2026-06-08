@@ -208,6 +208,7 @@ internal_links_allowed:
   - /tests
   - /privacy
   - /support
+  - /reliability-validity
 forbidden_routes:
   - /result/*
   - /orders/*
