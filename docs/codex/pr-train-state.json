@@ -49518,5 +49518,113 @@
         "note": "PR #1975 merged on GitHub at 2026-06-08T02:58:31Z with merge commit 0b16e566de2bb6690d618f6622f2e321ab66465b; origin/main contains the merge commit; the remote task branch is absent and the local task branch was deleted."
       }
     ]
+  },
+  "HELP-CMS-SERVICE-FIELDS-PROD-POSTDEPLOY-VERIFY-01": {
+    "repo": "fap-api",
+    "branch": "codex/help-cms-service-fields-prod-postdeploy-verify-01",
+    "base": "origin/main",
+    "status": "local_checks_passed",
+    "train_scope": "window_9_help_service_content",
+    "title": "docs(help): verify Help service fields production postdeploy",
+    "depends_on": [
+      "HELP-CMS-SERVICE-FIELDS-PROD-SHA-VERIFY-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User authorized adding and executing HELP-CMS-SERVICE-FIELDS-PROD-POSTDEPLOY-VERIFY-01 manifest/state entries to record read-only production revision, Help service migration, publish safety migration, and importer service-field mapping readiness. CMS mutation, publish, deploy, search submission, private URL access, secret/env/cookie/token reads, payment/refund action, payment-provider change, and Operator approval claim are forbidden."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "HELP-CMS-SERVICE-FIELDS-PROD-SHA-VERIFY-01 is merged on origin/main with commit 0b16e566de2bb6690d618f6622f2e321ab66465b."
+      },
+      "production_read_only": {
+        "status": "ready_for_policy_cms_sync",
+        "connection_method": "ssh_alias_fap-api-prod_batchmode_readonly",
+        "active_revision_source": "REVISION_FILE",
+        "active_revision_sha": "a98788512c1513750931504d4162d528ad19cc54",
+        "origin_main_sha": "a98788512c1513750931504d4162d528ad19cc54",
+        "production_matches_origin_main": true,
+        "migration_status": {
+          "2026_06_05_150000_add_help_service_fields_to_content_pages": "Ran batch 45",
+          "2026_06_08_010000_add_publish_safety_fields_to_content_pages": "Ran batch 46"
+        },
+        "runtime_file_presence": {
+          "content_pages_importer_command": "present",
+          "content_page_model": "present"
+        },
+        "importer_mapping_grep": {
+          "support_contact": "present",
+          "policy_version": "present",
+          "reviewer": "present",
+          "faq_items": "present",
+          "schema_enabled": "present"
+        }
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "python3 -m json.tool backend/docs/help/generated/help-cms-service-fields-prod-postdeploy-verify-01.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "git diff --check -- backend/docs/help/generated/help-cms-service-fields-prod-postdeploy-verify-01.v1.json backend/docs/operations/help-cms-service-fields-prod-postdeploy-verify-2026-06-08.md docs/codex/pr-train.yaml docs/codex/pr-train-state.json"
+        ]
+      },
+      "github": {
+        "status": "pending",
+        "checks": []
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "result": {
+      "decision": "POSTDEPLOY_READY_FOR_POLICY_CMS_SYNC",
+      "generated_artifact": "backend/docs/help/generated/help-cms-service-fields-prod-postdeploy-verify-01.v1.json",
+      "operations_report": "backend/docs/operations/help-cms-service-fields-prod-postdeploy-verify-2026-06-08.md",
+      "production_active_revision_sha": "a98788512c1513750931504d4162d528ad19cc54",
+      "origin_main_sha": "a98788512c1513750931504d4162d528ad19cc54",
+      "next_task_recommendation": "HELP-CONTENT-DRAFT-POLICY-CMS-SYNC-01"
+    },
+    "scope_validation": {
+      "cms_mutation_performed": false,
+      "publish_performed": false,
+      "deploy_performed": false,
+      "search_submission_performed": false,
+      "private_url_access_performed": false,
+      "secret_env_cookie_token_read": false,
+      "payment_or_refund_performed": false,
+      "payment_provider_changed": false,
+      "operator_approval_claimed": false,
+      "allowed_paths_only": true
+    },
+    "sidecars": [
+      {
+        "id": "HELP-CONTENT-DRAFT-POLICY-CMS-SYNC-01",
+        "status": "ready_for_separate_authorized_execution",
+        "note": "Production runtime is ready for CMS draft policy sync, but this PR does not mutate CMS rows or authorize publishing."
+      }
+    ],
+    "next_task": "HELP-CONTENT-DRAFT-POLICY-CMS-SYNC-01",
+    "transitions": [
+      {
+        "at": "2026-06-08",
+        "status": "authorized",
+        "note": "User authorized manifest/state entry and read-only postdeploy verification."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "production_read_only_verified",
+        "note": "Production REVISION matches origin/main a98788512c1513750931504d4162d528ad19cc54; Help service fields and publish safety migrations are Ran; content-pages importer and support_contact/policy_version/reviewer/faq_items/schema_enabled mappings are visible."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "local_checks_passed",
+        "note": "JSON/YAML validation and scoped diff whitespace checks passed. No CMS mutation, publish, deploy, search submission, private URL access, secret read, payment action, or Operator approval claim was performed."
+      }
+    ]
   }
 }
