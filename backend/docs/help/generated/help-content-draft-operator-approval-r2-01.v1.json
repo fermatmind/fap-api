@@ -1,0 +1,68 @@
+{
+  "schema": "help-content-draft-operator-approval-r2-01.v1",
+  "task": "HELP-CONTENT-DRAFT-OPERATOR-APPROVAL-R2-01",
+  "generated_at": "2026-06-08",
+  "decision": "OPERATOR_APPROVED_PUBLISH_PREFLIGHT_ALLOWED_NOT_PUBLISH",
+  "operator_review_status": "approved",
+  "operator_approval_recorded": true,
+  "publish_preflight_allowed": true,
+  "publish_allowed": false,
+  "scope": "Read-only record of the external Operator approval decision for the second-round Help CMS draft review.",
+  "approval_source": {
+    "source": "user_message",
+    "message": "approve",
+    "recorded_by": "Codex",
+    "interpretation": "Operator approval for the 12 Help CMS draft rows reviewed by HELP-CONTENT-DRAFT-OPERATOR-REVIEW-R2-01.",
+    "not_interpreted_as": [
+      "publish authorization",
+      "CMS mutation authorization",
+      "deploy authorization",
+      "search submission authorization",
+      "payment/refund authorization"
+    ]
+  },
+  "dependency_evidence": {
+    "HELP_CONTENT_DRAFT_OPERATOR_REVIEW_R2_01": {
+      "status": "merged",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1987",
+      "merge_commit": "61cb3b9ae539f0379801d0bf41406472eb81e3dd",
+      "review_status_before_approval": "review_requested",
+      "operator_approval_claimed_by_codex": false,
+      "publish_allowed_before_approval": false
+    }
+  },
+  "approved_review_scope": {
+    "draft_rows": 12,
+    "locales": [
+      "en",
+      "zh-CN"
+    ],
+    "slugs": [
+      "help-data-deletion",
+      "help-payment-refund",
+      "help-privacy-data",
+      "help-result-recovery",
+      "help-unlock-failure",
+      "help-use-boundaries"
+    ],
+    "source_package_sha256": "7d034de0b0eb5dc2c78fbb0e1828f3820e36f1c1a03d8f1567722c336438b453",
+    "import_package_sha256": "82a0d495f3fdd21df35696950eaa0b0a6b12d224d5dc7a8f82c8fa3e49cdcb65"
+  },
+  "remaining_gates": {
+    "publish_preflight_required": true,
+    "exact_publish_authorization_required": true,
+    "faq_schema_runtime_gate_required": true,
+    "current_publish_status": "blocked_until_publish_preflight_and_exact_publish_authorization"
+  },
+  "scope_validation": {
+    "cms_mutation_performed": false,
+    "publish_performed": false,
+    "deploy_performed": false,
+    "search_submission_performed": false,
+    "private_url_access_performed": false,
+    "secret_env_cookie_token_read": false,
+    "payment_or_refund_performed": false,
+    "payment_provider_changed": false
+  },
+  "next_task_recommendation": "HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-01"
+}
