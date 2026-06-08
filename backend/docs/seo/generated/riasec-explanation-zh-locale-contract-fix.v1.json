@@ -1,0 +1,210 @@
+{
+  "schema": "riasec-explanation-zh-locale-contract-fix.v1",
+  "task_id": "SEO-ARTICLE-RIASEC-V2-ZH-LOCALE-CONTRACT-FIX-01",
+  "generated_at": "2026-06-08T11:18:00+08:00",
+  "decision": "GO_ZH_CANONICAL_200_SEARCH_SUBMISSION_STILL_BLOCKED",
+  "scope": {
+    "summary": "Normalize the published Chinese RIASEC article CMS locale contract so the public canonical zh article route returns 200.",
+    "cms_mutation_performed": true,
+    "article_content_rewrite_performed": false,
+    "publish_performed_in_this_task": false,
+    "search_submission_performed": false,
+    "deploy_performed": false,
+    "frontend_deploy_performed": false,
+    "private_or_tokenized_url_accessed": false,
+    "public_canonical_routes_only": true
+  },
+  "target_article": {
+    "article_id": 40,
+    "slug": "riasec-holland-career-interest-test-explained",
+    "canonical_url": "https://fermatmind.com/zh/articles/riasec-holland-career-interest-test-explained",
+    "status": "published",
+    "is_public": true,
+    "is_indexable": true,
+    "published_revision_id": 45,
+    "translation_group_id": "riasec-explanation-article-2026-06-v2"
+  },
+  "production_locale_state": {
+    "before": {
+      "article_id": 40,
+      "article_locale": "zh",
+      "source_locale": "zh",
+      "seo_meta_locale": "zh",
+      "editorial_import_locale": "zh",
+      "article_test_edge_locales": [
+        "zh"
+      ],
+      "article_translation_revision_locales": [
+        "zh"
+      ],
+      "api_locale_zh_status": 200,
+      "api_locale_zh_cn_status": 404,
+      "frontend_zh_canonical_status": 404
+    },
+    "after": {
+      "article_id": 40,
+      "article_locale": "zh-CN",
+      "source_locale": "zh-CN",
+      "seo_meta_locale": "zh-CN",
+      "editorial_import_locale": "zh-CN",
+      "article_test_edge_locales": [
+        "zh-CN"
+      ],
+      "article_translation_revision_locales": [
+        "zh-CN"
+      ],
+      "api_locale_zh_status": 404,
+      "api_locale_zh_cn_status": 200,
+      "frontend_zh_canonical_status": 200
+    }
+  },
+  "cms_mutation": {
+    "performed": true,
+    "runtime": "production artisan tinker bounded update",
+    "guardrails": [
+      "confirmed article id 40 and slug before update",
+      "confirmed article 40 was already published, public, and indexable",
+      "confirmed no conflicting org and slug record existed for locale zh-CN",
+      "updated locale fields only",
+      "did not modify article body, title, H1, meta copy, FAQ entries, CTA labels, references, media, publication state, or tracking"
+    ],
+    "tables_updated": [
+      "articles.locale",
+      "articles.source_locale",
+      "article_seo_meta.locale",
+      "article_editorial_package_imports.locale",
+      "article_test_edges.locale",
+      "article_translation_revisions.locale"
+    ],
+    "post_mutation_output": {
+      "article_id": 40,
+      "article_locale": "zh-CN",
+      "source_locale": "zh-CN",
+      "status": "published",
+      "is_public": true,
+      "is_indexable": true,
+      "seo_locale": "zh-CN",
+      "import_locale": "zh-CN",
+      "edge_locales": [
+        "zh-CN"
+      ],
+      "revision_locales": [
+        "zh-CN"
+      ]
+    }
+  },
+  "post_fix_http_smoke": {
+    "api": [
+      {
+        "surface": "backend_public_article_api",
+        "article_id": 40,
+        "locale_query": "zh-CN",
+        "http_status": 200,
+        "body_bytes": 43265,
+        "status": "passed"
+      },
+      {
+        "surface": "backend_public_article_api",
+        "article_id": 40,
+        "locale_query": "zh",
+        "http_status": 404,
+        "body_bytes": 68,
+        "status": "expected_after_locale_normalization"
+      }
+    ],
+    "frontend": [
+      {
+        "surface": "frontend_public_article_detail",
+        "article_id": 40,
+        "locale_segment": "zh",
+        "http_status": 200,
+        "body_bytes": 172515,
+        "status": "passed"
+      },
+      {
+        "surface": "frontend_public_article_detail",
+        "article_id": 41,
+        "locale_segment": "en",
+        "http_status": 200,
+        "body_bytes": 175026,
+        "status": "passed"
+      }
+    ]
+  },
+  "post_fix_cms_state": [
+    {
+      "article_id": 40,
+      "locale": "zh-CN",
+      "source_locale": "zh-CN",
+      "status": "published",
+      "is_public": true,
+      "is_indexable": true,
+      "published_revision_id": 45,
+      "seo_locale": "zh-CN",
+      "seo_canonical_url": "https://fermatmind.com/zh/articles/riasec-holland-career-interest-test-explained",
+      "seo_robots": "index,follow"
+    },
+    {
+      "article_id": 41,
+      "locale": "en",
+      "source_locale": "en",
+      "status": "published",
+      "is_public": true,
+      "is_indexable": true,
+      "published_revision_id": 46,
+      "seo_locale": "en",
+      "seo_canonical_url": "https://fermatmind.com/en/articles/what-is-riasec-holland-code-career-interest-test",
+      "seo_robots": "index,follow"
+    }
+  ],
+  "sitemap_llms_smoke": {
+    "sitemap_xml": {
+      "url": "https://fermatmind.com/sitemap.xml",
+      "body_bytes": 333760,
+      "contains_zh_article": false,
+      "contains_en_article": false
+    },
+    "llms_txt": {
+      "url": "https://fermatmind.com/llms.txt",
+      "body_bytes": 160546,
+      "contains_zh_article": false,
+      "contains_en_article": true
+    },
+    "llms_full_txt": {
+      "url": "https://fermatmind.com/llms-full.txt",
+      "body_bytes": 525411,
+      "contains_zh_article": false,
+      "contains_en_article": true
+    },
+    "search_submission_allowed": false,
+    "convergence_status": "not_fully_converged"
+  },
+  "hard_boundaries": {
+    "no_article_body_title_h1_meta_faq_cta_rewrite": true,
+    "no_publish_in_this_task": true,
+    "no_search_submission": true,
+    "no_deploy": true,
+    "no_frontend_deploy": true,
+    "no_private_or_tokenized_url_access": true,
+    "public_canonical_routes_only": true
+  },
+  "remaining_blockers": [
+    {
+      "id": "sitemap_llms_not_fully_converged",
+      "status": "blocked",
+      "evidence": "The zh canonical route now returns 200, but sitemap.xml and llms outputs do not yet consistently enumerate both RIASEC article slugs.",
+      "next_check": "Run a separate post-publish smoke after cache or enumeration convergence."
+    },
+    {
+      "id": "search_submission_not_authorized",
+      "status": "hard_gate",
+      "evidence": "No GSC, Baidu, IndexNow, or search submission action was authorized or performed in this task.",
+      "next_check": "Only run search submission preflight after post-publish smoke passes and separate exact authorization is provided."
+    }
+  ],
+  "next_step": {
+    "recommended_task_id": "SEO-ARTICLE-RIASEC-V2-POST-PUBLISH-SMOKE-02",
+    "scope": "Re-run post-publish public smoke for zh and en article routes, schema, sitemap, llms, CTA public route, and tracking path. Do not submit search URLs.",
+    "search_submission_status": "blocked"
+  }
+}
