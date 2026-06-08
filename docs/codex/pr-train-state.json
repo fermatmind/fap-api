@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-08T14:39:00Z",
+  "updated_at": "2026-06-08T14:42:00Z",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -51278,7 +51278,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-sitemap-stability-02",
     "base": "origin/main",
-    "status": "local_checks_passed",
+    "status": "github_checks_pending",
     "train_scope": "sitemap_stability",
     "title": "SEO-SITEMAP-STABILITY-02: fix(seo): make backend sitemap source fail closed with fallback payload",
     "depends_on": [],
@@ -51324,8 +51324,8 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "302e4171f9eb5ace6d913f2fdb310b3379e6cbd2",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2007",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -51339,6 +51339,11 @@
         "at": "2026-06-08",
         "status": "local_checks_passed",
         "note": "Backend sitemap source fail-closed implementation, focused tests, route/migration smoke checks, scoped Pint, JSON/YAML parse, path-limited diff check, and bash backend/scripts/ci_verify_mbti.sh all passed locally."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "github_checks_pending",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/2007 from implementation commit 302e4171f9eb5ace6d913f2fdb310b3379e6cbd2; GitHub checks pending."
       }
     ]
   }
