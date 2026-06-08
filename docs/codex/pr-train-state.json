@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-08T17:00:04Z",
+  "updated_at": "2026-06-08T17:05:28Z",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -51356,7 +51356,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-sitemap-diff-02",
     "base": "origin/main",
-    "status": "github_checks_pending",
+    "status": "github_checks_passed_ready_to_merge",
     "train_scope": "sitemap_diff_parity",
     "title": "SEO-SITEMAP-DIFF-02: fix(seo): align scale sitemap source to localized canonical test URLs",
     "depends_on": [],
@@ -51398,9 +51398,22 @@
         "evidence": "PHP lint passed for SitemapGenerator and focused SEO sitemap tests. Focused PHPUnit passed with 17 warnings and 406 assertions. Scoped Pint --test passed. JSON/YAML parse passed. Path-limited git diff --check passed."
       },
       "github": {
-        "status": "pending",
-        "head_sha": "a759bc0bb752f80d4425937ba0e98d39f5da7493",
-        "pr_url": "https://github.com/fermatmind/fap-api/pull/2008"
+        "status": "pass",
+        "head_sha": "7b1aba66f084a2cba6bd2e798e5823b979c0656f",
+        "passed_checks": [
+          "hygiene",
+          "supply-chain",
+          "content-pack-build-validate",
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "Semgrep OSS",
+          "verify-bigfive",
+          "verify-mbti-legacy",
+          "verify-mbti-v2"
+        ],
+        "merge_state": "CLEAN",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/2008",
+        "failure_reason": null
       }
     },
     "failure_reason": null,
@@ -51433,6 +51446,11 @@
         "at": "2026-06-09",
         "status": "github_checks_pending",
         "note": "Opened https://github.com/fermatmind/fap-api/pull/2008 from head a759bc0bb752f80d4425937ba0e98d39f5da7493; GitHub checks pending."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "github_checks_passed_ready_to_merge",
+        "note": "GitHub checks passed for PR #2008 head 7b1aba66f084a2cba6bd2e798e5823b979c0656f: hygiene, supply-chain, content-pack-build-validate, Semgrep blocking, Semgrep OSS, semgrep sarif upload, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
       }
     ]
   }
