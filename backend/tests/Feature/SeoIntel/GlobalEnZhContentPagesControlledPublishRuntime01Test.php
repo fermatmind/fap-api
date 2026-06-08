@@ -143,6 +143,113 @@ final class GlobalEnZhContentPagesControlledPublishRuntime01Test extends TestCas
         );
     }
 
+    public function test_help_service_scope_dry_run_succeeds_without_writing_twelve_rows(): void
+    {
+        $this->seedHelpServiceTargets();
+
+        $output = $this->runHelpServicePublishCommand(['--dry-run' => true]);
+
+        $this->assertTrue($output['ok'] ?? false);
+        $this->assertSame('help-service', $output['scope'] ?? null);
+        $this->assertTrue($output['dry_run'] ?? false);
+        $this->assertFalse($output['writes_committed'] ?? true);
+        $this->assertSame(12, $output['target_count'] ?? null);
+        $this->assertSame(12, $output['would_publish_count'] ?? null);
+        $this->assertSame(0, $output['would_create_count'] ?? null);
+        $this->assertSame(['zh-CN', 'en'], $output['target_locales'] ?? null);
+        $this->assertContains('zh-CN:help-unlock-failure', $output['target_keys'] ?? []);
+        $this->assertContains('en:help-data-deletion', $output['target_keys'] ?? []);
+        $this->assertFalse($output['search_channel_action_attempted'] ?? true);
+        $this->assertFalse($output['url_submission_attempted'] ?? true);
+
+        foreach (self::helpServiceTargetKeys() as $key) {
+            foreach (['zh-CN', 'en'] as $locale) {
+                $page = $this->contentPageForLocale($key, $locale);
+                $this->assertSame(ContentPage::STATUS_DRAFT, (string) $page->status);
+                $this->assertFalse((bool) $page->is_public);
+                $this->assertFalse((bool) $page->is_indexable);
+                $this->assertNull($page->published_at);
+                $this->assertSame('support@fermatmind.com', (string) $page->support_contact);
+                $this->assertSame('help_service_policy.v1', (string) $page->policy_version);
+                $this->assertSame('Unknown', (string) $page->reviewer);
+                $this->assertFalse((bool) $page->schema_enabled);
+                $this->assertCount(4, $page->faq_items ?? []);
+            }
+        }
+    }
+
+    public function test_help_service_scope_execute_publishes_only_twelve_existing_rows(): void
+    {
+        $this->seedHelpServiceTargets();
+        $protected = ContentPage::query()->withoutGlobalScopes()->create($this->pageAttributes('help-faq', [
+            'kind' => ContentPage::KIND_HELP,
+            'page_type' => 'support_static',
+            'template' => 'help',
+            'locale' => 'en',
+            'status' => ContentPage::STATUS_DRAFT,
+            'is_public' => false,
+            'is_indexable' => false,
+            'published_at' => null,
+            'source_doc' => 'protected Help FAQ record',
+        ]));
+        $beforeCount = ContentPage::query()->withoutGlobalScopes()->count();
+
+        $output = $this->runHelpServicePublishCommand(['--execute' => true]);
+
+        $this->assertTrue($output['ok'] ?? false);
+        $this->assertFalse($output['dry_run'] ?? true);
+        $this->assertTrue($output['writes_committed'] ?? false);
+        $this->assertSame(12, $output['target_count'] ?? null);
+        $this->assertSame(12, count((array) ($output['published_keys'] ?? [])));
+        $this->assertContains('zh-CN:help-payment-refund', $output['published_keys'] ?? []);
+        $this->assertContains('en:help-result-recovery', $output['published_keys'] ?? []);
+        $this->assertSame($beforeCount, ContentPage::query()->withoutGlobalScopes()->count());
+
+        foreach (self::helpServiceTargetKeys() as $key) {
+            foreach (['zh-CN', 'en'] as $locale) {
+                $page = $this->contentPageForLocale($key, $locale);
+                $this->assertSame(ContentPage::STATUS_PUBLISHED, (string) $page->status);
+                $this->assertTrue((bool) $page->is_public);
+                $this->assertFalse((bool) $page->is_indexable);
+                $this->assertNotNull($page->published_at);
+                $this->assertSame((int) $page->working_revision_id, (int) $page->published_revision_id);
+            }
+        }
+
+        $protected->refresh();
+        $this->assertSame('help-faq', (string) $protected->slug);
+        $this->assertSame(ContentPage::STATUS_DRAFT, (string) $protected->status);
+        $this->assertFalse((bool) $protected->is_public);
+    }
+
+    public function test_help_service_scope_refuses_single_locale_option(): void
+    {
+        $this->seedHelpServiceTargets();
+
+        $output = $this->runHelpServicePublishCommand([
+            '--execute' => true,
+            '--locale' => 'en',
+        ], expectedExitCode: 1);
+
+        $this->assertFalse($output['ok'] ?? true);
+        $this->assertContains('unsupported_locale', $this->errorCodes($output));
+        $this->assertSame(ContentPage::STATUS_DRAFT, (string) $this->contentPageForLocale('help-unlock-failure', 'en')->status);
+    }
+
+    public function test_help_service_scope_refuses_extra_keys(): void
+    {
+        $this->seedHelpServiceTargets();
+
+        $output = $this->runHelpServicePublishCommand([
+            '--execute' => true,
+            '--keys' => implode(',', [...self::helpServiceTargetKeys(), 'help-faq']),
+        ], expectedExitCode: 1);
+
+        $this->assertFalse($output['ok'] ?? true);
+        $this->assertContains('extra_keys_not_allowed', $this->errorCodes($output));
+        $this->assertSame(ContentPage::STATUS_DRAFT, (string) $this->contentPageForLocale('help-payment-refund', 'zh-CN')->status);
+    }
+
     public function test_generated_json_report_exists_and_parses(): void
     {
         $generatedPath = base_path('docs/seo/generated/global-en-zh-content-pages-controlled-publish-runtime-01.v1.json');
@@ -159,6 +266,24 @@ final class GlobalEnZhContentPagesControlledPublishRuntime01Test extends TestCas
         $this->assertArrayHasKey('next_task', $generated);
     }
 
+    public function test_generated_help_service_runtime_report_exists_and_parses(): void
+    {
+        $generatedPath = base_path('docs/help/generated/help-content-pages-controlled-publish-runtime-01.v1.json');
+
+        $this->assertFileExists(base_path('docs/operations/help-content-pages-controlled-publish-runtime-2026-06-08.md'));
+        $this->assertFileExists($generatedPath);
+
+        $generated = json_decode((string) file_get_contents($generatedPath), true);
+
+        $this->assertIsArray($generated);
+        $this->assertSame('HELP-CONTENT-PAGES-CONTROLLED-PUBLISH-RUNTIME-01', $generated['task'] ?? null);
+        $this->assertSame('content-pages:publish-controlled', $generated['command_name'] ?? null);
+        $this->assertSame('help-service', $generated['runtime_scope'] ?? null);
+        $this->assertSame(12, $generated['target_count'] ?? null);
+        $this->assertFalse((bool) ($generated['publish_executed_in_this_pr'] ?? true));
+        $this->assertSame('HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-R2-01', $generated['next_task'] ?? null);
+    }
+
     /**
      * @param  list<string>  $skip
      */
@@ -170,6 +295,13 @@ final class GlobalEnZhContentPagesControlledPublishRuntime01Test extends TestCas
             }
 
             ContentPage::query()->withoutGlobalScopes()->create($this->pageAttributes($key));
+        }
+    }
+
+    private function seedHelpServiceTargets(): void
+    {
+        foreach ($this->helpServiceSourceRows() as $row) {
+            ContentPage::query()->withoutGlobalScopes()->create($this->helpServicePageAttributes($row));
         }
     }
 
@@ -214,12 +346,65 @@ final class GlobalEnZhContentPagesControlledPublishRuntime01Test extends TestCas
         ];
     }
 
+    /**
+     * @param  array<string, mixed>  $row
+     * @return array<string, mixed>
+     */
+    private function helpServicePageAttributes(array $row): array
+    {
+        return [
+            'org_id' => 0,
+            'slug' => (string) $row['slug'],
+            'path' => (string) $row['path'],
+            'kind' => ContentPage::KIND_HELP,
+            'page_type' => (string) ($row['pageType'] ?? 'support_static'),
+            'title' => (string) $row['title'],
+            'kicker' => (string) ($row['kicker'] ?? 'Help'),
+            'summary' => (string) $row['summary'],
+            'template' => 'help',
+            'animation_profile' => (string) ($row['animationProfile'] ?? 'editorial'),
+            'locale' => (string) $row['locale'],
+            'translation_group_id' => (string) ($row['translationGroupId'] ?? ('content-page-'.$row['slug'])),
+            'source_locale' => (string) ($row['sourceLocale'] ?? 'zh-CN'),
+            'translation_status' => (string) ($row['translationStatus'] ?? 'source'),
+            'published_at' => null,
+            'updated_at' => (string) ($row['updatedAt'] ?? '2026-06-04'),
+            'effective_at' => null,
+            'source_doc' => (string) $row['sourceDoc'],
+            'is_public' => false,
+            'is_indexable' => false,
+            'review_state' => 'owner_review',
+            'headings_json' => (array) ($row['headings'] ?? []),
+            'content_md' => (string) $row['contentMd'],
+            'content_html' => (string) ($row['contentHtml'] ?? ''),
+            'seo_title' => (string) $row['seoTitle'],
+            'meta_description' => (string) $row['metaDescription'],
+            'seo_description' => (string) $row['seoDescription'],
+            'canonical_path' => (string) $row['canonicalPath'],
+            'support_contact' => 'support@fermatmind.com',
+            'policy_version' => 'help_service_policy.v1',
+            'reviewer' => 'Unknown',
+            'schema_enabled' => false,
+            'faq_items' => (array) $row['faq_items'],
+            'status' => ContentPage::STATUS_DRAFT,
+        ];
+    }
+
     private function contentPage(string $key): ContentPage
     {
         return ContentPage::query()
             ->withoutGlobalScopes()
             ->where('slug', $key)
             ->where('locale', 'en')
+            ->firstOrFail();
+    }
+
+    private function contentPageForLocale(string $key, string $locale): ContentPage
+    {
+        return ContentPage::query()
+            ->withoutGlobalScopes()
+            ->where('slug', $key)
+            ->where('locale', $locale)
             ->firstOrFail();
     }
 
@@ -247,6 +432,19 @@ final class GlobalEnZhContentPagesControlledPublishRuntime01Test extends TestCas
     }
 
     /**
+     * @param  array<string, mixed>  $options
+     * @return array<string, mixed>
+     */
+    private function runHelpServicePublishCommand(array $options = [], int $expectedExitCode = 0): array
+    {
+        return $this->runPublishCommand($options + [
+            '--scope' => 'help-service',
+            '--locale' => 'all',
+            '--keys' => implode(',', self::helpServiceTargetKeys()),
+        ], $expectedExitCode);
+    }
+
+    /**
      * @param  array<string, mixed>  $output
      * @return list<string>
      */
@@ -264,5 +462,35 @@ final class GlobalEnZhContentPagesControlledPublishRuntime01Test extends TestCas
     private static function targetKeys(): array
     {
         return ['brand', 'charter', 'foundation', 'careers', 'policies'];
+    }
+
+    /**
+     * @return list<string>
+     */
+    private static function helpServiceTargetKeys(): array
+    {
+        return [
+            'help-unlock-failure',
+            'help-payment-refund',
+            'help-result-recovery',
+            'help-privacy-data',
+            'help-use-boundaries',
+            'help-data-deletion',
+        ];
+    }
+
+    /**
+     * @return list<array<string, mixed>>
+     */
+    private function helpServiceSourceRows(): array
+    {
+        $decoded = json_decode((string) file_get_contents(base_path('docs/help/import-packages/content-pages-draft-source/content_pages.help_service_drafts_01.json')), true);
+
+        $this->assertIsArray($decoded);
+
+        return array_values(array_filter(
+            $decoded,
+            static fn (mixed $row): bool => is_array($row),
+        ));
     }
 }

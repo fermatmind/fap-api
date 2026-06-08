@@ -10,13 +10,14 @@ use Illuminate\Console\Command;
 final class ContentPagesPublishControlledCommand extends Command
 {
     protected $signature = 'content-pages:publish-controlled
+        {--scope=global-en-wave1 : Controlled publish scope. Supported: global-en-wave1, help-service}
         {--locale=en : Required locale. Only en is supported for this bounded runtime}
         {--keys= : Comma-separated exact page keys to publish}
         {--dry-run : Preview without writes}
         {--execute : Explicitly perform the controlled publish}
         {--json : Emit JSON output}';
 
-    protected $description = 'Fail-closed controlled publish runtime for approved English content_pages records.';
+    protected $description = 'Fail-closed controlled publish runtime for approved content_pages records.';
 
     public function handle(ContentPagesControlledPublishService $service): int
     {
@@ -42,11 +43,12 @@ final class ContentPagesPublishControlledCommand extends Command
             return self::FAILURE;
         }
 
+        $scope = trim((string) $this->option('scope'));
         $locale = trim((string) $this->option('locale'));
         $keys = $this->keys();
         $payload = $execute
-            ? $service->execute($locale, $keys)
-            : $service->dryRun($locale, $keys);
+            ? $service->execute($scope, $locale, $keys)
+            : $service->dryRun($scope, $locale, $keys);
 
         $this->emit($payload);
 

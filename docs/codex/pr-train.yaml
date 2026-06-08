@@ -22435,6 +22435,57 @@ prs:
     content_authority: CMS/backend
     next_task: HELP-SERVICE-FAQ-SCHEMA-RUNTIME-01
 
+  - id: HELP-CONTENT-PAGES-CONTROLLED-PUBLISH-RUNTIME-01
+    repo: fap-api
+    depends_on:
+      - HELP-CONTENT-DRAFT-BLOCKER-CMS-SYNC-01
+      - HELP-SERVICE-FAQ-SCHEMA-RUNTIME-01
+    branch: codex/help-content-pages-controlled-publish-runtime-01
+    title: "HELP-CONTENT-PAGES-CONTROLLED-PUBLISH-RUNTIME-01: add Help service controlled publish runtime"
+    train_scope: window_9_help_service_content
+    status: in_progress
+    scope:
+      - Extend the existing content-pages:publish-controlled runtime with a fail-closed Help service scope for exactly the existing 12 Help ContentPage rows.
+      - Require the exact six Help service slugs and --locale=all so zh-CN and en rows are handled together.
+      - Keep dry-run as the default and require explicit --execute for local/test fixture writes; do not publish production CMS rows in this PR.
+      - Preserve no-create/no-upsert, non-indexability, no search submission, no deploy, no private URL access, and no Operator approval claim.
+    allowed_paths:
+      - backend/app/Console/Commands/ContentPagesPublishControlledCommand.php
+      - backend/app/Services/ContentPages/ContentPagesControlledPublishService.php
+      - backend/tests/Feature/SeoIntel/GlobalEnZhContentPagesControlledPublishRuntime01Test.php
+      - backend/docs/help/generated/help-content-pages-controlled-publish-runtime-01.v1.json
+      - backend/docs/operations/help-content-pages-controlled-publish-runtime-2026-06-08.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Publish, mutate CMS/production data, deploy, submit search URLs, access private result/order/share/pay/payment/history URLs, read secrets/env/cookies/tokens, run payment/refund flows, change payment-provider behavior, or claim Operator approval.
+    validation:
+      - php -l backend/app/Console/Commands/ContentPagesPublishControlledCommand.php
+      - php -l backend/app/Services/ContentPages/ContentPagesControlledPublishService.php
+      - php -l backend/tests/Feature/SeoIntel/GlobalEnZhContentPagesControlledPublishRuntime01Test.php
+      - python3 -m json.tool backend/docs/help/generated/help-content-pages-controlled-publish-runtime-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=GlobalEnZhContentPagesControlledPublishRuntime01 --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest --no-ansi
+      - cd backend && php artisan list --no-ansi | grep -E "content-pages:publish-controlled|content-pages"
+      - git diff --check -- backend/app/Console/Commands/ContentPagesPublishControlledCommand.php backend/app/Services/ContentPages/ContentPagesControlledPublishService.php backend/tests/Feature/SeoIntel/GlobalEnZhContentPagesControlledPublishRuntime01Test.php backend/docs/help/generated/help-content-pages-controlled-publish-runtime-01.v1.json backend/docs/operations/help-content-pages-controlled-publish-runtime-2026-06-08.md docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    payment_provider_call: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-R2-01
+
   - id: PUBLIC-BENEFIT-ASSET-PACKAGES-ARCHIVE-01
     repo: fap-api
     branch: codex/public-benefit-asset-packages-archive-01

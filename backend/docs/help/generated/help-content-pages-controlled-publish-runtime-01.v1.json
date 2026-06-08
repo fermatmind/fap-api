@@ -1,0 +1,84 @@
+{
+  "schema_version": "help-content-pages-controlled-publish-runtime-01.v1",
+  "task": "HELP-CONTENT-PAGES-CONTROLLED-PUBLISH-RUNTIME-01",
+  "generated_at": "2026-06-08",
+  "command_name": "content-pages:publish-controlled",
+  "runtime_scope": "help-service",
+  "command_shape": {
+    "dry_run": "php artisan content-pages:publish-controlled --scope=help-service --locale=all --keys=help-unlock-failure,help-payment-refund,help-result-recovery,help-privacy-data,help-use-boundaries,help-data-deletion --dry-run --json",
+    "execute_requires_future_exact_publish_authorization": true
+  },
+  "target_count": 12,
+  "target_locales": [
+    "zh-CN",
+    "en"
+  ],
+  "target_slugs": [
+    "help-unlock-failure",
+    "help-payment-refund",
+    "help-result-recovery",
+    "help-privacy-data",
+    "help-use-boundaries",
+    "help-data-deletion"
+  ],
+  "target_rows": [
+    "zh-CN:help-unlock-failure",
+    "zh-CN:help-payment-refund",
+    "zh-CN:help-result-recovery",
+    "zh-CN:help-privacy-data",
+    "zh-CN:help-use-boundaries",
+    "zh-CN:help-data-deletion",
+    "en:help-unlock-failure",
+    "en:help-payment-refund",
+    "en:help-result-recovery",
+    "en:help-privacy-data",
+    "en:help-use-boundaries",
+    "en:help-data-deletion"
+  ],
+  "runtime_guards": {
+    "dry_run_default": true,
+    "execute_requires_explicit_flag": true,
+    "exact_scope_required": true,
+    "locale_all_required_for_help_service": true,
+    "no_record_creation": true,
+    "no_upsert_missing": true,
+    "no_out_of_scope_cms_write": true,
+    "keeps_is_indexable_false": true,
+    "search_channel_action_attempted": false,
+    "url_submission_attempted": false,
+    "external_search_api_call_attempted": false,
+    "deploy_attempted": false,
+    "sitemap_llms_footer_explicit_enablement": false,
+    "private_url_access_performed": false,
+    "secret_env_cookie_token_read": false,
+    "payment_or_refund_performed": false,
+    "payment_provider_changed": false,
+    "operator_approval_claimed": false
+  },
+  "row_preflight_requirements": {
+    "kind": "help",
+    "source_doc_contains": "HELP-SERVICE-CONTENT-DRAFTS-01",
+    "status": "draft_or_already_published_idempotency_match",
+    "is_public_before_publish": false,
+    "is_indexable": false,
+    "published_at_before_publish": null,
+    "review_state_allowed": [
+      "owner_review",
+      "approved"
+    ],
+    "support_contact": "support@fermatmind.com",
+    "policy_version": "help_service_policy.v1",
+    "reviewer": "non_empty_or_Unknown",
+    "faq_items_count": 4
+  },
+  "publish_executed_in_this_pr": false,
+  "publish_allowed_by_this_artifact": false,
+  "cms_mutation_performed": false,
+  "final_decision": "RUNTIME_READY_PUBLISH_STILL_REQUIRES_PREFLIGHT_AND_EXACT_AUTHORIZATION",
+  "next_task": "HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-R2-01",
+  "notes": [
+    "This artifact records runtime capability only.",
+    "It does not authorize production publish execution.",
+    "HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-R2-01 must re-check the 12 production CMS draft rows before any publish execute request."
+  ]
+}

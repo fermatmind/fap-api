@@ -50649,5 +50649,106 @@
         "note": "PR #1998 merged at 2026-06-08T08:57:25Z with merge commit c468443998471ba2ad645476ad2389610f4c02b1; origin/main contains the merge commit, remote task branch is deleted, and local task branch was deleted."
       }
     ]
+  },
+  "HELP-CONTENT-PAGES-CONTROLLED-PUBLISH-RUNTIME-01": {
+    "repo": "fap-api",
+    "branch": "codex/help-content-pages-controlled-publish-runtime-01",
+    "base": "origin/main",
+    "status": "github_checks_pending",
+    "train_scope": "window_9_help_service_content",
+    "title": "HELP-CONTENT-PAGES-CONTROLLED-PUBLISH-RUNTIME-01: add Help service controlled publish runtime",
+    "depends_on": [
+      "HELP-CONTENT-DRAFT-BLOCKER-CMS-SYNC-01",
+      "HELP-SERVICE-FAQ-SCHEMA-RUNTIME-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User requested HELP-SERVICE-FAQ-SCHEMA-RUNTIME-01, HELP-CONTENT-PAGES-CONTROLLED-PUBLISH-RUNTIME-01, and HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-R2-01 in order."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "HELP-CONTENT-DRAFT-BLOCKER-CMS-SYNC-01 is merged in fap-api PR #1998 with merge commit c468443998471ba2ad645476ad2389610f4c02b1. HELP-SERVICE-FAQ-SCHEMA-RUNTIME-01 is merged in fap-web PR #1072 with merge commit b9eb0593414a283a3ad02366e203378bb41c9f06."
+      },
+      "scope": {
+        "status": "pass",
+        "allowed_paths": [
+          "backend/app/Console/Commands/ContentPagesPublishControlledCommand.php",
+          "backend/app/Services/ContentPages/ContentPagesControlledPublishService.php",
+          "backend/tests/Feature/SeoIntel/GlobalEnZhContentPagesControlledPublishRuntime01Test.php",
+          "backend/docs/help/generated/help-content-pages-controlled-publish-runtime-01.v1.json",
+          "backend/docs/operations/help-content-pages-controlled-publish-runtime-2026-06-08.md",
+          "docs/codex/pr-train.yaml",
+          "docs/codex/pr-train-state.json"
+        ],
+        "evidence": "Changed/untracked files are limited to the controlled publish command/service, focused runtime contract, Help runtime generated artifact/report, and PR-train metadata."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "php -l backend/app/Console/Commands/ContentPagesPublishControlledCommand.php",
+          "php -l backend/app/Services/ContentPages/ContentPagesControlledPublishService.php",
+          "php -l backend/tests/Feature/SeoIntel/GlobalEnZhContentPagesControlledPublishRuntime01Test.php",
+          "python3 -m json.tool backend/docs/help/generated/help-content-pages-controlled-publish-runtime-01.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=GlobalEnZhContentPagesControlledPublishRuntime01 --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest --no-ansi",
+          "cd backend && php artisan list --no-ansi | grep -E \"content-pages:publish-controlled|content-pages\"",
+          "git diff --check -- backend/app/Console/Commands/ContentPagesPublishControlledCommand.php backend/app/Services/ContentPages/ContentPagesControlledPublishService.php backend/tests/Feature/SeoIntel/GlobalEnZhContentPagesControlledPublishRuntime01Test.php backend/docs/help/generated/help-content-pages-controlled-publish-runtime-01.v1.json backend/docs/operations/help-content-pages-controlled-publish-runtime-2026-06-08.md docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+          "git diff --cached --check"
+        ],
+        "evidence": "PHP lint passed for command/service/test; JSON/YAML parse passed; GlobalEnZhContentPagesControlledPublishRuntime01 passed with 13 tests and 310 assertions; BigFiveResultPageV2CoreBodyPreviewTest passed with 164 tests and 511 assertions; artisan list shows content-pages:publish-controlled; path-limited git diff --check passed; git diff --cached --check passed."
+      },
+      "github": {
+        "status": "pending",
+        "head_sha": "dd5df8eb",
+        "passed_checks": [],
+        "merge_state": null,
+        "failure_reason": null,
+        "merge_commit": null
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": "dd5df8eb",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2000",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "result": {
+      "decision": "pending",
+      "generated_artifact": "backend/docs/help/generated/help-content-pages-controlled-publish-runtime-01.v1.json",
+      "operations_report": "backend/docs/operations/help-content-pages-controlled-publish-runtime-2026-06-08.md",
+      "next_task_recommendation": "HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-R2-01"
+    },
+    "scope_validation": {
+      "cms_mutation_performed": false,
+      "publish_performed": false,
+      "deploy_performed": false,
+      "search_submission_performed": false,
+      "private_url_access_performed": false,
+      "secret_env_cookie_token_read": false,
+      "payment_or_refund_performed": false,
+      "payment_provider_changed": false,
+      "operator_approval_claimed": false,
+      "allowed_paths_only": true
+    },
+    "transitions": [
+      {
+        "at": "2026-06-08",
+        "status": "in_progress",
+        "note": "Started Help service controlled publish runtime PR from origin/main. This PR implements runtime capability only and does not publish production CMS rows."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "local_checks_passed",
+        "note": "PHP lint, JSON/YAML parse, focused runtime contract, BigFive runtime-freeze classifier, artisan list, path-limited git diff --check, and git diff --cached --check passed. No CMS mutation, publish, deploy, search submission, private URL access, secret/env/cookie/token read, payment/refund action, payment provider change, or Operator approval claim was performed."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "github_checks_pending",
+        "note": "Opened fap-api PR #2000 for HELP-CONTENT-PAGES-CONTROLLED-PUBLISH-RUNTIME-01."
+      }
+    ]
   }
 }
