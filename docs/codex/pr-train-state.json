@@ -49660,7 +49660,7 @@
     "repo": "fap-api",
     "branch": "codex/help-content-draft-policy-cms-sync-01",
     "base": "origin/main",
-    "status": "pr_opened",
+    "status": "ready_to_merge",
     "train_scope": "window_9_help_service_content",
     "title": "ops(help): sync Help policy fields to CMS drafts",
     "depends_on": [
@@ -49735,12 +49735,25 @@
         ]
       },
       "github": {
-        "status": "pending",
-        "checks": []
+        "status": "pass",
+        "head_sha": "72eb488f00226832f9063fad154d42f284ec9eb7",
+        "passed_checks": [
+          "hygiene",
+          "supply-chain",
+          "content-pack-build-validate",
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "Semgrep OSS",
+          "verify-bigfive",
+          "verify-mbti-legacy",
+          "verify-mbti-v2"
+        ],
+        "merge_state": "CLEAN",
+        "failure_reason": null
       }
     },
     "failure_reason": null,
-    "commit_sha": "794ba1369955fd6d660db4473d1bef14970dab5d",
+    "commit_sha": "72eb488f00226832f9063fad154d42f284ec9eb7",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1985",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -49802,6 +49815,11 @@
         "at": "2026-06-08",
         "status": "pr_opened",
         "note": "Opened PR #1985 for HELP-CONTENT-DRAFT-POLICY-CMS-SYNC-01."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed for PR #1985 head 72eb488f00226832f9063fad154d42f284ec9eb7; merge state CLEAN."
       }
     ]
   }
