@@ -49523,7 +49523,7 @@
     "repo": "fap-api",
     "branch": "codex/help-cms-service-fields-prod-postdeploy-verify-01",
     "base": "origin/main",
-    "status": "pr_opened",
+    "status": "ready_to_merge",
     "train_scope": "window_9_help_service_content",
     "title": "docs(help): verify Help service fields production postdeploy",
     "depends_on": [
@@ -49571,8 +49571,21 @@
         ]
       },
       "github": {
-        "status": "pending",
-        "checks": []
+        "status": "pass",
+        "head_sha": "8a29260158d85e1c7674ba84b66d4904799fed56",
+        "passed_checks": [
+          "hygiene",
+          "supply-chain",
+          "content-pack-build-validate",
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "Semgrep OSS",
+          "verify-bigfive",
+          "verify-mbti-legacy",
+          "verify-mbti-v2"
+        ],
+        "merge_state": "UNKNOWN",
+        "failure_reason": null
       }
     },
     "failure_reason": null,
@@ -49629,6 +49642,11 @@
         "at": "2026-06-08",
         "status": "pr_opened",
         "note": "Opened PR #1984 for HELP-CMS-SERVICE-FIELDS-PROD-POSTDEPLOY-VERIFY-01."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed for PR #1984 head 8a29260158d85e1c7674ba84b66d4904799fed56; PR is ready for merge after final scope revalidation."
       }
     ]
   }
