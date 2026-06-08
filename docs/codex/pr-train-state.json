@@ -31850,7 +31850,7 @@
   "RESULT-EN-PARITY-06": {
     "repo": "fap-api",
     "branch": "codex/result-en-parity-06-bigfive-v2-en-assets",
-    "status": "pr_opened",
+    "status": "ready_to_merge",
     "depends_on": [
       "RESULT-EN-PARITY-05"
     ],
@@ -49416,8 +49416,18 @@
         ]
       },
       "github": {
-        "status": "pending",
-        "checks": []
+        "status": "pass",
+        "checks": [
+          "hygiene",
+          "supply-chain",
+          "content-pack-build-validate",
+          "verify-mbti-legacy",
+          "verify-mbti-v2",
+          "verify-bigfive",
+          "Semgrep blocking secrets",
+          "Semgrep OSS",
+          "semgrep sarif non-blocking upload"
+        ]
       }
     },
     "failure_reason": null,
@@ -49496,6 +49506,11 @@
         "at": "2026-06-08",
         "status": "commit_sha_pending_remote_head",
         "note": "After rebasing onto the refreshed origin/main target, commit_sha was set to pending_remote_pr_head to avoid self-referential amend hash churn before merge."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed after refreshing the target to origin/main 87afe2dfddfab1f8533512b8a2bdf1c347626000; PR merge state was clean."
       }
     ]
   }
