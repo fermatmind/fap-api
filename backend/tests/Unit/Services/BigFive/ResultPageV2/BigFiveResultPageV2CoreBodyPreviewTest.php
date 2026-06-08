@@ -4460,6 +4460,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Http/Controllers/API/V0_5/SEO/SitemapSourceController.php',
             'backend/app/Services/Career/PublicCareerAuthorityResponseCache.php',
+            'backend/app/Services/SEO/SeoDiscoverabilityCacheInvalidator.php',
             'backend/app/Services/SEO/SitemapGenerator.php',
             'backend/app/Services/SEO/SitemapCache.php',
         ], true);

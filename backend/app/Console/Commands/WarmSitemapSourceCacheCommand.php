@@ -29,8 +29,8 @@ final class WarmSitemapSourceCacheCommand extends Command
             $count = (int) ($payload['count'] ?? 0);
             $elapsed = round(microtime(true) - $start, 3);
 
-            Cache::put('seo:sitemap-source:v1:fresh', $payload, 600);
-            Cache::put('seo:sitemap-source:v1:stale', $payload, 86400);
+            Cache::put(SitemapSourceController::CACHE_KEY_FRESH, $payload, SitemapSourceController::FRESH_TTL_SECONDS);
+            Cache::put(SitemapSourceController::CACHE_KEY_STALE, $payload, SitemapSourceController::STALE_TTL_SECONDS);
 
             if ((bool) $this->option('json')) {
                 $this->line((string) json_encode([
