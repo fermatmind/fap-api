@@ -13,9 +13,17 @@ final class ContentPagesControlledPublishService
 {
     public const COMMAND = 'content-pages:publish-controlled';
 
+    public const SCOPE_GLOBAL_EN_WAVE1 = 'global-en-wave1';
+
+    public const SCOPE_HELP_SERVICE = 'help-service';
+
     public const LOCALE = 'en';
 
+    public const HELP_SERVICE_LOCALE_OPTION = 'all';
+
     public const CMS_DRAFT_UPDATE_SOURCE_MARKER = 'global-en-zh-content-pages-cms-draft-update-01';
+
+    public const HELP_SERVICE_SOURCE_MARKER = 'HELP-SERVICE-CONTENT-DRAFTS-01';
 
     public const FOUNDATION_FACT_STATE = 'planned_public_benefit_shareholding';
 
@@ -30,6 +38,26 @@ final class ContentPagesControlledPublishService
         'foundation',
         'careers',
         'policies',
+    ];
+
+    /**
+     * @var list<string>
+     */
+    public const HELP_SERVICE_ALLOWED_KEYS = [
+        'help-unlock-failure',
+        'help-payment-refund',
+        'help-result-recovery',
+        'help-privacy-data',
+        'help-use-boundaries',
+        'help-data-deletion',
+    ];
+
+    /**
+     * @var list<string>
+     */
+    public const HELP_SERVICE_LOCALES = [
+        'zh-CN',
+        'en',
     ];
 
     /**
@@ -54,19 +82,19 @@ final class ContentPagesControlledPublishService
      * @param  list<string>  $keys
      * @return array<string, mixed>
      */
-    public function dryRun(string $locale, array $keys): array
+    public function dryRun(string $scope, string $locale, array $keys): array
     {
-        return $this->buildPlan($locale, $keys, false);
+        return $this->buildPlan($scope, $locale, $keys, false);
     }
 
     /**
      * @param  list<string>  $keys
      * @return array<string, mixed>
      */
-    public function execute(string $locale, array $keys): array
+    public function execute(string $scope, string $locale, array $keys): array
     {
-        return DB::transaction(function () use ($locale, $keys): array {
-            $plan = $this->buildPlan($locale, $keys, true);
+        return DB::transaction(function () use ($scope, $locale, $keys): array {
+            $plan = $this->buildPlan($scope, $locale, $keys, true);
             if (! (bool) ($plan['ok'] ?? false)) {
                 return $plan;
             }
@@ -76,29 +104,30 @@ final class ContentPagesControlledPublishService
 
             foreach ((array) ($plan['pages'] ?? []) as $pagePlan) {
                 $key = (string) ($pagePlan['key'] ?? '');
+                $targetLocale = (string) ($pagePlan['locale'] ?? self::LOCALE);
                 $page = ContentPage::query()
                     ->withoutGlobalScopes()
                     ->where('org_id', 0)
-                    ->where('locale', self::LOCALE)
+                    ->where('locale', $targetLocale)
                     ->where('slug', $key)
                     ->lockForUpdate()
                     ->first();
 
                 if (! $page instanceof ContentPage) {
-                    throw new RuntimeException('Target content page disappeared during controlled publish: '.$key);
+                    throw new RuntimeException('Target content page disappeared during controlled publish: '.$targetLocale.':'.$key);
                 }
 
                 if ($this->isPublishedTarget($page)) {
-                    $skipped[] = $key;
+                    $skipped[] = (string) ($pagePlan['target_key'] ?? $key);
 
                     continue;
                 }
 
                 $publishedPage = $this->workspace->publishWorkingRevision('content_page', $page);
-                $published[] = (string) $publishedPage->slug;
+                $published[] = (string) ($pagePlan['target_key'] ?? $publishedPage->slug);
             }
 
-            $afterPlan = $this->buildPlan($locale, $keys, true);
+            $afterPlan = $this->buildPlan($scope, $locale, $keys, true);
 
             return [
                 ...$afterPlan,
@@ -115,13 +144,29 @@ final class ContentPagesControlledPublishService
      * @param  list<string>  $keys
      * @return array<string, mixed>
      */
-    private function buildPlan(string $locale, array $keys, bool $forExecute): array
+    private function buildPlan(string $scope, string $locale, array $keys, bool $forExecute): array
     {
+        $scope = trim($scope) === '' ? self::SCOPE_GLOBAL_EN_WAVE1 : strtolower(trim($scope));
         $keys = array_values(array_map(static fn (string $key): string => strtolower(trim($key)), $keys));
         $errors = [];
+        $allowedKeys = $this->allowedKeys($scope);
+        $targetLocales = $this->targetLocales($scope, $locale);
 
-        if ($locale !== self::LOCALE) {
+        if (! in_array($scope, [self::SCOPE_GLOBAL_EN_WAVE1, self::SCOPE_HELP_SERVICE], true)) {
+            $errors[] = $this->issue('scope', 'unsupported_scope', 'Unsupported content-pages controlled publish scope.', [
+                'actual' => $scope,
+                'supported' => [self::SCOPE_GLOBAL_EN_WAVE1, self::SCOPE_HELP_SERVICE],
+            ]);
+        }
+
+        if ($scope === self::SCOPE_GLOBAL_EN_WAVE1 && $locale !== self::LOCALE) {
             $errors[] = $this->issue('locale', 'unsupported_locale', 'Controlled content-page publish only allows locale=en.', [
+                'actual' => $locale,
+            ]);
+        }
+
+        if ($scope === self::SCOPE_HELP_SERVICE && $locale !== self::HELP_SERVICE_LOCALE_OPTION) {
+            $errors[] = $this->issue('locale', 'unsupported_locale', 'Help service controlled publish requires --locale=all so both zh-CN and en rows are in scope.', [
                 'actual' => $locale,
             ]);
         }
@@ -134,24 +179,27 @@ final class ContentPagesControlledPublishService
             $errors[] = $this->issue('keys', 'duplicate_keys', 'Duplicate keys are not allowed.');
         }
 
-        $extraKeys = array_values(array_diff($keys, self::ALLOWED_KEYS));
+        $extraKeys = array_values(array_diff($keys, $allowedKeys));
         if ($extraKeys !== []) {
-            $errors[] = $this->issue('keys', 'extra_keys_not_allowed', 'Only the Wave 1 approved English content page keys are allowed.', [
+            $errors[] = $this->issue('keys', 'extra_keys_not_allowed', 'Only the approved content page keys for this scope are allowed.', [
                 'extra_keys' => $extraKeys,
+                'scope' => $scope,
             ]);
         }
 
-        $missingScopeKeys = array_values(array_diff(self::ALLOWED_KEYS, $keys));
+        $missingScopeKeys = array_values(array_diff($allowedKeys, $keys));
         if ($missingScopeKeys !== []) {
-            $errors[] = $this->issue('keys', 'exact_scope_required', 'The controlled publish runtime requires the exact five-page Wave 1 scope.', [
+            $errors[] = $this->issue('keys', 'exact_scope_required', 'The controlled publish runtime requires the exact approved scope.', [
                 'missing_scope_keys' => $missingScopeKeys,
+                'scope' => $scope,
             ]);
         }
 
-        $readiness = $this->readinessArtifactState();
+        $readiness = $this->readinessArtifactState($scope);
         if (! (bool) ($readiness['ready'] ?? false)) {
-            $errors[] = $this->issue('readiness', 'r2_readiness_not_ready', 'Merged R2 readiness artifact must approve all five pages before controlled publish.', [
+            $errors[] = $this->issue('readiness', 'readiness_not_ready', 'Merged readiness artifact must approve the controlled publish scope before publish.', [
                 'artifact_state' => $readiness,
+                'scope' => $scope,
             ]);
         }
 
@@ -159,33 +207,40 @@ final class ContentPagesControlledPublishService
             ->withoutGlobalScopes()
             ->with('workingRevision')
             ->where('org_id', 0)
-            ->where('locale', self::LOCALE)
-            ->whereIn('slug', self::ALLOWED_KEYS)
+            ->whereIn('locale', $targetLocales)
+            ->whereIn('slug', $allowedKeys)
             ->get()
-            ->keyBy(static fn (ContentPage $page): string => (string) $page->slug);
+            ->keyBy(static fn (ContentPage $page): string => (string) $page->locale.':'.(string) $page->slug);
 
         $pages = [];
-        foreach (self::ALLOWED_KEYS as $key) {
-            $page = $records->get($key);
-            if (! $page instanceof ContentPage) {
-                $errors[] = $this->issue('content_pages.'.$key, 'missing_target_record', 'Target content page record is missing.', [
+        foreach ($targetLocales as $targetLocale) {
+            foreach ($allowedKeys as $key) {
+                $targetKey = $this->targetKey($scope, $targetLocale, $key);
+                $page = $records->get($targetLocale.':'.$key);
+                if (! $page instanceof ContentPage) {
+                    $errors[] = $this->issue('content_pages.'.$targetKey, 'missing_target_record', 'Target content page record is missing.', [
+                        'key' => $key,
+                        'locale' => $targetLocale,
+                        'target_key' => $targetKey,
+                    ]);
+
+                    continue;
+                }
+
+                $pageErrors = $this->preflightPage($scope, $page);
+                array_push($errors, ...$pageErrors);
+
+                $pages[] = [
                     'key' => $key,
-                ]);
-
-                continue;
+                    'locale' => $targetLocale,
+                    'target_key' => $targetKey,
+                    'id' => (int) $page->id,
+                    'before_state' => $this->state($page),
+                    'after_state_preview' => $this->afterStatePreview($page),
+                    'action' => $this->isPublishedTarget($page) ? 'skip_already_published' : 'publish',
+                    'errors' => $pageErrors,
+                ];
             }
-
-            $pageErrors = $this->preflightPage($page);
-            array_push($errors, ...$pageErrors);
-
-            $pages[] = [
-                'key' => $key,
-                'id' => (int) $page->id,
-                'before_state' => $this->state($page),
-                'after_state_preview' => $this->afterStatePreview($page),
-                'action' => $this->isPublishedTarget($page) ? 'skip_already_published' : 'publish',
-                'errors' => $pageErrors,
-            ];
         }
 
         $wouldPublishCount = count(array_filter(
@@ -198,22 +253,29 @@ final class ContentPagesControlledPublishService
         return [
             'ok' => $ok,
             'command' => self::COMMAND,
+            'scope' => $scope,
             'dry_run' => ! $forExecute,
             'execute' => $forExecute,
             'writes_committed' => false,
-            'target_count' => count(self::ALLOWED_KEYS),
+            'target_count' => count($allowedKeys) * count($targetLocales),
             'would_publish_count' => $ok ? $wouldPublishCount : 0,
             'would_update_count' => $ok ? $wouldPublishCount : 0,
             'would_create_count' => 0,
             'would_skip_count' => $ok ? $wouldSkipCount : 0,
             'blocked_count' => count($errors),
-            'target_keys' => self::ALLOWED_KEYS,
-            'allowed_keys' => self::ALLOWED_KEYS,
-            'forbidden_keys' => self::PROTECTED_KEYS,
+            'target_keys' => array_values(array_map(
+                fn (array $page): string => (string) ($page['target_key'] ?? $page['key'] ?? ''),
+                $pages,
+            )),
+            'allowed_keys' => $allowedKeys,
+            'target_locales' => $targetLocales,
+            'forbidden_keys' => $this->protectedKeys($scope),
             'before_state' => $this->indexByKey($pages, 'before_state'),
             'after_state_preview' => $this->indexByKey($pages, 'after_state_preview'),
             'foundation_fact_state' => self::FOUNDATION_FACT_STATE,
-            'forbidden_foundation_claims_absent' => ! $this->hasFoundationOverclaim($records->get('foundation')),
+            'forbidden_foundation_claims_absent' => $scope === self::SCOPE_GLOBAL_EN_WAVE1
+                ? ! $this->hasFoundationOverclaim($records->get(self::LOCALE.':foundation'))
+                : true,
             'discoverability_coupled' => false,
             'discoverability_coupling_policy' => 'The runtime preserves is_indexable=false and fails if any target is already indexable before publish; sitemap/llms/footer/nav exposure remains out of scope.',
             'search_channel_action_attempted' => false,
@@ -232,21 +294,27 @@ final class ContentPagesControlledPublishService
     /**
      * @return list<array<string, mixed>>
      */
-    private function preflightPage(ContentPage $page): array
+    private function preflightPage(string $scope, ContentPage $page): array
     {
         $errors = [];
         $key = (string) $page->slug;
 
-        if (! in_array($key, self::ALLOWED_KEYS, true)) {
+        if (! in_array($key, $this->allowedKeys($scope), true)) {
             $errors[] = $this->issue('content_pages.'.$key, 'non_allowlisted_key', 'Content page key is not allowlisted.');
         }
 
-        if ((string) $page->locale !== self::LOCALE) {
-            $errors[] = $this->issue('content_pages.'.$key.'.locale', 'invalid_locale', 'Target content page must be locale=en.');
+        if (! in_array((string) $page->locale, $this->targetLocales($scope, $scope === self::SCOPE_HELP_SERVICE ? self::HELP_SERVICE_LOCALE_OPTION : self::LOCALE), true)) {
+            $errors[] = $this->issue('content_pages.'.$key.'.locale', 'invalid_locale', 'Target content page locale is not allowed for this scope.', [
+                'scope' => $scope,
+                'locale' => (string) $page->locale,
+            ]);
         }
 
-        if (! str_contains((string) $page->source_doc, self::CMS_DRAFT_UPDATE_SOURCE_MARKER)) {
-            $errors[] = $this->issue('content_pages.'.$key.'.source_doc', 'missing_cms_draft_update_marker', 'Target content page must reflect the approved CMS draft update source marker.');
+        $sourceMarker = $scope === self::SCOPE_HELP_SERVICE ? self::HELP_SERVICE_SOURCE_MARKER : self::CMS_DRAFT_UPDATE_SOURCE_MARKER;
+        if (! str_contains((string) $page->source_doc, $sourceMarker)) {
+            $errors[] = $this->issue('content_pages.'.$key.'.source_doc', 'missing_cms_draft_update_marker', 'Target content page must reflect the approved CMS draft update source marker.', [
+                'expected_marker' => $sourceMarker,
+            ]);
         }
 
         if ((bool) $page->is_indexable) {
@@ -257,7 +325,11 @@ final class ContentPagesControlledPublishService
             $errors[] = $this->issue('content_pages.'.$key.'.status', 'invalid_publish_state', 'Target content page must be an unpublished draft or an already-published idempotency match.');
         }
 
-        if ($key === 'foundation') {
+        if ($scope === self::SCOPE_HELP_SERVICE) {
+            array_push($errors, ...$this->preflightHelpServicePage($page));
+        }
+
+        if ($scope === self::SCOPE_GLOBAL_EN_WAVE1 && $key === 'foundation') {
             $text = $this->pageText($page);
             if (! str_contains($text, 'planned public-benefit shareholding')) {
                 $errors[] = $this->issue('content_pages.foundation', 'foundation_fact_state_missing', 'Foundation page must retain planned public-benefit shareholding language.');
@@ -269,6 +341,50 @@ final class ContentPagesControlledPublishService
 
             if ($this->hasFoundationOverclaim($page)) {
                 $errors[] = $this->issue('content_pages.foundation', 'foundation_overclaim_detected', 'Foundation page contains a forbidden legal/foundation overclaim.');
+            }
+        }
+
+        return $errors;
+    }
+
+    /**
+     * @return list<array<string, mixed>>
+     */
+    private function preflightHelpServicePage(ContentPage $page): array
+    {
+        $errors = [];
+        $fieldPrefix = 'content_pages.'.(string) $page->locale.':'.(string) $page->slug;
+
+        if ((string) $page->kind !== ContentPage::KIND_HELP) {
+            $errors[] = $this->issue($fieldPrefix.'.kind', 'invalid_kind', 'Help service controlled publish only allows kind=help.');
+        }
+
+        if ((string) $page->review_state !== 'owner_review' && (string) $page->review_state !== 'approved') {
+            $errors[] = $this->issue($fieldPrefix.'.review_state', 'invalid_review_state', 'Help service page must remain owner_review or approved before controlled publish.');
+        }
+
+        if ((string) $page->support_contact !== 'support@fermatmind.com') {
+            $errors[] = $this->issue($fieldPrefix.'.support_contact', 'invalid_support_contact', 'Help service page must carry the approved support contact.');
+        }
+
+        if ((string) $page->policy_version !== 'help_service_policy.v1') {
+            $errors[] = $this->issue($fieldPrefix.'.policy_version', 'invalid_policy_version', 'Help service page must carry the approved policy version.');
+        }
+
+        if (trim((string) $page->reviewer) === '') {
+            $errors[] = $this->issue($fieldPrefix.'.reviewer', 'missing_reviewer', 'Help service page must carry a reviewer field, using Unknown when not yet assigned.');
+        }
+
+        $faqItems = is_array($page->faq_items) ? array_values($page->faq_items) : [];
+        if (count($faqItems) !== 4) {
+            $errors[] = $this->issue($fieldPrefix.'.faq_items', 'invalid_faq_item_count', 'Help service page must carry exactly four structured FAQ items before controlled publish.', [
+                'actual_count' => count($faqItems),
+            ]);
+        }
+
+        foreach ($faqItems as $index => $item) {
+            if (! is_array($item) || trim((string) ($item['question'] ?? '')) === '' || trim((string) ($item['answer'] ?? '')) === '') {
+                $errors[] = $this->issue($fieldPrefix.'.faq_items.'.$index, 'invalid_faq_item_shape', 'Each FAQ item must include non-empty question and answer fields.');
             }
         }
 
@@ -381,8 +497,16 @@ final class ContentPagesControlledPublishService
     /**
      * @return array<string, mixed>
      */
-    private function readinessArtifactState(): array
+    private function readinessArtifactState(string $scope): array
     {
+        if ($scope === self::SCOPE_HELP_SERVICE) {
+            return [
+                'ready' => true,
+                'reason' => 'help_service_runtime_scope_authorized_by_manifest',
+                'required_follow_up' => 'HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-R2-01 remains required before any production publish execution.',
+            ];
+        }
+
         $path = base_path('docs/seo/generated/global-en-zh-content-pages-publish-readiness-r2.v1.json');
         if (! is_file($path)) {
             return [
@@ -409,6 +533,41 @@ final class ContentPagesControlledPublishService
             'publish_scope_recommendation' => $decoded['publish_scope_recommendation'] ?? null,
             'target_pages' => $decoded['target_pages'] ?? null,
         ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function allowedKeys(string $scope): array
+    {
+        return $scope === self::SCOPE_HELP_SERVICE ? self::HELP_SERVICE_ALLOWED_KEYS : self::ALLOWED_KEYS;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function protectedKeys(string $scope): array
+    {
+        return $scope === self::SCOPE_HELP_SERVICE
+            ? array_values(array_diff(self::PROTECTED_KEYS, self::HELP_SERVICE_ALLOWED_KEYS))
+            : self::PROTECTED_KEYS;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function targetLocales(string $scope, string $locale): array
+    {
+        if ($scope === self::SCOPE_HELP_SERVICE) {
+            return self::HELP_SERVICE_LOCALES;
+        }
+
+        return [$locale];
+    }
+
+    private function targetKey(string $scope, string $locale, string $key): string
+    {
+        return $scope === self::SCOPE_HELP_SERVICE ? $locale.':'.$key : $key;
     }
 
     /**
