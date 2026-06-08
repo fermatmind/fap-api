@@ -1,0 +1,121 @@
+{
+  "schema_version": "science-contentpage-production-dry-run-nowrite-01.v1",
+  "task": "SCIENCE-CONTENTPAGE-PRODUCTION-DRY-RUN-NOWRITE-01",
+  "mode": "production_dry_run_no_write_gate",
+  "created_at": "2026-06-08T00:00:00Z",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production_import": false,
+  "production_rollout_enabled": false,
+  "cms_mutation_allowed": false,
+  "database_writes_allowed": false,
+  "content_import_allowed": false,
+  "publish_allowed": false,
+  "natural_distribution_allowed": false,
+  "package": {
+    "path": "backend/docs/seo/import-packages/science-contentpage-gpt55-review-draft-2026-06-08",
+    "status": "draft_only_not_for_publication",
+    "source_pages": 6,
+    "cms_draft_candidate_glob": "pages/*.md",
+    "non_candidate_files": [
+      "review_audit.md",
+      "operator_review.md",
+      "codex_qa.md",
+      "README.md"
+    ]
+  },
+  "local_no_write_dry_run": {
+    "executed": true,
+    "command": "cd backend && php artisan content-pages:science-draft-dry-run --package=../backend/docs/seo/import-packages/science-contentpage-gpt55-review-draft-2026-06-08 --json",
+    "status": "pass_no_write_dry_run",
+    "dry_run": true,
+    "would_write": false,
+    "database_writes_allowed": false,
+    "pages_seen": 6,
+    "pages_expected": 6,
+    "pages_ready_for_non_public_draft_import": 5,
+    "pages_reconciled_existing_authority": 1,
+    "pages_blocked": 0,
+    "issue_count": 0,
+    "content_page_rows_written_in_test": 0
+  },
+  "operator_review_gate": {
+    "executed": true,
+    "command": "cd backend && php artisan content-pages:science-operator-review-readiness --package=../backend/docs/seo/import-packages/science-contentpage-gpt55-review-draft-2026-06-08 --json",
+    "decision": "CONDITIONAL",
+    "operator_review_ready_for_non_public_draft": true,
+    "operator_publish_decision_ready": false,
+    "publish_allowed_default": false,
+    "missing_first_class_publish_safety_fields": []
+  },
+  "pre_import_qa_gate": {
+    "executed": true,
+    "command": "cd backend && php artisan content-pages:science-pre-import-qa --package=../backend/docs/seo/import-packages/science-contentpage-gpt55-review-draft-2026-06-08 --json",
+    "decision": "NO-GO",
+    "non_public_draft_import_qa_passed": true,
+    "real_import_allowed": false,
+    "publish_allowed": false,
+    "package_pre_import_qa_issue_count": 0,
+    "blocking_reasons": [
+      "operator_publish_decision_not_ready",
+      "real_import_requires_separate_operator_approval_and_import_command"
+    ],
+    "guards": {
+      "forbidden_claims_absent": true,
+      "private_url_absent": true,
+      "faq_visible_only": true,
+      "cta_public_canonical_only": true,
+      "draft_exposure_disabled": true,
+      "sitemap_llms_footer_disabled": true
+    }
+  },
+  "production_no_write_execution": {
+    "production_shell_accessed": false,
+    "production_dry_run_executed": false,
+    "production_database_mutated": false,
+    "production_cms_import_performed": false,
+    "production_publish_performed": false,
+    "production_backend_sha": "Unknown",
+    "production_artisan_output": "Unknown",
+    "reason": "This PR records and tests the no-write dry-run gate only. A later explicitly scoped task must run any production no-write command after import command enablement and operator approval."
+  },
+  "route_mapping": {
+    "create_non_public_draft": [
+      "/science",
+      "/item-design-notes",
+      "/reliability-validity",
+      "/data-privacy",
+      "/common-misconceptions"
+    ],
+    "existing_authority_revision_only": [
+      "/method-boundaries"
+    ],
+    "private_routes_allowed": []
+  },
+  "hard_no_go": [
+    "no_cms_mutation",
+    "no_database_write",
+    "no_real_import",
+    "no_publish",
+    "no_sitemap_llms_footer_exposure",
+    "no_private_url",
+    "no_hidden_faq_schema",
+    "no_unsupported_claims",
+    "no_dailygiving_amplification"
+  ],
+  "next_task": {
+    "id": "SCIENCE-CONTENTPAGE-REAL-IMPORT-COMMAND-ENABLEMENT-01",
+    "allowed_after": [
+      "local_no_write_dry_run.status == pass_no_write_dry_run",
+      "pre_import_qa_gate.package_pre_import_qa_issue_count == 0",
+      "operator_review_gate.operator_review_ready_for_non_public_draft == true"
+    ],
+    "still_required": [
+      "implement explicit real import command gate",
+      "require exact approval phrase before writes",
+      "keep default mode dry-run/no-write",
+      "block publish and discoverability"
+    ]
+  },
+  "final_decision": "GO_FOR_REAL_IMPORT_COMMAND_ENABLEMENT_ONLY"
+}
