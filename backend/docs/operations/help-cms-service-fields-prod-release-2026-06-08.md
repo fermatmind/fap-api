@@ -6,7 +6,7 @@ This is a fresh deploy-readiness check for the Help service ContentPage fields r
 
 ## Current Target
 
-- Current `origin/main`: `ee040639233985adce6cc599bb8b3a38f7d87750`
+- Current `origin/main`: `14f92cba66da60acf6c1bc5777058ceb33323319`
 - Deploy class if production active SHA is known and behind target: `deploy_latest_main`
 - Required Help runtime commits included:
   - PR #1956: `9cae1f45ee55acf11df43376e80387957c2049a3`
@@ -18,6 +18,7 @@ This is a fresh deploy-readiness check for the Help service ContentPage fields r
   - PR #1964: `01de36c41ff5180e269ca324bb5cc666eac2babf`
   - Unknown PR: `8a905835`
   - PR #1967: `ee040639233985adce6cc599bb8b3a38f7d87750`
+  - PR #1969: `14f92cba66da60acf6c1bc5777058ceb33323319`
 
 ## Public Production Evidence
 
@@ -44,7 +45,7 @@ I authorize Codex to run HELP-CMS-SERVICE-FIELDS-PROD-SHA-VERIFY-01 using an app
 Do not use this without refreshing `origin/main` and production active SHA again:
 
 ```text
-I explicitly approve backend production deploy for exact SHA ee040639233985adce6cc599bb8b3a38f7d87750 release help-cms-service-fields-prod-release-20260608-ee040639.
+I explicitly approve backend production deploy for exact SHA 14f92cba66da60acf6c1bc5777058ceb33323319 release help-cms-service-fields-prod-release-20260608-14f92cba.
 ```
 
 ## Validation

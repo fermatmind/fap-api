@@ -49176,7 +49176,7 @@
       },
       "target_resolution": {
         "status": "pass",
-        "origin_main_sha": "ee040639233985adce6cc599bb8b3a38f7d87750",
+        "origin_main_sha": "14f92cba66da60acf6c1bc5777058ceb33323319",
         "contains_pr_1956": true,
         "contains_pr_1959": true,
         "contains_pr_1962": true,
@@ -49185,7 +49185,8 @@
           "3acd4de7 PR #1965",
           "01de36c41ff5180e269ca324bb5cc666eac2babf PR #1964",
           "8a905835 Unknown PR",
-          "ee040639233985adce6cc599bb8b3a38f7d87750 PR #1967"
+          "ee040639233985adce6cc599bb8b3a38f7d87750 PR #1967",
+          "14f92cba66da60acf6c1bc5777058ceb33323319 PR #1969"
         ]
       },
       "public_production_runtime": {
@@ -49215,7 +49216,7 @@
           {
             "command": "git rev-parse origin/main",
             "status": "pass",
-            "output": "ee040639233985adce6cc599bb8b3a38f7d87750"
+            "output": "14f92cba66da60acf6c1bc5777058ceb33323319"
           },
           {
             "command": "git merge-base --is-ancestor 9cae1f45ee55acf11df43376e80387957c2049a3 origin/main",
@@ -49253,11 +49254,11 @@
       "github": {
         "status": "pending_after_rebase",
         "checks": [],
-        "note": "PR rebased after origin/main advanced to ee040639233985adce6cc599bb8b3a38f7d87750; GitHub checks must rerun before merge."
+        "note": "PR rebased after origin/main advanced to 14f92cba66da60acf6c1bc5777058ceb33323319; GitHub checks must rerun before merge."
       }
     },
     "failure_reason": null,
-    "commit_sha": "14987c0c0a15851c1999bd639788791bfdb3c179",
+    "commit_sha": "5746baec0c66fe1f05ffb0eec740c2c1cf7ec6fa",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1966",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -49266,7 +49267,7 @@
       "decision": "DEPLOY_AUTHORIZATION_BLOCKED_PRODUCTION_ACTIVE_SHA_UNKNOWN",
       "generated_artifact": "backend/docs/help/generated/help-cms-service-fields-prod-release-01.v1.json",
       "operations_report": "backend/docs/operations/help-cms-service-fields-prod-release-2026-06-08.md",
-    "current_origin_main_sha": "ee040639233985adce6cc599bb8b3a38f7d87750",
+    "current_origin_main_sha": "14f92cba66da60acf6c1bc5777058ceb33323319",
       "next_safe_authorization_prompt": "I authorize Codex to run HELP-CMS-SERVICE-FIELDS-PROD-SHA-VERIFY-01 using an approved read-only production method that reports only the active release SHA and migration status for the Help service field migrations, without reading secret/env/cookie/token values and without deploy, CMS mutation, publish, search submission, private URL access, payment/refund action, payment-provider change, or Operator approval claim.",
       "next_task_recommendation": "HELP-CMS-SERVICE-FIELDS-PROD-SHA-VERIFY-01"
     },
@@ -49332,6 +49333,11 @@
         "at": "2026-06-08",
         "status": "target_refreshed_after_main_advanced",
         "note": "origin/main advanced to ee040639233985adce6cc599bb8b3a38f7d87750 before merge, so the PR was rebased and the release readiness target was refreshed. Public checks still do not expose production active SHA."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "target_refreshed_after_main_advanced",
+        "note": "origin/main advanced again to 14f92cba66da60acf6c1bc5777058ceb33323319 before merge, so the PR was rebased and the release readiness target was refreshed again. Public checks still do not expose production active SHA."
       }
     ]
   }
