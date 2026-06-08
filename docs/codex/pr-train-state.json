@@ -31850,7 +31850,7 @@
   "RESULT-EN-PARITY-06": {
     "repo": "fap-api",
     "branch": "codex/result-en-parity-06-bigfive-v2-en-assets",
-    "status": "ready_to_merge",
+    "status": "local_checks_passed",
     "depends_on": [
       "RESULT-EN-PARITY-05"
     ],
@@ -49176,14 +49176,16 @@
       },
       "target_resolution": {
         "status": "pass",
-        "origin_main_sha": "01de36c41ff5180e269ca324bb5cc666eac2babf",
+        "origin_main_sha": "ee040639233985adce6cc599bb8b3a38f7d87750",
         "contains_pr_1956": true,
         "contains_pr_1959": true,
         "contains_pr_1962": true,
         "newer_main_commits_included": [
           "a5509759 PR #1963",
           "3acd4de7 PR #1965",
-          "01de36c41ff5180e269ca324bb5cc666eac2babf PR #1964"
+          "01de36c41ff5180e269ca324bb5cc666eac2babf PR #1964",
+          "8a905835 Unknown PR",
+          "ee040639233985adce6cc599bb8b3a38f7d87750 PR #1967"
         ]
       },
       "public_production_runtime": {
@@ -49213,7 +49215,7 @@
           {
             "command": "git rev-parse origin/main",
             "status": "pass",
-            "output": "01de36c41ff5180e269ca324bb5cc666eac2babf"
+            "output": "ee040639233985adce6cc599bb8b3a38f7d87750"
           },
           {
             "command": "git merge-base --is-ancestor 9cae1f45ee55acf11df43376e80387957c2049a3 origin/main",
@@ -49249,24 +49251,13 @@
         ]
       },
       "github": {
-        "status": "pass",
-        "checks": [
-          "hygiene",
-          "Semgrep blocking secrets",
-          "semgrep sarif non-blocking upload",
-          "supply-chain",
-          "content-pack-build-validate",
-          "verify-bigfive",
-          "verify-mbti-legacy",
-          "verify-mbti-v2",
-          "Semgrep OSS"
-        ],
-        "merge_state": "CLEAN",
-        "head_ref_oid_checked": "c96dd45d8722d1d1eb6fd087c554ab16ac216b18"
+        "status": "pending_after_rebase",
+        "checks": [],
+        "note": "PR rebased after origin/main advanced to ee040639233985adce6cc599bb8b3a38f7d87750; GitHub checks must rerun before merge."
       }
     },
     "failure_reason": null,
-    "commit_sha": "c96dd45d8722d1d1eb6fd087c554ab16ac216b18",
+    "commit_sha": "14987c0c0a15851c1999bd639788791bfdb3c179",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1966",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -49275,7 +49266,7 @@
       "decision": "DEPLOY_AUTHORIZATION_BLOCKED_PRODUCTION_ACTIVE_SHA_UNKNOWN",
       "generated_artifact": "backend/docs/help/generated/help-cms-service-fields-prod-release-01.v1.json",
       "operations_report": "backend/docs/operations/help-cms-service-fields-prod-release-2026-06-08.md",
-      "current_origin_main_sha": "01de36c41ff5180e269ca324bb5cc666eac2babf",
+    "current_origin_main_sha": "ee040639233985adce6cc599bb8b3a38f7d87750",
       "next_safe_authorization_prompt": "I authorize Codex to run HELP-CMS-SERVICE-FIELDS-PROD-SHA-VERIFY-01 using an approved read-only production method that reports only the active release SHA and migration status for the Help service field migrations, without reading secret/env/cookie/token values and without deploy, CMS mutation, publish, search submission, private URL access, payment/refund action, payment-provider change, or Operator approval claim.",
       "next_task_recommendation": "HELP-CMS-SERVICE-FIELDS-PROD-SHA-VERIFY-01"
     },
@@ -49336,6 +49327,11 @@
         "at": "2026-06-08",
         "status": "ready_to_merge",
         "note": "GitHub checks passed, merge state was clean, and origin/main had not advanced beyond the refreshed exact SHA 01de36c41ff5180e269ca324bb5cc666eac2babf. Deploy remains blocked because production active SHA is Unknown."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "target_refreshed_after_main_advanced",
+        "note": "origin/main advanced to ee040639233985adce6cc599bb8b3a38f7d87750 before merge, so the PR was rebased and the release readiness target was refreshed. Public checks still do not expose production active SHA."
       }
     ]
   }

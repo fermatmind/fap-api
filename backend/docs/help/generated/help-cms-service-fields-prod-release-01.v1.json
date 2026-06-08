@@ -6,7 +6,7 @@
   "scope": "Fresh deploy readiness only; no deploy, no migration, no CMS mutation, no publish.",
   "target_resolution": {
     "repo": "fermatmind/fap-api",
-    "origin_main_sha": "01de36c41ff5180e269ca324bb5cc666eac2babf",
+    "origin_main_sha": "ee040639233985adce6cc599bb8b3a38f7d87750",
     "deploy_class_if_active_sha_known": "deploy_latest_main",
     "requested_target_is_latest_origin_main": true,
     "included_required_help_runtime_prs": [
@@ -41,6 +41,16 @@
         "pr": 1964,
         "sha": "01de36c41ff5180e269ca324bb5cc666eac2babf",
         "summary": "docs(codex): close HELP-CMS-SERVICE-FIELDS-PROD-RUNTIME-01 ledger"
+      },
+      {
+        "pr": null,
+        "sha": "8a905835",
+        "summary": "docs(seo): record RIASEC draft cover preflight"
+      },
+      {
+        "pr": 1967,
+        "sha": "ee040639233985adce6cc599bb8b3a38f7d87750",
+        "summary": "docs(seo): summarize science contentpage line status"
       }
     ]
   },
@@ -56,10 +66,10 @@
   },
   "required_before_deploy": [
     "Obtain current production active SHA through an approved read-only operator method that does not expose secrets/env/cookies/tokens.",
-    "Confirm whether production already contains 01de36c41ff5180e269ca324bb5cc666eac2babf.",
+    "Confirm whether production already contains ee040639233985adce6cc599bb8b3a38f7d87750.",
     "If production does not contain it, provide exact deploy authorization for the current latest origin/main SHA at that time."
   ],
-  "stale_prompt_do_not_use_without_refresh": "I explicitly approve backend production deploy for exact SHA 01de36c41ff5180e269ca324bb5cc666eac2babf release help-cms-service-fields-prod-release-20260608-01de36c4.",
+  "stale_prompt_do_not_use_without_refresh": "I explicitly approve backend production deploy for exact SHA ee040639233985adce6cc599bb8b3a38f7d87750 release help-cms-service-fields-prod-release-20260608-ee040639.",
   "safe_next_authorization_prompt": "I authorize Codex to run HELP-CMS-SERVICE-FIELDS-PROD-SHA-VERIFY-01 using an approved read-only production method that reports only the active release SHA and migration status for the Help service field migrations, without reading secret/env/cookie/token values and without deploy, CMS mutation, publish, search submission, private URL access, payment/refund action, payment-provider change, or Operator approval claim.",
   "scope_validation": {
     "deploy_performed": false,
