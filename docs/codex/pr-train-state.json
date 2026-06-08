@@ -50465,7 +50465,7 @@
     "repo": "fap-api",
     "branch": "codex/help-content-draft-blocker-cms-sync-01",
     "base": "origin/main",
-    "status": "local_checks_passed",
+    "status": "ready_to_merge",
     "train_scope": "window_9_help_service_content",
     "title": "ops(help): sync repaired Help drafts to CMS",
     "depends_on": [
@@ -50556,17 +50556,27 @@
         ]
       },
       "github": {
-        "status": "pending",
-        "head_sha": null,
-        "passed_checks": [],
-        "merge_state": null,
+        "status": "pass",
+        "head_sha": "02569ee9373326c4cf5dd44ee67e7e89072688f4",
+        "passed_checks": [
+          "hygiene",
+          "supply-chain",
+          "content-pack-build-validate",
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "Semgrep OSS",
+          "verify-bigfive",
+          "verify-mbti-legacy",
+          "verify-mbti-v2"
+        ],
+        "merge_state": "CLEAN",
         "failure_reason": null,
         "merge_commit": null
       }
     },
     "failure_reason": null,
     "commit_sha": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1998",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -50627,6 +50637,11 @@
         "at": "2026-06-08",
         "status": "local_checks_passed",
         "note": "JSON/YAML validation, HelpContentImportPackageTest, and scoped diff whitespace checks passed."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed for PR #1998 head 02569ee9373326c4cf5dd44ee67e7e89072688f4; merge state pending final GitHub confirmation."
       }
     ]
   }
