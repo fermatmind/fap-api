@@ -50122,7 +50122,7 @@
     "repo": "fap-api",
     "branch": "codex/help-content-draft-publish-preflight-01",
     "base": "origin/main",
-    "status": "blocked",
+    "status": "pr_opened",
     "train_scope": "window_9_help_service_content",
     "title": "docs(help): run Help draft publish preflight",
     "depends_on": [
@@ -50207,7 +50207,7 @@
     },
     "failure_reason": "Publish preflight blocked: three English Help draft rows contain the payment_id phrase pattern; fap-web FAQ schema runtime does not yet consume CMS faq_items/schema_enabled for these service topics; existing content-pages:publish-controlled runtime does not allow the 12 Help service keys or zh-CN.",
     "commit_sha": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1993",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -50286,6 +50286,11 @@
         "at": "2026-06-08",
         "status": "commit_sha_pending_pr_head",
         "note": "Commit SHA is left null inside the commit to avoid self-referential amend churn; PR head and merge closeout will provide immutable SHA evidence."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "pr_opened",
+        "note": "Opened PR #1993 for HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-01."
       }
     ]
   }
