@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Services\Cms;
 
-use Symfony\Component\Yaml\Yaml;
-
 final class ScienceContentPagePreImportQaService
 {
     private const EXPOSURE_FALSE_FIELDS = [
@@ -254,17 +252,7 @@ final class ScienceContentPagePreImportQaService
      */
     private function readFrontmatter(string $path): array
     {
-        $content = (string) file_get_contents($path);
-        if (! preg_match('/\A---\R(?P<yaml>.*?)\R---\R(?P<body>.*)\z/s', $content, $matches)) {
-            throw new \RuntimeException('Page file is missing YAML frontmatter: '.$path);
-        }
-
-        $frontmatter = Yaml::parse((string) $matches['yaml']);
-        if (! is_array($frontmatter)) {
-            throw new \RuntimeException('Page frontmatter must parse to an object: '.$path);
-        }
-
-        return [$frontmatter, (string) $matches['body']];
+        return app(ScienceContentPageFrontmatterReader::class)->read($path);
     }
 
     private function hasForbiddenClaimPattern(string $body): bool

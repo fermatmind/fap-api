@@ -3833,6 +3833,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Console/Commands/ScienceContentPagePreImportQaCommand.php',
             'backend/app/Services/Cms/ScienceContentPageDraftDryRunService.php',
             'backend/app/Services/Cms/ScienceContentPageDraftImportService.php',
+            'backend/app/Services/Cms/ScienceContentPageFrontmatterReader.php',
             'backend/app/Services/Cms/ScienceContentPageOperatorReviewReadinessService.php',
             'backend/app/Services/Cms/ScienceContentPagePreImportQaService.php',
         ], true);
