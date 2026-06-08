@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-08T16:52:18Z",
+  "updated_at": "2026-06-08T16:56:08Z",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -51399,7 +51399,7 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
+    "commit_sha": "33ebf1b1de68997f9ed65a8a10b6f1f4a5a5a0cd",
     "pr_url": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -51418,6 +51418,11 @@
         "at": "2026-06-09",
         "status": "local_checks_passed",
         "note": "Scale sitemap source now emits localized canonical primary_slug URLs only; focused sitemap tests, Pint, JSON/YAML parse, and scope diff checks passed."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "committed",
+        "note": "Created scoped implementation commit 33ebf1b1de68997f9ed65a8a10b6f1f4a5a5a0cd."
       }
     ]
   }
