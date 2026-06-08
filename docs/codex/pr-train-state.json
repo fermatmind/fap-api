@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-08T16:56:08Z",
+  "updated_at": "2026-06-08T17:00:04Z",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -51356,7 +51356,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-sitemap-diff-02",
     "base": "origin/main",
-    "status": "in_progress",
+    "status": "github_checks_pending",
     "train_scope": "sitemap_diff_parity",
     "title": "SEO-SITEMAP-DIFF-02: fix(seo): align scale sitemap source to localized canonical test URLs",
     "depends_on": [],
@@ -51396,11 +51396,16 @@
           "git diff --cached --check"
         ],
         "evidence": "PHP lint passed for SitemapGenerator and focused SEO sitemap tests. Focused PHPUnit passed with 17 warnings and 406 assertions. Scoped Pint --test passed. JSON/YAML parse passed. Path-limited git diff --check passed."
+      },
+      "github": {
+        "status": "pending",
+        "head_sha": "a759bc0bb752f80d4425937ba0e98d39f5da7493",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/2008"
       }
     },
     "failure_reason": null,
     "commit_sha": "33ebf1b1de68997f9ed65a8a10b6f1f4a5a5a0cd",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2008",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -51423,6 +51428,11 @@
         "at": "2026-06-09",
         "status": "committed",
         "note": "Created scoped implementation commit 33ebf1b1de68997f9ed65a8a10b6f1f4a5a5a0cd."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "github_checks_pending",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/2008 from head a759bc0bb752f80d4425937ba0e98d39f5da7493; GitHub checks pending."
       }
     ]
   }
