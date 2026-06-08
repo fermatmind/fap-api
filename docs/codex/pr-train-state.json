@@ -51115,7 +51115,7 @@
     "repo": "fap-api",
     "branch": "codex/help-content-draft-post-publish-smoke-01",
     "base": "origin/main",
-    "status": "blocked_runtime_repair_required",
+    "status": "merged",
     "train_scope": "window_9_help_service_content",
     "title": "HELP-CONTENT-DRAFT-POST-PUBLISH-SMOKE-01: record Help post-publish runtime smoke",
     "depends_on": [
@@ -51200,7 +51200,7 @@
       },
       "github": {
         "status": "pass",
-        "head_sha": "2a4a78cb5b5073a1df380f6ebb73ae6347f17bcf",
+        "head_sha": "bb27fbc263cca33e141b020d2ad1faa57c562df0",
         "passed_checks": [
           "hygiene",
           "supply-chain",
@@ -51212,17 +51212,28 @@
           "verify-mbti-legacy",
           "verify-mbti-v2"
         ],
-        "merge_state": "CLEAN",
+        "merge_state": "MERGED",
         "failure_reason": null,
-        "merge_commit": null
+        "merge_commit": "ef7aedd9b0b60960131cdba71ea5b1140a958f1a",
+        "merged_at": "2026-06-08T12:03:20Z",
+        "remote_branch_deleted": true,
+        "origin_main_contains_merge_commit": true
+      },
+      "post_merge": {
+        "status": "pass",
+        "merge_commit": "ef7aedd9b0b60960131cdba71ea5b1140a958f1a",
+        "origin_main_contains_merge_commit": true,
+        "main_synced_to_origin_main": true,
+        "local_cleanup_executed": true,
+        "evidence": "PR #2004 is MERGED on GitHub; origin/main contains merge commit ef7aedd9b0b60960131cdba71ea5b1140a958f1a; remote branch codex/help-content-draft-post-publish-smoke-01 is deleted; local main is synced to origin/main."
       }
     },
-    "failure_reason": "Post-publish smoke blocked on frontend runtime: published Help pages render robots index, follow despite backend is_indexable=false, and FAQPage JSON-LD was not emitted in the smoke sample.",
-    "commit_sha": "2a4a78cb5b5073a1df380f6ebb73ae6347f17bcf",
+    "failure_reason": "Merged smoke record; follow-up remains required because the recorded smoke decision is BLOCKED_RUNTIME_REPAIR_REQUIRED for frontend robots/schema runtime.",
+    "commit_sha": "bb27fbc263cca33e141b020d2ad1faa57c562df0",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2004",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-08T12:03:20Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "result": {
       "decision": "BLOCKED_RUNTIME_REPAIR_REQUIRED",
       "generated_artifact": "backend/docs/help/generated/help-content-draft-post-publish-smoke-01.v1.json",
@@ -51254,7 +51265,13 @@
         "at": "2026-06-08",
         "status": "github_checks_passed_ready_to_merge",
         "note": "GitHub checks passed for PR #2004; smoke decision remains blocked_runtime_repair_required by design."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "merged",
+        "note": "PR #2004 squash-merged at 2026-06-08T12:03:20Z with merge commit ef7aedd9b0b60960131cdba71ea5b1140a958f1a; smoke decision remains blocked_runtime_repair_required for frontend follow-up."
       }
-    ]
+    ],
+    "merge_sha": "ef7aedd9b0b60960131cdba71ea5b1140a958f1a"
   }
 }
