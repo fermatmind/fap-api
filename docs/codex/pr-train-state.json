@@ -49278,7 +49278,7 @@
       "decision": "DEPLOY_AUTHORIZATION_BLOCKED_PRODUCTION_ACTIVE_SHA_UNKNOWN",
       "generated_artifact": "backend/docs/help/generated/help-cms-service-fields-prod-release-01.v1.json",
       "operations_report": "backend/docs/operations/help-cms-service-fields-prod-release-2026-06-08.md",
-    "current_origin_main_sha": "14f92cba66da60acf6c1bc5777058ceb33323319",
+      "current_origin_main_sha": "14f92cba66da60acf6c1bc5777058ceb33323319",
       "next_safe_authorization_prompt": "I authorize Codex to run HELP-CMS-SERVICE-FIELDS-PROD-SHA-VERIFY-01 using an approved read-only production method that reports only the active release SHA and migration status for the Help service field migrations, without reading secret/env/cookie/token values and without deploy, CMS mutation, publish, search submission, private URL access, payment/refund action, payment-provider change, or Operator approval claim.",
       "next_task_recommendation": "HELP-CMS-SERVICE-FIELDS-PROD-SHA-VERIFY-01"
     },
@@ -49660,7 +49660,7 @@
     "repo": "fap-api",
     "branch": "codex/help-content-draft-policy-cms-sync-01",
     "base": "origin/main",
-    "status": "local_checks_passed",
+    "status": "pr_opened",
     "train_scope": "window_9_help_service_content",
     "title": "ops(help): sync Help policy fields to CMS drafts",
     "depends_on": [
@@ -49740,8 +49740,8 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "794ba1369955fd6d660db4473d1bef14970dab5d",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1985",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -49797,6 +49797,11 @@
         "at": "2026-06-08",
         "status": "local_checks_passed",
         "note": "JSON/YAML validation, HelpContentImportPackageTest, and scoped diff whitespace checks passed."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "pr_opened",
+        "note": "Opened PR #1985 for HELP-CONTENT-DRAFT-POLICY-CMS-SYNC-01."
       }
     ]
   }
