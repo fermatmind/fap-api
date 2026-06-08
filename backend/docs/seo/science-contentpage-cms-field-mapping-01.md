@@ -1,6 +1,7 @@
 # SCIENCE-CONTENTPAGE-CMS-FIELD-MAPPING-01
 
 Date: 2026-06-05
+Updated: 2026-06-08
 Mode: backend/CMS field mapping planning, docs-only
 Branch: `codex/science-contentpage-field-mapping-01`
 
@@ -8,11 +9,37 @@ This report plans how six science/trust/methodology draft pages should map into 
 
 ## Decision
 
-**CONDITIONAL.** The six-page package can become a non-public draft import candidate only after `kind` normalization and `/method-boundaries` authority reconciliation. It is not compatible as-is and no page should be published from this package in the current state.
+**CONDITIONAL, pre-publication line complete.** The Science ContentPage line has completed the backend/importer safety path and the frontend exposure gates needed before any real content import can be proposed. The line is **not** complete as a publication or distribution task: no CMS write, database import, public publish, sitemap/llms inclusion, search submission, deployment, or social amplification has been authorized or performed.
 
-Recommended next implementation PR: **importer normalization PR**.
+Current practical meaning:
+- Non-public package validation is supported through backend dry-run commands.
+- Operator review readiness is supported through first-class ContentPage review and publish-safety fields.
+- Real import remains locked behind a separate operator approval plus a separate import-command PR.
+- Frontend route wrappers and discoverability gates exist, but draft routes stay non-public/non-indexable and are not eligible for footer, sitemap, or llms exposure until later gates pass.
 
-Reason: current backend fields are mostly sufficient for draft records, but package `kind` values are incompatible with current validation. Normalizing those values is lower risk than expanding backend enum/schema before there is an approved public route/discoverability plan.
+## 0. 2026-06-08 line completion review
+
+This update reconciles the earlier planning report against the merged cross-repo PR sequence.
+
+| Area | PRs reviewed | Status | Result |
+|---|---|---|---|
+| Backend field mapping | fap-api #1922 | Complete | Established the initial ContentPage mapping and draft-only constraints. |
+| Backend importer dry-run | fap-api #1944 | Complete | Added Science ContentPage package dry-run validation without writes. |
+| Backend operator review | fap-api #1948 | Complete | Added operator review readiness gate for non-public draft review. |
+| Backend pre-import QA | fap-api #1955 | Complete | Added pre-real-import QA gate for claim, route, FAQ, private URL, and exposure checks. |
+| Backend authority reconciliation | fap-api #1958 | Complete | Treated `/method-boundaries` as existing authority/revision-only, not a new record. |
+| Backend publish safety fields | fap-api #1959 | Complete | Promoted `publish_allowed`, operator approval, claim gate, forbidden claims, and FAQ schema eligibility into first-class ContentPage fields. |
+| Backend real-import lock | fap-api #1960 | Complete | Locked real import as dry-run-only and explicitly required separate operator approval plus a separate import-command PR. |
+| Frontend method-boundary reconciliation | fap-web #1060 | Complete | Reconciled method-boundaries route authority from the frontend planning side. |
+| Frontend guarded route wrappers | fap-web #1062 | Complete | Added guarded root route wrappers for the Science ContentPage slugs; empty CMS remains safe/noindex. |
+| Frontend claim gate | fap-web #1064 | Complete | Added claim-boundary checks for Science ContentPage content. |
+| Frontend FAQ schema gate | fap-web #1065 | Complete | Enforced visible-FAQ-only schema eligibility. |
+| Frontend discoverability gates | fap-web #1066 and #1068 | Complete | Kept draft Science ContentPages out of footer/sitemap/llms and preserved only existing authority routes. |
+
+Line status summary:
+- **Completed:** schema mapping, dry-run validation, operator review readiness, pre-import QA, authority reconciliation, publish-safety fields, real-import lock, guarded routes, claim/FAQ/discoverability tests.
+- **Not completed by design:** real CMS import, draft row creation, publication, public indexability, footer expansion, sitemap/llms inclusion, search submission, deployment, or content distribution.
+- **Next allowed phase:** a separately authorized real-import implementation or production dry-run may be scoped only after operator approval and package/content review evidence exist.
 
 ## 1. Current ContentPage field map
 
@@ -192,22 +219,31 @@ No page should be classified as public-ready. Route absence does not block non-p
 - Do not include private URL patterns in public body or link fields.
 - Do not publish or mutate existing `/method-boundaries` during import normalization.
 
-## 9. Recommended next implementation PR
+## 9. Completed implementation PRs and remaining gates
 
-Chosen next PR: **importer normalization PR**.
+The originally recommended importer normalization path has now been completed as a guarded dry-run/import-readiness line. The current repository state supports validating the six-page Science draft package as a non-public candidate, but it intentionally does not provide a real import or publish path.
 
-Proposed scope:
-- Add or update a dry-run-only import normalization spec/test for science ContentPage draft packages.
-- Normalize unsupported draft `kind` values to backend-supported `policy`.
-- Assert package pages remain `status=draft`, `is_public=false`, `is_indexable=false`.
-- Assert `/method-boundaries` is blocked from new-record creation and routed to reconciliation.
-- Assert no sitemap/llms/footer/FAQ-schema fields are emitted as backend writes.
+Completed implementation scope:
+- Dry-run package mapping and normalization.
+- `/method-boundaries` existing-authority reconciliation.
+- Operator review readiness.
+- Pre-real-import QA.
+- First-class publish/operator/claim/schema safety fields.
+- Real-import contract lock requiring separate approval and a later import-command PR.
+- Frontend guarded route wrappers and claim/FAQ/discoverability gates.
 
-Deferred implementation PRs:
-- Backend enum/schema extension PR: defer until taxonomy is approved.
-- Method-boundaries reconcile PR: should run before any `/method-boundaries` CMS write.
-- Route wrapper PR: fap-web only, after slug decisions.
-- Claim gate PR: required before publish or schema/discoverability exposure.
+Remaining gates before any real CMS import:
+- Operator confirms the exact package revision and content source.
+- Science/legal/product review resolves `science_review_required`, `legal_review_required`, `review_state`, `claim_gate_status`, `forbidden_claims`, and FAQ/schema eligibility.
+- A separate PR introduces or enables the real import command path; this document does not authorize it.
+- Production dry-run evidence is collected without database writes before any import execution.
+
+Remaining gates before any publication or discoverability exposure:
+- Imported CMS records exist and pass review.
+- `publish_allowed=true` is set only after operator approval.
+- `review_state=approved`, claim gate passed, forbidden claims empty, and schema eligibility reviewed when schema is enabled.
+- Frontend route smoke checks pass against real CMS content.
+- Sitemap, llms, footer, search submission, and distribution are each handled in separately scoped approval-gated tasks.
 
 ## 10. Validation
 
@@ -225,10 +261,12 @@ Runtime commands such as `php artisan route:list`, `php artisan migrate`, curl m
 
 | Gate | Decision | Reason |
 |---|---|---|
-| Current ContentPage model coverage | GO | Most required draft fields exist. |
-| Package direct compatibility | NO-GO | Package `kind` values fail current validation. |
+| Current ContentPage model coverage | GO | Required draft and publish-safety fields now exist. |
+| Package dry-run compatibility | GO | Backend dry-run validates the package without writes and preserves safety defaults. |
 | `page_type` compatibility | GO | Required values are supported. |
-| Root slug import strategy | CONDITIONAL | Use root slugs only; route absence blocks publish, not draft storage. |
-| `/method-boundaries` handling | NO-GO for new record | Existing authority must be reconciled as a revision proposal. |
-| Draft import after mapping | CONDITIONAL | Allowed only as non-public/noindex draft with review gates preserved. |
-| Publication | NO-GO | Route, claim, review, schema, and discoverability gates remain closed. |
+| Root slug import strategy | CONDITIONAL | Use root slugs only; route absence no longer blocks draft validation, but still blocks publication until content exists and route smoke passes. |
+| `/method-boundaries` handling | GO for revision-only, NO-GO for new record | Existing authority must remain single-source and be updated only through a reviewed revision path. |
+| Non-public draft readiness | CONDITIONAL | Dry-run and QA can pass for non-public drafts, but real import still needs separate operator approval and import-command PR. |
+| Real CMS import | NO-GO in this line | The real-import contract is intentionally locked as dry-run-only. |
+| Publication | NO-GO | Operator approval, approved review state, claim gate, schema eligibility, live route smoke, and separate publish authorization remain required. |
+| Discoverability | NO-GO | Sitemap, llms, footer, search submission, and distribution remain separate approval-gated tasks. |
