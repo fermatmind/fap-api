@@ -1,0 +1,182 @@
+{
+  "schema": "riasec-explanation-references-source-gate-preflight.v1",
+  "task_id": "RIASEC-EXPLANATION-REFERENCES-SOURCE-GATE-PREFLIGHT-01",
+  "generated_at": "2026-06-08T10:15:16+08:00",
+  "decision": "GO_PUBLISH_PREFLIGHT_DRY_RUN_PASSED_PUBLISH_STILL_NOT_AUTHORIZED",
+  "cms_mutation_performed": true,
+  "references_source_gate_reconciled": true,
+  "article_content_rewrite_performed": false,
+  "draft_revision_approval_performed": true,
+  "publish_preflight_performed": true,
+  "publish_preflight_dry_run": true,
+  "publish_preflight_ok": true,
+  "publish_performed": false,
+  "search_submission_performed": false,
+  "deploy_performed": false,
+  "private_url_accessed": false,
+  "source_set": [
+    {
+      "label": "O*NET Interest Profiler Manual",
+      "url": "https://www.onetcenter.org/reports/IP_Manual.html",
+      "http_status": 200,
+      "role": "primary_model_background"
+    },
+    {
+      "label": "The O*NET Content Model",
+      "url": "https://www.onetcenter.org/content.html",
+      "http_status": 200,
+      "role": "career_information_systems"
+    },
+    {
+      "label": "O*NET Interests Data Dictionary",
+      "url": "https://www.onetcenter.org/dictionary/20.2/text/interests.html",
+      "http_status": 200,
+      "role": "career_information_systems"
+    },
+    {
+      "label": "O*NET Interest Profiler API Reference",
+      "url": "https://services.onetcenter.org/reference/mpp/ip",
+      "http_status": 200,
+      "role": "career_information_systems"
+    },
+    {
+      "label": "APA Dictionary: Five-Factor Personality Model",
+      "url": "https://dictionary.apa.org/five-factor-personality-model",
+      "http_status": 200,
+      "role": "comparison_context"
+    }
+  ],
+  "source_gate": {
+    "references_count_after": 5,
+    "references_status_after": "complete",
+    "source_review_status": "accepted",
+    "source_review_scope": "RIASEC V2 source gate reconciliation",
+    "non_endorsement_boundary": true,
+    "no_diagnosis_boundary": true,
+    "no_deterministic_career_result_boundary": true,
+    "official_affiliation_not_implied": true
+  },
+  "article_mutations": [
+    {
+      "article_id": 40,
+      "locale": "zh",
+      "import_id": 11,
+      "status_after": "draft",
+      "is_public_after": false,
+      "is_indexable_after": false,
+      "translation_status_after": "approved",
+      "working_revision_id": 45,
+      "working_revision_status_after": "approved",
+      "reviewed_by": 1,
+      "references_count_after": 5,
+      "references_status_after": "complete",
+      "seo_references_count_after": 5,
+      "media_status_after": "complete"
+    },
+    {
+      "article_id": 41,
+      "locale": "en",
+      "import_id": 12,
+      "status_after": "draft",
+      "is_public_after": false,
+      "is_indexable_after": false,
+      "translation_status_after": "approved",
+      "working_revision_id": 46,
+      "working_revision_status_after": "approved",
+      "reviewed_by": 1,
+      "references_count_after": 5,
+      "references_status_after": "complete",
+      "seo_references_count_after": 5,
+      "media_status_after": "complete"
+    }
+  ],
+  "publish_preflight": {
+    "ok": true,
+    "dry_run": true,
+    "make_indexable": true,
+    "article_ids": [
+      40,
+      41
+    ],
+    "published_article_ids": [],
+    "errors": [],
+    "articles": [
+      {
+        "article_id": 40,
+        "locale": "zh",
+        "slug": "riasec-holland-career-interest-test-explained",
+        "status": "draft",
+        "working_revision_id": 45,
+        "working_revision_status": "approved",
+        "import_id": 11,
+        "import_status": "warning",
+        "claim_status": "warning",
+        "claim_warning_acknowledged": true,
+        "claim_matches_count": 2,
+        "references_count": 5,
+        "media_status": "complete",
+        "graph_status": "complete",
+        "cta_count": 1,
+        "faq_count": 6,
+        "ok": true,
+        "errors": []
+      },
+      {
+        "article_id": 41,
+        "locale": "en",
+        "slug": "what-is-riasec-holland-code-career-interest-test",
+        "status": "draft",
+        "working_revision_id": 46,
+        "working_revision_status": "approved",
+        "import_id": 12,
+        "import_status": "warning",
+        "claim_status": "passed",
+        "claim_warning_acknowledged": false,
+        "claim_matches_count": 0,
+        "references_count": 5,
+        "media_status": "complete",
+        "graph_status": "complete",
+        "cta_count": 1,
+        "faq_count": 6,
+        "ok": true,
+        "errors": []
+      }
+    ]
+  },
+  "public_absence_postcheck": {
+    "zh_article_public_api_http_status": 404,
+    "en_article_public_api_http_status": 404,
+    "articles_remain_non_public": true,
+    "articles_remain_non_indexable": true
+  },
+  "remaining_blockers": [
+    {
+      "id": "controlled_publish_not_authorized",
+      "status": "blocked",
+      "owner": "operator",
+      "required_input": "Exact controlled publish authorization is required before any publish command."
+    },
+    {
+      "id": "search_submission_not_authorized",
+      "status": "blocked",
+      "owner": "operator",
+      "required_input": "Search submission requires separate exact authorization after publish and post-publish smoke."
+    }
+  ],
+  "hard_boundaries": {
+    "no_article_body_title_h1_meta_faq_cta_rewrite": true,
+    "no_publish": true,
+    "no_search_submission": true,
+    "no_deploy": true,
+    "public_canonical_routes_only": true,
+    "no_private_or_tokenized_url_access": true
+  },
+  "next_step": {
+    "id": "SEO-ARTICLE-RIASEC-V2-CONTROLLED-PUBLISH-01",
+    "status": "blocked_until_exact_publish_authorization",
+    "post_publish_required_after_publish": [
+      "SEO-ARTICLE-RIASEC-V2-POST-PUBLISH-SMOKE-01",
+      "SEO-ARTICLE-RIASEC-V2-SEARCH-SUBMISSION-PREFLIGHT-01"
+    ]
+  }
+}
