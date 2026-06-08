@@ -1,0 +1,155 @@
+{
+  "schema": "riasec-explanation-controlled-publish-postpublish-smoke.v1",
+  "task_id": "SEO-ARTICLE-RIASEC-V2-CONTROLLED-PUBLISH-01",
+  "generated_at": "2026-06-08T10:31:32+08:00",
+  "decision": "CONDITIONAL_GO_PUBLISH_DONE_NO_GO_SEARCH_SUBMISSION_ZH_FRONTEND_404",
+  "exact_publish_authorization": "I explicitly approve Codex to publish article ids 40,41 after preflight passes.",
+  "preflight_rerun_before_publish": {
+    "ok": true,
+    "dry_run": true,
+    "article_ids": [
+      40,
+      41
+    ],
+    "errors": [],
+    "published_article_ids": []
+  },
+  "controlled_publish": {
+    "performed": true,
+    "ok": true,
+    "dry_run": false,
+    "article_ids": [
+      40,
+      41
+    ],
+    "published_article_ids": [
+      40,
+      41
+    ],
+    "errors": [],
+    "make_indexable": true,
+    "search_submission_performed": false,
+    "deploy_performed": false
+  },
+  "article_state_post_publish": [
+    {
+      "article_id": 40,
+      "locale": "zh",
+      "slug": "riasec-holland-career-interest-test-explained",
+      "status": "published",
+      "is_public": true,
+      "is_indexable": true,
+      "published_at": "2026-06-08T02:28:33+00:00",
+      "published_revision_id": 45,
+      "working_revision_id": 45,
+      "seo_robots": "index,follow",
+      "seo_indexable": true,
+      "references_count": 5,
+      "references_status": "complete",
+      "media_status": "complete"
+    },
+    {
+      "article_id": 41,
+      "locale": "en",
+      "slug": "what-is-riasec-holland-code-career-interest-test",
+      "status": "published",
+      "is_public": true,
+      "is_indexable": true,
+      "published_at": "2026-06-08T02:28:34+00:00",
+      "published_revision_id": 46,
+      "working_revision_id": 46,
+      "seo_robots": "index,follow",
+      "seo_indexable": true,
+      "references_count": 5,
+      "references_status": "complete",
+      "media_status": "complete"
+    }
+  ],
+  "post_publish_smoke": {
+    "api": [
+      {
+        "surface": "backend_public_article_api",
+        "article_id": 40,
+        "locale_query": "zh",
+        "http_status": 200,
+        "body_bytes": 43032
+      },
+      {
+        "surface": "backend_public_article_api",
+        "article_id": 41,
+        "locale_query": "en",
+        "http_status": 200,
+        "body_bytes": 27363
+      }
+    ],
+    "frontend": [
+      {
+        "surface": "frontend_public_article_detail",
+        "article_id": 40,
+        "locale_segment": "zh",
+        "http_status": 404,
+        "body_bytes": 23249,
+        "status": "blocked",
+        "blocker": "zh_frontend_canonical_404"
+      },
+      {
+        "surface": "frontend_public_article_detail",
+        "article_id": 41,
+        "locale_segment": "en",
+        "http_status": 200,
+        "body_bytes": 174696,
+        "status": "passed"
+      }
+    ],
+    "locale_contract_evidence": {
+      "published_chinese_article_locale": "zh",
+      "existing_chinese_canary_locale": "zh-CN",
+      "zh_api_with_locale_zh_status": 200,
+      "zh_api_with_locale_zh_cn_status": 404,
+      "existing_canary_api_with_locale_zh_cn_status": 200,
+      "likely_blocker": "fap-web production zh article route expects zh-CN API locale, while article 40 was imported and published as locale zh."
+    },
+    "sitemap_llms": {
+      "sitemap_contains_zh_article": false,
+      "sitemap_contains_en_article": false,
+      "llms_convergence_status": "not_converged_or_inconsistent",
+      "search_submission_allowed": false
+    }
+  },
+  "hard_boundaries": {
+    "no_article_body_title_h1_meta_faq_cta_rewrite": true,
+    "no_search_submission": true,
+    "no_deploy": true,
+    "no_frontend_deploy": true,
+    "no_private_or_tokenized_url_access": true,
+    "public_canonical_routes_only": true
+  },
+  "remaining_blockers": [
+    {
+      "id": "zh_frontend_canonical_404",
+      "status": "blocked",
+      "owner": "cms_operator_or_frontend_api_contract_owner",
+      "evidence": "Backend public API returns 200 for article 40 with locale=zh, but frontend canonical /zh/articles/riasec-holland-career-interest-test-explained returns 404. Existing Chinese article canary uses backend locale zh-CN.",
+      "required_input": "Authorize a narrow locale/API contract correction before search submission."
+    },
+    {
+      "id": "sitemap_llms_not_converged",
+      "status": "blocked",
+      "owner": "seo_operator",
+      "evidence": "Sitemap and llms checks did not consistently enumerate both newly published article slugs immediately after publish.",
+      "required_input": "Recheck after zh frontend canonical route passes; do not submit search URLs before convergence."
+    },
+    {
+      "id": "search_submission_not_authorized",
+      "status": "hard_gate",
+      "owner": "operator",
+      "required_input": "Search submission requires separate exact authorization after post-publish smoke passes."
+    }
+  ],
+  "next_step": {
+    "recommended_task_id": "SEO-ARTICLE-RIASEC-V2-ZH-LOCALE-CONTRACT-FIX-01",
+    "scope": "Fix or normalize the published zh RIASEC article route/API locale contract so the public canonical zh article page returns 200, without rewriting article content and without search submission.",
+    "publish_status": "articles_40_41_published",
+    "search_submission_status": "blocked"
+  }
+}
