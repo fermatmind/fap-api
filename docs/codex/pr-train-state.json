@@ -49833,7 +49833,7 @@
     "repo": "fap-api",
     "branch": "codex/help-content-draft-operator-review-r2-01",
     "base": "origin/main",
-    "status": "in_progress",
+    "status": "pr_opened",
     "train_scope": "window_9_help_service_content",
     "title": "docs(help): request Help draft operator review R2",
     "depends_on": [
@@ -49906,15 +49906,15 @@
       },
       "github": {
         "status": "pending",
-        "head_sha": null,
+        "head_sha": "dbc59c73a6c3a5f875c5465db63768a1bc43affa",
         "passed_checks": [],
         "failure_reason": null,
         "merge_commit": null
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "dbc59c73a6c3a5f875c5465db63768a1bc43affa",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/1987",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -49968,6 +49968,11 @@
         "at": "2026-06-08",
         "status": "review_requested",
         "note": "Generated second-round Operator review request artifact from synced 12 Help CMS drafts and revised v01 source package evidence. No Operator approval was claimed."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "pr_opened",
+        "note": "Opened PR #1987 for HELP-CONTENT-DRAFT-OPERATOR-REVIEW-R2-01."
       }
     ]
   }
