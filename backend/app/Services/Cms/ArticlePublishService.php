@@ -7,12 +7,17 @@ namespace App\Services\Cms;
 use App\Filament\Ops\Support\ContentReleaseAudit;
 use App\Models\Article;
 use App\Models\ArticleTranslationRevision;
+use App\Services\SEO\SeoDiscoverabilityCacheInvalidator;
 use Illuminate\Support\Facades\DB;
 use InvalidArgumentException;
 use RuntimeException;
 
 final class ArticlePublishService
 {
+    public function __construct(
+        private readonly SeoDiscoverabilityCacheInvalidator $seoDiscoverabilityCacheInvalidator,
+    ) {}
+
     public function publishArticle(int $articleId, string $source = 'article_publish_service'): Article
     {
         if ($articleId <= 0) {
@@ -48,6 +53,7 @@ final class ArticlePublishService
         });
 
         ContentReleaseAudit::log('article', $article, $source);
+        $this->seoDiscoverabilityCacheInvalidator->flushArticleDiscoverabilityCaches();
 
         return $article;
     }
@@ -58,7 +64,7 @@ final class ArticlePublishService
             throw new InvalidArgumentException('article_id must be positive.');
         }
 
-        return DB::transaction(function () use ($articleId): Article {
+        $article = DB::transaction(function () use ($articleId): Article {
             $article = Article::query()
                 ->withoutGlobalScopes()
                 ->where('id', $articleId)
@@ -75,6 +81,10 @@ final class ArticlePublishService
 
             return $article->fresh() ?? $article;
         });
+
+        $this->seoDiscoverabilityCacheInvalidator->flushArticleDiscoverabilityCaches();
+
+        return $article;
     }
 
     private function assertPublishable(Article $article): void

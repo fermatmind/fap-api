@@ -14,15 +14,15 @@ use Illuminate\Support\Facades\Cache;
 
 class SitemapSourceController extends Controller
 {
-    private const CACHE_KEY_FRESH = 'seo:sitemap-source:v1:fresh';
+    public const CACHE_KEY_FRESH = 'seo:sitemap-source:v1:fresh';
 
-    private const CACHE_KEY_STALE = 'seo:sitemap-source:v1:stale';
+    public const CACHE_KEY_STALE = 'seo:sitemap-source:v1:stale';
 
-    private const CACHE_KEY_LOCK = 'seo:sitemap-source:v1:lock';
+    public const CACHE_KEY_LOCK = 'seo:sitemap-source:v1:lock';
 
-    private const FRESH_TTL_SECONDS = 600;
+    public const FRESH_TTL_SECONDS = 600;
 
-    private const STALE_TTL_SECONDS = 86400;
+    public const STALE_TTL_SECONDS = 86400;
 
     private const LOCK_TTL_SECONDS = 120;
 
