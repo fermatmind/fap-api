@@ -1,0 +1,142 @@
+{
+  "schema": "help-content-draft-blocker-cms-sync-01.v1",
+  "task": "HELP-CONTENT-DRAFT-BLOCKER-CMS-SYNC-01",
+  "generated_at": "2026-06-08",
+  "decision": "CMS_DRAFT_BLOCKER_SYNC_COMPLETE_PUBLISH_STILL_BLOCKED",
+  "scope": "Sync the repaired local Help service ContentPage package into the existing 12 Help CMS drafts only.",
+  "authorization": {
+    "source": "user",
+    "allowed": "CMS mutation to sync the already repaired local package into the existing 12 Help CMS draft rows.",
+    "forbidden": [
+      "publish",
+      "deploy",
+      "search submission",
+      "private result/order/share/pay/payment/history URL access",
+      "secret/env/cookie/token value reading",
+      "payment/refund action",
+      "payment-provider behavior change",
+      "Operator approval claim"
+    ]
+  },
+  "source_package": {
+    "content_page_source_path": "backend/docs/help/import-packages/content-pages-draft-source/content_pages.help_service_drafts_01.json",
+    "content_page_source_sha256": "af59792b896892fa308ccddab0915e72c565e3f696bc10feb0af2c96f6c54d6d",
+    "import_package_path": "backend/docs/help/import-packages/help-service-content-drafts-01.import.v1.json",
+    "import_package_sha256": "15843defa1d3925624a49844e0ff15244a6cdff6cbb7c93bd3eac3c7fa5bed44",
+    "source_rows": 12,
+    "local_boundary_scan": {
+      "payment_id": 0,
+      "transaction_id": 0,
+      "orders_route": 0,
+      "result_route": 0,
+      "pay_route": 0,
+      "token_param": 0
+    }
+  },
+  "production_execution": {
+    "connection_method": "ssh_alias_fap-api-prod_batchmode",
+    "runtime_revision_sha": "8570a335c5cc539507b3dad4d8659fc9c971d759",
+    "temporary_source_dir": "/tmp/fm-help-blocker-cms-sync.3r25GW",
+    "temporary_source_removed": true,
+    "dry_run": {
+      "command": "php artisan content-pages:import-local-baseline --dry-run --upsert --status=draft --source-dir=/tmp/fm-help-blocker-cms-sync.3r25GW --no-ansi",
+      "exit_code": 0,
+      "files_found": 1,
+      "pages_found": 12,
+      "will_create": 0,
+      "will_update": 12,
+      "will_skip": 0
+    },
+    "import": {
+      "command": "php artisan content-pages:import-local-baseline --upsert --status=draft --source-dir=/tmp/fm-help-blocker-cms-sync.3r25GW --no-ansi",
+      "exit_code": 0,
+      "files_found": 1,
+      "pages_found": 12,
+      "will_create": 0,
+      "will_update": 12,
+      "will_skip": 0
+    }
+  },
+  "post_sync_cms_state": {
+    "checked_rows": 12,
+    "draft": 12,
+    "non_public": 12,
+    "non_indexable": 12,
+    "unpublished": 12,
+    "owner_review": 12,
+    "support_contact_support_at_fermatmind": 12,
+    "policy_version_help_service_policy_v1": 12,
+    "reviewer_unknown": 12,
+    "schema_disabled": 12,
+    "faq_items_count_4": 12,
+    "pattern_hits": {
+      "payment_id": 0,
+      "transaction_id": 0,
+      "payment_identifier": 0,
+      "private_route": 0,
+      "token_param": 0
+    },
+    "slugs": [
+      "help-data-deletion",
+      "help-payment-refund",
+      "help-privacy-data",
+      "help-result-recovery",
+      "help-unlock-failure",
+      "help-use-boundaries"
+    ],
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "public_absence_checks": {
+    "method": "Python urllib GET against public canonical routes with one manual 308 redirect follow",
+    "status": "pass",
+    "routes_checked": 12,
+    "expected_final_status": 404,
+    "results": [
+      {"route": "/zh/help/unlock-failure", "status_chain": [308, 404]},
+      {"route": "/en/help/unlock-failure", "status_chain": [308, 404]},
+      {"route": "/zh/help/payment-refund", "status_chain": [308, 404]},
+      {"route": "/en/help/payment-refund", "status_chain": [308, 404]},
+      {"route": "/zh/help/result-recovery", "status_chain": [308, 404]},
+      {"route": "/en/help/result-recovery", "status_chain": [308, 404]},
+      {"route": "/zh/help/privacy-data", "status_chain": [308, 404]},
+      {"route": "/en/help/privacy-data", "status_chain": [308, 404]},
+      {"route": "/zh/help/use-boundaries", "status_chain": [308, 404]},
+      {"route": "/en/help/use-boundaries", "status_chain": [308, 404]},
+      {"route": "/zh/help/data-deletion", "status_chain": [308, 404]},
+      {"route": "/en/help/data-deletion", "status_chain": [308, 404]}
+    ]
+  },
+  "scope_validation": {
+    "cms_mutation_performed": true,
+    "cms_mutation_limited_to_existing_12_help_drafts": true,
+    "publish_performed": false,
+    "deploy_performed": false,
+    "search_submission_performed": false,
+    "private_url_access_performed": false,
+    "secret_env_cookie_token_read": false,
+    "payment_or_refund_performed": false,
+    "payment_provider_changed": false,
+    "operator_approval_claimed": false
+  },
+  "sidecars": [
+    {
+      "id": "HELP-SERVICE-FAQ-SCHEMA-RUNTIME-01",
+      "status": "next_runtime_pr",
+      "note": "Frontend schema runtime still needs to consume CMS faq_items/schema_enabled."
+    },
+    {
+      "id": "HELP-CONTENT-PAGES-CONTROLLED-PUBLISH-RUNTIME-01",
+      "status": "follow_up_runtime_pr",
+      "note": "Backend still needs a bounded controlled publish runtime for ContentPage Help rows before publish execute."
+    },
+    {
+      "id": "HELP-CONTENT-DRAFT-PUBLISH-BLOCK",
+      "status": "hard_gate",
+      "note": "Publish remains blocked until schema runtime, controlled publish runtime, publish preflight, and exact publish authorization are complete."
+    }
+  ],
+  "next_task_recommendation": "HELP-SERVICE-FAQ-SCHEMA-RUNTIME-01"
+}
