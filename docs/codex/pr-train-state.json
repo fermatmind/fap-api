@@ -50318,7 +50318,7 @@
     "repo": "fap-api",
     "branch": "codex/help-content-draft-preflight-blocker-repair-01",
     "base": "origin/main",
-    "status": "pr_opened",
+    "status": "merged",
     "train_scope": "window_9_help_service_content",
     "title": "docs(help): repair Help preflight boundary phrase",
     "depends_on": [
@@ -50362,19 +50362,29 @@
         ]
       },
       "github": {
-        "status": "pending",
-        "head_sha": null,
-        "passed_checks": [],
+        "status": "pass",
+        "head_sha": "823ff56bc04aa3c3edeb1a05d762391369bb4298",
+        "passed_checks": [
+          "hygiene",
+          "supply-chain",
+          "content-pack-build-validate",
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "Semgrep OSS",
+          "verify-bigfive",
+          "verify-mbti-legacy",
+          "verify-mbti-v2"
+        ],
         "failure_reason": null,
-        "merge_commit": null
+        "merge_commit": "c0bed89cfc47f295f236f786f43228b5c12e17cc"
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
+    "commit_sha": "c0bed89cfc47f295f236f786f43228b5c12e17cc",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1995",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-08T08:24:57Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "result": {
       "decision": "LOCAL_PACKAGE_PAYMENT_ID_PHRASE_GATE_REPAIRED_CMS_SYNC_STILL_REQUIRED",
       "generated_artifact": "backend/docs/help/generated/help-content-draft-preflight-blocker-repair-01.v1.json",
@@ -50438,6 +50448,16 @@
         "at": "2026-06-08",
         "status": "pr_opened",
         "note": "Opened PR #1995 for HELP-CONTENT-DRAFT-PREFLIGHT-BLOCKER-REPAIR-01."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed for PR #1995 head 823ff56bc04aa3c3edeb1a05d762391369bb4298; merge state CLEAN."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "merged",
+        "note": "PR #1995 merged at 2026-06-08T08:24:57Z with merge commit c0bed89cfc47f295f236f786f43228b5c12e17cc; origin/main contains the merge commit, remote task branch is deleted, and the local task branch was deleted after switching this worktree to detached origin/main because local main is owned by another worktree."
       }
     ]
   }
