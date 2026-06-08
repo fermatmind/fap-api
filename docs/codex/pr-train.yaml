@@ -22393,6 +22393,48 @@ prs:
     content_authority: CMS/backend
     next_task: HELP-CONTENT-DRAFT-BLOCKER-CMS-SYNC-01
 
+  - id: HELP-CONTENT-DRAFT-BLOCKER-CMS-SYNC-01
+    repo: fap-api
+    depends_on:
+      - HELP-CONTENT-DRAFT-PREFLIGHT-BLOCKER-REPAIR-01
+    branch: codex/help-content-draft-blocker-cms-sync-01
+    title: "ops(help): sync repaired Help drafts to CMS"
+    train_scope: window_9_help_service_content
+    status: in_progress
+    scope:
+      - Sync the repaired local Help service ContentPage source package to the existing 12 Help CMS draft rows only.
+      - Preserve draft, non-public, non-indexable, unpublished, owner_review, support_contact, policy_version, reviewer, faq_items, and schema_enabled safety state.
+      - Verify the payment_id/transaction_id/payment identifier phrase gate remains clear in CMS summary output.
+      - Record that schema runtime and controlled publish runtime remain separate follow-up PRs.
+    allowed_paths:
+      - backend/docs/help/generated/help-content-draft-blocker-cms-sync-01.v1.json
+      - backend/docs/operations/help-content-draft-blocker-cms-sync-2026-06-08.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Publish, deploy, submit search URLs, access private result/order/share/pay/payment/history URLs, read secrets/env/cookies/tokens, run payment/refund flows, change payment-provider behavior, or claim Operator approval.
+    validation:
+      - python3 -m json.tool backend/docs/help/generated/help-content-draft-blocker-cms-sync-01.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=HelpContentImportPackageTest --no-ansi
+      - git diff --check -- backend/docs/help/generated/help-content-draft-blocker-cms-sync-01.v1.json backend/docs/operations/help-content-draft-blocker-cms-sync-2026-06-08.md docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: true
+    database_mutation: true
+    payment_provider_call: false
+    cms_mutation: true
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: CMS/backend
+    next_task: HELP-SERVICE-FAQ-SCHEMA-RUNTIME-01
+
   - id: PUBLIC-BENEFIT-ASSET-PACKAGES-ARCHIVE-01
     repo: fap-api
     branch: codex/public-benefit-asset-packages-archive-01
