@@ -50920,7 +50920,7 @@
     "repo": "fap-api",
     "branch": "codex/help-content-draft-publish-preflight-r3-01",
     "base": "origin/main",
-    "status": "local_checks_passed",
+    "status": "pr_open_github_checks_pending",
     "train_scope": "window_9_help_service_content",
     "title": "HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-R3-01: record post-deploy Help publish preflight",
     "depends_on": [
@@ -51008,7 +51008,7 @@
       },
       "github": {
         "status": "pending",
-        "head_sha": null,
+        "head_sha": "5d01682bbd442cee1b06cb3a3ab5259ce6904ac4",
         "passed_checks": [],
         "merge_state": null,
         "failure_reason": null,
@@ -51016,8 +51016,8 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "5d01682bbd442cee1b06cb3a3ab5259ce6904ac4",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2002",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -51056,6 +51056,11 @@
         "at": "2026-06-08",
         "status": "local_checks_passed",
         "note": "PHP lint, JSON/YAML parse, focused artifact contract, public HTTP checks, read-only production runtime checks, help-service controlled publish dry-run, and scoped diff whitespace checks passed. No CMS mutation, publish, deploy, search submission, private URL access, secret/env/cookie/token read, payment/refund action, payment provider change, or Operator approval claim was performed."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "pr_open_github_checks_pending",
+        "note": "Opened fap-api PR #2002 for HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-R3-01 after local checks passed."
       }
     ]
   }
