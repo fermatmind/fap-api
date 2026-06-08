@@ -1,0 +1,163 @@
+{
+  "schema": "riasec-explanation-draft-cover-attach-publish-preflight.v1",
+  "task_id": "RIASEC-EXPLANATION-DRAFT-COVER-ATTACH-PUBLISH-PREFLIGHT-01",
+  "generated_at": "2026-06-08T09:50:00+08:00",
+  "decision": "NO_GO_REFERENCES_MISSING",
+  "operator_authorization": "cms_media_asset_6_attach_to_riasec_drafts_then_draft_approval_publish_preflight_authorized_2026-06-08",
+  "cms_mutation_performed": true,
+  "article_cover_attach_performed": true,
+  "draft_revision_approval_performed": true,
+  "article_content_rewrite_performed": false,
+  "publish_preflight_performed": true,
+  "publish_preflight_dry_run": true,
+  "publish_preflight_ok": false,
+  "publish_performed": false,
+  "search_submission_performed": false,
+  "deploy_performed": false,
+  "private_url_accessed": false,
+  "media_asset": {
+    "asset_id": 6,
+    "asset_key": "article.riasec.explanation.cover.v1",
+    "cdn_status": "verified",
+    "cover_image_url": "https://api.fermatmind.com/storage/media-library/variants/articleriasecexplanationcoverv1/hero_1600x900.jpg",
+    "og_image_url": "https://api.fermatmind.com/storage/media-library/variants/articleriasecexplanationcoverv1/og_1200x630.jpg",
+    "cover_image_alt": "Abstract career-interest map with six work activity icons around a compass.",
+    "variant_keys": [
+      "hero",
+      "card",
+      "thumbnail",
+      "og",
+      "preload"
+    ]
+  },
+  "article_mutations": [
+    {
+      "locale": "zh",
+      "article_id": 40,
+      "working_revision_id": 45,
+      "slug": "riasec-holland-career-interest-test-explained",
+      "status_after": "draft",
+      "is_public_after": false,
+      "is_indexable_after": false,
+      "translation_status_after": "approved",
+      "working_revision_status_after": "approved",
+      "reviewed_by": 1,
+      "approved_at": "2026-06-08T01:44:05.000000Z",
+      "cover_image_attached": true,
+      "seo_og_image_attached": true,
+      "import_media_status_after": "complete",
+      "references_count": 0
+    },
+    {
+      "locale": "en",
+      "article_id": 41,
+      "working_revision_id": 46,
+      "slug": "what-is-riasec-holland-code-career-interest-test",
+      "status_after": "draft",
+      "is_public_after": false,
+      "is_indexable_after": false,
+      "translation_status_after": "approved",
+      "working_revision_status_after": "approved",
+      "reviewed_by": 1,
+      "approved_at": "2026-06-08T01:44:05.000000Z",
+      "cover_image_attached": true,
+      "seo_og_image_attached": true,
+      "import_media_status_after": "complete",
+      "references_count": 0
+    }
+  ],
+  "publish_preflight": {
+    "command": "php artisan articles:publish-controlled --article=40 --article=41 --ack-claim-warning=40 --make-indexable --dry-run --json --no-ansi",
+    "exit_code": 1,
+    "ok": false,
+    "dry_run": true,
+    "make_indexable": true,
+    "expected_confirmation": "I explicitly approve Codex to publish article ids 40,41 after preflight passes.",
+    "published_article_ids": [],
+    "articles": [
+      {
+        "article_id": 40,
+        "locale": "zh",
+        "working_revision_status": "approved",
+        "import_status": "warning",
+        "claim_status": "warning",
+        "claim_warning_acknowledged": true,
+        "claim_matches_count": 2,
+        "references_count": 0,
+        "media_status": "complete",
+        "graph_status": "complete",
+        "cta_count": 1,
+        "faq_count": 6,
+        "ok": false,
+        "errors": [
+          {
+            "field": "references",
+            "code": "references_missing"
+          }
+        ]
+      },
+      {
+        "article_id": 41,
+        "locale": "en",
+        "working_revision_status": "approved",
+        "import_status": "warning",
+        "claim_status": "passed",
+        "claim_warning_acknowledged": false,
+        "claim_matches_count": 0,
+        "references_count": 0,
+        "media_status": "complete",
+        "graph_status": "complete",
+        "cta_count": 1,
+        "faq_count": 6,
+        "ok": false,
+        "errors": [
+          {
+            "field": "references",
+            "code": "references_missing"
+          }
+        ]
+      }
+    ],
+    "blocking_error_codes": [
+      "references_missing"
+    ]
+  },
+  "public_absence_postcheck": {
+    "zh_article_public_api_http_status": 404,
+    "en_article_public_api_http_status": 404,
+    "articles_remain_non_public": true,
+    "articles_remain_non_indexable": true
+  },
+  "remaining_blockers": [
+    {
+      "id": "references_missing",
+      "status": "blocked",
+      "owner": "editor_or_import_gate_operator",
+      "required_input": "Populate or reconcile accepted references into the latest ArticleEditorialPackageImport gate for articles 40 and 41. Current references_count is 0 for both articles."
+    },
+    {
+      "id": "controlled_publish_not_authorized",
+      "status": "blocked",
+      "owner": "operator",
+      "required_input": "Controlled publish still requires exact publish approval after publish preflight passes."
+    }
+  ],
+  "next_step": {
+    "id": "RIASEC_V2_REFERENCES_GATE_RECONCILIATION_REQUIRED",
+    "recommended_action": "Do not publish. Reconcile references_count and reference payloads for the latest import gates, then rerun controlled publish preflight.",
+    "not_authorized_yet": [
+      "controlled publish",
+      "search submission",
+      "deploy",
+      "article content rewrite"
+    ]
+  },
+  "hard_boundaries": {
+    "no_article_body_title_h1_meta_faq_cta_rewrite": true,
+    "no_publish": true,
+    "no_search_submission": true,
+    "no_deploy": true,
+    "public_canonical_routes_only": true,
+    "no_private_or_tokenized_url_access": true
+  }
+}
