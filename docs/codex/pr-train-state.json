@@ -50122,7 +50122,7 @@
     "repo": "fap-api",
     "branch": "codex/help-content-draft-publish-preflight-01",
     "base": "origin/main",
-    "status": "pr_opened",
+    "status": "merged",
     "train_scope": "window_9_help_service_content",
     "title": "docs(help): run Help draft publish preflight",
     "depends_on": [
@@ -50198,19 +50198,29 @@
         ]
       },
       "github": {
-        "status": "pending",
-        "head_sha": null,
-        "passed_checks": [],
+        "status": "pass",
+        "head_sha": "b62fdf7d66c427b3f768c1e64a354bd43a7ee332",
+        "passed_checks": [
+          "hygiene",
+          "supply-chain",
+          "content-pack-build-validate",
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "Semgrep OSS",
+          "verify-bigfive",
+          "verify-mbti-legacy",
+          "verify-mbti-v2"
+        ],
         "failure_reason": null,
-        "merge_commit": null
+        "merge_commit": "8570a335c5cc539507b3dad4d8659fc9c971d759"
       }
     },
     "failure_reason": "Publish preflight blocked: three English Help draft rows contain the payment_id phrase pattern; fap-web FAQ schema runtime does not yet consume CMS faq_items/schema_enabled for these service topics; existing content-pages:publish-controlled runtime does not allow the 12 Help service keys or zh-CN.",
-    "commit_sha": null,
+    "commit_sha": "8570a335c5cc539507b3dad4d8659fc9c971d759",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1993",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-08T08:00:46Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "result": {
       "decision": "NO_GO_FOR_PUBLISH_EXECUTE",
       "generated_artifact": "backend/docs/help/generated/help-content-draft-publish-preflight-01.v1.json",
@@ -50291,6 +50301,16 @@
         "at": "2026-06-08",
         "status": "pr_opened",
         "note": "Opened PR #1993 for HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-01."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed for PR #1993 head b62fdf7d66c427b3f768c1e64a354bd43a7ee332; merge state CLEAN."
+      },
+      {
+        "at": "2026-06-08",
+        "status": "merged",
+        "note": "PR #1993 merged at 2026-06-08T08:00:46Z with merge commit 8570a335c5cc539507b3dad4d8659fc9c971d759; origin/main contains the merge commit, remote task branch is deleted, and the local task branch was deleted after switching this worktree to detached origin/main because local main is owned by another worktree."
       }
     ]
   }
