@@ -1,0 +1,155 @@
+{
+  "schema_version": "help-content-draft-publish-preflight-r2-01.v1",
+  "generated_at": "2026-06-08",
+  "task": {
+    "id": "HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-R2-01",
+    "type": "read_only_publish_preflight",
+    "scope": "window_9_help_service_content"
+  },
+  "authorization": {
+    "source": "user_requested_three_pr_sequence",
+    "cms_mutation_allowed": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "search_submission_allowed": false,
+    "private_url_access_allowed": false,
+    "secret_env_cookie_token_read_allowed": false,
+    "payment_or_refund_allowed": false,
+    "payment_provider_change_allowed": false,
+    "operator_approval_claim_allowed": false
+  },
+  "dependency_evidence": {
+    "help_content_draft_blocker_cms_sync": {
+      "status": "merged",
+      "pr": "https://github.com/fermatmind/fap-api/pull/1998",
+      "merge_commit": "c468443998471ba2ad645476ad2389610f4c02b1"
+    },
+    "help_service_faq_schema_runtime": {
+      "status": "merged",
+      "repo": "fap-web",
+      "pr": "https://github.com/fermatmind/fap-web/pull/1072",
+      "merge_commit": "b9eb0593414a283a3ad02366e203378bb41c9f06",
+      "production_deploy_status": "Unknown"
+    },
+    "help_content_pages_controlled_publish_runtime": {
+      "status": "merged",
+      "repo": "fap-api",
+      "pr": "https://github.com/fermatmind/fap-api/pull/2000",
+      "merge_commit": "31f0ce4f9f3966719dfc93234b224ce8990871ff",
+      "production_deploy_status": "not_deployed"
+    }
+  },
+  "source_package": {
+    "import_package_path": "backend/docs/help/import-packages/help-service-content-drafts-01.import.v1.json",
+    "import_package_sha256": "15843defa1d3925624a49844e0ff15244a6cdff6cbb7c93bd3eac3c7fa5bed44",
+    "content_page_source_path": "backend/docs/help/import-packages/content-pages-draft-source/content_pages.help_service_drafts_01.json",
+    "content_page_source_sha256": "af59792b896892fa308ccddab0915e72c565e3f696bc10feb0af2c96f6c54d6d",
+    "rows": 12,
+    "slugs": [
+      "help-unlock-failure",
+      "help-payment-refund",
+      "help-result-recovery",
+      "help-privacy-data",
+      "help-use-boundaries",
+      "help-data-deletion"
+    ],
+    "local_private_boundary_scan": {
+      "payment_id": 0,
+      "transaction_id": 0,
+      "payment_identifier": 0,
+      "private_route": 0,
+      "token_param": 0
+    }
+  },
+  "cms_draft_evidence": {
+    "source": "HELP-CONTENT-DRAFT-BLOCKER-CMS-SYNC-01 post-sync artifact",
+    "artifact_path": "backend/docs/help/generated/help-content-draft-blocker-cms-sync-01.v1.json",
+    "artifact_sha256": "d017b1a5425656a18d25780a370427dbc368fd760b4e00cc51912007724b63b4",
+    "checked_rows": 12,
+    "draft": 12,
+    "non_public": 12,
+    "non_indexable": 12,
+    "unpublished": 12,
+    "owner_review": 12,
+    "support_contact_support_at_fermatmind": 12,
+    "policy_version_help_service_policy_v1": 12,
+    "reviewer_unknown": 12,
+    "schema_disabled": 12,
+    "faq_items_count_4": 12,
+    "private_boundary_pattern_hits": {
+      "payment_id": 0,
+      "transaction_id": 0,
+      "payment_identifier": 0,
+      "private_route": 0,
+      "token_param": 0
+    }
+  },
+  "public_route_checks": {
+    "checked_at": "2026-06-08",
+    "draft_routes_checked": 12,
+    "draft_routes_final_404": 12,
+    "support_routes_200": 2,
+    "privacy_terms_routes_200": 4,
+    "private_url_accessed": false
+  },
+  "sitemap_llms_checks": {
+    "checked_at": "2026-06-08",
+    "resources": [
+      "https://fermatmind.com/sitemap.xml",
+      "https://fermatmind.com/llms.txt",
+      "https://fermatmind.com/llms-full.txt"
+    ],
+    "all_status_200": true,
+    "help_service_slug_hits": 0,
+    "private_pattern_hits": 0,
+    "search_submission_attempted": false
+  },
+  "source_runtime_checks": {
+    "fap_web_help_faq_schema_runtime_source": {
+      "status": "merged_to_main",
+      "merge_commit": "b9eb0593414a283a3ad02366e203378bb41c9f06",
+      "production_runtime_status": "Unknown"
+    },
+    "fap_api_controlled_publish_runtime_source": {
+      "status": "merged_to_main",
+      "merge_commit": "31f0ce4f9f3966719dfc93234b224ce8990871ff",
+      "artifact_path": "backend/docs/help/generated/help-content-pages-controlled-publish-runtime-01.v1.json",
+      "artifact_sha256": "b0911983e0f4b1973228c90d0c79ea3569fb266f5621a5ebf08b26050b18c6ee"
+    }
+  },
+  "production_runtime_check": {
+    "connection_method": "ssh_alias_fap-api-prod_batchmode_readonly_no_env_output",
+    "active_backend_revision_sha": "8570a335c5cc539507b3dad4d8659fc9c971d759",
+    "origin_main_sha_at_check": "31f0ce4f9f3966719dfc93234b224ce8990871ff",
+    "commits_behind_origin_main": 7,
+    "contains_help_controlled_publish_runtime_merge": false,
+    "artisan_command_visible": true,
+    "artisan_description_observed": "Fail-closed controlled publish runtime for approved English content_pages records.",
+    "help_service_scope_confirmed_in_production": false,
+    "read_secret_env_cookie_token": false
+  },
+  "decision": {
+    "status": "blocked",
+    "final_decision": "NO_GO_FOR_PUBLISH_EXECUTE",
+    "publish_allowed": false,
+    "publish_authorization_prompt_allowed": false,
+    "ready_for_exact_publish_authorization": false,
+    "blocking_reasons": [
+      "Production backend active revision does not contain HELP-CONTENT-PAGES-CONTROLLED-PUBLISH-RUNTIME-01.",
+      "Production fap-web Help FAQ schema runtime deployment status is Unknown.",
+      "A post-deploy publish preflight R3 is required before any exact publish authorization prompt."
+    ]
+  },
+  "scope_validation": {
+    "cms_mutation_performed": false,
+    "publish_performed": false,
+    "deploy_performed": false,
+    "search_submission_performed": false,
+    "private_url_access_performed": false,
+    "secret_env_cookie_token_read": false,
+    "payment_or_refund_performed": false,
+    "payment_provider_changed": false,
+    "operator_approval_claimed": false
+  },
+  "next_task_recommendation": "HELP-RUNTIME-PROD-DEPLOY-READINESS-01"
+}
