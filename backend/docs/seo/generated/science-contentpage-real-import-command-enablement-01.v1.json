@@ -26,7 +26,37 @@
       "/method-boundaries"
     ],
     "cms_mutation_in_this_pr": false,
-    "production_import_executed": false
+    "production_import_executed_after_pr": true
+  },
+  "closeout_2026_06_08": {
+    "parser_blocker_fixed_by_pr": 1983,
+    "production_no_write_dry_run": {
+      "ok": true,
+      "dry_run": true,
+      "writes_committed": 0,
+      "pages_seen": 6,
+      "planned_create_count": 5,
+      "authority_revision_only_count": 1,
+      "blocked_count": 0
+    },
+    "controlled_execute": {
+      "ok": true,
+      "dry_run": false,
+      "writes_committed": 1,
+      "pages_seen": 6,
+      "created_count": 5,
+      "publish_allowed": 0,
+      "discoverability_allowed": 0
+    },
+    "post_execute_idempotency_dry_run": {
+      "ok": true,
+      "dry_run": true,
+      "writes_committed": 0,
+      "planned_create_count": 0,
+      "skipped_existing_count": 5,
+      "authority_revision_only_count": 1
+    },
+    "publication_status": "NO_GO"
   },
   "runtime_guards": [
     "dry-run is default when --execute is absent",
@@ -53,13 +83,14 @@
     "no DailyGiving amplification"
   ],
   "next_task": {
-    "id": "SCIENCE-CONTENTPAGE-CONTROLLED-CMS-DRAFT-IMPORT-01",
+    "id": "SCIENCE-CONTENTPAGE-OPERATOR-PUBLISH-REVIEW-01",
     "requires": [
-      "GitHub checks green for command enablement PR",
-      "operator exact approval phrase",
-      "production no-write command output reviewed",
-      "controlled execution command scoped to non-public drafts"
+      "operator review of five imported drafts",
+      "claim gate review",
+      "science review",
+      "legal review where required",
+      "publish/discoverability gate remains blocked until approvals are recorded"
     ]
   },
-  "final_decision": "GO_FOR_CONTROLLED_CMS_DRAFT_IMPORT_AFTER_MERGE_AND_EXACT_APPROVAL"
+  "final_decision": "CONTROLLED_NON_PUBLIC_DRAFT_IMPORT_COMPLETE_PUBLICATION_NO_GO"
 }

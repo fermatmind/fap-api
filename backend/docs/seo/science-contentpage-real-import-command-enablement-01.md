@@ -5,6 +5,34 @@ GO for controlled CMS draft import after this PR is merged, GitHub checks are gr
 
 NO-GO for production import, publish, sitemap, llms, footer, search submission, or social distribution inside this PR.
 
+## 2026-06-08 Closeout Update
+
+The command enablement PR was later followed by:
+
+- fap-api #1983, which removed the production parser dependency blocker.
+- A production no-write dry-run that passed with `writes_committed=0`.
+- A controlled production execute using the exact approval phrase `SCIENCE_CONTENTPAGE_NON_PUBLIC_DRAFT_IMPORT_APPROVED`.
+- A post-execute idempotency dry-run that skipped the five existing rows without creating duplicates.
+
+Controlled import result:
+
+```text
+ok=1
+mode=execute
+dry_run=0
+writes_committed=1
+pages_seen=6
+planned_create_count=5
+skipped_existing_count=0
+authority_revision_only_count=1
+blocked_count=0
+created_count=5
+publish_allowed=0
+discoverability_allowed=0
+```
+
+This closeout means controlled non-public draft import is now complete. It does **not** change the publish/discoverability decision: public publish, sitemap, llms, footer, search submission, and social distribution remain NO-GO.
+
 ## Command
 `content-pages:science-import-drafts`
 
@@ -38,7 +66,7 @@ cd backend && php artisan content-pages:science-import-drafts --package=../backe
 - Private routes: blocked by prior pre-import QA gate.
 
 ## Deferred
-- Controlled CMS draft import.
-- Post-import QA.
+- CMS operator publication review.
+- Claim/science/legal review closeout.
 - Publish/discoverability gate.
-- Production no-write shell evidence.
+- Any public publish or search/distribution action.

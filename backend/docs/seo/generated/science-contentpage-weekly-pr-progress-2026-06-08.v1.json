@@ -1,0 +1,104 @@
+{
+  "schema_version": "science-contentpage-weekly-pr-progress-2026-06-08.v1",
+  "task": "SCIENCE-CONTENTPAGE-WEEKLY-PR-PROGRESS-2026-06-08",
+  "mode": "docs_only_progress_closeout",
+  "decision": "CONDITIONAL_NON_PUBLIC_DRAFT_IMPORT_COMPLETE_PUBLISH_NO_GO",
+  "science_contentpage_status": {
+    "non_public_draft_import_complete": true,
+    "created_draft_count": 5,
+    "existing_authority_revision_only_count": 1,
+    "publish_allowed": false,
+    "discoverability_allowed": false,
+    "sitemap_allowed": false,
+    "llms_allowed": false,
+    "footer_allowed": false,
+    "search_submission_allowed": false
+  },
+  "production_evidence": {
+    "no_write_dry_run": {
+      "ok": true,
+      "dry_run": true,
+      "writes_committed": 0,
+      "pages_seen": 6,
+      "planned_create_count": 5,
+      "authority_revision_only_count": 1,
+      "blocked_count": 0
+    },
+    "controlled_execute": {
+      "ok": true,
+      "dry_run": false,
+      "writes_committed": 1,
+      "pages_seen": 6,
+      "created_count": 5,
+      "publish_allowed": 0,
+      "discoverability_allowed": 0
+    },
+    "post_execute_idempotency_dry_run": {
+      "ok": true,
+      "dry_run": true,
+      "writes_committed": 0,
+      "planned_create_count": 0,
+      "skipped_existing_count": 5,
+      "authority_revision_only_count": 1
+    }
+  },
+  "created_draft_slugs": [
+    "/science",
+    "/item-design-notes",
+    "/reliability-validity",
+    "/data-privacy",
+    "/common-misconceptions"
+  ],
+  "existing_authority_revision_only": [
+    "/method-boundaries"
+  ],
+  "backend_prs": {
+    "merged": [
+      1922,
+      1944,
+      1948,
+      1955,
+      1958,
+      1959,
+      1960,
+      1967,
+      1973,
+      1976,
+      1978,
+      1981,
+      1983
+    ]
+  },
+  "frontend_prs": {
+    "merged": [
+      1060,
+      1062,
+      1064,
+      1065,
+      1066,
+      1068,
+      1069
+    ]
+  },
+  "adjacent_lines": {
+    "help_contentpage": "Recent Help PRs progressed through service-field production verification, policy sync, operator review R2, approval R2, publish preflight, and blocker repair. They do not authorize Science publishing.",
+    "riasec_article": "Recent RIASEC PRs progressed through review, media, locale, publish smoke, and search-submission preflight. They do not authorize Science discoverability.",
+    "dailygiving": "Recent DailyGiving PRs progressed proof handling and summaries while preserving noindex and search-amplification boundaries."
+  },
+  "remaining_no_go": [
+    "public_publish",
+    "sitemap",
+    "llms",
+    "footer",
+    "search_submission",
+    "social_distribution",
+    "faq_schema",
+    "unsupported_claims"
+  ],
+  "next_allowed_work": [
+    "CMS operator review for five imported drafts",
+    "claim/science/legal review closeout",
+    "publish preflight after approvals",
+    "discoverability gate after public eligibility is explicitly approved"
+  ]
+}
