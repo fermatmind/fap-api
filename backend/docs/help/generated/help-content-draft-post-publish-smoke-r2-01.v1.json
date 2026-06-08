@@ -1,0 +1,179 @@
+{
+  "schema_version": "help-content-draft-post-publish-smoke-r2-01.v1",
+  "generated_at": "2026-06-08",
+  "task": {
+    "id": "HELP-CONTENT-DRAFT-POST-PUBLISH-SMOKE-R2-01",
+    "type": "read_only_post_publish_smoke_rerun",
+    "scope": "window_9_help_service_content"
+  },
+  "authorization": {
+    "source": "user_requested_scoped_post_publish_smoke_r2",
+    "cms_mutation_allowed": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "search_submission_allowed": false,
+    "private_url_access_allowed": false,
+    "secret_env_cookie_token_read_allowed": false,
+    "payment_or_refund_allowed": false,
+    "payment_provider_change_allowed": false,
+    "operator_approval_claim_allowed": false,
+    "pr_train_manifest_state_updated": false
+  },
+  "dependency_evidence": {
+    "help_content_draft_post_publish_smoke_01": {
+      "status": "merged",
+      "repo": "fap-api",
+      "pr": "https://github.com/fermatmind/fap-api/pull/2004",
+      "merge_commit": "ef7aedd9b0b60960131cdba71ea5b1140a958f1a",
+      "recorded_decision": "BLOCKED_RUNTIME_REPAIR_REQUIRED"
+    },
+    "help_pages_noindex_runtime_repair": {
+      "status": "merged_and_deployed",
+      "repo": "fap-web",
+      "pr": "https://github.com/fermatmind/fap-web/pull/1075",
+      "merge_commit": "7b095a67dea4d633eafad5e5116d3510b25ace87",
+      "production_frontend_sha": "7b095a67dea4d633eafad5e5116d3510b25ace87"
+    }
+  },
+  "public_route_smoke": {
+    "base_url": "https://fermatmind.com",
+    "checked_pages": 12,
+    "http_200_count": 12,
+    "robots_noindex_count": 12,
+    "robots_index_follow_count": 0,
+    "canonical_count_failures": [],
+    "faqpage_total_hits": 0,
+    "private_tokenized_pattern_hits": 0,
+    "checked_routes": [
+      {
+        "path": "/en/help/unlock-failure",
+        "status": 200,
+        "robots": "noindex, nofollow, noarchive, nocache",
+        "canonical_count": 1,
+        "faqpage_hits": 0,
+        "private_tokenized_pattern_hits": 0
+      },
+      {
+        "path": "/en/help/payment-refund",
+        "status": 200,
+        "robots": "noindex, nofollow, noarchive, nocache",
+        "canonical_count": 1,
+        "faqpage_hits": 0,
+        "private_tokenized_pattern_hits": 0
+      },
+      {
+        "path": "/en/help/result-recovery",
+        "status": 200,
+        "robots": "noindex, nofollow, noarchive, nocache",
+        "canonical_count": 1,
+        "faqpage_hits": 0,
+        "private_tokenized_pattern_hits": 0
+      },
+      {
+        "path": "/en/help/privacy-data",
+        "status": 200,
+        "robots": "noindex, nofollow, noarchive, nocache",
+        "canonical_count": 1,
+        "faqpage_hits": 0,
+        "private_tokenized_pattern_hits": 0
+      },
+      {
+        "path": "/en/help/use-boundaries",
+        "status": 200,
+        "robots": "noindex, nofollow, noarchive, nocache",
+        "canonical_count": 1,
+        "faqpage_hits": 0,
+        "private_tokenized_pattern_hits": 0
+      },
+      {
+        "path": "/en/help/data-deletion",
+        "status": 200,
+        "robots": "noindex, nofollow, noarchive, nocache",
+        "canonical_count": 1,
+        "faqpage_hits": 0,
+        "private_tokenized_pattern_hits": 0
+      },
+      {
+        "path": "/zh/help/unlock-failure",
+        "status": 200,
+        "robots": "noindex, nofollow, noarchive, nocache",
+        "canonical_count": 1,
+        "faqpage_hits": 0,
+        "private_tokenized_pattern_hits": 0
+      },
+      {
+        "path": "/zh/help/payment-refund",
+        "status": 200,
+        "robots": "noindex, nofollow, noarchive, nocache",
+        "canonical_count": 1,
+        "faqpage_hits": 0,
+        "private_tokenized_pattern_hits": 0
+      },
+      {
+        "path": "/zh/help/result-recovery",
+        "status": 200,
+        "robots": "noindex, nofollow, noarchive, nocache",
+        "canonical_count": 1,
+        "faqpage_hits": 0,
+        "private_tokenized_pattern_hits": 0
+      },
+      {
+        "path": "/zh/help/privacy-data",
+        "status": 200,
+        "robots": "noindex, nofollow, noarchive, nocache",
+        "canonical_count": 1,
+        "faqpage_hits": 0,
+        "private_tokenized_pattern_hits": 0
+      },
+      {
+        "path": "/zh/help/use-boundaries",
+        "status": 200,
+        "robots": "noindex, nofollow, noarchive, nocache",
+        "canonical_count": 1,
+        "faqpage_hits": 0,
+        "private_tokenized_pattern_hits": 0
+      },
+      {
+        "path": "/zh/help/data-deletion",
+        "status": 200,
+        "robots": "noindex, nofollow, noarchive, nocache",
+        "canonical_count": 1,
+        "faqpage_hits": 0,
+        "private_tokenized_pattern_hits": 0
+      }
+    ]
+  },
+  "sitemap_llms_smoke": {
+    "checked": [
+      "/sitemap.xml",
+      "/llms.txt",
+      "/llms-full.txt"
+    ],
+    "status": "pass",
+    "all_status_200": true,
+    "help_service_slug_hits": 0,
+    "private_tokenized_pattern_hits": 0
+  },
+  "decision": {
+    "status": "PARTIAL_GO_SCHEMA_RUNTIME_BLOCKED",
+    "publish_state": "published_public_noindex",
+    "robots_runtime_status": "pass",
+    "schema_runtime_status": "blocked",
+    "blocking_reasons": [
+      "Published Help pages now render noindex robots correctly after the deployed fap-web noindex runtime repair.",
+      "Published Help pages still emit zero FAQPage JSON-LD hits across the 12-page smoke sample."
+    ],
+    "next_task_recommendation": "HELP-SERVICE-FAQ-SCHEMA-RUNTIME-R2-01"
+  },
+  "scope_validation": {
+    "cms_mutation_performed": false,
+    "publish_performed": false,
+    "deploy_performed": false,
+    "search_submission_performed": false,
+    "private_url_access_performed": false,
+    "secret_env_cookie_token_read": false,
+    "payment_or_refund_performed": false,
+    "payment_provider_changed": false,
+    "operator_approval_claimed": false
+  }
+}
