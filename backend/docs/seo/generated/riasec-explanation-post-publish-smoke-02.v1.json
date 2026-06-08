@@ -1,0 +1,216 @@
+{
+  "schema": "riasec-explanation-post-publish-smoke-02.v1",
+  "task_id": "SEO-ARTICLE-RIASEC-V2-POST-PUBLISH-SMOKE-02",
+  "generated_at": "2026-06-08T11:01:24+08:00",
+  "decision": "NO_GO_SEARCH_SUBMISSION_SITEMAP_LLMS_NOT_FULLY_CONVERGED",
+  "source_fix": {
+    "task_id": "SEO-ARTICLE-RIASEC-V2-ZH-LOCALE-CONTRACT-FIX-01",
+    "merge_commit": "f66853df400d43b66916eb18486438cf1916274c",
+    "summary": "The zh canonical article route was fixed before this smoke rerun."
+  },
+  "scope": {
+    "public_read_only_smoke": true,
+    "cms_mutation_performed": false,
+    "publish_performed": false,
+    "search_submission_performed": false,
+    "deploy_performed": false,
+    "frontend_deploy_performed": false,
+    "article_content_rewrite_performed": false,
+    "private_or_tokenized_url_accessed": false
+  },
+  "target_articles": [
+    {
+      "article_id": 40,
+      "locale": "zh-CN",
+      "public_locale_segment": "zh",
+      "slug": "riasec-holland-career-interest-test-explained",
+      "canonical_url": "https://fermatmind.com/zh/articles/riasec-holland-career-interest-test-explained"
+    },
+    {
+      "article_id": 41,
+      "locale": "en",
+      "public_locale_segment": "en",
+      "slug": "what-is-riasec-holland-code-career-interest-test",
+      "canonical_url": "https://fermatmind.com/en/articles/what-is-riasec-holland-code-career-interest-test"
+    }
+  ],
+  "public_route_smoke": [
+    {
+      "surface": "backend_public_article_api",
+      "article_id": 40,
+      "locale_query": "zh-CN",
+      "http_status": 200,
+      "status": "passed"
+    },
+    {
+      "surface": "backend_public_article_api",
+      "article_id": 41,
+      "locale_query": "en",
+      "http_status": 200,
+      "status": "passed"
+    },
+    {
+      "surface": "frontend_public_article_detail",
+      "article_id": 40,
+      "http_status": 200,
+      "status": "passed"
+    },
+    {
+      "surface": "frontend_public_article_detail",
+      "article_id": 41,
+      "http_status": 200,
+      "status": "passed"
+    }
+  ],
+  "schema_smoke": [
+    {
+      "article_id": 40,
+      "locale": "zh-CN",
+      "json_ld_types": [
+        "Article",
+        "BreadcrumbList",
+        "FAQPage"
+      ],
+      "faq_jsonld_count": 6,
+      "api_visible_faq_count": 6,
+      "faq_schema_matches_visible_faq": true,
+      "robots": "index, follow",
+      "canonical_link_present": true,
+      "status": "passed"
+    },
+    {
+      "article_id": 41,
+      "locale": "en",
+      "json_ld_types": [
+        "Article",
+        "BreadcrumbList",
+        "FAQPage"
+      ],
+      "faq_jsonld_count": 6,
+      "api_visible_faq_count": 6,
+      "faq_schema_matches_visible_faq": true,
+      "robots": "index, follow",
+      "canonical_link_present": true,
+      "status": "passed"
+    }
+  ],
+  "cta_tracking_smoke": [
+    {
+      "article_id": 40,
+      "locale": "zh-CN",
+      "api_start_test_target": "/zh/tests/holland-career-interest-test-riasec",
+      "api_cta_bundle_count": 1,
+      "api_primary_test_edge": {
+        "test_slug": "holland-career-interest-test-riasec",
+        "role": "primary",
+        "locale": "zh-CN",
+        "visibility": "public"
+      },
+      "frontend_cta_count": 3,
+      "frontend_cta_public_canonical_count": 3,
+      "frontend_cta_tracking_params_present": true,
+      "tracking_event_code_path": "SeoTrackedCtaLink renders TrackedEntryCtaLink with eventName article_to_test_click for article_detail.",
+      "tracking_source_refs": [
+        "fap-web:app/(localized)/[locale]/articles/[slug]/page.tsx:420",
+        "fap-web:components/cta/SeoTrackedCtaLink.tsx:155",
+        "fap-web:components/analytics/TrackedEntryCtaLink.tsx:19"
+      ],
+      "status": "passed"
+    },
+    {
+      "article_id": 41,
+      "locale": "en",
+      "api_start_test_target": "/en/tests/holland-career-interest-test-riasec",
+      "api_cta_bundle_count": 1,
+      "api_primary_test_edge": {
+        "test_slug": "holland-career-interest-test-riasec",
+        "role": "primary",
+        "locale": "en",
+        "visibility": "public"
+      },
+      "frontend_cta_count": 3,
+      "frontend_cta_public_canonical_count": 3,
+      "frontend_cta_tracking_params_present": true,
+      "tracking_event_code_path": "SeoTrackedCtaLink renders TrackedEntryCtaLink with eventName article_to_test_click for article_detail.",
+      "tracking_source_refs": [
+        "fap-web:app/(localized)/[locale]/articles/[slug]/page.tsx:420",
+        "fap-web:components/cta/SeoTrackedCtaLink.tsx:155",
+        "fap-web:components/analytics/TrackedEntryCtaLink.tsx:19"
+      ],
+      "status": "passed"
+    }
+  ],
+  "sitemap_llms_smoke": {
+    "backend_sitemap_source": {
+      "url": "https://api.fermatmind.com/api/v0.5/seo/sitemap-source",
+      "http_status": 200,
+      "source": "backend_sitemap_generator",
+      "count": 2389,
+      "contains_zh_article": false,
+      "contains_en_article": false,
+      "status": "blocked"
+    },
+    "sitemap_xml": {
+      "url": "https://fermatmind.com/sitemap.xml",
+      "http_status": 200,
+      "body_bytes": 333760,
+      "contains_zh_article": false,
+      "contains_en_article": false,
+      "status": "blocked"
+    },
+    "llms_txt": {
+      "url": "https://fermatmind.com/llms.txt",
+      "http_status": 200,
+      "body_bytes": 161390,
+      "contains_zh_article": true,
+      "contains_en_article": true,
+      "status": "passed"
+    },
+    "llms_full_txt": {
+      "url": "https://fermatmind.com/llms-full.txt",
+      "http_status": 200,
+      "body_bytes": 525411,
+      "contains_zh_article": false,
+      "contains_en_article": true,
+      "status": "blocked"
+    },
+    "fully_converged": false,
+    "search_submission_allowed": false
+  },
+  "hard_boundaries": {
+    "no_article_body_title_h1_meta_faq_cta_rewrite": true,
+    "no_publish": true,
+    "no_search_submission": true,
+    "no_deploy": true,
+    "no_frontend_deploy": true,
+    "no_private_or_tokenized_url_access": true,
+    "cta_public_canonical_only": true
+  },
+  "remaining_blockers": [
+    {
+      "id": "backend_sitemap_source_missing_articles",
+      "status": "blocked",
+      "evidence": "The backend sitemap-source response returned 200 but contained 0 matches for both RIASEC article slugs."
+    },
+    {
+      "id": "sitemap_xml_missing_articles",
+      "status": "blocked",
+      "evidence": "The production sitemap.xml returned 200 but contained 0 matches for both RIASEC article slugs."
+    },
+    {
+      "id": "llms_full_missing_zh_article",
+      "status": "blocked",
+      "evidence": "llms-full.txt returned 200 and contained the English article but not the Chinese article."
+    },
+    {
+      "id": "search_submission_not_authorized_or_ready",
+      "status": "hard_gate",
+      "evidence": "Search submission was not authorized and is not ready while sitemap and llms-full are not fully converged."
+    }
+  ],
+  "next_step": {
+    "recommended_task_id": "SEO-ARTICLE-RIASEC-V2-SITEMAP-LLMS-CONVERGENCE-FIX-01",
+    "scope": "Diagnose why published Article ids 40 and 41 are not fully represented in backend sitemap-source, sitemap.xml, and llms-full.txt. Do not submit search URLs.",
+    "search_submission_preflight": "blocked"
+  }
+}
