@@ -10,27 +10,38 @@ This is not a Search Channel submission track. Indexing, URL submission, and ext
 
 ## 2026-06-08 Line Review Update
 
-Decision: backend technical readiness is `CONDITIONAL COMPLETE`; production public activation is `NOT COMPLETE`.
+Decision: backend technical readiness is `COMPLETE`; first-record production activation is `COMPLETE`; DailyGiving public amplification remains `GATED`.
 
 The recent PR line closed the backend contract needed for DailyGiving proof handling:
 
 - operator-approved original charity donation proof images are allowed as public proof media;
 - model-level proof storage gates reject obvious private/public proof boundary violations;
-- public API smoke fixtures prove records and months can return public data without private fields;
+- public API smoke fixtures and production smoke prove records and months can return public data without private fields;
 - first-record private-ledger documentation records the real CNY 75 UNICEF proof review state without committing raw proof;
 - CMS Media Library Filament uploads now persist through the media generator instead of saving temporary `/tmp/...` paths;
 - repository rules now keep DailyGiving backend-authoritative, noindex, and blocked from trust badges or endorsement claims.
 
-The line is not fully operationally complete because the repository does not prove that a production DailyGiving record has been activated with a real public media URL. The remaining non-code gate is operator/CMS production activation.
+The production closeout has now activated the first real DailyGiving record through the backend authority layer. This makes the public ledger operational, but it does not authorize trust badges, paid-page proof claims, social/search amplification, or indexability.
 
-Production activation completion checklist:
+Production activation completion facts:
 
-1. CMS / Media Library uploads or selects the operator-approved original public proof media URL.
-2. The production record binds `proof_public_url` and sets `proof_status=operator_approved_available`.
-3. Proof review and claim review pass before `is_public=true`.
-4. The record keeps `is_indexable=false`.
-5. Public records and months API smoke passes with production data and confirms no private fields leak.
-6. DailyGiving remains blocked from sitemap, `llms.txt`, `llms-full.txt`, trust badges, social distribution, paid-page trust claims, and search submission.
+1. CMS / Media Library now has an operator-approved original public proof media URL:
+   `https://api.fermatmind.com/storage/foundation/daily-giving/public/daily-giving-unicef-receipt-2026-06-05.png`.
+2. Production record `FM-GIVING-2026-06-001` binds `proof_public_url` and uses `proof_status=operator_approved_available`.
+3. The first record is `donation_status=verified`, `is_public=true`, and `is_indexable=false`.
+4. Production records API returns `total=1`; months API returns `["2026-06"]`.
+5. Production public API smoke found no private fields such as `proof_private_path`, `proof_redaction_notes`, `receipt_reference_private`, `internal_notes`, admin user ids, token, secret, or private URL markers.
+6. DailyGiving pages remain `noindex, nofollow, noarchive, nocache`.
+7. `sitemap.xml`, `llms.txt`, and `llms-full.txt` remain free of DailyGiving entries.
+8. A production fap-web PM2 rolling reload was required after activation to clear stale Next public API cache across cluster workers; after reload, `/zh/foundation/daily-giving` and `/en/foundation/daily-giving` consistently rendered the first record and evidence link while preserving noindex.
+
+Remaining gated items:
+
+- no DailyGiving trust badge;
+- no paid-page trust claim;
+- no Search Channel, sitemap submission, or social distribution;
+- no UN / UNICEF official partnership, certification, endorsement, or guaranteed-impact implication;
+- no indexability change until a separate DailyGiving indexability release gate is approved.
 
 Recent PR review: the broader DailyGiving / Foundation line spans dozens of backend PRs plus the cross-repo frontend rendering and indexability PRs. The current dialogue's direct DailyGiving closeout PRs include backend proof/storage/private-ledger/API/media PRs and frontend proof/noindex adapter PRs. Adjacent Help, Science content-page, and RIASEC media PRs do not change the DailyGiving completion state, except that fap-api #1963 fixes the shared Media Library upload path needed for proof media.
 
@@ -115,9 +126,10 @@ Guardrails:
 | Social link frontend display | PR-FDN-SOCIAL-LINK-DISPLAY-IMPLEMENTATION-01 | Complete | fap-web PR #954 |
 | DailyGiving original proof media rule | DAILY-GIVING-ORIGINAL-PROOF-RULES | Complete | fap-api PR #1941 |
 | Operator-approved proof model gate and tests | DAILY-GIVING-REDACTED-PUBLIC-PROOF-01 / proof gate follow-up | Complete | fap-api PR #1950 |
-| First real record private-ledger documentation | DAILY-GIVING-FIRST-RECORD-PRIVATE-LEDGER-01 | Private-ledger complete; public activation still blocked | `backend/docs/operations/daily-giving-first-record-private-ledger.md` |
-| Public API smoke fixture for records/months | DAILY-GIVING-PUBLIC-API-SMOKE-01 | Complete for test fixture; production count still requires runtime smoke | `backend/docs/operations/daily-giving-public-api-smoke.md` |
+| First real record private-ledger documentation | DAILY-GIVING-FIRST-RECORD-PRIVATE-LEDGER-01 | Private-ledger complete; public activation complete | `backend/docs/operations/daily-giving-first-record-private-ledger.md`; production record `FM-GIVING-2026-06-001` |
+| Public API smoke fixture for records/months | DAILY-GIVING-PUBLIC-API-SMOKE-01 | Complete for test fixture and production smoke | `backend/docs/operations/daily-giving-public-api-smoke.md`; production records `total=1`, months `["2026-06"]` |
 | CMS Media Library upload path repair | CMS Media Library Filament upload fix | Complete | fap-api PR #1963 |
+| First public proof media activation | DAILY-GIVING-FIRST-RECORD-PUBLIC-ACTIVATION-01 | Complete | public proof URL returns 200 `image/png`; media asset public API returns published asset |
 | DailyGiving frontend noindex / llms gate | DAILY-GIVING-INDEXABILITY-GATE-01 | Complete | fap-web PR #1059 |
 | DailyGiving frontend proof URL adapter | DAILY-GIVING-PROOF-PUBLIC-URL-FRONTEND-ADAPTER-01 | Complete | fap-web PR #1063 |
 | DailyGiving frontend original proof rendering rules | DAILY-GIVING-ORIGINAL-PROOF-WEB-RULES | Complete | fap-web PR #1067 |
@@ -257,8 +269,8 @@ Expected runtime behavior after deployment:
 Daily Giving discoverability gate:
 
 - `/foundation` may be indexable only when approved Foundation CMS authority is public.
-- `/foundation/daily-giving` may be indexable only when at least one public Daily Giving record exists or an approved empty-state page exists.
-- `/foundation/daily-giving/{YYYY-MM}` may return 200 and indexable only when that month exists in the public months endpoint and contains public records.
+- `/foundation/daily-giving` must remain `noindex, nofollow, noarchive, nocache` even when public records exist, until a separate DailyGiving indexability release gate is approved.
+- `/foundation/daily-giving/{YYYY-MM}` may return 200 only when that month exists in the public months endpoint and contains public records, but it must remain noindex until the same separate indexability gate is approved.
 - Empty or unpublished month archives must not be exposed through sitemap, llms, llms-full, footer, or JSON-LD.
 - Unpublished records must never appear in public API responses, frontend HTML, JSON-LD, sitemap, llms, or social link display.
 
@@ -311,7 +323,8 @@ After Daily Giving data changes:
 3. Verify public API responses.
 4. Verify frontend ledger and month archive pages.
 5. Verify canonical, robots, JSON-LD, sitemap, llms, and footer/nav behavior.
-6. Record post-deploy smoke results when the change crosses a release boundary.
+6. If production frontend HTML does not reflect current backend public API data, perform a scoped fap-web PM2 rolling reload or approved cache revalidation, then recheck both locales.
+7. Record post-deploy smoke results when the change crosses a release boundary.
 
 ## Sidecars And Watch Items
 
@@ -349,5 +362,8 @@ Production read-only smoke examples:
 curl -I https://fermatmind.com/en/foundation
 curl -I https://fermatmind.com/en/foundation/daily-giving
 curl -sS https://fermatmind.com/api/v0.5/foundation/giving-records?locale=en
+curl -sS https://api.fermatmind.com/api/v0.5/foundation/giving-records?per_page=5
+curl -sS https://api.fermatmind.com/api/v0.5/foundation/giving-records/months
+curl -I https://api.fermatmind.com/storage/foundation/daily-giving/public/daily-giving-unicef-receipt-2026-06-05.png
 curl -sS https://fermatmind.com/llms-full.txt | grep -i "foundation"
 ```
