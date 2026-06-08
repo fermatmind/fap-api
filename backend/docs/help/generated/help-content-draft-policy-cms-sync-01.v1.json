@@ -1,0 +1,129 @@
+{
+  "schema": "help-content-draft-policy-cms-sync-01.v1",
+  "task": "HELP-CONTENT-DRAFT-POLICY-CMS-SYNC-01",
+  "generated_at": "2026-06-08",
+  "decision": "CMS_DRAFT_POLICY_SYNC_COMPLETE_PUBLISH_BLOCKED",
+  "scope": "Sync revised v01 Help service policy fields and content fields into the existing 12 Help ContentPage CMS drafts only.",
+  "authorization": {
+    "source": "user",
+    "allowed": "CMS mutation only for the existing 12 Help draft rows and the support_contact, policy_version, reviewer, faq_items, schema_enabled, and revised local package content fields.",
+    "forbidden": [
+      "publish",
+      "deploy",
+      "search submission",
+      "private result/order/share/pay/payment/history URL access",
+      "secret/env/cookie/token value reading",
+      "payment/refund action",
+      "payment-provider behavior change",
+      "Operator approval claim"
+    ]
+  },
+  "source_package": {
+    "path": "backend/docs/help/import-packages/content-pages-draft-source/content_pages.help_service_drafts_01.json",
+    "sha256": "7d034de0b0eb5dc2c78fbb0e1828f3820e36f1c1a03d8f1567722c336438b453",
+    "rows": 12,
+    "local_contract_check": {
+      "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=HelpContentImportPackageTest --no-ansi",
+      "status": "pass",
+      "assertions": 524
+    },
+    "private_url_boundary_check": {
+      "status": "pass",
+      "notes": "Keyword hits were boundary language telling users not to post full order numbers, payment identifiers, result links, history links, or private URLs publicly. No raw order number, payment id, transaction id, tokenized URL, or private URL value was recorded."
+    }
+  },
+  "production_execution": {
+    "connection_method": "ssh_alias_fap-api-prod_batchmode",
+    "runtime_revision_sha": "a98788512c1513750931504d4162d528ad19cc54",
+    "temporary_source_dir": "/tmp/fm-help-policy-cms-sync.IjY3nH",
+    "temporary_source_removed": true,
+    "dry_run": {
+      "command": "php artisan content-pages:import-local-baseline --dry-run --upsert --status=draft --source-dir=/tmp/fm-help-policy-cms-sync.IjY3nH --no-ansi",
+      "exit_code": 0,
+      "files_found": 1,
+      "pages_found": 12,
+      "will_create": 0,
+      "will_update": 12,
+      "will_skip": 0
+    },
+    "import": {
+      "command": "php artisan content-pages:import-local-baseline --upsert --status=draft --source-dir=/tmp/fm-help-policy-cms-sync.IjY3nH --no-ansi",
+      "exit_code": 0,
+      "files_found": 1,
+      "pages_found": 12,
+      "will_create": 0,
+      "will_update": 12,
+      "will_skip": 0
+    }
+  },
+  "post_sync_cms_state": {
+    "checked_rows": 12,
+    "draft": 12,
+    "non_public": 12,
+    "non_indexable": 12,
+    "unpublished": 12,
+    "owner_review": 12,
+    "support_contact_support_at_fermatmind": 12,
+    "policy_version_help_service_policy_v1": 12,
+    "reviewer_unknown": 12,
+    "schema_disabled": 12,
+    "faq_items_count_4": 12,
+    "slugs": [
+      "help-data-deletion",
+      "help-payment-refund",
+      "help-privacy-data",
+      "help-result-recovery",
+      "help-unlock-failure",
+      "help-use-boundaries"
+    ],
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "public_absence_checks": {
+    "method": "Python urllib GET with public canonical routes only",
+    "status": "pass",
+    "routes_checked": 12,
+    "expected_status": 404,
+    "results": [
+      {"route": "/zh/help/unlock-failure", "status": 404},
+      {"route": "/en/help/unlock-failure", "status": 404},
+      {"route": "/zh/help/payment-refund", "status": 404},
+      {"route": "/en/help/payment-refund", "status": 404},
+      {"route": "/zh/help/result-recovery", "status": 404},
+      {"route": "/en/help/result-recovery", "status": 404},
+      {"route": "/zh/help/privacy-data", "status": 404},
+      {"route": "/en/help/privacy-data", "status": 404},
+      {"route": "/zh/help/use-boundaries", "status": 404},
+      {"route": "/en/help/use-boundaries", "status": 404},
+      {"route": "/zh/help/data-deletion", "status": 404},
+      {"route": "/en/help/data-deletion", "status": 404}
+    ]
+  },
+  "scope_validation": {
+    "cms_mutation_performed": true,
+    "cms_mutation_limited_to_existing_12_help_drafts": true,
+    "publish_performed": false,
+    "deploy_performed": false,
+    "search_submission_performed": false,
+    "private_url_access_performed": false,
+    "secret_env_cookie_token_read": false,
+    "payment_or_refund_performed": false,
+    "payment_provider_changed": false,
+    "operator_approval_claimed": false
+  },
+  "sidecars": [
+    {
+      "id": "HELP-CONTENT-DRAFT-OPERATOR-REVIEW-R2-01",
+      "status": "ready_for_separate_review_request",
+      "note": "The 12 CMS drafts now contain the revised policy fields. Operator review is still not passed and must be requested separately."
+    },
+    {
+      "id": "HELP-CONTENT-DRAFT-PUBLISH-BLOCK",
+      "status": "hard_gate",
+      "note": "Publish remains blocked until Operator review passes, publish preflight passes, and exact publish authorization is provided."
+    }
+  ],
+  "next_task_recommendation": "HELP-CONTENT-DRAFT-OPERATOR-REVIEW-R2-01"
+}
