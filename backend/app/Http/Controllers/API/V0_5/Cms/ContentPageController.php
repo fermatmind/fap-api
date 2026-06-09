@@ -35,7 +35,7 @@ final class ContentPageController extends Controller
             ->where('org_id', $validated['org_id'])
             ->where('slug', $this->normalizeSlug($slug))
             ->where('locale', $validated['locale'])
-            ->publishedPublic()
+            ->publiclyReadable()
             ->first();
 
         if (! $page instanceof ContentPage) {
@@ -627,8 +627,8 @@ final class ContentPageController extends Controller
     private function isScienceControlledPage(string $normalizedSlug, string $pageType, bool $scienceReviewRequired): bool
     {
         return $scienceReviewRequired
-            || in_array($pageType, ['science', 'methodology', 'boundary'], true)
-            || in_array($normalizedSlug, ['science', 'method-boundaries', 'item-design-notes', 'reliability-validity', 'data-privacy', 'common-misconceptions'], true);
+            || in_array($pageType, ContentPage::SCIENCE_CONTROLLED_PAGE_TYPES, true)
+            || in_array($normalizedSlug, ContentPage::SCIENCE_CONTROLLED_SLUGS, true);
     }
 
     private function dateString(mixed $value): ?string

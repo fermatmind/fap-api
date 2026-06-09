@@ -80,14 +80,8 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
             $pages = ContentPage::query()
                 ->withoutGlobalScopes()
                 ->where('org_id', 0)
-                ->where('status', ContentPage::STATUS_PUBLISHED)
-                ->where('is_public', true)
-                ->where('is_indexable', true)
+                ->publiclyIndexable()
                 ->whereIn('locale', ['en', 'zh-CN'])
-                ->where(static function ($query): void {
-                    $query->whereNull('published_at')
-                        ->orWhere('published_at', '<=', now());
-                })
                 ->orderBy('locale')
                 ->orderBy('slug')
                 ->get();

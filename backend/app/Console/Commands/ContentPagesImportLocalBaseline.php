@@ -194,6 +194,13 @@ final class ContentPagesImportLocalBaseline extends Command
             'reviewer' => $this->nullableString($row['reviewer'] ?? null),
             'faq_items' => $this->normalizeFaqItems($row['faq_items'] ?? $row['faqItems'] ?? []),
             'schema_enabled' => (bool) ($row['schema_enabled'] ?? $row['schemaEnabled'] ?? false),
+            'publish_allowed' => (bool) ($row['publish_allowed'] ?? $row['publishAllowed'] ?? false),
+            'operator_approval_required' => (bool) ($row['operator_approval_required'] ?? $row['operatorApprovalRequired'] ?? true),
+            'operator_approved_at' => $this->nullableString($row['operator_approved_at'] ?? $row['operatorApprovedAt'] ?? null),
+            'claim_gate_status' => $this->normalizeClaimGateStatus($row['claim_gate_status'] ?? $row['claimGateStatus'] ?? null),
+            'forbidden_claims' => $this->normalizeForbiddenClaims($row['forbidden_claims'] ?? $row['forbiddenClaims'] ?? []),
+            'faq_schema_eligible' => (bool) ($row['faq_schema_eligible'] ?? $row['faqSchemaEligible'] ?? false),
+            'schema_eligibility_reviewed_at' => $this->nullableString($row['schema_eligibility_reviewed_at'] ?? $row['schemaEligibilityReviewedAt'] ?? null),
             'status' => $status,
         ];
     }
@@ -285,6 +292,16 @@ final class ContentPagesImportLocalBaseline extends Command
         return $status === ContentPage::STATUS_PUBLISHED ? 'approved' : 'draft';
     }
 
+    private function normalizeClaimGateStatus(mixed $value): string
+    {
+        $normalized = strtolower(trim((string) $value));
+        if (in_array($normalized, ContentPage::CLAIM_GATE_STATUSES, true)) {
+            return $normalized;
+        }
+
+        return 'not_reviewed';
+    }
+
     private function defaultTranslationGroupId(string $slug): string
     {
         return 'content-page-'.preg_replace('/[^a-z0-9]+/', '-', $slug);
@@ -334,6 +351,26 @@ final class ContentPagesImportLocalBaseline extends Command
         }
 
         return $items;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function normalizeForbiddenClaims(mixed $value): array
+    {
+        if (! is_array($value)) {
+            return [];
+        }
+
+        $claims = [];
+        foreach ($value as $claim) {
+            $normalized = trim((string) $claim);
+            if ($normalized !== '') {
+                $claims[] = $normalized;
+            }
+        }
+
+        return array_values(array_unique($claims));
     }
 
     /**

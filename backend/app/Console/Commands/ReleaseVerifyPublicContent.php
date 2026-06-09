@@ -122,8 +122,7 @@ final class ReleaseVerifyPublicContent extends Command
                 ->where('locale', $row['locale'])
                 ->where('kind', $row['kind'])
                 ->where('path', $row['path'])
-                ->where('status', ContentPage::STATUS_PUBLISHED)
-                ->where('is_public', true)
+                ->publiclyReadable()
                 ->exists();
 
             if (! $exists) {
@@ -134,8 +133,7 @@ final class ReleaseVerifyPublicContent extends Command
         $publishedPublicCount = ContentPage::query()
             ->withoutGlobalScopes()
             ->where('org_id', 0)
-            ->where('status', ContentPage::STATUS_PUBLISHED)
-            ->where('is_public', true)
+            ->publiclyReadable()
             ->count();
 
         return [
