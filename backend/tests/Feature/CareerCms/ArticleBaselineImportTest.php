@@ -7,6 +7,7 @@ namespace Tests\Feature\CareerCms;
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
+use App\Services\Cms\ArticleBodyHeadingGuard;
 use App\Services\Cms\ArticleSeoService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
@@ -111,6 +112,7 @@ final class ArticleBaselineImportTest extends TestCase
             data_get($editorial->cover_image_variants, 'editorial_metadata.cover_image_style_tag')
         );
         $this->assertContains('/zh/tests/mbti-personality-test-16-personality-types', data_get($editorial->cover_image_variants, 'editorial_metadata.internal_links', []));
+        $this->assertImportedArticleBodiesContainNoH1();
 
         $this->assertSixEditorialArticlesConvergeThroughSeoAuthority();
 
@@ -318,6 +320,29 @@ final class ArticleBaselineImportTest extends TestCase
 
         $this->assertLessThanOrEqual(64, mb_strlen((string) $article->translation_group_id));
         $this->assertStringStartsWith('article:', (string) $article->translation_group_id);
+    }
+
+    private function assertImportedArticleBodiesContainNoH1(): void
+    {
+        $guard = app(ArticleBodyHeadingGuard::class);
+        $articles = Article::query()
+            ->withoutGlobalScopes()
+            ->with('publishedRevision')
+            ->get();
+
+        foreach ($articles as $article) {
+            $this->assertFalse(
+                $guard->containsMarkdownH1((string) $article->content_md),
+                sprintf('Article body contains H1 after baseline import: %s/%s', (string) $article->locale, (string) $article->slug)
+            );
+
+            if ($article->publishedRevision instanceof ArticleTranslationRevision) {
+                $this->assertFalse(
+                    $guard->containsMarkdownH1((string) $article->publishedRevision->content_md),
+                    sprintf('Published revision body contains H1 after baseline import: %s/%s', (string) $article->locale, (string) $article->slug)
+                );
+            }
+        }
     }
 
     private function assertSixEditorialArticlesConvergeThroughSeoAuthority(): void

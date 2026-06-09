@@ -11,6 +11,7 @@ use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTag;
 use App\Models\ArticleTestEdge;
 use App\Models\ArticleTranslationRevision;
+use App\Services\Cms\ArticleBodyHeadingGuard;
 use App\Services\Cms\ArticleTranslationRevisionWorkspace;
 use App\Services\Cms\EditorialPackage\Config\EvergreenAnchors;
 use Illuminate\Support\Facades\DB;
@@ -167,6 +168,7 @@ final class EditorialPackageDraftImporter
     public function __construct(
         private readonly ArticleTranslationRevisionWorkspace $revisionWorkspace,
         private readonly EditorialPackageInputNormalizer $inputNormalizer,
+        private readonly ArticleBodyHeadingGuard $articleBodyHeadingGuard,
     ) {}
 
     /**
@@ -378,7 +380,7 @@ final class EditorialPackageDraftImporter
     private function normalize(array $package, ?string $localeOverride): array
     {
         $package = $this->inputNormalizer->normalize($package);
-        $body = (string) ($package['body_markdown'] ?? '');
+        $body = $this->articleBodyHeadingGuard->downgradeMarkdownH1ToH2((string) ($package['body_markdown'] ?? ''));
         $answerSurface = is_array($package['answer_surface_v1'] ?? null) ? $package['answer_surface_v1'] : [];
 
         return [

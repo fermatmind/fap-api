@@ -9,6 +9,7 @@ use App\Models\ArticleCategory;
 use App\Models\ArticleEditorialPackageImport;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
+use App\Services\Cms\ArticleBodyHeadingGuard;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
@@ -119,6 +120,8 @@ final class ArticleImportEditorialPackageCommandTest extends TestCase
             ->where('slug', 'ai-personality-editorial-draft')
             ->where('locale', 'zh-CN')
             ->firstOrFail();
+        $expectedBody = app(ArticleBodyHeadingGuard::class)
+            ->downgradeMarkdownH1ToH2((string) $package['body_markdown']);
 
         $this->assertSame('draft', (string) $article->status);
         $this->assertFalse((bool) $article->is_public);
@@ -126,7 +129,8 @@ final class ArticleImportEditorialPackageCommandTest extends TestCase
         $this->assertNull($article->published_revision_id);
         $this->assertSame('article_mbti_vs_holland_career_choice_v1', (string) $article->translation_group_id);
         $this->assertSame($package['title'], (string) $article->title);
-        $this->assertSame($package['body_markdown'], (string) $article->content_md);
+        $this->assertSame($expectedBody, (string) $article->content_md);
+        $this->assertFalse(app(ArticleBodyHeadingGuard::class)->containsMarkdownH1((string) $article->content_md));
         $this->assertSame($package['cover_image'], (string) $article->cover_image_url);
         $this->assertSame($package['cover_image_alt'], (string) $article->cover_image_alt);
         $this->assertSame($package['category'], (string) $article->category?->name);
@@ -138,7 +142,7 @@ final class ArticleImportEditorialPackageCommandTest extends TestCase
 
         $this->assertInstanceOf(ArticleTranslationRevision::class, $article->workingRevision);
         $this->assertSame(ArticleTranslationRevision::STATUS_HUMAN_REVIEW, (string) $article->workingRevision->revision_status);
-        $this->assertSame($package['body_markdown'], (string) $article->workingRevision->content_md);
+        $this->assertSame($expectedBody, (string) $article->workingRevision->content_md);
         $this->assertSame($package['seo_title'], (string) $article->workingRevision->seo_title);
         $this->assertSame($package['meta_description'], (string) $article->workingRevision->seo_description);
 
@@ -154,8 +158,8 @@ final class ArticleImportEditorialPackageCommandTest extends TestCase
         $this->assertSame($package['references'], $metadata['references'] ?? []);
         $this->assertSame($package['answer_surface_v1']['quick_answer'], data_get($metadata, 'answer_surface_v1.quick_answer'));
         $this->assertSame('below_intro', $metadata['answer_surface_visibility'] ?? null);
-        $this->assertSame($this->normalizedBodyHash($package['body_markdown']), data_get($metadata, 'validation.body_hash'));
-        $this->assertSame(['1:AI 与人格如何共同影响判断', '2:执行摘要', '2:为什么这不是单纯技术问题', '2:结论'], data_get($metadata, 'validation.heading_sequence'));
+        $this->assertSame($this->normalizedBodyHash($expectedBody), data_get($metadata, 'validation.body_hash'));
+        $this->assertSame(['2:AI 与人格如何共同影响判断', '2:执行摘要', '2:为什么这不是单纯技术问题', '2:结论'], data_get($metadata, 'validation.heading_sequence'));
 
         $this->assertSame($sensitiveCounts, $this->sensitiveTableCounts());
         $importLog = ArticleEditorialPackageImport::query()
@@ -165,13 +169,13 @@ final class ArticleImportEditorialPackageCommandTest extends TestCase
         $this->assertSame(ArticleEditorialPackageImport::STATUS_IMPORTED, (string) $importLog->status);
         $this->assertSame((int) $article->id, (int) $importLog->article_id);
         $this->assertSame('editorial_journal', (string) $importLog->content_track);
-        $this->assertSame($this->normalizedBodyHash($package['body_markdown']), (string) $importLog->body_hash);
+        $this->assertSame($this->normalizedBodyHash($expectedBody), (string) $importLog->body_hash);
         $this->assertSame(2, (int) $importLog->references_count);
         $this->assertSame('complete', data_get($importLog->references_json, 'status'));
         $this->assertSame('complete', data_get($importLog->media_json, 'status'));
         $this->assertSame('complete', data_get($importLog->graph_json, 'status'));
         $this->assertSame('passed', data_get($importLog->claim_result_json, 'status'));
-        $this->assertSame(['1:AI 与人格如何共同影响判断', '2:执行摘要', '2:为什么这不是单纯技术问题', '2:结论'], $importLog->heading_sequence_json);
+        $this->assertSame(['2:AI 与人格如何共同影响判断', '2:执行摘要', '2:为什么这不是单纯技术问题', '2:结论'], $importLog->heading_sequence_json);
         $this->assertStringNotContainsString($package['body_markdown'], json_encode($importLog->toArray(), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
         $this->getJson('/api/v0.5/articles/ai-personality-editorial-draft?locale=zh-CN')
             ->assertNotFound();

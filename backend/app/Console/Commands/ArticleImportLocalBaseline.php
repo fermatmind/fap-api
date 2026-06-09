@@ -9,6 +9,7 @@ use App\Models\ArticleCategory;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTag;
 use App\Models\ArticleTranslationRevision;
+use App\Services\Cms\ArticleBodyHeadingGuard;
 use App\Services\Cms\ArticlePublishService;
 use App\Services\Cms\ArticleSeoService;
 use App\Services\Cms\ArticleService;
@@ -36,6 +37,7 @@ final class ArticleImportLocalBaseline extends Command
     protected $description = 'Import committed article baseline content into Article CMS tables.';
 
     public function handle(
+        ArticleBodyHeadingGuard $articleBodyHeadingGuard,
         ArticleService $articleService,
         ArticlePublishService $articlePublishService,
         ArticleTranslationRevisionWorkspace $translationRevisionWorkspace,
@@ -59,7 +61,7 @@ final class ArticleImportLocalBaseline extends Command
             $selectedArticles = $this->normalizeSelectedArticles((array) $this->option('article'));
 
             $documents = $this->readDocuments($sourceDir, $selectedLocales);
-            $articles = $this->normalizeArticles($documents, $selectedArticles);
+            $articles = $this->normalizeArticles($documents, $selectedArticles, $articleBodyHeadingGuard);
             $summary = $this->importRows(
                 $articles,
                 [
@@ -196,8 +198,11 @@ final class ArticleImportLocalBaseline extends Command
      * @param  array<int, string>  $selectedArticles
      * @return array<int, array<string, mixed>>
      */
-    private function normalizeArticles(array $documents, array $selectedArticles = []): array
-    {
+    private function normalizeArticles(
+        array $documents,
+        array $selectedArticles,
+        ArticleBodyHeadingGuard $articleBodyHeadingGuard,
+    ): array {
         $rows = [];
         $seen = [];
 
@@ -224,7 +229,7 @@ final class ArticleImportLocalBaseline extends Command
                     ));
                 }
 
-                $normalized = $this->normalizeArticleRow($row, $documentLocale, $file, (int) $index);
+                $normalized = $this->normalizeArticleRow($row, $documentLocale, $file, (int) $index, $articleBodyHeadingGuard);
                 if ($selectedArticles !== [] && ! in_array((string) $normalized['slug'], $selectedArticles, true)) {
                     continue;
                 }
@@ -256,6 +261,7 @@ final class ArticleImportLocalBaseline extends Command
         string $documentLocale,
         string $file,
         int $index,
+        ArticleBodyHeadingGuard $articleBodyHeadingGuard,
     ): array {
         $slug = strtolower(trim((string) ($row['slug'] ?? '')));
         if ($slug === '') {
@@ -284,7 +290,7 @@ final class ArticleImportLocalBaseline extends Command
             ));
         }
 
-        $contentMd = trim((string) ($row['content_md'] ?? ''));
+        $contentMd = trim($articleBodyHeadingGuard->downgradeMarkdownH1ToH2((string) ($row['content_md'] ?? '')));
         if ($contentMd === '') {
             throw new RuntimeException(sprintf(
                 'Baseline file %s is missing content_md for slug=%s.',
