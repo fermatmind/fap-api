@@ -52532,7 +52532,7 @@
     "repo": "fap-api",
     "branch": "codex/career-zh-display-parity-04-live-gate",
     "base": "origin/main",
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "train_scope": "career_zh_display_parity",
     "title": "CAREER-ZH-DISPLAY-PARITY-04: chore(career): gate zh display live parity",
     "depends_on": [
@@ -52580,14 +52580,26 @@
         "evidence": "git diff --check passed after implementation; git diff --cached --check will be run after staging."
       },
       "github": {
-        "status": "pending",
+        "status": "pass",
         "pr_url": "https://github.com/fermatmind/fap-api/pull/2023",
-        "head_sha": "d02233d1372b302ee06569d5ddbc03f92983bef7",
-        "evidence": "PR #2023 opened for CAREER-ZH-DISPLAY-PARITY-04; GitHub checks are pending."
+        "head_sha": "da07e91896d688efbbe5f20461433197db6972aa",
+        "checks": [
+          "hygiene",
+          "supply-chain",
+          "content-pack-build-validate",
+          "verify-mbti-legacy",
+          "verify-mbti-v2",
+          "verify-bigfive",
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "Semgrep OSS"
+        ],
+        "merge_state": "CLEAN",
+        "evidence": "GitHub checks passed for head da07e91896d688efbbe5f20461433197db6972aa and gh pr view reported mergeStateStatus=CLEAN."
       }
     },
     "failure_reason": null,
-    "commit_sha": "d02233d1372b302ee06569d5ddbc03f92983bef7",
+    "commit_sha": "da07e91896d688efbbe5f20461433197db6972aa",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2023",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -52620,6 +52632,11 @@
         "at": "2026-06-09T16:58:00Z",
         "status": "github_checks_pending",
         "note": "Opened PR #2023 and pushed implementation commit d02233d1372b302ee06569d5ddbc03f92983bef7; waiting for GitHub checks."
+      },
+      {
+        "at": "2026-06-09T17:02:20Z",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed and PR #2023 reported mergeStateStatus=CLEAN for head da07e91896d688efbbe5f20461433197db6972aa."
       }
     ]
   }
