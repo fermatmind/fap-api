@@ -51967,7 +51967,7 @@
     "repo": "fap-api",
     "branch": "codex/article-h1-02",
     "base": "origin/main",
-    "status": "committed_pending_push",
+    "status": "github_checks_pending",
     "train_scope": "article_h1_single_dom",
     "title": "ARTICLE-H1-02: fix(cms): reject article body h1 at save and publish",
     "depends_on": [
@@ -52025,13 +52025,14 @@
       },
       "github": {
         "status": "pending",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/2014",
         "checks": [],
         "failure_reason": null
       }
     },
     "failure_reason": null,
     "commit_sha": "0f18583d13a2498637cd650ed871d2cef8b37538",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2014",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -52056,6 +52057,11 @@
         "at": "2026-06-09",
         "status": "committed_pending_push",
         "note": "Created scoped implementation commit 0f18583d13a2498637cd650ed871d2cef8b37538."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "github_checks_pending",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/2014 from branch codex/article-h1-02; GitHub checks pending."
       }
     ]
   },
