@@ -1528,6 +1528,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_article_body_h1_guard_changes(): void
+    {
+        $changed = [
+            'backend/app/Services/Cms/ArticleBodyHeadingGuard.php',
+            'backend/app/Services/Cms/ArticleTranslationRevisionWorkspace.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_article_publishing_ops_dashboard_changes(): void
     {
         $changed = [
@@ -2807,6 +2817,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isArticleBodyH1GuardFile($file)) {
+                continue;
+            }
+
             if ($this->isArticlePublishingOpsDashboardFile($file)) {
                 continue;
             }
@@ -3635,6 +3649,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return $file === 'backend/app/Console/Commands/ArticleImportEditorialPackage.php'
             || str_starts_with($file, 'backend/app/Services/Cms/EditorialPackage/');
+    }
+
+    private function isArticleBodyH1GuardFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Services/Cms/ArticleBodyHeadingGuard.php',
+            'backend/app/Services/Cms/ArticleTranslationRevisionWorkspace.php',
+        ], true);
     }
 
     private function isArticlePublishingOpsDashboardFile(string $file): bool

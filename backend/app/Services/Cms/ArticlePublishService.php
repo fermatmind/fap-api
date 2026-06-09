@@ -16,6 +16,7 @@ final class ArticlePublishService
 {
     public function __construct(
         private readonly SeoDiscoverabilityCacheInvalidator $seoDiscoverabilityCacheInvalidator,
+        private readonly ArticleBodyHeadingGuard $articleBodyHeadingGuard,
     ) {}
 
     public function publishArticle(int $articleId, string $source = 'article_publish_service'): Article
@@ -111,6 +112,11 @@ final class ArticlePublishService
         if (trim((string) $article->content_md) === '') {
             throw new InvalidArgumentException('content_md must exist before publish.');
         }
+
+        $this->articleBodyHeadingGuard->assertNoBodyH1(
+            (string) $article->content_md,
+            (string) ($article->content_html ?? '')
+        );
     }
 
     private function resolvePublishableRevision(Article $article): ArticleTranslationRevision
@@ -136,6 +142,8 @@ final class ArticlePublishService
         if (trim((string) $revision->content_md) === '') {
             throw new InvalidArgumentException('revision content_md must exist before publish.');
         }
+
+        $this->articleBodyHeadingGuard->assertNoBodyH1((string) $revision->content_md);
 
         return $revision;
     }

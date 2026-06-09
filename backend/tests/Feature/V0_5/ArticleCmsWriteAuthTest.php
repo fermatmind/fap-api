@@ -67,6 +67,27 @@ final class ArticleCmsWriteAuthTest extends TestCase
         ]);
     }
 
+    public function test_cms_article_create_rejects_body_h1(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_WRITE]);
+
+        $response = $this->withSession(['ops_org_id' => 16])
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->postJson('/api/v0.5/cms/articles', array_merge($this->articlePayload('body-h1-create'), [
+                'content_md' => "# Duplicate article title\n\nBody",
+            ]));
+
+        $response->assertStatus(422)
+            ->assertJsonPath('ok', false)
+            ->assertJsonPath('error_code', 'INVALID_ARGUMENT');
+
+        $this->assertStringContainsString('must not contain h1', (string) $response->json('message'));
+        $this->assertDatabaseMissing('articles', [
+            'slug' => 'body-h1-create',
+            'org_id' => 16,
+        ]);
+    }
+
     public function test_admin_owner_permission_can_write_articles(): void
     {
         $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_OWNER]);
@@ -209,6 +230,69 @@ final class ArticleCmsWriteAuthTest extends TestCase
         $this->assertFalse((bool) $article->is_public);
         $this->assertNull($article->published_at);
         $this->assertNull($article->scheduled_at);
+    }
+
+    public function test_cms_article_update_rejects_markdown_or_html_body_h1(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_WRITE]);
+        $article = Article::query()->create([
+            'org_id' => 32,
+            'slug' => 'body-h1-update-target',
+            'locale' => 'en',
+            'title' => 'Body H1 update target',
+            'content_md' => '## Existing section',
+            'content_html' => '<h2>Existing section</h2>',
+            'status' => 'draft',
+            'is_public' => false,
+            'is_indexable' => true,
+        ]);
+
+        $response = $this->withSession(['ops_org_id' => 32])
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->putJson('/api/v0.5/cms/articles/'.$article->id, [
+                'content_md' => "# Duplicate article title\n\nBody",
+                'content_html' => '<h1>Duplicate article title</h1>',
+            ]);
+
+        $response->assertStatus(422)
+            ->assertJsonPath('ok', false)
+            ->assertJsonPath('error_code', 'INVALID_ARGUMENT');
+
+        $this->assertStringContainsString('content_md', (string) $response->json('message'));
+        $this->assertStringContainsString('content_html', (string) $response->json('message'));
+        $this->assertDatabaseHas('articles', [
+            'id' => $article->id,
+            'content_md' => '## Existing section',
+            'content_html' => '<h2>Existing section</h2>',
+        ]);
+    }
+
+    public function test_article_publish_rejects_existing_body_h1(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_RELEASE]);
+        $article = Article::query()->create([
+            'org_id' => 33,
+            'slug' => 'body-h1-publish-target',
+            'locale' => 'en',
+            'title' => 'Body H1 publish target',
+            'content_md' => "# Duplicate article title\n\nBody",
+            'status' => 'draft',
+            'is_public' => false,
+            'is_indexable' => true,
+        ]);
+
+        $response = $this->withSession(['ops_org_id' => 33])
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->postJson('/api/v0.5/cms/articles/'.$article->id.'/publish');
+
+        $response->assertStatus(422)
+            ->assertJsonPath('ok', false)
+            ->assertJsonPath('error_code', 'INVALID_ARGUMENT');
+
+        $article->refresh();
+        $this->assertSame('draft', (string) $article->status);
+        $this->assertFalse((bool) $article->is_public);
+        $this->assertNull($article->published_revision_id);
     }
 
     public function test_cms_article_create_rejects_foreign_category_and_tags(): void

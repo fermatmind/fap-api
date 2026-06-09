@@ -10,6 +10,7 @@ use App\Models\ArticleCategory;
 use App\Models\ArticleTag;
 use App\Models\ArticleTestEdge;
 use App\Models\ArticleTranslationRevision;
+use App\Services\Cms\ArticleBodyHeadingGuard;
 use App\Services\Cms\ArticlePublishService;
 use App\Services\Cms\ArticleSeoService;
 use App\Services\Cms\ArticleService;
@@ -29,6 +30,7 @@ class ArticleController extends Controller
     public function __construct(
         private readonly ArticleService $articleService,
         private readonly ArticlePublishService $articlePublishService,
+        private readonly ArticleBodyHeadingGuard $articleBodyHeadingGuard,
         private readonly ArticleSeoService $articleSeoService,
         private readonly AnswerSurfaceContractService $answerSurfaceContractService,
         private readonly LandingSurfaceContractService $landingSurfaceContractService,
@@ -1052,7 +1054,7 @@ class ArticleController extends Controller
             'published_revision_id' => (int) $revision->id,
             'title' => (string) $revision->title,
             'excerpt' => $revision->excerpt,
-            'content_md' => (string) $revision->content_md,
+            'content_md' => $this->articleBodyHeadingGuard->downgradeMarkdownH1ToH2((string) $revision->content_md),
             'content_html' => null,
             'cover_image_url' => PublicMediaUrlGuard::sanitizeNullableUrl($article->cover_image_url),
             'cover_image_alt' => $article->cover_image_alt,
@@ -1140,8 +1142,10 @@ class ArticleController extends Controller
             'locale' => (string) $article->locale,
             'title' => (string) $article->title,
             'excerpt' => $article->excerpt,
-            'content_md' => (string) $article->content_md,
-            'content_html' => $article->content_html,
+            'content_md' => $this->articleBodyHeadingGuard->downgradeMarkdownH1ToH2((string) $article->content_md),
+            'content_html' => $article->content_html !== null
+                ? $this->articleBodyHeadingGuard->downgradeHtmlH1ToH2((string) $article->content_html)
+                : null,
             'cover_image_url' => PublicMediaUrlGuard::sanitizeNullableUrl($article->cover_image_url),
             'cover_image_alt' => $article->cover_image_alt,
             'cover_image_width' => $article->cover_image_width !== null ? (int) $article->cover_image_width : null,
