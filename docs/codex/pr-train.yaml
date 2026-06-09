@@ -23754,7 +23754,7 @@ prs:
     branch: codex/seo-conv-ingest-02
     title: "SEO-CONV-INGEST-02: feat(analytics): accept canonical SEO conversion funnel ingest"
     train_scope: seo_conversion_tracking
-    status: in_progress
+    status: merged
     scope:
       - Add a backend SEO attribution ingest route that accepts the canonical public SEO funnel events.
       - Accept landing_pv, article_to_test_click, start_test, complete_test, and view_result as distinct event codes.
@@ -23808,7 +23808,7 @@ prs:
     branch: codex/seo-conv-daily-04
     title: "SEO-CONV-DAILY-04: feat(analytics): aggregate SEO conversion funnel daily"
     train_scope: seo_conversion_tracking
-    status: pending_dependency
+    status: in_progress
     scope:
       - Aggregate canonical SEO conversion events into a safe daily read model by URL, article, test, and session dimensions.
       - Support landing_pv, article_to_test_click, start_test, complete_test, and view_result counts without mixing article_to_test_click into start_test.
@@ -23819,6 +23819,22 @@ prs:
       - backend/tests/Feature/Analytics/**
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
+    do_not:
+      - Add Ops/CMS dashboard views, frontend runtime tracking, ingest routes, production writes, deploys, CMS mutations, or public URL submissions in this PR.
+      - Store raw session_id, raw order identifiers, raw result identifiers, raw attempt identifiers, private paths, or sensitive query values in the daily read model.
+      - Reclassify article_to_test_click as start_test.
+    validation:
+      - php -l backend/app/Services/Analytics/SeoConversionDailyBuilder.php
+      - php -l backend/app/Console/Commands/RefreshSeoConversionDailyCommand.php
+      - php -l backend/database/migrations/2026_06_09_000100_create_analytics_seo_conversion_daily_table.php
+      - php -l backend/tests/Feature/Analytics/SeoConversionDailyBuilderTest.php
+      - cd backend && php artisan list --raw | rg "analytics:refresh-seo-conversion-daily"
+      - cd backend && php artisan test --filter=SeoConversionDailyBuilderTest --no-ansi
+      - cd backend && ./vendor/bin/pint --test app/Services/Analytics/SeoConversionDailyBuilder.php app/Console/Commands/RefreshSeoConversionDailyCommand.php tests/Feature/Analytics/SeoConversionDailyBuilderTest.php
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- backend/app/Services/Analytics/SeoConversionDailyBuilder.php backend/app/Console/Commands/RefreshSeoConversionDailyCommand.php backend/database/migrations/2026_06_09_000100_create_analytics_seo_conversion_daily_table.php backend/tests/Feature/Analytics/SeoConversionDailyBuilderTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
     production_write_execution: false
     database_mutation: true
