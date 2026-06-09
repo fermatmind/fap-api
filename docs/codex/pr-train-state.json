@@ -52103,7 +52103,7 @@
     "repo": "fap-api",
     "branch": "codex/article-h1-04",
     "base": "origin/main",
-    "status": "pr_opened",
+    "status": "ready_to_merge",
     "train_scope": "article_h1_single_dom",
     "title": "ARTICLE-H1-04: fix(ops): constrain article editor heading controls",
     "depends_on": [
@@ -52142,10 +52142,14 @@
       "diff_check": {
         "status": "pass",
         "evidence": "git diff --check -- backend/app/Filament/Ops/Resources/ArticleResource.php backend/lang docs/codex/pr-train.yaml docs/codex/pr-train-state.json and git diff --cached --check passed before staging."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "GitHub checks for head a8e300f908c22c94caba1c61becf8c6b1c5f2525 passed: hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep blocking secrets, semgrep sarif non-blocking upload, and Semgrep OSS."
       }
     },
     "failure_reason": null,
-    "commit_sha": "f676123e181ac059493157dbd97e2f4ca16742c2",
+    "commit_sha": "a8e300f908c22c94caba1c61becf8c6b1c5f2525",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2015",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -52171,6 +52175,11 @@
         "at": "2026-06-09",
         "status": "pr_opened",
         "note": "Opened fap-api PR #2015 for ARTICLE-H1-04."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed and merge state was CLEAN for head a8e300f908c22c94caba1c61becf8c6b1c5f2525."
       }
     ]
   }
