@@ -52187,7 +52187,7 @@
     "repo": "fap-api",
     "branch": "codex/career-zh-display-parity-01-audit",
     "base": "origin/main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "career_zh_display_parity",
     "title": "CAREER-ZH-DISPLAY-PARITY-01: feat(career): audit zh display parity",
     "depends_on": [],
@@ -52245,14 +52245,18 @@
         ],
         "merge_state": "CLEAN",
         "evidence": "GitHub checks passed for PR #2020 at head ef50a4a66477dac4ea03cd822d6c30e1d958058a and mergeStateStatus is CLEAN."
+      },
+      "merge_reconciliation": {
+        "status": "pass",
+        "evidence": "GitHub PR #2020 is MERGED; origin/main contains merge commit af382b46070d1455f6b7e2d9fe9af18ba7cb0e55; remote branch codex/career-zh-display-parity-01-audit was pruned; local branch cleanup was complete; post-merge command registration and one-slug read-only audit passed."
       }
     },
     "failure_reason": null,
-    "commit_sha": "ef50a4a66477dac4ea03cd822d6c30e1d958058a",
+    "commit_sha": "af382b46070d1455f6b7e2d9fe9af18ba7cb0e55",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2020",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-09T15:28:28Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "sidecar_issues": [],
     "transitions": [
       {
@@ -52284,6 +52288,11 @@
         "at": "2026-06-09",
         "status": "ready_to_merge",
         "note": "GitHub checks passed and merge state was CLEAN for PR #2020 head ef50a4a66477dac4ea03cd822d6c30e1d958058a."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "reconciled_merged",
+        "note": "Reconciled inside CAREER-ZH-DISPLAY-PARITY-02 metadata scope after PR #2020 squash merge. origin/main contains af382b46070d1455f6b7e2d9fe9af18ba7cb0e55 and local/remote task branches are cleaned up."
       }
     ]
   },
@@ -52291,7 +52300,7 @@
     "repo": "fap-api",
     "branch": "codex/career-zh-display-parity-02-import-manifest",
     "base": "origin/main",
-    "status": "pending_dependency",
+    "status": "ready_to_merge",
     "train_scope": "career_zh_display_parity",
     "title": "CAREER-ZH-DISPLAY-PARITY-02: feat(career): support zh display import manifests",
     "depends_on": [
@@ -52303,13 +52312,59 @@
         "evidence": "User explicitly authorized adding and executing CAREER-ZH-DISPLAY-PARITY-01 through CAREER-ZH-DISPLAY-PARITY-04, including fap-api docs/codex metadata updates, on 2026-06-09."
       },
       "dependency": {
-        "status": "pending",
-        "evidence": "Waiting for CAREER-ZH-DISPLAY-PARITY-01 to merge."
+        "status": "pass",
+        "evidence": "CAREER-ZH-DISPLAY-PARITY-01 PR #2020 merged at 2026-06-09T15:28:28Z and origin/main contains merge commit af382b46070d1455f6b7e2d9fe9af18ba7cb0e55."
+      },
+      "implementation": {
+        "status": "pass",
+        "evidence": "Implemented zh display parity manifest scope on validate/import commands and manifest-scoped reviewed Chinese field guard in mapper; no database writes, sitemap, llms, or index strategy changes."
+      },
+      "php_lint": {
+        "status": "pass",
+        "evidence": "php -l passed for CareerImportSelectedDisplayAssets.php, CareerValidateDisplayBatch.php, CareerSelectedDisplayAssetMapper.php, and focused test files."
+      },
+      "focused_tests": {
+        "status": "pass",
+        "evidence": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=\":memory:\" php artisan test passed for CareerImportSelectedDisplayAssetsCommandTest.php (28 tests / 4957 assertions), CareerValidateDisplayBatchCommandTest.php (11 tests / 144 assertions), and CareerSelectedDisplayAssetMapperTest.php (13 tests / 2691 assertions)."
+      },
+      "pint": {
+        "status": "pass",
+        "evidence": "cd backend && ./vendor/bin/pint --test passed for scoped command, mapper, and test files."
+      },
+      "metadata": {
+        "status": "pass",
+        "evidence": "docs/codex/pr-train-state.json parsed as JSON; docs/codex/pr-train.yaml parsed as YAML via Ruby stdlib."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are confined to PR02 scoped validate/import/mapper tests plus docs/codex state metadata."
+      },
+      "diff_check": {
+        "status": "pass",
+        "evidence": "Path-limited git diff --check passed for scoped PR02 files and docs/codex metadata."
+      },
+      "github": {
+        "status": "pass",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/2021",
+        "head_sha": "cf63925061cefe8be49188f187e0453f9d656d25",
+        "checks": [
+          "hygiene",
+          "supply-chain",
+          "content-pack-build-validate",
+          "verify-mbti-legacy",
+          "verify-mbti-v2",
+          "verify-bigfive",
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "Semgrep OSS"
+        ],
+        "merge_state": "CLEAN",
+        "evidence": "GitHub checks passed for PR #2021 at head cf63925061cefe8be49188f187e0453f9d656d25 and mergeStateStatus is CLEAN."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "cf63925061cefe8be49188f187e0453f9d656d25",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2021",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -52319,6 +52374,26 @@
         "at": "2026-06-09",
         "status": "pending_dependency",
         "note": "Future import/validation entry initialized only; implementation deferred until PR01 is merged."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "local_checks_passed",
+        "note": "PR02 implementation and local checks passed. Validator full-upload plans now include career_zh_display_parity_v0.1 scope and zh-CN target; import manifests enforce reviewed_workbook zh-CN rows; mapper rejects copied English core Chinese fields for manifest-scoped rows."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "committed_pending_push",
+        "note": "Created scoped implementation commit 83ee19f5fb8b82ba01a94a8e92deff82ad68d159 pending push and PR creation."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "pr_open_checks_pending",
+        "note": "Opened PR #2021 for CAREER-ZH-DISPLAY-PARITY-02; waiting for GitHub checks."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed and mergeStateStatus is CLEAN for PR #2021; ready for squash merge."
       }
     ]
   },

@@ -132,10 +132,10 @@ final class CareerValidateDisplayBatchCommandTest extends TestCase
         $this->createAuthorityOccupation('ready-upload-slug', '15-2011', '15-2011.00');
 
         $workbook = $this->writeWorkbook([
-            $this->row('existing-display-slug', schemaValid: true, linksStrict: true, ctaAction: 'start_riasec_test'),
-            $this->row('ready-upload-slug', title: 'Ready Upload', soc: '15-2011', onet: '15-2011.00', schemaValid: true, linksStrict: true, ctaAction: 'start_riasec_test'),
+            $this->row('existing-display-slug', cnTitle: '已有展示职业', schemaValid: true, linksStrict: true, ctaAction: 'start_riasec_test'),
+            $this->row('ready-upload-slug', title: 'Ready Upload', cnTitle: '待上传职业', soc: '15-2011', onet: '15-2011.00', schemaValid: true, linksStrict: true, ctaAction: 'start_riasec_test'),
             $this->row('needs-repair-slug', title: 'Needs Repair', soc: '17-1011', onet: '17-1011.00'),
-            $this->row('software-developers', title: 'Software Developers', soc: '15-1252', onet: '15-1252.00', schemaValid: true, linksStrict: true, ctaAction: 'start_riasec_test'),
+            $this->row('software-developers', title: 'Software Developers', cnTitle: '软件开发人员', soc: '15-1252', onet: '15-1252.00', schemaValid: true, linksStrict: true, ctaAction: 'start_riasec_test'),
         ]);
         $planOutput = $this->tempDir().'/career_full_upload_plan.json';
         $planMarkdown = $this->tempDir().'/career_full_upload_plan.md';
@@ -154,6 +154,8 @@ final class CareerValidateDisplayBatchCommandTest extends TestCase
         $this->assertFileExists($planMarkdown);
         $this->assertSame(4, $plan['workbook']['rows']);
         $this->assertCount(4, $plan['rows']);
+        $this->assertSame('career_zh_display_parity_v0.1', $plan['planner']['scope']);
+        $this->assertSame('zh-CN', $plan['planner']['target_locale']);
         $this->assertSame($plan['planner']['upload_manifest_sha256'], $report['full_upload_plan']['planner']['upload_manifest_sha256']);
 
         $rows = collect($plan['rows'])->keyBy('slug');
@@ -161,6 +163,11 @@ final class CareerValidateDisplayBatchCommandTest extends TestCase
         $this->assertFalse($rows->get('existing-display-slug')['import_eligible']);
         $this->assertSame('upload_candidate', $rows->get('ready-upload-slug')['status']);
         $this->assertTrue($rows->get('ready-upload-slug')['import_eligible']);
+        $this->assertSame(['en', 'zh-CN'], $rows->get('ready-upload-slug')['locale_scope']);
+        $this->assertSame('zh-CN', $rows->get('ready-upload-slug')['target_locale']);
+        $this->assertSame('reviewed_workbook', $rows->get('ready-upload-slug')['content_authority']);
+        $this->assertTrue($rows->get('ready-upload-slug')['reviewed_chinese_fields']);
+        $this->assertTrue($rows->get('ready-upload-slug')['seo_release_gates_unchanged']);
         $this->assertSame('needs_workbook_repair', $rows->get('needs-repair-slug')['status']);
         $this->assertFalse($rows->get('needs-repair-slug')['import_eligible']);
         $this->assertSame('manual_hold', $rows->get('software-developers')['status']);
@@ -179,10 +186,10 @@ final class CareerValidateDisplayBatchCommandTest extends TestCase
         $this->createAuthorityOccupation('ready-upload-slug-two', '15-2011', '15-2011.00');
 
         $first = $this->writeWorkbook([
-            $this->row('ready-upload-slug', title: 'Ready Upload', soc: '15-2011', onet: '15-2011.00', schemaValid: true, linksStrict: true, ctaAction: 'start_riasec_test'),
+            $this->row('ready-upload-slug', title: 'Ready Upload', cnTitle: '待上传职业', soc: '15-2011', onet: '15-2011.00', schemaValid: true, linksStrict: true, ctaAction: 'start_riasec_test'),
         ]);
         $second = $this->writeWorkbook([
-            $this->row('ready-upload-slug-two', title: 'Ready Upload Two', soc: '15-2011', onet: '15-2011.00', schemaValid: true, linksStrict: true, ctaAction: 'start_riasec_test'),
+            $this->row('ready-upload-slug-two', title: 'Ready Upload Two', cnTitle: '第二个待上传职业', soc: '15-2011', onet: '15-2011.00', schemaValid: true, linksStrict: true, ctaAction: 'start_riasec_test'),
         ]);
 
         [, $firstReport] = $this->runValidator($first, '');
@@ -441,7 +448,7 @@ final class CareerValidateDisplayBatchCommandTest extends TestCase
     private function row(
         string $slug,
         string $title = 'Data scientists',
-        string $cnTitle = 'Data scientists',
+        string $cnTitle = '数据科学家',
         string $soc = '15-2051',
         string $onet = '15-2051.00',
         bool $schemaValid = false,
