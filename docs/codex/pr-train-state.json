@@ -51592,7 +51592,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-conv-ingest-02",
     "base": "origin/main",
-    "status": "github_checks_passed_ready_to_merge",
+    "status": "merged",
     "train_scope": "seo_conversion_tracking",
     "title": "SEO-CONV-INGEST-02: feat(analytics): accept canonical SEO conversion funnel ingest",
     "depends_on": [
@@ -51768,7 +51768,7 @@
       },
       "github": {
         "status": "pass",
-        "head_sha": "b3e9668eb2d05d680fd2abe71cd3640d741fb287",
+        "head_sha": "963dc6eada45f5adbe0653e88bc134490ca11af0",
         "checks": [
           "hygiene",
           "supply-chain",
@@ -51782,15 +51782,15 @@
         ],
         "merge_state": "CLEAN",
         "failure_reason": null,
-        "evidence": "GitHub checks passed for PR #2011 at head b3e9668eb2d05d680fd2abe71cd3640d741fb287 after adding the BigFive freeze classifier exception for SEO conversion daily read-model files."
+        "evidence": "GitHub checks passed for PR #2011 at final head 963dc6eada45f5adbe0653e88bc134490ca11af0 after adding the BigFive freeze classifier exception for SEO conversion daily read-model files."
       }
     },
     "failure_reason": null,
     "commit_sha": "21b6fc6d2328d95cb09358aa0920e8708d23b1d4",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2011",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-09T04:18:01Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "sidecar_issues": [],
     "transitions": [
       {
@@ -51832,6 +51832,11 @@
         "at": "2026-06-09",
         "status": "github_checks_passed_ready_to_merge",
         "note": "GitHub checks passed for PR #2011 at head b3e9668eb2d05d680fd2abe71cd3640d741fb287 and mergeStateStatus is CLEAN."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "merged",
+        "note": "Reconciled during SEO-CONV-OPS-05: PR #2011 is MERGED at 2026-06-09T04:18:01Z with merge commit 1cae5d854b22bccde0becf485d93f6cd19a98fc2; origin/main contains the merge commit; remote branch was deleted; local task branch was deleted after squash merge; post-merge SeoConversionDailyBuilderTest and focused BigFive classifier revalidation passed."
       }
     ]
   },
@@ -51839,7 +51844,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-conv-ops-05",
     "base": "origin/main",
-    "status": "pending_dependency",
+    "status": "local_checks_passed",
     "train_scope": "seo_conversion_tracking",
     "title": "SEO-CONV-OPS-05: feat(ops): expose SEO conversion funnel readouts",
     "depends_on": [
@@ -51851,8 +51856,34 @@
         "evidence": "User explicitly authorized the SEO-CONV PR train and fap-api docs/codex metadata updates on 2026-06-09."
       },
       "dependency": {
-        "status": "pending",
-        "evidence": "Must wait for SEO-CONV-DAILY-04 to merge before starting."
+        "status": "pass",
+        "evidence": "SEO-CONV-DAILY-04 merged into fap-api main as PR #2011 at 2026-06-09T04:18:01Z with merge commit 1cae5d854b22bccde0becf485d93f6cd19a98fc2 before this branch started."
+      },
+      "scope": {
+        "status": "pass",
+        "evidence": "Changed files are confined to the v0.5 Ops SEO Intel route/controller, SeoIntel Ops read services, focused SeoIntel feature test, and docs/codex metadata.",
+        "allowed_paths": [
+          "backend/routes/api.php",
+          "backend/app/Http/Controllers/API/V0_5/Ops/**",
+          "backend/app/Services/SeoIntel/**",
+          "backend/tests/Feature/SeoIntel/**",
+          "docs/codex/pr-train.yaml",
+          "docs/codex/pr-train-state.json"
+        ]
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "php -l backend/routes/api.php",
+          "php -l backend/app/Http/Controllers/API/V0_5/Ops/SeoIntel/SeoIntelDashboardController.php",
+          "php -l backend/app/Services/SeoIntel/OpsDashboard/SeoDashboardApiReadService.php",
+          "php -l backend/app/Services/SeoIntel/OpsDashboard/SeoConversionFunnelReadService.php",
+          "php -l backend/tests/Feature/SeoIntel/SeoConversionFunnelOpsReadoutTest.php",
+          "cd backend && php artisan route:list --path=api/v0.5/ops/seo-intel --no-ansi",
+          "cd backend && php artisan test --filter=SeoConversionFunnelOpsReadoutTest --no-ansi",
+          "cd backend && php artisan test --filter=SeoDashApi01ReadOnlyApiContractTest --no-ansi"
+        ],
+        "evidence": "PHP lint passed for route, controller, read services, and focused feature test. Route-list shows GET /api/v0.5/ops/seo-intel/conversion-funnel. SeoConversionFunnelOpsReadoutTest passed 2 tests / 34 assertions. Existing SeoDashApi01ReadOnlyApiContractTest passed 6 tests / 110 assertions."
       }
     },
     "failure_reason": null,
@@ -51867,6 +51898,16 @@
         "at": "2026-06-09",
         "status": "pending_dependency",
         "note": "Initialized future fap-api Ops/CMS readout PR metadata only; implementation intentionally deferred."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "in_progress",
+        "note": "Created branch codex/seo-conv-ops-05 from latest fap-api main after SEO-CONV-DAILY-04 merged and cleaned up."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "local_checks_passed",
+        "note": "Added read-only Ops SEO Intel conversion funnel endpoint backed by analytics_seo_conversion_daily; focused route/auth/privacy/readout tests passed."
       }
     ]
   }
