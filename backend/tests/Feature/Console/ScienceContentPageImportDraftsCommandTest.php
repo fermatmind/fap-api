@@ -17,6 +17,8 @@ final class ScienceContentPageImportDraftsCommandTest extends TestCase
 
     private const PACKAGE_PATH = 'docs/seo/import-packages/science-contentpage-gpt55-review-draft-2026-06-08';
 
+    private const EN_PACKAGE_PATH = 'docs/seo/import-packages/science-contentpage-en-review-draft-2026-06-09';
+
     #[Test]
     public function default_mode_is_dry_run_and_writes_zero_content_pages(): void
     {
@@ -121,6 +123,107 @@ final class ScienceContentPageImportDraftsCommandTest extends TestCase
     }
 
     #[Test]
+    public function english_package_dry_run_plans_only_en_non_public_drafts(): void
+    {
+        [$exitCode, $payload] = $this->runImport(packagePath: self::EN_PACKAGE_PATH);
+
+        $this->assertSame(0, $exitCode, json_encode($payload, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $this->assertTrue($payload['ok']);
+        $this->assertSame('dry_run', $payload['mode']);
+        $this->assertTrue($payload['dry_run']);
+        $this->assertFalse($payload['writes_committed']);
+        $this->assertSame(5, $payload['pages_seen']);
+        $this->assertSame(5, $payload['planned_create_count']);
+        $this->assertSame(0, $payload['authority_revision_only_count']);
+        $this->assertSame(0, $payload['blocked_count']);
+        $this->assertFalse($payload['publish_allowed']);
+        $this->assertFalse($payload['discoverability_allowed']);
+
+        $science = collect($payload['pages'])->firstWhere('page_key', 'SCIENCE-HUB-CONTENT-EN-01');
+        $this->assertSame('create_missing_non_public_draft', $science['action']);
+        $this->assertSame('en', $science['locale']);
+        $this->assertSame('Assessment Science', data_get($science, 'content_page_attributes.title'));
+        $this->assertSame('en', data_get($science, 'content_page_attributes.locale'));
+        $this->assertSame('zh-CN', data_get($science, 'content_page_attributes.source_locale'));
+        $this->assertSame(ContentPage::TRANSLATION_STATUS_DRAFT, data_get($science, 'content_page_attributes.translation_status'));
+        $this->assertStringContainsString(
+            'science-contentpage-en-review-draft-2026-06-09/pages/01-science-hub-content-en-01.md',
+            (string) data_get($science, 'content_page_attributes.source_doc'),
+        );
+        $this->assertFalse(data_get($science, 'content_page_attributes.is_public'));
+        $this->assertFalse(data_get($science, 'content_page_attributes.is_indexable'));
+        $this->assertFalse(data_get($science, 'content_page_attributes.publish_allowed'));
+        $this->assertSame('not_reviewed', data_get($science, 'content_page_attributes.claim_gate_status'));
+
+        $this->assertSame(0, ContentPage::query()->withoutGlobalScopes()->count());
+    }
+
+    #[Test]
+    public function approved_execute_creates_english_rows_as_draft_translations_without_upsert_or_publish(): void
+    {
+        [$exitCode, $payload] = $this->runImport([
+            '--execute' => true,
+            '--approval-phrase' => ScienceContentPageDraftImportService::APPROVAL_PHRASE,
+        ], self::EN_PACKAGE_PATH);
+
+        $this->assertSame(0, $exitCode, json_encode($payload, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $this->assertTrue($payload['ok']);
+        $this->assertSame('execute', $payload['mode']);
+        $this->assertFalse($payload['dry_run']);
+        $this->assertTrue($payload['writes_committed']);
+        $this->assertSame(5, $payload['created_count']);
+        $this->assertFalse($payload['publish_allowed']);
+        $this->assertFalse($payload['discoverability_allowed']);
+
+        foreach ([
+            'science' => 'Assessment Science',
+            'item-design-notes' => 'Item Design Notes',
+            'reliability-validity' => 'Reliability and Validity',
+            'data-privacy' => 'Data Notes',
+            'common-misconceptions' => 'Common Misconceptions',
+        ] as $slug => $title) {
+            $page = ContentPage::query()
+                ->withoutGlobalScopes()
+                ->where('slug', $slug)
+                ->where('locale', 'en')
+                ->firstOrFail();
+
+            $this->assertSame($title, $page->title);
+            $this->assertSame(ContentPage::STATUS_DRAFT, $page->status);
+            $this->assertSame(ContentPage::TRANSLATION_STATUS_DRAFT, $page->translation_status);
+            $this->assertSame('zh-CN', $page->source_locale);
+            $this->assertFalse((bool) $page->is_public);
+            $this->assertFalse((bool) $page->is_indexable);
+            $this->assertFalse((bool) $page->publish_allowed);
+            $this->assertTrue((bool) $page->operator_approval_required);
+            $this->assertSame('not_reviewed', $page->claim_gate_status);
+            $this->assertFalse((bool) $page->faq_schema_eligible);
+            $this->assertFalse((bool) $page->schema_enabled);
+            $this->assertNull($page->published_at);
+            $this->assertNull($page->operator_approved_at);
+            $this->assertNull($page->schema_eligibility_reviewed_at);
+            $this->assertSame('policy', $page->kind);
+            $this->assertStringContainsString('science-contentpage-en-review-draft-2026-06-09/pages/', (string) $page->source_doc);
+        }
+
+        $this->assertDatabaseMissing('content_pages', [
+            'slug' => 'science',
+            'locale' => 'zh-CN',
+        ]);
+
+        [$secondExitCode, $secondPayload] = $this->runImport([
+            '--execute' => true,
+            '--approval-phrase' => ScienceContentPageDraftImportService::APPROVAL_PHRASE,
+        ], self::EN_PACKAGE_PATH);
+
+        $this->assertSame(0, $secondExitCode, json_encode($secondPayload, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $this->assertFalse($secondPayload['writes_committed']);
+        $this->assertSame(0, $secondPayload['planned_create_count']);
+        $this->assertSame(5, $secondPayload['skipped_existing_count']);
+        $this->assertSame(5, ContentPage::query()->withoutGlobalScopes()->count());
+    }
+
+    #[Test]
     public function repeated_execute_skips_existing_rows_without_duplicates_or_upsert(): void
     {
         $this->runImport([
@@ -146,10 +249,10 @@ final class ScienceContentPageImportDraftsCommandTest extends TestCase
     /**
      * @return array{0:int, 1:array<string,mixed>}
      */
-    private function runImport(array $options = []): array
+    private function runImport(array $options = [], string $packagePath = self::PACKAGE_PATH): array
     {
         $exitCode = Artisan::call('content-pages:science-import-drafts', array_merge([
-            '--package' => base_path(self::PACKAGE_PATH),
+            '--package' => base_path($packagePath),
             '--json' => true,
         ], $options));
 

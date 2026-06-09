@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-05-23T23:58:00+08:00",
+  "updated_at": "2026-06-09T15:21:39+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -6318,6 +6318,72 @@
           "at": "2026-06-08T06:20:00+08:00",
           "status": "ready_to_merge",
           "summary": "PR #1960 GitHub checks passed. Scope remains backend dry-run/pre-import contract lock only; no CMS mutation, real import, publish, sitemap, llms, footer, or distribution."
+        }
+      ]
+    },
+    "SCIENCE-CONTENTPAGE-EN-DRAFT-IMPORTER-01": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "local_checks_passed",
+      "branch": "codex/science-contentpage-en-draft-importer-01",
+      "commit_sha": "",
+      "pr_url": "",
+      "title": "SCIENCE-CONTENTPAGE-EN-DRAFT-IMPORTER-01: support English Science ContentPage draft package import",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "ruby -e 'require \"yaml\"; YAML.load_file(\"docs/codex/pr-train.yaml\")'",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Services/Cms/ScienceContentPageDraftDryRunService.php app/Services/Cms/ScienceContentPageDraftImportService.php tests/Feature/Console/ScienceContentPageDraftDryRunCommandTest.php tests/Feature/Console/ScienceContentPageImportDraftsCommandTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/Console/ScienceContentPageDraftDryRunCommandTest.php tests/Feature/Console/ScienceContentPageImportDraftsCommandTest.php --no-ansi",
+            "status": "passed",
+            "note": "11 tests, 311 assertions."
+          },
+          {
+            "command": "php artisan content-pages:science-draft-dry-run --package=docs/seo/import-packages/science-contentpage-en-review-draft-2026-06-09 --json",
+            "status": "passed",
+            "note": "pages_seen=5, pages_expected=5, issue_count=0, status=pass_no_write_dry_run."
+          },
+          {
+            "command": "php artisan content-pages:science-import-drafts --package=docs/seo/import-packages/science-contentpage-en-review-draft-2026-06-09 --json",
+            "status": "passed",
+            "note": "dry_run=true, writes_committed=false, planned_create_count=5, publish_allowed=false, discoverability_allowed=false."
+          },
+          {
+            "command": "git diff --check",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --cached --check",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-06-09T15:11:54+08:00",
+          "status": "in_progress",
+          "summary": "Started after explicit user authorization. Scope is limited to backend importer support for the approved five-page English Science ContentPage draft package; no CMS import, publish, sitemap, llms, footer, fap-web, or production content mutation."
+        },
+        {
+          "at": "2026-06-09T15:21:39+08:00",
+          "status": "local_checks_passed",
+          "summary": "Scoped importer checks passed. English package plans five locale=en non-public, non-indexable draft translations with source_locale=zh-CN, translation_status=draft, publish_allowed=false, and claim_gate_status=not_reviewed; default import command remains dry-run with writes_committed=false."
         }
       ]
     }
