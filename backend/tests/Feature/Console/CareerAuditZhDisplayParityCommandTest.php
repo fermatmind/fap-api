@@ -88,6 +88,11 @@ final class CareerAuditZhDisplayParityCommandTest extends TestCase
         $this->assertFalse($report['sitemap_changed']);
         $this->assertFalse($report['llms_changed']);
         $this->assertFalse($report['index_strategy_changed']);
+        $this->assertSame('blocked', $report['live_gate']['decision']);
+        $this->assertContains('api_failures_or_http_mismatches', $report['live_gate']['blockers']);
+        $this->assertContains('zh_missing_en_display_modules', $report['live_gate']['blockers']);
+        $this->assertContains('zh_restricted_shell_or_integrity_gap', $report['live_gate']['blockers']);
+        $this->assertSame(1, $report['live_gate']['restricted_shell_count']);
         $this->assertSame(5, $report['summary']['total_slugs']);
         $this->assertSame(1, $report['summary']['same_module_set']);
         $this->assertSame(1, $report['summary']['en_has_modules_zh_missing']);
@@ -130,10 +135,58 @@ final class CareerAuditZhDisplayParityCommandTest extends TestCase
 
         $this->assertSame(0, $exitCode, Artisan::output());
         $this->assertSame('explicit_slugs', $report['scan_scope']);
+        $this->assertSame('pass', $report['live_gate']['decision']);
         $this->assertSame(1, $report['summary']['total_slugs']);
         $this->assertSame(1, $report['summary']['same_module_set']);
 
         Http::assertNotSent(static fn ($request): bool => str_ends_with($request->url(), '/career/jobs?locale=en'));
+    }
+
+    #[Test]
+    public function it_can_assert_the_live_parity_gate_without_mutating_content_or_index_strategy(): void
+    {
+        Http::fake([
+            'https://api.example.test/api/v0.5/career/jobs/gated-slug?locale=en' => Http::response($this->detailPayload([
+                'hero',
+                'path',
+                'source_card',
+            ]), 200),
+            'https://api.example.test/api/v0.5/career/jobs/gated-slug?locale=zh-CN' => Http::response($this->detailPayload([
+                'hero',
+                'path',
+            ], amberFlags: ['runtime_published_shell']), 200),
+        ]);
+
+        $exitCode = Artisan::call('career:audit-zh-display-parity', [
+            '--api-base' => 'https://api.example.test/api/v0.5/career/jobs',
+            '--slugs' => 'gated-slug',
+            '--summary-only' => true,
+            '--json' => true,
+        ]);
+        $report = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame('pass', $report['decision']);
+        $this->assertSame('blocked', $report['live_gate']['decision']);
+        $this->assertSame([], $report['items']);
+        $this->assertFalse($report['live_gate']['sitemap_changed']);
+        $this->assertFalse($report['live_gate']['llms_changed']);
+        $this->assertFalse($report['live_gate']['index_strategy_changed']);
+
+        $exitCode = Artisan::call('career:audit-zh-display-parity', [
+            '--api-base' => 'https://api.example.test/api/v0.5/career/jobs',
+            '--slugs' => 'gated-slug',
+            '--assert-live-parity' => true,
+            '--json' => true,
+        ]);
+        $report = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertTrue($report['assert_live_parity']);
+        $this->assertSame('blocked', $report['decision']);
+        $this->assertSame('blocked', $report['live_gate']['decision']);
+        $this->assertContains('zh_missing_en_display_modules', $report['live_gate']['blockers']);
+        $this->assertContains('zh_restricted_shell_or_integrity_gap', $report['live_gate']['blockers']);
     }
 
     /**

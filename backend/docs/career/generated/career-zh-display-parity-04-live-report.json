@@ -1,0 +1,1811 @@
+{
+  "validator_version": "career_zh_display_parity_audit_v0.1",
+  "generated_from": "/private/tmp/career-zh-display-parity-04-live.json",
+  "read_only": true,
+  "writes_database": false,
+  "cms_mutation": false,
+  "sitemap_changed": false,
+  "llms_changed": false,
+  "index_strategy_changed": false,
+  "api_base": "https://api.fermatmind.com/api/v0.5/career/jobs",
+  "site_base": "https://fermatmind.com",
+  "scan_scope": "public_index_union",
+  "decision": "pass",
+  "live_gate": {
+    "decision": "blocked",
+    "blockers": [
+      "zh_missing_en_display_modules",
+      "zh_restricted_shell_or_integrity_gap"
+    ],
+    "total_slugs": 1046,
+    "same_module_set": 374,
+    "module_mismatch_count": 672,
+    "restricted_shell_count": 1029,
+    "api_failure_count": 0,
+    "index_mismatch_count": 0,
+    "sitemap_changed": false,
+    "llms_changed": false,
+    "index_strategy_changed": false
+  },
+  "summary": {
+    "total_slugs": 1046,
+    "en_index_count": 1046,
+    "zh_index_count": 1046,
+    "index_en_only_count": 0,
+    "index_zh_only_count": 0,
+    "same_module_set": 374,
+    "en_has_modules_zh_missing": 672,
+    "zh_has_modules_en_missing": 0,
+    "en_200_zh_not_200": 0,
+    "zh_200_en_not_200": 0,
+    "both_missing_or_failed": 0,
+    "api_failure_count": 0,
+    "classification_counts": {
+      "same_module_set": 374,
+      "en_has_modules_zh_missing": 672
+    },
+    "index_failures": [
+
+    ],
+    "samples": {
+      "same_module_set": [
+        {
+          "slug": "accountants-and-auditors",
+          "sample_urls": {
+            "en": "https://fermatmind.com/en/career/jobs/accountants-and-auditors",
+            "zh": "https://fermatmind.com/zh/career/jobs/accountants-and-auditors",
+            "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/accountants-and-auditors?locale=en",
+            "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/accountants-and-auditors?locale=zh-CN"
+          },
+          "module_counts": {
+            "en": 26,
+            "zh-CN": 26,
+            "en_only": 0,
+            "zh_only": 0
+          },
+          "zh_gate_reasons": [
+            "amber_flag:fit_score.provisional",
+            "amber_flag:strain_score.restricted",
+            "amber_flag:ai_survival_score.provisional",
+            "critical_missing_field:task_prototype_signature",
+            "critical_missing_field:structural_stability"
+          ]
+        },
+        {
+          "slug": "actors",
+          "sample_urls": {
+            "en": "https://fermatmind.com/en/career/jobs/actors",
+            "zh": "https://fermatmind.com/zh/career/jobs/actors",
+            "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/actors?locale=en",
+            "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/actors?locale=zh-CN"
+          },
+          "module_counts": {
+            "en": 4,
+            "zh-CN": 4,
+            "en_only": 0,
+            "zh_only": 0
+          },
+          "zh_gate_reasons": [
+            "amber_flag:display_asset_backed_directory_draft_shell",
+            "blocked_claim:compiled_recommendation_claims_unavailable",
+            "integrity_state:display_asset_backed",
+            "critical_missing_field:compiled_recommendation_snapshot"
+          ]
+        },
+        {
+          "slug": "aerospace-engineers",
+          "sample_urls": {
+            "en": "https://fermatmind.com/en/career/jobs/aerospace-engineers",
+            "zh": "https://fermatmind.com/zh/career/jobs/aerospace-engineers",
+            "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/aerospace-engineers?locale=en",
+            "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/aerospace-engineers?locale=zh-CN"
+          },
+          "module_counts": {
+            "en": 12,
+            "zh-CN": 12,
+            "en_only": 0,
+            "zh_only": 0
+          },
+          "zh_gate_reasons": [
+            "amber_flag:runtime_published_navigation_shell",
+            "blocked_claim:compiled_recommendation_claims_unavailable",
+            "blocked_claim:display_asset_claims_unavailable",
+            "integrity_state:runtime_published_shell",
+            "critical_missing_field:compiled_recommendation_snapshot",
+            "critical_missing_field:display_asset_claims"
+          ]
+        },
+        {
+          "slug": "agricultural-and-food-scientists",
+          "sample_urls": {
+            "en": "https://fermatmind.com/en/career/jobs/agricultural-and-food-scientists",
+            "zh": "https://fermatmind.com/zh/career/jobs/agricultural-and-food-scientists",
+            "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/agricultural-and-food-scientists?locale=en",
+            "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/agricultural-and-food-scientists?locale=zh-CN"
+          },
+          "module_counts": {
+            "en": 12,
+            "zh-CN": 12,
+            "en_only": 0,
+            "zh_only": 0
+          },
+          "zh_gate_reasons": [
+            "amber_flag:runtime_published_navigation_shell",
+            "blocked_claim:compiled_recommendation_claims_unavailable",
+            "blocked_claim:display_asset_claims_unavailable",
+            "integrity_state:runtime_published_shell",
+            "critical_missing_field:compiled_recommendation_snapshot",
+            "critical_missing_field:display_asset_claims"
+          ]
+        },
+        {
+          "slug": "agricultural-workers",
+          "sample_urls": {
+            "en": "https://fermatmind.com/en/career/jobs/agricultural-workers",
+            "zh": "https://fermatmind.com/zh/career/jobs/agricultural-workers",
+            "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/agricultural-workers?locale=en",
+            "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/agricultural-workers?locale=zh-CN"
+          },
+          "module_counts": {
+            "en": 12,
+            "zh-CN": 12,
+            "en_only": 0,
+            "zh_only": 0
+          },
+          "zh_gate_reasons": [
+            "amber_flag:runtime_published_navigation_shell",
+            "blocked_claim:compiled_recommendation_claims_unavailable",
+            "blocked_claim:display_asset_claims_unavailable",
+            "integrity_state:runtime_published_shell",
+            "critical_missing_field:compiled_recommendation_snapshot",
+            "critical_missing_field:display_asset_claims"
+          ]
+        },
+        {
+          "slug": "animal-scientists",
+          "sample_urls": {
+            "en": "https://fermatmind.com/en/career/jobs/animal-scientists",
+            "zh": "https://fermatmind.com/zh/career/jobs/animal-scientists",
+            "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/animal-scientists?locale=en",
+            "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/animal-scientists?locale=zh-CN"
+          },
+          "module_counts": {
+            "en": 26,
+            "zh-CN": 26,
+            "en_only": 0,
+            "zh_only": 0
+          },
+          "zh_gate_reasons": [
+            "amber_flag:display_asset_backed_directory_draft_shell",
+            "blocked_claim:compiled_recommendation_claims_unavailable",
+            "integrity_state:display_asset_backed",
+            "critical_missing_field:compiled_recommendation_snapshot"
+          ]
+        },
+        {
+          "slug": "animal-trainers",
+          "sample_urls": {
+            "en": "https://fermatmind.com/en/career/jobs/animal-trainers",
+            "zh": "https://fermatmind.com/zh/career/jobs/animal-trainers",
+            "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/animal-trainers?locale=en",
+            "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/animal-trainers?locale=zh-CN"
+          },
+          "module_counts": {
+            "en": 26,
+            "zh-CN": 26,
+            "en_only": 0,
+            "zh_only": 0
+          },
+          "zh_gate_reasons": [
+            "amber_flag:display_asset_backed_directory_draft_shell",
+            "blocked_claim:compiled_recommendation_claims_unavailable",
+            "integrity_state:display_asset_backed",
+            "critical_missing_field:compiled_recommendation_snapshot"
+          ]
+        },
+        {
+          "slug": "announcers",
+          "sample_urls": {
+            "en": "https://fermatmind.com/en/career/jobs/announcers",
+            "zh": "https://fermatmind.com/zh/career/jobs/announcers",
+            "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/announcers?locale=en",
+            "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/announcers?locale=zh-CN"
+          },
+          "module_counts": {
+            "en": 12,
+            "zh-CN": 12,
+            "en_only": 0,
+            "zh_only": 0
+          },
+          "zh_gate_reasons": [
+            "amber_flag:runtime_published_navigation_shell",
+            "blocked_claim:compiled_recommendation_claims_unavailable",
+            "blocked_claim:display_asset_claims_unavailable",
+            "integrity_state:runtime_published_shell",
+            "critical_missing_field:compiled_recommendation_snapshot",
+            "critical_missing_field:display_asset_claims"
+          ]
+        },
+        {
+          "slug": "anthropologists-and-archeologists",
+          "sample_urls": {
+            "en": "https://fermatmind.com/en/career/jobs/anthropologists-and-archeologists",
+            "zh": "https://fermatmind.com/zh/career/jobs/anthropologists-and-archeologists",
+            "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/anthropologists-and-archeologists?locale=en",
+            "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/anthropologists-and-archeologists?locale=zh-CN"
+          },
+          "module_counts": {
+            "en": 12,
+            "zh-CN": 12,
+            "en_only": 0,
+            "zh_only": 0
+          },
+          "zh_gate_reasons": [
+            "amber_flag:runtime_published_navigation_shell",
+            "blocked_claim:compiled_recommendation_claims_unavailable",
+            "blocked_claim:display_asset_claims_unavailable",
+            "integrity_state:runtime_published_shell",
+            "critical_missing_field:compiled_recommendation_snapshot",
+            "critical_missing_field:display_asset_claims"
+          ]
+        },
+        {
+          "slug": "anthropology-and-archeology-teachers-postsecondary",
+          "sample_urls": {
+            "en": "https://fermatmind.com/en/career/jobs/anthropology-and-archeology-teachers-postsecondary",
+            "zh": "https://fermatmind.com/zh/career/jobs/anthropology-and-archeology-teachers-postsecondary",
+            "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/anthropology-and-archeology-teachers-postsecondary?locale=en",
+            "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/anthropology-and-archeology-teachers-postsecondary?locale=zh-CN"
+          },
+          "module_counts": {
+            "en": 26,
+            "zh-CN": 26,
+            "en_only": 0,
+            "zh_only": 0
+          },
+          "zh_gate_reasons": [
+            "amber_flag:display_asset_backed_directory_draft_shell",
+            "blocked_claim:compiled_recommendation_claims_unavailable",
+            "integrity_state:display_asset_backed",
+            "critical_missing_field:compiled_recommendation_snapshot"
+          ]
+        },
+        {
+          "slug": "appraisers-and-assessors-of-real-estate",
+          "sample_urls": {
+            "en": "https://fermatmind.com/en/career/jobs/appraisers-and-assessors-of-real-estate",
+            "zh": "https://fermatmind.com/zh/career/jobs/appraisers-and-assessors-of-real-estate",
+            "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/appraisers-and-assessors-of-real-estate?locale=en",
+            "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/appraisers-and-assessors-of-real-estate?locale=zh-CN"
+          },
+          "module_counts": {
+            "en": 26,
+            "zh-CN": 26,
+            "en_only": 0,
+            "zh_only": 0
+          },
+          "zh_gate_reasons": [
+            "amber_flag:display_asset_backed_directory_draft_shell",
+            "blocked_claim:compiled_recommendation_claims_unavailable",
+            "integrity_state:display_asset_backed",
+            "critical_missing_field:compiled_recommendation_snapshot"
+          ]
+        },
+        {
+          "slug": "appraisers-of-personal-and-business-property",
+          "sample_urls": {
+            "en": "https://fermatmind.com/en/career/jobs/appraisers-of-personal-and-business-property",
+            "zh": "https://fermatmind.com/zh/career/jobs/appraisers-of-personal-and-business-property",
+            "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/appraisers-of-personal-and-business-property?locale=en",
+            "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/appraisers-of-personal-and-business-property?locale=zh-CN"
+          },
+          "module_counts": {
+            "en": 26,
+            "zh-CN": 26,
+            "en_only": 0,
+            "zh_only": 0
+          },
+          "zh_gate_reasons": [
+            "amber_flag:display_asset_backed_directory_draft_shell",
+            "blocked_claim:compiled_recommendation_claims_unavailable",
+            "integrity_state:display_asset_backed",
+            "critical_missing_field:compiled_recommendation_snapshot"
+          ]
+        },
+        {
+          "slug": "arbitrators-mediators-and-conciliators",
+          "sample_urls": {
+            "en": "https://fermatmind.com/en/career/jobs/arbitrators-mediators-and-conciliators",
+            "zh": "https://fermatmind.com/zh/career/jobs/arbitrators-mediators-and-conciliators",
+            "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/arbitrators-mediators-and-conciliators?locale=en",
+            "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/arbitrators-mediators-and-conciliators?locale=zh-CN"
+          },
+          "module_counts": {
+            "en": 12,
+            "zh-CN": 12,
+            "en_only": 0,
+            "zh_only": 0
+          },
+          "zh_gate_reasons": [
+            "amber_flag:runtime_published_navigation_shell",
+            "blocked_claim:compiled_recommendation_claims_unavailable",
+            "blocked_claim:display_asset_claims_unavailable",
+            "integrity_state:runtime_published_shell",
+            "critical_missing_field:compiled_recommendation_snapshot",
+            "critical_missing_field:display_asset_claims"
+          ]
+        },
+        {
+          "slug": "architects",
+          "sample_urls": {
+            "en": "https://fermatmind.com/en/career/jobs/architects",
+            "zh": "https://fermatmind.com/zh/career/jobs/architects",
+            "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/architects?locale=en",
+            "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/architects?locale=zh-CN"
+          },
+          "module_counts": {
+            "en": 26,
+            "zh-CN": 26,
+            "en_only": 0,
+            "zh_only": 0
+          },
+          "zh_gate_reasons": [
+            "amber_flag:display_asset_backed_directory_draft_shell",
+            "blocked_claim:compiled_recommendation_claims_unavailable",
+            "integrity_state:display_asset_backed",
+            "critical_missing_field:compiled_recommendation_snapshot"
+          ]
+        },
+        {
+          "slug": "architects-except-landscape-and-naval",
+          "sample_urls": {
+            "en": "https://fermatmind.com/en/career/jobs/architects-except-landscape-and-naval",
+            "zh": "https://fermatmind.com/zh/career/jobs/architects-except-landscape-and-naval",
+            "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/architects-except-landscape-and-naval?locale=en",
+            "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/architects-except-landscape-and-naval?locale=zh-CN"
+          },
+          "module_counts": {
+            "en": 26,
+            "zh-CN": 26,
+            "en_only": 0,
+            "zh_only": 0
+          },
+          "zh_gate_reasons": [
+            "amber_flag:display_asset_backed_directory_draft_shell",
+            "blocked_claim:compiled_recommendation_claims_unavailable",
+            "integrity_state:display_asset_backed",
+            "critical_missing_field:compiled_recommendation_snapshot"
+          ]
+        },
+        {
+          "slug": "architectural-and-civil-drafters",
+          "sample_urls": {
+            "en": "https://fermatmind.com/en/career/jobs/architectural-and-civil-drafters",
+            "zh": "https://fermatmind.com/zh/career/jobs/architectural-and-civil-drafters",
+            "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/architectural-and-civil-drafters?locale=en",
+            "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/architectural-and-civil-drafters?locale=zh-CN"
+          },
+          "module_counts": {
+            "en": 26,
+            "zh-CN": 26,
+            "en_only": 0,
+            "zh_only": 0
+          },
+          "zh_gate_reasons": [
+            "amber_flag:display_asset_backed_directory_draft_shell",
+            "blocked_claim:compiled_recommendation_claims_unavailable",
+            "integrity_state:display_asset_backed",
+            "critical_missing_field:compiled_recommendation_snapshot"
+          ]
+        },
+        {
+          "slug": "architectural-and-engineering-managers",
+          "sample_urls": {
+            "en": "https://fermatmind.com/en/career/jobs/architectural-and-engineering-managers",
+            "zh": "https://fermatmind.com/zh/career/jobs/architectural-and-engineering-managers",
+            "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/architectural-and-engineering-managers?locale=en",
+            "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/architectural-and-engineering-managers?locale=zh-CN"
+          },
+          "module_counts": {
+            "en": 26,
+            "zh-CN": 26,
+            "en_only": 0,
+            "zh_only": 0
+          },
+          "zh_gate_reasons": [
+            "amber_flag:display_asset_backed_directory_draft_shell",
+            "blocked_claim:compiled_recommendation_claims_unavailable",
+            "integrity_state:display_asset_backed",
+            "critical_missing_field:compiled_recommendation_snapshot"
+          ]
+        },
+        {
+          "slug": "architecture-teachers-postsecondary",
+          "sample_urls": {
+            "en": "https://fermatmind.com/en/career/jobs/architecture-teachers-postsecondary",
+            "zh": "https://fermatmind.com/zh/career/jobs/architecture-teachers-postsecondary",
+            "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/architecture-teachers-postsecondary?locale=en",
+            "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/architecture-teachers-postsecondary?locale=zh-CN"
+          },
+          "module_counts": {
+            "en": 26,
+            "zh-CN": 26,
+            "en_only": 0,
+            "zh_only": 0
+          },
+          "zh_gate_reasons": [
+            "amber_flag:display_asset_backed_directory_draft_shell",
+            "blocked_claim:compiled_recommendation_claims_unavailable",
+            "integrity_state:display_asset_backed",
+            "critical_missing_field:compiled_recommendation_snapshot"
+          ]
+        },
+        {
+          "slug": "archivists",
+          "sample_urls": {
+            "en": "https://fermatmind.com/en/career/jobs/archivists",
+            "zh": "https://fermatmind.com/zh/career/jobs/archivists",
+            "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/archivists?locale=en",
+            "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/archivists?locale=zh-CN"
+          },
+          "module_counts": {
+            "en": 26,
+            "zh-CN": 26,
+            "en_only": 0,
+            "zh_only": 0
+          },
+          "zh_gate_reasons": [
+            "amber_flag:display_asset_backed_directory_draft_shell",
+            "blocked_claim:compiled_recommendation_claims_unavailable",
+            "integrity_state:display_asset_backed",
+            "critical_missing_field:compiled_recommendation_snapshot"
+          ]
+        },
+        {
+          "slug": "area-ethnic-and-cultural-studies-teachers-postsecondary",
+          "sample_urls": {
+            "en": "https://fermatmind.com/en/career/jobs/area-ethnic-and-cultural-studies-teachers-postsecondary",
+            "zh": "https://fermatmind.com/zh/career/jobs/area-ethnic-and-cultural-studies-teachers-postsecondary",
+            "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/area-ethnic-and-cultural-studies-teachers-postsecondary?locale=en",
+            "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/area-ethnic-and-cultural-studies-teachers-postsecondary?locale=zh-CN"
+          },
+          "module_counts": {
+            "en": 26,
+            "zh-CN": 26,
+            "en_only": 0,
+            "zh_only": 0
+          },
+          "zh_gate_reasons": [
+            "amber_flag:display_asset_backed_directory_draft_shell",
+            "blocked_claim:compiled_recommendation_claims_unavailable",
+            "integrity_state:display_asset_backed",
+            "critical_missing_field:compiled_recommendation_snapshot"
+          ]
+        }
+      ],
+      "en_has_modules_zh_missing": [
+        {
+          "slug": "actuaries",
+          "sample_urls": {
+            "en": "https://fermatmind.com/en/career/jobs/actuaries",
+            "zh": "https://fermatmind.com/zh/career/jobs/actuaries",
+            "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/actuaries?locale=en",
+            "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/actuaries?locale=zh-CN"
+          },
+          "module_counts": {
+            "en": 26,
+            "zh-CN": 12,
+            "en_only": 14,
+            "zh_only": 0
+          },
+          "zh_gate_reasons": [
+            "zh_missing_en_display_modules",
+            "amber_flag:display_asset_backed_directory_draft_shell",
+            "blocked_claim:compiled_recommendation_claims_unavailable",
+            "integrity_state:display_asset_backed",
+            "critical_missing_field:compiled_recommendation_snapshot"
+          ]
+        },
+        {
+          "slug": "acupuncturists",
+          "sample_urls": {
+            "en": "https://fermatmind.com/en/career/jobs/acupuncturists",
+            "zh": "https://fermatmind.com/zh/career/jobs/acupuncturists",
+            "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/acupuncturists?locale=en",
+            "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/acupuncturists?locale=zh-CN"
+          },
+          "module_counts": {
+            "en": 26,
+            "zh-CN": 12,
+            "en_only": 14,
+            "zh_only": 0
+          },
+          "zh_gate_reasons": [
+            "zh_missing_en_display_modules",
+            "amber_flag:display_asset_backed_directory_draft_shell",
+            "blocked_claim:compiled_recommendation_claims_unavailable",
+            "integrity_state:display_asset_backed",
+            "critical_missing_field:compiled_recommendation_snapshot"
+          ]
+        },
+        {
+          "slug": "acute-care-nurses",
+          "sample_urls": {
+            "en": "https://fermatmind.com/en/career/jobs/acute-care-nurses",
+            "zh": "https://fermatmind.com/zh/career/jobs/acute-care-nurses",
+            "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/acute-care-nurses?locale=en",
+            "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/acute-care-nurses?locale=zh-CN"
+          },
+          "module_counts": {
+            "en": 26,
+            "zh-CN": 12,
+            "en_only": 14,
+            "zh_only": 0
+          },
+          "zh_gate_reasons": [
+            "zh_missing_en_display_modules",
+            "amber_flag:display_asset_backed_directory_draft_shell",
+            "blocked_claim:compiled_recommendation_claims_unavailable",
+            "integrity_state:display_asset_backed",
+            "critical_missing_field:compiled_recommendation_snapshot"
+          ]
+        },
+        {
+          "slug": "adapted-physical-education-specialists",
+          "sample_urls": {
+            "en": "https://fermatmind.com/en/career/jobs/adapted-physical-education-specialists",
+            "zh": "https://fermatmind.com/zh/career/jobs/adapted-physical-education-specialists",
+            "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/adapted-physical-education-specialists?locale=en",
+            "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/adapted-physical-education-specialists?locale=zh-CN"
+          },
+          "module_counts": {
+            "en": 26,
+            "zh-CN": 12,
+            "en_only": 14,
+            "zh_only": 0
+          },
+          "zh_gate_reasons": [
+            "zh_missing_en_display_modules",
+            "amber_flag:display_asset_backed_directory_draft_shell",
+            "blocked_claim:compiled_recommendation_claims_unavailable",
+            "integrity_state:display_asset_backed",
+            "critical_missing_field:compiled_recommendation_snapshot"
+          ]
+        },
+        {
+          "slug": "adhesive-bonding-machine-operators-and-tenders",
+          "sample_urls": {
+            "en": "https://fermatmind.com/en/career/jobs/adhesive-bonding-machine-operators-and-tenders",
+            "zh": "https://fermatmind.com/zh/career/jobs/adhesive-bonding-machine-operators-and-tenders",
+            "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/adhesive-bonding-machine-operators-and-tenders?locale=en",
+            "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/adhesive-bonding-machine-operators-and-tenders?locale=zh-CN"
+          },
+          "module_counts": {
+            "en": 26,
+            "zh-CN": 12,
+            "en_only": 14,
+            "zh_only": 0
+          },
+          "zh_gate_reasons": [
+            "zh_missing_en_display_modules",
+            "amber_flag:display_asset_backed_directory_draft_shell",
+            "blocked_claim:compiled_recommendation_claims_unavailable",
+            "integrity_state:display_asset_backed",
+            "critical_missing_field:compiled_recommendation_snapshot"
+          ]
+        },
+        {
+          "slug": "administrative-law-judges-adjudicators-and-hearing-officers",
+          "sample_urls": {
+            "en": "https://fermatmind.com/en/career/jobs/administrative-law-judges-adjudicators-and-hearing-officers",
+            "zh": "https://fermatmind.com/zh/career/jobs/administrative-law-judges-adjudicators-and-hearing-officers",
+            "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/administrative-law-judges-adjudicators-and-hearing-officers?locale=en",
+            "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/administrative-law-judges-adjudicators-and-hearing-officers?locale=zh-CN"
+          },
+          "module_counts": {
+            "en": 26,
+            "zh-CN": 12,
+            "en_only": 14,
+            "zh_only": 0
+          },
+          "zh_gate_reasons": [
+            "zh_missing_en_display_modules",
+            "amber_flag:display_asset_backed_directory_draft_shell",
+            "blocked_claim:compiled_recommendation_claims_unavailable",
+            "integrity_state:display_asset_backed",
+            "critical_missing_field:compiled_recommendation_snapshot"
+          ]
+        },
+        {
+          "slug": "administrative-services-managers",
+          "sample_urls": {
+            "en": "https://fermatmind.com/en/career/jobs/administrative-services-managers",
+            "zh": "https://fermatmind.com/zh/career/jobs/administrative-services-managers",
+            "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/administrative-services-managers?locale=en",
+            "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/administrative-services-managers?locale=zh-CN"
+          },
+          "module_counts": {
+            "en": 26,
+            "zh-CN": 12,
+            "en_only": 14,
+            "zh_only": 0
+          },
+          "zh_gate_reasons": [
+            "zh_missing_en_display_modules",
+            "amber_flag:display_asset_backed_directory_draft_shell",
+            "blocked_claim:compiled_recommendation_claims_unavailable",
+            "integrity_state:display_asset_backed",
+            "critical_missing_field:compiled_recommendation_snapshot"
+          ]
+        },
+        {
+          "slug": "adult-basic-education-adult-secondary-education-and-english-as-a-second-language-instructors",
+          "sample_urls": {
+            "en": "https://fermatmind.com/en/career/jobs/adult-basic-education-adult-secondary-education-and-english-as-a-second-language-instructors",
+            "zh": "https://fermatmind.com/zh/career/jobs/adult-basic-education-adult-secondary-education-and-english-as-a-second-language-instructors",
+            "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/adult-basic-education-adult-secondary-education-and-english-as-a-second-language-instructors?locale=en",
+            "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/adult-basic-education-adult-secondary-education-and-english-as-a-second-language-instructors?locale=zh-CN"
+          },
+          "module_counts": {
+            "en": 26,
+            "zh-CN": 12,
+            "en_only": 14,
+            "zh_only": 0
+          },
+          "zh_gate_reasons": [
+            "zh_missing_en_display_modules",
+            "amber_flag:display_asset_backed_directory_draft_shell",
+            "blocked_claim:compiled_recommendation_claims_unavailable",
+            "integrity_state:display_asset_backed",
+            "critical_missing_field:compiled_recommendation_snapshot"
+          ]
+        },
+        {
+          "slug": "adult-literacy-and-ged-teachers",
+          "sample_urls": {
+            "en": "https://fermatmind.com/en/career/jobs/adult-literacy-and-ged-teachers",
+            "zh": "https://fermatmind.com/zh/career/jobs/adult-literacy-and-ged-teachers",
+            "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/adult-literacy-and-ged-teachers?locale=en",
+            "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/adult-literacy-and-ged-teachers?locale=zh-CN"
+          },
+          "module_counts": {
+            "en": 26,
+            "zh-CN": 12,
+            "en_only": 14,
+            "zh_only": 0
+          },
+          "zh_gate_reasons": [
+            "zh_missing_en_display_modules",
+            "amber_flag:display_asset_backed_directory_draft_shell",
+            "blocked_claim:compiled_recommendation_claims_unavailable",
+            "integrity_state:display_asset_backed",
+            "critical_missing_field:compiled_recommendation_snapshot"
+          ]
+        },
+        {
+          "slug": "advanced-practice-psychiatric-nurses",
+          "sample_urls": {
+            "en": "https://fermatmind.com/en/career/jobs/advanced-practice-psychiatric-nurses",
+            "zh": "https://fermatmind.com/zh/career/jobs/advanced-practice-psychiatric-nurses",
+            "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/advanced-practice-psychiatric-nurses?locale=en",
+            "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/advanced-practice-psychiatric-nurses?locale=zh-CN"
+          },
+          "module_counts": {
+            "en": 26,
+            "zh-CN": 12,
+            "en_only": 14,
+            "zh_only": 0
+          },
+          "zh_gate_reasons": [
+            "zh_missing_en_display_modules",
+            "amber_flag:display_asset_backed_directory_draft_shell",
+            "blocked_claim:compiled_recommendation_claims_unavailable",
+            "integrity_state:display_asset_backed",
+            "critical_missing_field:compiled_recommendation_snapshot"
+          ]
+        },
+        {
+          "slug": "advertising-and-promotions-managers",
+          "sample_urls": {
+            "en": "https://fermatmind.com/en/career/jobs/advertising-and-promotions-managers",
+            "zh": "https://fermatmind.com/zh/career/jobs/advertising-and-promotions-managers",
+            "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/advertising-and-promotions-managers?locale=en",
+            "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/advertising-and-promotions-managers?locale=zh-CN"
+          },
+          "module_counts": {
+            "en": 26,
+            "zh-CN": 12,
+            "en_only": 14,
+            "zh_only": 0
+          },
+          "zh_gate_reasons": [
+            "zh_missing_en_display_modules",
+            "amber_flag:display_asset_backed_directory_draft_shell",
+            "blocked_claim:compiled_recommendation_claims_unavailable",
+            "integrity_state:display_asset_backed",
+            "critical_missing_field:compiled_recommendation_snapshot"
+          ]
+        },
+        {
+          "slug": "advertising-promotions-and-marketing-managers",
+          "sample_urls": {
+            "en": "https://fermatmind.com/en/career/jobs/advertising-promotions-and-marketing-managers",
+            "zh": "https://fermatmind.com/zh/career/jobs/advertising-promotions-and-marketing-managers",
+            "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/advertising-promotions-and-marketing-managers?locale=en",
+            "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/advertising-promotions-and-marketing-managers?locale=zh-CN"
+          },
+          "module_counts": {
+            "en": 26,
+            "zh-CN": 12,
+            "en_only": 14,
+            "zh_only": 0
+          },
+          "zh_gate_reasons": [
+            "zh_missing_en_display_modules",
+            "amber_flag:display_asset_backed_directory_draft_shell",
+            "blocked_claim:compiled_recommendation_claims_unavailable",
+            "integrity_state:display_asset_backed",
+            "critical_missing_field:compiled_recommendation_snapshot"
+          ]
+        },
+        {
+          "slug": "advertising-sales-agents",
+          "sample_urls": {
+            "en": "https://fermatmind.com/en/career/jobs/advertising-sales-agents",
+            "zh": "https://fermatmind.com/zh/career/jobs/advertising-sales-agents",
+            "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/advertising-sales-agents?locale=en",
+            "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/advertising-sales-agents?locale=zh-CN"
+          },
+          "module_counts": {
+            "en": 26,
+            "zh-CN": 12,
+            "en_only": 14,
+            "zh_only": 0
+          },
+          "zh_gate_reasons": [
+            "zh_missing_en_display_modules",
+            "amber_flag:display_asset_backed_directory_draft_shell",
+            "blocked_claim:compiled_recommendation_claims_unavailable",
+            "integrity_state:display_asset_backed",
+            "critical_missing_field:compiled_recommendation_snapshot"
+          ]
+        },
+        {
+          "slug": "aerospace-engineering-and-operations-technicians",
+          "sample_urls": {
+            "en": "https://fermatmind.com/en/career/jobs/aerospace-engineering-and-operations-technicians",
+            "zh": "https://fermatmind.com/zh/career/jobs/aerospace-engineering-and-operations-technicians",
+            "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/aerospace-engineering-and-operations-technicians?locale=en",
+            "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/aerospace-engineering-and-operations-technicians?locale=zh-CN"
+          },
+          "module_counts": {
+            "en": 26,
+            "zh-CN": 12,
+            "en_only": 14,
+            "zh_only": 0
+          },
+          "zh_gate_reasons": [
+            "zh_missing_en_display_modules",
+            "amber_flag:display_asset_backed_directory_draft_shell",
+            "blocked_claim:compiled_recommendation_claims_unavailable",
+            "integrity_state:display_asset_backed",
+            "critical_missing_field:compiled_recommendation_snapshot"
+          ]
+        },
+        {
+          "slug": "agents-and-business-managers-of-artists-performers-and-athletes",
+          "sample_urls": {
+            "en": "https://fermatmind.com/en/career/jobs/agents-and-business-managers-of-artists-performers-and-athletes",
+            "zh": "https://fermatmind.com/zh/career/jobs/agents-and-business-managers-of-artists-performers-and-athletes",
+            "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/agents-and-business-managers-of-artists-performers-and-athletes?locale=en",
+            "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/agents-and-business-managers-of-artists-performers-and-athletes?locale=zh-CN"
+          },
+          "module_counts": {
+            "en": 26,
+            "zh-CN": 12,
+            "en_only": 14,
+            "zh_only": 0
+          },
+          "zh_gate_reasons": [
+            "zh_missing_en_display_modules",
+            "amber_flag:display_asset_backed_directory_draft_shell",
+            "blocked_claim:compiled_recommendation_claims_unavailable",
+            "integrity_state:display_asset_backed",
+            "critical_missing_field:compiled_recommendation_snapshot"
+          ]
+        },
+        {
+          "slug": "agricultural-and-food-science-technicians",
+          "sample_urls": {
+            "en": "https://fermatmind.com/en/career/jobs/agricultural-and-food-science-technicians",
+            "zh": "https://fermatmind.com/zh/career/jobs/agricultural-and-food-science-technicians",
+            "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/agricultural-and-food-science-technicians?locale=en",
+            "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/agricultural-and-food-science-technicians?locale=zh-CN"
+          },
+          "module_counts": {
+            "en": 26,
+            "zh-CN": 12,
+            "en_only": 14,
+            "zh_only": 0
+          },
+          "zh_gate_reasons": [
+            "zh_missing_en_display_modules",
+            "amber_flag:display_asset_backed_directory_draft_shell",
+            "blocked_claim:compiled_recommendation_claims_unavailable",
+            "integrity_state:display_asset_backed",
+            "critical_missing_field:compiled_recommendation_snapshot"
+          ]
+        },
+        {
+          "slug": "agricultural-engineers",
+          "sample_urls": {
+            "en": "https://fermatmind.com/en/career/jobs/agricultural-engineers",
+            "zh": "https://fermatmind.com/zh/career/jobs/agricultural-engineers",
+            "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/agricultural-engineers?locale=en",
+            "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/agricultural-engineers?locale=zh-CN"
+          },
+          "module_counts": {
+            "en": 26,
+            "zh-CN": 12,
+            "en_only": 14,
+            "zh_only": 0
+          },
+          "zh_gate_reasons": [
+            "zh_missing_en_display_modules",
+            "amber_flag:display_asset_backed_directory_draft_shell",
+            "blocked_claim:compiled_recommendation_claims_unavailable",
+            "integrity_state:display_asset_backed",
+            "critical_missing_field:compiled_recommendation_snapshot"
+          ]
+        },
+        {
+          "slug": "agricultural-equipment-operators",
+          "sample_urls": {
+            "en": "https://fermatmind.com/en/career/jobs/agricultural-equipment-operators",
+            "zh": "https://fermatmind.com/zh/career/jobs/agricultural-equipment-operators",
+            "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/agricultural-equipment-operators?locale=en",
+            "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/agricultural-equipment-operators?locale=zh-CN"
+          },
+          "module_counts": {
+            "en": 26,
+            "zh-CN": 12,
+            "en_only": 14,
+            "zh_only": 0
+          },
+          "zh_gate_reasons": [
+            "zh_missing_en_display_modules",
+            "amber_flag:display_asset_backed_directory_draft_shell",
+            "blocked_claim:compiled_recommendation_claims_unavailable",
+            "integrity_state:display_asset_backed",
+            "critical_missing_field:compiled_recommendation_snapshot"
+          ]
+        },
+        {
+          "slug": "agricultural-inspectors",
+          "sample_urls": {
+            "en": "https://fermatmind.com/en/career/jobs/agricultural-inspectors",
+            "zh": "https://fermatmind.com/zh/career/jobs/agricultural-inspectors",
+            "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/agricultural-inspectors?locale=en",
+            "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/agricultural-inspectors?locale=zh-CN"
+          },
+          "module_counts": {
+            "en": 26,
+            "zh-CN": 12,
+            "en_only": 14,
+            "zh_only": 0
+          },
+          "zh_gate_reasons": [
+            "zh_missing_en_display_modules",
+            "amber_flag:display_asset_backed_directory_draft_shell",
+            "blocked_claim:compiled_recommendation_claims_unavailable",
+            "integrity_state:display_asset_backed",
+            "critical_missing_field:compiled_recommendation_snapshot"
+          ]
+        },
+        {
+          "slug": "agricultural-sciences-teachers-postsecondary",
+          "sample_urls": {
+            "en": "https://fermatmind.com/en/career/jobs/agricultural-sciences-teachers-postsecondary",
+            "zh": "https://fermatmind.com/zh/career/jobs/agricultural-sciences-teachers-postsecondary",
+            "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/agricultural-sciences-teachers-postsecondary?locale=en",
+            "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/agricultural-sciences-teachers-postsecondary?locale=zh-CN"
+          },
+          "module_counts": {
+            "en": 26,
+            "zh-CN": 12,
+            "en_only": 14,
+            "zh_only": 0
+          },
+          "zh_gate_reasons": [
+            "zh_missing_en_display_modules",
+            "amber_flag:display_asset_backed_directory_draft_shell",
+            "blocked_claim:compiled_recommendation_claims_unavailable",
+            "integrity_state:display_asset_backed",
+            "critical_missing_field:compiled_recommendation_snapshot"
+          ]
+        }
+      ]
+    }
+  },
+  "samples": {
+    "same_module_set": [
+      {
+        "slug": "accountants-and-auditors",
+        "sample_urls": {
+          "en": "https://fermatmind.com/en/career/jobs/accountants-and-auditors",
+          "zh": "https://fermatmind.com/zh/career/jobs/accountants-and-auditors",
+          "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/accountants-and-auditors?locale=en",
+          "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/accountants-and-auditors?locale=zh-CN"
+        },
+        "module_counts": {
+          "en": 26,
+          "zh-CN": 26,
+          "en_only": 0,
+          "zh_only": 0
+        },
+        "zh_gate_reasons": [
+          "amber_flag:fit_score.provisional",
+          "amber_flag:strain_score.restricted",
+          "amber_flag:ai_survival_score.provisional",
+          "critical_missing_field:task_prototype_signature",
+          "critical_missing_field:structural_stability"
+        ]
+      },
+      {
+        "slug": "actors",
+        "sample_urls": {
+          "en": "https://fermatmind.com/en/career/jobs/actors",
+          "zh": "https://fermatmind.com/zh/career/jobs/actors",
+          "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/actors?locale=en",
+          "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/actors?locale=zh-CN"
+        },
+        "module_counts": {
+          "en": 4,
+          "zh-CN": 4,
+          "en_only": 0,
+          "zh_only": 0
+        },
+        "zh_gate_reasons": [
+          "amber_flag:display_asset_backed_directory_draft_shell",
+          "blocked_claim:compiled_recommendation_claims_unavailable",
+          "integrity_state:display_asset_backed",
+          "critical_missing_field:compiled_recommendation_snapshot"
+        ]
+      },
+      {
+        "slug": "aerospace-engineers",
+        "sample_urls": {
+          "en": "https://fermatmind.com/en/career/jobs/aerospace-engineers",
+          "zh": "https://fermatmind.com/zh/career/jobs/aerospace-engineers",
+          "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/aerospace-engineers?locale=en",
+          "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/aerospace-engineers?locale=zh-CN"
+        },
+        "module_counts": {
+          "en": 12,
+          "zh-CN": 12,
+          "en_only": 0,
+          "zh_only": 0
+        },
+        "zh_gate_reasons": [
+          "amber_flag:runtime_published_navigation_shell",
+          "blocked_claim:compiled_recommendation_claims_unavailable",
+          "blocked_claim:display_asset_claims_unavailable",
+          "integrity_state:runtime_published_shell",
+          "critical_missing_field:compiled_recommendation_snapshot",
+          "critical_missing_field:display_asset_claims"
+        ]
+      },
+      {
+        "slug": "agricultural-and-food-scientists",
+        "sample_urls": {
+          "en": "https://fermatmind.com/en/career/jobs/agricultural-and-food-scientists",
+          "zh": "https://fermatmind.com/zh/career/jobs/agricultural-and-food-scientists",
+          "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/agricultural-and-food-scientists?locale=en",
+          "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/agricultural-and-food-scientists?locale=zh-CN"
+        },
+        "module_counts": {
+          "en": 12,
+          "zh-CN": 12,
+          "en_only": 0,
+          "zh_only": 0
+        },
+        "zh_gate_reasons": [
+          "amber_flag:runtime_published_navigation_shell",
+          "blocked_claim:compiled_recommendation_claims_unavailable",
+          "blocked_claim:display_asset_claims_unavailable",
+          "integrity_state:runtime_published_shell",
+          "critical_missing_field:compiled_recommendation_snapshot",
+          "critical_missing_field:display_asset_claims"
+        ]
+      },
+      {
+        "slug": "agricultural-workers",
+        "sample_urls": {
+          "en": "https://fermatmind.com/en/career/jobs/agricultural-workers",
+          "zh": "https://fermatmind.com/zh/career/jobs/agricultural-workers",
+          "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/agricultural-workers?locale=en",
+          "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/agricultural-workers?locale=zh-CN"
+        },
+        "module_counts": {
+          "en": 12,
+          "zh-CN": 12,
+          "en_only": 0,
+          "zh_only": 0
+        },
+        "zh_gate_reasons": [
+          "amber_flag:runtime_published_navigation_shell",
+          "blocked_claim:compiled_recommendation_claims_unavailable",
+          "blocked_claim:display_asset_claims_unavailable",
+          "integrity_state:runtime_published_shell",
+          "critical_missing_field:compiled_recommendation_snapshot",
+          "critical_missing_field:display_asset_claims"
+        ]
+      },
+      {
+        "slug": "animal-scientists",
+        "sample_urls": {
+          "en": "https://fermatmind.com/en/career/jobs/animal-scientists",
+          "zh": "https://fermatmind.com/zh/career/jobs/animal-scientists",
+          "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/animal-scientists?locale=en",
+          "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/animal-scientists?locale=zh-CN"
+        },
+        "module_counts": {
+          "en": 26,
+          "zh-CN": 26,
+          "en_only": 0,
+          "zh_only": 0
+        },
+        "zh_gate_reasons": [
+          "amber_flag:display_asset_backed_directory_draft_shell",
+          "blocked_claim:compiled_recommendation_claims_unavailable",
+          "integrity_state:display_asset_backed",
+          "critical_missing_field:compiled_recommendation_snapshot"
+        ]
+      },
+      {
+        "slug": "animal-trainers",
+        "sample_urls": {
+          "en": "https://fermatmind.com/en/career/jobs/animal-trainers",
+          "zh": "https://fermatmind.com/zh/career/jobs/animal-trainers",
+          "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/animal-trainers?locale=en",
+          "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/animal-trainers?locale=zh-CN"
+        },
+        "module_counts": {
+          "en": 26,
+          "zh-CN": 26,
+          "en_only": 0,
+          "zh_only": 0
+        },
+        "zh_gate_reasons": [
+          "amber_flag:display_asset_backed_directory_draft_shell",
+          "blocked_claim:compiled_recommendation_claims_unavailable",
+          "integrity_state:display_asset_backed",
+          "critical_missing_field:compiled_recommendation_snapshot"
+        ]
+      },
+      {
+        "slug": "announcers",
+        "sample_urls": {
+          "en": "https://fermatmind.com/en/career/jobs/announcers",
+          "zh": "https://fermatmind.com/zh/career/jobs/announcers",
+          "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/announcers?locale=en",
+          "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/announcers?locale=zh-CN"
+        },
+        "module_counts": {
+          "en": 12,
+          "zh-CN": 12,
+          "en_only": 0,
+          "zh_only": 0
+        },
+        "zh_gate_reasons": [
+          "amber_flag:runtime_published_navigation_shell",
+          "blocked_claim:compiled_recommendation_claims_unavailable",
+          "blocked_claim:display_asset_claims_unavailable",
+          "integrity_state:runtime_published_shell",
+          "critical_missing_field:compiled_recommendation_snapshot",
+          "critical_missing_field:display_asset_claims"
+        ]
+      },
+      {
+        "slug": "anthropologists-and-archeologists",
+        "sample_urls": {
+          "en": "https://fermatmind.com/en/career/jobs/anthropologists-and-archeologists",
+          "zh": "https://fermatmind.com/zh/career/jobs/anthropologists-and-archeologists",
+          "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/anthropologists-and-archeologists?locale=en",
+          "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/anthropologists-and-archeologists?locale=zh-CN"
+        },
+        "module_counts": {
+          "en": 12,
+          "zh-CN": 12,
+          "en_only": 0,
+          "zh_only": 0
+        },
+        "zh_gate_reasons": [
+          "amber_flag:runtime_published_navigation_shell",
+          "blocked_claim:compiled_recommendation_claims_unavailable",
+          "blocked_claim:display_asset_claims_unavailable",
+          "integrity_state:runtime_published_shell",
+          "critical_missing_field:compiled_recommendation_snapshot",
+          "critical_missing_field:display_asset_claims"
+        ]
+      },
+      {
+        "slug": "anthropology-and-archeology-teachers-postsecondary",
+        "sample_urls": {
+          "en": "https://fermatmind.com/en/career/jobs/anthropology-and-archeology-teachers-postsecondary",
+          "zh": "https://fermatmind.com/zh/career/jobs/anthropology-and-archeology-teachers-postsecondary",
+          "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/anthropology-and-archeology-teachers-postsecondary?locale=en",
+          "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/anthropology-and-archeology-teachers-postsecondary?locale=zh-CN"
+        },
+        "module_counts": {
+          "en": 26,
+          "zh-CN": 26,
+          "en_only": 0,
+          "zh_only": 0
+        },
+        "zh_gate_reasons": [
+          "amber_flag:display_asset_backed_directory_draft_shell",
+          "blocked_claim:compiled_recommendation_claims_unavailable",
+          "integrity_state:display_asset_backed",
+          "critical_missing_field:compiled_recommendation_snapshot"
+        ]
+      },
+      {
+        "slug": "appraisers-and-assessors-of-real-estate",
+        "sample_urls": {
+          "en": "https://fermatmind.com/en/career/jobs/appraisers-and-assessors-of-real-estate",
+          "zh": "https://fermatmind.com/zh/career/jobs/appraisers-and-assessors-of-real-estate",
+          "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/appraisers-and-assessors-of-real-estate?locale=en",
+          "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/appraisers-and-assessors-of-real-estate?locale=zh-CN"
+        },
+        "module_counts": {
+          "en": 26,
+          "zh-CN": 26,
+          "en_only": 0,
+          "zh_only": 0
+        },
+        "zh_gate_reasons": [
+          "amber_flag:display_asset_backed_directory_draft_shell",
+          "blocked_claim:compiled_recommendation_claims_unavailable",
+          "integrity_state:display_asset_backed",
+          "critical_missing_field:compiled_recommendation_snapshot"
+        ]
+      },
+      {
+        "slug": "appraisers-of-personal-and-business-property",
+        "sample_urls": {
+          "en": "https://fermatmind.com/en/career/jobs/appraisers-of-personal-and-business-property",
+          "zh": "https://fermatmind.com/zh/career/jobs/appraisers-of-personal-and-business-property",
+          "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/appraisers-of-personal-and-business-property?locale=en",
+          "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/appraisers-of-personal-and-business-property?locale=zh-CN"
+        },
+        "module_counts": {
+          "en": 26,
+          "zh-CN": 26,
+          "en_only": 0,
+          "zh_only": 0
+        },
+        "zh_gate_reasons": [
+          "amber_flag:display_asset_backed_directory_draft_shell",
+          "blocked_claim:compiled_recommendation_claims_unavailable",
+          "integrity_state:display_asset_backed",
+          "critical_missing_field:compiled_recommendation_snapshot"
+        ]
+      },
+      {
+        "slug": "arbitrators-mediators-and-conciliators",
+        "sample_urls": {
+          "en": "https://fermatmind.com/en/career/jobs/arbitrators-mediators-and-conciliators",
+          "zh": "https://fermatmind.com/zh/career/jobs/arbitrators-mediators-and-conciliators",
+          "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/arbitrators-mediators-and-conciliators?locale=en",
+          "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/arbitrators-mediators-and-conciliators?locale=zh-CN"
+        },
+        "module_counts": {
+          "en": 12,
+          "zh-CN": 12,
+          "en_only": 0,
+          "zh_only": 0
+        },
+        "zh_gate_reasons": [
+          "amber_flag:runtime_published_navigation_shell",
+          "blocked_claim:compiled_recommendation_claims_unavailable",
+          "blocked_claim:display_asset_claims_unavailable",
+          "integrity_state:runtime_published_shell",
+          "critical_missing_field:compiled_recommendation_snapshot",
+          "critical_missing_field:display_asset_claims"
+        ]
+      },
+      {
+        "slug": "architects",
+        "sample_urls": {
+          "en": "https://fermatmind.com/en/career/jobs/architects",
+          "zh": "https://fermatmind.com/zh/career/jobs/architects",
+          "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/architects?locale=en",
+          "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/architects?locale=zh-CN"
+        },
+        "module_counts": {
+          "en": 26,
+          "zh-CN": 26,
+          "en_only": 0,
+          "zh_only": 0
+        },
+        "zh_gate_reasons": [
+          "amber_flag:display_asset_backed_directory_draft_shell",
+          "blocked_claim:compiled_recommendation_claims_unavailable",
+          "integrity_state:display_asset_backed",
+          "critical_missing_field:compiled_recommendation_snapshot"
+        ]
+      },
+      {
+        "slug": "architects-except-landscape-and-naval",
+        "sample_urls": {
+          "en": "https://fermatmind.com/en/career/jobs/architects-except-landscape-and-naval",
+          "zh": "https://fermatmind.com/zh/career/jobs/architects-except-landscape-and-naval",
+          "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/architects-except-landscape-and-naval?locale=en",
+          "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/architects-except-landscape-and-naval?locale=zh-CN"
+        },
+        "module_counts": {
+          "en": 26,
+          "zh-CN": 26,
+          "en_only": 0,
+          "zh_only": 0
+        },
+        "zh_gate_reasons": [
+          "amber_flag:display_asset_backed_directory_draft_shell",
+          "blocked_claim:compiled_recommendation_claims_unavailable",
+          "integrity_state:display_asset_backed",
+          "critical_missing_field:compiled_recommendation_snapshot"
+        ]
+      },
+      {
+        "slug": "architectural-and-civil-drafters",
+        "sample_urls": {
+          "en": "https://fermatmind.com/en/career/jobs/architectural-and-civil-drafters",
+          "zh": "https://fermatmind.com/zh/career/jobs/architectural-and-civil-drafters",
+          "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/architectural-and-civil-drafters?locale=en",
+          "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/architectural-and-civil-drafters?locale=zh-CN"
+        },
+        "module_counts": {
+          "en": 26,
+          "zh-CN": 26,
+          "en_only": 0,
+          "zh_only": 0
+        },
+        "zh_gate_reasons": [
+          "amber_flag:display_asset_backed_directory_draft_shell",
+          "blocked_claim:compiled_recommendation_claims_unavailable",
+          "integrity_state:display_asset_backed",
+          "critical_missing_field:compiled_recommendation_snapshot"
+        ]
+      },
+      {
+        "slug": "architectural-and-engineering-managers",
+        "sample_urls": {
+          "en": "https://fermatmind.com/en/career/jobs/architectural-and-engineering-managers",
+          "zh": "https://fermatmind.com/zh/career/jobs/architectural-and-engineering-managers",
+          "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/architectural-and-engineering-managers?locale=en",
+          "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/architectural-and-engineering-managers?locale=zh-CN"
+        },
+        "module_counts": {
+          "en": 26,
+          "zh-CN": 26,
+          "en_only": 0,
+          "zh_only": 0
+        },
+        "zh_gate_reasons": [
+          "amber_flag:display_asset_backed_directory_draft_shell",
+          "blocked_claim:compiled_recommendation_claims_unavailable",
+          "integrity_state:display_asset_backed",
+          "critical_missing_field:compiled_recommendation_snapshot"
+        ]
+      },
+      {
+        "slug": "architecture-teachers-postsecondary",
+        "sample_urls": {
+          "en": "https://fermatmind.com/en/career/jobs/architecture-teachers-postsecondary",
+          "zh": "https://fermatmind.com/zh/career/jobs/architecture-teachers-postsecondary",
+          "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/architecture-teachers-postsecondary?locale=en",
+          "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/architecture-teachers-postsecondary?locale=zh-CN"
+        },
+        "module_counts": {
+          "en": 26,
+          "zh-CN": 26,
+          "en_only": 0,
+          "zh_only": 0
+        },
+        "zh_gate_reasons": [
+          "amber_flag:display_asset_backed_directory_draft_shell",
+          "blocked_claim:compiled_recommendation_claims_unavailable",
+          "integrity_state:display_asset_backed",
+          "critical_missing_field:compiled_recommendation_snapshot"
+        ]
+      },
+      {
+        "slug": "archivists",
+        "sample_urls": {
+          "en": "https://fermatmind.com/en/career/jobs/archivists",
+          "zh": "https://fermatmind.com/zh/career/jobs/archivists",
+          "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/archivists?locale=en",
+          "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/archivists?locale=zh-CN"
+        },
+        "module_counts": {
+          "en": 26,
+          "zh-CN": 26,
+          "en_only": 0,
+          "zh_only": 0
+        },
+        "zh_gate_reasons": [
+          "amber_flag:display_asset_backed_directory_draft_shell",
+          "blocked_claim:compiled_recommendation_claims_unavailable",
+          "integrity_state:display_asset_backed",
+          "critical_missing_field:compiled_recommendation_snapshot"
+        ]
+      },
+      {
+        "slug": "area-ethnic-and-cultural-studies-teachers-postsecondary",
+        "sample_urls": {
+          "en": "https://fermatmind.com/en/career/jobs/area-ethnic-and-cultural-studies-teachers-postsecondary",
+          "zh": "https://fermatmind.com/zh/career/jobs/area-ethnic-and-cultural-studies-teachers-postsecondary",
+          "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/area-ethnic-and-cultural-studies-teachers-postsecondary?locale=en",
+          "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/area-ethnic-and-cultural-studies-teachers-postsecondary?locale=zh-CN"
+        },
+        "module_counts": {
+          "en": 26,
+          "zh-CN": 26,
+          "en_only": 0,
+          "zh_only": 0
+        },
+        "zh_gate_reasons": [
+          "amber_flag:display_asset_backed_directory_draft_shell",
+          "blocked_claim:compiled_recommendation_claims_unavailable",
+          "integrity_state:display_asset_backed",
+          "critical_missing_field:compiled_recommendation_snapshot"
+        ]
+      }
+    ],
+    "en_has_modules_zh_missing": [
+      {
+        "slug": "actuaries",
+        "sample_urls": {
+          "en": "https://fermatmind.com/en/career/jobs/actuaries",
+          "zh": "https://fermatmind.com/zh/career/jobs/actuaries",
+          "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/actuaries?locale=en",
+          "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/actuaries?locale=zh-CN"
+        },
+        "module_counts": {
+          "en": 26,
+          "zh-CN": 12,
+          "en_only": 14,
+          "zh_only": 0
+        },
+        "zh_gate_reasons": [
+          "zh_missing_en_display_modules",
+          "amber_flag:display_asset_backed_directory_draft_shell",
+          "blocked_claim:compiled_recommendation_claims_unavailable",
+          "integrity_state:display_asset_backed",
+          "critical_missing_field:compiled_recommendation_snapshot"
+        ]
+      },
+      {
+        "slug": "acupuncturists",
+        "sample_urls": {
+          "en": "https://fermatmind.com/en/career/jobs/acupuncturists",
+          "zh": "https://fermatmind.com/zh/career/jobs/acupuncturists",
+          "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/acupuncturists?locale=en",
+          "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/acupuncturists?locale=zh-CN"
+        },
+        "module_counts": {
+          "en": 26,
+          "zh-CN": 12,
+          "en_only": 14,
+          "zh_only": 0
+        },
+        "zh_gate_reasons": [
+          "zh_missing_en_display_modules",
+          "amber_flag:display_asset_backed_directory_draft_shell",
+          "blocked_claim:compiled_recommendation_claims_unavailable",
+          "integrity_state:display_asset_backed",
+          "critical_missing_field:compiled_recommendation_snapshot"
+        ]
+      },
+      {
+        "slug": "acute-care-nurses",
+        "sample_urls": {
+          "en": "https://fermatmind.com/en/career/jobs/acute-care-nurses",
+          "zh": "https://fermatmind.com/zh/career/jobs/acute-care-nurses",
+          "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/acute-care-nurses?locale=en",
+          "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/acute-care-nurses?locale=zh-CN"
+        },
+        "module_counts": {
+          "en": 26,
+          "zh-CN": 12,
+          "en_only": 14,
+          "zh_only": 0
+        },
+        "zh_gate_reasons": [
+          "zh_missing_en_display_modules",
+          "amber_flag:display_asset_backed_directory_draft_shell",
+          "blocked_claim:compiled_recommendation_claims_unavailable",
+          "integrity_state:display_asset_backed",
+          "critical_missing_field:compiled_recommendation_snapshot"
+        ]
+      },
+      {
+        "slug": "adapted-physical-education-specialists",
+        "sample_urls": {
+          "en": "https://fermatmind.com/en/career/jobs/adapted-physical-education-specialists",
+          "zh": "https://fermatmind.com/zh/career/jobs/adapted-physical-education-specialists",
+          "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/adapted-physical-education-specialists?locale=en",
+          "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/adapted-physical-education-specialists?locale=zh-CN"
+        },
+        "module_counts": {
+          "en": 26,
+          "zh-CN": 12,
+          "en_only": 14,
+          "zh_only": 0
+        },
+        "zh_gate_reasons": [
+          "zh_missing_en_display_modules",
+          "amber_flag:display_asset_backed_directory_draft_shell",
+          "blocked_claim:compiled_recommendation_claims_unavailable",
+          "integrity_state:display_asset_backed",
+          "critical_missing_field:compiled_recommendation_snapshot"
+        ]
+      },
+      {
+        "slug": "adhesive-bonding-machine-operators-and-tenders",
+        "sample_urls": {
+          "en": "https://fermatmind.com/en/career/jobs/adhesive-bonding-machine-operators-and-tenders",
+          "zh": "https://fermatmind.com/zh/career/jobs/adhesive-bonding-machine-operators-and-tenders",
+          "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/adhesive-bonding-machine-operators-and-tenders?locale=en",
+          "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/adhesive-bonding-machine-operators-and-tenders?locale=zh-CN"
+        },
+        "module_counts": {
+          "en": 26,
+          "zh-CN": 12,
+          "en_only": 14,
+          "zh_only": 0
+        },
+        "zh_gate_reasons": [
+          "zh_missing_en_display_modules",
+          "amber_flag:display_asset_backed_directory_draft_shell",
+          "blocked_claim:compiled_recommendation_claims_unavailable",
+          "integrity_state:display_asset_backed",
+          "critical_missing_field:compiled_recommendation_snapshot"
+        ]
+      },
+      {
+        "slug": "administrative-law-judges-adjudicators-and-hearing-officers",
+        "sample_urls": {
+          "en": "https://fermatmind.com/en/career/jobs/administrative-law-judges-adjudicators-and-hearing-officers",
+          "zh": "https://fermatmind.com/zh/career/jobs/administrative-law-judges-adjudicators-and-hearing-officers",
+          "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/administrative-law-judges-adjudicators-and-hearing-officers?locale=en",
+          "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/administrative-law-judges-adjudicators-and-hearing-officers?locale=zh-CN"
+        },
+        "module_counts": {
+          "en": 26,
+          "zh-CN": 12,
+          "en_only": 14,
+          "zh_only": 0
+        },
+        "zh_gate_reasons": [
+          "zh_missing_en_display_modules",
+          "amber_flag:display_asset_backed_directory_draft_shell",
+          "blocked_claim:compiled_recommendation_claims_unavailable",
+          "integrity_state:display_asset_backed",
+          "critical_missing_field:compiled_recommendation_snapshot"
+        ]
+      },
+      {
+        "slug": "administrative-services-managers",
+        "sample_urls": {
+          "en": "https://fermatmind.com/en/career/jobs/administrative-services-managers",
+          "zh": "https://fermatmind.com/zh/career/jobs/administrative-services-managers",
+          "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/administrative-services-managers?locale=en",
+          "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/administrative-services-managers?locale=zh-CN"
+        },
+        "module_counts": {
+          "en": 26,
+          "zh-CN": 12,
+          "en_only": 14,
+          "zh_only": 0
+        },
+        "zh_gate_reasons": [
+          "zh_missing_en_display_modules",
+          "amber_flag:display_asset_backed_directory_draft_shell",
+          "blocked_claim:compiled_recommendation_claims_unavailable",
+          "integrity_state:display_asset_backed",
+          "critical_missing_field:compiled_recommendation_snapshot"
+        ]
+      },
+      {
+        "slug": "adult-basic-education-adult-secondary-education-and-english-as-a-second-language-instructors",
+        "sample_urls": {
+          "en": "https://fermatmind.com/en/career/jobs/adult-basic-education-adult-secondary-education-and-english-as-a-second-language-instructors",
+          "zh": "https://fermatmind.com/zh/career/jobs/adult-basic-education-adult-secondary-education-and-english-as-a-second-language-instructors",
+          "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/adult-basic-education-adult-secondary-education-and-english-as-a-second-language-instructors?locale=en",
+          "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/adult-basic-education-adult-secondary-education-and-english-as-a-second-language-instructors?locale=zh-CN"
+        },
+        "module_counts": {
+          "en": 26,
+          "zh-CN": 12,
+          "en_only": 14,
+          "zh_only": 0
+        },
+        "zh_gate_reasons": [
+          "zh_missing_en_display_modules",
+          "amber_flag:display_asset_backed_directory_draft_shell",
+          "blocked_claim:compiled_recommendation_claims_unavailable",
+          "integrity_state:display_asset_backed",
+          "critical_missing_field:compiled_recommendation_snapshot"
+        ]
+      },
+      {
+        "slug": "adult-literacy-and-ged-teachers",
+        "sample_urls": {
+          "en": "https://fermatmind.com/en/career/jobs/adult-literacy-and-ged-teachers",
+          "zh": "https://fermatmind.com/zh/career/jobs/adult-literacy-and-ged-teachers",
+          "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/adult-literacy-and-ged-teachers?locale=en",
+          "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/adult-literacy-and-ged-teachers?locale=zh-CN"
+        },
+        "module_counts": {
+          "en": 26,
+          "zh-CN": 12,
+          "en_only": 14,
+          "zh_only": 0
+        },
+        "zh_gate_reasons": [
+          "zh_missing_en_display_modules",
+          "amber_flag:display_asset_backed_directory_draft_shell",
+          "blocked_claim:compiled_recommendation_claims_unavailable",
+          "integrity_state:display_asset_backed",
+          "critical_missing_field:compiled_recommendation_snapshot"
+        ]
+      },
+      {
+        "slug": "advanced-practice-psychiatric-nurses",
+        "sample_urls": {
+          "en": "https://fermatmind.com/en/career/jobs/advanced-practice-psychiatric-nurses",
+          "zh": "https://fermatmind.com/zh/career/jobs/advanced-practice-psychiatric-nurses",
+          "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/advanced-practice-psychiatric-nurses?locale=en",
+          "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/advanced-practice-psychiatric-nurses?locale=zh-CN"
+        },
+        "module_counts": {
+          "en": 26,
+          "zh-CN": 12,
+          "en_only": 14,
+          "zh_only": 0
+        },
+        "zh_gate_reasons": [
+          "zh_missing_en_display_modules",
+          "amber_flag:display_asset_backed_directory_draft_shell",
+          "blocked_claim:compiled_recommendation_claims_unavailable",
+          "integrity_state:display_asset_backed",
+          "critical_missing_field:compiled_recommendation_snapshot"
+        ]
+      },
+      {
+        "slug": "advertising-and-promotions-managers",
+        "sample_urls": {
+          "en": "https://fermatmind.com/en/career/jobs/advertising-and-promotions-managers",
+          "zh": "https://fermatmind.com/zh/career/jobs/advertising-and-promotions-managers",
+          "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/advertising-and-promotions-managers?locale=en",
+          "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/advertising-and-promotions-managers?locale=zh-CN"
+        },
+        "module_counts": {
+          "en": 26,
+          "zh-CN": 12,
+          "en_only": 14,
+          "zh_only": 0
+        },
+        "zh_gate_reasons": [
+          "zh_missing_en_display_modules",
+          "amber_flag:display_asset_backed_directory_draft_shell",
+          "blocked_claim:compiled_recommendation_claims_unavailable",
+          "integrity_state:display_asset_backed",
+          "critical_missing_field:compiled_recommendation_snapshot"
+        ]
+      },
+      {
+        "slug": "advertising-promotions-and-marketing-managers",
+        "sample_urls": {
+          "en": "https://fermatmind.com/en/career/jobs/advertising-promotions-and-marketing-managers",
+          "zh": "https://fermatmind.com/zh/career/jobs/advertising-promotions-and-marketing-managers",
+          "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/advertising-promotions-and-marketing-managers?locale=en",
+          "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/advertising-promotions-and-marketing-managers?locale=zh-CN"
+        },
+        "module_counts": {
+          "en": 26,
+          "zh-CN": 12,
+          "en_only": 14,
+          "zh_only": 0
+        },
+        "zh_gate_reasons": [
+          "zh_missing_en_display_modules",
+          "amber_flag:display_asset_backed_directory_draft_shell",
+          "blocked_claim:compiled_recommendation_claims_unavailable",
+          "integrity_state:display_asset_backed",
+          "critical_missing_field:compiled_recommendation_snapshot"
+        ]
+      },
+      {
+        "slug": "advertising-sales-agents",
+        "sample_urls": {
+          "en": "https://fermatmind.com/en/career/jobs/advertising-sales-agents",
+          "zh": "https://fermatmind.com/zh/career/jobs/advertising-sales-agents",
+          "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/advertising-sales-agents?locale=en",
+          "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/advertising-sales-agents?locale=zh-CN"
+        },
+        "module_counts": {
+          "en": 26,
+          "zh-CN": 12,
+          "en_only": 14,
+          "zh_only": 0
+        },
+        "zh_gate_reasons": [
+          "zh_missing_en_display_modules",
+          "amber_flag:display_asset_backed_directory_draft_shell",
+          "blocked_claim:compiled_recommendation_claims_unavailable",
+          "integrity_state:display_asset_backed",
+          "critical_missing_field:compiled_recommendation_snapshot"
+        ]
+      },
+      {
+        "slug": "aerospace-engineering-and-operations-technicians",
+        "sample_urls": {
+          "en": "https://fermatmind.com/en/career/jobs/aerospace-engineering-and-operations-technicians",
+          "zh": "https://fermatmind.com/zh/career/jobs/aerospace-engineering-and-operations-technicians",
+          "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/aerospace-engineering-and-operations-technicians?locale=en",
+          "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/aerospace-engineering-and-operations-technicians?locale=zh-CN"
+        },
+        "module_counts": {
+          "en": 26,
+          "zh-CN": 12,
+          "en_only": 14,
+          "zh_only": 0
+        },
+        "zh_gate_reasons": [
+          "zh_missing_en_display_modules",
+          "amber_flag:display_asset_backed_directory_draft_shell",
+          "blocked_claim:compiled_recommendation_claims_unavailable",
+          "integrity_state:display_asset_backed",
+          "critical_missing_field:compiled_recommendation_snapshot"
+        ]
+      },
+      {
+        "slug": "agents-and-business-managers-of-artists-performers-and-athletes",
+        "sample_urls": {
+          "en": "https://fermatmind.com/en/career/jobs/agents-and-business-managers-of-artists-performers-and-athletes",
+          "zh": "https://fermatmind.com/zh/career/jobs/agents-and-business-managers-of-artists-performers-and-athletes",
+          "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/agents-and-business-managers-of-artists-performers-and-athletes?locale=en",
+          "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/agents-and-business-managers-of-artists-performers-and-athletes?locale=zh-CN"
+        },
+        "module_counts": {
+          "en": 26,
+          "zh-CN": 12,
+          "en_only": 14,
+          "zh_only": 0
+        },
+        "zh_gate_reasons": [
+          "zh_missing_en_display_modules",
+          "amber_flag:display_asset_backed_directory_draft_shell",
+          "blocked_claim:compiled_recommendation_claims_unavailable",
+          "integrity_state:display_asset_backed",
+          "critical_missing_field:compiled_recommendation_snapshot"
+        ]
+      },
+      {
+        "slug": "agricultural-and-food-science-technicians",
+        "sample_urls": {
+          "en": "https://fermatmind.com/en/career/jobs/agricultural-and-food-science-technicians",
+          "zh": "https://fermatmind.com/zh/career/jobs/agricultural-and-food-science-technicians",
+          "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/agricultural-and-food-science-technicians?locale=en",
+          "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/agricultural-and-food-science-technicians?locale=zh-CN"
+        },
+        "module_counts": {
+          "en": 26,
+          "zh-CN": 12,
+          "en_only": 14,
+          "zh_only": 0
+        },
+        "zh_gate_reasons": [
+          "zh_missing_en_display_modules",
+          "amber_flag:display_asset_backed_directory_draft_shell",
+          "blocked_claim:compiled_recommendation_claims_unavailable",
+          "integrity_state:display_asset_backed",
+          "critical_missing_field:compiled_recommendation_snapshot"
+        ]
+      },
+      {
+        "slug": "agricultural-engineers",
+        "sample_urls": {
+          "en": "https://fermatmind.com/en/career/jobs/agricultural-engineers",
+          "zh": "https://fermatmind.com/zh/career/jobs/agricultural-engineers",
+          "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/agricultural-engineers?locale=en",
+          "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/agricultural-engineers?locale=zh-CN"
+        },
+        "module_counts": {
+          "en": 26,
+          "zh-CN": 12,
+          "en_only": 14,
+          "zh_only": 0
+        },
+        "zh_gate_reasons": [
+          "zh_missing_en_display_modules",
+          "amber_flag:display_asset_backed_directory_draft_shell",
+          "blocked_claim:compiled_recommendation_claims_unavailable",
+          "integrity_state:display_asset_backed",
+          "critical_missing_field:compiled_recommendation_snapshot"
+        ]
+      },
+      {
+        "slug": "agricultural-equipment-operators",
+        "sample_urls": {
+          "en": "https://fermatmind.com/en/career/jobs/agricultural-equipment-operators",
+          "zh": "https://fermatmind.com/zh/career/jobs/agricultural-equipment-operators",
+          "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/agricultural-equipment-operators?locale=en",
+          "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/agricultural-equipment-operators?locale=zh-CN"
+        },
+        "module_counts": {
+          "en": 26,
+          "zh-CN": 12,
+          "en_only": 14,
+          "zh_only": 0
+        },
+        "zh_gate_reasons": [
+          "zh_missing_en_display_modules",
+          "amber_flag:display_asset_backed_directory_draft_shell",
+          "blocked_claim:compiled_recommendation_claims_unavailable",
+          "integrity_state:display_asset_backed",
+          "critical_missing_field:compiled_recommendation_snapshot"
+        ]
+      },
+      {
+        "slug": "agricultural-inspectors",
+        "sample_urls": {
+          "en": "https://fermatmind.com/en/career/jobs/agricultural-inspectors",
+          "zh": "https://fermatmind.com/zh/career/jobs/agricultural-inspectors",
+          "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/agricultural-inspectors?locale=en",
+          "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/agricultural-inspectors?locale=zh-CN"
+        },
+        "module_counts": {
+          "en": 26,
+          "zh-CN": 12,
+          "en_only": 14,
+          "zh_only": 0
+        },
+        "zh_gate_reasons": [
+          "zh_missing_en_display_modules",
+          "amber_flag:display_asset_backed_directory_draft_shell",
+          "blocked_claim:compiled_recommendation_claims_unavailable",
+          "integrity_state:display_asset_backed",
+          "critical_missing_field:compiled_recommendation_snapshot"
+        ]
+      },
+      {
+        "slug": "agricultural-sciences-teachers-postsecondary",
+        "sample_urls": {
+          "en": "https://fermatmind.com/en/career/jobs/agricultural-sciences-teachers-postsecondary",
+          "zh": "https://fermatmind.com/zh/career/jobs/agricultural-sciences-teachers-postsecondary",
+          "api_en": "https://api.fermatmind.com/api/v0.5/career/jobs/agricultural-sciences-teachers-postsecondary?locale=en",
+          "api_zh": "https://api.fermatmind.com/api/v0.5/career/jobs/agricultural-sciences-teachers-postsecondary?locale=zh-CN"
+        },
+        "module_counts": {
+          "en": 26,
+          "zh-CN": 12,
+          "en_only": 14,
+          "zh_only": 0
+        },
+        "zh_gate_reasons": [
+          "zh_missing_en_display_modules",
+          "amber_flag:display_asset_backed_directory_draft_shell",
+          "blocked_claim:compiled_recommendation_claims_unavailable",
+          "integrity_state:display_asset_backed",
+          "critical_missing_field:compiled_recommendation_snapshot"
+        ]
+      }
+    ]
+  },
+  "items_omitted": true,
+  "external_blocker": "Reviewed zh display import/publish/cache refresh has not yet cleared live parity blockers."
+}
