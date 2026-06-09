@@ -51475,7 +51475,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-sitemap-diff-03",
     "base": "origin/main",
-    "status": "github_checks_passed_ready_to_merge",
+    "status": "merged",
     "train_scope": "sitemap_diff_parity",
     "title": "SEO-SITEMAP-DIFF-03: fix(seo): align non-scale sitemap static and index URLs",
     "depends_on": [
@@ -51542,9 +51542,9 @@
     "failure_reason": null,
     "commit_sha": "c4f13c29810c8d89beaaa880a397d16999962e7b",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2009",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-09T03:22:41Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "result": {
       "excluded_backend_only_urls": [
         "dataset hub/method URLs",
@@ -51705,6 +51705,11 @@
         "at": "2026-06-09",
         "status": "github_checks_passed_ready_to_merge",
         "note": "GitHub checks passed for PR #2010 at head 13267cf796b5c9397f106cf196949a4858095fe6 and mergeStateStatus is CLEAN."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "merged",
+        "note": "Reconciled during SEO-CONV-DAILY-04: GitHub PR #2010 is MERGED at 2026-06-09T03:22:41Z with merge commit db2541da0af434fbb27143bdfda9cb04748d2749, origin/main contains the merge commit, and git ls-remote shows codex/seo-conv-ingest-02 is deleted on origin."
       }
     ]
   },
@@ -51712,7 +51717,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-conv-daily-04",
     "base": "origin/main",
-    "status": "pending_dependency",
+    "status": "github_checks_passed_ready_to_merge",
     "train_scope": "seo_conversion_tracking",
     "title": "SEO-CONV-DAILY-04: feat(analytics): aggregate SEO conversion funnel daily",
     "depends_on": [
@@ -51725,13 +51730,64 @@
         "evidence": "User explicitly authorized the SEO-CONV PR train and fap-api docs/codex metadata updates on 2026-06-09."
       },
       "dependency": {
-        "status": "pending",
-        "evidence": "Must wait for SEO-CONV-INGEST-02 and SEO-CONV-RUNTIME-03 to merge before starting."
+        "status": "pass",
+        "evidence": "SEO-CONV-INGEST-02 merged into fap-api main as PR #2010 at 2026-06-09T03:22:41Z with merge commit db2541da0af434fbb27143bdfda9cb04748d2749. SEO-CONV-RUNTIME-03 merged into fap-web main as PR #1085 at 2026-06-09T03:45:35Z with merge commit 84f0d718ac0a322322223b327106cadba803bc87."
+      },
+      "scope": {
+        "status": "pass",
+        "evidence": "Changed files are confined to the SEO conversion daily Analytics service, refresh command, migration, focused Analytics feature test, and docs/codex metadata.",
+        "allowed_paths": [
+          "backend/app/Services/Analytics/**",
+          "backend/app/Console/Commands/**",
+          "backend/database/migrations/**",
+          "backend/tests/Feature/Analytics/**",
+          "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+          "docs/codex/pr-train.yaml",
+          "docs/codex/pr-train-state.json"
+        ]
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "php -l backend/app/Services/Analytics/SeoConversionDailyBuilder.php",
+          "php -l backend/app/Console/Commands/RefreshSeoConversionDailyCommand.php",
+          "php -l backend/database/migrations/2026_06_09_000100_create_analytics_seo_conversion_daily_table.php",
+          "php -l backend/tests/Feature/Analytics/SeoConversionDailyBuilderTest.php",
+          "cd backend && php artisan list --raw | rg \"analytics:refresh-seo-conversion-daily|analytics:refresh-mbti-attribution-daily\"",
+          "cd backend && php artisan test --filter=SeoConversionDailyBuilderTest --no-ansi",
+          "cd backend && php artisan test --filter=MbtiAttributionEventIngestTest --no-ansi",
+          "cd backend && php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_seo_conversion_daily_read_model_changes' --no-ansi",
+          "cd backend && ./vendor/bin/pint --test app/Services/Analytics/SeoConversionDailyBuilder.php app/Console/Commands/RefreshSeoConversionDailyCommand.php tests/Feature/Analytics/SeoConversionDailyBuilderTest.php",
+          "cd backend && php artisan route:list --path=api/v0.5/seo --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi | rg \"analytics_seo_conversion_daily|analytics_seo_conv_daily\"",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "git diff --check -- backend/app/Services/Analytics/SeoConversionDailyBuilder.php backend/app/Console/Commands/RefreshSeoConversionDailyCommand.php backend/database/migrations/2026_06_09_000100_create_analytics_seo_conversion_daily_table.php backend/tests/Feature/Analytics/SeoConversionDailyBuilderTest.php backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json"
+        ],
+        "evidence": "PHP lint passed for the new builder, command, migration, feature test, and BigFive classifier test. Artisan auto-discovers analytics:refresh-seo-conversion-daily. Focused SeoConversionDailyBuilderTest passed 4 tests / 30 assertions. Existing MbtiAttributionEventIngestTest passed 11 tests / 62 assertions. Focused BigFive runtime freeze classifier regression passed after adding the SEO conversion daily read-model exception. Pint --test passed for scoped PHP files. v0.5 SEO route-list remained visible. Migration pretend showed only analytics_seo_conversion_daily DDL. JSON/YAML parse, scope validation, and path-limited git diff --check passed."
+      },
+      "github": {
+        "status": "pass",
+        "head_sha": "b3e9668eb2d05d680fd2abe71cd3640d741fb287",
+        "checks": [
+          "hygiene",
+          "supply-chain",
+          "content-pack-build-validate",
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "Semgrep OSS",
+          "verify-bigfive",
+          "verify-mbti-legacy",
+          "verify-mbti-v2"
+        ],
+        "merge_state": "CLEAN",
+        "failure_reason": null,
+        "evidence": "GitHub checks passed for PR #2011 at head b3e9668eb2d05d680fd2abe71cd3640d741fb287 after adding the BigFive freeze classifier exception for SEO conversion daily read-model files."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "21b6fc6d2328d95cb09358aa0920e8708d23b1d4",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2011",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -51741,6 +51797,41 @@
         "at": "2026-06-09",
         "status": "pending_dependency",
         "note": "Initialized future fap-api daily aggregation PR metadata only; implementation intentionally deferred."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "in_progress",
+        "note": "Created branch codex/seo-conv-daily-04 from fap-api main after verifying SEO-CONV-INGEST-02 and SEO-CONV-RUNTIME-03 are merged; implementing only daily aggregation read model scope."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "local_checks_passed",
+        "note": "Added analytics_seo_conversion_daily migration, safe daily builder, refresh command, and focused tests; local lint, focused tests, Pint, route-list, migration pretend, metadata parse, scope validation, and diff checks passed."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "committed_pending_push",
+        "note": "Created scoped implementation commit 21b6fc6d2328d95cb09358aa0920e8708d23b1d4."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "github_checks_pending",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/2011 from branch codex/seo-conv-daily-04; GitHub checks pending."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "github_checks_failed_fix_in_progress",
+        "note": "GitHub verify-bigfive failed because the BigFive runtime freeze classifier treated SEO conversion daily command, Analytics service, and migration files as BigFive runtime changes."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "local_checks_passed_after_github_fix",
+        "note": "Added a narrow BigFive freeze classifier exception and focused regression for SEO conversion daily read-model files; focused BigFive regression and SeoConversionDailyBuilderTest passed locally."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "github_checks_passed_ready_to_merge",
+        "note": "GitHub checks passed for PR #2011 at head b3e9668eb2d05d680fd2abe71cd3640d741fb287 and mergeStateStatus is CLEAN."
       }
     ]
   },
