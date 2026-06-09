@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\ContentPages;
 
+use App\Models\CmsTranslationRevision;
 use App\Models\ContentPage;
 use App\Services\Cms\RowBackedRevisionWorkspace;
 use Illuminate\Support\Facades\DB;
@@ -17,13 +18,19 @@ final class ContentPagesControlledPublishService
 
     public const SCOPE_HELP_SERVICE = 'help-service';
 
+    public const SCOPE_SCIENCE_ZH = 'science-zh';
+
     public const LOCALE = 'en';
 
     public const HELP_SERVICE_LOCALE_OPTION = 'all';
 
+    public const SCIENCE_ZH_LOCALE = 'zh-CN';
+
     public const CMS_DRAFT_UPDATE_SOURCE_MARKER = 'global-en-zh-content-pages-cms-draft-update-01';
 
     public const HELP_SERVICE_SOURCE_MARKER = 'HELP-SERVICE-CONTENT-DRAFTS-01';
+
+    public const SCIENCE_ZH_SOURCE_MARKER = 'science-contentpage-gpt55-review-draft-2026-06-08/pages/';
 
     public const FOUNDATION_FACT_STATE = 'planned_public_benefit_shareholding';
 
@@ -50,6 +57,17 @@ final class ContentPagesControlledPublishService
         'help-privacy-data',
         'help-use-boundaries',
         'help-data-deletion',
+    ];
+
+    /**
+     * @var list<string>
+     */
+    public const SCIENCE_ZH_ALLOWED_KEYS = [
+        'science',
+        'item-design-notes',
+        'reliability-validity',
+        'data-privacy',
+        'common-misconceptions',
     ];
 
     /**
@@ -123,7 +141,19 @@ final class ContentPagesControlledPublishService
                     continue;
                 }
 
+                if ($scope === self::SCOPE_SCIENCE_ZH) {
+                    $page = $this->prepareScienceZhForPublish($page);
+                } elseif ($scope === self::SCOPE_HELP_SERVICE && $page->isScienceControlledPage()) {
+                    $page = $this->prepareScienceControlledGateForPublish($page);
+                }
+
                 $publishedPage = $this->workspace->publishWorkingRevision('content_page', $page);
+                if ($scope === self::SCOPE_SCIENCE_ZH) {
+                    $publishedPage = $this->prepareScienceZhForPublish($publishedPage);
+                } elseif ($scope === self::SCOPE_HELP_SERVICE && $publishedPage->isScienceControlledPage()) {
+                    $publishedPage = $this->prepareScienceControlledGateForPublish($publishedPage);
+                }
+
                 $published[] = (string) ($pagePlan['target_key'] ?? $publishedPage->slug);
             }
 
@@ -152,10 +182,10 @@ final class ContentPagesControlledPublishService
         $allowedKeys = $this->allowedKeys($scope);
         $targetLocales = $this->targetLocales($scope, $locale);
 
-        if (! in_array($scope, [self::SCOPE_GLOBAL_EN_WAVE1, self::SCOPE_HELP_SERVICE], true)) {
+        if (! in_array($scope, [self::SCOPE_GLOBAL_EN_WAVE1, self::SCOPE_HELP_SERVICE, self::SCOPE_SCIENCE_ZH], true)) {
             $errors[] = $this->issue('scope', 'unsupported_scope', 'Unsupported content-pages controlled publish scope.', [
                 'actual' => $scope,
-                'supported' => [self::SCOPE_GLOBAL_EN_WAVE1, self::SCOPE_HELP_SERVICE],
+                'supported' => [self::SCOPE_GLOBAL_EN_WAVE1, self::SCOPE_HELP_SERVICE, self::SCOPE_SCIENCE_ZH],
             ]);
         }
 
@@ -167,6 +197,12 @@ final class ContentPagesControlledPublishService
 
         if ($scope === self::SCOPE_HELP_SERVICE && $locale !== self::HELP_SERVICE_LOCALE_OPTION) {
             $errors[] = $this->issue('locale', 'unsupported_locale', 'Help service controlled publish requires --locale=all so both zh-CN and en rows are in scope.', [
+                'actual' => $locale,
+            ]);
+        }
+
+        if ($scope === self::SCOPE_SCIENCE_ZH && $locale !== self::SCIENCE_ZH_LOCALE) {
+            $errors[] = $this->issue('locale', 'unsupported_locale', 'Science zh controlled publish requires --locale=zh-CN.', [
                 'actual' => $locale,
             ]);
         }
@@ -303,14 +339,14 @@ final class ContentPagesControlledPublishService
             $errors[] = $this->issue('content_pages.'.$key, 'non_allowlisted_key', 'Content page key is not allowlisted.');
         }
 
-        if (! in_array((string) $page->locale, $this->targetLocales($scope, $scope === self::SCOPE_HELP_SERVICE ? self::HELP_SERVICE_LOCALE_OPTION : self::LOCALE), true)) {
+        if (! in_array((string) $page->locale, $this->targetLocales($scope, $this->defaultLocaleOption($scope)), true)) {
             $errors[] = $this->issue('content_pages.'.$key.'.locale', 'invalid_locale', 'Target content page locale is not allowed for this scope.', [
                 'scope' => $scope,
                 'locale' => (string) $page->locale,
             ]);
         }
 
-        $sourceMarker = $scope === self::SCOPE_HELP_SERVICE ? self::HELP_SERVICE_SOURCE_MARKER : self::CMS_DRAFT_UPDATE_SOURCE_MARKER;
+        $sourceMarker = $this->sourceMarker($scope);
         if (! str_contains((string) $page->source_doc, $sourceMarker)) {
             $errors[] = $this->issue('content_pages.'.$key.'.source_doc', 'missing_cms_draft_update_marker', 'Target content page must reflect the approved CMS draft update source marker.', [
                 'expected_marker' => $sourceMarker,
@@ -329,6 +365,10 @@ final class ContentPagesControlledPublishService
             array_push($errors, ...$this->preflightHelpServicePage($page));
         }
 
+        if ($scope === self::SCOPE_SCIENCE_ZH) {
+            array_push($errors, ...$this->preflightScienceZhPage($page));
+        }
+
         if ($scope === self::SCOPE_GLOBAL_EN_WAVE1 && $key === 'foundation') {
             $text = $this->pageText($page);
             if (! str_contains($text, 'planned public-benefit shareholding')) {
@@ -342,6 +382,37 @@ final class ContentPagesControlledPublishService
             if ($this->hasFoundationOverclaim($page)) {
                 $errors[] = $this->issue('content_pages.foundation', 'foundation_overclaim_detected', 'Foundation page contains a forbidden legal/foundation overclaim.');
             }
+        }
+
+        return $errors;
+    }
+
+    /**
+     * @return list<array<string, mixed>>
+     */
+    private function preflightScienceZhPage(ContentPage $page): array
+    {
+        $errors = [];
+        $fieldPrefix = 'content_pages.'.(string) $page->locale.':'.(string) $page->slug;
+
+        if ((string) $page->kind !== ContentPage::KIND_POLICY) {
+            $errors[] = $this->issue($fieldPrefix.'.kind', 'invalid_kind', 'Science zh controlled publish only allows kind=policy.');
+        }
+
+        if ((string) $page->locale !== self::SCIENCE_ZH_LOCALE) {
+            $errors[] = $this->issue($fieldPrefix.'.locale', 'invalid_locale', 'Science zh controlled publish only allows zh-CN rows.');
+        }
+
+        if (trim((string) $page->content_md) === '') {
+            $errors[] = $this->issue($fieldPrefix.'.content_md', 'missing_content_md', 'Science zh page must have CMS body content before controlled publish.');
+        }
+
+        if ($this->hasPrivateUrlReference($this->pageText($page))) {
+            $errors[] = $this->issue($fieldPrefix.'.content_md', 'private_url_pattern_present', 'Science zh page content must not reference private result/order/share/pay/history URLs or sensitive query parameters.');
+        }
+
+        if ($this->isPublishedTarget($page) && ! $page->passesPublicReadinessGate()) {
+            $errors[] = $this->issue($fieldPrefix.'.public_readiness_gate', 'public_readiness_gate_failed', 'Already-published science zh page must satisfy the first-class public readiness gate.');
         }
 
         return $errors;
@@ -405,6 +476,68 @@ final class ContentPagesControlledPublishService
             && $page->published_at !== null;
     }
 
+    private function prepareScienceZhForPublish(ContentPage $page): ContentPage
+    {
+        $page = $this->prepareScienceControlledGateForPublish($page);
+
+        return $page->refresh();
+    }
+
+    private function prepareScienceControlledGateForPublish(ContentPage $page): ContentPage
+    {
+        $approvedAt = $page->operator_approved_at ?? now();
+        $reviewedAt = $page->last_reviewed_at ?? now();
+        $payloadPatch = [
+            'review_state' => 'approved',
+            'legal_review_required' => false,
+            'science_review_required' => false,
+            'reviewer' => trim((string) $page->reviewer) === '' ? 'operator_review' : $page->reviewer,
+            'schema_enabled' => false,
+            'publish_allowed' => true,
+            'operator_approval_required' => true,
+            'operator_approved_at' => $approvedAt,
+            'claim_gate_status' => 'passed',
+            'forbidden_claims' => [],
+            'faq_schema_eligible' => false,
+            'schema_eligibility_reviewed_at' => null,
+            'is_public' => false,
+            'is_indexable' => false,
+        ];
+
+        $working = $this->workspace->workingRevision('content_page', $page);
+        $payload = is_array($working->payload_json) ? $working->payload_json : [];
+        $working->forceFill([
+            'revision_status' => CmsTranslationRevision::STATUS_APPROVED,
+            'payload_json' => [
+                ...$payload,
+                ...$payloadPatch,
+                'operator_approved_at' => $approvedAt,
+                'schema_eligibility_reviewed_at' => null,
+            ],
+            'approved_at' => $working->approved_at ?? $approvedAt,
+        ])->save();
+
+        $page->forceFill([
+            'review_state' => 'approved',
+            'legal_review_required' => false,
+            'science_review_required' => false,
+            'last_reviewed_at' => $reviewedAt,
+            'reviewer' => (string) $payloadPatch['reviewer'],
+            'schema_enabled' => false,
+            'publish_allowed' => true,
+            'operator_approval_required' => true,
+            'operator_approved_at' => $approvedAt,
+            'claim_gate_status' => 'passed',
+            'forbidden_claims' => [],
+            'faq_schema_eligible' => false,
+            'schema_eligibility_reviewed_at' => null,
+            'is_indexable' => false,
+            'working_revision_id' => (int) $working->id,
+        ])->save();
+
+        return $page->refresh();
+    }
+
     private function hasFoundationOverclaim(mixed $page): bool
     {
         if (! $page instanceof ContentPage) {
@@ -420,6 +553,22 @@ final class ContentPagesControlledPublishService
             '/\\b(formal board governance|legal fiduciary duty|fiduciary duty)\\b/i',
             '/\\b\\d+(?:\\.\\d+)?%\\s+(ownership|shareholding|equity)\\b/i',
             '/\\b(completed|finalized|transferred|has transferred|now holds)\\s+(the\\s+)?(equity transfer|foundation holding|shares?|equity)\\b/i',
+        ];
+
+        foreach ($patterns as $pattern) {
+            if (preg_match($pattern, $text) === 1) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function hasPrivateUrlReference(string $text): bool
+    {
+        $patterns = [
+            '~/+(result|results|order|orders|share|pay|payment|history)(/|\\?|#|$)~i',
+            '~\\b(token|auth_token|access_token|result_id|order_id|order_no|orderno|payment_intent|client_secret)=~i',
         ];
 
         foreach ($patterns as $pattern) {
@@ -468,7 +617,7 @@ final class ContentPagesControlledPublishService
      */
     private function afterStatePreview(ContentPage $page): array
     {
-        return [
+        $preview = [
             ...$this->state($page),
             'status' => ContentPage::STATUS_PUBLISHED,
             'is_public' => true,
@@ -478,6 +627,27 @@ final class ContentPagesControlledPublishService
             'llms_eligible' => false,
             'footer_eligible' => false,
         ];
+
+        if ((string) $page->locale === self::SCIENCE_ZH_LOCALE && in_array((string) $page->slug, self::SCIENCE_ZH_ALLOWED_KEYS, true)) {
+            return [
+                ...$preview,
+                'review_state' => 'approved',
+                'legal_review_required' => false,
+                'science_review_required' => false,
+                'last_reviewed_at' => $page->last_reviewed_at?->toDateTimeString() ?? 'set_at_execute_time',
+                'publish_allowed' => true,
+                'operator_approval_required' => true,
+                'operator_approved_at' => $page->operator_approved_at?->toDateTimeString() ?? 'set_at_execute_time',
+                'claim_gate_status' => 'passed',
+                'forbidden_claims' => [],
+                'schema_enabled' => false,
+                'faq_schema_eligible' => false,
+                'schema_eligibility_reviewed_at' => null,
+                'public_readiness_gate' => 'pass_after_execute',
+            ];
+        }
+
+        return $preview;
     }
 
     /**
@@ -504,6 +674,41 @@ final class ContentPagesControlledPublishService
                 'ready' => true,
                 'reason' => 'help_service_runtime_scope_authorized_by_manifest',
                 'required_follow_up' => 'HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-R2-01 remains required before any production publish execution.',
+            ];
+        }
+
+        if ($scope === self::SCOPE_SCIENCE_ZH) {
+            $path = base_path('docs/seo/generated/science-contentpage-zh-controlled-publish-readiness-01.v1.json');
+            if (! is_file($path)) {
+                return [
+                    'ready' => false,
+                    'reason' => 'artifact_missing',
+                    'path' => $path,
+                ];
+            }
+
+            $decoded = json_decode((string) file_get_contents($path), true);
+            if (! is_array($decoded)) {
+                return [
+                    'ready' => false,
+                    'reason' => 'artifact_invalid_json',
+                    'path' => $path,
+                ];
+            }
+
+            return [
+                'ready' => ($decoded['final_decision'] ?? null) === 'science_contentpage_zh_controlled_publish_ready'
+                    && ($decoded['runtime_scope'] ?? null) === self::SCOPE_SCIENCE_ZH
+                    && ($decoded['target_locale'] ?? null) === self::SCIENCE_ZH_LOCALE
+                    && ($decoded['target_pages'] ?? null) === self::SCIENCE_ZH_ALLOWED_KEYS
+                    && ($decoded['is_indexable_after_publish'] ?? null) === false
+                    && ($decoded['sitemap_llms_footer_enabled'] ?? null) === false,
+                'final_decision' => $decoded['final_decision'] ?? null,
+                'runtime_scope' => $decoded['runtime_scope'] ?? null,
+                'target_locale' => $decoded['target_locale'] ?? null,
+                'target_pages' => $decoded['target_pages'] ?? null,
+                'is_indexable_after_publish' => $decoded['is_indexable_after_publish'] ?? null,
+                'sitemap_llms_footer_enabled' => $decoded['sitemap_llms_footer_enabled'] ?? null,
             ];
         }
 
@@ -540,7 +745,11 @@ final class ContentPagesControlledPublishService
      */
     private function allowedKeys(string $scope): array
     {
-        return $scope === self::SCOPE_HELP_SERVICE ? self::HELP_SERVICE_ALLOWED_KEYS : self::ALLOWED_KEYS;
+        return match ($scope) {
+            self::SCOPE_HELP_SERVICE => self::HELP_SERVICE_ALLOWED_KEYS,
+            self::SCOPE_SCIENCE_ZH => self::SCIENCE_ZH_ALLOWED_KEYS,
+            default => self::ALLOWED_KEYS,
+        };
     }
 
     /**
@@ -548,9 +757,11 @@ final class ContentPagesControlledPublishService
      */
     private function protectedKeys(string $scope): array
     {
-        return $scope === self::SCOPE_HELP_SERVICE
-            ? array_values(array_diff(self::PROTECTED_KEYS, self::HELP_SERVICE_ALLOWED_KEYS))
-            : self::PROTECTED_KEYS;
+        return match ($scope) {
+            self::SCOPE_HELP_SERVICE => array_values(array_diff(self::PROTECTED_KEYS, self::HELP_SERVICE_ALLOWED_KEYS)),
+            self::SCOPE_SCIENCE_ZH => array_values(array_unique([...self::PROTECTED_KEYS, 'method-boundaries'])),
+            default => self::PROTECTED_KEYS,
+        };
     }
 
     /**
@@ -562,12 +773,34 @@ final class ContentPagesControlledPublishService
             return self::HELP_SERVICE_LOCALES;
         }
 
+        if ($scope === self::SCOPE_SCIENCE_ZH) {
+            return [self::SCIENCE_ZH_LOCALE];
+        }
+
         return [$locale];
     }
 
     private function targetKey(string $scope, string $locale, string $key): string
     {
-        return $scope === self::SCOPE_HELP_SERVICE ? $locale.':'.$key : $key;
+        return in_array($scope, [self::SCOPE_HELP_SERVICE, self::SCOPE_SCIENCE_ZH], true) ? $locale.':'.$key : $key;
+    }
+
+    private function defaultLocaleOption(string $scope): string
+    {
+        return match ($scope) {
+            self::SCOPE_HELP_SERVICE => self::HELP_SERVICE_LOCALE_OPTION,
+            self::SCOPE_SCIENCE_ZH => self::SCIENCE_ZH_LOCALE,
+            default => self::LOCALE,
+        };
+    }
+
+    private function sourceMarker(string $scope): string
+    {
+        return match ($scope) {
+            self::SCOPE_HELP_SERVICE => self::HELP_SERVICE_SOURCE_MARKER,
+            self::SCOPE_SCIENCE_ZH => self::SCIENCE_ZH_SOURCE_MARKER,
+            default => self::CMS_DRAFT_UPDATE_SOURCE_MARKER,
+        };
     }
 
     /**

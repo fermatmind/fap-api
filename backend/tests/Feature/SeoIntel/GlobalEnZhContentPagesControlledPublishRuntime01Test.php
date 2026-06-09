@@ -250,6 +250,125 @@ final class GlobalEnZhContentPagesControlledPublishRuntime01Test extends TestCas
         $this->assertSame(ContentPage::STATUS_DRAFT, (string) $this->contentPageForLocale('help-payment-refund', 'zh-CN')->status);
     }
 
+    public function test_science_zh_scope_dry_run_previews_five_existing_rows_without_writes(): void
+    {
+        $this->seedScienceZhTargets();
+
+        $output = $this->runScienceZhPublishCommand(['--dry-run' => true]);
+
+        $this->assertTrue($output['ok'] ?? false);
+        $this->assertSame('science-zh', $output['scope'] ?? null);
+        $this->assertTrue($output['dry_run'] ?? false);
+        $this->assertFalse($output['writes_committed'] ?? true);
+        $this->assertSame(5, $output['target_count'] ?? null);
+        $this->assertSame(5, $output['would_publish_count'] ?? null);
+        $this->assertSame(0, $output['would_create_count'] ?? null);
+        $this->assertSame(['zh-CN'], $output['target_locales'] ?? null);
+        $this->assertSame(array_map(static fn (string $key): string => 'zh-CN:'.$key, self::scienceZhTargetKeys()), $output['target_keys'] ?? null);
+        $this->assertFalse($output['sitemap_llms_footer_explicit_enablement'] ?? true);
+        $this->assertContains('method-boundaries', $output['forbidden_keys'] ?? []);
+
+        foreach (self::scienceZhTargetKeys() as $key) {
+            $page = $this->contentPageForLocale($key, 'zh-CN');
+            $this->assertSame(ContentPage::STATUS_DRAFT, (string) $page->status);
+            $this->assertFalse((bool) $page->is_public);
+            $this->assertFalse((bool) $page->is_indexable);
+            $this->assertFalse((bool) $page->publish_allowed);
+            $this->assertNull($page->operator_approved_at);
+            $this->assertNull($page->published_at);
+        }
+    }
+
+    public function test_science_zh_scope_execute_sets_public_readiness_without_indexing_or_creation(): void
+    {
+        $this->seedScienceZhTargets();
+        ContentPage::query()->withoutGlobalScopes()->create($this->scienceZhPageAttributes('method-boundaries', [
+            'status' => ContentPage::STATUS_PUBLISHED,
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => now()->subDay(),
+            'source_doc' => 'protected method-boundaries existing record',
+            'publish_allowed' => true,
+            'review_state' => 'approved',
+            'legal_review_required' => false,
+            'science_review_required' => false,
+            'operator_approved_at' => now()->subDay(),
+            'claim_gate_status' => 'passed',
+            'forbidden_claims' => [],
+        ]));
+        $beforeCount = ContentPage::query()->withoutGlobalScopes()->count();
+
+        $output = $this->runScienceZhPublishCommand(['--execute' => true]);
+
+        $this->assertTrue($output['ok'] ?? false);
+        $this->assertFalse($output['dry_run'] ?? true);
+        $this->assertTrue($output['writes_committed'] ?? false);
+        $this->assertSame(array_map(static fn (string $key): string => 'zh-CN:'.$key, self::scienceZhTargetKeys()), $output['published_keys'] ?? null);
+        $this->assertSame($beforeCount, ContentPage::query()->withoutGlobalScopes()->count());
+
+        foreach (self::scienceZhTargetKeys() as $key) {
+            $page = $this->contentPageForLocale($key, 'zh-CN');
+            $this->assertSame(ContentPage::STATUS_PUBLISHED, (string) $page->status);
+            $this->assertTrue((bool) $page->is_public);
+            $this->assertFalse((bool) $page->is_indexable);
+            $this->assertNotNull($page->published_at);
+            $this->assertTrue((bool) $page->publish_allowed);
+            $this->assertSame('approved', (string) $page->review_state);
+            $this->assertFalse((bool) $page->legal_review_required);
+            $this->assertFalse((bool) $page->science_review_required);
+            $this->assertSame('passed', (string) $page->claim_gate_status);
+            $this->assertSame([], $page->forbidden_claims ?? []);
+            $this->assertTrue((bool) $page->operator_approval_required);
+            $this->assertNotNull($page->operator_approved_at);
+            $this->assertFalse((bool) $page->schema_enabled);
+            $this->assertFalse((bool) $page->faq_schema_eligible);
+            $this->assertTrue($page->passesPublicReadinessGate());
+            $this->assertSame((int) $page->working_revision_id, (int) $page->published_revision_id);
+
+            $this->getJson('/api/v0.5/content-pages/'.$key.'?locale=zh-CN&org_id=0')
+                ->assertOk()
+                ->assertJsonPath('ok', true)
+                ->assertJsonPath('page.slug', $key)
+                ->assertJsonPath('page.locale', 'zh-CN')
+                ->assertJsonPath('page.is_indexable', false)
+                ->assertJsonPath('page.publish_allowed', true)
+                ->assertJsonPath('page.claim_gate_status', 'passed');
+        }
+
+        $protected = $this->contentPageForLocale('method-boundaries', 'zh-CN');
+        $this->assertSame(ContentPage::STATUS_PUBLISHED, (string) $protected->status);
+        $this->assertTrue((bool) $protected->is_indexable);
+    }
+
+    public function test_science_zh_scope_refuses_method_boundaries_key(): void
+    {
+        $this->seedScienceZhTargets();
+
+        $output = $this->runScienceZhPublishCommand([
+            '--execute' => true,
+            '--keys' => implode(',', [...self::scienceZhTargetKeys(), 'method-boundaries']),
+        ], expectedExitCode: 1);
+
+        $this->assertFalse($output['ok'] ?? true);
+        $this->assertContains('extra_keys_not_allowed', $this->errorCodes($output));
+        $this->assertSame(ContentPage::STATUS_DRAFT, (string) $this->contentPageForLocale('science', 'zh-CN')->status);
+    }
+
+    public function test_science_zh_scope_refuses_private_url_patterns(): void
+    {
+        $this->seedScienceZhTargets(overridesByKey: [
+            'science' => [
+                'content_md' => "# 测评科学\n\n查看 /zh/result/private-token?token=secret 后继续。",
+            ],
+        ]);
+
+        $output = $this->runScienceZhPublishCommand(['--execute' => true], expectedExitCode: 1);
+
+        $this->assertFalse($output['ok'] ?? true);
+        $this->assertContains('private_url_pattern_present', $this->errorCodes($output));
+        $this->assertSame(ContentPage::STATUS_DRAFT, (string) $this->contentPageForLocale('science', 'zh-CN')->status);
+    }
+
     public function test_generated_json_report_exists_and_parses(): void
     {
         $generatedPath = base_path('docs/seo/generated/global-en-zh-content-pages-controlled-publish-runtime-01.v1.json');
@@ -284,6 +403,25 @@ final class GlobalEnZhContentPagesControlledPublishRuntime01Test extends TestCas
         $this->assertSame('HELP-CONTENT-DRAFT-PUBLISH-PREFLIGHT-R2-01', $generated['next_task'] ?? null);
     }
 
+    public function test_generated_science_zh_controlled_publish_readiness_report_exists_and_parses(): void
+    {
+        $generatedPath = base_path('docs/seo/generated/science-contentpage-zh-controlled-publish-readiness-01.v1.json');
+
+        $this->assertFileExists(base_path('docs/seo/science-contentpage-zh-controlled-publish-readiness-01.md'));
+        $this->assertFileExists($generatedPath);
+
+        $generated = json_decode((string) file_get_contents($generatedPath), true);
+
+        $this->assertIsArray($generated);
+        $this->assertSame('SCIENCE-CONTENTPAGE-ZH-CONTROLLED-PUBLISH-READINESS-01', $generated['task'] ?? null);
+        $this->assertSame('science-zh', $generated['runtime_scope'] ?? null);
+        $this->assertSame('zh-CN', $generated['target_locale'] ?? null);
+        $this->assertSame(self::scienceZhTargetKeys(), $generated['target_pages'] ?? null);
+        $this->assertFalse((bool) ($generated['publish_executed_in_this_pr'] ?? true));
+        $this->assertFalse((bool) ($generated['production_cms_mutation_performed'] ?? true));
+        $this->assertFalse((bool) ($generated['is_indexable_after_publish'] ?? true));
+    }
+
     /**
      * @param  list<string>  $skip
      */
@@ -302,6 +440,21 @@ final class GlobalEnZhContentPagesControlledPublishRuntime01Test extends TestCas
     {
         foreach ($this->helpServiceSourceRows() as $row) {
             ContentPage::query()->withoutGlobalScopes()->create($this->helpServicePageAttributes($row));
+        }
+    }
+
+    /**
+     * @param  list<string>  $skip
+     * @param  array<string, array<string, mixed>>  $overridesByKey
+     */
+    private function seedScienceZhTargets(array $skip = [], array $overridesByKey = []): void
+    {
+        foreach (self::scienceZhTargetKeys() as $key) {
+            if (in_array($key, $skip, true)) {
+                continue;
+            }
+
+            ContentPage::query()->withoutGlobalScopes()->create($this->scienceZhPageAttributes($key, $overridesByKey[$key] ?? []));
         }
     }
 
@@ -390,6 +543,76 @@ final class GlobalEnZhContentPagesControlledPublishRuntime01Test extends TestCas
         ];
     }
 
+    /**
+     * @param  array<string, mixed>  $overrides
+     * @return array<string, mixed>
+     */
+    private function scienceZhPageAttributes(string $key, array $overrides = []): array
+    {
+        $titles = [
+            'science' => '测评科学',
+            'method-boundaries' => '方法边界',
+            'item-design-notes' => '题目设计说明',
+            'reliability-validity' => '信度效度',
+            'data-privacy' => '数据说明',
+            'common-misconceptions' => '常见误区',
+        ];
+        $pageTypes = [
+            'science' => 'science',
+            'method-boundaries' => 'methodology',
+            'item-design-notes' => 'methodology',
+            'reliability-validity' => 'methodology',
+            'data-privacy' => 'privacy',
+            'common-misconceptions' => 'boundary',
+        ];
+        $title = $titles[$key] ?? $key;
+
+        return $overrides + [
+            'org_id' => 0,
+            'slug' => $key,
+            'path' => '/'.$key,
+            'kind' => ContentPage::KIND_POLICY,
+            'page_type' => $pageTypes[$key] ?? 'methodology',
+            'title' => $title,
+            'kicker' => '测评科学',
+            'summary' => $title.'的中文内容页草稿。',
+            'template' => 'policy',
+            'animation_profile' => 'editorial',
+            'locale' => 'zh-CN',
+            'translation_group_id' => 'content-page-'.$key,
+            'source_locale' => 'zh-CN',
+            'translation_status' => ContentPage::TRANSLATION_STATUS_SOURCE,
+            'published_at' => null,
+            'source_doc' => 'science-contentpage-gpt55-review-draft-2026-06-08/pages/'.$key.'.md',
+            'is_public' => false,
+            'is_indexable' => false,
+            'review_state' => 'science_review',
+            'owner' => 'seo_content',
+            'legal_review_required' => true,
+            'science_review_required' => true,
+            'headings_json' => [$title],
+            'content_md' => "# {$title}\n\n这是 {$title} 的中文 CMS 草稿内容，用于受控发布验证。",
+            'content_html' => '',
+            'seo_title' => $title,
+            'meta_description' => $title.'的中文说明。',
+            'seo_description' => $title.'的中文说明。',
+            'canonical_path' => '/'.$key,
+            'support_contact' => null,
+            'policy_version' => null,
+            'reviewer' => 'Unknown',
+            'schema_enabled' => false,
+            'faq_items' => [],
+            'publish_allowed' => false,
+            'operator_approval_required' => true,
+            'operator_approved_at' => null,
+            'claim_gate_status' => 'not_reviewed',
+            'forbidden_claims' => [],
+            'faq_schema_eligible' => false,
+            'schema_eligibility_reviewed_at' => null,
+            'status' => ContentPage::STATUS_DRAFT,
+        ];
+    }
+
     private function contentPage(string $key): ContentPage
     {
         return ContentPage::query()
@@ -445,6 +668,19 @@ final class GlobalEnZhContentPagesControlledPublishRuntime01Test extends TestCas
     }
 
     /**
+     * @param  array<string, mixed>  $options
+     * @return array<string, mixed>
+     */
+    private function runScienceZhPublishCommand(array $options = [], int $expectedExitCode = 0): array
+    {
+        return $this->runPublishCommand($options + [
+            '--scope' => 'science-zh',
+            '--locale' => 'zh-CN',
+            '--keys' => implode(',', self::scienceZhTargetKeys()),
+        ], $expectedExitCode);
+    }
+
+    /**
      * @param  array<string, mixed>  $output
      * @return list<string>
      */
@@ -476,6 +712,20 @@ final class GlobalEnZhContentPagesControlledPublishRuntime01Test extends TestCas
             'help-privacy-data',
             'help-use-boundaries',
             'help-data-deletion',
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    private static function scienceZhTargetKeys(): array
+    {
+        return [
+            'science',
+            'item-design-notes',
+            'reliability-validity',
+            'data-privacy',
+            'common-misconceptions',
         ];
     }
 

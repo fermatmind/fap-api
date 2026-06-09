@@ -1,0 +1,22 @@
+{
+  "schema_version": "science-contentpage-zh-controlled-publish-readiness-01.v1",
+  "task": "SCIENCE-CONTENTPAGE-ZH-CONTROLLED-PUBLISH-READINESS-01",
+  "final_decision": "science_contentpage_zh_controlled_publish_ready",
+  "runtime_scope": "science-zh",
+  "target_locale": "zh-CN",
+  "target_pages": [
+    "science",
+    "item-design-notes",
+    "reliability-validity",
+    "data-privacy",
+    "common-misconceptions"
+  ],
+  "publish_executed_in_this_pr": false,
+  "production_cms_mutation_performed": false,
+  "sitemap_llms_footer_enabled": false,
+  "is_indexable_after_publish": false,
+  "source_marker": "science-contentpage-gpt55-review-draft-2026-06-08/pages/",
+  "dry_run_command": "php artisan content-pages:publish-controlled --scope=science-zh --locale=zh-CN --keys=science,item-design-notes,reliability-validity,data-privacy,common-misconceptions --dry-run --json",
+  "execute_command_after_deploy_and_exact_operator_approval": "php artisan content-pages:publish-controlled --scope=science-zh --locale=zh-CN --keys=science,item-design-notes,reliability-validity,data-privacy,common-misconceptions --execute --json",
+  "next_task": "fap-web restore zh science footer links after live 200 smoke"
+}
