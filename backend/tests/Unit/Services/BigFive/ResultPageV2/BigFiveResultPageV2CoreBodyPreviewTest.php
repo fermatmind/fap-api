@@ -1061,6 +1061,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_seo_conversion_ops_read_model_file(): void
+    {
+        $changed = [
+            'backend/app/Services/SeoIntel/OpsDashboard/SeoConversionFunnelReadService.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_content_overview_ops_ui_file(): void
     {
         $changed = [
@@ -3938,6 +3947,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/SeoIntel/OpsDashboard/SeoSearchChannelQueueReadService.php',
             'backend/app/Services/SeoIntel/OpsDashboard/SeoUrlTruthReadService.php',
             'backend/app/Services/SeoIntel/OpsDashboard/CareerRuntimeReadModelService.php',
+            'backend/app/Services/SeoIntel/OpsDashboard/SeoConversionFunnelReadService.php',
         ], true);
     }
 

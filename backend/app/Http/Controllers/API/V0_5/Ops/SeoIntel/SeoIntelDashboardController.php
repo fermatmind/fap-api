@@ -39,6 +39,11 @@ final class SeoIntelDashboardController
         return $this->respond($this->readService->pagePerformance($this->limit($request)));
     }
 
+    public function conversionFunnel(Request $request): JsonResponse
+    {
+        return $this->respond($this->readService->conversionFunnel($this->safeFilters($request), $this->limit($request)));
+    }
+
     /**
      * @param  array<string, mixed>  $data
      */
@@ -61,5 +66,24 @@ final class SeoIntelDashboardController
         $limit = is_numeric($raw) ? (int) $raw : 25;
 
         return max(1, min($limit, 100));
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function safeFilters(Request $request): array
+    {
+        return $request->only([
+            'group_by',
+            'url',
+            'lang',
+            'page_type',
+            'source_url',
+            'source_article',
+            'target_test',
+            'scale_id',
+            'form_id',
+            'session_id_hash',
+        ]);
     }
 }
