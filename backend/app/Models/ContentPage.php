@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Models\Concerns\HasOrgScope;
+use App\Services\Cms\ContentPagePublishGate;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -194,6 +195,8 @@ final class ContentPage extends Model
                     ? 'content-page-'.$page->source_content_id
                     : (string) Str::uuid();
             }
+
+            app(ContentPagePublishGate::class)->assertPasses($page);
 
             $page->source_version_hash = $page->computeSourceVersionHash();
         });

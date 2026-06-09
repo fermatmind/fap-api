@@ -137,6 +137,8 @@ class SitemapGeneratorTest extends TestCase
             'title' => 'About help',
             'content_md' => '# About help',
             'content_html' => null,
+            'seo_title' => 'About help',
+            'meta_description' => 'About help page.',
             'status' => ContentPage::STATUS_PUBLISHED,
             'is_public' => true,
             'is_indexable' => true,
@@ -180,7 +182,7 @@ class SitemapGeneratorTest extends TestCase
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);
 
-        ContentPage::query()->create([
+        ContentPage::withoutEvents(fn (): ContentPage => ContentPage::query()->create([
             'org_id' => 0,
             'slug' => 'item-design-notes',
             'path' => '/item-design-notes',
@@ -202,7 +204,7 @@ class SitemapGeneratorTest extends TestCase
             'published_at' => Carbon::create(2026, 6, 8, 9, 0, 0, 'UTC'),
             'created_at' => Carbon::create(2026, 6, 8, 9, 0, 0, 'UTC'),
             'updated_at' => Carbon::create(2026, 6, 8, 9, 0, 0, 'UTC'),
-        ]);
+        ]));
 
         ContentPage::query()->create([
             'org_id' => 0,
@@ -214,6 +216,8 @@ class SitemapGeneratorTest extends TestCase
             'title' => 'Method boundaries',
             'content_md' => '## Method boundaries',
             'content_html' => null,
+            'seo_title' => 'Method boundaries',
+            'meta_description' => 'Method boundaries page.',
             'status' => ContentPage::STATUS_PUBLISHED,
             'is_public' => true,
             'is_indexable' => true,

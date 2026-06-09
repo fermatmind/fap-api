@@ -993,6 +993,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Filament/Ops/Resources/ContentPageResource/Pages/EditContentPage.php',
             'backend/app/Http/Controllers/API/V0_5/Cms/ContentPageController.php',
             'backend/app/Models/ContentPage.php',
+            'backend/app/Services/Cms/ContentPagePublishGate.php',
             'backend/app/Services/Cms/ContentPageTranslationAdapter.php',
             'backend/database/migrations/2026_06_08_010000_add_publish_safety_fields_to_content_pages.php',
         ];
@@ -3946,6 +3947,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Filament/Ops/Resources/ContentPageResource/Pages/EditContentPage.php',
             'backend/app/Http/Controllers/API/V0_5/Cms/ContentPageController.php',
             'backend/app/Models/ContentPage.php',
+            'backend/app/Services/Cms/ContentPagePublishGate.php',
             'backend/app/Services/Cms/ContentPageTranslationAdapter.php',
             'backend/database/migrations/2026_06_08_010000_add_publish_safety_fields_to_content_pages.php',
         ], true);

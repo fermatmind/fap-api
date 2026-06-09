@@ -13,6 +13,7 @@ use App\Services\SEO\SitemapCache;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
+use InvalidArgumentException;
 use Tests\TestCase;
 
 final class ArticlePublishDiscoverabilityCacheInvalidationTest extends TestCase
@@ -46,6 +47,19 @@ final class ArticlePublishDiscoverabilityCacheInvalidationTest extends TestCase
         $this->assertDiscoverabilityCachesFlushed();
     }
 
+    public function test_article_publish_rejects_body_h1_before_public_exposure(): void
+    {
+        $article = $this->createArticleWithRevision(
+            ArticleTranslationRevision::STATUS_APPROVED,
+            body: "# Article body\n\nBody text."
+        );
+
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Article body must not contain h1 headings');
+
+        app(ArticlePublishService::class)->publishArticle((int) $article->id, 'test_publish');
+    }
+
     private function seedDiscoverabilityCaches(): void
     {
         $payload = [
@@ -69,7 +83,7 @@ final class ArticlePublishDiscoverabilityCacheInvalidationTest extends TestCase
         $this->assertNull(Cache::get(SitemapCache::ETAG_CACHE_KEY));
     }
 
-    private function createArticleWithRevision(string $revisionStatus, bool $published = false): Article
+    private function createArticleWithRevision(string $revisionStatus, bool $published = false, string $body = 'Cache invalidation test body.'): Article
     {
         $category = ArticleCategory::query()->create([
             'org_id' => 0,
@@ -89,7 +103,7 @@ final class ArticlePublishDiscoverabilityCacheInvalidationTest extends TestCase
             'locale' => 'en',
             'title' => 'RIASEC cache invalidation test',
             'excerpt' => 'Cache invalidation test excerpt.',
-            'content_md' => 'Cache invalidation test body.',
+            'content_md' => $body,
             'status' => $published ? 'published' : 'draft',
             'is_public' => $published,
             'is_indexable' => true,
@@ -109,7 +123,7 @@ final class ArticlePublishDiscoverabilityCacheInvalidationTest extends TestCase
             'translated_from_version_hash' => (string) $article->source_version_hash,
             'title' => 'RIASEC cache invalidation test',
             'excerpt' => 'Cache invalidation test excerpt.',
-            'content_md' => 'Cache invalidation test body.',
+            'content_md' => $body,
             'seo_title' => 'RIASEC cache invalidation test',
             'seo_description' => 'Cache invalidation test description.',
             'published_at' => $published ? $publishedAt : null,
