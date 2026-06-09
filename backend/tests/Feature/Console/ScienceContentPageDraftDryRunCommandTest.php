@@ -14,6 +14,8 @@ final class ScienceContentPageDraftDryRunCommandTest extends TestCase
 {
     use RefreshDatabase;
 
+    private const EN_PACKAGE_PATH = 'docs/seo/import-packages/science-contentpage-en-review-draft-2026-06-09';
+
     #[Test]
     public function dry_run_maps_six_science_pages_without_database_writes(): void
     {
@@ -82,6 +84,41 @@ final class ScienceContentPageDraftDryRunCommandTest extends TestCase
         $this->assertSame('preserve_existing_authority_revision_only', $methodBoundaries['planned_action']);
         $this->assertSame('existing_authority_reconciliation_ready', $methodBoundaries['draft_import_decision']);
         $this->assertFalse($methodBoundaries['blocks_package_dry_run']);
+
+        $this->assertSame(0, ContentPage::query()->count());
+    }
+
+    #[Test]
+    public function approved_english_package_maps_five_en_drafts_without_database_writes(): void
+    {
+        $package = base_path(self::EN_PACKAGE_PATH);
+
+        $this->artisan('content-pages:science-draft-dry-run', [
+            '--package' => $package,
+        ])
+            ->expectsOutputToContain('task=SCIENCE-CONTENTPAGE-IMPORTER-DRYRUN-01')
+            ->expectsOutputToContain('dry_run=true')
+            ->expectsOutputToContain('would_write=false')
+            ->expectsOutputToContain('pages_seen=5')
+            ->expectsOutputToContain('pages_expected=5')
+            ->expectsOutputToContain('pages_ready_for_non_public_draft_import=5')
+            ->expectsOutputToContain('pages_reconciled_existing_authority=0')
+            ->expectsOutputToContain('pages_blocked=0')
+            ->expectsOutputToContain('status=pass_no_write_dry_run')
+            ->assertExitCode(0);
+
+        $payload = app(ScienceContentPageDraftDryRunService::class)->dryRun($package);
+        $scienceHub = collect($payload['pages'])->firstWhere('page_key', 'SCIENCE-HUB-CONTENT-EN-01');
+        $this->assertSame('en', $scienceHub['normalized_content_page']['locale']);
+        $this->assertSame('zh-CN', $scienceHub['normalized_content_page']['source_locale']);
+        $this->assertSame(ContentPage::TRANSLATION_STATUS_DRAFT, $scienceHub['normalized_content_page']['translation_status']);
+        $this->assertSame('en_title', $scienceHub['normalized_content_page']['title_source_field']);
+        $this->assertSame('science', $scienceHub['normalized_content_page']['slug']);
+        $this->assertSame('science', $scienceHub['normalized_content_page']['page_type']);
+        $this->assertFalse($scienceHub['normalized_content_page']['is_public']);
+        $this->assertFalse($scienceHub['normalized_content_page']['is_indexable']);
+        $this->assertFalse($scienceHub['normalized_content_page']['publish_allowed']);
+        $this->assertSame('not_reviewed', $scienceHub['normalized_content_page']['claim_gate_status']);
 
         $this->assertSame(0, ContentPage::query()->count());
     }

@@ -229,7 +229,7 @@ final class ScienceContentPageDraftImportService
         }
 
         [$frontmatter, $body] = $this->readFrontmatter($filePath);
-        $attributes = $this->contentPageAttributes($normalized, $frontmatter, $body, $file);
+        $attributes = $this->contentPageAttributes($root, $normalized, $frontmatter, $body, $file);
 
         return [
             'page_key' => $pageKey,
@@ -247,11 +247,20 @@ final class ScienceContentPageDraftImportService
      * @param  array<string, mixed>  $frontmatter
      * @return array<string, mixed>
      */
-    private function contentPageAttributes(array $normalized, array $frontmatter, string $body, string $file): array
+    private function contentPageAttributes(string $root, array $normalized, array $frontmatter, string $body, string $file): array
     {
         $slug = (string) ($normalized['slug'] ?? '');
         $path = (string) ($normalized['path'] ?? ('/'.$slug));
-        $title = $this->cleanString($frontmatter['zh_title'] ?? $frontmatter['h1'] ?? $slug);
+        $locale = (string) ($normalized['locale'] ?? 'zh-CN');
+        $sourceLocale = (string) ($normalized['source_locale'] ?? 'zh-CN');
+        $translationStatus = (string) ($normalized['translation_status'] ?? (
+            $locale === $sourceLocale
+                ? ContentPage::TRANSLATION_STATUS_SOURCE
+                : ContentPage::TRANSLATION_STATUS_DRAFT
+        ));
+        $title = $this->cleanString($locale === 'en'
+            ? ($frontmatter['en_title'] ?? $frontmatter['h1'] ?? $slug)
+            : ($frontmatter['zh_title'] ?? $frontmatter['h1'] ?? $slug));
         $metaDescription = $this->cleanString($frontmatter['meta_description_draft'] ?? '');
         $content = $this->cleanString($body);
 
@@ -266,11 +275,11 @@ final class ScienceContentPageDraftImportService
             'summary' => $metaDescription !== '' ? $metaDescription : null,
             'template' => 'policy',
             'animation_profile' => 'editorial',
-            'locale' => (string) ($normalized['locale'] ?? 'zh-CN'),
+            'locale' => $locale,
             'translation_group_id' => 'science-contentpage-'.$slug.'-zh-CN',
-            'source_locale' => 'zh-CN',
-            'translation_status' => ContentPage::TRANSLATION_STATUS_SOURCE,
-            'source_doc' => 'science-contentpage-gpt55-review-draft-2026-06-08/'.$file,
+            'source_locale' => $sourceLocale,
+            'translation_status' => $translationStatus,
+            'source_doc' => basename($root).'/'.$file,
             'is_public' => false,
             'is_indexable' => false,
             'review_state' => (string) ($normalized['review_state'] ?? 'science_review'),

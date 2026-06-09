@@ -17,6 +17,14 @@ final class ScienceContentPageDraftDryRunService
         'MISCONCEPTIONS-CONTENT-01',
     ];
 
+    private const EXPECTED_EN_PAGE_KEYS = [
+        'SCIENCE-HUB-CONTENT-EN-01',
+        'ITEM-DESIGN-CONTENT-EN-01',
+        'RELIABILITY-VALIDITY-CONTENT-EN-01',
+        'DATA-NOTES-CONTENT-EN-01',
+        'MISCONCEPTIONS-CONTENT-EN-01',
+    ];
+
     private const DRAFT_FALSE_FIELDS = [
         'is_public',
         'is_indexable',
@@ -41,6 +49,7 @@ final class ScienceContentPageDraftDryRunService
         }
 
         $manifest = $this->readJson($manifestPath);
+        $expectedPageKeys = $this->expectedPageKeys($manifest);
         $issues = [];
         $pages = [];
 
@@ -69,7 +78,7 @@ final class ScienceContentPageDraftDryRunService
                 continue;
             }
 
-            $pageResult = $this->validatePage($root, $page, $index);
+            $pageResult = $this->validatePage($root, $page, $index, $manifest);
             $pages[] = $pageResult;
             $seenKeys[] = (string) ($pageResult['page_key'] ?? '');
             foreach ($pageResult['issues'] as $issue) {
@@ -77,7 +86,7 @@ final class ScienceContentPageDraftDryRunService
             }
         }
 
-        $missingKeys = array_values(array_diff(self::EXPECTED_PAGE_KEYS, $seenKeys));
+        $missingKeys = array_values(array_diff($expectedPageKeys, $seenKeys));
         foreach ($missingKeys as $missingKey) {
             $issues[] = $this->issue('manifest', 'missing_expected_page', 'Missing expected page '.$missingKey.'.');
         }
@@ -105,7 +114,7 @@ final class ScienceContentPageDraftDryRunService
             'package_path' => $root,
             'package_status' => (string) ($manifest['status'] ?? 'Unknown'),
             'pages_seen' => count($pages),
-            'pages_expected' => count(self::EXPECTED_PAGE_KEYS),
+            'pages_expected' => count($expectedPageKeys),
             'pages_ready_for_non_public_draft_import' => count(array_filter(
                 $pages,
                 static fn (array $page): bool => ($page['draft_import_decision'] ?? '') === 'draft_import_ready'
@@ -132,7 +141,7 @@ final class ScienceContentPageDraftDryRunService
      * @param  array<string, mixed>  $manifestPage
      * @return array<string, mixed>
      */
-    private function validatePage(string $root, array $manifestPage, int $index): array
+    private function validatePage(string $root, array $manifestPage, int $index, array $manifest): array
     {
         $issues = [];
         $pageKey = (string) ($manifestPage['page_key'] ?? 'Unknown');
@@ -192,6 +201,13 @@ final class ScienceContentPageDraftDryRunService
             $issues[] = $this->issue($pageKey, 'private_route_pattern_present', 'Private route patterns may only appear as blocked metadata, not body/internal links.');
         }
 
+        $locale = $this->normalizeLocale((string) ($manifestPage['locale'] ?? $frontmatter['locale'] ?? $manifest['locale'] ?? 'zh-CN'));
+        $sourceLocale = $this->normalizeLocale((string) ($manifestPage['source_locale'] ?? $frontmatter['source_locale'] ?? $manifest['source_locale'] ?? 'zh-CN'));
+        $titleSourceField = $locale === 'en' ? 'en_title' : 'zh_title';
+        $translationStatus = $locale === $sourceLocale
+            ? ContentPage::TRANSLATION_STATUS_SOURCE
+            : ContentPage::TRANSLATION_STATUS_DRAFT;
+
         $metadataOnlyFields = [];
         foreach (['sitemap_eligible', 'llms_eligible', 'footer_eligible', 'visible_faq_items', 'claim_boundary_notes', 'reviewer_checklist', 'publish_blockers', 'unknown_fields'] as $field) {
             if (str_contains($body, $field.':') || array_key_exists($field, $manifestPage) || array_key_exists($field, $frontmatter)) {
@@ -207,8 +223,10 @@ final class ScienceContentPageDraftDryRunService
             'kind' => ContentPage::KIND_POLICY,
             'source_kind' => (string) ($manifestPage['kind'] ?? 'Unknown'),
             'page_type' => $pageType,
-            'locale' => 'zh-CN',
-            'title_source_field' => 'zh_title',
+            'locale' => $locale,
+            'source_locale' => $sourceLocale,
+            'translation_status' => $translationStatus,
+            'title_source_field' => $titleSourceField,
             'template' => 'policy',
             'animation_profile' => 'editorial',
             'status' => ContentPage::STATUS_DRAFT,
@@ -287,11 +305,29 @@ final class ScienceContentPageDraftDryRunService
 
     private function chooseCanonicalPath(string $pageKey, string $proposedPath, string $fallbackPath): string
     {
-        if ($pageKey === 'DATA-NOTES-CONTENT-01' && $fallbackPath === '/data-privacy') {
+        if (in_array($pageKey, ['DATA-NOTES-CONTENT-01', 'DATA-NOTES-CONTENT-EN-01'], true) && $fallbackPath === '/data-privacy') {
             return $fallbackPath;
         }
 
         return $proposedPath !== '' ? $proposedPath : $fallbackPath;
+    }
+
+    /**
+     * @param  array<string, mixed>  $manifest
+     * @return list<string>
+     */
+    private function expectedPageKeys(array $manifest): array
+    {
+        $locale = $this->normalizeLocale((string) ($manifest['locale'] ?? 'zh-CN'));
+
+        return $locale === 'en' ? self::EXPECTED_EN_PAGE_KEYS : self::EXPECTED_PAGE_KEYS;
+    }
+
+    private function normalizeLocale(string $locale): string
+    {
+        $normalized = strtolower(str_replace('_', '-', trim($locale)));
+
+        return str_starts_with($normalized, 'zh') ? 'zh-CN' : 'en';
     }
 
     private function hasPrivateRouteReference(string $value): bool

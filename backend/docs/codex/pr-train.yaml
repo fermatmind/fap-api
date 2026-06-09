@@ -3739,3 +3739,38 @@ prs:
     cleanup:
       delete_remote_branch: true
       run_local_cleanup: true
+
+  - id: SCIENCE-CONTENTPAGE-EN-DRAFT-IMPORTER-01
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/science-contentpage-en-draft-importer-01
+    base: main
+    depends_on: []
+    mode: execute
+    title: "SCIENCE-CONTENTPAGE-EN-DRAFT-IMPORTER-01: support English Science ContentPage draft package import"
+    scope: >
+      Backend-only importer support for the approved five-page English Science
+      ContentPage draft package. Update dry-run and controlled import mapping
+      so locale=en draft rows are planned correctly while preserving
+      draft-only, non-public, non-indexable, publish_allowed=false, and
+      claim_gate_status=not_reviewed guards. Do not execute CMS import,
+      publish, expose sitemap/llms/footer, change fap-web, or mutate production
+      content.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "ruby -e 'require \"yaml\"; YAML.load_file(\"docs/codex/pr-train.yaml\")'"
+      - "vendor/bin/pint --test app/Services/Cms/ScienceContentPageDraftDryRunService.php app/Services/Cms/ScienceContentPageDraftImportService.php tests/Feature/Console/ScienceContentPageDraftDryRunCommandTest.php tests/Feature/Console/ScienceContentPageImportDraftsCommandTest.php"
+      - "php artisan test tests/Feature/Console/ScienceContentPageDraftDryRunCommandTest.php tests/Feature/Console/ScienceContentPageImportDraftsCommandTest.php --no-ansi"
+      - "php artisan content-pages:science-draft-dry-run --package=docs/seo/import-packages/science-contentpage-en-review-draft-2026-06-09 --json"
+      - "php artisan content-pages:science-import-drafts --package=docs/seo/import-packages/science-contentpage-en-review-draft-2026-06-09 --json"
+      - "git diff --check"
+      - "git diff --cached --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
