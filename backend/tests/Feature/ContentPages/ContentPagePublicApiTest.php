@@ -68,6 +68,9 @@ final class ContentPagePublicApiTest extends TestCase
 
         $this->assertSame('policy', (string) $methodBoundaries->kind);
         $this->assertSame('/method-boundaries', (string) $methodBoundaries->path);
+        $this->assertTrue((bool) $methodBoundaries->publish_allowed);
+        $this->assertSame('passed', (string) $methodBoundaries->claim_gate_status);
+        $this->assertNotNull($methodBoundaries->operator_approved_at);
         $this->assertContains('四、医学与高风险场景边界', $methodBoundaries->headings_json ?? []);
     }
 
@@ -128,6 +131,87 @@ final class ContentPagePublicApiTest extends TestCase
         $this->assertStringContainsString('not a medical diagnosis', $enContent);
         $this->assertStringContainsString('do not guarantee school admission, employment', $enContent);
         $this->assertStringContainsString('Data and privacy boundaries', $enContent);
+    }
+
+    public function test_public_api_hides_science_content_pages_until_public_readiness_gate_passes(): void
+    {
+        $sciencePage = ContentPage::query()->withoutGlobalScopes()->create([
+            'org_id' => 0,
+            'slug' => 'reliability-validity',
+            'path' => '/reliability-validity',
+            'kind' => ContentPage::KIND_POLICY,
+            'page_type' => 'methodology',
+            'title' => 'Reliability and validity',
+            'summary' => 'Science review page.',
+            'template' => 'policy',
+            'animation_profile' => 'policy',
+            'locale' => 'en',
+            'published_at' => '2026-06-09',
+            'is_public' => true,
+            'is_indexable' => true,
+            'review_state' => 'approved',
+            'content_md' => "## Reliability\n\nDraft science content.",
+            'content_html' => '',
+            'seo_title' => 'Reliability and validity',
+            'meta_description' => 'Science review page.',
+            'status' => ContentPage::STATUS_PUBLISHED,
+            'publish_allowed' => false,
+            'operator_approval_required' => true,
+            'operator_approved_at' => null,
+            'claim_gate_status' => 'not_reviewed',
+            'forbidden_claims' => [],
+            'faq_schema_eligible' => false,
+            'schema_eligibility_reviewed_at' => null,
+        ]);
+
+        $this->getJson('/api/v0.5/content-pages/reliability-validity?locale=en&org_id=0')
+            ->assertNotFound()
+            ->assertJsonPath('ok', false);
+
+        $sciencePage->forceFill([
+            'publish_allowed' => true,
+            'operator_approved_at' => '2026-06-09 00:00:00',
+            'claim_gate_status' => 'passed',
+            'forbidden_claims' => [],
+            'faq_schema_eligible' => false,
+            'schema_eligibility_reviewed_at' => null,
+        ])->save();
+
+        $this->getJson('/api/v0.5/content-pages/reliability-validity?locale=en&org_id=0')
+            ->assertOk()
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('page.slug', 'reliability-validity')
+            ->assertJsonPath('page.publish_allowed', true)
+            ->assertJsonPath('page.claim_gate_status', 'passed');
+
+        ContentPage::query()->withoutGlobalScopes()->create([
+            'org_id' => 0,
+            'slug' => 'brand',
+            'path' => '/brand',
+            'kind' => ContentPage::KIND_COMPANY,
+            'page_type' => 'company',
+            'title' => 'Brand',
+            'summary' => 'Brand page.',
+            'template' => 'brand',
+            'animation_profile' => 'brand',
+            'locale' => 'en',
+            'published_at' => '2026-06-09',
+            'is_public' => true,
+            'is_indexable' => true,
+            'review_state' => 'approved',
+            'content_md' => "## Brand\n\nCompany content.",
+            'content_html' => '',
+            'seo_title' => 'Brand',
+            'meta_description' => 'Brand page.',
+            'status' => ContentPage::STATUS_PUBLISHED,
+            'publish_allowed' => false,
+            'claim_gate_status' => 'not_reviewed',
+        ]);
+
+        $this->getJson('/api/v0.5/content-pages/brand?locale=en&org_id=0')
+            ->assertOk()
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('page.slug', 'brand');
     }
 
     public function test_ops_list_and_update_are_backed_by_content_pages_table(): void

@@ -176,6 +176,64 @@ class SitemapGeneratorTest extends TestCase
         $this->assertStringNotContainsString('https://fermatmind.com/en/help/about', $xml);
     }
 
+    public function test_generate_excludes_science_content_pages_until_public_readiness_gate_passes(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+
+        ContentPage::query()->create([
+            'org_id' => 0,
+            'slug' => 'item-design-notes',
+            'path' => '/item-design-notes',
+            'kind' => ContentPage::KIND_POLICY,
+            'page_type' => 'methodology',
+            'locale' => 'en',
+            'title' => 'Item design notes',
+            'content_md' => '## Item design notes',
+            'content_html' => null,
+            'status' => ContentPage::STATUS_PUBLISHED,
+            'is_public' => true,
+            'is_indexable' => true,
+            'review_state' => 'approved',
+            'publish_allowed' => false,
+            'operator_approval_required' => true,
+            'operator_approved_at' => null,
+            'claim_gate_status' => 'not_reviewed',
+            'forbidden_claims' => [],
+            'published_at' => Carbon::create(2026, 6, 8, 9, 0, 0, 'UTC'),
+            'created_at' => Carbon::create(2026, 6, 8, 9, 0, 0, 'UTC'),
+            'updated_at' => Carbon::create(2026, 6, 8, 9, 0, 0, 'UTC'),
+        ]);
+
+        ContentPage::query()->create([
+            'org_id' => 0,
+            'slug' => 'method-boundaries',
+            'path' => '/method-boundaries',
+            'kind' => ContentPage::KIND_POLICY,
+            'page_type' => 'boundary',
+            'locale' => 'en',
+            'title' => 'Method boundaries',
+            'content_md' => '## Method boundaries',
+            'content_html' => null,
+            'status' => ContentPage::STATUS_PUBLISHED,
+            'is_public' => true,
+            'is_indexable' => true,
+            'review_state' => 'approved',
+            'publish_allowed' => true,
+            'operator_approval_required' => true,
+            'operator_approved_at' => Carbon::create(2026, 6, 9, 8, 0, 0, 'UTC'),
+            'claim_gate_status' => 'passed',
+            'forbidden_claims' => [],
+            'published_at' => Carbon::create(2026, 6, 8, 9, 0, 0, 'UTC'),
+            'created_at' => Carbon::create(2026, 6, 8, 9, 0, 0, 'UTC'),
+            'updated_at' => Carbon::create(2026, 6, 8, 9, 0, 0, 'UTC'),
+        ]);
+
+        $xml = (string) (app(SitemapGenerator::class)->generate()['xml'] ?? '');
+
+        $this->assertStringContainsString('https://fermatmind.com/en/method-boundaries', $xml);
+        $this->assertStringNotContainsString('https://fermatmind.com/en/item-design-notes', $xml);
+    }
+
     public function test_generate_includes_only_indexable_global_article_urls_with_locale_aware_paths(): void
     {
         config([

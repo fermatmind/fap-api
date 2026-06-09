@@ -59,6 +59,21 @@ final class ContentPage extends Model
         'not_applicable',
     ];
 
+    public const SCIENCE_CONTROLLED_SLUGS = [
+        'science',
+        'method-boundaries',
+        'item-design-notes',
+        'reliability-validity',
+        'data-privacy',
+        'common-misconceptions',
+    ];
+
+    public const SCIENCE_CONTROLLED_PAGE_TYPES = [
+        'science',
+        'methodology',
+        'boundary',
+    ];
+
     public const TRANSLATION_STATUS_SOURCE = 'source';
 
     public const TRANSLATION_STATUS_DRAFT = 'draft';
@@ -189,6 +204,116 @@ final class ContentPage extends Model
         return $query
             ->where('status', self::STATUS_PUBLISHED)
             ->where('is_public', true);
+    }
+
+    public function scopePubliclyReadable($query)
+    {
+        return $query
+            ->publishedPublic()
+            ->where(static function ($publishedAtQuery): void {
+                $publishedAtQuery
+                    ->whereNull('published_at')
+                    ->orWhere('published_at', '<=', now());
+            })
+            ->where(static function ($query): void {
+                $query
+                    ->where(static function ($standardPage): void {
+                        $standardPage
+                            ->whereNotIn('slug', self::SCIENCE_CONTROLLED_SLUGS)
+                            ->where(static function ($pageTypeQuery): void {
+                                $pageTypeQuery
+                                    ->whereNull('page_type')
+                                    ->orWhereNotIn('page_type', self::SCIENCE_CONTROLLED_PAGE_TYPES);
+                            })
+                            ->where(static function ($reviewQuery): void {
+                                $reviewQuery
+                                    ->whereNull('science_review_required')
+                                    ->orWhere('science_review_required', false);
+                            });
+                    })
+                    ->orWhere(static function ($controlledPage): void {
+                        $controlledPage
+                            ->where(static function ($scienceQuery): void {
+                                $scienceQuery
+                                    ->whereIn('slug', self::SCIENCE_CONTROLLED_SLUGS)
+                                    ->orWhereIn('page_type', self::SCIENCE_CONTROLLED_PAGE_TYPES)
+                                    ->orWhere('science_review_required', true);
+                            })
+                            ->where('publish_allowed', true)
+                            ->where('review_state', 'approved')
+                            ->where(static function ($legalQuery): void {
+                                $legalQuery
+                                    ->whereNull('legal_review_required')
+                                    ->orWhere('legal_review_required', false);
+                            })
+                            ->where(static function ($scienceReviewQuery): void {
+                                $scienceReviewQuery
+                                    ->whereNull('science_review_required')
+                                    ->orWhere('science_review_required', false);
+                            })
+                            ->where('claim_gate_status', 'passed')
+                            ->where(static function ($claimsQuery): void {
+                                $claimsQuery
+                                    ->whereNull('forbidden_claims')
+                                    ->orWhere('forbidden_claims', '[]')
+                                    ->orWhereJsonLength('forbidden_claims', 0);
+                            })
+                            ->where(static function ($operatorQuery): void {
+                                $operatorQuery
+                                    ->where('operator_approval_required', false)
+                                    ->orWhereNotNull('operator_approved_at');
+                            })
+                            ->where(static function ($schemaQuery): void {
+                                $schemaQuery
+                                    ->where('schema_enabled', false)
+                                    ->orWhere(static function ($schemaReviewQuery): void {
+                                        $schemaReviewQuery
+                                            ->where('faq_schema_eligible', true)
+                                            ->whereNotNull('schema_eligibility_reviewed_at');
+                                    });
+                            });
+                    });
+            });
+    }
+
+    public function scopePubliclyIndexable($query)
+    {
+        return $query
+            ->publiclyReadable()
+            ->where('is_indexable', true);
+    }
+
+    public function isScienceControlledPage(): bool
+    {
+        return in_array((string) $this->slug, self::SCIENCE_CONTROLLED_SLUGS, true)
+            || in_array((string) $this->page_type, self::SCIENCE_CONTROLLED_PAGE_TYPES, true)
+            || (bool) $this->science_review_required;
+    }
+
+    public function passesPublicReadinessGate(): bool
+    {
+        if ((string) $this->status !== self::STATUS_PUBLISHED || ! (bool) $this->is_public) {
+            return false;
+        }
+
+        if ($this->published_at !== null && $this->published_at->isFuture()) {
+            return false;
+        }
+
+        if (! $this->isScienceControlledPage()) {
+            return true;
+        }
+
+        $forbiddenClaims = is_array($this->forbidden_claims) ? array_values($this->forbidden_claims) : [];
+
+        return (bool) $this->publish_allowed
+            && (string) $this->review_state === 'approved'
+            && ! (bool) $this->legal_review_required
+            && ! (bool) $this->science_review_required
+            && (string) $this->claim_gate_status === 'passed'
+            && $forbiddenClaims === []
+            && (! (bool) $this->operator_approval_required || $this->operator_approved_at !== null)
+            && (! (bool) $this->schema_enabled || ((bool) $this->faq_schema_eligible && $this->schema_eligibility_reviewed_at !== null));
     }
 
     public function isSourceContent(): bool
