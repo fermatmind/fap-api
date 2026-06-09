@@ -10,8 +10,8 @@ use Illuminate\Console\Command;
 final class ContentPagesPublishControlledCommand extends Command
 {
     protected $signature = 'content-pages:publish-controlled
-        {--scope=global-en-wave1 : Controlled publish scope. Supported: global-en-wave1, help-service}
-        {--locale=en : Required locale. Only en is supported for this bounded runtime}
+        {--scope=global-en-wave1 : Controlled publish scope. Supported: global-en-wave1, help-service, science-zh}
+        {--locale=en : Required locale. Use en, all for help-service, or zh-CN for science-zh}
         {--keys= : Comma-separated exact page keys to publish}
         {--dry-run : Preview without writes}
         {--execute : Explicitly perform the controlled publish}
