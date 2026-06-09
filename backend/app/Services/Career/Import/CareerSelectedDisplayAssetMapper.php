@@ -528,7 +528,7 @@ final class CareerSelectedDisplayAssetMapper
             }
         }
 
-        $this->validateContent($row, $errors);
+        $this->validateContent($row, $errors, $expectedOverride !== null);
         $this->validateSchema($decoded, $errors);
         $this->validateCta($row, $slug, $errors);
         $this->validateSources($decoded['source_refs'] ?? null, $errors);
@@ -776,7 +776,7 @@ final class CareerSelectedDisplayAssetMapper
      * @param  list<string>  $errors
      * @param  array<string, string|int>  $row
      */
-    private function validateContent(array $row, array &$errors): void
+    private function validateContent(array $row, array &$errors, bool $requireReviewedChinese): void
     {
         foreach ([
             'EN_Title',
@@ -793,6 +793,25 @@ final class CareerSelectedDisplayAssetMapper
             'CN_Next_Steps',
         ] as $field) {
             $this->expect($this->stringValue($row, $field) !== '', "{$field} is required.", $errors);
+        }
+
+        if (! $requireReviewedChinese) {
+            return;
+        }
+
+        foreach ([
+            'CN_Title' => 'EN_Title',
+            'CN_H1' => 'EN_H1',
+            'CN_Quick_Answer' => 'EN_Quick_Answer',
+            'CN_Definition' => 'EN_Definition',
+            'CN_Caveat' => 'EN_Caveat',
+            'CN_Next_Steps' => 'EN_Next_Steps',
+        ] as $cnField => $enField) {
+            $cnValue = $this->stringValue($row, $cnField);
+            $enValue = $this->stringValue($row, $enField);
+
+            $this->expect($this->containsHan($cnValue), "{$cnField} must contain reviewed Chinese text.", $errors);
+            $this->expect($this->normalizedText($cnValue) !== $this->normalizedText($enValue), "{$cnField} must not be copied from {$enField}.", $errors);
         }
     }
 
@@ -1066,6 +1085,16 @@ final class CareerSelectedDisplayAssetMapper
         $encoded = json_encode($value, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
         return strtolower(is_string($encoded) ? $encoded : '');
+    }
+
+    private function containsHan(string $value): bool
+    {
+        return preg_match('/\p{Han}/u', $value) === 1;
+    }
+
+    private function normalizedText(string $value): string
+    {
+        return strtolower(trim(preg_replace('/\s+/u', ' ', $value) ?? $value));
     }
 
     private function urlCount(mixed $value): int

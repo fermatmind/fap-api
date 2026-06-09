@@ -22,6 +22,8 @@ final class CareerImportSelectedDisplayAssets extends Command
 
     private const VALIDATOR_VERSION = 'career_selected_display_asset_import_v0.1';
 
+    private const ZH_DISPLAY_PARITY_SCOPE = 'career_zh_display_parity_v0.1';
+
     private const SOURCE_SYSTEM_SOC = 'us_soc';
 
     private const SOURCE_SYSTEM_ONET = 'onet_soc_2019';
@@ -131,6 +133,8 @@ final class CareerImportSelectedDisplayAssets extends Command
                 'source_file_basename' => basename($file),
                 'source_file_sha256' => hash_file('sha256', $file) ?: null,
                 'manifest_sha256' => $manifest['manifest_sha256'] ?? null,
+                'manifest_scope' => $manifest['manifest_scope'] ?? null,
+                'manifest_target_locale' => $manifest['manifest_target_locale'] ?? null,
                 'manifest_expected_delta' => $manifest['expected_delta'] ?? null,
                 'requested_slugs' => $slugs,
                 'total_rows' => $workbook['total_rows'],
@@ -283,6 +287,8 @@ final class CareerImportSelectedDisplayAssets extends Command
         $rows = (array) ($decoded['rows'] ?? []);
         $expectedDelta = (array) ($decoded['expected_delta'] ?? []);
         $workbookSha = hash_file('sha256', $workbookPath) ?: null;
+        $manifestScope = trim((string) ($planner['scope'] ?? $decoded['scope'] ?? ''));
+        $targetLocale = trim((string) ($planner['target_locale'] ?? $decoded['target_locale'] ?? ''));
 
         $errors = [];
         if ((string) ($planner['version'] ?? '') !== 'career_full_upload_planner_v0.1') {
@@ -299,6 +305,12 @@ final class CareerImportSelectedDisplayAssets extends Command
         }
         if (! isset($expectedDelta['career_job_display_assets'])) {
             $errors[] = 'Manifest expected_delta.career_job_display_assets is required.';
+        }
+        if ($manifestScope !== '' && $manifestScope !== self::ZH_DISPLAY_PARITY_SCOPE) {
+            $errors[] = 'Manifest planner.scope must be career_zh_display_parity_v0.1 when provided.';
+        }
+        if ($manifestScope === self::ZH_DISPLAY_PARITY_SCOPE && $targetLocale !== 'zh-CN') {
+            $errors[] = 'Manifest planner.target_locale must be zh-CN for career_zh_display_parity_v0.1.';
         }
 
         $candidateSlugs = [];
@@ -330,6 +342,24 @@ final class CareerImportSelectedDisplayAssets extends Command
             if (in_array($status, ['manual_hold', 'duplicate_identity_hold', 'broad_group_hold', 'CN_proxy_hold'], true)) {
                 $errors[] = "Manifest import candidate {$slug} is a held row.";
             }
+            if ($manifestScope === self::ZH_DISPLAY_PARITY_SCOPE) {
+                $localeScope = (array) ($row['locale_scope'] ?? []);
+                if (! in_array('zh-CN', $localeScope, true)) {
+                    $errors[] = "Manifest import candidate {$slug} must include zh-CN in locale_scope.";
+                }
+                if ((string) ($row['target_locale'] ?? '') !== 'zh-CN') {
+                    $errors[] = "Manifest import candidate {$slug} must declare target_locale zh-CN.";
+                }
+                if ((string) ($row['content_authority'] ?? '') !== 'reviewed_workbook') {
+                    $errors[] = "Manifest import candidate {$slug} must declare content_authority reviewed_workbook.";
+                }
+                if ((bool) ($row['reviewed_chinese_fields'] ?? false) !== true) {
+                    $errors[] = "Manifest import candidate {$slug} must have reviewed_chinese_fields true.";
+                }
+                if ((bool) ($row['seo_release_gates_unchanged'] ?? false) !== true) {
+                    $errors[] = "Manifest import candidate {$slug} must keep seo_release_gates_unchanged true.";
+                }
+            }
 
             $candidateSlugs[] = $slug;
         }
@@ -349,6 +379,10 @@ final class CareerImportSelectedDisplayAssets extends Command
             'row_count' => count($rows),
             'upload_candidate_slugs' => $candidateSlugs,
         ];
+        if ($manifestScope === self::ZH_DISPLAY_PARITY_SCOPE) {
+            $manifestPayload['scope'] = $manifestScope;
+            $manifestPayload['target_locale'] = $targetLocale;
+        }
         $computedManifestSha = hash('sha256', json_encode($manifestPayload, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?: '');
         if (($planner['upload_manifest_sha256'] ?? null) !== $computedManifestSha) {
             $errors[] = 'Manifest upload_manifest_sha256 does not match workbook/candidate payload.';
@@ -360,6 +394,8 @@ final class CareerImportSelectedDisplayAssets extends Command
 
         $decoded['manifest_sha256'] = hash_file('sha256', $path) ?: null;
         $decoded['manifest_candidate_slugs'] = $candidateSlugs;
+        $decoded['manifest_scope'] = $manifestScope !== '' ? $manifestScope : null;
+        $decoded['manifest_target_locale'] = $targetLocale !== '' ? $targetLocale : null;
         $decoded['manifest_expected_display_delta'] = (int) ($expectedDelta['career_job_display_assets'] ?? 0);
         $decoded['manifest_baseline_display_assets'] = (int) data_get($planner, 'db_baseline.career_job_display_assets', 0);
 

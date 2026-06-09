@@ -444,6 +444,8 @@ final class CareerValidateDisplayBatch extends Command
             'personality_fit_present' => $json['en_personality'] !== null && $json['cn_personality'] !== null,
             'caveat_present' => $this->hasText($row, 'EN_Caveat') && $this->hasText($row, 'CN_Caveat'),
             'next_steps_present' => $this->hasText($row, 'EN_Next_Steps') && $this->hasText($row, 'CN_Next_Steps'),
+            'reviewed_chinese_text_present' => $this->reviewedChineseTextPresent($row),
+            'copied_en_to_cn_fields' => $this->copiedEnglishToChineseFields($row),
             'forbidden_public_terms_found' => $this->forbiddenTerms($row),
         ];
     }
@@ -923,6 +925,8 @@ final class CareerValidateDisplayBatch extends Command
             $contentGate['personality_fit_present'],
             $contentGate['caveat_present'],
             $contentGate['next_steps_present'],
+            $contentGate['reviewed_chinese_text_present'],
+            $contentGate['copied_en_to_cn_fields'] === [],
             $contentGate['forbidden_public_terms_found'] === [],
         ]);
         $authorityState = (string) ($authorityGate['authority_state'] ?? $authorityGate['public_API_state'] ?? '');
@@ -1221,6 +1225,8 @@ final class CareerValidateDisplayBatch extends Command
                 static fn (array $row): string => (string) $row['slug'],
                 array_filter($rows, static fn (array $row): bool => (bool) $row['import_eligible']),
             )),
+            'scope' => 'career_zh_display_parity_v0.1',
+            'target_locale' => 'zh-CN',
         ];
 
         return [
@@ -1233,6 +1239,8 @@ final class CareerValidateDisplayBatch extends Command
             ],
             'planner' => [
                 'version' => 'career_full_upload_planner_v0.1',
+                'scope' => 'career_zh_display_parity_v0.1',
+                'target_locale' => 'zh-CN',
                 'generated_at' => now()->toISOString(),
                 'db_baseline' => [
                     'career_job_display_assets' => $this->displayAssetBaselineCount(),
@@ -1267,6 +1275,12 @@ final class CareerValidateDisplayBatch extends Command
             'hold_reason' => $this->fullUploadHoldReason($status),
             'import_eligible' => $importEligible,
             'cohort_id' => $importEligible ? 'full_upload_manifest' : null,
+            'locale_scope' => ['en', 'zh-CN'],
+            'target_locale' => 'zh-CN',
+            'content_authority' => 'reviewed_workbook',
+            'reviewed_chinese_fields' => (bool) data_get($item, 'content_gate.reviewed_chinese_text_present', false)
+                && data_get($item, 'content_gate.copied_en_to_cn_fields', []) === [],
+            'seo_release_gates_unchanged' => true,
             'authority_state' => (string) ($authority['authority_state'] ?? ''),
             'display_surface_ready' => (bool) ($authority['display_surface_ready'] ?? false),
             'scores' => [
@@ -1778,6 +1792,61 @@ final class CareerValidateDisplayBatch extends Command
         sort($found);
 
         return $found;
+    }
+
+    /**
+     * @param  array<string, string|int>  $row
+     */
+    private function reviewedChineseTextPresent(array $row): bool
+    {
+        foreach (array_keys($this->chineseReviewFieldPairs()) as $cnField) {
+            if (! $this->containsHan($this->stringValue($row, $cnField))) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  array<string, string|int>  $row
+     * @return list<string>
+     */
+    private function copiedEnglishToChineseFields(array $row): array
+    {
+        $copied = [];
+        foreach ($this->chineseReviewFieldPairs() as $cnField => $enField) {
+            if ($this->normalizedText($this->stringValue($row, $cnField)) === $this->normalizedText($this->stringValue($row, $enField))) {
+                $copied[] = "{$cnField}:{$enField}";
+            }
+        }
+
+        return $copied;
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    private function chineseReviewFieldPairs(): array
+    {
+        return [
+            'CN_Title' => 'EN_Title',
+            'CN_H1' => 'EN_H1',
+            'CN_Quick_Answer' => 'EN_Quick_Answer',
+            'CN_Definition' => 'EN_Definition',
+            'CN_Caveat' => 'EN_Caveat',
+            'CN_Next_Steps' => 'EN_Next_Steps',
+        ];
+    }
+
+    private function containsHan(string $value): bool
+    {
+        return preg_match('/\p{Han}/u', $value) === 1;
+    }
+
+    private function normalizedText(string $value): string
+    {
+        return strtolower(trim(preg_replace('/\s+/u', ' ', $value) ?? $value));
     }
 
     /**

@@ -106,6 +106,61 @@ final class CareerImportSelectedDisplayAssetsCommandTest extends TestCase
     }
 
     #[Test]
+    public function zh_display_parity_manifest_requires_reviewed_chinese_workbook_authority(): void
+    {
+        $row = $this->row('manifest-only-career', title: 'Manifest Only Career', soc: '15-2011', onet: '15-2011.00');
+        $this->createAuthorityOccupation($row['Slug'], $row['SOC_Code'], $row['O_NET_Code']);
+        $workbook = $this->writeWorkbook([$row]);
+
+        [$exitCode, $report] = $this->runImportWithManifest(
+            $workbook,
+            $this->writeManifest(
+                $workbook,
+                [$row],
+                manifestScope: 'career_zh_display_parity_v0.1',
+                targetLocale: 'zh-CN',
+            ),
+        );
+
+        $this->assertSame(0, $exitCode, json_encode($report, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $this->assertSame('pass', $report['decision']);
+        $this->assertSame('career_zh_display_parity_v0.1', $report['manifest_scope']);
+        $this->assertSame('zh-CN', $report['manifest_target_locale']);
+
+        [$exitCode, $report] = $this->runImportWithManifest(
+            $workbook,
+            $this->writeManifest(
+                $workbook,
+                [$row],
+                manifestScope: 'career_zh_display_parity_v0.1',
+                targetLocale: 'zh-CN',
+                reviewedChineseFields: false,
+            ),
+        );
+
+        $this->assertSame(1, $exitCode);
+        $this->assertStringContainsString('must have reviewed_chinese_fields true', implode(' ', $report['errors']));
+
+        $copied = $row;
+        $copied['CN_Title'] = $copied['EN_Title'];
+        $copied['CN_H1'] = $copied['EN_H1'];
+        $copiedWorkbook = $this->writeWorkbook([$copied]);
+        [$exitCode, $report] = $this->runImportWithManifest(
+            $copiedWorkbook,
+            $this->writeManifest(
+                $copiedWorkbook,
+                [$copied],
+                manifestScope: 'career_zh_display_parity_v0.1',
+                targetLocale: 'zh-CN',
+            ),
+        );
+
+        $this->assertSame(1, $exitCode);
+        $this->assertStringContainsString('CN_Title must contain reviewed Chinese text.', implode(' ', $report['errors']));
+        $this->assertStringContainsString('CN_Title must not be copied from EN_Title.', implode(' ', $report['errors']));
+    }
+
+    #[Test]
     public function plan_manifest_rejects_invalid_or_held_candidates(): void
     {
         $row = $this->row('manifest-only-career', title: 'Manifest Only Career', soc: '15-2011', onet: '15-2011.00');
@@ -900,7 +955,10 @@ final class CareerImportSelectedDisplayAssetsCommandTest extends TestCase
     public function command_created_selected_asset_is_available_to_display_surface_builder(): void
     {
         $occupation = $this->createAuthorityOccupation('data-scientists', '15-2051', '15-2051.00');
-        $workbook = $this->writeWorkbook([$this->row('data-scientists')]);
+        $row = $this->row('data-scientists');
+        $row['Primary_CTA_Label'] = '测量我的职业兴趣';
+        $row['CN_Target_Queries'] = $this->encodeJson(['query' => '数据科学家职业']);
+        $workbook = $this->writeWorkbook([$row]);
 
         [$exitCode, $report] = $this->runImport($workbook, 'data-scientists', ['--force' => true]);
 
@@ -952,8 +1010,13 @@ final class CareerImportSelectedDisplayAssetsCommandTest extends TestCase
         int $baselineDisplayAssets = 0,
         ?string $publicResolutionType = 'public_canonical_job',
         string $rowStatus = 'upload_candidate',
+        ?string $manifestScope = null,
+        ?string $targetLocale = null,
+        ?bool $reviewedChineseFields = null,
+        ?string $contentAuthority = null,
+        ?bool $seoReleaseGatesUnchanged = null,
     ): string {
-        $manifestRows = array_map(static function (array $row, int $index) use ($publicResolutionType, $rowStatus): array {
+        $manifestRows = array_map(static function (array $row, int $index) use ($publicResolutionType, $rowStatus, $manifestScope, $targetLocale, $reviewedChineseFields, $contentAuthority, $seoReleaseGatesUnchanged): array {
             $manifestRow = [
                 'row_number' => $index + 2,
                 'slug' => $row['Slug'],
@@ -966,6 +1029,13 @@ final class CareerImportSelectedDisplayAssetsCommandTest extends TestCase
 
             if ($publicResolutionType !== null) {
                 $manifestRow['public_resolution_type'] = $publicResolutionType;
+            }
+            if ($manifestScope === 'career_zh_display_parity_v0.1') {
+                $manifestRow['locale_scope'] = ['en', 'zh-CN'];
+                $manifestRow['target_locale'] = $targetLocale ?? 'zh-CN';
+                $manifestRow['content_authority'] = $contentAuthority ?? 'reviewed_workbook';
+                $manifestRow['reviewed_chinese_fields'] = $reviewedChineseFields ?? true;
+                $manifestRow['seo_release_gates_unchanged'] = $seoReleaseGatesUnchanged ?? true;
             }
 
             return $manifestRow;
@@ -982,6 +1052,10 @@ final class CareerImportSelectedDisplayAssetsCommandTest extends TestCase
             'row_count' => count($manifestRows),
             'upload_candidate_slugs' => $candidateSlugs,
         ];
+        if ($manifestScope === 'career_zh_display_parity_v0.1') {
+            $payload['scope'] = $manifestScope;
+            $payload['target_locale'] = $targetLocale ?? 'zh-CN';
+        }
         $manifest = [
             'workbook' => [
                 'path' => $workbook,
@@ -992,6 +1066,8 @@ final class CareerImportSelectedDisplayAssetsCommandTest extends TestCase
             ],
             'planner' => [
                 'version' => $plannerVersion,
+                'scope' => $manifestScope,
+                'target_locale' => $targetLocale,
                 'generated_at' => '2026-05-05T00:00:00Z',
                 'db_baseline' => [
                     'career_job_display_assets' => $baselineDisplayAssets,

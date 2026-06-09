@@ -57,6 +57,23 @@ final class CareerSelectedDisplayAssetMapperTest extends TestCase
         $this->assertSame(24, $result['summary']['component_order_count']);
     }
 
+    public function test_it_rejects_manifest_rows_that_copy_english_into_core_chinese_fields(): void
+    {
+        $row = $this->row('manifest-only-career', title: 'Manifest Only Career', soc: '15-2011', onet: '15-2011.00');
+        $row['CN_Title'] = $row['EN_Title'];
+        $row['CN_H1'] = $row['EN_H1'];
+
+        $result = app(CareerSelectedDisplayAssetMapper::class)->mapRow(
+            $row,
+            ['soc' => '15-2011', 'onet' => '15-2011.00'],
+        );
+
+        $errors = implode(' ', $result['errors']);
+        $this->assertStringContainsString('CN_Title must contain reviewed Chinese text.', $errors);
+        $this->assertStringContainsString('CN_Title must not be copied from EN_Title.', $errors);
+        $this->assertStringContainsString('CN_H1 must not be copied from EN_H1.', $errors);
+    }
+
     public function test_it_maps_d5_selected_rows_to_display_asset_payloads(): void
     {
         foreach ($this->d5Rows() as $row) {
