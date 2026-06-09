@@ -75,6 +75,14 @@ final class MbtiAttributionEventController extends Controller
         'fbclid',
         'referrer',
         'session_id',
+        'url',
+        'lang',
+        'page_type',
+        'source_url',
+        'source_article',
+        'target_test',
+        'scale_id',
+        'form_id',
     ];
 
     /**
@@ -96,6 +104,35 @@ final class MbtiAttributionEventController extends Controller
         'invite_create_failed',
         'invite_share_or_copy',
         'invite_progress_advanced',
+        'landing_pv',
+        'article_to_test_click',
+        'start_test',
+        'complete_test',
+    ];
+
+    /**
+     * @var list<string>
+     */
+    private const SEO_CONVERSION_EVENT_NAMES = [
+        'landing_pv',
+        'article_to_test_click',
+        'start_test',
+        'complete_test',
+        'view_result',
+    ];
+
+    /**
+     * @var list<string>
+     */
+    private const SEO_FORBIDDEN_IDENTIFIER_KEYS = [
+        'attempt_id',
+        'attemptIdMasked',
+        'target_attempt_id',
+        'order_no',
+        'orderNo',
+        'orderNoMasked',
+        'order_id',
+        'transaction_id',
     ];
 
     public function store(Request $request): JsonResponse
@@ -160,6 +197,14 @@ final class MbtiAttributionEventController extends Controller
             'payload.fbclid' => ['nullable', 'string', 'max:256', 'regex:/\A[^\r\n]*\z/'],
             'payload.referrer' => ['nullable', 'string', 'max:512', 'regex:/\A[^\r\n]*\z/'],
             'payload.session_id' => ['nullable', 'string', 'max:128', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
+            'payload.url' => ['nullable', 'string', 'max:512', 'regex:/\A[^\r\n]*\z/'],
+            'payload.lang' => ['nullable', 'string', 'max:16', 'in:en,zh,zh-cn,zh-CN'],
+            'payload.page_type' => ['nullable', 'string', 'max:64', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
+            'payload.source_url' => ['nullable', 'string', 'max:512', 'regex:/\A[^\r\n]*\z/'],
+            'payload.source_article' => ['nullable', 'string', 'max:128', 'regex:/\A[A-Za-z0-9._:\/-]+\z/'],
+            'payload.target_test' => ['nullable', 'string', 'max:512', 'regex:/\A[^\r\n]*\z/'],
+            'payload.scale_id' => ['nullable', 'string', 'max:64', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
+            'payload.form_id' => ['nullable', 'string', 'max:64', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
             'anonymousId' => ['nullable', 'string', 'max:128', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
             'path' => ['nullable', 'string', 'max:512', 'regex:/\A\/[^\r\n]*\z/'],
             'timestamp' => ['nullable', 'date'],
@@ -176,6 +221,11 @@ final class MbtiAttributionEventController extends Controller
 
         $payload = is_array($data['payload'] ?? null) ? $data['payload'] : [];
         $path = $this->normalizeOptionalString($data['path'] ?? null, 2048) ?? '/';
+        $isSeoConversionEvent = $this->isSeoConversionEvent($eventName, $payload);
+        if ($isSeoConversionEvent) {
+            $path = $this->sanitizeSeoPublicUrl($path, 'path') ?? '/';
+            $payload = $this->sanitizeSeoConversionPayload($payload);
+        }
         $anonymousId = $this->normalizeOptionalString($data['anonymousId'] ?? null, 128);
         $occurredAt = Carbon::parse((string) ($data['timestamp'] ?? now()->toISOString()));
 
@@ -191,22 +241,39 @@ final class MbtiAttributionEventController extends Controller
             'source_page_type' => $this->normalizeOptionalString($payload['source_page_type'] ?? null, 64) ?? 'unknown',
             'target_action' => $this->normalizeOptionalString($payload['target_action'] ?? null, 128),
             'test_slug' => $this->normalizeOptionalString($payload['test_slug'] ?? null, 128),
-            'form_code' => $this->normalizeOptionalString($payload['form_code'] ?? null, 64),
-            'landing_path' => $this->normalizeOptionalString($payload['landing_path'] ?? null, 512) ?? $path,
+            'form_code' => $this->normalizeOptionalString($payload['form_code'] ?? $payload['form_id'] ?? null, 64),
+            'landing_path' => $this->normalizeOptionalString($payload['landing_path'] ?? $payload['url'] ?? null, 512) ?? $path,
             'path' => $path,
             'anonymous_id' => $anonymousId,
             'target_attempt_id' => $this->normalizeOptionalString($payload['target_attempt_id'] ?? null, 64),
             'attempt_id' => $attemptId,
             'raw_payload' => $payload,
         ];
+        if ($isSeoConversionEvent) {
+            $meta['seo_conversion'] = [
+                'event_name' => $eventName,
+                'url' => $this->normalizeOptionalString($payload['url'] ?? null, 512) ?? $path,
+                'lang' => $this->normalizeOptionalString($payload['lang'] ?? $payload['locale'] ?? null, 16)
+                    ?? ($path !== '' && str_starts_with($path, '/zh') ? 'zh' : 'en'),
+                'page_type' => $this->normalizeOptionalString($payload['page_type'] ?? $payload['source_page_type'] ?? null, 64) ?? 'unknown',
+                'source_url' => $this->normalizeOptionalString($payload['source_url'] ?? null, 512),
+                'source_article' => $this->normalizeOptionalString($payload['source_article'] ?? null, 128),
+                'target_test' => $this->normalizeOptionalString($payload['target_test'] ?? null, 512),
+                'scale_id' => $this->normalizeOptionalString($payload['scale_id'] ?? $payload['scale_code'] ?? $payload['scaleCode'] ?? null, 64),
+                'form_id' => $this->normalizeOptionalString($payload['form_id'] ?? $payload['form_code'] ?? null, 64),
+                'session_id' => $this->normalizeOptionalString($payload['session_id'] ?? null, 128),
+                'referrer' => $this->normalizeOptionalString($payload['referrer'] ?? null, 512),
+            ];
+        }
 
-        $locale = $this->normalizeOptionalString($payload['locale'] ?? null, 16)
+        $locale = $this->normalizeOptionalString($payload['locale'] ?? $payload['lang'] ?? null, 16)
             ?? ($path !== '' && str_starts_with($path, '/zh') ? 'zh' : 'en');
 
         $orgId = $this->resolveOrgId($request);
         $scaleCode = $this->normalizeOptionalString(
             $payload['scale_code']
                 ?? $payload['scaleCode']
+                ?? $payload['scale_id']
                 ?? null,
             64
         ) ?? 'MBTI';
@@ -297,6 +364,132 @@ final class MbtiAttributionEventController extends Controller
         }
 
         return $normalized;
+    }
+
+    /**
+     * @param  array<string, mixed>  $payload
+     */
+    private function isSeoConversionEvent(string $eventName, array $payload): bool
+    {
+        if (! in_array($eventName, self::SEO_CONVERSION_EVENT_NAMES, true)) {
+            return false;
+        }
+
+        if ($eventName !== 'view_result') {
+            return true;
+        }
+
+        foreach (['url', 'lang', 'page_type', 'source_url', 'source_article', 'target_test', 'scale_id', 'form_id', 'session_id'] as $key) {
+            if (array_key_exists($key, $payload)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param  array<string, mixed>  $payload
+     * @return array<string, mixed>
+     */
+    private function sanitizeSeoConversionPayload(array $payload): array
+    {
+        foreach (self::SEO_FORBIDDEN_IDENTIFIER_KEYS as $key) {
+            if ($this->normalizeOptionalString($payload[$key] ?? null, 256) !== null) {
+                throw ValidationException::withMessages([
+                    'payload.'.$key => 'Canonical SEO conversion ingest does not accept raw attempt, order, or result identifiers.',
+                ]);
+            }
+        }
+
+        $sessionId = $this->normalizeOptionalString($payload['session_id'] ?? null, 128);
+        if ($sessionId !== null && ! preg_match('/\Aseo_sess_[A-Za-z0-9_-]{16,96}\z/', $sessionId)) {
+            throw ValidationException::withMessages([
+                'payload.session_id' => 'Canonical SEO conversion session_id must use the seo_sess_ public session format.',
+            ]);
+        }
+
+        foreach (['url', 'source_url', 'referrer', 'landing_path', 'current_path'] as $key) {
+            if (array_key_exists($key, $payload)) {
+                $payload[$key] = $this->sanitizeSeoPublicUrl($payload[$key], 'payload.'.$key);
+            }
+        }
+
+        if (array_key_exists('target_test', $payload)) {
+            $targetTest = $this->normalizeOptionalString($payload['target_test'], 512);
+            if ($targetTest !== null && (str_starts_with($targetTest, '/') || preg_match('/\Ahttps?:\/\//i', $targetTest) === 1)) {
+                $payload['target_test'] = $this->sanitizeSeoPublicUrl($targetTest, 'payload.target_test');
+            }
+        }
+
+        $url = $this->normalizeOptionalString($payload['url'] ?? null, 512);
+        if ($url !== null) {
+            $payload['landing_path'] = $payload['landing_path'] ?? $url;
+            $payload['current_path'] = $payload['current_path'] ?? $url;
+        }
+
+        if (isset($payload['lang']) && ! isset($payload['locale'])) {
+            $payload['locale'] = $payload['lang'];
+        }
+        if (isset($payload['page_type']) && ! isset($payload['source_page_type'])) {
+            $payload['source_page_type'] = $payload['page_type'];
+        }
+        if (isset($payload['form_id']) && ! isset($payload['form_code'])) {
+            $payload['form_code'] = $payload['form_id'];
+        }
+        if (isset($payload['scale_id']) && ! isset($payload['scale_code'])) {
+            $payload['scale_code'] = $payload['scale_id'];
+        }
+
+        return $payload;
+    }
+
+    private function sanitizeSeoPublicUrl(mixed $value, string $field): ?string
+    {
+        $normalized = $this->normalizeOptionalString($value, 512);
+        if ($normalized === null) {
+            return null;
+        }
+
+        $parts = parse_url($normalized);
+        if ($parts === false) {
+            throw ValidationException::withMessages([
+                $field => 'Canonical SEO conversion URL is malformed.',
+            ]);
+        }
+
+        $path = (string) ($parts['path'] ?? ($normalized[0] === '/' ? $normalized : '/'));
+        if ($path === '') {
+            $path = '/';
+        }
+        if (! str_starts_with($path, '/')) {
+            $path = '/'.$path;
+        }
+
+        if ($this->isPrivateAnalyticsPath($path)) {
+            throw ValidationException::withMessages([
+                $field => 'Canonical SEO conversion ingest does not accept private result, order, share, pay, or history paths.',
+            ]);
+        }
+
+        $scheme = strtolower((string) ($parts['scheme'] ?? ''));
+        $host = strtolower((string) ($parts['host'] ?? ''));
+        if ($scheme !== '' && ! in_array($scheme, ['http', 'https'], true)) {
+            throw ValidationException::withMessages([
+                $field => 'Canonical SEO conversion URL must use http, https, or a root-relative path.',
+            ]);
+        }
+
+        if ($host !== '') {
+            return ($scheme !== '' ? $scheme : 'https').'://'.$host.$path;
+        }
+
+        return $path;
+    }
+
+    private function isPrivateAnalyticsPath(string $path): bool
+    {
+        return preg_match('#(^|/)(result|results|order|orders|share|shares|pay|payment|history)(/|$)#i', $path) === 1;
     }
 
     /**
