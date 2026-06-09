@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-08T17:23:16Z",
+  "updated_at": "2026-06-09T00:00:00Z",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -52180,6 +52180,215 @@
         "at": "2026-06-09",
         "status": "ready_to_merge",
         "note": "GitHub checks passed and merge state was CLEAN for head a8e300f908c22c94caba1c61becf8c6b1c5f2525."
+      }
+    ]
+  },
+  "CAREER-ZH-DISPLAY-PARITY-01": {
+    "repo": "fap-api",
+    "branch": "codex/career-zh-display-parity-01-audit",
+    "base": "origin/main",
+    "status": "ready_to_merge",
+    "train_scope": "career_zh_display_parity",
+    "title": "CAREER-ZH-DISPLAY-PARITY-01: feat(career): audit zh display parity",
+    "depends_on": [],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding and executing CAREER-ZH-DISPLAY-PARITY-01 through CAREER-ZH-DISPLAY-PARITY-04, including fap-api docs/codex metadata updates, on 2026-06-09."
+      },
+      "scope": {
+        "status": "pending",
+        "evidence": "Initialized from user-provided CAREER-ZH-DISPLAY-PARITY PR train scope."
+      },
+      "php_lint": {
+        "status": "pass",
+        "evidence": "php -l passed for CareerAuditZhDisplayParity.php, Console Kernel, and CareerAuditZhDisplayParityCommandTest.php."
+      },
+      "focused_test": {
+        "status": "pass",
+        "evidence": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=\":memory:\" php artisan test tests/Feature/Console/CareerAuditZhDisplayParityCommandTest.php --no-ansi passed 2 tests / 27 assertions."
+      },
+      "live_audit": {
+        "status": "pass",
+        "evidence": "cd backend && php artisan career:audit-zh-display-parity --json --output=/private/tmp/career-zh-display-parity-01-live.json passed read-only; total_slugs=1046, en_index_count=1046, zh_index_count=1046, same_module_set=374, en_has_modules_zh_missing=672, api_failure_count=0."
+      },
+      "pint": {
+        "status": "pass",
+        "evidence": "cd backend && ./vendor/bin/pint --test app/Console/Commands/CareerAuditZhDisplayParity.php app/Console/Kernel.php tests/Feature/Console/CareerAuditZhDisplayParityCommandTest.php passed."
+      },
+      "metadata": {
+        "status": "pass",
+        "evidence": "docs/codex/pr-train-state.json parsed as JSON and docs/codex/pr-train.yaml parsed as YAML via Ruby stdlib."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are confined to CareerAuditZhDisplayParity command, Kernel registration, focused command test, and docs/codex metadata."
+      },
+      "diff_check": {
+        "status": "pass",
+        "evidence": "Path-limited git diff --check and git diff --cached --check passed."
+      },
+      "github": {
+        "status": "pass",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/2020",
+        "head_sha": "ef50a4a66477dac4ea03cd822d6c30e1d958058a",
+        "checks": [
+          "hygiene",
+          "supply-chain",
+          "content-pack-build-validate",
+          "verify-mbti-legacy",
+          "verify-mbti-v2",
+          "verify-bigfive",
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "Semgrep OSS"
+        ],
+        "merge_state": "CLEAN",
+        "evidence": "GitHub checks passed for PR #2020 at head ef50a4a66477dac4ea03cd822d6c30e1d958058a and mergeStateStatus is CLEAN."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": "ef50a4a66477dac4ea03cd822d6c30e1d958058a",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2020",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "sidecar_issues": [],
+    "transitions": [
+      {
+        "at": "2026-06-09",
+        "status": "in_progress",
+        "note": "Initialized from explicit CAREER-ZH-DISPLAY-PARITY train authorization and started branch codex/career-zh-display-parity-01-audit from latest fap-api main."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "local_checks_passed",
+        "note": "Read-only zh display parity audit command, focused tests, live public API audit, Pint, metadata parse, scope validation, and diff checks passed. Live report reproduced total_slugs=1046 and en_has_modules_zh_missing=672 with api_failure_count=0."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "committed_pending_push",
+        "note": "Created scoped implementation commit c6e5d9505c76edb14dc445238c954e667b7975a0."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "github_checks_pending",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/2020 from branch codex/career-zh-display-parity-01-audit; GitHub checks pending."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "github_checks_queued_retry_pushed",
+        "note": "Initial pull_request CI run remained queued on verify-mbti-legacy and semgrep sarif non-blocking upload; pushed scoped ledger-only retry transition to trigger a fresh check set."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed and merge state was CLEAN for PR #2020 head ef50a4a66477dac4ea03cd822d6c30e1d958058a."
+      }
+    ]
+  },
+  "CAREER-ZH-DISPLAY-PARITY-02": {
+    "repo": "fap-api",
+    "branch": "codex/career-zh-display-parity-02-import-manifest",
+    "base": "origin/main",
+    "status": "pending_dependency",
+    "train_scope": "career_zh_display_parity",
+    "title": "CAREER-ZH-DISPLAY-PARITY-02: feat(career): support zh display import manifests",
+    "depends_on": [
+      "CAREER-ZH-DISPLAY-PARITY-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding and executing CAREER-ZH-DISPLAY-PARITY-01 through CAREER-ZH-DISPLAY-PARITY-04, including fap-api docs/codex metadata updates, on 2026-06-09."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Waiting for CAREER-ZH-DISPLAY-PARITY-01 to merge."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "sidecar_issues": [],
+    "transitions": [
+      {
+        "at": "2026-06-09",
+        "status": "pending_dependency",
+        "note": "Future import/validation entry initialized only; implementation deferred until PR01 is merged."
+      }
+    ]
+  },
+  "CAREER-ZH-DISPLAY-PARITY-03": {
+    "repo": "fap-api",
+    "branch": "codex/career-zh-display-parity-03-detail-cache",
+    "base": "origin/main",
+    "status": "pending_dependency",
+    "train_scope": "career_zh_display_parity",
+    "title": "CAREER-ZH-DISPLAY-PARITY-03: feat(career): refresh job detail cache per locale",
+    "depends_on": [
+      "CAREER-ZH-DISPLAY-PARITY-02"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding and executing CAREER-ZH-DISPLAY-PARITY-01 through CAREER-ZH-DISPLAY-PARITY-04, including fap-api docs/codex metadata updates, on 2026-06-09."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Waiting for CAREER-ZH-DISPLAY-PARITY-02 to merge."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "sidecar_issues": [],
+    "transitions": [
+      {
+        "at": "2026-06-09",
+        "status": "pending_dependency",
+        "note": "Future per-slug/per-locale detail cache entry initialized only; implementation deferred until PR02 is merged."
+      }
+    ]
+  },
+  "CAREER-ZH-DISPLAY-PARITY-04": {
+    "repo": "fap-api",
+    "branch": "codex/career-zh-display-parity-04-live-gate",
+    "base": "origin/main",
+    "status": "pending_dependency",
+    "train_scope": "career_zh_display_parity",
+    "title": "CAREER-ZH-DISPLAY-PARITY-04: chore(career): gate zh display live parity",
+    "depends_on": [
+      "CAREER-ZH-DISPLAY-PARITY-03"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding and executing CAREER-ZH-DISPLAY-PARITY-01 through CAREER-ZH-DISPLAY-PARITY-04, including fap-api docs/codex metadata updates, on 2026-06-09."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Waiting for CAREER-ZH-DISPLAY-PARITY-03 to merge."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "sidecar_issues": [],
+    "transitions": [
+      {
+        "at": "2026-06-09",
+        "status": "pending_dependency",
+        "note": "Future controlled publish/live parity gate entry initialized only; implementation deferred until PR03 is merged."
       }
     ]
   }
