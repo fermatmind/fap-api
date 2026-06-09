@@ -67,4 +67,33 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
             $this->assertStringContainsString($expectedNeedle, $source, $relativePath);
         }
     }
+
+    public function test_command_can_forget_and_warm_targeted_job_detail_cache_by_slug_and_locale(): void
+    {
+        $cacheKey = PublicCareerAuthorityResponseCache::JOB_DETAIL_CACHE_KEY_PREFIX.':missing-career:zh-CN';
+        Cache::forever($cacheKey, ['stale' => true]);
+
+        $this->artisan('career:warm-public-authority-cache', [
+            '--job-detail-slugs' => 'missing-career',
+            '--job-detail-locales' => 'zh-CN',
+            '--forget-job-detail' => true,
+            '--job-detail-only' => true,
+        ])
+            ->expectsOutputToContain('career_warm_phase=job_detail_zh_cn_missing-career state=starting')
+            ->expectsOutputToContain('career_warm_phase=job_detail_zh_cn_missing-career state=finished')
+            ->expectsOutputToContain($cacheKey)
+            ->expectsOutputToContain('status=warmed')
+            ->assertExitCode(0);
+
+        $this->assertFalse(Cache::has($cacheKey));
+    }
+
+    public function test_job_detail_only_requires_target_slugs(): void
+    {
+        $this->artisan('career:warm-public-authority-cache', [
+            '--job-detail-only' => true,
+        ])
+            ->expectsOutput('--job-detail-only requires --job-detail-slugs.')
+            ->assertExitCode(1);
+    }
 }

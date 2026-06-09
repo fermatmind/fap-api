@@ -106,6 +106,78 @@ final class PublicCareerAuthorityResponseCache
         return $this->refreshJobDetailPayload($normalizedSlug, $publicLocale);
     }
 
+    public function forgetJobDetailPayload(string $slug, string $publicLocale = 'zh-CN'): bool
+    {
+        $normalizedSlug = strtolower(trim($slug));
+        if ($normalizedSlug === '') {
+            return false;
+        }
+
+        return Cache::forget($this->jobDetailCacheKey($normalizedSlug, $publicLocale));
+    }
+
+    /**
+     * @return array{cache_key: string, locale: string, slug: string, status: string, member_count: int}
+     */
+    public function warmJobDetailPayload(string $slug, string $publicLocale = 'zh-CN', bool $forgetFirst = false): array
+    {
+        $normalizedSlug = strtolower(trim($slug));
+        $normalizedLocale = $this->normalizePublicLocale($publicLocale);
+        if ($normalizedSlug === '') {
+            return [
+                'cache_key' => '',
+                'locale' => $normalizedLocale,
+                'slug' => '',
+                'status' => 'invalid_slug',
+                'member_count' => 0,
+            ];
+        }
+
+        $cacheKey = $this->jobDetailCacheKey($normalizedSlug, $normalizedLocale);
+        if ($forgetFirst) {
+            Cache::forget($cacheKey);
+        }
+
+        $payload = $this->refreshJobDetailPayload($normalizedSlug, $normalizedLocale);
+
+        return [
+            'cache_key' => $cacheKey,
+            'locale' => $normalizedLocale,
+            'slug' => $normalizedSlug,
+            'status' => $payload === null ? 'missing' : 'cached',
+            'member_count' => $payload === null ? 0 : count((array) data_get($payload, 'sections', data_get($payload, 'modules', []))),
+        ];
+    }
+
+    /**
+     * @param  list<string>  $slugs
+     * @param  list<string>  $publicLocales
+     * @return array<string, array{cache_key: string, locale: string, slug: string, status: string, member_count: int}>
+     */
+    public function warmJobDetailPayloads(array $slugs, array $publicLocales = ['zh-CN'], bool $forgetFirst = false, ?callable $reporter = null): array
+    {
+        $normalizedSlugs = array_values(array_unique(array_filter(array_map(
+            static fn (string $slug): string => strtolower(trim($slug)),
+            $slugs,
+        ), static fn (string $slug): bool => $slug !== '')));
+        $normalizedLocales = array_values(array_unique(array_map(
+            fn (string $locale): string => $this->normalizePublicLocale($locale),
+            $publicLocales === [] ? ['zh-CN'] : $publicLocales,
+        )));
+
+        $summary = [];
+        foreach ($normalizedLocales as $locale) {
+            foreach ($normalizedSlugs as $slug) {
+                $phase = sprintf('job_detail_%s_%s', $this->cachePhaseLocale($locale), $slug);
+                $reporter?->__invoke($phase, 'starting');
+                $summary[$phase] = $this->warmJobDetailPayload($slug, $locale, $forgetFirst);
+                $reporter?->__invoke($phase, 'finished');
+            }
+        }
+
+        return $summary;
+    }
+
     /**
      * @return array<string, array{cache_key: string, member_count?: int, status: string}>
      */
@@ -257,6 +329,11 @@ final class PublicCareerAuthorityResponseCache
         return in_array($normalized, ['en', 'en-us'], true) ? 'en' : 'zh-CN';
     }
 
+    private function cachePhaseLocale(string $publicLocale): string
+    {
+        return strtolower(str_replace('-', '_', $this->normalizePublicLocale($publicLocale)));
+    }
+
     private function jobIndexCacheKey(string $publicLocale, bool $includeNonIndexable): string
     {
         return sprintf(
@@ -267,7 +344,7 @@ final class PublicCareerAuthorityResponseCache
         );
     }
 
-    private function jobDetailCacheKey(string $slug, string $publicLocale): string
+    public function jobDetailCacheKey(string $slug, string $publicLocale): string
     {
         return sprintf(
             '%s:%s:%s',

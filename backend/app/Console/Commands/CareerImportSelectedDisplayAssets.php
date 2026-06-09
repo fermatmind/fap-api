@@ -9,6 +9,7 @@ use App\Models\Occupation;
 use App\Models\OccupationCrosswalk;
 use App\Services\Career\CareerCliArtifactPathGuard;
 use App\Services\Career\Import\CareerSelectedDisplayAssetMapper;
+use App\Services\Career\PublicCareerAuthorityResponseCache;
 use Illuminate\Console\Command;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
@@ -41,8 +42,10 @@ final class CareerImportSelectedDisplayAssets extends Command
 
     protected $description = 'Guarded dry-run/force import for selected second-pilot career display assets.';
 
-    public function __construct(private readonly CareerSelectedDisplayAssetMapper $mapper)
-    {
+    public function __construct(
+        private readonly CareerSelectedDisplayAssetMapper $mapper,
+        private readonly PublicCareerAuthorityResponseCache $authorityResponseCache,
+    ) {
         parent::__construct();
     }
 
@@ -203,10 +206,12 @@ final class CareerImportSelectedDisplayAssets extends Command
 
                 return $written;
             });
+            $forgotDetailCaches = $this->forgetWrittenJobDetailCaches($written);
 
             return $this->finish(array_merge($report, [
                 'did_write' => count($written) > 0,
                 'written_assets' => $written,
+                'forgot_detail_caches' => $forgotDetailCaches,
                 'created_count' => count(array_filter($written, static fn (array $row): bool => ($row['created'] ?? false) === true)),
                 'updated_count' => count(array_filter($written, static fn (array $row): bool => ($row['created'] ?? false) !== true)),
             ]), true);
@@ -216,6 +221,32 @@ final class CareerImportSelectedDisplayAssets extends Command
                 'errors' => [$this->safeErrorMessage($throwable)],
             ]), false);
         }
+    }
+
+    /**
+     * @param  list<array{slug: string, row_id: int|string, created: bool}>  $written
+     * @return list<array{slug: string, locale: string, cache_key: string, forgotten: bool}>
+     */
+    private function forgetWrittenJobDetailCaches(array $written): array
+    {
+        $forgotten = [];
+        foreach ($written as $row) {
+            $slug = strtolower(trim((string) ($row['slug'] ?? '')));
+            if ($slug === '') {
+                continue;
+            }
+
+            $locale = 'zh-CN';
+            $cacheKey = $this->authorityResponseCache->jobDetailCacheKey($slug, $locale);
+            $forgotten[] = [
+                'slug' => $slug,
+                'locale' => $locale,
+                'cache_key' => $cacheKey,
+                'forgotten' => $this->authorityResponseCache->forgetJobDetailPayload($slug, $locale),
+            ];
+        }
+
+        return $forgotten;
     }
 
     private function requiredFile(): string
