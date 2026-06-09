@@ -135,7 +135,8 @@ final class ContentPagesControlledPublishService
                     throw new RuntimeException('Target content page disappeared during controlled publish: '.$targetLocale.':'.$key);
                 }
 
-                if ($this->isPublishedTarget($page)) {
+                $action = (string) ($pagePlan['action'] ?? $this->actionForPage($scope, $page));
+                if ($action === 'skip_already_published') {
                     $skipped[] = (string) ($pagePlan['target_key'] ?? $key);
 
                     continue;
@@ -266,6 +267,7 @@ final class ContentPagesControlledPublishService
                 $pageErrors = $this->preflightPage($scope, $page);
                 array_push($errors, ...$pageErrors);
 
+                $action = $this->actionForPage($scope, $page);
                 $pages[] = [
                     'key' => $key,
                     'locale' => $targetLocale,
@@ -273,17 +275,17 @@ final class ContentPagesControlledPublishService
                     'id' => (int) $page->id,
                     'before_state' => $this->state($page),
                     'after_state_preview' => $this->afterStatePreview($page),
-                    'action' => $this->isPublishedTarget($page) ? 'skip_already_published' : 'publish',
+                    'action' => $action,
                     'errors' => $pageErrors,
                 ];
             }
         }
 
-        $wouldPublishCount = count(array_filter(
+        $wouldWriteCount = count(array_filter(
             $pages,
-            static fn (array $page): bool => ($page['action'] ?? null) === 'publish'
+            static fn (array $page): bool => in_array((string) ($page['action'] ?? ''), ['publish', 'repair_existing_published'], true)
         ));
-        $wouldSkipCount = count($pages) - $wouldPublishCount;
+        $wouldSkipCount = count($pages) - $wouldWriteCount;
         $ok = $errors === [];
 
         return [
@@ -294,8 +296,9 @@ final class ContentPagesControlledPublishService
             'execute' => $forExecute,
             'writes_committed' => false,
             'target_count' => count($allowedKeys) * count($targetLocales),
-            'would_publish_count' => $ok ? $wouldPublishCount : 0,
-            'would_update_count' => $ok ? $wouldPublishCount : 0,
+            'would_publish_count' => $ok ? count(array_filter($pages, static fn (array $page): bool => ($page['action'] ?? null) === 'publish')) : 0,
+            'would_update_count' => $ok ? $wouldWriteCount : 0,
+            'would_repair_existing_published_count' => $ok ? count(array_filter($pages, static fn (array $page): bool => ($page['action'] ?? null) === 'repair_existing_published')) : 0,
             'would_create_count' => 0,
             'would_skip_count' => $ok ? $wouldSkipCount : 0,
             'blocked_count' => count($errors),
@@ -313,7 +316,7 @@ final class ContentPagesControlledPublishService
                 ? ! $this->hasFoundationOverclaim($records->get(self::LOCALE.':foundation'))
                 : true,
             'discoverability_coupled' => false,
-            'discoverability_coupling_policy' => 'The runtime preserves is_indexable=false and fails if any target is already indexable before publish; sitemap/llms/footer/nav exposure remains out of scope.',
+            'discoverability_coupling_policy' => 'The runtime preserves is_indexable=false, repairs already-published science-zh targets back to non-indexable, and keeps sitemap/llms/footer/nav exposure out of scope.',
             'search_channel_action_attempted' => false,
             'url_submission_attempted' => false,
             'external_search_api_call_attempted' => false,
@@ -353,7 +356,7 @@ final class ContentPagesControlledPublishService
             ]);
         }
 
-        if ((bool) $page->is_indexable) {
+        if ((bool) $page->is_indexable && ! $this->canRepairPublishedScienceZhPage($scope, $page)) {
             $errors[] = $this->issue('content_pages.'.$key.'.is_indexable', 'discoverability_coupling_risk', 'Controlled publish must not make sitemap/llms eligibility inseparable; target drafts must remain non-indexable.');
         }
 
@@ -411,7 +414,7 @@ final class ContentPagesControlledPublishService
             $errors[] = $this->issue($fieldPrefix.'.content_md', 'private_url_pattern_present', 'Science zh page content must not reference private result/order/share/pay/history URLs or sensitive query parameters.');
         }
 
-        if ($this->isPublishedTarget($page) && ! $page->passesPublicReadinessGate()) {
+        if ($this->isPublishedTarget($page) && ! $this->canRepairPublishedScienceZhPage(self::SCOPE_SCIENCE_ZH, $page) && ! $page->passesPublicReadinessGate()) {
             $errors[] = $this->issue($fieldPrefix.'.public_readiness_gate', 'public_readiness_gate_failed', 'Already-published science zh page must satisfy the first-class public readiness gate.');
         }
 
@@ -474,6 +477,28 @@ final class ContentPagesControlledPublishService
         return (string) $page->status === ContentPage::STATUS_PUBLISHED
             && (bool) $page->is_public
             && $page->published_at !== null;
+    }
+
+    private function actionForPage(string $scope, ContentPage $page): string
+    {
+        if (! $this->isPublishedTarget($page)) {
+            return 'publish';
+        }
+
+        if ($this->canRepairPublishedScienceZhPage($scope, $page)) {
+            return 'repair_existing_published';
+        }
+
+        return 'skip_already_published';
+    }
+
+    private function canRepairPublishedScienceZhPage(string $scope, ContentPage $page): bool
+    {
+        return $scope === self::SCOPE_SCIENCE_ZH
+            && $this->isPublishedTarget($page)
+            && in_array((string) $page->slug, self::SCIENCE_ZH_ALLOWED_KEYS, true)
+            && (string) $page->locale === self::SCIENCE_ZH_LOCALE
+            && ((bool) $page->is_indexable || ! $page->passesPublicReadinessGate());
     }
 
     private function prepareScienceZhForPublish(ContentPage $page): ContentPage
@@ -631,6 +656,7 @@ final class ContentPagesControlledPublishService
         if ((string) $page->locale === self::SCIENCE_ZH_LOCALE && in_array((string) $page->slug, self::SCIENCE_ZH_ALLOWED_KEYS, true)) {
             return [
                 ...$preview,
+                'is_indexable' => false,
                 'review_state' => 'approved',
                 'legal_review_required' => false,
                 'science_review_required' => false,

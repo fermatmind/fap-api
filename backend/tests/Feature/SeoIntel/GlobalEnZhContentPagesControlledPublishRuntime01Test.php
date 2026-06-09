@@ -340,6 +340,49 @@ final class GlobalEnZhContentPagesControlledPublishRuntime01Test extends TestCas
         $this->assertTrue((bool) $protected->is_indexable);
     }
 
+    public function test_science_zh_scope_repairs_already_published_indexable_rows_without_creation(): void
+    {
+        $this->seedBrokenPublishedScienceZhTargets();
+        $beforeCount = ContentPage::query()->withoutGlobalScopes()->count();
+
+        $dryRun = $this->runScienceZhPublishCommand(['--dry-run' => true]);
+
+        $this->assertTrue($dryRun['ok'] ?? false);
+        $this->assertSame(0, $dryRun['would_publish_count'] ?? null);
+        $this->assertSame(5, $dryRun['would_update_count'] ?? null);
+        $this->assertSame(5, $dryRun['would_repair_existing_published_count'] ?? null);
+        $this->assertSame('repair_existing_published', data_get($dryRun, 'pages.0.action'));
+        $this->assertFalse((bool) data_get($dryRun, 'after_state_preview.science.is_indexable'));
+
+        $output = $this->runScienceZhPublishCommand(['--execute' => true]);
+
+        $this->assertTrue($output['ok'] ?? false);
+        $this->assertTrue($output['writes_committed'] ?? false);
+        $this->assertSame(array_map(static fn (string $key): string => 'zh-CN:'.$key, self::scienceZhTargetKeys()), $output['published_keys'] ?? null);
+        $this->assertSame($beforeCount, ContentPage::query()->withoutGlobalScopes()->count());
+
+        foreach (self::scienceZhTargetKeys() as $key) {
+            $page = $this->contentPageForLocale($key, 'zh-CN');
+            $this->assertSame(ContentPage::STATUS_PUBLISHED, (string) $page->status);
+            $this->assertTrue((bool) $page->is_public);
+            $this->assertFalse((bool) $page->is_indexable);
+            $this->assertSame('approved', (string) $page->review_state);
+            $this->assertFalse((bool) $page->legal_review_required);
+            $this->assertFalse((bool) $page->science_review_required);
+            $this->assertTrue((bool) $page->publish_allowed);
+            $this->assertSame('passed', (string) $page->claim_gate_status);
+            $this->assertSame([], $page->forbidden_claims ?? []);
+            $this->assertNotNull($page->operator_approved_at);
+            $this->assertTrue($page->passesPublicReadinessGate());
+
+            $this->getJson('/api/v0.5/content-pages/'.$key.'?locale=zh-CN&org_id=0')
+                ->assertOk()
+                ->assertJsonPath('ok', true)
+                ->assertJsonPath('page.slug', $key)
+                ->assertJsonPath('page.is_indexable', false);
+        }
+    }
+
     public function test_science_zh_scope_refuses_method_boundaries_key(): void
     {
         $this->seedScienceZhTargets();
@@ -455,6 +498,28 @@ final class GlobalEnZhContentPagesControlledPublishRuntime01Test extends TestCas
             }
 
             ContentPage::query()->withoutGlobalScopes()->create($this->scienceZhPageAttributes($key, $overridesByKey[$key] ?? []));
+        }
+    }
+
+    private function seedBrokenPublishedScienceZhTargets(): void
+    {
+        foreach (self::scienceZhTargetKeys() as $key) {
+            ContentPage::withoutEvents(function () use ($key): void {
+                ContentPage::query()->withoutGlobalScopes()->create($this->scienceZhPageAttributes($key, [
+                    'status' => ContentPage::STATUS_PUBLISHED,
+                    'is_public' => true,
+                    'is_indexable' => true,
+                    'published_at' => now()->subDay(),
+                    'review_state' => 'science_review',
+                    'legal_review_required' => true,
+                    'science_review_required' => true,
+                    'publish_allowed' => false,
+                    'operator_approval_required' => true,
+                    'operator_approved_at' => null,
+                    'claim_gate_status' => 'not_reviewed',
+                    'forbidden_claims' => [],
+                ]));
+            });
         }
     }
 
