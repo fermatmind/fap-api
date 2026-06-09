@@ -51967,7 +51967,7 @@
     "repo": "fap-api",
     "branch": "codex/article-h1-02",
     "base": "origin/main",
-    "status": "local_checks_passed_after_github_fix",
+    "status": "ready_to_merge",
     "train_scope": "article_h1_single_dom",
     "title": "ARTICLE-H1-02: fix(cms): reject article body h1 at save and publish",
     "depends_on": [
@@ -52035,10 +52035,23 @@
         "evidence": "PHP lint, route-list, focused H1 feature/unit tests, baseline/editorial importer regressions, the CareerRecommendationPublicApiTest CI failure reproduction, focused BigFive runtime path diff/classifier regression, Pint --test, JSON/YAML parse, and path-limited git diff --check passed. Full ArticlePublicApiTest file was not used as a required check because its unchanged sitemap-source cache expectation is recorded as an external sidecar issue."
       },
       "github": {
-        "status": "failed_fix_pushed",
+        "status": "pass",
         "pr_url": "https://github.com/fermatmind/fap-api/pull/2014",
-        "checks": [],
-        "failure_reason": "GitHub verify-mbti-legacy, verify-mbti-v2, and verify-bigfive failed because article baseline/editorial package import paths hit the new body H1 guard and BigFive runtime-freeze needed a narrow CMS H1 guard exception. The fix normalizes importer body H1 to H2, adds importer regressions, and adds a scoped BigFive classifier regression."
+        "head_sha": "203b9851e275d1d8e4a3e5fb4153ffe976c49b04",
+        "checks": [
+          "hygiene",
+          "supply-chain",
+          "content-pack-build-validate",
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "Semgrep OSS",
+          "verify-bigfive",
+          "verify-mbti-legacy",
+          "verify-mbti-v2"
+        ],
+        "merge_state": "CLEAN",
+        "failure_reason": null,
+        "evidence": "GitHub checks passed for PR #2014 at head 203b9851e275d1d8e4a3e5fb4153ffe976c49b04 after importer normalization and BigFive classifier fixes."
       }
     },
     "failure_reason": null,
@@ -52078,6 +52091,11 @@
         "at": "2026-06-09",
         "status": "local_checks_passed_after_github_fix",
         "note": "Fixed GitHub verify failures by normalizing article baseline/editorial package importer body H1 to H2 and adding focused importer plus BigFive classifier regressions; local checks passed."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed for PR #2014 at head 203b9851e275d1d8e4a3e5fb4153ffe976c49b04 and mergeStateStatus is CLEAN."
       }
     ]
   },
