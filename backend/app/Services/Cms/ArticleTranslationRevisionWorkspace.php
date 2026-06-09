@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\DB;
 
 final class ArticleTranslationRevisionWorkspace
 {
+    public function __construct(
+        private readonly ArticleBodyHeadingGuard $articleBodyHeadingGuard,
+    ) {}
+
     /**
      * @return array<string, mixed>
      */
@@ -90,6 +94,7 @@ final class ArticleTranslationRevisionWorkspace
                 'seo_description' => $payload['seo_description'] ?? $revision->seo_description,
                 'created_by' => $revision->created_by ?: $adminUserId,
             ];
+            $this->articleBodyHeadingGuard->assertNoBodyH1((string) $revisionPayload['content_md']);
 
             if ($revisionChanged && ! in_array($revisionStatus, [
                 ArticleTranslationRevision::STATUS_APPROVED,

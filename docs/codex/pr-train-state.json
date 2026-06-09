@@ -51962,5 +51962,132 @@
         "note": "GitHub checks passed for PR #2012 at head 0ad2b4fa46792527b89bccbc7e443f2d34e69cf7 and mergeStateStatus is CLEAN."
       }
     ]
+  },
+  "ARTICLE-H1-02": {
+    "repo": "fap-api",
+    "branch": "codex/article-h1-02",
+    "base": "origin/main",
+    "status": "in_progress",
+    "train_scope": "article_h1_single_dom",
+    "title": "ARTICLE-H1-02: fix(cms): reject article body h1 at save and publish",
+    "depends_on": [
+      "ARTICLE-H1-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized ARTICLE-H1 PR train and fap-api docs/codex metadata updates on 2026-06-09."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "ARTICLE-H1-01 merged into fap-web main as PR #1087 at 2026-06-09T05:36:13Z with merge commit da2d4e124de958bdd6256c8ec9d85b3eae6bdfe6 before this branch started."
+      },
+      "scope": {
+        "status": "pass",
+        "evidence": "Planned files are confined to article CMS/API save, publish, translation publish, payload projection, focused tests, optional BigFive freeze classifier coverage, and docs/codex metadata.",
+        "allowed_paths": [
+          "backend/app/Http/Controllers/API/V0_5/Cms/ArticleController.php",
+          "backend/app/Services/Cms/ArticleBodyHeadingGuard.php",
+          "backend/app/Services/Cms/ArticleService.php",
+          "backend/app/Services/Cms/ArticlePublishService.php",
+          "backend/app/Services/Cms/ArticleTranslationRevisionWorkspace.php",
+          "backend/app/Services/Cms/ArticleTranslationWorkflowService.php",
+          "backend/tests/Feature/V0_5/ArticleCmsWriteAuthTest.php",
+          "backend/tests/Feature/V0_5/ArticlePublicApiTest.php",
+          "backend/tests/Unit/Services/Cms/ArticleBodyHeadingGuardTest.php",
+          "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+          "docs/codex/pr-train.yaml",
+          "docs/codex/pr-train-state.json"
+        ]
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "php -l backend/app/Services/Cms/ArticleBodyHeadingGuard.php",
+          "php -l backend/app/Services/Cms/ArticleService.php",
+          "php -l backend/app/Services/Cms/ArticlePublishService.php",
+          "php -l backend/app/Services/Cms/ArticleTranslationRevisionWorkspace.php",
+          "php -l backend/app/Services/Cms/ArticleTranslationWorkflowService.php",
+          "php -l backend/app/Http/Controllers/API/V0_5/Cms/ArticleController.php",
+          "php -l backend/tests/Unit/Services/Cms/ArticleBodyHeadingGuardTest.php",
+          "php -l backend/tests/Feature/V0_5/ArticleCmsWriteAuthTest.php",
+          "php -l backend/tests/Feature/V0_5/ArticlePublicApiTest.php",
+          "cd backend && php artisan route:list --path=api/v0.5/cms/articles --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Cms/ArticleBodyHeadingGuardTest.php tests/Feature/V0_5/ArticleCmsWriteAuthTest.php --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_5/ArticlePublicApiTest.php --filter=test_article_detail_downgrades_legacy_published_revision_body_h1 --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='test_runtime_paths_have_no_uncommitted_diff' --no-ansi",
+          "cd backend && ./vendor/bin/pint --test app/Services/Cms/ArticleBodyHeadingGuard.php app/Services/Cms/ArticleService.php app/Services/Cms/ArticlePublishService.php app/Services/Cms/ArticleTranslationRevisionWorkspace.php app/Services/Cms/ArticleTranslationWorkflowService.php app/Http/Controllers/API/V0_5/Cms/ArticleController.php tests/Unit/Services/Cms/ArticleBodyHeadingGuardTest.php tests/Feature/V0_5/ArticleCmsWriteAuthTest.php tests/Feature/V0_5/ArticlePublicApiTest.php",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "git diff --check -- backend/app/Http/Controllers/API/V0_5/Cms/ArticleController.php backend/app/Services/Cms/ArticleBodyHeadingGuard.php backend/app/Services/Cms/ArticleService.php backend/app/Services/Cms/ArticlePublishService.php backend/app/Services/Cms/ArticleTranslationRevisionWorkspace.php backend/app/Services/Cms/ArticleTranslationWorkflowService.php backend/tests/Feature/V0_5/ArticleCmsWriteAuthTest.php backend/tests/Feature/V0_5/ArticlePublicApiTest.php backend/tests/Unit/Services/Cms/ArticleBodyHeadingGuardTest.php backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json"
+        ],
+        "evidence": "PHP lint, route-list, focused H1 feature/unit tests, focused BigFive runtime path diff, Pint --test, JSON/YAML parse, and path-limited git diff --check passed. Full ArticlePublicApiTest file was not used as a required check because its unchanged sitemap-source cache expectation is recorded as an external sidecar issue."
+      },
+      "github": {
+        "status": "pending",
+        "checks": [],
+        "failure_reason": null
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "sidecar_issues": [
+      {
+        "status": "external_existing",
+        "issue": "ArticlePublicApiTest::test_sitemap_source_uses_public_readable_and_indexable_article_gate currently expects /api/v0.5/seo/sitemap-source to generate fresh payload after Cache::flush(), but SitemapSourceController::index reads only fresh/stale cache or fallback. This was observed while running the full ArticlePublicApiTest file and is outside ARTICLE-H1-02 scope."
+      }
+    ],
+    "transitions": [
+      {
+        "at": "2026-06-09",
+        "status": "in_progress",
+        "note": "Initialized from explicit ARTICLE-H1 PR train authorization and started branch codex/article-h1-02 from latest fap-api main."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "local_checks_passed",
+        "note": "Added article body H1 guard across CMS save, working revision save, article publish, translation publish, and API payload downgrade; focused local checks passed."
+      }
+    ]
+  },
+  "ARTICLE-H1-04": {
+    "repo": "fap-api",
+    "branch": "codex/article-h1-04",
+    "base": "origin/main",
+    "status": "pending_dependency",
+    "train_scope": "article_h1_single_dom",
+    "title": "ARTICLE-H1-04: fix(ops): constrain article editor heading controls",
+    "depends_on": [
+      "ARTICLE-H1-02",
+      "ARTICLE-H1-03"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized ARTICLE-H1 PR train and fap-api docs/codex metadata updates on 2026-06-09."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "ARTICLE-H1-04 must wait for ARTICLE-H1-02 and ARTICLE-H1-03."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "sidecar_issues": [],
+    "transitions": [
+      {
+        "at": "2026-06-09",
+        "status": "pending_dependency",
+        "note": "Initialized future CMS/Ops editor UX constraint PR metadata only; implementation intentionally deferred."
+      }
+    ]
   }
 }

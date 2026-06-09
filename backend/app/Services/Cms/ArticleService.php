@@ -16,6 +16,10 @@ use RuntimeException;
 
 final class ArticleService
 {
+    public function __construct(
+        private readonly ArticleBodyHeadingGuard $articleBodyHeadingGuard,
+    ) {}
+
     /**
      * @param  array<int,mixed>  $tags
      */
@@ -38,6 +42,7 @@ final class ArticleService
         if ($normalizedContentMd === '') {
             throw new InvalidArgumentException('content_md is required.');
         }
+        $this->articleBodyHeadingGuard->assertNoBodyH1($normalizedContentMd);
 
         $normalizedOrgId = max(0, $orgId);
         $resolvedSlug = $this->resolveUniqueSlug(
@@ -118,6 +123,10 @@ final class ArticleService
             if ($nextContentMd === '') {
                 throw new InvalidArgumentException('content_md is required.');
             }
+            $this->articleBodyHeadingGuard->assertNoBodyH1(
+                $nextContentMd,
+                array_key_exists('content_html', $fields) ? (string) ($fields['content_html'] ?? '') : (string) ($article->content_html ?? '')
+            );
 
             $slugInput = array_key_exists('slug', $fields)
                 ? (string) ($fields['slug'] ?? '')

@@ -23849,6 +23849,106 @@ prs:
     content_authority: backend
     next_task: SEO-CONV-OPS-05 in fap-api after this PR is merged
 
+  - id: ARTICLE-H1-02
+    repo: fap-api
+    depends_on:
+      - ARTICLE-H1-01
+    branch: codex/article-h1-02
+    title: "ARTICLE-H1-02: fix(cms): reject article body h1 at save and publish"
+    train_scope: article_h1_single_dom
+    status: in_progress
+    scope:
+      - Add backend/CMS authority guard so article body content cannot be saved or published with H1 headings.
+      - Keep article title as the only public H1 authority while downgrading legacy published body H1 content in API payloads.
+      - Cover CMS create/update, working revision save, generic article publish, translation publish, and public payload projection.
+    allowed_paths:
+      - backend/app/Http/Controllers/API/V0_5/Cms/ArticleController.php
+      - backend/app/Services/Cms/ArticleBodyHeadingGuard.php
+      - backend/app/Services/Cms/ArticleService.php
+      - backend/app/Services/Cms/ArticlePublishService.php
+      - backend/app/Services/Cms/ArticleTranslationRevisionWorkspace.php
+      - backend/app/Services/Cms/ArticleTranslationWorkflowService.php
+      - backend/tests/Feature/V0_5/ArticleCmsWriteAuthTest.php
+      - backend/tests/Feature/V0_5/ArticlePublicApiTest.php
+      - backend/tests/Unit/Services/Cms/ArticleBodyHeadingGuardTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify frontend article rendering, live audit scripts, CMS editor toolbar UX, routes, migrations, production content, deploys, or publish live CMS content in this PR.
+      - Rewrite existing article body content in storage.
+      - Add frontend/static editorial fallback content.
+    validation:
+      - php -l backend/app/Services/Cms/ArticleBodyHeadingGuard.php
+      - php -l backend/app/Services/Cms/ArticleService.php
+      - php -l backend/app/Services/Cms/ArticlePublishService.php
+      - php -l backend/app/Services/Cms/ArticleTranslationRevisionWorkspace.php
+      - php -l backend/app/Services/Cms/ArticleTranslationWorkflowService.php
+      - php -l backend/app/Http/Controllers/API/V0_5/Cms/ArticleController.php
+      - php -l backend/tests/Unit/Services/Cms/ArticleBodyHeadingGuardTest.php
+      - php -l backend/tests/Feature/V0_5/ArticleCmsWriteAuthTest.php
+      - php -l backend/tests/Feature/V0_5/ArticlePublicApiTest.php
+      - cd backend && php artisan route:list --path=api/v0.5/cms/articles --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Cms/ArticleBodyHeadingGuardTest.php tests/Feature/V0_5/ArticleCmsWriteAuthTest.php --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_5/ArticlePublicApiTest.php --filter=test_article_detail_downgrades_legacy_published_revision_body_h1 --no-ansi
+      - cd backend && ./vendor/bin/pint --test app/Services/Cms/ArticleBodyHeadingGuard.php app/Services/Cms/ArticleService.php app/Services/Cms/ArticlePublishService.php app/Services/Cms/ArticleTranslationRevisionWorkspace.php app/Services/Cms/ArticleTranslationWorkflowService.php app/Http/Controllers/API/V0_5/Cms/ArticleController.php tests/Unit/Services/Cms/ArticleBodyHeadingGuardTest.php tests/Feature/V0_5/ArticleCmsWriteAuthTest.php tests/Feature/V0_5/ArticlePublicApiTest.php
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- backend/app/Http/Controllers/API/V0_5/Cms/ArticleController.php backend/app/Services/Cms/ArticleBodyHeadingGuard.php backend/app/Services/Cms/ArticleService.php backend/app/Services/Cms/ArticlePublishService.php backend/app/Services/Cms/ArticleTranslationRevisionWorkspace.php backend/app/Services/Cms/ArticleTranslationWorkflowService.php backend/tests/Feature/V0_5/ArticleCmsWriteAuthTest.php backend/tests/Feature/V0_5/ArticlePublicApiTest.php backend/tests/Unit/Services/Cms/ArticleBodyHeadingGuardTest.php backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    content_authority: backend
+    next_task: ARTICLE-H1-03 in fap-web after this PR is merged
+
+  - id: ARTICLE-H1-04
+    repo: fap-api
+    depends_on:
+      - ARTICLE-H1-02
+      - ARTICLE-H1-03
+    branch: codex/article-h1-04
+    title: "ARTICLE-H1-04: fix(ops): constrain article editor heading controls"
+    train_scope: article_h1_single_dom
+    status: pending_dependency
+    scope:
+      - Add CMS/Ops editor experience constraints so article body editors guide operators away from H1.
+      - Keep backend validation from ARTICLE-H1-02 as the authority and add focused editor UX coverage where supported.
+    allowed_paths:
+      - backend/app/Filament/Ops/Resources/ArticleResource.php
+      - backend/lang/**
+      - backend/tests/Feature/Ops/**
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify frontend article rendering, live audit scripts, routes, migrations, production content, deploys, or publish live CMS content in this PR.
+      - Weaken ARTICLE-H1-02 backend validation.
+    validation:
+      - php -l backend/app/Filament/Ops/Resources/ArticleResource.php
+      - cd backend && php artisan test --filter=OpsCmsEditPolishTest --no-ansi
+      - cd backend && ./vendor/bin/pint --test app/Filament/Ops/Resources/ArticleResource.php
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- backend/app/Filament/Ops/Resources/ArticleResource.php backend/lang docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: SEO-CONV-OPS-05
     repo: fap-api
     depends_on:

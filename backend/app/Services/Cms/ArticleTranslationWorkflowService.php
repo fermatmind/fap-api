@@ -22,6 +22,7 @@ final class ArticleTranslationWorkflowService
     public function __construct(
         private readonly ArticleMachineTranslationProvider $provider,
         private readonly ArticleTranslationRevisionWorkspace $workspace,
+        private readonly ArticleBodyHeadingGuard $articleBodyHeadingGuard,
         private readonly AuditLogger $auditLogger,
     ) {}
 
@@ -389,6 +390,11 @@ final class ArticleTranslationWorkflowService
             if ($revision->revision_status !== ArticleTranslationRevision::STATUS_APPROVED) {
                 throw new ArticleTranslationWorkflowException('Only approved translation revisions can be published.', [
                     'working revision is not approved',
+                ]);
+            }
+            if ($this->articleBodyHeadingGuard->violations((string) $revision->content_md) !== []) {
+                throw new ArticleTranslationWorkflowException('Translation publish preflight failed.', [
+                    'article body h1 headings are not allowed',
                 ]);
             }
 

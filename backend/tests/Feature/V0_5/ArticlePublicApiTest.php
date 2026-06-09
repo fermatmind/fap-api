@@ -277,6 +277,25 @@ final class ArticlePublicApiTest extends TestCase
         $this->assertStringNotContainsString('www.fermatmind.com', (string) $response->getContent());
     }
 
+    public function test_article_detail_downgrades_legacy_published_revision_body_h1(): void
+    {
+        $this->createArticle([
+            'slug' => 'legacy-body-h1-article',
+            'locale' => 'en',
+            'title' => 'Legacy Body H1 Article',
+        ], [
+            'title' => 'Legacy Body H1 Article',
+            'content_md' => "# Legacy duplicate title\n\nBody\n\n## Existing section",
+        ]);
+
+        $response = $this->getJson('/api/v0.5/articles/legacy-body-h1-article?locale=en');
+
+        $response->assertOk()
+            ->assertJsonPath('article.content_md', "## Legacy duplicate title\n\nBody\n\n## Existing section");
+
+        $this->assertStringStartsWith('## Legacy duplicate title', (string) $response->json('article.content_md'));
+    }
+
     public function test_article_detail_projects_cms_cta_slots_and_visible_faq_without_private_targets(): void
     {
         config(['app.frontend_url' => 'https://www.fermatmind.com']);
