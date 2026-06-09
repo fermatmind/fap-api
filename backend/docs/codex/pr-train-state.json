@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-06-09T15:21:39+08:00",
+  "updated_at": "2026-06-09T15:23:28+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -6324,10 +6324,10 @@
     "SCIENCE-CONTENTPAGE-EN-DRAFT-IMPORTER-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "branch": "codex/science-contentpage-en-draft-importer-01",
-      "commit_sha": "",
-      "pr_url": "",
+      "commit_sha": "7050ea00",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/2016",
       "title": "SCIENCE-CONTENTPAGE-EN-DRAFT-IMPORTER-01: support English Science ContentPage draft package import",
       "checks": {
         "local": [
@@ -6367,7 +6367,12 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "github_checks",
+            "status": "pending"
+          }
+        ]
       },
       "failure_reason": "",
       "resume_policy": "manual_only",
@@ -6384,6 +6389,11 @@
           "at": "2026-06-09T15:21:39+08:00",
           "status": "local_checks_passed",
           "summary": "Scoped importer checks passed. English package plans five locale=en non-public, non-indexable draft translations with source_locale=zh-CN, translation_status=draft, publish_allowed=false, and claim_gate_status=not_reviewed; default import command remains dry-run with writes_committed=false."
+        },
+        {
+          "at": "2026-06-09T15:23:28+08:00",
+          "status": "pr_open",
+          "summary": "Opened GitHub PR https://github.com/fermatmind/fap-api/pull/2016 after successful local verification."
         }
       ]
     }
