@@ -51844,7 +51844,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-conv-ops-05",
     "base": "origin/main",
-    "status": "local_checks_passed_after_github_fix",
+    "status": "github_checks_passed_ready_to_merge",
     "train_scope": "seo_conversion_tracking",
     "title": "SEO-CONV-OPS-05: feat(ops): expose SEO conversion funnel readouts",
     "depends_on": [
@@ -51893,6 +51893,24 @@
           "git diff --check -- backend/routes/api.php backend/app/Http/Controllers/API/V0_5/Ops/SeoIntel/SeoIntelDashboardController.php backend/app/Services/SeoIntel/OpsDashboard/SeoDashboardApiReadService.php backend/app/Services/SeoIntel/OpsDashboard/SeoConversionFunnelReadService.php backend/tests/Feature/SeoIntel/SeoConversionFunnelOpsReadoutTest.php backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php backend/docs/contracts/openapi.snapshot.json docs/codex/pr-train.yaml docs/codex/pr-train-state.json"
         ],
         "evidence": "PHP lint passed for route, controller, read services, focused feature test, and BigFive classifier test. Route-list shows GET /api/v0.5/ops/seo-intel/conversion-funnel. SeoConversionFunnelOpsReadoutTest passed 2 tests / 34 assertions. Existing SeoDashApi01ReadOnlyApiContractTest passed 6 tests / 110 assertions. Focused BigFive runtime freeze regression passed with 2 tests / 10 assertions. OpenAPI snapshot is up-to-date after regeneration. Scoped Pint --test passed. JSON/YAML parse and path-limited git diff --check passed."
+      },
+      "github": {
+        "status": "pass",
+        "head_sha": "0ad2b4fa46792527b89bccbc7e443f2d34e69cf7",
+        "checks": [
+          "hygiene",
+          "supply-chain",
+          "content-pack-build-validate",
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "Semgrep OSS",
+          "verify-bigfive",
+          "verify-mbti-legacy",
+          "verify-mbti-v2"
+        ],
+        "merge_state": "CLEAN",
+        "failure_reason": null,
+        "evidence": "GitHub checks passed for PR #2012 at head 0ad2b4fa46792527b89bccbc7e443f2d34e69cf7 after OpenAPI snapshot and BigFive freeze classifier fixes."
       }
     },
     "failure_reason": null,
@@ -51937,6 +51955,11 @@
         "at": "2026-06-09",
         "status": "local_checks_passed_after_github_fix",
         "note": "Regenerated OpenAPI snapshot, added narrow SeoConversionFunnelReadService BigFive freeze classifier coverage, and reran scoped local checks successfully."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "github_checks_passed_ready_to_merge",
+        "note": "GitHub checks passed for PR #2012 at head 0ad2b4fa46792527b89bccbc7e443f2d34e69cf7 and mergeStateStatus is CLEAN."
       }
     ]
   }
