@@ -2289,6 +2289,7 @@ return [
                 'slug' => '用于公开文章 URL。请保持简短、稳定、易读。',
                 'excerpt' => '保存到当前工作版本的简短说明。',
                 'content_md' => '该 Markdown 正文会保存到当前工作版本，用于编辑审核。',
+                'content_md_no_h1' => '正文标题必须从 H2（`##`）开始。文章标题是唯一 H1；保存和发布校验会拒绝正文里的 H1 Markdown 或 HTML。',
                 'working_revision_status' => '推动当前工作版本进入机器初稿、人工审校、批准和待发布状态。',
                 'author_name' => '填写后会作为公开文章署名展示。',
                 'reviewer_name' => '可选的公开审阅者署名。',

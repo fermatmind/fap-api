@@ -59,6 +59,18 @@ final class OpsCmsEditPolishTest extends TestCase
         $this->assertEditPageHasRail(EditLandingSurface::class, $this->createLandingSurface()->getKey(), expectsTranslation: false, expectsRevision: false, expectsSeo: false);
     }
 
+    public function test_article_editor_removes_heading_toolbar_and_explains_body_h1_boundary(): void
+    {
+        Livewire::test(EditArticle::class, ['record' => $this->createArticle()->getKey()])
+            ->assertOk()
+            ->assertSee(__('ops.resources.articles.helpers.content_md_no_h1'));
+
+        $source = (string) file_get_contents(app_path('Filament/Ops/Resources/ArticleResource.php'));
+
+        $this->assertStringContainsString("->disableToolbarButtons(['heading'])", $source);
+        $this->assertStringContainsString("__('ops.resources.articles.helpers.content_md_no_h1')", $source);
+    }
+
     /**
      * @param  class-string<object>  $component
      */
