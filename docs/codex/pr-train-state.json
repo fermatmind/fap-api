@@ -52187,7 +52187,7 @@
     "repo": "fap-api",
     "branch": "codex/career-zh-display-parity-01-audit",
     "base": "origin/main",
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "train_scope": "career_zh_display_parity",
     "title": "CAREER-ZH-DISPLAY-PARITY-01: feat(career): audit zh display parity",
     "depends_on": [],
@@ -52229,14 +52229,26 @@
         "evidence": "Path-limited git diff --check and git diff --cached --check passed."
       },
       "github": {
-        "status": "queued_retry_pushed",
+        "status": "pass",
         "pr_url": "https://github.com/fermatmind/fap-api/pull/2020",
-        "head_sha": "ee69f6884cbd04109fcd2611b3826c16e62c5276",
-        "evidence": "Initial pull_request CI run 27215327825 remained queued on verify-mbti-legacy while push CI equivalent passed; pushing scoped ledger retry transition to trigger fresh check set."
+        "head_sha": "ef50a4a66477dac4ea03cd822d6c30e1d958058a",
+        "checks": [
+          "hygiene",
+          "supply-chain",
+          "content-pack-build-validate",
+          "verify-mbti-legacy",
+          "verify-mbti-v2",
+          "verify-bigfive",
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "Semgrep OSS"
+        ],
+        "merge_state": "CLEAN",
+        "evidence": "GitHub checks passed for PR #2020 at head ef50a4a66477dac4ea03cd822d6c30e1d958058a and mergeStateStatus is CLEAN."
       }
     },
     "failure_reason": null,
-    "commit_sha": "20d543a9f73301c1ef9b94308ee0bb1cda2f257e",
+    "commit_sha": "ef50a4a66477dac4ea03cd822d6c30e1d958058a",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2020",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -52267,6 +52279,11 @@
         "at": "2026-06-09",
         "status": "github_checks_queued_retry_pushed",
         "note": "Initial pull_request CI run remained queued on verify-mbti-legacy and semgrep sarif non-blocking upload; pushed scoped ledger-only retry transition to trigger a fresh check set."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed and merge state was CLEAN for PR #2020 head ef50a4a66477dac4ea03cd822d6c30e1d958058a."
       }
     ]
   },
