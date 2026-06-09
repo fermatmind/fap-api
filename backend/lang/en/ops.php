@@ -2289,6 +2289,7 @@ return [
                 'slug' => 'Used in the public article URL. Keep it short, stable, and human-readable.',
                 'excerpt' => 'Short summary saved to the current working revision.',
                 'content_md' => 'This markdown body is saved to the current working revision for editorial review.',
+                'content_md_no_h1' => 'Body headings must start at H2 (`##`). The article title owns the only H1; save and publish validation will reject body H1 markdown or HTML.',
                 'working_revision_status' => 'Advance the current working revision through machine draft, human review, approval, and release readiness.',
                 'author_name' => 'Public byline shown on the article surface when present.',
                 'reviewer_name' => 'Optional public reviewer attribution.',

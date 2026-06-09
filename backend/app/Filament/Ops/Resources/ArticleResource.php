@@ -126,7 +126,8 @@ class ArticleResource extends Resource
                                     ->label(__('ops.resources.articles.fields.content_md'))
                                     ->required()
                                     ->columnSpanFull()
-                                    ->helperText(__('ops.resources.articles.helpers.content_md'))
+                                    ->disableToolbarButtons(['heading'])
+                                    ->helperText(__('ops.resources.articles.helpers.content_md_no_h1'))
                                     ->extraFieldWrapperAttributes(['class' => 'ops-article-workspace-field ops-article-workspace-field--editor']),
                                 Forms\Components\TextInput::make('author_name')
                                     ->label(__('ops.resources.articles.fields.author_name'))

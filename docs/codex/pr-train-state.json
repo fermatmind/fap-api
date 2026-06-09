@@ -52103,7 +52103,7 @@
     "repo": "fap-api",
     "branch": "codex/article-h1-04",
     "base": "origin/main",
-    "status": "pending_dependency",
+    "status": "ready_to_merge",
     "train_scope": "article_h1_single_dom",
     "title": "ARTICLE-H1-04: fix(ops): constrain article editor heading controls",
     "depends_on": [
@@ -52116,13 +52116,41 @@
         "evidence": "User explicitly authorized ARTICLE-H1 PR train and fap-api docs/codex metadata updates on 2026-06-09."
       },
       "dependency": {
-        "status": "pending",
-        "evidence": "ARTICLE-H1-04 must wait for ARTICLE-H1-02 and ARTICLE-H1-03."
+        "status": "pass",
+        "evidence": "ARTICLE-H1-02 merged in fap-api PR #2014 on 2026-06-09. ARTICLE-H1-03 merged in fap-web PR #1088 on 2026-06-09 with merge commit 9d4bb1c55ebfcb9695cb04069fee520442f1ef0f."
+      },
+      "php_lint": {
+        "status": "pass",
+        "evidence": "php -l backend/app/Filament/Ops/Resources/ArticleResource.php and php -l backend/tests/Feature/Ops/OpsCmsEditPolishTest.php passed."
+      },
+      "focused_ops_test": {
+        "status": "pass",
+        "evidence": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=OpsCmsEditPolishTest --no-ansi passed 2 tests / 46 assertions."
+      },
+      "pint": {
+        "status": "pass",
+        "evidence": "cd backend && ./vendor/bin/pint --test app/Filament/Ops/Resources/ArticleResource.php tests/Feature/Ops/OpsCmsEditPolishTest.php passed."
+      },
+      "metadata": {
+        "status": "pass",
+        "evidence": "docs/codex/pr-train-state.json parsed as JSON and docs/codex/pr-train.yaml parsed as YAML."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Tracked changed files are within ARTICLE-H1-04 manifest scope; pre-existing untracked backend/docs/seo/import-packages/science-contentpage-en-review-draft-2026-06-09 remains unstaged and isolated."
+      },
+      "diff_check": {
+        "status": "pass",
+        "evidence": "git diff --check -- backend/app/Filament/Ops/Resources/ArticleResource.php backend/lang docs/codex/pr-train.yaml docs/codex/pr-train-state.json and git diff --cached --check passed before staging."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "GitHub checks for head a8e300f908c22c94caba1c61becf8c6b1c5f2525 passed: hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep blocking secrets, semgrep sarif non-blocking upload, and Semgrep OSS."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "a8e300f908c22c94caba1c61becf8c6b1c5f2525",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2015",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -52132,6 +52160,26 @@
         "at": "2026-06-09",
         "status": "pending_dependency",
         "note": "Initialized future CMS/Ops editor UX constraint PR metadata only; implementation intentionally deferred."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "in_progress",
+        "note": "Dependencies verified merged; started ARTICLE-H1-04 Ops article editor heading-control implementation from fap-api main."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "local_checks_passed",
+        "note": "ArticleResource lint, OpsCmsEditPolishTest, Pint, metadata parse, scope validation, and diff checks passed."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "pr_opened",
+        "note": "Opened fap-api PR #2015 for ARTICLE-H1-04."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed and merge state was CLEAN for head a8e300f908c22c94caba1c61becf8c6b1c5f2525."
       }
     ]
   }
