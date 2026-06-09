@@ -51717,7 +51717,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-conv-daily-04",
     "base": "origin/main",
-    "status": "local_checks_passed_after_github_fix",
+    "status": "github_checks_passed_ready_to_merge",
     "train_scope": "seo_conversion_tracking",
     "title": "SEO-CONV-DAILY-04: feat(analytics): aggregate SEO conversion funnel daily",
     "depends_on": [
@@ -51765,6 +51765,24 @@
           "git diff --check -- backend/app/Services/Analytics/SeoConversionDailyBuilder.php backend/app/Console/Commands/RefreshSeoConversionDailyCommand.php backend/database/migrations/2026_06_09_000100_create_analytics_seo_conversion_daily_table.php backend/tests/Feature/Analytics/SeoConversionDailyBuilderTest.php backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json"
         ],
         "evidence": "PHP lint passed for the new builder, command, migration, feature test, and BigFive classifier test. Artisan auto-discovers analytics:refresh-seo-conversion-daily. Focused SeoConversionDailyBuilderTest passed 4 tests / 30 assertions. Existing MbtiAttributionEventIngestTest passed 11 tests / 62 assertions. Focused BigFive runtime freeze classifier regression passed after adding the SEO conversion daily read-model exception. Pint --test passed for scoped PHP files. v0.5 SEO route-list remained visible. Migration pretend showed only analytics_seo_conversion_daily DDL. JSON/YAML parse, scope validation, and path-limited git diff --check passed."
+      },
+      "github": {
+        "status": "pass",
+        "head_sha": "b3e9668eb2d05d680fd2abe71cd3640d741fb287",
+        "checks": [
+          "hygiene",
+          "supply-chain",
+          "content-pack-build-validate",
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "Semgrep OSS",
+          "verify-bigfive",
+          "verify-mbti-legacy",
+          "verify-mbti-v2"
+        ],
+        "merge_state": "CLEAN",
+        "failure_reason": null,
+        "evidence": "GitHub checks passed for PR #2011 at head b3e9668eb2d05d680fd2abe71cd3640d741fb287 after adding the BigFive freeze classifier exception for SEO conversion daily read-model files."
       }
     },
     "failure_reason": null,
@@ -51809,6 +51827,11 @@
         "at": "2026-06-09",
         "status": "local_checks_passed_after_github_fix",
         "note": "Added a narrow BigFive freeze classifier exception and focused regression for SEO conversion daily read-model files; focused BigFive regression and SeoConversionDailyBuilderTest passed locally."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "github_checks_passed_ready_to_merge",
+        "note": "GitHub checks passed for PR #2011 at head b3e9668eb2d05d680fd2abe71cd3640d741fb287 and mergeStateStatus is CLEAN."
       }
     ]
   },
