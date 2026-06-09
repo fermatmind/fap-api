@@ -51592,7 +51592,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-conv-ingest-02",
     "base": "origin/main",
-    "status": "local_checks_passed_after_github_fix",
+    "status": "github_checks_passed_ready_to_merge",
     "train_scope": "seo_conversion_tracking",
     "title": "SEO-CONV-INGEST-02: feat(analytics): accept canonical SEO conversion funnel ingest",
     "depends_on": [
@@ -51640,13 +51640,22 @@
         "evidence": "PHP lint passed for route, controller, and feature test. v0.5 SEO route-list shows the new POST /api/v0.5/seo/attribution/events route. Focused MbtiAttributionEventIngestTest passed 11 tests / 62 assertions. BigFive runtime freeze focused tests passed after adding a narrow SEO attribution ingest classifier exception. Scoped Pint --test passed. JSON/YAML parse and path-limited git diff --check passed. After GitHub openapi diff gate failed, backend/docs/contracts/openapi.snapshot.json was added to the scoped contract artifact and rechecked with scripts/export_openapi.sh --check."
       },
       "github": {
-        "status": "failed_fix_in_progress",
+        "status": "pass",
+        "head_sha": "13267cf796b5c9397f106cf196949a4858095fe6",
         "checks": [
+          "hygiene",
+          "supply-chain",
+          "content-pack-build-validate",
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "Semgrep OSS",
           "verify-bigfive",
           "verify-mbti-legacy",
           "verify-mbti-v2"
         ],
-        "failure_reason": "GitHub verify jobs first failed because the openapi diff gate detected the new /api/v0.5/seo/attribution/events route was missing from backend/docs/contracts/openapi.snapshot.json. After fixing the snapshot, verify-bigfive failed because the runtime freeze classifier did not yet allow this SEO analytics-only route/controller diff."
+        "merge_state": "CLEAN",
+        "failure_reason": null,
+        "evidence": "GitHub checks passed for PR #2010 at head 13267cf796b5c9397f106cf196949a4858095fe6 after OpenAPI snapshot and BigFive freeze classifier fixes."
       }
     },
     "failure_reason": null,
@@ -51691,6 +51700,11 @@
         "at": "2026-06-09",
         "status": "local_checks_passed_after_github_fix",
         "note": "Reran scoped local checks after adding OpenAPI snapshot and BigFive freeze classifier coverage: PHP lint, route-list, focused ingest tests, focused BigFive freeze tests, Pint, OpenAPI check, JSON/YAML parse, scope validation, and git diff --check all passed."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "github_checks_passed_ready_to_merge",
+        "note": "GitHub checks passed for PR #2010 at head 13267cf796b5c9397f106cf196949a4858095fe6 and mergeStateStatus is CLEAN."
       }
     ]
   },
