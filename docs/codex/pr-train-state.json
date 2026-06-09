@@ -51717,7 +51717,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-conv-daily-04",
     "base": "origin/main",
-    "status": "committed_pending_push",
+    "status": "github_checks_pending",
     "train_scope": "seo_conversion_tracking",
     "title": "SEO-CONV-DAILY-04: feat(analytics): aggregate SEO conversion funnel daily",
     "depends_on": [
@@ -51767,7 +51767,7 @@
     },
     "failure_reason": null,
     "commit_sha": "21b6fc6d2328d95cb09358aa0920e8708d23b1d4",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2011",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -51792,6 +51792,11 @@
         "at": "2026-06-09",
         "status": "committed_pending_push",
         "note": "Created scoped implementation commit 21b6fc6d2328d95cb09358aa0920e8708d23b1d4."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "github_checks_pending",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/2011 from branch codex/seo-conv-daily-04; GitHub checks pending."
       }
     ]
   },
