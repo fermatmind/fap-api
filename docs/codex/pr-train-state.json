@@ -52187,7 +52187,7 @@
     "repo": "fap-api",
     "branch": "codex/career-zh-display-parity-01-audit",
     "base": "origin/main",
-    "status": "committed_pending_push",
+    "status": "github_checks_pending",
     "train_scope": "career_zh_display_parity",
     "title": "CAREER-ZH-DISPLAY-PARITY-01: feat(career): audit zh display parity",
     "depends_on": [],
@@ -52227,11 +52227,17 @@
       "diff_check": {
         "status": "pass",
         "evidence": "Path-limited git diff --check and git diff --cached --check passed."
+      },
+      "github": {
+        "status": "pending",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/2020",
+        "head_sha": "20d543a9f73301c1ef9b94308ee0bb1cda2f257e",
+        "evidence": "PR #2020 opened; GitHub checks pending."
       }
     },
     "failure_reason": null,
-    "commit_sha": "c6e5d9505c76edb14dc445238c954e667b7975a0",
-    "pr_url": null,
+    "commit_sha": "20d543a9f73301c1ef9b94308ee0bb1cda2f257e",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2020",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -52251,6 +52257,11 @@
         "at": "2026-06-09",
         "status": "committed_pending_push",
         "note": "Created scoped implementation commit c6e5d9505c76edb14dc445238c954e667b7975a0."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "github_checks_pending",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/2020 from branch codex/career-zh-display-parity-01-audit; GitHub checks pending."
       }
     ]
   },
