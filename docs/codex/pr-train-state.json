@@ -52229,10 +52229,10 @@
         "evidence": "Path-limited git diff --check and git diff --cached --check passed."
       },
       "github": {
-        "status": "pending",
+        "status": "queued_retry_pushed",
         "pr_url": "https://github.com/fermatmind/fap-api/pull/2020",
-        "head_sha": "20d543a9f73301c1ef9b94308ee0bb1cda2f257e",
-        "evidence": "PR #2020 opened; GitHub checks pending."
+        "head_sha": "ee69f6884cbd04109fcd2611b3826c16e62c5276",
+        "evidence": "Initial pull_request CI run 27215327825 remained queued on verify-mbti-legacy while push CI equivalent passed; pushing scoped ledger retry transition to trigger fresh check set."
       }
     },
     "failure_reason": null,
@@ -52262,6 +52262,11 @@
         "at": "2026-06-09",
         "status": "github_checks_pending",
         "note": "Opened https://github.com/fermatmind/fap-api/pull/2020 from branch codex/career-zh-display-parity-01-audit; GitHub checks pending."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "github_checks_queued_retry_pushed",
+        "note": "Initial pull_request CI run remained queued on verify-mbti-legacy and semgrep sarif non-blocking upload; pushed scoped ledger-only retry transition to trigger a fresh check set."
       }
     ]
   },
