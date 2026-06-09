@@ -51967,7 +51967,7 @@
     "repo": "fap-api",
     "branch": "codex/article-h1-02",
     "base": "origin/main",
-    "status": "in_progress",
+    "status": "committed_pending_push",
     "train_scope": "article_h1_single_dom",
     "title": "ARTICLE-H1-02: fix(cms): reject article body h1 at save and publish",
     "depends_on": [
@@ -52030,7 +52030,7 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
+    "commit_sha": "0f18583d13a2498637cd650ed871d2cef8b37538",
     "pr_url": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -52051,6 +52051,11 @@
         "at": "2026-06-09",
         "status": "local_checks_passed",
         "note": "Added article body H1 guard across CMS save, working revision save, article publish, translation publish, and API payload downgrade; focused local checks passed."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "committed_pending_push",
+        "note": "Created scoped implementation commit 0f18583d13a2498637cd650ed871d2cef8b37538."
       }
     ]
   },
