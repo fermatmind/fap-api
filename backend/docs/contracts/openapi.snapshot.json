@@ -3881,6 +3881,31 @@
                 ]
             }
         },
+        "/api/v0.5/ops/seo-intel/conversion-funnel": {
+            "get": {
+                "operationId": "api.v0_5.ops.seo_intel.conversion_funnel",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Ops\\SeoIntel\\SeoIntelDashboardController@conversionFunnel",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\EncryptCookies",
+                    "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+                    "Illuminate\\Session\\Middleware\\StartSession",
+                    "App\\Http\\Middleware\\SetOpsRequestContext",
+                    "App\\Http\\Middleware\\AdminAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\EnsureSeoIntelReadAuthorized"
+                ],
+                "x-laravel-name": "api.v0_5.ops.seo_intel.conversion_funnel"
+            }
+        },
         "/api/v0.5/ops/seo-intel/issues": {
             "get": {
                 "operationId": "api.v0_5.ops.seo_intel.issues",

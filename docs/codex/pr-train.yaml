@@ -23865,6 +23865,8 @@ prs:
       - backend/app/Http/Controllers/API/V0_5/Ops/**
       - backend/app/Services/SeoIntel/**
       - backend/tests/Feature/SeoIntel/**
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/docs/contracts/openapi.snapshot.json
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
@@ -23880,10 +23882,13 @@ prs:
       - cd backend && php artisan route:list --path=api/v0.5/ops/seo-intel --no-ansi
       - cd backend && php artisan test --filter=SeoConversionFunnelOpsReadoutTest --no-ansi
       - cd backend && php artisan test --filter=SeoDashApi01ReadOnlyApiContractTest --no-ansi
+      - cd backend && php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_seo_conversion_ops_read_model_file' --no-ansi
       - cd backend && ./vendor/bin/pint --test routes/api.php app/Http/Controllers/API/V0_5/Ops/SeoIntel/SeoIntelDashboardController.php app/Services/SeoIntel/OpsDashboard/SeoDashboardApiReadService.php app/Services/SeoIntel/OpsDashboard/SeoConversionFunnelReadService.php tests/Feature/SeoIntel/SeoConversionFunnelOpsReadoutTest.php
+      - cd backend && bash scripts/export_openapi.sh --check
+      - python3 -m json.tool backend/docs/contracts/openapi.snapshot.json >/dev/null
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
-      - git diff --check -- backend/routes/api.php backend/app/Http/Controllers/API/V0_5/Ops/SeoIntel/SeoIntelDashboardController.php backend/app/Services/SeoIntel/OpsDashboard/SeoDashboardApiReadService.php backend/app/Services/SeoIntel/OpsDashboard/SeoConversionFunnelReadService.php backend/tests/Feature/SeoIntel/SeoConversionFunnelOpsReadoutTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --check -- backend/routes/api.php backend/app/Http/Controllers/API/V0_5/Ops/SeoIntel/SeoIntelDashboardController.php backend/app/Services/SeoIntel/OpsDashboard/SeoDashboardApiReadService.php backend/app/Services/SeoIntel/OpsDashboard/SeoConversionFunnelReadService.php backend/tests/Feature/SeoIntel/SeoConversionFunnelOpsReadoutTest.php backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php backend/docs/contracts/openapi.snapshot.json docs/codex/pr-train.yaml docs/codex/pr-train-state.json
       - git diff --cached --check
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
     production_write_execution: false

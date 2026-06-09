@@ -51844,7 +51844,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-conv-ops-05",
     "base": "origin/main",
-    "status": "github_checks_pending",
+    "status": "local_checks_passed_after_github_fix",
     "train_scope": "seo_conversion_tracking",
     "title": "SEO-CONV-OPS-05: feat(ops): expose SEO conversion funnel readouts",
     "depends_on": [
@@ -51861,12 +51861,14 @@
       },
       "scope": {
         "status": "pass",
-        "evidence": "Changed files are confined to the v0.5 Ops SEO Intel route/controller, SeoIntel Ops read services, focused SeoIntel feature test, and docs/codex metadata.",
+        "evidence": "Changed files are confined to the v0.5 Ops SEO Intel route/controller, SeoIntel Ops read services, focused SeoIntel feature test, OpenAPI snapshot artifact, BigFive freeze classifier regression, and docs/codex metadata.",
         "allowed_paths": [
           "backend/routes/api.php",
           "backend/app/Http/Controllers/API/V0_5/Ops/**",
           "backend/app/Services/SeoIntel/**",
           "backend/tests/Feature/SeoIntel/**",
+          "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+          "backend/docs/contracts/openapi.snapshot.json",
           "docs/codex/pr-train.yaml",
           "docs/codex/pr-train-state.json"
         ]
@@ -51881,9 +51883,16 @@
           "php -l backend/tests/Feature/SeoIntel/SeoConversionFunnelOpsReadoutTest.php",
           "cd backend && php artisan route:list --path=api/v0.5/ops/seo-intel --no-ansi",
           "cd backend && php artisan test --filter=SeoConversionFunnelOpsReadoutTest --no-ansi",
-          "cd backend && php artisan test --filter=SeoDashApi01ReadOnlyApiContractTest --no-ansi"
+          "cd backend && php artisan test --filter=SeoDashApi01ReadOnlyApiContractTest --no-ansi",
+          "cd backend && php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_seo_conversion_ops_read_model_file' --no-ansi",
+          "cd backend && ./vendor/bin/pint --test routes/api.php app/Http/Controllers/API/V0_5/Ops/SeoIntel/SeoIntelDashboardController.php app/Services/SeoIntel/OpsDashboard/SeoDashboardApiReadService.php app/Services/SeoIntel/OpsDashboard/SeoConversionFunnelReadService.php tests/Feature/SeoIntel/SeoConversionFunnelOpsReadoutTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+          "cd backend && bash scripts/export_openapi.sh --check",
+          "python3 -m json.tool backend/docs/contracts/openapi.snapshot.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
+          "git diff --check -- backend/routes/api.php backend/app/Http/Controllers/API/V0_5/Ops/SeoIntel/SeoIntelDashboardController.php backend/app/Services/SeoIntel/OpsDashboard/SeoDashboardApiReadService.php backend/app/Services/SeoIntel/OpsDashboard/SeoConversionFunnelReadService.php backend/tests/Feature/SeoIntel/SeoConversionFunnelOpsReadoutTest.php backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php backend/docs/contracts/openapi.snapshot.json docs/codex/pr-train.yaml docs/codex/pr-train-state.json"
         ],
-        "evidence": "PHP lint passed for route, controller, read services, and focused feature test. Route-list shows GET /api/v0.5/ops/seo-intel/conversion-funnel. SeoConversionFunnelOpsReadoutTest passed 2 tests / 34 assertions. Existing SeoDashApi01ReadOnlyApiContractTest passed 6 tests / 110 assertions."
+        "evidence": "PHP lint passed for route, controller, read services, focused feature test, and BigFive classifier test. Route-list shows GET /api/v0.5/ops/seo-intel/conversion-funnel. SeoConversionFunnelOpsReadoutTest passed 2 tests / 34 assertions. Existing SeoDashApi01ReadOnlyApiContractTest passed 6 tests / 110 assertions. Focused BigFive runtime freeze regression passed with 2 tests / 10 assertions. OpenAPI snapshot is up-to-date after regeneration. Scoped Pint --test passed. JSON/YAML parse and path-limited git diff --check passed."
       }
     },
     "failure_reason": null,
@@ -51918,6 +51927,16 @@
         "at": "2026-06-09",
         "status": "github_checks_pending",
         "note": "Opened https://github.com/fermatmind/fap-api/pull/2012 from branch codex/seo-conv-ops-05; GitHub checks pending."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "github_checks_failed_fix_in_progress",
+        "note": "GitHub verify jobs failed because the new Ops route drifted backend/docs/contracts/openapi.snapshot.json and verify-bigfive classified SeoConversionFunnelReadService as a Big Five runtime change; adding scoped contract artifact and classifier coverage."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "local_checks_passed_after_github_fix",
+        "note": "Regenerated OpenAPI snapshot, added narrow SeoConversionFunnelReadService BigFive freeze classifier coverage, and reran scoped local checks successfully."
       }
     ]
   }
