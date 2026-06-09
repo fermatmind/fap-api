@@ -1674,15 +1674,42 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         $changed = [
             'backend/app/Http/Controllers/API/V0_3/MbtiAttributionEventController.php',
+            'backend/routes/api.php',
         ];
         $allowedChangedLines = [
             "+        'submit_attempt',",
+            "+        'landing_pv',",
+            "+        'article_to_test_click',",
+            "+        'start_test',",
+            "+        'complete_test',",
+            "+        'view_result',",
+            "+        'url',",
+            "+        'lang',",
+            "+        'page_type',",
+            "+        'source_url',",
+            "+        'source_article',",
+            "+        'target_test',",
+            "+        'scale_id',",
+            "+        'form_id',",
             "+            'payload.durationMs' => ['nullable', 'integer', 'min:0', 'max:86400000'],",
+            "+            'payload.url' => ['nullable', 'string', 'max:512', 'regex:/\\A[^\\r\\n]*\\z/'],",
             '+        $payloadInput = $request->input(\'payload\');',
+            '+        $isSeoConversionEvent = $this->isSeoConversionEvent($eventName, $payload);',
+            '+        if ($isSeoConversionEvent) {',
+            "+            'seo_conversion' => [",
             "+            'payload' => ['nullable', 'array'],",
             "-            'payload' => ['nullable', 'array:'.implode(',', self::PAYLOAD_KEYS)],",
             '+        $scaleCode = $this->normalizeOptionalString(',
             "+            'scale_code' => \$scaleCode,",
+            '+    private function sanitizeSeoPublicUrl(mixed $value, string $field): ?string',
+        ];
+        $routeChangedLines = [
+            "+    Route::post('/seo/attribution/events', [MbtiAttributionEventController::class, 'store'])",
+            '+        ->middleware([',
+            '+            \\App\\Http\\Middleware\\LimitApiPublicPayloadSize::class,',
+            "+            'throttle:api_track',",
+            '+        ])',
+            "+        ->name('api.v0_5.seo.attribution_events.store');",
         ];
         $blockedChangedLines = [
             '+        abort(403);',
@@ -1692,10 +1719,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             $changed,
             '',
             '',
+            routeChangedLines: $routeChangedLines,
             attributionControllerChangedLines: $allowedChangedLines,
         ));
-        $this->assertSame($changed, $this->mbtiImpactingRuntimeChanges(
-            $changed,
+        $this->assertSame(['backend/app/Http/Controllers/API/V0_3/MbtiAttributionEventController.php'], $this->mbtiImpactingRuntimeChanges(
+            ['backend/app/Http/Controllers/API/V0_3/MbtiAttributionEventController.php'],
             '',
             '',
             attributionControllerChangedLines: $blockedChangedLines,
@@ -3307,6 +3335,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
 
             if (
                 $file === 'backend/routes/api.php'
+                && $this->routeDiffIsSeoAttributionIngestOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
+            ) {
+                continue;
+            }
+
+            if (
+                $file === 'backend/routes/api.php'
                 && $this->routeDiffIsCiAuthBypassHardeningOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
             ) {
                 continue;
@@ -4892,11 +4927,27 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
-            if (preg_match('/^[+]\s*\'(slug|scaleCode|scale_code|current_path|attemptIdMasked|answered_count|durationMs|duration_ms|duration_bucket|order_no|orderNo|orderNoMasked|order_id|transaction_id|amount|value|price|currency|provider|pack_version|manifest_hash|norms_version|quality_level|locked|variant|sku_id|utm_source|utm_medium|utm_campaign|utm_term|utm_content|gclid|msclkid|fbclid|referrer|session_id|submit_attempt)\',\s*$/u', $line) === 1) {
+            if (preg_match('/^[+]\s*\{\s*$/u', $line) === 1) {
                 continue;
             }
 
-            if (preg_match('/^[+]\s*\'payload\.(slug|scaleCode|scale_code|current_path|attemptIdMasked|answered_count|durationMs|duration_ms|duration_bucket|order_no|orderNo|orderNoMasked|order_id|transaction_id|amount|value|price|currency|provider|pack_version|manifest_hash|norms_version|quality_level|locked|variant|sku_id|utm_source|utm_medium|utm_campaign|utm_term|utm_content|gclid|msclkid|fbclid|referrer|session_id)\'\s*=>\s*\[/u', $line) === 1) {
+            if (preg_match('/^[+]\s*\'(slug|scaleCode|scale_code|current_path|attempt_id|attemptIdMasked|target_attempt_id|answered_count|durationMs|duration_ms|duration_bucket|order_no|orderNo|orderNoMasked|order_id|transaction_id|amount|value|price|currency|provider|pack_version|manifest_hash|norms_version|quality_level|locked|variant|sku_id|utm_source|utm_medium|utm_campaign|utm_term|utm_content|gclid|msclkid|fbclid|referrer|session_id|submit_attempt|landing_pv|article_to_test_click|start_test|complete_test|view_result|url|lang|page_type|source_url|source_article|target_test|scale_id|form_id)\',\s*$/u', $line) === 1) {
+                continue;
+            }
+
+            if (preg_match('/^[+]\s*\'payload\.(slug|scaleCode|scale_code|current_path|attemptIdMasked|answered_count|durationMs|duration_ms|duration_bucket|order_no|orderNo|orderNoMasked|order_id|transaction_id|amount|value|price|currency|provider|pack_version|manifest_hash|norms_version|quality_level|locked|variant|sku_id|utm_source|utm_medium|utm_campaign|utm_term|utm_content|gclid|msclkid|fbclid|referrer|session_id|url|lang|page_type|source_url|source_article|target_test|scale_id|form_id)\'\s*=>\s*\[/u', $line) === 1) {
+                continue;
+            }
+
+            if (preg_match('/^[+-]\s*\'(form_code|landing_path|locale)\' => /u', $line) === 1) {
+                continue;
+            }
+
+            if (preg_match('/^[+-]\s*(\$payload\[\'form_id\'\]|\$payload\[\'url\'\]|\$payload\[\'lang\'\]|\$payload\[\'scale_id\'\])\s*/u', $line) === 1) {
+                continue;
+            }
+
+            if (preg_match('/^[+-]\s*(\$locale = \$this->normalizeOptionalString\(|\?\? \$payload\[\'scale_id\'\]|\?\? \(\$path !== \'\' && str_starts_with\(\$path, \'\/zh\'\) \? \'zh\' : \'en\'\),)/u', $line) === 1) {
                 continue;
             }
 
@@ -4916,10 +4967,31 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if (preg_match('/^[+]\s*(\/\*\*|\* @var list<string>|\* @param  array<string, mixed>  \$payload|\* @return array<string, mixed>|\*\/|private const SEO_|private function (isSeoConversionEvent|sanitizeSeoConversionPayload|sanitizeSeoPublicUrl|isPrivateAnalyticsPath)\b|\$isSeoConversionEvent =|if \(\$isSeoConversionEvent\)|\$path = \$this->sanitizeSeoPublicUrl|\$payload = \$this->sanitizeSeoConversionPayload|\$meta\[\'seo_conversion\'\]|\'seo_conversion\' =>|\'(event_name|url|lang|page_type|source_url|source_article|target_test|scale_id|form_id|session_id|referrer)\' =>|\'payload\.|\$field =>|foreach \(|if \(|return |throw ValidationException::withMessages|\$sessionId =|\$targetTest =|\$url =|\$normalized =|\$parts =|\$path =|\$scheme =|\$host =|\$payload\[|preg_match\()/u', $line) === 1) {
+                continue;
+            }
+
             return false;
         }
 
         return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function routeDiffIsSeoAttributionIngestOnly(array $changedLines): bool
+    {
+        $allowed = [
+            "+    Route::post('/seo/attribution/events', [MbtiAttributionEventController::class, 'store'])",
+            '+        ->middleware([',
+            '+            \\App\\Http\\Middleware\\LimitApiPublicPayloadSize::class,',
+            "+            'throttle:api_track',",
+            '+        ])',
+            "+        ->name('api.v0_5.seo.attribution_events.store');",
+        ];
+
+        return $changedLines !== [] && array_values($changedLines) === $allowed;
     }
 
     /**
