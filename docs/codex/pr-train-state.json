@@ -51717,7 +51717,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-conv-daily-04",
     "base": "origin/main",
-    "status": "github_checks_pending",
+    "status": "local_checks_passed_after_github_fix",
     "train_scope": "seo_conversion_tracking",
     "title": "SEO-CONV-DAILY-04: feat(analytics): aggregate SEO conversion funnel daily",
     "depends_on": [
@@ -51741,6 +51741,7 @@
           "backend/app/Console/Commands/**",
           "backend/database/migrations/**",
           "backend/tests/Feature/Analytics/**",
+          "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
           "docs/codex/pr-train.yaml",
           "docs/codex/pr-train-state.json"
         ]
@@ -51755,14 +51756,15 @@
           "cd backend && php artisan list --raw | rg \"analytics:refresh-seo-conversion-daily|analytics:refresh-mbti-attribution-daily\"",
           "cd backend && php artisan test --filter=SeoConversionDailyBuilderTest --no-ansi",
           "cd backend && php artisan test --filter=MbtiAttributionEventIngestTest --no-ansi",
+          "cd backend && php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_seo_conversion_daily_read_model_changes' --no-ansi",
           "cd backend && ./vendor/bin/pint --test app/Services/Analytics/SeoConversionDailyBuilder.php app/Console/Commands/RefreshSeoConversionDailyCommand.php tests/Feature/Analytics/SeoConversionDailyBuilderTest.php",
           "cd backend && php artisan route:list --path=api/v0.5/seo --no-ansi",
           "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi | rg \"analytics_seo_conversion_daily|analytics_seo_conv_daily\"",
           "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
           "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
-          "git diff --check -- backend/app/Services/Analytics/SeoConversionDailyBuilder.php backend/app/Console/Commands/RefreshSeoConversionDailyCommand.php backend/database/migrations/2026_06_09_000100_create_analytics_seo_conversion_daily_table.php backend/tests/Feature/Analytics/SeoConversionDailyBuilderTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json"
+          "git diff --check -- backend/app/Services/Analytics/SeoConversionDailyBuilder.php backend/app/Console/Commands/RefreshSeoConversionDailyCommand.php backend/database/migrations/2026_06_09_000100_create_analytics_seo_conversion_daily_table.php backend/tests/Feature/Analytics/SeoConversionDailyBuilderTest.php backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json"
         ],
-        "evidence": "PHP lint passed for the new builder, command, migration, and feature test. Artisan auto-discovers analytics:refresh-seo-conversion-daily. Focused SeoConversionDailyBuilderTest passed 4 tests / 30 assertions. Existing MbtiAttributionEventIngestTest passed 11 tests / 62 assertions. Pint --test passed for scoped PHP files. v0.5 SEO route-list remained visible. Migration pretend showed only analytics_seo_conversion_daily DDL. JSON/YAML parse, scope validation, and path-limited git diff --check passed."
+        "evidence": "PHP lint passed for the new builder, command, migration, feature test, and BigFive classifier test. Artisan auto-discovers analytics:refresh-seo-conversion-daily. Focused SeoConversionDailyBuilderTest passed 4 tests / 30 assertions. Existing MbtiAttributionEventIngestTest passed 11 tests / 62 assertions. Focused BigFive runtime freeze classifier regression passed after adding the SEO conversion daily read-model exception. Pint --test passed for scoped PHP files. v0.5 SEO route-list remained visible. Migration pretend showed only analytics_seo_conversion_daily DDL. JSON/YAML parse, scope validation, and path-limited git diff --check passed."
       }
     },
     "failure_reason": null,
@@ -51797,6 +51799,16 @@
         "at": "2026-06-09",
         "status": "github_checks_pending",
         "note": "Opened https://github.com/fermatmind/fap-api/pull/2011 from branch codex/seo-conv-daily-04; GitHub checks pending."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "github_checks_failed_fix_in_progress",
+        "note": "GitHub verify-bigfive failed because the BigFive runtime freeze classifier treated SEO conversion daily command, Analytics service, and migration files as BigFive runtime changes."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "local_checks_passed_after_github_fix",
+        "note": "Added a narrow BigFive freeze classifier exception and focused regression for SEO conversion daily read-model files; focused BigFive regression and SeoConversionDailyBuilderTest passed locally."
       }
     ]
   },

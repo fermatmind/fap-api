@@ -285,6 +285,17 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_seo_conversion_daily_read_model_changes(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/RefreshSeoConversionDailyCommand.php',
+            'backend/app/Services/Analytics/SeoConversionDailyBuilder.php',
+            'backend/database/migrations/2026_06_09_000100_create_analytics_seo_conversion_daily_table.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_public_healthz_alias_route_addition(): void
     {
         $changed = [
@@ -2827,6 +2838,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSeoConversionDailyReadModelFile($file)) {
+                continue;
+            }
+
             if ($this->isSeoIntelGscFoundationFile($file)) {
                 continue;
             }
@@ -4907,6 +4922,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isAnalyticsFunnelRefreshCommandFile(string $file): bool
     {
         return $file === 'backend/app/Console/Commands/RefreshAnalyticsFunnelDailyCommand.php';
+    }
+
+    private function isSeoConversionDailyReadModelFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/RefreshSeoConversionDailyCommand.php',
+            'backend/app/Services/Analytics/SeoConversionDailyBuilder.php',
+            'backend/database/migrations/2026_06_09_000100_create_analytics_seo_conversion_daily_table.php',
+        ], true);
     }
 
     /**

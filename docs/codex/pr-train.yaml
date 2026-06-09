@@ -23817,6 +23817,7 @@ prs:
       - backend/app/Console/Commands/**
       - backend/database/migrations/**
       - backend/tests/Feature/Analytics/**
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
@@ -23830,10 +23831,11 @@ prs:
       - php -l backend/tests/Feature/Analytics/SeoConversionDailyBuilderTest.php
       - cd backend && php artisan list --raw | rg "analytics:refresh-seo-conversion-daily"
       - cd backend && php artisan test --filter=SeoConversionDailyBuilderTest --no-ansi
+      - cd backend && php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_seo_conversion_daily_read_model_changes' --no-ansi
       - cd backend && ./vendor/bin/pint --test app/Services/Analytics/SeoConversionDailyBuilder.php app/Console/Commands/RefreshSeoConversionDailyCommand.php tests/Feature/Analytics/SeoConversionDailyBuilderTest.php
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
-      - git diff --check -- backend/app/Services/Analytics/SeoConversionDailyBuilder.php backend/app/Console/Commands/RefreshSeoConversionDailyCommand.php backend/database/migrations/2026_06_09_000100_create_analytics_seo_conversion_daily_table.php backend/tests/Feature/Analytics/SeoConversionDailyBuilderTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --check -- backend/app/Services/Analytics/SeoConversionDailyBuilder.php backend/app/Console/Commands/RefreshSeoConversionDailyCommand.php backend/database/migrations/2026_06_09_000100_create_analytics_seo_conversion_daily_table.php backend/tests/Feature/Analytics/SeoConversionDailyBuilderTest.php backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json
       - git diff --cached --check
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
     production_write_execution: false
