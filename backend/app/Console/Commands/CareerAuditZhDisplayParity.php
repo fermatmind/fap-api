@@ -29,6 +29,8 @@ final class CareerAuditZhDisplayParity extends Command
         {--timeout=15 : HTTP timeout in seconds}
         {--batch-size=40 : Max slugs per concurrent detail batch}
         {--sample-limit=20 : Max sample rows per summary bucket}
+        {--summary-only : Omit per-slug items from the JSON report}
+        {--assert-live-parity : Exit non-zero when the live parity gate is blocked}
         {--json : Emit JSON report}
         {--output= : Optional report output path}';
 
@@ -43,6 +45,7 @@ final class CareerAuditZhDisplayParity extends Command
             $batchSize = max(1, min(100, (int) $this->option('batch-size')));
             $sampleLimit = max(1, (int) $this->option('sample-limit'));
             $explicitSlugs = $this->csvOption('slugs');
+            $assertLiveParity = (bool) $this->option('assert-live-parity');
 
             $index = $explicitSlugs === []
                 ? $this->indexSlugs($apiBase, $timeout)
@@ -59,9 +62,12 @@ final class CareerAuditZhDisplayParity extends Command
             $items = $this->auditSlugs($apiBase, $siteBase, $slugs, $timeout, $batchSize);
 
             $summary = $this->summary($items, $index, $sampleLimit);
+            $liveGate = $this->liveGate($summary, $items);
             $report = [
                 'validator_version' => self::VALIDATOR_VERSION,
-                'decision' => ($summary['api_failure_count'] ?? 0) === 0 ? 'pass' : 'blocked',
+                'decision' => $assertLiveParity
+                    ? $liveGate['decision']
+                    : (($summary['api_failure_count'] ?? 0) === 0 ? 'pass' : 'blocked'),
                 'read_only' => true,
                 'writes_database' => false,
                 'cms_mutation' => false,
@@ -71,12 +77,12 @@ final class CareerAuditZhDisplayParity extends Command
                 'api_base' => $apiBase,
                 'site_base' => $siteBase,
                 'scan_scope' => $explicitSlugs === [] ? 'public_index_union' : 'explicit_slugs',
+                'assert_live_parity' => $assertLiveParity,
+                'live_gate' => $liveGate,
                 'summary' => $summary,
-                'items' => $items,
+                'items' => (bool) $this->option('summary-only') ? [] : $items,
                 'next_prs' => [
-                    'CAREER-ZH-DISPLAY-PARITY-02' => 'Use reviewed Chinese CMS/workbook display fields through validate/import manifest flow; do not copy English content.',
-                    'CAREER-ZH-DISPLAY-PARITY-03' => 'Add per-slug/per-locale detail cache forget/warm for imported zh-CN display assets.',
-                    'CAREER-ZH-DISPLAY-PARITY-04' => 'Run controlled publish/live parity gate without changing sitemap/llms/index strategy unless separately authorized.',
+                    'controlled_import_required' => 'If live_gate.decision is blocked because zh pages remain restricted shells or structurally mismatched, run only an explicitly approved reviewed-workbook import/publish/cache refresh before asserting live parity.',
                 ],
             ];
 
@@ -239,6 +245,61 @@ final class CareerAuditZhDisplayParity extends Command
             'classification_counts' => $classifications,
             'index_failures' => $index['failures'] ?? [],
             'samples' => $sampleByClassification,
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $summary
+     * @param  list<array<string, mixed>>  $items
+     * @return array<string, mixed>
+     */
+    private function liveGate(array $summary, array $items): array
+    {
+        $restrictedShellCount = 0;
+        foreach ($items as $item) {
+            $reasons = (array) ($item['zh_gate_reasons'] ?? []);
+            foreach ($reasons as $reason) {
+                $reason = (string) $reason;
+                if (str_contains($reason, 'runtime_published_shell')
+                    || str_contains($reason, 'critical_missing_field:')) {
+                    $restrictedShellCount++;
+
+                    break;
+                }
+            }
+        }
+
+        $blockers = [];
+        if ((int) ($summary['api_failure_count'] ?? 0) > 0) {
+            $blockers[] = 'api_failures_or_http_mismatches';
+        }
+        if ((int) ($summary['index_en_only_count'] ?? 0) > 0 || (int) ($summary['index_zh_only_count'] ?? 0) > 0) {
+            $blockers[] = 'public_index_locale_mismatch';
+        }
+        if ((int) ($summary['en_has_modules_zh_missing'] ?? 0) > 0) {
+            $blockers[] = 'zh_missing_en_display_modules';
+        }
+        if ((int) ($summary['zh_has_modules_en_missing'] ?? 0) > 0) {
+            $blockers[] = 'zh_has_unexpected_extra_modules';
+        }
+        if ($restrictedShellCount > 0) {
+            $blockers[] = 'zh_restricted_shell_or_integrity_gap';
+        }
+
+        return [
+            'decision' => $blockers === [] ? 'pass' : 'blocked',
+            'blockers' => $blockers,
+            'total_slugs' => (int) ($summary['total_slugs'] ?? 0),
+            'same_module_set' => (int) ($summary['same_module_set'] ?? 0),
+            'module_mismatch_count' => (int) ($summary['en_has_modules_zh_missing'] ?? 0)
+                + (int) ($summary['zh_has_modules_en_missing'] ?? 0),
+            'restricted_shell_count' => $restrictedShellCount,
+            'api_failure_count' => (int) ($summary['api_failure_count'] ?? 0),
+            'index_mismatch_count' => (int) ($summary['index_en_only_count'] ?? 0)
+                + (int) ($summary['index_zh_only_count'] ?? 0),
+            'sitemap_changed' => false,
+            'llms_changed' => false,
+            'index_strategy_changed' => false,
         ];
     }
 
