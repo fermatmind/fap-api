@@ -7,6 +7,7 @@ namespace App\Http\Controllers\API\V0_5\Cms;
 use App\Filament\Ops\Support\ContentReleaseAudit;
 use App\Http\Controllers\Controller;
 use App\Models\ContentPage;
+use App\Services\Cms\ContentPagePublishGate;
 use App\Services\Cms\RowBackedRevisionWorkspace;
 use App\Services\Cms\SiblingTranslationWorkflowService;
 use Illuminate\Http\JsonResponse;
@@ -18,6 +19,7 @@ final class ContentPageController extends Controller
 {
     public function __construct(
         private readonly RowBackedRevisionWorkspace $workspace,
+        private readonly ContentPagePublishGate $contentPagePublishGate,
     ) {}
 
     /**
@@ -185,23 +187,28 @@ final class ContentPageController extends Controller
         $faqSchemaEligible = (bool) ($validated['faq_schema_eligible'] ?? false);
         $schemaEligibilityReviewedAt = $validated['schema_eligibility_reviewed_at'] ?? null;
 
-        $publishSafetyErrors = $this->publishSafetyErrors(
-            normalizedSlug: $normalizedSlug,
-            pageType: $pageType,
-            status: $status,
-            isPublic: (bool) $validated['is_public'],
-            reviewState: $reviewState,
-            legalReviewRequired: (bool) ($validated['legal_review_required'] ?? false),
-            scienceReviewRequired: (bool) ($validated['science_review_required'] ?? false),
-            schemaEnabled: $schemaEnabled,
-            publishAllowed: $publishAllowed,
-            operatorApprovalRequired: $operatorApprovalRequired,
-            operatorApprovedAt: $operatorApprovedAt,
-            claimGateStatus: $claimGateStatus,
-            forbiddenClaims: $forbiddenClaims,
-            faqSchemaEligible: $faqSchemaEligible,
-            schemaEligibilityReviewedAt: $schemaEligibilityReviewedAt,
-        );
+        $publishSafetyErrors = $this->contentPagePublishGate->errorsForState([
+            'slug' => $normalizedSlug,
+            'page_type' => $pageType,
+            'locale' => (string) $validated['locale'],
+            'status' => $status,
+            'is_public' => (bool) $validated['is_public'],
+            'is_indexable' => (bool) $validated['is_indexable'],
+            'review_state' => $reviewState,
+            'legal_review_required' => (bool) ($validated['legal_review_required'] ?? false),
+            'science_review_required' => (bool) ($validated['science_review_required'] ?? false),
+            'schema_enabled' => $schemaEnabled,
+            'publish_allowed' => $publishAllowed,
+            'operator_approval_required' => $operatorApprovalRequired,
+            'operator_approved_at' => $operatorApprovedAt,
+            'claim_gate_status' => $claimGateStatus,
+            'forbidden_claims' => $forbiddenClaims,
+            'faq_schema_eligible' => $faqSchemaEligible,
+            'schema_eligibility_reviewed_at' => $schemaEligibilityReviewedAt,
+            'seo_title' => $this->nullableString($validated['seo_title'] ?? null),
+            'meta_description' => $this->nullableString($validated['meta_description'] ?? null),
+            'seo_description' => $this->nullableString($validated['seo_description'] ?? null),
+        ]);
         if ($publishSafetyErrors !== []) {
             return response()->json([
                 'ok' => false,
@@ -568,67 +575,6 @@ final class ContentPageController extends Controller
         }
 
         return array_values(array_unique($normalized));
-    }
-
-    /**
-     * @param  list<string>  $forbiddenClaims
-     * @return array<string, list<string>>
-     */
-    private function publishSafetyErrors(
-        string $normalizedSlug,
-        string $pageType,
-        string $status,
-        bool $isPublic,
-        string $reviewState,
-        bool $legalReviewRequired,
-        bool $scienceReviewRequired,
-        bool $schemaEnabled,
-        bool $publishAllowed,
-        bool $operatorApprovalRequired,
-        mixed $operatorApprovedAt,
-        string $claimGateStatus,
-        array $forbiddenClaims,
-        bool $faqSchemaEligible,
-        mixed $schemaEligibilityReviewedAt,
-    ): array {
-        if ($status !== ContentPage::STATUS_PUBLISHED || ! $isPublic || ! $this->isScienceControlledPage($normalizedSlug, $pageType, $scienceReviewRequired)) {
-            return [];
-        }
-
-        $errors = [];
-        if (! $publishAllowed) {
-            $errors['publish_allowed'][] = 'publish_allowed must be true before publishing a Science ContentPage.';
-        }
-        if ($operatorApprovalRequired && $operatorApprovedAt === null) {
-            $errors['operator_approved_at'][] = 'operator_approved_at is required while operator_approval_required is true.';
-        }
-        if ($reviewState !== 'approved') {
-            $errors['review_state'][] = 'review_state must be approved before publishing a Science ContentPage.';
-        }
-        if ($legalReviewRequired) {
-            $errors['legal_review_required'][] = 'legal_review_required must be resolved before publishing a Science ContentPage.';
-        }
-        if ($scienceReviewRequired) {
-            $errors['science_review_required'][] = 'science_review_required must be resolved before publishing a Science ContentPage.';
-        }
-        if ($claimGateStatus !== 'passed') {
-            $errors['claim_gate_status'][] = 'claim_gate_status must be passed before publishing a Science ContentPage.';
-        }
-        if ($forbiddenClaims !== []) {
-            $errors['forbidden_claims'][] = 'forbidden_claims must be empty before publishing a Science ContentPage.';
-        }
-        if ($schemaEnabled && (! $faqSchemaEligible || $schemaEligibilityReviewedAt === null)) {
-            $errors['faq_schema_eligible'][] = 'faq_schema_eligible and schema_eligibility_reviewed_at are required when schema_enabled is true.';
-        }
-
-        return $errors;
-    }
-
-    private function isScienceControlledPage(string $normalizedSlug, string $pageType, bool $scienceReviewRequired): bool
-    {
-        return $scienceReviewRequired
-            || in_array($pageType, ContentPage::SCIENCE_CONTROLLED_PAGE_TYPES, true)
-            || in_array($normalizedSlug, ContentPage::SCIENCE_CONTROLLED_SLUGS, true);
     }
 
     private function dateString(mixed $value): ?string

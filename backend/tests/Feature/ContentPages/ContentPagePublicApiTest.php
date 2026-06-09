@@ -11,6 +11,7 @@ use App\Models\Role;
 use App\Support\Rbac\PermissionNames;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 use Tests\TestCase;
 
 final class ContentPagePublicApiTest extends TestCase
@@ -135,7 +136,7 @@ final class ContentPagePublicApiTest extends TestCase
 
     public function test_public_api_hides_science_content_pages_until_public_readiness_gate_passes(): void
     {
-        $sciencePage = ContentPage::query()->withoutGlobalScopes()->create([
+        $sciencePage = ContentPage::withoutEvents(fn (): ContentPage => ContentPage::query()->withoutGlobalScopes()->create([
             'org_id' => 0,
             'slug' => 'reliability-validity',
             'path' => '/reliability-validity',
@@ -162,7 +163,7 @@ final class ContentPagePublicApiTest extends TestCase
             'forbidden_claims' => [],
             'faq_schema_eligible' => false,
             'schema_eligibility_reviewed_at' => null,
-        ]);
+        ]));
 
         $this->getJson('/api/v0.5/content-pages/reliability-validity?locale=en&org_id=0')
             ->assertNotFound()
@@ -212,6 +213,89 @@ final class ContentPagePublicApiTest extends TestCase
             ->assertOk()
             ->assertJsonPath('ok', true)
             ->assertJsonPath('page.slug', 'brand');
+    }
+
+    public function test_english_content_page_cannot_be_indexable_without_seo_title_and_meta_description(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_READ,
+            PermissionNames::ADMIN_CONTENT_WRITE,
+        ]);
+
+        $payload = [
+            'title' => 'Science hub',
+            'kicker' => 'Science',
+            'summary' => 'Science content.',
+            'kind' => 'policy',
+            'page_type' => 'science',
+            'template' => 'policy',
+            'animation_profile' => 'policy',
+            'locale' => 'en',
+            'status' => ContentPage::STATUS_DRAFT,
+            'review_state' => 'draft',
+            'published_at' => null,
+            'updated_at' => '2026-06-09',
+            'effective_at' => null,
+            'source_doc' => 'science-contentpage-en-review-draft-2026-06-09',
+            'is_public' => false,
+            'is_indexable' => true,
+            'content_md' => "## Science\n\nDraft content.",
+            'content_html' => '',
+            'seo_title' => '',
+            'meta_description' => '',
+            'seo_description' => '',
+            'canonical_path' => '/science',
+        ];
+
+        $this->withSession(['ops_org_id' => 0])
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->putJson('/api/v0.5/internal/content-pages/science', $payload)
+            ->assertStatus(422)
+            ->assertJsonPath('ok', false)
+            ->assertJsonPath('error_code', 'CONTENT_PAGE_PUBLISH_GATE_FAILED')
+            ->assertJsonValidationErrors([
+                'seo_title',
+                'meta_description',
+            ]);
+
+        $this->assertDatabaseMissing('content_pages', [
+            'slug' => 'science',
+            'locale' => 'en',
+        ]);
+    }
+
+    public function test_model_level_content_page_gate_blocks_public_science_without_passed_claim_gate(): void
+    {
+        $this->expectException(ValidationException::class);
+
+        ContentPage::query()->withoutGlobalScopes()->create([
+            'org_id' => 0,
+            'slug' => 'data-privacy',
+            'path' => '/data-privacy',
+            'kind' => ContentPage::KIND_POLICY,
+            'page_type' => 'science',
+            'title' => 'Data notes',
+            'summary' => 'Data notes.',
+            'template' => 'policy',
+            'animation_profile' => 'policy',
+            'locale' => 'en',
+            'published_at' => '2026-06-09',
+            'is_public' => true,
+            'is_indexable' => true,
+            'review_state' => 'approved',
+            'content_md' => "## Data\n\nContent.",
+            'content_html' => '',
+            'seo_title' => 'Data notes',
+            'meta_description' => 'Data notes.',
+            'status' => ContentPage::STATUS_PUBLISHED,
+            'publish_allowed' => true,
+            'operator_approval_required' => false,
+            'operator_approved_at' => null,
+            'claim_gate_status' => 'not_reviewed',
+            'forbidden_claims' => [],
+            'faq_schema_eligible' => false,
+            'schema_eligibility_reviewed_at' => null,
+        ]);
     }
 
     public function test_ops_list_and_update_are_backed_by_content_pages_table(): void
