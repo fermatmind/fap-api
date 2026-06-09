@@ -52103,7 +52103,7 @@
     "repo": "fap-api",
     "branch": "codex/article-h1-04",
     "base": "origin/main",
-    "status": "local_checks_passed",
+    "status": "pr_opened",
     "train_scope": "article_h1_single_dom",
     "title": "ARTICLE-H1-04: fix(ops): constrain article editor heading controls",
     "depends_on": [
@@ -52145,8 +52145,8 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "f676123e181ac059493157dbd97e2f4ca16742c2",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2015",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -52166,6 +52166,11 @@
         "at": "2026-06-09",
         "status": "local_checks_passed",
         "note": "ArticleResource lint, OpsCmsEditPolishTest, Pint, metadata parse, scope validation, and diff checks passed."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "pr_opened",
+        "note": "Opened fap-api PR #2015 for ARTICLE-H1-04."
       }
     ]
   }
