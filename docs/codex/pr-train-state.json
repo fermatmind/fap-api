@@ -53116,7 +53116,7 @@
     "repo": "fap-api",
     "branch": "codex/career-zh-display-parity-03-detail-cache",
     "base": "origin/main",
-    "status": "committed_pending_push",
+    "status": "pr_open_checks_pending",
     "train_scope": "career_zh_display_parity",
     "title": "CAREER-ZH-DISPLAY-PARITY-03: feat(career): refresh job detail cache per locale",
     "depends_on": [
@@ -53162,7 +53162,7 @@
     },
     "failure_reason": null,
     "commit_sha": "8f582fcb3b714a57f4be0e4a840d1f06a5c61302",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2022",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -53188,6 +53188,11 @@
         "at": "2026-06-09",
         "status": "committed_pending_push",
         "note": "Created scoped implementation commit 8f582fcb3b714a57f4be0e4a840d1f06a5c61302 pending push and PR creation. Final PR head may include metadata-only follow-up commits."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "pr_open_checks_pending",
+        "note": "Opened PR #2022 for CAREER-ZH-DISPLAY-PARITY-03; waiting for GitHub checks."
       }
     ]
   },
