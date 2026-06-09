@@ -52532,7 +52532,7 @@
     "repo": "fap-api",
     "branch": "codex/career-zh-display-parity-04-live-gate",
     "base": "origin/main",
-    "status": "local_checks_passed",
+    "status": "github_checks_pending",
     "train_scope": "career_zh_display_parity",
     "title": "CAREER-ZH-DISPLAY-PARITY-04: chore(career): gate zh display live parity",
     "depends_on": [
@@ -52578,11 +52578,17 @@
       "diff_check": {
         "status": "pass",
         "evidence": "git diff --check passed after implementation; git diff --cached --check will be run after staging."
+      },
+      "github": {
+        "status": "pending",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/2023",
+        "head_sha": "d02233d1372b302ee06569d5ddbc03f92983bef7",
+        "evidence": "PR #2023 opened for CAREER-ZH-DISPLAY-PARITY-04; GitHub checks are pending."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "d02233d1372b302ee06569d5ddbc03f92983bef7",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2023",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -52609,6 +52615,11 @@
         "at": "2026-06-09T16:53:13Z",
         "status": "local_checks_passed",
         "note": "Implemented live parity gate/report. Local focused tests and live audit passed; live parity remains blocked only by external reviewed zh content state, recorded as sidecar."
+      },
+      {
+        "at": "2026-06-09T16:58:00Z",
+        "status": "github_checks_pending",
+        "note": "Opened PR #2023 and pushed implementation commit d02233d1372b302ee06569d5ddbc03f92983bef7; waiting for GitHub checks."
       }
     ]
   }
