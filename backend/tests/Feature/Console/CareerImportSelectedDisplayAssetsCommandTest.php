@@ -10,8 +10,10 @@ use App\Models\OccupationCrosswalk;
 use App\Models\OccupationFamily;
 use App\Services\Career\Bundles\CareerJobDisplaySurfaceBuilder;
 use App\Services\Career\Import\CareerSelectedDisplayAssetMapper;
+use App\Services\Career\PublicCareerAuthorityResponseCache;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Cache;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 use ZipArchive;
@@ -513,6 +515,8 @@ final class CareerImportSelectedDisplayAssetsCommandTest extends TestCase
     {
         foreach ($this->selectedRows() as $row) {
             $this->createAuthorityOccupation($row['Slug'], $row['SOC_Code'], $row['O_NET_Code']);
+            Cache::forever(PublicCareerAuthorityResponseCache::JOB_DETAIL_CACHE_KEY_PREFIX.':'.$row['Slug'].':zh-CN', ['stale' => true]);
+            Cache::forever(PublicCareerAuthorityResponseCache::JOB_DETAIL_CACHE_KEY_PREFIX.':'.$row['Slug'].':en', ['stale' => true]);
         }
         $workbook = $this->writeWorkbook($this->selectedRows());
 
@@ -529,6 +533,7 @@ final class CareerImportSelectedDisplayAssetsCommandTest extends TestCase
         $this->assertSame(3, Occupation::query()->count());
         $this->assertSame(6, OccupationCrosswalk::query()->count());
         $this->assertSame(3, CareerJobDisplayAsset::query()->count());
+        $this->assertCount(3, $report['forgot_detail_caches']);
 
         foreach ($this->selectedRows() as $row) {
             $this->assertDatabaseHas('career_job_display_assets', [
@@ -539,6 +544,8 @@ final class CareerImportSelectedDisplayAssetsCommandTest extends TestCase
                 'asset_role' => 'formal_pilot_master',
                 'status' => 'ready_for_pilot',
             ]);
+            $this->assertFalse(Cache::has(PublicCareerAuthorityResponseCache::JOB_DETAIL_CACHE_KEY_PREFIX.':'.$row['Slug'].':zh-CN'));
+            $this->assertTrue(Cache::has(PublicCareerAuthorityResponseCache::JOB_DETAIL_CACHE_KEY_PREFIX.':'.$row['Slug'].':en'));
         }
     }
 

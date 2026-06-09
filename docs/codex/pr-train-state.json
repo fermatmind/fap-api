@@ -266,7 +266,9 @@
       "repo": "fap-api",
       "branch": "codex/seo-cms-canary-be-01-hreflang-cta-surfaces",
       "status": "merged",
-      "depends_on": [],
+      "depends_on": [
+
+      ],
       "commit_sha": "dc96157c0c226ed39c2036a27670c092bc54013f",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1852",
       "checks": {
@@ -371,7 +373,9 @@
           "note": "Reconciled before SEO-CMS-CANARY-DRAFT-PATH-01: GitHub PR #1852 is MERGED with merge commit dc96157c0c226ed39c2036a27670c092bc54013f, and origin/main contains that commit."
         }
       ],
-      "sidecars": [],
+      "sidecars": [
+
+      ],
       "next_task": "SEO-CMS-CANARY-WEB-01"
     },
     "PR-EQ-PER-01": {
@@ -1537,7 +1541,9 @@
           "git_diff_check": "passed: git diff --check"
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -1563,7 +1569,9 @@
           "git_diff_check": "passed: git diff --check"
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -1780,7 +1788,9 @@
           "command": "git diff --check"
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -1818,7 +1828,8 @@
       "depends_on": [
         "iq-report-builder-three-dimension-result-schema"
       ],
-      "checks": {},
+      "checks": {
+      },
       "sidecar_issues": [
         {
           "sidecar_id": "IQ-SIDECAR-COMMERCE-DEFERRED-001",
@@ -1905,7 +1916,9 @@
           "evidence": "User explicitly authorized registering AUDIT-1 in docs/codex/pr-train.yaml and docs/codex/pr-train-state.json only."
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "failure_reason": null,
       "next_pr": "AUDIT-2 2786 public-resolution source resolver",
       "merged_at": null,
@@ -1946,7 +1959,9 @@
           "evidence": "AUDIT-1 merged as 0c6dc52e9806242dc73cec405c7f09c05161d19b and origin/main contains the merge commit."
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "failure_reason": null,
       "next_pr": "AUDIT-3 Occupation entity inventory audit",
       "merged_at": null,
@@ -2038,7 +2053,9 @@
           "evidence": "Full MBTI CI chain exited 0 after the test-only allowlist fix; generated compiled artifacts were restored because they are outside AUDIT-3 scope."
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "failure_reason": null,
       "next_pr": "AUDIT-4 Baseline/display metadata inventory audit",
       "merged_at": null,
@@ -2137,8 +2154,12 @@
           "owner_repo": "fap-api",
           "scope_relation": "external_to_current_pr",
           "introduced_by_current_pr": false,
-          "affected_slugs": [],
-          "affected_locales": [],
+          "affected_slugs": [
+
+          ],
+          "affected_locales": [
+
+          ],
           "evidence": [
             "bash backend/scripts/ci_verify_mbti.sh failed after AUDIT-4 allowlist fix in unrelated BigFive norm/content tests with SQLSTATE[HY000]: General error: 5 database is locked against /tmp/fap-ci.sqlite.",
             "Scoped AUDIT-4 tests, AUDIT-1/2/3 regressions, pint, git diff --check, and BigFive runtime freeze path gate passed."
@@ -2238,7 +2259,9 @@
           "command": "git diff --check"
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "failure_reason": null,
       "next_pr": "AUDIT-6 Runtime projection/truth eligibility audit",
       "merged_at": null,
@@ -2329,7 +2352,9 @@
           "command": "git diff --check"
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "failure_reason": null,
       "next_pr": "AUDIT-7 SEO/GEO readiness audit",
       "merged_at": null,
@@ -2424,7 +2449,9 @@
           "command": "git diff --check"
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "failure_reason": null,
       "next_pr": "AUDIT-8 Surface readiness audit",
       "merged_at": null,
@@ -2514,7 +2541,9 @@
           "command": "git diff --check"
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "failure_reason": null,
       "next_pr": "AUDIT-9 career:audit-canonical-eligibility command integration",
       "merged_at": null,
@@ -2610,7 +2639,9 @@
           "command": "git diff --check"
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "failure_reason": null,
       "next_pr": "AUDIT-10 80-cohort readiness plan",
       "merged_at": null,
@@ -2703,7 +2734,9 @@
           "command": "git diff --check"
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "failure_reason": null,
       "next_pr": "AUDIT-11 Manifest train generator",
       "merged_at": null,
@@ -2790,7 +2823,9 @@
           "command": "git diff --check"
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "failure_reason": null,
       "next_pr": "AUDIT-12 Batch live acceptance v2",
       "merged_at": null,
@@ -2940,7 +2975,9 @@
           "command": "git diff --check"
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "failure_reason": null,
       "next_pr": "AUDIT-13 2786 full audit artifact/report",
       "merged_at": null,
@@ -3023,7 +3060,9 @@
           "command": "git diff --check"
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "failure_reason": null,
       "next_pr": "End of 2786 eligibility audit PR train",
       "merged_at": null,
@@ -3088,7 +3127,9 @@
       "merged_at": "2026-05-12T16:55:20Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "PR-RT-03": {
       "repo": "fap-api",
@@ -3168,7 +3209,9 @@
         "Personality type related articles remain deferred because no stable Personality related article authority was identified for INFJ-A/INFJ-T pages.",
         "Test detail related articles remain deferred because the existing related_test_slug contract is a fixed three-article test page slot and changing it would widen PR-RT-03 scope."
       ],
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "merge_sha": "44621613e5255a76631138d641da218e2993e343"
     },
     "CMD-FIX-1": {
@@ -3197,7 +3240,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "RIASEC-AH-04": {
       "repo": "fap-api",
@@ -3328,7 +3373,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "CTX-CONSUME-1": {
       "repo": "fap-api",
@@ -3381,7 +3428,9 @@
       "merged_at": "2026-05-13T12:11:29Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "CTX-EXPORT-1": {
       "repo": "fap-api",
@@ -3435,7 +3484,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "REPAIR-SURFACE-CONTEXT-1": {
       "repo": "fap-api",
@@ -3490,7 +3541,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "REPAIR-SEO-GEO-1": {
       "repo": "fap-api",
@@ -3595,7 +3648,9 @@
           "owner_repo": "fap-api",
           "scope_relation": "external_to_current_pr",
           "introduced_by_current_pr": false,
-          "affected_slugs": [],
+          "affected_slugs": [
+
+          ],
           "affected_locales": [
             "en",
             "zh"
@@ -3709,7 +3764,9 @@
       "merged_at": "2026-05-13T10:31:09Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "REPAIR-TITLE-1": {
       "repo": "fap-api",
@@ -3815,7 +3872,9 @@
       "merged_at": "2026-05-13T10:49:47Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "REPAIR-RUNTIME-1": {
       "repo": "fap-api",
@@ -3920,7 +3979,9 @@
       "merged_at": "2026-05-13T11:08:33Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "REPAIR-INDEX-1": {
       "repo": "fap-api",
@@ -4020,7 +4081,9 @@
       "merged_at": "2026-05-13T11:37:01Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "REPAIR-ENTITY-1": {
       "repo": "fap-api",
@@ -4073,7 +4136,9 @@
       "merged_at": "2026-05-13T11:53:44Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "REPAIR-80-CANDIDATE-1": {
       "repo": "fap-api",
@@ -4126,14 +4191,18 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "RIASEC-PERSONALIZATION-00": {
       "repo": "fap-api",
       "branch": "codex/riasec-personalization-00-train-registration",
       "title": "docs(codex): register RIASEC personalization train",
       "status": "merged",
-      "depends_on": [],
+      "depends_on": [
+
+      ],
       "scope_type": "train_registration_only",
       "allowed_paths": [
         "docs/codex/pr-train.yaml",
@@ -4155,7 +4224,9 @@
       "merged_at": "2026-05-13T07:06:00Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "RIASEC-PERSONALIZATION-01": {
       "repo": "fap-api",
@@ -4208,7 +4279,9 @@
       "merged_at": "2026-05-13T07:35:00Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "RIASEC-PERSONALIZATION-02": {
       "repo": "fap-api",
@@ -4257,7 +4330,9 @@
       "merged_at": "2026-05-13T07:53:00Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "RIASEC-PERSONALIZATION-03": {
       "repo": "fap-api",
@@ -4302,7 +4377,9 @@
       "merged_at": "2026-05-13T08:16:00Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "RIASEC-PERSONALIZATION-04": {
       "repo": "fap-api",
@@ -4349,7 +4426,9 @@
       "merged_at": "2026-05-13T08:33:00Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "RIASEC-PERSONALIZATION-05": {
       "repo": "fap-api",
@@ -4394,7 +4473,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "RIASEC-PERSONALIZATION-06": {
       "repo": "fap-web",
@@ -4414,12 +4495,15 @@
       ],
       "commit_sha": "bb01c378674b28857b98ddbdf3d657144ef3b83e",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1423",
-      "checks": {},
+      "checks": {
+      },
       "failure_reason": null,
       "merged_at": "2026-05-22T10:38:13Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": false,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "RIASEC-PERSONALIZATION-07": {
       "repo": "fap-web",
@@ -4442,12 +4526,15 @@
       ],
       "commit_sha": "7740b1b09ce6dddb693ac5dbcf8a1d027b0db08b",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1440",
-      "checks": {},
+      "checks": {
+      },
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "PR-RT-04": {
       "repo": "fap-api",
@@ -4527,7 +4614,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "post_merge_runbook_required": true
     },
     "RIASEC-DEEP-COPY-01": {
@@ -4595,7 +4684,9 @@
       "merged_at": "2026-05-13T11:31:25Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "RIASEC-DEEP-COPY-02": {
       "repo": "fap-api",
@@ -4659,7 +4750,9 @@
       "merged_at": "2026-05-13T12:05:30Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "RIASEC-DEEP-COPY-03": {
       "repo": "fap-api",
@@ -5135,7 +5228,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "REPAIR-INDEX-ENTITY-POLICY-2": {
       "repo": "fap-api",
@@ -5192,7 +5287,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "REPAIR-INDEX-STATE-MINIMUM-APPLY-PLAN-2": {
       "repo": "fap-api",
@@ -5248,7 +5345,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "REPAIR-80-READINESS-COMMAND-1": {
       "repo": "fap-api",
@@ -5301,7 +5400,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "REPAIR-80-MANIFEST-TRAIN-COMMAND-1": {
       "repo": "fap-api",
@@ -5354,7 +5455,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "REPAIR-80-READINESS-SELECTION-2": {
       "repo": "fap-api",
@@ -5407,7 +5510,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "PR-CMS-03": {
       "repo": "fap-api",
@@ -5555,7 +5660,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "REPAIR-80-TARGET-DELTA-1": {
       "repo": "fap-api",
@@ -5609,7 +5716,9 @@
       "merged_at": "2026-05-14T06:05:11Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "REPAIR-RUNTIME-CANDIDATE-PREP-1": {
       "repo": "fap-api",
@@ -5662,7 +5771,9 @@
       "merged_at": "2026-05-14T06:29:28Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "REPAIR-RUNTIME-CANDIDATE-PREP-APPLY-GATE-1": {
       "repo": "fap-api",
@@ -5717,7 +5828,9 @@
       "merged_at": "2026-05-14T07:00:35Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "REPAIR-RUNTIME-ARTIFACT-REFRESH-1": {
       "repo": "fap-api",
@@ -5770,7 +5883,9 @@
       "merged_at": "2026-05-14T07:45:52Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "REPAIR-51-DELTA-ROLLOUT-MANIFEST-1": {
       "repo": "fap-api",
@@ -5823,7 +5938,9 @@
       "merged_at": "2026-05-14T08:07:46Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "REPAIR-DELTA-ROLLOUT-GATE-1": {
       "repo": "fap-api",
@@ -5876,7 +5993,9 @@
       "merged_at": "2026-05-14T08:27:04Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "REPAIR-80-TOTAL-LIVE-ACCEPTANCE-1": {
       "repo": "fap-api",
@@ -5930,7 +6049,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "REPAIR-RUNTIME-CANDIDATE-ARTIFACT-REFRESH-2": {
       "repo": "fap-api",
@@ -5988,7 +6109,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "PR-CMS-04": {
       "repo": "fap-api",
@@ -6073,7 +6196,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "REPAIR-CANDIDATE-AWARE-AUDIT-POLICY-1": {
       "repo": "fap-api",
@@ -6124,7 +6249,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "REPAIR-DELTA-ROLLOUT-APPLY-BATCH-AUTHORITY-1": {
       "repo": "fap-api",
@@ -6204,7 +6331,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "REPAIR-POST-ROLLOUT-RUNTIME-PROJECTION-AUTHORITY-1": {
       "repo": "fap-api",
@@ -6263,7 +6392,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "REPAIR-80-LIVE-SURFACE-AUTHORITY-1": {
       "repo": "fap-api",
@@ -6321,7 +6452,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "REPAIR-PROGRESSIVE-COHORT-TARGET-DELTA-1": {
       "repo": "fap-api",
@@ -6384,8 +6517,12 @@
           "owner_repo": "fap-api",
           "scope_relation": "external_to_current_pr",
           "introduced_by_current_pr": false,
-          "affected_slugs": [],
-          "affected_locales": [],
+          "affected_slugs": [
+
+          ],
+          "affected_locales": [
+
+          ],
           "evidence": [
             "backend/scripts/ci_verify_mbti.sh failed only Tests\\Feature\\Content\\PacksPublishBig5Test and Tests\\Feature\\Content\\PacksRollbackBig5Test at File::isDirectory($target.'/compiled') assertions.",
             "Current PR changed only Career progressive audit/command/test/docs/train metadata paths and does not touch content pack publish/rollback code or compiled content assets.",
@@ -6461,8 +6598,12 @@
           "owner_repo": "fap-api",
           "scope_relation": "external_to_current_pr",
           "introduced_by_current_pr": false,
-          "affected_slugs": [],
-          "affected_locales": [],
+          "affected_slugs": [
+
+          ],
+          "affected_locales": [
+
+          ],
           "evidence": [
             "backend/scripts/ci_verify_mbti.sh failed Tests\\Feature\\Content\\PacksPublishBig5Test and Tests\\Feature\\Content\\PacksRollbackBig5Test at File::isDirectory($target.'/compiled') assertions.",
             "Current PR changed only Career runtime candidate prep command/planner/tests/docs/train metadata paths and does not touch content pack publish/rollback code or compiled content assets.",
@@ -6538,8 +6679,12 @@
           "owner_repo": "fap-api",
           "scope_relation": "external_to_current_pr",
           "introduced_by_current_pr": false,
-          "affected_slugs": [],
-          "affected_locales": [],
+          "affected_slugs": [
+
+          ],
+          "affected_locales": [
+
+          ],
           "evidence": [
             "backend/scripts/ci_verify_mbti.sh failed Tests\\Feature\\Content\\PacksPublishBig5Test and Tests\\Feature\\Content\\PacksRollbackBig5Test at File::isDirectory($target.'/compiled') assertions.",
             "Current PR changed only Career runtime artifact refresh command/planner/tests/docs/train metadata paths and does not touch content pack publish/rollback code or compiled content assets.",
@@ -6614,8 +6759,12 @@
           "owner_repo": "fap-api",
           "scope_relation": "external_to_current_pr",
           "introduced_by_current_pr": false,
-          "affected_slugs": [],
-          "affected_locales": [],
+          "affected_slugs": [
+
+          ],
+          "affected_locales": [
+
+          ],
           "evidence": [
             "backend/scripts/ci_verify_mbti.sh failed Tests\\Feature\\Content\\PacksPublishBig5Test and Tests\\Feature\\Content\\PacksRollbackBig5Test at File::isDirectory($target.'/compiled') assertions.",
             "Current PR changed only Career progressive rollout manifest/gate command/planner/tests/docs/train metadata paths and does not touch content pack publish/rollback code or compiled content assets.",
@@ -6691,8 +6840,12 @@
           "owner_repo": "fap-api",
           "scope_relation": "external_to_current_pr",
           "introduced_by_current_pr": false,
-          "affected_slugs": [],
-          "affected_locales": [],
+          "affected_slugs": [
+
+          ],
+          "affected_locales": [
+
+          ],
           "evidence": [
             "backend/scripts/ci_verify_mbti.sh failed Tests\\Feature\\Content\\PacksPublishBig5Test and Tests\\Feature\\Content\\PacksRollbackBig5Test at File::isDirectory($target.'/compiled') assertions.",
             "Current PR changed only Career progressive live acceptance command/planner/tests/docs/train metadata paths and does not touch content pack publish/rollback code or compiled content assets.",
@@ -6708,8 +6861,12 @@
           "owner_repo": "fap-api",
           "scope_relation": "external_to_current_pr",
           "introduced_by_current_pr": false,
-          "affected_slugs": [],
-          "affected_locales": [],
+          "affected_slugs": [
+
+          ],
+          "affected_locales": [
+
+          ],
           "evidence": [
             "backend/scripts/ci_verify_mbti.sh failed Tests\\Unit\\Services\\BigFive\\ResultPageV2\\BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff with backend/app/Http/Controllers/API/V0_3/MbtiAttributionEventController.php.",
             "Current PR does not modify backend/app/Http/Controllers/API/V0_3/MbtiAttributionEventController.php.",
@@ -6786,8 +6943,12 @@
           "owner_repo": "fap-api",
           "scope_relation": "external_to_current_pr",
           "introduced_by_current_pr": false,
-          "affected_slugs": [],
-          "affected_locales": [],
+          "affected_slugs": [
+
+          ],
+          "affected_locales": [
+
+          ],
           "evidence": [
             "backend/scripts/ci_verify_mbti.sh failed Tests\\Feature\\Content\\PacksPublishBig5Test and Tests\\Feature\\Content\\PacksRollbackBig5Test at File::isDirectory($target.'/compiled') assertions.",
             "Current PR changed only Career progressive closeout command/planner/tests/docs/train metadata paths and does not touch content pack publish/rollback code or compiled content assets.",
@@ -6803,8 +6964,12 @@
           "owner_repo": "fap-api",
           "scope_relation": "external_to_current_pr",
           "introduced_by_current_pr": false,
-          "affected_slugs": [],
-          "affected_locales": [],
+          "affected_slugs": [
+
+          ],
+          "affected_locales": [
+
+          ],
           "evidence": [
             "backend/scripts/ci_verify_mbti.sh failed Tests\\Unit\\Services\\BigFive\\ResultPageV2\\BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff with backend/app/Http/Controllers/API/V0_3/MbtiAttributionEventController.php.",
             "Current PR does not modify backend/app/Http/Controllers/API/V0_3/MbtiAttributionEventController.php.",
@@ -6880,8 +7045,12 @@
           "owner_repo": "fap-api",
           "scope_relation": "external_to_current_pr",
           "introduced_by_current_pr": false,
-          "affected_slugs": [],
-          "affected_locales": [],
+          "affected_slugs": [
+
+          ],
+          "affected_locales": [
+
+          ],
           "evidence": [
             "backend/scripts/ci_verify_mbti.sh failed Tests\\Feature\\Content\\PacksPublishBig5Test at tests/Feature/Content/PacksPublishBig5Test.php:94 asserting File::isDirectory($target.'/compiled').",
             "backend/scripts/ci_verify_mbti.sh failed Tests\\Feature\\Content\\PacksRollbackBig5Test at tests/Feature/Content/PacksRollbackBig5Test.php:97 asserting File::isDirectory($target.'/compiled').",
@@ -6947,7 +7116,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "REPAIR-PROGRESSIVE-READINESS-OCCUPATION-AWARE-SELECTION-1": {
       "repo": "fap-api",
@@ -7005,7 +7176,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "REPAIR-PROGRESSIVE-RUNTIME-CANDIDATE-POOL-SELECTION-1": {
       "repo": "fap-api",
@@ -7062,7 +7235,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "REPAIR-PROGRESSIVE-READINESS-CN-PROXY-EXCLUSION-1": {
       "repo": "fap-api",
@@ -7135,7 +7310,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "REPAIR-RUNTIME-PROJECTION-LOOKUP-LATEST-SELECTION-1": {
       "repo": "fap-api",
@@ -7208,8 +7385,12 @@
           "owner_repo": "fap-api",
           "scope_relation": "external_to_current_pr",
           "introduced_by_current_pr": false,
-          "affected_slugs": [],
-          "affected_locales": [],
+          "affected_slugs": [
+
+          ],
+          "affected_locales": [
+
+          ],
           "evidence": [
             "bash backend/scripts/ci_verify_mbti.sh failed in Tests\\Feature\\Content\\PacksPublishBig5Test at compiled directory assertion.",
             "bash backend/scripts/ci_verify_mbti.sh failed in Tests\\Feature\\Content\\PacksRollbackBig5Test at compiled directory assertion.",
@@ -7291,7 +7472,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "REPAIR-PROGRESSIVE-READINESS-SOFTWARE-MANUAL-HOLD-EXCLUSION-1": {
       "repo": "fap-api",
@@ -7373,8 +7556,12 @@
           "owner_repo": "fap-api",
           "scope_relation": "external_to_current_pr",
           "introduced_by_current_pr": false,
-          "affected_slugs": [],
-          "affected_locales": [],
+          "affected_slugs": [
+
+          ],
+          "affected_locales": [
+
+          ],
           "evidence": [
             "bash backend/scripts/ci_verify_mbti.sh failed in Tests\\Feature\\Content\\PacksPublishBig5Test at the target compiled directory assertion.",
             "bash backend/scripts/ci_verify_mbti.sh failed in Tests\\Feature\\Content\\PacksRollbackBig5Test at the target compiled directory assertion.",
@@ -7465,8 +7652,12 @@
           "owner_repo": "fap-api",
           "scope_relation": "external_to_current_pr",
           "introduced_by_current_pr": false,
-          "affected_slugs": [],
-          "affected_locales": [],
+          "affected_slugs": [
+
+          ],
+          "affected_locales": [
+
+          ],
           "evidence": [
             "bash backend/scripts/ci_verify_mbti.sh failed BigFiveResultPageV2CoreBodyPreviewTest::runtime_paths_have_no_uncommitted_diff while reporting CMS test-edge files from the parent worktree, not the current PR files.",
             "bash backend/scripts/ci_verify_mbti.sh failed Tests\\Feature\\Content\\PacksPublishBig5Test and Tests\\Feature\\Content\\PacksRollbackBig5Test at compiled directory assertions.",
@@ -7568,8 +7759,12 @@
           "owner_repo": "fap-api",
           "scope_relation": "external_to_current_pr",
           "introduced_by_current_pr": false,
-          "affected_slugs": [],
-          "affected_locales": [],
+          "affected_slugs": [
+
+          ],
+          "affected_locales": [
+
+          ],
           "evidence": [
             "bash backend/scripts/ci_verify_mbti.sh failed Tests\\Feature\\Content\\PacksPublishBig5Test at File::isDirectory($target.'/compiled').",
             "bash backend/scripts/ci_verify_mbti.sh failed Tests\\Feature\\Content\\PacksRollbackBig5Test at File::isDirectory($target.'/compiled').",
@@ -7662,8 +7857,12 @@
           "owner_repo": "fap-api",
           "scope_relation": "external_to_current_pr",
           "introduced_by_current_pr": false,
-          "affected_slugs": [],
-          "affected_locales": [],
+          "affected_slugs": [
+
+          ],
+          "affected_locales": [
+
+          ],
           "evidence": [
             "bash backend/scripts/ci_verify_mbti.sh failed Tests\\Feature\\Content\\PacksPublishBig5Test at File::isDirectory($target.'/compiled').",
             "bash backend/scripts/ci_verify_mbti.sh failed Tests\\Feature\\Content\\PacksRollbackBig5Test at File::isDirectory($target.'/compiled').",
@@ -7764,8 +7963,12 @@
           "owner_repo": "fap-api",
           "scope_relation": "external_to_current_pr",
           "introduced_by_current_pr": false,
-          "affected_slugs": [],
-          "affected_locales": [],
+          "affected_slugs": [
+
+          ],
+          "affected_locales": [
+
+          ],
           "evidence": [
             "bash backend/scripts/ci_verify_mbti.sh failed Tests\\Feature\\Content\\PacksPublishBig5Test at File::isDirectory($target.'/compiled').",
             "bash backend/scripts/ci_verify_mbti.sh failed Tests\\Feature\\Content\\PacksRollbackBig5Test at File::isDirectory($target.'/compiled').",
@@ -7860,7 +8063,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "PR-CMS-FIX-MASTER": {
       "repo": "fap-api",
@@ -7948,7 +8153,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "PR-GRAPH-01": {
       "repo": "fap-api",
@@ -8048,7 +8255,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "PR-MEDIA-01": {
       "repo": "fap-api",
@@ -8124,7 +8333,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": []
+      "sidecar_issues": [
+
+      ]
     },
     "AUDIT-API-IQ-RESULT-SECRECY": {
       "repo": "fap-api",
@@ -8220,7 +8431,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "history": [
         {
           "at": "2026-05-16T14:10:19+08:00",
@@ -8919,7 +9132,9 @@
       "merged_at": "2026-05-17T00:01:44Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "history": [
         {
           "at": "2026-05-16T14:10:19+08:00",
@@ -9073,7 +9288,9 @@
       "merged_at": "2026-05-17T13:21:17Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "history": [
         {
           "at": "2026-05-17T08:28:18+08:00",
@@ -9149,7 +9366,9 @@
           "evidence": "PR opened as https://github.com/fermatmind/fap-api/pull/1431; GitHub checks pending at PR creation."
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "failure_reason": null,
       "commit_sha": "39c079a34babf048df02f39bdd9fdda78dc07d9e",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1431"
@@ -9221,7 +9440,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "history": [
         {
           "at": "2026-05-17T10:54:07+08:00",
@@ -9488,7 +9709,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "history": [
         {
           "at": "2026-05-17T16:20:00+08:00",
@@ -9582,7 +9805,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "history": [
         {
           "at": "2026-05-17T22:00:00+08:00",
@@ -9967,7 +10192,9 @@
       "merged_at": "2026-05-17T06:32:14Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "history": [
         {
           "at": "2026-05-17T13:54:00+08:00",
@@ -10078,7 +10305,9 @@
       "merged_at": "2026-05-17T09:29:52Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "history": [
         {
           "at": "2026-05-17T15:50:00+08:00",
@@ -10207,7 +10436,9 @@
       "merged_at": "2026-05-17T10:11:08Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "history": [
         {
           "at": "2026-05-17T17:20:00+08:00",
@@ -10332,7 +10563,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "history": [
         {
           "at": "2026-05-17T19:05:00+08:00",
@@ -10437,7 +10670,9 @@
       "merged_at": "2026-05-17T11:40:42Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "history": [
         {
           "at": "2026-05-17T11:16:57.277842Z",
@@ -10539,7 +10774,9 @@
       "merged_at": "2026-05-17T12:07:10Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "history": [
         {
           "at": "2026-05-17T11:45:00Z",
@@ -10644,7 +10881,9 @@
       "merged_at": "2026-05-17T12:43:41Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "history": [
         {
           "at": "2026-05-17T12:20:00Z",
@@ -10762,7 +11001,9 @@
       "merged_at": "2026-05-17T13:39:44Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "history": [
         {
           "at": "2026-05-17T12:56:08Z",
@@ -10985,7 +11226,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "history": [
         {
           "at": "2026-05-18T02:04:59Z",
@@ -11024,7 +11267,9 @@
       "repo": "fap-api",
       "branch": "codex/publish-api-media-origin-readyness",
       "base": "main",
-      "depends_on": [],
+      "depends_on": [
+
+      ],
       "status": "merged",
       "train_scope": "publishing_reliability",
       "risk_level": "medium",
@@ -11082,7 +11327,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "history": [
         {
           "at": "2026-05-17T13:35:00Z",
@@ -11175,7 +11422,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "history": [
         {
           "at": "2026-05-17T13:43:00Z",
@@ -11203,7 +11452,9 @@
       "repo": "fap-api",
       "branch": "codex/storage-release-roots-audit",
       "base": "main",
-      "depends_on": [],
+      "depends_on": [
+
+      ],
       "status": "pr_open",
       "train_scope": "storage_runtime_hygiene",
       "risk_level": "low",
@@ -11271,7 +11522,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "history": [
         {
           "at": "2026-05-17T15:22:58Z",
@@ -11299,7 +11552,9 @@
       "repo": "fap-api",
       "branch": "codex/docs-shell-safety-guard",
       "base": "main",
-      "depends_on": [],
+      "depends_on": [
+
+      ],
       "status": "pr_open",
       "train_scope": "storage_runtime_hygiene",
       "risk_level": "low",
@@ -11372,7 +11627,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "history": [
         {
           "at": "2026-05-17T16:01:58Z",
@@ -11490,7 +11747,9 @@
       "merged_at": "2026-05-18T12:08:39Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "history": [
         {
           "at": "2026-05-18T11:57:22Z",
@@ -11618,7 +11877,9 @@
       "merged_at": "2026-05-18T12:56:16Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "history": [
         {
           "at": "2026-05-18T12:45:00Z",
@@ -11834,7 +12095,9 @@
           "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null; python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text())\"; git diff --check; git diff --cached --check"
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "history": [
         {
           "at": "2026-05-19T01:02:33Z",
@@ -11952,7 +12215,9 @@
           "status": "passed"
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "history": [
         {
           "at": "2026-05-19T01:02:33Z",
@@ -12070,7 +12335,9 @@
           "status": "passed"
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "history": [
         {
           "at": "2026-05-19T01:02:33Z",
@@ -12188,7 +12455,9 @@
           "status": "passed"
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "history": [
         {
           "at": "2026-05-19T01:02:33Z",
@@ -12310,7 +12579,9 @@
           "evidence": "PR #1541 was merged and origin/main contains merge commit 316223c6e9ece53da47bbd7523bb648a2cfb3c85."
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "history": [
         {
           "at": "2026-05-19T01:02:33Z",
@@ -12455,7 +12726,9 @@
           "status": "passed"
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "history": [
         {
           "at": "2026-05-19T01:02:33Z",
@@ -12579,7 +12852,9 @@
           "evidence": "Reconciled CONTENT-OPS-01 as merged/completed only in docs/codex/pr-train-state.json. No runtime, production, env, scheduler, Metabase, external API, crawler log, search submission, Research publish, or pSEO operation was performed."
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "history": [
         {
           "at": "2026-05-19T01:02:33Z",
@@ -12734,7 +13009,9 @@
       "merged_at": "2026-05-19T14:00:03Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": false,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "history": [
         {
           "at": "2026-05-19T13:45:00Z",
@@ -12813,7 +13090,9 @@
       "merged_at": "2026-05-19T14:42:31Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "history": [
         {
           "at": "2026-05-19T14:05:25Z",
@@ -12921,7 +13200,9 @@
       "merged_at": "2026-05-19T15:37:13Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "history": [
         {
           "at": "2026-05-19T15:14:47Z",
@@ -12979,7 +13260,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "history": [
         {
           "at": "2026-05-19T15:40:30Z",
@@ -13103,7 +13386,9 @@
       "merged_at": "2026-05-19T20:17:56Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "history": [
         {
           "at": "2026-05-19T20:13:48Z",
@@ -13160,7 +13445,9 @@
       "merged_at": "2026-05-19T20:23:32Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "history": [
         {
           "at": "2026-05-19T20:18:53Z",
@@ -13217,7 +13504,9 @@
       "merged_at": "2026-05-19T20:27:28Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "history": [
         {
           "at": "2026-05-19T20:24:01Z",
@@ -13281,7 +13570,9 @@
       "merged_at": "2026-05-19T20:39:19Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "history": [
         {
           "at": "2026-05-19T20:27:55Z",
@@ -13338,7 +13629,9 @@
       "merged_at": null,
       "remote_branch_deleted": null,
       "local_cleanup_executed": null,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "history": [
         {
           "at": "2026-05-19T23:05:07Z",
@@ -13379,7 +13672,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "history": [
         {
           "at": "2026-05-19T23:05:07Z",
@@ -13433,7 +13728,9 @@
       "merged_at": "2026-05-20T00:56:13Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "history": [
         {
           "at": "2026-05-20T00:40:00Z",
@@ -13506,7 +13803,9 @@
       "merged_at": "2026-05-20T04:00:03Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "history": [
         {
           "at": "2026-05-20T03:35:34Z",
@@ -14704,7 +15003,9 @@
       "status": "merged",
       "state": "merged",
       "title": "docs(seo-intel): add observation governance architecture contract",
-      "depends_on": [],
+      "depends_on": [
+
+      ],
       "commit_sha": "9d0b26e4ca234354963d9747f0f27438588856bc",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1556",
       "checks": {
@@ -15884,7 +16185,8 @@
           "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
           "git_diff_check": "passed: git diff --check"
         },
-        "github": {}
+        "github": {
+        }
       },
       "failure_reason": "Blocked before production write because the official Search Channel Queue command does not support bounded single-URL enqueue.",
       "merged_at": null,
@@ -15937,7 +16239,8 @@
           "git_diff_check": "passed: git diff --check",
           "scope_diff": "passed: changed files remain inside the allowed scope for SEO-GROWTH-MBTI-ACTION-01B-FIX-01"
         },
-        "github": {}
+        "github": {
+        }
       },
       "failure_reason": null,
       "merged_at": null,
@@ -15994,7 +16297,8 @@
           "yaml_manifest": "passed: yaml.safe_load(docs/codex/pr-train.yaml)",
           "git_diff_check": "passed: git diff --check"
         },
-        "github": {}
+        "github": {
+        }
       },
       "failure_reason": "Blocked before production write because the official production Search Channel Queue write gate is closed.",
       "merged_at": null,
@@ -16256,7 +16560,8 @@
           "git_diff_check": "passed: git diff --check",
           "git_diff_cached_check": "passed: git diff --cached --check"
         },
-        "github": {}
+        "github": {
+        }
       },
       "failure_reason": null,
       "merged_at": null,
@@ -16316,7 +16621,8 @@
           "git_diff_check": "passed: git diff --check",
           "git_diff_cached_check": "passed: git diff --cached --check"
         },
-        "github": {}
+        "github": {
+        }
       },
       "failure_reason": null,
       "merged_at": "2026-05-23T05:28:44Z",
@@ -16388,7 +16694,8 @@
           "git_diff_check": "passed: git diff --check",
           "git_diff_cached_check": "passed: git diff --cached --check"
         },
-        "github": {}
+        "github": {
+        }
       },
       "failure_reason": null,
       "merged_at": null,
@@ -16445,7 +16752,8 @@
           "git_diff_check": "passed: git diff --check",
           "git_diff_cached_check": "passed: git diff --cached --check"
         },
-        "github": {}
+        "github": {
+        }
       },
       "failure_reason": null,
       "merged_at": null,
@@ -16503,7 +16811,8 @@
           "git_diff_check": "passed: git diff --check",
           "git_diff_cached_check": "passed: git diff --cached --check"
         },
-        "github": {}
+        "github": {
+        }
       },
       "failure_reason": "Production preflight report found active old www Research URL Truth rows. A full three-URL bounded apex write would create duplicate Research canonical clusters because URL Truth upsert keys use canonical_url_hash + locale.",
       "merged_at": null,
@@ -16564,7 +16873,8 @@
           "git_diff_check": "passed: git diff --check",
           "git_diff_cached_check": "passed: git diff --cached --check"
         },
-        "github": {}
+        "github": {
+        }
       },
       "failure_reason": null,
       "merged_at": null,
@@ -16726,7 +17036,9 @@
       "repo": "fap-api",
       "branch": "codex/ops-security-storage-path-safety-01",
       "status": "merged",
-      "depends_on": [],
+      "depends_on": [
+
+      ],
       "findings": [
         66,
         68,
@@ -16790,7 +17102,9 @@
           "evidence": "PR #1625 required checks passed: hygiene, semgrep sarif, Semgrep OSS, verify-mbti-legacy, verify-mbti-v2. mergeStateStatus=CLEAN before squash merge."
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "failure_reason": null,
       "merged_at": "2026-05-23T17:10:13Z",
       "remote_branch_deleted": true,
@@ -16890,7 +17204,9 @@
           "evidence": "PR #1626 required checks succeeded before squash merge: hygiene, semgrep sarif, Semgrep OSS, verify-mbti-legacy, verify-mbti-v2."
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "failure_reason": null,
       "merged_at": "2026-05-23T17:42:47Z",
       "remote_branch_deleted": true,
@@ -16996,7 +17312,9 @@
           "evidence": "PR #1627 rerun completed with hygiene, semgrep sarif, Semgrep OSS, verify-mbti-legacy, and verify-mbti-v2 all successful before squash merge."
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "failure_reason": null,
       "merged_at": "2026-05-23T18:17:31Z",
       "remote_branch_deleted": true,
@@ -17085,7 +17403,9 @@
           "evidence": "GitHub PR #1628 is MERGED at fd0fb1f4c1109d2a806085cd0debcad98f38ab33; remote branch is absent."
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "failure_reason": null,
       "merged_at": "2026-05-23T18:54:35Z",
       "remote_branch_deleted": true,
@@ -17135,7 +17455,9 @@
           "evidence": "GitHub PR #1629 is MERGED at 47f18f4f4806f734f08f8677f8d15a36da6c3198; remote branch is absent."
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "failure_reason": null,
       "merged_at": "2026-05-23T19:21:05Z",
       "remote_branch_deleted": true,
@@ -17281,7 +17603,9 @@
           "command": "git diff --check"
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "failure_reason": null,
       "merged_at": "2026-05-23T20:23:03Z",
       "remote_branch_deleted": true,
@@ -17352,7 +17676,9 @@
           "evidence": "GitHub PR #1632 is MERGED and origin/main contains merge commit ceef6619d3b28276f76f8e0ce5194c03a2762df2."
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "failure_reason": null,
       "merged_at": "2026-05-23T20:44:54Z",
       "remote_branch_deleted": true,
@@ -17427,7 +17753,9 @@
           "evidence": "GitHub PR #1633 is MERGED and origin/main contains merge commit bd4816a8253c1307f3cca47e1479e98959aec3a6; remote task branch is absent."
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "failure_reason": null,
       "merged_at": "2026-05-23T21:07:40Z",
       "remote_branch_deleted": true,
@@ -18094,7 +18422,9 @@
           "evidence": "PR #1640 checks passed for Semgrep OSS, hygiene, semgrep sarif, verify-mbti-legacy, and verify-mbti-v2 at head bc00a0678dafa449a7e41a39bf176da3419793a7."
         }
       },
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -18131,7 +18461,9 @@
       "repo": "fap-api",
       "branch": "codex/pr-audit-be-01-ci-supply-chain",
       "status": "merged",
-      "depends_on": [],
+      "depends_on": [
+
+      ],
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1644",
       "checks": {
         "local": {
@@ -18147,7 +18479,9 @@
             "ruby -e JSON state parse",
             "git diff --check"
           ],
-          "failed": []
+          "failed": [
+
+          ]
         },
         "github_required_checks": {
           "status": "passed",
@@ -18160,14 +18494,18 @@
             "semgrep sarif non-blocking upload",
             "Semgrep OSS"
           ],
-          "failed": []
+          "failed": [
+
+          ]
         }
       },
       "failure_reason": null,
       "merged_at": "2026-05-24T07:37:28Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": false,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "events": [
         {
           "at": "2026-05-24T07:16:21.665+00:00",
@@ -18244,7 +18582,9 @@
             "verify-mbti-legacy",
             "verify-mbti-v2"
           ],
-          "failed": [],
+          "failed": [
+
+          ],
           "evidence": "PR #1645 passed required GitHub checks and was squash-merged as 0338122739bbe4fd9645943d4f08372a3881f560."
         },
         "runtime_freeze_ci_fix": {
@@ -18374,7 +18714,9 @@
             "verify-mbti-legacy",
             "verify-mbti-v2"
           ],
-          "failed": [],
+          "failed": [
+
+          ],
           "evidence": "GitHub required checks passed on PR #1648 after adding the scoped runtime-freeze classifier evidence for the attempt_quality retirement migration."
         },
         "github_required_checks": {
@@ -18389,7 +18731,9 @@
             "verify-mbti-legacy",
             "verify-mbti-v2"
           ],
-          "failed": [],
+          "failed": [
+
+          ],
           "evidence": "GitHub PR #1648 is MERGED and origin/main contains merge commit d18c0cc36a84ce50b823c995e4226b188551b0d0."
         }
       },
@@ -18397,7 +18741,9 @@
       "merged_at": "2026-05-24T09:57:44Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "events": [
         {
           "at": "2026-05-24T09:26:29.265Z",
@@ -19351,7 +19697,9 @@
       "repo": "fap-api",
       "branch": "codex/seo-growth-mbti-action-01d-scan-00",
       "status": "merged",
-      "depends_on": [],
+      "depends_on": [
+
+      ],
       "commit_sha": "8208e69422a7487d272df57107a5b5e1cacf6b68",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1661",
       "checks": {
@@ -19425,7 +19773,9 @@
       "repo": "fap-api",
       "branch": "codex/en-parity-00-full-site-inventory",
       "status": "merged",
-      "depends_on": [],
+      "depends_on": [
+
+      ],
       "commit_sha": "a95de5c9ff047851336ee1f7c35b2255ac8ba683",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1663",
       "checks": {
@@ -19718,7 +20068,9 @@
       "merged_at": "2026-05-25T05:24:17Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "events": [
         {
           "at": "2026-05-25T08:30:00+00:00",
@@ -19798,7 +20150,9 @@
       "merged_at": "2026-05-25T05:42:59Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "events": [
         {
           "at": "2026-05-25T06:10:00Z",
@@ -19878,7 +20232,9 @@
       "merged_at": "2026-05-25T06:02:20Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "events": [
         {
           "at": "2026-05-25T06:50:00Z",
@@ -19954,7 +20310,9 @@
       "merged_at": "2026-05-25T06:05:12Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "events": [
         {
           "at": "2026-05-25T05:01:32Z",
@@ -20043,7 +20401,9 @@
       "merged_at": "2026-05-25T07:00:22Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": false,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "events": [
         {
           "at": "2026-05-25T06:15:55Z",
@@ -20133,7 +20493,9 @@
       "merged_at": "2026-05-25T07:18:00Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": false,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "events": [
         {
           "at": "2026-05-25T07:10:00Z",
@@ -20207,7 +20569,9 @@
       "merged_at": "2026-05-25T07:30:44Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": false,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "events": [
         {
           "at": "2026-05-25T07:30:00Z",
@@ -20477,7 +20841,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "events": [
         {
           "at": "2026-05-25T06:15:00Z",
@@ -20515,7 +20881,9 @@
       "repo": "fap-api",
       "branch": "codex/global-en-zh-parity-scan-00",
       "status": "merged",
-      "depends_on": [],
+      "depends_on": [
+
+      ],
       "commit_sha": "87345d16c4b7b22a23ead480925bb1f4c58d2721",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1679",
       "checks": {
@@ -20653,7 +21021,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "events": [
         {
           "at": "2026-05-25T12:10:55.823326+00:00",
@@ -20778,7 +21148,9 @@
       "merged_at": "2026-05-25T16:53:34Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "events": [
         {
           "at": "2026-05-26T00:00:00+08:00",
@@ -20875,7 +21247,9 @@
       "merged_at": "2026-05-25T17:35:54Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "next_task": "GLOBAL-EN-ZH-ARTICLE-TRANSLATION-BATCH-02",
       "events": [
         {
@@ -20983,7 +21357,9 @@
       "merged_at": "2026-05-25T17:53:52Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "next_task": "GLOBAL-EN-ZH-TOPIC-TEST-LANDING-BATCH-03",
       "events": [
         {
@@ -21098,7 +21474,9 @@
       "merged_at": "2026-05-25T18:07:37Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "next_task": "GLOBAL-EN-ZH-RESEARCH-CLAIM-REVIEW-BATCH-04",
       "events": [
         {
@@ -21210,7 +21588,9 @@
       "merged_at": "2026-05-25T18:21:07Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "next_task": "GLOBAL-EN-ZH-CAREER-CONTENT-BATCH-05",
       "events": [
         {
@@ -21329,7 +21709,9 @@
       "merged_at": "2026-05-25T18:36:38Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "next_task": "GLOBAL-EN-ZH-RESULT-REPORT-ASSET-BATCH-06",
       "events": [
         {
@@ -21436,7 +21818,9 @@
       "merged_at": "2026-05-26T00:00:16Z",
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "next_task": "GLOBAL-EN-ZH-MEDIA-ALT-VISUAL-REVIEW-BATCH-07",
       "events": [
         {
@@ -21533,7 +21917,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "next_task": "GLOBAL-EN-ZH-GLOBAL-UI-I18N-BATCH-08",
       "events": [
         {
@@ -21600,7 +21986,9 @@
       "merged_at": null,
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
-      "sidecar_issues": [],
+      "sidecar_issues": [
+
+      ],
       "next_task": "GLOBAL-EN-ZH-FULL-PARITY-VERIFY-POST-BATCH",
       "events": [
         {
@@ -22307,7 +22695,9 @@
       "remote_branch_deleted": false,
       "local_cleanup_executed": true,
       "next_task": "DETAIL_READY_1048_DELTA_AUTHORITY_REPAIR-01",
-      "sidecars": [],
+      "sidecars": [
+
+      ],
       "transitions": [
         {
           "at": "2026-05-28T09:51:44Z",
@@ -22333,7 +22723,9 @@
       "base": "main",
       "title": "CAREER-1046-OPS-READ-MODEL-REPAIR-01 career runtime read model repair",
       "status": "merged",
-      "depends_on": [],
+      "depends_on": [
+
+      ],
       "checks": {
         "focused_phpunit": {
           "status": "pass",
@@ -22451,7 +22843,9 @@
           "note": "PR #1784 checks passed, squash merged at 530f412f8996b8223a2c6a36dd93fee5d3135584, remote branch deleted, local branch deleted, and post-merge focused test passed."
         }
       ],
-      "sidecars": [],
+      "sidecars": [
+
+      ],
       "next_task": "CAREER-1046-OBSERVABILITY-SLO-01",
       "merge_commit_sha": "530f412f8996b8223a2c6a36dd93fee5d3135584"
     },
@@ -22555,7 +22949,9 @@
           "note": "PR #1794 checks passed, squash merged at 1f6694b12db6a4f35c65f2fe5e753243bce01eae, remote branch deleted, local branch deleted, and post-merge focused test passed."
         }
       ],
-      "sidecars": [],
+      "sidecars": [
+
+      ],
       "next_task": "PR-HIRING-01",
       "merge_commit_sha": "1f6694b12db6a4f35c65f2fe5e753243bce01eae"
     },
@@ -22659,7 +23055,9 @@
           "note": "PR #1795 checks passed, squash merged at 6b50e9ab5ed00c2bfc0365d0d4ffc48a8696f58e, remote branch deleted, local branch deleted, and post-merge focused test passed."
         }
       ],
-      "sidecars": [],
+      "sidecars": [
+
+      ],
       "next_task": "CAREER-1046-INTERNAL-LINKING-AUTHORITY-01",
       "merge_commit_sha": "6b50e9ab5ed00c2bfc0365d0d4ffc48a8696f58e"
     },
@@ -22758,7 +23156,9 @@
           "note": "Reconciled already-merged fap-api PR #1798 before resuming CAREER-L3-DYNAMIC-SLOT-ARCHITECTURE-01."
         }
       ],
-      "sidecars": [],
+      "sidecars": [
+
+      ],
       "next_task": "CAREER-1046-FRONTEND-DISCOVERY-UX-01",
       "merge_sha": "38d0c8a7646d9e8264c62694c60a8445d3623096"
     },
@@ -22798,7 +23198,9 @@
           "note": "Reconciled fap-web PR #939 as merged before resuming dependent fap-api PR6."
         }
       ],
-      "sidecars": [],
+      "sidecars": [
+
+      ],
       "next_task": "CAREER-L3-DYNAMIC-SLOT-ARCHITECTURE-01",
       "merge_sha": "7626b901d77a5191a1b9211fd0b9a91c854a6c4f"
     },
@@ -23041,7 +23443,9 @@
       "base": "main",
       "title": "IQ-NORM-01 add IQ norm calibration authority",
       "status": "merged",
-      "depends_on": [],
+      "depends_on": [
+
+      ],
       "checks": {
         "local": {
           "status": "passed",
@@ -23353,7 +23757,8 @@
       "depends_on": [
         "IQ-NORM-03"
       ],
-      "checks": {},
+      "checks": {
+      },
       "failure_reason": null,
       "merged_at": "2026-05-31T15:48:58Z",
       "remote_branch_deleted": true,
@@ -23391,7 +23796,8 @@
       "depends_on": [
         "IQ-PAID-REPORT-01"
       ],
-      "checks": {},
+      "checks": {
+      },
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -23487,7 +23893,8 @@
       "depends_on": [
         "IQ-CMS-MEDIA-01"
       ],
-      "checks": {},
+      "checks": {
+      },
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -23609,7 +24016,8 @@
       "depends_on": [
         "IQ-SEO-RAMP-01"
       ],
-      "checks": {},
+      "checks": {
+      },
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -23775,7 +24183,8 @@
       "depends_on": [
         "IQ-OBS-01"
       ],
-      "checks": {},
+      "checks": {
+      },
       "failure_reason": null,
       "merged_at": null,
       "remote_branch_deleted": false,
@@ -23802,7 +24211,9 @@
       "base": "main",
       "title": "CLINICAL-LAUNCH-01 mental-health launch authority state machine",
       "status": "ci_fix_in_progress",
-      "depends_on": [],
+      "depends_on": [
+
+      ],
       "checks": {
         "focused_phpunit": {
           "status": "pass",
@@ -23896,7 +24307,8 @@
       "depends_on": [
         "CLINICAL-LAUNCH-01"
       ],
-      "checks": {},
+      "checks": {
+      },
       "failure_reason": null,
       "commit_sha": null,
       "pr_url": null,
@@ -23909,8 +24321,12 @@
         "github_checks_green": null,
         "post_merge_revalidated": null
       },
-      "transitions": [],
-      "sidecars": [],
+      "transitions": [
+
+      ],
+      "sidecars": [
+
+      ],
       "next_task": "CLINICAL-LAUNCH-03"
     },
     "CLINICAL-LAUNCH-03": {
@@ -23923,7 +24339,8 @@
       "depends_on": [
         "CLINICAL-LAUNCH-02"
       ],
-      "checks": {},
+      "checks": {
+      },
       "failure_reason": null,
       "commit_sha": null,
       "pr_url": null,
@@ -23936,8 +24353,12 @@
         "github_checks_green": null,
         "post_merge_revalidated": null
       },
-      "transitions": [],
-      "sidecars": [],
+      "transitions": [
+
+      ],
+      "sidecars": [
+
+      ],
       "next_task": "CLINICAL-LAUNCH-04"
     },
     "CLINICAL-LAUNCH-04": {
@@ -23950,7 +24371,8 @@
       "depends_on": [
         "CLINICAL-LAUNCH-03"
       ],
-      "checks": {},
+      "checks": {
+      },
       "failure_reason": null,
       "commit_sha": null,
       "pr_url": null,
@@ -23963,8 +24385,12 @@
         "github_checks_green": null,
         "post_merge_revalidated": null
       },
-      "transitions": [],
-      "sidecars": [],
+      "transitions": [
+
+      ],
+      "sidecars": [
+
+      ],
       "next_task": "CLINICAL-LAUNCH-05"
     },
     "CLINICAL-LAUNCH-05": {
@@ -23977,7 +24403,8 @@
       "depends_on": [
         "CLINICAL-LAUNCH-04"
       ],
-      "checks": {},
+      "checks": {
+      },
       "failure_reason": null,
       "commit_sha": null,
       "pr_url": null,
@@ -23990,8 +24417,12 @@
         "github_checks_green": null,
         "post_merge_revalidated": null
       },
-      "transitions": [],
-      "sidecars": [],
+      "transitions": [
+
+      ],
+      "sidecars": [
+
+      ],
       "next_task": "CLINICAL-LAUNCH-06"
     },
     "CLINICAL-LAUNCH-06": {
@@ -24004,7 +24435,8 @@
       "depends_on": [
         "CLINICAL-LAUNCH-05"
       ],
-      "checks": {},
+      "checks": {
+      },
       "failure_reason": null,
       "commit_sha": null,
       "pr_url": null,
@@ -24017,8 +24449,12 @@
         "github_checks_green": null,
         "post_merge_revalidated": null
       },
-      "transitions": [],
-      "sidecars": [],
+      "transitions": [
+
+      ],
+      "sidecars": [
+
+      ],
       "next_task": "CLINICAL-LAUNCH-07"
     },
     "CLINICAL-LAUNCH-07": {
@@ -24031,7 +24467,8 @@
       "depends_on": [
         "CLINICAL-LAUNCH-06"
       ],
-      "checks": {},
+      "checks": {
+      },
       "failure_reason": null,
       "commit_sha": null,
       "pr_url": null,
@@ -24044,8 +24481,12 @@
         "github_checks_green": null,
         "post_merge_revalidated": null
       },
-      "transitions": [],
-      "sidecars": [],
+      "transitions": [
+
+      ],
+      "sidecars": [
+
+      ],
       "next_task": "CLINICAL-LAUNCH-08"
     },
     "CLINICAL-LAUNCH-08": {
@@ -24058,7 +24499,8 @@
       "depends_on": [
         "CLINICAL-LAUNCH-07"
       ],
-      "checks": {},
+      "checks": {
+      },
       "failure_reason": null,
       "commit_sha": null,
       "pr_url": null,
@@ -24071,8 +24513,12 @@
         "github_checks_green": null,
         "post_merge_revalidated": null
       },
-      "transitions": [],
-      "sidecars": [],
+      "transitions": [
+
+      ],
+      "sidecars": [
+
+      ],
       "next_task": "CLINICAL-LAUNCH-09"
     },
     "CLINICAL-LAUNCH-09": {
@@ -24085,7 +24531,8 @@
       "depends_on": [
         "CLINICAL-LAUNCH-08"
       ],
-      "checks": {},
+      "checks": {
+      },
       "failure_reason": null,
       "commit_sha": null,
       "pr_url": null,
@@ -24098,8 +24545,12 @@
         "github_checks_green": null,
         "post_merge_revalidated": null
       },
-      "transitions": [],
-      "sidecars": [],
+      "transitions": [
+
+      ],
+      "sidecars": [
+
+      ],
       "next_task": "CLINICAL-LAUNCH-10"
     },
     "CLINICAL-LAUNCH-10": {
@@ -24112,7 +24563,8 @@
       "depends_on": [
         "CLINICAL-LAUNCH-09"
       ],
-      "checks": {},
+      "checks": {
+      },
       "failure_reason": null,
       "commit_sha": null,
       "pr_url": null,
@@ -24125,8 +24577,12 @@
         "github_checks_green": null,
         "post_merge_revalidated": null
       },
-      "transitions": [],
-      "sidecars": [],
+      "transitions": [
+
+      ],
+      "sidecars": [
+
+      ],
       "next_task": "CLINICAL-LAUNCH-11"
     },
     "CLINICAL-LAUNCH-11": {
@@ -24139,7 +24595,8 @@
       "depends_on": [
         "CLINICAL-LAUNCH-10"
       ],
-      "checks": {},
+      "checks": {
+      },
       "failure_reason": null,
       "commit_sha": null,
       "pr_url": null,
@@ -24152,8 +24609,12 @@
         "github_checks_green": null,
         "post_merge_revalidated": null
       },
-      "transitions": [],
-      "sidecars": [],
+      "transitions": [
+
+      ],
+      "sidecars": [
+
+      ],
       "next_task": "CLINICAL-LAUNCH-12"
     },
     "CLINICAL-LAUNCH-12": {
@@ -24166,7 +24627,8 @@
       "depends_on": [
         "CLINICAL-LAUNCH-11"
       ],
-      "checks": {},
+      "checks": {
+      },
       "failure_reason": null,
       "commit_sha": null,
       "pr_url": null,
@@ -24179,8 +24641,12 @@
         "github_checks_green": null,
         "post_merge_revalidated": null
       },
-      "transitions": [],
-      "sidecars": [],
+      "transitions": [
+
+      ],
+      "sidecars": [
+
+      ],
       "next_task": "CLINICAL-LAUNCH-13"
     },
     "CLINICAL-LAUNCH-13": {
@@ -24193,7 +24659,8 @@
       "depends_on": [
         "CLINICAL-LAUNCH-12"
       ],
-      "checks": {},
+      "checks": {
+      },
       "failure_reason": null,
       "commit_sha": null,
       "pr_url": null,
@@ -24206,8 +24673,12 @@
         "github_checks_green": null,
         "post_merge_revalidated": null
       },
-      "transitions": [],
-      "sidecars": [],
+      "transitions": [
+
+      ],
+      "sidecars": [
+
+      ],
       "next_task": "CLINICAL-LAUNCH-14"
     },
     "CLINICAL-LAUNCH-14": {
@@ -24220,7 +24691,8 @@
       "depends_on": [
         "CLINICAL-LAUNCH-13"
       ],
-      "checks": {},
+      "checks": {
+      },
       "failure_reason": null,
       "commit_sha": null,
       "pr_url": null,
@@ -24233,8 +24705,12 @@
         "github_checks_green": null,
         "post_merge_revalidated": null
       },
-      "transitions": [],
-      "sidecars": [],
+      "transitions": [
+
+      ],
+      "sidecars": [
+
+      ],
       "next_task": "CLINICAL-LAUNCH-15"
     },
     "CLINICAL-LAUNCH-15": {
@@ -24247,7 +24723,8 @@
       "depends_on": [
         "CLINICAL-LAUNCH-14"
       ],
-      "checks": {},
+      "checks": {
+      },
       "failure_reason": null,
       "commit_sha": null,
       "pr_url": null,
@@ -24260,8 +24737,12 @@
         "github_checks_green": null,
         "post_merge_revalidated": null
       },
-      "transitions": [],
-      "sidecars": [],
+      "transitions": [
+
+      ],
+      "sidecars": [
+
+      ],
       "next_task": "CLINICAL-LAUNCH-16"
     },
     "CLINICAL-LAUNCH-16": {
@@ -24274,7 +24755,8 @@
       "depends_on": [
         "CLINICAL-LAUNCH-15"
       ],
-      "checks": {},
+      "checks": {
+      },
       "failure_reason": null,
       "commit_sha": null,
       "pr_url": null,
@@ -24287,8 +24769,12 @@
         "github_checks_green": null,
         "post_merge_revalidated": null
       },
-      "transitions": [],
-      "sidecars": [],
+      "transitions": [
+
+      ],
+      "sidecars": [
+
+      ],
       "next_task": "CLINICAL-LAUNCH-17"
     },
     "CLINICAL-LAUNCH-17": {
@@ -24301,7 +24787,8 @@
       "depends_on": [
         "CLINICAL-LAUNCH-16"
       ],
-      "checks": {},
+      "checks": {
+      },
       "failure_reason": null,
       "commit_sha": null,
       "pr_url": null,
@@ -24314,8 +24801,12 @@
         "github_checks_green": null,
         "post_merge_revalidated": null
       },
-      "transitions": [],
-      "sidecars": [],
+      "transitions": [
+
+      ],
+      "sidecars": [
+
+      ],
       "next_task": "CLINICAL-LAUNCH-18"
     },
     "CLINICAL-LAUNCH-18": {
@@ -24328,7 +24819,8 @@
       "depends_on": [
         "CLINICAL-LAUNCH-17"
       ],
-      "checks": {},
+      "checks": {
+      },
       "failure_reason": null,
       "commit_sha": null,
       "pr_url": null,
@@ -24341,8 +24833,12 @@
         "github_checks_green": null,
         "post_merge_revalidated": null
       },
-      "transitions": [],
-      "sidecars": [],
+      "transitions": [
+
+      ],
+      "sidecars": [
+
+      ],
       "next_task": "CLINICAL-LAUNCH-19"
     },
     "CLINICAL-LAUNCH-19": {
@@ -24355,7 +24851,8 @@
       "depends_on": [
         "CLINICAL-LAUNCH-18"
       ],
-      "checks": {},
+      "checks": {
+      },
       "failure_reason": null,
       "commit_sha": null,
       "pr_url": null,
@@ -24368,8 +24865,12 @@
         "github_checks_green": null,
         "post_merge_revalidated": null
       },
-      "transitions": [],
-      "sidecars": [],
+      "transitions": [
+
+      ],
+      "sidecars": [
+
+      ],
       "next_task": "CLINICAL-LAUNCH-20"
     },
     "CLINICAL-LAUNCH-20": {
@@ -24382,7 +24883,8 @@
       "depends_on": [
         "CLINICAL-LAUNCH-19"
       ],
-      "checks": {},
+      "checks": {
+      },
       "failure_reason": null,
       "commit_sha": null,
       "pr_url": null,
@@ -24395,8 +24897,12 @@
         "github_checks_green": null,
         "post_merge_revalidated": null
       },
-      "transitions": [],
-      "sidecars": [],
+      "transitions": [
+
+      ],
+      "sidecars": [
+
+      ],
       "next_task": "CLINICAL-MH-LAUNCH-TRAIN-CLOSEOUT"
     },
     "ANALYTICS-FUNNEL-REPORT-READY-PROJECTION-MAPPING-02": {
@@ -24498,7 +25004,9 @@
     "merged_at": "2026-05-18T16:21:48Z",
     "remote_branch_deleted": true,
     "local_cleanup_executed": true,
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "metadata": {
       "dependency": "SEO-DASH-PROD-03D-SCAN",
       "production_write_execution": false,
@@ -24633,7 +25141,9 @@
     "branch": "codex/ops-ci-codescan-api-01",
     "base": "main",
     "title": "chore(ci): enable code scanning for fap-api",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "commit_sha": "962be45f81044d1eec60088ef34235f8e020032e",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1476",
     "checks": {
@@ -24643,7 +25153,8 @@
         "git_diff_check": "passed",
         "scope_validation": "passed"
       },
-      "github": {}
+      "github": {
+      }
     },
     "failure_reason": null,
     "merged_at": null,
@@ -24694,7 +25205,9 @@
     "branch": "codex/ops-ci-codescan-api-02",
     "base": "main",
     "title": "fix(ci): eliminate CiScaleImpact Semgrep findings",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "commit_sha": "a194a0bb1d0cf83e130cce205cb9410cb48d725b",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1607",
     "checks": {
@@ -24716,7 +25229,9 @@
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "history": [
       {
         "at": "2026-05-23T13:40:00+08:00",
@@ -24768,7 +25283,9 @@
     "merged_at": "2026-05-19T04:08:06Z",
     "remote_branch_deleted": true,
     "local_cleanup_executed": true,
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "history": [
       {
         "at": "2026-05-19T04:00:51.285Z",
@@ -24819,13 +25336,16 @@
         "git_diff_check": "passed",
         "scope_validation": "passed"
       },
-      "github": {}
+      "github": {
+      }
     },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "history": [
       {
         "at": "2026-05-19T04:10:16.588Z",
@@ -24894,7 +25414,9 @@
     "merged_at": "2026-05-19T15:24:19Z",
     "remote_branch_deleted": true,
     "local_cleanup_executed": true,
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "history": [
       {
         "at": "2026-05-19T15:00:00Z",
@@ -24972,7 +25494,9 @@
     "merged_at": "2026-05-19T15:41:57Z",
     "remote_branch_deleted": true,
     "local_cleanup_executed": true,
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "history": [
       {
         "at": "2026-05-19T15:00:00Z",
@@ -25054,7 +25578,9 @@
     "merged_at": "2026-05-19T20:45:57Z",
     "remote_branch_deleted": true,
     "local_cleanup_executed": true,
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "history": [
       {
         "at": "2026-05-19T20:06:36Z",
@@ -25138,7 +25664,9 @@
     "merged_at": "2026-05-19T21:11:58Z",
     "remote_branch_deleted": true,
     "local_cleanup_executed": true,
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "history": [
       {
         "at": "2026-05-19T20:06:36Z",
@@ -25235,7 +25763,9 @@
     "merged_at": "2026-05-19T22:39:08Z",
     "remote_branch_deleted": true,
     "local_cleanup_executed": true,
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "history": [
       {
         "at": "2026-05-19T20:06:36Z",
@@ -25334,7 +25864,9 @@
     "merged_at": "2026-05-19T22:55:01Z",
     "remote_branch_deleted": true,
     "local_cleanup_executed": true,
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "history": [
       {
         "at": "2026-05-19T22:39:08Z",
@@ -25424,7 +25956,9 @@
     "merged_at": "2026-05-19T23:15:17Z",
     "remote_branch_deleted": true,
     "local_cleanup_executed": true,
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "history": [
       {
         "at": "2026-05-19T22:39:08Z",
@@ -25512,7 +26046,9 @@
     "merged_at": "2026-05-19T23:24:32Z",
     "remote_branch_deleted": true,
     "local_cleanup_executed": true,
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "history": [
       {
         "at": "2026-05-19T23:15:17Z",
@@ -25597,7 +26133,9 @@
     "merged_at": "2026-05-19T23:40:38Z",
     "remote_branch_deleted": true,
     "local_cleanup_executed": true,
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "history": [
       {
         "at": "2026-05-19T23:15:17Z",
@@ -25685,7 +26223,9 @@
     "merged_at": "2026-05-20T00:07:13Z",
     "remote_branch_deleted": true,
     "local_cleanup_executed": true,
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "history": [
       {
         "at": "2026-05-19T23:55:28Z",
@@ -25760,7 +26300,9 @@
     "merged_at": "2026-05-20T00:24:00Z",
     "remote_branch_deleted": true,
     "local_cleanup_executed": true,
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "history": [
       {
         "at": "2026-05-19T23:55:28Z",
@@ -26040,7 +26582,9 @@
     "merged_at": "2026-05-20T01:58:13Z",
     "remote_branch_deleted": true,
     "local_cleanup_executed": true,
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "history": [
       {
         "at": "2026-05-20T01:44:34Z",
@@ -26131,7 +26675,9 @@
     "merged_at": "2026-05-20T02:44:41Z",
     "remote_branch_deleted": true,
     "local_cleanup_executed": true,
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "history": [
       {
         "at": "2026-05-20T02:16:00Z",
@@ -26672,7 +27218,9 @@
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "history": [
       {
         "at": "2026-05-20T11:20:00+08:00",
@@ -29020,7 +29568,9 @@
       "repo": "fap-api",
       "branch": "codex/ops-admin-ui-01-table-toolbar",
       "status": "pr_opened",
-      "depends_on": [],
+      "depends_on": [
+
+      ],
       "commit_sha": null,
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1750",
       "checks": {
@@ -29885,7 +30435,9 @@
       "repo": "fap-api",
       "branch": "codex/global-en-zh-human-review-import-queue-00",
       "base": "main",
-      "depends_on": [],
+      "depends_on": [
+
+      ],
       "title": "GLOBAL-EN-ZH-HUMAN-REVIEW-IMPORT-QUEUE-00 consolidated review queue",
       "commit_sha": "e934e8a5617ec669f6f326e1177e0c6044f9cb22",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1699",
@@ -30858,7 +31410,9 @@
       "remote_branch_deleted": false,
       "local_cleanup_executed": false,
       "next_task": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_SOURCE_REPAIR-01",
-      "sidecars": [],
+      "sidecars": [
+
+      ],
       "transitions": [
         {
           "at": "2026-05-28T18:48:00+08:00",
@@ -30942,7 +31496,9 @@
       "remote_branch_deleted": true,
       "local_cleanup_executed": true,
       "next_task": "RESULT-EMAIL-GATE-POLICY-02",
-      "sidecars": [],
+      "sidecars": [
+
+      ],
       "transitions": [
         {
           "at": "2026-05-29T00:36:09+08:00",
@@ -31823,7 +32379,9 @@
     "merged_at": "2026-05-25T07:03:57Z",
     "remote_branch_deleted": true,
     "local_cleanup_executed": true,
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "events": [
       {
         "at": "2026-05-25T06:55:00Z",
@@ -31901,7 +32459,9 @@
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "events": [
       {
         "at": "2026-05-25T07:20:00Z",
@@ -31924,7 +32484,9 @@
     "repo": "fap-api",
     "branch": "codex/marketingskills-fermatmind-fit-scan-00",
     "status": "merged",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "commit_sha": "2d08bb46555389226adf6dbce80dcc9111e2b82a",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1680",
     "checks": {
@@ -32121,7 +32683,9 @@
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "events": [
       {
         "at": "2026-05-25T21:45:00+08:00",
@@ -33588,7 +34152,9 @@
           "docs/codex/pr-train.yaml",
           "docs/codex/pr-train-state.json"
         ],
-        "outside_scope": []
+        "outside_scope": [
+
+        ]
       },
       "github": {
         "status": "passed",
@@ -33683,7 +34249,9 @@
           "backend/tests/Unit/Domain/Career/Audit/CareerRuntimeCandidatePrepPlannerTest.php",
           "docs/codex/pr-train-state.json"
         ],
-        "outside_scope": []
+        "outside_scope": [
+
+        ]
       },
       "github": {
         "status": "passed",
@@ -33804,7 +34372,9 @@
           "backend/tests/Unit/Domain/Career/Audit/CareerRuntimeArtifactRefreshPlannerTest.php",
           "docs/codex/pr-train-state.json"
         ],
-        "outside_scope": [],
+        "outside_scope": [
+
+        ],
         "diff_checks": [
           "git diff --check",
           "git diff --cached --check"
@@ -33895,7 +34465,9 @@
           "docs/codex/pr-train.yaml",
           "docs/codex/pr-train-state.json"
         ],
-        "outside_scope": []
+        "outside_scope": [
+
+        ]
       },
       "github": {
         "status": "passed",
@@ -33991,7 +34563,9 @@
           "backend/tests/Unit/Domain/Career/Audit/CareerDeltaRolloutManifestPlannerTest.php",
           "docs/codex/pr-train-state.json"
         ],
-        "outside_scope": [],
+        "outside_scope": [
+
+        ],
         "diff_checks": [
           "git diff --check",
           "git diff --cached --check"
@@ -34074,7 +34648,9 @@
           "backend/tests/Unit/Domain/Career/Audit/CareerProgressiveCohortCloseoutPlannerTest.php",
           "docs/codex/pr-train-state.json"
         ],
-        "outside_scope": [],
+        "outside_scope": [
+
+        ],
         "diff_checks": [
           "git diff --check",
           "git diff --cached --check"
@@ -34115,7 +34691,9 @@
     "branch": "codex/take-en-question-locale-scan-00",
     "base": "main",
     "status": "merged",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "title": "TAKE-EN-QUESTION-LOCALE-SCAN-00 take flow EN/ZH question locale scan",
     "commit_sha": "75b26a54aa2e66cb892d58e88b526f7848d6ac4c",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1732",
@@ -34144,7 +34722,9 @@
           "docs/codex/pr-train-state.json",
           "docs/codex/pr-train.yaml"
         ],
-        "outside_scope": [],
+        "outside_scope": [
+
+        ],
         "evidence": "Changed files are confined to read-only scan artifacts, focused test, and PR train metadata."
       },
       "local_validation": {
@@ -34258,7 +34838,9 @@
           "docs/codex/pr-train-state.json",
           "docs/codex/pr-train.yaml"
         ],
-        "outside_scope": [],
+        "outside_scope": [
+
+        ],
         "evidence": "Final branch diff is confined to MBTI controller projection, MBTI English sidecar pack data, focused test, and PR train metadata; shared QuestionsService is no longer in the branch diff."
       },
       "local_validation": {
@@ -34389,7 +34971,9 @@
           "docs/codex/pr-train.yaml",
           "docs/codex/pr-train-state.json"
         ],
-        "outside_scope": [],
+        "outside_scope": [
+
+        ],
         "changed_files": [
           "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
           "docs/codex/pr-train-state.json",
@@ -34533,7 +35117,9 @@
           "docs/codex/pr-train.yaml",
           "docs/codex/pr-train-state.json"
         ],
-        "outside_scope": [],
+        "outside_scope": [
+
+        ],
         "changed_files": [
           "backend/content_packs/ENNEAGRAM/v1-forced-choice-144/compiled/manifest.json",
           "backend/content_packs/ENNEAGRAM/v1-forced-choice-144/compiled/questions.compiled.json",
@@ -34721,7 +35307,9 @@
       "git_diff_check": "passed",
       "git_diff_cached_check": "passed"
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "next_task": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_SOURCE_CONTROLLED_IMPORT-01",
     "merge_commit": "54b47ccc27aa556e5d0596cee72245a66bbb3df3"
   },
@@ -34836,7 +35424,9 @@
     "base": "main",
     "title": "DETAIL_READY_1048_REPLACEMENT_AUTHORITY_INDEX_STATE_CONFLICT-01 replacement index-state runtime projection conflict report",
     "status": "merged",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "commit_sha": "05f7dda0b1350e523c02ea38daccbbedd91ce7e4",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1745",
     "checks": [
@@ -34912,7 +35502,9 @@
       "git_diff_check": "passed",
       "git_diff_cached_check": "passed"
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "next_task": "DETAIL_READY_1048_DELTA_AUTHORITY_REPAIR-01 or 1047 target decision"
   },
   "DETAIL_READY_1047_DELTA_AUTHORITY_REPAIR-01": {
@@ -34922,7 +35514,9 @@
     "base": "main",
     "title": "DETAIL_READY_1047_DELTA_AUTHORITY_REPAIR-01 clean 1047 delta authority manifest",
     "status": "merged",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "commit_sha": "e5cbc6816d70383ad33c9da985bd76d6c00c3b73",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1746",
     "checks": [
@@ -35003,7 +35597,9 @@
       "git_diff_check": "passed",
       "git_diff_cached_check": "passed"
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "next_task": "Select one clean replacement or approve 1046/hold decision before apply preflight"
   },
   "DETAIL_READY_1046_DELTA_AUTHORITY_REPAIR-01": {
@@ -35013,7 +35609,9 @@
     "base": "main",
     "title": "DETAIL_READY_1046_DELTA_AUTHORITY_REPAIR-01 clean 1046 delta authority manifest",
     "status": "merged",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "commit_sha": "6716bf50c3cd22691d4609434f8a2b12442b2c8a",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1747",
     "checks": [
@@ -35094,7 +35692,9 @@
       "git_diff_check": "passed",
       "git_diff_cached_check": "passed"
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "next_task": "DETAIL_READY_1046_ROLLOUT_APPLY_PREFLIGHT-01 explicit approval required before any apply"
   },
   "DETAIL_READY_1046_ROLLOUT_APPLY_PREFLIGHT-01": {
@@ -35104,7 +35704,9 @@
     "base": "main",
     "title": "DETAIL_READY_1046_ROLLOUT_APPLY_PREFLIGHT-01 production preflight for clean 1046 rollout apply",
     "status": "merged",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "commit_sha": "67e95aac7a4344a407c5c1b563c4131a27d2d7aa",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1748",
     "checks": [
@@ -35190,7 +35792,9 @@
       "git_diff_check": "passed",
       "git_diff_cached_check": "passed"
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "next_task": "DEPLOY-READINESS | Deploy fap-api PR #1747 before rerunning apply preflight"
   },
   "DETAIL_READY_1046_ROLLOUT_NO_AUDIT_DRY_RUN-01": {
@@ -35200,7 +35804,9 @@
     "base": "main",
     "title": "DETAIL_READY_1046_ROLLOUT_NO_AUDIT_DRY_RUN-01 no-write career rollout dry-run",
     "status": "merged",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "commit_sha": "09ec7f599b05d7d555ad186af81633010f5c47f3",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1749",
     "checks": [
@@ -35276,7 +35882,9 @@
       "git_diff_check": "passed",
       "git_diff_cached_check": "passed"
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "next_task": "DETAIL_READY_1046_ROLLOUT_APPLY_PREFLIGHT-01 rerun production no-write preflight after deploy"
   },
   "CAREER-1046-OPS-SCOPE-RECONCILIATION-01": {
@@ -35286,7 +35894,9 @@
     "base": "main",
     "title": "CAREER-1046-OPS-SCOPE-RECONCILIATION-01 reconcile public 1046 career runtime with CMS/Ops 378 scope",
     "status": "completed",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "commit_sha": "e30f96f4e068c2a7b62e1fe67950ffab6b061c72",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1754",
     "checks": [
@@ -35397,7 +36007,9 @@
       "git_diff_check": "passed",
       "git_diff_cached_check": "passed"
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "next_task": "CAREER-1046-OPS-READ-MODEL-REPAIR-01 explicit approval required before implementation"
   },
   "ANALYTICS-FUNNEL-EVENT-TAXONOMY-01": {
@@ -35407,7 +36019,9 @@
     "base": "main",
     "title": "ANALYTICS-FUNNEL-EVENT-TAXONOMY-01 unify canonical funnel event taxonomy",
     "status": "ci_fix_local_checks_passed",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "commit_sha": "265e1dcc58edd5a122627ff0e61594c5e3dbeeab",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1761",
     "checks": [
@@ -35611,7 +36225,9 @@
       "git_diff_check": "passed",
       "git_diff_cached_check": true
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "next_task": "Phase 3 ContentPacksIndex responsibility shrink requires explicit authorization"
   },
   "ANALYTICS-FUNNEL-OPS-READ-MODEL-REPAIR-01": {
@@ -35754,7 +36370,9 @@
       "git_diff_check": "passed",
       "git_diff_cached_check": "passed"
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "next_task": "ANALYTICS-FUNNEL-CONTROLLED-REFRESH-PREFLIGHT-01"
   },
   "ANALYTICS-FUNNEL-REFRESH-DRY-RUN-SQL-FIX-01": {
@@ -36472,7 +37090,9 @@
     "base": "main",
     "title": "OPS-API-INTERNAL-RESOLVE-PROOF Node1 API access stability proof",
     "status": "pr_opened_with_sidecars",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "commit_sha": "93556a55fbcf71aa998566eb4f276218cda48788",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1840",
     "checks": [
@@ -36699,7 +37319,9 @@
       "git_diff_check": "passed",
       "git_diff_cached_check": "passed"
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "next_task": "deploy-readiness required after merge"
   },
   "PAYMENT-ALIPAY-SCHEDULER-BOOTSTRAP-02": {
@@ -36811,7 +37433,9 @@
         "summary": "Opened PR https://github.com/fermatmind/fap-api/pull/1774 after local validation passed."
       }
     ],
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "next_task": "Run validation, open PR, and after merge perform deploy-readiness plus production scheduler runner verification."
   },
   "OPS-RELEASE-TRAIN-BACKEND-DEPLOY-ADAPTER-01": {
@@ -36937,7 +37561,9 @@
         "summary": "Opened PR https://github.com/fermatmind/fap-api/pull/1770 after local validation passed; no deploy performed."
       }
     ],
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "next_task": "Wait for GitHub checks and Codex final review; do not merge or deploy from this PR."
   },
   "OPS-RELEASE-TRAIN-WORKFLOW-PRODUCTION-ENV-BINDING-01": {
@@ -37056,7 +37682,9 @@
         "summary": "Validated workflow binding change locally without deploy, mode=run, production approval, rollback, or production mutation."
       }
     ],
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "next_task": "Open PR and keep production deploy disabled; manual GitHub production branch restriction remains required."
   },
   "OPS-RELEASE-TRAIN-CAREER-WARM-CACHE-NONBLOCKING-01": {
@@ -37271,7 +37899,9 @@
       "git_diff_check": "passed",
       "git_diff_cached_check": null
     },
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "next_task": "BACKEND-DEPLOY-READINESS for ANALYTICS-FUNNEL-REFRESH-DRY-RUN-SQL-FIX-02",
     "reconciliation": [
       {
@@ -37488,7 +38118,9 @@
         "summary": "PR #1777 was squash-merged at 23dd1bc4c55947f0f7eda1d4499f62395fb62d81; origin/main contains the merge commit, remote branch was deleted, and local cleanup completed before starting PAYMENT-ALIPAY-OWNER-MISMATCH-CONTROLLED-REPAIR-04."
       }
     ],
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "next_task": "Controlled owner-mismatch repair only after explicit future approval."
   },
   "PAYMENT-ALIPAY-OWNER-MISMATCH-CONTROLLED-REPAIR-04": {
@@ -37876,7 +38508,9 @@
         "note": "Ledger closeout: confirmed https://github.com/fermatmind/fap-api/pull/1786 merged at 2026-05-31T07:57:19Z; origin/main contains 9e59c976a71811e76f9a70c64eb6380cf0a25878; task branch cleanup completed or remote branch absent."
       }
     ],
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "next_task": "AUDIT-SEC-PAYMENT-INTEGRITY-01",
     "merge_commit": "9e59c976a71811e76f9a70c64eb6380cf0a25878",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1786",
@@ -38402,7 +39036,9 @@
         "note": "Created PR #1804 for docs-only security audit train ledger closeout; waiting for GitHub checks."
       }
     ],
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "next_task": null,
     "github": {
       "status": "checks_pending",
@@ -38721,7 +39357,9 @@
     "base": "main",
     "status": "pr_open_checks_pending",
     "title": "docs(foundation): validate Daily Giving backend runtime",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "commit_sha": "322bf0d8f0884c48730fc23c2713710315d19863",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1833",
     "checks": {
@@ -39030,7 +39668,9 @@
     "base": "main",
     "status": "merged",
     "title": "CAREER-DIRECTORY-AUTHORITY-ARTIFACT-API-01 career directory authority artifact API",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "commit_sha": "68f2b2dfc0b3b587a53ad85dc52a4b0f4b2eabcf",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1830",
     "checks": {
@@ -39765,7 +40405,9 @@
     "base": "main",
     "status": "merged",
     "title": "CAREER-LEGACY-FULL-JOBS-INDEX-CONSUMER-AUDIT-01 legacy full jobs index consumer audit",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "commit_sha": "24288ec8713900f6709cd472b51f2d097ef263af",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1845",
     "checks": {
@@ -40300,7 +40942,9 @@
         "note": "Ledger reconciled: PR #1850 is merged, origin/main contains merge commit d176ddc4, remote branch is deleted, and post-merge focused test passed."
       }
     ],
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "next_task": "ANALYTICS-FUNNEL-WEB-EVENT-NAME-ALIGNMENT-02"
   },
   "ANALYTICS-FUNNEL-PURCHASE-REPORT-TRUTH-BRIDGE-03": {
@@ -40386,7 +41030,9 @@
         "note": "Opened https://github.com/fermatmind/fap-api/pull/1851 for GitHub checks and merge review."
       }
     ],
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "next_task": "ANALYTICS-FUNNEL-GA4-PUBLIC-EVENT-SMOKE-01"
   },
   "SEO-CMS-CANARY-PREFLIGHT-LEDGER-01": {
@@ -40431,7 +41077,9 @@
         "note": "Registered only to satisfy SEO-CMS-CANARY-DRAFT-PATH-01 dependency bookkeeping in fap-api; fap-web PR #1004 is the owning PR."
       }
     ],
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "next_task": "SEO-CMS-CANARY-DRAFT-PATH-01"
   },
   "SEO-CMS-CANARY-DRAFT-PATH-01": {
@@ -40501,7 +41149,9 @@
         "note": "Reconciled before SEO-CMS-CANARY-DRAFT-VERIFY-01: GitHub PR #1855 is MERGED with merge commit 88efaf9b6e25e1a77b775de2ff07ade65eadbda0, local main equals origin/main, and the task branch cleanup was completed."
       }
     ],
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "next_task": "Authorized importer dry-run and read-only collision check, or SEO-CMS-CANARY-PREVIEW-01 only if no safe preview alternative exists."
   },
   "SEO-CMS-CANARY-DRAFT-VERIFY-01": {
@@ -40583,7 +41233,9 @@
         "note": "Reconciled before SEO-CONTENT-CANARY-PACKAGE-01: GitHub PR #1856 is MERGED with merge commit 1e75eef2631274554a4776fcc028b2ffb0e82dbc, local main equals origin/main, and the task branch cleanup was completed."
       }
     ],
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "next_task": "SEO-CONTENT-P1-08 remains blocked unless this verification returns GO and user separately authorizes draft-only execution."
   },
   "SEO-CONTENT-CANARY-PACKAGE-01": {
@@ -40663,7 +41315,9 @@
         "note": "Reconciled before SEO-CMS-CANARY-IMPORT-DRYRUN-01: GitHub PR #1857 is MERGED with merge commit e7d5f14d55be02bd9f74bb2a9fbdd9ccd0e30be4, local main equals origin/main, and task branch cleanup was completed."
       }
     ],
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "next_task": "SEO-CMS-CANARY-IMPORT-DRYRUN-01 should run controlled importer dry-run and collision validation before any draft-only execution."
   },
   "SEO-CMS-CANARY-IMPORT-DRYRUN-01": {
@@ -40755,7 +41409,9 @@
         "note": "Reconciled before SEO-CMS-CANARY-PACKAGE-ADAPTER-01: GitHub PR #1858 is MERGED with merge commit 6b0e6584c6ed9a47b023479130c4332127f79042, local main equals origin/main, and task branch cleanup was completed."
       }
     ],
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "next_task": "SEO-CONTENT-P1-08 remains blocked. Next authorization should address package/importer schema mapping and hidden CMS/DB readonly collision verification."
   },
   "SEO-CMS-CANARY-PACKAGE-ADAPTER-01": {
@@ -40845,7 +41501,9 @@
         "note": "Reconciled before SEO-CMS-CANARY-IMPORTER-GATE-01: GitHub PR #1859 is MERGED with merge commit 2c0cf1bf81b3ff751d75112914863850c5bacf15, origin/main contains the merge commit, and the remote task branch is no longer present."
       }
     ],
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "next_task": "SEO-CONTENT-P1-08 remains blocked. Next step is either importer rule/schema mapping for the Chinese package gates or authorized operator readonly hidden collision verification after adapter/importer gates pass."
   },
   "SEO-CMS-CANARY-IMPORTER-GATE-01": {
@@ -40928,7 +41586,9 @@
         "note": "Reconciled before SEO-CMS-CANARY-OPERATOR-COLLISION-01: GitHub PR #1860 is MERGED with merge commit 26f4fec3b7112acff6d3276613b1cd57744350f9, origin/main contains the merge commit, local main equals origin/main, and local/remote task branch cleanup was completed."
       }
     ],
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "next_task": "SEO-CMS-CANARY-OPERATOR-COLLISION-01 may proceed only after this PR is merged; SEO-CONTENT-P1-08 remains blocked until hidden CMS/DB collision is operator-verified by readonly path."
   },
   "SEO-CMS-CANARY-OPERATOR-COLLISION-01": {
@@ -41091,7 +41751,9 @@
         "note": "Reconciled before SEO-CONTENT-CANARY-EN-METADATA-01: GitHub PR #1862 is merged with merge commit 52a3efa1657244e61648875e31dd2fe97d1f195b, origin/main/local main are at that SHA, and the local/remote task branches were cleaned up."
       }
     ],
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "next_task": "SEO-CONTENT-CANARY-EN-METADATA-01 may proceed to apply GPT-5.5 Pro approved English SEO metadata replacements; publish remains forbidden."
   },
   "SEO-CONTENT-CANARY-EN-METADATA-01": {
@@ -41178,7 +41840,9 @@
         "note": "Reconciled before SEO-CONTENT-P1-08-POSTCHECK-ARCHIVE-01: GitHub PR #1863 is merged with merge commit 76b40c07b5eb679e7b593aca2007a77e1e56d4d7, origin/main contains that commit, and the remote task branch is absent. Publish remains forbidden."
       }
     ],
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "next_task": "SEO-CONTENT-P1-08 draft-only execution has completed; SEO-CONTENT-P1-08-POSTCHECK-ARCHIVE-01 archives the passed postcheck report and keeps publish blocked."
   },
   "SEO-CONTENT-P1-08": {
@@ -41538,7 +42202,8 @@
     ],
     "commit_sha": "11e82c0c7000bc90f2ec550b83d80a9b941465dc",
     "pr_url": null,
-    "checks": {},
+    "checks": {
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -41580,7 +42245,8 @@
     ],
     "commit_sha": "6547f4e08aebd665da98916dd5787a4a23adfed9",
     "pr_url": null,
-    "checks": {},
+    "checks": {
+    },
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -42766,7 +43432,9 @@
         "note": "Ledger reconciliation only: PR #1873 is merged, origin/main contains merge commit 4fa540738eb90b9777cade2da6d3c9d43feb70a5, remote branch is absent, and local cleanup was executed. No runtime files changed."
       }
     ],
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "next_task": "SEO-DASH-API-01 after separate authorization.",
     "merge_commit": "4fa540738eb90b9777cade2da6d3c9d43feb70a5"
   },
@@ -42885,7 +43553,9 @@
         "note": "Reconciled merged ledger for SEO-DASH-API-01 while starting SEO-DASH-MIGRATION-01. PR #1875 merged at cf1488e4aeccee8b6a54686d731e5f1a19ecf279 and branch cleanup was complete."
       }
     ],
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "next_task": "SEO-DASH-MIGRATION-01 after separate authorization."
   },
   "SEO-DASH-MIGRATION-01": {
@@ -43006,7 +43676,9 @@
         "note": "Ledger reconciliation only: PR #1876 is merged at 09286a347cc8788ac8626c476f386da2086b6e94; branch cleanup and post-merge revalidation were already completed."
       }
     ],
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "next_task": "SEO-DASH-COLLECTOR-01 after separate production migration readiness/deploy approval",
     "merge_commit_sha": "09286a347cc8788ac8626c476f386da2086b6e94"
   },
@@ -43116,7 +43788,9 @@
         "note": "Ledger reconciliation only: PR #1880 is merged at eddebd8d2392f2416cbb1f00802a6002eed45fdf; origin/main contains the merge commit and local/remote task branch cleanup is complete."
       }
     ],
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "next_task": "approval-gated production collector dry-run/no-write smoke after separate authorization",
     "merge_commit_sha": "eddebd8d2392f2416cbb1f00802a6002eed45fdf"
   },
@@ -43225,7 +43899,9 @@
         "note": "Ledger reconciliation only: PR #1882 is merged at 1b88323eb05d579e847d37b0e89ed24464b1924c; origin/main contains the merge commit and local/remote task branch cleanup was complete before SEO-DASH-COLLECTOR-02 started."
       }
     ],
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "next_task": "SEO-DASH-COLLECTOR-02 controlled collector runbook or write gate"
   },
   "SEO-DASH-COLLECTOR-02": {
@@ -43320,7 +43996,9 @@
         "note": "Opened PR #1883: https://github.com/fermatmind/fap-api/pull/1883."
       }
     ],
-    "sidecars": [],
+    "sidecars": [
+
+    ],
     "next_task": "approval-gated url_truth_inventory controlled write canary preflight"
   },
   "SEO-ARTICLE-SYSTEM-TRAIN-01": {
@@ -43330,7 +44008,9 @@
     "status": "merged",
     "train_scope": "seo_article_system_window_6",
     "title": "docs(seo): define article system PR train",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "checks": {
       "authorization": {
         "status": "pass",
@@ -47066,7 +47746,9 @@
     "branch": "codex/seo-article-riasec-v2-package-archive-01",
     "status": "merged",
     "title": "docs(seo): archive RIASEC explanation article package v2",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "checks": {
       "authorization": {
         "status": "pass",
@@ -47197,7 +47879,9 @@
       "decision": "GO for reference/source review",
       "content_safe": true,
       "content_blocked": false,
-      "blockers": [],
+      "blockers": [
+
+      ],
       "sidecar_issues": [
         "References remain needs_source_verification and block publish until reviewed.",
         "Career hub links are conditional and must not be activated in CMS body until route eligibility is confirmed.",
@@ -51281,7 +51965,9 @@
     "status": "github_checks_passed_pending_external_merge",
     "train_scope": "sitemap_stability",
     "title": "SEO-SITEMAP-STABILITY-02: fix(seo): make backend sitemap source fail closed with fallback payload",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "checks": {
       "authorization": {
         "status": "pass",
@@ -51359,7 +52045,9 @@
     "status": "merged",
     "train_scope": "sitemap_diff_parity",
     "title": "SEO-SITEMAP-DIFF-02: fix(seo): align scale sitemap source to localized canonical test URLs",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "checks": {
       "authorization": {
         "status": "pass",
@@ -51664,7 +52352,9 @@
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "transitions": [
       {
         "at": "2026-06-09",
@@ -51791,7 +52481,9 @@
     "merged_at": "2026-06-09T04:18:01Z",
     "remote_branch_deleted": true,
     "local_cleanup_executed": true,
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "transitions": [
       {
         "at": "2026-06-09",
@@ -51919,7 +52611,9 @@
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "transitions": [
       {
         "at": "2026-06-09",
@@ -52154,7 +52848,9 @@
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "transitions": [
       {
         "at": "2026-06-09",
@@ -52190,7 +52886,9 @@
     "status": "merged",
     "train_scope": "career_zh_display_parity",
     "title": "CAREER-ZH-DISPLAY-PARITY-01: feat(career): audit zh display parity",
-    "depends_on": [],
+    "depends_on": [
+
+    ],
     "checks": {
       "authorization": {
         "status": "pass",
@@ -52257,7 +52955,9 @@
     "merged_at": "2026-06-09T15:28:28Z",
     "remote_branch_deleted": true,
     "local_cleanup_executed": true,
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "transitions": [
       {
         "at": "2026-06-09",
@@ -52300,7 +53000,7 @@
     "repo": "fap-api",
     "branch": "codex/career-zh-display-parity-02-import-manifest",
     "base": "origin/main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "career_zh_display_parity",
     "title": "CAREER-ZH-DISPLAY-PARITY-02: feat(career): support zh display import manifests",
     "depends_on": [
@@ -52360,15 +53060,25 @@
         ],
         "merge_state": "CLEAN",
         "evidence": "GitHub checks passed for PR #2021 at head cf63925061cefe8be49188f187e0453f9d656d25 and mergeStateStatus is CLEAN."
+      },
+      "merge_reconciliation": {
+        "status": "pass",
+        "evidence": "GitHub PR #2021 is MERGED at 2026-06-09T16:03:31Z; origin/main contains merge commit 205d54c2c4a907836c1d9604cecb37ce73144d47; remote branch codex/career-zh-display-parity-02-import-manifest was pruned; local task branch was cleaned up."
       }
     },
     "failure_reason": null,
-    "commit_sha": "cf63925061cefe8be49188f187e0453f9d656d25",
+    "commit_sha": "205d54c2c4a907836c1d9604cecb37ce73144d47",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2021",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
-    "sidecar_issues": [],
+    "merged_at": "2026-06-09T16:03:31Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
+    "sidecar_issues": [
+      {
+        "id": "external-primary-worktree-dirty-content-baselines-2026-06-09",
+        "status": "external_unrelated",
+        "evidence": "Primary fap-api checkout still had unrelated modified files content_baselines/content_pages/content_pages.en.json and content_pages.zh-CN.json after PR02 cleanup; PR03 continued in clean isolated worktree /private/tmp/fap-api-career-zh-display-parity-03."
+      }
+    ],
     "transitions": [
       {
         "at": "2026-06-09",
@@ -52394,6 +53104,11 @@
         "at": "2026-06-09",
         "status": "ready_to_merge",
         "note": "GitHub checks passed and mergeStateStatus is CLEAN for PR #2021; ready for squash merge."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "reconciled_merged",
+        "note": "Reconciled inside CAREER-ZH-DISPLAY-PARITY-03 metadata scope after PR #2021 squash merge. origin/main contains 205d54c2c4a907836c1d9604cecb37ce73144d47 and local/remote task branches are cleaned up; unrelated primary checkout dirty files recorded as sidecar."
       }
     ]
   },
@@ -52401,7 +53116,7 @@
     "repo": "fap-api",
     "branch": "codex/career-zh-display-parity-03-detail-cache",
     "base": "origin/main",
-    "status": "pending_dependency",
+    "status": "ready_to_merge",
     "train_scope": "career_zh_display_parity",
     "title": "CAREER-ZH-DISPLAY-PARITY-03: feat(career): refresh job detail cache per locale",
     "depends_on": [
@@ -52413,22 +53128,94 @@
         "evidence": "User explicitly authorized adding and executing CAREER-ZH-DISPLAY-PARITY-01 through CAREER-ZH-DISPLAY-PARITY-04, including fap-api docs/codex metadata updates, on 2026-06-09."
       },
       "dependency": {
-        "status": "pending",
-        "evidence": "Waiting for CAREER-ZH-DISPLAY-PARITY-02 to merge."
+        "status": "pass",
+        "evidence": "CAREER-ZH-DISPLAY-PARITY-02 PR #2021 merged at 2026-06-09T16:03:31Z and origin/main contains merge commit 205d54c2c4a907836c1d9604cecb37ce73144d47."
+      },
+      "implementation": {
+        "status": "pass",
+        "evidence": "Added per-slug/per-locale job detail cache key, forget, and warm support; warm command accepts targeted job detail options; selected display asset force imports forget zh-CN detail caches after successful writes. No content import, publish, sitemap, llms, or index strategy changes."
+      },
+      "php_lint": {
+        "status": "pass",
+        "evidence": "php -l passed for PublicCareerAuthorityResponseCache.php, CareerWarmPublicAuthorityCache.php, and CareerImportSelectedDisplayAssets.php."
+      },
+      "focused_tests": {
+        "status": "pass",
+        "evidence": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=\":memory:\" php artisan test tests/Feature/Console/CareerImportSelectedDisplayAssetsCommandTest.php tests/Feature/Console/CareerWarmPublicAuthorityCacheCommandTest.php --no-ansi passed 32 tests with 5007 assertions. Existing file_get_contents warnings were emitted but exit code was 0."
+      },
+      "pint": {
+        "status": "pass",
+        "evidence": "cd backend && ./vendor/bin/pint --test passed for PublicCareerAuthorityResponseCache.php, CareerWarmPublicAuthorityCache.php, CareerImportSelectedDisplayAssets.php, and focused test files."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are confined to PR03 scoped cache service, warm command, import command, focused tests, and docs/codex state metadata."
+      },
+      "diff_check": {
+        "status": "pass",
+        "evidence": "Full git diff --check passed after implementation and metadata update; git diff --cached --check will be run after staging."
+      },
+      "metadata": {
+        "status": "pass",
+        "evidence": "docs/codex/pr-train-state.json parsed as JSON via python3 -m json.tool; docs/codex/pr-train.yaml parsed as YAML via Ruby stdlib."
+      },
+      "github": {
+        "status": "pass",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/2022",
+        "head_sha": "669883b5fce3f34e5fa00c787ff730d00d984bd3",
+        "checks": [
+          "hygiene",
+          "supply-chain",
+          "content-pack-build-validate",
+          "verify-mbti-legacy",
+          "verify-mbti-v2",
+          "verify-bigfive",
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "Semgrep OSS"
+        ],
+        "merge_state": "MERGEABLE_UNSTABLE_WITH_OLD_CANCELLED_RUNS",
+        "evidence": "Current head 669883b5fce3f34e5fa00c787ff730d00d984bd3 required GitHub checks passed. statusCheckRollup also includes cancelled jobs from superseded pull_request run 27220243638 after metadata push; current push run 27220243557 checks passed."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "8f582fcb3b714a57f4be0e4a840d1f06a5c61302",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2022",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
-    "sidecar_issues": [],
+    "sidecar_issues": [
+      {
+        "id": "external-primary-worktree-dirty-content-baselines-2026-06-09",
+        "status": "external_unrelated",
+        "evidence": "Primary fap-api checkout has unrelated modified content_baselines/content_pages JSON files; current PR03 is isolated in /private/tmp/fap-api-career-zh-display-parity-03 and does not touch them."
+      }
+    ],
     "transitions": [
       {
         "at": "2026-06-09",
         "status": "pending_dependency",
         "note": "Future per-slug/per-locale detail cache entry initialized only; implementation deferred until PR02 is merged."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "local_checks_passed",
+        "note": "Implemented scoped per-locale job detail cache forget/warm support, import cache invalidation, focused tests, php lint, and Pint in clean isolated worktree."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "committed_pending_push",
+        "note": "Created scoped implementation commit 8f582fcb3b714a57f4be0e4a840d1f06a5c61302 pending push and PR creation. Final PR head may include metadata-only follow-up commits."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "pr_open_checks_pending",
+        "note": "Opened PR #2022 for CAREER-ZH-DISPLAY-PARITY-03; waiting for GitHub checks."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "ready_to_merge",
+        "note": "Required current-head GitHub checks passed for PR #2022; old cancelled jobs from superseded run remain in statusCheckRollup but were not from current head execution."
       }
     ]
   },
@@ -52458,7 +53245,9 @@
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
-    "sidecar_issues": [],
+    "sidecar_issues": [
+
+    ],
     "transitions": [
       {
         "at": "2026-06-09",
