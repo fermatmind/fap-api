@@ -107,6 +107,109 @@ final class MbtiAttributionEventIngestTest extends TestCase
         $this->assertSame('/en/tests/big-five-personality-test/take', $meta['raw_payload']['current_path'] ?? null);
     }
 
+    public function test_seo_attribution_endpoint_accepts_canonical_conversion_funnel_and_sanitizes_dimensions(): void
+    {
+        config()->set('fap.events.ingest_token', 'ingest_test_token');
+
+        $events = [
+            'landing_pv' => '/en/articles/personality-types?token=secret',
+            'article_to_test_click' => '/en/articles/personality-types?email=person@example.com',
+            'start_test' => '/en/tests/mbti-personality-test-16-personality-types/take?attempt_id=raw_attempt',
+            'complete_test' => '/en/tests/mbti-personality-test-16-personality-types/take?result_id=raw_result',
+            'view_result' => '/en/tests/mbti-personality-test-16-personality-types?order_id=raw_order',
+        ];
+
+        foreach ($events as $eventName => $path) {
+            $response = $this->withHeaders([
+                'Authorization' => 'Bearer ingest_test_token',
+            ])->postJson('/api/v0.5/seo/attribution/events', [
+                'eventName' => $eventName,
+                'path' => $path,
+                'timestamp' => '2026-06-09T02:00:00Z',
+                'payload' => [
+                    'url' => 'https://fermatmind.com'.$path,
+                    'lang' => 'en',
+                    'page_type' => $eventName === 'landing_pv' ? 'article' : 'test',
+                    'source_url' => 'https://fermatmind.com/en/articles/personality-types?token=secret',
+                    'source_article' => 'personality-types',
+                    'target_test' => '/en/tests/mbti-personality-test-16-personality-types?session=secret',
+                    'scale_id' => 'MBTI',
+                    'form_id' => 'mbti_144',
+                    'session_id' => 'seo_sess_1234567890abcdef',
+                    'referrer' => 'https://www.google.com/search?q=mbti&email=person@example.com',
+                ],
+            ]);
+
+            $response->assertStatus(202);
+            $response->assertJsonPath('event_code', $eventName);
+        }
+
+        $this->assertSame(1, DB::table('events')->where('event_code', 'article_to_test_click')->count());
+        $this->assertSame(1, DB::table('events')->where('event_code', 'start_test')->count());
+
+        $row = DB::table('events')
+            ->where('event_code', 'article_to_test_click')
+            ->first();
+
+        $this->assertNotNull($row);
+
+        $meta = is_array($row->meta_json ?? null)
+            ? $row->meta_json
+            : (json_decode((string) ($row->meta_json ?? '{}'), true) ?: []);
+
+        $this->assertSame('article_to_test_click', (string) ($row->event_name ?? ''));
+        $this->assertSame('/en/articles/personality-types', $meta['path'] ?? null);
+        $this->assertSame('https://fermatmind.com/en/articles/personality-types', $meta['seo_conversion']['url'] ?? null);
+        $this->assertSame('https://fermatmind.com/en/articles/personality-types', $meta['seo_conversion']['source_url'] ?? null);
+        $this->assertSame('/en/tests/mbti-personality-test-16-personality-types', $meta['seo_conversion']['target_test'] ?? null);
+        $this->assertSame('seo_sess_1234567890abcdef', $meta['seo_conversion']['session_id'] ?? null);
+        $this->assertStringNotContainsString('secret', json_encode($meta, JSON_THROW_ON_ERROR));
+        $this->assertStringNotContainsString('person@example.com', json_encode($meta, JSON_THROW_ON_ERROR));
+        $this->assertStringNotContainsString('raw_attempt', json_encode($meta, JSON_THROW_ON_ERROR));
+    }
+
+    public function test_seo_attribution_endpoint_rejects_private_paths_and_raw_business_identifiers(): void
+    {
+        config()->set('fap.events.ingest_token', 'ingest_test_token');
+
+        $privatePath = $this->withHeaders([
+            'Authorization' => 'Bearer ingest_test_token',
+        ])->postJson('/api/v0.5/seo/attribution/events', [
+            'eventName' => 'start_test',
+            'path' => '/en/results/private-result-id',
+            'payload' => [
+                'url' => '/en/results/private-result-id',
+                'lang' => 'en',
+                'page_type' => 'result',
+                'scale_id' => 'MBTI',
+                'form_id' => 'mbti_144',
+                'session_id' => 'seo_sess_1234567890abcdef',
+            ],
+        ]);
+
+        $privatePath->assertStatus(422);
+
+        $rawIdentifier = $this->withHeaders([
+            'Authorization' => 'Bearer ingest_test_token',
+        ])->postJson('/api/v0.5/seo/attribution/events', [
+            'eventName' => 'complete_test',
+            'path' => '/en/tests/mbti-personality-test-16-personality-types/take',
+            'payload' => [
+                'url' => '/en/tests/mbti-personality-test-16-personality-types/take',
+                'lang' => 'en',
+                'page_type' => 'test',
+                'scale_id' => 'MBTI',
+                'form_id' => 'mbti_144',
+                'session_id' => 'seo_sess_1234567890abcdef',
+                'order_id' => 'ord_raw_123',
+            ],
+        ]);
+
+        $rawIdentifier->assertStatus(422);
+
+        $this->assertSame(0, DB::table('events')->count());
+    }
+
     public function test_ingest_endpoint_accepts_purchase_payload_with_non_pii_order_identifier(): void
     {
         config()->set('fap.events.ingest_token', 'ingest_test_token');

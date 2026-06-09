@@ -23746,3 +23746,110 @@ prs:
       backend_only_non_scale_excluded_or_noindex_urls: 12
       live_only_static_index_urls: 15
     next_task: SEO-SITEMAP-DIFF-04 in fap-web after this PR is merged
+
+  - id: SEO-CONV-INGEST-02
+    repo: fap-api
+    depends_on:
+      - SEO-CONV-TRACKING-01
+    branch: codex/seo-conv-ingest-02
+    title: "SEO-CONV-INGEST-02: feat(analytics): accept canonical SEO conversion funnel ingest"
+    train_scope: seo_conversion_tracking
+    status: in_progress
+    scope:
+      - Add a backend SEO attribution ingest route that accepts the canonical public SEO funnel events.
+      - Accept landing_pv, article_to_test_click, start_test, complete_test, and view_result as distinct event codes.
+      - Sanitize URL dimensions by dropping query/fragment values and reject private result/order/share/pay/history paths for canonical SEO conversion events.
+      - Reject raw order, attempt, and result identifiers in canonical SEO conversion payloads.
+      - Prove article_to_test_click is not stored or counted as start_test by the ingest contract.
+    allowed_paths:
+      - backend/routes/api.php
+      - backend/app/Http/Controllers/API/V0_3/MbtiAttributionEventController.php
+      - backend/tests/Feature/Analytics/MbtiAttributionEventIngestTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add daily aggregation, Ops/CMS dashboard views, frontend runtime tracking, migrations, production writes, deploys, or CMS mutations in this PR.
+      - Store raw tokens, raw order identifiers, raw result identifiers, raw attempt identifiers, private paths, or sensitive query values in SEO conversion event metadata.
+      - Reclassify article_to_test_click as start_test.
+    validation:
+      - php -l backend/routes/api.php
+      - php -l backend/app/Http/Controllers/API/V0_3/MbtiAttributionEventController.php
+      - php -l backend/tests/Feature/Analytics/MbtiAttributionEventIngestTest.php
+      - cd backend && php artisan route:list --path=api/v0.5/seo --no-ansi
+      - cd backend && php artisan test --filter=MbtiAttributionEventIngestTest --no-ansi
+      - cd backend && ./vendor/bin/pint --test routes/api.php app/Http/Controllers/API/V0_3/MbtiAttributionEventController.php tests/Feature/Analytics/MbtiAttributionEventIngestTest.php
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
+      - git diff --check -- backend/routes/api.php backend/app/Http/Controllers/API/V0_3/MbtiAttributionEventController.php backend/tests/Feature/Analytics/MbtiAttributionEventIngestTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    content_rewrite_allowed: false
+    content_authority: backend
+    next_task: SEO-CONV-RUNTIME-03 in fap-web after this PR is merged and SEO-CONV-TRACKING-01 is present on fap-web main
+
+  - id: SEO-CONV-DAILY-04
+    repo: fap-api
+    depends_on:
+      - SEO-CONV-INGEST-02
+      - SEO-CONV-RUNTIME-03
+    branch: codex/seo-conv-daily-04
+    title: "SEO-CONV-DAILY-04: feat(analytics): aggregate SEO conversion funnel daily"
+    train_scope: seo_conversion_tracking
+    status: pending_dependency
+    scope:
+      - Aggregate canonical SEO conversion events into a safe daily read model by URL, article, test, and session dimensions.
+      - Support landing_pv, article_to_test_click, start_test, complete_test, and view_result counts without mixing article_to_test_click into start_test.
+    allowed_paths:
+      - backend/app/Services/Analytics/**
+      - backend/app/Console/Commands/**
+      - backend/database/migrations/**
+      - backend/tests/Feature/Analytics/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: true
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    content_authority: backend
+    next_task: SEO-CONV-OPS-05 in fap-api after this PR is merged
+
+  - id: SEO-CONV-OPS-05
+    repo: fap-api
+    depends_on:
+      - SEO-CONV-DAILY-04
+    branch: codex/seo-conv-ops-05
+    title: "SEO-CONV-OPS-05: feat(ops): expose SEO conversion funnel readouts"
+    train_scope: seo_conversion_tracking
+    status: pending_dependency
+    scope:
+      - Add Ops/CMS read views or APIs for URL, article, and test-level SEO conversion funnel acceptance checks.
+      - Show privacy/cleaning status without exposing raw private identifiers.
+    allowed_paths:
+      - backend/app/Http/Controllers/API/V0_5/Ops/**
+      - backend/app/Services/SeoIntel/**
+      - backend/tests/Feature/SeoIntel/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    content_authority: backend

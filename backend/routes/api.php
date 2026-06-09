@@ -504,6 +504,12 @@ Route::prefix('v0.5')->group(function () {
     Route::get('/career/datasets/occupations/method', [CareerDatasetMethodController::class, 'show']);
     Route::get('/seo/sitemap-source', [SitemapSourceController::class, 'index'])
         ->name('seo.sitemap-source');
+    Route::post('/seo/attribution/events', [MbtiAttributionEventController::class, 'store'])
+        ->middleware([
+            \App\Http\Middleware\LimitApiPublicPayloadSize::class,
+            'throttle:api_track',
+        ])
+        ->name('api.v0_5.seo.attribution_events.store');
     Route::get('/foundation/giving-records/months', [DailyGivingRecordController::class, 'months']);
     Route::get('/foundation/giving-records/months/{yearMonth}', [DailyGivingRecordController::class, 'monthRecords']);
     Route::get('/foundation/giving-records', [DailyGivingRecordController::class, 'index']);
