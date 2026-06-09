@@ -23765,6 +23765,7 @@ prs:
       - backend/routes/api.php
       - backend/app/Http/Controllers/API/V0_3/MbtiAttributionEventController.php
       - backend/tests/Feature/Analytics/MbtiAttributionEventIngestTest.php
+      - backend/docs/contracts/openapi.snapshot.json
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
@@ -23778,9 +23779,11 @@ prs:
       - cd backend && php artisan route:list --path=api/v0.5/seo --no-ansi
       - cd backend && php artisan test --filter=MbtiAttributionEventIngestTest --no-ansi
       - cd backend && ./vendor/bin/pint --test routes/api.php app/Http/Controllers/API/V0_3/MbtiAttributionEventController.php tests/Feature/Analytics/MbtiAttributionEventIngestTest.php
+      - cd backend && bash scripts/export_openapi.sh --check
+      - python3 -m json.tool backend/docs/contracts/openapi.snapshot.json >/dev/null
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - python3 -c "import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')"
-      - git diff --check -- backend/routes/api.php backend/app/Http/Controllers/API/V0_3/MbtiAttributionEventController.php backend/tests/Feature/Analytics/MbtiAttributionEventIngestTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json
+      - git diff --check -- backend/routes/api.php backend/app/Http/Controllers/API/V0_3/MbtiAttributionEventController.php backend/tests/Feature/Analytics/MbtiAttributionEventIngestTest.php backend/docs/contracts/openapi.snapshot.json docs/codex/pr-train.yaml docs/codex/pr-train-state.json
       - git diff --cached --check
     merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
     production_write_execution: false

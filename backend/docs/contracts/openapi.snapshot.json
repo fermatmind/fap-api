@@ -4108,6 +4108,26 @@
                 ]
             }
         },
+        "/api/v0.5/seo/attribution/events": {
+            "post": {
+                "operationId": "api.v0_5.seo.attribution_events.store",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\MbtiAttributionEventController@store",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\LimitApiPublicPayloadSize",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_track"
+                ],
+                "x-laravel-name": "api.v0_5.seo.attribution_events.store"
+            }
+        },
         "/api/v0.5/seo/sitemap-source": {
             "get": {
                 "operationId": "seo.sitemap-source",

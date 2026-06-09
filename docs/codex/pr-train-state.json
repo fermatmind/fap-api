@@ -51592,7 +51592,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-conv-ingest-02",
     "base": "origin/main",
-    "status": "github_checks_pending",
+    "status": "github_checks_failed_fix_in_progress",
     "train_scope": "seo_conversion_tracking",
     "title": "SEO-CONV-INGEST-02: feat(analytics): accept canonical SEO conversion funnel ingest",
     "depends_on": [
@@ -51614,6 +51614,7 @@
           "backend/routes/api.php",
           "backend/app/Http/Controllers/API/V0_3/MbtiAttributionEventController.php",
           "backend/tests/Feature/Analytics/MbtiAttributionEventIngestTest.php",
+          "backend/docs/contracts/openapi.snapshot.json",
           "docs/codex/pr-train.yaml",
           "docs/codex/pr-train-state.json"
         ]
@@ -51627,16 +51628,23 @@
           "cd backend && php artisan route:list --path=api/v0.5/seo --no-ansi",
           "cd backend && php artisan test --filter=MbtiAttributionEventIngestTest --no-ansi",
           "cd backend && ./vendor/bin/pint --test routes/api.php app/Http/Controllers/API/V0_3/MbtiAttributionEventController.php tests/Feature/Analytics/MbtiAttributionEventIngestTest.php",
+          "cd backend && bash scripts/export_openapi.sh --check",
+          "python3 -m json.tool backend/docs/contracts/openapi.snapshot.json >/dev/null",
           "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
           "python3 -c \"import yaml, pathlib; yaml.safe_load(pathlib.Path('docs/codex/pr-train.yaml').read_text()); print('yaml ok')\"",
-          "git diff --check -- backend/routes/api.php backend/app/Http/Controllers/API/V0_3/MbtiAttributionEventController.php backend/tests/Feature/Analytics/MbtiAttributionEventIngestTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+          "git diff --check -- backend/routes/api.php backend/app/Http/Controllers/API/V0_3/MbtiAttributionEventController.php backend/tests/Feature/Analytics/MbtiAttributionEventIngestTest.php backend/docs/contracts/openapi.snapshot.json docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
           "git diff --cached --check"
         ],
-        "evidence": "PHP lint passed for route, controller, and feature test. v0.5 SEO route-list shows the new POST /api/v0.5/seo/attribution/events route. Focused MbtiAttributionEventIngestTest passed 11 tests / 62 assertions. Scoped Pint --test passed. JSON/YAML parse and path-limited git diff --check passed."
+        "evidence": "PHP lint passed for route, controller, and feature test. v0.5 SEO route-list shows the new POST /api/v0.5/seo/attribution/events route. Focused MbtiAttributionEventIngestTest passed 11 tests / 62 assertions. Scoped Pint --test passed. JSON/YAML parse and path-limited git diff --check passed. After GitHub openapi diff gate failed, backend/docs/contracts/openapi.snapshot.json was added to the scoped contract artifact and will be rechecked with scripts/export_openapi.sh --check."
       },
       "github": {
-        "status": "pending",
-        "checks": []
+        "status": "failed_fix_in_progress",
+        "checks": [
+          "verify-bigfive",
+          "verify-mbti-legacy",
+          "verify-mbti-v2"
+        ],
+        "failure_reason": "GitHub verify jobs failed because the openapi diff gate detected the new /api/v0.5/seo/attribution/events route was missing from backend/docs/contracts/openapi.snapshot.json."
       }
     },
     "failure_reason": null,
@@ -51666,6 +51674,11 @@
         "at": "2026-06-09",
         "status": "github_checks_pending",
         "note": "Opened https://github.com/fermatmind/fap-api/pull/2010 from branch codex/seo-conv-ingest-02; GitHub checks pending."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "github_checks_failed_fix_in_progress",
+        "note": "GitHub verify jobs failed at the openapi diff gate because the new v0.5 SEO attribution route was missing from backend/docs/contracts/openapi.snapshot.json; added the snapshot to current scope and regenerated it."
       }
     ]
   },
