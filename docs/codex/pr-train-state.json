@@ -53116,7 +53116,7 @@
     "repo": "fap-api",
     "branch": "codex/career-zh-display-parity-03-detail-cache",
     "base": "origin/main",
-    "status": "pr_open_checks_pending",
+    "status": "ready_to_merge",
     "train_scope": "career_zh_display_parity",
     "title": "CAREER-ZH-DISPLAY-PARITY-03: feat(career): refresh job detail cache per locale",
     "depends_on": [
@@ -53158,6 +53158,24 @@
       "metadata": {
         "status": "pass",
         "evidence": "docs/codex/pr-train-state.json parsed as JSON via python3 -m json.tool; docs/codex/pr-train.yaml parsed as YAML via Ruby stdlib."
+      },
+      "github": {
+        "status": "pass",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/2022",
+        "head_sha": "669883b5fce3f34e5fa00c787ff730d00d984bd3",
+        "checks": [
+          "hygiene",
+          "supply-chain",
+          "content-pack-build-validate",
+          "verify-mbti-legacy",
+          "verify-mbti-v2",
+          "verify-bigfive",
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "Semgrep OSS"
+        ],
+        "merge_state": "MERGEABLE_UNSTABLE_WITH_OLD_CANCELLED_RUNS",
+        "evidence": "Current head 669883b5fce3f34e5fa00c787ff730d00d984bd3 required GitHub checks passed. statusCheckRollup also includes cancelled jobs from superseded pull_request run 27220243638 after metadata push; current push run 27220243557 checks passed."
       }
     },
     "failure_reason": null,
@@ -53193,6 +53211,11 @@
         "at": "2026-06-09",
         "status": "pr_open_checks_pending",
         "note": "Opened PR #2022 for CAREER-ZH-DISPLAY-PARITY-03; waiting for GitHub checks."
+      },
+      {
+        "at": "2026-06-09",
+        "status": "ready_to_merge",
+        "note": "Required current-head GitHub checks passed for PR #2022; old cancelled jobs from superseded run remain in statusCheckRollup but were not from current head execution."
       }
     ]
   },
