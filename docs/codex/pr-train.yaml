@@ -24278,7 +24278,7 @@ prs:
     branch: codex/career-zh-parity-fix-03
     title: "CAREER-ZH-PARITY-FIX-03: feat(career): support authority-manifest zh display import"
     train_scope: career_zh_parity_fix
-    status: ready_to_merge
+    status: merged
     scope:
       - Replace hardcoded selected-slug limitations with production-authority manifest validation for the Chinese parity import scope.
       - Require reviewed workbook fields, exact manifest hashes, dry-run support, and safe refusal for non-authoritative slugs.
@@ -24320,7 +24320,7 @@ prs:
     branch: codex/career-zh-parity-fix-04
     title: "CAREER-ZH-PARITY-FIX-04: feat(career): controlled zh display import cache refresh"
     train_scope: career_zh_parity_fix
-    status: pending_dependency
+    status: local_verified_sidecar_external
     scope:
       - Add chunked controlled import execution support for the reviewed Chinese display parity manifest.
       - Clear and warm per-slug zh-CN job detail cache after successful imports.

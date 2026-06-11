@@ -108,6 +108,49 @@ final class CareerImportSelectedDisplayAssetsCommandTest extends TestCase
     }
 
     #[Test]
+    public function manifest_import_can_execute_a_controlled_candidate_chunk_with_lineage(): void
+    {
+        $rows = [
+            $this->row('manifest-only-career-one', title: 'Manifest Only Career One', soc: '15-2011', onet: '15-2011.00'),
+            $this->row('manifest-only-career-two', title: 'Manifest Only Career Two', soc: '15-2021', onet: '15-2021.00'),
+        ];
+        foreach ($rows as $row) {
+            $this->createAuthorityOccupation($row['Slug'], $row['SOC_Code'], $row['O_NET_Code']);
+        }
+        $workbook = $this->writeWorkbook($rows);
+        $manifest = $this->writeManifest($workbook, $rows);
+
+        [$exitCode, $report] = $this->runImportWithManifest($workbook, $manifest, [
+            '--manifest-chunk-size' => 1,
+            '--manifest-chunk-index' => 2,
+        ]);
+
+        $this->assertSame(0, $exitCode, json_encode($report, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $this->assertSame('pass', $report['decision']);
+        $this->assertSame(['manifest-only-career-two'], $report['requested_slugs']);
+        $this->assertSame(1, $report['validated_count']);
+        $this->assertSame(2, $report['manifest_execution']['total_candidates']);
+        $this->assertSame(1, $report['manifest_execution']['selected_count']);
+        $this->assertSame(1, $report['manifest_execution']['chunk_size']);
+        $this->assertSame(2, $report['manifest_execution']['chunk_index']);
+        $this->assertSame('manifest_chunk', $report['manifest_execution']['strategy']);
+        $this->assertIsString($report['manifest_execution']['selected_slugs_sha256']);
+    }
+
+    #[Test]
+    public function manifest_chunk_options_require_manifest_execution(): void
+    {
+        $workbook = $this->writeWorkbook([$this->row('data-scientists')]);
+
+        [$exitCode, $report] = $this->runImport($workbook, 'data-scientists', [
+            '--manifest-chunk-size' => 1,
+        ]);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertStringContainsString('--manifest-chunk-size requires --manifest.', implode(' ', $report['errors']));
+    }
+
+    #[Test]
     public function zh_display_parity_manifest_requires_reviewed_chinese_workbook_authority(): void
     {
         $row = $this->row('manifest-only-career', title: 'Manifest Only Career', soc: '15-2011', onet: '15-2011.00');
@@ -541,6 +584,7 @@ final class CareerImportSelectedDisplayAssetsCommandTest extends TestCase
         $this->assertSame(6, OccupationCrosswalk::query()->count());
         $this->assertSame(3, CareerJobDisplayAsset::query()->count());
         $this->assertCount(3, $report['forgot_detail_caches']);
+        $this->assertCount(3, $report['refreshed_detail_caches']);
 
         foreach ($this->selectedRows() as $row) {
             $this->assertDatabaseHas('career_job_display_assets', [
@@ -551,7 +595,13 @@ final class CareerImportSelectedDisplayAssetsCommandTest extends TestCase
                 'asset_role' => 'formal_pilot_master',
                 'status' => 'ready_for_pilot',
             ]);
-            $this->assertFalse(Cache::has(PublicCareerAuthorityResponseCache::JOB_DETAIL_CACHE_KEY_PREFIX.':'.$row['Slug'].':zh-CN'));
+            $zhCacheKey = PublicCareerAuthorityResponseCache::JOB_DETAIL_CACHE_KEY_PREFIX.':'.$row['Slug'].':zh-CN';
+            $refreshReport = collect($report['refreshed_detail_caches'])
+                ->firstWhere('slug', $row['Slug']);
+            $this->assertSame($zhCacheKey, $refreshReport['cache_key']);
+            $this->assertTrue($refreshReport['forgotten']);
+            $this->assertContains($refreshReport['warm_status'], ['cached', 'missing']);
+            $this->assertFalse(Cache::has($zhCacheKey));
             $this->assertTrue(Cache::has(PublicCareerAuthorityResponseCache::JOB_DETAIL_CACHE_KEY_PREFIX.':'.$row['Slug'].':en'));
         }
     }
