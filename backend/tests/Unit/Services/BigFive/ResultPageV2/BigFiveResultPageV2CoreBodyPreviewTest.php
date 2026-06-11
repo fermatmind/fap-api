@@ -1560,6 +1560,45 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_article_draft_preview_ops_route_changes(): void
+    {
+        $changed = [
+            'backend/app/Filament/Ops/Resources/ArticleResource/Support/ArticleWorkspace.php',
+            'backend/app/Http/Controllers/Ops/ArticleDraftPreviewController.php',
+            'backend/routes/web.php',
+        ];
+        $webRouteChangedLines = [
+            '+use App\Http\Controllers\Ops\ArticleDraftPreviewController;',
+            '+use App\Http\Middleware\AdminAuth;',
+            '+use App\Http\Middleware\EnsureAdminTotpVerified;',
+            '+use App\Http\Middleware\EnsureCmsAdminAuthorized;',
+            '+use App\Http\Middleware\OpsAccessControl;',
+            '+use App\Http\Middleware\RequireOpsOrgSelected;',
+            '+use App\Http\Middleware\ResolveOrgContext;',
+            '+use App\Http\Middleware\SetOpsRequestContext;',
+            '+    Route::get(\'/ops/article-preview/{article}\', ArticleDraftPreviewController::class)',
+            '+        ->middleware([',
+            '+            SetOpsRequestContext::class,',
+            '+            AdminAuth::class,',
+            '+            ResolveOrgContext::class,',
+            '+            EnsureAdminTotpVerified::class,',
+            '+            RequireOpsOrgSelected::class,',
+            '+            OpsAccessControl::class,',
+            '+            EnsureCmsAdminAuthorized::class.\':read\',',
+            '+        ])',
+            '+        ->whereNumber(\'article\')',
+            '+        ->name(\'ops.articles.preview\');',
+            '+',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            webRouteChangedLines: $webRouteChangedLines,
+        ));
+    }
+
     public function test_runtime_freeze_classifier_ignores_controlled_article_publish_sop_changes(): void
     {
         $changed = [
@@ -2830,6 +2869,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isArticleDraftPreviewOpsRouteFile($file)) {
+                continue;
+            }
+
             if ($this->isArticleMultiTestGraphEdgeFile($file)) {
                 continue;
             }
@@ -3125,6 +3168,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 && (
                     $this->routeDiffIsPublicHealthzAliasOnly($webRouteChangedLines ?? $this->webRouteChangedLines($repoRoot, $baseRef))
                     || $this->routeDiffIsApiRootServiceLandingOnly($webRouteChangedLines ?? $this->webRouteChangedLines($repoRoot, $baseRef))
+                    || $this->routeDiffIsArticleDraftPreviewOpsOnly($webRouteChangedLines ?? $this->webRouteChangedLines($repoRoot, $baseRef))
                 )
             ) {
                 continue;
@@ -3674,6 +3718,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Filament/Ops/Pages/EditorialReviewPage.php',
             'backend/app/Services/Cms/ArticleTranslationWorkflowService.php',
+        ], true);
+    }
+
+    private function isArticleDraftPreviewOpsRouteFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Filament/Ops/Resources/ArticleResource/Support/ArticleWorkspace.php',
+            'backend/app/Http/Controllers/Ops/ArticleDraftPreviewController.php',
         ], true);
     }
 
@@ -5444,6 +5496,60 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             '\'healthz\' => \'restricted\',',
             ']);',
             '}',
+        ];
+
+        foreach ($changedLines as $line) {
+            if (str_starts_with($line, '-')) {
+                return false;
+            }
+
+            if (! str_starts_with($line, '+')) {
+                return false;
+            }
+
+            $changedBody = trim(substr($line, 1));
+            if ($changedBody === '') {
+                continue;
+            }
+
+            if (! in_array($changedBody, $allowedLines, true)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function routeDiffIsArticleDraftPreviewOpsOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        $allowedLines = [
+            'use App\Http\Controllers\Ops\ArticleDraftPreviewController;',
+            'use App\Http\Middleware\AdminAuth;',
+            'use App\Http\Middleware\EnsureAdminTotpVerified;',
+            'use App\Http\Middleware\EnsureCmsAdminAuthorized;',
+            'use App\Http\Middleware\OpsAccessControl;',
+            'use App\Http\Middleware\RequireOpsOrgSelected;',
+            'use App\Http\Middleware\ResolveOrgContext;',
+            'use App\Http\Middleware\SetOpsRequestContext;',
+            'Route::get(\'/ops/article-preview/{article}\', ArticleDraftPreviewController::class)',
+            '->middleware([',
+            'SetOpsRequestContext::class,',
+            'AdminAuth::class,',
+            'ResolveOrgContext::class,',
+            'EnsureAdminTotpVerified::class,',
+            'RequireOpsOrgSelected::class,',
+            'OpsAccessControl::class,',
+            'EnsureCmsAdminAuthorized::class.\':read\',',
+            '])',
+            '->whereNumber(\'article\')',
+            '->name(\'ops.articles.preview\');',
         ];
 
         foreach ($changedLines as $line) {
