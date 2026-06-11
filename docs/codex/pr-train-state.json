@@ -53092,7 +53092,7 @@
     "repo": "fap-api",
     "branch": "codex/career-zh-parity-fix-05",
     "base": "origin/main",
-    "status": "local_verified_sidecar_external",
+    "status": "pr_open_checks_pending",
     "train_scope": "career_zh_parity_fix",
     "title": "CAREER-ZH-PARITY-FIX-05: fix(career): align display-asset integrity release policy",
     "depends_on": [
@@ -53124,11 +53124,15 @@
           "git diff --check"
         ],
         "notes": "PHP lint, focused CareerJobDetailApiTest coverage, CareerJobDisplaySurfaceBuilderTest, scoped Pint, JSON/YAML parse, and diff check passed. The manifest-listed broad Career feature/unit suite failed only on the pre-existing FirstWavePublishReadyValidator::validationMemoKey blocker plus downstream readiness assertions and is recorded as sidecar."
+      },
+      "github_checks": {
+        "status": "pending",
+        "evidence": "Opened PR #2030 for CAREER-ZH-PARITY-FIX-05 from head commit 733bf3f09ba7a528611b24cd0655a59de8c66cd1."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "733bf3f09ba7a528611b24cd0655a59de8c66cd1",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2030",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -53157,6 +53161,11 @@
         "at": "2026-06-11T05:13:00Z",
         "status": "local_verified_sidecar_external",
         "note": "Scoped PR05 checks passed; broad Career feature/unit suite retains external FirstWavePublishReadyValidator blocker recorded as sidecar."
+      },
+      {
+        "at": "2026-06-11T05:16:00Z",
+        "status": "pr_open_checks_pending",
+        "note": "Opened PR #2030 for CAREER-ZH-PARITY-FIX-05 from head commit 733bf3f09ba7a528611b24cd0655a59de8c66cd1."
       }
     ]
   },
