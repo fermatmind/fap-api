@@ -920,6 +920,8 @@ class SitemapGeneratorTest extends TestCase
             'status' => 'published',
             'is_public' => true,
             'is_indexable' => true,
+            'sitemap_eligible' => true,
+            'llms_eligible' => true,
             'published_at' => Carbon::create(2026, 3, 6, 8, 0, 0, 'UTC'),
             'scheduled_at' => null,
             'created_at' => Carbon::create(2026, 3, 6, 8, 0, 0, 'UTC'),
