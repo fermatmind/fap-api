@@ -53285,7 +53285,7 @@
     "repo": "fap-api",
     "branch": "codex/career-zh-parity-live-01",
     "base": "origin/main",
-    "status": "pr_open_checks_pending",
+    "status": "ready_to_merge",
     "train_scope": "career_zh_parity_live",
     "title": "CAREER-ZH-PARITY-LIVE-01: chore(career): rescan zh parity live root causes",
     "depends_on": [
@@ -53316,12 +53316,12 @@
         "notes": "Post-deploy production public API scan completed read-only: 1046 total slugs, EN/ZH index and API parity 1046/1046, 672 EN-only zh module gaps, 237 runtime shell signals, 0 zh-only module gaps, no sitemap/llms/index strategy changes. The report includes full shell slug list, missing modules, gate reasons, public asset-state inference, cache-stale boundary, and controlled import/cache-refresh candidate manifest."
       },
       "github_checks": {
-        "status": "pending",
-        "evidence": null
+        "status": "pass",
+        "evidence": "GitHub checks passed for PR #2033 head aafff42fb52bd16ccbac8992fd0f136ae80cafbf: hygiene, supply-chain, content-pack-build-validate, Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
       }
     },
     "failure_reason": null,
-    "commit_sha": "0362413b01c8bb609a053fbc2e498a8808fbf8eb",
+    "commit_sha": "aafff42fb52bd16ccbac8992fd0f136ae80cafbf",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2033",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -53357,6 +53357,11 @@
         "at": "2026-06-11T10:17:39Z",
         "status": "pr_open_checks_pending",
         "note": "Opened PR #2033 for CAREER-ZH-PARITY-LIVE-01 from head commit 0362413b01c8bb609a053fbc2e498a8808fbf8eb; waiting for GitHub checks."
+      },
+      {
+        "at": "2026-06-11T10:26:40Z",
+        "status": "ready_to_merge",
+        "note": "PR #2033 GitHub checks passed for head aafff42fb52bd16ccbac8992fd0f136ae80cafbf; scope remains confined to read-only report/metadata paths."
       }
     ]
   }
