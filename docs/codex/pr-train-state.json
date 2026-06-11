@@ -52768,7 +52768,7 @@
     "repo": "fap-api",
     "branch": "codex/career-zh-parity-fix-02",
     "base": "origin/main",
-    "status": "local_checks_passed_with_external_sidecar",
+    "status": "github_checks_pending",
     "train_scope": "career_zh_parity_fix",
     "title": "CAREER-ZH-PARITY-FIX-02: fix(career): repair reviewed zh display workbook contract",
     "depends_on": [
@@ -52830,7 +52830,7 @@
     },
     "failure_reason": null,
     "commit_sha": "112100e088c1d53b847cf87552a0de125b6fc0ad",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2026",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -52858,6 +52858,11 @@
         "at": "2026-06-11T03:24:00Z",
         "status": "committed",
         "note": "Created local commit 112100e088c1d53b847cf87552a0de125b6fc0ad after path-limited staging and cached diff check."
+      },
+      {
+        "at": "2026-06-11T03:28:00Z",
+        "status": "github_checks_pending",
+        "note": "Opened PR #2026 for branch codex/career-zh-parity-fix-02 and pushed local verification metadata; waiting for GitHub checks."
       }
     ]
   },
