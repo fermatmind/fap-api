@@ -455,6 +455,21 @@ final class CareerSelectedDisplayAssetMapper
         'QA_Status',
     ];
 
+    /**
+     * @param  array<string, string|int>  $row
+     */
+    public static function workbookRowAuthorityHash(array $row): string
+    {
+        $payload = [];
+        foreach (self::REQUIRED_HEADERS as $header) {
+            $payload[$header] = trim((string) ($row[$header] ?? ''));
+        }
+
+        $encoded = json_encode($payload, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+
+        return hash('sha256', is_string($encoded) ? $encoded : serialize($payload));
+    }
+
     /** @var list<string> */
     private const FORBIDDEN_PUBLIC_KEYS = [
         'release_gate',

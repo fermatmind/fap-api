@@ -192,6 +192,13 @@ final class CareerImportSelectedDisplayAssetsCommandTest extends TestCase
 
         [$exitCode, $report] = $this->runImportWithManifest(
             $workbook,
+            $this->writeManifest($workbook, [$row], rowHashOverride: str_repeat('0', 64)),
+        );
+        $this->assertSame(1, $exitCode);
+        $this->assertStringContainsString('workbook_row_sha256 must match reviewed workbook row', implode(' ', $report['errors']));
+
+        [$exitCode, $report] = $this->runImportWithManifest(
+            $workbook,
             $this->writeManifest($workbook, [$row], publicResolutionType: null),
         );
         $this->assertSame(1, $exitCode);
@@ -1022,11 +1029,13 @@ final class CareerImportSelectedDisplayAssetsCommandTest extends TestCase
         ?bool $reviewedChineseFields = null,
         ?string $contentAuthority = null,
         ?bool $seoReleaseGatesUnchanged = null,
+        ?string $rowHashOverride = null,
     ): string {
-        $manifestRows = array_map(static function (array $row, int $index) use ($publicResolutionType, $rowStatus, $manifestScope, $targetLocale, $reviewedChineseFields, $contentAuthority, $seoReleaseGatesUnchanged): array {
+        $manifestRows = array_map(static function (array $row, int $index) use ($publicResolutionType, $rowStatus, $manifestScope, $targetLocale, $reviewedChineseFields, $contentAuthority, $seoReleaseGatesUnchanged, $rowHashOverride): array {
             $manifestRow = [
                 'row_number' => $index + 2,
                 'slug' => $row['Slug'],
+                'workbook_row_sha256' => $rowHashOverride ?? CareerSelectedDisplayAssetMapper::workbookRowAuthorityHash($row),
                 'status' => $rowStatus,
                 'canonical_slug' => $row['Slug'],
                 'hold_reason' => null,
@@ -1058,6 +1067,13 @@ final class CareerImportSelectedDisplayAssetsCommandTest extends TestCase
             'workbook_sha256' => $actualWorkbookSha,
             'row_count' => count($manifestRows),
             'upload_candidate_slugs' => $candidateSlugs,
+            'upload_candidate_row_hashes' => array_values(array_map(
+                static fn (array $row): array => [
+                    'slug' => strtolower((string) $row['slug']),
+                    'workbook_row_sha256' => strtolower((string) $row['workbook_row_sha256']),
+                ],
+                $manifestRows,
+            )),
         ];
         if ($manifestScope === 'career_zh_display_parity_v0.1') {
             $payload['scope'] = $manifestScope;
