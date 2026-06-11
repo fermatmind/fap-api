@@ -9,7 +9,7 @@
     "PERSONALITY-EN-CONTENT-00": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open",
+      "status": "ci_fix_local_checks_passed",
       "branch": "codex/personality-en-content-00",
       "commit_sha": "4d319ae448c2fd605d0cdebc47bb44c138f1249a",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/2037",
@@ -24,7 +24,7 @@
             "status": "passed"
           },
           {
-            "command": "vendor/bin/pint --test app/Console/Commands/PersonalityEnrichMbtiEnglishVariantSections.php app/Services/Cms/MbtiEnglishVariantSectionEnrichmentService.php tests/Feature/Console/PersonalityEnrichMbtiEnglishVariantSectionsCommandTest.php",
+            "command": "vendor/bin/pint --test app/Console/Commands/PersonalityEnrichMbtiEnglishVariantSections.php app/Services/Cms/MbtiEnglishVariantSectionEnrichmentService.php tests/Feature/Console/PersonalityEnrichMbtiEnglishVariantSectionsCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
             "status": "passed"
           },
           {
@@ -33,15 +33,30 @@
             "details": "4 tests and 73 assertions passed."
           },
           {
+            "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=mbti_personality_english_variant_section_enrichment --no-ansi",
+            "status": "passed",
+            "details": "1 test and 1 assertion passed."
+          },
+          {
             "command": "php artisan list | rg 'personality:enrich-mbti-english-variant-sections'",
             "status": "passed"
           },
           {
-            "command": "git diff --check && git diff --cached --check",
+            "command": "git diff --check",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --cached --check",
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "verify-bigfive",
+            "status": "failed_fix_applied",
+            "details": "GitHub verify-bigfive failed because the runtime freeze classifier did not yet exempt the new backend MBTI English variant section enrichment command/service; added a focused classifier exception and regression test."
+          }
+        ]
       },
       "failure_reason": "",
       "resume_policy": "manual_only",
@@ -63,6 +78,11 @@
           "at": "2026-06-11T20:24:49+08:00",
           "status": "pr_open",
           "summary": "Opened PR #2037 for PERSONALITY-EN-CONTENT-00."
+        },
+        {
+          "at": "2026-06-11T20:43:02+08:00",
+          "status": "ci_fix_local_checks_passed",
+          "summary": "Fixed PR #2037 verify-bigfive failure by exempting the backend MBTI English variant section enrichment command/service from the BigFive runtime freeze classifier and adding a focused regression test. JSON/YAML, Pint, focused PHPUnit, command discovery, and diff checks passed."
         }
       ]
     },

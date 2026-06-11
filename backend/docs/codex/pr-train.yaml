@@ -3795,8 +3795,9 @@ prs:
     checks:
       - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
       - "ruby -e 'require \"yaml\"; YAML.load_file(\"docs/codex/pr-train.yaml\")'"
-      - "vendor/bin/pint --test app/Console/Commands/PersonalityEnrichMbtiEnglishVariantSections.php app/Services/Cms/MbtiEnglishVariantSectionEnrichmentService.php tests/Feature/Console/PersonalityEnrichMbtiEnglishVariantSectionsCommandTest.php"
+      - "vendor/bin/pint --test app/Console/Commands/PersonalityEnrichMbtiEnglishVariantSections.php app/Services/Cms/MbtiEnglishVariantSectionEnrichmentService.php tests/Feature/Console/PersonalityEnrichMbtiEnglishVariantSectionsCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
       - "php artisan test tests/Feature/Console/PersonalityEnrichMbtiEnglishVariantSectionsCommandTest.php --no-ansi"
+      - "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=mbti_personality_english_variant_section_enrichment --no-ansi"
       - "php artisan list | rg 'personality:enrich-mbti-english-variant-sections'"
       - "git diff --check"
       - "git diff --cached --check"
