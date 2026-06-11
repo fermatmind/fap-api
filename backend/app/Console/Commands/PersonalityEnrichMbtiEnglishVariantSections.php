@@ -187,7 +187,25 @@ final class PersonalityEnrichMbtiEnglishVariantSections extends Command
             }
         }
 
-        return $section->payload_json !== $desired['payload_json'];
+        return $this->canonicalComparableValue($section->payload_json) !== $this->canonicalComparableValue($desired['payload_json']);
+    }
+
+    private function canonicalComparableValue(mixed $value): mixed
+    {
+        if (! is_array($value)) {
+            return $value;
+        }
+
+        $normalized = [];
+        foreach ($value as $key => $item) {
+            $normalized[$key] = $this->canonicalComparableValue($item);
+        }
+
+        if (! array_is_list($normalized)) {
+            ksort($normalized);
+        }
+
+        return $normalized;
     }
 
     private function variantOrProfileTypeName(PersonalityProfileVariant $variant, PersonalityProfile $profile): ?string
@@ -230,7 +248,7 @@ final class PersonalityEnrichMbtiEnglishVariantSections extends Command
     {
         return json_encode([
             'body_md' => $section['body_md'] ?? null,
-            'payload_json' => $section['payload_json'] ?? null,
+            'payload_json' => $this->canonicalComparableValue($section['payload_json'] ?? null),
         ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?: '';
     }
 
