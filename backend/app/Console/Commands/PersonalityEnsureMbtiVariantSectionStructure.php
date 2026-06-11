@@ -80,6 +80,7 @@ final class PersonalityEnsureMbtiVariantSectionStructure extends Command
                     if ($existing instanceof PersonalityProfileVariantSection && $this->sectionHasContent($existing)) {
                         $summary['existing_required_sections']++;
                         $summary['preserved_existing_sections']++;
+
                         continue;
                     }
 

@@ -163,6 +163,86 @@ final class CareerNormalizeLegacyDisplayAssetsCommandTest extends TestCase
     }
 
     #[Test]
+    public function force_adds_missing_zh_module_placeholders_only_for_report_authorized_subset_slugs(): void
+    {
+        $slug = 'module-subset-career';
+        $occupation = $this->createOccupation($slug);
+        $missingModules = [
+            'career_snapshot_primary_locale',
+            'career_snapshot_secondary_locale',
+            'personality_fit_block',
+            'responsibilities_block',
+            'work_context_block',
+            'market_signal_card',
+            'adjacent_career_comparison_table',
+            'ai_impact_table',
+            'career_risk_cards',
+            'contract_project_risk_block',
+            'related_next_pages',
+            'source_card',
+            'review_validity_card',
+        ];
+        $zhContent = array_diff_key(
+            $this->pageContentForComponentOrder('中文内容'),
+            array_flip($missingModules),
+        );
+
+        CareerJobDisplayAsset::query()->create([
+            'occupation_id' => $occupation->id,
+            'canonical_slug' => $slug,
+            'surface_version' => 'display.surface.v1',
+            'asset_version' => 'v4.2',
+            'template_version' => 'v4.2',
+            'asset_type' => 'career_job_public_display',
+            'asset_role' => 'formal_pilot_master',
+            'status' => 'ready_for_pilot',
+            'component_order_json' => $this->componentOrder(),
+            'page_payload_json' => [
+                'page' => [
+                    'en' => $this->pageContentForComponentOrder('English content'),
+                    'zh' => $zhContent,
+                ],
+            ],
+            'seo_payload_json' => ['en' => ['title' => $slug], 'zh' => ['title' => $slug]],
+            'sources_json' => ['references' => [['label' => 'Official source']]],
+            'structured_data_json' => ['faq_page' => ['en' => ['mainEntity' => []], 'zh' => ['mainEntity' => []]]],
+            'implementation_contract_json' => ['claim_permissions' => ['visible' => true]],
+            'metadata_json' => ['command' => 'legacy-import'],
+        ]);
+
+        [$exitCode, $report] = $this->runNormalize($slug, [
+            '--force' => true,
+            '--module-subset-report' => $this->moduleSubsetReport([$slug]),
+        ]);
+
+        $this->assertSame(0, $exitCode, json_encode($report, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $this->assertSame('pass', $report['decision']);
+        $this->assertSame(1, $report['validated_count']);
+        $this->assertSame(1, $report['updated_count']);
+        $this->assertSame(1, $report['module_subset_authorized_count']);
+        $this->assertSame(count($missingModules), $report['module_placeholders_added_count']);
+
+        $asset = $this->asset($slug);
+        foreach ($this->componentOrder() as $moduleKey) {
+            $this->assertIsArray(data_get($asset->page_payload_json, "page.zh.{$moduleKey}"));
+        }
+        foreach ($missingModules as $moduleKey) {
+            $this->assertSame('pending_reviewed_zh_content', data_get($asset->page_payload_json, "page.zh.{$moduleKey}.module_state"));
+            $this->assertFalse(data_get($asset->page_payload_json, "page.zh.{$moduleKey}.content_available"));
+            $this->assertSame('no_translated_editorial_copy_generated', data_get($asset->page_payload_json, "page.zh.{$moduleKey}.placeholder_policy"));
+        }
+
+        [$exitCode, $report] = $this->runNormalize($slug, [
+            '--dry-run' => true,
+            '--module-subset-report' => $this->moduleSubsetReport([$slug]),
+        ]);
+
+        $this->assertSame(0, $exitCode, json_encode($report, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $this->assertSame(0, $report['would_update_count']);
+        $this->assertSame(0, $report['module_placeholders_added_count']);
+    }
+
+    #[Test]
     public function it_rejects_manual_hold_and_outside_slugs(): void
     {
         [$exitCode, $report] = $this->runNormalize('software-developers', ['--dry-run' => true]);
@@ -173,6 +253,16 @@ final class CareerNormalizeLegacyDisplayAssetsCommandTest extends TestCase
         $this->assertFalse($report['did_write']);
 
         [$exitCode, $report] = $this->runNormalize('animal-caretakers', ['--dry-run' => true]);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('fail', $report['decision']);
+        $this->assertStringContainsString('Unsupported slug(s)', implode(' ', $report['errors']));
+
+        $this->createOccupation('outside-module-subset');
+        [$exitCode, $report] = $this->runNormalize('outside-module-subset', [
+            '--dry-run' => true,
+            '--module-subset-report' => $this->moduleSubsetReport([]),
+        ]);
 
         $this->assertSame(1, $exitCode);
         $this->assertSame('fail', $report['decision']);
@@ -361,6 +451,36 @@ final class CareerNormalizeLegacyDisplayAssetsCommandTest extends TestCase
     private function allSlugs(): string
     {
         return implode(',', self::AFFECTED_SLUGS);
+    }
+
+    /**
+     * @param  list<string>  $slugs
+     */
+    private function moduleSubsetReport(array $slugs): string
+    {
+        $path = tempnam(sys_get_temp_dir(), 'career-module-subset-report-');
+        $this->assertIsString($path);
+        file_put_contents($path, json_encode([
+            'validator_version' => 'career_zh_display_parity_audit_v0.3',
+            'items' => array_map(static fn (string $slug): array => [
+                'slug' => $slug,
+                'root_cause' => 'zh_display_asset_present_but_module_subset',
+            ], $slugs),
+        ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+
+        return $path;
+    }
+
+    /**
+     * @return array<string, array<string, mixed>>
+     */
+    private function pageContentForComponentOrder(string $prefix): array
+    {
+        return collect($this->componentOrder())
+            ->mapWithKeys(static fn (string $moduleKey): array => [
+                $moduleKey => ['body' => "{$prefix}: {$moduleKey}"],
+            ])
+            ->all();
     }
 
     private function asset(string $slug): CareerJobDisplayAsset
