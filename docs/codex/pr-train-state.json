@@ -54025,7 +54025,7 @@
     "repo": "fap-api",
     "branch": "codex/career-full-parity-08",
     "base": "origin/main",
-    "status": "local_checks_passed",
+    "status": "pr_open_checks_pending",
     "train_scope": "career_full_parity",
     "title": "CAREER-FULL-PARITY-08: test(career): enforce live zh parity gate",
     "depends_on": [
@@ -54060,11 +54060,15 @@
       "scope": {
         "status": "pass",
         "evidence": "Changed files are confined to manifest-allowed audit command, audit feature test, generated career report, and docs/codex state paths."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": "PR #2049 opened; waiting for GitHub checks."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "7d7829ce",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2049",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -54083,6 +54087,11 @@
         "at": "2026-06-11T17:36:20Z",
         "status": "local_checks_passed",
         "note": "Implementation and required local checks passed; ready for scope validation, commit, push, and PR creation."
+      },
+      {
+        "at": "2026-06-11T17:38:10Z",
+        "status": "pr_open_checks_pending",
+        "note": "Opened PR #2049 from codex/career-full-parity-08 after local validation and scope validation passed."
       }
     ]
   },
