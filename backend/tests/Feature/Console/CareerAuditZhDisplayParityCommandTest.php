@@ -189,6 +189,40 @@ final class CareerAuditZhDisplayParityCommandTest extends TestCase
         $this->assertContains('zh_restricted_shell_or_integrity_gap', $report['live_gate']['blockers']);
     }
 
+    #[Test]
+    public function it_does_not_count_display_asset_missing_recommendation_snapshot_as_runtime_shell(): void
+    {
+        Http::fake([
+            'https://api.example.test/api/v0.5/career/jobs/display-asset-backed?locale=en' => Http::response($this->detailPayload([
+                'hero',
+                'path',
+                'source_card',
+            ]), 200),
+            'https://api.example.test/api/v0.5/career/jobs/display-asset-backed?locale=zh-CN' => Http::response($this->detailPayload([
+                'hero',
+                'path',
+                'source_card',
+            ], criticalMissingFields: ['compiled_recommendation_snapshot']), 200),
+        ]);
+
+        $exitCode = Artisan::call('career:audit-zh-display-parity', [
+            '--api-base' => 'https://api.example.test/api/v0.5/career/jobs',
+            '--slugs' => 'display-asset-backed',
+            '--assert-live-parity' => true,
+            '--json' => true,
+        ]);
+        $report = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame('pass', $report['decision']);
+        $this->assertSame('pass', $report['live_gate']['decision']);
+        $this->assertSame(0, $report['live_gate']['restricted_shell_count']);
+        $this->assertContains(
+            'critical_missing_field:compiled_recommendation_snapshot',
+            $report['items'][0]['zh_gate_reasons'],
+        );
+    }
+
     /**
      * @param  list<string>  $slugs
      * @return array<string, mixed>
