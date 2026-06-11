@@ -180,6 +180,44 @@ final class CareerValidateDisplayBatchCommandTest extends TestCase
     }
 
     #[Test]
+    public function it_can_emit_summary_only_json_for_large_full_workbook_reports(): void
+    {
+        $this->createAuthorityOccupation('ready-upload-slug', '15-2011', '15-2011.00');
+        $workbook = $this->writeWorkbook([
+            $this->row('ready-upload-slug', title: 'Ready Upload', cnTitle: '待上传职业', soc: '15-2011', onet: '15-2011.00', schemaValid: true, linksStrict: true, ctaAction: 'start_riasec_test'),
+            $this->row('needs-repair-slug', title: 'Needs Repair', soc: '17-1011', onet: '17-1011.00'),
+        ]);
+        $output = $this->tempDir().'/career_validate_summary.json';
+        $planOutput = $this->tempDir().'/career_full_upload_plan.json';
+
+        $exitCode = Artisan::call('career:validate-display-batch', [
+            '--file' => $workbook,
+            '--json' => true,
+            '--summary-only' => true,
+            '--output' => $output,
+            '--plan-output' => $planOutput,
+        ]);
+        $report = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
+        $written = json_decode((string) file_get_contents($output), true, flags: JSON_THROW_ON_ERROR);
+        $plan = json_decode((string) file_get_contents($planOutput), true, flags: JSON_THROW_ON_ERROR);
+
+        $this->assertSame(0, $exitCode, json_encode($report, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $this->assertSame($report, $written);
+        $this->assertSame('summary_only', $report['report_mode']);
+        $this->assertSame(2, $report['validated_count']);
+        $this->assertSame(2, $report['omitted_counts']['items']);
+        $this->assertSame(2, $report['omitted_counts']['full_upload_plan_rows']);
+        $this->assertSame(2, $report['allowlisted_slug_count']);
+        $this->assertSame([], $report['items']);
+        $this->assertSame([], $report['allowlisted_slugs']);
+        $this->assertSame([], $report['full_upload_plan']['rows']);
+        $this->assertArrayHasKey('ready_for_display_validation', $report['recommended_next_batch_counts']);
+        $this->assertSame([], $report['recommended_next_batches']['ready_for_display_validation']);
+        $this->assertCount(2, $plan['rows']);
+        $this->assertSame($plan['planner']['upload_manifest_sha256'], $report['full_upload_plan']['planner']['upload_manifest_sha256']);
+    }
+
+    #[Test]
     public function it_changes_manifest_hash_when_workbook_content_changes(): void
     {
         $this->createAuthorityOccupation('ready-upload-slug', '15-2011', '15-2011.00');

@@ -69,6 +69,32 @@ final class CareerFullDisplayWorkbookValidatorCommandTest extends TestCase
         $this->assertCount(5, $report['strategic_architecture_gap_scan']['gap_matrix']);
     }
 
+    #[Test]
+    public function it_delegates_summary_only_full_workbook_validation(): void
+    {
+        $workbook = $this->writeWorkbook([
+            $this->row('actuaries'),
+            $this->row('data-scientists'),
+        ]);
+
+        $exitCode = Artisan::call('career:validate-full-display-workbook', [
+            '--file' => $workbook,
+            '--json' => true,
+            '--summary-only' => true,
+        ]);
+        $report = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
+
+        $this->assertSame(0, $exitCode, json_encode($report, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $this->assertSame('career:validate-display-batch', $report['command']);
+        $this->assertSame('summary_only', $report['report_mode']);
+        $this->assertSame('full_workbook', $report['scan_scope']);
+        $this->assertSame(2, $report['validated_count']);
+        $this->assertSame(2, $report['omitted_counts']['items']);
+        $this->assertSame([], $report['items']);
+        $this->assertSame([], $report['full_upload_plan']['rows']);
+        $this->assertFalse($report['writes_database']);
+    }
+
     /**
      * @return array<string, string>
      */

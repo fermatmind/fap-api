@@ -1,0 +1,86 @@
+{
+  "report_id": "career-zh-parity-fix-01-readiness",
+  "generated_at": "2026-06-11T02:26:01Z",
+  "pr_train_id": "CAREER-ZH-PARITY-FIX-01",
+  "read_only": true,
+  "writes_database": false,
+  "database_mutation": false,
+  "cms_mutation": false,
+  "publish_allowed": false,
+  "deploy_allowed": false,
+  "sitemap_llms_index_strategy_changed": false,
+  "command": "php artisan career:validate-full-display-workbook --json --summary-only --output=/private/tmp/career-zh-parity-fix-01-readiness.json --plan-output=/private/tmp/career-zh-parity-fix-01-plan.json --plan-md-output=/private/tmp/career-zh-parity-fix-01-plan.md",
+  "validator_version": "career_display_batch_validator_v0.2",
+  "source_file_basename": "第九版_d23b_schema_repaired.xlsx",
+  "source_file_sha256": "c30f8743cfd0d8baa14ac931cc7270807425164952f6a44953b5b4ab448778ef",
+  "sheet": "Career_Assets_v4_1",
+  "total_rows": 2786,
+  "column_count": 70,
+  "header_exact_match": true,
+  "decision": "no_go",
+  "report_mode": "summary_only",
+  "validated_count": 2786,
+  "omitted_counts": {
+    "items": 2786,
+    "full_upload_plan_rows": 2786
+  },
+  "allowlisted_slug_count": 2786,
+  "summary": {
+    "allowlisted_count": 2786,
+    "ready_for_second_pilot_validation": 0,
+    "authority_ready_content_blocked": 0,
+    "content_ready_authority_blocked": 0,
+    "blocked_authority_unavailable": 2786,
+    "blocked_docx_fallback": 0,
+    "blocked_api_404": 0
+  },
+  "full_upload_plan": {
+    "planner": {
+      "version": "career_full_upload_planner_v0.1",
+      "scope": "career_zh_display_parity_v0.1",
+      "target_locale": "zh-CN",
+      "generated_at": "2026-06-11T02:25:18.094445Z",
+      "db_baseline": {
+        "career_job_display_assets": null
+      },
+      "upload_manifest_sha256": "93b065ba3e765da94d0745f4709c1798c55d3ec36f69168dc4d6c16e14c0ff46"
+    },
+    "summary": {
+      "already_imported_validated": 0,
+      "upload_candidates": 0,
+      "holds": {
+        "manual_hold": 1,
+        "duplicate_identity_hold": 0,
+        "broad_group_hold": 75,
+        "CN_proxy_hold": 1663,
+        "total": 1739
+      },
+      "needs_workbook_repair": 0,
+      "needs_authority_alignment": 0,
+      "unresolved": 1047,
+      "status_counts": {
+        "already_imported_validated": 0,
+        "upload_candidate": 0,
+        "needs_workbook_repair": 0,
+        "needs_authority_alignment": 0,
+        "duplicate_identity_hold": 0,
+        "broad_group_hold": 75,
+        "CN_proxy_hold": 1663,
+        "manual_hold": 1,
+        "non_importable": 0,
+        "blocked_external_sidecar": 1047
+      }
+    },
+    "rows_omitted_from_readiness_report": 2786,
+    "complete_plan_artifact": "/private/tmp/career-zh-parity-fix-01-plan.json",
+    "complete_plan_rows": 2786
+  },
+  "local_authority_note": "Local validation environment has no career authority DB snapshot, so all 2786 rows are blocked_authority_unavailable locally. This is expected readiness evidence for PR01 and does not import, publish, or mutate production state.",
+  "next_prs": [
+    "CAREER-ZH-PARITY-FIX-02 repair reviewed workbook contract issues",
+    "CAREER-ZH-PARITY-FIX-03 support authority-manifest zh display import",
+    "CAREER-ZH-PARITY-FIX-04 controlled import and zh detail cache refresh",
+    "CAREER-ZH-PARITY-FIX-05 display-asset integrity release policy",
+    "CAREER-ZH-PARITY-FIX-06 final live parity gate"
+  ]
+}
