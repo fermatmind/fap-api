@@ -30,8 +30,11 @@ final class SeoIntelSearchChannelLiveSubmissionExecutorTest extends TestCase
             'seo_intel.indexnow_live_api_enabled' => false,
             'seo_intel.search_channel_queue.live_submission.enabled' => false,
             'seo_intel.search_channel_queue.live_submission.external_api_calls_enabled' => false,
-            'seo_intel.search_channel_queue.live_submission.allowed_channels' => ['indexnow'],
+            'seo_intel.search_channel_queue.live_submission.allowed_channels' => ['indexnow', 'baidu_push'],
             'seo_intel.search_channel_queue.live_submission.allowed_hosts' => ['fermatmind.com'],
+            'seo_intel.search_channel_queue.live_submission.baidu.endpoint' => 'https://data.zz.baidu.test/urls',
+            'seo_intel.search_channel_queue.live_submission.baidu.site' => null,
+            'seo_intel.search_channel_queue.live_submission.baidu.token' => null,
             'seo_intel.search_channel_queue.live_submission.indexnow.endpoint' => 'https://api.indexnow.test/indexnow',
             'seo_intel.search_channel_queue.live_submission.indexnow.key' => null,
             'seo_intel.search_channel_queue.live_submission.indexnow.key_location' => null,
@@ -78,6 +81,47 @@ final class SeoIntelSearchChannelLiveSubmissionExecutorTest extends TestCase
     }
 
     #[Test]
+    public function baidu_dry_run_outputs_exact_phrase_without_external_call_or_writes(): void
+    {
+        Http::fake();
+        $canonicalUrl = 'https://fermatmind.com/zh/articles/mbti-vs-holland-career-choice';
+        $queueItemId = $this->seedQueueItem([
+            'canonical_url' => $canonicalUrl,
+            'locale' => 'zh-CN',
+            'page_entity_type' => 'article',
+            'entity_type' => 'article',
+            'entity_id' => 'article:37',
+            'source_authority' => 'backend_cms',
+            'source_table' => 'cms_articles',
+            'channel' => 'baidu_push',
+        ]);
+
+        [$exitCode, $payload] = $this->runSubmitCommand([
+            '--queue-item-id' => $queueItemId,
+            '--dry-run' => true,
+            '--json' => true,
+        ]);
+
+        $this->assertSame(0, $exitCode);
+        $this->assertSame('success', $payload['status'] ?? null);
+        $this->assertSame(
+            'I explicitly approve SEARCH-CHANNEL-LIVE-02 live submission for queue item '.$queueItemId.' channel baidu_push URL '.$canonicalUrl.'.',
+            $payload['approval_phrase'] ?? null,
+        );
+        $this->assertFalse((bool) ($payload['external_calls_attempted'] ?? true));
+        $this->assertFalse((bool) ($payload['search_submission_attempted'] ?? true));
+        $this->assertFalse((bool) ($payload['writes_attempted'] ?? true));
+        $this->assertFalse((bool) ($payload['writes_committed'] ?? true));
+
+        $item = DB::connection('seo_intel')->table('seo_search_channel_queue_items')->where('id', $queueItemId)->first();
+        $this->assertSame('pending', $item->approval_state);
+        $this->assertSame('dry_run_ready', $item->execution_state);
+        $this->assertNull($item->approved_by);
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_search_channel_queue_events')->count());
+        Http::assertNothingSent();
+    }
+
+    #[Test]
     public function live_submission_requires_exact_phrase_and_all_gates(): void
     {
         Http::fake();
@@ -97,6 +141,43 @@ final class SeoIntelSearchChannelLiveSubmissionExecutorTest extends TestCase
         $this->assertContains('indexnow_live_api_disabled', $payload['issues'] ?? []);
         $this->assertContains('indexnow_key_missing', $payload['issues'] ?? []);
         $this->assertContains('indexnow_key_location_missing', $payload['issues'] ?? []);
+        $this->assertFalse((bool) ($payload['writes_committed'] ?? true));
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_search_channel_queue_events')->count());
+        Http::assertNothingSent();
+    }
+
+    #[Test]
+    public function baidu_live_submission_requires_baidu_specific_gates(): void
+    {
+        Http::fake();
+        $queueItemId = $this->seedQueueItem([
+            'canonical_url' => 'https://fermatmind.com/zh/articles/mbti-vs-holland-career-choice',
+            'locale' => 'zh-CN',
+            'page_entity_type' => 'article',
+            'entity_type' => 'article',
+            'entity_id' => 'article:37',
+            'source_authority' => 'backend_cms',
+            'source_table' => 'cms_articles',
+            'channel' => 'baidu_push',
+        ]);
+
+        [$exitCode, $payload] = $this->runSubmitCommand([
+            '--queue-item-id' => $queueItemId,
+            '--approval-phrase' => 'wrong approval phrase',
+            '--json' => true,
+        ]);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('blocked', $payload['status'] ?? null);
+        $this->assertContains('approval_phrase_mismatch', $payload['issues'] ?? []);
+        $this->assertContains('live_submission_gate_disabled', $payload['issues'] ?? []);
+        $this->assertContains('external_api_gate_disabled', $payload['issues'] ?? []);
+        $this->assertContains('baidu_live_api_disabled', $payload['issues'] ?? []);
+        $this->assertContains('baidu_site_missing', $payload['issues'] ?? []);
+        $this->assertContains('baidu_token_missing', $payload['issues'] ?? []);
+        $this->assertNotContains('indexnow_live_api_disabled', $payload['issues'] ?? []);
+        $this->assertNotContains('indexnow_key_missing', $payload['issues'] ?? []);
+        $this->assertNotContains('indexnow_key_location_missing', $payload['issues'] ?? []);
         $this->assertFalse((bool) ($payload['writes_committed'] ?? true));
         $this->assertSame(0, DB::connection('seo_intel')->table('seo_search_channel_queue_events')->count());
         Http::assertNothingSent();
@@ -182,6 +263,99 @@ final class SeoIntelSearchChannelLiveSubmissionExecutorTest extends TestCase
     }
 
     #[Test]
+    public function approved_baidu_submission_updates_queue_and_logs_sanitized_events(): void
+    {
+        config([
+            'seo_intel.baidu_live_api_enabled' => true,
+            'seo_intel.search_channel_queue.live_submission.enabled' => true,
+            'seo_intel.search_channel_queue.live_submission.external_api_calls_enabled' => true,
+            'seo_intel.search_channel_queue.live_submission.baidu.endpoint' => 'https://data.zz.baidu.test/urls',
+            'seo_intel.search_channel_queue.live_submission.baidu.site' => 'https://fermatmind.com',
+            'seo_intel.search_channel_queue.live_submission.baidu.token' => 'secret-baidu-token',
+        ]);
+
+        Http::fake([
+            'data.zz.baidu.test/*' => Http::response(['success' => 1, 'remain' => 99], 200),
+        ]);
+
+        $canonicalUrl = 'https://fermatmind.com/zh/articles/mbti-vs-holland-career-choice';
+        $queueItemId = $this->seedQueueItem([
+            'canonical_url' => $canonicalUrl,
+            'locale' => 'zh-CN',
+            'page_entity_type' => 'article',
+            'entity_type' => 'article',
+            'entity_id' => 'article:37',
+            'source_authority' => 'backend_cms',
+            'source_table' => 'cms_articles',
+            'channel' => 'baidu_push',
+        ]);
+        $approvalPhrase = app(SearchChannelQueueLiveSubmissionExecutor::class)
+            ->approvalPhrase($queueItemId, 'baidu_push', $canonicalUrl);
+
+        [$exitCode, $payload, $rawOutput] = $this->runSubmitCommand([
+            '--queue-item-id' => $queueItemId,
+            '--approval-phrase' => $approvalPhrase,
+            '--actor' => 'seo-ops@example.com',
+            '--json' => true,
+        ]);
+
+        $this->assertSame(0, $exitCode);
+        $this->assertSame('success', $payload['status'] ?? null);
+        $this->assertTrue((bool) ($payload['external_calls_attempted'] ?? false));
+        $this->assertTrue((bool) ($payload['search_submission_attempted'] ?? false));
+        $this->assertSame('accepted', $payload['submission_status'] ?? null);
+        $this->assertSame('submitted', $payload['execution_state'] ?? null);
+        $this->assertSame(200, $payload['http_status'] ?? null);
+        $this->assertStringNotContainsString('secret-baidu-token', $rawOutput);
+
+        Http::assertSent(function (Request $request) use ($canonicalUrl): bool {
+            $query = [];
+            parse_str((string) parse_url($request->url(), PHP_URL_QUERY), $query);
+
+            return $request->method() === 'POST'
+                && parse_url($request->url(), PHP_URL_HOST) === 'data.zz.baidu.test'
+                && $query['site'] === 'https://fermatmind.com'
+                && $query['token'] === 'secret-baidu-token'
+                && $request->body() === $canonicalUrl;
+        });
+
+        $item = DB::connection('seo_intel')->table('seo_search_channel_queue_items')->where('id', $queueItemId)->first();
+        $this->assertSame('approved', $item->approval_state);
+        $this->assertSame('submitted', $item->execution_state);
+        $this->assertSame('seo-ops@example.com', $item->approved_by);
+        $this->assertNotNull($item->approved_at);
+
+        $events = DB::connection('seo_intel')
+            ->table('seo_search_channel_queue_events')
+            ->where('queue_item_id', $queueItemId)
+            ->orderBy('id')
+            ->get();
+
+        $this->assertSame(['live_submission_approved', 'live_submission_response'], $events->pluck('event_type')->all());
+        $this->assertSame('operator', $events[0]->actor_type);
+        $this->assertSame('seo-ops@example.com', $events[0]->actor_id);
+        $this->assertSame('system', $events[1]->actor_type);
+
+        foreach ($events as $event) {
+            $this->assertStringNotContainsString('secret-baidu-token', (string) $event->event_payload);
+            $this->assertStringNotContainsString($canonicalUrl, (string) $event->event_payload);
+        }
+
+        [$secondExitCode, $secondPayload] = $this->runSubmitCommand([
+            '--queue-item-id' => $queueItemId,
+            '--approval-phrase' => $approvalPhrase,
+            '--actor' => 'seo-ops@example.com',
+            '--json' => true,
+        ]);
+
+        $this->assertSame(1, $secondExitCode);
+        $this->assertSame('blocked', $secondPayload['status'] ?? null);
+        $this->assertContains('approval_state_not_pending', $secondPayload['issues'] ?? []);
+        $this->assertContains('execution_state_not_dry_run_ready', $secondPayload['issues'] ?? []);
+        Http::assertSentCount(1);
+    }
+
+    #[Test]
     public function unsafe_queue_item_is_rejected_without_writes_or_external_calls(): void
     {
         Http::fake();
@@ -224,8 +398,12 @@ final class SeoIntelSearchChannelLiveSubmissionExecutorTest extends TestCase
         $this->assertTrue((bool) ($artifact['atomic_single_item_claim_required'] ?? false));
         $this->assertFalse((bool) ($artifact['raw_secret_output_allowed'] ?? true));
         $this->assertContains('indexnow', $artifact['supported_live_channels'] ?? []);
+        $this->assertContains('baidu_push', $artifact['supported_live_channels'] ?? []);
         $this->assertContains('fermatmind.com', $artifact['allowed_hosts'] ?? []);
         $this->assertContains('SEO_INTEL_INDEXNOW_LIVE_API_ENABLED', $artifact['required_env_gates'] ?? []);
+        $this->assertContains('SEO_INTEL_BAIDU_LIVE_API_ENABLED', $artifact['required_env_gates'] ?? []);
+        $this->assertContains('SEO_INTEL_BAIDU_SITE', $artifact['required_env_gates'] ?? []);
+        $this->assertContains('SEO_INTEL_BAIDU_PUSH_TOKEN', $artifact['required_env_gates'] ?? []);
         $this->assertSame('dry_run_ready', data_get($artifact, 'required_queue_item_state.execution_state'));
         $this->assertTrue((bool) data_get($artifact, 'protected_boundaries.no_full_url_in_audit_event_payload'));
         $this->assertTrue((bool) data_get($artifact, 'protected_boundaries.single_item_idempotency_guard'));
