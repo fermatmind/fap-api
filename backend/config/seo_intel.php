@@ -265,6 +265,7 @@ return [
             'shenma_submit',
         ],
         'allowed_page_entity_types' => [
+            'article',
             'research_report',
             'home',
             'test_hub',

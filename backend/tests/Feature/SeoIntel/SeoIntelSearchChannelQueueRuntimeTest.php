@@ -47,6 +47,108 @@ final class SeoIntelSearchChannelQueueRuntimeTest extends TestCase
     }
 
     #[Test]
+    public function eligible_backend_cms_article_url_can_be_planned_without_live_submission(): void
+    {
+        $this->seedSeoUrl([
+            'canonical_url' => 'https://www.fermatmind.com/zh/articles/mbti-vs-holland-career-choice',
+            'locale' => 'zh-CN',
+            'page_entity_type' => 'article',
+            'entity_id_or_slug' => '37',
+            'cluster' => 'article',
+            'source_authority' => 'backend_cms',
+            'lastmod_source' => 'articles.updated_at',
+            'metadata_json' => [
+                'claim_safe' => true,
+                'claim_boundary_state' => 'approved',
+                'publication_state' => 'published',
+                'source_table' => 'articles',
+            ],
+        ]);
+
+        $output = $this->runQueueCommand([
+            '--dry-run' => true,
+            '--no-write' => true,
+            '--json' => true,
+            '--canonical-url' => 'https://www.fermatmind.com/zh/articles/mbti-vs-holland-career-choice',
+            '--channel' => 'indexnow',
+            '--limit' => 20,
+        ]);
+
+        $this->assertSame('success', $output['status'] ?? null);
+        $this->assertSame(1, $output['candidate_count'] ?? null);
+        $this->assertSame(1, $output['eligible_count'] ?? null);
+        $this->assertSame(0, $output['blocked_count'] ?? null);
+        $this->assertSame(1, $output['planned_queue_count'] ?? null);
+        $this->assertSame(['indexnow' => 1], $output['channel_breakdown'] ?? null);
+        $this->assertSame(['article' => 1], $output['page_type_breakdown'] ?? null);
+        $this->assertFalse((bool) ($output['writes_attempted'] ?? true));
+        $this->assertFalse((bool) ($output['writes_committed'] ?? true));
+        $this->assertFalse((bool) ($output['external_calls_attempted'] ?? true));
+        $this->assertFalse((bool) ($output['search_submission_attempted'] ?? true));
+        $this->assertFalse((bool) ($output['live_submission_attempted'] ?? true));
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_search_channel_queue_items')->count());
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_search_channel_queue_batches')->count());
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_search_channel_queue_events')->count());
+    }
+
+    #[Test]
+    public function unsafe_article_urls_remain_blocked(): void
+    {
+        $unsafeCases = [
+            'draft' => [
+                'metadata_json' => ['publication_state' => 'draft', 'claim_safe' => true],
+                'reason' => 'draft',
+            ],
+            'noindex' => [
+                'indexability_state' => 'noindex',
+                'metadata_json' => ['publication_state' => 'published', 'claim_safe' => true],
+                'reason' => 'noindex',
+            ],
+            'private_flow' => [
+                'is_private_flow' => true,
+                'metadata_json' => ['publication_state' => 'published', 'claim_safe' => true],
+                'reason' => 'private_flow',
+            ],
+            'claim_unsafe' => [
+                'metadata_json' => ['publication_state' => 'published', 'claim_safe' => false],
+                'reason' => 'claim_unsafe',
+            ],
+        ];
+
+        foreach ($unsafeCases as $case => $overrides) {
+            $this->seedSeoUrl(array_merge([
+                'canonical_url' => 'https://www.fermatmind.com/zh/articles/blocked-'.$case,
+                'locale' => 'zh-CN',
+                'page_entity_type' => 'article',
+                'entity_id_or_slug' => 'blocked-'.$case,
+                'cluster' => 'article',
+                'source_authority' => 'backend_cms',
+                'lastmod_source' => 'articles.updated_at',
+            ], $overrides));
+        }
+
+        $output = $this->runQueueCommand([
+            '--dry-run' => true,
+            '--no-write' => true,
+            '--json' => true,
+            '--page-type' => 'article',
+            '--limit' => 20,
+        ]);
+
+        $this->assertSame(0, $output['eligible_count'] ?? null);
+        $this->assertSame(4, $output['blocked_count'] ?? null);
+        $this->assertSame(1, data_get($output, 'reason_code_breakdown.draft'));
+        $this->assertSame(1, data_get($output, 'reason_code_breakdown.noindex'));
+        $this->assertSame(1, data_get($output, 'reason_code_breakdown.private_flow'));
+        $this->assertSame(1, data_get($output, 'reason_code_breakdown.claim_unsafe'));
+        $this->assertFalse((bool) ($output['writes_attempted'] ?? true));
+        $this->assertFalse((bool) ($output['writes_committed'] ?? true));
+        $this->assertFalse((bool) ($output['external_calls_attempted'] ?? true));
+        $this->assertFalse((bool) ($output['search_submission_attempted'] ?? true));
+        $this->assertFalse((bool) ($output['live_submission_attempted'] ?? true));
+    }
+
+    #[Test]
     public function draft_url_is_blocked(): void
     {
         $this->seedSeoUrl(['metadata_json' => ['publication_state' => 'draft']]);
@@ -332,6 +434,7 @@ final class SeoIntelSearchChannelQueueRuntimeTest extends TestCase
         $this->assertSame('search-channel-queue-runtime-mvp.v1', $artifact['schema_version'] ?? null);
         $this->assertSame('search_channel_queue', $artifact['runtime'] ?? null);
         $this->assertContains('indexnow', $artifact['allowed_channels'] ?? []);
+        $this->assertContains('article', $artifact['allowed_page_entity_types'] ?? []);
         $this->assertContains('research_report', $artifact['allowed_page_entity_types'] ?? []);
         $this->assertContains('take', $artifact['forbidden_page_entity_types'] ?? []);
         $this->assertContains('backend_cms', $artifact['approved_source_authorities'] ?? []);
