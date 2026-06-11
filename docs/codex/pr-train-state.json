@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-09T00:00:00Z",
+  "updated_at": "2026-06-11T02:39:11Z",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -52637,6 +52637,296 @@
         "at": "2026-06-09T17:02:20Z",
         "status": "ready_to_merge",
         "note": "GitHub checks passed and PR #2023 reported mergeStateStatus=CLEAN for head da07e91896d688efbbe5f20461433197db6972aa."
+      }
+    ]
+  },
+  "CAREER-ZH-PARITY-FIX-01": {
+    "repo": "fap-api",
+    "branch": "codex/career-zh-parity-fix-01",
+    "base": "origin/main",
+    "status": "ready_to_merge",
+    "train_scope": "career_zh_parity_fix",
+    "title": "CAREER-ZH-PARITY-FIX-01: fix(career): compact zh parity workbook readiness",
+    "depends_on": [],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding and executing CAREER-ZH-PARITY-FIX-01 through CAREER-ZH-PARITY-FIX-06, including fap-api docs/codex metadata updates, on 2026-06-11."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "No same-train dependency for PR01."
+      },
+      "implementation": {
+        "status": "pass",
+        "evidence": "Added --summary-only compact JSON support to career:validate-display-batch and career:validate-full-display-workbook. Summary-only preserves validated counts, plan hashes, and summary counts while omitting per-row items, full_upload_plan rows, allowlisted slug lists, and recommended batch slug lists."
+      },
+      "php_lint": {
+        "status": "pass",
+        "evidence": "php -l passed for CareerValidateDisplayBatch.php, CareerFullDisplayWorkbookValidator.php, CareerValidateDisplayBatchCommandTest.php, and CareerFullDisplayWorkbookValidatorCommandTest.php."
+      },
+      "focused_tests": {
+        "status": "pass",
+        "evidence": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=\":memory:\" php artisan test tests/Feature/Console/CareerValidateDisplayBatchCommandTest.php tests/Feature/Console/CareerFullDisplayWorkbookValidatorCommandTest.php --no-ansi passed with 14 warnings from existing workbook fixture file_get_contents noise and 195 assertions."
+      },
+      "readiness_run": {
+        "status": "pass",
+        "evidence": "cd backend && php artisan career:validate-full-display-workbook --file=/Users/rainie/Desktop/费马资料文件/职业：人格与职业决策操作系统/职业内容资产/第九版_d23b_schema_repaired.xlsx --json --summary-only --output=/private/tmp/career-zh-parity-fix-01-readiness.json --plan-output=/private/tmp/career-zh-parity-fix-01-plan.json --plan-md-output=/private/tmp/career-zh-parity-fix-01-plan.md completed with exit 0. Summary report is 16319 bytes; full plan artifact is 3203390 bytes."
+      },
+      "generated_report": {
+        "status": "pass",
+        "evidence": "backend/docs/career/generated/career-zh-parity-fix-01-readiness-report.json generated from the summary-only readiness run and parsed with python3 -m json.tool."
+      },
+      "format": {
+        "status": "pass",
+        "evidence": "cd backend && ./vendor/bin/pint --test app/Console/Commands/CareerValidateDisplayBatch.php app/Console/Commands/CareerFullDisplayWorkbookValidator.php tests/Feature/Console/CareerValidateDisplayBatchCommandTest.php tests/Feature/Console/CareerFullDisplayWorkbookValidatorCommandTest.php passed."
+      },
+      "metadata": {
+        "status": "pass",
+        "evidence": "docs/codex/pr-train-state.json parsed as JSON and docs/codex/pr-train.yaml parsed as YAML using Ruby stdlib."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are confined to PR01 scoped validator commands, focused tests, generated career readiness report, and root docs/codex metadata."
+      },
+      "diff_check": {
+        "status": "pass",
+        "evidence": "git diff --check passed for scoped files; git diff --cached --check will run after staging."
+      },
+      "cached_diff_check": {
+        "status": "pass",
+        "evidence": "git diff --cached --check passed after path-limited staging of the 7 scoped files."
+      },
+      "github": {
+        "status": "pass",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/2025",
+        "head_sha": "9150b0d70769ec72d89016611396698e07aa7caf",
+        "checks": [
+          "hygiene",
+          "supply-chain",
+          "content-pack-build-validate",
+          "verify-mbti-legacy",
+          "verify-mbti-v2",
+          "verify-bigfive",
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "Semgrep OSS"
+        ],
+        "merge_state": "CLEAN",
+        "evidence": "GitHub checks passed for PR #2025 and gh pr view reported mergeStateStatus=CLEAN."
+      },
+      "post_github_scope_validation": {
+        "status": "pass",
+        "evidence": "After GitHub checks passed, git diff --name-only origin/main...HEAD remained confined to the 7 scoped PR01 files and git diff --check origin/main...HEAD passed."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": "9150b0d70769ec72d89016611396698e07aa7caf",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2025",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "sidecar_issues": [],
+    "transitions": [
+      {
+        "at": "2026-06-11T02:19:47Z",
+        "status": "in_progress",
+        "note": "Initialized from explicit CAREER-ZH-PARITY-FIX train authorization and started branch codex/career-zh-parity-fix-01 from latest fap-api main."
+      },
+      {
+        "at": "2026-06-11T02:27:46Z",
+        "status": "local_checks_passed",
+        "note": "Implemented summary-only full workbook readiness output; lint, focused tests, real workbook readiness run, generated report validation, metadata validation, Pint, and scope validation passed locally."
+      },
+      {
+        "at": "2026-06-11T02:29:20Z",
+        "status": "committed",
+        "note": "Created local commit 6e16c94f7f53a39937913100bbb17326fa74abec for CAREER-ZH-PARITY-FIX-01 after scoped staging and cached diff check."
+      },
+      {
+        "at": "2026-06-11T02:31:06Z",
+        "status": "github_checks_pending",
+        "note": "Opened PR #2025 and pushed branch head 19d3160092b22dce29c18f79c722675fcb243ec0; waiting for GitHub checks."
+      },
+      {
+        "at": "2026-06-11T02:39:11Z",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed and PR #2025 reported mergeStateStatus=CLEAN for head 9150b0d70769ec72d89016611396698e07aa7caf."
+      }
+    ]
+  },
+  "CAREER-ZH-PARITY-FIX-02": {
+    "repo": "fap-api",
+    "branch": "codex/career-zh-parity-fix-02",
+    "base": "origin/main",
+    "status": "pending_dependency",
+    "train_scope": "career_zh_parity_fix",
+    "title": "CAREER-ZH-PARITY-FIX-02: fix(career): repair reviewed zh display workbook contract",
+    "depends_on": [
+      "CAREER-ZH-PARITY-FIX-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding and executing CAREER-ZH-PARITY-FIX-01 through CAREER-ZH-PARITY-FIX-06, including fap-api docs/codex metadata updates, on 2026-06-11."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Waiting for CAREER-ZH-PARITY-FIX-01 to merge."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "sidecar_issues": [],
+    "transitions": [
+      {
+        "at": "2026-06-11T02:19:47Z",
+        "status": "pending_dependency",
+        "note": "Future workbook contract repair entry initialized only; implementation deferred until CAREER-ZH-PARITY-FIX-01 is merged."
+      }
+    ]
+  },
+  "CAREER-ZH-PARITY-FIX-03": {
+    "repo": "fap-api",
+    "branch": "codex/career-zh-parity-fix-03",
+    "base": "origin/main",
+    "status": "pending_dependency",
+    "train_scope": "career_zh_parity_fix",
+    "title": "CAREER-ZH-PARITY-FIX-03: feat(career): support authority-manifest zh display import",
+    "depends_on": [
+      "CAREER-ZH-PARITY-FIX-02"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding and executing CAREER-ZH-PARITY-FIX-01 through CAREER-ZH-PARITY-FIX-06, including fap-api docs/codex metadata updates, on 2026-06-11."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Waiting for CAREER-ZH-PARITY-FIX-02 to merge."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "sidecar_issues": [],
+    "transitions": [
+      {
+        "at": "2026-06-11T02:19:47Z",
+        "status": "pending_dependency",
+        "note": "Future authority-manifest import entry initialized only; implementation deferred until CAREER-ZH-PARITY-FIX-02 is merged."
+      }
+    ]
+  },
+  "CAREER-ZH-PARITY-FIX-04": {
+    "repo": "fap-api",
+    "branch": "codex/career-zh-parity-fix-04",
+    "base": "origin/main",
+    "status": "pending_dependency",
+    "train_scope": "career_zh_parity_fix",
+    "title": "CAREER-ZH-PARITY-FIX-04: feat(career): controlled zh display import cache refresh",
+    "depends_on": [
+      "CAREER-ZH-PARITY-FIX-03"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding and executing CAREER-ZH-PARITY-FIX-01 through CAREER-ZH-PARITY-FIX-06, including fap-api docs/codex metadata updates, on 2026-06-11."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Waiting for CAREER-ZH-PARITY-FIX-03 to merge."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "sidecar_issues": [],
+    "transitions": [
+      {
+        "at": "2026-06-11T02:19:47Z",
+        "status": "pending_dependency",
+        "note": "Future controlled import/cache refresh entry initialized only; implementation deferred until CAREER-ZH-PARITY-FIX-03 is merged."
+      }
+    ]
+  },
+  "CAREER-ZH-PARITY-FIX-05": {
+    "repo": "fap-api",
+    "branch": "codex/career-zh-parity-fix-05",
+    "base": "origin/main",
+    "status": "pending_dependency",
+    "train_scope": "career_zh_parity_fix",
+    "title": "CAREER-ZH-PARITY-FIX-05: fix(career): align display-asset integrity release policy",
+    "depends_on": [
+      "CAREER-ZH-PARITY-FIX-04"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding and executing CAREER-ZH-PARITY-FIX-01 through CAREER-ZH-PARITY-FIX-06, including fap-api docs/codex metadata updates, on 2026-06-11."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Waiting for CAREER-ZH-PARITY-FIX-04 to merge."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "sidecar_issues": [],
+    "transitions": [
+      {
+        "at": "2026-06-11T02:19:47Z",
+        "status": "pending_dependency",
+        "note": "Future runtime integrity policy entry initialized only; implementation deferred until CAREER-ZH-PARITY-FIX-04 is merged."
+      }
+    ]
+  },
+  "CAREER-ZH-PARITY-FIX-06": {
+    "repo": "fap-api",
+    "branch": "codex/career-zh-parity-fix-06",
+    "base": "origin/main",
+    "status": "pending_dependency",
+    "train_scope": "career_zh_parity_fix",
+    "title": "CAREER-ZH-PARITY-FIX-06: chore(career): assert final zh display parity",
+    "depends_on": [
+      "CAREER-ZH-PARITY-FIX-05"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding and executing CAREER-ZH-PARITY-FIX-01 through CAREER-ZH-PARITY-FIX-06, including fap-api docs/codex metadata updates, on 2026-06-11."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Waiting for CAREER-ZH-PARITY-FIX-05 to merge."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "sidecar_issues": [],
+    "transitions": [
+      {
+        "at": "2026-06-11T02:19:47Z",
+        "status": "pending_dependency",
+        "note": "Future final live parity gate entry initialized only; implementation deferred until CAREER-ZH-PARITY-FIX-05 is merged."
       }
     ]
   }

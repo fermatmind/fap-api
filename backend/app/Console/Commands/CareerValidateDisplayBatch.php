@@ -140,6 +140,7 @@ final class CareerValidateDisplayBatch extends Command
         {--file= : Absolute path to a v4.2 career asset workbook}
         {--slugs= : Optional comma-separated explicit slug allowlist; omitted means read-only full workbook scan}
         {--json : Emit JSON report}
+        {--summary-only : Omit per-row items and full-upload plan rows from the emitted JSON report}
         {--output= : Optional report output path}
         {--plan-output= : Optional full-upload plan JSON output path for full workbook scans}
         {--plan-md-output= : Optional full-upload plan Markdown summary output path for full workbook scans}
@@ -1673,7 +1674,11 @@ final class CareerValidateDisplayBatch extends Command
             $report['validated_count'] = count($report['items']);
         }
 
-        $json = json_encode($report, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        $outputReport = (bool) $this->option('summary-only')
+            ? $this->summaryOnlyReport($report)
+            : $report;
+
+        $json = json_encode($outputReport, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         if (! is_string($json)) {
             throw new RuntimeException('Unable to encode validation report.');
         }
@@ -1689,15 +1694,58 @@ final class CareerValidateDisplayBatch extends Command
         if ((bool) $this->option('json')) {
             $this->output->write($json.PHP_EOL, false, OutputInterface::OUTPUT_RAW);
         } else {
-            $this->line('validator_version='.$report['validator_version']);
-            $this->line('decision='.$report['decision']);
-            $this->line('validated_count='.$report['validated_count']);
-            if (isset($report['summary'])) {
-                $this->line('summary='.json_encode($report['summary'], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+            $this->line('validator_version='.$outputReport['validator_version']);
+            $this->line('decision='.$outputReport['decision']);
+            $this->line('validated_count='.$outputReport['validated_count']);
+            if (isset($outputReport['summary'])) {
+                $this->line('summary='.json_encode($outputReport['summary'], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
             }
         }
 
         return $success ? self::SUCCESS : self::FAILURE;
+    }
+
+    /**
+     * @param  array<string, mixed>  $report
+     * @return array<string, mixed>
+     */
+    private function summaryOnlyReport(array $report): array
+    {
+        $omitted = [
+            'items' => isset($report['items']) && is_array($report['items']) ? count($report['items']) : 0,
+            'full_upload_plan_rows' => is_array(data_get($report, 'full_upload_plan.rows'))
+                ? count(data_get($report, 'full_upload_plan.rows'))
+                : 0,
+        ];
+
+        if (isset($report['items']) && is_array($report['items'])) {
+            $report['items'] = [];
+        }
+
+        if (isset($report['allowlisted_slugs']) && is_array($report['allowlisted_slugs'])) {
+            $report['allowlisted_slug_count'] = count($report['allowlisted_slugs']);
+            $report['allowlisted_slugs'] = [];
+        }
+
+        if (isset($report['recommended_next_batches']) && is_array($report['recommended_next_batches'])) {
+            $report['recommended_next_batch_counts'] = array_map(
+                static fn (mixed $batch): int => is_array($batch) ? count($batch) : 0,
+                $report['recommended_next_batches'],
+            );
+            $report['recommended_next_batches'] = array_map(
+                static fn (mixed $batch): mixed => is_array($batch) ? [] : $batch,
+                $report['recommended_next_batches'],
+            );
+        }
+
+        if (is_array(data_get($report, 'full_upload_plan.rows'))) {
+            data_set($report, 'full_upload_plan.rows', []);
+        }
+
+        $report['report_mode'] = 'summary_only';
+        $report['omitted_counts'] = $omitted;
+
+        return $report;
     }
 
     /**

@@ -12,6 +12,7 @@ final class CareerFullDisplayWorkbookValidator extends Command
         {--file= : Absolute path to a v4.2 career asset workbook}
         {--slugs= : Optional comma-separated explicit slug allowlist}
         {--json : Emit JSON report}
+        {--summary-only : Omit per-row items and full-upload plan rows from the emitted JSON report}
         {--output= : Optional report output path}
         {--plan-output= : Optional full-upload plan JSON output path for full workbook scans}
         {--plan-md-output= : Optional full-upload plan Markdown summary output path for full workbook scans}
@@ -25,6 +26,7 @@ final class CareerFullDisplayWorkbookValidator extends Command
             '--file' => $this->option('file'),
             '--slugs' => $this->option('slugs'),
             '--json' => (bool) $this->option('json'),
+            '--summary-only' => (bool) $this->option('summary-only'),
             '--output' => $this->option('output'),
             '--plan-output' => $this->option('plan-output'),
             '--plan-md-output' => $this->option('plan-md-output'),
