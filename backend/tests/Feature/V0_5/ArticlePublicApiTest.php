@@ -7,6 +7,7 @@ namespace Tests\Feature\V0_5;
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
+use App\Services\SEO\SitemapGenerator;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
@@ -94,6 +95,31 @@ final class ArticlePublicApiTest extends TestCase
             ->assertOk()
             ->assertJsonPath('items.0.slug', 'newest-uploaded-article')
             ->assertJsonPath('items.1.slug', 'older-voice-ordered-article');
+    }
+
+    public function test_public_article_payload_exposes_sitemap_and_llms_eligibility_gates(): void
+    {
+        $this->createArticle([
+            'slug' => 'indexable-held-from-enumeration',
+            'locale' => 'en',
+            'title' => 'Indexable held from enumeration',
+            'is_indexable' => true,
+            'sitemap_eligible' => false,
+            'llms_eligible' => false,
+        ]);
+
+        $this->getJson('/api/v0.5/articles?locale=en&page=1')
+            ->assertOk()
+            ->assertJsonPath('items.0.slug', 'indexable-held-from-enumeration')
+            ->assertJsonPath('items.0.is_indexable', true)
+            ->assertJsonPath('items.0.sitemap_eligible', false)
+            ->assertJsonPath('items.0.llms_eligible', false);
+
+        $this->getJson('/api/v0.5/articles/indexable-held-from-enumeration?locale=en')
+            ->assertOk()
+            ->assertJsonPath('article.is_indexable', true)
+            ->assertJsonPath('article.sitemap_eligible', false)
+            ->assertJsonPath('article.llms_eligible', false);
     }
 
     public function test_article_seo_detail_returns_localized_frontend_canonical_alternates_and_jsonld_urls(): void
@@ -627,7 +653,7 @@ final class ArticlePublicApiTest extends TestCase
         }
     }
 
-    public function test_sitemap_source_uses_public_readable_and_indexable_article_gate(): void
+    public function test_sitemap_source_uses_public_readable_indexable_and_sitemap_eligible_article_gate(): void
     {
         Cache::flush();
         config(['app.frontend_url' => 'https://staging.fermatmind.com']);
@@ -635,6 +661,8 @@ final class ArticlePublicApiTest extends TestCase
         $this->createArticle([
             'slug' => 'sitemap-visible-article',
             'locale' => 'en',
+            'sitemap_eligible' => true,
+            'llms_eligible' => true,
         ]);
         $this->createArticle([
             'slug' => 'sitemap-draft-article',
@@ -650,10 +678,8 @@ final class ArticlePublicApiTest extends TestCase
             'is_indexable' => false,
         ]);
 
-        $response = $this->getJson('/api/v0.5/seo/sitemap-source');
+        $locations = collect(app(SitemapGenerator::class)->generateUrls())->pluck('loc')->all();
 
-        $response->assertOk();
-        $locations = collect($response->json('items'))->pluck('loc')->all();
         $this->assertContains('https://staging.fermatmind.com/en/articles/sitemap-visible-article', $locations);
         $this->assertNotContains('https://staging.fermatmind.com/en/articles/sitemap-draft-article', $locations);
         $this->assertNotContains('https://staging.fermatmind.com/en/articles/sitemap-noindex-article', $locations);

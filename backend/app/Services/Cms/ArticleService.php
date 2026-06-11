@@ -164,6 +164,8 @@ final class ArticleService
                 'voice',
                 'voice_order',
                 'is_indexable',
+                'sitemap_eligible',
+                'llms_eligible',
             ];
 
             $updates = [];
