@@ -53285,7 +53285,7 @@
     "repo": "fap-api",
     "branch": "codex/career-zh-parity-live-01",
     "base": "origin/main",
-    "status": "local_verified",
+    "status": "pr_open_checks_pending",
     "train_scope": "career_zh_parity_live",
     "title": "CAREER-ZH-PARITY-LIVE-01: chore(career): rescan zh parity live root causes",
     "depends_on": [
@@ -53321,8 +53321,8 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": "cc6e7bb27c1509b166ddbe800e17c2e19ee4b929",
-    "pr_url": null,
+    "commit_sha": "0362413b01c8bb609a053fbc2e498a8808fbf8eb",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2033",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -53352,6 +53352,11 @@
         "at": "2026-06-11T10:14:40Z",
         "status": "committed",
         "note": "Created local commit cc6e7bb27c1509b166ddbe800e17c2e19ee4b929 for CAREER-ZH-PARITY-LIVE-01 after scoped staging and cached diff check."
+      },
+      {
+        "at": "2026-06-11T10:17:39Z",
+        "status": "pr_open_checks_pending",
+        "note": "Opened PR #2033 for CAREER-ZH-PARITY-LIVE-01 from head commit 0362413b01c8bb609a053fbc2e498a8808fbf8eb; waiting for GitHub checks."
       }
     ]
   }
