@@ -18,7 +18,7 @@ final class CareerRepairDisplayWorkbookContract extends Command
 {
     private const SHEET_NAME = 'Career_Assets_v4_1';
 
-    private const REPAIRER_VERSION = 'career_display_workbook_contract_repairer_v0.1';
+    private const REPAIRER_VERSION = 'career_display_workbook_contract_repairer_v0.2';
 
     /** @var list<string> */
     private const REQUIRED_HEADERS = [
@@ -27,6 +27,11 @@ final class CareerRepairDisplayWorkbookContract extends Command
         'CN_Occupation_Schema_JSON',
         'Claim_Level_Source_Refs',
         'Primary_CTA_Target_Action',
+        'Source_Page_Type',
+        'EN_Title',
+        'CN_Title',
+        'EN_H1',
+        'CN_H1',
     ];
 
     /** @var list<string> */
@@ -109,9 +114,12 @@ final class CareerRepairDisplayWorkbookContract extends Command
 
         $repairsByField = [];
         $sampleRepairs = [];
+        $manualReviewRows = [];
         $changedRows = 0;
         $changedCells = 0;
         $selectedRows = 0;
+        $autoRepairableRows = 0;
+        $changedRowsRequiringManualReview = 0;
 
         foreach ($rows as $rowIndex => $row) {
             $slug = strtolower(trim((string) ($row['Slug'] ?? '')));
@@ -124,8 +132,10 @@ final class CareerRepairDisplayWorkbookContract extends Command
             $changes = [];
 
             $this->normalizeCta($rows[$rowIndex], $changes);
+            $this->normalizeSourcePageType($rows[$rowIndex], $changes);
             $this->normalizeSourceRefs($rows[$rowIndex], $changes);
             $this->normalizeOccupationSchemas($rows[$rowIndex], $changes);
+            $manualReasons = $this->manualReviewReasons($rows[$rowIndex]);
 
             foreach ($changes as $field => $change) {
                 $rowChanged = true;
@@ -135,13 +145,27 @@ final class CareerRepairDisplayWorkbookContract extends Command
 
             if ($rowChanged) {
                 $changedRows++;
+                if ($manualReasons === []) {
+                    $autoRepairableRows++;
+                } else {
+                    $changedRowsRequiringManualReview++;
+                }
                 if (count($sampleRepairs) < 12) {
                     $sampleRepairs[] = [
                         'row_number' => $row['_row_number'] ?? null,
                         'slug' => $slug,
                         'fields' => array_keys($changes),
+                        'manual_review_required' => $manualReasons !== [],
                     ];
                 }
+            }
+
+            if ($manualReasons !== []) {
+                $manualReviewRows[] = [
+                    'row_number' => $row['_row_number'] ?? null,
+                    'slug' => $slug,
+                    'reasons' => $manualReasons,
+                ];
             }
         }
 
@@ -167,10 +191,15 @@ final class CareerRepairDisplayWorkbookContract extends Command
             'slug_filter_count' => count($slugAllowlist),
             'changed_rows' => $changedRows,
             'changed_cells' => $changedCells,
+            'auto_repairable_rows' => $autoRepairableRows,
+            'changed_rows_requiring_manual_review' => $changedRowsRequiringManualReview,
+            'manual_review_required_count' => count($manualReviewRows),
+            'manual_review_required_rows' => $manualReviewRows,
             'repairs_by_field' => $repairsByField,
             'sample_repairs' => $sampleRepairs,
             'repair_contract' => [
                 'primary_cta_target_action' => 'start_riasec_test',
+                'source_page_type' => 'career_job_detail',
                 'source_ref_label' => 'FermatMind interpretation',
                 'occupation_schema_forbidden_terms_removed' => [
                     'Product schema',
@@ -180,6 +209,59 @@ final class CareerRepairDisplayWorkbookContract extends Command
             ],
             'decision' => $changedRows === 0 ? 'already_clean' : ($execute ? 'repaired_artifact_written' : 'dry_run_changes_available'),
         ];
+    }
+
+    /**
+     * @param  array<string, string>  $row
+     * @param  array<string, mixed>  $changes
+     */
+    private function normalizeSourcePageType(array &$row, array &$changes): void
+    {
+        $previous = trim((string) ($row['Source_Page_Type'] ?? ''));
+        if ($previous === 'career_job_detail') {
+            return;
+        }
+
+        $row['Source_Page_Type'] = 'career_job_detail';
+        $changes['Source_Page_Type'] = ['from' => $previous, 'to' => 'career_job_detail'];
+    }
+
+    /**
+     * @param  array<string, string>  $row
+     * @return list<string>
+     */
+    private function manualReviewReasons(array $row): array
+    {
+        $reasons = [];
+        $cnTitle = trim((string) ($row['CN_Title'] ?? ''));
+        $cnH1 = trim((string) ($row['CN_H1'] ?? ''));
+        $enTitle = trim((string) ($row['EN_Title'] ?? ''));
+        $enH1 = trim((string) ($row['EN_H1'] ?? ''));
+
+        if ($cnTitle === '') {
+            $reasons[] = 'CN_Title missing';
+        } elseif (! $this->containsCjk($cnTitle)) {
+            $reasons[] = 'CN_Title lacks reviewed Chinese text';
+        }
+        if ($cnTitle !== '' && $enTitle !== '' && mb_strtolower($cnTitle) === mb_strtolower($enTitle)) {
+            $reasons[] = 'CN_Title copied from EN_Title';
+        }
+
+        if ($cnH1 === '') {
+            $reasons[] = 'CN_H1 missing';
+        } elseif (! $this->containsCjk($cnH1)) {
+            $reasons[] = 'CN_H1 lacks reviewed Chinese text';
+        }
+        if ($cnH1 !== '' && $enH1 !== '' && mb_strtolower($cnH1) === mb_strtolower($enH1)) {
+            $reasons[] = 'CN_H1 copied from EN_H1';
+        }
+
+        return array_values(array_unique($reasons));
+    }
+
+    private function containsCjk(string $value): bool
+    {
+        return preg_match('/\p{Han}/u', $value) === 1;
     }
 
     /**

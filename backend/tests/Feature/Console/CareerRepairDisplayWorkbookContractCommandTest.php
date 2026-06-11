@@ -18,6 +18,11 @@ final class CareerRepairDisplayWorkbookContractCommandTest extends TestCase
         'CN_Occupation_Schema_JSON',
         'Claim_Level_Source_Refs',
         'Primary_CTA_Target_Action',
+        'Source_Page_Type',
+        'EN_Title',
+        'CN_Title',
+        'EN_H1',
+        'CN_H1',
     ];
 
     #[Test]
@@ -41,8 +46,12 @@ final class CareerRepairDisplayWorkbookContractCommandTest extends TestCase
         $this->assertFalse($report['cms_mutation']);
         $this->assertSame('dry_run_changes_available', $report['decision']);
         $this->assertSame(1, $report['changed_rows']);
-        $this->assertSame(4, $report['changed_cells']);
+        $this->assertSame(5, $report['changed_cells']);
+        $this->assertSame(1, $report['auto_repairable_rows']);
+        $this->assertSame(0, $report['changed_rows_requiring_manual_review']);
+        $this->assertSame(0, $report['manual_review_required_count']);
         $this->assertSame(1, $report['repairs_by_field']['Primary_CTA_Target_Action']);
+        $this->assertSame(1, $report['repairs_by_field']['Source_Page_Type']);
         $this->assertSame(1, $report['repairs_by_field']['Claim_Level_Source_Refs']);
         $this->assertSame(1, $report['repairs_by_field']['EN_Occupation_Schema_JSON']);
         $this->assertSame(1, $report['repairs_by_field']['CN_Occupation_Schema_JSON']);
@@ -86,11 +95,47 @@ final class CareerRepairDisplayWorkbookContractCommandTest extends TestCase
         $this->assertSame(0, $secondReport['changed_cells']);
     }
 
+    #[Test]
+    public function it_isolates_rows_that_need_manual_chinese_title_review(): void
+    {
+        $workbook = $this->writeWorkbook([
+            $this->dirtyRow(
+                'manual-title-review',
+                enTitle: 'Manual Title Review',
+                cnTitle: 'Manual Title Review',
+                enH1: 'Manual Title Review',
+                cnH1: 'Manual Title Review',
+            ),
+        ]);
+
+        $exitCode = Artisan::call('career:repair-display-workbook-contract', [
+            '--file' => $workbook,
+            '--json' => true,
+        ]);
+        $report = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
+
+        $this->assertSame(0, $exitCode, json_encode($report, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $this->assertSame(1, $report['changed_rows']);
+        $this->assertSame(0, $report['auto_repairable_rows']);
+        $this->assertSame(1, $report['changed_rows_requiring_manual_review']);
+        $this->assertSame(1, $report['manual_review_required_count']);
+        $this->assertSame('manual-title-review', $report['manual_review_required_rows'][0]['slug']);
+        $this->assertContains('CN_Title lacks reviewed Chinese text', $report['manual_review_required_rows'][0]['reasons']);
+        $this->assertContains('CN_Title copied from EN_Title', $report['manual_review_required_rows'][0]['reasons']);
+        $this->assertContains('CN_H1 lacks reviewed Chinese text', $report['manual_review_required_rows'][0]['reasons']);
+        $this->assertContains('CN_H1 copied from EN_H1', $report['manual_review_required_rows'][0]['reasons']);
+    }
+
     /**
      * @return array<string, string>
      */
-    private function dirtyRow(string $slug): array
-    {
+    private function dirtyRow(
+        string $slug,
+        string $enTitle = 'Shipping, Receiving, And Inventory Clerks',
+        string $cnTitle = '发运、收货、库存文员',
+        string $enH1 = 'Shipping, Receiving, And Inventory Clerks',
+        string $cnH1 = '发运、收货、库存文员',
+    ): array {
         return [
             'Slug' => $slug,
             'EN_Occupation_Schema_JSON' => $this->encodeJson([
@@ -111,6 +156,11 @@ final class CareerRepairDisplayWorkbookContractCommandTest extends TestCase
                 'jobs' => ['url' => 'https://www.onetonline.org/link/details/43-5071.00', 'claim' => 'jobs employment'],
             ]),
             'Primary_CTA_Target_Action' => 'open_test',
+            'Source_Page_Type' => 'career_article',
+            'EN_Title' => $enTitle,
+            'CN_Title' => $cnTitle,
+            'EN_H1' => $enH1,
+            'CN_H1' => $cnH1,
         ];
     }
 
