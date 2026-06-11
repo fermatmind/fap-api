@@ -407,6 +407,14 @@ final class CareerNormalizeLegacyDisplayAssets extends Command
             $errors[] = 'Product schema remains in public payload after normalization.';
         }
 
+        $publishGate = (new CareerDisplayAssetPublishGate)->validatePayload(
+            $slug,
+            $this->componentOrder($asset),
+            $afterPage,
+            $afterStructuredData,
+            $afterMetadata,
+        );
+
         $wouldUpdate = $errors === [] && (
             $this->hash($beforePage) !== $this->hash($afterPage)
             || $this->hash($beforeMetadata) !== $this->hash($afterMetadata)
@@ -427,6 +435,14 @@ final class CareerNormalizeLegacyDisplayAssets extends Command
             'Product_schema_removed_count' => $productSchemasRemoved,
             'public_payload_forbidden_keys_found' => $forbidden,
             'Product_absent' => ! $this->containsProduct($publicPayload),
+            'publish_gate' => [
+                'validator_version' => $publishGate['validator_version'],
+                'decision' => $publishGate['decision'],
+                'module_parity' => $publishGate['module_parity'],
+                'source_page_type_valid' => $publishGate['source_page_type_valid'],
+                'product_schema_absent' => $publishGate['product_schema_absent'],
+                'reviewed_chinese_valid' => $publishGate['reviewed_chinese_valid'],
+            ],
             'patches' => $patches,
             'before' => [
                 'page_payload_json' => $beforePage,
@@ -709,6 +725,7 @@ final class CareerNormalizeLegacyDisplayAssets extends Command
             'module_subset_authorized_count' => count(array_filter($items, static fn (array $item): bool => ($item['module_subset_authorized'] ?? false) === true)),
             'Product_schema_removed_count' => array_sum(array_map(static fn (array $item): int => (int) ($item['Product_schema_removed_count'] ?? 0), $items)),
             'actor_shape_normalized_count' => count(array_filter($items, static fn (array $item): bool => ($item['actor_shape_normalized'] ?? false) === true)),
+            'publish_gate_blocked_count' => count(array_filter($items, static fn (array $item): bool => data_get($item, 'publish_gate.decision') !== 'pass')),
             'failed_count' => count(array_filter($items, static fn (array $item): bool => ($item['errors'] ?? []) !== [])),
         ];
     }
@@ -738,6 +755,7 @@ final class CareerNormalizeLegacyDisplayAssets extends Command
             'module_subset_report' => null,
             'Product_schema_removed_count' => 0,
             'actor_shape_normalized_count' => 0,
+            'publish_gate_blocked_count' => 0,
             'did_write' => false,
             'release_gates_changed' => false,
             'decision' => 'fail',
