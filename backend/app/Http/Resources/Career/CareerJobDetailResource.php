@@ -35,7 +35,11 @@ final class CareerJobDetailResource extends JsonResource
         $requestedLocale = is_string($request->query('locale')) ? (string) $request->query('locale') : 'zh-CN';
         $displaySurface = app(CareerJobDisplaySurfaceBuilder::class)->buildForBundle($bundle, $requestedLocale);
         $runtimeProjectionItem = $this->runtimePublishedProjectionItem($bundle, $requestedLocale);
-        if ($displaySurface === null && $runtimeProjectionItem !== null) {
+        if (
+            $displaySurface === null
+            && $runtimeProjectionItem !== null
+            && ($runtimeProjectionItem['projection_source'] ?? null) !== 'testing_database_fixture_fallback'
+        ) {
             $displaySurface = app(CareerRuntimePublishedDisplaySurfaceBuilder::class)
                 ->build($bundle, $requestedLocale, $runtimeProjectionItem);
         }

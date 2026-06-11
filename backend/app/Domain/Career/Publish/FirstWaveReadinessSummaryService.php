@@ -21,6 +21,11 @@ final class FirstWaveReadinessSummaryService
         private readonly FirstWavePublishReadyValidator $validator,
     ) {}
 
+    public static function clearSummaryMemo(): void
+    {
+        self::$summaryMemo = [];
+    }
+
     public function build(
         ?string $blockedRegistryPath = null,
         ?string $authorityOverridePath = null,

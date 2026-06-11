@@ -31,6 +31,11 @@ final class CareerFirstWaveLaunchTierSummaryService
         private readonly FirstWavePublishGate $publishGate,
     ) {}
 
+    public static function clearSummaryMemo(): void
+    {
+        self::$summaryMemo = null;
+    }
+
     public function build(): CareerFirstWaveLaunchTierSummary
     {
         if (self::$summaryMemo instanceof CareerFirstWaveLaunchTierSummary) {
