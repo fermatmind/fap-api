@@ -47,7 +47,7 @@ final class CareerAuditZhDisplayParityCommandTest extends TestCase
             'https://api.example.test/api/v0.5/career/jobs/zh-missing-modules?locale=zh-CN' => Http::response($this->detailPayload([
                 'hero',
                 'path',
-            ], amberFlags: ['runtime_published_shell'], criticalMissingFields: ['compiled_recommendation_snapshot']), 200),
+            ], amberFlags: ['runtime_published_shell'], criticalMissingFields: ['compiled_recommendation_snapshot'], integrityState: 'runtime_published_shell'), 200),
             'https://api.example.test/api/v0.5/career/jobs/zh-extra-modules?locale=en' => Http::response($this->detailPayload([
                 'hero',
                 'path',
@@ -93,6 +93,10 @@ final class CareerAuditZhDisplayParityCommandTest extends TestCase
         $this->assertContains('zh_missing_en_display_modules', $report['live_gate']['blockers']);
         $this->assertContains('zh_restricted_shell_or_integrity_gap', $report['live_gate']['blockers']);
         $this->assertSame(1, $report['live_gate']['restricted_shell_count']);
+        $this->assertSame(1, $report['production_live_assessment']['runtime_shell_count']);
+        $this->assertSame(['zh-missing-modules'], $report['production_live_assessment']['runtime_shell_slugs']);
+        $this->assertSame(1, $report['controlled_import_manifest']['candidate_count']);
+        $this->assertSame(['zh-missing-modules'], $report['controlled_import_manifest']['candidate_slugs']);
         $this->assertSame(5, $report['summary']['total_slugs']);
         $this->assertSame(1, $report['summary']['same_module_set']);
         $this->assertSame(1, $report['summary']['en_has_modules_zh_missing']);
@@ -109,6 +113,10 @@ final class CareerAuditZhDisplayParityCommandTest extends TestCase
         $this->assertContains('zh_missing_en_display_modules', $missing['zh_gate_reasons']);
         $this->assertContains('amber_flag:runtime_published_shell', $missing['zh_gate_reasons']);
         $this->assertContains('critical_missing_field:compiled_recommendation_snapshot', $missing['zh_gate_reasons']);
+        $this->assertSame('runtime_shell_missing_or_unpublished_zh_display_asset', $missing['root_cause']);
+        $this->assertSame('not_proven', $missing['cache_stale_assessment']['cache_stale']);
+        $this->assertSame('inferred_absent_or_not_published_from_public_payload', $missing['zh_public_asset_state']['cms_asset_exists']);
+        $this->assertTrue($missing['controlled_import_candidate']);
         $this->assertSame('https://www.example.test/zh/career/jobs/zh-missing-modules', $missing['sample_urls']['zh']);
     }
 
@@ -154,7 +162,7 @@ final class CareerAuditZhDisplayParityCommandTest extends TestCase
             'https://api.example.test/api/v0.5/career/jobs/gated-slug?locale=zh-CN' => Http::response($this->detailPayload([
                 'hero',
                 'path',
-            ], amberFlags: ['runtime_published_shell']), 200),
+            ], amberFlags: ['runtime_published_shell'], integrityState: 'runtime_published_shell'), 200),
         ]);
 
         $exitCode = Artisan::call('career:audit-zh-display-parity', [
@@ -187,6 +195,7 @@ final class CareerAuditZhDisplayParityCommandTest extends TestCase
         $this->assertSame('blocked', $report['live_gate']['decision']);
         $this->assertContains('zh_missing_en_display_modules', $report['live_gate']['blockers']);
         $this->assertContains('zh_restricted_shell_or_integrity_gap', $report['live_gate']['blockers']);
+        $this->assertSame(['gated-slug'], $report['controlled_import_manifest']['candidate_slugs']);
     }
 
     #[Test]
@@ -217,6 +226,9 @@ final class CareerAuditZhDisplayParityCommandTest extends TestCase
         $this->assertSame('pass', $report['decision']);
         $this->assertSame('pass', $report['live_gate']['decision']);
         $this->assertSame(0, $report['live_gate']['restricted_shell_count']);
+        $this->assertSame('inferred_present_from_public_payload', $report['items'][0]['zh_public_asset_state']['cms_asset_exists']);
+        $this->assertSame('not_indicated', $report['items'][0]['cache_stale_assessment']['cache_stale']);
+        $this->assertFalse($report['items'][0]['controlled_import_candidate']);
         $this->assertContains(
             'critical_missing_field:compiled_recommendation_snapshot',
             $report['items'][0]['zh_gate_reasons'],
@@ -249,6 +261,7 @@ final class CareerAuditZhDisplayParityCommandTest extends TestCase
         array $contentKeys,
         array $amberFlags = [],
         array $criticalMissingFields = [],
+        string $integrityState = 'display_asset_backed',
     ): array {
         return [
             'bundle_kind' => 'career_job_detail',
@@ -258,8 +271,24 @@ final class CareerAuditZhDisplayParityCommandTest extends TestCase
                 'blocked_claims' => [],
             ],
             'integrity_summary' => [
-                'integrity_state' => 'display_asset_backed',
+                'integrity_state' => $integrityState,
                 'critical_missing_fields' => $criticalMissingFields,
+            ],
+            'seo_contract' => [
+                'reason_codes' => $integrityState === 'display_asset_backed'
+                    ? ['validated_display_asset_backed_release', 'runtime_publish_projection']
+                    : ['runtime_published_shell_no_strong_claims'],
+            ],
+            'provenance_meta' => [
+                'content_version' => $integrityState === 'display_asset_backed'
+                    ? 'display_asset_backed_v4_2'
+                    : 'runtime_published_shell_v1',
+                'data_version' => $integrityState === 'display_asset_backed'
+                    ? 'career_job_display_assets.v4.2'
+                    : 'runtime_projection.v1',
+                'surface_type' => $integrityState === 'display_asset_backed'
+                    ? 'career_job_detail_display_asset_backed_bundle'
+                    : 'career_job_detail_runtime_published_shell',
             ],
             'display_surface_v1' => [
                 'page' => [

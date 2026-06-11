@@ -24436,3 +24436,44 @@ prs:
     url_submission: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: CAREER-ZH-PARITY-LIVE-01
+    repo: fap-api
+    depends_on:
+      - CAREER-ZH-PARITY-FIX-06
+    branch: codex/career-zh-parity-live-01
+    title: "CAREER-ZH-PARITY-LIVE-01: chore(career): rescan zh parity live root causes"
+    train_scope: career_zh_parity_live
+    status: user_authorized
+    scope:
+      - Run a post-deploy production read-only scan for all 1046 public career job slugs.
+      - Output the full runtime shell slug list, missing module list, gate reasons, public CMS asset inference, cache-stale boundary, and next controlled import/cache-refresh manifest.
+      - Reconcile CAREER-ZH-PARITY-FIX-06 merged ledger state after confirming GitHub and origin/main containment.
+    allowed_paths:
+      - backend/app/Console/Commands/CareerAuditZhDisplayParity.php
+      - backend/tests/Feature/Console/CareerAuditZhDisplayParityCommandTest.php
+      - backend/docs/career/generated/career-zh-parity-live-01-production-report.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify fap-web, publish content, import display assets, mutate CMS/database/cache, deploy, or change sitemap/llms/index strategy.
+    validation:
+      - php -l backend/app/Console/Commands/CareerAuditZhDisplayParity.php
+      - php -l backend/tests/Feature/Console/CareerAuditZhDisplayParityCommandTest.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Console/CareerAuditZhDisplayParityCommandTest.php --no-ansi
+      - cd backend && php artisan career:audit-zh-display-parity --output=docs/career/generated/career-zh-parity-live-01-production-report.json
+      - python3 -m json.tool backend/docs/career/generated/career-zh-parity-live-01-production-report.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    content_authority: backend
