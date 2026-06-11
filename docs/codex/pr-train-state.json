@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-11T13:13:09Z",
+  "updated_at": "2026-06-11T13:15:48Z",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -53379,7 +53379,7 @@
     "repo": "fap-api",
     "branch": "codex/career-full-parity-01",
     "base": "origin/main",
-    "status": "committed",
+    "status": "pr_open_checks_pending",
     "train_scope": "career_full_parity",
     "title": "CAREER-FULL-PARITY-01: fix(career): harden zh display parity audit failures",
     "depends_on": [
@@ -53411,8 +53411,8 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": "e07fa233ff350ea60d63d4b842df2fdc710c98e2",
-    "pr_url": null,
+    "commit_sha": "84d1c53c12af7601d5bb63bd2144f7527187fc31",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2038",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -53452,6 +53452,11 @@
         "at": "2026-06-11T13:13:09Z",
         "status": "committed",
         "note": "Created local commit e07fa233ff350ea60d63d4b842df2fdc710c98e2 for CAREER-FULL-PARITY-01 after scoped staging and cached diff check."
+      },
+      {
+        "at": "2026-06-11T13:15:48Z",
+        "status": "pr_open_checks_pending",
+        "note": "Opened PR #2038 for CAREER-FULL-PARITY-01; waiting for GitHub checks."
       }
     ]
   },
