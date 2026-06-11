@@ -26345,7 +26345,7 @@
   "BAIDU-LIVE-00": {
     "repo": "fap-api",
     "branch": "codex/baidu-live-00-readiness-contract",
-    "status": "pr_open_checks_pending",
+    "status": "ready_to_merge",
     "depends_on": [
       "GSC-LIVE-00"
     ],
@@ -53126,12 +53126,12 @@
         "notes": "PHP lint, focused CareerJobDetailApiTest coverage, CareerJobDisplaySurfaceBuilderTest, scoped Pint, JSON/YAML parse, and diff check passed. The manifest-listed broad Career feature/unit suite failed only on the pre-existing FirstWavePublishReadyValidator::validationMemoKey blocker plus downstream readiness assertions and is recorded as sidecar."
       },
       "github_checks": {
-        "status": "pending",
-        "evidence": "Opened PR #2030 for CAREER-ZH-PARITY-FIX-05 from head commit 733bf3f09ba7a528611b24cd0655a59de8c66cd1."
+        "status": "pass",
+        "evidence": "GitHub checks passed for PR #2030 head 917783ca4b41d2f02e989d1499d1b2d998839db2: hygiene, supply-chain, content-pack-build-validate, Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
       }
     },
     "failure_reason": null,
-    "commit_sha": "733bf3f09ba7a528611b24cd0655a59de8c66cd1",
+    "commit_sha": "917783ca4b41d2f02e989d1499d1b2d998839db2",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2030",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -53166,6 +53166,11 @@
         "at": "2026-06-11T05:16:00Z",
         "status": "pr_open_checks_pending",
         "note": "Opened PR #2030 for CAREER-ZH-PARITY-FIX-05 from head commit 733bf3f09ba7a528611b24cd0655a59de8c66cd1."
+      },
+      {
+        "at": "2026-06-11T05:23:00Z",
+        "status": "ready_to_merge",
+        "note": "PR #2030 GitHub checks passed for head 917783ca4b41d2f02e989d1499d1b2d998839db2; scope remains confined to PR05 allowed paths."
       }
     ]
   },
