@@ -1,0 +1,62 @@
+{
+  "pr_id": "CAREER-FULL-PARITY-07",
+  "title": "CAREER-FULL-PARITY-07: chore(career): warm en zh career detail caches",
+  "generated_at": "2026-06-11T17:06:37Z",
+  "read_only": true,
+  "writes_database": false,
+  "cms_mutation": false,
+  "cache_mutation_executed": false,
+  "publish_allowed": false,
+  "deploy_allowed": false,
+  "source_manifest": {
+    "path": "backend/docs/career/generated/career-full-parity-02-root-cause-manifest.json",
+    "slug_source": "items",
+    "slug_count": 1046,
+    "slug_list_sha256": "8065a0fec905af75c6524035a012928fb458c0f9cdc6d1d4b72483ee2ee06def",
+    "first_slug": "accountants-and-auditors",
+    "last_slug": "zoologists-and-wildlife-biologists"
+  },
+  "cache_convergence_plan": {
+    "target_locales": [
+      "en",
+      "zh-CN"
+    ],
+    "expected_cache_entries": 2092,
+    "cache_key_template": "career:public-authority:job-detail:v1:{slug}:{locale}",
+    "forget_before_warm": true,
+    "manifest_command": "php backend/artisan career:warm-public-authority-cache --job-detail-manifest=backend/docs/career/generated/career-full-parity-02-root-cause-manifest.json --job-detail-manifest-source=items --job-detail-locales=en,zh-CN --forget-job-detail --job-detail-only --json",
+    "chunked_fallback": "Use --job-detail-slugs=<chunk_slugs_csv> --job-detail-locales=en,zh-CN --forget-job-detail --job-detail-only --json when an operator wants smaller production batches."
+  },
+  "command_contract": {
+    "manifest_sources_supported": [
+      "auto",
+      "items",
+      "candidate_slugs",
+      "controlled_import_manifest.candidate_slugs",
+      "slugs"
+    ],
+    "json_report_fields": [
+      "job_detail_refresh.manifest_path",
+      "job_detail_refresh.manifest_source",
+      "job_detail_refresh.slug_count",
+      "job_detail_refresh.locales",
+      "job_detail_refresh.expected_cache_entries",
+      "job_detail_refresh.observed_cache_entries",
+      "job_detail_refresh.status_counts",
+      "job_detail_refresh.forget_first"
+    ],
+    "status_boundary": "Per-entry warm results keep invalid_slug and missing as entry statuses instead of aborting the whole manifest refresh."
+  },
+  "required_operator_boundary": {
+    "production_execution_requires_explicit_approval": true,
+    "approval_phrase_template": "I explicitly approve production career job detail cache forget/warm for 1046 slugs across en,zh-CN using career-full-parity-02 root-cause manifest SHA 8065a0fec905af75c6524035a012928fb458c0f9cdc6d1d4b72483ee2ee06def; run the manifest command exactly; no database writes, no CMS mutation, no publish, no deploy.",
+    "not_approved_in_this_pr": true
+  },
+  "acceptance": {
+    "full_cache_target_defined": true,
+    "en_zh_locales_supported": true,
+    "manifest_input_supported": true,
+    "missing_cache_reportable": true,
+    "production_cache_mutation_performed": false
+  }
+}

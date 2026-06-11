@@ -111,12 +111,65 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
         $this->assertFalse(Cache::has($cacheKey));
     }
 
+    public function test_command_can_warm_job_detail_caches_from_manifest_for_multiple_locales(): void
+    {
+        $manifestPath = tempnam(sys_get_temp_dir(), 'career-job-detail-manifest-');
+        $this->assertIsString($manifestPath);
+        file_put_contents($manifestPath, json_encode([
+            'items' => [
+                ['slug' => 'missing-career'],
+                ['slug' => 'another-missing-career'],
+                ['slug' => 'missing-career'],
+                ['slug' => ''],
+            ],
+        ], JSON_THROW_ON_ERROR));
+
+        foreach (['missing-career', 'another-missing-career'] as $slug) {
+            foreach (['en', 'zh-CN'] as $locale) {
+                Cache::forever(PublicCareerAuthorityResponseCache::JOB_DETAIL_CACHE_KEY_PREFIX.':'.$slug.':'.$locale, ['stale' => true]);
+            }
+        }
+
+        try {
+            $exitCode = Artisan::call('career:warm-public-authority-cache', [
+                '--job-detail-manifest' => $manifestPath,
+                '--job-detail-manifest-source' => 'items',
+                '--job-detail-locales' => 'en,zh-CN',
+                '--forget-job-detail' => true,
+                '--job-detail-only' => true,
+                '--json' => true,
+            ]);
+
+            $report = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+
+            $this->assertSame(0, $exitCode);
+            $this->assertSame('warmed', $report['status']);
+            $this->assertSame(2, $report['job_detail_refresh']['slug_count']);
+            $this->assertSame(['en', 'zh-CN'], $report['job_detail_refresh']['locales']);
+            $this->assertSame(4, $report['job_detail_refresh']['expected_cache_entries']);
+            $this->assertSame(4, $report['job_detail_refresh']['observed_cache_entries']);
+            $this->assertSame(['missing' => 4], $report['job_detail_refresh']['status_counts']);
+            $this->assertSame($manifestPath, $report['job_detail_refresh']['manifest_path']);
+            $this->assertSame('items', $report['job_detail_refresh']['manifest_source']);
+            $this->assertArrayHasKey('job_detail_en_missing-career', $report['entries']);
+            $this->assertArrayHasKey('job_detail_zh_cn_another-missing-career', $report['entries']);
+
+            foreach (['missing-career', 'another-missing-career'] as $slug) {
+                foreach (['en', 'zh-CN'] as $locale) {
+                    $this->assertFalse(Cache::has(PublicCareerAuthorityResponseCache::JOB_DETAIL_CACHE_KEY_PREFIX.':'.$slug.':'.$locale));
+                }
+            }
+        } finally {
+            @unlink($manifestPath);
+        }
+    }
+
     public function test_job_detail_only_requires_target_slugs(): void
     {
         $this->artisan('career:warm-public-authority-cache', [
             '--job-detail-only' => true,
         ])
-            ->expectsOutput('--job-detail-only requires --job-detail-slugs.')
+            ->expectsOutput('--job-detail-only requires --job-detail-slugs or --job-detail-manifest.')
             ->assertExitCode(1);
     }
 }
