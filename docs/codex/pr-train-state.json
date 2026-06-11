@@ -53188,7 +53188,7 @@
     "repo": "fap-api",
     "branch": "codex/career-zh-parity-fix-06",
     "base": "origin/main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "career_zh_parity_fix",
     "title": "CAREER-ZH-PARITY-FIX-06: chore(career): assert final zh display parity",
     "depends_on": [
@@ -53224,14 +53224,18 @@
       "github_checks": {
         "status": "pass",
         "evidence": "GitHub checks passed for PR #2032 head a10e9de005c4bfe7eb2fd1f90ae583a80609d77f: hygiene, supply-chain, content-pack-build-validate, Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
+      },
+      "merge_containment": {
+        "status": "pass",
+        "evidence": "PR #2032 is MERGED, origin/main contains merge commit 134b4ef95cc0e7a8d932ac323563dd010f10f32b, and local/remote task branches are absent."
       }
     },
     "failure_reason": null,
     "commit_sha": "a10e9de005c4bfe7eb2fd1f90ae583a80609d77f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2032",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-11T06:08:55Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "sidecar_issues": [
       {
         "id": "CAREER-ZH-PARITY-FIX-06-SIDECAR-01",
@@ -53268,6 +53272,86 @@
         "at": "2026-06-11T06:03:30Z",
         "status": "ready_to_merge",
         "note": "PR #2032 GitHub checks passed; scope remains confined to PR06 allowed paths. Live parity blocker remains external sidecar."
+      },
+      {
+        "at": "2026-06-11T10:12:35Z",
+        "status": "merged",
+        "note": "Reconciled during CAREER-ZH-PARITY-LIVE-01 start after confirming PR #2032 merged, origin/main containment, and local/remote branch cleanup."
+      }
+    ],
+    "merge_commit_sha": "134b4ef95cc0e7a8d932ac323563dd010f10f32b"
+  },
+  "CAREER-ZH-PARITY-LIVE-01": {
+    "repo": "fap-api",
+    "branch": "codex/career-zh-parity-live-01",
+    "base": "origin/main",
+    "status": "local_verified",
+    "train_scope": "career_zh_parity_live",
+    "title": "CAREER-ZH-PARITY-LIVE-01: chore(career): rescan zh parity live root causes",
+    "depends_on": [
+      "CAREER-ZH-PARITY-FIX-06"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding and executing CAREER-ZH-PARITY-LIVE-01, fap-api docs/codex metadata updates, read-only production rescan/report only, and CAREER-ZH-PARITY-FIX-06 merged-state reconciliation on 2026-06-11."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "CAREER-ZH-PARITY-FIX-06 PR #2032 merged at 2026-06-11T06:08:55Z; origin/main contains merge commit 134b4ef95cc0e7a8d932ac323563dd010f10f32b."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are confined to CareerAuditZhDisplayParity, its focused console test, backend/docs/career/generated/career-zh-parity-live-01-production-report.json, and docs/codex metadata; no fap-web, publish, deploy, sitemap, llms, cache mutation, CMS mutation, or index strategy files changed."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "php -l backend/app/Console/Commands/CareerAuditZhDisplayParity.php",
+          "php -l backend/tests/Feature/Console/CareerAuditZhDisplayParityCommandTest.php",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Console/CareerAuditZhDisplayParityCommandTest.php --no-ansi",
+          "cd backend && php artisan career:audit-zh-display-parity --output=docs/career/generated/career-zh-parity-live-01-production-report.json",
+          "python3 -m json.tool backend/docs/career/generated/career-zh-parity-live-01-production-report.json >/dev/null"
+        ],
+        "notes": "Post-deploy production public API scan completed read-only: 1046 total slugs, EN/ZH index and API parity 1046/1046, 672 EN-only zh module gaps, 237 runtime shell signals, 0 zh-only module gaps, no sitemap/llms/index strategy changes. The report includes full shell slug list, missing modules, gate reasons, public asset-state inference, cache-stale boundary, and controlled import/cache-refresh candidate manifest."
+      },
+      "github_checks": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": "cc6e7bb27c1509b166ddbe800e17c2e19ee4b929",
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "sidecar_issues": [
+      {
+        "id": "CAREER-ZH-PARITY-LIVE-01-SIDECAR-01",
+        "status": "open",
+        "severity": "external_content_state",
+        "title": "Production career zh parity still blocked by content/display asset state",
+        "evidence": "career:audit-zh-display-parity v0.3 scanned 1046 production public career job slugs after backend/frontend deploy: api_failure_count=0, index_mismatch_count=0, same_module_set=374, en_has_modules_zh_missing=672, zh_has_modules_en_missing=0, runtime_shell_count=237. Root causes: runtime_shell_missing_or_unpublished_zh_display_asset=237, zh_display_asset_present_but_module_subset=667, zh_missing_en_display_modules_without_public_asset_evidence=5, no_runtime_parity_issue_detected=137. Cache stale is not proven from public API alone.",
+        "introduced_by_current_pr": false,
+        "required_followup": "Use the generated controlled_import_manifest rows as the input for a separately authorized reviewed-workbook import/cache-refresh PR or controlled production operation; do not publish/import/deploy from this read-only PR."
+      }
+    ],
+    "transitions": [
+      {
+        "at": "2026-06-11T10:12:35Z",
+        "status": "initialized",
+        "note": "Initialized from explicit user authorization and started branch codex/career-zh-parity-live-01 from origin/main."
+      },
+      {
+        "at": "2026-06-11T10:12:35Z",
+        "status": "local_verified",
+        "note": "Enhanced read-only production parity report, generated full post-deploy report, and validated focused tests/JSON."
+      },
+      {
+        "at": "2026-06-11T10:14:40Z",
+        "status": "committed",
+        "note": "Created local commit cc6e7bb27c1509b166ddbe800e17c2e19ee4b929 for CAREER-ZH-PARITY-LIVE-01 after scoped staging and cached diff check."
       }
     ]
   }

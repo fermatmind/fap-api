@@ -16,7 +16,7 @@ use Throwable;
 
 final class CareerAuditZhDisplayParity extends Command
 {
-    private const VALIDATOR_VERSION = 'career_zh_display_parity_audit_v0.2';
+    private const VALIDATOR_VERSION = 'career_zh_display_parity_audit_v0.3';
 
     private const DEFAULT_API_BASE = 'https://api.fermatmind.com/api/v0.5/career/jobs';
 
@@ -63,6 +63,8 @@ final class CareerAuditZhDisplayParity extends Command
 
             $summary = $this->summary($items, $index, $sampleLimit);
             $liveGate = $this->liveGate($summary, $items);
+            $assessment = $this->productionLiveAssessment($items, $sampleLimit);
+            $controlledImportManifest = $this->controlledImportManifest($items, $assessment);
             $report = [
                 'validator_version' => self::VALIDATOR_VERSION,
                 'decision' => $assertLiveParity
@@ -80,9 +82,12 @@ final class CareerAuditZhDisplayParity extends Command
                 'assert_live_parity' => $assertLiveParity,
                 'live_gate' => $liveGate,
                 'summary' => $summary,
+                'production_live_assessment' => $assessment,
+                'controlled_import_manifest' => $controlledImportManifest,
                 'items' => (bool) $this->option('summary-only') ? [] : $items,
                 'next_prs' => [
-                    'controlled_import_required' => 'If live_gate.decision is blocked because zh pages remain restricted shells or structurally mismatched, run only an explicitly approved reviewed-workbook import/publish/cache refresh before asserting live parity.',
+                    'controlled_import_required' => 'Use controlled_import_manifest.candidate_slugs as the next reviewed-workbook import/cache-refresh input only after explicit production write approval.',
+                    'cache_stale_boundary' => 'Public API evidence alone cannot prove stale cache versus missing/unpublished CMS asset. Any cache-stale claim requires a separate read-only target cache/DB check or a controlled forget/warm run.',
                 ],
             ];
 
@@ -168,6 +173,9 @@ final class CareerAuditZhDisplayParity extends Command
         $enOnly = array_values(array_diff($enKeys, $zhKeys));
         $zhOnly = array_values(array_diff($zhKeys, $enKeys));
         $gateReasons = $this->zhGateReasons($zh['json'], $enOnly, $en, $zh);
+        $assetState = $this->zhPublicAssetState($zh['json']);
+        $rootCause = $this->rootCause($en, $zh, $enOnly, $zhOnly, $gateReasons, $assetState);
+        $cacheAssessment = $this->cacheStaleAssessment($rootCause, $gateReasons, $assetState);
 
         return [
             'slug' => $slug,
@@ -192,6 +200,10 @@ final class CareerAuditZhDisplayParity extends Command
                 'zh_only' => $zhOnly,
             ],
             'zh_gate_reasons' => $gateReasons,
+            'zh_public_asset_state' => $assetState,
+            'root_cause' => $rootCause,
+            'cache_stale_assessment' => $cacheAssessment,
+            'controlled_import_candidate' => $this->isControlledImportCandidate($rootCause, $gateReasons, $assetState),
             'classification' => $this->classification($en, $zh, $enOnly, $zhOnly),
         ];
     }
@@ -245,6 +257,124 @@ final class CareerAuditZhDisplayParity extends Command
             'classification_counts' => $classifications,
             'index_failures' => $index['failures'] ?? [],
             'samples' => $sampleByClassification,
+        ];
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $items
+     * @return array<string, mixed>
+     */
+    private function productionLiveAssessment(array $items, int $sampleLimit): array
+    {
+        $runtimeShellSlugs = [];
+        $missingModulesBySlug = [];
+        $rootCauseCounts = [];
+        $cmsAssetStateCounts = [];
+        $cacheStaleCounts = [];
+        $samplesByRootCause = [];
+
+        foreach ($items as $item) {
+            $slug = (string) ($item['slug'] ?? '');
+            $rootCause = (string) ($item['root_cause'] ?? 'unknown');
+            $cmsState = (string) Arr::get($item, 'zh_public_asset_state.cms_asset_exists');
+            $cacheState = (string) Arr::get($item, 'cache_stale_assessment.cache_stale');
+
+            $rootCauseCounts[$rootCause] = ($rootCauseCounts[$rootCause] ?? 0) + 1;
+            $cmsAssetStateCounts[$cmsState] = ($cmsAssetStateCounts[$cmsState] ?? 0) + 1;
+            $cacheStaleCounts[$cacheState] = ($cacheStaleCounts[$cacheState] ?? 0) + 1;
+
+            if ($this->hasRuntimePublishedShellReason((array) ($item['zh_gate_reasons'] ?? []))) {
+                $runtimeShellSlugs[] = $slug;
+            }
+
+            $enOnly = (array) Arr::get($item, 'missing_modules.en_only', []);
+            if ($enOnly !== []) {
+                $missingModulesBySlug[$slug] = array_values(array_map('strval', $enOnly));
+            }
+
+            $samplesByRootCause[$rootCause] ??= [];
+            if (count($samplesByRootCause[$rootCause]) < $sampleLimit) {
+                $samplesByRootCause[$rootCause][] = [
+                    'slug' => $slug,
+                    'classification' => $item['classification'] ?? null,
+                    'sample_urls' => $item['sample_urls'] ?? [],
+                    'missing_modules' => $item['missing_modules'] ?? [],
+                    'zh_gate_reasons' => $item['zh_gate_reasons'] ?? [],
+                    'zh_public_asset_state' => $item['zh_public_asset_state'] ?? [],
+                    'cache_stale_assessment' => $item['cache_stale_assessment'] ?? [],
+                ];
+            }
+        }
+
+        sort($runtimeShellSlugs);
+        ksort($missingModulesBySlug);
+        ksort($rootCauseCounts);
+        ksort($cmsAssetStateCounts);
+        ksort($cacheStaleCounts);
+        ksort($samplesByRootCause);
+
+        return [
+            'scope' => 'post_deploy_production_public_api_read_only',
+            'total_slugs' => count($items),
+            'runtime_shell_count' => count($runtimeShellSlugs),
+            'runtime_shell_slugs' => $runtimeShellSlugs,
+            'missing_modules_by_slug_count' => count($missingModulesBySlug),
+            'missing_modules_by_slug' => $missingModulesBySlug,
+            'root_cause_counts' => $rootCauseCounts,
+            'cms_asset_exists_counts' => $cmsAssetStateCounts,
+            'cache_stale_counts' => $cacheStaleCounts,
+            'samples_by_root_cause' => $samplesByRootCause,
+            'evidence_boundaries' => [
+                'cms_asset_exists' => 'inferred from public API integrity/provenance fields; not a direct database read',
+                'cache_stale' => 'unknown from public API alone unless target cache/DB evidence is separately collected',
+            ],
+        ];
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $items
+     * @param  array<string, mixed>  $assessment
+     * @return array<string, mixed>
+     */
+    private function controlledImportManifest(array $items, array $assessment): array
+    {
+        $candidates = [];
+        foreach ($items as $item) {
+            if (($item['controlled_import_candidate'] ?? false) !== true) {
+                continue;
+            }
+
+            $candidates[] = [
+                'slug' => (string) ($item['slug'] ?? ''),
+                'locale' => 'zh-CN',
+                'root_cause' => (string) ($item['root_cause'] ?? 'unknown'),
+                'missing_modules' => array_values(array_map('strval', (array) Arr::get($item, 'missing_modules.en_only', []))),
+                'zh_gate_reasons' => array_values(array_map('strval', (array) ($item['zh_gate_reasons'] ?? []))),
+                'cms_asset_exists' => (string) Arr::get($item, 'zh_public_asset_state.cms_asset_exists', 'unknown'),
+                'cache_stale' => (string) Arr::get($item, 'cache_stale_assessment.cache_stale', 'unknown'),
+            ];
+        }
+
+        usort($candidates, static fn (array $a, array $b): int => strcmp((string) $a['slug'], (string) $b['slug']));
+
+        return [
+            'schema_version' => 'career_zh_parity_controlled_import_manifest.v0.1',
+            'source_validator_version' => self::VALIDATOR_VERSION,
+            'source_scope' => 'post_deploy_production_public_api_read_only',
+            'target_command' => 'career:import-selected-display-assets',
+            'target_locale' => 'zh-CN',
+            'candidate_count' => count($candidates),
+            'candidate_slugs' => array_values(array_map(static fn (array $row): string => (string) $row['slug'], $candidates)),
+            'rows' => $candidates,
+            'requires_reviewed_workbook' => true,
+            'requires_explicit_production_write_approval' => true,
+            'requires_cache_forget_warm_after_import' => true,
+            'must_not_change_sitemap_llms_or_index_strategy' => true,
+            'runtime_shell_count_at_source_scan' => (int) ($assessment['runtime_shell_count'] ?? 0),
+            'notes' => [
+                'Rows are import/cache-refresh candidates, not publish authorization.',
+                'Do not import without matching reviewed workbook rows and the importer dry-run gate.',
+            ],
         ];
     }
 
@@ -397,6 +527,145 @@ final class CareerAuditZhDisplayParity extends Command
         }
 
         return array_values(array_unique($reasons));
+    }
+
+    /**
+     * @param  array<string, mixed>|null  $payload
+     * @return array<string, mixed>
+     */
+    private function zhPublicAssetState(?array $payload): array
+    {
+        $integrityState = Arr::get($payload ?? [], 'integrity_summary.integrity_state');
+        $contentVersion = Arr::get($payload ?? [], 'provenance_meta.content_version');
+        $dataVersion = Arr::get($payload ?? [], 'provenance_meta.data_version');
+        $surfaceType = Arr::get($payload ?? [], 'provenance_meta.surface_type')
+            ?: Arr::get($payload ?? [], 'seo_contract.surface_type');
+        $reasonCodes = (array) Arr::get($payload ?? [], 'seo_contract.reason_codes', []);
+
+        $integrityState = is_scalar($integrityState) ? (string) $integrityState : '';
+        $contentVersion = is_scalar($contentVersion) ? (string) $contentVersion : '';
+        $dataVersion = is_scalar($dataVersion) ? (string) $dataVersion : '';
+        $surfaceType = is_scalar($surfaceType) ? (string) $surfaceType : '';
+        $reasonCodes = array_values(array_map('strval', $reasonCodes));
+
+        $displayAssetBacked = $integrityState === 'display_asset_backed'
+            || str_contains($contentVersion, 'display_asset')
+            || str_contains($dataVersion, 'career_job_display_assets')
+            || str_contains($surfaceType, 'display_asset')
+            || in_array('validated_display_asset_backed_release', $reasonCodes, true);
+
+        $runtimeShell = $integrityState === 'runtime_published_shell'
+            || str_contains($contentVersion, 'runtime_published_shell')
+            || str_contains($surfaceType, 'runtime_published_shell')
+            || in_array('runtime_published_shell_no_strong_claims', $reasonCodes, true);
+
+        return [
+            'cms_asset_exists' => $displayAssetBacked
+                ? 'inferred_present_from_public_payload'
+                : ($runtimeShell ? 'inferred_absent_or_not_published_from_public_payload' : 'unknown_from_public_payload'),
+            'inference_source' => 'public_api_integrity_and_provenance',
+            'integrity_state' => $integrityState,
+            'content_version' => $contentVersion,
+            'data_version' => $dataVersion,
+            'surface_type' => $surfaceType,
+            'reason_codes' => $reasonCodes,
+        ];
+    }
+
+    /**
+     * @param  array{ok: bool, status: int|null}  $en
+     * @param  array{ok: bool, status: int|null}  $zh
+     * @param  list<string>  $enOnly
+     * @param  list<string>  $zhOnly
+     * @param  list<string>  $gateReasons
+     * @param  array<string, mixed>  $assetState
+     */
+    private function rootCause(array $en, array $zh, array $enOnly, array $zhOnly, array $gateReasons, array $assetState): string
+    {
+        if (($en['ok'] ?? false) && ! ($zh['ok'] ?? false)) {
+            return 'zh_api_not_200';
+        }
+
+        if (($zh['ok'] ?? false) && ! ($en['ok'] ?? false)) {
+            return 'en_api_not_200';
+        }
+
+        if (! ($en['ok'] ?? false) && ! ($zh['ok'] ?? false)) {
+            return 'both_locale_api_not_200';
+        }
+
+        $cmsAssetExists = (string) ($assetState['cms_asset_exists'] ?? 'unknown_from_public_payload');
+        if ($this->hasRuntimePublishedShellReason($gateReasons)
+            || (string) ($assetState['integrity_state'] ?? '') === 'runtime_published_shell') {
+            return $cmsAssetExists === 'inferred_present_from_public_payload'
+                ? 'runtime_shell_with_display_asset_present_cache_or_gate_suspect'
+                : 'runtime_shell_missing_or_unpublished_zh_display_asset';
+        }
+
+        if ($enOnly !== [] && $cmsAssetExists === 'inferred_present_from_public_payload') {
+            return 'zh_display_asset_present_but_module_subset';
+        }
+
+        if ($enOnly !== []) {
+            return 'zh_missing_en_display_modules_without_public_asset_evidence';
+        }
+
+        if ($zhOnly !== []) {
+            return 'zh_has_unexpected_extra_modules';
+        }
+
+        return 'no_runtime_parity_issue_detected';
+    }
+
+    /**
+     * @param  list<string>  $gateReasons
+     * @param  array<string, mixed>  $assetState
+     * @return array<string, mixed>
+     */
+    private function cacheStaleAssessment(string $rootCause, array $gateReasons, array $assetState): array
+    {
+        $cmsAssetExists = (string) ($assetState['cms_asset_exists'] ?? 'unknown_from_public_payload');
+        $cacheStale = 'unknown_public_api_only';
+        $requiresTargetCheck = false;
+        $reason = 'Public API output does not expose target cache timestamp or DB row state.';
+
+        if ($rootCause === 'no_runtime_parity_issue_detected') {
+            $cacheStale = 'not_indicated';
+            $reason = 'No public runtime parity issue was detected for this slug.';
+        } elseif ($rootCause === 'runtime_shell_with_display_asset_present_cache_or_gate_suspect') {
+            $cacheStale = 'possible';
+            $requiresTargetCheck = true;
+            $reason = 'Public payload suggests display asset backing but still reports runtime shell; verify target cache and release gate state.';
+        } elseif ($this->hasRuntimePublishedShellReason($gateReasons)
+            && $cmsAssetExists !== 'inferred_present_from_public_payload') {
+            $cacheStale = 'not_proven';
+            $requiresTargetCheck = true;
+            $reason = 'Runtime shell is visible, but public payload does not prove a CMS asset exists behind cache.';
+        }
+
+        return [
+            'cache_stale' => $cacheStale,
+            'requires_target_cache_check' => $requiresTargetCheck,
+            'evidence' => $reason,
+        ];
+    }
+
+    /**
+     * @param  list<string>  $gateReasons
+     * @param  array<string, mixed>  $assetState
+     */
+    private function isControlledImportCandidate(string $rootCause, array $gateReasons, array $assetState): bool
+    {
+        if ($this->hasRuntimePublishedShellReason($gateReasons)) {
+            return true;
+        }
+
+        if ($rootCause === 'zh_missing_en_display_modules_without_public_asset_evidence') {
+            return true;
+        }
+
+        return $rootCause === 'zh_display_asset_present_but_module_subset'
+            && (string) ($assetState['cms_asset_exists'] ?? '') !== 'inferred_present_from_public_payload';
     }
 
     /**
