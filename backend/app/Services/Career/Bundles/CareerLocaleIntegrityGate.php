@@ -35,7 +35,7 @@ final class CareerLocaleIntegrityGate
             return false;
         }
 
-        foreach (['primary_cta', 'final_cta', 'cta', 'faq_block', 'sections', 'content_sections', 'definition_block', 'responsibilities_block', 'work_context_block'] as $key) {
+        foreach (['faq_block', 'sections', 'content_sections', 'definition_block', 'responsibilities_block', 'work_context_block'] as $key) {
             $strings = $this->collectStrings($pageContent[$key] ?? null);
             if ($strings !== [] && ! $this->stringsContainCjk($strings) && $this->stringsLookEnglish($strings)) {
                 return false;

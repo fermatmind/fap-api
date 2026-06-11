@@ -405,6 +405,64 @@ final class CareerJobDetailApiTest extends TestCase
             ->assertJsonPath('display_surface_v1.page.content.hero.title', 'Data scientist career fit');
     }
 
+    public function test_zh_display_asset_backed_bundle_allows_shared_english_cta_when_reviewed_zh_content_is_ready(): void
+    {
+        $this->configurePublicResolutionPlan([
+            ['slug' => 'reviewed-zh-display-asset', 'status' => 'already_imported_validated'],
+        ]);
+
+        $occupation = $this->createDisplayAssetBackedOccupation('reviewed-zh-display-asset');
+        $this->createDisplayAsset($occupation, [
+            'page_payload_json' => [
+                'page' => [
+                    'zh' => [
+                        'hero' => ['title' => '展示资产职业'],
+                        'primary_cta' => ['label' => 'Start career fit test'],
+                        'definition_block' => [
+                            'heading' => '职业定义',
+                            'body' => '这是一份已经通过中文审阅的职业展示内容。',
+                        ],
+                        'market_signal_card' => [
+                            'salary_data_type' => 'BLS official wage evidence',
+                            'body' => '市场信号仅基于公开来源解释，不替代个人判断。',
+                        ],
+                        'ai_impact_table' => [
+                            'score_normalized' => '82',
+                            'source' => 'FermatMind central score',
+                        ],
+                    ],
+                    'en' => [
+                        'hero' => ['title' => 'Display backed career'],
+                        'primary_cta' => ['label' => 'Start career fit test'],
+                        'market_signal_card' => [
+                            'salary_data_type' => 'BLS official wage evidence',
+                            'body' => 'Official market signal from BLS.',
+                        ],
+                        'ai_impact_table' => [
+                            'score_normalized' => '82',
+                            'source' => 'FermatMind central score',
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+
+        $this->getJson('/api/v0.5/career/jobs/reviewed-zh-display-asset?locale=zh-CN')
+            ->assertOk()
+            ->assertJsonPath('trust_manifest.logic_version', 'career.protocol.job_detail.display_asset_backed.v1')
+            ->assertJsonPath('integrity_summary.integrity_state', 'display_asset_backed')
+            ->assertJsonPath('claim_permissions.allow_strong_claim', false)
+            ->assertJsonPath('claim_permissions.allow_salary_comparison', false)
+            ->assertJsonPath('seo_contract.reason_codes.0', 'validated_display_asset_backed_release')
+            ->assertJsonPath('display_surface_v1.page.locale', 'zh-CN')
+            ->assertJsonPath('display_surface_v1.page.content.hero.title', '展示资产职业')
+            ->assertJsonPath('display_surface_v1.page.content.primary_cta.label', 'Start career fit test')
+            ->assertJsonPath('display_surface_v1.page.content.definition_block.heading', '职业定义')
+            ->assertJsonPath('display_surface_v1.claim_permissions.allow_strong_claim', true)
+            ->assertJsonPath('display_surface_v1.claim_permissions.allow_salary_comparison', true)
+            ->assertJsonPath('display_surface_v1.claim_permissions.integrity_state', 'full');
+    }
+
     public function test_runtime_published_occupation_without_display_or_docx_asset_returns_restricted_public_shell(): void
     {
         $this->configurePublicResolutionPlan([
