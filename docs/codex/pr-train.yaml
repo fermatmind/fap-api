@@ -24237,7 +24237,7 @@ prs:
     branch: codex/career-zh-parity-fix-02
     title: "CAREER-ZH-PARITY-FIX-02: fix(career): repair reviewed zh display workbook contract"
     train_scope: career_zh_parity_fix
-    status: github_checks_pending
+    status: github_checks_pending_after_scoped_fix
     scope:
       - Add controlled workbook contract repair for reviewed Chinese career display assets.
       - Normalize CTA target, FermatMind interpretation source labels, Product schema leakage, and job-posting sample terms without copying English into Chinese fields.
