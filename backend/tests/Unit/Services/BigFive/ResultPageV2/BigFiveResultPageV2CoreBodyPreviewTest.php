@@ -250,6 +250,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_mbti_personality_variant_section_structure_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/PersonalityEnsureMbtiVariantSectionStructure.php',
+            'backend/app/Services/Cms/MbtiPersonalityVariantSectionStructureService.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_eq_cross_assessment_context_guard_changes(): void
     {
         $changed = [
@@ -2781,6 +2791,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isMbtiPersonalityVariantSectionStructureFile($file)) {
+                continue;
+            }
+
             if ($this->isPublicContentReleaseGuardCommandFile($file)) {
                 continue;
             }
@@ -3538,6 +3552,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/PersonalityRefreshMbtiVariantSeoMetadata.php',
             'backend/app/Services/Cms/MbtiPersonalityVariantSeoMetadataService.php',
+        ], true);
+    }
+
+    private function isMbtiPersonalityVariantSectionStructureFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/PersonalityEnsureMbtiVariantSectionStructure.php',
+            'backend/app/Services/Cms/MbtiPersonalityVariantSectionStructureService.php',
         ], true);
     }
 
