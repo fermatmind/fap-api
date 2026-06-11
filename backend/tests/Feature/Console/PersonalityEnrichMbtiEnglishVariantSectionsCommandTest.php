@@ -148,6 +148,45 @@ final class PersonalityEnrichMbtiEnglishVariantSectionsCommandTest extends TestC
         }
     }
 
+    public function test_dry_run_ignores_json_object_key_order_after_write(): void
+    {
+        $variants = $this->createEnglishMbtiVariantMatrix();
+
+        $this->artisan('personality:enrich-mbti-english-variant-sections', [
+            '--type' => ['ENFJ'],
+            '--write' => true,
+            '--assert-complete' => true,
+        ])
+            ->expectsOutputToContain('section_changes=36')
+            ->expectsOutputToContain('writes_committed=36')
+            ->assertExitCode(0);
+
+        $section = PersonalityProfileVariantSection::query()
+            ->withoutGlobalScopes()
+            ->where('personality_profile_variant_id', (int) $variants['ENFJ-A']->id)
+            ->where('section_key', 'career.advantages')
+            ->firstOrFail();
+
+        $section->payload_json = [
+            'items' => collect($section->payload_json['items'] ?? [])
+                ->map(static fn (array $item): array => [
+                    'body' => (string) $item['body'],
+                    'title' => (string) $item['title'],
+                ])
+                ->all(),
+        ];
+        $section->save();
+
+        $this->artisan('personality:enrich-mbti-english-variant-sections', [
+            '--type' => ['ENFJ'],
+            '--dry-run' => true,
+            '--assert-complete' => true,
+        ])
+            ->expectsOutputToContain('section_changes=0')
+            ->expectsOutputToContain('writes_committed=0')
+            ->assertExitCode(0);
+    }
+
     public function test_assert_complete_fails_when_selected_english_variant_scope_is_missing(): void
     {
         $profile = $this->createProfile('en', 'INFP', 'Mediator');
