@@ -48,6 +48,12 @@ class EditArticle extends EditRecord
                 ->url(ArticleResource::getUrl())
                 ->icon('heroicon-o-arrow-left')
                 ->color('gray'),
+            Action::make('previewDraft')
+                ->label('Preview draft')
+                ->url(fn (): ?string => ArticleWorkspace::previewUrl($this->getRecord()), shouldOpenInNewTab: true)
+                ->icon('heroicon-o-eye')
+                ->color('info')
+                ->visible(fn (): bool => filled(ArticleWorkspace::previewUrl($this->getRecord()))),
             Action::make('openPublicUrl')
                 ->label(__('ops.resources.articles.actions.open_public_url'))
                 ->url(fn (): ?string => ArticleWorkspace::publicUrl(

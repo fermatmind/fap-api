@@ -27,6 +27,15 @@ final class ArticleWorkspace
         return $baseUrl.'/'.$segment.'/articles/'.rawurlencode($resolvedSlug);
     }
 
+    public static function previewUrl(?Article $record): ?string
+    {
+        if (! $record instanceof Article || ! $record->getKey()) {
+            return null;
+        }
+
+        return route('ops.articles.preview', ['article' => $record->getKey()]);
+    }
+
     public static function renderEditorialCues(Get $get, ?Article $record = null): Htmlable
     {
         $status = trim((string) ($get('status') ?? $record?->status ?? 'draft'));
