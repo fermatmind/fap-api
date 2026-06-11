@@ -53000,7 +53000,7 @@
     "repo": "fap-api",
     "branch": "codex/career-zh-parity-fix-04",
     "base": "origin/main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "career_zh_parity_fix",
     "title": "CAREER-ZH-PARITY-FIX-04: feat(career): controlled zh display import cache refresh",
     "depends_on": [
@@ -53037,14 +53037,19 @@
       "github_checks": {
         "status": "pass",
         "evidence": "GitHub checks passed for PR #2029: hygiene, supply-chain, content-pack-build-validate, Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
+      },
+      "post_merge_reconciliation": {
+        "status": "pass",
+        "evidence": "GitHub PR #2029 is MERGED; origin/main contains merge commit d47faf1e1d713d5fef8262fd68a8e381119d4bd2; remote branch codex/career-zh-parity-fix-04 is deleted; local PR04 worktree/branch were removed after merge."
       }
     },
     "failure_reason": null,
-    "commit_sha": "095666733f502a63714090dd409bfd3be0aa997b",
+    "commit_sha": "25893f874aeee616cbc1a5907633937846173efb",
+    "merge_commit_sha": "d47faf1e1d713d5fef8262fd68a8e381119d4bd2",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2029",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-11T04:53:48Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "sidecar_issues": [
       {
         "id": "CAREER-ZH-PARITY-FIX-04-SIDECAR-01",
@@ -53075,6 +53080,11 @@
         "at": "2026-06-11T04:44:00Z",
         "status": "ready_to_merge",
         "note": "PR #2029 GitHub checks passed; scope remains confined to PR04 allowed paths."
+      },
+      {
+        "at": "2026-06-11T05:05:39Z",
+        "status": "merged",
+        "note": "Reconciled during CAREER-ZH-PARITY-FIX-05 preflight after PR #2029 merge and cleanup."
       }
     ]
   },
@@ -53082,7 +53092,7 @@
     "repo": "fap-api",
     "branch": "codex/career-zh-parity-fix-05",
     "base": "origin/main",
-    "status": "pending_dependency",
+    "status": "local_verified_sidecar_external",
     "train_scope": "career_zh_parity_fix",
     "title": "CAREER-ZH-PARITY-FIX-05: fix(career): align display-asset integrity release policy",
     "depends_on": [
@@ -53094,8 +53104,26 @@
         "evidence": "User explicitly authorized adding and executing CAREER-ZH-PARITY-FIX-01 through CAREER-ZH-PARITY-FIX-06, including fap-api docs/codex metadata updates, on 2026-06-11."
       },
       "dependency": {
-        "status": "pending",
-        "evidence": "Waiting for CAREER-ZH-PARITY-FIX-04 to merge."
+        "status": "pass",
+        "evidence": "CAREER-ZH-PARITY-FIX-04 merged as PR #2029 at 2026-06-11T04:53:48Z; origin/main contains d47faf1e1d713d5fef8262fd68a8e381119d4bd2."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are confined to CareerLocaleIntegrityGate, CareerJobDetailApiTest, and docs/codex metadata; no fap-web, publish, deploy, sitemap, llms, or index strategy files changed."
+      },
+      "local": {
+        "status": "pass_with_external_sidecar",
+        "commands": [
+          "php -l backend/app/Services/Career/Bundles/CareerLocaleIntegrityGate.php",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Career/CareerJobDetailApiTest.php --filter='shared_english_cta|locale_surface_is_english' --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Career/CareerJobDisplaySurfaceBuilderTest.php --no-ansi",
+          "cd backend && ./vendor/bin/pint --test app/Services/Career tests/Feature/Career tests/Unit/Services/Career",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Career tests/Unit/Services/Career --no-ansi",
+          "php -r 'json_decode(file_get_contents(\"docs/codex/pr-train-state.json\"), true, 512, JSON_THROW_ON_ERROR); echo \"state json ok\\n\";'",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'train yaml ok'\"",
+          "git diff --check"
+        ],
+        "notes": "PHP lint, focused CareerJobDetailApiTest coverage, CareerJobDisplaySurfaceBuilderTest, scoped Pint, JSON/YAML parse, and diff check passed. The manifest-listed broad Career feature/unit suite failed only on the pre-existing FirstWavePublishReadyValidator::validationMemoKey blocker plus downstream readiness assertions and is recorded as sidecar."
       }
     },
     "failure_reason": null,
@@ -53104,12 +53132,31 @@
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
-    "sidecar_issues": [],
+    "sidecar_issues": [
+      {
+        "id": "CAREER-ZH-PARITY-FIX-05-SIDECAR-01",
+        "status": "open",
+        "severity": "external",
+        "title": "Existing Career broad suite failure: FirstWavePublishReadyValidator::validationMemoKey missing",
+        "evidence": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Career tests/Unit/Services/Career --no-ansi exits 2 with 125 failed tests; failures center on Call to undefined method App\\Domain\\Career\\Publish\\FirstWavePublishReadyValidator::validationMemoKey() plus downstream first-wave readiness, release ledger, and dataset assertions. PR05 only touched CareerLocaleIntegrityGate and focused CareerJobDetailApiTest.",
+        "introduced_by_current_pr": false
+      }
+    ],
     "transitions": [
       {
         "at": "2026-06-11T02:19:47Z",
         "status": "pending_dependency",
         "note": "Future runtime integrity policy entry initialized only; implementation deferred until CAREER-ZH-PARITY-FIX-04 is merged."
+      },
+      {
+        "at": "2026-06-11T05:05:39Z",
+        "status": "in_progress",
+        "note": "Started from origin/main after PR04 merge; implementing runtime integrity policy alignment."
+      },
+      {
+        "at": "2026-06-11T05:13:00Z",
+        "status": "local_verified_sidecar_external",
+        "note": "Scoped PR05 checks passed; broad Career feature/unit suite retains external FirstWavePublishReadyValidator blocker recorded as sidecar."
       }
     ]
   },
