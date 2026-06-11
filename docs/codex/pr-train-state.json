@@ -26434,7 +26434,7 @@
   "INDEXNOW-LIVE-00": {
     "repo": "fap-api",
     "branch": "codex/indexnow-live-00-readiness-contract",
-    "status": "pr_open_checks_pending",
+    "status": "ready_to_merge",
     "depends_on": [
       "BAIDU-LIVE-00"
     ],
@@ -54062,8 +54062,12 @@
         "evidence": "Changed files are confined to manifest-allowed audit command, audit feature test, generated career report, and docs/codex state paths."
       },
       "github": {
-        "status": "pending",
-        "evidence": "PR #2049 opened; waiting for GitHub checks."
+        "status": "pass",
+        "evidence": "PR #2049 GitHub checks passed: Semgrep OSS, Semgrep blocking secrets, content-pack-build-validate, hygiene, semgrep SARIF upload, supply-chain, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
+      },
+      "merge_readiness": {
+        "status": "pass",
+        "evidence": "PR #2049 is OPEN, non-draft, mergeStateStatus=CLEAN, base=main, head=codex/career-full-parity-08; changed files remain within manifest scope."
       }
     },
     "failure_reason": null,
@@ -54092,6 +54096,11 @@
         "at": "2026-06-11T17:38:10Z",
         "status": "pr_open_checks_pending",
         "note": "Opened PR #2049 from codex/career-full-parity-08 after local validation and scope validation passed."
+      },
+      {
+        "at": "2026-06-11T17:44:07Z",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed and merge readiness revalidation confirmed PR #2049 is clean and scoped."
       }
     ]
   },
