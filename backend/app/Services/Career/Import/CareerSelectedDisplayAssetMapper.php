@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Career\Import;
 
+use App\Console\Commands\CareerDisplayAssetPublishGate;
 use App\Support\Xlsx\XlsxCellReference;
 use DOMDocument;
 use DOMElement;
@@ -550,9 +551,27 @@ final class CareerSelectedDisplayAssetMapper
         $this->validateLinks($decoded['en_internal_links'] ?? null, $decoded['cn_internal_links'] ?? null, $errors);
 
         $payload = $this->payload($row, $decoded);
+        $publishGate = (new CareerDisplayAssetPublishGate)->validatePayload(
+            $slug,
+            $payload['component_order_json'],
+            $payload['page_payload_json'],
+            $payload['structured_data_json'],
+            [
+                'release_gates' => [
+                    'sitemap' => false,
+                    'llms' => false,
+                    'paid' => false,
+                    'backlink' => false,
+                ],
+            ],
+            requireReviewedChinese: $expectedOverride !== null,
+        );
         $forbiddenKeys = $this->forbiddenPublicKeys($payload);
         if ($forbiddenKeys !== []) {
             $errors[] = 'Forbidden public payload keys found: '.implode(', ', $forbiddenKeys).'.';
+        }
+        foreach ($publishGate['errors'] as $publishGateError) {
+            $errors[] = 'Publish gate: '.$publishGateError;
         }
 
         $encodedPayload = json_encode($payload, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
@@ -575,6 +594,14 @@ final class CareerSelectedDisplayAssetMapper
                 'source_count' => count($payload['sources_json']['references'] ?? []),
                 'payload_size_bytes' => $payloadSize,
                 'public_payload_forbidden_keys_found' => $forbiddenKeys,
+                'publish_gate' => [
+                    'validator_version' => $publishGate['validator_version'],
+                    'decision' => $publishGate['decision'],
+                    'module_parity' => $publishGate['module_parity'],
+                    'source_page_type_valid' => $publishGate['source_page_type_valid'],
+                    'product_schema_absent' => $publishGate['product_schema_absent'],
+                    'reviewed_chinese_valid' => $publishGate['reviewed_chinese_valid'],
+                ],
                 'release_gates' => [
                     'sitemap' => false,
                     'llms' => false,

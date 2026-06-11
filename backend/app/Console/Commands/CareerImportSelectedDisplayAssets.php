@@ -799,6 +799,7 @@ final class CareerImportSelectedDisplayAssets extends Command
         return [
             'would_write_count' => count(array_filter($items, static fn (array $item): bool => ($item['would_write'] ?? false) === true)),
             'already_exists_count' => count(array_filter($items, static fn (array $item): bool => ($item['existing_display_asset'] ?? false) === true && ($item['errors'] ?? []) === [])),
+            'publish_gate_blocked_count' => count(array_filter($items, static fn (array $item): bool => data_get($item, 'payload_summary.publish_gate.decision') !== 'pass')),
             'failed_count' => count(array_filter($items, static fn (array $item): bool => ($item['errors'] ?? []) !== [])),
             'created_count' => 0,
             'updated_count' => 0,
@@ -866,6 +867,7 @@ final class CareerImportSelectedDisplayAssets extends Command
             'would_write' => false,
             'would_write_count' => 0,
             'already_exists_count' => 0,
+            'publish_gate_blocked_count' => 0,
             'did_write' => false,
             'created_count' => 0,
             'updated_count' => 0,
