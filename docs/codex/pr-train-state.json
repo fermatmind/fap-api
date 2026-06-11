@@ -54118,7 +54118,7 @@
     "repo": "fap-api",
     "branch": "codex/career-full-parity-09",
     "base": "origin/main",
-    "status": "local_checks_passed",
+    "status": "pr_open_checks_pending",
     "train_scope": "career_full_parity",
     "title": "CAREER-FULL-PARITY-09: fix(career): block invalid display asset publishing",
     "depends_on": [
@@ -54154,12 +54154,12 @@
         "evidence": "Changed files are confined to backend/app/Console/Commands, backend/app/Services/Career, backend/tests/Feature/Filament, and docs/codex/pr-train-state.json, all within CAREER-FULL-PARITY-09 allowed paths."
       },
       "github": {
-        "status": "not_started",
-        "evidence": "Final implementation is staged locally after correcting the support class path to backend/app/Console/Commands; PR #2050 will be force-pushed for a fresh GitHub check run."
+        "status": "pending",
+        "evidence": "PR #2050 will be force-pushed at final implementation commit edda0cb21a439dd4451df1a7be4e9c598a52f4bc for GitHub check rerun."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
+    "commit_sha": "edda0cb21a439dd4451df1a7be4e9c598a52f4bc",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2050",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -54224,6 +54224,11 @@
         "at": "2026-06-11T18:42:36Z",
         "status": "local_checks_passed_final_path",
         "note": "Finalized path-classification fix by placing CareerDisplayAssetPublishGate under backend/app/Console/Commands and reran required local checks plus BigFive regression."
+      },
+      {
+        "at": "2026-06-11T18:43:31Z",
+        "status": "commit_sha_reconciled",
+        "note": "Recorded final implementation commit SHA edda0cb21a439dd4451df1a7be4e9c598a52f4bc before force-pushing PR #2050."
       }
     ]
   },
