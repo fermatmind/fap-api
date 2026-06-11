@@ -24366,7 +24366,7 @@ prs:
     branch: codex/career-zh-parity-fix-05
     title: "CAREER-ZH-PARITY-FIX-05: fix(career): align display-asset integrity release policy"
     train_scope: career_zh_parity_fix
-    status: in_progress
+    status: merged
     scope:
       - Align runtime integrity policy so reviewed display_asset-backed pages are not misclassified as restricted shells when module and claim boundaries are satisfied.
       - Preserve public claim limits, noindex/sitemap/llms gates, and private/admin metadata exclusions.
@@ -24403,7 +24403,7 @@ prs:
     branch: codex/career-zh-parity-fix-06
     title: "CAREER-ZH-PARITY-FIX-06: chore(career): assert final zh display parity"
     train_scope: career_zh_parity_fix
-    status: pending_dependency
+    status: local_verified_sidecar_external
     scope:
       - Run and harden the final live parity gate for all 1046 public career job slugs.
       - Assert EN/ZH API 200 parity, zero English-module-only Chinese gaps, zero unexpected restricted shells, and unchanged sitemap/llms/index strategy.

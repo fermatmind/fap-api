@@ -16,7 +16,7 @@ use Throwable;
 
 final class CareerAuditZhDisplayParity extends Command
 {
-    private const VALIDATOR_VERSION = 'career_zh_display_parity_audit_v0.1';
+    private const VALIDATOR_VERSION = 'career_zh_display_parity_audit_v0.2';
 
     private const DEFAULT_API_BASE = 'https://api.fermatmind.com/api/v0.5/career/jobs';
 
@@ -257,15 +257,8 @@ final class CareerAuditZhDisplayParity extends Command
     {
         $restrictedShellCount = 0;
         foreach ($items as $item) {
-            $reasons = (array) ($item['zh_gate_reasons'] ?? []);
-            foreach ($reasons as $reason) {
-                $reason = (string) $reason;
-                if (str_contains($reason, 'runtime_published_shell')
-                    || str_contains($reason, 'critical_missing_field:')) {
-                    $restrictedShellCount++;
-
-                    break;
-                }
+            if ($this->hasRuntimePublishedShellReason((array) ($item['zh_gate_reasons'] ?? []))) {
+                $restrictedShellCount++;
             }
         }
 
@@ -301,6 +294,20 @@ final class CareerAuditZhDisplayParity extends Command
             'llms_changed' => false,
             'index_strategy_changed' => false,
         ];
+    }
+
+    /**
+     * @param  list<mixed>  $reasons
+     */
+    private function hasRuntimePublishedShellReason(array $reasons): bool
+    {
+        foreach ($reasons as $reason) {
+            if (str_contains((string) $reason, 'runtime_published_shell')) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**

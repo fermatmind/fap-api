@@ -53092,7 +53092,7 @@
     "repo": "fap-api",
     "branch": "codex/career-zh-parity-fix-05",
     "base": "origin/main",
-    "status": "pr_open_checks_pending",
+    "status": "merged",
     "train_scope": "career_zh_parity_fix",
     "title": "CAREER-ZH-PARITY-FIX-05: fix(career): align display-asset integrity release policy",
     "depends_on": [
@@ -53127,15 +53127,19 @@
       },
       "github_checks": {
         "status": "pass",
-        "evidence": "GitHub checks passed for PR #2030 head 917783ca4b41d2f02e989d1499d1b2d998839db2: hygiene, supply-chain, content-pack-build-validate, Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
+        "evidence": "GitHub checks passed for PR #2030 head 99950f3fec3f384bf116b83e0bc776bf78e2698e: hygiene, supply-chain, content-pack-build-validate, Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
+      },
+      "post_merge_reconciliation": {
+        "status": "pass",
+        "evidence": "GitHub PR #2030 is MERGED; origin/main contains merge commit 0f6152ae29e3576caa930495ec0578469dec60a8; remote branch codex/career-zh-parity-fix-05 is deleted; local PR05 worktree/branch were removed after merge."
       }
     },
     "failure_reason": null,
-    "commit_sha": "917783ca4b41d2f02e989d1499d1b2d998839db2",
+    "commit_sha": "99950f3fec3f384bf116b83e0bc776bf78e2698e",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2030",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-11T05:32:43Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "sidecar_issues": [
       {
         "id": "CAREER-ZH-PARITY-FIX-05-SIDECAR-01",
@@ -53171,14 +53175,20 @@
         "at": "2026-06-11T05:23:00Z",
         "status": "ready_to_merge",
         "note": "PR #2030 GitHub checks passed for head 917783ca4b41d2f02e989d1499d1b2d998839db2; scope remains confined to PR05 allowed paths."
+      },
+      {
+        "at": "2026-06-11T05:49:48Z",
+        "status": "merged",
+        "note": "Reconciled during CAREER-ZH-PARITY-FIX-06 preflight after PR #2030 merge, origin/main containment, branch deletion, and local cleanup."
       }
-    ]
+    ],
+    "merge_commit_sha": "0f6152ae29e3576caa930495ec0578469dec60a8"
   },
   "CAREER-ZH-PARITY-FIX-06": {
     "repo": "fap-api",
     "branch": "codex/career-zh-parity-fix-06",
     "base": "origin/main",
-    "status": "pending_dependency",
+    "status": "ready_to_merge",
     "train_scope": "career_zh_parity_fix",
     "title": "CAREER-ZH-PARITY-FIX-06: chore(career): assert final zh display parity",
     "depends_on": [
@@ -53190,22 +53200,74 @@
         "evidence": "User explicitly authorized adding and executing CAREER-ZH-PARITY-FIX-01 through CAREER-ZH-PARITY-FIX-06, including fap-api docs/codex metadata updates, on 2026-06-11."
       },
       "dependency": {
-        "status": "pending",
-        "evidence": "Waiting for CAREER-ZH-PARITY-FIX-05 to merge."
+        "status": "pass",
+        "evidence": "CAREER-ZH-PARITY-FIX-05 merged as PR #2030 at 2026-06-11T05:32:43Z; origin/main contains 0f6152ae29e3576caa930495ec0578469dec60a8."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are confined to CareerAuditZhDisplayParity, its focused console test, backend/docs/career/generated/career-zh-parity-fix-06-live-report.json, and docs/codex metadata; no fap-web, publish, deploy, sitemap, llms, or index strategy files changed."
+      },
+      "local": {
+        "status": "pass_with_external_sidecar",
+        "commands": [
+          "php -l backend/app/Console/Commands/CareerAuditZhDisplayParity.php",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Console/CareerAuditZhDisplayParityCommandTest.php --no-ansi",
+          "cd backend && php artisan career:audit-zh-display-parity --json --summary-only --assert-live-parity --output=docs/career/generated/career-zh-parity-fix-06-live-report.json",
+          "python3 -m json.tool backend/docs/career/generated/career-zh-parity-fix-06-live-report.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "git diff --check",
+          "git diff --cached --check"
+        ],
+        "notes": "PHP lint and focused console tests passed. The live read-only parity gate completed and wrote the PR06 report, but exited 1 because production still has 672 EN-only zh module gaps and 237 runtime published shell signals; API failures, public index mismatch, sitemap changes, llms changes, and index strategy changes are all zero/false. This is recorded as an external sidecar blocker not introduced by PR06."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "GitHub checks passed for PR #2032 head a10e9de005c4bfe7eb2fd1f90ae583a80609d77f: hygiene, supply-chain, content-pack-build-validate, Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "a10e9de005c4bfe7eb2fd1f90ae583a80609d77f",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2032",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
-    "sidecar_issues": [],
+    "sidecar_issues": [
+      {
+        "id": "CAREER-ZH-PARITY-FIX-06-SIDECAR-01",
+        "status": "open",
+        "severity": "external",
+        "title": "Production career zh live parity still blocked after final read-only gate",
+        "evidence": "career:audit-zh-display-parity v0.2 scanned 1046 production career job slugs: EN/ZH API/index parity is 1046/1046 with api_failure_count=0 and index_mismatch_count=0, but same_module_set=374, en_has_modules_zh_missing=672, zh_has_modules_en_missing=0, and restricted_shell_count=237. sitemap_changed=false, llms_changed=false, index_strategy_changed=false. Generated report: backend/docs/career/generated/career-zh-parity-fix-06-live-report.json.",
+        "introduced_by_current_pr": false,
+        "required_followup": "Requires explicitly approved backend production deployment/import/cache refresh or equivalent controlled content operation before assert-live-parity can pass."
+      }
+    ],
     "transitions": [
       {
         "at": "2026-06-11T02:19:47Z",
         "status": "pending_dependency",
         "note": "Future final live parity gate entry initialized only; implementation deferred until CAREER-ZH-PARITY-FIX-05 is merged."
+      },
+      {
+        "at": "2026-06-11T05:49:48Z",
+        "status": "in_progress",
+        "note": "Started from origin/main after PR05 merge; implementing final read-only parity gate/report hardening."
+      },
+      {
+        "at": "2026-06-11T05:49:48Z",
+        "status": "local_verified_sidecar_external",
+        "note": "Focused lint/test and report JSON parse passed; production live gate remains blocked by external zh module/runtime-shell parity state recorded as sidecar."
+      },
+      {
+        "at": "2026-06-11T05:56:00Z",
+        "status": "pr_open_checks_pending",
+        "note": "Opened PR #2032 for CAREER-ZH-PARITY-FIX-06 from head commit 1135dfb5b3afbc4f8f2a6d25d336b7445a57721a."
+      },
+      {
+        "at": "2026-06-11T06:03:30Z",
+        "status": "ready_to_merge",
+        "note": "PR #2032 GitHub checks passed; scope remains confined to PR06 allowed paths. Live parity blocker remains external sidecar."
       }
     ]
   }
