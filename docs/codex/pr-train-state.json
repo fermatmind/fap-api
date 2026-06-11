@@ -53000,7 +53000,7 @@
     "repo": "fap-api",
     "branch": "codex/career-zh-parity-fix-04",
     "base": "origin/main",
-    "status": "local_verified_sidecar_external",
+    "status": "pr_open_checks_pending",
     "train_scope": "career_zh_parity_fix",
     "title": "CAREER-ZH-PARITY-FIX-04: feat(career): controlled zh display import cache refresh",
     "depends_on": [
@@ -53033,11 +53033,15 @@
           "git diff --check"
         ],
         "notes": "PHP lint, focused feature tests, and scoped Pint passed. The manifest-listed broad tests/Unit/Services/Career command failed only on pre-existing career publish readiness failures outside PR04 scope and is recorded as sidecar."
+      },
+      "github_checks": {
+        "status": "pending",
+        "evidence": "PR #2029 opened; waiting for GitHub checks."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "9a1389e3810b92770501157205c4513ea5b1e91e",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2029",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -53061,6 +53065,11 @@
         "at": "2026-06-11T04:35:00Z",
         "status": "local_verified_sidecar_external",
         "note": "Implemented controlled manifest chunk execution and zh-CN job detail cache refresh reporting; focused checks passed; broad Career unit suite retains external FirstWavePublishReadyValidator blocker."
+      },
+      {
+        "at": "2026-06-11T04:38:00Z",
+        "status": "pr_open_checks_pending",
+        "note": "Opened PR #2029 for CAREER-ZH-PARITY-FIX-04 from head commit 9a1389e3810b92770501157205c4513ea5b1e91e."
       }
     ]
   },
