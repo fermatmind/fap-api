@@ -53933,7 +53933,7 @@
     "repo": "fap-api",
     "branch": "codex/career-full-parity-07",
     "base": "origin/main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "career_full_parity",
     "title": "CAREER-FULL-PARITY-07: chore(career): warm en zh career detail caches",
     "depends_on": [
@@ -53976,14 +53976,18 @@
       "merge_readiness": {
         "status": "pass",
         "evidence": "PR #2048 is OPEN, mergeStateStatus CLEAN, not draft, and changed files remain within the declared CAREER-FULL-PARITY-07 scope."
+      },
+      "merge": {
+        "status": "pass",
+        "evidence": "PR #2048 merged at 2026-06-11T17:28:20Z; origin/main contains merge commit 39834bfb9b98720bceffea5e4c22f2adbe356bc9."
       }
     },
     "failure_reason": null,
     "commit_sha": "f37b7883",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2048",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-11T17:28:20Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-11T13:00:17Z",
@@ -54009,6 +54013,11 @@
         "at": "2026-06-11T17:20:10Z",
         "status": "ready_to_merge",
         "note": "GitHub checks passed and merge preflight scope validation is clean for PR #2048."
+      },
+      {
+        "at": "2026-06-11T17:32:40Z",
+        "status": "merged",
+        "note": "Reconciled CAREER-FULL-PARITY-07 after PR #2048 merge and post-merge cleanup."
       }
     ]
   },
@@ -54016,7 +54025,7 @@
     "repo": "fap-api",
     "branch": "codex/career-full-parity-08",
     "base": "origin/main",
-    "status": "pending_dependency",
+    "status": "local_checks_passed",
     "train_scope": "career_full_parity",
     "title": "CAREER-FULL-PARITY-08: test(career): enforce live zh parity gate",
     "depends_on": [
@@ -54028,8 +54037,29 @@
         "evidence": "User explicitly authorized adding and executing CAREER-FULL-PARITY-01 through CAREER-FULL-PARITY-10 and allowed fap-api docs/codex metadata updates."
       },
       "dependency": {
-        "status": "pending",
-        "evidence": "Waiting for CAREER-FULL-PARITY-07 to merge before implementation."
+        "status": "pass",
+        "evidence": "CAREER-FULL-PARITY-07 PR #2048 is merged and origin/main contains merge commit 39834bfb9b98720bceffea5e4c22f2adbe356bc9."
+      },
+      "implementation": {
+        "status": "pass",
+        "evidence": "Career zh display parity audit now emits strict live_parity_assertions and ci_publish_readiness fields requiring runtime_shell_count, module_mismatch_count, api_failure_count, and index_mismatch_count to be zero, with same_module_set equal to total_slugs. Added generated CAREER-FULL-PARITY-08 readiness report."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "php -l backend/app/Console/Commands/CareerAuditZhDisplayParity.php",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Console/CareerAuditZhDisplayParityCommandTest.php --no-ansi",
+          "cd backend && ./vendor/bin/pint --test app/Console/Commands/CareerAuditZhDisplayParity.php tests/Feature/Console/CareerAuditZhDisplayParityCommandTest.php",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 -m json.tool backend/docs/career/generated/career-full-parity-08-live-parity-gate-readiness.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "git diff --check"
+        ],
+        "evidence": "Required local checks passed: php -l passed; focused CareerAuditZhDisplayParity command test passed with 5 warnings / 106 assertions; Pint, JSON, YAML, and diff checks passed."
+      },
+      "scope": {
+        "status": "pass",
+        "evidence": "Changed files are confined to manifest-allowed audit command, audit feature test, generated career report, and docs/codex state paths."
       }
     },
     "failure_reason": null,
@@ -54043,6 +54073,16 @@
         "at": "2026-06-11T13:00:17Z",
         "status": "pending_dependency",
         "note": "Initialized from explicit CAREER-FULL-PARITY train authorization; implementation deferred until dependencies merge."
+      },
+      {
+        "at": "2026-06-11T17:32:40Z",
+        "status": "in_progress",
+        "note": "Started CAREER-FULL-PARITY-08 from latest origin/main after PR07 cleanup."
+      },
+      {
+        "at": "2026-06-11T17:36:20Z",
+        "status": "local_checks_passed",
+        "note": "Implementation and required local checks passed; ready for scope validation, commit, push, and PR creation."
       }
     ]
   },
