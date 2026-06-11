@@ -54118,7 +54118,7 @@
     "repo": "fap-api",
     "branch": "codex/career-full-parity-09",
     "base": "origin/main",
-    "status": "pr_open_checks_pending",
+    "status": "ready_to_merge",
     "train_scope": "career_full_parity",
     "title": "CAREER-FULL-PARITY-09: fix(career): block invalid display asset publishing",
     "depends_on": [
@@ -54154,8 +54154,8 @@
         "evidence": "Changed files are confined to backend/app/Console/Commands, backend/app/Services/Career, backend/tests/Feature/Filament, and docs/codex/pr-train-state.json, all within CAREER-FULL-PARITY-09 allowed paths."
       },
       "github": {
-        "status": "pending",
-        "evidence": "PR #2050 will be force-pushed at final implementation commit edda0cb21a439dd4451df1a7be4e9c598a52f4bc for GitHub check rerun."
+        "status": "pass",
+        "evidence": "PR #2050 GitHub checks passed after final force-push: hygiene, supply-chain, content-pack-build-validate, Semgrep, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
       }
     },
     "failure_reason": null,
@@ -54229,6 +54229,11 @@
         "at": "2026-06-11T18:43:31Z",
         "status": "commit_sha_reconciled",
         "note": "Recorded final implementation commit SHA edda0cb21a439dd4451df1a7be4e9c598a52f4bc before force-pushing PR #2050."
+      },
+      {
+        "at": "2026-06-11T18:49:00Z",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed after force-push and scope revalidation remained within CAREER-FULL-PARITY-09."
       }
     ]
   },
