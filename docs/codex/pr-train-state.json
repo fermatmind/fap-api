@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-11T13:32:12Z",
+  "updated_at": "2026-06-11T13:34:05Z",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -53478,7 +53478,7 @@
     "repo": "fap-api",
     "branch": "codex/career-full-parity-02",
     "base": "origin/main",
-    "status": "local_verified",
+    "status": "pr_open_checks_pending",
     "train_scope": "career_full_parity",
     "title": "CAREER-FULL-PARITY-02: chore(career): generate full zh parity root-cause manifest",
     "depends_on": [
@@ -53510,8 +53510,8 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "8f3ea0c312ae7c42fb751a2a3e39c6ac40860da1",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2040",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -53535,6 +53535,11 @@
         "at": "2026-06-11T13:32:12Z",
         "status": "scope_validated",
         "note": "Validated changed files against CAREER-FULL-PARITY-02 allowed paths before staging."
+      },
+      {
+        "at": "2026-06-11T13:34:05Z",
+        "status": "pr_open_checks_pending",
+        "note": "Opened PR #2040 for CAREER-FULL-PARITY-02; waiting for GitHub checks."
       }
     ]
   },
