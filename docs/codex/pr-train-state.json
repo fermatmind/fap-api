@@ -52768,7 +52768,7 @@
     "repo": "fap-api",
     "branch": "codex/career-zh-parity-fix-02",
     "base": "origin/main",
-    "status": "github_checks_pending_after_scoped_fix",
+    "status": "ready_to_merge",
     "train_scope": "career_zh_parity_fix",
     "title": "CAREER-ZH-PARITY-FIX-02: fix(career): repair reviewed zh display workbook contract",
     "depends_on": [
@@ -52830,6 +52830,10 @@
       "github_verify_bigfive_initial": {
         "status": "failed_fixed_in_scope",
         "evidence": "GitHub verify-bigfive initially failed because BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff detected backend/app/Services/Career/Import/CareerDisplayWorkbookContractRepairer.php. The fix moved repair logic into the command and removed that runtime service path from the final PR diff."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "GitHub checks passed for PR #2026 head eb095864b3f0efa6c94a4cdc54c581eae34fdaa3: hygiene, supply-chain, content-pack-build-validate, Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
       }
     },
     "failure_reason": null,
@@ -52877,6 +52881,11 @@
         "at": "2026-06-11T04:08:00Z",
         "status": "committed",
         "note": "Committed scoped CI fix as 9a23cf25b126ba106890b71b97d84e40c6a7f406; final origin/main...HEAD diff no longer includes backend/app/Services/Career/Import/**."
+      },
+      {
+        "at": "2026-06-11T04:20:00Z",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed for PR #2026 head eb095864b3f0efa6c94a4cdc54c581eae34fdaa3 after the scoped verify-bigfive fix."
       }
     ]
   },
