@@ -1,11 +1,71 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-06-09T15:23:28+08:00",
+  "updated_at": "2026-06-11T20:24:49+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
   "items": {
+    "PERSONALITY-EN-CONTENT-00": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "pr_open",
+      "branch": "codex/personality-en-content-00",
+      "commit_sha": "c0ed5562dc07f937f4d29674ba276cc7835dfc68",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/2037",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "ruby -e 'require \"yaml\"; YAML.load_file(\"docs/codex/pr-train.yaml\")'",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Console/Commands/PersonalityEnrichMbtiEnglishVariantSections.php app/Services/Cms/MbtiEnglishVariantSectionEnrichmentService.php tests/Feature/Console/PersonalityEnrichMbtiEnglishVariantSectionsCommandTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/Console/PersonalityEnrichMbtiEnglishVariantSectionsCommandTest.php --no-ansi",
+            "status": "passed",
+            "details": "4 tests and 73 assertions passed."
+          },
+          {
+            "command": "php artisan list | rg 'personality:enrich-mbti-english-variant-sections'",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check && git diff --cached --check",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-06-11T20:24:49+08:00",
+          "status": "in_progress",
+          "summary": "Initialized PERSONALITY-EN-CONTENT-00 for backend/CMS-only English MBTI A/T personality variant section enrichment. Scope excludes fap-web, publishing, sitemap/llms, search submission, scheduler, and production mutation during the PR."
+        },
+        {
+          "at": "2026-06-11T20:24:49+08:00",
+          "status": "local_checks_passed",
+          "summary": "Added dry-run/no-write default English MBTI variant section enrichment command, CMS enrichment service, and focused tests. Scoped JSON/YAML, Pint, PHPUnit, artisan command discovery, and diff checks passed."
+        },
+        {
+          "at": "2026-06-11T20:24:49+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #2037 for PERSONALITY-EN-CONTENT-00."
+        }
+      ]
+    },
     "PR-CMS-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
