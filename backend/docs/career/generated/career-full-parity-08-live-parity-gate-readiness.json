@@ -1,0 +1,59 @@
+{
+  "pr_id": "CAREER-FULL-PARITY-08",
+  "title": "CAREER-FULL-PARITY-08: test(career): enforce live zh parity gate",
+  "generated_at": "2026-06-11T17:33:00Z",
+  "read_only": true,
+  "writes_database": false,
+  "cms_mutation": false,
+  "cache_mutation": false,
+  "publish_allowed": false,
+  "deploy_allowed": false,
+  "validator_version": "career_zh_display_parity_audit_v0.4",
+  "strict_live_parity_contract": {
+    "command": "php artisan career:audit-zh-display-parity --assert-live-parity --json --output=<report.json>",
+    "required_assertions": {
+      "runtime_shell_count": {
+        "expected": 0,
+        "failure_blocks": true
+      },
+      "module_mismatch_count": {
+        "expected": 0,
+        "failure_blocks": true
+      },
+      "api_failure_count": {
+        "expected": 0,
+        "failure_blocks": true
+      },
+      "index_mismatch_count": {
+        "expected": 0,
+        "failure_blocks": true
+      },
+      "same_module_set": {
+        "expected": "total_slugs",
+        "failure_blocks": true
+      }
+    }
+  },
+  "report_fields": [
+    "live_gate",
+    "live_parity_assertions",
+    "ci_publish_readiness",
+    "production_live_assessment",
+    "root_cause_manifest",
+    "controlled_import_manifest"
+  ],
+  "long_term_operating_rule": {
+    "train_closeout_requires": "live_parity_assertions.decision=pass",
+    "publish_readiness_requires": "ci_publish_readiness.publish_readiness=ready",
+    "public_index_strategy": "unchanged",
+    "sitemap_strategy": "unchanged",
+    "llms_strategy": "unchanged"
+  },
+  "acceptance": {
+    "runtime_shell_count_zero_required": true,
+    "en_has_modules_zh_missing_zero_required": true,
+    "zh_has_modules_en_missing_zero_required": true,
+    "api_index_mismatch_zero_required": true,
+    "production_write_performed": false
+  }
+}

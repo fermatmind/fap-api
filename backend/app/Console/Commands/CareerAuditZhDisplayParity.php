@@ -16,7 +16,7 @@ use Throwable;
 
 final class CareerAuditZhDisplayParity extends Command
 {
-    private const VALIDATOR_VERSION = 'career_zh_display_parity_audit_v0.3';
+    private const VALIDATOR_VERSION = 'career_zh_display_parity_audit_v0.4';
 
     private const DEFAULT_API_BASE = 'https://api.fermatmind.com/api/v0.5/career/jobs';
 
@@ -63,13 +63,14 @@ final class CareerAuditZhDisplayParity extends Command
 
             $summary = $this->summary($items, $index, $sampleLimit);
             $liveGate = $this->liveGate($summary, $items);
+            $liveParityAssertions = $this->liveParityAssertions($summary, $liveGate);
             $assessment = $this->productionLiveAssessment($items, $sampleLimit);
             $rootCauseManifest = $this->rootCauseManifest($items);
             $controlledImportManifest = $this->controlledImportManifest($items, $assessment);
             $report = [
                 'validator_version' => self::VALIDATOR_VERSION,
                 'decision' => $assertLiveParity
-                    ? $liveGate['decision']
+                    ? $liveParityAssertions['decision']
                     : (($summary['api_failure_count'] ?? 0) === 0 ? 'pass' : 'blocked'),
                 'read_only' => true,
                 'writes_database' => false,
@@ -82,6 +83,8 @@ final class CareerAuditZhDisplayParity extends Command
                 'scan_scope' => $explicitSlugs === [] ? 'public_index_union' : 'explicit_slugs',
                 'assert_live_parity' => $assertLiveParity,
                 'live_gate' => $liveGate,
+                'live_parity_assertions' => $liveParityAssertions,
+                'ci_publish_readiness' => $this->ciPublishReadiness($liveParityAssertions, $assertLiveParity),
                 'summary' => $summary,
                 'production_live_assessment' => $assessment,
                 'root_cause_manifest' => $rootCauseManifest,
@@ -557,6 +560,93 @@ final class CareerAuditZhDisplayParity extends Command
             'sitemap_changed' => false,
             'llms_changed' => false,
             'index_strategy_changed' => false,
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $summary
+     * @param  array<string, mixed>  $liveGate
+     * @return array<string, mixed>
+     */
+    private function liveParityAssertions(array $summary, array $liveGate): array
+    {
+        $totalSlugs = (int) ($summary['total_slugs'] ?? 0);
+        $assertions = [
+            'runtime_shell_count' => [
+                'expected' => 0,
+                'actual' => (int) ($liveGate['restricted_shell_count'] ?? 0),
+            ],
+            'module_mismatch_count' => [
+                'expected' => 0,
+                'actual' => (int) ($liveGate['module_mismatch_count'] ?? 0),
+            ],
+            'api_failure_count' => [
+                'expected' => 0,
+                'actual' => (int) ($liveGate['api_failure_count'] ?? 0),
+            ],
+            'index_mismatch_count' => [
+                'expected' => 0,
+                'actual' => (int) ($liveGate['index_mismatch_count'] ?? 0),
+            ],
+            'same_module_set' => [
+                'expected' => $totalSlugs,
+                'actual' => (int) ($summary['same_module_set'] ?? 0),
+            ],
+        ];
+
+        foreach ($assertions as &$assertion) {
+            $assertion['pass'] = $assertion['actual'] === $assertion['expected'];
+        }
+        unset($assertion);
+
+        $failed = array_keys(array_filter(
+            $assertions,
+            static fn (array $assertion): bool => $assertion['pass'] !== true,
+        ));
+
+        return [
+            'schema_version' => 'career_zh_live_parity_assertions.v0.1',
+            'decision' => $failed === [] ? 'pass' : 'blocked',
+            'total_slugs' => $totalSlugs,
+            'required_assertions' => $assertions,
+            'failed_assertions' => $failed,
+            'blockers' => $liveGate['blockers'] ?? [],
+            'assertion_policy' => [
+                'runtime_shell_count' => 'must_equal_zero',
+                'module_mismatch_count' => 'must_equal_zero',
+                'api_failure_count' => 'must_equal_zero',
+                'index_mismatch_count' => 'must_equal_zero',
+                'same_module_set' => 'must_equal_total_slugs',
+            ],
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $liveParityAssertions
+     * @return array<string, mixed>
+     */
+    private function ciPublishReadiness(array $liveParityAssertions, bool $assertLiveParity): array
+    {
+        return [
+            'schema_version' => 'career_zh_live_parity_ci_publish_readiness.v0.1',
+            'assert_live_parity_option_used' => $assertLiveParity,
+            'decision' => (string) ($liveParityAssertions['decision'] ?? 'blocked'),
+            'ci_gate_command' => 'php artisan career:audit-zh-display-parity --assert-live-parity --json --output=<report.json>',
+            'publish_readiness' => (string) ($liveParityAssertions['decision'] ?? 'blocked') === 'pass'
+                ? 'ready'
+                : 'blocked',
+            'required_before_publish_or_train_closeout' => [
+                'runtime_shell_count=0',
+                'module_mismatch_count=0',
+                'api_failure_count=0',
+                'index_mismatch_count=0',
+                'same_module_set=total_slugs',
+            ],
+            'production_write_execution' => false,
+            'database_mutation' => false,
+            'cms_mutation' => false,
+            'publish_allowed_by_this_command' => false,
+            'deploy_allowed_by_this_command' => false,
         ];
     }
 
