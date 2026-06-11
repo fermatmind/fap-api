@@ -24188,7 +24188,7 @@ prs:
     branch: codex/career-zh-parity-fix-01
     title: "CAREER-ZH-PARITY-FIX-01: fix(career): compact zh parity workbook readiness"
     train_scope: career_zh_parity_fix
-    status: in_progress
+    status: merged
     scope:
       - Fix full-workbook career display validation so large reviewed Chinese workbook scans can emit compact readiness JSON without console OOM.
       - Preserve read-only behavior and full plan artifact output while omitting per-row detail from summary-only stdout/report artifacts.
@@ -24237,7 +24237,7 @@ prs:
     branch: codex/career-zh-parity-fix-02
     title: "CAREER-ZH-PARITY-FIX-02: fix(career): repair reviewed zh display workbook contract"
     train_scope: career_zh_parity_fix
-    status: pending_dependency
+    status: ready_to_merge
     scope:
       - Add controlled workbook contract repair for reviewed Chinese career display assets.
       - Normalize CTA target, FermatMind interpretation source labels, Product schema leakage, and job-posting sample terms without copying English into Chinese fields.

@@ -1,0 +1,125 @@
+{
+    "command": "career:repair-display-workbook-contract",
+    "repairer_version": "career_display_workbook_contract_repairer_v0.1",
+    "sheet": "Career_Assets_v4_1",
+    "source_file_basename": "第九版_d23b_schema_repaired.xlsx",
+    "source_sha256": "c30f8743cfd0d8baa14ac931cc7270807425164952f6a44953b5b4ab448778ef",
+    "execute": false,
+    "writes_database": false,
+    "cms_mutation": false,
+    "output_file": null,
+    "output_sha256": null,
+    "total_rows": 2786,
+    "selected_rows": 2786,
+    "slug_filter_count": 0,
+    "changed_rows": 2579,
+    "changed_cells": 4981,
+    "repairs_by_field": {
+        "CN_Occupation_Schema_JSON": 827,
+        "Claim_Level_Source_Refs": 2527,
+        "Primary_CTA_Target_Action": 1627
+    },
+    "sample_repairs": [
+        {
+            "row_number": 2,
+            "slug": "accountants-and-auditors",
+            "fields": [
+                "Claim_Level_Source_Refs"
+            ]
+        },
+        {
+            "row_number": 3,
+            "slug": "actors",
+            "fields": [
+                "Claim_Level_Source_Refs"
+            ]
+        },
+        {
+            "row_number": 18,
+            "slug": "aerospace-engineers",
+            "fields": [
+                "Primary_CTA_Target_Action",
+                "Claim_Level_Source_Refs"
+            ]
+        },
+        {
+            "row_number": 21,
+            "slug": "agricultural-and-food-scientists",
+            "fields": [
+                "Primary_CTA_Target_Action",
+                "Claim_Level_Source_Refs"
+            ]
+        },
+        {
+            "row_number": 24,
+            "slug": "agricultural-inspectors",
+            "fields": [
+                "Primary_CTA_Target_Action",
+                "Claim_Level_Source_Refs"
+            ]
+        },
+        {
+            "row_number": 26,
+            "slug": "agricultural-technicians",
+            "fields": [
+                "Primary_CTA_Target_Action",
+                "Claim_Level_Source_Refs"
+            ]
+        },
+        {
+            "row_number": 27,
+            "slug": "agricultural-workers",
+            "fields": [
+                "Primary_CTA_Target_Action",
+                "Claim_Level_Source_Refs"
+            ]
+        },
+        {
+            "row_number": 28,
+            "slug": "agricultural-workers-all-other",
+            "fields": [
+                "Primary_CTA_Target_Action",
+                "Claim_Level_Source_Refs"
+            ]
+        },
+        {
+            "row_number": 47,
+            "slug": "animal-breeders",
+            "fields": [
+                "Primary_CTA_Target_Action",
+                "Claim_Level_Source_Refs"
+            ]
+        },
+        {
+            "row_number": 52,
+            "slug": "animal-trainers",
+            "fields": [
+                "CN_Occupation_Schema_JSON"
+            ]
+        },
+        {
+            "row_number": 53,
+            "slug": "announcers",
+            "fields": [
+                "Claim_Level_Source_Refs"
+            ]
+        },
+        {
+            "row_number": 54,
+            "slug": "anthropologists-and-archeologists",
+            "fields": [
+                "CN_Occupation_Schema_JSON"
+            ]
+        }
+    ],
+    "repair_contract": {
+        "primary_cta_target_action": "start_riasec_test",
+        "source_ref_label": "FermatMind interpretation",
+        "occupation_schema_forbidden_terms_removed": [
+            "Product schema",
+            "job posting sample",
+            "招聘样本"
+        ]
+    },
+    "decision": "dry_run_changes_available"
+}
