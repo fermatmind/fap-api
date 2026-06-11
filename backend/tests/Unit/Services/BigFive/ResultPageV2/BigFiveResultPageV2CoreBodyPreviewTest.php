@@ -1619,6 +1619,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ));
     }
 
+    public function test_runtime_freeze_classifier_ignores_article_sitemap_llms_eligibility_migration(): void
+    {
+        $changed = [
+            'backend/database/migrations/2026_06_11_000100_add_article_sitemap_llms_eligibility_fields.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_controlled_article_publish_sop_changes(): void
     {
         $changed = [
@@ -2901,6 +2910,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isArticleSitemapLlmsEligibilityMigrationFile($file)) {
+                continue;
+            }
+
             if ($this->isArticleMultiTestGraphEdgeFile($file)) {
                 continue;
             }
@@ -3771,6 +3784,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Filament/Ops/Resources/ArticleResource/Support/ArticleWorkspace.php',
             'backend/app/Http/Controllers/Ops/ArticleDraftPreviewController.php',
         ], true);
+    }
+
+    private function isArticleSitemapLlmsEligibilityMigrationFile(string $file): bool
+    {
+        return $file === 'backend/database/migrations/2026_06_11_000100_add_article_sitemap_llms_eligibility_fields.php';
     }
 
     private function isArticleMultiTestGraphEdgeFile(string $file): bool
