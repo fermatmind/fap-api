@@ -1,0 +1,199 @@
+{
+    "command": "career:repair-display-workbook-contract",
+    "repairer_version": "career_display_workbook_contract_repairer_v0.2",
+    "sheet": "Career_Assets_v4_1",
+    "source_file_basename": "第九版_d23b_schema_repaired.xlsx",
+    "source_sha256": "c30f8743cfd0d8baa14ac931cc7270807425164952f6a44953b5b4ab448778ef",
+    "execute": false,
+    "writes_database": false,
+    "cms_mutation": false,
+    "output_file": null,
+    "output_sha256": null,
+    "total_rows": 2786,
+    "selected_rows": 136,
+    "slug_filter_count": 136,
+    "changed_rows": 136,
+    "changed_cells": 320,
+    "auto_repairable_rows": 131,
+    "changed_rows_requiring_manual_review": 5,
+    "manual_review_required_count": 5,
+    "manual_review_required_rows": [
+        {
+            "row_number": 1930,
+            "slug": "data-scientists",
+            "reasons": [
+                "CN_Title lacks reviewed Chinese text",
+                "CN_Title copied from EN_Title",
+                "CN_H1 lacks reviewed Chinese text",
+                "CN_H1 copied from EN_H1"
+            ]
+        },
+        {
+            "row_number": 2211,
+            "slug": "human-resources-specialists",
+            "reasons": [
+                "CN_Title lacks reviewed Chinese text",
+                "CN_Title copied from EN_Title",
+                "CN_H1 lacks reviewed Chinese text",
+                "CN_H1 copied from EN_H1"
+            ]
+        },
+        {
+            "row_number": 2304,
+            "slug": "management-analysts",
+            "reasons": [
+                "CN_Title lacks reviewed Chinese text",
+                "CN_Title copied from EN_Title",
+                "CN_H1 lacks reviewed Chinese text",
+                "CN_H1 copied from EN_H1"
+            ]
+        },
+        {
+            "row_number": 2531,
+            "slug": "project-management-specialists",
+            "reasons": [
+                "CN_Title lacks reviewed Chinese text",
+                "CN_Title copied from EN_Title",
+                "CN_H1 lacks reviewed Chinese text",
+                "CN_H1 copied from EN_H1"
+            ]
+        },
+        {
+            "row_number": 2578,
+            "slug": "registered-nurses",
+            "reasons": [
+                "CN_Title lacks reviewed Chinese text",
+                "CN_Title copied from EN_Title",
+                "CN_H1 lacks reviewed Chinese text",
+                "CN_H1 copied from EN_H1"
+            ]
+        }
+    ],
+    "repairs_by_field": {
+        "CN_Occupation_Schema_JSON": 65,
+        "Claim_Level_Source_Refs": 119,
+        "Primary_CTA_Target_Action": 51,
+        "Source_Page_Type": 85
+    },
+    "sample_repairs": [
+        {
+            "row_number": 18,
+            "slug": "aerospace-engineers",
+            "fields": [
+                "Primary_CTA_Target_Action",
+                "Claim_Level_Source_Refs"
+            ],
+            "manual_review_required": false
+        },
+        {
+            "row_number": 21,
+            "slug": "agricultural-and-food-scientists",
+            "fields": [
+                "Primary_CTA_Target_Action",
+                "Claim_Level_Source_Refs"
+            ],
+            "manual_review_required": false
+        },
+        {
+            "row_number": 27,
+            "slug": "agricultural-workers",
+            "fields": [
+                "Primary_CTA_Target_Action",
+                "Claim_Level_Source_Refs"
+            ],
+            "manual_review_required": false
+        },
+        {
+            "row_number": 53,
+            "slug": "announcers",
+            "fields": [
+                "Source_Page_Type",
+                "Claim_Level_Source_Refs"
+            ],
+            "manual_review_required": false
+        },
+        {
+            "row_number": 54,
+            "slug": "anthropologists-and-archeologists",
+            "fields": [
+                "Source_Page_Type",
+                "CN_Occupation_Schema_JSON"
+            ],
+            "manual_review_required": false
+        },
+        {
+            "row_number": 58,
+            "slug": "arbitrators-mediators-and-conciliators",
+            "fields": [
+                "Source_Page_Type",
+                "CN_Occupation_Schema_JSON"
+            ],
+            "manual_review_required": false
+        },
+        {
+            "row_number": 74,
+            "slug": "assemblers-and-fabricators",
+            "fields": [
+                "Source_Page_Type",
+                "Claim_Level_Source_Refs"
+            ],
+            "manual_review_required": false
+        },
+        {
+            "row_number": 77,
+            "slug": "athletes-and-sports-competitors",
+            "fields": [
+                "Source_Page_Type",
+                "CN_Occupation_Schema_JSON"
+            ],
+            "manual_review_required": false
+        },
+        {
+            "row_number": 78,
+            "slug": "athletic-trainers",
+            "fields": [
+                "Source_Page_Type",
+                "CN_Occupation_Schema_JSON"
+            ],
+            "manual_review_required": false
+        },
+        {
+            "row_number": 81,
+            "slug": "atmospheric-scientists-including-meteorologists",
+            "fields": [
+                "Source_Page_Type",
+                "CN_Occupation_Schema_JSON"
+            ],
+            "manual_review_required": false
+        },
+        {
+            "row_number": 83,
+            "slug": "audiologists",
+            "fields": [
+                "Source_Page_Type",
+                "CN_Occupation_Schema_JSON"
+            ],
+            "manual_review_required": false
+        },
+        {
+            "row_number": 90,
+            "slug": "automotive-service-technicians-and-mechanics",
+            "fields": [
+                "Source_Page_Type",
+                "CN_Occupation_Schema_JSON"
+            ],
+            "manual_review_required": false
+        }
+    ],
+    "repair_contract": {
+        "primary_cta_target_action": "start_riasec_test",
+        "source_page_type": "career_job_detail",
+        "source_ref_label": "FermatMind interpretation",
+        "occupation_schema_forbidden_terms_removed": [
+            "Product schema",
+            "job posting sample",
+            "招聘样本"
+        ]
+    },
+    "decision": "dry_run_changes_available"
+}

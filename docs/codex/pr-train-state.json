@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-11T13:34:05Z",
+  "updated_at": "2026-06-11T15:31:40Z",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -10,7 +10,7 @@
     "title": "docs(monetization): scan locale freemium policy readiness",
     "checks": {
       "authorization": {
-        "status": "pass",
+        "status": "pass_with_external_pint_blocker",
         "evidence": "User explicitly authorized the Day 1 Commercial Readiness train, including FREEMIUM-LOCALE-POLICY-SCAN-01, with docs/codex manifest/state updates allowed."
       },
       "dependency": {
@@ -53478,7 +53478,7 @@
     "repo": "fap-api",
     "branch": "codex/career-full-parity-02",
     "base": "origin/main",
-    "status": "pr_open_checks_pending",
+    "status": "merged",
     "train_scope": "career_full_parity",
     "title": "CAREER-FULL-PARITY-02: chore(career): generate full zh parity root-cause manifest",
     "depends_on": [
@@ -53512,9 +53512,9 @@
     "failure_reason": null,
     "commit_sha": "8f3ea0c312ae7c42fb751a2a3e39c6ac40860da1",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2040",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-11T13:40:44Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-11T13:00:17Z",
@@ -53540,14 +53540,20 @@
         "at": "2026-06-11T13:34:05Z",
         "status": "pr_open_checks_pending",
         "note": "Opened PR #2040 for CAREER-FULL-PARITY-02; waiting for GitHub checks."
+      },
+      {
+        "at": "2026-06-11T13:54:56Z",
+        "status": "merged",
+        "note": "Reconciled during CAREER-FULL-PARITY-03 after confirming PR #2040 merged, origin/main contains merge commit f254f99b6a9726927e1a232c997d2f39a18d4998, local main was fast-forwarded, and task branch cleanup completed."
       }
-    ]
+    ],
+    "merge_commit_sha": "f254f99b6a9726927e1a232c997d2f39a18d4998"
   },
   "CAREER-FULL-PARITY-03": {
     "repo": "fap-api",
     "branch": "codex/career-full-parity-03",
     "base": "origin/main",
-    "status": "pending_dependency",
+    "status": "pr_open_checks_pending",
     "train_scope": "career_full_parity",
     "title": "CAREER-FULL-PARITY-03: fix(career): repair blocked workbook asset contracts",
     "depends_on": [
@@ -53559,13 +53565,30 @@
         "evidence": "User explicitly authorized adding and executing CAREER-FULL-PARITY-01 through CAREER-FULL-PARITY-10 and allowed fap-api docs/codex metadata updates."
       },
       "dependency": {
-        "status": "pending",
-        "evidence": "Waiting for CAREER-FULL-PARITY-02 to merge before implementation."
+        "status": "pass",
+        "evidence": "CAREER-FULL-PARITY-02 PR #2040 is merged and origin/main contains merge commit f254f99b6a9726927e1a232c997d2f39a18d4998."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Console tests/Feature/Career --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Console/CareerRepairDisplayWorkbookContractCommandTest.php --no-ansi",
+          "cd backend && ./vendor/bin/pint --test app/Console/Commands/CareerRepairDisplayWorkbookContract.php tests/Feature/Console/CareerRepairDisplayWorkbookContractCommandTest.php",
+          "python3 -m json.tool backend/docs/career/generated/career-full-parity-03-contract-repair-report.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "git diff --check"
+        ],
+        "notes": "External broad-test blocker was fixed by ad-hoc PR #2042. CAREER-FULL-PARITY-03 scoped checks pass: broad Feature/Console+Feature/Career suite completed with 704 warnings and 38924 assertions, focused workbook repair test completed with 3 warnings and 42 assertions, scoped Pint pass, generated report JSON pass, state JSON pass, YAML pass, git diff --check pass. Manifest directory-level Pint still reports a pre-existing origin/main style issue in app/Console/Commands/PersonalityEnsureMbtiVariantSectionStructure.php; recorded as external sidecar and kept out of this PR scope."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are confined to CareerRepairDisplayWorkbookContract.php, its console test, backend/docs/career/generated/career-full-parity-03-contract-repair-report.json, and docs/codex/pr-train-state.json."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "84de772b71e62830804bfd0ca134794571977d0e",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2043",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -53574,8 +53597,59 @@
         "at": "2026-06-11T13:00:17Z",
         "status": "pending_dependency",
         "note": "Initialized from explicit CAREER-FULL-PARITY train authorization; implementation deferred until dependencies merge."
+      },
+      {
+        "at": "2026-06-11T13:54:56Z",
+        "status": "in_progress",
+        "note": "Started CAREER-FULL-PARITY-03 from latest origin/main after PR02 merge cleanup; generated dry-run workbook contract repair report for 136 candidate slugs."
+      },
+      {
+        "at": "2026-06-11T13:59:30Z",
+        "status": "local_checks_failed_external_blocker",
+        "note": "Required broad Feature/Console+Feature/Career check failed outside PR03 scope; focused workbook repair validation, scope validation, JSON/YAML, Pint, and diff check passed. Stopped before commit/push/PR per PR-train failure policy."
+      },
+      {
+        "at": "2026-06-11T15:26:34Z",
+        "status": "local_checks_passed",
+        "note": "Resumed after ad-hoc PR #2042 fixed the external broad-test blocker. Rebased CAREER-FULL-PARITY-03 onto origin/main 5120fc21 and reran manifest checks successfully."
+      },
+      {
+        "at": "2026-06-11T15:26:34Z",
+        "status": "external_sidecar_blocker_recorded",
+        "note": "Directory-level Pint check still fails on a pre-existing origin/main style issue in app/Console/Commands/PersonalityEnsureMbtiVariantSectionStructure.php. Scoped Pint for CAREER-FULL-PARITY-03 files passes; the external style issue is not included in this PR."
+      },
+      {
+        "at": "2026-06-11T15:26:34Z",
+        "status": "committed",
+        "note": "Committed CAREER-FULL-PARITY-03 scoped repair command, tests, and generated dry-run report."
+      },
+      {
+        "at": "2026-06-11T15:31:40Z",
+        "status": "pr_open_checks_pending",
+        "note": "Opened PR #2043 for CAREER-FULL-PARITY-03 and started GitHub checks."
       }
-    ]
+    ],
+    "result": {
+      "dry_run_report": "backend/docs/career/generated/career-full-parity-03-contract-repair-report.json",
+      "selected_rows": 136,
+      "auto_repairable_rows": 131,
+      "manual_review_required_rows": 5,
+      "manual_review_required_slugs": [
+        "data-scientists",
+        "human-resources-specialists",
+        "management-analysts",
+        "project-management-specialists",
+        "registered-nurses"
+      ],
+      "external_sidecar_blockers": [
+        {
+          "type": "pre_existing_pint_style_issue",
+          "file": "backend/app/Console/Commands/PersonalityEnsureMbtiVariantSectionStructure.php",
+          "evidence": "cd backend && ./vendor/bin/pint --test app/Console/Commands/PersonalityEnsureMbtiVariantSectionStructure.php fails on origin/main with the same unary_operator_spaces style issue."
+        }
+      ],
+      "decision": "dry_run_changes_available"
+    }
   },
   "CAREER-FULL-PARITY-04": {
     "repo": "fap-api",
