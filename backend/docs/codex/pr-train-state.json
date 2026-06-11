@@ -1,11 +1,131 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-06-09T15:23:28+08:00",
+  "updated_at": "2026-06-11T20:24:49+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
   "items": {
+    "PERSONALITY-EN-CONTENT-00": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "ready_to_merge",
+      "branch": "codex/personality-en-content-00",
+      "commit_sha": "8ff2b65edd0b4a32f948f1424e9aad58fb9ef7b8",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/2037",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "ruby -e 'require \"yaml\"; YAML.load_file(\"docs/codex/pr-train.yaml\")'",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Console/Commands/PersonalityEnrichMbtiEnglishVariantSections.php app/Services/Cms/MbtiEnglishVariantSectionEnrichmentService.php tests/Feature/Console/PersonalityEnrichMbtiEnglishVariantSectionsCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/Console/PersonalityEnrichMbtiEnglishVariantSectionsCommandTest.php --no-ansi",
+            "status": "passed",
+            "details": "4 tests and 73 assertions passed."
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=mbti_personality_english_variant_section_enrichment --no-ansi",
+            "status": "passed",
+            "details": "1 test and 1 assertion passed."
+          },
+          {
+            "command": "php artisan list | rg 'personality:enrich-mbti-english-variant-sections'",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --cached --check",
+            "status": "passed"
+          }
+        ],
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "passed",
+            "details": "GitHub push and pull_request hygiene checks passed on PR #2037."
+          },
+          {
+            "name": "supply-chain",
+            "status": "passed",
+            "details": "GitHub push and pull_request supply-chain checks passed on PR #2037."
+          },
+          {
+            "name": "content-pack-build-validate",
+            "status": "passed",
+            "details": "GitHub push and pull_request content-pack-build-validate checks passed on PR #2037."
+          },
+          {
+            "name": "Semgrep blocking secrets",
+            "status": "passed",
+            "details": "GitHub Semgrep blocking secrets passed on PR #2037."
+          },
+          {
+            "name": "semgrep sarif non-blocking upload",
+            "status": "passed",
+            "details": "GitHub semgrep SARIF upload passed on PR #2037."
+          },
+          {
+            "name": "verify-bigfive",
+            "status": "passed",
+            "details": "GitHub push and pull_request verify-bigfive checks passed on PR #2037 after the scoped classifier fix."
+          },
+          {
+            "name": "verify-mbti-legacy",
+            "status": "passed",
+            "details": "GitHub push and pull_request verify-mbti-legacy checks passed on PR #2037."
+          },
+          {
+            "name": "verify-mbti-v2",
+            "status": "passed",
+            "details": "GitHub push and pull_request verify-mbti-v2 checks passed on PR #2037."
+          }
+        ]
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-06-11T20:24:49+08:00",
+          "status": "in_progress",
+          "summary": "Initialized PERSONALITY-EN-CONTENT-00 for backend/CMS-only English MBTI A/T personality variant section enrichment. Scope excludes fap-web, publishing, sitemap/llms, search submission, scheduler, and production mutation during the PR."
+        },
+        {
+          "at": "2026-06-11T20:24:49+08:00",
+          "status": "local_checks_passed",
+          "summary": "Added dry-run/no-write default English MBTI variant section enrichment command, CMS enrichment service, and focused tests. Scoped JSON/YAML, Pint, PHPUnit, artisan command discovery, and diff checks passed."
+        },
+        {
+          "at": "2026-06-11T20:24:49+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #2037 for PERSONALITY-EN-CONTENT-00."
+        },
+        {
+          "at": "2026-06-11T20:43:02+08:00",
+          "status": "ci_fix_local_checks_passed",
+          "summary": "Fixed PR #2037 verify-bigfive failure by exempting the backend MBTI English variant section enrichment command/service from the BigFive runtime freeze classifier and adding a focused regression test. JSON/YAML, Pint, focused PHPUnit, command discovery, and diff checks passed."
+        },
+        {
+          "at": "2026-06-11T20:49:11+08:00",
+          "status": "ready_to_merge",
+          "summary": "GitHub checks for PR #2037 passed after the scoped CI classifier fix. Ready for merge under github_checks_or_local_verify policy."
+        }
+      ]
+    },
     "PR-CMS-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",

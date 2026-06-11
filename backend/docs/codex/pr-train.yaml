@@ -3774,3 +3774,39 @@ prs:
     cleanup:
       delete_remote_branch: true
       run_local_cleanup: true
+
+  - id: PERSONALITY-EN-CONTENT-00
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/personality-en-content-00
+    base: main
+    depends_on: []
+    mode: execute
+    title: "PERSONALITY-EN-CONTENT-00: feat(cms): enrich English MBTI variant page sections"
+    scope: >
+      Backend/CMS-only English MBTI variant section enrichment. Add a guarded
+      Artisan command and CMS projection service to enrich en 16 MBTI types x
+      A/T = 32 personality variant pages across existing section keys, with
+      dry-run/no-write default, explicit --write for CMS section updates, and
+      contract tests for A/T differentiation, CTA/content intent, and English
+      scope isolation. Do not change fap-web, publish articles, change sitemap
+      or llms, alter robots/indexability/canonical metadata, submit to Google
+      or Baidu, enable scheduler, or mutate production content during this PR.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "ruby -e 'require \"yaml\"; YAML.load_file(\"docs/codex/pr-train.yaml\")'"
+      - "vendor/bin/pint --test app/Console/Commands/PersonalityEnrichMbtiEnglishVariantSections.php app/Services/Cms/MbtiEnglishVariantSectionEnrichmentService.php tests/Feature/Console/PersonalityEnrichMbtiEnglishVariantSectionsCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+      - "php artisan test tests/Feature/Console/PersonalityEnrichMbtiEnglishVariantSectionsCommandTest.php --no-ansi"
+      - "php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=mbti_personality_english_variant_section_enrichment --no-ansi"
+      - "php artisan list | rg 'personality:enrich-mbti-english-variant-sections'"
+      - "git diff --check"
+      - "git diff --cached --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
