@@ -166,7 +166,6 @@ final class CareerNormalizeLegacyDisplayAssetsCommandTest extends TestCase
     public function force_adds_missing_zh_module_placeholders_only_for_report_authorized_subset_slugs(): void
     {
         $slug = 'module-subset-career';
-        $occupation = $this->createOccupation($slug);
         $missingModules = [
             'career_snapshot_primary_locale',
             'career_snapshot_secondary_locale',
@@ -182,33 +181,7 @@ final class CareerNormalizeLegacyDisplayAssetsCommandTest extends TestCase
             'source_card',
             'review_validity_card',
         ];
-        $zhContent = array_diff_key(
-            $this->pageContentForComponentOrder('中文内容'),
-            array_flip($missingModules),
-        );
-
-        CareerJobDisplayAsset::query()->create([
-            'occupation_id' => $occupation->id,
-            'canonical_slug' => $slug,
-            'surface_version' => 'display.surface.v1',
-            'asset_version' => 'v4.2',
-            'template_version' => 'v4.2',
-            'asset_type' => 'career_job_public_display',
-            'asset_role' => 'formal_pilot_master',
-            'status' => 'ready_for_pilot',
-            'component_order_json' => $this->componentOrder(),
-            'page_payload_json' => [
-                'page' => [
-                    'en' => $this->pageContentForComponentOrder('English content'),
-                    'zh' => $zhContent,
-                ],
-            ],
-            'seo_payload_json' => ['en' => ['title' => $slug], 'zh' => ['title' => $slug]],
-            'sources_json' => ['references' => [['label' => 'Official source']]],
-            'structured_data_json' => ['faq_page' => ['en' => ['mainEntity' => []], 'zh' => ['mainEntity' => []]]],
-            'implementation_contract_json' => ['claim_permissions' => ['visible' => true]],
-            'metadata_json' => ['command' => 'legacy-import'],
-        ]);
+        $this->createModuleSubsetAsset($slug, $missingModules);
 
         [$exitCode, $report] = $this->runNormalize($slug, [
             '--force' => true,
@@ -240,6 +213,33 @@ final class CareerNormalizeLegacyDisplayAssetsCommandTest extends TestCase
         $this->assertSame(0, $exitCode, json_encode($report, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
         $this->assertSame(0, $report['would_update_count']);
         $this->assertSame(0, $report['module_placeholders_added_count']);
+    }
+
+    #[Test]
+    public function it_can_derive_module_subset_slugs_from_root_cause_manifest_without_explicit_slugs(): void
+    {
+        $first = 'module-subset-a';
+        $second = 'module-subset-b';
+        $missingModules = ['source_card', 'review_validity_card'];
+        $this->createModuleSubsetAsset($first, $missingModules);
+        $this->createModuleSubsetAsset($second, ['source_card']);
+
+        $exitCode = Artisan::call('career:normalize-legacy-display-assets', [
+            '--lineage-workbook' => $this->lineageWorkbook(),
+            '--module-subset-report' => $this->moduleSubsetRootCauseReport([$second, $first]),
+            '--dry-run' => true,
+            '--json' => true,
+        ]);
+        $report = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+
+        $this->assertSame(0, $exitCode, json_encode($report, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $this->assertSame('pass', $report['decision']);
+        $this->assertSame('module_subset_report', $report['requested_slug_source']);
+        $this->assertSame([$first, $second], $report['requested_slugs']);
+        $this->assertSame(2, $report['module_subset_authorized_count']);
+        $this->assertSame(2, $report['validated_count']);
+        $this->assertSame(2, $report['would_update_count']);
+        $this->assertSame(3, $report['module_placeholders_added_count']);
     }
 
     #[Test]
@@ -469,6 +469,63 @@ final class CareerNormalizeLegacyDisplayAssetsCommandTest extends TestCase
         ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
 
         return $path;
+    }
+
+    /**
+     * @param  list<string>  $slugs
+     */
+    private function moduleSubsetRootCauseReport(array $slugs): string
+    {
+        $path = tempnam(sys_get_temp_dir(), 'career-module-subset-root-cause-report-');
+        $this->assertIsString($path);
+        file_put_contents($path, json_encode([
+            'validator_version' => 'career_zh_display_parity_audit_v0.4',
+            'root_cause_manifest' => [
+                'buckets' => [
+                    'zh_display_asset_present_but_module_subset' => array_map(static fn (string $slug): array => [
+                        'slug' => $slug,
+                        'root_cause' => 'zh_display_asset_present_but_module_subset',
+                    ], $slugs),
+                ],
+            ],
+        ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+
+        return $path;
+    }
+
+    /**
+     * @param  list<string>  $missingModules
+     */
+    private function createModuleSubsetAsset(string $slug, array $missingModules): void
+    {
+        $occupation = $this->createOccupation($slug);
+        $zhContent = array_diff_key(
+            $this->pageContentForComponentOrder('中文内容'),
+            array_flip($missingModules),
+        );
+
+        CareerJobDisplayAsset::query()->create([
+            'occupation_id' => $occupation->id,
+            'canonical_slug' => $slug,
+            'surface_version' => 'display.surface.v1',
+            'asset_version' => 'v4.2',
+            'template_version' => 'v4.2',
+            'asset_type' => 'career_job_public_display',
+            'asset_role' => 'formal_pilot_master',
+            'status' => 'ready_for_pilot',
+            'component_order_json' => $this->componentOrder(),
+            'page_payload_json' => [
+                'page' => [
+                    'en' => $this->pageContentForComponentOrder('English content'),
+                    'zh' => $zhContent,
+                ],
+            ],
+            'seo_payload_json' => ['en' => ['title' => $slug], 'zh' => ['title' => $slug]],
+            'sources_json' => ['references' => [['label' => 'Official source']]],
+            'structured_data_json' => ['faq_page' => ['en' => ['mainEntity' => []], 'zh' => ['mainEntity' => []]]],
+            'implementation_contract_json' => ['claim_permissions' => ['visible' => true]],
+            'metadata_json' => ['command' => 'legacy-import'],
+        ]);
     }
 
     /**

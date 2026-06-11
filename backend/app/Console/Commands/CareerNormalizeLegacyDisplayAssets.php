@@ -159,6 +159,9 @@ final class CareerNormalizeLegacyDisplayAssets extends Command
             $report = array_merge($report, $this->summarize($items), [
                 'mode' => $force ? 'force' : 'dry_run',
                 'requested_slugs' => $slugs,
+                'requested_slug_source' => trim((string) $this->option('slugs')) === ''
+                    ? 'module_subset_report'
+                    : 'explicit_slugs',
                 'module_subset_report' => $this->moduleSubsetReportPath(),
                 'module_subset_authorized_count' => count($moduleSubsetAllowlist),
                 'items' => $items,
@@ -230,8 +233,13 @@ final class CareerNormalizeLegacyDisplayAssets extends Command
     private function requiredSlugs(): array
     {
         $raw = trim((string) $this->option('slugs'));
+        $moduleSubsetAllowlist = $this->moduleSubsetAllowlist();
         if ($raw === '') {
-            throw new RuntimeException('--slugs is required and must be an explicit comma-separated allowlist.');
+            if ($moduleSubsetAllowlist !== []) {
+                return $moduleSubsetAllowlist;
+            }
+
+            throw new RuntimeException('--slugs is required unless --module-subset-report provides an explicit module-subset allowlist.');
         }
 
         $parts = array_values(array_filter(array_map(
@@ -250,7 +258,7 @@ final class CareerNormalizeLegacyDisplayAssets extends Command
         $unsupported = array_values(array_filter(
             $parts,
             fn (string $slug): bool => ! in_array($slug, self::AFFECTED_SLUGS, true)
-                && ! in_array($slug, $this->moduleSubsetAllowlist(), true),
+                && ! in_array($slug, $moduleSubsetAllowlist, true),
         ));
 
         if ($unsupported !== []) {
@@ -279,10 +287,9 @@ final class CareerNormalizeLegacyDisplayAssets extends Command
             throw new RuntimeException('--module-subset-report must be valid JSON.');
         }
 
-        $items = is_array($payload['items'] ?? null) ? $payload['items'] : [];
         $slugs = [];
 
-        foreach ($items as $item) {
+        foreach ($this->moduleSubsetRows($payload) as $item) {
             if (! is_array($item)) {
                 continue;
             }
@@ -296,7 +303,10 @@ final class CareerNormalizeLegacyDisplayAssets extends Command
             $slugs[] = $slug;
         }
 
-        return array_values(array_unique($slugs));
+        $slugs = array_values(array_unique($slugs));
+        sort($slugs);
+
+        return $slugs;
     }
 
     private function moduleSubsetReportPath(): ?string
@@ -304,6 +314,25 @@ final class CareerNormalizeLegacyDisplayAssets extends Command
         $path = trim((string) $this->option('module-subset-report'));
 
         return $path === '' ? null : $path;
+    }
+
+    /**
+     * @param  array<string, mixed>  $payload
+     * @return list<mixed>
+     */
+    private function moduleSubsetRows(array $payload): array
+    {
+        $rows = [];
+        if (is_array($payload['items'] ?? null)) {
+            $rows = array_merge($rows, $payload['items']);
+        }
+
+        $bucket = data_get($payload, 'root_cause_manifest.buckets.zh_display_asset_present_but_module_subset');
+        if (is_array($bucket)) {
+            $rows = array_merge($rows, $bucket);
+        }
+
+        return $rows;
     }
 
     /**
