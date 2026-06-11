@@ -1,0 +1,27 @@
+{
+  "pr_id": "CAREER-FULL-PARITY-06",
+  "validator_version": "career_full_parity_en_display_asset_runtime_alignment_v1",
+  "read_only": true,
+  "writes_database": false,
+  "cms_mutation": false,
+  "publish_allowed": false,
+  "deploy_allowed": false,
+  "api_runtime_change": true,
+  "source_report": "backend/docs/career/generated/career-full-parity-02-root-cause-manifest.json",
+  "source_classification": "zh_has_modules_en_missing",
+  "candidate_slug_count": 106,
+  "candidate_slug_sha256": "8c0d2e50f6f4b28fd4a9e6195c579ebdbd62149dab57e0de608709e4c19fbea0",
+  "runtime_policy": {
+    "surface": "display_surface_v1.page.content",
+    "module_key_source": "career_job_display_assets.component_order_json",
+    "locale_alignment": "When a ready display asset surface is returned for any locale, missing component-order modules are represented as explicit pending_reviewed_locale_content placeholders for that requested locale.",
+    "public_copy_policy": "No cross-locale editorial copy is generated or copied.",
+    "index_strategy_changed": false
+  },
+  "expected_effect_after_deploy_and_cache_warm": {
+    "zh_has_modules_en_missing_delta": -106,
+    "sitemap_changed": false,
+    "llms_changed": false,
+    "index_strategy_changed": false
+  }
+}

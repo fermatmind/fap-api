@@ -26,6 +26,33 @@ final class CareerJobDetailApiTest extends TestCase
 {
     use RefreshDatabase;
 
+    private const DISPLAY_COMPONENT_ORDER = [
+        'breadcrumb',
+        'hero',
+        'fermat_decision_card',
+        'primary_cta',
+        'career_snapshot_primary_locale',
+        'career_snapshot_secondary_locale',
+        'fit_decision_checklist',
+        'riasec_fit_block',
+        'personality_fit_block',
+        'definition_block',
+        'responsibilities_block',
+        'work_context_block',
+        'market_signal_card',
+        'adjacent_career_comparison_table',
+        'ai_impact_table',
+        'career_risk_cards',
+        'contract_project_risk_block',
+        'next_steps_block',
+        'faq_block',
+        'related_next_pages',
+        'source_card',
+        'review_validity_card',
+        'boundary_notice',
+        'final_cta',
+    ];
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -463,6 +490,63 @@ final class CareerJobDetailApiTest extends TestCase
             ->assertJsonPath('display_surface_v1.claim_permissions.integrity_state', 'full');
     }
 
+    public function test_display_asset_surface_aligns_english_module_subset_to_component_order_without_copying_zh_content(): void
+    {
+        $this->configurePublicResolutionPlan([
+            ['slug' => 'english-module-subset-display-asset', 'status' => 'already_imported_validated'],
+        ]);
+
+        $occupation = $this->createDisplayAssetBackedOccupation('english-module-subset-display-asset');
+        $zhPage = $this->pageContentForDisplayComponentOrder('中文已审内容');
+        $zhPage['hero'] = ['title' => '中文完整展示资产职业'];
+        $enPage = [
+            'hero' => ['title' => 'English display asset career'],
+            'primary_cta' => ['label' => 'Start career fit test'],
+            'market_signal_card' => [
+                'salary_data_type' => 'BLS official wage evidence',
+                'body' => 'Official market signal from BLS.',
+            ],
+            'ai_impact_table' => [
+                'score_normalized' => '82',
+                'source' => 'FermatMind central score',
+            ],
+        ];
+
+        $this->createDisplayAsset($occupation, [
+            'component_order_json' => self::DISPLAY_COMPONENT_ORDER,
+            'page_payload_json' => [
+                'page' => [
+                    'zh' => $zhPage,
+                    'en' => $enPage,
+                ],
+            ],
+        ]);
+
+        $zhResponse = $this->getJson('/api/v0.5/career/jobs/english-module-subset-display-asset?locale=zh-CN')
+            ->assertOk()
+            ->assertJsonPath('display_surface_v1.page.locale', 'zh-CN');
+        $enResponse = $this->getJson('/api/v0.5/career/jobs/english-module-subset-display-asset?locale=en')
+            ->assertOk()
+            ->assertJsonPath('display_surface_v1.page.locale', 'en')
+            ->assertJsonPath('display_surface_v1.page.content.responsibilities_block.module_state', 'pending_reviewed_locale_content')
+            ->assertJsonPath('display_surface_v1.page.content.responsibilities_block.content_available', false)
+            ->assertJsonPath('display_surface_v1.page.content.responsibilities_block.placeholder_policy', 'no_cross_locale_editorial_copy_generated');
+
+        $zhContentKeys = array_keys((array) $zhResponse->json('display_surface_v1.page.content'));
+        $enContentKeys = array_keys((array) $enResponse->json('display_surface_v1.page.content'));
+        sort($zhContentKeys);
+        sort($enContentKeys);
+
+        $expected = self::DISPLAY_COMPONENT_ORDER;
+        sort($expected);
+        $this->assertSame($expected, $zhContentKeys);
+        $this->assertSame($expected, $enContentKeys);
+
+        $enDisplayContent = json_encode($enResponse->json('display_surface_v1.page.content'), JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE);
+        $this->assertStringNotContainsString('中文完整展示资产职业', $enDisplayContent);
+        $this->assertStringNotContainsString('中文已审内容', $enDisplayContent);
+    }
+
     public function test_runtime_published_occupation_without_display_or_docx_asset_returns_restricted_public_shell(): void
     {
         $this->configurePublicResolutionPlan([
@@ -693,5 +777,27 @@ final class CareerJobDetailApiTest extends TestCase
             'implementation_contract_json' => [],
             'metadata_json' => [],
         ], $overrides));
+    }
+
+    /**
+     * @return array<string, array<string, mixed>>
+     */
+    private function pageContentForDisplayComponentOrder(string $bodyPrefix): array
+    {
+        $content = [];
+        foreach (self::DISPLAY_COMPONENT_ORDER as $moduleKey) {
+            $content[$moduleKey] = ['body' => $bodyPrefix.': '.$moduleKey];
+        }
+
+        $content['market_signal_card'] = [
+            'salary_data_type' => 'BLS official wage evidence',
+            'body' => $bodyPrefix.': market_signal_card',
+        ];
+        $content['ai_impact_table'] = [
+            'score_normalized' => '82',
+            'source' => 'FermatMind central score',
+        ];
+
+        return $content;
     }
 }

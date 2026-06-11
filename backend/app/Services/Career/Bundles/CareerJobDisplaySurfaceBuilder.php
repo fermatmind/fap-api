@@ -116,6 +116,8 @@ final class CareerJobDisplaySurfaceBuilder
             return null;
         }
 
+        $componentOrder = $this->stripForbiddenKeys($asset->component_order_json ?? []);
+        $pageContent = $this->alignPageContentToComponentOrder($pageContent, $componentOrder);
         $claimPermissions = $this->claimPermissions($occupation, $asset, $pageContent);
         if (! $this->hasRequiredClaimPermissionKeys($claimPermissions)) {
             return null;
@@ -125,7 +127,6 @@ final class CareerJobDisplaySurfaceBuilder
             'locale' => $this->publicLocale($normalizedLocale),
             'content' => $this->stripForbiddenKeys($pageContent),
         ];
-        $componentOrder = $this->stripForbiddenKeys($asset->component_order_json ?? []);
         $sources = $this->stripForbiddenKeys($asset->sources_json ?? []);
         $structuredData = $this->stripForbiddenKeys($asset->structured_data_json ?? []);
         $implementationContract = $this->stripForbiddenKeys($asset->implementation_contract_json ?? []);
@@ -150,6 +151,34 @@ final class CareerJobDisplaySurfaceBuilder
             'structured_data_from_visible_content' => $structuredData,
             'implementation_contract' => $implementationContract,
         ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $pageContent
+     * @param  array<mixed>  $componentOrder
+     * @return array<string, mixed>
+     */
+    private function alignPageContentToComponentOrder(array $pageContent, array $componentOrder): array
+    {
+        foreach ($componentOrder as $component) {
+            if (! is_string($component) || trim($component) === '') {
+                continue;
+            }
+
+            if (array_key_exists($component, $pageContent)) {
+                continue;
+            }
+
+            $pageContent[$component] = [
+                'module_key' => $component,
+                'module_state' => 'pending_reviewed_locale_content',
+                'content_available' => false,
+                'source' => 'component_order_contract',
+                'placeholder_policy' => 'no_cross_locale_editorial_copy_generated',
+            ];
+        }
+
+        return $pageContent;
     }
 
     private function readyDisplayAsset(Occupation $occupation, string $canonicalSlug): ?CareerJobDisplayAsset
