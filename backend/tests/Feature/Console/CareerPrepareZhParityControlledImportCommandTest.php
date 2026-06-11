@@ -19,11 +19,16 @@ final class CareerPrepareZhParityControlledImportCommandTest extends TestCase
             'agricultural-and-food-scientists',
             'agricultural-workers',
         ]));
+        $contractRepairReport = $this->writeSourceReport($this->contractRepairReport(
+            ['aerospace-engineers', 'agricultural-and-food-scientists'],
+            ['agricultural-workers'],
+        ));
         $output = sys_get_temp_dir().'/career-zh-parity-controlled-import-readiness-test.json';
         @unlink($output);
 
         $exitCode = Artisan::call('career:prepare-zh-parity-controlled-import', [
             '--source-report' => $sourceReport,
+            '--contract-repair-report' => $contractRepairReport,
             '--chunk-size' => '2',
             '--output' => $output,
             '--json' => true,
@@ -37,10 +42,24 @@ final class CareerPrepareZhParityControlledImportCommandTest extends TestCase
         $this->assertFalse($report['writes_database']);
         $this->assertFalse($report['cache_mutation']);
         $this->assertFalse($report['content_mutation']);
-        $this->assertSame('ready_for_reviewed_workbook_dry_run', $report['readiness_decision']);
-        $this->assertSame(3, $report['controlled_import_input_manifest']['candidate_count']);
-        $this->assertSame(2, $report['execution_plan']['chunk_count']);
+        $this->assertSame('ready_for_auto_repairable_runtime_shell_dry_run', $report['readiness_decision']);
+        $this->assertSame(3, $report['controlled_import_input_manifest']['source_candidate_count']);
+        $this->assertSame(2, $report['controlled_import_input_manifest']['candidate_count']);
+        $this->assertSame(['agricultural-workers'], $report['operator_review_hold']['manual_review_required_slugs']);
+        $this->assertSame([
+            'aerospace-engineers',
+            'agricultural-and-food-scientists',
+        ], $report['controlled_import_input_manifest']['candidate_slugs']);
+        $this->assertSame(1, $report['execution_plan']['chunk_count']);
         $this->assertSame(2, $report['execution_plan']['chunks'][0]['candidate_count']);
+        $this->assertStringContainsString(
+            'career:align-career-authority-batch --file=<reviewed_workbook.xlsx> --slugs=aerospace-engineers,agricultural-and-food-scientists --dry-run --json',
+            $report['execution_plan']['chunks'][0]['authority_crosswalk_dry_run_command'],
+        );
+        $this->assertStringContainsString(
+            'career:align-career-authority-batch --file=<reviewed_workbook.xlsx> --slugs=aerospace-engineers,agricultural-and-food-scientists --force --json',
+            $report['execution_plan']['chunks'][0]['authority_crosswalk_force_command_requires_explicit_approval'],
+        );
         $this->assertStringContainsString('--dry-run --json', $report['execution_plan']['chunks'][0]['dry_run_command']);
         $this->assertStringContainsString('--force --json', $report['execution_plan']['chunks'][0]['force_command_requires_explicit_approval']);
         $this->assertStringContainsString(
@@ -57,9 +76,14 @@ final class CareerPrepareZhParityControlledImportCommandTest extends TestCase
         $report['index_strategy_changed'] = true;
         $report['controlled_import_manifest']['candidate_count'] = 99;
         $sourceReport = $this->writeSourceReport($report);
+        $contractRepairReport = $this->writeSourceReport($this->contractRepairReport(
+            ['aerospace-engineers', 'agricultural-workers'],
+            [],
+        ));
 
         $exitCode = Artisan::call('career:prepare-zh-parity-controlled-import', [
             '--source-report' => $sourceReport,
+            '--contract-repair-report' => $contractRepairReport,
             '--json' => true,
         ]);
         $output = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
@@ -72,6 +96,36 @@ final class CareerPrepareZhParityControlledImportCommandTest extends TestCase
         );
         $this->assertContains(
             'Source report must not change index strategy.',
+            $output['errors'],
+        );
+    }
+
+    #[Test]
+    public function it_rejects_contract_repair_reports_that_do_not_match_the_source_candidates(): void
+    {
+        $sourceReport = $this->writeSourceReport($this->sourceReport([
+            'aerospace-engineers',
+            'agricultural-workers',
+        ]));
+        $repairReport = $this->contractRepairReport(['aerospace-engineers'], []);
+        $repairReport['auto_repairable_rows'] = 1;
+        $contractRepairReport = $this->writeSourceReport($repairReport);
+
+        $exitCode = Artisan::call('career:prepare-zh-parity-controlled-import', [
+            '--source-report' => $sourceReport,
+            '--contract-repair-report' => $contractRepairReport,
+            '--json' => true,
+        ]);
+        $output = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('fail', $output['decision']);
+        $this->assertContains(
+            'Contract repair report selected_rows must match source candidate count.',
+            $output['errors'],
+        );
+        $this->assertContains(
+            'Contract repair report auto_repairable_rows must match eligible candidates.',
             $output['errors'],
         );
     }
@@ -137,6 +191,34 @@ final class CareerPrepareZhParityControlledImportCommandTest extends TestCase
                 'requires_cache_forget_warm_after_import' => true,
                 'must_not_change_sitemap_llms_or_index_strategy' => true,
             ],
+        ];
+    }
+
+    /**
+     * @param  list<string>  $autoRepairableSlugs
+     * @param  list<string>  $manualReviewSlugs
+     * @return array<string, mixed>
+     */
+    private function contractRepairReport(array $autoRepairableSlugs, array $manualReviewSlugs): array
+    {
+        return [
+            'command' => 'career:repair-display-workbook-contract',
+            'repairer_version' => 'career_display_workbook_contract_repairer_v0.2',
+            'execute' => false,
+            'writes_database' => false,
+            'cms_mutation' => false,
+            'selected_rows' => count($autoRepairableSlugs) + count($manualReviewSlugs),
+            'auto_repairable_rows' => count($autoRepairableSlugs),
+            'manual_review_required_count' => count($manualReviewSlugs),
+            'manual_review_required_rows' => array_map(static fn (string $slug, int $index): array => [
+                'row_number' => $index + 10,
+                'slug' => $slug,
+                'reasons' => [
+                    'CN_Title lacks reviewed Chinese text',
+                    'CN_H1 lacks reviewed Chinese text',
+                ],
+            ], $manualReviewSlugs, array_keys($manualReviewSlugs)),
+            'decision' => 'dry_run_changes_available',
         ];
     }
 }

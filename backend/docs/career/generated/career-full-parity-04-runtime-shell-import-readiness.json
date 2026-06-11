@@ -1,0 +1,2699 @@
+{
+    "validator_version": "career_zh_parity_controlled_import_readiness_v0.2",
+    "decision": "pass",
+    "read_only": true,
+    "writes_database": false,
+    "cache_mutation": false,
+    "content_mutation": false,
+    "publish_mutation": false,
+    "deploy_mutation": false,
+    "sitemap_changed": false,
+    "llms_changed": false,
+    "index_strategy_changed": false,
+    "source_report": {
+        "path": "backend/docs/career/generated/career-full-parity-02-root-cause-manifest.json",
+        "sha256": "86ec5872e0fe4fe5bb4bb1def0d55060b7fac2c8aff12efc9311b06ac999f07e",
+        "validator_version": "career_zh_display_parity_audit_v0.3",
+        "decision": "pass",
+        "live_gate_decision": "blocked"
+    },
+    "contract_repair_report": {
+        "path": "backend/docs/career/generated/career-full-parity-03-contract-repair-report.json",
+        "sha256": "83994947e4336fb7cf56b13445b9658a527a8a7c6eac6b04969bd0257d53c27e",
+        "repairer_version": "career_display_workbook_contract_repairer_v0.2",
+        "decision": "dry_run_changes_available",
+        "selected_rows": 136,
+        "auto_repairable_rows": 131,
+        "manual_review_required_count": 5
+    },
+    "readiness_decision": "ready_for_auto_repairable_runtime_shell_dry_run",
+    "blocked_until_explicit_approval": [
+        "reviewed_workbook_upload",
+        "authority_crosswalk_force_alignment",
+        "force_import",
+        "production_cache_forget_warm",
+        "production_controlled_execution"
+    ],
+    "operator_review_hold": {
+        "manual_review_required_count": 5,
+        "manual_review_required_slugs": [
+            "data-scientists",
+            "human-resources-specialists",
+            "management-analysts",
+            "project-management-specialists",
+            "registered-nurses"
+        ],
+        "manual_review_required_rows": [
+            {
+                "slug": "data-scientists",
+                "row_number": 1930,
+                "reasons": [
+                    "CN_Title lacks reviewed Chinese text",
+                    "CN_Title copied from EN_Title",
+                    "CN_H1 lacks reviewed Chinese text",
+                    "CN_H1 copied from EN_H1"
+                ]
+            },
+            {
+                "slug": "human-resources-specialists",
+                "row_number": 2211,
+                "reasons": [
+                    "CN_Title lacks reviewed Chinese text",
+                    "CN_Title copied from EN_Title",
+                    "CN_H1 lacks reviewed Chinese text",
+                    "CN_H1 copied from EN_H1"
+                ]
+            },
+            {
+                "slug": "management-analysts",
+                "row_number": 2304,
+                "reasons": [
+                    "CN_Title lacks reviewed Chinese text",
+                    "CN_Title copied from EN_Title",
+                    "CN_H1 lacks reviewed Chinese text",
+                    "CN_H1 copied from EN_H1"
+                ]
+            },
+            {
+                "slug": "project-management-specialists",
+                "row_number": 2531,
+                "reasons": [
+                    "CN_Title lacks reviewed Chinese text",
+                    "CN_Title copied from EN_Title",
+                    "CN_H1 lacks reviewed Chinese text",
+                    "CN_H1 copied from EN_H1"
+                ]
+            },
+            {
+                "slug": "registered-nurses",
+                "row_number": 2578,
+                "reasons": [
+                    "CN_Title lacks reviewed Chinese text",
+                    "CN_Title copied from EN_Title",
+                    "CN_H1 lacks reviewed Chinese text",
+                    "CN_H1 copied from EN_H1"
+                ]
+            }
+        ],
+        "reason": "CN_Title/CN_H1 require reviewed Chinese text before controlled import."
+    },
+    "controlled_import_input_manifest": {
+        "schema_version": "career_zh_parity_controlled_import_manifest.v0.1",
+        "source_scope": "post_deploy_production_public_api_read_only",
+        "target_command": "career:import-selected-display-assets",
+        "target_locale": "zh-CN",
+        "source_candidate_count": 136,
+        "source_candidate_slugs_sha256": "3bdcccb6aaa6fabd235fccd124cc49d25f1cb3582eaa253fd647912f51605c49",
+        "eligible_candidate_count": 131,
+        "eligible_candidate_slugs_sha256": "e02da5816e0ce82bc322810d628a2a71e23303b1990266f09cdcbce5c358ed07",
+        "candidate_count": 131,
+        "candidate_slugs_sha256": "e02da5816e0ce82bc322810d628a2a71e23303b1990266f09cdcbce5c358ed07",
+        "candidate_slugs": [
+            "aerospace-engineers",
+            "agricultural-and-food-scientists",
+            "agricultural-workers",
+            "announcers",
+            "anthropologists-and-archeologists",
+            "arbitrators-mediators-and-conciliators",
+            "assemblers-and-fabricators",
+            "athletes-and-sports-competitors",
+            "athletic-trainers",
+            "atmospheric-scientists-including-meteorologists",
+            "audiologists",
+            "automotive-service-technicians-and-mechanics",
+            "bakers",
+            "barbers-hairstylists-and-cosmetologists",
+            "bartenders",
+            "biological-technicians",
+            "boilermakers",
+            "brickmasons-blockmasons-and-stonemasons",
+            "broadcast-and-sound-engineering-technicians",
+            "bus-drivers",
+            "calibration-technologists-and-technicians",
+            "cartographers-and-photogrammetrists",
+            "chemical-engineers",
+            "chemical-technicians",
+            "childcare-workers",
+            "civil-engineering-technicians",
+            "claims-adjusters-appraisers-examiners-and-investigators",
+            "construction-equipment-operators",
+            "construction-laborers-and-helpers",
+            "cooks",
+            "cost-estimators",
+            "craft-and-fine-artists",
+            "curators-museum-technicians-and-conservators",
+            "customer-service-representatives",
+            "dancers-and-choreographers",
+            "delivery-truck-drivers-and-driver-sales-workers",
+            "dental-and-ophthalmic-laboratory-technicians-and-medical-appliance-technicians",
+            "diesel-service-technicians-and-mechanics",
+            "drafters",
+            "drywall-and-ceiling-tile-installers-and-tapers",
+            "electrical-and-electronics-installers-and-repairers",
+            "elementary-middle-and-high-school-principals",
+            "emts-and-paramedics",
+            "entertainment-and-recreation-managers",
+            "environmental-science-and-protection-technicians",
+            "environmental-scientists-and-specialists",
+            "film-and-video-editors-and-camera-operators",
+            "financial-clerks",
+            "fitness-trainers-and-instructors",
+            "food-and-beverage-serving-and-related-workers",
+            "food-and-tobacco-processing-workers",
+            "funeral-service-occupations",
+            "gaming-services-occupations",
+            "general-maintenance-and-repair-workers",
+            "general-office-clerks",
+            "geological-and-petroleum-technicians",
+            "geoscientists",
+            "grounds-maintenance-workers",
+            "hand-laborers-and-material-movers",
+            "health-and-safety-engineers",
+            "heavy-vehicle-and-mobile-equipment-service-technicians",
+            "home-health-aides-and-personal-care-aides",
+            "industrial-designers",
+            "industrial-engineering-technicians",
+            "industrial-machinery-mechanics-and-maintenance-workers-and-millwrights",
+            "industrial-production-managers",
+            "information-clerks",
+            "insulation-workers",
+            "insurance-sales-agents",
+            "janitors-and-building-cleaners",
+            "judges-and-hearing-officers",
+            "kindergarten-and-elementary-school-teachers",
+            "librarians",
+            "library-technicians-and-assistants",
+            "logging-workers",
+            "machinists-and-tool-and-die-makers",
+            "material-moving-machine-operators",
+            "material-recording-clerks",
+            "materials-engineers",
+            "medical-scientists",
+            "metal-and-plastic-machine-workers",
+            "middle-school-teachers",
+            "military-careers",
+            "mining-and-geological-engineers",
+            "multimedia-artists-and-animators",
+            "nuclear-technicians",
+            "nurse-anesthetists-nurse-midwives-and-nurse-practitioners",
+            "occupational-health-and-safety-specialists-and-technicians",
+            "occupational-therapy-assistants-and-aides",
+            "oil-and-gas-workers",
+            "painting-and-coating-workers",
+            "petroleum-engineers",
+            "physical-therapist-assistants-and-aides",
+            "physicians-and-surgeons",
+            "physicists-and-astronomers",
+            "police-and-detectives",
+            "postal-service-workers",
+            "postsecondary-education-administrators",
+            "postsecondary-teachers",
+            "power-plant-operators-distributors-and-dispatchers",
+            "preschool-and-childcare-center-directors",
+            "preschool-teachers",
+            "producers-and-directors",
+            "psychiatric-technicians-and-aides",
+            "psychologists",
+            "purchasing-managers-buyers-and-purchasing-agents",
+            "quality-control-inspectors",
+            "radiologic-technologists",
+            "railroad-occupations",
+            "real-estate-brokers-and-sales-agents",
+            "receptionists",
+            "retail-sales-workers",
+            "sales-managers",
+            "school-and-career-counselors",
+            "secretaries-and-administrative-assistants",
+            "set-and-exhibit-designers",
+            "sheet-metal-workers",
+            "small-engine-mechanics",
+            "social-workers",
+            "special-education-teachers",
+            "substance-abuse-behavioral-disorder-and-mental-health-counselors",
+            "taxi-drivers-and-chauffeurs",
+            "teacher-assistants",
+            "tile-and-marble-setters",
+            "top-executives",
+            "tour-and-travel-guides",
+            "water-transportation-occupations",
+            "welders-cutters-solderers-and-brazers",
+            "wholesale-and-manufacturing-sales-representatives",
+            "wind-turbine-technicians",
+            "woodworkers"
+        ],
+        "rows": [
+            {
+                "slug": "aerospace-engineers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "agricultural-and-food-scientists",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "agricultural-workers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "announcers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "anthropologists-and-archeologists",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "arbitrators-mediators-and-conciliators",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "assemblers-and-fabricators",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "athletes-and-sports-competitors",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "athletic-trainers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "atmospheric-scientists-including-meteorologists",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "audiologists",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "automotive-service-technicians-and-mechanics",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "bakers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "barbers-hairstylists-and-cosmetologists",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "bartenders",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "biological-technicians",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "boilermakers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "brickmasons-blockmasons-and-stonemasons",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "broadcast-and-sound-engineering-technicians",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "bus-drivers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "calibration-technologists-and-technicians",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "cartographers-and-photogrammetrists",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "chemical-engineers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "chemical-technicians",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "childcare-workers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "civil-engineering-technicians",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "claims-adjusters-appraisers-examiners-and-investigators",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "construction-equipment-operators",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "construction-laborers-and-helpers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "cooks",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "cost-estimators",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "craft-and-fine-artists",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "curators-museum-technicians-and-conservators",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "customer-service-representatives",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "dancers-and-choreographers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "delivery-truck-drivers-and-driver-sales-workers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "dental-and-ophthalmic-laboratory-technicians-and-medical-appliance-technicians",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "diesel-service-technicians-and-mechanics",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "drafters",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "drywall-and-ceiling-tile-installers-and-tapers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "electrical-and-electronics-installers-and-repairers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "elementary-middle-and-high-school-principals",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "emts-and-paramedics",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "entertainment-and-recreation-managers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "environmental-science-and-protection-technicians",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "environmental-scientists-and-specialists",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "film-and-video-editors-and-camera-operators",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "financial-clerks",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "fitness-trainers-and-instructors",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "food-and-beverage-serving-and-related-workers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "food-and-tobacco-processing-workers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "funeral-service-occupations",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "gaming-services-occupations",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "general-maintenance-and-repair-workers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "general-office-clerks",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "geological-and-petroleum-technicians",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "geoscientists",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "grounds-maintenance-workers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "hand-laborers-and-material-movers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "health-and-safety-engineers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "heavy-vehicle-and-mobile-equipment-service-technicians",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "home-health-aides-and-personal-care-aides",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "industrial-designers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "industrial-engineering-technicians",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "industrial-machinery-mechanics-and-maintenance-workers-and-millwrights",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "industrial-production-managers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "information-clerks",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "insulation-workers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "insurance-sales-agents",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "janitors-and-building-cleaners",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "judges-and-hearing-officers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "kindergarten-and-elementary-school-teachers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "librarians",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "library-technicians-and-assistants",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "logging-workers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "machinists-and-tool-and-die-makers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "material-moving-machine-operators",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "material-recording-clerks",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "materials-engineers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "medical-scientists",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "metal-and-plastic-machine-workers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "middle-school-teachers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "military-careers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "mining-and-geological-engineers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "multimedia-artists-and-animators",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "nuclear-technicians",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "nurse-anesthetists-nurse-midwives-and-nurse-practitioners",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "occupational-health-and-safety-specialists-and-technicians",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "occupational-therapy-assistants-and-aides",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "oil-and-gas-workers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "painting-and-coating-workers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "petroleum-engineers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "physical-therapist-assistants-and-aides",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "physicians-and-surgeons",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "physicists-and-astronomers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "police-and-detectives",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "postal-service-workers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "postsecondary-education-administrators",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "postsecondary-teachers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "power-plant-operators-distributors-and-dispatchers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "preschool-and-childcare-center-directors",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "preschool-teachers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "producers-and-directors",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "psychiatric-technicians-and-aides",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "psychologists",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "purchasing-managers-buyers-and-purchasing-agents",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "quality-control-inspectors",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "radiologic-technologists",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "railroad-occupations",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "real-estate-brokers-and-sales-agents",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "receptionists",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "retail-sales-workers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "sales-managers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "school-and-career-counselors",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "secretaries-and-administrative-assistants",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "set-and-exhibit-designers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "sheet-metal-workers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "small-engine-mechanics",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "social-workers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "special-education-teachers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "substance-abuse-behavioral-disorder-and-mental-health-counselors",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "taxi-drivers-and-chauffeurs",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "teacher-assistants",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "tile-and-marble-setters",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "top-executives",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "tour-and-travel-guides",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "water-transportation-occupations",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "welders-cutters-solderers-and-brazers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "wholesale-and-manufacturing-sales-representatives",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "wind-turbine-technicians",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            },
+            {
+                "slug": "woodworkers",
+                "locale": "zh-CN",
+                "root_cause": "runtime_shell_missing_or_unpublished_zh_display_asset",
+                "missing_modules": [],
+                "zh_gate_reasons": [
+                    "amber_flag:runtime_published_navigation_shell",
+                    "blocked_claim:compiled_recommendation_claims_unavailable",
+                    "blocked_claim:display_asset_claims_unavailable",
+                    "integrity_state:runtime_published_shell",
+                    "critical_missing_field:compiled_recommendation_snapshot",
+                    "critical_missing_field:display_asset_claims"
+                ],
+                "cms_asset_exists": "inferred_absent_or_not_published_from_public_payload",
+                "cache_stale": "not_proven",
+                "import_readiness": "auto_repairable_after_contract_repair"
+            }
+        ]
+    },
+    "source_live_counts": {
+        "total_slugs": 1046,
+        "runtime_shell_count": 131,
+        "missing_modules_by_slug_count": 672,
+        "root_cause_counts": {
+            "no_runtime_parity_issue_detected": 137,
+            "runtime_shell_missing_or_unpublished_zh_display_asset": 131,
+            "zh_display_asset_present_but_module_subset": 667,
+            "zh_has_unexpected_extra_modules": 106,
+            "zh_missing_en_display_modules_without_public_asset_evidence": 5
+        },
+        "cache_stale_counts": {
+            "not_indicated": 137,
+            "not_proven": 131,
+            "unknown_public_api_only": 778
+        },
+        "cms_asset_exists_counts": {
+            "inferred_absent_or_not_published_from_public_payload": 131,
+            "inferred_present_from_public_payload": 892,
+            "unknown_from_public_payload": 23
+        }
+    },
+    "execution_plan": {
+        "chunk_size": 50,
+        "chunk_count": 3,
+        "requires_reviewed_workbook": true,
+        "requires_validated_full_upload_manifest": true,
+        "dry_run_first": true,
+        "force_import_requires_explicit_approval": true,
+        "cache_refresh_requires_explicit_post_import_approval": true,
+        "must_not_change_sitemap_llms_or_index_strategy": true,
+        "placeholder_inputs": {
+            "reviewed_workbook": "<reviewed_workbook.xlsx>",
+            "validated_full_upload_plan_manifest": "<validated_full_upload_plan.json>"
+        },
+        "authority_crosswalk_alignment": {
+            "dry_run_command": "php backend/artisan career:align-career-authority-batch --file=<reviewed_workbook.xlsx> --slugs=<chunk_slugs_csv> --dry-run --json",
+            "force_command_requires_explicit_approval": "php backend/artisan career:align-career-authority-batch --file=<reviewed_workbook.xlsx> --slugs=<chunk_slugs_csv> --force --json"
+        },
+        "controlled_display_asset_import": {
+            "dry_run_command": "php backend/artisan career:import-selected-display-assets --file=<reviewed_workbook.xlsx> --manifest=<validated_full_upload_plan.json> --manifest-chunk-size=50 --manifest-chunk-index=1 --dry-run --json",
+            "force_command_requires_explicit_approval": "php backend/artisan career:import-selected-display-assets --file=<reviewed_workbook.xlsx> --manifest=<validated_full_upload_plan.json> --manifest-chunk-size=50 --manifest-chunk-index=1 --force --json"
+        },
+        "post_import_cache_refresh": {
+            "command_requires_explicit_approval": "php backend/artisan career:warm-public-authority-cache --job-detail-slugs=<chunk_slugs_csv> --job-detail-locales=zh-CN --forget-job-detail --job-detail-only --json"
+        },
+        "chunks": [
+            {
+                "chunk_index": 1,
+                "candidate_count": 50,
+                "candidate_slugs_sha256": "7619ac7700b03080c5a90927905fdc8f1ce0cc93aeb588ecb837f1dac2f87315",
+                "candidate_slugs": [
+                    "aerospace-engineers",
+                    "agricultural-and-food-scientists",
+                    "agricultural-workers",
+                    "announcers",
+                    "anthropologists-and-archeologists",
+                    "arbitrators-mediators-and-conciliators",
+                    "assemblers-and-fabricators",
+                    "athletes-and-sports-competitors",
+                    "athletic-trainers",
+                    "atmospheric-scientists-including-meteorologists",
+                    "audiologists",
+                    "automotive-service-technicians-and-mechanics",
+                    "bakers",
+                    "barbers-hairstylists-and-cosmetologists",
+                    "bartenders",
+                    "biological-technicians",
+                    "boilermakers",
+                    "brickmasons-blockmasons-and-stonemasons",
+                    "broadcast-and-sound-engineering-technicians",
+                    "bus-drivers",
+                    "calibration-technologists-and-technicians",
+                    "cartographers-and-photogrammetrists",
+                    "chemical-engineers",
+                    "chemical-technicians",
+                    "childcare-workers",
+                    "civil-engineering-technicians",
+                    "claims-adjusters-appraisers-examiners-and-investigators",
+                    "construction-equipment-operators",
+                    "construction-laborers-and-helpers",
+                    "cooks",
+                    "cost-estimators",
+                    "craft-and-fine-artists",
+                    "curators-museum-technicians-and-conservators",
+                    "customer-service-representatives",
+                    "dancers-and-choreographers",
+                    "delivery-truck-drivers-and-driver-sales-workers",
+                    "dental-and-ophthalmic-laboratory-technicians-and-medical-appliance-technicians",
+                    "diesel-service-technicians-and-mechanics",
+                    "drafters",
+                    "drywall-and-ceiling-tile-installers-and-tapers",
+                    "electrical-and-electronics-installers-and-repairers",
+                    "elementary-middle-and-high-school-principals",
+                    "emts-and-paramedics",
+                    "entertainment-and-recreation-managers",
+                    "environmental-science-and-protection-technicians",
+                    "environmental-scientists-and-specialists",
+                    "film-and-video-editors-and-camera-operators",
+                    "financial-clerks",
+                    "fitness-trainers-and-instructors",
+                    "food-and-beverage-serving-and-related-workers"
+                ],
+                "authority_crosswalk_dry_run_command": "php backend/artisan career:align-career-authority-batch --file=<reviewed_workbook.xlsx> --slugs=aerospace-engineers,agricultural-and-food-scientists,agricultural-workers,announcers,anthropologists-and-archeologists,arbitrators-mediators-and-conciliators,assemblers-and-fabricators,athletes-and-sports-competitors,athletic-trainers,atmospheric-scientists-including-meteorologists,audiologists,automotive-service-technicians-and-mechanics,bakers,barbers-hairstylists-and-cosmetologists,bartenders,biological-technicians,boilermakers,brickmasons-blockmasons-and-stonemasons,broadcast-and-sound-engineering-technicians,bus-drivers,calibration-technologists-and-technicians,cartographers-and-photogrammetrists,chemical-engineers,chemical-technicians,childcare-workers,civil-engineering-technicians,claims-adjusters-appraisers-examiners-and-investigators,construction-equipment-operators,construction-laborers-and-helpers,cooks,cost-estimators,craft-and-fine-artists,curators-museum-technicians-and-conservators,customer-service-representatives,dancers-and-choreographers,delivery-truck-drivers-and-driver-sales-workers,dental-and-ophthalmic-laboratory-technicians-and-medical-appliance-technicians,diesel-service-technicians-and-mechanics,drafters,drywall-and-ceiling-tile-installers-and-tapers,electrical-and-electronics-installers-and-repairers,elementary-middle-and-high-school-principals,emts-and-paramedics,entertainment-and-recreation-managers,environmental-science-and-protection-technicians,environmental-scientists-and-specialists,film-and-video-editors-and-camera-operators,financial-clerks,fitness-trainers-and-instructors,food-and-beverage-serving-and-related-workers --dry-run --json",
+                "authority_crosswalk_force_command_requires_explicit_approval": "php backend/artisan career:align-career-authority-batch --file=<reviewed_workbook.xlsx> --slugs=aerospace-engineers,agricultural-and-food-scientists,agricultural-workers,announcers,anthropologists-and-archeologists,arbitrators-mediators-and-conciliators,assemblers-and-fabricators,athletes-and-sports-competitors,athletic-trainers,atmospheric-scientists-including-meteorologists,audiologists,automotive-service-technicians-and-mechanics,bakers,barbers-hairstylists-and-cosmetologists,bartenders,biological-technicians,boilermakers,brickmasons-blockmasons-and-stonemasons,broadcast-and-sound-engineering-technicians,bus-drivers,calibration-technologists-and-technicians,cartographers-and-photogrammetrists,chemical-engineers,chemical-technicians,childcare-workers,civil-engineering-technicians,claims-adjusters-appraisers-examiners-and-investigators,construction-equipment-operators,construction-laborers-and-helpers,cooks,cost-estimators,craft-and-fine-artists,curators-museum-technicians-and-conservators,customer-service-representatives,dancers-and-choreographers,delivery-truck-drivers-and-driver-sales-workers,dental-and-ophthalmic-laboratory-technicians-and-medical-appliance-technicians,diesel-service-technicians-and-mechanics,drafters,drywall-and-ceiling-tile-installers-and-tapers,electrical-and-electronics-installers-and-repairers,elementary-middle-and-high-school-principals,emts-and-paramedics,entertainment-and-recreation-managers,environmental-science-and-protection-technicians,environmental-scientists-and-specialists,film-and-video-editors-and-camera-operators,financial-clerks,fitness-trainers-and-instructors,food-and-beverage-serving-and-related-workers --force --json",
+                "dry_run_command": "php backend/artisan career:import-selected-display-assets --file=<reviewed_workbook.xlsx> --manifest=<validated_full_upload_plan.json> --manifest-chunk-size=50 --manifest-chunk-index=1 --dry-run --json",
+                "force_command_requires_explicit_approval": "php backend/artisan career:import-selected-display-assets --file=<reviewed_workbook.xlsx> --manifest=<validated_full_upload_plan.json> --manifest-chunk-size=50 --manifest-chunk-index=1 --force --json",
+                "post_import_cache_refresh_command_requires_explicit_approval": "php backend/artisan career:warm-public-authority-cache --job-detail-slugs=aerospace-engineers,agricultural-and-food-scientists,agricultural-workers,announcers,anthropologists-and-archeologists,arbitrators-mediators-and-conciliators,assemblers-and-fabricators,athletes-and-sports-competitors,athletic-trainers,atmospheric-scientists-including-meteorologists,audiologists,automotive-service-technicians-and-mechanics,bakers,barbers-hairstylists-and-cosmetologists,bartenders,biological-technicians,boilermakers,brickmasons-blockmasons-and-stonemasons,broadcast-and-sound-engineering-technicians,bus-drivers,calibration-technologists-and-technicians,cartographers-and-photogrammetrists,chemical-engineers,chemical-technicians,childcare-workers,civil-engineering-technicians,claims-adjusters-appraisers-examiners-and-investigators,construction-equipment-operators,construction-laborers-and-helpers,cooks,cost-estimators,craft-and-fine-artists,curators-museum-technicians-and-conservators,customer-service-representatives,dancers-and-choreographers,delivery-truck-drivers-and-driver-sales-workers,dental-and-ophthalmic-laboratory-technicians-and-medical-appliance-technicians,diesel-service-technicians-and-mechanics,drafters,drywall-and-ceiling-tile-installers-and-tapers,electrical-and-electronics-installers-and-repairers,elementary-middle-and-high-school-principals,emts-and-paramedics,entertainment-and-recreation-managers,environmental-science-and-protection-technicians,environmental-scientists-and-specialists,film-and-video-editors-and-camera-operators,financial-clerks,fitness-trainers-and-instructors,food-and-beverage-serving-and-related-workers --job-detail-locales=zh-CN --forget-job-detail --job-detail-only --json"
+            },
+            {
+                "chunk_index": 2,
+                "candidate_count": 50,
+                "candidate_slugs_sha256": "236aedfcb71f4b4a4d11beb4b4d03100f56915d2fef1cd972666ba187bc00d50",
+                "candidate_slugs": [
+                    "food-and-tobacco-processing-workers",
+                    "funeral-service-occupations",
+                    "gaming-services-occupations",
+                    "general-maintenance-and-repair-workers",
+                    "general-office-clerks",
+                    "geological-and-petroleum-technicians",
+                    "geoscientists",
+                    "grounds-maintenance-workers",
+                    "hand-laborers-and-material-movers",
+                    "health-and-safety-engineers",
+                    "heavy-vehicle-and-mobile-equipment-service-technicians",
+                    "home-health-aides-and-personal-care-aides",
+                    "industrial-designers",
+                    "industrial-engineering-technicians",
+                    "industrial-machinery-mechanics-and-maintenance-workers-and-millwrights",
+                    "industrial-production-managers",
+                    "information-clerks",
+                    "insulation-workers",
+                    "insurance-sales-agents",
+                    "janitors-and-building-cleaners",
+                    "judges-and-hearing-officers",
+                    "kindergarten-and-elementary-school-teachers",
+                    "librarians",
+                    "library-technicians-and-assistants",
+                    "logging-workers",
+                    "machinists-and-tool-and-die-makers",
+                    "material-moving-machine-operators",
+                    "material-recording-clerks",
+                    "materials-engineers",
+                    "medical-scientists",
+                    "metal-and-plastic-machine-workers",
+                    "middle-school-teachers",
+                    "military-careers",
+                    "mining-and-geological-engineers",
+                    "multimedia-artists-and-animators",
+                    "nuclear-technicians",
+                    "nurse-anesthetists-nurse-midwives-and-nurse-practitioners",
+                    "occupational-health-and-safety-specialists-and-technicians",
+                    "occupational-therapy-assistants-and-aides",
+                    "oil-and-gas-workers",
+                    "painting-and-coating-workers",
+                    "petroleum-engineers",
+                    "physical-therapist-assistants-and-aides",
+                    "physicians-and-surgeons",
+                    "physicists-and-astronomers",
+                    "police-and-detectives",
+                    "postal-service-workers",
+                    "postsecondary-education-administrators",
+                    "postsecondary-teachers",
+                    "power-plant-operators-distributors-and-dispatchers"
+                ],
+                "authority_crosswalk_dry_run_command": "php backend/artisan career:align-career-authority-batch --file=<reviewed_workbook.xlsx> --slugs=food-and-tobacco-processing-workers,funeral-service-occupations,gaming-services-occupations,general-maintenance-and-repair-workers,general-office-clerks,geological-and-petroleum-technicians,geoscientists,grounds-maintenance-workers,hand-laborers-and-material-movers,health-and-safety-engineers,heavy-vehicle-and-mobile-equipment-service-technicians,home-health-aides-and-personal-care-aides,industrial-designers,industrial-engineering-technicians,industrial-machinery-mechanics-and-maintenance-workers-and-millwrights,industrial-production-managers,information-clerks,insulation-workers,insurance-sales-agents,janitors-and-building-cleaners,judges-and-hearing-officers,kindergarten-and-elementary-school-teachers,librarians,library-technicians-and-assistants,logging-workers,machinists-and-tool-and-die-makers,material-moving-machine-operators,material-recording-clerks,materials-engineers,medical-scientists,metal-and-plastic-machine-workers,middle-school-teachers,military-careers,mining-and-geological-engineers,multimedia-artists-and-animators,nuclear-technicians,nurse-anesthetists-nurse-midwives-and-nurse-practitioners,occupational-health-and-safety-specialists-and-technicians,occupational-therapy-assistants-and-aides,oil-and-gas-workers,painting-and-coating-workers,petroleum-engineers,physical-therapist-assistants-and-aides,physicians-and-surgeons,physicists-and-astronomers,police-and-detectives,postal-service-workers,postsecondary-education-administrators,postsecondary-teachers,power-plant-operators-distributors-and-dispatchers --dry-run --json",
+                "authority_crosswalk_force_command_requires_explicit_approval": "php backend/artisan career:align-career-authority-batch --file=<reviewed_workbook.xlsx> --slugs=food-and-tobacco-processing-workers,funeral-service-occupations,gaming-services-occupations,general-maintenance-and-repair-workers,general-office-clerks,geological-and-petroleum-technicians,geoscientists,grounds-maintenance-workers,hand-laborers-and-material-movers,health-and-safety-engineers,heavy-vehicle-and-mobile-equipment-service-technicians,home-health-aides-and-personal-care-aides,industrial-designers,industrial-engineering-technicians,industrial-machinery-mechanics-and-maintenance-workers-and-millwrights,industrial-production-managers,information-clerks,insulation-workers,insurance-sales-agents,janitors-and-building-cleaners,judges-and-hearing-officers,kindergarten-and-elementary-school-teachers,librarians,library-technicians-and-assistants,logging-workers,machinists-and-tool-and-die-makers,material-moving-machine-operators,material-recording-clerks,materials-engineers,medical-scientists,metal-and-plastic-machine-workers,middle-school-teachers,military-careers,mining-and-geological-engineers,multimedia-artists-and-animators,nuclear-technicians,nurse-anesthetists-nurse-midwives-and-nurse-practitioners,occupational-health-and-safety-specialists-and-technicians,occupational-therapy-assistants-and-aides,oil-and-gas-workers,painting-and-coating-workers,petroleum-engineers,physical-therapist-assistants-and-aides,physicians-and-surgeons,physicists-and-astronomers,police-and-detectives,postal-service-workers,postsecondary-education-administrators,postsecondary-teachers,power-plant-operators-distributors-and-dispatchers --force --json",
+                "dry_run_command": "php backend/artisan career:import-selected-display-assets --file=<reviewed_workbook.xlsx> --manifest=<validated_full_upload_plan.json> --manifest-chunk-size=50 --manifest-chunk-index=2 --dry-run --json",
+                "force_command_requires_explicit_approval": "php backend/artisan career:import-selected-display-assets --file=<reviewed_workbook.xlsx> --manifest=<validated_full_upload_plan.json> --manifest-chunk-size=50 --manifest-chunk-index=2 --force --json",
+                "post_import_cache_refresh_command_requires_explicit_approval": "php backend/artisan career:warm-public-authority-cache --job-detail-slugs=food-and-tobacco-processing-workers,funeral-service-occupations,gaming-services-occupations,general-maintenance-and-repair-workers,general-office-clerks,geological-and-petroleum-technicians,geoscientists,grounds-maintenance-workers,hand-laborers-and-material-movers,health-and-safety-engineers,heavy-vehicle-and-mobile-equipment-service-technicians,home-health-aides-and-personal-care-aides,industrial-designers,industrial-engineering-technicians,industrial-machinery-mechanics-and-maintenance-workers-and-millwrights,industrial-production-managers,information-clerks,insulation-workers,insurance-sales-agents,janitors-and-building-cleaners,judges-and-hearing-officers,kindergarten-and-elementary-school-teachers,librarians,library-technicians-and-assistants,logging-workers,machinists-and-tool-and-die-makers,material-moving-machine-operators,material-recording-clerks,materials-engineers,medical-scientists,metal-and-plastic-machine-workers,middle-school-teachers,military-careers,mining-and-geological-engineers,multimedia-artists-and-animators,nuclear-technicians,nurse-anesthetists-nurse-midwives-and-nurse-practitioners,occupational-health-and-safety-specialists-and-technicians,occupational-therapy-assistants-and-aides,oil-and-gas-workers,painting-and-coating-workers,petroleum-engineers,physical-therapist-assistants-and-aides,physicians-and-surgeons,physicists-and-astronomers,police-and-detectives,postal-service-workers,postsecondary-education-administrators,postsecondary-teachers,power-plant-operators-distributors-and-dispatchers --job-detail-locales=zh-CN --forget-job-detail --job-detail-only --json"
+            },
+            {
+                "chunk_index": 3,
+                "candidate_count": 31,
+                "candidate_slugs_sha256": "95fcef46c7b1f5dd3bb581b1141680cf33e902be666095685d8a915b07e0be90",
+                "candidate_slugs": [
+                    "preschool-and-childcare-center-directors",
+                    "preschool-teachers",
+                    "producers-and-directors",
+                    "psychiatric-technicians-and-aides",
+                    "psychologists",
+                    "purchasing-managers-buyers-and-purchasing-agents",
+                    "quality-control-inspectors",
+                    "radiologic-technologists",
+                    "railroad-occupations",
+                    "real-estate-brokers-and-sales-agents",
+                    "receptionists",
+                    "retail-sales-workers",
+                    "sales-managers",
+                    "school-and-career-counselors",
+                    "secretaries-and-administrative-assistants",
+                    "set-and-exhibit-designers",
+                    "sheet-metal-workers",
+                    "small-engine-mechanics",
+                    "social-workers",
+                    "special-education-teachers",
+                    "substance-abuse-behavioral-disorder-and-mental-health-counselors",
+                    "taxi-drivers-and-chauffeurs",
+                    "teacher-assistants",
+                    "tile-and-marble-setters",
+                    "top-executives",
+                    "tour-and-travel-guides",
+                    "water-transportation-occupations",
+                    "welders-cutters-solderers-and-brazers",
+                    "wholesale-and-manufacturing-sales-representatives",
+                    "wind-turbine-technicians",
+                    "woodworkers"
+                ],
+                "authority_crosswalk_dry_run_command": "php backend/artisan career:align-career-authority-batch --file=<reviewed_workbook.xlsx> --slugs=preschool-and-childcare-center-directors,preschool-teachers,producers-and-directors,psychiatric-technicians-and-aides,psychologists,purchasing-managers-buyers-and-purchasing-agents,quality-control-inspectors,radiologic-technologists,railroad-occupations,real-estate-brokers-and-sales-agents,receptionists,retail-sales-workers,sales-managers,school-and-career-counselors,secretaries-and-administrative-assistants,set-and-exhibit-designers,sheet-metal-workers,small-engine-mechanics,social-workers,special-education-teachers,substance-abuse-behavioral-disorder-and-mental-health-counselors,taxi-drivers-and-chauffeurs,teacher-assistants,tile-and-marble-setters,top-executives,tour-and-travel-guides,water-transportation-occupations,welders-cutters-solderers-and-brazers,wholesale-and-manufacturing-sales-representatives,wind-turbine-technicians,woodworkers --dry-run --json",
+                "authority_crosswalk_force_command_requires_explicit_approval": "php backend/artisan career:align-career-authority-batch --file=<reviewed_workbook.xlsx> --slugs=preschool-and-childcare-center-directors,preschool-teachers,producers-and-directors,psychiatric-technicians-and-aides,psychologists,purchasing-managers-buyers-and-purchasing-agents,quality-control-inspectors,radiologic-technologists,railroad-occupations,real-estate-brokers-and-sales-agents,receptionists,retail-sales-workers,sales-managers,school-and-career-counselors,secretaries-and-administrative-assistants,set-and-exhibit-designers,sheet-metal-workers,small-engine-mechanics,social-workers,special-education-teachers,substance-abuse-behavioral-disorder-and-mental-health-counselors,taxi-drivers-and-chauffeurs,teacher-assistants,tile-and-marble-setters,top-executives,tour-and-travel-guides,water-transportation-occupations,welders-cutters-solderers-and-brazers,wholesale-and-manufacturing-sales-representatives,wind-turbine-technicians,woodworkers --force --json",
+                "dry_run_command": "php backend/artisan career:import-selected-display-assets --file=<reviewed_workbook.xlsx> --manifest=<validated_full_upload_plan.json> --manifest-chunk-size=50 --manifest-chunk-index=3 --dry-run --json",
+                "force_command_requires_explicit_approval": "php backend/artisan career:import-selected-display-assets --file=<reviewed_workbook.xlsx> --manifest=<validated_full_upload_plan.json> --manifest-chunk-size=50 --manifest-chunk-index=3 --force --json",
+                "post_import_cache_refresh_command_requires_explicit_approval": "php backend/artisan career:warm-public-authority-cache --job-detail-slugs=preschool-and-childcare-center-directors,preschool-teachers,producers-and-directors,psychiatric-technicians-and-aides,psychologists,purchasing-managers-buyers-and-purchasing-agents,quality-control-inspectors,radiologic-technologists,railroad-occupations,real-estate-brokers-and-sales-agents,receptionists,retail-sales-workers,sales-managers,school-and-career-counselors,secretaries-and-administrative-assistants,set-and-exhibit-designers,sheet-metal-workers,small-engine-mechanics,social-workers,special-education-teachers,substance-abuse-behavioral-disorder-and-mental-health-counselors,taxi-drivers-and-chauffeurs,teacher-assistants,tile-and-marble-setters,top-executives,tour-and-travel-guides,water-transportation-occupations,welders-cutters-solderers-and-brazers,wholesale-and-manufacturing-sales-representatives,wind-turbine-technicians,woodworkers --job-detail-locales=zh-CN --forget-job-detail --job-detail-only --json"
+            }
+        ]
+    },
+    "acceptance_commands": {
+        "validate_readiness_report": "python3 -m json.tool backend/docs/career/generated/career-full-parity-04-runtime-shell-import-readiness.json >/dev/null",
+        "readiness_command": "php backend/artisan career:prepare-zh-parity-controlled-import --source-report=backend/docs/career/generated/career-full-parity-02-root-cause-manifest.json --contract-repair-report=backend/docs/career/generated/career-full-parity-03-contract-repair-report.json --output=backend/docs/career/generated/career-full-parity-04-runtime-shell-import-readiness.json --json",
+        "authority_crosswalk_dry_run_template": "php backend/artisan career:align-career-authority-batch --file=<reviewed_workbook.xlsx> --slugs=<chunk_slugs_csv> --dry-run --json",
+        "authority_crosswalk_force_template_after_approval": "php backend/artisan career:align-career-authority-batch --file=<reviewed_workbook.xlsx> --slugs=<chunk_slugs_csv> --force --json",
+        "dry_run_template": "php backend/artisan career:import-selected-display-assets --file=<reviewed_workbook.xlsx> --manifest=<validated_full_upload_plan.json> --manifest-chunk-size=50 --manifest-chunk-index=1 --dry-run --json",
+        "force_import_template_after_approval": "php backend/artisan career:import-selected-display-assets --file=<reviewed_workbook.xlsx> --manifest=<validated_full_upload_plan.json> --manifest-chunk-size=50 --manifest-chunk-index=1 --force --json",
+        "cache_refresh_template_after_import_approval": "php backend/artisan career:warm-public-authority-cache --job-detail-slugs=<chunk_slugs_csv> --job-detail-locales=zh-CN --forget-job-detail --job-detail-only --json"
+    }
+}

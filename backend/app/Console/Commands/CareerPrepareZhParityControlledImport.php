@@ -11,12 +11,17 @@ use Throwable;
 
 final class CareerPrepareZhParityControlledImport extends Command
 {
-    private const VALIDATOR_VERSION = 'career_zh_parity_controlled_import_readiness_v0.1';
+    private const VALIDATOR_VERSION = 'career_zh_parity_controlled_import_readiness_v0.2';
 
     private const SOURCE_MANIFEST_SCHEMA = 'career_zh_parity_controlled_import_manifest.v0.1';
 
+    private const DEFAULT_SOURCE_REPORT = 'backend/docs/career/generated/career-full-parity-02-root-cause-manifest.json';
+
+    private const DEFAULT_CONTRACT_REPAIR_REPORT = 'backend/docs/career/generated/career-full-parity-03-contract-repair-report.json';
+
     protected $signature = 'career:prepare-zh-parity-controlled-import
-        {--source-report=backend/docs/career/generated/career-zh-parity-live-01-production-report.json : CAREER-ZH-PARITY-LIVE-01 production report JSON}
+        {--source-report=backend/docs/career/generated/career-full-parity-02-root-cause-manifest.json : CAREER-FULL-PARITY-02 root-cause manifest JSON}
+        {--contract-repair-report=backend/docs/career/generated/career-full-parity-03-contract-repair-report.json : CAREER-FULL-PARITY-03 workbook contract repair report JSON}
         {--chunk-size=50 : Positive candidate chunk size for dry-run/import/cache command planning}
         {--output= : Optional JSON output path}
         {--json : Emit machine-readable report}';
@@ -27,11 +32,20 @@ final class CareerPrepareZhParityControlledImport extends Command
     {
         try {
             $sourceReportPath = $this->sourceReportPath();
+            $contractRepairReportPath = $this->contractRepairReportPath();
             $chunkSize = $this->chunkSize();
             $sourceReport = $this->readJsonFile($sourceReportPath);
+            $contractRepairReport = $this->readJsonFile($contractRepairReportPath);
             $sourceManifest = $this->sourceManifest($sourceReport);
-            $candidates = $this->candidateSlugs($sourceManifest);
-            $errors = $this->validateSourceReport($sourceReport, $sourceManifest, $candidates);
+            $sourceCandidates = $this->candidateSlugs($sourceManifest);
+            $manualReviewSlugs = $this->manualReviewSlugs($contractRepairReport);
+            $eligibleCandidates = $this->eligibleCandidateSlugs($sourceCandidates, $manualReviewSlugs);
+            $heldRows = $this->heldManualReviewRows($contractRepairReport);
+            $eligibleRows = $this->manifestRowsForSlugs($sourceManifest, $eligibleCandidates);
+            $errors = array_merge(
+                $this->validateSourceReport($sourceReport, $sourceManifest, $sourceCandidates),
+                $this->validateContractRepairReport($contractRepairReport, $sourceCandidates, $manualReviewSlugs, $eligibleCandidates),
+            );
 
             if ($errors !== []) {
                 return $this->finish([
@@ -42,11 +56,12 @@ final class CareerPrepareZhParityControlledImport extends Command
                     'cache_mutation' => false,
                     'content_mutation' => false,
                     'source_report' => $this->sourceReportSummary($sourceReportPath, $sourceReport),
+                    'contract_repair_report' => $this->contractRepairReportSummary($contractRepairReportPath, $contractRepairReport),
                     'errors' => array_values(array_unique($errors)),
                 ], false);
             }
 
-            $chunks = $this->chunks($candidates, $chunkSize);
+            $chunks = $this->chunks($eligibleCandidates, $chunkSize);
             $report = [
                 'validator_version' => self::VALIDATOR_VERSION,
                 'decision' => 'pass',
@@ -60,20 +75,34 @@ final class CareerPrepareZhParityControlledImport extends Command
                 'llms_changed' => false,
                 'index_strategy_changed' => false,
                 'source_report' => $this->sourceReportSummary($sourceReportPath, $sourceReport),
-                'readiness_decision' => 'ready_for_reviewed_workbook_dry_run',
+                'contract_repair_report' => $this->contractRepairReportSummary($contractRepairReportPath, $contractRepairReport),
+                'readiness_decision' => 'ready_for_auto_repairable_runtime_shell_dry_run',
                 'blocked_until_explicit_approval' => [
+                    'reviewed_workbook_upload',
+                    'authority_crosswalk_force_alignment',
                     'force_import',
                     'production_cache_forget_warm',
                     'production_controlled_execution',
+                ],
+                'operator_review_hold' => [
+                    'manual_review_required_count' => count($manualReviewSlugs),
+                    'manual_review_required_slugs' => $manualReviewSlugs,
+                    'manual_review_required_rows' => $heldRows,
+                    'reason' => 'CN_Title/CN_H1 require reviewed Chinese text before controlled import.',
                 ],
                 'controlled_import_input_manifest' => [
                     'schema_version' => (string) $sourceManifest['schema_version'],
                     'source_scope' => (string) $sourceManifest['source_scope'],
                     'target_command' => (string) $sourceManifest['target_command'],
                     'target_locale' => (string) $sourceManifest['target_locale'],
-                    'candidate_count' => count($candidates),
-                    'candidate_slugs_sha256' => $this->slugListSha256($candidates),
-                    'candidate_slugs' => $candidates,
+                    'source_candidate_count' => count($sourceCandidates),
+                    'source_candidate_slugs_sha256' => $this->slugListSha256($sourceCandidates),
+                    'eligible_candidate_count' => count($eligibleCandidates),
+                    'eligible_candidate_slugs_sha256' => $this->slugListSha256($eligibleCandidates),
+                    'candidate_count' => count($eligibleCandidates),
+                    'candidate_slugs_sha256' => $this->slugListSha256($eligibleCandidates),
+                    'candidate_slugs' => $eligibleCandidates,
+                    'rows' => $eligibleRows,
                 ],
                 'source_live_counts' => [
                     'total_slugs' => (int) data_get($sourceReport, 'summary.total_slugs', 0),
@@ -96,12 +125,26 @@ final class CareerPrepareZhParityControlledImport extends Command
                         'reviewed_workbook' => '<reviewed_workbook.xlsx>',
                         'validated_full_upload_plan_manifest' => '<validated_full_upload_plan.json>',
                     ],
+                    'authority_crosswalk_alignment' => [
+                        'dry_run_command' => 'php backend/artisan career:align-career-authority-batch --file=<reviewed_workbook.xlsx> --slugs=<chunk_slugs_csv> --dry-run --json',
+                        'force_command_requires_explicit_approval' => 'php backend/artisan career:align-career-authority-batch --file=<reviewed_workbook.xlsx> --slugs=<chunk_slugs_csv> --force --json',
+                    ],
+                    'controlled_display_asset_import' => [
+                        'dry_run_command' => 'php backend/artisan career:import-selected-display-assets --file=<reviewed_workbook.xlsx> --manifest=<validated_full_upload_plan.json> --manifest-chunk-size='.$chunkSize.' --manifest-chunk-index=1 --dry-run --json',
+                        'force_command_requires_explicit_approval' => 'php backend/artisan career:import-selected-display-assets --file=<reviewed_workbook.xlsx> --manifest=<validated_full_upload_plan.json> --manifest-chunk-size='.$chunkSize.' --manifest-chunk-index=1 --force --json',
+                    ],
+                    'post_import_cache_refresh' => [
+                        'command_requires_explicit_approval' => 'php backend/artisan career:warm-public-authority-cache --job-detail-slugs=<chunk_slugs_csv> --job-detail-locales=zh-CN --forget-job-detail --job-detail-only --json',
+                    ],
                     'chunks' => $this->executionChunks($chunks, $chunkSize),
                 ],
                 'acceptance_commands' => [
-                    'validate_readiness_report' => 'python3 -m json.tool backend/docs/career/generated/career-zh-parity-controlled-import-readiness-01.json >/dev/null',
-                    'readiness_command' => 'php backend/artisan career:prepare-zh-parity-controlled-import --source-report=backend/docs/career/generated/career-zh-parity-live-01-production-report.json --output=backend/docs/career/generated/career-zh-parity-controlled-import-readiness-01.json --json',
+                    'validate_readiness_report' => 'python3 -m json.tool backend/docs/career/generated/career-full-parity-04-runtime-shell-import-readiness.json >/dev/null',
+                    'readiness_command' => 'php backend/artisan career:prepare-zh-parity-controlled-import --source-report='.self::DEFAULT_SOURCE_REPORT.' --contract-repair-report='.self::DEFAULT_CONTRACT_REPAIR_REPORT.' --output=backend/docs/career/generated/career-full-parity-04-runtime-shell-import-readiness.json --json',
+                    'authority_crosswalk_dry_run_template' => 'php backend/artisan career:align-career-authority-batch --file=<reviewed_workbook.xlsx> --slugs=<chunk_slugs_csv> --dry-run --json',
+                    'authority_crosswalk_force_template_after_approval' => 'php backend/artisan career:align-career-authority-batch --file=<reviewed_workbook.xlsx> --slugs=<chunk_slugs_csv> --force --json',
                     'dry_run_template' => 'php backend/artisan career:import-selected-display-assets --file=<reviewed_workbook.xlsx> --manifest=<validated_full_upload_plan.json> --manifest-chunk-size='.$chunkSize.' --manifest-chunk-index=1 --dry-run --json',
+                    'force_import_template_after_approval' => 'php backend/artisan career:import-selected-display-assets --file=<reviewed_workbook.xlsx> --manifest=<validated_full_upload_plan.json> --manifest-chunk-size='.$chunkSize.' --manifest-chunk-index=1 --force --json',
                     'cache_refresh_template_after_import_approval' => 'php backend/artisan career:warm-public-authority-cache --job-detail-slugs=<chunk_slugs_csv> --job-detail-locales=zh-CN --forget-job-detail --job-detail-only --json',
                 ],
             ];
@@ -128,6 +171,19 @@ final class CareerPrepareZhParityControlledImport extends Command
         }
         if (! is_file($path)) {
             throw new RuntimeException('--source-report does not exist: '.$path);
+        }
+
+        return $path;
+    }
+
+    private function contractRepairReportPath(): string
+    {
+        $path = trim((string) $this->option('contract-repair-report'));
+        if ($path === '') {
+            throw new RuntimeException('--contract-repair-report is required.');
+        }
+        if (! is_file($path)) {
+            throw new RuntimeException('--contract-repair-report does not exist: '.$path);
         }
 
         return $path;
@@ -258,6 +314,51 @@ final class CareerPrepareZhParityControlledImport extends Command
     }
 
     /**
+     * @param  array<string, mixed>  $repairReport
+     * @param  list<string>  $sourceCandidateSlugs
+     * @param  list<string>  $manualReviewSlugs
+     * @param  list<string>  $eligibleCandidateSlugs
+     * @return list<string>
+     */
+    private function validateContractRepairReport(
+        array $repairReport,
+        array $sourceCandidateSlugs,
+        array $manualReviewSlugs,
+        array $eligibleCandidateSlugs,
+    ): array {
+        $errors = [];
+        if ((bool) ($repairReport['writes_database'] ?? true) !== false) {
+            $errors[] = 'Contract repair report must not write database.';
+        }
+        if ((bool) ($repairReport['cms_mutation'] ?? true) !== false) {
+            $errors[] = 'Contract repair report must not mutate CMS.';
+        }
+        if ((bool) ($repairReport['execute'] ?? true) !== false) {
+            $errors[] = 'Contract repair report must be a dry-run report.';
+        }
+        if ((int) ($repairReport['selected_rows'] ?? -1) !== count($sourceCandidateSlugs)) {
+            $errors[] = 'Contract repair report selected_rows must match source candidate count.';
+        }
+        if ((int) ($repairReport['manual_review_required_count'] ?? -1) !== count($manualReviewSlugs)) {
+            $errors[] = 'Contract repair report manual_review_required_count must match manual rows.';
+        }
+        if ((int) ($repairReport['auto_repairable_rows'] ?? -1) !== count($eligibleCandidateSlugs)) {
+            $errors[] = 'Contract repair report auto_repairable_rows must match eligible candidates.';
+        }
+        $sourceSet = array_flip($sourceCandidateSlugs);
+        foreach ($manualReviewSlugs as $slug) {
+            if (! isset($sourceSet[$slug])) {
+                $errors[] = 'Manual review slug is not present in source candidates: '.$slug.'.';
+            }
+        }
+        if ($eligibleCandidateSlugs === []) {
+            $errors[] = 'At least one auto-repairable runtime shell candidate is required.';
+        }
+
+        return $errors;
+    }
+
+    /**
      * @param  list<string>  $slugs
      * @return list<list<string>>
      */
@@ -281,11 +382,81 @@ final class CareerPrepareZhParityControlledImport extends Command
                 'candidate_count' => count($chunk),
                 'candidate_slugs_sha256' => $this->slugListSha256($chunk),
                 'candidate_slugs' => $chunk,
+                'authority_crosswalk_dry_run_command' => 'php backend/artisan career:align-career-authority-batch --file=<reviewed_workbook.xlsx> --slugs='.$chunkSlugs.' --dry-run --json',
+                'authority_crosswalk_force_command_requires_explicit_approval' => 'php backend/artisan career:align-career-authority-batch --file=<reviewed_workbook.xlsx> --slugs='.$chunkSlugs.' --force --json',
                 'dry_run_command' => 'php backend/artisan career:import-selected-display-assets --file=<reviewed_workbook.xlsx> --manifest=<validated_full_upload_plan.json> --manifest-chunk-size='.$chunkSize.' --manifest-chunk-index='.$chunkIndex.' --dry-run --json',
                 'force_command_requires_explicit_approval' => 'php backend/artisan career:import-selected-display-assets --file=<reviewed_workbook.xlsx> --manifest=<validated_full_upload_plan.json> --manifest-chunk-size='.$chunkSize.' --manifest-chunk-index='.$chunkIndex.' --force --json',
                 'post_import_cache_refresh_command_requires_explicit_approval' => 'php backend/artisan career:warm-public-authority-cache --job-detail-slugs='.$chunkSlugs.' --job-detail-locales=zh-CN --forget-job-detail --job-detail-only --json',
             ];
         }, $chunks, array_keys($chunks));
+    }
+
+    /**
+     * @param  array<string, mixed>  $repairReport
+     * @return list<string>
+     */
+    private function manualReviewSlugs(array $repairReport): array
+    {
+        $rows = (array) ($repairReport['manual_review_required_rows'] ?? []);
+
+        return array_values(array_unique(array_filter(array_map(
+            static fn (mixed $row): string => is_array($row) ? strtolower(trim((string) ($row['slug'] ?? ''))) : '',
+            $rows,
+        ), static fn (string $slug): bool => $slug !== '')));
+    }
+
+    /**
+     * @param  list<string>  $sourceCandidates
+     * @param  list<string>  $manualReviewSlugs
+     * @return list<string>
+     */
+    private function eligibleCandidateSlugs(array $sourceCandidates, array $manualReviewSlugs): array
+    {
+        $manual = array_flip($manualReviewSlugs);
+
+        return array_values(array_filter(
+            $sourceCandidates,
+            static fn (string $slug): bool => ! isset($manual[$slug]),
+        ));
+    }
+
+    /**
+     * @param  array<string, mixed>  $repairReport
+     * @return list<array<string, mixed>>
+     */
+    private function heldManualReviewRows(array $repairReport): array
+    {
+        return array_values(array_map(static fn (mixed $row): array => [
+            'slug' => is_array($row) ? strtolower(trim((string) ($row['slug'] ?? ''))) : '',
+            'row_number' => is_array($row) ? (int) ($row['row_number'] ?? 0) : 0,
+            'reasons' => is_array($row) ? array_values((array) ($row['reasons'] ?? [])) : [],
+        ], (array) ($repairReport['manual_review_required_rows'] ?? [])));
+    }
+
+    /**
+     * @param  array<string, mixed>  $manifest
+     * @param  list<string>  $slugs
+     * @return list<array<string, mixed>>
+     */
+    private function manifestRowsForSlugs(array $manifest, array $slugs): array
+    {
+        $wanted = array_flip($slugs);
+        $rows = [];
+        foreach ((array) ($manifest['rows'] ?? []) as $row) {
+            if (! is_array($row)) {
+                continue;
+            }
+            $slug = strtolower(trim((string) ($row['slug'] ?? '')));
+            if ($slug === '' || ! isset($wanted[$slug])) {
+                continue;
+            }
+            $rows[] = array_merge($row, [
+                'slug' => $slug,
+                'import_readiness' => 'auto_repairable_after_contract_repair',
+            ]);
+        }
+
+        return $rows;
     }
 
     /**
@@ -308,6 +479,23 @@ final class CareerPrepareZhParityControlledImport extends Command
             'validator_version' => (string) ($sourceReport['validator_version'] ?? ''),
             'decision' => (string) ($sourceReport['decision'] ?? ''),
             'live_gate_decision' => (string) data_get($sourceReport, 'live_gate.decision', ''),
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $contractRepairReport
+     * @return array<string, mixed>
+     */
+    private function contractRepairReportSummary(string $contractRepairReportPath, array $contractRepairReport): array
+    {
+        return [
+            'path' => $contractRepairReportPath,
+            'sha256' => hash_file('sha256', $contractRepairReportPath) ?: null,
+            'repairer_version' => (string) ($contractRepairReport['repairer_version'] ?? ''),
+            'decision' => (string) ($contractRepairReport['decision'] ?? ''),
+            'selected_rows' => (int) ($contractRepairReport['selected_rows'] ?? 0),
+            'auto_repairable_rows' => (int) ($contractRepairReport['auto_repairable_rows'] ?? 0),
+            'manual_review_required_count' => (int) ($contractRepairReport['manual_review_required_count'] ?? 0),
         ];
     }
 
