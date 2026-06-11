@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-11T15:26:34Z",
+  "updated_at": "2026-06-11T15:31:40Z",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -53553,7 +53553,7 @@
     "repo": "fap-api",
     "branch": "codex/career-full-parity-03",
     "base": "origin/main",
-    "status": "committed",
+    "status": "pr_open_checks_pending",
     "train_scope": "career_full_parity",
     "title": "CAREER-FULL-PARITY-03: fix(career): repair blocked workbook asset contracts",
     "depends_on": [
@@ -53588,7 +53588,7 @@
     },
     "failure_reason": null,
     "commit_sha": "84de772b71e62830804bfd0ca134794571977d0e",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2043",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -53622,6 +53622,11 @@
         "at": "2026-06-11T15:26:34Z",
         "status": "committed",
         "note": "Committed CAREER-FULL-PARITY-03 scoped repair command, tests, and generated dry-run report."
+      },
+      {
+        "at": "2026-06-11T15:31:40Z",
+        "status": "pr_open_checks_pending",
+        "note": "Opened PR #2043 for CAREER-FULL-PARITY-03 and started GitHub checks."
       }
     ],
     "result": {
