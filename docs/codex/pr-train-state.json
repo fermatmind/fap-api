@@ -53000,7 +53000,7 @@
     "repo": "fap-api",
     "branch": "codex/career-zh-parity-fix-04",
     "base": "origin/main",
-    "status": "pr_open_checks_pending",
+    "status": "ready_to_merge",
     "train_scope": "career_zh_parity_fix",
     "title": "CAREER-ZH-PARITY-FIX-04: feat(career): controlled zh display import cache refresh",
     "depends_on": [
@@ -53035,12 +53035,12 @@
         "notes": "PHP lint, focused feature tests, and scoped Pint passed. The manifest-listed broad tests/Unit/Services/Career command failed only on pre-existing career publish readiness failures outside PR04 scope and is recorded as sidecar."
       },
       "github_checks": {
-        "status": "pending",
-        "evidence": "PR #2029 opened; waiting for GitHub checks."
+        "status": "pass",
+        "evidence": "GitHub checks passed for PR #2029: hygiene, supply-chain, content-pack-build-validate, Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
       }
     },
     "failure_reason": null,
-    "commit_sha": "9a1389e3810b92770501157205c4513ea5b1e91e",
+    "commit_sha": "095666733f502a63714090dd409bfd3be0aa997b",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2029",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -53070,6 +53070,11 @@
         "at": "2026-06-11T04:38:00Z",
         "status": "pr_open_checks_pending",
         "note": "Opened PR #2029 for CAREER-ZH-PARITY-FIX-04 from head commit 9a1389e3810b92770501157205c4513ea5b1e91e."
+      },
+      {
+        "at": "2026-06-11T04:44:00Z",
+        "status": "ready_to_merge",
+        "note": "PR #2029 GitHub checks passed; scope remains confined to PR04 allowed paths."
       }
     ]
   },
