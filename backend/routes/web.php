@@ -1,5 +1,13 @@
 <?php
 
+use App\Http\Controllers\Ops\ArticleDraftPreviewController;
+use App\Http\Middleware\AdminAuth;
+use App\Http\Middleware\EnsureAdminTotpVerified;
+use App\Http\Middleware\EnsureCmsAdminAuthorized;
+use App\Http\Middleware\OpsAccessControl;
+use App\Http\Middleware\RequireOpsOrgSelected;
+use App\Http\Middleware\ResolveOrgContext;
+use App\Http\Middleware\SetOpsRequestContext;
 use App\Http\Controllers\SitemapController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -46,6 +54,19 @@ if (config('admin.panel_enabled')) {
     Route::permanentRedirect('/admin', '/ops');
     Route::get('/admin/{path}', fn (string $path) => redirect('/ops/'.$path, 301))
         ->where('path', '.*');
+
+    Route::get('/ops/article-preview/{article}', ArticleDraftPreviewController::class)
+        ->middleware([
+            SetOpsRequestContext::class,
+            AdminAuth::class,
+            ResolveOrgContext::class,
+            EnsureAdminTotpVerified::class,
+            RequireOpsOrgSelected::class,
+            OpsAccessControl::class,
+            EnsureCmsAdminAuthorized::class.':read',
+        ])
+        ->whereNumber('article')
+        ->name('ops.articles.preview');
 
     foreach ([
         'categories' => 'article-categories',
