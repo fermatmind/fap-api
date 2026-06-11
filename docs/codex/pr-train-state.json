@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-11T15:31:40Z",
+  "updated_at": "2026-06-11T15:54:39Z",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -53553,7 +53553,7 @@
     "repo": "fap-api",
     "branch": "codex/career-full-parity-03",
     "base": "origin/main",
-    "status": "pr_open_checks_pending",
+    "status": "merged",
     "train_scope": "career_full_parity",
     "title": "CAREER-FULL-PARITY-03: fix(career): repair blocked workbook asset contracts",
     "depends_on": [
@@ -53584,14 +53584,18 @@
       "scope_validation": {
         "status": "pass",
         "evidence": "Changed files are confined to CareerRepairDisplayWorkbookContract.php, its console test, backend/docs/career/generated/career-full-parity-03-contract-repair-report.json, and docs/codex/pr-train-state.json."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "GitHub PR #2043 merged at 2026-06-11T15:39:33Z; origin/main contains merge commit 8db469441b81670cda8949e9babb50d3005c95f1."
       }
     },
     "failure_reason": null,
     "commit_sha": "84de772b71e62830804bfd0ca134794571977d0e",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2043",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-11T15:39:33Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-11T13:00:17Z",
@@ -53627,6 +53631,11 @@
         "at": "2026-06-11T15:31:40Z",
         "status": "pr_open_checks_pending",
         "note": "Opened PR #2043 for CAREER-FULL-PARITY-03 and started GitHub checks."
+      },
+      {
+        "at": "2026-06-11T15:49:29Z",
+        "status": "merged_reconciled_in_next_pr",
+        "note": "Reconciled CAREER-FULL-PARITY-03 in CAREER-FULL-PARITY-04 after PR #2043 merge, remote branch deletion, local cleanup, and origin/main containment were verified before this branch started."
       }
     ],
     "result": {
@@ -53655,7 +53664,7 @@
     "repo": "fap-api",
     "branch": "codex/career-full-parity-04",
     "base": "origin/main",
-    "status": "pending_dependency",
+    "status": "pr_open_checks_pending",
     "train_scope": "career_full_parity",
     "title": "CAREER-FULL-PARITY-04: chore(career): prepare runtime shell zh asset import",
     "depends_on": [
@@ -53667,13 +53676,39 @@
         "evidence": "User explicitly authorized adding and executing CAREER-FULL-PARITY-01 through CAREER-FULL-PARITY-10 and allowed fap-api docs/codex metadata updates."
       },
       "dependency": {
+        "status": "pass",
+        "evidence": "CAREER-FULL-PARITY-03 PR #2043 is merged and origin/main contains merge commit 8db469441b81670cda8949e9babb50d3005c95f1."
+      },
+      "implementation": {
+        "status": "in_progress",
+        "evidence": "Preparing read-only runtime shell controlled import readiness from CAREER-FULL-PARITY-02 root-cause manifest plus CAREER-FULL-PARITY-03 contract repair report; generated 131 auto-repairable candidates and 5 manual-review holds."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Console tests/Feature/Career --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Console/CareerPrepareZhParityControlledImportCommandTest.php --no-ansi",
+          "cd backend && ./vendor/bin/pint --test app/Console/Commands/CareerPrepareZhParityControlledImport.php tests/Feature/Console/CareerPrepareZhParityControlledImportCommandTest.php",
+          "php backend/artisan career:prepare-zh-parity-controlled-import --source-report=backend/docs/career/generated/career-full-parity-02-root-cause-manifest.json --contract-repair-report=backend/docs/career/generated/career-full-parity-03-contract-repair-report.json --output=backend/docs/career/generated/career-full-parity-04-runtime-shell-import-readiness.json --json",
+          "python3 -m json.tool backend/docs/career/generated/career-full-parity-04-runtime-shell-import-readiness.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "git diff --check"
+        ],
+        "notes": "Focused readiness test passed with 3 warnings and 33 assertions. Required broad Feature/Console+Feature/Career suite passed with 705 warnings and 38937 assertions. Scoped Pint passed. PR04 generated readiness report passed JSON parse and splits 136 source candidates into 131 auto-repairable import candidates plus 5 manual-review holds."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are confined to CareerPrepareZhParityControlledImport.php, its console test, backend/docs/career/generated/career-full-parity-04-runtime-shell-import-readiness.json, and docs/codex/pr-train-state.json."
+      },
+      "github": {
         "status": "pending",
-        "evidence": "Waiting for CAREER-FULL-PARITY-03 to merge before implementation."
+        "evidence": "PR #2044 opened; waiting for GitHub checks."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "659f8446a5bf1fd27dab70d33cd9e31618b137c2",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2044",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -53682,8 +53717,39 @@
         "at": "2026-06-11T13:00:17Z",
         "status": "pending_dependency",
         "note": "Initialized from explicit CAREER-FULL-PARITY train authorization; implementation deferred until dependencies merge."
+      },
+      {
+        "at": "2026-06-11T15:49:29Z",
+        "status": "in_progress",
+        "note": "Started CAREER-FULL-PARITY-04 from latest origin/main after CAREER-FULL-PARITY-03 merge cleanup; generated read-only controlled import/cache readiness report."
+      },
+      {
+        "at": "2026-06-11T15:52:35Z",
+        "status": "local_checks_passed",
+        "note": "Generated PR04 readiness report and completed focused, broad, scoped Pint, JSON/YAML, diff, and scope validation checks."
+      },
+      {
+        "at": "2026-06-11T15:54:39Z",
+        "status": "pr_open_checks_pending",
+        "note": "Opened PR #2044 from codex/career-full-parity-04 after local validation and scope validation passed."
       }
-    ]
+    ],
+    "result": {
+      "readiness_report": "backend/docs/career/generated/career-full-parity-04-runtime-shell-import-readiness.json",
+      "source_candidate_count": 136,
+      "auto_repairable_candidate_count": 131,
+      "manual_review_required_count": 5,
+      "manual_review_required_slugs": [
+        "data-scientists",
+        "human-resources-specialists",
+        "management-analysts",
+        "project-management-specialists",
+        "registered-nurses"
+      ],
+      "chunk_size": 50,
+      "chunk_count": 3,
+      "production_writes": "none; report only, all force/import/cache commands require explicit operator approval"
+    }
   },
   "CAREER-FULL-PARITY-05": {
     "repo": "fap-api",
