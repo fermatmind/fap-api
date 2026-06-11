@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Console;
 
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
@@ -148,6 +149,52 @@ final class CareerAuditZhDisplayParityCommandTest extends TestCase
         $this->assertSame(1, $report['summary']['same_module_set']);
 
         Http::assertNotSent(static fn ($request): bool => str_ends_with($request->url(), '/career/jobs?locale=en'));
+    }
+
+    #[Test]
+    public function it_records_detail_connection_exceptions_per_slug_without_aborting_the_report(): void
+    {
+        Http::fake(function ($request) {
+            if ($request->url() === 'https://api.example.test/api/v0.5/career/jobs/unstable-slug?locale=zh-CN') {
+                throw new ConnectionException('Connection refused for zh detail request.');
+            }
+
+            return Http::response($this->detailPayload([
+                'hero',
+                'path',
+                'source_card',
+            ]), 200);
+        });
+
+        $exitCode = Artisan::call('career:audit-zh-display-parity', [
+            '--api-base' => 'https://api.example.test/api/v0.5/career/jobs',
+            '--site-base' => 'https://www.example.test',
+            '--slugs' => 'stable-slug,unstable-slug',
+            '--json' => true,
+        ]);
+        $report = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
+
+        $this->assertSame(1, $exitCode, Artisan::output());
+        $this->assertSame('blocked', $report['decision']);
+        $this->assertArrayNotHasKey('errors', $report);
+        $this->assertSame(2, $report['summary']['total_slugs']);
+        $this->assertSame(1, $report['summary']['same_module_set']);
+        $this->assertSame(1, $report['summary']['en_200_zh_not_200']);
+        $this->assertSame(1, $report['summary']['api_failure_count']);
+        $this->assertSame(1, $report['summary']['detail_api_error_count']);
+
+        $unstable = collect($report['items'])->firstWhere('slug', 'unstable-slug');
+        $this->assertSame('en_200_zh_not_200', $unstable['classification']);
+        $this->assertSame(200, $unstable['status']['en']);
+        $this->assertNull($unstable['status']['zh-CN']);
+        $this->assertSame('zh_detail_http_unknown', $unstable['zh_gate_reasons'][0]);
+        $this->assertSame('zh_api_not_200', $unstable['root_cause']);
+        $this->assertSame('zh-CN', $unstable['api_errors'][0]['locale']);
+        $this->assertSame('ConnectionException', $unstable['api_errors'][0]['type']);
+        $this->assertSame(
+            'https://api.example.test/api/v0.5/career/jobs/unstable-slug?locale=zh-CN',
+            $unstable['api_errors'][0]['url'],
+        );
     }
 
     #[Test]
