@@ -12,7 +12,14 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
 
+        \Illuminate\Support\Facades\Cache::flush();
         \App\Support\SchemaBaseline::clearCache();
+        \App\Domain\Career\Publish\FirstWavePublishReadyValidator::clearValidationMemo();
+        \App\Domain\Career\Publish\FirstWaveReadinessSummaryService::clearSummaryMemo();
+        \App\Domain\Career\Publish\CareerFirstWaveLifecycleSummaryService::clearSummaryMemo();
+        \App\Domain\Career\Publish\CareerFirstWaveLaunchTierSummaryService::clearSummaryMemo();
+        \App\Domain\Career\Publish\CareerFirstWaveDiscoverabilityManifestService::clearManifestMemo();
+        $this->app->forgetInstance(\App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility::class);
     }
 
     protected function grantScaleForOrg(int $orgId, string $scaleCode): void

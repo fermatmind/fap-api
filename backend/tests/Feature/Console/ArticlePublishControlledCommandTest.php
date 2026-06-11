@@ -295,7 +295,7 @@ final class ArticlePublishControlledCommandTest extends TestCase
             ['org_id' => 0, 'slug' => 'riasec'],
             ['name' => 'RIASEC', 'is_active' => true]
         );
-        $body = "# Controlled Publish Draft\n\n## 执行摘要\n\n正文。\n\n## FAQ\n\n### Q\n\nA.";
+        $body = "## Controlled Publish Draft\n\n## 执行摘要\n\n正文。\n\n## FAQ\n\n### Q\n\nA.";
         $bodyHash = hash('sha256', preg_replace("/\r\n?/", "\n", trim($body)));
         $locale = (string) ($overrides['locale'] ?? 'zh-CN');
         $slug = (string) ($overrides['slug'] ?? 'controlled-publish-draft');

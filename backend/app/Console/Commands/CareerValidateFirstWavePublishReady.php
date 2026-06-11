@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Domain\Career\Publish\CareerFirstWaveDiscoverabilityManifestService;
+use App\Domain\Career\Publish\CareerFirstWaveLaunchTierSummaryService;
+use App\Domain\Career\Publish\CareerFirstWaveLifecycleSummaryService;
 use App\Domain\Career\Publish\FirstWavePublishReadyValidator;
+use App\Domain\Career\Publish\FirstWaveReadinessSummaryService;
 use App\Services\Career\Import\FirstWaveAuthorityMaterializationService;
 use Illuminate\Console\Command;
 
@@ -56,6 +60,11 @@ final class CareerValidateFirstWavePublishReady extends Command
                 $repairSafePartials,
                 $authorityOverridePath !== '' ? $authorityOverridePath : null,
             );
+            FirstWavePublishReadyValidator::clearValidationMemo();
+            FirstWaveReadinessSummaryService::clearSummaryMemo();
+            CareerFirstWaveLifecycleSummaryService::clearSummaryMemo();
+            CareerFirstWaveLaunchTierSummaryService::clearSummaryMemo();
+            CareerFirstWaveDiscoverabilityManifestService::clearManifestMemo();
         }
 
         $report = $validator->validate(

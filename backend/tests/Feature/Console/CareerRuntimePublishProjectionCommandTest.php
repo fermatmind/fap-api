@@ -13,6 +13,15 @@ use Tests\TestCase;
 
 final class CareerRuntimePublishProjectionCommandTest extends TestCase
 {
+    protected function tearDown(): void
+    {
+        File::deleteDirectory(storage_path('app/private/career_runtime_publish_projection'));
+        File::deleteDirectory(storage_path('app/private/career_canonical_runtime_truth'));
+        File::deleteDirectory(storage_path('app/private/career_canonical_runtime_truth_finalization'));
+
+        parent::tearDown();
+    }
+
     public function test_export_command_materializes_projection_from_ledger_artifact(): void
     {
         $ledgerPath = $this->writeLedgerArtifact([

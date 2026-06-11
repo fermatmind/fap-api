@@ -22,6 +22,11 @@ final class CareerFirstWaveLifecycleSummaryService
         private readonly CareerFirstWaveIndexPolicyEngine $indexPolicyEngine,
     ) {}
 
+    public static function clearSummaryMemo(): void
+    {
+        self::$summaryMemo = null;
+    }
+
     public function build(): CareerFirstWaveLifecycleSummary
     {
         if (self::$summaryMemo instanceof CareerFirstWaveLifecycleSummary) {

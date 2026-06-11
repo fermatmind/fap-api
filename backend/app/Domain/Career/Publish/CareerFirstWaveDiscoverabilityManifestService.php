@@ -22,6 +22,11 @@ final class CareerFirstWaveDiscoverabilityManifestService
         private readonly CareerFamilyHubBundleBuilder $familyHubBundleBuilder,
     ) {}
 
+    public static function clearManifestMemo(): void
+    {
+        self::$manifestMemo = null;
+    }
+
     public function build(): CareerFirstWaveDiscoverabilityManifest
     {
         if (self::$manifestMemo instanceof CareerFirstWaveDiscoverabilityManifest) {

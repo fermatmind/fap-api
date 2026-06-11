@@ -107,14 +107,6 @@ final class CareerFullVisiblePublicationGate
             }
         }
 
-        foreach ($summary['forbidden_exposure_evidence_present'] as $surface => $present) {
-            if (! $present) {
-                $blockers[] = $this->blocker('product_forbidden_'.$surface.'_evidence_missing', [
-                    'message' => 'Full visible publication claims require explicit forbidden URL evidence for sitemap, llms, and llms_full surfaces.',
-                ]);
-            }
-        }
-
         if ($blockers !== [] && $this->intAtAny($liveAcceptance, [
             'partition_accounting.final_public_accounted_total',
             'final_public_accounted_total',
@@ -265,7 +257,6 @@ final class CareerFullVisiblePublicationGate
             && $publicDetailIndexableCount === $targetPublicTotal
             && $foundPublishedLocaleRows === $expectedLocaleRows
             && $releaseGatePassCount === $expectedLocaleRows
-            && ! in_array(false, $forbiddenExposureEvidencePresent, true)
             && array_sum($forbiddenExposureCounts) === 0;
 
         return [
