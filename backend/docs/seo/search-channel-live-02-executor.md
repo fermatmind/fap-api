@@ -10,7 +10,7 @@ submission by itself.
 
 - Command: `seo-intel:search-channel-submit`
 - Scope: exactly one existing queue item selected by `--queue-item-id`
-- Supported live channel in this task: `indexnow`
+- Supported live channels in this task: `indexnow`, `baidu_push`
 - Allowed host in this task: `fermatmind.com`
 - Default mode: blocked unless every live gate is explicitly enabled
 - Scheduler: not registered
@@ -40,14 +40,24 @@ I explicitly approve SEARCH-CHANNEL-LIVE-02 live submission for queue item <id> 
 
 ## Required Gates
 
-Actual live submission requires all of these gates:
+Actual live submission requires these shared gates:
 
 - `SEO_INTEL_SEARCH_CHANNEL_LIVE_SUBMISSION_ENABLED=true`
 - `SEO_INTEL_SEARCH_CHANNEL_EXTERNAL_API_CALLS_ENABLED=true`
+- The exact human approval phrase is supplied
+
+IndexNow additionally requires:
+
 - `SEO_INTEL_INDEXNOW_LIVE_API_ENABLED=true`
 - `SEO_INTEL_INDEXNOW_KEY` is present
 - `SEO_INTEL_INDEXNOW_KEY_LOCATION` is present
-- The exact human approval phrase is supplied
+
+Baidu push additionally requires:
+
+- `SEO_INTEL_BAIDU_LIVE_API_ENABLED=true`
+- `SEO_INTEL_BAIDU_SITE` is present
+- `SEO_INTEL_BAIDU_PUSH_TOKEN` is present
+- `SEO_INTEL_BAIDU_PUSH_ENDPOINT` defaults to `https://data.zz.baidu.com/urls`
 
 Default config keeps these gates disabled or empty.
 
@@ -64,12 +74,17 @@ The executor rejects the item unless it is:
 - `source_authority` is backend-approved
 - HTTPS URL under an allowed host
 
-After an accepted IndexNow response, the executor sets:
+After an accepted IndexNow or Baidu push response, the executor sets:
 
 - `approval_state=approved`
 - `execution_state=submitted`
 - `approved_by=<actor>`
 - `approved_at=<timestamp>`
+
+Baidu push sends exactly one canonical URL as `text/plain` to the configured
+endpoint with `site` and `token` query parameters. A Baidu response is accepted
+only when the HTTP response is successful and the JSON `success` count is at
+least 1.
 
 Failed provider calls are recorded as `execution_state=submit_failed`.
 

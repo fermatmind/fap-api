@@ -12,7 +12,8 @@
   "raw_secret_output_allowed": false,
   "sitemap_llms_behavior_changed": false,
   "supported_live_channels": [
-    "indexnow"
+    "indexnow",
+    "baidu_push"
   ],
   "allowed_hosts": [
     "fermatmind.com"
@@ -22,7 +23,10 @@
     "SEO_INTEL_SEARCH_CHANNEL_EXTERNAL_API_CALLS_ENABLED",
     "SEO_INTEL_INDEXNOW_LIVE_API_ENABLED",
     "SEO_INTEL_INDEXNOW_KEY",
-    "SEO_INTEL_INDEXNOW_KEY_LOCATION"
+    "SEO_INTEL_INDEXNOW_KEY_LOCATION",
+    "SEO_INTEL_BAIDU_LIVE_API_ENABLED",
+    "SEO_INTEL_BAIDU_SITE",
+    "SEO_INTEL_BAIDU_PUSH_TOKEN"
   ],
   "approval_phrase_template": "I explicitly approve SEARCH-CHANNEL-LIVE-02 live submission for queue item <id> channel <channel> URL <canonical_url>.",
   "required_queue_item_state": {

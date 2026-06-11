@@ -50,11 +50,7 @@ final class SearchChannelQueueLiveSubmissionExecutor
         }
 
         $now = now();
-        $endpoint = (string) config('seo_intel.search_channel_queue.live_submission.indexnow.endpoint');
-        $key = (string) config('seo_intel.search_channel_queue.live_submission.indexnow.key');
-        $keyLocation = (string) config('seo_intel.search_channel_queue.live_submission.indexnow.key_location');
         $canonicalUrl = (string) $item->canonical_url;
-        $host = (string) parse_url($canonicalUrl, PHP_URL_HOST);
 
         $claimed = $connection->table('seo_search_channel_queue_items')
             ->where('id', (int) $item->id)
@@ -87,21 +83,10 @@ final class SearchChannelQueueLiveSubmissionExecutor
         $accepted = false;
         $exceptionClass = null;
 
-        try {
-            $response = Http::timeout(max(1, (int) config('seo_intel.search_channel_queue.live_submission.indexnow.timeout_seconds', 10)))
-                ->asJson()
-                ->post($endpoint, [
-                    'host' => $host,
-                    'key' => $key,
-                    'keyLocation' => $keyLocation,
-                    'urlList' => [$canonicalUrl],
-                ]);
-
-            $httpStatus = $response->status();
-            $accepted = $response->successful();
-        } catch (Throwable $exception) {
-            $exceptionClass = $exception::class;
-        }
+        $submission = $this->submitToChannel((string) $item->channel, $canonicalUrl);
+        $httpStatus = $submission['http_status'];
+        $accepted = $submission['accepted'];
+        $exceptionClass = $submission['exception_class'];
 
         $submissionStatus = $this->statusNormalizer->normalize($accepted ? 'accepted' : 'failed');
         $executionState = $accepted ? 'submitted' : 'submit_failed';
@@ -116,7 +101,7 @@ final class SearchChannelQueueLiveSubmissionExecutor
         $this->events->log($connection, (int) $item->id, is_numeric($item->batch_id) ? (int) $item->batch_id : null, 'live_submission_response', [
             'channel' => (string) $item->channel,
             'url_hash' => (string) $item->url_hash,
-            'endpoint_host' => (string) parse_url($endpoint, PHP_URL_HOST),
+            'endpoint_host' => $submission['endpoint_host'],
             'http_status' => $httpStatus,
             'submission_status' => $submissionStatus,
             'exception_class' => $exceptionClass,
@@ -222,19 +207,130 @@ final class SearchChannelQueueLiveSubmissionExecutor
             $issues[] = 'external_api_gate_disabled';
         }
 
-        if ((string) $item->channel === 'indexnow' && ! (bool) config('seo_intel.indexnow_live_api_enabled', false)) {
-            $issues[] = 'indexnow_live_api_disabled';
-        }
+        $channel = (string) $item->channel;
+        if ($channel === 'indexnow') {
+            if (! (bool) config('seo_intel.indexnow_live_api_enabled', false)) {
+                $issues[] = 'indexnow_live_api_disabled';
+            }
 
-        if (trim((string) config('seo_intel.search_channel_queue.live_submission.indexnow.key')) === '') {
-            $issues[] = 'indexnow_key_missing';
-        }
+            if (trim((string) config('seo_intel.search_channel_queue.live_submission.indexnow.key')) === '') {
+                $issues[] = 'indexnow_key_missing';
+            }
 
-        if (trim((string) config('seo_intel.search_channel_queue.live_submission.indexnow.key_location')) === '') {
-            $issues[] = 'indexnow_key_location_missing';
+            if (trim((string) config('seo_intel.search_channel_queue.live_submission.indexnow.key_location')) === '') {
+                $issues[] = 'indexnow_key_location_missing';
+            }
+        } elseif ($channel === 'baidu_push') {
+            if (! (bool) config('seo_intel.baidu_live_api_enabled', false)) {
+                $issues[] = 'baidu_live_api_disabled';
+            }
+
+            if (trim((string) config('seo_intel.search_channel_queue.live_submission.baidu.endpoint')) === '') {
+                $issues[] = 'baidu_endpoint_missing';
+            }
+
+            if (trim((string) config('seo_intel.search_channel_queue.live_submission.baidu.site')) === '') {
+                $issues[] = 'baidu_site_missing';
+            }
+
+            if (trim((string) config('seo_intel.search_channel_queue.live_submission.baidu.token')) === '') {
+                $issues[] = 'baidu_token_missing';
+            }
+        } else {
+            $issues[] = 'unsupported_live_submission_channel';
         }
 
         return $issues;
+    }
+
+    /**
+     * @return array{accepted: bool, http_status: ?int, exception_class: ?class-string, endpoint_host: ?string}
+     */
+    private function submitToChannel(string $channel, string $canonicalUrl): array
+    {
+        return match ($channel) {
+            'indexnow' => $this->submitIndexNow($canonicalUrl),
+            'baidu_push' => $this->submitBaiduPush($canonicalUrl),
+            default => [
+                'accepted' => false,
+                'http_status' => null,
+                'exception_class' => null,
+                'endpoint_host' => null,
+            ],
+        };
+    }
+
+    /**
+     * @return array{accepted: bool, http_status: ?int, exception_class: ?class-string, endpoint_host: ?string}
+     */
+    private function submitIndexNow(string $canonicalUrl): array
+    {
+        $endpoint = (string) config('seo_intel.search_channel_queue.live_submission.indexnow.endpoint');
+        $key = (string) config('seo_intel.search_channel_queue.live_submission.indexnow.key');
+        $keyLocation = (string) config('seo_intel.search_channel_queue.live_submission.indexnow.key_location');
+        $host = (string) parse_url($canonicalUrl, PHP_URL_HOST);
+
+        try {
+            $response = Http::timeout(max(1, (int) config('seo_intel.search_channel_queue.live_submission.indexnow.timeout_seconds', 10)))
+                ->asJson()
+                ->post($endpoint, [
+                    'host' => $host,
+                    'key' => $key,
+                    'keyLocation' => $keyLocation,
+                    'urlList' => [$canonicalUrl],
+                ]);
+
+            return [
+                'accepted' => $response->successful(),
+                'http_status' => $response->status(),
+                'exception_class' => null,
+                'endpoint_host' => (string) parse_url($endpoint, PHP_URL_HOST),
+            ];
+        } catch (Throwable $exception) {
+            return [
+                'accepted' => false,
+                'http_status' => null,
+                'exception_class' => $exception::class,
+                'endpoint_host' => (string) parse_url($endpoint, PHP_URL_HOST),
+            ];
+        }
+    }
+
+    /**
+     * @return array{accepted: bool, http_status: ?int, exception_class: ?class-string, endpoint_host: ?string}
+     */
+    private function submitBaiduPush(string $canonicalUrl): array
+    {
+        $endpoint = (string) config('seo_intel.search_channel_queue.live_submission.baidu.endpoint');
+        $site = (string) config('seo_intel.search_channel_queue.live_submission.baidu.site');
+        $token = (string) config('seo_intel.search_channel_queue.live_submission.baidu.token');
+        $endpointWithQuery = $endpoint.'?'.http_build_query([
+            'site' => $site,
+            'token' => $token,
+        ]);
+
+        try {
+            $response = Http::timeout(max(1, (int) config('seo_intel.search_channel_queue.live_submission.baidu.timeout_seconds', 10)))
+                ->withBody($canonicalUrl, 'text/plain')
+                ->post($endpointWithQuery);
+
+            $body = $response->json();
+            $accepted = $response->successful() && (int) data_get(is_array($body) ? $body : [], 'success', 0) >= 1;
+
+            return [
+                'accepted' => $accepted,
+                'http_status' => $response->status(),
+                'exception_class' => null,
+                'endpoint_host' => (string) parse_url($endpoint, PHP_URL_HOST),
+            ];
+        } catch (Throwable $exception) {
+            return [
+                'accepted' => false,
+                'http_status' => null,
+                'exception_class' => $exception::class,
+                'endpoint_host' => (string) parse_url($endpoint, PHP_URL_HOST),
+            ];
+        }
     }
 
     /**

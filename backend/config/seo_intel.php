@@ -219,7 +219,7 @@ return [
         'purchase_truth_source' => 'backend_orders_payment_benefits',
     ],
     'baidu_enabled' => env('SEO_INTEL_BAIDU_ENABLED', false),
-    'baidu_live_api_enabled' => false,
+    'baidu_live_api_enabled' => env('SEO_INTEL_BAIDU_LIVE_API_ENABLED', false),
     'indexnow_enabled' => env('SEO_INTEL_INDEXNOW_ENABLED', false),
     'indexnow_live_api_enabled' => env('SEO_INTEL_INDEXNOW_LIVE_API_ENABLED', false),
     'baidu_source_engine' => 'baidu',
@@ -316,9 +316,16 @@ return [
             'external_api_calls_enabled' => env('SEO_INTEL_SEARCH_CHANNEL_EXTERNAL_API_CALLS_ENABLED', false),
             'allowed_channels' => [
                 'indexnow',
+                'baidu_push',
             ],
             'allowed_hosts' => [
                 'fermatmind.com',
+            ],
+            'baidu' => [
+                'endpoint' => env('SEO_INTEL_BAIDU_PUSH_ENDPOINT', 'https://data.zz.baidu.com/urls'),
+                'site' => env('SEO_INTEL_BAIDU_SITE'),
+                'token' => env('SEO_INTEL_BAIDU_PUSH_TOKEN'),
+                'timeout_seconds' => env('SEO_INTEL_BAIDU_PUSH_TIMEOUT_SECONDS', 10),
             ],
             'indexnow' => [
                 'endpoint' => env('SEO_INTEL_INDEXNOW_ENDPOINT', 'https://api.indexnow.org/indexnow'),
