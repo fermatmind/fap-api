@@ -53664,7 +53664,7 @@
     "repo": "fap-api",
     "branch": "codex/career-full-parity-04",
     "base": "origin/main",
-    "status": "pr_open_checks_pending",
+    "status": "merged",
     "train_scope": "career_full_parity",
     "title": "CAREER-FULL-PARITY-04: chore(career): prepare runtime shell zh asset import",
     "depends_on": [
@@ -53702,16 +53702,20 @@
         "evidence": "Changed files are confined to CareerPrepareZhParityControlledImport.php, its console test, backend/docs/career/generated/career-full-parity-04-runtime-shell-import-readiness.json, and docs/codex/pr-train-state.json."
       },
       "github": {
-        "status": "pending",
-        "evidence": "PR #2044 opened; waiting for GitHub checks."
+        "status": "pass",
+        "evidence": "PR #2044 is MERGED; origin/main contains merge commit 6411112b619494e8fdb64b35576d96477ee403b7. One stale gh pr checks row remained pending before merge, but GitHub merged the PR and all underlying workflow runs were successful."
+      },
+      "cleanup": {
+        "status": "pass",
+        "evidence": "Remote branch codex/career-full-parity-04 is absent, local branch was deleted, worktree was removed, and main was synced to origin/main."
       }
     },
     "failure_reason": null,
-    "commit_sha": "659f8446a5bf1fd27dab70d33cd9e31618b137c2",
+    "commit_sha": "6411112b619494e8fdb64b35576d96477ee403b7",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2044",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-11T16:02:54Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-11T13:00:17Z",
@@ -53732,6 +53736,11 @@
         "at": "2026-06-11T15:54:39Z",
         "status": "pr_open_checks_pending",
         "note": "Opened PR #2044 from codex/career-full-parity-04 after local validation and scope validation passed."
+      },
+      {
+        "at": "2026-06-11T16:15:14Z",
+        "status": "merged",
+        "note": "Reconciled CAREER-FULL-PARITY-04 in CAREER-FULL-PARITY-05 after PR #2044 merge, origin/main containment, branch deletion, and local cleanup were verified."
       }
     ],
     "result": {
@@ -53755,7 +53764,7 @@
     "repo": "fap-api",
     "branch": "codex/career-full-parity-05",
     "base": "origin/main",
-    "status": "pending_dependency",
+    "status": "pr_open_checks_pending",
     "train_scope": "career_full_parity",
     "title": "CAREER-FULL-PARITY-05: fix(career): normalize zh display asset module subsets",
     "depends_on": [
@@ -53767,13 +53776,42 @@
         "evidence": "User explicitly authorized adding and executing CAREER-FULL-PARITY-01 through CAREER-FULL-PARITY-10 and allowed fap-api docs/codex metadata updates."
       },
       "dependency": {
+        "status": "pass",
+        "evidence": "CAREER-FULL-PARITY-04 PR #2044 is merged and origin/main contains merge commit 6411112b619494e8fdb64b35576d96477ee403b7."
+      },
+      "implementation": {
+        "status": "pass",
+        "evidence": "Extended career:normalize-legacy-display-assets to accept CAREER-FULL-PARITY root-cause-report-authorized zh module subset slugs; adds component-order-derived pending_reviewed_zh_content placeholders without translated editorial copy; generated CAREER-FULL-PARITY-05 readiness report."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Console/CareerNormalizeLegacyDisplayAssetsCommandTest.php --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Career/CareerPublicDatasetContractBuilderTest.php --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Console tests/Feature/Career tests/Unit/Services/Career --no-ansi",
+          "cd backend && ./vendor/bin/pint --test app/Console/Commands app/Services/Career tests/Feature/Console tests/Feature/Career tests/Unit/Services/Career",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "git diff --check"
+        ],
+        "evidence": "All required local checks passed; broad PHPUnit command passed with 27 passed / 52426 assertions after scoped blocker repair; Pint passed across 526 files."
+      },
+      "external_broad_check_blocker": {
+        "status": "repaired_in_scope",
+        "evidence": "Required broad checks exposed an existing CareerPublicDatasetContractBuilderTest projection assumption and one Pint style issue in app/Console/Commands; both were repaired within manifest-allowed test/command scope so the required broad checks can pass."
+      },
+      "scope": {
+        "status": "pass",
+        "evidence": "Changed files are confined to manifest-allowed command, career tests, generated career report, and docs/codex state paths; the PersonalityEnsure formatter-only change is in backend/app/Console/Commands/** and was required by the manifest Pint check."
+      },
+      "github": {
         "status": "pending",
-        "evidence": "Waiting for CAREER-FULL-PARITY-04 to merge before implementation."
+        "evidence": "PR #2046 opened; waiting for GitHub checks."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "8e4fbcfceb2e7e31946e88be55b4b84b514f7902",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2046",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -53782,6 +53820,21 @@
         "at": "2026-06-11T13:00:17Z",
         "status": "pending_dependency",
         "note": "Initialized from explicit CAREER-FULL-PARITY train authorization; implementation deferred until dependencies merge."
+      },
+      {
+        "at": "2026-06-11T16:15:14Z",
+        "status": "in_progress",
+        "note": "Started CAREER-FULL-PARITY-05 from latest origin/main after PR04 cleanup; implementing report-authorized zh display asset module subset normalizer."
+      },
+      {
+        "at": "2026-06-11T16:29:23Z",
+        "status": "local_checks_passed",
+        "note": "Implementation and required local checks passed; ready for scope validation, commit, push, and PR creation."
+      },
+      {
+        "at": "2026-06-11T16:31:26Z",
+        "status": "pr_open_checks_pending",
+        "note": "Opened PR #2046 from codex/career-full-parity-05 after local validation and scope validation passed."
       }
     ]
   },

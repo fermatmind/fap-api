@@ -1,0 +1,43 @@
+{
+  "pr_id": "CAREER-FULL-PARITY-05",
+  "validator_version": "career_full_parity_zh_module_normalization_readiness_v1",
+  "read_only": true,
+  "writes_database": false,
+  "cms_mutation": false,
+  "publish_allowed": false,
+  "deploy_allowed": false,
+  "source_report": "backend/docs/career/generated/career-full-parity-02-root-cause-manifest.json",
+  "source_root_cause": "zh_display_asset_present_but_module_subset",
+  "candidate_slug_count": 667,
+  "candidate_slug_sha256": "ceb96fe4e2025a8af0952e87e649850cf4ca426081b89e9842b63f42e909162c",
+  "missing_module_keys": [
+    "adjacent_career_comparison_table",
+    "ai_impact_table",
+    "career_risk_cards",
+    "career_snapshot_primary_locale",
+    "career_snapshot_secondary_locale",
+    "contract_project_risk_block",
+    "market_signal_card",
+    "personality_fit_block",
+    "related_next_pages",
+    "responsibilities_block",
+    "review_validity_card",
+    "secondary_cta",
+    "source_card",
+    "work_context_block"
+  ],
+  "normalizer_command": "php artisan career:normalize-legacy-display-assets --slugs=<explicit-comma-separated-subset> --module-subset-report=backend/docs/career/generated/career-full-parity-02-root-cause-manifest.json --dry-run --json",
+  "force_command_requires_explicit_production_approval": "php artisan career:normalize-legacy-display-assets --slugs=<explicit-comma-separated-subset> --module-subset-report=backend/docs/career/generated/career-full-parity-02-root-cause-manifest.json --force --backup-path=<target-json-backup> --json",
+  "normalization_policy": {
+    "scope": "Only slugs listed in source_report items with root_cause=zh_display_asset_present_but_module_subset are eligible.",
+    "module_key_source": "career_job_display_assets.component_order_json",
+    "public_copy_policy": "No translated editorial copy is generated or copied from English.",
+    "placeholder_policy": "Missing zh component-order modules are filled with explicit pending_reviewed_zh_content placeholders so parity gates can distinguish module contract shape from reviewed content availability."
+  },
+  "expected_effect_after_controlled_force_and_cache_warm": {
+    "en_has_modules_zh_missing_delta": -667,
+    "sitemap_changed": false,
+    "llms_changed": false,
+    "index_strategy_changed": false
+  }
+}

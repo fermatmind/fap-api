@@ -20,6 +20,11 @@ final class CareerNormalizeLegacyDisplayAssets extends Command
     private const ASSET_VERSION = 'v4.2';
 
     /** @var list<string> */
+    private const DISPLAY_ASSET_MODULE_SUBSET_ROOT_CAUSES = [
+        'zh_display_asset_present_but_module_subset',
+    ];
+
+    /** @var list<string> */
     private const AFFECTED_SLUGS = [
         'actors',
         'accountants-and-auditors',
@@ -89,6 +94,7 @@ final class CareerNormalizeLegacyDisplayAssets extends Command
     protected $signature = 'career:normalize-legacy-display-assets
         {--slugs= : Comma-separated explicit slug allowlist}
         {--lineage-workbook= : Optional workbook path used to backfill verified lineage metadata}
+        {--module-subset-report= : Optional CAREER-FULL-PARITY root-cause manifest authorizing zh module subset normalization}
         {--dry-run : Validate and report without writing}
         {--force : Required to update legacy display asset JSON fields}
         {--json : Emit machine-readable report}
@@ -113,6 +119,7 @@ final class CareerNormalizeLegacyDisplayAssets extends Command
             }
 
             $slugs = $this->requiredSlugs();
+            $moduleSubsetAllowlist = $this->moduleSubsetAllowlist();
             try {
                 $assets = $this->assetsBySlug($slugs);
             } catch (QueryException $queryException) {
@@ -141,7 +148,7 @@ final class CareerNormalizeLegacyDisplayAssets extends Command
                     continue;
                 }
 
-                $item = $this->planItem($asset);
+                $item = $this->planItem($asset, in_array($slug, $moduleSubsetAllowlist, true));
                 $errors = array_merge($errors, array_map(
                     static fn (string $error): string => "{$slug}: {$error}",
                     $item['errors'],
@@ -152,6 +159,8 @@ final class CareerNormalizeLegacyDisplayAssets extends Command
             $report = array_merge($report, $this->summarize($items), [
                 'mode' => $force ? 'force' : 'dry_run',
                 'requested_slugs' => $slugs,
+                'module_subset_report' => $this->moduleSubsetReportPath(),
+                'module_subset_authorized_count' => count($moduleSubsetAllowlist),
                 'items' => $items,
                 'validated_count' => count($items),
             ]);
@@ -240,7 +249,8 @@ final class CareerNormalizeLegacyDisplayAssets extends Command
 
         $unsupported = array_values(array_filter(
             $parts,
-            static fn (string $slug): bool => ! in_array($slug, self::AFFECTED_SLUGS, true),
+            fn (string $slug): bool => ! in_array($slug, self::AFFECTED_SLUGS, true)
+                && ! in_array($slug, $this->moduleSubsetAllowlist(), true),
         ));
 
         if ($unsupported !== []) {
@@ -248,6 +258,52 @@ final class CareerNormalizeLegacyDisplayAssets extends Command
         }
 
         return $parts;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function moduleSubsetAllowlist(): array
+    {
+        $path = $this->moduleSubsetReportPath();
+        if ($path === null) {
+            return [];
+        }
+
+        if (! is_file($path)) {
+            throw new RuntimeException('--module-subset-report must point to an existing JSON report.');
+        }
+
+        $payload = json_decode((string) file_get_contents($path), true);
+        if (! is_array($payload)) {
+            throw new RuntimeException('--module-subset-report must be valid JSON.');
+        }
+
+        $items = is_array($payload['items'] ?? null) ? $payload['items'] : [];
+        $slugs = [];
+
+        foreach ($items as $item) {
+            if (! is_array($item)) {
+                continue;
+            }
+
+            $slug = strtolower(trim((string) ($item['slug'] ?? '')));
+            $rootCause = (string) ($item['root_cause'] ?? '');
+            if ($slug === '' || ! in_array($rootCause, self::DISPLAY_ASSET_MODULE_SUBSET_ROOT_CAUSES, true)) {
+                continue;
+            }
+
+            $slugs[] = $slug;
+        }
+
+        return array_values(array_unique($slugs));
+    }
+
+    private function moduleSubsetReportPath(): ?string
+    {
+        $path = trim((string) $this->option('module-subset-report'));
+
+        return $path === '' ? null : $path;
     }
 
     /**
@@ -267,7 +323,7 @@ final class CareerNormalizeLegacyDisplayAssets extends Command
     /**
      * @return array<string, mixed>
      */
-    private function planItem(CareerJobDisplayAsset $asset): array
+    private function planItem(CareerJobDisplayAsset $asset, bool $moduleSubsetAuthorized): array
     {
         $slug = (string) $asset->canonical_slug;
         $beforePage = $this->arrayValue($asset->page_payload_json);
@@ -280,6 +336,8 @@ final class CareerNormalizeLegacyDisplayAssets extends Command
         $errors = [];
         $actorShapeNormalized = false;
         $releaseGatesRemoved = 0;
+        $modulePlaceholdersAdded = 0;
+        $moduleSubsetLocales = [];
         $lineageBackfilled = false;
         $lineageHold = ! array_key_exists($slug, self::LINEAGE_SAFE_ROWS);
 
@@ -314,6 +372,15 @@ final class CareerNormalizeLegacyDisplayAssets extends Command
             );
             $errors = array_merge($errors, $lineageErrors);
             $patches = array_merge($patches, $lineagePatches);
+        }
+
+        if ($moduleSubsetAuthorized) {
+            [$afterPage, $modulePlaceholdersAdded, $moduleSubsetLocales, $moduleErrors, $modulePatches] = $this->normalizeModuleSubset(
+                $afterPage,
+                $asset,
+            );
+            $errors = array_merge($errors, $moduleErrors);
+            $patches = array_merge($patches, $modulePatches);
         }
 
         [$afterStructuredData, $productSchemasRemoved, $productSchemaPatches] = $this->removeProductSchemas(
@@ -352,6 +419,9 @@ final class CareerNormalizeLegacyDisplayAssets extends Command
             'would_update' => $wouldUpdate,
             'actor_shape_normalized' => $actorShapeNormalized,
             'release_gates_removed_count' => $releaseGatesRemoved,
+            'module_subset_authorized' => $moduleSubsetAuthorized,
+            'module_placeholders_added_count' => $modulePlaceholdersAdded,
+            'module_subset_locales' => $moduleSubsetLocales,
             'lineage_backfilled' => $lineageBackfilled,
             'lineage_hold' => $lineageHold && ! $lineageBackfilled,
             'Product_schema_removed_count' => $productSchemasRemoved,
@@ -371,6 +441,88 @@ final class CareerNormalizeLegacyDisplayAssets extends Command
                 'guard_hashes' => $this->guardHashes($asset),
             ],
             'errors' => $errors,
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $page
+     * @return array{array<string, mixed>, int, list<string>, list<string>, list<array<string, mixed>>}
+     */
+    private function normalizeModuleSubset(array $page, CareerJobDisplayAsset $asset): array
+    {
+        $componentOrder = $this->componentOrder($asset);
+        if ($componentOrder === []) {
+            return [$page, 0, [], ['component_order_json must contain a non-empty list before module subset normalization.'], []];
+        }
+
+        $errors = [];
+        $patches = [];
+        $added = 0;
+        $locales = [];
+
+        foreach (['zh'] as $locale) {
+            $path = "page.{$locale}";
+            $content = data_get($page, $path);
+            if (! is_array($content)) {
+                $errors[] = "{$path} must be an array before module subset normalization.";
+
+                continue;
+            }
+
+            $missing = [];
+            foreach ($componentOrder as $moduleKey) {
+                if (array_key_exists($moduleKey, $content)) {
+                    continue;
+                }
+
+                $content[$moduleKey] = $this->placeholderModule($moduleKey);
+                $missing[] = $moduleKey;
+            }
+
+            if ($missing === []) {
+                continue;
+            }
+
+            data_set($page, $path, $content);
+            $added += count($missing);
+            $locales[] = $locale;
+            $patches[] = [
+                'path' => '$.page_payload_json.'.str_replace('.', '.', $path),
+                'operation' => 'add_missing_component_order_module_placeholders',
+                'added_module_count' => count($missing),
+                'added_modules' => $missing,
+                'placeholder_policy' => 'no_translated_editorial_copy_generated',
+            ];
+        }
+
+        return [$page, $added, array_values(array_unique($locales)), $errors, $patches];
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function componentOrder(CareerJobDisplayAsset $asset): array
+    {
+        $componentOrder = $this->arrayValue($asset->component_order_json);
+
+        return array_values(array_filter(array_map(
+            static fn (mixed $moduleKey): string => is_string($moduleKey) ? trim($moduleKey) : '',
+            $componentOrder,
+        ), static fn (string $moduleKey): bool => $moduleKey !== ''));
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function placeholderModule(string $moduleKey): array
+    {
+        return [
+            'module_key' => $moduleKey,
+            'module_state' => 'pending_reviewed_zh_content',
+            'content_available' => false,
+            'source' => 'component_order_contract',
+            'normalizer_version' => self::VALIDATOR_VERSION,
+            'placeholder_policy' => 'no_translated_editorial_copy_generated',
         ];
     }
 
@@ -553,6 +705,8 @@ final class CareerNormalizeLegacyDisplayAssets extends Command
             'lineage_backfilled_count' => count(array_filter($items, static fn (array $item): bool => ($item['lineage_backfilled'] ?? false) === true)),
             'lineage_hold_count' => count(array_filter($items, static fn (array $item): bool => ($item['lineage_hold'] ?? false) === true)),
             'release_gates_removed_count' => array_sum(array_map(static fn (array $item): int => (int) ($item['release_gates_removed_count'] ?? 0), $items)),
+            'module_placeholders_added_count' => array_sum(array_map(static fn (array $item): int => (int) ($item['module_placeholders_added_count'] ?? 0), $items)),
+            'module_subset_authorized_count' => count(array_filter($items, static fn (array $item): bool => ($item['module_subset_authorized'] ?? false) === true)),
             'Product_schema_removed_count' => array_sum(array_map(static fn (array $item): int => (int) ($item['Product_schema_removed_count'] ?? 0), $items)),
             'actor_shape_normalized_count' => count(array_filter($items, static fn (array $item): bool => ($item['actor_shape_normalized'] ?? false) === true)),
             'failed_count' => count(array_filter($items, static fn (array $item): bool => ($item['errors'] ?? []) !== [])),
@@ -579,6 +733,9 @@ final class CareerNormalizeLegacyDisplayAssets extends Command
             'lineage_backfilled_count' => 0,
             'lineage_hold_count' => 0,
             'release_gates_removed_count' => 0,
+            'module_placeholders_added_count' => 0,
+            'module_subset_authorized_count' => 0,
+            'module_subset_report' => null,
             'Product_schema_removed_count' => 0,
             'actor_shape_normalized_count' => 0,
             'did_write' => false,
