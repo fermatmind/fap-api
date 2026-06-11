@@ -52644,7 +52644,7 @@
     "repo": "fap-api",
     "branch": "codex/career-zh-parity-fix-01",
     "base": "origin/main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "career_zh_parity_fix",
     "title": "CAREER-ZH-PARITY-FIX-01: fix(career): compact zh parity workbook readiness",
     "depends_on": [],
@@ -52718,14 +52718,18 @@
       "post_github_scope_validation": {
         "status": "pass",
         "evidence": "After GitHub checks passed, git diff --name-only origin/main...HEAD remained confined to the 7 scoped PR01 files and git diff --check origin/main...HEAD passed."
+      },
+      "post_merge_cleanup": {
+        "status": "pass",
+        "evidence": "PR #2025 is merged; origin/main and local main contain merge commit 12fab79a192c5f0537f2f61fbdc6614653fea9a9; local branch codex/career-zh-parity-fix-01 and remote branch were deleted during cleanup."
       }
     },
     "failure_reason": null,
-    "commit_sha": "9150b0d70769ec72d89016611396698e07aa7caf",
+    "commit_sha": "12fab79a192c5f0537f2f61fbdc6614653fea9a9",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2025",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-11T02:45:32Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "sidecar_issues": [],
     "transitions": [
       {
@@ -52752,6 +52756,11 @@
         "at": "2026-06-11T02:39:11Z",
         "status": "ready_to_merge",
         "note": "GitHub checks passed and PR #2025 reported mergeStateStatus=CLEAN for head 9150b0d70769ec72d89016611396698e07aa7caf."
+      },
+      {
+        "at": "2026-06-11T03:18:00Z",
+        "status": "merged",
+        "note": "Reconciled PR01 merged state inside CAREER-ZH-PARITY-FIX-02 metadata scope after confirming merge commit 12fab79a192c5f0537f2f61fbdc6614653fea9a9 on origin/main."
       }
     ]
   },
@@ -52759,7 +52768,7 @@
     "repo": "fap-api",
     "branch": "codex/career-zh-parity-fix-02",
     "base": "origin/main",
-    "status": "pending_dependency",
+    "status": "local_checks_passed_with_external_sidecar",
     "train_scope": "career_zh_parity_fix",
     "title": "CAREER-ZH-PARITY-FIX-02: fix(career): repair reviewed zh display workbook contract",
     "depends_on": [
@@ -52771,22 +52780,84 @@
         "evidence": "User explicitly authorized adding and executing CAREER-ZH-PARITY-FIX-01 through CAREER-ZH-PARITY-FIX-06, including fap-api docs/codex metadata updates, on 2026-06-11."
       },
       "dependency": {
-        "status": "pending",
-        "evidence": "Waiting for CAREER-ZH-PARITY-FIX-01 to merge."
+        "status": "pass",
+        "evidence": "CAREER-ZH-PARITY-FIX-01 merged as PR #2025; origin/main contains merge commit 12fab79a192c5f0537f2f61fbdc6614653fea9a9."
+      },
+      "implementation": {
+        "status": "pass",
+        "evidence": "Added career:repair-display-workbook-contract and CareerDisplayWorkbookContractRepairer. Command defaults to dry-run, writes no DB/CMS data, and only writes a repaired XLSX when --execute and --output are provided."
+      },
+      "php_lint": {
+        "status": "pass",
+        "evidence": "php -l passed for CareerRepairDisplayWorkbookContract.php, CareerDisplayWorkbookContractRepairer.php, and CareerRepairDisplayWorkbookContractCommandTest.php."
+      },
+      "focused_tests": {
+        "status": "pass",
+        "evidence": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=\":memory:\" php artisan test tests/Feature/Console/CareerRepairDisplayWorkbookContractCommandTest.php --no-ansi passed with existing file_get_contents warnings and 26 assertions."
+      },
+      "manifest_broad_unit_suite": {
+        "status": "external_blocker_not_introduced",
+        "evidence": "Manifest broad command cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=\":memory:\" php artisan test tests/Feature/Console/CareerRepairDisplayWorkbookContractCommandTest.php tests/Unit/Services/Career --no-ansi failed on existing Career unit failures, dominated by FirstWavePublishReadyValidator::validationMemoKey missing. Same FirstWavePublishReadyValidatorTest fails on current main, proving the blocker is not introduced by PR02."
+      },
+      "real_workbook_dry_run": {
+        "status": "pass",
+        "evidence": "career:repair-display-workbook-contract dry-run against 第九版_d23b_schema_repaired.xlsx produced backend/docs/career/generated/career-zh-parity-fix-02-contract-repair-report.json: total_rows=2786, changed_rows=2579, changed_cells=4981, writes_database=false, cms_mutation=false."
+      },
+      "real_workbook_execute_probe": {
+        "status": "pass",
+        "evidence": "Temporary --execute output /private/tmp/career-zh-parity-fix-02-repaired.xlsx wrote repaired_artifact_written with changed_rows=2579 and changed_cells=4981; second dry-run against the repaired xlsx returned already_clean with changed_rows=0 and changed_cells=0. Temporary xlsx was not committed."
+      },
+      "format": {
+        "status": "pass",
+        "evidence": "cd backend && ./vendor/bin/pint --test app/Console/Commands/CareerRepairDisplayWorkbookContract.php app/Services/Career/Import/CareerDisplayWorkbookContractRepairer.php tests/Feature/Console/CareerRepairDisplayWorkbookContractCommandTest.php passed."
+      },
+      "metadata": {
+        "status": "pass",
+        "evidence": "python3 -m json.tool passed for docs/codex/pr-train-state.json and backend/docs/career/generated/career-zh-parity-fix-02-contract-repair-report.json; docs/codex/pr-train.yaml parsed with Ruby YAML."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are confined to PR02 scoped command, import service, focused test, generated career report, and docs/codex metadata."
+      },
+      "diff_check": {
+        "status": "pass",
+        "evidence": "git diff --check passed before staging; git diff --cached --check will run after path-limited staging."
+      },
+      "cached_diff_check": {
+        "status": "pass",
+        "evidence": "git diff --cached --check passed after path-limited staging of PR02 scoped files."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
+    "commit_sha": "8edbca47bcf77f6bc797784b3823a624ff2de282",
     "pr_url": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
-    "sidecar_issues": [],
+    "sidecar_issues": [
+      {
+        "id": "CAREER-ZH-PARITY-FIX-02-SIDECAR-01",
+        "status": "open",
+        "severity": "external",
+        "title": "Existing Career unit suite failure: FirstWavePublishReadyValidator::validationMemoKey missing",
+        "evidence": "tests/Unit/Services/Career/FirstWavePublishReadyValidatorTest.php fails on current main with Call to undefined method App\\Domain\\Career\\Publish\\FirstWavePublishReadyValidator::validationMemoKey(); broad tests/Unit/Services/Career manifest command therefore fails for reasons outside PR02 scope."
+      }
+    ],
     "transitions": [
       {
         "at": "2026-06-11T02:19:47Z",
         "status": "pending_dependency",
         "note": "Future workbook contract repair entry initialized only; implementation deferred until CAREER-ZH-PARITY-FIX-01 is merged."
+      },
+      {
+        "at": "2026-06-11T03:18:00Z",
+        "status": "local_checks_passed_with_external_sidecar",
+        "note": "Implemented scoped workbook contract repair command; php lint, focused feature test, real workbook dry-run, temporary execute+second-pass probe, Pint, metadata validation, scope validation, and diff check passed. Broad Career unit suite failure was reproduced on main and recorded as external sidecar."
+      },
+      {
+        "at": "2026-06-11T03:24:00Z",
+        "status": "committed",
+        "note": "Created local commit 8edbca47bcf77f6bc797784b3823a624ff2de282 after path-limited staging and cached diff check."
       }
     ]
   },
