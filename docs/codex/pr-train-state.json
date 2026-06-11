@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-11T04:01:13Z",
+  "updated_at": "2026-06-11T04:06:00Z",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -52904,7 +52904,7 @@
     "repo": "fap-api",
     "branch": "codex/career-zh-parity-fix-03",
     "base": "origin/main",
-    "status": "local_checks_passed_with_external_sidecar",
+    "status": "pr_open",
     "train_scope": "career_zh_parity_fix",
     "title": "CAREER-ZH-PARITY-FIX-03: feat(career): support authority-manifest zh display import",
     "depends_on": [
@@ -52941,8 +52941,8 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "bf193e4045cd9644c0341b89073f1fb0e7b1ece6",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2028",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -52967,6 +52967,12 @@
         "from": "pending_dependency",
         "to": "local_checks_passed_with_external_sidecar",
         "note": "Implemented authority manifest row-hash validation for zh display import. Focused local checks passed; broad Career unit suite failure is external to PR03 and recorded as sidecar."
+      },
+      {
+        "at": "2026-06-11T12:06:00+08:00",
+        "from": "local_checks_passed_with_external_sidecar",
+        "to": "pr_open",
+        "note": "Opened GitHub PR #2028 after scoped implementation, focused local validation, and external broad Career unit sidecar recording."
       }
     ]
   },
