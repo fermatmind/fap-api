@@ -24477,3 +24477,345 @@ prs:
     url_submission: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: CAREER-FULL-PARITY-01
+    repo: fap-api
+    depends_on:
+      - CAREER-ZH-PARITY-LIVE-01
+    branch: codex/career-full-parity-01
+    title: "CAREER-FULL-PARITY-01: fix(career): harden zh display parity audit failures"
+    train_scope: career_full_parity
+    status: user_authorized
+    scope:
+      - Treat HTTP pool/detail connection exceptions as per-slug API failures instead of aborting the full audit.
+      - Preserve full 1046-slug detail output and record detail API error evidence.
+      - Commit a fresh generated production read-only report.
+    allowed_paths:
+      - backend/app/Console/Commands/CareerAuditZhDisplayParity.php
+      - backend/tests/Feature/Console/CareerAuditZhDisplayParityCommandTest.php
+      - backend/docs/career/generated/career-full-parity-01-live-report.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Import display assets, publish content, mutate database/cache, deploy, change sitemap/llms/index strategy, or modify fap-web.
+    validation:
+      - php -l backend/app/Console/Commands/CareerAuditZhDisplayParity.php
+      - php -l backend/tests/Feature/Console/CareerAuditZhDisplayParityCommandTest.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Console/CareerAuditZhDisplayParityCommandTest.php --no-ansi
+      - cd backend && php artisan career:audit-zh-display-parity --timeout=20 --batch-size=40 --sample-limit=30 --output=docs/career/generated/career-full-parity-01-live-report.json || test $? -eq 1
+      - python3 -m json.tool backend/docs/career/generated/career-full-parity-01-live-report.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: CAREER-FULL-PARITY-02
+    repo: fap-api
+    depends_on:
+      - CAREER-FULL-PARITY-01
+    branch: codex/career-full-parity-02
+    title: "CAREER-FULL-PARITY-02: chore(career): generate full zh parity root-cause manifest"
+    train_scope: career_full_parity
+    status: user_authorized
+    scope:
+      - Generate the current 1046-slug root-cause manifest with shell, zh subset, unknown asset evidence, and zh extra/en subset buckets.
+      - Include missing modules, asset status, and cache-status recommendation for every abnormal slug.
+    allowed_paths:
+      - backend/app/Console/Commands/CareerAuditZhDisplayParity.php
+      - backend/tests/Feature/Console/CareerAuditZhDisplayParityCommandTest.php
+      - backend/docs/career/generated/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - php -l backend/app/Console/Commands/CareerAuditZhDisplayParity.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Console/CareerAuditZhDisplayParityCommandTest.php --no-ansi
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: CAREER-FULL-PARITY-03
+    repo: fap-api
+    depends_on:
+      - CAREER-FULL-PARITY-02
+    branch: codex/career-full-parity-03
+    title: "CAREER-FULL-PARITY-03: fix(career): repair blocked workbook asset contracts"
+    train_scope: career_full_parity
+    status: user_authorized
+    scope:
+      - Add workbook/content-asset repair support for blocked career display rows.
+      - Split auto-repairable rows from manual Chinese Title/H1 review rows and validate dry-run output.
+    allowed_paths:
+      - backend/app/Console/Commands/**
+      - backend/app/Services/Career/**
+      - backend/tests/Feature/Console/**
+      - backend/tests/Feature/Career/**
+      - backend/docs/career/generated/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Console tests/Feature/Career --no-ansi
+      - cd backend && ./vendor/bin/pint --test app/Console/Commands app/Services/Career tests/Feature/Console tests/Feature/Career
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: CAREER-FULL-PARITY-04
+    repo: fap-api
+    depends_on:
+      - CAREER-FULL-PARITY-03
+    branch: codex/career-full-parity-04
+    title: "CAREER-FULL-PARITY-04: chore(career): prepare runtime shell zh asset import"
+    train_scope: career_full_parity
+    status: user_authorized
+    scope:
+      - Prepare controlled import manifest, authority crosswalk SOP, cache SOP, and reports for remaining runtime shell zh display assets.
+      - Keep production writes behind explicit operator approval.
+    allowed_paths:
+      - backend/app/Console/Commands/**
+      - backend/app/Services/Career/**
+      - backend/tests/Feature/Console/**
+      - backend/tests/Feature/Career/**
+      - backend/docs/career/generated/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Console tests/Feature/Career --no-ansi
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: CAREER-FULL-PARITY-05
+    repo: fap-api
+    depends_on:
+      - CAREER-FULL-PARITY-04
+    branch: codex/career-full-parity-05
+    title: "CAREER-FULL-PARITY-05: fix(career): normalize zh display asset module subsets"
+    train_scope: career_full_parity
+    status: user_authorized
+    scope:
+      - Normalize legacy zh display assets so validated workbook fields produce the standard module template.
+      - Add importer/normalizer tests for module parity.
+    allowed_paths:
+      - backend/app/Console/Commands/**
+      - backend/app/Services/Career/**
+      - backend/tests/Feature/Console/**
+      - backend/tests/Feature/Career/**
+      - backend/tests/Unit/Services/Career/**
+      - backend/docs/career/generated/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Console tests/Feature/Career tests/Unit/Services/Career --no-ansi
+      - cd backend && ./vendor/bin/pint --test app/Console/Commands app/Services/Career tests/Feature/Console tests/Feature/Career tests/Unit/Services/Career
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: CAREER-FULL-PARITY-06
+    repo: fap-api
+    depends_on:
+      - CAREER-FULL-PARITY-05
+    branch: codex/career-full-parity-06
+    title: "CAREER-FULL-PARITY-06: fix(career): align en display asset runtime bundle selection"
+    train_scope: career_full_parity
+    status: user_authorized
+    scope:
+      - Align EN/ZH career detail bundle selection so both locales can use the same display-asset-backed module set when available.
+      - Eliminate zh_has_modules_en_missing without changing public index strategy.
+    allowed_paths:
+      - backend/app/Services/Career/**
+      - backend/tests/Feature/Career/**
+      - backend/tests/Unit/Services/Career/**
+      - backend/docs/career/generated/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Career tests/Unit/Services/Career --no-ansi
+      - cd backend && ./vendor/bin/pint --test app/Services/Career tests/Feature/Career tests/Unit/Services/Career
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: CAREER-FULL-PARITY-07
+    repo: fap-api
+    depends_on:
+      - CAREER-FULL-PARITY-06
+    branch: codex/career-full-parity-07
+    title: "CAREER-FULL-PARITY-07: chore(career): warm en zh career detail caches"
+    train_scope: career_full_parity
+    status: user_authorized
+    scope:
+      - Add manifest-based EN/ZH career job detail cache forget/warm reporting.
+      - Support full 1046 cache convergence after controlled imports.
+    allowed_paths:
+      - backend/app/Console/Commands/**
+      - backend/app/Services/Career/**
+      - backend/tests/Feature/Console/**
+      - backend/tests/Feature/Career/**
+      - backend/docs/career/generated/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Console tests/Feature/Career --no-ansi
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: CAREER-FULL-PARITY-08
+    repo: fap-api
+    depends_on:
+      - CAREER-FULL-PARITY-07
+    branch: codex/career-full-parity-08
+    title: "CAREER-FULL-PARITY-08: test(career): enforce live zh parity gate"
+    train_scope: career_full_parity
+    status: user_authorized
+    scope:
+      - Add strict assert-live-parity gate requiring zero runtime shell, module mismatch, API failure, and index mismatch.
+      - Wire generated ops report output for CI/publish readiness.
+    allowed_paths:
+      - backend/app/Console/Commands/CareerAuditZhDisplayParity.php
+      - backend/tests/Feature/Console/CareerAuditZhDisplayParityCommandTest.php
+      - backend/docs/career/generated/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - php -l backend/app/Console/Commands/CareerAuditZhDisplayParity.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Console/CareerAuditZhDisplayParityCommandTest.php --no-ansi
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: CAREER-FULL-PARITY-09
+    repo: fap-api
+    depends_on:
+      - CAREER-FULL-PARITY-08
+    branch: codex/career-full-parity-09
+    title: "CAREER-FULL-PARITY-09: fix(career): block invalid display asset publishing"
+    train_scope: career_full_parity
+    status: user_authorized
+    scope:
+      - Enforce CMS/import validation for Source_Page_Type, Product schema exclusion, EN/ZH module parity, and Chinese review state.
+      - Add Filament/Ops or importer validation tests as applicable.
+    allowed_paths:
+      - backend/app/Filament/**
+      - backend/app/Console/Commands/**
+      - backend/app/Services/Career/**
+      - backend/tests/Feature/Console/**
+      - backend/tests/Feature/Career/**
+      - backend/tests/Feature/Filament/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Console tests/Feature/Career tests/Feature/Filament --no-ansi
+      - cd backend && ./vendor/bin/pint --test app/Filament app/Console/Commands app/Services/Career tests/Feature/Console tests/Feature/Career tests/Feature/Filament
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: CAREER-FULL-PARITY-10
+    repo: fap-api
+    depends_on:
+      - CAREER-FULL-PARITY-09
+    branch: codex/career-full-parity-10
+    title: "CAREER-FULL-PARITY-10: chore(career): certify final production career parity"
+    train_scope: career_full_parity
+    status: user_authorized
+    scope:
+      - Run final production 1046-slug live gate and commit the final generated report.
+      - Confirm same_module_set=1046, runtime_shell_count=0, module_mismatch_count=0, API/index failure=0.
+    allowed_paths:
+      - backend/app/Console/Commands/CareerAuditZhDisplayParity.php
+      - backend/tests/Feature/Console/CareerAuditZhDisplayParityCommandTest.php
+      - backend/docs/career/generated/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - php -l backend/app/Console/Commands/CareerAuditZhDisplayParity.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Console/CareerAuditZhDisplayParityCommandTest.php --no-ansi
+      - cd backend && php artisan career:audit-zh-display-parity --assert-live-parity --output=docs/career/generated/career-full-parity-10-final-report.json
+      - python3 -m json.tool backend/docs/career/generated/career-full-parity-10-final-report.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend

@@ -119,8 +119,18 @@ final class CareerAuditZhDisplayParity extends Command
             'en' => $this->slugsFromIndex($en['json']),
             'zh-CN' => $this->slugsFromIndex($zh['json']),
             'failures' => array_values(array_filter([
-                $en['ok'] ? null : ['locale' => 'en', 'status' => $en['status'], 'url' => $en['url']],
-                $zh['ok'] ? null : ['locale' => 'zh-CN', 'status' => $zh['status'], 'url' => $zh['url']],
+                $en['ok'] ? null : [
+                    'locale' => 'en',
+                    'status' => $en['status'],
+                    'url' => $en['url'],
+                    'error' => $en['error'] ?? null,
+                ],
+                $zh['ok'] ? null : [
+                    'locale' => 'zh-CN',
+                    'status' => $zh['status'],
+                    'url' => $zh['url'],
+                    'error' => $zh['error'] ?? null,
+                ],
             ])),
         ];
     }
@@ -133,22 +143,26 @@ final class CareerAuditZhDisplayParity extends Command
     {
         $items = [];
         foreach (array_chunk($slugs, $batchSize) as $chunk) {
-            /** @var array<string, Response> $responses */
-            $responses = Http::pool(function (Pool $pool) use ($apiBase, $chunk, $timeout): array {
-                $requests = [];
-                foreach ($chunk as $slug) {
-                    $requests[$slug.'|en'] = $pool->as($slug.'|en')
-                        ->timeout($timeout)
-                        ->acceptJson()
-                        ->get($apiBase.'/'.$slug, ['locale' => 'en']);
-                    $requests[$slug.'|zh-CN'] = $pool->as($slug.'|zh-CN')
-                        ->timeout($timeout)
-                        ->acceptJson()
-                        ->get($apiBase.'/'.$slug, ['locale' => 'zh-CN']);
-                }
+            /** @var array<string, Response|Throwable> $responses */
+            try {
+                $responses = Http::pool(function (Pool $pool) use ($apiBase, $chunk, $timeout): array {
+                    $requests = [];
+                    foreach ($chunk as $slug) {
+                        $requests[$slug.'|en'] = $pool->as($slug.'|en')
+                            ->timeout($timeout)
+                            ->acceptJson()
+                            ->get($apiBase.'/'.$slug, ['locale' => 'en']);
+                        $requests[$slug.'|zh-CN'] = $pool->as($slug.'|zh-CN')
+                            ->timeout($timeout)
+                            ->acceptJson()
+                            ->get($apiBase.'/'.$slug, ['locale' => 'zh-CN']);
+                    }
 
-                return $requests;
-            });
+                    return $requests;
+                });
+            } catch (Throwable) {
+                $responses = $this->fetchDetailChunkSequentially($apiBase, $chunk, $timeout);
+            }
 
             foreach ($chunk as $slug) {
                 $items[] = $this->auditSlugFromResponses(
@@ -161,6 +175,29 @@ final class CareerAuditZhDisplayParity extends Command
         }
 
         return $items;
+    }
+
+    /**
+     * @param  list<string>  $chunk
+     * @return array<string, Response|Throwable>
+     */
+    private function fetchDetailChunkSequentially(string $apiBase, array $chunk, int $timeout): array
+    {
+        $responses = [];
+        foreach ($chunk as $slug) {
+            foreach (['en', 'zh-CN'] as $locale) {
+                $key = $slug.'|'.$locale;
+                try {
+                    $responses[$key] = Http::timeout($timeout)
+                        ->acceptJson()
+                        ->get($apiBase.'/'.$slug, ['locale' => $locale]);
+                } catch (Throwable $throwable) {
+                    $responses[$key] = $throwable;
+                }
+            }
+        }
+
+        return $responses;
     }
 
     /**
@@ -183,6 +220,10 @@ final class CareerAuditZhDisplayParity extends Command
                 'en' => $en['status'],
                 'zh-CN' => $zh['status'],
             ],
+            'api_errors' => array_values(array_filter([
+                $this->apiErrorRow('en', $en),
+                $this->apiErrorRow('zh-CN', $zh),
+            ])),
             'sample_urls' => [
                 'en' => $siteBase.'/en/career/jobs/'.$slug,
                 'zh' => $siteBase.'/zh/career/jobs/'.$slug,
@@ -216,9 +257,11 @@ final class CareerAuditZhDisplayParity extends Command
     private function summary(array $items, array $index, int $sampleLimit): array
     {
         $classifications = [];
+        $detailApiErrorCount = 0;
         foreach ($items as $item) {
             $classification = (string) ($item['classification'] ?? 'unknown');
             $classifications[$classification] = ($classifications[$classification] ?? 0) + 1;
+            $detailApiErrorCount += count((array) ($item['api_errors'] ?? []));
         }
 
         $sampleByClassification = [];
@@ -231,6 +274,7 @@ final class CareerAuditZhDisplayParity extends Command
                     'sample_urls' => $item['sample_urls'],
                     'module_counts' => $item['module_counts'],
                     'zh_gate_reasons' => $item['zh_gate_reasons'],
+                    'api_errors' => $item['api_errors'] ?? [],
                 ];
             }
         }
@@ -254,6 +298,7 @@ final class CareerAuditZhDisplayParity extends Command
                 + ($classifications['en_200_zh_not_200'] ?? 0)
                 + ($classifications['zh_200_en_not_200'] ?? 0)
                 + ($classifications['both_missing_or_failed'] ?? 0),
+            'detail_api_error_count' => $detailApiErrorCount,
             'classification_counts' => $classifications,
             'index_failures' => $index['failures'] ?? [],
             'samples' => $sampleByClassification,
@@ -300,6 +345,7 @@ final class CareerAuditZhDisplayParity extends Command
                     'sample_urls' => $item['sample_urls'] ?? [],
                     'missing_modules' => $item['missing_modules'] ?? [],
                     'zh_gate_reasons' => $item['zh_gate_reasons'] ?? [],
+                    'api_errors' => $item['api_errors'] ?? [],
                     'zh_public_asset_state' => $item['zh_public_asset_state'] ?? [],
                     'cache_stale_assessment' => $item['cache_stale_assessment'] ?? [],
                 ];
@@ -669,27 +715,83 @@ final class CareerAuditZhDisplayParity extends Command
     }
 
     /**
-     * @return array{ok: bool, status: int|null, json: array<string, mixed>|null, url: string}
+     * @param  array{ok: bool, status: int|null, json: array<string, mixed>|null, url: string, error: array<string, string>|null}  $result
+     * @return array<string, mixed>|null
      */
-    private function fetchJson(string $url, array $query, int $timeout): array
+    private function apiErrorRow(string $locale, array $result): ?array
     {
-        $response = Http::timeout($timeout)->acceptJson()->get($url, $query);
-        $fullUrl = $this->urlWithQuery($url, $query);
+        $error = $result['error'] ?? null;
+        if (! is_array($error)) {
+            return null;
+        }
 
-        return $this->responseResult($response, $fullUrl);
+        return [
+            'locale' => $locale,
+            'url' => $result['url'],
+            'status' => $result['status'],
+            'type' => (string) ($error['type'] ?? 'unknown'),
+            'message' => (string) ($error['message'] ?? ''),
+        ];
     }
 
     /**
-     * @return array{ok: bool, status: int|null, json: array<string, mixed>|null, url: string}
+     * @return array{ok: bool, status: int|null, json: array<string, mixed>|null, url: string, error: array<string, string>|null}
      */
-    private function responseResult(?Response $response, string $fullUrl): array
+    private function fetchJson(string $url, array $query, int $timeout): array
     {
+        $fullUrl = $this->urlWithQuery($url, $query);
+
+        try {
+            $response = Http::timeout($timeout)->acceptJson()->get($url, $query);
+
+            return $this->responseResult($response, $fullUrl);
+        } catch (Throwable $throwable) {
+            return $this->responseResult($throwable, $fullUrl);
+        }
+    }
+
+    /**
+     * @return array{ok: bool, status: int|null, json: array<string, mixed>|null, url: string, error: array<string, string>|null}
+     */
+    private function responseResult(mixed $response, string $fullUrl): array
+    {
+        if ($response instanceof Response) {
+            return [
+                'ok' => $response->successful(),
+                'status' => $response->status(),
+                'json' => $response->successful() ? $this->safeJson($response) : null,
+                'url' => $fullUrl,
+                'error' => null,
+            ];
+        }
+
+        if ($response instanceof Throwable) {
+            return [
+                'ok' => false,
+                'status' => null,
+                'json' => null,
+                'url' => $fullUrl,
+                'error' => [
+                    'type' => class_basename($response),
+                    'message' => $this->safeErrorMessage($response),
+                ],
+            ];
+        }
+
         return [
-            'ok' => $response?->successful() === true,
-            'status' => $response?->status(),
-            'json' => $response?->successful() === true ? $this->safeJson($response) : null,
+            'ok' => false,
+            'status' => null,
+            'json' => null,
             'url' => $fullUrl,
+            'error' => null,
         ];
+    }
+
+    private function safeErrorMessage(Throwable $throwable): string
+    {
+        $message = trim($throwable->getMessage());
+
+        return mb_substr($message === '' ? 'HTTP request failed.' : $message, 0, 500);
     }
 
     /**

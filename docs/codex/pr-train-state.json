@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-11T04:10:30Z",
+  "updated_at": "2026-06-11T13:13:09Z",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -53285,7 +53285,7 @@
     "repo": "fap-api",
     "branch": "codex/career-zh-parity-live-01",
     "base": "origin/main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "career_zh_parity_live",
     "title": "CAREER-ZH-PARITY-LIVE-01: chore(career): rescan zh parity live root causes",
     "depends_on": [
@@ -53318,13 +53318,17 @@
       "github_checks": {
         "status": "pass",
         "evidence": "GitHub checks passed for PR #2033 head aafff42fb52bd16ccbac8992fd0f136ae80cafbf: hygiene, supply-chain, content-pack-build-validate, Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
+      },
+      "merge_containment": {
+        "status": "pass",
+        "evidence": "PR #2033 is MERGED and origin/main contains merge commit 88a8ad133e3f1df935e2090d27650fef9b948286; remote branch is absent after fetch --prune. Local cleanup for its prior isolated worktree was not executed in this PR01 worktree."
       }
     },
     "failure_reason": null,
     "commit_sha": "aafff42fb52bd16ccbac8992fd0f136ae80cafbf",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2033",
-    "merged_at": null,
-    "remote_branch_deleted": false,
+    "merged_at": "2026-06-11T10:33:40Z",
+    "remote_branch_deleted": true,
     "local_cleanup_executed": false,
     "sidecar_issues": [
       {
@@ -53362,6 +53366,398 @@
         "at": "2026-06-11T10:26:40Z",
         "status": "ready_to_merge",
         "note": "PR #2033 GitHub checks passed for head aafff42fb52bd16ccbac8992fd0f136ae80cafbf; scope remains confined to read-only report/metadata paths."
+      },
+      {
+        "at": "2026-06-11T13:00:17Z",
+        "status": "merged",
+        "note": "Reconciled during CAREER-FULL-PARITY-01 after confirming PR #2033 merged and origin/main contains merge commit 88a8ad133e3f1df935e2090d27650fef9b948286."
+      }
+    ],
+    "merge_commit_sha": "88a8ad133e3f1df935e2090d27650fef9b948286"
+  },
+  "CAREER-FULL-PARITY-01": {
+    "repo": "fap-api",
+    "branch": "codex/career-full-parity-01",
+    "base": "origin/main",
+    "status": "committed",
+    "train_scope": "career_full_parity",
+    "title": "CAREER-FULL-PARITY-01: fix(career): harden zh display parity audit failures",
+    "depends_on": [
+      "CAREER-ZH-PARITY-LIVE-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding and executing CAREER-FULL-PARITY-01 through CAREER-FULL-PARITY-10 and allowed fap-api docs/codex metadata updates."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "CAREER-ZH-PARITY-LIVE-01 PR #2033 is merged; origin/main contains merge commit 88a8ad133e3f1df935e2090d27650fef9b948286."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are confined to backend/app/Console/Commands/CareerAuditZhDisplayParity.php, backend/tests/Feature/Console/CareerAuditZhDisplayParityCommandTest.php, backend/docs/career/generated/career-full-parity-01-live-report.json, and docs/codex metadata. No content import, publish, cache mutation, deploy, sitemap/llms/index strategy, or fap-web files changed."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "php -l backend/app/Console/Commands/CareerAuditZhDisplayParity.php",
+          "php -l backend/tests/Feature/Console/CareerAuditZhDisplayParityCommandTest.php",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Console/CareerAuditZhDisplayParityCommandTest.php --no-ansi",
+          "cd backend && php artisan career:audit-zh-display-parity --timeout=20 --batch-size=40 --sample-limit=30 --output=docs/career/generated/career-full-parity-01-live-report.json || test $? -eq 1",
+          "python3 -m json.tool backend/docs/career/generated/career-full-parity-01-live-report.json >/dev/null"
+        ],
+        "notes": "Focused lint and console tests passed. Production read-only full scan generated 1046 item details; current public API instability was degraded into per-slug report evidence instead of aborting: api_failure_count=25, detail_api_error_count=2. Content/runtime parity remains for later PRs: same_module_set=259, en_has_modules_zh_missing=658, zh_has_modules_en_missing=104, runtime_shell_count=130."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": "e07fa233ff350ea60d63d4b842df2fdc710c98e2",
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "sidecar_issues": [
+      {
+        "id": "CAREER-FULL-PARITY-01-SIDECAR-01",
+        "status": "open",
+        "severity": "external_content_state",
+        "title": "Production career EN/ZH module parity remains unresolved after stable scan hardening",
+        "evidence": "career-full-parity-01 live report scanned 1046 public career job slugs and did not abort. It recorded api_failure_count=25 and detail_api_error_count=2 as external public API/network evidence. Content/runtime parity remains: same_module_set=259, en_has_modules_zh_missing=658, zh_has_modules_en_missing=104, runtime_shell_count=130.",
+        "introduced_by_current_pr": false,
+        "required_followup": "Continue CAREER-FULL-PARITY-02 through CAREER-FULL-PARITY-10 to generate root-cause manifests, repair/import assets, converge cache, and enforce final live parity."
+      }
+    ],
+    "transitions": [
+      {
+        "at": "2026-06-11T13:00:17Z",
+        "status": "initialized",
+        "note": "Initialized from explicit CAREER-FULL-PARITY train authorization; branch codex/career-full-parity-01 rebased onto latest origin/main."
+      },
+      {
+        "at": "2026-06-11T13:00:17Z",
+        "status": "local_verified",
+        "note": "Implemented per-slug HTTP exception degradation, added focused regression test, and generated stable 1046-item production read-only report."
+      },
+      {
+        "at": "2026-06-11T13:09:16Z",
+        "status": "local_verified",
+        "note": "Final PR01 production read-only report completed with 1046 items and degraded detail_api_error_count=2 into per-slug evidence instead of top-level abort."
+      },
+      {
+        "at": "2026-06-11T13:10:40Z",
+        "status": "scope_validated",
+        "note": "Validated changed files against CAREER-FULL-PARITY-01 allowed paths before staging."
+      },
+      {
+        "at": "2026-06-11T13:13:09Z",
+        "status": "committed",
+        "note": "Created local commit e07fa233ff350ea60d63d4b842df2fdc710c98e2 for CAREER-FULL-PARITY-01 after scoped staging and cached diff check."
+      }
+    ]
+  },
+  "CAREER-FULL-PARITY-02": {
+    "repo": "fap-api",
+    "branch": "codex/career-full-parity-02",
+    "base": "origin/main",
+    "status": "pending_dependency",
+    "train_scope": "career_full_parity",
+    "title": "CAREER-FULL-PARITY-02: chore(career): generate full zh parity root-cause manifest",
+    "depends_on": [
+      "CAREER-FULL-PARITY-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding and executing CAREER-FULL-PARITY-01 through CAREER-FULL-PARITY-10 and allowed fap-api docs/codex metadata updates."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Waiting for CAREER-FULL-PARITY-01 to merge before implementation."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-11T13:00:17Z",
+        "status": "pending_dependency",
+        "note": "Initialized from explicit CAREER-FULL-PARITY train authorization; implementation deferred until dependencies merge."
+      }
+    ]
+  },
+  "CAREER-FULL-PARITY-03": {
+    "repo": "fap-api",
+    "branch": "codex/career-full-parity-03",
+    "base": "origin/main",
+    "status": "pending_dependency",
+    "train_scope": "career_full_parity",
+    "title": "CAREER-FULL-PARITY-03: fix(career): repair blocked workbook asset contracts",
+    "depends_on": [
+      "CAREER-FULL-PARITY-02"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding and executing CAREER-FULL-PARITY-01 through CAREER-FULL-PARITY-10 and allowed fap-api docs/codex metadata updates."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Waiting for CAREER-FULL-PARITY-02 to merge before implementation."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-11T13:00:17Z",
+        "status": "pending_dependency",
+        "note": "Initialized from explicit CAREER-FULL-PARITY train authorization; implementation deferred until dependencies merge."
+      }
+    ]
+  },
+  "CAREER-FULL-PARITY-04": {
+    "repo": "fap-api",
+    "branch": "codex/career-full-parity-04",
+    "base": "origin/main",
+    "status": "pending_dependency",
+    "train_scope": "career_full_parity",
+    "title": "CAREER-FULL-PARITY-04: chore(career): prepare runtime shell zh asset import",
+    "depends_on": [
+      "CAREER-FULL-PARITY-03"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding and executing CAREER-FULL-PARITY-01 through CAREER-FULL-PARITY-10 and allowed fap-api docs/codex metadata updates."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Waiting for CAREER-FULL-PARITY-03 to merge before implementation."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-11T13:00:17Z",
+        "status": "pending_dependency",
+        "note": "Initialized from explicit CAREER-FULL-PARITY train authorization; implementation deferred until dependencies merge."
+      }
+    ]
+  },
+  "CAREER-FULL-PARITY-05": {
+    "repo": "fap-api",
+    "branch": "codex/career-full-parity-05",
+    "base": "origin/main",
+    "status": "pending_dependency",
+    "train_scope": "career_full_parity",
+    "title": "CAREER-FULL-PARITY-05: fix(career): normalize zh display asset module subsets",
+    "depends_on": [
+      "CAREER-FULL-PARITY-04"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding and executing CAREER-FULL-PARITY-01 through CAREER-FULL-PARITY-10 and allowed fap-api docs/codex metadata updates."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Waiting for CAREER-FULL-PARITY-04 to merge before implementation."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-11T13:00:17Z",
+        "status": "pending_dependency",
+        "note": "Initialized from explicit CAREER-FULL-PARITY train authorization; implementation deferred until dependencies merge."
+      }
+    ]
+  },
+  "CAREER-FULL-PARITY-06": {
+    "repo": "fap-api",
+    "branch": "codex/career-full-parity-06",
+    "base": "origin/main",
+    "status": "pending_dependency",
+    "train_scope": "career_full_parity",
+    "title": "CAREER-FULL-PARITY-06: fix(career): align en display asset runtime bundle selection",
+    "depends_on": [
+      "CAREER-FULL-PARITY-05"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding and executing CAREER-FULL-PARITY-01 through CAREER-FULL-PARITY-10 and allowed fap-api docs/codex metadata updates."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Waiting for CAREER-FULL-PARITY-05 to merge before implementation."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-11T13:00:17Z",
+        "status": "pending_dependency",
+        "note": "Initialized from explicit CAREER-FULL-PARITY train authorization; implementation deferred until dependencies merge."
+      }
+    ]
+  },
+  "CAREER-FULL-PARITY-07": {
+    "repo": "fap-api",
+    "branch": "codex/career-full-parity-07",
+    "base": "origin/main",
+    "status": "pending_dependency",
+    "train_scope": "career_full_parity",
+    "title": "CAREER-FULL-PARITY-07: chore(career): warm en zh career detail caches",
+    "depends_on": [
+      "CAREER-FULL-PARITY-06"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding and executing CAREER-FULL-PARITY-01 through CAREER-FULL-PARITY-10 and allowed fap-api docs/codex metadata updates."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Waiting for CAREER-FULL-PARITY-06 to merge before implementation."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-11T13:00:17Z",
+        "status": "pending_dependency",
+        "note": "Initialized from explicit CAREER-FULL-PARITY train authorization; implementation deferred until dependencies merge."
+      }
+    ]
+  },
+  "CAREER-FULL-PARITY-08": {
+    "repo": "fap-api",
+    "branch": "codex/career-full-parity-08",
+    "base": "origin/main",
+    "status": "pending_dependency",
+    "train_scope": "career_full_parity",
+    "title": "CAREER-FULL-PARITY-08: test(career): enforce live zh parity gate",
+    "depends_on": [
+      "CAREER-FULL-PARITY-07"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding and executing CAREER-FULL-PARITY-01 through CAREER-FULL-PARITY-10 and allowed fap-api docs/codex metadata updates."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Waiting for CAREER-FULL-PARITY-07 to merge before implementation."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-11T13:00:17Z",
+        "status": "pending_dependency",
+        "note": "Initialized from explicit CAREER-FULL-PARITY train authorization; implementation deferred until dependencies merge."
+      }
+    ]
+  },
+  "CAREER-FULL-PARITY-09": {
+    "repo": "fap-api",
+    "branch": "codex/career-full-parity-09",
+    "base": "origin/main",
+    "status": "pending_dependency",
+    "train_scope": "career_full_parity",
+    "title": "CAREER-FULL-PARITY-09: fix(career): block invalid display asset publishing",
+    "depends_on": [
+      "CAREER-FULL-PARITY-08"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding and executing CAREER-FULL-PARITY-01 through CAREER-FULL-PARITY-10 and allowed fap-api docs/codex metadata updates."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Waiting for CAREER-FULL-PARITY-08 to merge before implementation."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-11T13:00:17Z",
+        "status": "pending_dependency",
+        "note": "Initialized from explicit CAREER-FULL-PARITY train authorization; implementation deferred until dependencies merge."
+      }
+    ]
+  },
+  "CAREER-FULL-PARITY-10": {
+    "repo": "fap-api",
+    "branch": "codex/career-full-parity-10",
+    "base": "origin/main",
+    "status": "pending_dependency",
+    "train_scope": "career_full_parity",
+    "title": "CAREER-FULL-PARITY-10: chore(career): certify final production career parity",
+    "depends_on": [
+      "CAREER-FULL-PARITY-09"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding and executing CAREER-FULL-PARITY-01 through CAREER-FULL-PARITY-10 and allowed fap-api docs/codex metadata updates."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Waiting for CAREER-FULL-PARITY-09 to merge before implementation."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-11T13:00:17Z",
+        "status": "pending_dependency",
+        "note": "Initialized from explicit CAREER-FULL-PARITY train authorization; implementation deferred until dependencies merge."
       }
     ]
   }
