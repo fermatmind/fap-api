@@ -182,7 +182,7 @@ class SitemapGenerator
         $rows = Article::query()
             ->withoutGlobalScopes()
             ->where('org_id', 0)
-            ->publiclyIndexable()
+            ->publiclySitemapEligible()
             ->whereIn('locale', ArticleSeoService::SUPPORTED_LOCALES)
             ->whereNotNull('slug')
             ->where('slug', '<>', '')

@@ -77,6 +77,8 @@ class Article extends Model
         'lifecycle_note',
         'is_public',
         'is_indexable',
+        'sitemap_eligible',
+        'llms_eligible',
         'published_at',
         'scheduled_at',
     ];
@@ -97,6 +99,8 @@ class Article extends Model
         'lifecycle_changed_by_admin_user_id' => 'integer',
         'is_public' => 'boolean',
         'is_indexable' => 'boolean',
+        'sitemap_eligible' => 'boolean',
+        'llms_eligible' => 'boolean',
         'lifecycle_changed_at' => 'datetime',
         'published_at' => 'datetime',
         'scheduled_at' => 'datetime',
@@ -192,6 +196,20 @@ class Article extends Model
         return $query
             ->publiclyReadable()
             ->where('is_indexable', true);
+    }
+
+    public function scopePubliclySitemapEligible($query)
+    {
+        return $query
+            ->publiclyIndexable()
+            ->where('sitemap_eligible', true);
+    }
+
+    public function scopePubliclyLlmsEligible($query)
+    {
+        return $query
+            ->publiclyIndexable()
+            ->where('llms_eligible', true);
     }
 
     public function revisions(): HasMany
