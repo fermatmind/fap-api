@@ -345,6 +345,7 @@ final class CareerImportSelectedDisplayAssets extends Command
         }
 
         $candidateSlugs = [];
+        $candidateRowHashes = [];
         foreach ($rows as $row) {
             if (! is_array($row)) {
                 continue;
@@ -356,9 +357,13 @@ final class CareerImportSelectedDisplayAssets extends Command
                 continue;
             }
             $publicResolutionType = trim((string) ($row['public_resolution_type'] ?? ''));
+            $workbookRowSha = strtolower(trim((string) ($row['workbook_row_sha256'] ?? '')));
 
             if ($slug === '' || $slug === 'software-developers') {
                 $errors[] = 'Manifest import candidates must not include empty slugs or software-developers.';
+            }
+            if (preg_match('/\A[a-f0-9]{64}\z/i', $workbookRowSha) !== 1) {
+                $errors[] = "Manifest import candidate {$slug} must declare workbook_row_sha256.";
             }
             if ($publicResolutionType === '') {
                 $errors[] = "Manifest import candidate {$slug} must declare public_resolution_type public_canonical_job.";
@@ -393,9 +398,14 @@ final class CareerImportSelectedDisplayAssets extends Command
             }
 
             $candidateSlugs[] = $slug;
+            $candidateRowHashes[] = [
+                'slug' => $slug,
+                'workbook_row_sha256' => $workbookRowSha,
+            ];
         }
 
         $candidateSlugs = array_values(array_unique(array_filter($candidateSlugs)));
+        $candidateRowHashes = array_values($candidateRowHashes ?? []);
         if ($candidateSlugs === []) {
             $errors[] = 'Manifest must include at least one import_eligible upload_candidate row.';
         }
@@ -409,6 +419,7 @@ final class CareerImportSelectedDisplayAssets extends Command
             'workbook_sha256' => $workbookSha,
             'row_count' => count($rows),
             'upload_candidate_slugs' => $candidateSlugs,
+            'upload_candidate_row_hashes' => $candidateRowHashes,
         ];
         if ($manifestScope === self::ZH_DISPLAY_PARITY_SCOPE) {
             $manifestPayload['scope'] = $manifestScope;
@@ -425,6 +436,7 @@ final class CareerImportSelectedDisplayAssets extends Command
 
         $decoded['manifest_sha256'] = hash_file('sha256', $path) ?: null;
         $decoded['manifest_candidate_slugs'] = $candidateSlugs;
+        $decoded['manifest_candidate_row_hashes'] = $candidateRowHashes;
         $decoded['manifest_scope'] = $manifestScope !== '' ? $manifestScope : null;
         $decoded['manifest_target_locale'] = $targetLocale !== '' ? $targetLocale : null;
         $decoded['manifest_expected_display_delta'] = (int) ($expectedDelta['career_job_display_assets'] ?? 0);
@@ -490,6 +502,8 @@ final class CareerImportSelectedDisplayAssets extends Command
         $socCode = (string) ($workbookRow['SOC_Code'] ?? '');
         $onetCode = (string) ($workbookRow['O_NET_Code'] ?? '');
         $status = (string) ($manifestRow['status'] ?? '');
+        $expectedRowSha = strtolower(trim((string) ($manifestRow['workbook_row_sha256'] ?? '')));
+        $actualRowSha = CareerSelectedDisplayAssetMapper::workbookRowAuthorityHash($workbookRow);
 
         if ($slug === 'software-developers') {
             $errors[] = 'Manifest must not include software-developers.';
@@ -502,6 +516,9 @@ final class CareerImportSelectedDisplayAssets extends Command
         }
         if (in_array($status, ['manual_hold', 'duplicate_identity_hold', 'broad_group_hold', 'CN_proxy_hold'], true)) {
             $errors[] = 'Manifest must not include held rows.';
+        }
+        if ($manifestRow !== null && $expectedRowSha !== $actualRowSha) {
+            $errors[] = 'Manifest workbook_row_sha256 must match reviewed workbook row.';
         }
 
         return $errors;

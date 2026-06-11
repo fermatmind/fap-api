@@ -10,6 +10,7 @@ use App\Models\Occupation;
 use App\Models\Scopes\TenantScope;
 use App\Services\Career\Authority\CareerCrosswalkModePolicy;
 use App\Services\Career\Governance\CareerTrustFactReviewPolicy;
+use App\Services\Career\Import\CareerSelectedDisplayAssetMapper;
 use App\Support\Xlsx\XlsxCellReference;
 use DOMDocument;
 use DOMElement;
@@ -398,6 +399,7 @@ final class CareerValidateDisplayBatch extends Command
                 'title_zh' => $this->stringValue($row, 'CN_Title'),
                 'SOC_Code' => $this->stringValue($row, 'SOC_Code'),
                 'O_NET_Code' => $this->stringValue($row, 'O_NET_Code'),
+                'workbook_row_sha256' => CareerSelectedDisplayAssetMapper::workbookRowAuthorityHash($row),
             ],
             'content_gate' => $contentGate,
             'json_gate' => $jsonGate,
@@ -1226,6 +1228,13 @@ final class CareerValidateDisplayBatch extends Command
                 static fn (array $row): string => (string) $row['slug'],
                 array_filter($rows, static fn (array $row): bool => (bool) $row['import_eligible']),
             )),
+            'upload_candidate_row_hashes' => array_values(array_map(
+                static fn (array $row): array => [
+                    'slug' => (string) $row['slug'],
+                    'workbook_row_sha256' => (string) $row['workbook_row_sha256'],
+                ],
+                array_filter($rows, static fn (array $row): bool => (bool) $row['import_eligible']),
+            )),
             'scope' => 'career_zh_display_parity_v0.1',
             'target_locale' => 'zh-CN',
         ];
@@ -1268,6 +1277,7 @@ final class CareerValidateDisplayBatch extends Command
         return [
             'row_number' => (int) ($identity['row_number'] ?? 0),
             'slug' => (string) ($identity['slug'] ?? ''),
+            'workbook_row_sha256' => (string) ($identity['workbook_row_sha256'] ?? ''),
             'status' => $status,
             'public_resolution_type' => $importEligible
                 ? CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB

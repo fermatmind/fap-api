@@ -168,6 +168,7 @@ final class CareerValidateDisplayBatchCommandTest extends TestCase
         $this->assertSame('reviewed_workbook', $rows->get('ready-upload-slug')['content_authority']);
         $this->assertTrue($rows->get('ready-upload-slug')['reviewed_chinese_fields']);
         $this->assertTrue($rows->get('ready-upload-slug')['seo_release_gates_unchanged']);
+        $this->assertMatchesRegularExpression('/\A[a-f0-9]{64}\z/', $rows->get('ready-upload-slug')['workbook_row_sha256']);
         $this->assertSame('needs_workbook_repair', $rows->get('needs-repair-slug')['status']);
         $this->assertFalse($rows->get('needs-repair-slug')['import_eligible']);
         $this->assertSame('manual_hold', $rows->get('software-developers')['status']);
