@@ -52904,7 +52904,7 @@
     "repo": "fap-api",
     "branch": "codex/career-zh-parity-fix-03",
     "base": "origin/main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "career_zh_parity_fix",
     "title": "CAREER-ZH-PARITY-FIX-03: feat(career): support authority-manifest zh display import",
     "depends_on": [
@@ -52942,14 +52942,18 @@
       "github_checks": {
         "status": "pass",
         "evidence": "GitHub checks passed for PR #2028 head ecd0b161f73848485518ee878a75ef6d181a9961: hygiene, supply-chain, content-pack-build-validate, Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
+      },
+      "post_merge_reconciliation": {
+        "status": "pass",
+        "evidence": "GitHub PR #2028 is MERGED; origin/main contains merge commit 26a3eede150a9f8e60084960ab28cc52e2c43a38; remote branch codex/career-zh-parity-fix-03 is deleted; local PR03 worktree/branch were removed after merge."
       }
     },
     "failure_reason": null,
     "commit_sha": "bf193e4045cd9644c0341b89073f1fb0e7b1ece6",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2028",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-11T04:20:22Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "sidecar_issues": [
       {
         "id": "CAREER-ZH-PARITY-FIX-03-SIDECAR-01",
@@ -52983,14 +52987,20 @@
         "from": "pr_open",
         "to": "ready_to_merge",
         "note": "GitHub checks passed for PR #2028 head ecd0b161f73848485518ee878a75ef6d181a9961."
+      },
+      {
+        "at": "2026-06-11T04:20:22Z",
+        "status": "merged",
+        "note": "Reconciled during CAREER-ZH-PARITY-FIX-04 start after PR #2028 merge and cleanup."
       }
-    ]
+    ],
+    "merge_commit_sha": "26a3eede150a9f8e60084960ab28cc52e2c43a38"
   },
   "CAREER-ZH-PARITY-FIX-04": {
     "repo": "fap-api",
     "branch": "codex/career-zh-parity-fix-04",
     "base": "origin/main",
-    "status": "pending_dependency",
+    "status": "ready_to_merge",
     "train_scope": "career_zh_parity_fix",
     "title": "CAREER-ZH-PARITY-FIX-04: feat(career): controlled zh display import cache refresh",
     "depends_on": [
@@ -53002,22 +53012,69 @@
         "evidence": "User explicitly authorized adding and executing CAREER-ZH-PARITY-FIX-01 through CAREER-ZH-PARITY-FIX-06, including fap-api docs/codex metadata updates, on 2026-06-11."
       },
       "dependency": {
-        "status": "pending",
-        "evidence": "Waiting for CAREER-ZH-PARITY-FIX-03 to merge."
+        "status": "pass",
+        "evidence": "CAREER-ZH-PARITY-FIX-03 merged as PR #2028 at 2026-06-11T04:20:22Z; origin/main contains 26a3eede150a9f8e60084960ab28cc52e2c43a38."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are confined to Career import/cache commands, focused console tests, and docs/codex metadata."
+      },
+      "local": {
+        "status": "pass_with_external_sidecar",
+        "commands": [
+          "php -l backend/app/Console/Commands/CareerImportSelectedDisplayAssets.php",
+          "php -l backend/app/Console/Commands/CareerWarmPublicAuthorityCache.php",
+          "php -l backend/app/Services/Career/PublicCareerAuthorityResponseCache.php",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Console/CareerImportSelectedDisplayAssetsCommandTest.php tests/Feature/Console/CareerWarmPublicAuthorityCacheCommandTest.php --no-ansi",
+          "cd backend && ./vendor/bin/pint --test app/Console/Commands/CareerImportSelectedDisplayAssets.php app/Console/Commands/CareerWarmPublicAuthorityCache.php app/Services/Career/PublicCareerAuthorityResponseCache.php tests/Feature/Console/CareerImportSelectedDisplayAssetsCommandTest.php tests/Feature/Console/CareerWarmPublicAuthorityCacheCommandTest.php",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Career --no-ansi",
+          "php -r 'json_decode(file_get_contents(\"docs/codex/pr-train-state.json\"), true, 512, JSON_THROW_ON_ERROR); echo \"state json ok\\n\";'",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'train yaml ok'\"",
+          "git diff --check"
+        ],
+        "notes": "PHP lint, focused feature tests, and scoped Pint passed. The manifest-listed broad tests/Unit/Services/Career command failed only on pre-existing career publish readiness failures outside PR04 scope and is recorded as sidecar."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "GitHub checks passed for PR #2029: hygiene, supply-chain, content-pack-build-validate, Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "095666733f502a63714090dd409bfd3be0aa997b",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2029",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
-    "sidecar_issues": [],
+    "sidecar_issues": [
+      {
+        "id": "CAREER-ZH-PARITY-FIX-04-SIDECAR-01",
+        "status": "open",
+        "severity": "external",
+        "title": "Existing Career unit suite failure: FirstWavePublishReadyValidator::validationMemoKey missing",
+        "evidence": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Career --no-ansi exits 2 with 82 failed tests; failures center on Call to undefined method App\\Domain\\Career\\Publish\\FirstWavePublishReadyValidator::validationMemoKey() plus downstream first-wave readiness assertions. PR04 did not touch FirstWavePublishReadyValidator or first-wave release policy files.",
+        "introduced_by_current_pr": false
+      }
+    ],
     "transitions": [
       {
         "at": "2026-06-11T02:19:47Z",
         "status": "pending_dependency",
         "note": "Future controlled import/cache refresh entry initialized only; implementation deferred until CAREER-ZH-PARITY-FIX-03 is merged."
+      },
+      {
+        "at": "2026-06-11T04:35:00Z",
+        "status": "local_verified_sidecar_external",
+        "note": "Implemented controlled manifest chunk execution and zh-CN job detail cache refresh reporting; focused checks passed; broad Career unit suite retains external FirstWavePublishReadyValidator blocker."
+      },
+      {
+        "at": "2026-06-11T04:38:00Z",
+        "status": "pr_open_checks_pending",
+        "note": "Opened PR #2029 for CAREER-ZH-PARITY-FIX-04 from head commit 9a1389e3810b92770501157205c4513ea5b1e91e."
+      },
+      {
+        "at": "2026-06-11T04:44:00Z",
+        "status": "ready_to_merge",
+        "note": "PR #2029 GitHub checks passed; scope remains confined to PR04 allowed paths."
       }
     ]
   },

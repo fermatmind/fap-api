@@ -6,6 +6,7 @@ namespace Tests\Feature\Console;
 
 use App\Services\Career\PublicCareerAuthorityResponseCache;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Tests\TestCase;
 
@@ -85,6 +86,28 @@ final class CareerWarmPublicAuthorityCacheCommandTest extends TestCase
             ->expectsOutputToContain('status=warmed')
             ->assertExitCode(0);
 
+        $this->assertFalse(Cache::has($cacheKey));
+    }
+
+    public function test_command_emits_json_report_for_targeted_job_detail_cache_refresh(): void
+    {
+        $cacheKey = PublicCareerAuthorityResponseCache::JOB_DETAIL_CACHE_KEY_PREFIX.':missing-career:zh-CN';
+        Cache::forever($cacheKey, ['stale' => true]);
+
+        $exitCode = Artisan::call('career:warm-public-authority-cache', [
+            '--job-detail-slugs' => 'missing-career',
+            '--job-detail-locales' => 'zh-CN',
+            '--forget-job-detail' => true,
+            '--job-detail-only' => true,
+            '--json' => true,
+        ]);
+
+        $report = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertSame(0, $exitCode);
+        $this->assertSame('warmed', $report['status']);
+        $this->assertSame($cacheKey, $report['entries']['job_detail_zh_cn_missing-career']['cache_key']);
+        $this->assertSame('missing', $report['entries']['job_detail_zh_cn_missing-career']['status']);
+        $this->assertSame(0, $report['entries']['job_detail_zh_cn_missing-career']['member_count']);
         $this->assertFalse(Cache::has($cacheKey));
     }
 

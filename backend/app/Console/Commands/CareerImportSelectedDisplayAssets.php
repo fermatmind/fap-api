@@ -35,6 +35,8 @@ final class CareerImportSelectedDisplayAssets extends Command
         {--file= : Absolute path to repaired second-pilot workbook}
         {--slugs= : Comma-separated explicit slug allowlist}
         {--manifest= : Optional validated full-upload plan manifest JSON}
+        {--manifest-chunk-size= : Optional positive manifest candidate chunk size for controlled execution}
+        {--manifest-chunk-index=1 : 1-based manifest candidate chunk index}
         {--dry-run : Validate and report without writing}
         {--force : Required to write selected display asset rows}
         {--json : Emit machine-readable report}
@@ -67,7 +69,8 @@ final class CareerImportSelectedDisplayAssets extends Command
 
             $file = $this->requiredFile();
             $manifest = $this->optionalManifest($file);
-            $slugs = $manifest === null ? $this->requiredSlugs() : $this->manifestSlugs($manifest);
+            $manifestCandidateSlugs = $manifest === null ? null : $this->manifestSlugs($manifest);
+            [$slugs, $manifestExecution] = $this->executionSlugs($manifest, $manifestCandidateSlugs ?? $this->requiredSlugs());
             $workbook = $this->mapper->readWorkbook($file, $slugs);
             $missingHeaders = array_values(array_diff(CareerSelectedDisplayAssetMapper::REQUIRED_HEADERS, $workbook['headers']));
             if ($missingHeaders !== []) {
@@ -76,6 +79,7 @@ final class CareerImportSelectedDisplayAssets extends Command
                     'source_file_basename' => basename($file),
                     'source_file_sha256' => hash_file('sha256', $file) ?: null,
                     'manifest_sha256' => $manifest['manifest_sha256'] ?? null,
+                    'manifest_execution' => $manifestExecution,
                     'requested_slugs' => $slugs,
                     'decision' => 'fail',
                     'errors' => ['Workbook is missing required headers: '.implode(', ', $missingHeaders).'.'],
@@ -117,7 +121,7 @@ final class CareerImportSelectedDisplayAssets extends Command
                 );
                 if ($manifest !== null
                     && ($authority['existing_display_asset'] ?? false) === true
-                    && ! $this->manifestAllowsExistingDisplayAssets($manifest)) {
+                    && ! $this->manifestAllowsExistingDisplayAssets($manifest, count($slugs))) {
                     $itemErrors[] = 'Manifest slug already has a selected display asset.';
                 }
                 if ($manifest !== null && $manifestRow === null) {
@@ -139,6 +143,7 @@ final class CareerImportSelectedDisplayAssets extends Command
                 'manifest_scope' => $manifest['manifest_scope'] ?? null,
                 'manifest_target_locale' => $manifest['manifest_target_locale'] ?? null,
                 'manifest_expected_delta' => $manifest['expected_delta'] ?? null,
+                'manifest_execution' => $manifestExecution,
                 'requested_slugs' => $slugs,
                 'total_rows' => $workbook['total_rows'],
                 'validated_count' => count($items),
@@ -206,12 +211,13 @@ final class CareerImportSelectedDisplayAssets extends Command
 
                 return $written;
             });
-            $forgotDetailCaches = $this->forgetWrittenJobDetailCaches($written);
+            $refreshedDetailCaches = $this->refreshWrittenJobDetailCaches($written);
 
             return $this->finish(array_merge($report, [
                 'did_write' => count($written) > 0,
                 'written_assets' => $written,
-                'forgot_detail_caches' => $forgotDetailCaches,
+                'forgot_detail_caches' => $this->forgottenCacheSummaries($refreshedDetailCaches),
+                'refreshed_detail_caches' => $refreshedDetailCaches,
                 'created_count' => count(array_filter($written, static fn (array $row): bool => ($row['created'] ?? false) === true)),
                 'updated_count' => count(array_filter($written, static fn (array $row): bool => ($row['created'] ?? false) !== true)),
             ]), true);
@@ -225,11 +231,11 @@ final class CareerImportSelectedDisplayAssets extends Command
 
     /**
      * @param  list<array{slug: string, row_id: int|string, created: bool}>  $written
-     * @return list<array{slug: string, locale: string, cache_key: string, forgotten: bool}>
+     * @return list<array{slug: string, locale: string, cache_key: string, forgotten: bool, warm_status: string, member_count: int}>
      */
-    private function forgetWrittenJobDetailCaches(array $written): array
+    private function refreshWrittenJobDetailCaches(array $written): array
     {
-        $forgotten = [];
+        $refreshed = [];
         foreach ($written as $row) {
             $slug = strtolower(trim((string) ($row['slug'] ?? '')));
             if ($slug === '') {
@@ -238,15 +244,33 @@ final class CareerImportSelectedDisplayAssets extends Command
 
             $locale = 'zh-CN';
             $cacheKey = $this->authorityResponseCache->jobDetailCacheKey($slug, $locale);
-            $forgotten[] = [
+            $forgotten = $this->authorityResponseCache->forgetJobDetailPayload($slug, $locale);
+            $warm = $this->authorityResponseCache->warmJobDetailPayload($slug, $locale);
+            $refreshed[] = [
                 'slug' => $slug,
                 'locale' => $locale,
                 'cache_key' => $cacheKey,
-                'forgotten' => $this->authorityResponseCache->forgetJobDetailPayload($slug, $locale),
+                'forgotten' => $forgotten,
+                'warm_status' => (string) ($warm['status'] ?? 'unknown'),
+                'member_count' => (int) ($warm['member_count'] ?? 0),
             ];
         }
 
-        return $forgotten;
+        return $refreshed;
+    }
+
+    /**
+     * @param  list<array{slug: string, locale: string, cache_key: string, forgotten: bool, warm_status: string, member_count: int}>  $refreshed
+     * @return list<array{slug: string, locale: string, cache_key: string, forgotten: bool}>
+     */
+    private function forgottenCacheSummaries(array $refreshed): array
+    {
+        return array_map(static fn (array $row): array => [
+            'slug' => $row['slug'],
+            'locale' => $row['locale'],
+            'cache_key' => $row['cache_key'],
+            'forgotten' => $row['forgotten'],
+        ], $refreshed);
     }
 
     private function requiredFile(): string
@@ -455,6 +479,64 @@ final class CareerImportSelectedDisplayAssets extends Command
     }
 
     /**
+     * @param  array<string, mixed>|null  $manifest
+     * @param  list<string>  $candidateSlugs
+     * @return array{0: list<string>, 1: array<string, mixed>|null}
+     */
+    private function executionSlugs(?array $manifest, array $candidateSlugs): array
+    {
+        $chunkSizeRaw = trim((string) ($this->option('manifest-chunk-size') ?? ''));
+        $chunkIndexRaw = trim((string) ($this->option('manifest-chunk-index') ?? '1'));
+        $normalizedCandidates = array_values(array_unique(array_filter(array_map(
+            static fn (string $slug): string => strtolower(trim($slug)),
+            $candidateSlugs,
+        ), static fn (string $slug): bool => $slug !== '')));
+
+        $execution = $manifest === null ? null : [
+            'strategy' => 'manifest_full',
+            'chunked' => false,
+            'chunk_size' => null,
+            'chunk_index' => null,
+            'total_candidates' => count($normalizedCandidates),
+            'selected_count' => count($normalizedCandidates),
+            'selected_offset' => 0,
+            'selected_slugs_sha256' => $this->slugListSha256($normalizedCandidates),
+        ];
+
+        if ($chunkSizeRaw === '') {
+            return [$normalizedCandidates, $execution];
+        }
+        if ($manifest === null) {
+            throw new RuntimeException('--manifest-chunk-size requires --manifest.');
+        }
+        if (! ctype_digit($chunkSizeRaw) || (int) $chunkSizeRaw < 1) {
+            throw new RuntimeException('--manifest-chunk-size must be a positive integer.');
+        }
+        if (! ctype_digit($chunkIndexRaw) || (int) $chunkIndexRaw < 1) {
+            throw new RuntimeException('--manifest-chunk-index must be a positive 1-based integer.');
+        }
+
+        $chunkSize = (int) $chunkSizeRaw;
+        $chunkIndex = (int) $chunkIndexRaw;
+        $offset = ($chunkIndex - 1) * $chunkSize;
+        $selected = array_slice($normalizedCandidates, $offset, $chunkSize);
+        if ($selected === []) {
+            throw new RuntimeException('--manifest-chunk-index selects no manifest candidates.');
+        }
+
+        return [$selected, [
+            'strategy' => 'manifest_chunk',
+            'chunked' => true,
+            'chunk_size' => $chunkSize,
+            'chunk_index' => $chunkIndex,
+            'total_candidates' => count($normalizedCandidates),
+            'selected_count' => count($selected),
+            'selected_offset' => $offset,
+            'selected_slugs_sha256' => $this->slugListSha256($selected),
+        ]];
+    }
+
+    /**
      * @param  array<string, mixed>  $manifest
      * @return array<string, array<string, mixed>>
      */
@@ -475,9 +557,17 @@ final class CareerImportSelectedDisplayAssets extends Command
     }
 
     /**
+     * @param  list<string>  $slugs
+     */
+    private function slugListSha256(array $slugs): string
+    {
+        return hash('sha256', json_encode(array_values($slugs), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?: '');
+    }
+
+    /**
      * @param  array<string, mixed>  $manifest
      */
-    private function manifestAllowsExistingDisplayAssets(array $manifest): bool
+    private function manifestAllowsExistingDisplayAssets(array $manifest, ?int $selectedCount = null): bool
     {
         try {
             $current = CareerJobDisplayAsset::query()->count();
@@ -487,8 +577,9 @@ final class CareerImportSelectedDisplayAssets extends Command
 
         $baseline = (int) ($manifest['manifest_baseline_display_assets'] ?? 0);
         $expectedDelta = (int) ($manifest['manifest_expected_display_delta'] ?? 0);
+        $requiredDelta = $selectedCount === null ? $expectedDelta : min($expectedDelta, $selectedCount);
 
-        return $current >= ($baseline + $expectedDelta);
+        return $current >= ($baseline + $requiredDelta);
     }
 
     /**
