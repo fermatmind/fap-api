@@ -96,6 +96,14 @@ final class CareerAuditZhDisplayParityCommandTest extends TestCase
         $this->assertSame(1, $report['live_gate']['restricted_shell_count']);
         $this->assertSame(1, $report['production_live_assessment']['runtime_shell_count']);
         $this->assertSame(['zh-missing-modules'], $report['production_live_assessment']['runtime_shell_slugs']);
+        $this->assertSame(1, $report['root_cause_manifest']['bucket_counts']['runtime_shell']);
+        $this->assertSame(1, $report['root_cause_manifest']['bucket_counts']['zh_has_unexpected_extra_modules']);
+        $this->assertSame(2, $report['root_cause_manifest']['bucket_counts']['api_failures']);
+        $this->assertSame('zh-missing-modules', $report['root_cause_manifest']['buckets']['runtime_shell'][0]['slug']);
+        $this->assertSame(
+            'treat_as_missing_or_unpublished_until_target_check',
+            $report['root_cause_manifest']['buckets']['runtime_shell'][0]['cache_status_recommendation'],
+        );
         $this->assertSame(1, $report['controlled_import_manifest']['candidate_count']);
         $this->assertSame(['zh-missing-modules'], $report['controlled_import_manifest']['candidate_slugs']);
         $this->assertSame(5, $report['summary']['total_slugs']);
@@ -189,6 +197,8 @@ final class CareerAuditZhDisplayParityCommandTest extends TestCase
         $this->assertNull($unstable['status']['zh-CN']);
         $this->assertSame('zh_detail_http_unknown', $unstable['zh_gate_reasons'][0]);
         $this->assertSame('zh_api_not_200', $unstable['root_cause']);
+        $this->assertSame(1, $report['root_cause_manifest']['bucket_counts']['api_failures']);
+        $this->assertSame('unstable-slug', $report['root_cause_manifest']['buckets']['api_failures'][0]['slug']);
         $this->assertSame('zh-CN', $unstable['api_errors'][0]['locale']);
         $this->assertSame('ConnectionException', $unstable['api_errors'][0]['type']);
         $this->assertSame(

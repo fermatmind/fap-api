@@ -64,6 +64,7 @@ final class CareerAuditZhDisplayParity extends Command
             $summary = $this->summary($items, $index, $sampleLimit);
             $liveGate = $this->liveGate($summary, $items);
             $assessment = $this->productionLiveAssessment($items, $sampleLimit);
+            $rootCauseManifest = $this->rootCauseManifest($items);
             $controlledImportManifest = $this->controlledImportManifest($items, $assessment);
             $report = [
                 'validator_version' => self::VALIDATOR_VERSION,
@@ -83,6 +84,7 @@ final class CareerAuditZhDisplayParity extends Command
                 'live_gate' => $liveGate,
                 'summary' => $summary,
                 'production_live_assessment' => $assessment,
+                'root_cause_manifest' => $rootCauseManifest,
                 'controlled_import_manifest' => $controlledImportManifest,
                 'items' => (bool) $this->option('summary-only') ? [] : $items,
                 'next_prs' => [
@@ -422,6 +424,92 @@ final class CareerAuditZhDisplayParity extends Command
                 'Do not import without matching reviewed workbook rows and the importer dry-run gate.',
             ],
         ];
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $items
+     * @return array<string, mixed>
+     */
+    private function rootCauseManifest(array $items): array
+    {
+        $buckets = [
+            'runtime_shell' => [],
+            'zh_display_asset_present_but_module_subset' => [],
+            'zh_missing_en_display_modules_without_public_asset_evidence' => [],
+            'zh_has_unexpected_extra_modules' => [],
+            'api_failures' => [],
+            'no_runtime_parity_issue_detected' => [],
+            'other' => [],
+        ];
+
+        foreach ($items as $item) {
+            $rootCause = (string) ($item['root_cause'] ?? 'unknown');
+            $bucket = match ($rootCause) {
+                'runtime_shell_missing_or_unpublished_zh_display_asset',
+                'runtime_shell_with_display_asset_present_cache_or_gate_suspect' => 'runtime_shell',
+                'zh_display_asset_present_but_module_subset' => 'zh_display_asset_present_but_module_subset',
+                'zh_missing_en_display_modules_without_public_asset_evidence' => 'zh_missing_en_display_modules_without_public_asset_evidence',
+                'zh_has_unexpected_extra_modules' => 'zh_has_unexpected_extra_modules',
+                'zh_api_not_200', 'en_api_not_200', 'both_locale_api_not_200' => 'api_failures',
+                'no_runtime_parity_issue_detected' => 'no_runtime_parity_issue_detected',
+                default => 'other',
+            };
+
+            $buckets[$bucket][] = $this->rootCauseManifestRow($item);
+        }
+
+        foreach ($buckets as &$rows) {
+            usort($rows, static fn (array $a, array $b): int => strcmp((string) $a['slug'], (string) $b['slug']));
+        }
+        unset($rows);
+
+        return [
+            'schema_version' => 'career_full_parity_root_cause_manifest.v0.1',
+            'source_validator_version' => self::VALIDATOR_VERSION,
+            'total_slugs' => count($items),
+            'bucket_counts' => array_map('count', $buckets),
+            'buckets' => $buckets,
+            'cache_status_policy' => [
+                'unknown_public_api_only' => 'Do not label cache stale without target cache or DB evidence.',
+                'possible' => 'Run a read-only target cache/DB check or controlled forget/warm before concluding stale cache.',
+                'not_proven' => 'Treat as missing/unpublished asset until a separate target check proves otherwise.',
+                'not_indicated' => 'No runtime parity issue was detected from public API output.',
+            ],
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $item
+     * @return array<string, mixed>
+     */
+    private function rootCauseManifestRow(array $item): array
+    {
+        $cacheState = (string) Arr::get($item, 'cache_stale_assessment.cache_stale', 'unknown_public_api_only');
+
+        return [
+            'slug' => (string) ($item['slug'] ?? ''),
+            'classification' => (string) ($item['classification'] ?? 'unknown'),
+            'root_cause' => (string) ($item['root_cause'] ?? 'unknown'),
+            'status' => $item['status'] ?? [],
+            'module_counts' => $item['module_counts'] ?? [],
+            'missing_modules' => $item['missing_modules'] ?? [],
+            'zh_gate_reasons' => $item['zh_gate_reasons'] ?? [],
+            'zh_public_asset_state' => $item['zh_public_asset_state'] ?? [],
+            'cache_stale_assessment' => $item['cache_stale_assessment'] ?? [],
+            'cache_status_recommendation' => $this->cacheStatusRecommendation($cacheState),
+            'api_errors' => $item['api_errors'] ?? [],
+            'sample_urls' => $item['sample_urls'] ?? [],
+        ];
+    }
+
+    private function cacheStatusRecommendation(string $cacheState): string
+    {
+        return match ($cacheState) {
+            'possible' => 'verify_target_cache_or_run_controlled_forget_warm',
+            'not_proven' => 'treat_as_missing_or_unpublished_until_target_check',
+            'not_indicated' => 'no_cache_action_indicated',
+            default => 'requires_separate_target_cache_or_db_evidence',
+        };
     }
 
     /**

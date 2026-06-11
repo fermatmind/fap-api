@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-11T13:15:48Z",
+  "updated_at": "2026-06-11T13:32:12Z",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -53379,7 +53379,7 @@
     "repo": "fap-api",
     "branch": "codex/career-full-parity-01",
     "base": "origin/main",
-    "status": "pr_open_checks_pending",
+    "status": "merged",
     "train_scope": "career_full_parity",
     "title": "CAREER-FULL-PARITY-01: fix(career): harden zh display parity audit failures",
     "depends_on": [
@@ -53408,14 +53408,22 @@
           "python3 -m json.tool backend/docs/career/generated/career-full-parity-01-live-report.json >/dev/null"
         ],
         "notes": "Focused lint and console tests passed. Production read-only full scan generated 1046 item details; current public API instability was degraded into per-slug report evidence instead of aborting: api_failure_count=25, detail_api_error_count=2. Content/runtime parity remains for later PRs: same_module_set=259, en_has_modules_zh_missing=658, zh_has_modules_en_missing=104, runtime_shell_count=130."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "GitHub checks passed for PR #2038 head c9d669c38eb9f0b46c9b351274e06ce0cd5daf48: hygiene, supply-chain, content-pack-build-validate, Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
+      },
+      "merge_containment": {
+        "status": "pass",
+        "evidence": "PR #2038 is MERGED and origin/main/main contain merge commit b5b33a289847263bd535d34387fd50dc8660431a; remote and local task branches were deleted. Primary main has unrelated pre-existing generated/seo-ops-* untracked directories."
       }
     },
     "failure_reason": null,
     "commit_sha": "84d1c53c12af7601d5bb63bd2144f7527187fc31",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2038",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-11T13:22:40Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "sidecar_issues": [
       {
         "id": "CAREER-FULL-PARITY-01-SIDECAR-01",
@@ -53457,14 +53465,20 @@
         "at": "2026-06-11T13:15:48Z",
         "status": "pr_open_checks_pending",
         "note": "Opened PR #2038 for CAREER-FULL-PARITY-01; waiting for GitHub checks."
+      },
+      {
+        "at": "2026-06-11T13:31:14Z",
+        "status": "merged",
+        "note": "Reconciled during CAREER-FULL-PARITY-02 after confirming PR #2038 merged, origin/main containment, local main fast-forward, and task branch cleanup."
       }
-    ]
+    ],
+    "merge_commit_sha": "b5b33a289847263bd535d34387fd50dc8660431a"
   },
   "CAREER-FULL-PARITY-02": {
     "repo": "fap-api",
     "branch": "codex/career-full-parity-02",
     "base": "origin/main",
-    "status": "pending_dependency",
+    "status": "local_verified",
     "train_scope": "career_full_parity",
     "title": "CAREER-FULL-PARITY-02: chore(career): generate full zh parity root-cause manifest",
     "depends_on": [
@@ -53476,8 +53490,23 @@
         "evidence": "User explicitly authorized adding and executing CAREER-FULL-PARITY-01 through CAREER-FULL-PARITY-10 and allowed fap-api docs/codex metadata updates."
       },
       "dependency": {
-        "status": "pending",
-        "evidence": "Waiting for CAREER-FULL-PARITY-01 to merge before implementation."
+        "status": "pass",
+        "evidence": "CAREER-FULL-PARITY-01 PR #2038 is merged and origin/main contains merge commit b5b33a289847263bd535d34387fd50dc8660431a."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are confined to CareerAuditZhDisplayParity.php, its focused console test, backend/docs/career/generated/career-full-parity-02-root-cause-manifest.json, and docs/codex/pr-train-state.json. No import, publish, cache mutation, deploy, sitemap/llms/index strategy, or fap-web changes."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "php -l backend/app/Console/Commands/CareerAuditZhDisplayParity.php",
+          "php -l backend/tests/Feature/Console/CareerAuditZhDisplayParityCommandTest.php",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Console/CareerAuditZhDisplayParityCommandTest.php --no-ansi",
+          "cd backend && php artisan career:audit-zh-display-parity --timeout=30 --batch-size=20 --sample-limit=30 --output=docs/career/generated/career-full-parity-02-root-cause-manifest.json || test $? -eq 1",
+          "python3 -m json.tool backend/docs/career/generated/career-full-parity-02-root-cause-manifest.json >/dev/null"
+        ],
+        "notes": "Generated 1046-slug root-cause manifest with api_failure_count=0 and detail_api_error_count=0. Buckets: {'runtime_shell': 131, 'zh_display_asset_present_but_module_subset': 667, 'zh_missing_en_display_modules_without_public_asset_evidence': 5, 'zh_has_unexpected_extra_modules': 106, 'api_failures': 0, 'no_runtime_parity_issue_detected': 137, 'other': 0}. Root causes: {'no_runtime_parity_issue_detected': 137, 'runtime_shell_missing_or_unpublished_zh_display_asset': 131, 'zh_display_asset_present_but_module_subset': 667, 'zh_has_unexpected_extra_modules': 106, 'zh_missing_en_display_modules_without_public_asset_evidence': 5}."
       }
     },
     "failure_reason": null,
@@ -53491,6 +53520,21 @@
         "at": "2026-06-11T13:00:17Z",
         "status": "pending_dependency",
         "note": "Initialized from explicit CAREER-FULL-PARITY train authorization; implementation deferred until dependencies merge."
+      },
+      {
+        "at": "2026-06-11T13:31:14Z",
+        "status": "in_progress",
+        "note": "Started CAREER-FULL-PARITY-02 from latest origin/main after PR01 merge cleanup."
+      },
+      {
+        "at": "2026-06-11T13:31:14Z",
+        "status": "local_verified",
+        "note": "Added root_cause_manifest generator/test and generated the production 1046-slug root-cause manifest report."
+      },
+      {
+        "at": "2026-06-11T13:32:12Z",
+        "status": "scope_validated",
+        "note": "Validated changed files against CAREER-FULL-PARITY-02 allowed paths before staging."
       }
     ]
   },
