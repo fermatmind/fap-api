@@ -22,6 +22,7 @@ final class CareerNormalizeLegacyDisplayAssets extends Command
     /** @var list<string> */
     private const DISPLAY_ASSET_MODULE_SUBSET_ROOT_CAUSES = [
         'zh_display_asset_present_but_module_subset',
+        'zh_missing_en_display_modules_without_public_asset_evidence',
     ];
 
     /** @var list<string> */
@@ -36,7 +37,10 @@ final class CareerNormalizeLegacyDisplayAssets extends Command
         'dentists',
         'financial-analysts',
         'high-school-teachers',
+        'human-resources-specialists',
+        'management-analysts',
         'market-research-analysts',
+        'project-management-specialists',
         'registered-nurses',
     ];
 
@@ -327,9 +331,11 @@ final class CareerNormalizeLegacyDisplayAssets extends Command
             $rows = array_merge($rows, $payload['items']);
         }
 
-        $bucket = data_get($payload, 'root_cause_manifest.buckets.zh_display_asset_present_but_module_subset');
-        if (is_array($bucket)) {
-            $rows = array_merge($rows, $bucket);
+        foreach (self::DISPLAY_ASSET_MODULE_SUBSET_ROOT_CAUSES as $rootCause) {
+            $bucket = data_get($payload, "root_cause_manifest.buckets.{$rootCause}");
+            if (is_array($bucket)) {
+                $rows = array_merge($rows, $bucket);
+            }
         }
 
         return $rows;

@@ -39,6 +39,7 @@ final class CareerImportSelectedDisplayAssets extends Command
         {--manifest-chunk-index=1 : 1-based manifest candidate chunk index}
         {--dry-run : Validate and report without writing}
         {--force : Required to write selected display asset rows}
+        {--update-existing-from-manifest : Allow a manifest-authorized existing display asset to be updated from the reviewed workbook payload}
         {--json : Emit machine-readable report}
         {--output= : Optional report output path}';
 
@@ -58,6 +59,7 @@ final class CareerImportSelectedDisplayAssets extends Command
         try {
             $force = (bool) $this->option('force');
             $dryRun = (bool) $this->option('dry-run');
+            $updateExistingFromManifest = (bool) $this->option('update-existing-from-manifest');
 
             if ($force && $dryRun) {
                 return $this->finish(array_merge($report, [
@@ -69,6 +71,15 @@ final class CareerImportSelectedDisplayAssets extends Command
 
             $file = $this->requiredFile();
             $manifest = $this->optionalManifest($file);
+            if ($updateExistingFromManifest && $manifest === null) {
+                return $this->finish(array_merge($report, [
+                    'mode' => $force ? 'force' : 'dry_run',
+                    'source_file_basename' => basename($file),
+                    'source_file_sha256' => hash_file('sha256', $file) ?: null,
+                    'decision' => 'fail',
+                    'errors' => ['--update-existing-from-manifest requires --manifest.'],
+                ]), false);
+            }
             $manifestCandidateSlugs = $manifest === null ? null : $this->manifestSlugs($manifest);
             [$slugs, $manifestExecution] = $this->executionSlugs($manifest, $manifestCandidateSlugs ?? $this->requiredSlugs());
             $workbook = $this->mapper->readWorkbook($file, $slugs);
@@ -97,6 +108,8 @@ final class CareerImportSelectedDisplayAssets extends Command
             $items = [];
             $errors = [];
             $manifestRows = $manifest === null ? [] : $this->manifestRowsBySlug($manifest);
+            $manifestAllowsExistingDisplayAssets = $manifest !== null
+                && $this->manifestAllowsExistingDisplayAssets($manifest, count($slugs), $slugs);
             foreach ($slugs as $slug) {
                 $rows = $rowsBySlug[$slug] ?? [];
                 if (count($rows) !== 1) {
@@ -121,7 +134,7 @@ final class CareerImportSelectedDisplayAssets extends Command
                 );
                 if ($manifest !== null
                     && ($authority['existing_display_asset'] ?? false) === true
-                    && ! $this->manifestAllowsExistingDisplayAssets($manifest, count($slugs))) {
+                    && ! $manifestAllowsExistingDisplayAssets) {
                     $itemErrors[] = 'Manifest slug already has a selected display asset.';
                 }
                 if ($manifest !== null && $manifestRow === null) {
@@ -131,7 +144,12 @@ final class CareerImportSelectedDisplayAssets extends Command
                     $errors[] = "{$slug}: {$error}";
                 }
 
-                $items[] = $this->item($mapped, $authority, $itemErrors);
+                $items[] = $this->item(
+                    $mapped,
+                    $authority,
+                    $itemErrors,
+                    $updateExistingFromManifest && $manifestAllowsExistingDisplayAssets,
+                );
             }
 
             $summary = $this->summarize($items);
@@ -144,6 +162,7 @@ final class CareerImportSelectedDisplayAssets extends Command
                 'manifest_target_locale' => $manifest['manifest_target_locale'] ?? null,
                 'manifest_expected_delta' => $manifest['expected_delta'] ?? null,
                 'manifest_execution' => $manifestExecution,
+                'manifest_update_existing_enabled' => $updateExistingFromManifest,
                 'requested_slugs' => $slugs,
                 'total_rows' => $workbook['total_rows'],
                 'validated_count' => count($items),
@@ -567,8 +586,12 @@ final class CareerImportSelectedDisplayAssets extends Command
     /**
      * @param  array<string, mixed>  $manifest
      */
-    private function manifestAllowsExistingDisplayAssets(array $manifest, ?int $selectedCount = null): bool
+    private function manifestAllowsExistingDisplayAssets(array $manifest, ?int $selectedCount = null, array $selectedSlugs = []): bool
     {
+        if ($this->manifestAuthorizesExistingUpdates($manifest, $selectedSlugs)) {
+            return true;
+        }
+
         try {
             $current = CareerJobDisplayAsset::query()->count();
         } catch (QueryException) {
@@ -580,6 +603,33 @@ final class CareerImportSelectedDisplayAssets extends Command
         $requiredDelta = $selectedCount === null ? $expectedDelta : min($expectedDelta, $selectedCount);
 
         return $current >= ($baseline + $requiredDelta);
+    }
+
+    /**
+     * @param  list<string>  $selectedSlugs
+     */
+    private function manifestAuthorizesExistingUpdates(array $manifest, array $selectedSlugs): bool
+    {
+        if (($manifest['manifest_scope'] ?? null) !== self::ZH_DISPLAY_PARITY_SCOPE) {
+            return false;
+        }
+
+        $selectedSlugs = array_values(array_unique(array_filter(array_map(
+            static fn (string $slug): string => strtolower(trim($slug)),
+            $selectedSlugs,
+        ), static fn (string $slug): bool => $slug !== '')));
+        if ($selectedSlugs === []) {
+            return false;
+        }
+
+        $rowsBySlug = $this->manifestRowsBySlug($manifest);
+        foreach ($selectedSlugs as $slug) {
+            if (($rowsBySlug[$slug]['update_existing_display_asset'] ?? false) !== true) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -762,12 +812,16 @@ final class CareerImportSelectedDisplayAssets extends Command
      * @param  list<string>  $errors
      * @return array<string, mixed>
      */
-    private function item(array $mapped, array $authority, array $errors): array
+    private function item(array $mapped, array $authority, array $errors, bool $updateExistingFromManifest = false): array
     {
         $authorityReady = ($authority['occupation_found'] ?? false) === true
             && ($authority['soc_crosswalk_valid'] ?? false) === true
             && ($authority['onet_crosswalk_valid'] ?? false) === true;
         $authorityDeferredForLocalDryRun = ($authority['authority_state'] ?? null) === 'local_dry_run_authority_deferred';
+        $existingDisplayAsset = ($authority['existing_display_asset'] ?? false) === true;
+        $wouldWrite = $errors === []
+            && ($authorityReady || $authorityDeferredForLocalDryRun)
+            && (! $existingDisplayAsset || $updateExistingFromManifest);
 
         return [
             'slug' => $mapped['slug'],
@@ -778,10 +832,9 @@ final class CareerImportSelectedDisplayAssets extends Command
             'occupation_id' => $authority['occupation_id'],
             'soc_crosswalk_valid' => $authority['soc_crosswalk_valid'],
             'onet_crosswalk_valid' => $authority['onet_crosswalk_valid'],
-            'existing_display_asset' => $authority['existing_display_asset'],
-            'would_write' => $errors === []
-                && ($authorityReady || $authorityDeferredForLocalDryRun)
-                && ($authority['existing_display_asset'] ?? false) !== true,
+            'existing_display_asset' => $existingDisplayAsset,
+            'would_update_existing_display_asset' => $wouldWrite && $existingDisplayAsset,
+            'would_write' => $wouldWrite,
             'payload_summary' => $mapped['summary'],
             'payload' => $mapped['payload'],
             'release_gates_changed' => false,
@@ -798,7 +851,10 @@ final class CareerImportSelectedDisplayAssets extends Command
     {
         return [
             'would_write_count' => count(array_filter($items, static fn (array $item): bool => ($item['would_write'] ?? false) === true)),
-            'already_exists_count' => count(array_filter($items, static fn (array $item): bool => ($item['existing_display_asset'] ?? false) === true && ($item['errors'] ?? []) === [])),
+            'would_update_existing_count' => count(array_filter($items, static fn (array $item): bool => ($item['would_update_existing_display_asset'] ?? false) === true)),
+            'already_exists_count' => count(array_filter($items, static fn (array $item): bool => ($item['existing_display_asset'] ?? false) === true
+                && ($item['would_update_existing_display_asset'] ?? false) !== true
+                && ($item['errors'] ?? []) === [])),
             'publish_gate_blocked_count' => count(array_filter($items, static fn (array $item): bool => data_get($item, 'payload_summary.publish_gate.decision') !== 'pass')),
             'failed_count' => count(array_filter($items, static fn (array $item): bool => ($item['errors'] ?? []) !== [])),
             'created_count' => 0,
@@ -866,6 +922,7 @@ final class CareerImportSelectedDisplayAssets extends Command
             'items' => [],
             'would_write' => false,
             'would_write_count' => 0,
+            'would_update_existing_count' => 0,
             'already_exists_count' => 0,
             'publish_gate_blocked_count' => 0,
             'did_write' => false,

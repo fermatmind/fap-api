@@ -243,6 +243,41 @@ final class CareerNormalizeLegacyDisplayAssetsCommandTest extends TestCase
     }
 
     #[Test]
+    public function it_accepts_no_public_asset_evidence_root_cause_for_manifest_authorized_old_assets(): void
+    {
+        $slugs = [
+            'data-scientists',
+            'human-resources-specialists',
+            'management-analysts',
+            'project-management-specialists',
+            'registered-nurses',
+        ];
+        foreach ($slugs as $slug) {
+            $this->createModuleSubsetAsset($slug, ['source_card', 'review_validity_card']);
+        }
+
+        $exitCode = Artisan::call('career:normalize-legacy-display-assets', [
+            '--lineage-workbook' => $this->lineageWorkbook(),
+            '--module-subset-report' => $this->moduleSubsetRootCauseReport(
+                $slugs,
+                'zh_missing_en_display_modules_without_public_asset_evidence',
+            ),
+            '--dry-run' => true,
+            '--json' => true,
+        ]);
+        $report = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+
+        $this->assertSame(0, $exitCode, json_encode($report, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $this->assertSame('pass', $report['decision']);
+        $this->assertSame('module_subset_report', $report['requested_slug_source']);
+        $this->assertSame($slugs, $report['requested_slugs']);
+        $this->assertSame(5, $report['module_subset_authorized_count']);
+        $this->assertSame(5, $report['validated_count']);
+        $this->assertSame(5, $report['would_update_count']);
+        $this->assertSame(10, $report['module_placeholders_added_count']);
+    }
+
+    #[Test]
     public function it_rejects_manual_hold_and_outside_slugs(): void
     {
         [$exitCode, $report] = $this->runNormalize('software-developers', ['--dry-run' => true]);
@@ -474,7 +509,7 @@ final class CareerNormalizeLegacyDisplayAssetsCommandTest extends TestCase
     /**
      * @param  list<string>  $slugs
      */
-    private function moduleSubsetRootCauseReport(array $slugs): string
+    private function moduleSubsetRootCauseReport(array $slugs, string $rootCause = 'zh_display_asset_present_but_module_subset'): string
     {
         $path = tempnam(sys_get_temp_dir(), 'career-module-subset-root-cause-report-');
         $this->assertIsString($path);
@@ -482,9 +517,9 @@ final class CareerNormalizeLegacyDisplayAssetsCommandTest extends TestCase
             'validator_version' => 'career_zh_display_parity_audit_v0.4',
             'root_cause_manifest' => [
                 'buckets' => [
-                    'zh_display_asset_present_but_module_subset' => array_map(static fn (string $slug): array => [
+                    $rootCause => array_map(static fn (string $slug): array => [
                         'slug' => $slug,
-                        'root_cause' => 'zh_display_asset_present_but_module_subset',
+                        'root_cause' => $rootCause,
                     ], $slugs),
                 ],
             ],
