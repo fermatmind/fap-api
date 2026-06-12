@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services\SeoIntel\Sources;
 
+use App\Models\Article;
+use App\Models\ArticleSeoMeta;
 use App\Models\ContentPage;
 use App\Models\ResearchReport;
 use App\Services\Scale\ScaleRegistry;
@@ -30,6 +32,12 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
 
     private ?string $contentPagesUnavailableReason = null;
 
+    private bool $articlesAttempted = false;
+
+    private bool $articlesAvailable = false;
+
+    private ?string $articlesUnavailableReason = null;
+
     /**
      * @return list<UrlTruthInventoryRecord>
      */
@@ -39,6 +47,7 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
             ...$this->scaleCatalogCandidates(),
             ...$this->researchReportCandidates(),
             ...$this->contentPageCandidates(),
+            ...$this->articleCandidates(),
             ...$this->configuredBackendAuthorityCandidates(),
         ]);
     }
@@ -58,6 +67,9 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
             'content_pages_attempted' => $this->contentPagesAttempted,
             'content_pages_available' => $this->contentPagesAvailable,
             'content_pages_unavailable_reason' => $this->contentPagesUnavailableReason,
+            'articles_attempted' => $this->articlesAttempted,
+            'articles_available' => $this->articlesAvailable,
+            'articles_unavailable_reason' => $this->articlesUnavailableReason,
             'configured_backend_authority_canary_available' => $this->configuredBackendAuthorityCandidates() !== [],
             'fetches_public_html' => false,
             'external_api_calls' => false,
@@ -67,6 +79,87 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
             'static_llms_fallback_graph_truth' => false,
             'synthetic_production_fixture' => false,
         ];
+    }
+
+    /**
+     * @return list<UrlTruthInventoryRecord>
+     */
+    private function articleCandidates(): array
+    {
+        $this->articlesAttempted = true;
+
+        try {
+            $articles = Article::query()
+                ->withoutGlobalScopes()
+                ->with('seoMeta')
+                ->where('org_id', 0)
+                ->publiclySitemapEligible()
+                ->where('llms_eligible', true)
+                ->whereIn('locale', ['en', 'zh-CN'])
+                ->orderBy('locale')
+                ->orderBy('slug')
+                ->get();
+        } catch (\Throwable) {
+            $this->articlesUnavailableReason = 'articles_unavailable';
+
+            return [];
+        }
+
+        $records = [];
+        foreach ($articles as $article) {
+            if (! $article instanceof Article || ! $this->hasRequiredArticleFields($article)) {
+                continue;
+            }
+
+            $seoMeta = $article->seoMeta instanceof ArticleSeoMeta ? $article->seoMeta : null;
+            $path = $this->articleCanonicalPath($article, $seoMeta);
+            if ($path === null) {
+                continue;
+            }
+
+            $updatedAt = $article->updated_at instanceof Carbon ? $article->updated_at : null;
+            $lastmodAt = $updatedAt
+                ?? ($article->published_at instanceof Carbon ? $article->published_at : null);
+
+            $records[] = new UrlTruthInventoryRecord(
+                canonicalUrl: $this->canonicalUrl($path),
+                locale: (string) $article->locale,
+                pageEntityType: 'article',
+                entityIdOrSlug: (string) $article->id,
+                sourceAuthority: 'backend_cms',
+                indexabilityState: 'indexable',
+                lastmodAt: $lastmodAt,
+                lastmodSource: 'articles.updated_at',
+                cluster: 'articles',
+                entitySource: 'articles',
+                authorityStatus: 'published_approved',
+                sourceUpdatedAt: $updatedAt,
+                metadata: [
+                    'source_table_hash' => hash('sha256', 'articles'),
+                    'canonical_path_hash' => hash('sha256', $path),
+                    'slug_hash' => hash('sha256', (string) $article->slug),
+                    'translation_group_hash' => hash('sha256', (string) $article->translation_group_id),
+                    'claim_boundary_state' => 'claim_safe',
+                    'claim_safe' => true,
+                    'sitemap_eligible' => true,
+                    'llms_eligible' => true,
+                    'publication_state' => 'published',
+                    'robots' => 'index',
+                ],
+                attributes: [
+                    'source_authority' => 'backend_cms',
+                    'article_id_hash' => hash('sha256', (string) $article->id),
+                    'translation_group_hash' => hash('sha256', (string) $article->translation_group_id),
+                ],
+            );
+        }
+
+        $this->articlesAvailable = $records !== [];
+        if (! $this->articlesAvailable) {
+            $this->articlesUnavailableReason = 'articles_empty_or_ineligible';
+        }
+
+        return $records;
     }
 
     /**
@@ -347,6 +440,49 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
         return '/'.$localeSegment.'/research/'.$slug;
     }
 
+    private function articleCanonicalPath(Article $article, ?ArticleSeoMeta $seoMeta): ?string
+    {
+        $slug = trim((string) $article->slug);
+        if ($slug === '') {
+            return null;
+        }
+
+        $canonicalUrl = trim((string) ($seoMeta?->canonical_url ?? ''));
+        if ($canonicalUrl !== '') {
+            $path = (string) parse_url($canonicalUrl, PHP_URL_PATH);
+            if ($this->isSafeArticleRoutePath($path, $slug, (string) $article->locale)) {
+                return $path;
+            }
+
+            return null;
+        }
+
+        $localeSegment = match ((string) $article->locale) {
+            'zh-CN', 'zh' => 'zh',
+            'en' => 'en',
+            default => null,
+        };
+
+        if ($localeSegment === null) {
+            return null;
+        }
+
+        return '/'.$localeSegment.'/articles/'.$slug;
+    }
+
+    private function isSafeArticleRoutePath(string $path, string $slug, string $locale): bool
+    {
+        $normalized = '/'.ltrim($path, '/');
+        $localeSegment = match ($locale) {
+            'zh-CN', 'zh' => 'zh',
+            'en' => 'en',
+            default => null,
+        };
+
+        return $localeSegment !== null
+            && (bool) preg_match('#^/'.preg_quote($localeSegment, '#').'/articles/'.preg_quote($slug, '#').'$#', $normalized);
+    }
+
     private function isSafeResearchRoutePath(string $path, string $slug): bool
     {
         $normalized = '/'.ltrim($path, '/');
@@ -368,6 +504,18 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
         }
 
         return is_array($report->references) && $report->references !== [];
+    }
+
+    private function hasRequiredArticleFields(Article $article): bool
+    {
+        return trim((string) $article->slug) !== ''
+            && trim((string) $article->title) !== ''
+            && (string) $article->status === 'published'
+            && (bool) $article->is_public
+            && (bool) $article->is_indexable
+            && (bool) $article->sitemap_eligible
+            && (bool) $article->llms_eligible
+            && $article->published_revision_id !== null;
     }
 
     private function contentPageCanonicalPath(ContentPage $page): ?string

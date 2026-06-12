@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Feature\SeoIntel;
 
+use App\Models\Article;
+use App\Models\ArticleSeoMeta;
+use App\Models\ArticleTranslationRevision;
 use App\Models\ContentPage;
 use App\Models\ResearchReport;
 use App\Services\Scale\ScaleRegistry;
@@ -140,6 +143,92 @@ final class EnParity01UrlTruthCanonicalBaselineTest extends TestCase
     }
 
     #[Test]
+    public function articles_enter_url_truth_only_when_published_indexable_sitemap_and_llms_eligible(): void
+    {
+        config([
+            'app.frontend_url' => 'https://fermatmind.com',
+            'seo_intel.public_canonical_host' => 'https://fermatmind.com',
+        ]);
+
+        $enArticle = $this->createArticle([
+            'slug' => 'career-interest-test-vs-personality-test',
+            'locale' => 'en',
+            'title' => 'Career Interest Test vs Personality Test',
+            'translation_group_id' => 'tg_article_career_interest_vs_personality_test_2026v1',
+        ]);
+        $this->createArticleSeoMeta($enArticle, [
+            'canonical_url' => 'https://fermatmind.com/en/articles/career-interest-test-vs-personality-test',
+        ]);
+
+        $zhArticle = $this->createArticle([
+            'slug' => 'career-interest-vs-personality-test-differences',
+            'locale' => 'zh-CN',
+            'title' => '职业兴趣测试与性格测试的区别',
+            'translation_group_id' => 'tg_article_career_interest_vs_personality_test_2026v1',
+            'source_locale' => 'en',
+            'translation_status' => Article::TRANSLATION_STATUS_PUBLISHED,
+            'source_article_id' => $enArticle->id,
+            'translated_from_article_id' => $enArticle->id,
+        ]);
+        $this->createArticleSeoMeta($zhArticle, [
+            'canonical_url' => 'https://fermatmind.com/zh/articles/career-interest-vs-personality-test-differences',
+        ]);
+
+        $this->createArticle([
+            'slug' => 'draft-article',
+            'locale' => 'en',
+            'title' => 'Draft Article',
+            'status' => 'draft',
+            'is_public' => false,
+            'published_revision_id' => null,
+        ]);
+        $this->createArticle([
+            'slug' => 'no-llms-article',
+            'locale' => 'en',
+            'title' => 'No LLMS Article',
+            'llms_eligible' => false,
+        ]);
+        $unsafeCanonical = $this->createArticle([
+            'slug' => 'unsafe-canonical',
+            'locale' => 'en',
+            'title' => 'Unsafe Canonical',
+        ]);
+        $this->createArticleSeoMeta($unsafeCanonical, [
+            'canonical_url' => 'https://fermatmind.com/en/results/unsafe-canonical',
+        ]);
+
+        $source = new BackendAuthorityUrlTruthSource;
+        $records = $source->candidates();
+        $urls = array_map(static fn ($record): string => $record->canonicalUrl, $records);
+
+        $this->assertContains('https://fermatmind.com/en/articles/career-interest-test-vs-personality-test', $urls);
+        $this->assertContains('https://fermatmind.com/zh/articles/career-interest-vs-personality-test-differences', $urls);
+        $this->assertNotContains('https://fermatmind.com/en/articles/draft-article', $urls);
+        $this->assertNotContains('https://fermatmind.com/en/articles/no-llms-article', $urls);
+        $this->assertNotContains('https://fermatmind.com/en/results/unsafe-canonical', $urls);
+
+        $enRecord = collect($records)->first(
+            static fn ($record): bool => $record->canonicalUrl === 'https://fermatmind.com/en/articles/career-interest-test-vs-personality-test'
+        );
+
+        $this->assertNotNull($enRecord);
+        $this->assertSame('article', $enRecord->pageEntityType);
+        $this->assertSame((string) $enArticle->id, $enRecord->entityIdOrSlug);
+        $this->assertSame('backend_cms', $enRecord->sourceAuthority);
+        $this->assertSame('articles', $enRecord->entitySource);
+        $this->assertSame('published_approved', $enRecord->authorityStatus);
+        $this->assertSame('indexable', $enRecord->indexabilityState);
+        $this->assertSame('claim_safe', $enRecord->metadata['claim_boundary_state'] ?? null);
+        $this->assertTrue((bool) ($enRecord->metadata['sitemap_eligible'] ?? false));
+        $this->assertTrue((bool) ($enRecord->metadata['llms_eligible'] ?? false));
+
+        $metadata = $source->metadata();
+        $this->assertTrue((bool) ($metadata['articles_attempted'] ?? false));
+        $this->assertTrue((bool) ($metadata['articles_available'] ?? false));
+        $this->assertNull($metadata['articles_unavailable_reason'] ?? null);
+    }
+
+    #[Test]
     public function sitemap_source_exposes_only_content_pages_with_published_authority(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);
@@ -225,12 +314,21 @@ final class EnParity01UrlTruthCanonicalBaselineTest extends TestCase
             'is_public' => true,
             'is_indexable' => true,
             'review_state' => 'approved',
+            'legal_review_required' => false,
+            'science_review_required' => false,
             'content_md' => '## Overview'.PHP_EOL.'Authority-backed body.',
             'content_html' => '',
             'seo_title' => 'About FermatMind',
             'seo_description' => 'Authority-backed content page.',
             'meta_description' => 'Authority-backed content page.',
             'canonical_path' => '/en/about',
+            'schema_enabled' => false,
+            'publish_allowed' => true,
+            'operator_approval_required' => false,
+            'operator_approved_at' => now()->subDay(),
+            'claim_gate_status' => 'passed',
+            'forbidden_claims' => [],
+            'faq_schema_eligible' => false,
             'status' => ContentPage::STATUS_PUBLISHED,
             'published_at' => now()->subDay(),
         ]);
@@ -266,6 +364,79 @@ final class EnParity01UrlTruthCanonicalBaselineTest extends TestCase
             'seo_description' => 'Safe Research Report description.',
             'canonical_path' => '/en/research/safe-research-report',
         ]);
+    }
+
+    /**
+     * @param  array<string, mixed>  $overrides
+     */
+    private function createArticle(array $overrides = []): Article
+    {
+        $article = Article::query()->create($overrides + [
+            'org_id' => 0,
+            'slug' => 'safe-article',
+            'locale' => 'en',
+            'translation_group_id' => 'tg-safe-article',
+            'source_locale' => $overrides['locale'] ?? 'en',
+            'translation_status' => Article::TRANSLATION_STATUS_SOURCE,
+            'title' => 'Safe Article',
+            'excerpt' => 'Authority-backed article excerpt.',
+            'content_md' => '## Overview'.PHP_EOL.'Authority-backed article body.',
+            'content_html' => '',
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => true,
+            'sitemap_eligible' => true,
+            'llms_eligible' => true,
+            'published_at' => now()->subHour(),
+        ]);
+
+        if ($article->published_revision_id === null) {
+            $revision = ArticleTranslationRevision::query()->create([
+                'org_id' => (int) $article->org_id,
+                'article_id' => (int) $article->id,
+                'source_article_id' => (int) ($article->source_article_id ?: $article->id),
+                'translation_group_id' => (string) $article->translation_group_id,
+                'locale' => (string) $article->locale,
+                'source_locale' => (string) ($article->source_locale ?: $article->locale),
+                'revision_number' => 1,
+                'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
+                'title' => (string) $article->title,
+                'excerpt' => (string) $article->excerpt,
+                'content_md' => (string) $article->content_md,
+                'seo_title' => (string) $article->title,
+                'seo_description' => (string) $article->excerpt,
+                'published_at' => now()->subHour(),
+            ]);
+
+            $article->forceFill([
+                'working_revision_id' => $revision->id,
+                'published_revision_id' => $revision->id,
+            ])->save();
+        }
+
+        return $article->refresh();
+    }
+
+    /**
+     * @param  array<string, mixed>  $overrides
+     */
+    private function createArticleSeoMeta(Article $article, array $overrides = []): ArticleSeoMeta
+    {
+        return ArticleSeoMeta::query()->create($overrides + [
+            'org_id' => (int) $article->org_id,
+            'article_id' => (int) $article->id,
+            'locale' => (string) $article->locale,
+            'seo_title' => (string) $article->title,
+            'seo_description' => (string) $article->excerpt,
+            'canonical_url' => 'https://fermatmind.com/'.$this->articleLocaleSegment((string) $article->locale).'/articles/'.$article->slug,
+            'robots' => 'index,follow',
+            'is_indexable' => true,
+        ]);
+    }
+
+    private function articleLocaleSegment(string $locale): string
+    {
+        return $locale === 'zh-CN' ? 'zh' : 'en';
     }
 
     private function mockScaleRegistry(): ScaleRegistry
