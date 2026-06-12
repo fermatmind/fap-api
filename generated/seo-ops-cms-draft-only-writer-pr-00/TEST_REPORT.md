@@ -13,6 +13,7 @@ cd backend && vendor/bin/pint --test app/Console/Commands/ArticleImportSeoConten
 git diff --check -- backend/app/Console/Commands/ArticleImportSeoContentPackageDraft.php backend/app/Services/Cms/SeoContentPackage/SeoContentPackageDraftImporter.php backend/app/Console/Kernel.php backend/tests/Feature/Console/ArticleImportSeoContentPackageDraftCommandTest.php
 cd backend && php artisan route:list --no-ansi
 cd backend && php artisan migrate --pretend --no-interaction --no-ansi
+cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|seo_content_package_draft_importer' --no-ansi
 ```
 
 ## Focused Test Result
@@ -35,3 +36,4 @@ Covered:
 
 - `php artisan route:list --no-ansi`: passed; command registration was available.
 - `php artisan migrate --pretend --no-interaction --no-ansi`: blocked by local MySQL credentials, not by this patch. Error: `SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)` against local database `fap_api`. This PR adds no migrations and did not connect to production.
+- Big Five runtime freeze focused check: passed after classifying the SEO content package draft-only importer as a non-Big-Five runtime CMS draft writer path.
