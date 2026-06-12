@@ -278,6 +278,42 @@ final class CareerAlignCareerAuthorityBatchCommandTest extends TestCase
         $this->assertStringContainsString('Duplicate existing onet_soc_2019 crosswalks found.', implode(' ', $report['errors']));
     }
 
+    #[Test]
+    public function conflicting_existing_crosswalks_can_emit_corrected_workbook_manifest_without_writing(): void
+    {
+        $slug = 'acute-care-nurses';
+        $occupation = $this->createOccupation($slug);
+        $this->createCrosswalk($occupation, 'us_soc', '29-1141');
+        $this->createCrosswalk($occupation, 'onet_soc_2019', '29-1141.01');
+        $workbook = $this->writeWorkbook([
+            $this->row($slug, soc: '29-9999', onet: '29-9999.99'),
+        ]);
+        $correctionOutput = $this->tempDir().'/authority-correction.json';
+
+        [$exitCode, $report] = $this->runAlign($workbook, $slug, [
+            '--dry-run' => true,
+            '--authority-correction-output' => $correctionOutput,
+        ]);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('fail', $report['decision']);
+        $this->assertFalse($report['writes_database']);
+        $this->assertSame(1, $report['authority_correction_candidate_count']);
+        $this->assertSame(realpath(dirname($correctionOutput)).'/'.basename($correctionOutput), $report['authority_correction_output']);
+        $this->assertFileExists($correctionOutput);
+
+        $manifest = json_decode((string) file_get_contents($correctionOutput), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertSame('career_authority_workbook_corrections', $manifest['scope']);
+        $this->assertSame([$slug], $manifest['slugs']);
+        $this->assertSame(1, $manifest['row_count']);
+        $this->assertFalse($manifest['rows'][0]['safe_to_force_original_workbook']);
+        $this->assertTrue($manifest['rows'][0]['safe_to_use_corrected_row_for_next_dry_run']);
+        $this->assertSame('29-1141', $manifest['rows'][0]['corrected_workbook_row']['SOC_Code']);
+        $this->assertSame('29-1141.01', $manifest['rows'][0]['corrected_workbook_row']['O_NET_Code']);
+        $this->assertSame(1, Occupation::query()->count());
+        $this->assertSame(2, OccupationCrosswalk::query()->count());
+    }
+
     /**
      * @param  array<string, mixed>  $options
      * @return array{int, array<string, mixed>}

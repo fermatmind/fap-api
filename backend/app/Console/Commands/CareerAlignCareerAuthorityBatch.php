@@ -97,7 +97,8 @@ final class CareerAlignCareerAuthorityBatch extends Command
         {--dry-run : Validate and report without writing}
         {--force : Required to write authority Occupation and crosswalk rows}
         {--json : Emit machine-readable report}
-        {--output= : Optional report output path}';
+        {--output= : Optional report output path}
+        {--authority-correction-output= : Optional JSON output path for safe workbook/manifest correction suggestions when existing authority conflicts with workbook rows}';
 
     protected $description = 'Guarded dry-run/force alignment for career upload authority occupations and SOC/O*NET crosswalks.';
 
@@ -179,7 +180,12 @@ final class CareerAlignCareerAuthorityBatch extends Command
             $report = array_merge($report, [
                 'validated_count' => count($items),
                 'items' => $items,
-            ], $this->summarize($items));
+            ], $this->summarize($items), $this->authorityCorrectionSummary($items, $file));
+
+            $authorityCorrectionOutput = $this->writeAuthorityCorrectionOutput($report['authority_correction_manifest']);
+            if ($authorityCorrectionOutput !== null) {
+                $report['authority_correction_output'] = $authorityCorrectionOutput;
+            }
 
             if ($errors !== []) {
                 return $this->finish(array_merge($report, [
@@ -930,10 +936,114 @@ final class CareerAlignCareerAuthorityBatch extends Command
             'failed_count' => 0,
             'would_write' => false,
             'did_write' => false,
+            'authority_correction_candidate_count' => 0,
+            'authority_correction_output' => null,
+            'authority_correction_manifest' => [
+                'scope' => 'career_authority_workbook_corrections',
+                'row_count' => 0,
+                'slugs' => [],
+                'rows' => [],
+            ],
             'display_assets_created' => false,
             'release_gates_changed' => false,
             'decision' => 'fail',
         ];
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $items
+     * @return array{authority_correction_candidate_count:int, authority_correction_manifest:array<string,mixed>}
+     */
+    private function authorityCorrectionSummary(array $items, string $file): array
+    {
+        $rows = [];
+
+        foreach ($items as $item) {
+            $existingSoc = $this->singleCrosswalkCode($item['existing_us_soc_crosswalks'] ?? []);
+            $existingOnet = $this->singleCrosswalkCode($item['existing_onet_crosswalks'] ?? []);
+            $workbookSoc = (string) ($item['workbook_us_soc'] ?? '');
+            $workbookOnet = (string) ($item['workbook_onet'] ?? '');
+
+            $socConflicts = $existingSoc !== null && $existingSoc !== $workbookSoc;
+            $onetConflicts = $existingOnet !== null && $existingOnet !== $workbookOnet;
+            if (! $socConflicts && ! $onetConflicts) {
+                continue;
+            }
+
+            $correctedSoc = $existingSoc ?? $workbookSoc;
+            $correctedOnet = $existingOnet ?? $workbookOnet;
+            $rows[] = [
+                'slug' => (string) $item['slug'],
+                'row_number' => (int) ($item['row_number'] ?? 0),
+                'issue' => 'existing_authority_conflicts_with_workbook',
+                'safe_to_force_original_workbook' => false,
+                'safe_to_use_corrected_row_for_next_dry_run' => $this->isNormalSocCode($correctedSoc)
+                    && $this->isNormalOnetCode($correctedOnet),
+                'original_workbook_authority' => [
+                    'SOC_Code' => $workbookSoc,
+                    'O_NET_Code' => $workbookOnet,
+                ],
+                'existing_authority' => [
+                    'SOC_Code' => $existingSoc,
+                    'O_NET_Code' => $existingOnet,
+                ],
+                'corrected_workbook_row' => [
+                    'Slug' => (string) $item['slug'],
+                    'SOC_Code' => $correctedSoc,
+                    'O_NET_Code' => $correctedOnet,
+                    'EN_Title' => (string) $item['title_en'],
+                    'CN_Title' => (string) $item['title_zh'],
+                ],
+            ];
+        }
+
+        return [
+            'authority_correction_candidate_count' => count($rows),
+            'authority_correction_manifest' => [
+                'scope' => 'career_authority_workbook_corrections',
+                'source_command' => self::COMMAND_NAME,
+                'source_file_sha256' => hash_file('sha256', $file) ?: null,
+                'row_count' => count($rows),
+                'slugs' => array_values(array_map(
+                    static fn (array $row): string => (string) $row['slug'],
+                    $rows,
+                )),
+                'policy' => [
+                    'dry_run_only' => true,
+                    'database_writes' => false,
+                    'cache_mutation' => false,
+                    'publish' => false,
+                    'next_step' => 'Regenerate or patch workbook rows with corrected_workbook_row, then rerun authority alignment dry-run before any force operation.',
+                ],
+                'rows' => $rows,
+            ],
+        ];
+    }
+
+    /**
+     * @param  list<mixed>  $crosswalks
+     */
+    private function singleCrosswalkCode(array $crosswalks): ?string
+    {
+        if (count($crosswalks) !== 1 || ! is_array($crosswalks[0] ?? null)) {
+            return null;
+        }
+
+        $code = trim((string) ($crosswalks[0]['source_code'] ?? ''));
+
+        return $code === '' ? null : $code;
+    }
+
+    /**
+     * @param  array<string, mixed>  $manifest
+     */
+    private function writeAuthorityCorrectionOutput(array $manifest): ?string
+    {
+        return CareerCliArtifactPathGuard::writeJsonOutput(
+            $this->option('authority-correction-output'),
+            $manifest,
+            '--authority-correction-output',
+        );
     }
 
     /**

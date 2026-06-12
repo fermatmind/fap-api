@@ -359,6 +359,68 @@ final class CareerImportSelectedDisplayAssetsCommandTest extends TestCase
     }
 
     #[Test]
+    public function manifest_authorized_update_existing_rewrites_existing_display_asset(): void
+    {
+        $row = $this->row('manifest-only-career', title: 'Manifest Only Career', cnTitle: '已审核职业', soc: '15-2011', onet: '15-2011.00');
+        $occupation = $this->createAuthorityOccupation($row['Slug'], $row['SOC_Code'], $row['O_NET_Code']);
+        CareerJobDisplayAsset::query()->create([
+            'occupation_id' => $occupation->id,
+            'canonical_slug' => $row['Slug'],
+            'surface_version' => 'display.surface.v1',
+            'asset_version' => 'v4.2',
+            'template_version' => 'v4.2',
+            'asset_type' => 'career_job_public_display',
+            'asset_role' => 'formal_pilot_master',
+            'status' => 'ready_for_pilot',
+            'component_order_json' => ['hero'],
+            'page_payload_json' => ['page' => ['zh' => ['hero' => ['title' => '旧内容']], 'en' => []]],
+            'seo_payload_json' => [],
+            'sources_json' => [],
+            'structured_data_json' => [],
+            'implementation_contract_json' => [],
+            'metadata_json' => ['command' => 'legacy-import'],
+        ]);
+        $workbook = $this->writeWorkbook([$row]);
+        $manifest = $this->writeManifest(
+            $workbook,
+            [$row],
+            baselineDisplayAssets: 1,
+            manifestScope: 'career_zh_display_parity_v0.1',
+            targetLocale: 'zh-CN',
+            updateExistingDisplayAsset: true,
+        );
+
+        [$exitCode, $report] = $this->runImportWithManifest($workbook, $manifest, [
+            '--dry-run' => true,
+            '--update-existing-from-manifest' => true,
+        ]);
+
+        $this->assertSame(0, $exitCode, json_encode($report, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $this->assertSame('pass', $report['decision']);
+        $this->assertSame(1, $report['would_write_count']);
+        $this->assertSame(1, $report['would_update_existing_count']);
+        $this->assertSame(0, $report['already_exists_count']);
+
+        [$exitCode, $report] = $this->runImportWithManifest($workbook, $manifest, [
+            '--force' => true,
+            '--update-existing-from-manifest' => true,
+        ]);
+
+        $this->assertSame(0, $exitCode, json_encode($report, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $this->assertTrue($report['did_write']);
+        $this->assertSame(0, $report['created_count']);
+        $this->assertSame(1, $report['updated_count']);
+        $this->assertSame(1, CareerJobDisplayAsset::query()->count());
+
+        $asset = CareerJobDisplayAsset::query()->where('canonical_slug', $row['Slug'])->firstOrFail();
+        $this->assertCount(24, $asset->component_order_json);
+        $this->assertSame('career:import-selected-display-assets', data_get($asset->metadata_json, 'command'));
+        $this->assertIsArray(data_get($asset->page_payload_json, 'page.zh'));
+        $this->assertIsArray(data_get($asset->page_payload_json, 'page.en'));
+        $this->assertNotSame('旧内容', data_get($asset->page_payload_json, 'page.zh.hero.title'));
+    }
+
+    #[Test]
     public function d5_selected_slugs_dry_run_generates_payloads_without_writing_database_rows(): void
     {
         foreach ($this->d5Rows() as $row) {
@@ -1080,8 +1142,9 @@ final class CareerImportSelectedDisplayAssetsCommandTest extends TestCase
         ?string $contentAuthority = null,
         ?bool $seoReleaseGatesUnchanged = null,
         ?string $rowHashOverride = null,
+        bool $updateExistingDisplayAsset = false,
     ): string {
-        $manifestRows = array_map(static function (array $row, int $index) use ($publicResolutionType, $rowStatus, $manifestScope, $targetLocale, $reviewedChineseFields, $contentAuthority, $seoReleaseGatesUnchanged, $rowHashOverride): array {
+        $manifestRows = array_map(static function (array $row, int $index) use ($publicResolutionType, $rowStatus, $manifestScope, $targetLocale, $reviewedChineseFields, $contentAuthority, $seoReleaseGatesUnchanged, $rowHashOverride, $updateExistingDisplayAsset): array {
             $manifestRow = [
                 'row_number' => $index + 2,
                 'slug' => $row['Slug'],
@@ -1102,6 +1165,7 @@ final class CareerImportSelectedDisplayAssetsCommandTest extends TestCase
                 $manifestRow['content_authority'] = $contentAuthority ?? 'reviewed_workbook';
                 $manifestRow['reviewed_chinese_fields'] = $reviewedChineseFields ?? true;
                 $manifestRow['seo_release_gates_unchanged'] = $seoReleaseGatesUnchanged ?? true;
+                $manifestRow['update_existing_display_asset'] = $updateExistingDisplayAsset;
             }
 
             return $manifestRow;
