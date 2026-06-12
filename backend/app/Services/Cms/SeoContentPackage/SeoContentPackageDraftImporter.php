@@ -1,0 +1,901 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Services\Cms\SeoContentPackage;
+
+use App\Models\Article;
+use App\Models\ArticleCategory;
+use App\Models\ArticleEditorialPackageImport;
+use App\Models\ArticleSeoMeta;
+use App\Models\ArticleTranslationRevision;
+use App\Services\Cms\ArticleBodyHeadingGuard;
+use App\Services\Cms\ArticleTranslationRevisionWorkspace;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use RuntimeException;
+
+final class SeoContentPackageDraftImporter
+{
+    private const REQUIRED_FILES = [
+        'manifest.json',
+        'contracts/PUBLIC_CANONICAL_ROUTE_CONTRACT.json',
+        'contracts/ROUTE_ALIAS_CONTRACT.json',
+        'contracts/SOCIAL_IMAGE_METADATA_REQUIREMENTS.json',
+        'contracts/DYNAMIC_CTA_CONTRACT.json',
+        'contracts/INTERNAL_LINK_PLAN.json',
+        'contracts/PRIVATE_URL_GUARD.json',
+        'review/claim_gate.md',
+        'review/operator_review.md',
+        'codex/qa_checklist.md',
+    ];
+
+    private const REQUIRED_FLAGS = [
+        'draft_only',
+        'no_publish',
+        'no_index',
+        'no_sitemap',
+        'no_llms',
+        'schema_hold',
+        'hreflang_hold',
+    ];
+
+    private const PRIVATE_ROUTE_PATTERN = '~(?<![A-Za-z0-9_-])/(?:result|results|orders|order|share|pay|payment|history|take)(?:/|[?#\s)"\']|$)~i';
+
+    private const SENSITIVE_QUERY_PATTERN = '/(?:[?&]|^)(?:result_id|order_id|payment_id|token|score|user_id|report_id)=/i';
+
+    public function __construct(
+        private readonly ArticleTranslationRevisionWorkspace $revisionWorkspace,
+        private readonly ArticleBodyHeadingGuard $articleBodyHeadingGuard,
+    ) {}
+
+    /**
+     * @param  array<string, mixed>  $options
+     * @return array<string, mixed>
+     */
+    public function planFromDirectory(array $options): array
+    {
+        return $this->buildPlan($options);
+    }
+
+    /**
+     * @param  array<string, mixed>  $options
+     * @return array<string, mixed>
+     */
+    public function importFromDirectory(array $options): array
+    {
+        $plan = $this->buildPlan($options);
+        if (($plan['ok'] ?? false) !== true) {
+            return $plan;
+        }
+
+        $articles = [];
+        $packageItems = is_array($plan['package_items'] ?? null) ? $plan['package_items'] : [];
+
+        DB::transaction(function () use ($packageItems, &$articles): void {
+            foreach ($packageItems as $item) {
+                if (is_array($item)) {
+                    $articles[] = $this->writeDraft($item);
+                }
+            }
+        });
+
+        return array_merge($plan, [
+            'dry_run' => false,
+            'action' => $this->summaryAction($articles),
+            'would_write' => true,
+            'articles' => $articles,
+            'package_items' => [],
+        ]);
+    }
+
+    /**
+     * @param  array<string, mixed>  $options
+     * @return array<string, mixed>
+     */
+    private function buildPlan(array $options): array
+    {
+        $errors = [];
+        $warnings = [];
+        $packageRoot = $this->resolvePackageRoot((string) ($options['package'] ?? ''), $errors);
+        $expectedTranslationGroupId = trim((string) ($options['translation_group_id'] ?? ''));
+        $locales = $this->normalizeLocales($options['locales'] ?? []);
+        $expectedSlugs = is_array($options['expected_slugs'] ?? null) ? $options['expected_slugs'] : [];
+
+        $this->validateSafetyFlags($options, $errors);
+
+        if ($expectedTranslationGroupId === '') {
+            $errors[] = $this->issue('translation_group_id', 'missing_expected_translation_group_id', '--translation-group-id is required.');
+        }
+        if ($locales !== ['zh-CN', 'en']) {
+            $errors[] = $this->issue('locales', 'unsupported_locale_set', '--locales must resolve to zh-CN,en.');
+        }
+
+        $manifest = [];
+        $packageItems = [];
+        if ($packageRoot !== null) {
+            $this->validateRequiredFiles($packageRoot, $errors);
+            $manifest = $this->readJson($packageRoot.'/manifest.json', 'manifest.json', $errors);
+            $this->validateWholePackageText($packageRoot, $errors);
+            $packageItems = $this->buildPackageItems($packageRoot, $manifest, $expectedTranslationGroupId, $expectedSlugs, $errors, $warnings);
+        }
+
+        $ok = $errors === [];
+        $plannedArticles = $ok ? array_map(fn (array $item): array => $this->plannedArticle($item), $packageItems) : [];
+
+        return [
+            'ok' => $ok,
+            'dry_run' => (bool) ($options['dry_run'] ?? true),
+            'action' => $ok ? $this->summaryAction($plannedArticles) : 'will_skip',
+            'would_write' => $ok,
+            'translation_group_id' => $expectedTranslationGroupId,
+            'package_root' => $packageRoot,
+            'manifest_status' => $manifest !== [] ? 'valid_json' : 'missing_or_invalid',
+            'safety_flags' => $this->safetyFlagSnapshot($options),
+            'articles' => $plannedArticles,
+            'package_items' => $packageItems,
+            'errors' => $errors,
+            'warnings' => $warnings,
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $item
+     * @return array<string, mixed>
+     */
+    private function writeDraft(array $item): array
+    {
+        $existing = $this->existingArticle($item);
+        if ($existing instanceof Article && $this->isPublishedOrPublic($existing)) {
+            throw new RuntimeException('Existing published/public article cannot be mutated by SEO content package draft import.');
+        }
+
+        $category = $this->resolveCategory();
+        $metadata = $this->metadata($item);
+        $body = (string) $item['body_markdown'];
+
+        $article = $existing instanceof Article ? $existing : new Article;
+        $article->forceFill([
+            'org_id' => 0,
+            'category_id' => (int) $category->id,
+            'author_name' => 'Fermat Institute',
+            'reviewer_name' => null,
+            'reading_minutes' => $this->readingMinutes($body),
+            'slug' => (string) $item['slug'],
+            'locale' => (string) $item['locale'],
+            'translation_group_id' => (string) $item['translation_group_id'],
+            'title' => (string) $item['title'],
+            'excerpt' => (string) $item['excerpt'],
+            'content_md' => $body,
+            'content_html' => null,
+            'cover_image_url' => (string) $item['cover_image_url'],
+            'cover_image_alt' => (string) $item['cover_image_alt'],
+            'cover_image_width' => (int) $item['cover_image_width'],
+            'cover_image_height' => (int) $item['cover_image_height'],
+            'cover_image_variants' => $metadata,
+            'related_test_slug' => 'holland-career-interest-test-riasec',
+            'status' => 'draft',
+            'is_public' => false,
+            'is_indexable' => false,
+            'sitemap_eligible' => false,
+            'llms_eligible' => false,
+            'published_at' => null,
+            'scheduled_at' => null,
+            'published_revision_id' => null,
+        ])->save();
+
+        $revision = $this->revisionWorkspace->saveWorkingRevision($article, [
+            'title' => (string) $item['title'],
+            'excerpt' => (string) $item['excerpt'],
+            'content_md' => $body,
+            'seo_title' => (string) $item['meta_title'],
+            'seo_description' => (string) $item['meta_description'],
+            'working_revision_status' => ArticleTranslationRevision::STATUS_HUMAN_REVIEW,
+        ]);
+
+        $article->forceFill([
+            'working_revision_id' => (int) $revision->id,
+            'status' => 'draft',
+            'is_public' => false,
+            'is_indexable' => false,
+            'sitemap_eligible' => false,
+            'llms_eligible' => false,
+            'published_at' => null,
+            'published_revision_id' => null,
+        ])->save();
+
+        ArticleSeoMeta::query()->withoutGlobalScopes()->updateOrCreate(
+            [
+                'org_id' => 0,
+                'article_id' => (int) $article->id,
+                'locale' => (string) $item['locale'],
+            ],
+            [
+                'seo_title' => (string) $item['meta_title'],
+                'seo_description' => (string) $item['meta_description'],
+                'canonical_url' => (string) $item['canonical_url'],
+                'og_title' => (string) $item['meta_title'],
+                'og_description' => (string) $item['meta_description'],
+                'og_image_url' => (string) $item['og_image_url'],
+                'robots' => 'noindex,nofollow',
+                'schema_json' => [
+                    'editorial_package_v1' => $metadata['editorial_package_v1'],
+                ],
+                'is_indexable' => false,
+            ],
+        );
+
+        $this->persistImportRecord($article, $revision, $item, $metadata);
+
+        return [
+            'locale' => (string) $item['locale'],
+            'slug' => (string) $item['slug'],
+            'action' => $existing instanceof Article ? 'updated_working_revision' : 'created_draft',
+            'article_id' => (int) $article->id,
+            'working_revision_id' => (int) $revision->id,
+            'status' => 'draft',
+            'working_revision_status' => (string) $revision->revision_status,
+            'is_public' => false,
+            'is_indexable' => false,
+            'sitemap_eligible' => false,
+            'llms_eligible' => false,
+            'preview_url_candidate' => '/ops/article-preview/'.(int) $article->id,
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $item
+     * @return array<string, mixed>
+     */
+    private function plannedArticle(array $item): array
+    {
+        $existing = $this->existingArticle($item);
+
+        return [
+            'locale' => (string) $item['locale'],
+            'slug' => (string) $item['slug'],
+            'action' => $existing instanceof Article ? 'would_update_working_revision' : 'would_create_draft',
+            'article_id' => $existing instanceof Article ? (int) $existing->id : null,
+            'working_revision_id' => null,
+            'status' => 'draft',
+            'working_revision_status' => ArticleTranslationRevision::STATUS_HUMAN_REVIEW,
+            'is_public' => false,
+            'is_indexable' => false,
+            'sitemap_eligible' => false,
+            'llms_eligible' => false,
+            'preview_url_candidate' => $existing instanceof Article ? '/ops/article-preview/'.(int) $existing->id : null,
+        ];
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $errors
+     */
+    private function resolvePackageRoot(string $package, array &$errors): ?string
+    {
+        $path = trim($package);
+        if ($path === '') {
+            $errors[] = $this->issue('package', 'missing_package', '--package is required.');
+
+            return null;
+        }
+
+        if (! is_dir($path)) {
+            $errors[] = $this->issue('package', 'package_directory_not_found', 'Package directory not found.');
+
+            return null;
+        }
+
+        $root = realpath($path);
+        if (! is_string($root)) {
+            $errors[] = $this->issue('package', 'package_directory_unreadable', 'Package directory is unreadable.');
+
+            return null;
+        }
+
+        if (is_file($root.'/manifest.json')) {
+            return $root;
+        }
+
+        $children = glob($root.'/*/manifest.json') ?: [];
+        if (count($children) === 1) {
+            return dirname($children[0]);
+        }
+
+        $errors[] = $this->issue('manifest.json', 'manifest_not_found', 'manifest.json must exist in package root or a single child directory.');
+
+        return null;
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $errors
+     */
+    private function validateRequiredFiles(string $root, array &$errors): void
+    {
+        foreach (self::REQUIRED_FILES as $relativePath) {
+            if (! is_file($root.'/'.$relativePath)) {
+                $errors[] = $this->issue($relativePath, 'missing_required_file', $relativePath.' is required.');
+            }
+        }
+
+        if ((glob($root.'/pages/*.md') ?: []) === []) {
+            $errors[] = $this->issue('pages/*.md', 'missing_pages', 'At least one Markdown page is required.');
+        }
+        if ((glob($root.'/cms/CMS_FIELDS_*.json') ?: []) === []) {
+            $errors[] = $this->issue('cms/CMS_FIELDS_*.json', 'missing_cms_fields', 'CMS_FIELDS JSON files are required.');
+        }
+        if ((glob($root.'/cms/CMS_IMPORT_DRAFT_*.json') ?: []) === []) {
+            $errors[] = $this->issue('cms/CMS_IMPORT_DRAFT_*.json', 'missing_cms_import_drafts', 'CMS_IMPORT_DRAFT JSON files are required.');
+        }
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $errors
+     * @return array<string,mixed>
+     */
+    private function readJson(string $path, string $field, array &$errors): array
+    {
+        if (! is_file($path)) {
+            $errors[] = $this->issue($field, 'json_file_not_found', $field.' was not found.');
+
+            return [];
+        }
+
+        $decoded = json_decode((string) file_get_contents($path), true);
+        if (! is_array($decoded)) {
+            $errors[] = $this->issue($field, 'invalid_json', $field.' must be valid JSON.');
+
+            return [];
+        }
+
+        return $decoded;
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $errors
+     */
+    private function validateWholePackageText(string $root, array &$errors): void
+    {
+        $allFiles = array_merge(
+            glob($root.'/manifest.json') ?: [],
+            glob($root.'/pages/*.md') ?: [],
+            glob($root.'/cms/*.json') ?: [],
+            glob($root.'/contracts/*') ?: [],
+            glob($root.'/review/*') ?: [],
+            glob($root.'/codex/*') ?: [],
+        );
+        $activeLinkFiles = array_merge(
+            glob($root.'/pages/*.md') ?: [],
+            glob($root.'/cms/*.json') ?: [],
+            glob($root.'/contracts/DYNAMIC_CTA_CONTRACT.json') ?: [],
+            glob($root.'/contracts/INTERNAL_LINK_PLAN.json') ?: [],
+            glob($root.'/contracts/PUBLIC_CANONICAL_ROUTE_CONTRACT.json') ?: [],
+            glob($root.'/contracts/ROUTE_ALIAS_CONTRACT.json') ?: [],
+        );
+
+        $wholeText = '';
+        foreach ($allFiles as $file) {
+            if (is_file($file)) {
+                $wholeText .= "\n".(string) file_get_contents($file);
+            }
+        }
+        $activeLinkText = '';
+        foreach ($activeLinkFiles as $file) {
+            if (is_file($file)) {
+                $activeLinkText .= "\n".(string) file_get_contents($file);
+            }
+        }
+
+        if (preg_match('#/tests/big-five-personality-test(?!-ocean-model)#', $wholeText) === 1) {
+            $errors[] = $this->issue('big_five_route', 'old_big_five_route_found', 'Old Big Five route is forbidden.');
+        }
+        if (! str_contains($wholeText, '/tests/big-five-personality-test-ocean-model')) {
+            $errors[] = $this->issue('big_five_route', 'required_big_five_route_missing', 'Canonical Big Five route is required.');
+        }
+        if (str_contains($wholeText, '__CMS_MEDIA_LIBRARY_PLACEHOLDER__')) {
+            $errors[] = $this->issue('social_image', 'media_placeholder_found', 'CMS media placeholder marker is forbidden.');
+        }
+        if (preg_match(self::PRIVATE_ROUTE_PATTERN, $activeLinkText) === 1) {
+            $errors[] = $this->issue('private_url_guard', 'private_route_found', 'Private routes are forbidden.');
+        }
+        if (preg_match(self::SENSITIVE_QUERY_PATTERN, $activeLinkText) === 1) {
+            $errors[] = $this->issue('private_url_guard', 'sensitive_query_key_found', 'Sensitive query keys are forbidden.');
+        }
+    }
+
+    /**
+     * @param  array<string,mixed>  $manifest
+     * @param  array<string,mixed>  $expectedSlugs
+     * @param  list<array<string,mixed>>  $errors
+     * @param  list<array<string,mixed>>  $warnings
+     * @return list<array<string,mixed>>
+     */
+    private function buildPackageItems(
+        string $root,
+        array $manifest,
+        string $expectedTranslationGroupId,
+        array $expectedSlugs,
+        array &$errors,
+        array &$warnings
+    ): array {
+        $manifestTranslationGroupId = trim((string) ($manifest['translation_group_id'] ?? ''));
+        if ($manifestTranslationGroupId !== $expectedTranslationGroupId) {
+            $errors[] = $this->issue('manifest.translation_group_id', 'translation_group_id_mismatch', 'manifest translation_group_id does not match expected value.');
+        }
+
+        $items = [];
+        foreach (['zh-CN', 'en'] as $locale) {
+            $import = $this->readFirstJson($root.'/cms/CMS_IMPORT_DRAFT_'.$locale.'_*.json', 'cms import '.$locale, $errors);
+            $fields = $this->readFirstJson($root.'/cms/CMS_FIELDS_'.$locale.'_*.json', 'cms fields '.$locale, $errors);
+            $pagePath = $this->pagePathFor($root, $locale, $import, $manifest, $errors);
+            $page = $pagePath !== null ? $this->readMarkdownPage($pagePath) : ['frontmatter' => [], 'body' => ''];
+
+            $item = $this->normalizeItem($root, $locale, $manifest, $import, $fields, $page, $errors, $warnings);
+            $expectedSlug = trim((string) ($expectedSlugs[$locale] ?? ''));
+            if ($expectedSlug !== '' && (string) ($item['slug'] ?? '') !== $expectedSlug) {
+                $errors[] = $this->issue($locale.'.slug', 'expected_slug_mismatch', 'Package slug does not match expected slug.');
+            }
+
+            if ($item !== []) {
+                $items[] = $item;
+            }
+        }
+
+        return $items;
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $errors
+     * @return array<string,mixed>
+     */
+    private function readFirstJson(string $pattern, string $field, array &$errors): array
+    {
+        $matches = glob($pattern) ?: [];
+        if (count($matches) !== 1) {
+            $errors[] = $this->issue($field, 'json_file_count_invalid', $field.' must resolve to exactly one JSON file.');
+
+            return [];
+        }
+
+        return $this->readJson($matches[0], $field, $errors);
+    }
+
+    /**
+     * @param  array<string,mixed>  $import
+     * @param  array<string,mixed>  $manifest
+     * @param  list<array<string,mixed>>  $errors
+     */
+    private function pagePathFor(string $root, string $locale, array $import, array $manifest, array &$errors): ?string
+    {
+        $relative = trim((string) ($import['body_markdown_file'] ?? ''));
+        if ($relative === '') {
+            foreach ((array) ($manifest['pages'] ?? []) as $page) {
+                if (is_array($page) && (string) ($page['locale'] ?? '') === $locale) {
+                    $relative = trim((string) ($page['file'] ?? ''));
+                    break;
+                }
+            }
+        }
+
+        if ($relative === '') {
+            $matches = glob($root.'/pages/'.($locale === 'zh-CN' ? 'zh-CN-*' : 'en-*').'.md') ?: [];
+            if (count($matches) === 1) {
+                return $matches[0];
+            }
+        }
+
+        $path = $relative !== '' ? $root.'/'.ltrim($relative, '/') : '';
+        if ($path === '' || ! is_file($path)) {
+            $errors[] = $this->issue($locale.'.page', 'page_file_not_found', 'Markdown page for locale was not found.');
+
+            return null;
+        }
+
+        return $path;
+    }
+
+    /**
+     * @return array{frontmatter:array<string,mixed>,body:string}
+     */
+    private function readMarkdownPage(string $path): array
+    {
+        $contents = (string) file_get_contents($path);
+        if (preg_match('/\A---\R(.*?)\R---\R(.*)\z/s', $contents, $matches) !== 1) {
+            return ['frontmatter' => [], 'body' => trim($contents)];
+        }
+
+        return [
+            'frontmatter' => $this->parseSimpleFrontmatter((string) $matches[1]),
+            'body' => trim((string) $matches[2]),
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function parseSimpleFrontmatter(string $yaml): array
+    {
+        $data = [];
+        $lines = preg_split('/\R/', $yaml) ?: [];
+        $currentKey = null;
+        foreach ($lines as $line) {
+            if (preg_match('/^([A-Za-z0-9_-]+):\s*(.*)$/', $line, $matches) === 1) {
+                $currentKey = (string) $matches[1];
+                $value = trim((string) $matches[2]);
+                $data[$currentKey] = $value === '' ? [] : $this->parseScalar($value);
+
+                continue;
+            }
+
+            if ($currentKey !== null && preg_match('/^\s*-\s*(.+)$/', $line, $matches) === 1) {
+                if (! is_array($data[$currentKey] ?? null)) {
+                    $data[$currentKey] = [];
+                }
+                $data[$currentKey][] = $this->parseScalar(trim((string) $matches[1]));
+            }
+        }
+
+        return $data;
+    }
+
+    private function parseScalar(string $value): mixed
+    {
+        return match (strtolower($value)) {
+            'true' => true,
+            'false' => false,
+            'null' => null,
+            default => trim($value, '"\''),
+        };
+    }
+
+    /**
+     * @param  array<string,mixed>  $manifest
+     * @param  array<string,mixed>  $import
+     * @param  array<string,mixed>  $fields
+     * @param  array{frontmatter:array<string,mixed>,body:string}  $page
+     * @param  list<array<string,mixed>>  $errors
+     * @param  list<array<string,mixed>>  $warnings
+     * @return array<string,mixed>
+     */
+    private function normalizeItem(
+        string $root,
+        string $locale,
+        array $manifest,
+        array $import,
+        array $fields,
+        array $page,
+        array &$errors,
+        array &$warnings
+    ): array {
+        $frontmatter = $page['frontmatter'];
+        $body = $this->articleBodyHeadingGuard->downgradeMarkdownH1ToH2((string) $page['body']);
+        $manifestPage = $this->manifestPage($manifest, $locale);
+        $translationGroupId = $this->firstString($import['translation_group_id'] ?? null, $fields['translation_group_id'] ?? null, $frontmatter['translation_group_id'] ?? null, $manifest['translation_group_id'] ?? null);
+        $slug = Str::slug($this->firstString($import['slug'] ?? null, $fields['slug'] ?? null, $frontmatter['slug'] ?? null, $manifestPage['slug'] ?? null));
+        $title = $this->firstString($import['title'] ?? null, $fields['title'] ?? null, $frontmatter['title'] ?? null, $manifestPage['title'] ?? null);
+        $metaTitle = $this->firstString($import['meta_title'] ?? null, $fields['meta_title'] ?? null, $frontmatter['meta_title_draft'] ?? null, $manifestPage['meta_title_draft'] ?? null, $title);
+        $metaDescription = $this->firstString($import['meta_description'] ?? null, $fields['meta_description'] ?? null, $frontmatter['meta_description_draft'] ?? null, $manifestPage['meta_description_draft'] ?? null);
+        $canonical = $this->firstString($import['canonical_url'] ?? null, $fields['canonical_url'] ?? null, $frontmatter['canonical_url_draft'] ?? null, $manifestPage['canonical_url_draft'] ?? null);
+        $claimGateStatus = $this->firstString($import['claim_gate_status'] ?? null, $fields['claim_gate_status'] ?? null, $frontmatter['claim_gate_status'] ?? null, 'not_reviewed');
+        $social = is_array($import['social_image_metadata'] ?? null) ? $import['social_image_metadata'] : (is_array($fields['social_image_metadata'] ?? null) ? $fields['social_image_metadata'] : []);
+
+        $item = [
+            'locale' => $locale,
+            'translation_group_id' => $translationGroupId,
+            'slug' => $slug,
+            'title' => $title,
+            'meta_title' => $metaTitle,
+            'meta_description' => $metaDescription,
+            'excerpt' => mb_substr($metaDescription !== '' ? $metaDescription : trim(strip_tags($body)), 0, 240),
+            'canonical_url' => $canonical,
+            'body_markdown' => $body,
+            'primary_keyword' => $fields['primary_keyword'] ?? $import['primary_keyword'] ?? $frontmatter['primary_keyword'] ?? null,
+            'secondary_keywords' => $fields['secondary_keywords'] ?? $import['secondary_keywords'] ?? $frontmatter['secondary_keywords'] ?? null,
+            'claim_gate_status' => $claimGateStatus,
+            'publish_allowed' => (bool) ($import['publish_allowed'] ?? $fields['publish_allowed'] ?? $frontmatter['publish_allowed'] ?? false),
+            'sitemap_eligible' => (bool) ($import['sitemap_eligible'] ?? $fields['sitemap_eligible'] ?? $frontmatter['sitemap_eligible'] ?? false),
+            'llms_eligible' => (bool) ($import['llms_eligible'] ?? $fields['llms_eligible'] ?? $frontmatter['llms_eligible'] ?? false),
+            'schema_eligibility' => is_array($import['schema_eligibility'] ?? null) ? $import['schema_eligibility'] : ($fields['schema_eligibility'] ?? []),
+            'cover_media_asset_key' => $this->firstString($import['cover_media_asset_key'] ?? null, $fields['cover_media_asset_key'] ?? null, $social['media_library_asset_key'] ?? null),
+            'cover_image_url' => $this->firstString($import['cover_image_url'] ?? null, $fields['cover_image_url'] ?? null, $social['cover_image_url'] ?? null),
+            'cover_image_alt' => $this->firstString($import['cover_image_alt'] ?? null, $fields['cover_image_alt'] ?? null, $social['alt_text'] ?? null),
+            'cover_image_width' => (int) ($import['cover_image_width'] ?? $fields['cover_image_width'] ?? $social['width'] ?? 0),
+            'cover_image_height' => (int) ($import['cover_image_height'] ?? $fields['cover_image_height'] ?? $social['height'] ?? 0),
+            'cover_image_variants' => is_array($import['cover_image_variants'] ?? null) ? $import['cover_image_variants'] : ($fields['cover_image_variants'] ?? []),
+            'og_image_url' => $this->firstString($import['og_image_url'] ?? null, $fields['og_image_url'] ?? null, data_get($social, 'og_1200x630_variant.url'), $social['twitter_image_url'] ?? null),
+            'twitter_image_url' => $this->firstString($import['twitter_image_url'] ?? null, $fields['twitter_image_url'] ?? null, $social['twitter_image_url'] ?? null),
+            'social_image_metadata' => $social,
+            'source_package_root' => $root,
+        ];
+
+        $this->validateItem($item, $errors, $warnings);
+
+        return $item;
+    }
+
+    /**
+     * @param  array<string,mixed>  $manifest
+     * @return array<string,mixed>
+     */
+    private function manifestPage(array $manifest, string $locale): array
+    {
+        foreach ((array) ($manifest['pages'] ?? []) as $page) {
+            if (is_array($page) && (string) ($page['locale'] ?? '') === $locale) {
+                return $page;
+            }
+        }
+
+        return [];
+    }
+
+    /**
+     * @param  array<string,mixed>  $item
+     * @param  list<array<string,mixed>>  $errors
+     * @param  list<array<string,mixed>>  $warnings
+     */
+    private function validateItem(array $item, array &$errors, array &$warnings): void
+    {
+        $locale = (string) $item['locale'];
+        foreach (['translation_group_id', 'slug', 'title', 'meta_title', 'meta_description', 'canonical_url', 'body_markdown'] as $field) {
+            if (trim((string) ($item[$field] ?? '')) === '') {
+                $errors[] = $this->issue($locale.'.'.$field, 'missing_required_field', $field.' is required.');
+            }
+        }
+
+        if (! is_string($item['primary_keyword'] ?? null)) {
+            $errors[] = $this->issue($locale.'.primary_keyword', 'primary_keyword_not_string', 'primary_keyword must be a string.');
+        }
+        if (! is_array($item['secondary_keywords'] ?? null)) {
+            $errors[] = $this->issue($locale.'.secondary_keywords', 'secondary_keywords_not_array', 'secondary_keywords must be an array.');
+        }
+        if (! in_array((string) $item['claim_gate_status'], ['not_reviewed', 'human_review'], true)) {
+            $errors[] = $this->issue($locale.'.claim_gate_status', 'invalid_claim_gate_status', 'claim_gate_status must be not_reviewed or human_review.');
+        }
+        if ((bool) $item['publish_allowed']) {
+            $errors[] = $this->issue($locale.'.publish_allowed', 'publish_allowed_true_forbidden', 'publish_allowed must remain false.');
+        }
+        if ((bool) $item['sitemap_eligible']) {
+            $errors[] = $this->issue($locale.'.sitemap_eligible', 'sitemap_eligible_true_forbidden', 'sitemap_eligible must remain false.');
+        }
+        if ((bool) $item['llms_eligible']) {
+            $errors[] = $this->issue($locale.'.llms_eligible', 'llms_eligible_true_forbidden', 'llms_eligible must remain false.');
+        }
+        if (! str_starts_with((string) $item['canonical_url'], $locale === 'zh-CN' ? '/zh/articles/' : '/en/articles/')) {
+            $errors[] = $this->issue($locale.'.canonical_url', 'invalid_canonical_route', 'canonical_url must be a locale article route.');
+        }
+        if ((string) $item['cover_media_asset_key'] === '' || (string) $item['cover_image_url'] === '' || (string) $item['og_image_url'] === '') {
+            $errors[] = $this->issue($locale.'.social_image_metadata', 'missing_social_image_metadata', 'social image asset, cover URL, and OG URL are required.');
+        }
+        if ((int) $item['cover_image_width'] <= 0 || (int) $item['cover_image_height'] <= 0) {
+            $errors[] = $this->issue($locale.'.social_image_metadata', 'missing_social_image_dimensions', 'social image width and height are required.');
+        }
+        if (is_array($item['social_image_metadata'])
+            && isset($item['social_image_metadata']['media_library_status'])
+            && (string) $item['social_image_metadata']['media_library_status'] !== 'published') {
+            $errors[] = $this->issue($locale.'.social_image_metadata', 'social_image_not_published', 'Media Library asset must be published.');
+        }
+        if (is_array($item['social_image_metadata'])
+            && array_key_exists('is_public', $item['social_image_metadata'])
+            && (bool) $item['social_image_metadata']['is_public'] !== true) {
+            $errors[] = $this->issue($locale.'.social_image_metadata', 'social_image_not_public', 'Media Library asset must be public.');
+        }
+        if (! is_array($item['schema_eligibility'] ?? null)
+            || (bool) data_get($item, 'schema_eligibility.faq_schema', false) !== false) {
+            $errors[] = $this->issue($locale.'.schema_eligibility', 'schema_hold_not_satisfied', 'FAQ schema must remain disabled.');
+        }
+
+        if (trim((string) $item['twitter_image_url']) === '') {
+            $warnings[] = $this->issue($locale.'.twitter_image_url', 'twitter_image_reuses_og', 'Twitter image is missing and should reuse OG if needed.');
+        }
+    }
+
+    /**
+     * @param  array<string,mixed>  $item
+     */
+    private function existingArticle(array $item): ?Article
+    {
+        return Article::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', 0)
+            ->where('translation_group_id', (string) $item['translation_group_id'])
+            ->where('locale', (string) $item['locale'])
+            ->where('slug', (string) $item['slug'])
+            ->first();
+    }
+
+    private function isPublishedOrPublic(Article $article): bool
+    {
+        return (string) $article->status === 'published'
+            || (bool) $article->is_public
+            || $article->published_revision_id !== null
+            || $article->published_at !== null;
+    }
+
+    private function resolveCategory(): ArticleCategory
+    {
+        return ArticleCategory::query()->withoutGlobalScopes()->firstOrCreate(
+            ['org_id' => 0, 'slug' => 'seo-articles'],
+            ['name' => 'SEO Articles', 'is_active' => true, 'sort_order' => 0]
+        );
+    }
+
+    /**
+     * @param  array<string,mixed>  $item
+     * @return array<string,mixed>
+     */
+    private function metadata(array $item): array
+    {
+        $variants = is_array($item['cover_image_variants'] ?? null) ? $item['cover_image_variants'] : [];
+        $variants['editorial_package_v1'] = [
+            'source' => 'seo_content_package_mode_c',
+            'translation_group_id' => (string) $item['translation_group_id'],
+            'claim_gate_status' => (string) $item['claim_gate_status'],
+            'publish_allowed' => false,
+            'is_public' => false,
+            'is_indexable' => false,
+            'sitemap_eligible' => false,
+            'llms_eligible' => false,
+            'schema_hold' => true,
+            'hreflang_hold' => true,
+            'search_submission_allowed' => false,
+            'revalidation_allowed' => false,
+            'cover_media_asset_key' => (string) $item['cover_media_asset_key'],
+            'social_image_metadata' => $item['social_image_metadata'],
+            'body_hash' => hash('sha256', preg_replace("/\r\n?/", "\n", trim((string) $item['body_markdown'])) ?: trim((string) $item['body_markdown'])),
+        ];
+
+        return $variants;
+    }
+
+    /**
+     * @param  array<string,mixed>  $item
+     * @param  array<string,mixed>  $metadata
+     */
+    private function persistImportRecord(Article $article, ArticleTranslationRevision $revision, array $item, array $metadata): void
+    {
+        ArticleEditorialPackageImport::query()->withoutGlobalScopes()->create([
+            'org_id' => 0,
+            'article_id' => (int) $article->id,
+            'slug' => (string) $item['slug'],
+            'locale' => (string) $item['locale'],
+            'title' => (string) $item['title'],
+            'content_track' => 'seo_content_package_mode_c',
+            'status' => ArticleEditorialPackageImport::STATUS_IMPORTED,
+            'intended_status' => 'draft',
+            'validation_summary_json' => [
+                'source' => 'articles:import-seo-content-package-draft',
+                'working_revision_id' => (int) $revision->id,
+                'preview_url_candidate' => '/ops/article-preview/'.(int) $article->id,
+            ],
+            'claim_result_json' => [
+                'status' => (string) $item['claim_gate_status'],
+                'matches' => [],
+            ],
+            'exactness_json' => [
+                'translation_group_id' => (string) $item['translation_group_id'],
+                'canonical_url' => (string) $item['canonical_url'],
+            ],
+            'references_json' => ['status' => 'operator_review_required'],
+            'media_json' => [
+                'status' => 'complete',
+                'cover_media_asset_key' => (string) $item['cover_media_asset_key'],
+                'cover_image_url' => (string) $item['cover_image_url'],
+                'og_image_url' => (string) $item['og_image_url'],
+            ],
+            'graph_json' => [
+                'primary_cta' => '/tests/holland-career-interest-test-riasec',
+                'big_five_route' => '/tests/big-five-personality-test-ocean-model',
+            ],
+            'answer_surface_json' => ['status' => 'visible_only'],
+            'body_hash' => (string) data_get($metadata, 'editorial_package_v1.body_hash'),
+            'heading_sequence_json' => $this->headingSequence((string) $item['body_markdown']),
+            'references_count' => 0,
+            'missing_fields_json' => [],
+            'blocked_reasons_json' => [],
+            'imported_by' => null,
+        ]);
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function headingSequence(string $body): array
+    {
+        $headings = [];
+        foreach (preg_split('/\R/', $body) ?: [] as $line) {
+            if (preg_match('/^(#{2,6})\s+(.+)$/', $line, $matches) === 1) {
+                $headings[] = strlen((string) $matches[1]).':'.trim((string) $matches[2]);
+            }
+        }
+
+        return $headings;
+    }
+
+    private function readingMinutes(string $body): int
+    {
+        $characters = max(1, mb_strlen(strip_tags($body)));
+
+        return max(1, (int) ceil($characters / 700));
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function normalizeLocales(mixed $value): array
+    {
+        if (! is_array($value)) {
+            return [];
+        }
+
+        return array_values(array_map(static fn (mixed $locale): string => (string) $locale, $value));
+    }
+
+    /**
+     * @param  array<string,mixed>  $options
+     * @param  list<array<string,mixed>>  $errors
+     */
+    private function validateSafetyFlags(array $options, array &$errors): void
+    {
+        foreach (self::REQUIRED_FLAGS as $flag) {
+            if ((bool) ($options[$flag] ?? false) !== true) {
+                $errors[] = $this->issue('flags.'.$flag, 'missing_required_safety_flag', '--'.str_replace('_', '-', $flag).' is required.');
+            }
+        }
+    }
+
+    /**
+     * @param  array<string,mixed>  $options
+     * @return array<string,bool>
+     */
+    private function safetyFlagSnapshot(array $options): array
+    {
+        $snapshot = [];
+        foreach (self::REQUIRED_FLAGS as $flag) {
+            $snapshot[$flag] = (bool) ($options[$flag] ?? false);
+        }
+
+        return $snapshot;
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $articles
+     */
+    private function summaryAction(array $articles): string
+    {
+        if ($articles === []) {
+            return 'will_skip';
+        }
+
+        $actions = array_values(array_unique(array_map(
+            static fn (array $article): string => (string) ($article['action'] ?? ''),
+            $articles
+        )));
+
+        return count($actions) === 1 ? $actions[0] : 'mixed';
+    }
+
+    private function firstString(mixed ...$values): string
+    {
+        foreach ($values as $value) {
+            if (is_string($value) || is_numeric($value) || is_bool($value)) {
+                $normalized = trim((string) $value);
+                if ($normalized !== '') {
+                    return $normalized;
+                }
+            }
+        }
+
+        return '';
+    }
+
+    /**
+     * @return array{field:string,code:string,message:string}
+     */
+    private function issue(string $field, string $code, string $message): array
+    {
+        return [
+            'field' => $field,
+            'code' => $code,
+            'message' => $message,
+        ];
+    }
+}

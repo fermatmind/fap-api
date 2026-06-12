@@ -1,0 +1,440 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Tests\Feature\Console;
+
+use App\Models\Article;
+use App\Models\ArticleEditorialPackageImport;
+use App\Models\ArticleSeoMeta;
+use App\Models\ArticleTranslationRevision;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
+use Tests\TestCase;
+
+final class ArticleImportSeoContentPackageDraftCommandTest extends TestCase
+{
+    use RefreshDatabase;
+
+    private const TRANSLATION_GROUP_ID = 'tg_article_career_interest_vs_personality_test_2026v1';
+
+    public function test_dry_run_accepts_valid_bilingual_package_without_database_writes(): void
+    {
+        $package = $this->writeModeCPackage();
+
+        $exitCode = Artisan::call('articles:import-seo-content-package-draft', $this->commandOptions($package, [
+            '--dry-run' => true,
+            '--json' => true,
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertTrue($payload['dry_run']);
+        $this->assertSame('would_create_draft', $payload['action']);
+        $this->assertCount(2, $payload['articles']);
+        $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
+        $this->assertSame(0, ArticleSeoMeta::query()->withoutGlobalScopes()->count());
+        $this->assertSame(0, ArticleEditorialPackageImport::query()->withoutGlobalScopes()->count());
+    }
+
+    public function test_dry_run_rejects_old_big_five_alias(): void
+    {
+        $package = $this->writeModeCPackage(static function (array &$files): void {
+            $files['cms/CMS_FIELDS_en_career-interest-test-vs-personality-test.json']['secondary_hub_urls'][1] = '/tests/big-five-personality-test';
+        });
+
+        $exitCode = Artisan::call('articles:import-seo-content-package-draft', $this->commandOptions($package, [
+            '--dry-run' => true,
+            '--json' => true,
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertErrorCode($payload, 'old_big_five_route_found');
+        $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
+    }
+
+    public function test_dry_run_rejects_private_url(): void
+    {
+        $package = $this->writeModeCPackage(static function (array &$files): void {
+            $files['pages/en-career-interest-test-vs-personality-test.md'] .= "\n\n[private](/results/abc123)\n";
+        });
+
+        $exitCode = Artisan::call('articles:import-seo-content-package-draft', $this->commandOptions($package, [
+            '--dry-run' => true,
+            '--json' => true,
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertErrorCode($payload, 'private_route_found');
+        $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
+    }
+
+    public function test_dry_run_rejects_missing_social_image_metadata(): void
+    {
+        $package = $this->writeModeCPackage(static function (array &$files): void {
+            foreach (['zh-CN_career-interest-vs-personality-test-differences', 'en_career-interest-test-vs-personality-test'] as $suffix) {
+                $fieldsPath = 'cms/CMS_FIELDS_'.$suffix.'.json';
+                $importPath = 'cms/CMS_IMPORT_DRAFT_'.$suffix.'.json';
+                unset(
+                    $files[$fieldsPath]['cover_media_asset_key'],
+                    $files[$fieldsPath]['cover_image_url'],
+                    $files[$fieldsPath]['og_image_url'],
+                    $files[$fieldsPath]['social_image_metadata'],
+                    $files[$importPath]['cover_media_asset_key'],
+                    $files[$importPath]['cover_image_url'],
+                    $files[$importPath]['og_image_url'],
+                    $files[$importPath]['social_image_metadata']
+                );
+            }
+        });
+
+        $exitCode = Artisan::call('articles:import-seo-content-package-draft', $this->commandOptions($package, [
+            '--dry-run' => true,
+            '--json' => true,
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertErrorCode($payload, 'missing_social_image_metadata');
+        $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
+    }
+
+    public function test_dry_run_rejects_cms_media_placeholder_marker(): void
+    {
+        $package = $this->writeModeCPackage(static function (array &$files): void {
+            $files['cms/CMS_IMPORT_DRAFT_en_career-interest-test-vs-personality-test.json']['cover_image_url'] = '__CMS_MEDIA_LIBRARY_PLACEHOLDER__';
+        });
+
+        $exitCode = Artisan::call('articles:import-seo-content-package-draft', $this->commandOptions($package, [
+            '--dry-run' => true,
+            '--json' => true,
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertErrorCode($payload, 'media_placeholder_found');
+        $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
+    }
+
+    public function test_import_creates_draft_only_human_review_articles_without_publish_or_discoverability_release(): void
+    {
+        Http::fake();
+        $package = $this->writeModeCPackage();
+
+        $exitCode = Artisan::call('articles:import-seo-content-package-draft', $this->commandOptions($package, [
+            '--json' => true,
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertFalse($payload['dry_run']);
+        $this->assertSame('created_draft', $payload['action']);
+        $this->assertCount(2, $payload['articles']);
+
+        foreach ($payload['articles'] as $articleResult) {
+            $this->assertIsInt($articleResult['article_id']);
+            $this->assertIsInt($articleResult['working_revision_id']);
+            $this->assertStringStartsWith('/ops/article-preview/', $articleResult['preview_url_candidate']);
+
+            $article = Article::query()
+                ->withoutGlobalScopes()
+                ->with(['workingRevision', 'seoMeta'])
+                ->findOrFail((int) $articleResult['article_id']);
+
+            $this->assertSame('draft', (string) $article->status);
+            $this->assertFalse((bool) $article->is_public);
+            $this->assertFalse((bool) $article->is_indexable);
+            $this->assertFalse((bool) $article->sitemap_eligible);
+            $this->assertFalse((bool) $article->llms_eligible);
+            $this->assertNull($article->published_at);
+            $this->assertNull($article->published_revision_id);
+            $this->assertSame(self::TRANSLATION_GROUP_ID, (string) $article->translation_group_id);
+
+            $this->assertInstanceOf(ArticleTranslationRevision::class, $article->workingRevision);
+            $this->assertSame(ArticleTranslationRevision::STATUS_HUMAN_REVIEW, (string) $article->workingRevision->revision_status);
+            $this->assertSame((int) $articleResult['working_revision_id'], (int) $article->workingRevision->id);
+
+            $this->assertInstanceOf(ArticleSeoMeta::class, $article->seoMeta);
+            $this->assertSame('noindex,nofollow', (string) $article->seoMeta->robots);
+            $this->assertFalse((bool) $article->seoMeta->is_indexable);
+            $this->assertTrue((bool) data_get($article->seoMeta->schema_json, 'editorial_package_v1.schema_hold'));
+            $this->assertTrue((bool) data_get($article->seoMeta->schema_json, 'editorial_package_v1.hreflang_hold'));
+            $this->assertFalse((bool) data_get($article->seoMeta->schema_json, 'editorial_package_v1.publish_allowed', true));
+        }
+
+        $this->assertSame(2, Article::query()->withoutGlobalScopes()->count());
+        $this->assertSame(2, ArticleSeoMeta::query()->withoutGlobalScopes()->count());
+        $this->assertSame(2, ArticleEditorialPackageImport::query()->withoutGlobalScopes()->count());
+        $this->assertSame(0, DB::table('audit_logs')->where('action', 'content_release_publish')->count());
+        Http::assertNothingSent();
+    }
+
+    public function test_json_output_includes_article_ids_working_revision_ids_and_preview_url_candidates(): void
+    {
+        $package = $this->writeModeCPackage();
+
+        $exitCode = Artisan::call('articles:import-seo-content-package-draft', $this->commandOptions($package, [
+            '--json' => true,
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+
+        foreach ($payload['articles'] as $article) {
+            $this->assertIsInt($article['article_id']);
+            $this->assertGreaterThan(0, $article['article_id']);
+            $this->assertIsInt($article['working_revision_id']);
+            $this->assertGreaterThan(0, $article['working_revision_id']);
+            $this->assertSame('/ops/article-preview/'.$article['article_id'], $article['preview_url_candidate']);
+        }
+    }
+
+    /**
+     * @param  array<string,mixed>  $overrides
+     * @return array<string,mixed>
+     */
+    private function commandOptions(string $package, array $overrides = []): array
+    {
+        return array_replace([
+            '--package' => $package,
+            '--translation-group-id' => self::TRANSLATION_GROUP_ID,
+            '--locales' => 'zh-CN,en',
+            '--draft-only' => true,
+            '--no-publish' => true,
+            '--no-index' => true,
+            '--no-sitemap' => true,
+            '--no-llms' => true,
+            '--schema-hold' => true,
+            '--hreflang-hold' => true,
+            '--expected-zh-slug' => 'career-interest-vs-personality-test-differences',
+            '--expected-en-slug' => 'career-interest-test-vs-personality-test',
+        ], $overrides);
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function jsonOutput(): array
+    {
+        $payload = json_decode(Artisan::output(), true);
+        $this->assertIsArray($payload, Artisan::output());
+
+        return $payload;
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     */
+    private function assertErrorCode(array $payload, string $code): void
+    {
+        $this->assertContains($code, array_map(
+            static fn (array $error): string => (string) ($error['code'] ?? ''),
+            $payload['errors'] ?? []
+        ));
+    }
+
+    /**
+     * @param  callable(array<string,mixed>&):void|null  $mutate
+     */
+    private function writeModeCPackage(?callable $mutate = null): string
+    {
+        $root = sys_get_temp_dir().'/fm-mode-c-package-'.Str::random(12);
+        foreach (['pages', 'cms', 'contracts', 'review', 'codex'] as $directory) {
+            mkdir($root.'/'.$directory, 0777, true);
+        }
+
+        $files = $this->modeCFiles();
+        if ($mutate !== null) {
+            $mutate($files);
+        }
+
+        foreach ($files as $relativePath => $contents) {
+            $path = $root.'/'.$relativePath;
+            if (! is_dir(dirname($path))) {
+                mkdir(dirname($path), 0777, true);
+            }
+            file_put_contents(
+                $path,
+                is_array($contents)
+                    ? json_encode($contents, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
+                    : $contents
+            );
+        }
+
+        return $root;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function modeCFiles(): array
+    {
+        $social = [
+            'media_library_asset_key' => 'article.riasec.explanation.cover.v1',
+            'media_library_status' => 'published',
+            'is_public' => true,
+            'cdn_status' => 'verified',
+            'cover_image_url' => 'https://api.fermatmind.com/storage/media-library/variants/articleriasecexplanationcoverv1/hero_1600x900.jpg',
+            'hero_variant' => [
+                'url' => 'https://api.fermatmind.com/storage/media-library/variants/articleriasecexplanationcoverv1/hero_1600x900.jpg',
+                'width' => 1600,
+                'height' => 900,
+            ],
+            'og_1200x630_variant' => [
+                'url' => 'https://api.fermatmind.com/storage/media-library/variants/articleriasecexplanationcoverv1/og_1200x630.jpg',
+                'width' => 1200,
+                'height' => 630,
+            ],
+            'twitter_image_url' => 'https://api.fermatmind.com/storage/media-library/variants/articleriasecexplanationcoverv1/og_1200x630.jpg',
+            'alt_text' => 'Career exploration notes with a RIASEC structure and decision path diagram',
+            'width' => 1672,
+            'height' => 941,
+        ];
+        $variants = [
+            'hero' => ['url' => $social['hero_variant']['url'], 'width' => 1600, 'height' => 900],
+            'og' => ['url' => $social['og_1200x630_variant']['url'], 'width' => 1200, 'height' => 630],
+        ];
+        $baseFields = [
+            'translation_group_id' => self::TRANSLATION_GROUP_ID,
+            'status' => 'draft',
+            'publish_allowed' => false,
+            'is_indexable' => false,
+            'sitemap_eligible' => false,
+            'llms_eligible' => false,
+            'claim_gate_status' => 'not_reviewed',
+            'primary_keyword' => 'career interest test vs personality test',
+            'secondary_keywords' => ['Holland Code vs MBTI', 'career assessment vs personality assessment'],
+            'primary_hub_url' => '/tests/holland-career-interest-test-riasec',
+            'secondary_hub_urls' => ['/tests/mbti-personality-test-16-personality-types', '/tests/big-five-personality-test-ocean-model'],
+            'schema_eligibility' => ['article_schema' => 'review_required', 'faq_schema' => false, 'breadcrumb_schema' => 'review_required'],
+            'cover_media_asset_key' => 'article.riasec.explanation.cover.v1',
+            'cover_image_url' => $social['cover_image_url'],
+            'cover_image_alt' => $social['alt_text'],
+            'cover_image_width' => 1672,
+            'cover_image_height' => 941,
+            'cover_image_variants' => $variants,
+            'og_image_url' => $social['og_1200x630_variant']['url'],
+            'twitter_image_url' => $social['twitter_image_url'],
+            'social_image_metadata' => $social,
+        ];
+
+        return [
+            'manifest.json' => [
+                'package_name' => 'career-interest-test-vs-personality-test',
+                'status' => 'draft_only_not_for_publication',
+                'translation_group_id' => self::TRANSLATION_GROUP_ID,
+                'publish_allowed' => false,
+                'schema_generation_allowed' => false,
+                'hreflang_enablement_allowed' => false,
+                'pages' => [
+                    [
+                        'locale' => 'zh-CN',
+                        'title' => '职业兴趣测试与性格测试的区别：选专业、找工作该先做哪个？',
+                        'slug' => 'career-interest-vs-personality-test-differences',
+                        'canonical_url_draft' => '/zh/articles/career-interest-vs-personality-test-differences',
+                        'meta_title_draft' => '职业兴趣测试与性格测试有什么区别？职业规划指南 | FermatMind',
+                        'meta_description_draft' => '找工作应该测 MBTI 还是霍兰德？本文解释职业兴趣测试与性格测试的区别。',
+                        'file' => 'pages/zh-CN-career-interest-vs-personality-test-differences.md',
+                    ],
+                    [
+                        'locale' => 'en',
+                        'title' => 'Career Interest Test vs Personality Test: Which Should You Take First?',
+                        'slug' => 'career-interest-test-vs-personality-test',
+                        'canonical_url_draft' => '/en/articles/career-interest-test-vs-personality-test',
+                        'meta_title_draft' => 'Career Interest Test vs Personality Test: Which Should You Take?',
+                        'meta_description_draft' => 'Learn how Holland Code, MBTI, and Big Five answer different career exploration questions.',
+                        'file' => 'pages/en-career-interest-test-vs-personality-test.md',
+                    ],
+                ],
+            ],
+            'pages/zh-CN-career-interest-vs-personality-test-differences.md' => $this->markdownPage('zh-CN', '职业兴趣测试与性格测试的区别：选专业、找工作该先做哪个？', 'career-interest-vs-personality-test-differences', '/zh/articles/career-interest-vs-personality-test-differences'),
+            'pages/en-career-interest-test-vs-personality-test.md' => $this->markdownPage('en', 'Career Interest Test vs Personality Test: Which Should You Take First?', 'career-interest-test-vs-personality-test', '/en/articles/career-interest-test-vs-personality-test'),
+            'cms/CMS_FIELDS_zh-CN_career-interest-vs-personality-test-differences.json' => array_replace($baseFields, [
+                'locale' => 'zh-CN',
+                'title' => '职业兴趣测试与性格测试的区别：选专业、找工作该先做哪个？',
+                'slug' => 'career-interest-vs-personality-test-differences',
+                'canonical_url' => '/zh/articles/career-interest-vs-personality-test-differences',
+                'meta_title' => '职业兴趣测试与性格测试有什么区别？职业规划指南 | FermatMind',
+                'meta_description' => '找工作应该测 MBTI 还是霍兰德？本文解释职业兴趣测试与性格测试的区别。',
+            ]),
+            'cms/CMS_FIELDS_en_career-interest-test-vs-personality-test.json' => array_replace($baseFields, [
+                'locale' => 'en',
+                'title' => 'Career Interest Test vs Personality Test: Which Should You Take First?',
+                'slug' => 'career-interest-test-vs-personality-test',
+                'canonical_url' => '/en/articles/career-interest-test-vs-personality-test',
+                'meta_title' => 'Career Interest Test vs Personality Test: Which Should You Take?',
+                'meta_description' => 'Learn how Holland Code, MBTI, and Big Five answer different career exploration questions.',
+            ]),
+            'cms/CMS_IMPORT_DRAFT_zh-CN_career-interest-vs-personality-test-differences.json' => array_replace($baseFields, [
+                'locale' => 'zh-CN',
+                'title' => '职业兴趣测试与性格测试的区别：选专业、找工作该先做哪个？',
+                'slug' => 'career-interest-vs-personality-test-differences',
+                'canonical_url' => '/zh/articles/career-interest-vs-personality-test-differences',
+                'meta_title' => '职业兴趣测试与性格测试有什么区别？职业规划指南 | FermatMind',
+                'meta_description' => '找工作应该测 MBTI 还是霍兰德？本文解释职业兴趣测试与性格测试的区别。',
+                'body_markdown_file' => 'pages/zh-CN-career-interest-vs-personality-test-differences.md',
+            ]),
+            'cms/CMS_IMPORT_DRAFT_en_career-interest-test-vs-personality-test.json' => array_replace($baseFields, [
+                'locale' => 'en',
+                'title' => 'Career Interest Test vs Personality Test: Which Should You Take First?',
+                'slug' => 'career-interest-test-vs-personality-test',
+                'canonical_url' => '/en/articles/career-interest-test-vs-personality-test',
+                'meta_title' => 'Career Interest Test vs Personality Test: Which Should You Take?',
+                'meta_description' => 'Learn how Holland Code, MBTI, and Big Five answer different career exploration questions.',
+                'body_markdown_file' => 'pages/en-career-interest-test-vs-personality-test.md',
+            ]),
+            'contracts/PUBLIC_CANONICAL_ROUTE_CONTRACT.json' => ['routes' => ['/zh/articles/career-interest-vs-personality-test-differences', '/en/articles/career-interest-test-vs-personality-test']],
+            'contracts/ROUTE_ALIAS_CONTRACT.json' => ['canonical_big_five' => '/tests/big-five-personality-test-ocean-model'],
+            'contracts/SOCIAL_IMAGE_METADATA_REQUIREMENTS.json' => ['asset_key' => 'article.riasec.explanation.cover.v1', 'required' => true],
+            'contracts/DYNAMIC_CTA_CONTRACT.json' => ['primary' => '/tests/holland-career-interest-test-riasec', 'secondary' => ['/tests/mbti-personality-test-16-personality-types', '/tests/big-five-personality-test-ocean-model']],
+            'contracts/INTERNAL_LINK_PLAN.json' => ['links' => ['/tests/holland-career-interest-test-riasec', '/tests/big-five-personality-test-ocean-model']],
+            'contracts/PRIVATE_URL_GUARD.json' => ['forbidden' => ['/result', '/results', '/orders', '/order', '/share', '/pay', '/payment', '/history', '/take']],
+            'review/claim_gate.md' => "claim_gate_status: not_reviewed\n",
+            'review/operator_review.md' => "operator_review_required: true\n",
+            'codex/qa_checklist.md' => "- no publish\n- no index\n",
+        ];
+    }
+
+    private function markdownPage(string $locale, string $title, string $slug, string $canonical): string
+    {
+        return <<<MD
+---
+translation_group_id: {self::TRANSLATION_GROUP_ID}
+locale: {$locale}
+title: {$title}
+slug: {$slug}
+canonical_url_draft: {$canonical}
+primary_keyword: career interest test vs personality test
+secondary_keywords:
+  - Holland Code vs MBTI
+  - career assessment vs personality assessment
+claim_gate_status: not_reviewed
+publish_allowed: false
+sitemap_eligible: false
+llms_eligible: false
+---
+
+## Quick answer
+
+Start with a career-interest test when the question is direction, then use MBTI and Big Five as supporting lenses.
+
+## CTA
+
+[Start RIASEC](/tests/holland-career-interest-test-riasec)
+[Use Big Five](/tests/big-five-personality-test-ocean-model)
+
+## FAQ
+
+### Can a test decide my career?
+
+No. It is only one input.
+MD;
+    }
+}
