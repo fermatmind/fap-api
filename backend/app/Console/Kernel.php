@@ -6,6 +6,7 @@ use App\Console\Commands\AdminBootstrapOwner;
 use App\Console\Commands\ArchiveColdData;
 use App\Console\Commands\ArticleCoverPropagationSmoke;
 use App\Console\Commands\ArticleImportEditorialPackage;
+use App\Console\Commands\ArticleImportSeoContentPackageDraft;
 use App\Console\Commands\ArticlePublishControlled;
 // ✅ 显式注册（更稳，避免自动扫描失效/缓存导致找不到）
 use App\Console\Commands\Big5AttemptPurge;
@@ -322,6 +323,7 @@ class Kernel extends ConsoleKernel
         EvidencePack::class,
         ExperimentGuardrailsEvaluate::class,
         ArticleImportEditorialPackage::class,
+        ArticleImportSeoContentPackageDraft::class,
         ArticleCoverPropagationSmoke::class,
         ArticlePublishControlled::class,
     ];

@@ -1559,6 +1559,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_seo_content_package_draft_importer_changes(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/ArticleImportSeoContentPackageDraft.php',
+            'backend/app/Console/Kernel.php',
+            'backend/app/Services/Cms/SeoContentPackage/SeoContentPackageDraftImporter.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\ArticleImportSeoContentPackageDraft;',
+            '+        ArticleImportSeoContentPackageDraft::class,',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
+    }
+
     public function test_runtime_freeze_classifier_ignores_article_body_h1_guard_changes(): void
     {
         $changed = [
@@ -2908,6 +2923,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSeoContentPackageDraftImporterFile($file)) {
+                continue;
+            }
+
             if ($this->isArticleBodyH1GuardFile($file)) {
                 continue;
             }
@@ -3506,6 +3525,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 && (
                     $this->kernelDiffIsCareerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsArticleEditorialPackageDraftGateOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsSeoContentPackageDraftImporterOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsControlledArticlePublishSopOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsArticleCoverPropagationSmokeOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsAlipayPendingCompensationSchedulerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
@@ -3773,6 +3793,12 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return $file === 'backend/app/Console/Commands/ArticleImportEditorialPackage.php'
             || str_starts_with($file, 'backend/app/Services/Cms/EditorialPackage/');
+    }
+
+    private function isSeoContentPackageDraftImporterFile(string $file): bool
+    {
+        return $file === 'backend/app/Console/Commands/ArticleImportSeoContentPackageDraft.php'
+            || str_starts_with($file, 'backend/app/Services/Cms/SeoContentPackage/');
     }
 
     private function isArticleBodyH1GuardFile(string $file): bool
@@ -5277,6 +5303,28 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if (preg_match('/\bArticleImportEditorialPackage\b/u', $line) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsSeoContentPackageDraftImporterOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            if (preg_match('/\b(MBTI|Mbti|BigFive|Big5|Prewarm|ResultPage|Report)\b/u', $line) === 1) {
+                return false;
+            }
+
+            if (preg_match('/\bArticleImportSeoContentPackageDraft\b/u', $line) !== 1) {
                 return false;
             }
         }
