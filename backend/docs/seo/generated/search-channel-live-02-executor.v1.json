@@ -10,6 +10,7 @@
   "bulk_submission_supported": false,
   "atomic_single_item_claim_required": true,
   "raw_secret_output_allowed": false,
+  "sanitized_provider_error_diagnostics_allowed": true,
   "sitemap_llms_behavior_changed": false,
   "supported_live_channels": [
     "indexnow",
@@ -52,6 +53,7 @@
     "no_production_env_edit": true,
     "no_deploy": true,
     "no_raw_key_or_key_location_output": true,
-    "no_full_url_in_audit_event_payload": true
+    "no_full_url_in_audit_event_payload": true,
+    "provider_error_diagnostics_must_redact_secrets_and_urls": true
   }
 }

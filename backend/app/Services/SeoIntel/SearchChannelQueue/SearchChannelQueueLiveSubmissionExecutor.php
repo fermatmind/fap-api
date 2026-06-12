@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\SeoIntel\SearchChannelQueue;
 
 use App\Services\SeoIntel\SearchChannelSubmissionStatusNormalizer;
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Throwable;
@@ -87,6 +88,8 @@ final class SearchChannelQueueLiveSubmissionExecutor
         $httpStatus = $submission['http_status'];
         $accepted = $submission['accepted'];
         $exceptionClass = $submission['exception_class'];
+        $providerErrorCode = $submission['provider_error_code'];
+        $providerErrorMessage = $submission['provider_error_message'];
 
         $submissionStatus = $this->statusNormalizer->normalize($accepted ? 'accepted' : 'failed');
         $executionState = $accepted ? 'submitted' : 'submit_failed';
@@ -105,6 +108,8 @@ final class SearchChannelQueueLiveSubmissionExecutor
             'http_status' => $httpStatus,
             'submission_status' => $submissionStatus,
             'exception_class' => $exceptionClass,
+            'provider_error_code' => $providerErrorCode,
+            'provider_error_message' => $providerErrorMessage,
         ], 'system', 'seo-intel:search-channel-submit');
 
         return [
@@ -118,6 +123,8 @@ final class SearchChannelQueueLiveSubmissionExecutor
             'submission_status' => $submissionStatus,
             'execution_state' => $executionState,
             'http_status' => $httpStatus,
+            'provider_error_code' => $providerErrorCode,
+            'provider_error_message' => $providerErrorMessage,
         ];
     }
 
@@ -244,7 +251,7 @@ final class SearchChannelQueueLiveSubmissionExecutor
     }
 
     /**
-     * @return array{accepted: bool, http_status: ?int, exception_class: ?class-string, endpoint_host: ?string}
+     * @return array{accepted: bool, http_status: ?int, exception_class: ?class-string, endpoint_host: ?string, provider_error_code: ?string, provider_error_message: ?string}
      */
     private function submitToChannel(string $channel, string $canonicalUrl): array
     {
@@ -256,12 +263,14 @@ final class SearchChannelQueueLiveSubmissionExecutor
                 'http_status' => null,
                 'exception_class' => null,
                 'endpoint_host' => null,
+                'provider_error_code' => null,
+                'provider_error_message' => null,
             ],
         };
     }
 
     /**
-     * @return array{accepted: bool, http_status: ?int, exception_class: ?class-string, endpoint_host: ?string}
+     * @return array{accepted: bool, http_status: ?int, exception_class: ?class-string, endpoint_host: ?string, provider_error_code: ?string, provider_error_message: ?string}
      */
     private function submitIndexNow(string $canonicalUrl): array
     {
@@ -285,6 +294,8 @@ final class SearchChannelQueueLiveSubmissionExecutor
                 'http_status' => $response->status(),
                 'exception_class' => null,
                 'endpoint_host' => (string) parse_url($endpoint, PHP_URL_HOST),
+                'provider_error_code' => null,
+                'provider_error_message' => null,
             ];
         } catch (Throwable $exception) {
             return [
@@ -292,12 +303,14 @@ final class SearchChannelQueueLiveSubmissionExecutor
                 'http_status' => null,
                 'exception_class' => $exception::class,
                 'endpoint_host' => (string) parse_url($endpoint, PHP_URL_HOST),
+                'provider_error_code' => null,
+                'provider_error_message' => null,
             ];
         }
     }
 
     /**
-     * @return array{accepted: bool, http_status: ?int, exception_class: ?class-string, endpoint_host: ?string}
+     * @return array{accepted: bool, http_status: ?int, exception_class: ?class-string, endpoint_host: ?string, provider_error_code: ?string, provider_error_message: ?string}
      */
     private function submitBaiduPush(string $canonicalUrl): array
     {
@@ -316,12 +329,15 @@ final class SearchChannelQueueLiveSubmissionExecutor
 
             $body = $response->json();
             $accepted = $response->successful() && (int) data_get(is_array($body) ? $body : [], 'success', 0) >= 1;
+            $diagnostics = $this->sanitizedProviderDiagnostics($response, [$canonicalUrl, $site, $token]);
 
             return [
                 'accepted' => $accepted,
                 'http_status' => $response->status(),
                 'exception_class' => null,
                 'endpoint_host' => (string) parse_url($endpoint, PHP_URL_HOST),
+                'provider_error_code' => $accepted ? null : $diagnostics['provider_error_code'],
+                'provider_error_message' => $accepted ? null : $diagnostics['provider_error_message'],
             ];
         } catch (Throwable $exception) {
             return [
@@ -329,8 +345,67 @@ final class SearchChannelQueueLiveSubmissionExecutor
                 'http_status' => null,
                 'exception_class' => $exception::class,
                 'endpoint_host' => (string) parse_url($endpoint, PHP_URL_HOST),
+                'provider_error_code' => null,
+                'provider_error_message' => null,
             ];
         }
+    }
+
+    /**
+     * @param  list<string>  $sensitiveValues
+     * @return array{provider_error_code: ?string, provider_error_message: ?string}
+     */
+    private function sanitizedProviderDiagnostics(Response $response, array $sensitiveValues): array
+    {
+        $body = $response->json();
+        $payload = is_array($body) ? $body : [];
+        $errorCode = $this->firstScalarString($payload, ['error', 'error_code', 'errno', 'status', 'code']);
+        $errorMessage = $this->firstScalarString($payload, ['message', 'error_msg', 'msg', 'reason']);
+
+        return [
+            'provider_error_code' => $this->redactSensitiveText($errorCode, $sensitiveValues),
+            'provider_error_message' => $this->redactSensitiveText($errorMessage, $sensitiveValues),
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $payload
+     * @param  list<string>  $keys
+     */
+    private function firstScalarString(array $payload, array $keys): ?string
+    {
+        foreach ($keys as $key) {
+            $value = data_get($payload, $key);
+
+            if (is_scalar($value) && trim((string) $value) !== '') {
+                return trim((string) $value);
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @param  list<string>  $sensitiveValues
+     */
+    private function redactSensitiveText(?string $value, array $sensitiveValues): ?string
+    {
+        if ($value === null) {
+            return null;
+        }
+
+        $redacted = $value;
+
+        foreach ($sensitiveValues as $sensitiveValue) {
+            if (trim($sensitiveValue) !== '') {
+                $redacted = str_replace($sensitiveValue, '[redacted]', $redacted);
+            }
+        }
+
+        $redacted = (string) preg_replace('~https?://\\S+~i', '[redacted_url]', $redacted);
+        $redacted = (string) preg_replace('/\\b[A-Za-z0-9_-]{16,}\\b/', '[redacted_token]', $redacted);
+
+        return substr(trim($redacted), 0, 200);
     }
 
     /**

@@ -322,7 +322,7 @@ return [
                 'fermatmind.com',
             ],
             'baidu' => [
-                'endpoint' => env('SEO_INTEL_BAIDU_PUSH_ENDPOINT', 'https://data.zz.baidu.com/urls'),
+                'endpoint' => env('SEO_INTEL_BAIDU_PUSH_ENDPOINT', 'http://data.zz.baidu.com/urls'),
                 'site' => env('SEO_INTEL_BAIDU_SITE'),
                 'token' => env('SEO_INTEL_BAIDU_PUSH_TOKEN'),
                 'timeout_seconds' => env('SEO_INTEL_BAIDU_PUSH_TIMEOUT_SECONDS', 10),

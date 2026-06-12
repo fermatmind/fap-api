@@ -57,7 +57,7 @@ Baidu push additionally requires:
 - `SEO_INTEL_BAIDU_LIVE_API_ENABLED=true`
 - `SEO_INTEL_BAIDU_SITE` is present
 - `SEO_INTEL_BAIDU_PUSH_TOKEN` is present
-- `SEO_INTEL_BAIDU_PUSH_ENDPOINT` defaults to `https://data.zz.baidu.com/urls`
+- `SEO_INTEL_BAIDU_PUSH_ENDPOINT` defaults to `http://data.zz.baidu.com/urls`
 
 Default config keeps these gates disabled or empty.
 
@@ -99,8 +99,8 @@ The executor writes only Search Channel Queue audit events:
 - `live_submission_response`
 
 Event payloads use `url_hash`, endpoint host, HTTP status, normalized submission
-status, and optional exception class. They do not contain raw keys or the full
-submitted URL.
+status, optional exception class, and sanitized provider error code/message when
+available. They do not contain raw keys or the full submitted URL.
 
 ## Deferred
 
