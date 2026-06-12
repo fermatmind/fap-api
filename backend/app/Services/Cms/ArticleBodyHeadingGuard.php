@@ -52,21 +52,18 @@ final class ArticleBodyHeadingGuard
 
     public function downgradeMarkdownH1ToH2(string $markdown): string
     {
-        $lines = preg_split("/(\r\n|\n|\r)/", $markdown, -1, PREG_SPLIT_DELIM_CAPTURE);
-        if ($lines === false || $lines === []) {
+        $lines = explode("\n", str_replace(["\r\n", "\r"], "\n", $markdown));
+        if ($lines === []) {
             return $markdown;
         }
 
-        $output = '';
+        $output = [];
         $inFence = false;
 
-        for ($index = 0; $index < count($lines); $index += 2) {
-            $line = (string) ($lines[$index] ?? '');
-            $separator = (string) ($lines[$index + 1] ?? '');
-
+        foreach ($lines as $line) {
             if (preg_match('/^\s{0,3}(```|~~~)/', $line) === 1) {
                 $inFence = ! $inFence;
-                $output .= $line.$separator;
+                $output[] = $line;
 
                 continue;
             }
@@ -79,10 +76,10 @@ final class ArticleBodyHeadingGuard
                 }
             }
 
-            $output .= $line.$separator;
+            $output[] = $line;
         }
 
-        return $output;
+        return implode("\n", $output);
     }
 
     public function downgradeHtmlH1ToH2(string $html): string

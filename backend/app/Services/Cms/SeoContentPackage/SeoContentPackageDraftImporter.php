@@ -61,6 +61,7 @@ final class SeoContentPackageDraftImporter
     public function __construct(
         private readonly ArticleTranslationRevisionWorkspace $revisionWorkspace,
         private readonly ArticleBodyHeadingGuard $articleBodyHeadingGuard,
+        private readonly SeoContentPackageJsonNormalizer $jsonNormalizer,
     ) {}
 
     /**
@@ -136,6 +137,7 @@ final class SeoContentPackageDraftImporter
             $manifest = $this->readJson($packageRoot.'/manifest.json', 'manifest.json', $errors);
             $guardScans = $this->validatePackageGuardScopes($packageRoot, $errors);
             $packageItems = $this->buildPackageItems($packageRoot, $manifest, $expectedTranslationGroupId, $expectedSlugs, $errors, $warnings);
+            $this->validateJsonFieldSerialization($packageItems, $errors, $warnings);
         }
 
         $ok = $errors === [];
@@ -171,7 +173,7 @@ final class SeoContentPackageDraftImporter
         }
 
         $category = $this->resolveCategory();
-        $metadata = $this->metadata($item);
+        $metadata = $this->normalizedJsonForWrite('article.cover_image_variants', $this->metadata($item));
         $body = (string) $item['body_markdown'];
 
         $article = $existing instanceof Article ? $existing : new Article;
@@ -238,9 +240,9 @@ final class SeoContentPackageDraftImporter
                 'og_description' => (string) $item['meta_description'],
                 'og_image_url' => (string) $item['og_image_url'],
                 'robots' => 'noindex,nofollow',
-                'schema_json' => [
+                'schema_json' => $this->normalizedJsonForWrite('article_seo_meta.schema_json', [
                     'editorial_package_v1' => $metadata['editorial_package_v1'],
-                ],
+                ]),
                 'is_indexable' => false,
             ],
         );
@@ -1009,11 +1011,103 @@ final class SeoContentPackageDraftImporter
     }
 
     /**
+     * @param  list<array<string,mixed>>  $items
+     * @param  list<array<string,mixed>>  $errors
+     * @param  list<array<string,mixed>>  $warnings
+     */
+    private function validateJsonFieldSerialization(array $items, array &$errors, array &$warnings): void
+    {
+        foreach ($items as $item) {
+            $metadata = $this->metadata($item);
+            foreach ($this->jsonFieldPayloads($item, $metadata) as $field => $value) {
+                $result = $this->jsonNormalizer->normalizeField($field, $value);
+                foreach ($result['warnings'] as $warning) {
+                    $warnings[] = $warning;
+                }
+                foreach ($result['errors'] as $error) {
+                    $errors[] = $error;
+                }
+            }
+        }
+    }
+
+    /**
+     * @param  array<string,mixed>  $item
+     * @param  array<string,mixed>  $metadata
+     * @return array<string,mixed>
+     */
+    private function jsonFieldPayloads(
+        array $item,
+        array $metadata,
+        ?Article $article = null,
+        ?ArticleTranslationRevision $revision = null
+    ): array {
+        $articleId = $article instanceof Article ? (int) $article->id : null;
+        $workingRevisionId = $revision instanceof ArticleTranslationRevision ? (int) $revision->id : null;
+
+        return [
+            'article.cover_image_variants' => $metadata,
+            'article_seo_meta.schema_json' => [
+                'editorial_package_v1' => $metadata['editorial_package_v1'] ?? [],
+            ],
+            'article_editorial_package_import.validation_summary_json' => [
+                'source' => 'articles:import-seo-content-package-draft',
+                'working_revision_id' => $workingRevisionId,
+                'preview_url_candidate' => $articleId !== null ? '/ops/article-preview/'.$articleId : null,
+            ],
+            'article_editorial_package_import.claim_result_json' => [
+                'status' => (string) $item['claim_gate_status'],
+                'matches' => [],
+            ],
+            'article_editorial_package_import.exactness_json' => [
+                'translation_group_id' => (string) $item['translation_group_id'],
+                'canonical_url' => (string) $item['canonical_url'],
+            ],
+            'article_editorial_package_import.references_json' => ['status' => 'operator_review_required'],
+            'article_editorial_package_import.media_json' => [
+                'status' => 'complete',
+                'cover_media_asset_key' => (string) $item['cover_media_asset_key'],
+                'cover_image_url' => (string) $item['cover_image_url'],
+                'og_image_url' => (string) $item['og_image_url'],
+            ],
+            'article_editorial_package_import.graph_json' => [
+                'primary_cta' => '/tests/holland-career-interest-test-riasec',
+                'big_five_route' => '/tests/big-five-personality-test-ocean-model',
+            ],
+            'article_editorial_package_import.answer_surface_json' => ['status' => 'visible_only'],
+            'article_editorial_package_import.heading_sequence_json' => $this->headingSequence((string) $item['body_markdown']),
+            'article_editorial_package_import.missing_fields_json' => [],
+            'article_editorial_package_import.blocked_reasons_json' => [],
+        ];
+    }
+
+    private function normalizedJsonForWrite(string $field, mixed $value): mixed
+    {
+        $result = $this->jsonNormalizer->normalizeField($field, $value);
+        if ($result['errors'] !== []) {
+            $error = $result['errors'][0];
+
+            throw new RuntimeException((string) $error['field'].' '.$error['code'].': '.$error['message']);
+        }
+
+        return $result['value'];
+    }
+
+    /**
      * @param  array<string,mixed>  $item
      * @param  array<string,mixed>  $metadata
      */
     private function persistImportRecord(Article $article, ArticleTranslationRevision $revision, array $item, array $metadata): void
     {
+        $jsonFields = [];
+        foreach ($this->jsonFieldPayloads($item, $metadata, $article, $revision) as $field => $value) {
+            if (! str_starts_with($field, 'article_editorial_package_import.')) {
+                continue;
+            }
+
+            $jsonFields[Str::after($field, 'article_editorial_package_import.')] = $this->normalizedJsonForWrite($field, $value);
+        }
+
         ArticleEditorialPackageImport::query()->withoutGlobalScopes()->create([
             'org_id' => 0,
             'article_id' => (int) $article->id,
@@ -1023,37 +1117,10 @@ final class SeoContentPackageDraftImporter
             'content_track' => 'seo_content_package_mode_c',
             'status' => ArticleEditorialPackageImport::STATUS_IMPORTED,
             'intended_status' => 'draft',
-            'validation_summary_json' => [
-                'source' => 'articles:import-seo-content-package-draft',
-                'working_revision_id' => (int) $revision->id,
-                'preview_url_candidate' => '/ops/article-preview/'.(int) $article->id,
-            ],
-            'claim_result_json' => [
-                'status' => (string) $item['claim_gate_status'],
-                'matches' => [],
-            ],
-            'exactness_json' => [
-                'translation_group_id' => (string) $item['translation_group_id'],
-                'canonical_url' => (string) $item['canonical_url'],
-            ],
-            'references_json' => ['status' => 'operator_review_required'],
-            'media_json' => [
-                'status' => 'complete',
-                'cover_media_asset_key' => (string) $item['cover_media_asset_key'],
-                'cover_image_url' => (string) $item['cover_image_url'],
-                'og_image_url' => (string) $item['og_image_url'],
-            ],
-            'graph_json' => [
-                'primary_cta' => '/tests/holland-career-interest-test-riasec',
-                'big_five_route' => '/tests/big-five-personality-test-ocean-model',
-            ],
-            'answer_surface_json' => ['status' => 'visible_only'],
             'body_hash' => (string) data_get($metadata, 'editorial_package_v1.body_hash'),
-            'heading_sequence_json' => $this->headingSequence((string) $item['body_markdown']),
             'references_count' => 0,
-            'missing_fields_json' => [],
-            'blocked_reasons_json' => [],
             'imported_by' => null,
+            ...$jsonFields,
         ]);
     }
 
@@ -1063,9 +1130,9 @@ final class SeoContentPackageDraftImporter
     private function headingSequence(string $body): array
     {
         $headings = [];
-        foreach (preg_split('/\R/', $body) ?: [] as $line) {
-            if (preg_match('/^(#{2,6})\s+(.+)$/', $line, $matches) === 1) {
-                $headings[] = strlen((string) $matches[1]).':'.trim((string) $matches[2]);
+        foreach (explode("\n", str_replace(["\r\n", "\r"], "\n", $body)) as $line) {
+            if (preg_match('/^(#{2,6})[ \t]+/', $line, $matches) === 1) {
+                $headings[] = strlen((string) $matches[1]).':'.trim(substr($line, strlen((string) $matches[0])));
             }
         }
 

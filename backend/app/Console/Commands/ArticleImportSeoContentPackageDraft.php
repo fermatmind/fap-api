@@ -84,7 +84,7 @@ final class ArticleImportSeoContentPackageDraft extends Command
     private function emitSummary(array $summary): void
     {
         if ((bool) $this->option('json')) {
-            $this->line(json_encode($summary, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+            $this->line(json_encode($summary, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_INVALID_UTF8_SUBSTITUTE));
 
             return;
         }

@@ -11,8 +11,11 @@ use App\Models\ArticleTranslationRevision;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
+use RuntimeException;
 use Tests\TestCase;
 
 final class ArticleImportSeoContentPackageDraftCommandTest extends TestCase
@@ -343,7 +346,110 @@ final class ArticleImportSeoContentPackageDraftCommandTest extends TestCase
         $this->assertSame(2, ArticleSeoMeta::query()->withoutGlobalScopes()->count());
         $this->assertSame(2, ArticleEditorialPackageImport::query()->withoutGlobalScopes()->count());
         $this->assertSame(0, DB::table('audit_logs')->where('action', 'content_release_publish')->count());
+        foreach (['seo_search_channel_queue_items', 'seo_search_channel_queue_batches', 'seo_search_channel_queue_events'] as $table) {
+            if (Schema::hasTable($table)) {
+                $this->assertSame(0, DB::table($table)->count(), $table.' should remain empty.');
+            }
+        }
         Http::assertNothingSent();
+    }
+
+    public function test_import_serializes_multilingual_heading_sequence_with_smart_and_fullwidth_punctuation(): void
+    {
+        $package = $this->writeModeCPackage(static function (array &$files): void {
+            $files['pages/zh-CN-career-interest-vs-personality-test-differences.md'] = str_replace(
+                "## Quick answer\n",
+                "## 职业兴趣—性格“边界”：全角，标点\n\n## Quick answer\n",
+                $files['pages/zh-CN-career-interest-vs-personality-test-differences.md']
+            );
+        });
+
+        $exitCode = Artisan::call('articles:import-seo-content-package-draft', $this->commandOptions($package, [
+            '--json' => true,
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+
+        $importLog = ArticleEditorialPackageImport::query()
+            ->withoutGlobalScopes()
+            ->where('locale', 'zh-CN')
+            ->firstOrFail();
+
+        $this->assertStringContainsString(
+            '职业兴趣—性格“边界”：全角，标点',
+            implode("\n", $importLog->heading_sequence_json)
+        );
+    }
+
+    public function test_import_normalizes_malformed_utf8_heading_sequence_with_sanitized_warning(): void
+    {
+        $malformed = (string) hex2bin('c328');
+        $package = $this->writeModeCPackage(static function (array &$files) use ($malformed): void {
+            $files['pages/en-career-interest-test-vs-personality-test.md'] = str_replace(
+                "## Quick answer\n",
+                "## Broken {$malformed} heading\n\n## Quick answer\n",
+                $files['pages/en-career-interest-test-vs-personality-test.md']
+            );
+        });
+
+        $exitCode = Artisan::call('articles:import-seo-content-package-draft', $this->commandOptions($package, [
+            '--json' => true,
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertWarningCode($payload, 'json_string_utf8_normalized');
+
+        $importLog = ArticleEditorialPackageImport::query()
+            ->withoutGlobalScopes()
+            ->where('locale', 'en')
+            ->firstOrFail();
+
+        $this->assertContains('2:Broken �( heading', $importLog->heading_sequence_json);
+    }
+
+    public function test_malformed_utf8_in_review_context_does_not_crash_import_audit_json(): void
+    {
+        $malformed = (string) hex2bin('c328');
+        $package = $this->writeModeCPackage(static function (array &$files) use ($malformed): void {
+            $files['review/claim_gate.md'] = "claim_gate_status: not_reviewed\nreview_note: {$malformed}\n";
+        });
+
+        $exitCode = Artisan::call('articles:import-seo-content-package-draft', $this->commandOptions($package, [
+            '--json' => true,
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertSame(2, ArticleEditorialPackageImport::query()->withoutGlobalScopes()->count());
+    }
+
+    public function test_import_failure_rolls_back_all_draft_related_writes(): void
+    {
+        $package = $this->writeModeCPackage();
+
+        Event::listen('eloquent.creating: '.ArticleEditorialPackageImport::class, static function (): void {
+            throw new RuntimeException('forced import audit failure');
+        });
+
+        try {
+            $exitCode = Artisan::call('articles:import-seo-content-package-draft', $this->commandOptions($package, [
+                '--json' => true,
+            ]));
+        } finally {
+            Event::forget('eloquent.creating: '.ArticleEditorialPackageImport::class);
+        }
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
+        $this->assertSame(0, ArticleSeoMeta::query()->withoutGlobalScopes()->count());
+        $this->assertSame(0, ArticleEditorialPackageImport::query()->withoutGlobalScopes()->count());
     }
 
     public function test_json_output_includes_article_ids_working_revision_ids_and_preview_url_candidates(): void
@@ -407,6 +513,17 @@ final class ArticleImportSeoContentPackageDraftCommandTest extends TestCase
         $this->assertContains($code, array_map(
             static fn (array $error): string => (string) ($error['code'] ?? ''),
             $payload['errors'] ?? []
+        ));
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     */
+    private function assertWarningCode(array $payload, string $code): void
+    {
+        $this->assertContains($code, array_map(
+            static fn (array $warning): string => (string) ($warning['code'] ?? ''),
+            $payload['warnings'] ?? []
         ));
     }
 
