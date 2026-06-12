@@ -35,16 +35,38 @@ final class ArticleImportSeoContentPackageDraftCommandTest extends TestCase
         $this->assertTrue($payload['ok']);
         $this->assertTrue($payload['dry_run']);
         $this->assertSame('would_create_draft', $payload['action']);
+        $this->assertSame('passed', $payload['active_surface_guard_scan']['status']);
+        $this->assertSame('passed', $payload['contract_integrity_scan']['status']);
         $this->assertCount(2, $payload['articles']);
         $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
         $this->assertSame(0, ArticleSeoMeta::query()->withoutGlobalScopes()->count());
         $this->assertSame(0, ArticleEditorialPackageImport::query()->withoutGlobalScopes()->count());
     }
 
-    public function test_dry_run_rejects_old_big_five_alias(): void
+    public function test_dry_run_accepts_old_big_five_alias_key_with_canonical_value(): void
     {
         $package = $this->writeModeCPackage(static function (array &$files): void {
-            $files['cms/CMS_FIELDS_en_career-interest-test-vs-personality-test.json']['secondary_hub_urls'][1] = '/tests/big-five-personality-test';
+            $files['contracts/ROUTE_ALIAS_CONTRACT.json']['known_aliases'] = [
+                '/tests/big-five-personality-test' => '/tests/big-five-personality-test-ocean-model',
+            ];
+        });
+
+        $exitCode = Artisan::call('articles:import-seo-content-package-draft', $this->commandOptions($package, [
+            '--dry-run' => true,
+            '--json' => true,
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertSame('passed', $payload['contract_integrity_scan']['status']);
+        $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
+    }
+
+    public function test_dry_run_rejects_old_big_five_path_in_page_body(): void
+    {
+        $package = $this->writeModeCPackage(static function (array &$files): void {
+            $files['pages/en-career-interest-test-vs-personality-test.md'] .= "\n\n[Old Big Five](/tests/big-five-personality-test)\n";
         });
 
         $exitCode = Artisan::call('articles:import-seo-content-package-draft', $this->commandOptions($package, [
@@ -54,11 +76,89 @@ final class ArticleImportSeoContentPackageDraftCommandTest extends TestCase
 
         $payload = $this->jsonOutput();
         $this->assertSame(1, $exitCode);
-        $this->assertErrorCode($payload, 'old_big_five_route_found');
+        $this->assertErrorCode($payload, 'old_big_five_route_found_in_active_surface');
         $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
     }
 
-    public function test_dry_run_rejects_private_url(): void
+    public function test_dry_run_rejects_old_big_five_path_in_page_frontmatter_active_link(): void
+    {
+        $package = $this->writeModeCPackage(static function (array &$files): void {
+            $files['pages/en-career-interest-test-vs-personality-test.md'] = str_replace(
+                "canonical_url_draft: /en/articles/career-interest-test-vs-personality-test\n",
+                "canonical_url_draft: /en/articles/career-interest-test-vs-personality-test\nrelated_test_url: /tests/big-five-personality-test\n",
+                $files['pages/en-career-interest-test-vs-personality-test.md']
+            );
+        });
+
+        $exitCode = Artisan::call('articles:import-seo-content-package-draft', $this->commandOptions($package, [
+            '--dry-run' => true,
+            '--json' => true,
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertErrorCode($payload, 'old_big_five_route_found_in_active_surface');
+        $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
+    }
+
+    public function test_dry_run_rejects_old_big_five_path_in_cms_import_cta_target(): void
+    {
+        $package = $this->writeModeCPackage(static function (array &$files): void {
+            $files['cms/CMS_IMPORT_DRAFT_en_career-interest-test-vs-personality-test.json']['secondary_hub_urls'][1] = '/tests/big-five-personality-test';
+        });
+
+        $exitCode = Artisan::call('articles:import-seo-content-package-draft', $this->commandOptions($package, [
+            '--dry-run' => true,
+            '--json' => true,
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertErrorCode($payload, 'old_big_five_route_found_in_active_surface');
+        $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
+    }
+
+    public function test_dry_run_rejects_old_big_five_alias_value(): void
+    {
+        $package = $this->writeModeCPackage(static function (array &$files): void {
+            $files['contracts/ROUTE_ALIAS_CONTRACT.json']['known_aliases'] = [
+                '/tests/big-five-personality-test-ocean-model' => '/tests/big-five-personality-test',
+            ];
+        });
+
+        $exitCode = Artisan::call('articles:import-seo-content-package-draft', $this->commandOptions($package, [
+            '--dry-run' => true,
+            '--json' => true,
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertErrorCode($payload, 'route_alias_contract_invalid');
+        $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
+    }
+
+    public function test_dry_run_accepts_private_routes_in_private_url_guard_forbidden_paths(): void
+    {
+        $package = $this->writeModeCPackage(static function (array &$files): void {
+            $files['contracts/PRIVATE_URL_GUARD.json'] = [
+                'forbidden_paths' => ['/result', '/results', '/orders', '/order', '/share', '/pay', '/payment', '/history', '/take'],
+                'forbidden_query_keys' => ['result_id', 'order_id', 'payment_id', 'token', 'score', 'user_id', 'report_id'],
+            ];
+        });
+
+        $exitCode = Artisan::call('articles:import-seo-content-package-draft', $this->commandOptions($package, [
+            '--dry-run' => true,
+            '--json' => true,
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertSame('passed', $payload['contract_integrity_scan']['status']);
+        $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
+    }
+
+    public function test_dry_run_rejects_private_url_in_page_body(): void
     {
         $package = $this->writeModeCPackage(static function (array &$files): void {
             $files['pages/en-career-interest-test-vs-personality-test.md'] .= "\n\n[private](/results/abc123)\n";
@@ -71,7 +171,77 @@ final class ArticleImportSeoContentPackageDraftCommandTest extends TestCase
 
         $payload = $this->jsonOutput();
         $this->assertSame(1, $exitCode);
-        $this->assertErrorCode($payload, 'private_route_found');
+        $this->assertErrorCode($payload, 'private_route_found_in_active_surface');
+        $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
+    }
+
+    public function test_dry_run_accepts_sensitive_keys_in_dynamic_cta_forbidden_tracking_params(): void
+    {
+        $package = $this->writeModeCPackage(static function (array &$files): void {
+            $files['contracts/DYNAMIC_CTA_CONTRACT.json']['forbidden_tracking_params'] = ['result_id', 'order_id', 'payment_id', 'token', 'score', 'user_id', 'report_id'];
+        });
+
+        $exitCode = Artisan::call('articles:import-seo-content-package-draft', $this->commandOptions($package, [
+            '--dry-run' => true,
+            '--json' => true,
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertSame('passed', $payload['contract_integrity_scan']['status']);
+        $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
+    }
+
+    public function test_dry_run_rejects_sensitive_keys_in_dynamic_cta_allowed_tracking_params(): void
+    {
+        $package = $this->writeModeCPackage(static function (array &$files): void {
+            $files['contracts/DYNAMIC_CTA_CONTRACT.json']['allowed_tracking_params'] = ['utm_source', 'token'];
+        });
+
+        $exitCode = Artisan::call('articles:import-seo-content-package-draft', $this->commandOptions($package, [
+            '--dry-run' => true,
+            '--json' => true,
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertErrorCode($payload, 'dynamic_cta_forbidden_params_contract_invalid');
+        $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
+    }
+
+    public function test_dry_run_does_not_scan_claim_gate_review_text_as_article_body(): void
+    {
+        $package = $this->writeModeCPackage(static function (array &$files): void {
+            $files['review/claim_gate.md'] = "forbidden_claims_avoided:\n- Do not link /results or token examples in public body.\n- Legacy route mention: /tests/big-five-personality-test\n";
+        });
+
+        $exitCode = Artisan::call('articles:import-seo-content-package-draft', $this->commandOptions($package, [
+            '--dry-run' => true,
+            '--json' => true,
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertSame('passed', $payload['active_surface_guard_scan']['status']);
+        $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
+    }
+
+    public function test_dry_run_rejects_private_url_guard_contract_private_routes_outside_forbidden_context(): void
+    {
+        $package = $this->writeModeCPackage(static function (array &$files): void {
+            $files['contracts/PRIVATE_URL_GUARD.json']['allowed_paths'] = ['/result'];
+        });
+
+        $exitCode = Artisan::call('articles:import-seo-content-package-draft', $this->commandOptions($package, [
+            '--dry-run' => true,
+            '--json' => true,
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertErrorCode($payload, 'private_url_guard_contract_invalid');
         $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
     }
 
@@ -391,11 +561,25 @@ final class ArticleImportSeoContentPackageDraftCommandTest extends TestCase
                 'body_markdown_file' => 'pages/en-career-interest-test-vs-personality-test.md',
             ]),
             'contracts/PUBLIC_CANONICAL_ROUTE_CONTRACT.json' => ['routes' => ['/zh/articles/career-interest-vs-personality-test-differences', '/en/articles/career-interest-test-vs-personality-test']],
-            'contracts/ROUTE_ALIAS_CONTRACT.json' => ['canonical_big_five' => '/tests/big-five-personality-test-ocean-model'],
+            'contracts/ROUTE_ALIAS_CONTRACT.json' => [
+                'known_alias_autofix_allowed' => true,
+                'unknown_alias_requires_operator_input' => true,
+                'known_aliases' => [
+                    '/tests/big-five-personality-test' => '/tests/big-five-personality-test-ocean-model',
+                ],
+            ],
             'contracts/SOCIAL_IMAGE_METADATA_REQUIREMENTS.json' => ['asset_key' => 'article.riasec.explanation.cover.v1', 'required' => true],
-            'contracts/DYNAMIC_CTA_CONTRACT.json' => ['primary' => '/tests/holland-career-interest-test-riasec', 'secondary' => ['/tests/mbti-personality-test-16-personality-types', '/tests/big-five-personality-test-ocean-model']],
+            'contracts/DYNAMIC_CTA_CONTRACT.json' => [
+                'primary' => '/tests/holland-career-interest-test-riasec',
+                'secondary' => ['/tests/mbti-personality-test-16-personality-types', '/tests/big-five-personality-test-ocean-model'],
+                'allowed_tracking_params' => ['utm_source', 'utm_medium', 'utm_campaign'],
+                'forbidden_tracking_params' => ['result_id', 'order_id', 'payment_id', 'token', 'score', 'user_id', 'report_id'],
+            ],
             'contracts/INTERNAL_LINK_PLAN.json' => ['links' => ['/tests/holland-career-interest-test-riasec', '/tests/big-five-personality-test-ocean-model']],
-            'contracts/PRIVATE_URL_GUARD.json' => ['forbidden' => ['/result', '/results', '/orders', '/order', '/share', '/pay', '/payment', '/history', '/take']],
+            'contracts/PRIVATE_URL_GUARD.json' => [
+                'forbidden_paths' => ['/result', '/results', '/orders', '/order', '/share', '/pay', '/payment', '/history', '/take'],
+                'forbidden_query_keys' => ['result_id', 'order_id', 'payment_id', 'token', 'score', 'user_id', 'report_id'],
+            ],
             'review/claim_gate.md' => "claim_gate_status: not_reviewed\n",
             'review/operator_review.md' => "operator_review_required: true\n",
             'codex/qa_checklist.md' => "- no publish\n- no index\n",

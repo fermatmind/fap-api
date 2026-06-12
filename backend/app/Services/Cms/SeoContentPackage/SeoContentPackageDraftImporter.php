@@ -44,6 +44,20 @@ final class SeoContentPackageDraftImporter
 
     private const SENSITIVE_QUERY_PATTERN = '/(?:[?&]|^)(?:result_id|order_id|payment_id|token|score|user_id|report_id)=/i';
 
+    private const OLD_BIG_FIVE_ROUTE_PATTERN = '#/tests/big-five-personality-test(?!-ocean-model)#';
+
+    private const CANONICAL_BIG_FIVE_ROUTE = '/tests/big-five-personality-test-ocean-model';
+
+    private const SENSITIVE_QUERY_KEYS = [
+        'result_id',
+        'order_id',
+        'payment_id',
+        'token',
+        'score',
+        'user_id',
+        'report_id',
+    ];
+
     public function __construct(
         private readonly ArticleTranslationRevisionWorkspace $revisionWorkspace,
         private readonly ArticleBodyHeadingGuard $articleBodyHeadingGuard,
@@ -113,10 +127,14 @@ final class SeoContentPackageDraftImporter
 
         $manifest = [];
         $packageItems = [];
+        $guardScans = [
+            'active_surface_guard_scan' => ['status' => 'not_run'],
+            'contract_integrity_scan' => ['status' => 'not_run'],
+        ];
         if ($packageRoot !== null) {
             $this->validateRequiredFiles($packageRoot, $errors);
             $manifest = $this->readJson($packageRoot.'/manifest.json', 'manifest.json', $errors);
-            $this->validateWholePackageText($packageRoot, $errors);
+            $guardScans = $this->validatePackageGuardScopes($packageRoot, $errors);
             $packageItems = $this->buildPackageItems($packageRoot, $manifest, $expectedTranslationGroupId, $expectedSlugs, $errors, $warnings);
         }
 
@@ -131,6 +149,8 @@ final class SeoContentPackageDraftImporter
             'translation_group_id' => $expectedTranslationGroupId,
             'package_root' => $packageRoot,
             'manifest_status' => $manifest !== [] ? 'valid_json' : 'missing_or_invalid',
+            'active_surface_guard_scan' => $guardScans['active_surface_guard_scan'],
+            'contract_integrity_scan' => $guardScans['contract_integrity_scan'],
             'safety_flags' => $this->safetyFlagSnapshot($options),
             'articles' => $plannedArticles,
             'package_items' => $packageItems,
@@ -352,10 +372,91 @@ final class SeoContentPackageDraftImporter
 
     /**
      * @param  list<array<string,mixed>>  $errors
+     * @return array{active_surface_guard_scan:array<string,mixed>,contract_integrity_scan:array<string,mixed>}
      */
-    private function validateWholePackageText(string $root, array &$errors): void
+    private function validatePackageGuardScopes(string $root, array &$errors): array
     {
-        $allFiles = array_merge(
+        $activeErrorStart = count($errors);
+        $activeSurfaceText = $this->activeSurfaceText($root);
+        $packageText = $this->packageText($root);
+
+        if (preg_match(self::OLD_BIG_FIVE_ROUTE_PATTERN, $activeSurfaceText) === 1) {
+            $errors[] = $this->issue('active_surface_guard_scan.big_five_route', 'old_big_five_route_found_in_active_surface', 'Old Big Five route is forbidden in active import surfaces.');
+        }
+        if (! str_contains($packageText, self::CANONICAL_BIG_FIVE_ROUTE)) {
+            $errors[] = $this->issue('big_five_route', 'required_big_five_route_missing', 'Canonical Big Five route is required.');
+        }
+        if (str_contains($packageText, '__CMS_MEDIA_LIBRARY_PLACEHOLDER__')) {
+            $errors[] = $this->issue('social_image', 'media_placeholder_found', 'CMS media placeholder marker is forbidden.');
+        }
+        if (preg_match(self::PRIVATE_ROUTE_PATTERN, $activeSurfaceText) === 1) {
+            $errors[] = $this->issue('active_surface_guard_scan.private_url_guard', 'private_route_found_in_active_surface', 'Private routes are forbidden in active import surfaces.');
+        }
+        if (preg_match(self::SENSITIVE_QUERY_PATTERN, $activeSurfaceText) === 1) {
+            $errors[] = $this->issue('active_surface_guard_scan.private_url_guard', 'sensitive_query_key_found_in_active_surface', 'Sensitive query keys are forbidden in active import surfaces.');
+        }
+        $activeErrorCount = count($errors) - $activeErrorStart;
+
+        $contractErrorStart = count($errors);
+        $this->validateRouteAliasContract($root, $errors);
+        $this->validatePrivateUrlGuardContract($root, $errors);
+        $this->validateDynamicCtaContract($root, $errors);
+        $contractErrorCount = count($errors) - $contractErrorStart;
+
+        return [
+            'active_surface_guard_scan' => [
+                'status' => $activeErrorCount === 0 ? 'passed' : 'failed',
+                'error_count' => $activeErrorCount,
+            ],
+            'contract_integrity_scan' => [
+                'status' => $contractErrorCount === 0 ? 'passed' : 'failed',
+                'error_count' => $contractErrorCount,
+            ],
+        ];
+    }
+
+    private function activeSurfaceText(string $root): string
+    {
+        $parts = [];
+
+        foreach (glob($root.'/pages/*.md') ?: [] as $path) {
+            if (! is_file($path)) {
+                continue;
+            }
+
+            $page = $this->readMarkdownPage($path);
+            $parts[] = (string) json_encode($page['frontmatter'], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+            $parts[] = $page['body'];
+        }
+
+        foreach (glob($root.'/cms/*.json') ?: [] as $path) {
+            if (is_file($path)) {
+                $parts[] = (string) file_get_contents($path);
+            }
+        }
+
+        $manifest = $this->readJsonLenient($root.'/manifest.json');
+        $parts[] = (string) json_encode($manifest['pages'] ?? [], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+
+        $parts[] = (string) json_encode(
+            $this->withoutPolicyKeys($this->readJsonLenient($root.'/contracts/DYNAMIC_CTA_CONTRACT.json')),
+            JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
+        );
+        $parts[] = (string) json_encode(
+            $this->withoutPolicyKeys($this->readJsonLenient($root.'/contracts/INTERNAL_LINK_PLAN.json')),
+            JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
+        );
+        $parts[] = (string) json_encode(
+            $this->readJsonLenient($root.'/contracts/PUBLIC_CANONICAL_ROUTE_CONTRACT.json'),
+            JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
+        );
+
+        return implode("\n", $parts);
+    }
+
+    private function packageText(string $root): string
+    {
+        $files = array_merge(
             glob($root.'/manifest.json') ?: [],
             glob($root.'/pages/*.md') ?: [],
             glob($root.'/cms/*.json') ?: [],
@@ -363,43 +464,204 @@ final class SeoContentPackageDraftImporter
             glob($root.'/review/*') ?: [],
             glob($root.'/codex/*') ?: [],
         );
-        $activeLinkFiles = array_merge(
-            glob($root.'/pages/*.md') ?: [],
-            glob($root.'/cms/*.json') ?: [],
-            glob($root.'/contracts/DYNAMIC_CTA_CONTRACT.json') ?: [],
-            glob($root.'/contracts/INTERNAL_LINK_PLAN.json') ?: [],
-            glob($root.'/contracts/PUBLIC_CANONICAL_ROUTE_CONTRACT.json') ?: [],
-            glob($root.'/contracts/ROUTE_ALIAS_CONTRACT.json') ?: [],
-        );
 
-        $wholeText = '';
-        foreach ($allFiles as $file) {
+        $text = '';
+        foreach ($files as $file) {
             if (is_file($file)) {
-                $wholeText .= "\n".(string) file_get_contents($file);
-            }
-        }
-        $activeLinkText = '';
-        foreach ($activeLinkFiles as $file) {
-            if (is_file($file)) {
-                $activeLinkText .= "\n".(string) file_get_contents($file);
+                $text .= "\n".(string) file_get_contents($file);
             }
         }
 
-        if (preg_match('#/tests/big-five-personality-test(?!-ocean-model)#', $wholeText) === 1) {
-            $errors[] = $this->issue('big_five_route', 'old_big_five_route_found', 'Old Big Five route is forbidden.');
+        return $text;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function readJsonLenient(string $path): array
+    {
+        if (! is_file($path)) {
+            return [];
         }
-        if (! str_contains($wholeText, '/tests/big-five-personality-test-ocean-model')) {
-            $errors[] = $this->issue('big_five_route', 'required_big_five_route_missing', 'Canonical Big Five route is required.');
+
+        $decoded = json_decode((string) file_get_contents($path), true);
+
+        return is_array($decoded) ? $decoded : [];
+    }
+
+    private function withoutPolicyKeys(mixed $value): mixed
+    {
+        if (! is_array($value)) {
+            return $value;
         }
-        if (str_contains($wholeText, '__CMS_MEDIA_LIBRARY_PLACEHOLDER__')) {
-            $errors[] = $this->issue('social_image', 'media_placeholder_found', 'CMS media placeholder marker is forbidden.');
+
+        $filtered = [];
+        foreach ($value as $key => $child) {
+            $normalizedKey = strtolower((string) $key);
+            if (in_array($normalizedKey, [
+                'forbidden',
+                'forbidden_paths',
+                'forbidden_private_routes',
+                'forbidden_query_keys',
+                'forbidden_sensitive_query_keys',
+                'forbidden_tracking_params',
+                'private_url_guard_ref',
+                'private_links_forbidden',
+            ], true)) {
+                continue;
+            }
+
+            $filtered[$key] = $this->withoutPolicyKeys($child);
         }
-        if (preg_match(self::PRIVATE_ROUTE_PATTERN, $activeLinkText) === 1) {
-            $errors[] = $this->issue('private_url_guard', 'private_route_found', 'Private routes are forbidden.');
+
+        return $filtered;
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $errors
+     */
+    private function validateRouteAliasContract(string $root, array &$errors): void
+    {
+        $path = $root.'/contracts/ROUTE_ALIAS_CONTRACT.json';
+        $contract = $this->readJsonLenient($path);
+        $aliases = $this->aliasMappings($contract);
+        $allowedOldAliasCount = 0;
+
+        foreach ($aliases as $alias => $target) {
+            if (preg_match(self::OLD_BIG_FIVE_ROUTE_PATTERN, (string) $alias) === 1) {
+                if ($target !== self::CANONICAL_BIG_FIVE_ROUTE) {
+                    $errors[] = $this->issue('contract_integrity_scan.route_alias_contract', 'route_alias_contract_invalid', 'Old Big Five alias must resolve to the canonical OCEAN route.');
+                } else {
+                    $allowedOldAliasCount++;
+                }
+            }
+
+            if (preg_match(self::OLD_BIG_FIVE_ROUTE_PATTERN, $target) === 1) {
+                $errors[] = $this->issue('contract_integrity_scan.route_alias_contract', 'route_alias_contract_invalid', 'Old Big Five route is forbidden as an alias target.');
+            }
         }
-        if (preg_match(self::SENSITIVE_QUERY_PATTERN, $activeLinkText) === 1) {
-            $errors[] = $this->issue('private_url_guard', 'sensitive_query_key_found', 'Sensitive query keys are forbidden.');
+
+        $raw = is_file($path) ? (string) file_get_contents($path) : '';
+        $oldRouteCount = preg_match_all(self::OLD_BIG_FIVE_ROUTE_PATTERN, $raw);
+        if ($oldRouteCount > $allowedOldAliasCount) {
+            $errors[] = $this->issue('contract_integrity_scan.route_alias_contract', 'route_alias_contract_invalid', 'Old Big Five route may appear only as a known alias key.');
         }
+    }
+
+    /**
+     * @param  array<string,mixed>  $contract
+     * @return array<string,string>
+     */
+    private function aliasMappings(array $contract): array
+    {
+        $candidates = [];
+        foreach (['known_aliases', 'aliases', 'route_aliases'] as $key) {
+            if (is_array($contract[$key] ?? null)) {
+                $candidates[] = $contract[$key];
+            }
+        }
+        if ($candidates === []) {
+            $candidates[] = $contract;
+        }
+
+        $aliases = [];
+        foreach ($candidates as $candidate) {
+            foreach ($candidate as $alias => $target) {
+                if (is_string($alias) && is_string($target) && str_starts_with($alias, '/')) {
+                    $aliases[$alias] = $target;
+                }
+            }
+        }
+
+        return $aliases;
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $errors
+     */
+    private function validatePrivateUrlGuardContract(string $root, array &$errors): void
+    {
+        $contract = $this->readJsonLenient($root.'/contracts/PRIVATE_URL_GUARD.json');
+        $invalidPaths = [];
+        $this->collectPrivateGuardViolations($contract, [], false, $invalidPaths);
+
+        if ($invalidPaths !== []) {
+            $errors[] = $this->issue('contract_integrity_scan.private_url_guard', 'private_url_guard_contract_invalid', 'Private URL guard contract contains private routes or sensitive keys outside forbidden guard fields.');
+        }
+    }
+
+    /**
+     * @param  list<string>  $path
+     * @param  list<string>  $invalidPaths
+     */
+    private function collectPrivateGuardViolations(mixed $value, array $path, bool $allowedGuardContext, array &$invalidPaths): void
+    {
+        $key = strtolower((string) end($path));
+        $allowed = $allowedGuardContext || in_array($key, [
+            'forbidden',
+            'forbidden_paths',
+            'forbidden_private_routes',
+            'forbidden_query_keys',
+            'forbidden_sensitive_query_keys',
+            'sensitive_query_keys',
+        ], true);
+
+        if (is_array($value)) {
+            foreach ($value as $childKey => $child) {
+                $this->collectPrivateGuardViolations($child, [...$path, (string) $childKey], $allowed, $invalidPaths);
+            }
+
+            return;
+        }
+
+        if (! is_string($value)) {
+            return;
+        }
+
+        if ((preg_match(self::PRIVATE_ROUTE_PATTERN, $value) === 1 || $this->isSensitiveQueryKeyLiteral($value)) && ! $allowed) {
+            $invalidPaths[] = implode('.', $path);
+        }
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $errors
+     */
+    private function validateDynamicCtaContract(string $root, array &$errors): void
+    {
+        $contract = $this->readJsonLenient($root.'/contracts/DYNAMIC_CTA_CONTRACT.json');
+        $invalidPaths = [];
+        $this->collectDynamicCtaSensitiveKeyViolations($contract, [], false, $invalidPaths);
+
+        if ($invalidPaths !== []) {
+            $errors[] = $this->issue('contract_integrity_scan.dynamic_cta_contract', 'dynamic_cta_forbidden_params_contract_invalid', 'Sensitive tracking params may appear only in forbidden_tracking_params.');
+        }
+    }
+
+    /**
+     * @param  list<string>  $path
+     * @param  list<string>  $invalidPaths
+     */
+    private function collectDynamicCtaSensitiveKeyViolations(mixed $value, array $path, bool $allowedForbiddenParamContext, array &$invalidPaths): void
+    {
+        $key = strtolower((string) end($path));
+        $allowed = $allowedForbiddenParamContext || $key === 'forbidden_tracking_params';
+
+        if (is_array($value)) {
+            foreach ($value as $childKey => $child) {
+                $this->collectDynamicCtaSensitiveKeyViolations($child, [...$path, (string) $childKey], $allowed, $invalidPaths);
+            }
+
+            return;
+        }
+
+        if (is_string($value) && $this->isSensitiveQueryKeyLiteral($value) && ! $allowed) {
+            $invalidPaths[] = implode('.', $path);
+        }
+    }
+
+    private function isSensitiveQueryKeyLiteral(string $value): bool
+    {
+        return in_array(strtolower(trim($value)), self::SENSITIVE_QUERY_KEYS, true);
     }
 
     /**
