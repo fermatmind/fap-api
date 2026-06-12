@@ -201,7 +201,7 @@ final class CareerSelectedDisplayAssetMapperTest extends TestCase
         }
     }
 
-    public function test_biomedical_engineers_rejects_product_substring_if_reintroduced(): void
+    public function test_biomedical_engineers_allows_product_word_in_occupation_description(): void
     {
         $row = $this->row(
             'biomedical-engineers',
@@ -220,7 +220,7 @@ final class CareerSelectedDisplayAssetMapperTest extends TestCase
 
         $result = app(CareerSelectedDisplayAssetMapper::class)->mapRow($row);
 
-        $this->assertStringContainsString(
+        $this->assertStringNotContainsString(
             'EN_Occupation_Schema_JSON must not include Product schema.',
             implode(' ', $result['errors']),
         );

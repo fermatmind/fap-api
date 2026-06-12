@@ -971,7 +971,7 @@ final class CareerImportSelectedDisplayAssetsCommandTest extends TestCase
     }
 
     #[Test]
-    public function biomedical_engineers_product_substring_blocker_is_rejected_if_reintroduced(): void
+    public function biomedical_engineers_product_word_in_description_does_not_block_import(): void
     {
         $this->createAuthorityOccupation('biomedical-engineers', '17-2031', '17-2031.00');
         $row = $this->row(
@@ -992,10 +992,10 @@ final class CareerImportSelectedDisplayAssetsCommandTest extends TestCase
 
         [$exitCode, $report] = $this->runImport($workbook, 'biomedical-engineers');
 
-        $this->assertSame(1, $exitCode);
-        $this->assertStringContainsString(
+        $this->assertSame(0, $exitCode, json_encode($report, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $this->assertStringNotContainsString(
             'EN_Occupation_Schema_JSON must not include Product schema.',
-            implode(' ', $report['errors']),
+            implode(' ', $report['errors'] ?? []),
         );
     }
 
