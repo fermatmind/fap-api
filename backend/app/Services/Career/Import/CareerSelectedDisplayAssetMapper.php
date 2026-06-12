@@ -875,11 +875,39 @@ final class CareerSelectedDisplayAssetMapper
             $text = $this->encodedText($occupation);
             $this->expect(is_array($occupation), "{$label} must parse as Occupation JSON.", $errors);
             $this->expect(trim((string) ($occupation['occupationalCategory'] ?? $occupation['occupationCategory'] ?? '')) !== '', "{$label} must include occupationalCategory.", $errors);
-            $this->expect(! str_contains($text, 'product'), "{$label} must not include Product schema.", $errors);
+            $this->expect(! $this->containsProductSchema($occupation), "{$label} must not include Product schema.", $errors);
             $this->expect(! str_contains($text, 'ai exposure') && ! str_contains($text, 'ai_exposure'), "{$label} must not include AI Exposure.", $errors);
             $this->expect(! str_contains($text, 'industry_proxy'), "{$label} must not include CN industry proxy wage.", $errors);
             $this->expect(! str_contains($text, 'job posting sample') && ! str_contains($text, '招聘样本'), "{$label} must not include job posting sample terms.", $errors);
         }
+    }
+
+    private function containsProductSchema(mixed $value): bool
+    {
+        if (! is_array($value)) {
+            return false;
+        }
+
+        $type = $value['@type'] ?? null;
+        if (is_string($type) && strtolower($type) === 'product') {
+            return true;
+        }
+
+        if (is_array($type)) {
+            foreach ($type as $entry) {
+                if (is_string($entry) && strtolower($entry) === 'product') {
+                    return true;
+                }
+            }
+        }
+
+        foreach ($value as $child) {
+            if ($this->containsProductSchema($child)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
