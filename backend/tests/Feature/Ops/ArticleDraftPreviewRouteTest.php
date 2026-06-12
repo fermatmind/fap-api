@@ -58,6 +58,7 @@ final class ArticleDraftPreviewRouteTest extends TestCase
             ->assertDontSee('rel=\"canonical\"', false)
             ->assertDontSee('rel=\"alternate\"', false);
         $this->assertStringContainsString('no-store', (string) $response->headers->get('Cache-Control'));
+        $this->assertStringContainsString('private', (string) $response->headers->get('Cache-Control'));
 
         $article->refresh();
         $this->assertSame('draft', $article->status);
@@ -79,6 +80,16 @@ final class ArticleDraftPreviewRouteTest extends TestCase
             ->get('/ops/article-preview/'.$article->id)
             ->assertForbidden()
             ->assertJsonPath('message', 'admin_content_read_required');
+    }
+
+    public function test_preview_route_requires_authenticated_ops_session(): void
+    {
+        $article = $this->createDraftArticle();
+
+        $this
+            ->get('/ops/article-preview/'.$article->id)
+            ->assertUnauthorized()
+            ->assertJsonPath('message', 'admin_token_missing');
     }
 
     public function test_article_workspace_builds_ops_preview_url_instead_of_public_canonical_url(): void
@@ -119,7 +130,7 @@ final class ArticleDraftPreviewRouteTest extends TestCase
             'revision_status' => ArticleTranslationRevision::STATUS_MACHINE_DRAFT,
             'title' => 'Working Revision Preview Title',
             'excerpt' => 'Working revision excerpt.',
-            'content_md' => "## Body\\n\\nDraft body with /result/abc123?token=abc123 private link.",
+            'content_md' => '## Body\\n\\nDraft body with /result/abc123?token=abc123 private link.',
             'seo_title' => 'Revision SEO Title',
             'seo_description' => 'Revision SEO description.',
         ]);

@@ -83,7 +83,7 @@ final class ArticleDraftPreviewController extends Controller
         return response($html, 200, [
             'Content-Type' => 'text/html; charset=UTF-8',
             'X-Robots-Tag' => 'noindex, noarchive, nosnippet',
-            'Cache-Control' => 'no-store',
+            'Cache-Control' => 'no-store, private',
             'Referrer-Policy' => 'no-referrer',
         ]);
     }
