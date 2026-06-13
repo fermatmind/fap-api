@@ -74,6 +74,9 @@ class OpsDashboard extends Dashboard
             Action::make('failedJobs')
                 ->label(__('ops.dashboard.actions.failed_jobs'))
                 ->url('/ops/queue-monitor'),
+            Action::make('testKpiDaily')
+                ->label(__('ops.dashboard.actions.test_kpi_daily'))
+                ->url('/ops/test-kpi-daily?scope=global_org0'),
             Action::make('contentProbe')
                 ->label(__('ops.dashboard.actions.content_probe'))
                 ->url('/ops/content-pack-releases'),

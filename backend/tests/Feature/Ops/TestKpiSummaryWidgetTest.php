@@ -17,17 +17,17 @@ final class TestKpiSummaryWidgetTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_widget_reads_today_and_cumulative_success_failure_from_test_metrics_read_model(): void
+    public function test_widget_reads_sitewide_org_zero_success_failure_regardless_of_selected_org(): void
     {
         Carbon::setTestNow('2026-06-20 10:00:00');
 
         try {
             $this->setOpsOrg(21);
 
-            $this->insertDailyMetric('2026-06-19', 21, 'MBTI', 'zh-CN', 5, 3, 8);
-            $this->insertDailyMetric('2026-06-20', 21, 'MBTI', 'zh-CN', 7, 2, 9);
-            $this->insertDailyMetric('2026-06-20', 21, 'BIG5_OCEAN', 'en', 11, 1, 12);
-            $this->insertDailyMetric('2026-06-20', 99, 'MBTI', 'zh-CN', 100, 100, 200);
+            $this->insertDailyMetric('2026-06-19', 0, 'MBTI', 'zh-CN', 5, 3, 8);
+            $this->insertDailyMetric('2026-06-20', 0, 'MBTI', 'zh-CN', 7, 2, 9);
+            $this->insertDailyMetric('2026-06-20', 0, 'BIG5_OCEAN', 'en', 11, 1, 12);
+            $this->insertDailyMetric('2026-06-20', 21, 'MBTI', 'zh-CN', 100, 100, 200);
 
             $valuesByLabel = [];
             foreach ($this->widgetStats() as $stat) {
@@ -76,7 +76,7 @@ final class TestKpiSummaryWidgetTest extends TestCase
             $this->assertSame(__('ops.widgets.test_kpi'), (string) $stats[0]->getLabel());
             $this->assertSame(__('ops.widgets.no_data'), (string) $stats[0]->getValue());
             $this->assertSame(
-                'No analytics_test_metrics_daily rows match the current org. Run analytics:refresh-test-metrics-daily in a controlled task.',
+                'No analytics_test_metrics_daily rows match global org_id=0. Run analytics:refresh-test-metrics-daily in a controlled task.',
                 (string) $stats[0]->getDescription()
             );
         } finally {

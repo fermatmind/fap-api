@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Filament\Ops\Widgets;
 
 use App\Filament\Ops\Support\OpsMetricsAccess;
-use App\Support\OrgContext;
 use App\Support\SchemaBaseline;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
@@ -15,9 +14,9 @@ final class TestKpiSummaryWidget extends BaseWidget
 {
     protected static bool $isLazy = false;
 
-    private const NO_ORG_PLACEHOLDER = '-';
+    private const GLOBAL_ORG_ID = 0;
 
-    private const EMPTY_READ_MODEL_MESSAGE = 'No analytics_test_metrics_daily rows match the current org. Run analytics:refresh-test-metrics-daily in a controlled task.';
+    private const EMPTY_READ_MODEL_MESSAGE = 'No analytics_test_metrics_daily rows match global org_id=0. Run analytics:refresh-test-metrics-daily in a controlled task.';
 
     public static function canView(): bool
     {
@@ -35,20 +34,9 @@ final class TestKpiSummaryWidget extends BaseWidget
             return [$this->emptyReadModelStat('analytics_test_metrics_daily table is missing. Run php artisan migrate first.')];
         }
 
-        $orgContext = app(OrgContext::class);
-        $orgId = max(0, (int) $orgContext->orgId());
-        if ($orgId <= 0 && $orgContext->isTenantContext()) {
-            return [
-                $this->noOrgStat(__('ops.widgets.test_success_today'), __('ops.widgets.select_org_to_view_metrics')),
-                $this->noOrgStat(__('ops.widgets.test_failures_today'), __('ops.widgets.select_org_to_view_metrics')),
-                $this->noOrgStat(__('ops.widgets.site_success_cumulative'), __('ops.widgets.select_org_to_view_metrics')),
-                $this->noOrgStat(__('ops.widgets.site_failures_cumulative'), __('ops.widgets.select_org_to_view_metrics')),
-            ];
-        }
-
         $today = now()->toDateString();
         $query = DB::table('analytics_test_metrics_daily')
-            ->where('org_id', $orgId);
+            ->where('org_id', self::GLOBAL_ORG_ID);
 
         $row = $query
             ->selectRaw('COUNT(*) as row_count')
@@ -81,13 +69,6 @@ final class TestKpiSummaryWidget extends BaseWidget
                 ->description('analytics_test_metrics_daily.failed_attempts all days')
                 ->color($cumulativeFailures > 0 ? 'warning' : 'success'),
         ];
-    }
-
-    private function noOrgStat(string $label, string $description): Stat
-    {
-        return Stat::make($label, self::NO_ORG_PLACEHOLDER)
-            ->description($description)
-            ->color('gray');
     }
 
     private function emptyReadModelStat(string $description): Stat
