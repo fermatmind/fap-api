@@ -161,6 +161,15 @@ restore_hard_cutover_env() {
   if [[ "$PREV_FAP_CONTENT_PATH_MODE" == "__UNSET__" ]]; then unset FAP_CONTENT_PATH_MODE; else export FAP_CONTENT_PATH_MODE="$PREV_FAP_CONTENT_PATH_MODE"; fi
   if [[ "$PREV_FAP_CONTENT_PUBLISH_MODE" == "__UNSET__" ]]; then unset FAP_CONTENT_PUBLISH_MODE; else export FAP_CONTENT_PUBLISH_MODE="$PREV_FAP_CONTENT_PUBLISH_MODE"; fi
 }
+
+phpunit_in_memory() {
+  APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=":memory:" php artisan test "$@"
+}
+
+raw_phpunit_in_memory() {
+  APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=":memory:" php vendor/phpunit/phpunit/phpunit --configuration phpunit.xml "$@"
+}
+
 SCALE_SCOPE="${SCALE_SCOPE:-mbti_only}"
 echo "[CI] scale_scope=${SCALE_SCOPE} run_big5_ocean_gate=${RUN_BIG5_OCEAN_GATE} run_enneagram_gate=${RUN_ENNEAGRAM_GATE} run_clinical_combo_68_gate=${RUN_CLINICAL_COMBO_68_GATE} run_sds_20_gate=${RUN_SDS_20_GATE} run_eq_60_gate=${RUN_EQ_60_GATE} run_sds_norms_gate=${RUN_SDS_NORMS_GATE} run_full_scale_regression=${RUN_FULL_SCALE_REGRESSION} run_scale_identity_gate=${RUN_SCALE_IDENTITY_GATE} run_scale_identity_contract=${RUN_SCALE_IDENTITY_CONTRACT} run_scale_identity_hard_cutover=${RUN_SCALE_IDENTITY_HARD_CUTOVER} run_partner_api_smoke=${RUN_PARTNER_API_SMOKE} run_experiment_governance_gate=${RUN_EXPERIMENT_GOVERNANCE_GATE} run_openapi_diff_gate=${RUN_OPENAPI_DIFF_GATE} openapi_diff_allow_drift=${OPENAPI_DIFF_ALLOW_DRIFT}"
 if [[ "$RUN_BIG5_OCEAN_GATE" == "1" ]]; then
@@ -168,7 +177,7 @@ if [[ "$RUN_BIG5_OCEAN_GATE" == "1" ]]; then
   bash "$BACKEND_DIR/scripts/ci/verify_big5_norms.sh"
   php artisan content:lint --pack=BIG5_OCEAN --pack-version=v1
   php artisan content:compile --pack=BIG5_OCEAN --pack-version=v1
-  php artisan test --filter '(BigFive|Big5|NonMbtiReportContractRegressionTest)'
+  phpunit_in_memory --filter '(BigFive|Big5|NonMbtiReportContractRegressionTest)'
 
   echo "[CI] rebuilding sqlite baseline after BIG5_OCEAN gate"
   bash "$BACKEND_DIR/scripts/ci/prepare_sqlite.sh"
@@ -177,7 +186,7 @@ fi
 
 if [[ "$RUN_ENNEAGRAM_GATE" == "1" ]]; then
   echo "[CI] running ENNEAGRAM golden/read/report gates"
-  php artisan test \
+  phpunit_in_memory \
     tests/Feature/Content/EnneagramGoldenCasesTest.php \
     tests/Feature/V0_3/EnneagramAssessmentFlowTest.php \
     tests/Feature/V0_3/EnneagramReadReportContractTest.php \
@@ -235,13 +244,17 @@ fi
 
 if [[ "$RUN_PARTNER_API_SMOKE" == "1" ]]; then
   echo "[CI] running Partner API smoke test"
-  php artisan test --filter PartnerApiMvpTest
+  phpunit_in_memory --filter PartnerApiMvpTest
 fi
 
 if [[ "$RUN_EXPERIMENT_GOVERNANCE_GATE" == "1" ]]; then
   echo "[CI] running experiment governance gate"
-  php artisan test --filter ExperimentGuardrailAutoRollbackTest
+  phpunit_in_memory --filter ExperimentGuardrailAutoRollbackTest
 fi
+
+echo "[CI] rebuilding sqlite baseline before MBTI smoke"
+bash "$BACKEND_DIR/scripts/ci/prepare_sqlite.sh"
+php artisan fap:schema:verify
 
 # Ensure MBTI commercial benefit codes exist for report/share entitlement gate.
 BACKEND_DIR="$BACKEND_DIR" php -r '
@@ -1148,7 +1161,7 @@ fi
 
 echo "[CI] personality full-32 authority gate"
 php artisan personality:import-local-baseline --dry-run --upsert --status=published
-php vendor/phpunit/phpunit/phpunit --configuration phpunit.xml \
+raw_phpunit_in_memory \
   tests/Feature/V0_5/CareerRecommendationPublicApiTest.php \
   tests/Feature/PersonalityCms/PersonalityBaselineImportTest.php \
   tests/Feature/PersonalityCms/PersonalityVariantAuthorityTest.php \
@@ -1162,14 +1175,14 @@ php vendor/phpunit/phpunit/phpunit --configuration phpunit.xml \
 echo "[CI] personality full-32 authority gate OK"
 
 echo "[CI] payment event provider uniqueness gate"
-php artisan test --filter PaymentEventUniquenessAcrossProvidersTest
+phpunit_in_memory --filter PaymentEventUniquenessAcrossProvidersTest
 echo "[CI] payment event provider uniqueness gate OK"
 
 echo "[CI] migration safety gates"
-php artisan test --filter MigrationSafetyTest
-php artisan test --filter MigrationRollbackSafetyTest
-php artisan test --filter MigrationsNoSilentCatchTest
-php artisan test --filter MigrationProtectedTablesNoDropTest
+phpunit_in_memory --filter MigrationSafetyTest
+phpunit_in_memory --filter MigrationRollbackSafetyTest
+phpunit_in_memory --filter MigrationsNoSilentCatchTest
+phpunit_in_memory --filter MigrationProtectedTablesNoDropTest
 echo "[CI] migration safety gates OK"
 
 echo "[CI] auth guest contract gate"
@@ -1185,10 +1198,10 @@ if [[ "$RUN_OPENAPI_DIFF_GATE" == "1" ]]; then
     else
       echo "[CI][WARN] openapi drift detected but OPENAPI_DIFF_ALLOW_DRIFT=1 (non-blocking)"
     fi
-    OPENAPI_DIFF_ALLOW_DRIFT=1 php artisan test --filter OpenApiDiffTest
+    OPENAPI_DIFF_ALLOW_DRIFT=1 phpunit_in_memory --filter OpenApiDiffTest
   else
     bash scripts/export_openapi.sh --check
-    OPENAPI_DIFF_ALLOW_DRIFT=0 php artisan test --filter OpenApiDiffTest
+    OPENAPI_DIFF_ALLOW_DRIFT=0 phpunit_in_memory --filter OpenApiDiffTest
   fi
 
   echo "[CI] openapi diff gate OK"
@@ -1209,7 +1222,7 @@ bash scripts/pr71_verify.sh
 echo "[CI] migration static guard gate OK"
 
 echo "[CI] schema baseline runtime introspection gate"
-php artisan test --filter SchemaBaselineRuntimeIntrospectionTest
+phpunit_in_memory --filter SchemaBaselineRuntimeIntrospectionTest
 echo "[CI] schema baseline runtime introspection gate OK"
 
 echo "[CI] big5 ops controller layering gate"
@@ -1242,15 +1255,15 @@ echo "[CI] dependency security gate OK"
 
 if [[ "$RUN_SCALE_IDENTITY_HARD_CUTOVER" == "1" ]]; then
   echo "[CI] hard-cutover phpunit gate"
-  php artisan test tests/Feature/Ops/ScaleIdentityHardCutoverCiTest.php
+  phpunit_in_memory tests/Feature/Ops/ScaleIdentityHardCutoverCiTest.php
   echo "[CI] hard-cutover phpunit gate OK"
 fi
 
 echo "[CI] webhook/attempt regression gates"
-php vendor/phpunit/phpunit/phpunit --configuration phpunit.xml tests/Feature/V0_3/PaymentWebhookControllerTest.php
-php vendor/phpunit/phpunit/phpunit --configuration phpunit.xml tests/Feature/V0_3/AttemptOwnershipAnd404Test.php
-php vendor/phpunit/phpunit/phpunit --configuration phpunit.xml tests/Feature/V0_3/PaymentWebhookRouteWiringTest.php
-php vendor/phpunit/phpunit/phpunit --configuration phpunit.xml tests/Feature/Architecture/V0_3TraitReferenceTest.php
+raw_phpunit_in_memory tests/Feature/V0_3/PaymentWebhookControllerTest.php
+raw_phpunit_in_memory tests/Feature/V0_3/AttemptOwnershipAnd404Test.php
+raw_phpunit_in_memory tests/Feature/V0_3/PaymentWebhookRouteWiringTest.php
+raw_phpunit_in_memory tests/Feature/Architecture/V0_3TraitReferenceTest.php
 echo "[CI] webhook/attempt regression gates OK"
 
 QUEUE_BACKLOG_PROBE_STRICT="${QUEUE_BACKLOG_PROBE_STRICT:-1}"
