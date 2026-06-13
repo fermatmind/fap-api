@@ -82,6 +82,30 @@ final class PublicMediaUrlGuard
         return self::sanitizeNullableUrl(self::canonicalAssetOrigin().$publicPath);
     }
 
+    public static function publicAppStorageUrlForPath(?string $disk, mixed $path): ?string
+    {
+        $normalizedPath = trim((string) $path);
+        if ($normalizedPath === '') {
+            return null;
+        }
+
+        if (preg_match('/^https?:\/\//i', $normalizedPath)) {
+            return self::sanitizeNullableUrl($normalizedPath);
+        }
+
+        $publicPath = self::publicPathForDisk($disk, $normalizedPath);
+        if ($publicPath === '') {
+            return null;
+        }
+
+        $origin = rtrim(trim((string) config('app.url', '')), '/');
+        if ($origin === '' || ! preg_match('/^https:\/\//i', $origin)) {
+            return null;
+        }
+
+        return self::sanitizeNullableUrl($origin.$publicPath);
+    }
+
     public static function canonicalMediaUrl(?string $disk, mixed $path, mixed $url): ?string
     {
         if (self::isPrivateOrOpsDisk($disk)) {
