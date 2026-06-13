@@ -709,6 +709,77 @@ final class PersonalityPublicApiTest extends TestCase
             ->assertJsonPath('error_code', 'NOT_FOUND');
     }
 
+    public function test_committed_baseline_covers_all_public_variant_detail_pages(): void
+    {
+        $this->artisan('personality:import-local-baseline', [
+            '--status' => 'published',
+            '--upsert' => true,
+            '--source-dir' => base_path('../content_baselines/personality'),
+        ])
+            ->expectsOutputToContain('profiles_found=32')
+            ->expectsOutputToContain('variants_found=64')
+            ->expectsOutputToContain('variant_will_create=64')
+            ->assertExitCode(0);
+
+        $checkedRoutes = [];
+
+        foreach (['en', 'zh-CN'] as $locale) {
+            $directory = $this->getJson(sprintf(
+                '/api/v0.5/personality?locale=%s&include_variants=1&per_page=100',
+                rawurlencode($locale),
+            ));
+
+            $directory->assertOk()
+                ->assertJsonPath('pagination.total', 32)
+                ->assertJsonCount(32, 'items');
+
+            foreach ($directory->json('items') as $item) {
+                $routeSlug = (string) ($item['public_route_slug'] ?? $item['slug'] ?? '');
+                $runtimeTypeCode = (string) ($item['runtime_type_code'] ?? '');
+
+                $detail = $this->getJson(sprintf(
+                    '/api/v0.5/personality/%s?locale=%s',
+                    rawurlencode($routeSlug),
+                    rawurlencode($locale),
+                ));
+
+                $detail->assertOk()
+                    ->assertJsonPath('profile.type_code', (string) ($item['base_type_code'] ?? ''))
+                    ->assertJsonPath('mbti_public_projection_v1.runtime_type_code', $runtimeTypeCode);
+
+                $sections = $detail->json('sections');
+                self::assertIsArray($sections, $runtimeTypeCode.' sections should be an array.');
+                self::assertNotEmpty($sections, $runtimeTypeCode.' should not render the frontend empty-content fallback.');
+
+                $bodyText = collect($sections)
+                    ->map(static fn (array $section): string => trim(implode(' ', array_filter([
+                        (string) ($section['title'] ?? ''),
+                        (string) ($section['body_md'] ?? ''),
+                    ]))))
+                    ->filter(static fn (string $value): bool => $value !== '')
+                    ->implode("\n");
+
+                self::assertGreaterThan(
+                    200,
+                    mb_strlen($bodyText),
+                    $runtimeTypeCode.' should expose substantive public detail body text.',
+                );
+                self::assertStringNotContainsString('内容暂未同步', $bodyText);
+                self::assertStringNotContainsString('content is not yet synchronized', strtolower($bodyText));
+
+                $checkedRoutes[] = $locale.':'.$routeSlug;
+
+                if ($locale === 'zh-CN' && $runtimeTypeCode === 'ENTJ-T') {
+                    self::assertStringContainsString('带着自检系统的战略指挥官', $bodyText);
+                    self::assertStringContainsString('职业的天花板往往不在硬实力', $bodyText);
+                }
+            }
+        }
+
+        self::assertCount(64, $checkedRoutes);
+        self::assertContains('zh-CN:entj-t', $checkedRoutes);
+    }
+
     /**
      * @param  array<string, mixed>  $overrides
      */

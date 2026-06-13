@@ -24819,3 +24819,40 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: PERSONALITY-DETAIL-CONTENT-COVERAGE-01
+    repo: fap-api
+    depends_on:
+      - PERSONALITY-SEO-CURRENT-AUDIT-01
+    branch: codex/personality-detail-content-coverage-01
+    title: "PERSONALITY-DETAIL-CONTENT-COVERAGE-01: test(personality): lock variant detail content coverage"
+    train_scope: personality_seo
+    status: user_authorized
+    scope:
+      - Add backend coverage for committed MBTI personality baseline import into public variant detail pages.
+      - Prove /zh/personality/entj-t has substantive backend-authored body content after baseline import.
+      - Prove all 64 en/zh A/T public detail routes expose non-empty sections so frontend does not need an empty-content fallback.
+    allowed_paths:
+      - backend/tests/Feature/V0_5/PersonalityPublicApiTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify fap-web.
+      - Add FAQ, A/T difference sections, title metadata, comparison pages, sitemap changes, or llms changes.
+      - Move personality editorial authority into frontend code or local frontend fallback content.
+      - Mutate production CMS data or publish state.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_5/PersonalityPublicApiTest.php --filter committed_baseline_covers --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_5/PersonalityPublicApiTest.php --no-ansi
+      - cd backend && ./vendor/bin/pint --test tests/Feature/V0_5/PersonalityPublicApiTest.php
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
