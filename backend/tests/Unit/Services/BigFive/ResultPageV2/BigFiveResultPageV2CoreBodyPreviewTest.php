@@ -334,6 +334,24 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_test_metrics_scheduler_changes(): void
+    {
+        $changed = [
+            'backend/bootstrap/app.php',
+            'backend/app/Console/Commands/RefreshTestMetricsDailyCommand.php',
+        ];
+        $bootstrapChangedLines = [
+            "+        \$schedule->command('analytics:refresh-test-metrics-daily --scheduled-current-day')->everyFifteenMinutes()->withoutOverlapping(20);",
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            changed: $changed,
+            repoRoot: '',
+            baseRef: '',
+            bootstrapAppChangedLines: $bootstrapChangedLines,
+        ));
+    }
+
     public function test_runtime_freeze_classifier_ignores_seo_conversion_daily_read_model_changes(): void
     {
         $changed = [
@@ -2885,6 +2903,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ?array $webRouteChangedLines = null,
         ?array $resolveOrgContextChangedLines = null,
         ?array $contentPacksIndexChangedLines = null,
+        ?array $bootstrapAppChangedLines = null,
     ): array {
         $impacting = [];
 
@@ -3649,9 +3668,23 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 $file === 'backend/bootstrap/app.php'
                 && $repoRoot !== ''
                 && $baseRef !== ''
-                && $this->kernelDiffIsAlipayPendingCompensationSchedulerOnly(
-                    $this->changedLinesForFile($repoRoot, $baseRef, $file)
+                && (
+                    $this->kernelDiffIsAlipayPendingCompensationSchedulerOnly(
+                        $bootstrapAppChangedLines ?? $this->changedLinesForFile($repoRoot, $baseRef, $file)
+                    )
+                    || $this->kernelDiffIsTestMetricsSchedulerOnly(
+                        $bootstrapAppChangedLines ?? $this->changedLinesForFile($repoRoot, $baseRef, $file)
+                    )
                 )
+            ) {
+                continue;
+            }
+
+            if (
+                $file === 'backend/bootstrap/app.php'
+                && $repoRoot === ''
+                && $baseRef === ''
+                && $this->kernelDiffIsTestMetricsSchedulerOnly($bootstrapAppChangedLines ?? [])
             ) {
                 continue;
             }
@@ -5603,6 +5636,28 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if (preg_match('/commerce:compensate-pending-orders|--provider=alipay|--include-created|--only-stale|--limit=10|--older-than-minutes=60|everyTenMinutes|withoutOverlapping/u', $line) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsTestMetricsSchedulerOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            if (preg_match('/\b(MBTI|Mbti|BigFive|Big5|Prewarm|ResultPage|Report)\b/u', $line) === 1) {
+                return false;
+            }
+
+            if (preg_match('/analytics:refresh-test-metrics-daily|--scheduled-current-day|everyFifteenMinutes|withoutOverlapping\\(20\\)/u', $line) !== 1) {
                 return false;
             }
         }

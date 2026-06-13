@@ -18,6 +18,7 @@ final class RefreshTestMetricsDailyCommand extends Command
         {--to= : Inclusive end date (Y-m-d)}
         {--scale=* : Limit refresh to one or more scale codes}
         {--org=* : Limit refresh to one or more org ids}
+        {--scheduled-current-day : Scheduler-only mode that refreshes today for all orgs and all scales}
         {--dry-run : Preview the aggregation without writing rows}
         {--confirm-write= : Required exact confirmation token for non-dry-run refresh writes}';
 
@@ -31,8 +32,14 @@ final class RefreshTestMetricsDailyCommand extends Command
 
     public function handle(): int
     {
-        $from = $this->parseDateOption((string) $this->option('from'), now()->toDateString());
-        $to = $this->parseDateOption((string) $this->option('to'), now()->toDateString());
+        $scheduledCurrentDay = (bool) $this->option('scheduled-current-day');
+        $today = now()->toDateString();
+        $from = $scheduledCurrentDay
+            ? CarbonImmutable::parse($today)->startOfDay()
+            : $this->parseDateOption((string) $this->option('from'), $today);
+        $to = $scheduledCurrentDay
+            ? CarbonImmutable::parse($today)->startOfDay()
+            : $this->parseDateOption((string) $this->option('to'), $today);
 
         if ($from->greaterThan($to)) {
             $this->error('The --from date must be on or before --to.');
@@ -40,24 +47,24 @@ final class RefreshTestMetricsDailyCommand extends Command
             return self::FAILURE;
         }
 
-        $scaleCodes = array_values(array_filter(array_map(
+        $scaleCodes = $scheduledCurrentDay ? [] : array_values(array_filter(array_map(
             static fn (mixed $value): string => strtoupper(trim((string) $value)),
             (array) $this->option('scale')
         ), static fn (string $value): bool => $value !== ''));
 
-        $orgIds = array_values(array_filter(array_map(
+        $orgIds = $scheduledCurrentDay ? [] : array_values(array_filter(array_map(
             static fn (mixed $value): int => max(0, (int) $value),
             (array) $this->option('org')
         ), static fn (int $value): bool => $value >= 0));
 
-        $dryRun = (bool) $this->option('dry-run');
+        $dryRun = $scheduledCurrentDay ? false : (bool) $this->option('dry-run');
         $beforeCount = $this->countExistingRows($from, $to, $orgIds, $scaleCodes);
 
         if (! $dryRun) {
-            $guard = $this->validateWriteGuard($from, $to, $orgIds, $scaleCodes);
+            $guard = $this->validateWriteGuard($from, $to, $orgIds, $scaleCodes, $scheduledCurrentDay);
 
             if ($guard !== null) {
-                $this->emitSummary($from, $to, $orgIds, $scaleCodes, [
+                $this->emitSummary($from, $to, $orgIds, $scaleCodes, $scheduledCurrentDay, [
                     'dry_run' => false,
                     'before_count' => $beforeCount,
                     'after_count' => $beforeCount,
@@ -77,7 +84,7 @@ final class RefreshTestMetricsDailyCommand extends Command
         $result = $this->builder->refresh($from, $to, $orgIds, $scaleCodes, $dryRun);
         $afterCount = $this->countExistingRows($from, $to, $orgIds, $scaleCodes);
 
-        $this->emitSummary($from, $to, $orgIds, $scaleCodes, [
+        $this->emitSummary($from, $to, $orgIds, $scaleCodes, $scheduledCurrentDay, [
             'dry_run' => (bool) ($result['dry_run'] ?? false),
             'before_count' => $beforeCount,
             'after_count' => $afterCount,
@@ -140,7 +147,12 @@ final class RefreshTestMetricsDailyCommand extends Command
         CarbonImmutable $to,
         array $orgIds,
         array $scaleCodes,
+        bool $scheduledCurrentDay,
     ): ?string {
+        if ($scheduledCurrentDay) {
+            return $this->validateScheduledCurrentDayGuard();
+        }
+
         if (trim((string) $this->option('from')) === '' || trim((string) $this->option('to')) === '') {
             return 'explicit_from_to_required';
         }
@@ -158,6 +170,27 @@ final class RefreshTestMetricsDailyCommand extends Command
 
         if (! hash_equals($expected, $provided)) {
             return 'confirm_write_token_mismatch';
+        }
+
+        return null;
+    }
+
+    private function validateScheduledCurrentDayGuard(): ?string
+    {
+        if (trim((string) $this->option('from')) !== '' || trim((string) $this->option('to')) !== '') {
+            return 'scheduled_current_day_disallows_manual_dates';
+        }
+
+        if ((array) $this->option('org') !== [] || (array) $this->option('scale') !== []) {
+            return 'scheduled_current_day_disallows_manual_scope';
+        }
+
+        if ((bool) $this->option('dry-run')) {
+            return 'scheduled_current_day_disallows_dry_run';
+        }
+
+        if (trim((string) $this->option('confirm-write')) !== '') {
+            return 'scheduled_current_day_disallows_confirm_write';
         }
 
         return null;
@@ -193,12 +226,14 @@ final class RefreshTestMetricsDailyCommand extends Command
         CarbonImmutable $to,
         array $orgIds,
         array $scaleCodes,
+        bool $scheduledCurrentDay,
         array $summary,
     ): void {
         $this->line('from='.$from->toDateString());
         $this->line('to='.$to->toDateString());
         $this->line('org_scope='.($orgIds === [] ? '*' : implode(',', $orgIds)));
         $this->line('scale_scope='.($scaleCodes === [] ? '*' : implode(',', $scaleCodes)));
+        $this->line('scheduled_current_day='.($scheduledCurrentDay ? '1' : '0'));
         $this->line('dry_run='.($summary['dry_run'] ? '1' : '0'));
         $this->line('before_count='.$summary['before_count']);
         $this->line('after_count='.$summary['after_count']);
