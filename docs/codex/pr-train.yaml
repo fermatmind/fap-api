@@ -24880,6 +24880,7 @@ prs:
       - backend/app/Console/Commands/PersonalityPublicAssetsImport.php
       - backend/content_assets/personality_public/big_five_v1_seed.json
       - backend/tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - backend/docs/contracts/openapi.snapshot.json
       - backend/scripts/ci_verify_mbti.sh
       - backend/scripts/ci/prepare_sqlite.sh
@@ -24900,7 +24901,9 @@ prs:
       - php -l backend/app/Http/Controllers/API/V0_5/Cms/PersonalityPublicContentAssetController.php
       - php -l backend/app/Console/Commands/PersonalityPublicAssetsImport.php
       - php -l backend/tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php
+      - php -l backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='test_runtime_paths_have_no_uncommitted_diff|test_runtime_freeze_classifier_ignores_personality_public_asset_contract_changes' --no-ansi
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality-public-assets:import --no-ansi
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan route:list --path=api/v0.5/personality-content-assets --no-ansi
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-personality-public-assets.sqlite php artisan migrate --force --no-ansi
