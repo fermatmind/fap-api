@@ -767,6 +767,35 @@ final class PersonalityPublicApiTest extends TestCase
                 self::assertStringNotContainsString('内容暂未同步', $bodyText);
                 self::assertStringNotContainsString('content is not yet synchronized', strtolower($bodyText));
 
+                /** @var array<string, mixed>|null $differenceSection */
+                $differenceSection = collect($sections)
+                    ->firstWhere('section_key', 'traits.at_difference');
+                self::assertIsArray($differenceSection, $runtimeTypeCode.' should expose a backend-authored A/T difference section.');
+                self::assertSame(
+                    $this->expectedAtDifferenceTitle($locale, $runtimeTypeCode),
+                    $differenceSection['title'] ?? null,
+                    $runtimeTypeCode.' should expose a backend-authored public section title.',
+                );
+                self::assertSame(31, (int) ($differenceSection['sort_order'] ?? 0));
+                self::assertSame($runtimeTypeCode, data_get($differenceSection, 'payload_json.runtime_type_code'));
+                self::assertSame($this->siblingRuntimeTypeCode($runtimeTypeCode), data_get($differenceSection, 'payload_json.sibling_runtime_type_code'));
+
+                $projectionDifferenceSection = collect((array) $detail->json('mbti_public_projection_v1.sections'))
+                    ->firstWhere('key', 'traits.at_difference');
+                self::assertIsArray(
+                    $projectionDifferenceSection,
+                    $runtimeTypeCode.' should include the A/T difference section in mbti_public_projection_v1.',
+                );
+                self::assertSame(
+                    $this->expectedAtDifferenceTitle($locale, $runtimeTypeCode),
+                    $projectionDifferenceSection['title'] ?? null,
+                    $runtimeTypeCode.' projection title should come from backend variant payload.',
+                );
+                self::assertStringContainsString(
+                    $this->siblingRuntimeTypeCode($runtimeTypeCode),
+                    (string) ($projectionDifferenceSection['body_md'] ?? ''),
+                );
+
                 $checkedRoutes[] = $locale.':'.$routeSlug;
 
                 if ($locale === 'zh-CN' && $runtimeTypeCode === 'ENTJ-T') {
@@ -778,6 +807,25 @@ final class PersonalityPublicApiTest extends TestCase
 
         self::assertCount(64, $checkedRoutes);
         self::assertContains('zh-CN:entj-t', $checkedRoutes);
+    }
+
+    private function expectedAtDifferenceTitle(string $locale, string $runtimeTypeCode): string
+    {
+        $baseTypeCode = strtoupper(strtok($runtimeTypeCode, '-') ?: $runtimeTypeCode);
+
+        if ($locale === 'zh-CN') {
+            return $baseTypeCode.'-A 和 '.$baseTypeCode.'-T 有什么区别？';
+        }
+
+        return $baseTypeCode.'-A vs '.$baseTypeCode.'-T: what is the difference?';
+    }
+
+    private function siblingRuntimeTypeCode(string $runtimeTypeCode): string
+    {
+        $baseTypeCode = strtoupper(strtok($runtimeTypeCode, '-') ?: $runtimeTypeCode);
+        $variantCode = strtoupper(substr($runtimeTypeCode, -1));
+
+        return $baseTypeCode.'-'.($variantCode === 'A' ? 'T' : 'A');
     }
 
     /**

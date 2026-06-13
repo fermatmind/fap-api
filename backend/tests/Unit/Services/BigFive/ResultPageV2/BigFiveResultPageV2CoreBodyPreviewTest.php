@@ -270,6 +270,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_mbti_personality_at_difference_section_files(): void
+    {
+        $changed = [
+            'backend/app/Support/Mbti/MbtiCanonicalSectionRegistry.php',
+            'backend/app/Services/Mbti/Adapters/MbtiPersonalityProfileAuthoritySourceAdapter.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_mbti_personality_english_variant_section_enrichment_files(): void
     {
         $changed = [
@@ -2987,6 +2997,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isMbtiPersonalityAtDifferenceSectionFile($file)) {
+                continue;
+            }
+
             if ($this->isMbtiPersonalityEnglishVariantSectionEnrichmentFile($file)) {
                 continue;
             }
@@ -3833,6 +3847,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/PersonalityEnsureMbtiVariantSectionStructure.php',
             'backend/app/Services/Cms/MbtiPersonalityVariantSectionStructureService.php',
+        ], true);
+    }
+
+    private function isMbtiPersonalityAtDifferenceSectionFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Support/Mbti/MbtiCanonicalSectionRegistry.php',
+            'backend/app/Services/Mbti/Adapters/MbtiPersonalityProfileAuthoritySourceAdapter.php',
         ], true);
     }
 

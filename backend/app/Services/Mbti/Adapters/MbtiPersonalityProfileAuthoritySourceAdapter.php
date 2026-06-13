@@ -115,12 +115,13 @@ final class MbtiPersonalityProfileAuthoritySourceAdapter
             }
 
             $definition = MbtiCanonicalSectionRegistry::definition($sectionKey);
+            $payload = $this->arrayOrNull($section->payload_json);
             $sections[$sectionKey] = [
                 'key' => $sectionKey,
-                'title' => $this->nullableText($section->title) ?? (string) $definition['title'],
+                'title' => $this->nullableText(data_get($payload, 'title')) ?? (string) $definition['title'],
                 'render' => $this->nullableText($section->render_variant) ?? (string) $definition['render_variant'],
                 'body_md' => $this->nullableText($section->body_md),
-                'payload' => $this->arrayOrNull($section->payload_json),
+                'payload' => $payload,
                 'is_enabled' => true,
                 'source' => 'variant',
             ];
