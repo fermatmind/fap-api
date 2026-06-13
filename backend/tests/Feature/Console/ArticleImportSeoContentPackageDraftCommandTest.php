@@ -46,6 +46,43 @@ final class ArticleImportSeoContentPackageDraftCommandTest extends TestCase
         $this->assertSame(0, ArticleEditorialPackageImport::query()->withoutGlobalScopes()->count());
     }
 
+    public function test_dry_run_accepts_valid_zh_only_package_without_english_files(): void
+    {
+        $package = $this->writeModeCPackage(static function (array &$files): void {
+            $files['manifest.json']['locale_scope'] = ['zh-CN'];
+            $files['manifest.json']['translation_group_id'] = null;
+            $files['manifest.json']['pages'] = array_values(array_filter(
+                $files['manifest.json']['pages'],
+                static fn (array $page): bool => (string) ($page['locale'] ?? '') === 'zh-CN'
+            ));
+            unset(
+                $files['pages/en-career-interest-test-vs-personality-test.md'],
+                $files['cms/CMS_FIELDS_en_career-interest-test-vs-personality-test.json'],
+                $files['cms/CMS_IMPORT_DRAFT_en_career-interest-test-vs-personality-test.json']
+            );
+            $files['cms/CMS_FIELDS_zh-CN_career-interest-vs-personality-test-differences.json']['meta_description_draft'] =
+                $files['cms/CMS_FIELDS_zh-CN_career-interest-vs-personality-test-differences.json']['meta_description'];
+            unset($files['cms/CMS_FIELDS_zh-CN_career-interest-vs-personality-test-differences.json']['meta_description']);
+        });
+
+        $exitCode = Artisan::call('articles:import-seo-content-package-draft', $this->commandOptions($package, [
+            '--locales' => 'zh-CN',
+            '--expected-en-slug' => '',
+            '--dry-run' => true,
+            '--json' => true,
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertSame('would_create_draft', $payload['action']);
+        $this->assertSame('passed', $payload['active_surface_guard_scan']['status']);
+        $this->assertSame('passed', $payload['contract_integrity_scan']['status']);
+        $this->assertCount(1, $payload['articles']);
+        $this->assertSame('zh-CN', $payload['articles'][0]['locale']);
+        $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
+    }
+
     public function test_dry_run_accepts_old_big_five_alias_key_with_canonical_value(): void
     {
         $package = $this->writeModeCPackage(static function (array &$files): void {
@@ -292,6 +329,27 @@ final class ArticleImportSeoContentPackageDraftCommandTest extends TestCase
         $payload = $this->jsonOutput();
         $this->assertSame(1, $exitCode);
         $this->assertErrorCode($payload, 'media_placeholder_found');
+        $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
+    }
+
+    public function test_dry_run_accepts_cms_media_placeholder_marker_in_guard_contract_forbidden_list(): void
+    {
+        $package = $this->writeModeCPackage(static function (array &$files): void {
+            $files['contracts/SOCIAL_IMAGE_METADATA_REQUIREMENTS.json']['forbidden'] = [
+                '__CMS_MEDIA_LIBRARY_PLACEHOLDER__',
+                'fake image URL',
+            ];
+        });
+
+        $exitCode = Artisan::call('articles:import-seo-content-package-draft', $this->commandOptions($package, [
+            '--dry-run' => true,
+            '--json' => true,
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertSame('passed', $payload['active_surface_guard_scan']['status']);
         $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
     }
 
