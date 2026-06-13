@@ -526,6 +526,7 @@ class PersonalityController extends Controller
             'title' => (string) $profile->title,
             'subtitle' => $profile->subtitle,
             'excerpt' => $profile->excerpt,
+            'hero_image_url' => PublicMediaUrlGuard::sanitizeNullableUrl($profile->hero_image_url),
             'status' => (string) $profile->status,
             'is_public' => (bool) $profile->is_public,
             'is_indexable' => (bool) $profile->is_indexable,

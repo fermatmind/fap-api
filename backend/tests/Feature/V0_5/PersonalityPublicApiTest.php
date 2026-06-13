@@ -29,6 +29,7 @@ final class PersonalityPublicApiTest extends TestCase
             'rarity_text' => 'About 2%',
             'keywords_json' => ['strategy', 'independence'],
             'hero_summary_md' => 'Strategic, independent, and long-range.',
+            'hero_image_url' => 'https://assets.fermatmind.com/static/personality/type-icons/intj.png',
             'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
             'status' => 'published',
             'is_public' => true,
@@ -71,6 +72,7 @@ final class PersonalityPublicApiTest extends TestCase
             ->assertJsonCount(1, 'items')
             ->assertJsonPath('items.0.slug', 'intj')
             ->assertJsonPath('items.0.seo_meta.seo_title', 'INTJ Personality')
+            ->assertJsonPath('items.0.hero_image_url', 'https://assets.fermatmind.com/static/personality/type-icons/intj.png')
             ->assertJsonPath('landing_surface_v1.landing_contract_version', 'landing.surface.v1')
             ->assertJsonPath('landing_surface_v1.entry_surface', 'personality_index')
             ->assertJsonPath('items.0.canonical_type_code', 'INTJ')
@@ -291,6 +293,10 @@ final class PersonalityPublicApiTest extends TestCase
             ->assertJsonPath('profile.hero_image_url', null)
             ->assertJsonPath('seo_meta.og_image_url', null)
             ->assertJsonPath('seo_meta.twitter_image_url', null);
+
+        $this->getJson('/api/v0.5/personality?locale=en')
+            ->assertOk()
+            ->assertJsonPath('items.0.hero_image_url', null);
 
         $this->getJson('/api/v0.5/personality/intj/seo?locale=en')
             ->assertOk()
