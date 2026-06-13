@@ -1615,6 +1615,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_existing_article_seo_content_package_writer_changes(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/ArticleUpdateExistingSeoContentPackage.php',
+            'backend/app/Services/Cms/SeoContentPackage/SeoContentPackageExistingArticleUpdater.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_seo_image_bundle_importer_changes(): void
     {
         $changed = [
@@ -3968,7 +3978,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
 
     private function isSeoContentPackageDraftImporterFile(string $file): bool
     {
-        return $file === 'backend/app/Console/Commands/ArticleImportSeoContentPackageDraft.php'
+        return in_array($file, [
+            'backend/app/Console/Commands/ArticleImportSeoContentPackageDraft.php',
+            'backend/app/Console/Commands/ArticleUpdateExistingSeoContentPackage.php',
+        ], true)
             || str_starts_with($file, 'backend/app/Services/Cms/SeoContentPackage/');
     }
 
