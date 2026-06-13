@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-13T23:58:00+08:00",
+  "updated_at": "2026-06-14T00:05:00+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -54275,7 +54275,7 @@
     "repo": "fap-api",
     "branch": "codex/personality-detail-content-coverage-01",
     "base": "origin/main",
-    "status": "local_checks_passed",
+    "status": "pr_open_github_checks_pending",
     "train_scope": "personality_seo",
     "title": "PERSONALITY-DETAIL-CONTENT-COVERAGE-01: test(personality): lock variant detail content coverage",
     "depends_on": [
@@ -54314,11 +54314,16 @@
       "scope": {
         "status": "pass",
         "evidence": "Branch diff is confined to backend/tests/Feature/V0_5/PersonalityPublicApiTest.php, docs/codex/pr-train.yaml, and docs/codex/pr-train-state.json. Untracked Article updater files and generated seo-ops directories were left unstaged and out of scope."
+      },
+      "github": {
+        "status": "pending",
+        "head_sha": "1b09124c67f238e4f70d0c942f07ffc7988e757d",
+        "evidence": "PR #2074 opened after local checks passed; waiting for GitHub checks."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "1b09124c67f238e4f70d0c942f07ffc7988e757d",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2074",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -54332,6 +54337,11 @@
         "at": "2026-06-13T23:58:00+08:00",
         "status": "local_checks_passed",
         "note": "Implemented and validated backend personality detail coverage contract. Validation included focused and full PersonalityPublicApiTest, Personality filter, Pint, route list, sqlite migrate, ci_verify_mbti, JSON/YAML parse, git diff check, and scope validation."
+      },
+      {
+        "at": "2026-06-14T00:05:00+08:00",
+        "status": "pr_open_github_checks_pending",
+        "note": "Pushed commit 1b09124c and opened PR #2074; GitHub checks are pending."
       }
     ]
   }
