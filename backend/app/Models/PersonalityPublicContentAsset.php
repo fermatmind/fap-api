@@ -30,6 +30,8 @@ final class PersonalityPublicContentAsset extends Model
 
     public const ENTITY_POLARITY = 'polarity';
 
+    public const ENTITY_FACET_HUB = 'facet_hub';
+
     public const ENTITY_FACET = 'facet';
 
     public const ENTITY_CENTER = 'center';
@@ -44,6 +46,7 @@ final class PersonalityPublicContentAsset extends Model
         self::ENTITY_HUB,
         self::ENTITY_DOMAIN,
         self::ENTITY_POLARITY,
+        self::ENTITY_FACET_HUB,
         self::ENTITY_FACET,
         self::ENTITY_CENTER,
         self::ENTITY_CORE_TYPE,
@@ -56,6 +59,7 @@ final class PersonalityPublicContentAsset extends Model
             self::ENTITY_HUB,
             self::ENTITY_DOMAIN,
             self::ENTITY_POLARITY,
+            self::ENTITY_FACET_HUB,
             self::ENTITY_FACET,
         ],
         self::FRAMEWORK_ENNEAGRAM => [
@@ -73,6 +77,10 @@ final class PersonalityPublicContentAsset extends Model
 
     public const LAUNCH_APPROVED = 'approved';
 
+    public const LAUNCH_CONTENT_READY = 'content_ready';
+
+    public const LAUNCH_CONTENT_STUB = 'content_stub';
+
     public const LAUNCH_PUBLISHED = 'published';
 
     public const LAUNCH_ARCHIVED = 'archived';
@@ -81,8 +89,22 @@ final class PersonalityPublicContentAsset extends Model
         self::LAUNCH_DRAFT,
         self::LAUNCH_REVIEW,
         self::LAUNCH_APPROVED,
+        self::LAUNCH_CONTENT_READY,
+        self::LAUNCH_CONTENT_STUB,
         self::LAUNCH_PUBLISHED,
         self::LAUNCH_ARCHIVED,
+    ];
+
+    public const ROBOTS_INDEX_FOLLOW = 'index,follow';
+
+    public const ROBOTS_NOINDEX_FOLLOW = 'noindex,follow';
+
+    public const ROBOTS_NOINDEX_NOFOLLOW = 'noindex,nofollow';
+
+    public const ROBOTS_VALUES = [
+        self::ROBOTS_INDEX_FOLLOW,
+        self::ROBOTS_NOINDEX_FOLLOW,
+        self::ROBOTS_NOINDEX_NOFOLLOW,
     ];
 
     public const SUPPORTED_LOCALES = [
@@ -103,6 +125,7 @@ final class PersonalityPublicContentAsset extends Model
         'summary',
         'content_sections_json',
         'seo_json',
+        'robots',
         'canonical_json',
         'hreflang_json',
         'faq_json',
@@ -110,6 +133,7 @@ final class PersonalityPublicContentAsset extends Model
         'schema_json',
         'method_boundary_json',
         'evidence_notes_json',
+        'internal_links_json',
         'is_public',
         'index_eligible',
         'sitemap_eligible',
@@ -136,6 +160,7 @@ final class PersonalityPublicContentAsset extends Model
         'schema_json' => 'array',
         'method_boundary_json' => 'array',
         'evidence_notes_json' => 'array',
+        'internal_links_json' => 'array',
         'is_public' => 'boolean',
         'index_eligible' => 'boolean',
         'sitemap_eligible' => 'boolean',
@@ -163,10 +188,15 @@ final class PersonalityPublicContentAsset extends Model
             $asset->slug = self::normalizeSlug((string) $asset->slug);
             $asset->locale = self::normalizeLocale((string) $asset->locale);
             $asset->launch_state = self::normalizeLaunchState((string) $asset->launch_state);
+            $asset->robots = self::normalizeRobots((string) ($asset->robots ?: self::ROBOTS_NOINDEX_FOLLOW));
             $asset->review_state = trim((string) ($asset->review_state ?: 'draft'));
             $asset->contract_version = trim((string) ($asset->contract_version ?: self::CONTRACT_VERSION_V1));
 
-            if ($asset->launch_state !== self::LAUNCH_PUBLISHED || ! (bool) $asset->index_eligible) {
+            if (
+                $asset->launch_state !== self::LAUNCH_PUBLISHED
+                || ! (bool) $asset->index_eligible
+                || $asset->robots !== self::ROBOTS_INDEX_FOLLOW
+            ) {
                 $asset->sitemap_eligible = false;
                 $asset->llms_eligible = false;
             }
@@ -177,8 +207,10 @@ final class PersonalityPublicContentAsset extends Model
     {
         return $query
             ->where('is_public', true)
-            ->where('index_eligible', true)
-            ->where('launch_state', self::LAUNCH_PUBLISHED)
+            ->whereIn('launch_state', [
+                self::LAUNCH_CONTENT_READY,
+                self::LAUNCH_PUBLISHED,
+            ])
             ->where(static function (Builder $publishedAtQuery): void {
                 $publishedAtQuery
                     ->whereNull('published_at')
@@ -220,5 +252,14 @@ final class PersonalityPublicContentAsset extends Model
         return in_array($normalized, self::LAUNCH_STATES, true)
             ? $normalized
             : self::LAUNCH_DRAFT;
+    }
+
+    public static function normalizeRobots(string $value): string
+    {
+        $normalized = strtolower(str_replace(' ', '', trim($value)));
+
+        return in_array($normalized, self::ROBOTS_VALUES, true)
+            ? $normalized
+            : self::ROBOTS_NOINDEX_FOLLOW;
     }
 }

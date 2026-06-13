@@ -2707,6 +2707,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $routeChangedLines = [
             '+use App\\Http\\Controllers\\API\\V0_5\\Cms\\PersonalityPublicContentAssetController;',
             "+    Route::get('/personality-content-assets', [PersonalityPublicContentAssetController::class, 'index']);",
+            "+    Route::get('/personality-content-assets/{framework}/{entityType}/{code}', [PersonalityPublicContentAssetController::class, 'showByCode']);",
             "+    Route::get('/personality-content-assets/{framework}/{slug}', [PersonalityPublicContentAssetController::class, 'show']);",
         ];
 
@@ -5977,6 +5978,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $allowedLines = [
             '+use App\\Http\\Controllers\\API\\V0_5\\Cms\\PersonalityPublicContentAssetController;',
             "+    Route::get('/personality-content-assets', [PersonalityPublicContentAssetController::class, 'index']);",
+            "+    Route::get('/personality-content-assets/{framework}/{entityType}/{code}', [PersonalityPublicContentAssetController::class, 'showByCode']);",
             "+    Route::get('/personality-content-assets/{framework}/{slug}', [PersonalityPublicContentAssetController::class, 'show']);",
         ];
 

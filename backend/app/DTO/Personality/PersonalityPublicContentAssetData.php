@@ -18,11 +18,13 @@ final readonly class PersonalityPublicContentAssetData
      * @param  array<string,mixed>  $schema
      * @param  array<string,mixed>  $methodBoundary
      * @param  array<int,array<string,mixed>>  $evidenceNotes
+     * @param  array<int,array<string,mixed>>  $internalLinks
      */
     public function __construct(
         public int $orgId,
         public string $framework,
         public string $entityType,
+        public string $code,
         public string $entityKey,
         public string $slug,
         public string $locale,
@@ -30,6 +32,7 @@ final readonly class PersonalityPublicContentAssetData
         public ?string $summary,
         public array $contentSections,
         public array $seo,
+        public string $robots,
         public array $canonical,
         public array $hreflang,
         public array $faq,
@@ -37,6 +40,7 @@ final readonly class PersonalityPublicContentAssetData
         public array $schema,
         public array $methodBoundary,
         public array $evidenceNotes,
+        public array $internalLinks,
         public bool $isPublic,
         public bool $indexEligible,
         public bool $sitemapEligible,
@@ -46,6 +50,7 @@ final readonly class PersonalityPublicContentAssetData
         public string $contractVersion,
         public ?string $sourcePackage,
         public ?string $sourceHash,
+        public ?string $lastReviewedAt,
     ) {}
 
     /**
@@ -53,17 +58,22 @@ final readonly class PersonalityPublicContentAssetData
      */
     public static function fromValidatedPayload(array $payload): self
     {
+        $code = PersonalityPublicContentAsset::normalizeEntityKey((string) ($payload['code'] ?? $payload['entity_key']));
+        $contentSections = $payload['content_sections'] ?? $payload['sections'] ?? [];
+
         return new self(
             orgId: max(0, (int) ($payload['org_id'] ?? 0)),
             framework: PersonalityPublicContentAsset::normalizeToken((string) $payload['framework']),
             entityType: PersonalityPublicContentAsset::normalizeToken((string) $payload['entity_type']),
-            entityKey: PersonalityPublicContentAsset::normalizeEntityKey((string) $payload['entity_key']),
+            code: $code,
+            entityKey: PersonalityPublicContentAsset::normalizeEntityKey((string) ($payload['entity_key'] ?? $code)),
             slug: PersonalityPublicContentAsset::normalizeSlug((string) $payload['slug']),
             locale: PersonalityPublicContentAsset::normalizeLocale((string) $payload['locale']),
             title: trim((string) $payload['title']),
             summary: self::nullableString($payload['summary'] ?? null),
-            contentSections: array_values(is_array($payload['content_sections'] ?? null) ? $payload['content_sections'] : []),
+            contentSections: array_values(is_array($contentSections) ? $contentSections : []),
             seo: is_array($payload['seo'] ?? null) ? $payload['seo'] : [],
+            robots: PersonalityPublicContentAsset::normalizeRobots((string) ($payload['robots'] ?? PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW)),
             canonical: is_array($payload['canonical'] ?? null) ? $payload['canonical'] : [],
             hreflang: is_array($payload['hreflang'] ?? null) ? $payload['hreflang'] : [],
             faq: array_values(is_array($payload['faq'] ?? null) ? $payload['faq'] : []),
@@ -71,6 +81,7 @@ final readonly class PersonalityPublicContentAssetData
             schema: is_array($payload['schema'] ?? null) ? $payload['schema'] : [],
             methodBoundary: is_array($payload['method_boundary'] ?? null) ? $payload['method_boundary'] : [],
             evidenceNotes: array_values(is_array($payload['evidence_notes'] ?? null) ? $payload['evidence_notes'] : []),
+            internalLinks: array_values(is_array($payload['internal_links'] ?? null) ? $payload['internal_links'] : []),
             isPublic: (bool) ($payload['is_public'] ?? true),
             indexEligible: (bool) ($payload['index_eligible'] ?? false),
             sitemapEligible: (bool) ($payload['sitemap_eligible'] ?? false),
@@ -80,6 +91,7 @@ final readonly class PersonalityPublicContentAssetData
             contractVersion: trim((string) ($payload['contract_version'] ?? PersonalityPublicContentAsset::CONTRACT_VERSION_V1)) ?: PersonalityPublicContentAsset::CONTRACT_VERSION_V1,
             sourcePackage: self::nullableString($payload['source_package'] ?? null),
             sourceHash: self::nullableString($payload['source_hash'] ?? null),
+            lastReviewedAt: self::nullableString($payload['last_reviewed_at'] ?? null),
         );
     }
 
@@ -99,6 +111,7 @@ final readonly class PersonalityPublicContentAssetData
             'summary' => $this->summary,
             'content_sections_json' => $this->contentSections,
             'seo_json' => $this->seo,
+            'robots' => $this->robots,
             'canonical_json' => $this->canonical,
             'hreflang_json' => $this->hreflang,
             'faq_json' => $this->faq,
@@ -106,6 +119,7 @@ final readonly class PersonalityPublicContentAssetData
             'schema_json' => $this->schema,
             'method_boundary_json' => $this->methodBoundary,
             'evidence_notes_json' => $this->evidenceNotes,
+            'internal_links_json' => $this->internalLinks,
             'is_public' => $this->isPublic,
             'index_eligible' => $this->indexEligible,
             'sitemap_eligible' => $this->sitemapEligible,
@@ -115,6 +129,7 @@ final readonly class PersonalityPublicContentAssetData
             'contract_version' => $this->contractVersion,
             'source_package' => $this->sourcePackage,
             'source_hash' => $this->sourceHash,
+            'last_reviewed_at' => $this->lastReviewedAt,
         ];
     }
 
