@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Analytics;
 
+use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
@@ -74,6 +75,78 @@ final class RefreshTestMetricsDailyCommandTest extends TestCase
             ->expectsOutputToContain('write_guard_reason=confirm_write_token_mismatch')
             ->expectsOutputToContain('expected_confirm_write=analytics_test_metrics_daily:write:2026-06-16:2026-06-16:org=12:scale=all')
             ->assertExitCode(1);
+    }
+
+    public function test_scheduled_current_day_refreshes_today_for_all_orgs_without_manual_token(): void
+    {
+        Carbon::setTestNow('2026-06-17 10:15:00');
+
+        try {
+            $today = CarbonImmutable::parse('2026-06-17 09:00:00');
+            $yesterday = $today->subDay();
+            $success = (string) Str::uuid();
+            $failure = (string) Str::uuid();
+            $old = (string) Str::uuid();
+
+            $this->insertAttempt($success, 12, 'MBTI', 'MBTI', 'zh-CN', $today, $today->addMinutes(8));
+            $this->insertAttempt($failure, 13, 'BIG5', 'BIG5', 'en', $today->addMinutes(2), null);
+            $this->insertAttempt($old, 12, 'MBTI', 'MBTI', 'zh-CN', $yesterday, $yesterday->addMinutes(8));
+            $this->insertSubmission($success, 12, 'succeeded', $today->addMinutes(9));
+            $this->insertSubmission($failure, 13, 'failed', $today->addMinutes(10));
+            $this->insertSubmission($old, 12, 'succeeded', $yesterday->addMinutes(9));
+
+            $this->artisan('analytics:refresh-test-metrics-daily', [
+                '--scheduled-current-day' => true,
+            ])
+                ->expectsOutputToContain('from=2026-06-17')
+                ->expectsOutputToContain('to=2026-06-17')
+                ->expectsOutputToContain('org_scope=*')
+                ->expectsOutputToContain('scale_scope=*')
+                ->expectsOutputToContain('scheduled_current_day=1')
+                ->expectsOutputToContain('dry_run=0')
+                ->expectsOutputToContain('write_guard=passed')
+                ->assertExitCode(0);
+
+            $this->assertDatabaseHas('analytics_test_metrics_daily', [
+                'day' => '2026-06-17',
+                'org_id' => 12,
+                'scale_code' => 'MBTI',
+                'successful_attempts' => 1,
+                'failed_attempts' => 0,
+                'total_attempts' => 1,
+            ]);
+            $this->assertDatabaseHas('analytics_test_metrics_daily', [
+                'day' => '2026-06-17',
+                'org_id' => 13,
+                'scale_code' => 'BIG5',
+                'successful_attempts' => 0,
+                'failed_attempts' => 1,
+                'total_attempts' => 1,
+            ]);
+            $this->assertDatabaseMissing('analytics_test_metrics_daily', [
+                'day' => '2026-06-16',
+            ]);
+        } finally {
+            Carbon::setTestNow();
+        }
+    }
+
+    public function test_scheduled_current_day_blocks_manual_scope_overrides(): void
+    {
+        Carbon::setTestNow('2026-06-17 10:15:00');
+
+        try {
+            $this->artisan('analytics:refresh-test-metrics-daily', [
+                '--scheduled-current-day' => true,
+                '--org' => [12],
+            ])
+                ->expectsOutputToContain('scheduled_current_day=1')
+                ->expectsOutputToContain('write_guard=blocked')
+                ->expectsOutputToContain('write_guard_reason=scheduled_current_day_disallows_manual_scope')
+                ->assertExitCode(1);
+        } finally {
+            Carbon::setTestNow();
+        }
     }
 
     private function insertAttempt(
