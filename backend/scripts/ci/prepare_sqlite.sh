@@ -14,9 +14,14 @@ REPO_DIR="$(cd "$BACKEND_DIR/.." && pwd)"
 export DB_CONNECTION="${DB_CONNECTION:-sqlite}"
 export DB_DATABASE="${DB_DATABASE:-/tmp/fap-ci.sqlite}"
 
-rm -f "$DB_DATABASE" || true
-touch "$DB_DATABASE"
-chmod 666 "$DB_DATABASE" || true
+reset_sqlite_db() {
+  rm -f "$DB_DATABASE" "$DB_DATABASE-shm" "$DB_DATABASE-wal" "$DB_DATABASE-journal" || true
+  mkdir -p "$(dirname "$DB_DATABASE")"
+  touch "$DB_DATABASE"
+  chmod 666 "$DB_DATABASE" || true
+}
+
+reset_sqlite_db
 
 echo "[prepare_sqlite] DB_CONNECTION=$DB_CONNECTION"
 echo "[prepare_sqlite] DB_DATABASE=$DB_DATABASE"
@@ -24,7 +29,12 @@ echo "[prepare_sqlite] DB_DATABASE=$DB_DATABASE"
 cd "$BACKEND_DIR"
 
 php artisan config:clear || true
-php artisan migrate --force --no-interaction
+if ! php artisan migrate --force --no-interaction; then
+  echo "[prepare_sqlite][WARN] migrate failed; resetting sqlite db and retrying once" >&2
+  reset_sqlite_db
+  php artisan config:clear || true
+  php artisan migrate --force --no-interaction
+fi
 php artisan db:seed --class="Database\\Seeders\\CiScalesRegistrySeeder" --force --no-interaction || true
 
 # sync slugs for lookup tests

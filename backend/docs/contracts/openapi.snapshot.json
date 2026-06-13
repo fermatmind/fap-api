@@ -4048,6 +4048,40 @@
                 ]
             }
         },
+        "/api/v0.5/personality-content-assets": {
+            "get": {
+                "operationId": "get_api_v0_5_personality_content_assets",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\PersonalityPublicContentAssetController@index",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/personality-content-assets/{framework}/{slug}": {
+            "get": {
+                "operationId": "get_api_v0_5_personality_content_assets_framework_slug_",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\PersonalityPublicContentAssetController@show",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
         "/api/v0.5/personality/{type}": {
             "get": {
                 "operationId": "get_api_v0_5_personality_type_",

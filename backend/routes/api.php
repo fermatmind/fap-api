@@ -69,6 +69,7 @@ use App\Http\Controllers\API\V0_5\Cms\LandingSurfaceController;
 use App\Http\Controllers\API\V0_5\Cms\MediaLibraryController;
 use App\Http\Controllers\API\V0_5\Cms\PersonalityController;
 use App\Http\Controllers\API\V0_5\Cms\PersonalityDesktopCloneController;
+use App\Http\Controllers\API\V0_5\Cms\PersonalityPublicContentAssetController;
 use App\Http\Controllers\API\V0_5\Cms\ResearchReportController;
 use App\Http\Controllers\API\V0_5\Cms\SupportArticleController;
 use App\Http\Controllers\API\V0_5\Cms\TopicController;
@@ -595,6 +596,8 @@ Route::prefix('v0.5')->group(function () {
     Route::get('/career-jobs/{slug}', [CareerJobController::class, 'show']);
     Route::get('/career-recommendations/mbti', [CareerRecommendationController::class, 'index']);
     Route::get('/career-recommendations/mbti/{type}', [CareerRecommendationController::class, 'show']);
+    Route::get('/personality-content-assets', [PersonalityPublicContentAssetController::class, 'index']);
+    Route::get('/personality-content-assets/{framework}/{slug}', [PersonalityPublicContentAssetController::class, 'show']);
     Route::get('/personality', [PersonalityController::class, 'index']);
     Route::get('/personality/{type}/desktop-clone', [PersonalityDesktopCloneController::class, 'show']);
     Route::get('/personality/{type}/seo', [PersonalityController::class, 'seo']);

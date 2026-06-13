@@ -2683,6 +2683,26 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_personality_public_asset_contract_changes(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/PersonalityPublicAssetsImport.php',
+            'backend/app/DTO/Personality/PersonalityPublicContentAssetData.php',
+            'backend/app/Http/Controllers/API/V0_5/Cms/PersonalityPublicContentAssetController.php',
+            'backend/app/Models/PersonalityPublicContentAsset.php',
+            'backend/app/Services/Cms/PersonalityPublicContentAssetContract.php',
+            'backend/database/migrations/2026_06_14_000100_create_personality_public_content_assets_table.php',
+            'backend/routes/api.php',
+        ];
+        $routeChangedLines = [
+            '+use App\\Http\\Controllers\\API\\V0_5\\Cms\\PersonalityPublicContentAssetController;',
+            "+    Route::get('/personality-content-assets', [PersonalityPublicContentAssetController::class, 'index']);",
+            "+    Route::get('/personality-content-assets/{framework}/{slug}', [PersonalityPublicContentAssetController::class, 'show']);",
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', routeChangedLines: $routeChangedLines));
+    }
+
     public function test_runtime_freeze_classifier_allows_bigfive_norm_foundation_data_scope_only(): void
     {
         $allowed = [
@@ -2952,6 +2972,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isPersonalityPublicDirectoryFile($file)) {
+                continue;
+            }
+
+            if ($this->isPersonalityPublicAssetContractFile($file)) {
                 continue;
             }
 
@@ -3436,6 +3460,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if (
+                $file === 'backend/routes/api.php'
+                && $this->routeDiffIsPersonalityPublicAssetContractOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
+            ) {
+                continue;
+            }
+
             if ($this->isBigFiveV2PilotSupportFile($file)) {
                 continue;
             }
@@ -3774,6 +3805,18 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Http/Controllers/API/V0_5/Cms/PersonalityController.php',
             'backend/app/Services/Cms/PersonalityProfileService.php',
+        ], true);
+    }
+
+    private function isPersonalityPublicAssetContractFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/PersonalityPublicAssetsImport.php',
+            'backend/app/DTO/Personality/PersonalityPublicContentAssetData.php',
+            'backend/app/Http/Controllers/API/V0_5/Cms/PersonalityPublicContentAssetController.php',
+            'backend/app/Models/PersonalityPublicContentAsset.php',
+            'backend/app/Services/Cms/PersonalityPublicContentAssetContract.php',
+            'backend/database/migrations/2026_06_14_000100_create_personality_public_content_assets_table.php',
         ], true);
     }
 
@@ -5893,6 +5936,30 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if (preg_match('/^\+.*(SeoIntelDashboardController|EnsureSeoIntelReadAuthorized|ops\\/seo-intel|api\\.v0_5\\.ops\\.seo_intel|overview|urlTruth|url-truth|issues|trends|pagePerformance|page-performance|cmsAdminMiddleware|Route::prefix|Route::get|middleware|group|name)/u', $line) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function routeDiffIsPersonalityPublicAssetContractOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        $allowedLines = [
+            '+use App\\Http\\Controllers\\API\\V0_5\\Cms\\PersonalityPublicContentAssetController;',
+            "+    Route::get('/personality-content-assets', [PersonalityPublicContentAssetController::class, 'index']);",
+            "+    Route::get('/personality-content-assets/{framework}/{slug}', [PersonalityPublicContentAssetController::class, 'show']);",
+        ];
+
+        foreach ($changedLines as $line) {
+            if (! in_array($line, $allowedLines, true)) {
                 return false;
             }
         }

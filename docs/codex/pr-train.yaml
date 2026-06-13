@@ -24856,3 +24856,71 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: PERSONALITY-PUBLIC-ASSET-CONTRACT-01
+    repo: fap-api
+    depends_on:
+      - PERSONALITY-DETAIL-CONTENT-COVERAGE-01
+    branch: codex/personality-public-asset-contract-01
+    title: "PERSONALITY-PUBLIC-ASSET-CONTRACT-01: feat(personality): add public asset CMS contract"
+    train_scope: personality_seo
+    status: user_authorized
+    scope:
+      - Define a unified CMS/API contract for Big Five and Enneagram public personality content assets.
+      - Support framework big_five and enneagram with entity types hub, domain, polarity, facet, center, core_type, wing, and instinctual_subtype.
+      - Add launch/indexability fields plus SEO, canonical, hreflang, FAQ, media, schema, method boundary, and evidence note payloads.
+      - Prepare a Big Five V1 draft/noindex seed/import contract without adding public pages to sitemap or llms.
+    allowed_paths:
+      - backend/routes/api.php
+      - backend/database/migrations/2026_06_14_000100_create_personality_public_content_assets_table.php
+      - backend/app/Models/PersonalityPublicContentAsset.php
+      - backend/app/DTO/Personality/PersonalityPublicContentAssetData.php
+      - backend/app/Services/Cms/PersonalityPublicContentAssetContract.php
+      - backend/app/Http/Controllers/API/V0_5/Cms/PersonalityPublicContentAssetController.php
+      - backend/app/Console/Commands/PersonalityPublicAssetsImport.php
+      - backend/content_assets/personality_public/big_five_v1_seed.json
+      - backend/tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/docs/contracts/openapi.snapshot.json
+      - backend/scripts/ci_verify_mbti.sh
+      - backend/scripts/ci/prepare_sqlite.sh
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify MBTI content, MBTI importers, or MBTI result/report behavior.
+      - Modify Big Five or Enneagram result pages, scoring, report composers, or private result modules.
+      - Generate frontend pages or add indexable public routes.
+      - Add 32 OCEAN SEO pages, 54 wing x instinct pages, or Tritype pages.
+      - Add new sitemap or llms inclusion for these draft assets.
+    validation:
+      - php -l backend/routes/api.php
+      - php -l backend/database/migrations/2026_06_14_000100_create_personality_public_content_assets_table.php
+      - php -l backend/app/Models/PersonalityPublicContentAsset.php
+      - php -l backend/app/DTO/Personality/PersonalityPublicContentAssetData.php
+      - php -l backend/app/Services/Cms/PersonalityPublicContentAssetContract.php
+      - php -l backend/app/Http/Controllers/API/V0_5/Cms/PersonalityPublicContentAssetController.php
+      - php -l backend/app/Console/Commands/PersonalityPublicAssetsImport.php
+      - php -l backend/tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php
+      - php -l backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='test_runtime_paths_have_no_uncommitted_diff|test_runtime_freeze_classifier_ignores_personality_public_asset_contract_changes' --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan personality-public-assets:import --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan route:list --path=api/v0.5/personality-content-assets --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-personality-public-assets.sqlite php artisan migrate --force --no-ansi
+      - cd backend && bash scripts/export_openapi.sh --check
+      - cd backend && ./vendor/bin/pint --test app/Models/PersonalityPublicContentAsset.php app/DTO/Personality/PersonalityPublicContentAssetData.php app/Services/Cms/PersonalityPublicContentAssetContract.php app/Http/Controllers/API/V0_5/Cms/PersonalityPublicContentAssetController.php app/Console/Commands/PersonalityPublicAssetsImport.php tests/Feature/V0_5/PersonalityPublicContentAssetContractTest.php
+      - bash -n backend/scripts/ci_verify_mbti.sh
+      - bash -n backend/scripts/ci/prepare_sqlite.sh
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - python3 -m json.tool backend/content_assets/personality_public/big_five_v1_seed.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
