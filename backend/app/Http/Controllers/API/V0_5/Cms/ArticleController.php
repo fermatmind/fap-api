@@ -554,15 +554,15 @@ class ArticleController extends Controller
     private function editorialPackageMetadata(Article $article): array
     {
         $seoMeta = $article->relationLoaded('seoMeta') ? $article->seoMeta : null;
-        if (is_array($seoMeta?->schema_json) && is_array($seoMeta->schema_json['editorial_package_v1'] ?? null)) {
-            return $seoMeta->schema_json['editorial_package_v1'];
-        }
-
         $variants = is_array($article->cover_image_variants) ? $article->cover_image_variants : [];
-
-        return is_array($variants['editorial_package_v1'] ?? null)
+        $variantMetadata = is_array($variants['editorial_package_v1'] ?? null)
             ? $variants['editorial_package_v1']
             : [];
+        $schemaMetadata = is_array($seoMeta?->schema_json) && is_array($seoMeta->schema_json['editorial_package_v1'] ?? null)
+            ? $seoMeta->schema_json['editorial_package_v1']
+            : [];
+
+        return array_replace_recursive($variantMetadata, $schemaMetadata);
     }
 
     /**
@@ -1063,6 +1063,7 @@ class ArticleController extends Controller
             'cover_image_width' => $article->cover_image_width !== null ? (int) $article->cover_image_width : null,
             'cover_image_height' => $article->cover_image_height !== null ? (int) $article->cover_image_height : null,
             'cover_image_variants' => $this->publicCoverImageVariants($article),
+            'body_visual' => $this->publicBodyVisualPayload($article),
             'related_test_slug' => $article->related_test_slug,
             'related_test_slugs' => $this->publicRelatedTestSlugs($article),
             'test_edges' => $this->publicTestEdges($article),
@@ -1127,6 +1128,23 @@ class ArticleController extends Controller
         unset($variants['editorial_package_v1']);
 
         return $variants;
+    }
+
+    /**
+     * @return array<string,mixed>|null
+     */
+    private function publicBodyVisualPayload(Article $article): ?array
+    {
+        $metadata = $this->editorialPackageMetadata($article);
+        $imageUrl = PublicMediaUrlGuard::sanitizeNullableUrl($metadata['body_visual_image_url'] ?? null);
+        if ($imageUrl === null) {
+            return null;
+        }
+
+        return [
+            'image_url' => $imageUrl,
+            'fallback_authorized' => (bool) ($metadata['body_visual_fallback_authorized'] ?? false),
+        ];
     }
 
     /**

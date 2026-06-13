@@ -49,6 +49,8 @@ final class ArticleUpdateExistingSeoContentPackageCommandTest extends TestCase
         $this->assertSame(self::ARTICLE_ID, $payload['articles'][0]['article_id']);
         $this->assertSame((int) $article->working_revision_id, (int) $payload['articles'][0]['working_revision_id']);
         $this->assertSame((int) $article->published_revision_id, (int) $payload['articles'][0]['published_revision_id']);
+        $this->assertTrue((bool) $payload['articles'][0]['working_revision_is_published_revision']);
+        $this->assertTrue((bool) $payload['articles'][0]['will_create_isolated_working_revision']);
 
         $article->refresh();
         $this->assertSame('Published RIASEC article', (string) $article->workingRevision?->title);
@@ -71,6 +73,7 @@ final class ArticleUpdateExistingSeoContentPackageCommandTest extends TestCase
         $this->assertTrue($payload['ok']);
         $this->assertFalse($payload['dry_run']);
         $this->assertSame('updated_existing_working_revision', $payload['action']);
+        $this->assertTrue((bool) data_get($payload, 'articles.0.created_isolated_working_revision'));
 
         $article = Article::query()
             ->withoutGlobalScopes()
@@ -85,8 +88,11 @@ final class ArticleUpdateExistingSeoContentPackageCommandTest extends TestCase
         $this->assertTrue((bool) $article->sitemap_eligible);
         $this->assertTrue((bool) $article->llms_eligible);
         $this->assertSame($publishedRevisionId, (int) $article->published_revision_id);
+        $this->assertNotSame($publishedRevisionId, (int) $article->working_revision_id);
         $this->assertSame('https://fermatmind.com'.self::CANONICAL, (string) $article->seoMeta?->canonical_url);
 
+        $this->assertSame('Published RIASEC article', (string) $article->publishedRevision?->title);
+        $this->assertSame(ArticleTranslationRevision::STATUS_PUBLISHED, (string) $article->publishedRevision?->revision_status);
         $this->assertSame('霍兰德职业兴趣测试是什么？RIASEC 六型如何帮助职业探索', (string) $article->workingRevision?->title);
         $this->assertSame(ArticleTranslationRevision::STATUS_HUMAN_REVIEW, (string) $article->workingRevision?->revision_status);
         $this->assertStringContainsString('## RIASEC 六型如何帮助职业探索', (string) $article->workingRevision?->content_md);
