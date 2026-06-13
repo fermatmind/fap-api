@@ -353,6 +353,8 @@ final class OpsCustomPagesI18nContractTest extends TestCase
 
     private function visibleHtml(string $html): string
     {
-        return (string) preg_replace('#<script\\b[^>]*>.*?</script>#is', '', $html);
+        $withoutScripts = (string) preg_replace('#<script\\b[^>]*>.*?</script>#is', '', $html);
+
+        return (string) preg_replace('/\\s+href=(["\\\']).*?\\1/is', '', $withoutScripts);
     }
 }
