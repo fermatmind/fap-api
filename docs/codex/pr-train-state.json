@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-14T00:12:00+08:00",
+  "updated_at": "2026-06-14T00:20:00+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -26345,7 +26345,7 @@
   "BAIDU-LIVE-00": {
     "repo": "fap-api",
     "branch": "codex/baidu-live-00-readiness-contract",
-    "status": "ready_to_merge",
+    "status": "merged",
     "depends_on": [
       "GSC-LIVE-00"
     ],
@@ -54317,7 +54317,7 @@
       },
       "github": {
         "status": "pass",
-        "head_sha": "95bd7dc4e8bb2c93a04691e264336b0f85c839a0",
+        "head_sha": "1decea6d1d6b0344d9f2b24b848a0e35c513cdde",
         "checks": [
           "hygiene",
           "supply-chain",
@@ -54329,15 +54329,15 @@
           "semgrep sarif non-blocking upload",
           "Semgrep OSS"
         ],
-        "evidence": "PR #2074 GitHub checks passed at head 95bd7dc4 and mergeStateStatus was CLEAN."
+        "evidence": "PR #2074 GitHub checks passed at head 1decea6d and mergeStateStatus was CLEAN before squash merge."
       }
     },
     "failure_reason": null,
-    "commit_sha": "95bd7dc4e8bb2c93a04691e264336b0f85c839a0",
+    "commit_sha": "8235dad00c4f9fca50e3d3d13de6205dddabe5be",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2074",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-13T15:36:47Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-13T23:35:00+08:00",
@@ -54358,6 +54358,11 @@
         "at": "2026-06-14T00:12:00+08:00",
         "status": "ready_to_merge",
         "note": "GitHub checks passed for PR #2074 at head 95bd7dc4 and mergeStateStatus was CLEAN; recording ready_to_merge before merge."
+      },
+      {
+        "at": "2026-06-14T00:20:00+08:00",
+        "status": "merged",
+        "note": "PR #2074 was squash-merged as 8235dad0; remote branch deletion and local post-merge cleanup were verified."
       }
     ]
   }
