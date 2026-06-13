@@ -54700,7 +54700,7 @@
     "id": "PERSONALITY-SEO-TITLE-METADATA-01",
     "branch": "codex/personality-seo-title-metadata-01",
     "base": "origin/main",
-    "status": "committed",
+    "status": "pr_open",
     "train_scope": "personality_seo",
     "title": "PERSONALITY-SEO-TITLE-METADATA-01: feat(personality): add search-intent metadata authority",
     "depends_on": [
@@ -54736,12 +54736,12 @@
       },
       "github": {
         "status": "pending",
-        "evidence": null
+        "evidence": "GitHub checks pending for PR #2087."
       }
     },
     "failure_reason": null,
-    "commit_sha": "c93bbd698dacef202c1910f00bb2f6d607f396a2",
-    "pr_url": null,
+    "commit_sha": "743126f12e34baa3d856b3d50e4edd90d508fdce",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2087",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -54760,6 +54760,11 @@
         "at": "2026-06-14T04:36:00+08:00",
         "status": "committed",
         "note": "Recorded implementation commit c93bbd698dacef202c1910f00bb2f6d607f396a2 after local checks and scope validation passed."
+      },
+      {
+        "at": "2026-06-14T04:39:00+08:00",
+        "status": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/2087 from head 743126f12e34baa3d856b3d50e4edd90d508fdce."
       }
     ]
   }
