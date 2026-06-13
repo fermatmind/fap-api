@@ -1567,6 +1567,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     public function test_runtime_freeze_classifier_ignores_article_publishing_runtime_truth_gate_changes(): void
     {
         $changed = [
+            'backend/app/Console/Commands/ArticleEnsureSeoMetaBaseline.php',
             'backend/app/Console/Commands/ArticleImportLocalBaseline.php',
             'backend/app/Services/Career/StructuredData/CareerArticleStructuredDataBuilder.php',
             'backend/app/Services/Cms/ArticleSeoService.php',
@@ -4008,6 +4009,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isArticlePublishingRuntimeTruthGateFile(string $file): bool
     {
         return in_array($file, [
+            'backend/app/Console/Commands/ArticleEnsureSeoMetaBaseline.php',
             'backend/app/Console/Commands/ArticleImportLocalBaseline.php',
             'backend/app/Http/Controllers/API/V0_5/Cms/LandingSurfaceController.php',
             'backend/app/Services/Career/StructuredData/CareerArticleStructuredDataBuilder.php',
