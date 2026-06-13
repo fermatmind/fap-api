@@ -35,7 +35,7 @@ final class TestKpiDailyPage extends Page
 
     public string $toDate = '';
 
-    public string $scope = self::SCOPE_CURRENT_ORG;
+    public string $scope = self::SCOPE_GLOBAL_ORG0;
 
     public string $scaleCode = 'all';
 
@@ -67,7 +67,7 @@ final class TestKpiDailyPage extends Page
     {
         $this->fromDate = now()->subDays(13)->toDateString();
         $this->toDate = now()->toDateString();
-        $this->scope = $this->normalizeScope(request()->query('scope'));
+        $this->scope = $this->normalizeScope(request()->query('scope', self::SCOPE_GLOBAL_ORG0));
         $this->refreshPage();
     }
 
@@ -274,8 +274,8 @@ final class TestKpiDailyPage extends Page
         $normalized = strtolower(trim((string) $scope));
 
         return match ($normalized) {
-            'global', 'global_org0', 'org0' => self::SCOPE_GLOBAL_ORG0,
-            default => self::SCOPE_CURRENT_ORG,
+            'current', 'current_org' => self::SCOPE_CURRENT_ORG,
+            default => self::SCOPE_GLOBAL_ORG0,
         };
     }
 

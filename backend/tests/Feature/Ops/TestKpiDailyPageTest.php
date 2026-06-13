@@ -38,8 +38,9 @@ final class TestKpiDailyPageTest extends TestCase
             $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_OPS_READ]);
             $selectedOrg = $this->createOrganization('Test KPI Daily Org');
 
-            $this->insertDailyMetric('2026-06-20', (int) $selectedOrg->id, 'MBTI', 'MBTI_PERSONALITY_TEST_16_TYPES', '144Q', 'zh-CN', 7, 2, 9, 10);
-            $this->insertDailyMetric('2026-06-20', (int) $selectedOrg->id, 'BIG5_OCEAN', 'BIG_FIVE_OCEAN_MODEL', 'big5-120', 'en', 11, 1, 12, 14);
+            $this->insertDailyMetric('2026-06-20', 0, 'MBTI', 'MBTI_PERSONALITY_TEST_16_TYPES', '144Q', 'zh-CN', 7, 2, 9, 10);
+            $this->insertDailyMetric('2026-06-20', 0, 'BIG5_OCEAN', 'BIG_FIVE_OCEAN_MODEL', 'big5-120', 'en', 11, 1, 12, 14);
+            $this->insertDailyMetric('2026-06-20', (int) $selectedOrg->id, 'RIASEC', 'RIASEC_HOLLAND_CAREER_INTERESTS', 'riasec-60', 'zh-CN', 100, 100, 200, 210);
 
             $this->withSession($this->opsSession($admin, $selectedOrg))
                 ->actingAs($admin, (string) config('admin.guard', 'admin'))
@@ -52,7 +53,8 @@ final class TestKpiDailyPageTest extends TestCase
                 ->assertSee('BIG5_OCEAN')
                 ->assertSee('big5-120')
                 ->assertSee('91.7%')
-                ->assertSee('21');
+                ->assertSee('21')
+                ->assertDontSee('RIASEC_HOLLAND_CAREER_INTERESTS');
         } finally {
             Carbon::setTestNow();
         }

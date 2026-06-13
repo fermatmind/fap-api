@@ -100,6 +100,7 @@ return [
             'order_lookup' => 'Order Lookup',
             'webhook_failures' => 'Webhook Failures',
             'failed_jobs' => 'Failed Jobs',
+            'test_kpi_daily' => 'Test KPI Daily',
             'content_probe' => 'Content Probe',
             'switch_org' => 'Create/Switch Org',
         ],
@@ -188,9 +189,9 @@ return [
             ],
             'sections' => [
                 'kpis' => 'Selected Range Summary',
-                'kpis_desc' => 'Read-model totals for the current date, scale, form, locale, and org scope.',
+                'kpis_desc' => 'Read-model totals for the current date, scale, form, locale, and scope. The default scope is sitewide org_id=0.',
                 'detail' => 'Daily By-Test Detail',
-                'detail_desc' => 'One row per day, scale, scale v2, form, and locale. The table is capped at 500 rows for Ops readability.',
+                'detail_desc' => 'Daily per-test volume by day, scale, scale v2, form, and locale. The table is capped at 500 rows for Ops readability.',
                 'no_rows' => 'No daily test rows for the current scope.',
             ],
             'table' => [

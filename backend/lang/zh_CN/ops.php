@@ -100,6 +100,7 @@ return [
             'order_lookup' => '订单查询',
             'webhook_failures' => 'Webhook 失败',
             'failed_jobs' => '失败任务',
+            'test_kpi_daily' => '每日测试量',
             'content_probe' => '内容探针',
             'switch_org' => '创建/切换组织',
         ],
@@ -188,9 +189,9 @@ return [
             ],
             'sections' => [
                 'kpis' => '所选范围汇总',
-                'kpis_desc' => '当前日期、量表、表单、语言和组织范围内的读模型汇总。',
+                'kpis_desc' => '当前日期、量表、表单、语言和范围内的读模型汇总，默认展示全站 org_id=0。',
                 'detail' => '每日测试明细',
-                'detail_desc' => '按日期、量表、v2 量表、表单和语言展示。为保证后台可读性，表格最多展示 500 行。',
+                'detail_desc' => '按日期、量表、v2 量表、表单和语言展示每个测试的单日次数。为保证后台可读性，表格最多展示 500 行。',
                 'no_rows' => '当前范围暂无每日测试行。',
             ],
             'table' => [
