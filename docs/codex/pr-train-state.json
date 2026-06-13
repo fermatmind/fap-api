@@ -54440,7 +54440,7 @@
     "repo": "fap-api",
     "branch": "codex/personality-at-difference-sections-01",
     "base": "origin/main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "personality_seo",
     "title": "PERSONALITY-AT-DIFFERENCE-SECTIONS-01: feat(personality): add backend A/T difference sections",
     "depends_on": [
@@ -54546,11 +54546,11 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": "c583cd034e9e2b24a2031baa07dbda62f03d0ac4",
+    "commit_sha": "1069eafd5a43dbf20f86b4f2558ce8be8b780c1d",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2078",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-13T17:32:41Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-14T00:45:00+08:00",
@@ -54601,6 +54601,11 @@
         "at": "2026-06-14T01:27:00+08:00",
         "status": "ready_to_merge",
         "note": "GitHub checks passed for rebased head c583cd03 and mergeStateStatus was CLEAN; recording ready_to_merge before any merge attempt."
+      },
+      {
+        "at": "2026-06-14T01:37:00+08:00",
+        "status": "merged",
+        "note": "PR #2078 was squash-merged as 1069eafd5a43dbf20f86b4f2558ce8be8b780c1d; remote branch deletion was verified and local task branch cleanup was executed from detached origin/main because main is held by another worktree."
       }
     ]
   }
