@@ -2503,6 +2503,17 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_test_metrics_ops_summary_widget_changes(): void
+    {
+        $changed = [
+            'backend/app/Filament/Ops/Pages/OpsDashboard.php',
+            'backend/app/Filament/Ops/Support/OpsMetricsAccess.php',
+            'backend/app/Filament/Ops/Widgets/TestKpiSummaryWidget.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_payment_unlock_attribution_diagnostics(): void
     {
         $changed = [
@@ -3416,6 +3427,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isTestMetricsDailyReadModelFile($file)) {
+                continue;
+            }
+
+            if ($this->isTestMetricsOpsSummaryWidgetFile($file)) {
                 continue;
             }
 
@@ -5204,6 +5219,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Services/Analytics/TestMetricsDailyBuilder.php',
             'backend/database/migrations/2026_06_13_180000_create_analytics_test_metrics_daily_table.php',
+        ], true);
+    }
+
+    private function isTestMetricsOpsSummaryWidgetFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Filament/Ops/Pages/OpsDashboard.php',
+            'backend/app/Filament/Ops/Support/OpsMetricsAccess.php',
+            'backend/app/Filament/Ops/Widgets/TestKpiSummaryWidget.php',
         ], true);
     }
 

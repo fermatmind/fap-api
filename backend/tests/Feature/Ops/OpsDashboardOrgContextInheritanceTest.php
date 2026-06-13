@@ -8,6 +8,7 @@ use App\Filament\Ops\Widgets\CommerceKpiWidget;
 use App\Filament\Ops\Widgets\FunnelWidget;
 use App\Filament\Ops\Widgets\HealthzStatusWidget;
 use App\Filament\Ops\Widgets\QueueFailureWidget;
+use App\Filament\Ops\Widgets\TestKpiSummaryWidget;
 use App\Filament\Ops\Widgets\WebhookFailureWidget;
 use App\Http\Middleware\EnsureAdminTotpVerified;
 use App\Http\Middleware\OpsAccessControl;
@@ -51,6 +52,7 @@ final class OpsDashboardOrgContextInheritanceTest extends TestCase
             ->assertOk()
             ->assertSee($selectedOrg->name)
             ->assertSee(__('ops.widgets.paid_orders_today'))
+            ->assertSee(__('ops.widgets.test_kpi_overview'))
             ->assertSee(__('ops.widgets.funnel_snapshot_7d'))
             ->assertSee(__('ops.widgets.webhook_monitoring'))
             ->assertDontSee(__('ops.topbar.no_org_selected'))
@@ -86,6 +88,7 @@ final class OpsDashboardOrgContextInheritanceTest extends TestCase
             ->assertDontSee(__('ops.widgets.commerce_overview'))
             ->assertDontSee(__('ops.widgets.paid_orders_today'))
             ->assertDontSee(__('ops.widgets.paid_without_grant'))
+            ->assertDontSee(__('ops.widgets.test_kpi_overview'))
             ->assertDontSee(__('ops.widgets.funnel_snapshot_7d'))
             ->assertDontSee(__('ops.widgets.webhook_monitoring'));
     }
@@ -105,6 +108,7 @@ final class OpsDashboardOrgContextInheritanceTest extends TestCase
     public function test_ops_dashboard_widgets_render_on_initial_request_instead_of_lazy_livewire_updates(): void
     {
         $this->assertFalse(CommerceKpiWidget::isLazy());
+        $this->assertFalse(TestKpiSummaryWidget::isLazy());
         $this->assertFalse(FunnelWidget::isLazy());
         $this->assertFalse(WebhookFailureWidget::isLazy());
         $this->assertFalse(QueueFailureWidget::isLazy());

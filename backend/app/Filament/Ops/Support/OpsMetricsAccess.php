@@ -17,6 +17,16 @@ final class OpsMetricsAccess
         ]);
     }
 
+    public static function canViewTestMetrics(): bool
+    {
+        return self::hasAnyPermission([
+            PermissionNames::ADMIN_OWNER,
+            PermissionNames::ADMIN_OPS_READ,
+            PermissionNames::ADMIN_FUNNEL_READ,
+            PermissionNames::ADMIN_EVENTS_READ,
+        ]);
+    }
+
     /**
      * @param  list<string>  $permissions
      */

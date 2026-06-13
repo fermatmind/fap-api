@@ -8,6 +8,7 @@ use App\Filament\Ops\Widgets\CommerceKpiWidget;
 use App\Filament\Ops\Widgets\FunnelWidget;
 use App\Filament\Ops\Widgets\HealthzStatusWidget;
 use App\Filament\Ops\Widgets\QueueFailureWidget;
+use App\Filament\Ops\Widgets\TestKpiSummaryWidget;
 use App\Filament\Ops\Widgets\WebhookFailureWidget;
 use Filament\Actions\Action;
 use Filament\Pages\Dashboard;
@@ -48,6 +49,10 @@ class OpsDashboard extends Dashboard
 
         if (FunnelWidget::canView()) {
             array_unshift($widgets, FunnelWidget::class);
+        }
+
+        if (TestKpiSummaryWidget::canView()) {
+            array_unshift($widgets, TestKpiSummaryWidget::class);
         }
 
         if (CommerceKpiWidget::canView()) {
