@@ -54370,7 +54370,7 @@
     "repo": "fap-api",
     "branch": "codex/personality-public-asset-contract-01",
     "base": "origin/main",
-    "status": "local_checks_failed",
+    "status": "github_checks_pending",
     "train_scope": "personality_seo",
     "title": "PERSONALITY-PUBLIC-ASSET-CONTRACT-01: feat(personality): add public asset CMS contract",
     "depends_on": [
@@ -54399,8 +54399,8 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "0f88273b48385491172333a7ac510c20d8608347",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2079",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -54419,6 +54419,11 @@
         "at": "2026-06-14T00:44:07+08:00",
         "status": "local_checks_passed",
         "note": "Repaired local SQLite baseline/schema handling in ci_verify_mbti.sh and prepare_sqlite.sh; reran ci_verify_mbti.sh and all manifest local checks successfully."
+      },
+      {
+        "at": "2026-06-14T00:45:49+08:00",
+        "status": "github_checks_pending",
+        "note": "Committed and pushed branch codex/personality-public-asset-contract-01; opened PR https://github.com/fermatmind/fap-api/pull/2079."
       }
     ]
   }
