@@ -5,10 +5,12 @@ namespace App\Console;
 use App\Console\Commands\AdminBootstrapOwner;
 use App\Console\Commands\ArchiveColdData;
 use App\Console\Commands\ArticleCoverPropagationSmoke;
+use App\Console\Commands\ArticleEnsureSeoMetaBaseline;
 use App\Console\Commands\ArticleImportEditorialPackage;
 use App\Console\Commands\ArticleImportSeoContentPackageDraft;
 use App\Console\Commands\ArticlePublishControlled;
 use App\Console\Commands\ArticleReplaceInlineImageUrl;
+use App\Console\Commands\ArticleUpdateExistingSeoContentPackage;
 use App\Console\Commands\ArticleUpdateImageMetadata;
 use App\Console\Commands\Big5AttemptPurge;
 // ✅ 显式注册（更稳，避免自动扫描失效/缓存导致找不到）
@@ -97,6 +99,7 @@ use App\Console\Commands\CommerceRepairPaidOrders;
 use App\Console\Commands\CommerceRepairPostCommitFailed;
 use App\Console\Commands\ContentCompile;
 use App\Console\Commands\ContentLint;
+use App\Console\Commands\ContentReleaseRevalidate;
 use App\Console\Commands\EnneagramActivateRegistryRelease;
 use App\Console\Commands\EnneagramExportProductionEquivalentCandidatePayloads;
 use App\Console\Commands\EnneagramImportInactiveCandidateRelease;
@@ -155,6 +158,8 @@ use App\Console\Commands\QualityDailySummary;
 use App\Console\Commands\RefreshCareerAttributionDailyCommand;
 use App\Console\Commands\SdsPsychometricsReport;
 use App\Console\Commands\SeedScaleRegistry;
+use App\Console\Commands\SeoIntelSearchChannelQueueCommand;
+use App\Console\Commands\SeoIntelUrlTruthHandoffCommand;
 use App\Console\Commands\StorageControlPlaneSnapshot;
 use App\Console\Commands\StorageInventory;
 use App\Console\Commands\StorageMigrateLegacyArtifacts;
@@ -327,11 +332,16 @@ class Kernel extends ConsoleKernel
         ExperimentGuardrailsEvaluate::class,
         ArticleImportEditorialPackage::class,
         ArticleImportSeoContentPackageDraft::class,
+        ArticleEnsureSeoMetaBaseline::class,
+        ArticleUpdateExistingSeoContentPackage::class,
         ArticleCoverPropagationSmoke::class,
         ArticlePublishControlled::class,
         ArticleReplaceInlineImageUrl::class,
         ArticleUpdateImageMetadata::class,
         MediaAssetsImportSeoImageBundle::class,
+        SeoIntelUrlTruthHandoffCommand::class,
+        SeoIntelSearchChannelQueueCommand::class,
+        ContentReleaseRevalidate::class,
     ];
 
     /**

@@ -46,6 +46,7 @@ final class PublicMediaUrlGuardTest extends TestCase
 
         foreach ([
             'https://assets.fermatmind.com/static/share/mbti_wide_1200x630.png',
+            'https://api.fermatmind.com/storage/media-library/variants/article-daily/hero_1600x900.jpg',
             'https://api.fermatmind.com/static/social/wechat-qr.jpg',
             'https://api.staging.fermatmind.com/static/articles/cover.png',
         ] as $allowedUrl) {

@@ -14,6 +14,21 @@ final class ArticleEnsureSeoMetaBaselineCommandTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_daily_article_pipeline_commands_are_registered_for_production_artisan_path(): void
+    {
+        $commands = Artisan::all();
+
+        foreach ([
+            'articles:ensure-seo-meta-baseline',
+            'articles:update-existing-seo-content-package',
+            'content-release:revalidate',
+            'seo-intel:search-channel-queue',
+            'seo-intel:url-truth-handoff',
+        ] as $commandName) {
+            $this->assertArrayHasKey($commandName, $commands);
+        }
+    }
+
     public function test_default_invocation_is_dry_run_and_does_not_write(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);

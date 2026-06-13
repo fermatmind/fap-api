@@ -92,6 +92,71 @@ final class SeoIntelSearchChannelQueueRuntimeTest extends TestCase
     }
 
     #[Test]
+    public function eligible_backend_cms_article_url_can_be_written_to_queue_without_live_submission(): void
+    {
+        config([
+            'seo_intel.search_channel_queue.write_enabled' => true,
+            'seo_intel.search_channel.live_submission.enabled' => false,
+        ]);
+        $canonicalUrl = 'https://www.fermatmind.com/zh/articles/mbti-vs-holland-career-choice';
+        $this->seedSeoUrl([
+            'canonical_url' => $canonicalUrl,
+            'locale' => 'zh-CN',
+            'page_entity_type' => 'article',
+            'entity_id_or_slug' => '37',
+            'cluster' => 'article',
+            'source_authority' => 'backend_cms',
+            'lastmod_source' => 'articles.updated_at',
+            'metadata_json' => [
+                'claim_safe' => true,
+                'claim_boundary_state' => 'approved',
+                'publication_state' => 'published',
+                'source_table' => 'articles',
+            ],
+        ]);
+
+        $output = $this->runQueueCommand([
+            '--enqueue' => true,
+            '--json' => true,
+            '--canonical-url' => $canonicalUrl,
+            '--channel' => 'indexnow',
+            '--limit' => 20,
+        ]);
+
+        $this->assertSame('success', $output['status'] ?? null);
+        $this->assertTrue((bool) ($output['writes_attempted'] ?? false));
+        $this->assertTrue((bool) ($output['writes_committed'] ?? false));
+        $this->assertTrue((bool) ($output['enqueue_attempted'] ?? false));
+        $this->assertTrue((bool) ($output['enqueue_committed'] ?? false));
+        $this->assertFalse((bool) ($output['external_calls_attempted'] ?? true));
+        $this->assertFalse((bool) ($output['search_submission_attempted'] ?? true));
+        $this->assertFalse((bool) ($output['live_submission_attempted'] ?? true));
+        $this->assertSame(['indexnow' => 1], $output['channel_breakdown'] ?? null);
+        $this->assertSame(['article' => 1], $output['page_type_breakdown'] ?? null);
+        $this->assertSame(1, DB::connection('seo_intel')->table('seo_search_channel_queue_items')->count());
+        $this->assertSame(1, DB::connection('seo_intel')->table('seo_search_channel_queue_batches')->count());
+
+        $item = DB::connection('seo_intel')
+            ->table('seo_search_channel_queue_items')
+            ->where('canonical_url', $canonicalUrl)
+            ->first();
+
+        $this->assertNotNull($item);
+        $this->assertSame('article', $item->page_entity_type);
+        $this->assertSame('article', $item->entity_type);
+        $this->assertSame('37', $item->entity_id);
+        $this->assertSame('backend_cms', $item->source_authority);
+        $this->assertSame('articles', $item->source_table);
+        $this->assertSame('indexnow', $item->channel);
+        $this->assertSame('eligible', $item->eligibility_state);
+        $this->assertSame('pending', $item->approval_state);
+        $this->assertSame('dry_run_ready', $item->execution_state);
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_baidu_push_logs')->count());
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_indexnow_submissions')->count());
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_domestic_submission_logs')->count());
+    }
+
+    #[Test]
     public function unsafe_article_urls_remain_blocked(): void
     {
         $unsafeCases = [

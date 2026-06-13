@@ -646,6 +646,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     public function test_runtime_freeze_classifier_ignores_content_release_revalidate_automation_files(): void
     {
         $changed = [
+            'backend/app/Console/Commands/ContentReleaseRevalidate.php',
             'backend/app/Filament/Ops/Support/ContentReleaseFollowUp.php',
             'backend/app/Services/Cms/ContentReleasePathPlanner.php',
         ];
@@ -990,6 +991,28 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
+    public function test_runtime_freeze_classifier_ignores_daily_article_backend_pipeline_command_registration(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/ContentReleaseRevalidate.php',
+            'backend/app/Console/Kernel.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\ArticleEnsureSeoMetaBaseline;',
+            '+use App\\Console\\Commands\\ArticleUpdateExistingSeoContentPackage;',
+            '+use App\\Console\\Commands\\ContentReleaseRevalidate;',
+            '+use App\\Console\\Commands\\SeoIntelSearchChannelQueueCommand;',
+            '+use App\\Console\\Commands\\SeoIntelUrlTruthHandoffCommand;',
+            '+        ArticleEnsureSeoMetaBaseline::class,',
+            '+        ArticleUpdateExistingSeoContentPackage::class,',
+            '+        SeoIntelUrlTruthHandoffCommand::class,',
+            '+        SeoIntelSearchChannelQueueCommand::class,',
+            '+        ContentReleaseRevalidate::class,',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
     public function test_runtime_freeze_classifier_ignores_seo_intel_mbti_url_truth_cleanup_runtime_files(): void
@@ -3745,6 +3768,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsSeoImageBundleImporterOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsArticleImageMetadataUpdaterOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsArticleInlineImageUrlReplacerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsDailyArticleBackendPipelineOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsControlledArticlePublishSopOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsArticleCoverPropagationSmokeOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsAlipayPendingCompensationSchedulerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
@@ -3928,6 +3952,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isContentReleaseRevalidateAutomationFile(string $file): bool
     {
         return in_array($file, [
+            'backend/app/Console/Commands/ContentReleaseRevalidate.php',
             'backend/app/Filament/Ops/Support/ContentReleaseFollowUp.php',
             'backend/app/Services/Cms/ContentReleasePathPlanner.php',
         ], true);
@@ -5721,6 +5746,32 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if (preg_match('/\bArticleReplaceInlineImageUrl\b/u', $line) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsDailyArticleBackendPipelineOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            if (str_contains($line, '显式注册')) {
+                continue;
+            }
+
+            if (preg_match('/\b(MBTI|Mbti|BigFive|Big5|Prewarm|ResultPage|Report)\b/u', $line) === 1) {
+                return false;
+            }
+
+            if (preg_match('/\b(ArticleEnsureSeoMetaBaseline|ArticleUpdateExistingSeoContentPackage|ContentReleaseRevalidate|SeoIntelSearchChannelQueueCommand|SeoIntelUrlTruthHandoffCommand)\b/u', $line) !== 1) {
                 return false;
             }
         }
