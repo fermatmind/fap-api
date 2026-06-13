@@ -54440,7 +54440,7 @@
     "repo": "fap-api",
     "branch": "codex/personality-at-difference-sections-01",
     "base": "origin/main",
-    "status": "local_checks_passed_rebased_pending_github",
+    "status": "ready_to_merge",
     "train_scope": "personality_seo",
     "title": "PERSONALITY-AT-DIFFERENCE-SECTIONS-01: feat(personality): add backend A/T difference sections",
     "depends_on": [
@@ -54484,8 +54484,8 @@
         "evidence": "Scope expanded narrowly after user asked to continue: added backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php to manifest allowed_paths only to record the Big Five runtime-freeze classifier exception for these MBTI personality A/T difference backend files."
       },
       "github": {
-        "status": "pending_rerun_after_rebase",
-        "head_sha": "67c2b33f",
+        "status": "pass",
+        "head_sha": "c583cd034e9e2b24a2031baa07dbda62f03d0ac4",
         "checks": [
           {
             "name": "hygiene",
@@ -54523,7 +54523,7 @@
             "evidence": "Semgrep blocking secrets, semgrep sarif non-blocking upload, and Semgrep OSS completed successfully."
           }
         ],
-        "evidence": "GitHub PR #2078 reported all statusCheckRollup entries successful for pre-rebase head 71a60c41348853904687a7b341a71ea6ee64d4a0. origin/main then advanced to e7b8d85a via PR #2079, so this branch was rebased and must rerun GitHub checks before merge."
+        "evidence": "GitHub PR #2078 reports all statusCheckRollup entries successful for rebased head c583cd034e9e2b24a2031baa07dbda62f03d0ac4 and mergeStateStatus CLEAN."
       },
       "local_ci_fix": {
         "status": "pass",
@@ -54546,7 +54546,7 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": "67c2b33f",
+    "commit_sha": "c583cd034e9e2b24a2031baa07dbda62f03d0ac4",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2078",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -54596,6 +54596,11 @@
         "at": "2026-06-14T01:21:00+08:00",
         "status": "local_checks_passed_rebased_pending_github",
         "note": "After origin/main advanced to e7b8d85a via PR #2079, rebased current branch, resolved manifest/state overlap, reran scoped checks and full ci_verify_mbti.sh successfully, and prepared to force-push for GitHub rerun."
+      },
+      {
+        "at": "2026-06-14T01:27:00+08:00",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed for rebased head c583cd03 and mergeStateStatus was CLEAN; recording ready_to_merge before any merge attempt."
       }
     ]
   }
