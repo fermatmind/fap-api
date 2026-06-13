@@ -38349,7 +38349,7 @@
     "merge_commit": "42a8caacb4f4bfa0fb5a83ecd69c25e3b5e83973"
   },
   "AUDIT-SEC-TRAIN-LEDGER-CLOSEOUT-01": {
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "branch": "audit/sec-train-ledger-closeout-01",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1804",
     "base": "main",
@@ -54258,8 +54258,8 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "bb2a9863bcea53fc540a39b20378800ed009f17b",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2084",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -54677,6 +54677,11 @@
         "at": "2026-06-14T02:37:32+08:00",
         "status": "local_checks_passed",
         "note": "Rebased onto latest origin/main, removed /tmp/fap-ci.sqlite, reran the required full ci_verify_mbti.sh gate successfully, and restored generated Big Five compiled artifacts outside this PR scope."
+      },
+      {
+        "at": "2026-06-14T02:39:24+08:00",
+        "status": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/2084 after local checks and scope validation passed."
       }
     ]
   }
