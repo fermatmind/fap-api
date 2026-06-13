@@ -579,7 +579,13 @@ final class SeoImageBundleImporter
                 continue;
             }
             $variants[(string) $variant->variant_key] = [
-                'url' => PublicMediaUrlGuard::canonicalMediaUrl((string) $asset->disk, $variant->path, $variant->url),
+                'url' => $this->publicMediaUrlForImportedRecord(
+                    (string) $asset->disk,
+                    $variant->path,
+                    $variant->url,
+                    (string) $variant->sync_status,
+                    (string) $variant->cdn_status,
+                ),
                 'width' => (int) $variant->width,
                 'height' => (int) $variant->height,
                 'mime_type' => (string) $variant->mime_type,
@@ -589,7 +595,13 @@ final class SeoImageBundleImporter
         return [
             'id' => (int) $asset->id,
             'asset_key' => (string) $asset->asset_key,
-            'url' => PublicMediaUrlGuard::canonicalMediaUrl((string) $asset->disk, $asset->path, $asset->url),
+            'url' => $this->publicMediaUrlForImportedRecord(
+                (string) $asset->disk,
+                $asset->path,
+                $asset->url,
+                (string) $asset->sync_status,
+                (string) $asset->cdn_status,
+            ),
             'mime_type' => (string) $asset->mime_type,
             'width' => (int) $asset->width,
             'height' => (int) $asset->height,
@@ -601,6 +613,18 @@ final class SeoImageBundleImporter
             'cdn_status' => (string) $asset->cdn_status,
             'variants' => $variants,
         ];
+    }
+
+    private function publicMediaUrlForImportedRecord(string $disk, mixed $path, mixed $url, string $syncStatus, string $cdnStatus): ?string
+    {
+        if ($syncStatus === MediaAsset::SYNC_SKIPPED || $cdnStatus === MediaAsset::CDN_SKIPPED) {
+            $appStorageUrl = PublicMediaUrlGuard::publicAppStorageUrlForPath($disk, $path);
+            if ($appStorageUrl !== null) {
+                return $appStorageUrl;
+            }
+        }
+
+        return PublicMediaUrlGuard::canonicalMediaUrl($disk, $path, $url);
     }
 
     /**

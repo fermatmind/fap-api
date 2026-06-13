@@ -182,6 +182,23 @@ final class MediaAssetsImportSeoImageBundleCommandTest extends TestCase
         Storage::disk('public')->assertExists((string) $asset->path);
     }
 
+    public function test_non_dry_run_uses_public_api_storage_urls_when_cdn_sync_is_skipped(): void
+    {
+        config(['app.url' => 'https://api.fermatmind.com']);
+        Storage::fake('public');
+        $package = $this->writeImageBundlePackage();
+
+        $exitCode = Artisan::call('media-assets:import-seo-image-bundle', $this->commandOptions($package, [
+            '--json' => true,
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertStringStartsWith('https://api.fermatmind.com/storage/media-library/variants/', $payload['resolved_metadata']['cover_image_url']);
+        $this->assertStringStartsWith('https://api.fermatmind.com/storage/media-library/variants/', $payload['resolved_metadata']['og_image_url']);
+        $this->assertStringStartsWith('https://api.fermatmind.com/storage/media-library/variants/', $payload['resolved_metadata']['cover_image_variants']['hero']['url']);
+    }
+
     public function test_dry_run_does_not_write_existing_asset_or_storage(): void
     {
         Storage::fake('public');
