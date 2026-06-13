@@ -122,10 +122,6 @@ final class SeoContentPackageDraftImporter
         if ($expectedTranslationGroupId === '') {
             $errors[] = $this->issue('translation_group_id', 'missing_expected_translation_group_id', '--translation-group-id is required.');
         }
-        if ($locales !== ['zh-CN', 'en']) {
-            $errors[] = $this->issue('locales', 'unsupported_locale_set', '--locales must resolve to zh-CN,en.');
-        }
-
         $manifest = [];
         $packageItems = [];
         $guardScans = [
@@ -136,7 +132,8 @@ final class SeoContentPackageDraftImporter
             $this->validateRequiredFiles($packageRoot, $errors);
             $manifest = $this->readJson($packageRoot.'/manifest.json', 'manifest.json', $errors);
             $guardScans = $this->validatePackageGuardScopes($packageRoot, $errors);
-            $packageItems = $this->buildPackageItems($packageRoot, $manifest, $expectedTranslationGroupId, $expectedSlugs, $errors, $warnings);
+            $locales = $this->validatedLocales($locales, $manifest, $errors);
+            $packageItems = $this->buildPackageItems($packageRoot, $manifest, $locales, $expectedTranslationGroupId, $expectedSlugs, $errors, $warnings);
             $this->validateJsonFieldSerialization($packageItems, $errors, $warnings);
         }
 
@@ -195,7 +192,7 @@ final class SeoContentPackageDraftImporter
             'cover_image_width' => (int) $item['cover_image_width'],
             'cover_image_height' => (int) $item['cover_image_height'],
             'cover_image_variants' => $metadata,
-            'related_test_slug' => 'holland-career-interest-test-riasec',
+            'related_test_slug' => (string) $item['related_test_slug'],
             'status' => 'draft',
             'is_public' => false,
             'is_indexable' => false,
@@ -385,10 +382,11 @@ final class SeoContentPackageDraftImporter
         if (preg_match(self::OLD_BIG_FIVE_ROUTE_PATTERN, $activeSurfaceText) === 1) {
             $errors[] = $this->issue('active_surface_guard_scan.big_five_route', 'old_big_five_route_found_in_active_surface', 'Old Big Five route is forbidden in active import surfaces.');
         }
-        if (! str_contains($packageText, self::CANONICAL_BIG_FIVE_ROUTE)) {
+        if (preg_match(self::OLD_BIG_FIVE_ROUTE_PATTERN, $packageText) === 1
+            && ! str_contains($packageText, self::CANONICAL_BIG_FIVE_ROUTE)) {
             $errors[] = $this->issue('big_five_route', 'required_big_five_route_missing', 'Canonical Big Five route is required.');
         }
-        if (str_contains($packageText, '__CMS_MEDIA_LIBRARY_PLACEHOLDER__')) {
+        if (str_contains($activeSurfaceText, '__CMS_MEDIA_LIBRARY_PLACEHOLDER__')) {
             $errors[] = $this->issue('social_image', 'media_placeholder_found', 'CMS media placeholder marker is forbidden.');
         }
         if (preg_match(self::PRIVATE_ROUTE_PATTERN, $activeSurfaceText) === 1) {
@@ -605,6 +603,7 @@ final class SeoContentPackageDraftImporter
             'forbidden_private_routes',
             'forbidden_query_keys',
             'forbidden_sensitive_query_keys',
+            'forbidden_substrings',
             'sensitive_query_keys',
         ], true);
 
@@ -646,7 +645,12 @@ final class SeoContentPackageDraftImporter
     private function collectDynamicCtaSensitiveKeyViolations(mixed $value, array $path, bool $allowedForbiddenParamContext, array &$invalidPaths): void
     {
         $key = strtolower((string) end($path));
-        $allowed = $allowedForbiddenParamContext || $key === 'forbidden_tracking_params';
+        $allowed = $allowedForbiddenParamContext || in_array($key, [
+            'forbidden_tracking_params',
+            'forbidden_parameters',
+            'forbidden_query_keys',
+            'forbidden_sensitive_query_keys',
+        ], true);
 
         if (is_array($value)) {
             foreach ($value as $childKey => $child) {
@@ -676,18 +680,19 @@ final class SeoContentPackageDraftImporter
     private function buildPackageItems(
         string $root,
         array $manifest,
+        array $locales,
         string $expectedTranslationGroupId,
         array $expectedSlugs,
         array &$errors,
         array &$warnings
     ): array {
         $manifestTranslationGroupId = trim((string) ($manifest['translation_group_id'] ?? ''));
-        if ($manifestTranslationGroupId !== $expectedTranslationGroupId) {
+        if ($manifestTranslationGroupId !== '' && $manifestTranslationGroupId !== $expectedTranslationGroupId) {
             $errors[] = $this->issue('manifest.translation_group_id', 'translation_group_id_mismatch', 'manifest translation_group_id does not match expected value.');
         }
 
         $items = [];
-        foreach (['zh-CN', 'en'] as $locale) {
+        foreach ($locales as $locale) {
             $import = $this->readFirstJson($root.'/cms/CMS_IMPORT_DRAFT_'.$locale.'_*.json', 'cms import '.$locale, $errors);
             $fields = $this->readFirstJson($root.'/cms/CMS_FIELDS_'.$locale.'_*.json', 'cms fields '.$locale, $errors);
             $pagePath = $this->pagePathFor($root, $locale, $import, $manifest, $errors);
@@ -697,6 +702,9 @@ final class SeoContentPackageDraftImporter
             $expectedSlug = trim((string) ($expectedSlugs[$locale] ?? ''));
             if ($expectedSlug !== '' && (string) ($item['slug'] ?? '') !== $expectedSlug) {
                 $errors[] = $this->issue($locale.'.slug', 'expected_slug_mismatch', 'Package slug does not match expected slug.');
+            }
+            if ($item !== [] && (string) ($item['translation_group_id'] ?? '') !== $expectedTranslationGroupId) {
+                $errors[] = $this->issue($locale.'.translation_group_id', 'translation_group_id_mismatch', 'Package translation_group_id does not match expected value.');
             }
 
             if ($item !== []) {
@@ -836,11 +844,12 @@ final class SeoContentPackageDraftImporter
         $translationGroupId = $this->firstString($import['translation_group_id'] ?? null, $fields['translation_group_id'] ?? null, $frontmatter['translation_group_id'] ?? null, $manifest['translation_group_id'] ?? null);
         $slug = Str::slug($this->firstString($import['slug'] ?? null, $fields['slug'] ?? null, $frontmatter['slug'] ?? null, $manifestPage['slug'] ?? null));
         $title = $this->firstString($import['title'] ?? null, $fields['title'] ?? null, $frontmatter['title'] ?? null, $manifestPage['title'] ?? null);
-        $metaTitle = $this->firstString($import['meta_title'] ?? null, $fields['meta_title'] ?? null, $frontmatter['meta_title_draft'] ?? null, $manifestPage['meta_title_draft'] ?? null, $title);
-        $metaDescription = $this->firstString($import['meta_description'] ?? null, $fields['meta_description'] ?? null, $frontmatter['meta_description_draft'] ?? null, $manifestPage['meta_description_draft'] ?? null);
-        $canonical = $this->firstString($import['canonical_url'] ?? null, $fields['canonical_url'] ?? null, $frontmatter['canonical_url_draft'] ?? null, $manifestPage['canonical_url_draft'] ?? null);
+        $metaTitle = $this->firstString($import['meta_title'] ?? null, $import['meta_title_draft'] ?? null, $fields['meta_title'] ?? null, $fields['meta_title_draft'] ?? null, $frontmatter['meta_title_draft'] ?? null, $manifestPage['meta_title_draft'] ?? null, $title);
+        $metaDescription = $this->firstString($import['meta_description'] ?? null, $import['meta_description_draft'] ?? null, $fields['meta_description'] ?? null, $fields['meta_description_draft'] ?? null, $frontmatter['meta_description_draft'] ?? null, $manifestPage['meta_description_draft'] ?? null);
+        $canonical = $this->firstString($import['canonical_url'] ?? null, $import['canonical_url_draft'] ?? null, $fields['canonical_url'] ?? null, $fields['canonical_url_draft'] ?? null, $frontmatter['canonical_url_draft'] ?? null, $manifestPage['canonical_url_draft'] ?? null);
         $claimGateStatus = $this->firstString($import['claim_gate_status'] ?? null, $fields['claim_gate_status'] ?? null, $frontmatter['claim_gate_status'] ?? null, 'not_reviewed');
         $social = is_array($import['social_image_metadata'] ?? null) ? $import['social_image_metadata'] : (is_array($fields['social_image_metadata'] ?? null) ? $fields['social_image_metadata'] : []);
+        $primaryCtaPath = $this->firstString(data_get($import, 'primary_cta.href'), data_get($fields, 'primary_cta.href'), $import['primary_cta'] ?? null, $fields['primary_cta'] ?? null, $frontmatter['primary_cta'] ?? null, $import['primary_hub_url'] ?? null, $fields['primary_hub_url'] ?? null, $frontmatter['primary_hub_url'] ?? null);
 
         $item = [
             'locale' => $locale,
@@ -868,6 +877,8 @@ final class SeoContentPackageDraftImporter
             'og_image_url' => $this->firstString($import['og_image_url'] ?? null, $fields['og_image_url'] ?? null, data_get($social, 'og_1200x630_variant.url'), $social['twitter_image_url'] ?? null),
             'twitter_image_url' => $this->firstString($import['twitter_image_url'] ?? null, $fields['twitter_image_url'] ?? null, $social['twitter_image_url'] ?? null),
             'social_image_metadata' => $social,
+            'primary_cta_path' => $primaryCtaPath,
+            'related_test_slug' => $this->testSlugFromPath($primaryCtaPath),
             'source_package_root' => $root,
         ];
 
@@ -1071,8 +1082,11 @@ final class SeoContentPackageDraftImporter
                 'og_image_url' => (string) $item['og_image_url'],
             ],
             'article_editorial_package_import.graph_json' => [
-                'primary_cta' => '/tests/holland-career-interest-test-riasec',
-                'big_five_route' => '/tests/big-five-personality-test-ocean-model',
+                'primary_cta' => (string) ($item['primary_cta_path'] ?? ''),
+                'related_test_slug' => (string) ($item['related_test_slug'] ?? ''),
+                'big_five_route' => str_contains((string) ($item['body_markdown'] ?? ''), self::CANONICAL_BIG_FIVE_ROUTE)
+                    ? self::CANONICAL_BIG_FIVE_ROUTE
+                    : null,
             ],
             'article_editorial_package_import.answer_surface_json' => ['status' => 'visible_only'],
             'article_editorial_package_import.heading_sequence_json' => $this->headingSequence((string) $item['body_markdown']),
@@ -1156,6 +1170,55 @@ final class SeoContentPackageDraftImporter
         }
 
         return array_values(array_map(static fn (mixed $locale): string => (string) $locale, $value));
+    }
+
+    /**
+     * @param  list<string>  $requestedLocales
+     * @param  array<string,mixed>  $manifest
+     * @param  list<array<string,mixed>>  $errors
+     * @return list<string>
+     */
+    private function validatedLocales(array $requestedLocales, array $manifest, array &$errors): array
+    {
+        $locales = array_values(array_filter($requestedLocales, static fn (string $locale): bool => $locale !== ''));
+        $allowedSets = [
+            ['zh-CN', 'en'],
+            ['zh-CN'],
+        ];
+
+        if (! in_array($locales, $allowedSets, true)) {
+            $errors[] = $this->issue('locales', 'unsupported_locale_set', '--locales must resolve to zh-CN,en or zh-CN.');
+
+            return $locales;
+        }
+
+        $manifestLocales = array_values(array_filter(array_map(
+            static fn (mixed $locale): string => (string) $locale,
+            (array) ($manifest['locale_scope'] ?? [])
+        ), static fn (string $locale): bool => $locale !== ''));
+
+        if ($manifestLocales !== []) {
+            foreach ($locales as $locale) {
+                if (! in_array($locale, $manifestLocales, true)) {
+                    $errors[] = $this->issue('locales', 'locale_not_in_manifest_scope', 'Requested locale is not present in manifest locale_scope.');
+                }
+            }
+        }
+
+        return $locales;
+    }
+
+    private function testSlugFromPath(string $path): string
+    {
+        if (preg_match('~/(?:zh|en)/tests/([^/?#]+)~', $path, $matches) === 1) {
+            return (string) $matches[1];
+        }
+
+        if (preg_match('~/tests/([^/?#]+)~', $path, $matches) === 1) {
+            return (string) $matches[1];
+        }
+
+        return '';
     }
 
     /**
