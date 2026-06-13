@@ -54700,7 +54700,7 @@
     "id": "PERSONALITY-SEO-TITLE-METADATA-01",
     "branch": "codex/personality-seo-title-metadata-01",
     "base": "origin/main",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "train_scope": "personality_seo",
     "title": "PERSONALITY-SEO-TITLE-METADATA-01: feat(personality): add search-intent metadata authority",
     "depends_on": [
@@ -54735,12 +54735,12 @@
         "evidence": "After installing backend dependencies in the clean worktree, all manifest checks passed: command test 3 warnings / 36 assertions; personality_seo_title_metadata API filter 1 warning / 20 assertions; committed_baseline_covers filter 1 warning / 2898 assertions; Pint passed for 4 files; JSON/YAML parse and git diff --check passed."
       },
       "github": {
-        "status": "pending",
-        "evidence": "GitHub checks pending for PR #2087."
+        "status": "pass",
+        "evidence": "PR #2087 checks passed on head 4c5513baf5391290e2c5a9a2618ed2954a034458: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and semgrep sarif non-blocking upload."
       }
     },
     "failure_reason": null,
-    "commit_sha": "743126f12e34baa3d856b3d50e4edd90d508fdce",
+    "commit_sha": "4c5513baf5391290e2c5a9a2618ed2954a034458",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2087",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -54765,6 +54765,11 @@
         "at": "2026-06-14T04:39:00+08:00",
         "status": "pr_open",
         "note": "Opened https://github.com/fermatmind/fap-api/pull/2087 from head 743126f12e34baa3d856b3d50e4edd90d508fdce."
+      },
+      {
+        "at": "2026-06-14T04:45:00+08:00",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed and pre-merge scope validation showed only the 7 declared PR files changed."
       }
     ]
   }
