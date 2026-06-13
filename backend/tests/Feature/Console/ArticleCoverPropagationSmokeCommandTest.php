@@ -35,6 +35,40 @@ final class ArticleCoverPropagationSmokeCommandTest extends TestCase
         $this->assertTrue((bool) ($payload['ok'] ?? false));
         $this->assertSame($article->id, data_get($payload, 'articles.0.article_id'));
         $this->assertTrue((bool) data_get($payload, 'articles.0.list_found'));
+        $this->assertSame('matched', data_get($payload, 'articles.0.jsonld_image_status'));
+        $this->assertSame([], data_get($payload, 'articles.0.errors'));
+    }
+
+    public function test_command_accepts_dedicated_social_image_and_schema_hold(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+
+        $article = $this->createArticleWithCover();
+        $socialImage = 'https://api.fermatmind.com/storage/media-library/variants/big-five-cover/og_1200x630.jpg';
+        $article->seoMeta?->forceFill([
+            'og_image_url' => $socialImage,
+            'schema_json' => [
+                'editorial_package_v1' => [
+                    'article_schema_enabled' => false,
+                    'hreflang_gate_v1' => [
+                        'enabled' => false,
+                    ],
+                ],
+            ],
+        ])->save();
+
+        $exitCode = Artisan::call('articles:cover-smoke', [
+            '--article' => [(string) $article->id],
+            '--json' => true,
+        ]);
+
+        $payload = json_decode(Artisan::output(), true);
+
+        $this->assertSame(0, $exitCode);
+        $this->assertIsArray($payload);
+        $this->assertTrue((bool) ($payload['ok'] ?? false));
+        $this->assertSame($socialImage, data_get($payload, 'articles.0.social_image_url'));
+        $this->assertSame('schema_hold_skipped', data_get($payload, 'articles.0.jsonld_image_status'));
         $this->assertSame([], data_get($payload, 'articles.0.errors'));
     }
 

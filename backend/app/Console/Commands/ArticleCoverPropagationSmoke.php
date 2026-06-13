@@ -75,7 +75,10 @@ final class ArticleCoverPropagationSmoke extends Command
 
         $query = Article::query()
             ->withoutGlobalScopes()
-            ->with(['publishedRevision' => static fn ($relation) => $relation->withoutGlobalScopes()])
+            ->with([
+                'publishedRevision' => static fn ($relation) => $relation->withoutGlobalScopes(),
+                'seoMeta',
+            ])
             ->where('org_id', $this->orgId())
             ->where(static function ($targetQuery) use ($ids, $slugs): void {
                 if ($ids !== []) {
@@ -105,6 +108,7 @@ final class ArticleCoverPropagationSmoke extends Command
     {
         $errors = [];
         $expectedCover = PublicMediaUrlGuard::sanitizeNullableUrl($article->cover_image_url);
+        $expectedSocialImage = $this->expectedSocialImageUrl($article, $expectedCover);
 
         if (! $article->published_revision_id || (string) $article->status !== 'published' || ! (bool) $article->is_public) {
             $errors[] = $this->issue('article', 'article_not_publicly_readable', 'Article is not published and public.');
@@ -144,9 +148,15 @@ final class ArticleCoverPropagationSmoke extends Command
             $this->orgId()
         ));
         $this->assertSuccessfulPayload($seo, 'seo', $errors);
-        $this->assertSameCover(data_get($seo, 'json.meta.og.image'), $expectedCover, 'seo.meta.og.image', $errors);
-        $this->assertSameCover(data_get($seo, 'json.meta.twitter.image'), $expectedCover, 'seo.meta.twitter.image', $errors);
-        $this->assertJsonLdImage(data_get($seo, 'json.jsonld.image'), $expectedCover, $errors);
+        $this->assertSameImageUrl(data_get($seo, 'json.meta.og.image'), $expectedSocialImage, 'seo.meta.og.image', 'social_image_mismatch', $errors);
+        $this->assertSameImageUrl(data_get($seo, 'json.meta.twitter.image'), $expectedSocialImage, 'seo.meta.twitter.image', 'social_image_mismatch', $errors);
+        $jsonLdImageStatus = $this->articleSchemaHeld($article)
+            ? 'schema_hold_skipped'
+            : $this->assertJsonLdImage(
+                data_get($seo, 'json.jsonld.image'),
+                array_values(array_filter([$expectedCover, $expectedSocialImage])),
+                $errors
+            );
 
         $listResult = $this->findArticleInList($kernel, $article);
         if (! (bool) ($listResult['found'] ?? false)) {
@@ -160,6 +170,8 @@ final class ArticleCoverPropagationSmoke extends Command
             'slug' => (string) $article->slug,
             'locale' => (string) $article->locale,
             'cover_image_url' => $expectedCover,
+            'social_image_url' => $expectedSocialImage,
+            'jsonld_image_status' => $jsonLdImageStatus,
             'list_found' => (bool) ($listResult['found'] ?? false),
             'list_page' => $listResult['page'] ?? null,
             'ok' => $errors === [],
@@ -260,23 +272,37 @@ final class ArticleCoverPropagationSmoke extends Command
      */
     private function assertSameCover(mixed $actual, ?string $expectedCover, string $field, array &$errors): void
     {
-        if ($expectedCover === null || trim((string) $actual) !== $expectedCover) {
+        $this->assertSameImageUrl($actual, $expectedCover, $field, 'cover_url_mismatch', $errors);
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $errors
+     */
+    private function assertSameImageUrl(mixed $actual, ?string $expectedUrl, string $field, string $code, array &$errors): void
+    {
+        if ($expectedUrl === null || trim((string) $actual) !== $expectedUrl) {
             $errors[] = $this->issue($field, 'cover_url_mismatch', 'Cover URL did not propagate to expected public payload.', [
-                'expected' => $expectedCover,
+                'code' => $code,
+                'expected' => $expectedUrl,
                 'actual' => is_scalar($actual) ? (string) $actual : gettype($actual),
             ]);
         }
     }
 
     /**
+     * @param  list<string>  $acceptedImageUrls
      * @param  list<array<string,mixed>>  $errors
      */
-    private function assertJsonLdImage(mixed $image, ?string $expectedCover, array &$errors): void
+    private function assertJsonLdImage(mixed $image, array $acceptedImageUrls, array &$errors): string
     {
-        if ($expectedCover === null) {
+        if ($image === null || $image === [] || $image === '') {
+            return 'not_emitted_schema_hold';
+        }
+
+        if ($acceptedImageUrls === []) {
             $errors[] = $this->issue('seo.jsonld.image', 'jsonld_cover_missing', 'JSON-LD image cannot be verified without a public-safe cover URL.');
 
-            return;
+            return 'unverifiable';
         }
 
         $images = is_array($image) ? array_values($image) : [$image];
@@ -285,9 +311,15 @@ final class ArticleCoverPropagationSmoke extends Command
             $images
         )));
 
-        if (! in_array($expectedCover, $normalized, true)) {
-            $errors[] = $this->issue('seo.jsonld.image', 'jsonld_cover_mismatch', 'JSON-LD image does not include the article cover URL.');
+        foreach ($acceptedImageUrls as $acceptedImageUrl) {
+            if (in_array($acceptedImageUrl, $normalized, true)) {
+                return 'matched';
+            }
         }
+
+        $errors[] = $this->issue('seo.jsonld.image', 'jsonld_cover_mismatch', 'JSON-LD image does not include an accepted public article image URL.');
+
+        return 'mismatch';
     }
 
     /**
@@ -313,6 +345,35 @@ final class ArticleCoverPropagationSmoke extends Command
                 $errors[] = $this->issue($field.'.'.$variantKey.'.dimensions', 'cover_variant_dimensions_missing', 'Variant dimensions are missing.');
             }
         }
+    }
+
+    private function expectedSocialImageUrl(Article $article, ?string $expectedCover): ?string
+    {
+        $seoImage = PublicMediaUrlGuard::sanitizeNullableUrl($article->seoMeta?->og_image_url ?? null);
+        if ($seoImage !== null) {
+            return $seoImage;
+        }
+
+        $variants = is_array($article->cover_image_variants) ? $article->cover_image_variants : [];
+        $ogVariant = $variants['og'] ?? null;
+        if (is_array($ogVariant)) {
+            $variantUrl = PublicMediaUrlGuard::sanitizeNullableUrl($ogVariant['url'] ?? null);
+            if ($variantUrl !== null) {
+                return $variantUrl;
+            }
+        }
+
+        return $expectedCover;
+    }
+
+    private function articleSchemaHeld(Article $article): bool
+    {
+        $schemaJson = $article->relationLoaded('seoMeta') ? $article->seoMeta?->schema_json : null;
+        if (! is_array($schemaJson)) {
+            return false;
+        }
+
+        return data_get($schemaJson, 'editorial_package_v1.article_schema_enabled') === false;
     }
 
     private function orgId(): int

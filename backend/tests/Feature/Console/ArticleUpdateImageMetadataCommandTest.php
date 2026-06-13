@@ -82,6 +82,16 @@ final class ArticleUpdateImageMetadataCommandTest extends TestCase
 
             $this->assertSame($before[(int) $article->id], $this->protectedSnapshot($fresh));
         }
+
+        $publicPayload = $this->getJson('/api/v0.5/articles/career-confusion-test-map?locale=zh-CN&org_id=0')
+            ->assertOk()
+            ->json('article');
+        $this->assertSame(
+            'https://assets.fermatmind.com/articles/career-map/body_1600x900.jpg',
+            data_get($publicPayload, 'body_visual.image_url')
+        );
+        $this->assertFalse((bool) data_get($publicPayload, 'body_visual.fallback_authorized'));
+        $this->assertArrayNotHasKey('editorial_package_v1', (array) data_get($publicPayload, 'cover_image_variants', []));
     }
 
     public function test_execute_requires_all_no_side_effect_flags(): void
