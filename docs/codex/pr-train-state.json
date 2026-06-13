@@ -54440,7 +54440,7 @@
     "repo": "fap-api",
     "branch": "codex/personality-at-difference-sections-01",
     "base": "origin/main",
-    "status": "local_full_gate_failed_remote_green",
+    "status": "local_checks_passed_rebased_pending_github",
     "train_scope": "personality_seo",
     "title": "PERSONALITY-AT-DIFFERENCE-SECTIONS-01: feat(personality): add backend A/T difference sections",
     "depends_on": [
@@ -54461,7 +54461,7 @@
         "evidence": "Registered traits.at_difference, added backend-authored A/T difference sections to committed en and zh-CN MBTI baselines, and exposed payload-backed section titles in public detail sections and mbti_public_projection_v1."
       },
       "local": {
-        "status": "fail_out_of_scope_draft_exception",
+        "status": "pass",
         "commands": [
           "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_5/PersonalityPublicApiTest.php --filter committed_baseline_covers --no-ansi",
           "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Support/Mbti/MbtiCanonicalSectionRegistryTest.php --no-ansi",
@@ -54477,15 +54477,15 @@
           "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
           "git diff --check"
         ],
-        "evidence": "Scoped checks passed after rebasing onto origin/main 487b9fb9: committed-baseline test passed with 1038 assertions; registry test passed with 36 assertions; full PersonalityPublicApiTest passed with 1212 assertions; Pint passed; route:list showed 4 personality routes; sqlite migrate passed; php artisan test --filter Personality passed with 84 tests / 5974 assertions; JSON/YAML/diff checks passed. Required `cd backend && bash scripts/ci_verify_mbti.sh` was rerun after cleaning /tmp/fap-ci.sqlite; Big Five gate passed with 860 tests / 61470 assertions, Enneagram gate passed with 10 tests / 369 assertions, Partner API smoke passed, MBTI verify/events/personality/migration safety gates passed, then the script failed in the auth guest contract gate on `Tests\\Feature\\V0_3\\AuthGuestTokenTest::guest_token_does_not_use_numeric_body_anon_id` with HTTP 503 `token storage unavailable`, outside the personality A/T difference scope."
+        "evidence": "Scoped checks passed after rebasing onto origin/main e7b8d85a: committed-baseline test passed with 1038 assertions; registry test passed with 36 assertions; full PersonalityPublicApiTest passed with 1212 assertions; targeted Big Five A/T classifier test passed; route:list showed 6 personality/personality-content-assets routes after PR #2079; sqlite migrate passed; php artisan test --filter Personality passed with 91 tests / 6016 assertions; Pint passed for all touched PHP files; JSON/YAML/diff checks passed. Required full gate `bash scripts/ci_verify_mbti.sh` passed after PR #2079's SQLite CI repair landed on main: Big Five gate passed with 862 tests / 61472 assertions, personality full-32 authority gate passed with 46 tests / 2726 assertions, auth guest contract gate passed, and all remaining gates completed successfully."
       },
       "scope": {
         "status": "pass",
         "evidence": "Scope expanded narrowly after user asked to continue: added backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php to manifest allowed_paths only to record the Big Five runtime-freeze classifier exception for these MBTI personality A/T difference backend files."
       },
       "github": {
-        "status": "pass",
-        "head_sha": "71a60c41348853904687a7b341a71ea6ee64d4a0",
+        "status": "pending_rerun_after_rebase",
+        "head_sha": "67c2b33f",
         "checks": [
           {
             "name": "hygiene",
@@ -54523,7 +54523,7 @@
             "evidence": "Semgrep blocking secrets, semgrep sarif non-blocking upload, and Semgrep OSS completed successfully."
           }
         ],
-        "evidence": "GitHub PR #2078 reports all statusCheckRollup entries successful for head 71a60c41348853904687a7b341a71ea6ee64d4a0. origin/main advanced to e7b8d85a after this run, so the PR was being rebased before any merge attempt."
+        "evidence": "GitHub PR #2078 reported all statusCheckRollup entries successful for pre-rebase head 71a60c41348853904687a7b341a71ea6ee64d4a0. origin/main then advanced to e7b8d85a via PR #2079, so this branch was rebased and must rerun GitHub checks before merge."
       },
       "local_ci_fix": {
         "status": "pass",
@@ -54537,16 +54537,16 @@
         ],
         "evidence": "Targeted Big Five classifier test passed, exact previously failing runtime_paths_have_no_uncommitted_diff test passed, Pint passed for all touched PHP files, YAML/JSON/diff checks passed."
       },
-      "local_full_gate_after_ci_fix": {
-        "status": "fail",
+      "local_full_gate_after_rebase": {
+        "status": "pass",
         "commands": [
           "cd backend && bash -lc 'rm -f /tmp/fap-ci.sqlite /tmp/fap-ci.sqlite-* && bash scripts/ci_verify_mbti.sh'"
         ],
-        "evidence": "Required full manifest gate was rerun after the Big Five runtime-freeze fix. The Big Five runtime-freeze guard now passes, but the local full chain still exits 2 later in shared sqlite-backed tests with database lock and schema drift errors including `database is locked`, `table attempts has no column named org_id`, `table scales_registry has no column named assessment_driver`, and `ON CONFLICT clause does not match any PRIMARY KEY or UNIQUE constraint`. Summary: 29 failed, 832 passed. This keeps the draft PR not mergeable under the local manifest gate."
+        "evidence": "Required full manifest gate passed after rebasing onto origin/main e7b8d85a, which includes the PR #2079 SQLite CI repair. The previous sqlite lock/schema and auth guest local blockers did not recur."
       }
     },
-    "failure_reason": "GitHub checks are green after the scoped Big Five runtime-freeze classifier fix, but required local `ci_verify_mbti.sh` still fails in later sqlite/shared-schema tests outside the personality A/T difference scope. PR remains draft and not mergeable.",
-    "commit_sha": "71a60c41348853904687a7b341a71ea6ee64d4a0",
+    "failure_reason": null,
+    "commit_sha": "67c2b33f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2078",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -54591,6 +54591,11 @@
         "at": "2026-06-14T01:32:00+08:00",
         "status": "local_full_gate_failed_remote_green",
         "note": "GitHub checks are green for head 71a60c41, but a required local full ci_verify_mbti.sh rerun still fails later in sqlite lock/schema drift tests; PR remains draft and not mergeable."
+      },
+      {
+        "at": "2026-06-14T01:21:00+08:00",
+        "status": "local_checks_passed_rebased_pending_github",
+        "note": "After origin/main advanced to e7b8d85a via PR #2079, rebased current branch, resolved manifest/state overlap, reran scoped checks and full ci_verify_mbti.sh successfully, and prepared to force-push for GitHub rerun."
       }
     ]
   }
