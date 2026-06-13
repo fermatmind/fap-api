@@ -4120,6 +4120,23 @@
                 ]
             }
         },
+        "/api/v0.5/personality/comparisons/{comparison}": {
+            "get": {
+                "operationId": "get_api_v0_5_personality_comparisons_comparison_",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\PersonalityController@comparison",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
         "/api/v0.5/personality/{type}": {
             "get": {
                 "operationId": "get_api_v0_5_personality_type_",

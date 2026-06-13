@@ -600,6 +600,7 @@ Route::prefix('v0.5')->group(function () {
     Route::get('/personality-content-assets/{framework}/{entityType}/{code}', [PersonalityPublicContentAssetController::class, 'showByCode']);
     Route::get('/personality-content-assets/{framework}/{slug}', [PersonalityPublicContentAssetController::class, 'show']);
     Route::get('/personality', [PersonalityController::class, 'index']);
+    Route::get('/personality/comparisons/{comparison}', [PersonalityController::class, 'comparison']);
     Route::get('/personality/{type}/desktop-clone', [PersonalityDesktopCloneController::class, 'show']);
     Route::get('/personality/{type}/seo', [PersonalityController::class, 'seo']);
     Route::get('/personality/{type}', [PersonalityController::class, 'show']);

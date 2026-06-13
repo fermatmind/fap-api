@@ -26434,7 +26434,7 @@
   "INDEXNOW-LIVE-00": {
     "repo": "fap-api",
     "branch": "codex/indexnow-live-00-readiness-contract",
-    "status": "ready_to_merge",
+    "status": "merged",
     "depends_on": [
       "BAIDU-LIVE-00"
     ],
@@ -38349,7 +38349,7 @@
     "merge_commit": "42a8caacb4f4bfa0fb5a83ecd69c25e3b5e83973"
   },
   "AUDIT-SEC-TRAIN-LEDGER-CLOSEOUT-01": {
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "branch": "audit/sec-train-ledger-closeout-01",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1804",
     "base": "main",
@@ -54740,11 +54740,11 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": "4c5513baf5391290e2c5a9a2618ed2954a034458",
+    "commit_sha": "1b9074549211fe15b257a9595a88782cef118616",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2087",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-13T20:22:14Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-14T04:02:59+08:00",
@@ -54770,6 +54770,94 @@
         "at": "2026-06-14T04:45:00+08:00",
         "status": "ready_to_merge",
         "note": "GitHub checks passed and pre-merge scope validation showed only the 7 declared PR files changed."
+      },
+      {
+        "at": "2026-06-14T04:42:00+08:00",
+        "status": "merged",
+        "note": "Reconciled GitHub PR #2087 as merged; origin/main contains merge commit 1b9074549211fe15b257a9595a88782cef118616 and the remote branch is deleted."
+      }
+    ]
+  },
+  "PERSONALITY-COMPARISON-PAGES-01": {
+    "id": "PERSONALITY-COMPARISON-PAGES-01",
+    "branch": "codex/personality-comparison-pages-01-backend",
+    "base": "origin/main",
+    "status": "pr_open",
+    "train_scope": "personality_seo",
+    "title": "PERSONALITY-COMPARISON-PAGES-01: feat(personality): add backend A/T comparison authority",
+    "depends_on": [
+      "PERSONALITY-SEO-TITLE-METADATA-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding and executing the fap-api comparison backend PR-train item."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "PERSONALITY-SEO-TITLE-METADATA-01 is reconciled as merged in fap-api PR #2087 with merge commit 1b9074549211fe15b257a9595a88782cef118616."
+      },
+      "scope": {
+        "status": "pass",
+        "evidence": "Changed files are confined to the backend personality public API route/controller contract, OpenAPI snapshot, focused personality comparison tests, Big Five runtime-freeze classifier coverage, and docs/codex PR-train metadata. No fap-web, sitemap, llms, frontend rendering, production CMS mutation, publish-state mutation, or deploy is in scope."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_5/PersonalityPublicApiTest.php --filter personality_comparison --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter mbti_personality_comparison --no-ansi",
+          "cd backend && ./vendor/bin/pint --test routes/api.php app/Http/Controllers/API/V0_5/Cms/PersonalityController.php tests/Feature/V0_5/PersonalityPublicApiTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan route:list --path=api/v0.5/personality --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-personality-comparison-pages.sqlite php artisan migrate --force --no-ansi",
+          "cd backend && APP_ENV=testing PAYMENTS_ALLOW_STUB=true bash scripts/export_openapi.sh --check",
+          "cd backend && bash scripts/ci_verify_mbti.sh",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "git diff --check"
+        ],
+        "evidence": "After synchronizing backend/docs/contracts/openapi.snapshot.json for the new public comparison route, all required local checks passed: focused personality_comparison API test passed with 2 warnings / 34 assertions; Big Five runtime-freeze classifier filter passed with 1 warning / 1 assertion; Pint passed for 4 files; route-list showed the api/v0.5/personality comparison route among 8 personality routes; sqlite migrate passed; OpenAPI snapshot check passed; full scripts/ci_verify_mbti.sh passed through OpenAPI, auth, order security, migration, Big Five, MBTI, and webhook/attempt gates; JSON/YAML parse and git diff --check passed."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #2089 GitHub checks passed on head 3af2d882cd424069e8250fa2a49a7c815a7d80a8: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and semgrep sarif non-blocking upload. Pre-merge PR state was CLEAN."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": "c3e8eea1555dfed503fe9e8243edc2a0758a7aed",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2089",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-14T04:42:00+08:00",
+        "status": "in_progress",
+        "note": "Initialized from explicit user authorization and started backend-only MBTI A/T comparison authority implementation."
+      },
+      {
+        "at": "2026-06-14T05:00:00+08:00",
+        "status": "local_checks_failed",
+        "note": "Full ci_verify_mbti.sh reached the OpenAPI diff gate and failed because the new public comparison route required backend/docs/contracts/openapi.snapshot.json to be synchronized. No PR was opened before fixing the contract snapshot in scope."
+      },
+      {
+        "at": "2026-06-14T05:02:00+08:00",
+        "status": "local_checks_passed",
+        "note": "Synchronized the OpenAPI snapshot, restored validation-generated Big Five compiled artifacts outside this PR scope, reran the required full ci_verify_mbti.sh gate successfully, and verified the remaining diff is confined to the declared backend comparison authority scope."
+      },
+      {
+        "at": "2026-06-14T05:03:00+08:00",
+        "status": "committed",
+        "note": "Recorded scoped implementation commit c3e8eea1555dfed503fe9e8243edc2a0758a7aed after local checks and scope validation passed."
+      },
+      {
+        "at": "2026-06-14T05:04:00+08:00",
+        "status": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/2089 from head 52d796503aac62740f85535e344dfc0d7fe87e11."
+      },
+      {
+        "at": "2026-06-14T05:10:00+08:00",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed for PR #2089 and pre-merge scope validation showed only the 7 declared PR files changed."
       }
     ]
   }
