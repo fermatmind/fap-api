@@ -8,8 +8,8 @@ use App\Console\Commands\ArticleCoverPropagationSmoke;
 use App\Console\Commands\ArticleImportEditorialPackage;
 use App\Console\Commands\ArticleImportSeoContentPackageDraft;
 use App\Console\Commands\ArticlePublishControlled;
-// ✅ 显式注册（更稳，避免自动扫描失效/缓存导致找不到）
 use App\Console\Commands\Big5AttemptPurge;
+// ✅ 显式注册（更稳，避免自动扫描失效/缓存导致找不到）
 use App\Console\Commands\Big5PsychometricsReport;
 use App\Console\Commands\Big5TelemetrySummary;
 use App\Console\Commands\CareerAlignActorsAuthorityOccupation;
@@ -108,6 +108,7 @@ use App\Console\Commands\FapValidateReport;
 use App\Console\Commands\FapWeeklyReport;
 use App\Console\Commands\MbtiPrewarm;
 use App\Console\Commands\MbtiUpgradeLegacyPartialUnlocks;
+use App\Console\Commands\MediaAssetsImportSeoImageBundle;
 use App\Console\Commands\MetricsWeeklyValidity;
 use App\Console\Commands\NormsBig5BootstrapBuild;
 use App\Console\Commands\NormsBig5DriftCheck;
@@ -326,6 +327,7 @@ class Kernel extends ConsoleKernel
         ArticleImportSeoContentPackageDraft::class,
         ArticleCoverPropagationSmoke::class,
         ArticlePublishControlled::class,
+        MediaAssetsImportSeoImageBundle::class,
     ];
 
     /**

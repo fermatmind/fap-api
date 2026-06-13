@@ -42,12 +42,12 @@ final class MediaLibraryPublicApiTest extends TestCase
             '--source-dir' => '../content_baselines/media_assets',
         ])
             ->expectsOutputToContain('files_found=2')
-            ->expectsOutputToContain('assets_found=227')
-            ->expectsOutputToContain('will_create=227')
+            ->expectsOutputToContain('assets_found=230')
+            ->expectsOutputToContain('will_create=230')
             ->assertExitCode(0);
 
-        $this->assertSame(227, MediaAsset::query()->withoutGlobalScopes()->count());
-        $this->assertSame(233, MediaVariant::query()->count());
+        $this->assertSame(230, MediaAsset::query()->withoutGlobalScopes()->count());
+        $this->assertSame(239, MediaVariant::query()->count());
     }
 
     public function test_public_and_internal_api_return_media_variant_metadata(): void
