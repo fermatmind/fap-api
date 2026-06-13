@@ -19,8 +19,8 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
     {
         $this->artisan('personality-public-assets:import')
             ->expectsOutputToContain('dry_run=1')
-            ->expectsOutputToContain('assets_found=8')
-            ->expectsOutputToContain('valid_count=8')
+            ->expectsOutputToContain('assets_found=94')
+            ->expectsOutputToContain('valid_count=94')
             ->expectsOutputToContain('errors_count=0')
             ->expectsOutputToContain('indexable_count=0')
             ->expectsOutputToContain('sitemap_eligible_count=0')
@@ -30,26 +30,33 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
         $this->assertSame(0, PersonalityPublicContentAsset::query()->count());
     }
 
-    public function test_write_import_keeps_seed_assets_draft_noindex_and_hidden_from_public_api(): void
+    public function test_write_import_is_idempotent_and_exposes_only_render_candidates(): void
     {
         $this->artisan('personality-public-assets:import', [
             '--write' => true,
         ])
             ->expectsOutputToContain('dry_run=0')
-            ->expectsOutputToContain('will_create=8')
+            ->expectsOutputToContain('will_create=94')
             ->expectsOutputToContain('indexable_count=0')
             ->expectsOutputToContain('sitemap_eligible_count=0')
             ->expectsOutputToContain('llms_eligible_count=0')
             ->assertExitCode(0);
 
-        $this->assertSame(8, PersonalityPublicContentAsset::query()->count());
+        $this->assertSame(94, PersonalityPublicContentAsset::query()->count());
+
+        $this->artisan('personality-public-assets:import', [
+            '--write' => true,
+        ])
+            ->expectsOutputToContain('will_skip=94')
+            ->assertExitCode(0);
 
         $asset = PersonalityPublicContentAsset::query()
             ->where('framework', PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE)
             ->where('entity_type', PersonalityPublicContentAsset::ENTITY_HUB)
             ->firstOrFail();
 
-        $this->assertSame(PersonalityPublicContentAsset::LAUNCH_DRAFT, $asset->launch_state);
+        $this->assertSame(PersonalityPublicContentAsset::LAUNCH_CONTENT_READY, $asset->launch_state);
+        $this->assertSame(PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW, $asset->robots);
         $this->assertFalse((bool) $asset->index_eligible);
         $this->assertFalse((bool) $asset->sitemap_eligible);
         $this->assertFalse((bool) $asset->llms_eligible);
@@ -57,14 +64,67 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
         $this->getJson('/api/v0.5/personality-content-assets?framework=big_five&locale=en')
             ->assertOk()
             ->assertJsonPath('ok', true)
+            ->assertJsonPath('pagination.total', 17)
+            ->assertJsonCount(17, 'items')
+            ->assertJsonPath('items.0.index_eligible', false)
+            ->assertJsonPath('items.0.robots', PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW);
+
+        $this->getJson('/api/v0.5/personality-content-assets?framework=big_five&locale=zh-CN')
+            ->assertOk()
+            ->assertJsonPath('pagination.total', 17)
+            ->assertJsonCount(17, 'items');
+
+        $this->getJson('/api/v0.5/personality-content-assets?framework=big_five&locale=en&entity_type=facet')
+            ->assertOk()
             ->assertJsonPath('pagination.total', 0)
             ->assertJsonCount(0, 'items');
+
+        $this->getJson('/api/v0.5/personality-content-assets/big_five/domain/openness?locale=en')
+            ->assertOk()
+            ->assertJsonPath('personality_public_content_asset_v1.code', 'openness')
+            ->assertJsonPath('personality_public_content_asset_v1.entity_type', PersonalityPublicContentAsset::ENTITY_DOMAIN)
+            ->assertJsonPath('personality_public_content_asset_v1.launch_state', PersonalityPublicContentAsset::LAUNCH_CONTENT_READY)
+            ->assertJsonPath('personality_public_content_asset_v1.robots', PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW);
+
+        $this->getJson('/api/v0.5/personality-content-assets/big_five/facet/imagination?locale=en')
+            ->assertNotFound();
 
         $sitemapLocs = collect(app(SitemapGenerator::class)->generateUrls())
             ->pluck('loc')
             ->implode("\n");
 
         $this->assertStringNotContainsString('/personality/big-five', $sitemapLocs);
+    }
+
+    public function test_big_five_seed_has_expected_counts_parity_and_indexability(): void
+    {
+        $payload = json_decode((string) file_get_contents(base_path('content_assets/personality_public/big_five_v1_seed.json')), true);
+        $assets = collect(is_array($payload['assets'] ?? null) ? $payload['assets'] : []);
+
+        $this->assertSame(94, $assets->count());
+        $this->assertSame(['en' => 47, 'zh-CN' => 47], $assets->countBy('locale')->sortKeys()->all());
+        $this->assertSame([
+            'domain' => 10,
+            'facet' => 60,
+            'facet_hub' => 2,
+            'hub' => 2,
+            'polarity' => 20,
+        ], $assets->countBy('entity_type')->sortKeys()->all());
+
+        $renderCandidates = $assets->where('launch_state', PersonalityPublicContentAsset::LAUNCH_CONTENT_READY)->values();
+        $facetStubs = $assets->where('entity_type', PersonalityPublicContentAsset::ENTITY_FACET)->values();
+
+        $this->assertSame(34, $renderCandidates->count());
+        $this->assertSame(60, $facetStubs->count());
+        $this->assertTrue($renderCandidates->every(fn (array $asset): bool => $asset['robots'] === PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW));
+        $this->assertTrue($renderCandidates->every(fn (array $asset): bool => $asset['index_eligible'] === false && $asset['sitemap_eligible'] === false && $asset['llms_eligible'] === false));
+        $this->assertTrue($facetStubs->every(fn (array $asset): bool => $asset['launch_state'] === PersonalityPublicContentAsset::LAUNCH_CONTENT_STUB));
+        $this->assertTrue($facetStubs->every(fn (array $asset): bool => $asset['robots'] === PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW));
+        $this->assertTrue($facetStubs->every(fn (array $asset): bool => $asset['index_eligible'] === false && $asset['sitemap_eligible'] === false && $asset['llms_eligible'] === false));
+
+        $enCodes = $renderCandidates->where('locale', 'en')->pluck('code')->sort()->values()->all();
+        $zhCodes = $renderCandidates->where('locale', 'zh-CN')->pluck('code')->sort()->values()->all();
+        $this->assertSame($enCodes, $zhCodes);
     }
 
     public function test_published_indexable_asset_can_be_read_without_sitemap_or_llms_flags(): void
@@ -82,6 +142,7 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
             ->assertJsonPath('pagination.total', 1)
             ->assertJsonPath('items.0.framework', 'big_five')
             ->assertJsonPath('items.0.entity_type', 'hub')
+            ->assertJsonPath('items.0.robots', PersonalityPublicContentAsset::ROBOTS_INDEX_FOLLOW)
             ->assertJsonPath('items.0.index_eligible', true)
             ->assertJsonPath('items.0.sitemap_eligible', false)
             ->assertJsonPath('items.0.llms_eligible', false);
@@ -148,6 +209,18 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
         app(PersonalityPublicContentAssetContract::class)->validateAsset($this->contractPayload([
             'launch_state' => PersonalityPublicContentAsset::LAUNCH_DRAFT,
             'index_eligible' => true,
+            'robots' => PersonalityPublicContentAsset::ROBOTS_INDEX_FOLLOW,
+        ]));
+    }
+
+    public function test_contract_rejects_index_follow_without_published_indexable_asset(): void
+    {
+        $this->expectException(ValidationException::class);
+
+        app(PersonalityPublicContentAssetContract::class)->validateAsset($this->contractPayload([
+            'launch_state' => PersonalityPublicContentAsset::LAUNCH_CONTENT_READY,
+            'index_eligible' => false,
+            'robots' => PersonalityPublicContentAsset::ROBOTS_INDEX_FOLLOW,
         ]));
     }
 
@@ -176,6 +249,7 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
                 'title' => 'Big Five Personality',
                 'description' => 'Published fixture.',
             ],
+            'robots' => PersonalityPublicContentAsset::ROBOTS_INDEX_FOLLOW,
             'canonical_json' => [
                 'path' => '/en/personality/big-five',
             ],
@@ -194,6 +268,7 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
                     'note' => 'Test fixture.',
                 ],
             ],
+            'internal_links_json' => [],
             'is_public' => true,
             'index_eligible' => false,
             'sitemap_eligible' => false,
@@ -213,6 +288,7 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
         return array_merge([
             'framework' => PersonalityPublicContentAsset::FRAMEWORK_BIG_FIVE,
             'entity_type' => PersonalityPublicContentAsset::ENTITY_HUB,
+            'code' => 'big-five',
             'entity_key' => 'big-five',
             'slug' => 'big-five',
             'locale' => 'en',
@@ -228,6 +304,7 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
                 'title' => 'Big Five Personality',
                 'description' => 'Contract fixture.',
             ],
+            'robots' => PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW,
             'canonical' => [
                 'path' => '/en/personality/big-five',
             ],
@@ -246,6 +323,7 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
                     'note' => 'Contract fixture.',
                 ],
             ],
+            'internal_links' => [],
             'launch_state' => PersonalityPublicContentAsset::LAUNCH_DRAFT,
             'review_state' => 'draft',
             'index_eligible' => false,

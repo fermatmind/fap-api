@@ -73,11 +73,47 @@ final class PersonalityPublicContentAssetController extends Controller
             ->first();
 
         if (! $asset instanceof PersonalityPublicContentAsset) {
-            return response()->json([
-                'ok' => false,
-                'error_code' => 'NOT_FOUND',
-                'message' => 'personality content asset not found.',
-            ], 404);
+            return $this->notFoundResponse();
+        }
+
+        return response()->json([
+            'ok' => true,
+            'asset' => $this->assetPayload($asset),
+            'personality_public_content_asset_v1' => $this->assetPayload($asset),
+        ]);
+    }
+
+    public function showByCode(Request $request, string $framework, string $entityType, string $code): JsonResponse
+    {
+        $validated = $this->validateReadQuery($request);
+        if ($validated instanceof JsonResponse) {
+            return $validated;
+        }
+
+        $normalizedFramework = PersonalityPublicContentAsset::normalizeToken($framework);
+        $normalizedEntityType = PersonalityPublicContentAsset::normalizeToken($entityType);
+        $normalizedCode = PersonalityPublicContentAsset::normalizeEntityKey($code);
+
+        if (! in_array($normalizedFramework, PersonalityPublicContentAsset::FRAMEWORKS, true)) {
+            return $this->notFoundResponse();
+        }
+
+        if (! in_array($normalizedEntityType, PersonalityPublicContentAsset::ENTITY_TYPES, true)) {
+            return $this->notFoundResponse();
+        }
+
+        $asset = PersonalityPublicContentAsset::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', $validated['org_id'])
+            ->where('framework', $normalizedFramework)
+            ->where('entity_type', $normalizedEntityType)
+            ->where('entity_key', $normalizedCode)
+            ->forLocale($validated['locale'])
+            ->publiclyReadable()
+            ->first();
+
+        if (! $asset instanceof PersonalityPublicContentAsset) {
+            return $this->notFoundResponse();
         }
 
         return response()->json([
@@ -127,26 +163,34 @@ final class PersonalityPublicContentAssetController extends Controller
      */
     private function assetPayload(PersonalityPublicContentAsset $asset): array
     {
+        $contentSections = is_array($asset->content_sections_json) ? $asset->content_sections_json : [];
+        $canonical = is_array($asset->canonical_json) ? $asset->canonical_json : [];
+
         return [
             'id' => (int) $asset->id,
             'org_id' => (int) $asset->org_id,
             'contract_version' => (string) $asset->contract_version,
             'framework' => (string) $asset->framework,
             'entity_type' => (string) $asset->entity_type,
+            'code' => (string) $asset->entity_key,
             'entity_key' => (string) $asset->entity_key,
             'slug' => (string) $asset->slug,
             'locale' => (string) $asset->locale,
             'title' => (string) $asset->title,
             'summary' => $asset->summary,
-            'content_sections' => is_array($asset->content_sections_json) ? $asset->content_sections_json : [],
+            'sections' => $contentSections,
+            'content_sections' => $contentSections,
             'seo' => is_array($asset->seo_json) ? $asset->seo_json : [],
-            'canonical' => is_array($asset->canonical_json) ? $asset->canonical_json : [],
+            'robots' => PersonalityPublicContentAsset::normalizeRobots((string) $asset->robots),
+            'canonical_path' => (string) data_get($canonical, 'path', ''),
+            'canonical' => $canonical,
             'hreflang' => is_array($asset->hreflang_json) ? $asset->hreflang_json : [],
             'faq' => is_array($asset->faq_json) ? $asset->faq_json : [],
             'media' => is_array($asset->media_json) ? $asset->media_json : [],
             'schema' => is_array($asset->schema_json) ? $asset->schema_json : [],
             'method_boundary' => is_array($asset->method_boundary_json) ? $asset->method_boundary_json : [],
             'evidence_notes' => is_array($asset->evidence_notes_json) ? $asset->evidence_notes_json : [],
+            'internal_links' => is_array($asset->internal_links_json) ? $asset->internal_links_json : [],
             'is_public' => (bool) $asset->is_public,
             'index_eligible' => (bool) $asset->index_eligible,
             'sitemap_eligible' => (bool) $asset->sitemap_eligible,
@@ -159,5 +203,14 @@ final class PersonalityPublicContentAssetController extends Controller
             'last_reviewed_at' => $asset->last_reviewed_at?->toAtomString(),
             'updated_at' => $asset->updated_at?->toAtomString(),
         ];
+    }
+
+    private function notFoundResponse(): JsonResponse
+    {
+        return response()->json([
+            'ok' => false,
+            'error_code' => 'NOT_FOUND',
+            'message' => 'personality content asset not found.',
+        ], 404);
     }
 }

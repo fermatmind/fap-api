@@ -224,6 +224,14 @@ final class PersonalityPublicAssetsImport extends Command
 
     private function comparable(mixed $value): mixed
     {
+        if ($value instanceof \DateTimeInterface) {
+            return $value->format('Y-m-d\TH:i:sP');
+        }
+
+        if (is_string($value) && preg_match('/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})$/', $value) === 1) {
+            return (new \DateTimeImmutable($value))->format('Y-m-d\TH:i:sP');
+        }
+
         if (is_array($value)) {
             $this->sortAssociativeRecursive($value);
 

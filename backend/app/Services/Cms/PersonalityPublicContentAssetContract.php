@@ -40,6 +40,7 @@ final class PersonalityPublicContentAssetContract
             'org_id' => ['nullable', 'integer', 'min:0'],
             'framework' => ['required', Rule::in(PersonalityPublicContentAsset::FRAMEWORKS)],
             'entity_type' => ['required', Rule::in(PersonalityPublicContentAsset::ENTITY_TYPES)],
+            'code' => ['required', 'string', 'max:128', 'regex:/^[a-z0-9][a-z0-9_\\-.\\/]*$/i'],
             'entity_key' => ['required', 'string', 'max:128', 'regex:/^[a-z0-9][a-z0-9_\\-.\\/]*$/i'],
             'slug' => ['required', 'string', 'max:160', 'regex:/^[a-z0-9][a-z0-9\\-\\/]*$/i'],
             'locale' => ['required', Rule::in(PersonalityPublicContentAsset::SUPPORTED_LOCALES)],
@@ -50,6 +51,8 @@ final class PersonalityPublicContentAssetContract
             'content_sections.*.title' => ['nullable', 'string', 'max:255'],
             'content_sections.*.body_md' => ['nullable', 'string'],
             'seo' => ['required', 'array'],
+            'robots' => ['required', Rule::in(PersonalityPublicContentAsset::ROBOTS_VALUES)],
+            'canonical_path' => ['nullable', 'string', 'max:255'],
             'canonical' => ['required', 'array'],
             'hreflang' => ['present', 'array'],
             'faq' => ['present', 'array'],
@@ -57,6 +60,7 @@ final class PersonalityPublicContentAssetContract
             'schema' => ['present', 'array'],
             'method_boundary' => ['present', 'array'],
             'evidence_notes' => ['present', 'array'],
+            'internal_links' => ['present', 'array'],
             'is_public' => ['nullable', 'boolean'],
             'index_eligible' => ['nullable', 'boolean'],
             'sitemap_eligible' => ['nullable', 'boolean'],
@@ -66,6 +70,7 @@ final class PersonalityPublicContentAssetContract
             'contract_version' => ['nullable', 'string', 'max:64'],
             'source_package' => ['nullable', 'string', 'max:160'],
             'source_hash' => ['nullable', 'string', 'max:64'],
+            'last_reviewed_at' => ['nullable', 'date'],
         ]);
 
         $validator->after(function ($validator) use ($normalized): void {
@@ -118,18 +123,27 @@ final class PersonalityPublicContentAssetContract
         $payload['org_id'] = max(0, (int) ($payload['org_id'] ?? 0));
         $payload['framework'] = PersonalityPublicContentAsset::normalizeToken((string) ($payload['framework'] ?? ''));
         $payload['entity_type'] = PersonalityPublicContentAsset::normalizeToken((string) ($payload['entity_type'] ?? ''));
-        $payload['entity_key'] = PersonalityPublicContentAsset::normalizeEntityKey((string) ($payload['entity_key'] ?? ''));
+        $payload['code'] = PersonalityPublicContentAsset::normalizeEntityKey((string) ($payload['code'] ?? $payload['entity_key'] ?? ''));
+        $payload['entity_key'] = PersonalityPublicContentAsset::normalizeEntityKey((string) ($payload['entity_key'] ?? $payload['code'] ?? ''));
         $payload['slug'] = PersonalityPublicContentAsset::normalizeSlug((string) ($payload['slug'] ?? ''));
         $payload['locale'] = PersonalityPublicContentAsset::normalizeLocale((string) ($payload['locale'] ?? 'en'));
-        $payload['content_sections'] = is_array($payload['content_sections'] ?? null) ? $payload['content_sections'] : [];
+        $payload['content_sections'] = is_array($payload['content_sections'] ?? null)
+            ? $payload['content_sections']
+            : (is_array($payload['sections'] ?? null) ? $payload['sections'] : []);
         $payload['seo'] = is_array($payload['seo'] ?? null) ? $payload['seo'] : [];
+        $payload['robots'] = PersonalityPublicContentAsset::normalizeRobots((string) ($payload['robots'] ?? PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW));
+        if (! isset($payload['canonical']) && isset($payload['canonical_path'])) {
+            $payload['canonical'] = ['path' => (string) $payload['canonical_path']];
+        }
         $payload['canonical'] = is_array($payload['canonical'] ?? null) ? $payload['canonical'] : [];
+        $payload['canonical_path'] = trim((string) ($payload['canonical_path'] ?? data_get($payload, 'canonical.path', '')));
         $payload['hreflang'] = is_array($payload['hreflang'] ?? null) ? $payload['hreflang'] : [];
         $payload['faq'] = is_array($payload['faq'] ?? null) ? $payload['faq'] : [];
         $payload['media'] = is_array($payload['media'] ?? null) ? $payload['media'] : [];
         $payload['schema'] = is_array($payload['schema'] ?? null) ? $payload['schema'] : [];
         $payload['method_boundary'] = is_array($payload['method_boundary'] ?? null) ? $payload['method_boundary'] : [];
         $payload['evidence_notes'] = is_array($payload['evidence_notes'] ?? null) ? $payload['evidence_notes'] : [];
+        $payload['internal_links'] = is_array($payload['internal_links'] ?? null) ? $payload['internal_links'] : [];
         $payload['is_public'] = (bool) ($payload['is_public'] ?? true);
         $payload['index_eligible'] = (bool) ($payload['index_eligible'] ?? false);
         $payload['sitemap_eligible'] = (bool) ($payload['sitemap_eligible'] ?? false);
@@ -167,12 +181,21 @@ final class PersonalityPublicContentAssetContract
     private function validateLaunchGate($validator, array $payload): void
     {
         $launchState = (string) ($payload['launch_state'] ?? PersonalityPublicContentAsset::LAUNCH_DRAFT);
+        $robots = PersonalityPublicContentAsset::normalizeRobots((string) ($payload['robots'] ?? PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW));
         $indexEligible = (bool) ($payload['index_eligible'] ?? false);
         $sitemapEligible = (bool) ($payload['sitemap_eligible'] ?? false);
         $llmsEligible = (bool) ($payload['llms_eligible'] ?? false);
 
         if ($indexEligible && $launchState !== PersonalityPublicContentAsset::LAUNCH_PUBLISHED) {
             $validator->errors()->add('index_eligible', 'index_eligible=true requires launch_state=published.');
+        }
+
+        if ($indexEligible && $robots !== PersonalityPublicContentAsset::ROBOTS_INDEX_FOLLOW) {
+            $validator->errors()->add('robots', 'index_eligible=true requires robots=index,follow.');
+        }
+
+        if ($robots === PersonalityPublicContentAsset::ROBOTS_INDEX_FOLLOW && (! $indexEligible || $launchState !== PersonalityPublicContentAsset::LAUNCH_PUBLISHED)) {
+            $validator->errors()->add('robots', 'robots=index,follow requires published index_eligible assets.');
         }
 
         if (($sitemapEligible || $llmsEligible) && (! $indexEligible || $launchState !== PersonalityPublicContentAsset::LAUNCH_PUBLISHED)) {
@@ -188,6 +211,7 @@ final class PersonalityPublicContentAssetContract
         $surface = implode(' ', [
             (string) ($payload['framework'] ?? ''),
             (string) ($payload['entity_type'] ?? ''),
+            (string) ($payload['code'] ?? ''),
             (string) ($payload['entity_key'] ?? ''),
             (string) ($payload['slug'] ?? ''),
             (string) ($payload['title'] ?? ''),

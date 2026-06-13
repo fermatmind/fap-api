@@ -597,6 +597,7 @@ Route::prefix('v0.5')->group(function () {
     Route::get('/career-recommendations/mbti', [CareerRecommendationController::class, 'index']);
     Route::get('/career-recommendations/mbti/{type}', [CareerRecommendationController::class, 'show']);
     Route::get('/personality-content-assets', [PersonalityPublicContentAssetController::class, 'index']);
+    Route::get('/personality-content-assets/{framework}/{entityType}/{code}', [PersonalityPublicContentAssetController::class, 'showByCode']);
     Route::get('/personality-content-assets/{framework}/{slug}', [PersonalityPublicContentAssetController::class, 'show']);
     Route::get('/personality', [PersonalityController::class, 'index']);
     Route::get('/personality/{type}/desktop-clone', [PersonalityDesktopCloneController::class, 'show']);
