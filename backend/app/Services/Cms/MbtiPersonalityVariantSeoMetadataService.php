@@ -49,11 +49,11 @@ final class MbtiPersonalityVariantSeoMetadataService
         $typeLabel = $this->typeLabel($runtimeTypeCode, $typeName, $locale);
 
         if ($locale === 'zh-CN') {
-            $title = $typeLabel.'人格：特点、爱情、职业与适合工作';
-            $description = '了解 '.$typeLabel.'人格的核心特点、优势盲点、爱情关系、职业倾向与适合工作，并通过 MBTI 测试确认自己的类型。';
+            $title = $typeLabel.'人格：特点、适合职业、爱情与稀有度';
+            $description = '了解 '.$typeLabel.'人格的 A/T 区别、核心特点、爱情关系、适合职业、优势盲点、稀有度，并通过 MBTI 测试确认自己的类型。';
         } else {
-            $title = $typeLabel.' Personality: Traits, Careers & Relationships';
-            $description = 'Explore the '.$typeLabel.' personality type, including traits, strengths, blind spots, relationships, career fit, and how to confirm your type with an MBTI test.';
+            $title = $typeLabel.' Personality: Traits, Careers, Love & Rarity';
+            $description = 'Explore '.$typeLabel.' traits, A/T differences, strengths, blind spots, relationships, career fit, rarity, and how to confirm your type with an MBTI test.';
         }
 
         return [

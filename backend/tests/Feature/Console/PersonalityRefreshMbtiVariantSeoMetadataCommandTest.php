@@ -65,10 +65,12 @@ final class PersonalityRefreshMbtiVariantSeoMetadataCommandTest extends TestCase
             ->where('personality_profile_variant_id', (int) $variants['zh-CN|INFP-T']->id)
             ->firstOrFail();
 
-        $this->assertSame('INFP-T 调停者人格：特点、爱情、职业与适合工作', $infpT->seo_title);
+        $this->assertSame('INFP-T 调停者人格：特点、适合职业、爱情与稀有度', $infpT->seo_title);
+        $this->assertStringContainsString('A/T 区别', (string) $infpT->seo_description);
         $this->assertStringContainsString('核心特点', (string) $infpT->seo_description);
         $this->assertStringContainsString('爱情关系', (string) $infpT->seo_description);
-        $this->assertStringContainsString('职业倾向', (string) $infpT->seo_description);
+        $this->assertStringContainsString('适合职业', (string) $infpT->seo_description);
+        $this->assertStringContainsString('稀有度', (string) $infpT->seo_description);
         $this->assertSame($infpT->seo_title, $infpT->og_title);
         $this->assertSame($infpT->seo_description, $infpT->og_description);
         $this->assertSame($infpT->seo_title, $infpT->twitter_title);
@@ -81,10 +83,12 @@ final class PersonalityRefreshMbtiVariantSeoMetadataCommandTest extends TestCase
             ->where('personality_profile_variant_id', (int) $variants['en|ENFP-A']->id)
             ->firstOrFail();
 
-        $this->assertSame('ENFP-A Campaigner Personality: Traits, Careers & Relationships', $enfpA->seo_title);
+        $this->assertSame('ENFP-A Campaigner Personality: Traits, Careers, Love & Rarity', $enfpA->seo_title);
         $this->assertStringContainsString('traits', (string) $enfpA->seo_description);
+        $this->assertStringContainsString('A/T differences', (string) $enfpA->seo_description);
         $this->assertStringContainsString('relationships', (string) $enfpA->seo_description);
         $this->assertStringContainsString('career fit', (string) $enfpA->seo_description);
+        $this->assertStringContainsString('rarity', (string) $enfpA->seo_description);
         $this->assertSame($enfpA->seo_title, $enfpA->og_title);
         $this->assertSame($enfpA->seo_description, $enfpA->twitter_description);
     }
