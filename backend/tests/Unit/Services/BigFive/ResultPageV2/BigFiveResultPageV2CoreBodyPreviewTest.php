@@ -2524,6 +2524,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_test_metrics_ops_daily_page_changes(): void
+    {
+        $changed = [
+            'backend/app/Filament/Ops/Pages/TestKpiDailyPage.php',
+            'backend/resources/views/filament/ops/pages/test-kpi-daily-page.blade.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_payment_unlock_attribution_diagnostics(): void
     {
         $changed = [
@@ -5249,7 +5259,9 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Filament/Ops/Pages/OpsDashboard.php',
             'backend/app/Filament/Ops/Support/OpsMetricsAccess.php',
+            'backend/app/Filament/Ops/Pages/TestKpiDailyPage.php',
             'backend/app/Filament/Ops/Widgets/TestKpiSummaryWidget.php',
+            'backend/resources/views/filament/ops/pages/test-kpi-daily-page.blade.php',
         ], true);
     }
 
