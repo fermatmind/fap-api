@@ -42,21 +42,40 @@ class PersonalityController extends Controller
             return $validated;
         }
 
-        $paginator = $this->personalityProfileService->listPublicProfiles(
-            $validated['org_id'],
-            $validated['scale_code'],
-            $validated['locale'],
-            $validated['page'],
-            $validated['per_page'],
-        );
-
         $items = [];
-        foreach ($paginator->items() as $profile) {
-            if (! $profile instanceof PersonalityProfile) {
-                continue;
-            }
 
-            $items[] = $this->profileListPayload($profile);
+        if ($validated['include_variants']) {
+            $paginator = $this->personalityProfileService->listPublicProfileVariants(
+                $validated['org_id'],
+                $validated['scale_code'],
+                $validated['locale'],
+                $validated['page'],
+                $validated['per_page'],
+            );
+
+            foreach ($paginator->items() as $variant) {
+                if (! $variant instanceof PersonalityProfileVariant) {
+                    continue;
+                }
+
+                $items[] = $this->variantListPayload($variant);
+            }
+        } else {
+            $paginator = $this->personalityProfileService->listPublicProfiles(
+                $validated['org_id'],
+                $validated['scale_code'],
+                $validated['locale'],
+                $validated['page'],
+                $validated['per_page'],
+            );
+
+            foreach ($paginator->items() as $profile) {
+                if (! $profile instanceof PersonalityProfile) {
+                    continue;
+                }
+
+                $items[] = $this->profileListPayload($profile);
+            }
         }
 
         return response()->json([
@@ -539,6 +558,50 @@ class PersonalityController extends Controller
     /**
      * @return array<string, mixed>
      */
+    private function variantListPayload(PersonalityProfileVariant $variant): array
+    {
+        $profile = $variant->profile;
+        if (! $profile instanceof PersonalityProfile) {
+            return [];
+        }
+
+        $projection = $this->personalityProfileService->buildPublicProjection($profile, $variant);
+        $runtimeTypeCode = strtoupper(trim((string) ($variant->runtime_type_code ?? '')));
+        $canonicalTypeCode = strtoupper(trim((string) ($variant->canonical_type_code ?: $profile->canonical_type_code ?: $profile->type_code)));
+        $routeSlug = strtolower($runtimeTypeCode);
+
+        return array_merge([
+            'id' => (int) $variant->id,
+            'variant_id' => (int) $variant->id,
+            'profile_id' => (int) $profile->id,
+            'org_id' => (int) $profile->org_id,
+            'scale_code' => (string) $profile->scale_code,
+            'type_code' => $runtimeTypeCode,
+            'base_type_code' => $canonicalTypeCode,
+            'runtime_type_code' => $runtimeTypeCode,
+            'variant_code' => (string) $variant->variant_code,
+            'slug' => $routeSlug,
+            'base_slug' => (string) $profile->slug,
+            'locale' => (string) $profile->locale,
+            'title' => (string) $profile->title,
+            'subtitle' => $profile->subtitle,
+            'excerpt' => $profile->excerpt,
+            'hero_image_url' => PublicMediaUrlGuard::sanitizeNullableUrl($profile->hero_image_url),
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => (bool) $profile->is_indexable,
+            'published_at' => $variant->published_at?->toISOString(),
+            'updated_at' => $variant->updated_at?->toISOString(),
+            'seo_meta' => $this->variantSeoMetaSummaryPayload($profile, $variant),
+            'display_type' => data_get($projection, 'display_type'),
+            'public_route_slug' => data_get($projection, 'public_route_slug', $routeSlug),
+            'public_route_type' => data_get($projection, '_meta.public_route_type', '32-type'),
+        ], $this->personalityProfileService->publicCanonicalFields($profile, $variant));
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
     private function profileDetailPayload(PersonalityProfile $profile, ?PersonalityProfileVariant $variant = null): array
     {
         return array_merge([
@@ -703,7 +766,27 @@ class PersonalityController extends Controller
     }
 
     /**
-     * @return array{org_id:int,scale_code:string,locale:string,page:int,per_page:int}|JsonResponse
+     * @return array<string, mixed>|null
+     */
+    private function variantSeoMetaSummaryPayload(
+        PersonalityProfile $profile,
+        PersonalityProfileVariant $variant
+    ): ?array {
+        $profileSeoMeta = $profile->seoMeta;
+        $variantSeoMeta = $variant->seoMeta;
+
+        if (! $profileSeoMeta instanceof PersonalityProfileSeoMeta && ! $variantSeoMeta instanceof PersonalityProfileVariantSeoMeta) {
+            return null;
+        }
+
+        return [
+            'seo_title' => $variantSeoMeta?->seo_title ?? $profileSeoMeta?->seo_title,
+            'seo_description' => $variantSeoMeta?->seo_description ?? $profileSeoMeta?->seo_description,
+        ];
+    }
+
+    /**
+     * @return array{org_id:int,scale_code:string,locale:string,page:int,per_page:int,include_variants:bool}|JsonResponse
      */
     private function validateListQuery(Request $request): array|JsonResponse
     {
@@ -713,6 +796,7 @@ class PersonalityController extends Controller
             'locale' => ['required', 'in:en,zh-CN'],
             'page' => ['nullable', 'integer', 'min:1'],
             'per_page' => ['nullable', 'integer', 'min:1', 'max:100'],
+            'include_variants' => ['nullable', 'in:0,1'],
         ]);
 
         if ($validator->fails()) {
@@ -727,6 +811,7 @@ class PersonalityController extends Controller
             'locale' => (string) $validated['locale'],
             'page' => (int) ($validated['page'] ?? 1),
             'per_page' => (int) ($validated['per_page'] ?? 20),
+            'include_variants' => filter_var($validated['include_variants'] ?? false, FILTER_VALIDATE_BOOLEAN),
         ];
     }
 

@@ -240,6 +240,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_personality_public_directory_changes(): void
+    {
+        $changed = [
+            'backend/app/Http/Controllers/API/V0_5/Cms/PersonalityController.php',
+            'backend/app/Services/Cms/PersonalityProfileService.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_mbti_personality_variant_seo_metadata_refresh_files(): void
     {
         $changed = [
@@ -2874,6 +2884,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isPersonalityPublicDirectoryFile($file)) {
+                continue;
+            }
+
             if ($this->isMbtiPersonalityVariantSeoMetadataRefreshFile($file)) {
                 continue;
             }
@@ -3662,6 +3676,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Http/Controllers/API/V0_5/Cms/PersonalityController.php',
             'backend/app/PersonalityCms/DesktopClone/PersonalityDesktopCloneAssetSlotSupport.php',
             'backend/app/Services/Experiments/ExperimentAssigner.php',
+        ], true);
+    }
+
+    private function isPersonalityPublicDirectoryFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Http/Controllers/API/V0_5/Cms/PersonalityController.php',
+            'backend/app/Services/Cms/PersonalityProfileService.php',
         ], true);
     }
 
