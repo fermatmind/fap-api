@@ -315,6 +315,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_test_metrics_refresh_command_guard_changes(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/RefreshTestMetricsDailyCommand.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_seo_conversion_daily_read_model_changes(): void
     {
         $changed = [
@@ -3399,6 +3408,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isTestMetricsRefreshCommandFile($file)) {
+                continue;
+            }
+
             if ($this->isEq60V5ReportAssetLayerChange($file)) {
                 continue;
             }
@@ -5174,6 +5187,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isAnalyticsFunnelRefreshCommandFile(string $file): bool
     {
         return $file === 'backend/app/Console/Commands/RefreshAnalyticsFunnelDailyCommand.php';
+    }
+
+    private function isTestMetricsRefreshCommandFile(string $file): bool
+    {
+        return $file === 'backend/app/Console/Commands/RefreshTestMetricsDailyCommand.php';
     }
 
     private function isSeoConversionDailyReadModelFile(string $file): bool
