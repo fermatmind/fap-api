@@ -915,10 +915,12 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     public function test_runtime_freeze_classifier_ignores_seo_intel_search_channel_queue_runtime_files(): void
     {
         $changed = [
+            'backend/app/Console/Commands/SeoIntelSearchChannelApproveCommand.php',
             'backend/app/Console/Commands/SeoIntelSearchChannelQueueCommand.php',
             'backend/app/Console/Commands/SeoIntelSearchChannelSubmitApprovedCommand.php',
             'backend/app/Console/Commands/SeoIntelSearchChannelSubmitCommand.php',
             'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueAuditLogger.php',
+            'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueApprovalExecutor.php',
             'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueBoundedLiveExecutor.php',
             'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueChannelMapper.php',
             'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueEligibilityEvaluator.php',
@@ -4022,10 +4024,12 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isSeoIntelSearchChannelQueueRuntimeFile(string $file): bool
     {
         return in_array($file, [
+            'backend/app/Console/Commands/SeoIntelSearchChannelApproveCommand.php',
             'backend/app/Console/Commands/SeoIntelSearchChannelQueueCommand.php',
             'backend/app/Console/Commands/SeoIntelSearchChannelSubmitApprovedCommand.php',
             'backend/app/Console/Commands/SeoIntelSearchChannelSubmitCommand.php',
             'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueAuditLogger.php',
+            'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueApprovalExecutor.php',
             'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueBoundedLiveExecutor.php',
             'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueChannelMapper.php',
             'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueEligibilityEvaluator.php',
