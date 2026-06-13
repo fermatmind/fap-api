@@ -1578,6 +1578,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_seo_image_bundle_importer_changes(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/MediaAssetsImportSeoImageBundle.php',
+            'backend/app/Console/Kernel.php',
+            'backend/app/Services/Cms/SeoImageBundle/SeoImageBundleImporter.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\MediaAssetsImportSeoImageBundle;',
+            '+        MediaAssetsImportSeoImageBundle::class,',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
+    }
+
     public function test_runtime_freeze_classifier_ignores_article_body_h1_guard_changes(): void
     {
         $changed = [
@@ -2931,6 +2946,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSeoImageBundleImporterFile($file)) {
+                continue;
+            }
+
             if ($this->isArticleBodyH1GuardFile($file)) {
                 continue;
             }
@@ -3530,6 +3549,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     $this->kernelDiffIsCareerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsArticleEditorialPackageDraftGateOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoContentPackageDraftImporterOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsSeoImageBundleImporterOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsControlledArticlePublishSopOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsArticleCoverPropagationSmokeOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsAlipayPendingCompensationSchedulerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
@@ -3803,6 +3823,12 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return $file === 'backend/app/Console/Commands/ArticleImportSeoContentPackageDraft.php'
             || str_starts_with($file, 'backend/app/Services/Cms/SeoContentPackage/');
+    }
+
+    private function isSeoImageBundleImporterFile(string $file): bool
+    {
+        return $file === 'backend/app/Console/Commands/MediaAssetsImportSeoImageBundle.php'
+            || str_starts_with($file, 'backend/app/Services/Cms/SeoImageBundle/');
     }
 
     private function isArticleBodyH1GuardFile(string $file): bool
@@ -5333,6 +5359,32 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if (preg_match('/\bArticleImportSeoContentPackageDraft\b/u', $line) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsSeoImageBundleImporterOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            if (str_contains($line, '显式注册')) {
+                continue;
+            }
+
+            if (preg_match('/\b(MBTI|Mbti|BigFive|Big5|Prewarm|ResultPage|Report)\b/u', $line) === 1) {
+                return false;
+            }
+
+            if (preg_match('/\bMediaAssetsImportSeoImageBundle\b/u', $line) !== 1) {
                 return false;
             }
         }
