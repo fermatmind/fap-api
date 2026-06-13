@@ -23903,6 +23903,61 @@ prs:
     content_authority: backend
     next_task: SEO-CONV-OPS-05 in fap-api after this PR is merged
 
+  - id: PERSONALITY-DETAIL-FAQ-SEO-01
+    repo: fap-api
+    depends_on:
+      - PERSONALITY-AT-DIFFERENCE-SECTIONS-01
+    branch: codex/personality-detail-faq-seo-01-backend
+    title: "PERSONALITY-DETAIL-FAQ-SEO-01: feat(personality): add backend FAQ content contract"
+    train_scope: personality_seo
+    status: user_authorized
+    scope:
+      - Register a backend canonical MBTI FAQ section for public personality detail pages.
+      - Add backend-authored visible FAQ payloads to the committed en and zh-CN 32-variant personality baselines.
+      - Ensure public detail API, mbti_public_projection_v1, and answer_surface_v1 expose FAQ data for all 64 A/T pages.
+      - Add backend contracts proving frontend can render visible FAQ and derive FAQPage JSON-LD from backend authority.
+    allowed_paths:
+      - backend/app/Support/Mbti/MbtiCanonicalSectionRegistry.php
+      - backend/app/Http/Controllers/API/V0_5/Cms/PersonalityController.php
+      - backend/app/Services/Mbti/Adapters/MbtiPersonalityProfileAuthoritySourceAdapter.php
+      - backend/tests/Feature/V0_5/PersonalityPublicApiTest.php
+      - backend/tests/Unit/Support/Mbti/MbtiCanonicalSectionRegistryTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - content_baselines/personality/mbti.en.json
+      - content_baselines/personality/mbti.zh-CN.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify fap-web.
+      - Add title metadata rewrites, comparison pages, sitemap changes, llms changes, or frontend fallback copy.
+      - Promise Google FAQ rich results or add hidden FAQ-only structured data.
+      - Mutate production CMS data or publish state.
+      - Move personality editorial authority into frontend code.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_5/PersonalityPublicApiTest.php --filter committed_baseline_covers --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_5/PersonalityPublicApiTest.php --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Support/Mbti/MbtiCanonicalSectionRegistryTest.php --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter mbti_personality_detail_faq --no-ansi
+      - cd backend && ./vendor/bin/pint --test app/Support/Mbti/MbtiCanonicalSectionRegistry.php app/Http/Controllers/API/V0_5/Cms/PersonalityController.php app/Services/Mbti/Adapters/MbtiPersonalityProfileAuthoritySourceAdapter.php tests/Feature/V0_5/PersonalityPublicApiTest.php tests/Unit/Support/Mbti/MbtiCanonicalSectionRegistryTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan route:list --path=api/v0.5/personality --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-personality-detail-faq.sqlite php artisan migrate --force --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter Personality --no-ansi
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - python3 -m json.tool content_baselines/personality/mbti.en.json >/dev/null
+      - python3 -m json.tool content_baselines/personality/mbti.zh-CN.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+    next_task: PERSONALITY-SEO-TITLE-METADATA-01 after the fap-web consumer portion is merged
+
   - id: ARTICLE-H1-02
     repo: fap-api
     depends_on:

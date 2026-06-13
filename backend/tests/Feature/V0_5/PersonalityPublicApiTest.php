@@ -796,6 +796,44 @@ final class PersonalityPublicApiTest extends TestCase
                     (string) ($projectionDifferenceSection['body_md'] ?? ''),
                 );
 
+                /** @var array<string, mixed>|null $faqSection */
+                $faqSection = collect($sections)
+                    ->firstWhere('section_key', 'faq');
+                self::assertIsArray($faqSection, $runtimeTypeCode.' should expose a backend-authored visible FAQ section.');
+                self::assertSame('faq', $faqSection['render_variant'] ?? null);
+                self::assertSame(90, (int) ($faqSection['sort_order'] ?? 0));
+                self::assertSame($runtimeTypeCode, data_get($faqSection, 'payload_json.runtime_type_code'));
+                self::assertSame($this->siblingRuntimeTypeCode($runtimeTypeCode), data_get($faqSection, 'payload_json.sibling_runtime_type_code'));
+                self::assertCount(4, (array) data_get($faqSection, 'payload_json.items'));
+                self::assertSame(
+                    $this->expectedFaqMeaningQuestion($locale, $runtimeTypeCode),
+                    data_get($faqSection, 'payload_json.items.0.question'),
+                    $runtimeTypeCode.' FAQ question should come from backend baseline content.',
+                );
+
+                $projectionFaqSection = collect((array) $detail->json('mbti_public_projection_v1.sections'))
+                    ->firstWhere('key', 'faq');
+                self::assertIsArray(
+                    $projectionFaqSection,
+                    $runtimeTypeCode.' should include the FAQ section in mbti_public_projection_v1.',
+                );
+                self::assertSame('faq', $projectionFaqSection['render'] ?? null);
+                self::assertSame(
+                    $this->expectedFaqMeaningQuestion($locale, $runtimeTypeCode),
+                    data_get($projectionFaqSection, 'payload.items.0.question'),
+                );
+
+                $answerFaqBlocks = (array) $detail->json('answer_surface_v1.faq_blocks');
+                self::assertCount(4, $answerFaqBlocks, $runtimeTypeCode.' should expose four FAQ blocks for frontend FAQ rendering.');
+                self::assertSame(
+                    $this->expectedFaqMeaningQuestion($locale, $runtimeTypeCode),
+                    data_get($answerFaqBlocks, '0.question'),
+                );
+                self::assertStringContainsString(
+                    $runtimeTypeCode,
+                    (string) data_get($answerFaqBlocks, '0.answer'),
+                );
+
                 $checkedRoutes[] = $locale.':'.$routeSlug;
 
                 if ($locale === 'zh-CN' && $runtimeTypeCode === 'ENTJ-T') {
@@ -818,6 +856,15 @@ final class PersonalityPublicApiTest extends TestCase
         }
 
         return $baseTypeCode.'-A vs '.$baseTypeCode.'-T: what is the difference?';
+    }
+
+    private function expectedFaqMeaningQuestion(string $locale, string $runtimeTypeCode): string
+    {
+        if ($locale === 'zh-CN') {
+            return $runtimeTypeCode.' 是什么意思？';
+        }
+
+        return 'What does '.$runtimeTypeCode.' mean?';
     }
 
     private function siblingRuntimeTypeCode(string $runtimeTypeCode): string
