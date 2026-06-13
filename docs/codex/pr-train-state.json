@@ -54782,7 +54782,7 @@
     "id": "PERSONALITY-COMPARISON-PAGES-01",
     "branch": "codex/personality-comparison-pages-01-backend",
     "base": "origin/main",
-    "status": "local_checks_passed",
+    "status": "committed",
     "train_scope": "personality_seo",
     "title": "PERSONALITY-COMPARISON-PAGES-01: feat(personality): add backend A/T comparison authority",
     "depends_on": [
@@ -54823,7 +54823,7 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
+    "commit_sha": "c3e8eea1555dfed503fe9e8243edc2a0758a7aed",
     "pr_url": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -54843,6 +54843,11 @@
         "at": "2026-06-14T05:02:00+08:00",
         "status": "local_checks_passed",
         "note": "Synchronized the OpenAPI snapshot, restored validation-generated Big Five compiled artifacts outside this PR scope, reran the required full ci_verify_mbti.sh gate successfully, and verified the remaining diff is confined to the declared backend comparison authority scope."
+      },
+      {
+        "at": "2026-06-14T05:03:00+08:00",
+        "status": "committed",
+        "note": "Recorded scoped implementation commit c3e8eea1555dfed503fe9e8243edc2a0758a7aed after local checks and scope validation passed."
       }
     ]
   }
