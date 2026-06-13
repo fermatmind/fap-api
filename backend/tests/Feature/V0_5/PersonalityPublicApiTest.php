@@ -134,6 +134,207 @@ final class PersonalityPublicApiTest extends TestCase
             ->assertJsonPath('items.0.title', 'INTJ Org 7');
     }
 
+    public function test_list_defaults_to_base_profiles_even_when_variants_exist(): void
+    {
+        $profile = $this->createProfile([
+            'type_code' => 'INTJ',
+            'slug' => 'intj',
+            'title' => 'INTJ - Architect',
+            'hero_image_url' => 'https://assets.fermatmind.com/static/personality/type-icons/intj.png',
+            'status' => 'published',
+            'is_public' => true,
+            'published_at' => now()->subMinute(),
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+        ]);
+        $this->createVariant($profile, [
+            'variant_code' => 'A',
+            'runtime_type_code' => 'INTJ-A',
+            'is_published' => true,
+            'published_at' => now()->subMinute(),
+        ]);
+        $this->createVariant($profile, [
+            'variant_code' => 'T',
+            'runtime_type_code' => 'INTJ-T',
+            'is_published' => true,
+            'published_at' => now()->subMinute(),
+        ]);
+
+        $this->getJson('/api/v0.5/personality?locale=en')
+            ->assertOk()
+            ->assertJsonPath('pagination.total', 1)
+            ->assertJsonCount(1, 'items')
+            ->assertJsonPath('items.0.type_code', 'INTJ')
+            ->assertJsonPath('items.0.slug', 'intj')
+            ->assertJsonPath('items.0.hero_image_url', 'https://assets.fermatmind.com/static/personality/type-icons/intj.png')
+            ->assertJsonMissingPath('items.0.runtime_type_code')
+            ->assertJsonMissingPath('items.0.variant_code');
+    }
+
+    public function test_list_can_return_backend_authoritative_variant_directory(): void
+    {
+        $profile = $this->createProfile([
+            'type_code' => 'INTJ',
+            'slug' => 'intj',
+            'title' => 'INTJ - Architect',
+            'type_name' => 'Architect',
+            'nickname' => 'Systems builder',
+            'rarity_text' => 'About 2%',
+            'keywords_json' => ['strategy', 'independence'],
+            'hero_summary_md' => 'Base hero summary',
+            'hero_image_url' => 'https://assets.fermatmind.com/static/personality/type-icons/intj.png',
+            'status' => 'published',
+            'is_public' => true,
+            'published_at' => now()->subMinute(),
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+        ]);
+        $this->createSeoMeta($profile, [
+            'seo_title' => 'Base INTJ title',
+            'seo_description' => 'Base INTJ description',
+        ]);
+        $assertive = $this->createVariant($profile, [
+            'variant_code' => 'A',
+            'runtime_type_code' => 'INTJ-A',
+            'type_name' => 'Architect Assertive',
+            'nickname' => 'Assertive strategist',
+            'rarity_text' => 'About 3%',
+            'keywords_json' => ['assertive', 'strategy'],
+            'hero_summary_md' => 'Assertive hero summary',
+            'is_published' => true,
+            'published_at' => now()->subMinute(),
+        ]);
+        $this->createVariantSeoMeta($assertive, [
+            'seo_title' => 'INTJ-A title',
+            'seo_description' => 'INTJ-A description',
+        ]);
+        $this->createVariant($profile, [
+            'variant_code' => 'T',
+            'runtime_type_code' => 'INTJ-T',
+            'type_name' => 'Architect Turbulent',
+            'is_published' => true,
+            'published_at' => now()->subMinute(),
+        ]);
+
+        $draftProfile = $this->createProfile([
+            'type_code' => 'ENTP',
+            'slug' => 'entp',
+            'title' => 'ENTP draft',
+            'status' => 'draft',
+            'is_public' => true,
+        ]);
+        $this->createVariant($draftProfile, [
+            'canonical_type_code' => 'ENTP',
+            'variant_code' => 'A',
+            'runtime_type_code' => 'ENTP-A',
+            'is_published' => true,
+            'published_at' => now()->subMinute(),
+        ]);
+
+        $response = $this->getJson('/api/v0.5/personality?locale=en&include_variants=1');
+
+        $response->assertOk()
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('pagination.total', 2)
+            ->assertJsonCount(2, 'items')
+            ->assertJsonPath('items.0.type_code', 'INTJ-A')
+            ->assertJsonPath('items.0.runtime_type_code', 'INTJ-A')
+            ->assertJsonPath('items.0.base_type_code', 'INTJ')
+            ->assertJsonPath('items.0.canonical_type_code', 'INTJ')
+            ->assertJsonPath('items.0.variant_code', 'A')
+            ->assertJsonPath('items.0.slug', 'intj-a')
+            ->assertJsonPath('items.0.base_slug', 'intj')
+            ->assertJsonPath('items.0.display_type', 'INTJ-A')
+            ->assertJsonPath('items.0.public_route_slug', 'intj-a')
+            ->assertJsonPath('items.0.public_route_type', '32-type')
+            ->assertJsonPath('items.0.type_name', 'Architect Assertive')
+            ->assertJsonPath('items.0.nickname', 'Assertive strategist')
+            ->assertJsonPath('items.0.rarity', 'About 3%')
+            ->assertJsonPath('items.0.keywords.0', 'assertive')
+            ->assertJsonPath('items.0.hero_summary', 'Assertive hero summary')
+            ->assertJsonPath('items.0.hero_image_url', 'https://assets.fermatmind.com/static/personality/type-icons/intj.png')
+            ->assertJsonPath('items.0.seo_meta.seo_title', 'INTJ-A title')
+            ->assertJsonPath('items.1.type_code', 'INTJ-T')
+            ->assertJsonPath('items.1.slug', 'intj-t');
+
+        self::assertNotContains('ENTP-A', collect($response->json('items'))->pluck('runtime_type_code')->all());
+    }
+
+    public function test_variant_directory_respects_locale_org_and_publication_time(): void
+    {
+        $enProfile = $this->createProfile([
+            'org_id' => 0,
+            'type_code' => 'INTJ',
+            'slug' => 'intj',
+            'locale' => 'en',
+            'status' => 'published',
+            'is_public' => true,
+            'published_at' => now()->subMinute(),
+        ]);
+        $zhProfile = $this->createProfile([
+            'org_id' => 0,
+            'type_code' => 'INTJ',
+            'slug' => 'intj',
+            'locale' => 'zh-CN',
+            'status' => 'published',
+            'is_public' => true,
+            'published_at' => now()->subMinute(),
+        ]);
+        $orgProfile = $this->createProfile([
+            'org_id' => 7,
+            'type_code' => 'INTJ',
+            'slug' => 'intj',
+            'locale' => 'en',
+            'status' => 'published',
+            'is_public' => true,
+            'published_at' => now()->subMinute(),
+        ]);
+
+        $this->createVariant($enProfile, [
+            'runtime_type_code' => 'INTJ-A',
+            'variant_code' => 'A',
+            'published_at' => now()->subMinute(),
+        ]);
+        $this->createVariant($enProfile, [
+            'runtime_type_code' => 'INTJ-T',
+            'variant_code' => 'T',
+            'published_at' => now()->addHour(),
+        ]);
+        $this->createVariant($zhProfile, [
+            'runtime_type_code' => 'INTJ-T',
+            'variant_code' => 'T',
+            'published_at' => now()->subMinute(),
+        ]);
+        $this->createVariant($orgProfile, [
+            'runtime_type_code' => 'INTJ-T',
+            'variant_code' => 'T',
+            'published_at' => now()->subMinute(),
+        ]);
+
+        $this->getJson('/api/v0.5/personality?locale=en&include_variants=1')
+            ->assertOk()
+            ->assertJsonPath('pagination.total', 1)
+            ->assertJsonPath('items.0.runtime_type_code', 'INTJ-A');
+
+        $this->getJson('/api/v0.5/personality?locale=zh-CN&include_variants=1')
+            ->assertOk()
+            ->assertJsonPath('pagination.total', 1)
+            ->assertJsonPath('items.0.runtime_type_code', 'INTJ-T')
+            ->assertJsonPath('items.0.locale', 'zh-CN');
+
+        $this->getJson('/api/v0.5/personality?locale=en&org_id=7&include_variants=1')
+            ->assertOk()
+            ->assertJsonPath('pagination.total', 1)
+            ->assertJsonPath('items.0.org_id', 7)
+            ->assertJsonPath('items.0.runtime_type_code', 'INTJ-T');
+    }
+
+    public function test_variant_directory_requires_explicit_zero_or_one_flag(): void
+    {
+        $this->getJson('/api/v0.5/personality?locale=en&include_variants=true')
+            ->assertStatus(422)
+            ->assertJsonPath('ok', false)
+            ->assertJsonPath('error_code', 'INVALID_ARGUMENT');
+    }
+
     public function test_detail_returns_profile_sections_and_seo_meta(): void
     {
         config(['app.frontend_url' => 'https://www.fermatmind.com']);

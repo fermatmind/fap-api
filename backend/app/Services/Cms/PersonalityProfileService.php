@@ -40,6 +40,47 @@ final class PersonalityProfileService
             ->paginate($perPage, ['*'], 'page', $page);
     }
 
+    public function listPublicProfileVariants(
+        int $orgId,
+        string $scaleCode,
+        string $locale,
+        int $page = 1,
+        int $perPage = 100
+    ): LengthAwarePaginator {
+        return PersonalityProfileVariant::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', max(0, $orgId))
+            ->where('is_published', true)
+            ->where(static function (Builder $query): void {
+                $query->whereNull('published_at')
+                    ->orWhere('published_at', '<=', now());
+            })
+            ->whereHas('profile', function (Builder $query) use ($orgId, $scaleCode, $locale): void {
+                $query->withoutGlobalScopes()
+                    ->where('org_id', max(0, $orgId))
+                    ->where('scale_code', $this->normalizeScaleCode($scaleCode))
+                    ->whereIn('type_code', PersonalityProfile::TYPE_CODES)
+                    ->forLocale($this->normalizeLocale($locale))
+                    ->publishedPublic()
+                    ->where(static function (Builder $nested): void {
+                        $nested->whereNull('published_at')
+                            ->orWhere('published_at', '<=', now());
+                    });
+            })
+            ->with([
+                'profile' => static function ($query): void {
+                    $query->withoutGlobalScopes()
+                        ->with('seoMeta');
+                },
+                'seoMeta',
+            ])
+            ->orderBy('canonical_type_code')
+            ->orderByRaw("case when variant_code = 'A' then 0 when variant_code = 'T' then 1 else 9 end")
+            ->orderBy('runtime_type_code')
+            ->orderBy('id')
+            ->paginate($perPage, ['*'], 'page', $page);
+    }
+
     public function getPublicProfileByType(
         string $typeLookup,
         int $orgId,
