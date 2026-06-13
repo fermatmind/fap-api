@@ -24005,6 +24005,53 @@ prs:
     content_authority: backend
     next_task: PERSONALITY-SEO-TITLE-METADATA-01 fap-web consumer after this backend PR is merged
 
+  - id: PERSONALITY-COMPARISON-PAGES-01
+    repo: fap-api
+    depends_on:
+      - PERSONALITY-SEO-TITLE-METADATA-01
+    branch: codex/personality-comparison-pages-01-backend
+    title: "PERSONALITY-COMPARISON-PAGES-01: feat(personality): add backend A/T comparison authority"
+    train_scope: personality_seo
+    status: user_authorized
+    scope:
+      - Add a backend public MBTI A/T comparison endpoint for 16 base type pairs, keyed by the frontend comparison slug such as intj-a-vs-intj-t.
+      - Return backend-authoritative comparison projection, SEO surface, landing surface, answer surface, canonical URL, alternates, and structured data for each complete A/T pair.
+      - Require both published public A and T variants before returning a comparison page payload.
+      - Add contracts proving fap-web can render comparison pages without inferring editorial or SEO content client-side.
+    allowed_paths:
+      - backend/routes/api.php
+      - backend/app/Http/Controllers/API/V0_5/Cms/PersonalityController.php
+      - backend/docs/contracts/openapi.snapshot.json
+      - backend/tests/Feature/V0_5/PersonalityPublicApiTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify fap-web.
+      - Add frontend pages, sitemap changes, llms changes, CMS production writes, baseline content rewrites, deploys, or publish-state mutations.
+      - Generate comparison content in frontend code or make fap-web infer A/T authority.
+      - Add new 32 distinct media assets or alter existing personality media handling.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_5/PersonalityPublicApiTest.php --filter personality_comparison --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter mbti_personality_comparison --no-ansi
+      - cd backend && ./vendor/bin/pint --test routes/api.php app/Http/Controllers/API/V0_5/Cms/PersonalityController.php tests/Feature/V0_5/PersonalityPublicApiTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan route:list --path=api/v0.5/personality --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-personality-comparison-pages.sqlite php artisan migrate --force --no-ansi
+      - cd backend && APP_ENV=testing PAYMENTS_ALLOW_STUB=true bash scripts/export_openapi.sh --check
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+    next_task: PERSONALITY-COMPARISON-PAGES-01 fap-web consumer after this backend PR is merged
+
   - id: ARTICLE-H1-02
     repo: fap-api
     depends_on:

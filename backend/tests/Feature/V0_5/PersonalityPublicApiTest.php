@@ -612,6 +612,164 @@ final class PersonalityPublicApiTest extends TestCase
         );
     }
 
+    public function test_personality_comparison_endpoint_returns_backend_authoritative_at_pair(): void
+    {
+        config(['app.frontend_url' => 'https://www.fermatmind.com']);
+
+        $profile = $this->createProfile([
+            'type_code' => 'INTJ',
+            'slug' => 'intj',
+            'locale' => 'en',
+            'title' => 'INTJ Personality Type',
+            'type_name' => 'Architect',
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => now()->subMinute(),
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+        ]);
+        $this->createSeoMeta($profile, [
+            'seo_title' => 'INTJ Personality Type',
+            'seo_description' => 'Explore INTJ traits.',
+            'robots' => 'index,follow',
+        ]);
+
+        $assertive = $this->createVariant($profile, [
+            'canonical_type_code' => 'INTJ',
+            'variant_code' => 'A',
+            'runtime_type_code' => 'INTJ-A',
+            'type_name' => 'Architect Assertive',
+            'nickname' => 'Assertive strategist',
+            'rarity_text' => 'About 2%',
+            'hero_summary_md' => 'INTJ-A keeps a calmer long-range plan under pressure.',
+            'is_published' => true,
+            'published_at' => now()->subMinute(),
+        ]);
+        $this->createVariantSeoMeta($assertive, [
+            'seo_title' => 'INTJ-A Architect Personality: Traits, Careers, Love & Rarity',
+            'seo_description' => 'Explore INTJ-A Architect traits, A/T differences, strengths, blind spots, relationships, career fit, rarity, and how to confirm your type with an MBTI test.',
+        ]);
+        PersonalityProfileVariantSection::query()->create([
+            'personality_profile_variant_id' => (int) $assertive->id,
+            'section_key' => 'traits.at_difference',
+            'render_variant' => 'rich_text',
+            'body_md' => 'INTJ-A usually trusts the plan sooner and spends less energy second-guessing the decision.',
+            'payload_json' => ['runtime_type_code' => 'INTJ-A', 'sibling_runtime_type_code' => 'INTJ-T'],
+            'sort_order' => 31,
+            'is_enabled' => true,
+        ]);
+        PersonalityProfileVariantSection::query()->create([
+            'personality_profile_variant_id' => (int) $assertive->id,
+            'section_key' => 'career.summary',
+            'render_variant' => 'rich_text',
+            'body_md' => 'INTJ-A often fits roles that reward independent strategy and calm ownership.',
+            'sort_order' => 50,
+            'is_enabled' => true,
+        ]);
+
+        $turbulent = $this->createVariant($profile, [
+            'canonical_type_code' => 'INTJ',
+            'variant_code' => 'T',
+            'runtime_type_code' => 'INTJ-T',
+            'type_name' => 'Architect Turbulent',
+            'nickname' => 'Self-auditing strategist',
+            'rarity_text' => 'About 1%',
+            'hero_summary_md' => 'INTJ-T keeps checking weak points before committing.',
+            'is_published' => true,
+            'published_at' => now()->subMinute(),
+        ]);
+        $this->createVariantSeoMeta($turbulent, [
+            'seo_title' => 'INTJ-T Architect Personality: Traits, Careers, Love & Rarity',
+            'seo_description' => 'Explore INTJ-T Architect traits, A/T differences, strengths, blind spots, relationships, career fit, rarity, and how to confirm your type with an MBTI test.',
+        ]);
+        PersonalityProfileVariantSection::query()->create([
+            'personality_profile_variant_id' => (int) $turbulent->id,
+            'section_key' => 'traits.at_difference',
+            'render_variant' => 'rich_text',
+            'body_md' => 'INTJ-T usually stress-tests the plan longer and notices risks earlier.',
+            'payload_json' => ['runtime_type_code' => 'INTJ-T', 'sibling_runtime_type_code' => 'INTJ-A'],
+            'sort_order' => 31,
+            'is_enabled' => true,
+        ]);
+        PersonalityProfileVariantSection::query()->create([
+            'personality_profile_variant_id' => (int) $turbulent->id,
+            'section_key' => 'relationships.summary',
+            'render_variant' => 'rich_text',
+            'body_md' => 'INTJ-T often needs explicit trust signals before relaxing in close relationships.',
+            'sort_order' => 60,
+            'is_enabled' => true,
+        ]);
+
+        $response = $this->getJson('/api/v0.5/personality/comparisons/intj-a-vs-intj-t?locale=en');
+
+        $response->assertOk()
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('comparison_public_projection_v1.comparison_contract_version', 'mbti.at_comparison.v1')
+            ->assertJsonPath('comparison_public_projection_v1.comparison_slug', 'intj-a-vs-intj-t')
+            ->assertJsonPath('comparison_public_projection_v1.base_type_code', 'INTJ')
+            ->assertJsonPath('comparison_public_projection_v1.public_route_type', 'at-comparison')
+            ->assertJsonPath('comparison_public_projection_v1.variants.a.runtime_type_code', 'INTJ-A')
+            ->assertJsonPath('comparison_public_projection_v1.variants.a.public_route_slug', 'intj-a')
+            ->assertJsonPath('comparison_public_projection_v1.variants.t.runtime_type_code', 'INTJ-T')
+            ->assertJsonPath('comparison_public_projection_v1.variants.t.public_route_slug', 'intj-t')
+            ->assertJsonPath('comparison_public_projection_v1.comparison_blocks.0.key', 'at_difference')
+            ->assertJsonPath('comparison_public_projection_v1.comparison_blocks.0.variants.a', 'INTJ-A usually trusts the plan sooner and spends less energy second-guessing the decision.')
+            ->assertJsonPath('comparison_public_projection_v1.comparison_blocks.0.variants.t', 'INTJ-T usually stress-tests the plan longer and notices risks earlier.')
+            ->assertJsonPath('seo_meta.seo_title', 'INTJ-A vs INTJ-T: Traits, Careers, Love & Rarity')
+            ->assertJsonPath('seo_meta.canonical_url', 'https://fermatmind.com/en/personality/intj-a-vs-intj-t')
+            ->assertJsonPath('seo_surface_v1.surface_type', 'mbti_personality_at_comparison')
+            ->assertJsonPath('seo_surface_v1.canonical_url', 'https://fermatmind.com/en/personality/intj-a-vs-intj-t')
+            ->assertJsonPath('seo_surface_v1.alternates.zh-CN', 'https://fermatmind.com/zh/personality/intj-a-vs-intj-t')
+            ->assertJsonPath('landing_surface_v1.entry_surface', 'personality_comparison')
+            ->assertJsonPath('landing_surface_v1.entry_type', 'mbti_at_pair')
+            ->assertJsonPath('landing_surface_v1.cta_bundle.0.href', '/en/personality/intj-a')
+            ->assertJsonPath('answer_surface_v1.surface_type', 'personality_comparison_public_detail')
+            ->assertJsonPath('answer_surface_v1.compare_blocks.0.key', 'at_difference')
+            ->assertJsonPath('jsonld.@type', 'CollectionPage')
+            ->assertJsonPath('jsonld.mainEntity.@type', 'ItemList');
+
+        self::assertContains('BreadcrumbList', (array) $response->json('seo_surface_v1.structured_data_keys'));
+        self::assertStringNotContainsString('www.fermatmind.com', (string) $response->getContent());
+
+        $this->getJson('/api/v0.5/personality/comparisons/intj?locale=en')
+            ->assertOk()
+            ->assertJsonPath('comparison_public_projection_v1.comparison_slug', 'intj-a-vs-intj-t');
+    }
+
+    public function test_personality_comparison_endpoint_requires_complete_published_pair(): void
+    {
+        $profile = $this->createProfile([
+            'type_code' => 'INTJ',
+            'slug' => 'intj',
+            'locale' => 'en',
+            'status' => 'published',
+            'is_public' => true,
+            'published_at' => now()->subMinute(),
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+        ]);
+        $this->createVariant($profile, [
+            'variant_code' => 'A',
+            'runtime_type_code' => 'INTJ-A',
+            'is_published' => true,
+            'published_at' => now()->subMinute(),
+        ]);
+        $this->createVariant($profile, [
+            'variant_code' => 'T',
+            'runtime_type_code' => 'INTJ-T',
+            'is_published' => false,
+            'published_at' => null,
+        ]);
+
+        $this->getJson('/api/v0.5/personality/comparisons/intj-a-vs-intj-t?locale=en')
+            ->assertStatus(404)
+            ->assertJsonPath('ok', false)
+            ->assertJsonPath('error_code', 'NOT_FOUND');
+
+        $this->getJson('/api/v0.5/personality/comparisons/invalid-a-vs-invalid-t?locale=en')
+            ->assertStatus(404)
+            ->assertJsonPath('error_code', 'NOT_FOUND');
+    }
+
     public function test_detail_accepts_published_public_variants_after_canonical_cutover(): void
     {
         config(['app.frontend_url' => 'https://staging.fermatmind.com']);

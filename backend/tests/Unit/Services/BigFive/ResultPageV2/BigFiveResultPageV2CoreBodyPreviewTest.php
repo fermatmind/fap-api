@@ -250,6 +250,24 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_mbti_personality_comparison_api_contract_changes(): void
+    {
+        $changed = [
+            'backend/app/Http/Controllers/API/V0_5/Cms/PersonalityController.php',
+            'backend/routes/api.php',
+        ];
+        $routeChangedLines = [
+            "+    Route::get('/personality/comparisons/{comparison}', [PersonalityController::class, 'comparison']);",
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            routeChangedLines: $routeChangedLines,
+        ));
+    }
+
     public function test_runtime_freeze_classifier_ignores_mbti_personality_variant_seo_metadata_refresh_files(): void
     {
         $changed = [
@@ -3517,6 +3535,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if (
+                $file === 'backend/routes/api.php'
+                && $this->routeDiffIsPersonalityComparisonApiContractOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
+            ) {
+                continue;
+            }
+
             if ($this->isBigFiveV2PilotSupportFile($file)) {
                 continue;
             }
@@ -6045,6 +6070,28 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             "+    Route::get('/personality-content-assets', [PersonalityPublicContentAssetController::class, 'index']);",
             "+    Route::get('/personality-content-assets/{framework}/{entityType}/{code}', [PersonalityPublicContentAssetController::class, 'showByCode']);",
             "+    Route::get('/personality-content-assets/{framework}/{slug}', [PersonalityPublicContentAssetController::class, 'show']);",
+        ];
+
+        foreach ($changedLines as $line) {
+            if (! in_array($line, $allowedLines, true)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function routeDiffIsPersonalityComparisonApiContractOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        $allowedLines = [
+            "+    Route::get('/personality/comparisons/{comparison}', [PersonalityController::class, 'comparison']);",
         ];
 
         foreach ($changedLines as $line) {
