@@ -54435,5 +54435,163 @@
         "note": "Inspected failing verify-bigfive logs, added a scoped BigFive runtime freeze classifier guard for personality public asset contract files/routes, and reran local BigFive filter plus ci_verify_mbti successfully before push."
       }
     ]
+  },
+  "PERSONALITY-AT-DIFFERENCE-SECTIONS-01": {
+    "repo": "fap-api",
+    "branch": "codex/personality-at-difference-sections-01",
+    "base": "origin/main",
+    "status": "local_full_gate_failed_remote_green",
+    "train_scope": "personality_seo",
+    "title": "PERSONALITY-AT-DIFFERENCE-SECTIONS-01: feat(personality): add backend A/T difference sections",
+    "depends_on": [
+      "PERSONALITY-DETAIL-CONTENT-COVERAGE-01",
+      "PERSONALITY-HUB-MEDIA-RENDER-VERIFY-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized updating fap-api docs/codex/pr-train.yaml and docs/codex/pr-train-state.json to add PERSONALITY-AT-DIFFERENCE-SECTIONS-01, then execute it."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "PERSONALITY-DETAIL-CONTENT-COVERAGE-01 is merged in fap-api PR #2074; PERSONALITY-HUB-MEDIA-RENDER-VERIFY-01 is merged in fap-web PR #1134 before this backend A/T difference implementation started."
+      },
+      "implementation": {
+        "status": "pass",
+        "evidence": "Registered traits.at_difference, added backend-authored A/T difference sections to committed en and zh-CN MBTI baselines, and exposed payload-backed section titles in public detail sections and mbti_public_projection_v1."
+      },
+      "local": {
+        "status": "fail_out_of_scope_draft_exception",
+        "commands": [
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_5/PersonalityPublicApiTest.php --filter committed_baseline_covers --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Support/Mbti/MbtiCanonicalSectionRegistryTest.php --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_5/PersonalityPublicApiTest.php --no-ansi",
+          "cd backend && ./vendor/bin/pint --test app/Support/Mbti/MbtiCanonicalSectionRegistry.php app/Http/Controllers/API/V0_5/Cms/PersonalityController.php app/Services/Mbti/Adapters/MbtiPersonalityProfileAuthoritySourceAdapter.php tests/Feature/V0_5/PersonalityPublicApiTest.php tests/Unit/Support/Mbti/MbtiCanonicalSectionRegistryTest.php",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan route:list --path=api/v0.5/personality --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-personality-at-difference.sqlite php artisan migrate --force --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter Personality --no-ansi",
+          "cd backend && bash scripts/ci_verify_mbti.sh",
+          "python3 -m json.tool content_baselines/personality/mbti.en.json >/dev/null",
+          "python3 -m json.tool content_baselines/personality/mbti.zh-CN.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "git diff --check"
+        ],
+        "evidence": "Scoped checks passed after rebasing onto origin/main 487b9fb9: committed-baseline test passed with 1038 assertions; registry test passed with 36 assertions; full PersonalityPublicApiTest passed with 1212 assertions; Pint passed; route:list showed 4 personality routes; sqlite migrate passed; php artisan test --filter Personality passed with 84 tests / 5974 assertions; JSON/YAML/diff checks passed. Required `cd backend && bash scripts/ci_verify_mbti.sh` was rerun after cleaning /tmp/fap-ci.sqlite; Big Five gate passed with 860 tests / 61470 assertions, Enneagram gate passed with 10 tests / 369 assertions, Partner API smoke passed, MBTI verify/events/personality/migration safety gates passed, then the script failed in the auth guest contract gate on `Tests\\Feature\\V0_3\\AuthGuestTokenTest::guest_token_does_not_use_numeric_body_anon_id` with HTTP 503 `token storage unavailable`, outside the personality A/T difference scope."
+      },
+      "scope": {
+        "status": "pass",
+        "evidence": "Scope expanded narrowly after user asked to continue: added backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php to manifest allowed_paths only to record the Big Five runtime-freeze classifier exception for these MBTI personality A/T difference backend files."
+      },
+      "github": {
+        "status": "pass",
+        "head_sha": "71a60c41348853904687a7b341a71ea6ee64d4a0",
+        "checks": [
+          {
+            "name": "hygiene",
+            "status": "pass",
+            "evidence": "Both CI hygiene check runs completed successfully."
+          },
+          {
+            "name": "supply-chain",
+            "status": "pass",
+            "evidence": "Both CI supply-chain check runs completed successfully."
+          },
+          {
+            "name": "content-pack-build-validate",
+            "status": "pass",
+            "evidence": "Both CI content-pack-build-validate check runs completed successfully."
+          },
+          {
+            "name": "verify-bigfive",
+            "status": "pass",
+            "evidence": "Both CI verify-bigfive check runs completed successfully after the scoped runtime-freeze classifier fix."
+          },
+          {
+            "name": "verify-mbti-legacy",
+            "status": "pass",
+            "evidence": "Both CI verify-mbti-legacy check runs completed successfully."
+          },
+          {
+            "name": "verify-mbti-v2",
+            "status": "pass",
+            "evidence": "Both CI verify-mbti-v2 check runs completed successfully."
+          },
+          {
+            "name": "code-scanning",
+            "status": "pass",
+            "evidence": "Semgrep blocking secrets, semgrep sarif non-blocking upload, and Semgrep OSS completed successfully."
+          }
+        ],
+        "evidence": "GitHub PR #2078 reports all statusCheckRollup entries successful for head 71a60c41348853904687a7b341a71ea6ee64d4a0. origin/main advanced to e7b8d85a after this run, so the PR was being rebased before any merge attempt."
+      },
+      "local_ci_fix": {
+        "status": "pass",
+        "commands": [
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter mbti_personality_at_difference --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter runtime_paths_have_no_uncommitted_diff --no-ansi",
+          "cd backend && ./vendor/bin/pint --test app/Support/Mbti/MbtiCanonicalSectionRegistry.php app/Http/Controllers/API/V0_5/Cms/PersonalityController.php app/Services/Mbti/Adapters/MbtiPersonalityProfileAuthoritySourceAdapter.php tests/Feature/V0_5/PersonalityPublicApiTest.php tests/Unit/Support/Mbti/MbtiCanonicalSectionRegistryTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "git diff --check"
+        ],
+        "evidence": "Targeted Big Five classifier test passed, exact previously failing runtime_paths_have_no_uncommitted_diff test passed, Pint passed for all touched PHP files, YAML/JSON/diff checks passed."
+      },
+      "local_full_gate_after_ci_fix": {
+        "status": "fail",
+        "commands": [
+          "cd backend && bash -lc 'rm -f /tmp/fap-ci.sqlite /tmp/fap-ci.sqlite-* && bash scripts/ci_verify_mbti.sh'"
+        ],
+        "evidence": "Required full manifest gate was rerun after the Big Five runtime-freeze fix. The Big Five runtime-freeze guard now passes, but the local full chain still exits 2 later in shared sqlite-backed tests with database lock and schema drift errors including `database is locked`, `table attempts has no column named org_id`, `table scales_registry has no column named assessment_driver`, and `ON CONFLICT clause does not match any PRIMARY KEY or UNIQUE constraint`. Summary: 29 failed, 832 passed. This keeps the draft PR not mergeable under the local manifest gate."
+      }
+    },
+    "failure_reason": "GitHub checks are green after the scoped Big Five runtime-freeze classifier fix, but required local `ci_verify_mbti.sh` still fails in later sqlite/shared-schema tests outside the personality A/T difference scope. PR remains draft and not mergeable.",
+    "commit_sha": "71a60c41348853904687a7b341a71ea6ee64d4a0",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2078",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-14T00:45:00+08:00",
+        "status": "in_progress",
+        "note": "Initialized from explicit fap-api manifest/state authorization and started scoped backend A/T difference section implementation."
+      },
+      {
+        "at": "2026-06-14T00:58:00+08:00",
+        "status": "local_checks_failed",
+        "note": "Stopped before commit/PR because ci_verify_mbti.sh failed twice in the default Big Five gate with sqlite database lock and missing-table errors outside the scoped personality A/T difference changes."
+      },
+      {
+        "at": "2026-06-14T00:38:00+08:00",
+        "status": "draft_pr_exception_pending",
+        "note": "After user asked to continue, rebased onto latest origin/main and reran validations. Scoped checks passed; full ci_verify_mbti.sh now fails only in out-of-scope auth guest contract gate, so proceed to draft PR exception, not merge."
+      },
+      {
+        "at": "2026-06-14T00:45:00+08:00",
+        "status": "draft_pr_exception_committed",
+        "note": "Committed scoped backend A/T difference implementation with out-of-scope ci_verify_mbti auth guest failure documented for draft PR exception."
+      },
+      {
+        "at": "2026-06-14T00:49:00+08:00",
+        "status": "draft_pr_open_blocked_local_gate",
+        "note": "Opened draft PR #2078 with out-of-scope auth guest contract failure documented; not mergeable until required checks are green."
+      },
+      {
+        "at": "2026-06-14T00:58:00+08:00",
+        "status": "github_checks_failed_scope_blocked",
+        "note": "Remote verify-bigfive failed on BigFive runtime freeze guard for current-scope MBTI files. Required fix is outside manifest allowed_paths, so stop without editing outside scope."
+      },
+      {
+        "at": "2026-06-14T01:09:00+08:00",
+        "status": "ci_fix_in_progress",
+        "note": "User asked to continue after scope-blocked GitHub failure; applied minimal Big Five runtime-freeze classifier contract for MBTI personality A/T difference backend files."
+      },
+      {
+        "at": "2026-06-14T01:32:00+08:00",
+        "status": "local_full_gate_failed_remote_green",
+        "note": "GitHub checks are green for head 71a60c41, but a required local full ci_verify_mbti.sh rerun still fails later in sqlite lock/schema drift tests; PR remains draft and not mergeable."
+      }
+    ]
   }
 }

@@ -76,6 +76,16 @@ final class MbtiCanonicalSectionRegistry
                     'axis_aliases' => self::traitOverviewAxisAliases(),
                 ],
             ],
+            'traits.at_difference' => [
+                'bucket' => self::BUCKET_SECTIONS,
+                'render_variant' => self::RENDER_VARIANT_RICH_TEXT,
+                'group' => 'traits',
+                'label' => 'A/T Difference',
+                'title' => 'A/T difference',
+                'description' => 'Backend-authored module explaining how the Assertive and Turbulent variants differ for the same MBTI base type.',
+                'sort_order' => 31,
+                'enabled' => true,
+            ],
             'traits.why_this_type' => [
                 'bucket' => self::BUCKET_SECTIONS,
                 'render_variant' => self::RENDER_VARIANT_RICH_TEXT,

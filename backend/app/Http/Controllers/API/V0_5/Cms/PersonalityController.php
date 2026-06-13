@@ -18,6 +18,7 @@ use App\Services\PublicSurface\AnswerSurfaceContractService;
 use App\Services\PublicSurface\LandingSurfaceContractService;
 use App\Services\PublicSurface\SeoSurfaceContractService;
 use App\Support\CanonicalFrontendUrl;
+use App\Support\Mbti\MbtiCanonicalSectionRegistry;
 use App\Support\PublicMediaUrlGuard;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -726,15 +727,17 @@ class PersonalityController extends Controller
 
                 /** @var array<string, mixed>|null $baseSection */
                 $baseSection = $sections->get($sectionKey);
+                $definition = $this->mbtiCanonicalSectionDefinition($sectionKey);
+                $payload = is_array($section->payload_json)
+                    ? $section->payload_json
+                    : ($baseSection['payload_json'] ?? null);
                 $sections->put($sectionKey, [
                     'section_key' => $sectionKey,
-                    'title' => $section->title ?? $baseSection['title'] ?? null,
+                    'title' => data_get($payload, 'title') ?? $baseSection['title'] ?? ($definition['title'] ?? null),
                     'render_variant' => (string) ($section->render_variant ?: ($baseSection['render_variant'] ?? 'rich_text')),
                     'body_md' => $section->body_md ?? $baseSection['body_md'] ?? null,
                     'body_html' => $section->body_html ?? $baseSection['body_html'] ?? null,
-                    'payload_json' => is_array($section->payload_json)
-                        ? $section->payload_json
-                        : ($baseSection['payload_json'] ?? null),
+                    'payload_json' => $payload,
                     'sort_order' => (int) ($section->sort_order ?? $baseSection['sort_order'] ?? 0),
                     'is_enabled' => true,
                 ]);
@@ -748,6 +751,18 @@ class PersonalityController extends Controller
             ])
             ->values()
             ->all();
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function mbtiCanonicalSectionDefinition(string $sectionKey): array
+    {
+        try {
+            return MbtiCanonicalSectionRegistry::definition($sectionKey);
+        } catch (\InvalidArgumentException) {
+            return [];
+        }
     }
 
     /**
