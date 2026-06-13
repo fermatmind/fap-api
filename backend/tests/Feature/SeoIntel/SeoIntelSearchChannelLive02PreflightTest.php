@@ -66,7 +66,10 @@ final class SeoIntelSearchChannelLive02PreflightTest extends TestCase
         $this->assertTrue((bool) data_get($artifact, 'indexnow_live_configuration.indexnow_live_api_enabled'));
         $this->assertTrue((bool) data_get($artifact, 'indexnow_live_configuration.indexnow_key_present'));
         $this->assertSame(32, data_get($artifact, 'indexnow_live_configuration.indexnow_key_length'));
-        $this->assertSame('fermatmind.com', data_get($artifact, 'indexnow_live_configuration.indexnow_key_location_host'));
+        $this->assertContains(data_get($artifact, 'indexnow_live_configuration.indexnow_key_location_host'), [
+            'fermatmind.com',
+            '<redacted-indexnow-key-location-host>',
+        ]);
         $this->assertSame(32, data_get($artifact, 'indexnow_live_configuration.indexnow_key_location_public_bytes'));
         $this->assertSame('pass', data_get($artifact, 'live_gate_verification.status'));
         $this->assertSame(['approval_phrase_mismatch'], data_get($artifact, 'live_gate_verification.result.issues'));

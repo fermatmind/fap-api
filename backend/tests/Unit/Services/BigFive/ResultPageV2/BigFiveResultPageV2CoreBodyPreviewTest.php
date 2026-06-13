@@ -916,8 +916,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         $changed = [
             'backend/app/Console/Commands/SeoIntelSearchChannelQueueCommand.php',
+            'backend/app/Console/Commands/SeoIntelSearchChannelSubmitApprovedCommand.php',
             'backend/app/Console/Commands/SeoIntelSearchChannelSubmitCommand.php',
             'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueAuditLogger.php',
+            'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueBoundedLiveExecutor.php',
             'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueChannelMapper.php',
             'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueEligibilityEvaluator.php',
             'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueEligibilityResult.php',
@@ -4021,8 +4023,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return in_array($file, [
             'backend/app/Console/Commands/SeoIntelSearchChannelQueueCommand.php',
+            'backend/app/Console/Commands/SeoIntelSearchChannelSubmitApprovedCommand.php',
             'backend/app/Console/Commands/SeoIntelSearchChannelSubmitCommand.php',
             'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueAuditLogger.php',
+            'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueBoundedLiveExecutor.php',
             'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueChannelMapper.php',
             'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueEligibilityEvaluator.php',
             'backend/app/Services/SeoIntel/SearchChannelQueue/SearchChannelQueueEligibilityResult.php',
