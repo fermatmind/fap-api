@@ -38349,7 +38349,7 @@
     "merge_commit": "42a8caacb4f4bfa0fb5a83ecd69c25e3b5e83973"
   },
   "AUDIT-SEC-TRAIN-LEDGER-CLOSEOUT-01": {
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "branch": "audit/sec-train-ledger-closeout-01",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1804",
     "base": "main",
@@ -54818,8 +54818,8 @@
         "evidence": "After synchronizing backend/docs/contracts/openapi.snapshot.json for the new public comparison route, all required local checks passed: focused personality_comparison API test passed with 2 warnings / 34 assertions; Big Five runtime-freeze classifier filter passed with 1 warning / 1 assertion; Pint passed for 4 files; route-list showed the api/v0.5/personality comparison route among 8 personality routes; sqlite migrate passed; OpenAPI snapshot check passed; full scripts/ci_verify_mbti.sh passed through OpenAPI, auth, order security, migration, Big Five, MBTI, and webhook/attempt gates; JSON/YAML parse and git diff --check passed."
       },
       "github": {
-        "status": "pending",
-        "evidence": null
+        "status": "pass",
+        "evidence": "PR #2089 GitHub checks passed on head 3af2d882cd424069e8250fa2a49a7c815a7d80a8: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and semgrep sarif non-blocking upload. Pre-merge PR state was CLEAN."
       }
     },
     "failure_reason": null,
@@ -54853,6 +54853,11 @@
         "at": "2026-06-14T05:04:00+08:00",
         "status": "pr_open",
         "note": "Opened https://github.com/fermatmind/fap-api/pull/2089 from head 52d796503aac62740f85535e344dfc0d7fe87e11."
+      },
+      {
+        "at": "2026-06-14T05:10:00+08:00",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed for PR #2089 and pre-merge scope validation showed only the 7 declared PR files changed."
       }
     ]
   }
