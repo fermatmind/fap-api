@@ -41,13 +41,13 @@ final class MediaLibraryPublicApiTest extends TestCase
             '--status' => 'published',
             '--source-dir' => '../content_baselines/media_assets',
         ])
-            ->expectsOutputToContain('files_found=2')
-            ->expectsOutputToContain('assets_found=230')
-            ->expectsOutputToContain('will_create=230')
+            ->expectsOutputToContain('files_found=3')
+            ->expectsOutputToContain('assets_found=246')
+            ->expectsOutputToContain('will_create=246')
             ->assertExitCode(0);
 
-        $this->assertSame(230, MediaAsset::query()->withoutGlobalScopes()->count());
-        $this->assertSame(239, MediaVariant::query()->count());
+        $this->assertSame(246, MediaAsset::query()->withoutGlobalScopes()->count());
+        $this->assertSame(255, MediaVariant::query()->count());
     }
 
     public function test_public_and_internal_api_return_media_variant_metadata(): void
@@ -121,6 +121,27 @@ final class MediaLibraryPublicApiTest extends TestCase
             ->assertJsonPath('asset.url', 'https://assets.fermatmind.com/static/social/wechat-qr.jpg')
             ->assertJsonPath('asset.variants.0.variant_key', 'original')
             ->assertJsonPath('asset.variants.0.path', '/static/social/wechat-qr.jpg');
+    }
+
+    public function test_personality_type_icon_baseline_assets_resolve_to_committed_static_media(): void
+    {
+        $this->artisan('media-assets:import-local-baseline', [
+            '--upsert' => true,
+            '--status' => 'published',
+            '--source-dir' => '../content_baselines/media_assets',
+        ])->assertExitCode(0);
+
+        $this->assertFileExists(base_path('public/static/personality/type-icons/entj.png'));
+
+        $this->getJson('/api/v0.5/media-assets/personality.type_icon.entj?org_id=0')
+            ->assertOk()
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('asset.asset_key', 'personality.type_icon.entj')
+            ->assertJsonPath('asset.path', '/static/personality/type-icons/entj.png')
+            ->assertJsonPath('asset.url', 'https://assets.fermatmind.com/static/personality/type-icons/entj.png')
+            ->assertJsonPath('asset.mime_type', 'image/png')
+            ->assertJsonPath('asset.variants.0.variant_key', 'original')
+            ->assertJsonPath('asset.variants.0.path', '/static/personality/type-icons/entj.png');
     }
 
     public function test_internal_upload_generates_standard_media_variants(): void
