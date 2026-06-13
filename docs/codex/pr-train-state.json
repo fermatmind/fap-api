@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-11T18:32:00Z",
+  "updated_at": "2026-06-14T00:12:00+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -48100,7 +48100,7 @@
     "repo": "fap-api",
     "branch": "codex/daily-giving-redacted-public-proof-01",
     "base": "main",
-    "status": "pr_open_github_checks_pending",
+    "status": "ready_to_merge",
     "train_scope": "window_7_public_benefit_trust_gate",
     "title": "docs(benefit): gate DailyGiving redacted public proof",
     "depends_on": [
@@ -54268,6 +54268,96 @@
         "at": "2026-06-11T13:00:17Z",
         "status": "pending_dependency",
         "note": "Initialized from explicit CAREER-FULL-PARITY train authorization; implementation deferred until dependencies merge."
+      }
+    ]
+  },
+  "PERSONALITY-DETAIL-CONTENT-COVERAGE-01": {
+    "repo": "fap-api",
+    "branch": "codex/personality-detail-content-coverage-01",
+    "base": "origin/main",
+    "status": "pr_open_github_checks_pending",
+    "train_scope": "personality_seo",
+    "title": "PERSONALITY-DETAIL-CONTENT-COVERAGE-01: test(personality): lock variant detail content coverage",
+    "depends_on": [
+      "PERSONALITY-SEO-CURRENT-AUDIT-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized updating fap-api docs/codex/pr-train.yaml and docs/codex/pr-train-state.json to add PERSONALITY-DETAIL-CONTENT-COVERAGE-01, then execute it."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "PERSONALITY-SEO-CURRENT-AUDIT-01 merged in fap-web PR #1133; origin/main contains merge commit 185df2cccfa6df158770ed4db12f17245308bd9c."
+      },
+      "implementation": {
+        "status": "pass",
+        "evidence": "Added a backend public API contract that imports committed MBTI personality baselines, asserts en and zh-CN variant directories each expose 32 A/T summaries, requests all 64 public detail routes, and verifies each route exposes substantive backend-authored sections. The contract explicitly locks zh-CN ENTJ-T body text from the committed baseline."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_5/PersonalityPublicApiTest.php --filter committed_baseline_covers --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_5/PersonalityPublicApiTest.php --no-ansi",
+          "cd backend && ./vendor/bin/pint --test tests/Feature/V0_5/PersonalityPublicApiTest.php",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan route:list --path=api/v0.5/personality --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/... php artisan migrate --force --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter Personality --no-ansi",
+          "cd backend && bash scripts/ci_verify_mbti.sh",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "git diff --check",
+          "scope validation"
+        ],
+        "evidence": "Focused committed-baseline coverage test passed with 526 assertions; full PersonalityPublicApiTest passed 12 tests / 700 assertions; Pint passed for the changed test file; route list showed the 4 personality routes; sqlite migrate passed; php artisan test --filter Personality passed 84 tests / 5462 assertions; bash scripts/ci_verify_mbti.sh exited 0 including personality full-32 authority gate OK; JSON/YAML/diff/scope checks passed."
+      },
+      "scope": {
+        "status": "pass",
+        "evidence": "Branch diff is confined to backend/tests/Feature/V0_5/PersonalityPublicApiTest.php, docs/codex/pr-train.yaml, and docs/codex/pr-train-state.json. Untracked Article updater files and generated seo-ops directories were left unstaged and out of scope."
+      },
+      "github": {
+        "status": "pass",
+        "head_sha": "95bd7dc4e8bb2c93a04691e264336b0f85c839a0",
+        "checks": [
+          "hygiene",
+          "supply-chain",
+          "content-pack-build-validate",
+          "verify-mbti-legacy",
+          "verify-mbti-v2",
+          "verify-bigfive",
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "Semgrep OSS"
+        ],
+        "evidence": "PR #2074 GitHub checks passed at head 95bd7dc4 and mergeStateStatus was CLEAN."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": "95bd7dc4e8bb2c93a04691e264336b0f85c839a0",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2074",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-13T23:35:00+08:00",
+        "status": "in_progress",
+        "note": "Initialized from explicit fap-api manifest/state authorization and started the scoped backend content coverage contract."
+      },
+      {
+        "at": "2026-06-13T23:58:00+08:00",
+        "status": "local_checks_passed",
+        "note": "Implemented and validated backend personality detail coverage contract. Validation included focused and full PersonalityPublicApiTest, Personality filter, Pint, route list, sqlite migrate, ci_verify_mbti, JSON/YAML parse, git diff check, and scope validation."
+      },
+      {
+        "at": "2026-06-14T00:05:00+08:00",
+        "status": "pr_open_github_checks_pending",
+        "note": "Pushed commit 1b09124c and opened PR #2074; GitHub checks are pending."
+      },
+      {
+        "at": "2026-06-14T00:12:00+08:00",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed for PR #2074 at head 95bd7dc4 and mergeStateStatus was CLEAN; recording ready_to_merge before merge."
       }
     ]
   }
