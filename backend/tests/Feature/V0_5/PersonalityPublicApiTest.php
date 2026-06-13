@@ -505,7 +505,7 @@ final class PersonalityPublicApiTest extends TestCase
             ->assertJsonPath('meta.twitter.image', null);
     }
 
-    public function test_seo_endpoint_returns_locale_aware_meta_and_jsonld(): void
+    public function test_personality_seo_title_metadata_returns_search_intent_meta_and_jsonld(): void
     {
         config(['app.frontend_url' => 'https://staging.fermatmind.com']);
 
@@ -537,8 +537,8 @@ final class PersonalityPublicApiTest extends TestCase
             'published_at' => now()->subMinute(),
         ]);
         $this->createVariantSeoMeta($enVariant, [
-            'seo_title' => 'INTJ-A Personality Type: Traits, Careers, and Growth | FermatMind',
-            'seo_description' => 'Explore INTJ-A traits, strengths, blind spots, work style, relationships, and growth advice.',
+            'seo_title' => 'INTJ-A Architect Personality: Traits, Careers, Love & Rarity',
+            'seo_description' => 'Explore INTJ-A Architect traits, A/T differences, strengths, blind spots, relationships, career fit, rarity, and how to confirm your type with an MBTI test.',
             'canonical_url' => 'https://staging.fermatmind.com/en/personality/intj-a',
             'jsonld_overrides_json' => [
                 'mainEntityOfPage' => 'https://staging.fermatmind.com/en/personality/intj-a',
@@ -573,8 +573,8 @@ final class PersonalityPublicApiTest extends TestCase
             'published_at' => now()->subMinute(),
         ]);
         $this->createVariantSeoMeta($zhVariant, [
-            'seo_title' => 'INTJ-T 人格类型：特质、职业与成长 | FermatMind',
-            'seo_description' => '探索 INTJ-T 的特质、优势、关系模式与成长建议。',
+            'seo_title' => 'INTJ-T 建筑师人格：特点、适合职业、爱情与稀有度',
+            'seo_description' => '了解 INTJ-T 建筑师人格的 A/T 区别、核心特点、爱情关系、适合职业、优势盲点、稀有度，并通过 MBTI 测试确认自己的类型。',
             'canonical_url' => 'https://staging.fermatmind.com/zh/personality/intj-t',
             'jsonld_overrides_json' => [
                 'mainEntityOfPage' => 'https://staging.fermatmind.com/zh/personality/intj-t',
@@ -583,8 +583,8 @@ final class PersonalityPublicApiTest extends TestCase
 
         $enResponse = $this->getJson('/api/v0.5/personality/intj-a/seo?locale=en');
         $enResponse->assertOk()
-            ->assertJsonPath('meta.title', 'INTJ-A Personality Type: Traits, Careers, and Growth | FermatMind')
-            ->assertJsonPath('meta.description', 'Explore INTJ-A traits, strengths, blind spots, work style, relationships, and growth advice.')
+            ->assertJsonPath('meta.title', 'INTJ-A Architect Personality: Traits, Careers, Love & Rarity')
+            ->assertJsonPath('meta.description', 'Explore INTJ-A Architect traits, A/T differences, strengths, blind spots, relationships, career fit, rarity, and how to confirm your type with an MBTI test.')
             ->assertJsonPath('meta.canonical', 'https://staging.fermatmind.com/en/personality/intj-a')
             ->assertJsonPath('seo_surface_v1.metadata_contract_version', 'seo.surface.v1')
             ->assertJsonPath('seo_surface_v1.surface_type', 'mbti_personality_public_detail')
@@ -599,8 +599,8 @@ final class PersonalityPublicApiTest extends TestCase
 
         $zhResponse = $this->getJson('/api/v0.5/personality/intj-t/seo?locale=zh-CN');
         $zhResponse->assertOk()
-            ->assertJsonPath('meta.title', 'INTJ-T 人格类型：特质、职业与成长 | FermatMind')
-            ->assertJsonPath('meta.description', '探索 INTJ-T 的特质、优势、关系模式与成长建议。')
+            ->assertJsonPath('meta.title', 'INTJ-T 建筑师人格：特点、适合职业、爱情与稀有度')
+            ->assertJsonPath('meta.description', '了解 INTJ-T 建筑师人格的 A/T 区别、核心特点、爱情关系、适合职业、优势盲点、稀有度，并通过 MBTI 测试确认自己的类型。')
             ->assertJsonPath('meta.canonical', 'https://staging.fermatmind.com/zh/personality/intj-t')
             ->assertJsonPath('seo_surface_v1.metadata_contract_version', 'seo.surface.v1')
             ->assertJsonPath('meta.alternates.en', 'https://staging.fermatmind.com/en/personality/intj-t')
@@ -722,6 +722,7 @@ final class PersonalityPublicApiTest extends TestCase
             ->assertExitCode(0);
 
         $checkedRoutes = [];
+        $seoTitlesByLocale = [];
 
         foreach (['en', 'zh-CN'] as $locale) {
             $directory = $this->getJson(sprintf(
@@ -746,6 +747,29 @@ final class PersonalityPublicApiTest extends TestCase
                 $detail->assertOk()
                     ->assertJsonPath('profile.type_code', (string) ($item['base_type_code'] ?? ''))
                     ->assertJsonPath('mbti_public_projection_v1.runtime_type_code', $runtimeTypeCode);
+
+                $profileTypeName = (string) $detail->json('profile.type_name');
+                $expectedSeoTitle = $this->expectedSearchIntentSeoTitle($locale, $runtimeTypeCode, $profileTypeName);
+                $expectedSeoDescription = $this->expectedSearchIntentSeoDescription($locale, $runtimeTypeCode, $profileTypeName);
+
+                $detail->assertJsonPath('seo_meta.seo_title', $expectedSeoTitle)
+                    ->assertJsonPath('seo_meta.seo_description', $expectedSeoDescription)
+                    ->assertJsonPath('mbti_public_projection_v1.seo.title', $expectedSeoTitle)
+                    ->assertJsonPath('mbti_public_projection_v1.seo.description', $expectedSeoDescription);
+                self::assertStringContainsString($runtimeTypeCode, $expectedSeoTitle);
+                self::assertStringContainsString($runtimeTypeCode, $expectedSeoDescription);
+                self::assertStringContainsString($profileTypeName, $expectedSeoTitle);
+                self::assertStringContainsString($profileTypeName, $expectedSeoDescription);
+                self::assertStringContainsString('A/T', $expectedSeoDescription);
+                $localeSeoTokens = $locale === 'zh-CN'
+                    ? ['特点', '适合职业', '爱情', '稀有度', 'MBTI 测试']
+                    : ['Traits', 'Careers', 'Love', 'Rarity', 'MBTI test'];
+                foreach ($localeSeoTokens as $seoToken) {
+                    self::assertStringContainsString($seoToken, $expectedSeoTitle.' '.$expectedSeoDescription);
+                }
+                self::assertStringNotContainsString('Personality Type: Traits, Careers, and Growth', $expectedSeoTitle);
+                self::assertStringNotContainsString('人格类型：特质、职业与成长', $expectedSeoTitle);
+                $seoTitlesByLocale[$locale][] = $expectedSeoTitle;
 
                 $sections = $detail->json('sections');
                 self::assertIsArray($sections, $runtimeTypeCode.' sections should be an array.');
@@ -845,6 +869,36 @@ final class PersonalityPublicApiTest extends TestCase
 
         self::assertCount(64, $checkedRoutes);
         self::assertContains('zh-CN:entj-t', $checkedRoutes);
+        foreach ($seoTitlesByLocale as $locale => $titles) {
+            self::assertCount(32, $titles, $locale.' should expose 32 variant SEO titles.');
+            self::assertSame(
+                $titles,
+                array_values(array_unique($titles)),
+                $locale.' variant SEO titles should be unique and not template-collapsed.',
+            );
+        }
+    }
+
+    private function expectedSearchIntentSeoTitle(string $locale, string $runtimeTypeCode, string $typeName): string
+    {
+        $typeLabel = trim($runtimeTypeCode.' '.$typeName);
+
+        if ($locale === 'zh-CN') {
+            return $typeLabel.'人格：特点、适合职业、爱情与稀有度';
+        }
+
+        return $typeLabel.' Personality: Traits, Careers, Love & Rarity';
+    }
+
+    private function expectedSearchIntentSeoDescription(string $locale, string $runtimeTypeCode, string $typeName): string
+    {
+        $typeLabel = trim($runtimeTypeCode.' '.$typeName);
+
+        if ($locale === 'zh-CN') {
+            return '了解 '.$typeLabel.'人格的 A/T 区别、核心特点、爱情关系、适合职业、优势盲点、稀有度，并通过 MBTI 测试确认自己的类型。';
+        }
+
+        return 'Explore '.$typeLabel.' traits, A/T differences, strengths, blind spots, relationships, career fit, rarity, and how to confirm your type with an MBTI test.';
     }
 
     private function expectedAtDifferenceTitle(string $locale, string $runtimeTypeCode): string

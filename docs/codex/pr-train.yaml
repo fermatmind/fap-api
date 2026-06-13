@@ -23958,6 +23958,53 @@ prs:
     content_authority: backend
     next_task: PERSONALITY-SEO-TITLE-METADATA-01 after the fap-web consumer portion is merged
 
+  - id: PERSONALITY-SEO-TITLE-METADATA-01
+    repo: fap-api
+    depends_on:
+      - PERSONALITY-DETAIL-FAQ-SEO-01
+    branch: codex/personality-seo-title-metadata-01
+    title: "PERSONALITY-SEO-TITLE-METADATA-01: feat(personality): add search-intent metadata authority"
+    train_scope: personality_seo
+    status: user_authorized
+    scope:
+      - Refresh backend-authored MBTI A/T detail SEO title and description generation around search intent for traits, careers, relationships, A/T difference, and rarity.
+      - Add committed baseline seo_overrides for all 64 MBTI A/T detail pages so baseline imports carry backend metadata authority.
+      - Keep public personality detail API and seo_surface_v1 backed by backend SEO meta fields without frontend-authored fallback metadata.
+      - Add contracts preventing empty, duplicate, or overly generic A/T metadata.
+    allowed_paths:
+      - backend/app/Services/Cms/MbtiPersonalityVariantSeoMetadataService.php
+      - backend/tests/Feature/Console/PersonalityRefreshMbtiVariantSeoMetadataCommandTest.php
+      - backend/tests/Feature/V0_5/PersonalityPublicApiTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - content_baselines/personality/mbti.en.json
+      - content_baselines/personality/mbti.zh-CN.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify fap-web.
+      - Add comparison pages, sitemap changes, llms changes, FAQ changes, A/T difference sections, or frontend metadata fallback copy.
+      - Mutate production CMS data, publish state, or deploy.
+      - Move personality SEO authority into frontend code.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/Console/PersonalityRefreshMbtiVariantSeoMetadataCommandTest.php --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_5/PersonalityPublicApiTest.php --filter personality_seo_title_metadata --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_5/PersonalityPublicApiTest.php --filter committed_baseline_covers --no-ansi
+      - cd backend && ./vendor/bin/pint --test app/Services/Cms/MbtiPersonalityVariantSeoMetadataService.php tests/Feature/Console/PersonalityRefreshMbtiVariantSeoMetadataCommandTest.php tests/Feature/V0_5/PersonalityPublicApiTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - python3 -m json.tool content_baselines/personality/mbti.en.json >/dev/null
+      - python3 -m json.tool content_baselines/personality/mbti.zh-CN.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+    next_task: PERSONALITY-SEO-TITLE-METADATA-01 fap-web consumer after this backend PR is merged
+
   - id: ARTICLE-H1-02
     repo: fap-api
     depends_on:
