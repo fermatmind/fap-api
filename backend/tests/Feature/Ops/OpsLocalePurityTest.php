@@ -16,6 +16,7 @@ use App\Filament\Ops\Widgets\CommerceKpiWidget;
 use App\Filament\Ops\Widgets\FunnelWidget;
 use App\Filament\Ops\Widgets\HealthzStatusWidget;
 use App\Filament\Ops\Widgets\QueueFailureWidget;
+use App\Filament\Ops\Widgets\TestKpiSummaryWidget;
 use App\Filament\Ops\Widgets\WebhookFailureWidget;
 use Tests\TestCase;
 
@@ -30,6 +31,7 @@ final class OpsLocalePurityTest extends TestCase
         $this->assertSame('运行稳定性', $this->widgetHeading(QueueFailureWidget::class));
         $this->assertSame('Webhook 监控', $this->widgetHeading(WebhookFailureWidget::class));
         $this->assertSame('7 天漏斗快照', $this->widgetHeading(FunnelWidget::class));
+        $this->assertSame('测试量总览', $this->widgetHeading(TestKpiSummaryWidget::class));
 
         $this->assertSame('文章', ArticleResource::getNavigationLabel());
         $this->assertSame('职业指南', CareerGuideResource::getNavigationLabel());
@@ -51,6 +53,7 @@ final class OpsLocalePurityTest extends TestCase
         app()->setLocale('en');
 
         $this->assertSame('Commerce Overview', $this->widgetHeading(CommerceKpiWidget::class));
+        $this->assertSame('Test KPI Overview', $this->widgetHeading(TestKpiSummaryWidget::class));
         $this->assertSame('Articles', ArticleResource::getNavigationLabel());
         $this->assertSame('Career Guides', CareerGuideResource::getNavigationLabel());
         $this->assertSame('Career Jobs', CareerJobResource::getNavigationLabel());
