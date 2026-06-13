@@ -175,8 +175,11 @@ final class SeoIntelSearchChannelBoundedLiveExecutorTest extends TestCase
         Http::assertSent(function (Request $request): bool {
             $query = [];
             parse_str((string) parse_url($request->url(), PHP_URL_QUERY), $query);
+            $rawQuery = (string) parse_url($request->url(), PHP_URL_QUERY);
 
             return parse_url($request->url(), PHP_URL_HOST) === 'data.zz.baidu.test'
+                && str_contains($rawQuery, 'site=https://fermatmind.com&token=')
+                && ! str_contains($rawQuery, 'site=https%3A%2F%2Ffermatmind.com')
                 && $query['site'] === 'https://fermatmind.com'
                 && $query['token'] === 'secret-baidu-token'
                 && $request->body() === 'https://fermatmind.com/zh/articles/career-confusion-test-map';
