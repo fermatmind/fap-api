@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-14T00:05:00+08:00",
+  "updated_at": "2026-06-14T00:12:00+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -48100,7 +48100,7 @@
     "repo": "fap-api",
     "branch": "codex/daily-giving-redacted-public-proof-01",
     "base": "main",
-    "status": "pr_open_github_checks_pending",
+    "status": "ready_to_merge",
     "train_scope": "window_7_public_benefit_trust_gate",
     "title": "docs(benefit): gate DailyGiving redacted public proof",
     "depends_on": [
@@ -54316,13 +54316,24 @@
         "evidence": "Branch diff is confined to backend/tests/Feature/V0_5/PersonalityPublicApiTest.php, docs/codex/pr-train.yaml, and docs/codex/pr-train-state.json. Untracked Article updater files and generated seo-ops directories were left unstaged and out of scope."
       },
       "github": {
-        "status": "pending",
-        "head_sha": "1b09124c67f238e4f70d0c942f07ffc7988e757d",
-        "evidence": "PR #2074 opened after local checks passed; waiting for GitHub checks."
+        "status": "pass",
+        "head_sha": "95bd7dc4e8bb2c93a04691e264336b0f85c839a0",
+        "checks": [
+          "hygiene",
+          "supply-chain",
+          "content-pack-build-validate",
+          "verify-mbti-legacy",
+          "verify-mbti-v2",
+          "verify-bigfive",
+          "Semgrep blocking secrets",
+          "semgrep sarif non-blocking upload",
+          "Semgrep OSS"
+        ],
+        "evidence": "PR #2074 GitHub checks passed at head 95bd7dc4 and mergeStateStatus was CLEAN."
       }
     },
     "failure_reason": null,
-    "commit_sha": "1b09124c67f238e4f70d0c942f07ffc7988e757d",
+    "commit_sha": "95bd7dc4e8bb2c93a04691e264336b0f85c839a0",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2074",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -54342,6 +54353,11 @@
         "at": "2026-06-14T00:05:00+08:00",
         "status": "pr_open_github_checks_pending",
         "note": "Pushed commit 1b09124c and opened PR #2074; GitHub checks are pending."
+      },
+      {
+        "at": "2026-06-14T00:12:00+08:00",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed for PR #2074 at head 95bd7dc4 and mergeStateStatus was CLEAN; recording ready_to_merge before merge."
       }
     ]
   }
