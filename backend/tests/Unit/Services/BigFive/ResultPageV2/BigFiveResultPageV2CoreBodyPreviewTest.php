@@ -280,6 +280,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_mbti_personality_detail_faq_section_files(): void
+    {
+        $changed = [
+            'backend/app/Support/Mbti/MbtiCanonicalSectionRegistry.php',
+            'backend/app/Services/Mbti/Adapters/MbtiPersonalityProfileAuthoritySourceAdapter.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_mbti_personality_english_variant_section_enrichment_files(): void
     {
         $changed = [

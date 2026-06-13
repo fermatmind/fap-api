@@ -54608,5 +54608,76 @@
         "note": "PR #2078 was squash-merged as 1069eafd5a43dbf20f86b4f2558ce8be8b780c1d; remote branch deletion was verified and local task branch cleanup was executed from detached origin/main because main is held by another worktree."
       }
     ]
+  },
+  "PERSONALITY-DETAIL-FAQ-SEO-01": {
+    "repo": "fap-api",
+    "branch": "codex/personality-detail-faq-seo-01-backend",
+    "base": "origin/main",
+    "status": "local_checks_passed",
+    "train_scope": "personality_seo",
+    "title": "PERSONALITY-DETAIL-FAQ-SEO-01: feat(personality): add backend FAQ content contract",
+    "depends_on": [
+      "PERSONALITY-AT-DIFFERENCE-SECTIONS-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User authorized continuing execution after being told the fap-api manifest/state entry was required for PERSONALITY-DETAIL-FAQ-SEO-01."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "PERSONALITY-AT-DIFFERENCE-SECTIONS-01 is recorded merged in fap-api PR #2078 with merge commit 1069eafd5a43dbf20f86b4f2558ce8be8b780c1d."
+      },
+      "scope": {
+        "status": "pass",
+        "evidence": "Changed files are confined to backend MBTI canonical registry, backend personality API contract tests, committed MBTI personality baselines, Big Five runtime-freeze classifier coverage, and docs/codex PR-train metadata. No fap-web, sitemap, llms, title metadata, comparison page, production CMS mutation, or publish-state mutation is in scope."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_5/PersonalityPublicApiTest.php --filter committed_baseline_covers --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_5/PersonalityPublicApiTest.php --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Support/Mbti/MbtiCanonicalSectionRegistryTest.php --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter mbti_personality_detail_faq --no-ansi",
+          "cd backend && ./vendor/bin/pint --test app/Support/Mbti/MbtiCanonicalSectionRegistry.php app/Http/Controllers/API/V0_5/Cms/PersonalityController.php app/Services/Mbti/Adapters/MbtiPersonalityProfileAuthoritySourceAdapter.php tests/Feature/V0_5/PersonalityPublicApiTest.php tests/Unit/Support/Mbti/MbtiCanonicalSectionRegistryTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan route:list --path=api/v0.5/personality --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-api-personality-detail-faq.sqlite php artisan migrate --force --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter Personality --no-ansi",
+          "cd backend && bash -lc 'rm -f /tmp/fap-ci.sqlite /tmp/fap-ci.sqlite-* && bash scripts/ci_verify_mbti.sh'",
+          "python3 -m json.tool content_baselines/personality/mbti.en.json >/dev/null",
+          "python3 -m json.tool content_baselines/personality/mbti.zh-CN.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "git diff --check"
+        ],
+        "evidence": "Focused FAQ baseline contract passed with 1870 assertions; full PersonalityPublicApiTest passed with 2044 assertions; registry test passed with 38 assertions; targeted Big Five FAQ classifier test passed; Pint passed; route:list showed 6 personality routes; sqlite migrate passed; php artisan test --filter Personality passed with 92 tests / 6849 assertions; JSON/YAML/diff checks passed. Required full ci_verify_mbti.sh initially failed late in AuthGuestRouteWiringTest with SQLite `database disk image is malformed` for /tmp/fap-ci.sqlite; after removing /tmp/fap-ci.sqlite and rebasing onto latest origin/main, rerun `cd backend && bash -lc 'rm -f /tmp/fap-ci.sqlite /tmp/fap-ci.sqlite-* && bash scripts/ci_verify_mbti.sh'` passed through schema baseline runtime introspection, Big5 ops controller layering, legacy service request coupling, constructor injection, env usage, events dedupe explain, share flow alignment, dependency security, webhook/attempt regression, queue backlog, and cleanup gates."
+      },
+      "github": {
+        "status": "pending"
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-14T01:51:00+08:00",
+        "status": "in_progress",
+        "note": "Initialized from explicit continuation authorization and started backend-only FAQ content contract implementation."
+      },
+      {
+        "at": "2026-06-14T02:01:00+08:00",
+        "status": "local_checks_failed",
+        "note": "Implementation and focused checks passed, but required full ci_verify_mbti.sh failed late in AuthGuestRouteWiringTest with sqlite database disk image malformed for /tmp/fap-ci.sqlite. Stopped before commit, push, or PR creation."
+      },
+      {
+        "at": "2026-06-14T02:37:32+08:00",
+        "status": "local_checks_passed",
+        "note": "Rebased onto latest origin/main, removed /tmp/fap-ci.sqlite, reran the required full ci_verify_mbti.sh gate successfully, and restored generated Big Five compiled artifacts outside this PR scope."
+      }
+    ]
   }
 }

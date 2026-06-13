@@ -22,6 +22,7 @@ final class MbtiCanonicalSectionRegistryTest extends TestCase
         $this->assertArrayHasKey('career.work_experiments', $definitions);
         $this->assertArrayHasKey('career.next_step', $definitions);
         $this->assertArrayHasKey('traits.at_difference', $definitions);
+        $this->assertArrayHasKey('faq', $definitions);
         $this->assertArrayHasKey('traits.why_this_type', $definitions);
         $this->assertArrayHasKey('traits.close_call_axes', $definitions);
         $this->assertArrayHasKey('traits.adjacent_type_contrast', $definitions);
@@ -40,6 +41,10 @@ final class MbtiCanonicalSectionRegistryTest extends TestCase
         $this->assertSame(
             MbtiCanonicalSectionRegistry::RENDER_VARIANT_PREFERRED_ROLE_LIST,
             $definitions['career.preferred_roles']['render_variant']
+        );
+        $this->assertSame(
+            MbtiCanonicalSectionRegistry::RENDER_VARIANT_FAQ,
+            $definitions['faq']['render_variant']
         );
     }
 

@@ -22,6 +22,8 @@ final class MbtiCanonicalSectionRegistry
 
     public const RENDER_VARIANT_PREFERRED_ROLE_LIST = 'preferred_role_list';
 
+    public const RENDER_VARIANT_FAQ = 'faq';
+
     public const RENDER_VARIANT_PREMIUM_TEASER = 'premium_teaser';
 
     /**
@@ -85,6 +87,19 @@ final class MbtiCanonicalSectionRegistry
                 'description' => 'Backend-authored module explaining how the Assertive and Turbulent variants differ for the same MBTI base type.',
                 'sort_order' => 31,
                 'enabled' => true,
+            ],
+            'faq' => [
+                'bucket' => self::BUCKET_SECTIONS,
+                'render_variant' => self::RENDER_VARIANT_FAQ,
+                'group' => 'seo',
+                'label' => 'Visible FAQ',
+                'title' => 'Frequently asked questions',
+                'description' => 'Backend-authored visible FAQ items for public MBTI personality detail pages.',
+                'sort_order' => 90,
+                'enabled' => true,
+                'payload_schema' => [
+                    'items' => 'list<faq_item:{key,question,answer}>',
+                ],
             ],
             'traits.why_this_type' => [
                 'bucket' => self::BUCKET_SECTIONS,
