@@ -2561,7 +2561,9 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $changed = [
             'backend/app/Filament/Ops/Pages/OpsDashboard.php',
             'backend/app/Filament/Ops/Support/OpsMetricsAccess.php',
+            'backend/app/Filament/Ops/Widgets/TestKpiDailyInlineWidget.php',
             'backend/app/Filament/Ops/Widgets/TestKpiSummaryWidget.php',
+            'backend/resources/views/filament/ops/widgets/test-kpi-daily-inline-widget.blade.php',
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
@@ -5334,8 +5336,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Filament/Ops/Pages/OpsDashboard.php',
             'backend/app/Filament/Ops/Support/OpsMetricsAccess.php',
             'backend/app/Filament/Ops/Pages/TestKpiDailyPage.php',
+            'backend/app/Filament/Ops/Widgets/TestKpiDailyInlineWidget.php',
             'backend/app/Filament/Ops/Widgets/TestKpiSummaryWidget.php',
             'backend/resources/views/filament/ops/pages/test-kpi-daily-page.blade.php',
+            'backend/resources/views/filament/ops/widgets/test-kpi-daily-inline-widget.blade.php',
         ], true);
     }
 
