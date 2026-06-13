@@ -398,10 +398,7 @@ final class SearchChannelQueueBoundedLiveExecutor
         $endpoint = (string) config('seo_intel.search_channel_queue.live_submission.baidu.endpoint');
         $site = (string) config('seo_intel.search_channel_queue.live_submission.baidu.site');
         $token = (string) config('seo_intel.search_channel_queue.live_submission.baidu.token');
-        $endpointWithQuery = $endpoint.'?'.http_build_query([
-            'site' => $site,
-            'token' => $token,
-        ]);
+        $endpointWithQuery = $endpoint.'?site='.$site.'&token='.rawurlencode($token);
 
         try {
             $response = Http::timeout(max(1, (int) config('seo_intel.search_channel_queue.live_submission.baidu.timeout_seconds', 10)))
