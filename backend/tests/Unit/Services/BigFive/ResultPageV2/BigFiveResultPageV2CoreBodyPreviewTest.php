@@ -1797,11 +1797,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         $changed = [
             'backend/app/Console/Commands/ArticlePublishControlled.php',
+            'backend/app/Console/Commands/ArticlePromoteExistingWorkingRevisionControlled.php',
             'backend/app/Console/Kernel.php',
         ];
         $kernelChangedLines = [
             '+use App\\Console\\Commands\\ArticlePublishControlled;',
+            '+use App\\Console\\Commands\\ArticlePromoteExistingWorkingRevisionControlled;',
             '+        ArticlePublishControlled::class,',
+            '+        ArticlePromoteExistingWorkingRevisionControlled::class,',
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
@@ -4509,6 +4512,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return in_array($file, [
             'backend/app/Console/Commands/ArticlePublishControlled.php',
+            'backend/app/Console/Commands/ArticlePromoteExistingWorkingRevisionControlled.php',
             'backend/app/Services/Cms/ArticlePublishService.php',
         ], true);
     }
@@ -5793,7 +5797,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 return false;
             }
 
-            if (preg_match('/\bArticlePublishControlled\b/u', $line) !== 1) {
+            if (preg_match('/\b(ArticlePublishControlled|ArticlePromoteExistingWorkingRevisionControlled)\b/u', $line) !== 1) {
                 return false;
             }
         }
