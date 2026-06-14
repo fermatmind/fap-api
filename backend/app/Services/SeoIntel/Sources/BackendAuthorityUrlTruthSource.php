@@ -148,6 +148,7 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
                 ],
                 attributes: [
                     'source_authority' => 'backend_cms',
+                    'claim_safe' => true,
                     'article_id_hash' => hash('sha256', (string) $article->id),
                     'translation_group_hash' => hash('sha256', (string) $article->translation_group_id),
                 ],

@@ -23,7 +23,7 @@ final class SeoIntelUrlTruthHandoffCommand extends Command
         {--confirm-artifact-sha256= : Required SHA256 confirmation for write mode}
         {--json : Output safe machine-readable JSON}';
 
-    protected $description = 'Export or validate bounded Research URL Truth handoff artifacts without cross-cloud direct writes.';
+    protected $description = 'Export or validate bounded URL Truth handoff artifacts without cross-cloud direct writes.';
 
     public function handle(UrlTruthHandoffArtifact $artifact): int
     {
@@ -43,23 +43,23 @@ final class SeoIntelUrlTruthHandoffCommand extends Command
             ]);
         }
 
-        if ($pageType !== ResearchReport::PAGE_ENTITY_TYPE) {
+        if (! $artifact->supportsPageEntityType($pageType)) {
             return $this->finish([
                 'status' => 'blocked',
-                'issues' => ['only_research_report_page_type_supported'],
+                'issues' => ['unsupported_page_entity_type'],
                 'dry_run' => true,
                 'writes_committed' => false,
-            ]);
+            ], $pageType);
         }
 
         if ($exportPath !== null) {
-            return $this->export($artifact, $exportPath, $limit);
+            return $this->export($artifact, $exportPath, $limit, $pageType);
         }
 
-        return $this->import($artifact, (string) $importPath, $limit, $dryRun, $write);
+        return $this->import($artifact, (string) $importPath, $limit, $dryRun, $write, $pageType);
     }
 
-    private function export(UrlTruthHandoffArtifact $artifact, string $path, int $limit): int
+    private function export(UrlTruthHandoffArtifact $artifact, string $path, int $limit, string $pageType): int
     {
         $pathSafetyIssue = $artifact->artifactPathSafetyIssue($path, forWrite: true);
         if ($pathSafetyIssue !== null) {
@@ -69,13 +69,13 @@ final class SeoIntelUrlTruthHandoffCommand extends Command
                 'issues' => [$pathSafetyIssue],
                 'dry_run' => true,
                 'writes_committed' => false,
-            ]);
+            ], $pageType);
         }
 
         $source = new BackendAuthorityUrlTruthSource;
         $records = array_values(array_filter(
             $source->candidates(),
-            static fn (UrlTruthInventoryRecord $record): bool => $record->pageEntityType === ResearchReport::PAGE_ENTITY_TYPE
+            static fn (UrlTruthInventoryRecord $record): bool => $record->pageEntityType === $pageType
                 && $record->sourceAuthority === UrlTruthHandoffArtifact::SOURCE_AUTHORITY
         ));
 
@@ -84,8 +84,8 @@ final class SeoIntelUrlTruthHandoffCommand extends Command
             $b->canonicalUrlHash(),
         ));
 
-        $payload = $artifact->fromRecords($records, $source->metadata(), $limit);
-        $validation = $artifact->validate($payload, $limit);
+        $payload = $artifact->fromRecords($records, $source->metadata(), $limit, $pageType);
+        $validation = $artifact->validate($payload, $limit, $pageType);
 
         if ($validation['status'] === 'blocked') {
             return $this->finish([
@@ -94,7 +94,7 @@ final class SeoIntelUrlTruthHandoffCommand extends Command
                 'issues' => $validation['issues'],
                 'dry_run' => true,
                 'writes_committed' => false,
-            ]);
+            ], $pageType);
         }
 
         $artifact->writeJson($path, $payload);
@@ -114,10 +114,10 @@ final class SeoIntelUrlTruthHandoffCommand extends Command
             'search_url_submission' => false,
             'crawler_log_read' => false,
             'issues' => [],
-        ]);
+        ], $pageType);
     }
 
-    private function import(UrlTruthHandoffArtifact $artifact, string $path, int $limit, bool $dryRun, bool $write): int
+    private function import(UrlTruthHandoffArtifact $artifact, string $path, int $limit, bool $dryRun, bool $write, string $pageType): int
     {
         $pathSafetyIssue = $artifact->artifactPathSafetyIssue($path, forWrite: false);
         if ($pathSafetyIssue !== null) {
@@ -128,7 +128,7 @@ final class SeoIntelUrlTruthHandoffCommand extends Command
                 'dry_run' => true,
                 'writes_committed' => false,
                 'target_tables' => ['seo_urls', 'seo_url_entities'],
-            ]);
+            ], $pageType);
         }
 
         if (! is_file($path)) {
@@ -138,12 +138,12 @@ final class SeoIntelUrlTruthHandoffCommand extends Command
                 'issues' => ['handoff_artifact_missing'],
                 'dry_run' => true,
                 'writes_committed' => false,
-            ]);
+            ], $pageType);
         }
 
         $sha256 = $artifact->sha256($path);
         $payload = $artifact->readJson($path);
-        $validation = $artifact->validate($payload, $limit);
+        $validation = $artifact->validate($payload, $limit, $pageType);
 
         if ($validation['status'] === 'blocked') {
             return $this->finish([
@@ -154,7 +154,7 @@ final class SeoIntelUrlTruthHandoffCommand extends Command
                 'dry_run' => true,
                 'writes_committed' => false,
                 'target_tables' => ['seo_urls', 'seo_url_entities'],
-            ]);
+            ], $pageType);
         }
 
         if ($write && $dryRun) {
@@ -166,7 +166,7 @@ final class SeoIntelUrlTruthHandoffCommand extends Command
                 'dry_run' => true,
                 'writes_committed' => false,
                 'target_tables' => ['seo_urls', 'seo_url_entities'],
-            ]);
+            ], $pageType);
         }
 
         if (! $write) {
@@ -184,7 +184,7 @@ final class SeoIntelUrlTruthHandoffCommand extends Command
                 'search_url_submission' => false,
                 'crawler_log_read' => false,
                 'issues' => [],
-            ]);
+            ], $pageType);
         }
 
         if ($validation['records'] === []) {
@@ -196,7 +196,7 @@ final class SeoIntelUrlTruthHandoffCommand extends Command
                 'dry_run' => false,
                 'writes_committed' => false,
                 'target_tables' => ['seo_urls', 'seo_url_entities'],
-            ]);
+            ], $pageType);
         }
 
         $confirmation = $this->stringOption($this->option('confirm-artifact-sha256'));
@@ -209,7 +209,7 @@ final class SeoIntelUrlTruthHandoffCommand extends Command
                 'dry_run' => false,
                 'writes_committed' => false,
                 'target_tables' => ['seo_urls', 'seo_url_entities'],
-            ]);
+            ], $pageType);
         }
 
         if (! (bool) config('seo_intel.enabled', false) || ! (bool) config('seo_intel.write_enabled', false)) {
@@ -221,7 +221,7 @@ final class SeoIntelUrlTruthHandoffCommand extends Command
                 'dry_run' => false,
                 'writes_committed' => false,
                 'target_tables' => ['seo_urls', 'seo_url_entities'],
-            ]);
+            ], $pageType);
         }
 
         $written = (new UrlTruthInventoryRecordWriter)->write($validation['records']);
@@ -241,18 +241,18 @@ final class SeoIntelUrlTruthHandoffCommand extends Command
             'search_url_submission' => false,
             'crawler_log_read' => false,
             'issues' => [],
-        ]);
+        ], $pageType);
     }
 
     /**
      * @param  array<string, mixed>  $payload
      */
-    private function finish(array $payload): int
+    private function finish(array $payload, ?string $pageType = null): int
     {
         $output = [
             'task' => 'SEO-INTEL-TWO-STAGE-URL-TRUTH-HANDOFF-PR-00',
             'collector' => UrlTruthHandoffArtifact::COLLECTOR,
-            'page_entity_type' => UrlTruthHandoffArtifact::PAGE_ENTITY_TYPE,
+            'page_entity_type' => $pageType ?? UrlTruthHandoffArtifact::PAGE_ENTITY_TYPE,
             'source_authority' => UrlTruthHandoffArtifact::SOURCE_AUTHORITY,
             'target_tables' => ['seo_urls', 'seo_url_entities'],
             'external_api_calls' => false,
