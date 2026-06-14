@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Feature\SeoIntel;
 
+use App\Models\Article;
+use App\Models\ArticleSeoMeta;
+use App\Models\ArticleTranslationRevision;
 use App\Models\ResearchReport;
 use App\Services\SeoIntel\UrlTruthHandoffArtifact;
 use App\Services\SeoIntel\UrlTruthInventoryRecord;
@@ -39,7 +42,7 @@ final class SeoIntelTwoStageUrlTruthHandoffTest extends TestCase
         ]);
         $exportOutput = json_decode(trim(Artisan::output()), true);
 
-        $this->assertSame(0, $exportExitCode);
+        $this->assertSame(0, $exportExitCode, json_encode($exportOutput, JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR));
         $this->assertSame('success', $exportOutput['status'] ?? null);
         $this->assertTrue((bool) ($exportOutput['dry_run'] ?? false));
         $this->assertFalse((bool) ($exportOutput['writes_committed'] ?? true));
@@ -66,6 +69,79 @@ final class SeoIntelTwoStageUrlTruthHandoffTest extends TestCase
         $this->assertSame('import_dry_run', $importOutput['mode'] ?? null);
         $this->assertSame(1, $importOutput['planned_url_count'] ?? null);
         $this->assertFalse((bool) ($importOutput['writes_committed'] ?? true));
+    }
+
+    #[Test]
+    public function command_exports_and_validates_article_handoff_artifact_without_writes_or_search_submission(): void
+    {
+        config([
+            'app.frontend_url' => 'https://www.fermatmind.com',
+            'seo_intel.public_canonical_host' => 'https://fermatmind.com',
+        ]);
+
+        $article = $this->createPublishedArticle([
+            'slug' => 'mbti-basics',
+            'locale' => 'zh-CN',
+            'title' => 'MBTI 基础指南',
+        ]);
+
+        ArticleSeoMeta::query()->create([
+            'org_id' => 0,
+            'article_id' => $article->id,
+            'locale' => 'zh-CN',
+            'canonical_url' => 'https://fermatmind.com/zh/articles/mbti-basics',
+            'is_indexable' => true,
+        ]);
+
+        $path = sys_get_temp_dir().'/article-url-truth-handoff-'.bin2hex(random_bytes(4)).'.json';
+
+        $exportExitCode = Artisan::call('seo-intel:url-truth-handoff', [
+            '--export' => $path,
+            '--dry-run' => true,
+            '--json' => true,
+            '--limit' => 20,
+            '--page-type' => 'article',
+        ]);
+        $exportOutput = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(0, $exportExitCode, json_encode($exportOutput, JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR));
+        $this->assertSame('success', $exportOutput['status'] ?? null);
+        $this->assertSame('article', $exportOutput['page_entity_type'] ?? null);
+        $this->assertTrue((bool) ($exportOutput['dry_run'] ?? false));
+        $this->assertFalse((bool) ($exportOutput['writes_committed'] ?? true));
+        $this->assertFalse((bool) ($exportOutput['external_api_calls'] ?? true));
+        $this->assertFalse((bool) ($exportOutput['search_url_submission'] ?? true));
+        $this->assertSame(1, $exportOutput['planned_url_count'] ?? null);
+        $this->assertFileExists($path);
+
+        $artifact = json_decode((string) file_get_contents($path), true);
+        $this->assertSame(UrlTruthHandoffArtifact::SCHEMA_VERSION, $artifact['schema_version'] ?? null);
+        $this->assertSame('two_stage_article_url_truth_handoff', $artifact['mode'] ?? null);
+        $this->assertSame('article', data_get($artifact, 'constraints.allowed_page_entity_type'));
+        $this->assertSame('^/(en|zh)/articles/[a-z0-9][a-z0-9-]*$', data_get($artifact, 'constraints.allowed_route_regex'));
+        $this->assertSame('article', data_get($artifact, 'candidates.0.page_entity_type'));
+        $this->assertSame('backend_cms', data_get($artifact, 'candidates.0.source_authority'));
+        $this->assertSame('articles', data_get($artifact, 'candidates.0.entity_source'));
+        $this->assertSame((string) $article->id, data_get($artifact, 'candidates.0.entity_id_or_slug'));
+        $this->assertSame('/zh/articles/mbti-basics', parse_url((string) data_get($artifact, 'candidates.0.canonical_url'), PHP_URL_PATH));
+
+        $importExitCode = Artisan::call('seo-intel:url-truth-handoff', [
+            '--import' => $path,
+            '--dry-run' => true,
+            '--json' => true,
+            '--limit' => 20,
+            '--page-type' => 'article',
+        ]);
+        $importOutput = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(0, $importExitCode);
+        $this->assertSame('success', $importOutput['status'] ?? null);
+        $this->assertSame('article', $importOutput['page_entity_type'] ?? null);
+        $this->assertSame('import_dry_run', $importOutput['mode'] ?? null);
+        $this->assertSame(1, $importOutput['planned_url_count'] ?? null);
+        $this->assertFalse((bool) ($importOutput['writes_committed'] ?? true));
+        $this->assertFalse((bool) ($importOutput['external_api_calls'] ?? true));
+        $this->assertFalse((bool) ($importOutput['search_url_submission'] ?? true));
     }
 
     #[Test]
@@ -161,6 +237,81 @@ final class SeoIntelTwoStageUrlTruthHandoffTest extends TestCase
         $this->assertContains('candidate_claim_unsafe:0', $output['issues'] ?? []);
         $this->assertContains('candidate_route_not_research:0', $output['issues'] ?? []);
         $this->assertFalse((bool) ($output['writes_committed'] ?? true));
+    }
+
+    #[Test]
+    public function import_validation_rejects_wrong_article_source_route_or_entity_identity(): void
+    {
+        $artifact = new UrlTruthHandoffArtifact;
+        $payload = $artifact->fromRecords([
+            new UrlTruthInventoryRecord(
+                canonicalUrl: 'https://www.fermatmind.com/zh/research/mbti-basics',
+                locale: 'zh-CN',
+                pageEntityType: 'article',
+                entityIdOrSlug: '8',
+                sourceAuthority: 'backend_cms',
+                indexabilityState: 'indexable',
+                lastmodAt: now()->subHour(),
+                lastmodSource: 'articles.updated_at',
+                cluster: 'articles',
+                entitySource: 'research_reports',
+                authorityStatus: 'published_approved',
+                sourceUpdatedAt: now()->subHour(),
+                isPrivateFlow: false,
+                metadata: [
+                    'source_table_hash' => hash('sha256', 'articles'),
+                    'canonical_path_hash' => hash('sha256', '/zh/research/mbti-basics'),
+                ],
+                attributes: [
+                    'source_authority' => 'backend_cms',
+                    'claim_safe' => true,
+                ],
+            ),
+            new UrlTruthInventoryRecord(
+                canonicalUrl: 'https://www.fermatmind.com/zh/articles/big-five-tool-guide',
+                locale: 'zh-CN',
+                pageEntityType: 'article',
+                entityIdOrSlug: 'big-five-tool-guide',
+                sourceAuthority: 'backend_cms',
+                indexabilityState: 'indexable',
+                lastmodAt: now()->subHour(),
+                lastmodSource: 'articles.updated_at',
+                cluster: 'articles',
+                entitySource: 'articles',
+                authorityStatus: 'published_approved',
+                sourceUpdatedAt: now()->subHour(),
+                isPrivateFlow: false,
+                metadata: [
+                    'source_table_hash' => hash('sha256', 'articles'),
+                    'canonical_path_hash' => hash('sha256', '/zh/articles/big-five-tool-guide'),
+                ],
+                attributes: [
+                    'source_authority' => 'backend_cms',
+                    'claim_safe' => true,
+                ],
+            ),
+        ], pageEntityType: 'article');
+
+        $path = sys_get_temp_dir().'/invalid-article-url-truth-handoff-'.bin2hex(random_bytes(4)).'.json';
+        $artifact->writeJson($path, $payload);
+
+        $exitCode = Artisan::call('seo-intel:url-truth-handoff', [
+            '--import' => $path,
+            '--dry-run' => true,
+            '--json' => true,
+            '--limit' => 20,
+            '--page-type' => 'article',
+        ]);
+        $output = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('blocked', $output['status'] ?? null);
+        $this->assertContains('candidate_entity_source_not_articles:0', $output['issues'] ?? []);
+        $this->assertContains('candidate_route_not_article:0', $output['issues'] ?? []);
+        $this->assertContains('candidate_forbidden_route_fragment:/research:0', $output['issues'] ?? []);
+        $this->assertContains('candidate_article_entity_id_invalid:1', $output['issues'] ?? []);
+        $this->assertFalse((bool) ($output['writes_committed'] ?? true));
+        $this->assertFalse((bool) ($output['search_url_submission'] ?? true));
     }
 
     #[Test]
@@ -338,6 +489,57 @@ final class SeoIntelTwoStageUrlTruthHandoffTest extends TestCase
             'seo_description' => 'Safe Research Report description.',
             'canonical_path' => '/'.$localeSegment.'/research/'.$slug,
         ]);
+    }
+
+    /**
+     * @param  array<string, mixed>  $overrides
+     */
+    private function createPublishedArticle(array $overrides = []): Article
+    {
+        /** @var Article $article */
+        $article = Article::unguarded(fn (): Article => Article::query()->create($overrides + [
+            'org_id' => 0,
+            'slug' => 'safe-article',
+            'locale' => 'en',
+            'translation_group_id' => 'article-test-group',
+            'translation_status' => Article::TRANSLATION_STATUS_SOURCE,
+            'title' => 'Safe Article',
+            'excerpt' => 'Safe article excerpt.',
+            'content_md' => 'Safe article body.',
+            'content_html' => '<p>Safe article body.</p>',
+            'status' => 'published',
+            'lifecycle_state' => Article::LIFECYCLE_ACTIVE,
+            'is_public' => true,
+            'is_indexable' => true,
+            'sitemap_eligible' => true,
+            'llms_eligible' => true,
+            'published_at' => now()->subHour(),
+        ]));
+
+        /** @var ArticleTranslationRevision $revision */
+        $revision = ArticleTranslationRevision::query()->create([
+            'org_id' => 0,
+            'article_id' => $article->id,
+            'source_article_id' => null,
+            'locale' => $article->locale,
+            'source_locale' => $article->locale,
+            'translation_group_id' => $article->translation_group_id,
+            'revision_number' => 1,
+            'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
+            'title' => $article->title,
+            'excerpt' => $article->excerpt,
+            'content_md' => $article->content_md,
+            'source_version_hash' => $article->source_version_hash,
+            'published_at' => now()->subHour(),
+            'created_by' => null,
+        ]);
+
+        $article->forceFill([
+            'published_revision_id' => $revision->id,
+            'working_revision_id' => $revision->id,
+        ])->save();
+
+        return $article->refresh();
     }
 
     private function prepareSeoIntelSqliteConnection(): void

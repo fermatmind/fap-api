@@ -2,7 +2,7 @@
 
 ## Decision
 
-`SEO-INTEL-TWO-STAGE-URL-TRUTH-HANDOFF-PR-00` defines a controlled handoff path for Research URL Truth observation while `fap-api` production and the verified `seo_intel` RDS remain split across clouds.
+`SEO-INTEL-TWO-STAGE-URL-TRUTH-HANDOFF-PR-00` defines a controlled handoff path for backend-authoritative URL Truth observation while `fap-api` production and the verified `seo_intel` RDS remain split across clouds.
 
 The current MVP policy is:
 
@@ -27,6 +27,17 @@ php artisan seo-intel:url-truth-handoff \
   --page-type=research_report
 ```
 
+For published CMS articles, use the same no-write handoff path with `page-type=article`:
+
+```bash
+php artisan seo-intel:url-truth-handoff \
+  --export=/secure/path/article-url-truth-handoff.json \
+  --dry-run \
+  --json \
+  --limit=20 \
+  --page-type=article
+```
+
 The export is candidate-only. It does not write to `seo_intel`, does not call external search APIs, does not read crawler logs, and does not submit URLs.
 
 The artifact path must be an absolute `.json` path in an existing non-symlink directory. Export refuses to overwrite an existing file or symlink.
@@ -40,10 +51,22 @@ php artisan seo-intel:url-truth-handoff \
   --import=/secure/path/research-url-truth-handoff.json \
   --dry-run \
   --json \
+  --page-type=research_report \
   --limit=20
 ```
 
-Validation is fail-closed. The artifact is accepted only when every candidate is:
+For article artifacts:
+
+```bash
+php artisan seo-intel:url-truth-handoff \
+  --import=/secure/path/article-url-truth-handoff.json \
+  --dry-run \
+  --json \
+  --page-type=article \
+  --limit=20
+```
+
+Validation is fail-closed. Research artifacts are accepted only when every candidate is:
 
 - `page_entity_type = research_report`
 - `source_authority = backend_cms`
@@ -55,6 +78,20 @@ Validation is fail-closed. The artifact is accepted only when every candidate is
 - routed under `/en/research/{slug}` or `/zh/research/{slug}`
 
 Validation rejects `/articles`, `/reports`, stale `turnover-rate-report` slugs, draft/private/noindex/claim-unsafe candidates, and sensitive metadata keys.
+
+Article artifacts are accepted only when every candidate is:
+
+- `page_entity_type = article`
+- `source_authority = backend_cms`
+- `entity_source = articles`
+- `authority_status = published_approved`
+- `indexability_state = indexable`
+- non-private
+- claim-safe
+- routed under `/en/articles/{slug}` or `/zh/articles/{slug}`
+- backed by a numeric article entity id from backend CMS authority
+
+Article validation rejects `/research`, `/reports`, stale `turnover-rate-report` slugs, draft/private/noindex/claim-unsafe candidates, and sensitive metadata keys.
 
 Import validates artifact path safety before reading. It accepts only regular `.json` files under an existing non-symlink directory and rejects stream wrappers, relative paths, missing files, symlinks, and oversized artifacts.
 
@@ -70,6 +107,7 @@ php artisan seo-intel:url-truth-handoff \
   --write \
   --confirm-artifact-sha256=<artifact_sha256> \
   --json \
+  --page-type=research_report \
   --limit=20
 ```
 

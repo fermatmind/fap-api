@@ -16,30 +16,71 @@ final class UrlTruthHandoffArtifact
 
     public const PAGE_ENTITY_TYPE = 'research_report';
 
+    public const ARTICLE_PAGE_ENTITY_TYPE = 'article';
+
     public const SOURCE_AUTHORITY = 'backend_cms';
+
+    /**
+     * @var array<string, array{
+     *     mode:string,
+     *     route_regex:string,
+     *     entity_source:string,
+     *     route_fragment:string,
+     *     forbidden_route_fragments:list<string>,
+     *     type_issue:string,
+     *     entity_source_issue:string,
+     *     route_issue:string,
+     *     entity_identity_issue:string
+     * }>
+     */
+    private const PAGE_TYPE_POLICIES = [
+        self::PAGE_ENTITY_TYPE => [
+            'mode' => 'two_stage_research_report_url_truth_handoff',
+            'route_regex' => '^/(en|zh)/research/[a-z0-9][a-z0-9-]*$',
+            'entity_source' => 'research_reports',
+            'route_fragment' => '/research/',
+            'forbidden_route_fragments' => ['/articles', '/reports', 'turnover-rate-report'],
+            'type_issue' => 'candidate_not_research_report',
+            'entity_source_issue' => 'candidate_entity_source_not_research_reports',
+            'route_issue' => 'candidate_route_not_research',
+            'entity_identity_issue' => 'candidate_research_path_slug_mismatch',
+        ],
+        self::ARTICLE_PAGE_ENTITY_TYPE => [
+            'mode' => 'two_stage_article_url_truth_handoff',
+            'route_regex' => '^/(en|zh)/articles/[a-z0-9][a-z0-9-]*$',
+            'entity_source' => 'articles',
+            'route_fragment' => '/articles/',
+            'forbidden_route_fragments' => ['/research', '/reports', 'turnover-rate-report'],
+            'type_issue' => 'candidate_not_article',
+            'entity_source_issue' => 'candidate_entity_source_not_articles',
+            'route_issue' => 'candidate_route_not_article',
+            'entity_identity_issue' => 'candidate_article_entity_id_invalid',
+        ],
+    ];
 
     /**
      * @param  list<UrlTruthInventoryRecord>  $records
      * @param  array<string, mixed>  $sourceMetadata
      * @return array<string, mixed>
      */
-    public function fromRecords(array $records, array $sourceMetadata = [], ?int $limit = null): array
+    public function fromRecords(array $records, array $sourceMetadata = [], ?int $limit = null, string $pageEntityType = self::PAGE_ENTITY_TYPE): array
     {
+        $policy = $this->policyFor($pageEntityType);
         $boundedRecords = $limit === null ? $records : array_slice($records, 0, max(0, $limit));
 
         return [
             'schema_version' => self::SCHEMA_VERSION,
             'collector' => self::COLLECTOR,
-            'mode' => 'two_stage_research_report_url_truth_handoff',
+            'mode' => $policy['mode'],
             'generated_at' => now()->toIso8601String(),
             'dry_run_required_on_source' => true,
             'source_environment_role' => 'candidate_export_only',
             'runner_environment_role' => 'validate_then_bounded_write_only',
             'constraints' => [
-                'allowed_page_entity_type' => self::PAGE_ENTITY_TYPE,
+                'allowed_page_entity_type' => $pageEntityType,
                 'allowed_source_authority' => self::SOURCE_AUTHORITY,
-                'allowed_route_regex' => '^/(en|zh)/research/[a-z0-9][a-z0-9-]*$',
-                'forbidden_route_fragments' => ['/articles', '/reports', 'turnover-rate-report'],
+                'allowed_route_regex' => $policy['route_regex'],
+                'forbidden_route_fragments' => $policy['forbidden_route_fragments'],
                 'forbidden_states' => ['private', 'draft', 'noindex', 'claim_unsafe'],
                 'target_tables' => ['seo_urls', 'seo_url_entities'],
                 'no_external_api' => true,
@@ -57,10 +98,22 @@ final class UrlTruthHandoffArtifact
      * @param  array<string, mixed>  $artifact
      * @return array{status:string, issues:list<string>, records:list<UrlTruthInventoryRecord>, metadata:array<string, mixed>}
      */
-    public function validate(array $artifact, ?int $limit = null): array
+    public function validate(array $artifact, ?int $limit = null, ?string $expectedPageEntityType = null): array
     {
         $issues = [];
         $records = [];
+        $pageEntityType = (string) data_get($artifact, 'constraints.allowed_page_entity_type', self::PAGE_ENTITY_TYPE);
+
+        if ($expectedPageEntityType !== null && $expectedPageEntityType !== $pageEntityType) {
+            $issues[] = 'artifact_page_entity_type_mismatch';
+        }
+
+        if (! $this->supportsPageEntityType($pageEntityType)) {
+            $issues[] = 'unsupported_page_entity_type';
+            $pageEntityType = self::PAGE_ENTITY_TYPE;
+        }
+
+        $policy = $this->policyFor($pageEntityType);
 
         if (($artifact['schema_version'] ?? null) !== self::SCHEMA_VERSION) {
             $issues[] = 'invalid_schema_version';
@@ -72,6 +125,18 @@ final class UrlTruthHandoffArtifact
 
         if (($artifact['target_tables'] ?? null) !== ['seo_urls', 'seo_url_entities']) {
             $issues[] = 'invalid_target_tables';
+        }
+
+        if (data_get($artifact, 'constraints.allowed_page_entity_type') !== $pageEntityType) {
+            $issues[] = 'invalid_allowed_page_entity_type';
+        }
+
+        if (data_get($artifact, 'constraints.allowed_source_authority') !== self::SOURCE_AUTHORITY) {
+            $issues[] = 'invalid_allowed_source_authority';
+        }
+
+        if (data_get($artifact, 'constraints.allowed_route_regex') !== $policy['route_regex']) {
+            $issues[] = 'invalid_allowed_route_regex';
         }
 
         foreach (['no_external_api', 'no_search_submission', 'no_crawler_log_read'] as $flag) {
@@ -95,7 +160,7 @@ final class UrlTruthHandoffArtifact
                 continue;
             }
 
-            $recordIssues = $this->validateCandidate($candidate, $index);
+            $recordIssues = $this->validateCandidate($candidate, $index, $pageEntityType, $policy);
             if ($recordIssues !== []) {
                 array_push($issues, ...$recordIssues);
 
@@ -113,7 +178,7 @@ final class UrlTruthHandoffArtifact
                 'planned_url_count' => count($records),
                 'planned_entity_count' => count($records),
                 'target_tables' => ['seo_urls', 'seo_url_entities'],
-                'page_entity_type' => self::PAGE_ENTITY_TYPE,
+                'page_entity_type' => $pageEntityType,
                 'source_authority' => self::SOURCE_AUTHORITY,
                 'limit' => $limit,
             ],
@@ -243,9 +308,20 @@ final class UrlTruthHandoffArtifact
 
     /**
      * @param  array<string, mixed>  $candidate
+     * @param  array{
+     *     mode:string,
+     *     route_regex:string,
+     *     entity_source:string,
+     *     route_fragment:string,
+     *     forbidden_route_fragments:list<string>,
+     *     type_issue:string,
+     *     entity_source_issue:string,
+     *     route_issue:string,
+     *     entity_identity_issue:string
+     * }  $policy
      * @return list<string>
      */
-    private function validateCandidate(array $candidate, int $index): array
+    private function validateCandidate(array $candidate, int $index, string $pageEntityType, array $policy): array
     {
         $issues = [];
         $url = (string) ($candidate['canonical_url'] ?? '');
@@ -253,19 +329,19 @@ final class UrlTruthHandoffArtifact
         $host = Str::lower((string) parse_url($url, PHP_URL_HOST));
         $path = (string) (parse_url($url, PHP_URL_PATH) ?: '');
         $pathLocale = Str::before(Str::after($path, '/'), '/');
-        $pathSlug = Str::after($path, '/research/');
+        $pathSlug = Str::after($path, $policy['route_fragment']);
         $locale = (string) ($candidate['locale'] ?? '');
 
-        if (($candidate['page_entity_type'] ?? null) !== self::PAGE_ENTITY_TYPE) {
-            $issues[] = 'candidate_not_research_report:'.$index;
+        if (($candidate['page_entity_type'] ?? null) !== $pageEntityType) {
+            $issues[] = $policy['type_issue'].':'.$index;
         }
 
         if (($candidate['source_authority'] ?? null) !== self::SOURCE_AUTHORITY) {
             $issues[] = 'candidate_source_authority_not_backend_cms:'.$index;
         }
 
-        if (($candidate['entity_source'] ?? null) !== 'research_reports') {
-            $issues[] = 'candidate_entity_source_not_research_reports:'.$index;
+        if (($candidate['entity_source'] ?? null) !== $policy['entity_source']) {
+            $issues[] = $policy['entity_source_issue'].':'.$index;
         }
 
         if (($candidate['authority_status'] ?? null) !== 'published_approved') {
@@ -284,16 +360,16 @@ final class UrlTruthHandoffArtifact
             $issues[] = 'candidate_claim_unsafe:'.$index;
         }
 
-        if (! preg_match('#^/(en|zh)/research/[a-z0-9][a-z0-9-]*$#', $path)) {
-            $issues[] = 'candidate_route_not_research:'.$index;
+        if (! preg_match('#'.$policy['route_regex'].'#', $path)) {
+            $issues[] = $policy['route_issue'].':'.$index;
         }
 
         if ($scheme !== 'https' || ! in_array($host, $this->trustedTenantHosts(), true)) {
             $issues[] = 'candidate_untrusted_tenant_host:'.$index;
         }
 
-        if ($pathSlug === '' || ($candidate['entity_id_or_slug'] ?? null) !== $pathSlug) {
-            $issues[] = 'candidate_research_path_slug_mismatch:'.$index;
+        if ($this->entityIdentityInvalid($candidate, $pageEntityType, $pathSlug)) {
+            $issues[] = $policy['entity_identity_issue'].':'.$index;
         }
 
         $canonicalPathHash = data_get($candidate, 'metadata.canonical_path_hash');
@@ -301,7 +377,7 @@ final class UrlTruthHandoffArtifact
             $issues[] = 'candidate_canonical_path_hash_mismatch:'.$index;
         }
 
-        foreach (['/articles', '/reports', 'turnover-rate-report'] as $fragment) {
+        foreach ($policy['forbidden_route_fragments'] as $fragment) {
             if (str_contains($path, $fragment)) {
                 $issues[] = 'candidate_forbidden_route_fragment:'.$fragment.':'.$index;
             }
@@ -332,6 +408,59 @@ final class UrlTruthHandoffArtifact
         }
 
         return $issues;
+    }
+
+    /**
+     * @return list<string>
+     */
+    public function supportedPageEntityTypes(): array
+    {
+        return array_keys(self::PAGE_TYPE_POLICIES);
+    }
+
+    public function supportsPageEntityType(string $pageEntityType): bool
+    {
+        return array_key_exists($pageEntityType, self::PAGE_TYPE_POLICIES);
+    }
+
+    /**
+     * @return array{
+     *     mode:string,
+     *     route_regex:string,
+     *     entity_source:string,
+     *     route_fragment:string,
+     *     forbidden_route_fragments:list<string>,
+     *     type_issue:string,
+     *     entity_source_issue:string,
+     *     route_issue:string,
+     *     entity_identity_issue:string
+     * }
+     */
+    private function policyFor(string $pageEntityType): array
+    {
+        if (! $this->supportsPageEntityType($pageEntityType)) {
+            throw new InvalidArgumentException('unsupported_page_entity_type');
+        }
+
+        return self::PAGE_TYPE_POLICIES[$pageEntityType];
+    }
+
+    /**
+     * @param  array<string, mixed>  $candidate
+     */
+    private function entityIdentityInvalid(array $candidate, string $pageEntityType, string $pathSlug): bool
+    {
+        $entityIdOrSlug = (string) ($candidate['entity_id_or_slug'] ?? '');
+
+        if ($pageEntityType === self::PAGE_ENTITY_TYPE) {
+            return $pathSlug === '' || $entityIdOrSlug !== $pathSlug;
+        }
+
+        if ($pageEntityType === self::ARTICLE_PAGE_ENTITY_TYPE) {
+            return $entityIdOrSlug === '' || ! ctype_digit($entityIdOrSlug);
+        }
+
+        return true;
     }
 
     /**
