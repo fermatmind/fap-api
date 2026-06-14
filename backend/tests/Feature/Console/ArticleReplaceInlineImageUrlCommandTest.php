@@ -95,6 +95,9 @@ final class ArticleReplaceInlineImageUrlCommandTest extends TestCase
             $this->assertSame($this->bodyWithImage(self::NEW_URL, (string) $fresh->locale), (string) $fresh->content_md);
             $this->assertSame($this->bodyWithImage(self::NEW_URL, (string) $fresh->locale), (string) $fresh->workingRevision?->content_md);
             $this->assertSame($this->bodyWithImage(self::NEW_URL, (string) $fresh->locale), (string) $fresh->publishedRevision?->content_md);
+            $this->assertSame($payload['after'][array_search((int) $article->id, array_column($payload['after'], 'article_id'), true)]['source_version_hash'], (string) $fresh->source_version_hash);
+            $this->assertSame((string) $fresh->source_version_hash, (string) $fresh->workingRevision?->source_version_hash);
+            $this->assertSame((string) $fresh->source_version_hash, (string) $fresh->publishedRevision?->source_version_hash);
             $this->assertSame($before[(int) $article->id], $this->protectedSnapshot($fresh));
         }
     }
