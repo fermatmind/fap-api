@@ -328,9 +328,11 @@ final class ArticleInlineImageUrlReplacer
         /** @var Article $article */
         $article = $plan['article'];
         $contentMd = (string) $plan['replacement_content_md'];
+        $sourceVersionHash = (string) data_get($plan, 'after.source_version_hash');
 
         $article->forceFill([
             'content_md' => $contentMd,
+            'source_version_hash' => $sourceVersionHash,
         ])->saveQuietly();
         $article->refresh();
 
@@ -345,7 +347,7 @@ final class ArticleInlineImageUrlReplacer
             ->whereIn('id', $revisionIds)
             ->update([
                 'content_md' => $contentMd,
-                'source_version_hash' => $article->source_version_hash,
+                'source_version_hash' => $sourceVersionHash,
                 'translated_from_version_hash' => $article->translated_from_version_hash,
             ]);
     }

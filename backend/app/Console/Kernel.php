@@ -15,6 +15,7 @@ use App\Console\Commands\ArticleSeoGateRollout;
 use App\Console\Commands\ArticleTaxonomyHygiene;
 use App\Console\Commands\ArticleUpdateExistingSeoContentPackage;
 use App\Console\Commands\ArticleUpdateImageMetadata;
+use App\Console\Commands\ArticleUpdateTranslationGroupId;
 use App\Console\Commands\Big5AttemptPurge;
 // ✅ 显式注册（更稳，避免自动扫描失效/缓存导致找不到）
 use App\Console\Commands\Big5PsychometricsReport;
@@ -351,6 +352,7 @@ class Kernel extends ConsoleKernel
         ArticleReplaceInlineImageUrl::class,
         ArticleSeoGateRollout::class,
         ArticleTaxonomyHygiene::class,
+        ArticleUpdateTranslationGroupId::class,
         ArticleUpdateImageMetadata::class,
         MediaAssetsImportSeoImageBundle::class,
         SeoIntelUrlTruthHandoffCommand::class,
