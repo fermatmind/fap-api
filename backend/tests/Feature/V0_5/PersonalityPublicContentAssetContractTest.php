@@ -116,8 +116,20 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
 
         $this->assertSame(34, $renderCandidates->count());
         $this->assertSame(60, $facetStubs->count());
+        $this->assertTrue($assets->every(fn (array $asset): bool => $asset['robots'] === PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW));
+        $this->assertTrue($assets->every(fn (array $asset): bool => $asset['index_eligible'] === false && $asset['sitemap_eligible'] === false && $asset['llms_eligible'] === false));
         $this->assertTrue($renderCandidates->every(fn (array $asset): bool => $asset['robots'] === PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW));
         $this->assertTrue($renderCandidates->every(fn (array $asset): bool => $asset['index_eligible'] === false && $asset['sitemap_eligible'] === false && $asset['llms_eligible'] === false));
+        $this->assertTrue($renderCandidates->every(fn (array $asset): bool => count($asset['sections'] ?? []) >= 10));
+        $this->assertTrue($renderCandidates->every(fn (array $asset): bool => count($asset['faq'] ?? []) >= 5));
+        $this->assertTrue($renderCandidates->every(fn (array $asset): bool => count($asset['internal_links'] ?? []) >= 5));
+        $this->assertTrue($renderCandidates->every(function (array $asset): bool {
+            $canonicalPath = (string) data_get($asset, 'canonical.path', '');
+
+            return $asset['locale'] === 'zh-CN'
+                ? str_starts_with($canonicalPath, '/zh/personality/big-five')
+                : str_starts_with($canonicalPath, '/en/personality/big-five');
+        }));
         $this->assertTrue($facetStubs->every(fn (array $asset): bool => $asset['launch_state'] === PersonalityPublicContentAsset::LAUNCH_CONTENT_STUB));
         $this->assertTrue($facetStubs->every(fn (array $asset): bool => $asset['robots'] === PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW));
         $this->assertTrue($facetStubs->every(fn (array $asset): bool => $asset['index_eligible'] === false && $asset['sitemap_eligible'] === false && $asset['llms_eligible'] === false));
@@ -125,6 +137,25 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
         $enCodes = $renderCandidates->where('locale', 'en')->pluck('code')->sort()->values()->all();
         $zhCodes = $renderCandidates->where('locale', 'zh-CN')->pluck('code')->sort()->values()->all();
         $this->assertSame($enCodes, $zhCodes);
+
+        $serializedSeed = strtolower((string) json_encode($assets->all(), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+        foreach ([
+            'score',
+            'percentile',
+            'result id',
+            'report engine',
+            'payload',
+            '你这次结果',
+            '当前画像',
+            'facet anomaly rules',
+            '32 ocean',
+            'ocean 32',
+            '32型人格',
+            '32 型人格',
+            '官方32',
+        ] as $forbiddenTerm) {
+            $this->assertStringNotContainsString($forbiddenTerm, $serializedSeed);
+        }
     }
 
     public function test_import_dry_run_validates_enneagram_placeholder_seed_without_writing(): void
