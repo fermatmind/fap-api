@@ -127,6 +127,129 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
         $this->assertSame($enCodes, $zhCodes);
     }
 
+    public function test_import_dry_run_validates_enneagram_placeholder_seed_without_writing(): void
+    {
+        $this->artisan('personality-public-assets:import', [
+            '--source' => 'content_assets/personality_public/enneagram_v1_placeholder_seed.json',
+            '--framework' => ['enneagram'],
+        ])
+            ->expectsOutputToContain('dry_run=1')
+            ->expectsOutputToContain('assets_found=26')
+            ->expectsOutputToContain('valid_count=26')
+            ->expectsOutputToContain('errors_count=0')
+            ->expectsOutputToContain('indexable_count=0')
+            ->expectsOutputToContain('sitemap_eligible_count=0')
+            ->expectsOutputToContain('llms_eligible_count=0')
+            ->assertExitCode(0);
+
+        $this->assertSame(0, PersonalityPublicContentAsset::query()->count());
+    }
+
+    public function test_enneagram_placeholder_write_import_is_idempotent_and_exposes_v1_candidates(): void
+    {
+        $this->artisan('personality-public-assets:import', [
+            '--source' => 'content_assets/personality_public/enneagram_v1_placeholder_seed.json',
+            '--framework' => ['enneagram'],
+            '--write' => true,
+        ])
+            ->expectsOutputToContain('dry_run=0')
+            ->expectsOutputToContain('will_create=26')
+            ->expectsOutputToContain('indexable_count=0')
+            ->expectsOutputToContain('sitemap_eligible_count=0')
+            ->expectsOutputToContain('llms_eligible_count=0')
+            ->assertExitCode(0);
+
+        $this->assertSame(26, PersonalityPublicContentAsset::query()->count());
+
+        $this->artisan('personality-public-assets:import', [
+            '--source' => 'content_assets/personality_public/enneagram_v1_placeholder_seed.json',
+            '--framework' => ['enneagram'],
+            '--write' => true,
+        ])
+            ->expectsOutputToContain('will_skip=26')
+            ->assertExitCode(0);
+
+        $this->getJson('/api/v0.5/personality-content-assets?framework=enneagram&locale=en')
+            ->assertOk()
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('pagination.total', 13)
+            ->assertJsonCount(13, 'items')
+            ->assertJsonPath('items.0.index_eligible', false)
+            ->assertJsonPath('items.0.sitemap_eligible', false)
+            ->assertJsonPath('items.0.llms_eligible', false)
+            ->assertJsonPath('items.0.robots', PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW);
+
+        $this->getJson('/api/v0.5/personality-content-assets?framework=enneagram&locale=zh-CN')
+            ->assertOk()
+            ->assertJsonPath('pagination.total', 13)
+            ->assertJsonCount(13, 'items');
+
+        $this->getJson('/api/v0.5/personality-content-assets?framework=enneagram&locale=en&entity_type=center')
+            ->assertOk()
+            ->assertJsonPath('pagination.total', 3)
+            ->assertJsonCount(3, 'items');
+
+        $this->getJson('/api/v0.5/personality-content-assets/enneagram/hub/enneagram?locale=en')
+            ->assertOk()
+            ->assertJsonPath('personality_public_content_asset_v1.framework', 'enneagram')
+            ->assertJsonPath('personality_public_content_asset_v1.entity_type', PersonalityPublicContentAsset::ENTITY_HUB)
+            ->assertJsonPath('personality_public_content_asset_v1.code', 'enneagram')
+            ->assertJsonPath('personality_public_content_asset_v1.launch_state', PersonalityPublicContentAsset::LAUNCH_CONTENT_READY)
+            ->assertJsonPath('personality_public_content_asset_v1.robots', PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW);
+
+        $this->getJson('/api/v0.5/personality-content-assets/enneagram/center/gut?locale=en')
+            ->assertOk()
+            ->assertJsonPath('personality_public_content_asset_v1.code', 'gut')
+            ->assertJsonPath('personality_public_content_asset_v1.entity_type', PersonalityPublicContentAsset::ENTITY_CENTER);
+
+        $this->getJson('/api/v0.5/personality-content-assets/enneagram/core_type/type-1?locale=zh-CN')
+            ->assertOk()
+            ->assertJsonPath('personality_public_content_asset_v1.code', 'type-1')
+            ->assertJsonPath('personality_public_content_asset_v1.entity_type', PersonalityPublicContentAsset::ENTITY_CORE_TYPE);
+
+        $this->getJson('/api/v0.5/personality-content-assets/enneagram/wing/5w4?locale=en')
+            ->assertNotFound();
+
+        $this->getJson('/api/v0.5/personality-content-assets/enneagram/instinctual_subtype/type-2/self-preservation?locale=en')
+            ->assertNotFound();
+
+        $sitemapLocs = collect(app(SitemapGenerator::class)->generateUrls())
+            ->pluck('loc')
+            ->implode("\n");
+
+        $this->assertStringNotContainsString('/personality/enneagram', $sitemapLocs);
+    }
+
+    public function test_enneagram_placeholder_seed_has_expected_counts_parity_and_indexability(): void
+    {
+        $payload = json_decode((string) file_get_contents(base_path('content_assets/personality_public/enneagram_v1_placeholder_seed.json')), true);
+        $assets = collect(is_array($payload['assets'] ?? null) ? $payload['assets'] : []);
+
+        $this->assertSame(26, $assets->count());
+        $this->assertSame(['en' => 13, 'zh-CN' => 13], $assets->countBy('locale')->sortKeys()->all());
+        $this->assertSame([
+            'center' => 6,
+            'core_type' => 18,
+            'hub' => 2,
+        ], $assets->countBy('entity_type')->sortKeys()->all());
+
+        $this->assertSame(26, $assets->where('launch_state', PersonalityPublicContentAsset::LAUNCH_CONTENT_READY)->count());
+        $this->assertSame(0, $assets->where('entity_type', PersonalityPublicContentAsset::ENTITY_WING)->count());
+        $this->assertSame(0, $assets->where('entity_type', PersonalityPublicContentAsset::ENTITY_INSTINCTUAL_SUBTYPE)->count());
+        $this->assertTrue($assets->every(fn (array $asset): bool => $asset['framework'] === PersonalityPublicContentAsset::FRAMEWORK_ENNEAGRAM));
+        $this->assertTrue($assets->every(fn (array $asset): bool => $asset['robots'] === PersonalityPublicContentAsset::ROBOTS_NOINDEX_FOLLOW));
+        $this->assertTrue($assets->every(fn (array $asset): bool => $asset['index_eligible'] === false && $asset['sitemap_eligible'] === false && $asset['llms_eligible'] === false));
+
+        $enCodes = $assets->where('locale', 'en')->pluck('code')->sort()->values()->all();
+        $zhCodes = $assets->where('locale', 'zh-CN')->pluck('code')->sort()->values()->all();
+        $this->assertSame($enCodes, $zhCodes);
+        $this->assertContains('enneagram', $enCodes);
+        $this->assertContains('gut', $enCodes);
+        $this->assertContains('heart', $enCodes);
+        $this->assertContains('head', $enCodes);
+        $this->assertContains('type-9', $enCodes);
+    }
+
     public function test_published_indexable_asset_can_be_read_without_sitemap_or_llms_flags(): void
     {
         PersonalityPublicContentAsset::query()->create($this->assetAttributes([
