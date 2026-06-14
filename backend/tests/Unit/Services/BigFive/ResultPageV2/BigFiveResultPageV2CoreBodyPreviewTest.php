@@ -1732,6 +1732,20 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_article_translation_group_id_cleanup_command_changes(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/ArticleUpdateTranslationGroupId.php',
+            'backend/app/Console/Kernel.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\ArticleUpdateTranslationGroupId;',
+            '+        ArticleUpdateTranslationGroupId::class,',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
+    }
+
     public function test_runtime_freeze_classifier_ignores_article_body_h1_guard_changes(): void
     {
         $changed = [
@@ -3168,6 +3182,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isArticleTranslationGroupIdCleanupFile($file)) {
+                continue;
+            }
+
             if ($this->isArticleBodyH1GuardFile($file)) {
                 continue;
             }
@@ -3796,6 +3814,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsSeoImageBundleImporterOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsArticleImageMetadataUpdaterOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsArticleInlineImageUrlReplacerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsArticleTranslationGroupIdCleanupOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsDailyArticleBackendPipelineOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsControlledArticlePublishSopOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsArticleCoverPropagationSmokeOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
@@ -4140,6 +4159,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Console/Commands/ArticleReplaceInlineImageUrl.php',
             'backend/app/Services/Cms/ArticleInlineImageUrlReplacer.php',
         ], true);
+    }
+
+    private function isArticleTranslationGroupIdCleanupFile(string $file): bool
+    {
+        return $file === 'backend/app/Console/Commands/ArticleUpdateTranslationGroupId.php';
     }
 
     private function isArticleBodyH1GuardFile(string $file): bool
@@ -5775,6 +5799,32 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if (preg_match('/\bArticleReplaceInlineImageUrl\b/u', $line) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsArticleTranslationGroupIdCleanupOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            if (str_contains($line, '显式注册')) {
+                continue;
+            }
+
+            if (preg_match('/\b(MBTI|Mbti|BigFive|Big5|Prewarm|ResultPage|Report)\b/u', $line) === 1) {
+                return false;
+            }
+
+            if (preg_match('/\bArticleUpdateTranslationGroupId\b/u', $line) !== 1) {
                 return false;
             }
         }
