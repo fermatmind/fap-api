@@ -1,0 +1,2587 @@
+{
+    "package": "personality_public_enneagram_v1_placeholder_seed",
+    "contract_version": "personality_public_asset.v1",
+    "generated_at": "2026-06-14T00:00:00Z",
+    "assets": [
+        {
+            "framework": "enneagram",
+            "entity_type": "hub",
+            "code": "enneagram",
+            "entity_key": "enneagram",
+            "slug": "enneagram",
+            "locale": "en",
+            "title": "Enneagram Personality",
+            "summary": "The Enneagram describes nine personality patterns through motivation, attention, stress response, and growth themes.",
+            "seo": {
+                "title": "Enneagram Personality | FermatMind",
+                "description": "A noindex placeholder guide for the Enneagram hub, centers, and nine core types in FermatMind public personality content."
+            },
+            "robots": "noindex,follow",
+            "canonical_path": "/en/personality/enneagram",
+            "canonical": {
+                "path": "/en/personality/enneagram"
+            },
+            "hreflang": {
+                "en": "/en/personality/enneagram",
+                "zh-CN": "/zh/personality/enneagram"
+            },
+            "faq": [
+                {
+                    "question": "Is this a complete Enneagram guide?",
+                    "answer": "No. This is a noindex placeholder asset prepared for future CMS-authored public content."
+                }
+            ],
+            "media": {
+                "status": "placeholder",
+                "hero_image_asset_key": null,
+                "alt": "Enneagram Personality Enneagram placeholder"
+            },
+            "schema": {
+                "@type": "CollectionPage",
+                "about": "Enneagram personality framework placeholder"
+            },
+            "method_boundary": {
+                "summary": "Enneagram content is reflective and educational. It is not a clinical diagnosis, hiring screen, official typology credential, or deterministic identity label.",
+                "not_for": [
+                    "clinical diagnosis",
+                    "employment screening",
+                    "deterministic life decisions"
+                ]
+            },
+            "evidence_notes": [
+                {
+                    "source_type": "placeholder_boundary",
+                    "note": "Placeholder copy must remain bounded until full editorial review and source notes are complete."
+                }
+            ],
+            "internal_links": [
+                {
+                    "label": "Gut Center",
+                    "target_code": "gut",
+                    "relationship": "center",
+                    "href": "/en/personality/enneagram/centers/gut"
+                },
+                {
+                    "label": "Heart Center",
+                    "target_code": "heart",
+                    "relationship": "center",
+                    "href": "/en/personality/enneagram/centers/heart"
+                },
+                {
+                    "label": "Head Center",
+                    "target_code": "head",
+                    "relationship": "center",
+                    "href": "/en/personality/enneagram/centers/head"
+                },
+                {
+                    "label": "Type 1: The Reformer",
+                    "target_code": "type-1",
+                    "relationship": "core_type",
+                    "href": "/en/personality/enneagram/type-1"
+                },
+                {
+                    "label": "Type 2: The Helper",
+                    "target_code": "type-2",
+                    "relationship": "core_type",
+                    "href": "/en/personality/enneagram/type-2"
+                },
+                {
+                    "label": "Type 3: The Achiever",
+                    "target_code": "type-3",
+                    "relationship": "core_type",
+                    "href": "/en/personality/enneagram/type-3"
+                },
+                {
+                    "label": "Type 4: The Individualist",
+                    "target_code": "type-4",
+                    "relationship": "core_type",
+                    "href": "/en/personality/enneagram/type-4"
+                },
+                {
+                    "label": "Type 5: The Investigator",
+                    "target_code": "type-5",
+                    "relationship": "core_type",
+                    "href": "/en/personality/enneagram/type-5"
+                },
+                {
+                    "label": "Type 6: The Loyalist",
+                    "target_code": "type-6",
+                    "relationship": "core_type",
+                    "href": "/en/personality/enneagram/type-6"
+                },
+                {
+                    "label": "Type 7: The Enthusiast",
+                    "target_code": "type-7",
+                    "relationship": "core_type",
+                    "href": "/en/personality/enneagram/type-7"
+                },
+                {
+                    "label": "Type 8: The Challenger",
+                    "target_code": "type-8",
+                    "relationship": "core_type",
+                    "href": "/en/personality/enneagram/type-8"
+                },
+                {
+                    "label": "Type 9: The Peacemaker",
+                    "target_code": "type-9",
+                    "relationship": "core_type",
+                    "href": "/en/personality/enneagram/type-9"
+                },
+                {
+                    "label": "Take the Enneagram test",
+                    "target_code": "enneagram-test",
+                    "relationship": "test_cta",
+                    "href": "/en/tests/enneagram-personality-test-nine-types"
+                }
+            ],
+            "is_public": true,
+            "index_eligible": false,
+            "sitemap_eligible": false,
+            "llms_eligible": false,
+            "launch_state": "content_ready",
+            "review_state": "placeholder_ready",
+            "last_reviewed_at": "2026-06-14T00:00:00Z",
+            "sections": [
+                {
+                    "key": "overview",
+                    "title": "Placeholder overview",
+                    "body_md": "This placeholder introduces the Enneagram public content hub while full editorial content remains unpublished."
+                },
+                {
+                    "key": "structure",
+                    "title": "V1 structure",
+                    "body_md": "The V1 public asset contract covers one hub, three centers, and nine core types."
+                },
+                {
+                    "key": "method_boundary",
+                    "title": "Method boundary",
+                    "body_md": "Use the Enneagram for reflection and language, not diagnosis, employment screening, or deterministic life decisions."
+                }
+            ]
+        },
+        {
+            "framework": "enneagram",
+            "entity_type": "center",
+            "code": "gut",
+            "entity_key": "gut",
+            "slug": "enneagram/centers/gut",
+            "locale": "en",
+            "title": "Gut Center",
+            "summary": "The gut center groups types 8, 9, and 1 around boundaries, instinctive response, anger, and control themes.",
+            "seo": {
+                "title": "Gut Center | FermatMind Enneagram",
+                "description": "The gut center groups types 8, 9, and 1 around boundaries, instinctive response, anger, and control themes."
+            },
+            "robots": "noindex,follow",
+            "canonical_path": "/en/personality/enneagram/centers/gut",
+            "canonical": {
+                "path": "/en/personality/enneagram/centers/gut"
+            },
+            "hreflang": {
+                "en": "/en/personality/enneagram/centers/gut",
+                "zh-CN": "/zh/personality/enneagram/centers/gut"
+            },
+            "faq": [
+                {
+                    "question": "Is this a complete page for Gut Center?",
+                    "answer": "No. This noindex placeholder marks the CMS/API contract and will be expanded before index eligibility is enabled."
+                }
+            ],
+            "media": {
+                "status": "placeholder",
+                "hero_image_asset_key": null,
+                "alt": "Gut Center Enneagram placeholder"
+            },
+            "schema": {
+                "@type": "WebPage",
+                "about": "Enneagram personality framework placeholder"
+            },
+            "method_boundary": {
+                "summary": "Enneagram content is reflective and educational. It is not a clinical diagnosis, hiring screen, official typology credential, or deterministic identity label.",
+                "not_for": [
+                    "clinical diagnosis",
+                    "employment screening",
+                    "deterministic life decisions"
+                ]
+            },
+            "evidence_notes": [
+                {
+                    "source_type": "placeholder_boundary",
+                    "note": "Placeholder copy must remain bounded until full editorial review and source notes are complete."
+                }
+            ],
+            "internal_links": [
+                {
+                    "label": "Enneagram Personality",
+                    "target_code": "enneagram",
+                    "relationship": "hub",
+                    "href": "/en/personality/enneagram"
+                },
+                {
+                    "label": "Type 8: The Challenger",
+                    "target_code": "type-8",
+                    "relationship": "core_type",
+                    "href": "/en/personality/enneagram/type-8"
+                },
+                {
+                    "label": "Type 9: The Peacemaker",
+                    "target_code": "type-9",
+                    "relationship": "core_type",
+                    "href": "/en/personality/enneagram/type-9"
+                },
+                {
+                    "label": "Type 1: The Reformer",
+                    "target_code": "type-1",
+                    "relationship": "core_type",
+                    "href": "/en/personality/enneagram/type-1"
+                },
+                {
+                    "label": "Take the Enneagram test",
+                    "target_code": "enneagram-test",
+                    "relationship": "test_cta",
+                    "href": "/en/tests/enneagram-personality-test-nine-types"
+                }
+            ],
+            "is_public": true,
+            "index_eligible": false,
+            "sitemap_eligible": false,
+            "llms_eligible": false,
+            "launch_state": "content_ready",
+            "review_state": "placeholder_ready",
+            "last_reviewed_at": "2026-06-14T00:00:00Z",
+            "sections": [
+                {
+                    "key": "overview",
+                    "title": "Placeholder overview",
+                    "body_md": "The gut center groups types 8, 9, and 1 around boundaries, instinctive response, anger, and control themes."
+                },
+                {
+                    "key": "next_step",
+                    "title": "Future content",
+                    "body_md": "Full public body copy will be added in a separate content coverage PR."
+                },
+                {
+                    "key": "method_boundary",
+                    "title": "Method boundary",
+                    "body_md": "Enneagram content is reflective and educational. It is not a clinical diagnosis, hiring screen, official typology credential, or deterministic identity label."
+                }
+            ]
+        },
+        {
+            "framework": "enneagram",
+            "entity_type": "center",
+            "code": "heart",
+            "entity_key": "heart",
+            "slug": "enneagram/centers/heart",
+            "locale": "en",
+            "title": "Heart Center",
+            "summary": "The heart center groups types 2, 3, and 4 around image, value, identity, and being seen.",
+            "seo": {
+                "title": "Heart Center | FermatMind Enneagram",
+                "description": "The heart center groups types 2, 3, and 4 around image, value, identity, and being seen."
+            },
+            "robots": "noindex,follow",
+            "canonical_path": "/en/personality/enneagram/centers/heart",
+            "canonical": {
+                "path": "/en/personality/enneagram/centers/heart"
+            },
+            "hreflang": {
+                "en": "/en/personality/enneagram/centers/heart",
+                "zh-CN": "/zh/personality/enneagram/centers/heart"
+            },
+            "faq": [
+                {
+                    "question": "Is this a complete page for Heart Center?",
+                    "answer": "No. This noindex placeholder marks the CMS/API contract and will be expanded before index eligibility is enabled."
+                }
+            ],
+            "media": {
+                "status": "placeholder",
+                "hero_image_asset_key": null,
+                "alt": "Heart Center Enneagram placeholder"
+            },
+            "schema": {
+                "@type": "WebPage",
+                "about": "Enneagram personality framework placeholder"
+            },
+            "method_boundary": {
+                "summary": "Enneagram content is reflective and educational. It is not a clinical diagnosis, hiring screen, official typology credential, or deterministic identity label.",
+                "not_for": [
+                    "clinical diagnosis",
+                    "employment screening",
+                    "deterministic life decisions"
+                ]
+            },
+            "evidence_notes": [
+                {
+                    "source_type": "placeholder_boundary",
+                    "note": "Placeholder copy must remain bounded until full editorial review and source notes are complete."
+                }
+            ],
+            "internal_links": [
+                {
+                    "label": "Enneagram Personality",
+                    "target_code": "enneagram",
+                    "relationship": "hub",
+                    "href": "/en/personality/enneagram"
+                },
+                {
+                    "label": "Type 2: The Helper",
+                    "target_code": "type-2",
+                    "relationship": "core_type",
+                    "href": "/en/personality/enneagram/type-2"
+                },
+                {
+                    "label": "Type 3: The Achiever",
+                    "target_code": "type-3",
+                    "relationship": "core_type",
+                    "href": "/en/personality/enneagram/type-3"
+                },
+                {
+                    "label": "Type 4: The Individualist",
+                    "target_code": "type-4",
+                    "relationship": "core_type",
+                    "href": "/en/personality/enneagram/type-4"
+                },
+                {
+                    "label": "Take the Enneagram test",
+                    "target_code": "enneagram-test",
+                    "relationship": "test_cta",
+                    "href": "/en/tests/enneagram-personality-test-nine-types"
+                }
+            ],
+            "is_public": true,
+            "index_eligible": false,
+            "sitemap_eligible": false,
+            "llms_eligible": false,
+            "launch_state": "content_ready",
+            "review_state": "placeholder_ready",
+            "last_reviewed_at": "2026-06-14T00:00:00Z",
+            "sections": [
+                {
+                    "key": "overview",
+                    "title": "Placeholder overview",
+                    "body_md": "The heart center groups types 2, 3, and 4 around image, value, identity, and being seen."
+                },
+                {
+                    "key": "next_step",
+                    "title": "Future content",
+                    "body_md": "Full public body copy will be added in a separate content coverage PR."
+                },
+                {
+                    "key": "method_boundary",
+                    "title": "Method boundary",
+                    "body_md": "Enneagram content is reflective and educational. It is not a clinical diagnosis, hiring screen, official typology credential, or deterministic identity label."
+                }
+            ]
+        },
+        {
+            "framework": "enneagram",
+            "entity_type": "center",
+            "code": "head",
+            "entity_key": "head",
+            "slug": "enneagram/centers/head",
+            "locale": "en",
+            "title": "Head Center",
+            "summary": "The head center groups types 5, 6, and 7 around risk, planning, interpretation, and uncertainty.",
+            "seo": {
+                "title": "Head Center | FermatMind Enneagram",
+                "description": "The head center groups types 5, 6, and 7 around risk, planning, interpretation, and uncertainty."
+            },
+            "robots": "noindex,follow",
+            "canonical_path": "/en/personality/enneagram/centers/head",
+            "canonical": {
+                "path": "/en/personality/enneagram/centers/head"
+            },
+            "hreflang": {
+                "en": "/en/personality/enneagram/centers/head",
+                "zh-CN": "/zh/personality/enneagram/centers/head"
+            },
+            "faq": [
+                {
+                    "question": "Is this a complete page for Head Center?",
+                    "answer": "No. This noindex placeholder marks the CMS/API contract and will be expanded before index eligibility is enabled."
+                }
+            ],
+            "media": {
+                "status": "placeholder",
+                "hero_image_asset_key": null,
+                "alt": "Head Center Enneagram placeholder"
+            },
+            "schema": {
+                "@type": "WebPage",
+                "about": "Enneagram personality framework placeholder"
+            },
+            "method_boundary": {
+                "summary": "Enneagram content is reflective and educational. It is not a clinical diagnosis, hiring screen, official typology credential, or deterministic identity label.",
+                "not_for": [
+                    "clinical diagnosis",
+                    "employment screening",
+                    "deterministic life decisions"
+                ]
+            },
+            "evidence_notes": [
+                {
+                    "source_type": "placeholder_boundary",
+                    "note": "Placeholder copy must remain bounded until full editorial review and source notes are complete."
+                }
+            ],
+            "internal_links": [
+                {
+                    "label": "Enneagram Personality",
+                    "target_code": "enneagram",
+                    "relationship": "hub",
+                    "href": "/en/personality/enneagram"
+                },
+                {
+                    "label": "Type 5: The Investigator",
+                    "target_code": "type-5",
+                    "relationship": "core_type",
+                    "href": "/en/personality/enneagram/type-5"
+                },
+                {
+                    "label": "Type 6: The Loyalist",
+                    "target_code": "type-6",
+                    "relationship": "core_type",
+                    "href": "/en/personality/enneagram/type-6"
+                },
+                {
+                    "label": "Type 7: The Enthusiast",
+                    "target_code": "type-7",
+                    "relationship": "core_type",
+                    "href": "/en/personality/enneagram/type-7"
+                },
+                {
+                    "label": "Take the Enneagram test",
+                    "target_code": "enneagram-test",
+                    "relationship": "test_cta",
+                    "href": "/en/tests/enneagram-personality-test-nine-types"
+                }
+            ],
+            "is_public": true,
+            "index_eligible": false,
+            "sitemap_eligible": false,
+            "llms_eligible": false,
+            "launch_state": "content_ready",
+            "review_state": "placeholder_ready",
+            "last_reviewed_at": "2026-06-14T00:00:00Z",
+            "sections": [
+                {
+                    "key": "overview",
+                    "title": "Placeholder overview",
+                    "body_md": "The head center groups types 5, 6, and 7 around risk, planning, interpretation, and uncertainty."
+                },
+                {
+                    "key": "next_step",
+                    "title": "Future content",
+                    "body_md": "Full public body copy will be added in a separate content coverage PR."
+                },
+                {
+                    "key": "method_boundary",
+                    "title": "Method boundary",
+                    "body_md": "Enneagram content is reflective and educational. It is not a clinical diagnosis, hiring screen, official typology credential, or deterministic identity label."
+                }
+            ]
+        },
+        {
+            "framework": "enneagram",
+            "entity_type": "core_type",
+            "code": "type-1",
+            "entity_key": "type-1",
+            "slug": "enneagram/type-1",
+            "locale": "en",
+            "title": "Type 1: The Reformer",
+            "summary": "Type 1 is commonly described through improvement, standards, responsibility, and tension around what should be corrected.",
+            "seo": {
+                "title": "Type 1: The Reformer | FermatMind Enneagram",
+                "description": "Type 1 is commonly described through improvement, standards, responsibility, and tension around what should be corrected."
+            },
+            "robots": "noindex,follow",
+            "canonical_path": "/en/personality/enneagram/type-1",
+            "canonical": {
+                "path": "/en/personality/enneagram/type-1"
+            },
+            "hreflang": {
+                "en": "/en/personality/enneagram/type-1",
+                "zh-CN": "/zh/personality/enneagram/type-1"
+            },
+            "faq": [
+                {
+                    "question": "Is this a complete page for Type 1: The Reformer?",
+                    "answer": "No. This noindex placeholder marks the CMS/API contract and will be expanded before index eligibility is enabled."
+                }
+            ],
+            "media": {
+                "status": "placeholder",
+                "hero_image_asset_key": null,
+                "alt": "Type 1: The Reformer Enneagram placeholder"
+            },
+            "schema": {
+                "@type": "WebPage",
+                "about": "Enneagram personality framework placeholder"
+            },
+            "method_boundary": {
+                "summary": "Enneagram content is reflective and educational. It is not a clinical diagnosis, hiring screen, official typology credential, or deterministic identity label.",
+                "not_for": [
+                    "clinical diagnosis",
+                    "employment screening",
+                    "deterministic life decisions"
+                ]
+            },
+            "evidence_notes": [
+                {
+                    "source_type": "placeholder_boundary",
+                    "note": "Placeholder copy must remain bounded until full editorial review and source notes are complete."
+                }
+            ],
+            "internal_links": [
+                {
+                    "label": "Enneagram Personality",
+                    "target_code": "enneagram",
+                    "relationship": "hub",
+                    "href": "/en/personality/enneagram"
+                },
+                {
+                    "label": "Take the Enneagram test",
+                    "target_code": "enneagram-test",
+                    "relationship": "test_cta",
+                    "href": "/en/tests/enneagram-personality-test-nine-types"
+                }
+            ],
+            "is_public": true,
+            "index_eligible": false,
+            "sitemap_eligible": false,
+            "llms_eligible": false,
+            "launch_state": "content_ready",
+            "review_state": "placeholder_ready",
+            "last_reviewed_at": "2026-06-14T00:00:00Z",
+            "sections": [
+                {
+                    "key": "overview",
+                    "title": "Placeholder overview",
+                    "body_md": "Type 1 is commonly described through improvement, standards, responsibility, and tension around what should be corrected."
+                },
+                {
+                    "key": "next_step",
+                    "title": "Future content",
+                    "body_md": "Full public body copy will be added in a separate content coverage PR."
+                },
+                {
+                    "key": "method_boundary",
+                    "title": "Method boundary",
+                    "body_md": "Enneagram content is reflective and educational. It is not a clinical diagnosis, hiring screen, official typology credential, or deterministic identity label."
+                }
+            ]
+        },
+        {
+            "framework": "enneagram",
+            "entity_type": "core_type",
+            "code": "type-2",
+            "entity_key": "type-2",
+            "slug": "enneagram/type-2",
+            "locale": "en",
+            "title": "Type 2: The Helper",
+            "summary": "Type 2 is commonly described through helping, relational attunement, usefulness, and tension around being needed or appreciated.",
+            "seo": {
+                "title": "Type 2: The Helper | FermatMind Enneagram",
+                "description": "Type 2 is commonly described through helping, relational attunement, usefulness, and tension around being needed or appreciated."
+            },
+            "robots": "noindex,follow",
+            "canonical_path": "/en/personality/enneagram/type-2",
+            "canonical": {
+                "path": "/en/personality/enneagram/type-2"
+            },
+            "hreflang": {
+                "en": "/en/personality/enneagram/type-2",
+                "zh-CN": "/zh/personality/enneagram/type-2"
+            },
+            "faq": [
+                {
+                    "question": "Is this a complete page for Type 2: The Helper?",
+                    "answer": "No. This noindex placeholder marks the CMS/API contract and will be expanded before index eligibility is enabled."
+                }
+            ],
+            "media": {
+                "status": "placeholder",
+                "hero_image_asset_key": null,
+                "alt": "Type 2: The Helper Enneagram placeholder"
+            },
+            "schema": {
+                "@type": "WebPage",
+                "about": "Enneagram personality framework placeholder"
+            },
+            "method_boundary": {
+                "summary": "Enneagram content is reflective and educational. It is not a clinical diagnosis, hiring screen, official typology credential, or deterministic identity label.",
+                "not_for": [
+                    "clinical diagnosis",
+                    "employment screening",
+                    "deterministic life decisions"
+                ]
+            },
+            "evidence_notes": [
+                {
+                    "source_type": "placeholder_boundary",
+                    "note": "Placeholder copy must remain bounded until full editorial review and source notes are complete."
+                }
+            ],
+            "internal_links": [
+                {
+                    "label": "Enneagram Personality",
+                    "target_code": "enneagram",
+                    "relationship": "hub",
+                    "href": "/en/personality/enneagram"
+                },
+                {
+                    "label": "Take the Enneagram test",
+                    "target_code": "enneagram-test",
+                    "relationship": "test_cta",
+                    "href": "/en/tests/enneagram-personality-test-nine-types"
+                }
+            ],
+            "is_public": true,
+            "index_eligible": false,
+            "sitemap_eligible": false,
+            "llms_eligible": false,
+            "launch_state": "content_ready",
+            "review_state": "placeholder_ready",
+            "last_reviewed_at": "2026-06-14T00:00:00Z",
+            "sections": [
+                {
+                    "key": "overview",
+                    "title": "Placeholder overview",
+                    "body_md": "Type 2 is commonly described through helping, relational attunement, usefulness, and tension around being needed or appreciated."
+                },
+                {
+                    "key": "next_step",
+                    "title": "Future content",
+                    "body_md": "Full public body copy will be added in a separate content coverage PR."
+                },
+                {
+                    "key": "method_boundary",
+                    "title": "Method boundary",
+                    "body_md": "Enneagram content is reflective and educational. It is not a clinical diagnosis, hiring screen, official typology credential, or deterministic identity label."
+                }
+            ]
+        },
+        {
+            "framework": "enneagram",
+            "entity_type": "core_type",
+            "code": "type-3",
+            "entity_key": "type-3",
+            "slug": "enneagram/type-3",
+            "locale": "en",
+            "title": "Type 3: The Achiever",
+            "summary": "Type 3 is commonly described through achievement, adaptation, effectiveness, and tension around success or image.",
+            "seo": {
+                "title": "Type 3: The Achiever | FermatMind Enneagram",
+                "description": "Type 3 is commonly described through achievement, adaptation, effectiveness, and tension around success or image."
+            },
+            "robots": "noindex,follow",
+            "canonical_path": "/en/personality/enneagram/type-3",
+            "canonical": {
+                "path": "/en/personality/enneagram/type-3"
+            },
+            "hreflang": {
+                "en": "/en/personality/enneagram/type-3",
+                "zh-CN": "/zh/personality/enneagram/type-3"
+            },
+            "faq": [
+                {
+                    "question": "Is this a complete page for Type 3: The Achiever?",
+                    "answer": "No. This noindex placeholder marks the CMS/API contract and will be expanded before index eligibility is enabled."
+                }
+            ],
+            "media": {
+                "status": "placeholder",
+                "hero_image_asset_key": null,
+                "alt": "Type 3: The Achiever Enneagram placeholder"
+            },
+            "schema": {
+                "@type": "WebPage",
+                "about": "Enneagram personality framework placeholder"
+            },
+            "method_boundary": {
+                "summary": "Enneagram content is reflective and educational. It is not a clinical diagnosis, hiring screen, official typology credential, or deterministic identity label.",
+                "not_for": [
+                    "clinical diagnosis",
+                    "employment screening",
+                    "deterministic life decisions"
+                ]
+            },
+            "evidence_notes": [
+                {
+                    "source_type": "placeholder_boundary",
+                    "note": "Placeholder copy must remain bounded until full editorial review and source notes are complete."
+                }
+            ],
+            "internal_links": [
+                {
+                    "label": "Enneagram Personality",
+                    "target_code": "enneagram",
+                    "relationship": "hub",
+                    "href": "/en/personality/enneagram"
+                },
+                {
+                    "label": "Take the Enneagram test",
+                    "target_code": "enneagram-test",
+                    "relationship": "test_cta",
+                    "href": "/en/tests/enneagram-personality-test-nine-types"
+                }
+            ],
+            "is_public": true,
+            "index_eligible": false,
+            "sitemap_eligible": false,
+            "llms_eligible": false,
+            "launch_state": "content_ready",
+            "review_state": "placeholder_ready",
+            "last_reviewed_at": "2026-06-14T00:00:00Z",
+            "sections": [
+                {
+                    "key": "overview",
+                    "title": "Placeholder overview",
+                    "body_md": "Type 3 is commonly described through achievement, adaptation, effectiveness, and tension around success or image."
+                },
+                {
+                    "key": "next_step",
+                    "title": "Future content",
+                    "body_md": "Full public body copy will be added in a separate content coverage PR."
+                },
+                {
+                    "key": "method_boundary",
+                    "title": "Method boundary",
+                    "body_md": "Enneagram content is reflective and educational. It is not a clinical diagnosis, hiring screen, official typology credential, or deterministic identity label."
+                }
+            ]
+        },
+        {
+            "framework": "enneagram",
+            "entity_type": "core_type",
+            "code": "type-4",
+            "entity_key": "type-4",
+            "slug": "enneagram/type-4",
+            "locale": "en",
+            "title": "Type 4: The Individualist",
+            "summary": "Type 4 is commonly described through identity, emotional depth, difference, and tension around being understood.",
+            "seo": {
+                "title": "Type 4: The Individualist | FermatMind Enneagram",
+                "description": "Type 4 is commonly described through identity, emotional depth, difference, and tension around being understood."
+            },
+            "robots": "noindex,follow",
+            "canonical_path": "/en/personality/enneagram/type-4",
+            "canonical": {
+                "path": "/en/personality/enneagram/type-4"
+            },
+            "hreflang": {
+                "en": "/en/personality/enneagram/type-4",
+                "zh-CN": "/zh/personality/enneagram/type-4"
+            },
+            "faq": [
+                {
+                    "question": "Is this a complete page for Type 4: The Individualist?",
+                    "answer": "No. This noindex placeholder marks the CMS/API contract and will be expanded before index eligibility is enabled."
+                }
+            ],
+            "media": {
+                "status": "placeholder",
+                "hero_image_asset_key": null,
+                "alt": "Type 4: The Individualist Enneagram placeholder"
+            },
+            "schema": {
+                "@type": "WebPage",
+                "about": "Enneagram personality framework placeholder"
+            },
+            "method_boundary": {
+                "summary": "Enneagram content is reflective and educational. It is not a clinical diagnosis, hiring screen, official typology credential, or deterministic identity label.",
+                "not_for": [
+                    "clinical diagnosis",
+                    "employment screening",
+                    "deterministic life decisions"
+                ]
+            },
+            "evidence_notes": [
+                {
+                    "source_type": "placeholder_boundary",
+                    "note": "Placeholder copy must remain bounded until full editorial review and source notes are complete."
+                }
+            ],
+            "internal_links": [
+                {
+                    "label": "Enneagram Personality",
+                    "target_code": "enneagram",
+                    "relationship": "hub",
+                    "href": "/en/personality/enneagram"
+                },
+                {
+                    "label": "Take the Enneagram test",
+                    "target_code": "enneagram-test",
+                    "relationship": "test_cta",
+                    "href": "/en/tests/enneagram-personality-test-nine-types"
+                }
+            ],
+            "is_public": true,
+            "index_eligible": false,
+            "sitemap_eligible": false,
+            "llms_eligible": false,
+            "launch_state": "content_ready",
+            "review_state": "placeholder_ready",
+            "last_reviewed_at": "2026-06-14T00:00:00Z",
+            "sections": [
+                {
+                    "key": "overview",
+                    "title": "Placeholder overview",
+                    "body_md": "Type 4 is commonly described through identity, emotional depth, difference, and tension around being understood."
+                },
+                {
+                    "key": "next_step",
+                    "title": "Future content",
+                    "body_md": "Full public body copy will be added in a separate content coverage PR."
+                },
+                {
+                    "key": "method_boundary",
+                    "title": "Method boundary",
+                    "body_md": "Enneagram content is reflective and educational. It is not a clinical diagnosis, hiring screen, official typology credential, or deterministic identity label."
+                }
+            ]
+        },
+        {
+            "framework": "enneagram",
+            "entity_type": "core_type",
+            "code": "type-5",
+            "entity_key": "type-5",
+            "slug": "enneagram/type-5",
+            "locale": "en",
+            "title": "Type 5: The Investigator",
+            "summary": "Type 5 is commonly described through observation, knowledge, boundaries, and tension around resources or intrusion.",
+            "seo": {
+                "title": "Type 5: The Investigator | FermatMind Enneagram",
+                "description": "Type 5 is commonly described through observation, knowledge, boundaries, and tension around resources or intrusion."
+            },
+            "robots": "noindex,follow",
+            "canonical_path": "/en/personality/enneagram/type-5",
+            "canonical": {
+                "path": "/en/personality/enneagram/type-5"
+            },
+            "hreflang": {
+                "en": "/en/personality/enneagram/type-5",
+                "zh-CN": "/zh/personality/enneagram/type-5"
+            },
+            "faq": [
+                {
+                    "question": "Is this a complete page for Type 5: The Investigator?",
+                    "answer": "No. This noindex placeholder marks the CMS/API contract and will be expanded before index eligibility is enabled."
+                }
+            ],
+            "media": {
+                "status": "placeholder",
+                "hero_image_asset_key": null,
+                "alt": "Type 5: The Investigator Enneagram placeholder"
+            },
+            "schema": {
+                "@type": "WebPage",
+                "about": "Enneagram personality framework placeholder"
+            },
+            "method_boundary": {
+                "summary": "Enneagram content is reflective and educational. It is not a clinical diagnosis, hiring screen, official typology credential, or deterministic identity label.",
+                "not_for": [
+                    "clinical diagnosis",
+                    "employment screening",
+                    "deterministic life decisions"
+                ]
+            },
+            "evidence_notes": [
+                {
+                    "source_type": "placeholder_boundary",
+                    "note": "Placeholder copy must remain bounded until full editorial review and source notes are complete."
+                }
+            ],
+            "internal_links": [
+                {
+                    "label": "Enneagram Personality",
+                    "target_code": "enneagram",
+                    "relationship": "hub",
+                    "href": "/en/personality/enneagram"
+                },
+                {
+                    "label": "Take the Enneagram test",
+                    "target_code": "enneagram-test",
+                    "relationship": "test_cta",
+                    "href": "/en/tests/enneagram-personality-test-nine-types"
+                }
+            ],
+            "is_public": true,
+            "index_eligible": false,
+            "sitemap_eligible": false,
+            "llms_eligible": false,
+            "launch_state": "content_ready",
+            "review_state": "placeholder_ready",
+            "last_reviewed_at": "2026-06-14T00:00:00Z",
+            "sections": [
+                {
+                    "key": "overview",
+                    "title": "Placeholder overview",
+                    "body_md": "Type 5 is commonly described through observation, knowledge, boundaries, and tension around resources or intrusion."
+                },
+                {
+                    "key": "next_step",
+                    "title": "Future content",
+                    "body_md": "Full public body copy will be added in a separate content coverage PR."
+                },
+                {
+                    "key": "method_boundary",
+                    "title": "Method boundary",
+                    "body_md": "Enneagram content is reflective and educational. It is not a clinical diagnosis, hiring screen, official typology credential, or deterministic identity label."
+                }
+            ]
+        },
+        {
+            "framework": "enneagram",
+            "entity_type": "core_type",
+            "code": "type-6",
+            "entity_key": "type-6",
+            "slug": "enneagram/type-6",
+            "locale": "en",
+            "title": "Type 6: The Loyalist",
+            "summary": "Type 6 is commonly described through loyalty, risk scanning, preparedness, and tension around trust or security.",
+            "seo": {
+                "title": "Type 6: The Loyalist | FermatMind Enneagram",
+                "description": "Type 6 is commonly described through loyalty, risk scanning, preparedness, and tension around trust or security."
+            },
+            "robots": "noindex,follow",
+            "canonical_path": "/en/personality/enneagram/type-6",
+            "canonical": {
+                "path": "/en/personality/enneagram/type-6"
+            },
+            "hreflang": {
+                "en": "/en/personality/enneagram/type-6",
+                "zh-CN": "/zh/personality/enneagram/type-6"
+            },
+            "faq": [
+                {
+                    "question": "Is this a complete page for Type 6: The Loyalist?",
+                    "answer": "No. This noindex placeholder marks the CMS/API contract and will be expanded before index eligibility is enabled."
+                }
+            ],
+            "media": {
+                "status": "placeholder",
+                "hero_image_asset_key": null,
+                "alt": "Type 6: The Loyalist Enneagram placeholder"
+            },
+            "schema": {
+                "@type": "WebPage",
+                "about": "Enneagram personality framework placeholder"
+            },
+            "method_boundary": {
+                "summary": "Enneagram content is reflective and educational. It is not a clinical diagnosis, hiring screen, official typology credential, or deterministic identity label.",
+                "not_for": [
+                    "clinical diagnosis",
+                    "employment screening",
+                    "deterministic life decisions"
+                ]
+            },
+            "evidence_notes": [
+                {
+                    "source_type": "placeholder_boundary",
+                    "note": "Placeholder copy must remain bounded until full editorial review and source notes are complete."
+                }
+            ],
+            "internal_links": [
+                {
+                    "label": "Enneagram Personality",
+                    "target_code": "enneagram",
+                    "relationship": "hub",
+                    "href": "/en/personality/enneagram"
+                },
+                {
+                    "label": "Take the Enneagram test",
+                    "target_code": "enneagram-test",
+                    "relationship": "test_cta",
+                    "href": "/en/tests/enneagram-personality-test-nine-types"
+                }
+            ],
+            "is_public": true,
+            "index_eligible": false,
+            "sitemap_eligible": false,
+            "llms_eligible": false,
+            "launch_state": "content_ready",
+            "review_state": "placeholder_ready",
+            "last_reviewed_at": "2026-06-14T00:00:00Z",
+            "sections": [
+                {
+                    "key": "overview",
+                    "title": "Placeholder overview",
+                    "body_md": "Type 6 is commonly described through loyalty, risk scanning, preparedness, and tension around trust or security."
+                },
+                {
+                    "key": "next_step",
+                    "title": "Future content",
+                    "body_md": "Full public body copy will be added in a separate content coverage PR."
+                },
+                {
+                    "key": "method_boundary",
+                    "title": "Method boundary",
+                    "body_md": "Enneagram content is reflective and educational. It is not a clinical diagnosis, hiring screen, official typology credential, or deterministic identity label."
+                }
+            ]
+        },
+        {
+            "framework": "enneagram",
+            "entity_type": "core_type",
+            "code": "type-7",
+            "entity_key": "type-7",
+            "slug": "enneagram/type-7",
+            "locale": "en",
+            "title": "Type 7: The Enthusiast",
+            "summary": "Type 7 is commonly described through possibility, stimulation, reframing, and tension around limitation or discomfort.",
+            "seo": {
+                "title": "Type 7: The Enthusiast | FermatMind Enneagram",
+                "description": "Type 7 is commonly described through possibility, stimulation, reframing, and tension around limitation or discomfort."
+            },
+            "robots": "noindex,follow",
+            "canonical_path": "/en/personality/enneagram/type-7",
+            "canonical": {
+                "path": "/en/personality/enneagram/type-7"
+            },
+            "hreflang": {
+                "en": "/en/personality/enneagram/type-7",
+                "zh-CN": "/zh/personality/enneagram/type-7"
+            },
+            "faq": [
+                {
+                    "question": "Is this a complete page for Type 7: The Enthusiast?",
+                    "answer": "No. This noindex placeholder marks the CMS/API contract and will be expanded before index eligibility is enabled."
+                }
+            ],
+            "media": {
+                "status": "placeholder",
+                "hero_image_asset_key": null,
+                "alt": "Type 7: The Enthusiast Enneagram placeholder"
+            },
+            "schema": {
+                "@type": "WebPage",
+                "about": "Enneagram personality framework placeholder"
+            },
+            "method_boundary": {
+                "summary": "Enneagram content is reflective and educational. It is not a clinical diagnosis, hiring screen, official typology credential, or deterministic identity label.",
+                "not_for": [
+                    "clinical diagnosis",
+                    "employment screening",
+                    "deterministic life decisions"
+                ]
+            },
+            "evidence_notes": [
+                {
+                    "source_type": "placeholder_boundary",
+                    "note": "Placeholder copy must remain bounded until full editorial review and source notes are complete."
+                }
+            ],
+            "internal_links": [
+                {
+                    "label": "Enneagram Personality",
+                    "target_code": "enneagram",
+                    "relationship": "hub",
+                    "href": "/en/personality/enneagram"
+                },
+                {
+                    "label": "Take the Enneagram test",
+                    "target_code": "enneagram-test",
+                    "relationship": "test_cta",
+                    "href": "/en/tests/enneagram-personality-test-nine-types"
+                }
+            ],
+            "is_public": true,
+            "index_eligible": false,
+            "sitemap_eligible": false,
+            "llms_eligible": false,
+            "launch_state": "content_ready",
+            "review_state": "placeholder_ready",
+            "last_reviewed_at": "2026-06-14T00:00:00Z",
+            "sections": [
+                {
+                    "key": "overview",
+                    "title": "Placeholder overview",
+                    "body_md": "Type 7 is commonly described through possibility, stimulation, reframing, and tension around limitation or discomfort."
+                },
+                {
+                    "key": "next_step",
+                    "title": "Future content",
+                    "body_md": "Full public body copy will be added in a separate content coverage PR."
+                },
+                {
+                    "key": "method_boundary",
+                    "title": "Method boundary",
+                    "body_md": "Enneagram content is reflective and educational. It is not a clinical diagnosis, hiring screen, official typology credential, or deterministic identity label."
+                }
+            ]
+        },
+        {
+            "framework": "enneagram",
+            "entity_type": "core_type",
+            "code": "type-8",
+            "entity_key": "type-8",
+            "slug": "enneagram/type-8",
+            "locale": "en",
+            "title": "Type 8: The Challenger",
+            "summary": "Type 8 is commonly described through intensity, protection, directness, and tension around control or vulnerability.",
+            "seo": {
+                "title": "Type 8: The Challenger | FermatMind Enneagram",
+                "description": "Type 8 is commonly described through intensity, protection, directness, and tension around control or vulnerability."
+            },
+            "robots": "noindex,follow",
+            "canonical_path": "/en/personality/enneagram/type-8",
+            "canonical": {
+                "path": "/en/personality/enneagram/type-8"
+            },
+            "hreflang": {
+                "en": "/en/personality/enneagram/type-8",
+                "zh-CN": "/zh/personality/enneagram/type-8"
+            },
+            "faq": [
+                {
+                    "question": "Is this a complete page for Type 8: The Challenger?",
+                    "answer": "No. This noindex placeholder marks the CMS/API contract and will be expanded before index eligibility is enabled."
+                }
+            ],
+            "media": {
+                "status": "placeholder",
+                "hero_image_asset_key": null,
+                "alt": "Type 8: The Challenger Enneagram placeholder"
+            },
+            "schema": {
+                "@type": "WebPage",
+                "about": "Enneagram personality framework placeholder"
+            },
+            "method_boundary": {
+                "summary": "Enneagram content is reflective and educational. It is not a clinical diagnosis, hiring screen, official typology credential, or deterministic identity label.",
+                "not_for": [
+                    "clinical diagnosis",
+                    "employment screening",
+                    "deterministic life decisions"
+                ]
+            },
+            "evidence_notes": [
+                {
+                    "source_type": "placeholder_boundary",
+                    "note": "Placeholder copy must remain bounded until full editorial review and source notes are complete."
+                }
+            ],
+            "internal_links": [
+                {
+                    "label": "Enneagram Personality",
+                    "target_code": "enneagram",
+                    "relationship": "hub",
+                    "href": "/en/personality/enneagram"
+                },
+                {
+                    "label": "Take the Enneagram test",
+                    "target_code": "enneagram-test",
+                    "relationship": "test_cta",
+                    "href": "/en/tests/enneagram-personality-test-nine-types"
+                }
+            ],
+            "is_public": true,
+            "index_eligible": false,
+            "sitemap_eligible": false,
+            "llms_eligible": false,
+            "launch_state": "content_ready",
+            "review_state": "placeholder_ready",
+            "last_reviewed_at": "2026-06-14T00:00:00Z",
+            "sections": [
+                {
+                    "key": "overview",
+                    "title": "Placeholder overview",
+                    "body_md": "Type 8 is commonly described through intensity, protection, directness, and tension around control or vulnerability."
+                },
+                {
+                    "key": "next_step",
+                    "title": "Future content",
+                    "body_md": "Full public body copy will be added in a separate content coverage PR."
+                },
+                {
+                    "key": "method_boundary",
+                    "title": "Method boundary",
+                    "body_md": "Enneagram content is reflective and educational. It is not a clinical diagnosis, hiring screen, official typology credential, or deterministic identity label."
+                }
+            ]
+        },
+        {
+            "framework": "enneagram",
+            "entity_type": "core_type",
+            "code": "type-9",
+            "entity_key": "type-9",
+            "slug": "enneagram/type-9",
+            "locale": "en",
+            "title": "Type 9: The Peacemaker",
+            "summary": "Type 9 is commonly described through steadiness, mediation, comfort, and tension around conflict or self-erasure.",
+            "seo": {
+                "title": "Type 9: The Peacemaker | FermatMind Enneagram",
+                "description": "Type 9 is commonly described through steadiness, mediation, comfort, and tension around conflict or self-erasure."
+            },
+            "robots": "noindex,follow",
+            "canonical_path": "/en/personality/enneagram/type-9",
+            "canonical": {
+                "path": "/en/personality/enneagram/type-9"
+            },
+            "hreflang": {
+                "en": "/en/personality/enneagram/type-9",
+                "zh-CN": "/zh/personality/enneagram/type-9"
+            },
+            "faq": [
+                {
+                    "question": "Is this a complete page for Type 9: The Peacemaker?",
+                    "answer": "No. This noindex placeholder marks the CMS/API contract and will be expanded before index eligibility is enabled."
+                }
+            ],
+            "media": {
+                "status": "placeholder",
+                "hero_image_asset_key": null,
+                "alt": "Type 9: The Peacemaker Enneagram placeholder"
+            },
+            "schema": {
+                "@type": "WebPage",
+                "about": "Enneagram personality framework placeholder"
+            },
+            "method_boundary": {
+                "summary": "Enneagram content is reflective and educational. It is not a clinical diagnosis, hiring screen, official typology credential, or deterministic identity label.",
+                "not_for": [
+                    "clinical diagnosis",
+                    "employment screening",
+                    "deterministic life decisions"
+                ]
+            },
+            "evidence_notes": [
+                {
+                    "source_type": "placeholder_boundary",
+                    "note": "Placeholder copy must remain bounded until full editorial review and source notes are complete."
+                }
+            ],
+            "internal_links": [
+                {
+                    "label": "Enneagram Personality",
+                    "target_code": "enneagram",
+                    "relationship": "hub",
+                    "href": "/en/personality/enneagram"
+                },
+                {
+                    "label": "Take the Enneagram test",
+                    "target_code": "enneagram-test",
+                    "relationship": "test_cta",
+                    "href": "/en/tests/enneagram-personality-test-nine-types"
+                }
+            ],
+            "is_public": true,
+            "index_eligible": false,
+            "sitemap_eligible": false,
+            "llms_eligible": false,
+            "launch_state": "content_ready",
+            "review_state": "placeholder_ready",
+            "last_reviewed_at": "2026-06-14T00:00:00Z",
+            "sections": [
+                {
+                    "key": "overview",
+                    "title": "Placeholder overview",
+                    "body_md": "Type 9 is commonly described through steadiness, mediation, comfort, and tension around conflict or self-erasure."
+                },
+                {
+                    "key": "next_step",
+                    "title": "Future content",
+                    "body_md": "Full public body copy will be added in a separate content coverage PR."
+                },
+                {
+                    "key": "method_boundary",
+                    "title": "Method boundary",
+                    "body_md": "Enneagram content is reflective and educational. It is not a clinical diagnosis, hiring screen, official typology credential, or deterministic identity label."
+                }
+            ]
+        },
+        {
+            "framework": "enneagram",
+            "entity_type": "hub",
+            "code": "enneagram",
+            "entity_key": "enneagram",
+            "slug": "enneagram",
+            "locale": "zh-CN",
+            "title": "九型人格",
+            "summary": "九型人格用九种动机与注意力模式描述人在压力、关系和成长中的常见反应。",
+            "seo": {
+                "title": "九型人格 | 费马测试",
+                "description": "费马测试九型人格公开内容的 noindex 占位资产，覆盖九型 Hub、三中心和九个核心类型。"
+            },
+            "robots": "noindex,follow",
+            "canonical_path": "/zh/personality/enneagram",
+            "canonical": {
+                "path": "/zh/personality/enneagram"
+            },
+            "hreflang": {
+                "en": "/en/personality/enneagram",
+                "zh-CN": "/zh/personality/enneagram"
+            },
+            "faq": [
+                {
+                    "question": "这是完整的九型人格指南吗？",
+                    "answer": "不是。这是为后续 CMS 正文准备的 noindex 占位资产。"
+                }
+            ],
+            "media": {
+                "status": "placeholder",
+                "hero_image_asset_key": null,
+                "alt": "九型人格 九型人格占位图"
+            },
+            "schema": {
+                "@type": "CollectionPage",
+                "about": "Enneagram personality framework placeholder"
+            },
+            "method_boundary": {
+                "summary": "九型人格内容用于反思和教育，不是临床诊断、招聘筛选、官方类型凭证或决定论身份标签。",
+                "not_for": [
+                    "clinical diagnosis",
+                    "employment screening",
+                    "deterministic life decisions"
+                ]
+            },
+            "evidence_notes": [
+                {
+                    "source_type": "placeholder_boundary",
+                    "note": "在完整编辑审查和来源说明完成前，占位文案必须保持克制表达。"
+                }
+            ],
+            "internal_links": [
+                {
+                    "label": "本能中心",
+                    "target_code": "gut",
+                    "relationship": "center",
+                    "href": "/zh/personality/enneagram/centers/gut"
+                },
+                {
+                    "label": "情感中心",
+                    "target_code": "heart",
+                    "relationship": "center",
+                    "href": "/zh/personality/enneagram/centers/heart"
+                },
+                {
+                    "label": "思维中心",
+                    "target_code": "head",
+                    "relationship": "center",
+                    "href": "/zh/personality/enneagram/centers/head"
+                },
+                {
+                    "label": "1号人格：改革者",
+                    "target_code": "type-1",
+                    "relationship": "core_type",
+                    "href": "/zh/personality/enneagram/type-1"
+                },
+                {
+                    "label": "2号人格：助人者",
+                    "target_code": "type-2",
+                    "relationship": "core_type",
+                    "href": "/zh/personality/enneagram/type-2"
+                },
+                {
+                    "label": "3号人格：成就者",
+                    "target_code": "type-3",
+                    "relationship": "core_type",
+                    "href": "/zh/personality/enneagram/type-3"
+                },
+                {
+                    "label": "4号人格：个人主义者",
+                    "target_code": "type-4",
+                    "relationship": "core_type",
+                    "href": "/zh/personality/enneagram/type-4"
+                },
+                {
+                    "label": "5号人格：观察者",
+                    "target_code": "type-5",
+                    "relationship": "core_type",
+                    "href": "/zh/personality/enneagram/type-5"
+                },
+                {
+                    "label": "6号人格：忠诚者",
+                    "target_code": "type-6",
+                    "relationship": "core_type",
+                    "href": "/zh/personality/enneagram/type-6"
+                },
+                {
+                    "label": "7号人格：热情者",
+                    "target_code": "type-7",
+                    "relationship": "core_type",
+                    "href": "/zh/personality/enneagram/type-7"
+                },
+                {
+                    "label": "8号人格：挑战者",
+                    "target_code": "type-8",
+                    "relationship": "core_type",
+                    "href": "/zh/personality/enneagram/type-8"
+                },
+                {
+                    "label": "9号人格：调停者",
+                    "target_code": "type-9",
+                    "relationship": "core_type",
+                    "href": "/zh/personality/enneagram/type-9"
+                },
+                {
+                    "label": "开始九型人格测试",
+                    "target_code": "enneagram-test",
+                    "relationship": "test_cta",
+                    "href": "/zh/tests/enneagram-personality-test-nine-types"
+                }
+            ],
+            "is_public": true,
+            "index_eligible": false,
+            "sitemap_eligible": false,
+            "llms_eligible": false,
+            "launch_state": "content_ready",
+            "review_state": "placeholder_ready",
+            "last_reviewed_at": "2026-06-14T00:00:00Z",
+            "sections": [
+                {
+                    "key": "overview",
+                    "title": "占位概览",
+                    "body_md": "这是九型人格公开内容 Hub 的 noindex 占位资产，完整正文尚未发布。"
+                },
+                {
+                    "key": "structure",
+                    "title": "V1 结构",
+                    "body_md": "V1 公开资产合同覆盖一个 Hub、三个中心和九个核心类型。"
+                },
+                {
+                    "key": "method_boundary",
+                    "title": "方法边界",
+                    "body_md": "九型人格适合反思和沟通语言，不适合用于诊断、招聘筛选或决定论判断。"
+                }
+            ]
+        },
+        {
+            "framework": "enneagram",
+            "entity_type": "center",
+            "code": "gut",
+            "entity_key": "gut",
+            "slug": "enneagram/centers/gut",
+            "locale": "zh-CN",
+            "title": "本能中心",
+            "summary": "本能中心包含 8、9、1 号，常围绕边界、身体性反应、愤怒和控制主题展开。",
+            "seo": {
+                "title": "本能中心 | FermatMind Enneagram",
+                "description": "本能中心包含 8、9、1 号，常围绕边界、身体性反应、愤怒和控制主题展开。"
+            },
+            "robots": "noindex,follow",
+            "canonical_path": "/zh/personality/enneagram/centers/gut",
+            "canonical": {
+                "path": "/zh/personality/enneagram/centers/gut"
+            },
+            "hreflang": {
+                "en": "/en/personality/enneagram/centers/gut",
+                "zh-CN": "/zh/personality/enneagram/centers/gut"
+            },
+            "faq": [
+                {
+                    "question": "这是完整页面吗： 本能中心?",
+                    "answer": "不是。这个 noindex 占位页只锁定 CMS/API 合同，完整正文通过质量门槛后再开放索引。"
+                }
+            ],
+            "media": {
+                "status": "placeholder",
+                "hero_image_asset_key": null,
+                "alt": "本能中心 九型人格占位图"
+            },
+            "schema": {
+                "@type": "WebPage",
+                "about": "Enneagram personality framework placeholder"
+            },
+            "method_boundary": {
+                "summary": "九型人格内容用于反思和教育，不是临床诊断、招聘筛选、官方类型凭证或决定论身份标签。",
+                "not_for": [
+                    "clinical diagnosis",
+                    "employment screening",
+                    "deterministic life decisions"
+                ]
+            },
+            "evidence_notes": [
+                {
+                    "source_type": "placeholder_boundary",
+                    "note": "在完整编辑审查和来源说明完成前，占位文案必须保持克制表达。"
+                }
+            ],
+            "internal_links": [
+                {
+                    "label": "九型人格",
+                    "target_code": "enneagram",
+                    "relationship": "hub",
+                    "href": "/zh/personality/enneagram"
+                },
+                {
+                    "label": "8号人格：挑战者",
+                    "target_code": "type-8",
+                    "relationship": "core_type",
+                    "href": "/zh/personality/enneagram/type-8"
+                },
+                {
+                    "label": "9号人格：调停者",
+                    "target_code": "type-9",
+                    "relationship": "core_type",
+                    "href": "/zh/personality/enneagram/type-9"
+                },
+                {
+                    "label": "1号人格：改革者",
+                    "target_code": "type-1",
+                    "relationship": "core_type",
+                    "href": "/zh/personality/enneagram/type-1"
+                },
+                {
+                    "label": "开始九型人格测试",
+                    "target_code": "enneagram-test",
+                    "relationship": "test_cta",
+                    "href": "/zh/tests/enneagram-personality-test-nine-types"
+                }
+            ],
+            "is_public": true,
+            "index_eligible": false,
+            "sitemap_eligible": false,
+            "llms_eligible": false,
+            "launch_state": "content_ready",
+            "review_state": "placeholder_ready",
+            "last_reviewed_at": "2026-06-14T00:00:00Z",
+            "sections": [
+                {
+                    "key": "overview",
+                    "title": "占位概览",
+                    "body_md": "本能中心包含 8、9、1 号，常围绕边界、身体性反应、愤怒和控制主题展开。"
+                },
+                {
+                    "key": "next_step",
+                    "title": "后续内容",
+                    "body_md": "完整公开正文将在独立内容覆盖 PR 中补齐。"
+                },
+                {
+                    "key": "method_boundary",
+                    "title": "方法边界",
+                    "body_md": "九型人格内容用于反思和教育，不是临床诊断、招聘筛选、官方类型凭证或决定论身份标签。"
+                }
+            ]
+        },
+        {
+            "framework": "enneagram",
+            "entity_type": "center",
+            "code": "heart",
+            "entity_key": "heart",
+            "slug": "enneagram/centers/heart",
+            "locale": "zh-CN",
+            "title": "情感中心",
+            "summary": "情感中心包含 2、3、4 号，常围绕关系位置、价值感、身份和被看见展开。",
+            "seo": {
+                "title": "情感中心 | FermatMind Enneagram",
+                "description": "情感中心包含 2、3、4 号，常围绕关系位置、价值感、身份和被看见展开。"
+            },
+            "robots": "noindex,follow",
+            "canonical_path": "/zh/personality/enneagram/centers/heart",
+            "canonical": {
+                "path": "/zh/personality/enneagram/centers/heart"
+            },
+            "hreflang": {
+                "en": "/en/personality/enneagram/centers/heart",
+                "zh-CN": "/zh/personality/enneagram/centers/heart"
+            },
+            "faq": [
+                {
+                    "question": "这是完整页面吗： 情感中心?",
+                    "answer": "不是。这个 noindex 占位页只锁定 CMS/API 合同，完整正文通过质量门槛后再开放索引。"
+                }
+            ],
+            "media": {
+                "status": "placeholder",
+                "hero_image_asset_key": null,
+                "alt": "情感中心 九型人格占位图"
+            },
+            "schema": {
+                "@type": "WebPage",
+                "about": "Enneagram personality framework placeholder"
+            },
+            "method_boundary": {
+                "summary": "九型人格内容用于反思和教育，不是临床诊断、招聘筛选、官方类型凭证或决定论身份标签。",
+                "not_for": [
+                    "clinical diagnosis",
+                    "employment screening",
+                    "deterministic life decisions"
+                ]
+            },
+            "evidence_notes": [
+                {
+                    "source_type": "placeholder_boundary",
+                    "note": "在完整编辑审查和来源说明完成前，占位文案必须保持克制表达。"
+                }
+            ],
+            "internal_links": [
+                {
+                    "label": "九型人格",
+                    "target_code": "enneagram",
+                    "relationship": "hub",
+                    "href": "/zh/personality/enneagram"
+                },
+                {
+                    "label": "2号人格：助人者",
+                    "target_code": "type-2",
+                    "relationship": "core_type",
+                    "href": "/zh/personality/enneagram/type-2"
+                },
+                {
+                    "label": "3号人格：成就者",
+                    "target_code": "type-3",
+                    "relationship": "core_type",
+                    "href": "/zh/personality/enneagram/type-3"
+                },
+                {
+                    "label": "4号人格：个人主义者",
+                    "target_code": "type-4",
+                    "relationship": "core_type",
+                    "href": "/zh/personality/enneagram/type-4"
+                },
+                {
+                    "label": "开始九型人格测试",
+                    "target_code": "enneagram-test",
+                    "relationship": "test_cta",
+                    "href": "/zh/tests/enneagram-personality-test-nine-types"
+                }
+            ],
+            "is_public": true,
+            "index_eligible": false,
+            "sitemap_eligible": false,
+            "llms_eligible": false,
+            "launch_state": "content_ready",
+            "review_state": "placeholder_ready",
+            "last_reviewed_at": "2026-06-14T00:00:00Z",
+            "sections": [
+                {
+                    "key": "overview",
+                    "title": "占位概览",
+                    "body_md": "情感中心包含 2、3、4 号，常围绕关系位置、价值感、身份和被看见展开。"
+                },
+                {
+                    "key": "next_step",
+                    "title": "后续内容",
+                    "body_md": "完整公开正文将在独立内容覆盖 PR 中补齐。"
+                },
+                {
+                    "key": "method_boundary",
+                    "title": "方法边界",
+                    "body_md": "九型人格内容用于反思和教育，不是临床诊断、招聘筛选、官方类型凭证或决定论身份标签。"
+                }
+            ]
+        },
+        {
+            "framework": "enneagram",
+            "entity_type": "center",
+            "code": "head",
+            "entity_key": "head",
+            "slug": "enneagram/centers/head",
+            "locale": "zh-CN",
+            "title": "思维中心",
+            "summary": "思维中心包含 5、6、7 号，常围绕风险、解释、规划和不确定性展开。",
+            "seo": {
+                "title": "思维中心 | FermatMind Enneagram",
+                "description": "思维中心包含 5、6、7 号，常围绕风险、解释、规划和不确定性展开。"
+            },
+            "robots": "noindex,follow",
+            "canonical_path": "/zh/personality/enneagram/centers/head",
+            "canonical": {
+                "path": "/zh/personality/enneagram/centers/head"
+            },
+            "hreflang": {
+                "en": "/en/personality/enneagram/centers/head",
+                "zh-CN": "/zh/personality/enneagram/centers/head"
+            },
+            "faq": [
+                {
+                    "question": "这是完整页面吗： 思维中心?",
+                    "answer": "不是。这个 noindex 占位页只锁定 CMS/API 合同，完整正文通过质量门槛后再开放索引。"
+                }
+            ],
+            "media": {
+                "status": "placeholder",
+                "hero_image_asset_key": null,
+                "alt": "思维中心 九型人格占位图"
+            },
+            "schema": {
+                "@type": "WebPage",
+                "about": "Enneagram personality framework placeholder"
+            },
+            "method_boundary": {
+                "summary": "九型人格内容用于反思和教育，不是临床诊断、招聘筛选、官方类型凭证或决定论身份标签。",
+                "not_for": [
+                    "clinical diagnosis",
+                    "employment screening",
+                    "deterministic life decisions"
+                ]
+            },
+            "evidence_notes": [
+                {
+                    "source_type": "placeholder_boundary",
+                    "note": "在完整编辑审查和来源说明完成前，占位文案必须保持克制表达。"
+                }
+            ],
+            "internal_links": [
+                {
+                    "label": "九型人格",
+                    "target_code": "enneagram",
+                    "relationship": "hub",
+                    "href": "/zh/personality/enneagram"
+                },
+                {
+                    "label": "5号人格：观察者",
+                    "target_code": "type-5",
+                    "relationship": "core_type",
+                    "href": "/zh/personality/enneagram/type-5"
+                },
+                {
+                    "label": "6号人格：忠诚者",
+                    "target_code": "type-6",
+                    "relationship": "core_type",
+                    "href": "/zh/personality/enneagram/type-6"
+                },
+                {
+                    "label": "7号人格：热情者",
+                    "target_code": "type-7",
+                    "relationship": "core_type",
+                    "href": "/zh/personality/enneagram/type-7"
+                },
+                {
+                    "label": "开始九型人格测试",
+                    "target_code": "enneagram-test",
+                    "relationship": "test_cta",
+                    "href": "/zh/tests/enneagram-personality-test-nine-types"
+                }
+            ],
+            "is_public": true,
+            "index_eligible": false,
+            "sitemap_eligible": false,
+            "llms_eligible": false,
+            "launch_state": "content_ready",
+            "review_state": "placeholder_ready",
+            "last_reviewed_at": "2026-06-14T00:00:00Z",
+            "sections": [
+                {
+                    "key": "overview",
+                    "title": "占位概览",
+                    "body_md": "思维中心包含 5、6、7 号，常围绕风险、解释、规划和不确定性展开。"
+                },
+                {
+                    "key": "next_step",
+                    "title": "后续内容",
+                    "body_md": "完整公开正文将在独立内容覆盖 PR 中补齐。"
+                },
+                {
+                    "key": "method_boundary",
+                    "title": "方法边界",
+                    "body_md": "九型人格内容用于反思和教育，不是临床诊断、招聘筛选、官方类型凭证或决定论身份标签。"
+                }
+            ]
+        },
+        {
+            "framework": "enneagram",
+            "entity_type": "core_type",
+            "code": "type-1",
+            "entity_key": "type-1",
+            "slug": "enneagram/type-1",
+            "locale": "zh-CN",
+            "title": "1号人格：改革者",
+            "summary": "1号人格通常围绕改进、标准、责任感，以及什么需要被修正的张力展开。",
+            "seo": {
+                "title": "1号人格：改革者 | FermatMind Enneagram",
+                "description": "1号人格通常围绕改进、标准、责任感，以及什么需要被修正的张力展开。"
+            },
+            "robots": "noindex,follow",
+            "canonical_path": "/zh/personality/enneagram/type-1",
+            "canonical": {
+                "path": "/zh/personality/enneagram/type-1"
+            },
+            "hreflang": {
+                "en": "/en/personality/enneagram/type-1",
+                "zh-CN": "/zh/personality/enneagram/type-1"
+            },
+            "faq": [
+                {
+                    "question": "这是完整页面吗： 1号人格：改革者?",
+                    "answer": "不是。这个 noindex 占位页只锁定 CMS/API 合同，完整正文通过质量门槛后再开放索引。"
+                }
+            ],
+            "media": {
+                "status": "placeholder",
+                "hero_image_asset_key": null,
+                "alt": "1号人格：改革者 九型人格占位图"
+            },
+            "schema": {
+                "@type": "WebPage",
+                "about": "Enneagram personality framework placeholder"
+            },
+            "method_boundary": {
+                "summary": "九型人格内容用于反思和教育，不是临床诊断、招聘筛选、官方类型凭证或决定论身份标签。",
+                "not_for": [
+                    "clinical diagnosis",
+                    "employment screening",
+                    "deterministic life decisions"
+                ]
+            },
+            "evidence_notes": [
+                {
+                    "source_type": "placeholder_boundary",
+                    "note": "在完整编辑审查和来源说明完成前，占位文案必须保持克制表达。"
+                }
+            ],
+            "internal_links": [
+                {
+                    "label": "九型人格",
+                    "target_code": "enneagram",
+                    "relationship": "hub",
+                    "href": "/zh/personality/enneagram"
+                },
+                {
+                    "label": "开始九型人格测试",
+                    "target_code": "enneagram-test",
+                    "relationship": "test_cta",
+                    "href": "/zh/tests/enneagram-personality-test-nine-types"
+                }
+            ],
+            "is_public": true,
+            "index_eligible": false,
+            "sitemap_eligible": false,
+            "llms_eligible": false,
+            "launch_state": "content_ready",
+            "review_state": "placeholder_ready",
+            "last_reviewed_at": "2026-06-14T00:00:00Z",
+            "sections": [
+                {
+                    "key": "overview",
+                    "title": "占位概览",
+                    "body_md": "1号人格通常围绕改进、标准、责任感，以及什么需要被修正的张力展开。"
+                },
+                {
+                    "key": "next_step",
+                    "title": "后续内容",
+                    "body_md": "完整公开正文将在独立内容覆盖 PR 中补齐。"
+                },
+                {
+                    "key": "method_boundary",
+                    "title": "方法边界",
+                    "body_md": "九型人格内容用于反思和教育，不是临床诊断、招聘筛选、官方类型凭证或决定论身份标签。"
+                }
+            ]
+        },
+        {
+            "framework": "enneagram",
+            "entity_type": "core_type",
+            "code": "type-2",
+            "entity_key": "type-2",
+            "slug": "enneagram/type-2",
+            "locale": "zh-CN",
+            "title": "2号人格：助人者",
+            "summary": "2号人格通常围绕帮助、关系觉察、有用感，以及被需要或被感激的张力展开。",
+            "seo": {
+                "title": "2号人格：助人者 | FermatMind Enneagram",
+                "description": "2号人格通常围绕帮助、关系觉察、有用感，以及被需要或被感激的张力展开。"
+            },
+            "robots": "noindex,follow",
+            "canonical_path": "/zh/personality/enneagram/type-2",
+            "canonical": {
+                "path": "/zh/personality/enneagram/type-2"
+            },
+            "hreflang": {
+                "en": "/en/personality/enneagram/type-2",
+                "zh-CN": "/zh/personality/enneagram/type-2"
+            },
+            "faq": [
+                {
+                    "question": "这是完整页面吗： 2号人格：助人者?",
+                    "answer": "不是。这个 noindex 占位页只锁定 CMS/API 合同，完整正文通过质量门槛后再开放索引。"
+                }
+            ],
+            "media": {
+                "status": "placeholder",
+                "hero_image_asset_key": null,
+                "alt": "2号人格：助人者 九型人格占位图"
+            },
+            "schema": {
+                "@type": "WebPage",
+                "about": "Enneagram personality framework placeholder"
+            },
+            "method_boundary": {
+                "summary": "九型人格内容用于反思和教育，不是临床诊断、招聘筛选、官方类型凭证或决定论身份标签。",
+                "not_for": [
+                    "clinical diagnosis",
+                    "employment screening",
+                    "deterministic life decisions"
+                ]
+            },
+            "evidence_notes": [
+                {
+                    "source_type": "placeholder_boundary",
+                    "note": "在完整编辑审查和来源说明完成前，占位文案必须保持克制表达。"
+                }
+            ],
+            "internal_links": [
+                {
+                    "label": "九型人格",
+                    "target_code": "enneagram",
+                    "relationship": "hub",
+                    "href": "/zh/personality/enneagram"
+                },
+                {
+                    "label": "开始九型人格测试",
+                    "target_code": "enneagram-test",
+                    "relationship": "test_cta",
+                    "href": "/zh/tests/enneagram-personality-test-nine-types"
+                }
+            ],
+            "is_public": true,
+            "index_eligible": false,
+            "sitemap_eligible": false,
+            "llms_eligible": false,
+            "launch_state": "content_ready",
+            "review_state": "placeholder_ready",
+            "last_reviewed_at": "2026-06-14T00:00:00Z",
+            "sections": [
+                {
+                    "key": "overview",
+                    "title": "占位概览",
+                    "body_md": "2号人格通常围绕帮助、关系觉察、有用感，以及被需要或被感激的张力展开。"
+                },
+                {
+                    "key": "next_step",
+                    "title": "后续内容",
+                    "body_md": "完整公开正文将在独立内容覆盖 PR 中补齐。"
+                },
+                {
+                    "key": "method_boundary",
+                    "title": "方法边界",
+                    "body_md": "九型人格内容用于反思和教育，不是临床诊断、招聘筛选、官方类型凭证或决定论身份标签。"
+                }
+            ]
+        },
+        {
+            "framework": "enneagram",
+            "entity_type": "core_type",
+            "code": "type-3",
+            "entity_key": "type-3",
+            "slug": "enneagram/type-3",
+            "locale": "zh-CN",
+            "title": "3号人格：成就者",
+            "summary": "3号人格通常围绕成就、适应、效率，以及成功或形象的张力展开。",
+            "seo": {
+                "title": "3号人格：成就者 | FermatMind Enneagram",
+                "description": "3号人格通常围绕成就、适应、效率，以及成功或形象的张力展开。"
+            },
+            "robots": "noindex,follow",
+            "canonical_path": "/zh/personality/enneagram/type-3",
+            "canonical": {
+                "path": "/zh/personality/enneagram/type-3"
+            },
+            "hreflang": {
+                "en": "/en/personality/enneagram/type-3",
+                "zh-CN": "/zh/personality/enneagram/type-3"
+            },
+            "faq": [
+                {
+                    "question": "这是完整页面吗： 3号人格：成就者?",
+                    "answer": "不是。这个 noindex 占位页只锁定 CMS/API 合同，完整正文通过质量门槛后再开放索引。"
+                }
+            ],
+            "media": {
+                "status": "placeholder",
+                "hero_image_asset_key": null,
+                "alt": "3号人格：成就者 九型人格占位图"
+            },
+            "schema": {
+                "@type": "WebPage",
+                "about": "Enneagram personality framework placeholder"
+            },
+            "method_boundary": {
+                "summary": "九型人格内容用于反思和教育，不是临床诊断、招聘筛选、官方类型凭证或决定论身份标签。",
+                "not_for": [
+                    "clinical diagnosis",
+                    "employment screening",
+                    "deterministic life decisions"
+                ]
+            },
+            "evidence_notes": [
+                {
+                    "source_type": "placeholder_boundary",
+                    "note": "在完整编辑审查和来源说明完成前，占位文案必须保持克制表达。"
+                }
+            ],
+            "internal_links": [
+                {
+                    "label": "九型人格",
+                    "target_code": "enneagram",
+                    "relationship": "hub",
+                    "href": "/zh/personality/enneagram"
+                },
+                {
+                    "label": "开始九型人格测试",
+                    "target_code": "enneagram-test",
+                    "relationship": "test_cta",
+                    "href": "/zh/tests/enneagram-personality-test-nine-types"
+                }
+            ],
+            "is_public": true,
+            "index_eligible": false,
+            "sitemap_eligible": false,
+            "llms_eligible": false,
+            "launch_state": "content_ready",
+            "review_state": "placeholder_ready",
+            "last_reviewed_at": "2026-06-14T00:00:00Z",
+            "sections": [
+                {
+                    "key": "overview",
+                    "title": "占位概览",
+                    "body_md": "3号人格通常围绕成就、适应、效率，以及成功或形象的张力展开。"
+                },
+                {
+                    "key": "next_step",
+                    "title": "后续内容",
+                    "body_md": "完整公开正文将在独立内容覆盖 PR 中补齐。"
+                },
+                {
+                    "key": "method_boundary",
+                    "title": "方法边界",
+                    "body_md": "九型人格内容用于反思和教育，不是临床诊断、招聘筛选、官方类型凭证或决定论身份标签。"
+                }
+            ]
+        },
+        {
+            "framework": "enneagram",
+            "entity_type": "core_type",
+            "code": "type-4",
+            "entity_key": "type-4",
+            "slug": "enneagram/type-4",
+            "locale": "zh-CN",
+            "title": "4号人格：个人主义者",
+            "summary": "4号人格通常围绕身份、情绪深度、独特性，以及被理解的张力展开。",
+            "seo": {
+                "title": "4号人格：个人主义者 | FermatMind Enneagram",
+                "description": "4号人格通常围绕身份、情绪深度、独特性，以及被理解的张力展开。"
+            },
+            "robots": "noindex,follow",
+            "canonical_path": "/zh/personality/enneagram/type-4",
+            "canonical": {
+                "path": "/zh/personality/enneagram/type-4"
+            },
+            "hreflang": {
+                "en": "/en/personality/enneagram/type-4",
+                "zh-CN": "/zh/personality/enneagram/type-4"
+            },
+            "faq": [
+                {
+                    "question": "这是完整页面吗： 4号人格：个人主义者?",
+                    "answer": "不是。这个 noindex 占位页只锁定 CMS/API 合同，完整正文通过质量门槛后再开放索引。"
+                }
+            ],
+            "media": {
+                "status": "placeholder",
+                "hero_image_asset_key": null,
+                "alt": "4号人格：个人主义者 九型人格占位图"
+            },
+            "schema": {
+                "@type": "WebPage",
+                "about": "Enneagram personality framework placeholder"
+            },
+            "method_boundary": {
+                "summary": "九型人格内容用于反思和教育，不是临床诊断、招聘筛选、官方类型凭证或决定论身份标签。",
+                "not_for": [
+                    "clinical diagnosis",
+                    "employment screening",
+                    "deterministic life decisions"
+                ]
+            },
+            "evidence_notes": [
+                {
+                    "source_type": "placeholder_boundary",
+                    "note": "在完整编辑审查和来源说明完成前，占位文案必须保持克制表达。"
+                }
+            ],
+            "internal_links": [
+                {
+                    "label": "九型人格",
+                    "target_code": "enneagram",
+                    "relationship": "hub",
+                    "href": "/zh/personality/enneagram"
+                },
+                {
+                    "label": "开始九型人格测试",
+                    "target_code": "enneagram-test",
+                    "relationship": "test_cta",
+                    "href": "/zh/tests/enneagram-personality-test-nine-types"
+                }
+            ],
+            "is_public": true,
+            "index_eligible": false,
+            "sitemap_eligible": false,
+            "llms_eligible": false,
+            "launch_state": "content_ready",
+            "review_state": "placeholder_ready",
+            "last_reviewed_at": "2026-06-14T00:00:00Z",
+            "sections": [
+                {
+                    "key": "overview",
+                    "title": "占位概览",
+                    "body_md": "4号人格通常围绕身份、情绪深度、独特性，以及被理解的张力展开。"
+                },
+                {
+                    "key": "next_step",
+                    "title": "后续内容",
+                    "body_md": "完整公开正文将在独立内容覆盖 PR 中补齐。"
+                },
+                {
+                    "key": "method_boundary",
+                    "title": "方法边界",
+                    "body_md": "九型人格内容用于反思和教育，不是临床诊断、招聘筛选、官方类型凭证或决定论身份标签。"
+                }
+            ]
+        },
+        {
+            "framework": "enneagram",
+            "entity_type": "core_type",
+            "code": "type-5",
+            "entity_key": "type-5",
+            "slug": "enneagram/type-5",
+            "locale": "zh-CN",
+            "title": "5号人格：观察者",
+            "summary": "5号人格通常围绕观察、知识、边界，以及资源或被打扰的张力展开。",
+            "seo": {
+                "title": "5号人格：观察者 | FermatMind Enneagram",
+                "description": "5号人格通常围绕观察、知识、边界，以及资源或被打扰的张力展开。"
+            },
+            "robots": "noindex,follow",
+            "canonical_path": "/zh/personality/enneagram/type-5",
+            "canonical": {
+                "path": "/zh/personality/enneagram/type-5"
+            },
+            "hreflang": {
+                "en": "/en/personality/enneagram/type-5",
+                "zh-CN": "/zh/personality/enneagram/type-5"
+            },
+            "faq": [
+                {
+                    "question": "这是完整页面吗： 5号人格：观察者?",
+                    "answer": "不是。这个 noindex 占位页只锁定 CMS/API 合同，完整正文通过质量门槛后再开放索引。"
+                }
+            ],
+            "media": {
+                "status": "placeholder",
+                "hero_image_asset_key": null,
+                "alt": "5号人格：观察者 九型人格占位图"
+            },
+            "schema": {
+                "@type": "WebPage",
+                "about": "Enneagram personality framework placeholder"
+            },
+            "method_boundary": {
+                "summary": "九型人格内容用于反思和教育，不是临床诊断、招聘筛选、官方类型凭证或决定论身份标签。",
+                "not_for": [
+                    "clinical diagnosis",
+                    "employment screening",
+                    "deterministic life decisions"
+                ]
+            },
+            "evidence_notes": [
+                {
+                    "source_type": "placeholder_boundary",
+                    "note": "在完整编辑审查和来源说明完成前，占位文案必须保持克制表达。"
+                }
+            ],
+            "internal_links": [
+                {
+                    "label": "九型人格",
+                    "target_code": "enneagram",
+                    "relationship": "hub",
+                    "href": "/zh/personality/enneagram"
+                },
+                {
+                    "label": "开始九型人格测试",
+                    "target_code": "enneagram-test",
+                    "relationship": "test_cta",
+                    "href": "/zh/tests/enneagram-personality-test-nine-types"
+                }
+            ],
+            "is_public": true,
+            "index_eligible": false,
+            "sitemap_eligible": false,
+            "llms_eligible": false,
+            "launch_state": "content_ready",
+            "review_state": "placeholder_ready",
+            "last_reviewed_at": "2026-06-14T00:00:00Z",
+            "sections": [
+                {
+                    "key": "overview",
+                    "title": "占位概览",
+                    "body_md": "5号人格通常围绕观察、知识、边界，以及资源或被打扰的张力展开。"
+                },
+                {
+                    "key": "next_step",
+                    "title": "后续内容",
+                    "body_md": "完整公开正文将在独立内容覆盖 PR 中补齐。"
+                },
+                {
+                    "key": "method_boundary",
+                    "title": "方法边界",
+                    "body_md": "九型人格内容用于反思和教育，不是临床诊断、招聘筛选、官方类型凭证或决定论身份标签。"
+                }
+            ]
+        },
+        {
+            "framework": "enneagram",
+            "entity_type": "core_type",
+            "code": "type-6",
+            "entity_key": "type-6",
+            "slug": "enneagram/type-6",
+            "locale": "zh-CN",
+            "title": "6号人格：忠诚者",
+            "summary": "6号人格通常围绕忠诚、风险扫描、准备，以及信任或安全感的张力展开。",
+            "seo": {
+                "title": "6号人格：忠诚者 | FermatMind Enneagram",
+                "description": "6号人格通常围绕忠诚、风险扫描、准备，以及信任或安全感的张力展开。"
+            },
+            "robots": "noindex,follow",
+            "canonical_path": "/zh/personality/enneagram/type-6",
+            "canonical": {
+                "path": "/zh/personality/enneagram/type-6"
+            },
+            "hreflang": {
+                "en": "/en/personality/enneagram/type-6",
+                "zh-CN": "/zh/personality/enneagram/type-6"
+            },
+            "faq": [
+                {
+                    "question": "这是完整页面吗： 6号人格：忠诚者?",
+                    "answer": "不是。这个 noindex 占位页只锁定 CMS/API 合同，完整正文通过质量门槛后再开放索引。"
+                }
+            ],
+            "media": {
+                "status": "placeholder",
+                "hero_image_asset_key": null,
+                "alt": "6号人格：忠诚者 九型人格占位图"
+            },
+            "schema": {
+                "@type": "WebPage",
+                "about": "Enneagram personality framework placeholder"
+            },
+            "method_boundary": {
+                "summary": "九型人格内容用于反思和教育，不是临床诊断、招聘筛选、官方类型凭证或决定论身份标签。",
+                "not_for": [
+                    "clinical diagnosis",
+                    "employment screening",
+                    "deterministic life decisions"
+                ]
+            },
+            "evidence_notes": [
+                {
+                    "source_type": "placeholder_boundary",
+                    "note": "在完整编辑审查和来源说明完成前，占位文案必须保持克制表达。"
+                }
+            ],
+            "internal_links": [
+                {
+                    "label": "九型人格",
+                    "target_code": "enneagram",
+                    "relationship": "hub",
+                    "href": "/zh/personality/enneagram"
+                },
+                {
+                    "label": "开始九型人格测试",
+                    "target_code": "enneagram-test",
+                    "relationship": "test_cta",
+                    "href": "/zh/tests/enneagram-personality-test-nine-types"
+                }
+            ],
+            "is_public": true,
+            "index_eligible": false,
+            "sitemap_eligible": false,
+            "llms_eligible": false,
+            "launch_state": "content_ready",
+            "review_state": "placeholder_ready",
+            "last_reviewed_at": "2026-06-14T00:00:00Z",
+            "sections": [
+                {
+                    "key": "overview",
+                    "title": "占位概览",
+                    "body_md": "6号人格通常围绕忠诚、风险扫描、准备，以及信任或安全感的张力展开。"
+                },
+                {
+                    "key": "next_step",
+                    "title": "后续内容",
+                    "body_md": "完整公开正文将在独立内容覆盖 PR 中补齐。"
+                },
+                {
+                    "key": "method_boundary",
+                    "title": "方法边界",
+                    "body_md": "九型人格内容用于反思和教育，不是临床诊断、招聘筛选、官方类型凭证或决定论身份标签。"
+                }
+            ]
+        },
+        {
+            "framework": "enneagram",
+            "entity_type": "core_type",
+            "code": "type-7",
+            "entity_key": "type-7",
+            "slug": "enneagram/type-7",
+            "locale": "zh-CN",
+            "title": "7号人格：热情者",
+            "summary": "7号人格通常围绕可能性、刺激、重构，以及限制或不适的张力展开。",
+            "seo": {
+                "title": "7号人格：热情者 | FermatMind Enneagram",
+                "description": "7号人格通常围绕可能性、刺激、重构，以及限制或不适的张力展开。"
+            },
+            "robots": "noindex,follow",
+            "canonical_path": "/zh/personality/enneagram/type-7",
+            "canonical": {
+                "path": "/zh/personality/enneagram/type-7"
+            },
+            "hreflang": {
+                "en": "/en/personality/enneagram/type-7",
+                "zh-CN": "/zh/personality/enneagram/type-7"
+            },
+            "faq": [
+                {
+                    "question": "这是完整页面吗： 7号人格：热情者?",
+                    "answer": "不是。这个 noindex 占位页只锁定 CMS/API 合同，完整正文通过质量门槛后再开放索引。"
+                }
+            ],
+            "media": {
+                "status": "placeholder",
+                "hero_image_asset_key": null,
+                "alt": "7号人格：热情者 九型人格占位图"
+            },
+            "schema": {
+                "@type": "WebPage",
+                "about": "Enneagram personality framework placeholder"
+            },
+            "method_boundary": {
+                "summary": "九型人格内容用于反思和教育，不是临床诊断、招聘筛选、官方类型凭证或决定论身份标签。",
+                "not_for": [
+                    "clinical diagnosis",
+                    "employment screening",
+                    "deterministic life decisions"
+                ]
+            },
+            "evidence_notes": [
+                {
+                    "source_type": "placeholder_boundary",
+                    "note": "在完整编辑审查和来源说明完成前，占位文案必须保持克制表达。"
+                }
+            ],
+            "internal_links": [
+                {
+                    "label": "九型人格",
+                    "target_code": "enneagram",
+                    "relationship": "hub",
+                    "href": "/zh/personality/enneagram"
+                },
+                {
+                    "label": "开始九型人格测试",
+                    "target_code": "enneagram-test",
+                    "relationship": "test_cta",
+                    "href": "/zh/tests/enneagram-personality-test-nine-types"
+                }
+            ],
+            "is_public": true,
+            "index_eligible": false,
+            "sitemap_eligible": false,
+            "llms_eligible": false,
+            "launch_state": "content_ready",
+            "review_state": "placeholder_ready",
+            "last_reviewed_at": "2026-06-14T00:00:00Z",
+            "sections": [
+                {
+                    "key": "overview",
+                    "title": "占位概览",
+                    "body_md": "7号人格通常围绕可能性、刺激、重构，以及限制或不适的张力展开。"
+                },
+                {
+                    "key": "next_step",
+                    "title": "后续内容",
+                    "body_md": "完整公开正文将在独立内容覆盖 PR 中补齐。"
+                },
+                {
+                    "key": "method_boundary",
+                    "title": "方法边界",
+                    "body_md": "九型人格内容用于反思和教育，不是临床诊断、招聘筛选、官方类型凭证或决定论身份标签。"
+                }
+            ]
+        },
+        {
+            "framework": "enneagram",
+            "entity_type": "core_type",
+            "code": "type-8",
+            "entity_key": "type-8",
+            "slug": "enneagram/type-8",
+            "locale": "zh-CN",
+            "title": "8号人格：挑战者",
+            "summary": "8号人格通常围绕强度、保护、直接表达，以及控制或脆弱的张力展开。",
+            "seo": {
+                "title": "8号人格：挑战者 | FermatMind Enneagram",
+                "description": "8号人格通常围绕强度、保护、直接表达，以及控制或脆弱的张力展开。"
+            },
+            "robots": "noindex,follow",
+            "canonical_path": "/zh/personality/enneagram/type-8",
+            "canonical": {
+                "path": "/zh/personality/enneagram/type-8"
+            },
+            "hreflang": {
+                "en": "/en/personality/enneagram/type-8",
+                "zh-CN": "/zh/personality/enneagram/type-8"
+            },
+            "faq": [
+                {
+                    "question": "这是完整页面吗： 8号人格：挑战者?",
+                    "answer": "不是。这个 noindex 占位页只锁定 CMS/API 合同，完整正文通过质量门槛后再开放索引。"
+                }
+            ],
+            "media": {
+                "status": "placeholder",
+                "hero_image_asset_key": null,
+                "alt": "8号人格：挑战者 九型人格占位图"
+            },
+            "schema": {
+                "@type": "WebPage",
+                "about": "Enneagram personality framework placeholder"
+            },
+            "method_boundary": {
+                "summary": "九型人格内容用于反思和教育，不是临床诊断、招聘筛选、官方类型凭证或决定论身份标签。",
+                "not_for": [
+                    "clinical diagnosis",
+                    "employment screening",
+                    "deterministic life decisions"
+                ]
+            },
+            "evidence_notes": [
+                {
+                    "source_type": "placeholder_boundary",
+                    "note": "在完整编辑审查和来源说明完成前，占位文案必须保持克制表达。"
+                }
+            ],
+            "internal_links": [
+                {
+                    "label": "九型人格",
+                    "target_code": "enneagram",
+                    "relationship": "hub",
+                    "href": "/zh/personality/enneagram"
+                },
+                {
+                    "label": "开始九型人格测试",
+                    "target_code": "enneagram-test",
+                    "relationship": "test_cta",
+                    "href": "/zh/tests/enneagram-personality-test-nine-types"
+                }
+            ],
+            "is_public": true,
+            "index_eligible": false,
+            "sitemap_eligible": false,
+            "llms_eligible": false,
+            "launch_state": "content_ready",
+            "review_state": "placeholder_ready",
+            "last_reviewed_at": "2026-06-14T00:00:00Z",
+            "sections": [
+                {
+                    "key": "overview",
+                    "title": "占位概览",
+                    "body_md": "8号人格通常围绕强度、保护、直接表达，以及控制或脆弱的张力展开。"
+                },
+                {
+                    "key": "next_step",
+                    "title": "后续内容",
+                    "body_md": "完整公开正文将在独立内容覆盖 PR 中补齐。"
+                },
+                {
+                    "key": "method_boundary",
+                    "title": "方法边界",
+                    "body_md": "九型人格内容用于反思和教育，不是临床诊断、招聘筛选、官方类型凭证或决定论身份标签。"
+                }
+            ]
+        },
+        {
+            "framework": "enneagram",
+            "entity_type": "core_type",
+            "code": "type-9",
+            "entity_key": "type-9",
+            "slug": "enneagram/type-9",
+            "locale": "zh-CN",
+            "title": "9号人格：调停者",
+            "summary": "9号人格通常围绕稳定、调停、舒适，以及冲突或自我消隐的张力展开。",
+            "seo": {
+                "title": "9号人格：调停者 | FermatMind Enneagram",
+                "description": "9号人格通常围绕稳定、调停、舒适，以及冲突或自我消隐的张力展开。"
+            },
+            "robots": "noindex,follow",
+            "canonical_path": "/zh/personality/enneagram/type-9",
+            "canonical": {
+                "path": "/zh/personality/enneagram/type-9"
+            },
+            "hreflang": {
+                "en": "/en/personality/enneagram/type-9",
+                "zh-CN": "/zh/personality/enneagram/type-9"
+            },
+            "faq": [
+                {
+                    "question": "这是完整页面吗： 9号人格：调停者?",
+                    "answer": "不是。这个 noindex 占位页只锁定 CMS/API 合同，完整正文通过质量门槛后再开放索引。"
+                }
+            ],
+            "media": {
+                "status": "placeholder",
+                "hero_image_asset_key": null,
+                "alt": "9号人格：调停者 九型人格占位图"
+            },
+            "schema": {
+                "@type": "WebPage",
+                "about": "Enneagram personality framework placeholder"
+            },
+            "method_boundary": {
+                "summary": "九型人格内容用于反思和教育，不是临床诊断、招聘筛选、官方类型凭证或决定论身份标签。",
+                "not_for": [
+                    "clinical diagnosis",
+                    "employment screening",
+                    "deterministic life decisions"
+                ]
+            },
+            "evidence_notes": [
+                {
+                    "source_type": "placeholder_boundary",
+                    "note": "在完整编辑审查和来源说明完成前，占位文案必须保持克制表达。"
+                }
+            ],
+            "internal_links": [
+                {
+                    "label": "九型人格",
+                    "target_code": "enneagram",
+                    "relationship": "hub",
+                    "href": "/zh/personality/enneagram"
+                },
+                {
+                    "label": "开始九型人格测试",
+                    "target_code": "enneagram-test",
+                    "relationship": "test_cta",
+                    "href": "/zh/tests/enneagram-personality-test-nine-types"
+                }
+            ],
+            "is_public": true,
+            "index_eligible": false,
+            "sitemap_eligible": false,
+            "llms_eligible": false,
+            "launch_state": "content_ready",
+            "review_state": "placeholder_ready",
+            "last_reviewed_at": "2026-06-14T00:00:00Z",
+            "sections": [
+                {
+                    "key": "overview",
+                    "title": "占位概览",
+                    "body_md": "9号人格通常围绕稳定、调停、舒适，以及冲突或自我消隐的张力展开。"
+                },
+                {
+                    "key": "next_step",
+                    "title": "后续内容",
+                    "body_md": "完整公开正文将在独立内容覆盖 PR 中补齐。"
+                },
+                {
+                    "key": "method_boundary",
+                    "title": "方法边界",
+                    "body_md": "九型人格内容用于反思和教育，不是临床诊断、招聘筛选、官方类型凭证或决定论身份标签。"
+                }
+            ]
+        }
+    ]
+}
