@@ -156,6 +156,49 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
         ] as $forbiddenTerm) {
             $this->assertStringNotContainsString($forbiddenTerm, $serializedSeed);
         }
+
+        $publicFacingText = $assets
+            ->map(function (array $asset): string {
+                $sections = collect((array) ($asset['sections'] ?? []))
+                    ->flatMap(static fn (array $section): array => [
+                        (string) ($section['title'] ?? ''),
+                        (string) ($section['body'] ?? ''),
+                        (string) ($section['body_md'] ?? ''),
+                    ]);
+                $faq = collect((array) ($asset['faq'] ?? []))
+                    ->flatMap(static fn (array $entry): array => [
+                        (string) ($entry['question'] ?? ''),
+                        (string) ($entry['answer'] ?? ''),
+                    ]);
+                $evidenceNotes = collect((array) ($asset['evidence_notes'] ?? []))
+                    ->map(static fn (mixed $entry): string => is_array($entry)
+                        ? (string) ($entry['note'] ?? '')
+                        : (string) $entry);
+
+                return collect([
+                    (string) ($asset['title'] ?? ''),
+                    (string) ($asset['summary'] ?? ''),
+                    (string) data_get($asset, 'seo.title', ''),
+                    (string) data_get($asset, 'seo.description', ''),
+                    (string) data_get($asset, 'media.alt', ''),
+                    (string) data_get($asset, 'method_boundary.summary', ''),
+                ])
+                    ->merge($sections)
+                    ->merge($faq)
+                    ->merge($evidenceNotes)
+                    ->implode("\n");
+            })
+            ->implode("\n");
+
+        foreach ([
+            '公共内容包',
+            'content package',
+            'CMS',
+            'seed',
+            'render candidate',
+        ] as $forbiddenPublicTerm) {
+            $this->assertStringNotContainsString($forbiddenPublicTerm, $publicFacingText);
+        }
     }
 
     public function test_import_dry_run_validates_enneagram_placeholder_seed_without_writing(): void
