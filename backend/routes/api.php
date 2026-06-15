@@ -56,6 +56,7 @@ use App\Http\Controllers\API\V0_5\Career\CareerRecommendationExplainabilityContr
 use App\Http\Controllers\API\V0_5\Career\CareerRecommendationFeedbackController;
 use App\Http\Controllers\API\V0_5\Career\CareerRecommendationIndexController;
 use App\Http\Controllers\API\V0_5\Career\CareerRuntimeConfigController;
+use App\Http\Controllers\API\V0_5\Career\CareerSalaryAssetPreviewController;
 use App\Http\Controllers\API\V0_5\Career\CareerSearchController;
 use App\Http\Controllers\API\V0_5\Career\CareerShortlistController;
 use App\Http\Controllers\API\V0_5\Career\CareerTransitionPreviewController;
@@ -488,6 +489,7 @@ Route::prefix('v0.5')->group(function () {
     Route::get('/career/directory', [CareerDirectoryController::class, 'index']);
     Route::get('/career/jobs', [CareerJobListController::class, 'index']);
     Route::get('/career/cn-proxy/{slug}', [CareerCnProxyPublicOwnerController::class, 'show']);
+    Route::get('/career/jobs/{slug}/salary-asset', [CareerSalaryAssetPreviewController::class, 'show']);
     Route::get('/career/jobs/{slug}', [CareerJobDetailController::class, 'show']);
     Route::get('/career/jobs/{slug}/explainability', [CareerJobExplainabilityController::class, 'show']);
     Route::get('/career/recommendations/mbti', [CareerRecommendationIndexController::class, 'index']);

@@ -2391,6 +2391,30 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ));
     }
 
+    public function test_runtime_freeze_classifier_ignores_career_salary_asset_staging_preview_changes(): void
+    {
+        $changed = [
+            'backend/app/Http/Controllers/API/V0_5/Career/CareerSalaryAssetPreviewController.php',
+            'backend/app/Models/CareerJobSalaryAsset.php',
+            'backend/app/Models/Occupation.php',
+            'backend/app/Services/Career/SalaryAssets/CareerSalaryAssetImportService.php',
+            'backend/app/Services/Career/SalaryAssets/CareerSalaryAssetPreviewService.php',
+            'backend/database/migrations/2026_06_16_000100_create_career_job_salary_assets_table.php',
+            'backend/routes/api.php',
+        ];
+        $routeChangedLines = [
+            '+use App\\Http\\Controllers\\API\\V0_5\\Career\\CareerSalaryAssetPreviewController;',
+            "+    Route::get('/career/jobs/{slug}/salary-asset', [CareerSalaryAssetPreviewController::class, 'show']);",
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            routeChangedLines: $routeChangedLines,
+        ));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_display_asset_backed_bundle_changes(): void
     {
         $changed = [
@@ -3486,6 +3510,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isCareerSalaryAssetStagingPreviewFile($file)) {
+                continue;
+            }
+
             if (
                 $file === 'backend/app/Services/Content/ContentPacksIndex.php'
                 && $this->contentPacksIndexDiffIsStreamingScanOnly(
@@ -3534,6 +3562,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             if (
                 $file === 'backend/routes/api.php'
                 && $this->routeDiffIsCareerDirectoryAuthorityOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
+            ) {
+                continue;
+            }
+
+            if (
+                $file === 'backend/routes/api.php'
+                && $this->routeDiffIsCareerSalaryAssetStagingPreviewOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
             ) {
                 continue;
             }
@@ -5081,6 +5116,18 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ], true);
     }
 
+    private function isCareerSalaryAssetStagingPreviewFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Http/Controllers/API/V0_5/Career/CareerSalaryAssetPreviewController.php',
+            'backend/app/Models/CareerJobSalaryAsset.php',
+            'backend/app/Models/Occupation.php',
+            'backend/app/Services/Career/SalaryAssets/CareerSalaryAssetImportService.php',
+            'backend/app/Services/Career/SalaryAssets/CareerSalaryAssetPreviewService.php',
+            'backend/database/migrations/2026_06_16_000100_create_career_job_salary_assets_table.php',
+        ], true);
+    }
+
     private function isCareerPublicDistributionFile(string $file): bool
     {
         return in_array($file, [
@@ -6028,6 +6075,29 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $allowedLines = [
             '+use App\\Http\\Controllers\\API\\V0_5\\Career\\CareerDirectoryController;',
             "+    Route::get('/career/directory', [CareerDirectoryController::class, 'index']);",
+        ];
+
+        foreach ($changedLines as $line) {
+            if (! in_array($line, $allowedLines, true)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function routeDiffIsCareerSalaryAssetStagingPreviewOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        $allowedLines = [
+            '+use App\\Http\\Controllers\\API\\V0_5\\Career\\CareerSalaryAssetPreviewController;',
+            "+    Route::get('/career/jobs/{slug}/salary-asset', [CareerSalaryAssetPreviewController::class, 'show']);",
         ];
 
         foreach ($changedLines as $line) {
