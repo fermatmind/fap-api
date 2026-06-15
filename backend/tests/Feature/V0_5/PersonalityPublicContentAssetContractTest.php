@@ -199,6 +199,96 @@ final class PersonalityPublicContentAssetContractTest extends TestCase
         ] as $forbiddenPublicTerm) {
             $this->assertStringNotContainsString($forbiddenPublicTerm, $publicFacingText);
         }
+
+        $tokenize = static function (array $asset): array {
+            $sections = collect((array) ($asset['sections'] ?? []))
+                ->flatMap(static fn (array $section): array => [
+                    (string) ($section['title'] ?? ''),
+                    (string) ($section['body'] ?? ''),
+                    (string) ($section['body_md'] ?? ''),
+                ]);
+            $faq = collect((array) ($asset['faq'] ?? []))
+                ->flatMap(static fn (array $entry): array => [
+                    (string) ($entry['question'] ?? ''),
+                    (string) ($entry['answer'] ?? ''),
+                ]);
+            $text = collect([
+                (string) ($asset['title'] ?? ''),
+                (string) ($asset['summary'] ?? ''),
+                (string) data_get($asset, 'seo.title', ''),
+                (string) data_get($asset, 'seo.description', ''),
+            ])
+                ->merge($sections)
+                ->merge($faq)
+                ->implode(' ');
+
+            $parts = preg_split('/[^\p{L}\p{N}]+/u', mb_strtolower($text)) ?: [];
+            $stopWords = [
+                'the' => true,
+                'and' => true,
+                'for' => true,
+                'with' => true,
+                'this' => true,
+                'that' => true,
+                'not' => true,
+                'can' => true,
+                'you' => true,
+                'are' => true,
+                'big' => true,
+                'five' => true,
+                '人格' => true,
+                '大五' => true,
+                '继续' => true,
+                '查看' => true,
+                '本页' => true,
+                '解释' => true,
+            ];
+
+            return collect($parts)
+                ->filter(static fn (string $part): bool => mb_strlen($part) > 2 && ! isset($stopWords[$part]))
+                ->unique()
+                ->values()
+                ->all();
+        };
+
+        $jaccard = static function (array $left, array $right): float {
+            $leftSet = array_fill_keys($left, true);
+            $rightSet = array_fill_keys($right, true);
+            $intersection = count(array_intersect_key($leftSet, $rightSet));
+            $union = count($leftSet + $rightSet);
+
+            return $union > 0 ? $intersection / $union : 0.0;
+        };
+
+        foreach (['en', 'zh-CN'] as $locale) {
+            $reviewable = $renderCandidates
+                ->where('locale', $locale)
+                ->whereIn('entity_type', [
+                    PersonalityPublicContentAsset::ENTITY_DOMAIN,
+                    PersonalityPublicContentAsset::ENTITY_POLARITY,
+                ])
+                ->values();
+
+            for ($left = 0; $left < $reviewable->count(); $left++) {
+                for ($right = $left + 1; $right < $reviewable->count(); $right++) {
+                    $leftAsset = $reviewable[$left];
+                    $rightAsset = $reviewable[$right];
+                    $similarity = $jaccard($tokenize($leftAsset), $tokenize($rightAsset));
+
+                    $this->assertLessThan(
+                        0.72,
+                        $similarity,
+                        sprintf(
+                            'Big Five public content duplicate risk too high for %s %s vs %s: %.3f',
+                            $locale,
+                            (string) ($leftAsset['code'] ?? ''),
+                            (string) ($rightAsset['code'] ?? ''),
+                            $similarity
+                        )
+                    );
+                }
+            }
+        }
     }
 
     public function test_import_dry_run_validates_enneagram_placeholder_seed_without_writing(): void
