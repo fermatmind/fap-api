@@ -1734,6 +1734,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_article_seo_gate_rollout_tooling_changes(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/ArticleSeoGateRollout.php',
+            'backend/app/Console/Kernel.php',
+            'backend/app/Services/Cms/ArticleSeoGateRollout.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\ArticleSeoGateRollout;',
+            '+        ArticleSeoGateRollout::class,',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
+    }
+
     public function test_runtime_freeze_classifier_ignores_article_body_h1_guard_changes(): void
     {
         $changed = [
@@ -3170,6 +3185,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isArticleSeoGateRolloutFile($file)) {
+                continue;
+            }
+
             if ($this->isArticleBodyH1GuardFile($file)) {
                 continue;
             }
@@ -4141,6 +4160,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/ArticleReplaceInlineImageUrl.php',
             'backend/app/Services/Cms/ArticleInlineImageUrlReplacer.php',
+        ], true);
+    }
+
+    private function isArticleSeoGateRolloutFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/ArticleSeoGateRollout.php',
+            'backend/app/Services/Cms/ArticleSeoGateRollout.php',
         ], true);
     }
 
@@ -5804,7 +5831,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 return false;
             }
 
-            if (preg_match('/\b(ArticleEnsureSeoMetaBaseline|ArticleUpdateExistingSeoContentPackage|ContentReleaseRevalidate|SeoIntelSearchChannelQueueCommand|SeoIntelUrlTruthHandoffCommand)\b/u', $line) !== 1) {
+            if (preg_match('/\b(ArticleEnsureSeoMetaBaseline|ArticleUpdateExistingSeoContentPackage|ArticleSeoGateRollout|ContentReleaseRevalidate|SeoIntelSearchChannelQueueCommand|SeoIntelUrlTruthHandoffCommand)\b/u', $line) !== 1) {
                 return false;
             }
         }
