@@ -1106,6 +1106,7 @@ class ArticleController extends Controller
         $seoMeta['seo_description'] = $revision->seo_description;
         $seoMeta['canonical_url'] = CanonicalFrontendUrl::normalizeAbsoluteUrl($seoMeta['canonical_url'] ?? null);
         if (is_array($seoMeta['schema_json'] ?? null)) {
+            $this->projectPublicSeoGateMetadata($seoMeta, $seoMeta['schema_json']);
             $seoMeta['schema_json'] = PublicMediaUrlGuard::sanitizeJsonLdImageFields(
                 CanonicalFrontendUrl::normalizeNestedUrls($seoMeta['schema_json'])
             );
@@ -1291,12 +1292,54 @@ class ArticleController extends Controller
 
         $seoMeta['canonical_url'] = CanonicalFrontendUrl::normalizeAbsoluteUrl($seoMeta['canonical_url'] ?? null);
         if (is_array($seoMeta['schema_json'] ?? null)) {
+            $this->projectPublicSeoGateMetadata($seoMeta, $seoMeta['schema_json']);
             $seoMeta['schema_json'] = PublicMediaUrlGuard::sanitizeJsonLdImageFields(
                 CanonicalFrontendUrl::normalizeNestedUrls($seoMeta['schema_json'])
             );
+            unset($seoMeta['schema_json']['editorial_package_v1']);
         }
 
         return $seoMeta;
+    }
+
+    /**
+     * @param  array<string,mixed>  $seoMeta
+     * @param  array<string,mixed>  $schemaJson
+     */
+    private function projectPublicSeoGateMetadata(array &$seoMeta, array $schemaJson): void
+    {
+        $editorialPackage = $schemaJson['editorial_package_v1'] ?? null;
+        if (! is_array($editorialPackage)) {
+            return;
+        }
+
+        $schemaGates = [];
+        foreach ([
+            'article_schema_enabled' => 'article_schema_gate_v1',
+            'breadcrumb_schema_enabled' => 'breadcrumb_schema_gate_v1',
+            'faq_schema_enabled' => 'faq_schema_gate_v1',
+        ] as $sourceKey => $targetKey) {
+            if (is_bool($editorialPackage[$sourceKey] ?? null)) {
+                $schemaGates[$targetKey] = ['enabled' => (bool) $editorialPackage[$sourceKey]];
+            }
+        }
+
+        if ($schemaGates !== []) {
+            $seoMeta['schema_gates_v1'] = $schemaGates;
+        }
+
+        $hreflangGate = $editorialPackage['hreflang_gate_v1'] ?? null;
+        if (is_array($hreflangGate) && is_bool($hreflangGate['enabled'] ?? null)) {
+            $publicHreflangGate = ['enabled' => (bool) $hreflangGate['enabled']];
+
+            foreach (['policy', 'reason'] as $key) {
+                if (is_string($hreflangGate[$key] ?? null) && trim((string) $hreflangGate[$key]) !== '') {
+                    $publicHreflangGate[$key] = trim((string) $hreflangGate[$key]);
+                }
+            }
+
+            $seoMeta['hreflang_gate_v1'] = $publicHreflangGate;
+        }
     }
 
     private function invalidArgument(InvalidArgumentException $e): JsonResponse
