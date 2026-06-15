@@ -202,9 +202,15 @@ final class ArticleSeoGateRollout
                 continue;
             }
 
-            $types = $this->jsonLdTypes($this->seoService->generateJsonLd($article, $article->publishedRevision));
+            $types = $this->jsonLdTypes($this->seoService->generateJsonLd(
+                $article,
+                $article->publishedRevision,
+                $this->plannedFaqSchemaOverride($options)
+            ));
             $articleSchemaRequested = (bool) ($options['enable_article_schema'] ?? false)
                 || (bool) ($options['enable_breadcrumb_schema'] ?? false);
+            $faqSchemaRequested = (bool) ($options['enable_faq_schema'] ?? false);
+            $faqSchemaHeld = (bool) ($options['hold_faq_schema'] ?? false);
 
             if ($articleSchemaRequested && ! in_array('Article', $types, true)) {
                 $errors[] = $this->issue('article.'.$article->id.'.jsonld', 'json_ld_article_missing', 'Generated JSON-LD must contain Article before enabling Article schema.', [
@@ -213,7 +219,7 @@ final class ArticleSeoGateRollout
                 ]);
             }
 
-            if ($articleSchemaRequested && ! (bool) ($options['enable_faq_schema'] ?? false) && in_array('FAQPage', $types, true)) {
+            if ($articleSchemaRequested && ! $faqSchemaRequested && ! $faqSchemaHeld && in_array('FAQPage', $types, true)) {
                 $errors[] = $this->issue('article.'.$article->id.'.jsonld', 'json_ld_faq_gate_blocked', 'Generated JSON-LD contains FAQPage while FAQ schema gate is not explicitly enabled.', [
                     'article_id' => (int) $article->id,
                     'json_ld_types' => $types,
@@ -231,6 +237,22 @@ final class ArticleSeoGateRollout
         if ((bool) ($options['enable_hreflang'] ?? false)) {
             $this->validateReciprocalHreflang($articles, $errors);
         }
+    }
+
+    /**
+     * @param  array<string,mixed>  $options
+     */
+    private function plannedFaqSchemaOverride(array $options): ?bool
+    {
+        if ((bool) ($options['enable_faq_schema'] ?? false)) {
+            return true;
+        }
+
+        if ((bool) ($options['hold_faq_schema'] ?? false)) {
+            return false;
+        }
+
+        return null;
     }
 
     /**
@@ -397,6 +419,14 @@ final class ArticleSeoGateRollout
             $snapshot['schema_gates']['faq_schema_enabled'] = true;
         } elseif ((bool) ($options['hold_faq_schema'] ?? false)) {
             $snapshot['schema_gates']['faq_schema_enabled'] = false;
+        }
+        $plannedFaqSchemaOverride = $this->plannedFaqSchemaOverride($options);
+        if ($plannedFaqSchemaOverride !== null) {
+            $snapshot['json_ld_types'] = $this->jsonLdTypes($this->seoService->generateJsonLd(
+                $article,
+                $article->publishedRevision,
+                $plannedFaqSchemaOverride
+            ));
         }
         if ((bool) ($options['enable_hreflang'] ?? false)) {
             $snapshot['schema_gates']['hreflang_gate_v1'] = [

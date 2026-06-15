@@ -125,7 +125,7 @@ final class ArticleSeoGateRolloutCommandTest extends TestCase
         $this->assertTrue((bool) data_get($audit->meta_json, 'no_content_change'));
     }
 
-    public function test_article_schema_enable_blocks_when_generated_jsonld_contains_faqpage_and_faq_gate_is_held(): void
+    public function test_article_schema_enable_filters_generated_faqpage_when_faq_gate_is_held(): void
     {
         config(['app.frontend_url' => 'https://fermatmind.com']);
         $article = $this->createArticle([
@@ -156,6 +156,49 @@ final class ArticleSeoGateRolloutCommandTest extends TestCase
             '--enable-article-schema' => true,
             '--enable-breadcrumb-schema' => true,
             '--hold-faq-schema' => true,
+            '--dry-run' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertTrue($payload['ok']);
+        $this->assertTrue($payload['dry_run']);
+        $this->assertContains('FAQPage', data_get($payload, 'before.0.json_ld_types'));
+        $this->assertNotContains('FAQPage', data_get($payload, 'after.0.json_ld_types'));
+        $this->assertFalse((bool) data_get($payload, 'after.0.schema_gates.faq_schema_enabled'));
+    }
+
+    public function test_article_schema_enable_blocks_when_generated_jsonld_contains_faqpage_without_faq_gate_decision(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+        $article = $this->createArticle([
+            'id' => 51,
+            'slug' => 'enneagram-personality-test-explained',
+            'locale' => 'zh-CN',
+            'translation_group_id' => 'tg_article_enneagram_personality_test_explained_2026v1',
+            'title' => '九型人格测试准吗？',
+        ]);
+        $this->createSeoMeta($article, [
+            'schema_json' => [
+                'editorial_package_v1' => [
+                    'answer_surface_policy' => 'editor_supplied',
+                    'answer_surface_visibility' => 'below_intro',
+                    'answer_surface_v1' => [
+                        'faq_items' => [
+                            ['question' => '九型人格能诊断人格吗？', 'answer' => '不能，它只能用于自我理解。'],
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+
+        $exitCode = Artisan::call('articles:seo-gate-rollout', [
+            '--article-ids' => (string) $article->id,
+            '--translation-group-id' => 'tg_article_enneagram_personality_test_explained_2026v1',
+            '--expected-slugs' => 'enneagram-personality-test-explained',
+            '--enable-article-schema' => true,
+            '--enable-breadcrumb-schema' => true,
             '--dry-run' => true,
             '--json' => true,
         ]);
