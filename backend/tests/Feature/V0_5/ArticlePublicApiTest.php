@@ -322,6 +322,49 @@ final class ArticlePublicApiTest extends TestCase
         $this->assertStringStartsWith('## Legacy duplicate title', (string) $response->json('article.content_md'));
     }
 
+    public function test_article_detail_projects_public_schema_and_hreflang_gates_without_editorial_package(): void
+    {
+        $article = $this->createArticle([
+            'slug' => 'schema-gated-article',
+            'locale' => 'en',
+            'title' => 'Schema Gated Article',
+            'excerpt' => 'Article with controlled public schema gates.',
+        ]);
+        $this->createSeoMeta($article, [
+            'schema_json' => [
+                '@type' => 'Article',
+                'url' => 'https://www.fermatmind.com/en/articles/schema-gated-article',
+                'editorial_package_v1' => [
+                    'article_schema_enabled' => true,
+                    'breadcrumb_schema_enabled' => true,
+                    'faq_schema_enabled' => false,
+                    'hreflang_gate_v1' => [
+                        'enabled' => false,
+                        'policy' => 'no_hreflang',
+                        'reason' => 'no_direct_english_counterpart_approved',
+                        'recorded_by' => 'articles:seo-gate-rollout',
+                    ],
+                    'private_operator_note' => 'do not expose this package field',
+                ],
+            ],
+        ]);
+
+        $response = $this->getJson('/api/v0.5/articles/schema-gated-article?locale=en');
+
+        $response->assertOk()
+            ->assertJsonPath('article.seo_meta.schema_json.@type', 'Article')
+            ->assertJsonPath('article.seo_meta.schema_gates_v1.article_schema_gate_v1.enabled', true)
+            ->assertJsonPath('article.seo_meta.schema_gates_v1.breadcrumb_schema_gate_v1.enabled', true)
+            ->assertJsonPath('article.seo_meta.schema_gates_v1.faq_schema_gate_v1.enabled', false)
+            ->assertJsonPath('article.seo_meta.hreflang_gate_v1.enabled', false)
+            ->assertJsonPath('article.seo_meta.hreflang_gate_v1.policy', 'no_hreflang')
+            ->assertJsonPath('article.seo_meta.hreflang_gate_v1.reason', 'no_direct_english_counterpart_approved')
+            ->assertJsonMissingPath('article.seo_meta.hreflang_gate_v1.recorded_by')
+            ->assertJsonMissingPath('article.seo_meta.schema_json.editorial_package_v1');
+
+        $this->assertStringNotContainsString('private_operator_note', (string) $response->getContent());
+    }
+
     public function test_article_detail_projects_cms_cta_slots_and_visible_faq_without_private_targets(): void
     {
         config(['app.frontend_url' => 'https://www.fermatmind.com']);
