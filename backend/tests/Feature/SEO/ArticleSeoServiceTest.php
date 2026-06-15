@@ -89,4 +89,57 @@ final class ArticleSeoServiceTest extends TestCase
         $this->assertStringNotContainsString('www.fermatmind.com', json_encode($payload, JSON_THROW_ON_ERROR));
         $this->assertStringNotContainsString('www.fermatmind.com', json_encode($jsonLd, JSON_THROW_ON_ERROR));
     }
+
+    public function test_generate_json_ld_filters_visible_faq_when_faq_schema_gate_is_held(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+
+        $article = Article::query()->create([
+            'org_id' => 0,
+            'slug' => 'enneagram-personality-test-explained',
+            'locale' => 'zh-CN',
+            'title' => '九型人格测试准吗？',
+            'excerpt' => '了解九型人格测试的边界。',
+            'content_md' => '# 九型人格测试准吗？',
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => Carbon::create(2026, 6, 14, 8, 0, 0, 'UTC'),
+            'scheduled_at' => null,
+            'created_at' => Carbon::create(2026, 6, 14, 8, 0, 0, 'UTC'),
+            'updated_at' => Carbon::create(2026, 6, 14, 9, 0, 0, 'UTC'),
+        ]);
+
+        ArticleSeoMeta::query()->create([
+            'org_id' => 0,
+            'article_id' => (int) $article->id,
+            'locale' => 'zh-CN',
+            'seo_title' => '九型人格测试准吗？',
+            'seo_description' => '了解九型人格测试的边界。',
+            'canonical_url' => 'https://fermatmind.com/zh/articles/enneagram-personality-test-explained',
+            'og_title' => '九型人格测试准吗？',
+            'og_description' => '了解九型人格测试的边界。',
+            'robots' => 'index,follow',
+            'is_indexable' => true,
+            'schema_json' => [
+                'editorial_package_v1' => [
+                    'faq_schema_enabled' => false,
+                    'answer_surface_policy' => 'editor_supplied',
+                    'answer_surface_visibility' => 'below_intro',
+                    'answer_surface_v1' => [
+                        'faq_items' => [
+                            ['question' => '九型人格能诊断人格吗？', 'answer' => '不能，它只能用于自我理解。'],
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+
+        $service = app(ArticleSeoService::class);
+        $heldJsonLd = $service->generateJsonLd($article);
+        $enabledJsonLd = $service->generateJsonLd($article, null, true);
+
+        $this->assertStringNotContainsString('FAQPage', json_encode($heldJsonLd, JSON_THROW_ON_ERROR));
+        $this->assertSame('FAQPage', data_get($enabledJsonLd, 'hasPart.0.@type'));
+    }
 }

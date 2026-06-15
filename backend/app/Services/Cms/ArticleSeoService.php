@@ -120,7 +120,7 @@ final class ArticleSeoService
     /**
      * @return array<string,mixed>
      */
-    public function generateJsonLd(Article $article, ?ArticleTranslationRevision $revision = null): array
+    public function generateJsonLd(Article $article, ?ArticleTranslationRevision $revision = null, ?bool $faqSchemaEnabledOverride = null): array
     {
         $locale = $this->normalizeLocale((string) $article->locale);
         $seo = $this->resolveSeoMeta($article, $locale);
@@ -156,9 +156,13 @@ final class ArticleSeoService
 
         $faqPage = $this->buildVisibleFaqPage($article, $seo, $canonical);
         if ($faqPage !== null) {
-            $hasPart = is_array($jsonLd['hasPart'] ?? null) ? $jsonLd['hasPart'] : [];
-            $hasPart[] = $faqPage;
-            $jsonLd['hasPart'] = array_values($hasPart);
+            if ($this->shouldExposeFaqJsonLd($article, $seo, $faqSchemaEnabledOverride)) {
+                $hasPart = is_array($jsonLd['hasPart'] ?? null) ? $jsonLd['hasPart'] : [];
+                $hasPart[] = $faqPage;
+                $jsonLd['hasPart'] = array_values($hasPart);
+            } else {
+                $jsonLd = $this->removeFaqPageFromJsonLd($jsonLd);
+            }
         }
 
         return PublicMediaUrlGuard::sanitizeJsonLdImageFields(
@@ -317,6 +321,56 @@ final class ArticleSeoService
             '@id' => $canonical !== null ? $canonical.'#faq' : null,
             'mainEntity' => $mainEntity,
         ], static fn (mixed $value): bool => $value !== null);
+    }
+
+    private function shouldExposeFaqJsonLd(Article $article, ?ArticleSeoMeta $seo, ?bool $faqSchemaEnabledOverride): bool
+    {
+        if ($faqSchemaEnabledOverride !== null) {
+            return $faqSchemaEnabledOverride;
+        }
+
+        $metadata = $this->editorialPackageMetadata($article, $seo);
+        if (array_key_exists('faq_schema_enabled', $metadata) && is_bool($metadata['faq_schema_enabled'])) {
+            return (bool) $metadata['faq_schema_enabled'];
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  array<string,mixed>  $jsonLd
+     * @return array<string,mixed>
+     */
+    private function removeFaqPageFromJsonLd(array $jsonLd): array
+    {
+        if (($jsonLd['@type'] ?? null) === 'FAQPage') {
+            return [];
+        }
+
+        if (is_array($jsonLd['@type'] ?? null) && in_array('FAQPage', $jsonLd['@type'], true)) {
+            $jsonLd['@type'] = array_values(array_filter(
+                $jsonLd['@type'],
+                static fn (mixed $type): bool => $type !== 'FAQPage'
+            ));
+        }
+
+        if (is_array($jsonLd['hasPart'] ?? null)) {
+            $hasPart = [];
+            foreach ($jsonLd['hasPart'] as $part) {
+                if (is_array($part) && ($part['@type'] ?? null) === 'FAQPage') {
+                    continue;
+                }
+                $hasPart[] = $part;
+            }
+
+            if ($hasPart === []) {
+                unset($jsonLd['hasPart']);
+            } else {
+                $jsonLd['hasPart'] = array_values($hasPart);
+            }
+        }
+
+        return $jsonLd;
     }
 
     /**
