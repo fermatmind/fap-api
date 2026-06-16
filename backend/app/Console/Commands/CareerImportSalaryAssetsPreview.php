@@ -18,7 +18,7 @@ final class CareerImportSalaryAssetsPreview extends Command
         {--json : Emit machine-readable JSON report}
         {--output= : Optional report output path}';
 
-    protected $description = 'Dry-run or staging-preview import of PASS v3.6 career salary asset rows for the 10-slug allowlist.';
+    protected $description = 'Dry-run or staging-preview import of PASS v3.6 career salary asset rows for the configured staging preview allowlist.';
 
     public function __construct(
         private readonly CareerSalaryAssetImportService $importService,

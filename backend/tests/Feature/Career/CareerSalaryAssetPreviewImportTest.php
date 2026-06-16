@@ -8,6 +8,8 @@ use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Models\CareerJobSalaryAsset;
 use App\Models\Occupation;
 use App\Models\OccupationFamily;
+use App\Services\Career\SalaryAssets\CareerSalaryAssetImportService;
+use App\Services\Career\SalaryAssets\CareerSalaryAssetPreviewService;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
@@ -87,6 +89,105 @@ final class CareerSalaryAssetPreviewImportTest extends TestCase
             'status' => CareerJobSalaryAsset::STATUS_STAGING_PREVIEW,
             'preview_allowlisted' => true,
         ]);
+    }
+
+    public function test_preview_api_accepts_allowlisted_slug_samples_and_fail_closed_others(): void
+    {
+        Config::set('career_salary_assets.staging_preview_enabled', true);
+        Config::set('career_salary_assets.preview_slugs', [
+            'accountants-and-auditors',
+            'actuaries',
+            'computer-programmers',
+        ]);
+
+        foreach (['accountants-and-auditors', 'actuaries', 'computer-programmers', 'actors'] as $slug) {
+            $this->seedOccupation($slug);
+            $this->seedCareerJobBundleAuthority($slug);
+        }
+
+        $this->seedPreviewAsset('accountants-and-auditors', 'zh-CN');
+        $this->seedPreviewAsset('actuaries', 'en');
+        $this->seedPreviewAsset('computer-programmers', 'zh-CN');
+        $this->seedPreviewAsset('actors', 'en');
+
+        $this->getJson('/api/v0.5/career/jobs/accountants-and-auditors/salary-asset?locale=zh-CN')
+            ->assertOk()
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('preview', true)
+            ->assertJsonPath('salary_asset_v1.slug', 'accountants-and-auditors');
+
+        $this->getJson('/api/v0.5/career/jobs/actuaries/salary-asset?locale=en')
+            ->assertOk()
+            ->assertJsonPath('salary_asset_v1.slug', 'actuaries')
+            ->assertJsonPath('salary_asset_v1.locale', 'en')
+            ->assertJsonPath('salary_asset_v1.sources.0.used_for', 'China recruitment-market reference');
+
+        $payload = $this->getJson('/api/v0.5/career/jobs/actuaries/salary-asset?locale=en')->json('salary_asset_v1');
+        $this->assertArrayNotHasKey('research_notes', $payload);
+        $this->assertArrayNotHasKey('audit_fields', $payload);
+        $this->assertArrayNotHasKey('evidence_used', $payload);
+        $this->assertArrayNotHasKey('derived_from_estimate', $payload);
+        $this->assertArrayNotHasKey('forbidden_claims', $payload);
+        $this->assertSame('JobUI', $payload['sources'][0]['name']);
+
+        $this->getJson('/api/v0.5/career/jobs/actors/salary-asset?locale=en')
+            ->assertNotFound();
+    }
+
+    public function test_preview_importer_and_runtime_service_use_same_allowlist_source(): void
+    {
+        Config::set('career_salary_assets.staging_preview_enabled', true);
+        Config::set('career_salary_assets.preview_slugs', ['accountants-and-auditors', 'actuaries']);
+
+        foreach (['accountants-and-auditors', 'actuaries', 'actors'] as $slug) {
+            $this->seedOccupation($slug);
+            $this->seedCareerJobBundleAuthority($slug);
+        }
+
+        $file = $this->writeJsonl([
+            $this->assetRow('accountants-and-auditors', 'zh-CN'),
+            $this->assetRow('accountants-and-auditors', 'en'),
+            $this->assetRow('actuaries', 'zh-CN'),
+            $this->assetRow('actuaries', 'en'),
+            $this->assetRow('actors', 'zh-CN'),
+            $this->assetRow('actors', 'en'),
+        ]);
+
+        $rejectReport = storage_path('framework/testing/salary-preview-requested-slugs-not-allowlisted.json');
+        $rejectCode = Artisan::call('career:salary-assets-import-preview', [
+            '--file' => $file,
+            '--slugs' => 'accountants-and-auditors,actuaries,actors',
+            '--force' => true,
+            '--output' => $rejectReport,
+        ]);
+        $this->assertSame(1, $rejectCode);
+        $decodedReject = json_decode((string) file_get_contents($rejectReport), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertSame('fail', $decodedReject['decision']);
+        $this->assertStringContainsString('not in the staging preview allowlist', implode(' ', $decodedReject['errors']));
+
+        $forceReport = storage_path('framework/testing/salary-preview-force-shared-allowlist.json');
+        $forceCode = Artisan::call('career:salary-assets-import-preview', [
+            '--file' => $file,
+            '--force' => true,
+            '--output' => $forceReport,
+        ]);
+
+        $this->assertSame(0, $forceCode);
+        $decodedForce = json_decode((string) file_get_contents($forceReport), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertSame(4, $decodedForce['validated_preview_rows']);
+        $this->assertSame(4, $decodedForce['written_count']);
+
+        $this->getJson('/api/v0.5/career/jobs/actuaries/salary-asset?locale=zh-CN')
+            ->assertOk()
+            ->assertJsonPath('salary_asset_v1.slug', 'actuaries')
+            ->assertJsonPath('salary_asset_v1.locale', 'zh-CN');
+        $this->getJson('/api/v0.5/career/jobs/accountants-and-auditors/salary-asset?locale=en')
+            ->assertOk()
+            ->assertJsonPath('salary_asset_v1.slug', 'accountants-and-auditors')
+            ->assertJsonPath('salary_asset_v1.locale', 'en');
+
+        $this->getJson('/api/v0.5/career/jobs/actors/salary-asset?locale=zh-CN')
+            ->assertNotFound();
     }
 
     public function test_importer_force_blocks_when_career_job_bundle_authority_is_missing(): void
@@ -236,6 +337,14 @@ final class CareerSalaryAssetPreviewImportTest extends TestCase
         $this->seedRuntimeProjectionAuthority([$slug]);
         app(PublicCareerAuthorityResponseCache::class)->forgetJobDetailPayload($slug, 'zh-CN');
         app(PublicCareerAuthorityResponseCache::class)->forgetJobDetailPayload($slug, 'en');
+
+        app(PublicCareerAuthorityResponseCache::class)->warmJobDetailPayload($slug, 'zh-CN', true);
+        app(PublicCareerAuthorityResponseCache::class)->warmJobDetailPayload($slug, 'en', true);
+
+        $this->app->forgetInstance(CareerRuntimePublishProjectionVisibility::class);
+        $this->app->forgetInstance(CareerSalaryAssetImportService::class);
+        $this->app->forgetInstance(CareerSalaryAssetPreviewService::class);
+        $this->app->forgetInstance('App\\Console\\Commands\\CareerImportSalaryAssetsPreview');
     }
 
     /**
@@ -257,7 +366,7 @@ final class CareerSalaryAssetPreviewImportTest extends TestCase
             $detailRouteEnabled[$normalizedSlug] = true;
             $robotsIndexable[$normalizedSlug] = true;
             $releaseGatePass[$normalizedSlug] = true;
-            foreach (['en', 'zh'] as $locale) {
+            foreach (['en', 'zh', 'zh-CN'] as $locale) {
                 $items[$normalizedSlug.'|'.$locale] = [
                     'slug' => $normalizedSlug,
                     'locale' => $locale,
@@ -333,6 +442,42 @@ final class CareerSalaryAssetPreviewImportTest extends TestCase
         )));
 
         return $path;
+    }
+
+    private function seedPreviewAsset(string $slug, string $locale): void
+    {
+        $occupation = Occupation::query()->where('canonical_slug', $slug)->first();
+        if (! $occupation instanceof Occupation) {
+            $occupation = $this->seedOccupation($slug);
+        }
+
+        $row = $this->assetRow($slug, $locale);
+
+        CareerJobSalaryAsset::query()->updateOrCreate(
+            [
+                'occupation_id' => $occupation->id,
+                'career_job_slug' => $slug,
+                'locale' => $locale,
+                'asset_version' => CareerJobSalaryAsset::ASSET_VERSION_V3_6,
+            ],
+            [
+                'career_job_slug' => $slug,
+                'locale' => $locale,
+                'asset_version' => CareerJobSalaryAsset::ASSET_VERSION_V3_6,
+                'status' => CareerJobSalaryAsset::STATUS_STAGING_PREVIEW,
+                'preview_allowlisted' => true,
+                'asset_payload_json' => $row,
+                'sources_json' => $row['sources'],
+                'evidence_used_json' => $row['evidence_used'],
+                'derived_from_estimate_json' => $row['derived_from_estimate'],
+                'audit_fields_json' => $row['audit_fields'],
+                'asset_row_hash' => $row['audit_fields']['row_hash'],
+                'source_artifact_sha256' => null,
+                'evidence_artifact_sha256' => null,
+                'estimate_artifact_sha256' => null,
+                'import_run_id' => null,
+            ],
+        );
     }
 
     /**
