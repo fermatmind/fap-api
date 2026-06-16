@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace App\Services\Career\SalaryAssets;
 
+use App\Console\Commands\CareerPublicResolutionTypeMatrix;
+use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Models\CareerJobSalaryAsset;
 use App\Models\Occupation;
+use App\Services\Career\PublicCareerAuthorityResponseCache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Throwable;
@@ -16,6 +19,8 @@ final class CareerSalaryAssetImportService
 
     public function __construct(
         private readonly CareerSalaryAssetPreviewService $previewService,
+        private readonly CareerRuntimePublishProjectionVisibility $runtimeProjection,
+        private readonly PublicCareerAuthorityResponseCache $authorityResponseCache,
     ) {}
 
     /**
@@ -109,15 +114,12 @@ final class CareerSalaryAssetImportService
             }
         }
 
-        $missingOccupations = [];
-        foreach ($targetSlugs as $slug) {
-            $exists = Occupation::query()->where('canonical_slug', $slug)->exists();
-            if (! $exists) {
-                $missingOccupations[] = $slug;
+        $authorityReport = $this->careerJobBundleAuthorityReport($targetSlugs);
+        foreach ($authorityReport['rows'] as $authorityRow) {
+            $authorityErrors = is_array($authorityRow['errors'] ?? null) ? $authorityRow['errors'] : [];
+            foreach ($authorityErrors as $authorityError) {
+                $errors[] = ((string) ($authorityRow['slug'] ?? 'unknown')).': missing_career_job_bundle_authority: '.(string) $authorityError;
             }
-        }
-        foreach ($missingOccupations as $slug) {
-            $errors[] = "{$slug}: matching occupation row is missing.";
         }
 
         $validatedRows = array_values(array_map(
@@ -134,9 +136,86 @@ final class CareerSalaryAssetImportService
             'expected_preview_rows' => count($targetSlugs) * 2,
             'source_file_sha256' => hash_file('sha256', $file) ?: null,
             'target_slugs' => $targetSlugs,
+            'career_job_bundle_authority' => $authorityReport,
             'errors' => $errors,
             'rows' => $validatedRows,
         ]);
+    }
+
+    /**
+     * @param  list<string>  $targetSlugs
+     * @return array{checked_slug_count: int, ready_slug_count: int, rows: list<array<string, mixed>>}
+     */
+    private function careerJobBundleAuthorityReport(array $targetSlugs): array
+    {
+        $rows = [];
+        $readyCount = 0;
+
+        foreach ($targetSlugs as $slug) {
+            $occupationExists = Occupation::query()->where('canonical_slug', $slug)->exists();
+            $enItem = $this->runtimeProjection->itemForSlug($slug, 'en');
+            $zhItem = $this->runtimeProjection->itemForSlug($slug, 'zh-CN');
+            $projectionItem = is_array($enItem) ? $enItem : (is_array($zhItem) ? $zhItem : null);
+            $projectionExists = is_array($projectionItem);
+            $publicResolutionType = $projectionExists ? (string) ($projectionItem['public_resolution_type'] ?? '') : null;
+            $detailRouteEnabled = $projectionExists ? (($projectionItem['detail_route_enabled'] ?? false) === true) : false;
+            $releaseGatePass = $projectionExists ? (($projectionItem['release_gate_pass'] ?? false) === true) : false;
+            $detailApiZh = $this->authorityResponseCache->jobDetailPayload($slug, 'zh-CN') !== null;
+            $detailApiEn = $this->authorityResponseCache->jobDetailPayload($slug, 'en') !== null;
+            $errors = [];
+
+            if (! $occupationExists) {
+                $errors[] = 'occupation row is missing.';
+            }
+
+            if (! $projectionExists) {
+                $errors[] = 'runtime publish projection item is missing.';
+            }
+
+            if ($projectionExists && $publicResolutionType !== CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB) {
+                $errors[] = 'public_resolution_type must be public_canonical_job.';
+            }
+
+            if ($projectionExists && ! $detailRouteEnabled) {
+                $errors[] = 'detail_route_enabled must be true.';
+            }
+
+            if ($projectionExists && ! $releaseGatePass) {
+                $errors[] = 'release_gate_pass must be true.';
+            }
+
+            if (! $detailApiZh) {
+                $errors[] = 'zh-CN career job detail API is not ready.';
+            }
+
+            if (! $detailApiEn) {
+                $errors[] = 'en career job detail API is not ready.';
+            }
+
+            if ($errors === []) {
+                $readyCount++;
+            }
+
+            $rows[] = [
+                'slug' => $slug,
+                'occupation_row_exists' => $occupationExists,
+                'runtime_publish_projection_item_exists' => $projectionExists,
+                'public_resolution_type' => $publicResolutionType,
+                'public_resolution_type_pass' => $publicResolutionType === CareerPublicResolutionTypeMatrix::PUBLIC_CANONICAL_JOB,
+                'detail_route_enabled' => $detailRouteEnabled,
+                'release_gate_pass' => $releaseGatePass,
+                'detail_api_zh_CN_200' => $detailApiZh,
+                'detail_api_en_200' => $detailApiEn,
+                'ready' => $errors === [],
+                'errors' => $errors,
+            ];
+        }
+
+        return [
+            'checked_slug_count' => count($targetSlugs),
+            'ready_slug_count' => $readyCount,
+            'rows' => $rows,
+        ];
     }
 
     /**
