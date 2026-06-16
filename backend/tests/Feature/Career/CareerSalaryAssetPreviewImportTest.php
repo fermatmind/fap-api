@@ -119,6 +119,13 @@ final class CareerSalaryAssetPreviewImportTest extends TestCase
         Config::set('career_salary_assets.staging_preview_enabled', true);
         $occupation = $this->seedOccupation('accountants-and-auditors');
         $row = $this->assetRow('accountants-and-auditors', 'zh-CN');
+        $row['sources'][0]['name'] = '//';
+        $row['sources'][0]['url'] = 'https://www.jobui.com/salary/quanguo-kuaiji/';
+        $row['sources'][0]['used_for'] = 'CN evidence cn_001: internal ledger wording must not be reader-facing.';
+        $row['china_recruitment_reference']['facts']['range_source_evidence_ids'] = ['cn_001'];
+        $row['us_official_reference']['source_ids'] = ['us_001'];
+        $row['uk_reference']['source_id'] = 'uk_001';
+        $row['eu_context_boundary']['source_id'] = 'eu_001';
         CareerJobSalaryAsset::query()->create([
             'occupation_id' => $occupation->id,
             'career_job_slug' => 'accountants-and-auditors',
@@ -134,12 +141,26 @@ final class CareerSalaryAssetPreviewImportTest extends TestCase
             'asset_row_hash' => $row['audit_fields']['row_hash'],
         ]);
 
-        $this->getJson('/api/v0.5/career/jobs/accountants-and-auditors/salary-asset?locale=zh-CN')
+        $response = $this->getJson('/api/v0.5/career/jobs/accountants-and-auditors/salary-asset?locale=zh-CN')
             ->assertOk()
             ->assertJsonPath('preview', true)
             ->assertJsonPath('salary_asset_v1.slug', 'accountants-and-auditors')
-            ->assertJsonPath('salary_asset_v1.locale', 'zh-CN')
-            ->assertJsonPath('lineage.status', CareerJobSalaryAsset::STATUS_STAGING_PREVIEW);
+            ->assertJsonPath('salary_asset_v1.locale', 'zh-CN');
+
+        $payload = $response->json();
+        $this->assertArrayNotHasKey('lineage', $payload);
+        $asset = $payload['salary_asset_v1'];
+        foreach (['research_notes', 'audit_fields', 'evidence_used', 'derived_from_estimate', 'forbidden_claims'] as $internalKey) {
+            $this->assertArrayNotHasKey($internalKey, $asset);
+        }
+
+        $this->assertSame('职友集/JobUI', $asset['sources'][0]['name']);
+        $this->assertSame('中国招聘市场参考', $asset['sources'][0]['used_for']);
+        $this->assertArrayNotHasKey('source_id', $asset['sources'][0]);
+        $this->assertArrayNotHasKey('range_source_evidence_ids', $asset['china_recruitment_reference']['facts']);
+        $this->assertArrayNotHasKey('source_ids', $asset['us_official_reference']);
+        $this->assertArrayNotHasKey('source_id', $asset['uk_reference']);
+        $this->assertArrayNotHasKey('source_id', $asset['eu_context_boundary']);
     }
 
     public function test_preview_api_fails_closed_when_disabled_or_not_allowlisted(): void
@@ -169,6 +190,45 @@ final class CareerSalaryAssetPreviewImportTest extends TestCase
         Config::set('career_salary_assets.preview_slugs', ['actuaries']);
         $this->getJson('/api/v0.5/career/jobs/accountants-and-auditors/salary-asset?locale=zh-CN')
             ->assertNotFound();
+    }
+
+    public function test_importer_blocks_reader_facing_editorial_quality_failures(): void
+    {
+        $this->seedOccupation('accountants-and-auditors');
+        $this->seedCareerJobBundleAuthority('accountants-and-auditors');
+        $zh = $this->assetRow('accountants-and-auditors', 'zh-CN');
+        $en = $this->assetRow('accountants-and-auditors', 'en');
+        foreach ([&$zh, &$en] as &$row) {
+            $row['sources'][0]['name'] = '//';
+            $row['salary_drivers'] = array_fill(0, 5, [
+                'factor' => '岗位边界',
+                'description' => '会计师和审计师 的薪资会随具体岗位标题、职责范围和相邻岗位口径变化。',
+            ]);
+            $row['reader_guidance'] = array_fill(0, 4, '中国薪资只读作招聘市场样本信号，不读作官方全国职业工资。');
+        }
+        unset($row);
+
+        $file = $this->writeJsonl([$zh, $en]);
+        $report = storage_path('framework/testing/salary-preview-editorial-gate-fail.json');
+
+        $exitCode = Artisan::call('career:salary-assets-import-preview', [
+            '--file' => $file,
+            '--slugs' => 'accountants-and-auditors',
+            '--dry-run' => true,
+            '--output' => $report,
+        ]);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertDatabaseCount('career_job_salary_assets', 0);
+
+        $decoded = json_decode((string) file_get_contents($report), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertSame('fail', $decoded['decision']);
+        $this->assertSame(0, $decoded['editorial_quality_gate']['ready_row_count']);
+        $errors = implode(' ', $decoded['errors']);
+        $this->assertStringContainsString('salary_preview_editorial_gate', $errors);
+        $this->assertStringContainsString('reader-safe source label', $errors);
+        $this->assertStringContainsString('generic description', $errors);
+        $this->assertStringContainsString('generic sentence', $errors);
     }
 
     private function seedCareerJobBundleAuthority(string $slug): void
@@ -320,8 +380,34 @@ final class CareerSalaryAssetPreviewImportTest extends TestCase
             'us_official_reference' => ['status' => 'available', 'facts' => ['median_annual_usd' => 81680]],
             'uk_reference' => ['status' => 'available', 'facts' => ['starter_annual_gbp' => 25000]],
             'eu_context_boundary' => ['status' => 'macro_context_only'],
-            'salary_drivers' => array_fill(0, 5, ['factor' => 'Scope', 'description' => 'Role boundary changes pay.']),
-            'reader_guidance' => array_fill(0, 4, 'Read China values as recruitment-market references only.'),
+            'salary_drivers' => $locale === 'zh-CN'
+                ? [
+                    ['factor' => '审计季节性', 'description' => '审计旺季的加班、出差和项目密度会影响总收入与补贴结构。'],
+                    ['factor' => '证书与签字责任', 'description' => 'CPA、税务经验和是否承担签字或复核责任会改变岗位定价。'],
+                    ['factor' => '行业账务复杂度', 'description' => '制造、金融、互联网或跨境业务的准则复杂度不同，薪酬带宽也不同。'],
+                    ['factor' => '系统能力', 'description' => '熟悉 ERP、合并报表、成本核算和数据分析工具的候选人通常更有议价空间。'],
+                    ['factor' => '机构类型', 'description' => '事务所、企业财务、内审和咨询岗位的绩效奖金与晋升节奏不同。'],
+                ]
+                : [
+                    ['factor' => 'Audit season load', 'description' => 'Busy-season overtime, travel, and project density can change total compensation and allowances.'],
+                    ['factor' => 'Licensure and sign-off responsibility', 'description' => 'CPA status, tax exposure, and review or sign-off accountability materially affect pay.'],
+                    ['factor' => 'Industry accounting complexity', 'description' => 'Manufacturing, finance, internet, and cross-border reporting roles price accounting complexity differently.'],
+                    ['factor' => 'Systems capability', 'description' => 'ERP, consolidation, cost accounting, and analytics skills can improve negotiation leverage.'],
+                    ['factor' => 'Employer setting', 'description' => 'Public accounting, corporate finance, internal audit, and advisory roles use different bonus and promotion models.'],
+                ],
+            'reader_guidance' => $locale === 'zh-CN'
+                ? [
+                    '先分清样本是审计、税务、企业财务还是内审岗位，再比较薪资。',
+                    '中国区间只代表招聘市场样本，不代表官方职业工资或个人收入预测。',
+                    '美国和英国数据要按 SOC、职业 profile 和统计年份边界阅读。',
+                    '比较 offer 时同时看忙季强度、证书要求、出差、奖金和晋升路径。',
+                ]
+                : [
+                    'Separate audit, tax, corporate accounting, and internal-audit roles before comparing pay.',
+                    'Read the China range only as recruitment-market evidence, not an official wage or personal prediction.',
+                    'Read US and UK figures within their SOC, profile, source-year, and coverage boundaries.',
+                    'Compare offers alongside busy-season load, certification requirements, travel, bonuses, and promotion path.',
+                ],
             'forbidden_claims' => [],
             'sources' => [[
                 'market' => 'CN',
