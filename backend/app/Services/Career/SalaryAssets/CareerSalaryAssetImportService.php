@@ -126,6 +126,13 @@ final class CareerSalaryAssetImportService
             static fn (array $entry): array => $entry['row'],
             $rowsByKey
         ));
+        $editorialQualityReport = $this->editorialQualityReport($validatedRows);
+        foreach ($editorialQualityReport['rows'] as $editorialRow) {
+            $editorialErrors = is_array($editorialRow['errors'] ?? null) ? $editorialRow['errors'] : [];
+            foreach ($editorialErrors as $editorialError) {
+                $errors[] = ((string) ($editorialRow['slug'] ?? 'unknown')).'/'.((string) ($editorialRow['locale'] ?? 'unknown')).': salary_preview_editorial_gate: '.(string) $editorialError;
+            }
+        }
 
         return array_merge($report, [
             'mode' => 'dry_run',
@@ -137,6 +144,7 @@ final class CareerSalaryAssetImportService
             'source_file_sha256' => hash_file('sha256', $file) ?: null,
             'target_slugs' => $targetSlugs,
             'career_job_bundle_authority' => $authorityReport,
+            'editorial_quality_gate' => $editorialQualityReport,
             'errors' => $errors,
             'rows' => $validatedRows,
         ]);
@@ -216,6 +224,179 @@ final class CareerSalaryAssetImportService
             'ready_slug_count' => $readyCount,
             'rows' => $rows,
         ];
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $rows
+     * @return array{checked_row_count: int, ready_row_count: int, rows: list<array<string, mixed>>}
+     */
+    private function editorialQualityReport(array $rows): array
+    {
+        $reportRows = [];
+        $readyCount = 0;
+
+        foreach ($rows as $row) {
+            $errors = $this->editorialQualityErrors($row);
+            if ($errors === []) {
+                $readyCount++;
+            }
+
+            $reportRows[] = [
+                'slug' => $this->previewService->normalizeSlug((string) ($row['slug'] ?? '')),
+                'locale' => $this->previewService->normalizeLocale((string) ($row['locale'] ?? '')),
+                'ready' => $errors === [],
+                'errors' => $errors,
+            ];
+        }
+
+        return [
+            'checked_row_count' => count($rows),
+            'ready_row_count' => $readyCount,
+            'rows' => $reportRows,
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $row
+     * @return list<string>
+     */
+    private function editorialQualityErrors(array $row): array
+    {
+        return array_values(array_merge(
+            $this->sourceLabelErrors($row),
+            $this->salaryDriverErrors($row),
+            $this->readerGuidanceErrors($row),
+        ));
+    }
+
+    /**
+     * @param  array<string, mixed>  $row
+     * @return list<string>
+     */
+    private function sourceLabelErrors(array $row): array
+    {
+        $sources = is_array($row['sources'] ?? null) ? $row['sources'] : [];
+        $errors = [];
+
+        foreach ($sources as $index => $source) {
+            if (! is_array($source)) {
+                $errors[] = "sources[{$index}] must be an object.";
+
+                continue;
+            }
+
+            $name = trim((string) ($source['name'] ?? ''), " \t\n\r\0\x0B/");
+            if ($name === '') {
+                $errors[] = "sources[{$index}].name must be a reader-safe source label.";
+            }
+        }
+
+        return $errors;
+    }
+
+    /**
+     * @param  array<string, mixed>  $row
+     * @return list<string>
+     */
+    private function salaryDriverErrors(array $row): array
+    {
+        $drivers = is_array($row['salary_drivers'] ?? null) ? $row['salary_drivers'] : [];
+        $errors = [];
+
+        if (count($drivers) < 5) {
+            $errors[] = 'salary_drivers must contain at least five items.';
+
+            return $errors;
+        }
+
+        $descriptions = [];
+        foreach ($drivers as $driver) {
+            if (! is_array($driver)) {
+                continue;
+            }
+
+            $descriptions[] = trim((string) ($driver['description'] ?? ''));
+        }
+
+        $uniqueDescriptions = array_values(array_unique(array_filter($descriptions)));
+        if (count($uniqueDescriptions) < 3) {
+            $errors[] = 'salary_drivers must not reuse the same generic description across the row.';
+        }
+
+        if ($this->matchesKnownTemplate($descriptions, [
+            '薪资会随具体岗位标题、职责范围和相邻岗位口径变化',
+            '城市、机构类型、企业规模和预算来源会明显影响招聘报价',
+            '初级、独立承担、带团队或负责关键结果时',
+            '岗位相关证书、设备、软件、合规或客户责任',
+            '排班、现场工作、旺季、风险和交付压力',
+            'pay changes when the exact title, responsibility scope, or adjacent role cluster changes',
+            'City, employer type, organization size, and budget source can materially change offers',
+            'Entry, independent, senior, lead, or accountable roles are priced differently',
+            'Relevant licenses, equipment, software, compliance, or client responsibility can change compensation',
+            'Shift work, field work, seasonal pressure, risk, and delivery demands can affect bonuses or upper ranges',
+        ], 4)) {
+            $errors[] = 'salary_drivers still match the default template and need occupation-specific wording.';
+        }
+
+        return $errors;
+    }
+
+    /**
+     * @param  array<string, mixed>  $row
+     * @return list<string>
+     */
+    private function readerGuidanceErrors(array $row): array
+    {
+        $guidance = is_array($row['reader_guidance'] ?? null) ? array_values(array_map(
+            static fn (mixed $item): string => trim((string) $item),
+            $row['reader_guidance'],
+        )) : [];
+        $errors = [];
+
+        if (count($guidance) < 4) {
+            $errors[] = 'reader_guidance must contain at least four items.';
+
+            return $errors;
+        }
+
+        if (count(array_values(array_unique(array_filter($guidance)))) < 3) {
+            $errors[] = 'reader_guidance must not reuse the same generic sentence across the row.';
+        }
+
+        if ($this->matchesKnownTemplate($guidance, [
+            '先确认你看的是否真的是',
+            '中国薪资只读作招聘市场样本信号',
+            '美国、英国和欧盟来源各有统计口径',
+            '比较 offer 时同时看城市、经验、雇主类型',
+            'First confirm whether the source is the exact',
+            'Read China pay only as recruitment-market evidence',
+            'US, UK, and EU references use different source boundaries',
+            'Compare offers by location, experience, employer type',
+        ], 3)) {
+            $errors[] = 'reader_guidance still matches the default template and needs occupation-specific wording.';
+        }
+
+        return $errors;
+    }
+
+    /**
+     * @param  list<string>  $values
+     * @param  list<string>  $fragments
+     */
+    private function matchesKnownTemplate(array $values, array $fragments, int $threshold): bool
+    {
+        $matchCount = 0;
+        foreach ($values as $value) {
+            foreach ($fragments as $fragment) {
+                if ($fragment !== '' && str_contains($value, $fragment)) {
+                    $matchCount++;
+
+                    break;
+                }
+            }
+        }
+
+        return $matchCount >= $threshold;
     }
 
     /**
