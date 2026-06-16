@@ -4,18 +4,30 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Career;
 
+use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Models\CareerJobSalaryAsset;
 use App\Models\Occupation;
 use App\Models\OccupationFamily;
+use App\Services\Career\PublicCareerAuthorityResponseCache;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
+use Tests\Fixtures\Career\CareerRuntimePublishProjectionVisibilityFixture;
 use Tests\TestCase;
 
 final class CareerSalaryAssetPreviewImportTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        Cache::flush();
+        $this->seedRuntimeProjectionAuthority([]);
+    }
 
     public function test_salary_asset_sidecar_table_exists(): void
     {
@@ -28,6 +40,7 @@ final class CareerSalaryAssetPreviewImportTest extends TestCase
     public function test_importer_dry_run_validates_preview_rows_without_writing(): void
     {
         $this->seedOccupation('accountants-and-auditors');
+        $this->seedCareerJobBundleAuthority('accountants-and-auditors');
         $file = $this->writeJsonl([
             $this->assetRow('accountants-and-auditors', 'zh-CN'),
             $this->assetRow('accountants-and-auditors', 'en'),
@@ -53,6 +66,7 @@ final class CareerSalaryAssetPreviewImportTest extends TestCase
     public function test_importer_force_writes_staging_preview_rows_only(): void
     {
         $this->seedOccupation('accountants-and-auditors');
+        $this->seedCareerJobBundleAuthority('accountants-and-auditors');
         $file = $this->writeJsonl([
             $this->assetRow('accountants-and-auditors', 'zh-CN'),
             $this->assetRow('accountants-and-auditors', 'en'),
@@ -73,6 +87,31 @@ final class CareerSalaryAssetPreviewImportTest extends TestCase
             'status' => CareerJobSalaryAsset::STATUS_STAGING_PREVIEW,
             'preview_allowlisted' => true,
         ]);
+    }
+
+    public function test_importer_force_blocks_when_career_job_bundle_authority_is_missing(): void
+    {
+        $this->seedOccupation('accountants-and-auditors');
+        $file = $this->writeJsonl([
+            $this->assetRow('accountants-and-auditors', 'zh-CN'),
+            $this->assetRow('accountants-and-auditors', 'en'),
+        ]);
+        $report = storage_path('framework/testing/salary-preview-authority-fail.json');
+
+        $exitCode = Artisan::call('career:salary-assets-import-preview', [
+            '--file' => $file,
+            '--slugs' => 'accountants-and-auditors',
+            '--force' => true,
+            '--output' => $report,
+        ]);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertDatabaseCount('career_job_salary_assets', 0);
+
+        $decoded = json_decode((string) file_get_contents($report), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertSame('fail', $decoded['decision']);
+        $this->assertStringContainsString('missing_career_job_bundle_authority', implode(' ', $decoded['errors']));
+        $this->assertSame(0, $decoded['career_job_bundle_authority']['ready_slug_count']);
     }
 
     public function test_preview_api_projects_allowlisted_staging_asset_when_enabled(): void
@@ -130,6 +169,63 @@ final class CareerSalaryAssetPreviewImportTest extends TestCase
         Config::set('career_salary_assets.preview_slugs', ['actuaries']);
         $this->getJson('/api/v0.5/career/jobs/accountants-and-auditors/salary-asset?locale=zh-CN')
             ->assertNotFound();
+    }
+
+    private function seedCareerJobBundleAuthority(string $slug): void
+    {
+        $this->seedRuntimeProjectionAuthority([$slug]);
+        app(PublicCareerAuthorityResponseCache::class)->forgetJobDetailPayload($slug, 'zh-CN');
+        app(PublicCareerAuthorityResponseCache::class)->forgetJobDetailPayload($slug, 'en');
+    }
+
+    /**
+     * @param  list<string>  $slugs
+     */
+    private function seedRuntimeProjectionAuthority(array $slugs): void
+    {
+        $detailRouteEnabled = [];
+        $robotsIndexable = [];
+        $releaseGatePass = [];
+        $items = [];
+
+        foreach ($slugs as $slug) {
+            $normalizedSlug = strtolower(trim($slug));
+            if ($normalizedSlug === '') {
+                continue;
+            }
+
+            $detailRouteEnabled[$normalizedSlug] = true;
+            $robotsIndexable[$normalizedSlug] = true;
+            $releaseGatePass[$normalizedSlug] = true;
+            foreach (['en', 'zh'] as $locale) {
+                $items[$normalizedSlug.'|'.$locale] = [
+                    'slug' => $normalizedSlug,
+                    'locale' => $locale,
+                    'public_resolution_type' => 'public_canonical_job',
+                    'dataset_visible' => true,
+                    'search_visible' => true,
+                    'detail_route_enabled' => true,
+                    'robots_indexable' => true,
+                    'release_gate_pass' => true,
+                    'runtime_publish_state' => 'published',
+                ];
+            }
+        }
+
+        $this->app->instance(
+            CareerRuntimePublishProjectionVisibility::class,
+            new CareerRuntimePublishProjectionVisibilityFixture(
+                defaultDatasetVisible: false,
+                defaultSearchVisible: false,
+                defaultDetailRouteEnabled: false,
+                defaultRobotsIndexable: false,
+                defaultReleaseGatePass: false,
+                detailRouteEnabled: $detailRouteEnabled,
+                robotsIndexable: $robotsIndexable,
+                releaseGatePass: $releaseGatePass,
+                items: $items,
+            ),
+        );
     }
 
     private function seedOccupation(string $slug): Occupation
