@@ -2335,6 +2335,44 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ));
     }
 
+    public function test_runtime_freeze_classifier_ignores_legacy_api_user_auth_guard_hardening(): void
+    {
+        $changed = [
+            'backend/routes/api.php',
+        ];
+        $routeChangedLines = [
+            '+use Illuminate\Support\\Str;',
+            "-Route::middleware('auth:sanctum')->get('/user', function (Request \$request) {",
+            '-    return $request->user();',
+            "+Route::get('/user', static function (Request \$request) {",
+            "+    \$requestId = trim((string) \$request->header('X-Request-Id', ''));",
+            '+    if ($requestId === \'\') {',
+            "+        \$requestId = trim((string) \$request->header('X-Request-ID', ''));",
+            '+    }',
+            '+    if ($requestId === \'\') {',
+            '+        $requestId = (string) Str::uuid();',
+            '+    }',
+            '+',
+            '+    return response()->json([',
+            '+        \'ok\' => false,',
+            '+        \'error_code\' => \'UNAUTHENTICATED\',',
+            '+        \'message\' => \'Missing or invalid fm_token. Please login.\',',
+            '+        \'details\' => (object) [],',
+            '+        \'request_id\' => $requestId,',
+            '+    ], 401)->withHeaders([',
+            '+        \'WWW-Authenticate\' => \'Bearer realm="Fermat API", error="invalid_token"\',',
+            '+    ]);',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            null,
+            $routeChangedLines,
+        ));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_display_surface_builder_changes(): void
     {
         $changed = [
@@ -3823,6 +3861,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             if (
                 $file === 'backend/routes/api.php'
                 && $this->routeDiffIsCiAuthBypassHardeningOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
+            ) {
+                continue;
+            }
+
+            if (
+                $file === 'backend/routes/api.php'
+                && $this->routeDiffIsLegacyApiUserAuthGuardOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
             ) {
                 continue;
             }
@@ -6368,6 +6413,38 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         }
 
         return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function routeDiffIsLegacyApiUserAuthGuardOnly(array $changedLines): bool
+    {
+        $allowedLines = [
+            '+use Illuminate\Support\\Str;',
+            "-Route::middleware('auth:sanctum')->get('/user', function (Request \$request) {",
+            '-    return $request->user();',
+            "+Route::get('/user', static function (Request \$request) {",
+            "+    \$requestId = trim((string) \$request->header('X-Request-Id', ''));",
+            '+    if ($requestId === \'\') {',
+            "+        \$requestId = trim((string) \$request->header('X-Request-ID', ''));",
+            '+    }',
+            '+    if ($requestId === \'\') {',
+            '+        $requestId = (string) Str::uuid();',
+            '+    }',
+            '+',
+            '+    return response()->json([',
+            '+        \'ok\' => false,',
+            '+        \'error_code\' => \'UNAUTHENTICATED\',',
+            '+        \'message\' => \'Missing or invalid fm_token. Please login.\',',
+            '+        \'details\' => (object) [],',
+            '+        \'request_id\' => $requestId,',
+            '+    ], 401)->withHeaders([',
+            '+        \'WWW-Authenticate\' => \'Bearer realm="Fermat API", error="invalid_token"\',',
+            '+    ]);',
+        ];
+
+        return $changedLines !== [] && array_values($changedLines) === $allowedLines;
     }
 
     /**
