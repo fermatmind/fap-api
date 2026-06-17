@@ -12,6 +12,12 @@ class CareerJobSalaryAsset extends CareerFoundationModel
 
     public const STATUS_STAGING_PREVIEW = 'staging_preview';
 
+    public const STATUS_EDITORIAL_REVIEW = 'editorial_review';
+
+    public const STATUS_APPROVED = 'approved';
+
+    public const STATUS_PRODUCTION_IMPORTED = 'production_imported';
+
     protected $table = 'career_job_salary_assets';
 
     protected $casts = [

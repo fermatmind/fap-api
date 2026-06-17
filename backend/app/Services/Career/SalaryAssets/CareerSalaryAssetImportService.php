@@ -21,13 +21,14 @@ final class CareerSalaryAssetImportService
         private readonly CareerSalaryAssetPreviewService $previewService,
         private readonly CareerRuntimePublishProjectionVisibility $runtimeProjection,
         private readonly PublicCareerAuthorityResponseCache $authorityResponseCache,
+        private readonly CareerSalaryAssetImportStateMachine $stateMachine,
     ) {}
 
     /**
      * @param  list<string>|null  $requestedSlugs
      * @return array<string, mixed>
      */
-    public function validateFile(string $file, ?array $requestedSlugs = null): array
+    public function validateFile(string $file, ?array $requestedSlugs = null, ?string $expectedSha256 = null): array
     {
         $report = $this->baseReport($file, $requestedSlugs);
         $errors = [];
@@ -41,6 +42,7 @@ final class CareerSalaryAssetImportService
 
         $targetSlugs = $this->targetSlugs($requestedSlugs, $errors);
         $rowsByKey = [];
+        $duplicateKeys = [];
         $parseErrors = [];
         $totalLines = 0;
         $lineNumber = 0;
@@ -83,6 +85,7 @@ final class CareerSalaryAssetImportService
             $key = $slug.'|'.$locale;
             if (isset($rowsByKey[$key])) {
                 $errors[] = "{$slug}/{$locale}: duplicate asset row.";
+                $duplicateKeys[] = $key;
 
                 continue;
             }
@@ -97,6 +100,12 @@ final class CareerSalaryAssetImportService
 
         foreach ($parseErrors as $parseError) {
             $errors[] = $parseError;
+        }
+
+        $sourceFileSha256 = hash_file('sha256', $file) ?: null;
+        $expectedSha256 = $this->normalizeSha256($expectedSha256);
+        if ($expectedSha256 !== null && $sourceFileSha256 !== $expectedSha256) {
+            $errors[] = 'Source JSONL SHA-256 does not match expected artifact SHA.';
         }
 
         foreach ($targetSlugs as $slug) {
@@ -141,7 +150,14 @@ final class CareerSalaryAssetImportService
             'target_slug_count' => count($targetSlugs),
             'validated_preview_rows' => count($validatedRows),
             'expected_preview_rows' => count($targetSlugs) * 2,
-            'source_file_sha256' => hash_file('sha256', $file) ?: null,
+            'source_file_sha256' => $sourceFileSha256,
+            'expected_source_file_sha256' => $expectedSha256,
+            'source_file_sha256_match' => $expectedSha256 === null || $sourceFileSha256 === $expectedSha256,
+            'duplicate_key_count' => count(array_unique($duplicateKeys)),
+            'duplicate_keys' => array_values(array_unique($duplicateKeys)),
+            'idempotency' => $this->idempotencyReport($sourceFileSha256, $targetSlugs),
+            'rollback_policy' => $this->rollbackPolicy(),
+            'state_machine' => $this->stateMachine->report(),
             'target_slugs' => $targetSlugs,
             'career_job_bundle_authority' => $authorityReport,
             'editorial_quality_gate' => $editorialQualityReport,
@@ -403,9 +419,9 @@ final class CareerSalaryAssetImportService
      * @param  list<string>|null  $requestedSlugs
      * @return array<string, mixed>
      */
-    public function importStagingPreview(string $file, ?array $requestedSlugs = null): array
+    public function importStagingPreview(string $file, ?array $requestedSlugs = null, ?string $expectedSha256 = null): array
     {
-        $report = $this->validateFile($file, $requestedSlugs);
+        $report = $this->validateFile($file, $requestedSlugs, $expectedSha256);
         if (($report['decision'] ?? null) !== 'pass') {
             return $report;
         }
@@ -423,6 +439,15 @@ final class CareerSalaryAssetImportService
                 $locale = $this->previewService->normalizeLocale((string) ($row['locale'] ?? ''));
                 $occupation = Occupation::query()->where('canonical_slug', $slug)->firstOrFail();
                 $auditFields = $this->arrayValue($row, 'audit_fields');
+                $existing = CareerJobSalaryAsset::query()
+                    ->where('career_job_slug', $slug)
+                    ->where('locale', $locale)
+                    ->where('asset_version', CareerJobSalaryAsset::ASSET_VERSION_V3_6)
+                    ->first();
+
+                if (! $this->stateMachine->canWriteStagingPreviewFrom($existing?->status)) {
+                    throw new \RuntimeException("{$slug}/{$locale}: cannot transition salary asset from {$existing?->status} to staging_preview.");
+                }
 
                 $asset = CareerJobSalaryAsset::query()->updateOrCreate(
                     [
@@ -452,6 +477,8 @@ final class CareerSalaryAssetImportService
                     'locale' => $locale,
                     'row_id' => $asset->id,
                     'created' => $asset->wasRecentlyCreated,
+                    'previous_status' => $existing?->status,
+                    'new_status' => CareerJobSalaryAsset::STATUS_STAGING_PREVIEW,
                 ];
             }
 
@@ -464,6 +491,7 @@ final class CareerSalaryAssetImportService
             'did_write' => count($written) > 0,
             'written_count' => count($written),
             'import_run_id' => $importRunId,
+            'rollback_policy' => $this->rollbackPolicy($importRunId),
             'written_assets' => $written,
         ]);
     }
@@ -479,6 +507,11 @@ final class CareerSalaryAssetImportService
             'asset_version' => CareerJobSalaryAsset::ASSET_VERSION_V3_6,
             'status_policy' => CareerJobSalaryAsset::STATUS_STAGING_PREVIEW,
             'production_import_allowed' => false,
+            'production_import_gate' => [
+                'allowed' => false,
+                'required_from_status' => CareerJobSalaryAsset::STATUS_APPROVED,
+                'current_command_supports_production_import' => false,
+            ],
             'source_file' => $file,
             'requested_slugs' => $requestedSlugs,
         ];
@@ -579,5 +612,46 @@ final class CareerSalaryAssetImportService
     private function arrayValue(array $row, string $key): array
     {
         return is_array($row[$key] ?? null) ? $row[$key] : [];
+    }
+
+    private function normalizeSha256(?string $sha256): ?string
+    {
+        $normalized = strtolower(trim((string) $sha256));
+        if ($normalized === '') {
+            return null;
+        }
+
+        return $normalized;
+    }
+
+    /**
+     * @param  list<string>  $targetSlugs
+     * @return array<string, mixed>
+     */
+    private function idempotencyReport(?string $sourceFileSha256, array $targetSlugs): array
+    {
+        return [
+            'idempotency_key' => hash('sha256', implode('|', [
+                CareerJobSalaryAsset::ASSET_VERSION_V3_6,
+                $sourceFileSha256 ?? 'unknown_source_sha',
+                implode(',', $targetSlugs),
+            ])),
+            'target_key' => ['career_job_slug', 'locale', 'asset_version'],
+            'write_strategy' => 'update_or_create_by_target_key',
+            'duplicate_rows_allowed' => false,
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function rollbackPolicy(?string $importRunId = null): array
+    {
+        return [
+            'production_rollback_supported_by_this_command' => false,
+            'staging_preview_import_run_id' => $importRunId,
+            'staging_preview_rollback_boundary' => 'Rows written by a staging_preview import are scoped by import_run_id and must be rolled back before approval or production import.',
+            'production_import_requires_approved_status' => true,
+        ];
     }
 }
