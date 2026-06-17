@@ -65,7 +65,7 @@ final class CareerSalaryAssetPreviewService
      * @param  array<string, mixed>  $payload
      * @return array<string, mixed>
      */
-    private function readerSafePayload(array $payload): array
+    public function readerSafePayload(array $payload): array
     {
         foreach ([
             'research_notes',

@@ -28,9 +28,9 @@ final class CareerSalaryAssetImportService
      * @param  list<string>|null  $requestedSlugs
      * @return array<string, mixed>
      */
-    public function validateFile(string $file, ?array $requestedSlugs = null, ?string $expectedSha256 = null): array
+    public function validateFile(string $file, ?array $requestedSlugs = null, ?string $expectedSha256 = null, bool $allSlugsFromFile = false): array
     {
-        $report = $this->baseReport($file, $requestedSlugs);
+        $report = $this->baseReport($file, $requestedSlugs, $allSlugsFromFile);
         $errors = [];
 
         if (! is_file($file) || ! is_readable($file)) {
@@ -40,10 +40,15 @@ final class CareerSalaryAssetImportService
             ]);
         }
 
-        $targetSlugs = $this->targetSlugs($requestedSlugs, $errors);
+        $targetSlugs = $allSlugsFromFile ? [] : $this->targetSlugs($requestedSlugs, $errors);
+        $slugsInFileOrder = [];
         $rowsByKey = [];
         $duplicateKeys = [];
         $parseErrors = [];
+        $rowValidationErrors = [];
+        $editorialQualityRows = [];
+        $editorialReadyCount = 0;
+        $validatedRowCount = 0;
         $totalLines = 0;
         $lineNumber = 0;
 
@@ -78,7 +83,13 @@ final class CareerSalaryAssetImportService
 
             $slug = $this->previewService->normalizeSlug((string) ($row['slug'] ?? ''));
             $locale = $this->previewService->normalizeLocale((string) ($row['locale'] ?? ''));
-            if ($slug === '' || ! in_array($slug, $targetSlugs, true)) {
+            if ($slug === '') {
+                continue;
+            }
+
+            if ($allSlugsFromFile) {
+                $slugsInFileOrder[$slug] ??= true;
+            } elseif (! in_array($slug, $targetSlugs, true)) {
                 continue;
             }
 
@@ -86,6 +97,26 @@ final class CareerSalaryAssetImportService
             if (isset($rowsByKey[$key])) {
                 $errors[] = "{$slug}/{$locale}: duplicate asset row.";
                 $duplicateKeys[] = $key;
+
+                continue;
+            }
+
+            if ($allSlugsFromFile) {
+                foreach ($this->rowErrors($row, $slug, $locale) as $rowError) {
+                    $rowValidationErrors[] = "{$slug}/{$locale}: {$rowError}";
+                }
+
+                $editorialRow = $this->editorialQualityRowReport($row);
+                if (($editorialRow['ready'] ?? false) === true) {
+                    $editorialReadyCount++;
+                }
+
+                $editorialQualityRows[] = $editorialRow;
+                $validatedRowCount++;
+
+                $rowsByKey[$key] = [
+                    'line' => $lineNumber,
+                ];
 
                 continue;
             }
@@ -100,6 +131,14 @@ final class CareerSalaryAssetImportService
 
         foreach ($parseErrors as $parseError) {
             $errors[] = $parseError;
+        }
+
+        foreach ($rowValidationErrors as $rowValidationError) {
+            $errors[] = $rowValidationError;
+        }
+
+        if ($allSlugsFromFile) {
+            $targetSlugs = array_keys($slugsInFileOrder);
         }
 
         $sourceFileSha256 = hash_file('sha256', $file) ?: null;
@@ -117,8 +156,10 @@ final class CareerSalaryAssetImportService
                     continue;
                 }
 
-                foreach ($this->rowErrors($rowsByKey[$key]['row'], $slug, $locale) as $rowError) {
-                    $errors[] = "{$slug}/{$locale}: {$rowError}";
+                if (! $allSlugsFromFile) {
+                    foreach ($this->rowErrors($rowsByKey[$key]['row'], $slug, $locale) as $rowError) {
+                        $errors[] = "{$slug}/{$locale}: {$rowError}";
+                    }
                 }
             }
         }
@@ -131,11 +172,15 @@ final class CareerSalaryAssetImportService
             }
         }
 
-        $validatedRows = array_values(array_map(
+        $validatedRows = $allSlugsFromFile ? [] : array_values(array_map(
             static fn (array $entry): array => $entry['row'],
             $rowsByKey
         ));
-        $editorialQualityReport = $this->editorialQualityReport($validatedRows);
+        $editorialQualityReport = $allSlugsFromFile ? [
+            'checked_row_count' => $validatedRowCount,
+            'ready_row_count' => $editorialReadyCount,
+            'rows' => $editorialQualityRows,
+        ] : $this->editorialQualityReport($validatedRows);
         foreach ($editorialQualityReport['rows'] as $editorialRow) {
             $editorialErrors = is_array($editorialRow['errors'] ?? null) ? $editorialRow['errors'] : [];
             foreach ($editorialErrors as $editorialError) {
@@ -148,7 +193,7 @@ final class CareerSalaryAssetImportService
             'decision' => $errors === [] ? 'pass' : 'fail',
             'total_jsonl_lines' => $totalLines,
             'target_slug_count' => count($targetSlugs),
-            'validated_preview_rows' => count($validatedRows),
+            'validated_preview_rows' => $allSlugsFromFile ? $validatedRowCount : count($validatedRows),
             'expected_preview_rows' => count($targetSlugs) * 2,
             'source_file_sha256' => $sourceFileSha256,
             'expected_source_file_sha256' => $expectedSha256,
@@ -162,6 +207,7 @@ final class CareerSalaryAssetImportService
             'career_job_bundle_authority' => $authorityReport,
             'editorial_quality_gate' => $editorialQualityReport,
             'errors' => $errors,
+            'raw_rows_included' => ! $allSlugsFromFile,
             'rows' => $validatedRows,
         ]);
     }
@@ -252,23 +298,35 @@ final class CareerSalaryAssetImportService
         $readyCount = 0;
 
         foreach ($rows as $row) {
-            $errors = $this->editorialQualityErrors($row);
-            if ($errors === []) {
+            $reportRow = $this->editorialQualityRowReport($row);
+            if (($reportRow['ready'] ?? false) === true) {
                 $readyCount++;
             }
 
-            $reportRows[] = [
-                'slug' => $this->previewService->normalizeSlug((string) ($row['slug'] ?? '')),
-                'locale' => $this->previewService->normalizeLocale((string) ($row['locale'] ?? '')),
-                'ready' => $errors === [],
-                'errors' => $errors,
-            ];
+            $reportRows[] = $reportRow;
         }
 
         return [
             'checked_row_count' => count($rows),
             'ready_row_count' => $readyCount,
             'rows' => $reportRows,
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $row
+     * @return array{slug: string, locale: string, ready: bool, errors: list<string>}
+     */
+    private function editorialQualityRowReport(array $row): array
+    {
+        $projectedRow = $this->previewService->readerSafePayload($row);
+        $errors = $this->editorialQualityErrors($projectedRow);
+
+        return [
+            'slug' => $this->previewService->normalizeSlug((string) ($row['slug'] ?? '')),
+            'locale' => $this->previewService->normalizeLocale((string) ($row['locale'] ?? '')),
+            'ready' => $errors === [],
+            'errors' => $errors,
         ];
     }
 
@@ -500,7 +558,7 @@ final class CareerSalaryAssetImportService
      * @param  list<string>|null  $requestedSlugs
      * @return array<string, mixed>
      */
-    private function baseReport(string $file, ?array $requestedSlugs): array
+    private function baseReport(string $file, ?array $requestedSlugs, bool $allSlugsFromFile = false): array
     {
         return [
             'importer_version' => self::IMPORTER_VERSION,
@@ -514,6 +572,7 @@ final class CareerSalaryAssetImportService
             ],
             'source_file' => $file,
             'requested_slugs' => $requestedSlugs,
+            'all_slugs_from_file' => $allSlugsFromFile,
         ];
     }
 

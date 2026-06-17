@@ -152,6 +152,62 @@ final class CareerSalaryAssetPreviewImportTest extends TestCase
         $this->assertFalse((bool) ($decoded['production_import_allowed'] ?? true));
     }
 
+    public function test_importer_dry_run_can_validate_all_slugs_from_file_without_preview_allowlist(): void
+    {
+        Config::set('career_salary_assets.preview_slugs', ['not-in-source-file']);
+        $slugs = ['all-file-career-a', 'all-file-career-b'];
+        $this->seedCareerJobBundleAuthorities($slugs);
+
+        $file = $this->writeJsonl([
+            $this->assetRow('all-file-career-a', 'zh-CN'),
+            $this->assetRow('all-file-career-a', 'en'),
+            $this->assetRow('all-file-career-b', 'zh-CN'),
+            $this->assetRow('all-file-career-b', 'en'),
+        ]);
+        $report = storage_path('framework/testing/salary-preview-all-file-dry-run.json');
+
+        $exitCode = Artisan::call('career:salary-assets-import-preview', [
+            '--file' => $file,
+            '--all-slugs-from-file' => true,
+            '--dry-run' => true,
+            '--output' => $report,
+        ]);
+
+        $this->assertSame(0, $exitCode);
+        $this->assertDatabaseCount('career_job_salary_assets', 0);
+        $decoded = json_decode((string) file_get_contents($report), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertSame('pass', $decoded['decision']);
+        $this->assertTrue((bool) $decoded['all_slugs_from_file']);
+        $this->assertSame(2, $decoded['target_slug_count']);
+        $this->assertSame(4, $decoded['validated_preview_rows']);
+        $this->assertSame($slugs, $decoded['target_slugs']);
+    }
+
+    public function test_importer_editorial_gate_uses_reader_safe_projection_for_source_labels(): void
+    {
+        $this->seedCareerJobBundleAuthority('accountants-and-auditors');
+        $enRow = $this->assetRow('accountants-and-auditors', 'en');
+        $enRow['sources'][0]['name'] = '/';
+        $enRow['sources'][0]['url'] = 'https://m.jobui.com/salary/quanguo-huijishi/';
+        $file = $this->writeJsonl([
+            $this->assetRow('accountants-and-auditors', 'zh-CN'),
+            $enRow,
+        ]);
+        $report = storage_path('framework/testing/salary-preview-reader-safe-source-dry-run.json');
+
+        $exitCode = Artisan::call('career:salary-assets-import-preview', [
+            '--file' => $file,
+            '--slugs' => 'accountants-and-auditors',
+            '--dry-run' => true,
+            '--output' => $report,
+        ]);
+
+        $this->assertSame(0, $exitCode);
+        $decoded = json_decode((string) file_get_contents($report), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertSame('pass', $decoded['decision']);
+        $this->assertSame(2, $decoded['editorial_quality_gate']['ready_row_count']);
+    }
+
     public function test_importer_force_writes_staging_preview_rows_only(): void
     {
         $this->seedOccupation('accountants-and-auditors');
@@ -485,7 +541,7 @@ final class CareerSalaryAssetPreviewImportTest extends TestCase
         $this->assertSame(0, $decoded['editorial_quality_gate']['ready_row_count']);
         $errors = implode(' ', $decoded['errors']);
         $this->assertStringContainsString('salary_preview_editorial_gate', $errors);
-        $this->assertStringContainsString('reader-safe source label', $errors);
+        $this->assertStringNotContainsString('reader-safe source label', $errors);
         $this->assertStringContainsString('generic description', $errors);
         $this->assertStringContainsString('generic sentence', $errors);
     }
