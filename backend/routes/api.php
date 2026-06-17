@@ -96,6 +96,7 @@ use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Http\Request;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -106,8 +107,24 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::get('/user', static function (Request $request) {
+    $requestId = trim((string) $request->header('X-Request-Id', ''));
+    if ($requestId === '') {
+        $requestId = trim((string) $request->header('X-Request-ID', ''));
+    }
+    if ($requestId === '') {
+        $requestId = (string) Str::uuid();
+    }
+
+    return response()->json([
+        'ok' => false,
+        'error_code' => 'UNAUTHENTICATED',
+        'message' => 'Missing or invalid fm_token. Please login.',
+        'details' => (object) [],
+        'request_id' => $requestId,
+    ], 401)->withHeaders([
+        'WWW-Authenticate' => 'Bearer realm="Fermat API", error="invalid_token"',
+    ]);
 });
 
 Route::middleware([HealthzAccessControl::class, 'throttle:api_public'])
