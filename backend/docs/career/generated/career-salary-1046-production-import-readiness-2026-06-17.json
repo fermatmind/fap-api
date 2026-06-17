@@ -1,0 +1,53 @@
+{
+  "artifact_type": "career_salary_1046_production_import_readiness",
+  "artifact_version": "v1",
+  "generated_at": "2026-06-17",
+  "decision": "READY_FOR_PRODUCTION_IMPORT_APPROVAL",
+  "production_import_executed": false,
+  "production_import_approved": false,
+  "manual_operator_approval_required": true,
+  "required_approval_text": "批准 production import 1046 salary assets, using SHA c62c3c5b515034cebcec1a7429b82309092664d6615b01ce64cd02e798ff9dd4",
+  "source_asset": {
+    "asset_version": "v3.6",
+    "sha256": "c62c3c5b515034cebcec1a7429b82309092664d6615b01ce64cd02e798ff9dd4",
+    "row_count": 2092,
+    "slug_count": 1046,
+    "locale_counts": {
+      "zh-CN": 1046,
+      "en": 1046
+    }
+  },
+  "completed_gates": {
+    "final_independent_qa": "READY_FOR_EXPANDED_STAGING_PREVIEW",
+    "expanded_staging_preview": "PASS",
+    "editorial_review": "PASS",
+    "approved_import_gate": "PASS"
+  },
+  "pre_production_required_checks": [
+    "approval_manifest_sha256_match",
+    "approved_staging_rows_2092",
+    "production_dry_run_no_write",
+    "staging_approved_vs_production_target_compare",
+    "database_backup_verified",
+    "rollback_plan_verified",
+    "api_canary_plan_assigned",
+    "frontend_canary_plan_assigned",
+    "monitoring_owner_assigned"
+  ],
+  "stop_ship_rules": [
+    "asset_sha_mismatch",
+    "approval_manifest_sha_mismatch",
+    "approved_row_count_not_2092",
+    "duplicate_production_target_keys",
+    "production_write_without_operator_approval",
+    "missing_database_backup",
+    "api_canary_plan_missing",
+    "frontend_canary_plan_missing"
+  ],
+  "deferred_items": [
+    "production_import_execution",
+    "post_import_api_smoke",
+    "post_import_frontend_smoke",
+    "post_import_seo_safety_audit"
+  ]
+}
