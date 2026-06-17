@@ -2398,6 +2398,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Models/CareerJobSalaryAsset.php',
             'backend/app/Models/Occupation.php',
             'backend/app/Services/Career/SalaryAssets/CareerSalaryAssetImportService.php',
+            'backend/app/Services/Career/SalaryAssets/CareerSalaryAssetImportStateMachine.php',
             'backend/app/Services/Career/SalaryAssets/CareerSalaryAssetPreviewService.php',
             'backend/database/migrations/2026_06_16_000100_create_career_job_salary_assets_table.php',
             'backend/routes/api.php',
@@ -5123,6 +5124,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Models/CareerJobSalaryAsset.php',
             'backend/app/Models/Occupation.php',
             'backend/app/Services/Career/SalaryAssets/CareerSalaryAssetImportService.php',
+            'backend/app/Services/Career/SalaryAssets/CareerSalaryAssetImportStateMachine.php',
             'backend/app/Services/Career/SalaryAssets/CareerSalaryAssetPreviewService.php',
             'backend/database/migrations/2026_06_16_000100_create_career_job_salary_assets_table.php',
         ], true);
