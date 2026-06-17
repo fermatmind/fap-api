@@ -67,6 +67,12 @@ final class CareerSalaryAssetImportStateMachine
             && $this->canTransition(self::STATE_APPROVED, self::STATE_PRODUCTION_IMPORTED);
     }
 
+    public function canApproveFrom(?string $currentStatus): bool
+    {
+        return $currentStatus === self::STATE_EDITORIAL_REVIEW
+            || $currentStatus === self::STATE_STAGING_PREVIEW;
+    }
+
     /**
      * @return array<string, mixed>
      */

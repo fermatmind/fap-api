@@ -565,6 +565,259 @@ final class CareerSalaryAssetImportService
     }
 
     /**
+     * @return array<string, mixed>
+     */
+    public function approveStagingPreview(string $approvalManifestFile, ?string $expectedApprovalManifestSha256 = null, bool $apply = false): array
+    {
+        $approvalManifestSha256 = is_file($approvalManifestFile) ? (hash_file('sha256', $approvalManifestFile) ?: null) : null;
+        $rawExpectedApprovalManifestSha256 = trim((string) $expectedApprovalManifestSha256);
+        $expectedApprovalManifestSha256 = $this->normalizeSha256($expectedApprovalManifestSha256);
+        $errors = [];
+
+        if ($rawExpectedApprovalManifestSha256 !== '' && $expectedApprovalManifestSha256 === null) {
+            $errors[] = 'Expected approval manifest SHA-256 must be a 64-character hex digest.';
+        }
+
+        if (! is_file($approvalManifestFile) || ! is_readable($approvalManifestFile)) {
+            return $this->approvalReport($approvalManifestFile, $approvalManifestSha256, $expectedApprovalManifestSha256, $apply, [
+                'Approval manifest file is missing or unreadable.',
+            ]);
+        }
+
+        if ($expectedApprovalManifestSha256 !== null && $approvalManifestSha256 !== $expectedApprovalManifestSha256) {
+            $errors[] = 'Approval manifest SHA-256 does not match expected artifact SHA.';
+        }
+
+        try {
+            $manifest = json_decode((string) file_get_contents($approvalManifestFile), true, 512, JSON_THROW_ON_ERROR);
+        } catch (Throwable) {
+            return $this->approvalReport($approvalManifestFile, $approvalManifestSha256, $expectedApprovalManifestSha256, $apply, [
+                'Approval manifest is not valid JSON.',
+            ]);
+        }
+
+        if (! is_array($manifest)) {
+            return $this->approvalReport($approvalManifestFile, $approvalManifestSha256, $expectedApprovalManifestSha256, $apply, [
+                'Approval manifest root must be an object.',
+            ]);
+        }
+
+        $sourceAsset = $this->arrayValue($manifest, 'source_asset');
+        $sourceAudits = $this->arrayValue($manifest, 'source_audits');
+        $gateResults = $this->arrayValue($manifest, 'gate_results');
+        $editorialReview = $this->arrayValue($manifest, 'editorial_review');
+        $approvedSlugs = is_array($manifest['approved_slugs'] ?? null) ? array_values(array_filter(
+            array_map(fn (mixed $slug): string => $this->previewService->normalizeSlug((string) $slug), $manifest['approved_slugs']),
+            static fn (string $slug): bool => $slug !== ''
+        )) : [];
+        $approvedSlugSet = array_values(array_unique($approvedSlugs));
+
+        if (($manifest['artifact_type'] ?? null) !== 'career_salary_1046_editorial_review_approval_manifest') {
+            $errors[] = 'approval_manifest.artifact_type mismatch.';
+        }
+        if (($sourceAsset['row_count'] ?? null) !== 2092) {
+            $errors[] = 'approval_manifest.source_asset.row_count must be 2092.';
+        }
+        if (($sourceAsset['slug_count'] ?? null) !== 1046) {
+            $errors[] = 'approval_manifest.source_asset.slug_count must be 1046.';
+        }
+        $localeCounts = is_array($sourceAsset['locale_counts'] ?? null) ? $sourceAsset['locale_counts'] : [];
+        if (($localeCounts['zh-CN'] ?? null) !== 1046 || ($localeCounts['en'] ?? null) !== 1046) {
+            $errors[] = 'approval_manifest.source_asset.locale_counts must contain zh-CN=1046 and en=1046.';
+        }
+        $sourceAssetSha256 = $this->normalizeSha256(is_string($sourceAsset['sha256'] ?? null) ? $sourceAsset['sha256'] : null);
+        if ($sourceAssetSha256 === null) {
+            $errors[] = 'approval_manifest.source_asset.sha256 must be a SHA-256 digest.';
+        }
+        foreach ([
+            'independent_qa_sha256',
+            'staging_api_smoke_sha256',
+            'staging_summary_sha256',
+        ] as $shaField) {
+            if ($this->normalizeSha256(is_string($sourceAudits[$shaField] ?? null) ? $sourceAudits[$shaField] : null) === null) {
+                $errors[] = "approval_manifest.source_audits.{$shaField} must be a SHA-256 digest.";
+            }
+        }
+        if (($gateResults['independent_qa_conclusion'] ?? null) !== 'READY_FOR_EXPANDED_STAGING_PREVIEW') {
+            $errors[] = 'approval_manifest.gate_results.independent_qa_conclusion must be READY_FOR_EXPANDED_STAGING_PREVIEW.';
+        }
+        if (($gateResults['known_good_10slug_pass'] ?? null) !== true) {
+            $errors[] = 'approval_manifest.gate_results.known_good_10slug_pass must be true.';
+        }
+        if (($gateResults['projection_ready_rows'] ?? null) !== 2092 || ($gateResults['projection_blocked_rows'] ?? null) !== 0) {
+            $errors[] = 'approval_manifest.gate_results projection counts must be ready=2092 and blocked=0.';
+        }
+        if (($gateResults['staging_api_smoke_status'] ?? null) !== 'pass'
+            || ($gateResults['staging_api_ready_rows'] ?? null) !== 2092
+            || ($gateResults['staging_api_failed_rows'] ?? null) !== 0) {
+            $errors[] = 'approval_manifest.gate_results staging API smoke must pass 2092/2092.';
+        }
+        if (($editorialReview['status'] ?? null) !== 'editorial_review_pass') {
+            $errors[] = 'approval_manifest.editorial_review.status must be editorial_review_pass.';
+        }
+        if (($editorialReview['approved_for_next_state'] ?? null) !== CareerJobSalaryAsset::STATUS_APPROVED) {
+            $errors[] = 'approval_manifest.editorial_review.approved_for_next_state must be approved.';
+        }
+        if (($editorialReview['production_import_approved'] ?? null) !== false) {
+            $errors[] = 'approval_manifest.editorial_review.production_import_approved must be false.';
+        }
+        if (($editorialReview['manual_approval_required_for_production_import'] ?? null) !== true) {
+            $errors[] = 'approval_manifest.editorial_review.manual_approval_required_for_production_import must be true.';
+        }
+        if (($editorialReview['rejected_count'] ?? null) !== 0 || (is_array($editorialReview['rejected_slugs'] ?? null) && count($editorialReview['rejected_slugs']) > 0)) {
+            $errors[] = 'approval_manifest.editorial_review must have rejected_count=0 and no rejected_slugs.';
+        }
+        if (count($approvedSlugSet) !== 1046 || count($approvedSlugs) !== 1046) {
+            $errors[] = 'approval_manifest.approved_slugs must contain 1046 unique slugs.';
+        }
+
+        $dbReport = $sourceAssetSha256 === null ? $this->emptyApprovalDbReport() : $this->approvalDatabaseReport($approvedSlugSet, $sourceAssetSha256);
+        foreach ($dbReport['errors'] as $dbError) {
+            $errors[] = $dbError;
+        }
+
+        $approvalRunId = (string) Str::uuid();
+        $updated = [];
+        if ($errors === [] && $apply) {
+            $updated = DB::transaction(function () use ($approvedSlugSet, $sourceAssetSha256, $approvalManifestSha256, $sourceAudits, $approvalRunId): array {
+                $assets = CareerJobSalaryAsset::query()
+                    ->where('asset_version', CareerJobSalaryAsset::ASSET_VERSION_V3_6)
+                    ->whereIn('career_job_slug', $approvedSlugSet)
+                    ->where('source_artifact_sha256', $sourceAssetSha256)
+                    ->lockForUpdate()
+                    ->get();
+                $updated = [];
+
+                foreach ($assets as $asset) {
+                    if (! $this->stateMachine->canApproveFrom($asset->status)) {
+                        throw new \RuntimeException("{$asset->career_job_slug}/{$asset->locale}: cannot transition salary asset from {$asset->status} to approved.");
+                    }
+
+                    $auditFields = is_array($asset->audit_fields_json) ? $asset->audit_fields_json : [];
+                    $auditFields['approval_gate'] = [
+                        'status' => CareerJobSalaryAsset::STATUS_APPROVED,
+                        'approval_manifest_sha256' => $approvalManifestSha256,
+                        'independent_qa_sha256' => $sourceAudits['independent_qa_sha256'] ?? null,
+                        'staging_api_smoke_sha256' => $sourceAudits['staging_api_smoke_sha256'] ?? null,
+                        'approved_run_id' => $approvalRunId,
+                    ];
+                    $previousStatus = $asset->status;
+                    $asset->status = CareerJobSalaryAsset::STATUS_APPROVED;
+                    $asset->audit_fields_json = $auditFields;
+                    $asset->import_run_id = $approvalRunId;
+                    $asset->save();
+
+                    $updated[] = [
+                        'slug' => $asset->career_job_slug,
+                        'locale' => $asset->locale,
+                        'row_id' => $asset->id,
+                        'previous_status' => $previousStatus,
+                        'new_status' => CareerJobSalaryAsset::STATUS_APPROVED,
+                    ];
+                }
+
+                return $updated;
+            });
+        }
+
+        return array_merge($this->approvalReport($approvalManifestFile, $approvalManifestSha256, $expectedApprovalManifestSha256, $apply, $errors), [
+            'source_asset_sha256' => $sourceAssetSha256,
+            'independent_qa_sha256' => $sourceAudits['independent_qa_sha256'] ?? null,
+            'staging_api_smoke_sha256' => $sourceAudits['staging_api_smoke_sha256'] ?? null,
+            'approved_slug_count' => count($approvedSlugSet),
+            'expected_row_count' => 2092,
+            'database_gate' => $dbReport,
+            'did_write' => $apply && $errors === [] && count($updated) > 0,
+            'updated_count' => count($updated),
+            'approval_run_id' => $apply && $errors === [] ? $approvalRunId : null,
+            'updated_assets' => $updated,
+            'rollback_report' => [
+                'approved_run_id' => $apply && $errors === [] ? $approvalRunId : null,
+                'rollback_boundary' => 'Rows approved by this command are scoped by approval_run_id/import_run_id and must be moved back to editorial_review before any production import rollback is considered.',
+                'production_rows_touched' => 0,
+            ],
+        ]);
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function approvalReport(string $approvalManifestFile, ?string $approvalManifestSha256, ?string $expectedApprovalManifestSha256, bool $apply, array $errors): array
+    {
+        return [
+            'importer_version' => self::IMPORTER_VERSION,
+            'mode' => $apply ? 'approve_staging_preview' : 'approve_staging_preview_dry_run',
+            'asset_version' => CareerJobSalaryAsset::ASSET_VERSION_V3_6,
+            'decision' => $errors === [] ? 'pass' : 'fail',
+            'status_policy' => CareerJobSalaryAsset::STATUS_APPROVED,
+            'production_import_allowed' => false,
+            'production_rows_touched' => 0,
+            'approval_manifest_file' => $approvalManifestFile,
+            'approval_manifest_sha256' => $approvalManifestSha256,
+            'expected_approval_manifest_sha256' => $expectedApprovalManifestSha256,
+            'approval_manifest_sha256_match' => $expectedApprovalManifestSha256 === null || $approvalManifestSha256 === $expectedApprovalManifestSha256,
+            'state_machine' => $this->stateMachine->report(),
+            'errors' => $errors,
+        ];
+    }
+
+    /**
+     * @param  list<string>  $approvedSlugs
+     * @return array<string, mixed>
+     */
+    private function approvalDatabaseReport(array $approvedSlugs, string $sourceAssetSha256): array
+    {
+        $assets = CareerJobSalaryAsset::query()
+            ->where('asset_version', CareerJobSalaryAsset::ASSET_VERSION_V3_6)
+            ->whereIn('career_job_slug', $approvedSlugs)
+            ->where('source_artifact_sha256', $sourceAssetSha256)
+            ->get(['career_job_slug', 'locale', 'status', 'source_artifact_sha256']);
+        $rowsByKey = [];
+        $statusCounts = [];
+        $errors = [];
+
+        foreach ($assets as $asset) {
+            $rowsByKey[$asset->career_job_slug.'|'.$asset->locale] = true;
+            $statusCounts[$asset->status] = ($statusCounts[$asset->status] ?? 0) + 1;
+            if (! $this->stateMachine->canApproveFrom($asset->status)) {
+                $errors[] = "{$asset->career_job_slug}/{$asset->locale}: cannot transition from {$asset->status} to approved.";
+            }
+        }
+
+        foreach ($approvedSlugs as $slug) {
+            foreach (['zh-CN', 'en'] as $locale) {
+                if (! isset($rowsByKey[$slug.'|'.$locale])) {
+                    $errors[] = "{$slug}/{$locale}: approved staging row with matching source asset SHA is missing.";
+                }
+            }
+        }
+
+        return [
+            'checked_slug_count' => count($approvedSlugs),
+            'expected_row_count' => count($approvedSlugs) * 2,
+            'matching_row_count' => count($rowsByKey),
+            'status_counts' => $statusCounts,
+            'ready_for_approval' => $errors === [] && count($rowsByKey) === count($approvedSlugs) * 2,
+            'errors' => $errors,
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function emptyApprovalDbReport(): array
+    {
+        return [
+            'checked_slug_count' => 0,
+            'expected_row_count' => 0,
+            'matching_row_count' => 0,
+            'status_counts' => [],
+            'ready_for_approval' => false,
+            'errors' => [],
+        ];
+    }
+
+    /**
      * @param  list<string>  $targetSlugs
      * @return list<array<string, mixed>>
      */
@@ -724,7 +977,7 @@ final class CareerSalaryAssetImportService
             return null;
         }
 
-        return $normalized;
+        return preg_match('/^[a-f0-9]{64}$/', $normalized) === 1 ? $normalized : null;
     }
 
     /**

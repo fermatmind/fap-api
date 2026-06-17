@@ -337,6 +337,96 @@ final class CareerSalaryAssetPreviewImportTest extends TestCase
         $this->assertStringContainsString('cannot transition salary asset from production_imported to staging_preview', implode(' ', $decoded['errors']));
     }
 
+    public function test_importer_approval_gate_promotes_1046_staging_rows_to_approved_only_after_manifest_confirmation(): void
+    {
+        $slugs = array_map(static fn (int $index): string => 'approved-career-'.$index, range(1, 1046));
+        Config::set('career_salary_assets.preview_slugs', $slugs);
+        $this->seedCareerJobBundleAuthorities($slugs);
+
+        $rows = [];
+        foreach ($slugs as $slug) {
+            $rows[] = $this->assetRow($slug, 'zh-CN');
+            $rows[] = $this->assetRow($slug, 'en');
+        }
+        $file = $this->writeJsonl($rows);
+        $sourceSha = hash_file('sha256', $file);
+        $forceReport = storage_path('framework/testing/salary-preview-approved-gate-force.json');
+
+        $forceCode = Artisan::call('career:salary-assets-import-preview', [
+            '--file' => $file,
+            '--all-slugs-from-file' => true,
+            '--confirm-full-staging-preview' => true,
+            '--force' => true,
+            '--output' => $forceReport,
+        ]);
+
+        $this->assertSame(0, $forceCode);
+        $this->assertSame(2092, CareerJobSalaryAsset::query()->where('status', CareerJobSalaryAsset::STATUS_STAGING_PREVIEW)->count());
+
+        $approvalManifest = $this->writeApprovalManifest($slugs, (string) $sourceSha);
+        $approvalManifestSha = hash_file('sha256', $approvalManifest);
+        $dryRunReport = storage_path('framework/testing/salary-preview-approved-gate-dry-run.json');
+
+        $dryRunCode = Artisan::call('career:salary-assets-import-preview', [
+            '--approve-staging-preview' => true,
+            '--approval-manifest' => $approvalManifest,
+            '--expected-approval-manifest-sha256' => $approvalManifestSha,
+            '--output' => $dryRunReport,
+        ]);
+
+        $this->assertSame(0, $dryRunCode);
+        $this->assertSame(2092, CareerJobSalaryAsset::query()->where('status', CareerJobSalaryAsset::STATUS_STAGING_PREVIEW)->count());
+        $dryRun = json_decode((string) file_get_contents($dryRunReport), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertSame('pass', $dryRun['decision']);
+        $this->assertSame('approve_staging_preview_dry_run', $dryRun['mode']);
+        $this->assertSame(2092, $dryRun['database_gate']['matching_row_count']);
+        $this->assertFalse((bool) $dryRun['production_import_allowed']);
+        $this->assertSame(0, $dryRun['production_rows_touched']);
+
+        $applyReport = storage_path('framework/testing/salary-preview-approved-gate-apply.json');
+        $applyCode = Artisan::call('career:salary-assets-import-preview', [
+            '--approve-staging-preview' => true,
+            '--approval-manifest' => $approvalManifest,
+            '--expected-approval-manifest-sha256' => $approvalManifestSha,
+            '--confirm-approval-transition' => true,
+            '--output' => $applyReport,
+        ]);
+
+        $this->assertSame(0, $applyCode);
+        $this->assertSame(2092, CareerJobSalaryAsset::query()->where('status', CareerJobSalaryAsset::STATUS_APPROVED)->count());
+        $this->assertSame(0, CareerJobSalaryAsset::query()->where('status', CareerJobSalaryAsset::STATUS_PRODUCTION_IMPORTED)->count());
+        $apply = json_decode((string) file_get_contents($applyReport), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertSame('pass', $apply['decision']);
+        $this->assertSame('approve_staging_preview', $apply['mode']);
+        $this->assertTrue((bool) $apply['did_write']);
+        $this->assertSame(2092, $apply['updated_count']);
+        $this->assertSame(0, $apply['rollback_report']['production_rows_touched']);
+        $this->assertFalse((bool) $apply['production_import_allowed']);
+
+        $approved = CareerJobSalaryAsset::query()
+            ->where('career_job_slug', 'approved-career-1')
+            ->where('locale', 'en')
+            ->firstOrFail();
+        $this->assertSame(CareerJobSalaryAsset::STATUS_APPROVED, $approved->status);
+        $this->assertSame($approvalManifestSha, $approved->audit_fields_json['approval_gate']['approval_manifest_sha256'] ?? null);
+    }
+
+    public function test_importer_approval_gate_rejects_missing_or_unconfirmed_manifest_inputs(): void
+    {
+        $report = storage_path('framework/testing/salary-preview-approved-gate-missing-manifest.json');
+
+        $exitCode = Artisan::call('career:salary-assets-import-preview', [
+            '--approve-staging-preview' => true,
+            '--output' => $report,
+        ]);
+
+        $this->assertSame(1, $exitCode);
+        $decoded = json_decode((string) file_get_contents($report), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertSame('fail', $decoded['decision']);
+        $this->assertStringContainsString('--approval-manifest is required', implode(' ', $decoded['errors']));
+        $this->assertDatabaseCount('career_job_salary_assets', 0);
+    }
+
     public function test_preview_api_accepts_allowlisted_slug_samples_and_fail_closed_others(): void
     {
         Config::set('career_salary_assets.staging_preview_enabled', true);
@@ -714,6 +804,54 @@ final class CareerSalaryAssetPreviewImportTest extends TestCase
             'skill_gap_threshold' => 0.4,
             'trust_inheritance_scope' => ['allow_task_truth' => true],
         ]);
+    }
+
+    /**
+     * @param  list<string>  $slugs
+     */
+    private function writeApprovalManifest(array $slugs, string $sourceSha): string
+    {
+        $manifest = [
+            'artifact_type' => 'career_salary_1046_editorial_review_approval_manifest',
+            'version' => 'v3.6.1046.editorial_review.1',
+            'source_asset' => [
+                'path' => 'generated/career-salary-v3-6-1046-reader-repair-final-2092/career_job_salary_assets_1046_v3_6_reader_repaired.jsonl',
+                'sha256' => $sourceSha,
+                'row_count' => 2092,
+                'slug_count' => 1046,
+                'locale_counts' => ['zh-CN' => 1046, 'en' => 1046],
+            ],
+            'source_audits' => [
+                'independent_qa_sha256' => str_repeat('a', 64),
+                'staging_api_smoke_sha256' => str_repeat('b', 64),
+                'staging_summary_sha256' => str_repeat('c', 64),
+            ],
+            'gate_results' => [
+                'independent_qa_conclusion' => 'READY_FOR_EXPANDED_STAGING_PREVIEW',
+                'known_good_10slug_pass' => true,
+                'projection_ready_rows' => 2092,
+                'projection_blocked_rows' => 0,
+                'staging_api_smoke_status' => 'pass',
+                'staging_api_ready_rows' => 2092,
+                'staging_api_failed_rows' => 0,
+                'staging_preview_summary_conclusion' => 'EXPANDED_STAGING_PREVIEW_1046_PASS',
+            ],
+            'editorial_review' => [
+                'status' => 'editorial_review_pass',
+                'approved_for_next_state' => CareerJobSalaryAsset::STATUS_APPROVED,
+                'production_import_approved' => false,
+                'rejected_count' => 0,
+                'rejected_slugs' => [],
+                'high_risk_reviewed_slug_count' => 89,
+                'reviewed_categories' => ['military_or_command', 'variable_pay_or_performance'],
+                'manual_approval_required_for_production_import' => true,
+            ],
+            'approved_slugs' => $slugs,
+        ];
+        $path = storage_path('framework/testing/salary-preview-approval-manifest.json');
+        file_put_contents($path, json_encode($manifest, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES).PHP_EOL);
+
+        return $path;
     }
 
     /**
