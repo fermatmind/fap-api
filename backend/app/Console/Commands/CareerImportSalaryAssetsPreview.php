@@ -15,6 +15,7 @@ final class CareerImportSalaryAssetsPreview extends Command
         {--expected-sha256= : Optional expected SHA-256 for the input JSONL artifact}
         {--slugs= : Optional comma-separated preview slug subset}
         {--all-slugs-from-file : Dry-run every slug found in the source JSONL instead of the configured preview allowlist}
+        {--confirm-full-staging-preview : Explicitly confirm that --force may write every slug found in the source JSONL to staging_preview}
         {--dry-run : Validate only; this is the default when --force is not supplied}
         {--force : Write staging_preview rows for allowlisted preview slugs only}
         {--json : Emit machine-readable JSON report}
@@ -48,17 +49,18 @@ final class CareerImportSalaryAssetsPreview extends Command
                 ], false);
             }
             $allSlugsFromFile = (bool) $this->option('all-slugs-from-file');
-            if ($force && $allSlugsFromFile) {
+            $confirmFullStagingPreview = (bool) $this->option('confirm-full-staging-preview');
+            if ($force && $allSlugsFromFile && ! $confirmFullStagingPreview) {
                 return $this->finish([
                     'decision' => 'fail',
-                    'errors' => ['--all-slugs-from-file is dry-run only; staging_preview writes must use an explicit allowlist.'],
+                    'errors' => ['--force --all-slugs-from-file requires --confirm-full-staging-preview.'],
                 ], false);
             }
 
             $slugs = $this->requestedSlugs();
             $expectedSha256 = trim((string) $this->option('expected-sha256')) ?: null;
             $report = $force
-                ? $this->importService->importStagingPreview($file, $slugs, $expectedSha256)
+                ? $this->importService->importStagingPreview($file, $slugs, $expectedSha256, $allSlugsFromFile)
                 : $this->importService->validateFile($file, $slugs, $expectedSha256, $allSlugsFromFile);
 
             return $this->finish($report, ($report['decision'] ?? null) === 'pass');

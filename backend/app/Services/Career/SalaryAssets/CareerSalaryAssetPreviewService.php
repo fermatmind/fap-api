@@ -34,7 +34,7 @@ final class CareerSalaryAssetPreviewService
         $normalizedSlug = $this->normalizeSlug($slug);
         $normalizedLocale = $this->normalizeLocale($locale);
 
-        if (! $this->previewEnabled() || ! in_array($normalizedSlug, $this->previewSlugs(), true)) {
+        if (! $this->previewEnabled()) {
             return null;
         }
 

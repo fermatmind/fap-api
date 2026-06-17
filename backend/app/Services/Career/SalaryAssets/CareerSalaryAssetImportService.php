@@ -477,9 +477,9 @@ final class CareerSalaryAssetImportService
      * @param  list<string>|null  $requestedSlugs
      * @return array<string, mixed>
      */
-    public function importStagingPreview(string $file, ?array $requestedSlugs = null, ?string $expectedSha256 = null): array
+    public function importStagingPreview(string $file, ?array $requestedSlugs = null, ?string $expectedSha256 = null, bool $allSlugsFromFile = false): array
     {
-        $report = $this->validateFile($file, $requestedSlugs, $expectedSha256);
+        $report = $this->validateFile($file, $requestedSlugs, $expectedSha256, $allSlugsFromFile);
         if (($report['decision'] ?? null) !== 'pass') {
             return $report;
         }
@@ -487,8 +487,17 @@ final class CareerSalaryAssetImportService
         $importRunId = (string) Str::uuid();
         $sourceSha = is_string($report['source_file_sha256'] ?? null) ? $report['source_file_sha256'] : null;
 
+        /** @var list<string> $targetSlugs */
+        $targetSlugs = is_array($report['target_slugs'] ?? null) ? array_values(array_filter(
+            array_map(fn (mixed $slug): string => $this->previewService->normalizeSlug((string) $slug), $report['target_slugs']),
+            static fn (string $slug): bool => $slug !== ''
+        )) : [];
+
         /** @var list<array<string, mixed>> $rows */
-        $rows = is_array($report['rows'] ?? null) ? $report['rows'] : [];
+        $rows = $allSlugsFromFile
+            ? $this->rowsForTargetSlugs($file, $targetSlugs)
+            : (is_array($report['rows'] ?? null) ? $report['rows'] : []);
+
         $written = DB::transaction(function () use ($rows, $sourceSha, $importRunId): array {
             $written = [];
 
@@ -548,10 +557,45 @@ final class CareerSalaryAssetImportService
             'decision' => 'pass',
             'did_write' => count($written) > 0,
             'written_count' => count($written),
+            'full_staging_preview_confirmed' => $allSlugsFromFile,
             'import_run_id' => $importRunId,
             'rollback_policy' => $this->rollbackPolicy($importRunId),
             'written_assets' => $written,
         ]);
+    }
+
+    /**
+     * @param  list<string>  $targetSlugs
+     * @return list<array<string, mixed>>
+     */
+    private function rowsForTargetSlugs(string $file, array $targetSlugs): array
+    {
+        $targetLookup = array_fill_keys($targetSlugs, true);
+        $rows = [];
+        $handle = fopen($file, 'rb');
+        if ($handle === false) {
+            throw new \RuntimeException('Source JSONL file could not be opened for staging_preview write.');
+        }
+
+        while (($line = fgets($handle)) !== false) {
+            if (trim($line) === '') {
+                continue;
+            }
+
+            $row = json_decode($line, true, 512, JSON_THROW_ON_ERROR);
+            if (! is_array($row)) {
+                continue;
+            }
+
+            $slug = $this->previewService->normalizeSlug((string) ($row['slug'] ?? ''));
+            if (isset($targetLookup[$slug])) {
+                $rows[] = $row;
+            }
+        }
+
+        fclose($handle);
+
+        return $rows;
     }
 
     /**

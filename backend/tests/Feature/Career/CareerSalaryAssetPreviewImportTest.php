@@ -183,6 +183,67 @@ final class CareerSalaryAssetPreviewImportTest extends TestCase
         $this->assertSame($slugs, $decoded['target_slugs']);
     }
 
+    public function test_importer_force_all_slugs_from_file_requires_explicit_full_staging_confirmation(): void
+    {
+        Config::set('career_salary_assets.preview_slugs', ['not-in-source-file']);
+        $slugs = ['all-file-career-a', 'all-file-career-b'];
+        $this->seedCareerJobBundleAuthorities($slugs);
+
+        $file = $this->writeJsonl([
+            $this->assetRow('all-file-career-a', 'zh-CN'),
+            $this->assetRow('all-file-career-a', 'en'),
+            $this->assetRow('all-file-career-b', 'zh-CN'),
+            $this->assetRow('all-file-career-b', 'en'),
+        ]);
+        $report = storage_path('framework/testing/salary-preview-all-file-force-without-confirmation.json');
+
+        $exitCode = Artisan::call('career:salary-assets-import-preview', [
+            '--file' => $file,
+            '--all-slugs-from-file' => true,
+            '--force' => true,
+            '--output' => $report,
+        ]);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertDatabaseCount('career_job_salary_assets', 0);
+        $decoded = json_decode((string) file_get_contents($report), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertSame('fail', $decoded['decision']);
+        $this->assertStringContainsString('--confirm-full-staging-preview', implode(' ', $decoded['errors']));
+    }
+
+    public function test_importer_force_can_write_all_slugs_from_file_when_confirmed(): void
+    {
+        Config::set('career_salary_assets.preview_slugs', ['not-in-source-file']);
+        $slugs = ['all-file-career-a', 'all-file-career-b'];
+        $this->seedCareerJobBundleAuthorities($slugs);
+
+        $file = $this->writeJsonl([
+            $this->assetRow('all-file-career-a', 'zh-CN'),
+            $this->assetRow('all-file-career-a', 'en'),
+            $this->assetRow('all-file-career-b', 'zh-CN'),
+            $this->assetRow('all-file-career-b', 'en'),
+        ]);
+        $report = storage_path('framework/testing/salary-preview-all-file-force-confirmed.json');
+
+        $exitCode = Artisan::call('career:salary-assets-import-preview', [
+            '--file' => $file,
+            '--all-slugs-from-file' => true,
+            '--confirm-full-staging-preview' => true,
+            '--force' => true,
+            '--output' => $report,
+        ]);
+
+        $this->assertSame(0, $exitCode);
+        $this->assertDatabaseCount('career_job_salary_assets', 4);
+        $decoded = json_decode((string) file_get_contents($report), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertSame('pass', $decoded['decision']);
+        $this->assertTrue((bool) $decoded['all_slugs_from_file']);
+        $this->assertTrue((bool) $decoded['full_staging_preview_confirmed']);
+        $this->assertSame(4, $decoded['written_count']);
+        $this->assertSame($slugs, $decoded['target_slugs']);
+        $this->assertFalse((bool) ($decoded['production_import_allowed'] ?? true));
+    }
+
     public function test_importer_editorial_gate_uses_reader_safe_projection_for_source_labels(): void
     {
         $this->seedCareerJobBundleAuthority('accountants-and-auditors');
@@ -290,7 +351,6 @@ final class CareerSalaryAssetPreviewImportTest extends TestCase
         $this->seedPreviewAsset('accountants-and-auditors', 'zh-CN');
         $this->seedPreviewAsset('actuaries', 'en');
         $this->seedPreviewAsset('computer-programmers', 'zh-CN');
-        $this->seedPreviewAsset('actors', 'en');
 
         $this->getJson('/api/v0.5/career/jobs/accountants-and-auditors/salary-asset?locale=zh-CN')
             ->assertOk()
@@ -504,6 +564,10 @@ final class CareerSalaryAssetPreviewImportTest extends TestCase
         Config::set('career_salary_assets.staging_preview_enabled', true);
         Config::set('career_salary_assets.preview_slugs', ['actuaries']);
         $this->getJson('/api/v0.5/career/jobs/accountants-and-auditors/salary-asset?locale=zh-CN')
+            ->assertOk()
+            ->assertJsonPath('salary_asset_v1.slug', 'accountants-and-auditors');
+
+        $this->getJson('/api/v0.5/career/jobs/actuaries/salary-asset?locale=zh-CN')
             ->assertNotFound();
     }
 
