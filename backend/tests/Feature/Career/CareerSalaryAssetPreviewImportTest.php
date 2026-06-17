@@ -8,9 +8,9 @@ use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
 use App\Models\CareerJobSalaryAsset;
 use App\Models\Occupation;
 use App\Models\OccupationFamily;
+use App\Services\Career\PublicCareerAuthorityResponseCache;
 use App\Services\Career\SalaryAssets\CareerSalaryAssetImportService;
 use App\Services\Career\SalaryAssets\CareerSalaryAssetPreviewService;
-use App\Services\Career\PublicCareerAuthorityResponseCache;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
@@ -65,6 +65,93 @@ final class CareerSalaryAssetPreviewImportTest extends TestCase
         $this->assertFalse((bool) ($decoded['production_import_allowed'] ?? true));
     }
 
+    public function test_importer_dry_run_reports_state_machine_sha_idempotency_and_rollback_policy(): void
+    {
+        $this->seedOccupation('accountants-and-auditors');
+        $this->seedCareerJobBundleAuthority('accountants-and-auditors');
+        $file = $this->writeJsonl([
+            $this->assetRow('accountants-and-auditors', 'zh-CN'),
+            $this->assetRow('accountants-and-auditors', 'en'),
+        ]);
+        $sha = hash_file('sha256', $file);
+        $report = storage_path('framework/testing/salary-preview-state-machine-dry-run.json');
+
+        $exitCode = Artisan::call('career:salary-assets-import-preview', [
+            '--file' => $file,
+            '--slugs' => 'accountants-and-auditors',
+            '--expected-sha256' => $sha,
+            '--dry-run' => true,
+            '--output' => $report,
+        ]);
+
+        $this->assertSame(0, $exitCode);
+        $decoded = json_decode((string) file_get_contents($report), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertSame('pass', $decoded['decision']);
+        $this->assertSame($sha, $decoded['source_file_sha256']);
+        $this->assertTrue((bool) $decoded['source_file_sha256_match']);
+        $this->assertSame(0, $decoded['duplicate_key_count']);
+        $this->assertSame(['career_job_slug', 'locale', 'asset_version'], $decoded['idempotency']['target_key']);
+        $this->assertFalse((bool) $decoded['state_machine']['production_import_without_approved_allowed']);
+        $this->assertSame(CareerJobSalaryAsset::STATUS_APPROVED, $decoded['state_machine']['production_import_requires_from_status']);
+        $this->assertTrue((bool) $decoded['rollback_policy']['production_import_requires_approved_status']);
+    }
+
+    public function test_importer_dry_run_rejects_unexpected_source_sha(): void
+    {
+        $this->seedOccupation('accountants-and-auditors');
+        $this->seedCareerJobBundleAuthority('accountants-and-auditors');
+        $file = $this->writeJsonl([
+            $this->assetRow('accountants-and-auditors', 'zh-CN'),
+            $this->assetRow('accountants-and-auditors', 'en'),
+        ]);
+        $report = storage_path('framework/testing/salary-preview-sha-mismatch.json');
+
+        $exitCode = Artisan::call('career:salary-assets-import-preview', [
+            '--file' => $file,
+            '--slugs' => 'accountants-and-auditors',
+            '--expected-sha256' => str_repeat('0', 64),
+            '--dry-run' => true,
+            '--output' => $report,
+        ]);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertDatabaseCount('career_job_salary_assets', 0);
+        $decoded = json_decode((string) file_get_contents($report), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertFalse((bool) $decoded['source_file_sha256_match']);
+        $this->assertStringContainsString('Source JSONL SHA-256 does not match expected artifact SHA', implode(' ', $decoded['errors']));
+    }
+
+    public function test_importer_dry_run_validates_full_1046_contract_without_writing(): void
+    {
+        $slugs = array_map(static fn (int $index): string => 'contract-career-'.$index, range(1, 1046));
+        Config::set('career_salary_assets.preview_slugs', $slugs);
+        $this->seedCareerJobBundleAuthorities($slugs);
+
+        $rows = [];
+        foreach ($slugs as $slug) {
+            $rows[] = $this->assetRow($slug, 'zh-CN');
+            $rows[] = $this->assetRow($slug, 'en');
+        }
+        $file = $this->writeJsonl($rows);
+        $report = storage_path('framework/testing/salary-preview-full-1046-dry-run.json');
+
+        $exitCode = Artisan::call('career:salary-assets-import-preview', [
+            '--file' => $file,
+            '--dry-run' => true,
+            '--output' => $report,
+        ]);
+
+        $this->assertSame(0, $exitCode);
+        $this->assertDatabaseCount('career_job_salary_assets', 0);
+        $decoded = json_decode((string) file_get_contents($report), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertSame('pass', $decoded['decision']);
+        $this->assertSame(1046, $decoded['target_slug_count']);
+        $this->assertSame(2092, $decoded['validated_preview_rows']);
+        $this->assertSame(2092, $decoded['expected_preview_rows']);
+        $this->assertSame(1046, $decoded['career_job_bundle_authority']['ready_slug_count']);
+        $this->assertFalse((bool) ($decoded['production_import_allowed'] ?? true));
+    }
+
     public function test_importer_force_writes_staging_preview_rows_only(): void
     {
         $this->seedOccupation('accountants-and-auditors');
@@ -91,6 +178,48 @@ final class CareerSalaryAssetPreviewImportTest extends TestCase
         ]);
     }
 
+    public function test_importer_force_blocks_staging_preview_over_production_imported_rows(): void
+    {
+        $occupation = $this->seedOccupation('accountants-and-auditors');
+        $this->seedCareerJobBundleAuthority('accountants-and-auditors');
+        $row = $this->assetRow('accountants-and-auditors', 'zh-CN');
+        CareerJobSalaryAsset::query()->create([
+            'occupation_id' => $occupation->id,
+            'career_job_slug' => 'accountants-and-auditors',
+            'locale' => 'zh-CN',
+            'asset_version' => CareerJobSalaryAsset::ASSET_VERSION_V3_6,
+            'status' => CareerJobSalaryAsset::STATUS_PRODUCTION_IMPORTED,
+            'preview_allowlisted' => false,
+            'asset_payload_json' => $row,
+            'sources_json' => $row['sources'],
+            'evidence_used_json' => $row['evidence_used'],
+            'derived_from_estimate_json' => $row['derived_from_estimate'],
+            'audit_fields_json' => $row['audit_fields'],
+            'asset_row_hash' => $row['audit_fields']['row_hash'],
+        ]);
+        $file = $this->writeJsonl([
+            $row,
+            $this->assetRow('accountants-and-auditors', 'en'),
+        ]);
+        $report = storage_path('framework/testing/salary-preview-production-row-blocked.json');
+
+        $exitCode = Artisan::call('career:salary-assets-import-preview', [
+            '--file' => $file,
+            '--slugs' => 'accountants-and-auditors',
+            '--force' => true,
+            '--output' => $report,
+        ]);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertDatabaseHas('career_job_salary_assets', [
+            'career_job_slug' => 'accountants-and-auditors',
+            'locale' => 'zh-CN',
+            'status' => CareerJobSalaryAsset::STATUS_PRODUCTION_IMPORTED,
+        ]);
+        $decoded = json_decode((string) file_get_contents($report), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertStringContainsString('cannot transition salary asset from production_imported to staging_preview', implode(' ', $decoded['errors']));
+    }
+
     public function test_preview_api_accepts_allowlisted_slug_samples_and_fail_closed_others(): void
     {
         Config::set('career_salary_assets.staging_preview_enabled', true);
@@ -100,10 +229,7 @@ final class CareerSalaryAssetPreviewImportTest extends TestCase
             'computer-programmers',
         ]);
 
-        foreach (['accountants-and-auditors', 'actuaries', 'computer-programmers', 'actors'] as $slug) {
-            $this->seedOccupation($slug);
-            $this->seedCareerJobBundleAuthority($slug);
-        }
+        $this->seedCareerJobBundleAuthorities(['accountants-and-auditors', 'actuaries', 'computer-programmers', 'actors']);
 
         $this->seedPreviewAsset('accountants-and-auditors', 'zh-CN');
         $this->seedPreviewAsset('actuaries', 'en');
@@ -139,10 +265,7 @@ final class CareerSalaryAssetPreviewImportTest extends TestCase
         Config::set('career_salary_assets.staging_preview_enabled', true);
         Config::set('career_salary_assets.preview_slugs', ['accountants-and-auditors', 'actuaries']);
 
-        foreach (['accountants-and-auditors', 'actuaries', 'actors'] as $slug) {
-            $this->seedOccupation($slug);
-            $this->seedCareerJobBundleAuthority($slug);
-        }
+        $this->seedCareerJobBundleAuthorities(['accountants-and-auditors', 'actuaries', 'actors']);
 
         $file = $this->writeJsonl([
             $this->assetRow('accountants-and-auditors', 'zh-CN'),
@@ -369,14 +492,27 @@ final class CareerSalaryAssetPreviewImportTest extends TestCase
 
     private function seedCareerJobBundleAuthority(string $slug): void
     {
-        $this->seedRuntimeProjectionAuthority([$slug]);
-        app(PublicCareerAuthorityResponseCache::class)->forgetJobDetailPayload($slug, 'zh-CN');
-        app(PublicCareerAuthorityResponseCache::class)->forgetJobDetailPayload($slug, 'en');
+        $this->seedCareerJobBundleAuthorities([$slug]);
+    }
 
-        app(PublicCareerAuthorityResponseCache::class)->warmJobDetailPayload($slug, 'zh-CN', true);
-        app(PublicCareerAuthorityResponseCache::class)->warmJobDetailPayload($slug, 'en', true);
+    /**
+     * @param  list<string>  $slugs
+     */
+    private function seedCareerJobBundleAuthorities(array $slugs): void
+    {
+        $this->seedRuntimeProjectionAuthority($slugs);
 
-        $this->app->forgetInstance(CareerRuntimePublishProjectionVisibility::class);
+        foreach ($slugs as $slug) {
+            if (! Occupation::query()->where('canonical_slug', $slug)->exists()) {
+                $this->seedOccupation($slug);
+            }
+            app(PublicCareerAuthorityResponseCache::class)->forgetJobDetailPayload($slug, 'zh-CN');
+            app(PublicCareerAuthorityResponseCache::class)->forgetJobDetailPayload($slug, 'en');
+
+            app(PublicCareerAuthorityResponseCache::class)->warmJobDetailPayload($slug, 'zh-CN', true);
+            app(PublicCareerAuthorityResponseCache::class)->warmJobDetailPayload($slug, 'en', true);
+        }
+
         $this->app->forgetInstance(CareerSalaryAssetImportService::class);
         $this->app->forgetInstance(CareerSalaryAssetPreviewService::class);
         $this->app->forgetInstance('App\\Console\\Commands\\CareerImportSalaryAssetsPreview');

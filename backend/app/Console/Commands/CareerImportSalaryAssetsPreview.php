@@ -12,6 +12,7 @@ final class CareerImportSalaryAssetsPreview extends Command
 {
     protected $signature = 'career:salary-assets-import-preview
         {--file= : Absolute path to PASS career_job_salary_assets_1046_v3_6 JSONL}
+        {--expected-sha256= : Optional expected SHA-256 for the input JSONL artifact}
         {--slugs= : Optional comma-separated preview slug subset}
         {--dry-run : Validate only; this is the default when --force is not supplied}
         {--force : Write staging_preview rows for allowlisted preview slugs only}
@@ -47,9 +48,10 @@ final class CareerImportSalaryAssetsPreview extends Command
             }
 
             $slugs = $this->requestedSlugs();
+            $expectedSha256 = trim((string) $this->option('expected-sha256')) ?: null;
             $report = $force
-                ? $this->importService->importStagingPreview($file, $slugs)
-                : $this->importService->validateFile($file, $slugs);
+                ? $this->importService->importStagingPreview($file, $slugs, $expectedSha256)
+                : $this->importService->validateFile($file, $slugs, $expectedSha256);
 
             return $this->finish($report, ($report['decision'] ?? null) === 'pass');
         } catch (Throwable $throwable) {
