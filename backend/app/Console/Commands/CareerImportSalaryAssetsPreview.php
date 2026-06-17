@@ -16,6 +16,10 @@ final class CareerImportSalaryAssetsPreview extends Command
         {--slugs= : Optional comma-separated preview slug subset}
         {--all-slugs-from-file : Dry-run every slug found in the source JSONL instead of the configured preview allowlist}
         {--confirm-full-staging-preview : Explicitly confirm that --force may write every slug found in the source JSONL to staging_preview}
+        {--approve-staging-preview : Validate or transition existing staging_preview salary asset rows to approved using an approval manifest}
+        {--approval-manifest= : Absolute path to the editorial approval manifest JSON}
+        {--expected-approval-manifest-sha256= : Optional expected SHA-256 for the approval manifest artifact}
+        {--confirm-approval-transition : Explicitly confirm that --approve-staging-preview may update rows to approved}
         {--dry-run : Validate only; this is the default when --force is not supplied}
         {--force : Write staging_preview rows for allowlisted preview slugs only}
         {--json : Emit machine-readable JSON report}
@@ -32,6 +36,31 @@ final class CareerImportSalaryAssetsPreview extends Command
     public function handle(): int
     {
         try {
+            if ((bool) $this->option('approve-staging-preview')) {
+                if ((bool) $this->option('force')) {
+                    return $this->finish([
+                        'decision' => 'fail',
+                        'errors' => ['--approve-staging-preview and --force cannot be used together.'],
+                    ], false);
+                }
+
+                $manifest = trim((string) $this->option('approval-manifest'));
+                if ($manifest === '') {
+                    return $this->finish([
+                        'decision' => 'fail',
+                        'errors' => ['--approval-manifest is required with --approve-staging-preview.'],
+                    ], false);
+                }
+
+                $report = $this->importService->approveStagingPreview(
+                    $manifest,
+                    trim((string) $this->option('expected-approval-manifest-sha256')) ?: null,
+                    (bool) $this->option('confirm-approval-transition'),
+                );
+
+                return $this->finish($report, ($report['decision'] ?? null) === 'pass');
+            }
+
             $file = trim((string) $this->option('file'));
             if ($file === '') {
                 return $this->finish([
