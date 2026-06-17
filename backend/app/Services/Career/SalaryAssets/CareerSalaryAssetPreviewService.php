@@ -143,11 +143,10 @@ final class CareerSalaryAssetPreviewService
     private function readerSafeSourceName(string $name, string $url, string $market, string $locale): string
     {
         $normalized = trim($name, " \t\n\r\0\x0B/");
-        if ($normalized !== '') {
+        $host = strtolower((string) parse_url($url, PHP_URL_HOST));
+        if ($normalized !== '' && ! ($locale === 'en' && $market === 'CN' && $this->containsCjk($normalized))) {
             return $normalized;
         }
-
-        $host = strtolower((string) parse_url($url, PHP_URL_HOST));
 
         if (str_contains($host, 'jobui.com')) {
             return $locale === 'zh-CN' ? '职友集/JobUI' : 'JobUI';
@@ -176,6 +175,11 @@ final class CareerSalaryAssetPreviewService
             'EU' => 'EU macro context source',
             default => 'Source',
         };
+    }
+
+    private function containsCjk(string $value): bool
+    {
+        return preg_match('/\p{Han}/u', $value) === 1;
     }
 
     private function readerSafeSourceUse(string $market, string $locale): string

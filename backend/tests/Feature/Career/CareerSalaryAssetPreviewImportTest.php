@@ -264,6 +264,41 @@ final class CareerSalaryAssetPreviewImportTest extends TestCase
         $this->assertArrayNotHasKey('source_id', $asset['eu_context_boundary']);
     }
 
+    public function test_preview_api_sanitizes_english_cn_source_display_names(): void
+    {
+        Config::set('career_salary_assets.staging_preview_enabled', true);
+        Config::set('career_salary_assets.preview_slugs', ['zoologists-and-wildlife-biologists']);
+        $occupation = $this->seedOccupation('zoologists-and-wildlife-biologists');
+        $row = $this->assetRow('zoologists-and-wildlife-biologists', 'en');
+        $row['sources'][0]['market'] = 'CN';
+        $row['sources'][0]['name'] = '猎聘';
+        $row['sources'][0]['url'] = 'https://www.liepin.com/zpshengwuxingyeyanjiuyuan/xinzi/';
+        CareerJobSalaryAsset::query()->create([
+            'occupation_id' => $occupation->id,
+            'career_job_slug' => 'zoologists-and-wildlife-biologists',
+            'locale' => 'en',
+            'asset_version' => CareerJobSalaryAsset::ASSET_VERSION_V3_6,
+            'status' => CareerJobSalaryAsset::STATUS_STAGING_PREVIEW,
+            'preview_allowlisted' => true,
+            'asset_payload_json' => $row,
+            'sources_json' => $row['sources'],
+            'evidence_used_json' => $row['evidence_used'],
+            'derived_from_estimate_json' => $row['derived_from_estimate'],
+            'audit_fields_json' => $row['audit_fields'],
+            'asset_row_hash' => $row['audit_fields']['row_hash'],
+        ]);
+
+        $asset = $this->getJson('/api/v0.5/career/jobs/zoologists-and-wildlife-biologists/salary-asset?locale=en')
+            ->assertOk()
+            ->assertJsonPath('salary_asset_v1.locale', 'en')
+            ->json('salary_asset_v1');
+
+        $this->assertSame('Liepin', $asset['sources'][0]['name']);
+        $this->assertSame('China recruitment-market reference', $asset['sources'][0]['used_for']);
+        $this->assertDoesNotMatchRegularExpression('/\p{Han}/u', $asset['sources'][0]['name']);
+        $this->assertArrayNotHasKey('source_id', $asset['sources'][0]);
+    }
+
     public function test_preview_api_fails_closed_when_disabled_or_not_allowlisted(): void
     {
         $occupation = $this->seedOccupation('accountants-and-auditors');
