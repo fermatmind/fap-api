@@ -3172,6 +3172,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isMbti64CmsRevisionPromoteFile($file)) {
+                continue;
+            }
+
             if ($this->isMbtiPersonalityAtDifferenceSectionFile($file)) {
                 continue;
             }
@@ -3943,6 +3947,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsIqNormImportDryRunOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsMbti64BackendImportContractOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsMbti64CmsRevisionDraftOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsMbti64CmsRevisionPromoteOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                 )
             ) {
                 continue;
@@ -4071,6 +4076,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/PersonalityMbti64CmsRevisionDraft.php',
             'backend/app/Services/Cms/Mbti64CmsRevisionDraftWriter.php',
+        ], true);
+    }
+
+    private function isMbti64CmsRevisionPromoteFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/PersonalityMbti64CmsRevisionPromote.php',
+            'backend/app/Services/Cms/Mbti64CmsRevisionPromotionService.php',
         ], true);
     }
 
@@ -6132,6 +6145,25 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         foreach ($changedLines as $line) {
             $normalized = ltrim($line, '+-');
             if (preg_match('/\bPersonalityMbti64CmsRevisionDraft\b/u', $normalized) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsMbti64CmsRevisionPromoteOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            $normalized = ltrim($line, '+-');
+            if (preg_match('/\bPersonalityMbti64CmsRevisionPromote\b/u', $normalized) !== 1) {
                 return false;
             }
         }
