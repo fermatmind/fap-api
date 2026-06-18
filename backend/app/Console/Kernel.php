@@ -11,6 +11,7 @@ use App\Console\Commands\ArticleImportSeoContentPackageDraft;
 use App\Console\Commands\ArticlePublishControlled;
 use App\Console\Commands\ArticleReplaceInlineImageUrl;
 use App\Console\Commands\ArticleSeoGateRollout;
+use App\Console\Commands\ArticleTaxonomyHygiene;
 use App\Console\Commands\ArticleUpdateExistingSeoContentPackage;
 use App\Console\Commands\ArticleUpdateImageMetadata;
 use App\Console\Commands\Big5AttemptPurge;
@@ -341,6 +342,7 @@ class Kernel extends ConsoleKernel
         ArticlePublishControlled::class,
         ArticleReplaceInlineImageUrl::class,
         ArticleSeoGateRollout::class,
+        ArticleTaxonomyHygiene::class,
         ArticleUpdateImageMetadata::class,
         MediaAssetsImportSeoImageBundle::class,
         SeoIntelUrlTruthHandoffCommand::class,

@@ -83,6 +83,44 @@ final class ArticleImportSeoContentPackageDraftCommandTest extends TestCase
         $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
     }
 
+    public function test_dry_run_rejects_internal_visible_zh_category_name(): void
+    {
+        $package = $this->writeModeCPackage(static function (array &$files): void {
+            $files['cms/CMS_FIELDS_zh-CN_career-interest-vs-personality-test-differences.json']['category_name'] = 'SEO Articles';
+            $files['cms/CMS_IMPORT_DRAFT_zh-CN_career-interest-vs-personality-test-differences.json']['category_name'] = 'SEO Articles';
+        });
+
+        $exitCode = Artisan::call('articles:import-seo-content-package-draft', $this->commandOptions($package, [
+            '--dry-run' => true,
+            '--json' => true,
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertErrorCode($payload, 'category_reader_facing_label_required');
+        $this->assertErrorCode($payload, 'internal_visible_category_forbidden');
+        $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
+    }
+
+    public function test_dry_run_rejects_snake_case_zh_category_name(): void
+    {
+        $package = $this->writeModeCPackage(static function (array &$files): void {
+            $files['cms/CMS_FIELDS_zh-CN_career-interest-vs-personality-test-differences.json']['category_name'] = 'career_exploration';
+            $files['cms/CMS_IMPORT_DRAFT_zh-CN_career-interest-vs-personality-test-differences.json']['category_name'] = 'career_exploration';
+        });
+
+        $exitCode = Artisan::call('articles:import-seo-content-package-draft', $this->commandOptions($package, [
+            '--dry-run' => true,
+            '--json' => true,
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertErrorCode($payload, 'category_reader_facing_label_required');
+        $this->assertErrorCode($payload, 'internal_visible_category_forbidden');
+        $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
+    }
+
     public function test_dry_run_accepts_old_big_five_alias_key_with_canonical_value(): void
     {
         $package = $this->writeModeCPackage(static function (array &$files): void {
@@ -654,6 +692,8 @@ final class ArticleImportSeoContentPackageDraftCommandTest extends TestCase
             'sitemap_eligible' => false,
             'llms_eligible' => false,
             'claim_gate_status' => 'not_reviewed',
+            'category_name' => '职业决策',
+            'category_slug' => 'career-decision-making',
             'primary_keyword' => 'career interest test vs personality test',
             'secondary_keywords' => ['Holland Code vs MBTI', 'career assessment vs personality assessment'],
             'primary_hub_url' => '/tests/holland-career-interest-test-riasec',
@@ -711,6 +751,8 @@ final class ArticleImportSeoContentPackageDraftCommandTest extends TestCase
             ]),
             'cms/CMS_FIELDS_en_career-interest-test-vs-personality-test.json' => array_replace($baseFields, [
                 'locale' => 'en',
+                'category_name' => 'Career Decision-Making',
+                'category_slug' => 'career-decision-making',
                 'title' => 'Career Interest Test vs Personality Test: Which Should You Take First?',
                 'slug' => 'career-interest-test-vs-personality-test',
                 'canonical_url' => '/en/articles/career-interest-test-vs-personality-test',
@@ -728,6 +770,8 @@ final class ArticleImportSeoContentPackageDraftCommandTest extends TestCase
             ]),
             'cms/CMS_IMPORT_DRAFT_en_career-interest-test-vs-personality-test.json' => array_replace($baseFields, [
                 'locale' => 'en',
+                'category_name' => 'Career Decision-Making',
+                'category_slug' => 'career-decision-making',
                 'title' => 'Career Interest Test vs Personality Test: Which Should You Take First?',
                 'slug' => 'career-interest-test-vs-personality-test',
                 'canonical_url' => '/en/articles/career-interest-test-vs-personality-test',
