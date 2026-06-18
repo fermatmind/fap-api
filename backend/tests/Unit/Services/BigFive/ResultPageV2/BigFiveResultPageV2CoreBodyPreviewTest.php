@@ -318,6 +318,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_mbti64_cms_internal_link_draft_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/PersonalityMbti64CmsInternalLinkDraft.php',
+            'backend/app/Console/Kernel.php',
+            'backend/app/Services/Cms/Mbti64CmsInternalLinkDraftWriter.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\PersonalityMbti64CmsInternalLinkDraft;',
+            '+        PersonalityMbti64CmsInternalLinkDraft::class,',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
+    }
+
     public function test_runtime_freeze_classifier_ignores_mbti_personality_at_difference_section_files(): void
     {
         $changed = [
@@ -3172,6 +3187,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isMbti64CmsInternalLinkDraftFile($file)) {
+                continue;
+            }
+
             if ($this->isMbti64CmsRevisionPromoteFile($file)) {
                 continue;
             }
@@ -3947,6 +3966,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsIqNormImportDryRunOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsMbti64BackendImportContractOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsMbti64CmsRevisionDraftOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsMbti64CmsInternalLinkDraftOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsMbti64CmsRevisionPromoteOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                 )
             ) {
@@ -4076,6 +4096,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/PersonalityMbti64CmsRevisionDraft.php',
             'backend/app/Services/Cms/Mbti64CmsRevisionDraftWriter.php',
+        ], true);
+    }
+
+    private function isMbti64CmsInternalLinkDraftFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/PersonalityMbti64CmsInternalLinkDraft.php',
+            'backend/app/Services/Cms/Mbti64CmsInternalLinkDraftWriter.php',
         ], true);
     }
 
@@ -6150,6 +6178,41 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         }
 
         return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsMbti64CmsInternalLinkDraftOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        $containsInternalLinkDraftRegistration = false;
+
+        foreach ($changedLines as $line) {
+            $normalized = ltrim($line, '+-');
+            if (preg_match('/\bPersonalityMbti64CmsInternalLinkDraft\b/u', $normalized) === 1) {
+                $containsInternalLinkDraftRegistration = true;
+
+                continue;
+            }
+
+            if (preg_match('/\bPersonalityMbti64BackendImportContract\b/u', $normalized) === 1) {
+                continue;
+            }
+
+            if (trim($normalized) === '') {
+                continue;
+            }
+
+            if (in_array(trim($normalized), ['{', '}'], true)) {
+                return false;
+            }
+        }
+
+        return $containsInternalLinkDraftRegistration;
     }
 
     /**
