@@ -169,7 +169,11 @@ final class SeoContentPackageDraftImporter
             throw new RuntimeException('Existing published/public article cannot be mutated by SEO content package draft import.');
         }
 
-        $category = $this->resolveCategory();
+        $category = $this->resolveCategory(
+            (string) $item['category_name'],
+            (string) $item['category_slug'],
+            (string) $item['locale'],
+        );
         $metadata = $this->normalizedJsonForWrite('article.cover_image_variants', $this->metadata($item));
         $body = (string) $item['body_markdown'];
 
@@ -855,6 +859,8 @@ final class SeoContentPackageDraftImporter
             'locale' => $locale,
             'translation_group_id' => $translationGroupId,
             'slug' => $slug,
+            'category_name' => $this->firstString($import['category_name'] ?? null, $import['category'] ?? null, $fields['category_name'] ?? null, $fields['category'] ?? null, $frontmatter['category_name'] ?? null, $frontmatter['category'] ?? null, $manifestPage['category_name'] ?? null, $manifestPage['category'] ?? null, $manifest['category_name'] ?? null, $manifest['category'] ?? null),
+            'category_slug' => $this->firstString($import['category_slug'] ?? null, $fields['category_slug'] ?? null, $frontmatter['category_slug'] ?? null, $manifestPage['category_slug'] ?? null),
             'title' => $title,
             'meta_title' => $metaTitle,
             'meta_description' => $metaDescription,
@@ -937,6 +943,7 @@ final class SeoContentPackageDraftImporter
         if (! str_starts_with((string) $item['canonical_url'], $locale === 'zh-CN' ? '/zh/articles/' : '/en/articles/')) {
             $errors[] = $this->issue($locale.'.canonical_url', 'invalid_canonical_route', 'canonical_url must be a locale article route.');
         }
+        $this->validateReaderFacingCategory($item, $errors);
         if ((string) $item['cover_media_asset_key'] === '' || (string) $item['cover_image_url'] === '' || (string) $item['og_image_url'] === '') {
             $errors[] = $this->issue($locale.'.social_image_metadata', 'missing_social_image_metadata', 'social image asset, cover URL, and OG URL are required.');
         }
@@ -985,12 +992,102 @@ final class SeoContentPackageDraftImporter
             || $article->published_at !== null;
     }
 
-    private function resolveCategory(): ArticleCategory
+    private function resolveCategory(string $categoryName, string $categorySlug, string $locale): ArticleCategory
     {
+        $name = trim($categoryName);
+        if ($name !== '') {
+            $existing = ArticleCategory::query()
+                ->withoutGlobalScopes()
+                ->where('org_id', 0)
+                ->where('name', $name)
+                ->first();
+
+            if ($existing instanceof ArticleCategory) {
+                if (! (bool) $existing->is_active) {
+                    $existing->forceFill(['is_active' => true])->save();
+                }
+
+                return $existing;
+            }
+
+            $slug = $this->uniqueCategorySlug($categorySlug !== '' ? $categorySlug : $name);
+
+            return ArticleCategory::query()->withoutGlobalScopes()->create([
+                'org_id' => 0,
+                'slug' => $slug,
+                'name' => $name,
+                'is_active' => true,
+                'sort_order' => 0,
+            ]);
+        }
+
+        if ($locale === 'zh-CN') {
+            throw new RuntimeException('Reader-facing zh category is required before importing SEO content package draft.');
+        }
+
         return ArticleCategory::query()->withoutGlobalScopes()->firstOrCreate(
             ['org_id' => 0, 'slug' => 'seo-articles'],
             ['name' => 'SEO Articles', 'is_active' => true, 'sort_order' => 0]
         );
+    }
+
+    /**
+     * @param  array<string,mixed>  $item
+     * @param  list<array<string,mixed>>  $errors
+     */
+    private function validateReaderFacingCategory(array $item, array &$errors): void
+    {
+        $locale = (string) $item['locale'];
+        if ($locale !== 'zh-CN') {
+            return;
+        }
+
+        $category = trim((string) ($item['category_name'] ?? ''));
+        if ($category === '') {
+            $errors[] = $this->issue($locale.'.category', 'category_required', 'zh-CN SEO articles require a reader-facing category name.');
+
+            return;
+        }
+
+        if (! $this->containsHan($category)) {
+            $errors[] = $this->issue($locale.'.category', 'category_reader_facing_label_required', 'zh-CN SEO article category must be a Chinese-facing display label.');
+        }
+
+        if ($this->isInternalVisibleCategoryName($category)) {
+            $errors[] = $this->issue($locale.'.category', 'internal_visible_category_forbidden', 'Visible zh article category cannot be SEO Articles, snake_case, or an internal taxonomy label.');
+        }
+    }
+
+    private function containsHan(string $value): bool
+    {
+        return preg_match('/\p{Han}/u', $value) === 1;
+    }
+
+    private function isInternalVisibleCategoryName(string $value): bool
+    {
+        $normalized = strtolower(trim($value));
+        if (in_array($normalized, ['seo articles', 'seo-articles', 'career_exploration', 'career-exploration'], true)) {
+            return true;
+        }
+
+        return preg_match('/^[a-z][a-z0-9]*(?:_[a-z0-9]+)+$/', $normalized) === 1;
+    }
+
+    private function uniqueCategorySlug(string $seed): string
+    {
+        $base = Str::slug($seed);
+        if ($base === '') {
+            $base = 'article-category-'.substr(hash('sha256', $seed), 0, 10);
+        }
+
+        $slug = $base;
+        $suffix = 2;
+        while (ArticleCategory::query()->withoutGlobalScopes()->where('org_id', 0)->where('slug', $slug)->exists()) {
+            $slug = $base.'-'.$suffix;
+            $suffix++;
+        }
+
+        return $slug;
     }
 
     /**

@@ -4245,6 +4245,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return in_array($file, [
             'backend/app/Console/Commands/ArticleImportSeoContentPackageDraft.php',
+            'backend/app/Console/Commands/ArticleTaxonomyHygiene.php',
             'backend/app/Console/Commands/ArticleUpdateExistingSeoContentPackage.php',
         ], true)
             || str_starts_with($file, 'backend/app/Services/Cms/SeoContentPackage/');
@@ -5953,7 +5954,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 return false;
             }
 
-            if (preg_match('/\b(ArticleEnsureSeoMetaBaseline|ArticleUpdateExistingSeoContentPackage|ArticleSeoGateRollout|ContentReleaseRevalidate|SeoIntelSearchChannelQueueCommand|SeoIntelUrlTruthHandoffCommand)\b/u', $line) !== 1) {
+            if (preg_match('/\b(ArticleEnsureSeoMetaBaseline|ArticleTaxonomyHygiene|ArticleUpdateExistingSeoContentPackage|ArticleSeoGateRollout|ContentReleaseRevalidate|SeoIntelSearchChannelQueueCommand|SeoIntelUrlTruthHandoffCommand)\b/u', $line) !== 1) {
                 return false;
             }
         }
