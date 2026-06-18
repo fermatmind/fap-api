@@ -20,6 +20,9 @@ final class CareerImportSalaryAssetsPreview extends Command
         {--approval-manifest= : Absolute path to the editorial approval manifest JSON}
         {--expected-approval-manifest-sha256= : Optional expected SHA-256 for the approval manifest artifact}
         {--confirm-approval-transition : Explicitly confirm that --approve-staging-preview may update rows to approved}
+        {--production-import : Validate or transition approved salary asset rows to production_imported using the approval manifest and exact operator approval}
+        {--operator-approval= : Exact operator approval text required for --production-import}
+        {--confirm-production-import : Explicitly confirm that --production-import may update approved rows to production_imported}
         {--dry-run : Validate only; this is the default when --force is not supplied}
         {--force : Write staging_preview rows for allowlisted preview slugs only}
         {--json : Emit machine-readable JSON report}
@@ -36,6 +39,32 @@ final class CareerImportSalaryAssetsPreview extends Command
     public function handle(): int
     {
         try {
+            if ((bool) $this->option('production-import')) {
+                if ((bool) $this->option('force') || (bool) $this->option('approve-staging-preview')) {
+                    return $this->finish([
+                        'decision' => 'fail',
+                        'errors' => ['--production-import cannot be combined with --force or --approve-staging-preview.'],
+                    ], false);
+                }
+
+                $manifest = trim((string) $this->option('approval-manifest'));
+                if ($manifest === '') {
+                    return $this->finish([
+                        'decision' => 'fail',
+                        'errors' => ['--approval-manifest is required with --production-import.'],
+                    ], false);
+                }
+
+                $report = $this->importService->productionImportApproved(
+                    $manifest,
+                    trim((string) $this->option('expected-approval-manifest-sha256')) ?: null,
+                    trim((string) $this->option('operator-approval')),
+                    (bool) $this->option('confirm-production-import'),
+                );
+
+                return $this->finish($report, ($report['decision'] ?? null) === 'pass');
+            }
+
             if ((bool) $this->option('approve-staging-preview')) {
                 if ((bool) $this->option('force')) {
                     return $this->finish([
