@@ -1,0 +1,665 @@
+{
+    "artifact": "MBTI64-BACKEND-IMPORT-CONTRACT-PATCH-01",
+    "status": "pass",
+    "ok": true,
+    "dry_run_only": true,
+    "write_supported_in_this_pr": false,
+    "writes_committed": false,
+    "publish_attempted": false,
+    "search_release_attempted": false,
+    "sitemap_llms_release_attempted": false,
+    "source_version": "pilot-v2.1",
+    "source_status": "draft_for_codex_qa",
+    "expected_row_count": 8,
+    "row_count": 8,
+    "variant_row_count": 6,
+    "comparison_row_count": 2,
+    "row_order_locked": true,
+    "expected_urls": [
+        "/en/personality/intj-a-vs-intj-t",
+        "/zh/personality/istj-a",
+        "/en/personality/intp-a-vs-intp-t",
+        "/zh/personality/infp-t",
+        "/en/personality/intj-a",
+        "/en/personality/intj-t",
+        "/zh/personality/intj-a",
+        "/zh/personality/intj-t"
+    ],
+    "cms_revision_draft_contract": {
+        "variant_pages": {
+            "storage": "PersonalityProfileVariantRevision snapshot_json.mbti64_variant_content_package_v2_1",
+            "draft_identity": "org_id=0 + MBTI + locale + runtime_type_code",
+            "future_write_behavior": "create a draft revision only; do not promote live sections/SEO or publish in the same command"
+        },
+        "comparison_pages": {
+            "storage": "PersonalityProfileRevision snapshot_json.mbti64_comparison_draft_v2_1",
+            "draft_identity": "org_id=0 + MBTI + locale + canonical_type_code",
+            "future_write_behavior": "create a base-profile draft overlay; do not create a standalone comparison route/model in this patch"
+        }
+    },
+    "comparison_storage_contract": {
+        "current_runtime_truth": "comparison pages are not stored in a standalone CMS table in this patch",
+        "storage_decision": "store each comparison row as a draft overlay under the base PersonalityProfile revision snapshot",
+        "snapshot_key": "mbti64_comparison_draft_v2_1",
+        "why": "preserves exact comparison content without inventing runtime rendering behavior or schema migrations in this contract PR",
+        "promotion_requirement": "a later PR must add/confirm comparison read API/render contract before any publish/search release"
+    },
+    "field_mapping_contract": {
+        "first_class_fields_for_variant_promotion": [
+            "url",
+            "locale",
+            "page_type",
+            "canonical_target",
+            "seo.seo_title",
+            "seo.seo_description",
+            "seo.breadcrumb_title",
+            "seo.h1",
+            "seo.quick_answer_summary",
+            "content",
+            "faq",
+            "internal_links"
+        ],
+        "structured_metadata_fields": [
+            "primary_query",
+            "secondary_queries",
+            "excluded_queries",
+            "target_intent",
+            "target_test_route",
+            "method_boundary",
+            "trademark_boundary",
+            "information_gain",
+            "claim_risk_notes",
+            "qa_flags_for_codex",
+            "route_safety",
+            "v2_optimization",
+            "above_the_fold_module",
+            "serp_ctr_package_v2",
+            "status"
+        ],
+        "unsupported_field_policy": {
+            "decision": "structured_metadata_not_dropped",
+            "storage": {
+                "variant": "personality_profile_variant_revisions.snapshot_json.mbti64_variant_content_package_v2_1.structured_metadata",
+                "comparison": "personality_profile_revisions.snapshot_json.mbti64_comparison_draft_v2_1.structured_metadata"
+            },
+            "first_class_promotion_rule": "promote only through a later migration/model/API PR; do not silently map unsupported fields to unrelated columns"
+        }
+    },
+    "dry_run_write_guard_contract": {
+        "this_command_requires": "--dry-run",
+        "this_command_refuses": "--write",
+        "write_mode_available_in_this_pr": false,
+        "future_write_minimum_required_flags": [
+            "--write",
+            "--draft-only",
+            "--no-publish",
+            "--no-index",
+            "--no-sitemap",
+            "--no-llms",
+            "--no-search-release",
+            "--operator-approved"
+        ],
+        "hard_guards": [
+            "writes_committed=false in this PR",
+            "publish_attempted=false",
+            "search_release_attempted=false",
+            "sitemap_llms_release_attempted=false",
+            "no published_at mutation",
+            "no public/indexable/sitemap/llms flags enabled"
+        ]
+    },
+    "rows": [
+        {
+            "position": 1,
+            "url": "/en/personality/intj-a-vs-intj-t",
+            "locale": "en",
+            "page_type": "comparison",
+            "canonical_target": "/en/personality/intj-a-vs-intj-t",
+            "identity": {
+                "canonical_type_code": "INTJ",
+                "variant_pair": [
+                    "INTJ-A",
+                    "INTJ-T"
+                ]
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityProfileRevision",
+                "target_table": "personality_profile_revisions",
+                "lookup": {
+                    "org_id": 0,
+                    "scale_code": "MBTI",
+                    "locale": "row.locale",
+                    "canonical_type_code": "INTJ"
+                },
+                "standalone_comparison_model": false
+            },
+            "draft_revision": {
+                "revision_note": "mbti64 pilot-v2.1 comparison draft overlay: /en/personality/intj-a-vs-intj-t",
+                "snapshot_key": "mbti64_comparison_draft_v2_1",
+                "snapshot_owner": "base PersonalityProfile revision",
+                "publish_visibility": "not_public_until_separate_publish_gate",
+                "search_visibility": "not_search_released_until_separate_search_gate"
+            },
+            "first_class_field_destinations": {
+                "identity": "personality_profiles lookup + personality_profile_revisions profile_id/revision_no/note",
+                "body_and_seo": "stored as structured draft overlay in snapshot_json until a comparison-specific first-class model exists"
+            },
+            "structured_metadata_snapshot_path": "personality_profile_revisions.snapshot_json.mbti64_comparison_draft_v2_1.structured_metadata",
+            "content_section_keys": [
+                "quick_answer",
+                "side_by_side_summary",
+                "core_traits_comparison",
+                "stress_confidence",
+                "career_work_style",
+                "relationships_love",
+                "which_one_fits"
+            ],
+            "seo_keys": [
+                "seo_title",
+                "seo_description",
+                "breadcrumb_title",
+                "h1",
+                "quick_answer_summary"
+            ],
+            "faq_count": 7,
+            "internal_link_count": 7,
+            "publish_state_after_import": {
+                "status": "draft",
+                "is_public": false,
+                "is_indexable": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "published_at": null
+            },
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 2,
+            "url": "/zh/personality/istj-a",
+            "locale": "zh-CN",
+            "page_type": "variant",
+            "canonical_target": "/zh/personality/istj-a",
+            "identity": {
+                "canonical_type_code": "ISTJ",
+                "variant_code": "A",
+                "runtime_type_code": "ISTJ-A"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityProfileVariantRevision",
+                "target_table": "personality_profile_variant_revisions",
+                "lookup": {
+                    "org_id": 0,
+                    "scale_code": "MBTI",
+                    "locale": "row.locale",
+                    "runtime_type_code": "ISTJ-A"
+                },
+                "companion_tables_for_future_promotion": [
+                    "personality_profile_variant_sections",
+                    "personality_profile_variant_seo_meta"
+                ]
+            },
+            "draft_revision": {
+                "revision_note": "mbti64 pilot-v2.1 variant draft: /zh/personality/istj-a",
+                "snapshot_key": "mbti64_variant_content_package_v2_1",
+                "snapshot_owner": "PersonalityProfileVariant revision",
+                "runtime_type_code": "ISTJ-A",
+                "publish_visibility": "not_public_until_separate_publish_gate",
+                "search_visibility": "not_search_released_until_separate_search_gate"
+            },
+            "first_class_field_destinations": {
+                "identity": "personality_profile_variants lookup + personality_profile_variant_revisions personality_profile_variant_id/revision_no/note",
+                "seo": "planned destination: personality_profile_variant_seo_meta after a separate approved promotion/write PR",
+                "sections": "planned destination: personality_profile_variant_sections after a separate approved promotion/write PR",
+                "draft_payload": "current PR stores the complete importable draft only in revision snapshot contract output, not in DB"
+            },
+            "structured_metadata_snapshot_path": "personality_profile_variant_revisions.snapshot_json.mbti64_variant_content_package_v2_1.structured_metadata",
+            "content_section_keys": [
+                "quick_answer",
+                "meaning",
+                "a_t_difference",
+                "core_traits",
+                "strengths_blind_spots",
+                "careers_work_style",
+                "relationships_communication",
+                "common_misreads",
+                "similar_types"
+            ],
+            "seo_keys": [
+                "seo_title",
+                "seo_description",
+                "breadcrumb_title",
+                "h1",
+                "quick_answer_summary"
+            ],
+            "faq_count": 7,
+            "internal_link_count": 7,
+            "publish_state_after_import": {
+                "status": "draft",
+                "is_public": false,
+                "is_indexable": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "published_at": null
+            },
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 3,
+            "url": "/en/personality/intp-a-vs-intp-t",
+            "locale": "en",
+            "page_type": "comparison",
+            "canonical_target": "/en/personality/intp-a-vs-intp-t",
+            "identity": {
+                "canonical_type_code": "INTP",
+                "variant_pair": [
+                    "INTP-A",
+                    "INTP-T"
+                ]
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityProfileRevision",
+                "target_table": "personality_profile_revisions",
+                "lookup": {
+                    "org_id": 0,
+                    "scale_code": "MBTI",
+                    "locale": "row.locale",
+                    "canonical_type_code": "INTP"
+                },
+                "standalone_comparison_model": false
+            },
+            "draft_revision": {
+                "revision_note": "mbti64 pilot-v2.1 comparison draft overlay: /en/personality/intp-a-vs-intp-t",
+                "snapshot_key": "mbti64_comparison_draft_v2_1",
+                "snapshot_owner": "base PersonalityProfile revision",
+                "publish_visibility": "not_public_until_separate_publish_gate",
+                "search_visibility": "not_search_released_until_separate_search_gate"
+            },
+            "first_class_field_destinations": {
+                "identity": "personality_profiles lookup + personality_profile_revisions profile_id/revision_no/note",
+                "body_and_seo": "stored as structured draft overlay in snapshot_json until a comparison-specific first-class model exists"
+            },
+            "structured_metadata_snapshot_path": "personality_profile_revisions.snapshot_json.mbti64_comparison_draft_v2_1.structured_metadata",
+            "content_section_keys": [
+                "quick_answer",
+                "side_by_side_summary",
+                "core_traits_comparison",
+                "stress_confidence",
+                "career_work_style",
+                "relationships_love",
+                "which_one_fits"
+            ],
+            "seo_keys": [
+                "seo_title",
+                "seo_description",
+                "breadcrumb_title",
+                "h1",
+                "quick_answer_summary"
+            ],
+            "faq_count": 7,
+            "internal_link_count": 7,
+            "publish_state_after_import": {
+                "status": "draft",
+                "is_public": false,
+                "is_indexable": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "published_at": null
+            },
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 4,
+            "url": "/zh/personality/infp-t",
+            "locale": "zh-CN",
+            "page_type": "variant",
+            "canonical_target": "/zh/personality/infp-t",
+            "identity": {
+                "canonical_type_code": "INFP",
+                "variant_code": "T",
+                "runtime_type_code": "INFP-T"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityProfileVariantRevision",
+                "target_table": "personality_profile_variant_revisions",
+                "lookup": {
+                    "org_id": 0,
+                    "scale_code": "MBTI",
+                    "locale": "row.locale",
+                    "runtime_type_code": "INFP-T"
+                },
+                "companion_tables_for_future_promotion": [
+                    "personality_profile_variant_sections",
+                    "personality_profile_variant_seo_meta"
+                ]
+            },
+            "draft_revision": {
+                "revision_note": "mbti64 pilot-v2.1 variant draft: /zh/personality/infp-t",
+                "snapshot_key": "mbti64_variant_content_package_v2_1",
+                "snapshot_owner": "PersonalityProfileVariant revision",
+                "runtime_type_code": "INFP-T",
+                "publish_visibility": "not_public_until_separate_publish_gate",
+                "search_visibility": "not_search_released_until_separate_search_gate"
+            },
+            "first_class_field_destinations": {
+                "identity": "personality_profile_variants lookup + personality_profile_variant_revisions personality_profile_variant_id/revision_no/note",
+                "seo": "planned destination: personality_profile_variant_seo_meta after a separate approved promotion/write PR",
+                "sections": "planned destination: personality_profile_variant_sections after a separate approved promotion/write PR",
+                "draft_payload": "current PR stores the complete importable draft only in revision snapshot contract output, not in DB"
+            },
+            "structured_metadata_snapshot_path": "personality_profile_variant_revisions.snapshot_json.mbti64_variant_content_package_v2_1.structured_metadata",
+            "content_section_keys": [
+                "quick_answer",
+                "meaning",
+                "a_t_difference",
+                "core_traits",
+                "strengths_blind_spots",
+                "careers_work_style",
+                "relationships_communication",
+                "common_misreads",
+                "similar_types"
+            ],
+            "seo_keys": [
+                "seo_title",
+                "seo_description",
+                "breadcrumb_title",
+                "h1",
+                "quick_answer_summary"
+            ],
+            "faq_count": 7,
+            "internal_link_count": 7,
+            "publish_state_after_import": {
+                "status": "draft",
+                "is_public": false,
+                "is_indexable": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "published_at": null
+            },
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 5,
+            "url": "/en/personality/intj-a",
+            "locale": "en",
+            "page_type": "variant",
+            "canonical_target": "/en/personality/intj-a",
+            "identity": {
+                "canonical_type_code": "INTJ",
+                "variant_code": "A",
+                "runtime_type_code": "INTJ-A"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityProfileVariantRevision",
+                "target_table": "personality_profile_variant_revisions",
+                "lookup": {
+                    "org_id": 0,
+                    "scale_code": "MBTI",
+                    "locale": "row.locale",
+                    "runtime_type_code": "INTJ-A"
+                },
+                "companion_tables_for_future_promotion": [
+                    "personality_profile_variant_sections",
+                    "personality_profile_variant_seo_meta"
+                ]
+            },
+            "draft_revision": {
+                "revision_note": "mbti64 pilot-v2.1 variant draft: /en/personality/intj-a",
+                "snapshot_key": "mbti64_variant_content_package_v2_1",
+                "snapshot_owner": "PersonalityProfileVariant revision",
+                "runtime_type_code": "INTJ-A",
+                "publish_visibility": "not_public_until_separate_publish_gate",
+                "search_visibility": "not_search_released_until_separate_search_gate"
+            },
+            "first_class_field_destinations": {
+                "identity": "personality_profile_variants lookup + personality_profile_variant_revisions personality_profile_variant_id/revision_no/note",
+                "seo": "planned destination: personality_profile_variant_seo_meta after a separate approved promotion/write PR",
+                "sections": "planned destination: personality_profile_variant_sections after a separate approved promotion/write PR",
+                "draft_payload": "current PR stores the complete importable draft only in revision snapshot contract output, not in DB"
+            },
+            "structured_metadata_snapshot_path": "personality_profile_variant_revisions.snapshot_json.mbti64_variant_content_package_v2_1.structured_metadata",
+            "content_section_keys": [
+                "quick_answer",
+                "meaning",
+                "a_t_difference",
+                "core_traits",
+                "strengths_blind_spots",
+                "careers_work_style",
+                "relationships_communication",
+                "common_misreads",
+                "similar_types"
+            ],
+            "seo_keys": [
+                "seo_title",
+                "seo_description",
+                "breadcrumb_title",
+                "h1",
+                "quick_answer_summary"
+            ],
+            "faq_count": 7,
+            "internal_link_count": 7,
+            "publish_state_after_import": {
+                "status": "draft",
+                "is_public": false,
+                "is_indexable": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "published_at": null
+            },
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 6,
+            "url": "/en/personality/intj-t",
+            "locale": "en",
+            "page_type": "variant",
+            "canonical_target": "/en/personality/intj-t",
+            "identity": {
+                "canonical_type_code": "INTJ",
+                "variant_code": "T",
+                "runtime_type_code": "INTJ-T"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityProfileVariantRevision",
+                "target_table": "personality_profile_variant_revisions",
+                "lookup": {
+                    "org_id": 0,
+                    "scale_code": "MBTI",
+                    "locale": "row.locale",
+                    "runtime_type_code": "INTJ-T"
+                },
+                "companion_tables_for_future_promotion": [
+                    "personality_profile_variant_sections",
+                    "personality_profile_variant_seo_meta"
+                ]
+            },
+            "draft_revision": {
+                "revision_note": "mbti64 pilot-v2.1 variant draft: /en/personality/intj-t",
+                "snapshot_key": "mbti64_variant_content_package_v2_1",
+                "snapshot_owner": "PersonalityProfileVariant revision",
+                "runtime_type_code": "INTJ-T",
+                "publish_visibility": "not_public_until_separate_publish_gate",
+                "search_visibility": "not_search_released_until_separate_search_gate"
+            },
+            "first_class_field_destinations": {
+                "identity": "personality_profile_variants lookup + personality_profile_variant_revisions personality_profile_variant_id/revision_no/note",
+                "seo": "planned destination: personality_profile_variant_seo_meta after a separate approved promotion/write PR",
+                "sections": "planned destination: personality_profile_variant_sections after a separate approved promotion/write PR",
+                "draft_payload": "current PR stores the complete importable draft only in revision snapshot contract output, not in DB"
+            },
+            "structured_metadata_snapshot_path": "personality_profile_variant_revisions.snapshot_json.mbti64_variant_content_package_v2_1.structured_metadata",
+            "content_section_keys": [
+                "quick_answer",
+                "meaning",
+                "a_t_difference",
+                "core_traits",
+                "strengths_blind_spots",
+                "careers_work_style",
+                "relationships_communication",
+                "common_misreads",
+                "similar_types"
+            ],
+            "seo_keys": [
+                "seo_title",
+                "seo_description",
+                "breadcrumb_title",
+                "h1",
+                "quick_answer_summary"
+            ],
+            "faq_count": 7,
+            "internal_link_count": 7,
+            "publish_state_after_import": {
+                "status": "draft",
+                "is_public": false,
+                "is_indexable": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "published_at": null
+            },
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 7,
+            "url": "/zh/personality/intj-a",
+            "locale": "zh-CN",
+            "page_type": "variant",
+            "canonical_target": "/zh/personality/intj-a",
+            "identity": {
+                "canonical_type_code": "INTJ",
+                "variant_code": "A",
+                "runtime_type_code": "INTJ-A"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityProfileVariantRevision",
+                "target_table": "personality_profile_variant_revisions",
+                "lookup": {
+                    "org_id": 0,
+                    "scale_code": "MBTI",
+                    "locale": "row.locale",
+                    "runtime_type_code": "INTJ-A"
+                },
+                "companion_tables_for_future_promotion": [
+                    "personality_profile_variant_sections",
+                    "personality_profile_variant_seo_meta"
+                ]
+            },
+            "draft_revision": {
+                "revision_note": "mbti64 pilot-v2.1 variant draft: /zh/personality/intj-a",
+                "snapshot_key": "mbti64_variant_content_package_v2_1",
+                "snapshot_owner": "PersonalityProfileVariant revision",
+                "runtime_type_code": "INTJ-A",
+                "publish_visibility": "not_public_until_separate_publish_gate",
+                "search_visibility": "not_search_released_until_separate_search_gate"
+            },
+            "first_class_field_destinations": {
+                "identity": "personality_profile_variants lookup + personality_profile_variant_revisions personality_profile_variant_id/revision_no/note",
+                "seo": "planned destination: personality_profile_variant_seo_meta after a separate approved promotion/write PR",
+                "sections": "planned destination: personality_profile_variant_sections after a separate approved promotion/write PR",
+                "draft_payload": "current PR stores the complete importable draft only in revision snapshot contract output, not in DB"
+            },
+            "structured_metadata_snapshot_path": "personality_profile_variant_revisions.snapshot_json.mbti64_variant_content_package_v2_1.structured_metadata",
+            "content_section_keys": [
+                "quick_answer",
+                "meaning",
+                "a_t_difference",
+                "core_traits",
+                "strengths_blind_spots",
+                "careers_work_style",
+                "relationships_communication",
+                "common_misreads",
+                "similar_types"
+            ],
+            "seo_keys": [
+                "seo_title",
+                "seo_description",
+                "breadcrumb_title",
+                "h1",
+                "quick_answer_summary"
+            ],
+            "faq_count": 7,
+            "internal_link_count": 7,
+            "publish_state_after_import": {
+                "status": "draft",
+                "is_public": false,
+                "is_indexable": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "published_at": null
+            },
+            "write_mode_in_this_pr": "not_supported"
+        },
+        {
+            "position": 8,
+            "url": "/zh/personality/intj-t",
+            "locale": "zh-CN",
+            "page_type": "variant",
+            "canonical_target": "/zh/personality/intj-t",
+            "identity": {
+                "canonical_type_code": "INTJ",
+                "variant_code": "T",
+                "runtime_type_code": "INTJ-T"
+            },
+            "target": {
+                "target_model": "App\\Models\\PersonalityProfileVariantRevision",
+                "target_table": "personality_profile_variant_revisions",
+                "lookup": {
+                    "org_id": 0,
+                    "scale_code": "MBTI",
+                    "locale": "row.locale",
+                    "runtime_type_code": "INTJ-T"
+                },
+                "companion_tables_for_future_promotion": [
+                    "personality_profile_variant_sections",
+                    "personality_profile_variant_seo_meta"
+                ]
+            },
+            "draft_revision": {
+                "revision_note": "mbti64 pilot-v2.1 variant draft: /zh/personality/intj-t",
+                "snapshot_key": "mbti64_variant_content_package_v2_1",
+                "snapshot_owner": "PersonalityProfileVariant revision",
+                "runtime_type_code": "INTJ-T",
+                "publish_visibility": "not_public_until_separate_publish_gate",
+                "search_visibility": "not_search_released_until_separate_search_gate"
+            },
+            "first_class_field_destinations": {
+                "identity": "personality_profile_variants lookup + personality_profile_variant_revisions personality_profile_variant_id/revision_no/note",
+                "seo": "planned destination: personality_profile_variant_seo_meta after a separate approved promotion/write PR",
+                "sections": "planned destination: personality_profile_variant_sections after a separate approved promotion/write PR",
+                "draft_payload": "current PR stores the complete importable draft only in revision snapshot contract output, not in DB"
+            },
+            "structured_metadata_snapshot_path": "personality_profile_variant_revisions.snapshot_json.mbti64_variant_content_package_v2_1.structured_metadata",
+            "content_section_keys": [
+                "quick_answer",
+                "meaning",
+                "a_t_difference",
+                "core_traits",
+                "strengths_blind_spots",
+                "careers_work_style",
+                "relationships_communication",
+                "common_misreads",
+                "similar_types"
+            ],
+            "seo_keys": [
+                "seo_title",
+                "seo_description",
+                "breadcrumb_title",
+                "h1",
+                "quick_answer_summary"
+            ],
+            "faq_count": 7,
+            "internal_link_count": 7,
+            "publish_state_after_import": {
+                "status": "draft",
+                "is_public": false,
+                "is_indexable": false,
+                "sitemap_eligible": false,
+                "llms_eligible": false,
+                "published_at": null
+            },
+            "write_mode_in_this_pr": "not_supported"
+        }
+    ],
+    "errors": [],
+    "warnings": [],
+    "package_path": "/Users/rainie/Desktop/mbti64-content-package-pilot-v2.1.json",
+    "command": "personality:mbti64-backend-import-contract"
+}
