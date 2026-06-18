@@ -1,0 +1,70 @@
+{
+  "artifact": "MBTI64-CMS-REVISION-DRAFT-01",
+  "date": "2026-06-18",
+  "status": "pass",
+  "scope": "backend CMS revision draft writer only",
+  "source_package": "docs/seo/personality/content-packages/pilot-v2.1/mbti64-content-package-pilot-v2.1.json",
+  "command": "personality:mbti64-cms-revision-draft",
+  "local_capability": {
+    "dry_run": "pass in feature test with seeded CMS targets",
+    "write": "pass in feature test with seeded CMS targets",
+    "idempotence": "pass: second write creates 0 revisions and skips 8 existing revisions",
+    "unseeded_local_default_db_probe": "fail_closed_target_not_found_0_writes"
+  },
+  "row_contract": {
+    "total_rows": 8,
+    "variant_rows": 6,
+    "comparison_rows": 2,
+    "variant_target": "PersonalityProfileVariantRevision",
+    "comparison_target": "PersonalityProfileRevision",
+    "standalone_comparison_model_created": false
+  },
+  "snapshot_contract": {
+    "variant_snapshot_key": "mbti64_variant_content_package_v2_1",
+    "comparison_snapshot_key": "mbti64_comparison_draft_v2_1",
+    "includes": [
+      "source package hash",
+      "row identity",
+      "first-class draft fields",
+      "structured metadata",
+      "safety holds",
+      "raw row"
+    ]
+  },
+  "safety_boundaries": {
+    "writes_only_revision_rows": true,
+    "changes_live_personality_profiles": false,
+    "changes_live_personality_profile_variants": false,
+    "changes_sections_or_seo_meta": false,
+    "publishes_content": false,
+    "enables_indexing": false,
+    "changes_sitemap": false,
+    "changes_llms": false,
+    "triggers_search_release": false,
+    "production_import_run": false
+  },
+  "required_write_flags": [
+    "--write",
+    "--draft-only",
+    "--no-publish",
+    "--no-index",
+    "--no-sitemap",
+    "--no-llms",
+    "--no-search-release",
+    "--operator-approved=MBTI64-CMS-REVISION-DRAFT-01"
+  ],
+  "validation": {
+    "php_lint": "pass",
+    "targeted_phpunit": "pass: 11 tests, 98 assertions",
+    "bigfive_remote_gate_reproduction": "pass: 870 tests, 61493 assertions after freeze-classifier allowlist update",
+    "ci_verify_mbti": "pass",
+    "git_diff_check": "pass",
+    "scope_validation": "pass: only backend command/service/test, Kernel registration, Big Five runtime freeze classifier guard, and docs artifact files changed"
+  },
+  "ci_followup": {
+    "remote_failure_observed": "verify-bigfive initially failed because the Big Five runtime freeze classifier treated MBTI64 backend command/service registration as runtime-impacting",
+    "fix": "added explicit MBTI64 CMS revision draft allowlist coverage to the existing freeze classifier test guard",
+    "runtime_behavior_changed": false
+  },
+  "next_required_gate": "explicit operator approval for any production CMS revision draft write"
+}
