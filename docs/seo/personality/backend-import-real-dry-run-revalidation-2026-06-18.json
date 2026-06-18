@@ -1,0 +1,597 @@
+{
+  "artifact": "MBTI64-BACKEND-IMPORT-REAL-DRY-RUN-REVALIDATION-01",
+  "status": "pass",
+  "source_fap_web_dry_run_pr": "#1194",
+  "source_fap_api_patch_pr": "#2112",
+  "package_version_reviewed": "pilot-v2.1",
+  "source_package": "docs/seo/personality/content-packages/pilot-v2.1/mbti64-content-package-pilot-v2.1.json",
+  "source_package_original_path": "/Users/rainie/Desktop/mbti64-content-package-pilot-v2.1.json",
+  "source_package_sha256": "09acd30cfd7a8dd3eb0eacf8bef1ed10b54cfa0b89277e328faa6583fdf602a3",
+  "planner_discovery": {
+    "command_name": "personality:mbti64-backend-import-contract",
+    "command_class": "backend/app/Console/Commands/PersonalityMbti64BackendImportContract.php",
+    "service_class": "backend/app/Services/Cms/Mbti64BackendImportContractPlanner.php",
+    "test_class": "backend/tests/Feature/Console/PersonalityMbti64BackendImportContractCommandTest.php",
+    "required_arguments": [
+      "--package"
+    ],
+    "required_flags": [
+      "--dry-run"
+    ],
+    "write_flag_behavior": "--write is intentionally unsupported and fails closed in #2112",
+    "output_payload_format": "JSON summary with dry_run_only/write/publish/search flags, field mapping contract, row plans, errors, warnings",
+    "comparison_page_overlay_handling": {
+      "current_runtime_truth": "comparison pages are not stored in a standalone CMS table in this patch",
+      "storage_decision": "store each comparison row as a draft overlay under the base PersonalityProfile revision snapshot",
+      "snapshot_key": "mbti64_comparison_draft_v2_1",
+      "why": "preserves exact comparison content without inventing runtime rendering behavior or schema migrations in this contract PR",
+      "promotion_requirement": "a later PR must add/confirm comparison read API/render contract before any publish/search release"
+    },
+    "structured_metadata_handling": {
+      "decision": "structured_metadata_not_dropped",
+      "storage": {
+        "variant": "personality_profile_variant_revisions.snapshot_json.mbti64_variant_content_package_v2_1.structured_metadata",
+        "comparison": "personality_profile_revisions.snapshot_json.mbti64_comparison_draft_v2_1.structured_metadata"
+      },
+      "first_class_promotion_rule": "promote only through a later migration/model/API PR; do not silently map unsupported fields to unrelated columns"
+    }
+  },
+  "dry_run_execution": {
+    "command": "php artisan personality:mbti64-backend-import-contract --package=../docs/seo/personality/content-packages/pilot-v2.1/mbti64-content-package-pilot-v2.1.json --dry-run --json --output=/tmp/mbti64-real-dry-run-planner-output.json",
+    "executed_at": "2026-06-18",
+    "no_write": true,
+    "planner_status": "pass",
+    "planner_ok": true,
+    "dry_run_only": true,
+    "write_supported_in_this_pr": false,
+    "writes_committed": false,
+    "publish_attempted": false,
+    "search_release_attempted": false,
+    "sitemap_llms_release_attempted": false,
+    "expected_row_count": 8,
+    "row_count": 8,
+    "variant_row_count": 6,
+    "comparison_row_count": 2,
+    "row_order_locked": true,
+    "errors_count": 0,
+    "warnings_count": 0,
+    "operation_in_future_task_12": "create_revision_draft_only",
+    "operation_executed_in_this_pr": false,
+    "publish_immediately": false,
+    "publish_allowed": false,
+    "sitemap_allowed": false,
+    "llms_allowed": false,
+    "llms_full_allowed": false,
+    "search_release_allowed": false,
+    "previous_revision_id": "Unknown until Task 12",
+    "new_revision_id": "Unknown until Task 12",
+    "rollback_required": true
+  },
+  "warning_resolution": [
+    {
+      "warning_id": "W1",
+      "previous_status": "still_conditional",
+      "new_status": "resolved",
+      "evidence": [
+        "Command discovered: personality:mbti64-backend-import-contract",
+        "Planner accepted V2.1 package in --dry-run mode with status=pass",
+        "row_count=8; row_order_locked=true; errors=0; warnings=0"
+      ]
+    },
+    {
+      "warning_id": "W2",
+      "previous_status": "still_conditional",
+      "new_status": "resolved",
+      "evidence": [
+        "Planner exposes first-class field mapping for URL/locale/page_type/canonical/SEO/content/FAQ/internal_links.",
+        "Planner policy decision: structured_metadata_not_dropped.",
+        "Unsupported package fields above_the_fold_module, serp_ctr_package_v2, v2_optimization, information_gain, route_safety, claim_risk_notes, and qa_flags_for_codex are preserved as structured metadata."
+      ]
+    }
+  ],
+  "row_results": [
+    {
+      "position": 1,
+      "url": "/en/personality/intj-a-vs-intj-t",
+      "locale": "en",
+      "page_type": "comparison",
+      "mapping": "comparison_draft_overlay",
+      "target_model": "App\\Models\\PersonalityProfileRevision",
+      "target_table": "personality_profile_revisions",
+      "snapshot_key": "mbti64_comparison_draft_v2_1",
+      "structured_metadata_snapshot_path": "personality_profile_revisions.snapshot_json.mbti64_comparison_draft_v2_1.structured_metadata",
+      "publish_immediately": false,
+      "publish_allowed": false,
+      "sitemap_allowed": false,
+      "llms_allowed": false,
+      "llms_full_allowed": false,
+      "search_release_allowed": false,
+      "previous_revision_id": "Unknown until Task 12",
+      "new_revision_id": "Unknown until Task 12",
+      "rollback_required": true,
+      "write_mode_in_this_pr": "not_supported"
+    },
+    {
+      "position": 2,
+      "url": "/zh/personality/istj-a",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "mapping": "variant_revision_draft",
+      "target_model": "App\\Models\\PersonalityProfileVariantRevision",
+      "target_table": "personality_profile_variant_revisions",
+      "snapshot_key": "mbti64_variant_content_package_v2_1",
+      "structured_metadata_snapshot_path": "personality_profile_variant_revisions.snapshot_json.mbti64_variant_content_package_v2_1.structured_metadata",
+      "publish_immediately": false,
+      "publish_allowed": false,
+      "sitemap_allowed": false,
+      "llms_allowed": false,
+      "llms_full_allowed": false,
+      "search_release_allowed": false,
+      "previous_revision_id": "Unknown until Task 12",
+      "new_revision_id": "Unknown until Task 12",
+      "rollback_required": true,
+      "write_mode_in_this_pr": "not_supported"
+    },
+    {
+      "position": 3,
+      "url": "/en/personality/intp-a-vs-intp-t",
+      "locale": "en",
+      "page_type": "comparison",
+      "mapping": "comparison_draft_overlay",
+      "target_model": "App\\Models\\PersonalityProfileRevision",
+      "target_table": "personality_profile_revisions",
+      "snapshot_key": "mbti64_comparison_draft_v2_1",
+      "structured_metadata_snapshot_path": "personality_profile_revisions.snapshot_json.mbti64_comparison_draft_v2_1.structured_metadata",
+      "publish_immediately": false,
+      "publish_allowed": false,
+      "sitemap_allowed": false,
+      "llms_allowed": false,
+      "llms_full_allowed": false,
+      "search_release_allowed": false,
+      "previous_revision_id": "Unknown until Task 12",
+      "new_revision_id": "Unknown until Task 12",
+      "rollback_required": true,
+      "write_mode_in_this_pr": "not_supported"
+    },
+    {
+      "position": 4,
+      "url": "/zh/personality/infp-t",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "mapping": "variant_revision_draft",
+      "target_model": "App\\Models\\PersonalityProfileVariantRevision",
+      "target_table": "personality_profile_variant_revisions",
+      "snapshot_key": "mbti64_variant_content_package_v2_1",
+      "structured_metadata_snapshot_path": "personality_profile_variant_revisions.snapshot_json.mbti64_variant_content_package_v2_1.structured_metadata",
+      "publish_immediately": false,
+      "publish_allowed": false,
+      "sitemap_allowed": false,
+      "llms_allowed": false,
+      "llms_full_allowed": false,
+      "search_release_allowed": false,
+      "previous_revision_id": "Unknown until Task 12",
+      "new_revision_id": "Unknown until Task 12",
+      "rollback_required": true,
+      "write_mode_in_this_pr": "not_supported"
+    },
+    {
+      "position": 5,
+      "url": "/en/personality/intj-a",
+      "locale": "en",
+      "page_type": "variant",
+      "mapping": "variant_revision_draft",
+      "target_model": "App\\Models\\PersonalityProfileVariantRevision",
+      "target_table": "personality_profile_variant_revisions",
+      "snapshot_key": "mbti64_variant_content_package_v2_1",
+      "structured_metadata_snapshot_path": "personality_profile_variant_revisions.snapshot_json.mbti64_variant_content_package_v2_1.structured_metadata",
+      "publish_immediately": false,
+      "publish_allowed": false,
+      "sitemap_allowed": false,
+      "llms_allowed": false,
+      "llms_full_allowed": false,
+      "search_release_allowed": false,
+      "previous_revision_id": "Unknown until Task 12",
+      "new_revision_id": "Unknown until Task 12",
+      "rollback_required": true,
+      "write_mode_in_this_pr": "not_supported"
+    },
+    {
+      "position": 6,
+      "url": "/en/personality/intj-t",
+      "locale": "en",
+      "page_type": "variant",
+      "mapping": "variant_revision_draft",
+      "target_model": "App\\Models\\PersonalityProfileVariantRevision",
+      "target_table": "personality_profile_variant_revisions",
+      "snapshot_key": "mbti64_variant_content_package_v2_1",
+      "structured_metadata_snapshot_path": "personality_profile_variant_revisions.snapshot_json.mbti64_variant_content_package_v2_1.structured_metadata",
+      "publish_immediately": false,
+      "publish_allowed": false,
+      "sitemap_allowed": false,
+      "llms_allowed": false,
+      "llms_full_allowed": false,
+      "search_release_allowed": false,
+      "previous_revision_id": "Unknown until Task 12",
+      "new_revision_id": "Unknown until Task 12",
+      "rollback_required": true,
+      "write_mode_in_this_pr": "not_supported"
+    },
+    {
+      "position": 7,
+      "url": "/zh/personality/intj-a",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "mapping": "variant_revision_draft",
+      "target_model": "App\\Models\\PersonalityProfileVariantRevision",
+      "target_table": "personality_profile_variant_revisions",
+      "snapshot_key": "mbti64_variant_content_package_v2_1",
+      "structured_metadata_snapshot_path": "personality_profile_variant_revisions.snapshot_json.mbti64_variant_content_package_v2_1.structured_metadata",
+      "publish_immediately": false,
+      "publish_allowed": false,
+      "sitemap_allowed": false,
+      "llms_allowed": false,
+      "llms_full_allowed": false,
+      "search_release_allowed": false,
+      "previous_revision_id": "Unknown until Task 12",
+      "new_revision_id": "Unknown until Task 12",
+      "rollback_required": true,
+      "write_mode_in_this_pr": "not_supported"
+    },
+    {
+      "position": 8,
+      "url": "/zh/personality/intj-t",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "mapping": "variant_revision_draft",
+      "target_model": "App\\Models\\PersonalityProfileVariantRevision",
+      "target_table": "personality_profile_variant_revisions",
+      "snapshot_key": "mbti64_variant_content_package_v2_1",
+      "structured_metadata_snapshot_path": "personality_profile_variant_revisions.snapshot_json.mbti64_variant_content_package_v2_1.structured_metadata",
+      "publish_immediately": false,
+      "publish_allowed": false,
+      "sitemap_allowed": false,
+      "llms_allowed": false,
+      "llms_full_allowed": false,
+      "search_release_allowed": false,
+      "previous_revision_id": "Unknown until Task 12",
+      "new_revision_id": "Unknown until Task 12",
+      "rollback_required": true,
+      "write_mode_in_this_pr": "not_supported"
+    }
+  ],
+  "comparison_overlay_validation": {
+    "status": "pass",
+    "expected_urls": [
+      "/en/personality/intj-a-vs-intj-t",
+      "/en/personality/intp-a-vs-intp-t"
+    ],
+    "rows": [
+      {
+        "position": 1,
+        "url": "/en/personality/intj-a-vs-intj-t",
+        "locale": "en",
+        "page_type": "comparison",
+        "mapping": "comparison_draft_overlay",
+        "target_model": "App\\Models\\PersonalityProfileRevision",
+        "target_table": "personality_profile_revisions",
+        "snapshot_key": "mbti64_comparison_draft_v2_1",
+        "structured_metadata_snapshot_path": "personality_profile_revisions.snapshot_json.mbti64_comparison_draft_v2_1.structured_metadata",
+        "publish_immediately": false,
+        "publish_allowed": false,
+        "sitemap_allowed": false,
+        "llms_allowed": false,
+        "llms_full_allowed": false,
+        "search_release_allowed": false,
+        "previous_revision_id": "Unknown until Task 12",
+        "new_revision_id": "Unknown until Task 12",
+        "rollback_required": true,
+        "write_mode_in_this_pr": "not_supported"
+      },
+      {
+        "position": 3,
+        "url": "/en/personality/intp-a-vs-intp-t",
+        "locale": "en",
+        "page_type": "comparison",
+        "mapping": "comparison_draft_overlay",
+        "target_model": "App\\Models\\PersonalityProfileRevision",
+        "target_table": "personality_profile_revisions",
+        "snapshot_key": "mbti64_comparison_draft_v2_1",
+        "structured_metadata_snapshot_path": "personality_profile_revisions.snapshot_json.mbti64_comparison_draft_v2_1.structured_metadata",
+        "publish_immediately": false,
+        "publish_allowed": false,
+        "sitemap_allowed": false,
+        "llms_allowed": false,
+        "llms_full_allowed": false,
+        "search_release_allowed": false,
+        "previous_revision_id": "Unknown until Task 12",
+        "new_revision_id": "Unknown until Task 12",
+        "rollback_required": true,
+        "write_mode_in_this_pr": "not_supported"
+      }
+    ],
+    "storage_contract": {
+      "current_runtime_truth": "comparison pages are not stored in a standalone CMS table in this patch",
+      "storage_decision": "store each comparison row as a draft overlay under the base PersonalityProfile revision snapshot",
+      "snapshot_key": "mbti64_comparison_draft_v2_1",
+      "why": "preserves exact comparison content without inventing runtime rendering behavior or schema migrations in this contract PR",
+      "promotion_requirement": "a later PR must add/confirm comparison read API/render contract before any publish/search release"
+    }
+  },
+  "variant_mapping_validation": {
+    "status": "pass",
+    "expected_urls": [
+      "/zh/personality/istj-a",
+      "/zh/personality/infp-t",
+      "/en/personality/intj-a",
+      "/en/personality/intj-t",
+      "/zh/personality/intj-a",
+      "/zh/personality/intj-t"
+    ],
+    "rows": [
+      {
+        "position": 2,
+        "url": "/zh/personality/istj-a",
+        "locale": "zh-CN",
+        "page_type": "variant",
+        "mapping": "variant_revision_draft",
+        "target_model": "App\\Models\\PersonalityProfileVariantRevision",
+        "target_table": "personality_profile_variant_revisions",
+        "snapshot_key": "mbti64_variant_content_package_v2_1",
+        "structured_metadata_snapshot_path": "personality_profile_variant_revisions.snapshot_json.mbti64_variant_content_package_v2_1.structured_metadata",
+        "publish_immediately": false,
+        "publish_allowed": false,
+        "sitemap_allowed": false,
+        "llms_allowed": false,
+        "llms_full_allowed": false,
+        "search_release_allowed": false,
+        "previous_revision_id": "Unknown until Task 12",
+        "new_revision_id": "Unknown until Task 12",
+        "rollback_required": true,
+        "write_mode_in_this_pr": "not_supported"
+      },
+      {
+        "position": 4,
+        "url": "/zh/personality/infp-t",
+        "locale": "zh-CN",
+        "page_type": "variant",
+        "mapping": "variant_revision_draft",
+        "target_model": "App\\Models\\PersonalityProfileVariantRevision",
+        "target_table": "personality_profile_variant_revisions",
+        "snapshot_key": "mbti64_variant_content_package_v2_1",
+        "structured_metadata_snapshot_path": "personality_profile_variant_revisions.snapshot_json.mbti64_variant_content_package_v2_1.structured_metadata",
+        "publish_immediately": false,
+        "publish_allowed": false,
+        "sitemap_allowed": false,
+        "llms_allowed": false,
+        "llms_full_allowed": false,
+        "search_release_allowed": false,
+        "previous_revision_id": "Unknown until Task 12",
+        "new_revision_id": "Unknown until Task 12",
+        "rollback_required": true,
+        "write_mode_in_this_pr": "not_supported"
+      },
+      {
+        "position": 5,
+        "url": "/en/personality/intj-a",
+        "locale": "en",
+        "page_type": "variant",
+        "mapping": "variant_revision_draft",
+        "target_model": "App\\Models\\PersonalityProfileVariantRevision",
+        "target_table": "personality_profile_variant_revisions",
+        "snapshot_key": "mbti64_variant_content_package_v2_1",
+        "structured_metadata_snapshot_path": "personality_profile_variant_revisions.snapshot_json.mbti64_variant_content_package_v2_1.structured_metadata",
+        "publish_immediately": false,
+        "publish_allowed": false,
+        "sitemap_allowed": false,
+        "llms_allowed": false,
+        "llms_full_allowed": false,
+        "search_release_allowed": false,
+        "previous_revision_id": "Unknown until Task 12",
+        "new_revision_id": "Unknown until Task 12",
+        "rollback_required": true,
+        "write_mode_in_this_pr": "not_supported"
+      },
+      {
+        "position": 6,
+        "url": "/en/personality/intj-t",
+        "locale": "en",
+        "page_type": "variant",
+        "mapping": "variant_revision_draft",
+        "target_model": "App\\Models\\PersonalityProfileVariantRevision",
+        "target_table": "personality_profile_variant_revisions",
+        "snapshot_key": "mbti64_variant_content_package_v2_1",
+        "structured_metadata_snapshot_path": "personality_profile_variant_revisions.snapshot_json.mbti64_variant_content_package_v2_1.structured_metadata",
+        "publish_immediately": false,
+        "publish_allowed": false,
+        "sitemap_allowed": false,
+        "llms_allowed": false,
+        "llms_full_allowed": false,
+        "search_release_allowed": false,
+        "previous_revision_id": "Unknown until Task 12",
+        "new_revision_id": "Unknown until Task 12",
+        "rollback_required": true,
+        "write_mode_in_this_pr": "not_supported"
+      },
+      {
+        "position": 7,
+        "url": "/zh/personality/intj-a",
+        "locale": "zh-CN",
+        "page_type": "variant",
+        "mapping": "variant_revision_draft",
+        "target_model": "App\\Models\\PersonalityProfileVariantRevision",
+        "target_table": "personality_profile_variant_revisions",
+        "snapshot_key": "mbti64_variant_content_package_v2_1",
+        "structured_metadata_snapshot_path": "personality_profile_variant_revisions.snapshot_json.mbti64_variant_content_package_v2_1.structured_metadata",
+        "publish_immediately": false,
+        "publish_allowed": false,
+        "sitemap_allowed": false,
+        "llms_allowed": false,
+        "llms_full_allowed": false,
+        "search_release_allowed": false,
+        "previous_revision_id": "Unknown until Task 12",
+        "new_revision_id": "Unknown until Task 12",
+        "rollback_required": true,
+        "write_mode_in_this_pr": "not_supported"
+      },
+      {
+        "position": 8,
+        "url": "/zh/personality/intj-t",
+        "locale": "zh-CN",
+        "page_type": "variant",
+        "mapping": "variant_revision_draft",
+        "target_model": "App\\Models\\PersonalityProfileVariantRevision",
+        "target_table": "personality_profile_variant_revisions",
+        "snapshot_key": "mbti64_variant_content_package_v2_1",
+        "structured_metadata_snapshot_path": "personality_profile_variant_revisions.snapshot_json.mbti64_variant_content_package_v2_1.structured_metadata",
+        "publish_immediately": false,
+        "publish_allowed": false,
+        "sitemap_allowed": false,
+        "llms_allowed": false,
+        "llms_full_allowed": false,
+        "search_release_allowed": false,
+        "previous_revision_id": "Unknown until Task 12",
+        "new_revision_id": "Unknown until Task 12",
+        "rollback_required": true,
+        "write_mode_in_this_pr": "not_supported"
+      }
+    ]
+  },
+  "structured_metadata_validation": {
+    "status": "pass",
+    "unsupported_field_policy": {
+      "decision": "structured_metadata_not_dropped",
+      "storage": {
+        "variant": "personality_profile_variant_revisions.snapshot_json.mbti64_variant_content_package_v2_1.structured_metadata",
+        "comparison": "personality_profile_revisions.snapshot_json.mbti64_comparison_draft_v2_1.structured_metadata"
+      },
+      "first_class_promotion_rule": "promote only through a later migration/model/API PR; do not silently map unsupported fields to unrelated columns"
+    },
+    "required_field_coverage": [
+      {
+        "field": "above_the_fold_module",
+        "present_in_package_rows": true,
+        "first_class_supported": false,
+        "structured_metadata_supported": true,
+        "preservation": "structured_metadata"
+      },
+      {
+        "field": "serp_ctr_package_v2",
+        "present_in_package_rows": true,
+        "first_class_supported": false,
+        "structured_metadata_supported": true,
+        "preservation": "structured_metadata"
+      },
+      {
+        "field": "v2_optimization",
+        "present_in_package_rows": true,
+        "first_class_supported": false,
+        "structured_metadata_supported": true,
+        "preservation": "structured_metadata"
+      },
+      {
+        "field": "information_gain",
+        "present_in_package_rows": true,
+        "first_class_supported": false,
+        "structured_metadata_supported": true,
+        "preservation": "structured_metadata"
+      },
+      {
+        "field": "route_safety",
+        "present_in_package_rows": true,
+        "first_class_supported": false,
+        "structured_metadata_supported": true,
+        "preservation": "structured_metadata"
+      },
+      {
+        "field": "claim_risk_notes",
+        "present_in_package_rows": true,
+        "first_class_supported": false,
+        "structured_metadata_supported": true,
+        "preservation": "structured_metadata"
+      },
+      {
+        "field": "qa_flags_for_codex",
+        "present_in_package_rows": true,
+        "first_class_supported": false,
+        "structured_metadata_supported": true,
+        "preservation": "structured_metadata"
+      }
+    ]
+  },
+  "safety_recheck": {
+    "status": "pass",
+    "forbidden_patterns_checked": [
+      "/result",
+      "/results",
+      "/results/lookup",
+      "/orders",
+      "/orders/lookup",
+      "/share",
+      "/pay",
+      "/payment",
+      "/history",
+      "/private",
+      "/account",
+      "token=",
+      "session=",
+      "user=",
+      "result_id=",
+      "report_id=",
+      "order_no="
+    ],
+    "active_package_forbidden_hits": [],
+    "dry_run_output_forbidden_hits_excluding_non_payload_paths": [],
+    "dry_run_output_forbidden_hits_raw": [
+      {
+        "pointer": "/package_path",
+        "matches": [
+          "/private"
+        ],
+        "value": "/private/tmp/fap-api-mbti64-real-dry-run-revalidation-01/backend/../docs/seo/personality/content-packages/pilot-v2.1/mbti64-content-package-pilot-v2.1.json"
+      }
+    ],
+    "non_blocking_local_path_hits": [
+      {
+        "pointer": "/package_path",
+        "matches": [
+          "/private"
+        ],
+        "value": "/private/tmp/fap-api-mbti64-real-dry-run-revalidation-01/backend/../docs/seo/personality/content-packages/pilot-v2.1/mbti64-content-package-pilot-v2.1.json"
+      }
+    ],
+    "high_risk_claim_hits": [],
+    "known_hold_mentions_allowed": [
+      "/results/lookup sidecar classification blocks publish/search release"
+    ]
+  },
+  "no_mutation_proof": {
+    "status": "pass",
+    "no_cms_write_api_called": true,
+    "no_db_write_performed": true,
+    "no_revision_draft_created": true,
+    "no_production_url_changed": true,
+    "no_sitemap_changed": true,
+    "no_llms_txt_changed": true,
+    "no_llms_full_txt_changed": true,
+    "no_search_urls_submitted": true,
+    "write_flag_remains_fail_closed": true,
+    "evidence": [
+      "Only --dry-run command was executed for planner revalidation.",
+      "Planner output has writes_committed=false, publish_attempted=false, search_release_attempted=false, sitemap_llms_release_attempted=false.",
+      "Command class refuses --write in this PR.",
+      "No runtime, migration, route, sitemap, llms, search submission, scoring, result, payment, order, account, share, history, or private report files changed."
+    ]
+  },
+  "known_holds": [
+    "/results/lookup sidecar classification blocks publish/search release",
+    "No CMS import in this PR",
+    "No CMS revision draft creation in this PR",
+    "No sitemap/llms/search-release work in this PR",
+    "Operator approval required before CMS revision draft"
+  ],
+  "blockers": [],
+  "warnings": [
+    "Non-blocking planner package_path contains local /private/tmp path; this is execution provenance, not import payload or future draft content."
+  ],
+  "recommended_next_task": "MBTI64-CMS-REVISION-DRAFT-01 after explicit Operator authorization"
+}

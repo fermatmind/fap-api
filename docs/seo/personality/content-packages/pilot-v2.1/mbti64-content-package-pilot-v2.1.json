@@ -1,0 +1,2332 @@
+{
+  "artifact": "MBTI64-CONTENT-PACKAGE-V2.1-RELATED-TEST-LINK-PATCH-01-GPT55",
+  "version": "pilot-v2.1",
+  "status": "draft_for_codex_qa",
+  "scope": "8 existing personality URLs only; V2.1 content package link patch only; no publish, no CMS import, no sitemap, no llms, no llms-full, no search submission.",
+  "global_holds": [
+    "no publish",
+    "no CMS import",
+    "no sitemap change",
+    "no llms change",
+    "no llms-full change",
+    "no search submission",
+    "no result, private, payment, account, order, share, history, tokenized, session, or user-specific routes",
+    "requires Codex V2.1 QA before import",
+    "lookup-route sidecar classification blocks publish/search release"
+  ],
+  "rows": [
+    {
+      "url": "/en/personality/intj-a-vs-intj-t",
+      "locale": "en",
+      "page_type": "comparison",
+      "primary_query": "intj-a vs intj-t difference",
+      "secondary_queries": [
+        "intj-a vs intj-t",
+        "intj-a and intj-t differences",
+        "assertive architect vs turbulent architect",
+        "intj-a or intj-t",
+        "intj a t difference"
+      ],
+      "excluded_queries": [
+        "intj-a meaning",
+        "intj-t meaning",
+        "intj personality type",
+        "intj architect personality",
+        "mbti test"
+      ],
+      "target_intent": "Comparison intent for users deciding how INTJ-A and INTJ-T differ in confidence, pressure response, work style, and relationships.",
+      "target_test_route": "/en/tests/mbti-personality-test-16-personality-types",
+      "canonical_target": "/en/personality/intj-a-vs-intj-t",
+      "seo": {
+        "seo_title": "INTJ-A vs INTJ-T: Confidence, Stress and Work Style | FermatMind",
+        "seo_description": "Compare INTJ-A and INTJ-T by confidence, stress recovery, decision review, relationships, work style and self-check prompts.",
+        "breadcrumb_title": "INTJ-A vs INTJ-T",
+        "h1": "INTJ-A vs INTJ-T: Key Differences",
+        "quick_answer_summary": "INTJ-A and INTJ-T share the Architect core; the main difference is how they handle confidence, pressure, feedback and self-correction."
+      },
+      "content": {
+        "quick_answer": "The INTJ-A vs INTJ-T difference is not a change in the INTJ core type. Both patterns are strategic, independent, systems-oriented, and future-focused. The A/T layer mainly changes how an Architect handles confidence, stress, feedback, and self-correction: INTJ-A tends to act with steadier self-trust, while INTJ-T tends to examine risks, mistakes, and personal standards more intensely.",
+        "side_by_side_summary": {
+          "h2": "INTJ-A vs INTJ-T at a glance",
+          "rows": [
+            {
+              "dimension": "Decision confidence",
+              "a_variant": "More likely to commit once the logic is good enough and the risk is bounded.",
+              "t_variant": "More likely to re-check assumptions, edge cases, and hidden weaknesses before committing."
+            },
+            {
+              "dimension": "Stress response",
+              "a_variant": "Often protects long-term focus by moving past criticism quickly.",
+              "t_variant": "Often uses discomfort as a signal to refine the plan or raise the standard."
+            },
+            {
+              "dimension": "Feedback style",
+              "a_variant": "Prefers concise feedback that confirms whether the strategy works.",
+              "t_variant": "Prefers detailed feedback that exposes what could fail or improve."
+            },
+            {
+              "dimension": "Work rhythm",
+              "a_variant": "Can operate well in autonomous roles where decisions cannot be endlessly reopened.",
+              "t_variant": "Can operate well in analytical roles where revision, testing, and error detection matter."
+            },
+            {
+              "dimension": "Relationship pattern",
+              "a_variant": "May appear calm, self-contained, and hard to sway.",
+              "t_variant": "May appear intense, private, and more affected by relational uncertainty."
+            },
+            {
+              "dimension": "Growth edge",
+              "a_variant": "Needs to avoid dismissing useful doubt too quickly.",
+              "t_variant": "Needs to avoid treating every doubt as proof that the plan is weak."
+            }
+          ]
+        },
+        "core_traits_comparison": {
+          "h2": "What stays the same in both INTJ-A and INTJ-T",
+          "body": "Both INTJ-A and INTJ-T keep the recognizable Architect pattern: they prefer strategic clarity, independent reasoning, long-range planning, and systems that make sense internally. The difference is not that one is smarter, colder, rarer, or more capable. The difference is usually visible in the emotional and behavioral layer around the same INTJ core. A useful way to read this comparison is to separate strategy from regulation: the INTJ core explains the strategic lens, while the A/T layer explains how secure or self-critical that lens feels under pressure.",
+          "items": [
+            "Both tend to distrust vague claims and prefer models, principles, or evidence.",
+            "Both usually value autonomy and can become frustrated when process replaces progress.",
+            "Both often think in second-order effects: what happens after the immediate decision?",
+            "Both may need deliberate effort to make their reasoning legible to people who process socially.",
+            "Both can over-index on competence and under-communicate warmth unless they make it explicit."
+          ]
+        },
+        "stress_confidence": {
+          "h2": "Confidence and stress: the main A/T split",
+          "body": "The clearest INTJ-A vs INTJ-T difference appears when a plan is challenged. INTJ-A often protects execution by stabilizing around the chosen strategy. INTJ-T often protects quality by interrogating the chosen strategy again.",
+          "a_pattern": "INTJ-A may recover from criticism quickly and keep the project moving. This is useful in leadership, product, operations, and high-ambiguity strategy work. The blind spot is premature certainty: if the Architect stops listening too early, a preventable flaw can survive.",
+          "t_pattern": "INTJ-T may treat pressure as a interpretive tool. This is useful in research, engineering, writing, investing analysis, or any role where one overlooked assumption matters. The blind spot is over-review: if every imperfection reopens the entire plan, execution slows."
+        },
+        "career_work_style": {
+          "h2": "Career and work style differences",
+          "body": "Both INTJ-A and INTJ-T can fit strategic, technical, analytical, or systems-heavy work. The useful distinction is not job title; it is operating condition. INTJ-A often benefits from high-autonomy ownership, while INTJ-T often benefits from environments where critique, iteration, and precision are explicit parts of the workflow. For career exploration, treat this as an environment-fit filter rather than a job prescription: INTJ-A often needs decision authority and strategic ownership, while INTJ-T often benefits from roles where review cycles and risk analysis are valued.",
+          "a_work_style": "INTJ-A is often effective when a team needs a decisive owner: someone to define the architecture, set the standard, and move through ambiguity without constant reassurance.",
+          "t_work_style": "INTJ-T is often effective when a team needs a rigorous reviewer: someone to test assumptions, find the hidden failure mode, and refine the model before it becomes expensive.",
+          "shared_strengths": [
+            "strategic planning",
+            "systems design",
+            "long-range analysis",
+            "independent problem solving",
+            "high standards for competence"
+          ]
+        },
+        "relationships_love": {
+          "h2": "Relationships and communication",
+          "body": "In relationships, both INTJ patterns usually prefer depth, honesty, and consistency over constant emotional performance. INTJ-A may communicate with a calmer, more definite tone. INTJ-T may communicate with more internal intensity, especially when uncertainty, rejection, or misalignment is involved. In close relationships, the A/T difference often appears less in affection and more in repair style: INTJ-A may need reminders to revisit emotional nuance, while INTJ-T may need reassurance that uncertainty is not the same as failure.",
+          "a_relationship_pattern": "INTJ-A may show commitment through reliability, planning, and direct problem-solving. The risk is sounding detached when the other person needs emotional acknowledgment before solutions.",
+          "t_relationship_pattern": "INTJ-T may notice subtle shifts in tone or trust and spend more time interpreting them. The risk is privately overanalyzing signals instead of asking direct clarifying questions."
+        },
+        "which_one_fits": {
+          "h2": "Which one fits you better?",
+          "body": "Use A/T as a reflective lens, not as a permanent label. If your INTJ pattern is stable but your self-confidence and stress response change across life stages, your A/T result may also feel more fluid than the four-letter type code.",
+          "self_check_prompts": [
+            "When a plan is criticized, do you usually stabilize and proceed, or reopen the model and revise?",
+            "Do you lose more time from overconfidence or from over-checking?",
+            "Do you prefer feedback that is brief and decisive, or detailed and interpretive?",
+            "Under stress, do you become more detached and decisive, or more self-critical and perfectionistic?",
+            "Do people experience you as hard to shake, or as intense and internally demanding?"
+          ]
+        }
+      },
+      "faq": [
+        {
+          "question": "What is the main INTJ-A vs INTJ-T difference?",
+          "answer": "The main difference is usually confidence and stress response. INTJ-A tends to act with steadier self-trust, while INTJ-T tends to re-check assumptions and refine plans more intensely under pressure."
+        },
+        {
+          "question": "Is INTJ-A better than INTJ-T?",
+          "answer": "No. INTJ-A and INTJ-T describe different operating styles around the same INTJ core. INTJ-A can be more decisive; INTJ-T can be more corrective and quality-focused."
+        },
+        {
+          "question": "Can an INTJ change from A to T?",
+          "answer": "A/T can feel more situational than the four-letter type pattern. Confidence, stress load, work environment, and life stage can all affect whether the A or T description feels more accurate."
+        },
+        {
+          "question": "Which INTJ type is better for leadership?",
+          "answer": "Neither label determines leadership ability. INTJ-A may be comfortable making firm decisions, while INTJ-T may catch risks earlier. Strong leadership can use either pattern well."
+        },
+        {
+          "question": "Should I read the INTJ-A and INTJ-T profile pages too?",
+          "answer": "Yes. Use this comparison page to separate the A/T layer, then read the individual profile pages if you want a more focused explanation of either INTJ-A or INTJ-T."
+        },
+        {
+          "question": "Can an INTJ move between A and T patterns?",
+          "answer": "People can show more A-like or T-like behavior depending on stress, life stage and environment. Treat A/T as a self-observation lens, not a permanent status."
+        },
+        {
+          "question": "How should I use this INTJ-A vs INTJ-T page?",
+          "answer": "Use it as a practical reflection guide: compare the repeated patterns with your own behavior, then use the public 16 personality test route if you want a broader type check."
+        }
+      ],
+      "internal_links": [
+        {
+          "href": "/en/personality",
+          "anchor_text": "Explore all 16 personality types",
+          "role": "hub",
+          "safe_public_route": true
+        },
+        {
+          "href": "/en/personality/intj-a",
+          "anchor_text": "Read the INTJ-A profile",
+          "role": "sibling_variant",
+          "safe_public_route": true
+        },
+        {
+          "href": "/en/personality/intj-t",
+          "anchor_text": "Read the INTJ-T profile",
+          "role": "sibling_variant",
+          "safe_public_route": true
+        },
+        {
+          "href": "/en/tests/mbti-personality-test-16-personality-types",
+          "anchor_text": "Take the 16 personality test",
+          "role": "test",
+          "safe_public_route": true
+        },
+        {
+          "href": "/en/tests/big-five-personality-test-ocean-model",
+          "anchor_text": "Compare your type with the Big Five model",
+          "role": "related_test",
+          "safe_public_route": true
+        },
+        {
+          "href": "/en/tests/holland-career-interest-test-riasec",
+          "anchor_text": "Explore career interests with the Holland/RIASEC test",
+          "role": "related_test",
+          "safe_public_route": true
+        },
+        {
+          "href": "/en/personality/intj-a-vs-intj-t#method-boundary",
+          "anchor_text": "Method and limits",
+          "role": "method",
+          "safe_public_route": true
+        }
+      ],
+      "method_boundary": "Use this page as a structured self-reflection guide, not as a medical, hiring, admissions, financial, or relationship decision tool. The safest use is to compare the patterns here with your own repeated behavior, then confirm your broader type through a public 16 personality test.",
+      "trademark_boundary": "FermatMind publishes independent 16-type educational content. A/T is treated as an identity-style layer for interpretation; it is not part of the four-letter core type code.",
+      "information_gain": {
+        "why_this_page_is_not_template_content": "This page frames INTJ-A and INTJ-T through Architect-specific decision confidence, critique handling, strategic autonomy, and over-review patterns instead of generic A/T substitution.",
+        "unique_user_value": "It gives self-check prompts that help users distinguish decisive execution from corrective self-review without turning the page into a standalone INTJ-A or INTJ-T profile.",
+        "fermatmind_specific_path": "The page routes readers from comparison intent into the public 16 personality test and later sibling profiles while keeping result and account routes out of the funnel."
+      },
+      "claim_risk_notes": [
+        "No superiority claim between A and T variants.",
+        "No deterministic hiring, career, relationship, medical, or admissions claim.",
+        "A/T is framed as an identity-style interpretation layer, not as the core four-letter type itself."
+      ],
+      "qa_flags_for_codex": [
+        "Do not publish or search-release until the audited lookup-route classification is resolved."
+      ],
+      "route_safety": {
+        "target_test_route_verified_from_intent_map": true,
+        "forbidden_route_patterns_absent_from_internal_links": true,
+        "lookup_route_classification_required_before_publish_or_search_release": true,
+        "related_big_five_riasec_routes": {
+          "status": "verified_and_added",
+          "source": "related-test-route-scope-decision-2026-06-18",
+          "routes": [
+            "/en/tests/big-five-personality-test-ocean-model",
+            "/en/tests/holland-career-interest-test-riasec"
+          ]
+        },
+        "v2_1_related_test_links_added": true
+      },
+      "v2_optimization": {
+        "primary_improvement": "Strengthened answer usefulness, career/environment fit, self-check utility, and intent boundaries while preserving the original importable schema.",
+        "serp_intent_guard": {
+          "rank_for": "intj-a vs intj-t difference",
+          "do_not_rank_for": [
+            "intj-a meaning",
+            "intj-t meaning",
+            "intj personality type",
+            "intj architect personality",
+            "mbti test"
+          ],
+          "above_fold_answer_required": true
+        },
+        "conversion_design": {
+          "primary_cta_href": "/en/tests/mbti-personality-test-16-personality-types",
+          "primary_cta_label": "Take the 16 personality test",
+          "cta_rule": "Use only public canonical routes; no lookup, account, payment, history, or personalized-report paths."
+        },
+        "duplicate_defense": {
+          "variant_vs_comparison_boundary": "Variant pages answer standalone meaning/profile intent; comparison pages answer difference/decision intent.",
+          "page_specific_examples_required": true,
+          "faq_reuse_allowed": false
+        },
+        "related_test_link_patch": {
+          "version": "pilot-v2.1",
+          "scope": "Added verified locale-specific Big Five and Holland/RIASEC related_test links only; no SEO, body, FAQ, query, or canonical changes.",
+          "source": "related-test-route-scope-decision-2026-06-18",
+          "routes_added": [
+            "/en/tests/big-five-personality-test-ocean-model",
+            "/en/tests/holland-career-interest-test-riasec"
+          ]
+        }
+      },
+      "above_the_fold_module": {
+        "answer_card_title": "INTJ-A vs INTJ-T in one minute",
+        "answer_card_points": [
+          "Same core: strategic, independent, systems-oriented Architect reasoning.",
+          "INTJ-A tends to move with steadier self-trust once the logic is acceptable.",
+          "INTJ-T tends to revisit assumptions, risks and personal standards more intensely.",
+          "Neither label is better; the useful question is which pressure pattern repeats in real life."
+        ],
+        "best_next_step": "Use the self-check prompts, then take the public 16 personality test if your A/T pattern is still unclear."
+      },
+      "status": "draft_for_codex_qa",
+      "serp_ctr_package_v2": {
+        "seo_title": "INTJ-A vs INTJ-T: Confidence, Stress and Work Style | FermatMind",
+        "seo_description": "Compare INTJ-A and INTJ-T by confidence, stress recovery, decision review, relationships, work style and self-check prompts.",
+        "breadcrumb_title": "INTJ-A vs INTJ-T",
+        "h1": "INTJ-A vs INTJ-T: Key Differences",
+        "quick_answer_summary": "INTJ-A and INTJ-T share the Architect core; the main difference is how they handle confidence, pressure, feedback and self-correction.",
+        "ctr_angle": "Query-direct answer + non-official boundary + work/stress scenario framing",
+        "avoid_in_snippet": [
+          "provider-claim implication",
+          "32-type framing",
+          "rarity bait",
+          "career outcome certainty"
+        ]
+      }
+    },
+    {
+      "url": "/zh/personality/istj-a",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "primary_query": "ISTJ-A 人格特点",
+      "secondary_queries": [
+        "ISTJ-A 是什么人格",
+        "ISTJ-A 性格",
+        "ISTJ-A 职业",
+        "ISTJ-A 爱情",
+        "ISTJ-A 物流师"
+      ],
+      "excluded_queries": [
+        "ISTJ-A 和 ISTJ-T 区别",
+        "ISTJ-A vs ISTJ-T",
+        "ISTJ-T 人格特点",
+        "ISTJ 人格",
+        "16 型人格测试"
+      ],
+      "target_intent": "Chinese standalone profile intent for ISTJ-A, focused on responsibility, execution, stability, rules, communication, and work fit.",
+      "target_test_route": "/zh/tests/mbti-personality-test-16-personality-types",
+      "canonical_target": "/zh/personality/istj-a",
+      "seo": {
+        "seo_title": "ISTJ-A 人格特点：责任感、执行力、职业与关系 | FermatMind",
+        "seo_description": "系统了解 ISTJ-A 物流师的责任感、规则意识、工作风格、沟通方式、优势盲点与自我校准建议。",
+        "breadcrumb_title": "ISTJ-A 物流师",
+        "h1": "ISTJ-A 人格特点",
+        "quick_answer_summary": "ISTJ-A 是重责任、重事实、重流程和重交付的物流师风格；A 型身份让这种稳定性更容易带着确定感表达。"
+      },
+      "content": {
+        "quick_answer": "ISTJ-A 人格特点可以概括为：重视责任、事实、规则、稳定执行和可验证结果。作为物流师类型，ISTJ-A 往往不喜欢空泛承诺，更愿意把任务拆成流程、时间表和标准。A 型身份会让他们在判断完成度、承担责任和面对外部压力时更有确定感，但也可能让他们低估他人的情绪缓冲需求。",
+        "meaning": {
+          "h2": "ISTJ-A 是什么人格？",
+          "body": "ISTJ-A 是 16 型人格中物流师类型与 A 型身份风格的组合。这里的重点不是给人贴死标签，而是解释一种常见的工作和生活模式：他们通常相信事实胜过口号，相信流程胜过临场发挥，相信长期可靠胜过短期热闹。ISTJ-A 做事往往先问三个问题：依据是什么、责任归谁、怎样验收。"
+        },
+        "a_t_difference": {
+          "h2": "A 型身份如何影响 ISTJ-A",
+          "body": "在 ISTJ-A 身上，A 型身份通常表现为更稳定的自我评价和更强的执行确定性。他们做决定时不一定话多，但一旦标准清楚，就会倾向于按计划推进。这个特点让他们在制度、财务、运营、行政、工程支持、质量管理等场景中显得可靠。需要注意的是，自信不等于绝对正确；ISTJ-A 仍然需要给反馈、例外情况和人的感受留出空间。"
+        },
+        "core_traits": {
+          "h2": "ISTJ-A 的核心特点",
+          "items": [
+            "责任感强：不喜欢任务悬空，倾向于把承诺落实到具体行动。",
+            "重视秩序：偏好清楚的规则、边界、流程和验收标准。",
+            "事实导向：更相信记录、证据、经验和可检查的数据。",
+            "执行稳定：能在重复、细致或长期任务中保持节奏。",
+            "表达克制：通常不靠情绪感染他人，而靠可靠性建立信任。",
+            "风险保守：面对未经验证的新方案时，会先看成本、责任和后果。"
+          ]
+        },
+        "strengths_blind_spots": {
+          "h2": "优势与盲点",
+          "strengths": [
+            "适合承担需要准确性、连续性和责任闭环的任务。",
+            "在混乱环境中能快速寻找规则、流程和优先级。",
+            "对承诺和交付较认真，容易成为团队里的稳定锚点。",
+            "面对临时情绪波动时，不容易被带偏核心任务。",
+            "能把抽象目标转成清单、节点和检查标准。"
+          ],
+          "blind_spots": [
+            "可能把“没有按规则来”直接理解成“不专业”。",
+            "在变化太快的场景里，可能需要更久时间接受新打法。",
+            "容易把自己的高责任标准投射到所有人身上。",
+            "沟通中过于简洁时，别人可能感到被评判或不被理解。",
+            "当自己已经有把握时，可能低估不同意见的价值。"
+          ]
+        },
+        "careers_work_style": {
+          "h2": "职业倾向与工作风格",
+          "body": "ISTJ-A 不应该被简单地推向某一种职业。更准确的说法是，他们通常适合规则清楚、责任边界明确、结果可验证、流程能持续优化的环境。比起频繁换方向的创意混战，他们更容易在秩序、标准、数据、运营和交付相关的工作里发挥稳定性。 从测试转化角度，这一页不应只告诉用户“适合什么工作”，而要帮助用户识别自己更适合怎样的责任结构、反馈方式和流程密度。",
+          "best_fit_environments": [
+            "有清楚职责、流程和验收标准的运营或管理支持岗位。",
+            "需要细致检查、记录、合规、风控或质量控制的工作。",
+            "节奏稳定、责任明确、长期积累能产生优势的团队。",
+            "尊重专业边界，不把每件事都临时改成紧急任务的组织。",
+            "能让他们用经验和事实持续改进系统的环境。"
+          ],
+          "watchouts": [
+            "不要把临时变化全部视为管理混乱，有些变化来自真实信息更新。",
+            "当团队需要探索新方案时，先区分“无依据冒险”和“可控实验”。",
+            "向他人说明标准背后的原因，而不是只给结论。",
+            "保留例外处理机制，避免规则变成僵化防线。"
+          ]
+        },
+        "relationships_communication": {
+          "h2": "关系与沟通方式",
+          "body": "ISTJ-A 在关系中通常通过稳定、守时、兑现承诺和解决实际问题来表达在意。他们不一定频繁说感受，但会通过行动证明可靠。问题在于，对方有时需要的不是立刻解决问题，而是先被理解。 如果对方更重视情绪表达，ISTJ-A 可以把“我已经在处理”说出来；否则可靠的行动容易被误读成冷淡。",
+          "communication_tips": [
+            "在给建议前，先确认对方是想要方案还是想要倾听。",
+            "表达关心时不要只给任务清单，可以补一句“我知道这对你不容易”。",
+            "遇到冲突时，把事实、感受和请求分开说。",
+            "不要把临时情绪视为低效率，有些情绪是在传递重要信息。",
+            "对亲近的人解释自己的沉默：你是在处理，不是冷漠。"
+          ]
+        },
+        "common_misreads": {
+          "h2": "常见误读",
+          "items": [
+            "ISTJ-A 不是没有感情，而是更习惯用负责和行动表达重视。",
+            "ISTJ-A 不是天生保守，而是倾向先验证风险和责任边界。",
+            "ISTJ-A 的稳定不是低创造力，而是偏好在可靠系统内持续改进。",
+            "ISTJ-A 的自信不等于听不进意见；关键在于意见是否具体、有依据。",
+            "ISTJ-A 不等于只适合行政或传统岗位，很多复杂系统岗位也需要这种稳定性。",
+            "真正需要区分的是“稳定”与“僵化”：ISTJ-A 的价值在于把可靠性做成系统，而不是拒绝所有变化。"
+          ]
+        },
+        "similar_types": {
+          "h2": "容易混淆的相近类型",
+          "items": [
+            "ISTJ-T：同样重视责任和规则，但通常更容易反复检查压力和完成度。",
+            "ESTJ-A：同样重视秩序，但更外向地推动他人和组织执行。",
+            "ISFJ-A：同样可靠，但更容易把人的需要和照顾关系放在前面。",
+            "INTJ-A：同样有结构感，但更偏战略模型和长期系统设计。",
+            "ISTP-A：同样务实，但更偏即时问题解决和工具性探索。"
+          ]
+        }
+      },
+      "faq": [
+        {
+          "question": "ISTJ-A 人格特点是什么？",
+          "answer": "ISTJ-A 通常重视责任、规则、事实、稳定执行和可验证结果。他们更愿意用流程、标准和长期可靠性来建立信任。"
+        },
+        {
+          "question": "ISTJ-A 适合什么工作环境？",
+          "answer": "ISTJ-A 通常更适合职责清楚、流程稳定、结果可检查的环境，例如运营、合规、财务支持、质量管理、行政管理、工程支持等方向。但人格类型不决定职业结果。"
+        },
+        {
+          "question": "ISTJ-A 在感情中是什么样？",
+          "answer": "ISTJ-A 往往通过稳定、兑现承诺和解决实际问题来表达在意。他们需要注意，不是所有关系问题都能只靠方案解决，有时对方先需要情绪回应。"
+        },
+        {
+          "question": "ISTJ-A 会不会太固执？",
+          "answer": "ISTJ-A 可能在规则和标准上比较坚持，但这通常来自责任感和风险意识。盲点是把变化看成混乱，而不是信息更新。"
+        },
+        {
+          "question": "ISTJ-A 是固定不变的吗？",
+          "answer": "不是。人格内容适合用来理解倾向，而不是限定人生。压力、经验、职业环境和关系模式都会影响一个人如何表现自己的类型。"
+        },
+        {
+          "question": "ISTJ-A 适合高变化的工作吗？",
+          "answer": "可以，但前提是变化有清楚依据、责任边界和复盘机制。ISTJ-A 通常不怕难，而是不喜欢没有标准的反复改方向。"
+        },
+        {
+          "question": "ISTJ-A 在团队里最容易被误解什么？",
+          "answer": "最容易被误解为冷淡或保守。实际情况往往是他们更习惯用按时交付、负责到底和解决问题表达重视。"
+        }
+      ],
+      "internal_links": [
+        {
+          "href": "/zh/personality",
+          "anchor_text": "查看全部 16 型人格",
+          "role": "hub",
+          "safe_public_route": true
+        },
+        {
+          "href": "/zh/personality/istj-t",
+          "anchor_text": "查看 ISTJ-T 物流师",
+          "role": "sibling_variant",
+          "safe_public_route": true
+        },
+        {
+          "href": "/zh/personality/istj-a-vs-istj-t",
+          "anchor_text": "查看 ISTJ-A 与 ISTJ-T 的对照说明",
+          "role": "comparison",
+          "safe_public_route": true
+        },
+        {
+          "href": "/zh/tests/mbti-personality-test-16-personality-types",
+          "anchor_text": "进行 16 型人格测试",
+          "role": "test",
+          "safe_public_route": true
+        },
+        {
+          "href": "/zh/tests/big-five-personality-test-ocean-model",
+          "anchor_text": "用大五人格测试交叉理解你的类型",
+          "role": "related_test",
+          "safe_public_route": true
+        },
+        {
+          "href": "/zh/tests/holland-career-interest-test-riasec",
+          "anchor_text": "用霍兰德职业兴趣测试探索职业方向",
+          "role": "related_test",
+          "safe_public_route": true
+        },
+        {
+          "href": "/zh/personality/istj-a#method-boundary",
+          "anchor_text": "方法与边界",
+          "role": "method",
+          "safe_public_route": true
+        }
+      ],
+      "method_boundary": "本页用于结构化自我理解，不应用作医疗、招聘、录取、财务或亲密关系决策依据。更稳妥的用法是：把这里的模式与自己的长期行为对照，再通过公开的 16 型人格测试校准。",
+      "trademark_boundary": "FermatMind 发布的是独立的 16 型人格教育内容。A/T 在这里作为身份风格解释层，不属于四字母核心类型本身。",
+      "information_gain": {
+        "why_this_page_is_not_template_content": "本页围绕 ISTJ-A 的责任闭环、验收标准、流程稳定性和中文职场沟通场景展开，不只是替换人格代号。",
+        "unique_user_value": "用户能具体判断自己是用行动表达可靠，还是在沟通中过度依赖规则和结论。",
+        "fermatmind_specific_path": "页面把 ISTJ-A 的自我理解连接到公开 16 型人格测试和后续职业探索路径，同时避开结果查询类路由。"
+      },
+      "claim_risk_notes": [
+        "不声称 A/T 任一变体更高级。",
+        "不做确定性招聘、职业、关系、医疗或录取判断。",
+        "A/T 只作为身份风格解释层，不作为四字母核心类型本身。"
+      ],
+      "qa_flags_for_codex": [
+        "确认中文页面发布后 H2 结构完整渲染。",
+        "发布前必须完成审计中发现的结果查询类路由分类。"
+      ],
+      "route_safety": {
+        "target_test_route_verified_from_intent_map": true,
+        "forbidden_route_patterns_absent_from_internal_links": true,
+        "lookup_route_classification_required_before_publish_or_search_release": true,
+        "related_big_five_riasec_routes": {
+          "status": "verified_and_added",
+          "source": "related-test-route-scope-decision-2026-06-18",
+          "routes": [
+            "/zh/tests/big-five-personality-test-ocean-model",
+            "/zh/tests/holland-career-interest-test-riasec"
+          ]
+        },
+        "v2_1_related_test_links_added": true
+      },
+      "v2_optimization": {
+        "primary_improvement": "Strengthened answer usefulness, career/environment fit, self-check utility, and intent boundaries while preserving the original importable schema.",
+        "serp_intent_guard": {
+          "rank_for": "ISTJ-A 人格特点",
+          "do_not_rank_for": [
+            "ISTJ-A 和 ISTJ-T 区别",
+            "ISTJ-A vs ISTJ-T",
+            "ISTJ-T 人格特点",
+            "ISTJ 人格",
+            "16 型人格测试"
+          ],
+          "above_fold_answer_required": true
+        },
+        "conversion_design": {
+          "primary_cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+          "primary_cta_label": "进行 16 型人格测试",
+          "cta_rule": "Use only public canonical routes; no lookup, account, payment, history, or personalized-report paths."
+        },
+        "duplicate_defense": {
+          "variant_vs_comparison_boundary": "Variant pages answer standalone meaning/profile intent; comparison pages answer difference/decision intent.",
+          "page_specific_examples_required": true,
+          "faq_reuse_allowed": false
+        },
+        "related_test_link_patch": {
+          "version": "pilot-v2.1",
+          "scope": "Added verified locale-specific Big Five and Holland/RIASEC related_test links only; no SEO, body, FAQ, query, or canonical changes.",
+          "source": "related-test-route-scope-decision-2026-06-18",
+          "routes_added": [
+            "/zh/tests/big-five-personality-test-ocean-model",
+            "/zh/tests/holland-career-interest-test-riasec"
+          ]
+        }
+      },
+      "above_the_fold_module": {
+        "answer_card_title": "ISTJ-A 一分钟速读",
+        "answer_card_points": [
+          "核心模式：责任清楚、流程稳定、证据优先、结果可验收。",
+          "A 型身份：更容易相信自己的判断和执行节奏。",
+          "优势场景：运营、合规、财务、质量、行政、项目交付。",
+          "主要盲点：可能低估情绪沟通、例外情况和探索性试错。"
+        ],
+        "best_next_step": "先看工作风格与沟通建议；如果仍不确定类型，再做公开的 16 型人格测试。"
+      },
+      "status": "draft_for_codex_qa",
+      "serp_ctr_package_v2": {
+        "seo_title": "ISTJ-A 人格特点：责任感、执行力、职业与关系 | FermatMind",
+        "seo_description": "系统了解 ISTJ-A 物流师的责任感、规则意识、工作风格、沟通方式、优势盲点与自我校准建议。",
+        "breadcrumb_title": "ISTJ-A 物流师",
+        "h1": "ISTJ-A 人格特点",
+        "quick_answer_summary": "ISTJ-A 是重责任、重事实、重流程和重交付的物流师风格；A 型身份让这种稳定性更容易带着确定感表达。",
+        "ctr_angle": "主查询直答 + 非官方边界 + 工作/压力场景",
+        "avoid_in_snippet": [
+          "官方测试暗示",
+          "32型诱导",
+          "稀有度诱导",
+          "职业结果确定化"
+        ]
+      }
+    },
+    {
+      "url": "/en/personality/intp-a-vs-intp-t",
+      "locale": "en",
+      "page_type": "comparison",
+      "primary_query": "intp-a vs intp-t difference",
+      "secondary_queries": [
+        "intp-a vs intp-t",
+        "intp a and t difference",
+        "assertive logician vs turbulent logician",
+        "intp-a or intp-t",
+        "intp turbulent vs assertive"
+      ],
+      "excluded_queries": [
+        "intp-a meaning",
+        "intp-t meaning",
+        "intp personality type",
+        "intp logician personality",
+        "mbti test"
+      ],
+      "target_intent": "Comparison intent for users distinguishing INTP-A and INTP-T in analysis style, uncertainty tolerance, stress, iteration, relationships, and work settings.",
+      "target_test_route": "/en/tests/mbti-personality-test-16-personality-types",
+      "canonical_target": "/en/personality/intp-a-vs-intp-t",
+      "seo": {
+        "seo_title": "INTP-A vs INTP-T: Doubt, Stress and Analysis Style | FermatMind",
+        "seo_description": "Compare INTP-A and INTP-T by analysis style, uncertainty tolerance, stress response, relationships, work rhythm and self-check prompts.",
+        "breadcrumb_title": "INTP-A vs INTP-T",
+        "h1": "INTP-A vs INTP-T: Key Differences",
+        "quick_answer_summary": "INTP-A and INTP-T share the Logician core; A/T mainly changes confidence, uncertainty tolerance, revision pressure and how doubt is used."
+      },
+      "content": {
+        "quick_answer": "The INTP-A vs INTP-T difference is mainly about how the Logician pattern handles uncertainty, confidence, and pressure. Both are analytical, concept-driven, and curious. INTP-A usually feels more comfortable treating an idea as good enough to test or explain. INTP-T usually notices unresolved flaws more sharply and may revise longer before feeling satisfied.",
+        "side_by_side_summary": {
+          "h2": "INTP-A vs INTP-T at a glance",
+          "rows": [
+            {
+              "dimension": "Uncertainty tolerance",
+              "a_variant": "Can often move forward with an incomplete but usable model.",
+              "t_variant": "Often keeps searching for the missing variable, contradiction, or hidden exception."
+            },
+            {
+              "dimension": "Analysis rhythm",
+              "a_variant": "More likely to explore broadly, then simplify the model for use.",
+              "t_variant": "More likely to iterate repeatedly until the model feels internally tight."
+            },
+            {
+              "dimension": "Stress response",
+              "a_variant": "May detach from criticism and return to curiosity relatively quickly.",
+              "t_variant": "May internalize critique and turn it into deeper revision or self-questioning."
+            },
+            {
+              "dimension": "Communication",
+              "a_variant": "May explain ideas with more casual confidence.",
+              "t_variant": "May hedge, qualify, and add caveats to avoid overclaiming."
+            },
+            {
+              "dimension": "Work environment",
+              "a_variant": "Often benefits from experimental autonomy and low micromanagement.",
+              "t_variant": "Often benefits from research, review, and iterative improvement cycles."
+            },
+            {
+              "dimension": "Growth edge",
+              "a_variant": "Needs to avoid skipping too quickly from possibility to conclusion.",
+              "t_variant": "Needs to avoid letting perfect clarity block useful output."
+            }
+          ]
+        },
+        "core_traits_comparison": {
+          "h2": "What both INTP-A and INTP-T have in common",
+          "body": "Both INTP-A and INTP-T are still Logician patterns. They usually enjoy conceptual puzzles, independent thinking, precision, and unconventional angles. The A/T distinction does not decide intelligence, creativity, or competence. It describes how the same analytical core tends to behave around confidence, criticism, and unresolved complexity. The strongest information gain on this page is separating analytical depth from emotional cost: both variants can be abstract and original, but they pay different attention to doubt, review and confidence.",
+          "items": [
+            "Both tend to ask whether an idea is logically coherent before asking whether it is popular.",
+            "Both often enjoy systems, theories, tools, languages, puzzles, or abstract models.",
+            "Both may struggle when expected to perform enthusiasm instead of solve the actual problem.",
+            "Both can under-communicate progress because they are still refining the idea internally.",
+            "Both need some freedom to follow questions that are not immediately obvious to others."
+          ]
+        },
+        "stress_confidence": {
+          "h2": "Stress, self-critique, and confidence",
+          "body": "The A/T split becomes visible when an idea is incomplete or criticized. INTP-A is more likely to treat uncertainty as normal background noise. INTP-T is more likely to treat uncertainty as a signal that the model deserves another pass.",
+          "a_pattern": "INTP-A may share rough models earlier, test assumptions in conversation, and recover from being wrong without losing the thread. The risk is sounding too certain about a half-finished idea.",
+          "t_pattern": "INTP-T may catch subtle contradictions, refine definitions, and improve quality through repeated review. The risk is delaying useful output because the idea still has imperfections."
+        },
+        "career_work_style": {
+          "h2": "Career and work style differences",
+          "body": "Both INTP-A and INTP-T can do well in analytical, technical, research, product, writing, design, data, or systems roles. The useful distinction is how the environment handles ambiguity and output expectations. For career pathing, INTP-A often fits exploratory roles where prototypes and independent reasoning are rewarded, while INTP-T often fits research, debugging or quality-heavy work where careful revision improves the final model.",
+          "a_work_style": "INTP-A often works well where prototypes, exploration, and fast conceptual testing are valued. They may prefer being judged by the usefulness of the idea rather than by rigid process visibility.",
+          "t_work_style": "INTP-T often works well where revision, peer review, rigor, and error correction are valued. They may bring unusually strong sensitivity to weak assumptions, but need deadlines that prevent endless refinement.",
+          "shared_strengths": [
+            "conceptual analysis",
+            "model building",
+            "independent research",
+            "problem decomposition",
+            "creative hypothesis generation"
+          ]
+        },
+        "relationships_love": {
+          "h2": "Relationships and emotional interpretation",
+          "body": "In relationships, both INTP patterns may need time to translate internal thought into emotional language. INTP-A may appear more relaxed and playful with uncertainty. INTP-T may be more affected by perceived mistakes, awkward moments, or signs of disapproval. In relationships, the difference is often visible when ideas meet emotion: INTP-A may under-explain their certainty, while INTP-T may over-explain because they are still testing the meaning of the interaction.",
+          "a_relationship_pattern": "INTP-A may use humor, ideas, and practical curiosity to connect. The risk is underestimating when another person needs seriousness or reassurance.",
+          "t_relationship_pattern": "INTP-T may care deeply but process concerns privately, sometimes replaying conversations or analyzing small signals. The risk is over-interpreting ambiguity instead of asking directly."
+        },
+        "which_one_fits": {
+          "h2": "Which description fits you better?",
+          "body": "Use the comparison as a working mirror. A/T can feel sensitive to stress load, confidence, and environment, so the best indicator is not a single mood but your repeated pattern around uncertainty and self-critique.",
+          "self_check_prompts": [
+            "Do you share early models easily, or keep refining until they feel defensible?",
+            "When criticized, do you detach and keep exploring, or replay the weakness repeatedly?",
+            "Do you lose more output from moving too fast, or from never feeling finished?",
+            "Do you communicate with clean claims, or many caveats and qualifiers?",
+            "Under pressure, do you become more experimental, or more self-critical and exacting?"
+          ]
+        }
+      },
+      "faq": [
+        {
+          "question": "What is the main INTP-A vs INTP-T difference?",
+          "answer": "The main difference is how the Logician pattern handles uncertainty and self-critique. INTP-A tends to move forward with more ease, while INTP-T tends to revise and question more intensely."
+        },
+        {
+          "question": "Is INTP-T more analytical than INTP-A?",
+          "answer": "Not necessarily. Both can be highly analytical. INTP-T may show analysis through repeated refinement, while INTP-A may show it through broad exploration and faster testing."
+        },
+        {
+          "question": "Is INTP-A more confident?",
+          "answer": "Often, yes, in the limited sense that INTP-A may feel less personally shaken by an unfinished idea or external criticism. That does not make every INTP-A correct or every INTP-T insecure."
+        },
+        {
+          "question": "Which INTP type is better at work?",
+          "answer": "Neither is automatically better. INTP-A may be strong in exploratory prototyping, while INTP-T may be strong in review-heavy or precision-oriented work."
+        },
+        {
+          "question": "Can I be between INTP-A and INTP-T?",
+          "answer": "Yes. Many people recognize parts of both descriptions. Stress, confidence, age, and work context can shift which A/T pattern feels more visible."
+        },
+        {
+          "question": "Is INTP-T less confident than INTP-A?",
+          "answer": "Often, yes in behavior, but not in capability. INTP-T may question an idea longer, while INTP-A may move faster once the logic seems strong enough."
+        },
+        {
+          "question": "Which INTP variant is more creative?",
+          "answer": "Neither variant owns creativity. INTP-A may generate and test ideas faster; INTP-T may refine ideas more deeply before showing them."
+        }
+      ],
+      "internal_links": [
+        {
+          "href": "/en/personality",
+          "anchor_text": "Explore all 16 personality types",
+          "role": "hub",
+          "safe_public_route": true
+        },
+        {
+          "href": "/en/personality/intp-a",
+          "anchor_text": "Read the INTP-A profile",
+          "role": "sibling_variant",
+          "safe_public_route": true
+        },
+        {
+          "href": "/en/personality/intp-t",
+          "anchor_text": "Read the INTP-T profile",
+          "role": "sibling_variant",
+          "safe_public_route": true
+        },
+        {
+          "href": "/en/tests/mbti-personality-test-16-personality-types",
+          "anchor_text": "Take the 16 personality test",
+          "role": "test",
+          "safe_public_route": true
+        },
+        {
+          "href": "/en/tests/big-five-personality-test-ocean-model",
+          "anchor_text": "Compare your type with the Big Five model",
+          "role": "related_test",
+          "safe_public_route": true
+        },
+        {
+          "href": "/en/tests/holland-career-interest-test-riasec",
+          "anchor_text": "Explore career interests with the Holland/RIASEC test",
+          "role": "related_test",
+          "safe_public_route": true
+        },
+        {
+          "href": "/en/personality/intp-a-vs-intp-t#method-boundary",
+          "anchor_text": "Method and limits",
+          "role": "method",
+          "safe_public_route": true
+        }
+      ],
+      "method_boundary": "Use this page as a structured self-reflection guide, not as a medical, hiring, admissions, financial, or relationship decision tool. The safest use is to compare the patterns here with your own repeated behavior, then confirm your broader type through a public 16 personality test.",
+      "trademark_boundary": "FermatMind publishes independent 16-type educational content. A/T is treated as an identity-style layer for interpretation; it is not part of the four-letter core type code.",
+      "information_gain": {
+        "why_this_page_is_not_template_content": "The page focuses on INTP-specific uncertainty tolerance, model revision, caveat-heavy communication, and prototype-versus-refinement work patterns.",
+        "unique_user_value": "It helps users identify whether their bottleneck is premature simplification or endless refinement, which is more actionable than a generic A/T contrast.",
+        "fermatmind_specific_path": "The page connects comparison intent to public testing and sibling type navigation without using result or account routes."
+      },
+      "claim_risk_notes": [
+        "No superiority claim between A and T variants.",
+        "No deterministic hiring, career, relationship, medical, or admissions claim.",
+        "A/T is framed as an identity-style interpretation layer, not as the core four-letter type itself."
+      ],
+      "qa_flags_for_codex": [
+        "Do not publish or search-release until the audited lookup-route classification is resolved."
+      ],
+      "route_safety": {
+        "target_test_route_verified_from_intent_map": true,
+        "forbidden_route_patterns_absent_from_internal_links": true,
+        "lookup_route_classification_required_before_publish_or_search_release": true,
+        "related_big_five_riasec_routes": {
+          "status": "verified_and_added",
+          "source": "related-test-route-scope-decision-2026-06-18",
+          "routes": [
+            "/en/tests/big-five-personality-test-ocean-model",
+            "/en/tests/holland-career-interest-test-riasec"
+          ]
+        },
+        "v2_1_related_test_links_added": true
+      },
+      "v2_optimization": {
+        "primary_improvement": "Strengthened answer usefulness, career/environment fit, self-check utility, and intent boundaries while preserving the original importable schema.",
+        "serp_intent_guard": {
+          "rank_for": "intp-a vs intp-t difference",
+          "do_not_rank_for": [
+            "intp-a meaning",
+            "intp-t meaning",
+            "intp personality type",
+            "intp logician personality",
+            "mbti test"
+          ],
+          "above_fold_answer_required": true
+        },
+        "conversion_design": {
+          "primary_cta_href": "/en/tests/mbti-personality-test-16-personality-types",
+          "primary_cta_label": "Take the 16 personality test",
+          "cta_rule": "Use only public canonical routes; no lookup, account, payment, history, or personalized-report paths."
+        },
+        "duplicate_defense": {
+          "variant_vs_comparison_boundary": "Variant pages answer standalone meaning/profile intent; comparison pages answer difference/decision intent.",
+          "page_specific_examples_required": true,
+          "faq_reuse_allowed": false
+        },
+        "related_test_link_patch": {
+          "version": "pilot-v2.1",
+          "scope": "Added verified locale-specific Big Five and Holland/RIASEC related_test links only; no SEO, body, FAQ, query, or canonical changes.",
+          "source": "related-test-route-scope-decision-2026-06-18",
+          "routes_added": [
+            "/en/tests/big-five-personality-test-ocean-model",
+            "/en/tests/holland-career-interest-test-riasec"
+          ]
+        }
+      },
+      "above_the_fold_module": {
+        "answer_card_title": "INTP-A vs INTP-T in one minute",
+        "answer_card_points": [
+          "Same core: analytical, conceptual, independent, possibility-driven Logician thinking.",
+          "INTP-A more often treats an unfinished idea as usable enough to test.",
+          "INTP-T more often keeps interrogating the model until hidden flaws feel addressed.",
+          "The useful distinction is not intelligence; it is how doubt shapes action."
+        ],
+        "best_next_step": "Use the comparison table to identify your default uncertainty pattern, then confirm your broader type through the public 16 personality test."
+      },
+      "status": "draft_for_codex_qa",
+      "serp_ctr_package_v2": {
+        "seo_title": "INTP-A vs INTP-T: Doubt, Stress and Analysis Style | FermatMind",
+        "seo_description": "Compare INTP-A and INTP-T by analysis style, uncertainty tolerance, stress response, relationships, work rhythm and self-check prompts.",
+        "breadcrumb_title": "INTP-A vs INTP-T",
+        "h1": "INTP-A vs INTP-T: Key Differences",
+        "quick_answer_summary": "INTP-A and INTP-T share the Logician core; A/T mainly changes confidence, uncertainty tolerance, revision pressure and how doubt is used.",
+        "ctr_angle": "Query-direct answer + non-official boundary + work/stress scenario framing",
+        "avoid_in_snippet": [
+          "provider-claim implication",
+          "32-type framing",
+          "rarity bait",
+          "career outcome certainty"
+        ]
+      }
+    },
+    {
+      "url": "/zh/personality/infp-t",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "primary_query": "INFP-T 人格特点",
+      "secondary_queries": [
+        "INFP-T 是什么人格",
+        "INFP-T 性格",
+        "INFP-T 爱情",
+        "INFP-T 职业",
+        "INFP-T 调停者"
+      ],
+      "excluded_queries": [
+        "INFP-A 和 INFP-T 区别",
+        "INFP-A vs INFP-T",
+        "INFP-A 人格特点",
+        "INFP 人格",
+        "16 型人格测试"
+      ],
+      "target_intent": "Chinese standalone profile intent for INFP-T, focused on sensitivity, ideals, relationships, career fit, creativity, self-doubt, and pressure response.",
+      "target_test_route": "/zh/tests/mbti-personality-test-16-personality-types",
+      "canonical_target": "/zh/personality/infp-t",
+      "seo": {
+        "seo_title": "INFP-T 人格特点：敏感、理想、自我审视与职业 | FermatMind",
+        "seo_description": "了解 INFP-T 调停者的敏感、理想感、压力反应、关系沟通、职业环境偏好、优势盲点与自我校准。",
+        "breadcrumb_title": "INFP-T 调停者",
+        "h1": "INFP-T 人格特点",
+        "quick_answer_summary": "INFP-T 是理想感强、情绪感受细腻、重视意义和真实感的调停者风格；T 型身份让他们更容易自我审视和受压力触动。"
+      },
+      "content": {
+        "quick_answer": "INFP-T 人格特点可以概括为：重视内在价值、情绪细腻、富有想象力、在关系中追求真诚，同时容易自我审视。作为调停者类型，INFP-T 通常希望生活和工作有意义，而不是只追求效率或外部评价。T 型身份会让他们更敏感地感受到压力、批评和关系变化，也可能推动他们持续反思和创作。",
+        "meaning": {
+          "h2": "INFP-T 是什么人格？",
+          "body": "INFP-T 是调停者类型与 T 型身份风格的组合。它描述的是一种以内在价值、同理心、想象力和自我审视为核心的倾向。INFP-T 往往不满足于“看起来成功”，他们更在意一件事是否真诚、是否符合自己的价值、是否能保护某种重要的人或意义。"
+        },
+        "a_t_difference": {
+          "h2": "T 型身份如何影响 INFP-T",
+          "body": "在 INFP-T 身上，T 型身份常表现为更强的自我观察和压力敏感度。他们可能会反复想：我是不是做得不够好、对方是不是失望了、这个选择是否背离了真实的自己。这种敏感不是缺陷；它可以带来细腻的创作、深度共情和高质量反思。但如果缺少边界，也可能变成过度内耗。"
+        },
+        "core_traits": {
+          "h2": "INFP-T 的核心特点",
+          "items": [
+            "价值驱动：更容易被意义、真实、善意和个人信念打动。",
+            "情绪细腻：能捕捉微妙的气氛、措辞和关系变化。",
+            "想象力强：适合把感受、故事、隐喻或理想转化成表达。",
+            "自我审视：经常反思自己的动机、选择和对他人的影响。",
+            "关系真诚：不喜欢表面社交，更重视被理解和被尊重。",
+            "压力敏感：在批评、冲突或不确定关系中容易消耗心力。"
+          ]
+        },
+        "strengths_blind_spots": {
+          "h2": "优势与盲点",
+          "strengths": [
+            "能看到别人没说出口的情绪需要。",
+            "适合做需要同理心、表达、创作、倾听和价值判断的工作。",
+            "对不真诚、不公平或过度功利的环境有较强感知。",
+            "能把个人体验转化成文字、艺术、咨询、教育或社群价值。",
+            "愿意为自己相信的事投入长期情感能量。"
+          ],
+          "blind_spots": [
+            "容易把一次反馈扩大成对自我价值的否定。",
+            "可能因为怕伤害别人而不直接表达边界。",
+            "在选择太多时，容易陷入“哪个才是真正的我”的循环。",
+            "可能拖延具体行动，因为现实方案不够理想。",
+            "容易过度解读关系中的沉默、延迟回复或语气变化。"
+          ]
+        },
+        "careers_work_style": {
+          "h2": "职业倾向与工作风格",
+          "body": "INFP-T 不应被限定在某几个“温柔职业”里。更关键的是工作是否允许价值感、个人表达、独立思考和人文关怀存在。过度冷漠、只看短期指标、长期压抑真实表达的环境，会让 INFP-T 更容易消耗。 INFP-T 的职业探索应从“意义密度”和“情绪消耗”同时看：只有价值感但缺少边界，容易长期透支；只有稳定但缺少意义，容易失去动力。",
+          "best_fit_environments": [
+            "允许深度表达和长期打磨的写作、内容、设计、艺术或研究环境。",
+            "强调倾听、陪伴、教育、公益、心理支持或社群建设的工作。",
+            "价值观清楚、沟通相对温和、不把人完全工具化的团队。",
+            "能给独立空间，同时有明确反馈节奏的项目制工作。",
+            "允许个人把经验、故事和洞察转化成实际帮助的岗位。"
+          ],
+          "watchouts": [
+            "不要只凭“有意义”接下所有任务，也要看边界和资源。",
+            "把创作和帮助他人的愿望拆成可执行的小步骤。",
+            "面对批评时，先区分作品、行为和自我价值。",
+            "在关系或工作中练习清楚表达拒绝，而不是长期委屈。"
+          ]
+        },
+        "relationships_communication": {
+          "h2": "关系与沟通方式",
+          "body": "INFP-T 在关系中通常重视真诚、理解和情感安全。他们会记住对方细小的需要，也容易因为一句话、一个表情或一次忽略而反复思考。健康的 INFP-T 关系不是永远不冲突，而是能把感受说出来，而不是独自消化到崩溃。 INFP-T 在关系中常常不是要求完美回应，而是希望对方认真对待自己的感受来源。说清楚“我需要被理解，暂时不是要解决方案”会更有效。",
+          "communication_tips": [
+            "把“我感觉到”与“你就是”分开，减少误伤。",
+            "需要安慰时直接说，不要期待对方自动读懂。",
+            "给自己设定回复和解释的边界，不把所有沉默都当成拒绝。",
+            "冲突中先确认事实，再表达感受，最后提出具体请求。",
+            "在亲密关系中保留个人创作、独处和恢复空间。"
+          ]
+        },
+        "common_misreads": {
+          "h2": "常见误读",
+          "items": [
+            "INFP-T 不是脆弱，而是对意义、情绪和关系信号更敏感。",
+            "INFP-T 不是不现实，而是现实方案需要和价值感对齐。",
+            "INFP-T 的自我怀疑不代表没有能力，常常是高标准和深度反思的副作用。",
+            "INFP-T 不是只适合艺术，也可能适合教育、研究、公益、品牌、产品、人文科技等方向。",
+            "INFP-T 的沉默不一定是冷淡，可能是在整理复杂感受。",
+            "敏感不是低能力。对 INFP-T 来说，敏感如果有边界和输出渠道，可以变成洞察、表达、创作和深度关系能力。"
+          ]
+        },
+        "similar_types": {
+          "h2": "容易混淆的相近类型",
+          "items": [
+            "INFP-A：同样重视价值和真实，但通常自我评价更稳定。",
+            "INFJ-T：同样敏感和理想化，但更偏长期洞察、关系结构和使命感。",
+            "ISFP-T：同样重视真实感，但更偏当下体验、审美和具体行动。",
+            "ENFP-T：同样理想和情绪丰富，但更外向地探索人和可能性。",
+            "INTP-T：同样会自我怀疑，但更多围绕逻辑、模型和正确性。"
+          ]
+        }
+      },
+      "faq": [
+        {
+          "question": "INFP-T 人格特点是什么？",
+          "answer": "INFP-T 通常重视意义、真实、同理心和个人价值，同时更容易自我审视，对压力、批评和关系变化比较敏感。"
+        },
+        {
+          "question": "INFP-T 是不是很容易内耗？",
+          "answer": "INFP-T 可能比一些类型更容易反复思考自己的感受、选择和关系信号。关键不是消灭敏感，而是建立边界、行动节奏和事实校准。"
+        },
+        {
+          "question": "INFP-T 适合什么工作？",
+          "answer": "INFP-T 通常更适合能结合价值感、表达、创造、倾听或帮助他人的工作环境。人格类型不能决定职业结果，但可以帮助判断环境匹配度。"
+        },
+        {
+          "question": "INFP-T 在感情中是什么样？",
+          "answer": "INFP-T 往往重视真诚、理解和情感安全。他们可能非常细腻，但也需要练习直接表达需求，而不是让对方猜。"
+        },
+        {
+          "question": "INFP-T 可以变得更稳定吗？",
+          "answer": "可以。稳定不是变得麻木，而是学会区分事实、感受和猜测，并把理想拆成可执行的小行动。"
+        },
+        {
+          "question": "INFP-T 是不是太情绪化？",
+          "answer": "不应这样简单判断。INFP-T 通常对价值、关系和反馈更敏感；关键不是压掉感受，而是把感受转成边界、表达和行动。"
+        },
+        {
+          "question": "INFP-T 适合稳定工作还是自由工作？",
+          "answer": "更准确的问题是：这份工作是否有意义感、清楚边界和足够自主空间。过度混乱或过度僵化都会消耗 INFP-T。"
+        }
+      ],
+      "internal_links": [
+        {
+          "href": "/zh/personality",
+          "anchor_text": "查看全部 16 型人格",
+          "role": "hub",
+          "safe_public_route": true
+        },
+        {
+          "href": "/zh/personality/infp-a",
+          "anchor_text": "查看 INFP-A 调停者",
+          "role": "sibling_variant",
+          "safe_public_route": true
+        },
+        {
+          "href": "/zh/personality/infp-a-vs-infp-t",
+          "anchor_text": "查看 INFP-A 与 INFP-T 的对照说明",
+          "role": "comparison",
+          "safe_public_route": true
+        },
+        {
+          "href": "/zh/tests/mbti-personality-test-16-personality-types",
+          "anchor_text": "进行 16 型人格测试",
+          "role": "test",
+          "safe_public_route": true
+        },
+        {
+          "href": "/zh/tests/big-five-personality-test-ocean-model",
+          "anchor_text": "用大五人格测试交叉理解你的类型",
+          "role": "related_test",
+          "safe_public_route": true
+        },
+        {
+          "href": "/zh/tests/holland-career-interest-test-riasec",
+          "anchor_text": "用霍兰德职业兴趣测试探索职业方向",
+          "role": "related_test",
+          "safe_public_route": true
+        },
+        {
+          "href": "/zh/personality/infp-t#method-boundary",
+          "anchor_text": "方法与边界",
+          "role": "method",
+          "safe_public_route": true
+        }
+      ],
+      "method_boundary": "本页用于结构化自我理解，不应用作医疗、招聘、录取、财务或亲密关系决策依据。更稳妥的用法是：把这里的模式与自己的长期行为对照，再通过公开的 16 型人格测试校准。",
+      "trademark_boundary": "FermatMind 发布的是独立的 16 型人格教育内容。A/T 在这里作为身份风格解释层，不属于四字母核心类型本身。",
+      "information_gain": {
+        "why_this_page_is_not_template_content": "本页围绕 INFP-T 的价值感、关系敏感度、自我审视、创作压力和中文语境中的边界问题展开，而不是泛泛描述内向和理想主义。",
+        "unique_user_value": "用户能把“敏感”拆成可操作的事实校准、边界表达、创作节奏和关系沟通建议。",
+        "fermatmind_specific_path": "页面把人格解释连接到公开测试入口和后续职业探索，同时避免结果查询和私有报告路由。"
+      },
+      "claim_risk_notes": [
+        "不声称 A/T 任一变体更高级。",
+        "不做确定性招聘、职业、关系、医疗或录取判断。",
+        "A/T 只作为身份风格解释层，不作为四字母核心类型本身。"
+      ],
+      "qa_flags_for_codex": [
+        "确认中文 FAQ 可见渲染。",
+        "发布前必须完成审计中发现的结果查询类路由分类。"
+      ],
+      "route_safety": {
+        "target_test_route_verified_from_intent_map": true,
+        "forbidden_route_patterns_absent_from_internal_links": true,
+        "lookup_route_classification_required_before_publish_or_search_release": true,
+        "related_big_five_riasec_routes": {
+          "status": "verified_and_added",
+          "source": "related-test-route-scope-decision-2026-06-18",
+          "routes": [
+            "/zh/tests/big-five-personality-test-ocean-model",
+            "/zh/tests/holland-career-interest-test-riasec"
+          ]
+        },
+        "v2_1_related_test_links_added": true
+      },
+      "v2_optimization": {
+        "primary_improvement": "Strengthened answer usefulness, career/environment fit, self-check utility, and intent boundaries while preserving the original importable schema.",
+        "serp_intent_guard": {
+          "rank_for": "INFP-T 人格特点",
+          "do_not_rank_for": [
+            "INFP-A 和 INFP-T 区别",
+            "INFP-A vs INFP-T",
+            "INFP-A 人格特点",
+            "INFP 人格",
+            "16 型人格测试"
+          ],
+          "above_fold_answer_required": true
+        },
+        "conversion_design": {
+          "primary_cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+          "primary_cta_label": "进行 16 型人格测试",
+          "cta_rule": "Use only public canonical routes; no lookup, account, payment, history, or personalized-report paths."
+        },
+        "duplicate_defense": {
+          "variant_vs_comparison_boundary": "Variant pages answer standalone meaning/profile intent; comparison pages answer difference/decision intent.",
+          "page_specific_examples_required": true,
+          "faq_reuse_allowed": false
+        },
+        "related_test_link_patch": {
+          "version": "pilot-v2.1",
+          "scope": "Added verified locale-specific Big Five and Holland/RIASEC related_test links only; no SEO, body, FAQ, query, or canonical changes.",
+          "source": "related-test-route-scope-decision-2026-06-18",
+          "routes_added": [
+            "/zh/tests/big-five-personality-test-ocean-model",
+            "/zh/tests/holland-career-interest-test-riasec"
+          ]
+        }
+      },
+      "above_the_fold_module": {
+        "answer_card_title": "INFP-T 一分钟速读",
+        "answer_card_points": [
+          "核心模式：重价值、重意义、重真实感和内在一致性。",
+          "T 型身份：更容易受反馈、冲突和不确定关系影响。",
+          "优势场景：写作、咨询、教育、公益、设计、内容和需要共情的工作。",
+          "主要盲点：容易把一时的否定感当成整体自我否定。"
+        ],
+        "best_next_step": "先看压力反应和关系沟通部分；如果不确定类型，再做公开的 16 型人格测试。"
+      },
+      "status": "draft_for_codex_qa",
+      "serp_ctr_package_v2": {
+        "seo_title": "INFP-T 人格特点：敏感、理想、自我审视与职业 | FermatMind",
+        "seo_description": "了解 INFP-T 调停者的敏感、理想感、压力反应、关系沟通、职业环境偏好、优势盲点与自我校准。",
+        "breadcrumb_title": "INFP-T 调停者",
+        "h1": "INFP-T 人格特点",
+        "quick_answer_summary": "INFP-T 是理想感强、情绪感受细腻、重视意义和真实感的调停者风格；T 型身份让他们更容易自我审视和受压力触动。",
+        "ctr_angle": "主查询直答 + 非官方边界 + 工作/压力场景",
+        "avoid_in_snippet": [
+          "官方测试暗示",
+          "32型诱导",
+          "稀有度诱导",
+          "职业结果确定化"
+        ]
+      }
+    },
+    {
+      "url": "/en/personality/intj-a",
+      "locale": "en",
+      "page_type": "variant",
+      "primary_query": "intj-a meaning",
+      "secondary_queries": [
+        "intj-a personality",
+        "intj-a traits",
+        "assertive architect personality",
+        "intj-a careers",
+        "intj-a relationships"
+      ],
+      "excluded_queries": [
+        "intj-a vs intj-t",
+        "intj-a vs intj-t difference",
+        "intj-t meaning",
+        "intj personality type",
+        "mbti test"
+      ],
+      "target_intent": "Standalone meaning/profile intent for INTJ-A, including traits, strengths, work style, relationships, and practical interpretation.",
+      "target_test_route": "/en/tests/mbti-personality-test-16-personality-types",
+      "canonical_target": "/en/personality/intj-a",
+      "seo": {
+        "seo_title": "INTJ-A Meaning: Assertive Architect Traits and Work Style | FermatMind",
+        "seo_description": "Understand INTJ-A meaning, Assertive Architect traits, decision style, work environments, blind spots, relationships and self-check cues.",
+        "breadcrumb_title": "INTJ-A Architect",
+        "h1": "INTJ-A Meaning",
+        "quick_answer_summary": "INTJ-A describes an Architect pattern with steadier self-trust, strategic independence and a tendency to move from analysis into action once the plan is strong enough."
+      },
+      "content": {
+        "quick_answer": "INTJ-A meaning: an INTJ-A is an Architect-style personality pattern with an Assertive identity layer. In practice, that often looks like strategic independence, confidence in long-range decisions, low tolerance for vague reasoning, and a preference for systems that work without constant emotional negotiation. INTJ-A does not mean flawless, cold, or automatically successful; it means the INTJ pattern is often expressed with steadier self-trust.",
+        "meaning": {
+          "h2": "What does INTJ-A mean?",
+          "body": "INTJ-A combines the INTJ Architect pattern with an Assertive identity style. The Architect part points to strategic thinking, independence, systems reasoning, and future-oriented planning. The Assertive layer describes how the person often relates to pressure and self-evaluation: they may trust their judgment more readily, recover from criticism faster, and prefer decisive ownership over constant reassurance. This page targets standalone meaning, not comparison intent: it should answer what INTJ-A looks like in repeated choices, work rhythm and relationship repair."
+        },
+        "a_t_difference": {
+          "h2": "How the Assertive layer shows up",
+          "body": "For INTJ-A, the Assertive layer often shows up as calm commitment after the logic is clear. They may not need much external validation once they have tested a plan internally. This helps in ambiguous work, leadership, technical architecture, and long-range strategy. The risk is that confidence can become over-filtering: if the INTJ-A dismisses emotional or practical feedback too early, the strategy may be strong but poorly adopted."
+        },
+        "core_traits": {
+          "h2": "Core INTJ-A traits",
+          "items": [
+            "Strategic autonomy: prefers owning the model, roadmap, or system rather than waiting for group consensus.",
+            "Decision confidence: can commit once the evidence is sufficient, even when not everyone is comfortable yet.",
+            "Low tolerance for vague logic: pushes for definitions, mechanisms, and measurable consequences.",
+            "Long-range focus: often thinks beyond the immediate task toward second-order effects.",
+            "Composed under pressure: may appear calm or detached when others expect visible stress.",
+            "Selective collaboration: values capable partners but dislikes performative meetings."
+          ]
+        },
+        "strengths_blind_spots": {
+          "h2": "Strengths and blind spots",
+          "strengths": [
+            "Can bring structure to ambiguous problems without needing constant approval.",
+            "Often good at designing systems, strategies, roadmaps, or decision frameworks.",
+            "Can recover quickly from criticism when the underlying plan still makes sense.",
+            "Usually values competence and directness over politics.",
+            "May protect a team from panic by keeping attention on the real constraint."
+          ],
+          "blind_spots": [
+            "Can sound dismissive when other people are still processing uncertainty.",
+            "May underweight emotional buy-in, timing, and communication sequencing.",
+            "Can confuse calm confidence with complete information.",
+            "May resist revisiting a decision after mentally closing the model.",
+            "Can become impatient with people who need more context before acting."
+          ]
+        },
+        "careers_work_style": {
+          "h2": "Career and work style",
+          "body": "INTJ-A is often suited to environments where independent judgment, strategic planning, and clear ownership matter. This does not determine a career outcome, but it does suggest useful conditions: room to think, authority to improve systems, and colleagues who respect precise reasoning. A practical career lens is autonomy plus consequence: INTJ-A often does best where they can own a system, make reasoned tradeoffs and see whether the strategy actually works.",
+          "best_fit_environments": [
+            "Strategy, product, engineering, research, operations, or analytics teams that reward clear models.",
+            "Roles where decisions must be made with incomplete but sufficient information.",
+            "Autonomous ownership of a system, roadmap, architecture, or long-term plan.",
+            "Cultures that value direct feedback, competence, and measurable improvement.",
+            "Projects with a high need for prioritization and trade-off reasoning."
+          ],
+          "watchouts": [
+            "Do not assume the correct model will sell itself; adoption needs communication.",
+            "Build feedback loops before the plan becomes expensive to change.",
+            "Use plain language when explaining strategy to non-specialists.",
+            "Check whether your confidence comes from evidence or from impatience."
+          ]
+        },
+        "relationships_communication": {
+          "h2": "Relationships and communication",
+          "body": "In relationships, INTJ-A often shows care through reliability, planning, problem-solving, and protecting the future. They may not naturally perform emotion in a dramatic way, but they can be deeply loyal when the relationship makes sense and mutual respect is present. The relational opportunity is to translate certainty into context. INTJ-A may know why a decision makes sense, but others often need to hear the reasoning and the care behind it.",
+          "communication_tips": [
+            "Say the caring part out loud before moving into the solution.",
+            "When someone disagrees, ask what information they see that you might not.",
+            "Explain your silence as processing, not withdrawal.",
+            "Use softer timing for hard truths; precision without timing can feel like attack.",
+            "Let trusted people know what kind of feedback actually changes your mind."
+          ]
+        },
+        "common_misreads": {
+          "h2": "Common misreads",
+          "items": [
+            "INTJ-A is not emotionless; emotional expression may simply be selective and controlled.",
+            "INTJ-A confidence is not proof of correctness; it is a style of relating to uncertainty.",
+            "INTJ-A independence is not always arrogance; it can reflect a need for coherent ownership.",
+            "INTJ-A directness is not automatically hostility; tone still matters.",
+            "INTJ-A does not determine career success; environment, skill, effort, and timing still matter."
+          ]
+        },
+        "similar_types": {
+          "h2": "Similar types to compare",
+          "items": [
+            "INTJ-T: similar strategic core, often more self-critical and revision-oriented under pressure.",
+            "ENTJ-A: similarly decisive, but more outwardly commanding and organizationally forceful.",
+            "INTP-A: similarly independent, but more exploratory and concept-driven than goal-structured.",
+            "ISTJ-A: similarly structured, but more tradition-, procedure-, and detail-oriented.",
+            "INFJ-A: similarly future-oriented, but more people-pattern and meaning focused."
+          ]
+        }
+      },
+      "faq": [
+        {
+          "question": "What does INTJ-A mean?",
+          "answer": "INTJ-A means an INTJ Architect pattern with an Assertive identity style. It often shows up as strategic independence, steadier confidence, and a calmer response to pressure."
+        },
+        {
+          "question": "What are common INTJ-A traits?",
+          "answer": "Common INTJ-A traits include long-range thinking, systems reasoning, decision confidence, autonomy, direct communication, and high standards for competence."
+        },
+        {
+          "question": "Is INTJ-A always confident?",
+          "answer": "No. INTJ-A describes a tendency toward steadier self-trust, not permanent confidence. Context, expertise, stress, and personal history still matter."
+        },
+        {
+          "question": "What careers fit INTJ-A?",
+          "answer": "INTJ-A may fit environments that reward strategy, independent judgment, systems thinking, research, analysis, product ownership, or technical planning. No personality page can determine a career outcome."
+        },
+        {
+          "question": "How does INTJ-A communicate in relationships?",
+          "answer": "INTJ-A often communicates through reliability, planning, and problem-solving. They may need to add explicit emotional acknowledgment so their care is easier to recognize."
+        },
+        {
+          "question": "What does INTJ-A mean in everyday life?",
+          "answer": "It usually means an INTJ pattern with more visible self-trust: the person may plan independently, make firm decisions and recover from criticism without reopening every assumption."
+        },
+        {
+          "question": "What should INTJ-A watch for at work?",
+          "answer": "INTJ-A should watch for moving too fast past human context. The strategy may be sound, but adoption often depends on timing, explanation and trust."
+        }
+      ],
+      "internal_links": [
+        {
+          "href": "/en/personality",
+          "anchor_text": "Explore all 16 personality types",
+          "role": "hub",
+          "safe_public_route": true
+        },
+        {
+          "href": "/en/personality/intj-t",
+          "anchor_text": "Read the INTJ-T profile",
+          "role": "sibling_variant",
+          "safe_public_route": true
+        },
+        {
+          "href": "/en/personality/intj-a-vs-intj-t",
+          "anchor_text": "Compare INTJ-A and INTJ-T",
+          "role": "comparison",
+          "safe_public_route": true
+        },
+        {
+          "href": "/en/tests/mbti-personality-test-16-personality-types",
+          "anchor_text": "Take the 16 personality test",
+          "role": "test",
+          "safe_public_route": true
+        },
+        {
+          "href": "/en/tests/big-five-personality-test-ocean-model",
+          "anchor_text": "Compare your type with the Big Five model",
+          "role": "related_test",
+          "safe_public_route": true
+        },
+        {
+          "href": "/en/tests/holland-career-interest-test-riasec",
+          "anchor_text": "Explore career interests with the Holland/RIASEC test",
+          "role": "related_test",
+          "safe_public_route": true
+        },
+        {
+          "href": "/en/personality/intj-a#method-boundary",
+          "anchor_text": "Method and limits",
+          "role": "method",
+          "safe_public_route": true
+        }
+      ],
+      "method_boundary": "Use this page as a structured self-reflection guide, not as a medical, hiring, admissions, financial, or relationship decision tool. The safest use is to compare the patterns here with your own repeated behavior, then confirm your broader type through a public 16 personality test.",
+      "trademark_boundary": "FermatMind publishes independent 16-type educational content. A/T is treated as an identity-style layer for interpretation; it is not part of the four-letter core type code.",
+      "information_gain": {
+        "why_this_page_is_not_template_content": "This page centers on INTJ-A decision ownership, confidence calibration, system adoption, and emotional legibility rather than generic Architect traits.",
+        "unique_user_value": "Readers get concrete checks for when confidence helps execution versus when it blocks feedback.",
+        "fermatmind_specific_path": "The page sends users toward the public test route and the INTJ sibling/comparison cluster without using result lookup or private routes."
+      },
+      "claim_risk_notes": [
+        "No superiority claim between A and T variants.",
+        "No deterministic hiring, career, relationship, medical, or admissions claim.",
+        "A/T is framed as an identity-style interpretation layer, not as the core four-letter type itself."
+      ],
+      "qa_flags_for_codex": [
+        "Ensure SEO title does not get rewritten into comparison intent.",
+        "Do not publish or search-release until the audited lookup-route classification is resolved."
+      ],
+      "route_safety": {
+        "target_test_route_verified_from_intent_map": true,
+        "forbidden_route_patterns_absent_from_internal_links": true,
+        "lookup_route_classification_required_before_publish_or_search_release": true,
+        "related_big_five_riasec_routes": {
+          "status": "verified_and_added",
+          "source": "related-test-route-scope-decision-2026-06-18",
+          "routes": [
+            "/en/tests/big-five-personality-test-ocean-model",
+            "/en/tests/holland-career-interest-test-riasec"
+          ]
+        },
+        "v2_1_related_test_links_added": true
+      },
+      "v2_optimization": {
+        "primary_improvement": "Strengthened answer usefulness, career/environment fit, self-check utility, and intent boundaries while preserving the original importable schema.",
+        "serp_intent_guard": {
+          "rank_for": "intj-a meaning",
+          "do_not_rank_for": [
+            "intj-a vs intj-t",
+            "intj-a vs intj-t difference",
+            "intj-t meaning",
+            "intj personality type",
+            "mbti test"
+          ],
+          "above_fold_answer_required": true
+        },
+        "conversion_design": {
+          "primary_cta_href": "/en/tests/mbti-personality-test-16-personality-types",
+          "primary_cta_label": "Take the 16 personality test",
+          "cta_rule": "Use only public canonical routes; no lookup, account, payment, history, or personalized-report paths."
+        },
+        "duplicate_defense": {
+          "variant_vs_comparison_boundary": "Variant pages answer standalone meaning/profile intent; comparison pages answer difference/decision intent.",
+          "page_specific_examples_required": true,
+          "faq_reuse_allowed": false
+        },
+        "related_test_link_patch": {
+          "version": "pilot-v2.1",
+          "scope": "Added verified locale-specific Big Five and Holland/RIASEC related_test links only; no SEO, body, FAQ, query, or canonical changes.",
+          "source": "related-test-route-scope-decision-2026-06-18",
+          "routes_added": [
+            "/en/tests/big-five-personality-test-ocean-model",
+            "/en/tests/holland-career-interest-test-riasec"
+          ]
+        }
+      },
+      "above_the_fold_module": {
+        "answer_card_title": "INTJ-A in one minute",
+        "answer_card_points": [
+          "Core pattern: strategic, independent, long-range, systems-focused.",
+          "A-style layer: steadier confidence and faster recovery after criticism.",
+          "Best-fit environments: autonomous strategy, technical leadership, systems design and high-trust ownership.",
+          "Growth edge: do not dismiss useful doubt or emotional context too quickly."
+        ],
+        "best_next_step": "Read this page for standalone INTJ-A meaning; use the comparison page only if you are deciding between INTJ-A and INTJ-T."
+      },
+      "status": "draft_for_codex_qa",
+      "serp_ctr_package_v2": {
+        "seo_title": "INTJ-A Meaning: Assertive Architect Traits and Work Style | FermatMind",
+        "seo_description": "Understand INTJ-A meaning, Assertive Architect traits, decision style, work environments, blind spots, relationships and self-check cues.",
+        "breadcrumb_title": "INTJ-A Architect",
+        "h1": "INTJ-A Meaning",
+        "quick_answer_summary": "INTJ-A describes an Architect pattern with steadier self-trust, strategic independence and a tendency to move from analysis into action once the plan is strong enough.",
+        "ctr_angle": "Query-direct answer + non-official boundary + work/stress scenario framing",
+        "avoid_in_snippet": [
+          "provider-claim implication",
+          "32-type framing",
+          "rarity bait",
+          "career outcome certainty"
+        ]
+      }
+    },
+    {
+      "url": "/en/personality/intj-t",
+      "locale": "en",
+      "page_type": "variant",
+      "primary_query": "intj-t meaning",
+      "secondary_queries": [
+        "intj-t personality",
+        "intj-t traits",
+        "turbulent architect personality",
+        "intj-t careers",
+        "intj-t relationships"
+      ],
+      "excluded_queries": [
+        "intj-a vs intj-t",
+        "intj-a vs intj-t difference",
+        "intj-a meaning",
+        "intj personality type",
+        "mbti test"
+      ],
+      "target_intent": "Standalone meaning/profile intent for INTJ-T, including traits, pressure response, work style, relationships, and practical interpretation.",
+      "target_test_route": "/en/tests/mbti-personality-test-16-personality-types",
+      "canonical_target": "/en/personality/intj-t",
+      "seo": {
+        "seo_title": "INTJ-T Meaning: Turbulent Architect Traits and Stress Style | FermatMind",
+        "seo_description": "Understand INTJ-T meaning, Turbulent Architect traits, stress response, self-review, work style, relationships and self-check cues.",
+        "breadcrumb_title": "INTJ-T Architect",
+        "h1": "INTJ-T Meaning",
+        "quick_answer_summary": "INTJ-T describes an Architect pattern with stronger self-review, higher sensitivity to gaps and a tendency to refine plans under pressure."
+      },
+      "content": {
+        "quick_answer": "INTJ-T meaning: an INTJ-T is an Architect-style personality pattern with a Turbulent identity layer. In practice, that often looks like strategic thinking combined with stronger self-review, higher standards, sensitivity to pressure, and a habit of revisiting assumptions. INTJ-T does not mean weak or indecisive; it often means the person uses doubt as a tool for refinement.",
+        "meaning": {
+          "h2": "What does INTJ-T mean?",
+          "body": "INTJ-T combines the INTJ Architect pattern with a Turbulent identity style. The Architect part points to systems thinking, independence, long-range planning, and strategic analysis. The Turbulent layer describes how the person often responds to pressure: they may notice flaws quickly, evaluate themselves harshly, and use discomfort as a reason to improve the model. This page separates INTJ-T meaning from comparison intent: the focus is the lived pattern of self-review, not whether INTJ-T is better or worse than INTJ-A."
+        },
+        "a_t_difference": {
+          "h2": "How the Turbulent layer shows up",
+          "body": "For INTJ-T, the Turbulent layer often shows up as intense quality control. They may seem calm externally while privately reviewing every risk, inconsistency, or possible failure point. This can produce excellent strategy, research, design, or planning work. The risk is overcorrection: if every uncertainty feels like evidence that the plan is insufficient, momentum suffers."
+        },
+        "core_traits": {
+          "h2": "Core INTJ-T traits",
+          "items": [
+            "Strategic self-review: repeatedly tests whether a plan is strong enough.",
+            "High standards: often notices gaps between current output and the ideal version.",
+            "Pressure sensitivity: may feel criticism deeply even when they respond calmly.",
+            "Risk scanning: looks for weak assumptions, hidden constraints, and future failure points.",
+            "Private intensity: may process stress internally rather than display it openly.",
+            "Improvement drive: uses dissatisfaction as fuel for refinement and mastery."
+          ]
+        },
+        "strengths_blind_spots": {
+          "h2": "Strengths and blind spots",
+          "strengths": [
+            "Can detect flaws in a system before they become visible to others.",
+            "Often produces careful, well-tested, strategically coherent work.",
+            "Can turn criticism into useful refinement rather than shallow defensiveness.",
+            "May be unusually strong at scenario planning and risk review.",
+            "Often brings depth and seriousness to long-term goals."
+          ],
+          "blind_spots": [
+            "Can interpret normal uncertainty as proof that the plan is not ready.",
+            "May keep revising after the value of revision has dropped.",
+            "Can become emotionally invested in being correct or fully prepared.",
+            "May under-share progress because the work does not yet meet internal standards.",
+            "Can mistake self-criticism for objectivity."
+          ]
+        },
+        "careers_work_style": {
+          "h2": "Career and work style",
+          "body": "INTJ-T often fits environments where analysis, quality control, revision, and long-term precision matter. The best environment gives them room to improve the system but also clear deadlines that prevent infinite refinement. A practical career lens is complexity plus review space: INTJ-T often contributes strongly where risks must be anticipated, models must be refined and high standards actually matter.",
+          "best_fit_environments": [
+            "Research, engineering, strategy, analytics, security, product, writing, or planning roles with real complexity.",
+            "Teams that value rigorous critique without turning every review into politics.",
+            "Workflows where testing, peer review, scenario planning, and documentation matter.",
+            "Projects that require long-range risk analysis and second-order thinking.",
+            "Managers who define success criteria clearly but allow independent problem solving."
+          ],
+          "watchouts": [
+            "Set a stopping rule before starting deep analysis.",
+            "Distinguish between a fatal flaw and a normal imperfection.",
+            "Share draft thinking earlier with trusted reviewers.",
+            "Use deadlines as design constraints, not as threats to quality."
+          ]
+        },
+        "relationships_communication": {
+          "h2": "Relationships and communication",
+          "body": "In relationships, INTJ-T may care intensely but communicate through analysis, problem prevention, and careful planning. They can be loyal and protective, yet they may privately over-review conflict, tone, or perceived disappointment. The relational opportunity is to name uncertainty before it becomes distance. INTJ-T may retreat to refine a thought, but others may read that silence as withdrawal.",
+          "communication_tips": [
+            "Ask clarifying questions before assuming a negative meaning.",
+            "Tell trusted people when you need reassurance instead of presenting it as a logic problem.",
+            "Do not wait until the perfect wording exists before addressing an issue.",
+            "Separate a partner's feeling from a verdict on your competence.",
+            "Offer warmth before critique when the other person is emotionally exposed."
+          ]
+        },
+        "common_misreads": {
+          "h2": "Common misreads",
+          "items": [
+            "INTJ-T is not weak; sensitivity to risk can become strategic strength.",
+            "INTJ-T is not less intelligent than INTJ-A; the difference is not ability.",
+            "INTJ-T self-critique is not always objectivity; sometimes it is pressure talking.",
+            "INTJ-T privacy is not necessarily distrust; it may be internal processing.",
+            "INTJ-T perfectionism can protect quality, but it needs boundaries."
+          ]
+        },
+        "similar_types": {
+          "h2": "Similar types to compare",
+          "items": [
+            "INTJ-A: similar Architect core, often steadier and quicker to close decisions.",
+            "INTP-T: similarly self-questioning, but more exploratory and theory-oriented.",
+            "INFJ-T: similarly intense, but more focused on people patterns and meaning.",
+            "ISTJ-T: similarly careful, but more procedure- and duty-oriented.",
+            "ENTJ-T: similarly strategic, but more outwardly forceful and organizational."
+          ]
+        }
+      },
+      "faq": [
+        {
+          "question": "What does INTJ-T mean?",
+          "answer": "INTJ-T means an INTJ Architect pattern with a Turbulent identity style. It often shows up as strategic thinking plus stronger self-review, pressure sensitivity, and refinement."
+        },
+        {
+          "question": "Is INTJ-T insecure?",
+          "answer": "Not necessarily. INTJ-T may question plans and performance more intensely, but that can support better preparation, risk detection, and long-term improvement."
+        },
+        {
+          "question": "What are common INTJ-T strengths?",
+          "answer": "Common strengths include risk scanning, deep analysis, quality control, long-range planning, and the ability to refine weak assumptions before they become expensive."
+        },
+        {
+          "question": "What careers fit INTJ-T?",
+          "answer": "INTJ-T may fit analytical, technical, strategic, research, writing, product, or planning roles where careful review and independent thinking matter. No personality type determines career fit."
+        },
+        {
+          "question": "How can INTJ-T reduce overthinking?",
+          "answer": "Useful tactics include setting stopping rules, sharing drafts earlier, separating normal imperfection from fatal flaws, and using deadlines as decision constraints."
+        },
+        {
+          "question": "What does INTJ-T mean in everyday life?",
+          "answer": "It usually means an INTJ pattern with stronger self-review. The person may notice weak points quickly, revisit decisions often and use pressure as a signal to refine the plan."
+        },
+        {
+          "question": "Is INTJ-T a weakness?",
+          "answer": "No. The T-style pattern can create overthinking, but it can also support excellent risk detection, preparation and quality control when managed well."
+        }
+      ],
+      "internal_links": [
+        {
+          "href": "/en/personality",
+          "anchor_text": "Explore all 16 personality types",
+          "role": "hub",
+          "safe_public_route": true
+        },
+        {
+          "href": "/en/personality/intj-a",
+          "anchor_text": "Read the INTJ-A profile",
+          "role": "sibling_variant",
+          "safe_public_route": true
+        },
+        {
+          "href": "/en/personality/intj-a-vs-intj-t",
+          "anchor_text": "Compare INTJ-A and INTJ-T",
+          "role": "comparison",
+          "safe_public_route": true
+        },
+        {
+          "href": "/en/tests/mbti-personality-test-16-personality-types",
+          "anchor_text": "Take the 16 personality test",
+          "role": "test",
+          "safe_public_route": true
+        },
+        {
+          "href": "/en/tests/big-five-personality-test-ocean-model",
+          "anchor_text": "Compare your type with the Big Five model",
+          "role": "related_test",
+          "safe_public_route": true
+        },
+        {
+          "href": "/en/tests/holland-career-interest-test-riasec",
+          "anchor_text": "Explore career interests with the Holland/RIASEC test",
+          "role": "related_test",
+          "safe_public_route": true
+        },
+        {
+          "href": "/en/personality/intj-t#method-boundary",
+          "anchor_text": "Method and limits",
+          "role": "method",
+          "safe_public_route": true
+        }
+      ],
+      "method_boundary": "Use this page as a structured self-reflection guide, not as a medical, hiring, admissions, financial, or relationship decision tool. The safest use is to compare the patterns here with your own repeated behavior, then confirm your broader type through a public 16 personality test.",
+      "trademark_boundary": "FermatMind publishes independent 16-type educational content. A/T is treated as an identity-style layer for interpretation; it is not part of the four-letter core type code.",
+      "information_gain": {
+        "why_this_page_is_not_template_content": "This page treats INTJ-T as a risk-scanning, self-reviewing Architect pattern with specific work and relationship consequences, not as a generic less-confident counterpart.",
+        "unique_user_value": "Readers get concrete ways to separate useful critique from momentum-killing over-review.",
+        "fermatmind_specific_path": "The page connects to the public test route and INTJ sibling cluster while keeping private and result routes out."
+      },
+      "claim_risk_notes": [
+        "No superiority claim between A and T variants.",
+        "No deterministic hiring, career, relationship, medical, or admissions claim.",
+        "A/T is framed as an identity-style interpretation layer, not as the core four-letter type itself."
+      ],
+      "qa_flags_for_codex": [
+        "Ensure SEO title remains standalone meaning intent.",
+        "Do not publish or search-release until the audited lookup-route classification is resolved."
+      ],
+      "route_safety": {
+        "target_test_route_verified_from_intent_map": true,
+        "forbidden_route_patterns_absent_from_internal_links": true,
+        "lookup_route_classification_required_before_publish_or_search_release": true,
+        "related_big_five_riasec_routes": {
+          "status": "verified_and_added",
+          "source": "related-test-route-scope-decision-2026-06-18",
+          "routes": [
+            "/en/tests/big-five-personality-test-ocean-model",
+            "/en/tests/holland-career-interest-test-riasec"
+          ]
+        },
+        "v2_1_related_test_links_added": true
+      },
+      "v2_optimization": {
+        "primary_improvement": "Strengthened answer usefulness, career/environment fit, self-check utility, and intent boundaries while preserving the original importable schema.",
+        "serp_intent_guard": {
+          "rank_for": "intj-t meaning",
+          "do_not_rank_for": [
+            "intj-a vs intj-t",
+            "intj-a vs intj-t difference",
+            "intj-a meaning",
+            "intj personality type",
+            "mbti test"
+          ],
+          "above_fold_answer_required": true
+        },
+        "conversion_design": {
+          "primary_cta_href": "/en/tests/mbti-personality-test-16-personality-types",
+          "primary_cta_label": "Take the 16 personality test",
+          "cta_rule": "Use only public canonical routes; no lookup, account, payment, history, or personalized-report paths."
+        },
+        "duplicate_defense": {
+          "variant_vs_comparison_boundary": "Variant pages answer standalone meaning/profile intent; comparison pages answer difference/decision intent.",
+          "page_specific_examples_required": true,
+          "faq_reuse_allowed": false
+        },
+        "related_test_link_patch": {
+          "version": "pilot-v2.1",
+          "scope": "Added verified locale-specific Big Five and Holland/RIASEC related_test links only; no SEO, body, FAQ, query, or canonical changes.",
+          "source": "related-test-route-scope-decision-2026-06-18",
+          "routes_added": [
+            "/en/tests/big-five-personality-test-ocean-model",
+            "/en/tests/holland-career-interest-test-riasec"
+          ]
+        }
+      },
+      "above_the_fold_module": {
+        "answer_card_title": "INTJ-T in one minute",
+        "answer_card_points": [
+          "Core pattern: strategic, independent, analytical and future-focused.",
+          "T-style layer: more self-review, stronger pressure awareness and deeper revision cycles.",
+          "Best-fit environments: research, architecture, risk analysis, complex planning and high-quality review work.",
+          "Growth edge: do not treat every doubt as proof that the plan is weak."
+        ],
+        "best_next_step": "Read this page for standalone INTJ-T meaning; use the comparison page only if you are deciding between INTJ-A and INTJ-T."
+      },
+      "status": "draft_for_codex_qa",
+      "serp_ctr_package_v2": {
+        "seo_title": "INTJ-T Meaning: Turbulent Architect Traits and Stress Style | FermatMind",
+        "seo_description": "Understand INTJ-T meaning, Turbulent Architect traits, stress response, self-review, work style, relationships and self-check cues.",
+        "breadcrumb_title": "INTJ-T Architect",
+        "h1": "INTJ-T Meaning",
+        "quick_answer_summary": "INTJ-T describes an Architect pattern with stronger self-review, higher sensitivity to gaps and a tendency to refine plans under pressure.",
+        "ctr_angle": "Query-direct answer + non-official boundary + work/stress scenario framing",
+        "avoid_in_snippet": [
+          "provider-claim implication",
+          "32-type framing",
+          "rarity bait",
+          "career outcome certainty"
+        ]
+      }
+    },
+    {
+      "url": "/zh/personality/intj-a",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "primary_query": "INTJ-A 人格特点",
+      "secondary_queries": [
+        "INTJ-A 是什么人格",
+        "INTJ-A 性格",
+        "INTJ-A 职业",
+        "INTJ-A 爱情",
+        "INTJ-A 建筑师"
+      ],
+      "excluded_queries": [
+        "INTJ-A 和 INTJ-T 区别",
+        "INTJ-A vs INTJ-T",
+        "INTJ-T 人格特点",
+        "INTJ 人格",
+        "16 型人格测试"
+      ],
+      "target_intent": "Chinese standalone meaning/profile intent for INTJ-A, including traits, decision style, work style, relationships, and practical self-understanding.",
+      "target_test_route": "/zh/tests/mbti-personality-test-16-personality-types",
+      "canonical_target": "/zh/personality/intj-a",
+      "seo": {
+        "seo_title": "INTJ-A 人格特点：独立判断、战略规划与关系沟通 | FermatMind",
+        "seo_description": "了解 INTJ-A 建筑师的独立判断、战略规划、自信型决策、工作偏好、关系沟通、优势盲点与自我校准。",
+        "breadcrumb_title": "INTJ-A 建筑师",
+        "h1": "INTJ-A 人格特点",
+        "quick_answer_summary": "INTJ-A 是偏战略、独立、系统化的建筑师风格；A 型身份让他们更容易带着稳定自信推进判断和计划。"
+      },
+      "content": {
+        "quick_answer": "INTJ-A 人格特点可以概括为：独立判断、长期规划、系统思维、重视逻辑一致性，并且在压力下通常保持较稳定的自我信任。作为建筑师类型，INTJ-A 往往喜欢先建立模型，再推进执行。A 型身份让他们更容易相信自己的判断，但也需要避免把自信变成过早关闭反馈。",
+        "meaning": {
+          "h2": "INTJ-A 是什么人格？",
+          "body": "INTJ-A 是建筑师类型与 A 型身份风格的组合。建筑师类型通常关注系统、策略、长期目标和底层逻辑；A 型身份则让这种模式更偏向稳定、自主和确定。INTJ-A 常见的问题不是“有没有想法”，而是“这个系统是否足够清楚、目标是否值得、执行路径是否合理”。 这页的目标不是抢“INTJ-A 和 INTJ-T 区别”的搜索意图，而是把 INTJ-A 在判断、工作和关系中的独立模式讲清楚。"
+        },
+        "a_t_difference": {
+          "h2": "A 型身份如何影响 INTJ-A",
+          "body": "在 INTJ-A 身上，A 型身份通常表现为较稳定的自我评价和更快的决策闭合。一旦他们认为逻辑链条足够完整，就会倾向于推进方案，而不是反复寻找外部确认。这种特点适合战略规划、产品架构、技术方案、研究方向判断和复杂项目推进。但如果沟通不足，别人可能只看到结论，看不到推理过程。"
+        },
+        "core_traits": {
+          "h2": "INTJ-A 的核心特点",
+          "items": [
+            "独立判断：习惯自己搭建判断框架，不轻易跟随群体情绪。",
+            "战略规划：关注长期目标、结构设计和关键路径。",
+            "逻辑优先：不喜欢含糊表达，倾向追问定义、机制和证据。",
+            "自信执行：在信息足够时，能较快做出取舍并推进。",
+            "情绪克制：压力下可能显得冷静，但不代表没有感受。",
+            "高标准：对自己和合作对象都倾向于要求能力与效率。"
+          ]
+        },
+        "strengths_blind_spots": {
+          "h2": "优势与盲点",
+          "strengths": [
+            "能在复杂问题中抓住结构和核心约束。",
+            "适合建立长期路线图、策略模型和系统方案。",
+            "面对混乱时不容易被短期情绪牵着走。",
+            "通常能独立推进高认知负荷任务。",
+            "能用清晰标准过滤低质量信息。"
+          ],
+          "blind_spots": [
+            "可能低估他人接受方案所需的情绪和背景铺垫。",
+            "容易把解释过一次的事视为不必再解释。",
+            "在已经形成判断后，可能不愿重新打开模型。",
+            "可能把效率问题看得比关系修复更重要。",
+            "有时会把不同节奏误判为能力不足。"
+          ]
+        },
+        "careers_work_style": {
+          "h2": "职业倾向与工作风格",
+          "body": "INTJ-A 更适合需要长期思考、结构设计、独立判断和策略推进的环境。具体职业不是由类型决定的，关键是工作是否允许他们用模型和系统解决问题，而不是长期陷入无效沟通和临时救火。 职业探索上，INTJ-A 的关键不是某个固定岗位，而是是否有足够的战略空间、决策权、复杂问题和结果反馈。",
+          "best_fit_environments": [
+            "战略、产品、技术、研究、咨询、运营设计或数据分析相关工作。",
+            "目标明确、授权清楚、允许独立负责复杂模块的团队。",
+            "重视长期规划和系统改进，而不是只追逐短期热闹的组织。",
+            "能接受直接反馈和理性讨论的合作环境。",
+            "需要把模糊问题转成结构化方案的岗位。"
+          ],
+          "watchouts": [
+            "重要方案不要只给结论，要展示推理路径。",
+            "在推动改变前，先判断对方需要事实、情绪还是利益说明。",
+            "定期主动邀请反对意见，避免模型过早封闭。",
+            "不要把所有协商都视为低效率，有些协商是在降低执行阻力。"
+          ]
+        },
+        "relationships_communication": {
+          "h2": "关系与沟通方式",
+          "body": "INTJ-A 在关系中常通过规划、解决问题、长期负责和稳定支持来表达在意。他们可能不擅长高频情绪表达，但会认真对待自己认可的人。关系中的挑战是：对方需要的可能不是马上被分析，而是先被看见。 在关系中，INTJ-A 可以把“我已经想清楚了”拆成“我是怎样想清楚的”。这会显著降低他人感到被排除的概率。",
+          "communication_tips": [
+            "在给建议前先表达理解，例如“我知道这件事让你很累”。",
+            "不要只把冲突当成逻辑问题，也要处理安全感和语气。",
+            "解释自己的沉默是思考，不是惩罚或冷漠。",
+            "重要关系中，主动说出欣赏和承诺，不要只靠行动暗示。",
+            "当对方需要情绪回应时，先慢一步再给解决方案。"
+          ]
+        },
+        "common_misreads": {
+          "h2": "常见误读",
+          "items": [
+            "INTJ-A 不是没有情绪，而是更倾向于控制表达和优先解决问题。",
+            "INTJ-A 的自信不代表永远正确，只代表他们更容易相信自己的判断。",
+            "INTJ-A 的独立不是一定不需要人，而是不喜欢无效依赖。",
+            "INTJ-A 的直接不等于不尊重，但表达方式仍然会影响关系。",
+            "INTJ-A 不只适合技术岗位，也可能适合任何需要战略和系统能力的领域。"
+          ]
+        },
+        "similar_types": {
+          "h2": "容易混淆的相近类型",
+          "items": [
+            "INTJ-T：同样是建筑师类型，但通常更容易自我审视和反复检查。",
+            "ENTJ-A：同样战略和自信，但更外向地推动组织和他人。",
+            "INTP-A：同样独立思考，但更偏理论探索而非目标推进。",
+            "ISTJ-A：同样重视结构，但更偏规则、经验和执行秩序。",
+            "INFJ-A：同样看重长期图景，但更关注人和意义的结构。"
+          ]
+        }
+      },
+      "faq": [
+        {
+          "question": "INTJ-A 人格特点是什么？",
+          "answer": "INTJ-A 通常独立、战略化、重视逻辑、擅长长期规划，并且在压力下更容易保持稳定的自我信任。"
+        },
+        {
+          "question": "INTJ-A 适合什么工作？",
+          "answer": "INTJ-A 通常更适合需要系统思维、独立判断、战略规划和复杂问题解决的环境。人格类型不能决定职业结果，但能帮助判断环境匹配。"
+        },
+        {
+          "question": "INTJ-A 在感情中冷淡吗？",
+          "answer": "不一定。INTJ-A 可能不常用夸张方式表达感情，但会通过负责、规划、解决问题和长期支持来表达在意。"
+        },
+        {
+          "question": "INTJ-A 最大盲点是什么？",
+          "answer": "常见盲点是过早相信自己的模型，低估沟通、情绪铺垫和反对意见的重要性。"
+        },
+        {
+          "question": "INTJ-A 是否固定不变？",
+          "answer": "不是。人格内容描述的是倾向，不是命运。经验、压力、职业环境和关系反馈都会影响一个人的表现方式。"
+        },
+        {
+          "question": "INTJ-A 在工作中最大的优势是什么？",
+          "answer": "通常是把复杂目标拆成长期策略、系统结构和执行优先级。他们不一定喜欢频繁社交，但很重视方案是否真正有效。"
+        },
+        {
+          "question": "INTJ-A 容易在人际中出现什么问题？",
+          "answer": "容易把清晰判断表达得过于直接，让他人感觉没有参与空间。更好的方式是说明判断依据，并给对方反馈入口。"
+        }
+      ],
+      "internal_links": [
+        {
+          "href": "/zh/personality",
+          "anchor_text": "查看全部 16 型人格",
+          "role": "hub",
+          "safe_public_route": true
+        },
+        {
+          "href": "/zh/personality/intj-t",
+          "anchor_text": "查看 INTJ-T 建筑师",
+          "role": "sibling_variant",
+          "safe_public_route": true
+        },
+        {
+          "href": "/zh/personality/intj-a-vs-intj-t",
+          "anchor_text": "查看 INTJ-A 与 INTJ-T 的对照说明",
+          "role": "comparison",
+          "safe_public_route": true
+        },
+        {
+          "href": "/zh/tests/mbti-personality-test-16-personality-types",
+          "anchor_text": "进行 16 型人格测试",
+          "role": "test",
+          "safe_public_route": true
+        },
+        {
+          "href": "/zh/tests/big-five-personality-test-ocean-model",
+          "anchor_text": "用大五人格测试交叉理解你的类型",
+          "role": "related_test",
+          "safe_public_route": true
+        },
+        {
+          "href": "/zh/tests/holland-career-interest-test-riasec",
+          "anchor_text": "用霍兰德职业兴趣测试探索职业方向",
+          "role": "related_test",
+          "safe_public_route": true
+        },
+        {
+          "href": "/zh/personality/intj-a#method-boundary",
+          "anchor_text": "方法与边界",
+          "role": "method",
+          "safe_public_route": true
+        }
+      ],
+      "method_boundary": "本页用于结构化自我理解，不应用作医疗、招聘、录取、财务或亲密关系决策依据。更稳妥的用法是：把这里的模式与自己的长期行为对照，再通过公开的 16 型人格测试校准。",
+      "trademark_boundary": "FermatMind 发布的是独立的 16 型人格教育内容。A/T 在这里作为身份风格解释层，不属于四字母核心类型本身。",
+      "information_gain": {
+        "why_this_page_is_not_template_content": "本页围绕 INTJ-A 的战略模型、决策闭合、沟通采纳和中文职场中的独立负责展开，不是泛化的建筑师介绍。",
+        "unique_user_value": "用户能判断自己的自信是在提升执行，还是在过早关闭反馈。",
+        "fermatmind_specific_path": "页面把 INTJ-A 单页、兄弟页、对照页和公开测试入口连接起来，同时避免私有结果路由。"
+      },
+      "claim_risk_notes": [
+        "不声称 A/T 任一变体更高级。",
+        "不做确定性招聘、职业、关系、医疗或录取判断。",
+        "A/T 只作为身份风格解释层，不作为四字母核心类型本身。"
+      ],
+      "qa_flags_for_codex": [
+        "确认中文页面发布后 H2 和 FAQ 均可见。",
+        "发布前必须完成审计中发现的结果查询类路由分类。"
+      ],
+      "route_safety": {
+        "target_test_route_verified_from_intent_map": true,
+        "forbidden_route_patterns_absent_from_internal_links": true,
+        "lookup_route_classification_required_before_publish_or_search_release": true,
+        "related_big_five_riasec_routes": {
+          "status": "verified_and_added",
+          "source": "related-test-route-scope-decision-2026-06-18",
+          "routes": [
+            "/zh/tests/big-five-personality-test-ocean-model",
+            "/zh/tests/holland-career-interest-test-riasec"
+          ]
+        },
+        "v2_1_related_test_links_added": true
+      },
+      "v2_optimization": {
+        "primary_improvement": "Strengthened answer usefulness, career/environment fit, self-check utility, and intent boundaries while preserving the original importable schema.",
+        "serp_intent_guard": {
+          "rank_for": "INTJ-A 人格特点",
+          "do_not_rank_for": [
+            "INTJ-A 和 INTJ-T 区别",
+            "INTJ-A vs INTJ-T",
+            "INTJ-T 人格特点",
+            "INTJ 人格",
+            "16 型人格测试"
+          ],
+          "above_fold_answer_required": true
+        },
+        "conversion_design": {
+          "primary_cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+          "primary_cta_label": "进行 16 型人格测试",
+          "cta_rule": "Use only public canonical routes; no lookup, account, payment, history, or personalized-report paths."
+        },
+        "duplicate_defense": {
+          "variant_vs_comparison_boundary": "Variant pages answer standalone meaning/profile intent; comparison pages answer difference/decision intent.",
+          "page_specific_examples_required": true,
+          "faq_reuse_allowed": false
+        },
+        "related_test_link_patch": {
+          "version": "pilot-v2.1",
+          "scope": "Added verified locale-specific Big Five and Holland/RIASEC related_test links only; no SEO, body, FAQ, query, or canonical changes.",
+          "source": "related-test-route-scope-decision-2026-06-18",
+          "routes_added": [
+            "/zh/tests/big-five-personality-test-ocean-model",
+            "/zh/tests/holland-career-interest-test-riasec"
+          ]
+        }
+      },
+      "above_the_fold_module": {
+        "answer_card_title": "INTJ-A 一分钟速读",
+        "answer_card_points": [
+          "核心模式：战略规划、独立判断、系统思维、长期目标。",
+          "A 型身份：更稳定的自我信任，更快从批评中恢复。",
+          "优势场景：战略、产品、技术架构、研究规划、复杂系统优化。",
+          "主要盲点：可能低估情绪背景、协作节奏和他人的参与感。"
+        ],
+        "best_next_step": "本页回答 INTJ-A 本身的人格特点；如果你想比较 A/T 差异，再进入对比页。"
+      },
+      "status": "draft_for_codex_qa",
+      "serp_ctr_package_v2": {
+        "seo_title": "INTJ-A 人格特点：独立判断、战略规划与关系沟通 | FermatMind",
+        "seo_description": "了解 INTJ-A 建筑师的独立判断、战略规划、自信型决策、工作偏好、关系沟通、优势盲点与自我校准。",
+        "breadcrumb_title": "INTJ-A 建筑师",
+        "h1": "INTJ-A 人格特点",
+        "quick_answer_summary": "INTJ-A 是偏战略、独立、系统化的建筑师风格；A 型身份让他们更容易带着稳定自信推进判断和计划。",
+        "ctr_angle": "主查询直答 + 非官方边界 + 工作/压力场景",
+        "avoid_in_snippet": [
+          "官方测试暗示",
+          "32型诱导",
+          "稀有度诱导",
+          "职业结果确定化"
+        ]
+      }
+    },
+    {
+      "url": "/zh/personality/intj-t",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "primary_query": "INTJ-T 人格特点",
+      "secondary_queries": [
+        "INTJ-T 是什么人格",
+        "INTJ-T 性格",
+        "INTJ-T 职业",
+        "INTJ-T 爱情",
+        "INTJ-T 建筑师"
+      ],
+      "excluded_queries": [
+        "INTJ-A 和 INTJ-T 区别",
+        "INTJ-A vs INTJ-T",
+        "INTJ-A 人格特点",
+        "INTJ 人格",
+        "16 型人格测试"
+      ],
+      "target_intent": "Chinese standalone meaning/profile intent for INTJ-T, including traits, stress response, work style, relationships, and practical self-understanding.",
+      "target_test_route": "/zh/tests/mbti-personality-test-16-personality-types",
+      "canonical_target": "/zh/personality/intj-t",
+      "seo": {
+        "seo_title": "INTJ-T 人格特点：高标准、自我审视与压力反应 | FermatMind",
+        "seo_description": "了解 INTJ-T 建筑师的高标准、自我审视、压力反应、战略规划、工作偏好、关系沟通与常见误读。",
+        "breadcrumb_title": "INTJ-T 建筑师",
+        "h1": "INTJ-T 人格特点",
+        "quick_answer_summary": "INTJ-T 是偏战略、独立、系统化的建筑师风格；T 型身份让他们更容易自我审视、关注风险并在压力下反复修正计划。"
+      },
+      "content": {
+        "quick_answer": "INTJ-T 人格特点可以概括为：独立思考、战略规划、高标准、自我审视和强烈的风险意识。作为建筑师类型，INTJ-T 通常喜欢搭建长期模型和系统方案；T 型身份让他们更容易感受到压力、批评和不完美，也更容易通过反复校准提升质量。INTJ-T 不是脆弱，而是更容易把怀疑转化为修正。",
+        "meaning": {
+          "h2": "INTJ-T 是什么人格？",
+          "body": "INTJ-T 是建筑师类型与 T 型身份风格的组合。建筑师类型关注系统、策略、逻辑和长期目标；T 型身份则让这种模式更带有自我审视和压力敏感度。INTJ-T 常常不是没有方向，而是会不断问：这个方向是否足够严谨、有没有隐藏风险、我是否忽略了关键变量。 这页的目标是解释 INTJ-T 的独立思考与压力处理方式，不把页面变成 INTJ-A/INTJ-T 对比。"
+        },
+        "a_t_difference": {
+          "h2": "T 型身份如何影响 INTJ-T",
+          "body": "在 INTJ-T 身上，T 型身份通常表现为更强的质量控制和自我要求。他们可能外表冷静，内心却在反复检查漏洞、后果和替代方案。这种特质适合研究、策略、技术、分析、写作和复杂项目评审。需要注意的是，审慎不应变成无限拖延；如果每个不确定性都被视为重大缺陷，行动会被消耗。"
+        },
+        "core_traits": {
+          "h2": "INTJ-T 的核心特点",
+          "items": [
+            "战略思维：关注长期目标、系统结构和关键约束。",
+            "高标准：容易发现当前方案与理想状态之间的差距。",
+            "自我审视：会反复评估自己的判断、能力和完成度。",
+            "风险敏感：擅长看到潜在问题、薄弱环节和未来代价。",
+            "内在强度高：压力下可能不外露，但内心消耗明显。",
+            "持续修正：倾向通过复盘、迭代和优化提高质量。"
+          ]
+        },
+        "strengths_blind_spots": {
+          "h2": "优势与盲点",
+          "strengths": [
+            "能在方案早期发现隐性风险和逻辑漏洞。",
+            "适合做需要严谨分析、长期规划和质量把关的任务。",
+            "对复杂系统有耐心，愿意深入理解底层机制。",
+            "能把批评转化为改进，而不是只做表面防御。",
+            "在高标准环境中可能持续打磨出很强的专业能力。"
+          ],
+          "blind_spots": [
+            "容易把正常不确定性理解为方案还不够好。",
+            "可能因为不满意草稿而迟迟不输出。",
+            "会把外部反馈过度内化为自我否定。",
+            "可能低估休息、情绪恢复和关系支持的必要性。",
+            "在压力大时容易把所有变量都纳入控制范围。"
+          ]
+        },
+        "careers_work_style": {
+          "h2": "职业倾向与工作风格",
+          "body": "INTJ-T 通常适合需要深度分析、风险识别、方案优化和长期判断的环境。人格类型不决定职业结果，但能帮助识别工作条件：他们需要复杂问题、独立空间、明确标准和可迭代的反馈机制。 职业探索上，INTJ-T 的关键是复杂度与复盘空间是否足够：太浅的任务容易无聊，完全没有反馈的高压任务又容易放大自我怀疑。",
+          "best_fit_environments": [
+            "研究、技术、数据、策略、产品、咨询、写作或系统设计相关工作。",
+            "允许深度思考和质量打磨，但有清楚截止线的项目。",
+            "重视严谨评审、风险管理和长期规划的团队。",
+            "能接受直接但具体反馈，而不是模糊评价的组织。",
+            "让他们负责发现问题、改进模型或优化系统的岗位。"
+          ],
+          "watchouts": [
+            "开始前设定“足够好”的交付标准，避免无限修改。",
+            "把风险分成致命风险、重要风险和可接受缺口。",
+            "定期输出中间版本，不要等到完全满意才让别人看到。",
+            "把自我批评写成具体改进行动，而不是人格否定。"
+          ]
+        },
+        "relationships_communication": {
+          "h2": "关系与沟通方式",
+          "body": "INTJ-T 在关系中可能显得理性、克制、难以靠近，但内在并不一定冷淡。他们往往会认真分析关系中的问题，也可能因为一句反馈或一次失误而反复复盘。健康沟通的关键，是把分析和感受都说出来，而不是只给对方结论。 在关系中，INTJ-T 可以提前说明自己需要时间整理，不是故意疏远。把沉默翻译成可理解的边界，会减少误会。",
+          "communication_tips": [
+            "不要把对方的情绪自动理解为对你的否定。",
+            "需要确认时直接表达，不要只在内心推演。",
+            "冲突中先说明你在乎关系，再讨论问题结构。",
+            "避免用过度分析替代道歉、安慰或陪伴。",
+            "允许亲近的人看到未完成的想法和不确定感。"
+          ]
+        },
+        "common_misreads": {
+          "h2": "常见误读",
+          "items": [
+            "INTJ-T 不是能力弱，而是更容易看到风险和不足。",
+            "INTJ-T 不是悲观，而是倾向先检查系统会在哪里失效。",
+            "INTJ-T 的高标准不等于永远不满意，需要学会设置停止线。",
+            "INTJ-T 的沉默不一定是冷漠，可能是在内部复盘。",
+            "INTJ-T 不只适合技术或研究，也适合任何需要严谨长期判断的领域。"
+          ]
+        },
+        "similar_types": {
+          "h2": "容易混淆的相近类型",
+          "items": [
+            "INTJ-A：同样是建筑师类型，但通常决策闭合更快，自我评价更稳定。",
+            "INTP-T：同样容易反复思考，但更偏理论模型和概念探索。",
+            "INFJ-T：同样强烈和自我审视，但更关注人、关系和意义。",
+            "ISTJ-T：同样谨慎，但更偏规则、经验和责任执行。",
+            "ENTJ-T：同样战略和高标准，但更外向地推动团队和组织。"
+          ]
+        }
+      },
+      "faq": [
+        {
+          "question": "INTJ-T 人格特点是什么？",
+          "answer": "INTJ-T 通常独立、战略化、重视逻辑和长期规划，同时更容易自我审视、感受到压力，并反复检查方案中的风险。"
+        },
+        {
+          "question": "INTJ-T 是不是容易焦虑？",
+          "answer": "INTJ-T 可能更容易感受到压力和不确定性，但这不等同于心理问题。它也可能表现为风险意识、质量控制和持续改进。"
+        },
+        {
+          "question": "INTJ-T 适合什么工作？",
+          "answer": "INTJ-T 通常更适合需要严谨分析、长期规划、风险识别和系统优化的工作环境。人格类型不能决定职业结果。"
+        },
+        {
+          "question": "INTJ-T 在感情中是什么样？",
+          "answer": "INTJ-T 可能不擅长高频情绪表达，但会认真分析关系问题。他们需要练习直接表达在意和不安，而不是只在内心复盘。"
+        },
+        {
+          "question": "INTJ-T 如何减少过度自我审视？",
+          "answer": "可以设定停止线、区分致命风险和普通缺口、提前输出草稿，并把自我批评转化成具体改进行动。"
+        },
+        {
+          "question": "INTJ-T 是不是比 INTJ-A 更焦虑？",
+          "answer": "不能简单等同。INTJ-T 通常更容易自我审视和感知压力，但这也可能带来更细致的风险意识和修正能力。"
+        },
+        {
+          "question": "INTJ-T 怎么减少过度自我怀疑？",
+          "answer": "可以把疑虑分成三类：有证据的风险、可以测试的假设、暂时无法控制的担心。这样能保留洞察，同时减少反复内耗。"
+        }
+      ],
+      "internal_links": [
+        {
+          "href": "/zh/personality",
+          "anchor_text": "查看全部 16 型人格",
+          "role": "hub",
+          "safe_public_route": true
+        },
+        {
+          "href": "/zh/personality/intj-a",
+          "anchor_text": "查看 INTJ-A 建筑师",
+          "role": "sibling_variant",
+          "safe_public_route": true
+        },
+        {
+          "href": "/zh/personality/intj-a-vs-intj-t",
+          "anchor_text": "查看 INTJ-A 与 INTJ-T 的对照说明",
+          "role": "comparison",
+          "safe_public_route": true
+        },
+        {
+          "href": "/zh/tests/mbti-personality-test-16-personality-types",
+          "anchor_text": "进行 16 型人格测试",
+          "role": "test",
+          "safe_public_route": true
+        },
+        {
+          "href": "/zh/tests/big-five-personality-test-ocean-model",
+          "anchor_text": "用大五人格测试交叉理解你的类型",
+          "role": "related_test",
+          "safe_public_route": true
+        },
+        {
+          "href": "/zh/tests/holland-career-interest-test-riasec",
+          "anchor_text": "用霍兰德职业兴趣测试探索职业方向",
+          "role": "related_test",
+          "safe_public_route": true
+        },
+        {
+          "href": "/zh/personality/intj-t#method-boundary",
+          "anchor_text": "方法与边界",
+          "role": "method",
+          "safe_public_route": true
+        }
+      ],
+      "method_boundary": "本页用于结构化自我理解，不应用作医疗、招聘、录取、财务或亲密关系决策依据。更稳妥的用法是：把这里的模式与自己的长期行为对照，再通过公开的 16 型人格测试校准。",
+      "trademark_boundary": "FermatMind 发布的是独立的 16 型人格教育内容。A/T 在这里作为身份风格解释层，不属于四字母核心类型本身。",
+      "information_gain": {
+        "why_this_page_is_not_template_content": "本页把 INTJ-T 写成高标准、风险扫描和自我审视的建筑师模式，而不是简单把 INTJ-A 的自信替换成不自信。",
+        "unique_user_value": "用户能学会区分有价值的复盘、过度自我批评和阻碍行动的完美主义。",
+        "fermatmind_specific_path": "页面连接 INTJ-T 单页、兄弟页、对照页和公开测试入口，同时避开私有结果路由。"
+      },
+      "claim_risk_notes": [
+        "不声称 A/T 任一变体更高级。",
+        "不做确定性招聘、职业、关系、医疗或录取判断。",
+        "A/T 只作为身份风格解释层，不作为四字母核心类型本身。"
+      ],
+      "qa_flags_for_codex": [
+        "确认中文页面发布后 H2 和 FAQ 均可见。",
+        "发布前必须完成审计中发现的结果查询类路由分类。"
+      ],
+      "route_safety": {
+        "target_test_route_verified_from_intent_map": true,
+        "forbidden_route_patterns_absent_from_internal_links": true,
+        "lookup_route_classification_required_before_publish_or_search_release": true,
+        "related_big_five_riasec_routes": {
+          "status": "verified_and_added",
+          "source": "related-test-route-scope-decision-2026-06-18",
+          "routes": [
+            "/zh/tests/big-five-personality-test-ocean-model",
+            "/zh/tests/holland-career-interest-test-riasec"
+          ]
+        },
+        "v2_1_related_test_links_added": true
+      },
+      "v2_optimization": {
+        "primary_improvement": "Strengthened answer usefulness, career/environment fit, self-check utility, and intent boundaries while preserving the original importable schema.",
+        "serp_intent_guard": {
+          "rank_for": "INTJ-T 人格特点",
+          "do_not_rank_for": [
+            "INTJ-A 和 INTJ-T 区别",
+            "INTJ-A vs INTJ-T",
+            "INTJ-A 人格特点",
+            "INTJ 人格",
+            "16 型人格测试"
+          ],
+          "above_fold_answer_required": true
+        },
+        "conversion_design": {
+          "primary_cta_href": "/zh/tests/mbti-personality-test-16-personality-types",
+          "primary_cta_label": "进行 16 型人格测试",
+          "cta_rule": "Use only public canonical routes; no lookup, account, payment, history, or personalized-report paths."
+        },
+        "duplicate_defense": {
+          "variant_vs_comparison_boundary": "Variant pages answer standalone meaning/profile intent; comparison pages answer difference/decision intent.",
+          "page_specific_examples_required": true,
+          "faq_reuse_allowed": false
+        },
+        "related_test_link_patch": {
+          "version": "pilot-v2.1",
+          "scope": "Added verified locale-specific Big Five and Holland/RIASEC related_test links only; no SEO, body, FAQ, query, or canonical changes.",
+          "source": "related-test-route-scope-decision-2026-06-18",
+          "routes_added": [
+            "/zh/tests/big-five-personality-test-ocean-model",
+            "/zh/tests/holland-career-interest-test-riasec"
+          ]
+        }
+      },
+      "above_the_fold_module": {
+        "answer_card_title": "INTJ-T 一分钟速读",
+        "answer_card_points": [
+          "核心模式：战略规划、独立分析、系统思维、长期目标。",
+          "T 型身份：更强的自我检查、压力感知和风险意识。",
+          "优势场景：研究、架构、风控、复杂规划、质量要求高的工作。",
+          "主要盲点：容易把正常不确定性理解成计划不够好。"
+        ],
+        "best_next_step": "本页回答 INTJ-T 本身的人格特点；如果你想比较 A/T 差异，再进入对比页。"
+      },
+      "status": "draft_for_codex_qa",
+      "serp_ctr_package_v2": {
+        "seo_title": "INTJ-T 人格特点：高标准、自我审视与压力反应 | FermatMind",
+        "seo_description": "了解 INTJ-T 建筑师的高标准、自我审视、压力反应、战略规划、工作偏好、关系沟通与常见误读。",
+        "breadcrumb_title": "INTJ-T 建筑师",
+        "h1": "INTJ-T 人格特点",
+        "quick_answer_summary": "INTJ-T 是偏战略、独立、系统化的建筑师风格；T 型身份让他们更容易自我审视、关注风险并在压力下反复修正计划。",
+        "ctr_angle": "主查询直答 + 非官方边界 + 工作/压力场景",
+        "avoid_in_snippet": [
+          "官方测试暗示",
+          "32型诱导",
+          "稀有度诱导",
+          "职业结果确定化"
+        ]
+      }
+    }
+  ],
+  "created_at": "2026-06-18T02:45:54Z",
+  "source_artifact": "MBTI64-CONTENT-PACKAGE-PILOT-01-GPT55 / pilot-v1",
+  "optimization_lens": {
+    "strategy": "Second-pass operator optimization using four lenses: test-first conversion, career/personality pathing, A/T identity differentiation, and people-first SEO intent satisfaction.",
+    "lenses": [
+      {
+        "name": "123test-style utility",
+        "applied_as": "Every page now pushes toward practical self-assessment, core skills, work environments, and a simple next-step test path rather than only descriptive reading."
+      },
+      {
+        "name": "Truity-style career pathing",
+        "applied_as": "Career sections emphasize environment fit, interest-fit follow-up, and non-deterministic career exploration instead of job-list determinism."
+      },
+      {
+        "name": "16Personalities-style A/T clarity without imitation",
+        "applied_as": "A/T is explained through confidence, stress recovery, self-review, and emotional composure while preserving FermatMind wording and avoiding provider-affiliation claims."
+      },
+      {
+        "name": "Google SEO director lens",
+        "applied_as": "Each page has a clearer answer block, intent boundaries, duplicate-differentiation notes, CTA safety, and information-gain hooks so the content is useful before it is search-optimized."
+      }
+    ],
+    "publish_holds": [
+      "Codex content-package QA required",
+      "trademark/claim gate required",
+      "duplicate/differentiation gate required",
+      "route classification required before publish/search release",
+      "no sitemap or llms exposure changes in this asset package"
+    ]
+  },
+  "qa_checklist_for_codex": {
+    "must_validate": [
+      "exactly 8 rows in pilot queue order",
+      "all variant and comparison required content sections present",
+      "FAQ count >= 5 per row; v2 target is >= 7",
+      "no forbidden route patterns in target_test_route or internal_links",
+      "no provider-affiliation claim",
+      "no deterministic career, hiring, relationship, medical, or admissions claim",
+      "Chinese variant pages render H2 sections and visible FAQ",
+      "comparison pages remain independent decision-support pages, not stitched variant pages",
+      "route-classification sidecar resolved before publish/search release"
+    ],
+    "publish_blockers_remaining": [
+      "route classification before publish/search release",
+      "CMS import review",
+      "frontend render smoke",
+      "schema/canonical/hreflang QA",
+      "duplicate/differentiation QA"
+    ]
+  },
+  "source_version": "pilot-v2",
+  "patch_scope": "related_test_links_only",
+  "safe_routes_source": "related-test-route-scope-decision-2026-06-18",
+  "patch_summary": {
+    "source_artifact": "mbti64-content-package-pilot-v2.json",
+    "source_zip_sha256": "c508a2d27d4e746854ca3c1023ba4fdc686c2fd6ddb7c5e29e5813a302f0c6ec",
+    "changed_areas": [
+      "root version/status metadata",
+      "internal_links related_test additions",
+      "route_safety related-test status",
+      "qa_flags_for_codex cleanup for previously unknown Big Five/RIASEC routes",
+      "v2_optimization related-test note"
+    ],
+    "unchanged_areas": [
+      "row order",
+      "SEO title",
+      "SEO description",
+      "breadcrumb title",
+      "H1",
+      "quick_answer_summary",
+      "body content",
+      "FAQ",
+      "primary_query",
+      "excluded_queries",
+      "target_intent",
+      "canonical_target"
+    ],
+    "safe_public_routes": {
+      "en_big_five": "/en/tests/big-five-personality-test-ocean-model",
+      "en_riasec_holland": "/en/tests/holland-career-interest-test-riasec",
+      "zh_big_five": "/zh/tests/big-five-personality-test-ocean-model",
+      "zh_riasec_holland": "/zh/tests/holland-career-interest-test-riasec"
+    }
+  },
+  "patched_at": "2026-06-18"
+}
