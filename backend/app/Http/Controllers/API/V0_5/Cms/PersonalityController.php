@@ -234,7 +234,8 @@ class PersonalityController extends Controller
         $turbulentProjection = $this->personalityProfileService->buildPublicProjection($turbulentProfile, $turbulentVariant);
         $assertiveSections = $this->publicSectionPayloads($assertiveProfile, $assertiveVariant);
         $turbulentSections = $this->publicSectionPayloads($turbulentProfile, $turbulentVariant);
-        $meta = $this->comparisonMeta($baseTypeCode, $validated['locale']);
+        $comparisonOverlay = $this->mbti64PromotedComparisonOverlay($assertiveProfile);
+        $meta = $this->comparisonMeta($baseTypeCode, $validated['locale'], $comparisonOverlay);
         $jsonLd = $this->comparisonJsonLd($baseTypeCode, $validated['locale'], $meta);
         $comparisonProjection = $this->comparisonProjectionPayload(
             $baseTypeCode,
@@ -249,8 +250,14 @@ class PersonalityController extends Controller
             $turbulentSections,
             $meta
         );
+        $comparisonProjection = $this->applyMbti64PromotedComparisonOverlay(
+            $comparisonProjection,
+            $comparisonOverlay,
+            $baseTypeCode,
+            $validated['locale']
+        );
         $seoSurface = $this->buildSeoSurface($meta, $jsonLd, 'mbti_personality_at_comparison');
-        $landingSurface = $this->buildComparisonLandingSurface($baseTypeCode, $validated['locale'], $meta);
+        $landingSurface = $this->buildComparisonLandingSurface($baseTypeCode, $validated['locale'], $meta, $comparisonOverlay);
 
         return response()->json([
             'ok' => true,
@@ -265,7 +272,8 @@ class PersonalityController extends Controller
                 $validated['locale'],
                 $comparisonProjection,
                 $seoSurface,
-                $landingSurface
+                $landingSurface,
+                $comparisonOverlay
             ),
         ]);
     }
@@ -309,14 +317,17 @@ class PersonalityController extends Controller
     /**
      * @return array<string,mixed>
      */
-    private function comparisonMeta(string $baseTypeCode, string $locale): array
+    private function comparisonMeta(string $baseTypeCode, string $locale, ?array $comparisonOverlay = null): array
     {
-        $title = $locale === 'zh-CN'
+        $overlaySeo = is_array($comparisonOverlay['seo'] ?? null) ? $comparisonOverlay['seo'] : [];
+        $title = $this->normalizedString($overlaySeo['seo_title'] ?? null) ?? ($locale === 'zh-CN'
             ? $baseTypeCode.'-A 和 '.$baseTypeCode.'-T 区别：特点、职业、爱情与稀有度'
-            : $baseTypeCode.'-A vs '.$baseTypeCode.'-T: Traits, Careers, Love & Rarity';
-        $description = $locale === 'zh-CN'
+            : $baseTypeCode.'-A vs '.$baseTypeCode.'-T: Traits, Careers, Love & Rarity');
+        $description = $this->normalizedString($overlaySeo['seo_description'] ?? null)
+            ?? $this->normalizedString($overlaySeo['quick_answer_summary'] ?? null)
+            ?? ($locale === 'zh-CN'
             ? '对比 '.$baseTypeCode.'-A 与 '.$baseTypeCode.'-T 的 A/T 区别、核心特点、爱情关系、适合职业、优势盲点、稀有度，并通过 MBTI 测试确认自己的类型。'
-            : 'Compare '.$baseTypeCode.'-A and '.$baseTypeCode.'-T traits, A/T differences, strengths, blind spots, relationships, career fit, rarity, and how to confirm your type with an MBTI test.';
+            : 'Compare '.$baseTypeCode.'-A and '.$baseTypeCode.'-T traits, A/T differences, strengths, blind spots, relationships, career fit, rarity, and how to confirm your type with an MBTI test.');
         $canonical = $this->comparisonCanonicalUrl($baseTypeCode, $locale);
         $alternates = [
             'en' => $this->comparisonCanonicalUrl($baseTypeCode, 'en'),
@@ -454,6 +465,241 @@ class PersonalityController extends Controller
                 'personality_variant_seo_meta',
             ],
         ];
+    }
+
+    /**
+     * @return array<string,mixed>|null
+     */
+    private function mbti64PromotedComparisonOverlay(PersonalityProfile $profile): ?array
+    {
+        $section = PersonalityProfileSection::query()
+            ->withoutGlobalScopes()
+            ->where('profile_id', (int) $profile->id)
+            ->where('section_key', 'mbti64_comparison_a_vs_t')
+            ->where('is_enabled', true)
+            ->first();
+
+        if (! $section instanceof PersonalityProfileSection) {
+            return null;
+        }
+
+        $payload = is_array($section->payload_json) ? $section->payload_json : [];
+        $seo = is_array($payload['seo'] ?? null) ? $payload['seo'] : [];
+        $content = is_array($payload['content'] ?? null) ? $payload['content'] : [];
+
+        if ($seo === [] && $content === []) {
+            return null;
+        }
+
+        return [
+            'section' => $this->sectionPayload($section),
+            'seo' => $seo,
+            'content' => $content,
+            'faq' => is_array($payload['faq'] ?? null) ? array_values((array) $payload['faq']) : [],
+            'internal_links' => is_array($payload['internal_links'] ?? null) ? array_values((array) $payload['internal_links']) : [],
+            'source' => $this->normalizedString($payload['source'] ?? null) ?? 'mbti64_comparison_a_vs_t',
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $projection
+     * @return array<string,mixed>
+     */
+    private function applyMbti64PromotedComparisonOverlay(
+        array $projection,
+        ?array $comparisonOverlay,
+        string $baseTypeCode,
+        string $locale
+    ): array {
+        if ($comparisonOverlay === null) {
+            return $projection;
+        }
+
+        $seo = is_array($comparisonOverlay['seo'] ?? null) ? $comparisonOverlay['seo'] : [];
+        $content = is_array($comparisonOverlay['content'] ?? null) ? $comparisonOverlay['content'] : [];
+        $blocks = $this->mbti64PromotedComparisonBlocks($content);
+        if ($blocks === []) {
+            return $projection;
+        }
+
+        $projection['comparison_contract_version'] = 'mbti.at_comparison.v1.mbti64_overlay';
+        $projection['title'] = $this->normalizedString($seo['h1'] ?? null)
+            ?? $this->normalizedString($seo['seo_title'] ?? null)
+            ?? ($projection['title'] ?? null);
+        $projection['description'] = $this->normalizedString($seo['quick_answer_summary'] ?? null)
+            ?? $this->normalizedString($content['quick_answer'] ?? null)
+            ?? $this->normalizedString($seo['seo_description'] ?? null)
+            ?? ($projection['description'] ?? null);
+        $projection['comparison_blocks'] = $blocks;
+        $projection['source_refs'] = array_values(array_unique(array_merge(
+            (array) ($projection['source_refs'] ?? []),
+            [
+                'personality_profile_sections.mbti64_comparison_a_vs_t',
+                'mbti64_comparison_draft_v2_1',
+            ]
+        )));
+        $projection['faq'] = $this->mbti64PromotedComparisonFaq($comparisonOverlay);
+        $projection['internal_links'] = $this->mbti64PromotedComparisonInternalLinks($comparisonOverlay, $locale);
+        $projection['overlay_source'] = [
+            'section_key' => 'mbti64_comparison_a_vs_t',
+            'source' => $comparisonOverlay['source'] ?? 'mbti64_comparison_a_vs_t',
+            'base_type_code' => $baseTypeCode,
+        ];
+
+        return $projection;
+    }
+
+    /**
+     * @param  array<string,mixed>  $content
+     * @return list<array<string,mixed>>
+     */
+    private function mbti64PromotedComparisonBlocks(array $content): array
+    {
+        $blocks = [];
+        $summary = is_array($content['side_by_side_summary'] ?? null) ? $content['side_by_side_summary'] : [];
+        $rows = is_array($summary['rows'] ?? null) ? array_values((array) $summary['rows']) : [];
+
+        foreach ($rows as $index => $row) {
+            if (! is_array($row)) {
+                continue;
+            }
+
+            $title = $this->normalizedString($row['dimension'] ?? null) ?? 'Comparison '.((string) ($index + 1));
+            $assertive = $this->normalizedString($row['a_variant'] ?? null);
+            $turbulent = $this->normalizedString($row['t_variant'] ?? null);
+            if ($assertive === null && $turbulent === null) {
+                continue;
+            }
+
+            $blocks[] = [
+                'key' => $this->comparisonBlockKey($title, 'side_by_side_'.$index),
+                'title' => $title,
+                'source' => 'personality_profile_sections.mbti64_comparison_a_vs_t',
+                'variants' => [
+                    'a' => $assertive ?? '',
+                    't' => $turbulent ?? '',
+                ],
+                'body_md' => implode("\n\n", array_values(array_filter([
+                    $assertive !== null ? 'A: '.$assertive : null,
+                    $turbulent !== null ? 'T: '.$turbulent : null,
+                ]))),
+            ];
+        }
+
+        foreach ($content as $key => $value) {
+            if ($key === 'side_by_side_summary' || $key === 'quick_answer') {
+                continue;
+            }
+
+            if (! is_array($value)) {
+                continue;
+            }
+
+            $body = $this->normalizedString($value['body'] ?? null);
+            if ($body === null) {
+                continue;
+            }
+
+            $blocks[] = [
+                'key' => $this->comparisonBlockKey((string) $key, (string) $key),
+                'title' => $this->normalizedString($value['h2'] ?? null) ?? str_replace('_', ' ', (string) $key),
+                'source' => 'personality_profile_sections.mbti64_comparison_a_vs_t',
+                'variants' => [
+                    'a' => $body,
+                    't' => $body,
+                ],
+                'body_md' => $body,
+            ];
+        }
+
+        return $blocks;
+    }
+
+    private function comparisonBlockKey(string $value, string $fallback): string
+    {
+        $normalized = strtolower(trim(preg_replace('/[^a-zA-Z0-9_]+/', '_', $value) ?? '', '_'));
+
+        return substr($normalized !== '' ? $normalized : $fallback, 0, 90);
+    }
+
+    /**
+     * @return list<array<string,string|null>>
+     */
+    private function mbti64PromotedComparisonFaq(?array $comparisonOverlay): array
+    {
+        if ($comparisonOverlay === null || ! is_array($comparisonOverlay['faq'] ?? null)) {
+            return [];
+        }
+
+        $items = [];
+        foreach ((array) $comparisonOverlay['faq'] as $index => $item) {
+            if (! is_array($item)) {
+                continue;
+            }
+
+            $question = $this->normalizedString($item['question'] ?? null);
+            $answer = $this->normalizedString($item['answer'] ?? null);
+            if ($question === null && $answer === null) {
+                continue;
+            }
+
+            $items[] = [
+                'key' => $this->normalizedString($item['id'] ?? $item['key'] ?? null) ?? 'mbti64-comparison-faq-'.$index,
+                'question' => $question,
+                'answer' => $answer,
+            ];
+        }
+
+        return $items;
+    }
+
+    /**
+     * @return list<array<string,string|null>>
+     */
+    private function mbti64PromotedComparisonInternalLinks(?array $comparisonOverlay, string $locale): array
+    {
+        if ($comparisonOverlay === null || ! is_array($comparisonOverlay['internal_links'] ?? null)) {
+            return [];
+        }
+
+        $links = [];
+        foreach ((array) $comparisonOverlay['internal_links'] as $index => $link) {
+            if (! is_array($link) || ($link['safe_public_route'] ?? null) !== true) {
+                continue;
+            }
+
+            $href = $this->normalizedString($link['href'] ?? null);
+            $label = $this->normalizedString($link['anchor_text'] ?? null);
+            if ($href === null || $label === null || $this->containsForbiddenPublicRoute($href)) {
+                continue;
+            }
+
+            $links[] = [
+                'key' => $this->normalizedString($link['role'] ?? null) ?? 'mbti64-comparison-link-'.$index,
+                'label' => $label,
+                'href' => $href,
+                'kind' => $this->normalizedString($link['role'] ?? null) ?? 'content_continue',
+                'locale' => $locale,
+            ];
+        }
+
+        return $links;
+    }
+
+    private function containsForbiddenPublicRoute(string $href): bool
+    {
+        return preg_match('#/(?:results|orders|share|pay|payment|history|private|account)(?:/|$)|(?:token|session|result_id|report_id|order_no)=#i', $href) === 1;
+    }
+
+    private function normalizedString(mixed $value): ?string
+    {
+        if (! is_scalar($value)) {
+            return null;
+        }
+
+        $normalized = trim(preg_replace('/\s+/', ' ', (string) $value) ?? '');
+
+        return $normalized !== '' ? $normalized : null;
     }
 
     /**
@@ -645,11 +891,48 @@ class PersonalityController extends Controller
      * @param  array<string,mixed>  $meta
      * @return array<string,mixed>
      */
-    private function buildComparisonLandingSurface(string $baseTypeCode, string $locale, array $meta): array
-    {
+    private function buildComparisonLandingSurface(
+        string $baseTypeCode,
+        string $locale,
+        array $meta,
+        ?array $comparisonOverlay = null
+    ): array {
         $segment = $this->frontendLocaleSegment($locale);
         $baseSlug = strtolower($baseTypeCode);
         $startTestPath = '/'.$segment.'/tests/mbti-personality-test-16-personality-types';
+        $overlayLinks = $this->mbti64PromotedComparisonInternalLinks($comparisonOverlay, $locale);
+        $fallbackCtas = [
+            [
+                'key' => 'assertive_detail',
+                'label' => $baseTypeCode.'-A',
+                'href' => '/'.$segment.'/personality/'.$baseSlug.'-a',
+                'kind' => 'content_continue',
+            ],
+            [
+                'key' => 'turbulent_detail',
+                'label' => $baseTypeCode.'-T',
+                'href' => '/'.$segment.'/personality/'.$baseSlug.'-t',
+                'kind' => 'content_continue',
+            ],
+            [
+                'key' => 'start_test',
+                'label' => $locale === 'zh-CN' ? '开始测试' : 'Take the test',
+                'href' => $startTestPath,
+                'kind' => 'start_test',
+            ],
+        ];
+        $ctaBundle = array_values(array_merge($overlayLinks, $fallbackCtas));
+        $seenCtas = [];
+        $ctaBundle = array_values(array_filter($ctaBundle, static function (array $cta) use (&$seenCtas): bool {
+            $href = (string) ($cta['href'] ?? '');
+            if ($href === '' || isset($seenCtas[$href])) {
+                return false;
+            }
+
+            $seenCtas[$href] = true;
+
+            return true;
+        }));
 
         return $this->landingSurfaceContractService->build([
             'landing_scope' => 'public_indexable_detail',
@@ -667,26 +950,7 @@ class PersonalityController extends Controller
             'continue_reading_keys' => ['personality_detail', 'topic_cluster'],
             'start_test_target' => $startTestPath,
             'content_continue_target' => '/'.$segment.'/personality/'.$baseSlug.'-a',
-            'cta_bundle' => [
-                [
-                    'key' => 'assertive_detail',
-                    'label' => $baseTypeCode.'-A',
-                    'href' => '/'.$segment.'/personality/'.$baseSlug.'-a',
-                    'kind' => 'content_continue',
-                ],
-                [
-                    'key' => 'turbulent_detail',
-                    'label' => $baseTypeCode.'-T',
-                    'href' => '/'.$segment.'/personality/'.$baseSlug.'-t',
-                    'kind' => 'content_continue',
-                ],
-                [
-                    'key' => 'start_test',
-                    'label' => $locale === 'zh-CN' ? '开始测试' : 'Take the test',
-                    'href' => $startTestPath,
-                    'kind' => 'start_test',
-                ],
-            ],
+            'cta_bundle' => $ctaBundle,
             'indexability_state' => 'indexable',
             'attribution_scope' => 'public_personality_landing',
             'seo_surface_ref' => $this->comparisonSlug($baseTypeCode),
@@ -697,6 +961,7 @@ class PersonalityController extends Controller
                 'comparison_slug' => $this->comparisonSlug($baseTypeCode),
                 'locale' => $locale,
                 'scale_code' => PersonalityProfile::SCALE_CODE_MBTI,
+                'overlay_source' => $comparisonOverlay !== null ? 'mbti64_comparison_a_vs_t' : null,
             ],
         ]);
     }
@@ -712,7 +977,8 @@ class PersonalityController extends Controller
         string $locale,
         array $projection,
         array $seoSurface,
-        array $landingSurface
+        array $landingSurface,
+        ?array $comparisonOverlay = null
     ): array {
         $summaryBlocks = [
             [
@@ -731,6 +997,14 @@ class PersonalityController extends Controller
             ])
             ->values()
             ->all();
+        $faqBlocks = $this->mbti64PromotedComparisonFaq($comparisonOverlay);
+        $answerBundle = [
+            ['key' => 'summary', 'title' => 'summary', 'count' => count($summaryBlocks)],
+            ['key' => 'compare', 'title' => 'compare', 'count' => count($compareBlocks)],
+        ];
+        if ($faqBlocks !== []) {
+            $answerBundle[] = ['key' => 'faq', 'title' => 'faq', 'count' => count($faqBlocks)];
+        }
 
         return $this->answerSurfaceContractService->build([
             'answer_scope' => 'public_indexable_detail',
@@ -741,16 +1015,15 @@ class PersonalityController extends Controller
                 is_array($landingSurface['cta_bundle'] ?? null) ? $landingSurface['cta_bundle'] : [],
                 3
             ),
-            'answer_bundle' => [
-                ['key' => 'summary', 'title' => 'summary', 'count' => count($summaryBlocks)],
-                ['key' => 'compare', 'title' => 'compare', 'count' => count($compareBlocks)],
-            ],
+            'faq_blocks' => $faqBlocks,
+            'answer_bundle' => $answerBundle,
             'evidence_refs' => array_values(array_filter([
                 (string) ($seoSurface['metadata_fingerprint'] ?? ''),
                 (string) ($landingSurface['landing_fingerprint'] ?? ''),
                 'comparison_public_projection_v1',
                 'personality_variant_sections',
                 'personality_variant_seo_meta',
+                $comparisonOverlay !== null ? 'personality_profile_sections.mbti64_comparison_a_vs_t' : null,
             ])),
             'public_safety_state' => 'public_indexable',
             'indexability_state' => 'indexable',
@@ -763,6 +1036,7 @@ class PersonalityController extends Controller
                 'comparison_slug' => $this->comparisonSlug($baseTypeCode),
                 'locale' => $locale,
                 'scale_code' => PersonalityProfile::SCALE_CODE_MBTI,
+                'overlay_source' => $comparisonOverlay !== null ? 'mbti64_comparison_a_vs_t' : null,
             ],
         ]);
     }
