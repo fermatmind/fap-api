@@ -288,6 +288,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_mbti64_backend_import_contract_dry_run_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/PersonalityMbti64BackendImportContract.php',
+            'backend/app/Console/Kernel.php',
+            'backend/app/Services/Cms/Mbti64BackendImportContractPlanner.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\PersonalityMbti64BackendImportContract;',
+            '+        PersonalityMbti64BackendImportContract::class,',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
+    }
+
     public function test_runtime_freeze_classifier_ignores_mbti_personality_at_difference_section_files(): void
     {
         $changed = [
@@ -3134,6 +3149,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isMbti64BackendImportContractFile($file)) {
+                continue;
+            }
+
             if ($this->isMbtiPersonalityAtDifferenceSectionFile($file)) {
                 continue;
             }
@@ -3903,6 +3922,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsArticleCoverPropagationSmokeOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsAlipayPendingCompensationSchedulerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsIqNormImportDryRunOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsMbti64BackendImportContractOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                 )
             ) {
                 continue;
@@ -4015,6 +4035,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/PersonalityEnsureMbtiVariantSectionStructure.php',
             'backend/app/Services/Cms/MbtiPersonalityVariantSectionStructureService.php',
+        ], true);
+    }
+
+    private function isMbti64BackendImportContractFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/PersonalityMbti64BackendImportContract.php',
+            'backend/app/Services/Cms/Mbti64BackendImportContractPlanner.php',
         ], true);
     }
 
@@ -6037,6 +6065,25 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if (preg_match('/\bNormsIqImport\b/u', $normalized) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsMbti64BackendImportContractOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            $normalized = ltrim($line, '+-');
+            if (preg_match('/\bPersonalityMbti64BackendImportContract\b/u', $normalized) !== 1) {
                 return false;
             }
         }
