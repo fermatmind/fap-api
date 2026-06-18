@@ -34,6 +34,17 @@ final class CareerSalaryAssetPreviewService
         $normalizedSlug = $this->normalizeSlug($slug);
         $normalizedLocale = $this->normalizeLocale($locale);
 
+        $productionAsset = CareerJobSalaryAsset::query()
+            ->where('career_job_slug', $normalizedSlug)
+            ->where('locale', $normalizedLocale)
+            ->where('asset_version', CareerJobSalaryAsset::ASSET_VERSION_V3_6)
+            ->where('status', CareerJobSalaryAsset::STATUS_PRODUCTION_IMPORTED)
+            ->first();
+
+        if ($productionAsset instanceof CareerJobSalaryAsset) {
+            return $productionAsset;
+        }
+
         if (! $this->previewEnabled()) {
             return null;
         }
@@ -56,7 +67,8 @@ final class CareerSalaryAssetPreviewService
 
         return [
             'ok' => true,
-            'preview' => true,
+            'preview' => $asset->status !== CareerJobSalaryAsset::STATUS_PRODUCTION_IMPORTED,
+            'status' => $asset->status,
             'salary_asset_v1' => $this->readerSafePayload($payload),
         ];
     }
