@@ -26,6 +26,7 @@ final class ArticleTaxonomyHygiene extends Command
 
     private const ARTICLE_CATEGORY_TARGETS = [
         40 => '职业探索',
+        46 => '职业探索',
         48 => '职业探索',
         50 => '能力与认知',
         51 => '人格心理学',

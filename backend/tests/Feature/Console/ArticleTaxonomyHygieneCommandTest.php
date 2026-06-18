@@ -61,7 +61,8 @@ final class ArticleTaxonomyHygieneCommandTest extends TestCase
         $this->seedTaxonomy();
         $articles = [
             $this->createPublishedArticle(40, 'riasec-holland-career-interest-test-explained', 11),
-            $this->createPublishedArticle(48, 'big-five-tool-guide', 14),
+            $this->createPublishedArticle(46, 'career-interest-vs-personality-test-differences', 14),
+            $this->createPublishedArticle(48, 'career-confusion-test-map', 14),
             $this->createPublishedArticle(50, 'iq-test-score-and-limits-explained', 14),
             $this->createPublishedArticle(51, 'enneagram-personality-test-explained', 14),
             $this->createPublishedArticle(52, 'college-major-choice-holland-mbti-career-test', 14),
@@ -74,8 +75,8 @@ final class ArticleTaxonomyHygieneCommandTest extends TestCase
         )->all();
 
         $exitCode = Artisan::call('articles:taxonomy-hygiene', [
-            '--article-ids' => '40,48,50,51,52',
-            '--expected-slugs' => 'riasec-holland-career-interest-test-explained,big-five-tool-guide,iq-test-score-and-limits-explained,enneagram-personality-test-explained,college-major-choice-holland-mbti-career-test',
+            '--article-ids' => '40,46,48,50,51,52',
+            '--expected-slugs' => 'riasec-holland-career-interest-test-explained,career-interest-vs-personality-test-differences,career-confusion-test-map,iq-test-score-and-limits-explained,enneagram-personality-test-explained,college-major-choice-holland-mbti-career-test',
             '--execute' => true,
             '--json' => true,
             '--no-content-change' => true,
@@ -99,6 +100,7 @@ final class ArticleTaxonomyHygieneCommandTest extends TestCase
 
         $expectedCategoryNames = [
             40 => '职业探索',
+            46 => '职业探索',
             48 => '职业探索',
             50 => '能力与认知',
             51 => '人格心理学',
@@ -115,7 +117,7 @@ final class ArticleTaxonomyHygieneCommandTest extends TestCase
 
         $audit = AuditLog::query()->withoutGlobalScopes()->where('action', 'articles_taxonomy_hygiene')->first();
         $this->assertInstanceOf(AuditLog::class, $audit);
-        $this->assertSame('40,48,50,51,52', (string) $audit->target_id);
+        $this->assertSame('40,46,48,50,51,52', (string) $audit->target_id);
         $this->assertSame('articles:taxonomy-hygiene', data_get($audit->meta_json, 'command'));
         $this->assertTrue((bool) data_get($audit->meta_json, 'no_content_change'));
     }
