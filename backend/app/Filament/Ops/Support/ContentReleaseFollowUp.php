@@ -17,6 +17,38 @@ final class ContentReleaseFollowUp
     public static function dispatch(string $type, object $record, string $source, Request $request): void
     {
         $payload = self::payload($type, $record, $source);
+        self::dispatchPayload($request, $payload);
+    }
+
+    /**
+     * @param  list<string>  $paths
+     * @param  array<string, mixed>  $contentExtras
+     */
+    public static function dispatchExplicitPaths(
+        string $type,
+        object $record,
+        array $paths,
+        string $source,
+        Request $request,
+        array $contentExtras = [],
+    ): void {
+        $payload = self::payload(
+            type: $type,
+            record: $record,
+            source: $source,
+            paths: self::normalizePaths($paths),
+            contentExtras: $contentExtras,
+            event: 'content_release_revalidate',
+        );
+
+        self::dispatchPayload($request, $payload);
+    }
+
+    /**
+     * @param  array<string, mixed>  $payload
+     */
+    private static function dispatchPayload(Request $request, array $payload): void
+    {
         $cacheInvalidationUrls = self::cacheInvalidationUrls();
         $cacheInvalidationSecret = self::cacheInvalidationSecret();
 
@@ -68,20 +100,30 @@ final class ContentReleaseFollowUp
     }
 
     /**
+     * @param  list<string>|null  $paths
+     * @param  array<string, mixed>  $contentExtras
      * @return array<string, mixed>
      */
-    private static function payload(string $type, object $record, string $source): array
-    {
+    private static function payload(
+        string $type,
+        object $record,
+        string $source,
+        ?array $paths = null,
+        array $contentExtras = [],
+        string $event = 'content_release_publish',
+    ): array {
         $title = trim((string) data_get($record, 'title', 'Untitled'));
         $locale = trim((string) data_get($record, 'locale', ''));
         $publishedAt = optional(data_get($record, 'published_at'))?->toISOString();
-        $paths = self::invalidateUrls($type, $record);
+        $paths = $paths ?? self::invalidateUrls($type, $record);
+        $verb = $event === 'content_release_publish' ? 'published' : 'revalidated';
 
         return [
-            'event' => 'content_release_publish',
+            'event' => $event,
             'text' => sprintf(
-                '[CMS release] %s published via %s (%s)',
+                '[CMS release] %s %s via %s (%s)',
                 $title !== '' ? $title : 'Untitled',
+                $verb,
                 $source,
                 $type
             ),
@@ -96,7 +138,7 @@ final class ContentReleaseFollowUp
                 'status' => trim((string) data_get($record, 'status', 'published')),
                 'visibility' => data_get($record, 'is_public') ? 'public' : 'private',
                 'published_at' => $publishedAt,
-            ],
+            ] + $contentExtras,
             'cache_signal' => [
                 'kind' => 'invalidate',
                 'paths' => $paths,
@@ -111,6 +153,25 @@ final class ContentReleaseFollowUp
     private static function invalidateUrls(string $type, object $record): array
     {
         return app(ContentReleasePathPlanner::class)->paths($type, $record);
+    }
+
+    /**
+     * @param  list<string>  $paths
+     * @return list<string>
+     */
+    private static function normalizePaths(array $paths): array
+    {
+        $normalized = [];
+        foreach ($paths as $path) {
+            $path = trim($path);
+            if ($path === '' || ! str_starts_with($path, '/')) {
+                continue;
+            }
+
+            $normalized[] = $path;
+        }
+
+        return array_values(array_unique($normalized));
     }
 
     /**
