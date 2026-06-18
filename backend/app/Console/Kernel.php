@@ -157,6 +157,7 @@ use App\Console\Commands\PacksRollback;
 use App\Console\Commands\PaymentsPruneEvents;
 use App\Console\Commands\PersonalityImportDesktopCloneBaseline;
 use App\Console\Commands\PersonalityMbti64CmsRevisionDraft;
+use App\Console\Commands\PersonalityMbti64CmsRevisionPromote;
 use App\Console\Commands\PersonalityMbti64BackendImportContract;
 use App\Console\Commands\QualityDailySummary;
 use App\Console\Commands\RefreshCareerAttributionDailyCommand;
@@ -192,6 +193,7 @@ class Kernel extends ConsoleKernel
         FapWeeklyReport::class,
         PersonalityImportDesktopCloneBaseline::class,
         PersonalityMbti64CmsRevisionDraft::class,
+        PersonalityMbti64CmsRevisionPromote::class,
         PersonalityMbti64BackendImportContract::class,
         MetricsWeeklyValidity::class,
         MbtiPrewarm::class,
