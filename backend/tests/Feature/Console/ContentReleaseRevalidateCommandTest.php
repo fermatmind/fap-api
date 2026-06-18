@@ -103,6 +103,143 @@ final class ContentReleaseRevalidateCommandTest extends TestCase
         });
     }
 
+    public function test_dry_run_plans_article_taxonomy_paths_without_broad_article_planner_paths(): void
+    {
+        config()->set('ops.content_release_observability.cache_invalidation_urls', [
+            'https://cache.example.test/api/content-release/revalidate',
+        ]);
+        config()->set('ops.content_release_observability.cache_invalidation_secret', 'release-secret');
+        Http::fake();
+
+        $first = $this->articleWithSeoMeta('zh-CN', [
+            'target_topics' => ['mbti'],
+            'target_tests' => ['mbti-personality-test-16-personality-types'],
+        ], 'taxonomy-first');
+        $second = $this->articleWithSeoMeta('zh-CN', [
+            'target_topics' => ['riasec'],
+            'target_tests' => ['holland-career-interest-test-riasec'],
+        ], 'taxonomy-second');
+
+        $exitCode = Artisan::call('content-release:revalidate', [
+            '--type' => 'article-taxonomy',
+            '--article-ids' => $first->id.','.$second->id,
+            '--expected-slugs' => 'taxonomy-first,taxonomy-second',
+            '--include-index' => '/zh/articles',
+            '--dry-run' => true,
+            '--json' => true,
+        ]);
+
+        $rawOutput = Artisan::output();
+        $payload = $this->jsonOutput($rawOutput);
+
+        $this->assertSame(0, $exitCode, $rawOutput);
+        $this->assertSame('success', $payload['status'] ?? null);
+        $this->assertTrue((bool) ($payload['dry_run'] ?? false));
+        $this->assertSame('article-taxonomy', $payload['type'] ?? null);
+        $this->assertSame('taxonomy_only', $payload['allowed_path_scope'] ?? null);
+        $this->assertSame([
+            '/zh/articles',
+            '/zh/articles/taxonomy-first',
+            '/zh/articles/taxonomy-second',
+        ], $payload['paths'] ?? []);
+        $this->assertContains('llms', $payload['excluded_path_classes'] ?? []);
+        $this->assertContains('topics', $payload['excluded_path_classes'] ?? []);
+        $this->assertContains('tests', $payload['excluded_path_classes'] ?? []);
+        $this->assertNotContains('/zh', $payload['paths'] ?? []);
+        $this->assertNotContains('/llms.txt', $payload['paths'] ?? []);
+        $this->assertNotContains('/llms-full.txt', $payload['paths'] ?? []);
+        $this->assertNotContains('/zh/topics/mbti', $payload['paths'] ?? []);
+        $this->assertNotContains('/zh/tests/mbti-personality-test-16-personality-types', $payload['paths'] ?? []);
+        $this->assertFalse((bool) ($payload['external_search_submission_attempted'] ?? true));
+        $this->assertFalse((bool) ($payload['schema_hreflang_write_attempted'] ?? true));
+        $this->assertFalse((bool) ($payload['sitemap_llms_mutation_attempted'] ?? true));
+        $this->assertFalse((bool) ($payload['token_output'] ?? true));
+        $this->assertStringNotContainsString('release-secret', $rawOutput);
+        $this->assertStringNotContainsString('cache.example.test', $rawOutput);
+
+        Http::assertNothingSent();
+    }
+
+    public function test_execute_dispatches_article_taxonomy_paths_without_broad_article_planner_paths(): void
+    {
+        config()->set('ops.content_release_observability.cache_invalidation_urls', [
+            'https://cache.example.test/api/content-release/revalidate',
+        ]);
+        config()->set('ops.content_release_observability.cache_invalidation_secret', 'release-secret');
+        Http::fake([
+            'https://cache.example.test/*' => Http::response(['ok' => true], 200),
+        ]);
+
+        $article = $this->articleWithSeoMeta('zh-CN', [
+            'target_topics' => ['mbti'],
+        ], 'taxonomy-execute');
+
+        $exitCode = Artisan::call('content-release:revalidate', [
+            '--type' => 'article-taxonomy',
+            '--article-ids' => (string) $article->id,
+            '--expected-slugs' => 'taxonomy-execute',
+            '--include-index' => '/zh/articles',
+            '--source' => 'article_taxonomy_hygiene_20260618',
+            '--execute' => true,
+            '--json' => true,
+        ]);
+
+        $rawOutput = Artisan::output();
+        $payload = $this->jsonOutput($rawOutput);
+
+        $this->assertSame(0, $exitCode, $rawOutput);
+        $this->assertSame('success', $payload['status'] ?? null);
+        $this->assertFalse((bool) ($payload['dry_run'] ?? true));
+        $this->assertSame('taxonomy_only_revalidation_dispatched', $payload['action'] ?? null);
+        $this->assertSame([
+            '/zh/articles',
+            '/zh/articles/taxonomy-execute',
+        ], $payload['paths'] ?? []);
+        $this->assertStringNotContainsString('release-secret', $rawOutput);
+        $this->assertStringNotContainsString('cache.example.test', $rawOutput);
+
+        Http::assertSent(function ($request) use ($article): bool {
+            $paths = (array) data_get($request->data(), 'cache_signal.paths', []);
+
+            return $request->url() === 'https://cache.example.test/api/content-release/revalidate'
+                && $request->hasHeader('X-FM-Content-Release-Token', 'release-secret')
+                && data_get($request->data(), 'event') === 'content_release_revalidate'
+                && data_get($request->data(), 'content.type') === 'article-taxonomy'
+                && data_get($request->data(), 'content.article_ids') === [(int) $article->id]
+                && data_get($request->data(), 'content.path_scope') === 'taxonomy_only'
+                && $paths === ['/zh/articles', '/zh/articles/taxonomy-execute'];
+        });
+    }
+
+    public function test_article_taxonomy_blocks_slug_lock_mismatch_without_posting(): void
+    {
+        config()->set('ops.content_release_observability.cache_invalidation_urls', [
+            'https://cache.example.test/api/content-release/revalidate',
+        ]);
+        config()->set('ops.content_release_observability.cache_invalidation_secret', 'release-secret');
+        Http::fake();
+
+        $article = $this->articleWithSeoMeta('zh-CN', [], 'taxonomy-lock');
+
+        $exitCode = Artisan::call('content-release:revalidate', [
+            '--type' => 'article-taxonomy',
+            '--article-ids' => (string) $article->id,
+            '--expected-slugs' => 'wrong-slug',
+            '--include-index' => '/zh/articles',
+            '--dry-run' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput(Artisan::output());
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('blocked', $payload['status'] ?? null);
+        $this->assertSame('will_skip', $payload['action'] ?? null);
+        $this->assertContains('expected_slug_mismatch', $payload['issues'] ?? []);
+
+        Http::assertNothingSent();
+    }
+
     public function test_execute_blocks_when_revalidation_token_or_endpoint_config_is_missing(): void
     {
         config()->set('ops.content_release_observability.cache_invalidation_urls', []);
@@ -131,11 +268,11 @@ final class ContentReleaseRevalidateCommandTest extends TestCase
     /**
      * @param  array<string,mixed>  $editorialMetadata
      */
-    private function articleWithSeoMeta(string $locale, array $editorialMetadata = []): Article
+    private function articleWithSeoMeta(string $locale, array $editorialMetadata = [], string $slug = 'content-release-article'): Article
     {
         $article = Article::query()->withoutGlobalScopes()->create([
             'org_id' => 0,
-            'slug' => 'content-release-article',
+            'slug' => $slug,
             'locale' => $locale,
             'title' => 'Content Release Article',
             'excerpt' => 'Release excerpt',
@@ -154,7 +291,7 @@ final class ContentReleaseRevalidateCommandTest extends TestCase
             'locale' => $locale,
             'seo_title' => 'Release SEO title',
             'seo_description' => 'Release SEO description',
-            'canonical_url' => 'https://fermatmind.com/'.(str_starts_with($locale, 'zh') ? 'zh' : 'en').'/articles/content-release-article',
+            'canonical_url' => 'https://fermatmind.com/'.(str_starts_with($locale, 'zh') ? 'zh' : 'en').'/articles/'.$slug,
             'robots' => 'index,follow',
             'schema_json' => [
                 'editorial_package_v1' => $editorialMetadata,
