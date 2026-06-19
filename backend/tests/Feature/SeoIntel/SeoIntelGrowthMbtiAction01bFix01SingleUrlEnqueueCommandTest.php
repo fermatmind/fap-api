@@ -76,6 +76,47 @@ final class SeoIntelGrowthMbtiAction01bFix01SingleUrlEnqueueCommandTest extends 
     }
 
     #[Test]
+    public function dry_run_with_persisted_personality_variant_url_is_queue_eligible(): void
+    {
+        $url = 'https://fermatmind.com/en/personality/intj-a';
+        $this->seedSeoUrl([
+            'canonical_url' => $url,
+            'page_entity_type' => 'personality_profile_variant',
+            'entity_id_or_slug' => 'variant-intj-a',
+            'source_authority' => 'backend_cms',
+            'cluster' => 'personality',
+            'metadata_json' => [
+                'claim_safe' => true,
+                'claim_boundary_state' => 'claim_safe',
+                'publication_state' => 'published',
+                'robots' => 'index',
+                'sitemap_eligible' => true,
+                'llms_eligible' => true,
+                'source_table' => 'personality_profile_variants',
+            ],
+        ]);
+
+        $output = $this->runQueueCommand([
+            '--dry-run' => true,
+            '--no-write' => true,
+            '--json' => true,
+            '--channel' => 'indexnow',
+            '--canonical-url' => $url,
+            '--limit' => 20,
+        ]);
+
+        $this->assertSame('success', $output['status'] ?? null);
+        $this->assertSame(1, $output['candidate_count'] ?? null);
+        $this->assertSame(1, $output['eligible_count'] ?? null);
+        $this->assertSame(1, $output['planned_queue_count'] ?? null);
+        $this->assertSame('personality_profile_variant', data_get($output, 'selected_candidate.page_entity_type'));
+        $this->assertFalse((bool) ($output['writes_attempted'] ?? true));
+        $this->assertFalse((bool) ($output['enqueue_attempted'] ?? true));
+        $this->assertFalse((bool) ($output['external_calls_attempted'] ?? true));
+        $this->assertFalse((bool) ($output['search_submission_attempted'] ?? true));
+    }
+
+    #[Test]
     public function dry_run_with_absent_url_returns_zero_candidates_and_safe_issue(): void
     {
         $exitCode = Artisan::call('seo-intel:search-channel-queue', [

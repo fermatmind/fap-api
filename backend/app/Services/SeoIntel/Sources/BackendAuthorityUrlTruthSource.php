@@ -7,6 +7,8 @@ namespace App\Services\SeoIntel\Sources;
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
 use App\Models\ContentPage;
+use App\Models\PersonalityProfile;
+use App\Models\PersonalityProfileVariant;
 use App\Models\ResearchReport;
 use App\Services\Scale\ScaleRegistry;
 use App\Services\SeoIntel\UrlTruthInventoryRecord;
@@ -38,6 +40,12 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
 
     private ?string $articlesUnavailableReason = null;
 
+    private bool $personalityProfilesAttempted = false;
+
+    private bool $personalityProfilesAvailable = false;
+
+    private ?string $personalityProfilesUnavailableReason = null;
+
     /**
      * @return list<UrlTruthInventoryRecord>
      */
@@ -48,6 +56,7 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
             ...$this->researchReportCandidates(),
             ...$this->contentPageCandidates(),
             ...$this->articleCandidates(),
+            ...$this->personalityProfileCandidates(),
             ...$this->configuredBackendAuthorityCandidates(),
         ]);
     }
@@ -70,6 +79,9 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
             'articles_attempted' => $this->articlesAttempted,
             'articles_available' => $this->articlesAvailable,
             'articles_unavailable_reason' => $this->articlesUnavailableReason,
+            'personality_profiles_attempted' => $this->personalityProfilesAttempted,
+            'personality_profiles_available' => $this->personalityProfilesAvailable,
+            'personality_profiles_unavailable_reason' => $this->personalityProfilesUnavailableReason,
             'configured_backend_authority_canary_available' => $this->configuredBackendAuthorityCandidates() !== [],
             'fetches_public_html' => false,
             'external_api_calls' => false,
@@ -158,6 +170,118 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
         $this->articlesAvailable = $records !== [];
         if (! $this->articlesAvailable) {
             $this->articlesUnavailableReason = 'articles_empty_or_ineligible';
+        }
+
+        return $records;
+    }
+
+    /**
+     * @return list<UrlTruthInventoryRecord>
+     */
+    private function personalityProfileCandidates(): array
+    {
+        $this->personalityProfilesAttempted = true;
+
+        try {
+            $profiles = PersonalityProfile::query()
+                ->withoutGlobalScopes()
+                ->with(['variants' => static function ($query): void {
+                    $query
+                        ->withoutGlobalScopes()
+                        ->where('is_published', true)
+                        ->where(static function ($builder): void {
+                            $builder->whereNull('published_at')
+                                ->orWhere('published_at', '<=', now());
+                        })
+                        ->orderBy('variant_code');
+                }])
+                ->where('org_id', 0)
+                ->where('scale_code', PersonalityProfile::SCALE_CODE_MBTI)
+                ->whereIn('type_code', PersonalityProfile::BASE_TYPE_CODES)
+                ->whereIn('locale', PersonalityProfile::SUPPORTED_LOCALES)
+                ->where('status', 'published')
+                ->where('is_public', true)
+                ->where('is_indexable', true)
+                ->where(static function ($builder): void {
+                    $builder->whereNull('published_at')
+                        ->orWhere('published_at', '<=', now());
+                })
+                ->orderBy('locale')
+                ->orderBy('type_code')
+                ->get();
+        } catch (\Throwable) {
+            $this->personalityProfilesUnavailableReason = 'personality_profiles_unavailable';
+
+            return [];
+        }
+
+        $records = [];
+        foreach ($profiles as $profile) {
+            if (! $profile instanceof PersonalityProfile || ! $this->hasRequiredPersonalityProfileFields($profile)) {
+                continue;
+            }
+
+            $variants = $profile->variants
+                ->filter(static fn (PersonalityProfileVariant $variant): bool => trim((string) $variant->runtime_type_code) !== '')
+                ->values();
+
+            foreach ($variants as $variant) {
+                $path = $this->personalityVariantCanonicalPath($profile, $variant);
+                if ($path === null) {
+                    continue;
+                }
+
+                $records[] = $this->personalityRecord(
+                    canonicalPath: $path,
+                    locale: (string) $profile->locale,
+                    pageEntityType: 'personality_profile_variant',
+                    entityIdOrSlug: (string) $variant->id,
+                    entitySource: 'personality_profile_variants',
+                    lastmodSource: 'personality_profile_variants.updated_at',
+                    sourceUpdatedAt: $variant->updated_at instanceof Carbon ? $variant->updated_at : null,
+                    lastmodAt: $variant->updated_at instanceof Carbon ? $variant->updated_at : null,
+                    extraMetadata: [
+                        'profile_id_hash' => hash('sha256', (string) $profile->id),
+                        'variant_id_hash' => hash('sha256', (string) $variant->id),
+                        'runtime_type_code_hash' => hash('sha256', (string) $variant->runtime_type_code),
+                        'canonical_type_code_hash' => hash('sha256', (string) $variant->canonical_type_code),
+                    ],
+                    extraAttributes: [
+                        'profile_id_hash' => hash('sha256', (string) $profile->id),
+                        'variant_id_hash' => hash('sha256', (string) $variant->id),
+                        'runtime_type_code_hash' => hash('sha256', (string) $variant->runtime_type_code),
+                    ],
+                );
+            }
+
+            $comparisonPath = $this->personalityComparisonCanonicalPath($profile, $variants);
+            if ($comparisonPath !== null) {
+                $updatedAt = $profile->updated_at instanceof Carbon ? $profile->updated_at : null;
+                $records[] = $this->personalityRecord(
+                    canonicalPath: $comparisonPath,
+                    locale: (string) $profile->locale,
+                    pageEntityType: 'personality_profile_comparison',
+                    entityIdOrSlug: (string) $profile->id,
+                    entitySource: 'personality_profiles',
+                    lastmodSource: 'personality_profiles.updated_at',
+                    sourceUpdatedAt: $updatedAt,
+                    lastmodAt: $updatedAt,
+                    extraMetadata: [
+                        'profile_id_hash' => hash('sha256', (string) $profile->id),
+                        'canonical_type_code_hash' => hash('sha256', (string) $profile->canonical_type_code),
+                        'comparison_kind' => 'a_vs_t',
+                    ],
+                    extraAttributes: [
+                        'profile_id_hash' => hash('sha256', (string) $profile->id),
+                        'canonical_type_code_hash' => hash('sha256', (string) $profile->canonical_type_code),
+                    ],
+                );
+            }
+        }
+
+        $this->personalityProfilesAvailable = $records !== [];
+        if (! $this->personalityProfilesAvailable) {
+            $this->personalityProfilesUnavailableReason = 'personality_profiles_empty_or_ineligible';
         }
 
         return $records;
@@ -566,6 +690,115 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
 
         return trim((string) $page->content_md) !== ''
             || trim((string) $page->content_html) !== '';
+    }
+
+    private function hasRequiredPersonalityProfileFields(PersonalityProfile $profile): bool
+    {
+        return trim((string) $profile->type_code) !== ''
+            && trim((string) $profile->canonical_type_code) !== ''
+            && in_array((string) $profile->canonical_type_code, PersonalityProfile::BASE_TYPE_CODES, true)
+            && trim((string) $profile->title) !== ''
+            && (string) $profile->status === 'published'
+            && (bool) $profile->is_public
+            && (bool) $profile->is_indexable;
+    }
+
+    private function personalityVariantCanonicalPath(
+        PersonalityProfile $profile,
+        PersonalityProfileVariant $variant
+    ): ?string {
+        $localeSegment = match ((string) $profile->locale) {
+            'zh-CN', 'zh' => 'zh',
+            'en' => 'en',
+            default => null,
+        };
+
+        $runtimeTypeCode = strtolower(trim((string) $variant->runtime_type_code));
+
+        if ($localeSegment === null || preg_match('/^[a-z]{4}-[at]$/', $runtimeTypeCode) !== 1) {
+            return null;
+        }
+
+        return '/'.$localeSegment.'/personality/'.$runtimeTypeCode;
+    }
+
+    /**
+     * @param  \Illuminate\Support\Collection<int, PersonalityProfileVariant>  $variants
+     */
+    private function personalityComparisonCanonicalPath(PersonalityProfile $profile, $variants): ?string
+    {
+        $localeSegment = match ((string) $profile->locale) {
+            'zh-CN', 'zh' => 'zh',
+            'en' => 'en',
+            default => null,
+        };
+
+        $typeCode = strtolower(trim((string) $profile->canonical_type_code));
+        if ($localeSegment === null || preg_match('/^[a-z]{4}$/', $typeCode) !== 1) {
+            return null;
+        }
+
+        $variantCodes = $variants
+            ->map(static fn (PersonalityProfileVariant $variant): string => strtoupper(trim((string) $variant->variant_code)))
+            ->unique()
+            ->values()
+            ->all();
+
+        if (! in_array('A', $variantCodes, true) || ! in_array('T', $variantCodes, true)) {
+            return null;
+        }
+
+        return '/'.$localeSegment.'/personality/'.$typeCode.'-a-vs-'.$typeCode.'-t';
+    }
+
+    /**
+     * @param  array<string, mixed>  $extraMetadata
+     * @param  array<string, mixed>  $extraAttributes
+     */
+    private function personalityRecord(
+        string $canonicalPath,
+        string $locale,
+        string $pageEntityType,
+        string $entityIdOrSlug,
+        string $entitySource,
+        string $lastmodSource,
+        ?Carbon $sourceUpdatedAt,
+        ?Carbon $lastmodAt,
+        array $extraMetadata = [],
+        array $extraAttributes = [],
+    ): UrlTruthInventoryRecord {
+        return new UrlTruthInventoryRecord(
+            canonicalUrl: $this->canonicalUrl($canonicalPath),
+            locale: $locale,
+            pageEntityType: $pageEntityType,
+            entityIdOrSlug: $entityIdOrSlug,
+            sourceAuthority: 'backend_cms',
+            indexabilityState: 'indexable',
+            lastmodAt: $lastmodAt,
+            lastmodSource: $lastmodSource,
+            cluster: 'personality',
+            entitySource: $entitySource,
+            authorityStatus: 'published_approved',
+            sourceUpdatedAt: $sourceUpdatedAt,
+            metadata: [
+                'source_table_hash' => hash('sha256', $entitySource),
+                'canonical_path_hash' => hash('sha256', $canonicalPath),
+                'claim_boundary_state' => 'claim_safe',
+                'claim_safe' => true,
+                'sitemap_eligible' => true,
+                'llms_eligible' => true,
+                'publication_state' => 'published',
+                'robots' => 'index',
+                'frontend_fallback' => false,
+                'static_sitemap_fallback' => false,
+                'static_llms_fallback' => false,
+                'private_flow' => false,
+            ] + $extraMetadata,
+            attributes: [
+                'source_authority' => 'backend_cms',
+                'claim_safe' => true,
+            ] + $extraAttributes,
+        );
     }
 
     /**
