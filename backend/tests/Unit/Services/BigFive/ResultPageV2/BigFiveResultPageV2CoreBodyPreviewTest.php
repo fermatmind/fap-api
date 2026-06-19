@@ -1080,6 +1080,17 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_article_release_closeout_read_model_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/ArticleReleaseCloseout.php',
+            'backend/app/Console/Kernel.php',
+            'backend/app/Services/Cms/ArticleReleaseCloseoutService.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_seo_intel_mbti_url_truth_cleanup_runtime_files(): void
     {
         $changed = [
@@ -3368,6 +3379,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isArticleReleaseCloseoutFile($file)) {
+                continue;
+            }
+
             if ($this->isArticleTranslationGroupIdCleanupFile($file)) {
                 continue;
             }
@@ -4421,6 +4436,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isArticleDiscoverabilityReleaseFile(string $file): bool
     {
         return $file === 'backend/app/Console/Commands/ArticleDiscoverabilityRelease.php';
+    }
+
+    private function isArticleReleaseCloseoutFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/ArticleReleaseCloseout.php',
+            'backend/app/Console/Kernel.php',
+            'backend/app/Services/Cms/ArticleReleaseCloseoutService.php',
+        ], true);
     }
 
     private function isArticleTranslationGroupIdCleanupFile(string $file): bool
