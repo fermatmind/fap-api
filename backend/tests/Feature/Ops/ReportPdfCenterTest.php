@@ -67,10 +67,78 @@ final class ReportPdfCenterTest extends TestCase
             ->assertTableColumnExists('pdf_ready')
             ->assertTableColumnExists('delivery_status')
             ->assertTableColumnExists('updated_at')
+            ->assertTableColumnExists('big5_result_page_v2_status')
+            ->assertTableColumnExists('big5_result_page_v2_fallback_reason')
+            ->assertTableColumnExists('big5_result_page_v2_validation_error_count')
+            ->assertTableColumnExists('big5_result_page_v2_audited_at')
             ->assertTableColumnExists('org_id')
             ->assertTableActionExists('view', null, $chain['snapshot'])
             ->assertTableActionDoesNotExist('edit', null, $chain['snapshot'])
             ->assertTableActionDoesNotExist('delete', null, $chain['snapshot']);
+    }
+
+    public function test_report_pdf_center_surfaces_big5_v2_audit_without_raw_payloads(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_MENU_SUPPORT,
+            PermissionNames::ADMIN_OPS_READ,
+        ]);
+        $selectedOrg = $this->createOrganization('Big Five V2 Audit Org');
+        $attemptId = (string) Str::uuid();
+
+        DB::table('report_snapshots')->insert([
+            'org_id' => 0,
+            'attempt_id' => $attemptId,
+            'order_no' => null,
+            'scale_code' => 'BIG5_OCEAN',
+            'pack_id' => 'BIG5_OCEAN',
+            'dir_version' => 'v1',
+            'scoring_spec_version' => 'big5_spec_2026Q2_form90_v1',
+            'report_engine_version' => 'v1.2',
+            'big5_result_page_v2_status' => 'attached',
+            'big5_result_page_v2_fallback_reason' => 'v2_attached',
+            'big5_result_page_v2_validation_error_count' => 0,
+            'big5_result_page_v2_audited_at' => now()->subMinute(),
+            'snapshot_version' => 'v1',
+            'report_json' => json_encode([
+                'locked' => false,
+                'access_level' => 'full',
+                'variant' => 'full',
+                'big5_result_page_v2' => ['payload_key' => 'big5_result_page_v2'],
+            ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'report_free_json' => json_encode(['variant' => 'free'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'report_full_json' => json_encode(['payload_json' => 'raw-hidden'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'status' => 'ready',
+            'last_error' => null,
+            'created_at' => now()->subMinutes(2),
+            'updated_at' => now()->subMinute(),
+        ]);
+
+        $snapshot = ReportSnapshot::query()
+            ->withoutGlobalScopes()
+            ->whereKey($attemptId)
+            ->firstOrFail();
+
+        session($this->opsSession($admin, $selectedOrg, 'en'));
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+
+        Livewire::test(ListReportSnapshots::class)
+            ->assertOk()
+            ->assertCanSeeTableRecords([$snapshot])
+            ->assertTableColumnStateSet('big5_result_page_v2_status', 'Attached', $snapshot);
+
+        $this->withSession($this->opsSession($admin, $selectedOrg, 'en'))
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->get('/ops/reports/'.$attemptId.'?locale=en')
+            ->assertOk()
+            ->assertSee('Big Five V2 status')
+            ->assertSee('Attached')
+            ->assertSee('v2_attached')
+            ->assertSee('Big Five V2 validation errors')
+            ->assertDontSee('report_json')
+            ->assertDontSee('report_full_json')
+            ->assertDontSee('payload_json')
+            ->assertDontSee('raw-hidden');
     }
 
     public function test_report_pdf_center_index_query_stays_lightweight_for_production_listing(): void

@@ -28,6 +28,10 @@ class ReportSnapshot extends Model
         'dir_version',
         'scoring_spec_version',
         'report_engine_version',
+        'big5_result_page_v2_status',
+        'big5_result_page_v2_fallback_reason',
+        'big5_result_page_v2_validation_error_count',
+        'big5_result_page_v2_audited_at',
         'snapshot_version',
         'report_json',
         'report_free_json',
@@ -40,6 +44,8 @@ class ReportSnapshot extends Model
 
     protected $casts = [
         'org_id' => 'integer',
+        'big5_result_page_v2_validation_error_count' => 'integer',
+        'big5_result_page_v2_audited_at' => 'datetime',
         'report_json' => 'array',
         'report_free_json' => 'array',
         'report_full_json' => 'array',

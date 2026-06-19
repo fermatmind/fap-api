@@ -136,6 +136,23 @@ class ReportSnapshotResource extends Resource
                 Tables\Columns\TextColumn::make('report_engine_version')
                     ->label(__('ops.custom_pages.reports.columns.report_engine_version'))
                     ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('big5_result_page_v2_status')
+                    ->label(__('ops.custom_pages.reports.columns.big5_result_page_v2_status'))
+                    ->state(fn (ReportSnapshot $record): string => $support->displayStatusLabel($support->bigFiveResultPageV2Status($record)['label']))
+                    ->badge()
+                    ->color(fn (ReportSnapshot $record): string => $support->bigFiveResultPageV2Status($record)['state'])
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('big5_result_page_v2_fallback_reason')
+                    ->label(__('ops.custom_pages.reports.columns.big5_result_page_v2_fallback_reason'))
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('big5_result_page_v2_validation_error_count')
+                    ->label(__('ops.custom_pages.reports.columns.big5_result_page_v2_validation_error_count'))
+                    ->numeric()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('big5_result_page_v2_audited_at')
+                    ->label(__('ops.custom_pages.reports.columns.big5_result_page_v2_audited_at'))
+                    ->dateTime()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('last_delivery_email_sent_at')
                     ->label(__('ops.custom_pages.reports.columns.last_delivery_email_sent_at'))
                     ->dateTime()
@@ -262,6 +279,18 @@ class ReportSnapshotResource extends Resource
                 Tables\Filters\SelectFilter::make('report_engine_version')
                     ->label(__('ops.custom_pages.reports.columns.report_engine_version'))
                     ->options(fn (): array => $support->distinctSnapshotOptions('report_engine_version')),
+                Tables\Filters\SelectFilter::make('big5_result_page_v2_status')
+                    ->label(__('ops.custom_pages.reports.columns.big5_result_page_v2_status'))
+                    ->options(fn (): array => $support->distinctSnapshotOptions('big5_result_page_v2_status'))
+                    ->query(function (Builder $query, array $data) use ($support): void {
+                        $support->applyBigFiveResultPageV2StatusFilter($query, $data['value'] ?? null);
+                    }),
+                Tables\Filters\SelectFilter::make('big5_result_page_v2_fallback_reason')
+                    ->label(__('ops.custom_pages.reports.columns.big5_result_page_v2_fallback_reason'))
+                    ->options(fn (): array => $support->distinctSnapshotOptions('big5_result_page_v2_fallback_reason'))
+                    ->query(function (Builder $query, array $data) use ($support): void {
+                        $support->applySnapshotFieldContainsFilter($query, 'big5_result_page_v2_fallback_reason', $data['value'] ?? null);
+                    }),
             ])
             ->filtersLayout(FiltersLayout::AboveContentCollapsible)
             ->filtersFormColumns(4)

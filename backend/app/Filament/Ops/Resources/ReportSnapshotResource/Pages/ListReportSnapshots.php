@@ -33,8 +33,18 @@ class ListReportSnapshots extends ListRecords
 
     public function getSubheading(): ?string
     {
+        $support = app(ReportSnapshotExplorerSupport::class);
+        $summary = $support->bigFiveResultPageV2CoverageSummary();
+
         return __('ops.resources.support.report_pdf_subheading', [
-            'days' => app(ReportSnapshotExplorerSupport::class)->indexLookbackDays(),
+            'days' => $support->indexLookbackDays(),
+        ]).' '.__('ops.custom_pages.reports.big5_v2_coverage_summary', [
+            'total' => (string) $summary['total'],
+            'attached' => (string) $summary['attached'],
+            'fallback' => (string) $summary['fallback'],
+            'invalid' => (string) $summary['invalid'],
+            'coverage_rate' => $summary['coverage_rate'],
+            'fallback_rate' => $summary['fallback_rate'],
         ]);
     }
 
