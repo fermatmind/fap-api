@@ -285,6 +285,16 @@ final class CareerAiImpactAssetPreviewImportTest extends TestCase
         $row['search_projection'] = ['candidate_only_not_runtime_seo' => true];
         $row['score_rationale']['source_ids'] = ['source_should_not_leak'];
         $row['score_rationale']['evidence_ids'] = ['evidence_should_not_leak'];
+        $row['items']['reader_boundary']['body'] = 'This score is not a career disappearance or job-loss risk prediction.';
+        $row['sources'][] = [
+            'source_id' => 'internal_rubric_v5',
+            'source_name' => 'FermatMind AI Task-Exposure Rubric v5',
+            'source_type' => 'internal_rubric',
+            'source_url' => 'fermatmind://internal/rubric/career-ai-task-exposure-v5',
+            'used_for' => 'Internal scoring lens.',
+            'captured_fact' => 'Internal rubric.',
+            'boundary' => 'Never used alone.',
+        ];
 
         CareerJobAiImpactAsset::query()->create([
             'occupation_id' => $occupation->id,
@@ -309,15 +319,32 @@ final class CareerAiImpactAssetPreviewImportTest extends TestCase
             ->assertJsonPath('ai_impact_asset_v1.locale', 'en');
 
         $asset = $response->json('ai_impact_asset_v1');
-        foreach (['audit_fields', 'evidence_used', 'derived_from_synthesis', 'search_projection'] as $internalKey) {
+        foreach ([
+            'asset_version',
+            'ledger_type',
+            'block_type',
+            'batch_role',
+            'seed_ordinal',
+            'audit_fields',
+            'evidence_used',
+            'derived_from_synthesis',
+            'search_projection',
+            'score_rationale',
+            'micro_family',
+        ] as $internalKey) {
             $this->assertArrayNotHasKey($internalKey, $asset);
         }
 
         $this->assertArrayNotHasKey('source_id', $asset['sources'][0]);
         $this->assertArrayNotHasKey('used_for', $asset['sources'][0]);
-        $this->assertArrayNotHasKey('source_ids', $asset['score_rationale']);
-        $this->assertArrayNotHasKey('evidence_ids', $asset['score_rationale']);
+        $this->assertArrayNotHasKey('source_type', $asset['sources'][0]);
+        $this->assertArrayNotHasKey('boundary', $asset['sources'][0]);
         $this->assertSame('O*NET OnLine summary for Accountants and Auditors', $asset['sources'][0]['name']);
+        $this->assertCount(1, $asset['sources']);
+        $this->assertStringNotContainsString('fermatmind://internal', json_encode($asset, JSON_THROW_ON_ERROR));
+        $this->assertStringNotContainsString('career disappearance', $asset['items']['reader_boundary']['body']);
+        $this->assertStringNotContainsString('job-loss risk', $asset['items']['reader_boundary']['body']);
+        $this->assertStringContainsString('individual career outcome', $asset['items']['reader_boundary']['body']);
     }
 
     public function test_preview_api_fails_closed_when_disabled_or_not_allowlisted(): void
