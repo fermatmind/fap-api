@@ -1104,6 +1104,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_article_weekly_seo_observation_export_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/ArticleWeeklySeoObservationExport.php',
+            'backend/app/Console/Kernel.php',
+            'backend/app/Services/SeoIntel/ArticleWeeklySeoObservationExportService.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\ArticleWeeklySeoObservationExport;',
+            '+        ArticleWeeklySeoObservationExport::class,',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
+    }
+
     public function test_runtime_freeze_classifier_ignores_seo_intel_mbti_url_truth_cleanup_runtime_files(): void
     {
         $changed = [
@@ -3420,6 +3435,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isArticleWeeklySeoObservationExportFile($file)) {
+                continue;
+            }
+
             if ($this->isArticleTranslationGroupIdCleanupFile($file)) {
                 continue;
             }
@@ -4091,6 +4110,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsArticleInlineImageUrlReplacerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsArticleTranslationGroupIdCleanupOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsArticleReleaseCloseoutOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsArticleWeeklySeoObservationExportOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsDailyArticleBackendPipelineOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsControlledArticlePublishSopOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsArticleCoverPropagationSmokeOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
@@ -4493,6 +4513,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Console/Commands/ArticleReleaseCloseout.php',
             'backend/app/Filament/Ops/Resources/ArticleResource/Support/ArticleSeoReleaseStatus.php',
             'backend/app/Services/Cms/ArticleReleaseCloseoutService.php',
+        ], true);
+    }
+
+    private function isArticleWeeklySeoObservationExportFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/ArticleWeeklySeoObservationExport.php',
+            'backend/app/Services/SeoIntel/ArticleWeeklySeoObservationExportService.php',
         ], true);
     }
 
@@ -6232,6 +6260,32 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if (preg_match('/\bArticleReleaseCloseout\b/u', $line) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsArticleWeeklySeoObservationExportOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            if (str_contains($line, '显式注册')) {
+                continue;
+            }
+
+            if (preg_match('/\b(MBTI|Mbti|BigFive|Big5|Prewarm|ResultPage|Report)\b/u', $line) === 1) {
+                return false;
+            }
+
+            if (preg_match('/\bArticleWeeklySeoObservationExport\b/u', $line) !== 1) {
                 return false;
             }
         }
