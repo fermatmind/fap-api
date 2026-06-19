@@ -49,31 +49,7 @@ return new class extends Migration
 
     public function down(): void
     {
-        if (! Schema::hasTable('report_snapshots')) {
-            return;
-        }
-
-        Schema::table('report_snapshots', function (Blueprint $table): void {
-            if ($this->indexExists('report_snapshots', 'report_snapshots_big5_v2_status_idx')) {
-                $table->dropIndex('report_snapshots_big5_v2_status_idx');
-            }
-            if ($this->indexExists('report_snapshots', 'report_snapshots_big5_v2_reason_idx')) {
-                $table->dropIndex('report_snapshots_big5_v2_reason_idx');
-            }
-        });
-
-        Schema::table('report_snapshots', function (Blueprint $table): void {
-            foreach ([
-                'big5_result_page_v2_audited_at',
-                'big5_result_page_v2_validation_error_count',
-                'big5_result_page_v2_fallback_reason',
-                'big5_result_page_v2_status',
-            ] as $column) {
-                if (Schema::hasColumn('report_snapshots', $column)) {
-                    $table->dropColumn($column);
-                }
-            }
-        });
+        // Audit fields are append-only for production observability; rollback is intentionally non-destructive.
     }
 
     private function indexExists(string $table, string $index): bool

@@ -2864,6 +2864,19 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_bigfive_v2_result_page_audit_contract_changes(): void
+    {
+        $changed = [
+            'backend/app/Filament/Ops/Resources/ReportSnapshotResource.php',
+            'backend/app/Filament/Ops/Resources/ReportSnapshotResource/Pages/ListReportSnapshots.php',
+            'backend/app/Filament/Ops/Resources/ReportSnapshotResource/Support/ReportSnapshotExplorerSupport.php',
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2AuditFields.php',
+            'backend/database/migrations/2026_06_19_000100_add_big5_result_page_v2_audit_fields_to_report_snapshots.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_bigfive_v2_en_parity_draft_catalog(): void
     {
         $changed = [
@@ -3702,6 +3715,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isBigFiveV2PilotSupportFile($file)) {
+                continue;
+            }
+
+            if ($this->isBigFiveV2ResultPageAuditContractFile($file)) {
                 continue;
             }
 
@@ -5530,6 +5547,17 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return $file === 'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2RuntimeWrapper.php'
             || $file === 'backend/app/Services/BigFive/ResultPageV2/BigFiveV2PilotRuntimeObservability.php'
             || preg_match('#^backend/app/Services/BigFive/ResultPageV2/(ContentAssets|RouteMatrix|Selector|Composer|Access|Routing|Pdf|Share|History|Compare|Rollout|Observability)/[A-Za-z0-9_]+\.php$#', $file) === 1;
+    }
+
+    private function isBigFiveV2ResultPageAuditContractFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Filament/Ops/Resources/ReportSnapshotResource.php',
+            'backend/app/Filament/Ops/Resources/ReportSnapshotResource/Pages/ListReportSnapshots.php',
+            'backend/app/Filament/Ops/Resources/ReportSnapshotResource/Support/ReportSnapshotExplorerSupport.php',
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2AuditFields.php',
+            'backend/database/migrations/2026_06_19_000100_add_big5_result_page_v2_audit_fields_to_report_snapshots.php',
+        ], true);
     }
 
     private function isBigFiveV2EnParityDraftCatalogFile(string $file): bool

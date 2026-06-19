@@ -41,8 +41,6 @@ class ReportGatekeeper
         private CrisisPolicyResolver $crisisPolicyResolver,
         private ReportSubjectRepository $subjects,
         private OrgContext $orgContext,
-        private BigFiveResultPageV2RuntimeWrapper $bigFiveResultPageV2RuntimeWrapper,
-        private BigFiveResultPageV2AuditFields $bigFiveResultPageV2AuditFields,
     ) {}
 
     private function freemiumLocalePolicy(): FreemiumLocalePolicy
@@ -701,7 +699,7 @@ class ReportGatekeeper
                 'created_at' => $now,
                 'updated_at' => $now,
             ];
-            $row = $this->bigFiveResultPageV2AuditFields->appendToSnapshotRow($row, $bigFiveResultPageV2Audit);
+            $row = app(BigFiveResultPageV2AuditFields::class)->appendToSnapshotRow($row, $bigFiveResultPageV2Audit);
 
             DB::table('report_snapshots')->insertOrIgnore($row);
 
@@ -748,7 +746,7 @@ class ReportGatekeeper
             $responsePayload['big5_public_projection_v1'] = $projection;
         }
 
-        $wrapped = $this->bigFiveResultPageV2RuntimeWrapper->appendIfEnabledWithAudit($attempt, $result, $responsePayload);
+        $wrapped = app(BigFiveResultPageV2RuntimeWrapper::class)->appendIfEnabledWithAudit($attempt, $result, $responsePayload);
         $payload = $wrapped['payload'][BigFiveResultPageV2Contract::PAYLOAD_KEY] ?? null;
         if (is_array($payload)) {
             $report[BigFiveResultPageV2Contract::PAYLOAD_KEY] = $payload;
@@ -756,7 +754,7 @@ class ReportGatekeeper
 
         return [
             $report,
-            $this->bigFiveResultPageV2AuditFields->fromRuntimeAudit(
+            app(BigFiveResultPageV2AuditFields::class)->fromRuntimeAudit(
                 is_array($wrapped['audit'] ?? null) ? $wrapped['audit'] : [],
                 BigFiveResultPageV2Contract::SCALE_CODE
             ),
