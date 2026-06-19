@@ -31,6 +31,7 @@ use App\Http\Controllers\API\V0_4\BootController;
 use App\Http\Controllers\API\V0_4\ExperimentGovernanceController;
 use App\Http\Controllers\API\V0_4\PartnerController;
 use App\Http\Controllers\API\V0_4\RotationAuditController;
+use App\Http\Controllers\API\V0_5\Career\CareerAiImpactAssetPreviewController;
 use App\Http\Controllers\API\V0_5\Career\CareerAliasResolutionController;
 use App\Http\Controllers\API\V0_5\Career\CareerAttributionEventController;
 use App\Http\Controllers\API\V0_5\Career\CareerCnProxyPublicOwnerController;
@@ -506,6 +507,7 @@ Route::prefix('v0.5')->group(function () {
     Route::get('/career/directory', [CareerDirectoryController::class, 'index']);
     Route::get('/career/jobs', [CareerJobListController::class, 'index']);
     Route::get('/career/cn-proxy/{slug}', [CareerCnProxyPublicOwnerController::class, 'show']);
+    Route::get('/career/jobs/{slug}/ai-impact-asset', [CareerAiImpactAssetPreviewController::class, 'show']);
     Route::get('/career/jobs/{slug}/salary-asset', [CareerSalaryAssetPreviewController::class, 'show']);
     Route::get('/career/jobs/{slug}', [CareerJobDetailController::class, 'show']);
     Route::get('/career/jobs/{slug}/explainability', [CareerJobExplainabilityController::class, 'show']);

@@ -2537,6 +2537,30 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ));
     }
 
+    public function test_runtime_freeze_classifier_ignores_career_ai_impact_asset_preview_contract_changes(): void
+    {
+        $changed = [
+            'backend/app/Http/Controllers/API/V0_5/Career/CareerAiImpactAssetPreviewController.php',
+            'backend/app/Models/CareerJobAiImpactAsset.php',
+            'backend/app/Services/Career/AiImpactAssets/CareerAiImpactAssetImportService.php',
+            'backend/app/Services/Career/AiImpactAssets/CareerAiImpactAssetImportStateMachine.php',
+            'backend/app/Services/Career/AiImpactAssets/CareerAiImpactAssetPreviewService.php',
+            'backend/database/migrations/2026_06_19_000100_create_career_job_ai_impact_assets_table.php',
+            'backend/routes/api.php',
+        ];
+        $routeChangedLines = [
+            '+use App\\Http\\Controllers\\API\\V0_5\\Career\\CareerAiImpactAssetPreviewController;',
+            "+    Route::get('/career/jobs/{slug}/ai-impact-asset', [CareerAiImpactAssetPreviewController::class, 'show']);",
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            routeChangedLines: $routeChangedLines,
+        ));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_display_asset_backed_bundle_changes(): void
     {
         $changed = [
@@ -3673,6 +3697,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isCareerAiImpactAssetPreviewContractFile($file)) {
+                continue;
+            }
+
             if (
                 $file === 'backend/app/Services/Content/ContentPacksIndex.php'
                 && $this->contentPacksIndexDiffIsStreamingScanOnly(
@@ -3728,6 +3756,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             if (
                 $file === 'backend/routes/api.php'
                 && $this->routeDiffIsCareerSalaryAssetStagingPreviewOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
+            ) {
+                continue;
+            }
+
+            if (
+                $file === 'backend/routes/api.php'
+                && $this->routeDiffIsCareerAiImpactAssetPreviewContractOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
             ) {
                 continue;
             }
@@ -5359,6 +5394,18 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ], true);
     }
 
+    private function isCareerAiImpactAssetPreviewContractFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Http/Controllers/API/V0_5/Career/CareerAiImpactAssetPreviewController.php',
+            'backend/app/Models/CareerJobAiImpactAsset.php',
+            'backend/app/Services/Career/AiImpactAssets/CareerAiImpactAssetImportService.php',
+            'backend/app/Services/Career/AiImpactAssets/CareerAiImpactAssetImportStateMachine.php',
+            'backend/app/Services/Career/AiImpactAssets/CareerAiImpactAssetPreviewService.php',
+            'backend/database/migrations/2026_06_19_000100_create_career_job_ai_impact_assets_table.php',
+        ], true);
+    }
+
     private function isCareerPublicDistributionFile(string $file): bool
     {
         return in_array($file, [
@@ -6458,6 +6505,29 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $allowedLines = [
             '+use App\\Http\\Controllers\\API\\V0_5\\Career\\CareerSalaryAssetPreviewController;',
             "+    Route::get('/career/jobs/{slug}/salary-asset', [CareerSalaryAssetPreviewController::class, 'show']);",
+        ];
+
+        foreach ($changedLines as $line) {
+            if (! in_array($line, $allowedLines, true)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function routeDiffIsCareerAiImpactAssetPreviewContractOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        $allowedLines = [
+            '+use App\\Http\\Controllers\\API\\V0_5\\Career\\CareerAiImpactAssetPreviewController;',
+            "+    Route::get('/career/jobs/{slug}/ai-impact-asset', [CareerAiImpactAssetPreviewController::class, 'show']);",
         ];
 
         foreach ($changedLines as $line) {

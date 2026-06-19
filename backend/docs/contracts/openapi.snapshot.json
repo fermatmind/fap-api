@@ -2855,6 +2855,23 @@
                 ]
             }
         },
+        "/api/v0.5/career/jobs/{slug}/ai-impact-asset": {
+            "get": {
+                "operationId": "get_api_v0_5_career_jobs_slug_ai_impact_asset",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerAiImpactAssetPreviewController@show",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
         "/api/v0.5/career/jobs/{slug}/explainability": {
             "get": {
                 "operationId": "get_api_v0_5_career_jobs_slug_explainability",
