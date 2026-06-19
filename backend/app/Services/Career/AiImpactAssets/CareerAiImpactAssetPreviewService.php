@@ -32,9 +32,9 @@ final class CareerAiImpactAssetPreviewService
     public function previewAsset(string $slug, string $locale): ?CareerJobAiImpactAsset
     {
         $normalizedSlug = $this->normalizeSlug($slug);
-        $normalizedLocale = $this->normalizeLocale($locale);
+        $normalizedLocale = $this->normalizePreviewLocale($locale);
 
-        if (! $this->previewEnabled()) {
+        if ($normalizedLocale === null || ! $this->previewEnabled()) {
             return null;
         }
 
@@ -186,6 +186,15 @@ final class CareerAiImpactAssetPreviewService
         return match (strtolower(trim($locale))) {
             'en', 'en-us', 'en_us' => 'en',
             default => 'zh-CN',
+        };
+    }
+
+    private function normalizePreviewLocale(string $locale): ?string
+    {
+        return match (strtolower(trim($locale))) {
+            'en', 'en-us', 'en_us' => 'en',
+            'zh', 'zh-cn', 'zh_cn' => 'zh-CN',
+            default => null,
         };
     }
 }
