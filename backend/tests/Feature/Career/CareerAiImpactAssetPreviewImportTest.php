@@ -440,6 +440,37 @@ final class CareerAiImpactAssetPreviewImportTest extends TestCase
             ->assertNotFound();
     }
 
+    public function test_preview_api_fails_closed_for_unsupported_locale_without_fallback(): void
+    {
+        Config::set('career_ai_impact_assets.staging_preview_enabled', true);
+        Config::set('career_ai_impact_assets.preview_slugs', ['accountants-and-auditors']);
+        $occupation = $this->seedOccupation('accountants-and-auditors');
+        $zhRow = $this->assetRow('accountants-and-auditors', 'zh-CN');
+
+        CareerJobAiImpactAsset::query()->create([
+            'occupation_id' => $occupation->id,
+            'career_job_slug' => 'accountants-and-auditors',
+            'locale' => 'zh-CN',
+            'asset_version' => CareerJobAiImpactAsset::ASSET_VERSION_V5,
+            'status' => CareerJobAiImpactAsset::STATUS_STAGING_PREVIEW,
+            'preview_allowlisted' => true,
+            'asset_payload_json' => $zhRow,
+            'sources_json' => $zhRow['sources'],
+            'evidence_used_json' => $zhRow['evidence_used'],
+            'derived_from_synthesis_json' => $zhRow['derived_from_synthesis'],
+            'audit_fields_json' => $zhRow['audit_fields'],
+            'asset_row_hash' => $zhRow['audit_fields']['row_hash'],
+        ]);
+
+        $this->getJson('/api/v0.5/career/jobs/accountants-and-auditors/ai-impact-asset?locale=fr')
+            ->assertNotFound()
+            ->assertJsonPath('ok', false);
+
+        $this->getJson('/api/v0.5/career/jobs/accountants-and-auditors/ai-impact-asset?locale=zh-CN')
+            ->assertOk()
+            ->assertJsonPath('ai_impact_asset_v1.locale', 'zh-CN');
+    }
+
     private function seedCareerJobBundleAuthority(string $slug): void
     {
         $this->seedCareerJobBundleAuthorities([$slug]);
