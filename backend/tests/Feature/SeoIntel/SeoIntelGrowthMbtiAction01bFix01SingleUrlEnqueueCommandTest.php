@@ -39,6 +39,7 @@ final class SeoIntelGrowthMbtiAction01bFix01SingleUrlEnqueueCommandTest extends 
         $synopsis = $command->getDefinition()->getSynopsis();
 
         $this->assertStringContainsString('--canonical-url [CANONICAL-URL]', $synopsis);
+        $this->assertStringContainsString('--confirm-bounded-enqueue-override [CONFIRM-BOUNDED-ENQUEUE-OVERRIDE]', $synopsis);
         $this->assertStringContainsString('--enqueue', $synopsis);
     }
 

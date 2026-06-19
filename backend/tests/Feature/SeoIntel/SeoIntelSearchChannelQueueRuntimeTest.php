@@ -157,6 +157,71 @@ final class SeoIntelSearchChannelQueueRuntimeTest extends TestCase
     }
 
     #[Test]
+    public function bounded_enqueue_override_writes_one_article_url_channel_when_write_gate_is_disabled(): void
+    {
+        $canonicalUrl = 'https://fermatmind.com/zh/articles/gaokao-score-major-shortlist-riasec-checklist';
+        $this->seedSeoUrl([
+            'canonical_url' => $canonicalUrl,
+            'locale' => 'zh-CN',
+            'page_entity_type' => 'article',
+            'entity_id_or_slug' => '53',
+            'cluster' => 'article',
+            'source_authority' => 'backend_cms',
+            'lastmod_source' => 'articles.updated_at',
+            'metadata_json' => [
+                'claim_safe' => true,
+                'claim_boundary_state' => 'approved',
+                'publication_state' => 'published',
+                'source_table' => 'articles',
+            ],
+        ]);
+        $approvalPhrase = sprintf(
+            'I explicitly approve SEARCH-CHANNEL-QUEUE-ENQUEUE write for canonical URL %s channel indexnow; no live submission, no CMS content changes, no publish, no schema/hreflang writes, no sitemap/llms mutation.',
+            $canonicalUrl,
+        );
+
+        $blockedOutput = $this->runQueueCommand([
+            '--enqueue' => true,
+            '--json' => true,
+            '--canonical-url' => $canonicalUrl,
+            '--channel' => 'indexnow',
+            '--limit' => 20,
+        ], expectSuccess: false);
+
+        $this->assertSame('blocked', $blockedOutput['status'] ?? null);
+        $this->assertContains('write_gate_disabled', $blockedOutput['issues'] ?? []);
+        $this->assertContains('bounded_enqueue_override_confirmation_required', $blockedOutput['issues'] ?? []);
+        $this->assertSame($approvalPhrase, $blockedOutput['required_bounded_enqueue_override_confirmation'] ?? null);
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_search_channel_queue_items')->count());
+
+        $output = $this->runQueueCommand([
+            '--enqueue' => true,
+            '--json' => true,
+            '--canonical-url' => $canonicalUrl,
+            '--channel' => 'indexnow',
+            '--confirm-bounded-enqueue-override' => $approvalPhrase,
+            '--limit' => 20,
+        ]);
+
+        $this->assertSame('success', $output['status'] ?? null);
+        $this->assertSame('bounded_command_override', $output['write_authorization'] ?? null);
+        $this->assertTrue((bool) ($output['config_write_gate_bypassed'] ?? false));
+        $this->assertTrue((bool) ($output['writes_attempted'] ?? false));
+        $this->assertTrue((bool) ($output['writes_committed'] ?? false));
+        $this->assertTrue((bool) ($output['enqueue_committed'] ?? false));
+        $this->assertFalse((bool) ($output['external_calls_attempted'] ?? true));
+        $this->assertFalse((bool) ($output['search_submission_attempted'] ?? true));
+        $this->assertFalse((bool) ($output['live_submission_attempted'] ?? true));
+        $this->assertSame(['indexnow' => 1], $output['channel_breakdown'] ?? null);
+        $this->assertSame(['article' => 1], $output['page_type_breakdown'] ?? null);
+        $this->assertSame(1, DB::connection('seo_intel')->table('seo_search_channel_queue_items')->count());
+        $this->assertSame(1, DB::connection('seo_intel')->table('seo_search_channel_queue_batches')->count());
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_baidu_push_logs')->count());
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_indexnow_submissions')->count());
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_domestic_submission_logs')->count());
+    }
+
+    #[Test]
     public function unsafe_article_urls_remain_blocked(): void
     {
         $unsafeCases = [
@@ -523,12 +588,12 @@ final class SeoIntelSearchChannelQueueRuntimeTest extends TestCase
      * @param  array<string, mixed>  $arguments
      * @return array<string, mixed>
      */
-    private function runQueueCommand(array $arguments): array
+    private function runQueueCommand(array $arguments, bool $expectSuccess = true): array
     {
         $exitCode = Artisan::call('seo-intel:search-channel-queue', $arguments);
         $output = json_decode(trim(Artisan::output()), true);
 
-        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame($expectSuccess ? 0 : 1, $exitCode, Artisan::output());
         $this->assertIsArray($output);
 
         return $output;

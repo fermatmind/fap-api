@@ -18,6 +18,7 @@ final class SeoIntelSearchChannelQueueCommand extends Command
         {--channel= : Restrict planning to one supported channel}
         {--canonical-url= : Restrict planning to one persisted canonical URL}
         {--page-type= : Restrict planning to one page entity type}
+        {--confirm-bounded-enqueue-override= : Exact approval phrase for a command-scoped single URL/channel enqueue override}
         {--limit=20 : Maximum URL Truth rows to inspect}';
 
     protected $description = 'Plan or enqueue Search Channel Queue candidates without live search submission.';
@@ -31,6 +32,7 @@ final class SeoIntelSearchChannelQueueCommand extends Command
         $channel = $this->nullableOption('channel');
         $canonicalUrl = $this->nullableOption('canonical-url');
         $pageType = $this->nullableOption('page-type');
+        $boundedEnqueueOverrideConfirmation = $this->nullableOption('confirm-bounded-enqueue-override');
 
         $plan = $planner->plan($channel, $pageType, $limit, $canonicalUrl);
         $plannedItems = $plan['planned_items'];
@@ -47,6 +49,9 @@ final class SeoIntelSearchChannelQueueCommand extends Command
         $status = 'success';
         $issues = [];
         $duplicateDetected = (bool) ($plan['duplicate_detected'] ?? false);
+        $writeAuthorization = 'config_gate';
+        $configWriteGateBypassed = false;
+        $requiredBoundedEnqueueOverrideConfirmation = null;
 
         if ($canonicalUrl !== null && $plan['source_unavailable_reason'] === null && (int) $plan['candidate_count'] === 0) {
             $issues[] = 'canonical_url_not_found';
@@ -87,10 +92,27 @@ final class SeoIntelSearchChannelQueueCommand extends Command
             $enqueueAttempted = true;
             $status = 'blocked';
         } elseif ($writeRequested && ! $writeGateEnabled) {
+            $boundedOverride = $this->boundedEnqueueOverride(
+                enqueue: $enqueue,
+                canonicalUrl: $canonicalUrl,
+                channel: $channel,
+                confirmation: $boundedEnqueueOverrideConfirmation,
+            );
+            $requiredBoundedEnqueueOverrideConfirmation = $boundedOverride['required_confirmation'];
             $writesAttempted = true;
             $enqueueAttempted = true;
-            $status = 'blocked';
-            $issues[] = 'write_gate_disabled';
+
+            if (! $boundedOverride['allowed']) {
+                $status = 'blocked';
+                $issues[] = 'write_gate_disabled';
+                $issues = array_merge($issues, $boundedOverride['issues']);
+            } elseif ($plannedItems !== []) {
+                $writeAuthorization = 'bounded_command_override';
+                $configWriteGateBypassed = true;
+                $writeResult = $writer->write($plannedItems);
+                $writesCommitted = ((int) $writeResult['written_items']) > 0;
+                $enqueueCommitted = $writesCommitted;
+            }
         } elseif ($writeRequested && $plannedItems !== []) {
             $writesAttempted = true;
             $enqueueAttempted = true;
@@ -134,6 +156,9 @@ final class SeoIntelSearchChannelQueueCommand extends Command
             'protected_legacy_tables_not_written' => config('seo_intel.search_channel_queue.protected_legacy_tables', []),
             'write_gate_env' => 'SEO_INTEL_SEARCH_CHANNEL_QUEUE_WRITE_ENABLED',
             'write_gate_enabled' => $writeGateEnabled,
+            'write_authorization' => $writeAuthorization,
+            'config_write_gate_bypassed' => $configWriteGateBypassed,
+            'required_bounded_enqueue_override_confirmation' => $requiredBoundedEnqueueOverrideConfirmation,
             'batch_ids' => $writeResult['batch_ids'],
             'written_items' => $writeResult['written_items'],
             'issues' => $issues,
@@ -171,6 +196,44 @@ final class SeoIntelSearchChannelQueueCommand extends Command
         $value = trim((string) $value);
 
         return $value === '' ? null : $value;
+    }
+
+    /**
+     * @return array{allowed: bool, issues: list<string>, required_confirmation: ?string}
+     */
+    private function boundedEnqueueOverride(bool $enqueue, ?string $canonicalUrl, ?string $channel, ?string $confirmation): array
+    {
+        $issues = [];
+        $requiredConfirmation = null;
+
+        if (! $enqueue) {
+            $issues[] = 'bounded_enqueue_override_requires_enqueue';
+        }
+
+        if ($canonicalUrl === null || $channel === null) {
+            $issues[] = 'bounded_enqueue_override_requires_canonical_url_and_channel';
+        } else {
+            $requiredConfirmation = $this->boundedEnqueueOverrideConfirmation($canonicalUrl, $channel);
+
+            if ($confirmation !== $requiredConfirmation) {
+                $issues[] = 'bounded_enqueue_override_confirmation_required';
+            }
+        }
+
+        return [
+            'allowed' => $issues === [],
+            'issues' => $issues,
+            'required_confirmation' => $requiredConfirmation,
+        ];
+    }
+
+    private function boundedEnqueueOverrideConfirmation(string $canonicalUrl, string $channel): string
+    {
+        return sprintf(
+            'I explicitly approve SEARCH-CHANNEL-QUEUE-ENQUEUE write for canonical URL %s channel %s; no live submission, no CMS content changes, no publish, no schema/hreflang writes, no sitemap/llms mutation.',
+            $canonicalUrl,
+            $channel,
+        );
     }
 
     private function stringValue(mixed $value): string
