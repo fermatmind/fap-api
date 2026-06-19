@@ -1095,6 +1095,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_article_release_closeout_ops_panel_files(): void
+    {
+        $changed = [
+            'backend/app/Filament/Ops/Resources/ArticleResource/Support/ArticleSeoReleaseStatus.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_seo_intel_mbti_url_truth_cleanup_runtime_files(): void
     {
         $changed = [
@@ -4482,6 +4491,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return in_array($file, [
             'backend/app/Console/Commands/ArticleReleaseCloseout.php',
+            'backend/app/Filament/Ops/Resources/ArticleResource/Support/ArticleSeoReleaseStatus.php',
             'backend/app/Services/Cms/ArticleReleaseCloseoutService.php',
         ], true);
     }
