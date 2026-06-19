@@ -597,6 +597,66 @@ final class SeoIntelTwoStageUrlTruthHandoffTest extends TestCase
     }
 
     #[Test]
+    public function article_import_write_can_use_exact_bounded_override_when_config_write_flags_are_disabled(): void
+    {
+        $this->prepareSeoIntelSqliteConnection();
+        config([
+            'seo_intel.enabled' => false,
+            'seo_intel.write_enabled' => false,
+        ]);
+
+        $artifact = new UrlTruthHandoffArtifact;
+        $path = sys_get_temp_dir().'/write-article-url-truth-handoff-'.bin2hex(random_bytes(4)).'.json';
+        $artifact->writeJson($path, $artifact->fromRecords([$this->articleRecord()], pageEntityType: 'article'));
+        $sha256 = $artifact->sha256($path);
+        $overrideConfirmation = sprintf(
+            'I explicitly approve bounded URL Truth handoff import write for article page_entity_type using artifact sha256 %s generated at %s; no search submission, no CMS content changes, no publish, no schema/hreflang writes.',
+            $sha256,
+            $path,
+        );
+
+        $blockedExitCode = Artisan::call('seo-intel:url-truth-handoff', [
+            '--import' => $path,
+            '--write' => true,
+            '--confirm-artifact-sha256' => $sha256,
+            '--json' => true,
+            '--limit' => 20,
+            '--page-type' => 'article',
+        ]);
+        $blockedOutput = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(1, $blockedExitCode);
+        $this->assertContains('seo_intel_write_flags_disabled', $blockedOutput['issues'] ?? []);
+        $this->assertContains('bounded_write_override_confirmation_required', $blockedOutput['issues'] ?? []);
+        $this->assertSame($overrideConfirmation, $blockedOutput['required_bounded_write_override_confirmation'] ?? null);
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_urls')->count());
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_url_entities')->count());
+
+        $writeExitCode = Artisan::call('seo-intel:url-truth-handoff', [
+            '--import' => $path,
+            '--write' => true,
+            '--confirm-artifact-sha256' => $sha256,
+            '--confirm-bounded-write-override' => $overrideConfirmation,
+            '--json' => true,
+            '--limit' => 20,
+            '--page-type' => 'article',
+        ]);
+        $writeOutput = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(0, $writeExitCode, json_encode($writeOutput, JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR));
+        $this->assertSame('success', $writeOutput['status'] ?? null);
+        $this->assertSame('import_write', $writeOutput['mode'] ?? null);
+        $this->assertSame('article', $writeOutput['page_entity_type'] ?? null);
+        $this->assertSame('bounded_command_override', $writeOutput['write_authorization'] ?? null);
+        $this->assertTrue((bool) ($writeOutput['config_write_flags_bypassed'] ?? false));
+        $this->assertTrue((bool) ($writeOutput['writes_committed'] ?? false));
+        $this->assertFalse((bool) ($writeOutput['search_url_submission'] ?? true));
+        $this->assertSame(['seo_urls', 'seo_url_entities'], $writeOutput['target_tables'] ?? null);
+        $this->assertSame(1, DB::connection('seo_intel')->table('seo_urls')->count());
+        $this->assertSame(1, DB::connection('seo_intel')->table('seo_url_entities')->count());
+    }
+
+    #[Test]
     public function generated_artifact_locks_two_stage_handoff_boundary(): void
     {
         $path = base_path('docs/seo/generated/seo-intel-two-stage-url-truth-handoff.v1.json');
@@ -654,6 +714,44 @@ final class SeoIntelTwoStageUrlTruthHandoffTest extends TestCase
             attributes: [
                 'claim_safe' => true,
                 'source_authority' => 'backend_cms',
+            ],
+        );
+    }
+
+    private function articleRecord(
+        string $canonicalUrl = 'https://fermatmind.com/zh/articles/gaokao-score-major-shortlist-riasec-checklist',
+        string $entityIdOrSlug = '53',
+    ): UrlTruthInventoryRecord {
+        $path = (string) parse_url($canonicalUrl, PHP_URL_PATH);
+
+        return new UrlTruthInventoryRecord(
+            canonicalUrl: $canonicalUrl,
+            locale: 'zh-CN',
+            pageEntityType: 'article',
+            entityIdOrSlug: $entityIdOrSlug,
+            sourceAuthority: 'backend_cms',
+            indexabilityState: 'indexable',
+            lastmodAt: now()->subHour(),
+            lastmodSource: 'articles.updated_at',
+            cluster: 'articles',
+            entitySource: 'articles',
+            authorityStatus: 'published_approved',
+            sourceUpdatedAt: now()->subHour(),
+            isPrivateFlow: false,
+            metadata: [
+                'canonical_path_hash' => hash('sha256', $path),
+                'source_table_hash' => hash('sha256', 'articles'),
+                'claim_boundary_state' => 'claim_safe',
+                'claim_safe' => true,
+                'sitemap_eligible' => true,
+                'llms_eligible' => true,
+                'publication_state' => 'published',
+                'robots' => 'index',
+            ],
+            attributes: [
+                'claim_safe' => true,
+                'source_authority' => 'backend_cms',
+                'article_id_hash' => hash('sha256', $entityIdOrSlug),
             ],
         );
     }
