@@ -1080,6 +1080,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_article_release_closeout_read_model_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/ArticleReleaseCloseout.php',
+            'backend/app/Console/Kernel.php',
+            'backend/app/Services/Cms/ArticleReleaseCloseoutService.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\ArticleReleaseCloseout;',
+            '+        ArticleReleaseCloseout::class,',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
+    }
+
     public function test_runtime_freeze_classifier_ignores_seo_intel_mbti_url_truth_cleanup_runtime_files(): void
     {
         $changed = [
@@ -3392,6 +3407,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isArticleReleaseCloseoutFile($file)) {
+                continue;
+            }
+
             if ($this->isArticleTranslationGroupIdCleanupFile($file)) {
                 continue;
             }
@@ -4062,6 +4081,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsArticleImageMetadataUpdaterOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsArticleInlineImageUrlReplacerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsArticleTranslationGroupIdCleanupOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsArticleReleaseCloseoutOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsDailyArticleBackendPipelineOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsControlledArticlePublishSopOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsArticleCoverPropagationSmokeOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
@@ -4456,6 +4476,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isArticleDiscoverabilityReleaseFile(string $file): bool
     {
         return $file === 'backend/app/Console/Commands/ArticleDiscoverabilityRelease.php';
+    }
+
+    private function isArticleReleaseCloseoutFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/ArticleReleaseCloseout.php',
+            'backend/app/Services/Cms/ArticleReleaseCloseoutService.php',
+        ], true);
     }
 
     private function isArticleTranslationGroupIdCleanupFile(string $file): bool
@@ -6168,6 +6196,32 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if (preg_match('/\bArticleUpdateTranslationGroupId\b/u', $line) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsArticleReleaseCloseoutOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            if (str_contains($line, '显式注册')) {
+                continue;
+            }
+
+            if (preg_match('/\b(MBTI|Mbti|BigFive|Big5|Prewarm|ResultPage|Report)\b/u', $line) === 1) {
+                return false;
+            }
+
+            if (preg_match('/\bArticleReleaseCloseout\b/u', $line) !== 1) {
                 return false;
             }
         }
