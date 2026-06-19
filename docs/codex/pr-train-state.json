@@ -38873,7 +38873,7 @@
     "repo": "fap-api",
     "branch": "codex/pr-fdn-social-sync-mvp-01",
     "base": "main",
-    "status": "pr_open",
+    "status": "merged",
     "title": "feat(foundation): add manual Daily Giving social sync MVP",
     "depends_on": [
       "PR-FDN-SOCIAL-SYNC-READINESS"
@@ -55026,15 +55026,19 @@
       },
       "github": {
         "status": "pass",
-        "evidence": "PR #2139 GitHub checks passed on head 52447f402a37a23b818b020c0c7c2c23240cd524 after the scoped CI fix: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and semgrep sarif non-blocking upload. mergeStateStatus=CLEAN."
+        "evidence": "PR #2139 GitHub checks passed on final head f33d424e7cd969258a72e71c4bf652a362606607: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and semgrep sarif non-blocking upload. mergeStateStatus=CLEAN before squash merge."
+      },
+      "post_merge": {
+        "status": "pass",
+        "evidence": "GitHub reports PR #2139 MERGED at 2026-06-19T23:22:38Z with merge commit f2ba00ba4c7b85c62988c43f7f88ab499ad72d24. origin/main and local main both point to f2ba00ba4c7b85c62988c43f7f88ab499ad72d24; remote task branch is absent; no local task branch remains. Post-merge OpenAPI snapshot check, SeoDashApi01ReadOnlyApiContractTest, BigFive runtime-freeze focused filter, JSON/YAML, and diff checks passed."
       }
     },
     "failure_reason": null,
-    "commit_sha": "52447f402a37a23b818b020c0c7c2c23240cd524",
+    "commit_sha": "f2ba00ba4c7b85c62988c43f7f88ab499ad72d24",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2139",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-19T23:22:38Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-20T07:08:00+08:00",
@@ -55075,6 +55079,11 @@
         "at": "2026-06-20T07:31:00+08:00",
         "status": "ready_to_merge",
         "note": "GitHub checks passed for PR #2139 at head 52447f402a37a23b818b020c0c7c2c23240cd524 and mergeStateStatus was CLEAN; pre-merge scope validation remained within the PR8 allowlist."
+      },
+      {
+        "at": "2026-06-20T07:35:00+08:00",
+        "status": "merged",
+        "note": "PR #2139 was squash-merged as f2ba00ba4c7b85c62988c43f7f88ab499ad72d24; remote branch is deleted, local task branch is absent, local main is synced to origin/main, and post-merge focused validation passed."
       }
     ]
   }
