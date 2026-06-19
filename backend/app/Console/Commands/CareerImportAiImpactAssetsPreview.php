@@ -15,6 +15,7 @@ final class CareerImportAiImpactAssetsPreview extends Command
         {--expected-sha256= : Optional expected SHA-256 for the input JSONL artifact}
         {--slugs= : Optional comma-separated preview slug subset}
         {--all-slugs-from-file : Dry-run every slug found in the source JSONL instead of the configured preview allowlist}
+        {--confirm-full-staging-preview : Explicitly confirm that --force may write every slug found in the source JSONL to staging_preview}
         {--dry-run : Validate only; do not write staging or production rows}
         {--force : Write rows only when --status=staging_preview and validation passes}
         {--status=staging_preview : Target import status; only staging_preview is supported by this command}
@@ -48,6 +49,13 @@ final class CareerImportAiImpactAssetsPreview extends Command
                 return $this->finish([
                     'decision' => 'fail',
                     'errors' => ['--force cannot be combined with --dry-run.'],
+                ], false);
+            }
+
+            if ($force && (bool) $this->option('all-slugs-from-file') && ! (bool) $this->option('confirm-full-staging-preview')) {
+                return $this->finish([
+                    'decision' => 'fail',
+                    'errors' => ['--force --all-slugs-from-file requires --confirm-full-staging-preview.'],
                 ], false);
             }
 
