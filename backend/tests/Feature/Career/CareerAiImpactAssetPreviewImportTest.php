@@ -149,6 +149,64 @@ final class CareerAiImpactAssetPreviewImportTest extends TestCase
             ->assertJsonMissingPath('ai_impact_asset_v1.search_projection');
     }
 
+    public function test_importer_force_all_slugs_from_file_requires_explicit_confirmation(): void
+    {
+        $this->seedCareerJobBundleAuthority('accountants-and-auditors');
+        $file = $this->writeJsonl([
+            $this->assetRow('accountants-and-auditors', 'zh-CN'),
+            $this->assetRow('accountants-and-auditors', 'en'),
+        ]);
+        $report = storage_path('framework/testing/ai-impact-preview-force-full-requires-confirmation.json');
+
+        $exitCode = Artisan::call('career:ai-impact-assets-import-preview', [
+            '--file' => $file,
+            '--all-slugs-from-file' => true,
+            '--force' => true,
+            '--output' => $report,
+        ]);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertDatabaseCount('career_job_ai_impact_assets', 0);
+        $decoded = json_decode((string) file_get_contents($report), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertStringContainsString('--force --all-slugs-from-file requires --confirm-full-staging-preview', implode(' ', $decoded['errors']));
+    }
+
+    public function test_importer_force_all_slugs_from_file_writes_row_allowlisted_full_preview(): void
+    {
+        Config::set('career_ai_impact_assets.staging_preview_enabled', true);
+        Config::set('career_ai_impact_assets.preview_slugs', []);
+        $this->seedCareerJobBundleAuthorities(['accountants-and-auditors', 'actuaries']);
+        $file = $this->writeJsonl([
+            $this->assetRow('accountants-and-auditors', 'zh-CN'),
+            $this->assetRow('accountants-and-auditors', 'en'),
+            $this->assetRow('actuaries', 'zh-CN'),
+            $this->assetRow('actuaries', 'en'),
+        ]);
+        $report = storage_path('framework/testing/ai-impact-preview-force-full-confirmed.json');
+
+        $exitCode = Artisan::call('career:ai-impact-assets-import-preview', [
+            '--file' => $file,
+            '--all-slugs-from-file' => true,
+            '--confirm-full-staging-preview' => true,
+            '--force' => true,
+            '--output' => $report,
+        ]);
+
+        $this->assertSame(0, $exitCode);
+        $this->assertDatabaseCount('career_job_ai_impact_assets', 4);
+        $decoded = json_decode((string) file_get_contents($report), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertSame('pass', $decoded['decision']);
+        $this->assertSame(4, $decoded['written_count']);
+        $this->assertTrue((bool) $decoded['staging_write_performed']);
+        $this->assertFalse((bool) $decoded['production_import_allowed']);
+
+        $this->getJson('/api/v0.5/career/jobs/actuaries/ai-impact-asset?locale=en')
+            ->assertOk()
+            ->assertJsonPath('ai_impact_asset_v1.slug', 'actuaries')
+            ->assertJsonMissingPath('ai_impact_asset_v1.evidence_used')
+            ->assertJsonMissingPath('ai_impact_asset_v1.search_projection');
+    }
+
     public function test_importer_force_rejects_non_staging_preview_status_without_writing(): void
     {
         $this->seedCareerJobBundleAuthority('accountants-and-auditors');
@@ -374,6 +432,10 @@ final class CareerAiImpactAssetPreviewImportTest extends TestCase
 
         Config::set('career_ai_impact_assets.staging_preview_enabled', true);
         Config::set('career_ai_impact_assets.preview_slugs', ['actuaries']);
+        CareerJobAiImpactAsset::query()
+            ->where('career_job_slug', 'accountants-and-auditors')
+            ->where('locale', 'zh-CN')
+            ->update(['preview_allowlisted' => false]);
         $this->getJson('/api/v0.5/career/jobs/accountants-and-auditors/ai-impact-asset?locale=zh-CN')
             ->assertNotFound();
     }
