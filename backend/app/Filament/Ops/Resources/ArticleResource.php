@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Ops\Resources;
 
 use App\Filament\Ops\Resources\ArticleResource\Pages;
+use App\Filament\Ops\Resources\ArticleResource\Support\ArticleSeoReleaseStatus;
 use App\Filament\Ops\Resources\ArticleResource\Support\ArticleWorkspace;
 use App\Filament\Ops\Support\ContentAccess;
 use App\Filament\Ops\Support\ContentReleaseAudit;
@@ -386,6 +387,16 @@ class ArticleResource extends Resource
                                     ->label(__('ops.resources.articles.fields.og_image_url'))
                                     ->maxLength(255)
                                     ->helperText(__('ops.resources.articles.helpers.og_image_url')),
+                            ]),
+                        Forms\Components\Section::make('SEO Release Status')
+                            ->description('Read-only closeout snapshot for article discoverability and search-release readiness.')
+                            ->extraAttributes(['class' => 'ops-article-workspace-section ops-edit-workspace-section ops-edit-workspace-section--rail ops-article-workspace-section--rail'])
+                            ->visible(fn (?Article $record): bool => filled($record))
+                            ->schema([
+                                Forms\Components\Placeholder::make('seo_release_closeout_status')
+                                    ->label('Single article closeout')
+                                    ->content(fn (?Article $record) => ArticleSeoReleaseStatus::render($record))
+                                    ->columnSpanFull(),
                             ]),
                         Forms\Components\Section::make(__('ops.edit.sections.audit'))
                             ->description(__('ops.edit.descriptions.audit'))
