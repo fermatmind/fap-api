@@ -125,6 +125,7 @@ final class SeoIntelCollectorManager
                 new GscSearchAnalyticsRowNormalizer(
                     new GscQueryClassifier,
                 ),
+                new GscDataQualityGate,
             );
         }
 

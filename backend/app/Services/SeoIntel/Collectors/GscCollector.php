@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\SeoIntel\Collectors;
 
+use App\Services\SeoIntel\GscDataQualityGate;
 use App\Services\SeoIntel\GscSearchAnalyticsRowNormalizer;
 use App\Services\SeoIntel\SeoIntelCollector;
 use App\Services\SeoIntel\SeoIntelCollectorResult;
@@ -12,6 +13,7 @@ final class GscCollector implements SeoIntelCollector
 {
     public function __construct(
         private readonly GscSearchAnalyticsRowNormalizer $normalizer,
+        private readonly GscDataQualityGate $dataQualityGate,
     ) {}
 
     public function name(): string
@@ -29,6 +31,7 @@ final class GscCollector implements SeoIntelCollector
         $windowDays = (int) config('seo_intel.gsc_default_window_days', 28);
         $rows = $this->fixtureRows();
         $normalized = array_map(fn (array $row): array => $this->normalizer->normalize($row), $rows);
+        $qualityGate = $this->dataQualityGate->evaluate($normalized);
         $brandRows = count(array_filter($normalized, static fn (array $row): bool => (bool) ($row['is_brand_query'] ?? false)));
         $nonBrandRows = count(array_filter($normalized, static fn (array $row): bool => ($row['query_type'] ?? 'unknown') === 'non_brand'));
 
@@ -49,6 +52,9 @@ final class GscCollector implements SeoIntelCollector
                 'rows_normalized' => count($normalized),
                 'brand_rows' => $brandRows,
                 'non_brand_rows' => $nonBrandRows,
+                'data_origin' => 'fixture',
+                'data_quality_gate' => $qualityGate,
+                'opportunity_queue_eligible' => false,
                 'date_window' => [
                     'lag_days' => $lagDays,
                     'window_days' => $windowDays,

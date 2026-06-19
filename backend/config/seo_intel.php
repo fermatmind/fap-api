@@ -221,6 +221,19 @@ return [
         'query_purchase_attribution_allowed' => false,
         'purchase_truth_source' => 'backend_orders_payment_benefits',
     ],
+    'gsc_data_quality' => [
+        'min_rows' => 1,
+        'max_report_age_days' => 10,
+        'allowed_data_origins' => [
+            'live_gsc_api',
+        ],
+        'forbidden_data_origins' => [
+            'fixture',
+            'mock',
+            'static_artifact',
+            'unknown',
+        ],
+    ],
     'baidu_enabled' => env('SEO_INTEL_BAIDU_ENABLED', false),
     'baidu_live_api_enabled' => env('SEO_INTEL_BAIDU_LIVE_API_ENABLED', false),
     'indexnow_enabled' => env('SEO_INTEL_INDEXNOW_ENABLED', false),

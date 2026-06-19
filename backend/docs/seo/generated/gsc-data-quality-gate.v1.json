@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "id": "SEO-GSC-DATA-QUALITY-01",
+  "repo": "fap-api",
+  "gate": "gsc_data_quality",
+  "collector": "gsc_foundation",
+  "purpose": "Block stale, fixture, mock, static artifact, unknown, or structurally incomplete GSC rows from future opportunity queue use.",
+  "read_only": true,
+  "live_gsc_api_enabled": false,
+  "gsc_credentials_required": false,
+  "production_backfill_executed": false,
+  "scheduler_enabled": false,
+  "queue_worker_enabled": false,
+  "cms_mutation": false,
+  "search_channel_enqueue": false,
+  "search_provider_submission": false,
+  "opportunity_queue_implemented": false,
+  "required_to_pass": {
+    "source_engine": "google",
+    "data_origin": "live_gsc_api",
+    "forbidden_data_origins": [
+      "fixture",
+      "mock",
+      "static_artifact",
+      "unknown"
+    ],
+    "required_metric_fields": [
+      "canonical_url_hash",
+      "query_hash",
+      "clicks",
+      "impressions"
+    ],
+    "lag_days_required": 3,
+    "max_report_age_days": 10
+  },
+  "current_gsc_foundation_status": {
+    "data_origin": "fixture",
+    "data_quality_gate_status": "blocked",
+    "opportunity_queue_eligible": false
+  },
+  "forbidden_actions": [
+    "call_live_gsc_api",
+    "validate_or_store_credentials",
+    "run_production_backfill",
+    "enable_scheduler",
+    "enable_queue_worker",
+    "write_cms",
+    "create_cms_draft",
+    "enqueue_search_channel",
+    "submit_to_search_provider",
+    "score_opportunities"
+  ],
+  "next_allowed_use": "Future opportunity queue may read GSC rows only after this gate reports pass on live_gsc_api data."
+}

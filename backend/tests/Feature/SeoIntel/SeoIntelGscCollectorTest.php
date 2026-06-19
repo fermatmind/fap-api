@@ -34,6 +34,8 @@ final class SeoIntelGscCollectorTest extends TestCase
         $this->assertSame(2, $result->metadata['rows_normalized'] ?? null);
         $this->assertSame(3, $result->metadata['data_lag_days'] ?? null);
         $this->assertSame('google', $result->metadata['source_engine'] ?? null);
+        $this->assertSame('blocked', data_get($result->metadata, 'data_quality_gate.status'));
+        $this->assertFalse((bool) ($result->metadata['opportunity_queue_eligible'] ?? true));
         $this->assertFalse((bool) ($result->metadata['gsc_live_api_enabled'] ?? true));
         $this->assertFalse((bool) ($result->metadata['query_purchase_attribution_allowed'] ?? true));
         $this->assertSame('backend_orders_payment_benefits', $result->metadata['purchase_truth_source'] ?? null);
@@ -120,6 +122,8 @@ final class SeoIntelGscCollectorTest extends TestCase
         $this->assertFalse((bool) ($decoded['metadata']['external_calls_attempted'] ?? true));
         $this->assertFalse((bool) ($decoded['metadata']['credentials_required'] ?? true));
         $this->assertSame(3, $decoded['metadata']['data_lag_days'] ?? null);
+        $this->assertSame('blocked', data_get($decoded, 'metadata.data_quality_gate.status'));
+        $this->assertFalse((bool) data_get($decoded, 'metadata.data_quality_gate.opportunity_queue_eligible', true));
 
         foreach (['email', 'order_no', 'attempt_id', 'payment_id', 'provider_event_id', 'cookie', 'token', 'secret'] as $forbidden) {
             $this->assertStringNotContainsString($forbidden, $output);
