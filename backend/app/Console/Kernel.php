@@ -10,6 +10,7 @@ use App\Console\Commands\ArticleEnsureSeoMetaBaseline;
 use App\Console\Commands\ArticleImportEditorialPackage;
 use App\Console\Commands\ArticleImportSeoContentPackageDraft;
 use App\Console\Commands\ArticlePublishControlled;
+use App\Console\Commands\ArticleReleaseCloseout;
 use App\Console\Commands\ArticleReplaceInlineImageUrl;
 use App\Console\Commands\ArticleSeoGateRollout;
 use App\Console\Commands\ArticleTaxonomyHygiene;
@@ -350,6 +351,7 @@ class Kernel extends ConsoleKernel
         ArticleDiscoverabilityRelease::class,
         ArticlePublishControlled::class,
         ArticleReplaceInlineImageUrl::class,
+        ArticleReleaseCloseout::class,
         ArticleSeoGateRollout::class,
         ArticleTaxonomyHygiene::class,
         ArticleUpdateTranslationGroupId::class,
