@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-20T04:55:00+08:00",
+  "updated_at": "2026-06-20T05:00:00+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -41537,7 +41537,7 @@
       "SEO-CMS-CANARY-EDITORIAL-REVIEW-01"
     ],
     "commit_sha": "11e82c0c7000bc90f2ec550b83d80a9b941465dc",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2136",
     "checks": {},
     "failure_reason": null,
     "merged_at": null,
@@ -54835,7 +54835,8 @@
         "evidence": "Focused GSC data quality gate and existing GSC collector tests passed with 11 warnings / 131 assertions; runtime-freeze focused filter passed with 1 warning / 1 assertion; dry-run collector JSON showed data_quality_gate.status=blocked, opportunity_queue_eligible=false, external_calls_attempted=false, writes_attempted=false; Pint, JSON/YAML, diff check, and scope validation passed."
       },
       "github": {
-        "status": "pending"
+        "status": "pending",
+        "evidence": "PR #2136 opened; GitHub checks pending."
       }
     },
     "failure_reason": null,
@@ -54859,6 +54860,11 @@
         "at": "2026-06-20T04:55:00+08:00",
         "status": "committed",
         "note": "Recorded implementation commit 6c310c263dedec47173f9ef857326744ca238de1 after rebasing onto latest origin/main and rerunning local checks."
+      },
+      {
+        "at": "2026-06-20T05:00:00+08:00",
+        "status": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/2136."
       }
     ]
   },
