@@ -23920,6 +23920,8 @@ prs:
       - backend/app/Services/SeoIntel/OpsDashboard/SeoDashboardApiReadService.php
       - backend/app/Services/SeoIntel/OpsDashboard/SeoOpportunityQueueReadService.php
       - backend/tests/Feature/SeoIntel/SeoDashApi01ReadOnlyApiContractTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/docs/contracts/openapi.snapshot.json
       - backend/docs/seo/opportunity-queue-readonly.md
       - backend/docs/seo/generated/seo-opportunity-queue-readonly.v1.json
       - backend/docs/seo/generated/seo-dash-api-01-readonly-api-contract.v1.json
@@ -23938,9 +23940,13 @@ prs:
       - php -l backend/app/Services/SeoIntel/OpsDashboard/SeoDashboardApiReadService.php
       - php -l backend/app/Services/SeoIntel/OpsDashboard/SeoOpportunityQueueReadService.php
       - php -l backend/tests/Feature/SeoIntel/SeoDashApi01ReadOnlyApiContractTest.php
+      - php -l backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/SeoIntel/SeoDashApi01ReadOnlyApiContractTest.php --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|seo_opportunity_queue|seo_dash_api_read_only' --no-ansi
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan route:list --path=api/v0.5/ops/seo-intel --no-ansi
-      - cd backend && ./vendor/bin/pint --test routes/api.php app/Http/Controllers/API/V0_5/Ops/SeoIntel/SeoIntelDashboardController.php app/Services/SeoIntel/OpsDashboard/SeoDashboardApiReadService.php app/Services/SeoIntel/OpsDashboard/SeoOpportunityQueueReadService.php tests/Feature/SeoIntel/SeoDashApi01ReadOnlyApiContractTest.php
+      - cd backend && APP_ENV=testing PAYMENTS_ALLOW_STUB=true bash scripts/export_openapi.sh --check
+      - cd backend && ./vendor/bin/pint --test routes/api.php app/Http/Controllers/API/V0_5/Ops/SeoIntel/SeoIntelDashboardController.php app/Services/SeoIntel/OpsDashboard/SeoDashboardApiReadService.php app/Services/SeoIntel/OpsDashboard/SeoOpportunityQueueReadService.php tests/Feature/SeoIntel/SeoDashApi01ReadOnlyApiContractTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - python3 -m json.tool backend/docs/contracts/openapi.snapshot.json >/dev/null
       - python3 -m json.tool backend/docs/seo/generated/seo-opportunity-queue-readonly.v1.json >/dev/null
       - python3 -m json.tool backend/docs/seo/generated/seo-dash-api-01-readonly-api-contract.v1.json >/dev/null
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null

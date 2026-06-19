@@ -38415,7 +38415,7 @@
     "branch": "codex/analytics-funnel-ops-org0-visibility-repair-01",
     "base": "main",
     "title": "ANALYTICS-FUNNEL-OPS-ORG0-VISIBILITY-REPAIR-01 show global org0 funnel rows",
-    "status": "pr_open",
+    "status": "local_checks_passed_after_ci_fix",
     "depends_on": [
       "ANALYTICS-FUNNEL-CONTROLLED-REFRESH-WRITE-GUARD-01"
     ],
@@ -42909,7 +42909,7 @@
         "evidence": "Changed files are limited to seo_intel migration readiness docs/artifact, focused contract test, and PR train metadata. No runtime route, migration file, production DB, collector, external API, CMS, search submission, fap-web, or deploy change was made."
       },
       "local": {
-        "status": "pass",
+        "status": "pass_after_ci_fix",
         "commands": [
           "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoDashMigration01ReadinessTest --no-ansi",
           "cd backend && vendor/bin/pint --test tests/Feature/SeoIntel/SeoDashMigration01ReadinessTest.php",
@@ -54990,6 +54990,8 @@
           "backend/app/Services/SeoIntel/OpsDashboard/SeoDashboardApiReadService.php",
           "backend/app/Services/SeoIntel/OpsDashboard/SeoOpportunityQueueReadService.php",
           "backend/tests/Feature/SeoIntel/SeoDashApi01ReadOnlyApiContractTest.php",
+          "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+          "backend/docs/contracts/openapi.snapshot.json",
           "backend/docs/seo/opportunity-queue-readonly.md",
           "backend/docs/seo/generated/seo-opportunity-queue-readonly.v1.json",
           "backend/docs/seo/generated/seo-dash-api-01-readonly-api-contract.v1.json",
@@ -55006,9 +55008,13 @@
           "php -l backend/app/Services/SeoIntel/OpsDashboard/SeoDashboardApiReadService.php",
           "php -l backend/app/Services/SeoIntel/OpsDashboard/SeoOpportunityQueueReadService.php",
           "php -l backend/tests/Feature/SeoIntel/SeoDashApi01ReadOnlyApiContractTest.php",
+          "php -l backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
           "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/SeoIntel/SeoDashApi01ReadOnlyApiContractTest.php --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|seo_opportunity_queue|seo_dash_api_read_only' --no-ansi",
           "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan route:list --path=api/v0.5/ops/seo-intel --no-ansi",
-          "cd backend && ./vendor/bin/pint --test routes/api.php app/Http/Controllers/API/V0_5/Ops/SeoIntel/SeoIntelDashboardController.php app/Services/SeoIntel/OpsDashboard/SeoDashboardApiReadService.php app/Services/SeoIntel/OpsDashboard/SeoOpportunityQueueReadService.php tests/Feature/SeoIntel/SeoDashApi01ReadOnlyApiContractTest.php",
+          "cd backend && APP_ENV=testing PAYMENTS_ALLOW_STUB=true bash scripts/export_openapi.sh --check",
+          "cd backend && ./vendor/bin/pint --test routes/api.php app/Http/Controllers/API/V0_5/Ops/SeoIntel/SeoIntelDashboardController.php app/Services/SeoIntel/OpsDashboard/SeoDashboardApiReadService.php app/Services/SeoIntel/OpsDashboard/SeoOpportunityQueueReadService.php tests/Feature/SeoIntel/SeoDashApi01ReadOnlyApiContractTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+          "python3 -m json.tool backend/docs/contracts/openapi.snapshot.json >/dev/null",
           "python3 -m json.tool backend/docs/seo/generated/seo-opportunity-queue-readonly.v1.json >/dev/null",
           "python3 -m json.tool backend/docs/seo/generated/seo-dash-api-01-readonly-api-contract.v1.json >/dev/null",
           "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
@@ -55016,11 +55022,11 @@
           "git diff --check",
           "scope validation"
         ],
-        "evidence": "Syntax checks passed for route/controller/services/focused test. SeoDashApi01ReadOnlyApiContractTest passed: 7 tests, 145 assertions. route:list showed 7 private Ops SEO Intel GET routes including opportunity-queue and no write route. Pint passed for 5 files. Generated JSON, train state JSON, YAML, git diff --check, and explicit changed-file allowlist validation passed."
+        "evidence": "Syntax checks passed for route/controller/services/focused tests. SeoDashApi01ReadOnlyApiContractTest passed: 7 tests, 145 assertions. BigFive runtime-freeze focused filter passed: 3 tests, 13 assertions. OpenAPI snapshot check passed after exporting the new route. route:list showed 7 private Ops SEO Intel GET routes including opportunity-queue and no write route. Pint passed for 6 files. OpenAPI/generated JSON, train state JSON, YAML, git diff --check, and explicit changed-file allowlist validation passed."
       },
       "github": {
-        "status": "pending",
-        "evidence": "PR #2139 opened; GitHub checks pending on head f2ee09d7bb7d6fd42e8fa6b6dea01eff4c67d71e."
+        "status": "failed_inspected",
+        "evidence": "PR #2139 initial GitHub checks failed on head cf877104d2526fd08274e518064670434114d4bb: verify-mbti-legacy and verify-mbti-v2 reported OpenAPI snapshot drift for /api/v0.5/ops/seo-intel/opportunity-queue; verify-bigfive reported the new SeoOpportunityQueueReadService.php as an unclassified runtime-freeze diff. Both fixes are limited to current PR contract/scope gate files."
       }
     },
     "failure_reason": null,
@@ -55049,6 +55055,16 @@
         "at": "2026-06-20T07:22:00+08:00",
         "status": "pr_open",
         "note": "Opened https://github.com/fermatmind/fap-api/pull/2139; GitHub checks pending."
+      },
+      {
+        "at": "2026-06-20T07:24:00+08:00",
+        "status": "github_checks_failed_inspected",
+        "note": "Inspected PR #2139 failed checks: OpenAPI snapshot missing the new route and BigFive runtime-freeze classifier missing the new read-only service. Fix remains within the PR8 gate files."
+      },
+      {
+        "at": "2026-06-20T07:25:00+08:00",
+        "status": "local_checks_passed_after_ci_fix",
+        "note": "Regenerated OpenAPI snapshot, added the BigFive runtime-freeze classifier exception/test for SeoOpportunityQueueReadService, and reran focused API, OpenAPI, BigFive, Pint, JSON/YAML, diff, and scope checks successfully."
       }
     ]
   }
