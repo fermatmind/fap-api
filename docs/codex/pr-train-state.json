@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-20T05:00:00+08:00",
+  "updated_at": "2026-06-20T07:16:00+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -54782,7 +54782,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-gsc-data-quality-01",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "fermatmind_seo_agent_gsc_quality_gate",
     "title": "test(seo-intel): add GSC data quality gate",
     "depends_on": [
@@ -54840,11 +54840,11 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": "92d73439e55c175ec2d77c0d6115815e2a895562",
+    "commit_sha": "f1b5bd96e2887ba55ca6a4ab56e7a23d9775e007",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2136",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-19T21:04:19Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-20T04:46:00+08:00",
@@ -54870,6 +54870,11 @@
         "at": "2026-06-20T05:04:00+08:00",
         "status": "ready_to_merge",
         "note": "GitHub checks passed for PR #2136 at head 92d73439e55c175ec2d77c0d6115815e2a895562; recording ready_to_merge before merge."
+      },
+      {
+        "at": "2026-06-20T07:08:00+08:00",
+        "status": "merged",
+        "note": "Reconciled while starting SEO-OPPORTUNITY-QUEUE-READONLY-01: GitHub PR #2136 is MERGED, origin/main contains merge commit f1b5bd96e2887ba55ca6a4ab56e7a23d9775e007, and local/remote task branches are absent."
       }
     ]
   },
@@ -54953,6 +54958,87 @@
         "at": "2026-06-14T05:10:00+08:00",
         "status": "ready_to_merge",
         "note": "GitHub checks passed for PR #2089 and pre-merge scope validation showed only the 7 declared PR files changed."
+      }
+    ]
+  },
+  "SEO-OPPORTUNITY-QUEUE-READONLY-01": {
+    "repo": "fap-api",
+    "branch": "codex/seo-opportunity-queue-readonly-01",
+    "base": "main",
+    "status": "local_checks_passed",
+    "train_scope": "fermatmind_seo_agent_opportunity_queue_readonly",
+    "title": "feat(seo-intel): add read-only opportunity queue",
+    "depends_on": [
+      "SEO-GSC-DATA-QUALITY-01",
+      "external:fap-web/SEO-OPPORTUNITY-QUEUE-CONTRACT-01#1232",
+      "external:fap-web/SEO-OPS-READMODEL-BRIDGE-01#1227"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly provided SEO-OPPORTUNITY-QUEUE-READONLY-01 as the eighth PR in the FermatMind SEO Agent sequence and authorized continuous PR-train execution after GSC quality, opportunity queue contract, and ops read-model bridge dependencies."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "SEO-GSC-DATA-QUALITY-01 is merged in fap-api PR #2136, fap-web SEO-OPPORTUNITY-QUEUE-CONTRACT-01 is merged in PR #1232, and fap-web SEO-OPS-READMODEL-BRIDGE-01 is merged in PR #1227 before this PR started."
+      },
+      "scope": {
+        "status": "pass",
+        "allowed_paths": [
+          "backend/routes/api.php",
+          "backend/app/Http/Controllers/API/V0_5/Ops/SeoIntel/SeoIntelDashboardController.php",
+          "backend/app/Services/SeoIntel/OpsDashboard/SeoDashboardApiReadService.php",
+          "backend/app/Services/SeoIntel/OpsDashboard/SeoOpportunityQueueReadService.php",
+          "backend/tests/Feature/SeoIntel/SeoDashApi01ReadOnlyApiContractTest.php",
+          "backend/docs/seo/opportunity-queue-readonly.md",
+          "backend/docs/seo/generated/seo-opportunity-queue-readonly.v1.json",
+          "backend/docs/seo/generated/seo-dash-api-01-readonly-api-contract.v1.json",
+          "docs/codex/pr-train.yaml",
+          "docs/codex/pr-train-state.json"
+        ],
+        "evidence": "Changed files match the SEO-OPPORTUNITY-QUEUE-READONLY-01 allowlist. Existing untracked generated/ directories are unrelated and excluded from staging. No POST route, command, job, migration, scheduler, queue worker, CMS write, Search Channel action, provider call, fap-web, sitemap, llms, robots, schema, hreflang, frontend runtime SEO, or public page changed."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "php -l backend/routes/api.php",
+          "php -l backend/app/Http/Controllers/API/V0_5/Ops/SeoIntel/SeoIntelDashboardController.php",
+          "php -l backend/app/Services/SeoIntel/OpsDashboard/SeoDashboardApiReadService.php",
+          "php -l backend/app/Services/SeoIntel/OpsDashboard/SeoOpportunityQueueReadService.php",
+          "php -l backend/tests/Feature/SeoIntel/SeoDashApi01ReadOnlyApiContractTest.php",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/SeoIntel/SeoDashApi01ReadOnlyApiContractTest.php --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan route:list --path=api/v0.5/ops/seo-intel --no-ansi",
+          "cd backend && ./vendor/bin/pint --test routes/api.php app/Http/Controllers/API/V0_5/Ops/SeoIntel/SeoIntelDashboardController.php app/Services/SeoIntel/OpsDashboard/SeoDashboardApiReadService.php app/Services/SeoIntel/OpsDashboard/SeoOpportunityQueueReadService.php tests/Feature/SeoIntel/SeoDashApi01ReadOnlyApiContractTest.php",
+          "python3 -m json.tool backend/docs/seo/generated/seo-opportunity-queue-readonly.v1.json >/dev/null",
+          "python3 -m json.tool backend/docs/seo/generated/seo-dash-api-01-readonly-api-contract.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "git diff --check",
+          "scope validation"
+        ],
+        "evidence": "Syntax checks passed for route/controller/services/focused test. SeoDashApi01ReadOnlyApiContractTest passed: 7 tests, 145 assertions. route:list showed 7 private Ops SEO Intel GET routes including opportunity-queue and no write route. Pint passed for 5 files. Generated JSON, train state JSON, YAML, git diff --check, and explicit changed-file allowlist validation passed."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": "PR not opened yet."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-20T07:08:00+08:00",
+        "status": "in_progress",
+        "note": "Initialized from explicit user sequence. Scope is backend-only read-only opportunity queue; no CMS/search/provider/write action is allowed."
+      },
+      {
+        "at": "2026-06-20T07:16:00+08:00",
+        "status": "local_checks_passed",
+        "note": "Implemented private read-only opportunity queue endpoint and sanitized read service. Local checks and scope validation passed; existing untracked generated/ directories were excluded from staging."
       }
     ]
   }

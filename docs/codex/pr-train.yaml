@@ -23899,6 +23899,65 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: SEO-OPPORTUNITY-QUEUE-READONLY-01
+    repo: fap-api
+    branch: codex/seo-opportunity-queue-readonly-01
+    title: "feat(seo-intel): add read-only opportunity queue"
+    train_scope: fermatmind_seo_agent_opportunity_queue_readonly
+    status: in_progress
+    depends_on:
+      - SEO-GSC-DATA-QUALITY-01
+      - external:fap-web/SEO-OPPORTUNITY-QUEUE-CONTRACT-01#1232
+      - external:fap-web/SEO-OPS-READMODEL-BRIDGE-01#1227
+    scope:
+      - Add a private Ops SEO Intel read-only opportunity queue endpoint backed by sanitized seo_intel read models.
+      - Gate candidate rows behind GscDataQualityGate so stale, fixture, mock, static artifact, unknown, incomplete, or non-Google data cannot produce candidates.
+      - Expose only safe aliases such as canonical path, URL hash, query hash, masked query, metrics, and human-review next step.
+      - Add generated contract evidence and focused tests proving no CMS writes, no Search Channel enqueue, no provider calls, and no execution.
+    allowed_paths:
+      - backend/routes/api.php
+      - backend/app/Http/Controllers/API/V0_5/Ops/SeoIntel/SeoIntelDashboardController.php
+      - backend/app/Services/SeoIntel/OpsDashboard/SeoDashboardApiReadService.php
+      - backend/app/Services/SeoIntel/OpsDashboard/SeoOpportunityQueueReadService.php
+      - backend/tests/Feature/SeoIntel/SeoDashApi01ReadOnlyApiContractTest.php
+      - backend/docs/seo/opportunity-queue-readonly.md
+      - backend/docs/seo/generated/seo-opportunity-queue-readonly.v1.json
+      - backend/docs/seo/generated/seo-dash-api-01-readonly-api-contract.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add POST/write routes, commands, jobs, migrations, schedulers, queue workers, or production collectors.
+      - Write CMS, create CMS drafts, publish, unpublish, import, upload media, or mutate editorial content.
+      - Enqueue, approve, retry, or submit Search Channel rows.
+      - Call Google Search Console, Baidu, IndexNow, or any external provider.
+      - Expose raw query, raw canonical URL, private identifiers, payment/order data, provider credentials, raw payloads, or metadata_json.
+      - Modify fap-web, sitemap, llms, robots, schema, hreflang, frontend runtime SEO, or public pages.
+    validation:
+      - php -l backend/routes/api.php
+      - php -l backend/app/Http/Controllers/API/V0_5/Ops/SeoIntel/SeoIntelDashboardController.php
+      - php -l backend/app/Services/SeoIntel/OpsDashboard/SeoDashboardApiReadService.php
+      - php -l backend/app/Services/SeoIntel/OpsDashboard/SeoOpportunityQueueReadService.php
+      - php -l backend/tests/Feature/SeoIntel/SeoDashApi01ReadOnlyApiContractTest.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/SeoIntel/SeoDashApi01ReadOnlyApiContractTest.php --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan route:list --path=api/v0.5/ops/seo-intel --no-ansi
+      - cd backend && ./vendor/bin/pint --test routes/api.php app/Http/Controllers/API/V0_5/Ops/SeoIntel/SeoIntelDashboardController.php app/Services/SeoIntel/OpsDashboard/SeoDashboardApiReadService.php app/Services/SeoIntel/OpsDashboard/SeoOpportunityQueueReadService.php tests/Feature/SeoIntel/SeoDashApi01ReadOnlyApiContractTest.php
+      - python3 -m json.tool backend/docs/seo/generated/seo-opportunity-queue-readonly.v1.json >/dev/null
+      - python3 -m json.tool backend/docs/seo/generated/seo-dash-api-01-readonly-api-contract.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+      - scope validation
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: PERSONALITY-AT-DIFFERENCE-SECTIONS-01
     repo: fap-api
     depends_on:
