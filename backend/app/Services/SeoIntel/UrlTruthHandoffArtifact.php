@@ -18,7 +18,28 @@ final class UrlTruthHandoffArtifact
 
     public const ARTICLE_PAGE_ENTITY_TYPE = 'article';
 
+    public const PERSONALITY_PROFILE_VARIANT_PAGE_ENTITY_TYPE = 'personality_profile_variant';
+
+    public const PERSONALITY_PROFILE_COMPARISON_PAGE_ENTITY_TYPE = 'personality_profile_comparison';
+
     public const SOURCE_AUTHORITY = 'backend_cms';
+
+    private const PRIVATE_ROUTE_FRAGMENTS = [
+        '/results',
+        '/orders',
+        '/share',
+        '/pay',
+        '/payment',
+        '/history',
+        '/private',
+        '/account',
+        'token=',
+        'session=',
+        'user=',
+        'result_id=',
+        'report_id=',
+        'order_no=',
+    ];
 
     /**
      * @var array<string, array{
@@ -55,6 +76,28 @@ final class UrlTruthHandoffArtifact
             'entity_source_issue' => 'candidate_entity_source_not_articles',
             'route_issue' => 'candidate_route_not_article',
             'entity_identity_issue' => 'candidate_article_entity_id_invalid',
+        ],
+        self::PERSONALITY_PROFILE_VARIANT_PAGE_ENTITY_TYPE => [
+            'mode' => 'two_stage_personality_profile_variant_url_truth_handoff',
+            'route_regex' => '^/(en|zh)/personality/[a-z]{4}-[at]$',
+            'entity_source' => 'personality_profile_variants',
+            'route_fragment' => '/personality/',
+            'forbidden_route_fragments' => self::PRIVATE_ROUTE_FRAGMENTS,
+            'type_issue' => 'candidate_not_personality_profile_variant',
+            'entity_source_issue' => 'candidate_entity_source_not_personality_profile_variants',
+            'route_issue' => 'candidate_route_not_personality_profile_variant',
+            'entity_identity_issue' => 'candidate_personality_profile_variant_entity_id_invalid',
+        ],
+        self::PERSONALITY_PROFILE_COMPARISON_PAGE_ENTITY_TYPE => [
+            'mode' => 'two_stage_personality_profile_comparison_url_truth_handoff',
+            'route_regex' => '^/(en|zh)/personality/([a-z]{4})-a-vs-\2-t$',
+            'entity_source' => 'personality_profiles',
+            'route_fragment' => '/personality/',
+            'forbidden_route_fragments' => self::PRIVATE_ROUTE_FRAGMENTS,
+            'type_issue' => 'candidate_not_personality_profile_comparison',
+            'entity_source_issue' => 'candidate_entity_source_not_personality_profiles',
+            'route_issue' => 'candidate_route_not_personality_profile_comparison',
+            'entity_identity_issue' => 'candidate_personality_profile_comparison_entity_id_invalid',
         ],
     ];
 
@@ -377,8 +420,10 @@ final class UrlTruthHandoffArtifact
             $issues[] = 'candidate_canonical_path_hash_mismatch:'.$index;
         }
 
+        $normalizedUrl = Str::lower($url);
+        $normalizedPath = Str::lower($path);
         foreach ($policy['forbidden_route_fragments'] as $fragment) {
-            if (str_contains($path, $fragment)) {
+            if (str_contains($normalizedPath, $fragment) || str_contains($normalizedUrl, $fragment)) {
                 $issues[] = 'candidate_forbidden_route_fragment:'.$fragment.':'.$index;
             }
         }
@@ -458,6 +503,18 @@ final class UrlTruthHandoffArtifact
 
         if ($pageEntityType === self::ARTICLE_PAGE_ENTITY_TYPE) {
             return $entityIdOrSlug === '' || ! ctype_digit($entityIdOrSlug);
+        }
+
+        if ($pageEntityType === self::PERSONALITY_PROFILE_VARIANT_PAGE_ENTITY_TYPE) {
+            return $entityIdOrSlug === ''
+                || ! ctype_digit($entityIdOrSlug)
+                || preg_match('/^[a-z]{4}-[at]$/i', $pathSlug) !== 1;
+        }
+
+        if ($pageEntityType === self::PERSONALITY_PROFILE_COMPARISON_PAGE_ENTITY_TYPE) {
+            return $entityIdOrSlug === ''
+                || ! ctype_digit($entityIdOrSlug)
+                || preg_match('/^([a-z]{4})-a-vs-\1-t$/i', $pathSlug) !== 1;
         }
 
         return true;

@@ -7,6 +7,8 @@ namespace Tests\Feature\SeoIntel;
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
+use App\Models\PersonalityProfile;
+use App\Models\PersonalityProfileVariant;
 use App\Models\ResearchReport;
 use App\Services\SeoIntel\UrlTruthHandoffArtifact;
 use App\Services\SeoIntel\UrlTruthInventoryRecord;
@@ -142,6 +144,207 @@ final class SeoIntelTwoStageUrlTruthHandoffTest extends TestCase
         $this->assertFalse((bool) ($importOutput['writes_committed'] ?? true));
         $this->assertFalse((bool) ($importOutput['external_api_calls'] ?? true));
         $this->assertFalse((bool) ($importOutput['search_url_submission'] ?? true));
+    }
+
+    #[Test]
+    public function command_exports_and_validates_mbti64_variant_handoff_artifact_without_writes(): void
+    {
+        config([
+            'app.frontend_url' => 'https://www.fermatmind.com',
+            'seo_intel.public_canonical_host' => 'https://fermatmind.com',
+        ]);
+        $this->seedMbti64PersonalityProfiles();
+
+        $path = sys_get_temp_dir().'/mbti64-variant-url-truth-handoff-'.bin2hex(random_bytes(4)).'.json';
+
+        $exportExitCode = Artisan::call('seo-intel:url-truth-handoff', [
+            '--export' => $path,
+            '--dry-run' => true,
+            '--json' => true,
+            '--limit' => 100,
+            '--page-type' => 'personality_profile_variant',
+        ]);
+        $exportOutput = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(0, $exportExitCode, json_encode($exportOutput, JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR));
+        $this->assertSame('success', $exportOutput['status'] ?? null);
+        $this->assertSame('personality_profile_variant', $exportOutput['page_entity_type'] ?? null);
+        $this->assertSame(64, $exportOutput['planned_url_count'] ?? null);
+        $this->assertFalse((bool) ($exportOutput['writes_committed'] ?? true));
+        $this->assertFalse((bool) ($exportOutput['external_api_calls'] ?? true));
+        $this->assertFalse((bool) ($exportOutput['search_url_submission'] ?? true));
+        $this->assertFileExists($path);
+
+        $artifact = json_decode((string) file_get_contents($path), true);
+        $urls = array_map(static fn (array $candidate): string => (string) $candidate['canonical_url'], $artifact['candidates'] ?? []);
+
+        $this->assertSame('two_stage_personality_profile_variant_url_truth_handoff', $artifact['mode'] ?? null);
+        $this->assertSame('personality_profile_variant', data_get($artifact, 'constraints.allowed_page_entity_type'));
+        $this->assertSame('^/(en|zh)/personality/[a-z]{4}-[at]$', data_get($artifact, 'constraints.allowed_route_regex'));
+        $this->assertCount(64, $urls);
+        $this->assertContains('https://fermatmind.com/en/personality/intj-a', $urls);
+        $this->assertContains('https://fermatmind.com/en/personality/intj-t', $urls);
+        $this->assertContains('https://fermatmind.com/zh/personality/istj-a', $urls);
+        $this->assertContains('https://fermatmind.com/zh/personality/infp-t', $urls);
+        $this->assertFalse(collect($urls)->contains(static fn (string $url): bool => str_contains($url, '/zh-CN/')));
+        $this->assertFalse(collect($artifact['candidates'] ?? [])->contains(static fn (array $candidate): bool => $candidate['page_entity_type'] !== 'personality_profile_variant'));
+        $this->assertFalse(collect($artifact['candidates'] ?? [])->contains(static fn (array $candidate): bool => $candidate['entity_source'] !== 'personality_profile_variants'));
+
+        $importExitCode = Artisan::call('seo-intel:url-truth-handoff', [
+            '--import' => $path,
+            '--dry-run' => true,
+            '--json' => true,
+            '--limit' => 100,
+            '--page-type' => 'personality_profile_variant',
+        ]);
+        $importOutput = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(0, $importExitCode, json_encode($importOutput, JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR));
+        $this->assertSame('success', $importOutput['status'] ?? null);
+        $this->assertSame('import_dry_run', $importOutput['mode'] ?? null);
+        $this->assertSame('personality_profile_variant', $importOutput['page_entity_type'] ?? null);
+        $this->assertSame(64, $importOutput['planned_url_count'] ?? null);
+        $this->assertFalse((bool) ($importOutput['writes_committed'] ?? true));
+        $this->assertFalse((bool) ($importOutput['external_api_calls'] ?? true));
+        $this->assertFalse((bool) ($importOutput['search_url_submission'] ?? true));
+    }
+
+    #[Test]
+    public function command_exports_and_validates_mbti64_comparison_handoff_artifact_without_writes(): void
+    {
+        config([
+            'app.frontend_url' => 'https://www.fermatmind.com',
+            'seo_intel.public_canonical_host' => 'https://fermatmind.com',
+        ]);
+        $this->seedMbti64PersonalityProfiles();
+
+        $path = sys_get_temp_dir().'/mbti64-comparison-url-truth-handoff-'.bin2hex(random_bytes(4)).'.json';
+
+        $exportExitCode = Artisan::call('seo-intel:url-truth-handoff', [
+            '--export' => $path,
+            '--dry-run' => true,
+            '--json' => true,
+            '--limit' => 100,
+            '--page-type' => 'personality_profile_comparison',
+        ]);
+        $exportOutput = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(0, $exportExitCode, json_encode($exportOutput, JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR));
+        $this->assertSame('success', $exportOutput['status'] ?? null);
+        $this->assertSame('personality_profile_comparison', $exportOutput['page_entity_type'] ?? null);
+        $this->assertSame(32, $exportOutput['planned_url_count'] ?? null);
+        $this->assertFalse((bool) ($exportOutput['writes_committed'] ?? true));
+        $this->assertFalse((bool) ($exportOutput['external_api_calls'] ?? true));
+        $this->assertFalse((bool) ($exportOutput['search_url_submission'] ?? true));
+        $this->assertFileExists($path);
+
+        $artifact = json_decode((string) file_get_contents($path), true);
+        $urls = array_map(static fn (array $candidate): string => (string) $candidate['canonical_url'], $artifact['candidates'] ?? []);
+
+        $this->assertSame('two_stage_personality_profile_comparison_url_truth_handoff', $artifact['mode'] ?? null);
+        $this->assertSame('personality_profile_comparison', data_get($artifact, 'constraints.allowed_page_entity_type'));
+        $this->assertSame('^/(en|zh)/personality/([a-z]{4})-a-vs-\2-t$', data_get($artifact, 'constraints.allowed_route_regex'));
+        $this->assertCount(32, $urls);
+        $this->assertContains('https://fermatmind.com/en/personality/intj-a-vs-intj-t', $urls);
+        $this->assertContains('https://fermatmind.com/en/personality/intp-a-vs-intp-t', $urls);
+        $this->assertFalse(collect($urls)->contains(static fn (string $url): bool => str_contains($url, '/zh-CN/')));
+        $this->assertFalse(collect($artifact['candidates'] ?? [])->contains(static fn (array $candidate): bool => $candidate['page_entity_type'] !== 'personality_profile_comparison'));
+        $this->assertFalse(collect($artifact['candidates'] ?? [])->contains(static fn (array $candidate): bool => $candidate['entity_source'] !== 'personality_profiles'));
+
+        $importExitCode = Artisan::call('seo-intel:url-truth-handoff', [
+            '--import' => $path,
+            '--dry-run' => true,
+            '--json' => true,
+            '--limit' => 100,
+            '--page-type' => 'personality_profile_comparison',
+        ]);
+        $importOutput = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(0, $importExitCode, json_encode($importOutput, JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR));
+        $this->assertSame('success', $importOutput['status'] ?? null);
+        $this->assertSame('import_dry_run', $importOutput['mode'] ?? null);
+        $this->assertSame('personality_profile_comparison', $importOutput['page_entity_type'] ?? null);
+        $this->assertSame(32, $importOutput['planned_url_count'] ?? null);
+        $this->assertFalse((bool) ($importOutput['writes_committed'] ?? true));
+        $this->assertFalse((bool) ($importOutput['external_api_calls'] ?? true));
+        $this->assertFalse((bool) ($importOutput['search_url_submission'] ?? true));
+    }
+
+    #[Test]
+    public function personality_handoff_write_requires_artifact_sha_confirmation(): void
+    {
+        $this->prepareSeoIntelSqliteConnection();
+        config([
+            'seo_intel.enabled' => true,
+            'seo_intel.write_enabled' => true,
+        ]);
+
+        $artifact = new UrlTruthHandoffArtifact;
+        $path = sys_get_temp_dir().'/write-mbti64-variant-url-truth-handoff-'.bin2hex(random_bytes(4)).'.json';
+        $artifact->writeJson($path, $artifact->fromRecords([
+            $this->personalityVariantRecord(),
+        ], pageEntityType: 'personality_profile_variant'));
+
+        $blockedExitCode = Artisan::call('seo-intel:url-truth-handoff', [
+            '--import' => $path,
+            '--write' => true,
+            '--json' => true,
+            '--limit' => 20,
+            '--page-type' => 'personality_profile_variant',
+        ]);
+        $blockedOutput = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(1, $blockedExitCode);
+        $this->assertSame('blocked', $blockedOutput['status'] ?? null);
+        $this->assertContains('artifact_sha256_confirmation_required', $blockedOutput['issues'] ?? []);
+        $this->assertFalse((bool) ($blockedOutput['writes_committed'] ?? true));
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_urls')->count());
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_url_entities')->count());
+    }
+
+    #[Test]
+    public function personality_handoff_validation_blocks_private_routes_and_sensitive_query_keys(): void
+    {
+        $artifact = new UrlTruthHandoffArtifact;
+        $payload = $artifact->fromRecords([
+            $this->personalityVariantRecord(canonicalUrl: 'https://fermatmind.com/en/results/lookup'),
+            $this->personalityVariantRecord(canonicalUrl: 'https://fermatmind.com/en/personality/intj-a?token=unsafe'),
+            $this->personalityComparisonRecord(canonicalUrl: 'https://fermatmind.com/en/account'),
+        ], pageEntityType: 'personality_profile_variant');
+
+        $payload['candidates'][2]['page_entity_type'] = 'personality_profile_variant';
+        $payload['candidates'][2]['entity_source'] = 'personality_profile_variants';
+        $payload['candidates'][2]['row_fingerprint'] = hash('sha256', json_encode([
+            'canonical_url' => $payload['candidates'][2]['canonical_url'] ?? null,
+            'locale' => $payload['candidates'][2]['locale'] ?? null,
+            'page_entity_type' => $payload['candidates'][2]['page_entity_type'] ?? null,
+            'entity_id_or_slug' => $payload['candidates'][2]['entity_id_or_slug'] ?? null,
+            'source_authority' => $payload['candidates'][2]['source_authority'] ?? null,
+            'indexability_state' => $payload['candidates'][2]['indexability_state'] ?? null,
+            'entity_source' => $payload['candidates'][2]['entity_source'] ?? null,
+            'authority_status' => $payload['candidates'][2]['authority_status'] ?? null,
+            'is_private_flow' => (bool) ($payload['candidates'][2]['is_private_flow'] ?? true),
+        ], JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR));
+
+        $path = sys_get_temp_dir().'/private-mbti64-url-truth-handoff-'.bin2hex(random_bytes(4)).'.json';
+        $artifact->writeJson($path, $payload);
+
+        $exitCode = Artisan::call('seo-intel:url-truth-handoff', [
+            '--import' => $path,
+            '--dry-run' => true,
+            '--json' => true,
+            '--limit' => 20,
+            '--page-type' => 'personality_profile_variant',
+        ]);
+        $output = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('blocked', $output['status'] ?? null);
+        $this->assertContains('candidate_forbidden_route_fragment:/results:0', $output['issues'] ?? []);
+        $this->assertContains('candidate_forbidden_route_fragment:token=:1', $output['issues'] ?? []);
+        $this->assertContains('candidate_forbidden_route_fragment:/account:2', $output['issues'] ?? []);
+        $this->assertFalse((bool) ($output['writes_committed'] ?? true));
+        $this->assertFalse((bool) ($output['search_url_submission'] ?? true));
     }
 
     #[Test]
@@ -453,6 +656,142 @@ final class SeoIntelTwoStageUrlTruthHandoffTest extends TestCase
                 'source_authority' => 'backend_cms',
             ],
         );
+    }
+
+    private function personalityVariantRecord(
+        string $canonicalUrl = 'https://fermatmind.com/en/personality/intj-a',
+        string $locale = 'en',
+        string $entityIdOrSlug = '101',
+    ): UrlTruthInventoryRecord {
+        $path = (string) parse_url($canonicalUrl, PHP_URL_PATH);
+
+        return new UrlTruthInventoryRecord(
+            canonicalUrl: $canonicalUrl,
+            locale: $locale,
+            pageEntityType: 'personality_profile_variant',
+            entityIdOrSlug: $entityIdOrSlug,
+            sourceAuthority: 'backend_cms',
+            indexabilityState: 'indexable',
+            lastmodAt: now()->subHour(),
+            lastmodSource: 'personality_profile_variants.updated_at',
+            cluster: 'personality',
+            entitySource: 'personality_profile_variants',
+            authorityStatus: 'published_approved',
+            sourceUpdatedAt: now()->subHour(),
+            isPrivateFlow: false,
+            metadata: [
+                'canonical_path_hash' => hash('sha256', $path),
+                'source_table_hash' => hash('sha256', 'personality_profile_variants'),
+                'claim_boundary_state' => 'claim_safe',
+                'claim_safe' => true,
+                'sitemap_eligible' => true,
+                'llms_eligible' => true,
+                'publication_state' => 'published',
+                'robots' => 'index',
+            ],
+            attributes: [
+                'claim_safe' => true,
+                'source_authority' => 'backend_cms',
+                'variant_id_hash' => hash('sha256', $entityIdOrSlug),
+            ],
+        );
+    }
+
+    private function personalityComparisonRecord(
+        string $canonicalUrl = 'https://fermatmind.com/en/personality/intj-a-vs-intj-t',
+        string $locale = 'en',
+        string $entityIdOrSlug = '201',
+    ): UrlTruthInventoryRecord {
+        $path = (string) parse_url($canonicalUrl, PHP_URL_PATH);
+
+        return new UrlTruthInventoryRecord(
+            canonicalUrl: $canonicalUrl,
+            locale: $locale,
+            pageEntityType: 'personality_profile_comparison',
+            entityIdOrSlug: $entityIdOrSlug,
+            sourceAuthority: 'backend_cms',
+            indexabilityState: 'indexable',
+            lastmodAt: now()->subHour(),
+            lastmodSource: 'personality_profiles.updated_at',
+            cluster: 'personality',
+            entitySource: 'personality_profiles',
+            authorityStatus: 'published_approved',
+            sourceUpdatedAt: now()->subHour(),
+            isPrivateFlow: false,
+            metadata: [
+                'canonical_path_hash' => hash('sha256', $path),
+                'source_table_hash' => hash('sha256', 'personality_profiles'),
+                'claim_boundary_state' => 'claim_safe',
+                'claim_safe' => true,
+                'sitemap_eligible' => true,
+                'llms_eligible' => true,
+                'publication_state' => 'published',
+                'robots' => 'index',
+            ],
+            attributes: [
+                'claim_safe' => true,
+                'source_authority' => 'backend_cms',
+                'profile_id_hash' => hash('sha256', $entityIdOrSlug),
+            ],
+        );
+    }
+
+    private function seedMbti64PersonalityProfiles(): void
+    {
+        foreach (PersonalityProfile::SUPPORTED_LOCALES as $locale) {
+            foreach (PersonalityProfile::BASE_TYPE_CODES as $typeCode) {
+                $profile = $this->createPersonalityProfile($locale, $typeCode);
+                $this->createPersonalityVariant($profile, 'A');
+                $this->createPersonalityVariant($profile, 'T');
+            }
+        }
+    }
+
+    private function createPersonalityProfile(string $locale, string $typeCode): PersonalityProfile
+    {
+        return PersonalityProfile::query()->create([
+            'org_id' => 0,
+            'scale_code' => PersonalityProfile::SCALE_CODE_MBTI,
+            'type_code' => $typeCode,
+            'canonical_type_code' => $typeCode,
+            'slug' => strtolower($typeCode),
+            'locale' => $locale,
+            'title' => $typeCode.' Personality',
+            'type_name' => $typeCode,
+            'nickname' => $typeCode,
+            'keywords_json' => [$typeCode, 'MBTI'],
+            'subtitle' => $typeCode.' public personality profile.',
+            'excerpt' => $typeCode.' public personality profile excerpt.',
+            'hero_kicker' => 'Personality',
+            'hero_summary_md' => $typeCode.' public profile summary.',
+            'hero_summary_html' => '<p>'.$typeCode.' public profile summary.</p>',
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => now()->subHour(),
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+        ]);
+    }
+
+    private function createPersonalityVariant(PersonalityProfile $profile, string $variantCode): PersonalityProfileVariant
+    {
+        $runtimeTypeCode = ((string) $profile->type_code).'-'.$variantCode;
+
+        return PersonalityProfileVariant::query()->create([
+            'org_id' => 0,
+            'personality_profile_id' => (int) $profile->id,
+            'canonical_type_code' => (string) $profile->type_code,
+            'variant_code' => $variantCode,
+            'runtime_type_code' => $runtimeTypeCode,
+            'type_name' => $runtimeTypeCode,
+            'nickname' => $runtimeTypeCode,
+            'keywords_json' => [$runtimeTypeCode, 'MBTI'],
+            'hero_summary_md' => $runtimeTypeCode.' public variant summary.',
+            'hero_summary_html' => '<p>'.$runtimeTypeCode.' public variant summary.</p>',
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+            'is_published' => true,
+            'published_at' => now()->subHour(),
+        ]);
     }
 
     /**

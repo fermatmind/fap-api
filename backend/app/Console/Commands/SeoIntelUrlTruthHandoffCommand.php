@@ -274,7 +274,10 @@ final class SeoIntelUrlTruthHandoffCommand extends Command
 
     private function boundedLimit(mixed $rawLimit): int
     {
-        $max = max(1, (int) config('seo_intel.url_truth_inventory.canary_max_limit', 50));
+        $max = max(1, (int) config(
+            'seo_intel.url_truth_inventory.handoff_max_limit',
+            config('seo_intel.url_truth_inventory.canary_max_limit', 50)
+        ));
 
         if ($rawLimit === null || $rawLimit === '') {
             return min($max, 20);
