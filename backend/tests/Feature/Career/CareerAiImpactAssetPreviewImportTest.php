@@ -94,6 +94,85 @@ final class CareerAiImpactAssetPreviewImportTest extends TestCase
         $this->assertSame(CareerJobAiImpactAsset::STATUS_APPROVED, $decoded['state_machine']['production_import_requires_from_status']);
         $this->assertTrue((bool) $decoded['rollback_policy']['production_import_requires_approved_status']);
         $this->assertFalse((bool) $decoded['rollback_policy']['dry_run_writes_database']);
+        $this->assertTrue((bool) $decoded['rollback_policy']['staging_preview_write_supported_in_this_pr']);
+    }
+
+    public function test_importer_force_writes_staging_preview_rows_after_validation_passes(): void
+    {
+        Config::set('career_ai_impact_assets.staging_preview_enabled', true);
+        Config::set('career_ai_impact_assets.preview_slugs', ['accountants-and-auditors']);
+        $this->seedCareerJobBundleAuthority('accountants-and-auditors');
+        $file = $this->writeJsonl([
+            $this->assetRow('accountants-and-auditors', 'zh-CN'),
+            $this->assetRow('accountants-and-auditors', 'en'),
+        ]);
+        $sha = hash_file('sha256', $file);
+        $report = storage_path('framework/testing/ai-impact-preview-force-write.json');
+
+        $exitCode = Artisan::call('career:ai-impact-assets-import-preview', [
+            '--file' => $file,
+            '--slugs' => 'accountants-and-auditors',
+            '--expected-sha256' => $sha,
+            '--force' => true,
+            '--status' => CareerJobAiImpactAsset::STATUS_STAGING_PREVIEW,
+            '--output' => $report,
+        ]);
+
+        $this->assertSame(0, $exitCode);
+        $this->assertDatabaseCount('career_job_ai_impact_assets', 2);
+        $this->assertDatabaseHas('career_job_ai_impact_assets', [
+            'career_job_slug' => 'accountants-and-auditors',
+            'locale' => 'zh-CN',
+            'asset_version' => CareerJobAiImpactAsset::ASSET_VERSION_V5,
+            'status' => CareerJobAiImpactAsset::STATUS_STAGING_PREVIEW,
+            'preview_allowlisted' => true,
+            'source_artifact_sha256' => $sha,
+        ]);
+
+        $decoded = json_decode((string) file_get_contents($report), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertSame('pass', $decoded['decision']);
+        $this->assertSame('write', $decoded['mode']);
+        $this->assertSame(2, $decoded['written_count']);
+        $this->assertSame(2, $decoded['created_count']);
+        $this->assertSame(0, $decoded['updated_count']);
+        $this->assertTrue((bool) $decoded['staging_write_performed']);
+        $this->assertFalse((bool) $decoded['production_import_allowed']);
+
+        $this->getJson('/api/v0.5/career/jobs/accountants-and-auditors/ai-impact-asset?locale=en')
+            ->assertOk()
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('preview', true)
+            ->assertJsonPath('ai_impact_asset_v1.slug', 'accountants-and-auditors')
+            ->assertJsonMissingPath('ai_impact_asset_v1.audit_fields')
+            ->assertJsonMissingPath('ai_impact_asset_v1.evidence_used')
+            ->assertJsonMissingPath('ai_impact_asset_v1.derived_from_synthesis')
+            ->assertJsonMissingPath('ai_impact_asset_v1.search_projection');
+    }
+
+    public function test_importer_force_rejects_non_staging_preview_status_without_writing(): void
+    {
+        $this->seedCareerJobBundleAuthority('accountants-and-auditors');
+        $file = $this->writeJsonl([
+            $this->assetRow('accountants-and-auditors', 'zh-CN'),
+            $this->assetRow('accountants-and-auditors', 'en'),
+        ]);
+        $report = storage_path('framework/testing/ai-impact-preview-force-production-reject.json');
+
+        $exitCode = Artisan::call('career:ai-impact-assets-import-preview', [
+            '--file' => $file,
+            '--slugs' => 'accountants-and-auditors',
+            '--force' => true,
+            '--status' => CareerJobAiImpactAsset::STATUS_PRODUCTION_IMPORTED,
+            '--output' => $report,
+        ]);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertDatabaseCount('career_job_ai_impact_assets', 0);
+        $decoded = json_decode((string) file_get_contents($report), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertSame('fail', $decoded['decision']);
+        $this->assertFalse((bool) $decoded['production_import_allowed']);
+        $this->assertFalse((bool) $decoded['staging_write_performed']);
+        $this->assertStringContainsString('Only staging_preview status is supported', implode(' ', $decoded['errors']));
     }
 
     public function test_importer_dry_run_rejects_unexpected_source_sha(): void
@@ -450,8 +529,8 @@ final class CareerAiImpactAssetPreviewImportTest extends TestCase
                 'reader_boundary' => [
                     'label' => $isZh ? 'AI 评分边界' : 'AI score boundary',
                     'body' => $isZh
-                        ? '该分数是任务暴露信号，不是岗位消失、收入变化或个人结果预测。'
-                        : 'This score is a task-exposure signal, not a prediction of job loss, wage change, or an individual outcome.',
+                        ? '该分数是任务暴露信号，不是个人职业结果预测。'
+                        : 'This score is a task-exposure signal, not an individual career outcome forecast.',
                 ],
             ],
             'score_rationale' => [

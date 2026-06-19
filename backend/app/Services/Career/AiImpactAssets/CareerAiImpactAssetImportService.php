@@ -6,8 +6,10 @@ namespace App\Services\Career\AiImpactAssets;
 
 use App\Console\Commands\CareerPublicResolutionTypeMatrix;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionVisibility;
+use App\Models\CareerJobAiImpactAsset;
 use App\Models\Occupation;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
+use Illuminate\Support\Str;
 use Throwable;
 
 final class CareerAiImpactAssetImportService
@@ -171,6 +173,173 @@ final class CareerAiImpactAssetImportService
             'production_import_allowed' => false,
             'staging_write_performed' => false,
             'errors' => $errors,
+        ]);
+    }
+
+    /**
+     * @param  list<string>|null  $requestedSlugs
+     * @return array<string, mixed>
+     */
+    public function importStagingPreview(
+        string $file,
+        ?array $requestedSlugs = null,
+        ?string $expectedSha256 = null,
+        bool $allSlugsFromFile = false,
+        string $status = CareerJobAiImpactAsset::STATUS_STAGING_PREVIEW,
+    ): array {
+        if ($status !== CareerJobAiImpactAsset::STATUS_STAGING_PREVIEW) {
+            return array_merge($this->baseReport($file, $requestedSlugs, $allSlugsFromFile), [
+                'mode' => 'write',
+                'decision' => 'fail',
+                'status' => $status,
+                'production_import_allowed' => false,
+                'staging_write_performed' => false,
+                'errors' => ['Only staging_preview status is supported by this command.'],
+            ]);
+        }
+
+        $validation = $this->validateFile($file, $requestedSlugs, $expectedSha256, $allSlugsFromFile);
+        if (($validation['decision'] ?? null) !== 'pass') {
+            return array_merge($validation, [
+                'mode' => 'write',
+                'status' => $status,
+                'staging_write_performed' => false,
+                'write_skipped_reason' => 'validation_failed',
+            ]);
+        }
+
+        $targetSlugs = array_values(array_map('strval', (array) ($validation['target_slugs'] ?? [])));
+        $targetKeys = [];
+        foreach ($targetSlugs as $slug) {
+            foreach (['zh-CN', 'en'] as $locale) {
+                $targetKeys[$slug.'|'.$locale] = true;
+            }
+        }
+
+        $sourceFileSha256 = is_string($validation['source_file_sha256'] ?? null)
+            ? (string) $validation['source_file_sha256']
+            : null;
+        $importRunId = (string) Str::uuid();
+        $writtenCount = 0;
+        $createdCount = 0;
+        $updatedCount = 0;
+        $writtenRows = [];
+
+        $handle = fopen($file, 'rb');
+        if ($handle === false) {
+            return array_merge($validation, [
+                'mode' => 'write',
+                'status' => $status,
+                'decision' => 'fail',
+                'staging_write_performed' => false,
+                'errors' => ['Source JSONL file could not be opened for staging write.'],
+            ]);
+        }
+
+        while (($line = fgets($handle)) !== false) {
+            if (trim($line) === '') {
+                continue;
+            }
+
+            try {
+                $row = json_decode($line, true, 512, JSON_THROW_ON_ERROR);
+            } catch (Throwable) {
+                continue;
+            }
+
+            if (! is_array($row)) {
+                continue;
+            }
+
+            $slug = $this->previewService->normalizeSlug((string) ($row['slug'] ?? ''));
+            $locale = $this->previewService->normalizeLocale((string) ($row['locale'] ?? ''));
+            if (! isset($targetKeys[$slug.'|'.$locale])) {
+                continue;
+            }
+
+            $occupation = Occupation::query()->where('canonical_slug', $slug)->first();
+            if (! $occupation instanceof Occupation) {
+                continue;
+            }
+
+            $assetVersion = CareerJobAiImpactAsset::ASSET_VERSION_V5;
+            $existing = CareerJobAiImpactAsset::query()
+                ->where('career_job_slug', $slug)
+                ->where('locale', $locale)
+                ->where('asset_version', $assetVersion)
+                ->first();
+
+            $payload = [
+                'occupation_id' => $occupation->id,
+                'status' => CareerJobAiImpactAsset::STATUS_STAGING_PREVIEW,
+                'preview_allowlisted' => true,
+                'asset_payload_json' => $row,
+                'sources_json' => is_array($row['sources'] ?? null) ? $row['sources'] : null,
+                'evidence_used_json' => is_array($row['evidence_used'] ?? null) ? $row['evidence_used'] : null,
+                'derived_from_synthesis_json' => is_array($row['derived_from_synthesis'] ?? null) ? $row['derived_from_synthesis'] : null,
+                'audit_fields_json' => is_array($row['audit_fields'] ?? null) ? $row['audit_fields'] : null,
+                'asset_row_hash' => (string) (($row['audit_fields']['row_hash'] ?? '') ?: hash('sha256', json_encode($row, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?: '')),
+                'source_artifact_sha256' => $sourceFileSha256,
+                'evidence_artifact_sha256' => null,
+                'synthesis_artifact_sha256' => null,
+                'import_run_id' => $importRunId,
+            ];
+
+            CareerJobAiImpactAsset::query()->updateOrCreate(
+                [
+                    'career_job_slug' => $slug,
+                    'locale' => $locale,
+                    'asset_version' => $assetVersion,
+                ],
+                $payload,
+            );
+
+            $writtenCount++;
+            if ($existing instanceof CareerJobAiImpactAsset) {
+                $updatedCount++;
+            } else {
+                $createdCount++;
+            }
+
+            $writtenRows[] = [
+                'slug' => $slug,
+                'locale' => $locale,
+                'status' => CareerJobAiImpactAsset::STATUS_STAGING_PREVIEW,
+                'operation' => $existing instanceof CareerJobAiImpactAsset ? 'updated' : 'created',
+            ];
+        }
+
+        fclose($handle);
+
+        $expectedWriteCount = (int) ($validation['expected_preview_rows'] ?? 0);
+        if ($writtenCount !== $expectedWriteCount) {
+            return array_merge($validation, [
+                'mode' => 'write',
+                'status' => CareerJobAiImpactAsset::STATUS_STAGING_PREVIEW,
+                'decision' => 'fail',
+                'staging_write_performed' => true,
+                'production_import_allowed' => false,
+                'import_run_id' => $importRunId,
+                'written_count' => $writtenCount,
+                'created_count' => $createdCount,
+                'updated_count' => $updatedCount,
+                'written_rows' => $writtenRows,
+                'errors' => ["Staging preview write count {$writtenCount} did not match expected row count {$expectedWriteCount}."],
+            ]);
+        }
+
+        return array_merge($validation, [
+            'mode' => 'write',
+            'status' => CareerJobAiImpactAsset::STATUS_STAGING_PREVIEW,
+            'decision' => 'pass',
+            'staging_write_performed' => true,
+            'production_import_allowed' => false,
+            'import_run_id' => $importRunId,
+            'written_count' => $writtenCount,
+            'created_count' => $createdCount,
+            'updated_count' => $updatedCount,
+            'written_rows' => $writtenRows,
+            'errors' => [],
         ]);
     }
 
@@ -385,14 +554,14 @@ final class CareerAiImpactAssetImportService
         return [
             'importer_version' => self::IMPORTER_VERSION,
             'asset_version' => 'career_risk_future_ai_impact_v5',
-            'status_policy' => 'dry_run_only_for_this_contract',
+            'status_policy' => 'dry_run_or_staging_preview_only_for_this_contract',
             'production_import_allowed' => false,
             'production_import_gate' => [
                 'allowed' => false,
                 'required_from_status' => 'approved',
                 'current_command_supports_production_import' => false,
             ],
-            'staging_write_supported' => false,
+            'staging_write_supported' => true,
             'source_file' => $file,
             'requested_slugs' => $requestedSlugs,
             'all_slugs_from_file' => $allSlugsFromFile,
@@ -444,7 +613,7 @@ final class CareerAiImpactAssetImportService
     {
         return [
             'dry_run_writes_database' => false,
-            'staging_preview_write_supported_in_this_pr' => false,
+            'staging_preview_write_supported_in_this_pr' => true,
             'production_import_requires_approved_status' => true,
         ];
     }
