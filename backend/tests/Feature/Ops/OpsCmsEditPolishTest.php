@@ -99,6 +99,10 @@ final class OpsCmsEditPolishTest extends TestCase
 
         if ($expectsSeo) {
             $test->assertSee(__('ops.edit.sections.seo'));
+
+            if ($component === EditArticle::class) {
+                $test->assertSee('SEO Release Status');
+            }
         }
     }
 
