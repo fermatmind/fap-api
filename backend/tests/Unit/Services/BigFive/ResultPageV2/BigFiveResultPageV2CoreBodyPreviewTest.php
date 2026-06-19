@@ -2351,6 +2351,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_enneagram_phase8b_candidate_asset_reconciliation_changes(): void
+    {
+        $changed = [
+            'backend/app/Services/Enneagram/Assets/EnneagramInactiveCandidateReleaseImporter.php',
+            'backend/app/Services/Enneagram/Assets/EnneagramProductionEquivalentCandidatePayloadExporter.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_display_import_service_changes(): void
     {
         $changed = [
@@ -3936,6 +3946,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isEnneagramPhase8bCandidateAssetReconciliationFile($file)) {
+                continue;
+            }
+
             if ($this->isIqReportFoundationFile($file)) {
                 continue;
             }
@@ -4993,6 +5007,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isEnneagramForcedChoiceQuestionPackTranslationFile(string $file): bool
     {
         return preg_match('#^backend/content_packs/ENNEAGRAM/v1-forced-choice-144/compiled/(?:questions\\.compiled|manifest)\\.json$#', $file) === 1;
+    }
+
+    private function isEnneagramPhase8bCandidateAssetReconciliationFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Services/Enneagram/Assets/EnneagramInactiveCandidateReleaseImporter.php',
+            'backend/app/Services/Enneagram/Assets/EnneagramProductionEquivalentCandidatePayloadExporter.php',
+        ], true);
     }
 
     private function isIqReportFoundationFile(string $file): bool

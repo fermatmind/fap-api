@@ -8,7 +8,7 @@ use RuntimeException;
 
 final class EnneagramProductionEquivalentCandidatePayloadExporter
 {
-    private const EXPECTED_MANIFEST_SHA256 = '87f7eb874eb162ff158b5d3ac5e4393218d045054b2f0e3e0eddc09c6c3ea556';
+    private const EXPECTED_MANIFEST_SHA256 = 'a9fd3eb474ea2ca0130d06ad2b1640305d9160ee1a74e559ad4f60bfc4db56c0';
 
     private const EXPECTED_RUNTIME_REGISTRY_MANIFEST_SHA256 = 'ac5bdaab3c761b0d01a56f92679aa58341110d64de0f47a1fa0062b64f76f97f';
 
@@ -284,34 +284,42 @@ final class EnneagramProductionEquivalentCandidatePayloadExporter
             '1R-A' => $this->resolveExternalAssetPath(
                 '/Users/rainie/Desktop/FermatMind_Enneagram_Content_Expansion_Batch_1R_B_v3/FermatMind_Enneagram_Content_Expansion_Batch_1R_A_Assets_v6_final.json',
                 '/Users/rainie/Desktop/九型/FermatMind_Enneagram_Content_Expansion_Batch_1R_B_v3/FermatMind_Enneagram_Content_Expansion_Batch_1R_A_Assets_v6_final.json',
+                '/Users/rainie/Desktop/费马资料文件/九型/FermatMind_Enneagram_Content_Expansion_Batch_1R_B_v3/FermatMind_Enneagram_Content_Expansion_Batch_1R_A_Assets_v6_final.json',
             ),
             '1R-B' => $this->resolveExternalAssetPath(
                 '/Users/rainie/Desktop/FermatMind_Enneagram_Content_Expansion_Batch_1R_B_v3/FermatMind_Enneagram_Content_Expansion_Batch_1R_B_Legacy_Core_Rewrite_v3_Assets.json',
                 '/Users/rainie/Desktop/九型/FermatMind_Enneagram_Content_Expansion_Batch_1R_B_v3/FermatMind_Enneagram_Content_Expansion_Batch_1R_B_Legacy_Core_Rewrite_v3_Assets.json',
+                '/Users/rainie/Desktop/费马资料文件/九型/FermatMind_Enneagram_Content_Expansion_Batch_1R_B_v3/FermatMind_Enneagram_Content_Expansion_Batch_1R_B_Legacy_Core_Rewrite_v3_Assets.json',
             ),
             '1R-C' => $this->resolveExternalAssetPath(
                 '/Users/rainie/Desktop/FermatMind_Enneagram_Content_Expansion_Batch_1R_C_Low_Resonance_Objection_Handling/FermatMind_Enneagram_Content_Expansion_Batch_1R_C_Low_Resonance_Objection_Handling_Assets.json',
                 '/Users/rainie/Desktop/九型/FermatMind_Enneagram_Content_Expansion_Batch_1R_C_Low_Resonance_Objection_Handling/FermatMind_Enneagram_Content_Expansion_Batch_1R_C_Low_Resonance_Objection_Handling_Assets.json',
+                '/Users/rainie/Desktop/费马资料文件/九型/FermatMind_Enneagram_Content_Expansion_Batch_1R_C_Low_Resonance_Objection_Handling/FermatMind_Enneagram_Content_Expansion_Batch_1R_C_Low_Resonance_Objection_Handling_Assets.json',
             ),
             '1R-D' => $this->resolveExternalAssetPath(
                 '/Users/rainie/Desktop/FermatMind_Enneagram_Content_Expansion_Batch_1R_D_Partial_Resonance_Deep_Branch/FermatMind_Enneagram_Content_Expansion_Batch_1R_D_Partial_Resonance_Deep_Branch_Assets.json',
                 '/Users/rainie/Desktop/九型/FermatMind_Enneagram_Content_Expansion_Batch_1R_D_Partial_Resonance_Deep_Branch/FermatMind_Enneagram_Content_Expansion_Batch_1R_D_Partial_Resonance_Deep_Branch_Assets.json',
+                '/Users/rainie/Desktop/费马资料文件/九型/FermatMind_Enneagram_Content_Expansion_Batch_1R_D_Partial_Resonance_Deep_Branch/FermatMind_Enneagram_Content_Expansion_Batch_1R_D_Partial_Resonance_Deep_Branch_Assets.json',
             ),
             '1R-E' => $this->resolveExternalAssetPath(
                 '/Users/rainie/Desktop/FermatMind_Enneagram_Content_Expansion_Batch_1R_E_Diffuse_Top3_Convergence/FermatMind_Enneagram_Content_Expansion_Batch_1R_E_Diffuse_Top3_Convergence_Assets.json',
                 '/Users/rainie/Desktop/九型/FermatMind_Enneagram_Content_Expansion_Batch_1R_E_Diffuse_Top3_Convergence/FermatMind_Enneagram_Content_Expansion_Batch_1R_E_Diffuse_Top3_Convergence_Assets.json',
+                '/Users/rainie/Desktop/费马资料文件/九型/FermatMind_Enneagram_Content_Expansion_Batch_1R_E_Diffuse_Top3_Convergence/FermatMind_Enneagram_Content_Expansion_Batch_1R_E_Diffuse_Top3_Convergence_Assets.json',
             ),
             '1R-F' => $this->resolveExternalAssetPath(
                 '/Users/rainie/Desktop/FermatMind_Enneagram_Content_Expansion_Batch_1R_F_Close_Call_36_Pair_Completion/FermatMind_Enneagram_Content_Expansion_Batch_1R_F_Close_Call_36_Pair_Completion_Assets.json',
                 '/Users/rainie/Desktop/九型/FermatMind_Enneagram_Content_Expansion_Batch_1R_F_Close_Call_36_Pair_Completion/FermatMind_Enneagram_Content_Expansion_Batch_1R_F_Close_Call_36_Pair_Completion_Assets.json',
+                '/Users/rainie/Desktop/费马资料文件/九型/FermatMind_Enneagram_Content_Expansion_Batch_1R_F_Close_Call_36_Pair_Completion/FermatMind_Enneagram_Content_Expansion_Batch_1R_F_Close_Call_36_Pair_Completion_Assets.json',
             ),
             '1R-G' => $this->resolveExternalAssetPath(
                 '/Users/rainie/Desktop/FermatMind_Enneagram_Content_Expansion_Batch_1R_G_Scene_Localization/FermatMind_Enneagram_Content_Expansion_Batch_1R_G_Scene_Localization_Assets.json',
                 '/Users/rainie/Desktop/九型/FermatMind_Enneagram_Content_Expansion_Batch_1R_G_Scene_Localization/FermatMind_Enneagram_Content_Expansion_Batch_1R_G_Scene_Localization_Assets.json',
+                '/Users/rainie/Desktop/费马资料文件/九型/FermatMind_Enneagram_Content_Expansion_Batch_1R_G_Scene_Localization/FermatMind_Enneagram_Content_Expansion_Batch_1R_G_Scene_Localization_Assets.json',
             ),
             '1R-H' => $this->resolveExternalAssetPath(
                 '/Users/rainie/Desktop/FermatMind_Enneagram_Content_Expansion_Batch_1R_H_FC144_Recommendation_Pack/FermatMind_Enneagram_Content_Expansion_Batch_1R_H_FC144_Recommendation_Pack_Assets.json',
                 '/Users/rainie/Desktop/九型/FermatMind_Enneagram_Content_Expansion_Batch_1R_H_FC144_Recommendation_Pack/FermatMind_Enneagram_Content_Expansion_Batch_1R_H_FC144_Recommendation_Pack_Assets.json',
+                '/Users/rainie/Desktop/费马资料文件/九型/FermatMind_Enneagram_Content_Expansion_Batch_1R_H_FC144_Recommendation_Pack/FermatMind_Enneagram_Content_Expansion_Batch_1R_H_FC144_Recommendation_Pack_Assets.json',
                 '/mnt/data/FermatMind_Enneagram_Content_Expansion_Batch_1R_H_FC144_Recommendation_Pack/FermatMind_Enneagram_Content_Expansion_Batch_1R_H_FC144_Recommendation_Pack_Assets.json',
             ),
         ];

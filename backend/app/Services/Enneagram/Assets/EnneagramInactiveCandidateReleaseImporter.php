@@ -15,7 +15,7 @@ use RuntimeException;
 
 final class EnneagramInactiveCandidateReleaseImporter
 {
-    private const DEFAULT_EXPECTED_CANDIDATE_MANIFEST_SHA256 = '87f7eb874eb162ff158b5d3ac5e4393218d045054b2f0e3e0eddc09c6c3ea556';
+    private const DEFAULT_EXPECTED_CANDIDATE_MANIFEST_SHA256 = 'a9fd3eb474ea2ca0130d06ad2b1640305d9160ee1a74e559ad4f60bfc4db56c0';
 
     private const DEFAULT_EXPECTED_RUNTIME_REGISTRY_MANIFEST_SHA256 = 'ac5bdaab3c761b0d01a56f92679aa58341110d64de0f47a1fa0062b64f76f97f';
 
