@@ -30,5 +30,29 @@
     "reason": "composer audit still reports the advisory although composer.lock is already above the affected upper bound <=3.7.19",
     "reviewed_at": "2026-04-17",
     "expires_at": "2026-05-01"
+  },
+  {
+    "advisory_id": "PKSA-n7tx-gkfb-14yj",
+    "package": "filament/forms",
+    "locked_version": "v3.3.54",
+    "reason": "composer audit still reports the advisory although composer.lock is already above the affected upper bound <=3.3.52",
+    "reviewed_at": "2026-06-19",
+    "expires_at": "2026-07-03"
+  },
+  {
+    "advisory_id": "PKSA-m5cs-t1y6-qpcs",
+    "package": "laravel/framework",
+    "locked_version": "v12.62.0",
+    "reason": "composer audit still reports the advisory although composer.lock is already above the affected upper bound <12.61.1",
+    "reviewed_at": "2026-06-19",
+    "expires_at": "2026-07-03"
+  },
+  {
+    "advisory_id": "PKSA-mnyp-475s-ywph",
+    "package": "mtdowling/jmespath.php",
+    "locked_version": "2.9.1",
+    "reason": "composer audit still reports the advisory although composer.lock is already above the affected upper bound <2.9.1",
+    "reviewed_at": "2026-06-19",
+    "expires_at": "2026-07-03"
   }
 ]

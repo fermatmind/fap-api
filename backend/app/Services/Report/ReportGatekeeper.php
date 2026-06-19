@@ -12,6 +12,9 @@ use App\Services\Commerce\FreemiumLocalePolicy;
 use App\Services\Content\ContentPack;
 use App\Services\Content\ContentStore;
 use App\Services\ContentPackResolver;
+use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2AuditFields;
+use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2Contract;
+use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2RuntimeWrapper;
 use App\Services\Report\Resolvers\AccessResolver;
 use App\Services\Report\Resolvers\CrisisPolicyResolver;
 use App\Services\Report\Resolvers\OfferResolver;
@@ -656,6 +659,16 @@ class ReportGatekeeper
         array $reportFull
     ): void {
         try {
+            $scaleCode = strtoupper((string) ($attempt->scale_code ?? $result->scale_code ?? 'MBTI'));
+            $bigFiveResultPageV2Audit = [];
+            if ($scaleCode === BigFiveResultPageV2Contract::SCALE_CODE) {
+                [$reportFull, $bigFiveResultPageV2Audit] = $this->attachBigFiveResultPageV2ForSnapshot(
+                    $attempt,
+                    $result,
+                    $reportFull
+                );
+            }
+
             $reportFullJson = json_encode($reportFull, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
             $reportFreeJson = json_encode($reportFree, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
             if ($reportFullJson === false || $reportFreeJson === false) {
@@ -672,7 +685,7 @@ class ReportGatekeeper
                 'org_id' => $orgId,
                 'attempt_id' => $attemptId,
                 'order_no' => null,
-                'scale_code' => strtoupper((string) ($attempt->scale_code ?? $result->scale_code ?? 'MBTI')),
+                'scale_code' => $scaleCode,
                 'pack_id' => (string) ($attempt->pack_id ?? $result->pack_id ?? ''),
                 'dir_version' => (string) ($attempt->dir_version ?? $result->dir_version ?? ''),
                 'scoring_spec_version' => $attempt->scoring_spec_version ?? $result->scoring_spec_version ?? null,
@@ -686,6 +699,7 @@ class ReportGatekeeper
                 'created_at' => $now,
                 'updated_at' => $now,
             ];
+            $row = app(BigFiveResultPageV2AuditFields::class)->appendToSnapshotRow($row, $bigFiveResultPageV2Audit);
 
             DB::table('report_snapshots')->insertOrIgnore($row);
 
@@ -702,6 +716,59 @@ class ReportGatekeeper
                 'error' => $e->getMessage(),
             ]);
         }
+    }
+
+    /**
+     * @param  array<string,mixed>  $report
+     * @return array{0:array<string,mixed>,1:array<string,mixed>}
+     */
+    private function attachBigFiveResultPageV2ForSnapshot(Attempt $attempt, Result $result, array $report): array
+    {
+        $modulesFull = ReportAccess::normalizeModules(array_merge(
+            [ReportAccess::freeModuleForScale(BigFiveResultPageV2Contract::SCALE_CODE)],
+            ReportAccess::allDefaultModulesOffered(BigFiveResultPageV2Contract::SCALE_CODE)
+        ));
+        $modulesPreview = ReportAccess::allDefaultModulesOffered(BigFiveResultPageV2Contract::SCALE_CODE);
+        $responsePayload = [
+            'report' => $report,
+            'locked' => false,
+            'access_level' => ReportAccess::REPORT_ACCESS_FULL,
+            'variant' => ReportAccess::VARIANT_FULL,
+            'modules_allowed' => $modulesFull,
+            'modules_preview' => $modulesPreview,
+            'big5_form_v1' => [
+                'form_code' => $this->resolveBigFiveFormCode($attempt),
+            ],
+        ];
+
+        $projection = data_get($report, '_meta.big5_public_projection_v1');
+        if (is_array($projection)) {
+            $responsePayload['big5_public_projection_v1'] = $projection;
+        }
+
+        $wrapped = app(BigFiveResultPageV2RuntimeWrapper::class)->appendIfEnabledWithAudit($attempt, $result, $responsePayload);
+        $payload = $wrapped['payload'][BigFiveResultPageV2Contract::PAYLOAD_KEY] ?? null;
+        if (is_array($payload)) {
+            $report[BigFiveResultPageV2Contract::PAYLOAD_KEY] = $payload;
+        }
+
+        return [
+            $report,
+            app(BigFiveResultPageV2AuditFields::class)->fromRuntimeAudit(
+                is_array($wrapped['audit'] ?? null) ? $wrapped['audit'] : [],
+                BigFiveResultPageV2Contract::SCALE_CODE
+            ),
+        ];
+    }
+
+    private function resolveBigFiveFormCode(Attempt $attempt): string
+    {
+        $formCode = trim((string) data_get($attempt->answers_summary_json, 'meta.form_code', ''));
+        if ($formCode !== '') {
+            return $formCode;
+        }
+
+        return (int) ($attempt->question_count ?? 0) === 90 ? 'big5_90' : 'big5_120';
     }
 
     private function buildReportVariant(

@@ -9,10 +9,12 @@ use App\Models\Result;
 use App\Services\BigFive\ReportEngine\Bridge\BigFiveLiveRuntimeBridge;
 use App\Services\BigFive\ResultPageV2\Access\BigFiveV2PilotAccessGate;
 use App\Services\BigFive\ResultPageV2\Composer\BigFiveV2PilotPayloadComposer;
+use App\Services\BigFive\ResultPageV2\Observability\BigFiveV2ProductionRolloutTelemetry;
 use App\Services\BigFive\ResultPageV2\Routing\BigFiveV2ProjectionRouteInputAdapter;
 use App\Services\BigFive\ResultPageV2\Routing\BigFiveV2RouteDrivenSelectorInputBuilder;
 use App\Services\BigFive\ResultPageV2\Routing\BigFiveV2RouteInput;
 use App\Services\BigFive\ResultPageV2\Routing\BigFiveV2RouteMatrixLookup;
+use App\Services\BigFive\ResultPageV2\Rollout\BigFiveV2ProductionRolloutGate;
 use App\Services\BigFive\ResultPageV2\Selector\BigFiveV2DeterministicSelector;
 use App\Services\Report\ReportAccess;
 use Illuminate\Support\Facades\Log;
@@ -25,6 +27,8 @@ final class BigFiveResultPageV2RuntimeWrapper
         private readonly BigFiveResultPageV2Validator $validator,
         private readonly BigFiveV2PilotAccessGate $pilotAccessGate,
         private readonly BigFiveV2PilotRuntimeObservability $pilotObservability,
+        private readonly BigFiveV2ProductionRolloutGate $productionRolloutGate,
+        private readonly BigFiveV2ProductionRolloutTelemetry $productionTelemetry,
     ) {}
 
     /**
@@ -33,11 +37,24 @@ final class BigFiveResultPageV2RuntimeWrapper
      */
     public function appendIfEnabled(Attempt $attempt, Result $result, array $responsePayload): array
     {
+        return $this->appendIfEnabledWithAudit($attempt, $result, $responsePayload)['payload'];
+    }
+
+    /**
+     * @param  array<string,mixed>  $responsePayload
+     * @return array{payload:array<string,mixed>,audit:array<string,mixed>}
+     */
+    public function appendIfEnabledWithAudit(Attempt $attempt, Result $result, array $responsePayload): array
+    {
         $legacyRuntimeEnabled = $this->legacyRuntimeEnabled();
         $pilotRuntimeEnabled = $this->pilotRuntimeEnabled();
+        $audit = $this->audit(
+            BigFiveResultPageV2AuditFields::STATUS_NOT_EVALUATED,
+            BigFiveResultPageV2AuditFields::REASON_NOT_BIG5
+        );
 
         if (strtoupper(trim((string) ($attempt->scale_code ?? ''))) !== BigFiveResultPageV2Contract::SCALE_CODE) {
-            return $responsePayload;
+            return ['payload' => $responsePayload, 'audit' => $audit];
         }
 
         if (! $legacyRuntimeEnabled && ! $pilotRuntimeEnabled) {
@@ -46,11 +63,33 @@ final class BigFiveResultPageV2RuntimeWrapper
                 'fallback_reason' => 'pilot_runtime_disabled',
             ]);
 
-            return $responsePayload;
+            return [
+                'payload' => $responsePayload,
+                'audit' => $this->audit(
+                    BigFiveResultPageV2AuditFields::STATUS_DISABLED,
+                    BigFiveResultPageV2AuditFields::REASON_PRODUCTION_RUNTIME_DISABLED
+                ),
+            ];
         }
 
         if ($pilotRuntimeEnabled) {
             return $this->appendPilotPayload($attempt, $result, $responsePayload);
+        }
+
+        if ((string) app()->environment() === 'production') {
+            $decision = $this->productionRolloutGate->decide($attempt);
+            $this->productionTelemetry->recordRolloutDecision($attempt, $result, $decision);
+            if (! $decision->allowed) {
+                return [
+                    'payload' => $responsePayload,
+                    'audit' => $this->audit(
+                        BigFiveResultPageV2AuditFields::STATUS_FALLBACK,
+                        BigFiveResultPageV2AuditFields::REASON_PRODUCTION_ROLLOUT_DENIED
+                    ),
+                ];
+            }
+
+            return $this->appendProductionPayload($attempt, $result, $responsePayload);
         }
 
         try {
@@ -64,12 +103,27 @@ final class BigFiveResultPageV2RuntimeWrapper
                     'errors' => array_slice($errors, 0, 10),
                 ]);
 
-                return $responsePayload;
+                return [
+                    'payload' => $responsePayload,
+                    'audit' => $this->audit(
+                        BigFiveResultPageV2AuditFields::STATUS_INVALID,
+                        BigFiveResultPageV2AuditFields::REASON_PAYLOAD_VALIDATION_FAILED,
+                        count($errors)
+                    ),
+                ];
             }
 
             $payload = $envelope[BigFiveResultPageV2Contract::PAYLOAD_KEY] ?? null;
             if (is_array($payload)) {
                 $responsePayload[BigFiveResultPageV2Contract::PAYLOAD_KEY] = $payload;
+
+                return [
+                    'payload' => $responsePayload,
+                    'audit' => $this->audit(
+                        BigFiveResultPageV2AuditFields::STATUS_ATTACHED,
+                        BigFiveResultPageV2AuditFields::REASON_V2_ATTACHED
+                    ),
+                ];
             }
         } catch (\Throwable $exception) {
             Log::warning('BIG5_RESULT_PAGE_V2_RUNTIME_WRAPPER_FAILED', [
@@ -78,9 +132,23 @@ final class BigFiveResultPageV2RuntimeWrapper
                 'exception_class' => $exception::class,
                 'message' => $exception->getMessage(),
             ]);
+
+            return [
+                'payload' => $responsePayload,
+                'audit' => $this->audit(
+                    BigFiveResultPageV2AuditFields::STATUS_FALLBACK,
+                    $this->classifyPayloadException($exception)
+                ),
+            ];
         }
 
-        return $responsePayload;
+        return [
+            'payload' => $responsePayload,
+            'audit' => $this->audit(
+                BigFiveResultPageV2AuditFields::STATUS_FALLBACK,
+                BigFiveResultPageV2AuditFields::REASON_LEGACY_ENGINE_ONLY
+            ),
+        ];
     }
 
     private function legacyRuntimeEnabled(): bool
@@ -148,22 +216,34 @@ final class BigFiveResultPageV2RuntimeWrapper
 
     /**
      * @param  array<string,mixed>  $responsePayload
-     * @return array<string,mixed>
+     * @return array{payload:array<string,mixed>,audit:array<string,mixed>}
      */
     private function appendPilotPayload(Attempt $attempt, Result $result, array $responsePayload): array
     {
         if (! $this->responseAllowsPilotPayload($responsePayload)) {
-            return $responsePayload;
+            return [
+                'payload' => $responsePayload,
+                'audit' => $this->audit(
+                    BigFiveResultPageV2AuditFields::STATUS_FALLBACK,
+                    BigFiveResultPageV2AuditFields::REASON_LOCKED_OR_FREE_PREVIEW
+                ),
+            ];
         }
 
         $accessDecision = $this->pilotAccessGate->decide($attempt);
         $this->pilotObservability->recordAccessDecision($attempt, $result, $accessDecision);
         if (! $accessDecision->allowed) {
-            return $responsePayload;
+            return [
+                'payload' => $responsePayload,
+                'audit' => $this->audit(
+                    BigFiveResultPageV2AuditFields::STATUS_FALLBACK,
+                    BigFiveResultPageV2AuditFields::REASON_PRODUCTION_ROLLOUT_DENIED
+                ),
+            ];
         }
 
         try {
-            $build = $this->buildPilotEnvelope($attempt, $result, $responsePayload);
+            $build = $this->buildRouteDrivenEnvelope($attempt, $result, $responsePayload);
             $envelope = $build['envelope'];
             $errors = $this->validator->validateEnvelope($envelope);
             if ($errors !== []) {
@@ -175,13 +255,28 @@ final class BigFiveResultPageV2RuntimeWrapper
                     'errors' => array_slice($errors, 0, 10),
                 ]);
 
-                return $responsePayload;
+                return [
+                    'payload' => $responsePayload,
+                    'audit' => $this->audit(
+                        BigFiveResultPageV2AuditFields::STATUS_INVALID,
+                        BigFiveResultPageV2AuditFields::REASON_PAYLOAD_VALIDATION_FAILED,
+                        count($errors)
+                    ),
+                ];
             }
 
             $payload = $envelope[BigFiveResultPageV2Contract::PAYLOAD_KEY] ?? null;
             if (is_array($payload)) {
                 $responsePayload[BigFiveResultPageV2Contract::PAYLOAD_KEY] = $payload;
                 $this->pilotObservability->recordPayloadAttached($attempt, $result, $build['metrics']);
+
+                return [
+                    'payload' => $responsePayload,
+                    'audit' => $this->audit(
+                        BigFiveResultPageV2AuditFields::STATUS_ATTACHED,
+                        BigFiveResultPageV2AuditFields::REASON_V2_ATTACHED
+                    ),
+                ];
             }
         } catch (\Throwable $exception) {
             $this->pilotObservability->recordPayloadGenerationFailed($attempt, $result, $exception);
@@ -191,9 +286,115 @@ final class BigFiveResultPageV2RuntimeWrapper
                 'exception_class' => $exception::class,
                 'message' => $exception->getMessage(),
             ]);
+
+            return [
+                'payload' => $responsePayload,
+                'audit' => $this->audit(
+                    BigFiveResultPageV2AuditFields::STATUS_FALLBACK,
+                    $this->classifyPayloadException($exception)
+                ),
+            ];
         }
 
-        return $responsePayload;
+        return [
+            'payload' => $responsePayload,
+            'audit' => $this->audit(
+                BigFiveResultPageV2AuditFields::STATUS_FALLBACK,
+                BigFiveResultPageV2AuditFields::REASON_LEGACY_ENGINE_ONLY
+            ),
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $responsePayload
+     * @return array{payload:array<string,mixed>,audit:array<string,mixed>}
+     */
+    private function appendProductionPayload(Attempt $attempt, Result $result, array $responsePayload): array
+    {
+        if (! $this->responseAllowsPilotPayload($responsePayload)) {
+            return [
+                'payload' => $responsePayload,
+                'audit' => $this->audit(
+                    BigFiveResultPageV2AuditFields::STATUS_FALLBACK,
+                    BigFiveResultPageV2AuditFields::REASON_LOCKED_OR_FREE_PREVIEW
+                ),
+            ];
+        }
+
+        try {
+            $build = $this->buildRouteDrivenEnvelope($attempt, $result, $responsePayload);
+            $this->productionTelemetry->recordSelectorSuppression(
+                $attempt,
+                $result,
+                (int) ($build['metrics']['selector_suppressed_ref_count'] ?? 0),
+                (int) ($build['metrics']['unresolved_ref_count'] ?? 0)
+            );
+
+            $envelope = $build['envelope'];
+            $errors = $this->validator->validateEnvelope($envelope);
+            if ($errors !== []) {
+                $this->productionTelemetry->recordPayloadValidationFailure($attempt, $result, $errors);
+                Log::warning('BIG5_RESULT_PAGE_V2_PRODUCTION_PAYLOAD_INVALID', [
+                    'attempt_id' => (string) ($attempt->id ?? ''),
+                    'result_id' => (string) ($result->id ?? ''),
+                    'error_count' => count($errors),
+                    'errors' => array_slice($errors, 0, 10),
+                ]);
+
+                return [
+                    'payload' => $responsePayload,
+                    'audit' => $this->audit(
+                        BigFiveResultPageV2AuditFields::STATUS_INVALID,
+                        BigFiveResultPageV2AuditFields::REASON_PAYLOAD_VALIDATION_FAILED,
+                        count($errors)
+                    ),
+                ];
+            }
+
+            $payload = $envelope[BigFiveResultPageV2Contract::PAYLOAD_KEY] ?? null;
+            if (is_array($payload)) {
+                $responsePayload[BigFiveResultPageV2Contract::PAYLOAD_KEY] = $payload;
+
+                return [
+                    'payload' => $responsePayload,
+                    'audit' => $this->audit(
+                        BigFiveResultPageV2AuditFields::STATUS_ATTACHED,
+                        BigFiveResultPageV2AuditFields::REASON_V2_ATTACHED
+                    ),
+                ];
+            }
+        } catch (\Throwable $exception) {
+            $reason = $this->classifyPayloadException($exception);
+            if ($reason === BigFiveResultPageV2AuditFields::REASON_COMPOSER_FAILED) {
+                $this->productionTelemetry->recordComposerFailure($attempt, $result, $exception);
+            } else {
+                $this->productionTelemetry->recordFailClosed($attempt, $result, $reason);
+            }
+
+            Log::warning('BIG5_RESULT_PAGE_V2_PRODUCTION_RUNTIME_WRAPPER_FAILED', [
+                'attempt_id' => (string) ($attempt->id ?? ''),
+                'result_id' => (string) ($result->id ?? ''),
+                'exception_class' => $exception::class,
+                'message' => $exception->getMessage(),
+                'fallback_reason' => $reason,
+            ]);
+
+            return [
+                'payload' => $responsePayload,
+                'audit' => $this->audit(
+                    BigFiveResultPageV2AuditFields::STATUS_FALLBACK,
+                    $reason
+                ),
+            ];
+        }
+
+        return [
+            'payload' => $responsePayload,
+            'audit' => $this->audit(
+                BigFiveResultPageV2AuditFields::STATUS_FALLBACK,
+                BigFiveResultPageV2AuditFields::REASON_LEGACY_ENGINE_ONLY
+            ),
+        ];
     }
 
     /**
@@ -285,13 +486,13 @@ final class BigFiveResultPageV2RuntimeWrapper
     /**
      * @return array{envelope: array{big5_result_page_v2: array<string,mixed>}, metrics: array<string,mixed>}
      */
-    private function buildPilotEnvelope(Attempt $attempt, Result $result, array $responsePayload): array
+    private function buildRouteDrivenEnvelope(Attempt $attempt, Result $result, array $responsePayload): array
     {
         $routeInput = $this->buildRouteInput($result, $responsePayload);
         $routeRow = (new BigFiveV2RouteMatrixLookup)->lookup($routeInput);
         if ($routeRow === null) {
             throw new RuntimeException(
-                'Big Five V2 pilot route row is missing for route hash: '.$this->combinationKeyHash($routeInput->combinationKey)
+                'Big Five V2 route lookup failed for route hash: '.$this->combinationKeyHash($routeInput->combinationKey)
             );
         }
 
@@ -305,7 +506,7 @@ final class BigFiveResultPageV2RuntimeWrapper
         try {
             $envelope = (new BigFiveV2PilotPayloadComposer)->compose($input, $selection);
         } catch (\Throwable $exception) {
-            throw new RuntimeException('Big Five V2 pilot composer failed.', previous: $exception);
+            throw new RuntimeException('Big Five V2 composer failed.', previous: $exception);
         }
 
         return [
@@ -334,10 +535,13 @@ final class BigFiveResultPageV2RuntimeWrapper
     private function buildRouteInput(Result $result, array $responsePayload): BigFiveV2RouteInput
     {
         $projection = $responsePayload['big5_public_projection_v1'] ?? null;
+        if (! is_array($projection)) {
+            $projection = data_get($responsePayload, 'report._meta.big5_public_projection_v1');
+        }
         if (is_array($projection) && $projection !== []) {
             $meta = (array) ($projection['_meta'] ?? []);
             if (($meta['redacted'] ?? false) === true || ($meta['locked'] ?? false) === true) {
-                throw new RuntimeException('Big Five V2 pilot projection is locked or redacted.');
+                throw new RuntimeException('Big Five V2 projection is locked or redacted.');
             }
         }
 
@@ -349,7 +553,7 @@ final class BigFiveResultPageV2RuntimeWrapper
                 return $routeInput;
             }
 
-            throw new RuntimeException('Big Five V2 pilot route input is invalid: '.implode('; ', $adapter->errors()));
+            throw new RuntimeException('Big Five V2 route input is invalid: '.implode('; ', $adapter->errors()));
         }
 
         if (is_array($projection) && $projection !== []) {
@@ -359,10 +563,10 @@ final class BigFiveResultPageV2RuntimeWrapper
                 return $routeInput;
             }
 
-            throw new RuntimeException('Big Five V2 pilot route projection is invalid: '.implode('; ', $adapter->errors()));
+            throw new RuntimeException('Big Five V2 route projection is invalid: '.implode('; ', $adapter->errors()));
         }
 
-        throw new RuntimeException('Big Five V2 pilot score result is missing.');
+        throw new RuntimeException('Big Five V2 score result is missing.');
     }
 
     private function combinationKeyHash(string $combinationKey): string
@@ -404,7 +608,9 @@ final class BigFiveResultPageV2RuntimeWrapper
             'form_code' => $this->resolveFormCode($attempt, $formSummary),
             'big5_public_projection_v1' => is_array($responsePayload['big5_public_projection_v1'] ?? null)
                 ? $responsePayload['big5_public_projection_v1']
-                : [],
+                : (is_array(data_get($responsePayload, 'report._meta.big5_public_projection_v1'))
+                    ? data_get($responsePayload, 'report._meta.big5_public_projection_v1')
+                    : []),
             'big5_report_engine_v2' => is_array($responsePayload[BigFiveLiveRuntimeBridge::RESPONSE_KEY] ?? null)
                 ? $responsePayload[BigFiveLiveRuntimeBridge::RESPONSE_KEY]
                 : [],
@@ -465,5 +671,44 @@ final class BigFiveResultPageV2RuntimeWrapper
         }
 
         return $default;
+    }
+
+    /**
+     * @return array{status:string,fallback_reason:?string,validation_error_count:int}
+     */
+    private function audit(string $status, ?string $reason, int $validationErrorCount = 0): array
+    {
+        return [
+            'status' => $status,
+            'fallback_reason' => $reason,
+            'validation_error_count' => max(0, min(65535, $validationErrorCount)),
+        ];
+    }
+
+    private function classifyPayloadException(\Throwable $exception): string
+    {
+        $message = strtolower($exception->getMessage());
+
+        if (str_contains($message, 'locked') || str_contains($message, 'redacted')) {
+            return BigFiveResultPageV2AuditFields::REASON_LOCKED_OR_FREE_PREVIEW;
+        }
+
+        if (str_contains($message, 'score result is missing')) {
+            return BigFiveResultPageV2AuditFields::REASON_MISSING_SCORE_RESULT;
+        }
+
+        if (str_contains($message, 'route input') || str_contains($message, 'route projection')) {
+            return BigFiveResultPageV2AuditFields::REASON_ROUTE_INPUT_INVALID;
+        }
+
+        if (str_contains($message, 'route lookup failed') || str_contains($message, 'route row is missing')) {
+            return BigFiveResultPageV2AuditFields::REASON_ROUTE_LOOKUP_FAILED;
+        }
+
+        if (str_contains($message, 'composer failed')) {
+            return BigFiveResultPageV2AuditFields::REASON_COMPOSER_FAILED;
+        }
+
+        return BigFiveResultPageV2AuditFields::REASON_EXCEPTION;
     }
 }

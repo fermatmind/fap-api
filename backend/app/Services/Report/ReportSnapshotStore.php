@@ -7,6 +7,9 @@ use App\Models\Result;
 use App\Repositories\Report\ReportAccessActor;
 use App\Repositories\Report\ReportSubject;
 use App\Repositories\Report\ReportSubjectRepository;
+use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2AuditFields;
+use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2Contract;
+use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2RuntimeWrapper;
 use App\Services\Analytics\EventRecorder;
 use App\Services\Assessment\GenericReportBuilder;
 use App\Services\Scale\ScaleIdentityWriteProjector;
@@ -33,6 +36,8 @@ class ReportSnapshotStore
         private EventRecorder $eventRecorder,
         private ScaleIdentityWriteProjector $identityProjector,
         private ReportSubjectRepository $subjects,
+        private BigFiveResultPageV2RuntimeWrapper $bigFiveResultPageV2RuntimeWrapper,
+        private BigFiveResultPageV2AuditFields $bigFiveResultPageV2AuditFields,
     ) {}
 
     /**
@@ -192,6 +197,18 @@ class ReportSnapshotStore
             return $this->serverError('REPORT_FAILED', 'report generation failed.');
         }
 
+        $bigFiveResultPageV2Audit = [];
+        if ($scaleCode === BigFiveResultPageV2Contract::SCALE_CODE) {
+            [$reportFull, $bigFiveResultPageV2Audit] = $this->attachBigFiveResultPageV2ForSnapshot(
+                $attempt,
+                $result,
+                $reportFull,
+                ReportAccess::VARIANT_FULL,
+                $modulesFull,
+                $modulesPreview
+            );
+        }
+
         $reportFree = $this->buildVariantReport(
             $scaleCode,
             $attempt,
@@ -230,6 +247,7 @@ class ReportSnapshotStore
             'created_at' => $now,
             'updated_at' => $now,
         ];
+        $row = $this->bigFiveResultPageV2AuditFields->appendToSnapshotRow($row, $bigFiveResultPageV2Audit);
         if ($this->shouldWriteScaleIdentityColumns()) {
             $row['scale_code_v2'] = $scaleCodeV2;
             $row['scale_uid'] = $scaleUid;
@@ -267,6 +285,64 @@ class ReportSnapshotStore
             'snapshot' => $snapshot ? $this->normalizeSnapshot($snapshot) : null,
             'idempotent' => false,
         ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $report
+     * @param  list<string>  $modulesAllowed
+     * @param  list<string>  $modulesPreview
+     * @return array{0:array<string,mixed>,1:array<string,mixed>}
+     */
+    private function attachBigFiveResultPageV2ForSnapshot(
+        Attempt $attempt,
+        Result $result,
+        array $report,
+        string $variant,
+        array $modulesAllowed,
+        array $modulesPreview
+    ): array {
+        $responsePayload = [
+            'report' => $report,
+            'locked' => $variant === ReportAccess::VARIANT_FREE,
+            'access_level' => $variant === ReportAccess::VARIANT_FREE
+                ? ReportAccess::REPORT_ACCESS_FREE
+                : ReportAccess::REPORT_ACCESS_FULL,
+            'variant' => $variant,
+            'modules_allowed' => $modulesAllowed,
+            'modules_preview' => $modulesPreview,
+            'big5_form_v1' => [
+                'form_code' => $this->resolveBigFiveFormCode($attempt),
+            ],
+        ];
+
+        $projection = data_get($report, '_meta.big5_public_projection_v1');
+        if (is_array($projection)) {
+            $responsePayload['big5_public_projection_v1'] = $projection;
+        }
+
+        $wrapped = $this->bigFiveResultPageV2RuntimeWrapper->appendIfEnabledWithAudit($attempt, $result, $responsePayload);
+        $payload = $wrapped['payload'][BigFiveResultPageV2Contract::PAYLOAD_KEY] ?? null;
+        if (is_array($payload)) {
+            $report[BigFiveResultPageV2Contract::PAYLOAD_KEY] = $payload;
+        }
+
+        return [
+            $report,
+            $this->bigFiveResultPageV2AuditFields->fromRuntimeAudit(
+                is_array($wrapped['audit'] ?? null) ? $wrapped['audit'] : [],
+                BigFiveResultPageV2Contract::SCALE_CODE
+            ),
+        ];
+    }
+
+    private function resolveBigFiveFormCode(Attempt $attempt): string
+    {
+        $formCode = trim((string) data_get($attempt->answers_summary_json, 'meta.form_code', ''));
+        if ($formCode !== '') {
+            return $formCode;
+        }
+
+        return (int) ($attempt->question_count ?? 0) === 90 ? 'big5_90' : 'big5_120';
     }
 
     private function normalizeActor(mixed $raw): ?string

@@ -376,6 +376,21 @@ final class ReportSnapshotExplorerSupport
     /**
      * @param  Builder<ReportSnapshot>  $query
      */
+    public function applyBigFiveResultPageV2StatusFilter(Builder $query, ?string $value): void
+    {
+        $status = strtolower(trim((string) $value));
+        if ($status === '' || ! SchemaBaseline::hasColumn('report_snapshots', 'big5_result_page_v2_status')) {
+            return;
+        }
+
+        $query
+            ->whereRaw('upper(coalesce(report_snapshots.scale_code, \'\')) = ?', ['BIG5_OCEAN'])
+            ->whereRaw('lower(coalesce(report_snapshots.big5_result_page_v2_status, ?)) = ?', ['', $status]);
+    }
+
+    /**
+     * @param  Builder<ReportSnapshot>  $query
+     */
     public function applyHasOrderFilter(Builder $query, bool $wanted): void
     {
         if (! SchemaBaseline::hasTable('orders')) {
@@ -610,6 +625,32 @@ final class ReportSnapshotExplorerSupport
     /**
      * @return array{label:string,state:string}
      */
+    public function bigFiveResultPageV2Status(object $snapshot): array
+    {
+        if (strtoupper(trim((string) ($snapshot->scale_code ?? ''))) !== 'BIG5_OCEAN') {
+            return ['label' => 'not_evaluated', 'state' => 'gray'];
+        }
+
+        $status = strtolower(trim((string) ($snapshot->big5_result_page_v2_status ?? '')));
+        if ($status === '') {
+            $status = 'not_evaluated';
+        }
+
+        return [
+            'label' => $status,
+            'state' => match ($status) {
+                'attached' => 'success',
+                'invalid' => 'danger',
+                'fallback' => 'warning',
+                'disabled' => 'gray',
+                default => 'gray',
+            },
+        ];
+    }
+
+    /**
+     * @return array{label:string,state:string}
+     */
     public function unlockStatus(object $snapshot): array
     {
         if ($this->hasActiveGrant($snapshot)) {
@@ -703,6 +744,50 @@ final class ReportSnapshotExplorerSupport
     }
 
     /**
+     * @return array{total:int,attached:int,fallback:int,invalid:int,coverage_rate:string,fallback_rate:string}
+     */
+    public function bigFiveResultPageV2CoverageSummary(): array
+    {
+        if (! SchemaBaseline::hasColumn('report_snapshots', 'big5_result_page_v2_status')) {
+            return [
+                'total' => 0,
+                'attached' => 0,
+                'fallback' => 0,
+                'invalid' => 0,
+                'coverage_rate' => '0.0%',
+                'fallback_rate' => '0.0%',
+            ];
+        }
+
+        $rows = DB::table('report_snapshots')
+            ->selectRaw('lower(coalesce(big5_result_page_v2_status, \'\')) as v2_status, count(*) as aggregate')
+            ->whereRaw('upper(coalesce(scale_code, \'\')) = ?', ['BIG5_OCEAN'])
+            ->where(function (QueryBuilder $builder): void {
+                $this->applyRecentSnapshotWindow($builder);
+            })
+            ->groupBy('v2_status')
+            ->pluck('aggregate', 'v2_status')
+            ->mapWithKeys(fn ($count, $status): array => [(string) $status => (int) $count])
+            ->all();
+
+        $attached = (int) ($rows['attached'] ?? 0);
+        $fallback = (int) ($rows['fallback'] ?? 0);
+        $invalid = (int) ($rows['invalid'] ?? 0);
+        $disabled = (int) ($rows['disabled'] ?? 0);
+        $notEvaluated = (int) (($rows['not_evaluated'] ?? 0) + ($rows[''] ?? 0));
+        $total = $attached + $fallback + $invalid + $disabled + $notEvaluated;
+
+        return [
+            'total' => $total,
+            'attached' => $attached,
+            'fallback' => $fallback,
+            'invalid' => $invalid,
+            'coverage_rate' => $this->formatRate($attached, $total),
+            'fallback_rate' => $this->formatRate($fallback + $invalid, $total),
+        ];
+    }
+
+    /**
      * @return array{
      *     headline: array<string, array{label:string,state:string}>,
      *     snapshot_summary: array{fields:list<array{label:string,value:string,hint:?string,kind:string,state:?string}>,notes:list<string>},
@@ -783,6 +868,17 @@ final class ReportSnapshotExplorerSupport
                 $this->field('region', $this->stringOrDash($region)),
                 $this->pillField('snapshot_status', $headline['snapshot']['label'], $headline['snapshot']['state']),
                 $this->field('report_engine_version', $this->stringOrDash($snapshotRow->report_engine_version ?? $snapshot->report_engine_version ?? null)),
+                $this->pillField(
+                    'big5_result_page_v2_status',
+                    $this->stringOrDash($snapshotRow->big5_result_page_v2_status ?? $snapshot->big5_result_page_v2_status ?? null),
+                    $this->bigFiveResultPageV2Status((object) [
+                        'scale_code' => $snapshotRow->scale_code ?? $snapshot->scale_code ?? null,
+                        'big5_result_page_v2_status' => $snapshotRow->big5_result_page_v2_status ?? $snapshot->big5_result_page_v2_status ?? null,
+                    ])['state']
+                ),
+                $this->field('big5_result_page_v2_fallback_reason', $this->stringOrDash($snapshotRow->big5_result_page_v2_fallback_reason ?? $snapshot->big5_result_page_v2_fallback_reason ?? null)),
+                $this->field('big5_result_page_v2_validation_error_count', $this->stringOrDash($snapshotRow->big5_result_page_v2_validation_error_count ?? $snapshot->big5_result_page_v2_validation_error_count ?? null)),
+                $this->field('big5_result_page_v2_audited_at', $this->formatTimestamp($snapshotRow->big5_result_page_v2_audited_at ?? $snapshot->big5_result_page_v2_audited_at ?? null)),
                 $this->field('variant', $this->stringOrDash($reportData['variant'] ?? null)),
                 $this->field('access_level', $this->stringOrDash($reportData['access_level'] ?? null)),
                 $this->pillField(
@@ -1603,6 +1699,15 @@ final class ReportSnapshotExplorerSupport
     private function frontendLocaleSegment(string $locale): string
     {
         return str_starts_with(strtolower(trim($locale)), 'zh') ? 'zh' : 'en';
+    }
+
+    private function formatRate(int $numerator, int $denominator): string
+    {
+        if ($denominator <= 0) {
+            return '0.0%';
+        }
+
+        return number_format(($numerator / $denominator) * 100, 1).'%';
     }
 
     /**
