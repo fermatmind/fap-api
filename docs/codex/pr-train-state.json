@@ -38415,7 +38415,7 @@
     "branch": "codex/analytics-funnel-ops-org0-visibility-repair-01",
     "base": "main",
     "title": "ANALYTICS-FUNNEL-OPS-ORG0-VISIBILITY-REPAIR-01 show global org0 funnel rows",
-    "status": "local_checks_passed_after_ci_fix",
+    "status": "ready_to_merge",
     "depends_on": [
       "ANALYTICS-FUNNEL-CONTROLLED-REFRESH-WRITE-GUARD-01"
     ],
@@ -55025,12 +55025,12 @@
         "evidence": "Syntax checks passed for route/controller/services/focused tests. SeoDashApi01ReadOnlyApiContractTest passed: 7 tests, 145 assertions. BigFive runtime-freeze focused filter passed: 3 tests, 13 assertions. OpenAPI snapshot check passed after exporting the new route. route:list showed 7 private Ops SEO Intel GET routes including opportunity-queue and no write route. Pint passed for 6 files. OpenAPI/generated JSON, train state JSON, YAML, git diff --check, and explicit changed-file allowlist validation passed."
       },
       "github": {
-        "status": "failed_inspected",
-        "evidence": "PR #2139 initial GitHub checks failed on head cf877104d2526fd08274e518064670434114d4bb: verify-mbti-legacy and verify-mbti-v2 reported OpenAPI snapshot drift for /api/v0.5/ops/seo-intel/opportunity-queue; verify-bigfive reported the new SeoOpportunityQueueReadService.php as an unclassified runtime-freeze diff. Both fixes are limited to current PR contract/scope gate files."
+        "status": "pass",
+        "evidence": "PR #2139 GitHub checks passed on head 52447f402a37a23b818b020c0c7c2c23240cd524 after the scoped CI fix: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and semgrep sarif non-blocking upload. mergeStateStatus=CLEAN."
       }
     },
     "failure_reason": null,
-    "commit_sha": "72b793e421ccc87a85738a9c0fd39850de7a2acf",
+    "commit_sha": "52447f402a37a23b818b020c0c7c2c23240cd524",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2139",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -55070,6 +55070,11 @@
         "at": "2026-06-20T07:26:00+08:00",
         "status": "ci_fix_committed",
         "note": "Recorded CI fix commit 72b793e421ccc87a85738a9c0fd39850de7a2acf for PR #2139."
+      },
+      {
+        "at": "2026-06-20T07:31:00+08:00",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed for PR #2139 at head 52447f402a37a23b818b020c0c7c2c23240cd524 and mergeStateStatus was CLEAN; pre-merge scope validation remained within the PR8 allowlist."
       }
     ]
   }
