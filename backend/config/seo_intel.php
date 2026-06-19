@@ -30,6 +30,7 @@ return [
     'url_truth_inventory' => [
         'canary_default_limit' => 10,
         'canary_max_limit' => 50,
+        'handoff_max_limit' => 100,
         'write_requires_bound' => true,
         'research_report_candidate_limit' => 100,
         'source_authority' => 'backend_sitemap_source',
