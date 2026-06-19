@@ -21,6 +21,7 @@ final class SeoIntelUrlTruthHandoffCommand extends Command
         {--limit=20 : Bound exported or imported candidates}
         {--page-type=research_report : Required page entity type}
         {--confirm-artifact-sha256= : Required SHA256 confirmation for write mode}
+        {--confirm-bounded-write-override= : Exact approval phrase for command-scoped write override when seo_intel config write flags are disabled}
         {--json : Output safe machine-readable JSON}';
 
     protected $description = 'Export or validate bounded URL Truth handoff artifacts without cross-cloud direct writes.';
@@ -212,16 +213,32 @@ final class SeoIntelUrlTruthHandoffCommand extends Command
             ], $pageType);
         }
 
-        if (! (bool) config('seo_intel.enabled', false) || ! (bool) config('seo_intel.write_enabled', false)) {
-            return $this->finish([
-                'status' => 'blocked',
-                'mode' => 'import_write',
-                'artifact_sha256' => $sha256,
-                'issues' => ['seo_intel_write_flags_disabled'],
-                'dry_run' => false,
-                'writes_committed' => false,
-                'target_tables' => ['seo_urls', 'seo_url_entities'],
-            ], $pageType);
+        $configWriteEnabled = (bool) config('seo_intel.enabled', false) && (bool) config('seo_intel.write_enabled', false);
+        $writeAuthorization = 'config_flags';
+        $configWriteFlagsBypassed = false;
+
+        if (! $configWriteEnabled) {
+            $expectedOverrideConfirmation = $this->boundedWriteOverrideConfirmation($pageType, $sha256, $path);
+            $overrideConfirmation = $this->stringOption($this->option('confirm-bounded-write-override'));
+
+            if ($overrideConfirmation === null || ! hash_equals($expectedOverrideConfirmation, $overrideConfirmation)) {
+                return $this->finish([
+                    'status' => 'blocked',
+                    'mode' => 'import_write',
+                    'artifact_sha256' => $sha256,
+                    'issues' => [
+                        'seo_intel_write_flags_disabled',
+                        'bounded_write_override_confirmation_required',
+                    ],
+                    'required_bounded_write_override_confirmation' => $expectedOverrideConfirmation,
+                    'dry_run' => false,
+                    'writes_committed' => false,
+                    'target_tables' => ['seo_urls', 'seo_url_entities'],
+                ], $pageType);
+            }
+
+            $writeAuthorization = 'bounded_command_override';
+            $configWriteFlagsBypassed = true;
         }
 
         $written = (new UrlTruthInventoryRecordWriter)->write($validation['records']);
@@ -236,12 +253,24 @@ final class SeoIntelUrlTruthHandoffCommand extends Command
             'written_records' => $written,
             'planned_url_count' => $validation['metadata']['planned_url_count'],
             'planned_entity_count' => $validation['metadata']['planned_entity_count'],
+            'write_authorization' => $writeAuthorization,
+            'config_write_flags_bypassed' => $configWriteFlagsBypassed,
             'target_tables' => ['seo_urls', 'seo_url_entities'],
             'external_api_calls' => false,
             'search_url_submission' => false,
             'crawler_log_read' => false,
             'issues' => [],
         ], $pageType);
+    }
+
+    private function boundedWriteOverrideConfirmation(string $pageType, string $sha256, string $path): string
+    {
+        return sprintf(
+            'I explicitly approve bounded URL Truth handoff import write for %s page_entity_type using artifact sha256 %s generated at %s; no search submission, no CMS content changes, no publish, no schema/hreflang writes.',
+            $pageType,
+            $sha256,
+            $path,
+        );
     }
 
     /**
