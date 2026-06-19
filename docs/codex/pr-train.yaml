@@ -23848,6 +23848,57 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: SEO-GSC-DATA-QUALITY-01
+    repo: fap-api
+    branch: codex/seo-gsc-data-quality-01
+    title: "test(seo-intel): add GSC data quality gate"
+    train_scope: fermatmind_seo_agent_gsc_quality_gate
+    status: in_progress
+    depends_on:
+      - external:fap-web/SEO-RUNTIME-QA-AGENT-01#1229
+    scope:
+      - Add a backend SeoIntel data-quality gate that blocks stale, fixture, mock, static artifact, unknown, or incomplete GSC rows from future opportunity queue use.
+      - Keep the existing gsc_foundation collector disabled/dry-run and explicitly mark fixture output as opportunity_queue_eligible=false.
+      - Add docs/generated contract evidence and focused tests proving no live GSC call, no writes, and no CMS/search action.
+    allowed_paths:
+      - backend/config/seo_intel.php
+      - backend/app/Services/SeoIntel/Collectors/GscCollector.php
+      - backend/app/Services/SeoIntel/GscDataQualityGate.php
+      - backend/app/Services/SeoIntel/GscSearchAnalyticsRowNormalizer.php
+      - backend/app/Services/SeoIntel/SeoIntelCollectorManager.php
+      - backend/tests/Feature/SeoIntel/SeoIntelGscCollectorTest.php
+      - backend/tests/Feature/SeoIntel/SeoIntelGscDataQualityGateTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - backend/docs/seo/gsc-data-quality-gate.md
+      - backend/docs/seo/generated/gsc-data-quality-gate.v1.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Call live GSC APIs, validate/store credentials, or enable GSC live connector.
+      - Create CMS drafts, publish, unpublish, mutate CMS, enqueue Search Channel, approve or submit URLs.
+      - Run production backfills, production migrations, scheduler jobs, queue workers, deploy, SSH, edit env, or touch Node2/Node3.
+      - Modify fap-web, sitemap, llms, robots, schema, hreflang, payment, order, report, recommendation, scoring, or public runtime behavior.
+      - Implement opportunity queue scoring or execution.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/SeoIntel/SeoIntelGscDataQualityGateTest.php tests/Feature/SeoIntel/SeoIntelGscCollectorTest.php --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=seo_intel_gsc_foundation --no-ansi
+      - cd backend && php artisan seo-intel:collect --collector=gsc_foundation --dry-run --json
+      - cd backend && ./vendor/bin/pint --test app/Services/SeoIntel/Collectors/GscCollector.php app/Services/SeoIntel/GscDataQualityGate.php app/Services/SeoIntel/GscSearchAnalyticsRowNormalizer.php app/Services/SeoIntel/SeoIntelCollectorManager.php config/seo_intel.php tests/Feature/SeoIntel/SeoIntelGscCollectorTest.php tests/Feature/SeoIntel/SeoIntelGscDataQualityGateTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - python3 -m json.tool backend/docs/seo/generated/gsc-data-quality-gate.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: PERSONALITY-AT-DIFFERENCE-SECTIONS-01
     repo: fap-api
     depends_on:

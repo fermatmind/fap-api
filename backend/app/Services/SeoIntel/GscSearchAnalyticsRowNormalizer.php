@@ -43,7 +43,8 @@ final class GscSearchAnalyticsRowNormalizer
             'query_type' => $queryType,
             'data_state' => (string) ($row['data_state'] ?? 'final'),
             'metadata_json' => [
-                'row_source' => 'fixture',
+                'data_origin' => (string) ($row['data_origin'] ?? $row['row_source'] ?? 'fixture'),
+                'row_source' => (string) ($row['row_source'] ?? $row['data_origin'] ?? 'fixture'),
                 'purchase_attribution_allowed' => false,
             ],
         ];

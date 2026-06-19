@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-14T00:20:00+08:00",
+  "updated_at": "2026-06-20T05:00:00+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -41537,7 +41537,7 @@
       "SEO-CMS-CANARY-EDITORIAL-REVIEW-01"
     ],
     "commit_sha": "11e82c0c7000bc90f2ec550b83d80a9b941465dc",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2136",
     "checks": {},
     "failure_reason": null,
     "merged_at": null,
@@ -54775,6 +54775,101 @@
         "at": "2026-06-14T04:42:00+08:00",
         "status": "merged",
         "note": "Reconciled GitHub PR #2087 as merged; origin/main contains merge commit 1b9074549211fe15b257a9595a88782cef118616 and the remote branch is deleted."
+      }
+    ]
+  },
+  "SEO-GSC-DATA-QUALITY-01": {
+    "repo": "fap-api",
+    "branch": "codex/seo-gsc-data-quality-01",
+    "base": "main",
+    "status": "ready_to_merge",
+    "train_scope": "fermatmind_seo_agent_gsc_quality_gate",
+    "title": "test(seo-intel): add GSC data quality gate",
+    "depends_on": [
+      "external:fap-web/SEO-RUNTIME-QA-AGENT-01#1229"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly provided SEO-GSC-DATA-QUALITY-01 as the third PR in the FermatMind SEO Agent sequence and authorized continuous PR-train execution."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "fap-web SEO-RUNTIME-QA-AGENT-01 is merged in PR #1229 with merge commit 39b6357d841378baabf69d71a0f044d3e2b341f5 before this fap-api PR started."
+      },
+      "scope": {
+        "status": "pass",
+        "allowed_paths": [
+          "backend/config/seo_intel.php",
+          "backend/app/Services/SeoIntel/Collectors/GscCollector.php",
+          "backend/app/Services/SeoIntel/GscDataQualityGate.php",
+          "backend/app/Services/SeoIntel/GscSearchAnalyticsRowNormalizer.php",
+          "backend/app/Services/SeoIntel/SeoIntelCollectorManager.php",
+          "backend/tests/Feature/SeoIntel/SeoIntelGscCollectorTest.php",
+          "backend/tests/Feature/SeoIntel/SeoIntelGscDataQualityGateTest.php",
+          "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+          "backend/docs/seo/gsc-data-quality-gate.md",
+          "backend/docs/seo/generated/gsc-data-quality-gate.v1.json",
+          "docs/codex/pr-train.yaml",
+          "docs/codex/pr-train-state.json"
+        ],
+        "evidence": "Changed files are confined to the declared backend GSC data quality gate scope. No route, migration, CMS, Search Channel, scheduler, env, deploy, fap-web, sitemap, llms, robots, schema, hreflang, payment, order, report, recommendation, or scoring files changed."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "composer install --no-interaction --prefer-dist",
+          "php -l backend/app/Services/SeoIntel/GscDataQualityGate.php",
+          "php -l backend/app/Services/SeoIntel/Collectors/GscCollector.php",
+          "php -l backend/tests/Feature/SeoIntel/SeoIntelGscDataQualityGateTest.php",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/SeoIntel/SeoIntelGscDataQualityGateTest.php tests/Feature/SeoIntel/SeoIntelGscCollectorTest.php --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=seo_intel_gsc_foundation --no-ansi",
+          "cd backend && php artisan seo-intel:collect --collector=gsc_foundation --dry-run --json",
+          "cd backend && ./vendor/bin/pint --test app/Services/SeoIntel/Collectors/GscCollector.php app/Services/SeoIntel/GscDataQualityGate.php app/Services/SeoIntel/GscSearchAnalyticsRowNormalizer.php app/Services/SeoIntel/SeoIntelCollectorManager.php config/seo_intel.php tests/Feature/SeoIntel/SeoIntelGscCollectorTest.php tests/Feature/SeoIntel/SeoIntelGscDataQualityGateTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+          "python3 -m json.tool backend/docs/seo/generated/gsc-data-quality-gate.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'metadata ok'\"",
+          "git diff --check",
+          "scope validation"
+        ],
+        "evidence": "Focused GSC data quality gate and existing GSC collector tests passed with 11 warnings / 131 assertions; runtime-freeze focused filter passed with 1 warning / 1 assertion; dry-run collector JSON showed data_quality_gate.status=blocked, opportunity_queue_eligible=false, external_calls_attempted=false, writes_attempted=false; Pint, JSON/YAML, diff check, and scope validation passed."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #2136 GitHub checks passed for head 92d73439e55c175ec2d77c0d6115815e2a895562: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and semgrep sarif non-blocking upload."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": "92d73439e55c175ec2d77c0d6115815e2a895562",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2136",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-20T04:46:00+08:00",
+        "status": "in_progress",
+        "note": "Initialized from explicit user sequence. Scope is backend-only GSC data quality gate; no CMS/search/live GSC/provider/write action is allowed."
+      },
+      {
+        "at": "2026-06-20T04:54:00+08:00",
+        "status": "local_checks_passed",
+        "note": "Implemented GSC data quality gate, collector metadata, docs/generated contract, manifest/state entry, and focused tests. Local checks and scope validation passed."
+      },
+      {
+        "at": "2026-06-20T04:55:00+08:00",
+        "status": "committed",
+        "note": "Recorded implementation commit 6c310c263dedec47173f9ef857326744ca238de1 after rebasing onto latest origin/main and rerunning local checks."
+      },
+      {
+        "at": "2026-06-20T05:00:00+08:00",
+        "status": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/2136."
+      },
+      {
+        "at": "2026-06-20T05:04:00+08:00",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed for PR #2136 at head 92d73439e55c175ec2d77c0d6115815e2a895562; recording ready_to_merge before merge."
       }
     ]
   },
