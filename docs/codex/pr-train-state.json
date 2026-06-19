@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-20T07:16:00+08:00",
+  "updated_at": "2026-06-20T07:18:00+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -54965,7 +54965,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-opportunity-queue-readonly-01",
     "base": "main",
-    "status": "local_checks_passed",
+    "status": "committed",
     "train_scope": "fermatmind_seo_agent_opportunity_queue_readonly",
     "title": "feat(seo-intel): add read-only opportunity queue",
     "depends_on": [
@@ -55024,7 +55024,7 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
+    "commit_sha": "c081d1a79fed93160601585641c298718125e193",
     "pr_url": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -55039,6 +55039,11 @@
         "at": "2026-06-20T07:16:00+08:00",
         "status": "local_checks_passed",
         "note": "Implemented private read-only opportunity queue endpoint and sanitized read service. Local checks and scope validation passed; existing untracked generated/ directories were excluded from staging."
+      },
+      {
+        "at": "2026-06-20T07:18:00+08:00",
+        "status": "committed",
+        "note": "Recorded scoped implementation commit c081d1a79fed93160601585641c298718125e193 after local checks and scope validation passed."
       }
     ]
   }
