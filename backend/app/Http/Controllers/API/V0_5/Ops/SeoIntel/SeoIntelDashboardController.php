@@ -39,6 +39,11 @@ final class SeoIntelDashboardController
         return $this->respond($this->readService->pagePerformance($this->limit($request)));
     }
 
+    public function opportunityQueue(Request $request): JsonResponse
+    {
+        return $this->respond($this->readService->opportunityQueue($this->limit($request)));
+    }
+
     public function conversionFunnel(Request $request): JsonResponse
     {
         return $this->respond($this->readService->conversionFunnel($this->safeFilters($request), $this->limit($request)));

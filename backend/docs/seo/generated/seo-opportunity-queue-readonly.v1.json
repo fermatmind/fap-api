@@ -1,0 +1,61 @@
+{
+  "version": "seo-opportunity-queue-readonly.v1",
+  "task": "SEO-OPPORTUNITY-QUEUE-READONLY-01",
+  "repo": "fap-api",
+  "route": "GET /api/v0.5/ops/seo-intel/opportunity-queue",
+  "read_only": true,
+  "private_ops_api_only": true,
+  "gsc_data_quality_gate_required": true,
+  "source_tables": [
+    "seo_gsc_daily",
+    "seo_urls"
+  ],
+  "candidate_fields": [
+    "opportunity_id",
+    "canonical_path",
+    "canonical_url_hash",
+    "query_hash",
+    "query_display_masked",
+    "locale",
+    "source_signal",
+    "report_date",
+    "metrics",
+    "recommended_next_step",
+    "allowed_action"
+  ],
+  "scoring_contract": {
+    "min_impressions": 50,
+    "max_ctr_ppm": 10000,
+    "position_milli_window": [
+      8000,
+      20000
+    ],
+    "brand_query_allowed": false
+  },
+  "forbidden_response_fields": [
+    "canonical_url",
+    "raw_query",
+    "metadata_json",
+    "raw_payload",
+    "order_no",
+    "attempt_id",
+    "payment_id",
+    "provider_event_id"
+  ],
+  "boundaries": {
+    "cms_draft_allowed": false,
+    "cms_write_allowed": false,
+    "search_channel_enqueue_allowed": false,
+    "search_provider_submission_allowed": false,
+    "execution_allowed": false,
+    "external_calls_attempted": false,
+    "writes_attempted": false
+  },
+  "production_operation_performed": false,
+  "migration_added": false,
+  "collector_enabled": false,
+  "cms_mutation_allowed": false,
+  "search_channel_action": false,
+  "deploy_allowed": false,
+  "next_task": "SEO-CMS-DRAFT-PILOT-01 remains HOLD unless GPT 5.5 Pro content approval, exact package hash, and dry-run approval are provided"
+}

@@ -9,14 +9,16 @@
     "GET /api/v0.5/ops/seo-intel/url-truth",
     "GET /api/v0.5/ops/seo-intel/issues",
     "GET /api/v0.5/ops/seo-intel/trends",
-    "GET /api/v0.5/ops/seo-intel/page-performance"
+    "GET /api/v0.5/ops/seo-intel/page-performance",
+    "GET /api/v0.5/ops/seo-intel/opportunity-queue"
   ],
   "route_names": [
     "api.v0_5.ops.seo_intel.overview",
     "api.v0_5.ops.seo_intel.url_truth",
     "api.v0_5.ops.seo_intel.issues",
     "api.v0_5.ops.seo_intel.trends",
-    "api.v0_5.ops.seo_intel.page_performance"
+    "api.v0_5.ops.seo_intel.page_performance",
+    "api.v0_5.ops.seo_intel.opportunity_queue"
   ],
   "allowed_permissions": [
     "admin.seo_intel.read",
@@ -67,6 +69,16 @@
     "production_raw_log_read",
     "public_metabase_link"
   ],
+  "opportunity_queue_api_mapping": {
+    "contract_version": "seo-opportunity-queue-readonly.v1",
+    "gsc_data_quality_gate_required": true,
+    "execution_allowed": false,
+    "cms_write_allowed": false,
+    "search_channel_enqueue_allowed": false,
+    "search_provider_submission_allowed": false,
+    "raw_query_exposed": false,
+    "raw_canonical_url_exposed": false
+  },
   "forbidden_response_fields": [
     "email",
     "raw_email",

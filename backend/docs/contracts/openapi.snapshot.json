@@ -3964,6 +3964,31 @@
                 "x-laravel-name": "api.v0_5.ops.seo_intel.issues"
             }
         },
+        "/api/v0.5/ops/seo-intel/opportunity-queue": {
+            "get": {
+                "operationId": "api.v0_5.ops.seo_intel.opportunity_queue",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Ops\\SeoIntel\\SeoIntelDashboardController@opportunityQueue",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\EncryptCookies",
+                    "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+                    "Illuminate\\Session\\Middleware\\StartSession",
+                    "App\\Http\\Middleware\\SetOpsRequestContext",
+                    "App\\Http\\Middleware\\AdminAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\EnsureSeoIntelReadAuthorized"
+                ],
+                "x-laravel-name": "api.v0_5.ops.seo_intel.opportunity_queue"
+            }
+        },
         "/api/v0.5/ops/seo-intel/overview": {
             "get": {
                 "operationId": "api.v0_5.ops.seo_intel.overview",

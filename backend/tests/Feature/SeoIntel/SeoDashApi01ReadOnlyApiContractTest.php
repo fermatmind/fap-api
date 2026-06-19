@@ -94,6 +94,7 @@ final class SeoDashApi01ReadOnlyApiContractTest extends TestCase
                 '/api/v0.5/ops/seo-intel/issues',
                 '/api/v0.5/ops/seo-intel/trends',
                 '/api/v0.5/ops/seo-intel/page-performance',
+                '/api/v0.5/ops/seo-intel/opportunity-queue',
             ] as $path) {
                 $this->actingAs($admin, (string) config('admin.guard', 'admin'))
                     ->getJson($path)
@@ -166,6 +167,48 @@ final class SeoDashApi01ReadOnlyApiContractTest extends TestCase
         $this->assertStringNotContainsString('https://fermatmind.com', $json);
         $this->assertStringNotContainsString('query_display_masked', $json);
         $this->assertStringNotContainsString('metadata_json', $json);
+    }
+
+    #[Test]
+    public function opportunity_queue_endpoint_is_gsc_quality_gated_and_read_only(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_SEO_INTEL_READ]);
+
+        $response = $this->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->getJson('/api/v0.5/ops/seo-intel/opportunity-queue?limit=5')
+            ->assertOk()
+            ->assertJsonPath('data.schema_version', 'seo-opportunity-queue-readonly.v1')
+            ->assertJsonPath('data.mode', 'read_only')
+            ->assertJsonPath('data.source_gate.status', 'pass')
+            ->assertJsonPath('data.source_gate.opportunity_queue_eligible', true)
+            ->assertJsonPath('data.total_count', 1)
+            ->assertJsonPath('data.recent_rows.0.canonical_path', '/en/tests/mbti-personality-test-16-personality-types')
+            ->assertJsonPath('data.recent_rows.0.query_display_masked', 'm**********y')
+            ->assertJsonPath('data.recent_rows.0.allowed_action', 'read_only_review')
+            ->assertJsonPath('data.boundaries.cms_write_allowed', false)
+            ->assertJsonPath('data.boundaries.search_channel_enqueue_allowed', false)
+            ->assertJsonPath('data.boundaries.search_provider_submission_allowed', false)
+            ->assertJsonPath('data.boundaries.execution_allowed', false)
+            ->assertJsonPath('data.boundaries.external_calls_attempted', false)
+            ->assertJsonPath('data.boundaries.writes_attempted', false);
+
+        $json = $response->getContent();
+
+        foreach ([
+            'https://fermatmind.com',
+            'mbti career clarity',
+            'metadata_json',
+            'raw_payload',
+            'order_no',
+            'attempt_id',
+            'payment_id',
+        ] as $forbidden) {
+            $this->assertStringNotContainsString($forbidden, $json);
+        }
+
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->postJson('/api/v0.5/ops/seo-intel/opportunity-queue', [])
+            ->assertMethodNotAllowed();
     }
 
     #[Test]
@@ -297,11 +340,23 @@ final class SeoDashApi01ReadOnlyApiContractTest extends TestCase
             $table->id();
             $table->date('report_date');
             $table->char('canonical_url_hash', 64)->nullable();
+            $table->text('canonical_url')->nullable();
+            $table->char('query_hash', 64)->nullable();
             $table->string('query_display_masked', 255)->nullable();
             $table->string('locale', 16)->nullable();
             $table->string('source_engine', 64)->default('google');
+            $table->string('device', 32)->nullable();
+            $table->string('country', 16)->nullable();
+            $table->string('search_type', 32)->nullable();
             $table->unsignedInteger('clicks')->default(0);
             $table->unsignedInteger('impressions')->default(0);
+            $table->unsignedInteger('ctr_ppm')->nullable();
+            $table->unsignedInteger('average_position_milli')->nullable();
+            $table->boolean('is_brand_query')->default(false);
+            $table->string('query_type', 32)->default('unknown');
+            $table->string('data_state', 32)->default('final');
+            $table->timestamp('collected_at')->nullable();
+            $table->json('metadata_json')->nullable();
             $table->timestamp('updated_at')->nullable();
             $table->timestamp('created_at')->nullable();
         });
@@ -467,15 +522,43 @@ final class SeoDashApi01ReadOnlyApiContractTest extends TestCase
         ]);
 
         DB::connection('seo_intel')->table('seo_gsc_daily')->insert([
-            'report_date' => '2026-06-02',
+            'report_date' => now()->subDays(4)->toDateString(),
             'canonical_url_hash' => $hash,
+            'canonical_url' => 'https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types',
+            'query_hash' => hash('sha256', 'fermatmind mbti'),
             'query_display_masked' => 'mbti test',
             'locale' => 'en',
             'source_engine' => 'google',
             'clicks' => 7,
             'impressions' => 70,
-            'created_at' => '2026-06-02 00:00:00',
-            'updated_at' => '2026-06-02 00:00:00',
+            'ctr_ppm' => 100000,
+            'average_position_milli' => 4200,
+            'is_brand_query' => true,
+            'query_type' => 'brand',
+            'data_state' => 'final',
+            'metadata_json' => json_encode(['data_origin' => 'live_gsc_api', 'row_source' => 'live_gsc_api'], JSON_UNESCAPED_SLASHES),
+            'created_at' => now()->subDays(4)->toDateTimeString(),
+            'updated_at' => now()->subDays(4)->toDateTimeString(),
+        ]);
+
+        DB::connection('seo_intel')->table('seo_gsc_daily')->insert([
+            'report_date' => now()->subDays(4)->toDateString(),
+            'canonical_url_hash' => $hash,
+            'canonical_url' => 'https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types',
+            'query_hash' => hash('sha256', 'mbti career clarity'),
+            'query_display_masked' => 'm**********y',
+            'locale' => 'en',
+            'source_engine' => 'google',
+            'clicks' => 0,
+            'impressions' => 500,
+            'ctr_ppm' => 0,
+            'average_position_milli' => 10700,
+            'is_brand_query' => false,
+            'query_type' => 'non_brand',
+            'data_state' => 'final',
+            'metadata_json' => json_encode(['data_origin' => 'live_gsc_api', 'row_source' => 'live_gsc_api'], JSON_UNESCAPED_SLASHES),
+            'created_at' => now()->subDays(4)->toDateTimeString(),
+            'updated_at' => now()->subDays(4)->toDateTimeString(),
         ]);
 
         DB::connection('seo_intel')->table('seo_baidu_landing_daily')->insert([

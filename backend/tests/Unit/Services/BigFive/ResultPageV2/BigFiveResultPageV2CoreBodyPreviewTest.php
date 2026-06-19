@@ -1034,6 +1034,28 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ));
     }
 
+    public function test_runtime_freeze_classifier_ignores_seo_opportunity_queue_readonly_files(): void
+    {
+        $changed = [
+            'backend/app/Http/Controllers/API/V0_5/Ops/SeoIntel/SeoIntelDashboardController.php',
+            'backend/app/Services/SeoIntel/OpsDashboard/SeoDashboardApiReadService.php',
+            'backend/app/Services/SeoIntel/OpsDashboard/SeoOpportunityQueueReadService.php',
+            'backend/routes/api.php',
+        ];
+
+        $routeChangedLines = [
+            "+            Route::get('/opportunity-queue', [SeoIntelDashboardController::class, 'opportunityQueue'])",
+            "+                ->name('api.v0_5.ops.seo_intel.opportunity_queue');",
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            routeChangedLines: $routeChangedLines,
+        ));
+    }
+
     public function test_runtime_freeze_classifier_ignores_seo_intel_search_channel_queue_runtime_files(): void
     {
         $changed = [
@@ -4866,6 +4888,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/SeoIntel/OpsDashboard/SeoCrawlerLogObservationReadService.php',
             'backend/app/Services/SeoIntel/OpsDashboard/SeoDashboardOverviewReadService.php',
             'backend/app/Services/SeoIntel/OpsDashboard/SeoIssueQueueReadService.php',
+            'backend/app/Services/SeoIntel/OpsDashboard/SeoOpportunityQueueReadService.php',
             'backend/app/Services/SeoIntel/OpsDashboard/SeoSearchChannelQueueReadService.php',
             'backend/app/Services/SeoIntel/OpsDashboard/SeoUrlTruthReadService.php',
             'backend/app/Services/SeoIntel/OpsDashboard/CareerRuntimeReadModelService.php',
@@ -6703,7 +6726,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
-            if (preg_match('/^\+.*(SeoIntelDashboardController|EnsureSeoIntelReadAuthorized|ops\\/seo-intel|api\\.v0_5\\.ops\\.seo_intel|overview|urlTruth|url-truth|issues|trends|pagePerformance|page-performance|cmsAdminMiddleware|Route::prefix|Route::get|middleware|group|name)/u', $line) !== 1) {
+            if (preg_match('/^\+.*(SeoIntelDashboardController|EnsureSeoIntelReadAuthorized|ops\\/seo-intel|api\\.v0_5\\.ops\\.seo_intel|overview|urlTruth|url-truth|issues|trends|pagePerformance|page-performance|opportunityQueue|opportunity-queue|opportunity_queue|cmsAdminMiddleware|Route::prefix|Route::get|middleware|group|name)/u', $line) !== 1) {
                 return false;
             }
         }
