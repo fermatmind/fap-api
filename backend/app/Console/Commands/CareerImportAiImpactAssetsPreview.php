@@ -15,11 +15,13 @@ final class CareerImportAiImpactAssetsPreview extends Command
         {--expected-sha256= : Optional expected SHA-256 for the input JSONL artifact}
         {--slugs= : Optional comma-separated preview slug subset}
         {--all-slugs-from-file : Dry-run every slug found in the source JSONL instead of the configured preview allowlist}
-        {--dry-run : Validate only; this command never writes staging or production rows}
+        {--dry-run : Validate only; do not write staging or production rows}
+        {--force : Write rows only when --status=staging_preview and validation passes}
+        {--status=staging_preview : Target import status; only staging_preview is supported by this command}
         {--json : Emit machine-readable JSON report}
         {--output= : Optional report output path}';
 
-    protected $description = 'Dry-run validation for PASS v5 career AI impact asset rows and the configured staging preview contract.';
+    protected $description = 'Validate or write PASS v5 career AI impact asset rows for the configured staging preview contract.';
 
     public function __construct(
         private readonly CareerAiImpactAssetImportService $importService,
@@ -38,12 +40,31 @@ final class CareerImportAiImpactAssetsPreview extends Command
                 ], false);
             }
 
-            $report = $this->importService->validateFile(
-                $file,
-                $this->requestedSlugs(),
-                trim((string) $this->option('expected-sha256')) ?: null,
-                (bool) $this->option('all-slugs-from-file'),
-            );
+            $force = (bool) $this->option('force');
+            $dryRun = (bool) $this->option('dry-run');
+            $status = trim((string) $this->option('status')) ?: 'staging_preview';
+
+            if ($force && $dryRun) {
+                return $this->finish([
+                    'decision' => 'fail',
+                    'errors' => ['--force cannot be combined with --dry-run.'],
+                ], false);
+            }
+
+            $report = $force
+                ? $this->importService->importStagingPreview(
+                    $file,
+                    $this->requestedSlugs(),
+                    trim((string) $this->option('expected-sha256')) ?: null,
+                    (bool) $this->option('all-slugs-from-file'),
+                    $status,
+                )
+                : $this->importService->validateFile(
+                    $file,
+                    $this->requestedSlugs(),
+                    trim((string) $this->option('expected-sha256')) ?: null,
+                    (bool) $this->option('all-slugs-from-file'),
+                );
 
             return $this->finish($report, ($report['decision'] ?? null) === 'pass');
         } catch (Throwable $throwable) {
