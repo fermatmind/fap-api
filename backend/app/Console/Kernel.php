@@ -5,6 +5,7 @@ namespace App\Console;
 use App\Console\Commands\AdminBootstrapOwner;
 use App\Console\Commands\ArchiveColdData;
 use App\Console\Commands\ArticleCoverPropagationSmoke;
+use App\Console\Commands\ArticleDiscoverabilityRelease;
 use App\Console\Commands\ArticleEnsureSeoMetaBaseline;
 use App\Console\Commands\ArticleImportEditorialPackage;
 use App\Console\Commands\ArticleImportSeoContentPackageDraft;
@@ -345,6 +346,7 @@ class Kernel extends ConsoleKernel
         ArticleEnsureSeoMetaBaseline::class,
         ArticleUpdateExistingSeoContentPackage::class,
         ArticleCoverPropagationSmoke::class,
+        ArticleDiscoverabilityRelease::class,
         ArticlePublishControlled::class,
         ArticleReplaceInlineImageUrl::class,
         ArticleSeoGateRollout::class,
