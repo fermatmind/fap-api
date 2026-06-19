@@ -1,0 +1,41 @@
+{
+  "summary": {
+    "target_checks": 3,
+    "ready_checks": 3,
+    "failed_checks": 0,
+    "final_conclusion": "AI_IMPACT_V5_FAIL_CLOSED_PASS"
+  },
+  "results": [
+    {
+      "case": "invalid_slug_zh",
+      "url": "https://staging.fermatmind.com/api/v0.5/career/jobs/not-a-real-career-ai-impact-preview/ai-impact-asset?locale=zh-CN",
+      "expected": [
+        404
+      ],
+      "http_status": 404,
+      "ready": true,
+      "body_sample": "{\"ok\":false,\"error_code\":\"NOT_FOUND\",\"message\":\"career AI impact asset preview unavailable.\"}"
+    },
+    {
+      "case": "invalid_slug_en",
+      "url": "https://staging.fermatmind.com/api/v0.5/career/jobs/not-a-real-career-ai-impact-preview/ai-impact-asset?locale=en",
+      "expected": [
+        404
+      ],
+      "http_status": 404,
+      "ready": true,
+      "body_sample": "{\"ok\":false,\"error_code\":\"NOT_FOUND\",\"message\":\"career AI impact asset preview unavailable.\"}"
+    },
+    {
+      "case": "unsupported_locale",
+      "url": "https://staging.fermatmind.com/api/v0.5/career/jobs/accountants-and-auditors/ai-impact-asset?locale=fr",
+      "expected": [
+        404,
+        422
+      ],
+      "http_status": 404,
+      "ready": true,
+      "body_sample": "{\"ok\":false,\"error_code\":\"NOT_FOUND\",\"message\":\"career AI impact asset preview unavailable.\"}"
+    }
+  ]
+}

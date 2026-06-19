@@ -1,0 +1,42 @@
+{
+  "final_conclusion": "AI_IMPACT_V5_1046_STAGING_PREVIEW_IMPORT_PASS",
+  "deploy_revision": "c5de88c49e9a4b284a9156aa3010bd064243ff5b",
+  "deploy_current": "/var/www/fap-api-staging/releases/27849271998-1",
+  "source_asset_sha256": "f22e0266f9b8aa904b00466c9cf751efa72835aebcee41c959d454ffacf96a92",
+  "staging_force": {
+    "decision": "pass",
+    "total_jsonl_lines": 2092,
+    "target_slug_count": 1046,
+    "validated_preview_rows": 2092,
+    "written_count": 2092,
+    "created_count": 0,
+    "updated_count": 2092,
+    "staging_write_performed": true,
+    "production_import_allowed": false,
+    "errors_count": 0
+  },
+  "api_smoke": {
+    "target_rows": 2092,
+    "ready_rows": 2092,
+    "failed_rows": 0,
+    "http_status_counts": {
+      "200": 2092
+    },
+    "error_counts": {},
+    "duration_seconds": 44.17,
+    "source_asset_sha256": "f22e0266f9b8aa904b00466c9cf751efa72835aebcee41c959d454ffacf96a92",
+    "final_conclusion": "AI_IMPACT_V5_1046_STAGING_API_SMOKE_PASS"
+  },
+  "fail_closed": {
+    "target_checks": 3,
+    "ready_checks": 3,
+    "failed_checks": 0,
+    "final_conclusion": "AI_IMPACT_V5_FAIL_CLOSED_PASS"
+  },
+  "boundaries": {
+    "production_import_performed": false,
+    "content_asset_changed": false,
+    "page_runtime_changed": false,
+    "seo_surface_changed": false
+  }
+}
