@@ -40,6 +40,8 @@ return [
             'article',
             'topic',
             'personality',
+            'personality_profile_variant',
+            'personality_profile_comparison',
             'career_job',
             'career_recommendation',
             'methodology',
@@ -270,6 +272,8 @@ return [
             'home',
             'test_hub',
             'test_detail',
+            'personality_profile_variant',
+            'personality_profile_comparison',
         ],
         'forbidden_page_entity_types' => [
             'take',
