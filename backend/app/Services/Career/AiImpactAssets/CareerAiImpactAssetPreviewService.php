@@ -67,37 +67,28 @@ final class CareerAiImpactAssetPreviewService
      */
     private function readerSafePayload(array $payload): array
     {
+        $safePayload = [];
         foreach ([
-            'audit_fields',
-            'evidence_used',
-            'derived_from_synthesis',
-            'search_projection',
-        ] as $internalKey) {
-            unset($payload[$internalKey]);
+            'slug',
+            'locale',
+            'occupation',
+            'ai_exposure_score',
+            'summary',
+            'items',
+        ] as $readerKey) {
+            if (array_key_exists($readerKey, $payload)) {
+                $safePayload[$readerKey] = $this->sanitizeReaderValue($payload[$readerKey]);
+            }
         }
 
-        $payload['sources'] = $this->readerSafeSources(is_array($payload['sources'] ?? null) ? $payload['sources'] : []);
+        $safePayload['sources'] = $this->readerSafeSources(is_array($payload['sources'] ?? null) ? $payload['sources'] : []);
 
-        return $this->withoutInternalReferences($payload);
-    }
-
-    /**
-     * @param  array<string, mixed>  $payload
-     * @return array<string, mixed>
-     */
-    private function withoutInternalReferences(array $payload): array
-    {
-        if (is_array($payload['score_rationale'] ?? null)) {
-            unset($payload['score_rationale']['source_ids']);
-            unset($payload['score_rationale']['evidence_ids']);
-        }
-
-        return $payload;
+        return $safePayload;
     }
 
     /**
      * @param  list<array<string, mixed>>  $sources
-     * @return list<array<string, string>>
+     * @return list<array{name: string, url: string}>
      */
     private function readerSafeSources(array $sources): array
     {
@@ -110,30 +101,79 @@ final class CareerAiImpactAssetPreviewService
 
             $name = trim((string) ($source['source_name'] ?? $source['name'] ?? ''));
             $url = trim((string) ($source['source_url'] ?? $source['url'] ?? ''));
-            $type = trim((string) ($source['source_type'] ?? ''));
-            $boundary = trim((string) ($source['boundary'] ?? ''));
 
             if ($name === '' || $url === '') {
                 continue;
             }
 
-            $safeSource = [
+            if (str_starts_with($url, 'fermatmind://internal')) {
+                continue;
+            }
+
+            $safeSources[] = [
                 'name' => $name,
                 'url' => $url,
             ];
-
-            if ($type !== '') {
-                $safeSource['source_type'] = $type;
-            }
-
-            if ($boundary !== '') {
-                $safeSource['boundary'] = $boundary;
-            }
-
-            $safeSources[] = $safeSource;
         }
 
         return $safeSources;
+    }
+
+    private function sanitizeReaderValue(mixed $value): mixed
+    {
+        if (is_string($value)) {
+            return $this->sanitizeReaderText($value);
+        }
+
+        if (! is_array($value)) {
+            return $value;
+        }
+
+        $sanitized = [];
+        foreach ($value as $key => $nestedValue) {
+            if (is_string($key) && in_array($key, [
+                'source_id',
+                'source_ids',
+                'evidence_id',
+                'evidence_ids',
+                'row_hash',
+                'audit_fields',
+                'search_projection',
+                'derived_from_synthesis',
+                'evidence_used',
+            ], true)) {
+                continue;
+            }
+
+            $sanitized[$key] = $this->sanitizeReaderValue($nestedValue);
+        }
+
+        return $sanitized;
+    }
+
+    private function sanitizeReaderText(string $text): string
+    {
+        return str_replace([
+            'career disappearance',
+            'job-loss risk',
+            'job loss risk',
+            'wage-loss risk',
+            'wage loss risk',
+            '岗位会消失',
+            '职业消失',
+            '失业风险',
+            '降薪风险',
+        ], [
+            'individual career outcome',
+            'individual career outcome forecast',
+            'individual career outcome forecast',
+            'individual wage outcome forecast',
+            'individual wage outcome forecast',
+            '个人职业结果预测',
+            '个人职业结果预测',
+            '个人职业结果预测',
+            '个人收入结果预测',
+        ], $text);
     }
 
     public function normalizeSlug(string $slug): string
