@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-20T07:18:00+08:00",
+  "updated_at": "2026-06-20T07:22:00+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -54965,7 +54965,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-opportunity-queue-readonly-01",
     "base": "main",
-    "status": "committed",
+    "status": "pr_open",
     "train_scope": "fermatmind_seo_agent_opportunity_queue_readonly",
     "title": "feat(seo-intel): add read-only opportunity queue",
     "depends_on": [
@@ -55020,12 +55020,12 @@
       },
       "github": {
         "status": "pending",
-        "evidence": "PR not opened yet."
+        "evidence": "PR #2139 opened; GitHub checks pending on head f2ee09d7bb7d6fd42e8fa6b6dea01eff4c67d71e."
       }
     },
     "failure_reason": null,
-    "commit_sha": "c081d1a79fed93160601585641c298718125e193",
-    "pr_url": null,
+    "commit_sha": "f2ee09d7bb7d6fd42e8fa6b6dea01eff4c67d71e",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2139",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -55044,6 +55044,11 @@
         "at": "2026-06-20T07:18:00+08:00",
         "status": "committed",
         "note": "Recorded scoped implementation commit c081d1a79fed93160601585641c298718125e193 after local checks and scope validation passed."
+      },
+      {
+        "at": "2026-06-20T07:22:00+08:00",
+        "status": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/2139; GitHub checks pending."
       }
     ]
   }
