@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-20T04:54:00+08:00",
+  "updated_at": "2026-06-20T04:55:00+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -54839,7 +54839,7 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
+    "commit_sha": "6c310c263dedec47173f9ef857326744ca238de1",
     "pr_url": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -54854,6 +54854,11 @@
         "at": "2026-06-20T04:54:00+08:00",
         "status": "local_checks_passed",
         "note": "Implemented GSC data quality gate, collector metadata, docs/generated contract, manifest/state entry, and focused tests. Local checks and scope validation passed."
+      },
+      {
+        "at": "2026-06-20T04:55:00+08:00",
+        "status": "committed",
+        "note": "Recorded implementation commit 6c310c263dedec47173f9ef857326744ca238de1 after rebasing onto latest origin/main and rerunning local checks."
       }
     ]
   },
