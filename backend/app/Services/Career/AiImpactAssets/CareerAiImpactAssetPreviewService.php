@@ -72,10 +72,12 @@ final class CareerAiImpactAssetPreviewService
     public function publicPayload(CareerJobAiImpactAsset $asset): array
     {
         $payload = is_array($asset->asset_payload_json) ? $asset->asset_payload_json : [];
+        $isProduction = $asset->status === CareerJobAiImpactAsset::STATUS_PRODUCTION_IMPORTED;
 
         return [
             'ok' => true,
-            'preview' => true,
+            'preview' => ! $isProduction,
+            'status' => $asset->status,
             'ai_impact_asset_v1' => $this->readerSafePayload($payload),
         ];
     }
@@ -90,7 +92,6 @@ final class CareerAiImpactAssetPreviewService
         foreach ([
             'slug',
             'locale',
-            'occupation',
             'ai_exposure_score',
             'summary',
             'items',
@@ -100,9 +101,34 @@ final class CareerAiImpactAssetPreviewService
             }
         }
 
+        if (is_array($payload['occupation'] ?? null)) {
+            $safePayload['occupation'] = $this->readerSafeOccupation(
+                $payload['occupation'],
+                (string) ($payload['locale'] ?? '')
+            );
+        }
+
         $safePayload['sources'] = $this->readerSafeSources(is_array($payload['sources'] ?? null) ? $payload['sources'] : []);
 
         return $safePayload;
+    }
+
+    /**
+     * @param  array<string, mixed>  $occupation
+     * @return array<string, mixed>
+     */
+    private function readerSafeOccupation(array $occupation, string $locale): array
+    {
+        $safeOccupation = $this->sanitizeReaderValue($occupation);
+        if (! is_array($safeOccupation)) {
+            return [];
+        }
+
+        if ($this->normalizeLocale($locale) === 'en') {
+            unset($safeOccupation['title_zh']);
+        }
+
+        return $safeOccupation;
     }
 
     /**
