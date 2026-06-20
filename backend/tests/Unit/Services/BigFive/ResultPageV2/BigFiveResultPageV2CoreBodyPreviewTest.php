@@ -1088,6 +1088,20 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_seo_agent_codex_review_runner_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/SeoAgentCodexReviewRunnerCommand.php',
+            'backend/app/Console/Kernel.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\SeoAgentCodexReviewRunnerCommand;',
+            '+        SeoAgentCodexReviewRunnerCommand::class,',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
+    }
+
     public function test_runtime_freeze_classifier_ignores_seo_intel_search_channel_queue_runtime_files(): void
     {
         $changed = [
@@ -3598,6 +3612,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSeoAgentCodexReviewRunnerFile($file)) {
+                continue;
+            }
+
             if ($this->isSeoIntelSearchChannelQueueRuntimeFile($file)) {
                 continue;
             }
@@ -4184,6 +4202,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsMbti64CmsInternalLinkDraftOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsMbti64CmsRevisionPromoteOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentCmsTdkGapReadonlyScannerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsSeoAgentCodexReviewRunnerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                 )
             ) {
                 continue;
@@ -4822,6 +4841,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/SeoAgentCmsTdkGapScanCommand.php',
             'backend/app/Services/SeoAgent/CmsTdkGapReadonlyScanner.php',
+        ], true);
+    }
+
+    private function isSeoAgentCodexReviewRunnerFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/SeoAgentCodexReviewRunnerCommand.php',
         ], true);
     }
 
@@ -6423,6 +6449,28 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if (preg_match('/\bSeoAgentCmsTdkGapScanCommand\b/u', $line) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsSeoAgentCodexReviewRunnerOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            if (preg_match('/\b(MBTI|Mbti|BigFive|Big5|Prewarm|ResultPage|Report)\b/u', $line) === 1) {
+                return false;
+            }
+
+            if (preg_match('/\bSeoAgentCodexReviewRunnerCommand\b/u', $line) !== 1) {
                 return false;
             }
         }
