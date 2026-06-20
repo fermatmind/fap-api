@@ -265,6 +265,14 @@ final class SeoAgentRunCommand extends Command
             $candidateVerdicts,
             static fn (array $candidate): bool => ($candidate['worth_optimizing'] ?? false) === true
         ));
+        $draftReady = array_filter(
+            $candidateVerdicts,
+            static fn (array $candidate): bool => ($candidate['recommended_action'] ?? '') === 'cms_draft_package_dry_run'
+        );
+        $technicalReview = array_filter(
+            $candidateVerdicts,
+            static fn (array $candidate): bool => ($candidate['recommended_action'] ?? '') === 'technical_review_required'
+        );
 
         return [
             'schema_version' => 'seo-agent-codex-review-verdict.v1',
@@ -280,11 +288,10 @@ final class SeoAgentRunCommand extends Command
             'candidate_count' => count($candidateVerdicts),
             'candidate_verdicts' => $candidateVerdicts,
             'worth_optimizing' => $worthOptimizing !== [],
-            'recommended_action' => $worthOptimizing !== [] ? 'cms_draft_package_dry_run' : 'defer',
-            'risk_flags' => array_values(array_unique(array_merge(...array_map(
-                static fn (array $candidate): array => (array) ($candidate['risk_flags'] ?? []),
-                $candidateVerdicts
-            )))),
+            'recommended_action' => $draftReady !== []
+                ? 'cms_draft_package_dry_run'
+                : ($technicalReview !== [] ? 'technical_review_required' : 'defer'),
+            'risk_flags' => $this->aggregateRiskFlags($candidateVerdicts),
             'needs_human_approval' => true,
             'forbidden_actions' => $this->forbiddenActions(),
             'negative_guarantees' => $this->negativeGuarantees(),
@@ -298,10 +305,16 @@ final class SeoAgentRunCommand extends Command
     private function candidateVerdict(array $candidate): array
     {
         $severity = (string) ($candidate['severity'] ?? '');
+        $sourceFamily = (string) ($candidate['source_family'] ?? '');
         $sourceId = (string) ($candidate['source_id'] ?? '');
+        $subjectType = (string) ($candidate['subject_type'] ?? '');
         $subjectRef = (string) ($candidate['subject_ref'] ?? '');
         $safePath = (string) ($candidate['safe_path'] ?? '');
         $evidenceRefs = (array) ($candidate['evidence_refs'] ?? []);
+        $gapTypes = array_values(array_filter(
+            array_map('strval', (array) ($candidate['gap_types'] ?? [])),
+            static fn (string $gap): bool => $gap !== ''
+        ));
         $riskFlags = [];
 
         if ($sourceId === '' || $subjectRef === '' || $safePath === '') {
@@ -314,23 +327,104 @@ final class SeoAgentRunCommand extends Command
             $riskFlags[] = 'unsupported_severity';
         }
 
-        $worthOptimizing = $riskFlags === [] && in_array($severity, ['p1', 'p2'], true);
+        [$recommendedAction, $reviewReason, $sourceRiskFlags] = $this->reviewDecision(
+            $sourceFamily,
+            $subjectType,
+            $severity,
+            $gapTypes,
+            $riskFlags
+        );
+        $riskFlags = array_values(array_unique(array_merge($riskFlags, $sourceRiskFlags)));
+        $worthOptimizing = in_array($recommendedAction, ['cms_draft_package_dry_run', 'technical_review_required'], true);
 
         return [
             'source_id' => $sourceId !== '' ? $sourceId : hash('sha256', $subjectRef.$safePath.json_encode($candidate)),
-            'source_family' => (string) ($candidate['source_family'] ?? ''),
-            'subject_type' => (string) ($candidate['subject_type'] ?? ''),
+            'source_family' => $sourceFamily,
+            'subject_type' => $subjectType,
             'subject_ref' => $subjectRef,
             'safe_path' => $safePath,
             'severity' => $severity,
-            'gap_types' => array_values(array_filter(array_map('strval', (array) ($candidate['gap_types'] ?? [])))),
+            'gap_types' => $gapTypes,
             'evidence_refs' => $evidenceRefs,
             'worth_optimizing' => $worthOptimizing,
-            'recommended_action' => $worthOptimizing ? 'cms_draft_package_dry_run' : 'defer',
+            'recommended_action' => $recommendedAction,
+            'review_reason' => $reviewReason,
             'risk_flags' => $riskFlags,
             'needs_human_approval' => true,
             'execution_permission' => false,
         ];
+    }
+
+    /**
+     * @param  list<string>  $gapTypes
+     * @param  list<string>  $existingRiskFlags
+     * @return array{0: string, 1: string, 2: list<string>}
+     */
+    private function reviewDecision(
+        string $sourceFamily,
+        string $subjectType,
+        string $severity,
+        array $gapTypes,
+        array $existingRiskFlags
+    ): array {
+        if ($existingRiskFlags !== [] || ! in_array($severity, ['p1', 'p2'], true)) {
+            return ['defer', 'p3_or_incomplete_or_unsupported_candidate', []];
+        }
+
+        if ($this->isGscOnlyWithoutCmsTarget($sourceFamily, $subjectType)) {
+            return ['defer', 'gsc_candidate_without_cms_target', ['cms_target_missing']];
+        }
+
+        if ($sourceFamily === 'runtime_seo_qa' && $this->hasTechnicalRuntimeGap($gapTypes)) {
+            return ['technical_review_required', 'runtime_seo_qa_requires_technical_review', ['technical_surface_requires_human_review']];
+        }
+
+        if (in_array($sourceFamily, ['cms_tdk_gap', 'cms_faq_gap'], true)) {
+            return ['cms_draft_package_dry_run', $sourceFamily.'_ready_for_draft_dry_run', []];
+        }
+
+        return ['cms_draft_package_dry_run', 'complete_p1_p2_candidate_ready_for_draft_dry_run', []];
+    }
+
+    private function isGscOnlyWithoutCmsTarget(string $sourceFamily, string $subjectType): bool
+    {
+        return str_contains($sourceFamily, 'gsc')
+            && ! in_array($subjectType, ['article', 'content_page'], true);
+    }
+
+    /**
+     * @param  list<string>  $gapTypes
+     */
+    private function hasTechnicalRuntimeGap(array $gapTypes): bool
+    {
+        foreach ($gapTypes as $gapType) {
+            if (str_contains($gapType, 'canonical')
+                || str_contains($gapType, 'noindex')
+                || str_contains($gapType, 'robots')
+                || str_contains($gapType, 'redirect')
+                || str_contains($gapType, 'status')
+            ) {
+                return true;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $candidateVerdicts
+     * @return list<string>
+     */
+    private function aggregateRiskFlags(array $candidateVerdicts): array
+    {
+        $flags = [];
+        foreach ($candidateVerdicts as $candidate) {
+            foreach ((array) ($candidate['risk_flags'] ?? []) as $flag) {
+                $flags[] = (string) $flag;
+            }
+        }
+
+        return array_values(array_unique($flags));
     }
 
     /**
