@@ -34,7 +34,22 @@ final class CareerAiImpactAssetPreviewService
         $normalizedSlug = $this->normalizeSlug($slug);
         $normalizedLocale = $this->normalizePreviewLocale($locale);
 
-        if ($normalizedLocale === null || ! $this->previewEnabled()) {
+        if ($normalizedLocale === null) {
+            return null;
+        }
+
+        $productionAsset = CareerJobAiImpactAsset::query()
+            ->where('career_job_slug', $normalizedSlug)
+            ->where('locale', $normalizedLocale)
+            ->where('asset_version', CareerJobAiImpactAsset::ASSET_VERSION_V5)
+            ->where('status', CareerJobAiImpactAsset::STATUS_PRODUCTION_IMPORTED)
+            ->first();
+
+        if ($productionAsset instanceof CareerJobAiImpactAsset) {
+            return $productionAsset;
+        }
+
+        if (! $this->previewEnabled()) {
             return null;
         }
 

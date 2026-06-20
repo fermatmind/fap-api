@@ -17,13 +17,14 @@ final class CareerImportAiImpactAssetsPreview extends Command
         {--all-slugs-from-file : Dry-run every slug found in the source JSONL instead of the configured preview allowlist}
         {--confirm-full-staging-preview : Explicitly confirm that --force may write every slug found in the source JSONL to staging_preview}
         {--confirm-approved-transition : Explicitly confirm that --force may mark validated rows as approved}
+        {--confirm-production-import : Explicitly confirm that --force may import validated, approved AI Impact rows into production_imported}
         {--approval-manifest= : Approval manifest JSON produced by the editorial review package}
         {--approval-manifest-sha256= : Optional expected SHA-256 for the approval manifest}
         {--editorial-review-report= : Editorial review JSON report that authorizes the approved transition}
         {--editorial-review-sha256= : Optional expected SHA-256 for the editorial review report}
         {--dry-run : Validate only; do not write staging or production rows}
-        {--force : Write rows only when --status=staging_preview or perform explicit approved transition when --status=approved}
-        {--status=staging_preview : Target import status; staging_preview and approved are supported; production_imported is never supported here}
+        {--force : Write rows only when --status=staging_preview, perform explicit approved transition, or perform explicit production import}
+        {--status=staging_preview : Target import status; staging_preview, approved, and production_imported are supported through their explicit gates}
         {--json : Emit machine-readable JSON report}
         {--output= : Optional report output path}';
 
@@ -80,6 +81,18 @@ final class CareerImportAiImpactAssetsPreview extends Command
                     trim((string) $this->option('editorial-review-report')),
                     trim((string) $this->option('editorial-review-sha256')) ?: null,
                     (bool) $this->option('confirm-approved-transition'),
+                );
+            } elseif ($force && $status === 'production_imported') {
+                $report = $this->importService->importApprovedAssetsToProduction(
+                    $file,
+                    $this->requestedSlugs(),
+                    trim((string) $this->option('expected-sha256')) ?: null,
+                    (bool) $this->option('all-slugs-from-file'),
+                    trim((string) $this->option('approval-manifest')),
+                    trim((string) $this->option('approval-manifest-sha256')) ?: null,
+                    trim((string) $this->option('editorial-review-report')),
+                    trim((string) $this->option('editorial-review-sha256')) ?: null,
+                    (bool) $this->option('confirm-production-import'),
                 );
             } else {
                 $report = $force
