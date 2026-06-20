@@ -10,6 +10,10 @@
   "external_model_api_call": false,
   "rules": {
     "p1_or_p2_complete_candidate": "cms_draft_package_dry_run",
+    "cms_tdk_gap": "cms_draft_package_dry_run",
+    "cms_faq_gap": "cms_draft_package_dry_run",
+    "runtime_seo_qa_canonical_noindex_robots": "technical_review_required",
+    "gsc_without_cms_target": "defer",
     "p3_or_incomplete_candidate": "defer",
     "needs_human_approval": true,
     "execution_permission": false

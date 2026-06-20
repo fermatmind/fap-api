@@ -25,6 +25,31 @@ final class SeoAgentCodexReviewRunnerTest extends TestCase
         $handoffPath = $this->writeHandoff([
             $this->candidate('p1', 'title gap'),
             $this->candidate('p2', 'description gap'),
+            $this->candidate('p1', 'canonical runtime', [
+                'source_family' => 'runtime_seo_qa',
+                'gap_types' => ['canonical_mismatch'],
+                'evidence_refs' => [
+                    [
+                        'code' => 'canonical_mismatch',
+                        'field_status' => 'mismatch',
+                    ],
+                ],
+            ]),
+            $this->candidate('p2', 'faq gap', [
+                'source_family' => 'cms_faq_gap',
+                'gap_types' => ['missing_faq_items'],
+                'evidence_refs' => [
+                    [
+                        'code' => 'missing_faq_items',
+                        'field_status' => 'missing',
+                    ],
+                ],
+            ]),
+            $this->candidate('p1', 'gsc no cms target', [
+                'source_family' => 'gsc_performance',
+                'subject_type' => 'query_page',
+                'gap_types' => ['low_ctr'],
+            ]),
             $this->candidate('p3', 'low priority'),
             [
                 'source_family' => 'cms_tdk_gap',
@@ -52,14 +77,27 @@ final class SeoAgentCodexReviewRunnerTest extends TestCase
         $this->assertSame('deterministic_rules', $verdict['review_mode'] ?? null);
         $this->assertFalse((bool) ($verdict['execution_permission'] ?? true));
         $this->assertFalse((bool) data_get($verdict, 'negative_guarantees.external_model_api_call', true));
-        $this->assertSame(4, $verdict['candidate_count'] ?? null);
+        $this->assertSame(7, $verdict['candidate_count'] ?? null);
         $this->assertTrue((bool) ($verdict['worth_optimizing'] ?? false));
         $this->assertSame('cms_draft_package_dry_run', $verdict['recommended_action'] ?? null);
 
         $candidateActions = array_column($verdict['candidate_verdicts'] ?? [], 'recommended_action');
-        $this->assertSame(['cms_draft_package_dry_run', 'cms_draft_package_dry_run', 'defer', 'defer'], $candidateActions);
+        $this->assertSame([
+            'cms_draft_package_dry_run',
+            'cms_draft_package_dry_run',
+            'technical_review_required',
+            'cms_draft_package_dry_run',
+            'defer',
+            'defer',
+            'defer',
+        ], $candidateActions);
         $this->assertSame(['missing_title'], data_get($verdict, 'candidate_verdicts.0.gap_types'));
         $this->assertSame('missing_title', data_get($verdict, 'candidate_verdicts.0.evidence_refs.0.code'));
+        $this->assertSame('runtime_seo_qa_requires_technical_review', data_get($verdict, 'candidate_verdicts.2.review_reason'));
+        $this->assertSame('cms_faq_gap_ready_for_draft_dry_run', data_get($verdict, 'candidate_verdicts.3.review_reason'));
+        $this->assertSame('gsc_candidate_without_cms_target', data_get($verdict, 'candidate_verdicts.4.review_reason'));
+        $this->assertContains('technical_surface_requires_human_review', $verdict['risk_flags'] ?? []);
+        $this->assertContains('cms_target_missing', $verdict['risk_flags'] ?? []);
         $this->assertContains('candidate_incomplete', $verdict['risk_flags'] ?? []);
         $this->assertContains('evidence_missing', $verdict['risk_flags'] ?? []);
 
@@ -113,6 +151,8 @@ final class SeoAgentCodexReviewRunnerTest extends TestCase
         $this->assertSame('seo-agent-codex-review-verdict.v1', $artifact['output_schema'] ?? null);
         $this->assertSame('codex', $artifact['reviewer'] ?? null);
         $this->assertFalse((bool) ($artifact['external_model_api_call'] ?? true));
+        $this->assertSame('technical_review_required', data_get($artifact, 'rules.runtime_seo_qa_canonical_noindex_robots'));
+        $this->assertSame('defer', data_get($artifact, 'rules.gsc_without_cms_target'));
         $this->assertFalse((bool) data_get($artifact, 'negative_guarantees.cms_write', true));
     }
 
