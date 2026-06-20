@@ -1,0 +1,98 @@
+{
+  "version": "seo-agent-run-control-packet.v1",
+  "task": "SEO-AGENT-RUN-CONTROL-PACKET-02",
+  "repo": "fap-api",
+  "type": "control_plane_contract",
+  "runtime_execution_enabled": false,
+  "required_fields": [
+    "run_id",
+    "run_mode",
+    "trigger",
+    "scope",
+    "input_refs",
+    "evidence_refs",
+    "model_review",
+    "approval",
+    "forbidden_actions",
+    "allowed_actions",
+    "output_artifacts",
+    "negative_guarantees",
+    "next_step"
+  ],
+  "allowed_run_modes": [
+    "readonly_discovery",
+    "gpt_review_handoff",
+    "cms_draft_dry_run",
+    "controlled_canary_write",
+    "post_action_review"
+  ],
+  "allowed_approval_states": [
+    "not_requested",
+    "review_requested",
+    "approved_for_dry_run_only",
+    "approved_for_single_canary_write",
+    "approved_for_publish_or_submit",
+    "rejected"
+  ],
+  "default_approval_state": "not_requested",
+  "model_review": {
+    "reviewer": "gpt_5_5_pro",
+    "role": "review_only",
+    "execution_permission": false,
+    "required_output": "verdict_json"
+  },
+  "artifact_requirements": {
+    "required_metadata": [
+      "path",
+      "size",
+      "sha256",
+      "schema_version",
+      "sanitized_summary"
+    ],
+    "forbidden_content": [
+      "raw_query",
+      "raw_url",
+      "credential_path",
+      "service_account_json",
+      "client_email",
+      "private_key",
+      "token",
+      "cookie",
+      "session"
+    ]
+  },
+  "forbidden_actions_by_default": [
+    "cms_write",
+    "cms_publish",
+    "search_channel_enqueue",
+    "search_channel_submit",
+    "indexing_request",
+    "sitemap_submission",
+    "scheduler_activation",
+    "queue_worker_activation",
+    "production_env_update",
+    "source_code_mutation",
+    "bulk_import"
+  ],
+  "allowed_actions_without_separate_approval": [
+    "readonly_scan",
+    "evidence_artifact_write",
+    "gpt_review_handoff_artifact",
+    "cms_draft_package_dry_run"
+  ],
+  "negative_guarantees": {
+    "database_write": false,
+    "cms_write": false,
+    "cms_publish": false,
+    "search_channel_enqueue": false,
+    "search_channel_submit": false,
+    "indexing_request": false,
+    "sitemap_submission": false,
+    "scheduler_activation": false,
+    "queue_worker_started": false,
+    "production_env_change": false,
+    "source_code_mutation": false,
+    "pr_train_metadata_change": false
+  },
+  "next_step": "Use this packet contract as the required envelope for GPT 5.5 Pro review handoff and CMS draft dry-run package generation."
+}
