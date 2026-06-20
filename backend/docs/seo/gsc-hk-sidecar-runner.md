@@ -36,6 +36,16 @@ Bounded live read, Google read-only call allowed:
 php artisan seo-intel:collect --collector=gsc_foundation --gsc-live-read --dry-run --no-write --json --start-date=YYYY-MM-DD --end-date=YYYY-MM-DD --limit=250
 ```
 
+Repeatable sidecar wrapper:
+
+```bash
+php artisan seo-intel:gsc-sidecar-runner --mode=preflight --artifact-dir=/opt/fermatmind/seo-gsc-runner/artifacts
+```
+
+```bash
+php artisan seo-intel:gsc-sidecar-runner --mode=live-read --start-date=YYYY-MM-DD --end-date=YYYY-MM-DD --limit=250 --dimensions=query,page --artifact-dir=/opt/fermatmind/seo-gsc-runner/artifacts
+```
+
 ## Required Runtime Gates
 
 - `SEO_INTEL_GSC_ENABLED=true`
@@ -46,6 +56,9 @@ php artisan seo-intel:collect --collector=gsc_foundation --gsc-live-read --dry-r
 - `SEO_INTEL_GSC_SERVICE_ACCOUNT_JSON_PATH` points to a root-readable or app-user-readable secret file outside git
 - command includes `--dry-run --no-write --json`
 - live read command includes explicit `--gsc-live-read`
+- sidecar wrapper must call only `seo-intel:collect --collector=gsc_foundation`
+- sidecar wrapper must force `--dry-run --no-write --json`
+- sidecar wrapper must fail if the collector reports any write, CMS, Search Channel, or indexing boundary as enabled
 
 ## Secret Placement
 
@@ -124,6 +137,38 @@ Sanitized live-read summary:
 This runtime evidence PR records the already-completed sidecar verification only. It did not change production `fap-api` environment variables, enable a scheduler, write a database row, import `seo_gsc_daily`, enqueue an opportunity, mutate CMS content, enqueue or submit Search Channel records, request GSC indexing, submit a sitemap, call Baidu, or call IndexNow.
 
 No service-account JSON content, private key, access token, client email, cookie, session, raw query, raw URL, or runtime environment secret was committed, printed into this evidence package, or attached to the PR.
+
+## Runner Wrapper Contract
+
+Task: `SEO-GSC-HK-SIDECAR-RUNNER-WRAPPER-01`
+
+`php artisan seo-intel:gsc-sidecar-runner` is the only approved repeatable wrapper for the Hong Kong GSC sidecar runtime. The wrapper exists to replace manual command assembly with a bounded, auditable command surface.
+
+Wrapper guarantees:
+
+- accepts only `--mode=preflight` or `--mode=live-read`
+- live-read requires explicit `--start-date`, `--end-date`, `--limit`, `--dimensions`, and `--artifact-dir`
+- live-read limits must stay within `1..250`
+- internally invokes only `seo-intel:collect --collector=gsc_foundation`
+- always forces `--dry-run --no-write --json`
+- preflight always forces `--gsc-live-preflight`
+- live-read always forces `--gsc-live-read`
+- writes a sanitized JSON artifact to the requested artifact directory
+- prints only artifact path, byte size, SHA256, and safe summary fields
+- fails closed if any forbidden boundary reports enabled or attempted writes
+
+Forbidden wrapper outcomes:
+
+- no DB write
+- no `seo_gsc_daily` import/backfill
+- no opportunity queue enqueue
+- no CMS write or draft mutation
+- no Search Channel enqueue, approval, retry, or submission
+- no GSC URL Inspection request indexing
+- no sitemap submission
+- no scheduler activation
+- no queue worker activation
+- no raw query, raw URL, credential, token, client email, cookie, session, or private key output
 
 ## Output Boundary
 

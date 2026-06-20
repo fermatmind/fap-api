@@ -11,7 +11,9 @@
   "uses_88cn_web_process": false,
   "allowed_commands": {
     "preflight": "php artisan seo-intel:collect --collector=gsc_foundation --gsc-live-preflight --dry-run --no-write --json",
-    "bounded_live_read": "php artisan seo-intel:collect --collector=gsc_foundation --gsc-live-read --dry-run --no-write --json --start-date=YYYY-MM-DD --end-date=YYYY-MM-DD --limit=250"
+    "bounded_live_read": "php artisan seo-intel:collect --collector=gsc_foundation --gsc-live-read --dry-run --no-write --json --start-date=YYYY-MM-DD --end-date=YYYY-MM-DD --limit=250",
+    "sidecar_wrapper_preflight": "php artisan seo-intel:gsc-sidecar-runner --mode=preflight --artifact-dir=/opt/fermatmind/seo-gsc-runner/artifacts",
+    "sidecar_wrapper_live_read": "php artisan seo-intel:gsc-sidecar-runner --mode=live-read --start-date=YYYY-MM-DD --end-date=YYYY-MM-DD --limit=250 --dimensions=query,page --artifact-dir=/opt/fermatmind/seo-gsc-runner/artifacts"
   },
   "required_runtime_gates": [
     "SEO_INTEL_GSC_ENABLED=true",
@@ -22,7 +24,9 @@
     "SEO_INTEL_GSC_SERVICE_ACCOUNT_JSON_PATH",
     "--dry-run",
     "--no-write",
-    "--gsc-live-read for bounded live reads"
+    "--gsc-live-read for bounded live reads",
+    "sidecar wrapper must call only seo-intel:collect --collector=gsc_foundation",
+    "sidecar wrapper must fail if forbidden write/CMS/search/indexing boundaries are true"
   ],
   "allowed_outputs": [
     "status",
@@ -187,6 +191,68 @@
       "raw_url",
       "runtime_env_secret"
     ]
+  },
+  "runner_wrapper_contract": {
+    "task": "SEO-GSC-HK-SIDECAR-RUNNER-WRAPPER-01",
+    "command": "php artisan seo-intel:gsc-sidecar-runner",
+    "schema_version": "gsc-hk-sidecar-runner-wrapper.v1",
+    "enabled_by_default": false,
+    "scheduler_enabled": false,
+    "queue_worker_enabled": false,
+    "supported_modes": [
+      "preflight",
+      "live-read"
+    ],
+    "required_live_read_options": [
+      "--start-date",
+      "--end-date",
+      "--limit",
+      "--dimensions",
+      "--artifact-dir"
+    ],
+    "limit_bounds": [
+      1,
+      250
+    ],
+    "internal_command": "seo-intel:collect",
+    "forced_collector": "gsc_foundation",
+    "forced_flags": [
+      "--dry-run",
+      "--no-write",
+      "--json",
+      "--gsc-live-preflight for preflight",
+      "--gsc-live-read for live-read"
+    ],
+    "artifact_output": {
+      "writes_sanitized_json": true,
+      "prints_artifact_path": true,
+      "prints_byte_size": true,
+      "prints_sha256": true,
+      "prints_safe_summary": true,
+      "prints_raw_rows": false,
+      "prints_credentials": false
+    },
+    "fail_closed_if_true": [
+      "writes_attempted",
+      "writes_committed",
+      "metadata.writes_attempted",
+      "metadata.writes_committed",
+      "metadata.cms_write_allowed",
+      "metadata.search_channel_enqueue_allowed",
+      "metadata.indexing_request_allowed"
+    ],
+    "negative_guarantees": {
+      "db_writes": false,
+      "seo_gsc_daily_import": false,
+      "cms_write": false,
+      "opportunity_queue_enqueue": false,
+      "search_channel_enqueue": false,
+      "search_channel_submit": false,
+      "gsc_url_inspection_request_indexing": false,
+      "gsc_sitemap_submit": false,
+      "scheduler_activation": false,
+      "queue_worker_activation": false
+    }
   },
   "requires_operator_approval_before_secret_install": true,
   "requires_operator_approval_before_live_read": true,
