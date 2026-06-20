@@ -22,20 +22,26 @@ final class MbtiPrewarm extends Command
     protected $signature = 'mbti:prewarm
         {--slug=mbti-personality-test-16-personality-types : MBTI landing slug to prewarm}
         {--locales=zh,en : Comma separated locales to prewarm}
-        {--forms=mbti_93,mbti_144 : Comma separated form codes to prewarm}';
+        {--forms=mbti_93,mbti_144 : Comma separated MBTI form codes to prewarm}
+        {--scales=MBTI,BIG5_OCEAN,ENNEAGRAM,RIASEC,EQ_60,IQ_RAVEN : Comma separated question scale codes to prewarm}';
 
-    protected $description = 'Prewarm MBTI lookup and questions caches for the hottest public locales/forms.';
+    protected $description = 'Prewarm MBTI lookup plus hot public question caches for the hottest locales/forms.';
 
     public function handle(): int
     {
         $slug = trim((string) $this->option('slug'));
         $rawForms = (string) $this->option('forms');
+        $rawScales = (string) $this->option('scales');
         $locales = $this->parseCsvOption((string) $this->option('locales'));
         $forms = $this->parseCsvOption($rawForms);
+        $scales = array_values(array_unique(array_map(
+            static fn (string $scale): string => strtoupper($scale),
+            $this->parseCsvOption($rawScales)
+        )));
         $usesDefaultForms = $rawForms === 'mbti_93,mbti_144';
 
-        if ($slug === '' || $locales === [] || $forms === []) {
-            $this->error('slug, locales and forms must not be empty.');
+        if ($slug === '' || $locales === [] || $forms === [] || $scales === []) {
+            $this->error('slug, locales, forms and scales must not be empty.');
 
             return self::FAILURE;
         }
@@ -53,75 +59,84 @@ final class MbtiPrewarm extends Command
         $failed = false;
 
         foreach ($locales as $locale) {
-            $lookupRequest = Request::create('/api/v0.3/scales/lookup', 'GET', [
-                'slug' => $slug,
-                'locale' => $locale,
-            ]);
-
-            try {
-                $lookupResponse = $lookupController->lookup($lookupRequest);
-                $this->line(sprintf(
-                    'lookup locale=%s status=%d cache=%s',
-                    $locale,
-                    $lookupResponse->getStatusCode(),
-                    $lookupResponse->headers->get('X-FAP-Cache', 'n/a')
-                ));
-                if ($lookupResponse->getStatusCode() !== 200) {
-                    $failed = true;
-                }
-            } catch (Throwable $e) {
-                $this->error(sprintf('lookup locale=%s failed: %s', $locale, $e->getMessage()));
-                $failed = true;
-            }
-
-            foreach ($this->formsForLocale($locale, $forms, $usesDefaultForms) as $formCode) {
-                $questionLocale = $this->normalizeQuestionLocale($locale);
-                $questionsRequest = Request::create('/api/v0.3/scales/MBTI/questions', 'GET', [
-                    'locale' => $questionLocale,
-                    'form_code' => $formCode,
+            if (in_array('MBTI', $scales, true)) {
+                $lookupRequest = Request::create('/api/v0.3/scales/lookup', 'GET', [
+                    'slug' => $slug,
+                    'locale' => $locale,
                 ]);
 
                 try {
-                    $questionsResponse = $scalesController->questions(
-                        $questionsRequest,
-                        'MBTI',
-                        $questionsService,
-                        $bigFivePackLoader,
-                        $clinicalPackLoader,
-                        $sds20PackLoader,
-                        $eq60PackLoader,
-                        $enneagramPackLoader,
-                        $riasecPackLoader
-                    );
+                    $lookupResponse = $lookupController->lookup($lookupRequest);
                     $this->line(sprintf(
-                        'questions locale=%s form=%s status=%d cache=%s',
-                        $questionLocale,
-                        $formCode,
-                        $questionsResponse->getStatusCode(),
-                        $questionsResponse->headers->get('X-FAP-Cache', 'n/a')
+                        'lookup locale=%s status=%d cache=%s',
+                        $locale,
+                        $lookupResponse->getStatusCode(),
+                        $lookupResponse->headers->get('X-FAP-Cache', 'n/a')
                     ));
-                    if ($questionsResponse->getStatusCode() !== 200) {
+                    if ($lookupResponse->getStatusCode() !== 200) {
                         $failed = true;
                     }
                 } catch (Throwable $e) {
-                    $this->error(sprintf(
-                        'questions locale=%s form=%s failed: %s',
-                        $questionLocale,
-                        $formCode,
-                        $e->getMessage()
-                    ));
+                    $this->error(sprintf('lookup locale=%s failed: %s', $locale, $e->getMessage()));
                     $failed = true;
+                }
+            }
+
+            foreach ($scales as $scaleCode) {
+                foreach ($this->formsForScaleAndLocale($scaleCode, $locale, $forms, $usesDefaultForms) as $formCode) {
+                    $questionLocale = $this->normalizeQuestionLocale($locale);
+                    $questionParams = [
+                        'locale' => $questionLocale,
+                    ];
+                    if ($formCode !== null) {
+                        $questionParams['form_code'] = $formCode;
+                    }
+                    $questionsRequest = Request::create('/api/v0.3/scales/'.$scaleCode.'/questions', 'GET', $questionParams);
+
+                    try {
+                        $questionsResponse = $scalesController->questions(
+                            $questionsRequest,
+                            $scaleCode,
+                            $questionsService,
+                            $bigFivePackLoader,
+                            $clinicalPackLoader,
+                            $sds20PackLoader,
+                            $eq60PackLoader,
+                            $enneagramPackLoader,
+                            $riasecPackLoader
+                        );
+                        $this->line(sprintf(
+                            'questions scale=%s locale=%s form=%s status=%d cache=%s',
+                            $scaleCode,
+                            $questionLocale,
+                            $formCode ?? 'default',
+                            $questionsResponse->getStatusCode(),
+                            $questionsResponse->headers->get('X-FAP-Cache', 'n/a')
+                        ));
+                        if ($questionsResponse->getStatusCode() !== 200) {
+                            $failed = true;
+                        }
+                    } catch (Throwable $e) {
+                        $this->error(sprintf(
+                            'questions scale=%s locale=%s form=%s failed: %s',
+                            $scaleCode,
+                            $questionLocale,
+                            $formCode ?? 'default',
+                            $e->getMessage()
+                        ));
+                        $failed = true;
+                    }
                 }
             }
         }
 
         if ($failed) {
-            $this->error('MBTI prewarm completed with failures.');
+            $this->error('Question prewarm completed with failures.');
 
             return self::FAILURE;
         }
 
-        $this->info('MBTI prewarm completed successfully.');
+        $this->info('Question prewarm completed successfully.');
 
         return self::SUCCESS;
     }
@@ -152,18 +167,24 @@ final class MbtiPrewarm extends Command
 
     /**
      * @param  list<string>  $forms
-     * @return list<string>
+     * @return list<string|null>
      */
-    private function formsForLocale(string $locale, array $forms, bool $usesDefaultForms): array
+    private function formsForScaleAndLocale(string $scaleCode, string $locale, array $forms, bool $usesDefaultForms): array
     {
-        if (! $usesDefaultForms) {
+        if ($scaleCode === 'MBTI' && ! $usesDefaultForms) {
             return $forms;
         }
 
-        return match ($this->normalizeQuestionLocale($locale)) {
-            'zh-CN' => ['mbti_93'],
-            'en' => ['mbti_144'],
-            default => $forms,
+        return match ($scaleCode) {
+            'MBTI' => match ($this->normalizeQuestionLocale($locale)) {
+                'zh-CN' => ['mbti_93'],
+                'en' => ['mbti_144'],
+                default => $forms,
+            },
+            'BIG5_OCEAN' => ['big5_120', 'big5_90'],
+            'ENNEAGRAM' => ['enneagram_likert_105', 'enneagram_forced_choice_144'],
+            'RIASEC' => ['riasec_60', 'riasec_140'],
+            default => [null],
         };
     }
 }
