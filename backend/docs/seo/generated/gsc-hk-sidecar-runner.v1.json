@@ -113,7 +113,82 @@
       "scheduler_activation": false
     }
   },
+  "php84_runtime_evidence": {
+    "task": "SEO-GSC-HK-SIDECAR-PHP84-RUNTIME-01",
+    "observed_date": "2026-06-20",
+    "status": "php84_runtime_and_readonly_gsc_live_read_verified",
+    "runtime": {
+      "php_cli_version": "8.4.22",
+      "laravel_framework_version": "12.62.0",
+      "composer_install_without_ignore_platform_req_php": true,
+      "verified_cli_extensions": [
+        "bcmath",
+        "curl",
+        "intl",
+        "mbstring",
+        "pdo_mysql",
+        "pdo_sqlite",
+        "xml",
+        "zip"
+      ]
+    },
+    "secret_path": "/opt/fermatmind/seo-gsc-runner/secrets/gsc-service-account.json",
+    "artifacts": {
+      "preflight": {
+        "path": "/opt/fermatmind/seo-gsc-runner/artifacts/gsc-live-preflight-php84-20260620.json",
+        "byte_size": 1406,
+        "sha256": "b48731deca0e7af7d3d10014dcb4a75765893fc2849d75fc0b539ee137dee800"
+      },
+      "read_only_live_read": {
+        "path": "/opt/fermatmind/seo-gsc-runner/artifacts/gsc-live-read-php84-20260620-window-20260617.json",
+        "byte_size": 2970,
+        "sha256": "d08502f806672e26609f5af7b3ac5c354f464478f64e2cf8498dca821f738999"
+      }
+    },
+    "live_read_summary": {
+      "status": "success",
+      "collector": "gsc_foundation",
+      "dry_run": true,
+      "no_write": true,
+      "external_calls_attempted": true,
+      "writes_attempted": false,
+      "writes_committed": false,
+      "rows_seen": 25,
+      "date_window": {
+        "start_date": "2026-06-17",
+        "end_date": "2026-06-17"
+      },
+      "mode": "gsc_live_readonly_sidecar_read",
+      "data_quality_gate": "pass"
+    },
+    "runtime_actions_performed": {
+      "production_env_edit": false,
+      "scheduler_activation": false,
+      "db_write": false,
+      "seo_intel_write": false,
+      "seo_gsc_daily_import": false,
+      "opportunity_queue_enqueue": false,
+      "cms_mutation": false,
+      "search_channel_enqueue": false,
+      "search_channel_submit": false,
+      "gsc_url_inspection_request_indexing": false,
+      "gsc_sitemap_submit": false,
+      "baidu_call": false,
+      "indexnow_call": false
+    },
+    "forbidden_evidence": [
+      "service_account_json",
+      "private_key",
+      "access_token",
+      "client_email",
+      "cookie",
+      "session",
+      "raw_query",
+      "raw_url",
+      "runtime_env_secret"
+    ]
+  },
   "requires_operator_approval_before_secret_install": true,
   "requires_operator_approval_before_live_read": true,
-  "next_allowed_step": "credential preflight without Google API calls, then separately approved bounded read-only live read from the Hong Kong sidecar host"
+  "next_allowed_step": "sidecar runner wrapper or read-model boundary PR; do not enable scheduler, write DB, enqueue opportunities, mutate CMS, or submit search without a separate approval"
 }

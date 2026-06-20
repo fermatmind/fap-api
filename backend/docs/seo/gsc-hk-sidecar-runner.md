@@ -81,6 +81,50 @@ No service-account JSON content, private key, access token, client email, cookie
 
 This evidence PR did not execute a live GSC read, call Google APIs, write `seo_intel`, enqueue an opportunity, enqueue or submit Search Channel records, mutate CMS, edit production environment variables, or activate a scheduler.
 
+## PHP 8.4 Runtime Evidence
+
+Task: `SEO-GSC-HK-SIDECAR-PHP84-RUNTIME-01`
+
+On 2026-06-20, the Hong Kong sidecar runner runtime was upgraded for sidecar-only execution:
+
+- PHP CLI version: `8.4.22`
+- Laravel runtime smoke: `Laravel Framework 12.62.0`
+- Composer completed without `--ignore-platform-req=php`
+- Verified CLI extensions included `bcmath`, `curl`, `intl`, `mbstring`, `pdo_mysql`, `pdo_sqlite`, `xml`, and `zip`
+
+The existing service-account JSON remained at the approved isolated secret path:
+
+```text
+/opt/fermatmind/seo-gsc-runner/secrets/gsc-service-account.json
+```
+
+New sanitized evidence artifacts were generated on the sidecar host:
+
+- Preflight artifact: `/opt/fermatmind/seo-gsc-runner/artifacts/gsc-live-preflight-php84-20260620.json`
+  - File size: `1406` bytes
+  - SHA256: `b48731deca0e7af7d3d10014dcb4a75765893fc2849d75fc0b539ee137dee800`
+- Read-only live read artifact: `/opt/fermatmind/seo-gsc-runner/artifacts/gsc-live-read-php84-20260620-window-20260617.json`
+  - File size: `2970` bytes
+  - SHA256: `d08502f806672e26609f5af7b3ac5c354f464478f64e2cf8498dca821f738999`
+
+Sanitized live-read summary:
+
+- `status=success`
+- `collector=gsc_foundation`
+- `dry_run=true`
+- `no_write=true`
+- `external_calls_attempted=true`
+- `writes_attempted=false`
+- `writes_committed=false`
+- `rows_seen=25`
+- `date_window=2026-06-17..2026-06-17`
+- `mode=gsc_live_readonly_sidecar_read`
+- `data_quality_gate=pass`
+
+This runtime evidence PR records the already-completed sidecar verification only. It did not change production `fap-api` environment variables, enable a scheduler, write a database row, import `seo_gsc_daily`, enqueue an opportunity, mutate CMS content, enqueue or submit Search Channel records, request GSC indexing, submit a sitemap, call Baidu, or call IndexNow.
+
+No service-account JSON content, private key, access token, client email, cookie, session, raw query, raw URL, or runtime environment secret was committed, printed into this evidence package, or attached to the PR.
+
 ## Output Boundary
 
 The runner may emit a sanitized JSON artifact containing:
