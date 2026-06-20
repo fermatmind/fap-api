@@ -3,7 +3,10 @@
   "task": "SEO-AGENT-OPPORTUNITY-SOURCE-EXPANSION-01",
   "repo": "fap-api",
   "type": "opportunity_source_contract",
-  "runtime_scanners_added": false,
+  "runtime_scanners_added": true,
+  "implemented_runtime_scanners": [
+    "cms_tdk_gap_readonly_scanner"
+  ],
   "source_families": [
     {
       "id": "gsc_performance",
@@ -13,7 +16,9 @@
     },
     {
       "id": "cms_tdk_gap",
-      "status": "future_readonly_source",
+      "status": "implemented_readonly_source",
+      "runtime_scanner": "cms_tdk_gap_readonly_scanner",
+      "command": "php artisan seo-agent:cms-tdk-gap-scan",
       "detects": ["missing_title", "missing_meta_description", "missing_canonical", "missing_indexability_metadata"],
       "write_allowed": false
     },
@@ -64,7 +69,7 @@
     "severity_values": ["p0", "p1", "p2", "p3"],
     "allowed_actions_without_separate_approval": [
       "readonly_review",
-      "gpt_review_handoff",
+      "codex_review_handoff",
       "cms_draft_package_dry_run"
     ]
   },
@@ -104,5 +109,5 @@
     "sitemap_llms_gap_readonly_scanner",
     "hreflang_canonical_gap_readonly_scanner"
   ],
-  "next_step": "Implement one readonly source scanner at a time, starting with cms_tdk_gap, and require seo-agent-run-control-packet.v1 for GPT review handoff or CMS draft dry-run."
+  "next_step": "Implement one readonly source scanner at a time, starting with cms_tdk_gap, and require seo-agent-run-control-packet.v1 for Codex review handoff or CMS draft dry-run."
 }

@@ -15,7 +15,7 @@ Each SEO Agent run must preserve a durable packet that explains:
 - what approval state the run is in
 - which output artifacts were generated
 
-The packet is the handoff boundary between read-only discovery, GPT 5.5 Pro review, CMS draft generation, and any later controlled execution.
+The packet is the handoff boundary between read-only discovery, Codex review, CMS draft generation, and any later controlled execution.
 
 ## Required Shape
 
@@ -68,4 +68,4 @@ Output artifacts must be identified by path, byte size, SHA256, schema version, 
 
 ## Next Step
 
-After this contract, future PRs may generate concrete packets for GPT 5.5 Pro review and CMS draft dry-run packages. Execution remains held until separate approvals are implemented.
+After this contract, future PRs may generate concrete packets for Codex review and CMS draft dry-run packages. Execution remains held until separate approvals are implemented.

@@ -41,21 +41,21 @@ final class SeoAgentRunControlPacketContractTest extends TestCase
         }
 
         $this->assertContains('readonly_discovery', $artifact['allowed_run_modes'] ?? []);
-        $this->assertContains('gpt_review_handoff', $artifact['allowed_run_modes'] ?? []);
+        $this->assertContains('codex_review_handoff', $artifact['allowed_run_modes'] ?? []);
         $this->assertContains('cms_draft_dry_run', $artifact['allowed_run_modes'] ?? []);
         $this->assertSame('not_requested', $artifact['default_approval_state'] ?? null);
         $this->assertContains('approved_for_single_canary_write', $artifact['allowed_approval_states'] ?? []);
     }
 
     #[Test]
-    public function contract_keeps_gpt_review_and_execution_boundaries_separate(): void
+    public function contract_keeps_codex_review_and_execution_boundaries_separate(): void
     {
         $artifact = json_decode(
             (string) file_get_contents(base_path('docs/seo/generated/seo-agent-run-control-packet.v1.json')),
             true
         );
 
-        $this->assertSame('gpt_5_5_pro', data_get($artifact, 'model_review.reviewer'));
+        $this->assertSame('codex', data_get($artifact, 'model_review.reviewer'));
         $this->assertSame('review_only', data_get($artifact, 'model_review.role'));
         $this->assertFalse((bool) data_get($artifact, 'model_review.execution_permission', true));
 

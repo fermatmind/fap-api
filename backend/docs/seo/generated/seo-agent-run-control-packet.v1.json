@@ -21,7 +21,7 @@
   ],
   "allowed_run_modes": [
     "readonly_discovery",
-    "gpt_review_handoff",
+    "codex_review_handoff",
     "cms_draft_dry_run",
     "controlled_canary_write",
     "post_action_review"
@@ -36,7 +36,7 @@
   ],
   "default_approval_state": "not_requested",
   "model_review": {
-    "reviewer": "gpt_5_5_pro",
+    "reviewer": "codex",
     "role": "review_only",
     "execution_permission": false,
     "required_output": "verdict_json"
@@ -77,7 +77,7 @@
   "allowed_actions_without_separate_approval": [
     "readonly_scan",
     "evidence_artifact_write",
-    "gpt_review_handoff_artifact",
+    "codex_review_handoff_artifact",
     "cms_draft_package_dry_run"
   ],
   "negative_guarantees": {
@@ -94,5 +94,5 @@
     "source_code_mutation": false,
     "pr_train_metadata_change": false
   },
-  "next_step": "Use this packet contract as the required envelope for GPT 5.5 Pro review handoff and CMS draft dry-run package generation."
+  "next_step": "Use this packet contract as the required envelope for Codex review handoff and CMS draft dry-run package generation."
 }
