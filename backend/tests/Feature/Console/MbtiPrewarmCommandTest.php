@@ -20,6 +20,8 @@ final class MbtiPrewarmCommandTest extends TestCase
         Config::set('content_packs.mbti_response_cache_store', 'array');
         Config::set('content_packs.mbti_lookup_cache_ttl_seconds', 600);
         Config::set('content_packs.mbti_questions_cache_ttl_seconds', 600);
+        Config::set('content_packs.questions_response_cache_store', 'array');
+        Config::set('content_packs.questions_response_cache_ttl_seconds', 600);
         Config::set('content_packs.loader_cache_store', 'array');
         Config::set('content_packs.loader_cache_ttl_seconds', 300);
 
@@ -35,9 +37,11 @@ final class MbtiPrewarmCommandTest extends TestCase
         $this->artisan('mbti:prewarm')
             ->expectsOutputToContain('lookup locale=zh status=200')
             ->expectsOutputToContain('lookup locale=en status=200')
-            ->expectsOutputToContain('questions locale=zh-CN form=mbti_93 status=200')
-            ->expectsOutputToContain('questions locale=en form=mbti_144 status=200')
-            ->expectsOutputToContain('MBTI prewarm completed successfully.')
+            ->expectsOutputToContain('questions scale=MBTI locale=zh-CN form=mbti_93 status=200')
+            ->expectsOutputToContain('questions scale=MBTI locale=en form=mbti_144 status=200')
+            ->expectsOutputToContain('questions scale=RIASEC locale=zh-CN form=riasec_60 status=200')
+            ->expectsOutputToContain('questions scale=IQ_RAVEN locale=en form=default status=200')
+            ->expectsOutputToContain('Question prewarm completed successfully.')
             ->assertExitCode(0);
 
         $this->getJson('/api/v0.3/scales/lookup?slug=mbti-personality-test-16-personality-types&locale=zh')

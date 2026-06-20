@@ -24,6 +24,7 @@ use App\Services\Scale\ScaleIdentityResolver;
 use App\Services\Scale\ScaleRegistry;
 use App\Support\CacheKeys;
 use App\Support\OrgContext;
+use Illuminate\Contracts\Cache\Repository as CacheRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -241,6 +242,45 @@ class ScalesController extends Controller
             $this->publicInputGuard->assertSafeContentIdentifier($packId, 'pack_id');
             $this->publicInputGuard->assertSafeContentIdentifier($dirVersion, 'dir_version');
 
+            $assetsBaseUrlOverride = $request->attributes->get('assets_base_url');
+            $assetsBaseUrlOverride = is_string($assetsBaseUrlOverride) ? $assetsBaseUrlOverride : null;
+
+            $cacheStore = Cache::store((string) config(
+                'content_packs.questions_response_cache_store',
+                config('content_packs.mbti_response_cache_store', 'hot_redis')
+            ));
+            $cacheTtl = max(1, (int) config(
+                'content_packs.questions_response_cache_ttl_seconds',
+                config('content_packs.mbti_questions_cache_ttl_seconds', 600)
+            ));
+            $cacheKey = null;
+            if ($this->shouldCacheQuestionsResponse($resolvedScaleCode)) {
+                $cacheKey = CacheKeys::scaleQuestions(
+                    $orgId,
+                    $resolvedScaleCode,
+                    $code,
+                    $packId,
+                    $dirVersion,
+                    $resolvedFormCode,
+                    $locale,
+                    $region,
+                    $assetsBaseUrlOverride
+                );
+                $cached = $cacheStore->get($cacheKey);
+                if (is_array($cached)) {
+                    $this->logCacheEvent('questions_hit', $cacheKey, [
+                        'org_id' => $orgId,
+                        'scale_code' => $resolvedScaleCode,
+                        'requested_scale_code' => $code,
+                        'form_code' => $resolvedFormCode,
+                        'locale' => $locale,
+                        'region' => $region,
+                    ]);
+
+                    return $this->cacheableJson($cached, 'hit');
+                }
+            }
+
             if ($resolvedScaleCode === 'BIG5_OCEAN') {
                 $version = $dirVersion !== '' ? $dirVersion : (string) ($row['default_dir_version'] ?? BigFivePackLoader::PACK_VERSION);
                 $normalizedLocale = $this->normalizeBigFiveLocale($locale);
@@ -319,7 +359,7 @@ class ScalesController extends Controller
                     $disclaimerHash = hash('sha256', $disclaimerVersion.'|'.$disclaimerText);
                 }
 
-                return response()->json([
+                $payload = [
                     'ok' => true,
                     'scale_code' => $scaleCodeMeta['scale_code'],
                     'region' => $region,
@@ -335,7 +375,16 @@ class ScalesController extends Controller
                         'disclaimer_hash' => $disclaimerHash,
                         'disclaimer_text' => $disclaimerText,
                     ],
-                ] + $scaleCodeMeta);
+                ] + $scaleCodeMeta;
+
+                return $this->cacheQuestionsPayload($payload, $cacheStore, $cacheKey, $cacheTtl, [
+                    'org_id' => $orgId,
+                    'scale_code' => $resolvedScaleCode,
+                    'requested_scale_code' => $code,
+                    'form_code' => $resolvedFormCode,
+                    'locale' => $normalizedLocale,
+                    'region' => $region,
+                ]);
             }
 
             if ($resolvedScaleCode === 'ENNEAGRAM') {
@@ -343,7 +392,7 @@ class ScalesController extends Controller
                 $doc = $enneagramPackLoader->loadQuestionsDoc($locale, $version);
                 $localeResolved = (string) ($doc['locale_resolved'] ?? $enneagramPackLoader->normalizeLocale($locale));
 
-                return response()->json([
+                $payload = [
                     'ok' => true,
                     'scale_code' => $scaleCodeMeta['scale_code'],
                     'region' => $region,
@@ -361,7 +410,16 @@ class ScalesController extends Controller
                         'locale_resolved' => $localeResolved,
                         'question_count' => $resolvedQuestionCount,
                     ],
-                ] + $scaleCodeMeta);
+                ] + $scaleCodeMeta;
+
+                return $this->cacheQuestionsPayload($payload, $cacheStore, $cacheKey, $cacheTtl, [
+                    'org_id' => $orgId,
+                    'scale_code' => $resolvedScaleCode,
+                    'requested_scale_code' => $code,
+                    'form_code' => $resolvedFormCode,
+                    'locale' => $localeResolved,
+                    'region' => $region,
+                ]);
             }
 
             if ($resolvedScaleCode === 'RIASEC') {
@@ -369,7 +427,7 @@ class ScalesController extends Controller
                 $doc = $riasecPackLoader->loadQuestionsDoc($locale, $version);
                 $localeResolved = (string) ($doc['locale_resolved'] ?? $riasecPackLoader->normalizeLocale($locale));
 
-                return response()->json([
+                $payload = [
                     'ok' => true,
                     'scale_code' => $scaleCodeMeta['scale_code'],
                     'region' => $region,
@@ -390,7 +448,16 @@ class ScalesController extends Controller
                         'option_anchors' => is_array($doc['option_anchors'] ?? null) ? $doc['option_anchors'] : [],
                         'dimension_codes' => is_array($doc['dimension_codes'] ?? null) ? $doc['dimension_codes'] : ['R', 'I', 'A', 'S', 'E', 'C'],
                     ],
-                ] + $scaleCodeMeta);
+                ] + $scaleCodeMeta;
+
+                return $this->cacheQuestionsPayload($payload, $cacheStore, $cacheKey, $cacheTtl, [
+                    'org_id' => $orgId,
+                    'scale_code' => $resolvedScaleCode,
+                    'requested_scale_code' => $code,
+                    'form_code' => $resolvedFormCode,
+                    'locale' => $localeResolved,
+                    'region' => $region,
+                ]);
             }
 
             if ($resolvedScaleCode === 'CLINICAL_COMBO_68') {
@@ -482,7 +549,7 @@ class ScalesController extends Controller
                 $seoGeoAuthority = is_array($seoGeoAuthorityAsset[$localeResolved] ?? null) ? (array) $seoGeoAuthorityAsset[$localeResolved] : [];
                 $seoGeoPublicPage = (array) data_get($reportAssets, 'assets.seo_geo_authority.public_page', []);
 
-                return response()->json([
+                $payload = [
                     'ok' => true,
                     'scale_code' => $scaleCodeMeta['scale_code'],
                     'region' => $region,
@@ -507,37 +574,16 @@ class ScalesController extends Controller
                         ],
                         'seo_geo_authority' => $this->projectEqSeoGeoAuthority($seoGeoAuthority, $seoGeoPublicPage),
                     ],
-                ] + $scaleCodeMeta);
-            }
+                ] + $scaleCodeMeta;
 
-            $assetsBaseUrlOverride = $request->attributes->get('assets_base_url');
-            $assetsBaseUrlOverride = is_string($assetsBaseUrlOverride) ? $assetsBaseUrlOverride : null;
-
-            $cacheStore = Cache::store((string) config('content_packs.mbti_response_cache_store', 'hot_redis'));
-            $cacheTtl = max(1, (int) config('content_packs.mbti_questions_cache_ttl_seconds', 600));
-            $cacheKey = null;
-            if ($resolvedScaleCode === 'MBTI' && $resolvedFormCode !== null) {
-                $cacheKey = CacheKeys::mbtiQuestions(
-                    $orgId,
-                    $packId,
-                    $dirVersion,
-                    $resolvedFormCode,
-                    $locale,
-                    $region,
-                    $assetsBaseUrlOverride,
-                    $code
-                );
-                $cached = $cacheStore->get($cacheKey);
-                if (is_array($cached)) {
-                    $this->logCacheEvent('questions_hit', $cacheKey, [
-                        'org_id' => $orgId,
-                        'form_code' => $resolvedFormCode,
-                        'locale' => $locale,
-                        'region' => $region,
-                    ]);
-
-                    return $this->cacheableJson($cached, 'hit');
-                }
+                return $this->cacheQuestionsPayload($payload, $cacheStore, $cacheKey, $cacheTtl, [
+                    'org_id' => $orgId,
+                    'scale_code' => $resolvedScaleCode,
+                    'requested_scale_code' => $code,
+                    'form_code' => $resolvedFormCode,
+                    'locale' => $localeResolved,
+                    'region' => $region,
+                ]);
             }
 
             $loaded = $questionsService->loadByPack($packId, $dirVersion, $assetsBaseUrlOverride);
@@ -566,18 +612,14 @@ class ScalesController extends Controller
                     : $loaded['questions'],
             ] + $scaleCodeMeta;
 
-            if ($cacheKey !== null) {
-                $cacheStore->put($cacheKey, $payload, $cacheTtl);
-                $this->logCacheEvent('questions_miss', $cacheKey, [
-                    'org_id' => $orgId,
-                    'form_code' => $resolvedFormCode,
-                    'locale' => $locale,
-                    'region' => $region,
-                    'ttl' => $cacheTtl,
-                ]);
-            }
-
-            return $this->cacheableJson($payload, 'miss');
+            return $this->cacheQuestionsPayload($payload, $cacheStore, $cacheKey, $cacheTtl, [
+                'org_id' => $orgId,
+                'scale_code' => $resolvedScaleCode,
+                'requested_scale_code' => $code,
+                'form_code' => $resolvedFormCode,
+                'locale' => $locale,
+                'region' => $region,
+            ]);
         } catch (\Throwable $e) {
             if ($e instanceof ApiProblemException || $e instanceof ValidationException) {
                 throw $e;
@@ -956,9 +998,49 @@ class ScalesController extends Controller
     /**
      * @param  array<string,mixed>  $payload
      */
+    private function cacheQuestionsPayload(
+        array $payload,
+        CacheRepository $cacheStore,
+        ?string $cacheKey,
+        int $cacheTtl,
+        array $context = []
+    ): JsonResponse {
+        if ($cacheKey !== null) {
+            $cacheStore->put($cacheKey, $payload, $cacheTtl);
+            $this->logCacheEvent('questions_miss', $cacheKey, $context + [
+                'ttl' => $cacheTtl,
+            ]);
+        }
+
+        return $this->cacheableJson($payload, 'miss');
+    }
+
+    private function shouldCacheQuestionsResponse(string $scaleCode): bool
+    {
+        return in_array(strtoupper(trim($scaleCode)), [
+            'MBTI',
+            'BIG5_OCEAN',
+            'ENNEAGRAM',
+            'RIASEC',
+            'EQ_60',
+            'IQ_RAVEN',
+            'IQ_INTELLIGENCE_QUOTIENT',
+        ], true);
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     */
     private function cacheableJson(array $payload, string $state): JsonResponse
     {
         $response = response()->json($payload);
+        $maxAge = max(0, (int) config('content_packs.questions_public_cache_max_age_seconds', 300));
+        $staleWhileRevalidate = max(0, (int) config('content_packs.questions_public_cache_stale_while_revalidate_seconds', 600));
+        $cacheControl = 'public, max-age='.$maxAge;
+        if ($staleWhileRevalidate > 0) {
+            $cacheControl .= ', stale-while-revalidate='.$staleWhileRevalidate;
+        }
+        $response->headers->set('Cache-Control', $cacheControl);
         if ($this->shouldExposeCacheState()) {
             $response->headers->set(self::CACHE_DEBUG_HEADER, $state);
         }
@@ -980,6 +1062,6 @@ class ScalesController extends Controller
             return;
         }
 
-        Log::info('mbti.questions.cache.'.$event, ['cache_key' => $cacheKey] + $context);
+        Log::info('scale.questions.cache.'.$event, ['cache_key' => $cacheKey] + $context);
     }
 }

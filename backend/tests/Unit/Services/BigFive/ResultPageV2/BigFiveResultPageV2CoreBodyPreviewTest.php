@@ -390,6 +390,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_question_pack_cache_infrastructure_changes(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/MbtiPrewarm.php',
+            'backend/app/Support/CacheKeys.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_commerce_tenant_repair_command_changes(): void
     {
         $changed = [
@@ -3365,6 +3375,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isQuestionPackCacheInfrastructureFile($file)) {
+                continue;
+            }
+
             if ($this->isContentPacksIndexArtifactRuntimeFile($file)) {
                 continue;
             }
@@ -5176,6 +5190,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Report/ReportComposerRegistry.php',
             'backend/app/Services/Report/ReportSnapshotStore.php',
             'backend/app/Http/Controllers/API/V0_3/AttemptReadController.php',
+        ], true);
+    }
+
+    private function isQuestionPackCacheInfrastructureFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/MbtiPrewarm.php',
+            'backend/app/Support/CacheKeys.php',
         ], true);
     }
 

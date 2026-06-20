@@ -20,6 +20,8 @@ final class MbtiResponseCacheTest extends TestCase
         Config::set('content_packs.mbti_response_cache_store', 'array');
         Config::set('content_packs.mbti_lookup_cache_ttl_seconds', 600);
         Config::set('content_packs.mbti_questions_cache_ttl_seconds', 600);
+        Config::set('content_packs.questions_response_cache_store', 'array');
+        Config::set('content_packs.questions_response_cache_ttl_seconds', 600);
         Config::set('content_packs.loader_cache_store', 'array');
         Config::set('content_packs.loader_cache_ttl_seconds', 300);
 

@@ -83,6 +83,34 @@ final class CacheKeys
             .':assets='.$assetsMarker;
     }
 
+    public static function scaleQuestions(
+        int $orgId,
+        string $resolvedScaleCode,
+        string $requestedScaleCode,
+        string $packId,
+        string $dirVersion,
+        ?string $resolvedFormCode,
+        string $locale,
+        string $region,
+        ?string $assetsBaseUrlOverride = null,
+    ): string {
+        $assetsMarker = $assetsBaseUrlOverride === null || trim($assetsBaseUrlOverride) === ''
+            ? 'default'
+            : substr(hash('sha256', trim($assetsBaseUrlOverride)), 0, 12);
+
+        return self::base().':scale:questions'
+            .':org='.self::normalizeSegment((string) $orgId)
+            .':scale='.self::normalizeSegment($resolvedScaleCode)
+            .':requested='.self::normalizeSegment($requestedScaleCode)
+            .':pack='.self::normalizeSegment($packId)
+            .':dir='.self::normalizeSegment($dirVersion)
+            .':form='.self::normalizeSegment((string) ($resolvedFormCode ?? ''))
+            .':locale='.self::normalizeSegment($locale)
+            .':region='.self::normalizeSegment($region)
+            .':response='.self::responseScaleCodeMode()
+            .':assets='.$assetsMarker;
+    }
+
     public static function contentAsset(string $packPath, string $relPath): string
     {
         $packPath = trim($packPath);
