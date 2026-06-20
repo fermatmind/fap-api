@@ -195,6 +195,7 @@ final class SeoIntelGscReadModelControlledImportCanaryTest extends TestCase
         $rows = DB::connection('seo_intel')->table('seo_gsc_daily')->get();
         $this->assertCount(1, $rows);
         $this->assertSame('2026-06-17', (string) $rows[0]->report_date);
+        $this->assertSame($this->expectedIdempotencyKey(), $rows[0]->idempotency_key);
         $this->assertSame(hash('sha256', 'https://fermatmind.com/zh/articles/mbti-basics'), $rows[0]->canonical_url_hash);
         $this->assertNull($rows[0]->canonical_url);
         $this->assertSame(hash('sha256', 'mbti测试'), $rows[0]->query_hash);
@@ -229,6 +230,50 @@ final class SeoIntelGscReadModelControlledImportCanaryTest extends TestCase
         $this->assertSame(1, $payload['rows_skipped_existing'] ?? null);
         $this->assertSame(1, DB::connection('seo_intel')->table('seo_gsc_daily')->count());
         Http::assertNothingSent();
+    }
+
+    #[Test]
+    public function migration_backfills_idempotency_key_and_adds_unique_index_for_existing_rows(): void
+    {
+        Schema::connection('seo_intel')->drop('seo_gsc_daily');
+        $this->createSeoGscDailyTable(includeIdempotencyKey: false);
+
+        DB::connection('seo_intel')->table('seo_gsc_daily')->insert([
+            'report_date' => '2026-06-17',
+            'canonical_url_hash' => hash('sha256', 'https://fermatmind.com/zh/articles/mbti-basics'),
+            'canonical_url' => null,
+            'query_hash' => hash('sha256', 'mbti测试'),
+            'query_display_masked' => 'm****试',
+            'locale' => 'zh-CN',
+            'source_engine' => 'google',
+            'device' => null,
+            'country' => null,
+            'search_type' => 'web',
+            'clicks' => 0,
+            'impressions' => 60,
+            'ctr_ppm' => 0,
+            'average_position_milli' => 9000,
+            'is_brand_query' => false,
+            'query_type' => 'non_brand',
+            'data_state' => 'final',
+            'metadata_json' => json_encode(['data_origin' => 'live_gsc_api'], JSON_UNESCAPED_SLASHES),
+            'created_at' => now()->toDateTimeString(),
+            'updated_at' => now()->toDateTimeString(),
+        ]);
+
+        $migration = require base_path('database/migrations/seo_intel/2026_06_20_130000_add_idempotency_key_to_seo_gsc_daily_table.php');
+        $migration->up();
+
+        $row = DB::connection('seo_intel')->table('seo_gsc_daily')->first();
+        $this->assertSame($this->expectedIdempotencyKey(), $row->idempotency_key);
+
+        $indexes = DB::connection('seo_intel')->select("PRAGMA index_list('seo_gsc_daily')");
+        $uniqueIndexNames = array_map(
+            static fn (object $index): string => (bool) $index->unique ? (string) $index->name : '',
+            $indexes,
+        );
+
+        $this->assertContains('seo_gsc_daily_idempotency_key_unique', $uniqueIndexNames);
     }
 
     /**
@@ -319,10 +364,13 @@ final class SeoIntelGscReadModelControlledImportCanaryTest extends TestCase
         return $path;
     }
 
-    private function createSeoGscDailyTable(): void
+    private function createSeoGscDailyTable(bool $includeIdempotencyKey = true): void
     {
-        Schema::connection('seo_intel')->create('seo_gsc_daily', function (Blueprint $table): void {
+        Schema::connection('seo_intel')->create('seo_gsc_daily', function (Blueprint $table) use ($includeIdempotencyKey): void {
             $table->id();
+            if ($includeIdempotencyKey) {
+                $table->char('idempotency_key', 64)->nullable()->unique('seo_gsc_daily_idempotency_key_unique');
+            }
             $table->date('report_date');
             $table->char('canonical_url_hash', 64)->nullable();
             $table->text('canonical_url')->nullable();
@@ -344,5 +392,18 @@ final class SeoIntelGscReadModelControlledImportCanaryTest extends TestCase
             $table->json('metadata_json')->nullable();
             $table->timestamps();
         });
+    }
+
+    private function expectedIdempotencyKey(): string
+    {
+        return hash('sha256', implode('|', [
+            '2026-06-17',
+            hash('sha256', 'https://fermatmind.com/zh/articles/mbti-basics'),
+            hash('sha256', 'mbti测试'),
+            'google',
+            '',
+            '',
+            'web',
+        ]));
     }
 }
