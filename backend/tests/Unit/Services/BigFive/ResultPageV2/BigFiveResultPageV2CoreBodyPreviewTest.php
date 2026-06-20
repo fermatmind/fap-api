@@ -890,9 +890,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     public function test_runtime_freeze_classifier_ignores_seo_intel_gsc_foundation_files(): void
     {
         $changed = [
+            'backend/app/Console/Commands/SeoIntelGscReadModelImportDryRunCommand.php',
             'backend/app/Console/Commands/SeoIntelGscSidecarRunnerCommand.php',
             'backend/app/Services/SeoIntel/Collectors/GscCollector.php',
             'backend/app/Services/SeoIntel/GscReadonlyLiveAdapter.php',
+            'backend/app/Services/SeoIntel/GscReadModelArtifactDryRunImporter.php',
             'backend/app/Services/SeoIntel/GscDataQualityGate.php',
             'backend/app/Services/SeoIntel/GscQueryClassifier.php',
             'backend/app/Services/SeoIntel/GscSearchAnalyticsRowNormalizer.php',
@@ -4689,9 +4691,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isSeoIntelGscFoundationFile(string $file): bool
     {
         return in_array($file, [
+            'backend/app/Console/Commands/SeoIntelGscReadModelImportDryRunCommand.php',
             'backend/app/Console/Commands/SeoIntelGscSidecarRunnerCommand.php',
             'backend/app/Services/SeoIntel/Collectors/GscCollector.php',
             'backend/app/Services/SeoIntel/GscReadonlyLiveAdapter.php',
+            'backend/app/Services/SeoIntel/GscReadModelArtifactDryRunImporter.php',
             'backend/app/Services/SeoIntel/GscDataQualityGate.php',
             'backend/app/Services/SeoIntel/GscQueryClassifier.php',
             'backend/app/Services/SeoIntel/GscSearchAnalyticsRowNormalizer.php',
