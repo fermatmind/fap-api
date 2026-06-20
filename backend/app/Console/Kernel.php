@@ -171,6 +171,7 @@ use App\Console\Commands\SeedScaleRegistry;
 use App\Console\Commands\SeoAgentCodexReviewRunnerCommand;
 use App\Console\Commands\SeoAgentCmsDraftPackageDryRunCommand;
 use App\Console\Commands\SeoIntelSearchChannelQueueCommand;
+use App\Console\Commands\SeoAgentCmsFaqGapScanCommand;
 use App\Console\Commands\SeoAgentCmsTdkGapScanCommand;
 use App\Console\Commands\SeoAgentRuntimeSeoQaScanCommand;
 use App\Console\Commands\SeoIntelUrlTruthHandoffCommand;
@@ -363,6 +364,7 @@ class Kernel extends ConsoleKernel
         ArticleUpdateImageMetadata::class,
         ArticleWeeklySeoObservationExport::class,
         MediaAssetsImportSeoImageBundle::class,
+        SeoAgentCmsFaqGapScanCommand::class,
         SeoAgentCmsTdkGapScanCommand::class,
         SeoAgentCodexReviewRunnerCommand::class,
         SeoAgentCmsDraftPackageDryRunCommand::class,
