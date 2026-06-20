@@ -1,0 +1,89 @@
+{
+  "version": "gsc-readmodel-importer-dryrun.v1",
+  "task": "SEO-GSC-READMODEL-IMPORTER-DRYRUN-01",
+  "repo": "fap-api",
+  "command": "php artisan seo-intel:gsc-readmodel-import-dry-run",
+  "dry_run_required": true,
+  "write_mode_available": false,
+  "input": {
+    "artifact_kind": "sanitized_hk_gsc_sidecar_wrapper_artifact",
+    "required_status": "success",
+    "required_data_origin": "live_gsc_api",
+    "required_data_quality_gate": "pass",
+    "required_rows_path": "payload.metadata.safe_row_preview"
+  },
+  "target_table": {
+    "name": "seo_gsc_daily",
+    "status": "future_import_preview_only",
+    "write_allowed_in_this_pr": false
+  },
+  "validation": {
+    "forbidden_fields_checked_recursively": [
+      "raw_query",
+      "raw_url",
+      "query",
+      "page",
+      "canonical_url",
+      "url",
+      "credential_path",
+      "token",
+      "access_token",
+      "api_key",
+      "client_email",
+      "service_account_json",
+      "private_key",
+      "cookie",
+      "session",
+      "raw_payload"
+    ],
+    "required_false_flags": [
+      "payload.writes_attempted",
+      "payload.writes_committed",
+      "payload.metadata.writes_attempted",
+      "payload.metadata.writes_committed",
+      "payload.metadata.cms_write_allowed",
+      "payload.metadata.search_channel_enqueue_allowed",
+      "payload.metadata.indexing_request_allowed"
+    ],
+    "required_safe_row_fields": [
+      "report_date",
+      "canonical_url_hash",
+      "query_hash",
+      "source_engine",
+      "clicks",
+      "impressions"
+    ]
+  },
+  "preview_output": {
+    "schema_version": "gsc-readmodel-importer-dryrun.v1",
+    "dry_run": true,
+    "would_write": false,
+    "target_table": "seo_gsc_daily",
+    "rows_previewed": "bounded_1_to_250",
+    "canonical_url": "null_until_separate_backend_url_truth_join_is_approved",
+    "metadata_json": {
+      "data_origin": "live_gsc_api",
+      "row_source": "live_gsc_api",
+      "purchase_attribution_allowed": false,
+      "dry_run_import_preview": true
+    }
+  },
+  "negative_guarantees": {
+    "database_write": false,
+    "seo_gsc_daily_write": false,
+    "migration_added": false,
+    "scheduler_activation": false,
+    "queue_worker_activation": false,
+    "opportunity_queue_enqueue": false,
+    "cms_write": false,
+    "search_channel_enqueue": false,
+    "search_channel_submit": false,
+    "search_provider_submission": false,
+    "gsc_url_inspection_request_indexing": false,
+    "sitemap_submission": false,
+    "live_gsc_api_call": false,
+    "credential_read_print_or_store": false,
+    "production_env_change": false
+  },
+  "next_allowed_step": "Deploy dry-run command to sidecar runtime and run importer preflight against the latest sanitized live-read artifact; write-mode import, scheduler, opportunity queue, CMS, and search/indexing remain held."
+}
