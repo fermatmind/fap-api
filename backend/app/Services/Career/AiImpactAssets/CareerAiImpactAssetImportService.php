@@ -33,8 +33,9 @@ final class CareerAiImpactAssetImportService
         ?array $requestedSlugs = null,
         ?string $expectedSha256 = null,
         bool $allSlugsFromFile = false,
+        bool $enforcePreviewAllowlist = true,
     ): array {
-        $report = $this->baseReport($file, $requestedSlugs, $allSlugsFromFile);
+        $report = $this->baseReport($file, $requestedSlugs, $allSlugsFromFile, $enforcePreviewAllowlist);
         $errors = [];
 
         if (! is_file($file) || ! is_readable($file)) {
@@ -109,7 +110,7 @@ final class CareerAiImpactAssetImportService
 
         $targetSlugs = $allSlugsFromFile
             ? array_values(array_keys($slugsFromFile))
-            : $this->targetSlugs($requestedSlugs, $errors);
+            : $this->targetSlugs($requestedSlugs, $errors, $enforcePreviewAllowlist);
 
         $sourceFileSha256 = hash_file('sha256', $file) ?: null;
         $expectedSha256 = $this->normalizeSha256($expectedSha256);
@@ -169,6 +170,7 @@ final class CareerAiImpactAssetImportService
             'state_machine' => $this->stateMachine->report(),
             'target_slugs' => $targetSlugs,
             'all_slugs_from_file' => $allSlugsFromFile,
+            'preview_allowlist_enforced' => $enforcePreviewAllowlist,
             'career_job_bundle_authority' => $authorityReport,
             'projection_safety_gate' => $projectionSafetyReport,
             'production_import_allowed' => false,
@@ -543,6 +545,251 @@ final class CareerAiImpactAssetImportService
     }
 
     /**
+     * @param  list<string>|null  $requestedSlugs
+     * @return array<string, mixed>
+     */
+    public function importApprovedAssetsToProduction(
+        string $file,
+        ?array $requestedSlugs = null,
+        ?string $expectedSha256 = null,
+        bool $allSlugsFromFile = false,
+        string $approvalManifestFile = '',
+        ?string $expectedApprovalManifestSha256 = null,
+        string $editorialReviewReportFile = '',
+        ?string $expectedEditorialReviewSha256 = null,
+        bool $confirmed = false,
+    ): array {
+        $baseReport = $this->baseReport($file, $requestedSlugs, $allSlugsFromFile);
+        if (! $confirmed) {
+            return array_merge($baseReport, [
+                'mode' => 'production_import',
+                'status' => CareerJobAiImpactAsset::STATUS_PRODUCTION_IMPORTED,
+                'decision' => 'fail',
+                'approved_transition_performed' => false,
+                'production_import_allowed' => false,
+                'production_import_performed' => false,
+                'errors' => ['--confirm-production-import is required to import AI impact assets into production.'],
+            ]);
+        }
+
+        if ($this->normalizeSha256($expectedSha256) === null) {
+            return array_merge($baseReport, [
+                'mode' => 'production_import',
+                'status' => CareerJobAiImpactAsset::STATUS_PRODUCTION_IMPORTED,
+                'decision' => 'fail',
+                'approved_transition_performed' => false,
+                'production_import_allowed' => false,
+                'production_import_performed' => false,
+                'errors' => ['--expected-sha256 with the approved asset artifact SHA is required for production import.'],
+            ]);
+        }
+
+        $validation = $this->validateFile($file, $requestedSlugs, $expectedSha256, $allSlugsFromFile, false);
+        if (($validation['decision'] ?? null) !== 'pass') {
+            return array_merge($validation, [
+                'mode' => 'production_import',
+                'status' => CareerJobAiImpactAsset::STATUS_PRODUCTION_IMPORTED,
+                'production_import_allowed' => false,
+                'production_import_performed' => false,
+                'write_skipped_reason' => 'validation_failed',
+            ]);
+        }
+
+        $errors = [];
+        $sourceFileSha256 = is_string($validation['source_file_sha256'] ?? null)
+            ? (string) $validation['source_file_sha256']
+            : null;
+        $targetSlugs = array_values(array_map('strval', (array) ($validation['target_slugs'] ?? [])));
+        $expectedRows = (int) ($validation['expected_preview_rows'] ?? (count($targetSlugs) * 2));
+        $targetSlugCount = count($targetSlugs);
+
+        $approvalArtifact = $this->readJsonArtifact($approvalManifestFile, $expectedApprovalManifestSha256, 'approval manifest', $errors);
+        $editorialArtifact = $this->readJsonArtifact($editorialReviewReportFile, $expectedEditorialReviewSha256, 'editorial review report', $errors);
+        $approvalManifest = is_array($approvalArtifact['payload'] ?? null) ? $approvalArtifact['payload'] : [];
+        $editorialReview = is_array($editorialArtifact['payload'] ?? null) ? $editorialArtifact['payload'] : [];
+
+        $this->validateApprovalManifest($approvalManifest, $sourceFileSha256, $expectedRows, $targetSlugCount, $errors);
+        $this->validateEditorialReviewReport($editorialReview, $sourceFileSha256, $expectedRows, $targetSlugCount, $errors);
+
+        $assetVersion = CareerJobAiImpactAsset::ASSET_VERSION_V5;
+        $targetKeys = [];
+        foreach ($targetSlugs as $slug) {
+            foreach (['zh-CN', 'en'] as $locale) {
+                $targetKeys[$slug.'|'.$locale] = ['slug' => $slug, 'locale' => $locale];
+            }
+        }
+
+        $existingRows = CareerJobAiImpactAsset::query()
+            ->where('asset_version', $assetVersion)
+            ->whereIn('career_job_slug', $targetSlugs)
+            ->whereIn('locale', ['zh-CN', 'en'])
+            ->get();
+
+        $existingByKey = [];
+        foreach ($existingRows as $asset) {
+            $existingByKey[$asset->career_job_slug.'|'.$asset->locale] = $asset;
+        }
+
+        $rollbackRows = [];
+        $previousStatusCounts = [];
+        foreach ($targetKeys as $key => $target) {
+            $asset = $existingByKey[$key] ?? null;
+            $previousStatus = $asset instanceof CareerJobAiImpactAsset ? (string) $asset->status : 'missing';
+            $previousStatusCounts[$previousStatus] = (int) ($previousStatusCounts[$previousStatus] ?? 0) + 1;
+
+            if ($asset instanceof CareerJobAiImpactAsset) {
+                if (! in_array($previousStatus, [
+                    CareerJobAiImpactAsset::STATUS_APPROVED,
+                    CareerJobAiImpactAsset::STATUS_PRODUCTION_IMPORTED,
+                ], true)) {
+                    $errors[] = "{$target['slug']}/{$target['locale']}: production import requires approved source rows or an empty production target, found {$previousStatus}.";
+                }
+
+                if (is_string($asset->source_artifact_sha256) && $sourceFileSha256 !== null && $asset->source_artifact_sha256 !== $sourceFileSha256) {
+                    $errors[] = "{$target['slug']}/{$target['locale']}: existing source artifact SHA does not match the approved production artifact SHA.";
+                }
+            }
+
+            $rollbackRows[] = [
+                'slug' => $target['slug'],
+                'locale' => $target['locale'],
+                'previous_status' => $previousStatus,
+                'new_status' => CareerJobAiImpactAsset::STATUS_PRODUCTION_IMPORTED,
+            ];
+        }
+
+        if ($errors !== []) {
+            return array_merge($validation, [
+                'mode' => 'production_import',
+                'status' => CareerJobAiImpactAsset::STATUS_PRODUCTION_IMPORTED,
+                'decision' => 'fail',
+                'approved_transition_performed' => false,
+                'production_import_allowed' => false,
+                'production_import_performed' => false,
+                'approval_manifest_sha256' => $approvalArtifact['sha256'] ?? null,
+                'editorial_review_sha256' => $editorialArtifact['sha256'] ?? null,
+                'production_rows_touched' => 0,
+                'rollback_report' => [
+                    'available' => true,
+                    'target_key' => ['career_job_slug', 'locale', 'asset_version'],
+                    'previous_status_counts' => $previousStatusCounts,
+                    'rows' => $rollbackRows,
+                ],
+                'errors' => $errors,
+            ]);
+        }
+
+        $targetRows = $this->targetRowsFromFile($file, array_keys($targetKeys));
+        $importRunId = (string) Str::uuid();
+        $writtenCount = 0;
+        $createdCount = 0;
+        $updatedCount = 0;
+        $writtenRows = [];
+
+        DB::transaction(function () use (
+            $targetRows,
+            $assetVersion,
+            $sourceFileSha256,
+            $importRunId,
+            &$writtenCount,
+            &$createdCount,
+            &$updatedCount,
+            &$writtenRows
+        ): void {
+            foreach ($targetRows as $key => $row) {
+                $slug = $this->previewService->normalizeSlug((string) ($row['slug'] ?? ''));
+                $locale = $this->previewService->normalizeLocale((string) ($row['locale'] ?? ''));
+                $occupation = Occupation::query()->where('canonical_slug', $slug)->first();
+                if (! $occupation instanceof Occupation) {
+                    continue;
+                }
+
+                $existing = CareerJobAiImpactAsset::query()
+                    ->where('career_job_slug', $slug)
+                    ->where('locale', $locale)
+                    ->where('asset_version', $assetVersion)
+                    ->first();
+
+                CareerJobAiImpactAsset::query()->updateOrCreate(
+                    [
+                        'career_job_slug' => $slug,
+                        'locale' => $locale,
+                        'asset_version' => $assetVersion,
+                    ],
+                    [
+                        'occupation_id' => $occupation->id,
+                        'status' => CareerJobAiImpactAsset::STATUS_PRODUCTION_IMPORTED,
+                        'preview_allowlisted' => false,
+                        'asset_payload_json' => $row,
+                        'sources_json' => is_array($row['sources'] ?? null) ? $row['sources'] : null,
+                        'evidence_used_json' => is_array($row['evidence_used'] ?? null) ? $row['evidence_used'] : null,
+                        'derived_from_synthesis_json' => is_array($row['derived_from_synthesis'] ?? null) ? $row['derived_from_synthesis'] : null,
+                        'audit_fields_json' => is_array($row['audit_fields'] ?? null) ? $row['audit_fields'] : null,
+                        'asset_row_hash' => (string) (($row['audit_fields']['row_hash'] ?? '') ?: hash('sha256', json_encode($row, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?: '')),
+                        'source_artifact_sha256' => $sourceFileSha256,
+                        'evidence_artifact_sha256' => null,
+                        'synthesis_artifact_sha256' => null,
+                        'import_run_id' => $importRunId,
+                    ],
+                );
+
+                $writtenCount++;
+                if ($existing instanceof CareerJobAiImpactAsset) {
+                    $updatedCount++;
+                } else {
+                    $createdCount++;
+                }
+
+                $writtenRows[] = [
+                    'slug' => $slug,
+                    'locale' => $locale,
+                    'status' => CareerJobAiImpactAsset::STATUS_PRODUCTION_IMPORTED,
+                    'operation' => $existing instanceof CareerJobAiImpactAsset ? 'updated' : 'created',
+                    'key' => $key,
+                ];
+            }
+        });
+
+        $productionImportedCount = CareerJobAiImpactAsset::query()
+            ->where('asset_version', $assetVersion)
+            ->whereIn('career_job_slug', $targetSlugs)
+            ->whereIn('locale', ['zh-CN', 'en'])
+            ->where('status', CareerJobAiImpactAsset::STATUS_PRODUCTION_IMPORTED)
+            ->count();
+        $decision = $writtenCount === $expectedRows && $productionImportedCount === $expectedRows ? 'pass' : 'fail';
+
+        return array_merge($validation, [
+            'mode' => 'production_import',
+            'status' => CareerJobAiImpactAsset::STATUS_PRODUCTION_IMPORTED,
+            'decision' => $decision,
+            'approved_transition_performed' => false,
+            'production_import_allowed' => true,
+            'production_import_performed' => true,
+            'staging_write_performed' => false,
+            'import_run_id' => $importRunId,
+            'approval_manifest_file' => $approvalManifestFile,
+            'approval_manifest_sha256' => $approvalArtifact['sha256'] ?? null,
+            'editorial_review_report_file' => $editorialReviewReportFile,
+            'editorial_review_sha256' => $editorialArtifact['sha256'] ?? null,
+            'written_count' => $writtenCount,
+            'created_count' => $createdCount,
+            'updated_count' => $updatedCount,
+            'expected_written_count' => $expectedRows,
+            'production_imported_count' => $productionImportedCount,
+            'production_rows_touched' => $writtenCount,
+            'written_rows' => $writtenRows,
+            'rollback_report' => [
+                'available' => true,
+                'target_key' => ['career_job_slug', 'locale', 'asset_version'],
+                'previous_status_counts' => $previousStatusCounts,
+                'rows' => $rollbackRows,
+                'rollback_sql_intent' => 'Restore each row to previous_status, or delete rows whose previous_status was missing, by career_job_slug, locale, asset_version, and import_run_id if rollback is required.',
+            ],
+            'errors' => $decision === 'pass' ? [] : ['Production import row count invariant failed.'],
+        ]);
+    }
+
+    /**
      * @param  list<string>  $targetSlugs
      * @return array{checked_slug_count: int, ready_slug_count: int, rows: list<array<string, mixed>>}
      */
@@ -748,22 +995,30 @@ final class CareerAiImpactAssetImportService
      * @param  list<string>|null  $requestedSlugs
      * @return array<string, mixed>
      */
-    private function baseReport(string $file, ?array $requestedSlugs, bool $allSlugsFromFile): array
-    {
+    private function baseReport(
+        string $file,
+        ?array $requestedSlugs,
+        bool $allSlugsFromFile,
+        bool $enforcePreviewAllowlist = true,
+    ): array {
         return [
             'importer_version' => self::IMPORTER_VERSION,
             'asset_version' => 'career_risk_future_ai_impact_v5',
-            'status_policy' => 'dry_run_staging_preview_or_approved_transition_only_for_this_contract',
+            'status_policy' => 'dry_run_staging_preview_approved_transition_or_explicit_production_import',
             'production_import_allowed' => false,
             'production_import_gate' => [
-                'allowed' => false,
+                'allowed' => true,
                 'required_from_status' => 'approved',
-                'current_command_supports_production_import' => false,
+                'current_command_supports_production_import' => true,
+                'requires_confirm_production_import' => true,
+                'requires_exact_source_sha256' => true,
+                'requires_editorial_approval_artifacts' => true,
             ],
             'staging_write_supported' => true,
             'source_file' => $file,
             'requested_slugs' => $requestedSlugs,
             'all_slugs_from_file' => $allSlugsFromFile,
+            'preview_allowlist_enforced' => $enforcePreviewAllowlist,
         ];
     }
 
@@ -911,7 +1166,7 @@ final class CareerAiImpactAssetImportService
      * @param  list<string>  $errors
      * @return list<string>
      */
-    private function targetSlugs(?array $requestedSlugs, array &$errors): array
+    private function targetSlugs(?array $requestedSlugs, array &$errors, bool $enforcePreviewAllowlist = true): array
     {
         $allowlist = $this->previewService->previewSlugs();
         $target = $requestedSlugs === null || $requestedSlugs === []
@@ -921,9 +1176,11 @@ final class CareerAiImpactAssetImportService
                 $requestedSlugs
             )));
 
-        foreach ($target as $slug) {
-            if (! in_array($slug, $allowlist, true)) {
-                $errors[] = "{$slug}: slug is not in the AI Impact staging preview allowlist.";
+        if ($enforcePreviewAllowlist) {
+            foreach ($target as $slug) {
+                if (! in_array($slug, $allowlist, true)) {
+                    $errors[] = "{$slug}: slug is not in the AI Impact staging preview allowlist.";
+                }
             }
         }
 
@@ -953,7 +1210,50 @@ final class CareerAiImpactAssetImportService
             'dry_run_writes_database' => false,
             'staging_preview_write_supported_in_this_pr' => true,
             'production_import_requires_approved_status' => true,
+            'production_import_requires_exact_artifact_sha' => true,
+            'production_import_requires_explicit_confirmation' => true,
         ];
+    }
+
+    /**
+     * @param  list<string>  $targetKeys
+     * @return array<string, array<string, mixed>>
+     */
+    private function targetRowsFromFile(string $file, array $targetKeys): array
+    {
+        $targetKeyMap = array_fill_keys($targetKeys, true);
+        $rows = [];
+        $handle = fopen($file, 'rb');
+        if ($handle === false) {
+            return $rows;
+        }
+
+        while (($line = fgets($handle)) !== false) {
+            if (trim($line) === '') {
+                continue;
+            }
+
+            try {
+                $row = json_decode($line, true, 512, JSON_THROW_ON_ERROR);
+            } catch (Throwable) {
+                continue;
+            }
+
+            if (! is_array($row)) {
+                continue;
+            }
+
+            $slug = $this->previewService->normalizeSlug((string) ($row['slug'] ?? ''));
+            $locale = $this->previewService->normalizeLocale((string) ($row['locale'] ?? ''));
+            $key = $slug.'|'.$locale;
+            if (isset($targetKeyMap[$key])) {
+                $rows[$key] = $row;
+            }
+        }
+
+        fclose($handle);
+
+        return $rows;
     }
 
     private function normalizeSha256(?string $value): ?string
