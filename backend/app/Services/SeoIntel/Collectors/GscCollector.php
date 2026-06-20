@@ -261,11 +261,18 @@ final class GscCollector implements SeoIntelCollector
             'canonical_url_hash' => $row['canonical_url_hash'] ?? null,
             'query_hash' => $row['query_hash'] ?? null,
             'query_display_masked' => $row['query_display_masked'] ?? null,
+            'locale' => $row['locale'] ?? null,
             'source_engine' => $row['source_engine'] ?? null,
+            'device' => $row['device'] ?? null,
+            'country' => $row['country'] ?? null,
+            'search_type' => $row['search_type'] ?? null,
             'clicks' => $row['clicks'] ?? null,
             'impressions' => $row['impressions'] ?? null,
             'ctr_ppm' => $row['ctr_ppm'] ?? null,
             'average_position_milli' => $row['average_position_milli'] ?? null,
+            'is_brand_query' => $row['is_brand_query'] ?? null,
+            'query_type' => $row['query_type'] ?? null,
+            'data_state' => $row['data_state'] ?? null,
         ], array_slice($rows, 0, 3)));
     }
 }
