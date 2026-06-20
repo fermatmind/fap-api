@@ -174,6 +174,7 @@ use App\Console\Commands\SeoIntelSearchChannelQueueCommand;
 use App\Console\Commands\SeoAgentCmsFaqGapScanCommand;
 use App\Console\Commands\SeoAgentCmsTdkGapScanCommand;
 use App\Console\Commands\SeoAgentRuntimeSeoQaScanCommand;
+use App\Console\Commands\SeoAgentOpportunityAggregateCommand;
 use App\Console\Commands\SeoIntelUrlTruthHandoffCommand;
 use App\Console\Commands\StorageControlPlaneSnapshot;
 use App\Console\Commands\StorageInventory;
@@ -369,6 +370,7 @@ class Kernel extends ConsoleKernel
         SeoAgentCodexReviewRunnerCommand::class,
         SeoAgentCmsDraftPackageDryRunCommand::class,
         SeoAgentRuntimeSeoQaScanCommand::class,
+        SeoAgentOpportunityAggregateCommand::class,
         SeoIntelUrlTruthHandoffCommand::class,
         SeoIntelSearchChannelQueueCommand::class,
         ContentReleaseRevalidate::class,

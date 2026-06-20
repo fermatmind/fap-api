@@ -1,0 +1,69 @@
+{
+  "version": "seo-agent-opportunity-aggregate.v1",
+  "task": "SEO-AGENT-OPPORTUNITY-AGGREGATOR-01",
+  "repo": "fap-api",
+  "type": "readonly_opportunity_aggregate_contract",
+  "command": "php artisan seo-agent:opportunity-aggregate",
+  "input_schemas": [
+    "seo-agent-cms-tdk-gap-readonly-scanner.v1",
+    "seo-agent-runtime-seo-qa-readonly-scanner.v1",
+    "seo-agent-cms-faq-gap-readonly-scanner.v1",
+    "future_gsc_or_opportunity_queue_export_artifact"
+  ],
+  "output_schema": "seo-agent-opportunity-aggregate.v1",
+  "candidate_required_fields": [
+    "source_family",
+    "source_id",
+    "subject_type",
+    "subject_ref",
+    "safe_path",
+    "severity",
+    "score",
+    "dedupe_key",
+    "priority_rank",
+    "gap_types",
+    "evidence_refs"
+  ],
+  "dedupe_policy": "subject_type + subject_ref + source_family + sorted_gap_types",
+  "cross_source_same_subject_merge_allowed": false,
+  "ranking_policy": "severity desc, source weight desc, evidence count desc, dedupe key asc",
+  "source_weights": {
+    "runtime_seo_qa": 40,
+    "cms_tdk_gap": 30,
+    "cms_faq_gap": 20,
+    "gsc_performance": 10
+  },
+  "forbidden_input_or_output_fields": [
+    "raw_url",
+    "raw_query",
+    "full_url",
+    "credential_path",
+    "service_account_json",
+    "client_email",
+    "private_key",
+    "token",
+    "cookie",
+    "session",
+    "content_md",
+    "content_html",
+    "raw_html",
+    "cms_draft_body"
+  ],
+  "negative_guarantees": {
+    "database_write": false,
+    "cms_write": false,
+    "cms_publish": false,
+    "search_channel_enqueue": false,
+    "search_channel_submit": false,
+    "indexing_request": false,
+    "sitemap_submission": false,
+    "scheduler_activation": false,
+    "queue_worker_started": false,
+    "production_env_change": false,
+    "google_search_console_api_call": false,
+    "google_indexing_api_call": false,
+    "external_model_api_call": false,
+    "pr_train_metadata_change": false
+  },
+  "next_step": "Feed this aggregate artifact into a run orchestrator or Codex review handoff in a later PR; this PR does not execute downstream actions."
+}
