@@ -35,7 +35,7 @@ Raw URLs, raw queries, credentials, tokens, private paths, raw payloads, and CMS
 
 ## Scoring Boundary
 
-The expanded source contract is allowed to score and rank candidates, but not execute actions. Scores must remain explainable through evidence fields. A source candidate may only flow into GPT review or CMS draft dry-run after it is wrapped by `seo-agent-run-control-packet.v1`.
+The expanded source contract is allowed to score and rank candidates, but not execute actions. Scores must remain explainable through evidence fields. A source candidate may only flow into Codex review or CMS draft dry-run after it is wrapped by `seo-agent-run-control-packet.v1`.
 
 ## Execution Boundary
 

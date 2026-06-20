@@ -63,7 +63,7 @@ final class SeoAgentOpportunitySourceExpansionContractTest extends TestCase
 
         foreach ([
             'readonly_review',
-            'gpt_review_handoff',
+            'codex_review_handoff',
             'cms_draft_package_dry_run',
         ] as $allowedAction) {
             $this->assertContains($allowedAction, data_get($artifact, 'candidate_shape.allowed_actions_without_separate_approval', []), $allowedAction);
