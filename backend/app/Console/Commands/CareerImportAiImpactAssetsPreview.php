@@ -16,9 +16,14 @@ final class CareerImportAiImpactAssetsPreview extends Command
         {--slugs= : Optional comma-separated preview slug subset}
         {--all-slugs-from-file : Dry-run every slug found in the source JSONL instead of the configured preview allowlist}
         {--confirm-full-staging-preview : Explicitly confirm that --force may write every slug found in the source JSONL to staging_preview}
+        {--confirm-approved-transition : Explicitly confirm that --force may mark validated rows as approved}
+        {--approval-manifest= : Approval manifest JSON produced by the editorial review package}
+        {--approval-manifest-sha256= : Optional expected SHA-256 for the approval manifest}
+        {--editorial-review-report= : Editorial review JSON report that authorizes the approved transition}
+        {--editorial-review-sha256= : Optional expected SHA-256 for the editorial review report}
         {--dry-run : Validate only; do not write staging or production rows}
-        {--force : Write rows only when --status=staging_preview and validation passes}
-        {--status=staging_preview : Target import status; only staging_preview is supported by this command}
+        {--force : Write rows only when --status=staging_preview or perform explicit approved transition when --status=approved}
+        {--status=staging_preview : Target import status; staging_preview and approved are supported; production_imported is never supported here}
         {--json : Emit machine-readable JSON report}
         {--output= : Optional report output path}';
 
@@ -52,27 +57,46 @@ final class CareerImportAiImpactAssetsPreview extends Command
                 ], false);
             }
 
-            if ($force && (bool) $this->option('all-slugs-from-file') && ! (bool) $this->option('confirm-full-staging-preview')) {
+            if (
+                $force
+                && $status === 'staging_preview'
+                && (bool) $this->option('all-slugs-from-file')
+                && ! (bool) $this->option('confirm-full-staging-preview')
+            ) {
                 return $this->finish([
                     'decision' => 'fail',
                     'errors' => ['--force --all-slugs-from-file requires --confirm-full-staging-preview.'],
                 ], false);
             }
 
-            $report = $force
-                ? $this->importService->importStagingPreview(
+            if ($force && $status === 'approved') {
+                $report = $this->importService->approveReviewedAssets(
                     $file,
                     $this->requestedSlugs(),
                     trim((string) $this->option('expected-sha256')) ?: null,
                     (bool) $this->option('all-slugs-from-file'),
-                    $status,
-                )
-                : $this->importService->validateFile(
-                    $file,
-                    $this->requestedSlugs(),
-                    trim((string) $this->option('expected-sha256')) ?: null,
-                    (bool) $this->option('all-slugs-from-file'),
+                    trim((string) $this->option('approval-manifest')),
+                    trim((string) $this->option('approval-manifest-sha256')) ?: null,
+                    trim((string) $this->option('editorial-review-report')),
+                    trim((string) $this->option('editorial-review-sha256')) ?: null,
+                    (bool) $this->option('confirm-approved-transition'),
                 );
+            } else {
+                $report = $force
+                    ? $this->importService->importStagingPreview(
+                        $file,
+                        $this->requestedSlugs(),
+                        trim((string) $this->option('expected-sha256')) ?: null,
+                        (bool) $this->option('all-slugs-from-file'),
+                        $status,
+                    )
+                    : $this->importService->validateFile(
+                        $file,
+                        $this->requestedSlugs(),
+                        trim((string) $this->option('expected-sha256')) ?: null,
+                        (bool) $this->option('all-slugs-from-file'),
+                    );
+            }
 
             return $this->finish($report, ($report['decision'] ?? null) === 'pass');
         } catch (Throwable $throwable) {
