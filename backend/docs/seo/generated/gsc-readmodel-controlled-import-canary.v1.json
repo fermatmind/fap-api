@@ -9,7 +9,7 @@
   "default_mode": "dry_run_canary_plan",
   "execute_requires": [
     "--execute",
-    "--limit=1",
+    "--limit=1..10",
     "--confirm-artifact-sha256=<artifact_sha256>",
     "--confirm-write=<exact_generated_confirmation_phrase>",
     "--json"
@@ -20,13 +20,16 @@
     "required_data_origin": "live_gsc_api",
     "required_data_quality_gate": "pass",
     "required_rows_path": "payload.metadata.safe_row_preview",
-    "max_rows_per_execution": 1
+    "max_rows_per_execution": 10
   },
   "validation": {
     "dry_run_importer_must_pass": true,
     "artifact_sha256_confirmation_required": true,
     "exact_write_confirmation_required": true,
-    "limit_must_equal": 1,
+    "limit_must_be_between": [
+      1,
+      10
+    ],
     "forbidden_fields_rejected_recursively": [
       "raw_query",
       "raw_url",
@@ -58,11 +61,13 @@
   "target": {
     "connection": "seo_intel",
     "table": "seo_gsc_daily",
-    "write_scope": "single_row_canary_only",
+    "write_scope": "controlled_batch10_canary_only",
     "canonical_url_policy": "null_until_separate_backend_url_truth_join_is_approved",
-    "migration_added_in_this_pr": true,
-    "migration_scope": "seo_gsc_daily.idempotency_key only",
-    "unique_index_added_in_this_pr": true,
+    "migration_added_in_this_pr": false,
+    "idempotency_migration_available": true,
+    "idempotency_migration_scope": "seo_gsc_daily.idempotency_key only",
+    "unique_index_added_in_this_pr": false,
+    "unique_index_available": true,
     "unique_index": "seo_gsc_daily_idempotency_key_unique"
   },
   "idempotency": {
@@ -99,7 +104,9 @@
       "writes_attempted",
       "writes_committed",
       "rows_inserted",
-      "rows_skipped_existing"
+      "rows_skipped_existing",
+      "rows_failed",
+      "max_rows_per_execution"
     ]
   },
   "negative_guarantees": {
@@ -119,8 +126,8 @@
     "production_env_change": false
   },
   "held_after_this_pr": [
-    "production execute canary until separate explicit approval",
-    "batch read model import",
+    "production execute batch10 canary until separate explicit approval",
+    "batch import above 10 rows",
     "scheduler activation",
     "opportunity queue execution",
     "CMS draft package",

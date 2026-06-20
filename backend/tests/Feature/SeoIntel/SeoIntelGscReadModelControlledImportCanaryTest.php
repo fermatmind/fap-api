@@ -151,20 +151,42 @@ final class SeoIntelGscReadModelControlledImportCanaryTest extends TestCase
     }
 
     #[Test]
-    public function canary_fails_closed_when_limit_is_not_exactly_one(): void
+    public function canary_fails_closed_when_limit_exceeds_batch10(): void
     {
         Http::fake();
         $artifactPath = $this->writeArtifact($this->validArtifact());
 
         [$exitCode, $payload] = $this->runCanaryCommand([
             '--artifact' => $artifactPath,
-            '--limit' => 2,
+            '--limit' => 11,
             '--json' => true,
         ]);
 
         $this->assertSame(1, $exitCode);
         $this->assertSame('blocked', $payload['status'] ?? null);
-        $this->assertSame(['limit_must_be_exactly_1'], $payload['issues'] ?? null);
+        $this->assertSame(['limit_must_be_between_1_and_10'], $payload['issues'] ?? null);
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_gsc_daily')->count());
+        Http::assertNothingSent();
+    }
+
+    #[Test]
+    public function dry_run_can_preview_batch10_without_database_write(): void
+    {
+        Http::fake();
+        $artifactPath = $this->writeArtifact($this->validArtifact(rowCount: 10));
+
+        [$exitCode, $payload] = $this->runCanaryCommand([
+            '--artifact' => $artifactPath,
+            '--limit' => 10,
+            '--json' => true,
+        ]);
+
+        $this->assertSame(0, $exitCode);
+        $this->assertSame('success', $payload['status'] ?? null);
+        $this->assertSame(10, $payload['rows_would_insert'] ?? null);
+        $this->assertSame(10, $payload['rows_previewed'] ?? null);
+        $this->assertSame(10, $payload['max_rows_per_execution'] ?? null);
+        $this->assertStringContainsString('at most 10 rows', (string) ($payload['required_confirmation_phrase'] ?? ''));
         $this->assertSame(0, DB::connection('seo_intel')->table('seo_gsc_daily')->count());
         Http::assertNothingSent();
     }
@@ -196,12 +218,12 @@ final class SeoIntelGscReadModelControlledImportCanaryTest extends TestCase
         $this->assertCount(1, $rows);
         $this->assertSame('2026-06-17', (string) $rows[0]->report_date);
         $this->assertSame($this->expectedIdempotencyKey(), $rows[0]->idempotency_key);
-        $this->assertSame(hash('sha256', 'https://fermatmind.com/zh/articles/mbti-basics'), $rows[0]->canonical_url_hash);
+        $this->assertSame(hash('sha256', 'https://fermatmind.com/zh/articles/mbti-basics-0'), $rows[0]->canonical_url_hash);
         $this->assertNull($rows[0]->canonical_url);
-        $this->assertSame(hash('sha256', 'mbti测试'), $rows[0]->query_hash);
+        $this->assertSame(hash('sha256', 'mbti测试0'), $rows[0]->query_hash);
         $this->assertSame('m****试', $rows[0]->query_display_masked);
         $this->assertSame(60, (int) $rows[0]->impressions);
-        $this->assertStringNotContainsString('mbti测试', json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR));
+        $this->assertStringNotContainsString('mbti测试0', json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR));
         Http::assertNothingSent();
     }
 
@@ -233,6 +255,67 @@ final class SeoIntelGscReadModelControlledImportCanaryTest extends TestCase
     }
 
     #[Test]
+    public function execute_inserts_batch10_and_reports_rows_failed_empty(): void
+    {
+        Http::fake();
+        $artifactPath = $this->writeArtifact($this->validArtifact(rowCount: 10));
+        $sha256 = (string) hash_file('sha256', $artifactPath);
+
+        [$exitCode, $payload] = $this->runCanaryCommand([
+            '--artifact' => $artifactPath,
+            '--limit' => 10,
+            '--confirm-artifact-sha256' => $sha256,
+            '--confirm-write' => app(GscReadModelControlledImportCanary::class)->confirmationPhrase($sha256, 10),
+            '--execute' => true,
+            '--json' => true,
+        ]);
+
+        $this->assertSame(0, $exitCode);
+        $this->assertSame('success', $payload['status'] ?? null);
+        $this->assertTrue((bool) ($payload['writes_committed'] ?? false));
+        $this->assertSame(10, $payload['rows_inserted'] ?? null);
+        $this->assertSame(0, $payload['rows_skipped_existing'] ?? null);
+        $this->assertSame([], $payload['rows_failed'] ?? null);
+        $this->assertSame(10, DB::connection('seo_intel')->table('seo_gsc_daily')->count());
+        Http::assertNothingSent();
+    }
+
+    #[Test]
+    public function execute_batch10_skips_existing_rows_by_idempotency_key(): void
+    {
+        Http::fake();
+        $artifactPath = $this->writeArtifact($this->validArtifact(rowCount: 10));
+        $sha256 = (string) hash_file('sha256', $artifactPath);
+        $canary = app(GscReadModelControlledImportCanary::class);
+        $arguments = [
+            '--artifact' => $artifactPath,
+            '--limit' => 10,
+            '--confirm-artifact-sha256' => $sha256,
+            '--confirm-write' => $canary->confirmationPhrase($sha256, 10),
+            '--execute' => true,
+            '--json' => true,
+        ];
+
+        $this->runCanaryCommand([
+            '--artifact' => $artifactPath,
+            '--limit' => 1,
+            '--confirm-artifact-sha256' => $sha256,
+            '--confirm-write' => $canary->confirmationPhrase($sha256, 1),
+            '--execute' => true,
+            '--json' => true,
+        ]);
+        [$exitCode, $payload] = $this->runCanaryCommand($arguments);
+
+        $this->assertSame(0, $exitCode);
+        $this->assertSame('success', $payload['status'] ?? null);
+        $this->assertTrue((bool) ($payload['writes_committed'] ?? false));
+        $this->assertSame(9, $payload['rows_inserted'] ?? null);
+        $this->assertSame(1, $payload['rows_skipped_existing'] ?? null);
+        $this->assertSame(10, DB::connection('seo_intel')->table('seo_gsc_daily')->count());
+        Http::assertNothingSent();
+    }
+
+    #[Test]
     public function migration_backfills_idempotency_key_and_adds_unique_index_for_existing_rows(): void
     {
         Schema::connection('seo_intel')->drop('seo_gsc_daily');
@@ -240,9 +323,9 @@ final class SeoIntelGscReadModelControlledImportCanaryTest extends TestCase
 
         DB::connection('seo_intel')->table('seo_gsc_daily')->insert([
             'report_date' => '2026-06-17',
-            'canonical_url_hash' => hash('sha256', 'https://fermatmind.com/zh/articles/mbti-basics'),
+            'canonical_url_hash' => hash('sha256', 'https://fermatmind.com/zh/articles/mbti-basics-0'),
             'canonical_url' => null,
-            'query_hash' => hash('sha256', 'mbti测试'),
+            'query_hash' => hash('sha256', 'mbti测试0'),
             'query_display_masked' => 'm****试',
             'locale' => 'zh-CN',
             'source_engine' => 'google',
@@ -295,7 +378,7 @@ final class SeoIntelGscReadModelControlledImportCanaryTest extends TestCase
     /**
      * @return array<string, mixed>
      */
-    private function validArtifact(): array
+    private function validArtifact(int $rowCount = 1): array
     {
         return [
             'schema_version' => 'gsc-hk-sidecar-runner-wrapper.v1',
@@ -320,24 +403,10 @@ final class SeoIntelGscReadModelControlledImportCanaryTest extends TestCase
                         'status' => 'pass',
                         'opportunity_queue_eligible' => true,
                     ],
-                    'safe_row_preview' => [[
-                        'report_date' => '2026-06-17',
-                        'canonical_url_hash' => hash('sha256', 'https://fermatmind.com/zh/articles/mbti-basics'),
-                        'query_hash' => hash('sha256', 'mbti测试'),
-                        'query_display_masked' => 'm****试',
-                        'locale' => 'zh-CN',
-                        'source_engine' => 'google',
-                        'device' => null,
-                        'country' => null,
-                        'search_type' => 'web',
-                        'clicks' => 0,
-                        'impressions' => 60,
-                        'ctr_ppm' => 0,
-                        'average_position_milli' => 9000,
-                        'is_brand_query' => false,
-                        'query_type' => 'non_brand',
-                        'data_state' => 'final',
-                    ]],
+                    'safe_row_preview' => array_map(
+                        fn (int $index): array => $this->safeRow($index),
+                        range(0, $rowCount - 1),
+                    ),
                     'opportunity_queue_eligible' => false,
                     'cms_write_allowed' => false,
                     'search_channel_enqueue_allowed' => false,
@@ -348,6 +417,31 @@ final class SeoIntelGscReadModelControlledImportCanaryTest extends TestCase
                     'queue_worker_enabled' => false,
                 ],
             ],
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function safeRow(int $index): array
+    {
+        return [
+            'report_date' => '2026-06-17',
+            'canonical_url_hash' => hash('sha256', 'https://fermatmind.com/zh/articles/mbti-basics-'.$index),
+            'query_hash' => hash('sha256', 'mbti测试'.$index),
+            'query_display_masked' => 'm****试',
+            'locale' => 'zh-CN',
+            'source_engine' => 'google',
+            'device' => null,
+            'country' => null,
+            'search_type' => 'web',
+            'clicks' => 0,
+            'impressions' => 60 + $index,
+            'ctr_ppm' => 0,
+            'average_position_milli' => 9000 + $index,
+            'is_brand_query' => false,
+            'query_type' => 'non_brand',
+            'data_state' => 'final',
         ];
     }
 
@@ -398,8 +492,8 @@ final class SeoIntelGscReadModelControlledImportCanaryTest extends TestCase
     {
         return hash('sha256', implode('|', [
             '2026-06-17',
-            hash('sha256', 'https://fermatmind.com/zh/articles/mbti-basics'),
-            hash('sha256', 'mbti测试'),
+            hash('sha256', 'https://fermatmind.com/zh/articles/mbti-basics-0'),
+            hash('sha256', 'mbti测试0'),
             'google',
             '',
             '',
