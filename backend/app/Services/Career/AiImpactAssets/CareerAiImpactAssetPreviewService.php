@@ -42,7 +42,11 @@ final class CareerAiImpactAssetPreviewService
             ->where('career_job_slug', $normalizedSlug)
             ->where('locale', $normalizedLocale)
             ->where('asset_version', CareerJobAiImpactAsset::ASSET_VERSION_V5)
-            ->where('status', CareerJobAiImpactAsset::STATUS_STAGING_PREVIEW)
+            ->whereIn('status', [
+                CareerJobAiImpactAsset::STATUS_STAGING_PREVIEW,
+                CareerJobAiImpactAsset::STATUS_EDITORIAL_REVIEW,
+                CareerJobAiImpactAsset::STATUS_APPROVED,
+            ])
             ->where('preview_allowlisted', true)
             ->first();
     }

@@ -233,6 +233,154 @@ final class CareerAiImpactAssetPreviewImportTest extends TestCase
         $this->assertStringContainsString('Only staging_preview status is supported', implode(' ', $decoded['errors']));
     }
 
+    public function test_importer_force_approved_requires_explicit_manifest_and_confirmation(): void
+    {
+        $this->seedCareerJobBundleAuthority('accountants-and-auditors');
+        $file = $this->writeJsonl([
+            $this->assetRow('accountants-and-auditors', 'zh-CN'),
+            $this->assetRow('accountants-and-auditors', 'en'),
+        ]);
+        $report = storage_path('framework/testing/ai-impact-approved-requires-manifest.json');
+
+        $exitCode = Artisan::call('career:ai-impact-assets-import-preview', [
+            '--file' => $file,
+            '--slugs' => 'accountants-and-auditors',
+            '--force' => true,
+            '--status' => CareerJobAiImpactAsset::STATUS_APPROVED,
+            '--output' => $report,
+        ]);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertDatabaseCount('career_job_ai_impact_assets', 0);
+        $decoded = json_decode((string) file_get_contents($report), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertSame('fail', $decoded['decision']);
+        $this->assertFalse((bool) $decoded['production_import_allowed']);
+        $this->assertFalse((bool) $decoded['approved_transition_performed']);
+        $this->assertStringContainsString('--confirm-approved-transition is required', implode(' ', $decoded['errors']));
+
+        $missingArtifactReport = storage_path('framework/testing/ai-impact-approved-requires-artifacts.json');
+        $exitCode = Artisan::call('career:ai-impact-assets-import-preview', [
+            '--file' => $file,
+            '--slugs' => 'accountants-and-auditors',
+            '--force' => true,
+            '--status' => CareerJobAiImpactAsset::STATUS_APPROVED,
+            '--confirm-approved-transition' => true,
+            '--output' => $missingArtifactReport,
+        ]);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertDatabaseCount('career_job_ai_impact_assets', 0);
+        $decoded = json_decode((string) file_get_contents($missingArtifactReport), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertSame('fail', $decoded['decision']);
+        $this->assertFalse((bool) $decoded['approved_transition_performed']);
+        $this->assertStringContainsString('Approval manifest file is required', implode(' ', $decoded['errors']));
+        $this->assertStringContainsString('Editorial review report file is required', implode(' ', $decoded['errors']));
+    }
+
+    public function test_importer_force_approved_marks_existing_reviewed_rows_without_touching_production(): void
+    {
+        Config::set('career_ai_impact_assets.staging_preview_enabled', true);
+        Config::set('career_ai_impact_assets.preview_slugs', ['accountants-and-auditors', 'actuaries']);
+        $this->seedCareerJobBundleAuthorities(['accountants-and-auditors', 'actuaries']);
+
+        $zhRow = $this->assetRow('accountants-and-auditors', 'zh-CN');
+        $enRow = $this->assetRow('accountants-and-auditors', 'en');
+        $file = $this->writeJsonl([$zhRow, $enRow]);
+        $assetSha = hash_file('sha256', $file);
+        $approvalManifest = $this->writeJsonArtifact($this->approvalManifest($assetSha, 2, 1));
+        $editorialReview = $this->writeJsonArtifact($this->editorialReviewReport($assetSha, 2, 1));
+        $approvalSha = hash_file('sha256', $approvalManifest);
+        $editorialSha = hash_file('sha256', $editorialReview);
+
+        $occupation = Occupation::query()->where('canonical_slug', 'accountants-and-auditors')->firstOrFail();
+        foreach ([$zhRow, $enRow] as $row) {
+            CareerJobAiImpactAsset::query()->create([
+                'occupation_id' => $occupation->id,
+                'career_job_slug' => 'accountants-and-auditors',
+                'locale' => $row['locale'],
+                'asset_version' => CareerJobAiImpactAsset::ASSET_VERSION_V5,
+                'status' => CareerJobAiImpactAsset::STATUS_EDITORIAL_REVIEW,
+                'preview_allowlisted' => true,
+                'asset_payload_json' => $row,
+                'sources_json' => $row['sources'],
+                'evidence_used_json' => $row['evidence_used'],
+                'derived_from_synthesis_json' => $row['derived_from_synthesis'],
+                'audit_fields_json' => $row['audit_fields'],
+                'asset_row_hash' => $row['audit_fields']['row_hash'],
+                'source_artifact_sha256' => $assetSha,
+            ]);
+        }
+
+        $productionOccupation = Occupation::query()->where('canonical_slug', 'actuaries')->firstOrFail();
+        $productionRow = $this->assetRow('actuaries', 'en');
+        CareerJobAiImpactAsset::query()->create([
+            'occupation_id' => $productionOccupation->id,
+            'career_job_slug' => 'actuaries',
+            'locale' => 'en',
+            'asset_version' => CareerJobAiImpactAsset::ASSET_VERSION_V5,
+            'status' => CareerJobAiImpactAsset::STATUS_PRODUCTION_IMPORTED,
+            'preview_allowlisted' => false,
+            'asset_payload_json' => $productionRow,
+            'sources_json' => $productionRow['sources'],
+            'evidence_used_json' => $productionRow['evidence_used'],
+            'derived_from_synthesis_json' => $productionRow['derived_from_synthesis'],
+            'audit_fields_json' => $productionRow['audit_fields'],
+            'asset_row_hash' => $productionRow['audit_fields']['row_hash'],
+        ]);
+
+        $report = storage_path('framework/testing/ai-impact-approved-transition.json');
+        $exitCode = Artisan::call('career:ai-impact-assets-import-preview', [
+            '--file' => $file,
+            '--slugs' => 'accountants-and-auditors',
+            '--expected-sha256' => $assetSha,
+            '--force' => true,
+            '--status' => CareerJobAiImpactAsset::STATUS_APPROVED,
+            '--confirm-approved-transition' => true,
+            '--approval-manifest' => $approvalManifest,
+            '--approval-manifest-sha256' => $approvalSha,
+            '--editorial-review-report' => $editorialReview,
+            '--editorial-review-sha256' => $editorialSha,
+            '--output' => $report,
+        ]);
+
+        $this->assertSame(0, $exitCode);
+        $this->assertDatabaseCount('career_job_ai_impact_assets', 3);
+        $this->assertDatabaseHas('career_job_ai_impact_assets', [
+            'career_job_slug' => 'accountants-and-auditors',
+            'locale' => 'zh-CN',
+            'asset_version' => CareerJobAiImpactAsset::ASSET_VERSION_V5,
+            'status' => CareerJobAiImpactAsset::STATUS_APPROVED,
+        ]);
+        $this->assertDatabaseHas('career_job_ai_impact_assets', [
+            'career_job_slug' => 'accountants-and-auditors',
+            'locale' => 'en',
+            'asset_version' => CareerJobAiImpactAsset::ASSET_VERSION_V5,
+            'status' => CareerJobAiImpactAsset::STATUS_APPROVED,
+        ]);
+        $this->assertDatabaseHas('career_job_ai_impact_assets', [
+            'career_job_slug' => 'actuaries',
+            'locale' => 'en',
+            'asset_version' => CareerJobAiImpactAsset::ASSET_VERSION_V5,
+            'status' => CareerJobAiImpactAsset::STATUS_PRODUCTION_IMPORTED,
+        ]);
+
+        $decoded = json_decode((string) file_get_contents($report), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertSame('pass', $decoded['decision']);
+        $this->assertSame('approved_transition', $decoded['mode']);
+        $this->assertSame(2, $decoded['approved_count']);
+        $this->assertSame(0, $decoded['production_rows_touched']);
+        $this->assertFalse((bool) $decoded['production_import_allowed']);
+        $this->assertFalse((bool) $decoded['production_import_performed']);
+        $this->assertTrue((bool) $decoded['rollback_report']['available']);
+        $this->assertSame([CareerJobAiImpactAsset::STATUS_EDITORIAL_REVIEW => 2], $decoded['rollback_report']['previous_status_counts']);
+
+        $this->getJson('/api/v0.5/career/jobs/accountants-and-auditors/ai-impact-asset?locale=en')
+            ->assertOk()
+            ->assertJsonPath('ai_impact_asset_v1.slug', 'accountants-and-auditors')
+            ->assertJsonMissingPath('ai_impact_asset_v1.evidence_used')
+            ->assertJsonMissingPath('ai_impact_asset_v1.search_projection');
+    }
+
     public function test_importer_dry_run_rejects_unexpected_source_sha(): void
     {
         $this->seedCareerJobBundleAuthority('accountants-and-auditors');
@@ -594,6 +742,67 @@ final class CareerAiImpactAssetPreviewImportTest extends TestCase
         )));
 
         return $path;
+    }
+
+    /**
+     * @param  array<string, mixed>  $payload
+     */
+    private function writeJsonArtifact(array $payload): string
+    {
+        $path = storage_path('framework/testing/ai-impact-artifact-'.bin2hex(random_bytes(4)).'.json');
+        $dir = dirname($path);
+        if (! is_dir($dir)) {
+            mkdir($dir, 0775, true);
+        }
+
+        file_put_contents($path, json_encode($payload, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT).PHP_EOL);
+
+        return $path;
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function approvalManifest(string $assetSha, int $rows, int $slugs): array
+    {
+        return [
+            'schema_version' => 'career_ai_impact_v5_approval_manifest_v1',
+            'final_conclusion' => 'AI_IMPACT_V5_EDITORIAL_REVIEW_PASS',
+            'production_import_allowed' => false,
+            'next_allowed_transition' => CareerJobAiImpactAsset::STATUS_APPROVED,
+            'approved_rows' => $rows,
+            'rejected_rows' => 0,
+            'unique_slugs' => $slugs,
+            'final_repaired_asset_sha256' => $assetSha,
+            'required_for_approved_transition' => [
+                'asset_sha256' => $assetSha,
+                'row_count' => $rows,
+                'slug_count' => $slugs,
+            ],
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function editorialReviewReport(string $assetSha, int $rows, int $slugs): array
+    {
+        return [
+            'schema_version' => 'career_ai_impact_v5_editorial_review_package_v1',
+            'final_conclusion' => 'AI_IMPACT_V5_EDITORIAL_REVIEW_PASS',
+            'inputs' => [
+                'final_repaired_asset_sha256' => $assetSha,
+            ],
+            'metrics' => [
+                'asset_rows' => $rows,
+                'unique_slugs' => $slugs,
+                'findings' => 0,
+                'rejected_rows' => 0,
+            ],
+            'guarantees' => [
+                'no_production_import' => true,
+            ],
+        ];
     }
 
     /**
