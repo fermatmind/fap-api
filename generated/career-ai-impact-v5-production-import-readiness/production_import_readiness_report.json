@@ -1,0 +1,52 @@
+{
+  "final_conclusion": "READY_FOR_PRODUCTION_IMPORT_APPROVAL",
+  "generated_at_utc": "2026-06-20T02:38:54.953488+00:00",
+  "scope": "read_only_production_import_readiness_for_ai_impact_v5_1046",
+  "production_import_performed": false,
+  "production_rows_touched": 0,
+  "production_dry_run": {
+    "decision": "pass",
+    "mode": "dry_run",
+    "total_jsonl_lines": 2092,
+    "target_slug_count": 1046,
+    "validated_preview_rows": 2092,
+    "expected_preview_rows": 2092,
+    "source_file_sha256": "f22e0266f9b8aa904b00466c9cf751efa72835aebcee41c959d454ffacf96a92",
+    "source_file_sha256_match": true,
+    "duplicate_key_count": 0,
+    "authority_error_count": 0,
+    "projection_error_count": 0,
+    "error_count": 0,
+    "staging_write_performed": false,
+    "production_import_allowed_by_current_command": false
+  },
+  "staging_approved_source": {
+    "decision": "pass",
+    "mode": "approved_transition",
+    "approved_transition_performed": true,
+    "approved_count": 2092,
+    "expected_approved_count": 2092,
+    "approval_manifest_sha256": "f07686a30aba34452b9c6faecd1367b003ad19dd17d6896020d3e9e091753646",
+    "editorial_review_sha256": "be3a5810b2cdd54a726150c7024c14ec806aacea8f870f919b80e67e4fba22cb",
+    "source_file_sha256": "f22e0266f9b8aa904b00466c9cf751efa72835aebcee41c959d454ffacf96a92",
+    "production_import_allowed": false,
+    "production_import_performed": false,
+    "production_rows_touched": 0,
+    "rollback_available": true,
+    "rollback_previous_status_counts": {
+      "staging_preview": 2092
+    }
+  },
+  "manual_approval_required": {
+    "required_phrase": "批准 AI Impact v5 1046 production import, using SHA f22e0266f9b8aa904b00466c9cf751efa72835aebcee41c959d454ffacf96a92",
+    "asset_sha256": "f22e0266f9b8aa904b00466c9cf751efa72835aebcee41c959d454ffacf96a92",
+    "approval_manifest_sha256": "f07686a30aba34452b9c6faecd1367b003ad19dd17d6896020d3e9e091753646",
+    "editorial_review_sha256": "be3a5810b2cdd54a726150c7024c14ec806aacea8f870f919b80e67e4fba22cb",
+    "note": "Do not run production import until the user provides this exact approval in a future turn."
+  },
+  "deferred_items": [
+    "production import execution",
+    "post-import SEO safety audit",
+    "runtime sitemap/llms/canonical/noindex/schema changes"
+  ]
+}
