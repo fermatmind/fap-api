@@ -173,6 +173,14 @@ final class SeoDashApi01ReadOnlyApiContractTest extends TestCase
     public function opportunity_queue_endpoint_is_gsc_quality_gated_and_read_only(): void
     {
         $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_SEO_INTEL_READ]);
+        $queueArtifact = $this->opportunityQueueArtifact();
+
+        $this->assertFalse((bool) data_get($queueArtifact, 'sidecar_artifact_boundary.direct_sidecar_artifact_consumption_allowed', true));
+        $this->assertSame(
+            'seo_intel read model rows after gsc data_quality_gate=pass',
+            data_get($queueArtifact, 'sidecar_artifact_boundary.allowed_source'),
+        );
+        $this->assertFalse((bool) data_get($queueArtifact, 'sidecar_artifact_boundary.queue_item_creation_allowed', true));
 
         $response = $this->actingAs($admin, (string) config('admin.guard', 'admin'))
             ->getJson('/api/v0.5/ops/seo-intel/opportunity-queue?limit=5')
@@ -273,6 +281,22 @@ final class SeoDashApi01ReadOnlyApiContractTest extends TestCase
     private function artifact(): array
     {
         $path = base_path('docs/seo/generated/seo-dash-api-01-readonly-api-contract.v1.json');
+
+        $this->assertFileExists($path);
+
+        $decoded = json_decode((string) file_get_contents($path), true);
+
+        $this->assertIsArray($decoded);
+
+        return $decoded;
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function opportunityQueueArtifact(): array
+    {
+        $path = base_path('docs/seo/generated/seo-opportunity-queue-readonly.v1.json');
 
         $this->assertFileExists($path);
 
