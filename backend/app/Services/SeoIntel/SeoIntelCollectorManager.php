@@ -126,6 +126,7 @@ final class SeoIntelCollectorManager
                     new GscQueryClassifier,
                 ),
                 new GscDataQualityGate,
+                new GscReadonlyLiveAdapter,
             );
         }
 

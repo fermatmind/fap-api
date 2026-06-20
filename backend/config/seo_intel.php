@@ -7,7 +7,7 @@ return [
     'write_enabled' => env('SEO_INTEL_WRITE_ENABLED', false),
     'collectors_enabled' => env('SEO_INTEL_COLLECTORS_ENABLED', false),
     'dry_run_default' => env('SEO_INTEL_DRY_RUN_DEFAULT', true),
-    'allow_external_api_calls' => false,
+    'allow_external_api_calls' => env('SEO_INTEL_ALLOW_EXTERNAL_API_CALLS', false),
     'allow_production_crawl' => false,
     'allow_production_log_read' => false,
     'allowed_collectors' => [
@@ -205,10 +205,25 @@ return [
         'keyword_purchase_attribution_allowed' => false,
     ],
     'gsc_enabled' => env('SEO_INTEL_GSC_ENABLED', false),
-    'gsc_live_api_enabled' => false,
+    'gsc_live_api_enabled' => env('SEO_INTEL_GSC_LIVE_API_ENABLED', false),
     'gsc_property_url' => env('SEO_INTEL_GSC_PROPERTY_URL', null),
     'gsc_backfill_lag_days' => 3,
     'gsc_default_window_days' => 28,
+    'gsc_readonly_adapter' => [
+        'auth_mode' => env('SEO_INTEL_GSC_AUTH_MODE', 'disabled'),
+        'service_account_json' => env('SEO_INTEL_GSC_SERVICE_ACCOUNT_JSON', ''),
+        'service_account_json_path' => env('SEO_INTEL_GSC_SERVICE_ACCOUNT_JSON_PATH', ''),
+        'access_token' => env('SEO_INTEL_GSC_ACCESS_TOKEN', ''),
+        'token_uri' => env('SEO_INTEL_GSC_TOKEN_URI', 'https://oauth2.googleapis.com/token'),
+        'search_analytics_endpoint' => env(
+            'SEO_INTEL_GSC_SEARCH_ANALYTICS_ENDPOINT',
+            'https://searchconsole.googleapis.com/webmasters/v3/sites/%s/searchAnalytics/query'
+        ),
+        'scope' => env('SEO_INTEL_GSC_SCOPE', 'https://www.googleapis.com/auth/webmasters.readonly'),
+        'timeout_seconds' => (int) env('SEO_INTEL_GSC_TIMEOUT_SECONDS', 10),
+        'default_limit' => (int) env('SEO_INTEL_GSC_DEFAULT_LIMIT', 250),
+        'max_limit' => (int) env('SEO_INTEL_GSC_MAX_LIMIT', 250),
+    ],
     'gsc_foundation' => [
         'source_engine' => 'google',
         'brand_query_terms' => [
