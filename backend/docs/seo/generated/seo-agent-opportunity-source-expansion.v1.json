@@ -1,0 +1,108 @@
+{
+  "version": "seo-agent-opportunity-source-expansion.v1",
+  "task": "SEO-AGENT-OPPORTUNITY-SOURCE-EXPANSION-01",
+  "repo": "fap-api",
+  "type": "opportunity_source_contract",
+  "runtime_scanners_added": false,
+  "source_families": [
+    {
+      "id": "gsc_performance",
+      "status": "existing_read_model_source",
+      "inputs": ["seo_gsc_daily", "seo_urls", "gsc_data_quality_gate"],
+      "write_allowed": false
+    },
+    {
+      "id": "cms_tdk_gap",
+      "status": "future_readonly_source",
+      "detects": ["missing_title", "missing_meta_description", "missing_canonical", "missing_indexability_metadata"],
+      "write_allowed": false
+    },
+    {
+      "id": "cms_faq_gap",
+      "status": "future_readonly_source",
+      "detects": ["missing_faq_block", "thin_faq_block", "faq_schema_candidate"],
+      "write_allowed": false
+    },
+    {
+      "id": "cms_internal_link_gap",
+      "status": "future_readonly_source",
+      "detects": ["missing_internal_links", "missing_anchor_coverage", "orphan_candidate"],
+      "write_allowed": false
+    },
+    {
+      "id": "runtime_seo_qa",
+      "status": "future_readonly_source",
+      "detects": ["noindex", "canonical_mismatch", "json_ld_absent", "robots_conflict", "redirect_surprise", "http_status_issue"],
+      "write_allowed": false
+    },
+    {
+      "id": "sitemap_llms_gap",
+      "status": "future_readonly_source",
+      "detects": ["sitemap_missing_eligible_url", "sitemap_contains_ineligible_url", "llms_missing_eligible_url", "llms_contains_ineligible_url"],
+      "write_allowed": false
+    },
+    {
+      "id": "hreflang_canonical_gap",
+      "status": "future_readonly_source",
+      "detects": ["hreflang_missing", "hreflang_return_tag_missing", "locale_alternate_missing", "canonical_self_reference_missing"],
+      "write_allowed": false
+    }
+  ],
+  "candidate_shape": {
+    "required_fields": [
+      "source_family",
+      "source_id",
+      "subject_type",
+      "subject_ref",
+      "safe_path",
+      "severity",
+      "evidence_refs",
+      "recommended_next_step",
+      "allowed_action",
+      "blocked_actions"
+    ],
+    "severity_values": ["p0", "p1", "p2", "p3"],
+    "allowed_actions_without_separate_approval": [
+      "readonly_review",
+      "gpt_review_handoff",
+      "cms_draft_package_dry_run"
+    ]
+  },
+  "run_packet_required_before_downstream_action": "seo-agent-run-control-packet.v1",
+  "forbidden_output_fields": [
+    "raw_url",
+    "raw_query",
+    "credential_path",
+    "service_account_json",
+    "client_email",
+    "private_key",
+    "token",
+    "cookie",
+    "session",
+    "raw_payload",
+    "cms_draft_body"
+  ],
+  "negative_guarantees": {
+    "database_write": false,
+    "cms_write": false,
+    "cms_publish": false,
+    "search_channel_enqueue": false,
+    "search_channel_submit": false,
+    "indexing_request": false,
+    "sitemap_submission": false,
+    "scheduler_activation": false,
+    "queue_worker_started": false,
+    "production_env_change": false,
+    "source_code_mutation": false,
+    "pr_train_metadata_change": false
+  },
+  "implementation_sequence": [
+    "cms_tdk_gap_readonly_scanner",
+    "cms_faq_gap_readonly_scanner",
+    "cms_internal_link_gap_readonly_scanner",
+    "runtime_seo_qa_readonly_scanner",
+    "sitemap_llms_gap_readonly_scanner",
+    "hreflang_canonical_gap_readonly_scanner"
+  ],
+  "next_step": "Implement one readonly source scanner at a time, starting with cms_tdk_gap, and require seo-agent-run-control-packet.v1 for GPT review handoff or CMS draft dry-run."
+}
