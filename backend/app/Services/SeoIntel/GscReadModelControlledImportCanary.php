@@ -15,7 +15,9 @@ final class GscReadModelControlledImportCanary
 
     public const TARGET_TABLE = 'seo_gsc_daily';
 
-    private const LIMIT = 1;
+    private const MIN_LIMIT = 1;
+
+    private const MAX_LIMIT = 10;
 
     public function __construct(private readonly GscReadModelArtifactDryRunImporter $dryRunImporter) {}
 
@@ -26,7 +28,7 @@ final class GscReadModelControlledImportCanary
     public function plan(array $artifact, string $artifactSha256, int $limit): array
     {
         $issues = $this->limitIssues($limit);
-        $preview = $this->dryRunImporter->preview($artifact, self::LIMIT);
+        $preview = $this->dryRunImporter->preview($artifact, $limit);
 
         if (($preview['ok'] ?? false) !== true) {
             $issues[] = 'dry_run_importer_validation_failed';
@@ -34,7 +36,7 @@ final class GscReadModelControlledImportCanary
 
         $issues = array_values(array_unique($issues));
         $ok = $issues === [];
-        $rows = $ok ? array_slice((array) ($preview['preview_rows'] ?? []), 0, self::LIMIT) : [];
+        $rows = $ok ? array_slice((array) ($preview['preview_rows'] ?? []), 0, $limit) : [];
 
         return [
             'schema_version' => self::SCHEMA_VERSION,
@@ -50,11 +52,13 @@ final class GscReadModelControlledImportCanary
             'target_connection' => (string) config('seo_intel.connection', 'seo_intel'),
             'target_table' => self::TARGET_TABLE,
             'artifact_sha256' => $artifactSha256,
-            'required_confirmation_phrase' => $this->confirmationPhrase($artifactSha256),
+            'required_confirmation_phrase' => $this->confirmationPhrase($artifactSha256, $limit),
+            'max_rows_per_execution' => self::MAX_LIMIT,
             'rows_previewed' => count($rows),
             'rows_would_insert' => $ok ? count($rows) : 0,
             'rows_inserted' => 0,
             'rows_skipped_existing' => 0,
+            'rows_failed' => [],
             'write_boundary' => $this->writeBoundary(writeAllowed: false),
             'data_origin' => $preview['data_origin'] ?? null,
             'data_quality_gate' => $preview['data_quality_gate'] ?? null,
@@ -84,7 +88,7 @@ final class GscReadModelControlledImportCanary
             $issues[] = 'artifact_sha256_confirmation_required';
         }
 
-        $expectedConfirmation = $this->confirmationPhrase($artifactSha256);
+        $expectedConfirmation = $this->confirmationPhrase($artifactSha256, $limit);
         if ($confirmedWritePhrase === null || ! hash_equals($expectedConfirmation, $confirmedWritePhrase)) {
             $issues[] = 'exact_write_confirmation_required';
         }
@@ -103,14 +107,15 @@ final class GscReadModelControlledImportCanary
                 'writes_committed' => false,
                 'rows_inserted' => 0,
                 'rows_skipped_existing' => 0,
+                'rows_failed' => [],
                 'write_boundary' => $this->writeBoundary(writeAllowed: false),
                 'issues' => $issues,
                 'negative_guarantees' => $this->negativeGuarantees(),
             ];
         }
 
-        $row = (array) data_get($plan, 'preview_rows.0', []);
-        if ($row === []) {
+        $rows = array_values(array_filter((array) ($plan['preview_rows'] ?? []), 'is_array'));
+        if ($rows === []) {
             return [
                 ...$plan,
                 'status' => 'blocked',
@@ -123,37 +128,29 @@ final class GscReadModelControlledImportCanary
                 'writes_committed' => false,
                 'rows_inserted' => 0,
                 'rows_skipped_existing' => 0,
+                'rows_failed' => [],
                 'write_boundary' => $this->writeBoundary(writeAllowed: false),
-                'issues' => ['preview_row_required'],
+                'issues' => ['preview_rows_required'],
                 'negative_guarantees' => $this->negativeGuarantees(),
             ];
         }
 
         $connection = (string) config('seo_intel.connection', 'seo_intel');
         $query = DB::connection($connection)->table(self::TARGET_TABLE);
+        $inserted = 0;
+        $skipped = 0;
 
-        if ($this->matchingRowExists($connection, $row)) {
-            return [
-                ...$plan,
-                'status' => 'success',
-                'mode' => 'canary_execute',
-                'ok' => true,
-                'dry_run' => false,
-                'execute' => true,
-                'would_write' => false,
-                'writes_attempted' => true,
-                'writes_committed' => false,
-                'rows_would_insert' => 0,
-                'rows_inserted' => 0,
-                'rows_skipped_existing' => 1,
-                'write_boundary' => $this->writeBoundary(writeAllowed: true),
-                'issues' => [],
-                'negative_guarantees' => $this->negativeGuarantees(),
-            ];
+        foreach ($rows as $row) {
+            if ($this->matchingRowExists($connection, $row)) {
+                $skipped++;
+
+                continue;
+            }
+
+            $now = Carbon::now('UTC')->toDateTimeString();
+            $query->insert($this->insertPayload($row, $artifactSha256, $now));
+            $inserted++;
         }
-
-        $now = Carbon::now('UTC')->toDateTimeString();
-        $query->insert($this->insertPayload($row, $artifactSha256, $now));
 
         return [
             ...$plan,
@@ -164,21 +161,23 @@ final class GscReadModelControlledImportCanary
             'execute' => true,
             'would_write' => false,
             'writes_attempted' => true,
-            'writes_committed' => true,
+            'writes_committed' => $inserted > 0,
             'rows_would_insert' => 0,
-            'rows_inserted' => 1,
-            'rows_skipped_existing' => 0,
+            'rows_inserted' => $inserted,
+            'rows_skipped_existing' => $skipped,
+            'rows_failed' => [],
             'write_boundary' => $this->writeBoundary(writeAllowed: true),
             'issues' => [],
             'negative_guarantees' => $this->negativeGuarantees(),
         ];
     }
 
-    public function confirmationPhrase(string $artifactSha256): string
+    public function confirmationPhrase(string $artifactSha256, int $limit = self::MIN_LIMIT): string
     {
         return sprintf(
-            'I explicitly approve %s to write at most 1 row to seo_gsc_daily from artifact sha256 %s; no scheduler, no queue, no CMS, no search, no indexing.',
+            'I explicitly approve %s to write at most %d rows to seo_gsc_daily from artifact sha256 %s; no scheduler, no queue, no CMS, no search, no indexing.',
             self::TASK,
+            $limit,
             $artifactSha256,
         );
     }
@@ -188,7 +187,7 @@ final class GscReadModelControlledImportCanary
      */
     private function limitIssues(int $limit): array
     {
-        return $limit === self::LIMIT ? [] : ['limit_must_be_exactly_1'];
+        return $limit >= self::MIN_LIMIT && $limit <= self::MAX_LIMIT ? [] : ['limit_must_be_between_1_and_10'];
     }
 
     /**
@@ -251,7 +250,7 @@ final class GscReadModelControlledImportCanary
         return [
             'seo_gsc_daily_write_allowed' => $writeAllowed,
             'target_table' => self::TARGET_TABLE,
-            'max_rows_per_execution' => self::LIMIT,
+            'max_rows_per_execution' => self::MAX_LIMIT,
             'idempotency_key_fields' => [
                 'report_date',
                 'canonical_url_hash',
@@ -295,7 +294,7 @@ final class GscReadModelControlledImportCanary
     {
         return [
             'database_write_outside_seo_gsc_daily' => false,
-            'seo_gsc_daily_write_beyond_single_canary_row' => false,
+            'seo_gsc_daily_write_beyond_batch10_limit' => false,
             'migration_added' => false,
             'scheduler_activation' => false,
             'queue_worker_activation' => false,

@@ -12,13 +12,13 @@ final class SeoIntelGscReadModelImportCanaryCommand extends Command
 {
     protected $signature = 'seo-intel:gsc-readmodel-import-canary
         {--artifact= : Path to a sanitized GSC sidecar live-read artifact}
-        {--limit=1 : Canary row limit; must be exactly 1}
+        {--limit=1 : Canary row limit; bounded 1..10}
         {--execute : Execute the bounded canary write}
         {--confirm-artifact-sha256= : Required for --execute; must match artifact SHA256}
         {--confirm-write= : Required exact confirmation phrase for --execute}
         {--json : Emit JSON summary}';
 
-    protected $description = 'Validate a sanitized GSC artifact and optionally write one controlled seo_gsc_daily canary row.';
+    protected $description = 'Validate a sanitized GSC artifact and optionally write a controlled seo_gsc_daily batch10 canary.';
 
     public function handle(GscReadModelControlledImportCanary $canary): int
     {
@@ -41,9 +41,9 @@ final class SeoIntelGscReadModelImportCanaryCommand extends Command
         $limit = $this->limit();
         if ($limit === null) {
             return $this->finish([
-                ...$this->failureSummary('limit_must_be_exactly_1'),
+                ...$this->failureSummary('limit_must_be_between_1_and_10'),
                 'artifact_sha256' => $sha256,
-                'required_confirmation_phrase' => $canary->confirmationPhrase($sha256),
+                'required_confirmation_phrase' => $canary->confirmationPhrase($sha256, 1),
             ]);
         }
 
@@ -81,7 +81,7 @@ final class SeoIntelGscReadModelImportCanaryCommand extends Command
 
         $limit = (int) $raw;
 
-        return $limit === 1 ? 1 : null;
+        return $limit >= 1 && $limit <= 10 ? $limit : null;
     }
 
     private function nullableString(mixed $value): ?string
