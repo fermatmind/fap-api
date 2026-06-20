@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\SeoIntel\Collectors;
 
 use App\Services\SeoIntel\GscDataQualityGate;
+use App\Services\SeoIntel\GscReadonlyLiveAdapter;
 use App\Services\SeoIntel\GscSearchAnalyticsRowNormalizer;
 use App\Services\SeoIntel\SeoIntelCollector;
 use App\Services\SeoIntel\SeoIntelCollectorResult;
@@ -14,6 +15,7 @@ final class GscCollector implements SeoIntelCollector
     public function __construct(
         private readonly GscSearchAnalyticsRowNormalizer $normalizer,
         private readonly GscDataQualityGate $dataQualityGate,
+        private readonly GscReadonlyLiveAdapter $liveAdapter,
     ) {}
 
     public function name(): string
@@ -27,6 +29,33 @@ final class GscCollector implements SeoIntelCollector
     public function collect(array $options = []): SeoIntelCollectorResult
     {
         $dryRun = (bool) ($options['dry_run'] ?? true);
+        if ((bool) ($options['gsc_live_preflight'] ?? false)) {
+            $preflight = $this->liveAdapter->preflight($options);
+            $blocked = ($preflight['status'] ?? 'blocked') !== 'ready';
+
+            return new SeoIntelCollectorResult(
+                collector: $this->name(),
+                status: $blocked ? 'blocked' : 'success',
+                dryRun: $dryRun,
+                writesAttempted: false,
+                writesCommitted: false,
+                externalCallsAttempted: false,
+                itemsSeen: 0,
+                issues: array_values(array_map('strval', $preflight['issues'] ?? [])),
+                metadata: [
+                    'mode' => 'gsc_live_readonly_credential_preflight',
+                    'data_origin_if_executed' => 'live_gsc_api',
+                    'live_readiness' => $preflight,
+                    'opportunity_queue_eligible' => false,
+                    'cms_write_allowed' => false,
+                    'search_channel_enqueue_allowed' => false,
+                    'search_provider_submission_allowed' => false,
+                    'writes_attempted' => false,
+                    'external_calls_attempted' => false,
+                ],
+            );
+        }
+
         $lagDays = (int) config('seo_intel.gsc_backfill_lag_days', 3);
         $windowDays = (int) config('seo_intel.gsc_default_window_days', 28);
         $rows = $this->fixtureRows();

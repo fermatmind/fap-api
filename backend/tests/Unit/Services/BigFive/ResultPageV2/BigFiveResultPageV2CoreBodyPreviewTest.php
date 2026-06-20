@@ -881,6 +881,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         $changed = [
             'backend/app/Services/SeoIntel/Collectors/GscCollector.php',
+            'backend/app/Services/SeoIntel/GscReadonlyLiveAdapter.php',
             'backend/app/Services/SeoIntel/GscDataQualityGate.php',
             'backend/app/Services/SeoIntel/GscQueryClassifier.php',
             'backend/app/Services/SeoIntel/GscSearchAnalyticsRowNormalizer.php',
@@ -4674,6 +4675,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return in_array($file, [
             'backend/app/Services/SeoIntel/Collectors/GscCollector.php',
+            'backend/app/Services/SeoIntel/GscReadonlyLiveAdapter.php',
             'backend/app/Services/SeoIntel/GscDataQualityGate.php',
             'backend/app/Services/SeoIntel/GscQueryClassifier.php',
             'backend/app/Services/SeoIntel/GscSearchAnalyticsRowNormalizer.php',

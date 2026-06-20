@@ -17,7 +17,8 @@ final class SeoIntelCollectCommand extends Command
         {--limit= : Bound collectors that support deterministic canaries}
         {--locale= : Filter collectors that support locale scoping}
         {--page-type= : Filter collectors that support page entity type scoping}
-        {--canary : Use a deterministic bounded canary subset when supported}';
+        {--canary : Use a deterministic bounded canary subset when supported}
+        {--gsc-live-preflight : Run the GSC read-only live adapter credential/readiness preflight without live API calls}';
 
     protected $description = 'Run a disabled-by-default Search Intelligence collector skeleton.';
 
@@ -33,6 +34,7 @@ final class SeoIntelCollectCommand extends Command
             'locale' => $this->option('locale'),
             'page_type' => $this->option('page-type'),
             'canary' => (bool) $this->option('canary'),
+            'gsc_live_preflight' => (bool) $this->option('gsc-live-preflight'),
         ]);
 
         if ((bool) $this->option('json')) {

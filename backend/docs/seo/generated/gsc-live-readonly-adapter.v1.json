@@ -1,0 +1,67 @@
+{
+  "version": "gsc-live-readonly-adapter.v1",
+  "task": "SEO-GSC-LIVE-READONLY-ADAPTER-01",
+  "type": "runtime_adapter_preflight_contract",
+  "channel": "gsc",
+  "read_only": true,
+  "enabled_by_default": false,
+  "live_api_enabled_by_default": false,
+  "writes_enabled_by_default": false,
+  "preflight_command": "php artisan seo-intel:collect --collector=gsc_foundation --gsc-live-preflight --dry-run --no-write --json",
+  "adapter": {
+    "class": "App\\Services\\SeoIntel\\GscReadonlyLiveAdapter",
+    "api": "Google Search Console Search Analytics",
+    "data_origin_if_executed": "live_gsc_api",
+    "requires_explicit_execute_live_read": true,
+    "persists_rows": false
+  },
+  "required_gates": [
+    "seo_intel.gsc_enabled",
+    "seo_intel.gsc_live_api_enabled",
+    "seo_intel.allow_external_api_calls",
+    "seo_intel.gsc_property_url",
+    "seo_intel.gsc_readonly_adapter.auth_mode",
+    "safe_secret_channel_credentials",
+    "execute_live_read"
+  ],
+  "supported_auth_modes": [
+    "access_token",
+    "service_account"
+  ],
+  "safe_secret_sources": [
+    "SEO_INTEL_GSC_ACCESS_TOKEN",
+    "SEO_INTEL_GSC_SERVICE_ACCOUNT_JSON",
+    "SEO_INTEL_GSC_SERVICE_ACCOUNT_JSON_PATH"
+  ],
+  "forbidden_outputs": [
+    "access_token",
+    "private_key",
+    "client_email",
+    "credential_json",
+    "credential_path",
+    "cookie",
+    "session",
+    "raw_ip",
+    "order_id",
+    "attempt_id",
+    "payment_id"
+  ],
+  "negative_guarantees": {
+    "db_writes": false,
+    "cms_write": false,
+    "opportunity_queue_enqueue": false,
+    "search_channel_enqueue": false,
+    "search_channel_approve": false,
+    "search_channel_submit": false,
+    "gsc_url_inspection_request_indexing": false,
+    "gsc_sitemap_submit": false,
+    "baidu_call": false,
+    "indexnow_call": false,
+    "scheduler_enabled": false,
+    "queue_worker_enabled": false,
+    "production_env_edited": false,
+    "sitemap_changed": false,
+    "llms_changed": false
+  },
+  "next_allowed_step": "secure-environment credential preflight; live row import/backfill remains a separate approval"
+}
