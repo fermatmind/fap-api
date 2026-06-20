@@ -55,30 +55,43 @@ final class SeoOpportunityQueueReadService extends AbstractSeoDashboardReadServi
     private function gscRows(): array
     {
         return $this->table('seo_gsc_daily')
+            ->leftJoinSub(
+                $this->table('seo_urls')
+                    ->select('canonical_url_hash')
+                    ->selectRaw('MIN(canonical_url) AS canonical_url')
+                    ->groupBy('canonical_url_hash'),
+                'url_truth',
+                function ($join): void {
+                    $join->on('seo_gsc_daily.canonical_url_hash', '=', 'url_truth.canonical_url_hash');
+                }
+            )
             ->select([
-                'report_date',
-                'canonical_url_hash',
-                'canonical_url',
-                'query_hash',
-                'query_display_masked',
-                'locale',
-                'source_engine',
-                'clicks',
-                'impressions',
-                'ctr_ppm',
-                'average_position_milli',
-                'is_brand_query',
-                'query_type',
-                'metadata_json',
+                'seo_gsc_daily.report_date',
+                'seo_gsc_daily.canonical_url_hash',
+                'seo_gsc_daily.canonical_url AS gsc_canonical_url',
+                'url_truth.canonical_url AS url_truth_canonical_url',
+                'seo_gsc_daily.query_hash',
+                'seo_gsc_daily.query_display_masked',
+                'seo_gsc_daily.locale',
+                'seo_gsc_daily.source_engine',
+                'seo_gsc_daily.clicks',
+                'seo_gsc_daily.impressions',
+                'seo_gsc_daily.ctr_ppm',
+                'seo_gsc_daily.average_position_milli',
+                'seo_gsc_daily.is_brand_query',
+                'seo_gsc_daily.query_type',
+                'seo_gsc_daily.metadata_json',
             ])
-            ->where('source_engine', 'google')
-            ->orderByDesc('report_date')
+            ->where('seo_gsc_daily.source_engine', 'google')
+            ->orderByDesc('seo_gsc_daily.report_date')
             ->limit(500)
             ->get()
             ->map(fn (object $row): array => [
                 'report_date' => (string) $row->report_date,
                 'canonical_url_hash' => (string) $row->canonical_url_hash,
-                'canonical_url' => is_string($row->canonical_url ?? null) ? $row->canonical_url : null,
+                'canonical_url' => is_string($row->url_truth_canonical_url ?? null)
+                    ? $row->url_truth_canonical_url
+                    : (is_string($row->gsc_canonical_url ?? null) ? $row->gsc_canonical_url : null),
                 'query_hash' => (string) $row->query_hash,
                 'query_display_masked' => is_string($row->query_display_masked ?? null) ? $row->query_display_masked : null,
                 'locale' => is_string($row->locale ?? null) ? $row->locale : null,
