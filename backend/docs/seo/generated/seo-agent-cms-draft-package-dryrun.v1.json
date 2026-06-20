@@ -1,0 +1,36 @@
+{
+  "version": "seo-agent-cms-draft-package-dry-run.v1",
+  "task": "SEO-AGENT-CMS-DRAFT-PACKAGE-DRYRUN-01",
+  "repo": "fap-api",
+  "command": "php artisan seo-agent:cms-draft-package-dry-run",
+  "input_schema": "seo-agent-codex-review-verdict.v1",
+  "output_schema": "seo-agent-cms-draft-package-dry-run.v1",
+  "dry_run": true,
+  "cms_write_allowed": false,
+  "generates_final_copy": false,
+  "draft_brief_fields": [
+    "source_id",
+    "source_family",
+    "subject_type",
+    "subject_ref",
+    "safe_path",
+    "gap_codes",
+    "target_fields",
+    "draft_instructions",
+    "claim_gate_required",
+    "human_approval_required"
+  ],
+  "negative_guarantees": {
+    "database_write": false,
+    "cms_write": false,
+    "cms_publish": false,
+    "search_channel_enqueue": false,
+    "search_channel_submit": false,
+    "indexing_request": false,
+    "sitemap_submission": false,
+    "scheduler_activation": false,
+    "queue_worker_started": false,
+    "production_env_change": false
+  },
+  "next_step": "A later separately approved task may turn a dry-run brief into a bounded CMS draft write canary."
+}
