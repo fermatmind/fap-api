@@ -1,0 +1,64 @@
+{
+  "version": "gsc-weekly-readonly-automation-plan.v1",
+  "task": "SEO-GSC-WEEKLY-READONLY-AUTOMATION-PLAN-01",
+  "repo": "fap-api",
+  "type": "manual_readonly_runner_contract",
+  "script": "backend/scripts/seo/gsc_weekly_readonly_runner.sh",
+  "scheduler_activation": false,
+  "production_cron_activation": false,
+  "queue_worker_activation": false,
+  "default_runtime": {
+    "artifact_dir": "/opt/fermatmind/seo-gsc-runner/artifacts",
+    "window_days": 28,
+    "allowed_window_days": [7, 28],
+    "limit": 250,
+    "limit_bounds": [1, 250],
+    "dimensions": "query,page",
+    "end_date_default": "utc_today_minus_3_days"
+  },
+  "workflow": [
+    "gsc_sidecar_preflight",
+    "gsc_live_read_readonly",
+    "gsc_readmodel_import_dryrun",
+    "opportunity_threshold_precheck_artifact"
+  ],
+  "output_schema": "gsc-weekly-readonly-run.v1",
+  "opportunity_contract": {
+    "min_impressions": 50,
+    "max_ctr_ppm": 10000,
+    "position_milli_window": [8000, 20000],
+    "query_type_required": "non_brand",
+    "brand_query_allowed": false
+  },
+  "negative_guarantees": {
+    "database_write": false,
+    "seo_gsc_daily_write": false,
+    "controlled_import_execute": false,
+    "scheduler_activation": false,
+    "production_cron_activation": false,
+    "queue_worker_started": false,
+    "opportunity_queue_enqueue": false,
+    "cms_write": false,
+    "search_channel_submit": false,
+    "indexing_request": false,
+    "google_indexing_api_call": false,
+    "production_env_change": false,
+    "pr_train_metadata_change": false
+  },
+  "allowed_external_call": {
+    "google_search_console_search_analytics_readonly": true,
+    "google_indexing_api": false,
+    "search_channel": false,
+    "cms": false
+  },
+  "next_step_if_candidates_found": "Generate a separate controlled import canary plan with --limit=10 and wait for exact human approval before --execute.",
+  "held_items": [
+    "batch25_importer_limit",
+    "laravel_scheduler_activation",
+    "production_cron_activation",
+    "cms_draft_generation",
+    "search_channel_submission",
+    "indexing_request",
+    "automatic_tdk_or_content_mutation"
+  ]
+}
