@@ -51,6 +51,12 @@
     "external_calls_attempted": false,
     "writes_attempted": false
   },
+  "sidecar_artifact_boundary": {
+    "direct_sidecar_artifact_consumption_allowed": false,
+    "allowed_source": "seo_intel read model rows after gsc data_quality_gate=pass",
+    "sidecar_artifact_role": "evidence_and_future_import_input_candidate_only",
+    "queue_item_creation_allowed": false
+  },
   "production_operation_performed": false,
   "migration_added": false,
   "collector_enabled": false,

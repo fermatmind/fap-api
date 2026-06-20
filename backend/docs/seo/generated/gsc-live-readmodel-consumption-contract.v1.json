@@ -1,0 +1,91 @@
+{
+  "version": "gsc-live-readmodel-consumption-contract.v1",
+  "task": "SEO-GSC-LIVE-READMODEL-CONSUMPTION-CONTRACT-01",
+  "repo": "fap-api",
+  "channel": "gsc",
+  "read_only_contract": true,
+  "runtime_behavior_changed": false,
+  "live_api_call_in_this_pr": false,
+  "credential_operation_in_this_pr": false,
+  "migration_added": false,
+  "scheduler_enabled": false,
+  "queue_worker_enabled": false,
+  "seo_gsc_daily_write": false,
+  "opportunity_queue_enqueue": false,
+  "cms_mutation_allowed": false,
+  "search_channel_action_allowed": false,
+  "indexing_request_allowed": false,
+  "production_env_changed": false,
+  "required_before_future_read_model_import": {
+    "data_origin": "live_gsc_api",
+    "data_quality_gate": "pass",
+    "source_engine": "google",
+    "sanitized_fields_only": true,
+    "gsc_finalization_lag_required": true,
+    "freshness_window_required": true,
+    "hashed_identifiers_required": [
+      "canonical_url_hash",
+      "query_hash"
+    ]
+  },
+  "allowed_sanitized_fields": [
+    "report_date",
+    "canonical_url_hash",
+    "query_hash",
+    "query_display_masked",
+    "locale",
+    "source_engine",
+    "device",
+    "country",
+    "search_type",
+    "clicks",
+    "impressions",
+    "ctr_ppm",
+    "average_position_milli",
+    "is_brand_query",
+    "query_type",
+    "data_state",
+    "data_origin",
+    "row_source"
+  ],
+  "forbidden_artifact_fields": [
+    "raw_query",
+    "raw_url",
+    "credential_path",
+    "token",
+    "access_token",
+    "api_key",
+    "client_email",
+    "service_account_json",
+    "cookie",
+    "session",
+    "raw_payload"
+  ],
+  "future_read_model_target": {
+    "table": "seo_gsc_daily",
+    "status": "future_import_target_only",
+    "importer_added_in_this_pr": false,
+    "write_allowed_in_this_pr": false
+  },
+  "opportunity_queue_boundary": {
+    "direct_sidecar_artifact_consumption_allowed": false,
+    "allowed_source": "seo_intel read model rows after gsc data_quality_gate=pass",
+    "queue_execution_allowed": false,
+    "cms_draft_allowed": false,
+    "search_submission_allowed": false
+  },
+  "negative_guarantees": {
+    "live_gsc_api_call": false,
+    "credential_read_print_or_store": false,
+    "seo_gsc_daily_import": false,
+    "database_write": false,
+    "scheduler_activation": false,
+    "opportunity_queue_enqueue": false,
+    "cms_write": false,
+    "search_channel_enqueue": false,
+    "search_provider_submission": false,
+    "gsc_url_inspection_request_indexing": false,
+    "sitemap_submission": false
+  },
+  "next_allowed_step": "dry-run-only read model importer design or preflight PR; no scheduler, opportunity queue execution, CMS mutation, or search/indexing submission without separate approval"
+}
