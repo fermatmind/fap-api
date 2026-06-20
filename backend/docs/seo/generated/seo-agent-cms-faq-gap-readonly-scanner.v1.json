@@ -1,0 +1,79 @@
+{
+  "version": "seo-agent-cms-faq-gap-readonly-scanner.v1",
+  "task": "SEO-AGENT-CMS-FAQ-GAP-READONLY-SCANNER-01",
+  "command": "php artisan seo-agent:cms-faq-gap-scan",
+  "source_family": "cms_faq_gap",
+  "run_mode": "readonly_discovery",
+  "supported_surfaces": [
+    "articles",
+    "content-pages",
+    "all"
+  ],
+  "candidate_fields": [
+    "source_family",
+    "source_id",
+    "subject_type",
+    "subject_ref",
+    "safe_path",
+    "locale",
+    "severity",
+    "gap_types",
+    "evidence_refs",
+    "recommended_next_step",
+    "allowed_action",
+    "blocked_actions"
+  ],
+  "article_signal_policy": [
+    "article_seo_meta.schema_json contains FAQPage",
+    "article_seo_meta.schema_json.editorial_package_v1.answer_surface_v1 exists without valid faq_items"
+  ],
+  "content_page_signal_policy": [
+    "faq_schema_eligible=true",
+    "schema_enabled=true",
+    "kind/page_type/slug/path indicates help, support, or faq"
+  ],
+  "forbidden_output_fields": [
+    "raw_url",
+    "full_url",
+    "raw_body",
+    "content_md",
+    "content_html",
+    "schema_json",
+    "payload",
+    "credential_path",
+    "service_account_json",
+    "client_email",
+    "private_key",
+    "token",
+    "Bearer "
+  ],
+  "allowed_actions": [
+    "readonly_scan",
+    "evidence_artifact_write",
+    "codex_review_handoff_future"
+  ],
+  "blocked_actions": [
+    "cms_write",
+    "cms_publish",
+    "faq_schema_enable",
+    "search_channel_enqueue",
+    "search_channel_submit",
+    "indexing_request",
+    "scheduler_activation",
+    "queue_worker_activation"
+  ],
+  "negative_guarantees": {
+    "database_write": false,
+    "cms_write": false,
+    "cms_publish": false,
+    "faq_schema_enable": false,
+    "search_channel_enqueue": false,
+    "search_channel_submit": false,
+    "indexing_request": false,
+    "sitemap_submission": false,
+    "scheduler_activation": false,
+    "queue_worker_started": false,
+    "production_env_change": false,
+    "pr_train_metadata_change": false
+  }
+}
