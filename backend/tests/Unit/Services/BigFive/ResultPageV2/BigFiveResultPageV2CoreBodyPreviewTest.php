@@ -1161,6 +1161,20 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_seo_agent_run_orchestrator_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/SeoAgentRunCommand.php',
+            'backend/app/Console/Kernel.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\SeoAgentRunCommand;',
+            '+        SeoAgentRunCommand::class,',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
+    }
+
     public function test_runtime_freeze_classifier_ignores_seo_intel_search_channel_queue_runtime_files(): void
     {
         $changed = [
@@ -3691,6 +3705,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSeoAgentRunOrchestratorFile($file)) {
+                continue;
+            }
+
             if ($this->isSeoIntelSearchChannelQueueRuntimeFile($file)) {
                 continue;
             }
@@ -4282,6 +4300,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsSeoAgentRuntimeSeoQaReadonlyScannerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentCmsFaqGapReadonlyScannerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentOpportunityAggregatorOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsSeoAgentRunOrchestratorOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                 )
             ) {
                 continue;
@@ -4958,6 +4977,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/SeoAgentOpportunityAggregateCommand.php',
             'backend/app/Services/SeoAgent/OpportunityAggregator.php',
+        ], true);
+    }
+
+    private function isSeoAgentRunOrchestratorFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/SeoAgentRunCommand.php',
         ], true);
     }
 
@@ -6669,6 +6695,28 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if (preg_match('/\bSeoAgentOpportunityAggregateCommand\b/u', $line) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsSeoAgentRunOrchestratorOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            if (preg_match('/\b(MBTI|Mbti|BigFive|Big5|Prewarm|ResultPage|Report)\b/u', $line) === 1) {
+                return false;
+            }
+
+            if (preg_match('/\bSeoAgentRunCommand\b/u', $line) !== 1) {
                 return false;
             }
         }
