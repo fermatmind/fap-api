@@ -1,0 +1,73 @@
+{
+  "version": "gsc-hk-sidecar-runner.v1",
+  "task": "SEO-GSC-HK-SIDECAR-RUNNER-01",
+  "type": "runtime_sidecar_contract",
+  "channel": "gsc",
+  "runner_region": "cn-hongkong",
+  "read_only": true,
+  "enabled_by_default": false,
+  "writes_enabled_by_default": false,
+  "scheduler_enabled_by_default": false,
+  "uses_88cn_web_process": false,
+  "allowed_commands": {
+    "preflight": "php artisan seo-intel:collect --collector=gsc_foundation --gsc-live-preflight --dry-run --no-write --json",
+    "bounded_live_read": "php artisan seo-intel:collect --collector=gsc_foundation --gsc-live-read --dry-run --no-write --json --start-date=YYYY-MM-DD --end-date=YYYY-MM-DD --limit=250"
+  },
+  "required_runtime_gates": [
+    "SEO_INTEL_GSC_ENABLED=true",
+    "SEO_INTEL_GSC_LIVE_API_ENABLED=true",
+    "SEO_INTEL_ALLOW_EXTERNAL_API_CALLS=true",
+    "SEO_INTEL_GSC_PROPERTY_URL",
+    "SEO_INTEL_GSC_AUTH_MODE=service_account",
+    "SEO_INTEL_GSC_SERVICE_ACCOUNT_JSON_PATH",
+    "--dry-run",
+    "--no-write",
+    "--gsc-live-read for bounded live reads"
+  ],
+  "allowed_outputs": [
+    "status",
+    "rows_seen",
+    "date_window",
+    "dimensions",
+    "http_status",
+    "readiness_metadata",
+    "data_quality_gate",
+    "canonical_url_hash",
+    "query_hash",
+    "query_display_masked",
+    "safe_metrics"
+  ],
+  "forbidden_outputs": [
+    "raw_query",
+    "raw_url",
+    "access_token",
+    "service_account_json",
+    "private_key",
+    "client_email",
+    "credential_path",
+    "cookie",
+    "session",
+    "order_id",
+    "payment_id",
+    "attempt_id"
+  ],
+  "negative_guarantees": {
+    "db_writes": false,
+    "seo_gsc_daily_import": false,
+    "cms_write": false,
+    "opportunity_queue_enqueue": false,
+    "search_channel_enqueue": false,
+    "search_channel_approve": false,
+    "search_channel_submit": false,
+    "gsc_url_inspection_request_indexing": false,
+    "gsc_sitemap_submit": false,
+    "baidu_call": false,
+    "indexnow_call": false,
+    "generic_proxy": false,
+    "production_env_edited_by_pr": false,
+    "deployment_changed_by_pr": false
+  },
+  "requires_operator_approval_before_secret_install": true,
+  "requires_operator_approval_before_live_read": true,
+  "next_allowed_step": "operator-approved secret install and bounded read-only live read from the Hong Kong sidecar host"
+}

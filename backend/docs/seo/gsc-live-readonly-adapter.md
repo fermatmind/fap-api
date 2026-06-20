@@ -14,6 +14,12 @@ Default `gsc_foundation` behavior remains fixture-only unless a caller explicitl
 php artisan seo-intel:collect --collector=gsc_foundation --gsc-live-preflight --dry-run --no-write --json
 ```
 
+After credential preflight is ready, a bounded live read must still use a second explicit gate:
+
+```bash
+php artisan seo-intel:collect --collector=gsc_foundation --gsc-live-read --dry-run --no-write --json --start-date=YYYY-MM-DD --end-date=YYYY-MM-DD --limit=250
+```
+
 The preflight checks only sanitized readiness facts:
 
 - GSC collector enabled flag
@@ -39,6 +45,8 @@ The preflight does not call Google. It never prints access tokens, private keys,
 
 The adapter returns Search Analytics rows only to the caller. It does not persist rows. A later PR must separately approve any import/backfill into `seo_gsc_daily` and must pass `GscDataQualityGate` before opportunity scoring can use live rows.
 
+The `--gsc-live-read` command returns only sanitized artifacts: row counts, date window, dimensions, hashed URL/query identifiers, masked query display, safe metrics, readiness metadata, and data-quality gate state. It must not print raw query strings, raw URLs, credential paths, access tokens, service-account JSON, private keys, client emails, cookies, or session values.
+
 ## Supported Credential Shapes
 
 Allowed safe-secret sources:
@@ -61,6 +69,10 @@ Credentials must come from a safe secret channel. They must not be committed, pr
 - no production config mutation
 - no GSC-as-URL-Truth behavior
 
+## Hong Kong Sidecar Runner Boundary
+
+When mainland production egress cannot reach Google OAuth or Search Console, the approved safe architecture is a separate Hong Kong sidecar runner. The runner may execute only the read-only preflight and bounded live-read commands above from a secure runtime that can reach Google. It must not run inside the 88CN web application process, share 88CN PM2 process state, modify 88CN app files, proxy arbitrary traffic, write `seo_intel`, enqueue Search Channel records, mutate CMS, submit URLs, or request indexing.
+
 ## Next Safe Step
 
-After this PR is merged, the next safe operational step is a credential-side preflight using the command above in a secure environment. If the preflight reports `ready`, a later separately approved PR can add a bounded dry-run import/backfill path that normalizes live rows, writes only when explicitly approved, and keeps `GscDataQualityGate` as the opportunity-queue gate.
+After this PR is merged, the next safe operational step is a credential-side preflight using the command above in the Hong Kong sidecar environment. If the preflight reports `ready`, a bounded `--gsc-live-read` may produce a sanitized JSON artifact. Any import/backfill into `seo_gsc_daily` remains a later separately approved PR and must keep `GscDataQualityGate` as the opportunity-queue gate.

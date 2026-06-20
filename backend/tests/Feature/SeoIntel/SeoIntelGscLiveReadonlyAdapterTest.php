@@ -132,6 +132,74 @@ final class SeoIntelGscLiveReadonlyAdapterTest extends TestCase
     }
 
     #[Test]
+    public function gsc_live_read_command_returns_only_sanitized_artifact_without_writes_or_submissions(): void
+    {
+        $this->enableAccessTokenConfig();
+
+        Http::fake([
+            'searchconsole.googleapis.com/*' => Http::response([
+                'rows' => [
+                    [
+                        'keys' => ['mbti测试', 'https://fermatmind.com/zh/articles/mbti-basics'],
+                        'clicks' => 0,
+                        'impressions' => 6,
+                        'ctr' => 0,
+                        'position' => 9.0,
+                    ],
+                ],
+            ], 200),
+        ]);
+
+        $exitCode = Artisan::call('seo-intel:collect', [
+            '--collector' => 'gsc_foundation',
+            '--gsc-live-read' => true,
+            '--dry-run' => true,
+            '--no-write' => true,
+            '--json' => true,
+            '--start-date' => '2026-06-01',
+            '--end-date' => '2026-06-17',
+            '--limit' => 500,
+        ]);
+
+        $output = trim(Artisan::output());
+        $decoded = json_decode($output, true);
+
+        $this->assertSame(0, $exitCode);
+        $this->assertSame('success', $decoded['status'] ?? null);
+        $this->assertSame('gsc_live_readonly_sidecar_read', data_get($decoded, 'metadata.mode'));
+        $this->assertTrue((bool) ($decoded['external_calls_attempted'] ?? false));
+        $this->assertFalse((bool) ($decoded['writes_attempted'] ?? true));
+        $this->assertFalse((bool) data_get($decoded, 'metadata.writes_committed', true));
+        $this->assertFalse((bool) data_get($decoded, 'metadata.cms_write_allowed', true));
+        $this->assertFalse((bool) data_get($decoded, 'metadata.search_channel_enqueue_allowed', true));
+        $this->assertFalse((bool) data_get($decoded, 'metadata.search_provider_submission_allowed', true));
+        $this->assertFalse((bool) data_get($decoded, 'metadata.indexing_request_allowed', true));
+        $this->assertFalse((bool) data_get($decoded, 'metadata.opportunity_queue_eligible', true));
+        $this->assertSame(1, $decoded['items_seen'] ?? null);
+        $this->assertSame(250, data_get($decoded, 'metadata.row_limit'));
+        $this->assertSame('2026-06-01', data_get($decoded, 'metadata.date_window.start_date'));
+        $this->assertSame('2026-06-17', data_get($decoded, 'metadata.date_window.end_date'));
+        $this->assertSame('live_gsc_api', data_get($decoded, 'metadata.data_quality_gate.data_origins.0'));
+        $this->assertNotEmpty(data_get($decoded, 'metadata.safe_row_preview.0.query_hash'));
+        $this->assertNotEmpty(data_get($decoded, 'metadata.safe_row_preview.0.canonical_url_hash'));
+        $this->assertSame('m****试', data_get($decoded, 'metadata.safe_row_preview.0.query_display_masked'));
+        $this->assertStringNotContainsString('mbti测试', $output);
+        $this->assertStringNotContainsString('https://fermatmind.com/zh/articles/mbti-basics', $output);
+        $this->assertStringNotContainsString('secret-gsc-token', $output);
+        $this->assertStringNotContainsString('Authorization', $output);
+
+        Http::assertSent(function (Request $request): bool {
+            return str_contains($request->url(), 'searchconsole.googleapis.com/webmasters/v3/sites/sc-domain%3Afermatmind.com/searchAnalytics/query')
+                && $request->hasHeader('Authorization', 'Bearer secret-gsc-token')
+                && $request['rowLimit'] === 250
+                && $request['startDate'] === '2026-06-01'
+                && $request['endDate'] === '2026-06-17'
+                && $request['dimensions'] === ['query', 'page']
+                && $request['type'] === 'web';
+        });
+    }
+
+    #[Test]
     public function generated_contract_locks_no_write_no_submission_boundary(): void
     {
         $artifact = json_decode(
@@ -153,6 +221,32 @@ final class SeoIntelGscLiveReadonlyAdapterTest extends TestCase
         $this->assertFalse((bool) data_get($artifact, 'negative_guarantees.search_channel_submit', true));
         $this->assertFalse((bool) data_get($artifact, 'negative_guarantees.gsc_url_inspection_request_indexing', true));
         $this->assertFalse((bool) data_get($artifact, 'negative_guarantees.gsc_sitemap_submit', true));
+    }
+
+    #[Test]
+    public function hk_sidecar_runner_contract_locks_isolated_readonly_boundary(): void
+    {
+        $artifact = json_decode(
+            (string) file_get_contents(base_path('docs/seo/generated/gsc-hk-sidecar-runner.v1.json')),
+            true
+        );
+
+        $this->assertIsArray($artifact);
+        $this->assertSame('gsc-hk-sidecar-runner.v1', $artifact['version'] ?? null);
+        $this->assertSame('SEO-GSC-HK-SIDECAR-RUNNER-01', $artifact['task'] ?? null);
+        $this->assertSame('cn-hongkong', $artifact['runner_region'] ?? null);
+        $this->assertTrue((bool) ($artifact['read_only'] ?? false));
+        $this->assertFalse((bool) ($artifact['uses_88cn_web_process'] ?? true));
+        $this->assertFalse((bool) data_get($artifact, 'negative_guarantees.db_writes', true));
+        $this->assertFalse((bool) data_get($artifact, 'negative_guarantees.seo_gsc_daily_import', true));
+        $this->assertFalse((bool) data_get($artifact, 'negative_guarantees.cms_write', true));
+        $this->assertFalse((bool) data_get($artifact, 'negative_guarantees.opportunity_queue_enqueue', true));
+        $this->assertFalse((bool) data_get($artifact, 'negative_guarantees.search_channel_enqueue', true));
+        $this->assertFalse((bool) data_get($artifact, 'negative_guarantees.search_channel_submit', true));
+        $this->assertFalse((bool) data_get($artifact, 'negative_guarantees.gsc_url_inspection_request_indexing', true));
+        $this->assertFalse((bool) data_get($artifact, 'negative_guarantees.generic_proxy', true));
+        $this->assertTrue((bool) ($artifact['requires_operator_approval_before_secret_install'] ?? false));
+        $this->assertTrue((bool) ($artifact['requires_operator_approval_before_live_read'] ?? false));
     }
 
     private function enableAccessTokenConfig(): void
