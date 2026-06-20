@@ -67,7 +67,53 @@
     "production_env_edited_by_pr": false,
     "deployment_changed_by_pr": false
   },
+  "credential_placement_evidence": {
+    "task": "SEO-GSC-HK-SIDECAR-CREDENTIAL-PREFLIGHT-01",
+    "observed_date": "2026-06-20",
+    "status": "secret_placed_on_isolated_hk_sidecar_runner",
+    "secret_path": "/opt/fermatmind/seo-gsc-runner/secrets/gsc-service-account.json",
+    "sha256": "97c1e4c44be769ec66ec1df5f8b816e114262edcd234f2df7fe6e9a835ced02c",
+    "byte_size": 2422,
+    "directory": {
+      "owner": "root",
+      "group": "fm-seo-gsc",
+      "mode": "0750"
+    },
+    "file": {
+      "owner": "root",
+      "group": "fm-seo-gsc",
+      "mode": "0640"
+    },
+    "verification_commands": [
+      "sha256sum",
+      "wc -c",
+      "ls -ld",
+      "ls -l"
+    ],
+    "forbidden_evidence": [
+      "service_account_json",
+      "private_key",
+      "access_token",
+      "client_email",
+      "cookie",
+      "session",
+      "raw_credential_value",
+      "runtime_env_secret"
+    ],
+    "runtime_actions_performed": {
+      "live_gsc_read": false,
+      "google_api_call": false,
+      "db_write": false,
+      "seo_intel_write": false,
+      "opportunity_queue_enqueue": false,
+      "search_channel_enqueue": false,
+      "search_channel_submit": false,
+      "cms_mutation": false,
+      "production_env_edit": false,
+      "scheduler_activation": false
+    }
+  },
   "requires_operator_approval_before_secret_install": true,
   "requires_operator_approval_before_live_read": true,
-  "next_allowed_step": "operator-approved secret install and bounded read-only live read from the Hong Kong sidecar host"
+  "next_allowed_step": "credential preflight without Google API calls, then separately approved bounded read-only live read from the Hong Kong sidecar host"
 }

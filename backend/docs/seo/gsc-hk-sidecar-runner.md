@@ -59,6 +59,28 @@ Recommended shape:
 
 Permissions should allow only the runner user and root to read it. Do not store the secret under `/var/www/88cn`, the 88CN repository, the FermatMind repository checkout, shell history, generated artifacts, or PR attachments.
 
+## Credential Placement Evidence
+
+Task: `SEO-GSC-HK-SIDECAR-CREDENTIAL-PREFLIGHT-01`
+
+On 2026-06-20, the service-account JSON was placed on the Hong Kong sidecar runner at the approved isolated secret path:
+
+```text
+/opt/fermatmind/seo-gsc-runner/secrets/gsc-service-account.json
+```
+
+Non-sensitive verification evidence:
+
+- SHA256: `97c1e4c44be769ec66ec1df5f8b816e114262edcd234f2df7fe6e9a835ced02c`
+- File size: `2422` bytes
+- Secret directory owner/group/mode: `root:fm-seo-gsc` / `0750`
+- Secret file owner/group/mode: `root:fm-seo-gsc` / `0640`
+- Verification commands were limited to `sha256sum`, `wc -c`, `ls -ld`, and `ls -l`.
+
+No service-account JSON content, private key, access token, client email, cookie, session, raw credential value, or runtime environment secret was committed, printed into this evidence package, or attached to the PR.
+
+This evidence PR did not execute a live GSC read, call Google APIs, write `seo_intel`, enqueue an opportunity, enqueue or submit Search Channel records, mutate CMS, edit production environment variables, or activate a scheduler.
+
 ## Output Boundary
 
 The runner may emit a sanitized JSON artifact containing:
