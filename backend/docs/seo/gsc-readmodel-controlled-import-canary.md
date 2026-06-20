@@ -8,7 +8,9 @@ This PR adds the first write-capable GSC read-model importer, limited to a singl
 
 The command reads a sanitized Hong Kong GSC sidecar live-read artifact, reuses the dry-run importer validation gates, and writes at most one row only when the operator provides `--execute`, an exact artifact SHA256 confirmation, and the exact generated write confirmation phrase.
 
-This PR does not add a scheduler, enqueue opportunities, mutate CMS content, enqueue or submit Search Channel records, request GSC indexing, submit a sitemap, call Google APIs, change production environment variables, add a migration, or add a unique index.
+The follow-up idempotency PR adds a dedicated `idempotency_key` column and unique index so future small-batch imports can skip existing rows deterministically. It does not change the write limit: the command remains limited to one row until a separate batch10 PR is approved.
+
+This PR family does not add a scheduler, enqueue opportunities, mutate CMS content, enqueue or submit Search Channel records, request GSC indexing, submit a sitemap, call Google APIs, or change production environment variables.
 
 ## Command
 
@@ -58,13 +60,18 @@ Allowed write target:
 
 The inserted row comes from the dry-run `preview_rows` shape. `canonical_url` remains `null` because raw URLs are not allowed in sidecar artifacts. The row metadata records `data_origin=live_gsc_api`, `row_source=live_gsc_api`, the source artifact SHA256, and the canary task id.
 
-Before insert, the importer checks for an existing row with the same `report_date`, `canonical_url_hash`, `query_hash`, `source_engine`, `device`, `country`, and `search_type`. Existing rows are skipped and reported as `rows_skipped_existing=1`.
+Before insert, the importer computes `idempotency_key=sha256(report_date|canonical_url_hash|query_hash|source_engine|device|country|search_type)`. Existing rows with the same idempotency key are skipped and reported as `rows_skipped_existing=1`.
+
+Schema boundary:
+
+- column: `seo_gsc_daily.idempotency_key`
+- unique index: `seo_gsc_daily_idempotency_key_unique`
+- existing rows are backfilled by the forward migration before the unique index is created
 
 ## Negative Guarantees
 
 - no database write outside `seo_gsc_daily`
-- no migration
-- no unique index or schema change
+- no schema change outside `seo_gsc_daily.idempotency_key`
 - no scheduler activation
 - no queue worker activation
 - no opportunity queue enqueue
@@ -80,4 +87,4 @@ Before insert, the importer checks for an existing row with the same `report_dat
 
 After merge, the next operational step is deploying `main` to the HK sidecar runner and running the dry-run canary plan. A real `--execute` canary write still requires separate explicit approval.
 
-Batch import, unique-key idempotency, scheduler activation, opportunity queue execution, CMS drafting, and search/indexing actions remain separate holds.
+Batch import, scheduler activation, opportunity queue execution, CMS drafting, and search/indexing actions remain separate holds.

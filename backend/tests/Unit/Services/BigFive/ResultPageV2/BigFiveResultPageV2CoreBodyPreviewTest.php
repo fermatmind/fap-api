@@ -901,6 +901,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/SeoIntel/GscQueryClassifier.php',
             'backend/app/Services/SeoIntel/GscSearchAnalyticsRowNormalizer.php',
             'backend/database/migrations/2026_05_17_000900_create_seo_gsc_daily_table.php',
+            'backend/database/migrations/seo_intel/2026_06_20_130000_add_idempotency_key_to_seo_gsc_daily_table.php',
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
@@ -4704,6 +4705,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/SeoIntel/GscQueryClassifier.php',
             'backend/app/Services/SeoIntel/GscSearchAnalyticsRowNormalizer.php',
             'backend/database/migrations/2026_05_17_000900_create_seo_gsc_daily_table.php',
+            'backend/database/migrations/seo_intel/2026_06_20_130000_add_idempotency_key_to_seo_gsc_daily_table.php',
         ], true);
     }
 

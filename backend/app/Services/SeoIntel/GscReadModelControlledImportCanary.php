@@ -198,13 +198,7 @@ final class GscReadModelControlledImportCanary
     {
         return DB::connection($connection)
             ->table(self::TARGET_TABLE)
-            ->where('report_date', (string) ($row['report_date'] ?? ''))
-            ->where('canonical_url_hash', (string) ($row['canonical_url_hash'] ?? ''))
-            ->where('query_hash', (string) ($row['query_hash'] ?? ''))
-            ->where('source_engine', (string) ($row['source_engine'] ?? 'google'))
-            ->where('device', $row['device'] ?? null)
-            ->where('country', $row['country'] ?? null)
-            ->where('search_type', $row['search_type'] ?? null)
+            ->where('idempotency_key', $this->idempotencyKey($row))
             ->exists();
     }
 
@@ -221,6 +215,7 @@ final class GscReadModelControlledImportCanary
         $metadata['canary_task'] = self::TASK;
 
         return [
+            'idempotency_key' => $this->idempotencyKey($row),
             'report_date' => (string) $row['report_date'],
             'canonical_url_hash' => (string) $row['canonical_url_hash'],
             'canonical_url' => null,
@@ -257,9 +252,40 @@ final class GscReadModelControlledImportCanary
             'seo_gsc_daily_write_allowed' => $writeAllowed,
             'target_table' => self::TARGET_TABLE,
             'max_rows_per_execution' => self::LIMIT,
+            'idempotency_key_fields' => [
+                'report_date',
+                'canonical_url_hash',
+                'query_hash',
+                'source_engine',
+                'device',
+                'country',
+                'search_type',
+            ],
+            'idempotency_unique_index' => 'seo_gsc_daily_idempotency_key_unique',
             'database_write_outside_seo_gsc_daily_allowed' => false,
             'canonical_url_policy' => 'null_until_separate_backend_url_truth_join_is_approved',
         ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $row
+     */
+    private function idempotencyKey(array $row): string
+    {
+        return hash('sha256', implode('|', [
+            $this->normalized((string) ($row['report_date'] ?? '')),
+            $this->normalized((string) ($row['canonical_url_hash'] ?? '')),
+            $this->normalized((string) ($row['query_hash'] ?? '')),
+            $this->normalized((string) ($row['source_engine'] ?? 'google')),
+            $this->normalized($row['device'] ?? null),
+            $this->normalized($row['country'] ?? null),
+            $this->normalized($row['search_type'] ?? null),
+        ]));
+    }
+
+    private function normalized(mixed $value): string
+    {
+        return trim((string) ($value ?? ''));
     }
 
     /**
