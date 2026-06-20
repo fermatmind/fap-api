@@ -46,6 +46,16 @@ php artisan seo-intel:gsc-sidecar-runner --mode=preflight --artifact-dir=/opt/fe
 php artisan seo-intel:gsc-sidecar-runner --mode=live-read --start-date=YYYY-MM-DD --end-date=YYYY-MM-DD --limit=250 --dimensions=query,page --artifact-dir=/opt/fermatmind/seo-gsc-runner/artifacts
 ```
 
+Preferred sidecar launcher:
+
+```bash
+backend/scripts/seo/gsc_sidecar_runner.sh --mode=preflight --artifact-dir=/opt/fermatmind/seo-gsc-runner/artifacts
+```
+
+```bash
+backend/scripts/seo/gsc_sidecar_runner.sh --mode=live-read --start-date=YYYY-MM-DD --end-date=YYYY-MM-DD --limit=250 --dimensions=query,page --artifact-dir=/opt/fermatmind/seo-gsc-runner/artifacts
+```
+
 ## Required Runtime Gates
 
 - `SEO_INTEL_GSC_ENABLED=true`
@@ -59,6 +69,10 @@ php artisan seo-intel:gsc-sidecar-runner --mode=live-read --start-date=YYYY-MM-D
 - sidecar wrapper must call only `seo-intel:collect --collector=gsc_foundation`
 - sidecar wrapper must force `--dry-run --no-write --json`
 - sidecar wrapper must fail if the collector reports any write, CMS, Search Channel, or indexing boundary as enabled
+- sidecar launcher must load runtime gates from `/opt/fermatmind/seo-gsc-runner/env/gsc-sidecar.env` unless `SIDECAR_ENV_FILE` overrides it
+- sidecar launcher must set `APP_CONFIG_CACHE=${SIDECAR_CONFIG_CACHE:-/tmp/fermatmind-gsc-sidecar-config.php}` before Laravel starts
+- sidecar launcher must fail closed if `APP_CONFIG_CACHE` points under `bootstrap/cache`
+- sidecar launcher must fail closed if inline service-account JSON or access-token env values are present
 
 ## Secret Placement
 
@@ -169,6 +183,47 @@ Forbidden wrapper outcomes:
 - no scheduler activation
 - no queue worker activation
 - no raw query, raw URL, credential, token, client email, cookie, session, or private key output
+
+## Sidecar Runtime Env and Config Cache Boundary
+
+Task: `SEO-GSC-SIDECAR-RUNTIME-ENV-CACHE-BOUNDARY-01`
+
+`backend/scripts/seo/gsc_sidecar_runner.sh` is the approved launcher for repeatable HK sidecar execution. It exists to replace manual inline environment assembly with a bounded process-level entrypoint.
+
+Launcher guarantees:
+
+- defaults to `/opt/fermatmind/seo-gsc-runner/env/gsc-sidecar.env`
+- supports `SIDECAR_ENV_FILE=/path/to/env` for operator-controlled sidecar env placement
+- sets `APP_CONFIG_CACHE` before Laravel bootstraps
+- defaults `APP_CONFIG_CACHE` to `/tmp/fermatmind-gsc-sidecar-config.php`
+- rejects `APP_CONFIG_CACHE` under `bootstrap/cache`
+- requires the GSC live-read gates and service-account path to be present
+- rejects inline service-account JSON and access-token env values
+- delegates only to `php artisan seo-intel:gsc-sidecar-runner "$@"`
+
+The sidecar env file may contain non-secret runtime switches, the GSC property, auth mode, and a service-account JSON file path. It must not contain service-account JSON content, private key content, access tokens, client email values, raw query data, raw URL data, cookies, sessions, or CMS/search credentials.
+
+The PR that introduced this launcher did not change production `fap-api` environment variables, run a live read, write a database row, import `seo_gsc_daily`, enqueue an opportunity, mutate CMS content, enqueue or submit Search Channel records, request GSC indexing, submit a sitemap, call Baidu, call IndexNow, enable a scheduler, or enable a queue worker.
+
+## Readmodel Dry-run Revalidation Evidence
+
+Task: `GSC Readmodel Dry-run revalidation`
+
+On 2026-06-20, the HK sidecar runner was synced to `origin/main` at `ae025183f1f3975103740ad80f27322a2afe2693` and a read-only chain was verified:
+
+- Preflight artifact: `/opt/fermatmind/seo-gsc-runner/artifacts/gsc-preflight-wrapper-20260620T090151Z-success.json`
+  - File size: `3521` bytes
+  - SHA256: `0d2e2b2182c56059d57c56d57ffc8219ba358bad64a6a1825bfd43ad35f6e169`
+- Read-only live read artifact: `/opt/fermatmind/seo-gsc-runner/artifacts/gsc-live-read-wrapper-20260620T090231Z-success.json`
+  - File size: `7409` bytes
+  - SHA256: `5b1de9bd4f69a9678eef591d16000a268033b64eb1b22400e8c03a8f7b52ebb6`
+  - Summary: `status=success`, `data_quality_gate=pass`, `items_seen=25`
+- Readmodel dry-run importer artifact: `/opt/fermatmind/seo-gsc-runner/artifacts/gsc-readmodel-import-dryrun-20260620T090231Z.json`
+  - File size: `4803` bytes
+  - SHA256: `cae112da93a7dcbe4d1afc59a7c5fc803bcb2fb859868a44920e84f30743efc4`
+  - Summary: `ok=true`, `data_origin=live_gsc_api`, `data_quality_gate=pass`, `would_write=false`, `rows_would_insert=3`
+
+The same revalidation confirmed no DB write, scheduler, queue, CMS, Search Channel, indexing, production env mutation, or secret-pattern output. `SEO-GSC-READMODEL-CONTROLLED-IMPORT-CANARY-01` remains held until a separate operator approval explicitly authorizes a write-capable canary.
 
 ## Output Boundary
 
