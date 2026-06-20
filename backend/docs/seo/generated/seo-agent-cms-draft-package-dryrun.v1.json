@@ -1,6 +1,6 @@
 {
   "version": "seo-agent-cms-draft-package-dry-run.v1",
-  "task": "SEO-AGENT-CMS-DRAFT-PACKAGE-DRYRUN-01",
+  "task": "SEO-AGENT-CMS-DRAFT-PACKAGE-PROPOSAL-01",
   "repo": "fap-api",
   "command": "php artisan seo-agent:cms-draft-package-dry-run",
   "input_schema": "seo-agent-codex-review-verdict.v1",
@@ -8,6 +8,7 @@
   "dry_run": true,
   "cms_write_allowed": false,
   "generates_final_copy": false,
+  "proposal_artifact": true,
   "draft_brief_fields": [
     "source_id",
     "source_family",
@@ -15,10 +16,23 @@
     "subject_ref",
     "safe_path",
     "gap_codes",
+    "target_model",
     "target_fields",
+    "proposed_seo_title",
+    "proposed_seo_description",
+    "proposed_faq_items",
+    "proposed_canonical_path",
+    "proposed_indexability",
     "draft_instructions",
     "claim_gate_required",
     "human_approval_required"
+  ],
+  "proposal_fields": [
+    "proposed_seo_title",
+    "proposed_seo_description",
+    "proposed_faq_items",
+    "proposed_canonical_path",
+    "proposed_indexability"
   ],
   "negative_guarantees": {
     "database_write": false,

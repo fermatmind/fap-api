@@ -23,7 +23,13 @@ final class SeoAgentCmsDraftPackageDryRunTest extends TestCase
         $this->createRows();
         $artifactDir = $this->artifactDir();
         $verdictPath = $this->writeVerdict([
-            $this->candidateVerdict('cms_draft_package_dry_run', true, ['missing_title', 'missing_meta_description']),
+            $this->candidateVerdict('cms_draft_package_dry_run', true, [
+                'missing_title',
+                'missing_meta_description',
+                'missing_canonical',
+                'missing_indexability_metadata',
+                'missing_faq_items',
+            ]),
             $this->candidateVerdict('defer', false, ['missing_canonical']),
         ]);
         $countsBefore = $this->rowCounts();
@@ -46,12 +52,35 @@ final class SeoAgentCmsDraftPackageDryRunTest extends TestCase
         $this->assertFalse((bool) ($package['cms_write_allowed'] ?? true));
         $this->assertFalse((bool) ($package['execution_permission'] ?? true));
         $this->assertSame(1, $package['draft_brief_count'] ?? null);
+        $this->assertSame(1, $package['proposal_count'] ?? null);
 
         $brief = $package['draft_briefs'][0] ?? [];
         $this->assertSame('article:1:zh-CN', $brief['subject_ref'] ?? null);
         $this->assertSame('/zh/articles/draft-package-candidate', $brief['safe_path'] ?? null);
-        $this->assertSame(['missing_title', 'missing_meta_description'], $brief['gap_codes'] ?? null);
-        $this->assertSame(['seo_title', 'seo_description'], $brief['target_fields'] ?? null);
+        $this->assertSame([
+            'missing_title',
+            'missing_meta_description',
+            'missing_canonical',
+            'missing_indexability_metadata',
+            'missing_faq_items',
+        ], $brief['gap_codes'] ?? null);
+        $this->assertSame([
+            'seo_title',
+            'seo_description',
+            'canonical_url_or_path',
+            'is_indexable_or_robots',
+            'faq_items',
+        ], $brief['target_fields'] ?? null);
+        $this->assertSame('article', $brief['target_model'] ?? null);
+        $this->assertSame('Draft Package Candidate | FermatMind', $brief['proposed_seo_title'] ?? null);
+        $this->assertSame(
+            'Review Draft Package Candidate with FermatMind guidance, evidence, and next steps after claim-gate approval.',
+            $brief['proposed_seo_description'] ?? null
+        );
+        $this->assertSame('/zh/articles/draft-package-candidate', $brief['proposed_canonical_path'] ?? null);
+        $this->assertSame('indexable_after_manual_review', $brief['proposed_indexability'] ?? null);
+        $this->assertCount(2, $brief['proposed_faq_items'] ?? []);
+        $this->assertSame($brief, data_get($package, 'proposal_items.0'));
         $this->assertTrue((bool) ($brief['claim_gate_required'] ?? false));
         $this->assertTrue((bool) ($brief['human_approval_required'] ?? false));
 
@@ -117,6 +146,13 @@ final class SeoAgentCmsDraftPackageDryRunTest extends TestCase
         $this->assertTrue((bool) ($artifact['dry_run'] ?? false));
         $this->assertFalse((bool) ($artifact['cms_write_allowed'] ?? true));
         $this->assertFalse((bool) ($artifact['generates_final_copy'] ?? true));
+        $this->assertSame([
+            'proposed_seo_title',
+            'proposed_seo_description',
+            'proposed_faq_items',
+            'proposed_canonical_path',
+            'proposed_indexability',
+        ], $artifact['proposal_fields'] ?? null);
         $this->assertFalse((bool) data_get($artifact, 'negative_guarantees.cms_write', true));
     }
 

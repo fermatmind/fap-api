@@ -143,6 +143,8 @@ final class SeoAgentCmsDraftPackageDryRunCommand extends Command
             ],
             'draft_brief_count' => count($draftBriefs),
             'draft_briefs' => $draftBriefs,
+            'proposal_count' => count($draftBriefs),
+            'proposal_items' => $draftBriefs,
             'claim_gate_required' => true,
             'human_approval_required' => true,
             'forbidden_actions' => [
@@ -165,16 +167,37 @@ final class SeoAgentCmsDraftPackageDryRunCommand extends Command
     private function draftBrief(array $candidate): array
     {
         $gapCodes = $this->gapCodes($candidate);
+        $targetFields = $this->targetFields($gapCodes);
+        $safePath = (string) ($candidate['safe_path'] ?? '');
+        $subjectType = (string) ($candidate['subject_type'] ?? '');
+        $targetModel = $subjectType === 'content_page' ? 'content_page' : 'article';
+        $label = $this->labelFromSafePath($safePath);
 
         return [
             'source_id' => (string) ($candidate['source_id'] ?? ''),
             'source_family' => (string) ($candidate['source_family'] ?? ''),
-            'subject_type' => (string) ($candidate['subject_type'] ?? ''),
+            'subject_type' => $subjectType,
             'subject_ref' => (string) ($candidate['subject_ref'] ?? ''),
-            'safe_path' => (string) ($candidate['safe_path'] ?? ''),
+            'safe_path' => $safePath,
             'severity' => (string) ($candidate['severity'] ?? ''),
             'gap_codes' => $gapCodes,
-            'target_fields' => $this->targetFields($gapCodes),
+            'target_model' => $targetModel,
+            'target_fields' => $targetFields,
+            'proposed_seo_title' => in_array('seo_title', $targetFields, true)
+                ? $this->proposedSeoTitle($label)
+                : null,
+            'proposed_seo_description' => in_array('seo_description', $targetFields, true)
+                ? $this->proposedSeoDescription($label)
+                : null,
+            'proposed_faq_items' => in_array('faq_items', $targetFields, true)
+                ? $this->proposedFaqItems($label)
+                : [],
+            'proposed_canonical_path' => in_array('canonical_url_or_path', $targetFields, true)
+                ? $safePath
+                : null,
+            'proposed_indexability' => in_array('is_indexable_or_robots', $targetFields, true)
+                ? 'indexable_after_manual_review'
+                : null,
             'draft_instructions' => [
                 'prepare_field_level_proposal_only',
                 'do_not_generate_final_body_copy',
@@ -232,6 +255,41 @@ final class SeoAgentCmsDraftPackageDryRunCommand extends Command
         return array_values(array_unique($fields));
     }
 
+    private function labelFromSafePath(string $safePath): string
+    {
+        $lastSegment = basename(trim($safePath, '/'));
+        $label = trim(str_replace(['-', '_'], ' ', $lastSegment));
+
+        return $label !== '' ? ucwords($label) : 'FermatMind page';
+    }
+
+    private function proposedSeoTitle(string $label): string
+    {
+        return mb_substr($label.' | FermatMind', 0, 70);
+    }
+
+    private function proposedSeoDescription(string $label): string
+    {
+        return mb_substr('Review '.$label.' with FermatMind guidance, evidence, and next steps after claim-gate approval.', 0, 155);
+    }
+
+    /**
+     * @return list<array<string, string>>
+     */
+    private function proposedFaqItems(string $label): array
+    {
+        return [
+            [
+                'question' => 'What should readers know about '.$label.'?',
+                'answer' => 'Draft answer pending claim gate and human approval.',
+            ],
+            [
+                'question' => 'What is the next step for '.$label.'?',
+                'answer' => 'Draft answer pending claim gate and human approval.',
+            ],
+        ];
+    }
+
     /**
      * @return list<string>
      */
@@ -267,6 +325,7 @@ final class SeoAgentCmsDraftPackageDryRunCommand extends Command
             'schema_version' => (string) ($payload['schema_version'] ?? 'unknown'),
             'sanitized_summary' => [
                 'draft_brief_count' => (int) ($payload['draft_brief_count'] ?? 0),
+                'proposal_count' => (int) ($payload['proposal_count'] ?? 0),
                 'cms_write_allowed' => false,
             ],
         ];
