@@ -1,0 +1,45 @@
+{
+  "version": "seo-agent-codex-review-runner.v1",
+  "task": "SEO-AGENT-CODEX-REVIEW-RUNNER-01",
+  "repo": "fap-api",
+  "command": "php artisan seo-agent:codex-review-runner",
+  "input_schema": "seo-agent-codex-review-handoff.v1",
+  "output_schema": "seo-agent-codex-review-verdict.v1",
+  "reviewer": "codex",
+  "review_mode": "deterministic_rules",
+  "external_model_api_call": false,
+  "rules": {
+    "p1_or_p2_complete_candidate": "cms_draft_package_dry_run",
+    "p3_or_incomplete_candidate": "defer",
+    "needs_human_approval": true,
+    "execution_permission": false
+  },
+  "forbidden_input_fields": [
+    "raw_url",
+    "raw_query",
+    "credential_path",
+    "service_account_json",
+    "client_email",
+    "private_key",
+    "token",
+    "cookie",
+    "session",
+    "content_md",
+    "content_html",
+    "cms_draft_body"
+  ],
+  "negative_guarantees": {
+    "database_write": false,
+    "cms_write": false,
+    "cms_publish": false,
+    "search_channel_enqueue": false,
+    "search_channel_submit": false,
+    "indexing_request": false,
+    "sitemap_submission": false,
+    "scheduler_activation": false,
+    "queue_worker_started": false,
+    "production_env_change": false,
+    "external_model_api_call": false
+  },
+  "next_step": "Use accepted verdicts as input to a CMS draft package dry-run artifact only."
+}
