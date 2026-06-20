@@ -13,7 +13,9 @@
     "preflight": "php artisan seo-intel:collect --collector=gsc_foundation --gsc-live-preflight --dry-run --no-write --json",
     "bounded_live_read": "php artisan seo-intel:collect --collector=gsc_foundation --gsc-live-read --dry-run --no-write --json --start-date=YYYY-MM-DD --end-date=YYYY-MM-DD --limit=250",
     "sidecar_wrapper_preflight": "php artisan seo-intel:gsc-sidecar-runner --mode=preflight --artifact-dir=/opt/fermatmind/seo-gsc-runner/artifacts",
-    "sidecar_wrapper_live_read": "php artisan seo-intel:gsc-sidecar-runner --mode=live-read --start-date=YYYY-MM-DD --end-date=YYYY-MM-DD --limit=250 --dimensions=query,page --artifact-dir=/opt/fermatmind/seo-gsc-runner/artifacts"
+    "sidecar_wrapper_live_read": "php artisan seo-intel:gsc-sidecar-runner --mode=live-read --start-date=YYYY-MM-DD --end-date=YYYY-MM-DD --limit=250 --dimensions=query,page --artifact-dir=/opt/fermatmind/seo-gsc-runner/artifacts",
+    "sidecar_launcher_preflight": "backend/scripts/seo/gsc_sidecar_runner.sh --mode=preflight --artifact-dir=/opt/fermatmind/seo-gsc-runner/artifacts",
+    "sidecar_launcher_live_read": "backend/scripts/seo/gsc_sidecar_runner.sh --mode=live-read --start-date=YYYY-MM-DD --end-date=YYYY-MM-DD --limit=250 --dimensions=query,page --artifact-dir=/opt/fermatmind/seo-gsc-runner/artifacts"
   },
   "required_runtime_gates": [
     "SEO_INTEL_GSC_ENABLED=true",
@@ -254,7 +256,100 @@
       "queue_worker_activation": false
     }
   },
+  "sidecar_launcher_contract": {
+    "task": "SEO-GSC-SIDECAR-RUNTIME-ENV-CACHE-BOUNDARY-01",
+    "script": "backend/scripts/seo/gsc_sidecar_runner.sh",
+    "default_env_file": "/opt/fermatmind/seo-gsc-runner/env/gsc-sidecar.env",
+    "env_file_override": "SIDECAR_ENV_FILE",
+    "default_app_config_cache": "/tmp/fermatmind-gsc-sidecar-config.php",
+    "app_config_cache_override": "SIDECAR_CONFIG_CACHE",
+    "production_env_edited_by_pr": false,
+    "scheduler_enabled": false,
+    "queue_worker_enabled": false,
+    "delegates_to": "php artisan seo-intel:gsc-sidecar-runner",
+    "allowed_env_file_values": [
+      "SEO_INTEL_GSC_ENABLED=true",
+      "SEO_INTEL_GSC_LIVE_API_ENABLED=true",
+      "SEO_INTEL_ALLOW_EXTERNAL_API_CALLS=true",
+      "SEO_INTEL_GSC_PROPERTY_URL",
+      "SEO_INTEL_GSC_AUTH_MODE=service_account",
+      "SEO_INTEL_GSC_SERVICE_ACCOUNT_JSON_PATH",
+      "SIDECAR_CONFIG_CACHE"
+    ],
+    "forbidden_env_file_values": [
+      "service-account JSON content",
+      "private key content",
+      "access token",
+      "client email",
+      "raw query",
+      "raw URL",
+      "cookie",
+      "session",
+      "CMS credential",
+      "Search Channel credential"
+    ],
+    "fail_closed_if": [
+      "env file is missing or unreadable",
+      "APP_CONFIG_CACHE must not point under bootstrap/cache",
+      "required GSC env is missing",
+      "SEO_INTEL_GSC_AUTH_MODE is not service_account",
+      "SEO_INTEL_GSC_ACCESS_TOKEN is non-empty",
+      "SEO_INTEL_GSC_SERVICE_ACCOUNT_JSON is non-empty"
+    ],
+    "negative_guarantees": {
+      "production_env_edit": false,
+      "scheduler_activation": false,
+      "queue_worker_activation": false,
+      "db_writes": false,
+      "seo_gsc_daily_import": false,
+      "opportunity_queue_enqueue": false,
+      "cms_write": false,
+      "search_channel_submit": false,
+      "gsc_url_inspection_request_indexing": false
+    }
+  },
+  "readmodel_dryrun_revalidation": {
+    "task": "GSC Readmodel Dry-run revalidation",
+    "observed_date": "2026-06-20",
+    "sidecar_origin_main_sha": "ae025183f1f3975103740ad80f27322a2afe2693",
+    "preflight": {
+      "path": "/opt/fermatmind/seo-gsc-runner/artifacts/gsc-preflight-wrapper-20260620T090151Z-success.json",
+      "byte_size": 3521,
+      "sha256": "0d2e2b2182c56059d57c56d57ffc8219ba358bad64a6a1825bfd43ad35f6e169",
+      "status": "success"
+    },
+    "live_read": {
+      "path": "/opt/fermatmind/seo-gsc-runner/artifacts/gsc-live-read-wrapper-20260620T090231Z-success.json",
+      "byte_size": 7409,
+      "sha256": "5b1de9bd4f69a9678eef591d16000a268033b64eb1b22400e8c03a8f7b52ebb6",
+      "status": "success",
+      "data_quality_gate": "pass",
+      "items_seen": 25
+    },
+    "import_dryrun": {
+      "path": "/opt/fermatmind/seo-gsc-runner/artifacts/gsc-readmodel-import-dryrun-20260620T090231Z.json",
+      "byte_size": 4803,
+      "sha256": "cae112da93a7dcbe4d1afc59a7c5fc803bcb2fb859868a44920e84f30743efc4",
+      "ok": true,
+      "data_origin": "live_gsc_api",
+      "data_quality_gate": "pass",
+      "would_write": false,
+      "rows_would_insert": 3
+    },
+    "negative_guarantees": {
+      "db_write": false,
+      "scheduler_activation": false,
+      "queue_enqueue": false,
+      "cms_mutation": false,
+      "search_channel_enqueue": false,
+      "search_channel_submit": false,
+      "indexing_request": false,
+      "production_env_edit": false,
+      "secret_pattern_output": false
+    },
+    "next_write_capable_step": "SEO-GSC-READMODEL-CONTROLLED-IMPORT-CANARY-01 remains held until separate operator approval"
+  },
   "requires_operator_approval_before_secret_install": true,
   "requires_operator_approval_before_live_read": true,
-  "next_allowed_step": "sidecar runner wrapper or read-model boundary PR; do not enable scheduler, write DB, enqueue opportunities, mutate CMS, or submit search without a separate approval"
+  "next_allowed_step": "deploy/sync launcher to HK sidecar and rerun read-only preflight/live-read/dry-run through the launcher; do not enable scheduler, write DB, enqueue opportunities, mutate CMS, or submit search without a separate approval"
 }
