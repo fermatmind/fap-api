@@ -1,0 +1,41 @@
+{
+  "version": "seo-agent-controlled-cms-draft-write.v1",
+  "task": "SEO-AGENT-CONTROLLED-CMS-DRAFT-WRITER-01",
+  "repo": "fap-api",
+  "command": "php artisan seo-agent:cms-draft-write",
+  "input_schema": "seo-agent-cms-draft-package-dry-run.v1",
+  "output_schema": "seo-agent-controlled-cms-draft-write.v1",
+  "default_mode": "dry_run_plan",
+  "execute_requires": [
+    "--execute",
+    "--confirm-package-sha256=<sha256>",
+    "--confirm-write=<exact phrase>",
+    "--limit=1..10"
+  ],
+  "supported_targets": [
+    "article",
+    "content_page"
+  ],
+  "write_targets": {
+    "article": "article_revisions.payload_json isolated SEO Agent revision",
+    "content_page": "cms_translation_revisions.payload_json draft revision"
+  },
+  "idempotency_policy": "subject_ref + package_sha256 + sorted target_fields",
+  "max_rows_per_execution": 10,
+  "publishes_content": false,
+  "mutates_published_revision": false,
+  "negative_guarantees": {
+    "cms_publish": false,
+    "published_revision_mutation": false,
+    "live_published_content_mutation": false,
+    "search_channel_enqueue": false,
+    "search_channel_submit": false,
+    "indexing_request": false,
+    "sitemap_submission": false,
+    "scheduler_activation": false,
+    "queue_worker_started": false,
+    "production_env_change": false,
+    "external_model_api_call": false
+  },
+  "next_step": "Run dry-run plan first, then execute only with package sha and exact human approval phrase."
+}
