@@ -1,0 +1,124 @@
+{
+  "version": "gsc-readmodel-controlled-import-canary.v1",
+  "task": "SEO-GSC-READMODEL-CONTROLLED-IMPORT-CANARY-01",
+  "repo": "fap-api",
+  "command": "php artisan seo-intel:gsc-readmodel-import-canary",
+  "ad_hoc_pr": true,
+  "pr_train_manifest_update": false,
+  "write_mode_available": true,
+  "default_mode": "dry_run_canary_plan",
+  "execute_requires": [
+    "--execute",
+    "--limit=1",
+    "--confirm-artifact-sha256=<artifact_sha256>",
+    "--confirm-write=<exact_generated_confirmation_phrase>",
+    "--json"
+  ],
+  "input": {
+    "artifact_kind": "sanitized_hk_gsc_sidecar_wrapper_live_read_artifact",
+    "required_status": "success",
+    "required_data_origin": "live_gsc_api",
+    "required_data_quality_gate": "pass",
+    "required_rows_path": "payload.metadata.safe_row_preview",
+    "max_rows_per_execution": 1
+  },
+  "validation": {
+    "dry_run_importer_must_pass": true,
+    "artifact_sha256_confirmation_required": true,
+    "exact_write_confirmation_required": true,
+    "limit_must_equal": 1,
+    "forbidden_fields_rejected_recursively": [
+      "raw_query",
+      "raw_url",
+      "query",
+      "page",
+      "canonical_url",
+      "url",
+      "credential_path",
+      "token",
+      "access_token",
+      "api_key",
+      "client_email",
+      "service_account_json",
+      "private_key",
+      "cookie",
+      "session",
+      "raw_payload"
+    ],
+    "required_false_flags": [
+      "payload.writes_attempted",
+      "payload.writes_committed",
+      "payload.metadata.writes_attempted",
+      "payload.metadata.writes_committed",
+      "payload.metadata.cms_write_allowed",
+      "payload.metadata.search_channel_enqueue_allowed",
+      "payload.metadata.indexing_request_allowed"
+    ]
+  },
+  "target": {
+    "connection": "seo_intel",
+    "table": "seo_gsc_daily",
+    "write_scope": "single_row_canary_only",
+    "canonical_url_policy": "null_until_separate_backend_url_truth_join_is_approved",
+    "migration_added_in_this_pr": false,
+    "unique_index_added_in_this_pr": false
+  },
+  "idempotency": {
+    "schema_unique_constraint_available": false,
+    "application_existing_row_check": [
+      "report_date",
+      "canonical_url_hash",
+      "query_hash",
+      "source_engine",
+      "device",
+      "country",
+      "search_type"
+    ],
+    "existing_row_behavior": "skip_and_report_rows_skipped_existing"
+  },
+  "output": {
+    "schema_version": "gsc-readmodel-controlled-import-canary.v1",
+    "status_values": [
+      "success",
+      "blocked"
+    ],
+    "dry_run_plan_fields": [
+      "artifact_sha256",
+      "required_confirmation_phrase",
+      "rows_would_insert",
+      "preview_rows"
+    ],
+    "execute_fields": [
+      "writes_attempted",
+      "writes_committed",
+      "rows_inserted",
+      "rows_skipped_existing"
+    ]
+  },
+  "negative_guarantees": {
+    "database_write_outside_seo_gsc_daily": false,
+    "migration_added": false,
+    "scheduler_activation": false,
+    "queue_worker_activation": false,
+    "opportunity_queue_enqueue": false,
+    "cms_write": false,
+    "search_channel_enqueue": false,
+    "search_channel_submit": false,
+    "search_provider_submission": false,
+    "gsc_url_inspection_request_indexing": false,
+    "sitemap_submission": false,
+    "live_gsc_api_call": false,
+    "credential_read_print_or_store": false,
+    "production_env_change": false
+  },
+  "held_after_this_pr": [
+    "production execute canary until separate explicit approval",
+    "batch read model import",
+    "unique-key idempotency migration",
+    "scheduler activation",
+    "opportunity queue execution",
+    "CMS draft package",
+    "Search Channel enqueue or submit",
+    "indexing request or sitemap submission"
+  ]
+}
