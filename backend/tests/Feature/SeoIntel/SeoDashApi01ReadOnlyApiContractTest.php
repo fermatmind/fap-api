@@ -181,6 +181,11 @@ final class SeoDashApi01ReadOnlyApiContractTest extends TestCase
             data_get($queueArtifact, 'sidecar_artifact_boundary.allowed_source'),
         );
         $this->assertFalse((bool) data_get($queueArtifact, 'sidecar_artifact_boundary.queue_item_creation_allowed', true));
+        $this->assertSame(
+            'read_only_resolver_by_canonical_url_hash',
+            data_get($queueArtifact, 'url_truth_resolution.mode'),
+        );
+        $this->assertFalse((bool) data_get($queueArtifact, 'url_truth_resolution.raw_canonical_url_response_allowed', true));
 
         $response = $this->actingAs($admin, (string) config('admin.guard', 'admin'))
             ->getJson('/api/v0.5/ops/seo-intel/opportunity-queue?limit=5')
@@ -210,6 +215,10 @@ final class SeoDashApi01ReadOnlyApiContractTest extends TestCase
             'order_no',
             'attempt_id',
             'payment_id',
+            'client_email',
+            'private_key',
+            'Bearer',
+            'gsc-service-account.json',
         ] as $forbidden) {
             $this->assertStringNotContainsString($forbidden, $json);
         }
@@ -568,7 +577,7 @@ final class SeoDashApi01ReadOnlyApiContractTest extends TestCase
         DB::connection('seo_intel')->table('seo_gsc_daily')->insert([
             'report_date' => now()->subDays(4)->toDateString(),
             'canonical_url_hash' => $hash,
-            'canonical_url' => 'https://fermatmind.com/en/tests/mbti-personality-test-16-personality-types',
+            'canonical_url' => null,
             'query_hash' => hash('sha256', 'mbti career clarity'),
             'query_display_masked' => 'm**********y',
             'locale' => 'en',

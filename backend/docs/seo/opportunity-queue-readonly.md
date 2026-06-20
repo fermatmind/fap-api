@@ -29,6 +29,10 @@ The read model can return candidate rows only when `GscDataQualityGate` passes o
 
 Candidate rows expose safe aliases only: canonical path, URL hash, query hash, masked query, locale, report date, metrics, and a human-review next step.
 
+`seo_urls` is used only as a read-only URL truth resolver by `canonical_url_hash`. This keeps opportunity display working for live GSC canary imports where `seo_gsc_daily.canonical_url` remains `null` because sanitized sidecar artifacts cannot carry raw URLs. The API may return the resolved safe path, but it must not return the raw canonical URL.
+
+The opportunity queue must consume `seo_intel` read-model rows after `GscDataQualityGate=pass`. It must not directly consume sidecar artifacts, dry-run importer previews, service-account paths, tokens, or raw Search Console payloads.
+
 ## Boundary
 
 The read-only opportunity queue is not an execution queue. A later PR must separately define and approve CMS draft dry-runs or Search Channel readiness before any write action.

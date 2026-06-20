@@ -10,6 +10,13 @@
     "seo_gsc_daily",
     "seo_urls"
   ],
+  "url_truth_resolution": {
+    "mode": "read_only_resolver_by_canonical_url_hash",
+    "resolver_table": "seo_urls",
+    "metric_source_table": "seo_gsc_daily",
+    "supports_null_gsc_canonical_url": true,
+    "raw_canonical_url_response_allowed": false
+  },
   "candidate_fields": [
     "opportunity_id",
     "canonical_path",
@@ -55,6 +62,7 @@
     "direct_sidecar_artifact_consumption_allowed": false,
     "allowed_source": "seo_intel read model rows after gsc data_quality_gate=pass",
     "sidecar_artifact_role": "evidence_and_future_import_input_candidate_only",
+    "dry_run_preview_consumption_allowed": false,
     "queue_item_creation_allowed": false
   },
   "production_operation_performed": false,
