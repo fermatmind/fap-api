@@ -169,6 +169,7 @@ use App\Console\Commands\RefreshCareerAttributionDailyCommand;
 use App\Console\Commands\SdsPsychometricsReport;
 use App\Console\Commands\SeedScaleRegistry;
 use App\Console\Commands\SeoIntelSearchChannelQueueCommand;
+use App\Console\Commands\SeoAgentCmsTdkGapScanCommand;
 use App\Console\Commands\SeoIntelUrlTruthHandoffCommand;
 use App\Console\Commands\StorageControlPlaneSnapshot;
 use App\Console\Commands\StorageInventory;
@@ -359,6 +360,7 @@ class Kernel extends ConsoleKernel
         ArticleUpdateImageMetadata::class,
         ArticleWeeklySeoObservationExport::class,
         MediaAssetsImportSeoImageBundle::class,
+        SeoAgentCmsTdkGapScanCommand::class,
         SeoIntelUrlTruthHandoffCommand::class,
         SeoIntelSearchChannelQueueCommand::class,
         ContentReleaseRevalidate::class,

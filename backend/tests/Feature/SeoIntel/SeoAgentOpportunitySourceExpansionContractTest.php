@@ -27,9 +27,14 @@ final class SeoAgentOpportunitySourceExpansionContractTest extends TestCase
             $this->assertContains($sourceId, $sourceIds, $sourceId);
         }
 
-        $this->assertFalse((bool) ($artifact['runtime_scanners_added'] ?? true));
+        $this->assertTrue((bool) ($artifact['runtime_scanners_added'] ?? false));
+        $this->assertContains('cms_tdk_gap_readonly_scanner', $artifact['implemented_runtime_scanners'] ?? []);
         $this->assertSame('seo-agent-run-control-packet.v1', $artifact['run_packet_required_before_downstream_action'] ?? null);
         $this->assertContains('cms_tdk_gap_readonly_scanner', $artifact['implementation_sequence'] ?? []);
+
+        $cmsTdkSource = collect($artifact['source_families'] ?? [])->firstWhere('id', 'cms_tdk_gap');
+        $this->assertSame('implemented_readonly_source', $cmsTdkSource['status'] ?? null);
+        $this->assertSame('php artisan seo-agent:cms-tdk-gap-scan', $cmsTdkSource['command'] ?? null);
     }
 
     #[Test]

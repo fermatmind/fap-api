@@ -1,0 +1,99 @@
+{
+  "version": "seo-agent-cms-tdk-gap-readonly-scanner.v1",
+  "task": "SEO-AGENT-CMS-TDK-GAP-READONLY-SCANNER-01",
+  "repo": "fap-api",
+  "type": "runtime_readonly_scanner_contract",
+  "command": "php artisan seo-agent:cms-tdk-gap-scan",
+  "source_family": "cms_tdk_gap",
+  "surfaces": [
+    "articles",
+    "content-pages",
+    "all"
+  ],
+  "default_surface": "all",
+  "default_limit": 100,
+  "max_limit": 250,
+  "detects": [
+    "missing_title",
+    "missing_meta_description",
+    "missing_canonical",
+    "missing_indexability_metadata"
+  ],
+  "output_artifacts": [
+    "seo-agent-cms-tdk-gap-readonly-scanner.v1",
+    "seo-agent-run-control-packet.v1",
+    "seo-agent-codex-review-handoff.v1"
+  ],
+  "candidate_shape": {
+    "required_fields": [
+      "source_family",
+      "source_id",
+      "subject_type",
+      "subject_ref",
+      "safe_path",
+      "severity",
+      "evidence_refs",
+      "recommended_next_step",
+      "allowed_action",
+      "blocked_actions"
+    ],
+    "source_family": "cms_tdk_gap",
+    "allowed_subject_types": [
+      "article",
+      "content_page"
+    ],
+    "severity_values": [
+      "p1",
+      "p2",
+      "p3"
+    ],
+    "allowed_action": "readonly_review"
+  },
+  "run_control_packet": {
+    "schema_version": "seo-agent-run-control-packet.v1",
+    "run_mode": "readonly_discovery",
+    "approval_status": "not_requested"
+  },
+  "codex_review_handoff": {
+    "schema_version": "seo-agent-codex-review-handoff.v1",
+    "reviewer": "codex",
+    "role": "review_only",
+    "execution_permission": false,
+    "required_output_fields": [
+      "worth_optimizing",
+      "recommended_action",
+      "risk_flags",
+      "needs_human_approval"
+    ]
+  },
+  "forbidden_output_fields": [
+    "raw_url",
+    "raw_query",
+    "credential_path",
+    "service_account_json",
+    "client_email",
+    "private_key",
+    "token",
+    "cookie",
+    "session",
+    "raw_payload",
+    "cms_draft_body",
+    "content_md",
+    "content_html"
+  ],
+  "negative_guarantees": {
+    "database_write": false,
+    "cms_write": false,
+    "cms_publish": false,
+    "search_channel_enqueue": false,
+    "search_channel_submit": false,
+    "indexing_request": false,
+    "sitemap_submission": false,
+    "scheduler_activation": false,
+    "queue_worker_started": false,
+    "production_env_change": false,
+    "source_code_mutation": false,
+    "pr_train_metadata_change": false
+  },
+  "next_step": "Codex reviews the handoff artifact and may recommend a CMS draft package dry-run only after human approval."
+}

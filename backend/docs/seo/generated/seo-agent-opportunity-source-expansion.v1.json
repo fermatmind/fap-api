@@ -3,7 +3,10 @@
   "task": "SEO-AGENT-OPPORTUNITY-SOURCE-EXPANSION-01",
   "repo": "fap-api",
   "type": "opportunity_source_contract",
-  "runtime_scanners_added": false,
+  "runtime_scanners_added": true,
+  "implemented_runtime_scanners": [
+    "cms_tdk_gap_readonly_scanner"
+  ],
   "source_families": [
     {
       "id": "gsc_performance",
@@ -13,7 +16,9 @@
     },
     {
       "id": "cms_tdk_gap",
-      "status": "future_readonly_source",
+      "status": "implemented_readonly_source",
+      "runtime_scanner": "cms_tdk_gap_readonly_scanner",
+      "command": "php artisan seo-agent:cms-tdk-gap-scan",
       "detects": ["missing_title", "missing_meta_description", "missing_canonical", "missing_indexability_metadata"],
       "write_allowed": false
     },
