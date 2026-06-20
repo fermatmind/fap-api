@@ -1,0 +1,76 @@
+{
+  "version": "seo-agent-runtime-seo-qa-readonly-scanner.v1",
+  "task": "SEO-AGENT-RUNTIME-SEO-QA-READONLY-SCANNER-01",
+  "command": "php artisan seo-agent:runtime-seo-qa-scan",
+  "source_family": "runtime_seo_qa",
+  "run_mode": "readonly_discovery",
+  "supported_sources": [
+    "cms-indexable"
+  ],
+  "candidate_fields": [
+    "source_family",
+    "source_id",
+    "subject_type",
+    "subject_ref",
+    "safe_path",
+    "locale",
+    "severity",
+    "gap_types",
+    "evidence_refs",
+    "recommended_next_step",
+    "allowed_action",
+    "blocked_actions"
+  ],
+  "checks": [
+    "http_status",
+    "redirect_status",
+    "canonical_tag",
+    "meta_robots_noindex",
+    "x_robots_tag_noindex",
+    "json_ld_presence"
+  ],
+  "forbidden_output_fields": [
+    "raw_url",
+    "full_url",
+    "raw_html",
+    "html",
+    "body",
+    "cookie",
+    "authorization",
+    "credential_path",
+    "service_account_json",
+    "client_email",
+    "private_key",
+    "token",
+    "Bearer "
+  ],
+  "allowed_actions": [
+    "readonly_http_qa",
+    "evidence_artifact_write",
+    "codex_review_handoff_future"
+  ],
+  "blocked_actions": [
+    "cms_write",
+    "cms_publish",
+    "search_channel_enqueue",
+    "search_channel_submit",
+    "indexing_request",
+    "scheduler_activation",
+    "queue_worker_activation"
+  ],
+  "negative_guarantees": {
+    "database_write": false,
+    "cms_write": false,
+    "cms_publish": false,
+    "search_channel_enqueue": false,
+    "search_channel_submit": false,
+    "indexing_request": false,
+    "sitemap_submission": false,
+    "scheduler_activation": false,
+    "queue_worker_started": false,
+    "production_env_change": false,
+    "google_search_console_api_call": false,
+    "google_indexing_api_call": false,
+    "pr_train_metadata_change": false
+  }
+}
