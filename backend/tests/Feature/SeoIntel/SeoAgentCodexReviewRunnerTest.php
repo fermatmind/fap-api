@@ -58,6 +58,8 @@ final class SeoAgentCodexReviewRunnerTest extends TestCase
 
         $candidateActions = array_column($verdict['candidate_verdicts'] ?? [], 'recommended_action');
         $this->assertSame(['cms_draft_package_dry_run', 'cms_draft_package_dry_run', 'defer', 'defer'], $candidateActions);
+        $this->assertSame(['missing_title'], data_get($verdict, 'candidate_verdicts.0.gap_types'));
+        $this->assertSame('missing_title', data_get($verdict, 'candidate_verdicts.0.evidence_refs.0.code'));
         $this->assertContains('candidate_incomplete', $verdict['risk_flags'] ?? []);
         $this->assertContains('evidence_missing', $verdict['risk_flags'] ?? []);
 
@@ -127,6 +129,7 @@ final class SeoAgentCodexReviewRunnerTest extends TestCase
             'subject_ref' => 'article:1:zh-CN',
             'safe_path' => '/zh/articles/'.$this->safeSlug($label),
             'severity' => $severity,
+            'gap_types' => ['missing_title'],
             'evidence_refs' => [
                 [
                     'code' => 'missing_title',

@@ -199,12 +199,41 @@ final class SeoAgentCodexReviewRunnerCommand extends Command
             'subject_ref' => $subjectRef,
             'safe_path' => $safePath,
             'severity' => $severity,
+            'gap_types' => array_values(array_filter(
+                array_map('strval', (array) ($candidate['gap_types'] ?? [])),
+                static fn (string $gap): bool => $gap !== ''
+            )),
+            'evidence_refs' => $this->sanitizedEvidenceRefs($evidenceRefs),
             'worth_optimizing' => $worthOptimizing,
             'recommended_action' => $worthOptimizing ? 'cms_draft_package_dry_run' : 'defer',
             'risk_flags' => $riskFlags,
             'needs_human_approval' => true,
             'execution_permission' => false,
         ];
+    }
+
+    /**
+     * @param  array<int, mixed>  $evidenceRefs
+     * @return list<array<string, string>>
+     */
+    private function sanitizedEvidenceRefs(array $evidenceRefs): array
+    {
+        $refs = [];
+        foreach ($evidenceRefs as $ref) {
+            if (! is_array($ref)) {
+                continue;
+            }
+
+            $refs[] = [
+                'code' => (string) ($ref['code'] ?? ''),
+                'field_status' => (string) ($ref['field_status'] ?? ''),
+            ];
+        }
+
+        return array_values(array_filter(
+            $refs,
+            static fn (array $ref): bool => $ref['code'] !== '' || $ref['field_status'] !== ''
+        ));
     }
 
     /**
