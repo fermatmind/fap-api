@@ -1,0 +1,78 @@
+{
+  "schema_version": "fap.riasec.result_page_v2.asset_agent.safety_report.v0.1",
+  "task_id": "RIASEC-RESULT-ASSET-FACTORY-PILOT-BATCH-01",
+  "run_id": "share_safety_pilot_20260621T1555Z",
+  "created_at": "2026-06-21T15:55:00Z",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "content_authority": "backend",
+  "cms_write_performed": false,
+  "runtime_change_performed": false,
+  "frontend_fallback_allowed": false,
+  "private_payload_exported": false,
+  "public_payload_scan": {
+    "status": "pass",
+    "hit_count": 0,
+    "fields_scanned": [
+      "public_payload.title_zh",
+      "public_payload.summary_zh",
+      "public_payload.boundary_zh"
+    ],
+    "forbidden_fields_absent_from_public_payload": [
+      "attempt_id",
+      "user_id",
+      "private_url",
+      "private_path",
+      "raw_score",
+      "raw_scores",
+      "score_vector",
+      "dimension_vector",
+      "percentile",
+      "percentiles",
+      "editor_notes",
+      "qa_notes",
+      "internal_metadata"
+    ],
+    "forbidden_terms_checked": [
+      "career match",
+      "occupation match",
+      "job fit",
+      "fit score",
+      "success prediction",
+      "hiring suitability",
+      "ability proof",
+      "raw score",
+      "percentile",
+      "职业匹配",
+      "岗位匹配",
+      "匹配度",
+      "推荐职业",
+      "职业推荐",
+      "岗位胜任",
+      "成功概率",
+      "职业成功",
+      "更准确",
+      "最终答案",
+      "你就是",
+      "天生适合",
+      "招聘筛选"
+    ]
+  },
+  "claim_safety": {
+    "no_deterministic_identity_type": true,
+    "no_diagnosis_or_treatment": true,
+    "no_hiring_screening": true,
+    "no_success_prediction": true,
+    "no_ability_measurement": true,
+    "no_raw_score_or_percentile": true,
+    "no_public_private_identifier": true,
+    "no_share_leak": true
+  },
+  "known_harness_boundary": {
+    "status": "documented_sidecar",
+    "introduced_by_current_pr": false,
+    "note": "Current full-corpus RIASEC harness scans governance fields broadly. This dry run proves the final asset public_payload allowlist only; selector-ready import remains disabled."
+  }
+}

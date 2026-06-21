@@ -36818,7 +36818,7 @@
     "id": "OPS-RELEASE-TRAIN-BACKEND-DEPLOY-ADAPTER-01",
     "repo": "fap-api",
     "branch": "ops/release-train-backend-deploy-adapter-01",
-    "status": "ready_to_merge",
+    "status": "merged",
     "commit_sha": "81a620782cce73544c8cee13e581137123c2bfc1",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1770",
     "checks": {
@@ -56323,14 +56323,18 @@
       "github": {
         "status": "pass",
         "evidence": "PR #2231 GitHub required checks passed on head da0e3b34585da9f7f61849cca3ad0775647a0ba8; mergeStateStatus CLEAN."
+      },
+      "post_merge": {
+        "status": "pass",
+        "evidence": "PR #2231 merged at 2026-06-21T15:53:41Z with merge commit bcd4687d0e0539381446a08225ed64a891c9606f; origin/main contains the merge commit; local main equals origin/main; local and remote task branch cleanup completed; post-merge focused validation passed."
       }
     },
     "failure_reason": null,
-    "commit_sha": "71cd4f8ce28e19187ef686169d72dadbfe62b07e",
+    "commit_sha": "bcd4687d0e0539381446a08225ed64a891c9606f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2231",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-21T15:53:41Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-21T22:06:47+08:00",
@@ -56356,6 +56360,11 @@
         "at": "2026-06-21T23:47:26+08:00",
         "status": "ready_to_merge",
         "note": "PR #2231 GitHub checks passed on head da0e3b34585da9f7f61849cca3ad0775647a0ba8 and merge state is CLEAN; pre-merge scope validation passed."
+      },
+      {
+        "at": "2026-06-21T23:59:43+08:00",
+        "status": "merged",
+        "note": "Post-merge reconciliation confirmed PR #2231 merged at 2026-06-21T15:53:41Z with merge commit bcd4687d0e0539381446a08225ed64a891c9606f; origin/main contains the merge commit; local main equals origin/main; local and remote task branch cleanup completed."
       }
     ]
   },
@@ -56363,7 +56372,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-asset-factory-pilot-batch-01",
     "base": "main",
-    "status": "pending_authorization",
+    "status": "ready_to_merge",
     "train_scope": "riasec_result_page_v2_asset_agent",
     "title": "RIASEC-RESULT-ASSET-FACTORY-PILOT-BATCH-01: feat(riasec):dry-run share safety result batch",
     "depends_on": [
@@ -56373,11 +56382,50 @@
       "authorization": {
         "status": "pass",
         "evidence": "User explicitly authorized the eight-item RIASEC Result Page asset-agent PR train and docs/codex manifest/state updates in the goal objective."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "RIASEC-RESULT-SELECTOR-QA-REPAIR-01 merged as PR #2231; origin/main contains merge commit bcd4687d0e0539381446a08225ed64a891c9606f."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "find backend/content_assets/riasec/result_page_v2/agent_runs -name '*.json' -print -exec python3 -m json.tool {} >/dev/null \\;",
+          "python3 local JSONL parse for share_safety_pilot_20260621T1555Z raw/repaired/final/assets files",
+          "python3 local public_payload leak scan for final_assets.jsonl and selector_ready_assets assets.jsonl",
+          "git diff --check",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+        ],
+        "notes": "Added a one-asset share_safety dry-run package with raw draft, repaired draft, final asset, validation report, safety report, source ledger snapshot, go/no-go report, and staging-only selector-ready candidate mirror. No CMS writes, runtime wiring, route matrix, golden cases, frontend fallback, pilot gate, or production gate."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to backend/content_assets/riasec/result_page_v2/agent_runs, backend/content_assets/riasec/result_page_v2/selector_ready_assets, and docs/codex state bookkeeping."
+      },
+      "sidecars": {
+        "status": "open_non_blocking",
+        "items": [
+          {
+            "sidecar_id": "RIASEC-GAP-FORBIDDEN-TERMS-001",
+            "introduced_by_current_pr": false,
+            "reason": "Existing full-corpus strict harness reports pre-existing forbidden-term hits in v1 assets. Current PR public_payload scan is green and does not widen runtime use."
+          },
+          {
+            "sidecar_id": "RIASEC-GAP-ROUTE-MATRIX-001",
+            "introduced_by_current_pr": false,
+            "reason": "Route matrix and golden case generation are intentionally deferred to RIASEC-RESULT-ROUTE-MATRIX-GOLDEN-CASE-QA-01."
+          }
+        ]
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #2234 GitHub required checks passed on head 7814d366c7016a733c7d775f7f659836f705dd37; mergeStateStatus CLEAN."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "768951018239edbf6df96e4e464dab4b1f0e312c",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2234",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -56386,6 +56434,21 @@
         "at": "2026-06-21T22:06:47+08:00",
         "status": "pending_authorization",
         "note": "Manifest/state entry authorized for the RIASEC Result Page asset-agent train. Implementation waits for its dependency order."
+      },
+      {
+        "at": "2026-06-21T23:59:43+08:00",
+        "status": "local_checks_passed",
+        "note": "Produced share_safety_pilot_20260621T1555Z dry-run package with one staging-only share_safety_registry candidate. JSON, JSONL, public payload leak scan, YAML, diff, and scope validation passed; external sidecars recorded as non-blocking because they were not introduced by this PR."
+      },
+      {
+        "at": "2026-06-22T00:01:44+08:00",
+        "status": "github_checks_pending",
+        "note": "Opened PR #2234 from head 768951018239edbf6df96e4e464dab4b1f0e312c; waiting for required GitHub checks."
+      },
+      {
+        "at": "2026-06-22T00:09:00+08:00",
+        "status": "ready_to_merge",
+        "note": "PR #2234 GitHub checks passed on head 7814d366c7016a733c7d775f7f659836f705dd37 and merge state is CLEAN; pre-merge scope validation passed."
       }
     ]
   },

@@ -1,0 +1,62 @@
+{
+  "schema_version": "fap.riasec.result_page_v2.asset_agent.validation_report.v0.1",
+  "task_id": "RIASEC-RESULT-ASSET-FACTORY-PILOT-BATCH-01",
+  "run_id": "share_safety_pilot_20260621T1555Z",
+  "created_at": "2026-06-21T15:55:00Z",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "content_authority": "backend",
+  "cms_write_performed": false,
+  "runtime_change_performed": false,
+  "frontend_fallback_allowed": false,
+  "private_payload_exported": false,
+  "candidate_counts": {
+    "raw_draft_assets": 1,
+    "repaired_draft_assets": 1,
+    "final_assets": 1,
+    "selector_ready_candidate_assets": 1
+  },
+  "registry_counts": {
+    "share_safety_registry": 1
+  },
+  "reading_mode_counts": {
+    "quick": 1
+  },
+  "final_asset_validation": {
+    "status": "pass",
+    "schema_version": "fap.riasec.result_page_v2.selector_asset.v0.1",
+    "registry_key": "share_safety_registry",
+    "module_key": "module_08_share_save",
+    "slot_key": "module_08_share_save.share_safe_boundary.summary",
+    "shareable": true,
+    "shareable_policy": "public_payload_allowlist_required",
+    "fallback_policy": "omit_share_block",
+    "public_payload_allowlist": [
+      "title_zh",
+      "summary_zh",
+      "boundary_zh"
+    ],
+    "validation_errors": []
+  },
+  "checksums": {
+    "raw_draft_assets_jsonl": "4a466df49013881b9f5ea13857fe1912ea2c69f49c3e4544e89520adc4af5d77",
+    "repaired_draft_assets_jsonl": "0ab2aabfbdeb8c6905d6afc118ad9251680e884bdd66908a8431c77078dd0764",
+    "final_assets_jsonl": "05abc8ef6302baa8efb501f01e3a815297d4ec3a8ea615cc625fe57ccba82735"
+  },
+  "external_sidecars": [
+    {
+      "sidecar_id": "RIASEC-GAP-FORBIDDEN-TERMS-001",
+      "introduced_by_current_pr": false,
+      "status": "open",
+      "evidence": "Existing full-corpus strict harness still reports pre-existing forbidden-term hits in v1 assets; this PR limits validation to the share-safety pilot public_payload and does not widen runtime use."
+    },
+    {
+      "sidecar_id": "RIASEC-GAP-ROUTE-MATRIX-001",
+      "introduced_by_current_pr": false,
+      "status": "open",
+      "evidence": "Route matrix and golden case generation remain deferred to RIASEC-RESULT-ROUTE-MATRIX-GOLDEN-CASE-QA-01."
+    }
+  ]
+}
