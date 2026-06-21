@@ -52,6 +52,7 @@ use App\Http\Controllers\API\V0_5\Career\CareerJobExplainabilityController;
 use App\Http\Controllers\API\V0_5\Career\CareerJobListController;
 use App\Http\Controllers\API\V0_5\Career\CareerLaunchGovernanceClosureController;
 use App\Http\Controllers\API\V0_5\Career\CareerLifecycleOperationalSummaryController;
+use App\Http\Controllers\API\V0_5\Career\CareerPageAssemblyAssetPreviewController;
 use App\Http\Controllers\API\V0_5\Career\CareerRecommendationDetailController;
 use App\Http\Controllers\API\V0_5\Career\CareerRecommendationExplainabilityController;
 use App\Http\Controllers\API\V0_5\Career\CareerRecommendationFeedbackController;
@@ -508,6 +509,7 @@ Route::prefix('v0.5')->group(function () {
     Route::get('/career/jobs', [CareerJobListController::class, 'index']);
     Route::get('/career/cn-proxy/{slug}', [CareerCnProxyPublicOwnerController::class, 'show']);
     Route::get('/career/jobs/{slug}/ai-impact-asset', [CareerAiImpactAssetPreviewController::class, 'show']);
+    Route::get('/career/jobs/{slug}/page-assembly-asset', [CareerPageAssemblyAssetPreviewController::class, 'show']);
     Route::get('/career/jobs/{slug}/salary-asset', [CareerSalaryAssetPreviewController::class, 'show']);
     Route::get('/career/jobs/{slug}', [CareerJobDetailController::class, 'show']);
     Route::get('/career/jobs/{slug}/explainability', [CareerJobExplainabilityController::class, 'show']);
