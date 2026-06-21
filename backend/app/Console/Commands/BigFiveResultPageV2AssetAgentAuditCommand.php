@@ -11,11 +11,14 @@ use Throwable;
 final class BigFiveResultPageV2AssetAgentAuditCommand extends Command
 {
     protected $signature = 'big5:result-page-v2-agent
-        {action=audit : Supported actions: audit, generate-candidates}
+        {action=audit : Supported actions: audit, generate-candidates, stage-candidates}
         {--run-id= : Stable run identifier for the artifact directory}
         {--artifact-dir= : Optional artifact root; defaults to backend/artifacts/big5_result_page_v2_agent}
         {--content-asset-root= : Optional content asset root for tests}
         {--source-ledger-dir= : Optional source ledger directory for tests}
+        {--candidate-dir= : Candidate artifact directory for stage-candidates}
+        {--staging-output-dir= : Optional staging package output directory for stage-candidates}
+        {--allow-staging-write : Permit stage-candidates to write the reviewed staging package}
         {--strict : Return non-zero when validator, inventory, source-ledger, or leak checks fail}
         {--json : Emit machine-readable summary}';
 
@@ -38,11 +41,18 @@ final class BigFiveResultPageV2AssetAgentAuditCommand extends Command
                     'artifact_dir' => trim((string) $this->option('artifact-dir')),
                     'source_ledger_dir' => trim((string) $this->option('source-ledger-dir')),
                 ]),
+                'stage-candidates' => $agent->stageCandidates([
+                    'run_id' => trim((string) $this->option('run-id')),
+                    'artifact_dir' => trim((string) $this->option('artifact-dir')),
+                    'candidate_dir' => trim((string) $this->option('candidate-dir')),
+                    'staging_output_dir' => trim((string) $this->option('staging-output-dir')),
+                    'allow_staging_write' => (bool) $this->option('allow-staging-write'),
+                ]),
                 default => null,
             };
 
             if (! is_array($summary)) {
-                $this->error('Unsupported action. Supported actions: audit, generate-candidates');
+                $this->error('Unsupported action. Supported actions: audit, generate-candidates, stage-candidates');
 
                 return self::FAILURE;
             }
