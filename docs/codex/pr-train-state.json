@@ -56047,7 +56047,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-existing-asset-gap-audit-01",
     "base": "main",
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "train_scope": "riasec_result_page_v2_asset_agent",
     "title": "RIASEC-RESULT-EXISTING-ASSET-GAP-AUDIT-01: docs(riasec):审计现有 result assets gaps",
     "depends_on": [
@@ -56074,15 +56074,15 @@
       },
       "scope_validation": {
         "status": "pass",
-        "evidence": "Changed files are confined to backend/content_assets/riasec/result_page_v2/qa/** and docs/codex state reconciliation."
+        "evidence": "Pre-merge scope validation shows only RIASEC result_page_v2 QA gap audit files and docs/codex state changed."
       },
       "github": {
-        "status": "pending",
-        "evidence": "PR #2228 opened; waiting for required GitHub checks on current head."
+        "status": "pass",
+        "evidence": "PR #2228 GitHub required checks passed on head 5a05ea77c60d2601e48a351f4187aba55e57294c; mergeStateStatus CLEAN."
       }
     },
     "failure_reason": null,
-    "commit_sha": "51bde8d933d13967b56cbf7fc12aa2d4376726f6",
+    "commit_sha": "5a05ea77c60d2601e48a351f4187aba55e57294c",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2228",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -56107,6 +56107,11 @@
         "at": "2026-06-21T23:20:29+08:00",
         "status": "github_checks_pending",
         "note": "Opened PR #2228 from commit 51bde8d933d13967b56cbf7fc12aa2d4376726f6; waiting for required GitHub checks."
+      },
+      {
+        "at": "2026-06-21T23:26:57+08:00",
+        "status": "ready_to_merge",
+        "note": "PR #2228 GitHub checks passed on head 5a05ea77c60d2601e48a351f4187aba55e57294c and merge state is CLEAN; pre-merge scope validation passed."
       }
     ]
   },
