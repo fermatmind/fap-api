@@ -93,6 +93,11 @@ final class BigFiveV2PilotAccessGate
             }
         }
 
+        $percentageDenial = $this->publicPercentageDenialReason($context);
+        if ($percentageDenial !== null) {
+            return new BigFiveV2PilotAccessDecision(false, $percentageDenial, null, $context);
+        }
+
         if ($this->publicRolloutAllows($context)) {
             return new BigFiveV2PilotAccessDecision(true, 'public_pilot_gate_allowed', 'rollout_percentage', $context);
         }
@@ -146,6 +151,28 @@ final class BigFiveV2PilotAccessGate
             static fn (string $value): string => strtoupper($value),
             $this->configuredList($key),
         ));
+    }
+
+    /**
+     * @param  array<string,string>  $context
+     */
+    private function publicPercentageDenialReason(array $context): ?string
+    {
+        $percentage = (int) config('big5_result_page_v2.public_pilot_rollout_percentage', 0);
+        if ($percentage <= 0 || $context['environment'] !== 'production') {
+            return null;
+        }
+
+        if (! (bool) config('big5_result_page_v2.public_pilot_production_percentage_enabled', false)) {
+            return 'public_pilot_production_percentage_disabled';
+        }
+
+        $maxPercentage = (int) config('big5_result_page_v2.public_pilot_production_max_percentage', 0);
+        if ($maxPercentage <= 0 || $percentage > $maxPercentage) {
+            return 'public_pilot_production_blast_radius_exceeded';
+        }
+
+        return null;
     }
 
     /**

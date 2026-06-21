@@ -1,0 +1,60 @@
+{
+  "schema": "big5_result_page_v2.m7_pilot_gate_matrix.v0_1",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_pilot": true,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "pilot_gate_decision": "GO_ALLOWLIST_ONLY",
+  "production_decision": "NO_GO",
+  "matrix": [
+    {
+      "area": "coverage_qa",
+      "status": "pass",
+      "blocks_pilot": false
+    },
+    {
+      "area": "safety_qa",
+      "status": "pass",
+      "blocks_pilot": false
+    },
+    {
+      "area": "editorial_qa",
+      "status": "pass",
+      "blocks_pilot": false
+    },
+    {
+      "area": "mapping_qa",
+      "status": "pass",
+      "blocks_pilot": false
+    },
+    {
+      "area": "rendered_preview_qa",
+      "status": "pass",
+      "blocks_pilot": false
+    },
+    {
+      "area": "production_public_pilot_allowlist",
+      "status": "required_before_real_exposure",
+      "blocks_pilot": false
+    },
+    {
+      "area": "production_percentage_blast_radius",
+      "status": "default_zero_requires_explicit_max",
+      "blocks_pilot": false
+    },
+    {
+      "area": "production_rollout",
+      "status": "blocked_until_m8_or_later",
+      "blocks_pilot": false,
+      "blocks_production": true
+    },
+    {
+      "area": "ops_reporting",
+      "status": "deferred_to_m8",
+      "blocks_pilot": false,
+      "blocks_production_ops": true
+    }
+  ]
+}

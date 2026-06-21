@@ -44,6 +44,8 @@ return [
         explode(',', (string) env('BIG5_RESULT_PAGE_V2_PUBLIC_PILOT_ALLOWED_LOCALES', 'zh,zh-CN')),
     ))),
     'public_pilot_rollout_percentage' => (int) env('BIG5_RESULT_PAGE_V2_PUBLIC_PILOT_ROLLOUT_PERCENTAGE', 0),
+    'public_pilot_production_percentage_enabled' => env('BIG5_RESULT_PAGE_V2_PUBLIC_PILOT_PRODUCTION_PERCENTAGE_ENABLED', false),
+    'public_pilot_production_max_percentage' => (int) env('BIG5_RESULT_PAGE_V2_PUBLIC_PILOT_PRODUCTION_MAX_PERCENTAGE', 0),
     'public_pilot_access_allowed_attempt_ids' => array_values(array_filter(array_map(
         static fn (string $attemptId): string => trim($attemptId),
         explode(',', (string) env('BIG5_RESULT_PAGE_V2_PUBLIC_PILOT_ALLOWED_ATTEMPT_IDS', '')),

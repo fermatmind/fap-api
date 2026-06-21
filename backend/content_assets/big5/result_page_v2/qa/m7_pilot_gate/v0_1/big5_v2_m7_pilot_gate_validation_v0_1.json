@@ -1,0 +1,32 @@
+{
+  "schema": "big5_result_page_v2.m7_pilot_gate_validation.v0_1",
+  "package": "m7_pilot_gate",
+  "version": "v0_1",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_pilot": true,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "pilot_gate_decision": "GO_ALLOWLIST_ONLY",
+  "production_decision": "NO_GO",
+  "validation_status": "pass",
+  "checks": {
+    "coverage_qa": "pass",
+    "safety_qa": "pass",
+    "editorial_qa": "pass",
+    "mapping_qa": "pass",
+    "rendered_preview_qa": "pass",
+    "release_snapshot_linked": "pass",
+    "production_import_gate_linked": "pass",
+    "public_pilot_allowlist_gate": "pass",
+    "production_percentage_default_disabled": "pass",
+    "production_rollout_not_enabled": "pass",
+    "m8_ops_deferred": "pass"
+  },
+  "hard_blockers_before_production": [
+    "explicit_human_production_rollout_approval_missing",
+    "production_rollout_config_disabled",
+    "m8_ops_metrics_not_connected"
+  ]
+}

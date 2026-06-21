@@ -1,0 +1,21 @@
+{
+  "schema": "big5_result_page_v2.m7_pilot_gate_manifest.v0_1",
+  "package": "m7_pilot_gate",
+  "version": "v0_1",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_pilot": true,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "pilot_gate_decision": "GO_ALLOWLIST_ONLY",
+  "production_decision": "NO_GO",
+  "m8_ops_deferred": true,
+  "files": [
+    "big5_v2_m7_pilot_gate_report_v0_1.json",
+    "big5_v2_m7_pilot_gate_matrix_v0_1.json",
+    "big5_v2_m7_pilot_gate_validation_v0_1.json",
+    "README.md",
+    "SHA256SUMS"
+  ]
+}
