@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-21T18:55:00+08:00",
+  "updated_at": "2026-06-21T19:08:00+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -55552,7 +55552,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-result-route-matrix-golden-case-qa-01",
     "base": "main",
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "train_scope": "big5_result_page_v2_asset_agent",
     "title": "BIG5-RESULT-ROUTE-MATRIX-GOLDEN-CASE-QA-01: test(big5):验证 route matrix golden cases",
     "depends_on": [
@@ -55586,12 +55586,12 @@
         "evidence": "Changed files are confined to backend/content_assets/big5/result_page_v2/qa/route_matrix_golden_case_staging_input/v0_1/*, backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2RouteMatrixGoldenCaseStagingInputQaTest.php, docs/codex/pr-train.yaml, and docs/codex/pr-train-state.json."
       },
       "github": {
-        "status": "pending",
-        "evidence": "PR #2207 opened from head fa9cd31c3f134785bf276694c8de90f0a196f15b; waiting for required GitHub checks."
+        "status": "pass",
+        "evidence": "PR #2207 checks passed on head 99b96e2f829d0ae36ae2cf5c72aa6892f5ca76fb: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and non-blocking Semgrep SARIF upload."
       }
     },
     "failure_reason": null,
-    "commit_sha": "fa9cd31c3f134785bf276694c8de90f0a196f15b",
+    "commit_sha": "99b96e2f829d0ae36ae2cf5c72aa6892f5ca76fb",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2207",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -55611,6 +55611,11 @@
         "at": "2026-06-21T18:55:00+08:00",
         "status": "github_checks_pending",
         "note": "Opened PR #2207 from commit fa9cd31c3f134785bf276694c8de90f0a196f15b; waiting for required GitHub checks."
+      },
+      {
+        "at": "2026-06-21T19:08:00+08:00",
+        "status": "ready_to_merge",
+        "note": "PR #2207 GitHub checks passed on head 99b96e2f829d0ae36ae2cf5c72aa6892f5ca76fb; merge state CLEAN. Ready to merge after this state update revalidates."
       }
     ]
   },
