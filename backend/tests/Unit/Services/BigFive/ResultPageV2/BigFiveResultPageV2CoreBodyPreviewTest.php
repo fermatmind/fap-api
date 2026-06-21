@@ -1339,6 +1339,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_seo_agent_l5a_cms_draft_write_canary_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/SeoAgentL5aCmsDraftWriteCanaryCommand.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_seo_agent_gsc_opportunity_auto_draft_files(): void
     {
         $changed = [
@@ -4049,6 +4058,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSeoAgentL5aCmsDraftWriteCanaryFile($file)) {
+                continue;
+            }
+
             if ($this->isSeoAgentGscOpportunityAutoDraftFile($file)) {
                 continue;
             }
@@ -5453,6 +5466,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return in_array($file, [
             'backend/app/Console/Commands/SeoAgentL5aCandidateReviewCommand.php',
+        ], true);
+    }
+
+    private function isSeoAgentL5aCmsDraftWriteCanaryFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/SeoAgentL5aCmsDraftWriteCanaryCommand.php',
         ], true);
     }
 
