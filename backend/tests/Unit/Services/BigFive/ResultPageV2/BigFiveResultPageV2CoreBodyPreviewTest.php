@@ -3242,6 +3242,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_bigfive_v2_asset_agent_audit_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/BigFiveResultPageV2AssetAgentAuditCommand.php',
+            'backend/app/Console/Kernel.php',
+            'backend/app/Services/BigFive/ResultPageV2/AssetAgent/BigFiveResultPageV2AssetAgent.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\BigFiveResultPageV2AssetAgentAuditCommand;',
+            '+        BigFiveResultPageV2AssetAgentAuditCommand::class,',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
+    }
+
     public function test_runtime_freeze_classifier_ignores_bigfive_v2_en_parity_draft_catalog(): void
     {
         $changed = [
@@ -4182,6 +4197,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isBigFiveV2AssetAgentFile($file)) {
+                continue;
+            }
+
             if ($this->isBigFiveV2EnParityDraftCatalogFile($file)) {
                 continue;
             }
@@ -4467,6 +4486,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsSeoAgentPostPublishSearchSubmitOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentPostPublishIndexnowAutoOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentGscOpportunityAutoDraftOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsBigFiveV2AssetAgentAuditOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                 )
             ) {
                 continue;
@@ -6223,6 +6243,12 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ], true);
     }
 
+    private function isBigFiveV2AssetAgentFile(string $file): bool
+    {
+        return $file === 'backend/app/Console/Commands/BigFiveResultPageV2AssetAgentAuditCommand.php'
+            || preg_match('#^backend/app/Services/BigFive/ResultPageV2/AssetAgent/[A-Za-z0-9_]+\.php$#', $file) === 1;
+    }
+
     private function isBigFiveV2EnParityDraftCatalogFile(string $file): bool
     {
         return $file === 'backend/content_packs/BIG5_OCEAN/v2/drafts/en_parity/result_page_v2_en_asset_catalog_draft.v1.json';
@@ -7123,6 +7149,24 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if (preg_match('/\bSeoAgentGscOpportunityAutoDraftCommand\b/u', $line) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsBigFiveV2AssetAgentAuditOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            if (preg_match('/\bBigFiveResultPageV2AssetAgentAuditCommand\b/u', $line) !== 1) {
                 return false;
             }
         }
