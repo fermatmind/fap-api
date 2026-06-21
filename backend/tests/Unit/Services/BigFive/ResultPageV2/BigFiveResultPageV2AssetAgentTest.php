@@ -38,6 +38,17 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
             $this->assertFalse((bool) ($inventory['production_use_allowed'] ?? true));
             $this->assertSame('fap.big5.result_page_v2.selector_asset.v0.1', data_get($inventory, 'inputs.selector_asset_schema'));
             $this->assertTrue((bool) data_get($inventory, 'source_ledger.valid'));
+            $this->assertStringEndsWith(
+                'content_assets/big5/result_page_v2/source_ledger/source_ledger.json',
+                (string) data_get($inventory, 'source_ledger.primary_ledger_path')
+            );
+            $this->assertSame([
+                'public_domain_source',
+                'citation_only',
+                'structure_reference_only',
+                'forbidden_copy_source',
+            ], data_get($inventory, 'source_ledger.allowed_source_labels'));
+            $this->assertTrue((bool) data_get($inventory, 'source_ledger.bfi_2_policy_valid'));
 
             $validation = $this->readJson($runDir.'/validation_report.json');
             $this->assertSame(325, (int) ($validation['asset_count'] ?? 0));
@@ -105,6 +116,48 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
             $this->assertStringNotContainsString('body_zh', $allArtifacts);
         } finally {
             $this->deleteDirectory($artifactRoot);
+        }
+    }
+
+    public function test_source_ledger_contract_fixes_source_labels_and_bfi2_copy_boundary(): void
+    {
+        $summary = app(BigFiveResultPageV2AssetAgent::class)->audit([
+            'run_id' => 'source-ledger-contract',
+            'artifact_dir' => $this->tempDir('big5-v2-agent-source-ledger'),
+        ]);
+        $artifactDir = (string) ($summary['artifact_dir'] ?? '');
+
+        try {
+            $inventory = $this->readJson($artifactDir.'/input_inventory.json');
+            $sourceLedger = (array) data_get($inventory, 'source_ledger', []);
+
+            $this->assertTrue((bool) ($sourceLedger['valid'] ?? false));
+            $this->assertSame([], $sourceLedger['errors'] ?? ['unexpected']);
+            $this->assertSame([
+                'public_domain_source',
+                'citation_only',
+                'structure_reference_only',
+                'forbidden_copy_source',
+            ], $sourceLedger['allowed_source_labels'] ?? []);
+            $this->assertSame(1, data_get($sourceLedger, 'label_counts.public_domain_source'));
+            $this->assertGreaterThanOrEqual(1, (int) data_get($sourceLedger, 'label_counts.citation_only', 0));
+            $this->assertGreaterThanOrEqual(1, (int) data_get($sourceLedger, 'label_counts.structure_reference_only', 0));
+            $this->assertSame(1, data_get($sourceLedger, 'label_counts.forbidden_copy_source'));
+            $this->assertTrue((bool) ($sourceLedger['bfi_2_policy_valid'] ?? false));
+
+            foreach ([
+                'ipip_official',
+                'bfi_2_colby',
+                'bigfive_web_github',
+                'internal_big5_v2_formal_doc',
+                'internal_big5_twenty_thousand_word_final_doc',
+                'existing_big5_result_page_v2_asset_packs',
+                'restricted_bfi2_item_text_and_proprietary_reports',
+            ] as $sourceId) {
+                $this->assertContains($sourceId, (array) ($sourceLedger['required_source_ids_present'] ?? []));
+            }
+        } finally {
+            $this->deleteDirectory(dirname($artifactDir));
         }
     }
 
