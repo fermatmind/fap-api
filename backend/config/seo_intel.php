@@ -298,6 +298,7 @@ return [
         'allowed_page_entity_types' => [
             'article',
             'research_report',
+            'content_page',
             'home',
             'test_hub',
             'test_detail',

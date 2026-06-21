@@ -1,0 +1,59 @@
+{
+  "version": "seo-agent-post-publish-search-submit.v1",
+  "task": "SEO-AGENT-POST-PUBLISH-SEARCH-SUBMIT-01",
+  "repo": "fap-api",
+  "command": "php artisan seo-agent:post-publish-search-submit",
+  "input_schema": "seo-agent-cms-publish-canary.v1",
+  "output_schema": "seo-agent-post-publish-search-submit.v1",
+  "default_mode": "dry_run_plan",
+  "execute_requires": [
+    "--execute",
+    "--limit=1",
+    "--confirm-evidence-sha256=<publish-evidence-sha256>"
+  ],
+  "supported_targets_v1": [
+    "content_page"
+  ],
+  "channels_v1": [
+    "indexnow",
+    "google_sitemap"
+  ],
+  "max_published_urls_per_execution": 1,
+  "requires_url_truth_row": true,
+  "requires_publish_evidence": {
+    "schema_version": "seo-agent-cms-publish-canary.v1",
+    "status": "success",
+    "execute": true,
+    "writes_committed": true,
+    "published_count": 1,
+    "rollback_evidence_available": true
+  },
+  "write_targets": [
+    "seo_search_channel_queue_items",
+    "seo_search_channel_queue_batches",
+    "seo_search_channel_queue_events"
+  ],
+  "protected_targets_not_written": [
+    "seo_baidu_push_logs",
+    "seo_indexnow_submissions",
+    "seo_domestic_submission_logs"
+  ],
+  "live_submission": {
+    "search_channel_submit": false,
+    "google_indexing_live_api_call": false,
+    "sitemap_submission": false,
+    "external_api_calls": false
+  },
+  "negative_guarantees": {
+    "cms_write": false,
+    "cms_publish": false,
+    "search_channel_submit": false,
+    "indexing_request": false,
+    "google_indexing_live_api_call": false,
+    "sitemap_submission": false,
+    "scheduler_activation": false,
+    "queue_worker_started": false,
+    "external_model_api_call": false
+  },
+  "next_step": "Implement live submission or Google Indexing executor only in a separate explicitly approved PR."
+}
