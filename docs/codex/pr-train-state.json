@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-21T16:19:31+08:00",
+  "updated_at": "2026-06-21T16:47:21+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -39253,7 +39253,7 @@
     "repo": "fap-api",
     "branch": "codex/payment-alipay-return-immediate-compensation-05",
     "base": "main",
-    "status": "pr_open",
+    "status": "merged",
     "title": "PAYMENT-ALIPAY-RETURN-IMMEDIATE-COMPENSATION-05 compensate Alipay return immediately",
     "depends_on": [
       "PAYMENT-ALIPAY-SCHEDULER-BOOTSTRAP-02"
@@ -55187,11 +55187,11 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": "91ac1a794c4ef4bbc2956fe067a8562194cbe443",
+    "commit_sha": "baa0fef96d560dffeb7fc8a12278045e737e4292",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2187",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-21T08:24:53Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-21T15:57:09+08:00",
@@ -55212,6 +55212,11 @@
         "at": "2026-06-21T16:19:31+08:00",
         "status": "pr_open",
         "note": "Opened https://github.com/fermatmind/fap-api/pull/2187 from scoped source-ledger commit 91ac1a794c4ef4bbc2956fe067a8562194cbe443."
+      },
+      {
+        "at": "2026-06-21T16:32:09+08:00",
+        "status": "merged",
+        "note": "Reconciled during BIG5-RESULT-ASSET-VALIDATOR-HARNESS-01: GitHub reports PR #2187 merged at 2026-06-21T08:24:53Z; origin/main contains merge commit baa0fef96d560dffeb7fc8a12278045e737e4292; local main was synced, post-merge validation passed, and task branch cleanup was completed."
       }
     ]
   },
@@ -55219,7 +55224,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-result-asset-validator-harness-01",
     "base": "main",
-    "status": "pending_dependency",
+    "status": "ci_fix_local_checks_passed",
     "train_scope": "big5_result_page_v2_asset_agent",
     "title": "BIG5-RESULT-ASSET-VALIDATOR-HARNESS-01: test(big5):建 result asset validator harness",
     "depends_on": [
@@ -55231,13 +55236,35 @@
         "evidence": "User explicitly requested implementation of the eight-item Big Five Result Page V2 asset-agent plan."
       },
       "dependency": {
-        "status": "pending",
-        "evidence": "Waits for BIG5-RESULT-SOURCE-LEDGER-01 to merge into main."
+        "status": "pass",
+        "evidence": "BIG5-RESULT-SOURCE-LEDGER-01 is merged; origin/main contains merge commit baa0fef96d560dffeb7fc8a12278045e737e4292."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are confined to the AssetAgent command/service/test, Kernel command registration, BigFive ResultPageV2 freeze guard classifier test, and docs/codex PR-train metadata."
+      },
+      "local": {
+        "status": "pass_with_existing_phpunit_warnings",
+        "commands": [
+          "php -l backend/app/Console/Commands/BigFiveResultPageV2AssetAgentAuditCommand.php",
+          "php -l backend/app/Services/BigFive/ResultPageV2/AssetAgent/BigFiveResultPageV2AssetAgent.php",
+          "php -l backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2AssetAgentTest.php",
+          "php -l backend/app/Console/Kernel.php",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2SelectorAssetValidatorTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest --no-ansi",
+          "git diff --check"
+        ],
+        "notes": "Focused tests passed with existing PHPUnit warning classifications. GitHub verify-bigfive exposed the freeze guard classifier gap for the new read-only AssetAgent harness; scoped CI repair passed local revalidation."
+      },
+      "github": {
+        "status": "failed_current_pr_scoped_repair_pushed",
+        "evidence": "PR #2190 verify-bigfive failed because BigFiveResultPageV2CoreBodyPreviewTest flagged the new AssetAgent command/service/Kernel registration as runtime diff. Scoped guard repair passed locally and will be pushed for GitHub recheck."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "19feb4f36851e2319a1462027642496029c9d4cb",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2190",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -55246,6 +55273,26 @@
         "at": "2026-06-21T15:57:09+08:00",
         "status": "pending_dependency",
         "note": "Manifest/state entry authorized; implementation waits for the source ledger PR."
+      },
+      {
+        "at": "2026-06-21T16:32:09+08:00",
+        "status": "local_checks_passed",
+        "note": "Added read-only AssetAgent audit command, service, Kernel registration, and focused tests. Local syntax, focused PHPUnit, selector validator, diff, and scope checks passed; current selector assets still have 3 recorded shareable registry findings deferred to selector QA repair."
+      },
+      {
+        "at": "2026-06-21T16:36:04+08:00",
+        "status": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/2190 from scoped validator harness commit 19feb4f36851e2319a1462027642496029c9d4cb."
+      },
+      {
+        "at": "2026-06-21T16:43:37+08:00",
+        "status": "ci_fix_local_checks_pending",
+        "note": "Inspected GitHub verify-bigfive failure: runtime freeze classifier rejected the new read-only AssetAgent command/service/Kernel registration. Added a narrow BigFive V2 AssetAgent harness classifier path and manifest/state metadata repair; local revalidation pending."
+      },
+      {
+        "at": "2026-06-21T16:47:21+08:00",
+        "status": "ci_fix_local_checks_passed",
+        "note": "Scoped CI repair local checks passed: AssetAgent, selector validator, CoreBodyPreview freeze guard, PHP syntax, JSON/YAML, diff, and scope validation."
       }
     ]
   },
