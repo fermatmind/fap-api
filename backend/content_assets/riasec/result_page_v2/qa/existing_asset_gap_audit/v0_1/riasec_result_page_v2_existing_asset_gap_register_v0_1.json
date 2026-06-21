@@ -1,0 +1,192 @@
+{
+  "schema_version": "fap.riasec.result_page_v2.existing_asset_gap_register.v0.1",
+  "audit_id": "RIASEC-RESULT-EXISTING-ASSET-GAP-AUDIT-01",
+  "created_at_utc": "2026-06-21T15:30:00Z",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "cms_write_performed": false,
+  "runtime_change_performed": false,
+  "frontend_fallback_allowed": false,
+  "private_payload_exported": false,
+  "scope": {
+    "top_level_asset_file_count": 24,
+    "jsonl_asset_file_count": 9,
+    "jsonl_row_count": 1470,
+    "json_asset_file_count": 13,
+    "markdown_companion_file_count": 2,
+    "result_page_v2_source_ledger_present": true,
+    "selector_ready_asset_count": 0,
+    "route_matrix_row_count": 0,
+    "canonical_profile_count": 0,
+    "golden_case_count": 0
+  },
+  "source_files": [
+    "backend/content_assets/riasec/dimension_deep_copy_v1.zh-CN.r3.json",
+    "backend/content_assets/riasec/top3_code_chain_strategy_v1.zh-CN.jsonl",
+    "backend/content_assets/riasec/pair_blend_15_pairs_v1.zh-CN.jsonl",
+    "backend/content_assets/riasec/low_quality_cautious_reading_v1.zh-CN.json",
+    "backend/content_assets/riasec/share_pdf_history_v1.en.json",
+    "backend/content_assets/riasec/share_pdf_history_v1.zh-CN.json",
+    "backend/content_assets/riasec/result_page_v2/source_ledger/v0_1/riasec_result_source_ledger_v0_1.json"
+  ],
+  "inventory_summary": {
+    "top_level_assets": [
+      {
+        "asset_family": "dimension_deep_copy",
+        "files": 1,
+        "rows_or_items": 6,
+        "coverage_note": "Six RIASEC dimensions exist as deep-copy content, but they are not packaged as V2 selector slots."
+      },
+      {
+        "asset_family": "top3_code_chain_strategy",
+        "files": 1,
+        "rows_or_items": 20,
+        "coverage_note": "Top-3 chain copy exists for a subset of code patterns; no 216 route matrix or selector reference layer exists."
+      },
+      {
+        "asset_family": "pair_blend_15_pairs",
+        "files": 1,
+        "rows_or_items": 15,
+        "coverage_note": "Pair blend coverage exists for 15 dimension pairs; not yet expressed as selector conflict-resolution assets."
+      },
+      {
+        "asset_family": "activity_task_examples",
+        "files": 1,
+        "rows_or_items": 360,
+        "coverage_note": "Large activity example table exists in zh-CN only; it is not route-addressable by V2 selector."
+      },
+      {
+        "asset_family": "occupation_examples_boundary",
+        "files": 1,
+        "rows_or_items": 360,
+        "coverage_note": "Occupation examples include safety boundaries but require share-safe and no-recommendation QA before selector use."
+      },
+      {
+        "asset_family": "share_pdf_history",
+        "files": 2,
+        "rows_or_items": null,
+        "coverage_note": "Share/PDF/history copy exists for en and zh-CN, but no dedicated V2 share_safety_registry exists."
+      },
+      {
+        "asset_family": "low_quality_cautious_reading",
+        "files": 1,
+        "rows_or_items": null,
+        "coverage_note": "Low-quality cautious copy exists in zh-CN only; no route matrix or selector fallback binding exists."
+      }
+    ],
+    "jsonl_row_counts": {
+      "140q_task_environment_role_v1.zh-CN.jsonl": 126,
+      "activity_task_examples_v1.zh-CN.jsonl": 360,
+      "aspirations_calibration_v1.zh-CN.jsonl": 70,
+      "disagree_path_v1.zh-CN.jsonl": 45,
+      "feedback_action_lab_v1.zh-CN.jsonl": 204,
+      "next_exploration_nodes_v1.zh-CN.jsonl": 270,
+      "occupation_examples_boundary_v1.zh-CN.jsonl": 360,
+      "pair_blend_15_pairs_v1.zh-CN.jsonl": 15,
+      "top3_code_chain_strategy_v1.zh-CN.jsonl": 20
+    }
+  },
+  "gap_register": [
+    {
+      "gap_id": "RIASEC-GAP-V2-SELECTOR-ASSETS-001",
+      "severity": "P0",
+      "area": "selector_ready_assets",
+      "status": "open",
+      "finding": "No RIASEC Result Page V2 selector-ready asset package exists under result_page_v2.",
+      "evidence": "find backend/content_assets/riasec/result_page_v2 -path '*selector*' returns no selector_ready_assets package.",
+      "introduced_by_current_pr": false,
+      "deferred_to_pr": "RIASEC-RESULT-SELECTOR-QA-REPAIR-01"
+    },
+    {
+      "gap_id": "RIASEC-GAP-ROUTE-MATRIX-001",
+      "severity": "P0",
+      "area": "route_matrix",
+      "status": "open",
+      "finding": "No RIASEC route matrix rows, canonical profile matrix, selector reference resolution table, or conflict-resolution report exists.",
+      "evidence": "result_page_v2 currently contains source_ledger and this QA folder only.",
+      "introduced_by_current_pr": false,
+      "deferred_to_pr": "RIASEC-RESULT-ROUTE-MATRIX-GOLDEN-CASE-QA-01"
+    },
+    {
+      "gap_id": "RIASEC-GAP-GOLDEN-CASES-001",
+      "severity": "P0",
+      "area": "golden_cases",
+      "status": "open",
+      "finding": "No canonical-profile or golden-case package exists for RIASEC Result Page V2.",
+      "evidence": "No result_page_v2 selector_qa_policy golden cases or route-driven golden case QA files exist.",
+      "introduced_by_current_pr": false,
+      "deferred_to_pr": "RIASEC-RESULT-ROUTE-MATRIX-GOLDEN-CASE-QA-01"
+    },
+    {
+      "gap_id": "RIASEC-GAP-SHARE-SAFE-001",
+      "severity": "P1",
+      "area": "share_safe_coverage",
+      "status": "open",
+      "finding": "Share/PDF/history v1 assets exist, but there is no V2 share_safety registry or selector allowlist that proves public share blocks cannot expose raw scores, private payloads, career-match claims, or occupational ranking.",
+      "evidence": "share_pdf_history_v1.en.json and share_pdf_history_v1.zh-CN.json exist; no share_safety_registry exists under result_page_v2.",
+      "introduced_by_current_pr": false,
+      "deferred_to_pr": "RIASEC-RESULT-ASSET-FACTORY-PILOT-BATCH-01"
+    },
+    {
+      "gap_id": "RIASEC-GAP-LOW-QUALITY-001",
+      "severity": "P1",
+      "area": "low_quality_coverage",
+      "status": "open",
+      "finding": "Low-quality cautious copy exists only as a zh-CN v1 asset and is not wired to route-matrix fallback, selector trigger policy, or share-safe redaction.",
+      "evidence": "low_quality_cautious_reading_v1.zh-CN.json exists with fallback_behavior=omit_module; no V2 selector trigger matrix exists.",
+      "introduced_by_current_pr": false,
+      "deferred_to_pr": "RIASEC-RESULT-SELECTOR-QA-REPAIR-01"
+    },
+    {
+      "gap_id": "RIASEC-GAP-FALLBACK-001",
+      "severity": "P1",
+      "area": "fail_closed_fallback",
+      "status": "open",
+      "finding": "Many v1 assets declare frontend_fallback_allowed=false and omit-module fallback, but there is no V2 selector policy proving missing content fails closed across route, selector, share, PDF, history, and compare surfaces.",
+      "evidence": "Existing v1 asset flags are local to individual files; no result_page_v2 selector_qa_policy package exists.",
+      "introduced_by_current_pr": false,
+      "deferred_to_pr": "RIASEC-RESULT-SELECTOR-QA-REPAIR-01"
+    },
+    {
+      "gap_id": "RIASEC-GAP-SCENARIO-SCOPE-001",
+      "severity": "P2",
+      "area": "scenario_scope",
+      "status": "open",
+      "finding": "Activity, exploration, feedback, and aspiration tables are broad but not normalized into V2 scenario/action_plan selector registries.",
+      "evidence": "activity_task_examples has 360 rows, next_exploration_nodes has 270 rows, and feedback_action_lab has 204 rows; no V2 scenario registry exists.",
+      "introduced_by_current_pr": false,
+      "deferred_to_pr": "RIASEC-RESULT-ASSET-FACTORY-PILOT-BATCH-01"
+    },
+    {
+      "gap_id": "RIASEC-GAP-LOCALE-001",
+      "severity": "P2",
+      "area": "locale_coverage",
+      "status": "open",
+      "finding": "Most substantive v1 assets are zh-CN only; en assets exist mainly for FAQ, method boundary, share/PDF/history, and technical summary.",
+      "evidence": "The 9 JSONL tables are zh-CN only. en JSON assets exist for faq, professional_method_boundary, share_pdf_history, and technical_note_user_summary.",
+      "introduced_by_current_pr": false,
+      "deferred_to_pr": "RIASEC-RESULT-ASSET-FACTORY-PILOT-BATCH-01"
+    },
+    {
+      "gap_id": "RIASEC-GAP-FORBIDDEN-TERMS-001",
+      "severity": "P1",
+      "area": "safety_claim_scan",
+      "status": "open",
+      "finding": "The PR3 strict harness reports 13 forbidden-term hits in the existing RIASEC v1 corpus.",
+      "evidence": "cd backend && APP_ENV=testing php artisan riasec:result-page-v2-agent audit --strict --json --no-ansi exits 1 with strict_failures=[\"forbidden_public_payload_leaks\"], validation_error_count=0, leak_hit_count=13.",
+      "introduced_by_current_pr": false,
+      "sidecar_required": true,
+      "deferred_to_pr": "RIASEC-RESULT-SELECTOR-QA-REPAIR-01"
+    }
+  ],
+  "go_no_go": {
+    "staging_audit_evidence": "go",
+    "selector_input_use": "no_go_until_selector_assets_and_route_matrix_exist",
+    "asset_generation": "no_go",
+    "cms_import": "no_go",
+    "runtime_wrapper_enablement": "no_go",
+    "production_gate": "no_go"
+  }
+}
