@@ -20,6 +20,17 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
 {
     use RefreshDatabase;
 
+    private const PILOT_PATHS = [
+        '/en/personality/intj-a-vs-intj-t',
+        '/zh/personality/istj-a',
+        '/en/personality/intp-a-vs-intp-t',
+        '/zh/personality/infp-t',
+        '/en/personality/intj-a',
+        '/en/personality/intj-t',
+        '/zh/personality/intj-a',
+        '/zh/personality/intj-t',
+    ];
+
     public function test_dry_run_lists_eight_latest_revisions_without_live_writes(): void
     {
         $this->seedTargets();
@@ -228,6 +239,91 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         $this->assertSame(0, PersonalityProfileSection::query()->count());
     }
 
+    public function test_dry_run_supports_eighty_eight_agent_projection_revisions_without_live_writes(): void
+    {
+        $this->seedProjectionTargets();
+        [$packagePath, $qaPath] = $this->writeProjectionArtifacts($this->validProjectionPackage(), $this->validProjectionQa());
+        $this->createProjectionDraftRevisions($packagePath, $qaPath);
+
+        $exitCode = Artisan::call('personality:mbti64-cms-revision-promote', [
+            '--package' => $packagePath,
+            '--dry-run' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertTrue($payload['ok']);
+        $this->assertTrue($payload['dry_run']);
+        $this->assertFalse($payload['write']);
+        $this->assertSame(88, $payload['row_count']);
+        $this->assertSame(58, $payload['variant_row_count']);
+        $this->assertSame(30, $payload['comparison_row_count']);
+        $this->assertSame(88, $payload['would_promote_count']);
+        $this->assertFalse($payload['writes_committed']);
+        $this->assertSame('mbti64_agent_projection_draft_v1', $payload['rows'][0]['snapshot_key']);
+        $this->assertSame(0, PersonalityProfileVariantSeoMeta::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantSection::query()->count());
+        $this->assertSame(0, PersonalityProfileSection::query()->count());
+    }
+
+    public function test_write_promotes_eighty_eight_agent_projection_revisions_without_index_search_side_effects(): void
+    {
+        $targets = $this->seedProjectionTargets();
+        [$packagePath, $qaPath] = $this->writeProjectionArtifacts($this->validProjectionPackage(), $this->validProjectionQa());
+        $this->createProjectionDraftRevisions($packagePath, $qaPath);
+        $profileBefore = $this->profilePublishState($targets['en|ENFJ']);
+        $variantBefore = $this->variantPublishState($targets['en|ENFJ-A']);
+
+        $exitCode = Artisan::call('personality:mbti64-cms-revision-promote', $this->promoteWriteOptions($packagePath));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertTrue($payload['ok']);
+        $this->assertTrue($payload['write']);
+        $this->assertTrue($payload['writes_committed']);
+        $this->assertTrue($payload['content_promotion_attempted']);
+        $this->assertFalse($payload['index_attempted']);
+        $this->assertFalse($payload['sitemap_llms_release_attempted']);
+        $this->assertFalse($payload['search_release_attempted']);
+        $this->assertFalse($payload['queue_enqueue_attempted']);
+        $this->assertSame(88, $payload['promoted_count']);
+        $this->assertSame(58, PersonalityProfileVariantSeoMeta::query()->count());
+        $this->assertSame(30, PersonalityProfileSection::query()->where('section_key', 'mbti64_comparison_a_vs_t')->count());
+        $this->assertSame($profileBefore, $this->profilePublishState($targets['en|ENFJ']));
+        $this->assertSame($variantBefore, $this->variantPublishState($targets['en|ENFJ-A']));
+
+        $seo = PersonalityProfileVariantSeoMeta::query()
+            ->where('personality_profile_variant_id', (int) $targets['en|ENFJ-A']->id)
+            ->firstOrFail();
+        $this->assertSame('ENFJ-A Meaning Guide | FermatMind', $seo->seo_title);
+        $this->assertSame('/en/personality/enfj-a', $seo->canonical_url);
+
+        $comparison = PersonalityProfileSection::query()
+            ->where('profile_id', (int) $targets['en|ENFJ']->id)
+            ->where('section_key', 'mbti64_comparison_a_vs_t')
+            ->firstOrFail();
+        $this->assertSame('ENFJ-A-VS-ENFJ-T Meaning', $comparison->title);
+        $this->assertSame('/en/personality/enfj-a-vs-enfj-t', $comparison->payload_json['url'] ?? null);
+    }
+
+    public function test_second_agent_projection_write_is_idempotent(): void
+    {
+        $this->seedProjectionTargets();
+        [$packagePath, $qaPath] = $this->writeProjectionArtifacts($this->validProjectionPackage(), $this->validProjectionQa());
+        $this->createProjectionDraftRevisions($packagePath, $qaPath);
+
+        $this->assertSame(0, Artisan::call('personality:mbti64-cms-revision-promote', $this->promoteWriteOptions($packagePath)));
+        $secondExit = Artisan::call('personality:mbti64-cms-revision-promote', $this->promoteWriteOptions($packagePath));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $secondExit, Artisan::output());
+        $this->assertTrue($payload['ok']);
+        $this->assertFalse($payload['writes_committed']);
+        $this->assertSame(0, $payload['promoted_count']);
+        $this->assertSame(88, $payload['skipped_existing_count']);
+    }
+
     /**
      * @return array<string,PersonalityProfile|PersonalityProfileVariant>
      */
@@ -311,6 +407,26 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
             'is_published' => true,
             'published_at' => now(),
         ]);
+    }
+
+    /**
+     * @return array<string,PersonalityProfile|PersonalityProfileVariant>
+     */
+    private function seedProjectionTargets(): array
+    {
+        $targets = [];
+        foreach (['en', 'zh-CN'] as $locale) {
+            foreach (PersonalityProfile::BASE_TYPE_CODES as $typeCode) {
+                $profile = $this->createProfile($locale, $typeCode, $typeCode.' fixture');
+                $targets[$locale.'|'.$typeCode] = $profile;
+                foreach (['A', 'T'] as $variantCode) {
+                    $runtimeTypeCode = $typeCode.'-'.$variantCode;
+                    $targets[$locale.'|'.$runtimeTypeCode] = $this->createVariant($profile, $runtimeTypeCode);
+                }
+            }
+        }
+
+        return $targets;
     }
 
     /**
@@ -446,6 +562,209 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         ]);
 
         $this->assertSame(0, $exitCode, Artisan::output());
+    }
+
+    private function createProjectionDraftRevisions(string $packagePath, string $qaPath): void
+    {
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', [
+            '--package' => $packagePath,
+            '--qa' => $qaPath,
+            '--write' => true,
+            '--json' => true,
+            '--draft-only' => true,
+            '--no-publish' => true,
+            '--no-index' => true,
+            '--no-sitemap' => true,
+            '--no-llms' => true,
+            '--no-search-release' => true,
+            '--operator-approved' => 'MBTI64-CMS-PROJECTION-DRAFT-88-01',
+        ]);
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function validProjectionPackage(): array
+    {
+        $recommendations = [];
+        foreach ($this->projectionTargetPaths() as $path) {
+            $recommendations[] = $this->projectionRecommendation($path);
+        }
+
+        return [
+            'artifact' => 'MBTI64-PUBLIC-PROFILE-AGENT-EXPANSION-88-01',
+            'version' => 'mbti64.agent_expansion_88_recommendations.v1',
+            'generated_at' => '2026-06-21T00:00:00Z',
+            'status' => 'pass_ready_for_qa_gates',
+            'summary' => [
+                'recommendation_count' => 88,
+                'variant_pages' => 58,
+                'comparison_pages' => 30,
+                'pilot_urls_excluded' => 8,
+            ],
+            'recommendations' => $recommendations,
+            'blockers' => [],
+            'warnings' => ['GSC_EVIDENCE_PENDING'],
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function validProjectionQa(): array
+    {
+        $pageResults = [];
+        foreach ($this->projectionTargetPaths() as $path) {
+            $pageResults[] = [
+                'target_url' => 'https://fermatmind.com'.$path,
+                'locale' => str_starts_with($path, '/zh/') ? 'zh-CN' : 'en',
+                'page_type' => str_contains($path, '-a-vs-') ? 'comparison' : 'variant',
+                'gates' => [
+                    'schema_validation' => 'pass',
+                    'trademark_claim_gate' => 'pass',
+                    'claim_risk_gate' => 'pass',
+                    'duplicate_template_gate' => 'pass',
+                    'private_route_gate' => 'pass',
+                    'result_page_leakage_gate' => 'pass',
+                    'seo_projection_gate' => 'pass',
+                    'bilingual_consistency_gate' => 'pass',
+                ],
+                'blockers' => [],
+                'warnings' => ['GSC_EVIDENCE_PENDING'],
+                'decision' => 'PASS_READY_FOR_CMS_DRAFT',
+            ];
+        }
+
+        return [
+            'artifact' => 'MBTI64-PUBLIC-PROFILE-AGENT-EXPANSION-88-QA-01',
+            'generated_at' => '2026-06-21T00:00:00Z',
+            'status' => 'pass_ready_for_cms_draft',
+            'summary' => [
+                'checked_recommendation_count' => 88,
+                'pass_ready_for_cms_draft_count' => 88,
+                'blocked_count' => 0,
+            ],
+            'page_results' => $pageResults,
+            'blockers' => [],
+            'warnings' => ['GSC_EVIDENCE_PENDING'],
+            'final_decision' => 'PASS_READY_FOR_CMS_DRAFT',
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function projectionTargetPaths(): array
+    {
+        $paths = [];
+        foreach (['en', 'zh'] as $prefix) {
+            foreach (PersonalityProfile::BASE_TYPE_CODES as $typeCode) {
+                $lower = strtolower($typeCode);
+                $comparison = '/'.$prefix.'/personality/'.$lower.'-a-vs-'.$lower.'-t';
+                if (! in_array($comparison, self::PILOT_PATHS, true)) {
+                    $paths[] = $comparison;
+                }
+
+                foreach (['a', 't'] as $variant) {
+                    $path = '/'.$prefix.'/personality/'.$lower.'-'.$variant;
+                    if (! in_array($path, self::PILOT_PATHS, true)) {
+                        $paths[] = $path;
+                    }
+                }
+            }
+        }
+
+        return $paths;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function projectionRecommendation(string $path): array
+    {
+        $locale = str_starts_with($path, '/zh/') ? 'zh-CN' : 'en';
+        $slug = basename($path);
+        $titlePrefix = strtoupper($slug);
+
+        return [
+            'recommendation_id' => 'fixture:'.$path,
+            'target_url' => 'https://fermatmind.com'.$path,
+            'framework' => 'mbti64',
+            'locale' => $locale,
+            'current_surface' => [
+                'title' => 'Current '.$slug,
+                'description' => 'Current description',
+                'h1' => 'Current H1',
+            ],
+            'observed_signal' => ['evidence_state' => 'gsc_pending'],
+            'reference_patterns_used' => [
+                ['pattern_id' => 'fixture_reference', 'source_url' => 'https://fermatmind.com/en/personality/intj-a'],
+            ],
+            'source_inputs' => [
+                'cms_or_api_snapshot' => 'fixture',
+                'reference_pack' => 'fixture',
+                'seo_signal' => 'GSC_EVIDENCE_PENDING',
+            ],
+            'recommendations' => [
+                'title' => ['recommended' => $titlePrefix.' Meaning Guide | FermatMind'],
+                'description' => ['recommended' => 'Safe public personality explanation for '.$slug.'.'],
+                'h1' => ['recommended' => $titlePrefix.' Meaning'],
+                'quick_answer' => ['recommended' => 'This public profile explains '.$slug.' for reflection, not diagnosis or deterministic decisions.'],
+                'faq' => array_map(
+                    static fn (int $index): array => [
+                        'question' => 'Fixture question '.$index.'?',
+                        'answer' => 'Fixture answer '.$index.' for safe public profile reading.',
+                        'reason' => 'Fixture QA.',
+                    ],
+                    [1, 2, 3, 4, 5]
+                ),
+                'internal_links' => [
+                    [
+                        'href' => $locale === 'zh-CN' ? '/zh/personality' : '/en/personality',
+                        'anchor_text' => $locale === 'zh-CN' ? '人格首页' : 'Personality hub',
+                        'role' => 'hub',
+                        'safe_public_route' => true,
+                    ],
+                    [
+                        'href' => $locale === 'zh-CN'
+                            ? '/zh/tests/mbti-personality-test-16-personality-types'
+                            : '/en/tests/mbti-personality-test-16-personality-types',
+                        'anchor_text' => $locale === 'zh-CN' ? 'MBTI 测试' : 'MBTI test',
+                        'role' => 'related_test',
+                        'safe_public_route' => true,
+                    ],
+                ],
+                'differentiation_notes' => ['Fixture differentiation note.'],
+            ],
+            'qa_required' => [
+                'schema_validation',
+                'trademark_claim_gate',
+                'claim_risk_gate',
+                'duplicate_template_gate',
+                'private_route_gate',
+                'result_page_leakage_gate',
+                'seo_projection_gate',
+                'bilingual_consistency_gate',
+            ],
+            'blocked_reason' => null,
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $package
+     * @param  array<string,mixed>  $qa
+     * @return array{0:string,1:string}
+     */
+    private function writeProjectionArtifacts(array $package, array $qa): array
+    {
+        $packagePath = sys_get_temp_dir().'/mbti64-cms-projection-promote-package-'.bin2hex(random_bytes(6)).'.json';
+        $qaPath = sys_get_temp_dir().'/mbti64-cms-projection-promote-qa-'.bin2hex(random_bytes(6)).'.json';
+        File::put($packagePath, json_encode($package, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+        File::put($qaPath, json_encode($qa, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+
+        return [$packagePath, $qaPath];
     }
 
     /**
