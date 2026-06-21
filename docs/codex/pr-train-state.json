@@ -55858,7 +55858,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-asset-validator-harness-01",
     "base": "main",
-    "status": "local_checks_passed_with_external_sidecar",
+    "status": "github_checks_pending",
     "train_scope": "riasec_result_page_v2_asset_agent",
     "title": "RIASEC-RESULT-ASSET-VALIDATOR-HARNESS-01: test(riasec):建 result asset validator harness",
     "depends_on": [
@@ -55894,11 +55894,15 @@
       "scope_validation": {
         "status": "pass",
         "evidence": "Changed files are confined to the RIASEC AssetAgent command/service/test, console command registration, bootstrap command discovery, and docs/codex PR-train metadata allowed for RIASEC-RESULT-ASSET-VALIDATOR-HARNESS-01."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": "PR #2224 opened; waiting for required GitHub checks on current head."
       }
     },
     "failure_reason": null,
-    "commit_sha": "11df8984aae018a3915495eae9286b9377aa72ac",
-    "pr_url": null,
+    "commit_sha": "e37a2b23dda0b965d527a0e01b59022c714b403a",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2224",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -55922,6 +55926,11 @@
         "at": "2026-06-21T22:52:36+08:00",
         "status": "commit_created",
         "note": "Recorded scoped implementation commit 11df8984aae018a3915495eae9286b9377aa72ac after local checks and scope validation passed."
+      },
+      {
+        "at": "2026-06-21T22:53:32+08:00",
+        "status": "github_checks_pending",
+        "note": "Opened PR #2224 from commit e37a2b23dda0b965d527a0e01b59022c714b403a; waiting for required GitHub checks."
       }
     ],
     "sidecar_issues": [
