@@ -1,0 +1,37 @@
+{
+  "schema": "big5_result_page_v2.pilot_run_rollback.v0_1",
+  "package": "pilot_run_evidence",
+  "version": "v0_1",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_pilot": true,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "production_percentage_enabled": false,
+  "pilot_run_reviewed": true,
+  "pilot_run_decision": "GO_ALLOWLIST_REVIEWED",
+  "production_decision": "NO_GO",
+  "rollback_controls": {
+    "disable_public_pilot": true,
+    "clear_allowlist": true,
+    "set_rollout_percentage_to_zero": true,
+    "keep_production_percentage_disabled": true,
+    "keep_production_max_percentage_zero": true,
+    "keep_result_page_scope_only": true
+  },
+  "kill_switch_evidence": {
+    "default_access_decision": "deny",
+    "non_allowlisted_request_decision": "deny",
+    "production_without_allowlist_decision": "deny",
+    "percentage_without_explicit_enablement_decision": "deny",
+    "blast_radius_over_max_decision": "deny"
+  },
+  "rollback_validation": {
+    "requires_database_write": false,
+    "requires_content_import": false,
+    "requires_frontend_change": false,
+    "requires_ops_panel_change": false,
+    "preserves_legacy_fallback": true
+  }
+}

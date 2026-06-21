@@ -1,0 +1,68 @@
+{
+  "schema": "big5_result_page_v2.pilot_run_evidence.v0_1",
+  "package": "pilot_run_evidence",
+  "version": "v0_1",
+  "generated_at": "2026-06-21T00:00:00Z",
+  "mode": "allowlist_pilot_run_review",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_pilot": true,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "production_percentage_enabled": false,
+  "pilot_run_reviewed": true,
+  "pilot_run_decision": "GO_ALLOWLIST_REVIEWED",
+  "production_decision": "NO_GO",
+  "allowlist_configuration_shape": {
+    "pilot_gate": "public_pilot_allowlist_only",
+    "surface_scope": "result_page_only",
+    "allowed_scale_codes": [
+      "BIG5_OCEAN"
+    ],
+    "allowed_form_codes": [
+      "big5_90"
+    ],
+    "allowed_locales": [
+      "zh-CN"
+    ],
+    "member_reference_policy": "opaque_anonymous_subjects_only",
+    "direct_result_reference_policy": "not_used",
+    "user_or_org_reference_policy": "not_used",
+    "rollout_percentage": 0,
+    "production_percentage_enabled": false,
+    "production_max_percentage": 0
+  },
+  "sample_scope": {
+    "sample_kind": "fresh_anonymous_big5_live_result",
+    "sample_count": 1,
+    "sample_boundary": "redacted_result_only",
+    "contains_real_user_data": false,
+    "contains_private_links": false,
+    "contains_raw_measurements": false,
+    "contains_public_rank_values": false,
+    "contains_unreviewed_content": false
+  },
+  "reviewed_evidence": {
+    "m7_gate": "backend/content_assets/big5/result_page_v2/qa/m7_pilot_gate/v0_1/big5_v2_m7_pilot_gate_report_v0_1.json",
+    "all_surface_readiness": "backend/content_assets/big5/result_page_v2/qa/all_surface_public_pilot_readiness/v0_1/big5_all_surface_public_pilot_readiness_report_v0_1.json",
+    "rendered_preview": "backend/content_assets/big5/result_page_v2/qa/rendered_preview/expanded_surfaces/v0_1/big5_o59_expanded_rendered_qa_report_v0_1.json",
+    "access_gate_contract": "backend/tests/Feature/V0_3/BigFiveV2PublicPilotAccessGateTest.php",
+    "fail_closed_contract": "backend/tests/Feature/V0_3/BigFiveV2PublicPilotFailClosedTest.php"
+  },
+  "operator_review": {
+    "operator_review_complete": true,
+    "redaction_status": "pass",
+    "allowlist_shape_status": "pass",
+    "rollback_status": "pass",
+    "no_production_status": "pass"
+  },
+  "must_not_change": [
+    "fap-web result page copy",
+    "runtime defaults",
+    "production import gate",
+    "production rollout gate",
+    "M8 Ops reporting",
+    "legacy fallback ownership"
+  ]
+}
