@@ -6,8 +6,11 @@ namespace App\Console\Commands;
 
 use App\Models\CmsTranslationRevision;
 use App\Models\ContentPage;
+use FilesystemIterator;
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 use RuntimeException;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
@@ -250,11 +253,45 @@ final class SeoAgentL5aCmsDraftWriteCanaryCommand extends Command
     private function sourcePackagePath(array $candidateReview): ?string
     {
         $path = trim((string) data_get($candidateReview, 'input_artifacts.cms_draft_package_dry_run.path'));
-        if ($path === '' || str_contains($path, "\0") || ! is_file($path) || ! is_readable($path)) {
+        if ($path !== '' && ! str_contains($path, "\0") && is_file($path) && is_readable($path)) {
+            return $path;
+        }
+
+        $sha = strtolower(trim((string) data_get($candidateReview, 'input_artifacts.cms_draft_package_dry_run.sha256')));
+        if (preg_match('/\A[a-f0-9]{64}\z/', $sha) !== 1) {
             return null;
         }
 
-        return $path;
+        return $this->sourcePackagePathBySha($sha);
+    }
+
+    private function sourcePackagePathBySha(string $sha): ?string
+    {
+        $root = storage_path('app/seo-agent');
+        if (! is_dir($root) || ! is_readable($root)) {
+            return null;
+        }
+
+        $files = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator($root, FilesystemIterator::SKIP_DOTS)
+        );
+
+        foreach ($files as $file) {
+            if (! $file->isFile() || $file->getExtension() !== 'json') {
+                continue;
+            }
+
+            $path = $file->getPathname();
+            if (! is_readable($path)) {
+                continue;
+            }
+
+            if ((hash_file('sha256', $path) ?: '') === $sha) {
+                return $path;
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -353,7 +390,7 @@ final class SeoAgentL5aCmsDraftWriteCanaryCommand extends Command
             $input['--execute'] = true;
         }
 
-        $buffer = new BufferedOutput();
+        $buffer = new BufferedOutput;
         $exitCode = $command->run(new ArrayInput($input), $buffer);
         $summary = json_decode(trim($buffer->fetch()), true);
         if (! is_array($summary)) {
