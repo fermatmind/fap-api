@@ -31,12 +31,20 @@
       "review_required",
       "source_reference",
       "frontend_fallback",
-      "production_use_allowed",
-      "ready_for_runtime",
-      "ready_for_pilot",
-      "ready_for_production"
-    ]
-  },
+            "production_use_allowed",
+            "ready_for_runtime",
+            "ready_for_pilot",
+            "ready_for_production"
+        ],
+        "slot_key_prefix_aliases": {
+            "module_02_quick": {
+                "module_key": "module_02_quick_understanding",
+                "status": "legacy_slot_prefix_allowed",
+                "reason": "selector-ready assets keep compact module_02_quick.* slot keys while runtime module keys remain module_02_quick_understanding",
+                "must_not_be_used_as_module_key": true
+            }
+        }
+    },
   "scope_overrides": {
     "low_quality": {
       "allowed_registries": [
