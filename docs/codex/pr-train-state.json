@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-22T08:42:00+08:00",
+  "updated_at": "2026-06-22T08:44:00+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -57220,7 +57220,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-v2-auto-pr-orchestrator",
     "base": "main",
-    "status": "local_validated",
+    "status": "pr_open",
     "train_scope": "big5_result_page_v2_asset_agent_automation",
     "title": "B5-RESULT-AUTO-PR-ORCHESTRATOR-01: Plan Big Five V2 agent artifact PRs",
     "depends_on": [
@@ -57254,12 +57254,12 @@
       },
       "github": {
         "status": "pending",
-        "evidence": null
+        "evidence": "PR #2242 open; waiting for GitHub checks after second rebase onto latest origin/main."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "244f2c0b4c7803fada3417503052743ce93881a7",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2242",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -57268,6 +57268,11 @@
         "at": "2026-06-22T08:42:00+08:00",
         "status": "local_validated",
         "note": "Local validation and scope validation passed for dry-run artifact-only auto PR orchestrator planning after rebase."
+      },
+      {
+        "at": "2026-06-22T08:44:00+08:00",
+        "status": "pr_open",
+        "note": "PR #2242 remains open after second rebase onto latest origin/main; waiting for required GitHub checks."
       }
     ]
   }
