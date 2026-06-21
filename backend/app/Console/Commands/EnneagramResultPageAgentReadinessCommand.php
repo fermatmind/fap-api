@@ -15,7 +15,8 @@ final class EnneagramResultPageAgentReadinessCommand extends Command
         {--run-id= : Stable run identifier for the artifact directory}
         {--artifact-dir= : Optional artifact root; defaults to backend/artifacts/enneagram_result_page_agent}
         {--candidate-dir= : Optional existing Phase8B candidate directory to check for required artifact names}
-        {--strict : Return non-zero when a provided candidate directory is missing required artifacts}
+        {--source-ledger-dir= : Optional source ledger directory; defaults to backend/content_assets/enneagram/result_page/source_ledger}
+        {--strict : Return non-zero when the source ledger or provided candidate directory is invalid}
         {--json : Emit machine-readable summary}';
 
     protected $description = 'Read-only Enneagram result page content asset agent readiness/control-packet audit.';
@@ -33,6 +34,7 @@ final class EnneagramResultPageAgentReadinessCommand extends Command
                 'run_id' => trim((string) $this->option('run-id')),
                 'artifact_dir' => trim((string) $this->option('artifact-dir')),
                 'candidate_dir' => trim((string) $this->option('candidate-dir')),
+                'source_ledger_dir' => trim((string) $this->option('source-ledger-dir')),
                 'strict' => (bool) $this->option('strict'),
             ]);
 
