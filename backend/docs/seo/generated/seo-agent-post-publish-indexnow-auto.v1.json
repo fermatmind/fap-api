@@ -1,0 +1,72 @@
+{
+  "version": "seo-agent-post-publish-indexnow-auto.v1",
+  "task": "SEO-AGENT-POST-PUBLISH-INDEXNOW-AUTO-01",
+  "repo": "fap-api",
+  "command": "php artisan seo-agent:post-publish-indexnow-auto",
+  "input_schemas": [
+    "seo-agent-cms-publish-canary.v1",
+    "seo-agent-cms-publish-auto-canary.v1"
+  ],
+  "output_schema": "seo-agent-post-publish-indexnow-auto.v1",
+  "default_mode": "dry_run_plan",
+  "execute_requires": [
+    "--execute",
+    "--limit=1..3",
+    "successful CMS publish evidence",
+    "URL Truth row for each published ContentPage"
+  ],
+  "max_published_urls_per_execution": 3,
+  "live_submit_channels_v1": [
+    "indexnow"
+  ],
+  "blocked_live_submit_channels_v1": [
+    "google_sitemap",
+    "google_indexing",
+    "baidu_push",
+    "so360_submit",
+    "sogou_submit",
+    "shenma_submit"
+  ],
+  "supported_targets_v1": [
+    "content_page"
+  ],
+  "pipeline": [
+    "validate_publish_evidence",
+    "resolve_published_content_page_safe_path",
+    "read_url_truth",
+    "enqueue_indexnow",
+    "approve_bounded_queue_item",
+    "submit_indexnow_bounded_live",
+    "write_sanitized_evidence"
+  ],
+  "negative_guarantees": {
+    "cms_write": false,
+    "cms_publish": false,
+    "google_sitemap_live_submit": false,
+    "google_indexing_api_call": false,
+    "baidu_push_live_submit": false,
+    "scheduler_activation": false,
+    "queue_worker_started": false,
+    "external_model_api_call": false,
+    "frontend_code_mutation": false
+  },
+  "evidence": {
+    "records_publish_evidence_sha256": true,
+    "records_queue_item_ids": true,
+    "records_url_hashes": true,
+    "records_http_status": true,
+    "forbidden_fields_absent": [
+      "raw_url",
+      "raw_query",
+      "credential_path",
+      "client_email",
+      "private_key",
+      "Bearer token",
+      "cookie",
+      "content_md",
+      "content_html",
+      "cms_draft_body"
+    ]
+  },
+  "next_step": "GSC post-publish feedback remains a separate PR."
+}
