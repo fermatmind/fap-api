@@ -172,6 +172,7 @@ use App\Console\Commands\SeoAgentCodexReviewRunnerCommand;
 use App\Console\Commands\SeoAgentCmsDraftPackageDryRunCommand;
 use App\Console\Commands\SeoAgentCmsDraftWriteCommand;
 use App\Console\Commands\SeoAgentCmsPublishCanaryCommand;
+use App\Console\Commands\SeoAgentGscOpportunityAutoDraftCommand;
 use App\Console\Commands\SeoAgentPostPublishSearchSubmitCommand;
 use App\Console\Commands\SeoIntelSearchChannelQueueCommand;
 use App\Console\Commands\SeoAgentCmsFaqGapScanCommand;
@@ -376,6 +377,7 @@ class Kernel extends ConsoleKernel
         SeoAgentCmsDraftPackageDryRunCommand::class,
         SeoAgentCmsDraftWriteCommand::class,
         SeoAgentCmsPublishCanaryCommand::class,
+        SeoAgentGscOpportunityAutoDraftCommand::class,
         SeoAgentPostPublishSearchSubmitCommand::class,
         SeoAgentRuntimeSeoQaScanCommand::class,
         SeoAgentOpportunityAggregateCommand::class,

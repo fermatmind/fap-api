@@ -1,0 +1,66 @@
+{
+  "version": "seo-agent-gsc-opportunity-auto-draft.v1",
+  "task": "SEO-AGENT-GSC-OPPORTUNITY-AUTO-DRAFT-01",
+  "repo": "fap-api",
+  "type": "readonly_gsc_opportunity_to_cms_draft_dryrun_contract",
+  "command": "php artisan seo-agent:gsc-opportunity-auto-draft",
+  "inputs": [
+    "seo_intel.seo_gsc_daily",
+    "seo_intel.seo_urls",
+    "gsc_data_quality_gate"
+  ],
+  "outputs": [
+    "seo-agent-gsc-opportunity-auto-draft.v1",
+    "seo-agent-opportunity-aggregate.v1",
+    "seo-agent-codex-review-handoff.v1",
+    "seo-agent-codex-review-verdict.v1",
+    "seo-agent-cms-draft-package-dry-run.v1"
+  ],
+  "candidate_contract": {
+    "source_family": "gsc_performance",
+    "data_origin": "live_gsc_api",
+    "min_impressions": 50,
+    "max_ctr_ppm": 10000,
+    "position_milli_window": [8000, 20000],
+    "query_type_required": "non_brand",
+    "brand_query_allowed": false,
+    "cms_target_required": true,
+    "allowed_subject_types": ["article", "content_page"],
+    "target_gap_types": [
+      "gsc_low_ctr_title_opportunity",
+      "gsc_low_ctr_description_opportunity"
+    ]
+  },
+  "forbidden_input_or_output_fields": [
+    "raw_url",
+    "raw_query",
+    "full_url",
+    "credential_path",
+    "service_account_json",
+    "client_email",
+    "private_key",
+    "token",
+    "cookie",
+    "session",
+    "content_md",
+    "content_html",
+    "raw_html",
+    "cms_draft_body"
+  ],
+  "negative_guarantees": {
+    "database_write": false,
+    "cms_write": false,
+    "cms_publish": false,
+    "search_channel_enqueue": false,
+    "search_channel_submit": false,
+    "indexing_request": false,
+    "sitemap_submission": false,
+    "scheduler_activation": false,
+    "queue_worker_started": false,
+    "production_env_change": false,
+    "google_search_console_api_call": false,
+    "google_indexing_api_call": false,
+    "external_model_api_call": false
+  },
+  "next_step": "A separate controlled CMS draft writer may consume the dry-run package after policy approval; this command never writes or publishes CMS content."
+}

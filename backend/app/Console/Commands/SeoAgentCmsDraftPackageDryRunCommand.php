@@ -243,7 +243,9 @@ final class SeoAgentCmsDraftPackageDryRunCommand extends Command
         foreach ($gapCodes as $code) {
             $fields[] = match ($code) {
                 'missing_title' => 'seo_title',
+                'gsc_low_ctr_title_opportunity', 'gsc_low_ctr_rank_8_20' => 'seo_title',
                 'missing_meta_description' => 'seo_description',
+                'gsc_low_ctr_description_opportunity' => 'seo_description',
                 'missing_canonical' => 'canonical_url_or_path',
                 'missing_indexability_metadata' => 'is_indexable_or_robots',
                 'missing_faq_items', 'missing_visible_faq' => 'faq_items',
