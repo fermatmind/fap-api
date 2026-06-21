@@ -17,6 +17,8 @@ final class BigFiveResultPageV2AssetAgent
 {
     public const SCHEMA_VERSION = 'fap.big5.result_page_v2.asset_agent.audit.v0.1';
 
+    private const OPS_REPORT_SCHEMA_VERSION = 'fap.big5.result_page_v2.asset_agent.ops_report.v0.1';
+
     public const DEFAULT_ARTIFACT_RELATIVE_DIR = 'artifacts/big5_result_page_v2_agent';
 
     private const COVERAGE_MATRIX_RELATIVE_PATH = 'content_assets/big5/result_page_v2/personalization_coverage_matrix_v0_2.json';
@@ -87,6 +89,9 @@ final class BigFiveResultPageV2AssetAgent
         $batchPlan = $this->buildBatchPlan($matrix, $records);
         $qaSummary = $this->buildQaSummary($records, $runTests);
         $promotionReport = $this->buildPromotionReport($inventory, $batchPlan, $qaSummary);
+        $opsReport = $this->buildOpsReport($inventory, $batchPlan, $qaSummary, $promotionReport, $artifactDir, $runId);
+        $qaSummary = $this->withOpsReport($qaSummary, $opsReport);
+        $promotionReport = $this->withOpsReport($promotionReport, $opsReport);
         $repairLog = $this->buildRepairLog($inventory, $batchPlan, $qaSummary);
 
         $this->ensureDirectory($artifactDir);
@@ -96,6 +101,7 @@ final class BigFiveResultPageV2AssetAgent
             'source_license_classification.json' => $sourceClassification,
             'p0_batch_plan.json' => $batchPlan,
             'qa_eval_summary.json' => $qaSummary,
+            'ops_report_summary.json' => $opsReport,
             'repair_log.json' => $repairLog,
         ];
 
@@ -393,6 +399,188 @@ final class BigFiveResultPageV2AssetAgent
             'ready_for_runtime' => false,
             'ready_for_production' => false,
         ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $inventory
+     * @param  array<string,mixed>  $batchPlan
+     * @param  array<string,mixed>  $qaSummary
+     * @param  array<string,mixed>  $promotionReport
+     * @return array<string,mixed>
+     */
+    private function buildOpsReport(
+        array $inventory,
+        array $batchPlan,
+        array $qaSummary,
+        array $promotionReport,
+        string $artifactDir,
+        string $runId,
+    ): array {
+        $metrics = $this->opsMetrics($inventory, $batchPlan, $qaSummary, $promotionReport);
+        $previous = $this->previousOpsReport($artifactDir, $runId);
+
+        return [
+            'schema_version' => self::OPS_REPORT_SCHEMA_VERSION,
+            'task' => 'ops_report_standardization',
+            'runtime_use' => 'staging_only',
+            'production_use_allowed' => false,
+            'run_id' => $runId,
+            'metric_schema' => $this->opsMetricSchema(),
+            'metrics' => $metrics,
+            'diff_summary' => $this->opsDiffSummary($metrics, $previous),
+            'negative_guarantees' => $this->negativeGuarantees(),
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     * @param  array<string,mixed>  $opsReport
+     * @return array<string,mixed>
+     */
+    private function withOpsReport(array $payload, array $opsReport): array
+    {
+        $payload['ops_report_schema_version'] = self::OPS_REPORT_SCHEMA_VERSION;
+        $payload['ops_metrics'] = $opsReport['metrics'] ?? [];
+        $payload['ops_diff_summary'] = $opsReport['diff_summary'] ?? [];
+
+        return $payload;
+    }
+
+    /**
+     * @param  array<string,mixed>  $inventory
+     * @param  array<string,mixed>  $batchPlan
+     * @param  array<string,mixed>  $qaSummary
+     * @param  array<string,mixed>  $promotionReport
+     * @return array<string,mixed>
+     */
+    private function opsMetrics(array $inventory, array $batchPlan, array $qaSummary, array $promotionReport): array
+    {
+        $gaps = (array) ($inventory['gaps'] ?? []);
+        $shareSafety = (array) ($gaps['share_safety'] ?? []);
+        $normUnavailable = (array) ($gaps['norm_unavailable'] ?? []);
+        $lowQuality = (array) ($gaps['low_quality'] ?? []);
+
+        return [
+            'p0_blocker_count' => count((array) ($promotionReport['p0_blockers'] ?? [])),
+            'registry_gap_count' => count((array) ($gaps['registry'] ?? [])),
+            'module_gap_count' => count((array) ($gaps['module'] ?? [])),
+            'scope_gap_count' => count((array) ($gaps['scope'] ?? [])),
+            'reading_mode_gap_count' => count((array) ($gaps['reading_mode'] ?? [])),
+            'share_safety_missing_count' => count((array) ($shareSafety['missing'] ?? [])),
+            'share_safety_registry_count' => (int) ($shareSafety['share_safety_registry_count'] ?? 0),
+            'share_safe_reading_mode_count' => (int) ($shareSafety['share_safe_reading_mode_count'] ?? 0),
+            'shareable_true_count' => (int) ($shareSafety['shareable_true_count'] ?? 0),
+            'norm_unavailable_missing' => (bool) ($normUnavailable['missing'] ?? true),
+            'norm_unavailable_count' => (int) ($normUnavailable['count'] ?? 0),
+            'low_quality_missing' => (bool) ($lowQuality['missing'] ?? true),
+            'low_quality_count' => (int) ($lowQuality['count'] ?? 0),
+            'forbidden_leak_hit_count' => (int) data_get($qaSummary, 'leak_scan.hit_count', 0),
+            'leak_scan_status' => (string) data_get($qaSummary, 'leak_scan.status', 'unknown'),
+            'asset_record_count' => (int) ($inventory['asset_record_count'] ?? 0),
+            'p0_batch_count' => (int) ($batchPlan['p0_batch_count'] ?? 0),
+            'ready_for_pilot' => false,
+            'ready_for_runtime' => false,
+            'ready_for_production' => false,
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function opsMetricSchema(): array
+    {
+        return [
+            'schema_version' => self::OPS_REPORT_SCHEMA_VERSION,
+            'required_metric_keys' => [
+                'p0_blocker_count',
+                'registry_gap_count',
+                'module_gap_count',
+                'scope_gap_count',
+                'reading_mode_gap_count',
+                'share_safety_missing_count',
+                'norm_unavailable_missing',
+                'low_quality_missing',
+                'forbidden_leak_hit_count',
+                'ready_for_pilot',
+                'ready_for_runtime',
+                'ready_for_production',
+            ],
+            'ready_flag_defaults' => [
+                'ready_for_pilot' => false,
+                'ready_for_runtime' => false,
+                'ready_for_production' => false,
+            ],
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $currentMetrics
+     * @param  array<string,mixed>|null  $previousReport
+     * @return array<string,mixed>
+     */
+    private function opsDiffSummary(array $currentMetrics, ?array $previousReport): array
+    {
+        if ($previousReport === null) {
+            return [
+                'comparison_status' => 'no_previous_run',
+                'previous_run_id' => null,
+                'metric_deltas' => [],
+            ];
+        }
+
+        $previousMetrics = (array) ($previousReport['metrics'] ?? []);
+        $deltas = [];
+        foreach ($this->opsMetricSchema()['required_metric_keys'] as $key) {
+            $current = $currentMetrics[$key] ?? null;
+            $previous = $previousMetrics[$key] ?? null;
+            $deltas[$key] = [
+                'previous' => $previous,
+                'current' => $current,
+                'delta' => (is_numeric($current) && is_numeric($previous))
+                    ? ((int) $current - (int) $previous)
+                    : null,
+                'changed' => $current !== $previous,
+            ];
+        }
+
+        return [
+            'comparison_status' => 'compared',
+            'previous_run_id' => (string) ($previousReport['run_id'] ?? ''),
+            'metric_deltas' => $deltas,
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>|null
+     */
+    private function previousOpsReport(string $artifactDir, string $runId): ?array
+    {
+        $artifactRoot = dirname($artifactDir);
+        if (! is_dir($artifactRoot)) {
+            return null;
+        }
+
+        $candidates = [];
+        foreach (scandir($artifactRoot) ?: [] as $entry) {
+            if ($entry === '.' || $entry === '..' || $entry === $runId) {
+                continue;
+            }
+
+            $path = $artifactRoot.'/'.$entry.'/ops_report_summary.json';
+            if (is_file($path)) {
+                $candidates[$path] = filemtime($path) ?: 0;
+            }
+        }
+
+        if ($candidates === []) {
+            return null;
+        }
+
+        arsort($candidates);
+        $path = (string) array_key_first($candidates);
+        $decoded = json_decode((string) file_get_contents($path), true);
+
+        return is_array($decoded) ? $decoded : null;
     }
 
     /**
@@ -920,6 +1108,23 @@ final class BigFiveResultPageV2AssetAgent
         }
 
         $lines[] = '';
+        $lines[] = '## Ops Metrics';
+        $lines[] = '';
+        $metrics = (array) ($promotionReport['ops_metrics'] ?? []);
+        foreach ($this->opsMetricSchema()['required_metric_keys'] as $key) {
+            $value = $metrics[$key] ?? null;
+            $lines[] = '- '.$key.': '.$this->markdownScalar($value);
+        }
+
+        $lines[] = '';
+        $lines[] = '## Diff Summary';
+        $lines[] = '';
+        $diffSummary = (array) ($promotionReport['ops_diff_summary'] ?? []);
+        $lines[] = '- comparison_status: '.(string) ($diffSummary['comparison_status'] ?? 'unknown');
+        $previousRunId = $diffSummary['previous_run_id'] ?? null;
+        $lines[] = '- previous_run_id: '.$this->markdownScalar($previousRunId);
+
+        $lines[] = '';
         $lines[] = '## P0 Blockers';
         $lines[] = '';
         $blockers = (array) ($promotionReport['p0_blockers'] ?? []);
@@ -939,6 +1144,18 @@ final class BigFiveResultPageV2AssetAgent
         }
 
         return implode(PHP_EOL, $lines).PHP_EOL;
+    }
+
+    private function markdownScalar(mixed $value): string
+    {
+        if (is_bool($value)) {
+            return $value ? 'true' : 'false';
+        }
+        if ($value === null) {
+            return 'null';
+        }
+
+        return (string) $value;
     }
 
     /**
