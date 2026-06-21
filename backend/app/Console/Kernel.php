@@ -164,6 +164,7 @@ use App\Console\Commands\PaymentsPruneEvents;
 use App\Console\Commands\PersonalityImportDesktopCloneBaseline;
 use App\Console\Commands\PersonalityMbti64BackendImportContract;
 use App\Console\Commands\PersonalityMbti64CmsInternalLinkDraft;
+use App\Console\Commands\PersonalityMbti64CmsProjectionDraft;
 use App\Console\Commands\PersonalityMbti64CmsRevisionDraft;
 use App\Console\Commands\PersonalityMbti64CmsRevisionPromote;
 use App\Console\Commands\QualityDailySummary;
@@ -216,6 +217,7 @@ class Kernel extends ConsoleKernel
         FapWeeklyReport::class,
         PersonalityImportDesktopCloneBaseline::class,
         PersonalityMbti64CmsInternalLinkDraft::class,
+        PersonalityMbti64CmsProjectionDraft::class,
         PersonalityMbti64CmsRevisionDraft::class,
         PersonalityMbti64CmsRevisionPromote::class,
         PersonalityMbti64BackendImportContract::class,

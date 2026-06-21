@@ -1,0 +1,1813 @@
+{
+  "artifact": "MBTI64-PUBLIC-PROFILE-AGENT-EXPANSION-88-QA-01",
+  "generated_at": "2026-06-21T07:49:25.100Z",
+  "status": "pass_ready_for_cms_draft",
+  "input_artifact": "docs/seo/personality/mbti64-agent-expansion-88-recommendations-2026-06-21.json",
+  "scope": "Artifact-only QA gate over 88 MBTI64 public profile draft recommendations. No CMS write, no publish, no index/search release, no sitemap/llms mutation.",
+  "gates": [
+    "schema_validation",
+    "trademark_claim_gate",
+    "claim_risk_gate",
+    "duplicate_template_gate",
+    "private_route_gate",
+    "result_page_leakage_gate",
+    "seo_projection_gate",
+    "bilingual_consistency_gate"
+  ],
+  "summary": {
+    "checked_recommendation_count": 88,
+    "pass_ready_for_cms_draft_count": 88,
+    "blocked_count": 0,
+    "warning_count": 1,
+    "duplicate_signature_group_count": 0,
+    "bilingual_asymmetric_type_count": 0,
+    "gsc_evidence_state": "GSC_EVIDENCE_PENDING"
+  },
+  "gate_rollup": {
+    "schema_validation_failures": 0,
+    "trademark_claim_failures": 0,
+    "claim_risk_failures": 0,
+    "duplicate_template_failures": 0,
+    "private_route_failures": 0,
+    "result_page_leakage_failures": 0,
+    "seo_projection_failures": 0,
+    "bilingual_consistency_failures": 0
+  },
+  "duplicate_template_gate": {
+    "duplicate_signature_group_count": 0,
+    "duplicate_groups": []
+  },
+  "bilingual_consistency_gate": {
+    "checked_type_count": 16,
+    "asymmetric_type_count": 0,
+    "asymmetric_types": []
+  },
+  "page_results": [
+    {
+      "target_url": "https://fermatmind.com/en/personality/enfj-a",
+      "locale": "en",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/enfj-a-vs-enfj-t",
+      "locale": "en",
+      "page_type": "comparison",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/enfj-t",
+      "locale": "en",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/enfp-a",
+      "locale": "en",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/enfp-a-vs-enfp-t",
+      "locale": "en",
+      "page_type": "comparison",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/enfp-t",
+      "locale": "en",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/entj-a",
+      "locale": "en",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/entj-a-vs-entj-t",
+      "locale": "en",
+      "page_type": "comparison",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/entj-t",
+      "locale": "en",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/entp-a",
+      "locale": "en",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/entp-a-vs-entp-t",
+      "locale": "en",
+      "page_type": "comparison",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/entp-t",
+      "locale": "en",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/esfj-a",
+      "locale": "en",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/esfj-a-vs-esfj-t",
+      "locale": "en",
+      "page_type": "comparison",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/esfj-t",
+      "locale": "en",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/esfp-a",
+      "locale": "en",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/esfp-a-vs-esfp-t",
+      "locale": "en",
+      "page_type": "comparison",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/esfp-t",
+      "locale": "en",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/estj-a",
+      "locale": "en",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/estj-a-vs-estj-t",
+      "locale": "en",
+      "page_type": "comparison",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/estj-t",
+      "locale": "en",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/estp-a",
+      "locale": "en",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/estp-a-vs-estp-t",
+      "locale": "en",
+      "page_type": "comparison",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/estp-t",
+      "locale": "en",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/infj-a",
+      "locale": "en",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/infj-a-vs-infj-t",
+      "locale": "en",
+      "page_type": "comparison",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/infj-t",
+      "locale": "en",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/infp-a",
+      "locale": "en",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/infp-a-vs-infp-t",
+      "locale": "en",
+      "page_type": "comparison",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/infp-t",
+      "locale": "en",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/intp-a",
+      "locale": "en",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/intp-t",
+      "locale": "en",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/isfj-a",
+      "locale": "en",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/isfj-a-vs-isfj-t",
+      "locale": "en",
+      "page_type": "comparison",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/isfj-t",
+      "locale": "en",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/isfp-a",
+      "locale": "en",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/isfp-a-vs-isfp-t",
+      "locale": "en",
+      "page_type": "comparison",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/isfp-t",
+      "locale": "en",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/istj-a",
+      "locale": "en",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/istj-a-vs-istj-t",
+      "locale": "en",
+      "page_type": "comparison",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/istj-t",
+      "locale": "en",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/istp-a",
+      "locale": "en",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/istp-a-vs-istp-t",
+      "locale": "en",
+      "page_type": "comparison",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/istp-t",
+      "locale": "en",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/enfj-a",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/enfj-a-vs-enfj-t",
+      "locale": "zh-CN",
+      "page_type": "comparison",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/enfj-t",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/enfp-a",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/enfp-a-vs-enfp-t",
+      "locale": "zh-CN",
+      "page_type": "comparison",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/enfp-t",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/entj-a",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/entj-a-vs-entj-t",
+      "locale": "zh-CN",
+      "page_type": "comparison",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/entj-t",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/entp-a",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/entp-a-vs-entp-t",
+      "locale": "zh-CN",
+      "page_type": "comparison",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/entp-t",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/esfj-a",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/esfj-a-vs-esfj-t",
+      "locale": "zh-CN",
+      "page_type": "comparison",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/esfj-t",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/esfp-a",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/esfp-a-vs-esfp-t",
+      "locale": "zh-CN",
+      "page_type": "comparison",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/esfp-t",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/estj-a",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/estj-a-vs-estj-t",
+      "locale": "zh-CN",
+      "page_type": "comparison",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/estj-t",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/estp-a",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/estp-a-vs-estp-t",
+      "locale": "zh-CN",
+      "page_type": "comparison",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/estp-t",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/infj-a",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/infj-a-vs-infj-t",
+      "locale": "zh-CN",
+      "page_type": "comparison",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/infj-t",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/infp-a",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/infp-a-vs-infp-t",
+      "locale": "zh-CN",
+      "page_type": "comparison",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/intj-a-vs-intj-t",
+      "locale": "zh-CN",
+      "page_type": "comparison",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/intp-a",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/intp-a-vs-intp-t",
+      "locale": "zh-CN",
+      "page_type": "comparison",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/intp-t",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/isfj-a",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/isfj-a-vs-isfj-t",
+      "locale": "zh-CN",
+      "page_type": "comparison",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/isfj-t",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/isfp-a",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/isfp-a-vs-isfp-t",
+      "locale": "zh-CN",
+      "page_type": "comparison",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/isfp-t",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/istj-a-vs-istj-t",
+      "locale": "zh-CN",
+      "page_type": "comparison",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/istj-t",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/istp-a",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/istp-a-vs-istp-t",
+      "locale": "zh-CN",
+      "page_type": "comparison",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/istp-t",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ],
+      "decision": "PASS_READY_FOR_CMS_DRAFT"
+    }
+  ],
+  "blockers": [],
+  "warnings": [
+    "GSC_EVIDENCE_PENDING"
+  ],
+  "final_decision": "PASS_READY_FOR_CMS_DRAFT",
+  "recommended_next_task": "MBTI64-CMS-PROJECTION-DRAFT-88-01"
+}
