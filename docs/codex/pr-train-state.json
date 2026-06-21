@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-21T18:11:18+08:00",
+  "updated_at": "2026-06-21T18:32:00+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -32072,7 +32072,7 @@
   "FERMAT-MARKETING-SKILLS-ADAPTATION-02": {
     "repo": "fap-api",
     "branch": "codex/fermat-marketing-skills-adaptation-02",
-    "status": "ready_to_merge",
+    "status": "merged",
     "depends_on": [
       "FERMAT-MARKETING-SKILLS-ADAPTATION-01"
     ],
@@ -55425,15 +55425,15 @@
       },
       "github": {
         "status": "pass",
-        "evidence": "PR #2197 checks passed on head b29dec11efdfd14a5ec6cd9cbb1735ec6f6f4318: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and non-blocking Semgrep SARIF upload."
+        "evidence": "PR #2197 checks passed on final head e875e5cf2946640d3cbb57c019ded3237cc10e36: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and non-blocking Semgrep SARIF upload."
       }
     },
     "failure_reason": null,
-    "commit_sha": "33551c1f4d692a6e5da7def2945a2694e6ea1232",
+    "commit_sha": "0a1f62b1ec73d5f7a86a242d56e160f0f80b6e28",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2197",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-21T09:43:25Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-21T15:57:09+08:00",
@@ -55454,6 +55454,11 @@
         "at": "2026-06-21T18:11:18+08:00",
         "status": "ready_to_merge",
         "note": "PR #2197 GitHub checks passed on head b29dec11efdfd14a5ec6cd9cbb1735ec6f6f4318; ready to merge after this state update revalidates."
+      },
+      {
+        "at": "2026-06-21T18:18:00+08:00",
+        "status": "merged",
+        "note": "Reconciled during BIG5-RESULT-ASSET-FACTORY-PILOT-BATCH-01: PR #2197 merged at 2026-06-21T09:43:25Z with merge commit 0a1f62b1ec73d5f7a86a242d56e160f0f80b6e28; origin/main contains the merge commit; local main was synced to origin/main; local and remote task branch cleanup completed; post-merge validation passed."
       }
     ]
   },
@@ -55461,7 +55466,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-result-asset-factory-pilot-batch-01",
     "base": "main",
-    "status": "pending_dependency",
+    "status": "ready_to_merge",
     "train_scope": "big5_result_page_v2_asset_agent",
     "title": "BIG5-RESULT-ASSET-FACTORY-PILOT-BATCH-01: feat(big5):dry-run share safety selector batch",
     "depends_on": [
@@ -55473,13 +55478,34 @@
         "evidence": "User explicitly requested implementation of the eight-item Big Five Result Page V2 asset-agent plan."
       },
       "dependency": {
-        "status": "pending",
-        "evidence": "Waits for BIG5-RESULT-SELECTOR-QA-REPAIR-01 to merge into main."
+        "status": "pass",
+        "evidence": "BIG5-RESULT-SELECTOR-QA-REPAIR-01 is merged; origin/main contains merge commit 0a1f62b1ec73d5f7a86a242d56e160f0f80b6e28. Current branch was fast-forwarded to latest origin/main c85d49229f0c856993d1e184ad2830dac6eda2fa before implementation."
+      },
+      "local": {
+        "status": "pass_with_external_sidecar",
+        "commands": [
+          "find backend/content_assets/big5/result_page_v2/agent_runs/share_safety_pilot_20260621T1800Z -name '*.json' -print -exec python3 -m json.tool {} >/dev/null \\;",
+          "ruby -rjson -e 'Dir[\"backend/content_assets/big5/result_page_v2/agent_runs/share_safety_pilot_20260621T1800Z/*.jsonl\"].each { |path| File.foreach(path).with_index(1) { |line, idx| JSON.parse(line); }; puts \"jsonl ok #{path}\" }'",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2SelectorAssetValidatorTest --no-ansi",
+          "cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "git diff --check"
+        ],
+        "evidence": "Share-safety pilot JSON/JSONL validation and selector validator tests pass. Strict audit still exits non-zero on pre-existing selector_validation_errors=3; this is external to the current PR and recorded as sidecar B5-GAP-SEL-SHARE-001 under the user-approved protocol."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are confined to backend/content_assets/big5/result_page_v2/agent_runs/share_safety_pilot_20260621T1800Z/* and docs/codex/pr-train-state.json. No selector_ready_assets import, runtime wrapper enablement, CMS write, frontend fallback, or production gate change."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #2203 checks passed on head 1f11d40050cb7af5965ef7ee3fe29ff575d59f6b: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and non-blocking Semgrep SARIF upload."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "1f11d40050cb7af5965ef7ee3fe29ff575d59f6b",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2203",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -55488,6 +55514,32 @@
         "at": "2026-06-21T15:57:09+08:00",
         "status": "pending_dependency",
         "note": "Manifest/state entry authorized; implementation waits for the selector QA repair PR. First pilot scope remains share_safety_registry only."
+      },
+      {
+        "at": "2026-06-21T18:18:00+08:00",
+        "status": "local_checks_passed_with_external_sidecar",
+        "note": "Created share_safety_registry-only dry-run agent run with raw draft, repaired draft, final asset, validation report, safety report, source ledger snapshot, input inventory, and NO-GO report. All outputs remain runtime_use=staging_only with production_use_allowed=false, ready_for_runtime=false, and ready_for_production=false. Strict audit sidecar is external and pre-existing."
+      },
+      {
+        "at": "2026-06-21T18:24:00+08:00",
+        "status": "github_checks_pending",
+        "note": "Opened PR #2203 from commit 910d01f24d0fe0405ae0d7af1ffcb0e5aa86e16b; waiting for required GitHub checks."
+      },
+      {
+        "at": "2026-06-21T18:32:00+08:00",
+        "status": "ready_to_merge",
+        "note": "PR #2203 GitHub checks passed on head 1f11d40050cb7af5965ef7ee3fe29ff575d59f6b; merge state CLEAN. Ready to merge after this state update revalidates."
+      }
+    ],
+    "sidecar_issues": [
+      {
+        "sidecar_id": "B5-GAP-SEL-SHARE-001",
+        "owner_repo": "fap-api",
+        "scope_relation": "external_to_current_pr",
+        "introduced_by_current_pr": false,
+        "summary": "Strict Big Five Result Page V2 AssetAgent audit still reports 3 selector_validation_errors in the existing selector asset corpus.",
+        "evidence": "cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi exits 1 with strict_failures=[\"selector_validation_errors\"], validation_error_count=3, leak_hit_count=0, source_ledger_valid=true, asset_inventory_valid=true.",
+        "deferred_to_pr": "Sidecar follow-up; not part of share_safety dry-run pilot scope."
       }
     ]
   },

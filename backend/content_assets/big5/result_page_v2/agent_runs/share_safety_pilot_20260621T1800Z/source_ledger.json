@@ -1,0 +1,28 @@
+{
+  "schema_version": "fap.big5.result_page_v2.asset_agent.source_ledger_snapshot.v0.1",
+  "run_id": "share_safety_pilot_20260621T1800Z",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "source_refs": [
+    {
+      "source_id": "ipip_official",
+      "usage": "construct naming and non-diagnostic Big Five framing",
+      "limitations": "No item text copied; no normative percentile or diagnostic claim."
+    },
+    {
+      "source_id": "bfi_2_colby",
+      "usage": "citation-only trait/facet boundary reference",
+      "limitations": "No proprietary BFI-2 item text, scoring keys, or report copy used."
+    },
+    {
+      "source_id": "internal_big5_v2_formal_doc",
+      "usage": "internal result page share-safety boundary",
+      "limitations": "Dry-run candidate only; requires human review before staging import."
+    },
+    {
+      "source_id": "existing_big5_result_page_v2_asset_packs",
+      "usage": "selector contract fields and staging-only safety flags",
+      "limitations": "No runtime selector package mutation in this PR."
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "fap.big5.result_page_v2.asset_agent.validation_report.v0.1",
+  "run_id": "share_safety_pilot_20260621T1800Z",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "candidate_counts": {
+    "raw_draft_assets": 1,
+    "repaired_draft_assets": 1,
+    "final_assets": 1
+  },
+  "final_asset_validation": {
+    "status": "pass",
+    "registry_key": "share_safety_registry",
+    "shareable": true,
+    "shareable_policy": "required_for_every_shareable_true_block",
+    "forbidden_public_field_count": 0
+  },
+  "external_sidecars": [
+    {
+      "sidecar_id": "B5-GAP-SEL-SHARE-001",
+      "introduced_by_current_pr": false,
+      "status": "open",
+      "evidence": "Clean-main strict audit still reports 3 pre-existing selector_validation_errors in v0_3_p0_full."
+    }
+  ]
+}
