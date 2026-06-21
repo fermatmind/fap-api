@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-21T16:32:09+08:00",
+  "updated_at": "2026-06-21T16:36:04+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -55224,7 +55224,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-result-asset-validator-harness-01",
     "base": "main",
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "train_scope": "big5_result_page_v2_asset_agent",
     "title": "BIG5-RESULT-ASSET-VALIDATOR-HARNESS-01: test(big5):建 result asset validator harness",
     "depends_on": [
@@ -55255,11 +55255,15 @@
           "git diff --check"
         ],
         "notes": "Focused tests passed with existing PHPUnit warning classifications. AssetAgent records the current 3 selector validator findings and does not repair them in this PR."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": "GitHub checks pending for PR #2190."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "19feb4f36851e2319a1462027642496029c9d4cb",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2190",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -55273,6 +55277,11 @@
         "at": "2026-06-21T16:32:09+08:00",
         "status": "local_checks_passed",
         "note": "Added read-only AssetAgent audit command, service, Kernel registration, and focused tests. Local syntax, focused PHPUnit, selector validator, diff, and scope checks passed; current selector assets still have 3 recorded shareable registry findings deferred to selector QA repair."
+      },
+      {
+        "at": "2026-06-21T16:36:04+08:00",
+        "status": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/2190 from scoped validator harness commit 19feb4f36851e2319a1462027642496029c9d4cb."
       }
     ]
   },
