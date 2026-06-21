@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-22T08:44:00+08:00",
+  "updated_at": "2026-06-22T08:45:00+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -57220,7 +57220,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-v2-auto-pr-orchestrator",
     "base": "main",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "train_scope": "big5_result_page_v2_asset_agent_automation",
     "title": "B5-RESULT-AUTO-PR-ORCHESTRATOR-01: Plan Big Five V2 agent artifact PRs",
     "depends_on": [
@@ -57253,12 +57253,12 @@
         "evidence": "Changed files are limited to allowed PR2 scope: BigFiveResultPageV2AssetAgentAuditCommand.php, BigFiveResultPageV2AssetAgent.php, BigFiveResultPageV2AssetAgentTest.php, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json. No fap-web copy, production import gate, rollout gate, release snapshot, runtime flag, CI inspector, mechanical fixer, auto merge, or weekly ops behavior changed."
       },
       "github": {
-        "status": "pending",
-        "evidence": "PR #2242 open; waiting for GitHub checks after second rebase onto latest origin/main."
+        "status": "pass",
+        "evidence": "PR #2242 checks had completed successfully before the latest rebase; waiting for required checks on the rebased ready-to-merge head."
       }
     },
     "failure_reason": null,
-    "commit_sha": "244f2c0b4c7803fada3417503052743ce93881a7",
+    "commit_sha": "ad5d5d65fd44d63a2e9b9d10c7fae538c7fadcda",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2242",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -57273,6 +57273,11 @@
         "at": "2026-06-22T08:44:00+08:00",
         "status": "pr_open",
         "note": "PR #2242 remains open after second rebase onto latest origin/main; waiting for required GitHub checks."
+      },
+      {
+        "at": "2026-06-22T08:45:00+08:00",
+        "status": "ready_to_merge",
+        "note": "Ready-to-merge state replayed during second rebase; required checks must pass on the rebased head before merge."
       }
     ]
   }
