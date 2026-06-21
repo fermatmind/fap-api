@@ -56750,5 +56750,420 @@
         "note": "Opened https://github.com/fermatmind/fap-api/pull/2223 for FREE-FULL-REPORT-MODE-FEATURE-FLAG-01 after local checks passed."
       }
     ]
+  },
+  "RIASEC-OPS-AGENT-RUNBOOK-01": {
+    "repo": "fap-api",
+    "branch": "codex/riasec-ops-agent-runbook-01",
+    "base": "main",
+    "status": "local_checks_passed",
+    "train_scope": "riasec_result_ops_agent_release_chain",
+    "title": "RIASEC-OPS-AGENT-RUNBOOK-01: docs(riasec): solidify ops agent runbook",
+    "depends_on": [],
+    "checks": {
+      "json_tool_pr_train_state": "passed",
+      "yaml_parse_pr_train_manifest": "passed",
+      "git_diff_check": "passed",
+      "scope_validation": "passed"
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_auto_rollout_allowed": false,
+    "production_cms_write_allowed": false,
+    "production_gate_auto_enable_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-06-22T07:12:59+08:00",
+        "from": "missing_from_manifest",
+        "to": "in_progress",
+        "notes": "Initialized from explicit RIASEC ops agent and release-chain /goal authorization."
+      },
+      {
+        "at": "2026-06-22T07:15:40+08:00",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "notes": "Docs-only runbook, manifest/state parse, git diff check, and path scope validation passed before commit."
+      }
+    ]
+  },
+  "RIASEC-OPS-AGENT-PERMISSION-MODEL-01": {
+    "repo": "fap-api",
+    "branch": "codex/riasec-ops-agent-permission-model-01",
+    "base": "main",
+    "status": "pending_dependency",
+    "train_scope": "riasec_result_ops_agent_release_chain",
+    "title": "RIASEC-OPS-AGENT-PERMISSION-MODEL-01: docs(riasec): define ops agent permission model",
+    "depends_on": [
+      "RIASEC-OPS-AGENT-RUNBOOK-01"
+    ],
+    "checks": {},
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_auto_rollout_allowed": false,
+    "production_cms_write_allowed": false,
+    "production_gate_auto_enable_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-06-22T07:12:59+08:00",
+        "from": "missing_from_manifest",
+        "to": "pending_dependency",
+        "notes": "Initialized from explicit RIASEC ops agent and release-chain /goal authorization."
+      }
+    ]
+  },
+  "RIASEC-OPS-AGENT-PR-TRAIN-ORCHESTRATOR-01": {
+    "repo": "fap-api",
+    "branch": "codex/riasec-ops-agent-pr-train-orchestrator-01",
+    "base": "main",
+    "status": "pending_dependency",
+    "train_scope": "riasec_result_ops_agent_release_chain",
+    "title": "RIASEC-OPS-AGENT-PR-TRAIN-ORCHESTRATOR-01: feat(riasec): add ops PR train orchestrator",
+    "depends_on": [
+      "RIASEC-OPS-AGENT-PERMISSION-MODEL-01"
+    ],
+    "checks": {},
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_auto_rollout_allowed": false,
+    "production_cms_write_allowed": false,
+    "production_gate_auto_enable_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-06-22T07:12:59+08:00",
+        "from": "missing_from_manifest",
+        "to": "pending_dependency",
+        "notes": "Initialized from explicit RIASEC ops agent and release-chain /goal authorization."
+      }
+    ]
+  },
+  "RIASEC-OPS-AGENT-STAGING-RUNNER-01": {
+    "repo": "fap-api",
+    "branch": "codex/riasec-ops-agent-staging-runner-01",
+    "base": "main",
+    "status": "pending_dependency",
+    "train_scope": "riasec_result_ops_agent_release_chain",
+    "title": "RIASEC-OPS-AGENT-STAGING-RUNNER-01: feat(riasec): add ops staging runner",
+    "depends_on": [
+      "RIASEC-OPS-AGENT-PR-TRAIN-ORCHESTRATOR-01"
+    ],
+    "checks": {},
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_auto_rollout_allowed": false,
+    "production_cms_write_allowed": false,
+    "production_gate_auto_enable_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-06-22T07:12:59+08:00",
+        "from": "missing_from_manifest",
+        "to": "pending_dependency",
+        "notes": "Initialized from explicit RIASEC ops agent and release-chain /goal authorization."
+      }
+    ]
+  },
+  "RIASEC-OPS-AGENT-REPORTING-SIDECAR-01": {
+    "repo": "fap-api",
+    "branch": "codex/riasec-ops-agent-reporting-sidecar-01",
+    "base": "main",
+    "status": "pending_dependency",
+    "train_scope": "riasec_result_ops_agent_release_chain",
+    "title": "RIASEC-OPS-AGENT-REPORTING-SIDECAR-01: feat(riasec): add ops reporting sidecar",
+    "depends_on": [
+      "RIASEC-OPS-AGENT-STAGING-RUNNER-01"
+    ],
+    "checks": {},
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_auto_rollout_allowed": false,
+    "production_cms_write_allowed": false,
+    "production_gate_auto_enable_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-06-22T07:12:59+08:00",
+        "from": "missing_from_manifest",
+        "to": "pending_dependency",
+        "notes": "Initialized from explicit RIASEC ops agent and release-chain /goal authorization."
+      }
+    ]
+  },
+  "RIASEC-RESULT-FAPWEB-RENDERED-PREVIEW-QA-01": {
+    "repo": "fap-web",
+    "branch": "codex/riasec-result-fapweb-rendered-preview-qa-01",
+    "base": "main",
+    "status": "pending_dependency",
+    "train_scope": "riasec_result_ops_agent_release_chain",
+    "title": "RIASEC-RESULT-FAPWEB-RENDERED-PREVIEW-QA-01: test(riasec): add rendered preview QA",
+    "depends_on": [
+      "RIASEC-OPS-AGENT-REPORTING-SIDECAR-01"
+    ],
+    "checks": {},
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_auto_rollout_allowed": false,
+    "production_cms_write_allowed": false,
+    "production_gate_auto_enable_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-06-22T07:12:59+08:00",
+        "from": "missing_from_manifest",
+        "to": "pending_dependency",
+        "notes": "Initialized from explicit RIASEC ops agent and release-chain /goal authorization."
+      }
+    ]
+  },
+  "RIASEC-RESULT-BACKEND-STAGING-IMPORT-HANDOFF-01": {
+    "repo": "fap-api",
+    "branch": "codex/riasec-result-backend-staging-import-handoff-01",
+    "base": "main",
+    "status": "pending_dependency",
+    "train_scope": "riasec_result_ops_agent_release_chain",
+    "title": "RIASEC-RESULT-BACKEND-STAGING-IMPORT-HANDOFF-01: docs(riasec): add staging import handoff",
+    "depends_on": [
+      "RIASEC-RESULT-FAPWEB-RENDERED-PREVIEW-QA-01"
+    ],
+    "checks": {},
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_auto_rollout_allowed": false,
+    "production_cms_write_allowed": false,
+    "production_gate_auto_enable_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-06-22T07:12:59+08:00",
+        "from": "missing_from_manifest",
+        "to": "pending_dependency",
+        "notes": "Initialized from explicit RIASEC ops agent and release-chain /goal authorization."
+      }
+    ]
+  },
+  "RIASEC-RESULT-SELECTOR-COVERAGE-BATCH-01": {
+    "repo": "fap-api",
+    "branch": "codex/riasec-result-selector-coverage-batch-01",
+    "base": "main",
+    "status": "pending_dependency",
+    "train_scope": "riasec_result_ops_agent_release_chain",
+    "title": "RIASEC-RESULT-SELECTOR-COVERAGE-BATCH-01: content(riasec): fill selector coverage gaps",
+    "depends_on": [
+      "RIASEC-RESULT-BACKEND-STAGING-IMPORT-HANDOFF-01"
+    ],
+    "checks": {},
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_auto_rollout_allowed": false,
+    "production_cms_write_allowed": false,
+    "production_gate_auto_enable_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-06-22T07:12:59+08:00",
+        "from": "missing_from_manifest",
+        "to": "pending_dependency",
+        "notes": "Initialized from explicit RIASEC ops agent and release-chain /goal authorization."
+      }
+    ]
+  },
+  "RIASEC-RESULT-STAGING-IMPORT-DRY-RUN-01": {
+    "repo": "fap-api",
+    "branch": "codex/riasec-result-staging-import-dry-run-01",
+    "base": "main",
+    "status": "pending_dependency",
+    "train_scope": "riasec_result_ops_agent_release_chain",
+    "title": "RIASEC-RESULT-STAGING-IMPORT-DRY-RUN-01: feat(riasec): add staging import dry-run",
+    "depends_on": [
+      "RIASEC-RESULT-SELECTOR-COVERAGE-BATCH-01"
+    ],
+    "checks": {},
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_auto_rollout_allowed": false,
+    "production_cms_write_allowed": false,
+    "production_gate_auto_enable_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-06-22T07:12:59+08:00",
+        "from": "missing_from_manifest",
+        "to": "pending_dependency",
+        "notes": "Initialized from explicit RIASEC ops agent and release-chain /goal authorization."
+      }
+    ]
+  },
+  "RIASEC-RESULT-RUNTIME-WRAPPER-STAGING-01": {
+    "repo": "fap-api",
+    "branch": "codex/riasec-result-runtime-wrapper-staging-01",
+    "base": "main",
+    "status": "pending_dependency",
+    "train_scope": "riasec_result_ops_agent_release_chain",
+    "title": "RIASEC-RESULT-RUNTIME-WRAPPER-STAGING-01: feat(riasec): add staging runtime wrapper gate",
+    "depends_on": [
+      "RIASEC-RESULT-STAGING-IMPORT-DRY-RUN-01"
+    ],
+    "checks": {},
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_auto_rollout_allowed": false,
+    "production_cms_write_allowed": false,
+    "production_gate_auto_enable_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-06-22T07:12:59+08:00",
+        "from": "missing_from_manifest",
+        "to": "pending_dependency",
+        "notes": "Initialized from explicit RIASEC ops agent and release-chain /goal authorization."
+      }
+    ]
+  },
+  "RIASEC-RESULT-PILOT-ALLOWLIST-GATE-01": {
+    "repo": "fap-api",
+    "branch": "codex/riasec-result-pilot-allowlist-gate-01",
+    "base": "main",
+    "status": "pending_dependency",
+    "train_scope": "riasec_result_ops_agent_release_chain",
+    "title": "RIASEC-RESULT-PILOT-ALLOWLIST-GATE-01: feat(riasec): add pilot allowlist gate",
+    "depends_on": [
+      "RIASEC-RESULT-RUNTIME-WRAPPER-STAGING-01"
+    ],
+    "checks": {},
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_auto_rollout_allowed": false,
+    "production_cms_write_allowed": false,
+    "production_gate_auto_enable_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-06-22T07:12:59+08:00",
+        "from": "missing_from_manifest",
+        "to": "pending_dependency",
+        "notes": "Initialized from explicit RIASEC ops agent and release-chain /goal authorization."
+      }
+    ]
+  },
+  "RIASEC-RESULT-ALL-SURFACE-PILOT-QA-01": {
+    "repo": "fap-api",
+    "branch": "codex/riasec-result-all-surface-pilot-qa-01",
+    "base": "main",
+    "status": "pending_dependency",
+    "train_scope": "riasec_result_ops_agent_release_chain",
+    "title": "RIASEC-RESULT-ALL-SURFACE-PILOT-QA-01: test(riasec): add all-surface pilot QA",
+    "depends_on": [
+      "RIASEC-RESULT-PILOT-ALLOWLIST-GATE-01"
+    ],
+    "checks": {},
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_auto_rollout_allowed": false,
+    "production_cms_write_allowed": false,
+    "production_gate_auto_enable_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-06-22T07:12:59+08:00",
+        "from": "missing_from_manifest",
+        "to": "pending_dependency",
+        "notes": "Initialized from explicit RIASEC ops agent and release-chain /goal authorization."
+      }
+    ]
+  },
+  "RIASEC-RESULT-PRODUCTION-IMPORT-GATE-01": {
+    "repo": "fap-api",
+    "branch": "codex/riasec-result-production-import-gate-01",
+    "base": "main",
+    "status": "pending_dependency",
+    "train_scope": "riasec_result_ops_agent_release_chain",
+    "title": "RIASEC-RESULT-PRODUCTION-IMPORT-GATE-01: test(riasec): add production import gate",
+    "depends_on": [
+      "RIASEC-RESULT-ALL-SURFACE-PILOT-QA-01"
+    ],
+    "checks": {},
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_auto_rollout_allowed": false,
+    "production_cms_write_allowed": false,
+    "production_gate_auto_enable_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-06-22T07:12:59+08:00",
+        "from": "missing_from_manifest",
+        "to": "pending_dependency",
+        "notes": "Initialized from explicit RIASEC ops agent and release-chain /goal authorization."
+      }
+    ]
+  },
+  "RIASEC-RESULT-PRODUCTION-ROLLOUT-GATE-01": {
+    "repo": "fap-api",
+    "branch": "codex/riasec-result-production-rollout-gate-01",
+    "base": "main",
+    "status": "pending_dependency",
+    "train_scope": "riasec_result_ops_agent_release_chain",
+    "title": "RIASEC-RESULT-PRODUCTION-ROLLOUT-GATE-01: test(riasec): add production rollout gate",
+    "depends_on": [
+      "RIASEC-RESULT-PRODUCTION-IMPORT-GATE-01"
+    ],
+    "checks": {},
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_auto_rollout_allowed": false,
+    "production_cms_write_allowed": false,
+    "production_gate_auto_enable_allowed": false,
+    "transitions": [
+      {
+        "at": "2026-06-22T07:12:59+08:00",
+        "from": "missing_from_manifest",
+        "to": "pending_dependency",
+        "notes": "Initialized from explicit RIASEC ops agent and release-chain /goal authorization."
+      }
+    ]
   }
 }

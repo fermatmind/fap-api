@@ -26019,3 +26019,435 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: RIASEC-OPS-AGENT-RUNBOOK-01
+    repo: fap-api
+    branch: codex/riasec-ops-agent-runbook-01
+    title: "RIASEC-OPS-AGENT-RUNBOOK-01: docs(riasec): solidify ops agent runbook"
+    train_scope: riasec_result_ops_agent_release_chain
+    status: user_authorized
+    scope:
+      - Document auto-to-PR, auto-to-staging, and auto-to-report boundaries for the RIASEC result page ops agent.
+      - Document production as a manual approval gate only.
+      - Document forbidden production rollout, CMS write, runtime enablement, and frontend fallback actions.
+    allowed_paths:
+      - backend/docs/riasec/result-ops-agent-runbook.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Generate assets.
+      - Modify runtime code.
+      - Import CMS content.
+      - Open production gates.
+    validation:
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: RIASEC-OPS-AGENT-PERMISSION-MODEL-01
+    repo: fap-api
+    depends_on:
+      - RIASEC-OPS-AGENT-RUNBOOK-01
+    branch: codex/riasec-ops-agent-permission-model-01
+    title: "RIASEC-OPS-AGENT-PERMISSION-MODEL-01: docs(riasec): define ops agent permission model"
+    train_scope: riasec_result_ops_agent_release_chain
+    status: user_authorized
+    scope:
+      - Define allowed and forbidden permissions for branch, validation, PR, staging dry-run, and reporting automation.
+      - Forbid production CMS writes and production rollout execution.
+    allowed_paths:
+      - backend/docs/riasec/**
+      - backend/content_assets/riasec/result_page_v2/governance/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - git diff --check
+      - jq empty on touched JSON files
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: RIASEC-OPS-AGENT-PR-TRAIN-ORCHESTRATOR-01
+    repo: fap-api
+    depends_on:
+      - RIASEC-OPS-AGENT-PERMISSION-MODEL-01
+    branch: codex/riasec-ops-agent-pr-train-orchestrator-01
+    title: "RIASEC-OPS-AGENT-PR-TRAIN-ORCHESTRATOR-01: feat(riasec): add ops PR train orchestrator"
+    train_scope: riasec_result_ops_agent_release_chain
+    status: user_authorized
+    scope:
+      - Add backend ops command, service, and tests for manifest/state driven PR train orchestration status.
+      - Model branch, scope validation, push, PR, and check polling states without bypassing repository policy.
+    allowed_paths:
+      - backend/app/Console/Commands/*Riasec*Ops*
+      - backend/app/Services/Riasec/Ops/**
+      - backend/tests/**/RiasecOpsAgent*
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - cd backend && php artisan test --filter=RiasecOpsAgent
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: RIASEC-OPS-AGENT-STAGING-RUNNER-01
+    repo: fap-api
+    depends_on:
+      - RIASEC-OPS-AGENT-PR-TRAIN-ORCHESTRATOR-01
+    branch: codex/riasec-ops-agent-staging-runner-01
+    title: "RIASEC-OPS-AGENT-STAGING-RUNNER-01: feat(riasec): add ops staging runner"
+    train_scope: riasec_result_ops_agent_release_chain
+    status: user_authorized
+    scope:
+      - Add staging dry-run, preview, and smoke runner support.
+      - Write only staging artifacts and reports.
+    allowed_paths:
+      - backend/app/Console/Commands/*Riasec*Ops*
+      - backend/app/Services/Riasec/Ops/**
+      - backend/artifacts/riasec_result_page_v2_agent/**
+      - backend/tests/**/RiasecOpsAgent*
+      - backend/tests/**/RiasecResultPage*
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - cd backend && php artisan test --filter=RiasecOpsAgent
+      - cd backend && php artisan test --filter=RiasecResultPage
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: RIASEC-OPS-AGENT-REPORTING-SIDECAR-01
+    repo: fap-api
+    depends_on:
+      - RIASEC-OPS-AGENT-STAGING-RUNNER-01
+    branch: codex/riasec-ops-agent-reporting-sidecar-01
+    title: "RIASEC-OPS-AGENT-REPORTING-SIDECAR-01: feat(riasec): add ops reporting sidecar"
+    train_scope: riasec_result_ops_agent_release_chain
+    status: user_authorized
+    scope:
+      - Add go/no-go, sidecar issue, failure attribution, and next-step report support.
+      - Allow external blockers to be recorded without stopping the train when current PR checks and scope are clean.
+    allowed_paths:
+      - backend/docs/riasec/**
+      - backend/app/Services/Riasec/Ops/**
+      - backend/tests/**/RiasecOpsAgent*
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - cd backend && php artisan test --filter=RiasecOpsAgent
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: RIASEC-RESULT-FAPWEB-RENDERED-PREVIEW-QA-01
+    repo: fap-web
+    depends_on:
+      - RIASEC-OPS-AGENT-REPORTING-SIDECAR-01
+    branch: codex/riasec-result-fapweb-rendered-preview-qa-01
+    title: "RIASEC-RESULT-FAPWEB-RENDERED-PREVIEW-QA-01: test(riasec): add rendered preview QA"
+    train_scope: riasec_result_ops_agent_release_chain
+    status: user_authorized
+    scope:
+      - Consume backend handoff fixtures and expected assertions in fap-web contract tests.
+      - Cover result page, PDF, share, history, compare, locked/free redaction, low-quality, and fallback.
+      - Preserve backend authority and no frontend fallback copy.
+    allowed_paths:
+      - tests/contracts/**
+      - tests/fixtures/riasec/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - pnpm test:contract -- riasec
+      - pnpm typecheck
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: RIASEC-RESULT-BACKEND-STAGING-IMPORT-HANDOFF-01
+    repo: fap-api
+    depends_on:
+      - RIASEC-RESULT-FAPWEB-RENDERED-PREVIEW-QA-01
+    branch: codex/riasec-result-backend-staging-import-handoff-01
+    title: "RIASEC-RESULT-BACKEND-STAGING-IMPORT-HANDOFF-01: docs(riasec): add staging import handoff"
+    train_scope: riasec_result_ops_agent_release_chain
+    status: user_authorized
+    scope:
+      - Add staging import handoff governance, import package list, checksum, acceptance matrix, and runtime no-touch policy.
+      - Do not write CMS data.
+    allowed_paths:
+      - backend/content_assets/riasec/result_page_v2/governance/**
+      - backend/docs/riasec/**
+      - backend/tests/**/RiasecResultPage*
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - jq empty on touched JSON files
+      - cd backend && php artisan test --filter=RiasecResultPage
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: RIASEC-RESULT-SELECTOR-COVERAGE-BATCH-01
+    repo: fap-api
+    depends_on:
+      - RIASEC-RESULT-BACKEND-STAGING-IMPORT-HANDOFF-01
+    branch: codex/riasec-result-selector-coverage-batch-01
+    title: "RIASEC-RESULT-SELECTOR-COVERAGE-BATCH-01: content(riasec): fill selector coverage gaps"
+    train_scope: riasec_result_ops_agent_release_chain
+    status: user_authorized
+    scope:
+      - Add staging-only selector assets for clear primary, near tie, top3, low-quality, and norm-unavailable route groups.
+      - Preserve raw draft, repaired draft, final assets, QA report, and safety report.
+    allowed_paths:
+      - backend/content_assets/riasec/result_page_v2/**
+      - backend/tests/**/RiasecResultPage*
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - cd backend && php artisan riasec:result-page-v2-agent audit --strict --json
+      - cd backend && php artisan test --filter=RiasecResultPageAssetAgent
+      - cd backend && php artisan test --filter=RiasecResultPage
+      - jq empty on touched JSON files
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: RIASEC-RESULT-STAGING-IMPORT-DRY-RUN-01
+    repo: fap-api
+    depends_on:
+      - RIASEC-RESULT-SELECTOR-COVERAGE-BATCH-01
+    branch: codex/riasec-result-staging-import-dry-run-01
+    title: "RIASEC-RESULT-STAGING-IMPORT-DRY-RUN-01: feat(riasec): add staging import dry-run"
+    train_scope: riasec_result_ops_agent_release_chain
+    status: user_authorized
+    scope:
+      - Add staging import dry-run report, checksum, inventory, leak scan, and fail-closed report support.
+      - Do not write CMS data.
+    allowed_paths:
+      - backend/app/Console/Commands/*Riasec*
+      - backend/app/Services/Riasec/**
+      - backend/content_assets/riasec/result_page_v2/**
+      - backend/tests/**/RiasecResultPage*
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - cd backend && php artisan test --filter=RiasecResultPage
+      - cd backend && php artisan riasec:result-page-v2-agent audit --strict --json
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: RIASEC-RESULT-RUNTIME-WRAPPER-STAGING-01
+    repo: fap-api
+    depends_on:
+      - RIASEC-RESULT-STAGING-IMPORT-DRY-RUN-01
+    branch: codex/riasec-result-runtime-wrapper-staging-01
+    title: "RIASEC-RESULT-RUNTIME-WRAPPER-STAGING-01: feat(riasec): add staging runtime wrapper gate"
+    train_scope: riasec_result_ops_agent_release_chain
+    status: user_authorized
+    scope:
+      - Add RIASEC result_page_v2 runtime wrapper with default-off staging and pilot gate behavior.
+      - Omit invalid payloads and fail closed for locked/free redaction states.
+    allowed_paths:
+      - backend/config/**
+      - backend/app/Services/Riasec/**
+      - backend/app/Services/Report/**
+      - backend/app/Http/Controllers/API/V0_3/**
+      - backend/tests/**/RiasecResultPage*
+      - backend/tests/Feature/V0_3/RiasecAssessmentFlowTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - cd backend && php artisan test --filter=RiasecResultPage
+      - cd backend && php artisan test --filter=RiasecAssessmentFlowTest
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: RIASEC-RESULT-PILOT-ALLOWLIST-GATE-01
+    repo: fap-api
+    depends_on:
+      - RIASEC-RESULT-RUNTIME-WRAPPER-STAGING-01
+    branch: codex/riasec-result-pilot-allowlist-gate-01
+    title: "RIASEC-RESULT-PILOT-ALLOWLIST-GATE-01: feat(riasec): add pilot allowlist gate"
+    train_scope: riasec_result_ops_agent_release_chain
+    status: user_authorized
+    scope:
+      - Add attempt, user, anon, org, form, locale, and environment allowlist gates.
+      - Add kill switch and pilot observability.
+      - Keep production default denied.
+    allowed_paths:
+      - backend/config/**
+      - backend/app/Services/Riasec/**
+      - backend/tests/**/RiasecPilot*
+      - backend/tests/**/RiasecResultPage*
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - cd backend && php artisan test --filter=RiasecResultPage
+      - cd backend && php artisan test --filter=RiasecPilot
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: RIASEC-RESULT-ALL-SURFACE-PILOT-QA-01
+    repo: fap-api
+    depends_on:
+      - RIASEC-RESULT-PILOT-ALLOWLIST-GATE-01
+    branch: codex/riasec-result-all-surface-pilot-qa-01
+    title: "RIASEC-RESULT-ALL-SURFACE-PILOT-QA-01: test(riasec): add all-surface pilot QA"
+    train_scope: riasec_result_ops_agent_release_chain
+    status: user_authorized
+    scope:
+      - Add all-surface pilot QA evidence for result, PDF, share, history, compare, locked/free, low-quality, and fallback surfaces.
+    allowed_paths:
+      - backend/content_assets/riasec/result_page_v2/qa/**
+      - backend/tests/**/RiasecResultPage*
+      - backend/tests/Feature/V0_3/RiasecAssessmentFlowTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - cd backend && php artisan test --filter=RiasecResultPage
+      - cd backend && php artisan test --filter=RiasecAssessmentFlowTest
+      - jq empty on touched JSON files
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: RIASEC-RESULT-PRODUCTION-IMPORT-GATE-01
+    repo: fap-api
+    depends_on:
+      - RIASEC-RESULT-ALL-SURFACE-PILOT-QA-01
+    branch: codex/riasec-result-production-import-gate-01
+    title: "RIASEC-RESULT-PRODUCTION-IMPORT-GATE-01: test(riasec): add production import gate"
+    train_scope: riasec_result_ops_agent_release_chain
+    status: user_authorized
+    scope:
+      - Add production import gate policy, release snapshot, and approval evidence.
+      - Reject staging-only artifacts and keep production disabled.
+    allowed_paths:
+      - backend/content_assets/riasec/result_page_v2/governance/**
+      - backend/content_assets/riasec/result_page_v2/releases/**
+      - backend/tests/**/RiasecResultPage*
+      - backend/tests/**/ImportGate*
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - cd backend && php artisan test --filter=RiasecResultPage
+      - cd backend && php artisan test --filter=ImportGate
+      - jq empty on touched JSON files
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: RIASEC-RESULT-PRODUCTION-ROLLOUT-GATE-01
+    repo: fap-api
+    depends_on:
+      - RIASEC-RESULT-PRODUCTION-IMPORT-GATE-01
+    branch: codex/riasec-result-production-rollout-gate-01
+    title: "RIASEC-RESULT-PRODUCTION-ROLLOUT-GATE-01: test(riasec): add production rollout gate"
+    train_scope: riasec_result_ops_agent_release_chain
+    status: user_authorized
+    scope:
+      - Add manual approval gate, configuration validation, tenant/form/locale scope, percentage max, rollback and kill-switch checks, and post-deploy smoke procedures.
+      - Do not execute production rollout automatically.
+    allowed_paths:
+      - backend/config/**
+      - backend/app/Services/Riasec/**
+      - backend/content_assets/riasec/result_page_v2/governance/**
+      - backend/content_assets/riasec/result_page_v2/qa/**
+      - backend/tests/**/RiasecResultPage*
+      - backend/tests/**/ProductionRuntime*
+      - backend/tests/**/RolloutGate*
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    validation:
+      - cd backend && php artisan test --filter=RiasecResultPage
+      - cd backend && php artisan test --filter=ProductionRuntime
+      - cd backend && php artisan test --filter=RolloutGate
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
