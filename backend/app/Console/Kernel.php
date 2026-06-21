@@ -112,6 +112,7 @@ use App\Console\Commands\ContentReleaseRevalidate;
 use App\Console\Commands\EnneagramActivateRegistryRelease;
 use App\Console\Commands\EnneagramExportProductionEquivalentCandidatePayloads;
 use App\Console\Commands\EnneagramImportInactiveCandidateRelease;
+use App\Console\Commands\EnneagramResultPageAgentReadinessCommand;
 use App\Console\Commands\EnneagramRollbackRegistryRelease;
 use App\Console\Commands\Eq60PsychometricsReport;
 use App\Console\Commands\FapEmailLifecycleRollout;
@@ -239,6 +240,7 @@ class Kernel extends ConsoleKernel
         EnneagramExportProductionEquivalentCandidatePayloads::class,
         EnneagramActivateRegistryRelease::class,
         EnneagramImportInactiveCandidateRelease::class,
+        EnneagramResultPageAgentReadinessCommand::class,
         EnneagramRollbackRegistryRelease::class,
         BigFiveExportProductionEquivalentCandidatePayloads::class,
         BigFiveImportInactiveCandidateRelease::class,
