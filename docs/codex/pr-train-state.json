@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-21T22:25:44+08:00",
+  "updated_at": "2026-06-21T22:31:19+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -55777,7 +55777,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-source-ledger-01",
     "base": "main",
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "train_scope": "riasec_result_page_v2_asset_agent",
     "title": "RIASEC-RESULT-SOURCE-LEDGER-01: docs(riasec):建 result source ledger",
     "depends_on": [
@@ -55807,12 +55807,12 @@
         "evidence": "Changed files are confined to backend/content_assets/riasec/result_page_v2/source_ledger/v0_1/* and docs/codex/pr-train-state.json. PR1 state reconciliation is included because it is required to unblock this dependency chain."
       },
       "github": {
-        "status": "pending",
-        "evidence": "PR #2220 opened from commit a85583df56533f2222482bd928350e9476543bc4; waiting for required GitHub checks."
+        "status": "pass",
+        "evidence": "PR #2220 checks passed on head 94407f4d34fb202cea1af6682e50a2847411fde6: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and non-blocking Semgrep SARIF upload. Merge state CLEAN."
       }
     },
     "failure_reason": null,
-    "commit_sha": "a85583df56533f2222482bd928350e9476543bc4",
+    "commit_sha": "94407f4d34fb202cea1af6682e50a2847411fde6",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2220",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -55837,6 +55837,11 @@
         "at": "2026-06-21T22:25:44+08:00",
         "status": "github_checks_pending",
         "note": "Opened PR #2220 from commit a85583df56533f2222482bd928350e9476543bc4; waiting for required GitHub checks."
+      },
+      {
+        "at": "2026-06-21T22:31:19+08:00",
+        "status": "ready_to_merge",
+        "note": "PR #2220 GitHub checks passed on head 94407f4d34fb202cea1af6682e50a2847411fde6; merge state CLEAN. Ready to merge after this state update revalidates."
       }
     ]
   },
