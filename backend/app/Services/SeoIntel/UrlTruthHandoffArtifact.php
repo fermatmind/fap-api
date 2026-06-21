@@ -18,6 +18,8 @@ final class UrlTruthHandoffArtifact
 
     public const ARTICLE_PAGE_ENTITY_TYPE = 'article';
 
+    public const CONTENT_PAGE_ENTITY_TYPE = 'content_page';
+
     public const PERSONALITY_PROFILE_VARIANT_PAGE_ENTITY_TYPE = 'personality_profile_variant';
 
     public const PERSONALITY_PROFILE_COMPARISON_PAGE_ENTITY_TYPE = 'personality_profile_comparison';
@@ -76,6 +78,17 @@ final class UrlTruthHandoffArtifact
             'entity_source_issue' => 'candidate_entity_source_not_articles',
             'route_issue' => 'candidate_route_not_article',
             'entity_identity_issue' => 'candidate_article_entity_id_invalid',
+        ],
+        self::CONTENT_PAGE_ENTITY_TYPE => [
+            'mode' => 'two_stage_content_page_url_truth_handoff',
+            'route_regex' => '^/(en|zh)/(?!results(?:/|$)|orders(?:/|$)|share(?:/|$)|pay(?:/|$)|payment(?:/|$)|history(?:/|$)|private(?:/|$)|account(?:/|$)|admin(?:/|$)|ops(?:/|$))[a-z0-9][a-z0-9/_-]*$',
+            'entity_source' => 'content_pages',
+            'route_fragment' => '/',
+            'forbidden_route_fragments' => self::PRIVATE_ROUTE_FRAGMENTS,
+            'type_issue' => 'candidate_not_content_page',
+            'entity_source_issue' => 'candidate_entity_source_not_content_pages',
+            'route_issue' => 'candidate_route_not_content_page',
+            'entity_identity_issue' => 'candidate_content_page_entity_id_invalid',
         ],
         self::PERSONALITY_PROFILE_VARIANT_PAGE_ENTITY_TYPE => [
             'mode' => 'two_stage_personality_profile_variant_url_truth_handoff',
@@ -503,6 +516,10 @@ final class UrlTruthHandoffArtifact
 
         if ($pageEntityType === self::ARTICLE_PAGE_ENTITY_TYPE) {
             return $entityIdOrSlug === '' || ! ctype_digit($entityIdOrSlug);
+        }
+
+        if ($pageEntityType === self::CONTENT_PAGE_ENTITY_TYPE) {
+            return trim($entityIdOrSlug) === '';
         }
 
         if ($pageEntityType === self::PERSONALITY_PROFILE_VARIANT_PAGE_ENTITY_TYPE) {

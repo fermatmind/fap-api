@@ -20,6 +20,7 @@ final class SeoIntelUrlTruthHandoffCommand extends Command
         {--write : Execute bounded write from a validated import artifact}
         {--limit=20 : Bound exported or imported candidates}
         {--page-type=research_report : Required page entity type}
+        {--canonical-path= : Optional exact canonical path filter for export, e.g. /help/about}
         {--confirm-artifact-sha256= : Required SHA256 confirmation for write mode}
         {--confirm-bounded-write-override= : Exact approval phrase for command-scoped write override when seo_intel config write flags are disabled}
         {--json : Output safe machine-readable JSON}';
@@ -34,6 +35,7 @@ final class SeoIntelUrlTruthHandoffCommand extends Command
         $dryRun = (bool) $this->option('dry-run') || ! $write;
         $limit = $this->boundedLimit($this->option('limit'));
         $pageType = $this->stringOption($this->option('page-type')) ?? ResearchReport::PAGE_ENTITY_TYPE;
+        $canonicalPath = $this->normalizedPathOption($this->option('canonical-path'));
 
         if (($exportPath === null && $importPath === null) || ($exportPath !== null && $importPath !== null)) {
             return $this->finish([
@@ -54,13 +56,13 @@ final class SeoIntelUrlTruthHandoffCommand extends Command
         }
 
         if ($exportPath !== null) {
-            return $this->export($artifact, $exportPath, $limit, $pageType);
+            return $this->export($artifact, $exportPath, $limit, $pageType, $canonicalPath);
         }
 
         return $this->import($artifact, (string) $importPath, $limit, $dryRun, $write, $pageType);
     }
 
-    private function export(UrlTruthHandoffArtifact $artifact, string $path, int $limit, string $pageType): int
+    private function export(UrlTruthHandoffArtifact $artifact, string $path, int $limit, string $pageType, ?string $canonicalPath): int
     {
         $pathSafetyIssue = $artifact->artifactPathSafetyIssue($path, forWrite: true);
         if ($pathSafetyIssue !== null) {
@@ -79,6 +81,13 @@ final class SeoIntelUrlTruthHandoffCommand extends Command
             static fn (UrlTruthInventoryRecord $record): bool => $record->pageEntityType === $pageType
                 && $record->sourceAuthority === UrlTruthHandoffArtifact::SOURCE_AUTHORITY
         ));
+
+        if ($canonicalPath !== null) {
+            $records = array_values(array_filter(
+                $records,
+                fn (UrlTruthInventoryRecord $record): bool => $this->recordMatchesCanonicalPath($record, $canonicalPath),
+            ));
+        }
 
         usort($records, static fn (UrlTruthInventoryRecord $a, UrlTruthInventoryRecord $b): int => strcmp(
             $a->canonicalUrlHash(),
@@ -110,6 +119,7 @@ final class SeoIntelUrlTruthHandoffCommand extends Command
             'writes_committed' => false,
             'planned_url_count' => $validation['metadata']['planned_url_count'],
             'planned_entity_count' => $validation['metadata']['planned_entity_count'],
+            'canonical_path_filter' => $canonicalPath,
             'target_tables' => ['seo_urls', 'seo_url_entities'],
             'external_api_calls' => false,
             'search_url_submission' => false,
@@ -313,6 +323,38 @@ final class SeoIntelUrlTruthHandoffCommand extends Command
         }
 
         return min($max, max(1, (int) $rawLimit));
+    }
+
+    private function normalizedPathOption(mixed $value): ?string
+    {
+        $path = trim((string) $value);
+        if ($path === '') {
+            return null;
+        }
+
+        $parsedPath = parse_url($path, PHP_URL_PATH);
+        $path = is_string($parsedPath) && $parsedPath !== '' ? $parsedPath : $path;
+        $path = '/'.ltrim($path, '/');
+
+        return rtrim($path, '/') ?: '/';
+    }
+
+    private function recordMatchesCanonicalPath(UrlTruthInventoryRecord $record, string $canonicalPath): bool
+    {
+        $recordPath = (string) (parse_url($record->canonicalUrl, PHP_URL_PATH) ?: '');
+        $recordPath = $this->normalizedPathOption($recordPath) ?? '';
+
+        return $recordPath === $canonicalPath
+            || $this->stripLocalePrefix($recordPath) === $canonicalPath;
+    }
+
+    private function stripLocalePrefix(string $path): string
+    {
+        if (preg_match('#^/(?:en|zh)(/.*)$#', $path, $matches) === 1) {
+            return rtrim((string) $matches[1], '/') ?: '/';
+        }
+
+        return $path;
     }
 
     private function stringOption(mixed $value): ?string
