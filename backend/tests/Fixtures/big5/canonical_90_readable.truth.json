@@ -129,8 +129,8 @@
             }
         ],
         "links": {
-            "first": "http://127.0.0.1:18010/api/v0.3/me/attempts?page=1",
-            "last": "http://127.0.0.1:18010/api/v0.3/me/attempts?page=1",
+            "first": "<local-origin>/api/v0.3/me/attempts?page=1",
+            "last": "<local-origin>/api/v0.3/me/attempts?page=1",
             "next": null,
             "prev": null
         },
@@ -152,6 +152,7 @@
         "x_report_variant": "full"
     },
     "report_access_payload": {
+        "access_source": "none",
         "access_state": "ready",
         "actions": {
             "history_href": null,
@@ -169,6 +170,7 @@
             "scale_code": "BIG5_OCEAN",
             "short_label": "90 questions"
         },
+        "free_full_report_mode": false,
         "invite_unlock_diag_v1": {
             "completed_invitees": 0,
             "invite_status": null,
@@ -198,7 +200,9 @@
         "ok": true,
         "payload": {
             "access_level": "full",
+            "access_source": "none",
             "fallback": true,
+            "free_full_report_mode": false,
             "invite_unlock_diag_v1": {
                 "completed_invitees": 0,
                 "invite_status": null,
@@ -221,11 +225,13 @@
                 "unlock_source": "none",
                 "unlock_stage": "full"
             },
+            "paywall_suppressed": false,
             "result_exists": true,
             "unlock_source": "none",
             "unlock_stage": "full",
             "variant": "full"
         },
+        "paywall_suppressed": false,
         "pdf_state": "ready",
         "projection_version": 1,
         "reason_code": "projection_missing_result_ready",

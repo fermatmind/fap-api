@@ -205,6 +205,50 @@ final class IqReportContractTest extends TestCase
         $response->assertJsonPath('upgrade_sku', null);
     }
 
+    public function test_iq_report_endpoint_returns_full_report_under_free_full_report_mode_without_answer_key_leak(): void
+    {
+        config()->set('fap.features.free_full_report_mode', true);
+        config()->set('fap.free_full_report_assessments', ['IQ_RAVEN']);
+
+        $this->seedScales();
+
+        $attemptId = (string) Str::uuid();
+        $anonId = 'anon_iq_report_free_full_mode';
+        $token = $this->issueAnonToken($anonId);
+        $this->createAttempt($attemptId, $anonId);
+        $this->createScoredResult($attemptId);
+
+        $response = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/report");
+
+        $response->assertOk()
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('locked', false)
+            ->assertJsonPath('access_level', 'full')
+            ->assertJsonPath('variant', 'full')
+            ->assertJsonPath('unlock_stage', 'full')
+            ->assertJsonPath('unlock_source', 'none')
+            ->assertJsonPath('access_source', 'free_full_report_mode')
+            ->assertJsonPath('free_full_report_mode', true)
+            ->assertJsonPath('paywall_suppressed', true)
+            ->assertJsonPath('upgrade_sku', null)
+            ->assertJsonPath('upgrade_sku_effective', null)
+            ->assertJsonPath('offers', []);
+
+        $payload = $response->json();
+        $this->assertIsArray(data_get($payload, 'report.dimensions'));
+        $this->assertIsArray(data_get($payload, 'report.quality'));
+        $this->assertIsArray(data_get($payload, 'report.scoring'));
+        $this->assertIsArray(data_get($payload, 'report.iq_pro'));
+        $this->assertEquals(21.0, data_get($payload, 'report.summary.raw_score'));
+        $this->assertSame('A', data_get($payload, 'report.quality.level'));
+        $this->assertSame('contract_defined_not_implemented', data_get($payload, 'report.iq_pro.pdf_payload.status'));
+        $this->assertSame('contract_defined_not_implemented', data_get($payload, 'report.iq_pro.certificate_payload.status'));
+        $this->assertPayloadHasNoAnswerKeyFields($payload);
+    }
+
     public function test_iq_result_endpoint_redacts_legacy_answer_keys_from_public_payload(): void
     {
         $this->seedScales();

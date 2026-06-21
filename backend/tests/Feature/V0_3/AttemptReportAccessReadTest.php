@@ -269,6 +269,48 @@ final class AttemptReportAccessReadTest extends TestCase
         ]);
     }
 
+    public function test_mbti_report_access_promotes_to_full_ready_when_free_full_report_mode_is_enabled(): void
+    {
+        config()->set('fap.features.free_full_report_mode', true);
+        config()->set('fap.free_full_report_assessments', ['MBTI']);
+
+        $this->seedScales();
+
+        $attemptId = (string) Str::uuid();
+        $anonId = 'anon_access_free_full_report_mode';
+        $token = $this->issueAnonToken($anonId);
+        $this->createAttempt($attemptId, $anonId);
+        $this->createResult($attemptId);
+
+        $response = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/report-access");
+
+        $response->assertOk()
+            ->assertJsonPath('attempt_id', $attemptId)
+            ->assertJsonPath('access_state', 'ready')
+            ->assertJsonPath('report_state', 'ready')
+            ->assertJsonPath('pdf_state', 'ready')
+            ->assertJsonPath('unlock_stage', 'full')
+            ->assertJsonPath('unlock_source', 'none')
+            ->assertJsonPath('access_source', 'free_full_report_mode')
+            ->assertJsonPath('free_full_report_mode', true)
+            ->assertJsonPath('paywall_suppressed', true)
+            ->assertJsonPath('payload.locked', false)
+            ->assertJsonPath('payload.access_level', 'full')
+            ->assertJsonPath('payload.variant', 'full')
+            ->assertJsonPath('payload.unlock_stage', 'full')
+            ->assertJsonPath('payload.unlock_source', 'none')
+            ->assertJsonPath('payload.access_source', 'free_full_report_mode')
+            ->assertJsonPath('payload.free_full_report_mode', true)
+            ->assertJsonPath('payload.paywall_suppressed', true)
+            ->assertJsonPath('payload.upgrade_sku', null)
+            ->assertJsonPath('payload.upgrade_sku_effective', null)
+            ->assertJsonPath('payload.offers', [])
+            ->assertJsonPath('payload.modules_preview', []);
+    }
+
     public function test_it_keeps_projection_missing_pending_when_active_grant_exists_but_result_does_not_exist(): void
     {
         $this->seedScales();
@@ -547,9 +589,9 @@ final class AttemptReportAccessReadTest extends TestCase
 
         Log::shouldHaveReceived('warning')
             ->atLeast()->once()
-            ->withArgs(function (string $message, array $context) use ($attemptId): bool {
+            ->withArgs(function (string $message, array $context): bool {
                 return $message === 'REPORT_ACCESS_INVITE_SNAPSHOT_FAILED'
-                    && (string) ($context['attempt_id'] ?? '') === $attemptId
+                    && is_string($context['attempt_fingerprint'] ?? null)
                     && (string) ($context['failure_code'] ?? '') === 'invite_snapshot_table_missing';
             });
     }
@@ -593,9 +635,9 @@ final class AttemptReportAccessReadTest extends TestCase
 
         Log::shouldHaveReceived('warning')
             ->atLeast()->once()
-            ->withArgs(function (string $message, array $context) use ($attemptId): bool {
+            ->withArgs(function (string $message, array $context): bool {
                 return $message === 'REPORT_ACCESS_PROJECTION_READ_FAILED'
-                    && (string) ($context['attempt_id'] ?? '') === $attemptId
+                    && is_string($context['attempt_fingerprint'] ?? null)
                     && (string) ($context['failure_code'] ?? '') === 'projection_table_missing';
             });
     }

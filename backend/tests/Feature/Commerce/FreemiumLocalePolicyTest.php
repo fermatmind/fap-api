@@ -117,7 +117,6 @@ final class FreemiumLocalePolicyTest extends TestCase
         $token = $this->issueAnonToken($anonId);
 
         $response = $this->withHeaders([
-            'X-Anon-Id' => $anonId,
             'X-Fap-Locale' => 'en',
             'Authorization' => 'Bearer '.$token,
         ])->postJson('/api/v0.3/orders', [
@@ -152,8 +151,6 @@ final class FreemiumLocalePolicyTest extends TestCase
             'anon_id' => $anonId,
             'org_id' => 0,
             'role' => 'public',
-            'expires_at' => now()->addDay(),
-            'revoked_at' => null,
             'created_at' => now(),
             'updated_at' => now(),
         ]);

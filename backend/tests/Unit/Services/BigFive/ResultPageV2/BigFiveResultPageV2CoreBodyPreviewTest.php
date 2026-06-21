@@ -562,6 +562,18 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_free_full_report_mode_feature_flag_files(): void
+    {
+        $changed = [
+            'backend/app/Http/Controllers/API/V0_3/AttemptReadController.php',
+            'backend/app/Services/Report/ReportGatekeeper.php',
+            'backend/app/Services/Report/Resolvers/AccessResolver.php',
+            'backend/config/fap.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_clinical_combo_en_paid_parity_changes(): void
     {
         $changed = [
@@ -4646,6 +4658,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isFreeFullReportModeFeatureFlagFile($file)) {
+                continue;
+            }
+
             if ($this->isClinicalComboEnPaidParityFile($file)) {
                 continue;
             }
@@ -5961,6 +5977,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Commerce/EntitlementManager.php',
             'backend/app/Services/Report/ReportAccess.php',
             'backend/app/Services/Report/Resolvers/AccessResolver.php',
+        ], true);
+    }
+
+    private function isFreeFullReportModeFeatureFlagFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Http/Controllers/API/V0_3/AttemptReadController.php',
+            'backend/app/Services/Report/ReportGatekeeper.php',
+            'backend/app/Services/Report/Resolvers/AccessResolver.php',
+            'backend/config/fap.php',
         ], true);
     }
 

@@ -97,12 +97,17 @@ class ReportGatekeeper
             $commercial,
             $forceFreeOnly
         );
-        $hasAccess = (bool) ($accessState['has_full_access'] ?? false)
-            || $this->freemiumLocalePolicy()->grantsFullFree($localePolicy);
+        $freeFullReportMode = $this->accessResolver->freeFullReportModeEnabled($scaleCode);
+        $localeGrantsFullFree = $this->freemiumLocalePolicy()->grantsFullFree($localePolicy);
+        $hasEntitlementFullAccess = (bool) ($accessState['has_entitlement_full_access'] ?? false);
+        $hasAccess = (bool) ($accessState['has_full_access'] ?? false) || $localeGrantsFullFree;
 
         return [
             'ok' => true,
             'locked' => ! $hasAccess,
+            'access_source' => $this->resolveAccessSource($freeFullReportMode, $localeGrantsFullFree, $hasEntitlementFullAccess),
+            'free_full_report_mode' => $freeFullReportMode,
+            'paywall_suppressed' => $freeFullReportMode,
         ];
     }
 
@@ -176,8 +181,15 @@ class ReportGatekeeper
             $commercial,
             $forceFreeOnly
         );
-        $hasFullAccess = (bool) ($accessState['has_full_access'] ?? false)
-            || $this->freemiumLocalePolicy()->grantsFullFree($localePolicy);
+        $freeFullReportMode = $this->accessResolver->freeFullReportModeEnabled($scaleCode);
+        $localeGrantsFullFree = $this->freemiumLocalePolicy()->grantsFullFree($localePolicy);
+        $hasEntitlementFullAccess = (bool) ($accessState['has_entitlement_full_access'] ?? false);
+        $accessSource = $this->resolveAccessSource($freeFullReportMode, $localeGrantsFullFree, $hasEntitlementFullAccess);
+        $paywallSuppressed = $freeFullReportMode;
+        $hasFullAccess = (bool) ($accessState['has_full_access'] ?? false) || $localeGrantsFullFree;
+        if ($freeFullReportMode) {
+            [$paywall, $viewPolicy] = $this->suppressPaywall($paywall, $viewPolicy);
+        }
 
         $modulesOffered = $this->offerResolver->collectModulesFromOffers((array) ($paywall['offers'] ?? []));
         if ($modulesOffered === []) {
@@ -219,6 +231,14 @@ class ReportGatekeeper
         $modulesPreview = (array) ($crisisState['modules_preview'] ?? $modulesPreview);
         $hasFullAccess = (bool) ($crisisState['has_full_access'] ?? $hasFullAccess);
         $hasPaidModuleAccess = (bool) ($crisisState['has_paid_module_access'] ?? $hasPaidModuleAccess);
+        if ($freeFullReportMode) {
+            [$paywall, $viewPolicy] = $this->suppressPaywall($paywall, $viewPolicy);
+            $modulesAllowed = $this->fullRuntimeModulesForScale($scaleCode);
+            $modulesOffered = ReportAccess::allDefaultModulesOffered($scaleCode);
+            $modulesPreview = [];
+            $hasFullAccess = true;
+            $hasPaidModuleAccess = true;
+        }
         if ($scaleCode === ReportAccess::SCALE_EQ_60) {
             $viewPolicy = $this->eq60AllFreeViewPolicy($viewPolicy);
             $paywall = $this->eq60AllFreePaywall($paywall, $viewPolicy);
@@ -289,7 +309,10 @@ class ReportGatekeeper
                     $modulesPreview,
                     $normsPayload,
                     $qualityPayload,
-                    $isMbtiContract
+                    $isMbtiContract,
+                    accessSource: $accessSource,
+                    freeFullReportMode: $freeFullReportMode,
+                    paywallSuppressed: $paywallSuppressed
                 );
             }
         }
@@ -320,7 +343,10 @@ class ReportGatekeeper
                     $modulesPreview,
                     $normsPayload,
                     $qualityPayload,
-                    $isMbtiContract
+                    $isMbtiContract,
+                    accessSource: $accessSource,
+                    freeFullReportMode: $freeFullReportMode,
+                    paywallSuppressed: $paywallSuppressed
                 );
             }
 
@@ -347,7 +373,10 @@ class ReportGatekeeper
                             $modulesPreview,
                             $normsPayload,
                             $qualityPayload,
-                            $isMbtiContract
+                            $isMbtiContract,
+                            accessSource: $accessSource,
+                            freeFullReportMode: $freeFullReportMode,
+                            paywallSuppressed: $paywallSuppressed
                         );
                     }
                 }
@@ -373,7 +402,10 @@ class ReportGatekeeper
                             $modulesPreview,
                             $normsPayload,
                             $qualityPayload,
-                            $isMbtiContract
+                            $isMbtiContract,
+                            accessSource: $accessSource,
+                            freeFullReportMode: $freeFullReportMode,
+                            paywallSuppressed: $paywallSuppressed
                         );
                     }
                 }
@@ -410,7 +442,10 @@ class ReportGatekeeper
                             $modulesPreview,
                             $normsPayload,
                             $qualityPayload,
-                            $isMbtiContract
+                            $isMbtiContract,
+                            accessSource: $accessSource,
+                            freeFullReportMode: $freeFullReportMode,
+                            paywallSuppressed: $paywallSuppressed
                         );
                     }
                 }
@@ -431,7 +466,10 @@ class ReportGatekeeper
                             $modulesPreview,
                             $normsPayload,
                             $qualityPayload,
-                            $isMbtiContract
+                            $isMbtiContract,
+                            accessSource: $accessSource,
+                            freeFullReportMode: $freeFullReportMode,
+                            paywallSuppressed: $paywallSuppressed
                         );
                     }
 
@@ -455,7 +493,10 @@ class ReportGatekeeper
                             $modulesPreview,
                             $normsPayload,
                             $qualityPayload,
-                            $isMbtiContract
+                            $isMbtiContract,
+                            accessSource: $accessSource,
+                            freeFullReportMode: $freeFullReportMode,
+                            paywallSuppressed: $paywallSuppressed
                         );
                     }
                 }
@@ -480,7 +521,10 @@ class ReportGatekeeper
                 $modulesPreview,
                 $normsPayload,
                 $qualityPayload,
-                $isMbtiContract
+                $isMbtiContract,
+                accessSource: $accessSource,
+                freeFullReportMode: $freeFullReportMode,
+                paywallSuppressed: $paywallSuppressed
             );
         }
 
@@ -533,7 +577,10 @@ class ReportGatekeeper
             $modulesPreview,
             $normsPayload,
             $qualityPayload,
-            $isMbtiContract
+            $isMbtiContract,
+            accessSource: $accessSource,
+            freeFullReportMode: $freeFullReportMode,
+            paywallSuppressed: $paywallSuppressed
         );
     }
 
@@ -640,6 +687,21 @@ class ReportGatekeeper
         $paywall['view_policy'] = $viewPolicy;
 
         return $paywall;
+    }
+
+    /**
+     * @return array{0:array<string,mixed>,1:array<string,mixed>}
+     */
+    private function suppressPaywall(array $paywall, array $viewPolicy): array
+    {
+        $viewPolicy['blur_others'] = false;
+        $viewPolicy['teaser_percent'] = 0.0;
+        $viewPolicy['upgrade_sku'] = null;
+
+        return [
+            $this->eq60AllFreePaywall($paywall, $viewPolicy),
+            $viewPolicy,
+        ];
     }
 
     private function canUseAttemptScopedPaidModules(?string $userId, ?string $anonId, ?string $role): bool
@@ -862,6 +924,35 @@ class ReportGatekeeper
             || (bool) config('fap.features.submit_async_v2', false);
     }
 
+    private function resolveAccessSource(
+        bool $freeFullReportMode,
+        bool $localeGrantsFullFree,
+        bool $hasEntitlementFullAccess
+    ): string {
+        if ($freeFullReportMode) {
+            return 'free_full_report_mode';
+        }
+
+        if ($localeGrantsFullFree) {
+            return 'freemium_locale_policy';
+        }
+
+        return $hasEntitlementFullAccess ? 'payment' : 'none';
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function fullRuntimeModulesForScale(string $scaleCode): array
+    {
+        return $scaleCode === ReportAccess::SCALE_EQ_60
+            ? ReportAccess::eq60AllRuntimeModules()
+            : ReportAccess::normalizeModules(array_merge(
+                ReportAccess::defaultModulesAllowedForLocked($scaleCode),
+                ReportAccess::allDefaultModulesOffered($scaleCode)
+            ));
+    }
+
     private function enqueueSnapshotBuild(int $orgId, Attempt $attempt, Result $result): void
     {
         $attemptId = trim((string) ($attempt->id ?? ''));
@@ -909,7 +1000,10 @@ class ReportGatekeeper
         array $quality = [],
         bool $isMbtiContract = false,
         ?string $unlockStage = null,
-        ?string $unlockSource = null
+        ?string $unlockSource = null,
+        string $accessSource = 'none',
+        bool $freeFullReportMode = false,
+        bool $paywallSuppressed = false
     ): array {
         $generating = (bool) ($meta['generating'] ?? false);
         $snapshotError = (bool) ($meta['snapshot_error'] ?? false);
@@ -947,6 +1041,9 @@ class ReportGatekeeper
             'variant' => ReportAccess::normalizeVariant($variant),
             'unlock_stage' => $normalizedUnlockStage,
             'unlock_source' => ReportAccess::normalizeUnlockSource($unlockSource ?? ReportAccess::UNLOCK_SOURCE_NONE),
+            'access_source' => trim($accessSource) !== '' ? $accessSource : 'none',
+            'free_full_report_mode' => $freeFullReportMode,
+            'paywall_suppressed' => $paywallSuppressed,
             'upgrade_sku' => $paywall['upgrade_sku'] ?? ($viewPolicy['upgrade_sku'] ?? null),
             'upgrade_sku_effective' => $paywall['upgrade_sku_effective'] ?? ($viewPolicy['upgrade_sku'] ?? null),
             'offers' => $paywall['offers'] ?? [],

@@ -785,6 +785,19 @@ class AttemptReadController extends Controller
         $isEq60 = strtoupper(trim((string) ($attempt->scale_code ?? ''))) === ReportAccess::SCALE_EQ_60;
         $isEnneagram = strtoupper(trim((string) ($attempt->scale_code ?? ''))) === ReportAccess::SCALE_ENNEAGRAM;
         $isRiasec = strtoupper(trim((string) ($attempt->scale_code ?? ''))) === ReportAccess::SCALE_RIASEC;
+        $freeFullReportModeRequested = $resultExists && $this->freeFullReportModeEnabledForScale($scaleCode);
+        $freeFullReportModeGate = $freeFullReportModeRequested
+            ? $this->reportGatekeeper->ensureAccess(
+                $orgId,
+                (string) $attempt->id,
+                $readUserId,
+                $readAnonId,
+                $this->currentOrgContext()->role()
+            )
+            : ['ok' => false];
+        $freeFullReportModeEnabled = ($freeFullReportModeGate['ok'] ?? false) === true
+            && ! (bool) ($freeFullReportModeGate['locked'] ?? true)
+            && (bool) ($freeFullReportModeGate['free_full_report_mode'] ?? false);
         $hasBigFiveFullAccess = $isBigFive && $resultExists && $this->hasBigFiveFullAccess($request, $orgId, (string) $attempt->id, $readUserId, $readAnonId);
         if (($hasBigFiveFullAccess || $isEq60 || $isEnneagram || $isRiasec) && $resultExists) {
             $accessState = 'ready';
@@ -812,6 +825,20 @@ class AttemptReadController extends Controller
                     'blur_others' => false,
                 ];
             }
+        }
+        if ($freeFullReportModeEnabled) {
+            $accessState = 'ready';
+            $reportState = 'ready';
+            if ($this->reportAccessSupportsPdfWhenUnlocked($scaleCode)) {
+                $pdfState = 'ready';
+            }
+            $payloadJson = array_merge(
+                $payloadJson,
+                $this->freeFullReportModePayloadForScale(
+                    $scaleCode,
+                    (string) ($freeFullReportModeGate['access_source'] ?? 'free_full_report_mode')
+                )
+            );
         }
 
         if ($repairFailed && $resultExists) {
@@ -920,8 +947,14 @@ class AttemptReadController extends Controller
                     ? ReportAccess::VARIANT_FULL
                     : ReportAccess::VARIANT_FREE)
         ));
+        $payloadJson['access_source'] = trim((string) data_get($payloadJson, 'access_source', 'none')) ?: 'none';
+        $payloadJson['free_full_report_mode'] = (bool) data_get($payloadJson, 'free_full_report_mode', false);
+        $payloadJson['paywall_suppressed'] = (bool) data_get($payloadJson, 'paywall_suppressed', false);
         $responsePayload['unlock_stage'] = $unlockStage;
         $responsePayload['unlock_source'] = $unlockSource;
+        $responsePayload['access_source'] = $payloadJson['access_source'];
+        $responsePayload['free_full_report_mode'] = $payloadJson['free_full_report_mode'];
+        $responsePayload['paywall_suppressed'] = $payloadJson['paywall_suppressed'];
         $inviteSnapshotFailureCode = null;
         $inviteSnapshot = $this->resolveInviteSnapshot(
             (int) ($attempt->org_id ?? 0),
@@ -1325,6 +1358,71 @@ class AttemptReadController extends Controller
         }
 
         return ! (bool) ($gate['locked'] ?? true);
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function freeFullReportModePayloadForScale(string $scaleCode, string $accessSource = 'free_full_report_mode'): array
+    {
+        $scaleCode = strtoupper(trim($scaleCode));
+        $viewPolicy = [
+            'free_sections' => $scaleCode === ReportAccess::SCALE_EQ_60
+                ? ReportAccess::eq60FreeSectionKeys()
+                : [],
+            'blur_others' => false,
+            'teaser_percent' => 0.0,
+            'upgrade_sku' => null,
+        ];
+
+        return [
+            'locked' => false,
+            'access_level' => ReportAccess::REPORT_ACCESS_FULL,
+            'variant' => ReportAccess::VARIANT_FULL,
+            'unlock_stage' => ReportAccess::UNLOCK_STAGE_FULL,
+            'unlock_source' => ReportAccess::UNLOCK_SOURCE_NONE,
+            'access_source' => trim($accessSource) !== '' ? $accessSource : 'free_full_report_mode',
+            'free_full_report_mode' => true,
+            'paywall_suppressed' => true,
+            'upgrade_sku' => null,
+            'upgrade_sku_effective' => null,
+            'offers' => [],
+            'modules_allowed' => $this->fullRuntimeModulesForScale($scaleCode),
+            'modules_preview' => [],
+            'view_policy' => $viewPolicy,
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function fullRuntimeModulesForScale(string $scaleCode): array
+    {
+        return $scaleCode === ReportAccess::SCALE_EQ_60
+            ? ReportAccess::eq60AllRuntimeModules()
+            : ReportAccess::normalizeModules(array_merge(
+                ReportAccess::defaultModulesAllowedForLocked($scaleCode),
+                ReportAccess::allDefaultModulesOffered($scaleCode)
+            ));
+    }
+
+    private function reportAccessSupportsPdfWhenUnlocked(string $scaleCode): bool
+    {
+        return strtoupper(trim($scaleCode)) !== ReportAccess::SCALE_IQ_RAVEN;
+    }
+
+    private function freeFullReportModeEnabledForScale(string $scaleCode): bool
+    {
+        if (! (bool) config('fap.features.free_full_report_mode', false)) {
+            return false;
+        }
+
+        $allowedScales = array_map(
+            static fn (mixed $value): string => strtoupper(trim((string) $value)),
+            (array) config('fap.free_full_report_assessments', [])
+        );
+
+        return in_array(strtoupper(trim($scaleCode)), array_values(array_filter($allowedScales)), true);
     }
 
     /**
