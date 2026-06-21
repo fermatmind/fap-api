@@ -56465,7 +56465,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-route-matrix-golden-case-qa-01",
     "base": "main",
-    "status": "local_checks_passed",
+    "status": "github_checks_pending",
     "train_scope": "riasec_result_page_v2_asset_agent",
     "title": "RIASEC-RESULT-ROUTE-MATRIX-GOLDEN-CASE-QA-01: test(riasec):验证 route matrix golden cases",
     "depends_on": [
@@ -56509,8 +56509,8 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "235ea2b0a7067a011adf79f5657ed0777754da6b",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2236",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -56524,6 +56524,11 @@
         "at": "2026-06-22T00:48:37+08:00",
         "status": "local_checks_passed",
         "note": "Produced route matrix and golden-case staging QA seed/reports with 7 canonical groups and one resolved share_safety selector ref. Focused route QA test, full Riasec filter, JSON/YAML, diff, and scope validation passed; unresolved broad selector packages are recorded as non-blocking sidecar because they pre-existed this PR."
+      },
+      {
+        "at": "2026-06-22T00:51:01+08:00",
+        "status": "github_checks_pending",
+        "note": "Opened PR #2236 from head 235ea2b0a7067a011adf79f5657ed0777754da6b; waiting for required GitHub checks."
       }
     ]
   },
