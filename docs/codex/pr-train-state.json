@@ -55695,6 +55695,81 @@
       }
     ]
   },
+  "B5-RESULT-CANDIDATE-BATCH-001": {
+    "repo": "fap-api",
+    "branch": "codex/big5-v2-candidate-batch-001",
+    "base": "main",
+    "status": "ready_to_merge",
+    "train_scope": "big5_result_page_v2_asset_agent",
+    "title": "B5-RESULT-CANDIDATE-BATCH-001: Stage first Big Five V2 asset-agent candidate batch",
+    "depends_on": [
+      "BIG5-RESULT-ASSET-FACTORY-PILOT-BATCH-01",
+      "BIG5-RESULT-ROUTE-MATRIX-GOLDEN-CASE-QA-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly requested the Big Five V2 result-page asset agent train and provided this candidate batch PR scope."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "GitHub shows PR #2203 and PR #2207 merged; origin/main contains merge commits 28a9ae48a6093db59ba1cfcd2116b6f683d33b10 and 0d8c99b42b6475d4d6bb90cbdab9256735acf81d."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "find backend/content_assets/big5/result_page_v2/agent_runs/candidate_batch_001 backend/content_assets/big5/result_page_v2/staging_candidate_imports/candidate_batch_001 -name '*.json' -print -exec python3 -m json.tool {} >/dev/null \\;",
+          "ruby -rjson -e 'Dir[\"backend/content_assets/big5/result_page_v2/{agent_runs,staging_candidate_imports}/candidate_batch_001/*.jsonl\"].each { |path| File.foreach(path).with_index(1) { |line, idx| JSON.parse(line); }; puts \"jsonl ok #{path}\" }'",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "git diff --check",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2SelectorAssetValidatorTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ContentAssetLookupTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2StagingComposerTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ValidatorTest --no-ansi",
+          "cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi"
+        ],
+        "evidence": "Generated one selector_asset and one content_asset candidate with the existing agent, added human review manifest, staged reviewed candidates through stage-candidates, and validated the committed batch. Strict audit remained green with selector_validation_errors=0 and leak_hit_count=0."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are confined to backend/content_assets/big5/result_page_v2/agent_runs/candidate_batch_001/*, backend/content_assets/big5/result_page_v2/staging_candidate_imports/candidate_batch_001/*, BigFiveResultPageV2AssetAgentTest, and docs/codex manifest/state. No runtime, CMS, production import, rollout, Ops, or fap-web files changed."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #2225 checks passed on head 67e33d53f97eaafe8f58fd4107bf64434f42198c: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and non-blocking Semgrep SARIF upload. Merge state CLEAN."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": "0d5bd2f8aa6fe2e274eacb4447a89627b8ba8972",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2225",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-21T23:30:00+08:00",
+        "status": "in_progress",
+        "note": "Started candidate batch PR from latest origin/main. Scope is one generated candidate batch, human review manifest, staging import package, focused contract test, and docs/codex train registration."
+      },
+      {
+        "at": "2026-06-21T23:56:00+08:00",
+        "status": "local_checks_passed",
+        "note": "Generated candidate_batch_001, added review manifest, staged reviewed candidates into staging_candidate_imports/candidate_batch_001, and passed JSON/JSONL, YAML/state, focused Big Five V2 tests, strict audit, and scope validation."
+      },
+      {
+        "at": "2026-06-21T23:59:00+08:00",
+        "status": "github_checks_pending",
+        "note": "Opened PR #2225 from branch codex/big5-v2-candidate-batch-001; waiting for required GitHub checks."
+      },
+      {
+        "at": "2026-06-22T00:04:00+08:00",
+        "status": "ready_to_merge",
+        "note": "PR #2225 GitHub checks passed on head 67e33d53f97eaafe8f58fd4107bf64434f42198c and mergeStateStatus is CLEAN."
+      }
+    ]
+  },
   "RIASEC-RESULT-ASSET-AGENT-RUNBOOK-01": {
     "repo": "fap-api",
     "branch": "codex/riasec-result-asset-agent-runbook-01",

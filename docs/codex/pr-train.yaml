@@ -24301,6 +24301,47 @@ prs:
     content_authority: backend
     next_task: SEO-CONV-OPS-05 in fap-api after this PR is merged
 
+  - id: B5-RESULT-CANDIDATE-BATCH-001
+    repo: fap-api
+    depends_on:
+      - BIG5-RESULT-ASSET-FACTORY-PILOT-BATCH-01
+      - BIG5-RESULT-ROUTE-MATRIX-GOLDEN-CASE-QA-01
+    branch: codex/big5-v2-candidate-batch-001
+    title: "B5-RESULT-CANDIDATE-BATCH-001: Stage first Big Five V2 asset-agent candidate batch"
+    train_scope: big5_result_page_v2_asset_agent
+    status: user_authorized
+    scope:
+      - Run the existing Big Five V2 result-page asset agent candidate flow for one small staging-only batch.
+      - Add a human review manifest and stage only reviewed selector_asset/content_asset candidates into a staging package.
+      - Keep all outputs runtime_use=staging_only, production_use_allowed=false, and ready_for_pilot/runtime/production=false.
+    allowed_paths:
+      - backend/content_assets/big5/result_page_v2/agent_runs/candidate_batch_001/**
+      - backend/content_assets/big5/result_page_v2/staging_candidate_imports/candidate_batch_001/**
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2AssetAgentTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Write runtime selector packages, CMS data, release snapshots, production import gates, rollout gates, Ops panels, or fap-web copy.
+      - Generate final big5_result_page_v2 payloads or make big5_report_engine_v2 a primary path.
+    validation:
+      - cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2SelectorAssetValidatorTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ContentAssetLookupTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2StagingComposerTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ValidatorTest --no-ansi
+      - git diff --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: RIASEC-RESULT-ASSET-AGENT-RUNBOOK-01
     repo: fap-api
     branch: codex/riasec-result-asset-agent-runbook-01

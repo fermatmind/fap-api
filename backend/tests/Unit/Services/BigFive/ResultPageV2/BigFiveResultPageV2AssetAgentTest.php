@@ -376,6 +376,82 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
         }
     }
 
+    public function test_committed_candidate_batch_001_is_reviewed_and_staging_only(): void
+    {
+        $agentRunDir = base_path('content_assets/big5/result_page_v2/agent_runs/candidate_batch_001');
+        $stagingDir = base_path('content_assets/big5/result_page_v2/staging_candidate_imports/candidate_batch_001');
+
+        foreach ([
+            'selector_asset_candidates.jsonl',
+            'content_asset_candidates.jsonl',
+            'candidate_generation_summary.json',
+            'review_manifest.json',
+            'staging_import_summary.json',
+            'staging_import_validation_report.json',
+            'repair_log.json',
+        ] as $filename) {
+            $this->assertFileExists($agentRunDir.'/'.$filename);
+        }
+
+        foreach ([
+            'selector_asset_candidates.staging.jsonl',
+            'content_asset_candidates.staging.jsonl',
+            'staging_import_manifest.json',
+            'staging_import_validation_report.json',
+            'repair_log.json',
+        ] as $filename) {
+            $this->assertFileExists($stagingDir.'/'.$filename);
+        }
+
+        $generation = $this->readJson($agentRunDir.'/candidate_generation_summary.json');
+        $review = $this->readJson($agentRunDir.'/review_manifest.json');
+        $summary = $this->readJson($agentRunDir.'/staging_import_summary.json');
+        $validation = $this->readJson($stagingDir.'/staging_import_validation_report.json');
+        $manifest = $this->readJson($stagingDir.'/staging_import_manifest.json');
+        $repairLog = $this->readJson($stagingDir.'/repair_log.json');
+
+        $this->assertSame('pass', data_get($generation, 'validation.status'));
+        $this->assertSame(0, data_get($generation, 'validation.error_count'));
+        $this->assertSame('pass', data_get($generation, 'leak_scan.status'));
+        $this->assertSame(0, data_get($generation, 'leak_scan.hit_count'));
+
+        $this->assertTrue((bool) ($review['human_reviewed'] ?? false));
+        $this->assertSame('approved_for_staging', $review['review_status'] ?? null);
+        $this->assertSame([
+            'selector_asset_candidates.jsonl',
+            'content_asset_candidates.jsonl',
+        ], $review['approved_candidate_files'] ?? []);
+
+        $this->assertTrue((bool) ($summary['ok'] ?? false));
+        $this->assertTrue((bool) ($summary['staging_write_performed'] ?? false));
+        $this->assertTrue((bool) ($validation['staging_write_performed'] ?? false));
+        $this->assertSame('pass', data_get($validation, 'candidate_validation.status'));
+        $this->assertSame(0, data_get($validation, 'candidate_validation.error_count'));
+        $this->assertSame('pass', data_get($validation, 'leak_scan.status'));
+        $this->assertSame(0, data_get($validation, 'leak_scan.hit_count'));
+        $this->assertSame([], $repairLog['entries'] ?? ['unexpected']);
+
+        foreach ([$generation, $review, $manifest] as $artifact) {
+            $this->assertSame('staging_only', $artifact['runtime_use'] ?? null);
+            $this->assertFalse((bool) ($artifact['production_use_allowed'] ?? true));
+            $this->assertFalse((bool) ($artifact['ready_for_pilot'] ?? true));
+            $this->assertFalse((bool) ($artifact['ready_for_runtime'] ?? true));
+            $this->assertFalse((bool) ($artifact['ready_for_production'] ?? true));
+        }
+
+        $allArtifacts = implode("\n", array_map(
+            static fn (string $path): string => (string) file_get_contents($path),
+            array_merge(
+                glob($agentRunDir.'/*') ?: [],
+                glob($stagingDir.'/*') ?: []
+            )
+        ));
+
+        foreach (['private_url', 'attempt_id', 'raw_score', 'percentile', 'fixed_type', 'user_confirmed_type', 'type_code'] as $forbiddenToken) {
+            $this->assertStringNotContainsString($forbiddenToken, $allArtifacts);
+        }
+    }
+
     public function test_strict_mode_rejects_public_payload_and_shareable_score_leaks(): void
     {
         $root = $this->tempDir('big5-v2-agent-leak');
