@@ -185,6 +185,7 @@ use App\Console\Commands\SeoAgentGscPostPublishFeedbackCommand;
 use App\Console\Commands\SeoAgentOpportunityAggregateCommand;
 use App\Console\Commands\SeoAgentPostPublishIndexnowAutoCommand;
 use App\Console\Commands\SeoAgentPostPublishSearchSubmitCommand;
+use App\Console\Commands\SeoAgentPriorityQueueSchedulerCommand;
 use App\Console\Commands\SeoAgentRunCommand;
 use App\Console\Commands\SeoAgentRuntimeSeoQaScanCommand;
 use App\Console\Commands\SeoAgentWeeklyDraftWriteAutoCommand;
@@ -396,6 +397,7 @@ class Kernel extends ConsoleKernel
         SeoAgentGscPostPublishFeedbackCommand::class,
         SeoAgentPostPublishIndexnowAutoCommand::class,
         SeoAgentPostPublishSearchSubmitCommand::class,
+        SeoAgentPriorityQueueSchedulerCommand::class,
         SeoAgentRuntimeSeoQaScanCommand::class,
         SeoAgentOpportunityAggregateCommand::class,
         SeoAgentRunCommand::class,

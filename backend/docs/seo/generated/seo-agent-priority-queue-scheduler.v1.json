@@ -1,0 +1,66 @@
+{
+  "version": "seo-agent-priority-queue-scheduler.v1",
+  "task": "SEO-AGENT-PRIORITY-QUEUE-SCHEDULER-01",
+  "command": "php artisan seo-agent:priority-queue-scheduler",
+  "mode": "weekly-l5-low-risk",
+  "trigger": "external_cron_or_manual_cli",
+  "laravel_scheduler_enabled_by_pr": false,
+  "queue_worker_started_by_pr": false,
+  "recommended_lock": "flock -n /tmp/seo-agent-priority-queue-scheduler.lock",
+  "max_draft_rows_per_execution": 10,
+  "max_content_page_publish_canaries_per_execution": 3,
+  "live_submit_channels_v1": [
+    "indexnow"
+  ],
+  "blocked_live_submit_channels_v1": [
+    "google_indexing",
+    "google_sitemap",
+    "baidu_push"
+  ],
+  "delegated_commands": [
+    "php artisan seo-agent:weekly-draft-write-auto",
+    "php artisan seo-agent:auto-rollback-guard --mode=preflight",
+    "php artisan seo-agent:cms-publish-auto-canary --auto-approve-low-risk --execute",
+    "php artisan seo-agent:post-publish-indexnow-auto --execute",
+    "php artisan seo-agent:auto-rollback-guard --mode=post-publish"
+  ],
+  "allowed_actions": [
+    "readonly_discovery",
+    "auto_approval_policy_evaluation",
+    "cms_draft_revision_write",
+    "content_page_publish_canary",
+    "url_truth_read",
+    "search_channel_queue_write",
+    "search_channel_queue_approve",
+    "indexnow_live_submit",
+    "rollback_guard_preflight",
+    "rollback_guard_post_publish",
+    "evidence_artifact_write"
+  ],
+  "forbidden_actions": [
+    "article_auto_publish",
+    "cms_bulk_publish",
+    "google_indexing_api_call",
+    "baidu_live_submit",
+    "google_sitemap_live_submit",
+    "laravel_scheduler_activation",
+    "queue_worker_activation",
+    "frontend_code_mutation",
+    "production_env_update",
+    "external_model_api_call"
+  ],
+  "negative_guarantees": {
+    "article_auto_publish": false,
+    "cms_bulk_publish": false,
+    "publish_limit_above_three": false,
+    "draft_limit_above_ten": false,
+    "google_indexing_api_call": false,
+    "baidu_live_submit": false,
+    "google_sitemap_live_submit": false,
+    "laravel_scheduler_activation": false,
+    "queue_worker_started": false,
+    "frontend_code_mutation": false,
+    "production_env_change": false,
+    "external_model_api_call": false
+  }
+}

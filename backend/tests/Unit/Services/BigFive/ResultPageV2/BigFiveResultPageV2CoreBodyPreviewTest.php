@@ -1316,6 +1316,20 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_seo_agent_priority_queue_scheduler_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/SeoAgentPriorityQueueSchedulerCommand.php',
+            'backend/app/Console/Kernel.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\SeoAgentPriorityQueueSchedulerCommand;',
+            '+        SeoAgentPriorityQueueSchedulerCommand::class,',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
+    }
+
     public function test_runtime_freeze_classifier_ignores_seo_agent_gsc_opportunity_auto_draft_files(): void
     {
         $changed = [
@@ -3970,6 +3984,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSeoAgentPriorityQueueSchedulerFile($file)) {
+                continue;
+            }
+
             if ($this->isSeoAgentGscOpportunityAutoDraftFile($file)) {
                 continue;
             }
@@ -4588,6 +4606,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsSeoAgentPostPublishIndexnowAutoOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentGscPostPublishFeedbackOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentAutoRollbackGuardOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsSeoAgentPriorityQueueSchedulerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentGscOpportunityAutoDraftOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsBigFiveV2AssetAgentAuditOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsBigFiveV2InactiveCandidateScaffoldOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
@@ -5345,6 +5364,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return in_array($file, [
             'backend/app/Console/Commands/SeoAgentAutoRollbackGuardCommand.php',
+        ], true);
+    }
+
+    private function isSeoAgentPriorityQueueSchedulerFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/SeoAgentPriorityQueueSchedulerCommand.php',
         ], true);
     }
 
@@ -7308,6 +7334,28 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if (preg_match('/\bSeoAgentAutoRollbackGuardCommand\b/u', $line) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsSeoAgentPriorityQueueSchedulerOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            if (preg_match('/\b(MBTI|Mbti|BigFive|Big5|Prewarm|ResultPage|Report)\b/u', $line) === 1) {
+                return false;
+            }
+
+            if (preg_match('/\bSeoAgentPriorityQueueSchedulerCommand\b/u', $line) !== 1) {
                 return false;
             }
         }
