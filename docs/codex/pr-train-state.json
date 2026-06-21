@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-21T18:18:00+08:00",
+  "updated_at": "2026-06-21T18:24:00+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -55466,7 +55466,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-result-asset-factory-pilot-batch-01",
     "base": "main",
-    "status": "local_checks_passed_with_external_sidecar",
+    "status": "github_checks_pending",
     "train_scope": "big5_result_page_v2_asset_agent",
     "title": "BIG5-RESULT-ASSET-FACTORY-PILOT-BATCH-01: feat(big5):dry-run share safety selector batch",
     "depends_on": [
@@ -55497,11 +55497,15 @@
       "scope_validation": {
         "status": "pass",
         "evidence": "Changed files are confined to backend/content_assets/big5/result_page_v2/agent_runs/share_safety_pilot_20260621T1800Z/* and docs/codex/pr-train-state.json. No selector_ready_assets import, runtime wrapper enablement, CMS write, frontend fallback, or production gate change."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": "PR #2203 opened from head 910d01f24d0fe0405ae0d7af1ffcb0e5aa86e16b; waiting for required GitHub checks."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "910d01f24d0fe0405ae0d7af1ffcb0e5aa86e16b",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2203",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -55515,6 +55519,11 @@
         "at": "2026-06-21T18:18:00+08:00",
         "status": "local_checks_passed_with_external_sidecar",
         "note": "Created share_safety_registry-only dry-run agent run with raw draft, repaired draft, final asset, validation report, safety report, source ledger snapshot, input inventory, and NO-GO report. All outputs remain runtime_use=staging_only with production_use_allowed=false, ready_for_runtime=false, and ready_for_production=false. Strict audit sidecar is external and pre-existing."
+      },
+      {
+        "at": "2026-06-21T18:24:00+08:00",
+        "status": "github_checks_pending",
+        "note": "Opened PR #2203 from commit 910d01f24d0fe0405ae0d7af1ffcb0e5aa86e16b; waiting for required GitHub checks."
       }
     ],
     "sidecar_issues": [
