@@ -1,0 +1,84 @@
+{
+  "schema": "big5_result_page_v2.production_ops_report.v0_1",
+  "package": "production_ops",
+  "version": "v0_1",
+  "generated_at": "2026-06-21T00:00:00Z",
+  "mode": "production_ops_reporting_contract",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_pilot": true,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "production_ops_reporting_ready": true,
+  "production_decision": "OPS_READY_ROLLOUT_STILL_GATED",
+  "reporting_window_days": 45,
+  "metrics": {
+    "v2_payload_coverage_rate": {
+      "source": "report_snapshots.big5_result_page_v2_status",
+      "calculation": "attached / total_big5_reports_in_window",
+      "redaction": "count_and_rate_only"
+    },
+    "fallback_hit_rate": {
+      "source": "report_snapshots.big5_result_page_v2_status",
+      "calculation": "(fallback + invalid) / total_big5_reports_in_window",
+      "redaction": "count_and_rate_only"
+    },
+    "malformed_rejection_reasons": {
+      "source": "report_snapshots.big5_result_page_v2_fallback_reason",
+      "calculation": "invalid_status_grouped_by_non_pii_reason",
+      "redaction": "enum_counts_only"
+    },
+    "validation_error_count": {
+      "source": "report_snapshots.big5_result_page_v2_validation_error_count",
+      "calculation": "sum_for_invalid_status_in_window",
+      "redaction": "integer_count_only"
+    },
+    "audited_at_freshness": {
+      "source": "report_snapshots.big5_result_page_v2_audited_at",
+      "calculation": "latest_audit_timestamp_visible_in_ops_detail",
+      "redaction": "timestamp_only"
+    }
+  },
+  "ops_surfaces": {
+    "report_pdf_center": {
+      "status": "ready_redacted",
+      "fields": [
+        "big5_result_page_v2_status",
+        "big5_result_page_v2_fallback_reason",
+        "big5_result_page_v2_validation_error_count",
+        "big5_result_page_v2_audited_at"
+      ],
+      "raw_fields_hidden": [
+        "report_json",
+        "report_free_json",
+        "report_full_json",
+        "payload_json",
+        "result_json"
+      ]
+    },
+    "ops_summary": {
+      "status": "ready_redacted",
+      "fields": [
+        "total",
+        "attached",
+        "fallback",
+        "invalid",
+        "coverage_rate",
+        "fallback_rate",
+        "fallback_reasons",
+        "invalid_reasons",
+        "validation_error_count",
+        "window_days"
+      ]
+    }
+  },
+  "must_not_change": [
+    "fap-web result page copy",
+    "runtime defaults",
+    "release snapshot",
+    "production import gate",
+    "production rollout gate",
+    "legacy fallback ownership"
+  ]
+}

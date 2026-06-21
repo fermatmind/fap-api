@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-21T22:43:15+08:00",
+  "updated_at": "2026-06-22T01:49:00+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -55779,7 +55779,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-v2-pilot-run-evidence",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "big5_result_page_v2_asset_agent",
     "title": "B5-RESULT-PILOT-RUN-EVIDENCE-01: Add Big Five V2 allowlist pilot run evidence",
     "depends_on": [
@@ -55821,11 +55821,11 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": "d6a4c9b534d831bcf7e79a04c94378a0be9cb0b5",
+    "commit_sha": "18665feefac81262c37bb29493cff60aa5b423a4",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2229",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-21T15:34:24Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-22T00:41:00+08:00",
@@ -55846,6 +55846,80 @@
         "at": "2026-06-22T01:29:00+08:00",
         "status": "ready_to_merge",
         "note": "PR #2229 GitHub checks passed on head c4cfbcdc2892848d5687fbb9e2bc50a8ca976686 and mergeStateStatus is CLEAN."
+      },
+      {
+        "at": "2026-06-22T01:38:00+08:00",
+        "status": "merged",
+        "note": "Reconciled during B5-RESULT-M8-PRODUCTION-OPS-01: GitHub reports PR #2229 merged at 2026-06-21T15:34:24Z with merge commit 18665feefac81262c37bb29493cff60aa5b423a4; origin/main contains the merge commit; local and remote task branches are absent; post-merge strict audit and pilot evidence test passed."
+      }
+    ]
+  },
+  "B5-RESULT-M8-PRODUCTION-OPS-01": {
+    "repo": "fap-api",
+    "branch": "codex/big5-v2-m8-production-ops",
+    "base": "main",
+    "status": "local_checks_passed",
+    "train_scope": "big5_result_page_v2_asset_agent",
+    "title": "B5-RESULT-M8-PRODUCTION-OPS-01: Add Big Five V2 production ops reporting",
+    "depends_on": [
+      "B5-RESULT-PILOT-RUN-EVIDENCE-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly requested the continuous Big Five V2 result-page asset agent train and provided this M8 production ops PR scope."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "GitHub shows PR #2229 merged and origin/main contains merge commit 18665feefac81262c37bb29493cff60aa5b423a4."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ProductionOpsTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=ReportPdfCenterTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=ProductionRuntimeTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=RolloutGateTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveV2PilotObservabilityTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFivePdfDeliveryTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ValidatorTest --no-ansi",
+          "cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi",
+          "cd backend && php artisan route:list --no-ansi",
+          "cd backend && DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi",
+          "cd backend && bash scripts/ci_verify_mbti.sh",
+          "git diff --check",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "find backend/content_assets/big5/result_page_v2/qa/production_ops/v0_1 -name '*.json' -print -exec python3 -m json.tool {} >/dev/null \\;",
+          "cd backend/content_assets/big5/result_page_v2/qa/production_ops/v0_1 && shasum -a 256 -c SHA256SUMS"
+        ],
+        "evidence": "M8 production ops package, Report/PDF Center summary aggregation, focused production ops test, existing production/runtime/rollout/PDF/validator tests, route list, migrate pretend, strict asset-agent audit, git diff check, JSON/YAML parse, SHA256SUMS, and full ci_verify_mbti.sh all passed. Generated BIG5_OCEAN v1 compiled files from ci_verify_mbti.sh were restored because they are outside M8 scope."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are confined to ReportSnapshotExplorerSupport, ReportPdfCenterTest, BigFiveResultPageV2ProductionOpsTest, backend/content_assets/big5/result_page_v2/qa/production_ops/*, and docs/codex manifest/state. No fap-web copy, frontend content, release snapshot, production import gate, rollout gate, CMS publishing, or legacy engine primary-path changes."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-22T01:38:00+08:00",
+        "status": "in_progress",
+        "note": "Started M8 production ops PR from latest origin/main. Scope is redacted Ops summary aggregation, production_ops evidence package, focused tests, and docs/codex train registration."
+      },
+      {
+        "at": "2026-06-22T01:49:00+08:00",
+        "status": "local_checks_passed",
+        "note": "M8 production ops implementation passed focused backend tests, strict audit, route list, migrate pretend, full ci_verify_mbti.sh, artifact SHA checks, and scope validation."
       }
     ]
   },

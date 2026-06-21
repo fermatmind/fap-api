@@ -24381,6 +24381,52 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: B5-RESULT-M8-PRODUCTION-OPS-01
+    repo: fap-api
+    depends_on:
+      - B5-RESULT-PILOT-RUN-EVIDENCE-01
+    branch: codex/big5-v2-m8-production-ops
+    title: "B5-RESULT-M8-PRODUCTION-OPS-01: Add Big Five V2 production ops reporting"
+    train_scope: big5_result_page_v2_asset_agent
+    status: user_authorized
+    scope:
+      - Add M8 production ops reporting contract for Big Five V2 result page audit metrics.
+      - Track V2 payload coverage, fallback hit rate, malformed payload rejection reasons, leak smoke, PDF/private URL/footer/token smoke, audit fields, and Ops panel evidence.
+      - Keep production rollout controlled by release snapshot, production import gate, rollout gate, audit fields, and Ops review.
+    allowed_paths:
+      - backend/app/Filament/Ops/Resources/ReportSnapshotResource/Support/ReportSnapshotExplorerSupport.php
+      - backend/content_assets/big5/result_page_v2/qa/production_ops/**
+      - backend/tests/Feature/Ops/ReportPdfCenterTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2ProductionOpsTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add fap-web copy, make big5_report_engine_v2 primary, expose raw report_json/report_full_json/payload_json, or enable production rollout.
+      - Change release snapshots, production import gates, rollout gates, CMS data, frontend routes, or result-page content copy.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=ProductionRuntimeTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=RolloutGateTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveV2PilotObservabilityTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=ReportPdfCenterTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFivePdfDeliveryTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ValidatorTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ProductionOpsTest --no-ansi
+      - cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - cd backend && php artisan route:list --no-ansi
+      - cd backend && DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --pretend --no-ansi
+      - git diff --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: RIASEC-RESULT-ASSET-AGENT-RUNBOOK-01
     repo: fap-api
     branch: codex/riasec-result-asset-agent-runbook-01

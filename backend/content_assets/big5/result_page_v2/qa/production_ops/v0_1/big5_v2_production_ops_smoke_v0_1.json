@@ -1,0 +1,43 @@
+{
+  "schema": "big5_result_page_v2.production_ops_smoke.v0_1",
+  "package": "production_ops",
+  "version": "v0_1",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_pilot": true,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "production_ops_reporting_ready": true,
+  "smoke_contract": {
+    "fresh_anonymous_big5_live_sample": "required_for_operator_run",
+    "report_json_fetch": "redacted_evidence_only",
+    "report_pdf_fetch": "redacted_text_evidence_only",
+    "pdf_private_link_check": "must_not_appear",
+    "footer_check": "must_not_expose_internal_tokens",
+    "legacy_engine_label_check": "must_not_appear",
+    "controller_name_check": "must_not_appear",
+    "payload_word_check": "must_not_appear_in_public_text",
+    "registry_word_check": "must_not_appear_in_public_text"
+  },
+  "forbidden_public_text_tokens": [
+    "private URL",
+    "attempt id",
+    "Big Five Report Engine",
+    "PR3B",
+    "AttemptReadController",
+    "payload",
+    "registry",
+    "raw scores",
+    "shareable percentiles",
+    "internal metadata",
+    "[object Object]"
+  ],
+  "evidence_output_policy": {
+    "stores_real_attempt_identifier": false,
+    "stores_private_link": false,
+    "stores_pdf_file": false,
+    "stores_raw_report_body": false,
+    "stores_user_score_values": false
+  }
+}
