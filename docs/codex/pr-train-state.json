@@ -56207,7 +56207,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-selector-qa-repair-01",
     "base": "main",
-    "status": "commit_created",
+    "status": "github_checks_pending",
     "train_scope": "riasec_result_page_v2_asset_agent",
     "title": "RIASEC-RESULT-SELECTOR-QA-REPAIR-01: fix(riasec):修 result selector QA policy",
     "depends_on": [
@@ -56238,8 +56238,8 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": "e8ca8c4e764d68b0bd8b7a48cb4d4db92e2dc0e2",
-    "pr_url": null,
+    "commit_sha": "71cd4f8ce28e19187ef686169d72dadbfe62b07e",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2231",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -56258,6 +56258,11 @@
         "at": "2026-06-21T23:41:00+08:00",
         "status": "commit_created",
         "note": "Recorded scoped selector QA policy commit e8ca8c4e764d68b0bd8b7a48cb4d4db92e2dc0e2 after local checks and scope validation passed."
+      },
+      {
+        "at": "2026-06-21T23:41:42+08:00",
+        "status": "github_checks_pending",
+        "note": "Opened PR #2231 from head 71cd4f8ce28e19187ef686169d72dadbfe62b07e; waiting for required GitHub checks."
       }
     ]
   },
