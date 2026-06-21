@@ -1,0 +1,31 @@
+{
+  "schema_version": "fap.riasec.result_page_v2.golden_case_report.v0.1",
+  "task_id": "RIASEC-RESULT-ROUTE-MATRIX-GOLDEN-CASE-QA-01",
+  "created_at": "2026-06-21T16:50:00Z",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "content_authority": "backend",
+  "cms_write_performed": false,
+  "runtime_change_performed": false,
+  "frontend_fallback_allowed": false,
+  "private_payload_exported": false,
+  "golden_case_source": "backend/content_assets/riasec/result_page_v2/route_matrix/staging_qa_v0_1/golden_cases.json",
+  "golden_case_count": 7,
+  "required_group_count": 7,
+  "group_distribution": {
+    "clear_primary_code": 1,
+    "near_tie_pair": 1,
+    "top3_chain": 1,
+    "low_quality": 1,
+    "share_safe": 1,
+    "norm_unavailable": 1,
+    "route_miss": 1
+  },
+  "share_safe_case_status": "pass",
+  "non_share_route_cases_status": "fail_closed_missing_selector_assets",
+  "mismatch_count": 0,
+  "runtime_selector_input_readiness": "no_go",
+  "validation_status": "pass_with_fail_closed_sidecars"
+}

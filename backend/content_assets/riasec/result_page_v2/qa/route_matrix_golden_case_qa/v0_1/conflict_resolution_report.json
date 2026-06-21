@@ -1,0 +1,41 @@
+{
+  "schema_version": "fap.riasec.result_page_v2.conflict_resolution_report.v0.1",
+  "task_id": "RIASEC-RESULT-ROUTE-MATRIX-GOLDEN-CASE-QA-01",
+  "created_at": "2026-06-21T16:50:00Z",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "content_authority": "backend",
+  "cms_write_performed": false,
+  "runtime_change_performed": false,
+  "frontend_fallback_allowed": false,
+  "private_payload_exported": false,
+  "policy_source": "backend/content_assets/riasec/result_page_v2/selector_qa_policy/v0_1/riasec_result_page_v2_selector_qa_policy_v0_1_conflict_resolution.json",
+  "priority_order_verified": [
+    "safety_boundary",
+    "quality_boundary",
+    "share_surface_boundary",
+    "method_boundary",
+    "route_specific_selector",
+    "scenario_action",
+    "activity_example"
+  ],
+  "conflict_cases_tested": [
+    {
+      "case_id": "conflict.share_surface_private_payload.qa_v0_1",
+      "route_id": "route.share_safe.generic.qa_v0_1",
+      "expected_result": "share_surface_boundary_wins",
+      "status": "pass"
+    },
+    {
+      "case_id": "conflict.route_miss.qa_v0_1",
+      "route_id": "route.miss.qa_v0_1",
+      "expected_result": "omit_result_page_v2_modules",
+      "status": "pass"
+    }
+  ],
+  "conflict_count": 2,
+  "mismatch_count": 0,
+  "resolution_status": "pass_for_staging_qa_seed_only"
+}

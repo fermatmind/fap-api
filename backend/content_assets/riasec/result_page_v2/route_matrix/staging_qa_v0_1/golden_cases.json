@@ -1,0 +1,55 @@
+{
+  "schema_version": "fap.riasec.result_page_v2.route_matrix.golden_cases.v0.1",
+  "task_id": "RIASEC-RESULT-ROUTE-MATRIX-GOLDEN-CASE-QA-01",
+  "created_at": "2026-06-21T16:50:00Z",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "content_authority": "backend",
+  "cms_write_performed": false,
+  "runtime_change_performed": false,
+  "frontend_fallback_allowed": false,
+  "private_payload_exported": false,
+  "golden_case_count": 7,
+  "golden_cases": [
+    {
+      "case_id": "golden.clear_primary.R.qa_v0_1",
+      "canonical_profile_id": "canonical.clear_primary.R.qa_v0_1",
+      "expected_resolution": "fail_closed_missing_selector_asset"
+    },
+    {
+      "case_id": "golden.near_tie.R_I.qa_v0_1",
+      "canonical_profile_id": "canonical.near_tie.R_I.qa_v0_1",
+      "expected_resolution": "fail_closed_missing_selector_asset"
+    },
+    {
+      "case_id": "golden.top3.I_A_S.qa_v0_1",
+      "canonical_profile_id": "canonical.top3.I_A_S.qa_v0_1",
+      "expected_resolution": "fail_closed_missing_selector_asset"
+    },
+    {
+      "case_id": "golden.low_quality.boundary.qa_v0_1",
+      "canonical_profile_id": "canonical.low_quality.boundary.qa_v0_1",
+      "expected_resolution": "fail_closed_boundary_only"
+    },
+    {
+      "case_id": "golden.share_safe.generic.qa_v0_1",
+      "canonical_profile_id": "canonical.share_safe.generic.qa_v0_1",
+      "expected_resolution": "resolved_staging_candidate",
+      "expected_selector_refs": [
+        "candidate.share_safety_registry.share_boundary_summary.final.v0_1"
+      ]
+    },
+    {
+      "case_id": "golden.norm_unavailable.boundary.qa_v0_1",
+      "canonical_profile_id": "canonical.norm_unavailable.boundary.qa_v0_1",
+      "expected_resolution": "fail_closed_method_boundary_only"
+    },
+    {
+      "case_id": "golden.route_miss.qa_v0_1",
+      "canonical_profile_id": "canonical.route_miss.qa_v0_1",
+      "expected_resolution": "fail_closed_omit_result_page_v2_modules"
+    }
+  ]
+}

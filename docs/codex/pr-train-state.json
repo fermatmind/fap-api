@@ -36944,7 +36944,7 @@
     "id": "OPS-RELEASE-TRAIN-WORKFLOW-PRODUCTION-ENV-BINDING-01",
     "repo": "fap-api",
     "branch": "ops/release-train-workflow-production-env-binding-01",
-    "status": "ready_to_merge",
+    "status": "merged",
     "commit_sha": "c17da937",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1771",
     "checks": {
@@ -56421,14 +56421,18 @@
       "github": {
         "status": "pass",
         "evidence": "PR #2234 GitHub required checks passed on head 7814d366c7016a733c7d775f7f659836f705dd37; mergeStateStatus CLEAN."
+      },
+      "post_merge": {
+        "status": "pass",
+        "evidence": "PR #2234 merged at 2026-06-21T16:43:43Z with merge commit 79cb4981e95ec9cc1743a781650f23dc9c8e3db7; origin/main contains the merge commit; local main equals origin/main; local and remote task branch cleanup completed; post-merge focused validation passed."
       }
     },
     "failure_reason": null,
-    "commit_sha": "768951018239edbf6df96e4e464dab4b1f0e312c",
+    "commit_sha": "79cb4981e95ec9cc1743a781650f23dc9c8e3db7",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2234",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-21T16:43:43Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-21T22:06:47+08:00",
@@ -56449,6 +56453,11 @@
         "at": "2026-06-22T00:09:00+08:00",
         "status": "ready_to_merge",
         "note": "PR #2234 GitHub checks passed on head 7814d366c7016a733c7d775f7f659836f705dd37 and merge state is CLEAN; pre-merge scope validation passed."
+      },
+      {
+        "at": "2026-06-22T00:48:37+08:00",
+        "status": "merged",
+        "note": "Post-merge reconciliation confirmed PR #2234 merged at 2026-06-21T16:43:43Z with merge commit 79cb4981e95ec9cc1743a781650f23dc9c8e3db7; origin/main contains the merge commit; local main equals origin/main; local and remote task branch cleanup completed."
       }
     ]
   },
@@ -56456,7 +56465,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-route-matrix-golden-case-qa-01",
     "base": "main",
-    "status": "pending_authorization",
+    "status": "ready_to_merge",
     "train_scope": "riasec_result_page_v2_asset_agent",
     "title": "RIASEC-RESULT-ROUTE-MATRIX-GOLDEN-CASE-QA-01: test(riasec):验证 route matrix golden cases",
     "depends_on": [
@@ -56466,11 +56475,46 @@
       "authorization": {
         "status": "pass",
         "evidence": "User explicitly authorized the eight-item RIASEC Result Page asset-agent PR train and docs/codex manifest/state updates in the goal objective."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "RIASEC-RESULT-ASSET-FACTORY-PILOT-BATCH-01 merged as PR #2234; origin/main contains merge commit 79cb4981e95ec9cc1743a781650f23dc9c8e3db7."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=RiasecResultPageRouteMatrixQaReportTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Riasec --no-ansi",
+          "find backend/content_assets/riasec/result_page_v2/qa -name '*.json' -print -exec python3 -m json.tool {} >/dev/null \\;",
+          "find backend/content_assets/riasec/result_page_v2/route_matrix -name '*.json' -print -exec python3 -m json.tool {} >/dev/null \\;",
+          "git diff --check",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+        ],
+        "notes": "Added staging-only route matrix QA seed, canonical profiles, golden cases, selector ref resolution report, and conflict-resolution report. The reports mark share_safety as the only resolved staging candidate and keep route-specific selector gaps fail-closed."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to backend/content_assets/riasec/result_page_v2/route_matrix, backend/content_assets/riasec/result_page_v2/qa, backend/tests/Unit/Services/Riasec/RiasecResultPageRouteMatrixQaReportTest.php, and docs/codex state bookkeeping."
+      },
+      "sidecars": {
+        "status": "open_non_blocking",
+        "items": [
+          {
+            "sidecar_id": "RIASEC-GAP-V2-SELECTOR-ASSETS-001",
+            "introduced_by_current_pr": false,
+            "reason": "Only the PR6 share_safety selector candidate resolves; broad route-specific selector packages remain absent and fail closed."
+          }
+        ]
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #2236 GitHub required checks passed on head 3ba6e111314ab5cbbcaf05d06af4d79fd572480c; mergeStateStatus CLEAN."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "235ea2b0a7067a011adf79f5657ed0777754da6b",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2236",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -56479,6 +56523,21 @@
         "at": "2026-06-21T22:06:47+08:00",
         "status": "pending_authorization",
         "note": "Manifest/state entry authorized for the RIASEC Result Page asset-agent train. Implementation waits for its dependency order."
+      },
+      {
+        "at": "2026-06-22T00:48:37+08:00",
+        "status": "local_checks_passed",
+        "note": "Produced route matrix and golden-case staging QA seed/reports with 7 canonical groups and one resolved share_safety selector ref. Focused route QA test, full Riasec filter, JSON/YAML, diff, and scope validation passed; unresolved broad selector packages are recorded as non-blocking sidecar because they pre-existed this PR."
+      },
+      {
+        "at": "2026-06-22T00:51:01+08:00",
+        "status": "github_checks_pending",
+        "note": "Opened PR #2236 from head 235ea2b0a7067a011adf79f5657ed0777754da6b; waiting for required GitHub checks."
+      },
+      {
+        "at": "2026-06-22T01:11:04+08:00",
+        "status": "ready_to_merge",
+        "note": "PR #2236 GitHub checks passed on head 3ba6e111314ab5cbbcaf05d06af4d79fd572480c and merge state is CLEAN; pre-merge scope validation passed."
       }
     ]
   },

@@ -1,0 +1,40 @@
+{
+  "schema_version": "fap.riasec.result_page_v2.route_matrix_report.v0.1",
+  "task_id": "RIASEC-RESULT-ROUTE-MATRIX-GOLDEN-CASE-QA-01",
+  "created_at": "2026-06-21T16:50:00Z",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "content_authority": "backend",
+  "cms_write_performed": false,
+  "runtime_change_performed": false,
+  "frontend_fallback_allowed": false,
+  "private_payload_exported": false,
+  "route_matrix_source": "backend/content_assets/riasec/result_page_v2/route_matrix/staging_qa_v0_1/route_matrix_rows.json",
+  "route_matrix_row_count": 7,
+  "canonical_profile_count": 7,
+  "golden_case_count": 7,
+  "selector_ready_candidate_count": 1,
+  "selector_refs_resolved": 1,
+  "selector_refs_unresolved": 0,
+  "route_specific_asset_groups_missing": [
+    "clear_primary_code",
+    "near_tie_pair",
+    "top3_chain",
+    "low_quality",
+    "norm_unavailable"
+  ],
+  "staging_selector_input_readiness": "partial_go_share_safety_only",
+  "runtime_selector_input_readiness": "no_go",
+  "production_readiness": "no_go",
+  "validation_status": "pass_with_fail_closed_sidecars",
+  "sidecars": [
+    {
+      "sidecar_id": "RIASEC-GAP-V2-SELECTOR-ASSETS-001",
+      "introduced_by_current_pr": false,
+      "status": "open",
+      "evidence": "Only one PR6 share_safety candidate exists; full route-specific selector package remains absent."
+    }
+  ]
+}
