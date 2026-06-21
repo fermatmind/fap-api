@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-21T19:30:00+08:00",
+  "updated_at": "2026-06-21T19:42:00+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -55628,7 +55628,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-result-render-preview-handoff-01",
     "base": "main",
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "train_scope": "big5_result_page_v2_asset_agent",
     "title": "BIG5-RESULT-RENDER-PREVIEW-HANDOFF-01: docs(big5):交付 rendered preview fixtures",
     "depends_on": [
@@ -55662,12 +55662,12 @@
         "evidence": "Changed files are confined to backend/content_assets/big5/result_page_v2/rendered_preview/fap_web_handoff/v0_1/* and docs/codex/pr-train-state.json."
       },
       "github": {
-        "status": "pending",
-        "evidence": "PR #2210 opened from head 67793ee4f68d94f4eeae51afb2ab3c3245468e54; waiting for required GitHub checks."
+        "status": "pass",
+        "evidence": "PR #2210 checks passed on head 610da0870dd76e07ac14cd7a157a3dc6db6dbbed: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and non-blocking Semgrep SARIF upload."
       }
     },
     "failure_reason": null,
-    "commit_sha": "67793ee4f68d94f4eeae51afb2ab3c3245468e54",
+    "commit_sha": "610da0870dd76e07ac14cd7a157a3dc6db6dbbed",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2210",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -55687,6 +55687,11 @@
         "at": "2026-06-21T19:30:00+08:00",
         "status": "github_checks_pending",
         "note": "Opened PR #2210 from commit 67793ee4f68d94f4eeae51afb2ab3c3245468e54; waiting for required GitHub checks."
+      },
+      {
+        "at": "2026-06-21T19:42:00+08:00",
+        "status": "ready_to_merge",
+        "note": "PR #2210 GitHub checks passed on head 610da0870dd76e07ac14cd7a157a3dc6db6dbbed; merge state CLEAN. Ready to merge after this state update revalidates."
       }
     ]
   }
