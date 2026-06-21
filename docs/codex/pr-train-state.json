@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-20T07:22:00+08:00",
+  "updated_at": "2026-06-21T16:05:20+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -55084,6 +55084,304 @@
         "at": "2026-06-20T07:35:00+08:00",
         "status": "merged",
         "note": "PR #2139 was squash-merged as f2ba00ba4c7b85c62988c43f7f88ab499ad72d24; remote branch is deleted, local task branch is absent, local main is synced to origin/main, and post-merge focused validation passed."
+      }
+    ]
+  },
+  "BIG5-RESULT-ASSET-AGENT-RUNBOOK-01": {
+    "repo": "fap-api",
+    "branch": "codex/big5-result-asset-agent-runbook-01",
+    "base": "main",
+    "status": "pr_open",
+    "train_scope": "big5_result_page_v2_asset_agent",
+    "title": "BIG5-RESULT-ASSET-AGENT-RUNBOOK-01: docs(big5):固化 result asset agent runbook",
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly requested implementation of the Big Five Result Page V2 asset-agent plan, including authorization to add the eight manifest/state entries and execute the first docs-only runbook PR."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "This is the first item in the Big Five Result Page V2 asset-agent sequence."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are confined to backend/docs/big5/result-asset-agent-runbook.md, backend/docs/big5/result-asset-agent-schema.md, backend/docs/big5/result-asset-agent-gates.md, docs/codex/pr-train.yaml, and docs/codex/pr-train-state.json."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "git diff --check",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "git status --porcelain=v1",
+          "! rg -n \"production_use_allowed: true|ready_for_runtime: true|ready_for_production: true|cms_write_performed: true|runtime_change_performed: true|frontend_fallback_allowed: true\" backend/docs/big5 docs/codex/pr-train.yaml"
+        ],
+        "notes": "Docs-only checks passed. The forbidden positive gate scan returned no matches in the new docs and manifest. Runtime commands are not applicable because this PR changes no routes, migrations, services, CMS importers, or runtime wrappers."
+      }
+    },
+    "result": {
+      "go_no_go": "GO for docs-only runbook and PR-train authorization metadata; NO-GO for asset generation, CMS import, runtime wiring, pilot access, or production rollout.",
+      "highest_blocker": null
+    },
+    "failure_reason": null,
+    "commit_sha": "215cfaccc01d3a54c1578377f8c6f7d72478cb06",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2184",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-21T15:57:09+08:00",
+        "status": "in_progress",
+        "note": "Initialized from explicit user authorization. Scope is docs-only runbook/protocol/gates plus PR train metadata; no assets, CMS import, runtime, pilot, or production gate changes are allowed."
+      },
+      {
+        "at": "2026-06-21T16:02:01+08:00",
+        "status": "local_checks_passed",
+        "note": "Added runbook, artifact protocol, and stage gates; manifest/state parse, diff check, changed-file scope validation, and forbidden positive gate scan passed."
+      },
+      {
+        "at": "2026-06-21T16:05:20+08:00",
+        "status": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/2184 from scoped implementation commit 215cfaccc01d3a54c1578377f8c6f7d72478cb06."
+      }
+    ]
+  },
+  "BIG5-RESULT-SOURCE-LEDGER-01": {
+    "repo": "fap-api",
+    "branch": "codex/big5-result-source-ledger-01",
+    "base": "main",
+    "status": "pending_dependency",
+    "train_scope": "big5_result_page_v2_asset_agent",
+    "title": "BIG5-RESULT-SOURCE-LEDGER-01: docs(big5):建 result source ledger",
+    "depends_on": [
+      "BIG5-RESULT-ASSET-AGENT-RUNBOOK-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly requested implementation of the eight-item Big Five Result Page V2 asset-agent plan."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Waits for BIG5-RESULT-ASSET-AGENT-RUNBOOK-01 to merge into main."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-21T15:57:09+08:00",
+        "status": "pending_dependency",
+        "note": "Manifest/state entry authorized; implementation waits for the runbook PR."
+      }
+    ]
+  },
+  "BIG5-RESULT-ASSET-VALIDATOR-HARNESS-01": {
+    "repo": "fap-api",
+    "branch": "codex/big5-result-asset-validator-harness-01",
+    "base": "main",
+    "status": "pending_dependency",
+    "train_scope": "big5_result_page_v2_asset_agent",
+    "title": "BIG5-RESULT-ASSET-VALIDATOR-HARNESS-01: test(big5):建 result asset validator harness",
+    "depends_on": [
+      "BIG5-RESULT-SOURCE-LEDGER-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly requested implementation of the eight-item Big Five Result Page V2 asset-agent plan."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Waits for BIG5-RESULT-SOURCE-LEDGER-01 to merge into main."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-21T15:57:09+08:00",
+        "status": "pending_dependency",
+        "note": "Manifest/state entry authorized; implementation waits for the source ledger PR."
+      }
+    ]
+  },
+  "BIG5-RESULT-EXISTING-ASSET-GAP-AUDIT-01": {
+    "repo": "fap-api",
+    "branch": "codex/big5-result-existing-asset-gap-audit-01",
+    "base": "main",
+    "status": "pending_dependency",
+    "train_scope": "big5_result_page_v2_asset_agent",
+    "title": "BIG5-RESULT-EXISTING-ASSET-GAP-AUDIT-01: docs(big5):审计现有 result assets gaps",
+    "depends_on": [
+      "BIG5-RESULT-ASSET-VALIDATOR-HARNESS-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly requested implementation of the eight-item Big Five Result Page V2 asset-agent plan."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Waits for BIG5-RESULT-ASSET-VALIDATOR-HARNESS-01 to merge into main."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-21T15:57:09+08:00",
+        "status": "pending_dependency",
+        "note": "Manifest/state entry authorized; implementation waits for the validator harness PR."
+      }
+    ]
+  },
+  "BIG5-RESULT-SELECTOR-QA-REPAIR-01": {
+    "repo": "fap-api",
+    "branch": "codex/big5-result-selector-qa-repair-01",
+    "base": "main",
+    "status": "pending_dependency",
+    "train_scope": "big5_result_page_v2_asset_agent",
+    "title": "BIG5-RESULT-SELECTOR-QA-REPAIR-01: fix(big5):修 result selector QA policy",
+    "depends_on": [
+      "BIG5-RESULT-EXISTING-ASSET-GAP-AUDIT-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly requested implementation of the eight-item Big Five Result Page V2 asset-agent plan."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Waits for BIG5-RESULT-EXISTING-ASSET-GAP-AUDIT-01 to merge into main."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-21T15:57:09+08:00",
+        "status": "pending_dependency",
+        "note": "Manifest/state entry authorized; implementation waits for the gap audit PR."
+      }
+    ]
+  },
+  "BIG5-RESULT-ASSET-FACTORY-PILOT-BATCH-01": {
+    "repo": "fap-api",
+    "branch": "codex/big5-result-asset-factory-pilot-batch-01",
+    "base": "main",
+    "status": "pending_dependency",
+    "train_scope": "big5_result_page_v2_asset_agent",
+    "title": "BIG5-RESULT-ASSET-FACTORY-PILOT-BATCH-01: feat(big5):dry-run share safety selector batch",
+    "depends_on": [
+      "BIG5-RESULT-SELECTOR-QA-REPAIR-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly requested implementation of the eight-item Big Five Result Page V2 asset-agent plan."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Waits for BIG5-RESULT-SELECTOR-QA-REPAIR-01 to merge into main."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-21T15:57:09+08:00",
+        "status": "pending_dependency",
+        "note": "Manifest/state entry authorized; implementation waits for the selector QA repair PR. First pilot scope remains share_safety_registry only."
+      }
+    ]
+  },
+  "BIG5-RESULT-ROUTE-MATRIX-GOLDEN-CASE-QA-01": {
+    "repo": "fap-api",
+    "branch": "codex/big5-result-route-matrix-golden-case-qa-01",
+    "base": "main",
+    "status": "pending_dependency",
+    "train_scope": "big5_result_page_v2_asset_agent",
+    "title": "BIG5-RESULT-ROUTE-MATRIX-GOLDEN-CASE-QA-01: test(big5):验证 route matrix golden cases",
+    "depends_on": [
+      "BIG5-RESULT-ASSET-FACTORY-PILOT-BATCH-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly requested implementation of the eight-item Big Five Result Page V2 asset-agent plan."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Waits for BIG5-RESULT-ASSET-FACTORY-PILOT-BATCH-01 to merge into main."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-21T15:57:09+08:00",
+        "status": "pending_dependency",
+        "note": "Manifest/state entry authorized; implementation waits for the share safety pilot PR."
+      }
+    ]
+  },
+  "BIG5-RESULT-RENDER-PREVIEW-HANDOFF-01": {
+    "repo": "fap-api",
+    "branch": "codex/big5-result-render-preview-handoff-01",
+    "base": "main",
+    "status": "pending_dependency",
+    "train_scope": "big5_result_page_v2_asset_agent",
+    "title": "BIG5-RESULT-RENDER-PREVIEW-HANDOFF-01: docs(big5):交付 rendered preview fixtures",
+    "depends_on": [
+      "BIG5-RESULT-ROUTE-MATRIX-GOLDEN-CASE-QA-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly requested implementation of the eight-item Big Five Result Page V2 asset-agent plan."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Waits for BIG5-RESULT-ROUTE-MATRIX-GOLDEN-CASE-QA-01 to merge into main."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-21T15:57:09+08:00",
+        "status": "pending_dependency",
+        "note": "Manifest/state entry authorized; implementation waits for the route matrix and golden case QA PR."
       }
     ]
   }
