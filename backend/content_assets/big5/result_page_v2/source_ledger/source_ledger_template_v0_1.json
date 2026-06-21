@@ -1,0 +1,85 @@
+{
+  "schema_version": "fap.big5.result_page_v2.source_ledger.template.v0.1",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "cms_write_performed": false,
+  "runtime_change_performed": false,
+  "frontend_fallback_allowed": false,
+  "private_payload_exported": false,
+  "description": "Template for source-ledger rows consumed by the Big Five Result Page V2 asset agent.",
+  "required_row_fields": [
+    "source_id",
+    "source_type",
+    "title",
+    "authority_level",
+    "source_ref",
+    "claim_categories",
+    "permitted_use",
+    "limitations",
+    "disallowed_use",
+    "copy_policy",
+    "asset_scopes_allowed",
+    "claim_trace_requirements",
+    "evidence_refs",
+    "review_status"
+  ],
+  "row_template": {
+    "source_id": "stable_snake_case_id",
+    "source_type": "public_method_source | public_domain_measurement_source | structure_reference_only | internal_authority | internal_asset_pack | open_source_reference | forbidden_copy_source",
+    "title": "Reader-facing source title",
+    "authority_level": "primary | supporting | reference_only | forbidden_for_copy",
+    "source_ref": {
+      "kind": "url | repo_path | internal_document_ref",
+      "value": "https://example.test/source-or/repository/relative/path",
+      "retrieved_at": "YYYY-MM-DD",
+      "sha256": null
+    },
+    "claim_categories": [
+      "method_boundary",
+      "domain_taxonomy",
+      "facet_structure",
+      "reading_mode",
+      "module_mapping",
+      "selector_contract",
+      "share_safety",
+      "route_matrix",
+      "render_preview"
+    ],
+    "permitted_use": [
+      "Describe the exact bounded use this source supports."
+    ],
+    "limitations": [
+      "Describe uncertainty, copyright, measurement, or generalization limits."
+    ],
+    "disallowed_use": [
+      "Describe claims or copy use forbidden from this source."
+    ],
+    "copy_policy": {
+      "copy_allowed": false,
+      "paraphrase_allowed": true,
+      "citation_required": true,
+      "notes": "Do not copy restricted item text or proprietary report prose."
+    },
+    "asset_scopes_allowed": [
+      "source_ledger",
+      "validator_harness",
+      "gap_audit",
+      "selector_asset_draft"
+    ],
+    "claim_trace_requirements": [
+      "Every derived claim must include source_id, evidence_ref, limitation, and reviewer decision."
+    ],
+    "evidence_refs": [
+      {
+        "ref_id": "evidence_ref_id",
+        "summary": "Short source-backed evidence summary.",
+        "limitations": [
+          "Known limit"
+        ]
+      }
+    ],
+    "review_status": "template"
+  }
+}

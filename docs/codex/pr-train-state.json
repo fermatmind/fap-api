@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-21T16:05:20+08:00",
+  "updated_at": "2026-06-21T16:19:31+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -38941,7 +38941,7 @@
     "repo": "fap-api",
     "branch": "codex/analytics-payment-unlock-attribution-repair-01a",
     "base": "main",
-    "status": "pr_open",
+    "status": "merged",
     "title": "ANALYTICS-PAYMENT-UNLOCK-ATTRIBUTION-REPAIR-01A add read-only payment unlock diagnostics",
     "depends_on": [
       "ANALYTICS-FUNNEL-OPS-GLOBAL-SCOPE-ENTRY-01"
@@ -55124,11 +55124,11 @@
       "highest_blocker": null
     },
     "failure_reason": null,
-    "commit_sha": "215cfaccc01d3a54c1578377f8c6f7d72478cb06",
+    "commit_sha": "7bfb6b392ea1ff589eafa64598e0ea53e22acdb9",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2184",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-21T08:12:41Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-21T15:57:09+08:00",
@@ -55144,6 +55144,11 @@
         "at": "2026-06-21T16:05:20+08:00",
         "status": "pr_open",
         "note": "Opened https://github.com/fermatmind/fap-api/pull/2184 from scoped implementation commit 215cfaccc01d3a54c1578377f8c6f7d72478cb06."
+      },
+      {
+        "at": "2026-06-21T16:17:17+08:00",
+        "status": "merged",
+        "note": "Reconciled during BIG5-RESULT-SOURCE-LEDGER-01 preflight: GitHub reports PR #2184 merged at 2026-06-21T08:12:41Z; origin/main contains merge commit 7bfb6b392ea1ff589eafa64598e0ea53e22acdb9; local main was synced and task branch cleanup was completed."
       }
     ]
   },
@@ -55151,7 +55156,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-result-source-ledger-01",
     "base": "main",
-    "status": "pending_dependency",
+    "status": "pr_open",
     "train_scope": "big5_result_page_v2_asset_agent",
     "title": "BIG5-RESULT-SOURCE-LEDGER-01: docs(big5):建 result source ledger",
     "depends_on": [
@@ -55163,13 +55168,27 @@
         "evidence": "User explicitly requested implementation of the eight-item Big Five Result Page V2 asset-agent plan."
       },
       "dependency": {
-        "status": "pending",
-        "evidence": "Waits for BIG5-RESULT-ASSET-AGENT-RUNBOOK-01 to merge into main."
+        "status": "pass",
+        "evidence": "BIG5-RESULT-ASSET-AGENT-RUNBOOK-01 is merged; origin/main contains merge commit 7bfb6b392ea1ff589eafa64598e0ea53e22acdb9."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are confined to backend/content_assets/big5/result_page_v2/source_ledger/** and docs/codex/pr-train-state.json."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "find backend/content_assets/big5/result_page_v2/source_ledger -name '*.json' -print -exec python3 -m json.tool {} >/dev/null \\;",
+          "git diff --check",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+        ],
+        "notes": "Source ledger JSON parse, train state JSON parse, train YAML parse, diff check, and changed-file scope validation passed. Runtime commands are not applicable because this PR changes no routes, migrations, services, CMS importers, runtime wrappers, or asset generation outputs."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "91ac1a794c4ef4bbc2956fe067a8562194cbe443",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2187",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -55178,6 +55197,21 @@
         "at": "2026-06-21T15:57:09+08:00",
         "status": "pending_dependency",
         "note": "Manifest/state entry authorized; implementation waits for the runbook PR."
+      },
+      {
+        "at": "2026-06-21T16:17:17+08:00",
+        "status": "in_progress",
+        "note": "Dependency verified merged on origin/main. Scope is source ledger template plus initial evidence ledger; no selector assets, CMS import, runtime, pilot, or production gate changes are allowed."
+      },
+      {
+        "at": "2026-06-21T16:18:23+08:00",
+        "status": "local_checks_passed",
+        "note": "Added source ledger README, template, and initial evidence ledger. JSON/YAML parse, diff check, and scope validation passed."
+      },
+      {
+        "at": "2026-06-21T16:19:31+08:00",
+        "status": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/2187 from scoped source-ledger commit 91ac1a794c4ef4bbc2956fe067a8562194cbe443."
       }
     ]
   },

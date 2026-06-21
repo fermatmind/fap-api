@@ -172,6 +172,7 @@ use App\Console\Commands\RefreshCareerAttributionDailyCommand;
 use App\Console\Commands\SdsPsychometricsReport;
 use App\Console\Commands\SeedScaleRegistry;
 use App\Console\Commands\SeoAgentCodexReviewRunnerCommand;
+use App\Console\Commands\SeoAgentAutoRollbackGuardCommand;
 use App\Console\Commands\SeoAgentCmsDraftPackageDryRunCommand;
 use App\Console\Commands\SeoAgentCmsDraftWriteCommand;
 use App\Console\Commands\SeoAgentCmsPublishAutoCanaryCommand;
@@ -382,6 +383,7 @@ class Kernel extends ConsoleKernel
         ArticleWeeklySeoObservationExport::class,
         MediaAssetsImportSeoImageBundle::class,
         SeoAgentCmsFaqGapScanCommand::class,
+        SeoAgentAutoRollbackGuardCommand::class,
         SeoAgentCmsTdkGapScanCommand::class,
         SeoAgentCodexReviewRunnerCommand::class,
         SeoAgentCmsDraftPackageDryRunCommand::class,
