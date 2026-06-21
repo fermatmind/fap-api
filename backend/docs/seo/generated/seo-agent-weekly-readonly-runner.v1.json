@@ -1,0 +1,46 @@
+{
+  "version": "seo-agent-weekly-readonly-runner.v1",
+  "task": "SEO-AGENT-WEEKLY-READONLY-RUNNER-01",
+  "repo": "fap-api",
+  "type": "weekly_readonly_l4_runner_contract",
+  "command": "php artisan seo-agent:weekly-readonly-runner",
+  "delegated_command": "php artisan seo-agent:run",
+  "default_sources": [
+    "cms-tdk-gap",
+    "runtime-seo-qa",
+    "cms-faq-gap"
+  ],
+  "chain": [
+    "scanner_artifacts",
+    "seo-agent-opportunity-aggregate.v1",
+    "seo-agent-run-control-packet.v1",
+    "seo-agent-codex-review-handoff.v1",
+    "seo-agent-codex-review-verdict.v1",
+    "seo-agent-cms-draft-package-dry-run.v1",
+    "seo-agent-run-evidence.v1",
+    "seo-agent-weekly-readonly-runner.v1"
+  ],
+  "manual_or_external_automation_entrypoint": true,
+  "production_scheduler_enabled_by_pr": false,
+  "scheduler_activation_requires_separate_approval": true,
+  "runtime_public_http_read_allowed": true,
+  "gsc_live_read_allowed": false,
+  "external_model_api_call": false,
+  "negative_guarantees": {
+    "database_write": false,
+    "cms_write": false,
+    "cms_publish": false,
+    "search_channel_enqueue": false,
+    "search_channel_submit": false,
+    "indexing_request": false,
+    "sitemap_submission": false,
+    "scheduler_activation": false,
+    "queue_worker_started": false,
+    "production_env_change": false,
+    "google_search_console_api_call": false,
+    "google_indexing_api_call": false,
+    "external_model_api_call": false,
+    "pr_train_metadata_change": false
+  },
+  "next_step": "Controlled CMS draft writes remain a separate PR and are not enabled by this runner."
+}
