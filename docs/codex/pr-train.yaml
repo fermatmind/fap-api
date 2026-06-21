@@ -24100,6 +24100,7 @@ prs:
       - backend/app/Console/Kernel.php
       - backend/app/Services/BigFive/ResultPageV2/AssetAgent/**
       - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2AssetAgentTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - backend/docs/big5/**
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
@@ -24109,6 +24110,7 @@ prs:
     validation:
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2SelectorAssetValidatorTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest --no-ansi
       - git diff --check
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
