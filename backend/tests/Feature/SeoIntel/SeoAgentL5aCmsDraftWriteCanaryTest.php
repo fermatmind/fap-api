@@ -51,6 +51,35 @@ final class SeoAgentL5aCmsDraftWriteCanaryTest extends TestCase
     }
 
     #[Test]
+    public function dry_run_resolves_pathless_candidate_review_package_by_sha(): void
+    {
+        $page = $this->createContentPage();
+        [$candidateReviewPath, $packagePath, $candidateReview] = $this->writeCandidateReview($page);
+        $seoAgentDir = storage_path('app/seo-agent/l5a-pathless-package-'.Str::uuid()->toString());
+        File::ensureDirectoryExists($seoAgentDir);
+        $resolvedPackagePath = $seoAgentDir.'/source-package.json';
+        File::copy($packagePath, $resolvedPackagePath);
+
+        unset($candidateReview['input_artifacts']['cms_draft_package_dry_run']['path']);
+        $candidateReview['input_artifacts']['cms_draft_package_dry_run']['sha256'] = hash_file('sha256', $resolvedPackagePath) ?: '';
+        $candidateReview['input_artifacts']['cms_draft_package_dry_run']['size'] = filesize($resolvedPackagePath) ?: 0;
+        File::put($candidateReviewPath, json_encode($candidateReview, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)."\n");
+
+        $exitCode = Artisan::call('seo-agent:l5a-cms-draft-write-canary', [
+            '--candidate-review' => $candidateReviewPath,
+            '--limit' => 1,
+            '--json' => true,
+        ]);
+        $summary = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame('planned', $summary['status'] ?? null);
+        $this->assertSame(1, $summary['planned_count'] ?? null);
+        $this->assertSame(0, CmsTranslationRevision::query()->count());
+        $this->assertNoForbiddenStrings($summary);
+    }
+
+    #[Test]
     public function execute_fails_closed_without_matching_candidate_review_sha(): void
     {
         $page = $this->createContentPage();
