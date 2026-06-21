@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-21T22:07:36+08:00",
+  "updated_at": "2026-06-21T22:08:34+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -55699,7 +55699,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-asset-agent-runbook-01",
     "base": "main",
-    "status": "local_checks_passed",
+    "status": "github_checks_pending",
     "train_scope": "riasec_result_page_v2_asset_agent",
     "title": "RIASEC-RESULT-ASSET-AGENT-RUNBOOK-01: docs(riasec):固化 result asset agent runbook",
     "depends_on": [],
@@ -55724,11 +55724,15 @@
       "scope_validation": {
         "status": "pass",
         "evidence": "Changed files are confined to backend/docs/riasec/result-asset-agent-*.md, docs/codex/pr-train.yaml, and docs/codex/pr-train-state.json. No agent run artifacts, runtime files, CMS importers, routes, migrations, or production gates changed."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": "PR #2215 opened from commit 4a356f737789651f2ff4c0749841df31642ae692; waiting for required GitHub checks."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "4a356f737789651f2ff4c0749841df31642ae692",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2215",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -55747,6 +55751,11 @@
         "at": "2026-06-21T22:07:36+08:00",
         "status": "local_checks_passed",
         "note": "Added RIASEC result asset agent runbook/schema/gates and registered the eight-item train. Checks and scope validation passed. No assets, runtime, CMS, or production gate changes."
+      },
+      {
+        "at": "2026-06-21T22:08:34+08:00",
+        "status": "github_checks_pending",
+        "note": "Opened PR #2215 from commit 4a356f737789651f2ff4c0749841df31642ae692; waiting for required GitHub checks."
       }
     ]
   },
