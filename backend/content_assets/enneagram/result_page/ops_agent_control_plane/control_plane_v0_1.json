@@ -1,0 +1,73 @@
+{
+  "schema_version": "fap.enneagram.result_page.ops_agent_control_plane.v0.1",
+  "scale": "ENNEAGRAM",
+  "surface": "private_result_page",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "allowed_modes": [
+    {
+      "mode": "auto-to-pr",
+      "description": "Agent may prepare scoped branches, run local validation, open PRs, and poll checks.",
+      "may_write_repo_files": true,
+      "may_create_pull_request": true,
+      "may_write_staging": false,
+      "may_write_production": false,
+      "may_activate_production": false,
+      "requires_manual_approval": false
+    },
+    {
+      "mode": "auto-to-staging",
+      "description": "Agent may prepare staging-only dry runs and inactive import validation evidence.",
+      "may_write_repo_files": true,
+      "may_create_pull_request": true,
+      "may_write_staging": true,
+      "may_write_production": false,
+      "may_activate_production": false,
+      "requires_manual_approval": false
+    },
+    {
+      "mode": "auto-to-report",
+      "description": "Agent may prepare evidence bundles, readiness reports, and sidecar issue payloads.",
+      "may_write_repo_files": true,
+      "may_create_pull_request": true,
+      "may_write_staging": false,
+      "may_write_production": false,
+      "may_activate_production": false,
+      "requires_manual_approval": false
+    },
+    {
+      "mode": "production-manual-gate",
+      "description": "Agent may prepare the production activation command packet, but execution requires human approval.",
+      "may_write_repo_files": false,
+      "may_create_pull_request": false,
+      "may_write_staging": false,
+      "may_write_production": false,
+      "may_activate_production": false,
+      "requires_manual_approval": true
+    }
+  ],
+  "production_manual_gate": {
+    "execution_allowed_for_agent": false,
+    "manual_approval_required": true,
+    "exact_release_id": "enneagram_1r_a_to_1r_h_phase8b_candidate_20260427_a9fd3eb4",
+    "candidate_manifest_sha256": "a9fd3eb474ea2ca0130d06ad2b1640305d9160ee1a74e559ad4f60bfc4db56c0",
+    "runtime_registry_sha256": "ac5bdaab3c761b0d01a56f92679aa58341110d64de0f47a1fa0062b64f76f97f",
+    "required_approval_fields": [
+      "release_id",
+      "confirm_release_id",
+      "candidate_manifest_sha256",
+      "runtime_registry_sha256",
+      "rollback_window",
+      "post_activation_smoke_plan"
+    ],
+    "prepared_command_template": "php artisan enneagram:activate-inactive-candidate-release --release-id=enneagram_1r_a_to_1r_h_phase8b_candidate_20260427_a9fd3eb4 --confirm-release-id=enneagram_1r_a_to_1r_h_phase8b_candidate_20260427_a9fd3eb4 --candidate-manifest-sha256=a9fd3eb474ea2ca0130d06ad2b1640305d9160ee1a74e559ad4f60bfc4db56c0 --runtime-registry-sha256=ac5bdaab3c761b0d01a56f92679aa58341110d64de0f47a1fa0062b64f76f97f --json"
+  },
+  "negative_guarantees": {
+    "bulk_content_generation_happened": false,
+    "candidate_import_happened": false,
+    "production_activation_happened": false,
+    "runtime_switch_happened": false,
+    "production_write_happened": false,
+    "frontend_change_happened": false
+  }
+}
