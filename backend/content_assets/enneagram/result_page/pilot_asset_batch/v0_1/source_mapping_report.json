@@ -1,0 +1,37 @@
+{
+  "schema_version": "fap.enneagram.result_page.pilot_source_mapping_report.v0.1",
+  "batch_id": "ENNEAGRAM-RESULT-PILOT-ASSET-BATCH-01",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "source_mapping_failure_count": 0,
+  "fallback_source_count": 0,
+  "blocked_source_count": 0,
+  "duplicate_selection_count": 0,
+  "branch_provenance_mismatch_count": 0,
+  "payload_count": 2,
+  "mappings": [
+    {
+      "asset_key": "pilot_t1_baseline_reflection_v0_1",
+      "payload_path": "payloads/pilot_t1_baseline_reflection.json",
+      "source_ids": [
+        "phase8b_candidate_baseline_a9fd",
+        "batch_1r_a_asset_stream",
+        "forbidden_claim_policy"
+      ],
+      "source_asset_sha256": null,
+      "trace_status": "pilot_scaffold_trace_only"
+    },
+    {
+      "asset_key": "pilot_t5_fc144_second_lens_v0_1",
+      "payload_path": "payloads/pilot_t5_fc144_second_lens.json",
+      "source_ids": [
+        "phase8b_candidate_baseline_a9fd",
+        "batch_1r_h_asset_stream",
+        "fc144_boundary_policy",
+        "forbidden_claim_policy"
+      ],
+      "source_asset_sha256": null,
+      "trace_status": "pilot_scaffold_trace_only"
+    }
+  ]
+}

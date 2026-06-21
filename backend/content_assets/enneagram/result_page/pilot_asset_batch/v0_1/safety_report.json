@@ -1,0 +1,26 @@
+{
+  "schema_version": "fap.enneagram.result_page.pilot_safety_report.v0.1",
+  "batch_id": "ENNEAGRAM-RESULT-PILOT-ASSET-BATCH-01",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "metadata_leakage_hit_count": 0,
+  "forbidden_claim_hit_count": 0,
+  "fc144_boundary_violation_count": 0,
+  "legacy_residual_count": 0,
+  "checked_payload_count": 2,
+  "forbidden_claim_families": [
+    "diagnosis_clinical_treatment",
+    "hiring_employment_screening",
+    "final_typing_you_are_this_type",
+    "fixed_type_certainty",
+    "e105_fc144_score_comparison",
+    "fc144_more_accurate_or_replacement_result",
+    "success_salary_performance_prediction",
+    "private_result_identifier_path_or_vector_leakage"
+  ],
+  "notes": [
+    "Pilot payloads are staging-only fixtures.",
+    "FC144 wording is second-lens only and does not rank, replace, or finalize current-result interpretation.",
+    "No private identifiers, private paths, raw vectors, editor notes, or QA notes are present in public payloads."
+  ]
+}
