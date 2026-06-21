@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-21T16:03:28+08:00",
+  "updated_at": "2026-06-21T16:05:20+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -55091,7 +55091,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-result-asset-agent-runbook-01",
     "base": "main",
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "train_scope": "big5_result_page_v2_asset_agent",
     "title": "BIG5-RESULT-ASSET-AGENT-RUNBOOK-01: docs(big5):固化 result asset agent runbook",
     "checks": {
@@ -55124,8 +55124,8 @@
       "highest_blocker": null
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "215cfaccc01d3a54c1578377f8c6f7d72478cb06",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2184",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -55139,6 +55139,11 @@
         "at": "2026-06-21T16:02:01+08:00",
         "status": "local_checks_passed",
         "note": "Added runbook, artifact protocol, and stage gates; manifest/state parse, diff check, changed-file scope validation, and forbidden positive gate scan passed."
+      },
+      {
+        "at": "2026-06-21T16:05:20+08:00",
+        "status": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/2184 from scoped implementation commit 215cfaccc01d3a54c1578377f8c6f7d72478cb06."
       }
     ]
   },
