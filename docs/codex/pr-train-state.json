@@ -55779,7 +55779,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-v2-pilot-run-evidence",
     "base": "main",
-    "status": "in_progress",
+    "status": "ready_to_merge",
     "train_scope": "big5_result_page_v2_asset_agent",
     "title": "B5-RESULT-PILOT-RUN-EVIDENCE-01: Add Big Five V2 allowlist pilot run evidence",
     "depends_on": [
@@ -55816,8 +55816,8 @@
         "evidence": "Changed files are confined to backend/content_assets/big5/result_page_v2/qa/pilot_run_evidence/*, BigFiveResultPageV2PilotRunEvidenceTest, and docs/codex manifest/state. No fap-web, runtime default, CMS, release snapshot, production import gate, production rollout, or M8 Ops files changed."
       },
       "github": {
-        "status": "pending",
-        "evidence": "Opened PR #2229 from branch codex/big5-v2-pilot-run-evidence; waiting for required GitHub checks."
+        "status": "pass",
+        "evidence": "PR #2229 checks passed on head c4cfbcdc2892848d5687fbb9e2bc50a8ca976686: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and non-blocking Semgrep SARIF upload. Merge state CLEAN."
       }
     },
     "failure_reason": null,
@@ -55841,6 +55841,11 @@
         "at": "2026-06-22T00:59:00+08:00",
         "status": "github_checks_pending",
         "note": "Opened PR #2229 from branch codex/big5-v2-pilot-run-evidence; waiting for required GitHub checks."
+      },
+      {
+        "at": "2026-06-22T01:29:00+08:00",
+        "status": "ready_to_merge",
+        "note": "PR #2229 GitHub checks passed on head c4cfbcdc2892848d5687fbb9e2bc50a8ca976686 and mergeStateStatus is CLEAN."
       }
     ]
   },
