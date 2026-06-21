@@ -1,0 +1,36 @@
+{
+  "schema": "big5_result_page_v2.production_ops_validation.v0_1",
+  "package": "production_ops",
+  "version": "v0_1",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_pilot": true,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "production_ops_reporting_ready": true,
+  "validation_status": "pass",
+  "checks": {
+    "coverage_metric_defined": "pass",
+    "fallback_metric_defined": "pass",
+    "malformed_reason_metric_defined": "pass",
+    "leak_smoke_defined": "pass",
+    "pdf_footer_token_smoke_defined": "pass",
+    "ops_audit_fields_visible": "pass",
+    "raw_fields_hidden": "pass",
+    "runtime_defaults_not_changed": "pass",
+    "production_rollout_not_enabled": "pass",
+    "legacy_fallback_not_primary": "pass"
+  },
+  "required_operator_cadence": [
+    "weekly",
+    "after_each_content_batch",
+    "after_each_runtime_gate_change"
+  ],
+  "hard_blockers_before_broad_rollout": [
+    "coverage_or_fallback_regression_unreviewed",
+    "leak_smoke_failure",
+    "malformed_reason_spike_unreviewed",
+    "ops_audit_field_missing"
+  ]
+}

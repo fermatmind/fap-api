@@ -141,6 +141,81 @@ final class ReportPdfCenterTest extends TestCase
             ->assertDontSee('raw-hidden');
     }
 
+    public function test_big5_v2_ops_summary_counts_coverage_fallback_invalid_and_rejection_reasons(): void
+    {
+        $now = now();
+        $rows = [
+            ['status' => 'attached', 'reason' => 'v2_attached', 'errors' => 0, 'minutes_ago' => 5],
+            ['status' => 'attached', 'reason' => 'v2_attached', 'errors' => 0, 'minutes_ago' => 6],
+            ['status' => 'fallback', 'reason' => 'production_rollout_denied', 'errors' => 0, 'minutes_ago' => 7],
+            ['status' => 'fallback', 'reason' => 'locked_or_free_preview', 'errors' => 0, 'minutes_ago' => 8],
+            ['status' => 'invalid', 'reason' => 'payload_validation_failed', 'errors' => 3, 'minutes_ago' => 9],
+            ['status' => 'invalid', 'reason' => 'route_input_invalid', 'errors' => 2, 'minutes_ago' => 60 * 24 * 50],
+        ];
+
+        foreach ($rows as $index => $row) {
+            DB::table('report_snapshots')->insert([
+                'org_id' => 0,
+                'attempt_id' => (string) Str::uuid(),
+                'order_no' => null,
+                'scale_code' => 'BIG5_OCEAN',
+                'pack_id' => 'BIG5_OCEAN',
+                'dir_version' => 'v1',
+                'scoring_spec_version' => 'big5_spec_2026Q2_form90_v1',
+                'report_engine_version' => 'v1.2',
+                'big5_result_page_v2_status' => $row['status'],
+                'big5_result_page_v2_fallback_reason' => $row['reason'],
+                'big5_result_page_v2_validation_error_count' => $row['errors'],
+                'big5_result_page_v2_audited_at' => $now->copy()->subMinutes((int) $row['minutes_ago']),
+                'snapshot_version' => 'v1',
+                'report_json' => json_encode(['variant' => 'full', 'row' => $index], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                'status' => 'ready',
+                'last_error' => null,
+                'created_at' => $now->copy()->subMinutes((int) $row['minutes_ago']),
+                'updated_at' => $now->copy()->subMinutes((int) $row['minutes_ago']),
+            ]);
+        }
+
+        DB::table('report_snapshots')->insert([
+            'org_id' => 0,
+            'attempt_id' => (string) Str::uuid(),
+            'order_no' => null,
+            'scale_code' => 'MBTI_16',
+            'pack_id' => 'MBTI_16',
+            'dir_version' => 'v1',
+            'scoring_spec_version' => 'mbti_spec',
+            'report_engine_version' => 'v1',
+            'big5_result_page_v2_status' => 'attached',
+            'big5_result_page_v2_fallback_reason' => 'v2_attached',
+            'big5_result_page_v2_validation_error_count' => 0,
+            'big5_result_page_v2_audited_at' => $now,
+            'snapshot_version' => 'v1',
+            'report_json' => json_encode(['variant' => 'full'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'status' => 'ready',
+            'last_error' => null,
+            'created_at' => $now,
+            'updated_at' => $now,
+        ]);
+
+        $summary = app(ReportSnapshotExplorerSupport::class)->bigFiveResultPageV2CoverageSummary();
+
+        $this->assertSame(45, $summary['window_days']);
+        $this->assertSame(5, $summary['total']);
+        $this->assertSame(2, $summary['attached']);
+        $this->assertSame(2, $summary['fallback']);
+        $this->assertSame(1, $summary['invalid']);
+        $this->assertSame('40.0%', $summary['coverage_rate']);
+        $this->assertSame('60.0%', $summary['fallback_rate']);
+        $this->assertSame(3, $summary['validation_error_count']);
+        $this->assertSame([
+            'locked_or_free_preview' => 1,
+            'production_rollout_denied' => 1,
+        ], $summary['fallback_reasons']);
+        $this->assertSame([
+            'payload_validation_failed' => 1,
+        ], $summary['invalid_reasons']);
+    }
+
     public function test_report_pdf_center_index_query_stays_lightweight_for_production_listing(): void
     {
         $support = app(ReportSnapshotExplorerSupport::class);
