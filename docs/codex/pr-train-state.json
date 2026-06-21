@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-21T19:22:00+08:00",
+  "updated_at": "2026-06-21T19:30:00+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -55628,7 +55628,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-result-render-preview-handoff-01",
     "base": "main",
-    "status": "local_checks_passed",
+    "status": "github_checks_pending",
     "train_scope": "big5_result_page_v2_asset_agent",
     "title": "BIG5-RESULT-RENDER-PREVIEW-HANDOFF-01: docs(big5):交付 rendered preview fixtures",
     "depends_on": [
@@ -55660,11 +55660,15 @@
       "scope_validation": {
         "status": "pass",
         "evidence": "Changed files are confined to backend/content_assets/big5/result_page_v2/rendered_preview/fap_web_handoff/v0_1/* and docs/codex/pr-train-state.json."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": "PR #2210 opened from head 67793ee4f68d94f4eeae51afb2ab3c3245468e54; waiting for required GitHub checks."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "67793ee4f68d94f4eeae51afb2ab3c3245468e54",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2210",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -55678,6 +55682,11 @@
         "at": "2026-06-21T19:22:00+08:00",
         "status": "local_checks_passed",
         "note": "Added backend-owned fap-web render preview handoff bundle with fixture manifest, expected assertions, and go/no-go. Covers result page, PDF, share, history, compare, locked/free redaction, low-quality, and norm-unavailable assertions. No fap-web changes, frontend fallback, CMS import, runtime selector wiring, pilot flag, or production gate change."
+      },
+      {
+        "at": "2026-06-21T19:30:00+08:00",
+        "status": "github_checks_pending",
+        "note": "Opened PR #2210 from commit 67793ee4f68d94f4eeae51afb2ab3c3245468e54; waiting for required GitHub checks."
       }
     ]
   }
