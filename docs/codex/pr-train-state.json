@@ -56465,7 +56465,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-route-matrix-golden-case-qa-01",
     "base": "main",
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "train_scope": "riasec_result_page_v2_asset_agent",
     "title": "RIASEC-RESULT-ROUTE-MATRIX-GOLDEN-CASE-QA-01: test(riasec):验证 route matrix golden cases",
     "depends_on": [
@@ -56506,6 +56506,10 @@
             "reason": "Only the PR6 share_safety selector candidate resolves; broad route-specific selector packages remain absent and fail closed."
           }
         ]
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #2236 GitHub required checks passed on head 3ba6e111314ab5cbbcaf05d06af4d79fd572480c; mergeStateStatus CLEAN."
       }
     },
     "failure_reason": null,
@@ -56529,6 +56533,11 @@
         "at": "2026-06-22T00:51:01+08:00",
         "status": "github_checks_pending",
         "note": "Opened PR #2236 from head 235ea2b0a7067a011adf79f5657ed0777754da6b; waiting for required GitHub checks."
+      },
+      {
+        "at": "2026-06-22T01:11:04+08:00",
+        "status": "ready_to_merge",
+        "note": "PR #2236 GitHub checks passed on head 3ba6e111314ab5cbbcaf05d06af4d79fd572480c and merge state is CLEAN; pre-merge scope validation passed."
       }
     ]
   },
