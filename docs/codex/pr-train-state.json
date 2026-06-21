@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-21T22:08:34+08:00",
+  "updated_at": "2026-06-21T22:14:27+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -55699,7 +55699,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-asset-agent-runbook-01",
     "base": "main",
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "train_scope": "riasec_result_page_v2_asset_agent",
     "title": "RIASEC-RESULT-ASSET-AGENT-RUNBOOK-01: docs(riasec):固化 result asset agent runbook",
     "depends_on": [],
@@ -55726,12 +55726,12 @@
         "evidence": "Changed files are confined to backend/docs/riasec/result-asset-agent-*.md, docs/codex/pr-train.yaml, and docs/codex/pr-train-state.json. No agent run artifacts, runtime files, CMS importers, routes, migrations, or production gates changed."
       },
       "github": {
-        "status": "pending",
-        "evidence": "PR #2215 opened from commit 4a356f737789651f2ff4c0749841df31642ae692; waiting for required GitHub checks."
+        "status": "pass",
+        "evidence": "PR #2215 checks passed on head b2976f7638aed2717c0a955d13011d0c920ddfa0: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and non-blocking Semgrep SARIF upload. Merge state CLEAN."
       }
     },
     "failure_reason": null,
-    "commit_sha": "4a356f737789651f2ff4c0749841df31642ae692",
+    "commit_sha": "b2976f7638aed2717c0a955d13011d0c920ddfa0",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2215",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -55756,6 +55756,11 @@
         "at": "2026-06-21T22:08:34+08:00",
         "status": "github_checks_pending",
         "note": "Opened PR #2215 from commit 4a356f737789651f2ff4c0749841df31642ae692; waiting for required GitHub checks."
+      },
+      {
+        "at": "2026-06-21T22:14:27+08:00",
+        "status": "ready_to_merge",
+        "note": "PR #2215 GitHub checks passed on head b2976f7638aed2717c0a955d13011d0c920ddfa0; merge state CLEAN. Ready to merge after this state update revalidates."
       }
     ]
   },
