@@ -56288,7 +56288,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-asset-factory-pilot-batch-01",
     "base": "main",
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "train_scope": "riasec_result_page_v2_asset_agent",
     "title": "RIASEC-RESULT-ASSET-FACTORY-PILOT-BATCH-01: feat(riasec):dry-run share safety result batch",
     "depends_on": [
@@ -56333,6 +56333,10 @@
             "reason": "Route matrix and golden case generation are intentionally deferred to RIASEC-RESULT-ROUTE-MATRIX-GOLDEN-CASE-QA-01."
           }
         ]
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #2234 GitHub required checks passed on head 7814d366c7016a733c7d775f7f659836f705dd37; mergeStateStatus CLEAN."
       }
     },
     "failure_reason": null,
@@ -56356,6 +56360,11 @@
         "at": "2026-06-22T00:01:44+08:00",
         "status": "github_checks_pending",
         "note": "Opened PR #2234 from head 768951018239edbf6df96e4e464dab4b1f0e312c; waiting for required GitHub checks."
+      },
+      {
+        "at": "2026-06-22T00:09:00+08:00",
+        "status": "ready_to_merge",
+        "note": "PR #2234 GitHub checks passed on head 7814d366c7016a733c7d775f7f659836f705dd37 and merge state is CLEAN; pre-merge scope validation passed."
       }
     ]
   },
