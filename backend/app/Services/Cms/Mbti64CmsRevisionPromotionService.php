@@ -20,6 +20,12 @@ final class Mbti64CmsRevisionPromotionService
 
     private const COMPARISON_SNAPSHOT_KEY = 'mbti64_comparison_draft_v2_1';
 
+    private const AGENT_PROJECTION_SNAPSHOT_KEY = 'mbti64_agent_projection_draft_v1';
+
+    private const AGENT_PROJECTION_ARTIFACT = 'MBTI64-PUBLIC-PROFILE-AGENT-EXPANSION-88-01';
+
+    private const AGENT_PROJECTION_VERSION = 'mbti64.agent_expansion_88_recommendations.v1';
+
     public function __construct(private readonly Mbti64BackendImportContractPlanner $planner)
     {
     }
@@ -51,7 +57,7 @@ final class Mbti64CmsRevisionPromotionService
      */
     private function buildSummary(array $package, string $sourceSha256, bool $write, array $options): array
     {
-        $contract = $this->planner->plan($package);
+        $contract = $this->promotionContract($package);
         if (($contract['ok'] ?? false) !== true) {
             return array_merge($this->baseSummary($package, $sourceSha256, $write), [
                 'ok' => false,
@@ -69,7 +75,7 @@ final class Mbti64CmsRevisionPromotionService
                 continue;
             }
 
-            $row = $this->packageRow($package, (int) ($plannedRow['position'] ?? 0));
+            $row = $this->packageRow($package, (int) ($plannedRow['position'] ?? 0), $contract);
             $preparedRows[] = $this->prepareRow($plannedRow, $row, $sourceSha256, $write, $errors);
         }
 
@@ -134,6 +140,98 @@ final class Mbti64CmsRevisionPromotionService
      * @param  array<string,mixed>  $package
      * @return array<string,mixed>
      */
+    private function promotionContract(array $package): array
+    {
+        if ($this->isAgentProjectionPackage($package)) {
+            return $this->agentProjectionContract($package);
+        }
+
+        return $this->planner->plan($package);
+    }
+
+    /**
+     * @param  array<string,mixed>  $package
+     */
+    private function isAgentProjectionPackage(array $package): bool
+    {
+        return (string) ($package['artifact'] ?? '') === self::AGENT_PROJECTION_ARTIFACT
+            || (string) ($package['version'] ?? '') === self::AGENT_PROJECTION_VERSION
+            || is_array($package['recommendations'] ?? null);
+    }
+
+    /**
+     * @param  array<string,mixed>  $package
+     * @return array<string,mixed>
+     */
+    private function agentProjectionContract(array $package): array
+    {
+        $errors = [];
+        $warnings = [];
+        $summary = is_array($package['summary'] ?? null) ? $package['summary'] : [];
+        $recommendations = $this->recommendations($package);
+
+        if ((string) ($package['artifact'] ?? '') !== self::AGENT_PROJECTION_ARTIFACT) {
+            $errors[] = ['field' => 'artifact', 'code' => 'unsupported_package_artifact', 'message' => 'Unexpected MBTI64 agent projection artifact.'];
+        }
+        if ((string) ($package['version'] ?? '') !== self::AGENT_PROJECTION_VERSION) {
+            $errors[] = ['field' => 'version', 'code' => 'unsupported_package_version', 'message' => 'Unexpected MBTI64 agent projection version.'];
+        }
+        if ((string) ($package['status'] ?? '') !== 'pass_ready_for_qa_gates') {
+            $errors[] = ['field' => 'status', 'code' => 'package_status_not_ready_for_qa', 'message' => 'Package must be ready for QA gates before promotion planning.'];
+        }
+        if (count($recommendations) !== 88 || (int) ($summary['recommendation_count'] ?? -1) !== 88) {
+            $errors[] = ['field' => 'recommendations', 'code' => 'unexpected_recommendation_count', 'message' => 'Expected exactly 88 MBTI64 agent projection recommendations.'];
+        }
+        if ((int) ($summary['variant_pages'] ?? -1) !== 58 || (int) ($summary['comparison_pages'] ?? -1) !== 30) {
+            $errors[] = ['field' => 'summary', 'code' => 'unexpected_page_type_counts', 'message' => 'Expected 58 variant and 30 comparison recommendations.'];
+        }
+
+        $rows = [];
+        foreach ($recommendations as $index => $recommendation) {
+            $identity = $this->identityForRecommendation($recommendation);
+            if ($identity === null) {
+                $errors[] = [
+                    'field' => 'recommendations.'.((string) $index).'.target_url',
+                    'code' => 'unsupported_mbti64_target_url',
+                    'message' => 'Unsupported MBTI64 public profile URL: '.((string) ($recommendation['target_url'] ?? '')),
+                ];
+
+                continue;
+            }
+
+            $rows[] = [
+                'position' => $index + 1,
+                'url' => (string) $identity['url'],
+                'locale' => (string) $identity['locale'],
+                'page_type' => (string) $identity['page_type'],
+                'identity' => $identity,
+                'target' => [
+                    'target_table' => $identity['page_type'] === 'comparison'
+                        ? 'personality_profile_revisions'
+                        : 'personality_profile_variant_revisions',
+                ],
+                'snapshot_key' => self::AGENT_PROJECTION_SNAPSHOT_KEY,
+            ];
+        }
+
+        return [
+            'ok' => $errors === [],
+            'status' => $errors === [] ? 'pass' : 'fail',
+            'artifact' => 'MBTI64-CMS-PROJECTION-PROMOTE-88-CONTRACT-PATCH-01',
+            'source_kind' => 'mbti64_agent_projection_draft_v1',
+            'row_count' => count($rows),
+            'variant_row_count' => count(array_filter($rows, static fn (array $row): bool => ($row['page_type'] ?? null) === 'variant')),
+            'comparison_row_count' => count(array_filter($rows, static fn (array $row): bool => ($row['page_type'] ?? null) === 'comparison')),
+            'rows' => $rows,
+            'errors' => $errors,
+            'warnings' => $warnings,
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $package
+     * @return array<string,mixed>
+     */
     private function baseSummary(array $package, string $sourceSha256, bool $write): array
     {
         return [
@@ -165,12 +263,31 @@ final class Mbti64CmsRevisionPromotionService
      * @param  array<string,mixed>  $package
      * @return array<string,mixed>
      */
-    private function packageRow(array $package, int $position): array
+    private function packageRow(array $package, int $position, array $contract): array
     {
+        if (($contract['source_kind'] ?? null) === 'mbti64_agent_projection_draft_v1') {
+            $recommendations = $this->recommendations($package);
+            $recommendation = $recommendations[$position - 1] ?? [];
+
+            return is_array($recommendation) ? $recommendation : [];
+        }
+
         $rows = is_array($package['rows'] ?? null) ? array_values((array) $package['rows']) : [];
         $row = $rows[$position - 1] ?? [];
 
         return is_array($row) ? $row : [];
+    }
+
+    /**
+     * @param  array<string,mixed>  $package
+     * @return list<array<string,mixed>>
+     */
+    private function recommendations(array $package): array
+    {
+        return array_values(array_filter(
+            is_array($package['recommendations'] ?? null) ? $package['recommendations'] : [],
+            static fn (mixed $item): bool => is_array($item)
+        ));
     }
 
     /**
@@ -187,7 +304,10 @@ final class Mbti64CmsRevisionPromotionService
         array &$errors,
     ): array {
         $pageType = (string) ($plannedRow['page_type'] ?? '');
-        $snapshotKey = $pageType === 'comparison' ? self::COMPARISON_SNAPSHOT_KEY : self::VARIANT_SNAPSHOT_KEY;
+        $snapshotKey = (string) ($plannedRow['snapshot_key'] ?? '');
+        if ($snapshotKey === '') {
+            $snapshotKey = $pageType === 'comparison' ? self::COMPARISON_SNAPSHOT_KEY : self::VARIANT_SNAPSHOT_KEY;
+        }
         $target = $this->targetRecord($plannedRow);
         $targetId = $target['id'] ?? null;
         $targetField = $pageType === 'comparison' ? 'profile_id' : 'personality_profile_variant_id';
@@ -290,6 +410,46 @@ final class Mbti64CmsRevisionPromotionService
         return $variant instanceof PersonalityProfileVariant ? ['id' => (int) $variant->id] : [];
     }
 
+    /**
+     * @param  array<string,mixed>  $recommendation
+     * @return array<string,string>|null
+     */
+    private function identityForRecommendation(array $recommendation): ?array
+    {
+        $targetUrl = (string) ($recommendation['target_url'] ?? '');
+        $path = (string) (parse_url($targetUrl, PHP_URL_PATH) ?: '');
+        if (preg_match('#^/(?<prefix>en|zh)/personality/(?<type>[a-z]{4})-(?<variant>a|t)$#i', $path, $matches) === 1) {
+            $locale = $this->localeFromPrefix((string) $matches['prefix']);
+            $canonicalType = strtoupper((string) $matches['type']);
+            $variantCode = strtoupper((string) $matches['variant']);
+
+            return [
+                'url' => $targetUrl,
+                'path' => $path,
+                'locale' => $locale,
+                'page_type' => 'variant',
+                'canonical_type_code' => $canonicalType,
+                'variant_code' => $variantCode,
+                'runtime_type_code' => $canonicalType.'-'.$variantCode,
+            ];
+        }
+
+        if (preg_match('#^/(?<prefix>en|zh)/personality/(?<type>[a-z]{4})-a-vs-\k<type>-t$#i', $path, $matches) === 1) {
+            $locale = $this->localeFromPrefix((string) $matches['prefix']);
+            $canonicalType = strtoupper((string) $matches['type']);
+
+            return [
+                'url' => $targetUrl,
+                'path' => $path,
+                'locale' => $locale,
+                'page_type' => 'comparison',
+                'canonical_type_code' => $canonicalType,
+            ];
+        }
+
+        return null;
+    }
+
     private function matchingRevision(
         string $pageType,
         string $targetField,
@@ -355,22 +515,24 @@ final class Mbti64CmsRevisionPromotionService
         $links = is_array($fields['internal_links'] ?? null)
             ? array_values((array) $fields['internal_links'])
             : (is_array($row['internal_links'] ?? null) ? array_values((array) $row['internal_links']) : []);
-        $canonical = (string) ($fields['canonical_target'] ?? ($row['canonical_target'] ?? ($plannedRow['url'] ?? '')));
+        $identity = is_array($plannedRow['identity'] ?? null) ? $plannedRow['identity'] : [];
+        $canonical = (string) ($fields['canonical_target']
+            ?? ($row['canonical_target'] ?? ($identity['path'] ?? ($plannedRow['url'] ?? ''))));
 
         return [
             'page_type' => $pageType,
             'seo' => [
-                'seo_title' => $this->nullableString($seo['seo_title'] ?? null),
-                'seo_description' => $this->nullableString($seo['seo_description'] ?? null),
+                'seo_title' => $this->nullableString($seo['seo_title'] ?? ($seo['title'] ?? null)),
+                'seo_description' => $this->nullableString($seo['seo_description'] ?? ($seo['description'] ?? null)),
                 'canonical_url' => $canonical,
-                'og_title' => $this->nullableString($seo['og_title'] ?? ($seo['seo_title'] ?? null)),
-                'og_description' => $this->nullableString($seo['og_description'] ?? ($seo['seo_description'] ?? null)),
-                'twitter_title' => $this->nullableString($seo['twitter_title'] ?? ($seo['seo_title'] ?? null)),
-                'twitter_description' => $this->nullableString($seo['twitter_description'] ?? ($seo['seo_description'] ?? null)),
+                'og_title' => $this->nullableString($seo['og_title'] ?? ($seo['seo_title'] ?? ($seo['title'] ?? null))),
+                'og_description' => $this->nullableString($seo['og_description'] ?? ($seo['seo_description'] ?? ($seo['description'] ?? null))),
+                'twitter_title' => $this->nullableString($seo['twitter_title'] ?? ($seo['seo_title'] ?? ($seo['title'] ?? null))),
+                'twitter_description' => $this->nullableString($seo['twitter_description'] ?? ($seo['seo_description'] ?? ($seo['description'] ?? null))),
                 'robots' => 'index,follow',
                 'jsonld_overrides_json' => [
-                    'name' => $this->nullableString($seo['h1'] ?? ($seo['seo_title'] ?? null)),
-                    'description' => $this->nullableString($seo['seo_description'] ?? null),
+                    'name' => $this->nullableString($seo['h1'] ?? ($seo['seo_title'] ?? ($seo['title'] ?? null))),
+                    'description' => $this->nullableString($seo['seo_description'] ?? ($seo['description'] ?? null)),
                     'url' => $canonical,
                 ],
             ],
@@ -399,6 +561,8 @@ final class Mbti64CmsRevisionPromotionService
         array $plannedRow,
         string $snapshotKey,
     ): array {
+        $identity = is_array($plannedRow['identity'] ?? null) ? $plannedRow['identity'] : [];
+        $canonicalPath = (string) ($identity['path'] ?? ($plannedRow['url'] ?? ''));
         $sections = [];
         $sort = 100;
         foreach ($content as $key => $value) {
@@ -460,8 +624,8 @@ final class Mbti64CmsRevisionPromotionService
             'body_html' => null,
             'payload_json' => [
                 'snapshot_key' => $snapshotKey,
-                'url' => (string) ($plannedRow['url'] ?? ''),
-                'identity' => $plannedRow['identity'] ?? [],
+                'url' => $canonicalPath,
+                'identity' => $identity,
                 'structured_metadata' => $metadata,
                 'raw_row' => $row,
             ],
@@ -492,6 +656,9 @@ final class Mbti64CmsRevisionPromotionService
         array $plannedRow,
         string $snapshotKey,
     ): array {
+        $identity = is_array($plannedRow['identity'] ?? null) ? $plannedRow['identity'] : [];
+        $canonicalPath = (string) ($identity['path'] ?? ($plannedRow['url'] ?? ''));
+
         return [
             'section_key' => 'mbti64_comparison_a_vs_t',
             'title' => $this->nullableString($seo['h1'] ?? ($seo['seo_title'] ?? 'A/T comparison')),
@@ -500,13 +667,13 @@ final class Mbti64CmsRevisionPromotionService
             'body_html' => null,
             'payload_json' => [
                 'snapshot_key' => $snapshotKey,
-                'url' => (string) ($plannedRow['url'] ?? ''),
+                'url' => $canonicalPath,
                 'seo' => $seo,
                 'content' => $content,
                 'faq' => $faq,
                 'internal_links' => $links,
                 'structured_metadata' => $metadata,
-                'identity' => $plannedRow['identity'] ?? [],
+                'identity' => $identity,
                 'raw_row' => $row,
                 'source' => 'mbti64_v2_1_comparison_revision_promotion',
             ],
@@ -709,5 +876,10 @@ final class Mbti64CmsRevisionPromotionService
         $trimmed = trim($value);
 
         return $trimmed !== '' ? $trimmed : null;
+    }
+
+    private function localeFromPrefix(string $prefix): string
+    {
+        return strtolower($prefix) === 'zh' ? 'zh-CN' : 'en';
     }
 }

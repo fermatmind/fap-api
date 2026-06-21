@@ -23,7 +23,7 @@ final class PersonalityMbti64CmsRevisionPromote extends Command
     ];
 
     protected $signature = 'personality:mbti64-cms-revision-promote
-        {--package= : Path to the MBTI64 pilot V2.1 JSON package}
+        {--package= : Path to the MBTI64 pilot V2.1 or agent projection JSON package}
         {--dry-run : Plan promotion without database writes}
         {--write : Promote latest matching revision snapshots to live CMS content fields}
         {--json : Emit the full JSON summary}
@@ -35,7 +35,7 @@ final class PersonalityMbti64CmsRevisionPromote extends Command
         {--no-search-release : Required for --write; confirms no search release or queue action}
         {--operator-approved= : Required exact approval token for --write}';
 
-    protected $description = 'Promote MBTI64 pilot V2.1 CMS draft revisions into live CMS content with no index/search side effects.';
+    protected $description = 'Promote MBTI64 CMS draft revisions into live CMS content with no index/search side effects.';
 
     public function handle(Mbti64CmsRevisionPromotionService $service): int
     {
