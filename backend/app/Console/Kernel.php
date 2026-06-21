@@ -22,6 +22,7 @@ use App\Console\Commands\Big5AttemptPurge;
 // ✅ 显式注册（更稳，避免自动扫描失效/缓存导致找不到）
 use App\Console\Commands\Big5PsychometricsReport;
 use App\Console\Commands\Big5TelemetrySummary;
+use App\Console\Commands\BigFiveResultPageV2AssetAgentAuditCommand;
 use App\Console\Commands\CareerAlignActorsAuthorityOccupation;
 use App\Console\Commands\CareerAlignCareerAuthorityBatch;
 use App\Console\Commands\CareerAlignD8AuthorityCrosswalks;
@@ -249,6 +250,7 @@ class Kernel extends ConsoleKernel
         SdsPsychometricsReport::class,
         Big5AttemptPurge::class,
         Big5TelemetrySummary::class,
+        BigFiveResultPageV2AssetAgentAuditCommand::class,
         CommerceReconcile::class,
         CommerceCompensatePendingOrders::class,
         CommerceRepairPaidOrders::class,
