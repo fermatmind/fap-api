@@ -12,6 +12,29 @@
     "--confirm-write=<exact phrase>",
     "--limit=1..10"
   ],
+  "low_risk_auto_approve_mode": {
+    "command_shape": "php artisan seo-agent:cms-draft-write --package=<path> --limit=10 --auto-approve-low-risk --execute --json",
+    "max_rows_per_execution": 10,
+    "allowed_source_families": [
+      "cms_tdk_gap",
+      "cms_faq_gap"
+    ],
+    "allowed_severities": [
+      "p1",
+      "p2"
+    ],
+    "allowed_target_fields": [
+      "seo_title",
+      "seo_description",
+      "canonical_url_or_path",
+      "is_indexable_or_robots",
+      "faq_items",
+      "faq_schema_eligible"
+    ],
+    "publishes_content": false,
+    "search_submit_allowed": false,
+    "indexing_request_allowed": false
+  },
   "supported_targets": [
     "article",
     "content_page"
