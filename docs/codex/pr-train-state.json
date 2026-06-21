@@ -55858,7 +55858,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-asset-validator-harness-01",
     "base": "main",
-    "status": "ci_fix_local_checks_passed",
+    "status": "ready_to_merge",
     "train_scope": "riasec_result_page_v2_asset_agent",
     "title": "RIASEC-RESULT-ASSET-VALIDATOR-HARNESS-01: test(riasec):建 result asset validator harness",
     "depends_on": [
@@ -55894,15 +55894,15 @@
       },
       "scope_validation": {
         "status": "pass",
-        "evidence": "Changed files are confined to the RIASEC AssetAgent command/service/test, console/bootstrap command registration, BigFive runtime-freeze classifier regression, and docs/codex PR-train metadata allowed for the scoped CI repair."
+        "evidence": "Pre-merge scope validation shows only the 8 declared RIASEC validator harness and scoped freeze guard files changed."
       },
       "github": {
-        "status": "failed_then_scoped_fix_pending_rerun",
-        "evidence": "PR #2224 verify-bigfive failed because BigFive runtime-freeze classifier flagged the new read-only RIASEC AssetAgent command/service/Kernel paths. Added a scoped classifier regression and local revalidation; rerun pending after push."
+        "status": "pass",
+        "evidence": "PR #2224 GitHub required checks passed on head 78d258a47c207d0bffb71a440f7b61195f9e0119 after scoped verify-bigfive freeze guard repair; mergeStateStatus CLEAN."
       }
     },
     "failure_reason": null,
-    "commit_sha": "e37a2b23dda0b965d527a0e01b59022c714b403a",
+    "commit_sha": "78d258a47c207d0bffb71a440f7b61195f9e0119",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2224",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -55937,6 +55937,11 @@
         "at": "2026-06-21T23:03:33+08:00",
         "status": "ci_fix_local_checks_passed",
         "note": "Inspected PR #2224 verify-bigfive failure and added a scoped runtime-freeze classifier regression for the read-only RIASEC AssetAgent harness. CoreBodyPreview, RIASEC harness, slot contract, CLI smoke, JSON/YAML, diff, and scope validation passed locally."
+      },
+      {
+        "at": "2026-06-21T23:08:52+08:00",
+        "status": "ready_to_merge",
+        "note": "PR #2224 GitHub checks passed on head 78d258a47c207d0bffb71a440f7b61195f9e0119 and merge state is CLEAN; pre-merge scope validation passed."
       }
     ],
     "sidecar_issues": [
