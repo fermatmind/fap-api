@@ -1,0 +1,54 @@
+{
+  "version": "seo-agent-auto-rollback-guard.v1",
+  "task": "SEO-AGENT-AUTO-ROLLBACK-GUARD-01",
+  "command": "php artisan seo-agent:auto-rollback-guard",
+  "modes": [
+    "preflight",
+    "post-publish"
+  ],
+  "input_schemas": {
+    "preflight": [
+      "seo-agent-run-evidence.v1",
+      "seo-agent-weekly-draft-write-auto.v1",
+      "seo-agent-cms-draft-package-dry-run.v1"
+    ],
+    "post_publish": [
+      "seo-agent-cms-publish-canary.v1",
+      "seo-agent-cms-publish-auto-canary.v1"
+    ]
+  },
+  "default_mode": "guard_evidence_only",
+  "execute_mode": {
+    "requires": [
+      "--execute",
+      "--mode=post-publish",
+      "complete rollback evidence",
+      "exactly one eligible content_page target"
+    ],
+    "max_content_page_rollback_count": 1,
+    "article_rollback": false,
+    "bulk_rollback": false
+  },
+  "guard_actions": [
+    "allow_next_step",
+    "pause_publish",
+    "pause_indexnow"
+  ],
+  "negative_guarantees": {
+    "cms_bulk_publish": false,
+    "article_auto_publish": false,
+    "content_page_rollback_beyond_one": false,
+    "search_channel_enqueue": false,
+    "search_channel_submit": false,
+    "google_indexing_api_call": false,
+    "scheduler_activation": false,
+    "queue_worker_activation": false,
+    "frontend_mutation": false
+  },
+  "deferred": [
+    "persistent automation pause state",
+    "multi-page rollback",
+    "article rollback",
+    "search channel rollback"
+  ]
+}
