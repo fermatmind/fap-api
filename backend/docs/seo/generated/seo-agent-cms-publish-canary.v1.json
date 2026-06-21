@@ -1,0 +1,73 @@
+{
+  "version": "seo-agent-cms-publish-canary.v1",
+  "task": "SEO-AGENT-CMS-PUBLISH-CANARY-01",
+  "repo": "fap-api",
+  "command": "php artisan seo-agent:cms-publish-canary",
+  "input_schemas": [
+    "seo-agent-cms-draft-package-dry-run.v1",
+    "seo-agent-controlled-cms-draft-write.v1"
+  ],
+  "output_schema": "seo-agent-cms-publish-canary.v1",
+  "default_mode": "dry_run_plan",
+  "execute_requires": [
+    "--execute",
+    "--limit=1",
+    "--confirm-package-sha256=<package-sha256>",
+    "--auto-approve-low-risk or --confirm-publish=<exact phrase>"
+  ],
+  "max_rows_per_execution": 1,
+  "supported_targets_v1": [
+    "content_page"
+  ],
+  "unsupported_targets_v1": {
+    "article": "blocked because SEO Agent article drafts are isolated article_revisions while the existing article publish path uses article_translation_revisions"
+  },
+  "low_risk_auto_publish_mode": {
+    "allowed_source_families": [
+      "cms_tdk_gap",
+      "cms_faq_gap"
+    ],
+    "allowed_severities": [
+      "p1",
+      "p2"
+    ],
+    "allowed_target_fields": [
+      "seo_title",
+      "seo_description",
+      "canonical_url_or_path",
+      "is_indexable_or_robots",
+      "faq_items",
+      "faq_schema_eligible"
+    ],
+    "claim_gate_required": true,
+    "forbidden_claim_scan_required": true,
+    "rollback_evidence_required": true
+  },
+  "post_publish_boundaries": {
+    "search_channel_enqueue": false,
+    "search_channel_submit": false,
+    "indexing_request": false,
+    "sitemap_submission": false,
+    "scheduler_activation": false,
+    "queue_worker_started": false,
+    "external_model_api_call": false
+  },
+  "evidence": {
+    "records_package_sha256": true,
+    "records_revision_id": true,
+    "records_rollback_snapshot_hashes": true,
+    "forbidden_fields_absent": [
+      "raw_url",
+      "raw_query",
+      "credential_path",
+      "client_email",
+      "private_key",
+      "Bearer token",
+      "cookie",
+      "content_md",
+      "content_html",
+      "cms_draft_body"
+    ]
+  },
+  "next_step": "Only after one successful canary publish should post-publish search submit be implemented in a separate PR."
+}
