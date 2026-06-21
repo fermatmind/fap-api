@@ -38349,7 +38349,7 @@
     "merge_commit": "42a8caacb4f4bfa0fb5a83ecd69c25e3b5e83973"
   },
   "AUDIT-SEC-TRAIN-LEDGER-CLOSEOUT-01": {
-    "status": "ready_to_merge",
+    "status": "merged",
     "branch": "audit/sec-train-ledger-closeout-01",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1804",
     "base": "main",
@@ -56510,14 +56510,18 @@
       "github": {
         "status": "pass",
         "evidence": "PR #2236 GitHub required checks passed on head 3ba6e111314ab5cbbcaf05d06af4d79fd572480c; mergeStateStatus CLEAN."
+      },
+      "post_merge": {
+        "status": "pass",
+        "evidence": "PR #2236 merged at 2026-06-21T17:39:15Z with merge commit cad520e300f42d1c7e191e92b05d9cfbabcb7712; origin/main contains the merge commit; local main equals origin/main; local and remote task branch cleanup completed; post-merge focused validation passed."
       }
     },
     "failure_reason": null,
-    "commit_sha": "235ea2b0a7067a011adf79f5657ed0777754da6b",
+    "commit_sha": "cad520e300f42d1c7e191e92b05d9cfbabcb7712",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2236",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-21T17:39:15Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-21T22:06:47+08:00",
@@ -56538,6 +56542,11 @@
         "at": "2026-06-22T01:11:04+08:00",
         "status": "ready_to_merge",
         "note": "PR #2236 GitHub checks passed on head 3ba6e111314ab5cbbcaf05d06af4d79fd572480c and merge state is CLEAN; pre-merge scope validation passed."
+      },
+      {
+        "at": "2026-06-22T01:42:13+08:00",
+        "status": "merged",
+        "note": "Post-merge reconciliation confirmed PR #2236 merged at 2026-06-21T17:39:15Z with merge commit cad520e300f42d1c7e191e92b05d9cfbabcb7712; origin/main contains the merge commit; local main equals origin/main; local and remote task branch cleanup completed."
       }
     ]
   },
@@ -56545,7 +56554,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-render-preview-handoff-01",
     "base": "main",
-    "status": "pending_authorization",
+    "status": "local_checks_passed",
     "train_scope": "riasec_result_page_v2_asset_agent",
     "title": "RIASEC-RESULT-RENDER-PREVIEW-HANDOFF-01: docs(riasec):交付 rendered preview fixtures",
     "depends_on": [
@@ -56555,6 +56564,24 @@
       "authorization": {
         "status": "pass",
         "evidence": "User explicitly authorized the eight-item RIASEC Result Page asset-agent PR train and docs/codex manifest/state updates in the goal objective."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "RIASEC-RESULT-ROUTE-MATRIX-GOLDEN-CASE-QA-01 merged as PR #2236; origin/main contains merge commit cad520e300f42d1c7e191e92b05d9cfbabcb7712."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "find backend/content_assets/riasec/result_page_v2/rendered_preview -name '*.json' -print -exec python3 -m json.tool {} >/dev/null \\;",
+          "git diff --check",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+        ],
+        "notes": "Added backend-owned rendered preview fixture manifest, expected assertions, and handoff report covering result page, PDF, share, history, compare, locked/free redaction, low-quality, and fallback surfaces. No fap-web changes, frontend fallback, CMS import, runtime selector wiring, pilot gate, or production gate."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to backend/content_assets/riasec/result_page_v2/rendered_preview and docs/codex state bookkeeping."
       }
     },
     "failure_reason": null,
@@ -56568,6 +56595,11 @@
         "at": "2026-06-21T22:06:47+08:00",
         "status": "pending_authorization",
         "note": "Manifest/state entry authorized for the RIASEC Result Page asset-agent train. Implementation waits for its dependency order."
+      },
+      {
+        "at": "2026-06-22T01:42:13+08:00",
+        "status": "local_checks_passed",
+        "note": "Produced rendered preview handoff fixture manifest, expected assertions, and handoff report. JSON/YAML, diff, and scope validation passed."
       }
     ]
   },
