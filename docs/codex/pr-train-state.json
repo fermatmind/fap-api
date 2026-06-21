@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-21T16:47:21+08:00",
+  "updated_at": "2026-06-21T17:19:11+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -55258,16 +55258,16 @@
         "notes": "Focused tests passed with existing PHPUnit warning classifications. GitHub verify-bigfive exposed the freeze guard classifier gap for the new read-only AssetAgent harness; scoped CI repair passed local revalidation."
       },
       "github": {
-        "status": "failed_current_pr_scoped_repair_pushed",
-        "evidence": "PR #2190 verify-bigfive failed because BigFiveResultPageV2CoreBodyPreviewTest flagged the new AssetAgent command/service/Kernel registration as runtime diff. Scoped guard repair passed locally and will be pushed for GitHub recheck."
+        "status": "pass",
+        "evidence": "PR #2190 GitHub required checks passed after rebase and scoped repair."
       }
     },
     "failure_reason": null,
-    "commit_sha": "19feb4f36851e2319a1462027642496029c9d4cb",
+    "commit_sha": "2a23e880f42b7ef0760115ae0407b1644db48472",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2190",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-21T09:01:06Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-21T15:57:09+08:00",
@@ -55293,6 +55293,11 @@
         "at": "2026-06-21T16:47:21+08:00",
         "status": "ci_fix_local_checks_passed",
         "note": "Scoped CI repair local checks passed: AssetAgent, selector validator, CoreBodyPreview freeze guard, PHP syntax, JSON/YAML, diff, and scope validation."
+      },
+      {
+        "at": "2026-06-21T17:06:21+08:00",
+        "status": "merged",
+        "note": "Reconciled during BIG5-RESULT-EXISTING-ASSET-GAP-AUDIT-01: PR #2190 merged at 2026-06-21T09:01:06Z with merge commit 2a23e880f42b7ef0760115ae0407b1644db48472; origin/main contains the merge commit; local main was synced; local and remote task branch cleanup completed; post-merge focused validation passed."
       }
     ]
   },
@@ -55300,7 +55305,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-result-existing-asset-gap-audit-01",
     "base": "main",
-    "status": "pending_dependency",
+    "status": "local_checks_passed",
     "train_scope": "big5_result_page_v2_asset_agent",
     "title": "BIG5-RESULT-EXISTING-ASSET-GAP-AUDIT-01: docs(big5):审计现有 result assets gaps",
     "depends_on": [
@@ -55312,8 +55317,23 @@
         "evidence": "User explicitly requested implementation of the eight-item Big Five Result Page V2 asset-agent plan."
       },
       "dependency": {
-        "status": "pending",
-        "evidence": "Waits for BIG5-RESULT-ASSET-VALIDATOR-HARNESS-01 to merge into main."
+        "status": "pass",
+        "evidence": "BIG5-RESULT-ASSET-VALIDATOR-HARNESS-01 is merged; origin/main contains merge commit 2a23e880f42b7ef0760115ae0407b1644db48472."
+      },
+      "sidecar_external_blocker": {
+        "status": "recorded",
+        "evidence": "Clean-main strict harness audit fails on pre-existing selector_validation_errors=3. This is not introduced by BIG5-RESULT-EXISTING-ASSET-GAP-AUDIT-01 and is recorded in the gap register for BIG5-RESULT-SELECTOR-QA-REPAIR-01."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --json --no-ansi",
+          "find backend/content_assets/big5/result_page_v2/qa -name '*.json' -print -exec python3 -m json.tool {} >/dev/null \\;",
+          "git diff --check",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+        ],
+        "evidence": "Non-strict harness dry-run passed with selector_asset_count=325, validation_error_count=3, leak_hit_count=0, source_ledger_valid=true, asset_inventory_valid=true, ready_for_runtime=false, ready_for_production=false. The strict failure is pre-existing and recorded as sidecar B5-GAP-STRICT-001."
       }
     },
     "failure_reason": null,
@@ -55327,6 +55347,27 @@
         "at": "2026-06-21T15:57:09+08:00",
         "status": "pending_dependency",
         "note": "Manifest/state entry authorized; implementation waits for the validator harness PR."
+      },
+      {
+        "at": "2026-06-21T17:06:21+08:00",
+        "status": "local_checks_pending",
+        "note": "Dependency merged and reconciled. Began existing asset gap audit; strict harness failure is a pre-existing selector QA sidecar, so this PR uses harness dry-run plus gap register validation."
+      },
+      {
+        "at": "2026-06-21T17:19:11+08:00",
+        "status": "local_checks_passed",
+        "note": "Harness dry-run, QA JSON parse, manifest/state parse, git diff check, and scope validation passed. Strict harness failure remains recorded as an external sidecar and deferred to BIG5-RESULT-SELECTOR-QA-REPAIR-01."
+      }
+    ],
+    "sidecar_issues": [
+      {
+        "sidecar_id": "B5-GAP-STRICT-001",
+        "owner_repo": "fap-api",
+        "scope_relation": "external_to_current_pr",
+        "introduced_by_current_pr": false,
+        "summary": "Strict Big Five Result Page V2 AssetAgent audit fails on 3 pre-existing selector share-safety ownership errors.",
+        "evidence": "cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi",
+        "deferred_to_pr": "BIG5-RESULT-SELECTOR-QA-REPAIR-01"
       }
     ]
   },

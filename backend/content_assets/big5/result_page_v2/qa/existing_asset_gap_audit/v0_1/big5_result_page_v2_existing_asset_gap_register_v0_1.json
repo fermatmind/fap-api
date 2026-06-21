@@ -1,0 +1,219 @@
+{
+  "schema_version": "fap.big5.result_page_v2.existing_asset_gap_register.v0.1",
+  "audit_id": "BIG5-RESULT-EXISTING-ASSET-GAP-AUDIT-01",
+  "created_at_utc": "2026-06-21T09:08:00Z",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "scope": {
+    "package_inventory_count": 13,
+    "selector_asset_count": 325,
+    "route_matrix_row_count": 3125,
+    "route_matrix_unique_combination_count": 3125,
+    "canonical_profile_count": 8,
+    "golden_case_count": 31,
+    "o59_canonical_case_present": true
+  },
+  "source_files": [
+    "backend/content_assets/big5/result_page_v2/master_catalog/v0_1/big5_asset_package_inventory_v0_1.json",
+    "backend/content_assets/big5/result_page_v2/selector_ready_assets/v0_3_p0_full/assets.jsonl",
+    "backend/content_assets/big5/result_page_v2/route_matrix/v0_1_1/big5_3125_route_matrix_O1_v0_1_1.jsonl",
+    "backend/content_assets/big5/result_page_v2/route_matrix/v0_1_1/big5_3125_route_matrix_O2_v0_1_1.jsonl",
+    "backend/content_assets/big5/result_page_v2/route_matrix/v0_1_1/big5_3125_route_matrix_O3_v0_1_1.jsonl",
+    "backend/content_assets/big5/result_page_v2/route_matrix/v0_1_1/big5_3125_route_matrix_O4_v0_1_1.jsonl",
+    "backend/content_assets/big5/result_page_v2/route_matrix/v0_1_1/big5_3125_route_matrix_O5_v0_1_1.jsonl",
+    "backend/content_assets/big5/result_page_v2/selector_qa_policy/v0_1/big5_result_page_v2_selector_qa_policy_v0_1_golden_cases.json"
+  ],
+  "package_inventory": {
+    "package_count": 13,
+    "packages": [
+      {"package_key": "B5-CONTENT-0", "package_type": "governance", "row_count": 0, "gap_summary": "governance spec only; no runtime asset rows expected"},
+      {"package_key": "B5-A-lite", "package_type": "source_authority", "row_count": 0, "gap_summary": "source authority and mapping governance only"},
+      {"package_key": "B5-B1-O59-core-body", "package_type": "core_body", "row_count": 79, "gap_summary": "O59-only body seed; not generalized beyond canonical O59"},
+      {"package_key": "B5-B1-Preview", "package_type": "rendered_preview_qa", "row_count": 0, "gap_summary": "preview QA contract only"},
+      {"package_key": "B5-B1-Preview-Codex-Handoff", "package_type": "codex_handoff", "row_count": 0, "gap_summary": "frontend handoff only"},
+      {"package_key": "B5-CONTENT-1", "package_type": "trait_band_assets", "row_count": 25, "gap_summary": "covers 5 traits x 5 bands"},
+      {"package_key": "B5-CONTENT-2", "package_type": "coupling_assets", "row_count": 60, "gap_summary": "coupling package inventory row count differs from selector coupling registry count 50; keep as inventory gap until reference mapping is reconciled"},
+      {"package_key": "B5-CONTENT-3", "package_type": "facet_assets", "row_count": 90, "gap_summary": "facet package inventory row count differs from selector facet_pattern registry count 60; likely package includes glossary/high/low rows outside selector granularity"},
+      {"package_key": "B5-CONTENT-4", "package_type": "canonical_profile_routes", "row_count": 64, "gap_summary": "8 canonical profiles x 8 sections; route matrix references all 8 profile keys"},
+      {"package_key": "B5-CONTENT-5", "package_type": "scenario_action_assets", "row_count": 160, "gap_summary": "scenario package is broader than selector action/scenario registries; reference consistency remains staging QA"},
+      {"package_key": "B5-CONTENT-6", "package_type": "route_matrix", "row_count": 3125, "gap_summary": "route matrix rows complete and uniquely keyed"},
+      {"package_key": "selector-ready-assets-v0.3-p0-full", "package_type": "selector_ready_assets", "row_count": 325, "gap_summary": "3 selector validator findings remain in share-safe registry ownership"},
+      {"package_key": "selector-qa-policy-v0.1", "package_type": "selector_qa_policy", "row_count": 30, "gap_summary": "inventory says 30 golden cases but file contains 31 including O59 canonical preview"}
+    ]
+  },
+  "selector_asset_inventory": {
+    "asset_count": 325,
+    "registry_counts": {
+      "action_plan_registry": 25,
+      "boundary_registry": 5,
+      "coupling_registry": 50,
+      "domain_registry": 50,
+      "facet_pattern_registry": 60,
+      "method_registry": 6,
+      "observation_feedback_registry": 25,
+      "profile_signature_registry": 20,
+      "scenario_registry": 40,
+      "share_safety_registry": 10,
+      "state_scope_registry": 14,
+      "triple_pattern_registry": 20
+    },
+    "module_counts": {
+      "module_00_trust_bar": 1,
+      "module_01_hero": 45,
+      "module_02_quick_understanding": 24,
+      "module_03_trait_deep_dive": 26,
+      "module_04_coupling": 52,
+      "module_05_facet_reframe": 61,
+      "module_06_application_matrix": 57,
+      "module_07_collaboration_manual": 8,
+      "module_08_share_save": 12,
+      "module_09_feedback_data_flywheel": 26,
+      "module_10_method_privacy": 13
+    },
+    "fallback_policy_counts": {
+      "boundary_only": 87,
+      "neutral_unavailable": 3,
+      "omit": 235
+    },
+    "known_validator_findings": [
+      {
+        "finding_id": "B5-GAP-SEL-SHARE-001",
+        "severity": "P0",
+        "status": "open",
+        "description": "Three shareable selector assets originate from scenario_registry instead of share_safety_registry.",
+        "validator_errors": [
+          "selector asset 246: shareable=true selector assets must originate from share_safety_registry",
+          "selector asset 247: shareable=true selector assets must originate from share_safety_registry",
+          "selector asset 250: shareable=true selector assets must originate from share_safety_registry"
+        ],
+        "affected_asset_keys": [
+          "asset.module_07_collaboration_manual.scenario_registry.collaboration_document_first.v0_3",
+          "asset.module_07_collaboration_manual.scenario_registry.collaboration_clear_owner_deadline.v0_3",
+          "asset.module_07_collaboration_manual.scenario_registry.collaboration_share_safe_manual.v0_3"
+        ],
+        "deferred_to_pr": "BIG5-RESULT-SELECTOR-QA-REPAIR-01",
+        "runtime_impact": "blocked_for_strict_selector_gate",
+        "production_impact": "production_use_allowed remains false"
+      }
+    ]
+  },
+  "route_matrix_inventory": {
+    "version": "v0_1_1",
+    "shard_counts": {
+      "O1": 625,
+      "O2": 625,
+      "O3": 625,
+      "O4": 625,
+      "O5": 625
+    },
+    "total_rows": 3125,
+    "unique_combination_keys": 3125,
+    "canonical_profile_distribution": {
+      "complex_explorer_low_structure": 501,
+      "sensitive_independent_thinker": 494,
+      "quiet_deep_worker": 413,
+      "connective_coordinator": 368,
+      "vigilant_perfectionist": 360,
+      "overloaded_internalizer": 359,
+      "sharp_exploratory_driver": 332,
+      "orderly_supporter": 298
+    },
+    "canonical_profile_usage_distribution": {
+      "generic_band_route": 2759,
+      "nearest_route_only": 332,
+      "direct_profile_route": 34
+    },
+    "o59_canonical_row": {
+      "combination_key": "O3_C2_E2_A3_N4",
+      "nearest_canonical_profile_key": "sensitive_independent_thinker",
+      "nearest_canonical_profile_label_zh": "敏锐的独立思考者",
+      "canonical_profile_usage": "direct_profile_route",
+      "profile_label_public_allowed": true,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    "gap_summary": "Route matrix row count and O59 canonical row are present, but route matrix is not yet accepted as production selector input until selector refs and conflict resolution are separately validated."
+  },
+  "golden_case_inventory": {
+    "golden_case_count": 31,
+    "group_counts": {
+      "clear_signature": 6,
+      "high_tension_or_mixed": 7,
+      "balanced_or_diffuse": 3,
+      "facet_reframe": 5,
+      "safety_downgrade": 5,
+      "scenario_application": 4,
+      "canonical_o59_preview": 1
+    },
+    "o59_case_key": "golden_case_31_o59_canonical_preview",
+    "gap_summary": "O59 canonical preview case exists, but inventory and older planning copy still reference 30 golden cases; route/golden QA must normalize the acceptance count to 31."
+  },
+  "gap_register": [
+    {
+      "gap_id": "B5-GAP-STRICT-001",
+      "severity": "P0",
+      "area": "validator_harness",
+      "status": "open",
+      "finding": "Clean-main strict harness audit exits blocked because selector_validation_errors=3.",
+      "evidence": "cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi",
+      "introduced_by_current_pr": false,
+      "sidecar_required": true,
+      "deferred_to_pr": "BIG5-RESULT-SELECTOR-QA-REPAIR-01"
+    },
+    {
+      "gap_id": "B5-GAP-SEL-SHARE-001",
+      "severity": "P0",
+      "area": "share_safe_selector_contract",
+      "status": "open",
+      "finding": "Three module_07 collaboration selector assets are shareable=true but remain in scenario_registry.",
+      "introduced_by_current_pr": false,
+      "deferred_to_pr": "BIG5-RESULT-SELECTOR-QA-REPAIR-01"
+    },
+    {
+      "gap_id": "B5-GAP-GOLDEN-COUNT-001",
+      "severity": "P1",
+      "area": "golden_case_inventory",
+      "status": "open",
+      "finding": "selector-qa-policy package inventory says 30 golden cases while the golden case file contains 31 including O59 canonical preview.",
+      "introduced_by_current_pr": false,
+      "deferred_to_pr": "BIG5-RESULT-ROUTE-MATRIX-GOLDEN-CASE-QA-01"
+    },
+    {
+      "gap_id": "B5-GAP-ROUTE-QA-001",
+      "severity": "P1",
+      "area": "route_matrix_readiness",
+      "status": "open",
+      "finding": "3125 route rows and O59 row exist, but selector ref resolution and conflict resolution still need dedicated route/golden QA before staging selector input use.",
+      "introduced_by_current_pr": false,
+      "deferred_to_pr": "BIG5-RESULT-ROUTE-MATRIX-GOLDEN-CASE-QA-01"
+    },
+    {
+      "gap_id": "B5-GAP-NORM-UNAVAILABLE-001",
+      "severity": "P1",
+      "area": "norm_unavailable_coverage",
+      "status": "open",
+      "finding": "Selector inventory contains norm boundary assets, but norm-unavailable route/golden coverage is not yet proven as a staging selector input matrix.",
+      "introduced_by_current_pr": false,
+      "deferred_to_pr": "BIG5-RESULT-SELECTOR-QA-REPAIR-01"
+    },
+    {
+      "gap_id": "B5-GAP-LOW-QUALITY-001",
+      "severity": "P1",
+      "area": "low_quality_coverage",
+      "status": "open",
+      "finding": "Low-quality boundary assets exist, but low-quality selector conflict resolution remains only partially exercised by golden cases.",
+      "introduced_by_current_pr": false,
+      "deferred_to_pr": "BIG5-RESULT-SELECTOR-QA-REPAIR-01"
+    }
+  ],
+  "negative_guarantees": {
+    "generated_assets": false,
+    "cms_write": false,
+    "database_write": false,
+    "runtime_wrapper_change": false,
+    "production_gate_opened": false,
+    "frontend_fallback_added": false
+  }
+}

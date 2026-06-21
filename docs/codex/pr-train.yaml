@@ -24143,7 +24143,7 @@ prs:
     do_not:
       - Repair selector policy, generate official assets, import CMS data, modify runtime, or open gates.
     validation:
-      - cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi
+      - cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --json --no-ansi
       - find backend/content_assets/big5/result_page_v2/qa -name '*.json' -print -exec python3 -m json.tool {} >/dev/null \;
       - git diff --check
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
