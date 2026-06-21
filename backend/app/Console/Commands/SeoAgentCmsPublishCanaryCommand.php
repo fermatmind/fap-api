@@ -50,6 +50,7 @@ final class SeoAgentCmsPublishCanaryCommand extends Command
         {--package= : Path to a seo-agent-cms-draft-package-dry-run.v1 JSON artifact}
         {--draft-write-evidence= : Path to a seo-agent-controlled-cms-draft-write.v1 JSON artifact}
         {--limit=1 : Maximum CMS drafts to publish; first canary requires exactly 1}
+        {--subject-ref= : Optional exact package proposal subject_ref to publish}
         {--confirm-package-sha256= : Required package sha256 for execute mode}
         {--confirm-publish= : Exact confirmation phrase for execute mode when not using low-risk auto approval}
         {--auto-approve-low-risk : Execute one low-risk ContentPage canary without an exact publish phrase}
@@ -102,7 +103,7 @@ final class SeoAgentCmsPublishCanaryCommand extends Command
             ]));
         }
 
-        $proposal = $this->firstProposal($package);
+        $proposal = $this->selectedProposal($package, trim((string) $this->option('subject-ref')));
         if ($proposal === null) {
             return $this->finish($this->failureSummary('publish_candidate_missing', [
                 'package_sha256' => $packageSha,
@@ -243,7 +244,7 @@ final class SeoAgentCmsPublishCanaryCommand extends Command
      * @param  array<string, mixed>  $package
      * @return array<string, mixed>|null
      */
-    private function firstProposal(array $package): ?array
+    private function selectedProposal(array $package, string $subjectRef = ''): ?array
     {
         $items = $package['proposal_items'] ?? $package['draft_briefs'] ?? [];
         if (! is_array($items)) {
@@ -251,7 +252,7 @@ final class SeoAgentCmsPublishCanaryCommand extends Command
         }
 
         foreach ($items as $item) {
-            if (is_array($item)) {
+            if (is_array($item) && ($subjectRef === '' || (string) ($item['subject_ref'] ?? '') === $subjectRef)) {
                 return $item;
             }
         }

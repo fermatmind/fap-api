@@ -1231,6 +1231,20 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_seo_agent_cms_publish_auto_canary_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/SeoAgentCmsPublishAutoCanaryCommand.php',
+            'backend/app/Console/Kernel.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\SeoAgentCmsPublishAutoCanaryCommand;',
+            '+        SeoAgentCmsPublishAutoCanaryCommand::class,',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
+    }
+
     public function test_runtime_freeze_classifier_ignores_seo_agent_post_publish_search_submit_files(): void
     {
         $changed = [
@@ -3819,6 +3833,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSeoAgentCmsPublishAutoCanaryFile($file)) {
+                continue;
+            }
+
             if ($this->isSeoAgentPostPublishSearchSubmitFile($file)) {
                 continue;
             }
@@ -4427,6 +4445,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsSeoAgentWeeklyReadonlyRunnerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentWeeklyDraftWriteAutoOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentCmsPublishCanaryOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsSeoAgentCmsPublishAutoCanaryOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentPostPublishSearchSubmitOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentGscOpportunityAutoDraftOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                 )
@@ -5140,6 +5159,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return in_array($file, [
             'backend/app/Console/Commands/SeoAgentCmsPublishCanaryCommand.php',
+        ], true);
+    }
+
+    private function isSeoAgentCmsPublishAutoCanaryFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/SeoAgentCmsPublishAutoCanaryCommand.php',
         ], true);
     }
 
@@ -6983,6 +7009,28 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if (preg_match('/\bSeoAgentCmsPublishCanaryCommand\b/u', $line) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsSeoAgentCmsPublishAutoCanaryOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            if (preg_match('/\b(MBTI|Mbti|BigFive|Big5|Prewarm|ResultPage|Report)\b/u', $line) === 1) {
+                return false;
+            }
+
+            if (preg_match('/\bSeoAgentCmsPublishAutoCanaryCommand\b/u', $line) !== 1) {
                 return false;
             }
         }
