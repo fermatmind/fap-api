@@ -1,0 +1,59 @@
+{
+  "schema_version": "fap.riasec.result_page_v2.route_matrix.canonical_profiles.v0.1",
+  "task_id": "RIASEC-RESULT-ROUTE-MATRIX-GOLDEN-CASE-QA-01",
+  "created_at": "2026-06-21T16:50:00Z",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "content_authority": "backend",
+  "cms_write_performed": false,
+  "runtime_change_performed": false,
+  "frontend_fallback_allowed": false,
+  "private_payload_exported": false,
+  "canonical_profile_count": 7,
+  "profiles": [
+    {
+      "canonical_profile_id": "canonical.clear_primary.R.qa_v0_1",
+      "group_key": "clear_primary_code",
+      "route_id": "route.clear_primary.R.qa_v0_1",
+      "expected_behavior": "route-specific modules omitted until selector assets exist"
+    },
+    {
+      "canonical_profile_id": "canonical.near_tie.R_I.qa_v0_1",
+      "group_key": "near_tie_pair",
+      "route_id": "route.near_tie.R_I.qa_v0_1",
+      "expected_behavior": "near-tie modules omitted until selector assets exist"
+    },
+    {
+      "canonical_profile_id": "canonical.top3.I_A_S.qa_v0_1",
+      "group_key": "top3_chain",
+      "route_id": "route.top3.I_A_S.qa_v0_1",
+      "expected_behavior": "top3 modules omitted until selector assets exist"
+    },
+    {
+      "canonical_profile_id": "canonical.low_quality.boundary.qa_v0_1",
+      "group_key": "low_quality",
+      "route_id": "route.low_quality.boundary.qa_v0_1",
+      "expected_behavior": "boundary-only fail-closed"
+    },
+    {
+      "canonical_profile_id": "canonical.share_safe.generic.qa_v0_1",
+      "group_key": "share_safe",
+      "route_id": "route.share_safe.generic.qa_v0_1",
+      "expected_behavior": "share-safe selector candidate resolves without private payload"
+    },
+    {
+      "canonical_profile_id": "canonical.norm_unavailable.boundary.qa_v0_1",
+      "group_key": "norm_unavailable",
+      "route_id": "route.norm_unavailable.boundary.qa_v0_1",
+      "expected_behavior": "method-boundary-only fail-closed"
+    },
+    {
+      "canonical_profile_id": "canonical.route_miss.qa_v0_1",
+      "group_key": "route_miss",
+      "route_id": "route.miss.qa_v0_1",
+      "expected_behavior": "omit result_page_v2 modules without frontend fallback"
+    }
+  ]
+}

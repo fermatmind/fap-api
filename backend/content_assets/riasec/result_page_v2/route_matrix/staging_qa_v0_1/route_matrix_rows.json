@@ -1,0 +1,91 @@
+{
+  "schema_version": "fap.riasec.result_page_v2.route_matrix.rows.v0.1",
+  "task_id": "RIASEC-RESULT-ROUTE-MATRIX-GOLDEN-CASE-QA-01",
+  "matrix_id": "riasec_result_page_v2_route_matrix_staging_qa_v0_1",
+  "created_at": "2026-06-21T16:50:00Z",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "content_authority": "backend",
+  "cms_write_performed": false,
+  "runtime_change_performed": false,
+  "frontend_fallback_allowed": false,
+  "private_payload_exported": false,
+  "row_count": 7,
+  "route_rows": [
+    {
+      "route_id": "route.clear_primary.R.qa_v0_1",
+      "group_key": "clear_primary_code",
+      "profile_code": "R",
+      "quality_state": "acceptable",
+      "reading_mode": "standard",
+      "surface": "result_page",
+      "expected_selector_refs": [],
+      "resolution_status": "fail_closed_missing_selector_asset"
+    },
+    {
+      "route_id": "route.near_tie.R_I.qa_v0_1",
+      "group_key": "near_tie_pair",
+      "profile_code": "RI",
+      "quality_state": "acceptable",
+      "reading_mode": "standard",
+      "surface": "result_page",
+      "expected_selector_refs": [],
+      "resolution_status": "fail_closed_missing_selector_asset"
+    },
+    {
+      "route_id": "route.top3.I_A_S.qa_v0_1",
+      "group_key": "top3_chain",
+      "profile_code": "IAS",
+      "quality_state": "acceptable",
+      "reading_mode": "deep",
+      "surface": "result_page",
+      "expected_selector_refs": [],
+      "resolution_status": "fail_closed_missing_selector_asset"
+    },
+    {
+      "route_id": "route.low_quality.boundary.qa_v0_1",
+      "group_key": "low_quality",
+      "profile_code": "SCE",
+      "quality_state": "low_quality",
+      "reading_mode": "quick",
+      "surface": "result_page",
+      "expected_selector_refs": [],
+      "resolution_status": "fail_closed_boundary_only"
+    },
+    {
+      "route_id": "route.share_safe.generic.qa_v0_1",
+      "group_key": "share_safe",
+      "profile_code": "RIASEC",
+      "quality_state": "acceptable",
+      "reading_mode": "quick",
+      "surface": "share",
+      "expected_selector_refs": [
+        "candidate.share_safety_registry.share_boundary_summary.final.v0_1"
+      ],
+      "resolution_status": "resolved_staging_candidate"
+    },
+    {
+      "route_id": "route.norm_unavailable.boundary.qa_v0_1",
+      "group_key": "norm_unavailable",
+      "profile_code": "ACE",
+      "quality_state": "acceptable",
+      "norm_status": "unavailable",
+      "reading_mode": "standard",
+      "surface": "result_page",
+      "expected_selector_refs": [],
+      "resolution_status": "fail_closed_method_boundary_only"
+    },
+    {
+      "route_id": "route.miss.qa_v0_1",
+      "group_key": "route_miss",
+      "profile_code": "unknown",
+      "quality_state": "acceptable",
+      "reading_mode": "standard",
+      "surface": "result_page",
+      "expected_selector_refs": [],
+      "resolution_status": "fail_closed_omit_result_page_v2_modules"
+    }
+  ]
+}
