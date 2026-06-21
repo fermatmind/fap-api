@@ -320,10 +320,13 @@ class PersonalityController extends Controller
     private function comparisonMeta(string $baseTypeCode, string $locale, ?array $comparisonOverlay = null): array
     {
         $overlaySeo = is_array($comparisonOverlay['seo'] ?? null) ? $comparisonOverlay['seo'] : [];
-        $title = $this->normalizedString($overlaySeo['seo_title'] ?? null) ?? ($locale === 'zh-CN'
+        $title = $this->normalizedString($overlaySeo['seo_title'] ?? null)
+            ?? $this->normalizedString($overlaySeo['title'] ?? null)
+            ?? ($locale === 'zh-CN'
             ? $baseTypeCode.'-A 和 '.$baseTypeCode.'-T 区别：特点、职业、爱情与稀有度'
             : $baseTypeCode.'-A vs '.$baseTypeCode.'-T: Traits, Careers, Love & Rarity');
         $description = $this->normalizedString($overlaySeo['seo_description'] ?? null)
+            ?? $this->normalizedString($overlaySeo['description'] ?? null)
             ?? $this->normalizedString($overlaySeo['quick_answer_summary'] ?? null)
             ?? ($locale === 'zh-CN'
             ? '对比 '.$baseTypeCode.'-A 与 '.$baseTypeCode.'-T 的 A/T 区别、核心特点、爱情关系、适合职业、优势盲点、稀有度，并通过 MBTI 测试确认自己的类型。'
@@ -498,6 +501,7 @@ class PersonalityController extends Controller
             'faq' => is_array($payload['faq'] ?? null) ? array_values((array) $payload['faq']) : [],
             'internal_links' => is_array($payload['internal_links'] ?? null) ? array_values((array) $payload['internal_links']) : [],
             'source' => $this->normalizedString($payload['source'] ?? null) ?? 'mbti64_comparison_a_vs_t',
+            'snapshot_key' => $this->normalizedString($payload['snapshot_key'] ?? null),
         ];
     }
 
@@ -518,31 +522,42 @@ class PersonalityController extends Controller
         $seo = is_array($comparisonOverlay['seo'] ?? null) ? $comparisonOverlay['seo'] : [];
         $content = is_array($comparisonOverlay['content'] ?? null) ? $comparisonOverlay['content'] : [];
         $blocks = $this->mbti64PromotedComparisonBlocks($content);
-        if ($blocks === []) {
+        $title = $this->normalizedString($seo['h1'] ?? null)
+            ?? $this->normalizedString($seo['seo_title'] ?? null)
+            ?? $this->normalizedString($seo['title'] ?? null);
+        $description = $this->normalizedString($seo['quick_answer_summary'] ?? null)
+            ?? $this->normalizedString($content['quick_answer'] ?? null)
+            ?? $this->normalizedString($seo['seo_description'] ?? null)
+            ?? $this->normalizedString($seo['description'] ?? null);
+        $faq = $this->mbti64PromotedComparisonFaq($comparisonOverlay);
+        $internalLinks = $this->mbti64PromotedComparisonInternalLinks($comparisonOverlay, $locale);
+
+        if ($blocks === [] && $title === null && $description === null && $faq === [] && $internalLinks === []) {
             return $projection;
         }
 
+        $snapshotKey = $this->normalizedString($comparisonOverlay['snapshot_key'] ?? null)
+            ?? 'mbti64_comparison_draft_v2_1';
+
         $projection['comparison_contract_version'] = 'mbti.at_comparison.v1.mbti64_overlay';
-        $projection['title'] = $this->normalizedString($seo['h1'] ?? null)
-            ?? $this->normalizedString($seo['seo_title'] ?? null)
-            ?? ($projection['title'] ?? null);
-        $projection['description'] = $this->normalizedString($seo['quick_answer_summary'] ?? null)
-            ?? $this->normalizedString($content['quick_answer'] ?? null)
-            ?? $this->normalizedString($seo['seo_description'] ?? null)
-            ?? ($projection['description'] ?? null);
-        $projection['comparison_blocks'] = $blocks;
+        $projection['title'] = $title ?? ($projection['title'] ?? null);
+        $projection['description'] = $description ?? ($projection['description'] ?? null);
+        if ($blocks !== []) {
+            $projection['comparison_blocks'] = $blocks;
+        }
         $projection['source_refs'] = array_values(array_unique(array_merge(
             (array) ($projection['source_refs'] ?? []),
             [
                 'personality_profile_sections.mbti64_comparison_a_vs_t',
-                'mbti64_comparison_draft_v2_1',
+                $snapshotKey,
             ]
         )));
-        $projection['faq'] = $this->mbti64PromotedComparisonFaq($comparisonOverlay);
-        $projection['internal_links'] = $this->mbti64PromotedComparisonInternalLinks($comparisonOverlay, $locale);
+        $projection['faq'] = $faq;
+        $projection['internal_links'] = $internalLinks;
         $projection['overlay_source'] = [
             'section_key' => 'mbti64_comparison_a_vs_t',
             'source' => $comparisonOverlay['source'] ?? 'mbti64_comparison_a_vs_t',
+            'snapshot_key' => $snapshotKey,
             'base_type_code' => $baseTypeCode,
         ];
 

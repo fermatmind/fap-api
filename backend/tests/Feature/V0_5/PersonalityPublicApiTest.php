@@ -885,6 +885,139 @@ final class PersonalityPublicApiTest extends TestCase
         self::assertStringNotContainsString('Old generated assertive difference.', (string) $response->getContent());
     }
 
+    public function test_personality_comparison_endpoint_reads_agent_projection_overlay_without_comparison_blocks(): void
+    {
+        config(['app.frontend_url' => 'https://fermatmind.com']);
+
+        $profile = $this->createProfile([
+            'type_code' => 'INTJ',
+            'slug' => 'intj',
+            'locale' => 'en',
+            'title' => 'INTJ Personality Type',
+            'type_name' => 'Architect',
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => now()->subMinute(),
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+        ]);
+        $this->createSeoMeta($profile, [
+            'seo_title' => 'INTJ Personality Type',
+            'seo_description' => 'Explore INTJ traits.',
+            'robots' => 'index,follow',
+        ]);
+
+        $assertive = $this->createVariant($profile, [
+            'canonical_type_code' => 'INTJ',
+            'variant_code' => 'A',
+            'runtime_type_code' => 'INTJ-A',
+            'type_name' => 'Architect Assertive',
+            'is_published' => true,
+            'published_at' => now()->subMinute(),
+        ]);
+        $this->createVariantSeoMeta($assertive, [
+            'seo_title' => 'Old INTJ-A title',
+            'seo_description' => 'Old INTJ-A description.',
+        ]);
+        PersonalityProfileVariantSection::query()->create([
+            'personality_profile_variant_id' => (int) $assertive->id,
+            'section_key' => 'traits.at_difference',
+            'render_variant' => 'rich_text',
+            'body_md' => 'Old generated assertive difference kept as fallback.',
+            'sort_order' => 31,
+            'is_enabled' => true,
+        ]);
+
+        $turbulent = $this->createVariant($profile, [
+            'canonical_type_code' => 'INTJ',
+            'variant_code' => 'T',
+            'runtime_type_code' => 'INTJ-T',
+            'type_name' => 'Architect Turbulent',
+            'is_published' => true,
+            'published_at' => now()->subMinute(),
+        ]);
+        $this->createVariantSeoMeta($turbulent, [
+            'seo_title' => 'Old INTJ-T title',
+            'seo_description' => 'Old INTJ-T description.',
+        ]);
+        PersonalityProfileVariantSection::query()->create([
+            'personality_profile_variant_id' => (int) $turbulent->id,
+            'section_key' => 'traits.at_difference',
+            'render_variant' => 'rich_text',
+            'body_md' => 'Old generated turbulent difference kept as fallback.',
+            'sort_order' => 31,
+            'is_enabled' => true,
+        ]);
+
+        PersonalityProfileSection::query()->create([
+            'profile_id' => (int) $profile->id,
+            'section_key' => 'mbti64_comparison_a_vs_t',
+            'title' => 'INTJ-A vs INTJ-T: Agent Projection',
+            'render_variant' => 'rich_text',
+            'body_md' => 'INTJ-A and INTJ-T share the Architect core.',
+            'payload_json' => [
+                'snapshot_key' => 'mbti64_agent_projection_draft_v1',
+                'source' => 'mbti64_agent_projection_draft_v1',
+                'seo' => [
+                    'title' => 'INTJ-A vs INTJ-T: Confidence, Stress and Work Style | FermatMind',
+                    'description' => 'Compare INTJ-A and INTJ-T through strategy, independence, confidence, stress recovery and feedback style.',
+                ],
+                'content' => [
+                    'quick_answer' => 'INTJ-A and INTJ-T share the same Architect core. The useful difference is how each style handles confidence, pressure, feedback and self-correction.',
+                ],
+                'faq' => [
+                    [
+                        'id' => 'intj-a-vs-intj-t-main-difference',
+                        'question' => 'What is the main INTJ-A vs INTJ-T difference?',
+                        'answer' => 'The main difference is confidence style and pressure recovery, not a better or worse INTJ type.',
+                    ],
+                ],
+                'internal_links' => [
+                    [
+                        'href' => '/en/personality/intj-a',
+                        'anchor_text' => 'INTJ-A profile',
+                        'role' => 'assertive_detail',
+                        'safe_public_route' => true,
+                    ],
+                    [
+                        'href' => '/en/results/lookup',
+                        'anchor_text' => 'Private result lookup',
+                        'role' => 'unsafe_result_lookup',
+                        'safe_public_route' => true,
+                    ],
+                ],
+            ],
+            'sort_order' => 920,
+            'is_enabled' => true,
+        ]);
+
+        $response = $this->getJson('/api/v0.5/personality/comparisons/intj-a-vs-intj-t?locale=en');
+
+        $response->assertOk()
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('seo_meta.seo_title', 'INTJ-A vs INTJ-T: Confidence, Stress and Work Style | FermatMind')
+            ->assertJsonPath('seo_meta.seo_description', 'Compare INTJ-A and INTJ-T through strategy, independence, confidence, stress recovery and feedback style.')
+            ->assertJsonPath('seo_surface_v1.title', 'INTJ-A vs INTJ-T: Confidence, Stress and Work Style | FermatMind')
+            ->assertJsonPath('seo_surface_v1.description', 'Compare INTJ-A and INTJ-T through strategy, independence, confidence, stress recovery and feedback style.')
+            ->assertJsonPath('comparison_public_projection_v1.comparison_contract_version', 'mbti.at_comparison.v1.mbti64_overlay')
+            ->assertJsonPath('comparison_public_projection_v1.title', 'INTJ-A vs INTJ-T: Confidence, Stress and Work Style | FermatMind')
+            ->assertJsonPath('comparison_public_projection_v1.description', 'INTJ-A and INTJ-T share the same Architect core. The useful difference is how each style handles confidence, pressure, feedback and self-correction.')
+            ->assertJsonPath('comparison_public_projection_v1.comparison_blocks.0.key', 'at_difference')
+            ->assertJsonPath('comparison_public_projection_v1.faq.0.question', 'What is the main INTJ-A vs INTJ-T difference?')
+            ->assertJsonPath('comparison_public_projection_v1.internal_links.0.href', '/en/personality/intj-a')
+            ->assertJsonPath('comparison_public_projection_v1.overlay_source.snapshot_key', 'mbti64_agent_projection_draft_v1')
+            ->assertJsonPath('answer_surface_v1.summary_blocks.0.body', 'INTJ-A and INTJ-T share the same Architect core. The useful difference is how each style handles confidence, pressure, feedback and self-correction.')
+            ->assertJsonPath('answer_surface_v1.faq_blocks.0.question', 'What is the main INTJ-A vs INTJ-T difference?')
+            ->assertJsonPath('answer_surface_v1.next_step_blocks.0.href', '/en/personality/intj-a');
+
+        self::assertContains('mbti64_agent_projection_draft_v1', (array) $response->json('comparison_public_projection_v1.source_refs'));
+        self::assertStringContainsString(
+            'Old generated assertive difference kept as fallback.',
+            (string) $response->getContent(),
+        );
+        self::assertStringNotContainsString('/en/results/lookup', (string) $response->getContent());
+    }
+
     public function test_personality_comparison_endpoint_requires_complete_published_pair(): void
     {
         $profile = $this->createProfile([
