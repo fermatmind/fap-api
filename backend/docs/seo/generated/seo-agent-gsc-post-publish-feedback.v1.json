@@ -1,0 +1,70 @@
+{
+  "version": "seo-agent-gsc-post-publish-feedback.v1",
+  "task": "SEO-AGENT-GSC-POST-PUBLISH-FEEDBACK-01",
+  "command": "php artisan seo-agent:gsc-post-publish-feedback",
+  "input_schemas": [
+    "seo-agent-cms-publish-canary.v1",
+    "seo-agent-cms-publish-auto-canary.v1"
+  ],
+  "allowed_windows_days": [
+    7,
+    14,
+    28
+  ],
+  "read_models": [
+    "seo_intel.seo_urls",
+    "seo_intel.seo_gsc_daily"
+  ],
+  "classification_values": [
+    "improved",
+    "flat",
+    "declined",
+    "insufficient_data"
+  ],
+  "row_gate": {
+    "source_engine": "google",
+    "data_origin": "live_gsc_api",
+    "data_state": "final",
+    "required_fields": [
+      "report_date",
+      "canonical_url_hash",
+      "query_hash",
+      "clicks",
+      "impressions"
+    ]
+  },
+  "output_schema": {
+    "schema_version": "seo-agent-gsc-post-publish-feedback.v1",
+    "target_fields": [
+      "subject_ref",
+      "safe_path",
+      "canonical_url_hash",
+      "published_date",
+      "window_days",
+      "source_gate",
+      "before",
+      "after",
+      "classification"
+    ]
+  },
+  "negative_guarantees": {
+    "google_search_console_live_api_call": false,
+    "google_indexing_api_call": false,
+    "search_channel_enqueue": false,
+    "search_channel_submit": false,
+    "cms_write": false,
+    "cms_publish": false,
+    "database_write": false,
+    "scheduler_activation": false,
+    "queue_worker_activation": false,
+    "frontend_mutation": false,
+    "canonical_url_exposed": false,
+    "query_text_exposed": false
+  },
+  "deferred": [
+    "automatic rollback decisions",
+    "automation pause state mutation",
+    "live GSC API refresh",
+    "Google Indexing live API"
+  ]
+}

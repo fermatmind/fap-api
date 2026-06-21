@@ -174,6 +174,7 @@ use App\Console\Commands\SeoAgentCmsDraftWriteCommand;
 use App\Console\Commands\SeoAgentCmsPublishAutoCanaryCommand;
 use App\Console\Commands\SeoAgentCmsPublishCanaryCommand;
 use App\Console\Commands\SeoAgentGscOpportunityAutoDraftCommand;
+use App\Console\Commands\SeoAgentGscPostPublishFeedbackCommand;
 use App\Console\Commands\SeoAgentPostPublishIndexnowAutoCommand;
 use App\Console\Commands\SeoAgentPostPublishSearchSubmitCommand;
 use App\Console\Commands\SeoIntelSearchChannelQueueCommand;
@@ -382,6 +383,7 @@ class Kernel extends ConsoleKernel
         SeoAgentCmsPublishAutoCanaryCommand::class,
         SeoAgentCmsPublishCanaryCommand::class,
         SeoAgentGscOpportunityAutoDraftCommand::class,
+        SeoAgentGscPostPublishFeedbackCommand::class,
         SeoAgentPostPublishIndexnowAutoCommand::class,
         SeoAgentPostPublishSearchSubmitCommand::class,
         SeoAgentRuntimeSeoQaScanCommand::class,
