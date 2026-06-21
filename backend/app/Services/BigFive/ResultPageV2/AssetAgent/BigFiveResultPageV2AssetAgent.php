@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\BigFive\ResultPageV2\AssetAgent;
 
+use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2Contract;
 use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2SelectorAssetContract;
 use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2SelectorAssetValidator;
 use App\Services\BigFive\ResultPageV2\ContentAssets\BigFiveV2AssetPackageLoader;
@@ -15,6 +16,8 @@ use SplFileInfo;
 final class BigFiveResultPageV2AssetAgent
 {
     public const SCHEMA_VERSION = 'fap.big5.result_page_v2.asset_agent.audit.v0.1';
+
+    private const OPS_REPORT_SCHEMA_VERSION = 'fap.big5.result_page_v2.asset_agent.ops_report.v0.1';
 
     public const DEFAULT_ARTIFACT_RELATIVE_DIR = 'artifacts/big5_result_page_v2_agent';
 
@@ -93,7 +96,10 @@ final class BigFiveResultPageV2AssetAgent
         $assets = $this->collectSelectorAssets($contentAssetRoot);
         $validationReport = $this->buildValidationReport($assets);
         $safetyReport = $this->buildSafetyReport($assets);
-        $goNoGo = $this->buildGoNoGo($inventory, $validationReport, $safetyReport);
+        $opsReport = $this->buildOpsReport($inventory, $validationReport, $safetyReport, $assets, $artifactDir, $runId);
+        $safetyReport = $this->withOpsReport($safetyReport, $opsReport);
+        $qaSummary = $this->buildQaSummary($validationReport, $safetyReport, $opsReport);
+        $goNoGo = $this->buildGoNoGo($inventory, $validationReport, $safetyReport, $opsReport);
         $strictFailures = $this->strictFailures($inventory, $validationReport, $safetyReport);
 
         $this->ensureDirectory($artifactDir);
@@ -102,6 +108,8 @@ final class BigFiveResultPageV2AssetAgent
             'input_inventory.json' => $this->writeJson($artifactDir.'/input_inventory.json', $inventory),
             'validation_report.json' => $this->writeJson($artifactDir.'/validation_report.json', $validationReport),
             'safety_report.json' => $this->writeJson($artifactDir.'/safety_report.json', $safetyReport),
+            'qa_eval_summary.json' => $this->writeJson($artifactDir.'/qa_eval_summary.json', $qaSummary),
+            'ops_report_summary.json' => $this->writeJson($artifactDir.'/ops_report_summary.json', $opsReport),
             'go_no_go.md' => $this->writeText($artifactDir.'/go_no_go.md', $goNoGo),
         ];
 
@@ -120,6 +128,7 @@ final class BigFiveResultPageV2AssetAgent
                 'leak_hit_count' => (int) ($safetyReport['leak_scan']['hit_count'] ?? 0),
                 'source_ledger_valid' => (bool) ($inventory['source_ledger']['valid'] ?? false),
                 'asset_inventory_valid' => (bool) ($inventory['asset_inventory']['valid'] ?? false),
+                'ready_for_pilot' => false,
                 'ready_for_runtime' => false,
                 'ready_for_production' => false,
             ],
@@ -217,8 +226,271 @@ final class BigFiveResultPageV2AssetAgent
      * @param  array<string,mixed>  $inventory
      * @param  array<string,mixed>  $validationReport
      * @param  array<string,mixed>  $safetyReport
+     * @param  list<array<string,mixed>>  $assets
+     * @return array<string,mixed>
      */
-    private function buildGoNoGo(array $inventory, array $validationReport, array $safetyReport): string
+    private function buildOpsReport(
+        array $inventory,
+        array $validationReport,
+        array $safetyReport,
+        array $assets,
+        string $artifactDir,
+        string $runId,
+    ): array {
+        $metrics = $this->opsMetrics($inventory, $validationReport, $safetyReport, $assets);
+        $previous = $this->previousOpsReport($artifactDir, $runId);
+
+        return [
+            'schema_version' => self::OPS_REPORT_SCHEMA_VERSION,
+            'task' => 'ops_report_standardization',
+            'runtime_use' => 'staging_only',
+            'production_use_allowed' => false,
+            'run_id' => $runId,
+            'metric_schema' => $this->opsMetricSchema(),
+            'metrics' => $metrics,
+            'diff_summary' => $this->opsDiffSummary($metrics, $previous),
+            'negative_guarantees' => $this->negativeGuarantees(),
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     * @param  array<string,mixed>  $opsReport
+     * @return array<string,mixed>
+     */
+    private function withOpsReport(array $payload, array $opsReport): array
+    {
+        $payload['ops_report_schema_version'] = self::OPS_REPORT_SCHEMA_VERSION;
+        $payload['ops_metrics'] = $opsReport['metrics'] ?? [];
+        $payload['ops_diff_summary'] = $opsReport['diff_summary'] ?? [];
+
+        return $payload;
+    }
+
+    /**
+     * @param  array<string,mixed>  $validationReport
+     * @param  array<string,mixed>  $safetyReport
+     * @param  array<string,mixed>  $opsReport
+     * @return array<string,mixed>
+     */
+    private function buildQaSummary(array $validationReport, array $safetyReport, array $opsReport): array
+    {
+        return [
+            'schema_version' => self::SCHEMA_VERSION,
+            'task' => 'qa_eval_runner',
+            'runtime_use' => 'staging_only',
+            'production_use_allowed' => false,
+            'selector_validation' => [
+                'asset_count' => (int) ($validationReport['asset_count'] ?? 0),
+                'error_count' => (int) ($validationReport['error_count'] ?? 0),
+            ],
+            'leak_scan' => $safetyReport['leak_scan'] ?? [],
+            'ops_report_schema_version' => self::OPS_REPORT_SCHEMA_VERSION,
+            'ops_metrics' => $opsReport['metrics'] ?? [],
+            'ops_diff_summary' => $opsReport['diff_summary'] ?? [],
+            'negative_guarantees' => $this->negativeGuarantees(),
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $inventory
+     * @param  array<string,mixed>  $validationReport
+     * @param  array<string,mixed>  $safetyReport
+     * @param  list<array<string,mixed>>  $assets
+     * @return array<string,mixed>
+     */
+    private function opsMetrics(array $inventory, array $validationReport, array $safetyReport, array $assets): array
+    {
+        $counts = $this->assetCounts($assets);
+        $strictFailures = $this->strictFailures($inventory, $validationReport, $safetyReport);
+        $shareSafetyMissing = array_values(array_filter([
+            ((int) ($counts['registry_key']['share_safety_registry'] ?? 0)) > 0 ? null : 'share_safety_registry',
+            ((int) ($counts['reading_mode']['share_safe'] ?? 0)) > 0 ? null : 'share_safe_reading_mode',
+        ]));
+
+        return [
+            'p0_blocker_count' => count($strictFailures),
+            'registry_gap_count' => count($this->missingValues(
+                BigFiveResultPageV2SelectorAssetContract::REGISTRY_KEYS,
+                (array) ($counts['registry_key'] ?? [])
+            )),
+            'module_gap_count' => count($this->missingValues(
+                BigFiveResultPageV2Contract::MODULE_KEYS,
+                (array) ($counts['module_key'] ?? [])
+            )),
+            'scope_gap_count' => count($this->missingValues(
+                BigFiveResultPageV2Contract::INTERPRETATION_SCOPES,
+                (array) ($counts['scope'] ?? [])
+            )),
+            'reading_mode_gap_count' => count($this->missingValues(
+                BigFiveResultPageV2SelectorAssetContract::READING_MODES,
+                (array) ($counts['reading_mode'] ?? [])
+            )),
+            'share_safety_missing_count' => count($shareSafetyMissing),
+            'share_safety_registry_count' => (int) ($counts['registry_key']['share_safety_registry'] ?? 0),
+            'share_safe_reading_mode_count' => (int) ($counts['reading_mode']['share_safe'] ?? 0),
+            'shareable_true_count' => count(array_filter($assets, static fn (array $asset): bool => ($asset['shareable'] ?? false) === true)),
+            'norm_unavailable_missing' => ((int) ($counts['scope']['norm_unavailable'] ?? 0)) === 0,
+            'norm_unavailable_count' => (int) ($counts['scope']['norm_unavailable'] ?? 0),
+            'low_quality_missing' => ((int) ($counts['scope']['low_quality'] ?? 0)) === 0,
+            'low_quality_count' => (int) ($counts['scope']['low_quality'] ?? 0),
+            'forbidden_leak_hit_count' => (int) data_get($safetyReport, 'leak_scan.hit_count', 0),
+            'validation_error_count' => (int) ($validationReport['error_count'] ?? 0),
+            'asset_record_count' => count($assets),
+            'ready_for_pilot' => false,
+            'ready_for_runtime' => false,
+            'ready_for_production' => false,
+        ];
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $assets
+     * @return array<string,array<string,int>>
+     */
+    private function assetCounts(array $assets): array
+    {
+        $counts = [
+            'registry_key' => [],
+            'module_key' => [],
+            'scope' => [],
+            'reading_mode' => [],
+        ];
+
+        foreach ($assets as $asset) {
+            foreach (['registry_key', 'module_key', 'scope'] as $key) {
+                $value = $asset[$key] ?? null;
+                if (is_string($value) && $value !== '') {
+                    $counts[$key][$value] = ($counts[$key][$value] ?? 0) + 1;
+                }
+            }
+            foreach ((array) ($asset['reading_modes'] ?? []) as $mode) {
+                if (is_string($mode) && $mode !== '') {
+                    $counts['reading_mode'][$mode] = ($counts['reading_mode'][$mode] ?? 0) + 1;
+                }
+            }
+        }
+
+        return $counts;
+    }
+
+    /**
+     * @param  list<string>  $expected
+     * @param  array<string,int>  $observed
+     * @return list<string>
+     */
+    private function missingValues(array $expected, array $observed): array
+    {
+        return array_values(array_filter(
+            $expected,
+            static fn (string $value): bool => ! array_key_exists($value, $observed)
+        ));
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function opsMetricSchema(): array
+    {
+        return [
+            'schema_version' => self::OPS_REPORT_SCHEMA_VERSION,
+            'required_metric_keys' => [
+                'p0_blocker_count',
+                'registry_gap_count',
+                'module_gap_count',
+                'scope_gap_count',
+                'reading_mode_gap_count',
+                'share_safety_missing_count',
+                'norm_unavailable_missing',
+                'low_quality_missing',
+                'forbidden_leak_hit_count',
+                'ready_for_pilot',
+                'ready_for_runtime',
+                'ready_for_production',
+            ],
+            'ready_flag_defaults' => [
+                'ready_for_pilot' => false,
+                'ready_for_runtime' => false,
+                'ready_for_production' => false,
+            ],
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $currentMetrics
+     * @param  array<string,mixed>|null  $previousReport
+     * @return array<string,mixed>
+     */
+    private function opsDiffSummary(array $currentMetrics, ?array $previousReport): array
+    {
+        if ($previousReport === null) {
+            return [
+                'comparison_status' => 'no_previous_run',
+                'previous_run_id' => null,
+                'metric_deltas' => [],
+            ];
+        }
+
+        $previousMetrics = (array) ($previousReport['metrics'] ?? []);
+        $deltas = [];
+        foreach ($this->opsMetricSchema()['required_metric_keys'] as $key) {
+            $current = $currentMetrics[$key] ?? null;
+            $previous = $previousMetrics[$key] ?? null;
+            $deltas[$key] = [
+                'previous' => $previous,
+                'current' => $current,
+                'delta' => (is_numeric($current) && is_numeric($previous))
+                    ? ((int) $current - (int) $previous)
+                    : null,
+                'changed' => $current !== $previous,
+            ];
+        }
+
+        return [
+            'comparison_status' => 'compared',
+            'previous_run_id' => (string) ($previousReport['run_id'] ?? ''),
+            'metric_deltas' => $deltas,
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>|null
+     */
+    private function previousOpsReport(string $artifactDir, string $runId): ?array
+    {
+        $artifactRoot = dirname($artifactDir);
+        if (! is_dir($artifactRoot)) {
+            return null;
+        }
+
+        $candidates = [];
+        foreach (scandir($artifactRoot) ?: [] as $entry) {
+            if ($entry === '.' || $entry === '..' || $entry === $runId) {
+                continue;
+            }
+
+            $path = $artifactRoot.'/'.$entry.'/ops_report_summary.json';
+            if (is_file($path)) {
+                $candidates[$path] = filemtime($path) ?: 0;
+            }
+        }
+
+        if ($candidates === []) {
+            return null;
+        }
+
+        arsort($candidates);
+        $path = (string) array_key_first($candidates);
+        $decoded = json_decode((string) file_get_contents($path), true);
+
+        return is_array($decoded) ? $decoded : null;
+    }
+
+    /**
+     * @param  array<string,mixed>  $inventory
+     * @param  array<string,mixed>  $validationReport
+     * @param  array<string,mixed>  $safetyReport
+     */
+    private function buildGoNoGo(array $inventory, array $validationReport, array $safetyReport, array $opsReport): string
     {
         $lines = [
             '# Big Five Result Page V2 Asset Agent Harness GO/NO-GO',
@@ -238,14 +510,41 @@ final class BigFiveResultPageV2AssetAgent
             '- selector_validation_errors: '.(string) ($validationReport['error_count'] ?? 0),
             '- leak_hit_count: '.(string) data_get($safetyReport, 'leak_scan.hit_count', 0),
             '',
+            '## Ops Metrics',
+            '',
+        ];
+
+        foreach ($this->opsMetricSchema()['required_metric_keys'] as $key) {
+            $lines[] = '- '.$key.': '.$this->markdownScalar(data_get($opsReport, 'metrics.'.$key));
+        }
+
+        $lines = array_merge($lines, [
+            '',
+            '## Diff Summary',
+            '',
+            '- comparison_status: '.(string) data_get($opsReport, 'diff_summary.comparison_status', 'unknown'),
+            '- previous_run_id: '.$this->markdownScalar(data_get($opsReport, 'diff_summary.previous_run_id')),
+            '',
             '## Deferred',
             '',
             '- No selector assets are generated.',
             '- No CMS import is performed.',
             '- No runtime wrapper, pilot gate, production import gate, or rollout gate is changed.',
-        ];
+        ]);
 
         return implode(PHP_EOL, $lines).PHP_EOL;
+    }
+
+    private function markdownScalar(mixed $value): string
+    {
+        if (is_bool($value)) {
+            return $value ? 'true' : 'false';
+        }
+        if ($value === null) {
+            return 'null';
+        }
+
+        return (string) $value;
     }
 
     /**

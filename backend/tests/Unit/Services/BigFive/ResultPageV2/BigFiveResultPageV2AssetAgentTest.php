@@ -26,6 +26,8 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
                 'input_inventory.json',
                 'validation_report.json',
                 'safety_report.json',
+                'qa_eval_summary.json',
+                'ops_report_summary.json',
                 'go_no_go.md',
             ] as $filename) {
                 $this->assertFileExists($runDir.'/'.$filename);
@@ -51,15 +53,87 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
             $goNoGo = (string) file_get_contents($runDir.'/go_no_go.md');
             $this->assertStringContainsString('ready_for_runtime: false', $goNoGo);
             $this->assertStringContainsString('production_use_allowed: false', $goNoGo);
+            $this->assertStringContainsString('## Ops Metrics', $goNoGo);
+            $this->assertStringContainsString('comparison_status: no_previous_run', $goNoGo);
+
+            $qa = $this->readJson($runDir.'/qa_eval_summary.json');
+            $this->assertSame(
+                'fap.big5.result_page_v2.asset_agent.ops_report.v0.1',
+                $qa['ops_report_schema_version'] ?? null
+            );
+            $this->assertFalse((bool) data_get($qa, 'ops_metrics.ready_for_pilot', true));
+            $this->assertFalse((bool) data_get($qa, 'ops_metrics.ready_for_runtime', true));
+            $this->assertFalse((bool) data_get($qa, 'ops_metrics.ready_for_production', true));
+
+            $opsReport = $this->readJson($runDir.'/ops_report_summary.json');
+            $this->assertSame(
+                'fap.big5.result_page_v2.asset_agent.ops_report.v0.1',
+                $opsReport['schema_version'] ?? null
+            );
+            foreach ([
+                'p0_blocker_count',
+                'registry_gap_count',
+                'module_gap_count',
+                'scope_gap_count',
+                'reading_mode_gap_count',
+                'share_safety_missing_count',
+                'norm_unavailable_missing',
+                'low_quality_missing',
+                'forbidden_leak_hit_count',
+                'ready_for_pilot',
+                'ready_for_runtime',
+                'ready_for_production',
+            ] as $metricKey) {
+                $this->assertArrayHasKey($metricKey, (array) ($opsReport['metrics'] ?? []));
+            }
+            $this->assertSame('no_previous_run', data_get($opsReport, 'diff_summary.comparison_status'));
 
             $allArtifacts = implode("\n", array_map(
                 static fn (string $filename): string => (string) file_get_contents($runDir.'/'.$filename),
-                ['input_inventory.json', 'validation_report.json', 'safety_report.json', 'go_no_go.md']
+                [
+                    'input_inventory.json',
+                    'validation_report.json',
+                    'safety_report.json',
+                    'qa_eval_summary.json',
+                    'ops_report_summary.json',
+                    'go_no_go.md',
+                ]
             ));
             $this->assertStringContainsString('private_url', $allArtifacts);
             $this->assertStringContainsString('attempt_id', $allArtifacts);
             $this->assertStringNotContainsString(sys_get_temp_dir(), $allArtifacts);
             $this->assertStringNotContainsString('body_zh', $allArtifacts);
+        } finally {
+            $this->deleteDirectory($artifactRoot);
+        }
+    }
+
+    public function test_audit_ops_report_compares_against_previous_run(): void
+    {
+        $artifactRoot = $this->tempDir('big5-v2-agent-ops-diff');
+
+        try {
+            app(BigFiveResultPageV2AssetAgent::class)->audit([
+                'run_id' => 'run-a',
+                'artifact_dir' => $artifactRoot,
+            ]);
+            app(BigFiveResultPageV2AssetAgent::class)->audit([
+                'run_id' => 'run-b',
+                'artifact_dir' => $artifactRoot,
+            ]);
+
+            $opsReport = $this->readJson($artifactRoot.'/run-b/ops_report_summary.json');
+            $this->assertSame('compared', data_get($opsReport, 'diff_summary.comparison_status'));
+            $this->assertSame('run-a', data_get($opsReport, 'diff_summary.previous_run_id'));
+            $this->assertArrayHasKey(
+                'p0_blocker_count',
+                (array) data_get($opsReport, 'diff_summary.metric_deltas', [])
+            );
+            $this->assertSame(
+                0,
+                data_get($opsReport, 'diff_summary.metric_deltas.p0_blocker_count.delta')
+            );
+            $this->assertFalse((bool) data_get($opsReport, 'metrics.ready_for_production', true));
         } finally {
             $this->deleteDirectory($artifactRoot);
         }
