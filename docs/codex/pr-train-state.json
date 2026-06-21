@@ -56078,7 +56078,7 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
+    "commit_sha": "1ec1e89cbf52bd634e055cdb6c9b28522bd89198",
     "pr_url": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -56093,6 +56093,11 @@
         "at": "2026-06-21T23:18:58+08:00",
         "status": "local_checks_passed",
         "note": "Produced RIASEC Result Page V2 existing asset gap register with 9 open gaps grouped by selector assets, route matrix, golden cases, share-safe coverage, low-quality coverage, fallback, scenario scope, locale coverage, and forbidden-term sidecar. JSON/YAML, diff, and scope validation passed."
+      },
+      {
+        "at": "2026-06-21T23:19:26+08:00",
+        "status": "commit_created",
+        "note": "Recorded scoped gap-audit commit 1ec1e89cbf52bd634e055cdb6c9b28522bd89198 after local checks and scope validation passed."
       }
     ]
   },
