@@ -3279,6 +3279,18 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ];
         $kernelChangedLines = [
             '+use App\\Console\\Commands\\BigFiveResultPageV2AssetAgentAuditCommand;',
+            '-use App\\Console\\Commands\\SeoAgentCodexReviewRunnerCommand;',
+            '+use App\\Console\\Commands\\SeoAgentCmsFaqGapScanCommand;',
+            '+use App\\Console\\Commands\\SeoAgentCmsTdkGapScanCommand;',
+            '+use App\\Console\\Commands\\SeoAgentCodexReviewRunnerCommand;',
+            '+use App\\Console\\Commands\\SeoAgentOpportunityAggregateCommand;',
+            '-use App\\Console\\Commands\\SeoIntelSearchChannelQueueCommand;',
+            '-use App\\Console\\Commands\\SeoAgentCmsFaqGapScanCommand;',
+            '-use App\\Console\\Commands\\SeoAgentCmsTdkGapScanCommand;',
+            '-use App\\Console\\Commands\\SeoAgentRuntimeSeoQaScanCommand;',
+            '-use App\\Console\\Commands\\SeoAgentOpportunityAggregateCommand;',
+            '+use App\\Console\\Commands\\SeoAgentRuntimeSeoQaScanCommand;',
+            '+use App\\Console\\Commands\\SeoIntelSearchChannelQueueCommand;',
             '+        BigFiveResultPageV2AssetAgentAuditCommand::class,',
         ];
 
@@ -7306,13 +7318,32 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             return false;
         }
 
+        $allowed = [
+            'use App\\Console\\Commands\\BigFiveResultPageV2AssetAgentAuditCommand;',
+            '        BigFiveResultPageV2AssetAgentAuditCommand::class,',
+            'use App\\Console\\Commands\\SeoAgentCmsFaqGapScanCommand;',
+            'use App\\Console\\Commands\\SeoAgentCmsTdkGapScanCommand;',
+            'use App\\Console\\Commands\\SeoAgentCodexReviewRunnerCommand;',
+            'use App\\Console\\Commands\\SeoAgentOpportunityAggregateCommand;',
+            'use App\\Console\\Commands\\SeoAgentRuntimeSeoQaScanCommand;',
+            'use App\\Console\\Commands\\SeoIntelSearchChannelQueueCommand;',
+        ];
+        $hasAuditCommand = false;
+
         foreach ($changedLines as $line) {
-            if (preg_match('/\bBigFiveResultPageV2AssetAgentAuditCommand\b/u', $line) !== 1) {
+            $normalized = str_starts_with($line, '+') || str_starts_with($line, '-')
+                ? substr($line, 1)
+                : $line;
+
+            if (! in_array($normalized, $allowed, true)) {
                 return false;
             }
+
+            $hasAuditCommand = $hasAuditCommand
+                || str_contains($normalized, 'BigFiveResultPageV2AssetAgentAuditCommand');
         }
 
-        return true;
+        return $hasAuditCommand;
     }
 
     /**
