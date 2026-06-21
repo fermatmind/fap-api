@@ -24017,6 +24017,286 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: BIG5-RESULT-ASSET-AGENT-RUNBOOK-01
+    repo: fap-api
+    branch: codex/big5-result-asset-agent-runbook-01
+    title: "BIG5-RESULT-ASSET-AGENT-RUNBOOK-01: docs(big5):固化 result asset agent runbook"
+    train_scope: big5_result_page_v2_asset_agent
+    status: user_authorized
+    scope:
+      - Document the Big Five Result Page V2 backend content-asset agent runbook, input/output protocol, forbidden actions, and stage gates.
+      - Reuse the RIASEC backend projection, deep-slot, and fail-closed pattern as the authority model.
+      - Do not generate assets, import CMS content, change runtime, or open pilot/production gates.
+    allowed_paths:
+      - backend/docs/big5/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Generate `agent_runs` artifacts or selector assets.
+      - Modify `backend/app/**`, `backend/routes/**`, `backend/database/**`, runtime wrappers, CMS importers, or production gates.
+      - Set `production_use_allowed=true`, enable pilot access, add frontend fallback, or export private result payload fields.
+    validation:
+      - git diff --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: BIG5-RESULT-SOURCE-LEDGER-01
+    repo: fap-api
+    depends_on:
+      - BIG5-RESULT-ASSET-AGENT-RUNBOOK-01
+    branch: codex/big5-result-source-ledger-01
+    title: "BIG5-RESULT-SOURCE-LEDGER-01: docs(big5):建 result source ledger"
+    train_scope: big5_result_page_v2_asset_agent
+    status: user_authorized
+    scope:
+      - Add source ledger template and first evidence ledger for IPIP, BFI-2 structure-only use, University of Oregon method framing, internal V2.0 source, internal long-form source, and existing asset packs.
+      - Require each claim row to include source, reference, permitted use, limitation, and disallowed use.
+      - Do not generate selector assets or CMS imports.
+    allowed_paths:
+      - backend/content_assets/big5/result_page_v2/source_ledger/**
+      - backend/docs/big5/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Copy BFI-2 item text, proprietary report copy, competitor result copy, or internal drafts into generated user-facing selector prose.
+      - Generate official assets, import CMS data, modify runtime, or open production gates.
+    validation:
+      - find backend/content_assets/big5/result_page_v2/source_ledger -name '*.json' -print -exec python3 -m json.tool {} >/dev/null \;
+      - git diff --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: BIG5-RESULT-ASSET-VALIDATOR-HARNESS-01
+    repo: fap-api
+    depends_on:
+      - BIG5-RESULT-SOURCE-LEDGER-01
+    branch: codex/big5-result-asset-validator-harness-01
+    title: "BIG5-RESULT-ASSET-VALIDATOR-HARNESS-01: test(big5):建 result asset validator harness"
+    train_scope: big5_result_page_v2_asset_agent
+    status: user_authorized
+    scope:
+      - Add agent run directory validator/test wrapper for Big Five Result Page V2 asset-agent runs.
+      - Reuse `BigFiveResultPageV2SelectorAssetValidator`, asset inventory, checksums, forbidden public field scans, and share leak scans.
+      - Keep the harness read-only against runtime and production state.
+    allowed_paths:
+      - backend/app/Console/Commands/BigFiveResultPageV2AssetAgentAuditCommand.php
+      - backend/app/Console/Kernel.php
+      - backend/app/Services/BigFive/ResultPageV2/AssetAgent/**
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2AssetAgentTest.php
+      - backend/docs/big5/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Generate formal selector assets or `production_use_allowed=true` artifacts.
+      - Modify runtime wrapper behavior, CMS importers, public API contracts, or frontend fixtures.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2SelectorAssetValidatorTest --no-ansi
+      - git diff --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: BIG5-RESULT-EXISTING-ASSET-GAP-AUDIT-01
+    repo: fap-api
+    depends_on:
+      - BIG5-RESULT-ASSET-VALIDATOR-HARNESS-01
+    branch: codex/big5-result-existing-asset-gap-audit-01
+    title: "BIG5-RESULT-EXISTING-ASSET-GAP-AUDIT-01: docs(big5):审计现有 result assets gaps"
+    train_scope: big5_result_page_v2_asset_agent
+    status: user_authorized
+    scope:
+      - Produce a gap register for the existing 13 packages, 325 selector assets, 3125 route matrix rows, 31 golden cases, and O59 canonical case.
+      - Group gaps by registry, scope, scenario, share-safe coverage, norm-unavailable coverage, and route/golden-case readiness.
+      - Keep output as audit evidence only.
+    allowed_paths:
+      - backend/content_assets/big5/result_page_v2/qa/**
+      - backend/docs/big5/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Repair selector policy, generate official assets, import CMS data, modify runtime, or open gates.
+    validation:
+      - cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi
+      - find backend/content_assets/big5/result_page_v2/qa -name '*.json' -print -exec python3 -m json.tool {} >/dev/null \;
+      - git diff --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: BIG5-RESULT-SELECTOR-QA-REPAIR-01
+    repo: fap-api
+    depends_on:
+      - BIG5-RESULT-EXISTING-ASSET-GAP-AUDIT-01
+    branch: codex/big5-result-selector-qa-repair-01
+    title: "BIG5-RESULT-SELECTOR-QA-REPAIR-01: fix(big5):修 result selector QA policy"
+    train_scope: big5_result_page_v2_asset_agent
+    status: user_authorized
+    scope:
+      - Repair selector QA policy coverage warnings, golden case grouping, slot/module naming, banned terms, and O59 canonical case regression.
+      - Keep every asset and policy artifact staging-only and non-runtime.
+    allowed_paths:
+      - backend/content_assets/big5/result_page_v2/selector_qa_policy/**
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/**
+      - backend/docs/big5/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Generate new official content batches, modify runtime wrapper behavior, import CMS data, or open pilot/production gates.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2SelectorAssetImportV03Test --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2SelectorAssetValidatorTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2RouteDrivenGoldenCasesTest --no-ansi
+      - git diff --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: BIG5-RESULT-ASSET-FACTORY-PILOT-BATCH-01
+    repo: fap-api
+    depends_on:
+      - BIG5-RESULT-SELECTOR-QA-REPAIR-01
+    branch: codex/big5-result-asset-factory-pilot-batch-01
+    title: "BIG5-RESULT-ASSET-FACTORY-PILOT-BATCH-01: feat(big5):dry-run share safety selector batch"
+    train_scope: big5_result_page_v2_asset_agent
+    status: user_authorized
+    scope:
+      - Dry-run a narrow `share_safety_registry` selector asset pilot batch.
+      - Preserve raw draft, repair draft, final asset, validation report, safety report, and go/no-go report.
+      - Keep every output staging-only and production-disallowed.
+    allowed_paths:
+      - backend/content_assets/big5/result_page_v2/agent_runs/**
+      - backend/content_assets/big5/result_page_v2/selector_ready_assets/**
+      - backend/docs/big5/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Generate O59 plus low-quality plus norm-unavailable combined assets in this PR.
+      - Import CMS data, wire runtime selectors, enable pilot access, or open production gates.
+    validation:
+      - cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2SelectorAssetValidatorTest --no-ansi
+      - git diff --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: BIG5-RESULT-ROUTE-MATRIX-GOLDEN-CASE-QA-01
+    repo: fap-api
+    depends_on:
+      - BIG5-RESULT-ASSET-FACTORY-PILOT-BATCH-01
+    branch: codex/big5-result-route-matrix-golden-case-qa-01
+    title: "BIG5-RESULT-ROUTE-MATRIX-GOLDEN-CASE-QA-01: test(big5):验证 route matrix golden cases"
+    train_scope: big5_result_page_v2_asset_agent
+    status: user_authorized
+    scope:
+      - Validate 3125 route rows, eight canonical profiles, O59, selector reference resolution, and conflict resolution.
+      - Produce route matrix and golden case staging-input QA reports.
+    allowed_paths:
+      - backend/content_assets/big5/result_page_v2/route_matrix/**
+      - backend/content_assets/big5/result_page_v2/selector_qa_policy/**
+      - backend/content_assets/big5/result_page_v2/qa/**
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/**
+      - backend/docs/big5/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Wire route matrix to production runtime, import CMS data, or enable pilot/production flags.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveV2RouteMatrixParserTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2RouteDrivenGoldenCasesTest --no-ansi
+      - git diff --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: BIG5-RESULT-RENDER-PREVIEW-HANDOFF-01
+    repo: fap-api
+    depends_on:
+      - BIG5-RESULT-ROUTE-MATRIX-GOLDEN-CASE-QA-01
+    branch: codex/big5-result-render-preview-handoff-01
+    title: "BIG5-RESULT-RENDER-PREVIEW-HANDOFF-01: docs(big5):交付 rendered preview fixtures"
+    train_scope: big5_result_page_v2_asset_agent
+    status: user_authorized
+    scope:
+      - Generate backend fixture manifest and expected assertions for fap-web rendered preview QA.
+      - Cover result page, PDF, share, history, compare, locked/free redaction, low-quality, and norm-unavailable surfaces.
+      - Keep handoff backend-owned and production-disallowed.
+    allowed_paths:
+      - backend/content_assets/big5/result_page_v2/rendered_preview/**
+      - backend/content_assets/big5/result_page_v2/qa/**
+      - backend/docs/big5/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify fap-web, add frontend fallback content, import CMS data, wire runtime selectors, or open production gates.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ValidatorTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2PublicSurfacePolicyTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2PdfSurfacePolicyTest --no-ansi
+      - git diff --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
     next_task: SEO-CONV-OPS-05 in fap-api after this PR is merged
 
   - id: PERSONALITY-DETAIL-FAQ-SEO-01
