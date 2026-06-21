@@ -2735,6 +2735,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_enneagram_result_page_agent_readiness_scaffold(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/EnneagramResultPageAgentReadinessCommand.php',
+            'backend/app/Console/Kernel.php',
+            'backend/app/Services/Enneagram/Assets/Agent/EnneagramResultPageAgentReadiness.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\EnneagramResultPageAgentReadinessCommand;',
+            '+        EnneagramResultPageAgentReadinessCommand::class,',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_display_import_service_changes(): void
     {
         $changed = [
@@ -4547,6 +4562,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isEnneagramResultPageAgentReadinessFile($file)) {
+                continue;
+            }
+
             if ($this->isIqReportFoundationFile($file)) {
                 continue;
             }
@@ -4639,6 +4658,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsBigFiveV2AssetAgentAuditOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsBigFiveV2InactiveCandidateScaffoldOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsBigFiveV2AssetAgentHarnessOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsEnneagramResultPageAgentReadinessOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                 )
             ) {
                 continue;
@@ -6449,6 +6469,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ], true);
     }
 
+    private function isEnneagramResultPageAgentReadinessFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/EnneagramResultPageAgentReadinessCommand.php',
+            'backend/app/Services/Enneagram/Assets/Agent/EnneagramResultPageAgentReadiness.php',
+        ], true);
+    }
+
     private function isBigFiveV2EnParityDraftCatalogFile(string $file): bool
     {
         return $file === 'backend/content_packs/BIG5_OCEAN/v2/drafts/en_parity/result_page_v2_en_asset_catalog_draft.v1.json';
@@ -7486,6 +7514,23 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $allowed = [
             'use App\\Console\\Commands\\BigFiveResultPageV2AssetAgentAuditCommand;',
             '        BigFiveResultPageV2AssetAgentAuditCommand::class,',
+        ];
+        $normalized = array_map(
+            static fn (string $line): string => str_starts_with($line, '+') ? substr($line, 1) : $line,
+            $changedLines,
+        );
+
+        return $changedLines !== [] && array_values($normalized) === $allowed;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsEnneagramResultPageAgentReadinessOnly(array $changedLines): bool
+    {
+        $allowed = [
+            'use App\\Console\\Commands\\EnneagramResultPageAgentReadinessCommand;',
+            '        EnneagramResultPageAgentReadinessCommand::class,',
         ];
         $normalized = array_map(
             static fn (string $line): string => str_starts_with($line, '+') ? substr($line, 1) : $line,
