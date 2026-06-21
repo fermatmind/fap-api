@@ -1,0 +1,159 @@
+{
+  "schema": "fap.big5.result_page_v2.route_matrix_golden_case_staging_input_qa_report.v0_1",
+  "package_key": "big5_result_page_v2.route_matrix_golden_case_staging_input_qa.v0_1",
+  "version": "0.1",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_staging_selector_input": true,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "cms_write_performed": false,
+  "runtime_change_performed": false,
+  "production_gate_change_performed": false,
+  "staging_selector_input_status": {
+    "status": "go_with_fail_closed_suppression",
+    "ready_for_staging_selector_input": true,
+    "blocking_for_runtime_selector": true,
+    "blocking_for_production": true,
+    "reason": "Route matrix rows and golden cases are structurally valid, but unresolved selector references must remain suppressed until a later resolution PR."
+  },
+  "route_matrix": {
+    "source_package": "backend/content_assets/big5/result_page_v2/route_matrix/v0_1_1",
+    "row_count": 3125,
+    "expected_row_count": 3125,
+    "shard_count": 5,
+    "row_counts_by_shard": {
+      "O1": 625,
+      "O2": 625,
+      "O3": 625,
+      "O4": 625,
+      "O5": 625
+    },
+    "unique_combination_key_count": 3125,
+    "missing_combination_key_count": 0,
+    "duplicate_combination_key_count": 0,
+    "invalid_combination_key_count": 0,
+    "runtime_use": "staging_only",
+    "production_use_allowed": false,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false,
+    "o59_canonical_row": {
+      "combination_key": "O3_C2_E2_A3_N4",
+      "nearest_canonical_profile_key": "sensitive_independent_thinker",
+      "nearest_canonical_profile_label_zh": "敏锐的独立思考者",
+      "profile_family": "sensitive_independent_thinker",
+      "interpretation_scope": "high_tension_or_mixed",
+      "profile_label_public_allowed": true
+    }
+  },
+  "canonical_profiles": {
+    "source_package": "backend/content_assets/big5/result_page_v2/canonical_profiles/v0_1",
+    "profile_count": 8,
+    "covered_by_route_driven_backend_golden_cases": true,
+    "profile_keys": [
+      "complex_explorer_low_structure",
+      "connective_coordinator",
+      "orderly_supporter",
+      "overloaded_internalizer",
+      "quiet_deep_worker",
+      "sensitive_independent_thinker",
+      "sharp_exploratory_driver",
+      "vigilant_perfectionist"
+    ]
+  },
+  "golden_cases": {
+    "selector_qa_policy_package": "backend/content_assets/big5/result_page_v2/selector_qa_policy/v0_1",
+    "selector_qa_golden_case_count": 31,
+    "selector_qa_groups": {
+      "balanced_or_diffuse": 3,
+      "canonical_o59_preview": 1,
+      "clear_signature": 6,
+      "facet_reframe": 5,
+      "high_tension_or_mixed": 7,
+      "safety_downgrade": 5,
+      "scenario_application": 4
+    },
+    "route_driven_backend_package": "backend/content_assets/big5/result_page_v2/qa/route_driven_golden_cases/v0_1",
+    "route_driven_backend_case_count": 16,
+    "canonical_profile_family_case_count": 8,
+    "variant_case_count": 8,
+    "route_driven_variant_groups": [
+      "norm_unavailable",
+      "degraded_quality",
+      "low_profile_confidence",
+      "unresolved_suppression",
+      "surface_safety",
+      "coupling_alias_resolution",
+      "supplemental_coupling_resolution",
+      "metadata_non_leak"
+    ],
+    "o59_selector_case_key": "golden_case_31_o59_canonical_preview",
+    "o59_route_driven_case_present": true
+  },
+  "selector_reference_resolution": {
+    "source_report": "backend/content_assets/big5/result_page_v2/qa/selector_reference_consistency/v0_1/selector_reference_consistency_report_v0_1.json",
+    "mode": "staging_only_advisory_scan",
+    "unresolved_reference_count": 92,
+    "unresolved_by_type": {
+      "coupling_key": 41,
+      "profile_key": 19,
+      "scenario_key": 32
+    },
+    "route_matrix_to_imported_content_assets_status": "pass",
+    "route_matrix_to_imported_content_assets_unresolved_count": 0,
+    "post_import_unresolved_coupling_key_count": 0,
+    "selector_suppression_behavior_changed": false,
+    "fail_closed_required": true,
+    "may_unsuppress_selector_refs": false
+  },
+  "conflict_resolution": {
+    "source_policy": "backend/content_assets/big5/result_page_v2/selector_qa_policy/v0_1/big5_result_page_v2_selector_qa_policy_v0_1_conflict_resolution.json",
+    "runtime_use": "staging_only",
+    "resolution_order": [
+      "safety_override",
+      "runtime_scope_override",
+      "reading_mode_filter",
+      "trigger_match_filter",
+      "mutual_exclusion_group_dedupe",
+      "slot_limit_dedupe",
+      "semantic_conflict_guard",
+      "public_payload_sanitization",
+      "rendered_text_leak_scan"
+    ],
+    "mutual_exclusion_rule_count": 7,
+    "semantic_conflict_guard_count": 6,
+    "rendered_text_banned_scan_present": true,
+    "shareable_blocks_require_share_safety_registry": true,
+    "profile_label_as_type_guard_present": true
+  },
+  "staging_input_contract": {
+    "route_matrix_can_feed_selector_input": true,
+    "golden_cases_can_feed_selector_input": true,
+    "selected_unresolved_refs_must_remain_suppressed": true,
+    "body_composition_allowed": false,
+    "public_payload_allowlist_change": false,
+    "frontend_fallback_allowed": false,
+    "cms_write_allowed": false,
+    "production_import_allowed": false
+  },
+  "sidecar_issues": [
+    {
+      "sidecar_id": "B5-SEL-REF-ADVISORY-001",
+      "scope_relation": "external_to_current_pr",
+      "introduced_by_current_pr": false,
+      "summary": "Selector reference consistency remains advisory with 92 unresolved references. Route matrix and golden cases are valid staging selector inputs only while unresolved refs remain fail-closed and suppressed.",
+      "blocking_for_staging_selector_input": false,
+      "blocking_for_runtime_selector": true,
+      "blocking_for_production": true
+    }
+  ],
+  "must_not_change": [
+    "Do not wire route matrix to production runtime.",
+    "Do not import CMS data.",
+    "Do not enable pilot or production flags.",
+    "Do not unsuppress unresolved selector references.",
+    "Do not generate new body copy."
+  ]
+}

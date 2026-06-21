@@ -24250,7 +24250,7 @@ prs:
     do_not:
       - Wire route matrix to production runtime, import CMS data, or enable pilot/production flags.
     validation:
-      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveV2RouteMatrixParserTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2RouteMatrixParserTest --no-ansi
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2RouteDrivenGoldenCasesTest --no-ansi
       - git diff --check
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
