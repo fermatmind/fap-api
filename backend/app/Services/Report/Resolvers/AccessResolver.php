@@ -10,7 +10,7 @@ class AccessResolver
     public function __construct(private EntitlementManager $entitlements) {}
 
     /**
-     * @return array{benefit_code:?string,has_full_access:bool}
+     * @return array{benefit_code:?string,has_full_access:bool,has_entitlement_full_access:bool}
      */
     public function resolveAccess(
         string $scaleCode,
@@ -23,20 +23,24 @@ class AccessResolver
     ): array {
         $scaleCode = strtoupper(trim($scaleCode));
         $benefitCode = $this->resolveBenefitCode($commercial);
-        $hasFullAccess = $benefitCode !== ''
+        $hasEntitlementFullAccess = $benefitCode !== ''
             ? $this->entitlements->hasFullAccess($orgId, $userId, $anonId, $attemptId, $benefitCode)
             : false;
+        $hasFullAccess = $hasEntitlementFullAccess;
+        $freeFullReportMode = $this->freeFullReportModeEnabled($scaleCode);
 
-        if ($forceFreeOnly && ! $this->isForceFreeFullAccessScale($scaleCode)) {
+        if ($freeFullReportMode) {
+            $hasFullAccess = true;
+        } elseif ($forceFreeOnly && ! $this->isForceFreeFullAccessScale($scaleCode)) {
             $hasFullAccess = false;
-        }
-        if ($forceFreeOnly && $this->isForceFreeFullAccessScale($scaleCode)) {
+        } elseif ($forceFreeOnly && $this->isForceFreeFullAccessScale($scaleCode)) {
             $hasFullAccess = true;
         }
 
         return [
             'benefit_code' => $benefitCode !== '' ? $benefitCode : null,
             'has_full_access' => $hasFullAccess,
+            'has_entitlement_full_access' => $hasEntitlementFullAccess,
         ];
     }
 
@@ -56,13 +60,11 @@ class AccessResolver
         ?string $anonId = null
     ): array {
         $scaleCode = strtoupper(trim($scaleCode));
-        if ($forceFreeOnly && $this->isForceFreeFullAccessScale($scaleCode)) {
-            $modulesAllowed = $scaleCode === ReportAccess::SCALE_EQ_60
-                ? ReportAccess::eq60AllRuntimeModules()
-                : ReportAccess::normalizeModules(array_merge(
-                    ReportAccess::defaultModulesAllowedForLocked($scaleCode),
-                    ReportAccess::allDefaultModulesOffered($scaleCode)
-                ));
+        if (
+            ($forceFreeOnly && $this->isForceFreeFullAccessScale($scaleCode))
+            || $this->freeFullReportModeEnabled($scaleCode)
+        ) {
+            $modulesAllowed = $this->fullRuntimeModulesForScale($scaleCode);
 
             return [
                 'modules_allowed' => $modulesAllowed,
@@ -115,6 +117,27 @@ class AccessResolver
         ];
     }
 
+    public function freeFullReportModeEnabled(string $scaleCode): bool
+    {
+        $scaleCode = strtoupper(trim($scaleCode));
+        $container = \Illuminate\Container\Container::getInstance();
+        if (! $container || ! $container->bound('config')) {
+            return false;
+        }
+
+        $config = $container->make('config');
+        if (! (bool) $config->get('fap.features.free_full_report_mode', false)) {
+            return false;
+        }
+
+        $allowedScales = array_map(
+            static fn (mixed $value): string => strtoupper(trim((string) $value)),
+            (array) $config->get('fap.free_full_report_assessments', [])
+        );
+
+        return in_array($scaleCode, array_values(array_filter($allowedScales)), true);
+    }
+
     private function resolveBenefitCode(array $commercial): string
     {
         $benefitCode = strtoupper(trim((string) ($commercial['report_benefit_code'] ?? '')));
@@ -133,6 +156,19 @@ class AccessResolver
             ReportAccess::SCALE_ENNEAGRAM,
             ReportAccess::SCALE_RIASEC,
         ], true);
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function fullRuntimeModulesForScale(string $scaleCode): array
+    {
+        return $scaleCode === ReportAccess::SCALE_EQ_60
+            ? ReportAccess::eq60AllRuntimeModules()
+            : ReportAccess::normalizeModules(array_merge(
+                ReportAccess::defaultModulesAllowedForLocked($scaleCode),
+                ReportAccess::allDefaultModulesOffered($scaleCode)
+            ));
     }
 
     /**

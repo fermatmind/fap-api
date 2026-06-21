@@ -19,8 +19,8 @@ final class AccessResolverTest extends TestCase
             ->with(0, null, 'anon_enneagram', 'attempt_enneagram', 'ENNEAGRAM_REPORT')
             ->willReturn(false);
         $entitlements->expects($this->once())
-            ->method('getAllowedModulesForAttempt')
-            ->with(0, 'attempt_enneagram')
+            ->method('getAllowedModulesForAttemptForActor')
+            ->with(0, 'attempt_enneagram', null, null)
             ->willReturn([ReportAccess::MODULE_ENNEAGRAM_CORE]);
 
         $resolver = new AccessResolver($entitlements);

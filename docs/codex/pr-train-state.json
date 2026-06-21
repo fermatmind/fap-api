@@ -55973,5 +55973,64 @@
         "note": "Manifest/state entry authorized for the RIASEC Result Page asset-agent train. Implementation waits for its dependency order."
       }
     ]
+  },
+  "FREE-FULL-REPORT-MODE-FEATURE-FLAG-01": {
+    "repo": "fap-api",
+    "branch": "codex/free-full-report-mode-feature-flag-01",
+    "base": "main",
+    "status": "pr_open",
+    "train_scope": "free_full_report_mode",
+    "title": "feat(growth): add free full report mode for assessments",
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized FREE-FULL-REPORT-MODE-FEATURE-FLAG-01 and allowed docs/codex manifest/state registration before implementation."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "This backend implementation PR was explicitly authorized as a standalone scope with no declared upstream PR-train dependency."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are confined to backend report access/config/test paths plus docs/codex PR-train metadata."
+      },
+      "local": {
+        "status": "pass_with_warnings",
+        "commands": [
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter FreemiumLocalePolicyTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter AttemptReportAccessReadTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter IqReportContractTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter AccessResolverTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter MbtiReadPathParityContractTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter MbtiPhase2AssemblerIntegrationTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='test_runtime_paths_have_no_uncommitted_diff|test_runtime_freeze_classifier_ignores_iq_paid_report_entitlement_contract_changes|test_runtime_freeze_classifier_ignores_riasec_snapshot_bound_report_files|test_runtime_freeze_classifier_ignores_iq_report_foundation_changes|test_runtime_freeze_classifier_ignores_free_full_report_mode_feature_flag_files' --no-ansi",
+          "git diff --check"
+        ],
+        "notes": "All required checks exited successfully. Several existing suites emitted file_get_contents warnings while still passing under php artisan test."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2223",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-21T22:37:00+08:00",
+        "status": "in_progress",
+        "note": "Manifest/state entry authorized and backend-only implementation started in a clean origin/main worktree."
+      },
+      {
+        "at": "2026-06-21T23:10:00+08:00",
+        "status": "local_checks_passed",
+        "note": "Feature-flag access changes, report-access sync, focused regressions, MBTI parity, IQ contract, runtime-freeze guard checks, and scoped diff check passed locally."
+      },
+      {
+        "at": "2026-06-21T22:51:45+08:00",
+        "status": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/2223 for FREE-FULL-REPORT-MODE-FEATURE-FLAG-01 after local checks passed."
+      }
+    ]
   }
 }

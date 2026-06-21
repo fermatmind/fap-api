@@ -25804,3 +25804,50 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: FREE-FULL-REPORT-MODE-FEATURE-FLAG-01
+    repo: fap-api
+    branch: codex/free-full-report-mode-feature-flag-01
+    title: "feat(growth): add free full report mode for assessments"
+    train_scope: free_full_report_mode
+    status: user_authorized
+    scope:
+      - Add a backend-only reversible feature flag for full report read access across MBTI, BIG5_OCEAN, RIASEC, IQ_RAVEN, EQ_60, and ENNEAGRAM.
+      - Intercept read-time access resolution and report-access payloads without mutating payment, order, benefit_grants, benefit_wallets, CMS, or frontend code.
+      - Preserve actor ownership, token and email gates, non-target scale behavior, and IQ answer-key redaction and PDF exclusion.
+    allowed_paths:
+      - backend/config/fap.php
+      - backend/app/Services/Report/Resolvers/AccessResolver.php
+      - backend/app/Services/Report/ReportGatekeeper.php
+      - backend/app/Http/Controllers/API/V0_3/AttemptReadController.php
+      - backend/tests/Feature/Commerce/FreemiumLocalePolicyTest.php
+      - backend/tests/Feature/V0_3/AttemptReportAccessReadTest.php
+      - backend/tests/Feature/V0_3/IqReportContractTest.php
+      - backend/tests/Unit/Services/Report/AccessResolverTest.php
+      - backend/tests/Feature/V0_3/MbtiReadPathParityContractTest.php
+      - backend/tests/Feature/Report/MbtiPhase2AssemblerIntegrationTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify fap-web.
+      - Modify CMS content, sitemap, robots, llms, schema, hreflang, or deployment config.
+      - Mutate production env vars, production DB state, payment webhooks, refund logic, payment callbacks, order write paths, benefit_grants, or benefit_wallets.
+      - Introduce frontend-only bypasses or broaden private result access.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter FreemiumLocalePolicyTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter AttemptReportAccessReadTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter IqReportContractTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter AccessResolverTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter MbtiReadPathParityContractTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter MbtiPhase2AssemblerIntegrationTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='test_runtime_paths_have_no_uncommitted_diff|test_runtime_freeze_classifier_ignores_iq_paid_report_entitlement_contract_changes|test_runtime_freeze_classifier_ignores_riasec_snapshot_bound_report_files|test_runtime_freeze_classifier_ignores_iq_report_foundation_changes|test_runtime_freeze_classifier_ignores_free_full_report_mode_feature_flag_files' --no-ansi
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend

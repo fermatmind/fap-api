@@ -25,10 +25,16 @@ return [
             'FAP_FEATURE_EMAIL_FIRST_RESULT_ACCESS',
             env('APP_ENV') === 'production'
         ),
+        'free_full_report_mode' => (bool) env('FAP_FEATURE_FREE_FULL_REPORT_MODE', false),
         'model_router_v2' => (bool) env('FAP_FEATURE_MODEL_ROUTER_V2', true),
         'submit_async_v2' => (bool) env('FAP_FEATURE_SUBMIT_ASYNC_V2', true),
         'report_snapshot_strict_v2' => (bool) env('FAP_FEATURE_REPORT_SNAPSHOT_STRICT_V2', true),
     ],
+
+    'free_full_report_assessments' => array_values(array_filter(array_map(
+        static fn (mixed $value): string => strtoupper(trim((string) $value)),
+        explode(',', (string) env('FAP_FREE_FULL_REPORT_ASSESSMENTS', 'MBTI,BIG5_OCEAN,RIASEC,IQ_RAVEN,EQ_60,ENNEAGRAM'))
+    ))),
 
     'result_email_gate' => [
         'require_binding_for_read' => (bool) env('FAP_RESULT_EMAIL_REQUIRE_BINDING_FOR_READ', false),
