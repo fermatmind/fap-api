@@ -1,0 +1,710 @@
+{
+  "schema_version": "fap.enneagram.result_page.source_ledger.v0.1",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "cms_write_performed": false,
+  "runtime_change_performed": false,
+  "frontend_fallback_allowed": false,
+  "activation_happened": false,
+  "description": "Source-ledger contract for the Enneagram result-page agent validator harness. This is scaffold and provenance only.",
+  "allowed_source_labels": [
+    "runtime_contract",
+    "compiled_question_contract",
+    "candidate_baseline",
+    "asset_stream_contract",
+    "policy_contract"
+  ],
+  "candidate_contract": {
+    "baseline_candidate_manifest_sha256": "a9fd3eb474ea2ca0130d06ad2b1640305d9160ee1a74e559ad4f60bfc4db56c0",
+    "runtime_registry_manifest_sha256": "ac5bdaab3c761b0d01a56f92679aa58341110d64de0f47a1fa0062b64f76f97f",
+    "expected_payload_count": 630,
+    "launch_scope": [
+      "1R-A",
+      "1R-B",
+      "1R-C",
+      "1R-D",
+      "1R-E",
+      "1R-F",
+      "1R-G",
+      "1R-H"
+    ],
+    "out_of_launch_scope": [
+      "1R-I",
+      "1R-J"
+    ]
+  },
+  "sources": [
+    {
+      "source_id": "enneagram_v2_runtime_registry",
+      "source_label": "runtime_contract",
+      "title": "Enneagram V2 runtime registry manifest",
+      "authority_level": "primary",
+      "source_ref": {
+        "kind": "repo_path",
+        "value": "content_packs/ENNEAGRAM/v2/registry/manifest.json",
+        "sha256": "ac5bdaab3c761b0d01a56f92679aa58341110d64de0f47a1fa0062b64f76f97f"
+      },
+      "claim_categories": [
+        "runtime_hash",
+        "registry_contract"
+      ],
+      "permitted_use": [
+        "Verify that a provided candidate is checked against the expected runtime registry hash."
+      ],
+      "limitations": [
+        "Evidence-only in this PR; no runtime switch is allowed."
+      ],
+      "disallowed_use": [
+        "Do not activate or mutate runtime rows from this ledger."
+      ],
+      "copy_policy": {
+        "copy_allowed": false,
+        "paraphrase_allowed": false,
+        "public_payload_allowed": false,
+        "notes": "Registry manifest is a hash contract, not public result copy."
+      },
+      "asset_scopes_allowed": [
+        "source_ledger",
+        "validator_harness"
+      ],
+      "claim_trace_requirements": [
+        "Candidate validation must compare the runtime registry hash to this ledger row."
+      ],
+      "evidence_refs": [
+        {
+          "ref_id": "runtime_registry_hash_contract",
+          "summary": "Expected runtime registry hash for a9fd baseline validation.",
+          "limitations": [
+            "Does not imply runtime activation."
+          ]
+        }
+      ],
+      "review_status": "approved_for_validator_scaffold"
+    },
+    {
+      "source_id": "enneagram_e105_compiled_questions",
+      "source_label": "compiled_question_contract",
+      "title": "E105 compiled question contract",
+      "authority_level": "supporting",
+      "source_ref": {
+        "kind": "repo_path",
+        "value": "content_packs/ENNEAGRAM/v2",
+        "sha256": null
+      },
+      "claim_categories": [
+        "question_boundary",
+        "method_boundary"
+      ],
+      "permitted_use": [
+        "Preserve E105 as the primary result source boundary for result-page copy."
+      ],
+      "limitations": [
+        "Does not authorize deterministic typing, diagnosis, or E105 versus FC144 score comparison."
+      ],
+      "disallowed_use": [
+        "Do not claim that E105 and FC144 scores are directly comparable."
+      ],
+      "copy_policy": {
+        "copy_allowed": false,
+        "paraphrase_allowed": false,
+        "public_payload_allowed": false,
+        "notes": "Question contract only; not reusable public copy."
+      },
+      "asset_scopes_allowed": [
+        "source_ledger",
+        "validator_harness",
+        "candidate_dry_run"
+      ],
+      "claim_trace_requirements": [
+        "Every E105 method claim must retain the question-boundary limitation."
+      ],
+      "evidence_refs": [
+        {
+          "ref_id": "e105_question_boundary",
+          "summary": "E105 remains the primary current result flow boundary.",
+          "limitations": [
+            "No score-comparison claim is allowed."
+          ]
+        }
+      ],
+      "review_status": "approved_for_validator_scaffold"
+    },
+    {
+      "source_id": "enneagram_fc144_compiled_questions",
+      "source_label": "compiled_question_contract",
+      "title": "FC144 compiled question contract",
+      "authority_level": "supporting",
+      "source_ref": {
+        "kind": "repo_path",
+        "value": "content_packs/ENNEAGRAM/v2",
+        "sha256": null
+      },
+      "claim_categories": [
+        "question_boundary",
+        "fc144_boundary"
+      ],
+      "permitted_use": [
+        "Frame FC144 only as a second lens or follow-up exploration boundary."
+      ],
+      "limitations": [
+        "FC144 must not be positioned as more accurate, replacement, final typing, or score-superiority evidence."
+      ],
+      "disallowed_use": [
+        "Do not claim FC144 replaces or corrects the E105 result."
+      ],
+      "copy_policy": {
+        "copy_allowed": false,
+        "paraphrase_allowed": false,
+        "public_payload_allowed": false,
+        "notes": "Question contract only; not reusable public copy."
+      },
+      "asset_scopes_allowed": [
+        "source_ledger",
+        "validator_harness",
+        "candidate_dry_run"
+      ],
+      "claim_trace_requirements": [
+        "Every FC144 claim must include the second-lens limitation."
+      ],
+      "evidence_refs": [
+        {
+          "ref_id": "fc144_second_lens_boundary",
+          "summary": "FC144 is bounded to second-lens language.",
+          "limitations": [
+            "No accuracy-superiority or replacement-result claim is allowed."
+          ]
+        }
+      ],
+      "review_status": "approved_for_validator_scaffold"
+    },
+    {
+      "source_id": "phase8b_candidate_baseline_a9fd",
+      "source_label": "candidate_baseline",
+      "title": "Phase8B a9fd candidate baseline contract",
+      "authority_level": "baseline",
+      "source_ref": {
+        "kind": "contract_hash",
+        "value": "phase8b_candidate_manifest_sha256:a9fd3eb474ea2ca0130d06ad2b1640305d9160ee1a74e559ad4f60bfc4db56c0",
+        "sha256": "a9fd3eb474ea2ca0130d06ad2b1640305d9160ee1a74e559ad4f60bfc4db56c0"
+      },
+      "claim_categories": [
+        "candidate_baseline",
+        "payload_count",
+        "scope_boundary"
+      ],
+      "permitted_use": [
+        "Validate a provided candidate directory against the approved a9fd baseline contract."
+      ],
+      "limitations": [
+        "This ledger does not store candidate payloads and does not prove a candidate directory exists locally."
+      ],
+      "disallowed_use": [
+        "Do not treat another manifest hash as a silent substitute for a9fd."
+      ],
+      "copy_policy": {
+        "copy_allowed": false,
+        "paraphrase_allowed": false,
+        "public_payload_allowed": false,
+        "notes": "Hash contract only."
+      },
+      "asset_scopes_allowed": [
+        "source_ledger",
+        "validator_harness"
+      ],
+      "claim_trace_requirements": [
+        "Candidate validation must compare manifest SHA, runtime registry SHA, payload count, launch scope, and out-of-launch scope."
+      ],
+      "evidence_refs": [
+        {
+          "ref_id": "a9fd_rebaselined_candidate_contract",
+          "summary": "a9fd is the current approved candidate baseline after the unrecovered prior tmp candidate.",
+          "limitations": [
+            "No candidate payloads are committed in this PR."
+          ]
+        }
+      ],
+      "review_status": "approved_for_validator_scaffold"
+    },
+    {
+      "source_id": "batch_1r_a_asset_stream",
+      "source_label": "asset_stream_contract",
+      "title": "Batch 1R-A asset stream",
+      "authority_level": "supporting",
+      "source_ref": {
+        "kind": "logical_asset_stream",
+        "value": "FermatMind_Enneagram_Content_Expansion_Batch_1R_A_Assets_v6_final.json",
+        "sha256": null
+      },
+      "claim_categories": [
+        "source_mapping",
+        "launch_scope"
+      ],
+      "permitted_use": [
+        "Trace candidate payloads to launch-scope asset stream 1R-A."
+      ],
+      "limitations": [
+        "Logical provenance only; no external asset JSON is copied into this repo."
+      ],
+      "disallowed_use": [
+        "Do not expose machine-local source paths or private working notes."
+      ],
+      "copy_policy": {
+        "copy_allowed": false,
+        "paraphrase_allowed": false,
+        "public_payload_allowed": false,
+        "notes": "Asset stream row is provenance only."
+      },
+      "asset_scopes_allowed": [
+        "source_ledger",
+        "validator_harness",
+        "candidate_dry_run"
+      ],
+      "claim_trace_requirements": [
+        "Every payload derived from this stream must map back to the stream id and source checksum."
+      ],
+      "evidence_refs": [
+        {
+          "ref_id": "batch_1r_a_scope",
+          "summary": "1R-A is in launch scope.",
+          "limitations": [
+            "No public copy is authorized by the ledger row alone."
+          ]
+        }
+      ],
+      "review_status": "approved_for_validator_scaffold"
+    },
+    {
+      "source_id": "batch_1r_b_asset_stream",
+      "source_label": "asset_stream_contract",
+      "title": "Batch 1R-B asset stream",
+      "authority_level": "supporting",
+      "source_ref": {
+        "kind": "logical_asset_stream",
+        "value": "FermatMind_Enneagram_Content_Expansion_Batch_1R_B_Assets_v6_final.json",
+        "sha256": null
+      },
+      "claim_categories": [
+        "source_mapping",
+        "launch_scope"
+      ],
+      "permitted_use": [
+        "Trace candidate payloads to launch-scope asset stream 1R-B."
+      ],
+      "limitations": [
+        "Logical provenance only; no external asset JSON is copied into this repo."
+      ],
+      "disallowed_use": [
+        "Do not expose machine-local source paths or private working notes."
+      ],
+      "copy_policy": {
+        "copy_allowed": false,
+        "paraphrase_allowed": false,
+        "public_payload_allowed": false,
+        "notes": "Asset stream row is provenance only."
+      },
+      "asset_scopes_allowed": [
+        "source_ledger",
+        "validator_harness",
+        "candidate_dry_run"
+      ],
+      "claim_trace_requirements": [
+        "Every payload derived from this stream must map back to the stream id and source checksum."
+      ],
+      "evidence_refs": [
+        {
+          "ref_id": "batch_1r_b_scope",
+          "summary": "1R-B is in launch scope.",
+          "limitations": [
+            "No public copy is authorized by the ledger row alone."
+          ]
+        }
+      ],
+      "review_status": "approved_for_validator_scaffold"
+    },
+    {
+      "source_id": "batch_1r_c_asset_stream",
+      "source_label": "asset_stream_contract",
+      "title": "Batch 1R-C asset stream",
+      "authority_level": "supporting",
+      "source_ref": {
+        "kind": "logical_asset_stream",
+        "value": "FermatMind_Enneagram_Content_Expansion_Batch_1R_C_Assets_v6_final.json",
+        "sha256": null
+      },
+      "claim_categories": [
+        "source_mapping",
+        "launch_scope"
+      ],
+      "permitted_use": [
+        "Trace candidate payloads to launch-scope asset stream 1R-C."
+      ],
+      "limitations": [
+        "Logical provenance only; no external asset JSON is copied into this repo."
+      ],
+      "disallowed_use": [
+        "Do not expose machine-local source paths or private working notes."
+      ],
+      "copy_policy": {
+        "copy_allowed": false,
+        "paraphrase_allowed": false,
+        "public_payload_allowed": false,
+        "notes": "Asset stream row is provenance only."
+      },
+      "asset_scopes_allowed": [
+        "source_ledger",
+        "validator_harness",
+        "candidate_dry_run"
+      ],
+      "claim_trace_requirements": [
+        "Every payload derived from this stream must map back to the stream id and source checksum."
+      ],
+      "evidence_refs": [
+        {
+          "ref_id": "batch_1r_c_scope",
+          "summary": "1R-C is in launch scope.",
+          "limitations": [
+            "No public copy is authorized by the ledger row alone."
+          ]
+        }
+      ],
+      "review_status": "approved_for_validator_scaffold"
+    },
+    {
+      "source_id": "batch_1r_d_asset_stream",
+      "source_label": "asset_stream_contract",
+      "title": "Batch 1R-D asset stream",
+      "authority_level": "supporting",
+      "source_ref": {
+        "kind": "logical_asset_stream",
+        "value": "FermatMind_Enneagram_Content_Expansion_Batch_1R_D_Assets_v6_final.json",
+        "sha256": null
+      },
+      "claim_categories": [
+        "source_mapping",
+        "launch_scope"
+      ],
+      "permitted_use": [
+        "Trace candidate payloads to launch-scope asset stream 1R-D."
+      ],
+      "limitations": [
+        "Logical provenance only; no external asset JSON is copied into this repo."
+      ],
+      "disallowed_use": [
+        "Do not expose machine-local source paths or private working notes."
+      ],
+      "copy_policy": {
+        "copy_allowed": false,
+        "paraphrase_allowed": false,
+        "public_payload_allowed": false,
+        "notes": "Asset stream row is provenance only."
+      },
+      "asset_scopes_allowed": [
+        "source_ledger",
+        "validator_harness",
+        "candidate_dry_run"
+      ],
+      "claim_trace_requirements": [
+        "Every payload derived from this stream must map back to the stream id and source checksum."
+      ],
+      "evidence_refs": [
+        {
+          "ref_id": "batch_1r_d_scope",
+          "summary": "1R-D is in launch scope.",
+          "limitations": [
+            "No public copy is authorized by the ledger row alone."
+          ]
+        }
+      ],
+      "review_status": "approved_for_validator_scaffold"
+    },
+    {
+      "source_id": "batch_1r_e_asset_stream",
+      "source_label": "asset_stream_contract",
+      "title": "Batch 1R-E asset stream",
+      "authority_level": "supporting",
+      "source_ref": {
+        "kind": "logical_asset_stream",
+        "value": "FermatMind_Enneagram_Content_Expansion_Batch_1R_E_Assets_v6_final.json",
+        "sha256": null
+      },
+      "claim_categories": [
+        "source_mapping",
+        "launch_scope"
+      ],
+      "permitted_use": [
+        "Trace candidate payloads to launch-scope asset stream 1R-E."
+      ],
+      "limitations": [
+        "Logical provenance only; no external asset JSON is copied into this repo."
+      ],
+      "disallowed_use": [
+        "Do not expose machine-local source paths or private working notes."
+      ],
+      "copy_policy": {
+        "copy_allowed": false,
+        "paraphrase_allowed": false,
+        "public_payload_allowed": false,
+        "notes": "Asset stream row is provenance only."
+      },
+      "asset_scopes_allowed": [
+        "source_ledger",
+        "validator_harness",
+        "candidate_dry_run"
+      ],
+      "claim_trace_requirements": [
+        "Every payload derived from this stream must map back to the stream id and source checksum."
+      ],
+      "evidence_refs": [
+        {
+          "ref_id": "batch_1r_e_scope",
+          "summary": "1R-E is in launch scope.",
+          "limitations": [
+            "No public copy is authorized by the ledger row alone."
+          ]
+        }
+      ],
+      "review_status": "approved_for_validator_scaffold"
+    },
+    {
+      "source_id": "batch_1r_f_asset_stream",
+      "source_label": "asset_stream_contract",
+      "title": "Batch 1R-F asset stream",
+      "authority_level": "supporting",
+      "source_ref": {
+        "kind": "logical_asset_stream",
+        "value": "FermatMind_Enneagram_Content_Expansion_Batch_1R_F_Assets_v6_final.json",
+        "sha256": null
+      },
+      "claim_categories": [
+        "source_mapping",
+        "launch_scope"
+      ],
+      "permitted_use": [
+        "Trace candidate payloads to launch-scope asset stream 1R-F."
+      ],
+      "limitations": [
+        "Logical provenance only; no external asset JSON is copied into this repo."
+      ],
+      "disallowed_use": [
+        "Do not expose machine-local source paths or private working notes."
+      ],
+      "copy_policy": {
+        "copy_allowed": false,
+        "paraphrase_allowed": false,
+        "public_payload_allowed": false,
+        "notes": "Asset stream row is provenance only."
+      },
+      "asset_scopes_allowed": [
+        "source_ledger",
+        "validator_harness",
+        "candidate_dry_run"
+      ],
+      "claim_trace_requirements": [
+        "Every payload derived from this stream must map back to the stream id and source checksum."
+      ],
+      "evidence_refs": [
+        {
+          "ref_id": "batch_1r_f_scope",
+          "summary": "1R-F is in launch scope.",
+          "limitations": [
+            "No public copy is authorized by the ledger row alone."
+          ]
+        }
+      ],
+      "review_status": "approved_for_validator_scaffold"
+    },
+    {
+      "source_id": "batch_1r_g_asset_stream",
+      "source_label": "asset_stream_contract",
+      "title": "Batch 1R-G asset stream",
+      "authority_level": "supporting",
+      "source_ref": {
+        "kind": "logical_asset_stream",
+        "value": "FermatMind_Enneagram_Content_Expansion_Batch_1R_G_Assets_v6_final.json",
+        "sha256": null
+      },
+      "claim_categories": [
+        "source_mapping",
+        "launch_scope"
+      ],
+      "permitted_use": [
+        "Trace candidate payloads to launch-scope asset stream 1R-G."
+      ],
+      "limitations": [
+        "Logical provenance only; no external asset JSON is copied into this repo."
+      ],
+      "disallowed_use": [
+        "Do not expose machine-local source paths or private working notes."
+      ],
+      "copy_policy": {
+        "copy_allowed": false,
+        "paraphrase_allowed": false,
+        "public_payload_allowed": false,
+        "notes": "Asset stream row is provenance only."
+      },
+      "asset_scopes_allowed": [
+        "source_ledger",
+        "validator_harness",
+        "candidate_dry_run"
+      ],
+      "claim_trace_requirements": [
+        "Every payload derived from this stream must map back to the stream id and source checksum."
+      ],
+      "evidence_refs": [
+        {
+          "ref_id": "batch_1r_g_scope",
+          "summary": "1R-G is in launch scope.",
+          "limitations": [
+            "No public copy is authorized by the ledger row alone."
+          ]
+        }
+      ],
+      "review_status": "approved_for_validator_scaffold"
+    },
+    {
+      "source_id": "batch_1r_h_asset_stream",
+      "source_label": "asset_stream_contract",
+      "title": "Batch 1R-H asset stream",
+      "authority_level": "supporting",
+      "source_ref": {
+        "kind": "logical_asset_stream",
+        "value": "FermatMind_Enneagram_Content_Expansion_Batch_1R_H_Assets_v6_final.json",
+        "sha256": null
+      },
+      "claim_categories": [
+        "source_mapping",
+        "launch_scope"
+      ],
+      "permitted_use": [
+        "Trace candidate payloads to launch-scope asset stream 1R-H."
+      ],
+      "limitations": [
+        "Logical provenance only; no external asset JSON is copied into this repo."
+      ],
+      "disallowed_use": [
+        "Do not expose machine-local source paths or private working notes."
+      ],
+      "copy_policy": {
+        "copy_allowed": false,
+        "paraphrase_allowed": false,
+        "public_payload_allowed": false,
+        "notes": "Asset stream row is provenance only."
+      },
+      "asset_scopes_allowed": [
+        "source_ledger",
+        "validator_harness",
+        "candidate_dry_run"
+      ],
+      "claim_trace_requirements": [
+        "Every payload derived from this stream must map back to the stream id and source checksum."
+      ],
+      "evidence_refs": [
+        {
+          "ref_id": "batch_1r_h_scope",
+          "summary": "1R-H is in launch scope.",
+          "limitations": [
+            "No public copy is authorized by the ledger row alone."
+          ]
+        }
+      ],
+      "review_status": "approved_for_validator_scaffold"
+    },
+    {
+      "source_id": "fc144_boundary_policy",
+      "source_label": "policy_contract",
+      "title": "FC144 boundary policy",
+      "authority_level": "policy",
+      "source_ref": {
+        "kind": "policy",
+        "value": "enneagram_result_page_fc144_second_lens_policy",
+        "sha256": null
+      },
+      "claim_categories": [
+        "fc144_boundary",
+        "forbidden_claim_boundary"
+      ],
+      "permitted_use": [
+        "Validate that FC144 language stays second-lens only."
+      ],
+      "limitations": [
+        "Policy row only; not public copy."
+      ],
+      "disallowed_use": [
+        "No FC144 accuracy-superiority, replacement-result, final-typing, or direct score-comparison claim."
+      ],
+      "copy_policy": {
+        "copy_allowed": false,
+        "paraphrase_allowed": false,
+        "public_payload_allowed": false,
+        "notes": "Policy row only."
+      },
+      "asset_scopes_allowed": [
+        "source_ledger",
+        "validator_harness",
+        "candidate_dry_run"
+      ],
+      "claim_trace_requirements": [
+        "Every FC144 candidate payload must pass the boundary validator."
+      ],
+      "evidence_refs": [
+        {
+          "ref_id": "fc144_policy_zero_violation_gate",
+          "summary": "Validator requires FC144 boundary violation count to be zero.",
+          "limitations": [
+            "Does not activate or import content."
+          ]
+        }
+      ],
+      "review_status": "approved_for_validator_scaffold"
+    },
+    {
+      "source_id": "forbidden_claim_policy",
+      "source_label": "policy_contract",
+      "title": "Forbidden claim policy",
+      "authority_level": "policy",
+      "source_ref": {
+        "kind": "policy",
+        "value": "enneagram_result_page_forbidden_claim_families",
+        "sha256": null
+      },
+      "claim_categories": [
+        "safety_policy",
+        "metadata_leakage",
+        "forbidden_claim_boundary"
+      ],
+      "permitted_use": [
+        "Validate that candidate payloads do not contain forbidden claim families or private metadata leakage."
+      ],
+      "limitations": [
+        "Policy row only; future content generation still needs separate source-backed review."
+      ],
+      "disallowed_use": [
+        "No diagnostic, hiring, final typing, fixed certainty, score-comparison, FC144 replacement, prediction, or private identifier leakage."
+      ],
+      "copy_policy": {
+        "copy_allowed": false,
+        "paraphrase_allowed": false,
+        "public_payload_allowed": false,
+        "notes": "Policy row only."
+      },
+      "asset_scopes_allowed": [
+        "source_ledger",
+        "validator_harness",
+        "candidate_dry_run"
+      ],
+      "claim_trace_requirements": [
+        "Every candidate payload must pass metadata leakage and forbidden claim scans before import QA."
+      ],
+      "evidence_refs": [
+        {
+          "ref_id": "forbidden_claim_zero_gate",
+          "summary": "Validator requires forbidden claim and metadata leakage hit counts to be zero.",
+          "limitations": [
+            "Does not generate or approve new content by itself."
+          ]
+        }
+      ],
+      "review_status": "approved_for_validator_scaffold"
+    }
+  ]
+}

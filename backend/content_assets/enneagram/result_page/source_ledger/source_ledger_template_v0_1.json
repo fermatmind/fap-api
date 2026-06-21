@@ -1,0 +1,104 @@
+{
+  "schema_version": "fap.enneagram.result_page.source_ledger.v0.1",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "cms_write_performed": false,
+  "runtime_change_performed": false,
+  "frontend_fallback_allowed": false,
+  "activation_happened": false,
+  "description": "Template for source-ledger rows consumed by the Enneagram result-page asset agent validator harness.",
+  "allowed_source_labels": [
+    "runtime_contract",
+    "compiled_question_contract",
+    "candidate_baseline",
+    "asset_stream_contract",
+    "policy_contract"
+  ],
+  "candidate_contract": {
+    "baseline_candidate_manifest_sha256": "a9fd3eb474ea2ca0130d06ad2b1640305d9160ee1a74e559ad4f60bfc4db56c0",
+    "runtime_registry_manifest_sha256": "ac5bdaab3c761b0d01a56f92679aa58341110d64de0f47a1fa0062b64f76f97f",
+    "expected_payload_count": 630,
+    "launch_scope": [
+      "1R-A",
+      "1R-B",
+      "1R-C",
+      "1R-D",
+      "1R-E",
+      "1R-F",
+      "1R-G",
+      "1R-H"
+    ],
+    "out_of_launch_scope": [
+      "1R-I",
+      "1R-J"
+    ]
+  },
+  "required_row_fields": [
+    "source_id",
+    "source_label",
+    "title",
+    "authority_level",
+    "source_ref",
+    "claim_categories",
+    "permitted_use",
+    "limitations",
+    "disallowed_use",
+    "copy_policy",
+    "asset_scopes_allowed",
+    "claim_trace_requirements",
+    "evidence_refs",
+    "review_status"
+  ],
+  "row_template": {
+    "source_id": "stable_snake_case_id",
+    "source_label": "runtime_contract | compiled_question_contract | candidate_baseline | asset_stream_contract | policy_contract",
+    "title": "Short source title",
+    "authority_level": "primary | supporting | policy | baseline",
+    "source_ref": {
+      "kind": "repo_path | logical_asset_stream | contract_hash | policy",
+      "value": "repository/relative/path-or-logical-source-ref",
+      "sha256": null
+    },
+    "claim_categories": [
+      "runtime_hash",
+      "question_boundary",
+      "candidate_baseline",
+      "source_mapping",
+      "safety_policy",
+      "fc144_boundary"
+    ],
+    "permitted_use": [
+      "Describe the exact bounded use this source supports."
+    ],
+    "limitations": [
+      "Describe uncertainty, ownership, measurement, and generalization limits."
+    ],
+    "disallowed_use": [
+      "Describe forbidden claim or copy use."
+    ],
+    "copy_policy": {
+      "copy_allowed": false,
+      "paraphrase_allowed": false,
+      "public_payload_allowed": false,
+      "notes": "Evidence-only unless a future PR explicitly promotes the row for generated candidate content."
+    },
+    "asset_scopes_allowed": [
+      "source_ledger",
+      "validator_harness",
+      "candidate_dry_run"
+    ],
+    "claim_trace_requirements": [
+      "Every future derived claim must include source_id, evidence_ref, limitation, and reviewer decision."
+    ],
+    "evidence_refs": [
+      {
+        "ref_id": "evidence_ref_id",
+        "summary": "Short evidence summary.",
+        "limitations": [
+          "Known limit"
+        ]
+      }
+    ],
+    "review_status": "template"
+  }
+}
