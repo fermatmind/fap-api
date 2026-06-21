@@ -7,6 +7,7 @@ namespace Tests\Feature\SeoIntel;
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
+use App\Models\ContentPage;
 use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileVariant;
 use App\Models\ResearchReport;
@@ -143,6 +144,82 @@ final class SeoIntelTwoStageUrlTruthHandoffTest extends TestCase
         $this->assertSame(1, $importOutput['planned_url_count'] ?? null);
         $this->assertFalse((bool) ($importOutput['writes_committed'] ?? true));
         $this->assertFalse((bool) ($importOutput['external_api_calls'] ?? true));
+        $this->assertFalse((bool) ($importOutput['search_url_submission'] ?? true));
+    }
+
+    #[Test]
+    public function command_exports_and_validates_filtered_content_page_handoff_artifact_without_writes(): void
+    {
+        config([
+            'app.frontend_url' => 'https://www.fermatmind.com',
+            'seo_intel.public_canonical_host' => 'https://fermatmind.com',
+        ]);
+
+        $about = $this->createPublishedContentPage([
+            'slug' => 'help-about',
+            'path' => '/help/about',
+            'canonical_path' => '/help/about',
+            'locale' => 'zh-CN',
+            'title' => 'About FermatMind',
+        ]);
+        $this->createPublishedContentPage([
+            'slug' => 'help-contact',
+            'path' => '/help/contact',
+            'canonical_path' => '/help/contact',
+            'locale' => 'zh-CN',
+            'title' => 'Contact FermatMind',
+        ]);
+
+        $path = sys_get_temp_dir().'/content-page-url-truth-handoff-'.bin2hex(random_bytes(4)).'.json';
+
+        $exportExitCode = Artisan::call('seo-intel:url-truth-handoff', [
+            '--export' => $path,
+            '--dry-run' => true,
+            '--json' => true,
+            '--limit' => 20,
+            '--page-type' => 'content_page',
+            '--canonical-path' => '/help/about',
+        ]);
+        $exportOutput = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(0, $exportExitCode, json_encode($exportOutput, JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR));
+        $this->assertSame('success', $exportOutput['status'] ?? null);
+        $this->assertSame('content_page', $exportOutput['page_entity_type'] ?? null);
+        $this->assertSame('/help/about', $exportOutput['canonical_path_filter'] ?? null);
+        $this->assertTrue((bool) ($exportOutput['dry_run'] ?? false));
+        $this->assertFalse((bool) ($exportOutput['writes_committed'] ?? true));
+        $this->assertFalse((bool) ($exportOutput['external_api_calls'] ?? true));
+        $this->assertFalse((bool) ($exportOutput['search_url_submission'] ?? true));
+        $this->assertSame(1, $exportOutput['planned_url_count'] ?? null);
+        $this->assertFileExists($path);
+
+        $artifact = json_decode((string) file_get_contents($path), true);
+        $this->assertSame(UrlTruthHandoffArtifact::SCHEMA_VERSION, $artifact['schema_version'] ?? null);
+        $this->assertSame('two_stage_content_page_url_truth_handoff', $artifact['mode'] ?? null);
+        $this->assertSame('content_page', data_get($artifact, 'constraints.allowed_page_entity_type'));
+        $this->assertSame('content_page', data_get($artifact, 'candidates.0.page_entity_type'));
+        $this->assertSame('backend_cms', data_get($artifact, 'candidates.0.source_authority'));
+        $this->assertSame('content_pages', data_get($artifact, 'candidates.0.entity_source'));
+        $this->assertSame('published_approved', data_get($artifact, 'candidates.0.authority_status'));
+        $this->assertTrue((bool) data_get($artifact, 'candidates.0.attributes.claim_safe'));
+        $this->assertSame((string) $about->slug, data_get($artifact, 'candidates.0.entity_id_or_slug'));
+        $this->assertSame('/zh/help/about', parse_url((string) data_get($artifact, 'candidates.0.canonical_url'), PHP_URL_PATH));
+
+        $importExitCode = Artisan::call('seo-intel:url-truth-handoff', [
+            '--import' => $path,
+            '--dry-run' => true,
+            '--json' => true,
+            '--limit' => 20,
+            '--page-type' => 'content_page',
+        ]);
+        $importOutput = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(0, $importExitCode, json_encode($importOutput, JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR));
+        $this->assertSame('success', $importOutput['status'] ?? null);
+        $this->assertSame('content_page', $importOutput['page_entity_type'] ?? null);
+        $this->assertSame('import_dry_run', $importOutput['mode'] ?? null);
+        $this->assertSame(1, $importOutput['planned_url_count'] ?? null);
+        $this->assertFalse((bool) ($importOutput['writes_committed'] ?? true));
         $this->assertFalse((bool) ($importOutput['search_url_submission'] ?? true));
     }
 
@@ -343,6 +420,38 @@ final class SeoIntelTwoStageUrlTruthHandoffTest extends TestCase
         $this->assertContains('candidate_forbidden_route_fragment:/results:0', $output['issues'] ?? []);
         $this->assertContains('candidate_forbidden_route_fragment:token=:1', $output['issues'] ?? []);
         $this->assertContains('candidate_forbidden_route_fragment:/account:2', $output['issues'] ?? []);
+        $this->assertFalse((bool) ($output['writes_committed'] ?? true));
+        $this->assertFalse((bool) ($output['search_url_submission'] ?? true));
+    }
+
+    #[Test]
+    public function content_page_handoff_validation_blocks_private_noindex_or_claim_unsafe_candidates(): void
+    {
+        $artifact = new UrlTruthHandoffArtifact;
+        $payload = $artifact->fromRecords([
+            $this->contentPageRecord(canonicalUrl: 'https://fermatmind.com/zh/account/about'),
+            $this->contentPageRecord(canonicalUrl: 'https://fermatmind.com/zh/help/noindex', indexabilityState: 'noindex'),
+            $this->contentPageRecord(canonicalUrl: 'https://fermatmind.com/zh/help/claim-unsafe', claimSafe: false),
+        ], pageEntityType: 'content_page');
+
+        $path = sys_get_temp_dir().'/invalid-content-page-url-truth-handoff-'.bin2hex(random_bytes(4)).'.json';
+        $artifact->writeJson($path, $payload);
+
+        $exitCode = Artisan::call('seo-intel:url-truth-handoff', [
+            '--import' => $path,
+            '--dry-run' => true,
+            '--json' => true,
+            '--limit' => 20,
+            '--page-type' => 'content_page',
+        ]);
+        $output = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('blocked', $output['status'] ?? null);
+        $this->assertContains('candidate_route_not_content_page:0', $output['issues'] ?? []);
+        $this->assertContains('candidate_forbidden_route_fragment:/account:0', $output['issues'] ?? []);
+        $this->assertContains('candidate_not_indexable:1', $output['issues'] ?? []);
+        $this->assertContains('candidate_claim_unsafe:2', $output['issues'] ?? []);
         $this->assertFalse((bool) ($output['writes_committed'] ?? true));
         $this->assertFalse((bool) ($output['search_url_submission'] ?? true));
     }
@@ -756,6 +865,47 @@ final class SeoIntelTwoStageUrlTruthHandoffTest extends TestCase
         );
     }
 
+    private function contentPageRecord(
+        string $canonicalUrl = 'https://fermatmind.com/zh/help/about',
+        string $entityIdOrSlug = 'help-about',
+        string $indexabilityState = 'indexable',
+        bool $claimSafe = true,
+    ): UrlTruthInventoryRecord {
+        $path = (string) parse_url($canonicalUrl, PHP_URL_PATH);
+
+        return new UrlTruthInventoryRecord(
+            canonicalUrl: $canonicalUrl,
+            locale: 'zh-CN',
+            pageEntityType: 'content_page',
+            entityIdOrSlug: $entityIdOrSlug,
+            sourceAuthority: 'backend_cms',
+            indexabilityState: $indexabilityState,
+            lastmodAt: now()->subHour(),
+            lastmodSource: 'content_pages.updated_at',
+            cluster: 'content_pages',
+            entitySource: 'content_pages',
+            authorityStatus: 'published_approved',
+            sourceUpdatedAt: now()->subHour(),
+            isPrivateFlow: false,
+            metadata: [
+                'canonical_path_hash' => hash('sha256', $path),
+                'source_table_hash' => hash('sha256', 'content_pages'),
+                'claim_boundary_state' => $claimSafe ? 'claim_safe' : 'claim_unsafe',
+                'claim_safe' => $claimSafe,
+                'publication_state' => 'published',
+                'robots' => $indexabilityState === 'indexable' ? 'index' : 'noindex',
+                'frontend_fallback' => false,
+                'static_sitemap_fallback' => false,
+                'static_llms_fallback' => false,
+                'private_flow' => false,
+            ],
+            attributes: [
+                'claim_safe' => $claimSafe,
+                'source_authority' => 'backend_cms',
+            ],
+        );
+    }
+
     private function personalityVariantRecord(
         string $canonicalUrl = 'https://fermatmind.com/en/personality/intj-a',
         string $locale = 'en',
@@ -1025,5 +1175,42 @@ final class SeoIntelTwoStageUrlTruthHandoffTest extends TestCase
             $table->json('attributes_json')->nullable();
             $table->timestamps();
         });
+    }
+
+    /**
+     * @param  array<string, mixed>  $overrides
+     */
+    private function createPublishedContentPage(array $overrides = []): ContentPage
+    {
+        return ContentPage::query()->create($overrides + [
+            'org_id' => 0,
+            'slug' => 'help-about',
+            'path' => '/help/about',
+            'canonical_path' => '/help/about',
+            'kind' => ContentPage::KIND_HELP,
+            'page_type' => 'support_static',
+            'title' => 'About FermatMind',
+            'summary' => 'About FermatMind.',
+            'template' => 'company',
+            'animation_profile' => 'none',
+            'locale' => 'zh-CN',
+            'content_md' => 'About FermatMind content.',
+            'content_html' => '<p>About FermatMind content.</p>',
+            'seo_title' => 'About FermatMind',
+            'seo_description' => 'About FermatMind description.',
+            'is_public' => true,
+            'is_indexable' => true,
+            'schema_enabled' => false,
+            'publish_allowed' => true,
+            'operator_approval_required' => false,
+            'legal_review_required' => false,
+            'science_review_required' => false,
+            'claim_gate_status' => 'passed',
+            'forbidden_claims' => [],
+            'status' => ContentPage::STATUS_PUBLISHED,
+            'review_state' => 'approved',
+            'published_revision_id' => 88,
+            'published_at' => now()->subHour(),
+        ]);
     }
 }
