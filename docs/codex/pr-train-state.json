@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-21T19:08:00+08:00",
+  "updated_at": "2026-06-21T19:22:00+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -35978,7 +35978,7 @@
   "CONTENT-PACKS-CI-ARTIFACT-CONSUMER-SPLIT-01": {
     "repo": "fap-api",
     "branch": "fix/content-packs-ci-artifact-consumer-split-01",
-    "status": "ready_to_merge",
+    "status": "merged",
     "commit_sha": "f42f3017987210b4b6ee9b002f90631ce861bc7e",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1768",
     "checks": {
@@ -55587,15 +55587,15 @@
       },
       "github": {
         "status": "pass",
-        "evidence": "PR #2207 checks passed on head 99b96e2f829d0ae36ae2cf5c72aa6892f5ca76fb: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and non-blocking Semgrep SARIF upload."
+        "evidence": "PR #2207 checks passed on final head a0f87219093d9b95f6d24b1e660a8fbdb5d1f1a3: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and non-blocking Semgrep SARIF upload."
       }
     },
     "failure_reason": null,
-    "commit_sha": "99b96e2f829d0ae36ae2cf5c72aa6892f5ca76fb",
+    "commit_sha": "0d8c99b42b6475d4d6bb90cbdab9256735acf81d",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2207",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-21T10:25:44Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-21T15:57:09+08:00",
@@ -55616,6 +55616,11 @@
         "at": "2026-06-21T19:08:00+08:00",
         "status": "ready_to_merge",
         "note": "PR #2207 GitHub checks passed on head 99b96e2f829d0ae36ae2cf5c72aa6892f5ca76fb; merge state CLEAN. Ready to merge after this state update revalidates."
+      },
+      {
+        "at": "2026-06-21T19:22:00+08:00",
+        "status": "merged",
+        "note": "Reconciled during BIG5-RESULT-RENDER-PREVIEW-HANDOFF-01: PR #2207 merged at 2026-06-21T10:25:44Z with merge commit 0d8c99b42b6475d4d6bb90cbdab9256735acf81d; origin/main contains the merge commit; local main equals origin/main; local branch deleted; remote branch absent; post-merge revalidation passed."
       }
     ]
   },
@@ -55623,7 +55628,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-result-render-preview-handoff-01",
     "base": "main",
-    "status": "pending_dependency",
+    "status": "local_checks_passed",
     "train_scope": "big5_result_page_v2_asset_agent",
     "title": "BIG5-RESULT-RENDER-PREVIEW-HANDOFF-01: docs(big5):交付 rendered preview fixtures",
     "depends_on": [
@@ -55635,8 +55640,26 @@
         "evidence": "User explicitly requested implementation of the eight-item Big Five Result Page V2 asset-agent plan."
       },
       "dependency": {
-        "status": "pending",
-        "evidence": "Waits for BIG5-RESULT-ROUTE-MATRIX-GOLDEN-CASE-QA-01 to merge into main."
+        "status": "pass",
+        "evidence": "BIG5-RESULT-ROUTE-MATRIX-GOLDEN-CASE-QA-01 is merged; origin/main contains merge commit 0d8c99b42b6475d4d6bb90cbdab9256735acf81d."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ValidatorTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2PublicSurfacePolicyTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2PdfSurfacePolicyTest --no-ansi",
+          "python3 -m json.tool backend/content_assets/big5/result_page_v2/rendered_preview/fap_web_handoff/v0_1/render_preview_fixture_manifest.json >/dev/null",
+          "python3 -m json.tool backend/content_assets/big5/result_page_v2/rendered_preview/fap_web_handoff/v0_1/expected_assertions.json >/dev/null",
+          "git diff --check",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+        ],
+        "evidence": "Validator, public surface policy, and PDF surface policy tests passed with existing PHPUnit warning classifications. New fap-web handoff manifest and expected assertions parse as JSON."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are confined to backend/content_assets/big5/result_page_v2/rendered_preview/fap_web_handoff/v0_1/* and docs/codex/pr-train-state.json."
       }
     },
     "failure_reason": null,
@@ -55650,6 +55673,11 @@
         "at": "2026-06-21T15:57:09+08:00",
         "status": "pending_dependency",
         "note": "Manifest/state entry authorized; implementation waits for the route matrix and golden case QA PR."
+      },
+      {
+        "at": "2026-06-21T19:22:00+08:00",
+        "status": "local_checks_passed",
+        "note": "Added backend-owned fap-web render preview handoff bundle with fixture manifest, expected assertions, and go/no-go. Covers result page, PDF, share, history, compare, locked/free redaction, low-quality, and norm-unavailable assertions. No fap-web changes, frontend fallback, CMS import, runtime selector wiring, pilot flag, or production gate change."
       }
     ]
   }
