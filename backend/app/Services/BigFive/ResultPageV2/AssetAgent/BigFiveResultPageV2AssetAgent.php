@@ -389,6 +389,88 @@ final class BigFiveResultPageV2AssetAgent
     }
 
     /**
+     * @param  array{
+     *   run_id?:string,
+     *   artifact_dir?:string,
+     *   source_run_dir?:string,
+     *   pr_id?:string,
+     *   branch?:string,
+     *   title?:string
+     * }  $options
+     * @return array<string,mixed>
+     */
+    public function planPr(array $options = []): array
+    {
+        $runId = $this->sanitizeRunId((string) ($options['run_id'] ?? ''));
+        $artifactDir = $this->artifactDir((string) ($options['artifact_dir'] ?? ''), $runId);
+        $sourceRunDir = trim((string) ($options['source_run_dir'] ?? '')) === ''
+            ? ''
+            : $this->absolutePath((string) ($options['source_run_dir'] ?? ''));
+        $prId = $this->sanitizePrId((string) ($options['pr_id'] ?? ''));
+        $branch = $this->sanitizeBranch((string) ($options['branch'] ?? ''), $prId);
+        $title = trim((string) ($options['title'] ?? '')) !== ''
+            ? trim((string) ($options['title'] ?? ''))
+            : $prId.': Big Five V2 agent artifact handoff';
+
+        $this->ensureDirectory($artifactDir);
+
+        $sourceSummary = $this->sourceRunSummary($sourceRunDir);
+        $plannedFiles = $this->plannedChangedFiles((array) ($sourceSummary['files'] ?? []));
+        $scopeValidation = $this->orchestratorScopeValidation($plannedFiles);
+        $prBody = $this->buildAutoPrBody($prId, $sourceSummary, $scopeValidation);
+        $ok = (bool) ($sourceSummary['valid'] ?? false) && (bool) ($scopeValidation['valid'] ?? false);
+
+        $plan = [
+            'schema_version' => self::SCHEMA_VERSION,
+            'task' => 'auto_pr_orchestrator_plan',
+            'runtime_use' => 'not_runtime',
+            'production_use_allowed' => false,
+            'ready_for_pilot' => false,
+            'ready_for_runtime' => false,
+            'ready_for_production' => false,
+            'ok' => $ok,
+            'status' => $ok ? 'ready_for_operator_orchestrator' : 'blocked',
+            'execution_mode' => 'dry_run_artifact_only',
+            'run_id' => $runId,
+            'pr' => [
+                'id' => $prId,
+                'branch' => $branch,
+                'title' => $title,
+                'commit_message' => $title,
+                'body_artifact' => 'auto_pr_body.md',
+            ],
+            'source_run' => $sourceSummary,
+            'planned_changed_files' => $plannedFiles,
+            'scope_validation' => $scopeValidation,
+            'negative_guarantees' => $this->orchestratorNegativeGuarantees(),
+        ];
+
+        $artifacts = [
+            'auto_pr_orchestration_plan.json' => $this->writeJson($artifactDir.'/auto_pr_orchestration_plan.json', $plan),
+            'auto_pr_scope_validation.json' => $this->writeJson($artifactDir.'/auto_pr_scope_validation.json', $scopeValidation),
+            'auto_pr_body.md' => $this->writeText($artifactDir.'/auto_pr_body.md', $prBody),
+        ];
+
+        return [
+            'schema_version' => self::SCHEMA_VERSION,
+            'ok' => $ok,
+            'status' => $ok ? 'success' : 'blocked',
+            'run_id' => $runId,
+            'artifact_dir' => $artifactDir,
+            'artifacts' => $artifacts,
+            'summary' => [
+                'source_run_valid' => (bool) ($sourceSummary['valid'] ?? false),
+                'planned_changed_file_count' => count($plannedFiles),
+                'scope_validation_valid' => (bool) ($scopeValidation['valid'] ?? false),
+                'ready_for_pilot' => false,
+                'ready_for_runtime' => false,
+                'ready_for_production' => false,
+            ],
+            'negative_guarantees' => $this->orchestratorNegativeGuarantees(),
+        ];
+    }
+
+    /**
      * @return array<string,mixed>
      */
     private function buildInventory(string $contentAssetRoot, string $sourceLedgerDir): array
@@ -1477,6 +1559,203 @@ final class BigFiveResultPageV2AssetAgent
         return trim($runId, '.-') !== '' ? $runId : gmdate('Ymd\THis\Z');
     }
 
+    private function sanitizePrId(string $prId): string
+    {
+        $prId = strtoupper(trim($prId));
+        $prId = preg_replace('/[^A-Z0-9_.-]/', '-', $prId) ?: 'B5-RESULT-AGENT-ARTIFACT-PR';
+
+        return trim($prId, '.-') !== '' ? $prId : 'B5-RESULT-AGENT-ARTIFACT-PR';
+    }
+
+    private function sanitizeBranch(string $branch, string $prId): string
+    {
+        $branch = trim($branch) !== '' ? trim($branch) : 'codex/'.strtolower(str_replace('_', '-', $prId));
+        $branch = preg_replace('/[^A-Za-z0-9_\\/.:-]/', '-', $branch) ?: 'codex/big5-v2-agent-artifact-pr';
+
+        return trim($branch, '.-/') !== '' ? $branch : 'codex/big5-v2-agent-artifact-pr';
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function sourceRunSummary(string $sourceRunDir): array
+    {
+        if ($sourceRunDir === '' || ! is_dir($sourceRunDir)) {
+            return [
+                'valid' => false,
+                'source_run_dir' => null,
+                'artifact_kind' => 'missing',
+                'files' => [],
+                'errors' => ['source_run_dir missing'],
+            ];
+        }
+
+        $files = [];
+        foreach ($this->filesUnder($sourceRunDir) as $file) {
+            $files[] = [
+                'relative_path' => $this->redactPath($file->getPathname()),
+                'sha256' => hash_file('sha256', $file->getPathname()) ?: '',
+                'size' => filesize($file->getPathname()) ?: 0,
+            ];
+        }
+
+        $errors = [];
+        $kind = $this->sourceArtifactKind($sourceRunDir);
+        if ($kind === 'unknown') {
+            $errors[] = 'source artifact kind unsupported';
+        }
+
+        return [
+            'valid' => $errors === [] && $files !== [],
+            'source_run_dir' => $this->redactPath($sourceRunDir),
+            'artifact_kind' => $kind,
+            'file_count' => count($files),
+            'files' => $files,
+            'summary' => $this->sourceArtifactSummary($sourceRunDir, $kind),
+            'errors' => $errors,
+        ];
+    }
+
+    private function sourceArtifactKind(string $sourceRunDir): string
+    {
+        foreach ([
+            'candidate_generation_summary.json' => 'candidate_generation',
+            'staging_import_summary.json' => 'staging_import',
+            'ops_report_summary.json' => 'audit_ops_report',
+            'qa_eval_summary.json' => 'audit_qa_report',
+        ] as $filename => $kind) {
+            if (is_file(rtrim($sourceRunDir, '/').'/'.$filename)) {
+                return $kind;
+            }
+        }
+
+        return 'unknown';
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function sourceArtifactSummary(string $sourceRunDir, string $kind): array
+    {
+        $filename = match ($kind) {
+            'candidate_generation' => 'candidate_generation_summary.json',
+            'staging_import' => 'staging_import_summary.json',
+            'audit_ops_report' => 'ops_report_summary.json',
+            'audit_qa_report' => 'qa_eval_summary.json',
+            default => '',
+        };
+
+        if ($filename === '') {
+            return [];
+        }
+
+        $payload = $this->readOptionalJson(rtrim($sourceRunDir, '/').'/'.$filename);
+        if (! is_array($payload)) {
+            return [];
+        }
+
+        return [
+            'status' => (string) ($payload['status'] ?? ($payload['task'] ?? '')),
+            'runtime_use' => (string) ($payload['runtime_use'] ?? ''),
+            'production_use_allowed' => (bool) ($payload['production_use_allowed'] ?? false),
+            'ready_for_pilot' => (bool) ($payload['ready_for_pilot'] ?? false),
+            'ready_for_runtime' => (bool) ($payload['ready_for_runtime'] ?? false),
+            'ready_for_production' => (bool) ($payload['ready_for_production'] ?? false),
+            'validation_error_count' => (int) data_get($payload, 'validation.error_count', data_get($payload, 'metrics.validation_error_count', 0)),
+            'leak_hit_count' => (int) data_get($payload, 'leak_scan.hit_count', data_get($payload, 'metrics.forbidden_leak_hit_count', 0)),
+        ];
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $files
+     * @return list<string>
+     */
+    private function plannedChangedFiles(array $files): array
+    {
+        $planned = [];
+        foreach ($files as $file) {
+            $relativePath = (string) ($file['relative_path'] ?? '');
+            if ($relativePath === '') {
+                continue;
+            }
+            $planned[] = str_starts_with($relativePath, 'backend/')
+                ? $relativePath
+                : 'backend/'.$relativePath;
+        }
+
+        sort($planned);
+
+        return array_values(array_unique($planned));
+    }
+
+    /**
+     * @param  list<string>  $plannedFiles
+     * @return array<string,mixed>
+     */
+    private function orchestratorScopeValidation(array $plannedFiles): array
+    {
+        $allowedPrefixes = [
+            'backend/artifacts/big5_result_page_v2_agent/',
+            'backend/content_assets/big5/result_page_v2/agent_runs/',
+            'backend/content_assets/big5/result_page_v2/staging_candidate_imports/',
+            'docs/codex/',
+        ];
+        $violations = [];
+        foreach ($plannedFiles as $file) {
+            $allowed = false;
+            foreach ($allowedPrefixes as $prefix) {
+                if (str_starts_with($file, $prefix)) {
+                    $allowed = true;
+                    break;
+                }
+            }
+            if (! $allowed) {
+                $violations[] = $file;
+            }
+        }
+
+        return [
+            'schema_version' => self::SCHEMA_VERSION,
+            'task' => 'auto_pr_scope_validation',
+            'runtime_use' => 'not_runtime',
+            'production_use_allowed' => false,
+            'valid' => $plannedFiles !== [] && $violations === [],
+            'allowed_prefixes' => $allowedPrefixes,
+            'planned_changed_file_count' => count($plannedFiles),
+            'violations' => $violations,
+            'negative_guarantees' => $this->orchestratorNegativeGuarantees(),
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $sourceSummary
+     * @param  array<string,mixed>  $scopeValidation
+     */
+    private function buildAutoPrBody(string $prId, array $sourceSummary, array $scopeValidation): string
+    {
+        $lines = [
+            '## What changed',
+            '- Adds reviewed Big Five V2 result-page asset agent artifacts for `'.$prId.'`.',
+            '- Includes generated scope validation evidence for the artifact-only change set.',
+            '',
+            '## Why',
+            '- Keeps backend as the content asset authority while preserving staging/not-runtime defaults.',
+            '',
+            '## Validation',
+            '- `php artisan big5:result-page-v2-agent plan-pr --run-id=<run> --source-run-dir=<artifact-run> --json --no-ansi`',
+            '- Scope validation: '.$this->markdownScalar($scopeValidation['valid'] ?? false),
+            '- Source artifact kind: '.(string) ($sourceSummary['artifact_kind'] ?? 'unknown'),
+            '',
+            '## Intentionally deferred',
+            '- No frontend copy added.',
+            '- No final Big Five result page runtime payload generated.',
+            '- No production import, release snapshot, rollout gate, or runtime flag changed.',
+            '- Legacy `big5_report_engine_v2` remains fallback only.',
+        ];
+
+        return implode(PHP_EOL, $lines).PHP_EOL;
+    }
+
     private function ensureDirectory(string $path): void
     {
         if (! is_dir($path) && ! mkdir($path, 0775, true) && ! is_dir($path)) {
@@ -1620,6 +1899,29 @@ final class BigFiveResultPageV2AssetAgent
             'release_snapshot_change' => false,
             'production_import_gate_change' => false,
             'rollout_gate_change' => false,
+        ];
+    }
+
+    /**
+     * @return array<string,bool>
+     */
+    private function orchestratorNegativeGuarantees(): array
+    {
+        return [
+            'database_write' => false,
+            'cms_write' => false,
+            'content_assets_write' => false,
+            'frontend_copy_write' => false,
+            'final_result_payload_generation' => false,
+            'runtime_flag_change' => false,
+            'release_snapshot_change' => false,
+            'production_import_gate_change' => false,
+            'rollout_gate_change' => false,
+            'git_branch_created' => false,
+            'git_commit_created' => false,
+            'github_pr_created' => false,
+            'github_checks_polled' => false,
+            'auto_merge_performed' => false,
         ];
     }
 }

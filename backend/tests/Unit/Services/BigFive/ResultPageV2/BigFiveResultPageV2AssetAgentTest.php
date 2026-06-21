@@ -265,6 +265,86 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
         }
     }
 
+    public function test_plan_pr_writes_dry_run_orchestration_artifacts_without_git_or_github_mutation(): void
+    {
+        $artifactRoot = base_path('artifacts/big5_result_page_v2_agent/unit-orchestrator');
+
+        $this->deleteDirectory($artifactRoot);
+
+        try {
+            app(BigFiveResultPageV2AssetAgent::class)->generateCandidates([
+                'run_id' => 'candidate-source',
+                'artifact_dir' => $artifactRoot,
+            ]);
+
+            $this->artisan('big5:result-page-v2-agent', [
+                'action' => 'plan-pr',
+                '--run-id' => 'orchestrator-plan',
+                '--artifact-dir' => $artifactRoot,
+                '--source-run-dir' => $artifactRoot.'/candidate-source',
+                '--pr-id' => 'B5-RESULT-CANDIDATE-BATCH-DRY-RUN-01',
+                '--branch' => 'codex/big5-v2-candidate-batch-dry-run',
+                '--title' => 'B5-RESULT-CANDIDATE-BATCH-DRY-RUN-01: Big Five V2 candidate batch dry run',
+                '--json' => true,
+            ])->assertExitCode(0);
+
+            $runDir = $artifactRoot.'/orchestrator-plan';
+            foreach ([
+                'auto_pr_orchestration_plan.json',
+                'auto_pr_scope_validation.json',
+                'auto_pr_body.md',
+            ] as $filename) {
+                $this->assertFileExists($runDir.'/'.$filename);
+            }
+
+            $plan = $this->readJson($runDir.'/auto_pr_orchestration_plan.json');
+            $scope = $this->readJson($runDir.'/auto_pr_scope_validation.json');
+            $body = (string) file_get_contents($runDir.'/auto_pr_body.md');
+
+            $this->assertSame('auto_pr_orchestrator_plan', $plan['task'] ?? null);
+            $this->assertSame('not_runtime', $plan['runtime_use'] ?? null);
+            $this->assertFalse((bool) ($plan['production_use_allowed'] ?? true));
+            $this->assertFalse((bool) ($plan['ready_for_pilot'] ?? true));
+            $this->assertFalse((bool) ($plan['ready_for_runtime'] ?? true));
+            $this->assertFalse((bool) ($plan['ready_for_production'] ?? true));
+            $this->assertSame('dry_run_artifact_only', $plan['execution_mode'] ?? null);
+            $this->assertSame('codex/big5-v2-candidate-batch-dry-run', data_get($plan, 'pr.branch'));
+            $this->assertSame('candidate_generation', data_get($plan, 'source_run.artifact_kind'));
+            $this->assertTrue((bool) data_get($plan, 'source_run.valid'));
+            $this->assertGreaterThan(0, (int) data_get($plan, 'scope_validation.planned_changed_file_count'));
+            $this->assertTrue((bool) data_get($plan, 'scope_validation.valid'));
+            $this->assertTrue((bool) ($scope['valid'] ?? false));
+
+            foreach ([
+                'git_branch_created',
+                'git_commit_created',
+                'github_pr_created',
+                'github_checks_polled',
+                'auto_merge_performed',
+                'runtime_flag_change',
+                'production_import_gate_change',
+                'rollout_gate_change',
+            ] as $guarantee) {
+                $this->assertFalse((bool) data_get($plan, "negative_guarantees.{$guarantee}", true), $guarantee);
+            }
+
+            $this->assertStringContainsString('No frontend copy added.', $body);
+            $this->assertStringContainsString('No production import, release snapshot, rollout gate, or runtime flag changed.', $body);
+            $this->assertStringContainsString('Legacy `big5_report_engine_v2` remains fallback only.', $body);
+
+            $allArtifacts = implode("\n", [
+                (string) file_get_contents($runDir.'/auto_pr_orchestration_plan.json'),
+                (string) file_get_contents($runDir.'/auto_pr_scope_validation.json'),
+                $body,
+            ]);
+            foreach (['private_url', 'attempt_id', 'raw_score', 'percentile', 'fixed_type', 'user_confirmed_type', 'type_code'] as $forbiddenToken) {
+                $this->assertStringNotContainsString($forbiddenToken, $allArtifacts);
+            }
+        } finally {
+            $this->deleteDirectory($artifactRoot);
+        }
+    }
+
     public function test_stage_candidates_fails_closed_without_human_review_manifest(): void
     {
         $artifactRoot = $this->tempDir('big5-v2-agent-stage-missing-review');
