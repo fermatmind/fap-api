@@ -1,0 +1,85 @@
+{
+  "schema": "big5_result_page_v2.m7_pilot_gate_report.v0_1",
+  "package": "m7_pilot_gate",
+  "version": "v0_1",
+  "generated_at": "2026-06-21T00:00:00Z",
+  "mode": "pilot_gate_go_no_go",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_pilot": true,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "pilot_gate_decision": "GO_ALLOWLIST_ONLY",
+  "production_decision": "NO_GO",
+  "allowed_pilot_modes": [
+    "production_public_pilot_allowlist_only",
+    "non_production_percentage_simulation"
+  ],
+  "blocked_modes": [
+    "production_percentage_without_explicit_enablement",
+    "production_percentage_over_configured_max",
+    "full_production_rollout",
+    "ops_dashboard_reporting"
+  ],
+  "gate_status": {
+    "coverage_qa": {
+      "status": "pass",
+      "evidence": "backend/content_assets/big5/result_page_v2/master_catalog/v0_1/big5_master_catalog_qa_summary_v0_1.json"
+    },
+    "safety_qa": {
+      "status": "pass",
+      "evidence": "backend/content_assets/big5/result_page_v2/qa/production_all_surface_release_gate/v0_1/big5_v2_production_all_surface_regression_scan_v0_1.json"
+    },
+    "editorial_qa": {
+      "status": "pass",
+      "evidence": "backend/content_assets/big5/result_page_v2/governance/release_approval_v0_1/big5_v2_release_approval_evidence_v0_1.json"
+    },
+    "mapping_qa": {
+      "status": "pass",
+      "evidence": "backend/content_assets/big5/result_page_v2/qa/selector_reference_consistency/v0_1/selector_reference_consistency_report_v0_1.json"
+    },
+    "rendered_preview_qa": {
+      "status": "pass",
+      "evidence": "backend/content_assets/big5/result_page_v2/qa/all_surface_public_pilot_readiness/v0_1/big5_all_surface_public_pilot_readiness_report_v0_1.json"
+    },
+    "release_snapshot": {
+      "status": "present_not_production_enabled",
+      "evidence": "backend/content_assets/big5/result_page_v2/releases/v0_1/big5_v2_release_snapshot_rc_0_1.json"
+    },
+    "production_import_gate": {
+      "status": "policy_present_fail_closed",
+      "evidence": "backend/content_assets/big5/result_page_v2/governance/production_import_gate_v0_1/big5_v2_production_import_gate_policy_v0_1.json"
+    },
+    "rollout_gate": {
+      "status": "allowlist_gate_ready_default_disabled",
+      "evidence": "backend/app/Services/BigFive/ResultPageV2/Access/BigFiveV2PilotAccessGate.php"
+    }
+  },
+  "runtime_configuration_contract": {
+    "public_pilot_enabled_required": true,
+    "public_pilot_surface_scope_required": "result_page_only",
+    "public_pilot_production_allowlist_enabled_required": true,
+    "production_percentage_requires": [
+      "BIG5_RESULT_PAGE_V2_PUBLIC_PILOT_PRODUCTION_PERCENTAGE_ENABLED=true",
+      "BIG5_RESULT_PAGE_V2_PUBLIC_PILOT_PRODUCTION_MAX_PERCENTAGE greater than or equal to requested percentage"
+    ],
+    "default_production_percentage_enabled": false,
+    "default_production_max_percentage": 0
+  },
+  "must_not_touch": [
+    "fap-web result page copy",
+    "final big5_result_page_v2 payload generation",
+    "production import mutation",
+    "production rollout enablement",
+    "M8 Ops metrics",
+    "big5_report_engine_v2 primary path"
+  ],
+  "m8_deferred_metrics": [
+    "V2 payload coverage",
+    "fallback hit rate",
+    "malformed payload rejection reasons",
+    "PDF/private URL/footer/token smoke",
+    "Ops panel audit fields"
+  ]
+}
