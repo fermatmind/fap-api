@@ -3371,6 +3371,35 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_allows_bigfive_v2_inactive_candidate_scaffold_scope_only(): void
+    {
+        $allowed = [
+            'backend/app/Console/Commands/BigFiveExportProductionEquivalentCandidatePayloads.php',
+            'backend/app/Console/Commands/BigFiveImportInactiveCandidateRelease.php',
+            'backend/app/Console/Kernel.php',
+            'backend/app/Services/BigFive/ResultPageV2/Candidate/BigFiveCandidatePackageContract.php',
+            'backend/app/Services/BigFive/ResultPageV2/Candidate/BigFiveInactiveCandidateReleaseImporter.php',
+            'backend/app/Services/BigFive/ResultPageV2/Candidate/BigFiveProductionEquivalentCandidatePayloadExporter.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\BigFiveExportProductionEquivalentCandidatePayloads;',
+            '+use App\\Console\\Commands\\BigFiveImportInactiveCandidateRelease;',
+            '+        BigFiveExportProductionEquivalentCandidatePayloads::class,',
+            '+        BigFiveImportInactiveCandidateRelease::class,',
+        ];
+
+        $blocked = [
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Transformer.php',
+            'backend/app/Services/BigFive/ResultPageV2/Candidate/BigFiveCandidateRuntimeActivator.php',
+            'backend/database/migrations/2026_06_21_000000_activate_bigfive_result_page_v2_candidate.php',
+            'backend/routes/api.php',
+            'frontend/src/big5/result-page-v2.ts',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($allowed, '', '', $kernelChangedLines));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', '', $kernelChangedLines));
+    }
+
     public function test_runtime_freeze_classifier_keeps_mbti_and_bigfive_runtime_changes_blocked(): void
     {
         $changed = [
@@ -4200,6 +4229,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isBigFiveV2InactiveCandidateScaffoldFile($file)) {
+                continue;
+            }
+
             if ($this->isBigFiveV2EnParityDraftCatalogFile($file)) {
                 continue;
             }
@@ -4486,6 +4519,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsSeoAgentPostPublishIndexnowAutoOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentGscPostPublishFeedbackOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentGscOpportunityAutoDraftOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsBigFiveV2InactiveCandidateScaffoldOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                 )
             ) {
                 continue;
@@ -6249,6 +6283,17 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ], true);
     }
 
+    private function isBigFiveV2InactiveCandidateScaffoldFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/BigFiveExportProductionEquivalentCandidatePayloads.php',
+            'backend/app/Console/Commands/BigFiveImportInactiveCandidateRelease.php',
+            'backend/app/Services/BigFive/ResultPageV2/Candidate/BigFiveCandidatePackageContract.php',
+            'backend/app/Services/BigFive/ResultPageV2/Candidate/BigFiveInactiveCandidateReleaseImporter.php',
+            'backend/app/Services/BigFive/ResultPageV2/Candidate/BigFiveProductionEquivalentCandidatePayloadExporter.php',
+        ], true);
+    }
+
     private function isBigFiveV2EnParityDraftCatalogFile(string $file): bool
     {
         return $file === 'backend/content_packs/BIG5_OCEAN/v2/drafts/en_parity/result_page_v2_en_asset_catalog_draft.v1.json';
@@ -7176,6 +7221,25 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         }
 
         return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsBigFiveV2InactiveCandidateScaffoldOnly(array $changedLines): bool
+    {
+        $allowed = [
+            'use App\\Console\\Commands\\BigFiveExportProductionEquivalentCandidatePayloads;',
+            'use App\\Console\\Commands\\BigFiveImportInactiveCandidateRelease;',
+            '        BigFiveExportProductionEquivalentCandidatePayloads::class,',
+            '        BigFiveImportInactiveCandidateRelease::class,',
+        ];
+        $normalized = array_map(
+            static fn (string $line): string => str_starts_with($line, '+') ? substr($line, 1) : $line,
+            $changedLines,
+        );
+
+        return $changedLines !== [] && array_values($normalized) === $allowed;
     }
 
     /**

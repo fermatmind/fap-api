@@ -22,6 +22,8 @@ use App\Console\Commands\Big5AttemptPurge;
 // ✅ 显式注册（更稳，避免自动扫描失效/缓存导致找不到）
 use App\Console\Commands\Big5PsychometricsReport;
 use App\Console\Commands\Big5TelemetrySummary;
+use App\Console\Commands\BigFiveExportProductionEquivalentCandidatePayloads;
+use App\Console\Commands\BigFiveImportInactiveCandidateRelease;
 use App\Console\Commands\CareerAlignActorsAuthorityOccupation;
 use App\Console\Commands\CareerAlignCareerAuthorityBatch;
 use App\Console\Commands\CareerAlignD8AuthorityCrosswalks;
@@ -233,6 +235,8 @@ class Kernel extends ConsoleKernel
         EnneagramActivateRegistryRelease::class,
         EnneagramImportInactiveCandidateRelease::class,
         EnneagramRollbackRegistryRelease::class,
+        BigFiveExportProductionEquivalentCandidatePayloads::class,
+        BigFiveImportInactiveCandidateRelease::class,
         NormsImport::class,
         NormsIqImport::class,
         NormsBig5Roll::class,
