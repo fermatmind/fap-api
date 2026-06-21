@@ -1,0 +1,21 @@
+{
+  "schema": "fap.big5.result_page_v2.route_matrix_golden_case_staging_input_qa_summary.v0_1",
+  "package_key": "big5_result_page_v2.route_matrix_golden_case_staging_input_qa.v0_1",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_staging_selector_input": true,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "route_matrix_row_count": 3125,
+  "route_matrix_shard_count": 5,
+  "canonical_profile_family_count": 8,
+  "selector_qa_golden_case_count": 31,
+  "route_driven_backend_golden_case_count": 16,
+  "o59_combination_key": "O3_C2_E2_A3_N4",
+  "o59_profile_key": "sensitive_independent_thinker",
+  "selector_reference_unresolved_count": 92,
+  "selector_reference_policy": "fail_closed_suppression_required",
+  "staging_input_decision": "go_with_fail_closed_suppression",
+  "production_go": false
+}
