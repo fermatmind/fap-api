@@ -1,0 +1,49 @@
+{
+  "schema_version": "fap.enneagram.result_page.pilot_payload.v0.1",
+  "asset_key": "pilot_t5_fc144_second_lens_v0_1",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "result_type": "type_5",
+  "module_key": "fc144_second_lens",
+  "locale": "zh-CN",
+  "public_payload": {
+    "heading": "把第二视角当作补充观察",
+    "body": "如果你之后选择继续看更细的题组，它只适合帮助你从另一个角度整理主题，不用于替换当前结果，也不用于给分数排序。",
+    "cards": [
+      {
+        "label": "适合观察",
+        "text": "你在收集信息、保持边界和投入行动之间如何分配精力。"
+      },
+      {
+        "label": "不适合判断",
+        "text": "不要把不同题组的数字当成同一把尺子来排列高低。"
+      }
+    ]
+  },
+  "routing_metadata": {
+    "result_state": "fc144_recommendation",
+    "resonance_band": "second_lens",
+    "shareability": "private_result_only"
+  },
+  "source_trace": {
+    "source_ids": [
+      "phase8b_candidate_baseline_a9fd",
+      "batch_1r_h_asset_stream",
+      "fc144_boundary_policy",
+      "forbidden_claim_policy"
+    ],
+    "claim_trace": [
+      {
+        "claim_key": "fc144_second_lens_non_replacement_frame",
+        "source_id": "fc144_boundary_policy",
+        "limitation": "FC144 language remains second-lens only and cannot rank or replace current-result interpretation."
+      }
+    ]
+  },
+  "safety_flags": {
+    "staging_only": true,
+    "metadata_leakage_checked": true,
+    "forbidden_claim_checked": true,
+    "fc144_boundary_checked": true
+  }
+}

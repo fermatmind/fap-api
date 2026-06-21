@@ -1,0 +1,48 @@
+{
+  "schema_version": "fap.enneagram.result_page.pilot_payload.v0.1",
+  "asset_key": "pilot_t1_baseline_reflection_v0_1",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "result_type": "type_1",
+  "module_key": "baseline_reflection",
+  "locale": "zh-CN",
+  "public_payload": {
+    "heading": "把标准感转成可执行的整理动作",
+    "body": "这个结果可以作为一次自我观察入口：当你很快看见哪里不够稳、不够清楚时，先把最重要的一处写成下一步动作，而不是一次性修正全部问题。",
+    "cards": [
+      {
+        "label": "容易卡住的地方",
+        "text": "把多个小瑕疵合并成一个必须马上解决的整体。"
+      },
+      {
+        "label": "更稳的练习",
+        "text": "先选一处影响最大的细节，写下负责人、时间和可接受完成标准。"
+      }
+    ]
+  },
+  "routing_metadata": {
+    "result_state": "baseline",
+    "resonance_band": "clear",
+    "shareability": "private_result_only"
+  },
+  "source_trace": {
+    "source_ids": [
+      "phase8b_candidate_baseline_a9fd",
+      "batch_1r_a_asset_stream",
+      "forbidden_claim_policy"
+    ],
+    "claim_trace": [
+      {
+        "claim_key": "baseline_reflection_safe_action_frame",
+        "source_id": "batch_1r_a_asset_stream",
+        "limitation": "Pilot wording only; not full candidate payload coverage."
+      }
+    ]
+  },
+  "safety_flags": {
+    "staging_only": true,
+    "metadata_leakage_checked": true,
+    "forbidden_claim_checked": true,
+    "fc144_boundary_checked": true
+  }
+}

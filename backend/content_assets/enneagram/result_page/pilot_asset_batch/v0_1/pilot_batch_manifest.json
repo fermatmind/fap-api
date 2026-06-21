@@ -1,0 +1,53 @@
+{
+  "schema_version": "fap.enneagram.result_page.pilot_asset_batch.v0.1",
+  "batch_id": "ENNEAGRAM-RESULT-PILOT-ASSET-BATCH-01",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "cms_write_performed": false,
+  "runtime_change_performed": false,
+  "frontend_fallback_allowed": false,
+  "activation_happened": false,
+  "bulk_content_generation_happened": false,
+  "candidate_payload_creation_happened": false,
+  "candidate_export_happened": false,
+  "inactive_import_happened": false,
+  "description": "Minimal pilot fixture for validating Enneagram result-page agent input/output, source trace, claim safety, and rollback shape.",
+  "source_ledger_schema_version": "fap.enneagram.result_page.source_ledger.v0.1",
+  "candidate_contract_reference": {
+    "baseline_candidate_manifest_sha256": "a9fd3eb474ea2ca0130d06ad2b1640305d9160ee1a74e559ad4f60bfc4db56c0",
+    "runtime_registry_manifest_sha256": "ac5bdaab3c761b0d01a56f92679aa58341110d64de0f47a1fa0062b64f76f97f",
+    "expected_full_candidate_payload_count": 630,
+    "pilot_payload_count": 2
+  },
+  "payloads": [
+    {
+      "asset_key": "pilot_t1_baseline_reflection_v0_1",
+      "relative_path": "payloads/pilot_t1_baseline_reflection.json",
+      "result_type": "type_1",
+      "module_key": "baseline_reflection",
+      "source_ids": [
+        "phase8b_candidate_baseline_a9fd",
+        "batch_1r_a_asset_stream",
+        "forbidden_claim_policy"
+      ]
+    },
+    {
+      "asset_key": "pilot_t5_fc144_second_lens_v0_1",
+      "relative_path": "payloads/pilot_t5_fc144_second_lens.json",
+      "result_type": "type_5",
+      "module_key": "fc144_second_lens",
+      "source_ids": [
+        "phase8b_candidate_baseline_a9fd",
+        "batch_1r_h_asset_stream",
+        "fc144_boundary_policy",
+        "forbidden_claim_policy"
+      ]
+    }
+  ],
+  "required_reports": [
+    "source_mapping_report.json",
+    "safety_report.json",
+    "rollback_plan.md"
+  ],
+  "next_gate": "ENNEAGRAM-RESULT-AGENT-RUNNER-EVAL-HARNESS-01"
+}
