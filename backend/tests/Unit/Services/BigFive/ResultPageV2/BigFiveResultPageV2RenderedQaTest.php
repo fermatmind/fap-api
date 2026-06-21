@@ -28,7 +28,7 @@ final class BigFiveResultPageV2RenderedQaTest extends TestCase
         }
     }
 
-    public function test_pilot_surface_matrix_has_explicit_status_without_fake_passes(): void
+    public function test_pilot_surface_matrix_has_explicit_status_with_evidence_for_every_surface(): void
     {
         $matrix = $this->jsonFile('big5_o59_pilot_rendered_qa_surface_matrix_v0_1.json');
         $surfaces = $this->surfacesByKey($matrix);
@@ -47,32 +47,43 @@ final class BigFiveResultPageV2RenderedQaTest extends TestCase
         $this->assertSame('pass', data_get($surfaces, 'result_page_mobile.status'));
         $this->assertNotSame([], data_get($surfaces, 'result_page_mobile.evidence'));
 
-        foreach (['pdf', 'share_card', 'history', 'compare'] as $pendingSurface) {
-            $this->assertSame('pending_surface', data_get($surfaces, "{$pendingSurface}.status"), $pendingSurface);
-            $this->assertSame([], data_get($surfaces, "{$pendingSurface}.evidence"), $pendingSurface);
-            $this->assertNotSame('', (string) data_get($surfaces, "{$pendingSurface}.pending_reason"), $pendingSurface);
+        foreach (['pdf', 'share_card', 'history', 'compare'] as $surfaceKey) {
+            $this->assertSame('pass', data_get($surfaces, "{$surfaceKey}.status"), $surfaceKey);
+            $this->assertNotSame([], data_get($surfaces, "{$surfaceKey}.evidence"), $surfaceKey);
+            $this->assertStringContainsString('fap-web/tests/contracts/big5-', implode(' ', data_get($surfaces, "{$surfaceKey}.evidence", [])), $surfaceKey);
         }
 
         $this->assertSame([
-            'pass' => 2,
-            'pending_surface' => 4,
+            'pass' => 6,
+            'pending_surface' => 0,
             'fail' => 0,
         ], $matrix['status_counts'] ?? null);
     }
 
-    public function test_report_keeps_pending_surfaces_blocking_user_surface_release(): void
+    public function test_report_marks_rendered_qa_complete_without_production_enablement(): void
     {
         $report = $this->jsonFile('big5_o59_pilot_rendered_qa_report_v0_1.json');
 
-        $this->assertSame(['result_page_desktop', 'result_page_mobile'], $report['passed_surfaces'] ?? null);
+        $this->assertSame([
+            'result_page_desktop',
+            'result_page_mobile',
+            'pdf',
+            'share_card',
+            'history',
+            'compare',
+        ], $report['passed_surfaces'] ?? null);
         $this->assertSame([], $report['failed_surfaces'] ?? null);
-        $this->assertSame(['pdf', 'share_card', 'history', 'compare'], $report['pending_surfaces'] ?? null);
+        $this->assertSame([], $report['pending_surfaces'] ?? null);
         $this->assertTrue((bool) data_get($report, 'pilot_readiness.pilot_runtime_flag_default_off'));
         $this->assertTrue((bool) data_get($report, 'pilot_readiness.pilot_runtime_available_in_allowed_non_production_environment'));
         $this->assertTrue((bool) data_get($report, 'pilot_readiness.result_page_mobile_contract_available'));
-        $this->assertFalse((bool) data_get($report, 'pilot_readiness.all_required_surfaces_passed'));
-        $this->assertFalse((bool) data_get($report, 'pilot_readiness.pilot_rendered_qa_complete'));
-        $this->assertTrue((bool) data_get($report, 'pilot_readiness.pilot_user_surface_release_blocked'));
+        $this->assertTrue((bool) data_get($report, 'pilot_readiness.pdf_contract_available'));
+        $this->assertTrue((bool) data_get($report, 'pilot_readiness.share_card_contract_available'));
+        $this->assertTrue((bool) data_get($report, 'pilot_readiness.history_contract_available'));
+        $this->assertTrue((bool) data_get($report, 'pilot_readiness.compare_contract_available'));
+        $this->assertTrue((bool) data_get($report, 'pilot_readiness.all_required_surfaces_passed'));
+        $this->assertTrue((bool) data_get($report, 'pilot_readiness.pilot_rendered_qa_complete'));
+        $this->assertFalse((bool) data_get($report, 'pilot_readiness.pilot_user_surface_release_blocked'));
         $this->assertTrue((bool) data_get($report, 'pilot_readiness.production_blocked'));
     }
 
@@ -83,6 +94,12 @@ final class BigFiveResultPageV2RenderedQaTest extends TestCase
         $visibleText = $this->visibleText($this->pilotPayload());
 
         $this->assertSame('pass', data_get($report, 'public_payload_banned_scan.status'));
+        $this->assertContains('private URL', $matrix['banned_rendered_terms_union'] ?? []);
+        $this->assertContains('Big Five Report Engine', $matrix['banned_rendered_terms_union'] ?? []);
+        $this->assertContains('PR3B', $matrix['banned_rendered_terms_union'] ?? []);
+        $this->assertContains('AttemptReadController', $matrix['banned_rendered_terms_union'] ?? []);
+        $this->assertContains('payload', $matrix['banned_rendered_terms_union'] ?? []);
+        $this->assertContains('registry', $matrix['banned_rendered_terms_union'] ?? []);
         foreach ((array) ($matrix['banned_rendered_terms_union'] ?? []) as $term) {
             $this->assertStringNotContainsString((string) $term, $visibleText, (string) $term);
         }

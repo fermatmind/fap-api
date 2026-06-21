@@ -250,8 +250,8 @@
     },
     {
       "surface_key": "pdf",
-      "status": "pending_surface",
-      "coverage": "no_o59_pdf_render_harness_in_p1_3_api_scope",
+      "status": "pass",
+      "coverage": "backend_adapter_fixture_plus_fap_web_rendered_contract",
       "expected_sections": [
         "hero_summary",
         "domains_overview",
@@ -353,13 +353,18 @@
           ]
         }
       },
-      "evidence": [],
-      "notes": "Do not claim pass until an O59 PDF render harness exists and checks public rendered output."
+      "evidence": [
+        "backend/app/Services/BigFive/ResultPageV2/Pdf/BigFiveV2PdfPayloadAdapter.php",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2PdfPayloadAdapterTest.php",
+        "backend/tests/Fixtures/big5_result_page_v2/pdf_o59_route_driven_payload_v0_1.json",
+        "fap-web/tests/contracts/big5-pdf-rendered-qa.contract.test.tsx"
+      ],
+      "notes": "PDF has backend adapter fixture evidence and fap-web rendered QA contract coverage; this remains a non-runtime handoff artifact."
     },
     {
       "surface_key": "share_card",
-      "status": "pending_surface",
-      "coverage": "no_o59_share_card_render_harness_in_p1_3_api_scope",
+      "status": "pass",
+      "coverage": "backend_share_safe_fixture_plus_fap_web_rendered_contract",
       "expected_sections": [
         "hero_summary",
         "methodology_and_access"
@@ -441,13 +446,18 @@
           ]
         }
       },
-      "evidence": [],
-      "notes": "Do not claim pass until an O59 share-card harness verifies safe summary rendering."
+      "evidence": [
+        "backend/app/Services/BigFive/ResultPageV2/Share/BigFiveV2ShareSafeSummaryAdapter.php",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2ShareSafeSummaryAdapterTest.php",
+        "backend/tests/Fixtures/big5_result_page_v2/share_o59_route_driven_payload_v0_1.json",
+        "fap-web/tests/contracts/big5-share-card-rendered-qa.contract.test.tsx"
+      ],
+      "notes": "Share card uses the backend share-safe summary adapter fixture and fap-web rendered QA contract coverage."
     },
     {
       "surface_key": "history",
-      "status": "pending_surface",
-      "coverage": "existing_history_harness_is_not_o59_v2_payload_rendered_preview",
+      "status": "pass",
+      "coverage": "backend_history_snapshot_fixture_plus_fap_web_rendered_contract",
       "expected_sections": [
         "safe_summary"
       ],
@@ -526,13 +536,18 @@
           ]
         }
       },
-      "evidence": [],
-      "notes": "Do not claim pass until history consumes a backend-safe summary for this V2 payload without metadata leakage."
+      "evidence": [
+        "backend/app/Services/BigFive/ResultPageV2/History/BigFiveV2HistorySnapshotAdapter.php",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2HistorySnapshotAdapterTest.php",
+        "backend/tests/Fixtures/big5_result_page_v2/history_o59_route_driven_payload_v0_1.json",
+        "fap-web/tests/contracts/big5-history-rendered-qa.contract.test.tsx"
+      ],
+      "notes": "History uses the backend snapshot adapter fixture and fap-web rendered QA contract coverage without metadata leakage."
     },
     {
       "surface_key": "compare",
-      "status": "pending_surface",
-      "coverage": "existing_compare_harness_is_not_o59_v2_payload_rendered_preview",
+      "status": "pass",
+      "coverage": "backend_compare_snapshot_fixture_plus_fap_web_rendered_contract",
       "expected_sections": [
         "safe_summary"
       ],
@@ -611,11 +626,28 @@
           ]
         }
       },
-      "evidence": [],
-      "notes": "Do not claim pass until compare consumes a backend-safe summary for this V2 payload without metadata leakage."
+      "evidence": [
+        "backend/app/Services/BigFive/ResultPageV2/Compare/BigFiveV2CompareSnapshotAdapter.php",
+        "backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CompareSnapshotAdapterTest.php",
+        "backend/tests/Fixtures/big5_result_page_v2/compare_o59_route_driven_payload_v0_1.json",
+        "fap-web/tests/contracts/big5-compare-rendered-qa.contract.test.tsx"
+      ],
+      "notes": "Compare uses the backend snapshot adapter fixture and fap-web rendered QA contract coverage without metadata leakage."
     }
   ],
   "banned_rendered_terms_union": [
+    "private URL",
+    "attempt id",
+    "Big Five Report Engine",
+    "PR3B",
+    "AttemptReadController",
+    "payload",
+    "registry",
+    "raw score",
+    "raw_score",
+    "raw_scores",
+    "percentile",
+    "percentiles",
     "A compact overview",
     "Five-domain distribution with percentile-oriented context",
     "Focused read on domain-level strengths",
@@ -641,8 +673,8 @@
     "production_use_allowed"
   ],
   "status_counts": {
-    "pass": 2,
-    "pending_surface": 4,
+    "pass": 6,
+    "pending_surface": 0,
     "fail": 0
   }
 }

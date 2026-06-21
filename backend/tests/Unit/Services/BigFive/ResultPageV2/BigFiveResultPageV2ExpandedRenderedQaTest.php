@@ -33,7 +33,7 @@ final class BigFiveResultPageV2ExpandedRenderedQaTest extends TestCase
         $this->assertTrue((bool) data_get($report, 'staging_preview_readiness.production_blocked'));
     }
 
-    public function test_surface_matrix_marks_only_desktop_and_mobile_as_pass(): void
+    public function test_surface_matrix_marks_all_required_surfaces_as_pass_with_evidence(): void
     {
         $matrix = $this->jsonFile('big5_o59_expanded_rendered_qa_surface_matrix_v0_1.json');
         $surfaces = $this->surfacesByKey($matrix);
@@ -52,27 +52,41 @@ final class BigFiveResultPageV2ExpandedRenderedQaTest extends TestCase
         $this->assertSame('existing_fap_web_contract', data_get($surfaces, 'result_page_desktop.coverage'));
         $this->assertSame('existing_fap_web_contract', data_get($surfaces, 'result_page_mobile.coverage'));
 
-        foreach (['pdf', 'share_card', 'history', 'compare'] as $pendingSurface) {
-            $this->assertSame('pending_surface', data_get($surfaces, "{$pendingSurface}.status"), $pendingSurface);
-            $this->assertSame([], data_get($surfaces, "{$pendingSurface}.evidence"), $pendingSurface);
+        foreach (['pdf', 'share_card', 'history', 'compare'] as $surfaceKey) {
+            $this->assertSame('pass', data_get($surfaces, "{$surfaceKey}.status"), $surfaceKey);
+            $this->assertNotSame([], data_get($surfaces, "{$surfaceKey}.evidence"), $surfaceKey);
+            $this->assertStringContainsString('fap-web/tests/contracts/big5-', implode(' ', data_get($surfaces, "{$surfaceKey}.evidence", [])), $surfaceKey);
         }
 
         $this->assertSame([
-            'pass' => 2,
-            'pending_surface' => 4,
+            'pass' => 6,
+            'pending_surface' => 0,
             'fail' => 0,
         ], $matrix['status_counts'] ?? null);
     }
 
-    public function test_report_keeps_pending_surfaces_out_of_passed_surfaces(): void
+    public function test_report_marks_expanded_rendered_qa_complete_without_runtime_enablement(): void
     {
         $report = $this->jsonFile('big5_o59_expanded_rendered_qa_report_v0_1.json');
 
-        $this->assertSame(['result_page_desktop', 'result_page_mobile'], $report['passed_surfaces'] ?? null);
+        $this->assertSame([
+            'result_page_desktop',
+            'result_page_mobile',
+            'pdf',
+            'share_card',
+            'history',
+            'compare',
+        ], $report['passed_surfaces'] ?? null);
         $this->assertSame([], $report['failed_surfaces'] ?? null);
-        $this->assertSame(['pdf', 'share_card', 'history', 'compare'], $report['pending_surfaces'] ?? null);
-        $this->assertFalse((bool) data_get($report, 'staging_preview_readiness.all_required_surfaces_passed'));
-        $this->assertFalse((bool) data_get($report, 'staging_preview_readiness.expanded_rendered_qa_complete'));
+        $this->assertSame([], $report['pending_surfaces'] ?? null);
+        $this->assertTrue((bool) data_get($report, 'staging_preview_readiness.pdf_contract_available'));
+        $this->assertTrue((bool) data_get($report, 'staging_preview_readiness.share_card_contract_available'));
+        $this->assertTrue((bool) data_get($report, 'staging_preview_readiness.history_contract_available'));
+        $this->assertTrue((bool) data_get($report, 'staging_preview_readiness.compare_contract_available'));
+        $this->assertTrue((bool) data_get($report, 'staging_preview_readiness.all_required_surfaces_passed'));
+        $this->assertTrue((bool) data_get($report, 'staging_preview_readiness.expanded_rendered_qa_complete'));
+        $this->assertFalse((bool) ($report['ready_for_runtime'] ?? true));
+        $this->assertFalse((bool) ($report['ready_for_production'] ?? true));
     }
 
     public function test_public_payload_visible_fields_do_not_leak_banned_terms(): void
@@ -87,6 +101,12 @@ final class BigFiveResultPageV2ExpandedRenderedQaTest extends TestCase
         $this->assertContains('internal_metadata', $terms);
         $this->assertContains('selector_basis', $terms);
         $this->assertContains('production_use_allowed', $terms);
+        $this->assertContains('private URL', $terms);
+        $this->assertContains('Big Five Report Engine', $terms);
+        $this->assertContains('PR3B', $terms);
+        $this->assertContains('AttemptReadController', $terms);
+        $this->assertContains('payload', $terms);
+        $this->assertContains('registry', $terms);
 
         foreach ($terms as $term) {
             $term = (string) $term;
