@@ -1,0 +1,92 @@
+{
+    "schema_version": "fap.enneagram.result_page.batch_1r_g.manifest.v0.1",
+    "batch_id": "ENNEAGRAM-RESULT-ASSETS-1R-G-01",
+    "runtime_use": "not_runtime",
+    "production_use_allowed": false,
+    "cms_write_performed": false,
+    "runtime_change_performed": false,
+    "frontend_fallback_allowed": false,
+    "activation_happened": false,
+    "inactive_import_happened": false,
+    "candidate_export_happened": false,
+    "bulk_content_generation_happened": false,
+    "description": "Repo-owned derived 1R-G Enneagram scene-localization result-page content assets for agent batch validation.",
+    "source_ledger_schema_version": "fap.enneagram.result_page.source_ledger.v0.1",
+    "source_ledger_row_id": "batch_1r_g_asset_stream",
+    "source_asset_logical_ref": "FermatMind_Enneagram_Content_Expansion_Batch_1R_G_Scene_Localization_Assets.json",
+    "source_asset_sha256": "c399a93a35f8c769b93b4ab4040a62b59980b34cf8cac351da48af3f91efbf46",
+    "candidate_contract_reference": {
+        "baseline_candidate_manifest_sha256": "a9fd3eb474ea2ca0130d06ad2b1640305d9160ee1a74e559ad4f60bfc4db56c0",
+        "runtime_registry_manifest_sha256": "ac5bdaab3c761b0d01a56f92679aa58341110d64de0f47a1fa0062b64f76f97f",
+        "expected_full_candidate_payload_count": 630,
+        "this_batch_asset_count": 162
+    },
+    "coverage_counts": {
+        "by_category": {
+            "scene_localization_response": 162
+        },
+        "by_module_key": {
+            "scene_localization": 162
+        },
+        "by_type_id": {
+            "1": 18,
+            "2": 18,
+            "3": 18,
+            "4": 18,
+            "5": 18,
+            "6": 18,
+            "7": 18,
+            "8": 18,
+            "9": 18
+        },
+        "by_scope": {
+            "clear": 162,
+            "close_call": 162,
+            "diffuse": 162,
+            "low_quality": 162
+        },
+        "by_shareability": {
+            "private_result_only": 162,
+            "share_teaser_ready": 0
+        },
+        "by_safety_level": {
+            "no_accuracy_claim|no_hard_typing|non_diagnostic|non_hiring|user_facing_only|scene_localization_safe": 162
+        },
+        "by_scene_axis": {
+            "early_career_cross_team": 9,
+            "early_career_internship": 9,
+            "early_career_kpi_feedback": 9,
+            "early_career_probation": 9,
+            "early_career_reporting": 9,
+            "relationship_cold_war": 9,
+            "relationship_conflict_repair": 9,
+            "relationship_family_expectation": 9,
+            "relationship_intimacy": 9,
+            "relationship_no_reply": 9,
+            "student_club_collaboration": 9,
+            "student_dorm_relationship": 9,
+            "student_exam_pressure": 9,
+            "student_group_project": 9,
+            "student_job_search": 9,
+            "student_thesis_paper": 9,
+            "work_colleague_blame_shift": 9,
+            "work_leader_changes_requirements": 9
+        },
+        "by_scene_domain": {
+            "early_career": 63,
+            "relationship": 45,
+            "student": 54
+        }
+    },
+    "artifact_hashes": {
+        "assets_json_sha256": "364bafbd87bb1ad0847c9f611c4a7eed56c70eb04fd3be8fd99dc8b9a43829e7",
+        "payload_hash_count": 162
+    },
+    "required_reports": [
+        "source_mapping_report.json",
+        "safety_report.json",
+        "runner_eval_report.json",
+        "rollback_plan.md"
+    ],
+    "next_gate": "ENNEAGRAM-RESULT-ASSETS-1R-H-01"
+}
