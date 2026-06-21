@@ -24301,6 +24301,285 @@ prs:
     content_authority: backend
     next_task: SEO-CONV-OPS-05 in fap-api after this PR is merged
 
+  - id: RIASEC-RESULT-ASSET-AGENT-RUNBOOK-01
+    repo: fap-api
+    branch: codex/riasec-result-asset-agent-runbook-01
+    title: "RIASEC-RESULT-ASSET-AGENT-RUNBOOK-01: docs(riasec):固化 result asset agent runbook"
+    train_scope: riasec_result_page_v2_asset_agent
+    status: user_authorized
+    scope:
+      - Document the Holland/RIASEC Result Page backend content-asset agent runbook, input/output protocol, forbidden actions, and stage gates.
+      - Reuse the existing RIASEC projection, deep-slot, and fail-closed pattern as the authority model.
+      - Do not generate assets, import CMS content, change runtime, or open pilot/production gates.
+    allowed_paths:
+      - backend/docs/riasec/**result-asset-agent*.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Generate `agent_runs` artifacts or selector/content assets.
+      - Modify `backend/app/**`, `backend/routes/**`, `backend/database/**`, runtime wrappers, CMS importers, or production gates.
+      - Set `production_use_allowed=true`, enable pilot access, add frontend fallback, or export private result payload fields.
+    validation:
+      - git diff --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: RIASEC-RESULT-SOURCE-LEDGER-01
+    repo: fap-api
+    depends_on:
+      - RIASEC-RESULT-ASSET-AGENT-RUNBOOK-01
+    branch: codex/riasec-result-source-ledger-01
+    title: "RIASEC-RESULT-SOURCE-LEDGER-01: docs(riasec):建 result source ledger"
+    train_scope: riasec_result_page_v2_asset_agent
+    status: user_authorized
+    scope:
+      - Add source ledger template and first evidence ledger for Holland/RIASEC public sources, internal formal drafts, internal long-form drafts, and existing asset packs.
+      - Require each claim row to include source, reference, permitted use, limitation, and disallowed use.
+      - Do not generate selector/content assets or CMS imports.
+    allowed_paths:
+      - backend/content_assets/riasec/result_page_v2/source_ledger/**
+      - backend/docs/riasec/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Copy proprietary report copy, competitor result copy, or internal drafts into generated user-facing prose.
+      - Generate official assets, import CMS data, modify runtime, or open production gates.
+    validation:
+      - find backend/content_assets/riasec/result_page_v2/source_ledger -name '*.json' -print -exec python3 -m json.tool {} >/dev/null \;
+      - git diff --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: RIASEC-RESULT-ASSET-VALIDATOR-HARNESS-01
+    repo: fap-api
+    depends_on:
+      - RIASEC-RESULT-SOURCE-LEDGER-01
+    branch: codex/riasec-result-asset-validator-harness-01
+    title: "RIASEC-RESULT-ASSET-VALIDATOR-HARNESS-01: test(riasec):建 result asset validator harness"
+    train_scope: riasec_result_page_v2_asset_agent
+    status: user_authorized
+    scope:
+      - Add agent run directory validator/test wrapper for RIASEC result-page asset-agent runs.
+      - Reuse existing selector/content validators, asset inventory, checksums, forbidden public field scans, and share leak scans.
+      - Keep the harness read-only against runtime and production state.
+    allowed_paths:
+      - backend/app/Console/Commands/*Riasec*AssetAgent*Command.php
+      - backend/app/Console/Kernel.php
+      - backend/app/Services/Riasec/**/AssetAgent/**
+      - backend/app/Services/RIASEC/**/AssetAgent/**
+      - backend/tests/**/Riasec*AssetAgent*Test.php
+      - backend/tests/**/RIASEC*AssetAgent*Test.php
+      - backend/docs/riasec/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Generate formal selector/content assets or `production_use_allowed=true` artifacts.
+      - Modify runtime wrapper behavior, CMS importers, public API contracts, or frontend fixtures.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=RiasecResultPageAssetAgentTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Riasec --no-ansi
+      - git diff --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: RIASEC-RESULT-EXISTING-ASSET-GAP-AUDIT-01
+    repo: fap-api
+    depends_on:
+      - RIASEC-RESULT-ASSET-VALIDATOR-HARNESS-01
+    branch: codex/riasec-result-existing-asset-gap-audit-01
+    title: "RIASEC-RESULT-EXISTING-ASSET-GAP-AUDIT-01: docs(riasec):审计现有 result assets gaps"
+    train_scope: riasec_result_page_v2_asset_agent
+    status: user_authorized
+    scope:
+      - Produce a gap register for existing RIASEC result page assets, deep slots, route/selector references, and golden cases.
+      - Group gaps by registry, scope, scenario, share-safe coverage, low-quality coverage, fallback coverage, and route/golden-case readiness.
+      - Keep output as audit evidence only.
+    allowed_paths:
+      - backend/content_assets/riasec/result_page_v2/qa/**
+      - backend/docs/riasec/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Repair selector policy, generate official assets, import CMS data, modify runtime, or open gates.
+    validation:
+      - find backend/content_assets/riasec/result_page_v2/qa -name '*.json' -print -exec python3 -m json.tool {} >/dev/null \;
+      - git diff --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: RIASEC-RESULT-SELECTOR-QA-REPAIR-01
+    repo: fap-api
+    depends_on:
+      - RIASEC-RESULT-EXISTING-ASSET-GAP-AUDIT-01
+    branch: codex/riasec-result-selector-qa-repair-01
+    title: "RIASEC-RESULT-SELECTOR-QA-REPAIR-01: fix(riasec):修 result selector QA policy"
+    train_scope: riasec_result_page_v2_asset_agent
+    status: user_authorized
+    scope:
+      - Repair selector/content QA policy coverage warnings, golden case grouping, slot/module naming, banned terms, and fail-closed fallback rules.
+      - Keep every asset and policy artifact staging-only and non-runtime.
+    allowed_paths:
+      - backend/content_assets/riasec/result_page_v2/selector_qa_policy/**
+      - backend/content_assets/riasec/result_page_v2/qa/**
+      - backend/tests/**/Riasec**
+      - backend/tests/**/RIASEC**
+      - backend/docs/riasec/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Generate new official content batches, modify runtime wrapper behavior, import CMS data, or open pilot/production gates.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Riasec --no-ansi
+      - git diff --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: RIASEC-RESULT-ASSET-FACTORY-PILOT-BATCH-01
+    repo: fap-api
+    depends_on:
+      - RIASEC-RESULT-SELECTOR-QA-REPAIR-01
+    branch: codex/riasec-result-asset-factory-pilot-batch-01
+    title: "RIASEC-RESULT-ASSET-FACTORY-PILOT-BATCH-01: feat(riasec):dry-run share safety result batch"
+    train_scope: riasec_result_page_v2_asset_agent
+    status: user_authorized
+    scope:
+      - Dry-run a narrow `share_safety` selector/content asset pilot batch unless the repository scan proves `low_quality cautious copy` is narrower and safer.
+      - Preserve raw draft, repair draft, final asset, validation report, safety report, and go/no-go report.
+      - Keep every output staging-only and production-disallowed.
+    allowed_paths:
+      - backend/content_assets/riasec/result_page_v2/agent_runs/**
+      - backend/content_assets/riasec/result_page_v2/selector_ready_assets/**
+      - backend/docs/riasec/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Generate broad route-specific assets in this PR.
+      - Import CMS data, wire runtime selectors, enable pilot access, or open production gates.
+    validation:
+      - find backend/content_assets/riasec/result_page_v2/agent_runs -name '*.json' -print -exec python3 -m json.tool {} >/dev/null \;
+      - git diff --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: RIASEC-RESULT-ROUTE-MATRIX-GOLDEN-CASE-QA-01
+    repo: fap-api
+    depends_on:
+      - RIASEC-RESULT-ASSET-FACTORY-PILOT-BATCH-01
+    branch: codex/riasec-result-route-matrix-golden-case-qa-01
+    title: "RIASEC-RESULT-ROUTE-MATRIX-GOLDEN-CASE-QA-01: test(riasec):验证 route matrix golden cases"
+    train_scope: riasec_result_page_v2_asset_agent
+    status: user_authorized
+    scope:
+      - Validate route matrix, canonical profiles, golden cases, selector/content reference resolution, and conflict resolution.
+      - Produce route matrix and golden case staging-input QA reports.
+    allowed_paths:
+      - backend/content_assets/riasec/result_page_v2/route_matrix/**
+      - backend/content_assets/riasec/result_page_v2/selector_qa_policy/**
+      - backend/content_assets/riasec/result_page_v2/qa/**
+      - backend/tests/**/Riasec**
+      - backend/tests/**/RIASEC**
+      - backend/docs/riasec/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Wire route matrix to production runtime, import CMS data, or enable pilot/production flags.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Riasec --no-ansi
+      - find backend/content_assets/riasec/result_page_v2/qa -name '*.json' -print -exec python3 -m json.tool {} >/dev/null \;
+      - git diff --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: RIASEC-RESULT-RENDER-PREVIEW-HANDOFF-01
+    repo: fap-api
+    depends_on:
+      - RIASEC-RESULT-ROUTE-MATRIX-GOLDEN-CASE-QA-01
+    branch: codex/riasec-result-render-preview-handoff-01
+    title: "RIASEC-RESULT-RENDER-PREVIEW-HANDOFF-01: docs(riasec):交付 rendered preview fixtures"
+    train_scope: riasec_result_page_v2_asset_agent
+    status: user_authorized
+    scope:
+      - Generate backend fixture manifest and expected assertions for fap-web rendered preview QA.
+      - Cover result page, PDF, share, history, compare, locked/free redaction, low-quality, and fallback surfaces.
+      - Keep handoff backend-owned and production-disallowed.
+    allowed_paths:
+      - backend/content_assets/riasec/result_page_v2/rendered_preview/**
+      - backend/content_assets/riasec/result_page_v2/qa/**
+      - backend/docs/riasec/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify fap-web, add frontend fallback content, import CMS data, wire runtime selectors, or open production gates.
+    validation:
+      - find backend/content_assets/riasec/result_page_v2/rendered_preview -name '*.json' -print -exec python3 -m json.tool {} >/dev/null \;
+      - git diff --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: PERSONALITY-DETAIL-FAQ-SEO-01
     repo: fap-api
     depends_on:
