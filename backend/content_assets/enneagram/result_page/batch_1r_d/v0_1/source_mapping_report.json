@@ -1,0 +1,735 @@
+{
+    "schema_version": "fap.enneagram.result_page.batch_source_mapping_report.v0.1",
+    "runtime_use": "not_runtime",
+    "production_use_allowed": false,
+    "batch_scope": "1R-D",
+    "payload_count": 90,
+    "source_mapping_failure_count": 0,
+    "fallback_source_count": 0,
+    "blocked_source_count": 0,
+    "duplicate_selection_count": 0,
+    "branch_provenance_mismatch_count": 0,
+    "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+    "mappings": [
+        {
+            "asset_key": "enneagram_1R_D_t1_blindspot_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t1_blindspot_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "blindspot_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t1_context_specific_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t1_context_specific_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "context_specific",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t1_fear_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t1_fear_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "fear_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t1_growth_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t1_growth_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "growth_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t1_motivation_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t1_motivation_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "motivation_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t1_relationship_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t1_relationship_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "relationship_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t1_strength_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t1_strength_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "strength_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t1_stress_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t1_stress_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "stress_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t1_top2_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t1_top2_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "top2_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t1_work_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t1_work_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "work_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t2_blindspot_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t2_blindspot_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "blindspot_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t2_context_specific_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t2_context_specific_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "context_specific",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t2_fear_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t2_fear_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "fear_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t2_growth_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t2_growth_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "growth_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t2_motivation_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t2_motivation_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "motivation_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t2_relationship_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t2_relationship_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "relationship_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t2_strength_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t2_strength_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "strength_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t2_stress_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t2_stress_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "stress_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t2_top2_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t2_top2_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "top2_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t2_work_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t2_work_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "work_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t3_blindspot_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t3_blindspot_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "blindspot_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t3_context_specific_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t3_context_specific_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "context_specific",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t3_fear_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t3_fear_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "fear_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t3_growth_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t3_growth_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "growth_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t3_motivation_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t3_motivation_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "motivation_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t3_relationship_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t3_relationship_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "relationship_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t3_strength_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t3_strength_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "strength_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t3_stress_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t3_stress_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "stress_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t3_top2_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t3_top2_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "top2_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t3_work_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t3_work_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "work_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t4_blindspot_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t4_blindspot_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "blindspot_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t4_context_specific_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t4_context_specific_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "context_specific",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t4_fear_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t4_fear_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "fear_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t4_growth_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t4_growth_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "growth_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t4_motivation_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t4_motivation_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "motivation_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t4_relationship_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t4_relationship_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "relationship_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t4_strength_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t4_strength_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "strength_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t4_stress_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t4_stress_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "stress_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t4_top2_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t4_top2_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "top2_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t4_work_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t4_work_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "work_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t5_blindspot_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t5_blindspot_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "blindspot_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t5_context_specific_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t5_context_specific_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "context_specific",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t5_fear_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t5_fear_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "fear_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t5_growth_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t5_growth_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "growth_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t5_motivation_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t5_motivation_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "motivation_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t5_relationship_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t5_relationship_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "relationship_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t5_strength_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t5_strength_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "strength_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t5_stress_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t5_stress_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "stress_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t5_top2_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t5_top2_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "top2_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t5_work_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t5_work_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "work_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t6_blindspot_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t6_blindspot_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "blindspot_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t6_context_specific_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t6_context_specific_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "context_specific",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t6_fear_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t6_fear_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "fear_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t6_growth_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t6_growth_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "growth_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t6_motivation_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t6_motivation_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "motivation_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t6_relationship_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t6_relationship_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "relationship_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t6_strength_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t6_strength_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "strength_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t6_stress_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t6_stress_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "stress_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t6_top2_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t6_top2_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "top2_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t6_work_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t6_work_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "work_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t7_blindspot_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t7_blindspot_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "blindspot_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t7_context_specific_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t7_context_specific_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "context_specific",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t7_fear_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t7_fear_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "fear_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t7_growth_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t7_growth_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "growth_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t7_motivation_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t7_motivation_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "motivation_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t7_relationship_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t7_relationship_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "relationship_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t7_strength_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t7_strength_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "strength_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t7_stress_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t7_stress_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "stress_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t7_top2_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t7_top2_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "top2_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t7_work_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t7_work_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "work_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t8_blindspot_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t8_blindspot_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "blindspot_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t8_context_specific_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t8_context_specific_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "context_specific",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t8_fear_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t8_fear_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "fear_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t8_growth_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t8_growth_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "growth_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t8_motivation_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t8_motivation_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "motivation_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t8_relationship_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t8_relationship_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "relationship_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t8_strength_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t8_strength_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "strength_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t8_stress_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t8_stress_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "stress_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t8_top2_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t8_top2_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "top2_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t8_work_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t8_work_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "work_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t9_blindspot_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t9_blindspot_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "blindspot_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t9_context_specific_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t9_context_specific_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "context_specific",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t9_fear_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t9_fear_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "fear_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t9_growth_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t9_growth_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "growth_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t9_motivation_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t9_motivation_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "motivation_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t9_relationship_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t9_relationship_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "relationship_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t9_strength_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t9_strength_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "strength_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t9_stress_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t9_stress_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "stress_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t9_top2_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t9_top2_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "top2_only",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_D_t9_work_only_v1",
+            "source_id": "batch_1r_d_asset_stream",
+            "source_asset_key": "enneagram_1R_D_t9_work_only_v1",
+            "source_asset_sha256": "c312d47a8ffe4c6bb3bc8e36e91102f76f072d318d71f328309ca3b0f804c28a",
+            "branch_key": "work_only",
+            "status": "mapped"
+        }
+    ]
+}
