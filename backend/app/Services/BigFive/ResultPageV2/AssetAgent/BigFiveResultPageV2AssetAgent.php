@@ -23,6 +23,25 @@ final class BigFiveResultPageV2AssetAgent
 
     private const SOURCE_LEDGER_RELATIVE_PATH = 'content_assets/big5/result_page_v2/source_ledger';
 
+    private const SOURCE_LEDGER_PRIMARY_FILENAME = 'source_ledger.json';
+
+    private const SOURCE_LEDGER_ALLOWED_LABELS = [
+        'public_domain_source',
+        'citation_only',
+        'structure_reference_only',
+        'forbidden_copy_source',
+    ];
+
+    private const SOURCE_LEDGER_REQUIRED_SOURCE_IDS = [
+        'ipip_official',
+        'bfi_2_colby',
+        'bigfive_web_github',
+        'internal_big5_v2_formal_doc',
+        'internal_big5_twenty_thousand_word_final_doc',
+        'existing_big5_result_page_v2_asset_packs',
+        'restricted_bfi2_item_text_and_proprietary_reports',
+    ];
+
     private const SELECTOR_ASSET_RELATIVE_PATH = 'selector_ready_assets/v0_3_p0_full/assets.jsonl';
 
     private const FORBIDDEN_PUBLIC_FIELDS = [
@@ -579,6 +598,11 @@ final class BigFiveResultPageV2AssetAgent
                 'exists' => false,
                 'valid' => false,
                 'json_count' => 0,
+                'primary_ledger_path' => null,
+                'allowed_source_labels' => self::SOURCE_LEDGER_ALLOWED_LABELS,
+                'required_source_ids_present' => [],
+                'label_counts' => [],
+                'bfi_2_policy_valid' => false,
                 'errors' => ['source ledger directory missing'],
                 'files' => [],
             ];
@@ -605,13 +629,169 @@ final class BigFiveResultPageV2AssetAgent
             ];
         }
 
+        $primaryLedgerPath = $sourceLedgerDir.'/'.self::SOURCE_LEDGER_PRIMARY_FILENAME;
+        $primaryLedger = null;
+        if (! is_file($primaryLedgerPath)) {
+            $errors[] = self::SOURCE_LEDGER_PRIMARY_FILENAME.' missing';
+        } else {
+            $decoded = json_decode((string) file_get_contents($primaryLedgerPath), true);
+            if (! is_array($decoded)) {
+                $errors[] = self::SOURCE_LEDGER_PRIMARY_FILENAME.' is not valid JSON';
+            } else {
+                $primaryLedger = $decoded;
+                $errors = array_merge($errors, $this->sourceLedgerContractErrors($primaryLedger));
+            }
+        }
+
+        $sources = is_array($primaryLedger) ? (array) ($primaryLedger['sources'] ?? []) : [];
+
         return [
             'exists' => true,
-            'valid' => $errors === [] && $files !== [],
+            'valid' => $errors === [] && $files !== [] && is_array($primaryLedger),
             'json_count' => count($files),
+            'primary_ledger_path' => is_file($primaryLedgerPath) ? $this->redactPath($primaryLedgerPath) : null,
+            'allowed_source_labels' => self::SOURCE_LEDGER_ALLOWED_LABELS,
+            'required_source_ids_present' => $this->presentSourceIds($sources),
+            'label_counts' => $this->sourceLabelCounts($sources),
+            'bfi_2_policy_valid' => $this->bfi2PolicyValid($sources),
             'errors' => $errors,
             'files' => $files,
         ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $ledger
+     * @return list<string>
+     */
+    private function sourceLedgerContractErrors(array $ledger): array
+    {
+        $errors = [];
+
+        if (($ledger['runtime_use'] ?? null) !== 'not_runtime') {
+            $errors[] = 'source_ledger runtime_use must be not_runtime';
+        }
+        if (($ledger['production_use_allowed'] ?? null) !== false) {
+            $errors[] = 'source_ledger production_use_allowed must be false';
+        }
+        foreach (['ready_for_pilot', 'ready_for_runtime', 'ready_for_production'] as $flag) {
+            if (($ledger[$flag] ?? null) !== false) {
+                $errors[] = "source_ledger {$flag} must be false";
+            }
+        }
+
+        $labels = array_values((array) ($ledger['allowed_source_labels'] ?? []));
+        sort($labels);
+        $expectedLabels = self::SOURCE_LEDGER_ALLOWED_LABELS;
+        sort($expectedLabels);
+        if ($labels !== $expectedLabels) {
+            $errors[] = 'source_ledger allowed_source_labels must match the fixed source label contract';
+        }
+
+        $sources = (array) ($ledger['sources'] ?? []);
+        if ($sources === []) {
+            $errors[] = 'source_ledger sources missing';
+        }
+
+        $presentIds = $this->presentSourceIds($sources);
+        foreach (self::SOURCE_LEDGER_REQUIRED_SOURCE_IDS as $sourceId) {
+            if (! in_array($sourceId, $presentIds, true)) {
+                $errors[] = "source_ledger missing required source_id {$sourceId}";
+            }
+        }
+
+        foreach ($sources as $index => $source) {
+            if (! is_array($source)) {
+                $errors[] = "source_ledger source row {$index} must be an object";
+
+                continue;
+            }
+
+            $sourceId = (string) ($source['source_id'] ?? 'unknown');
+            $label = (string) ($source['source_label'] ?? '');
+            if (! in_array($label, self::SOURCE_LEDGER_ALLOWED_LABELS, true)) {
+                $errors[] = "source_ledger {$sourceId} has invalid source_label {$label}";
+            }
+            if (! is_array($source['copy_policy'] ?? null)) {
+                $errors[] = "source_ledger {$sourceId} missing copy_policy";
+            }
+        }
+
+        if (! $this->bfi2PolicyValid($sources)) {
+            $errors[] = 'source_ledger bfi_2_colby must be structure_reference_only with copy_allowed=false and item/prose copy bans';
+        }
+
+        return $errors;
+    }
+
+    /**
+     * @param  list<mixed>|array<int,mixed>  $sources
+     * @return list<string>
+     */
+    private function presentSourceIds(array $sources): array
+    {
+        $ids = [];
+        foreach ($sources as $source) {
+            if (! is_array($source)) {
+                continue;
+            }
+
+            $sourceId = (string) ($source['source_id'] ?? '');
+            if ($sourceId !== '') {
+                $ids[] = $sourceId;
+            }
+        }
+
+        sort($ids);
+
+        return array_values(array_unique($ids));
+    }
+
+    /**
+     * @param  list<mixed>|array<int,mixed>  $sources
+     * @return array<string,int>
+     */
+    private function sourceLabelCounts(array $sources): array
+    {
+        $counts = array_fill_keys(self::SOURCE_LEDGER_ALLOWED_LABELS, 0);
+        foreach ($sources as $source) {
+            if (! is_array($source)) {
+                continue;
+            }
+
+            $label = (string) ($source['source_label'] ?? '');
+            if ($label !== '') {
+                $counts[$label] = ($counts[$label] ?? 0) + 1;
+            }
+        }
+        ksort($counts);
+
+        return $counts;
+    }
+
+    /**
+     * @param  list<mixed>|array<int,mixed>  $sources
+     */
+    private function bfi2PolicyValid(array $sources): bool
+    {
+        $bfi2 = null;
+        foreach ($sources as $source) {
+            if (is_array($source) && ($source['source_id'] ?? null) === 'bfi_2_colby') {
+                $bfi2 = $source;
+
+                break;
+            }
+        }
+
+        if (! is_array($bfi2)) {
+            return false;
+        }
+
+        $disallowedUse = strtolower(implode(' ', array_map('strval', (array) ($bfi2['disallowed_use'] ?? []))));
+
+        return ($bfi2['source_label'] ?? null) === 'structure_reference_only'
+            && data_get($bfi2, 'copy_policy.copy_allowed') === false
+            && str_contains($disallowedUse, 'item text')
+            && str_contains($disallowedUse, 'body prose');
     }
 
     /**
