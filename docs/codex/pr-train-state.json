@@ -55817,12 +55817,12 @@
       },
       "github": {
         "status": "pending",
-        "evidence": null
+        "evidence": "Opened PR #2229 from branch codex/big5-v2-pilot-run-evidence; waiting for required GitHub checks."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "d6a4c9b534d831bcf7e79a04c94378a0be9cb0b5",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2229",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -55836,6 +55836,11 @@
         "at": "2026-06-22T00:54:00+08:00",
         "status": "local_checks_passed",
         "note": "Pilot run evidence package, SHA checks, focused M7/access/rendered/evidence tests, strict audit, and scope validation passed. Evidence stays allowlist-only, not_runtime, production disabled, and M8 Ops deferred."
+      },
+      {
+        "at": "2026-06-22T00:59:00+08:00",
+        "status": "github_checks_pending",
+        "note": "Opened PR #2229 from branch codex/big5-v2-pilot-run-evidence; waiting for required GitHub checks."
       }
     ]
   },
