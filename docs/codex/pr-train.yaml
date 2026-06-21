@@ -24386,6 +24386,7 @@ prs:
       - backend/app/Services/RIASEC/**/AssetAgent/**
       - backend/tests/**/Riasec*AssetAgent*Test.php
       - backend/tests/**/RIASEC*AssetAgent*Test.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - backend/docs/riasec/**
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
@@ -24395,6 +24396,7 @@ prs:
     validation:
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=RiasecResultPageAssetAgentTest --no-ansi
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=RiasecContentRegistrySlotContractTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest --no-ansi
       - cd backend && APP_ENV=testing php artisan riasec:result-page-v2-agent audit --json --no-ansi
       - git diff --check
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
