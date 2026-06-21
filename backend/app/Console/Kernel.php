@@ -180,6 +180,7 @@ use App\Console\Commands\SeoAgentCmsTdkGapScanCommand;
 use App\Console\Commands\SeoAgentRuntimeSeoQaScanCommand;
 use App\Console\Commands\SeoAgentOpportunityAggregateCommand;
 use App\Console\Commands\SeoAgentRunCommand;
+use App\Console\Commands\SeoAgentWeeklyDraftWriteAutoCommand;
 use App\Console\Commands\SeoAgentWeeklyReadonlyRunnerCommand;
 use App\Console\Commands\SeoIntelUrlTruthHandoffCommand;
 use App\Console\Commands\StorageControlPlaneSnapshot;
@@ -382,6 +383,7 @@ class Kernel extends ConsoleKernel
         SeoAgentRuntimeSeoQaScanCommand::class,
         SeoAgentOpportunityAggregateCommand::class,
         SeoAgentRunCommand::class,
+        SeoAgentWeeklyDraftWriteAutoCommand::class,
         SeoAgentWeeklyReadonlyRunnerCommand::class,
         SeoIntelUrlTruthHandoffCommand::class,
         SeoIntelSearchChannelQueueCommand::class,
