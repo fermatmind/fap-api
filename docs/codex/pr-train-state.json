@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-22T07:36:54+08:00",
+  "updated_at": "2026-06-22T07:37:55+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -56816,7 +56816,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-ops-agent-permission-model-01",
     "base": "main",
-    "status": "local_checks_passed",
+    "status": "pull_request_open",
     "train_scope": "riasec_result_ops_agent_release_chain",
     "title": "RIASEC-OPS-AGENT-PERMISSION-MODEL-01: docs(riasec): define ops agent permission model",
     "depends_on": [
@@ -56827,11 +56827,12 @@
       "json_tool_pr_train_state": "passed",
       "yaml_parse_pr_train_manifest": "passed",
       "git_diff_check": "passed",
-      "scope_validation": "passed"
+      "scope_validation": "passed",
+      "pr_created": "passed"
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "ca5f218c52e721df675fb9cd5730cd50bcf38b6f",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2244",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -56850,6 +56851,12 @@
         "from": "pending_dependency",
         "to": "local_checks_passed",
         "notes": "Permission-model docs and staging governance JSON passed local validation and manifest scope validation."
+      },
+      {
+        "at": "2026-06-22T07:37:55+08:00",
+        "from": "local_checks_passed",
+        "to": "pull_request_open",
+        "notes": "Opened GitHub PR #2244 after local checks and path scope validation passed."
       }
     ]
   },
