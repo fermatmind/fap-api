@@ -1,0 +1,735 @@
+{
+    "schema_version": "fap.enneagram.result_page.batch_source_mapping_report.v0.1",
+    "runtime_use": "not_runtime",
+    "production_use_allowed": false,
+    "batch_scope": "1R-H",
+    "payload_count": 90,
+    "source_mapping_failure_count": 0,
+    "fallback_source_count": 0,
+    "blocked_source_count": 0,
+    "duplicate_selection_count": 0,
+    "branch_provenance_mismatch_count": 0,
+    "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+    "mappings": [
+        {
+            "asset_key": "enneagram_1R_H_t1_fc144_recommendation_after_pair_comparison_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t1_fc144_recommendation_after_pair_comparison_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "after_pair_comparison",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t1_fc144_recommendation_after_scene_localization_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t1_fc144_recommendation_after_scene_localization_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "after_scene_localization",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t1_fc144_recommendation_clear_high_resonance_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t1_fc144_recommendation_clear_high_resonance_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "clear_high_resonance",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t1_fc144_recommendation_close_call_top2_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t1_fc144_recommendation_close_call_top2_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "close_call_top2",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t1_fc144_recommendation_diffuse_top3_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t1_fc144_recommendation_diffuse_top3_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "diffuse_top3",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t1_fc144_recommendation_high_engagement_deep_reader_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t1_fc144_recommendation_high_engagement_deep_reader_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "high_engagement_deep_reader",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t1_fc144_recommendation_low_quality_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t1_fc144_recommendation_low_quality_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "low_quality",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t1_fc144_recommendation_low_resonance_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t1_fc144_recommendation_low_resonance_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "low_resonance",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t1_fc144_recommendation_paid_preview_teaser_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t1_fc144_recommendation_paid_preview_teaser_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "paid_preview_teaser",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t1_fc144_recommendation_partial_resonance_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t1_fc144_recommendation_partial_resonance_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "partial_resonance",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t2_fc144_recommendation_after_pair_comparison_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t2_fc144_recommendation_after_pair_comparison_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "after_pair_comparison",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t2_fc144_recommendation_after_scene_localization_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t2_fc144_recommendation_after_scene_localization_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "after_scene_localization",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t2_fc144_recommendation_clear_high_resonance_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t2_fc144_recommendation_clear_high_resonance_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "clear_high_resonance",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t2_fc144_recommendation_close_call_top2_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t2_fc144_recommendation_close_call_top2_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "close_call_top2",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t2_fc144_recommendation_diffuse_top3_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t2_fc144_recommendation_diffuse_top3_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "diffuse_top3",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t2_fc144_recommendation_high_engagement_deep_reader_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t2_fc144_recommendation_high_engagement_deep_reader_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "high_engagement_deep_reader",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t2_fc144_recommendation_low_quality_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t2_fc144_recommendation_low_quality_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "low_quality",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t2_fc144_recommendation_low_resonance_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t2_fc144_recommendation_low_resonance_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "low_resonance",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t2_fc144_recommendation_paid_preview_teaser_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t2_fc144_recommendation_paid_preview_teaser_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "paid_preview_teaser",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t2_fc144_recommendation_partial_resonance_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t2_fc144_recommendation_partial_resonance_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "partial_resonance",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t3_fc144_recommendation_after_pair_comparison_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t3_fc144_recommendation_after_pair_comparison_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "after_pair_comparison",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t3_fc144_recommendation_after_scene_localization_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t3_fc144_recommendation_after_scene_localization_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "after_scene_localization",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t3_fc144_recommendation_clear_high_resonance_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t3_fc144_recommendation_clear_high_resonance_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "clear_high_resonance",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t3_fc144_recommendation_close_call_top2_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t3_fc144_recommendation_close_call_top2_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "close_call_top2",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t3_fc144_recommendation_diffuse_top3_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t3_fc144_recommendation_diffuse_top3_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "diffuse_top3",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t3_fc144_recommendation_high_engagement_deep_reader_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t3_fc144_recommendation_high_engagement_deep_reader_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "high_engagement_deep_reader",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t3_fc144_recommendation_low_quality_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t3_fc144_recommendation_low_quality_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "low_quality",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t3_fc144_recommendation_low_resonance_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t3_fc144_recommendation_low_resonance_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "low_resonance",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t3_fc144_recommendation_paid_preview_teaser_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t3_fc144_recommendation_paid_preview_teaser_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "paid_preview_teaser",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t3_fc144_recommendation_partial_resonance_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t3_fc144_recommendation_partial_resonance_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "partial_resonance",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t4_fc144_recommendation_after_pair_comparison_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t4_fc144_recommendation_after_pair_comparison_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "after_pair_comparison",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t4_fc144_recommendation_after_scene_localization_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t4_fc144_recommendation_after_scene_localization_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "after_scene_localization",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t4_fc144_recommendation_clear_high_resonance_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t4_fc144_recommendation_clear_high_resonance_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "clear_high_resonance",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t4_fc144_recommendation_close_call_top2_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t4_fc144_recommendation_close_call_top2_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "close_call_top2",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t4_fc144_recommendation_diffuse_top3_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t4_fc144_recommendation_diffuse_top3_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "diffuse_top3",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t4_fc144_recommendation_high_engagement_deep_reader_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t4_fc144_recommendation_high_engagement_deep_reader_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "high_engagement_deep_reader",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t4_fc144_recommendation_low_quality_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t4_fc144_recommendation_low_quality_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "low_quality",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t4_fc144_recommendation_low_resonance_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t4_fc144_recommendation_low_resonance_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "low_resonance",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t4_fc144_recommendation_paid_preview_teaser_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t4_fc144_recommendation_paid_preview_teaser_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "paid_preview_teaser",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t4_fc144_recommendation_partial_resonance_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t4_fc144_recommendation_partial_resonance_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "partial_resonance",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t5_fc144_recommendation_after_pair_comparison_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t5_fc144_recommendation_after_pair_comparison_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "after_pair_comparison",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t5_fc144_recommendation_after_scene_localization_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t5_fc144_recommendation_after_scene_localization_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "after_scene_localization",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t5_fc144_recommendation_clear_high_resonance_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t5_fc144_recommendation_clear_high_resonance_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "clear_high_resonance",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t5_fc144_recommendation_close_call_top2_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t5_fc144_recommendation_close_call_top2_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "close_call_top2",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t5_fc144_recommendation_diffuse_top3_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t5_fc144_recommendation_diffuse_top3_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "diffuse_top3",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t5_fc144_recommendation_high_engagement_deep_reader_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t5_fc144_recommendation_high_engagement_deep_reader_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "high_engagement_deep_reader",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t5_fc144_recommendation_low_quality_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t5_fc144_recommendation_low_quality_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "low_quality",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t5_fc144_recommendation_low_resonance_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t5_fc144_recommendation_low_resonance_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "low_resonance",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t5_fc144_recommendation_paid_preview_teaser_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t5_fc144_recommendation_paid_preview_teaser_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "paid_preview_teaser",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t5_fc144_recommendation_partial_resonance_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t5_fc144_recommendation_partial_resonance_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "partial_resonance",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t6_fc144_recommendation_after_pair_comparison_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t6_fc144_recommendation_after_pair_comparison_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "after_pair_comparison",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t6_fc144_recommendation_after_scene_localization_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t6_fc144_recommendation_after_scene_localization_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "after_scene_localization",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t6_fc144_recommendation_clear_high_resonance_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t6_fc144_recommendation_clear_high_resonance_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "clear_high_resonance",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t6_fc144_recommendation_close_call_top2_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t6_fc144_recommendation_close_call_top2_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "close_call_top2",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t6_fc144_recommendation_diffuse_top3_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t6_fc144_recommendation_diffuse_top3_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "diffuse_top3",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t6_fc144_recommendation_high_engagement_deep_reader_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t6_fc144_recommendation_high_engagement_deep_reader_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "high_engagement_deep_reader",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t6_fc144_recommendation_low_quality_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t6_fc144_recommendation_low_quality_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "low_quality",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t6_fc144_recommendation_low_resonance_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t6_fc144_recommendation_low_resonance_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "low_resonance",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t6_fc144_recommendation_paid_preview_teaser_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t6_fc144_recommendation_paid_preview_teaser_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "paid_preview_teaser",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t6_fc144_recommendation_partial_resonance_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t6_fc144_recommendation_partial_resonance_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "partial_resonance",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t7_fc144_recommendation_after_pair_comparison_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t7_fc144_recommendation_after_pair_comparison_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "after_pair_comparison",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t7_fc144_recommendation_after_scene_localization_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t7_fc144_recommendation_after_scene_localization_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "after_scene_localization",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t7_fc144_recommendation_clear_high_resonance_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t7_fc144_recommendation_clear_high_resonance_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "clear_high_resonance",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t7_fc144_recommendation_close_call_top2_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t7_fc144_recommendation_close_call_top2_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "close_call_top2",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t7_fc144_recommendation_diffuse_top3_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t7_fc144_recommendation_diffuse_top3_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "diffuse_top3",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t7_fc144_recommendation_high_engagement_deep_reader_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t7_fc144_recommendation_high_engagement_deep_reader_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "high_engagement_deep_reader",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t7_fc144_recommendation_low_quality_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t7_fc144_recommendation_low_quality_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "low_quality",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t7_fc144_recommendation_low_resonance_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t7_fc144_recommendation_low_resonance_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "low_resonance",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t7_fc144_recommendation_paid_preview_teaser_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t7_fc144_recommendation_paid_preview_teaser_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "paid_preview_teaser",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t7_fc144_recommendation_partial_resonance_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t7_fc144_recommendation_partial_resonance_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "partial_resonance",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t8_fc144_recommendation_after_pair_comparison_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t8_fc144_recommendation_after_pair_comparison_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "after_pair_comparison",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t8_fc144_recommendation_after_scene_localization_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t8_fc144_recommendation_after_scene_localization_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "after_scene_localization",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t8_fc144_recommendation_clear_high_resonance_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t8_fc144_recommendation_clear_high_resonance_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "clear_high_resonance",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t8_fc144_recommendation_close_call_top2_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t8_fc144_recommendation_close_call_top2_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "close_call_top2",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t8_fc144_recommendation_diffuse_top3_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t8_fc144_recommendation_diffuse_top3_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "diffuse_top3",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t8_fc144_recommendation_high_engagement_deep_reader_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t8_fc144_recommendation_high_engagement_deep_reader_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "high_engagement_deep_reader",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t8_fc144_recommendation_low_quality_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t8_fc144_recommendation_low_quality_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "low_quality",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t8_fc144_recommendation_low_resonance_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t8_fc144_recommendation_low_resonance_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "low_resonance",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t8_fc144_recommendation_paid_preview_teaser_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t8_fc144_recommendation_paid_preview_teaser_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "paid_preview_teaser",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t8_fc144_recommendation_partial_resonance_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t8_fc144_recommendation_partial_resonance_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "partial_resonance",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t9_fc144_recommendation_after_pair_comparison_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t9_fc144_recommendation_after_pair_comparison_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "after_pair_comparison",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t9_fc144_recommendation_after_scene_localization_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t9_fc144_recommendation_after_scene_localization_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "after_scene_localization",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t9_fc144_recommendation_clear_high_resonance_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t9_fc144_recommendation_clear_high_resonance_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "clear_high_resonance",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t9_fc144_recommendation_close_call_top2_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t9_fc144_recommendation_close_call_top2_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "close_call_top2",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t9_fc144_recommendation_diffuse_top3_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t9_fc144_recommendation_diffuse_top3_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "diffuse_top3",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t9_fc144_recommendation_high_engagement_deep_reader_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t9_fc144_recommendation_high_engagement_deep_reader_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "high_engagement_deep_reader",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t9_fc144_recommendation_low_quality_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t9_fc144_recommendation_low_quality_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "low_quality",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t9_fc144_recommendation_low_resonance_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t9_fc144_recommendation_low_resonance_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "low_resonance",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t9_fc144_recommendation_paid_preview_teaser_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t9_fc144_recommendation_paid_preview_teaser_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "paid_preview_teaser",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_H_t9_fc144_recommendation_partial_resonance_v1",
+            "source_id": "batch_1r_h_asset_stream",
+            "source_asset_key": "enneagram_1R_H_t9_fc144_recommendation_partial_resonance_v1",
+            "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+            "branch_key": "partial_resonance",
+            "status": "mapped"
+        }
+    ]
+}

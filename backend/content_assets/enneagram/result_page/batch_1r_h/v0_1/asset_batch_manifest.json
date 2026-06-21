@@ -1,0 +1,91 @@
+{
+    "schema_version": "fap.enneagram.result_page.batch_1r_h.manifest.v0.1",
+    "batch_id": "ENNEAGRAM-RESULT-ASSETS-1R-H-01",
+    "runtime_use": "not_runtime",
+    "production_use_allowed": false,
+    "cms_write_performed": false,
+    "runtime_change_performed": false,
+    "frontend_fallback_allowed": false,
+    "activation_happened": false,
+    "inactive_import_happened": false,
+    "candidate_export_happened": false,
+    "bulk_content_generation_happened": false,
+    "description": "Repo-owned derived 1R-H Enneagram FC144 recommendation result-page content assets for agent batch validation.",
+    "source_ledger_schema_version": "fap.enneagram.result_page.source_ledger.v0.1",
+    "source_ledger_row_id": "batch_1r_h_asset_stream",
+    "source_asset_logical_ref": "FermatMind_Enneagram_Content_Expansion_Batch_1R_H_FC144_Recommendation_Pack_Assets.json",
+    "source_asset_sha256": "74b5db9775792f156eeeb9cc203c888c3c627c8498cfb5c7a16ff521208c9140",
+    "candidate_contract_reference": {
+        "baseline_candidate_manifest_sha256": "a9fd3eb474ea2ca0130d06ad2b1640305d9160ee1a74e559ad4f60bfc4db56c0",
+        "runtime_registry_manifest_sha256": "ac5bdaab3c761b0d01a56f92679aa58341110d64de0f47a1fa0062b64f76f97f",
+        "expected_full_candidate_payload_count": 630,
+        "this_batch_asset_count": 90
+    },
+    "coverage_counts": {
+        "by_category": {
+            "fc144_recommendation_response": 90
+        },
+        "by_module_key": {
+            "form_recommendation": 90
+        },
+        "by_type_id": {
+            "1": 10,
+            "2": 10,
+            "3": 10,
+            "4": 10,
+            "5": 10,
+            "6": 10,
+            "7": 10,
+            "8": 10,
+            "9": 10
+        },
+        "by_scope": {
+            "clear": 54,
+            "close_call": 63,
+            "diffuse": 45,
+            "low_quality": 18
+        },
+        "by_shareability": {
+            "private_result_only": 90,
+            "share_teaser_ready": 0
+        },
+        "by_safety_level": {
+            "no_accuracy_claim|no_e105_fc144_score_comparison|no_fc144_final_typing|no_hard_typing|non_diagnostic|non_hiring|user_facing_only|fc144_recommendation_safe": 90
+        },
+        "by_fc144_recommendation_context": {
+            "after_pair_comparison": 9,
+            "after_scene_localization": 9,
+            "clear_high_resonance": 9,
+            "close_call_top2": 9,
+            "diffuse_top3": 9,
+            "high_engagement_deep_reader": 9,
+            "low_quality": 9,
+            "low_resonance": 9,
+            "paid_preview_teaser": 9,
+            "partial_resonance": 9
+        },
+        "by_recommendation_strategy": {
+            "defer_until_pair_review": 9,
+            "defer_until_top3_converges": 9,
+            "do_not_recommend_before_same_form_retest": 9,
+            "explain_objection_before_recommendation": 9,
+            "paid_teaser_without_accuracy_claim": 9,
+            "recommend_after_deep_reading": 9,
+            "recommend_after_high_resonance": 9,
+            "recommend_after_pair_comparison": 9,
+            "recommend_after_partial_axis_is_clear": 9,
+            "recommend_after_scene_stability": 9
+        }
+    },
+    "artifact_hashes": {
+        "assets_json_sha256": "dbaf1d8cece7870e6f890f99add065606629ab7de32c7397a1a6143b50f6bab8",
+        "payload_hash_count": 90
+    },
+    "required_reports": [
+        "source_mapping_report.json",
+        "safety_report.json",
+        "runner_eval_report.json",
+        "rollback_plan.md"
+    ],
+    "next_gate": "ENNEAGRAM-RESULT-FULL-CANDIDATE-EXPORT-01"
+}
