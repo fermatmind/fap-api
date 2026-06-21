@@ -55933,7 +55933,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-asset-validator-harness-01",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "riasec_result_page_v2_asset_agent",
     "title": "RIASEC-RESULT-ASSET-VALIDATOR-HARNESS-01: test(riasec):建 result asset validator harness",
     "depends_on": [
@@ -55974,14 +55974,18 @@
       "github": {
         "status": "pass",
         "evidence": "PR #2224 GitHub required checks passed on head 78d258a47c207d0bffb71a440f7b61195f9e0119 after scoped verify-bigfive freeze guard repair; mergeStateStatus CLEAN."
+      },
+      "post_merge": {
+        "status": "pass",
+        "evidence": "PR #2224 merged with squash commit bba68cd98eb2e10a3338375e22ced1cf7b3f4a2e; origin/main contains the merge commit; local main was synced to origin/main; local task branch deleted; remote task branch absent; post-merge RIASEC harness, slot contract, freeze guard regression, CLI smoke, JSON/YAML, and diff checks passed."
       }
     },
     "failure_reason": null,
-    "commit_sha": "78d258a47c207d0bffb71a440f7b61195f9e0119",
+    "commit_sha": "bba68cd98eb2e10a3338375e22ced1cf7b3f4a2e",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2224",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-21T15:14:33Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-21T22:06:47+08:00",
@@ -56017,6 +56021,11 @@
         "at": "2026-06-21T23:08:52+08:00",
         "status": "ready_to_merge",
         "note": "PR #2224 GitHub checks passed on head 78d258a47c207d0bffb71a440f7b61195f9e0119 and merge state is CLEAN; pre-merge scope validation passed."
+      },
+      {
+        "at": "2026-06-21T23:18:58+08:00",
+        "status": "merged",
+        "note": "Reconciled during RIASEC-RESULT-EXISTING-ASSET-GAP-AUDIT-01: PR #2224 merged at 2026-06-21T15:14:33Z with merge commit bba68cd98eb2e10a3338375e22ced1cf7b3f4a2e; origin/main contains the merge commit; local main equals origin/main; local and remote task branch cleanup completed; post-merge focused validation passed."
       }
     ],
     "sidecar_issues": [
@@ -56038,7 +56047,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-existing-asset-gap-audit-01",
     "base": "main",
-    "status": "pending_authorization",
+    "status": "ready_to_merge",
     "train_scope": "riasec_result_page_v2_asset_agent",
     "title": "RIASEC-RESULT-EXISTING-ASSET-GAP-AUDIT-01: docs(riasec):审计现有 result assets gaps",
     "depends_on": [
@@ -56048,11 +56057,33 @@
       "authorization": {
         "status": "pass",
         "evidence": "User explicitly authorized the eight-item RIASEC Result Page asset-agent PR train and docs/codex manifest/state updates in the goal objective."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "RIASEC-RESULT-ASSET-VALIDATOR-HARNESS-01 merged as PR #2224; origin/main contains merge commit bba68cd98eb2e10a3338375e22ced1cf7b3f4a2e."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "find backend/content_assets/riasec/result_page_v2/qa -name '*.json' -print -exec python3 -m json.tool {} >/dev/null \\;",
+          "git diff --check",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+        ],
+        "notes": "Added RIASEC existing asset gap audit README and JSON register. Audit records 24 top-level v1 asset files, 1470 JSONL rows, no V2 selector-ready assets, no route matrix rows, no canonical profile matrix, and no golden cases."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Pre-merge scope validation shows only RIASEC result_page_v2 QA gap audit files and docs/codex state changed."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #2228 GitHub required checks passed on head 5a05ea77c60d2601e48a351f4187aba55e57294c; mergeStateStatus CLEAN."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "5a05ea77c60d2601e48a351f4187aba55e57294c",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2228",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -56061,6 +56092,26 @@
         "at": "2026-06-21T22:06:47+08:00",
         "status": "pending_authorization",
         "note": "Manifest/state entry authorized for the RIASEC Result Page asset-agent train. Implementation waits for its dependency order."
+      },
+      {
+        "at": "2026-06-21T23:18:58+08:00",
+        "status": "local_checks_passed",
+        "note": "Produced RIASEC Result Page V2 existing asset gap register with 9 open gaps grouped by selector assets, route matrix, golden cases, share-safe coverage, low-quality coverage, fallback, scenario scope, locale coverage, and forbidden-term sidecar. JSON/YAML, diff, and scope validation passed."
+      },
+      {
+        "at": "2026-06-21T23:19:26+08:00",
+        "status": "commit_created",
+        "note": "Recorded scoped gap-audit commit 1ec1e89cbf52bd634e055cdb6c9b28522bd89198 after local checks and scope validation passed."
+      },
+      {
+        "at": "2026-06-21T23:20:29+08:00",
+        "status": "github_checks_pending",
+        "note": "Opened PR #2228 from commit 51bde8d933d13967b56cbf7fc12aa2d4376726f6; waiting for required GitHub checks."
+      },
+      {
+        "at": "2026-06-21T23:26:57+08:00",
+        "status": "ready_to_merge",
+        "note": "PR #2228 GitHub checks passed on head 5a05ea77c60d2601e48a351f4187aba55e57294c and merge state is CLEAN; pre-merge scope validation passed."
       }
     ]
   },
