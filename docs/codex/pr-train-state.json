@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-21T22:31:19+08:00",
+  "updated_at": "2026-06-21T22:43:15+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -55777,7 +55777,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-source-ledger-01",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "riasec_result_page_v2_asset_agent",
     "title": "RIASEC-RESULT-SOURCE-LEDGER-01: docs(riasec):建 result source ledger",
     "depends_on": [
@@ -55809,14 +55809,18 @@
       "github": {
         "status": "pass",
         "evidence": "PR #2220 checks passed on head 94407f4d34fb202cea1af6682e50a2847411fde6: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and non-blocking Semgrep SARIF upload. Merge state CLEAN."
+      },
+      "post_merge": {
+        "status": "pass",
+        "evidence": "PR #2220 merged at 2026-06-21T14:37:31Z with merge commit ef1c4fc9fae28aaf7f1ea5cc82b80c1b6fd7221c; origin/main contains the merge commit; local main holder equals origin/main; local branch deleted; remote branch absent; post-merge JSON/YAML/diff and source ledger jq checks passed."
       }
     },
     "failure_reason": null,
-    "commit_sha": "94407f4d34fb202cea1af6682e50a2847411fde6",
+    "commit_sha": "ef1c4fc9fae28aaf7f1ea5cc82b80c1b6fd7221c",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2220",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-21T14:37:31Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-21T22:06:47+08:00",
@@ -55842,6 +55846,11 @@
         "at": "2026-06-21T22:31:19+08:00",
         "status": "ready_to_merge",
         "note": "PR #2220 GitHub checks passed on head 94407f4d34fb202cea1af6682e50a2847411fde6; merge state CLEAN. Ready to merge after this state update revalidates."
+      },
+      {
+        "at": "2026-06-21T22:43:15+08:00",
+        "status": "merged",
+        "note": "Reconciled during RIASEC-RESULT-ASSET-VALIDATOR-HARNESS-01: PR #2220 merged, origin/main contains merge commit, main holder equals origin/main, task branch cleanup completed, and post-merge revalidation passed."
       }
     ]
   },
@@ -55849,7 +55858,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-asset-validator-harness-01",
     "base": "main",
-    "status": "pending_authorization",
+    "status": "local_checks_passed_with_external_sidecar",
     "train_scope": "riasec_result_page_v2_asset_agent",
     "title": "RIASEC-RESULT-ASSET-VALIDATOR-HARNESS-01: test(riasec):建 result asset validator harness",
     "depends_on": [
@@ -55859,6 +55868,32 @@
       "authorization": {
         "status": "pass",
         "evidence": "User explicitly authorized the eight-item RIASEC Result Page asset-agent PR train and docs/codex manifest/state updates in the goal objective."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "RIASEC-RESULT-SOURCE-LEDGER-01 merged as PR #2220; origin/main contains merge commit ef1c4fc9fae28aaf7f1ea5cc82b80c1b6fd7221c. Current branch started from origin/main ef1c4fc9fae28aaf7f1ea5cc82b80c1b6fd7221c."
+      },
+      "local": {
+        "status": "pass_with_external_sidecar",
+        "commands": [
+          "php -l backend/app/Services/Riasec/AssetAgent/RiasecResultPageAssetAgent.php",
+          "php -l backend/app/Console/Commands/RiasecResultPageAssetAgentAuditCommand.php",
+          "php -l backend/tests/Unit/Services/Riasec/RiasecResultPageAssetAgentTest.php",
+          "php -l backend/app/Console/Kernel.php",
+          "php -l backend/bootstrap/app.php",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=RiasecResultPageAssetAgentTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=RiasecContentRegistrySlotContractTest --no-ansi",
+          "cd backend && APP_ENV=testing php artisan riasec:result-page-v2-agent audit --json --no-ansi",
+          "cd backend && APP_ENV=testing php artisan riasec:result-page-v2-agent audit --strict --json --no-ansi",
+          "git diff --check",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+        ],
+        "notes": "PHP syntax checks, focused RIASEC AssetAgent test, reused RiasecContentRegistrySlotContract test, non-strict CLI smoke, JSON/YAML parse, diff check, and changed-file scope validation passed. Strict CLI audit exits non-zero only on 13 pre-existing forbidden-term hits in the existing RIASEC asset corpus; recorded as external sidecar RIASEC-GAP-FORBIDDEN-TERMS-001."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are confined to the RIASEC AssetAgent command/service/test, console command registration, bootstrap command discovery, and docs/codex PR-train metadata allowed for RIASEC-RESULT-ASSET-VALIDATOR-HARNESS-01."
       }
     },
     "failure_reason": null,
@@ -55872,6 +55907,30 @@
         "at": "2026-06-21T22:06:47+08:00",
         "status": "pending_authorization",
         "note": "Manifest/state entry authorized for the RIASEC Result Page asset-agent train. Implementation waits for its dependency order."
+      },
+      {
+        "at": "2026-06-21T22:43:15+08:00",
+        "status": "in_progress",
+        "note": "Started validator harness PR from latest origin/main after source ledger PR merge and cleanup. Scope is read-only RIASEC asset-agent command/service/test plus docs/codex state reconciliation."
+      },
+      {
+        "at": "2026-06-21T22:50:59+08:00",
+        "status": "local_checks_passed_with_external_sidecar",
+        "note": "Implemented read-only RIASEC AssetAgent audit harness and command. Focused tests, CLI smoke, JSON/YAML, diff, and scope validation passed; strict audit forbidden-term hits are existing corpus issues recorded as sidecar RIASEC-GAP-FORBIDDEN-TERMS-001."
+      }
+    ],
+    "sidecar_issues": [
+      {
+        "sidecar_id": "RIASEC-GAP-FORBIDDEN-TERMS-001",
+        "status": "external_preexisting_blocker_recorded",
+        "introduced_by_current_pr": false,
+        "summary": "Strict RIASEC Result Page asset-agent audit reports 13 forbidden-term hits in the existing RIASEC asset corpus.",
+        "evidence": "cd backend && APP_ENV=testing php artisan riasec:result-page-v2-agent audit --strict --json --no-ansi exits 1 with strict_failures=[\"forbidden_public_payload_leaks\"], validation_error_count=0, leak_hit_count=13, source_ledger_valid=true, asset_inventory_valid=true.",
+        "deferred_to": [
+          "RIASEC-RESULT-EXISTING-ASSET-GAP-AUDIT-01",
+          "RIASEC-RESULT-SELECTOR-QA-REPAIR-01"
+        ],
+        "continuation_policy": "Per user protocol, continue because this blocker is not introduced by the current PR and scoped validation is green."
       }
     ]
   },

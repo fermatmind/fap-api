@@ -171,6 +171,7 @@ use App\Console\Commands\PersonalityMbti64CmsRevisionDraft;
 use App\Console\Commands\PersonalityMbti64CmsRevisionPromote;
 use App\Console\Commands\QualityDailySummary;
 use App\Console\Commands\RefreshCareerAttributionDailyCommand;
+use App\Console\Commands\RiasecResultPageAssetAgentAuditCommand;
 use App\Console\Commands\SdsPsychometricsReport;
 use App\Console\Commands\SeedScaleRegistry;
 use App\Console\Commands\SeoAgentAutoRollbackGuardCommand;
@@ -262,6 +263,7 @@ class Kernel extends ConsoleKernel
         Big5AttemptPurge::class,
         Big5TelemetrySummary::class,
         BigFiveResultPageV2AssetAgentAuditCommand::class,
+        RiasecResultPageAssetAgentAuditCommand::class,
         CommerceReconcile::class,
         CommerceCompensatePendingOrders::class,
         CommerceRepairPaidOrders::class,

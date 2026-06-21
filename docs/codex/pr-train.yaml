@@ -24381,6 +24381,7 @@ prs:
     allowed_paths:
       - backend/app/Console/Commands/*Riasec*AssetAgent*Command.php
       - backend/app/Console/Kernel.php
+      - backend/bootstrap/app.php
       - backend/app/Services/Riasec/**/AssetAgent/**
       - backend/app/Services/RIASEC/**/AssetAgent/**
       - backend/tests/**/Riasec*AssetAgent*Test.php
@@ -24393,7 +24394,8 @@ prs:
       - Modify runtime wrapper behavior, CMS importers, public API contracts, or frontend fixtures.
     validation:
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=RiasecResultPageAssetAgentTest --no-ansi
-      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Riasec --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=RiasecContentRegistrySlotContractTest --no-ansi
+      - cd backend && APP_ENV=testing php artisan riasec:result-page-v2-agent audit --json --no-ansi
       - git diff --check
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
