@@ -24465,6 +24465,46 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: B5-RESULT-AUTO-PR-ORCHESTRATOR-01
+    repo: fap-api
+    depends_on:
+      - B5-RESULT-AUTO-NIGHTLY-SCHEDULER-01
+    branch: codex/big5-v2-auto-pr-orchestrator
+    title: "B5-RESULT-AUTO-PR-ORCHESTRATOR-01: Plan Big Five V2 agent artifact PRs"
+    train_scope: big5_result_page_v2_asset_agent_automation
+    status: user_authorized
+    scope:
+      - Add an artifact-only auto PR orchestration plan action for Big Five V2 agent runs.
+      - Generate scoped branch, commit message, PR title/body, planned changed files, and scope validation artifacts from an existing agent artifact run.
+      - Keep the first orchestrator version dry-run/artifact-only: no git branch creation, no commit, no push, no GitHub PR creation, no check polling, and no merge.
+      - Preserve backend authority and staging/not-runtime defaults.
+    allowed_paths:
+      - backend/app/Console/Commands/BigFiveResultPageV2AssetAgentAuditCommand.php
+      - backend/app/Services/BigFive/ResultPageV2/AssetAgent/BigFiveResultPageV2AssetAgent.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2AssetAgentTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add fap-web copy, generate final frontend payloads, make big5_report_engine_v2 primary, enable production rollout, or touch release/import/rollout gates.
+      - Add CI inspector, mechanical fixer, auto merge, cleanup, or weekly ops runner behavior in this PR.
+      - Execute git or GitHub mutations from the orchestrator action.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi
+      - cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent generate-candidates --run-id=candidate-source --artifact-dir=artifacts/big5_result_page_v2_agent/testing-auto-pr-orchestrator --json --no-ansi
+      - cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent plan-pr --run-id=orchestrator-plan --artifact-dir=artifacts/big5_result_page_v2_agent/testing-auto-pr-orchestrator --source-run-dir=artifacts/big5_result_page_v2_agent/testing-auto-pr-orchestrator/candidate-source --pr-id=B5-RESULT-CANDIDATE-BATCH-DRY-RUN-01 --branch=codex/big5-v2-candidate-batch-dry-run --json --no-ansi
+      - rm -rf backend/artifacts/big5_result_page_v2_agent/testing-auto-pr-orchestrator
+      - git diff --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: RIASEC-RESULT-ASSET-AGENT-RUNBOOK-01
     repo: fap-api
     branch: codex/riasec-result-asset-agent-runbook-01
