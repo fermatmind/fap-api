@@ -1,0 +1,102 @@
+{
+    "schema_version": "fap.enneagram.result_page.batch_1r_f.manifest.v0.1",
+    "batch_id": "ENNEAGRAM-RESULT-ASSETS-1R-F-01",
+    "runtime_use": "not_runtime",
+    "production_use_allowed": false,
+    "cms_write_performed": false,
+    "runtime_change_performed": false,
+    "frontend_fallback_allowed": false,
+    "activation_happened": false,
+    "inactive_import_happened": false,
+    "candidate_export_happened": false,
+    "bulk_content_generation_happened": false,
+    "description": "Repo-owned derived 1R-F Enneagram close-call pair result-page content assets for agent batch validation.",
+    "source_ledger_schema_version": "fap.enneagram.result_page.source_ledger.v0.1",
+    "source_ledger_row_id": "batch_1r_f_asset_stream",
+    "source_asset_logical_ref": "FermatMind_Enneagram_Content_Expansion_Batch_1R_F_Close_Call_36_Pair_Completion_Assets.json",
+    "source_asset_sha256": "199c9fd596d03f876c3e0385ee1dd2973cde0a58cd30ec9d119137f610b9dc97",
+    "candidate_contract_reference": {
+        "baseline_candidate_manifest_sha256": "a9fd3eb474ea2ca0130d06ad2b1640305d9160ee1a74e559ad4f60bfc4db56c0",
+        "runtime_registry_manifest_sha256": "ac5bdaab3c761b0d01a56f92679aa58341110d64de0f47a1fa0062b64f76f97f",
+        "expected_full_candidate_payload_count": 630,
+        "this_batch_asset_count": 36
+    },
+    "coverage_counts": {
+        "by_category": {
+            "close_call_pair": 36
+        },
+        "by_module_key": {
+            "close_call_pair_card": 36
+        },
+        "by_type_id": {
+            "1": 8,
+            "2": 8,
+            "3": 8,
+            "4": 8,
+            "5": 8,
+            "6": 8,
+            "7": 8,
+            "8": 8,
+            "9": 8
+        },
+        "by_scope": {
+            "close_call": 36
+        },
+        "by_shareability": {
+            "private_result_only": 36,
+            "share_teaser_ready": 0
+        },
+        "by_safety_level": {
+            "no_accuracy_claim|no_fc144_final_typing|no_hard_typing|no_user_confirmed_type_overwrite|non_diagnostic|non_hiring|close_call_pair_safe": 36
+        },
+        "by_pair_key": {
+            "1_2": 1,
+            "1_3": 1,
+            "1_4": 1,
+            "1_5": 1,
+            "1_6": 1,
+            "1_7": 1,
+            "1_8": 1,
+            "1_9": 1,
+            "2_3": 1,
+            "2_4": 1,
+            "2_5": 1,
+            "2_6": 1,
+            "2_7": 1,
+            "2_8": 1,
+            "2_9": 1,
+            "3_4": 1,
+            "3_5": 1,
+            "3_6": 1,
+            "3_7": 1,
+            "3_8": 1,
+            "3_9": 1,
+            "4_5": 1,
+            "4_6": 1,
+            "4_7": 1,
+            "4_8": 1,
+            "4_9": 1,
+            "5_6": 1,
+            "5_7": 1,
+            "5_8": 1,
+            "5_9": 1,
+            "6_7": 1,
+            "6_8": 1,
+            "6_9": 1,
+            "7_8": 1,
+            "7_9": 1,
+            "8_9": 1
+        }
+    },
+    "artifact_hashes": {
+        "assets_json_sha256": "608d009a9cd4bf301c6d6163747ffc9efc06054385a4dcba9e6f3aa8518470b6",
+        "payload_hash_count": 36
+    },
+    "required_reports": [
+        "source_mapping_report.json",
+        "safety_report.json",
+        "runner_eval_report.json",
+        "rollback_plan.md"
+    ],
+    "next_gate": "ENNEAGRAM-RESULT-ASSETS-1R-G-01"
+}
