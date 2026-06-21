@@ -1,0 +1,29 @@
+{
+  "schema_version": "fap.big5.result_page_v2.asset_agent.input_inventory.v0.1",
+  "run_id": "share_safety_pilot_20260621T1800Z",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "scope": {
+    "registry": "share_safety_registry",
+    "pilot_batch_size": 1,
+    "generation_mode": "dry_run_only",
+    "excluded_combinations": [
+      "O59_plus_low_quality_plus_norm_unavailable"
+    ]
+  },
+  "source_inputs": [
+    "backend/content_assets/big5/result_page_v2/source_ledger/source_ledger.json",
+    "backend/content_assets/big5/result_page_v2/selector_qa_policy/v0_1/big5_result_page_v2_selector_qa_policy_v0_1_repair_report.json",
+    "backend/content_assets/big5/result_page_v2/selector_ready_assets/v0_3_p0_full/assets.jsonl"
+  ],
+  "negative_guarantees": {
+    "cms_write": false,
+    "database_write": false,
+    "runtime_wrapper_enablement": false,
+    "frontend_fallback": false,
+    "production_gate_change": false
+  }
+}

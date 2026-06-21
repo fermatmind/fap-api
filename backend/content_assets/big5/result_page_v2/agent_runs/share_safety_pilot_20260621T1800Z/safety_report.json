@@ -1,0 +1,32 @@
+{
+  "schema_version": "fap.big5.result_page_v2.asset_agent.safety_report.v0.1",
+  "run_id": "share_safety_pilot_20260621T1800Z",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "leak_scan": {
+    "status": "pass",
+    "hit_count": 0,
+    "forbidden_terms_checked": [
+      "raw_score",
+      "percentile",
+      "fixed_type",
+      "user_confirmed_type",
+      "diagnosis",
+      "therapy",
+      "hiring_screen",
+      "success_prediction"
+    ]
+  },
+  "claim_safety": {
+    "no_fixed_personality_type": true,
+    "no_official_32_type": true,
+    "no_diagnosis_or_treatment": true,
+    "no_hiring_screening": true,
+    "no_success_prediction": true,
+    "no_ability_measurement": true,
+    "no_raw_score_or_percentile": true
+  }
+}
