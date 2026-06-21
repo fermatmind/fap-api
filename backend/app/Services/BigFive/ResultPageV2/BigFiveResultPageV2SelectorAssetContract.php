@@ -164,7 +164,7 @@ final class BigFiveResultPageV2SelectorAssetContract
         'scenario_registry' => ['module_06_application_matrix', 'module_07_collaboration_manual'],
         'action_plan_registry' => ['module_06_application_matrix'],
         'observation_feedback_registry' => ['module_09_feedback_data_flywheel'],
-        'share_safety_registry' => ['module_08_share_save'],
+        'share_safety_registry' => ['module_07_collaboration_manual', 'module_08_share_save'],
         'boundary_registry' => ['module_00_trust_bar', 'module_01_hero', 'module_08_share_save', 'module_10_method_privacy'],
         'method_registry' => ['module_00_trust_bar', 'module_10_method_privacy'],
     ];
@@ -187,7 +187,7 @@ final class BigFiveResultPageV2SelectorAssetContract
         'scenario_registry' => ['application_matrix', 'collaboration_manual'],
         'action_plan_registry' => ['application_matrix'],
         'observation_feedback_registry' => ['feedback_block'],
-        'share_safety_registry' => ['share_save'],
+        'share_safety_registry' => ['collaboration_manual', 'share_save'],
         'boundary_registry' => ['trust_bar', 'hero_summary', 'share_save', 'method_boundary'],
         'method_registry' => ['trust_bar', 'method_boundary'],
     ];

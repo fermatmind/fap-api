@@ -39,7 +39,7 @@
       {"package_key": "B5-CONTENT-4", "package_type": "canonical_profile_routes", "row_count": 64, "gap_summary": "8 canonical profiles x 8 sections; route matrix references all 8 profile keys"},
       {"package_key": "B5-CONTENT-5", "package_type": "scenario_action_assets", "row_count": 160, "gap_summary": "scenario package is broader than selector action/scenario registries; reference consistency remains staging QA"},
       {"package_key": "B5-CONTENT-6", "package_type": "route_matrix", "row_count": 3125, "gap_summary": "route matrix rows complete and uniquely keyed"},
-      {"package_key": "selector-ready-assets-v0.3-p0-full", "package_type": "selector_ready_assets", "row_count": 325, "gap_summary": "3 selector validator findings remain in share-safe registry ownership"},
+      {"package_key": "selector-ready-assets-v0.3-p0-full", "package_type": "selector_ready_assets", "row_count": 325, "gap_summary": "P0 share-safe selector ownership is repaired; remaining readiness gaps are route/golden and coverage QA"},
       {"package_key": "selector-qa-policy-v0.1", "package_type": "selector_qa_policy", "row_count": 30, "gap_summary": "inventory says 30 golden cases but file contains 31 including O59 canonical preview"}
     ]
   },
@@ -54,8 +54,8 @@
       "method_registry": 6,
       "observation_feedback_registry": 25,
       "profile_signature_registry": 20,
-      "scenario_registry": 40,
-      "share_safety_registry": 10,
+      "scenario_registry": 37,
+      "share_safety_registry": 13,
       "state_scope_registry": 14,
       "triple_pattern_registry": 20
     },
@@ -81,20 +81,16 @@
       {
         "finding_id": "B5-GAP-SEL-SHARE-001",
         "severity": "P0",
-        "status": "open",
-        "description": "Three shareable selector assets originate from scenario_registry instead of share_safety_registry.",
-        "validator_errors": [
-          "selector asset 246: shareable=true selector assets must originate from share_safety_registry",
-          "selector asset 247: shareable=true selector assets must originate from share_safety_registry",
-          "selector asset 250: shareable=true selector assets must originate from share_safety_registry"
-        ],
+        "status": "resolved",
+        "description": "Three shareable selector assets now originate from share_safety_registry.",
+        "validator_errors": [],
         "affected_asset_keys": [
-          "asset.module_07_collaboration_manual.scenario_registry.collaboration_document_first.v0_3",
-          "asset.module_07_collaboration_manual.scenario_registry.collaboration_clear_owner_deadline.v0_3",
-          "asset.module_07_collaboration_manual.scenario_registry.collaboration_share_safe_manual.v0_3"
+          "asset.module_07_collaboration_manual.share_safety_registry.collaboration_document_first.v0_3",
+          "asset.module_07_collaboration_manual.share_safety_registry.collaboration_clear_owner_deadline.v0_3",
+          "asset.module_07_collaboration_manual.share_safety_registry.collaboration_share_safe_manual.v0_3"
         ],
         "deferred_to_pr": "BIG5-RESULT-SELECTOR-QA-REPAIR-01",
-        "runtime_impact": "blocked_for_strict_selector_gate",
+        "runtime_impact": "strict_selector_gate_unblocked",
         "production_impact": "production_use_allowed remains false"
       }
     ]
@@ -155,19 +151,19 @@
       "gap_id": "B5-GAP-STRICT-001",
       "severity": "P0",
       "area": "validator_harness",
-      "status": "open",
-      "finding": "Clean-main strict harness audit exits blocked because selector_validation_errors=3.",
+      "status": "resolved",
+      "finding": "Clean-main strict harness audit exits 0 after share-safe selector registry ownership repair.",
       "evidence": "cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi",
       "introduced_by_current_pr": false,
-      "sidecar_required": true,
+      "sidecar_required": false,
       "deferred_to_pr": "BIG5-RESULT-SELECTOR-QA-REPAIR-01"
     },
     {
       "gap_id": "B5-GAP-SEL-SHARE-001",
       "severity": "P0",
       "area": "share_safe_selector_contract",
-      "status": "open",
-      "finding": "Three module_07 collaboration selector assets are shareable=true but remain in scenario_registry.",
+      "status": "resolved",
+      "finding": "Three module_07 collaboration selector assets are shareable=true and now belong to share_safety_registry.",
       "introduced_by_current_pr": false,
       "deferred_to_pr": "BIG5-RESULT-SELECTOR-QA-REPAIR-01"
     },
