@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-21T16:18:23+08:00",
+  "updated_at": "2026-06-21T16:19:31+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -55156,7 +55156,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-result-source-ledger-01",
     "base": "main",
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "train_scope": "big5_result_page_v2_asset_agent",
     "title": "BIG5-RESULT-SOURCE-LEDGER-01: docs(big5):建 result source ledger",
     "depends_on": [
@@ -55187,8 +55187,8 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "91ac1a794c4ef4bbc2956fe067a8562194cbe443",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2187",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -55207,6 +55207,11 @@
         "at": "2026-06-21T16:18:23+08:00",
         "status": "local_checks_passed",
         "note": "Added source ledger README, template, and initial evidence ledger. JSON/YAML parse, diff check, and scope validation passed."
+      },
+      {
+        "at": "2026-06-21T16:19:31+08:00",
+        "status": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/2187 from scoped source-ledger commit 91ac1a794c4ef4bbc2956fe067a8562194cbe443."
       }
     ]
   },
