@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-21T17:19:11+08:00",
+  "updated_at": "2026-06-21T17:26:10+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -55305,7 +55305,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-result-existing-asset-gap-audit-01",
     "base": "main",
-    "status": "local_checks_passed",
+    "status": "github_checks_pending",
     "train_scope": "big5_result_page_v2_asset_agent",
     "title": "BIG5-RESULT-EXISTING-ASSET-GAP-AUDIT-01: docs(big5):审计现有 result assets gaps",
     "depends_on": [
@@ -55337,8 +55337,8 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "a91412d1bb6022280fbbda607bf1f5522367b1a8",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2194",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -55357,6 +55357,11 @@
         "at": "2026-06-21T17:19:11+08:00",
         "status": "local_checks_passed",
         "note": "Harness dry-run, QA JSON parse, manifest/state parse, git diff check, and scope validation passed. Strict harness failure remains recorded as an external sidecar and deferred to BIG5-RESULT-SELECTOR-QA-REPAIR-01."
+      },
+      {
+        "at": "2026-06-21T17:26:10+08:00",
+        "status": "github_checks_pending",
+        "note": "Opened PR #2194 from commit a91412d1bb6022280fbbda607bf1f5522367b1a8; waiting for required GitHub checks."
       }
     ],
     "sidecar_issues": [
