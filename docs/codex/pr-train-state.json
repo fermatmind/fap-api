@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-21T22:14:27+08:00",
+  "updated_at": "2026-06-21T22:24:49+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -55699,7 +55699,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-asset-agent-runbook-01",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "riasec_result_page_v2_asset_agent",
     "title": "RIASEC-RESULT-ASSET-AGENT-RUNBOOK-01: docs(riasec):固化 result asset agent runbook",
     "depends_on": [],
@@ -55728,14 +55728,18 @@
       "github": {
         "status": "pass",
         "evidence": "PR #2215 checks passed on head b2976f7638aed2717c0a955d13011d0c920ddfa0: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and non-blocking Semgrep SARIF upload. Merge state CLEAN."
+      },
+      "post_merge": {
+        "status": "pass",
+        "evidence": "PR #2215 merged at 2026-06-21T14:20:02Z with merge commit 436c62975f66236c5fca8f42994efde7e78453dd; origin/main contains the merge commit; local main was synced to origin/main; local branch deleted; remote branch absent; post-merge JSON/YAML/diff checks passed."
       }
     },
     "failure_reason": null,
-    "commit_sha": "b2976f7638aed2717c0a955d13011d0c920ddfa0",
+    "commit_sha": "436c62975f66236c5fca8f42994efde7e78453dd",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2215",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-21T14:20:02Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-21T22:06:47+08:00",
@@ -55761,6 +55765,11 @@
         "at": "2026-06-21T22:14:27+08:00",
         "status": "ready_to_merge",
         "note": "PR #2215 GitHub checks passed on head b2976f7638aed2717c0a955d13011d0c920ddfa0; merge state CLEAN. Ready to merge after this state update revalidates."
+      },
+      {
+        "at": "2026-06-21T22:23:57+08:00",
+        "status": "merged",
+        "note": "Reconciled during RIASEC-RESULT-SOURCE-LEDGER-01: PR #2215 merged, origin/main contains merge commit, local main equals origin/main, task branch cleanup completed, and post-merge revalidation passed."
       }
     ]
   },
@@ -55768,7 +55777,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-source-ledger-01",
     "base": "main",
-    "status": "pending_authorization",
+    "status": "local_checks_passed",
     "train_scope": "riasec_result_page_v2_asset_agent",
     "title": "RIASEC-RESULT-SOURCE-LEDGER-01: docs(riasec):建 result source ledger",
     "depends_on": [
@@ -55778,6 +55787,24 @@
       "authorization": {
         "status": "pass",
         "evidence": "User explicitly authorized the eight-item RIASEC Result Page asset-agent PR train and docs/codex manifest/state updates in the goal objective."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "RIASEC-RESULT-ASSET-AGENT-RUNBOOK-01 merged as PR #2215; origin/main contains merge commit 436c62975f66236c5fca8f42994efde7e78453dd. Current branch started from latest origin/main after cleanup."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "find backend/content_assets/riasec/result_page_v2/source_ledger -name '*.json' -print -exec jq empty {} \\;",
+          "git diff --check",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+        ],
+        "evidence": "Source ledger template and first evidence ledger parse as JSON with jq; docs/codex state and manifest parse; whitespace validation passed."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are confined to backend/content_assets/riasec/result_page_v2/source_ledger/v0_1/* and docs/codex/pr-train-state.json. PR1 state reconciliation is included because it is required to unblock this dependency chain."
       }
     },
     "failure_reason": null,
@@ -55791,6 +55818,16 @@
         "at": "2026-06-21T22:06:47+08:00",
         "status": "pending_authorization",
         "note": "Manifest/state entry authorized for the RIASEC Result Page asset-agent train. Implementation waits for its dependency order."
+      },
+      {
+        "at": "2026-06-21T22:23:57+08:00",
+        "status": "in_progress",
+        "note": "Started source ledger PR from latest main after runbook PR merge and cleanup. Scope is source ledger files plus docs/codex state reconciliation."
+      },
+      {
+        "at": "2026-06-21T22:24:49+08:00",
+        "status": "local_checks_passed",
+        "note": "Added source ledger template, first evidence ledger, and README. Ledger covers public O*NET/DOL/Holland method references, internal RIASEC docs/placeholders, and current repository asset-pack checksums. No assets, runtime, CMS, or production gate changes."
       }
     ]
   },
