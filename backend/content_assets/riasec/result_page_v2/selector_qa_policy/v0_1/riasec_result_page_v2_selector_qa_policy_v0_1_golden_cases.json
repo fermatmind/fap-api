@@ -1,0 +1,64 @@
+{
+  "schema_version": "fap.riasec.result_page_v2.selector_qa_policy.v0.1",
+  "policy_key": "riasec_result_page_v2.golden_case_groups.v0_1",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "policy_use": "advisory_grouping_scaffold",
+  "golden_case_count": 0,
+  "golden_cases_ready": false,
+  "canonical_profile_count": 0,
+  "route_matrix_required_before_cases": true,
+  "required_groups": [
+    {
+      "group_key": "clear_primary_code",
+      "minimum_future_cases": 6,
+      "purpose": "One clear high primary dimension for each RIASEC code."
+    },
+    {
+      "group_key": "near_tie_pair",
+      "minimum_future_cases": 6,
+      "purpose": "Near-tie pair cases to verify pair blend and ambiguity copy."
+    },
+    {
+      "group_key": "top3_chain",
+      "minimum_future_cases": 6,
+      "purpose": "Top-3 chain cases to verify sequence and activity ladder copy."
+    },
+    {
+      "group_key": "low_quality",
+      "minimum_future_cases": 2,
+      "purpose": "Fail-closed quality boundary and cautious copy."
+    },
+    {
+      "group_key": "share_safe",
+      "minimum_future_cases": 2,
+      "purpose": "Public sharing allowlist and private payload redaction."
+    },
+    {
+      "group_key": "norm_unavailable",
+      "minimum_future_cases": 2,
+      "purpose": "Suppress rank, percentile, and norm-backed claims."
+    },
+    {
+      "group_key": "route_miss",
+      "minimum_future_cases": 1,
+      "purpose": "Route matrix miss omits V2 modules without frontend fallback."
+    }
+  ],
+  "must_not_contain": [
+    "career match",
+    "job fit",
+    "fit score",
+    "success prediction",
+    "hiring suitability",
+    "raw_score",
+    "percentile",
+    "selector_trace",
+    "frontend_fallback",
+    "production_use_allowed",
+    "ready_for_runtime",
+    "ready_for_production"
+  ]
+}

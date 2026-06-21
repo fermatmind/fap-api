@@ -1,0 +1,28 @@
+{
+  "schema_version": "fap.riasec.result_page_v2.selector_qa_policy.v0.1",
+  "package_key": "riasec_result_page_v2.selector_qa_policy.v0_1",
+  "package_role": "selector_qa_policy_advisory_pack",
+  "created_at_utc": "2026-06-21T15:40:00Z",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "policy_use": "advisory_only",
+  "no_runtime_wiring": true,
+  "no_frontend_fallback": true,
+  "files": {
+    "readme": "README.md",
+    "selection_policy": "riasec_result_page_v2_selector_qa_policy_v0_1_selection_policy.json",
+    "conflict_resolution": "riasec_result_page_v2_selector_qa_policy_v0_1_conflict_resolution.json",
+    "golden_cases": "riasec_result_page_v2_selector_qa_policy_v0_1_golden_cases.json",
+    "repair_report": "riasec_result_page_v2_selector_qa_policy_v0_1_repair_report.json"
+  },
+  "source_gap_register": "backend/content_assets/riasec/result_page_v2/qa/existing_asset_gap_audit/v0_1/riasec_result_page_v2_existing_asset_gap_register_v0_1.json",
+  "guardrails": {
+    "no_formal_asset_generation": true,
+    "no_cms_import": true,
+    "no_runtime_wrapper_enablement": true,
+    "no_production_gate": true,
+    "private_payload_public_export_forbidden": true
+  }
+}

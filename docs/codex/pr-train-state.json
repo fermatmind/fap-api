@@ -36707,7 +36707,7 @@
     "repo": "fap-api",
     "branch": "codex/payment-alipay-scheduler-bootstrap-02",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "title": "PAYMENT-ALIPAY-SCHEDULER-BOOTSTRAP-02 register Alipay compensation in runtime scheduler",
     "commit_sha": "fecc207643c37dba0d411eda305a376d6eb3a2db",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/1774",
@@ -56158,14 +56158,18 @@
       "github": {
         "status": "pass",
         "evidence": "PR #2228 GitHub required checks passed on head 5a05ea77c60d2601e48a351f4187aba55e57294c; mergeStateStatus CLEAN."
+      },
+      "post_merge": {
+        "status": "pass",
+        "evidence": "PR #2228 merged at 2026-06-21T15:33:45Z with merge commit 960380d057685889247a2cc9696c019f1d61f7a0; origin/main contains the merge commit; local main worktree equals origin/main at 18665feefac81262c37bb29493cff60aa5b423a4; local and remote task branches were cleaned up; post-merge validation passed."
       }
     },
     "failure_reason": null,
-    "commit_sha": "5a05ea77c60d2601e48a351f4187aba55e57294c",
+    "commit_sha": "960380d057685889247a2cc9696c019f1d61f7a0",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2228",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-21T15:33:45Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-21T22:06:47+08:00",
@@ -56191,6 +56195,11 @@
         "at": "2026-06-21T23:26:57+08:00",
         "status": "ready_to_merge",
         "note": "PR #2228 GitHub checks passed on head 5a05ea77c60d2601e48a351f4187aba55e57294c and merge state is CLEAN; pre-merge scope validation passed."
+      },
+      {
+        "at": "2026-06-21T23:39:00+08:00",
+        "status": "merged",
+        "note": "Post-merge reconciliation confirmed PR #2228 merged at 2026-06-21T15:33:45Z with merge commit 960380d057685889247a2cc9696c019f1d61f7a0; origin/main contains the merge commit; local main equals origin/main; local and remote task branch cleanup completed."
       }
     ]
   },
@@ -56198,7 +56207,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-selector-qa-repair-01",
     "base": "main",
-    "status": "pending_authorization",
+    "status": "ready_to_merge",
     "train_scope": "riasec_result_page_v2_asset_agent",
     "title": "RIASEC-RESULT-SELECTOR-QA-REPAIR-01: fix(riasec):修 result selector QA policy",
     "depends_on": [
@@ -56208,11 +56217,33 @@
       "authorization": {
         "status": "pass",
         "evidence": "User explicitly authorized the eight-item RIASEC Result Page asset-agent PR train and docs/codex manifest/state updates in the goal objective."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "RIASEC-RESULT-EXISTING-ASSET-GAP-AUDIT-01 merged as PR #2228; origin/main contains merge commit 960380d057685889247a2cc9696c019f1d61f7a0."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=RiasecResultPageSelectorQaPolicyTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Riasec --no-ansi",
+          "find backend/content_assets/riasec/result_page_v2/selector_qa_policy -name '*.json' -print -exec python3 -m json.tool {} >/dev/null \\; && php -l backend/tests/Unit/Services/Riasec/RiasecResultPageSelectorQaPolicyTest.php",
+          "git diff --check"
+        ],
+        "notes": "Added staging-only RIASEC selector QA policy files for coverage warnings, slot/module naming, banned terms, golden case grouping scaffold, conflict resolution, and fail-closed fallback rules. No selector assets, route matrix rows, CMS writes, runtime wrapper changes, or production gates were added."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to backend/content_assets/riasec/result_page_v2/selector_qa_policy/v0_1, backend/tests/Unit/Services/Riasec/RiasecResultPageSelectorQaPolicyTest.php, and docs/codex state bookkeeping."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #2231 GitHub required checks passed on head da0e3b34585da9f7f61849cca3ad0775647a0ba8; mergeStateStatus CLEAN."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "71cd4f8ce28e19187ef686169d72dadbfe62b07e",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2231",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -56221,6 +56252,26 @@
         "at": "2026-06-21T22:06:47+08:00",
         "status": "pending_authorization",
         "note": "Manifest/state entry authorized for the RIASEC Result Page asset-agent train. Implementation waits for its dependency order."
+      },
+      {
+        "at": "2026-06-21T23:39:00+08:00",
+        "status": "local_checks_passed",
+        "note": "Added staging-only selector QA policy scaffold and focused PHPUnit coverage for coverage warnings, golden grouping, slot/module naming, banned terms, and fail-closed fallback rules. Focused Riasec policy test, full Riasec filter, JSON syntax, PHP lint, diff, and scope validation passed."
+      },
+      {
+        "at": "2026-06-21T23:41:00+08:00",
+        "status": "commit_created",
+        "note": "Recorded scoped selector QA policy commit e8ca8c4e764d68b0bd8b7a48cb4d4db92e2dc0e2 after local checks and scope validation passed."
+      },
+      {
+        "at": "2026-06-21T23:41:42+08:00",
+        "status": "github_checks_pending",
+        "note": "Opened PR #2231 from head 71cd4f8ce28e19187ef686169d72dadbfe62b07e; waiting for required GitHub checks."
+      },
+      {
+        "at": "2026-06-21T23:47:26+08:00",
+        "status": "ready_to_merge",
+        "note": "PR #2231 GitHub checks passed on head da0e3b34585da9f7f61849cca3ad0775647a0ba8 and merge state is CLEAN; pre-merge scope validation passed."
       }
     ]
   },
