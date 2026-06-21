@@ -11,7 +11,7 @@ use Throwable;
 final class BigFiveResultPageV2AssetAgentAuditCommand extends Command
 {
     protected $signature = 'big5:result-page-v2-agent
-        {action=audit : Milestone 1 supports audit only}
+        {action=audit : Supported actions: audit, generate-candidates}
         {--run-id= : Stable run identifier for the artifact directory}
         {--artifact-dir= : Optional artifact root; defaults to backend/artifacts/big5_result_page_v2_agent}
         {--content-asset-root= : Optional content asset root for tests}
@@ -19,24 +19,33 @@ final class BigFiveResultPageV2AssetAgentAuditCommand extends Command
         {--strict : Return non-zero when validator, inventory, source-ledger, or leak checks fail}
         {--json : Emit machine-readable summary}';
 
-    protected $description = 'Read-only Big Five Result Page V2 content asset agent audit harness.';
+    protected $description = 'Read-only Big Five Result Page V2 content asset agent audit and candidate harness.';
 
     public function handle(BigFiveResultPageV2AssetAgent $agent): int
     {
         try {
-            if ($this->argument('action') !== 'audit') {
-                $this->error('Unsupported action. Milestone 1 supports only: audit');
+            $action = (string) $this->argument('action');
+            $summary = match ($action) {
+                'audit' => $agent->audit([
+                    'run_id' => trim((string) $this->option('run-id')),
+                    'artifact_dir' => trim((string) $this->option('artifact-dir')),
+                    'content_asset_root' => trim((string) $this->option('content-asset-root')),
+                    'source_ledger_dir' => trim((string) $this->option('source-ledger-dir')),
+                    'strict' => (bool) $this->option('strict'),
+                ]),
+                'generate-candidates' => $agent->generateCandidates([
+                    'run_id' => trim((string) $this->option('run-id')),
+                    'artifact_dir' => trim((string) $this->option('artifact-dir')),
+                    'source_ledger_dir' => trim((string) $this->option('source-ledger-dir')),
+                ]),
+                default => null,
+            };
+
+            if (! is_array($summary)) {
+                $this->error('Unsupported action. Supported actions: audit, generate-candidates');
 
                 return self::FAILURE;
             }
-
-            $summary = $agent->audit([
-                'run_id' => trim((string) $this->option('run-id')),
-                'artifact_dir' => trim((string) $this->option('artifact-dir')),
-                'content_asset_root' => trim((string) $this->option('content-asset-root')),
-                'source_ledger_dir' => trim((string) $this->option('source-ledger-dir')),
-                'strict' => (bool) $this->option('strict'),
-            ]);
 
             if ((bool) $this->option('json')) {
                 $this->line((string) json_encode($summary, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
