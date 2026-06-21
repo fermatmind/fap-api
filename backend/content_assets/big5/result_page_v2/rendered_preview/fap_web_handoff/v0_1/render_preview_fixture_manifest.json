@@ -1,0 +1,126 @@
+{
+  "schema": "fap.big5.result_page_v2.render_preview_fixture_manifest.v0_1",
+  "package_key": "big5_result_page_v2.fap_web_render_preview_handoff.v0_1",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "cms_write_performed": false,
+  "runtime_change_performed": false,
+  "frontend_fallback_allowed": false,
+  "production_gate_change_performed": false,
+  "handoff_consumer": "fap-web rendered preview contract tests",
+  "source_authority": "fap-api backend fixtures and QA assets",
+  "fixture_groups": [
+    {
+      "fixture_key": "o59_result_page_route_driven",
+      "fixture_path": "backend/tests/Fixtures/big5_result_page_v2/route_driven_o59_canonical_pilot_payload_v0_1.payload.json",
+      "source_route_key": "O3_C2_E2_A3_N4",
+      "profile_key": "sensitive_independent_thinker",
+      "surfaces": [
+        "result_page_desktop",
+        "result_page_mobile"
+      ],
+      "assertion_profile": "result_page_o59_visible_and_safe"
+    },
+    {
+      "fixture_key": "o59_pdf_route_driven",
+      "fixture_path": "backend/tests/Fixtures/big5_result_page_v2/pdf_o59_route_driven_payload_v0_1.json",
+      "source_route_key": "O3_C2_E2_A3_N4",
+      "profile_key": "sensitive_independent_thinker",
+      "surfaces": [
+        "pdf"
+      ],
+      "assertion_profile": "pdf_safe_summary_and_no_metadata"
+    },
+    {
+      "fixture_key": "o59_share_card_route_driven",
+      "fixture_path": "backend/tests/Fixtures/big5_result_page_v2/share_o59_route_driven_payload_v0_1.json",
+      "source_route_key": "O3_C2_E2_A3_N4",
+      "profile_key": "sensitive_independent_thinker",
+      "surfaces": [
+        "share_card"
+      ],
+      "assertion_profile": "share_safe_summary_only"
+    },
+    {
+      "fixture_key": "o59_history_route_driven",
+      "fixture_path": "backend/tests/Fixtures/big5_result_page_v2/history_o59_route_driven_payload_v0_1.json",
+      "source_route_key": "O3_C2_E2_A3_N4",
+      "profile_key": "sensitive_independent_thinker",
+      "surfaces": [
+        "history"
+      ],
+      "assertion_profile": "history_safe_snapshot_no_paid_detail"
+    },
+    {
+      "fixture_key": "o59_compare_route_driven",
+      "fixture_path": "backend/tests/Fixtures/big5_result_page_v2/compare_o59_route_driven_payload_v0_1.json",
+      "source_route_key": "O3_C2_E2_A3_N4",
+      "profile_key": "sensitive_independent_thinker",
+      "surfaces": [
+        "compare"
+      ],
+      "assertion_profile": "compare_safe_snapshot_no_cross_scale_rank"
+    },
+    {
+      "fixture_key": "norm_unavailable_result_page",
+      "fixture_path": "backend/tests/Fixtures/big5_result_page_v2/norm_unavailable.payload.json",
+      "surfaces": [
+        "result_page_desktop",
+        "result_page_mobile"
+      ],
+      "assertion_profile": "norm_unavailable_no_percentile_claim"
+    },
+    {
+      "fixture_key": "low_quality_result_page",
+      "fixture_path": "backend/tests/Fixtures/big5_result_page_v2/low_quality.payload.json",
+      "surfaces": [
+        "result_page_desktop",
+        "result_page_mobile"
+      ],
+      "assertion_profile": "low_quality_boundary_and_retest"
+    },
+    {
+      "fixture_key": "locked_free_redaction_contract",
+      "fixture_path": null,
+      "source_contract_paths": [
+        "backend/tests/Feature/V0_3/BigFiveResultEngineFoundationTest.php",
+        "backend/tests/Feature/Content/BigFivePaywallFlagModesTest.php",
+        "backend/tests/Feature/Attempts/BigFiveHistoryCompareTest.php"
+      ],
+      "surfaces": [
+        "result_page_desktop",
+        "result_page_mobile",
+        "pdf",
+        "history",
+        "compare"
+      ],
+      "assertion_profile": "locked_free_redaction"
+    }
+  ],
+  "source_qa_assets": [
+    "backend/content_assets/big5/result_page_v2/qa/rendered_preview/o59_canonical/manifest.json",
+    "backend/content_assets/big5/result_page_v2/qa/rendered_preview/o59_canonical/canonical_o59_rendered_preview_expectations_v0_1.json",
+    "backend/content_assets/big5/result_page_v2/qa/rendered_preview/expanded_surfaces/v0_1/big5_o59_expanded_rendered_qa_report_v0_1.json",
+    "backend/content_assets/big5/result_page_v2/qa/all_surface_public_pilot_readiness/v0_1/big5_all_surface_public_pilot_readiness_summary_v0_1.json",
+    "backend/content_assets/big5/result_page_v2/qa/route_matrix_golden_case_staging_input/v0_1/big5_route_matrix_golden_case_staging_input_qa_report_v0_1.json"
+  ],
+  "required_frontend_handoff_outputs": [
+    "tested_surfaces",
+    "passed_surfaces",
+    "failed_surfaces",
+    "pending_surfaces",
+    "visible_text_assertions",
+    "must_not_render_assertions",
+    "redaction_assertions",
+    "fixture_import_notes"
+  ],
+  "must_not": [
+    "Do not add frontend fallback editorial content.",
+    "Do not copy backend content assets into frontend authority.",
+    "Do not expose raw scores, percentile fields, vectors, selector traces, source references, or internal metadata.",
+    "Do not mark runtime or production ready from this handoff."
+  ]
+}

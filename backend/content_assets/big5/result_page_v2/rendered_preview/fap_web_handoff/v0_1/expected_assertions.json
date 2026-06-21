@@ -1,0 +1,194 @@
+{
+  "schema": "fap.big5.result_page_v2.render_preview_expected_assertions.v0_1",
+  "package_key": "big5_result_page_v2.fap_web_render_preview_handoff.v0_1",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "assertion_profiles": {
+    "result_page_o59_visible_and_safe": {
+      "surfaces": [
+        "result_page_desktop",
+        "result_page_mobile"
+      ],
+      "must_render": [
+        "敏锐的独立思考者",
+        "高敏感 × 中高开放 × 克制进入",
+        "Big Five 描述的是连续人格特质，不是固定人格类型",
+        "不用于医学诊断",
+        "不用于招聘筛选",
+        "画像名只是辅助理解标签"
+      ],
+      "must_not_render": [
+        "frontend_fallback",
+        "internal_metadata",
+        "selector_basis",
+        "source_reference",
+        "runtime_use",
+        "production_use_allowed",
+        "[object Object]"
+      ]
+    },
+    "pdf_safe_summary_and_no_metadata": {
+      "surfaces": [
+        "pdf"
+      ],
+      "must_render": [
+        "敏锐的独立思考者",
+        "高敏感 × 中高开放 × 克制进入"
+      ],
+      "must_not_render": [
+        "frontend_fallback",
+        "internal_metadata",
+        "selector_basis",
+        "source_reference",
+        "runtime_use",
+        "production_use_allowed",
+        "[object Object]"
+      ],
+      "required_policy": "backend_payload_only_fail_closed"
+    },
+    "share_safe_summary_only": {
+      "surfaces": [
+        "share_card"
+      ],
+      "must_render": [
+        "敏锐的独立思考者",
+        "画像名只是辅助理解标签"
+      ],
+      "must_not_render": [
+        "raw_score",
+        "raw_scores",
+        "percentile",
+        "percentiles",
+        "facet_vector",
+        "internal_metadata",
+        "selector_basis",
+        "source_reference",
+        "[object Object]"
+      ],
+      "required_policy": "share card must use safe summary only"
+    },
+    "history_safe_snapshot_no_paid_detail": {
+      "surfaces": [
+        "history"
+      ],
+      "must_render": [
+        "敏锐的独立思考者"
+      ],
+      "must_not_render": [
+        "facet_vector",
+        "internal_metadata",
+        "selector_basis",
+        "source_reference",
+        "runtime_use",
+        "production_use_allowed"
+      ],
+      "required_policy": "history entry must not expose full staging metadata or paid-only detail when locked"
+    },
+    "compare_safe_snapshot_no_cross_scale_rank": {
+      "surfaces": [
+        "compare"
+      ],
+      "must_render": [
+        "敏锐的独立思考者"
+      ],
+      "must_not_render": [
+        "MBTI 排名",
+        "Enneagram 排名",
+        "能力排名",
+        "internal_metadata",
+        "selector_basis",
+        "source_reference"
+      ],
+      "required_policy": "compare must not rank good/bad or compare incompatible score spaces"
+    },
+    "norm_unavailable_no_percentile_claim": {
+      "surfaces": [
+        "result_page_desktop",
+        "result_page_mobile"
+      ],
+      "must_not_render": [
+        "约高于",
+        "正态曲线",
+        "常模排名",
+        "percentile",
+        "percentiles",
+        "normal_curve_without_norm"
+      ],
+      "required_policy": "norm unavailable blocks percentile and normal curve claims"
+    },
+    "low_quality_boundary_and_retest": {
+      "surfaces": [
+        "result_page_desktop",
+        "result_page_mobile"
+      ],
+      "must_render_intent": [
+        "boundary",
+        "method",
+        "retest"
+      ],
+      "must_not_render": [
+        "你就是某一型",
+        "固定人格类型",
+        "能力预测",
+        "招聘筛选",
+        "诊断"
+      ],
+      "required_policy": "low quality blocks persona and deep claims"
+    },
+    "locked_free_redaction": {
+      "surfaces": [
+        "result_page_desktop",
+        "result_page_mobile",
+        "pdf",
+        "history",
+        "compare"
+      ],
+      "must_assert_json_paths": [
+        "locked=true for locked report responses",
+        "variant=free for locked report responses",
+        "access_level=free for locked report responses",
+        "facet_vector is empty or absent when locked",
+        "trait_vector.*.percentile is absent when locked",
+        "trait_vector.*.mean is absent when locked",
+        "controlled_narrative_v1 is absent when locked",
+        "cultural_calibration_v1 is absent when locked",
+        "comparative_v1 is absent when locked",
+        "history access_summary.access_state=locked for locked rows",
+        "PDF X-Report-Variant=free when locked/free"
+      ],
+      "must_not_render": [
+        "raw_score",
+        "percentile",
+        "facet_vector",
+        "controlled_narrative_v1",
+        "cultural_calibration_v1",
+        "comparative_v1",
+        "internal_metadata",
+        "selector_basis"
+      ],
+      "required_policy": "locked/free surfaces must render only redacted free-safe payloads"
+    }
+  },
+  "global_must_not_render": [
+    "frontend_fallback",
+    "internal_metadata",
+    "selector_basis",
+    "source_reference",
+    "review_status",
+    "qa_notes",
+    "runtime_use",
+    "production_use_allowed",
+    "[object Object]"
+  ],
+  "handoff_acceptance": {
+    "fap_web_must_report_tested_surfaces": true,
+    "fap_web_must_report_pending_surfaces": true,
+    "pending_surface_cannot_count_as_pass": true,
+    "backend_fixture_paths_must_remain_backend_authority": true,
+    "frontend_editorial_fallback_allowed": false,
+    "production_enablement_allowed": false
+  }
+}
