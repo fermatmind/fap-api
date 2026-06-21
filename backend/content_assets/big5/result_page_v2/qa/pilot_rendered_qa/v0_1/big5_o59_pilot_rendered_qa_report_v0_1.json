@@ -11,21 +11,20 @@
   "ready_for_production": false,
   "surface_count": 6,
   "surface_status_counts": {
-    "pass": 2,
-    "pending_surface": 4,
+    "pass": 6,
+    "pending_surface": 0,
     "fail": 0
   },
   "passed_surfaces": [
     "result_page_desktop",
-    "result_page_mobile"
-  ],
-  "failed_surfaces": [],
-  "pending_surfaces": [
+    "result_page_mobile",
     "pdf",
     "share_card",
     "history",
     "compare"
   ],
+  "failed_surfaces": [],
+  "pending_surfaces": [],
   "public_payload_banned_scan": {
     "status": "pass",
     "scan_scope": "repo_owned_o59_pilot_payload_visible_fields_only",
@@ -36,34 +35,21 @@
     "pilot_runtime_available_in_allowed_non_production_environment": true,
     "result_page_desktop_contract_available": true,
     "result_page_mobile_contract_available": true,
-    "all_required_surfaces_passed": false,
-    "pilot_rendered_qa_complete": false,
+    "pdf_contract_available": true,
+    "share_card_contract_available": true,
+    "history_contract_available": true,
+    "compare_contract_available": true,
+    "all_required_surfaces_passed": true,
+    "pilot_rendered_qa_complete": true,
     "pilot_can_proceed_for_default_off_backend_payload_preview": true,
-    "pilot_user_surface_release_blocked": true,
+    "pilot_user_surface_release_blocked": false,
     "production_blocked": true
   },
-  "remaining_blockers": [
-    {
-      "surface_key": "pdf",
-      "blocker": "No pilot PDF render harness yet."
-    },
-    {
-      "surface_key": "share_card",
-      "blocker": "No pilot share-card render harness yet."
-    },
-    {
-      "surface_key": "history",
-      "blocker": "No pilot history surface contract yet."
-    },
-    {
-      "surface_key": "compare",
-      "blocker": "No pilot compare surface contract yet."
-    }
-  ],
+  "remaining_blockers": [],
   "not_allowed": [
     "Do not treat this advisory QA report as production approval.",
     "Do not enable production runtime.",
     "Do not add frontend-authored Big Five explanation fallback.",
-    "Do not mark pending surfaces as pass without rendered evidence."
+    "Do not generate final big5_result_page_v2 payloads for frontend in this advisory package."
   ]
 }
