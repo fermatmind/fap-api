@@ -1,6 +1,6 @@
 {
   "artifact": "MBTI64-PUBLIC-PROFILE-AGENT-EXPANSION-88-QA-01",
-  "generated_at": "2026-06-21T07:49:25.100Z",
+  "generated_at": "2026-06-21T00:00:00.000Z",
   "status": "pass_ready_for_cms_draft",
   "input_artifact": "docs/seo/personality/mbti64-agent-expansion-88-recommendations-2026-06-21.json",
   "scope": "Artifact-only QA gate over 88 MBTI64 public profile draft recommendations. No CMS write, no publish, no index/search release, no sitemap/llms mutation.",
@@ -20,6 +20,7 @@
     "blocked_count": 0,
     "warning_count": 1,
     "duplicate_signature_group_count": 0,
+    "normalized_editorial_duplicate_signature_group_count": 0,
     "bilingual_asymmetric_type_count": 0,
     "gsc_evidence_state": "GSC_EVIDENCE_PENDING"
   },
@@ -31,11 +32,14 @@
     "private_route_failures": 0,
     "result_page_leakage_failures": 0,
     "seo_projection_failures": 0,
-    "bilingual_consistency_failures": 0
+    "bilingual_consistency_failures": 0,
+    "grammar_editorial_failures": 0
   },
   "duplicate_template_gate": {
     "duplicate_signature_group_count": 0,
-    "duplicate_groups": []
+    "duplicate_groups": [],
+    "normalized_editorial_duplicate_signature_group_count": 0,
+    "normalized_editorial_duplicate_groups": []
   },
   "bilingual_consistency_gate": {
     "checked_type_count": 16,
