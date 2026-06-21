@@ -64,8 +64,45 @@ final class EnneagramRegistryActivationCommandTest extends TestCase
         $this->assertSame($fixture['release_id'], DB::table('content_pack_activations')->where('pack_id', 'ENNEAGRAM')->where('pack_version', 'v2')->value('release_id'));
     }
 
+    public function test_inactive_candidate_activation_command_requires_exact_hash_contract(): void
+    {
+        $fixture = $this->importInactiveFixture('inactive_candidate_activation_command');
+        $outputDir = $fixture['output_dir'].'/inactive_candidate_activate';
+
+        $this->artisan('enneagram:activate-inactive-candidate-release', [
+            '--release-id' => $fixture['release_id'],
+            '--confirm-release-id' => $fixture['release_id'],
+            '--candidate-manifest-sha256' => $fixture['contracts']['candidate_manifest_sha256'],
+            '--runtime-registry-sha256' => $fixture['contracts']['runtime_registry_manifest_sha256'],
+            '--output-dir' => $outputDir,
+            '--actor' => 'activation_command_test',
+            '--json' => true,
+        ])->assertExitCode(0);
+
+        $summary = json_decode((string) File::get($outputDir.'/phase8d3_activation_summary.json'), true);
+        $this->assertSame('PASS_PRODUCTION_ACTIVATION_COMPLETED', $summary['verdict'] ?? null);
+        $this->assertTrue($summary['production_activation_happened'] ?? false);
+        $this->assertSame($fixture['release_id'], DB::table('content_pack_activations')->where('pack_id', 'ENNEAGRAM')->where('pack_version', 'v2')->value('release_id'));
+    }
+
+    public function test_inactive_candidate_activation_command_fails_closed_on_hash_mismatch(): void
+    {
+        $fixture = $this->importInactiveFixture('inactive_candidate_activation_command_hash_mismatch');
+
+        $this->artisan('enneagram:activate-inactive-candidate-release', [
+            '--release-id' => $fixture['release_id'],
+            '--confirm-release-id' => $fixture['release_id'],
+            '--candidate-manifest-sha256' => hash('sha256', 'wrong'),
+            '--runtime-registry-sha256' => $fixture['contracts']['runtime_registry_manifest_sha256'],
+            '--output-dir' => $fixture['output_dir'].'/inactive_candidate_activate_mismatch',
+            '--json' => true,
+        ])->assertExitCode(1);
+
+        $this->assertFalse(DB::table('content_pack_activations')->exists());
+    }
+
     /**
-     * @return array{release_id:string,output_dir:string}
+     * @return array{release_id:string,output_dir:string,contracts:array{candidate_manifest_sha256:string,runtime_registry_manifest_sha256:string}}
      */
     private function importInactiveFixture(string $suffix): array
     {
@@ -85,6 +122,7 @@ final class EnneagramRegistryActivationCommandTest extends TestCase
         return [
             'release_id' => (string) $summary['inactive_release_id'],
             'output_dir' => $outputDir,
+            'contracts' => $contracts,
         ];
     }
 
@@ -166,6 +204,7 @@ final class EnneagramRegistryActivationCommandTest extends TestCase
             'duplicate_selection_count' => 0,
             'metadata_leak_count' => 0,
         ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
+        File::put($candidateDir.'/forbidden_claim_report.json', json_encode(['violation_count' => 0], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
         File::put($candidateDir.'/legacy_residual_scan.json', json_encode(['legacy_deep_core_residual_count' => 0], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
         File::put($candidateDir.'/fc144_boundary_report.json', json_encode(['violation_count' => 0], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
         File::put($candidateDir.'/phase8b_summary.json', json_encode(['verdict' => 'PASS_FOR_PRODUCTION_EQUIVALENT_E2E_QA'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));

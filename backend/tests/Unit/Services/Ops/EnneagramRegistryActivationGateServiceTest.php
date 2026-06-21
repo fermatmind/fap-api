@@ -143,6 +143,141 @@ final class EnneagramRegistryActivationGateServiceTest extends TestCase
         );
     }
 
+    public function test_inactive_candidate_production_activation_records_snapshot_and_rollback_target(): void
+    {
+        $previous = $this->createPublishedReleaseFixture('enneagram_previous_active_for_inactive_candidate');
+        $fixture = $this->importInactiveFixture('service_production_activation');
+        $hashes = $this->importedCandidateHashes($fixture['storage_path']);
+
+        DB::table('content_pack_activations')->updateOrInsert(
+            ['pack_id' => 'ENNEAGRAM', 'pack_version' => 'v2'],
+            [
+                'release_id' => $previous['release_id'],
+                'activated_at' => now(),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+        );
+
+        $summary = app(EnneagramRegistryActivationGateService::class)->activateInactiveCandidateRelease(
+            $fixture['release_id'],
+            $fixture['release_id'],
+            $hashes['candidate_manifest_sha256'],
+            $hashes['runtime_registry_manifest_sha256'],
+            $fixture['output_dir'].'/production_activate',
+            'ops_activation_test'
+        );
+
+        $resolver = app(EnneagramRegistryReleaseResolver::class);
+
+        $this->assertSame('PASS_PRODUCTION_ACTIVATION_COMPLETED', $summary['verdict']);
+        $this->assertTrue($summary['production_activation_happened']);
+        $this->assertSame($previous['release_id'], $summary['rollback_target_release_id']);
+        $this->assertSame($fixture['release_id'], DB::table('content_pack_activations')
+            ->where('pack_id', 'ENNEAGRAM')
+            ->where('pack_version', 'v2')
+            ->value('release_id'));
+        $this->assertSame('active_release', $resolver->runtimeRegistryContext()['source']);
+        $this->assertDatabaseHas('content_release_snapshots', [
+            'pack_id' => 'ENNEAGRAM',
+            'pack_version' => 'v2',
+            'activation_before_release_id' => $previous['release_id'],
+            'activation_after_release_id' => $fixture['release_id'],
+            'reason' => 'enneagram_registry_activate_inactive_candidate',
+        ]);
+        $this->assertFileExists($fixture['output_dir'].'/production_activate/phase8d3_activation_summary.json');
+    }
+
+    public function test_inactive_candidate_activation_rejects_hash_mismatch(): void
+    {
+        $fixture = $this->importInactiveFixture('service_production_activation_hash_mismatch');
+        $hashes = $this->importedCandidateHashes($fixture['storage_path']);
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('Candidate manifest hash does not match activation contract.');
+
+        app(EnneagramRegistryActivationGateService::class)->activateInactiveCandidateRelease(
+            $fixture['release_id'],
+            $fixture['release_id'],
+            hash('sha256', 'wrong'),
+            $hashes['runtime_registry_manifest_sha256'],
+            $fixture['output_dir'].'/production_activate_mismatch',
+            'ops_activation_test'
+        );
+    }
+
+    public function test_inactive_candidate_activation_rejects_forbidden_claim_report_violations(): void
+    {
+        $fixture = $this->importInactiveFixture('service_production_activation_forbidden_claim');
+        $hashes = $this->importedCandidateHashes($fixture['storage_path']);
+        File::put(
+            storage_path('app/'.$fixture['storage_path'].'/candidate/forbidden_claim_report.json'),
+            json_encode(['violation_count' => 1], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT)
+        );
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('Forbidden claim violation detected.');
+
+        app(EnneagramRegistryActivationGateService::class)->activateInactiveCandidateRelease(
+            $fixture['release_id'],
+            $fixture['release_id'],
+            $hashes['candidate_manifest_sha256'],
+            $hashes['runtime_registry_manifest_sha256'],
+            $fixture['output_dir'].'/production_activate_forbidden_claim',
+            'ops_activation_test'
+        );
+    }
+
+    public function test_inactive_candidate_rollback_restores_recorded_previous_release(): void
+    {
+        $previous = $this->createPublishedReleaseFixture('enneagram_previous_active_for_inactive_candidate_rollback');
+        $fixture = $this->importInactiveFixture('service_production_rollback');
+        $hashes = $this->importedCandidateHashes($fixture['storage_path']);
+        $service = app(EnneagramRegistryActivationGateService::class);
+
+        DB::table('content_pack_activations')->updateOrInsert(
+            ['pack_id' => 'ENNEAGRAM', 'pack_version' => 'v2'],
+            [
+                'release_id' => $previous['release_id'],
+                'activated_at' => now(),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+        );
+
+        $service->activateInactiveCandidateRelease(
+            $fixture['release_id'],
+            $fixture['release_id'],
+            $hashes['candidate_manifest_sha256'],
+            $hashes['runtime_registry_manifest_sha256'],
+            $fixture['output_dir'].'/production_activate',
+            'ops_activation_test'
+        );
+
+        $summary = $service->rollbackInactiveCandidateRelease(
+            $fixture['release_id'],
+            $fixture['release_id'],
+            $fixture['output_dir'].'/production_rollback',
+            'ops_rollback_test'
+        );
+
+        $this->assertSame('PASS_PRODUCTION_ROLLBACK_COMPLETED', $summary['verdict']);
+        $this->assertSame($previous['release_id'], $summary['rollback_target_release_id']);
+        $this->assertFalse($summary['restored_repo_fallback']);
+        $this->assertSame($previous['release_id'], DB::table('content_pack_activations')
+            ->where('pack_id', 'ENNEAGRAM')
+            ->where('pack_version', 'v2')
+            ->value('release_id'));
+        $this->assertDatabaseHas('content_release_snapshots', [
+            'pack_id' => 'ENNEAGRAM',
+            'pack_version' => 'v2',
+            'activation_before_release_id' => $fixture['release_id'],
+            'activation_after_release_id' => $previous['release_id'],
+            'reason' => 'enneagram_registry_rollback_inactive_candidate',
+        ]);
+        $this->assertFileExists($fixture['output_dir'].'/production_rollback/phase8d3_rollback_summary.json');
+    }
+
     /**
      * @return array{release_id:string,storage_path:string,output_dir:string}
      */
@@ -283,6 +418,7 @@ final class EnneagramRegistryActivationGateServiceTest extends TestCase
             'duplicate_selection_count' => 0,
             'metadata_leak_count' => 0,
         ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
+        File::put($candidateDir.'/forbidden_claim_report.json', json_encode(['violation_count' => 0], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
         File::put($candidateDir.'/legacy_residual_scan.json', json_encode(['legacy_deep_core_residual_count' => 0], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
         File::put($candidateDir.'/fc144_boundary_report.json', json_encode(['violation_count' => 0], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
         File::put($candidateDir.'/phase8b_summary.json', json_encode(['verdict' => 'PASS_FOR_PRODUCTION_EQUIVALENT_E2E_QA'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
@@ -301,6 +437,21 @@ final class EnneagramRegistryActivationGateServiceTest extends TestCase
                 'candidate_manifest_sha256' => $manifestHash,
                 'runtime_registry_manifest_sha256' => $runtimeHash,
             ],
+        ];
+    }
+
+    /**
+     * @return array{candidate_manifest_sha256:string,runtime_registry_manifest_sha256:string}
+     */
+    private function importedCandidateHashes(string $storagePath): array
+    {
+        $path = storage_path('app/'.$storagePath.'/candidate/candidate_hashes.json');
+        $decoded = json_decode((string) File::get($path), true);
+        $this->assertIsArray($decoded);
+
+        return [
+            'candidate_manifest_sha256' => (string) ($decoded['candidate_manifest_sha256'] ?? ''),
+            'runtime_registry_manifest_sha256' => (string) ($decoded['runtime_registry_manifest_sha256'] ?? ''),
         ];
     }
 }

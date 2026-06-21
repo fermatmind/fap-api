@@ -2814,6 +2814,31 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_enneagram_inactive_candidate_activation_commands(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/EnneagramActivateInactiveCandidateRelease.php',
+            'backend/app/Console/Commands/EnneagramRollbackInactiveCandidateRelease.php',
+            'backend/app/Console/Kernel.php',
+            'backend/app/Services/Ops/EnneagramRegistryActivationGateService.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\EnneagramActivateInactiveCandidateRelease;',
+            '+use App\\Console\\Commands\\EnneagramRollbackInactiveCandidateRelease;',
+            '+        EnneagramActivateInactiveCandidateRelease::class,',
+            '+        EnneagramRollbackInactiveCandidateRelease::class,',
+        ];
+
+        $blocked = [
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Transformer.php',
+            'backend/routes/api.php',
+            'frontend/src/big5/result-page-v2.ts',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', '', $kernelChangedLines));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_display_import_service_changes(): void
     {
         $changed = [
@@ -4650,6 +4675,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isEnneagramInactiveCandidateActivationFile($file)) {
+                continue;
+            }
+
             if ($this->isIqReportFoundationFile($file)) {
                 continue;
             }
@@ -4748,6 +4777,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsBigFiveV2AssetAgentHarnessOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsRiasecResultPageAssetAgentHarnessOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsEnneagramResultPageAgentReadinessOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsEnneagramInactiveCandidateActivationOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                 )
             ) {
                 continue;
@@ -6614,6 +6644,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return $file === 'backend/app/Services/Enneagram/Assets/Agent/EnneagramResultPageAgentBatchRunner.php';
     }
 
+    private function isEnneagramInactiveCandidateActivationFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/EnneagramActivateInactiveCandidateRelease.php',
+            'backend/app/Console/Commands/EnneagramRollbackInactiveCandidateRelease.php',
+            'backend/app/Services/Ops/EnneagramRegistryActivationGateService.php',
+        ], true);
+    }
+
     private function isBigFiveV2EnParityDraftCatalogFile(string $file): bool
     {
         return $file === 'backend/content_packs/BIG5_OCEAN/v2/drafts/en_parity/result_page_v2_en_asset_catalog_draft.v1.json';
@@ -7696,6 +7735,25 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $allowed = [
             'use App\\Console\\Commands\\EnneagramResultPageAgentReadinessCommand;',
             '        EnneagramResultPageAgentReadinessCommand::class,',
+        ];
+        $normalized = array_map(
+            static fn (string $line): string => str_starts_with($line, '+') ? substr($line, 1) : $line,
+            $changedLines,
+        );
+
+        return $changedLines !== [] && array_values($normalized) === $allowed;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsEnneagramInactiveCandidateActivationOnly(array $changedLines): bool
+    {
+        $allowed = [
+            'use App\\Console\\Commands\\EnneagramActivateInactiveCandidateRelease;',
+            'use App\\Console\\Commands\\EnneagramRollbackInactiveCandidateRelease;',
+            '        EnneagramActivateInactiveCandidateRelease::class,',
+            '        EnneagramRollbackInactiveCandidateRelease::class,',
         ];
         $normalized = array_map(
             static fn (string $line): string => str_starts_with($line, '+') ? substr($line, 1) : $line,

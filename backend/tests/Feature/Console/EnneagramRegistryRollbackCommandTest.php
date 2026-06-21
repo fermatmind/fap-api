@@ -6,6 +6,7 @@ namespace Tests\Feature\Console;
 
 use App\Services\Enneagram\Assets\EnneagramInactiveCandidateReleaseImporter;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Tests\TestCase;
 
@@ -35,8 +36,38 @@ final class EnneagramRegistryRollbackCommandTest extends TestCase
 
     }
 
+    public function test_inactive_candidate_rollback_command_restores_repo_fallback(): void
+    {
+        $fixture = $this->importInactiveFixture('inactive_candidate_rollback_command');
+        $activateOutput = $fixture['output_dir'].'/inactive_candidate_activate';
+        $rollbackOutput = $fixture['output_dir'].'/inactive_candidate_rollback';
+
+        $this->artisan('enneagram:activate-inactive-candidate-release', [
+            '--release-id' => $fixture['release_id'],
+            '--confirm-release-id' => $fixture['release_id'],
+            '--candidate-manifest-sha256' => $fixture['contracts']['candidate_manifest_sha256'],
+            '--runtime-registry-sha256' => $fixture['contracts']['runtime_registry_manifest_sha256'],
+            '--output-dir' => $activateOutput,
+            '--actor' => 'rollback_command_test_activate',
+            '--json' => true,
+        ])->assertExitCode(0);
+
+        $this->artisan('enneagram:rollback-inactive-candidate-release', [
+            '--release-id' => $fixture['release_id'],
+            '--confirm-release-id' => $fixture['release_id'],
+            '--output-dir' => $rollbackOutput,
+            '--actor' => 'rollback_command_test_rollback',
+            '--json' => true,
+        ])->assertExitCode(0);
+
+        $summary = json_decode((string) File::get($rollbackOutput.'/phase8d3_rollback_summary.json'), true);
+        $this->assertSame('PASS_PRODUCTION_ROLLBACK_COMPLETED', $summary['verdict'] ?? null);
+        $this->assertTrue($summary['restored_repo_fallback'] ?? false);
+        $this->assertFalse(DB::table('content_pack_activations')->exists());
+    }
+
     /**
-     * @return array{release_id:string,output_dir:string}
+     * @return array{release_id:string,output_dir:string,contracts:array{candidate_manifest_sha256:string,runtime_registry_manifest_sha256:string}}
      */
     private function importInactiveFixture(string $suffix): array
     {
@@ -56,6 +87,7 @@ final class EnneagramRegistryRollbackCommandTest extends TestCase
         return [
             'release_id' => (string) $summary['inactive_release_id'],
             'output_dir' => $outputDir,
+            'contracts' => $contracts,
         ];
     }
 
@@ -137,6 +169,7 @@ final class EnneagramRegistryRollbackCommandTest extends TestCase
             'duplicate_selection_count' => 0,
             'metadata_leak_count' => 0,
         ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
+        File::put($candidateDir.'/forbidden_claim_report.json', json_encode(['violation_count' => 0], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
         File::put($candidateDir.'/legacy_residual_scan.json', json_encode(['legacy_deep_core_residual_count' => 0], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
         File::put($candidateDir.'/fc144_boundary_report.json', json_encode(['violation_count' => 0], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
         File::put($candidateDir.'/phase8b_summary.json', json_encode(['verdict' => 'PASS_FOR_PRODUCTION_EQUIVALENT_E2E_QA'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));

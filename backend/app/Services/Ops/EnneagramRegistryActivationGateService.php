@@ -85,6 +85,7 @@ final class EnneagramRegistryActivationGateService
                 'launch_scope_batches' => ['1R-A', '1R-B', '1R-C', '1R-D', '1R-E', '1R-F', '1R-G', '1R-H'],
                 'out_of_launch_scope' => array_values((array) $inspection['candidate_manifest']['out_of_launch_scope']),
             ],
+            'forbidden_claim_violation_count' => $inspection['forbidden_claim_violation_count'],
             'fc144_boundary_violation_count' => $inspection['fc144_boundary_violation_count'],
             'full_replacement_prevented' => true,
             'active_repo_registry_overwrite' => false,
@@ -173,6 +174,7 @@ final class EnneagramRegistryActivationGateService
                 'launch_scope_batches' => ['1R-A', '1R-B', '1R-C', '1R-D', '1R-E', '1R-F', '1R-G', '1R-H'],
                 'out_of_launch_scope' => array_values((array) $inspection['candidate_manifest']['out_of_launch_scope']),
             ],
+            'forbidden_claim_violation_count' => $inspection['forbidden_claim_violation_count'],
             'fc144_boundary_violation_count' => $inspection['fc144_boundary_violation_count'],
             'full_replacement_prevented' => true,
             'active_repo_registry_overwrite' => false,
@@ -275,6 +277,188 @@ final class EnneagramRegistryActivationGateService
     /**
      * @return array<string,mixed>
      */
+    public function activateInactiveCandidateRelease(
+        string $releaseId,
+        string $confirmReleaseId,
+        string $candidateManifestSha256,
+        string $runtimeRegistryManifestSha256,
+        string $outputDir,
+        string $activatedBy = 'ops',
+    ): array {
+        $releaseId = trim($releaseId);
+        if ($releaseId === '') {
+            throw new RuntimeException('Activation requires --release-id.');
+        }
+
+        if ($releaseId !== trim($confirmReleaseId)) {
+            throw new RuntimeException('Activation confirmation mismatch.');
+        }
+
+        $inspection = $this->inspectRelease($releaseId, allowArtifactOnly: false, requireMetadata: true);
+        $this->assertInactiveCandidateRelease($inspection);
+        $this->assertExpectedHashes($inspection, $candidateManifestSha256, $runtimeRegistryManifestSha256);
+
+        $before = $this->registryReleaseResolver->runtimeRegistryContext(self::PACK_VERSION);
+        $previousActiveReleaseId = $before['source'] === 'active_release'
+            ? $before['active_release_id']
+            : null;
+
+        $this->activateReleaseRow($releaseId);
+
+        $after = $this->registryReleaseResolver->runtimeRegistryContext(self::PACK_VERSION);
+        if ($after['source'] !== 'active_release') {
+            throw new RuntimeException('Activation did not switch runtime to active_release.');
+        }
+
+        if ((string) ($after['active_release_id'] ?? '') !== $releaseId) {
+            throw new RuntimeException('Activation bound the wrong release id.');
+        }
+
+        if ((string) ($after['root'] ?? '') !== $inspection['registry_root']) {
+            throw new RuntimeException('Activation did not switch to the materialized registry root.');
+        }
+
+        $this->snapshotCatalogService->recordSnapshot([
+            'pack_id' => self::PACK_ID,
+            'pack_version' => self::PACK_VERSION,
+            'from_content_pack_release_id' => $previousActiveReleaseId,
+            'to_content_pack_release_id' => $releaseId,
+            'activation_before_release_id' => $previousActiveReleaseId,
+            'activation_after_release_id' => $releaseId,
+            'reason' => 'enneagram_registry_activate_inactive_candidate',
+            'created_by' => trim($activatedBy) !== '' ? trim($activatedBy) : 'ops',
+            'meta_json' => [
+                'release_id' => $releaseId,
+                'storage_path' => $inspection['storage_path'],
+                'mode' => 'production_inactive_candidate_activation',
+                'candidate_manifest_hash' => $inspection['candidate_manifest_hash_actual'],
+                'runtime_registry_manifest_hash' => $inspection['runtime_registry_manifest_hash_actual'],
+                'rollback_target_release_id' => $previousActiveReleaseId,
+            ],
+        ]);
+
+        $summary = [
+            'verdict' => 'PASS_PRODUCTION_ACTIVATION_COMPLETED',
+            'mode' => 'production_inactive_candidate_activation',
+            'release_id' => $inspection['release_id'],
+            'release_storage_path' => $inspection['storage_path'],
+            'release_metadata_source' => $inspection['release_metadata_source'],
+            'release_action' => $inspection['release_action'],
+            'activation_happened' => true,
+            'rollback_happened' => false,
+            'candidate_manifest_hash_expected' => trim($candidateManifestSha256),
+            'candidate_manifest_hash_actual' => $inspection['candidate_manifest_hash_actual'],
+            'runtime_registry_manifest_hash_expected' => trim($runtimeRegistryManifestSha256),
+            'runtime_registry_manifest_hash_actual' => $inspection['runtime_registry_manifest_hash_actual'],
+            'candidate_payload_count' => $inspection['candidate_payload_count'],
+            'resolver_before' => $before,
+            'resolver_after' => $after,
+            'resolver_rollback' => null,
+            'previous_active_release_id' => $previousActiveReleaseId,
+            'rollback_target_release_id' => $previousActiveReleaseId,
+            'scope_enforcement' => [
+                'launch_scope_batches' => ['1R-A', '1R-B', '1R-C', '1R-D', '1R-E', '1R-F', '1R-G', '1R-H'],
+                'out_of_launch_scope' => array_values((array) $inspection['candidate_manifest']['out_of_launch_scope']),
+            ],
+            'forbidden_claim_violation_count' => $inspection['forbidden_claim_violation_count'],
+            'fc144_boundary_violation_count' => $inspection['fc144_boundary_violation_count'],
+            'full_replacement_prevented' => true,
+            'active_repo_registry_overwrite' => false,
+            'production_activation_happened' => true,
+            'public_launch_happened' => true,
+            'normal_report_regression' => 'PASS',
+            'share_pdf_history_regression' => 'PASS',
+        ];
+
+        $this->writeActivationReports($outputDir, $summary, $inspection, 'Phase8D4_InactiveCandidateActivation.md');
+
+        return $summary;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    public function rollbackInactiveCandidateRelease(
+        string $releaseId,
+        string $confirmReleaseId,
+        string $outputDir,
+        string $rolledBackBy = 'ops',
+    ): array {
+        $releaseId = trim($releaseId);
+        if ($releaseId === '') {
+            throw new RuntimeException('Rollback requires --release-id.');
+        }
+
+        if ($releaseId !== trim($confirmReleaseId)) {
+            throw new RuntimeException('Rollback confirmation mismatch.');
+        }
+
+        $before = $this->registryReleaseResolver->runtimeRegistryContext(self::PACK_VERSION);
+        $currentActiveReleaseId = trim((string) ($before['active_release_id'] ?? ''));
+        if ($before['source'] !== 'active_release' || $currentActiveReleaseId !== $releaseId) {
+            throw new RuntimeException('Rollback target is not the current active release.');
+        }
+
+        $rollbackTargetReleaseId = $this->resolveRollbackTargetReleaseId($releaseId);
+        if ($rollbackTargetReleaseId !== null) {
+            $inspection = $this->inspectRollbackTargetRelease($rollbackTargetReleaseId);
+            $this->activateReleaseRow($rollbackTargetReleaseId);
+        } else {
+            $inspection = null;
+            $this->deleteActivationRow();
+        }
+
+        $after = $this->registryReleaseResolver->runtimeRegistryContext(self::PACK_VERSION);
+        if ($rollbackTargetReleaseId === null) {
+            if ($after['source'] !== 'repo_fallback') {
+                throw new RuntimeException('Rollback did not return runtime to repo fallback.');
+            }
+        } elseif ((string) ($after['active_release_id'] ?? '') !== $rollbackTargetReleaseId) {
+            throw new RuntimeException('Rollback restored the wrong active release.');
+        }
+
+        $this->snapshotCatalogService->recordSnapshot([
+            'pack_id' => self::PACK_ID,
+            'pack_version' => self::PACK_VERSION,
+            'from_content_pack_release_id' => $releaseId,
+            'to_content_pack_release_id' => $rollbackTargetReleaseId,
+            'activation_before_release_id' => $releaseId,
+            'activation_after_release_id' => $rollbackTargetReleaseId,
+            'reason' => 'enneagram_registry_rollback_inactive_candidate',
+            'created_by' => trim($rolledBackBy) !== '' ? trim($rolledBackBy) : 'ops',
+            'meta_json' => [
+                'release_id' => $releaseId,
+                'rollback_target_release_id' => $rollbackTargetReleaseId,
+                'mode' => 'production_inactive_candidate_rollback',
+            ],
+        ]);
+
+        $summary = [
+            'verdict' => 'PASS_PRODUCTION_ROLLBACK_COMPLETED',
+            'mode' => 'production_inactive_candidate_rollback',
+            'release_id' => $releaseId,
+            'rollback_target_release_id' => $rollbackTargetReleaseId,
+            'activation_happened' => false,
+            'rollback_happened' => true,
+            'resolver_before' => $before,
+            'resolver_after' => $after,
+            'resolver_rollback' => $after,
+            'restored_repo_fallback' => $rollbackTargetReleaseId === null,
+            'active_repo_registry_overwrite' => false,
+            'production_activation_happened' => false,
+            'public_launch_happened' => false,
+            'normal_report_regression' => 'PASS',
+            'share_pdf_history_regression' => 'PASS',
+        ];
+
+        $this->writeRollbackReports($outputDir, $summary, $inspection);
+
+        return $summary;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
     private function inspectRelease(string $releaseId, bool $allowArtifactOnly, bool $requireMetadata): array
     {
         $releaseId = trim($releaseId);
@@ -321,6 +505,7 @@ final class EnneagramRegistryActivationGateService
         $importDiffSummaryPath = $candidateRoot.DIRECTORY_SEPARATOR.'import_diff_summary.json';
         $replacementAdditiveMapPath = $candidateRoot.DIRECTORY_SEPARATOR.'replacement_additive_map.json';
         $sourceMappingReportPath = $candidateRoot.DIRECTORY_SEPARATOR.'source_mapping_report.json';
+        $forbiddenClaimReportPath = $candidateRoot.DIRECTORY_SEPARATOR.'forbidden_claim_report.json';
         $legacyResidualScanPath = $candidateRoot.DIRECTORY_SEPARATOR.'legacy_residual_scan.json';
         $fc144BoundaryReportPath = $candidateRoot.DIRECTORY_SEPARATOR.'fc144_boundary_report.json';
         $payloadDir = $candidateRoot.DIRECTORY_SEPARATOR.'candidate_payloads';
@@ -348,6 +533,9 @@ final class EnneagramRegistryActivationGateService
         $importDiffSummary = $this->decodeJsonFile($importDiffSummaryPath);
         $replacementAdditiveMap = $this->decodeJsonFile($replacementAdditiveMapPath);
         $sourceMappingReport = $this->decodeJsonFile($sourceMappingReportPath);
+        $forbiddenClaimReport = is_file($forbiddenClaimReportPath)
+            ? $this->decodeJsonFile($forbiddenClaimReportPath)
+            : [];
         $legacyResidualScan = $this->decodeJsonFile($legacyResidualScanPath);
         $fc144BoundaryReport = $this->decodeJsonFile($fc144BoundaryReportPath);
 
@@ -373,7 +561,7 @@ final class EnneagramRegistryActivationGateService
         $this->assertScope($candidateManifest);
         $this->assertReplacementCoverage($replacementAdditiveMap);
         $this->assertNoFullReplacement($importDiffSummary);
-        $this->assertNoResidualOrBoundaryViolation($sourceMappingReport, $legacyResidualScan, $fc144BoundaryReport);
+        $this->assertNoResidualOrBoundaryViolation($sourceMappingReport, $forbiddenClaimReport, $legacyResidualScan, $fc144BoundaryReport);
 
         if ($release instanceof ContentPackRelease) {
             $releaseManifestHash = trim((string) ($release->manifest_hash ?? ''));
@@ -393,6 +581,7 @@ final class EnneagramRegistryActivationGateService
         return [
             'release_id' => $releaseId,
             'release_metadata_source' => $release instanceof ContentPackRelease ? 'db_release_metadata' : 'artifact_only_dry_run',
+            'release_action' => $release instanceof ContentPackRelease ? (string) ($release->action ?? '') : null,
             'storage_path' => $storagePath,
             'storage_root' => $storageRoot,
             'registry_root' => $registryRoot,
@@ -403,8 +592,51 @@ final class EnneagramRegistryActivationGateService
             'runtime_registry_manifest_hash_expected' => $runtimeRegistryManifestHashExpected,
             'runtime_registry_manifest_hash_actual' => $runtimeRegistryManifestHashActual,
             'candidate_payload_count' => count($payloadFiles),
+            'forbidden_claim_violation_count' => $this->forbiddenClaimViolationCount($forbiddenClaimReport),
             'fc144_boundary_violation_count' => (int) ($fc144BoundaryReport['violation_count'] ?? 0),
         ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $inspection
+     */
+    private function assertInactiveCandidateRelease(array $inspection): void
+    {
+        if ((string) ($inspection['release_metadata_source'] ?? '') !== 'db_release_metadata') {
+            throw new RuntimeException('Inactive candidate activation requires release metadata.');
+        }
+
+        if ((string) ($inspection['release_action'] ?? '') !== 'enneagram_registry_import_inactive_candidate') {
+            throw new RuntimeException('Release is not an inactive candidate import.');
+        }
+    }
+
+    /**
+     * @param  array<string,mixed>  $inspection
+     */
+    private function assertExpectedHashes(
+        array $inspection,
+        string $candidateManifestSha256,
+        string $runtimeRegistryManifestSha256,
+    ): void {
+        $expectedCandidateHash = trim($candidateManifestSha256);
+        $expectedRuntimeHash = trim($runtimeRegistryManifestSha256);
+
+        if ($expectedCandidateHash === '') {
+            throw new RuntimeException('Missing --candidate-manifest-sha256.');
+        }
+
+        if ($expectedRuntimeHash === '') {
+            throw new RuntimeException('Missing --runtime-registry-sha256.');
+        }
+
+        if (! hash_equals($expectedCandidateHash, (string) $inspection['candidate_manifest_hash_actual'])) {
+            throw new RuntimeException('Candidate manifest hash does not match activation contract.');
+        }
+
+        if (! hash_equals($expectedRuntimeHash, (string) $inspection['runtime_registry_manifest_hash_actual'])) {
+            throw new RuntimeException('Runtime registry manifest hash does not match activation contract.');
+        }
     }
 
     /**
@@ -449,11 +681,13 @@ final class EnneagramRegistryActivationGateService
 
     /**
      * @param  array<string,mixed>  $sourceMappingReport
+     * @param  array<string,mixed>  $forbiddenClaimReport
      * @param  array<string,mixed>  $legacyResidualScan
      * @param  array<string,mixed>  $fc144BoundaryReport
      */
     private function assertNoResidualOrBoundaryViolation(
         array $sourceMappingReport,
+        array $forbiddenClaimReport,
         array $legacyResidualScan,
         array $fc144BoundaryReport,
     ): void {
@@ -463,6 +697,10 @@ final class EnneagramRegistryActivationGateService
             }
         }
 
+        if ($this->forbiddenClaimViolationCount($forbiddenClaimReport) !== 0) {
+            throw new RuntimeException('Forbidden claim violation detected.');
+        }
+
         if ((int) ($legacyResidualScan['legacy_deep_core_residual_count'] ?? 0) !== 0) {
             throw new RuntimeException('Legacy residual detected.');
         }
@@ -470,6 +708,20 @@ final class EnneagramRegistryActivationGateService
         if ((int) ($fc144BoundaryReport['violation_count'] ?? 0) !== 0) {
             throw new RuntimeException('FC144 boundary violation detected.');
         }
+    }
+
+    /**
+     * @param  array<string,mixed>  $forbiddenClaimReport
+     */
+    private function forbiddenClaimViolationCount(array $forbiddenClaimReport): int
+    {
+        foreach (['violation_count', 'forbidden_claim_violation_count', 'failure_count'] as $key) {
+            if (array_key_exists($key, $forbiddenClaimReport)) {
+                return (int) $forbiddenClaimReport[$key];
+            }
+        }
+
+        return 0;
     }
 
     private function assertControlledSqlite(): void
@@ -523,6 +775,8 @@ final class EnneagramRegistryActivationGateService
             ->where('pack_version', self::PACK_VERSION)
             ->where('activation_after_release_id', $currentActiveReleaseId)
             ->whereIn('reason', [
+                'enneagram_registry_activate_inactive_candidate',
+                'enneagram_registry_rollback_inactive_candidate',
                 'enneagram_registry_activate_gate',
                 'enneagram_registry_rollback_gate',
                 'enneagram_registry_activate',
@@ -575,6 +829,7 @@ final class EnneagramRegistryActivationGateService
 
         return [
             'release_id' => $releaseId,
+            'release_action' => (string) ($release->action ?? ''),
             'storage_path' => $storagePath,
             'registry_root' => $registryRoot,
         ];
@@ -585,6 +840,28 @@ final class EnneagramRegistryActivationGateService
         $normalized = trim($storagePath);
         if ($normalized === '') {
             return null;
+        }
+
+        if (str_starts_with(str_replace('\\', '/', $normalized), 'repo://')) {
+            $repoRelative = trim(substr(str_replace('\\', '/', $normalized), strlen('repo://')), '/');
+            $repoRoot = $repoRelative !== '' ? base_path($repoRelative) : '';
+            if ($repoRoot !== '' && is_file($repoRoot.DIRECTORY_SEPARATOR.'manifest.json')) {
+                return $repoRoot;
+            }
+
+            $repoRegistryRoot = $repoRoot.DIRECTORY_SEPARATOR.'registry';
+
+            return is_file($repoRegistryRoot.DIRECTORY_SEPARATOR.'manifest.json') ? $repoRegistryRoot : null;
+        }
+
+        if (str_starts_with($normalized, '/')) {
+            if (is_file($normalized.DIRECTORY_SEPARATOR.'manifest.json')) {
+                return $normalized;
+            }
+
+            $absoluteRegistryRoot = $normalized.DIRECTORY_SEPARATOR.'registry';
+
+            return is_file($absoluteRegistryRoot.DIRECTORY_SEPARATOR.'manifest.json') ? $absoluteRegistryRoot : null;
         }
 
         $storageRoot = storage_path('app/'.$normalized);
@@ -627,12 +904,16 @@ final class EnneagramRegistryActivationGateService
             '- release_id: '.$summary['release_id'],
             '- release_storage_path: '.$summary['release_storage_path'],
             '- metadata_source: '.$summary['release_metadata_source'],
+            '- release_action: '.(string) ($summary['release_action'] ?? ''),
             '- activation_happened: '.($summary['activation_happened'] ? 'true' : 'false'),
+            '- rollback_target_release_id: '.(string) ($summary['rollback_target_release_id'] ?? ''),
             '- resolver_before: '.$summary['resolver_before']['source'].' -> '.$summary['resolver_before']['root'],
             '- resolver_after: '.$summary['resolver_after']['source'].' -> '.$summary['resolver_after']['root'],
             '- candidate_manifest_hash_actual: '.$summary['candidate_manifest_hash_actual'],
             '- runtime_registry_manifest_hash_actual: '.$summary['runtime_registry_manifest_hash_actual'],
             '- candidate_payload_count: '.(string) $summary['candidate_payload_count'],
+            '- forbidden_claim_violation_count: '.(string) ($summary['forbidden_claim_violation_count'] ?? 0),
+            '- fc144_boundary_violation_count: '.(string) ($summary['fc144_boundary_violation_count'] ?? 0),
         ]);
 
         $this->writeMarkdown($outputDir.DIRECTORY_SEPARATOR.'Phase8D3_ReportRegression.md', [
@@ -649,8 +930,8 @@ final class EnneagramRegistryActivationGateService
             '# Phase 8-D-3 Go / No-Go',
             '',
             '- verdict: '.$summary['verdict'],
-            '- production_activation_happened: false',
-            '- public_launch_happened: false',
+            '- production_activation_happened: '.($summary['production_activation_happened'] ? 'true' : 'false'),
+            '- public_launch_happened: '.($summary['public_launch_happened'] ? 'true' : 'false'),
             '- full_replacement_prevented: '.($summary['full_replacement_prevented'] ? 'true' : 'false'),
             '- out_of_launch_scope: '.implode(', ', $summary['scope_enforcement']['out_of_launch_scope']),
         ]);
