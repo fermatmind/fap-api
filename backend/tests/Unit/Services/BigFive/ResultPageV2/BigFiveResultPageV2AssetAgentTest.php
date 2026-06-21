@@ -52,11 +52,8 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
 
             $validation = $this->readJson($runDir.'/validation_report.json');
             $this->assertSame(325, (int) ($validation['asset_count'] ?? 0));
-            $this->assertSame(3, (int) ($validation['error_count'] ?? -1));
-            $this->assertStringContainsString(
-                'shareable=true selector assets must originate from share_safety_registry',
-                implode("\n", (array) ($validation['errors'] ?? []))
-            );
+            $this->assertSame(0, (int) ($validation['error_count'] ?? -1));
+            $this->assertSame([], (array) ($validation['errors'] ?? []));
 
             $safety = $this->readJson($runDir.'/safety_report.json');
             $this->assertSame('pass', data_get($safety, 'leak_scan.status'));

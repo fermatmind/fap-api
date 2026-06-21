@@ -4381,6 +4381,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isBigFiveV2SelectorAssetContractFile($file)) {
+                continue;
+            }
+
             if ($this->isBigFiveV2ResultPageAuditContractFile($file)) {
                 continue;
             }
@@ -6484,6 +6488,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return $file === 'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2RuntimeWrapper.php'
             || $file === 'backend/app/Services/BigFive/ResultPageV2/BigFiveV2PilotRuntimeObservability.php'
             || preg_match('#^backend/app/Services/BigFive/ResultPageV2/(ContentAssets|RouteMatrix|Selector|Composer|Access|Routing|Pdf|Share|History|Compare|Rollout|Observability)/[A-Za-z0-9_]+\.php$#', $file) === 1;
+    }
+
+    private function isBigFiveV2SelectorAssetContractFile(string $file): bool
+    {
+        return $file === 'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2SelectorAssetContract.php';
     }
 
     private function isBigFiveV2ResultPageAuditContractFile(string $file): bool

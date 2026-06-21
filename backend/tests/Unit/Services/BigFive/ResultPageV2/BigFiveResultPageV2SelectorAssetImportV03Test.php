@@ -22,8 +22,8 @@ final class BigFiveResultPageV2SelectorAssetImportV03Test extends TestCase
         'method_registry' => 6,
         'observation_feedback_registry' => 25,
         'profile_signature_registry' => 20,
-        'scenario_registry' => 40,
-        'share_safety_registry' => 10,
+        'scenario_registry' => 37,
+        'share_safety_registry' => 13,
         'state_scope_registry' => 14,
         'triple_pattern_registry' => 20,
     ];
@@ -64,19 +64,21 @@ final class BigFiveResultPageV2SelectorAssetImportV03Test extends TestCase
         $manifest = $this->manifest();
 
         $this->assertSame(325, $manifest['asset_count'] ?? null);
-        $this->assertSame('b69af54089dacd09d62c7b3ee9b37fbff012e231e6d00be752a376a4598e27bd', hash_file('sha256', $this->path('assets.json')));
+        $this->assertSame('37875b72dc149e43561734862657a9e736b614e1b70b86b82851e59a928ce165', hash_file('sha256', $this->path('assets.json')));
         $this->assertSame(hash_file('sha256', $this->path('assets.json')), $manifest['sha256_json'] ?? null);
     }
 
-    public function test_v0_3_staging_assets_reject_shareable_content_outside_share_safety_registry(): void
+    public function test_v0_3_staging_assets_pass_shareable_registry_validation(): void
     {
         $validator = new BigFiveResultPageV2SelectorAssetValidator;
 
         $errors = $validator->validateAssetSet($this->assets());
 
-        $this->assertCount(3, $errors);
-        foreach ($errors as $error) {
-            $this->assertStringContainsString('shareable=true selector assets must originate from share_safety_registry', $error);
+        $this->assertSame([], $errors);
+        foreach ($this->assets() as $asset) {
+            if (($asset['shareable'] ?? false) === true) {
+                $this->assertSame('share_safety_registry', $asset['registry_key'] ?? null, (string) ($asset['asset_key'] ?? ''));
+            }
         }
     }
 

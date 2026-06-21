@@ -15,8 +15,8 @@
         "method_registry": 6,
         "observation_feedback_registry": 25,
         "profile_signature_registry": 20,
-        "scenario_registry": 40,
-        "share_safety_registry": 10,
+        "scenario_registry": 37,
+        "share_safety_registry": 13,
         "state_scope_registry": 14,
         "triple_pattern_registry": 20
     },
@@ -29,8 +29,8 @@
         "method_registry": 6,
         "observation_feedback_registry": 25,
         "profile_signature_registry": 20,
-        "scenario_registry": 40,
-        "share_safety_registry": 10,
+        "scenario_registry": 37,
+        "share_safety_registry": 13,
         "state_scope_registry": 14,
         "triple_pattern_registry": 20
     },
@@ -95,9 +95,9 @@
         "share_safety_required": 11
     },
     "shareable_assets": [
-        "asset.module_07_collaboration_manual.scenario_registry.collaboration_document_first.v0_3",
-        "asset.module_07_collaboration_manual.scenario_registry.collaboration_clear_owner_deadline.v0_3",
-        "asset.module_07_collaboration_manual.scenario_registry.collaboration_share_safe_manual.v0_3"
+        "asset.module_07_collaboration_manual.share_safety_registry.collaboration_document_first.v0_3",
+        "asset.module_07_collaboration_manual.share_safety_registry.collaboration_clear_owner_deadline.v0_3",
+        "asset.module_07_collaboration_manual.share_safety_registry.collaboration_share_safe_manual.v0_3"
     ],
     "validation_status": "pass",
     "validation_error_count": 0,
@@ -111,7 +111,7 @@
     ],
     "next_recommended_steps": [
         "Run psychometric review for profile_signature, facet_pattern, coupling, and triple_pattern assets.",
-        "Run share-safety/privacy review for share_safety and shareable scenario assets.",
+        "Run share-safety/privacy review for share_safety and share-safe collaboration assets.",
         "Create golden cases and selection policy before any runtime composer integration.",
         "Keep this v0.3 P0 full bundle staging-only until reviewed and selected through a backend-owned composer."
     ]

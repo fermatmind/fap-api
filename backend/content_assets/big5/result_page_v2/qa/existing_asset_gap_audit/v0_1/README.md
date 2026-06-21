@@ -11,6 +11,6 @@ It records the current state of the existing backend content assets:
 - 31 selector golden cases, including `golden_case_31_o59_canonical_preview`.
 - O59 canonical route row `O3_C2_E2_A3_N4`.
 
-The main blocking gap is selector QA, not missing route rows: the strict agent audit fails on the existing 3 shareable selector assets that are still owned by `scenario_registry` instead of `share_safety_registry`.
+The P0 share-safe selector ownership gap has been repaired: the 3 shareable collaboration selector assets are now owned by `share_safety_registry`. Route/golden acceptance, norm-unavailable coverage, and low-quality coverage remain separate staging QA follow-ups.
 
 No runtime, CMS, production gate, frontend fallback, or formal asset generation is changed here.
