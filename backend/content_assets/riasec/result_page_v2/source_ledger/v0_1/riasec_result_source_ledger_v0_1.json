@@ -1,0 +1,631 @@
+{
+  "schema_version": "fap.riasec.result_page_v2.source_ledger.v0.1",
+  "task_id": "RIASEC-RESULT-SOURCE-LEDGER-01",
+  "run_id": "riasec_source_ledger_v0_1_20260621",
+  "created_at": "2026-06-21T22:23:37+08:00",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "content_authority": "backend",
+  "cms_write_performed": false,
+  "runtime_change_performed": false,
+  "frontend_fallback_allowed": false,
+  "private_payload_exported": false,
+  "scope": {
+    "scale": "RIASEC",
+    "surface": "result_page_v2",
+    "purpose": "Evidence ledger for future RIASEC result page asset-agent claims before any generation, validator harness, CMS import, runtime wiring, pilot, or production gate.",
+    "non_goals": [
+      "asset_generation",
+      "runtime_enablement",
+      "cms_import",
+      "production_authorization",
+      "frontend_fallback"
+    ]
+  },
+  "source_records": [
+    {
+      "source_id": "public_onet_interest_profiler_overview",
+      "source_name": "O*NET Interest Profiler overview",
+      "source_ref": "https://www.onetcenter.org/IP.html",
+      "evidence_type": "public_reference",
+      "permitted_use": [
+        "method-boundary framing",
+        "RIASEC dimension names",
+        "career exploration context"
+      ],
+      "limitations": [
+        "does not authorize copying instrument items",
+        "does not prove FermatMind scoring equivalence",
+        "does not authorize official O*NET endorsement claims"
+      ],
+      "disallowed_use": [
+        "copy O*NET item text",
+        "claim official DOL/O*NET certification",
+        "derive occupation matching or hiring suitability claims"
+      ]
+    },
+    {
+      "source_id": "public_onet_interest_profiler_manual",
+      "source_name": "O*NET Interest Profiler manual page",
+      "source_ref": "https://www.onetcenter.org/reports/IP_Manual.html",
+      "evidence_type": "public_reference",
+      "permitted_use": [
+        "historical/method framing",
+        "Holland RIASEC basis statement",
+        "educational planning and career guidance boundary"
+      ],
+      "limitations": [
+        "manual is evidence for O*NET IP, not proof of this product validity",
+        "does not authorize raw score interpretation beyond local validated contract"
+      ],
+      "disallowed_use": [
+        "claim clinical diagnosis",
+        "claim employment suitability",
+        "claim exact O*NET Interest Profiler score equivalence"
+      ]
+    },
+    {
+      "source_id": "public_dol_onet_tools",
+      "source_name": "U.S. Department of Labor O*NET career exploration tools page",
+      "source_ref": "https://www.dol.gov/agencies/eta/onet/tools",
+      "evidence_type": "public_reference",
+      "permitted_use": [
+        "career exploration boundary",
+        "self-directed planning context"
+      ],
+      "limitations": [
+        "does not authorize proprietary copy reuse",
+        "does not define this repository runtime contract"
+      ],
+      "disallowed_use": [
+        "DOL endorsement implication",
+        "guaranteed career match claim",
+        "official hiring screen claim"
+      ]
+    },
+    {
+      "source_id": "public_onet_online_interests",
+      "source_name": "O*NET Online browse by career interest types",
+      "source_ref": "https://www.onetonline.org/explore/interests/",
+      "evidence_type": "public_reference",
+      "permitted_use": [
+        "public R/I/A/S/E/C label cross-check",
+        "career exploration IA reference"
+      ],
+      "limitations": [
+        "occupation search behavior is not a result page content asset contract",
+        "does not authorize direct occupation recommendations"
+      ],
+      "disallowed_use": [
+        "rank occupations as matches",
+        "emit SOC/occupation claims without separate source mapping",
+        "frontend fallback route inference"
+      ]
+    },
+    {
+      "source_id": "public_onet_ip_services",
+      "source_name": "O*NET Interest Profiler services page",
+      "source_ref": "https://services.onetcenter.org/ip",
+      "evidence_type": "public_reference",
+      "permitted_use": [
+        "integration boundary reference for future service comparison only"
+      ],
+      "limitations": [
+        "not used by this PR",
+        "current ledger does not call external services"
+      ],
+      "disallowed_use": [
+        "runtime dependency",
+        "network call from asset agent",
+        "production import authorization"
+      ]
+    },
+    {
+      "source_id": "bibliographic_holland_1997",
+      "source_name": "John L. Holland, Making Vocational Choices, 3rd edition",
+      "source_ref": "Holland, J. L. (1997). Making Vocational Choices: A Theory of Vocational Personalities and Work Environments. Psychological Assessment Resources.",
+      "evidence_type": "bibliographic_reference",
+      "permitted_use": [
+        "theory lineage reference",
+        "RIASEC construct boundary"
+      ],
+      "limitations": [
+        "bibliographic reference only; full text is not included in repo",
+        "does not authorize copy reuse or item reuse"
+      ],
+      "disallowed_use": [
+        "quote or reproduce proprietary text without review",
+        "claim deterministic identity type",
+        "claim ability or job success prediction"
+      ]
+    },
+    {
+      "source_id": "internal_riasec_v73_pack_docs",
+      "source_name": "Internal RIASEC V7.3 pack preflight/import docs",
+      "source_ref": "backend/docs/riasec/*pack*.md and backend/docs/riasec/full-content-fixture-freeze-pack-13-be.md",
+      "evidence_type": "internal_doc",
+      "permitted_use": [
+        "asset inventory context",
+        "boundary policy inheritance",
+        "staging-only QA references"
+      ],
+      "limitations": [
+        "not a license to generate new copy",
+        "some original source zips are referenced but not stored in repo"
+      ],
+      "disallowed_use": [
+        "copy internal drafts into public payload without claim ledger row",
+        "treat preflight notes as production gate approval"
+      ]
+    },
+    {
+      "source_id": "existing_riasec_asset_pack_snapshot",
+      "source_name": "Current repository RIASEC content asset pack snapshot",
+      "source_ref": "backend/content_assets/riasec/*",
+      "evidence_type": "existing_asset_pack",
+      "permitted_use": [
+        "checksum inventory",
+        "gap audit input",
+        "validator harness fixture input"
+      ],
+      "limitations": [
+        "existing files are not automatically selector-ready",
+        "does not prove route/golden-case coverage"
+      ],
+      "disallowed_use": [
+        "production import",
+        "runtime wrapper enablement",
+        "frontend fallback copy"
+      ]
+    }
+  ],
+  "claim_rows": [
+    {
+      "claim_id": "riasec_six_interest_areas_public_label_claim",
+      "claim_text": "RIASEC/Holland result assets may refer to the six vocational interest areas as Realistic, Investigative, Artistic, Social, Enterprising, and Conventional.",
+      "claim_scope": "dimension_label",
+      "source_id": "public_onet_interest_profiler_overview",
+      "source_ref": "https://www.onetcenter.org/IP.html",
+      "evidence_type": "public_reference",
+      "permitted_use": [
+        "dimension naming",
+        "method-boundary copy"
+      ],
+      "limitations": [
+        "labels alone do not validate scoring, norms, or route selection"
+      ],
+      "disallowed_use": [
+        "official O*NET certification claim",
+        "deterministic personality identity claim"
+      ],
+      "claim_status": "approved_for_staging_reference",
+      "review_notes": "Use as label authority only."
+    },
+    {
+      "claim_id": "riasec_career_exploration_not_match_claim",
+      "claim_text": "RIASEC result copy must frame outputs as career exploration and guidance, not as guaranteed job fit, hiring suitability, or success prediction.",
+      "claim_scope": "method_boundary",
+      "source_id": "public_dol_onet_tools",
+      "source_ref": "https://www.dol.gov/agencies/eta/onet/tools",
+      "evidence_type": "public_reference",
+      "permitted_use": [
+        "safety boundary",
+        "method note",
+        "share-safe wording review"
+      ],
+      "limitations": [
+        "does not define every local forbidden term"
+      ],
+      "disallowed_use": [
+        "career match guarantee",
+        "employment suitability decision",
+        "success prediction"
+      ],
+      "claim_status": "approved_for_staging_reference",
+      "review_notes": "Boundary must be enforced by validator harness in later PR."
+    },
+    {
+      "claim_id": "riasec_no_item_or_external_copy_reuse_claim",
+      "claim_text": "Public sources can support method framing, but agent outputs must not copy O*NET item text, proprietary report copy, competitor copy, or unavailable internal drafts.",
+      "claim_scope": "claim_safety",
+      "source_id": "public_onet_interest_profiler_manual",
+      "source_ref": "https://www.onetcenter.org/reports/IP_Manual.html",
+      "evidence_type": "public_reference",
+      "permitted_use": [
+        "source ledger limitation",
+        "copyright/IP safety rule"
+      ],
+      "limitations": [
+        "does not by itself scan generated text"
+      ],
+      "disallowed_use": [
+        "copy item text",
+        "copy report prose",
+        "use unavailable source archives as direct evidence"
+      ],
+      "claim_status": "approved_for_staging_reference",
+      "review_notes": "Later safety QA must enforce this as a blocker."
+    },
+    {
+      "claim_id": "riasec_backend_fail_closed_claim",
+      "claim_text": "Missing or invalid RIASEC result content must fail closed through backend policy rather than frontend fallback copy.",
+      "claim_scope": "fallback_policy",
+      "source_id": "internal_riasec_v73_pack_docs",
+      "source_ref": "backend/docs/riasec/deep-copy-slot-schema-contract.md",
+      "evidence_type": "internal_doc",
+      "permitted_use": [
+        "runbook rule",
+        "validator harness requirement",
+        "gap audit criterion"
+      ],
+      "limitations": [
+        "does not prove current runtime coverage for every slot"
+      ],
+      "disallowed_use": [
+        "frontend fallback",
+        "runtime enablement without validator pass"
+      ],
+      "claim_status": "approved_for_staging_reference",
+      "review_notes": "Inherited from existing RIASEC deep-slot contract."
+    },
+    {
+      "claim_id": "riasec_existing_asset_snapshot_claim",
+      "claim_text": "The current repository snapshot contains RIASEC lifecycle, deep-copy, activity, occupation-boundary, quality, feedback, and technical note assets that may be inventoried as gap-audit inputs.",
+      "claim_scope": "asset_inventory",
+      "source_id": "existing_riasec_asset_pack_snapshot",
+      "source_ref": "backend/content_assets/riasec/*",
+      "evidence_type": "existing_asset_pack",
+      "permitted_use": [
+        "asset inventory",
+        "gap audit",
+        "validator harness input"
+      ],
+      "limitations": [
+        "asset presence does not prove selector readiness or production readiness"
+      ],
+      "disallowed_use": [
+        "production import",
+        "runtime wrapper enablement",
+        "CMS write"
+      ],
+      "claim_status": "approved_for_staging_reference",
+      "review_notes": "Checksums are captured in existing_asset_pack_inventory."
+    }
+  ],
+  "internal_source_placeholders": [
+    {
+      "placeholder_id": "internal_riasec_formal_result_v2_source",
+      "description": "Internal formal RIASEC result page source draft, if available outside the repository.",
+      "status": "pending_access_or_attachment",
+      "permitted_until_attached": [
+        "record as missing source",
+        "block claims that depend on it"
+      ],
+      "disallowed_until_attached": [
+        "quote text",
+        "generate user-facing copy",
+        "mark claim approved"
+      ]
+    },
+    {
+      "placeholder_id": "internal_riasec_long_form_source",
+      "description": "Internal long-form RIASEC source manuscript, if available outside the repository.",
+      "status": "pending_access_or_attachment",
+      "permitted_until_attached": [
+        "record as missing source",
+        "block claims that depend on it"
+      ],
+      "disallowed_until_attached": [
+        "quote text",
+        "generate user-facing copy",
+        "mark claim approved"
+      ]
+    }
+  ],
+  "internal_doc_inventory": [
+    {
+      "path": "backend/docs/riasec/deep-copy-slot-schema-contract.md",
+      "sha256": "f401af12c461c4e90833967bc9bb78c062930095d36d0f7d15b4bef970aa88f0",
+      "bytes": 7694
+    },
+    {
+      "path": "backend/docs/riasec/full-content-fixture-freeze-pack-13-be.md",
+      "sha256": "cfc0b012aea373d967f105d44d35698f7cce357990c278044128cf4395851eda",
+      "bytes": 1946
+    },
+    {
+      "path": "backend/docs/riasec/lifecycle-copy-pack-11-be.md",
+      "sha256": "c9d63a1da6f238f2b041836afa17e862d5b1ec491cbdc7c3696549800b7c299f",
+      "bytes": 1544
+    },
+    {
+      "path": "backend/docs/riasec/feedback-action-lab-pack-10-be.md",
+      "sha256": "9834e7571eb528b67cbed7d460601840ce19ff232dfe5c10033a92a5557bc3f1",
+      "bytes": 1930
+    },
+    {
+      "path": "backend/docs/riasec/activity-task-examples-pack-05-preflight.md",
+      "sha256": "00b15d982e199d48f7500bd0589206b819c0686e6b87749418986d4e897c836a",
+      "bytes": 2636
+    },
+    {
+      "path": "backend/docs/riasec/occupation-examples-pack-06-preflight.md",
+      "sha256": "05ee8c830b05a6e95a2fba005c2a05a2e722aa23d23d7ebb77a36df9ba501908",
+      "bytes": 2782
+    },
+    {
+      "path": "backend/docs/riasec/aspirations-disagree-pack-09-preflight.md",
+      "sha256": "afc062ea8d30e796faf4b53af977bd95a74ecab8a524436f19a003710e865d6c",
+      "bytes": 3302
+    },
+    {
+      "path": "backend/docs/riasec/result-asset-agent-runbook.md",
+      "sha256": "99cd633d975a86387072fa7345241141a0d8df63eca242415a74a52ab1f9bc95",
+      "bytes": 6433
+    },
+    {
+      "path": "backend/docs/riasec/result-asset-agent-schema.md",
+      "sha256": "b5e4fdb267e5f4dfef81853dbdb89058d4b747f60590b6b1e56b9f6d113a0667",
+      "bytes": 4562
+    },
+    {
+      "path": "backend/docs/riasec/result-asset-agent-gates.md",
+      "sha256": "f59a20596304f9b5375122de4500e68f6a6cbe48a001be344be3a386b0f13da5",
+      "bytes": 4621
+    }
+  ],
+  "existing_asset_pack_inventory": [
+    {
+      "path": "backend/content_assets/riasec/140q_task_environment_role_v1.zh-CN.jsonl",
+      "sha256": "7eb3d98d3f98f846a66f52df93b54eebda3235f119b55f52db79105c1c612159",
+      "bytes": 307863,
+      "format": "jsonl",
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false
+    },
+    {
+      "path": "backend/content_assets/riasec/activity_task_examples_v1.zh-CN.jsonl",
+      "sha256": "b2e084e04a924078c5aa625646d4c355db27991f0a5d9fc9ca6d5bf00368ba3b",
+      "bytes": 988768,
+      "format": "jsonl",
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false
+    },
+    {
+      "path": "backend/content_assets/riasec/aspirations_calibration_v1.zh-CN.jsonl",
+      "sha256": "8fd65ea92fba34f47c178489339bd3c25513421f5004157360a04c65ac430fac",
+      "bytes": 146575,
+      "format": "jsonl",
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false
+    },
+    {
+      "path": "backend/content_assets/riasec/dimension_deep_copy_v1.zh-CN.r3.json",
+      "sha256": "a8177d76e48868feb04081bcf493eb80e7945a33647ed2c56e0ed8e2e23ddf40",
+      "bytes": 28511,
+      "format": "json",
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false
+    },
+    {
+      "path": "backend/content_assets/riasec/disagree_path_v1.zh-CN.jsonl",
+      "sha256": "474bba517fd7015b5792eb3fc3053504ac70e368334491fb55e1ae8a30b4f05b",
+      "bytes": 88262,
+      "format": "jsonl",
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false
+    },
+    {
+      "path": "backend/content_assets/riasec/faq_v1.en.json",
+      "sha256": "fb4faa8626a11a8fffa8c4e28d1ed32f3ea68db9662abe6e30faceb81ca82c47",
+      "bytes": 6141,
+      "format": "json",
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false
+    },
+    {
+      "path": "backend/content_assets/riasec/faq_v1.en.md",
+      "sha256": "104624d3e59251dc7cc16436c4e59a226727d7601c092c7d070703a8a0944925",
+      "bytes": 1459,
+      "format": "markdown",
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false
+    },
+    {
+      "path": "backend/content_assets/riasec/faq_v1.zh-CN.json",
+      "sha256": "bd934b6b8435524c93525f7539318a1e3004c2e1b9562f0bf5b16f245131dd03",
+      "bytes": 5349,
+      "format": "json",
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false
+    },
+    {
+      "path": "backend/content_assets/riasec/faq_v1.zh-CN.md",
+      "sha256": "cdeb86f982fe9be2984d485dcb3b47e848dc9398580c7b4e8606a38af1bfd7de",
+      "bytes": 3417,
+      "format": "markdown",
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false
+    },
+    {
+      "path": "backend/content_assets/riasec/feedback_action_lab_v1.zh-CN.jsonl",
+      "sha256": "9740ec9d5482bfc0c11ca494ad6da52b05d6426017ca241b2351ebf7a302c4c1",
+      "bytes": 347974,
+      "format": "jsonl",
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false
+    },
+    {
+      "path": "backend/content_assets/riasec/low_quality_cautious_reading_v1.zh-CN.json",
+      "sha256": "d9be1d97a3317616958434a7669003b0c1f2991e00a6472ad102d3d2b6226763",
+      "bytes": 3842,
+      "format": "json",
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false
+    },
+    {
+      "path": "backend/content_assets/riasec/near_tie_alternate_code_copy_v1.zh-CN.json",
+      "sha256": "6dc2c723ed1fc978634fa46252f6f768233688ceea4216ee56ef7515ce5ae89e",
+      "bytes": 2295,
+      "format": "json",
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false
+    },
+    {
+      "path": "backend/content_assets/riasec/next_exploration_nodes_v1.zh-CN.jsonl",
+      "sha256": "1d1f4a0a15077d8cfd656a6b3563378c36e8a2da572c3164c99997a9d8ccd7ed",
+      "bytes": 451848,
+      "format": "jsonl",
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false
+    },
+    {
+      "path": "backend/content_assets/riasec/occupation_examples_boundary_v1.zh-CN.jsonl",
+      "sha256": "0a915381c32b3d013ad169a6bae5e14359951d9fd5a487ba4fcb984ef7b51c01",
+      "bytes": 1119923,
+      "format": "jsonl",
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false
+    },
+    {
+      "path": "backend/content_assets/riasec/pair_blend_15_pairs_v1.zh-CN.jsonl",
+      "sha256": "e668c5ca0f936bc82db443ebb1a19f967a6e5b968a77509336a64f74956e92e6",
+      "bytes": 55837,
+      "format": "jsonl",
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false
+    },
+    {
+      "path": "backend/content_assets/riasec/professional_method_boundary_v1.en.json",
+      "sha256": "d93ea73d2a12e7f7d0b8295480fa17ea35f662cba5159b49ce4564f5b0c777dc",
+      "bytes": 3317,
+      "format": "json",
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false
+    },
+    {
+      "path": "backend/content_assets/riasec/professional_method_boundary_v1.zh-CN.json",
+      "sha256": "a68732971e19489c1007d850a8ce5ee5268f725bf99dd2d15dbb5faa2355c662",
+      "bytes": 2978,
+      "format": "json",
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false
+    },
+    {
+      "path": "backend/content_assets/riasec/profile_shape_copy_v1.zh-CN.json",
+      "sha256": "38bab425f809c7a3cce4384525693a85043237c97239adeb28e92056a4dd897e",
+      "bytes": 3106,
+      "format": "json",
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false
+    },
+    {
+      "path": "backend/content_assets/riasec/share_pdf_history_v1.en.json",
+      "sha256": "a7ba07eb763c0e4743c8fe2c37de13d09ce594a857a3c7d2d1a7620596e27b37",
+      "bytes": 3585,
+      "format": "json",
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false
+    },
+    {
+      "path": "backend/content_assets/riasec/share_pdf_history_v1.zh-CN.json",
+      "sha256": "c876feba706a1e117052a2a4e1b02ce63d48d1f7c43e0b7838e609b927222558",
+      "bytes": 3272,
+      "format": "json",
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false
+    },
+    {
+      "path": "backend/content_assets/riasec/technical_note_user_summary_v1.en.json",
+      "sha256": "89f08e854d03805e9bdeed63ae583a54a269315a56b59a344f952cdcb9cc218a",
+      "bytes": 2583,
+      "format": "json",
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false
+    },
+    {
+      "path": "backend/content_assets/riasec/technical_note_user_summary_v1.zh-CN.json",
+      "sha256": "c0cc7640f0814080feb4f66c00245db5f3fd0d30d9e9e541272e25d62cb023d2",
+      "bytes": 2360,
+      "format": "json",
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false
+    },
+    {
+      "path": "backend/content_assets/riasec/top3_code_chain_strategy_v1.zh-CN.jsonl",
+      "sha256": "15a60d0f6ae7893eb3851d4515e31abccb9065c550bb81c5d8588154b5836ff1",
+      "bytes": 88435,
+      "format": "jsonl",
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false
+    },
+    {
+      "path": "backend/content_assets/riasec/top_code_confidence_copy_v1.zh-CN.json",
+      "sha256": "da7951867f4914859bda9683c34862ce0463844425dd716ccf68ddaf7d1da285",
+      "bytes": 2517,
+      "format": "json",
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false
+    }
+  ],
+  "go_no_go": {
+    "source_ledger_ready_for_next_gate": true,
+    "asset_generation_allowed": false,
+    "runtime_enablement_allowed": false,
+    "cms_import_allowed": false,
+    "production_use_allowed": false,
+    "notes": [
+      "This PR creates source evidence only. Later PRs must add validators before generation."
+    ]
+  }
+}
