@@ -1330,6 +1330,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_seo_agent_l5a_candidate_review_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/SeoAgentL5aCandidateReviewCommand.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_seo_agent_gsc_opportunity_auto_draft_files(): void
     {
         $changed = [
@@ -4027,6 +4036,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSeoAgentL5aCandidateReviewFile($file)) {
+                continue;
+            }
+
             if ($this->isSeoAgentGscOpportunityAutoDraftFile($file)) {
                 continue;
             }
@@ -5420,6 +5433,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return in_array($file, [
             'backend/app/Console/Commands/SeoAgentPriorityQueueSchedulerCommand.php',
+        ], true);
+    }
+
+    private function isSeoAgentL5aCandidateReviewFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/SeoAgentL5aCandidateReviewCommand.php',
         ], true);
     }
 
