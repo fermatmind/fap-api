@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-21T16:36:04+08:00",
+  "updated_at": "2026-06-21T16:47:21+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -55224,7 +55224,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-result-asset-validator-harness-01",
     "base": "main",
-    "status": "pr_open",
+    "status": "ci_fix_local_checks_passed",
     "train_scope": "big5_result_page_v2_asset_agent",
     "title": "BIG5-RESULT-ASSET-VALIDATOR-HARNESS-01: test(big5):建 result asset validator harness",
     "depends_on": [
@@ -55241,7 +55241,7 @@
       },
       "scope_validation": {
         "status": "pass",
-        "evidence": "Changed files are confined to the AssetAgent command/service/test, Kernel command registration, and docs/codex/pr-train-state.json."
+        "evidence": "Changed files are confined to the AssetAgent command/service/test, Kernel command registration, BigFive ResultPageV2 freeze guard classifier test, and docs/codex PR-train metadata."
       },
       "local": {
         "status": "pass_with_existing_phpunit_warnings",
@@ -55252,13 +55252,14 @@
           "php -l backend/app/Console/Kernel.php",
           "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi",
           "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2SelectorAssetValidatorTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest --no-ansi",
           "git diff --check"
         ],
-        "notes": "Focused tests passed with existing PHPUnit warning classifications. AssetAgent records the current 3 selector validator findings and does not repair them in this PR."
+        "notes": "Focused tests passed with existing PHPUnit warning classifications. GitHub verify-bigfive exposed the freeze guard classifier gap for the new read-only AssetAgent harness; scoped CI repair passed local revalidation."
       },
       "github": {
-        "status": "pending",
-        "evidence": "GitHub checks pending for PR #2190."
+        "status": "failed_current_pr_scoped_repair_pushed",
+        "evidence": "PR #2190 verify-bigfive failed because BigFiveResultPageV2CoreBodyPreviewTest flagged the new AssetAgent command/service/Kernel registration as runtime diff. Scoped guard repair passed locally and will be pushed for GitHub recheck."
       }
     },
     "failure_reason": null,
@@ -55282,6 +55283,16 @@
         "at": "2026-06-21T16:36:04+08:00",
         "status": "pr_open",
         "note": "Opened https://github.com/fermatmind/fap-api/pull/2190 from scoped validator harness commit 19feb4f36851e2319a1462027642496029c9d4cb."
+      },
+      {
+        "at": "2026-06-21T16:43:37+08:00",
+        "status": "ci_fix_local_checks_pending",
+        "note": "Inspected GitHub verify-bigfive failure: runtime freeze classifier rejected the new read-only AssetAgent command/service/Kernel registration. Added a narrow BigFive V2 AssetAgent harness classifier path and manifest/state metadata repair; local revalidation pending."
+      },
+      {
+        "at": "2026-06-21T16:47:21+08:00",
+        "status": "ci_fix_local_checks_passed",
+        "note": "Scoped CI repair local checks passed: AssetAgent, selector validator, CoreBodyPreview freeze guard, PHP syntax, JSON/YAML, diff, and scope validation."
       }
     ]
   },
