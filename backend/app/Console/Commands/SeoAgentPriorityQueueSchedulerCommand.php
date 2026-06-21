@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Carbon;
 use RuntimeException;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -22,6 +24,7 @@ final class SeoAgentPriorityQueueSchedulerCommand extends Command
         {--draft-limit=10 : Maximum low-risk CMS draft revisions to write, 1..10}
         {--base-url= : Public site base URL for IndexNow target resolution}
         {--artifact-dir= : Directory for L5 scheduler evidence artifacts}
+        {--preflight-only : Run readonly discovery and readiness checks without draft writes, publish, queue writes, or IndexNow submit}
         {--json : Emit JSON summary}';
 
     protected $description = 'External-cron L5-A low-risk SEO Agent orchestrator; writes drafts, publishes bounded ContentPage canaries, and submits IndexNow only.';
@@ -56,6 +59,10 @@ final class SeoAgentPriorityQueueSchedulerCommand extends Command
         $runDir = rtrim($artifactDir, '/').'/priority-queue-scheduler-run-'.$timestamp;
         if (! is_dir($runDir) && ! mkdir($runDir, 0775, true) && ! is_dir($runDir)) {
             return $this->finish($this->failureSummary('run_artifact_dir_unwritable'));
+        }
+
+        if ((bool) $this->option('preflight-only')) {
+            return $this->handlePreflightOnly($artifactDir, $timestamp, $runDir, $sources, $limit, $draftLimit, $publishLimit);
         }
 
         $steps = [];
@@ -218,6 +225,68 @@ final class SeoAgentPriorityQueueSchedulerCommand extends Command
         return max(1, min((int) $raw, 250));
     }
 
+    /**
+     * @param  list<string>  $sources
+     */
+    private function handlePreflightOnly(
+        string $artifactDir,
+        string $timestamp,
+        string $runDir,
+        array $sources,
+        int $limit,
+        int $draftLimit,
+        int $publishLimit
+    ): int {
+        $steps = [];
+        $weekly = $this->runSubCommand('seo-agent:weekly-readonly-runner', [
+            '--sources' => implode(',', $sources),
+            '--limit' => $limit,
+            '--artifact-dir' => $this->stepDir($runDir, '01-weekly-readonly-runner'),
+            '--json' => true,
+        ]);
+        $steps['weekly_readonly_runner'] = $this->stepSummary($weekly);
+        if (! $this->ok($weekly)) {
+            return $this->finishPreflightWithEvidence($artifactDir, $timestamp, 'blocked', $sources, $limit, $draftLimit, $publishLimit, $steps, [
+                'issue' => 'weekly_readonly_runner_failed',
+                'url_truth_preflight' => $this->urlTruthPreflight(),
+                'indexnow_config_preflight' => $this->indexnowConfigPreflight(),
+            ]);
+        }
+
+        $weeklyArtifactPath = (string) data_get($weekly, 'artifact.path', '');
+        if ($weeklyArtifactPath === '' || ! is_file($weeklyArtifactPath)) {
+            return $this->finishPreflightWithEvidence($artifactDir, $timestamp, 'blocked', $sources, $limit, $draftLimit, $publishLimit, $steps, [
+                'issue' => 'weekly_readonly_artifact_missing',
+                'url_truth_preflight' => $this->urlTruthPreflight(),
+                'indexnow_config_preflight' => $this->indexnowConfigPreflight(),
+            ]);
+        }
+
+        $preflight = $this->runSubCommand('seo-agent:auto-rollback-guard', [
+            '--run-evidence' => $weeklyArtifactPath,
+            '--mode' => 'preflight',
+            '--artifact-dir' => $this->stepDir($runDir, '02-rollback-preflight'),
+            '--json' => true,
+        ]);
+        $steps['rollback_preflight'] = $this->stepSummary($preflight);
+
+        return $this->finishPreflightWithEvidence(
+            $artifactDir,
+            $timestamp,
+            $this->guardPassed($preflight) ? 'success' : 'blocked',
+            $sources,
+            $limit,
+            $draftLimit,
+            $publishLimit,
+            $steps,
+            [
+                'issue' => $this->guardPassed($preflight) ? null : 'rollback_preflight_blocked',
+                'url_truth_preflight' => $this->urlTruthPreflight(),
+                'indexnow_config_preflight' => $this->indexnowConfigPreflight(),
+            ]
+        );
+    }
+
     private function boundedInt(string $option, int $min, int $max): ?int
     {
         $value = filter_var($this->option($option), FILTER_VALIDATE_INT);
@@ -323,6 +392,141 @@ final class SeoAgentPriorityQueueSchedulerCommand extends Command
             'stop_the_line' => (bool) ($summary['stop_the_line'] ?? false),
             'rollback_executed_count' => (int) ($summary['rollback_executed_count'] ?? 0),
         ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function urlTruthPreflight(): array
+    {
+        try {
+            if (! Schema::connection('seo_intel')->hasTable('seo_urls')) {
+                return [
+                    'status' => 'blocked',
+                    'issue' => 'seo_urls_table_missing',
+                    'eligible_indexable_backend_cms_rows' => 0,
+                    'writes_attempted' => false,
+                ];
+            }
+
+            $count = (int) DB::connection('seo_intel')
+                ->table('seo_urls')
+                ->where('source_authority', 'backend_cms')
+                ->where('indexability_state', 'indexable')
+                ->where('is_private_flow', false)
+                ->count();
+
+            return [
+                'status' => $count > 0 ? 'pass' : 'soft_pass_no_current_rows',
+                'eligible_indexable_backend_cms_rows' => $count,
+                'writes_attempted' => false,
+            ];
+        } catch (\Throwable $exception) {
+            return [
+                'status' => 'blocked',
+                'issue' => 'url_truth_preflight_failed',
+                'exception_class' => $exception::class,
+                'writes_attempted' => false,
+            ];
+        }
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function indexnowConfigPreflight(): array
+    {
+        $keyPresent = trim((string) config('seo_intel.search_channel_queue.live_submission.indexnow.key')) !== '';
+        $keyLocationPresent = trim((string) config('seo_intel.search_channel_queue.live_submission.indexnow.key_location')) !== '';
+        $liveSubmissionEnabled = (bool) config('seo_intel.search_channel_queue.live_submission.enabled', false);
+        $externalCallsEnabled = (bool) config('seo_intel.search_channel_queue.live_submission.external_api_calls_enabled', false);
+
+        return [
+            'status' => $keyPresent && $keyLocationPresent ? 'pass' : 'blocked',
+            'key_present' => $keyPresent,
+            'key_location_present' => $keyLocationPresent,
+            'live_submission_enabled' => $liveSubmissionEnabled,
+            'external_api_calls_enabled' => $externalCallsEnabled,
+            'ready_for_live_submit' => $keyPresent && $keyLocationPresent && $liveSubmissionEnabled && $externalCallsEnabled,
+            'secret_values_printed' => false,
+        ];
+    }
+
+    /**
+     * @param  list<string>  $sources
+     * @param  array<string, array<string, mixed>>  $steps
+     * @param  array<string, mixed>  $extra
+     */
+    private function finishPreflightWithEvidence(
+        string $artifactDir,
+        string $timestamp,
+        string $status,
+        array $sources,
+        int $limit,
+        int $draftLimit,
+        int $publishLimit,
+        array $steps,
+        array $extra
+    ): int {
+        $payload = [
+            'schema_version' => self::SCHEMA_VERSION,
+            'task' => 'SEO-AGENT-L5A-SCHEDULER-PREFLIGHT-MODE-01',
+            'status' => $status,
+            'run_mode' => 'weekly_l5_low_risk_preflight_only',
+            'preflight_only' => true,
+            'trigger' => 'external_cron_or_manual_cli',
+            'command' => 'php artisan seo-agent:priority-queue-scheduler --preflight-only',
+            'sources' => $sources,
+            'limit' => $limit,
+            'draft_limit' => $draftLimit,
+            'publish_limit' => $publishLimit,
+            'steps' => $steps,
+            ...$extra,
+            'allowed_actions' => [
+                'readonly_discovery',
+                'auto_approval_policy_evaluation',
+                'url_truth_read',
+                'indexnow_config_read',
+                'rollback_guard_preflight',
+                'evidence_artifact_write',
+            ],
+            'forbidden_actions' => [
+                ...$this->forbiddenActions(),
+                'cms_draft_revision_write',
+                'content_page_publish_canary',
+                'search_channel_queue_write',
+                'search_channel_queue_approve',
+                'indexnow_live_submit',
+            ],
+            'cron_boundary' => [
+                'external_cron_supported' => true,
+                'laravel_scheduler_enabled_by_pr' => false,
+                'queue_worker_started_by_pr' => false,
+                'recommended_lock' => 'flock -n /tmp/seo-agent-priority-queue-scheduler.lock',
+            ],
+            'negative_guarantees' => [
+                ...$this->negativeGuarantees(),
+                'cms_draft_revision_write' => false,
+                'content_page_publish_canary' => false,
+                'search_channel_queue_write' => false,
+                'search_channel_queue_approve' => false,
+                'indexnow_live_submit' => false,
+            ],
+        ];
+        $artifact = $this->writeArtifact($artifactDir, 'seo-agent-priority-queue-scheduler-preflight-'.$timestamp.'.json', $payload);
+
+        return $this->finish([
+            'schema_version' => self::SCHEMA_VERSION,
+            'ok' => $status === 'success',
+            'status' => $status,
+            'preflight_only' => true,
+            'issue' => $extra['issue'] ?? null,
+            'artifact' => $artifact,
+            'steps' => $steps,
+            'url_truth_preflight' => $extra['url_truth_preflight'] ?? [],
+            'indexnow_config_preflight' => $extra['indexnow_config_preflight'] ?? [],
+            'negative_guarantees' => $payload['negative_guarantees'],
+        ]);
     }
 
     /**
