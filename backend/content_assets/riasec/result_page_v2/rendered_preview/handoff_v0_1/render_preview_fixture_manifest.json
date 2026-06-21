@@ -1,0 +1,103 @@
+{
+  "schema_version": "fap.riasec.result_page_v2.render_preview_fixture_manifest.v0.1",
+  "task_id": "RIASEC-RESULT-RENDER-PREVIEW-HANDOFF-01",
+  "created_at": "2026-06-21T17:45:00Z",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "content_authority": "backend",
+  "cms_write_performed": false,
+  "runtime_change_performed": false,
+  "frontend_fallback_allowed": false,
+  "private_payload_exported": false,
+  "handoff_scope": {
+    "consumer_repo": "fap-web",
+    "handoff_type": "rendered_preview_qa_fixture_manifest",
+    "fixture_status": "staging_preview_only",
+    "frontend_changes_required": false
+  },
+  "source_artifacts": {
+    "route_matrix_rows": "backend/content_assets/riasec/result_page_v2/route_matrix/staging_qa_v0_1/route_matrix_rows.json",
+    "canonical_profiles": "backend/content_assets/riasec/result_page_v2/route_matrix/staging_qa_v0_1/canonical_profiles.json",
+    "golden_cases": "backend/content_assets/riasec/result_page_v2/route_matrix/staging_qa_v0_1/golden_cases.json",
+    "route_matrix_report": "backend/content_assets/riasec/result_page_v2/qa/route_matrix_golden_case_qa/v0_1/route_matrix_report.json",
+    "selector_ref_resolution_report": "backend/content_assets/riasec/result_page_v2/qa/route_matrix_golden_case_qa/v0_1/selector_ref_resolution_report.json",
+    "share_safety_selector_candidate": "backend/content_assets/riasec/result_page_v2/selector_ready_assets/share_safety_pilot_20260621T1555Z/assets.jsonl"
+  },
+  "fixture_cases": [
+    {
+      "fixture_id": "riasec_result_page_clear_primary_R_preview",
+      "surface": "result_page",
+      "route_id": "route.clear_primary.R.qa_v0_1",
+      "expected_state": "fail_closed_missing_selector_asset",
+      "expected_modules": [],
+      "redaction_profile": "private_result_snapshot_allowed_for_owner_only"
+    },
+    {
+      "fixture_id": "riasec_pdf_share_safe_boundary_preview",
+      "surface": "pdf",
+      "route_id": "route.share_safe.generic.qa_v0_1",
+      "expected_state": "render_share_safe_boundary_only",
+      "expected_selector_refs": [
+        "candidate.share_safety_registry.share_boundary_summary.final.v0_1"
+      ],
+      "redaction_profile": "pdf_public_safe_summary"
+    },
+    {
+      "fixture_id": "riasec_share_public_preview",
+      "surface": "share",
+      "route_id": "route.share_safe.generic.qa_v0_1",
+      "expected_state": "render_share_safe_boundary_only",
+      "expected_selector_refs": [
+        "candidate.share_safety_registry.share_boundary_summary.final.v0_1"
+      ],
+      "redaction_profile": "public_share_allowlist"
+    },
+    {
+      "fixture_id": "riasec_history_snapshot_preview",
+      "surface": "history",
+      "route_id": "route.top3.I_A_S.qa_v0_1",
+      "expected_state": "fail_closed_missing_selector_asset",
+      "expected_modules": [],
+      "redaction_profile": "history_no_raw_vector_public"
+    },
+    {
+      "fixture_id": "riasec_compare_cross_form_guard_preview",
+      "surface": "compare",
+      "route_id": "route.norm_unavailable.boundary.qa_v0_1",
+      "expected_state": "method_boundary_only",
+      "expected_modules": [],
+      "redaction_profile": "compare_no_raw_delta"
+    },
+    {
+      "fixture_id": "riasec_locked_free_redaction_preview",
+      "surface": "result_page",
+      "route_id": "route.near_tie.R_I.qa_v0_1",
+      "expected_state": "locked_free_redaction_visible",
+      "expected_modules": [],
+      "redaction_profile": "free_mode_no_deep_selector_payload"
+    },
+    {
+      "fixture_id": "riasec_low_quality_preview",
+      "surface": "result_page",
+      "route_id": "route.low_quality.boundary.qa_v0_1",
+      "expected_state": "boundary_only_fail_closed",
+      "expected_modules": [],
+      "redaction_profile": "low_quality_no_strong_profile"
+    },
+    {
+      "fixture_id": "riasec_route_miss_preview",
+      "surface": "result_page",
+      "route_id": "route.miss.qa_v0_1",
+      "expected_state": "omit_result_page_v2_modules",
+      "expected_modules": [],
+      "redaction_profile": "frontend_fallback_forbidden"
+    }
+  ],
+  "public_payload_allowlist": [
+    "title_zh",
+    "summary_zh",
+    "boundary_zh"
+  ]
+}

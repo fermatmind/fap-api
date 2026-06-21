@@ -1,0 +1,38 @@
+{
+  "schema_version": "fap.riasec.result_page_v2.render_preview_handoff_report.v0.1",
+  "task_id": "RIASEC-RESULT-RENDER-PREVIEW-HANDOFF-01",
+  "created_at": "2026-06-21T17:45:00Z",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "content_authority": "backend",
+  "cms_write_performed": false,
+  "runtime_change_performed": false,
+  "frontend_fallback_allowed": false,
+  "private_payload_exported": false,
+  "fixture_manifest": "backend/content_assets/riasec/result_page_v2/rendered_preview/handoff_v0_1/render_preview_fixture_manifest.json",
+  "expected_assertions": "backend/content_assets/riasec/result_page_v2/rendered_preview/handoff_v0_1/expected_assertions.json",
+  "fixture_case_count": 8,
+  "surface_count": 7,
+  "covered_surfaces": [
+    "result_page",
+    "pdf",
+    "share",
+    "history",
+    "compare",
+    "locked_free_redaction",
+    "low_quality",
+    "fallback"
+  ],
+  "handoff_status": "ready_for_fap_web_rendered_preview_qa",
+  "runtime_status": "no_go",
+  "production_status": "no_go",
+  "deferred_items": [
+    "fap-web rendered preview execution",
+    "runtime selector integration",
+    "CMS import",
+    "pilot allowlist",
+    "production import gate"
+  ]
+}

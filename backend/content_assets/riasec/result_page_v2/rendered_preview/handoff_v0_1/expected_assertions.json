@@ -1,0 +1,79 @@
+{
+  "schema_version": "fap.riasec.result_page_v2.render_preview_expected_assertions.v0.1",
+  "task_id": "RIASEC-RESULT-RENDER-PREVIEW-HANDOFF-01",
+  "created_at": "2026-06-21T17:45:00Z",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "content_authority": "backend",
+  "cms_write_performed": false,
+  "runtime_change_performed": false,
+  "frontend_fallback_allowed": false,
+  "private_payload_exported": false,
+  "global_assertions": [
+    "no_cms_write",
+    "no_runtime_wrapper_enablement",
+    "no_frontend_fallback_copy",
+    "no_production_gate_change",
+    "all_missing_route_specific_assets_fail_closed",
+    "share_surface_uses_public_payload_allowlist_only"
+  ],
+  "forbidden_public_fields": [
+    "attempt_id",
+    "user_id",
+    "private_url",
+    "private_path",
+    "raw_score",
+    "raw_scores",
+    "score_vector",
+    "dimension_vector",
+    "percentile",
+    "percentiles",
+    "selector_trace",
+    "selector_basis",
+    "editor_notes",
+    "qa_notes",
+    "internal_metadata",
+    "production_use_allowed",
+    "ready_for_runtime",
+    "ready_for_production"
+  ],
+  "surface_assertions": {
+    "result_page": [
+      "owner-only result state may render backend-authoritative shell",
+      "missing route-specific selector assets omit V2 modules",
+      "free/locked mode must not expose deep selector payload"
+    ],
+    "pdf": [
+      "PDF preview may render share-safe boundary candidate only",
+      "PDF preview must not contain raw scores or vectors",
+      "PDF preview must not infer missing route copy"
+    ],
+    "share": [
+      "share preview renders only public_payload allowlist fields",
+      "share preview omits private identifiers and selector traces",
+      "share preview must not contain deterministic identity or outcome claims"
+    ],
+    "history": [
+      "history preview is snapshot-bound",
+      "history preview does not expose raw vector fields publicly",
+      "history preview does not synthesize missing V2 modules"
+    ],
+    "compare": [
+      "compare preview blocks raw cross-form deltas",
+      "compare preview uses method-boundary-only state when norm status is unavailable",
+      "compare preview does not rank or percentile users"
+    ],
+    "low_quality": [
+      "low-quality preview hides strong profile modules",
+      "low-quality preview keeps user-not-blamed boundary",
+      "low-quality preview does not upsell 140Q as a repair path"
+    ],
+    "fallback": [
+      "route miss omits result_page_v2 modules",
+      "frontend fallback copy is forbidden",
+      "QA trace may exist only in private reports, not public payload"
+    ]
+  }
+}
