@@ -56554,7 +56554,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-render-preview-handoff-01",
     "base": "main",
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "train_scope": "riasec_result_page_v2_asset_agent",
     "title": "RIASEC-RESULT-RENDER-PREVIEW-HANDOFF-01: docs(riasec):交付 rendered preview fixtures",
     "depends_on": [
@@ -56582,6 +56582,10 @@
       "scope_validation": {
         "status": "pass",
         "evidence": "Changed files are limited to backend/content_assets/riasec/result_page_v2/rendered_preview and docs/codex state bookkeeping."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #2237 GitHub required checks passed on head 296f249a9463ae80fa133cfb860b364838c44873; mergeStateStatus CLEAN."
       }
     },
     "failure_reason": null,
@@ -56605,6 +56609,11 @@
         "at": "2026-06-22T01:43:45+08:00",
         "status": "github_checks_pending",
         "note": "Opened PR #2237 from head 259859f44611903584ce8990daf1f84ba260cfa4; waiting for required GitHub checks."
+      },
+      {
+        "at": "2026-06-22T01:50:06+08:00",
+        "status": "ready_to_merge",
+        "note": "PR #2237 GitHub checks passed on head 296f249a9463ae80fa133cfb860b364838c44873 and merge state is CLEAN; pre-merge scope validation passed."
       }
     ]
   },
