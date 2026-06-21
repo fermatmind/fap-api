@@ -2889,6 +2889,23 @@
                 ]
             }
         },
+        "/api/v0.5/career/jobs/{slug}/page-assembly-asset": {
+            "get": {
+                "operationId": "get_api_v0_5_career_jobs_slug_page_assembly_asset",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerPageAssemblyAssetPreviewController@show",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
         "/api/v0.5/career/jobs/{slug}/salary-asset": {
             "get": {
                 "operationId": "get_api_v0_5_career_jobs_slug_salary_asset",
