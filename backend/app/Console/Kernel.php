@@ -24,6 +24,7 @@ use App\Console\Commands\Big5PsychometricsReport;
 use App\Console\Commands\Big5TelemetrySummary;
 use App\Console\Commands\BigFiveExportProductionEquivalentCandidatePayloads;
 use App\Console\Commands\BigFiveImportInactiveCandidateRelease;
+use App\Console\Commands\BigFiveResultPageV2AssetAgentAuditCommand;
 use App\Console\Commands\CareerAlignActorsAuthorityOccupation;
 use App\Console\Commands\CareerAlignCareerAuthorityBatch;
 use App\Console\Commands\CareerAlignD8AuthorityCrosswalks;
@@ -171,24 +172,24 @@ use App\Console\Commands\QualityDailySummary;
 use App\Console\Commands\RefreshCareerAttributionDailyCommand;
 use App\Console\Commands\SdsPsychometricsReport;
 use App\Console\Commands\SeedScaleRegistry;
-use App\Console\Commands\SeoAgentCodexReviewRunnerCommand;
 use App\Console\Commands\SeoAgentAutoRollbackGuardCommand;
 use App\Console\Commands\SeoAgentCmsDraftPackageDryRunCommand;
 use App\Console\Commands\SeoAgentCmsDraftWriteCommand;
+use App\Console\Commands\SeoAgentCmsFaqGapScanCommand;
 use App\Console\Commands\SeoAgentCmsPublishAutoCanaryCommand;
 use App\Console\Commands\SeoAgentCmsPublishCanaryCommand;
+use App\Console\Commands\SeoAgentCmsTdkGapScanCommand;
+use App\Console\Commands\SeoAgentCodexReviewRunnerCommand;
 use App\Console\Commands\SeoAgentGscOpportunityAutoDraftCommand;
 use App\Console\Commands\SeoAgentGscPostPublishFeedbackCommand;
+use App\Console\Commands\SeoAgentOpportunityAggregateCommand;
 use App\Console\Commands\SeoAgentPostPublishIndexnowAutoCommand;
 use App\Console\Commands\SeoAgentPostPublishSearchSubmitCommand;
-use App\Console\Commands\SeoIntelSearchChannelQueueCommand;
-use App\Console\Commands\SeoAgentCmsFaqGapScanCommand;
-use App\Console\Commands\SeoAgentCmsTdkGapScanCommand;
-use App\Console\Commands\SeoAgentRuntimeSeoQaScanCommand;
-use App\Console\Commands\SeoAgentOpportunityAggregateCommand;
 use App\Console\Commands\SeoAgentRunCommand;
+use App\Console\Commands\SeoAgentRuntimeSeoQaScanCommand;
 use App\Console\Commands\SeoAgentWeeklyDraftWriteAutoCommand;
 use App\Console\Commands\SeoAgentWeeklyReadonlyRunnerCommand;
+use App\Console\Commands\SeoIntelSearchChannelQueueCommand;
 use App\Console\Commands\SeoIntelUrlTruthHandoffCommand;
 use App\Console\Commands\StorageControlPlaneSnapshot;
 use App\Console\Commands\StorageInventory;
@@ -257,6 +258,7 @@ class Kernel extends ConsoleKernel
         SdsPsychometricsReport::class,
         Big5AttemptPurge::class,
         Big5TelemetrySummary::class,
+        BigFiveResultPageV2AssetAgentAuditCommand::class,
         CommerceReconcile::class,
         CommerceCompensatePendingOrders::class,
         CommerceRepairPaidOrders::class,

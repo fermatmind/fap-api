@@ -3285,6 +3285,33 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_bigfive_v2_asset_agent_audit_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/BigFiveResultPageV2AssetAgentAuditCommand.php',
+            'backend/app/Console/Kernel.php',
+            'backend/app/Services/BigFive/ResultPageV2/AssetAgent/BigFiveResultPageV2AssetAgent.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\BigFiveResultPageV2AssetAgentAuditCommand;',
+            '-use App\\Console\\Commands\\SeoAgentCodexReviewRunnerCommand;',
+            '+use App\\Console\\Commands\\SeoAgentCmsFaqGapScanCommand;',
+            '+use App\\Console\\Commands\\SeoAgentCmsTdkGapScanCommand;',
+            '+use App\\Console\\Commands\\SeoAgentCodexReviewRunnerCommand;',
+            '+use App\\Console\\Commands\\SeoAgentOpportunityAggregateCommand;',
+            '-use App\\Console\\Commands\\SeoIntelSearchChannelQueueCommand;',
+            '-use App\\Console\\Commands\\SeoAgentCmsFaqGapScanCommand;',
+            '-use App\\Console\\Commands\\SeoAgentCmsTdkGapScanCommand;',
+            '-use App\\Console\\Commands\\SeoAgentRuntimeSeoQaScanCommand;',
+            '-use App\\Console\\Commands\\SeoAgentOpportunityAggregateCommand;',
+            '+use App\\Console\\Commands\\SeoAgentRuntimeSeoQaScanCommand;',
+            '+use App\\Console\\Commands\\SeoIntelSearchChannelQueueCommand;',
+            '+        BigFiveResultPageV2AssetAgentAuditCommand::class,',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
+    }
+
     public function test_runtime_freeze_classifier_ignores_bigfive_v2_en_parity_draft_catalog(): void
     {
         $changed = [
@@ -4266,6 +4293,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isBigFiveV2AssetAgentFile($file)) {
+                continue;
+            }
+
             if ($this->isBigFiveV2InactiveCandidateScaffoldFile($file)) {
                 continue;
             }
@@ -4558,6 +4589,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsSeoAgentGscPostPublishFeedbackOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentAutoRollbackGuardOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentGscOpportunityAutoDraftOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsBigFiveV2AssetAgentAuditOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsBigFiveV2InactiveCandidateScaffoldOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                 )
             ) {
@@ -6337,6 +6369,12 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ], true);
     }
 
+    private function isBigFiveV2AssetAgentFile(string $file): bool
+    {
+        return $file === 'backend/app/Console/Commands/BigFiveResultPageV2AssetAgentAuditCommand.php'
+            || preg_match('#^backend/app/Services/BigFive/ResultPageV2/AssetAgent/[A-Za-z0-9_]+\.php$#', $file) === 1;
+    }
+
     private function isBigFiveV2InactiveCandidateScaffoldFile(string $file): bool
     {
         return in_array($file, [
@@ -7297,6 +7335,43 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         }
 
         return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsBigFiveV2AssetAgentAuditOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        $allowed = [
+            'use App\\Console\\Commands\\BigFiveResultPageV2AssetAgentAuditCommand;',
+            '        BigFiveResultPageV2AssetAgentAuditCommand::class,',
+            'use App\\Console\\Commands\\SeoAgentCmsFaqGapScanCommand;',
+            'use App\\Console\\Commands\\SeoAgentCmsTdkGapScanCommand;',
+            'use App\\Console\\Commands\\SeoAgentCodexReviewRunnerCommand;',
+            'use App\\Console\\Commands\\SeoAgentOpportunityAggregateCommand;',
+            'use App\\Console\\Commands\\SeoAgentRuntimeSeoQaScanCommand;',
+            'use App\\Console\\Commands\\SeoIntelSearchChannelQueueCommand;',
+        ];
+        $hasAuditCommand = false;
+
+        foreach ($changedLines as $line) {
+            $normalized = str_starts_with($line, '+') || str_starts_with($line, '-')
+                ? substr($line, 1)
+                : $line;
+
+            if (! in_array($normalized, $allowed, true)) {
+                return false;
+            }
+
+            $hasAuditCommand = $hasAuditCommand
+                || str_contains($normalized, 'BigFiveResultPageV2AssetAgentAuditCommand');
+        }
+
+        return $hasAuditCommand;
     }
 
     /**
