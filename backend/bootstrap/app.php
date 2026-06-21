@@ -31,6 +31,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withCommands([
         __DIR__.'/../app/Console/Commands',
         \App\Console\Commands\FapResolvePack::class,
+        \App\Console\Commands\RiasecResultPageAssetAgentAuditCommand::class,
     ])
     ->withSchedule(function (Schedule $schedule): void {
         $schedule->command('storage:prune --execute --scope=reports_backups --strategy=strict')->dailyAt('03:10')->withoutOverlapping();

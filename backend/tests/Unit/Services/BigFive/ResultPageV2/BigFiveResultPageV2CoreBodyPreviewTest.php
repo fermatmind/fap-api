@@ -2733,6 +2733,31 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_riasec_result_page_asset_agent_harness(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/RiasecResultPageAssetAgentAuditCommand.php',
+            'backend/app/Console/Kernel.php',
+            'backend/app/Services/Riasec/AssetAgent/RiasecResultPageAssetAgent.php',
+            'backend/bootstrap/app.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\RiasecResultPageAssetAgentAuditCommand;',
+            '+        RiasecResultPageAssetAgentAuditCommand::class,',
+        ];
+        $bootstrapAppChangedLines = [
+            '+        \\App\\Console\\Commands\\RiasecResultPageAssetAgentAuditCommand::class,',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            changed: $changed,
+            repoRoot: '',
+            baseRef: '',
+            kernelChangedLines: $kernelChangedLines,
+            bootstrapAppChangedLines: $bootstrapAppChangedLines,
+        ));
+    }
+
     public function test_runtime_freeze_classifier_ignores_enneagram_forced_choice_question_pack_translation_changes(): void
     {
         $changed = [
@@ -4593,6 +4618,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isRiasecResultPageAssetAgentHarnessFile($file)) {
+                continue;
+            }
+
             if ($this->isEnneagramForcedChoiceQuestionPackTranslationFile($file)) {
                 continue;
             }
@@ -4701,6 +4730,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsBigFiveV2AssetAgentAuditOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsBigFiveV2InactiveCandidateScaffoldOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsBigFiveV2AssetAgentHarnessOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsRiasecResultPageAssetAgentHarnessOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsEnneagramResultPageAgentReadinessOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                 )
             ) {
@@ -4718,6 +4748,9 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsTestMetricsSchedulerOnly(
                         $bootstrapAppChangedLines ?? $this->changedLinesForFile($repoRoot, $baseRef, $file)
                     )
+                    || $this->kernelDiffIsRiasecResultPageAssetAgentHarnessOnly(
+                        $bootstrapAppChangedLines ?? $this->changedLinesForFile($repoRoot, $baseRef, $file)
+                    )
                 )
             ) {
                 continue;
@@ -4727,7 +4760,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 $file === 'backend/bootstrap/app.php'
                 && $repoRoot === ''
                 && $baseRef === ''
-                && $this->kernelDiffIsTestMetricsSchedulerOnly($bootstrapAppChangedLines ?? [])
+                && (
+                    $this->kernelDiffIsTestMetricsSchedulerOnly($bootstrapAppChangedLines ?? [])
+                    || $this->kernelDiffIsRiasecResultPageAssetAgentHarnessOnly($bootstrapAppChangedLines ?? [])
+                )
             ) {
                 continue;
             }
@@ -5878,6 +5914,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isRiasecQuestionPackTranslationFile(string $file): bool
     {
         return preg_match('#^backend/content_packs/RIASEC/v1-(?:standard-60|enhanced-140)/compiled/(?:questions\\.compiled|manifest)\\.json$#', $file) === 1;
+    }
+
+    private function isRiasecResultPageAssetAgentHarnessFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/RiasecResultPageAssetAgentAuditCommand.php',
+            'backend/app/Services/Riasec/AssetAgent/RiasecResultPageAssetAgent.php',
+        ], true);
     }
 
     private function isEnneagramForcedChoiceQuestionPackTranslationFile(string $file): bool
@@ -7588,6 +7632,34 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         );
 
         return $changedLines !== [] && array_values($normalized) === $allowed;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsRiasecResultPageAssetAgentHarnessOnly(array $changedLines): bool
+    {
+        $allowed = [
+            'use App\\Console\\Commands\\RiasecResultPageAssetAgentAuditCommand;',
+            '        RiasecResultPageAssetAgentAuditCommand::class,',
+            '        \\App\\Console\\Commands\\RiasecResultPageAssetAgentAuditCommand::class,',
+        ];
+        $normalized = array_map(
+            static fn (string $line): string => str_starts_with($line, '+') ? substr($line, 1) : $line,
+            $changedLines,
+        );
+        $hasAuditCommand = false;
+
+        foreach ($normalized as $line) {
+            if (! in_array($line, $allowed, true)) {
+                return false;
+            }
+
+            $hasAuditCommand = $hasAuditCommand
+                || str_contains($line, 'RiasecResultPageAssetAgentAuditCommand');
+        }
+
+        return $changedLines !== [] && $hasAuditCommand;
     }
 
     /**
