@@ -1246,6 +1246,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_seo_agent_auto_approval_policy_file(): void
+    {
+        $changed = [
+            'backend/app/Services/SeoAgent/AutoApprovalPolicy.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_seo_intel_search_channel_queue_runtime_files(): void
     {
         $changed = [
@@ -3800,6 +3809,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSeoAgentAutoApprovalPolicyFile($file)) {
+                continue;
+            }
+
             if ($this->isSeoIntelSearchChannelQueueRuntimeFile($file)) {
                 continue;
             }
@@ -5116,6 +5129,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/SeoAgentGscOpportunityAutoDraftCommand.php',
             'backend/app/Console/Commands/SeoAgentCmsDraftPackageDryRunCommand.php',
+        ], true);
+    }
+
+    private function isSeoAgentAutoApprovalPolicyFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Services/SeoAgent/AutoApprovalPolicy.php',
         ], true);
     }
 
