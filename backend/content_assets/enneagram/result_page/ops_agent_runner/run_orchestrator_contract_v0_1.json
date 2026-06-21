@@ -1,0 +1,51 @@
+{
+  "schema_version": "fap.enneagram.result_page.ops_agent_runner.v0.1",
+  "control_plane_schema_version": "fap.enneagram.result_page.ops_agent_control_plane.v0.1",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "queue_backend": "file_backed_manifest",
+  "default_base_branch": "main",
+  "branch_prefix": "codex/",
+  "worktree_root_template": "<tmp>/fap-api-{branch_slug}",
+  "allowed_modes": [
+    "auto-to-pr",
+    "auto-to-staging",
+    "auto-to-report"
+  ],
+  "run_states": [
+    "planned",
+    "branch_prepared",
+    "local_validation",
+    "scope_validation",
+    "pr_created",
+    "checks_polling",
+    "ready_to_merge",
+    "merged",
+    "post_merge_revalidated"
+  ],
+  "failure_classes": [
+    "current_pr_scope",
+    "external_ci_flaky",
+    "external_dependency",
+    "merge_policy_block",
+    "manual_review_required"
+  ],
+  "external_blocker_policy": {
+    "continue_when_required_checks_green": true,
+    "continue_when_scope_validation_green": true,
+    "record_sidecar_issue_payload": true,
+    "sidecar_issue_dry_run_by_default": true
+  },
+  "production_guard": {
+    "agent_may_execute_production_rollout": false,
+    "production_requires_manual_gate": true
+  },
+  "negative_guarantees": {
+    "bulk_content_generation_happened": false,
+    "candidate_import_happened": false,
+    "production_activation_happened": false,
+    "runtime_switch_happened": false,
+    "production_write_happened": false,
+    "frontend_change_happened": false
+  }
+}

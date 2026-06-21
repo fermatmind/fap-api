@@ -115,6 +115,7 @@ use App\Console\Commands\EnneagramExportProductionEquivalentCandidatePayloads;
 use App\Console\Commands\EnneagramImportInactiveCandidateRelease;
 use App\Console\Commands\EnneagramResultPageAgentReadinessCommand;
 use App\Console\Commands\EnneagramResultPageOpsControlPlaneCommand;
+use App\Console\Commands\EnneagramResultPageOpsRunnerCommand;
 use App\Console\Commands\EnneagramRollbackInactiveCandidateRelease;
 use App\Console\Commands\EnneagramRollbackRegistryRelease;
 use App\Console\Commands\Eq60PsychometricsReport;
@@ -247,6 +248,7 @@ class Kernel extends ConsoleKernel
         EnneagramImportInactiveCandidateRelease::class,
         EnneagramResultPageAgentReadinessCommand::class,
         EnneagramResultPageOpsControlPlaneCommand::class,
+        EnneagramResultPageOpsRunnerCommand::class,
         EnneagramRollbackInactiveCandidateRelease::class,
         EnneagramRollbackRegistryRelease::class,
         BigFiveExportProductionEquivalentCandidatePayloads::class,
