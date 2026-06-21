@@ -55699,7 +55699,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-v2-candidate-batch-001",
     "base": "main",
-    "status": "local_checks_passed",
+    "status": "github_checks_pending",
     "train_scope": "big5_result_page_v2_asset_agent",
     "title": "B5-RESULT-CANDIDATE-BATCH-001: Stage first Big Five V2 asset-agent candidate batch",
     "depends_on": [
@@ -55739,7 +55739,7 @@
     },
     "failure_reason": null,
     "commit_sha": "0d5bd2f8aa6fe2e274eacb4447a89627b8ba8972",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2225",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -55753,6 +55753,11 @@
         "at": "2026-06-21T23:56:00+08:00",
         "status": "local_checks_passed",
         "note": "Generated candidate_batch_001, added review manifest, staged reviewed candidates into staging_candidate_imports/candidate_batch_001, and passed JSON/JSONL, YAML/state, focused Big Five V2 tests, strict audit, and scope validation."
+      },
+      {
+        "at": "2026-06-21T23:59:00+08:00",
+        "status": "github_checks_pending",
+        "note": "Opened PR #2225 from branch codex/big5-v2-candidate-batch-001; waiting for required GitHub checks."
       }
     ]
   },
