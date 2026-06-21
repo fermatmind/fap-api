@@ -1,0 +1,77 @@
+{
+  "version": "seo-agent-cms-publish-auto-canary.v1",
+  "task": "SEO-AGENT-CMS-PUBLISH-AUTO-CANARY3-01",
+  "repo": "fap-api",
+  "command": "php artisan seo-agent:cms-publish-auto-canary",
+  "input_schemas": [
+    "seo-agent-cms-draft-package-dry-run.v1",
+    "seo-agent-controlled-cms-draft-write.v1",
+    "seo-agent-auto-approval-policy.v1"
+  ],
+  "output_schema": "seo-agent-cms-publish-auto-canary.v1",
+  "default_mode": "dry_run_plan",
+  "delegates_to": "php artisan seo-agent:cms-publish-canary",
+  "execute_requires": [
+    "--execute",
+    "--limit=1..3",
+    "--auto-approve-low-risk",
+    "package sha256 must match draft-write evidence"
+  ],
+  "max_rows_per_execution": 3,
+  "supported_targets_v1": [
+    "content_page"
+  ],
+  "unsupported_targets_v1": {
+    "article": "blocked in L5-A publish automation; article drafts may be written but not auto-published"
+  },
+  "low_risk_auto_publish_mode": {
+    "allowed_source_families": [
+      "cms_tdk_gap",
+      "cms_faq_gap"
+    ],
+    "allowed_severities": [
+      "p1",
+      "p2"
+    ],
+    "allowed_target_fields": [
+      "seo_title",
+      "seo_description",
+      "canonical_path",
+      "is_indexable",
+      "faq_items",
+      "schema_enabled"
+    ],
+    "claim_gate_required": true,
+    "forbidden_claim_scan_required": true,
+    "rollback_evidence_required": true
+  },
+  "post_publish_boundaries": {
+    "search_channel_enqueue": false,
+    "search_channel_submit": false,
+    "indexing_request": false,
+    "sitemap_submission": false,
+    "scheduler_activation": false,
+    "queue_worker_started": false,
+    "external_model_api_call": false,
+    "frontend_code_mutation": false
+  },
+  "evidence": {
+    "records_package_sha256": true,
+    "records_draft_write_evidence_sha256": true,
+    "records_selected_subject_refs": true,
+    "records_delegated_publish_results": true,
+    "forbidden_fields_absent": [
+      "raw_url",
+      "raw_query",
+      "credential_path",
+      "client_email",
+      "private_key",
+      "Bearer token",
+      "cookie",
+      "content_md",
+      "content_html",
+      "cms_draft_body"
+    ]
+  },
+  "next_step": "Post-publish IndexNow automation remains a separate PR."
+}
