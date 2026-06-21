@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-22T07:24:00+08:00",
+  "updated_at": "2026-06-22T07:31:00+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -55942,7 +55942,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-v2-nightly-audit-scheduler",
     "base": "main",
-    "status": "local_validated",
+    "status": "pr_open",
     "train_scope": "big5_result_page_v2_asset_agent_automation",
     "title": "B5-RESULT-AUTO-NIGHTLY-SCHEDULER-01: Schedule Big Five V2 nightly audit",
     "depends_on": [
@@ -55976,12 +55976,12 @@
       },
       "github": {
         "status": "pending",
-        "evidence": null
+        "evidence": "PR #2239 opened; waiting for GitHub checks."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "1a2018316f1a4e2a2743fc2d012a3c501e6d11bf",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2239",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -55995,6 +55995,11 @@
         "at": "2026-06-22T07:24:00+08:00",
         "status": "local_validated",
         "note": "Local validation and scope validation passed for nightly strict audit scheduler PR. Scheduler registration is in bootstrap/app.php because schedule:list uses the Laravel bootstrap schedule in this repo."
+      },
+      {
+        "at": "2026-06-22T07:31:00+08:00",
+        "status": "pr_open",
+        "note": "Opened PR #2239 after local validation and scope validation passed; waiting for required GitHub checks."
       }
     ]
   },
