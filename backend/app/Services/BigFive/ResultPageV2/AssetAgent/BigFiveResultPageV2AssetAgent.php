@@ -44,6 +44,8 @@ final class BigFiveResultPageV2AssetAgent
 
     private const SELECTOR_ASSET_RELATIVE_PATH = 'selector_ready_assets/v0_3_p0_full/assets.jsonl';
 
+    private const CONTENT_ASSET_SCHEMA_RELATIVE_PATH = 'content_assets/big5/result_page_v2/governance/content_asset_factory_spec/big5_content_asset_schema_v0_1.json';
+
     private const FORBIDDEN_PUBLIC_FIELDS = [
         'attempt_id',
         'private_url',
@@ -152,6 +154,87 @@ final class BigFiveResultPageV2AssetAgent
                 'ready_for_production' => false,
             ],
             'negative_guarantees' => $this->negativeGuarantees(),
+        ];
+    }
+
+    /**
+     * @param  array{
+     *   run_id?:string,
+     *   artifact_dir?:string,
+     *   source_ledger_dir?:string
+     * }  $options
+     * @return array<string,mixed>
+     */
+    public function generateCandidates(array $options = []): array
+    {
+        $runId = $this->sanitizeRunId((string) ($options['run_id'] ?? ''));
+        $artifactDir = $this->artifactDir((string) ($options['artifact_dir'] ?? ''), $runId);
+        $sourceLedgerDir = $this->optionalPath(
+            (string) ($options['source_ledger_dir'] ?? ''),
+            base_path(self::SOURCE_LEDGER_RELATIVE_PATH)
+        );
+
+        $this->ensureDirectory($artifactDir);
+
+        $sourceLedger = $this->sourceLedgerSummary($sourceLedgerDir);
+        $selectorCandidates = $this->draftSelectorAssetCandidates();
+        $contentCandidates = $this->draftContentAssetCandidates();
+        $validation = $this->candidateValidationReport($selectorCandidates, $contentCandidates);
+        $leakScan = $this->candidateLeakScan($selectorCandidates, $contentCandidates);
+
+        $ok = (bool) ($sourceLedger['valid'] ?? false)
+            && ((int) ($validation['error_count'] ?? 0)) === 0
+            && ((int) ($leakScan['hit_count'] ?? 0)) === 0;
+
+        $summary = [
+            'schema_version' => self::SCHEMA_VERSION,
+            'task' => 'candidate_generator',
+            'runtime_use' => 'staging_only',
+            'production_use_allowed' => false,
+            'ready_for_pilot' => false,
+            'ready_for_runtime' => false,
+            'ready_for_production' => false,
+            'run_id' => $runId,
+            'source_ledger' => [
+                'valid' => (bool) ($sourceLedger['valid'] ?? false),
+                'primary_ledger_path' => $sourceLedger['primary_ledger_path'] ?? null,
+                'allowed_source_labels' => $sourceLedger['allowed_source_labels'] ?? [],
+                'bfi_2_policy_valid' => (bool) ($sourceLedger['bfi_2_policy_valid'] ?? false),
+                'errors' => $sourceLedger['errors'] ?? [],
+            ],
+            'candidate_counts' => [
+                'selector_asset' => count($selectorCandidates),
+                'content_asset' => count($contentCandidates),
+            ],
+            'validation' => $validation,
+            'leak_scan' => $leakScan,
+            'negative_guarantees' => $this->candidateNegativeGuarantees(),
+        ];
+
+        $artifacts = [
+            'selector_asset_candidates.jsonl' => $this->writeJsonl($artifactDir.'/selector_asset_candidates.jsonl', $selectorCandidates),
+            'content_asset_candidates.jsonl' => $this->writeJsonl($artifactDir.'/content_asset_candidates.jsonl', $contentCandidates),
+            'candidate_generation_summary.json' => $this->writeJson($artifactDir.'/candidate_generation_summary.json', $summary),
+        ];
+
+        return [
+            'schema_version' => self::SCHEMA_VERSION,
+            'ok' => $ok,
+            'status' => $ok ? 'success' : 'blocked',
+            'run_id' => $runId,
+            'artifact_dir' => $artifactDir,
+            'artifacts' => $artifacts,
+            'summary' => [
+                'selector_candidate_count' => count($selectorCandidates),
+                'content_candidate_count' => count($contentCandidates),
+                'validation_error_count' => (int) ($validation['error_count'] ?? 0),
+                'leak_hit_count' => (int) ($leakScan['hit_count'] ?? 0),
+                'source_ledger_valid' => (bool) ($sourceLedger['valid'] ?? false),
+                'ready_for_pilot' => false,
+                'ready_for_runtime' => false,
+                'ready_for_production' => false,
+            ],
+            'negative_guarantees' => $this->candidateNegativeGuarantees(),
         ];
     }
 
@@ -797,6 +880,268 @@ final class BigFiveResultPageV2AssetAgent
     /**
      * @return list<array<string,mixed>>
      */
+    private function draftSelectorAssetCandidates(): array
+    {
+        return [
+            [
+                'version' => BigFiveResultPageV2SelectorAssetContract::SCHEMA_VERSION,
+                'asset_key' => 'candidate_m4_boundary_method_non_runtime_v0_1',
+                'registry_key' => 'boundary_registry',
+                'module_key' => 'module_00_trust_bar',
+                'block_key' => 'module_00_trust_bar.candidate_m4_boundary_method_non_runtime_v0_1',
+                'block_kind' => 'trust_bar',
+                'slot_key' => 'trust_bar.boundary_core',
+                'trigger' => [
+                    'reading_mode' => ['quick', 'standard'],
+                    'scenario' => ['global'],
+                    'interpretation_scopes' => ['all'],
+                    'source_label' => 'citation_only',
+                ],
+                'priority' => 90,
+                'mutual_exclusion_group' => 'candidate_m4.boundary_method',
+                'can_stack_with' => ['method_registry'],
+                'reading_modes' => ['quick', 'standard'],
+                'scenario' => 'global',
+                'scope' => 'all',
+                'required_evidence_level' => 'descriptive',
+                'evidence_level' => 'descriptive',
+                'safety_level' => 'boundary',
+                'shareable' => false,
+                'shareable_policy' => 'not_shareable',
+                'fallback_policy' => 'backend_required',
+                'content_source' => 'gpt_selector_asset_batch',
+                'provenance' => [
+                    'runtime_use' => 'staging_only',
+                    'production_use_allowed' => false,
+                    'source_id' => 'internal_big5_v2_formal_doc',
+                    'source_label' => 'citation_only',
+                    'candidate_stage' => 'm4_generate_candidates',
+                ],
+                'replacement_policy' => [
+                    'runtime_use' => 'staging_only',
+                    'production_use_allowed' => false,
+                    'requires_human_review' => true,
+                    'requires_staging_import_gate' => true,
+                ],
+                'forbidden_public_fields' => [],
+                'review_status' => 'draft',
+                'public_payload' => [
+                    'candidate_ref' => 'candidate_content_m4_method_boundary_v0_1',
+                    'payload_kind' => 'selector_asset_candidate',
+                    'runtime_use' => 'staging_only',
+                    'production_use_allowed' => false,
+                    'ready_for_pilot' => false,
+                ],
+                'internal_metadata' => [],
+            ],
+        ];
+    }
+
+    /**
+     * @return list<array<string,mixed>>
+     */
+    private function draftContentAssetCandidates(): array
+    {
+        return [
+            [
+                'asset_id' => 'candidate_content_m4_method_boundary_v0_1',
+                'asset_key' => 'candidate_m4_method_boundary_contract_scaffold',
+                'asset_version' => 'v0_1',
+                'asset_type' => 'method_boundary',
+                'asset_layer' => 'L0_governance',
+                'module_key' => 'module_10_method_privacy',
+                'section_key' => 'method_privacy',
+                'slot_key' => 'method_boundary.method_norm_privacy',
+                'copy_role' => 'schema_candidate',
+                'reading_mode' => ['standard'],
+                'title_zh' => null,
+                'body_zh' => null,
+                'short_body_zh' => null,
+                'cta_zh' => null,
+                'applies_to' => [
+                    'scale_code' => ['BIG5_OCEAN'],
+                    'source_label' => ['citation_only'],
+                    'candidate_stage' => ['m4_generate_candidates'],
+                ],
+                'avoid_when' => [
+                    [
+                        'field' => 'qa_status',
+                        'operator' => 'not_equals',
+                        'value' => 'draft',
+                        'action' => 'manual_review_required',
+                    ],
+                ],
+                'can_combine_with' => ['boundary_registry'],
+                'cannot_combine_with' => ['runtime_use', 'production_use'],
+                'dedupe_group' => 'candidate_m4.method_boundary',
+                'selection_priority' => 0,
+                'selection_specificity' => 0,
+                'fallback_allowed' => false,
+                'render_surface' => [],
+                'body_quality' => [
+                    'body_chars' => 0,
+                    'sentence_count' => 0,
+                    'has_trait_layer' => false,
+                    'has_score_band_layer' => false,
+                    'has_coupling_layer' => false,
+                    'has_facet_layer' => false,
+                    'has_real_world_layer' => false,
+                    'has_cost_layer' => false,
+                    'has_strength_layer' => false,
+                    'has_action_layer' => false,
+                    'has_boundary_layer' => true,
+                    'has_editorial_leakage' => false,
+                    'template_risk' => 'candidate_scaffold_only',
+                    'rendered_preview_required' => true,
+                ],
+                'safety_tags' => [
+                    'candidate_scaffold',
+                    'not_user_visible',
+                    'staging_only',
+                    'source_trace_required',
+                ],
+                'qa_status' => 'draft',
+                'ready_for_pilot' => false,
+                'runtime_use' => 'staging_only',
+                'production_use_allowed' => false,
+                'source_trace' => [
+                    'source_pack' => 'BIG5_RESULT_PAGE_V2_SOURCE_LEDGER',
+                    'source_role' => 'citation_only',
+                    'derived_from' => [
+                        'internal_big5_v2_formal_doc',
+                        'source_ledger.json',
+                    ],
+                    'forbidden_copy_sources_excluded' => true,
+                    'bfi_2_copy_used' => false,
+                ],
+                'repair_log_refs' => [],
+            ],
+        ];
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $selectorCandidates
+     * @param  list<array<string,mixed>>  $contentCandidates
+     * @return array<string,mixed>
+     */
+    private function candidateValidationReport(array $selectorCandidates, array $contentCandidates): array
+    {
+        $errors = [];
+        foreach ($this->selectorValidator->validateAssetSet($selectorCandidates) as $error) {
+            $errors[] = 'selector_asset: '.$error;
+        }
+        foreach ($contentCandidates as $index => $candidate) {
+            foreach ($this->validateContentAssetCandidate($candidate) as $error) {
+                $errors[] = "content_asset {$index}: {$error}";
+            }
+        }
+
+        return [
+            'status' => $errors === [] ? 'pass' : 'blocked',
+            'selector_asset_candidate_count' => count($selectorCandidates),
+            'content_asset_candidate_count' => count($contentCandidates),
+            'error_count' => count($errors),
+            'errors' => $errors,
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $candidate
+     * @return list<string>
+     */
+    private function validateContentAssetCandidate(array $candidate): array
+    {
+        $schema = $this->contentAssetSchema();
+        $errors = [];
+
+        foreach ((array) ($schema['required_fields'] ?? []) as $field) {
+            if (is_string($field) && ! array_key_exists($field, $candidate)) {
+                $errors[] = "content asset missing {$field}";
+            }
+        }
+
+        foreach ([
+            'asset_type' => (array) ($schema['asset_type_enum'] ?? []),
+            'asset_layer' => (array) ($schema['asset_layer_enum'] ?? []),
+            'qa_status' => (array) data_get($schema, 'field_definitions.qa_status.allowed', []),
+            'runtime_use' => (array) data_get($schema, 'field_definitions.runtime_use.allowed', []),
+        ] as $field => $allowed) {
+            if (! in_array((string) ($candidate[$field] ?? ''), $allowed, true)) {
+                $errors[] = "{$field} is invalid: ".(string) ($candidate[$field] ?? '');
+            }
+        }
+
+        foreach ((array) ($candidate['reading_mode'] ?? []) as $mode) {
+            if (! in_array($mode, (array) data_get($schema, 'field_definitions.reading_mode.allowed', []), true)) {
+                $errors[] = "reading_mode is invalid: {$mode}";
+            }
+        }
+
+        if (($candidate['ready_for_pilot'] ?? null) !== false) {
+            $errors[] = 'ready_for_pilot must be false';
+        }
+        if (($candidate['runtime_use'] ?? null) !== 'staging_only') {
+            $errors[] = 'runtime_use must be staging_only';
+        }
+        if (($candidate['production_use_allowed'] ?? null) !== false) {
+            $errors[] = 'production_use_allowed must be false';
+        }
+        if (! is_array($candidate['source_trace'] ?? null)) {
+            $errors[] = 'source_trace must be an object';
+        }
+        if (data_get($candidate, 'source_trace.bfi_2_copy_used') !== false) {
+            $errors[] = 'source_trace.bfi_2_copy_used must be false';
+        }
+
+        return $errors;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function contentAssetSchema(): array
+    {
+        $path = base_path(self::CONTENT_ASSET_SCHEMA_RELATIVE_PATH);
+        $decoded = json_decode((string) file_get_contents($path), true);
+        if (! is_array($decoded)) {
+            throw new RuntimeException('Content asset schema is not valid JSON.');
+        }
+
+        return $decoded;
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $selectorCandidates
+     * @param  list<array<string,mixed>>  $contentCandidates
+     * @return array<string,mixed>
+     */
+    private function candidateLeakScan(array $selectorCandidates, array $contentCandidates): array
+    {
+        $hits = [];
+        foreach ($selectorCandidates as $index => $candidate) {
+            $hits = array_merge(
+                $hits,
+                $this->scanPayload((array) ($candidate['public_payload'] ?? []), "selector_asset_candidate:{$index}", 'selector_public_payload')
+            );
+        }
+        foreach ($contentCandidates as $index => $candidate) {
+            $publicFields = array_intersect_key($candidate, array_flip(['title_zh', 'body_zh', 'short_body_zh', 'cta_zh']));
+            $hits = array_merge(
+                $hits,
+                $this->scanPayload($publicFields, "content_asset_candidate:{$index}", 'content_public_fields')
+            );
+        }
+
+        return [
+            'status' => $hits === [] ? 'pass' : 'blocked',
+            'hit_count' => count($hits),
+            'hits' => $hits,
+        ];
+    }
+
+    /**
+     * @return list<array<string,mixed>>
+     */
     private function collectSelectorAssets(string $contentAssetRoot): array
     {
         $path = rtrim($contentAssetRoot, '/').'/'.self::SELECTOR_ASSET_RELATIVE_PATH;
@@ -923,6 +1268,28 @@ final class BigFiveResultPageV2AssetAgent
     }
 
     /**
+     * @param  list<array<string,mixed>>  $rows
+     * @return array<string,mixed>
+     */
+    private function writeJsonl(string $path, array $rows): array
+    {
+        $lines = [];
+        foreach ($rows as $row) {
+            $encoded = json_encode($row, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+            if (! is_string($encoded)) {
+                throw new RuntimeException('Unable to encode JSONL artifact: '.$this->redactPath($path));
+            }
+            $lines[] = $encoded;
+        }
+
+        if (file_put_contents($path, implode(PHP_EOL, $lines).PHP_EOL) === false) {
+            throw new RuntimeException('Unable to write artifact: '.$this->redactPath($path));
+        }
+
+        return $this->fileRef($path);
+    }
+
+    /**
      * @return array<string,mixed>
      */
     private function writeText(string $path, string $text): array
@@ -983,6 +1350,24 @@ final class BigFiveResultPageV2AssetAgent
             'cms_write' => false,
             'frontend_copy_write' => false,
             'selector_asset_generation' => false,
+            'runtime_flag_change' => false,
+            'release_snapshot_change' => false,
+            'production_import_gate_change' => false,
+            'rollout_gate_change' => false,
+        ];
+    }
+
+    /**
+     * @return array<string,bool>
+     */
+    private function candidateNegativeGuarantees(): array
+    {
+        return [
+            'database_write' => false,
+            'cms_write' => false,
+            'content_assets_write' => false,
+            'frontend_copy_write' => false,
+            'final_result_payload_generation' => false,
             'runtime_flag_change' => false,
             'release_snapshot_change' => false,
             'production_import_gate_change' => false,

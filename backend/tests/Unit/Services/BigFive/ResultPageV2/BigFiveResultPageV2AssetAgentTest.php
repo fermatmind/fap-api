@@ -192,6 +192,82 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
         }
     }
 
+    public function test_generate_candidates_writes_staging_only_selector_and_content_asset_drafts(): void
+    {
+        $artifactRoot = $this->tempDir('big5-v2-agent-candidates');
+
+        try {
+            $this->artisan('big5:result-page-v2-agent', [
+                'action' => 'generate-candidates',
+                '--run-id' => 'candidate-run',
+                '--artifact-dir' => $artifactRoot,
+                '--json' => true,
+            ])->assertExitCode(0);
+
+            $runDir = $artifactRoot.'/candidate-run';
+            foreach ([
+                'selector_asset_candidates.jsonl',
+                'content_asset_candidates.jsonl',
+                'candidate_generation_summary.json',
+            ] as $filename) {
+                $this->assertFileExists($runDir.'/'.$filename);
+            }
+
+            $selectorCandidates = $this->readJsonl($runDir.'/selector_asset_candidates.jsonl');
+            $contentCandidates = $this->readJsonl($runDir.'/content_asset_candidates.jsonl');
+            $summary = $this->readJson($runDir.'/candidate_generation_summary.json');
+
+            $this->assertCount(1, $selectorCandidates);
+            $this->assertCount(1, $contentCandidates);
+            $this->assertSame('staging_only', $summary['runtime_use'] ?? null);
+            $this->assertFalse((bool) ($summary['production_use_allowed'] ?? true));
+            $this->assertFalse((bool) ($summary['ready_for_pilot'] ?? true));
+            $this->assertFalse((bool) ($summary['ready_for_runtime'] ?? true));
+            $this->assertFalse((bool) ($summary['ready_for_production'] ?? true));
+            $this->assertSame('pass', data_get($summary, 'validation.status'));
+            $this->assertSame(0, data_get($summary, 'validation.error_count'));
+            $this->assertSame('pass', data_get($summary, 'leak_scan.status'));
+            $this->assertSame(0, data_get($summary, 'leak_scan.hit_count'));
+            $this->assertTrue((bool) data_get($summary, 'source_ledger.valid'));
+            $this->assertTrue((bool) data_get($summary, 'source_ledger.bfi_2_policy_valid'));
+
+            $selector = $selectorCandidates[0];
+            $this->assertSame('draft', $selector['review_status'] ?? null);
+            $this->assertFalse((bool) ($selector['shareable'] ?? true));
+            $this->assertSame('staging_only', data_get($selector, 'public_payload.runtime_use'));
+            $this->assertFalse((bool) data_get($selector, 'public_payload.production_use_allowed', true));
+
+            $content = $contentCandidates[0];
+            $this->assertSame('draft', $content['qa_status'] ?? null);
+            $this->assertSame('staging_only', $content['runtime_use'] ?? null);
+            $this->assertFalse((bool) ($content['production_use_allowed'] ?? true));
+            $this->assertFalse((bool) ($content['ready_for_pilot'] ?? true));
+            $this->assertFalse((bool) data_get($content, 'source_trace.bfi_2_copy_used', true));
+
+            $allArtifacts = implode("\n", array_map(
+                static fn (string $filename): string => (string) file_get_contents($runDir.'/'.$filename),
+                [
+                    'selector_asset_candidates.jsonl',
+                    'content_asset_candidates.jsonl',
+                    'candidate_generation_summary.json',
+                ]
+            ));
+            foreach ([
+                'private_url',
+                'attempt_id',
+                'raw_score',
+                'percentile',
+                'fixed_type',
+                'user_confirmed_type',
+                'type_code',
+            ] as $forbiddenToken) {
+                $this->assertStringNotContainsString($forbiddenToken, $allArtifacts);
+            }
+        } finally {
+            $this->deleteDirectory($artifactRoot);
+        }
+    }
+
     public function test_strict_mode_rejects_public_payload_and_shareable_score_leaks(): void
     {
         $root = $this->tempDir('big5-v2-agent-leak');
@@ -272,6 +348,21 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
         $this->assertIsArray($decoded);
 
         return $decoded;
+    }
+
+    /**
+     * @return list<array<string,mixed>>
+     */
+    private function readJsonl(string $path): array
+    {
+        $rows = [];
+        foreach (file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) ?: [] as $line) {
+            $decoded = json_decode($line, true);
+            $this->assertIsArray($decoded);
+            $rows[] = $decoded;
+        }
+
+        return $rows;
     }
 
     private function deleteDirectory(string $path): void
