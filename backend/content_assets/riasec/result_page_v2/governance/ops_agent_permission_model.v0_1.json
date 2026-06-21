@@ -1,0 +1,98 @@
+{
+  "schema": "fap.riasec.result_page_v2.ops_agent_permission_model.v0.1",
+  "status": "staging_governance",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "cms_write_allowed": false,
+  "production_rollout_allowed": false,
+  "production_gate_auto_enable_allowed": false,
+  "permission_tiers": [
+    {
+      "id": "auto_to_pr",
+      "allowed_actions": [
+        "read_pr_train_manifest",
+        "read_pr_train_state",
+        "verify_dependency_merged_to_main",
+        "create_scoped_branch_from_latest_main",
+        "edit_manifest_allowed_paths",
+        "run_manifest_local_checks",
+        "run_scope_validation",
+        "commit_push_open_pr",
+        "poll_github_checks",
+        "inspect_failed_checks"
+      ],
+      "denied_actions": [
+        "modify_files_outside_current_scope",
+        "combine_adjacent_pr_scopes",
+        "skip_unmerged_dependency",
+        "bypass_required_github_checks",
+        "merge_when_policy_blocks"
+      ]
+    },
+    {
+      "id": "auto_to_staging",
+      "allowed_actions": [
+        "run_staging_dry_run",
+        "run_staging_preview",
+        "run_staging_smoke",
+        "write_staging_artifacts",
+        "write_staging_reports",
+        "run_checksum_inventory_leak_scan"
+      ],
+      "denied_actions": [
+        "write_production_cms",
+        "import_production_content",
+        "mutate_production_environment",
+        "mark_assets_production_ready",
+        "enable_runtime_without_runtime_wrapper_pr"
+      ]
+    },
+    {
+      "id": "auto_to_report",
+      "allowed_actions": [
+        "write_go_no_go_report",
+        "write_sidecar_blocker_record",
+        "classify_failure_source",
+        "recommend_next_step"
+      ],
+      "denied_actions": [
+        "treat_report_as_production_approval",
+        "suppress_current_pr_failure",
+        "hide_required_check_failure",
+        "convert_sidecar_to_production_action"
+      ]
+    }
+  ],
+  "always_denied_capabilities": [
+    "production_rollout_execution",
+    "production_cms_write",
+    "production_import",
+    "production_gate_enablement",
+    "production_environment_flag_mutation",
+    "frontend_authored_result_copy_fallback",
+    "private_score_or_trace_public_leak",
+    "cross_surface_runtime_side_effect"
+  ],
+  "required_stage_gates": [
+    "dependency_merged",
+    "branch_created_from_latest_main",
+    "manifest_scope_loaded",
+    "local_checks_passed",
+    "scope_validation_passed",
+    "pull_request_opened",
+    "github_required_checks_green",
+    "merge_policy_satisfied",
+    "merged_to_main",
+    "main_synced",
+    "task_branch_deleted",
+    "post_merge_revalidated"
+  ],
+  "sidecar_policy": {
+    "continue_when_external_blocker": true,
+    "requires_current_pr_checks_green": true,
+    "requires_scope_validation_green": true,
+    "current_pr_blocker_stops_train": true
+  }
+}

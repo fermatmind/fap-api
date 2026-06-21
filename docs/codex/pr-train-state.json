@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-22T07:39:00+08:00",
+  "updated_at": "2026-06-22T07:44:54+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -56755,7 +56755,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-ops-agent-runbook-01",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "riasec_result_ops_agent_release_chain",
     "title": "RIASEC-OPS-AGENT-RUNBOOK-01: docs(riasec): solidify ops agent runbook",
     "depends_on": [],
@@ -56766,14 +56766,15 @@
       "scope_validation": "passed",
       "pr_created": "passed",
       "github_required_checks": "passed",
-      "merge_state": "clean"
+      "merge_state": "clean",
+      "post_merge_revalidation": "passed"
     },
     "failure_reason": null,
-    "commit_sha": "23a536e7fcf45d0d9359ccf349884b166792290a",
+    "commit_sha": "03ecc9ad1f037e05206d319c0051629a98053664",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2240",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-21T23:33:46Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_auto_rollout_allowed": false,
     "production_cms_write_allowed": false,
     "production_gate_auto_enable_allowed": false,
@@ -56801,23 +56802,39 @@
         "from": "pull_request_open",
         "to": "ready_to_merge",
         "notes": "GitHub required checks passed and PR merge state was CLEAN before merge."
+      },
+      {
+        "at": "2026-06-22T07:36:54+08:00",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "notes": "Reconciled PR #2240 after GitHub reported MERGED, origin/main contained merge commit fa0333b68ff4cb261e01be6658c73b4f9a82c7d0, local main was fast-forwarded, and task branches were cleaned."
       }
-    ]
+    ],
+    "merge_commit": "fa0333b68ff4cb261e01be6658c73b4f9a82c7d0"
   },
   "RIASEC-OPS-AGENT-PERMISSION-MODEL-01": {
     "repo": "fap-api",
     "branch": "codex/riasec-ops-agent-permission-model-01",
     "base": "main",
-    "status": "pending_dependency",
+    "status": "ready_to_merge",
     "train_scope": "riasec_result_ops_agent_release_chain",
     "title": "RIASEC-OPS-AGENT-PERMISSION-MODEL-01: docs(riasec): define ops agent permission model",
     "depends_on": [
       "RIASEC-OPS-AGENT-RUNBOOK-01"
     ],
-    "checks": {},
+    "checks": {
+      "json_tool_permission_model": "passed",
+      "json_tool_pr_train_state": "passed",
+      "yaml_parse_pr_train_manifest": "passed",
+      "git_diff_check": "passed",
+      "scope_validation": "passed",
+      "pr_created": "passed",
+      "github_required_checks": "passed",
+      "merge_state": "clean"
+    },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "2c55e2d08555af5a7c9373c80401a87613902b03",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2244",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -56830,6 +56847,24 @@
         "from": "missing_from_manifest",
         "to": "pending_dependency",
         "notes": "Initialized from explicit RIASEC ops agent and release-chain /goal authorization."
+      },
+      {
+        "at": "2026-06-22T07:36:54+08:00",
+        "from": "pending_dependency",
+        "to": "local_checks_passed",
+        "notes": "Permission-model docs and staging governance JSON passed local validation and manifest scope validation."
+      },
+      {
+        "at": "2026-06-22T07:37:55+08:00",
+        "from": "local_checks_passed",
+        "to": "pull_request_open",
+        "notes": "Opened GitHub PR #2244 after local checks and path scope validation passed."
+      },
+      {
+        "at": "2026-06-22T07:44:54+08:00",
+        "from": "pull_request_open",
+        "to": "ready_to_merge",
+        "notes": "GitHub required checks passed and PR merge state was CLEAN before merge."
       }
     ]
   },
