@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-21T17:26:10+08:00",
+  "updated_at": "2026-06-21T17:35:24+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -54370,7 +54370,7 @@
     "repo": "fap-api",
     "branch": "codex/personality-public-asset-contract-01",
     "base": "origin/main",
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "train_scope": "personality_seo",
     "title": "PERSONALITY-PUBLIC-ASSET-CONTRACT-01: feat(personality): add public asset CMS contract",
     "depends_on": [
@@ -55334,6 +55334,10 @@
           "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
         ],
         "evidence": "Non-strict harness dry-run passed with selector_asset_count=325, validation_error_count=3, leak_hit_count=0, source_ledger_valid=true, asset_inventory_valid=true, ready_for_runtime=false, ready_for_production=false. The strict failure is pre-existing and recorded as sidecar B5-GAP-STRICT-001."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #2194 checks passed on head 57c7189ebf7d4d848adc03c4fbaf21979d1f6355: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and non-blocking Semgrep SARIF upload."
       }
     },
     "failure_reason": null,
@@ -55362,6 +55366,11 @@
         "at": "2026-06-21T17:26:10+08:00",
         "status": "github_checks_pending",
         "note": "Opened PR #2194 from commit a91412d1bb6022280fbbda607bf1f5522367b1a8; waiting for required GitHub checks."
+      },
+      {
+        "at": "2026-06-21T17:35:24+08:00",
+        "status": "ready_to_merge",
+        "note": "PR #2194 is clean and GitHub checks passed on head 57c7189ebf7d4d848adc03c4fbaf21979d1f6355; ready to merge after this state update revalidates."
       }
     ],
     "sidecar_issues": [
