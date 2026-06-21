@@ -1,0 +1,91 @@
+{
+  "version": "seo-agent-auto-approval-policy.v1",
+  "task": "SEO-AGENT-AUTO-APPROVAL-POLICY-01",
+  "repo": "fap-api",
+  "default_policy_mode": "l5_low_risk_auto_approval",
+  "decision_output_fields": [
+    "approval_decision",
+    "risk_tier",
+    "allowed_next_actions",
+    "blocked_actions",
+    "reason_codes",
+    "normalized_target_fields"
+  ],
+  "allowed_source_families": [
+    "cms_tdk_gap",
+    "cms_faq_gap"
+  ],
+  "allowed_target_models_for_draft_write": [
+    "article",
+    "content_page"
+  ],
+  "allowed_target_models_for_auto_publish": [
+    "content_page"
+  ],
+  "allowed_severities": [
+    "p1",
+    "p2"
+  ],
+  "allowed_target_fields": [
+    "seo_title",
+    "seo_description",
+    "canonical_path",
+    "is_indexable",
+    "faq_items",
+    "schema_enabled"
+  ],
+  "accepted_field_aliases": {
+    "canonical_url_or_path": "canonical_path",
+    "is_indexable_or_robots": "is_indexable",
+    "faq_schema_eligible": "schema_enabled"
+  },
+  "blocked_source_families": {
+    "runtime_seo_qa": "technical_review_required",
+    "gsc_performance": "manual_review_required_for_l5_auto_approval"
+  },
+  "claim_risk_blockers": [
+    "diagnostic",
+    "cure",
+    "guarantee",
+    "official endorsement",
+    "clinically proven",
+    "hiring fit",
+    "medical advice",
+    "treatment"
+  ],
+  "forbidden_input_fields": [
+    "raw_url",
+    "raw_query",
+    "credential_path",
+    "service_account_json",
+    "client_email",
+    "private_key",
+    "token",
+    "cookie",
+    "session",
+    "content_md",
+    "content_html",
+    "cms_draft_body",
+    "payload",
+    "metadata_json"
+  ],
+  "limits": {
+    "draft_write_auto_limit": 10,
+    "content_page_publish_auto_limit": 3,
+    "article_publish_auto_allowed": false
+  },
+  "negative_guarantees": {
+    "database_write": false,
+    "cms_write": false,
+    "cms_publish": false,
+    "search_channel_enqueue": false,
+    "search_channel_submit": false,
+    "google_indexing_live_api_call": false,
+    "scheduler_activation": false,
+    "queue_worker_started": false,
+    "frontend_direct_push": false,
+    "frontend_auto_deploy": false,
+    "external_model_api_call": false
+  },
+  "next_step": "Consume this service in weekly draft write automation before enabling automatic ContentPage publish and IndexNow submit."
+}
