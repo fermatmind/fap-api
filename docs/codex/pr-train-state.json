@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-22T02:06:00+08:00",
+  "updated_at": "2026-06-22T07:24:00+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -38415,7 +38415,7 @@
     "branch": "codex/analytics-funnel-ops-org0-visibility-repair-01",
     "base": "main",
     "title": "ANALYTICS-FUNNEL-OPS-ORG0-VISIBILITY-REPAIR-01 show global org0 funnel rows",
-    "status": "ready_to_merge",
+    "status": "merged",
     "depends_on": [
       "ANALYTICS-FUNNEL-CONTROLLED-REFRESH-WRITE-GUARD-01"
     ],
@@ -55905,11 +55905,11 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": "7690ad523eab0fd9be50f43377619e71d35a6a56",
+    "commit_sha": "bb6c0abb67dcbb8da214ed2b5418708ce50d8e6c",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2232",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-21T16:43:41Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-22T01:38:00+08:00",
@@ -55930,6 +55930,71 @@
         "at": "2026-06-22T02:06:00+08:00",
         "status": "ready_to_merge",
         "note": "PR #2232 was rebased onto origin/main bcd4687d0e0539381446a08225ed64a891c9606f, scope validation stayed green, GitHub checks passed on head 7690ad523eab0fd9be50f43377619e71d35a6a56, and mergeStateStatus is CLEAN."
+      },
+      {
+        "at": "2026-06-22T07:10:00+08:00",
+        "status": "merged",
+        "note": "Reconciled during B5-RESULT-AUTO-NIGHTLY-SCHEDULER-01 preflight: GitHub reports PR #2232 merged at 2026-06-21T16:43:41Z with merge commit bb6c0abb67dcbb8da214ed2b5418708ce50d8e6c; origin/main contains the merge commit; local and remote task branches are absent; post-merge strict audit and production ops test had passed."
+      }
+    ]
+  },
+  "B5-RESULT-AUTO-NIGHTLY-SCHEDULER-01": {
+    "repo": "fap-api",
+    "branch": "codex/big5-v2-nightly-audit-scheduler",
+    "base": "main",
+    "status": "local_validated",
+    "train_scope": "big5_result_page_v2_asset_agent_automation",
+    "title": "B5-RESULT-AUTO-NIGHTLY-SCHEDULER-01: Schedule Big Five V2 nightly audit",
+    "depends_on": [
+      "B5-RESULT-M8-PRODUCTION-OPS-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly requested the Big Five V2 result-page asset agent full-auto PR train and authorized manifest/state updates for this PR."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "GitHub shows PR #2232 merged and origin/main contains merge commit bb6c0abb67dcbb8da214ed2b5418708ce50d8e6c."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AgentAutomationTest --no-ansi",
+          "cd backend && php artisan schedule:list --no-ansi",
+          "git diff --check",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+        ],
+        "evidence": "Strict audit ok=true with validation_error_count=0 and leak_hit_count=0; AssetAgentTest passed 8 tests/200 assertions; AgentAutomationTest passed 2 tests/35 assertions; schedule:list includes 40 4 * * * php artisan big5:result-page-v2-agent audit --strict --json --no-ansi; YAML/JSON/diff checks passed."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to allowed PR1 scope: backend/bootstrap/app.php, backend/tests/Feature/Console/BigFiveResultPageV2AgentAutomationTest.php, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json. No fap-web copy, release snapshot, production import gate, rollout gate, or runtime production enablement changed."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-22T07:10:00+08:00",
+        "status": "in_progress",
+        "note": "Started PR1 from latest origin/main. Scope is nightly strict audit schedule registration, redacted/fail-closed scheduler tests, and docs/codex train registration only."
+      },
+      {
+        "at": "2026-06-22T07:24:00+08:00",
+        "status": "local_validated",
+        "note": "Local validation and scope validation passed for nightly strict audit scheduler PR. Scheduler registration is in bootstrap/app.php because schedule:list uses the Laravel bootstrap schedule in this repo."
       }
     ]
   },
