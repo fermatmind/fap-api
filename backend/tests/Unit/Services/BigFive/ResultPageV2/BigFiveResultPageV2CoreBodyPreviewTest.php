@@ -2750,6 +2750,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_enneagram_result_page_agent_runner_harness(): void
+    {
+        $changed = [
+            'backend/app/Services/Enneagram/Assets/Agent/EnneagramResultPageAgentBatchRunner.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_display_import_service_changes(): void
     {
         $changed = [
@@ -4563,6 +4572,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isEnneagramResultPageAgentReadinessFile($file)) {
+                continue;
+            }
+
+            if ($this->isEnneagramResultPageAgentRunnerHarnessFile($file)) {
                 continue;
             }
 
@@ -6475,6 +6488,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Console/Commands/EnneagramResultPageAgentReadinessCommand.php',
             'backend/app/Services/Enneagram/Assets/Agent/EnneagramResultPageAgentReadiness.php',
         ], true);
+    }
+
+    private function isEnneagramResultPageAgentRunnerHarnessFile(string $file): bool
+    {
+        return $file === 'backend/app/Services/Enneagram/Assets/Agent/EnneagramResultPageAgentBatchRunner.php';
     }
 
     private function isBigFiveV2EnParityDraftCatalogFile(string $file): bool
