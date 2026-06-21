@@ -42,6 +42,7 @@ final class SeoAgentCmsDraftWriteCommand extends Command
         {--limit=1 : Maximum draft rows to create, 1..10}
         {--confirm-package-sha256= : Required package sha256 for execute mode}
         {--confirm-write= : Exact confirmation phrase for execute mode}
+        {--auto-approve-low-risk : Execute only low-risk CMS draft proposals without an exact human confirmation phrase}
         {--execute : Actually create bounded CMS draft revisions}
         {--json : Emit JSON summary}';
 
@@ -81,6 +82,7 @@ final class SeoAgentCmsDraftWriteCommand extends Command
         $requiredPhrase = $this->requiredConfirmationPhrase($limit, $packageSha);
         $proposals = array_slice($this->proposalItems($package), 0, $limit);
         $execute = (bool) $this->option('execute');
+        $autoApproveLowRisk = (bool) $this->option('auto-approve-low-risk');
 
         if (! $execute) {
             return $this->finish([
@@ -94,17 +96,22 @@ final class SeoAgentCmsDraftWriteCommand extends Command
                 'max_rows_per_execution' => 10,
                 'package_sha256' => $packageSha,
                 'required_confirmation_phrase' => $requiredPhrase,
+                'auto_approve_low_risk_available' => true,
+                'auto_approve_low_risk_eligible' => $this->lowRiskIssue($proposals) === null,
                 'writes_attempted' => false,
                 'writes_committed' => false,
                 'negative_guarantees' => $this->negativeGuarantees(),
             ]);
         }
 
-        $confirmationIssue = $this->validateConfirmation($packageSha, $requiredPhrase);
-        if ($confirmationIssue !== null) {
-            return $this->finish($this->failureSummary($confirmationIssue, [
+        $approvalIssue = $autoApproveLowRisk
+            ? $this->lowRiskIssue($proposals)
+            : $this->validateConfirmation($packageSha, $requiredPhrase);
+        if ($approvalIssue !== null) {
+            return $this->finish($this->failureSummary($approvalIssue, [
                 'package_sha256' => $packageSha,
                 'required_confirmation_phrase' => $requiredPhrase,
+                'auto_approve_low_risk' => $autoApproveLowRisk,
             ]));
         }
 
@@ -134,6 +141,8 @@ final class SeoAgentCmsDraftWriteCommand extends Command
             'status' => $failed === [] ? 'success' : 'partial_failure',
             'dry_run' => false,
             'execute' => true,
+            'approval_mode' => $autoApproveLowRisk ? 'low_risk_auto_approved' : 'exact_human_confirmation',
+            'auto_approve_low_risk' => $autoApproveLowRisk,
             'package_sha256' => $packageSha,
             'writes_attempted' => true,
             'writes_committed' => $created !== [],
@@ -211,6 +220,59 @@ final class SeoAgentCmsDraftWriteCommand extends Command
         }
         if ((string) $this->option('confirm-write') !== $requiredPhrase) {
             return 'confirm_write_phrase_mismatch';
+        }
+
+        return null;
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $proposals
+     */
+    private function lowRiskIssue(array $proposals): ?string
+    {
+        if ($proposals === []) {
+            return 'low_risk_auto_approval_empty_package';
+        }
+
+        foreach ($proposals as $proposal) {
+            $sourceFamily = (string) ($proposal['source_family'] ?? '');
+            if (! in_array($sourceFamily, ['cms_tdk_gap', 'cms_faq_gap'], true)) {
+                return 'low_risk_auto_approval_source_family_not_allowed';
+            }
+
+            $targetModel = (string) ($proposal['target_model'] ?? $proposal['subject_type'] ?? '');
+            if (! in_array($targetModel, ['article', 'content_page'], true)) {
+                return 'low_risk_auto_approval_target_model_not_allowed';
+            }
+
+            $severity = (string) ($proposal['severity'] ?? '');
+            if (! in_array($severity, ['p1', 'p2'], true)) {
+                return 'low_risk_auto_approval_severity_not_allowed';
+            }
+
+            $fields = $this->targetFields($proposal);
+            if ($fields === []) {
+                return 'low_risk_auto_approval_target_fields_missing';
+            }
+
+            foreach ($fields as $field) {
+                if (! in_array($field, [
+                    'seo_title',
+                    'seo_description',
+                    'canonical_url_or_path',
+                    'is_indexable_or_robots',
+                    'faq_items',
+                    'faq_schema_eligible',
+                ], true)) {
+                    return 'low_risk_auto_approval_target_field_not_allowed';
+                }
+            }
+
+            if ((bool) ($proposal['claim_gate_required'] ?? false) !== true
+                || (bool) ($proposal['human_approval_required'] ?? false) !== true
+                || (bool) ($proposal['execution_permission'] ?? false) !== false) {
+                return 'low_risk_auto_approval_boundaries_invalid';
+            }
         }
 
         return null;

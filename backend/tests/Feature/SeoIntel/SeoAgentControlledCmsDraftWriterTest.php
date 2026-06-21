@@ -147,6 +147,72 @@ final class SeoAgentControlledCmsDraftWriterTest extends TestCase
     }
 
     #[Test]
+    public function low_risk_auto_approved_execute_writes_up_to_batch10_without_exact_phrase(): void
+    {
+        [$article, $page] = $this->createTargets();
+        $packagePath = $this->writePackage([
+            $this->proposal('article', (int) $article->id),
+            $this->proposal('content_page', (int) $page->id, [
+                'source_family' => 'cms_faq_gap',
+                'target_fields' => ['faq_items'],
+                'proposed_faq_items' => [
+                    [
+                        'question' => 'What should readers know?',
+                        'answer' => 'Draft answer pending claim gate and human approval.',
+                    ],
+                ],
+            ]),
+        ]);
+
+        $exitCode = Artisan::call('seo-agent:cms-draft-write', [
+            '--package' => $packagePath,
+            '--limit' => 10,
+            '--auto-approve-low-risk' => true,
+            '--execute' => true,
+            '--json' => true,
+        ]);
+        $summary = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame('success', $summary['status'] ?? null);
+        $this->assertSame('low_risk_auto_approved', $summary['approval_mode'] ?? null);
+        $this->assertTrue((bool) ($summary['auto_approve_low_risk'] ?? false));
+        $this->assertSame(2, $summary['rows_created'] ?? null);
+        $this->assertSame(1, ArticleRevision::query()->count());
+        $this->assertSame(1, CmsTranslationRevision::query()->count());
+        $this->assertFalse((bool) data_get($summary, 'negative_guarantees.cms_publish', true));
+        $this->assertFalse((bool) data_get($summary, 'negative_guarantees.search_channel_enqueue', true));
+        $this->assertFalse((bool) data_get($summary, 'negative_guarantees.indexing_request', true));
+    }
+
+    #[Test]
+    public function low_risk_auto_approved_execute_fails_closed_for_non_low_risk_source(): void
+    {
+        [$article] = $this->createTargets();
+        $packagePath = $this->writePackage([
+            $this->proposal('article', (int) $article->id, [
+                'source_family' => 'runtime_seo_qa',
+                'target_fields' => ['manual_review_required'],
+            ]),
+        ]);
+
+        $exitCode = Artisan::call('seo-agent:cms-draft-write', [
+            '--package' => $packagePath,
+            '--limit' => 10,
+            '--auto-approve-low-risk' => true,
+            '--execute' => true,
+            '--json' => true,
+        ]);
+        $summary = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('blocked', $summary['status'] ?? null);
+        $this->assertContains('low_risk_auto_approval_source_family_not_allowed', $summary['issues'] ?? []);
+        $this->assertSame(0, ArticleRevision::query()->count());
+        $this->assertSame(0, CmsTranslationRevision::query()->count());
+    }
+
+    #[Test]
     public function generated_contract_documents_writer_boundaries(): void
     {
         $artifact = $this->readJson(base_path('docs/seo/generated/seo-agent-controlled-cms-draft-write.v1.json'));
@@ -154,6 +220,8 @@ final class SeoAgentControlledCmsDraftWriterTest extends TestCase
         $this->assertSame('seo-agent-controlled-cms-draft-write.v1', $artifact['version'] ?? null);
         $this->assertSame('php artisan seo-agent:cms-draft-write', $artifact['command'] ?? null);
         $this->assertSame(10, $artifact['max_rows_per_execution'] ?? null);
+        $this->assertSame(10, data_get($artifact, 'low_risk_auto_approve_mode.max_rows_per_execution'));
+        $this->assertContains('cms_tdk_gap', data_get($artifact, 'low_risk_auto_approve_mode.allowed_source_families', []));
         $this->assertFalse((bool) ($artifact['publishes_content'] ?? true));
         $this->assertFalse((bool) data_get($artifact, 'negative_guarantees.indexing_request', true));
     }
@@ -231,22 +299,25 @@ final class SeoAgentControlledCmsDraftWriterTest extends TestCase
     /**
      * @return array<string, mixed>
      */
-    private function proposal(string $targetModel, int $id): array
+    private function proposal(string $targetModel, int $id, array $overrides = []): array
     {
         $safeLabel = $targetModel === 'article' ? 'article-candidate' : 'content-page-candidate';
 
-        return [
+        return array_merge([
             'source_id' => hash('sha256', $targetModel.(string) $id),
+            'source_family' => 'cms_tdk_gap',
             'target_model' => $targetModel,
             'subject_type' => $targetModel,
             'subject_ref' => $targetModel.':'.$id.':zh-CN',
             'safe_path' => '/zh/'.$safeLabel,
+            'severity' => 'p2',
             'target_fields' => ['seo_title', 'seo_description'],
             'proposed_seo_title' => ($targetModel === 'article' ? 'Article Candidate' : 'Content Page Candidate').' | FermatMind',
             'proposed_seo_description' => 'Review candidate with FermatMind guidance.',
             'claim_gate_required' => true,
             'human_approval_required' => true,
-        ];
+            'execution_permission' => false,
+        ], $overrides);
     }
 
     private function approvalPhrase(int $limit, string $sha): string
