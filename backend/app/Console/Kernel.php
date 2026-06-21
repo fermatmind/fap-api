@@ -109,10 +109,12 @@ use App\Console\Commands\CommerceRepairPostCommitFailed;
 use App\Console\Commands\ContentCompile;
 use App\Console\Commands\ContentLint;
 use App\Console\Commands\ContentReleaseRevalidate;
+use App\Console\Commands\EnneagramActivateInactiveCandidateRelease;
 use App\Console\Commands\EnneagramActivateRegistryRelease;
 use App\Console\Commands\EnneagramExportProductionEquivalentCandidatePayloads;
 use App\Console\Commands\EnneagramImportInactiveCandidateRelease;
 use App\Console\Commands\EnneagramResultPageAgentReadinessCommand;
+use App\Console\Commands\EnneagramRollbackInactiveCandidateRelease;
 use App\Console\Commands\EnneagramRollbackRegistryRelease;
 use App\Console\Commands\Eq60PsychometricsReport;
 use App\Console\Commands\FapEmailLifecycleRollout;
@@ -239,9 +241,11 @@ class Kernel extends ConsoleKernel
         ContentLint::class,
         ContentCompile::class,
         EnneagramExportProductionEquivalentCandidatePayloads::class,
+        EnneagramActivateInactiveCandidateRelease::class,
         EnneagramActivateRegistryRelease::class,
         EnneagramImportInactiveCandidateRelease::class,
         EnneagramResultPageAgentReadinessCommand::class,
+        EnneagramRollbackInactiveCandidateRelease::class,
         EnneagramRollbackRegistryRelease::class,
         BigFiveExportProductionEquivalentCandidatePayloads::class,
         BigFiveImportInactiveCandidateRelease::class,
