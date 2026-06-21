@@ -387,6 +387,7 @@ final class SeoAgentCmsPublishAutoCanaryCommand extends Command
             'writes_attempted' => (bool) ($summary['writes_attempted'] ?? false),
             'writes_committed' => (bool) ($summary['writes_committed'] ?? false),
             'affected_refs' => array_values((array) ($summary['affected_refs'] ?? [])),
+            'rollback_evidence' => is_array($summary['rollback_evidence'] ?? null) ? (array) $summary['rollback_evidence'] : [],
             'issues' => array_values(array_map('strval', (array) ($summary['issues'] ?? []))),
             'boundaries' => is_array($summary['boundaries'] ?? null) ? (array) $summary['boundaries'] : [],
         ];
