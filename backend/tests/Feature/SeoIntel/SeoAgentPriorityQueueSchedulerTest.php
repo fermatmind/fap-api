@@ -112,6 +112,68 @@ final class SeoAgentPriorityQueueSchedulerTest extends TestCase
     }
 
     #[Test]
+    public function preflight_only_mode_never_writes_publishes_queues_or_submits(): void
+    {
+        Http::fake();
+        $page = $this->createContentPage();
+        $this->seedSeoUrl('https://fermatmind.com/zh/priority-scheduler-page', (string) $page->id);
+
+        $artifactDir = $this->artifactDir();
+        $exitCode = Artisan::call('seo-agent:priority-queue-scheduler', [
+            '--mode' => 'weekly-l5-low-risk',
+            '--sources' => 'cms-tdk-gap',
+            '--limit' => 10,
+            '--draft-limit' => 10,
+            '--publish-limit' => 1,
+            '--artifact-dir' => $artifactDir,
+            '--preflight-only' => true,
+            '--json' => true,
+        ]);
+        $summary = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame('seo-agent-priority-queue-scheduler.v1', $summary['schema_version'] ?? null);
+        $this->assertTrue((bool) ($summary['preflight_only'] ?? false));
+        $this->assertSame('success', $summary['status'] ?? null);
+        $this->assertArrayHasKey('weekly_readonly_runner', $summary['steps'] ?? []);
+        $this->assertArrayHasKey('rollback_preflight', $summary['steps'] ?? []);
+        $this->assertArrayNotHasKey('weekly_draft_write_auto', $summary['steps'] ?? []);
+        $this->assertArrayNotHasKey('cms_publish_auto_canary', $summary['steps'] ?? []);
+        $this->assertArrayNotHasKey('post_publish_indexnow_auto', $summary['steps'] ?? []);
+        $this->assertSame('pass', data_get($summary, 'url_truth_preflight.status'));
+        $this->assertSame('pass', data_get($summary, 'indexnow_config_preflight.status'));
+        $this->assertFalse((bool) data_get($summary, 'indexnow_config_preflight.secret_values_printed', true));
+        $this->assertFalse((bool) data_get($summary, 'negative_guarantees.cms_draft_revision_write', true));
+        $this->assertFalse((bool) data_get($summary, 'negative_guarantees.content_page_publish_canary', true));
+        $this->assertFalse((bool) data_get($summary, 'negative_guarantees.search_channel_queue_write', true));
+        $this->assertFalse((bool) data_get($summary, 'negative_guarantees.indexnow_live_submit', true));
+
+        $fresh = $page->refresh();
+        $this->assertSame('not_reviewed', (string) $fresh->claim_gate_status);
+        $this->assertSame('draft', (string) $fresh->review_state);
+        $this->assertSame(88, (int) $fresh->published_revision_id);
+        $this->assertSame(0, CmsTranslationRevision::query()->count());
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_search_channel_queue_items')->count());
+        Http::assertNothingSent();
+
+        $artifact = $this->readJson((string) data_get($summary, 'artifact.path'));
+        $this->assertSame('SEO-AGENT-L5A-SCHEDULER-PREFLIGHT-MODE-01', $artifact['task'] ?? null);
+        $this->assertTrue((bool) ($artifact['preflight_only'] ?? false));
+        $this->assertContains('readonly_discovery', $artifact['allowed_actions'] ?? []);
+        $this->assertNotContains('cms_draft_revision_write', $artifact['allowed_actions'] ?? []);
+        $this->assertNotContains('content_page_publish_canary', $artifact['allowed_actions'] ?? []);
+        $this->assertNotContains('indexnow_live_submit', $artifact['allowed_actions'] ?? []);
+
+        $combined = implode("\n", array_map(
+            static fn ($file): string => (string) file_get_contents($file->getPathname()),
+            File::allFiles($artifactDir)
+        ));
+        foreach ($this->forbiddenStrings() as $forbidden) {
+            $this->assertStringNotContainsString($forbidden, $combined, $forbidden);
+        }
+    }
+
+    #[Test]
     public function command_fails_closed_for_invalid_limits_and_mode(): void
     {
         $exitCode = Artisan::call('seo-agent:priority-queue-scheduler', [
