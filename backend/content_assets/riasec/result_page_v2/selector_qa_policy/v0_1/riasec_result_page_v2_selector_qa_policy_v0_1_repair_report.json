@@ -1,0 +1,34 @@
+{
+  "schema_version": "fap.riasec.result_page_v2.selector_qa_policy.repair_report.v0.1",
+  "audit_id": "RIASEC-RESULT-SELECTOR-QA-REPAIR-01",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "cms_write_performed": false,
+  "runtime_change_performed": false,
+  "frontend_fallback_allowed": false,
+  "repair_summary": {
+    "coverage_warnings_defined": true,
+    "golden_case_groups_defined": true,
+    "slot_module_naming_policy_defined": true,
+    "banned_terms_defined": true,
+    "fail_closed_fallback_rules_defined": true,
+    "selector_assets_generated": false,
+    "route_matrix_generated": false,
+    "golden_cases_generated": false
+  },
+  "known_open_gaps_after_repair": [
+    "selector_ready_assets_missing",
+    "route_matrix_missing",
+    "golden_cases_missing",
+    "share_safety_registry_missing",
+    "low_quality_selector_binding_missing",
+    "strict_harness_forbidden_term_hits_existing_corpus"
+  ],
+  "deferred_to": {
+    "pilot_batch": "RIASEC-RESULT-ASSET-FACTORY-PILOT-BATCH-01",
+    "route_matrix_qa": "RIASEC-RESULT-ROUTE-MATRIX-GOLDEN-CASE-QA-01",
+    "render_preview_handoff": "RIASEC-RESULT-RENDER-PREVIEW-HANDOFF-01"
+  }
+}

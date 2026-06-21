@@ -1,0 +1,108 @@
+{
+  "schema_version": "fap.riasec.result_page_v2.selector_qa_policy.v0.1",
+  "policy_key": "riasec_result_page_v2.conflict_resolution.v0_1",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "policy_use": "advisory_only",
+  "no_runtime_wiring": true,
+  "no_frontend_fallback": true,
+  "priority_order": [
+    "safety_boundary",
+    "quality_boundary",
+    "share_surface_boundary",
+    "method_boundary",
+    "route_specific_selector",
+    "scenario_action",
+    "activity_example"
+  ],
+  "mutual_exclusion_rules": [
+    {
+      "rule_key": "low_quality_blocks_profile_shape",
+      "when": "quality_state=low_quality",
+      "block_registries": [
+        "profile_shape_registry",
+        "pair_blend_registry",
+        "top3_chain_registry"
+      ]
+    },
+    {
+      "rule_key": "share_surface_blocks_private_payload",
+      "when": "surface=share",
+      "block_fields": [
+        "attempt_id",
+        "user_id",
+        "raw_score",
+        "score_vector",
+        "percentile",
+        "selector_trace",
+        "internal_metadata"
+      ]
+    },
+    {
+      "rule_key": "norm_unavailable_blocks_rank_claim",
+      "when": "norm_status=unavailable",
+      "block_terms": [
+        "percentile",
+        "population rank",
+        "超过多少人",
+        "常模排名"
+      ]
+    }
+  ],
+  "banned_terms": [
+    "career match",
+    "occupation match",
+    "job fit",
+    "fit score",
+    "success prediction",
+    "success probability",
+    "hiring suitability",
+    "ability proof",
+    "140Q more accurate",
+    "raw score delta",
+    "60Q wrong",
+    "职业匹配",
+    "岗位匹配",
+    "匹配度",
+    "推荐职业",
+    "职业推荐",
+    "岗位胜任",
+    "成功概率",
+    "职业成功",
+    "更准确",
+    "更准",
+    "最终答案",
+    "你就是",
+    "天生适合",
+    "招聘筛选"
+  ],
+  "public_payload_forbidden_fields": [
+    "attempt_id",
+    "user_id",
+    "private_url",
+    "private_path",
+    "raw_score",
+    "raw_scores",
+    "score_vector",
+    "percentile",
+    "percentiles",
+    "selector_trace",
+    "selector_basis",
+    "editor_notes",
+    "qa_notes",
+    "internal_metadata",
+    "production_use_allowed",
+    "ready_for_runtime",
+    "ready_for_production"
+  ],
+  "fallback_rules": {
+    "missing_content": "omit_module_fail_closed",
+    "invalid_selector_asset": "drop_asset_emit_QA_error",
+    "selector_conflict": "choose_highest_safety_then_specificity",
+    "route_matrix_miss": "omit_result_page_v2_modules",
+    "share_safety_violation": "omit_share_block",
+    "pdf_history_compare_redaction_failure": "omit_secondary_surface"
+  }
+}
