@@ -55699,7 +55699,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-v2-candidate-batch-001",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "big5_result_page_v2_asset_agent",
     "title": "B5-RESULT-CANDIDATE-BATCH-001: Stage first Big Five V2 asset-agent candidate batch",
     "depends_on": [
@@ -55742,11 +55742,11 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": "0d5bd2f8aa6fe2e274eacb4447a89627b8ba8972",
+    "commit_sha": "a39020abfecbbc56eda751e66aa483009f5de34c",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2225",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-21T15:09:37Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-21T23:30:00+08:00",
@@ -55767,6 +55767,85 @@
         "at": "2026-06-22T00:04:00+08:00",
         "status": "ready_to_merge",
         "note": "PR #2225 GitHub checks passed on head 67e33d53f97eaafe8f58fd4107bf64434f42198c and mergeStateStatus is CLEAN."
+      },
+      {
+        "at": "2026-06-22T00:41:00+08:00",
+        "status": "merged",
+        "note": "Reconciled during B5-RESULT-PILOT-RUN-EVIDENCE-01: GitHub reports PR #2225 merged at 2026-06-21T15:09:37Z with merge commit a39020abfecbbc56eda751e66aa483009f5de34c; origin/main contains the merge commit; local and remote task branches are absent."
+      }
+    ]
+  },
+  "B5-RESULT-PILOT-RUN-EVIDENCE-01": {
+    "repo": "fap-api",
+    "branch": "codex/big5-v2-pilot-run-evidence",
+    "base": "main",
+    "status": "ready_to_merge",
+    "train_scope": "big5_result_page_v2_asset_agent",
+    "title": "B5-RESULT-PILOT-RUN-EVIDENCE-01: Add Big Five V2 allowlist pilot run evidence",
+    "depends_on": [
+      "B5-RESULT-CANDIDATE-BATCH-001"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly requested the continuous Big Five V2 result-page asset agent train and provided this pilot run evidence PR scope."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "GitHub shows PR #2225 merged and origin/main contains merge commit a39020abfecbbc56eda751e66aa483009f5de34c."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "find backend/content_assets/big5/result_page_v2/qa/pilot_run_evidence/v0_1 -name '*.json' -print -exec python3 -m json.tool {} >/dev/null \\;",
+          "cd backend/content_assets/big5/result_page_v2/qa/pilot_run_evidence/v0_1 && shasum -a 256 -c SHA256SUMS",
+          "git diff --check",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=M7PilotGateTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveV2PublicPilotAccessGateTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2RenderedQaTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ExpandedRenderedQaTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2PilotRunEvidenceTest --no-ansi",
+          "cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi"
+        ],
+        "evidence": "Added reviewed allowlist-only pilot run evidence package, verified SHA256SUMS, passed M7 gate/access/rendered/evidence tests, and strict audit remained green with validation_error_count=0 and leak_hit_count=0."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are confined to backend/content_assets/big5/result_page_v2/qa/pilot_run_evidence/*, BigFiveResultPageV2PilotRunEvidenceTest, and docs/codex manifest/state. No fap-web, runtime default, CMS, release snapshot, production import gate, production rollout, or M8 Ops files changed."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #2229 checks passed on head c4cfbcdc2892848d5687fbb9e2bc50a8ca976686: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and non-blocking Semgrep SARIF upload. Merge state CLEAN."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": "d6a4c9b534d831bcf7e79a04c94378a0be9cb0b5",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2229",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-22T00:41:00+08:00",
+        "status": "in_progress",
+        "note": "Started pilot run evidence PR from latest origin/main. Scope is backend QA evidence package, focused pilot-run evidence test, and docs/codex train registration."
+      },
+      {
+        "at": "2026-06-22T00:54:00+08:00",
+        "status": "local_checks_passed",
+        "note": "Pilot run evidence package, SHA checks, focused M7/access/rendered/evidence tests, strict audit, and scope validation passed. Evidence stays allowlist-only, not_runtime, production disabled, and M8 Ops deferred."
+      },
+      {
+        "at": "2026-06-22T00:59:00+08:00",
+        "status": "github_checks_pending",
+        "note": "Opened PR #2229 from branch codex/big5-v2-pilot-run-evidence; waiting for required GitHub checks."
+      },
+      {
+        "at": "2026-06-22T01:29:00+08:00",
+        "status": "ready_to_merge",
+        "note": "PR #2229 GitHub checks passed on head c4cfbcdc2892848d5687fbb9e2bc50a8ca976686 and mergeStateStatus is CLEAN."
       }
     ]
   },

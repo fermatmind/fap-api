@@ -24342,6 +24342,45 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: B5-RESULT-PILOT-RUN-EVIDENCE-01
+    repo: fap-api
+    depends_on:
+      - B5-RESULT-CANDIDATE-BATCH-001
+    branch: codex/big5-v2-pilot-run-evidence
+    title: "B5-RESULT-PILOT-RUN-EVIDENCE-01: Add Big Five V2 allowlist pilot run evidence"
+    train_scope: big5_result_page_v2_asset_agent
+    status: user_authorized
+    scope:
+      - Add reviewed pilot run evidence for the M7 allowlist-only Big Five V2 result page pilot.
+      - Record allowlist configuration shape, redacted anonymous sample scope, rollback and kill-switch evidence, and no-production decision.
+      - Keep evidence not_runtime, production_use_allowed=false, ready_for_runtime=false, and ready_for_production=false.
+    allowed_paths:
+      - backend/content_assets/big5/result_page_v2/qa/pilot_run_evidence/**
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2PilotRunEvidenceTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add fap-web copy, change runtime defaults, write CMS data, alter release snapshots, change production import gates, enable production rollout, or connect M8 Ops metrics.
+      - Make big5_report_engine_v2 a primary path.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=M7PilotGateTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveV2PublicPilotAccessGateTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2RenderedQaTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ExpandedRenderedQaTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2PilotRunEvidenceTest --no-ansi
+      - cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi
+      - git diff --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: RIASEC-RESULT-ASSET-AGENT-RUNBOOK-01
     repo: fap-api
     branch: codex/riasec-result-asset-agent-runbook-01

@@ -1,0 +1,41 @@
+{
+  "schema": "big5_result_page_v2.pilot_run_validation.v0_1",
+  "package": "pilot_run_evidence",
+  "version": "v0_1",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_pilot": true,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "production_percentage_enabled": false,
+  "pilot_run_reviewed": true,
+  "pilot_run_decision": "GO_ALLOWLIST_REVIEWED",
+  "production_decision": "NO_GO",
+  "validation_status": "pass",
+  "checks": {
+    "m7_gate_reviewed": "pass",
+    "allowlist_configuration_shape_recorded": "pass",
+    "sample_scope_redacted": "pass",
+    "rollback_evidence_recorded": "pass",
+    "production_rollout_not_enabled": "pass",
+    "production_percentage_disabled": "pass",
+    "frontend_copy_not_added": "pass",
+    "runtime_defaults_not_changed": "pass",
+    "m8_ops_deferred": "pass",
+    "legacy_fallback_not_primary": "pass"
+  },
+  "pilot_entry_requirements": [
+    "allowlist_members_are_opaque_anonymous_subjects",
+    "sample_evidence_is_redacted",
+    "rollback_controls_are_verified",
+    "production_percentage_is_zero",
+    "operator_review_is_complete"
+  ],
+  "hard_blockers_before_production": [
+    "production_ops_metrics_not_connected",
+    "explicit_human_production_rollout_approval_missing",
+    "production_percentage_disabled",
+    "production_rollout_disabled"
+  ]
+}
