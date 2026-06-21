@@ -1,0 +1,879 @@
+{
+    "schema_version": "fap.enneagram.result_page.batch_source_mapping_report.v0.1",
+    "runtime_use": "not_runtime",
+    "production_use_allowed": false,
+    "batch_scope": "1R-E",
+    "payload_count": 108,
+    "source_mapping_failure_count": 0,
+    "fallback_source_count": 0,
+    "blocked_source_count": 0,
+    "duplicate_selection_count": 0,
+    "branch_provenance_mismatch_count": 0,
+    "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+    "mappings": [
+        {
+            "asset_key": "enneagram_1R_E_t1_behavior_vs_motivation_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t1_behavior_vs_motivation_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "behavior_vs_motivation",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t1_broad_distribution_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t1_broad_distribution_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "broad_distribution",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t1_center_clustered_body_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t1_center_clustered_body_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "center_clustered_body",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t1_center_clustered_head_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t1_center_clustered_head_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "center_clustered_head",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t1_center_clustered_heart_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t1_center_clustered_heart_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "center_clustered_heart",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t1_contradictory_pattern_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t1_contradictory_pattern_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "contradictory_pattern",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t1_cross_center_distribution_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t1_cross_center_distribution_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "cross_center_distribution",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t1_low_signal_top3_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t1_low_signal_top3_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "low_signal_top3",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t1_next_step_convergence_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t1_next_step_convergence_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "next_step_convergence",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t1_scene_specific_top3_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t1_scene_specific_top3_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "scene_specific_top3",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t1_three_center_spread_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t1_three_center_spread_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "three_center_spread",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t1_top3_flat_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t1_top3_flat_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "top3_flat",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t2_behavior_vs_motivation_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t2_behavior_vs_motivation_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "behavior_vs_motivation",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t2_broad_distribution_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t2_broad_distribution_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "broad_distribution",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t2_center_clustered_body_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t2_center_clustered_body_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "center_clustered_body",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t2_center_clustered_head_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t2_center_clustered_head_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "center_clustered_head",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t2_center_clustered_heart_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t2_center_clustered_heart_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "center_clustered_heart",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t2_contradictory_pattern_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t2_contradictory_pattern_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "contradictory_pattern",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t2_cross_center_distribution_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t2_cross_center_distribution_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "cross_center_distribution",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t2_low_signal_top3_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t2_low_signal_top3_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "low_signal_top3",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t2_next_step_convergence_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t2_next_step_convergence_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "next_step_convergence",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t2_scene_specific_top3_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t2_scene_specific_top3_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "scene_specific_top3",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t2_three_center_spread_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t2_three_center_spread_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "three_center_spread",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t2_top3_flat_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t2_top3_flat_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "top3_flat",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t3_behavior_vs_motivation_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t3_behavior_vs_motivation_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "behavior_vs_motivation",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t3_broad_distribution_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t3_broad_distribution_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "broad_distribution",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t3_center_clustered_body_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t3_center_clustered_body_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "center_clustered_body",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t3_center_clustered_head_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t3_center_clustered_head_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "center_clustered_head",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t3_center_clustered_heart_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t3_center_clustered_heart_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "center_clustered_heart",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t3_contradictory_pattern_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t3_contradictory_pattern_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "contradictory_pattern",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t3_cross_center_distribution_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t3_cross_center_distribution_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "cross_center_distribution",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t3_low_signal_top3_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t3_low_signal_top3_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "low_signal_top3",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t3_next_step_convergence_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t3_next_step_convergence_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "next_step_convergence",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t3_scene_specific_top3_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t3_scene_specific_top3_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "scene_specific_top3",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t3_three_center_spread_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t3_three_center_spread_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "three_center_spread",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t3_top3_flat_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t3_top3_flat_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "top3_flat",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t4_behavior_vs_motivation_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t4_behavior_vs_motivation_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "behavior_vs_motivation",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t4_broad_distribution_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t4_broad_distribution_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "broad_distribution",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t4_center_clustered_body_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t4_center_clustered_body_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "center_clustered_body",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t4_center_clustered_head_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t4_center_clustered_head_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "center_clustered_head",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t4_center_clustered_heart_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t4_center_clustered_heart_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "center_clustered_heart",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t4_contradictory_pattern_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t4_contradictory_pattern_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "contradictory_pattern",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t4_cross_center_distribution_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t4_cross_center_distribution_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "cross_center_distribution",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t4_low_signal_top3_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t4_low_signal_top3_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "low_signal_top3",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t4_next_step_convergence_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t4_next_step_convergence_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "next_step_convergence",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t4_scene_specific_top3_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t4_scene_specific_top3_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "scene_specific_top3",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t4_three_center_spread_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t4_three_center_spread_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "three_center_spread",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t4_top3_flat_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t4_top3_flat_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "top3_flat",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t5_behavior_vs_motivation_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t5_behavior_vs_motivation_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "behavior_vs_motivation",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t5_broad_distribution_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t5_broad_distribution_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "broad_distribution",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t5_center_clustered_body_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t5_center_clustered_body_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "center_clustered_body",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t5_center_clustered_head_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t5_center_clustered_head_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "center_clustered_head",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t5_center_clustered_heart_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t5_center_clustered_heart_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "center_clustered_heart",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t5_contradictory_pattern_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t5_contradictory_pattern_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "contradictory_pattern",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t5_cross_center_distribution_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t5_cross_center_distribution_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "cross_center_distribution",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t5_low_signal_top3_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t5_low_signal_top3_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "low_signal_top3",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t5_next_step_convergence_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t5_next_step_convergence_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "next_step_convergence",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t5_scene_specific_top3_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t5_scene_specific_top3_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "scene_specific_top3",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t5_three_center_spread_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t5_three_center_spread_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "three_center_spread",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t5_top3_flat_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t5_top3_flat_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "top3_flat",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t6_behavior_vs_motivation_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t6_behavior_vs_motivation_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "behavior_vs_motivation",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t6_broad_distribution_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t6_broad_distribution_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "broad_distribution",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t6_center_clustered_body_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t6_center_clustered_body_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "center_clustered_body",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t6_center_clustered_head_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t6_center_clustered_head_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "center_clustered_head",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t6_center_clustered_heart_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t6_center_clustered_heart_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "center_clustered_heart",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t6_contradictory_pattern_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t6_contradictory_pattern_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "contradictory_pattern",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t6_cross_center_distribution_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t6_cross_center_distribution_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "cross_center_distribution",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t6_low_signal_top3_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t6_low_signal_top3_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "low_signal_top3",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t6_next_step_convergence_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t6_next_step_convergence_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "next_step_convergence",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t6_scene_specific_top3_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t6_scene_specific_top3_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "scene_specific_top3",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t6_three_center_spread_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t6_three_center_spread_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "three_center_spread",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t6_top3_flat_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t6_top3_flat_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "top3_flat",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t7_behavior_vs_motivation_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t7_behavior_vs_motivation_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "behavior_vs_motivation",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t7_broad_distribution_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t7_broad_distribution_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "broad_distribution",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t7_center_clustered_body_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t7_center_clustered_body_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "center_clustered_body",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t7_center_clustered_head_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t7_center_clustered_head_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "center_clustered_head",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t7_center_clustered_heart_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t7_center_clustered_heart_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "center_clustered_heart",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t7_contradictory_pattern_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t7_contradictory_pattern_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "contradictory_pattern",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t7_cross_center_distribution_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t7_cross_center_distribution_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "cross_center_distribution",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t7_low_signal_top3_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t7_low_signal_top3_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "low_signal_top3",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t7_next_step_convergence_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t7_next_step_convergence_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "next_step_convergence",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t7_scene_specific_top3_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t7_scene_specific_top3_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "scene_specific_top3",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t7_three_center_spread_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t7_three_center_spread_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "three_center_spread",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t7_top3_flat_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t7_top3_flat_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "top3_flat",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t8_behavior_vs_motivation_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t8_behavior_vs_motivation_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "behavior_vs_motivation",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t8_broad_distribution_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t8_broad_distribution_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "broad_distribution",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t8_center_clustered_body_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t8_center_clustered_body_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "center_clustered_body",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t8_center_clustered_head_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t8_center_clustered_head_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "center_clustered_head",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t8_center_clustered_heart_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t8_center_clustered_heart_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "center_clustered_heart",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t8_contradictory_pattern_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t8_contradictory_pattern_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "contradictory_pattern",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t8_cross_center_distribution_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t8_cross_center_distribution_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "cross_center_distribution",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t8_low_signal_top3_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t8_low_signal_top3_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "low_signal_top3",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t8_next_step_convergence_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t8_next_step_convergence_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "next_step_convergence",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t8_scene_specific_top3_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t8_scene_specific_top3_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "scene_specific_top3",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t8_three_center_spread_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t8_three_center_spread_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "three_center_spread",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t8_top3_flat_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t8_top3_flat_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "top3_flat",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t9_behavior_vs_motivation_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t9_behavior_vs_motivation_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "behavior_vs_motivation",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t9_broad_distribution_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t9_broad_distribution_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "broad_distribution",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t9_center_clustered_body_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t9_center_clustered_body_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "center_clustered_body",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t9_center_clustered_head_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t9_center_clustered_head_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "center_clustered_head",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t9_center_clustered_heart_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t9_center_clustered_heart_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "center_clustered_heart",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t9_contradictory_pattern_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t9_contradictory_pattern_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "contradictory_pattern",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t9_cross_center_distribution_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t9_cross_center_distribution_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "cross_center_distribution",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t9_low_signal_top3_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t9_low_signal_top3_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "low_signal_top3",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t9_next_step_convergence_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t9_next_step_convergence_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "next_step_convergence",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t9_scene_specific_top3_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t9_scene_specific_top3_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "scene_specific_top3",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t9_three_center_spread_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t9_three_center_spread_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "three_center_spread",
+            "status": "mapped"
+        },
+        {
+            "asset_key": "enneagram_1R_E_t9_top3_flat_v1",
+            "source_id": "batch_1r_e_asset_stream",
+            "source_asset_key": "enneagram_1R_E_t9_top3_flat_v1",
+            "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+            "branch_key": "top3_flat",
+            "status": "mapped"
+        }
+    ]
+}

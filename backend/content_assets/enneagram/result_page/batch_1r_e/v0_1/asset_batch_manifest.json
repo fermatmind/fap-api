@@ -1,0 +1,79 @@
+{
+    "schema_version": "fap.enneagram.result_page.batch_1r_e.manifest.v0.1",
+    "batch_id": "ENNEAGRAM-RESULT-ASSETS-1R-E-01",
+    "runtime_use": "not_runtime",
+    "production_use_allowed": false,
+    "cms_write_performed": false,
+    "runtime_change_performed": false,
+    "frontend_fallback_allowed": false,
+    "activation_happened": false,
+    "inactive_import_happened": false,
+    "candidate_export_happened": false,
+    "bulk_content_generation_happened": false,
+    "description": "Repo-owned derived 1R-E Enneagram diffuse-convergence result-page content assets for agent batch validation.",
+    "source_ledger_schema_version": "fap.enneagram.result_page.source_ledger.v0.1",
+    "source_ledger_row_id": "batch_1r_e_asset_stream",
+    "source_asset_logical_ref": "FermatMind_Enneagram_Content_Expansion_Batch_1R_E_Diffuse_Top3_Convergence_Assets.json",
+    "source_asset_sha256": "c88683363e40715425f3b7377c26a59379e2fc4036f0dd22c58ff2771760d9d9",
+    "candidate_contract_reference": {
+        "baseline_candidate_manifest_sha256": "a9fd3eb474ea2ca0130d06ad2b1640305d9160ee1a74e559ad4f60bfc4db56c0",
+        "runtime_registry_manifest_sha256": "ac5bdaab3c761b0d01a56f92679aa58341110d64de0f47a1fa0062b64f76f97f",
+        "expected_full_candidate_payload_count": 630,
+        "this_batch_asset_count": 108
+    },
+    "coverage_counts": {
+        "by_category": {
+            "diffuse_convergence_response": 108
+        },
+        "by_module_key": {
+            "all9_profile": 99,
+            "methodology_boundary_card": 9
+        },
+        "by_type_id": {
+            "1": 12,
+            "2": 12,
+            "3": 12,
+            "4": 12,
+            "5": 12,
+            "6": 12,
+            "7": 12,
+            "8": 12,
+            "9": 12
+        },
+        "by_scope": {
+            "diffuse": 108
+        },
+        "by_shareability": {
+            "private_result_only": 108,
+            "share_teaser_ready": 0
+        },
+        "by_safety_level": {
+            "no_accuracy_claim|no_fc144_final_typing|no_hard_typing|no_score_space_confusion|non_diagnostic|non_hiring|user_facing_only|diffuse_convergence_safe": 108
+        },
+        "by_diffuse_axis": {
+            "behavior_vs_motivation": 9,
+            "broad_distribution": 9,
+            "center_clustered_body": 9,
+            "center_clustered_head": 9,
+            "center_clustered_heart": 9,
+            "contradictory_pattern": 9,
+            "cross_center_distribution": 9,
+            "low_signal_top3": 9,
+            "next_step_convergence": 9,
+            "scene_specific_top3": 9,
+            "three_center_spread": 9,
+            "top3_flat": 9
+        }
+    },
+    "artifact_hashes": {
+        "assets_json_sha256": "36f09bad7404b9ae29ffef98b4a0f73828558077bf0000950dc5ae3b0910e5a7",
+        "payload_hash_count": 108
+    },
+    "required_reports": [
+        "source_mapping_report.json",
+        "safety_report.json",
+        "runner_eval_report.json",
+        "rollback_plan.md"
+    ],
+    "next_gate": "ENNEAGRAM-RESULT-ASSETS-1R-F-01"
+}
