@@ -333,6 +333,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_mbti64_cms_projection_draft_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/PersonalityMbti64CmsProjectionDraft.php',
+            'backend/app/Console/Kernel.php',
+            'backend/app/Services/Cms/Mbti64CmsProjectionDraftWriter.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\PersonalityMbti64CmsProjectionDraft;',
+            '+        PersonalityMbti64CmsProjectionDraft::class,',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
+    }
+
     public function test_runtime_freeze_classifier_ignores_mbti_personality_at_difference_section_files(): void
     {
         $changed = [
@@ -3626,6 +3641,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isMbti64CmsProjectionDraftFile($file)) {
+                continue;
+            }
+
             if ($this->isMbti64CmsRevisionPromoteFile($file)) {
                 continue;
             }
@@ -4520,6 +4539,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsMbti64BackendImportContractOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsMbti64CmsRevisionDraftOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsMbti64CmsInternalLinkDraftOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsMbti64CmsProjectionDraftOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsMbti64CmsRevisionPromoteOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentCmsTdkGapReadonlyScannerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentCodexReviewRunnerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
@@ -4675,6 +4695,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/PersonalityMbti64CmsInternalLinkDraft.php',
             'backend/app/Services/Cms/Mbti64CmsInternalLinkDraftWriter.php',
+        ], true);
+    }
+
+    private function isMbti64CmsProjectionDraftFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/PersonalityMbti64CmsProjectionDraft.php',
+            'backend/app/Services/Cms/Mbti64CmsProjectionDraftWriter.php',
         ], true);
     }
 
@@ -7472,6 +7500,25 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         }
 
         return $containsInternalLinkDraftRegistration;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsMbti64CmsProjectionDraftOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            $normalized = ltrim($line, '+-');
+            if (preg_match('/\bPersonalityMbti64CmsProjectionDraft\b/u', $normalized) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
