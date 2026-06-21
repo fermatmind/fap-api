@@ -239,6 +239,156 @@ final class BigFiveResultPageV2AssetAgent
     }
 
     /**
+     * @param  array{
+     *   run_id?:string,
+     *   artifact_dir?:string,
+     *   candidate_dir?:string,
+     *   staging_output_dir?:string,
+     *   allow_staging_write?:bool
+     * }  $options
+     * @return array<string,mixed>
+     */
+    public function stageCandidates(array $options = []): array
+    {
+        $runId = $this->sanitizeRunId((string) ($options['run_id'] ?? ''));
+        $artifactDir = $this->artifactDir((string) ($options['artifact_dir'] ?? ''), $runId);
+        $candidateDir = trim((string) ($options['candidate_dir'] ?? '')) === ''
+            ? ''
+            : $this->absolutePath((string) ($options['candidate_dir'] ?? ''));
+        $stagingOutputDir = $this->optionalPath(
+            (string) ($options['staging_output_dir'] ?? ''),
+            base_path('content_assets/big5/result_page_v2/staging_candidate_imports/'.$runId)
+        );
+        $allowStagingWrite = ($options['allow_staging_write'] ?? false) === true;
+
+        $this->ensureDirectory($artifactDir);
+
+        $selectorCandidates = $candidateDir === '' ? [] : $this->readJsonl($candidateDir.'/selector_asset_candidates.jsonl');
+        $contentCandidates = $candidateDir === '' ? [] : $this->readJsonl($candidateDir.'/content_asset_candidates.jsonl');
+        $reviewManifest = $candidateDir === '' ? null : $this->readOptionalJson($candidateDir.'/review_manifest.json');
+        $validation = $this->candidateValidationReport($selectorCandidates, $contentCandidates);
+        $reviewErrors = $this->reviewManifestErrors($reviewManifest);
+        $leakScan = $this->candidateLeakScan($selectorCandidates, $contentCandidates);
+
+        $stagingWritePerformed = false;
+        $stagingArtifacts = [];
+        $ok = ((int) ($validation['error_count'] ?? 0)) === 0
+            && $reviewErrors === []
+            && ((int) ($leakScan['hit_count'] ?? 0)) === 0;
+
+        $repairLog = [
+            'schema_version' => self::SCHEMA_VERSION,
+            'task' => 'staging_import_repair_log',
+            'runtime_use' => 'staging_only',
+            'production_use_allowed' => false,
+            'repair_required' => ! $ok,
+            'entries' => array_values(array_merge(
+                (array) ($validation['errors'] ?? []),
+                $reviewErrors,
+                array_map(static fn (array $hit): string => 'leak: '.(string) ($hit['value'] ?? ''), (array) ($leakScan['hits'] ?? []))
+            )),
+        ];
+
+        $validationReport = [
+            'schema_version' => self::SCHEMA_VERSION,
+            'task' => 'staging_import_validation',
+            'runtime_use' => 'staging_only',
+            'production_use_allowed' => false,
+            'ready_for_pilot' => false,
+            'ready_for_runtime' => false,
+            'ready_for_production' => false,
+            'candidate_dir' => $this->redactPath($candidateDir),
+            'staging_output_dir' => $this->redactPath($stagingOutputDir),
+            'allow_staging_write' => $allowStagingWrite,
+            'staging_write_performed' => false,
+            'review_manifest' => [
+                'present' => $reviewManifest !== null,
+                'valid' => $reviewErrors === [],
+                'errors' => $reviewErrors,
+            ],
+            'candidate_counts' => [
+                'selector_asset' => count($selectorCandidates),
+                'content_asset' => count($contentCandidates),
+            ],
+            'candidate_validation' => $validation,
+            'leak_scan' => $leakScan,
+            'negative_guarantees' => $allowStagingWrite ? $this->stagingImportNegativeGuarantees() : $this->candidateNegativeGuarantees(),
+        ];
+
+        if ($ok && $allowStagingWrite) {
+            $this->ensureDirectory($stagingOutputDir);
+            $validationReport['staging_write_performed'] = true;
+            $stagingArtifacts = [
+                'selector_asset_candidates.staging.jsonl' => $this->writeJsonl($stagingOutputDir.'/selector_asset_candidates.staging.jsonl', $selectorCandidates),
+                'content_asset_candidates.staging.jsonl' => $this->writeJsonl($stagingOutputDir.'/content_asset_candidates.staging.jsonl', $contentCandidates),
+                'staging_import_manifest.json' => $this->writeJson($stagingOutputDir.'/staging_import_manifest.json', [
+                    'schema_version' => self::SCHEMA_VERSION,
+                    'task' => 'staging_import_manifest',
+                    'runtime_use' => 'staging_only',
+                    'production_use_allowed' => false,
+                    'ready_for_pilot' => false,
+                    'ready_for_runtime' => false,
+                    'ready_for_production' => false,
+                    'candidate_dir' => $this->redactPath($candidateDir),
+                    'selector_asset_candidate_count' => count($selectorCandidates),
+                    'content_asset_candidate_count' => count($contentCandidates),
+                    'review_manifest' => [
+                        'review_status' => (string) ($reviewManifest['review_status'] ?? ''),
+                        'reviewed_at' => (string) ($reviewManifest['reviewed_at'] ?? ''),
+                    ],
+                    'negative_guarantees' => $this->stagingImportNegativeGuarantees(),
+                ]),
+                'staging_import_validation_report.json' => $this->writeJson($stagingOutputDir.'/staging_import_validation_report.json', $validationReport),
+                'repair_log.json' => $this->writeJson($stagingOutputDir.'/repair_log.json', $repairLog),
+            ];
+            $stagingWritePerformed = true;
+        }
+
+        $artifactSummary = [
+            'schema_version' => self::SCHEMA_VERSION,
+            'task' => 'staging_import_gate',
+            'runtime_use' => 'staging_only',
+            'production_use_allowed' => false,
+            'ready_for_pilot' => false,
+            'ready_for_runtime' => false,
+            'ready_for_production' => false,
+            'ok' => $ok,
+            'staging_write_performed' => $stagingWritePerformed,
+            'staging_artifacts' => $stagingArtifacts,
+            'validation_report' => $validationReport,
+            'repair_log' => $repairLog,
+        ];
+
+        $artifacts = [
+            'staging_import_summary.json' => $this->writeJson($artifactDir.'/staging_import_summary.json', $artifactSummary),
+            'staging_import_validation_report.json' => $this->writeJson($artifactDir.'/staging_import_validation_report.json', $validationReport),
+            'repair_log.json' => $this->writeJson($artifactDir.'/repair_log.json', $repairLog),
+        ];
+
+        return [
+            'schema_version' => self::SCHEMA_VERSION,
+            'ok' => $ok,
+            'status' => $ok ? 'success' : 'blocked',
+            'run_id' => $runId,
+            'artifact_dir' => $artifactDir,
+            'artifacts' => $artifacts,
+            'staging_artifacts' => $stagingArtifacts,
+            'summary' => [
+                'selector_candidate_count' => count($selectorCandidates),
+                'content_candidate_count' => count($contentCandidates),
+                'validation_error_count' => (int) ($validation['error_count'] ?? 0),
+                'review_error_count' => count($reviewErrors),
+                'leak_hit_count' => (int) ($leakScan['hit_count'] ?? 0),
+                'staging_write_performed' => $stagingWritePerformed,
+                'ready_for_pilot' => false,
+                'ready_for_runtime' => false,
+                'ready_for_production' => false,
+            ],
+            'negative_guarantees' => $allowStagingWrite ? $this->stagingImportNegativeGuarantees() : $this->candidateNegativeGuarantees(),
+        ];
+    }
+
+    /**
      * @return array<string,mixed>
      */
     private function buildInventory(string $contentAssetRoot, string $sourceLedgerDir): array
@@ -1027,6 +1177,12 @@ final class BigFiveResultPageV2AssetAgent
     private function candidateValidationReport(array $selectorCandidates, array $contentCandidates): array
     {
         $errors = [];
+        if ($selectorCandidates === []) {
+            $errors[] = 'selector_asset candidates missing';
+        }
+        if ($contentCandidates === []) {
+            $errors[] = 'content_asset candidates missing';
+        }
         foreach ($this->selectorValidator->validateAssetSet($selectorCandidates) as $error) {
             $errors[] = 'selector_asset: '.$error;
         }
@@ -1137,6 +1293,81 @@ final class BigFiveResultPageV2AssetAgent
             'hit_count' => count($hits),
             'hits' => $hits,
         ];
+    }
+
+    /**
+     * @return list<array<string,mixed>>
+     */
+    private function readJsonl(string $path): array
+    {
+        if (! is_file($path)) {
+            return [];
+        }
+
+        $rows = [];
+        foreach (file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) ?: [] as $line) {
+            $decoded = json_decode($line, true);
+            if (is_array($decoded)) {
+                $rows[] = $decoded;
+            }
+        }
+
+        return $rows;
+    }
+
+    /**
+     * @return array<string,mixed>|null
+     */
+    private function readOptionalJson(string $path): ?array
+    {
+        if (! is_file($path)) {
+            return null;
+        }
+
+        $decoded = json_decode((string) file_get_contents($path), true);
+
+        return is_array($decoded) ? $decoded : null;
+    }
+
+    /**
+     * @param  array<string,mixed>|null  $reviewManifest
+     * @return list<string>
+     */
+    private function reviewManifestErrors(?array $reviewManifest): array
+    {
+        if ($reviewManifest === null) {
+            return ['review_manifest.json missing'];
+        }
+
+        $errors = [];
+        if (($reviewManifest['human_reviewed'] ?? null) !== true) {
+            $errors[] = 'review_manifest human_reviewed must be true';
+        }
+        if (($reviewManifest['review_status'] ?? null) !== 'approved_for_staging') {
+            $errors[] = 'review_manifest review_status must be approved_for_staging';
+        }
+        if (($reviewManifest['runtime_use'] ?? null) !== 'staging_only') {
+            $errors[] = 'review_manifest runtime_use must be staging_only';
+        }
+        if (($reviewManifest['production_use_allowed'] ?? null) !== false) {
+            $errors[] = 'review_manifest production_use_allowed must be false';
+        }
+        if (($reviewManifest['ready_for_pilot'] ?? null) !== false) {
+            $errors[] = 'review_manifest ready_for_pilot must be false';
+        }
+        if ((string) ($reviewManifest['reviewed_by'] ?? '') === '') {
+            $errors[] = 'review_manifest reviewed_by missing';
+        }
+        if ((string) ($reviewManifest['reviewed_at'] ?? '') === '') {
+            $errors[] = 'review_manifest reviewed_at missing';
+        }
+        foreach (['selector_asset_candidates.jsonl', 'content_asset_candidates.jsonl'] as $filename) {
+            if (! in_array($filename, (array) ($reviewManifest['approved_candidate_files'] ?? []), true)) {
+                $errors[] = "review_manifest approved_candidate_files missing {$filename}";
+            }
+        }
+
+        return $errors;
     }
 
     /**
@@ -1366,6 +1597,23 @@ final class BigFiveResultPageV2AssetAgent
             'database_write' => false,
             'cms_write' => false,
             'content_assets_write' => false,
+            'frontend_copy_write' => false,
+            'final_result_payload_generation' => false,
+            'runtime_flag_change' => false,
+            'release_snapshot_change' => false,
+            'production_import_gate_change' => false,
+            'rollout_gate_change' => false,
+        ];
+    }
+
+    /**
+     * @return array<string,bool>
+     */
+    private function stagingImportNegativeGuarantees(): array
+    {
+        return [
+            'database_write' => false,
+            'cms_write' => false,
             'frontend_copy_write' => false,
             'final_result_payload_generation' => false,
             'runtime_flag_change' => false,

@@ -268,6 +268,117 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
         }
     }
 
+    public function test_stage_candidates_fails_closed_without_human_review_manifest(): void
+    {
+        $artifactRoot = $this->tempDir('big5-v2-agent-stage-missing-review');
+        $stagingDir = $artifactRoot.'/staging-package';
+
+        try {
+            app(BigFiveResultPageV2AssetAgent::class)->generateCandidates([
+                'run_id' => 'candidate-run',
+                'artifact_dir' => $artifactRoot,
+            ]);
+
+            $this->artisan('big5:result-page-v2-agent', [
+                'action' => 'stage-candidates',
+                '--run-id' => 'stage-run',
+                '--artifact-dir' => $artifactRoot,
+                '--candidate-dir' => $artifactRoot.'/candidate-run',
+                '--staging-output-dir' => $stagingDir,
+                '--allow-staging-write' => true,
+                '--json' => true,
+            ])->assertExitCode(1);
+
+            $summary = $this->readJson($artifactRoot.'/stage-run/staging_import_summary.json');
+            $this->assertFalse((bool) ($summary['ok'] ?? true));
+            $this->assertFalse((bool) ($summary['staging_write_performed'] ?? true));
+            $this->assertStringContainsString(
+                'review_manifest.json missing',
+                implode("\n", (array) data_get($summary, 'repair_log.entries', []))
+            );
+            $this->assertFileDoesNotExist($stagingDir.'/staging_import_manifest.json');
+        } finally {
+            $this->deleteDirectory($artifactRoot);
+        }
+    }
+
+    public function test_stage_candidates_imports_only_reviewed_candidates_to_staging_package(): void
+    {
+        $artifactRoot = $this->tempDir('big5-v2-agent-stage-reviewed');
+        $candidateDir = $artifactRoot.'/candidate-run';
+        $stagingDir = $artifactRoot.'/content_assets/big5/result_page_v2/staging_candidate_imports/reviewed-run';
+
+        try {
+            app(BigFiveResultPageV2AssetAgent::class)->generateCandidates([
+                'run_id' => 'candidate-run',
+                'artifact_dir' => $artifactRoot,
+            ]);
+            file_put_contents($candidateDir.'/review_manifest.json', json_encode([
+                'schema_version' => 'fap.big5.result_page_v2.staging_review_manifest.v0.1',
+                'human_reviewed' => true,
+                'review_status' => 'approved_for_staging',
+                'runtime_use' => 'staging_only',
+                'production_use_allowed' => false,
+                'ready_for_pilot' => false,
+                'reviewed_by' => 'unit_test_editorial_gate',
+                'reviewed_at' => '2026-06-21T00:00:00Z',
+                'approved_candidate_files' => [
+                    'selector_asset_candidates.jsonl',
+                    'content_asset_candidates.jsonl',
+                ],
+            ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES).PHP_EOL);
+
+            $this->artisan('big5:result-page-v2-agent', [
+                'action' => 'stage-candidates',
+                '--run-id' => 'stage-run',
+                '--artifact-dir' => $artifactRoot,
+                '--candidate-dir' => $candidateDir,
+                '--staging-output-dir' => $stagingDir,
+                '--allow-staging-write' => true,
+                '--json' => true,
+            ])->assertExitCode(0);
+
+            foreach ([
+                'selector_asset_candidates.staging.jsonl',
+                'content_asset_candidates.staging.jsonl',
+                'staging_import_manifest.json',
+                'staging_import_validation_report.json',
+                'repair_log.json',
+            ] as $filename) {
+                $this->assertFileExists($stagingDir.'/'.$filename);
+            }
+
+            $summary = $this->readJson($artifactRoot.'/stage-run/staging_import_summary.json');
+            $validation = $this->readJson($stagingDir.'/staging_import_validation_report.json');
+            $manifest = $this->readJson($stagingDir.'/staging_import_manifest.json');
+
+            $this->assertTrue((bool) ($summary['ok'] ?? false));
+            $this->assertTrue((bool) ($summary['staging_write_performed'] ?? false));
+            $this->assertTrue((bool) ($validation['staging_write_performed'] ?? false));
+            $this->assertSame('pass', data_get($validation, 'candidate_validation.status'));
+            $this->assertSame('pass', data_get($validation, 'leak_scan.status'));
+            $this->assertSame('staging_only', $manifest['runtime_use'] ?? null);
+            $this->assertFalse((bool) ($manifest['production_use_allowed'] ?? true));
+            $this->assertFalse((bool) ($manifest['ready_for_pilot'] ?? true));
+
+            $allStagingArtifacts = implode("\n", array_map(
+                static fn (string $filename): string => (string) file_get_contents($stagingDir.'/'.$filename),
+                [
+                    'selector_asset_candidates.staging.jsonl',
+                    'content_asset_candidates.staging.jsonl',
+                    'staging_import_manifest.json',
+                    'staging_import_validation_report.json',
+                    'repair_log.json',
+                ]
+            ));
+            foreach (['private_url', 'attempt_id', 'raw_score', 'percentile', 'fixed_type', 'user_confirmed_type', 'type_code'] as $forbiddenToken) {
+                $this->assertStringNotContainsString($forbiddenToken, $allStagingArtifacts);
+            }
+        } finally {
+            $this->deleteDirectory($artifactRoot);
+        }
+    }
+
     public function test_strict_mode_rejects_public_payload_and_shareable_score_leaks(): void
     {
         $root = $this->tempDir('big5-v2-agent-leak');
