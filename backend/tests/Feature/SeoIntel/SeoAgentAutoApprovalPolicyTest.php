@@ -86,12 +86,18 @@ final class SeoAgentAutoApprovalPolicyTest extends TestCase
         $claim = $policy->evaluateCandidate($this->candidate([
             'proposed_seo_description' => 'Clinically proven diagnostic guidance for hiring fit.',
         ]));
+        $deterministicCareerClaim = $policy->evaluateCandidate($this->candidate([
+            'proposed_seo_title' => 'Find your perfect match and ideal job',
+            'proposed_seo_description' => '为你匹配最适合的职业，并决定你的职业。',
+        ]));
 
         $this->assertSame('blocked', $raw['approval_decision'] ?? null);
         $this->assertContains('forbidden_field_present:raw_url', $raw['reason_codes'] ?? []);
         $this->assertContains('full_url_present', $raw['reason_codes'] ?? []);
         $this->assertSame('blocked', $claim['approval_decision'] ?? null);
         $this->assertContains('forbidden_claim_detected', $claim['reason_codes'] ?? []);
+        $this->assertSame('blocked', $deterministicCareerClaim['approval_decision'] ?? null);
+        $this->assertContains('forbidden_claim_detected', $deterministicCareerClaim['reason_codes'] ?? []);
     }
 
     #[Test]

@@ -55,6 +55,15 @@ final class AutoApprovalPolicy
         '/\bhiring\s+fit\b/i',
         '/\bmedical\s+advice\b/i',
         '/\btreatment\b/i',
+        '/\bperfect\s+match\b/i',
+        '/\bideal\s+job\b/i',
+        '/\bjob\s+fit\b/i',
+        '/\bcareer\s+match\b/i',
+        '/\bbest\s+career\s+for\s+you\b/i',
+        '/\bdetermin(e|es|ed|ing)?\s+your\s+career\b/i',
+        '/为你匹配最适合的职业/u',
+        '/最适合你的职业/u',
+        '/决定你的职业/u',
     ];
 
     /**
