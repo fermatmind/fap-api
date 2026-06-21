@@ -63,11 +63,12 @@
   "no_frontend_fallback": true,
   "files": {
     "readme": "README.md",
-    "golden_cases": "big5_result_page_v2_selector_qa_policy_v0_1_golden_cases.json",
-    "selection_policy": "big5_result_page_v2_selector_qa_policy_v0_1_selection_policy.json",
-    "conflict_resolution": "big5_result_page_v2_selector_qa_policy_v0_1_conflict_resolution.json",
-    "slot_resolution_report": "big5_result_page_v2_selector_qa_policy_v0_1_slot_resolution_report.json",
-    "sha256sums": "SHA256SUMS"
+        "golden_cases": "big5_result_page_v2_selector_qa_policy_v0_1_golden_cases.json",
+        "selection_policy": "big5_result_page_v2_selector_qa_policy_v0_1_selection_policy.json",
+        "conflict_resolution": "big5_result_page_v2_selector_qa_policy_v0_1_conflict_resolution.json",
+        "repair_report": "big5_result_page_v2_selector_qa_policy_v0_1_repair_report.json",
+        "slot_resolution_report": "big5_result_page_v2_selector_qa_policy_v0_1_slot_resolution_report.json",
+        "sha256sums": "SHA256SUMS"
   },
   "golden_case_count": 31,
   "source_golden_case_count": 30,
@@ -82,16 +83,19 @@
   },
   "normalization_summary": {
     "added_o59_canonical_case": true,
-    "added_golden_group_to_cases": true,
-    "normalized_facet_include_slot_case": true,
-    "expanded_rendered_banned_terms": true,
-    "slot_resolution_report_unresolved_reference_count": 0
-  },
+        "added_golden_group_to_cases": true,
+        "normalized_facet_include_slot_case": true,
+        "expanded_rendered_banned_terms": true,
+        "slot_resolution_report_unresolved_reference_count": 0,
+        "added_slot_key_prefix_aliases": true,
+        "added_selector_qa_repair_report": true
+    },
   "sha256": {
-    "README.md": "e0ed1346e7acc48cbf28e00862035cbbbc6fa5c26a56a77070a3e325c7865baf",
-    "big5_result_page_v2_selector_qa_policy_v0_1_golden_cases.json": "6b3c509c88dfa320e61c661a136ec6c6d674f2a94577f079397696a4c86d860e",
-    "big5_result_page_v2_selector_qa_policy_v0_1_selection_policy.json": "297cc8a4c597c0d08de9d52c68e37af20d72cd4d150b0dff7b8155b80d70088e",
-    "big5_result_page_v2_selector_qa_policy_v0_1_conflict_resolution.json": "a56c1a7658b105d566fd28b03629aaf33008bdd07e6736e8012bf19816201b22",
-    "big5_result_page_v2_selector_qa_policy_v0_1_slot_resolution_report.json": "b1720fece76106d803ae02fcef620813c55380094ccfc7b3609cff519b32fb3d"
-  }
+        "README.md": "7ad5537d1f1bc351d3356c68d295bf0f8d4dfc49c7c10e14d924b37bb3809063",
+        "big5_result_page_v2_selector_qa_policy_v0_1_golden_cases.json": "6b3c509c88dfa320e61c661a136ec6c6d674f2a94577f079397696a4c86d860e",
+        "big5_result_page_v2_selector_qa_policy_v0_1_selection_policy.json": "4fd679f28537cc381e8aaf0a017a83acdb871742a56407c9dbba8bb120a771ed",
+        "big5_result_page_v2_selector_qa_policy_v0_1_conflict_resolution.json": "323baeafec21ec5b679dbce5a26c5ae318f654b2337c782fd638d8f9d6b7aef8",
+        "big5_result_page_v2_selector_qa_policy_v0_1_slot_resolution_report.json": "b1720fece76106d803ae02fcef620813c55380094ccfc7b3609cff519b32fb3d",
+        "big5_result_page_v2_selector_qa_policy_v0_1_repair_report.json": "46b8bdba1ad95c7ec56fa696c7586db579c0f47e7c6bf88f91dcc2f2e6922377"
+    }
 }

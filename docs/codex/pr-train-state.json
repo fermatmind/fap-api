@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-21T17:35:24+08:00",
+  "updated_at": "2026-06-21T18:11:18+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -55305,7 +55305,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-result-existing-asset-gap-audit-01",
     "base": "main",
-    "status": "github_checks_pending",
+    "status": "merged",
     "train_scope": "big5_result_page_v2_asset_agent",
     "title": "BIG5-RESULT-EXISTING-ASSET-GAP-AUDIT-01: docs(big5):审计现有 result assets gaps",
     "depends_on": [
@@ -55337,15 +55337,15 @@
       },
       "github": {
         "status": "pass",
-        "evidence": "PR #2194 checks passed on head 57c7189ebf7d4d848adc03c4fbaf21979d1f6355: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and non-blocking Semgrep SARIF upload."
+        "evidence": "PR #2194 checks passed on final head 1be69531e810ea6364c9cc07d51b7ba3d3604ea8: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and non-blocking Semgrep SARIF upload."
       }
     },
     "failure_reason": null,
-    "commit_sha": "a91412d1bb6022280fbbda607bf1f5522367b1a8",
+    "commit_sha": "5a570ade44305ba49e9e1d60a6ac86a2e0e548c7",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2194",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-21T09:23:42Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-21T15:57:09+08:00",
@@ -55371,6 +55371,11 @@
         "at": "2026-06-21T17:35:24+08:00",
         "status": "ready_to_merge",
         "note": "PR #2194 is clean and GitHub checks passed on head 57c7189ebf7d4d848adc03c4fbaf21979d1f6355; ready to merge after this state update revalidates."
+      },
+      {
+        "at": "2026-06-21T17:57:10+08:00",
+        "status": "merged",
+        "note": "Reconciled during BIG5-RESULT-SELECTOR-QA-REPAIR-01: PR #2194 merged at 2026-06-21T09:23:42Z with merge commit 5a570ade44305ba49e9e1d60a6ac86a2e0e548c7; origin/main contains the merge commit; local main equals origin/main; local and remote task branch cleanup completed; post-merge validation passed."
       }
     ],
     "sidecar_issues": [
@@ -55389,7 +55394,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-result-selector-qa-repair-01",
     "base": "main",
-    "status": "pending_dependency",
+    "status": "ready_to_merge",
     "train_scope": "big5_result_page_v2_asset_agent",
     "title": "BIG5-RESULT-SELECTOR-QA-REPAIR-01: fix(big5):修 result selector QA policy",
     "depends_on": [
@@ -55401,13 +55406,31 @@
         "evidence": "User explicitly requested implementation of the eight-item Big Five Result Page V2 asset-agent plan."
       },
       "dependency": {
-        "status": "pending",
-        "evidence": "Waits for BIG5-RESULT-EXISTING-ASSET-GAP-AUDIT-01 to merge into main."
+        "status": "pass",
+        "evidence": "BIG5-RESULT-EXISTING-ASSET-GAP-AUDIT-01 is merged; origin/main contains merge commit 5a570ade44305ba49e9e1d60a6ac86a2e0e548c7."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2SelectorAssetImportV03Test --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2SelectorAssetValidatorTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2RouteDrivenGoldenCasesTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2SelectorQaPolicyRepairTest --no-ansi",
+          "find backend/content_assets/big5/result_page_v2/selector_qa_policy/v0_1 -name '*.json' -print -exec python3 -m json.tool {} >/dev/null \\;",
+          "git diff --check",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+        ],
+        "evidence": "Manifest selector import, selector validator, route-driven golden cases, and new selector QA policy repair tests passed with existing PHPUnit warning classifications."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #2197 checks passed on head b29dec11efdfd14a5ec6cd9cbb1735ec6f6f4318: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and non-blocking Semgrep SARIF upload."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "33551c1f4d692a6e5da7def2945a2694e6ea1232",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2197",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -55416,6 +55439,21 @@
         "at": "2026-06-21T15:57:09+08:00",
         "status": "pending_dependency",
         "note": "Manifest/state entry authorized; implementation waits for the gap audit PR."
+      },
+      {
+        "at": "2026-06-21T17:57:10+08:00",
+        "status": "local_checks_passed",
+        "note": "Dependency merged and reconciled. Selector QA policy repair report, slot/module alias policy, expanded banned terms, O59/golden grouping assertions, checksums, and tests are local-green. No selector asset package, runtime, CMS, or production gate mutation."
+      },
+      {
+        "at": "2026-06-21T18:04:30+08:00",
+        "status": "github_checks_pending",
+        "note": "Opened PR #2197 from commit 33551c1f4d692a6e5da7def2945a2694e6ea1232; waiting for required GitHub checks."
+      },
+      {
+        "at": "2026-06-21T18:11:18+08:00",
+        "status": "ready_to_merge",
+        "note": "PR #2197 GitHub checks passed on head b29dec11efdfd14a5ec6cd9cbb1735ec6f6f4318; ready to merge after this state update revalidates."
       }
     ]
   },

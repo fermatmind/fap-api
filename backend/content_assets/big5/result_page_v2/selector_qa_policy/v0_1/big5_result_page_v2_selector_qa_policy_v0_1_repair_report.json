@@ -1,0 +1,80 @@
+{
+  "schema": "fap.big5.result_page_v2.selector_qa_policy.repair_report.v0_1",
+  "repair_id": "BIG5-RESULT-SELECTOR-QA-REPAIR-01",
+  "mode": "staging_only_advisory_scan",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_asset_review": true,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "source_asset_batch": "big5_result_page_v2.selector_ready_assets.v0.3_p0_full",
+  "policy_package": "big5_result_page_v2.selector_qa_policy.v0.1",
+  "repair_summary": {
+    "coverage_warning_policy_locked": true,
+    "golden_case_grouping_locked": true,
+    "slot_module_naming_policy_locked": true,
+    "rendered_banned_terms_expanded": true,
+    "o59_canonical_case_regression_locked": true,
+    "selector_asset_mutation": false,
+    "runtime_wrapper_change": false,
+    "cms_write": false,
+    "production_gate_change": false
+  },
+  "coverage_warnings": [
+    "module_00_trust_bar only 1 asset",
+    "module_07_collaboration_manual only 8 assets",
+    "shareable assets only 3",
+    "balanced_profile only 4",
+    "norm_unavailable only 2"
+  ],
+  "golden_case_groups": {
+    "clear_signature": 6,
+    "high_tension_or_mixed": 7,
+    "balanced_or_diffuse": 3,
+    "facet_reframe": 5,
+    "safety_downgrade": 5,
+    "scenario_application": 4,
+    "canonical_o59_preview": 1
+  },
+  "slot_key_prefix_aliases": {
+    "module_02_quick": {
+      "module_key": "module_02_quick_understanding",
+      "status": "legacy_slot_prefix_allowed",
+      "must_not_be_used_as_module_key": true
+    }
+  },
+  "rendered_banned_terms_added": [
+    "official_32_type",
+    "32_type",
+    "personality_type_assignment",
+    "clinical_diagnosis",
+    "therapy_claim",
+    "treatment_claim",
+    "employment_screening",
+    "success_prediction",
+    "ability_measurement",
+    "官方32型",
+    "人格类型判定",
+    "临床诊断",
+    "治疗建议",
+    "招聘筛选",
+    "成功预测",
+    "能力测量"
+  ],
+  "o59_canonical_case": {
+    "case_key": "golden_case_31_o59_canonical_preview",
+    "combination_key": "O3_C2_E2_A3_N4",
+    "golden_group": "canonical_o59_preview",
+    "expected_profile_family": "sensitive_independent_thinker",
+    "runtime_use": "staging_only",
+    "production_use_allowed": false
+  },
+  "open_sidecars": [
+    {
+      "sidecar_id": "B5-GAP-SEL-SHARE-001",
+      "status": "not_mutated_in_policy_pr",
+      "reason": "selector_ready_assets are outside this PR allowed path; strict asset mutation remains deferred to an asset-package PR with selector_ready_assets scope"
+    }
+  ]
+}

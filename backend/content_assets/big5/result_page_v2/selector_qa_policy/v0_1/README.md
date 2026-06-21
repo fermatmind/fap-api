@@ -4,9 +4,10 @@
 
 ## Files
 
-- `big5_result_page_v2_selector_qa_policy_v0_1_golden_cases.json`: 30 个 Golden Cases。
+- `big5_result_page_v2_selector_qa_policy_v0_1_golden_cases.json`: 31 个 Golden Cases，包含 repo-owned O59 canonical preview case。
 - `big5_result_page_v2_selector_qa_policy_v0_1_selection_policy.json`: Selection Policy，定义模块选块、阅读模式、scope 降级、slot 限制。
 - `big5_result_page_v2_selector_qa_policy_v0_1_conflict_resolution.json`: Conflict Resolution，定义互斥、冲突、降级、安全与渲染泄漏扫描规则。
+- `big5_result_page_v2_selector_qa_policy_v0_1_repair_report.json`: Policy repair report，固化 coverage warnings、golden case 分组、slot/module 命名、banned terms、O59 回归口径。
 - `big5_result_page_v2_selector_qa_policy_v0_1_manifest.json`: manifest 与 hash。
 
 ## Scope
@@ -25,13 +26,14 @@
 - Facet 反直觉型：5
 - 安全降级型：5
 - 场景应用型：4
+- O59 canonical preview：1
 
 ## Next Codex Task
 
 `P0-SELECTOR-QA-AND-POLICY-IMPORT`
 
 导入这些文件到 backend staging，并新增 tests：
-1. 30 个 golden cases 可 parse；
+1. 31 个 golden cases 可 parse；
 2. selection policy 和 conflict resolution 可 parse；
 3. golden cases 覆盖 P0 风险；
 4. policy 不接 runtime；
@@ -49,6 +51,8 @@ Normalization applied during import:
 - Normalized facet `include_slots` from uppercase facet ids to selector-ready slot keys that use lowercase facet ids.
 - Expanded rendered banned terms for public-surface leakage checks.
 - Added a slot resolution report for `include_slots` and `include_registry_keys` against `selector_ready_assets/v0_3_p0_full`.
+- Added explicit slot/module naming policy: `module_02_quick.*` is a slot-key prefix owned by module key `module_02_quick_understanding`, not a runtime module rename.
+- Added repair report checks for existing coverage warnings, 31 golden cases, O59 canonical preview, and rendered banned terms.
 
 Safety boundaries:
 
