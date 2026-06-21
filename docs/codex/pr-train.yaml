@@ -24427,6 +24427,44 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: B5-RESULT-AUTO-NIGHTLY-SCHEDULER-01
+    repo: fap-api
+    depends_on:
+      - B5-RESULT-M8-PRODUCTION-OPS-01
+    branch: codex/big5-v2-nightly-audit-scheduler
+    title: "B5-RESULT-AUTO-NIGHTLY-SCHEDULER-01: Schedule Big Five V2 nightly audit"
+    train_scope: big5_result_page_v2_asset_agent_automation
+    status: user_authorized
+    scope:
+      - Add a safe scheduled/external-cron runner for `php artisan big5:result-page-v2-agent audit --strict --json --no-ansi`.
+      - Persist redacted audit artifacts only.
+      - Ensure the scheduler does not change production rollout, CMS writes, frontend writes, release snapshots, production import gates, or rollout gates.
+      - Add tests proving the scheduled audit is strict, redacted, staging/not_runtime only, and fails closed.
+    allowed_paths:
+      - backend/bootstrap/app.php
+      - backend/tests/Feature/Console/BigFiveResultPageV2AgentAutomationTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add fap-web copy, generate final frontend payloads, make big5_report_engine_v2 primary, enable production rollout, or touch release/import/rollout gates.
+      - Add auto PR, CI inspector, mechanical fixer, auto merge, cleanup, or weekly ops runner behavior in this PR.
+    validation:
+      - cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AgentAutomationTest --no-ansi
+      - cd backend && php artisan schedule:list --no-ansi
+      - git diff --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: RIASEC-RESULT-ASSET-AGENT-RUNBOOK-01
     repo: fap-api
     branch: codex/riasec-result-asset-agent-runbook-01
