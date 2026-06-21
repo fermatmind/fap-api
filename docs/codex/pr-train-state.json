@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-22T07:31:00+08:00",
+  "updated_at": "2026-06-22T07:39:00+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -55942,7 +55942,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-v2-nightly-audit-scheduler",
     "base": "main",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "train_scope": "big5_result_page_v2_asset_agent_automation",
     "title": "B5-RESULT-AUTO-NIGHTLY-SCHEDULER-01: Schedule Big Five V2 nightly audit",
     "depends_on": [
@@ -55975,12 +55975,12 @@
         "evidence": "Changed files are limited to allowed PR1 scope: backend/bootstrap/app.php, backend/tests/Feature/Console/BigFiveResultPageV2AgentAutomationTest.php, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json. No fap-web copy, release snapshot, production import gate, rollout gate, or runtime production enablement changed."
       },
       "github": {
-        "status": "pending",
-        "evidence": "PR #2239 opened; waiting for GitHub checks."
+        "status": "pass",
+        "evidence": "PR #2239 checks completed successfully on head 85841992376a4c5419901cf672ed6f1584a4b1be; mergeStateStatus CLEAN; PR title/body and changed-file scope re-reviewed."
       }
     },
     "failure_reason": null,
-    "commit_sha": "1a2018316f1a4e2a2743fc2d012a3c501e6d11bf",
+    "commit_sha": "85841992376a4c5419901cf672ed6f1584a4b1be",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2239",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -56000,6 +56000,11 @@
         "at": "2026-06-22T07:31:00+08:00",
         "status": "pr_open",
         "note": "Opened PR #2239 after local validation and scope validation passed; waiting for required GitHub checks."
+      },
+      {
+        "at": "2026-06-22T07:39:00+08:00",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed, mergeStateStatus is CLEAN, and PR title/body/scope were re-reviewed. Ready to merge under squash policy after this state update is pushed and checks remain green."
       }
     ]
   },
