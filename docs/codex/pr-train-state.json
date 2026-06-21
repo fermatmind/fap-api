@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-22T01:55:00+08:00",
+  "updated_at": "2026-06-22T02:06:00+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -55858,7 +55858,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-v2-m8-production-ops",
     "base": "main",
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "train_scope": "big5_result_page_v2_asset_agent",
     "title": "B5-RESULT-M8-PRODUCTION-OPS-01: Add Big Five V2 production ops reporting",
     "depends_on": [
@@ -55900,12 +55900,12 @@
         "evidence": "Changed files are confined to ReportSnapshotExplorerSupport, ReportPdfCenterTest, BigFiveResultPageV2ProductionOpsTest, backend/content_assets/big5/result_page_v2/qa/production_ops/*, and docs/codex manifest/state. No fap-web copy, frontend content, release snapshot, production import gate, rollout gate, CMS publishing, or legacy engine primary-path changes."
       },
       "github": {
-        "status": "pending",
-        "evidence": "PR #2232 opened; waiting for GitHub required checks."
+        "status": "pass",
+        "evidence": "PR #2232 checks passed on rebased head 7690ad523eab0fd9be50f43377619e71d35a6a56: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and non-blocking Semgrep SARIF upload. Merge state CLEAN after rebasing onto origin/main bcd4687d0e0539381446a08225ed64a891c9606f."
       }
     },
     "failure_reason": null,
-    "commit_sha": "1c029c2d021641a700cd571ba1cb3972d85704e2",
+    "commit_sha": "7690ad523eab0fd9be50f43377619e71d35a6a56",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2232",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -55925,6 +55925,11 @@
         "at": "2026-06-22T01:55:00+08:00",
         "status": "github_checks_pending",
         "note": "Opened PR #2232 from branch codex/big5-v2-m8-production-ops after local checks and scope validation passed."
+      },
+      {
+        "at": "2026-06-22T02:06:00+08:00",
+        "status": "ready_to_merge",
+        "note": "PR #2232 was rebased onto origin/main bcd4687d0e0539381446a08225ed64a891c9606f, scope validation stayed green, GitHub checks passed on head 7690ad523eab0fd9be50f43377619e71d35a6a56, and mergeStateStatus is CLEAN."
       }
     ]
   },
