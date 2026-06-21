@@ -1,0 +1,45 @@
+{
+  "schema_version": "fap.riasec.result_page_v2.asset_agent.source_ledger_snapshot.v0.1",
+  "task_id": "RIASEC-RESULT-ASSET-FACTORY-PILOT-BATCH-01",
+  "run_id": "share_safety_pilot_20260621T1555Z",
+  "created_at": "2026-06-21T15:55:00Z",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "content_authority": "backend",
+  "cms_write_performed": false,
+  "runtime_change_performed": false,
+  "frontend_fallback_allowed": false,
+  "private_payload_exported": false,
+  "ledger_source": {
+    "path": "backend/content_assets/riasec/result_page_v2/source_ledger/v0_1/riasec_result_source_ledger_v0_1.json",
+    "sha256": "9033251381b235f352ebb380fd494e6500c6ce0df322779d16bc05a45b1abb11"
+  },
+  "claim_rows_used": [
+    {
+      "claim_id": "riasec_six_interest_areas_public_label_claim",
+      "source_id": "public_onet_interest_profiler_overview",
+      "permitted_use": "dimension label boundary only",
+      "limitations": "does not validate scoring, norms, routing, or job outcomes"
+    },
+    {
+      "claim_id": "riasec_career_exploration_not_match_claim",
+      "source_id": "public_dol_onet_tools",
+      "permitted_use": "share-safe method boundary",
+      "limitations": "does not authorize matching, ranking, hiring, ability, or success claims"
+    },
+    {
+      "claim_id": "riasec_existing_asset_pack_snapshot_claim",
+      "source_id": "existing_riasec_asset_pack_snapshot",
+      "permitted_use": "staging inventory and gap context",
+      "limitations": "existing pack is not selector-ready or runtime-approved"
+    }
+  ],
+  "source_ids": [
+    "public_onet_interest_profiler_overview",
+    "public_dol_onet_tools",
+    "internal_riasec_v73_pack_docs",
+    "existing_riasec_asset_pack_snapshot"
+  ]
+}

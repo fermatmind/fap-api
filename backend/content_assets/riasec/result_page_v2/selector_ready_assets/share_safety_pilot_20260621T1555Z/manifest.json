@@ -1,0 +1,30 @@
+{
+  "schema_version": "fap.riasec.result_page_v2.selector_ready_assets.manifest.v0.1",
+  "task_id": "RIASEC-RESULT-ASSET-FACTORY-PILOT-BATCH-01",
+  "run_id": "share_safety_pilot_20260621T1555Z",
+  "created_at": "2026-06-21T15:55:00Z",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "content_authority": "backend",
+  "cms_write_performed": false,
+  "runtime_change_performed": false,
+  "frontend_fallback_allowed": false,
+  "private_payload_exported": false,
+  "asset_schema_version": "fap.riasec.result_page_v2.selector_asset.v0.1",
+  "asset_count": 1,
+  "assets_jsonl_sha256": "3b643bdda54bd4cde60ab099e9df7e50664fbe815b60d02fbfbaae47fb7afa33",
+  "registries": {
+    "share_safety_registry": 1
+  },
+  "source_run_artifacts": {
+    "final_assets": "backend/content_assets/riasec/result_page_v2/agent_runs/share_safety_pilot_20260621T1555Z/final_assets.jsonl",
+    "validation_report": "backend/content_assets/riasec/result_page_v2/agent_runs/share_safety_pilot_20260621T1555Z/validation_report.json",
+    "safety_report": "backend/content_assets/riasec/result_page_v2/agent_runs/share_safety_pilot_20260621T1555Z/safety_report.json"
+  },
+  "selector_ready_candidate": false,
+  "staging_review_only": true,
+  "import_allowed": false,
+  "runtime_selector_wiring_allowed": false
+}

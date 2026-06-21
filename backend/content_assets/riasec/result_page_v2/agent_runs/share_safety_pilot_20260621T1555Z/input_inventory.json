@@ -1,0 +1,58 @@
+{
+  "schema_version": "fap.riasec.result_page_v2.asset_agent.input_inventory.v0.1",
+  "task_id": "RIASEC-RESULT-ASSET-FACTORY-PILOT-BATCH-01",
+  "run_id": "share_safety_pilot_20260621T1555Z",
+  "created_at": "2026-06-21T15:55:00Z",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "content_authority": "backend",
+  "cms_write_performed": false,
+  "runtime_change_performed": false,
+  "frontend_fallback_allowed": false,
+  "private_payload_exported": false,
+  "scope": {
+    "registry": "share_safety_registry",
+    "pilot_batch_size": 1,
+    "generation_mode": "dry_run_only",
+    "locale": "zh-CN",
+    "excluded_scopes": [
+      "route_matrix",
+      "canonical_profiles",
+      "golden_cases",
+      "low_quality_cautious_copy",
+      "scenario_action_registry",
+      "cms_import",
+      "runtime_selector_wiring",
+      "production_gate"
+    ]
+  },
+  "source_inputs": [
+    {
+      "path": "backend/content_assets/riasec/result_page_v2/source_ledger/v0_1/riasec_result_source_ledger_v0_1.json",
+      "sha256": "9033251381b235f352ebb380fd494e6500c6ce0df322779d16bc05a45b1abb11"
+    },
+    {
+      "path": "backend/content_assets/riasec/result_page_v2/selector_qa_policy/v0_1/riasec_result_page_v2_selector_qa_policy_v0_1_selection_policy.json",
+      "sha256": "bd6ed4d17e4e49684ef4fc98526705c8d30cb9858ef163ae8870dfce855e552d"
+    },
+    {
+      "path": "backend/content_assets/riasec/result_page_v2/selector_qa_policy/v0_1/riasec_result_page_v2_selector_qa_policy_v0_1_repair_report.json",
+      "sha256": "d39204f4f4e6503890d2b2bbeb4994ca415798ae9053d7d861560d9247be2575"
+    },
+    {
+      "path": "backend/content_assets/riasec/result_page_v2/qa/existing_asset_gap_audit/v0_1/riasec_result_page_v2_existing_asset_gap_register_v0_1.json",
+      "sha256": "40c67e3a0187b44ca04ea0a4f02cafc2cc694b7dba074563b847797c54b821c8"
+    }
+  ],
+  "negative_guarantees": {
+    "cms_write": false,
+    "database_write": false,
+    "runtime_wrapper_enablement": false,
+    "frontend_fallback": false,
+    "production_gate_change": false,
+    "route_matrix_generation": false,
+    "golden_case_generation": false
+  }
+}
