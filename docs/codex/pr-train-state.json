@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-22T16:11:02.492+00:00",
+  "updated_at": "2026-06-22T16:12:20.759+00:00",
   "SEO-AGENT-ARTICLE41-DRAFT-CLAIM-RISK-QA-01": {
     "repo": "fap-api",
     "branch": "codex/seo-agent-article41-draft-claim-risk-qa-01",
@@ -59065,7 +59065,7 @@
     "repo": "fap-api",
     "branch": "codex/fa30-api-05-analytics-smoke-exclusion",
     "base": "main",
-    "status": "local_validated",
+    "status": "pr_open",
     "train_scope": "fa30_six_scale_smoke_analytics_exclusion",
     "title": "FA30-API-05: Centralize six-scale smoke attempt analytics exclusion",
     "depends_on": [
@@ -59098,12 +59098,12 @@
       },
       "github": {
         "status": "pending",
-        "evidence": ""
+        "evidence": "PR #2324 opened; GitHub checks pending."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "7a1c1a46d7cd55e075694b7a5f4921ad79f0a7c3",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2324",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -59117,6 +59117,11 @@
         "at": "2026-06-22T16:11:02.492+00:00",
         "status": "local_validated",
         "note": "Local tests, formatting, YAML/JSON parsing, diff check, and path scope validation passed after rebasing onto latest origin/main. PHPUnit warnings were warning-only and did not fail the targeted suites."
+      },
+      {
+        "at": "2026-06-22T16:12:20.759+00:00",
+        "status": "pr_open",
+        "note": "Opened PR #2324 after local validation and scope validation passed."
       }
     ]
   }
