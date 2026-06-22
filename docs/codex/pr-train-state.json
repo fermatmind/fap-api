@@ -59142,7 +59142,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-result-page-analytics-handoff",
     "base": "main",
-    "status": "local_validated",
+    "status": "pr_open",
     "train_scope": "big5_result_page_agent_readiness_to_pilot",
     "title": "BIG5-RESULT-PAGE-ANALYTICS-HANDOFF-01: Add Big Five result-page analytics handoff",
     "depends_on": [
@@ -59176,13 +59176,13 @@
         "evidence": "Changed files are limited to the Big Five V2 analytics handoff QA package, focused PHPUnit, and docs/codex metadata including #2331 merge reconciliation. No runtime wrapper, controller, route, DB migration, fap-web copy, CMS, SEO runtime, rollout, import, release snapshot, dashboard, event emission, analytics refresh command, or deploy file changed."
       },
       "github": {
-        "status": "not_started",
-        "evidence": "PR not opened yet."
+        "status": "pending",
+        "evidence": "Opened https://github.com/fermatmind/fap-api/pull/2333 on head e90ca9c62774c0b726b7cfbc740a8019818fc3fa."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "e90ca9c62774c0b726b7cfbc740a8019818fc3fa",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2333",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -59196,6 +59196,11 @@
         "at": "2026-06-23T01:35:00Z",
         "status": "local_validated",
         "note": "Added a redacted advisory analytics handoff package covering full-report view, PDF, share, second-test rate, returning user, and D1/D7/D14/D28 metrics plus smoke/test/generated artifact exclusions. Focused tests, checksum, metadata, Pint, runtime-freeze guard, and diff checks passed."
+      },
+      {
+        "at": "2026-06-23T01:45:00Z",
+        "status": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/2333 after local validation and scope validation passed."
       }
     ]
   },
