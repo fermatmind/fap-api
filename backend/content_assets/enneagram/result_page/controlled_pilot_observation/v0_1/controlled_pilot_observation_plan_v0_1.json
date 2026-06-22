@@ -1,0 +1,107 @@
+{
+  "schema_version": "fap.enneagram.result_page.controlled_pilot_observation.v0.1",
+  "status": "observation_plan_only",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "activation_happened": false,
+  "production_rollback_happened": false,
+  "runtime_switch_happened": false,
+  "bulk_content_generation_happened": false,
+  "cms_write_happened": false,
+  "frontend_change_happened": false,
+  "requires_completed_manual_production_gate": true,
+  "requires_post_activation_smoke_pass": true,
+  "release_contract": {
+    "release_id": "enneagram_1r_a_to_1r_h_phase8b_candidate_20260427_a9fd3eb4",
+    "candidate_manifest_sha256": "a9fd3eb474ea2ca0130d06ad2b1640305d9160ee1a74e559ad4f60bfc4db56c0",
+    "runtime_registry_sha256": "ac5bdaab3c761b0d01a56f92679aa58341110d64de0f47a1fa0062b64f76f97f",
+    "rollback_window": "60 minutes after activation"
+  },
+  "observation_windows": [
+    {
+      "window_id": "D1",
+      "offset_days_after_activation": 1,
+      "required_review": true
+    },
+    {
+      "window_id": "D7",
+      "offset_days_after_activation": 7,
+      "required_review": true
+    },
+    {
+      "window_id": "D14",
+      "offset_days_after_activation": 14,
+      "required_review": true
+    },
+    {
+      "window_id": "D28",
+      "offset_days_after_activation": 28,
+      "required_review": true
+    }
+  ],
+  "metric_contract": {
+    "allowed_metrics": [
+      "share_clicks",
+      "share_card_views",
+      "retest_starts",
+      "retest_completions",
+      "big_five_cross_test_clicks",
+      "mbti_cross_test_clicks",
+      "pdf_generation_errors",
+      "share_generation_errors",
+      "claim_gate_hits",
+      "metadata_leakage_gate_hits",
+      "fc144_boundary_gate_hits"
+    ],
+    "forbidden_metric_fields": [
+      "attempt_id",
+      "raw_score",
+      "raw_scores",
+      "score_vector",
+      "raw_score_vector",
+      "private_report_payload",
+      "private_report_url",
+      "internal_hash",
+      "release_hash",
+      "source_trace",
+      "selector_metadata",
+      "interpretation_context_id"
+    ],
+    "aggregation_minimum": "aggregate_only",
+    "public_surface_data_policy": "public_safe_summary_only"
+  },
+  "pilot_holds": {
+    "no_paid_distribution": true,
+    "no_social_campaign_expansion": true,
+    "no_seo_expansion": true,
+    "no_sitemap_inclusion_change": true,
+    "no_indexnow_submission": true,
+    "no_cms_copy_change": true,
+    "no_runtime_rollout_percentage_change": true
+  },
+  "stop_triggers": [
+    "private_payload_leak_detected",
+    "attempt_id_or_raw_score_leak_detected",
+    "forbidden_claim_detected",
+    "fc144_boundary_violation_detected",
+    "pdf_or_share_private_boundary_violation_detected",
+    "post_activation_smoke_failure",
+    "rollback_target_snapshot_missing"
+  ],
+  "review_outputs": [
+    "d1_observation_report",
+    "d7_observation_report",
+    "d14_observation_report",
+    "d28_observation_report",
+    "release_readiness_summary_after_pilot"
+  ],
+  "negative_guarantees": {
+    "production_activation_happened_by_this_plan": false,
+    "production_rollback_happened_by_this_plan": false,
+    "runtime_switch_happened_by_this_plan": false,
+    "bulk_content_generation_happened_by_this_plan": false,
+    "cms_write_happened_by_this_plan": false,
+    "frontend_change_happened_by_this_plan": false,
+    "seo_or_search_submission_happened_by_this_plan": false
+  }
+}
