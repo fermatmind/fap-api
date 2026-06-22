@@ -2661,7 +2661,7 @@ class AttemptReadController extends Controller
         $variant = (string) ($generated['variant'] ?? $variant);
         $locked = (bool) ($generated['locked'] ?? $locked);
 
-        return response($pdfBinary, 200, [
+        $responseHeaders = [
             'Content-Type' => 'application/pdf',
             'Content-Disposition' => $disposition.'; filename="'.$fileName.'"',
             'Cache-Control' => 'private, no-store',
@@ -2682,7 +2682,22 @@ class AttemptReadController extends Controller
             'X-Cross-Form-Comparable' => is_bool($pdfMetadata['cross_form_comparable'] ?? null)
                 ? (($pdfMetadata['cross_form_comparable'] ?? false) ? 'true' : 'false')
                 : '',
-        ]);
+        ];
+
+        if (strtoupper((string) ($attempt->scale_code ?? '')) === 'ENNEAGRAM') {
+            foreach ([
+                'X-Report-Schema-Version',
+                'X-Projection-Version',
+                'X-Report-Engine-Version',
+                'X-Interpretation-Context-Id',
+                'X-Content-Release-Hash',
+                'X-Content-Snapshot-Status',
+            ] as $internalHeader) {
+                unset($responseHeaders[$internalHeader]);
+            }
+        }
+
+        return response($pdfBinary, 200, $responseHeaders);
     }
 
     /**
