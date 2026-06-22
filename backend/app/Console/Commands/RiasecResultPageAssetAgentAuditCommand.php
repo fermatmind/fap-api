@@ -11,7 +11,7 @@ use Throwable;
 final class RiasecResultPageAssetAgentAuditCommand extends Command
 {
     protected $signature = 'riasec:result-page-v2-agent
-        {action=audit : Supported action: audit}
+        {action=audit : Supported action: audit, staging-import-dry-run}
         {--run-id= : Stable run identifier for the artifact directory}
         {--artifact-dir= : Optional artifact root; defaults to backend/artifacts/riasec_result_page_v2_agent}
         {--content-asset-root= : Optional content asset root for tests}
@@ -25,19 +25,22 @@ final class RiasecResultPageAssetAgentAuditCommand extends Command
     {
         try {
             $action = (string) $this->argument('action');
-            if ($action !== 'audit') {
-                $this->error('Unsupported action. Supported action: audit');
+            if (! in_array($action, ['audit', 'staging-import-dry-run'], true)) {
+                $this->error('Unsupported action. Supported actions: audit, staging-import-dry-run');
 
                 return self::FAILURE;
             }
 
-            $summary = $agent->audit([
+            $options = [
                 'run_id' => trim((string) $this->option('run-id')),
                 'artifact_dir' => trim((string) $this->option('artifact-dir')),
                 'content_asset_root' => trim((string) $this->option('content-asset-root')),
                 'source_ledger_dir' => trim((string) $this->option('source-ledger-dir')),
                 'strict' => (bool) $this->option('strict'),
-            ]);
+            ];
+            $summary = $action === 'staging-import-dry-run'
+                ? $agent->stagingImportDryRun($options)
+                : $agent->audit($options);
 
             if ((bool) $this->option('json')) {
                 $this->line((string) json_encode($summary, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));

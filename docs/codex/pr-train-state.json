@@ -57213,7 +57213,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-selector-coverage-batch-01",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "riasec_result_ops_agent_release_chain",
     "title": "RIASEC-RESULT-SELECTOR-COVERAGE-BATCH-01: content(riasec): fill selector coverage gaps",
     "depends_on": [
@@ -57231,14 +57231,18 @@
       "branch_pushed": "passed",
       "pr_created": "passed",
       "github_required_checks": "passed",
-      "pre_merge_scope_recheck": "passed"
+      "pre_merge_scope_recheck": "passed",
+      "github_merge_confirmed": "passed",
+      "origin_main_contains_merge_commit": "passed",
+      "post_merge_cleanup": "passed",
+      "post_merge_revalidate": "passed"
     },
-    "failure_reason": "Strict audit command returns exit code 1 only for pre-existing RIASEC leak-scan hits outside selector_coverage_batch_20260622T0948Z; current PR new hit count is 0. Registered sidecar issue at backend/content_assets/riasec/result_page_v2/qa/sidecar_issues/strict_audit_preexisting_leak_scan_20260622.json per user continuation protocol.",
-    "commit_sha": "2737fb131d9316eed77590d80314b5ef26e07b1d",
+    "failure_reason": null,
+    "commit_sha": "124d1754e9248f102b82c5f65149f1206fe6bb57",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2265",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-22T02:23:36Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_auto_rollout_allowed": false,
     "production_cms_write_allowed": false,
     "production_gate_auto_enable_allowed": false,
@@ -57272,6 +57276,12 @@
         "from": "pull_request_open",
         "to": "ready_to_merge",
         "notes": "GitHub checks passed for PR #2265 and pre-merge scope recheck stayed within PR8 allowed files. Strict audit external sidecar remains documented."
+      },
+      {
+        "at": "2026-06-22T10:47:00+08:00",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "notes": "Reconciled before PR9: GitHub PR #2265 merged as 124d1754e9248f102b82c5f65149f1206fe6bb57; origin/main contains the merge commit; local/remote branch cleanup and RiasecResultPage post-merge revalidation passed."
       }
     ]
   },
@@ -57279,19 +57289,30 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-staging-import-dry-run-01",
     "base": "main",
-    "status": "pending_dependency",
+    "status": "ready_to_merge",
     "train_scope": "riasec_result_ops_agent_release_chain",
     "title": "RIASEC-RESULT-STAGING-IMPORT-DRY-RUN-01: feat(riasec): add staging import dry-run",
     "depends_on": [
       "RIASEC-RESULT-SELECTOR-COVERAGE-BATCH-01"
     ],
-    "checks": {},
+    "checks": {
+      "dependency_pr8_merged": "passed",
+      "php_artisan_test_filter_RiasecResultPage": "passed",
+      "php_artisan_riasec_result_page_v2_agent_audit_strict": "passed",
+      "php_artisan_riasec_result_page_v2_agent_staging_import_dry_run_strict": "passed",
+      "git_diff_check": "passed",
+      "scope_validation": "passed",
+      "branch_pushed": "passed",
+      "pr_created": "passed",
+      "github_required_checks": "passed",
+      "pre_merge_scope_recheck": "passed"
+    },
     "failure_reason": null,
-    "commit_sha": "91ad717799e6813eebfdf730ed99431b6d9dd958",
-    "pr_url": "https://github.com/fermatmind/fap-api/pull/2264",
-    "merged_at": "2026-06-22T02:11:20Z",
-    "remote_branch_deleted": true,
-    "local_cleanup_executed": true,
+    "commit_sha": "871a768ee148b836c6e2e550dabb5c4a24260f7d",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2268",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
     "production_auto_rollout_allowed": false,
     "production_cms_write_allowed": false,
     "production_gate_auto_enable_allowed": false,
@@ -57301,6 +57322,24 @@
         "from": "missing_from_manifest",
         "to": "pending_dependency",
         "notes": "Initialized from explicit RIASEC ops agent and release-chain /goal authorization."
+      },
+      {
+        "at": "2026-06-22T10:53:00+08:00",
+        "from": "pending_dependency",
+        "to": "local_checks_passed",
+        "notes": "PR8 dependency reconciled merged. Added staging-import-dry-run action/report support, result_page_v2 scoped public payload leak scan, checksum inventory, fail-closed report, and RiasecResultPage tests. No CMS write or runtime change."
+      },
+      {
+        "at": "2026-06-22T11:00:00+08:00",
+        "from": "local_checks_passed",
+        "to": "pull_request_open",
+        "notes": "Opened GitHub PR #2268 after local validation and scope validation passed. No CMS write, runtime wrapper, frontend fallback, pilot gate, or production rollout."
+      },
+      {
+        "at": "2026-06-22T11:06:00+08:00",
+        "from": "pull_request_open",
+        "to": "ready_to_merge",
+        "notes": "GitHub checks passed for PR #2268 and pre-merge scope recheck stayed within PR9 allowed files."
       }
     ]
   },
