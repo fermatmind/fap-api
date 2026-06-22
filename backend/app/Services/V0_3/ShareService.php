@@ -509,7 +509,6 @@ class ShareService
                 static fn (array $row): array => [
                     'type' => trim((string) ($row['type'] ?? '')),
                     'candidate_role' => trim((string) ($row['candidate_role'] ?? '')),
-                    'display_score' => $row['display_score'] ?? null,
                 ],
                 array_filter($topTypeCards, static fn (mixed $row): bool => is_array($row))
             )),
@@ -517,39 +516,20 @@ class ShareService
                 static fn (array $row): array => [
                     'type' => trim((string) ($row['type'] ?? '')),
                     'rank' => isset($row['rank']) ? (int) $row['rank'] : null,
-                    'display_score' => $row['display_score'] ?? null,
                 ],
                 array_filter($all9Profile, static fn (mixed $row): bool => is_array($row))
             )),
             'confidence_level' => $confidenceLevel !== '' ? $confidenceLevel : null,
             'confidence_label' => $confidenceLabel !== '' ? $confidenceLabel : null,
             'interpretation_scope' => $scope !== '' ? $scope : null,
-            'interpretation_reason' => $classification['interpretation_reason'] ?? data_get($projection, 'classification.interpretation_reason'),
             'close_call_pair' => [
                 'pair_key' => $this->stringOrNull($closeCallPair['pair_key'] ?? null),
                 'type_a' => $this->stringOrNull($closeCallPair['type_a'] ?? null),
                 'type_b' => $this->stringOrNull($closeCallPair['type_b'] ?? null),
             ],
-            'dominance_gap_abs' => data_get($projection, 'classification.dominance_gap_abs'),
-            'dominance_gap_pct' => data_get($projection, 'classification.dominance_gap_pct'),
             'compare_compatibility_group' => data_get($projection, 'methodology.compare_compatibility_group')
                 ?? data_get($snapshotBinding, 'compare_compatibility_group'),
             'cross_form_comparable' => false,
-            'interpretation_context_id' => data_get($reportV2, 'provenance.interpretation_context_id')
-                ?? data_get($projection, 'content_binding.interpretation_context_id')
-                ?? data_get($snapshotBinding, 'interpretation_context_id'),
-            'registry_release_hash' => data_get($reportV2, 'registry.registry_release_hash')
-                ?? data_get($reportV2, 'provenance.registry_release_hash'),
-            'content_release_hash' => data_get($reportV2, 'provenance.content_release_hash')
-                ?? data_get($projection, 'content_binding.content_release_hash')
-                ?? data_get($snapshotBinding, 'content_release_hash'),
-            'content_snapshot_status' => data_get($reportV2, 'provenance.content_snapshot_status')
-                ?? data_get($projection, 'content_binding.content_snapshot_status')
-                ?? data_get($snapshotBinding, 'content_snapshot_status'),
-            'report_schema_version' => data_get($reportV2, 'schema_version')
-                ?? data_get($snapshotBinding, 'report_schema_version'),
-            'projection_version' => data_get($projection, 'algorithmic_meta.projection_version')
-                ?? data_get($snapshotBinding, 'projection_version'),
             'generated_at' => $generatedAt,
             'summary_text' => $shareText,
         ];
@@ -843,8 +823,8 @@ class ShareService
                 ? '我在 FermatMind 的九型结果可以阅读，但系统提示解释边界较宽。它更适合作为初步观察线索，而不是最终定型。'
                 : 'My FermatMind Enneagram result is readable, but the interpretation boundary is wider. It is better used as an observation cue than a final label.',
             default => $locale === 'zh-CN'
-                ? sprintf('我在 FermatMind 的九型结果显示：我最可能是 %s 号。结果清晰度较高，但仍建议把它当成持续观察自己的框架。', $primary !== '' ? $primary : '主候选')
-                : sprintf('My FermatMind Enneagram result suggests I am most likely Type %s. The signal is relatively clear, but it should still be used as a framework for continued self-observation.', $primary !== '' ? $primary : 'A'),
+                ? sprintf('我在 FermatMind 的九型结果显示：当前结果更接近 %s 号倾向。结果清晰度较高，但仍建议把它当成持续观察自己的框架。', $primary !== '' ? $primary : '主候选')
+                : sprintf('My FermatMind Enneagram result currently leans toward Type %s. The signal is relatively clear, but it should still be used as a framework for continued self-observation.', $primary !== '' ? $primary : 'A'),
         };
     }
 
@@ -1223,6 +1203,7 @@ class ShareService
             if ($enneagramPublicSummary !== []) {
                 $payload['enneagram_public_summary_v1'] = $enneagramPublicSummary;
             }
+            unset($payload['attempt_id'], $payload['org_id'], $payload['content_package_version']);
         } elseif ($scaleCode === 'RIASEC' && $riasecProjection !== []) {
             $payload['riasec_public_projection_v1'] = $riasecProjection;
             if ($riasecProjectionV2 !== []) {
