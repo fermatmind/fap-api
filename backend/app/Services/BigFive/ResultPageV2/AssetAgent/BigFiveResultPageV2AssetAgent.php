@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\BigFive\ResultPageV2\AssetAgent;
 
 use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2Contract;
+use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2ProductionOpsMetrics;
 use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2SelectorAssetContract;
 use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2SelectorAssetValidator;
 use App\Services\BigFive\ResultPageV2\ContentAssets\BigFiveV2AssetPackageLoader;
@@ -95,6 +96,7 @@ final class BigFiveResultPageV2AssetAgent
     public function __construct(
         private readonly BigFiveV2AssetPackageLoader $packageLoader = new BigFiveV2AssetPackageLoader,
         private readonly BigFiveResultPageV2SelectorAssetValidator $selectorValidator = new BigFiveResultPageV2SelectorAssetValidator,
+        private readonly BigFiveResultPageV2ProductionOpsMetrics $productionOpsMetrics = new BigFiveResultPageV2ProductionOpsMetrics,
     ) {}
 
     /**
@@ -933,7 +935,9 @@ final class BigFiveResultPageV2AssetAgent
      * @param  array{
      *   run_id?:string,
      *   artifact_dir?:string,
-     *   production_ops_dir?:string
+     *   production_ops_dir?:string,
+     *   ops_source?:string,
+     *   window_days?:int
      * }  $options
      * @return array<string,mixed>
      */
@@ -941,6 +945,8 @@ final class BigFiveResultPageV2AssetAgent
     {
         $runId = $this->sanitizeRunId((string) ($options['run_id'] ?? ''));
         $artifactDir = $this->artifactDir((string) ($options['artifact_dir'] ?? ''), $runId);
+        $opsSource = strtolower(trim((string) ($options['ops_source'] ?? 'report_snapshots'))) ?: 'report_snapshots';
+        $windowDays = max(1, (int) ($options['window_days'] ?? 45));
         $productionOpsDir = $this->optionalPath(
             (string) ($options['production_ops_dir'] ?? ''),
             base_path(self::PRODUCTION_OPS_RELATIVE_PATH)
@@ -953,19 +959,47 @@ final class BigFiveResultPageV2AssetAgent
         $metrics = (array) ($opsReport['metrics'] ?? []);
         $smokeContract = (array) ($smoke['smoke_contract'] ?? []);
         $forbiddenTokens = array_values(array_map('strval', (array) ($smoke['forbidden_public_text_tokens'] ?? [])));
+        $reportingReady = (bool) ($opsReport['production_ops_reporting_ready'] ?? false);
+        $rolloutEnabled = (bool) ($opsReport['production_rollout_enabled'] ?? true);
+        $allowedOpsSources = ['report_snapshots', 'contract'];
+        $metricsSummary = in_array($opsSource, $allowedOpsSources, true)
+            ? ($opsSource === 'report_snapshots' ? $this->productionOpsMetrics->summarize($windowDays) : null)
+            : [
+                'source' => $opsSource,
+                'query_status' => 'blocked',
+                'blockers' => [
+                    [
+                        'code' => 'unsupported_ops_source',
+                        'allowed_sources' => $allowedOpsSources,
+                    ],
+                ],
+                'reporting_window_days' => $windowDays,
+                'metrics' => [],
+                'redaction' => [],
+            ];
 
         $report = [
             'schema_version' => self::SCHEMA_VERSION,
             'task' => 'weekly_ops_runner',
+            'ops_source' => $opsSource,
             'runtime_use' => 'not_runtime',
             'production_use_allowed' => false,
             'ready_for_pilot' => false,
             'ready_for_runtime' => false,
             'ready_for_production' => false,
             'run_id' => $runId,
-            'reporting_window_days' => (int) ($opsReport['reporting_window_days'] ?? 45),
-            'production_ops_reporting_ready' => (bool) ($opsReport['production_ops_reporting_ready'] ?? false),
-            'production_rollout_enabled' => (bool) ($opsReport['production_rollout_enabled'] ?? true),
+            'reporting_window_days' => $opsSource === 'report_snapshots'
+                ? (int) ($metricsSummary['reporting_window_days'] ?? $windowDays)
+                : (int) ($opsReport['reporting_window_days'] ?? $windowDays),
+            'production_ops_reporting_ready' => $reportingReady,
+            'production_rollout_enabled' => $rolloutEnabled,
+            'metrics_source' => $opsSource,
+            'metrics_query_status' => $metricsSummary['query_status'] ?? ($opsSource === 'contract' ? 'contract_baseline' : 'blocked'),
+            'metrics_query_blockers' => $metricsSummary['blockers'] ?? [],
+            'production_metrics' => $opsSource === 'report_snapshots' ? (array) ($metricsSummary['metrics'] ?? []) : null,
+            'metric_redaction' => $opsSource === 'report_snapshots' ? (array) ($metricsSummary['redaction'] ?? []) : [
+                'metric_values' => 'contract_redaction_policy_only',
+            ],
             'metrics_contract' => [
                 'v2_payload_coverage_rate' => $metrics['v2_payload_coverage_rate'] ?? null,
                 'fallback_hit_rate' => $metrics['fallback_hit_rate'] ?? null,
@@ -982,9 +1016,17 @@ final class BigFiveResultPageV2AssetAgent
                 'registry_word_check' => $smokeContract['registry_word_check'] ?? null,
                 'forbidden_public_text_token_count' => count($forbiddenTokens),
             ],
-            'evidence_output_policy' => $smoke['evidence_output_policy'] ?? [],
-            'negative_guarantees' => $this->weeklyOpsNegativeGuarantees(),
+            'evidence_output_policy' => $opsSource === 'contract'
+                ? ($smoke['evidence_output_policy'] ?? [])
+                : $this->weeklyOpsEvidenceOutputPolicySummary((array) ($smoke['evidence_output_policy'] ?? [])),
+            'negative_guarantees' => $opsSource === 'contract'
+                ? $this->weeklyOpsNegativeGuarantees()
+                : $this->weeklyOpsSanitizedNegativeGuarantees(),
         ];
+        $ok = $reportingReady
+            && ! $rolloutEnabled
+            && in_array($opsSource, $allowedOpsSources, true)
+            && ($opsSource === 'contract' || ($report['metrics_query_status'] ?? null) === 'ready');
 
         $artifacts = [
             'weekly_ops_report.json' => $this->writeJson($artifactDir.'/weekly_ops_report.json', $report),
@@ -993,20 +1035,27 @@ final class BigFiveResultPageV2AssetAgent
 
         return [
             'schema_version' => self::SCHEMA_VERSION,
-            'ok' => (bool) ($report['production_ops_reporting_ready'] ?? false) && ! (bool) ($report['production_rollout_enabled'] ?? true),
-            'status' => ((bool) ($report['production_ops_reporting_ready'] ?? false) && ! (bool) ($report['production_rollout_enabled'] ?? true)) ? 'success' : 'blocked',
+            'ok' => $ok,
+            'status' => $ok ? 'success' : 'blocked',
             'run_id' => $runId,
             'artifact_dir' => $artifactDir,
             'artifacts' => $artifacts,
             'summary' => [
+                'ops_source' => $opsSource,
                 'production_ops_reporting_ready' => (bool) ($report['production_ops_reporting_ready'] ?? false),
                 'production_rollout_enabled' => (bool) ($report['production_rollout_enabled'] ?? true),
+                'metrics_query_status' => (string) ($report['metrics_query_status'] ?? 'unknown'),
+                'total_big5_reports' => (int) data_get($report, 'production_metrics.total_big5_reports', 0),
+                'v2_payload_coverage_rate' => (string) data_get($report, 'production_metrics.v2_payload_coverage_rate', '0.0%'),
+                'fallback_hit_rate' => (string) data_get($report, 'production_metrics.fallback_hit_rate', '0.0%'),
                 'forbidden_public_text_token_count' => count($forbiddenTokens),
                 'ready_for_pilot' => false,
                 'ready_for_runtime' => false,
                 'ready_for_production' => false,
             ],
-            'negative_guarantees' => $this->weeklyOpsNegativeGuarantees(),
+            'negative_guarantees' => $opsSource === 'contract'
+                ? $this->weeklyOpsNegativeGuarantees()
+                : $this->weeklyOpsSanitizedNegativeGuarantees(),
         ];
     }
 
@@ -1416,6 +1465,9 @@ final class BigFiveResultPageV2AssetAgent
         }
         if ($value === null) {
             return 'null';
+        }
+        if (is_array($value)) {
+            return (string) json_encode($value, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         }
 
         return (string) $value;
@@ -2971,6 +3023,8 @@ final class BigFiveResultPageV2AssetAgent
             '- production_use_allowed: false',
             '- ready_for_runtime: false',
             '- ready_for_production: false',
+            '- ops_source: '.$this->markdownScalar($report['ops_source'] ?? null),
+            '- metrics_query_status: '.$this->markdownScalar($report['metrics_query_status'] ?? null),
             '- production_rollout_enabled: '.$this->markdownScalar($report['production_rollout_enabled'] ?? null),
             '- reporting_window_days: '.$this->markdownScalar($report['reporting_window_days'] ?? null),
             '',
@@ -2978,14 +3032,32 @@ final class BigFiveResultPageV2AssetAgent
             '',
         ];
 
-        foreach ([
-            'v2_payload_coverage_rate',
-            'fallback_hit_rate',
-            'malformed_rejection_reasons',
-            'validation_error_count',
-            'audited_at_freshness',
-        ] as $metricKey) {
-            $lines[] = '- '.$metricKey.': '.(string) data_get($report, "metrics_contract.{$metricKey}.redaction", 'redacted_contract');
+        $productionMetrics = (array) ($report['production_metrics'] ?? []);
+        if ($productionMetrics !== []) {
+            foreach ([
+                'total_big5_reports',
+                'attached_count',
+                'fallback_count',
+                'invalid_count',
+                'disabled_or_not_evaluated_count',
+                'v2_payload_coverage_rate',
+                'fallback_hit_rate',
+                'validation_error_count',
+                'latest_audited_at',
+            ] as $metricKey) {
+                $lines[] = '- '.$metricKey.': '.$this->markdownScalar($productionMetrics[$metricKey] ?? null);
+            }
+            $lines[] = '- malformed_rejection_reasons: '.$this->markdownScalar($productionMetrics['malformed_rejection_reasons'] ?? []);
+        } else {
+            foreach ([
+                'v2_payload_coverage_rate',
+                'fallback_hit_rate',
+                'malformed_rejection_reasons',
+                'validation_error_count',
+                'audited_at_freshness',
+            ] as $metricKey) {
+                $lines[] = '- '.$metricKey.': '.(string) data_get($report, "metrics_contract.{$metricKey}.redaction", 'redacted_contract');
+            }
         }
 
         $lines = array_merge($lines, [
@@ -3283,6 +3355,44 @@ final class BigFiveResultPageV2AssetAgent
             'local_main_synced' => $liveExecutionPerformed && $isMergePlan,
             'post_merge_revalidation_run' => false,
             'auto_merge_performed' => $liveExecutionPerformed && $isMergePlan,
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $policy
+     * @return array<string,bool>
+     */
+    private function weeklyOpsEvidenceOutputPolicySummary(array $policy): array
+    {
+        return [
+            'identity_storage_allowed' => (bool) ($policy['stores_real_attempt_identifier'] ?? true),
+            'private_link_storage_allowed' => (bool) ($policy['stores_private_link'] ?? true),
+            'pdf_storage_allowed' => (bool) ($policy['stores_pdf_file'] ?? true),
+            'report_body_storage_allowed' => (bool) ($policy['stores_raw_report_body'] ?? true),
+            'score_value_storage_allowed' => (bool) ($policy['stores_user_score_values'] ?? true),
+        ];
+    }
+
+    /**
+     * @return array<string,bool>
+     */
+    private function weeklyOpsSanitizedNegativeGuarantees(): array
+    {
+        return [
+            'database_write' => false,
+            'cms_write' => false,
+            'content_assets_write' => false,
+            'frontend_copy_write' => false,
+            'result_payload_generation' => false,
+            'runtime_flag_change' => false,
+            'release_snapshot_change' => false,
+            'production_import_gate_change' => false,
+            'rollout_gate_change' => false,
+            'identity_storage_allowed' => false,
+            'private_link_storage_allowed' => false,
+            'pdf_storage_allowed' => false,
+            'report_body_storage_allowed' => false,
+            'score_value_storage_allowed' => false,
         ];
     }
 

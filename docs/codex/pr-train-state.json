@@ -43232,7 +43232,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-dash-collector-02-write-gate",
     "base": "main",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "train_scope": "seo_intel_controlled_collector_write_gate",
     "title": "docs(seo): define controlled collector write gate",
     "checks": {
@@ -58360,11 +58360,11 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": "377d6430cffd4264b55c9b1d51567c47907f5831",
+    "commit_sha": "d5562a8764eabed1889f3dbd57ed4691282f2197",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2272",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-22T03:26:57Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-22T03:20:00Z",
@@ -58380,6 +58380,89 @@
         "at": "2026-06-22T03:30:00Z",
         "status": "ready_to_merge",
         "note": "GitHub checks passed on head f17891c1f4fd09e50a2060eca9deea4996f76f99, mergeStateStatus is CLEAN, and PR title/body/scope were re-reviewed. Ready to merge under squash policy after this state update is pushed and checks remain green."
+      },
+      {
+        "at": "2026-06-22T05:33:07Z",
+        "status": "merged",
+        "note": "Reconciled before M8: GitHub reports PR #2272 merged at 2026-06-22T03:26:57Z with merge commit d5562a8764eabed1889f3dbd57ed4691282f2197; origin/main contains the merge commit and local/remote task branches are absent."
+      }
+    ]
+  },
+  "B5-RESULT-M8-PRODUCTION-OPS-METRICS-01": {
+    "repo": "fap-api",
+    "branch": "codex/big5-v2-m8-production-ops-metrics",
+    "base": "main",
+    "status": "pr_open",
+    "train_scope": "big5_result_page_v2_production_ops",
+    "title": "B5-RESULT-M8-PRODUCTION-OPS-METRICS-01: Connect Big Five V2 weekly ops to production metrics",
+    "depends_on": [
+      "B5-RESULT-AUTO-MERGE-LIVE-PILOT-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized the M8 Production Ops Metrics PR plan."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "B5-RESULT-AUTO-MERGE-LIVE-PILOT-01 is merged and origin/main contains merge commit d5562a8764eabed1889f3dbd57ed4691282f2197."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ProductionOpsTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=ReportPdfCenterTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-ci-bigfive-local-m8.sqlite QUEUE_CONNECTION=sync php artisan test --filter '(BigFive|Big5|NonMbtiReportContractRegressionTest)' --no-ansi",
+          "cd backend && vendor/bin/pint --test app/Console/Commands/BigFiveResultPageV2AssetAgentAuditCommand.php app/Filament/Ops/Resources/ReportSnapshotResource/Support/ReportSnapshotExplorerSupport.php app/Services/BigFive/ResultPageV2/AssetAgent/BigFiveResultPageV2AssetAgent.php app/Services/BigFive/ResultPageV2/BigFiveResultPageV2ProductionOpsMetrics.php tests/Feature/Ops/ReportPdfCenterTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2AssetAgentTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2ProductionOpsTest.php",
+          "cd backend && vendor/bin/pint --test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2ProductionOpsTest.php",
+          "git diff --check",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+        ],
+        "evidence": "Targeted AssetAgentTest, ProductionOpsTest, ReportPdfCenterTest, CoreBodyPreviewTest, CI-equivalent Big Five filter, Pint --test, git diff --check, JSON parse, and YAML parse passed locally. The first GitHub verify-bigfive failure was scoped to this PR: the new missing-table test dropped report_snapshots in a broad suite and the new production ops metrics service needed freeze classifier allowlisting; both were fixed in current scope."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to Big Five V2 asset agent command/service/tests, ReportSnapshotExplorerSupport Ops summary reuse, and docs/codex PR-train metadata. No fap-web copy, runtime flag, release snapshot, production import gate, rollout gate, CMS write, or DB write changed."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #2279 required GitHub checks passed on head 6ffa8e950ad1ec23064819884ecd241276e840b7; mergeStateStatus CLEAN; PR title/body and changed-file scope were re-reviewed."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": "6ffa8e950ad1ec23064819884ecd241276e840b7",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2279",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-22T05:33:07Z",
+        "status": "in_progress",
+        "note": "Started M8 scoped backend PR from latest origin/main. Scope is limited to weekly-ops production metrics, shared Ops summary service, tests, and docs/codex metadata."
+      },
+      {
+        "at": "2026-06-22T05:39:03Z",
+        "status": "local_validated",
+        "note": "Implemented report_snapshots-backed weekly ops metrics, preserved contract source mode, reused the metrics service in Report/PDF Center, and passed local target tests plus static validation."
+      },
+      {
+        "at": "2026-06-22T05:41:11Z",
+        "status": "pr_open",
+        "note": "Opened PR #2279 after local validation and scope validation passed."
+      },
+      {
+        "at": "2026-06-22T05:54:15Z",
+        "status": "ci_fix_local_validated",
+        "note": "Inspected failed verify-bigfive jobs. Fixed current-scope test pollution from dropping report_snapshots in broad suites and added production ops metrics service to the Big Five V2 freeze classifier allowlist. Local CI-equivalent Big Five filter passed with 976 passed and 1 expected skip."
+      },
+      {
+        "at": "2026-06-22T06:00:39Z",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed on head 6ffa8e950ad1ec23064819884ecd241276e840b7, mergeStateStatus is CLEAN, and PR title/body/scope were re-reviewed. Ready to merge under squash policy after this state update is pushed and checks remain green."
       }
     ]
   }

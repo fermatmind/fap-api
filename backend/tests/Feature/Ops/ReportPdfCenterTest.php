@@ -204,9 +204,11 @@ final class ReportPdfCenterTest extends TestCase
         $this->assertSame(2, $summary['attached']);
         $this->assertSame(2, $summary['fallback']);
         $this->assertSame(1, $summary['invalid']);
+        $this->assertSame(0, $summary['disabled_or_not_evaluated_count']);
         $this->assertSame('40.0%', $summary['coverage_rate']);
         $this->assertSame('60.0%', $summary['fallback_rate']);
         $this->assertSame(3, $summary['validation_error_count']);
+        $this->assertIsString($summary['latest_audited_at']);
         $this->assertSame([
             'locked_or_free_preview' => 1,
             'production_rollout_denied' => 1,
@@ -214,6 +216,9 @@ final class ReportPdfCenterTest extends TestCase
         $this->assertSame([
             'payload_validation_failed' => 1,
         ], $summary['invalid_reasons']);
+        $this->assertSame([
+            'payload_validation_failed' => 1,
+        ], $summary['malformed_rejection_reasons']);
     }
 
     public function test_report_pdf_center_index_query_stays_lightweight_for_production_listing(): void

@@ -3627,6 +3627,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_bigfive_v2_production_ops_metrics_changes(): void
+    {
+        $changed = [
+            'backend/app/Filament/Ops/Resources/ReportSnapshotResource/Support/ReportSnapshotExplorerSupport.php',
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2ProductionOpsMetrics.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_bigfive_v2_asset_agent_audit_files(): void
     {
         $changed = [
@@ -6919,6 +6929,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Filament/Ops/Resources/ReportSnapshotResource/Pages/ListReportSnapshots.php',
             'backend/app/Filament/Ops/Resources/ReportSnapshotResource/Support/ReportSnapshotExplorerSupport.php',
             'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2AuditFields.php',
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2ProductionOpsMetrics.php',
             'backend/database/migrations/2026_06_19_000100_add_big5_result_page_v2_audit_fields_to_report_snapshots.php',
         ], true);
     }

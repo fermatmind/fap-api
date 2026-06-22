@@ -5,6 +5,10 @@ declare(strict_types=1);
 namespace Tests\Unit\Services\BigFive\ResultPageV2;
 
 use App\Services\BigFive\ResultPageV2\AssetAgent\BigFiveResultPageV2AssetAgent;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 final class BigFiveResultPageV2AssetAgentTest extends TestCase
@@ -885,6 +889,7 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
                 'action' => 'weekly-ops',
                 '--run-id' => 'weekly',
                 '--artifact-dir' => $artifactRoot,
+                '--ops-source' => 'contract',
                 '--json' => true,
             ])->assertExitCode(0);
 
@@ -894,6 +899,7 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
 
             $report = $this->readJson($runDir.'/weekly_ops_report.json');
             $this->assertSame('weekly_ops_runner', $report['task'] ?? null);
+            $this->assertSame('contract', $report['ops_source'] ?? null);
             $this->assertSame('not_runtime', $report['runtime_use'] ?? null);
             $this->assertFalse((bool) ($report['production_use_allowed'] ?? true));
             $this->assertTrue((bool) ($report['production_ops_reporting_ready'] ?? false));
@@ -918,6 +924,76 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
                 $this->assertFalse((bool) data_get($report, "negative_guarantees.{$guarantee}", true), $guarantee);
             }
         } finally {
+            $this->deleteDirectory($artifactRoot);
+        }
+    }
+
+    public function test_weekly_ops_defaults_to_report_snapshots_metrics_without_sensitive_fields(): void
+    {
+        $artifactRoot = base_path('artifacts/big5_result_page_v2_agent/unit-weekly-ops-report-snapshots');
+        $attemptIds = $this->seedBigFiveOpsSnapshotRows();
+
+        $this->deleteDirectory($artifactRoot);
+
+        try {
+            $this->artisan('big5:result-page-v2-agent', [
+                'action' => 'weekly-ops',
+                '--run-id' => 'weekly',
+                '--artifact-dir' => $artifactRoot,
+                '--window-days' => 45,
+                '--json' => true,
+            ])->assertExitCode(0);
+
+            $runDir = $artifactRoot.'/weekly';
+            $report = $this->readJson($runDir.'/weekly_ops_report.json');
+            $markdown = (string) file_get_contents($runDir.'/weekly_ops_report.md');
+
+            $this->assertSame('report_snapshots', $report['ops_source'] ?? null);
+            $this->assertSame('report_snapshots', $report['metrics_source'] ?? null);
+            $this->assertSame('ready', $report['metrics_query_status'] ?? null);
+            $this->assertSame(45, (int) ($report['reporting_window_days'] ?? 0));
+            $this->assertSame('not_runtime', $report['runtime_use'] ?? null);
+            $this->assertFalse((bool) ($report['production_use_allowed'] ?? true));
+            $this->assertFalse((bool) ($report['ready_for_runtime'] ?? true));
+            $this->assertFalse((bool) ($report['ready_for_production'] ?? true));
+
+            $this->assertSame(6, data_get($report, 'production_metrics.total_big5_reports'));
+            $this->assertSame(2, data_get($report, 'production_metrics.attached_count'));
+            $this->assertSame(2, data_get($report, 'production_metrics.fallback_count'));
+            $this->assertSame(1, data_get($report, 'production_metrics.invalid_count'));
+            $this->assertSame(1, data_get($report, 'production_metrics.disabled_or_not_evaluated_count'));
+            $this->assertSame('33.3%', data_get($report, 'production_metrics.v2_payload_coverage_rate'));
+            $this->assertSame('50.0%', data_get($report, 'production_metrics.fallback_hit_rate'));
+            $this->assertSame(3, data_get($report, 'production_metrics.validation_error_count'));
+            $this->assertIsString(data_get($report, 'production_metrics.latest_audited_at'));
+            $this->assertSame([
+                'payload_validation_failed' => 1,
+            ], data_get($report, 'production_metrics.malformed_rejection_reasons'));
+            $this->assertSame([
+                'locked_or_free_preview' => 1,
+                'production_rollout_denied' => 1,
+            ], data_get($report, 'production_metrics.fallback_reasons'));
+            $this->assertSame('not_returned', data_get($report, 'metric_redaction.report_body_fields'));
+            $this->assertStringContainsString('total_big5_reports: 6', $markdown);
+            $this->assertStringContainsString('malformed_rejection_reasons: {"payload_validation_failed":1}', $markdown);
+
+            $allArtifacts = (string) file_get_contents($runDir.'/weekly_ops_report.json')."\n".$markdown;
+            foreach ([
+                'attempt_id',
+                'private_url',
+                'report_json',
+                'report_full_json',
+                'report_free_json',
+                'raw scores',
+                'raw_score',
+                'raw_scores',
+                'shareable percentiles',
+                '[object Object]',
+            ] as $forbiddenToken) {
+                $this->assertStringNotContainsString($forbiddenToken, $allArtifacts, $forbiddenToken);
+            }
+        } finally {
+            DB::table('report_snapshots')->whereIn('attempt_id', $attemptIds)->delete();
             $this->deleteDirectory($artifactRoot);
         }
     }
@@ -1170,6 +1246,83 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
         } finally {
             $this->deleteDirectory($root);
         }
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function seedBigFiveOpsSnapshotRows(): array
+    {
+        $this->ensureReportSnapshotsTable();
+
+        $now = now();
+        $attemptIds = [];
+        $rows = [
+            ['status' => 'attached', 'reason' => 'v2_attached', 'errors' => 0, 'minutes_ago' => 5, 'scale' => 'BIG5_OCEAN'],
+            ['status' => 'attached', 'reason' => 'v2_attached', 'errors' => 0, 'minutes_ago' => 6, 'scale' => 'BIG5_OCEAN'],
+            ['status' => 'fallback', 'reason' => 'production_rollout_denied', 'errors' => 0, 'minutes_ago' => 7, 'scale' => 'BIG5_OCEAN'],
+            ['status' => 'fallback', 'reason' => 'locked_or_free_preview', 'errors' => 0, 'minutes_ago' => 8, 'scale' => 'BIG5_OCEAN'],
+            ['status' => 'invalid', 'reason' => 'payload_validation_failed', 'errors' => 3, 'minutes_ago' => 9, 'scale' => 'BIG5_OCEAN'],
+            ['status' => 'not_evaluated', 'reason' => 'production_runtime_disabled', 'errors' => 0, 'minutes_ago' => 10, 'scale' => 'BIG5_OCEAN'],
+            ['status' => 'invalid', 'reason' => 'route_input_invalid', 'errors' => 2, 'minutes_ago' => 60 * 24 * 50, 'scale' => 'BIG5_OCEAN'],
+            ['status' => 'attached', 'reason' => 'v2_attached', 'errors' => 0, 'minutes_ago' => 4, 'scale' => 'MBTI_16'],
+        ];
+
+        foreach ($rows as $index => $row) {
+            $attemptId = (string) Str::uuid();
+            $attemptIds[] = $attemptId;
+
+            DB::table('report_snapshots')->insert([
+                'org_id' => 0,
+                'attempt_id' => $attemptId,
+                'order_no' => null,
+                'scale_code' => $row['scale'],
+                'pack_id' => $row['scale'],
+                'dir_version' => 'v1',
+                'scoring_spec_version' => 'big5_spec_2026Q2_form90_v1',
+                'report_engine_version' => 'v1.2',
+                'big5_result_page_v2_status' => $row['status'],
+                'big5_result_page_v2_fallback_reason' => $row['reason'],
+                'big5_result_page_v2_validation_error_count' => $row['errors'],
+                'big5_result_page_v2_audited_at' => $now->copy()->subMinutes((int) $row['minutes_ago']),
+                'snapshot_version' => 'v1',
+                'report_json' => json_encode(['variant' => 'full', 'row' => $index], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                'status' => 'ready',
+                'last_error' => null,
+                'created_at' => $now->copy()->subMinutes((int) $row['minutes_ago']),
+                'updated_at' => $now->copy()->subMinutes((int) $row['minutes_ago']),
+            ]);
+        }
+
+        return $attemptIds;
+    }
+
+    private function ensureReportSnapshotsTable(): void
+    {
+        if (Schema::hasTable('report_snapshots')) {
+            return;
+        }
+
+        Schema::create('report_snapshots', function (Blueprint $table): void {
+            $table->id();
+            $table->unsignedBigInteger('org_id')->default(0);
+            $table->string('attempt_id');
+            $table->string('order_no')->nullable();
+            $table->string('scale_code')->nullable();
+            $table->string('pack_id')->nullable();
+            $table->string('dir_version')->nullable();
+            $table->string('scoring_spec_version')->nullable();
+            $table->string('report_engine_version')->nullable();
+            $table->string('big5_result_page_v2_status')->nullable();
+            $table->string('big5_result_page_v2_fallback_reason')->nullable();
+            $table->unsignedSmallInteger('big5_result_page_v2_validation_error_count')->default(0);
+            $table->timestamp('big5_result_page_v2_audited_at')->nullable();
+            $table->string('snapshot_version')->nullable();
+            $table->json('report_json')->nullable();
+            $table->string('status')->nullable();
+            $table->text('last_error')->nullable();
+            $table->timestamps();
+        });
     }
 
     private function tempDir(string $prefix): string
