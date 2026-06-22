@@ -183,4 +183,30 @@ final class ScaleImpactResolverTest extends TestCase
         $this->assertTrue((bool) ($result['run_full_scale_regression'] ?? false));
         $this->assertSame('full_regression', (string) ($result['scale_scope'] ?? ''));
     }
+
+    public function test_analytics_command_change_skips_mbti_smoke(): void
+    {
+        $resolver = new ScaleImpactResolver;
+        $result = $resolver->resolve([
+            'backend/app/Console/Commands/RefreshAnalyticsFunnelDailyCommand.php',
+        ]);
+
+        $this->assertTrue((bool) ($result['analytics_changed'] ?? false));
+        $this->assertFalse((bool) ($result['shared_changed'] ?? true));
+        $this->assertFalse((bool) ($result['run_mbti_smoke'] ?? true));
+        $this->assertSame('analytics_only_no_mbti_smoke', (string) ($result['scale_scope'] ?? ''));
+    }
+
+    public function test_analytics_migration_change_skips_mbti_smoke(): void
+    {
+        $resolver = new ScaleImpactResolver;
+        $result = $resolver->resolve([
+            'backend/database/migrations/2026_06_13_180000_create_analytics_test_metrics_daily_table.php',
+        ]);
+
+        $this->assertTrue((bool) ($result['analytics_changed'] ?? false));
+        $this->assertFalse((bool) ($result['shared_changed'] ?? true));
+        $this->assertFalse((bool) ($result['run_mbti_smoke'] ?? true));
+        $this->assertSame('analytics_only_no_mbti_smoke', (string) ($result['scale_scope'] ?? ''));
+    }
 }

@@ -126,6 +126,7 @@ RUN_PARTNER_API_SMOKE="${RUN_PARTNER_API_SMOKE:-1}"
 RUN_EXPERIMENT_GOVERNANCE_GATE="${RUN_EXPERIMENT_GOVERNANCE_GATE:-0}"
 RUN_OPENAPI_DIFF_GATE="${RUN_OPENAPI_DIFF_GATE:-1}"
 OPENAPI_DIFF_ALLOW_DRIFT="${OPENAPI_DIFF_ALLOW_DRIFT:-0}"
+RUN_MBTI_SMOKE="${RUN_MBTI_SMOKE:-1}"
 if [[ "$RUN_FULL_SCALE_REGRESSION" == "1" && "$RUN_SCALE_IDENTITY_CONTRACT" != "1" ]]; then
   RUN_SCALE_IDENTITY_CONTRACT="1"
 fi
@@ -171,7 +172,7 @@ raw_phpunit_in_memory() {
 }
 
 SCALE_SCOPE="${SCALE_SCOPE:-mbti_only}"
-echo "[CI] scale_scope=${SCALE_SCOPE} run_big5_ocean_gate=${RUN_BIG5_OCEAN_GATE} run_enneagram_gate=${RUN_ENNEAGRAM_GATE} run_clinical_combo_68_gate=${RUN_CLINICAL_COMBO_68_GATE} run_sds_20_gate=${RUN_SDS_20_GATE} run_eq_60_gate=${RUN_EQ_60_GATE} run_sds_norms_gate=${RUN_SDS_NORMS_GATE} run_full_scale_regression=${RUN_FULL_SCALE_REGRESSION} run_scale_identity_gate=${RUN_SCALE_IDENTITY_GATE} run_scale_identity_contract=${RUN_SCALE_IDENTITY_CONTRACT} run_scale_identity_hard_cutover=${RUN_SCALE_IDENTITY_HARD_CUTOVER} run_partner_api_smoke=${RUN_PARTNER_API_SMOKE} run_experiment_governance_gate=${RUN_EXPERIMENT_GOVERNANCE_GATE} run_openapi_diff_gate=${RUN_OPENAPI_DIFF_GATE} openapi_diff_allow_drift=${OPENAPI_DIFF_ALLOW_DRIFT}"
+echo "[CI] scale_scope=${SCALE_SCOPE} run_big5_ocean_gate=${RUN_BIG5_OCEAN_GATE} run_enneagram_gate=${RUN_ENNEAGRAM_GATE} run_clinical_combo_68_gate=${RUN_CLINICAL_COMBO_68_GATE} run_sds_20_gate=${RUN_SDS_20_GATE} run_eq_60_gate=${RUN_EQ_60_GATE} run_sds_norms_gate=${RUN_SDS_NORMS_GATE} run_full_scale_regression=${RUN_FULL_SCALE_REGRESSION} run_scale_identity_gate=${RUN_SCALE_IDENTITY_GATE} run_scale_identity_contract=${RUN_SCALE_IDENTITY_CONTRACT} run_scale_identity_hard_cutover=${RUN_SCALE_IDENTITY_HARD_CUTOVER} run_partner_api_smoke=${RUN_PARTNER_API_SMOKE} run_experiment_governance_gate=${RUN_EXPERIMENT_GOVERNANCE_GATE} run_openapi_diff_gate=${RUN_OPENAPI_DIFF_GATE} openapi_diff_allow_drift=${OPENAPI_DIFF_ALLOW_DRIFT} run_mbti_smoke=${RUN_MBTI_SMOKE}"
 if [[ "$RUN_BIG5_OCEAN_GATE" == "1" ]]; then
   echo "[CI] running BIG5_OCEAN content gates"
   bash "$BACKEND_DIR/scripts/ci/verify_big5_norms.sh"
@@ -746,107 +747,108 @@ if (( reads_count < 60 )); then
   exit 44
 fi
 
-# -----------------------------
-# Start server (force clean port first)
-# -----------------------------
-lsof -ti "tcp:${PORT}" | xargs -r kill -9 || true
-if lsof -ti "tcp:${PORT}" >/dev/null 2>&1; then
-  fail "port already in use: ${PORT}. Stop your local server or set PORT=18xxx"
-fi
-
-echo "[CI] starting server: php artisan serve --host=$HOST --port=$PORT"
-CACHE_STORE=file php artisan serve --host="$HOST" --port="$PORT" >"$SERVE_LOG" 2>&1 &
-SERVE_PID=$!
-
-echo "[CI] waiting for health: $API/api/healthz"
-wait_health "$API/api/healthz" 100 || {
-  echo "[CI][FAIL] server not ready"
-  echo "---- tail artisan_serve.log ----" >&2
-  tail -n 120 "$SERVE_LOG" >&2 || true
-  exit 11
-}
-echo "[CI] server ready (pid=$SERVE_PID)"
-
-# -----------------------------
-# Self-check: manifest/assets/schema
-# -----------------------------
-SELF_CHECK_PKG="${SELF_CHECK_PKG:-$CANON_REL}"
-echo "[CI] fap:self-check (manifest/assets/schema) pkg=$SELF_CHECK_PKG"
-php artisan fap:self-check --pkg="$SELF_CHECK_PKG" >"$SELF_CHECK_LOG" 2>&1 || {
-  echo "[CI][FAIL] self-check failed"
-  tail -n 220 "$SELF_CHECK_LOG" >&2 || true
-  exit 12
-}
-echo "[CI] self-check OK"
-
-# -----------------------------
-# MVP check (templates + reads)
-# - Always persist log to artifacts (for postmortem)
-# - Default is HARD GATE (MVP_STRICT=1)
-# -----------------------------
-if [[ -n "$PACK_DIR" ]]; then
-  MVP_SH="$SCRIPT_DIR/mvp_check.sh"
-  if [[ ! -x "$MVP_SH" ]]; then
-    echo "[CI][FAIL] missing or not executable: $MVP_SH" >&2
-    exit 14
+if [[ "$RUN_MBTI_SMOKE" == "1" ]]; then
+  # -----------------------------
+  # Start server (force clean port first)
+  # -----------------------------
+  lsof -ti "tcp:${PORT}" | xargs -r kill -9 || true
+  if lsof -ti "tcp:${PORT}" >/dev/null 2>&1; then
+    fail "port already in use: ${PORT}. Stop your local server or set PORT=18xxx"
   fi
 
-  echo "[CI] MVP check -> $MVP_LOG"
-  set +e
-  {
-    echo "== MVP check (templates + reads) =="
-    echo "PACK_DIR=$PACK_DIR"
-    bash "$MVP_SH" "$PACK_DIR"
-    echo "EXIT=$?"
-  } 2>&1 | tee "$MVP_LOG"
-  set -e
+  echo "[CI] starting server: php artisan serve --host=$HOST --port=$PORT"
+  CACHE_STORE=file php artisan serve --host="$HOST" --port="$PORT" >"$SERVE_LOG" 2>&1 &
+  SERVE_PID=$!
 
-  if [[ "$MVP_STRICT" == "1" ]]; then
-    # 1) templates coverage: any false => FAIL
-    if grep -qE '^[A-Z]{2}\.[A-Z]=false$' "$MVP_LOG"; then
-      echo "[CI][FAIL] MVP templates coverage has false (see $MVP_LOG)" >&2
-      exit 30
-    fi
+  echo "[CI] waiting for health: $API/api/healthz"
+  wait_health "$API/api/healthz" 100 || {
+    echo "[CI][FAIL] server not ready"
+    echo "---- tail artisan_serve.log ----" >&2
+    tail -n 120 "$SERVE_LOG" >&2 || true
+    exit 11
+  }
+  echo "[CI] server ready (pid=$SERVE_PID)"
 
-    # 2) reads thresholds
-    total_unique="$(grep -E '^reads\.total_unique=' "$MVP_LOG" | tail -n 1 | sed -E 's/^reads\.total_unique=//')"
-    fallback="$(grep -E '^reads\.fallback=' "$MVP_LOG" | tail -n 1 | sed -E 's/^reads\.fallback=//')"
-    non_empty="$(grep -E '^reads\.non_empty_strategy_buckets=' "$MVP_LOG" | tail -n 1 | sed -E 's/^reads\.non_empty_strategy_buckets=([0-9]+).*/\1/')"
+  # -----------------------------
+  # Self-check: manifest/assets/schema
+  # -----------------------------
+  SELF_CHECK_PKG="${SELF_CHECK_PKG:-$CANON_REL}"
+  echo "[CI] fap:self-check (manifest/assets/schema) pkg=$SELF_CHECK_PKG"
+  php artisan fap:self-check --pkg="$SELF_CHECK_PKG" >"$SELF_CHECK_LOG" 2>&1 || {
+    echo "[CI][FAIL] self-check failed"
+    tail -n 220 "$SELF_CHECK_LOG" >&2 || true
+    exit 12
+  }
+  echo "[CI] self-check OK"
 
-    if ! [[ "$total_unique" =~ ^[0-9]+$ && "$fallback" =~ ^[0-9]+$ && "$non_empty" =~ ^[0-9]+$ ]]; then
-      echo "[CI][FAIL] MVP reads stats missing/non-numeric (see $MVP_LOG)" >&2
-      exit 31
-    fi
-    if (( total_unique < 7 )); then
-      echo "[CI][FAIL] MVP reads.total_unique=$total_unique < 7 (see $MVP_LOG)" >&2
-      exit 32
-    fi
-    if (( fallback < 2 )); then
-      echo "[CI][FAIL] MVP reads.fallback=$fallback < 2 (see $MVP_LOG)" >&2
-      exit 33
-    fi
-    if (( non_empty < 2 )); then
-      echo "[CI][FAIL] MVP reads.non_empty_strategy_buckets=$non_empty < 2 (see $MVP_LOG)" >&2
-      exit 34
+  # -----------------------------
+  # MVP check (templates + reads)
+  # - Always persist log to artifacts (for postmortem)
+  # - Default is HARD GATE (MVP_STRICT=1)
+  # -----------------------------
+  if [[ -n "$PACK_DIR" ]]; then
+    MVP_SH="$SCRIPT_DIR/mvp_check.sh"
+    if [[ ! -x "$MVP_SH" ]]; then
+      echo "[CI][FAIL] missing or not executable: $MVP_SH" >&2
+      exit 14
     fi
 
-    echo "[CI] MVP check PASS ✅"
-  else
-    echo "[CI][WARN] MVP_STRICT=0; skip MVP hard gate (log only)."
+    echo "[CI] MVP check -> $MVP_LOG"
+    set +e
+    {
+      echo "== MVP check (templates + reads) =="
+      echo "PACK_DIR=$PACK_DIR"
+      bash "$MVP_SH" "$PACK_DIR"
+      echo "EXIT=$?"
+    } 2>&1 | tee "$MVP_LOG"
+    set -e
+
+    if [[ "$MVP_STRICT" == "1" ]]; then
+      # 1) templates coverage: any false => FAIL
+      if grep -qE '^[A-Z]{2}\.[A-Z]=false$' "$MVP_LOG"; then
+        echo "[CI][FAIL] MVP templates coverage has false (see $MVP_LOG)" >&2
+        exit 30
+      fi
+
+      # 2) reads thresholds
+      total_unique="$(grep -E '^reads\.total_unique=' "$MVP_LOG" | tail -n 1 | sed -E 's/^reads\.total_unique=//')"
+      fallback="$(grep -E '^reads\.fallback=' "$MVP_LOG" | tail -n 1 | sed -E 's/^reads\.fallback=//')"
+      non_empty="$(grep -E '^reads\.non_empty_strategy_buckets=' "$MVP_LOG" | tail -n 1 | sed -E 's/^reads\.non_empty_strategy_buckets=([0-9]+).*/\1/')"
+
+      if ! [[ "$total_unique" =~ ^[0-9]+$ && "$fallback" =~ ^[0-9]+$ && "$non_empty" =~ ^[0-9]+$ ]]; then
+        echo "[CI][FAIL] MVP reads stats missing/non-numeric (see $MVP_LOG)" >&2
+        exit 31
+      fi
+      if (( total_unique < 7 )); then
+        echo "[CI][FAIL] MVP reads.total_unique=$total_unique < 7 (see $MVP_LOG)" >&2
+        exit 32
+      fi
+      if (( fallback < 2 )); then
+        echo "[CI][FAIL] MVP reads.fallback=$fallback < 2 (see $MVP_LOG)" >&2
+        exit 33
+      fi
+      if (( non_empty < 2 )); then
+        echo "[CI][FAIL] MVP reads.non_empty_strategy_buckets=$non_empty < 2 (see $MVP_LOG)" >&2
+        exit 34
+      fi
+
+      echo "[CI] MVP check PASS ✅"
+    else
+      echo "[CI][WARN] MVP_STRICT=0; skip MVP hard gate (log only)."
+    fi
   fi
-fi
 
-# -----------------------------
-# Smoke: questions endpoint must be ok=true
-# -----------------------------
-SMOKE_SCALE_CODE="${SMOKE_SCALE_CODE:-MBTI}"
-if [[ "$RUN_SCALE_IDENTITY_HARD_CUTOVER" == "1" ]]; then
-  SMOKE_SCALE_CODE="MBTI_PERSONALITY_TEST_16_TYPES"
-fi
+  # -----------------------------
+  # Smoke: questions endpoint must be ok=true
+  # -----------------------------
+  SMOKE_SCALE_CODE="${SMOKE_SCALE_CODE:-MBTI}"
+  if [[ "$RUN_SCALE_IDENTITY_HARD_CUTOVER" == "1" ]]; then
+    SMOKE_SCALE_CODE="MBTI_PERSONALITY_TEST_16_TYPES"
+  fi
 
-echo "[CI] smoke: /api/v0.3/scales/${SMOKE_SCALE_CODE}/questions"
-echo "[CI] smoke precheck db_connection=${DB_CONNECTION} db_database=${DB_DATABASE}"
-if ! APP_ENV="$APP_ENV" DB_CONNECTION="$DB_CONNECTION" DB_DATABASE="$DB_DATABASE" BACKEND_DIR="$BACKEND_DIR" php -r '
+  echo "[CI] smoke: /api/v0.3/scales/${SMOKE_SCALE_CODE}/questions"
+  echo "[CI] smoke precheck db_connection=${DB_CONNECTION} db_database=${DB_DATABASE}"
+  if ! APP_ENV="$APP_ENV" DB_CONNECTION="$DB_CONNECTION" DB_DATABASE="$DB_DATABASE" BACKEND_DIR="$BACKEND_DIR" php -r '
 $backendDir = rtrim((string) getenv("BACKEND_DIR"), "/");
 require $backendDir . "/vendor/autoload.php";
 $app = require $backendDir . "/bootstrap/app.php";
@@ -873,113 +875,112 @@ if (!$exists) {
     exit(3);
 }
 '; then
-  echo "[CI][FAIL] MBTI scale registry baseline missing before smoke"
-  exit 13
-fi
-
-SMOKE_HTTP_CODE=""
-for attempt in 1 2 3; do
-  SMOKE_HTTP_CODE="$(curl -sS -o "$SMOKE_Q_LOG" -w "%{http_code}" "$API/api/v0.3/scales/${SMOKE_SCALE_CODE}/questions" || true)"
-  if [[ "$SMOKE_HTTP_CODE" == "200" ]]; then
-    break
+    echo "[CI][FAIL] MBTI scale registry baseline missing before smoke"
+    exit 13
   fi
 
-  if [[ "$attempt" -lt 3 ]]; then
-    echo "[CI][WARN] smoke attempt ${attempt} failed http=${SMOKE_HTTP_CODE}, retrying..."
-    sleep 1
-  fi
-done
-
-if [[ "$SMOKE_HTTP_CODE" != "200" ]]; then
-  echo "[CI][FAIL] smoke curl failed http=${SMOKE_HTTP_CODE}"
-  head -c 1200 "$SMOKE_Q_LOG" || true
-  echo
-  tail -n 120 "$SERVE_LOG" >&2 || true
-  exit 13
-fi
-
-if ! php -r '$j=json_decode(file_get_contents($argv[1]), true); if (!is_array($j) || !($j["ok"] ?? false)) { exit(1); }' "$SMOKE_Q_LOG" >/dev/null 2>&1; then
-  echo "[CI][FAIL] smoke returned ok=false. body:"
-  head -c 1200 "$SMOKE_Q_LOG" || true
-  echo
-  echo "[CI] tail artisan_serve.log:"
-  tail -n 200 "$SERVE_LOG" || true
-  exit 13
-fi
-echo "[CI] smoke OK"
-
-if [[ "$RUN_SCALE_IDENTITY_HARD_CUTOVER" == "1" ]]; then
-  echo "[CI] running scale identity hard-cutover contract gate (full regression)"
-  API="$API" REGION="$REGION" LOCALE="$LOCALE" bash "$SCALE_IDENTITY_HARD_CUTOVER_SH"
-  echo "[CI] scale identity hard-cutover contract gate OK"
-elif [[ "$RUN_SCALE_IDENTITY_CONTRACT" == "1" ]]; then
-  echo "[CI] running scale identity contract gate"
-  API="$API" REGION="$REGION" LOCALE="$LOCALE" bash "$SCALE_IDENTITY_CONTRACT_SH"
-  echo "[CI] scale identity contract gate OK"
-fi
-
-# -----------------------------
-# Run E2E verify
-# -----------------------------
-echo "[CI] get fm_token for gated endpoints"
-echo "[CI] verify anon_id=$ANON_ID"
-FM_TOKEN="$(
-  curl -sS -X POST "$API/api/v0.3/auth/wx_phone" \
-    -H "Content-Type: application/json" \
-    -d "{\"wx_code\":\"dev\",\"phone_code\":\"dev\",\"anon_id\":\"${ANON_ID}\"}" \
-  | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo $j["token"] ?? "";'
-)"
-
-if [[ -z "$FM_TOKEN" || "$FM_TOKEN" == "null" ]]; then
-  echo "[CI][FAIL] cannot get token from /api/v0.3/auth/wx_phone" >&2
-  exit 15
-fi
-
-set_curl_auth
-
-VERIFY_MBTI_SCALE_CODE="${VERIFY_MBTI_SCALE_CODE:-MBTI}"
-VERIFY_MBTI_EXPECT_PACK_PREFIX="${VERIFY_MBTI_EXPECT_PACK_PREFIX:-MBTI.cn-mainland.zh-CN.}"
-if [[ "$RUN_SCALE_IDENTITY_HARD_CUTOVER" == "1" ]]; then
-  VERIFY_MBTI_SCALE_CODE="MBTI_PERSONALITY_TEST_16_TYPES"
-fi
-
-echo "[CI] running verify_mbti.sh (with FM_TOKEN) scale_code=${VERIFY_MBTI_SCALE_CODE}"
-API="$API" REGION="$REGION" LOCALE="$LOCALE" SCALE_CODE="$VERIFY_MBTI_SCALE_CODE" EXPECT_PACK_PREFIX="$VERIFY_MBTI_EXPECT_PACK_PREFIX" RUN_DIR="$RUN_DIR" ANON_ID="$ANON_ID" FM_TOKEN="$FM_TOKEN" \
-  bash "$SCRIPT_DIR/verify_mbti.sh"
-echo "[CI] verify_mbti OK ✅"
-
-# -----------------------------
-# ContentGraph: stability / rollback verification
-# -----------------------------
-RR_DIR="$RUN_DIR/content_graph"
-mkdir -p "$RR_DIR"
-ATTEMPT_ID_FILE="$RUN_DIR/attempt_id.txt"
-if [[ ! -s "$ATTEMPT_ID_FILE" ]]; then
-  fail "missing attempt_id file for content_graph checks: $ATTEMPT_ID_FILE"
-fi
-ATTEMPT_ID="$(cat "$ATTEMPT_ID_FILE")"
-REPORT_URL="$API/api/v0.3/attempts/$ATTEMPT_ID/report?anon_id=$ANON_ID"
-
-RR_REPORT_1="$RR_DIR/report_rr_1.json"
-RR_REPORT_2="$RR_DIR/report_rr_2.json"
-RR_LIST_1="$RR_DIR/recommended_reads_1.json"
-RR_LIST_2="$RR_DIR/recommended_reads_2.json"
-RR_COMPARE="$RR_DIR/recommended_reads_compare.json"
-RR_ROLLBACK="$RR_DIR/recommended_reads_rollback.json"
-
-if [[ "${CONTENT_GRAPH_ENABLED:-0}" == "1" ]]; then
-  echo "[CI] content_graph stability: recommended_reads (CONTENT_GRAPH_ENABLED=1)"
-  fetch_authed_json "$REPORT_URL" "$RR_REPORT_1"
-  fetch_authed_json "$REPORT_URL" "$RR_REPORT_2"
-
-  rr_count=""
-  for f in "$RR_REPORT_1" "$RR_REPORT_2"; do
-    out="$RR_LIST_2"
-    if [[ "$f" == "$RR_REPORT_1" ]]; then
-      out="$RR_LIST_1"
+  SMOKE_HTTP_CODE=""
+  for attempt in 1 2 3; do
+    SMOKE_HTTP_CODE="$(curl -sS -o "$SMOKE_Q_LOG" -w "%{http_code}" "$API/api/v0.3/scales/${SMOKE_SCALE_CODE}/questions" || true)"
+    if [[ "$SMOKE_HTTP_CODE" == "200" ]]; then
+      break
     fi
-    set +e
-    rr_out="$(php -r '
+
+    if [[ "$attempt" -lt 3 ]]; then
+      echo "[CI][WARN] smoke attempt ${attempt} failed http=${SMOKE_HTTP_CODE}, retrying..."
+      sleep 1
+    fi
+  done
+
+  if [[ "$SMOKE_HTTP_CODE" != "200" ]]; then
+    echo "[CI][FAIL] smoke curl failed http=${SMOKE_HTTP_CODE}"
+    head -c 1200 "$SMOKE_Q_LOG" || true
+    echo
+    tail -n 120 "$SERVE_LOG" >&2 || true
+    exit 13
+  fi
+
+  if ! php -r '$j=json_decode(file_get_contents($argv[1]), true); if (!is_array($j) || !($j["ok"] ?? false)) { exit(1); }' "$SMOKE_Q_LOG" >/dev/null 2>&1; then
+    echo "[CI][FAIL] smoke returned ok=false. body:"
+    head -c 1200 "$SMOKE_Q_LOG" || true
+    echo
+    echo "[CI] tail artisan_serve.log:"
+    tail -n 200 "$SERVE_LOG" || true
+    exit 13
+  fi
+  echo "[CI] smoke OK"
+
+  if [[ "$RUN_SCALE_IDENTITY_HARD_CUTOVER" == "1" ]]; then
+    echo "[CI] running scale identity hard-cutover contract gate (full regression)"
+    API="$API" REGION="$REGION" LOCALE="$LOCALE" bash "$SCALE_IDENTITY_HARD_CUTOVER_SH"
+    echo "[CI] scale identity hard-cutover contract gate OK"
+  elif [[ "$RUN_SCALE_IDENTITY_CONTRACT" == "1" ]]; then
+    echo "[CI] running scale identity contract gate"
+    API="$API" REGION="$REGION" LOCALE="$LOCALE" bash "$SCALE_IDENTITY_CONTRACT_SH"
+    echo "[CI] scale identity contract gate OK"
+  fi
+  # -----------------------------
+  # Run E2E verify
+  # -----------------------------
+  echo "[CI] get fm_token for gated endpoints"
+  echo "[CI] verify anon_id=$ANON_ID"
+  FM_TOKEN="$(
+    curl -sS -X POST "$API/api/v0.3/auth/wx_phone" \
+      -H "Content-Type: application/json" \
+      -d "{\"wx_code\":\"dev\",\"phone_code\":\"dev\",\"anon_id\":\"${ANON_ID}\"}" \
+    | php -r '$j=json_decode(stream_get_contents(STDIN), true); echo $j["token"] ?? "";'
+  )"
+
+  if [[ -z "$FM_TOKEN" || "$FM_TOKEN" == "null" ]]; then
+    echo "[CI][FAIL] cannot get token from /api/v0.3/auth/wx_phone" >&2
+    exit 15
+  fi
+
+  set_curl_auth
+
+  VERIFY_MBTI_SCALE_CODE="${VERIFY_MBTI_SCALE_CODE:-MBTI}"
+  VERIFY_MBTI_EXPECT_PACK_PREFIX="${VERIFY_MBTI_EXPECT_PACK_PREFIX:-MBTI.cn-mainland.zh-CN.}"
+  if [[ "$RUN_SCALE_IDENTITY_HARD_CUTOVER" == "1" ]]; then
+    VERIFY_MBTI_SCALE_CODE="MBTI_PERSONALITY_TEST_16_TYPES"
+  fi
+
+  echo "[CI] running verify_mbti.sh (with FM_TOKEN) scale_code=${VERIFY_MBTI_SCALE_CODE}"
+  API="$API" REGION="$REGION" LOCALE="$LOCALE" SCALE_CODE="$VERIFY_MBTI_SCALE_CODE" EXPECT_PACK_PREFIX="$VERIFY_MBTI_EXPECT_PACK_PREFIX" RUN_DIR="$RUN_DIR" ANON_ID="$ANON_ID" FM_TOKEN="$FM_TOKEN" \
+    bash "$SCRIPT_DIR/verify_mbti.sh"
+  echo "[CI] verify_mbti OK ✅"
+
+  # -----------------------------
+  # ContentGraph: stability / rollback verification
+  # -----------------------------
+  RR_DIR="$RUN_DIR/content_graph"
+  mkdir -p "$RR_DIR"
+  ATTEMPT_ID_FILE="$RUN_DIR/attempt_id.txt"
+  if [[ ! -s "$ATTEMPT_ID_FILE" ]]; then
+    fail "missing attempt_id file for content_graph checks: $ATTEMPT_ID_FILE"
+  fi
+  ATTEMPT_ID="$(cat "$ATTEMPT_ID_FILE")"
+  REPORT_URL="$API/api/v0.3/attempts/$ATTEMPT_ID/report?anon_id=$ANON_ID"
+
+  RR_REPORT_1="$RR_DIR/report_rr_1.json"
+  RR_REPORT_2="$RR_DIR/report_rr_2.json"
+  RR_LIST_1="$RR_DIR/recommended_reads_1.json"
+  RR_LIST_2="$RR_DIR/recommended_reads_2.json"
+  RR_COMPARE="$RR_DIR/recommended_reads_compare.json"
+  RR_ROLLBACK="$RR_DIR/recommended_reads_rollback.json"
+
+  if [[ "${CONTENT_GRAPH_ENABLED:-0}" == "1" ]]; then
+    echo "[CI] content_graph stability: recommended_reads (CONTENT_GRAPH_ENABLED=1)"
+    fetch_authed_json "$REPORT_URL" "$RR_REPORT_1"
+    fetch_authed_json "$REPORT_URL" "$RR_REPORT_2"
+
+    rr_count=""
+    for f in "$RR_REPORT_1" "$RR_REPORT_2"; do
+      out="$RR_LIST_2"
+      if [[ "$f" == "$RR_REPORT_1" ]]; then
+        out="$RR_LIST_1"
+      fi
+      set +e
+      rr_out="$(php -r '
 $path = $argv[1];
 $out = $argv[2];
 $j = json_decode(file_get_contents($path), true);
@@ -1002,21 +1003,21 @@ foreach ($rr as $item) {
 file_put_contents($out, json_encode($list, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
 echo $len;
 ' "$f" "$out")"
-    php_ec=$?
-    set -e
-    if [[ "$php_ec" -ne 0 ]]; then
-      if [[ "$php_ec" -eq 3 ]]; then
-        fail "report.recommended_reads missing or not array (CONTENT_GRAPH_ENABLED=1). file=$f"
+      php_ec=$?
+      set -e
+      if [[ "$php_ec" -ne 0 ]]; then
+        if [[ "$php_ec" -eq 3 ]]; then
+          fail "report.recommended_reads missing or not array (CONTENT_GRAPH_ENABLED=1). file=$f"
+        fi
+        if [[ "$php_ec" -eq 4 ]]; then
+          fail "report.recommended_reads count out of range: $rr_out (expect 3-6). file=$f"
+        fi
+        fail "report.recommended_reads parse failed (CONTENT_GRAPH_ENABLED=1). file=$f"
       fi
-      if [[ "$php_ec" -eq 4 ]]; then
-        fail "report.recommended_reads count out of range: $rr_out (expect 3-6). file=$f"
-      fi
-      fail "report.recommended_reads parse failed (CONTENT_GRAPH_ENABLED=1). file=$f"
-    fi
-    rr_count="$rr_out"
-  done
+      rr_count="$rr_out"
+    done
 
-  php -r '
+    php -r '
 $a = json_decode(file_get_contents($argv[1]), true);
 $b = json_decode(file_get_contents($argv[2]), true);
 if (!is_array($a)) { $a = []; }
@@ -1024,21 +1025,21 @@ if (!is_array($b)) { $b = []; }
 echo json_encode(["first" => $a, "second" => $b], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 ' "$RR_LIST_1" "$RR_LIST_2" >"$RR_COMPARE"
 
-  if ! cmp -s "$RR_LIST_1" "$RR_LIST_2"; then
-    fail "recommended_reads unstable across calls (see $RR_COMPARE)"
-  fi
+    if ! cmp -s "$RR_LIST_1" "$RR_LIST_2"; then
+      fail "recommended_reads unstable across calls (see $RR_COMPARE)"
+    fi
 
-  echo "[CI] content_graph stability OK (recommended_reads count=$rr_count)"
-else
-  echo "[CI] content_graph rollback: recommended_reads disabled (CONTENT_GRAPH_ENABLED=0)"
-  REPORT_JSON="$RUN_DIR/report.json"
-  if [[ ! -s "$REPORT_JSON" ]]; then
-    fetch_authed_json "$REPORT_URL" "$RR_REPORT_1"
-    REPORT_JSON="$RR_REPORT_1"
-  fi
+    echo "[CI] content_graph stability OK (recommended_reads count=$rr_count)"
+  else
+    echo "[CI] content_graph rollback: recommended_reads disabled (CONTENT_GRAPH_ENABLED=0)"
+    REPORT_JSON="$RUN_DIR/report.json"
+    if [[ ! -s "$REPORT_JSON" ]]; then
+      fetch_authed_json "$REPORT_URL" "$RR_REPORT_1"
+      REPORT_JSON="$RR_REPORT_1"
+    fi
 
-  set +e
-  rr_meta="$(php -r '
+    set +e
+    rr_meta="$(php -r '
 $path = $argv[1];
 $out = $argv[2];
 $j = json_decode(file_get_contents($path), true);
@@ -1053,107 +1054,110 @@ $payload = ["has_recommended_reads" => $has, "recommended_reads_length" => $len]
 file_put_contents($out, json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
 echo ($has ? "1" : "0") . ":" . $len;
 ' "$REPORT_JSON" "$RR_ROLLBACK")"
-  php_ec=$?
-  set -e
-  if [[ "$php_ec" -ne 0 ]]; then
-    if [[ "$php_ec" -eq 3 ]]; then
-      fail "report.recommended_reads present but not array (CONTENT_GRAPH_ENABLED=0). file=$REPORT_JSON"
+    php_ec=$?
+    set -e
+    if [[ "$php_ec" -ne 0 ]]; then
+      if [[ "$php_ec" -eq 3 ]]; then
+        fail "report.recommended_reads present but not array (CONTENT_GRAPH_ENABLED=0). file=$REPORT_JSON"
+      fi
+      if [[ "$php_ec" -eq 4 ]]; then
+        fail "report.recommended_reads should be empty or missing when CONTENT_GRAPH_ENABLED=0. file=$REPORT_JSON"
+      fi
+      fail "report.recommended_reads parse failed (CONTENT_GRAPH_ENABLED=0). file=$REPORT_JSON"
     fi
-    if [[ "$php_ec" -eq 4 ]]; then
-      fail "report.recommended_reads should be empty or missing when CONTENT_GRAPH_ENABLED=0. file=$REPORT_JSON"
-    fi
-    fail "report.recommended_reads parse failed (CONTENT_GRAPH_ENABLED=0). file=$REPORT_JSON"
+
+    rr_len="${rr_meta#*:}"
+    echo "[CI] content_graph rollback OK (recommended_reads length=$rr_len)"
   fi
 
-  rr_len="${rr_meta#*:}"
-  echo "[CI] content_graph rollback OK (recommended_reads length=$rr_len)"
+  # -----------------------------
+  # Events acceptance (M3)
+  # -----------------------------
+  echo "[CI] events acceptance (M3)"
+
+  # Ensure sqlite path is passed to acceptance scripts (keep consistent with CI env)
+  SQLITE_DB_FOR_ACCEPT="$DB_DATABASE"
+
+  # ----------------------------
+  # Phase B: phone OTP acceptance (run before events so logs/order are clear)
+  # ----------------------------
+  if [[ "$ACCEPT_PHONE" == "1" ]]; then
+    echo "[CI] phone otp acceptance (Phase B)"
+    API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" CACHE_STORE=file bash "$ACCEPT_PHONE_SH"
+    echo "[CI] phone otp acceptance OK"
+  fi
+
+  # ----------------------------
+  # Phase C-1: email claim acceptance (optional)
+  # ----------------------------
+  if [[ "$ACCEPT_EMAIL" == "1" ]]; then
+    echo "[CI] email claim acceptance (Phase C-1)"
+    API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" bash "$ACCEPT_EMAIL_SH"
+    echo "[CI] email claim acceptance OK"
+
+    echo "[CI] email outbox dedup acceptance (Phase C-1b)"
+    API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" bash "$ACCEPT_EMAIL_DEDUP_SH"
+    echo "[CI] email outbox dedup acceptance OK"
+  fi
+
+  # ----------------------------
+  # Phase C-2: identities bind acceptance (optional)
+  # ----------------------------
+  if [[ "$ACCEPT_IDENTITIES" == "1" ]]; then
+    echo "[CI] identities bind acceptance (Phase C-2)"
+    API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" bash "$ACCEPT_IDENTITIES_SH"
+    echo "[CI] identities bind acceptance OK"
+  fi
+
+  # ----------------------------
+  # Phase C-3: abuse audit acceptance (optional)
+  # ----------------------------
+  if [[ "$ACCEPT_ABUSE" == "1" ]]; then
+    echo "[CI] abuse audit acceptance (Phase C-3)"
+    API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" bash "$ACCEPT_ABUSE_SH"
+    echo "[CI] abuse audit acceptance OK"
+  fi
+
+  # ----------------------------
+  # Phase C-4: lookup/order acceptance (optional)
+  # ----------------------------
+  if [[ "$ACCEPT_ORDER" == "1" ]]; then
+    echo "[CI] lookup order acceptance (Phase C-4)"
+    API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" bash "$ACCEPT_ORDER_SH"
+    echo "[CI] lookup order acceptance OK"
+  fi
+
+  API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" ANON_ID="$ANON_ID" FM_TOKEN="$FM_TOKEN" \
+    "$SCRIPT_DIR/accept_events_C.sh" >/dev/null
+
+  API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" FM_TOKEN="$FM_TOKEN" \
+    "$SCRIPT_DIR/accept_events_F_result_view_meta.sh"
+
+  API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" FM_TOKEN="$FM_TOKEN" \
+    "$SCRIPT_DIR/accept_events_G_report_view_meta.sh"
+
+  API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" FM_TOKEN="$FM_TOKEN" \
+    SKIP_C=1 "$SCRIPT_DIR/accept_events_E_share_meta.sh"
+
+  API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" FM_TOKEN="$FM_TOKEN" \
+    "$SCRIPT_DIR/accept_events_H_share_view_meta.sh"
+
+  API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" FM_TOKEN="$FM_TOKEN" \
+    "$SCRIPT_DIR/accept_events_D_anon.sh"
+
+  API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" FM_TOKEN="$FM_TOKEN" \
+    "$SCRIPT_DIR/accept_events_D_click_anon_override.sh"
+
+  API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" FM_TOKEN="$FM_TOKEN" \
+    "$SCRIPT_DIR/accept_events_D_anon_block_placeholder_click.sh"
+
+  echo "[CI] events acceptance OK"
+
+  echo "[CI] stopping API server before phpunit gates"
+  stop_server_if_running
+else
+  echo "[CI] MBTI smoke/e2e block skipped (RUN_MBTI_SMOKE=0 scale_scope=${SCALE_SCOPE})"
 fi
-
-# -----------------------------
-# Events acceptance (M3)
-# -----------------------------
-echo "[CI] events acceptance (M3)"
-
-# Ensure sqlite path is passed to acceptance scripts (keep consistent with CI env)
-SQLITE_DB_FOR_ACCEPT="$DB_DATABASE"
-
-# ----------------------------
-# Phase B: phone OTP acceptance (run before events so logs/order are clear)
-# ----------------------------
-if [[ "$ACCEPT_PHONE" == "1" ]]; then
-  echo "[CI] phone otp acceptance (Phase B)"
-  API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" CACHE_STORE=file bash "$ACCEPT_PHONE_SH"
-  echo "[CI] phone otp acceptance OK"
-fi
-
-# ----------------------------
-# Phase C-1: email claim acceptance (optional)
-# ----------------------------
-if [[ "$ACCEPT_EMAIL" == "1" ]]; then
-  echo "[CI] email claim acceptance (Phase C-1)"
-  API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" bash "$ACCEPT_EMAIL_SH"
-  echo "[CI] email claim acceptance OK"
-
-  echo "[CI] email outbox dedup acceptance (Phase C-1b)"
-  API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" bash "$ACCEPT_EMAIL_DEDUP_SH"
-  echo "[CI] email outbox dedup acceptance OK"
-fi
-
-# ----------------------------
-# Phase C-2: identities bind acceptance (optional)
-# ----------------------------
-if [[ "$ACCEPT_IDENTITIES" == "1" ]]; then
-  echo "[CI] identities bind acceptance (Phase C-2)"
-  API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" bash "$ACCEPT_IDENTITIES_SH"
-  echo "[CI] identities bind acceptance OK"
-fi
-
-# ----------------------------
-# Phase C-3: abuse audit acceptance (optional)
-# ----------------------------
-if [[ "$ACCEPT_ABUSE" == "1" ]]; then
-  echo "[CI] abuse audit acceptance (Phase C-3)"
-  API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" bash "$ACCEPT_ABUSE_SH"
-  echo "[CI] abuse audit acceptance OK"
-fi
-
-# ----------------------------
-# Phase C-4: lookup/order acceptance (optional)
-# ----------------------------
-if [[ "$ACCEPT_ORDER" == "1" ]]; then
-  echo "[CI] lookup order acceptance (Phase C-4)"
-  API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" bash "$ACCEPT_ORDER_SH"
-  echo "[CI] lookup order acceptance OK"
-fi
-
-API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" ANON_ID="$ANON_ID" FM_TOKEN="$FM_TOKEN" \
-  "$SCRIPT_DIR/accept_events_C.sh" >/dev/null
-
-API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" FM_TOKEN="$FM_TOKEN" \
-  "$SCRIPT_DIR/accept_events_F_result_view_meta.sh"
-
-API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" FM_TOKEN="$FM_TOKEN" \
-  "$SCRIPT_DIR/accept_events_G_report_view_meta.sh"
-
-API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" FM_TOKEN="$FM_TOKEN" \
-  SKIP_C=1 "$SCRIPT_DIR/accept_events_E_share_meta.sh"
-
-API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" FM_TOKEN="$FM_TOKEN" \
-  "$SCRIPT_DIR/accept_events_H_share_view_meta.sh"
-
-API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" FM_TOKEN="$FM_TOKEN" \
-  "$SCRIPT_DIR/accept_events_D_anon.sh"
-
-API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" FM_TOKEN="$FM_TOKEN" \
-  "$SCRIPT_DIR/accept_events_D_click_anon_override.sh"
-
-API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" FM_TOKEN="$FM_TOKEN" \
-  "$SCRIPT_DIR/accept_events_D_anon_block_placeholder_click.sh"
-
-echo "[CI] events acceptance OK"
-
-echo "[CI] stopping API server before phpunit gates"
-stop_server_if_running
 if [[ "$HARD_CUTOVER_ENV_APPLIED" == "1" ]]; then
   echo "[CI] restoring scale identity env for phpunit gates"
   restore_hard_cutover_env

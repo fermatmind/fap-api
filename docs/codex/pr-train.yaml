@@ -26845,3 +26845,43 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: FA30-API-01
+    repo: fap-api
+    depends_on: []
+    branch: codex/fa30-api-01-analytics-smoke-exclusion
+    title: "FA30-API-01: Exclude analytics-only backend changes from MBTI smoke"
+    train_scope: fa30_batch2_backend_ci_boundary
+    status: user_authorized
+    scope:
+      - Detect analytics-only backend diff paths without classifying them as shared runtime changes.
+      - Skip the MBTI smoke and browser-style E2E block when the current diff is analytics-only.
+      - Wire GitHub CI to pass the analytics-only smoke decision into ci_verify_mbti without widening other gates.
+      - Keep later phpunit, auth, OpenAPI, and security gates intact.
+    allowed_paths:
+      - .github/workflows/ci.yml
+      - backend/app/Services/Ci/ScaleImpactResolver.php
+      - backend/scripts/ci_verify_mbti.sh
+      - backend/tests/Unit/Ci/ScaleImpactResolverTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Widen scale-gate selection for non-analytics PRs.
+      - Change frontend runtime or deploy logic.
+      - Skip auth/OpenAPI/order security/phpunit gates after the smoke block.
+      - Modify Batch 2 dry-run or readback authority flows.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=ScaleImpactResolverTest --no-ansi
+      - bash -n backend/scripts/ci_verify_mbti.sh
+      - ruby -e "require 'yaml'; YAML.load_file('.github/workflows/ci.yml'); puts 'workflow yaml ok'"
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend

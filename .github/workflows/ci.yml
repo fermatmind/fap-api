@@ -246,6 +246,25 @@ jobs:
           name: content-packs-index
           path: backend/storage/app/private/content_packs_index
 
+      - name: Resolve MBTI smoke impact
+        working-directory: backend
+        shell: bash
+        run: |
+          set -euo pipefail
+          while IFS='=' read -r key value; do
+            case "$key" in
+              run_mbti_smoke)
+                printf 'RUN_MBTI_SMOKE=%s\n' "$value"
+                ;;
+              scale_scope)
+                printf 'SCALE_SCOPE=%s\n' "$value"
+                ;;
+              reason)
+                printf 'SCALE_IMPACT_REASON=%s\n' "$value"
+                ;;
+            esac
+          done < <(bash scripts/ci/resolve_scale_impact.sh --format env --no-github-output) | tee -a "$GITHUB_ENV"
+
       - name: Run ci_verify_mbti
         run: bash ./backend/scripts/ci_verify_mbti.sh
 
