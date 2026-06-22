@@ -57212,8 +57212,8 @@
     ],
     "checks": {},
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "b28ebdf17b37745d6a5dffc46c7ee01c0820b0d6",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2264",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -57721,6 +57721,11 @@
         "at": "2026-06-22T09:05:00Z",
         "status": "local_validated",
         "note": "Local validation and scope validation passed for runner SOP/runbook and authorized train metadata initialization."
+      },
+      {
+        "at": "2026-06-22T09:10:00Z",
+        "status": "pr_open",
+        "note": "Opened PR #2264 after local validation and scope validation passed; waiting for required GitHub checks."
       }
     ]
   },
