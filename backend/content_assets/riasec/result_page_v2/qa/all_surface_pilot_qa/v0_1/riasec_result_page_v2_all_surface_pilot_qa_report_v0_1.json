@@ -1,0 +1,116 @@
+{
+  "schema": "fap.riasec.result_page_v2.all_surface_pilot_qa_report.v0.1",
+  "report_id": "riasec_result_page_v2_all_surface_pilot_qa_v0_1",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "cms_write_performed": false,
+  "runtime_wrapper_enablement_changed": false,
+  "frontend_fallback_allowed": false,
+  "production_gate_opened": false,
+  "pilot_gate_required": true,
+  "pilot_gate_inputs_required": [
+    "attempt_id",
+    "user_id",
+    "anon_id",
+    "org_id",
+    "form_code",
+    "locale",
+    "environment"
+  ],
+  "kill_switch_required": true,
+  "raw_private_fields_forbidden": [
+    "raw_score",
+    "private_score",
+    "score_vector",
+    "percentile",
+    "attempt_id",
+    "user_id",
+    "anon_id",
+    "org_id",
+    "token",
+    "email",
+    "phone"
+  ],
+  "surfaces": [
+    {
+      "surface": "result_page",
+      "pilot_payload_policy": "allow_only_when_full_variant_and_allowlisted",
+      "expected_payload_state": "result_page_v2_wrapper_attached",
+      "redaction_state": "full_only",
+      "qa_decision": "pass_staging_only"
+    },
+    {
+      "surface": "pdf",
+      "pilot_payload_policy": "not_enabled_in_this_pr",
+      "expected_payload_state": "payload_omitted_fail_closed",
+      "redaction_state": "no_pdf_payload_export",
+      "qa_decision": "pass_deferred_to_render_preview"
+    },
+    {
+      "surface": "share",
+      "pilot_payload_policy": "share_safe_summary_only_until_dedicated_adapter",
+      "expected_payload_state": "payload_omitted_fail_closed",
+      "redaction_state": "no_share_block_leak",
+      "qa_decision": "pass_deferred_to_render_preview"
+    },
+    {
+      "surface": "history",
+      "pilot_payload_policy": "no_cross_attempt_private_delta_export",
+      "expected_payload_state": "payload_omitted_fail_closed",
+      "redaction_state": "no_raw_history_vector",
+      "qa_decision": "pass_deferred_to_render_preview"
+    },
+    {
+      "surface": "compare",
+      "pilot_payload_policy": "no_private_compare_vector_export",
+      "expected_payload_state": "payload_omitted_fail_closed",
+      "redaction_state": "no_raw_compare_vector",
+      "qa_decision": "pass_deferred_to_render_preview"
+    },
+    {
+      "surface": "locked",
+      "pilot_payload_policy": "locked_state_omits_result_page_v2_payload",
+      "expected_payload_state": "payload_omitted_fail_closed",
+      "redaction_state": "locked_payload_allowed_false",
+      "qa_decision": "pass_fail_closed"
+    },
+    {
+      "surface": "free",
+      "pilot_payload_policy": "free_variant_omits_result_page_v2_payload",
+      "expected_payload_state": "payload_omitted_fail_closed",
+      "redaction_state": "free_payload_allowed_false",
+      "qa_decision": "pass_fail_closed"
+    },
+    {
+      "surface": "low_quality",
+      "pilot_payload_policy": "low_quality_routes_require_cautious_copy_and_no_trait_overclaim",
+      "expected_payload_state": "selector_inputs_quality_state_only",
+      "redaction_state": "no_raw_quality_flags_export",
+      "qa_decision": "pass_staging_guarded"
+    },
+    {
+      "surface": "fallback",
+      "pilot_payload_policy": "invalid_or_missing_projection_omits_payload",
+      "expected_payload_state": "payload_omitted_fail_closed",
+      "redaction_state": "frontend_fallback_forbidden",
+      "qa_decision": "pass_fail_closed"
+    }
+  ],
+  "required_assertions": [
+    "result_page_full_variant_can_attach_only_after_pilot_allowlist_gate_allows",
+    "free_variant_omits_result_page_v2_payload",
+    "locked_payload_allowed_false",
+    "free_payload_allowed_false",
+    "pdf_share_history_compare_have_no_runtime_payload_export_in_this_pr",
+    "low_quality_exports_quality_state_only_without_raw_flags",
+    "fallback_omits_payload_when_projection_is_invalid",
+    "no_raw_private_identifier_or_score_fields"
+  ],
+  "next_handoff": {
+    "target_pr": "RIASEC-RESULT-PRODUCTION-IMPORT-GATE-01",
+    "frontend_preview_dependency": "RIASEC-RESULT-FAPWEB-RENDERED-PREVIEW-QA-01",
+    "notes": "This report is a backend QA gate input only; rendered preview assertions remain frontend handoff work."
+  }
+}
