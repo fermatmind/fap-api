@@ -43124,7 +43124,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-dash-collector-01-smoke-reconcile",
     "base": "main",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "train_scope": "seo_intel_collector_dry_run_smoke_evidence",
     "title": "docs(seo): record collector dry-run smoke evidence",
     "checks": {
@@ -58131,6 +58131,10 @@
       "scope_validation": {
         "status": "pass",
         "evidence": "Current PR changes are limited to backend/docs/big5/result-asset-agent-auto-merge-live-pilot.md and docs/codex/pr-train-state.json. No fap-web copy, runtime flag, production gate, release snapshot, rollout gate, CMS write, or DB write changed."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #2272 required GitHub checks completed successfully on head f17891c1f4fd09e50a2060eca9deea4996f76f99; mergeStateStatus CLEAN; PR title/body and changed-file scope were re-reviewed."
       }
     },
     "failure_reason": null,
@@ -58149,6 +58153,11 @@
         "at": "2026-06-22T03:25:00Z",
         "status": "pr_open",
         "note": "Opened PR #2272 after live merge pilot evidence, local validation, and scope validation passed."
+      },
+      {
+        "at": "2026-06-22T03:30:00Z",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed on head f17891c1f4fd09e50a2060eca9deea4996f76f99, mergeStateStatus is CLEAN, and PR title/body/scope were re-reviewed. Ready to merge under squash policy after this state update is pushed and checks remain green."
       }
     ]
   }
