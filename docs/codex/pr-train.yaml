@@ -26887,3 +26887,44 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: FA30-API-02
+    repo: fap-api
+    depends_on:
+      - FA30-API-01
+    branch: codex/fa30-api-02-batch2-dry-run-gate
+    title: "FA30-API-02: Add Batch 2 Big Five and Enneagram dry-run gate"
+    train_scope: fa30_batch2_backend_dry_run_gate
+    status: user_authorized
+    scope:
+      - Add a backend-only Batch 2 dry-run gate entrypoint that evaluates Big Five staged candidate validation and Enneagram content-batch safety without production writes.
+      - Reuse the existing Big Five asset-agent and Enneagram content-batch services instead of introducing parallel content pipelines.
+      - Emit a combined gate report whose GO path advances only to FA30-API-03 readback/review ledger work.
+      - Keep production activation, runtime switches, frontend changes, and staging-write execution blocked.
+    allowed_paths:
+      - backend/app/Console/Commands/Batch2ResultPageDryRunGateCommand.php
+      - backend/app/Console/Kernel.php
+      - backend/app/Services/Content/Batch2ResultPageDryRunGate.php
+      - backend/tests/Feature/Console/Batch2ResultPageDryRunGateCommandTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Generate new Big Five candidate assets or Enneagram bulk content in this PR.
+      - Perform staging writes, candidate imports, activation, rollout, runtime switches, or frontend changes.
+      - Modify Batch 2 readback/review ledger authority logic in this PR.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Batch2ResultPageDryRunGateCommandTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=batch2_result_page_dry_run_gate --no-ansi
+      - cd backend && vendor/bin/pint --test app/Console/Commands/Batch2ResultPageDryRunGateCommand.php app/Services/Content/Batch2ResultPageDryRunGate.php tests/Feature/Console/Batch2ResultPageDryRunGateCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
