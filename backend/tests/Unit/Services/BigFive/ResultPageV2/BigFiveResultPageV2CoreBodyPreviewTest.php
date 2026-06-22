@@ -1316,6 +1316,20 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_seo_agent_l5a_indexnow_submit_canary_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/SeoAgentL5aIndexnowSubmitCanaryCommand.php',
+            'backend/app/Console/Kernel.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\SeoAgentL5aIndexnowSubmitCanaryCommand;',
+            '+        SeoAgentL5aIndexnowSubmitCanaryCommand::class,',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
+    }
+
     public function test_runtime_freeze_classifier_ignores_seo_agent_gsc_post_publish_feedback_files(): void
     {
         $changed = [
@@ -4338,6 +4352,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSeoAgentL5aIndexnowSubmitCanaryFile($file)) {
+                continue;
+            }
+
             if ($this->isSeoAgentGscOpportunityAutoDraftFile($file)) {
                 continue;
             }
@@ -5023,6 +5041,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsSeoAgentWeeklyDraftWriteAutoOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentCmsPublishCanaryOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentL5aContentPagePublishCanaryOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsSeoAgentL5aIndexnowSubmitCanaryOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentCmsPublishAutoCanaryOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentPostPublishSearchSubmitOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentPostPublishIndexnowAutoOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
@@ -5831,6 +5850,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return in_array($file, [
             'backend/app/Console/Commands/SeoAgentL5aContentPagePublishCanaryCommand.php',
+        ], true);
+    }
+
+    private function isSeoAgentL5aIndexnowSubmitCanaryFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/SeoAgentL5aIndexnowSubmitCanaryCommand.php',
         ], true);
     }
 
@@ -7848,6 +7874,28 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if (preg_match('/\b(SeoAgentL5aContentPagePublishCanaryCommand|EnneagramResultPageContentBatchCommand)\b/u', $line) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsSeoAgentL5aIndexnowSubmitCanaryOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            if (preg_match('/\b(MBTI|Mbti|BigFive|Big5|Prewarm|ResultPage|Report)\b/u', $line) === 1) {
+                return false;
+            }
+
+            if (preg_match('/\bSeoAgentL5aIndexnowSubmitCanaryCommand\b/u', $line) !== 1) {
                 return false;
             }
         }
