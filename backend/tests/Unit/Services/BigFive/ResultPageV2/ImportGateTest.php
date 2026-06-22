@@ -13,6 +13,8 @@ final class ImportGateTest extends TestCase
 
     private const APPROVAL_PREP_RELEASE_PATH = 'content_assets/big5/result_page_v2/releases/v0_2';
 
+    private const IMPORT_GATE_PASS_RELEASE_PATH = 'content_assets/big5/result_page_v2/releases/v0_3';
+
     private const GATE_POLICY_PATH = 'content_assets/big5/result_page_v2/governance/production_import_gate_v0_1';
 
     public function test_import_gate_policy_package_exists_without_runtime_enablement(): void
@@ -35,7 +37,7 @@ final class ImportGateTest extends TestCase
 
         $this->assertFalse($result['accepted']);
         $this->assertContains('release_candidate_required', $result['reasons']);
-        $this->assertContains('production_use_allowed_required', $result['reasons']);
+        $this->assertContains('production_import_gate_pass_required', $result['reasons']);
         $this->assertContains('rendered_qa_evidence_required', $result['reasons']);
         $this->assertContains('all_surface_pass_evidence_required', $result['reasons']);
         $this->assertContains('approval_evidence_required', $result['reasons']);
@@ -46,7 +48,7 @@ final class ImportGateTest extends TestCase
         $result = $this->validateImportGate(base_path(self::APPROVAL_PREP_RELEASE_PATH));
 
         $this->assertFalse($result['accepted']);
-        $this->assertContains('production_use_allowed_required', $result['reasons']);
+        $this->assertContains('production_import_gate_pass_required', $result['reasons']);
         $this->assertContains('approval_evidence_required', $result['reasons']);
         $this->assertNotContains('release_candidate_required', $result['reasons']);
         $this->assertNotContains('rendered_qa_evidence_required', $result['reasons']);
@@ -65,6 +67,29 @@ final class ImportGateTest extends TestCase
             'all_surface_pass_evidence',
             'approval_evidence',
         ], $snapshotEvidence['required_evidence'] ?? null);
+    }
+
+    public function test_gate_accepts_import_gate_pass_snapshot_without_runtime_or_rollout_enablement(): void
+    {
+        $result = $this->validateImportGate(base_path(self::IMPORT_GATE_PASS_RELEASE_PATH));
+
+        $this->assertTrue($result['accepted'], implode(',', $result['reasons']));
+        $this->assertSame([], $result['reasons']);
+
+        $snapshotEvidence = $result['evidence']['snapshots'][0] ?? [];
+        $this->assertSame('big5_result_page_v2_rc_0_3', $snapshotEvidence['snapshot_id'] ?? null);
+        $this->assertSame('v0_3', $snapshotEvidence['snapshot_version'] ?? null);
+
+        $manifest = $this->jsonFile(base_path(self::IMPORT_GATE_PASS_RELEASE_PATH.'/manifest.json'));
+        $snapshot = $this->jsonFile(base_path(self::IMPORT_GATE_PASS_RELEASE_PATH.'/big5_v2_release_snapshot_rc_0_3.json'));
+
+        $this->assertSame('not_runtime', $manifest['runtime_use'] ?? null);
+        $this->assertSame('not_runtime', $snapshot['runtime_use'] ?? null);
+        $this->assertFalse((bool) ($snapshot['production_use_allowed'] ?? true));
+        $this->assertTrue((bool) ($snapshot['production_import_gate_pass'] ?? false));
+        $this->assertFalse((bool) ($snapshot['ready_for_production'] ?? true));
+        $this->assertFalse((bool) ($snapshot['production_rollout_enabled'] ?? true));
+        $this->assertSame('pass', $snapshot['import_gate_current_decision'] ?? null);
     }
 
     public function test_gate_rejects_missing_snapshot_and_sha256_mismatch(): void
@@ -148,8 +173,6 @@ final class ImportGateTest extends TestCase
      */
     private function validCandidateSnapshot(): array
     {
-        $productionUseAllowedKey = 'production_use'.'_allowed';
-
         return [
             'schema_version' => 'big5_v2_release_snapshot_v0_1',
             'snapshot_id' => 'test_candidate',
@@ -159,7 +182,8 @@ final class ImportGateTest extends TestCase
             'runtime_use' => 'not_runtime',
             'immutable' => true,
             'release_candidate' => true,
-            $productionUseAllowedKey => ! false,
+            'production_use_allowed' => false,
+            'production_import_gate_pass' => true,
             'ready_for_production' => false,
             'production_rollout_enabled' => false,
             'content_version_refs' => [
@@ -272,8 +296,8 @@ final class ImportGateTest extends TestCase
             $reasons[] = 'release_candidate_required';
         }
 
-        if (($snapshot['production_use_allowed'] ?? false) !== true) {
-            $reasons[] = 'production_use_allowed_required';
+        if (($snapshot['production_import_gate_pass'] ?? false) !== true) {
+            $reasons[] = 'production_import_gate_pass_required';
         }
 
         if ($this->isStagingOnly($snapshot)) {

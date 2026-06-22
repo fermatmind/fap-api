@@ -1,0 +1,42 @@
+{
+  "package": "big5_v2_release_snapshots",
+  "version": "v0_3",
+  "mode": "immutable_snapshot_manifest",
+  "runtime_use": "not_runtime",
+  "production_import_gate_pass": true,
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "snapshots": [
+    {
+      "snapshot_id": "big5_result_page_v2_rc_0_3",
+      "snapshot_version": "v0_3",
+      "file": "big5_v2_release_snapshot_rc_0_3.json",
+      "sha256": "6398bd43904d2029bf598c4a047a984b14326e47e66533f786824d049a9b66b1",
+      "immutable": true,
+      "production_import_gate_pass": true
+    }
+  ],
+  "human_approval_evidence": {
+    "evidence_id": "big5_result_page_v2_rc_0_3_human_approval_evidence",
+    "file": "human_approval_evidence_rc_0_3.json",
+    "sha256": "0ced780896fc940c8dacfb42a669c0eeed955f8963b7003a97f37a738d0eeeb1",
+    "redacted": true,
+    "status": "pass"
+  },
+  "production_import_gate_pass_evidence": {
+    "evidence_id": "big5_result_page_v2_rc_0_3_import_gate_pass",
+    "file": "production_import_gate_pass_evidence_rc_0_3.json",
+    "sha256": "9e33c6637c6ec1ea00a96891ce20cfa50afda8de3976c9956a32ac8ed1ada908",
+    "redacted": true,
+    "status": "pass"
+  },
+  "rollback_supported_by_snapshot_revert": true,
+  "remaining_blockers_before_actual_production_activation": [
+    "production_runtime_env_not_enabled",
+    "production_rollout_config_not_enabled",
+    "production_allowlist_scope_missing",
+    "tenant_scope_missing",
+    "post_deploy_live_smoke_not_attached_to_this_snapshot"
+  ]
+}

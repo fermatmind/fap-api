@@ -1,0 +1,97 @@
+{
+  "schema_version": "big5_v2_release_snapshot_v0_1",
+  "snapshot_id": "big5_result_page_v2_rc_0_3",
+  "snapshot_version": "v0_3",
+  "snapshot_sha256": "bac101e6a9b9be089eda13b72ea25a7ed544e128290398ba616918e0d108d016",
+  "created_at": "2026-06-22T00:00:00Z",
+  "mode": "immutable_release_snapshot",
+  "runtime_use": "not_runtime",
+  "immutable": true,
+  "release_candidate": true,
+  "production_approval_prep": false,
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "import_gate_preparable": true,
+  "production_import_gate_pass": true,
+  "import_gate_current_decision": "pass",
+  "content_version_refs": [
+    {
+      "kind": "rendered_qa_evidence",
+      "status": "pass",
+      "path": "content_assets/big5/result_page_v2/qa/pilot_rendered_qa/v0_1/big5_o59_pilot_rendered_qa_report_v0_1.json",
+      "version": "v0_1",
+      "sha256": "c215646a77cb3b4dc84ab56c692aa68eeafd4e2da1a363497dd429534a355b0e"
+    },
+    {
+      "kind": "all_surface_pass_evidence",
+      "status": "pass",
+      "path": "content_assets/big5/result_page_v2/qa/production_all_surface_release_gate/v0_1/big5_v2_production_all_surface_release_gate_report_v0_1.json",
+      "version": "v0_1",
+      "sha256": "709e8ad6b32336ee41eda0d7286a94c6562b41defce0e322cb0465ec38375a25"
+    },
+    {
+      "kind": "pilot_run_evidence",
+      "status": "pass_allowlist_reviewed",
+      "path": "content_assets/big5/result_page_v2/qa/pilot_run_evidence/v0_1/big5_v2_pilot_run_evidence_v0_1.json",
+      "version": "v0_1",
+      "sha256": "a05a7c9a8dd09de2e23fab261782eb4250ac3606b24716bb45dc2c6968f4d0ab"
+    },
+    {
+      "kind": "production_ops_baseline",
+      "status": "pass_metrics_ready_rollout_still_gated",
+      "path": "content_assets/big5/result_page_v2/qa/production_ops/v0_1/big5_v2_production_ops_report_v0_1.json",
+      "version": "v0_1",
+      "sha256": "a94af231f03a321e211aad69258b1572dd8c0632a24c5f908ac1bcf3c271c77e"
+    },
+    {
+      "kind": "rollback_kill_switch_evidence",
+      "status": "pass",
+      "path": "content_assets/big5/result_page_v2/qa/production_rollout_rollback_kill_switch/v0_1/big5_v2_production_rollout_rollback_kill_switch_validation_v0_1.json",
+      "version": "v0_1",
+      "sha256": "7f1c780cd5de782ed0f2e30ed1386921368061dd5a2ab2b6547b9e9f780093ae"
+    },
+    {
+      "kind": "approval_evidence",
+      "status": "pass",
+      "path": "content_assets/big5/result_page_v2/releases/v0_3/human_approval_evidence_rc_0_3.json",
+      "version": "v0_1",
+      "sha256": "37ce8cfb5d3fb70ef7c1c822e03ef51a7aa06564c6133dbc8ee69040b8829a26"
+    },
+    {
+      "kind": "production_import_gate_pass_evidence",
+      "status": "pass",
+      "path": "content_assets/big5/result_page_v2/releases/v0_3/production_import_gate_pass_evidence_rc_0_3.json",
+      "version": "v0_1",
+      "sha256": "faefd58a795366af300ac8f249140ef11a29ebc8497d722dbd9278b28cf2f889"
+    }
+  ],
+  "traceability": {
+    "previous_snapshot_id": "big5_result_page_v2_rc_0_2",
+    "previous_snapshot": "content_assets/big5/result_page_v2/releases/v0_2/big5_v2_release_snapshot_rc_0_2.json",
+    "snapshot_manifest": "content_assets/big5/result_page_v2/releases/v0_3/manifest.json",
+    "human_approval_evidence": "content_assets/big5/result_page_v2/releases/v0_3/human_approval_evidence_rc_0_3.json",
+    "production_import_gate_pass_evidence": "content_assets/big5/result_page_v2/releases/v0_3/production_import_gate_pass_evidence_rc_0_3.json"
+  },
+  "remaining_blockers_before_actual_production_activation": [
+    "production_runtime_env_not_enabled",
+    "production_rollout_config_not_enabled",
+    "production_allowlist_scope_missing",
+    "tenant_scope_missing",
+    "post_deploy_live_smoke_not_attached_to_this_snapshot"
+  ],
+  "rollback": {
+    "strategy": "revert_to_previous_immutable_snapshot_or_disable_release_snapshot",
+    "previous_snapshot_id": "big5_result_page_v2_rc_0_2",
+    "release_disable_supported": true,
+    "emergency_disable_supported": true,
+    "allowlist_revoke_supported": true,
+    "operator_note": "Actual rollback requires a separate approved operator action; this snapshot only records import gate acceptance evidence."
+  },
+  "immutability_contract": {
+    "overwrite_allowed": false,
+    "append_only_versions": true,
+    "hash_required": true,
+    "manifest_hash_required": true
+  }
+}
