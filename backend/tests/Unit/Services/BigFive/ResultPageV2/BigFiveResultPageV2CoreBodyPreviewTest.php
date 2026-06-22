@@ -2953,6 +2953,26 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_riasec_result_page_production_import_command(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/RiasecResultPageV2ProductionImportCommand.php',
+            'backend/app/Console/Kernel.php',
+            'backend/app/Services/Riasec/RiasecResultPageV2ProductionImportExecutor.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\RiasecResultPageV2ProductionImportCommand;',
+            '+        RiasecResultPageV2ProductionImportCommand::class,',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            changed: $changed,
+            repoRoot: '',
+            baseRef: '',
+            kernelChangedLines: $kernelChangedLines,
+        ));
+    }
+
     public function test_runtime_freeze_classifier_ignores_enneagram_forced_choice_question_pack_translation_changes(): void
     {
         $changed = [
@@ -5146,6 +5166,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isRiasecResultPageProductionImportCommandFile($file)) {
+                continue;
+            }
+
             if ($this->isEnneagramForcedChoiceQuestionPackTranslationFile($file)) {
                 continue;
             }
@@ -5309,6 +5333,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsBigFiveV2InactiveCandidateScaffoldOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsBigFiveV2AssetAgentHarnessOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsRiasecResultPageAssetAgentHarnessOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsRiasecResultPageProductionImportCommandOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsEnneagramResultPageAgentReadinessOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsEnneagramResultPageOpsControlPlaneOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsEnneagramResultPageOpsRunnerOrchestratorOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
@@ -6602,6 +6627,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/RiasecResultPageOpsRunnerCommand.php',
             'backend/app/Services/Riasec/Ops/RiasecResultPageOpsAgentRunOrchestrator.php',
+        ], true);
+    }
+
+    private function isRiasecResultPageProductionImportCommandFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/RiasecResultPageV2ProductionImportCommand.php',
+            'backend/app/Services/Riasec/RiasecResultPageV2ProductionImportExecutor.php',
         ], true);
     }
 
@@ -8684,6 +8717,33 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         }
 
         return $changedLines !== [] && $hasAuditCommand;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsRiasecResultPageProductionImportCommandOnly(array $changedLines): bool
+    {
+        $allowed = [
+            'use App\\Console\\Commands\\RiasecResultPageV2ProductionImportCommand;',
+            '        RiasecResultPageV2ProductionImportCommand::class,',
+        ];
+        $normalized = array_map(
+            static fn (string $line): string => str_starts_with($line, '+') ? substr($line, 1) : $line,
+            $changedLines,
+        );
+        $hasImportCommand = false;
+
+        foreach ($normalized as $line) {
+            if (! in_array($line, $allowed, true)) {
+                return false;
+            }
+
+            $hasImportCommand = $hasImportCommand
+                || str_contains($line, 'RiasecResultPageV2ProductionImportCommand');
+        }
+
+        return $changedLines !== [] && $hasImportCommand;
     }
 
     /**
