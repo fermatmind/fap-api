@@ -1,0 +1,72 @@
+{
+  "schema": "big5_result_page_v2.production_allowlist_scope_matrix.v0_1",
+  "package": "production_allowlist_rollout_config",
+  "version": "v0_1",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "production_runtime_enabled": false,
+  "production_rollout_enabled": false,
+  "rollout_allowed": false,
+  "scope_dimensions": [
+    {
+      "dimension": "attempt",
+      "config_key": "production_rollout_allowed_attempt_ids",
+      "matching": "exact_attempt_id"
+    },
+    {
+      "dimension": "user",
+      "config_key": "production_rollout_allowed_user_ids",
+      "matching": "exact_user_id"
+    },
+    {
+      "dimension": "anon",
+      "config_key": "production_rollout_allowed_anon_ids",
+      "matching": "exact_anon_id"
+    },
+    {
+      "dimension": "org",
+      "config_key": "production_rollout_allowed_org_ids",
+      "matching": "exact_org_id"
+    },
+    {
+      "dimension": "tenant",
+      "config_key": "production_rollout_allowed_tenant_ids",
+      "matching": "current_gate_uses_attempt_org_id_as_tenant_scope"
+    },
+    {
+      "dimension": "form",
+      "config_key": "production_rollout_allowed_form_codes",
+      "matching": "exact_form_code"
+    },
+    {
+      "dimension": "locale",
+      "config_key": "production_rollout_allowed_locales",
+      "matching": "exact_locale"
+    },
+    {
+      "dimension": "scale",
+      "config_key": "production_rollout_allowed_scale_codes",
+      "matching": "case_insensitive_scale_code"
+    }
+  ],
+  "deny_reasons": [
+    "production_rollout_allowlist_denied",
+    "production_rollout_tenant_denied",
+    "production_rollout_form_denied",
+    "production_rollout_locale_denied",
+    "production_rollout_scale_denied",
+    "production_rollout_manual_approval_missing",
+    "production_rollout_import_gate_missing",
+    "production_rollout_snapshot_disabled",
+    "production_rollout_emergency_disabled"
+  ],
+  "redaction": {
+    "allowlist_values": "not_recorded",
+    "attempt_references": "not_recorded",
+    "result_access_links": "not_recorded",
+    "raw_result_body": "not_recorded",
+    "raw_score_values": "not_recorded"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "schema": "big5_result_page_v2.production_allowlist_rollout_config.v0_1",
+  "package": "production_allowlist_rollout_config",
+  "version": "v0_1",
+  "generated_at": "2026-06-22T00:00:00Z",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "production_runtime_enabled": false,
+  "production_rollout_enabled": false,
+  "rollout_allowed": false,
+  "rollout_mode_evidence": "allowlist_only",
+  "production_decision": "ALLOWLIST_CONFIG_READY_ROLLOUT_DISABLED",
+  "release_snapshot": {
+    "snapshot_id": "big5_result_page_v2_rc_0_3",
+    "runtime_prep": "content_assets/big5/result_page_v2/qa/production_runtime_enablement_prep/v0_1/big5_v2_production_runtime_enablement_prep_v0_1.json",
+    "import_gate_pass": "content_assets/big5/result_page_v2/releases/v0_3/production_import_gate_pass_evidence_rc_0_3.json"
+  },
+  "config_evidence": {
+    "mode": "allowlist_only",
+    "percentage": 0,
+    "max_percentage": 0,
+    "broad_traffic": "blocked",
+    "manual_approval_required": true,
+    "runtime_enablement_required_separately": true,
+    "env_keys": {
+      "rollout_enabled": "BIG5_RESULT_PAGE_V2_PRODUCTION_ROLLOUT_ENABLED",
+      "rollout_configured": "BIG5_RESULT_PAGE_V2_PRODUCTION_ROLLOUT_CONFIGURED",
+      "rollout_mode": "BIG5_RESULT_PAGE_V2_PRODUCTION_ROLLOUT_MODE",
+      "manual_approval": "BIG5_RESULT_PAGE_V2_PRODUCTION_ROLLOUT_MANUAL_APPROVAL_GRANTED",
+      "attempt_allowlist": "BIG5_RESULT_PAGE_V2_PRODUCTION_ROLLOUT_ALLOWED_ATTEMPT_IDS",
+      "user_allowlist": "BIG5_RESULT_PAGE_V2_PRODUCTION_ROLLOUT_ALLOWED_USER_IDS",
+      "anon_allowlist": "BIG5_RESULT_PAGE_V2_PRODUCTION_ROLLOUT_ALLOWED_ANON_IDS",
+      "org_allowlist": "BIG5_RESULT_PAGE_V2_PRODUCTION_ROLLOUT_ALLOWED_ORG_IDS",
+      "tenant_scope": "BIG5_RESULT_PAGE_V2_PRODUCTION_ROLLOUT_ALLOWED_TENANT_IDS",
+      "scale_scope": "BIG5_RESULT_PAGE_V2_PRODUCTION_ROLLOUT_ALLOWED_SCALE_CODES",
+      "form_scope": "BIG5_RESULT_PAGE_V2_PRODUCTION_ROLLOUT_ALLOWED_FORM_CODES",
+      "locale_scope": "BIG5_RESULT_PAGE_V2_PRODUCTION_ROLLOUT_ALLOWED_LOCALES"
+    },
+    "required_disabled_in_this_pr": {
+      "production_rollout_enabled": false,
+      "production_rollout_percentage": 0,
+      "production_rollout_max_percentage": 0
+    }
+  },
+  "rollback": {
+    "emergency_disable_supported": true,
+    "release_disable_supported": true,
+    "allowlist_revoke_supported": true,
+    "evidence": "content_assets/big5/result_page_v2/qa/production_rollout_rollback_kill_switch/v0_1/big5_v2_production_rollout_rollback_kill_switch_validation_v0_1.json"
+  }
+}
