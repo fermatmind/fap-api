@@ -1,0 +1,40 @@
+{
+  "schema_version": "fap.riasec.result_page_v2.runtime_no_touch_policy.v0.1",
+  "task_id": "RIASEC-RESULT-BACKEND-STAGING-IMPORT-HANDOFF-01",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "cms_write_performed": false,
+  "runtime_change_performed": false,
+  "frontend_fallback_allowed": false,
+  "private_payload_exported": false,
+  "no_touch_runtime_paths": [
+    "backend/app/Http/**",
+    "backend/app/Services/**/Runtime/**",
+    "backend/routes/**",
+    "backend/database/**"
+  ],
+  "forbidden_in_this_pr": [
+    "CMS writes",
+    "staging import execution",
+    "production import",
+    "runtime wrapper enablement",
+    "production rollout",
+    "frontend fallback"
+  ],
+  "allowed_in_this_pr": [
+    "governance handoff package",
+    "checksum inventory",
+    "acceptance matrix",
+    "no-touch policy",
+    "tests validating staging-only governance"
+  ],
+  "next_stage_requires": [
+    "explicit staging dry-run PR",
+    "checksum revalidation",
+    "leak scan",
+    "fail-closed import harness",
+    "staging-only artifact output"
+  ]
+}

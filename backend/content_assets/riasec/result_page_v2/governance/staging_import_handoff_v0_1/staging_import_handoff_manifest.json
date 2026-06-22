@@ -1,0 +1,35 @@
+{
+  "schema_version": "fap.riasec.result_page_v2.staging_import_handoff_manifest.v0.1",
+  "task_id": "RIASEC-RESULT-BACKEND-STAGING-IMPORT-HANDOFF-01",
+  "created_at": "2026-06-22T09:30:00+08:00",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "content_authority": "backend",
+  "cms_write_performed": false,
+  "cms_write_allowed": false,
+  "runtime_change_performed": false,
+  "runtime_wrapper_enablement_allowed": false,
+  "frontend_fallback_allowed": false,
+  "private_payload_exported": false,
+  "production_import_gate_open": false,
+  "production_rollout_allowed": false,
+  "handoff_status": "ready_for_staging_import_dry_run_governance_only",
+  "import_execution_allowed_in_this_pr": false,
+  "package_files": [
+    "backend/content_assets/riasec/result_page_v2/governance/staging_import_handoff_v0_1/import_package_list.json",
+    "backend/content_assets/riasec/result_page_v2/governance/staging_import_handoff_v0_1/checksum_inventory.json",
+    "backend/content_assets/riasec/result_page_v2/governance/staging_import_handoff_v0_1/acceptance_matrix.json",
+    "backend/content_assets/riasec/result_page_v2/governance/staging_import_handoff_v0_1/runtime_no_touch_policy.json"
+  ],
+  "next_allowed_pr": "RIASEC-RESULT-STAGING-IMPORT-DRY-RUN-01",
+  "blocked_actions": [
+    "cms_staging_write",
+    "cms_production_write",
+    "runtime_wrapper_enablement",
+    "frontend_fallback",
+    "production_import",
+    "production_rollout"
+  ]
+}

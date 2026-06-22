@@ -57043,7 +57043,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-ops-agent-reporting-sidecar-01",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "riasec_result_ops_agent_release_chain",
     "title": "RIASEC-OPS-AGENT-REPORTING-SIDECAR-01: feat(riasec): add ops reporting sidecar",
     "depends_on": [
@@ -57057,14 +57057,17 @@
       "scope_validation": "passed",
       "pr_created": "passed",
       "github_required_checks": "passed",
-      "pre_merge_scope_recheck": "passed"
+      "pre_merge_scope_recheck": "passed",
+      "github_merge_confirmed": "passed",
+      "origin_main_contains_merge_commit": "passed",
+      "post_merge_cleanup": "passed"
     },
     "failure_reason": null,
-    "commit_sha": "9655f76a11c657707398098007a45695bc9749f2",
+    "commit_sha": "2a3b388274e5379c37c4ba98da9955f1c35621fa",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2259",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-22T01:05:12Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_auto_rollout_allowed": false,
     "production_cms_write_allowed": false,
     "production_gate_auto_enable_allowed": false,
@@ -57092,6 +57095,12 @@
         "from": "pull_request_open",
         "to": "ready_to_merge",
         "notes": "GitHub required checks passed and pre-merge scope recheck stayed within PR5 allowed files."
+      },
+      {
+        "at": "2026-06-22T09:29:21+08:00",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "notes": "PR #2259 merged at 2026-06-22T01:05:12Z; origin/main contains merge commit 2a3b388274e5379c37c4ba98da9955f1c35621fa; local and remote task branches cleaned."
       }
     ]
   },
@@ -57099,19 +57108,24 @@
     "repo": "fap-web",
     "branch": "codex/riasec-result-fapweb-rendered-preview-qa-01",
     "base": "main",
-    "status": "pending_dependency",
+    "status": "merged",
     "train_scope": "riasec_result_ops_agent_release_chain",
     "title": "RIASEC-RESULT-FAPWEB-RENDERED-PREVIEW-QA-01: test(riasec): add rendered preview QA",
     "depends_on": [
       "RIASEC-OPS-AGENT-REPORTING-SIDECAR-01"
     ],
-    "checks": {},
+    "checks": {
+      "dependency_pr5_merged": "passed",
+      "github_merge_confirmed": "passed",
+      "origin_main_contains_merge_commit": "passed",
+      "post_merge_cleanup": "passed"
+    },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "commit_sha": "be871196c982e15028dda51564c2c627b2abf71b",
+    "pr_url": "https://github.com/fermatmind/fap-web/pull/1301",
+    "merged_at": "2026-06-22T01:25:21Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_auto_rollout_allowed": false,
     "production_cms_write_allowed": false,
     "production_gate_auto_enable_allowed": false,
@@ -57121,6 +57135,12 @@
         "from": "missing_from_manifest",
         "to": "pending_dependency",
         "notes": "Initialized from explicit RIASEC ops agent and release-chain /goal authorization."
+      },
+      {
+        "at": "2026-06-22T09:29:21+08:00",
+        "from": "pending_dependency",
+        "to": "merged",
+        "notes": "Cross-repo dependency verified: fap-web PR #1301 merged at 2026-06-22T01:25:21Z with merge commit be871196c982e15028dda51564c2c627b2abf71b; fap-web main was synced and task branch cleaned."
       }
     ]
   },
@@ -57128,16 +57148,25 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-backend-staging-import-handoff-01",
     "base": "main",
-    "status": "pending_dependency",
+    "status": "ready_to_merge",
     "train_scope": "riasec_result_ops_agent_release_chain",
     "title": "RIASEC-RESULT-BACKEND-STAGING-IMPORT-HANDOFF-01: docs(riasec): add staging import handoff",
     "depends_on": [
       "RIASEC-RESULT-FAPWEB-RENDERED-PREVIEW-QA-01"
     ],
-    "checks": {},
+    "checks": {
+      "dependency_pr6_merged": "passed",
+      "jq_empty_touched_json": "passed",
+      "php_artisan_test_filter_RiasecResultPage": "passed",
+      "git_diff_check": "passed",
+      "scope_validation": "passed",
+      "pr_created": "passed",
+      "github_required_checks": "passed",
+      "pre_merge_scope_recheck": "passed"
+    },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "8af3ba6b521cd7bdd287612320a9d7df33974ba5",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2263",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -57150,6 +57179,24 @@
         "from": "missing_from_manifest",
         "to": "pending_dependency",
         "notes": "Initialized from explicit RIASEC ops agent and release-chain /goal authorization."
+      },
+      {
+        "at": "2026-06-22T09:29:21+08:00",
+        "from": "pending_dependency",
+        "to": "local_checks_passed",
+        "notes": "PR6 dependency verified merged; staging import handoff governance package added with checksum inventory, acceptance matrix, no-touch policy, docs, and RiasecResultPage tests. No CMS write or runtime change."
+      },
+      {
+        "at": "2026-06-22T09:33:00+08:00",
+        "from": "local_checks_passed",
+        "to": "pull_request_open",
+        "notes": "Opened GitHub PR #2263 after local checks and path scope validation passed."
+      },
+      {
+        "at": "2026-06-22T09:44:00+08:00",
+        "from": "pull_request_open",
+        "to": "ready_to_merge",
+        "notes": "GitHub required checks passed and pre-merge scope recheck stayed within PR7 allowed files."
       }
     ]
   },

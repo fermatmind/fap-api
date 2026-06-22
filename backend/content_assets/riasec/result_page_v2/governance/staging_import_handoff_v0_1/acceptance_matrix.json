@@ -1,0 +1,52 @@
+{
+  "schema_version": "fap.riasec.result_page_v2.staging_import_acceptance_matrix.v0.1",
+  "task_id": "RIASEC-RESULT-BACKEND-STAGING-IMPORT-HANDOFF-01",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "cms_write_performed": false,
+  "runtime_change_performed": false,
+  "frontend_fallback_allowed": false,
+  "private_payload_exported": false,
+  "acceptance_gates": [
+    {
+      "id": "checksum_inventory_complete",
+      "required": true,
+      "status": "pass",
+      "evidence": "Six handoff input files have sha256 entries."
+    },
+    {
+      "id": "fap_web_rendered_preview_handoff_complete",
+      "required": true,
+      "status": "pass",
+      "evidence": "Rendered preview handoff report covers result_page, pdf, share, history, compare, locked_free_redaction, low_quality, and fallback."
+    },
+    {
+      "id": "selector_candidate_import_blocked",
+      "required": true,
+      "status": "pass",
+      "evidence": "Share safety selector pilot manifest remains selector_ready_candidate=false and import_allowed=false."
+    },
+    {
+      "id": "route_matrix_not_runtime_input",
+      "required": true,
+      "status": "pass",
+      "evidence": "Route matrix QA remains partial_go_share_safety_only for staging and no_go for runtime."
+    },
+    {
+      "id": "cms_write_not_authorized",
+      "required": true,
+      "status": "pass",
+      "evidence": "This PR defines governance only; no CMS import command or write path is executed."
+    },
+    {
+      "id": "production_gate_closed",
+      "required": true,
+      "status": "pass",
+      "evidence": "production_use_allowed=false and ready_for_production=false across handoff files."
+    }
+  ],
+  "go_no_go": "GO_FOR_STAGING_IMPORT_DRY_RUN_PR_ONLY",
+  "production_go_no_go": "NO_GO"
+}

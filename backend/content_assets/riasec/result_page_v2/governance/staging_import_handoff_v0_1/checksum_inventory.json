@@ -1,0 +1,46 @@
+{
+  "schema_version": "fap.riasec.result_page_v2.staging_import_checksum_inventory.v0.1",
+  "task_id": "RIASEC-RESULT-BACKEND-STAGING-IMPORT-HANDOFF-01",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "cms_write_performed": false,
+  "runtime_change_performed": false,
+  "frontend_fallback_allowed": false,
+  "private_payload_exported": false,
+  "checksum_algorithm": "sha256",
+  "files": [
+    {
+      "id": "render_preview_fixture_manifest",
+      "path": "backend/content_assets/riasec/result_page_v2/rendered_preview/handoff_v0_1/render_preview_fixture_manifest.json",
+      "sha256": "8f7403067336aea64d7e10b444f6c20efebb73227e16b5ebc7622c447cc6c4ec"
+    },
+    {
+      "id": "render_preview_expected_assertions",
+      "path": "backend/content_assets/riasec/result_page_v2/rendered_preview/handoff_v0_1/expected_assertions.json",
+      "sha256": "b2231fc109e45bd72d714d7c43b93fed6abd134071ab584f8422cf169d7466b2"
+    },
+    {
+      "id": "render_preview_handoff_report",
+      "path": "backend/content_assets/riasec/result_page_v2/rendered_preview/handoff_v0_1/handoff_report.json",
+      "sha256": "0e45e7a1e6522592ad389abcfc7cae19d26ef69513ce22ee02fd9218436acd2b"
+    },
+    {
+      "id": "share_safety_selector_candidate_manifest",
+      "path": "backend/content_assets/riasec/result_page_v2/selector_ready_assets/share_safety_pilot_20260621T1555Z/manifest.json",
+      "sha256": "19e809feb5b580c1699c48a08b73289b297a20d90be65e2a7679a7ee94e4d7a5"
+    },
+    {
+      "id": "route_matrix_report",
+      "path": "backend/content_assets/riasec/result_page_v2/qa/route_matrix_golden_case_qa/v0_1/route_matrix_report.json",
+      "sha256": "4e7a4e9f480669413470ca57957b1811277ecdadc440000440a19730ad1c85d5"
+    },
+    {
+      "id": "golden_case_report",
+      "path": "backend/content_assets/riasec/result_page_v2/qa/route_matrix_golden_case_qa/v0_1/golden_case_report.json",
+      "sha256": "9bcd1e5e3e38c4e737bf8b4daa0fd5ad9ba6e4161b60a88e03374b5149f1a7a9"
+    }
+  ],
+  "file_count": 6
+}
