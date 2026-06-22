@@ -11,7 +11,7 @@ use Throwable;
 final class BigFiveResultPageV2AssetAgentAuditCommand extends Command
 {
     protected $signature = 'big5:result-page-v2-agent
-        {action=audit : Supported actions: audit, generate-candidates, stage-candidates, plan-pr, inspect-ci, plan-merge-cleanup, weekly-ops}
+        {action=audit : Supported actions: audit, generate-candidates, stage-candidates, plan-pr, inspect-ci, plan-merge-cleanup, execute-github-mutation, weekly-ops}
         {--run-id= : Stable run identifier for the artifact directory}
         {--artifact-dir= : Optional artifact root; defaults to backend/artifacts/big5_result_page_v2_agent}
         {--content-asset-root= : Optional content asset root for tests}
@@ -24,8 +24,13 @@ final class BigFiveResultPageV2AssetAgentAuditCommand extends Command
         {--title= : Planned PR title for plan-pr}
         {--checks-json= : Exported GitHub statusCheckRollup JSON for inspect-ci}
         {--pr-state-json= : Exported GitHub PR state JSON for plan-merge-cleanup}
+        {--execution-plan-json= : Auto PR or merge cleanup plan JSON for execute-github-mutation}
+        {--repo-root= : Git repository root for execute-github-mutation}
+        {--github-repo= : GitHub repository slug, for example fermatmind/fap-api}
+        {--mutation-mode=simulate : GitHub mutation execution mode: simulate or live}
         {--production-ops-dir= : Production ops contract directory for weekly-ops}
         {--apply-mechanical-fixes : Permit inspect-ci to apply supported mechanical fixes}
+        {--allow-github-mutation : Permit execute-github-mutation to perform live git/GitHub mutations}
         {--allow-staging-write : Permit stage-candidates to write the reviewed staging package}
         {--strict : Return non-zero when validator, inventory, source-ledger, or leak checks fail}
         {--json : Emit machine-readable summary}';
@@ -75,6 +80,15 @@ final class BigFiveResultPageV2AssetAgentAuditCommand extends Command
                     'artifact_dir' => trim((string) $this->option('artifact-dir')),
                     'pr_state_json' => trim((string) $this->option('pr-state-json')),
                 ]),
+                'execute-github-mutation' => $agent->executeGithubMutation([
+                    'run_id' => trim((string) $this->option('run-id')),
+                    'artifact_dir' => trim((string) $this->option('artifact-dir')),
+                    'execution_plan_json' => trim((string) $this->option('execution-plan-json')),
+                    'repo_root' => trim((string) $this->option('repo-root')),
+                    'github_repo' => trim((string) $this->option('github-repo')),
+                    'mutation_mode' => trim((string) $this->option('mutation-mode')),
+                    'allow_github_mutation' => (bool) $this->option('allow-github-mutation'),
+                ]),
                 'weekly-ops' => $agent->weeklyOps([
                     'run_id' => trim((string) $this->option('run-id')),
                     'artifact_dir' => trim((string) $this->option('artifact-dir')),
@@ -84,7 +98,7 @@ final class BigFiveResultPageV2AssetAgentAuditCommand extends Command
             };
 
             if (! is_array($summary)) {
-                $this->error('Unsupported action. Supported actions: audit, generate-candidates, stage-candidates, plan-pr, inspect-ci, plan-merge-cleanup, weekly-ops');
+                $this->error('Unsupported action. Supported actions: audit, generate-candidates, stage-candidates, plan-pr, inspect-ci, plan-merge-cleanup, execute-github-mutation, weekly-ops');
 
                 return self::FAILURE;
             }

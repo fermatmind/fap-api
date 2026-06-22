@@ -12,6 +12,7 @@ use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use RuntimeException;
 use SplFileInfo;
+use Symfony\Component\Process\Process;
 
 final class BigFiveResultPageV2AssetAgent
 {
@@ -47,6 +48,11 @@ final class BigFiveResultPageV2AssetAgent
     private const CONTENT_ASSET_SCHEMA_RELATIVE_PATH = 'content_assets/big5/result_page_v2/governance/content_asset_factory_spec/big5_content_asset_schema_v0_1.json';
 
     private const PRODUCTION_OPS_RELATIVE_PATH = 'content_assets/big5/result_page_v2/qa/production_ops/v0_1';
+
+    private const GITHUB_MUTATION_ALLOWED_PLAN_TASKS = [
+        'auto_pr_orchestrator_plan',
+        'auto_merge_cleanup_plan',
+    ];
 
     private const FORBIDDEN_PUBLIC_FIELDS = [
         'attempt_id',
@@ -672,6 +678,126 @@ final class BigFiveResultPageV2AssetAgent
                 'ready_for_production' => false,
             ],
             'negative_guarantees' => $this->mergeCleanupNegativeGuarantees(),
+        ];
+    }
+
+    /**
+     * @param  array{
+     *   run_id?:string,
+     *   artifact_dir?:string,
+     *   execution_plan_json?:string,
+     *   repo_root?:string,
+     *   github_repo?:string,
+     *   mutation_mode?:string,
+     *   allow_github_mutation?:bool
+     * }  $options
+     * @return array<string,mixed>
+     */
+    public function executeGithubMutation(array $options = []): array
+    {
+        $runId = $this->sanitizeRunId((string) ($options['run_id'] ?? ''));
+        $artifactDir = $this->artifactDir((string) ($options['artifact_dir'] ?? ''), $runId);
+        $planJson = trim((string) ($options['execution_plan_json'] ?? '')) === ''
+            ? ''
+            : $this->absolutePath((string) ($options['execution_plan_json'] ?? ''));
+        $repoRoot = trim((string) ($options['repo_root'] ?? '')) === ''
+            ? dirname(base_path())
+            : $this->absolutePath((string) ($options['repo_root'] ?? ''));
+        $githubRepo = trim((string) ($options['github_repo'] ?? ''));
+        $mutationMode = strtolower(trim((string) ($options['mutation_mode'] ?? 'simulate')));
+        $allowGithubMutation = ($options['allow_github_mutation'] ?? false) === true;
+
+        $this->ensureDirectory($artifactDir);
+
+        $plan = $this->readOptionalJson($planJson) ?? [];
+        $task = (string) ($plan['task'] ?? '');
+        $preflight = $this->githubMutationPreflight($plan, $planJson, $repoRoot, $githubRepo, $mutationMode, $allowGithubMutation);
+        $steps = $this->githubMutationSteps($plan, dirname($planJson), $githubRepo);
+        $live = $mutationMode === 'live' && $allowGithubMutation && $preflight['valid'] === true;
+        $results = [];
+
+        if ($live) {
+            foreach ($steps as $step) {
+                $result = $this->runGithubMutationStep((array) $step, $repoRoot);
+                $results[] = $result;
+                if (($result['exit_code'] ?? 1) !== 0) {
+                    $preflight['valid'] = false;
+                    $preflight['blockers'][] = 'execution_step_failed: '.(string) ($step['name'] ?? 'unknown');
+
+                    break;
+                }
+            }
+        } else {
+            $results = array_map(
+                fn (array $step): array => [
+                    'name' => (string) ($step['name'] ?? ''),
+                    'command' => $this->redactCommand(array_values(array_map('strval', (array) ($step['command'] ?? [])))),
+                    'executed' => false,
+                    'exit_code' => null,
+                    'stdout' => '',
+                    'stderr' => '',
+                ],
+                $steps
+            );
+        }
+
+        $stepsSucceeded = $mutationMode === 'live' ? $this->allStepsSucceeded($results) : true;
+        $liveExecutionPerformed = $live && $this->allStepsSucceeded($results);
+
+        $report = [
+            'schema_version' => self::SCHEMA_VERSION,
+            'task' => 'github_mutation_execution_runner',
+            'runtime_use' => 'not_runtime',
+            'production_use_allowed' => false,
+            'ready_for_pilot' => false,
+            'ready_for_runtime' => false,
+            'ready_for_production' => false,
+            'execution_plan_json' => $planJson === '' ? null : $this->redactPath($planJson),
+            'repo_root' => $this->redactExecutionPath($repoRoot),
+            'github_repo' => $this->redactGithubRepo($githubRepo),
+            'source_plan_task' => $task,
+            'mutation_mode' => $mutationMode,
+            'allow_github_mutation' => $allowGithubMutation,
+            'live_execution_performed' => $liveExecutionPerformed,
+            'preflight' => $preflight,
+            'step_count' => count($steps),
+            'steps' => $results,
+            'negative_guarantees' => $this->githubMutationNegativeGuarantees($task, $liveExecutionPerformed),
+        ];
+
+        $artifacts = [
+            'github_mutation_execution_report.json' => $this->writeJson($artifactDir.'/github_mutation_execution_report.json', $report),
+            'repair_log.json' => $this->writeJson($artifactDir.'/repair_log.json', [
+                'schema_version' => self::SCHEMA_VERSION,
+                'task' => 'github_mutation_execution_repair_log',
+                'runtime_use' => 'not_runtime',
+                'production_use_allowed' => false,
+                'repair_required' => ! (bool) ($preflight['valid'] ?? false) || ! $stepsSucceeded,
+                'entries' => array_values((array) ($preflight['blockers'] ?? [])),
+            ]),
+        ];
+
+        $ok = $plan !== [] && $preflight['valid'] === true && $stepsSucceeded;
+
+        return [
+            'schema_version' => self::SCHEMA_VERSION,
+            'ok' => $ok,
+            'status' => $ok ? 'success' : 'blocked',
+            'run_id' => $runId,
+            'artifact_dir' => $artifactDir,
+            'artifacts' => $artifacts,
+            'summary' => [
+                'source_plan_task' => $task,
+                'mutation_mode' => $mutationMode,
+                'preflight_valid' => (bool) ($preflight['valid'] ?? false),
+                'blocker_count' => count((array) ($preflight['blockers'] ?? [])),
+                'step_count' => count($steps),
+                'live_execution_performed' => $liveExecutionPerformed,
+                'ready_for_pilot' => false,
+                'ready_for_runtime' => false,
+                'ready_for_production' => false,
+            ],
+            'negative_guarantees' => $this->githubMutationNegativeGuarantees($task, $liveExecutionPerformed),
         ];
     }
 
@@ -2090,6 +2216,282 @@ final class BigFiveResultPageV2AssetAgent
     }
 
     /**
+     * @return array{valid:bool,blockers:list<string>,allowed_plan_tasks:list<string>}
+     */
+    private function githubMutationPreflight(
+        array $plan,
+        string $planJson,
+        string $repoRoot,
+        string $githubRepo,
+        string $mutationMode,
+        bool $allowGithubMutation,
+    ): array {
+        $blockers = [];
+        $task = (string) ($plan['task'] ?? '');
+
+        if ($planJson === '' || ! is_file($planJson)) {
+            $blockers[] = 'execution_plan_json_missing';
+        }
+        if ($plan === []) {
+            $blockers[] = 'execution_plan_json_invalid';
+        }
+        if (! in_array($task, self::GITHUB_MUTATION_ALLOWED_PLAN_TASKS, true)) {
+            $blockers[] = 'unsupported_plan_task';
+        }
+        if (! in_array($mutationMode, ['simulate', 'live'], true)) {
+            $blockers[] = 'unsupported_mutation_mode';
+        }
+        if ($mutationMode === 'live' && ! $allowGithubMutation) {
+            $blockers[] = 'live_github_mutation_not_allowed';
+        }
+        if ($mutationMode === 'live' && ! is_dir($repoRoot.'/.git')) {
+            $blockers[] = 'repo_root_missing_git_directory';
+        }
+        if ($mutationMode === 'live' && ! preg_match('/^[A-Za-z0-9_.-]+\\/[A-Za-z0-9_.-]+$/', $githubRepo)) {
+            $blockers[] = 'github_repo_slug_invalid';
+        }
+
+        if ($task === 'auto_pr_orchestrator_plan') {
+            $blockers = array_merge($blockers, $this->githubPrPlanBlockers($plan));
+        }
+        if ($task === 'auto_merge_cleanup_plan') {
+            $blockers = array_merge($blockers, $this->githubMergeCleanupPlanBlockers($plan));
+        }
+
+        return [
+            'valid' => $blockers === [],
+            'blockers' => array_values(array_unique($blockers)),
+            'allowed_plan_tasks' => self::GITHUB_MUTATION_ALLOWED_PLAN_TASKS,
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function githubPrPlanBlockers(array $plan): array
+    {
+        $blockers = [];
+        $branch = (string) data_get($plan, 'pr.branch', '');
+        $title = (string) data_get($plan, 'pr.title', '');
+        $bodyArtifact = (string) data_get($plan, 'pr.body_artifact', '');
+        $plannedFiles = (array) ($plan['planned_changed_files'] ?? []);
+
+        if (($plan['ok'] ?? null) !== true) {
+            $blockers[] = 'source_plan_not_ok';
+        }
+        if ((string) ($plan['execution_mode'] ?? '') !== 'dry_run_artifact_only') {
+            $blockers[] = 'source_plan_execution_mode_unexpected';
+        }
+        if (data_get($plan, 'scope_validation.valid') !== true) {
+            $blockers[] = 'source_plan_scope_validation_failed';
+        }
+        if (! str_starts_with($branch, 'codex/') || ! preg_match('/^[A-Za-z0-9_\\/.:-]+$/', $branch)) {
+            $blockers[] = 'branch_not_safe_codex_branch';
+        }
+        if ($title === '') {
+            $blockers[] = 'pr_title_missing';
+        }
+        if ($bodyArtifact !== 'auto_pr_body.md') {
+            $blockers[] = 'pr_body_artifact_unexpected';
+        }
+        if ($plannedFiles === []) {
+            $blockers[] = 'planned_changed_files_missing';
+        }
+        foreach ($plannedFiles as $file) {
+            if (! is_string($file) || $file === '' || str_contains($file, '..') || str_starts_with($file, '/')) {
+                $blockers[] = 'planned_changed_file_path_invalid';
+            }
+        }
+
+        return $blockers;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function githubMergeCleanupPlanBlockers(array $plan): array
+    {
+        $blockers = [];
+        $commands = (array) ($plan['planned_commands'] ?? []);
+
+        if (data_get($plan, 'gate.can_merge') !== true) {
+            $blockers[] = 'merge_gate_not_green';
+        }
+        if ((array) data_get($plan, 'gate.blockers', []) !== []) {
+            $blockers[] = 'merge_gate_has_blockers';
+        }
+        if ($commands === []) {
+            $blockers[] = 'planned_commands_missing';
+        }
+        foreach ($commands as $command) {
+            if (! is_string($command) || ! $this->mergeCleanupCommandAllowed($command)) {
+                $blockers[] = 'planned_command_not_allowed';
+            }
+        }
+
+        return $blockers;
+    }
+
+    private function mergeCleanupCommandAllowed(string $command): bool
+    {
+        return preg_match('/^gh pr merge [0-9]+ --squash --delete-branch$/', $command) === 1
+            || $command === 'git fetch origin main --prune'
+            || $command === 'git checkout main'
+            || $command === 'git pull --ff-only origin main'
+            || preg_match('/^git branch -d codex\\/[A-Za-z0-9_\\/.:-]+$/', $command) === 1;
+    }
+
+    /**
+     * @return list<array{name:string,command:list<string>}>
+     */
+    private function githubMutationSteps(array $plan, string $planDir, string $githubRepo): array
+    {
+        $task = (string) ($plan['task'] ?? '');
+        if ($task === 'auto_pr_orchestrator_plan') {
+            $branch = (string) data_get($plan, 'pr.branch', '');
+            $title = (string) data_get($plan, 'pr.title', '');
+            $commitMessage = (string) data_get($plan, 'pr.commit_message', $title);
+            $bodyPath = rtrim($planDir, '/').'/'.(string) data_get($plan, 'pr.body_artifact', 'auto_pr_body.md');
+            $plannedFiles = array_values(array_map('strval', (array) ($plan['planned_changed_files'] ?? [])));
+
+            return [
+                ['name' => 'fetch_main', 'command' => ['git', 'fetch', 'origin', 'main', '--prune']],
+                ['name' => 'checkout_main', 'command' => ['git', 'checkout', 'main']],
+                ['name' => 'pull_main_ff_only', 'command' => ['git', 'pull', '--ff-only', 'origin', 'main']],
+                ['name' => 'create_task_branch', 'command' => ['git', 'checkout', '-b', $branch]],
+                ['name' => 'stage_planned_files', 'command' => array_merge(['git', 'add', '--'], $plannedFiles)],
+                ['name' => 'commit_planned_files', 'command' => ['git', 'commit', '-m', $commitMessage]],
+                ['name' => 'push_task_branch', 'command' => ['git', 'push', '-u', 'origin', $branch]],
+                ['name' => 'create_pull_request', 'command' => ['gh', 'pr', 'create', '--repo', $githubRepo, '--base', 'main', '--head', $branch, '--title', $title, '--body-file', $bodyPath]],
+            ];
+        }
+
+        if ($task === 'auto_merge_cleanup_plan') {
+            return $this->mergeCleanupSteps((array) ($plan['planned_commands'] ?? []), $githubRepo);
+        }
+
+        return [];
+    }
+
+    /**
+     * @return list<array{name:string,command:list<string>}>
+     */
+    private function mergeCleanupSteps(array $commands, string $githubRepo): array
+    {
+        $steps = [];
+        foreach ($commands as $command) {
+            if (! is_string($command) || ! $this->mergeCleanupCommandAllowed($command)) {
+                continue;
+            }
+
+            if (preg_match('/^gh pr merge ([0-9]+) --squash --delete-branch$/', $command, $matches) === 1) {
+                $steps[] = [
+                    'name' => 'squash_merge_pr',
+                    'command' => ['gh', 'pr', 'merge', $matches[1], '--repo', $githubRepo, '--squash', '--delete-branch'],
+                ];
+
+                continue;
+            }
+
+            if (preg_match('/^git branch -d (codex\\/[A-Za-z0-9_\\/.:-]+)$/', $command, $matches) === 1) {
+                $steps[] = [
+                    'name' => 'delete_local_branch',
+                    'command' => ['git', 'branch', '-d', $matches[1]],
+                ];
+
+                continue;
+            }
+
+            $steps[] = [
+                'name' => match ($command) {
+                    'git fetch origin main --prune' => 'fetch_main',
+                    'git checkout main' => 'checkout_main',
+                    'git pull --ff-only origin main' => 'pull_main_ff_only',
+                    default => 'unknown',
+                },
+                'command' => explode(' ', $command),
+            ];
+        }
+
+        return $steps;
+    }
+
+    /**
+     * @param  array{name?:string,command?:list<string>}  $step
+     * @return array<string,mixed>
+     */
+    private function runGithubMutationStep(array $step, string $repoRoot): array
+    {
+        $command = array_values(array_map('strval', (array) ($step['command'] ?? [])));
+        $process = new Process($command, $repoRoot);
+        $process->setTimeout(300);
+        $process->run();
+
+        return [
+            'name' => (string) ($step['name'] ?? ''),
+            'command' => $this->redactCommand($command),
+            'executed' => true,
+            'exit_code' => $process->getExitCode(),
+            'stdout' => $this->redactProcessOutput($process->getOutput()),
+            'stderr' => $this->redactProcessOutput($process->getErrorOutput()),
+        ];
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $results
+     */
+    private function allStepsSucceeded(array $results): bool
+    {
+        if ($results === []) {
+            return false;
+        }
+
+        foreach ($results as $result) {
+            if (($result['executed'] ?? false) !== true || ($result['exit_code'] ?? 1) !== 0) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $command
+     * @return list<string>
+     */
+    private function redactCommand(array $command): array
+    {
+        return array_map(fn (string $part): string => $this->redactExecutionPath($part), $command);
+    }
+
+    private function redactExecutionPath(string $value): string
+    {
+        $base = base_path();
+        $repoRoot = dirname($base);
+
+        $value = str_replace($base, '<backend>', $value);
+        $value = str_replace($repoRoot, '<repo>', $value);
+        $value = preg_replace('/\\/private\\/tmp\\/[A-Za-z0-9_.\\/-]+/', '<tmp-path>', $value) ?? $value;
+        $value = preg_replace('/\\/Users\\/[^\\s]+/', '<user-path>', $value) ?? $value;
+
+        return $value;
+    }
+
+    private function redactProcessOutput(string $output): string
+    {
+        $output = $this->redactExecutionPath($output);
+        $output = preg_replace('/gh[pousr]_[A-Za-z0-9_]+/', '<redacted-token>', $output) ?? $output;
+        $output = preg_replace('/[A-Za-z0-9_\\-]{20,}\\.[A-Za-z0-9_\\-]{20,}\\.[A-Za-z0-9_\\-]{20,}/', '<redacted-token>', $output) ?? $output;
+
+        return mb_substr(trim($output), 0, 2000);
+    }
+
+    private function redactGithubRepo(string $githubRepo): ?string
+    {
+        return preg_match('/^[A-Za-z0-9_.-]+\\/[A-Za-z0-9_.-]+$/', $githubRepo) === 1 ? $githubRepo : null;
+    }
+
+    /**
      * @param  array<string,mixed>  $check
      * @return array<string,mixed>
      */
@@ -2405,6 +2807,37 @@ final class BigFiveResultPageV2AssetAgent
             'local_main_synced' => false,
             'post_merge_revalidation_run' => false,
             'auto_merge_performed' => false,
+        ];
+    }
+
+    /**
+     * @return array<string,bool>
+     */
+    private function githubMutationNegativeGuarantees(string $task, bool $liveExecutionPerformed): array
+    {
+        $isPrPlan = $task === 'auto_pr_orchestrator_plan';
+        $isMergePlan = $task === 'auto_merge_cleanup_plan';
+
+        return [
+            'database_write' => false,
+            'cms_write' => false,
+            'content_assets_write' => false,
+            'frontend_copy_write' => false,
+            'final_result_payload_generation' => false,
+            'runtime_flag_change' => false,
+            'release_snapshot_change' => false,
+            'production_import_gate_change' => false,
+            'rollout_gate_change' => false,
+            'git_branch_created' => $liveExecutionPerformed && $isPrPlan,
+            'git_commit_created' => $liveExecutionPerformed && $isPrPlan,
+            'github_pr_created' => $liveExecutionPerformed && $isPrPlan,
+            'github_checks_polled' => false,
+            'github_merge_performed' => $liveExecutionPerformed && $isMergePlan,
+            'remote_branch_deleted' => $liveExecutionPerformed && $isMergePlan,
+            'local_branch_deleted' => $liveExecutionPerformed && $isMergePlan,
+            'local_main_synced' => $liveExecutionPerformed && $isMergePlan,
+            'post_merge_revalidation_run' => false,
+            'auto_merge_performed' => $liveExecutionPerformed && $isMergePlan,
         ];
     }
 
