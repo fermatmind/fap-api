@@ -1,0 +1,59 @@
+{
+  "schema_version": "fap.riasec.result_page_v2.production_import_execution.v0.1",
+  "task_id": "RIASEC-RESULT-V2-PRODUCTION-IMPORT-EXECUTION-01",
+  "created_date": "2026-06-22",
+  "record_type": "production_import_execution_gate",
+  "decision": "NO-GO",
+  "execution_status": "not_executed",
+  "second_execution_authorization_present": false,
+  "inputs_reviewed": {
+    "production_import_gate_dry_run": "backend/content_assets/riasec/result_page_v2/qa/production_import_gate_dry_run/v0_1/riasec_result_page_v2_production_import_gate_dry_run_no_go_v0_1.json",
+    "approved_snapshot_sidecar": "backend/content_assets/riasec/result_page_v2/governance/production_approval_evidence/v0_1/riasec_result_page_v2_production_approved_snapshot_artifact_no_go_v0_1.json",
+    "production_import_gate_policy": "backend/content_assets/riasec/result_page_v2/governance/production_import_gate_v0_1/riasec_result_page_v2_production_import_gate_policy_v0_1.json"
+  },
+  "preconditions": {
+    "production_approved_snapshot_exists": false,
+    "import_gate_dry_run_passed": false,
+    "complete_human_import_approval_exists": false,
+    "explicit_second_execution_authorization_exists": false,
+    "cms_import_command_target_authorized": false,
+    "public_payload_leak_scan_passed_for_approved_snapshot": false,
+    "rollout_separation_preserved": true
+  },
+  "non_execution_record": {
+    "production_import_command_run": false,
+    "cms_write_performed": false,
+    "runtime_change_performed": false,
+    "environment_change_performed": false,
+    "production_rollout_opened": false
+  },
+  "required_future_execution_conditions": [
+    "production_approved_snapshot_exists",
+    "production_import_human_approval_evidence_complete_and_go",
+    "import_gate_dry_run_passes_for_exact_snapshot",
+    "explicit_second_authorization_for_production_import_execution_present",
+    "import_command_target_dry_run_and_rollback_named",
+    "public_payload_leak_scan_passes",
+    "production_rollout_remains_disabled_and_separately_gated"
+  ],
+  "negative_guarantees": {
+    "runtime_change_performed": false,
+    "environment_change_performed": false,
+    "cms_write_performed": false,
+    "production_import_performed": false,
+    "production_rollout_performed": false,
+    "production_gate_enabled": false,
+    "approved_snapshot_generated": false,
+    "source_rc_snapshot_modified": false,
+    "staging_only_assets_marked_production_ready": false,
+    "codex_approved_production_activation": false
+  },
+  "go_no_go": {
+    "execute_production_import_now": false,
+    "cms_production_write_allowed_now": false,
+    "runtime_production_enablement_allowed_now": false,
+    "production_rollout_allowed_now": false,
+    "import_approval_counts_as_rollout_approval": false,
+    "continue_train_to_rollout_approval_packet": true
+  }
+}
