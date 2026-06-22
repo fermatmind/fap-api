@@ -3083,6 +3083,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $changed = [
             'backend/app/Console/Commands/EnneagramResultPageProductionManualGateCommand.php',
             'backend/app/Console/Kernel.php',
+            'backend/app/Services/Enneagram/Assets/Agent/EnneagramResultPagePendingProductionGateStore.php',
             'backend/app/Services/Enneagram/Assets/Agent/EnneagramResultPageProductionManualGateRunbook.php',
             'backend/content_assets/enneagram/result_page/production_manual_gate/README.md',
             'backend/content_assets/enneagram/result_page/production_manual_gate/production_manual_gate_contract_v0_1.json',
@@ -7197,6 +7198,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return in_array($file, [
             'backend/app/Console/Commands/EnneagramResultPageProductionManualGateCommand.php',
+            'backend/app/Services/Enneagram/Assets/Agent/EnneagramResultPagePendingProductionGateStore.php',
             'backend/app/Services/Enneagram/Assets/Agent/EnneagramResultPageProductionManualGateRunbook.php',
             'backend/content_assets/enneagram/result_page/production_manual_gate/README.md',
             'backend/content_assets/enneagram/result_page/production_manual_gate/production_manual_gate_contract_v0_1.json',
