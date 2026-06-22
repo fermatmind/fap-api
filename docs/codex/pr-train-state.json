@@ -44311,7 +44311,7 @@
     "repo": "fap-api",
     "branch": "codex/help-content-draft-postcheck-01",
     "base": "origin/main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "window_9_help_service_content",
     "title": "docs(help): archive Help CMS draft postcheck",
     "depends_on": [
@@ -56986,14 +56986,17 @@
       "scope_validation": "passed",
       "pr_created": "passed",
       "github_required_checks": "passed",
-      "pre_merge_scope_recheck": "passed"
+      "pre_merge_scope_recheck": "passed",
+      "github_merge_confirmed": "passed",
+      "origin_main_contains_merge_commit": "passed",
+      "post_merge_cleanup": "passed"
     },
     "failure_reason": null,
-    "commit_sha": "07a361200f3021088cac9333ef1a6c10287e67f8",
+    "commit_sha": "73080ce0a6a89bda7779a07355b1ec8ebaf71741",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2255",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-22T00:46:44Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_auto_rollout_allowed": false,
     "production_cms_write_allowed": false,
     "production_gate_auto_enable_allowed": false,
@@ -57027,6 +57030,12 @@
         "from": "pull_request_open",
         "to": "ready_to_merge",
         "notes": "GitHub required checks passed after rebasing onto origin/main; pre-merge scope recheck stayed within PR4 allowed files."
+      },
+      {
+        "at": "2026-06-22T08:51:19+08:00",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "notes": "PR #2255 merged at 2026-06-22T00:46:44Z; origin/main contains merge commit 73080ce0a6a89bda7779a07355b1ec8ebaf71741; local and remote task branches cleaned."
       }
     ]
   },
@@ -57034,15 +57043,19 @@
     "repo": "fap-api",
     "branch": "codex/riasec-ops-agent-reporting-sidecar-01",
     "base": "main",
-    "status": "pending_dependency",
+    "status": "local_checks_passed",
     "train_scope": "riasec_result_ops_agent_release_chain",
     "title": "RIASEC-OPS-AGENT-REPORTING-SIDECAR-01: feat(riasec): add ops reporting sidecar",
     "depends_on": [
       "RIASEC-OPS-AGENT-STAGING-RUNNER-01"
     ],
-    "checks": {},
+    "checks": {
+      "dependency_pr4_merged": "passed",
+      "php_lint_orchestrator": "passed",
+      "php_artisan_test_filter_RiasecOpsAgent": "passed"
+    },
     "failure_reason": null,
-    "commit_sha": null,
+    "commit_sha": "ff39897ea46ba4f680ad2b0fb75350578b9ab9f2",
     "pr_url": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -57056,6 +57069,12 @@
         "from": "missing_from_manifest",
         "to": "pending_dependency",
         "notes": "Initialized from explicit RIASEC ops agent and release-chain /goal authorization."
+      },
+      {
+        "at": "2026-06-22T08:51:19+08:00",
+        "from": "pending_dependency",
+        "to": "local_checks_passed",
+        "notes": "PR4 dependency verified merged and cleaned; RiasecOpsAgent tests passed for reporting sidecar service support."
       }
     ]
   },
