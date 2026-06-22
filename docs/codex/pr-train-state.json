@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-22T09:10:00+08:00",
+  "updated_at": "2026-06-22T09:22:00+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -57290,7 +57290,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-v2-ci-inspector-mechanical-fixer",
     "base": "main",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "train_scope": "big5_result_page_v2_asset_agent_automation",
     "title": "B5-RESULT-CI-INSPECTOR-MECHANICAL-FIXER-01: Inspect Big Five V2 agent PR checks",
     "depends_on": [
@@ -57321,12 +57321,12 @@
         "evidence": "Changed files are limited to allowed PR3 scope: BigFiveResultPageV2AssetAgentAuditCommand.php, BigFiveResultPageV2AssetAgent.php, BigFiveResultPageV2AssetAgentTest.php, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json. No fap-web copy, production import gate, rollout gate, release snapshot, runtime flag, auto merge, cleanup, or weekly ops behavior changed."
       },
       "github": {
-        "status": "pending",
-        "evidence": "PR #2250 opened; waiting for GitHub checks."
+        "status": "pass",
+        "evidence": "PR #2250 checks completed successfully on head 3c07528c8f615919d4ece45c1517c97104f3baf0; mergeStateStatus CLEAN; PR title/body and changed-file scope re-reviewed."
       }
     },
     "failure_reason": null,
-    "commit_sha": "4622292c1a9d46a2f9c590a0f4ced8cdc8f77ae2",
+    "commit_sha": "3c07528c8f615919d4ece45c1517c97104f3baf0",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2250",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -57341,6 +57341,11 @@
         "at": "2026-06-22T09:10:00+08:00",
         "status": "pr_open",
         "note": "Opened PR #2250 after local validation and scope validation passed; waiting for required GitHub checks."
+      },
+      {
+        "at": "2026-06-22T09:22:00+08:00",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed, mergeStateStatus is CLEAN, and PR title/body/scope were re-reviewed. Ready to merge under squash policy after this state update is pushed and checks remain green."
       }
     ]
   }
