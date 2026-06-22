@@ -39995,7 +39995,7 @@
     "repo": "fap-api",
     "branch": "codex/career-search-channel-readiness-gate-01",
     "base": "main",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "title": "CAREER-SEARCH-CHANNEL-READINESS-GATE-01 career Search Channel readiness gate",
     "depends_on": [
       "CAREER-DIRECTORY-AUTHORITY-DRIFT-GATE-01"
@@ -57892,6 +57892,10 @@
       "scope_validation": {
         "status": "pass",
         "evidence": "Changed files are limited to the Big Five V2 asset agent command/service/test files and docs/codex PR-train state. git diff --check, JSON parse, and YAML parse passed."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #2269 required GitHub checks completed successfully on head d0053f7f8171724308e1bc535bbf58a711df5c8b; PR title/body and changed-file scope were re-reviewed."
       }
     },
     "failure_reason": null,
@@ -57910,6 +57914,11 @@
         "at": "2026-06-22T02:50:00Z",
         "status": "pr_open",
         "note": "Opened PR #2269 for the auto check poller after local validation and scope validation passed."
+      },
+      {
+        "at": "2026-06-22T02:55:00Z",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed on head d0053f7f8171724308e1bc535bbf58a711df5c8b, and PR title/body/scope were re-reviewed. Ready to merge under squash policy after this state update is pushed and checks remain green."
       }
     ]
   },
