@@ -1,0 +1,35 @@
+{
+  "schema_version": "fap.riasec.result_page_v2.selector_coverage_validation_report.v0.1",
+  "task_id": "RIASEC-RESULT-SELECTOR-COVERAGE-BATCH-01",
+  "run_id": "selector_coverage_batch_20260622T0948Z",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "cms_write_performed": false,
+  "runtime_change_performed": false,
+  "frontend_fallback_allowed": false,
+  "private_payload_exported": false,
+  "asset_schema_version": "fap.riasec.result_page_v2.selector_asset.v0.1",
+  "raw_draft_asset_count": 5,
+  "repaired_draft_asset_count": 5,
+  "final_asset_count": 5,
+  "covered_route_groups": ["clear_primary", "near_tie", "top3", "low_quality", "norm_unavailable"],
+  "covered_registries": {
+    "profile_signature_registry": 3,
+    "method_boundary_registry": 2
+  },
+  "selector_contract_checks": {
+    "slot_key_present": true,
+    "trigger_present": true,
+    "priority_present": true,
+    "mutual_exclusion_group_present": true,
+    "fallback_policy_present": true,
+    "public_payload_allowlist_checked": true
+  },
+  "error_count": 0,
+  "warnings": [
+    "staging_candidate_not_imported",
+    "requires_staging_import_gate"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "schema_version": "fap.riasec.result_page_v2.sidecar_issue.v0.1",
+  "task_id": "RIASEC-RESULT-SELECTOR-COVERAGE-BATCH-01",
+  "created_at": "2026-06-22T10:04:00+08:00",
+  "status": "external_blocker_registered",
+  "blocking_check": "cd backend && php artisan riasec:result-page-v2-agent audit --strict --json",
+  "blocking_check_exit_code": 1,
+  "current_pr_new_hit_count": 0,
+  "external_hit_count": 64,
+  "scope_boundary": {
+    "current_pr_scope": "Add staging-only selector assets for clear_primary, near_tie, top3, low_quality, and norm_unavailable route groups.",
+    "current_pr_allowed_to_repair_historical_assets": false,
+    "production_rollout_allowed": false,
+    "cms_write_allowed": false,
+    "runtime_change_allowed": false
+  },
+  "source_file_summary": {
+    "content_assets/riasec/result_page_v2/selector_qa_policy/v0_1/riasec_result_page_v2_selector_qa_policy_v0_1_conflict_resolution.json": 26,
+    "content_assets/riasec/result_page_v2/agent_runs/share_safety_pilot_20260621T1555Z/safety_report.json": 21,
+    "content_assets/riasec/professional_method_boundary_v1.zh-CN.json": 6,
+    "content_assets/riasec/technical_note_user_summary_v1.zh-CN.json": 3,
+    "content_assets/riasec/pair_blend_15_pairs_v1.zh-CN.jsonl": 2,
+    "content_assets/riasec/faq_v1.en.json": 1,
+    "content_assets/riasec/faq_v1.zh-CN.json": 1,
+    "content_assets/riasec/result_page_v2/agent_runs/share_safety_pilot_20260621T1555Z/final_assets.jsonl": 1,
+    "content_assets/riasec/result_page_v2/agent_runs/share_safety_pilot_20260621T1555Z/raw_draft_assets.jsonl": 1,
+    "content_assets/riasec/result_page_v2/agent_runs/share_safety_pilot_20260621T1555Z/repaired_draft_assets.jsonl": 1,
+    "content_assets/riasec/result_page_v2/selector_ready_assets/share_safety_pilot_20260621T1555Z/assets.jsonl": 1
+  },
+  "current_pr_remediation": [
+    "Removed top-level internal_metadata from selector_coverage_batch_20260622T0948Z JSONL assets and replaced it with agent_metadata.",
+    "Updated selector_ready manifest checksum after remediation.",
+    "Added PHPUnit coverage to keep public_payload free of forbidden private fields."
+  ],
+  "recommended_follow_up": {
+    "type": "sidecar_issue",
+    "title": "RIASEC result-page strict audit has pre-existing leak-scan hits outside selector coverage batch",
+    "suggested_owner_pr": "RIASEC-RESULT-SELECTOR-QA-REPAIR follow-up or dedicated historical leak-scan repair",
+    "notes": "Do not repair the historical FAQ, method-boundary, share-safety pilot, or selector QA policy files inside RIASEC-RESULT-SELECTOR-COVERAGE-BATCH-01 unless explicitly re-scoped."
+  }
+}

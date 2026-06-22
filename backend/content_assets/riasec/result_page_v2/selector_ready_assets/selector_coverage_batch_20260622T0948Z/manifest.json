@@ -1,0 +1,40 @@
+{
+  "schema_version": "fap.riasec.result_page_v2.selector_ready_assets.manifest.v0.1",
+  "task_id": "RIASEC-RESULT-SELECTOR-COVERAGE-BATCH-01",
+  "run_id": "selector_coverage_batch_20260622T0948Z",
+  "created_at": "2026-06-22T09:48:00Z",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "content_authority": "backend",
+  "cms_write_performed": false,
+  "runtime_change_performed": false,
+  "frontend_fallback_allowed": false,
+  "private_payload_exported": false,
+  "asset_schema_version": "fap.riasec.result_page_v2.selector_asset.v0.1",
+  "asset_count": 5,
+  "assets_jsonl_sha256": "dba3a7baa456f3fa76f86a3d3e61d7a0bfab594ec1debcfce7a5d7b7276f324e",
+  "registries": {
+    "profile_signature_registry": 3,
+    "method_boundary_registry": 2
+  },
+  "covered_route_groups": [
+    "clear_primary",
+    "near_tie",
+    "top3",
+    "low_quality",
+    "norm_unavailable"
+  ],
+  "source_run_artifacts": {
+    "raw_draft_assets": "backend/content_assets/riasec/result_page_v2/agent_runs/selector_coverage_batch_20260622T0948Z/raw_draft_assets.jsonl",
+    "repaired_draft_assets": "backend/content_assets/riasec/result_page_v2/agent_runs/selector_coverage_batch_20260622T0948Z/repaired_draft_assets.jsonl",
+    "final_assets": "backend/content_assets/riasec/result_page_v2/agent_runs/selector_coverage_batch_20260622T0948Z/final_assets.jsonl",
+    "validation_report": "backend/content_assets/riasec/result_page_v2/agent_runs/selector_coverage_batch_20260622T0948Z/validation_report.json",
+    "safety_report": "backend/content_assets/riasec/result_page_v2/agent_runs/selector_coverage_batch_20260622T0948Z/safety_report.json"
+  },
+  "selector_ready_candidate": false,
+  "staging_review_only": true,
+  "import_allowed": false,
+  "runtime_selector_wiring_allowed": false
+}
