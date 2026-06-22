@@ -47753,7 +47753,7 @@
     "repo": "fap-api",
     "branch": "codex/daily-giving-public-api-smoke-01",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "window_7_public_benefit_trust_gate",
     "title": "test(benefit): add DailyGiving public API smoke gate",
     "depends_on": [
@@ -57287,11 +57287,11 @@
     ],
     "checks": {},
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "commit_sha": "91ad717799e6813eebfdf730ed99431b6d9dd958",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2264",
+    "merged_at": "2026-06-22T02:11:20Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_auto_rollout_allowed": false,
     "production_cms_write_allowed": false,
     "production_gate_auto_enable_allowed": false,
@@ -57316,8 +57316,8 @@
     ],
     "checks": {},
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "7a4d75d8ef66deaf9f8d8fd0121f57d6989ba1f6",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2267",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -57781,6 +57781,11 @@
         "at": "2026-06-22T09:25:00Z",
         "status": "ready_to_merge",
         "note": "GitHub checks passed, mergeStateStatus is CLEAN, and PR title/body/scope were re-reviewed. Ready to merge under squash policy after this state update is pushed and checks remain green."
+      },
+      {
+        "at": "2026-06-22T02:14:00Z",
+        "status": "merged",
+        "note": "PR #2264 merged with merge commit 91ad717799e6813eebfdf730ed99431b6d9dd958; origin/main contains the merge commit, local main was fast-forwarded, task branch was deleted locally/remotely, and post-merge JSON/YAML/diff validation passed."
       }
     ]
   },
@@ -57788,7 +57793,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-v2-live-dry-run-pilot",
     "base": "main",
-    "status": "pending_dependency",
+    "status": "ready_to_merge",
     "train_scope": "big5_result_page_v2_asset_agent_execution_runner",
     "title": "B5-RESULT-LIVE-DRY-RUN-PILOT-01: Record Big Five V2 live PR mutation pilot",
     "depends_on": [
@@ -57800,8 +57805,28 @@
         "evidence": "User authorized this PR train item in the /goal execution request."
       },
       "dependency": {
-        "status": "pending",
-        "evidence": "Waiting for B5-RESULT-RUNNER-SOP-RUNBOOK-01 to merge into main."
+        "status": "pass",
+        "evidence": "B5-RESULT-RUNNER-SOP-RUNBOOK-01 is merged and origin/main contains merge commit 91ad717799e6813eebfdf730ed99431b6d9dd958."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent generate-candidates --run-id=live-dry-run-source --artifact-dir=content_assets/big5/result_page_v2/agent_runs/testing-live-dry-run --json --no-ansi",
+          "cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent plan-pr --run-id=live-dry-run-plan --artifact-dir=content_assets/big5/result_page_v2/agent_runs/testing-live-dry-run --source-run-dir=content_assets/big5/result_page_v2/agent_runs/testing-live-dry-run/live-dry-run-source --pr-id=B5-RESULT-LIVE-DRY-RUN-ARTIFACT-01 --branch=codex/big5-v2-live-dry-run-artifact --json --no-ansi",
+          "cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent execute-github-mutation --run-id=live-dry-run-execution --artifact-dir=content_assets/big5/result_page_v2/agent_runs/testing-live-dry-run --execution-plan-json=content_assets/big5/result_page_v2/agent_runs/testing-live-dry-run/live-dry-run-plan/auto_pr_orchestration_plan.json --repo-root=<clean-clone-root> --github-repo=fermatmind/fap-api --mutation-mode=live --allow-github-mutation --json --no-ansi",
+          "git diff --check",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+        ],
+        "evidence": "Live execution succeeded in a temporary clean clone with preflight_valid=true, blocker_count=0, step_count=8, live_execution_performed=true, git_branch_created=true, git_commit_created=true, github_pr_created=true. Created pilot PR #2266 and left it open/unmerged."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "PR2 changed files are limited to backend/docs/big5/result-asset-agent-live-dry-run-pilot.md and docs/codex/pr-train-state.json. No fap-web copy, production import gate, release snapshot, rollout gate, runtime flag, CMS write, or DB write changed."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #2267 required GitHub checks completed successfully on head 345b8ba7b234dfc40a28eef2bdff17798bdaf334; mergeStateStatus CLEAN; PR title/body and changed-file scope were re-reviewed."
       }
     },
     "failure_reason": null,
@@ -57810,7 +57835,23 @@
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
-    "transitions": []
+    "transitions": [
+      {
+        "at": "2026-06-22T02:15:00Z",
+        "status": "local_validated",
+        "note": "Live dry-run pilot created artifact-only PR #2266 via execute-github-mutation live mode. The pilot PR is open and unmerged for the later merge cleanup pilot."
+      },
+      {
+        "at": "2026-06-22T02:20:00Z",
+        "status": "pr_open",
+        "note": "Opened PR #2267 after live dry-run evidence and scope validation passed; waiting for required GitHub checks."
+      },
+      {
+        "at": "2026-06-22T02:35:00Z",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed, mergeStateStatus is CLEAN, and PR title/body/scope were re-reviewed. Ready to merge under squash policy after this state update is pushed and checks remain green."
+      }
+    ]
   },
   "B5-RESULT-AUTO-CHECK-POLLER-01": {
     "repo": "fap-api",
