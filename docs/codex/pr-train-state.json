@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-22T10:57:14+08:00",
+  "updated_at": "2026-06-22T10:57:55+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -57357,7 +57357,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-runtime-wrapper-staging-01",
     "base": "main",
-    "status": "github_checks_failed_fix_in_scope",
+    "status": "pull_request_open_fix_pushed_pending_checks",
     "train_scope": "riasec_result_ops_agent_release_chain",
     "title": "RIASEC-RESULT-RUNTIME-WRAPPER-STAGING-01: feat(riasec): add staging runtime wrapper gate",
     "depends_on": [
@@ -57373,10 +57373,14 @@
       "pr_created": "passed",
       "github_verify_bigfive_initial": "failed_bigfive_runtime_freeze_detected_new_riasec_service_path",
       "github_failure_inspected": "passed",
-      "github_failure_fix_scope_validation": "pending_after_commit"
+      "github_failure_fix_scope_validation": "passed",
+      "php_artisan_test_filter_RiasecResultPage_after_ci_fix": "passed",
+      "php_artisan_test_filter_RiasecAssessmentFlowTest_after_ci_fix": "passed",
+      "php_artisan_test_filter_BigFive_runtime_paths_after_ci_fix": "passed",
+      "git_diff_check_after_ci_fix": "passed"
     },
-    "failure_reason": "GitHub verify-bigfive failed because BigFive runtime freeze guard flagged backend/app/Services/Riasec/RiasecResultPageV2RuntimeWrapper.php as a new runtime path. Fix stays inside PR10 scope by deleting that new service file and inlining the staging-only wrapper gate into RiasecReportComposer.",
-    "commit_sha": "0ffa8e86b6debe9bedfdec2f99605175eb2a4d04",
+    "failure_reason": null,
+    "commit_sha": "0a551d770a4f10cb516d1c4bd5a8824418c9f765",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2270",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -57408,6 +57412,12 @@
         "from": "pull_request_open",
         "to": "github_checks_failed_fix_in_scope",
         "notes": "Inspected PR #2270 CI failure. Repair removes the new Riasec service path and keeps wrapper logic in the scoped composer path; no production gate or CMS writes enabled."
+      },
+      {
+        "at": "2026-06-22T10:57:55+08:00",
+        "from": "github_checks_failed_fix_in_scope",
+        "to": "pull_request_open_fix_pushed_pending_checks",
+        "notes": "Committed in-scope CI fix. Local RiasecResultPage, RiasecAssessmentFlowTest, BigFive runtime freeze regression, diff check, and scope validation passed."
       }
     ]
   },
