@@ -1,0 +1,55 @@
+{
+  "schema": "fap.riasec.result_page_v2.production_rollout_gate_policy.v0.1",
+  "package": "riasec_result_page_v2_production_rollout_gate",
+  "version": "v0_1",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "cms_write_performed": false,
+  "automatic_rollout_allowed": false,
+  "manual_approval_required": true,
+  "required_before_rollout": [
+    "production_import_gate_passed",
+    "explicit_human_production_rollout_approval",
+    "approved_release_snapshot_id",
+    "tenant_scope",
+    "form_scope",
+    "locale_scope",
+    "percentage_max",
+    "rollback_kill_switch",
+    "post_deploy_smoke_procedure"
+  ],
+  "allowed_modes": [
+    "disabled",
+    "allowlist_only",
+    "percentage",
+    "allowlist_or_percentage"
+  ],
+  "blocked_modes": [
+    "automatic_production_rollout",
+    "unscoped_global_rollout",
+    "cms_production_write",
+    "frontend_fallback_enablement"
+  ],
+  "rollback": {
+    "kill_switch_config": "riasec_result_page_v2.production_emergency_disabled",
+    "rollback_method": "disable rollout config or disable release snapshot",
+    "post_disable_smoke_required": true
+  },
+  "post_deploy_smoke": {
+    "procedure_id": "riasec_result_page_v2_post_deploy_smoke_v0_1",
+    "required_surfaces": [
+      "result_page",
+      "pdf",
+      "share",
+      "history",
+      "compare",
+      "locked",
+      "free",
+      "low_quality",
+      "fallback"
+    ],
+    "requires_no_private_payload_leak": true
+  }
+}

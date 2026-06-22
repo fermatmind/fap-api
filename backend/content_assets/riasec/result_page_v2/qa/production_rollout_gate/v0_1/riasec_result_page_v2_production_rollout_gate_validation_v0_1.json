@@ -1,0 +1,22 @@
+{
+  "schema": "fap.riasec.result_page_v2.production_rollout_gate_validation.v0.1",
+  "package": "riasec_result_page_v2_production_rollout_gate_qa",
+  "version": "v0_1",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "cms_write_performed": false,
+  "validation_status": "pass",
+  "checks": {
+    "automatic_rollout_blocked": "pass",
+    "manual_approval_required": "pass",
+    "tenant_scope_required": "pass",
+    "form_scope_required": "pass",
+    "locale_scope_required": "pass",
+    "percentage_max_required": "pass",
+    "rollback_kill_switch_required": "pass",
+    "post_deploy_smoke_required": "pass"
+  },
+  "production_decision": "NO_GO"
+}

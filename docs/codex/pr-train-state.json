@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-22T12:01:28+08:00",
+  "updated_at": "2026-06-22T12:12:44+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -57601,7 +57601,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-production-import-gate-01",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "riasec_result_ops_agent_release_chain",
     "title": "RIASEC-RESULT-PRODUCTION-IMPORT-GATE-01: test(riasec): add production import gate",
     "depends_on": [
@@ -57618,14 +57618,18 @@
       "pr_created": "passed",
       "github_required_checks": "passed",
       "pre_merge_scope_validation": "passed",
-      "pre_merge_git_diff_check": "passed"
+      "pre_merge_git_diff_check": "passed",
+      "post_merge_php_artisan_test_filter_RiasecResultPage": "passed",
+      "post_merge_php_artisan_test_filter_ImportGate": "passed",
+      "post_merge_jq_empty_import_gate_json": "passed",
+      "main_equals_origin_main": "passed_detached_origin_main"
     },
     "failure_reason": null,
-    "commit_sha": "5f4490f8337bb3a666b194d7ab989ea47021aba0",
+    "commit_sha": "64a942d107bdba44a1b21b10e49e198e664c0b25",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2275",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-22T04:08:04Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_auto_rollout_allowed": false,
     "production_cms_write_allowed": false,
     "production_gate_auto_enable_allowed": false,
@@ -57659,6 +57663,12 @@
         "from": "pull_request_open",
         "to": "ready_to_merge",
         "notes": "GitHub required checks are green on PR #2275. Pre-merge scope validation and git diff --check passed."
+      },
+      {
+        "at": "2026-06-22T12:12:44+08:00",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "notes": "Reconciled PR #2275 after squash merge. Merge commit 64a942d107bdba44a1b21b10e49e198e664c0b25 is on origin/main; remote/local task branch cleanup and post-merge revalidation passed."
       }
     ]
   },
@@ -57666,13 +57676,20 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-production-rollout-gate-01",
     "base": "main",
-    "status": "pending_dependency",
+    "status": "local_checks_passed",
     "train_scope": "riasec_result_ops_agent_release_chain",
     "title": "RIASEC-RESULT-PRODUCTION-ROLLOUT-GATE-01: test(riasec): add production rollout gate",
     "depends_on": [
       "RIASEC-RESULT-PRODUCTION-IMPORT-GATE-01"
     ],
-    "checks": {},
+    "checks": {
+      "dependency_pr13_merged": "passed",
+      "php_artisan_test_filter_RiasecResultPage": "passed",
+      "php_artisan_test_filter_ProductionRuntime": "passed",
+      "php_artisan_test_filter_RolloutGate": "passed",
+      "git_diff_check": "passed",
+      "scope_validation": "passed"
+    },
     "failure_reason": null,
     "commit_sha": null,
     "pr_url": null,
@@ -57688,6 +57705,12 @@
         "from": "missing_from_manifest",
         "to": "pending_dependency",
         "notes": "Initialized from explicit RIASEC ops agent and release-chain /goal authorization."
+      },
+      {
+        "at": "2026-06-22T12:12:44+08:00",
+        "from": "pending_dependency",
+        "to": "local_checks_passed",
+        "notes": "Added manual-only production rollout gate config/service, governance policy, QA validation, and tests for manual approval, import gate, snapshot, scoped tenant/form/locale, percentage max, kill switch, and post-deploy smoke procedure. No automatic production rollout."
       }
     ]
   },
