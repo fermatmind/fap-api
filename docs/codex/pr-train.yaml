@@ -27494,3 +27494,44 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: BIG5-CONTROLLED-PILOT-RUNTIME-ACTIVATION-01
+    repo: fap-api
+    depends_on:
+      - BIG5-CONTROLLED-PILOT-GATE-01
+    branch: codex/big5-controlled-pilot-runtime-activation
+    title: "BIG5-CONTROLLED-PILOT-RUNTIME-ACTIVATION-01: Enable Big Five controlled pilot runtime path"
+    train_scope: big5_strategic_completion_roadmap
+    status: user_authorized
+    scope:
+      - Keep Big Five V2 controlled pilot runtime fail-closed and allowlist-only for production pilot use.
+      - Block public percentage buckets in production controlled pilot mode; only explicit allowlist matches can attach V2.
+      - Add a redacted backend activation evidence package that keeps production use, full rollout, CMS, SEO runtime, and deploy deferred.
+    allowed_paths:
+      - backend/app/Services/BigFive/ResultPageV2/Access/BigFiveV2PilotAccessGate.php
+      - backend/content_assets/big5/result_page_v2/qa/controlled_pilot_runtime_activation/**
+      - backend/tests/Feature/V0_3/BigFiveV2PublicPilotAccessGateTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2ControlledPilotRuntimeActivationTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify fap-web, frontend result-page copy, CMS, SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, routes, controllers, DB migrations, release snapshots, production import gates, production rollout gates, dashboards, analytics refresh commands, live smoke, deploy workflows, or real allowlist identifiers.
+      - Enable percentage rollout, full production rollout, production import, CMS publish, search submission, or manual deploy.
+    validation:
+      - cd backend && php artisan test --filter=BigFiveResultPageV2ControlledPilotRuntimeActivationTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveV2PublicPilotAccessGateTest --no-ansi
+      - find backend/content_assets/big5/result_page_v2/qa/controlled_pilot_runtime_activation/v0_1 -name '*.json' -print -exec python3 -m json.tool {} >/dev/null \;
+      - cd backend/content_assets/big5/result_page_v2/qa/controlled_pilot_runtime_activation/v0_1 && shasum -a 256 -c SHA256SUMS
+      - cd backend && vendor/bin/pint --test app/Services/BigFive/ResultPageV2/Access/BigFiveV2PilotAccessGate.php tests/Feature/V0_3/BigFiveV2PublicPilotAccessGateTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2ControlledPilotRuntimeActivationTest.php
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='test_runtime_paths_have_no_uncommitted_diff' --no-ansi
+      - git diff --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend

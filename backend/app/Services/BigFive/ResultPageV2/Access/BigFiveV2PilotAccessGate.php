@@ -172,7 +172,7 @@ final class BigFiveV2PilotAccessGate
             return 'public_pilot_production_blast_radius_exceeded';
         }
 
-        return null;
+        return 'public_pilot_production_percentage_blocked_for_controlled_pilot';
     }
 
     /**
@@ -182,6 +182,10 @@ final class BigFiveV2PilotAccessGate
     {
         $percentage = max(0, min(100, (int) config('big5_result_page_v2.public_pilot_rollout_percentage', 0)));
         if ($percentage <= 0) {
+            return false;
+        }
+
+        if ($context['environment'] === 'production') {
             return false;
         }
 

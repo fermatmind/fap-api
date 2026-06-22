@@ -57100,7 +57100,7 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
+    "commit_sha": "c28da4b8ae31034ffdc64337b6bd1deef1e4f167",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2223",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -58447,7 +58447,7 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
+    "commit_sha": "d62cbe6317f08d4307bd9488e5cf9059c3bcbf1d",
     "pr_url": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -59348,6 +59348,73 @@
         "at": "2026-06-22T17:39:45Z",
         "status": "merged",
         "note": "PR #2336 merged with merge commit 3c4b6b04c164928ce10c60f8bab2386fa5b4fb36. origin/main contains the merge commit, the remote task branch was deleted, local main was synced, and local cleanup was executed."
+      }
+    ]
+  },
+  "BIG5-CONTROLLED-PILOT-RUNTIME-ACTIVATION-01": {
+    "repo": "fap-api",
+    "branch": "codex/big5-controlled-pilot-runtime-activation",
+    "base": "main",
+    "status": "pr_open",
+    "train_scope": "big5_strategic_completion_roadmap",
+    "title": "BIG5-CONTROLLED-PILOT-RUNTIME-ACTIVATION-01: Enable Big Five controlled pilot runtime path",
+    "depends_on": [
+      "BIG5-CONTROLLED-PILOT-GATE-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly requested the Big Five strategic completion roadmap and listed Controlled Pilot Runtime Activation as the next scoped backend phase."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "BIG5-CONTROLLED-PILOT-GATE-01 is merged as fap-api PR #2336, and origin/main contains merge commit 3c4b6b04c164928ce10c60f8bab2386fa5b4fb36."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "cd backend && php artisan test --filter=BigFiveResultPageV2ControlledPilotRuntimeActivationTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveV2PublicPilotAccessGateTest --no-ansi",
+          "find backend/content_assets/big5/result_page_v2/qa/controlled_pilot_runtime_activation/v0_1 -name '*.json' -print -exec python3 -m json.tool {} >/dev/null \\;",
+          "cd backend/content_assets/big5/result_page_v2/qa/controlled_pilot_runtime_activation/v0_1 && shasum -a 256 -c SHA256SUMS",
+          "cd backend && vendor/bin/pint --test app/Services/BigFive/ResultPageV2/Access/BigFiveV2PilotAccessGate.php tests/Feature/V0_3/BigFiveV2PublicPilotAccessGateTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2ControlledPilotRuntimeActivationTest.php",
+          "cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='test_runtime_paths_have_no_uncommitted_diff' --no-ansi",
+          "git diff --check",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+        ],
+        "evidence": "Focused controlled pilot runtime activation package test passed, public pilot access gate regression passed including production percentage blocking, JSON parse and SHA256SUMS passed, targeted Pint passed, runtime-freeze guard passed, and metadata/diff checks passed. PHPUnit warnings were limited to the known missing backend/.env in this temporary worktree and all commands exited 0."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are confined to BigFiveV2PilotAccessGate, BigFiveV2PublicPilotAccessGateTest, the controlled_pilot_runtime_activation QA package, the focused runtime activation artifact test, and docs/codex metadata. No fap-web copy, CMS, SEO runtime, routes, controllers, DB migrations, release snapshot activation, production import gate, production rollout gate, live smoke, deploy workflow, or real allowlist identifiers changed."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2340",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-22T18:06:09Z",
+        "status": "in_progress",
+        "note": "Started from synced fap-api main. Scope is controlled pilot runtime activation evidence plus fail-closed production percentage blocking for the public pilot access gate."
+      },
+      {
+        "at": "2026-06-22T18:06:09Z",
+        "status": "local_validated",
+        "note": "Added redacted controlled pilot runtime activation evidence, blocked production public pilot percentage buckets for controlled pilot, and passed focused artifact/access-gate tests, JSON/SHA checks, Pint, runtime-freeze guard, metadata parse, and diff check."
+      },
+      {
+        "at": "2026-06-22T18:06:09Z",
+        "status": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/2340 after local validation and scope validation passed."
       }
     ]
   },
