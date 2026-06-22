@@ -1,0 +1,58 @@
+{
+  "schema_version": "fap.riasec.result_page_v2.staging_import_package_list.v0.1",
+  "task_id": "RIASEC-RESULT-BACKEND-STAGING-IMPORT-HANDOFF-01",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "cms_write_performed": false,
+  "runtime_change_performed": false,
+  "frontend_fallback_allowed": false,
+  "private_payload_exported": false,
+  "import_execution_allowed_in_this_pr": false,
+  "candidate_inputs": [
+    {
+      "id": "render_preview_fixture_manifest",
+      "path": "backend/content_assets/riasec/result_page_v2/rendered_preview/handoff_v0_1/render_preview_fixture_manifest.json",
+      "role": "fap_web_rendered_preview_fixture_manifest",
+      "import_action": "read_only_reference",
+      "required_for_staging_dry_run": true
+    },
+    {
+      "id": "render_preview_expected_assertions",
+      "path": "backend/content_assets/riasec/result_page_v2/rendered_preview/handoff_v0_1/expected_assertions.json",
+      "role": "fap_web_expected_assertions",
+      "import_action": "read_only_reference",
+      "required_for_staging_dry_run": true
+    },
+    {
+      "id": "render_preview_handoff_report",
+      "path": "backend/content_assets/riasec/result_page_v2/rendered_preview/handoff_v0_1/handoff_report.json",
+      "role": "handoff_readiness_report",
+      "import_action": "read_only_reference",
+      "required_for_staging_dry_run": true
+    },
+    {
+      "id": "share_safety_selector_candidate_manifest",
+      "path": "backend/content_assets/riasec/result_page_v2/selector_ready_assets/share_safety_pilot_20260621T1555Z/manifest.json",
+      "role": "staging_selector_candidate_manifest",
+      "import_action": "dry_run_candidate_only",
+      "required_for_staging_dry_run": true
+    },
+    {
+      "id": "route_matrix_report",
+      "path": "backend/content_assets/riasec/result_page_v2/qa/route_matrix_golden_case_qa/v0_1/route_matrix_report.json",
+      "role": "route_matrix_staging_readiness_gate",
+      "import_action": "read_only_gate",
+      "required_for_staging_dry_run": true
+    },
+    {
+      "id": "golden_case_report",
+      "path": "backend/content_assets/riasec/result_page_v2/qa/route_matrix_golden_case_qa/v0_1/golden_case_report.json",
+      "role": "golden_case_staging_readiness_gate",
+      "import_action": "read_only_gate",
+      "required_for_staging_dry_run": true
+    }
+  ],
+  "candidate_input_count": 6
+}
