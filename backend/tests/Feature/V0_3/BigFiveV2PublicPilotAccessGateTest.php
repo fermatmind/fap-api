@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Feature\V0_3;
 
+use App\Services\BigFive\ResultPageV2\Access\BigFiveV2PilotAccessGate;
 use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2Contract;
 use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2RuntimeWrapper;
-use App\Services\BigFive\ResultPageV2\Access\BigFiveV2PilotAccessGate;
 use App\Services\Report\ReportAccess;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Feature\V0_3\Concerns\BuildsBigFiveReportEngineBridgeFixture;
@@ -192,6 +192,25 @@ final class BigFiveV2PublicPilotAccessGateTest extends TestCase
 
         $this->assertFalse($decision->allowed);
         $this->assertSame('public_pilot_production_blast_radius_exceeded', $decision->reason);
+    }
+
+    public function test_controlled_pilot_production_rejects_percentage_even_when_explicitly_configured(): void
+    {
+        $this->forceProductionEnvironment();
+        $fixture = $this->createCanonicalBigFiveBridgeFixture('anon_big5_public_pilot_prod_percentage_blocked');
+        $this->enablePublicPilot([
+            'public_pilot_allowed_environments' => ['production', 'testing'],
+            'public_pilot_production_allowlist_enabled' => true,
+            'public_pilot_access_allowed_anon_ids' => [],
+            'public_pilot_rollout_percentage' => 10,
+            'public_pilot_production_percentage_enabled' => true,
+            'public_pilot_production_max_percentage' => 10,
+        ]);
+
+        $decision = app(BigFiveV2PilotAccessGate::class)->decide($fixture['attempt']);
+
+        $this->assertFalse($decision->allowed);
+        $this->assertSame('public_pilot_production_percentage_blocked_for_controlled_pilot', $decision->reason);
     }
 
     /**
