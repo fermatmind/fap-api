@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-22T12:39:21+08:00",
+  "updated_at": "2026-06-22T13:35:55+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -55091,7 +55091,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-result-asset-agent-runbook-01",
     "base": "main",
-    "status": "pr_open",
+    "status": "merged",
     "train_scope": "big5_result_page_v2_asset_agent",
     "title": "BIG5-RESULT-ASSET-AGENT-RUNBOOK-01: docs(big5):固化 result asset agent runbook",
     "checks": {
@@ -55156,7 +55156,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-result-source-ledger-01",
     "base": "main",
-    "status": "pr_open",
+    "status": "merged",
     "train_scope": "big5_result_page_v2_asset_agent",
     "title": "BIG5-RESULT-SOURCE-LEDGER-01: docs(big5):建 result source ledger",
     "depends_on": [
@@ -55224,7 +55224,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-result-asset-validator-harness-01",
     "base": "main",
-    "status": "ci_fix_local_checks_passed",
+    "status": "merged",
     "train_scope": "big5_result_page_v2_asset_agent",
     "title": "BIG5-RESULT-ASSET-VALIDATOR-HARNESS-01: test(big5):建 result asset validator harness",
     "depends_on": [
@@ -55394,7 +55394,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-result-selector-qa-repair-01",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "big5_result_page_v2_asset_agent",
     "title": "BIG5-RESULT-SELECTOR-QA-REPAIR-01: fix(big5):修 result selector QA policy",
     "depends_on": [
@@ -55466,7 +55466,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-result-asset-factory-pilot-batch-01",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "big5_result_page_v2_asset_agent",
     "title": "BIG5-RESULT-ASSET-FACTORY-PILOT-BATCH-01: feat(big5):dry-run share safety selector batch",
     "depends_on": [
@@ -55552,7 +55552,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-result-route-matrix-golden-case-qa-01",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "big5_result_page_v2_asset_agent",
     "title": "BIG5-RESULT-ROUTE-MATRIX-GOLDEN-CASE-QA-01: test(big5):验证 route matrix golden cases",
     "depends_on": [
@@ -55628,7 +55628,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-result-render-preview-handoff-01",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "big5_result_page_v2_asset_agent",
     "title": "BIG5-RESULT-RENDER-PREVIEW-HANDOFF-01: docs(big5):交付 rendered preview fixtures",
     "depends_on": [
@@ -55667,11 +55667,11 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": "610da0870dd76e07ac14cd7a157a3dc6db6dbbed",
+    "commit_sha": "0fa0e16dcc76d986de3b481e6e0342b566c63d01",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2210",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-21T10:42:41Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-21T15:57:09+08:00",
@@ -56285,7 +56285,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-existing-asset-gap-audit-01",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "riasec_result_page_v2_asset_agent",
     "title": "RIASEC-RESULT-EXISTING-ASSET-GAP-AUDIT-01: docs(riasec):审计现有 result assets gaps",
     "depends_on": [
@@ -56366,7 +56366,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-selector-qa-repair-01",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "riasec_result_page_v2_asset_agent",
     "title": "RIASEC-RESULT-SELECTOR-QA-REPAIR-01: fix(riasec):修 result selector QA policy",
     "depends_on": [
@@ -56447,7 +56447,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-asset-factory-pilot-batch-01",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "riasec_result_page_v2_asset_agent",
     "title": "RIASEC-RESULT-ASSET-FACTORY-PILOT-BATCH-01: feat(riasec):dry-run share safety result batch",
     "depends_on": [
@@ -56540,7 +56540,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-route-matrix-golden-case-qa-01",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "riasec_result_page_v2_asset_agent",
     "title": "RIASEC-RESULT-ROUTE-MATRIX-GOLDEN-CASE-QA-01: test(riasec):验证 route matrix golden cases",
     "depends_on": [
@@ -56629,7 +56629,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-render-preview-handoff-01",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "riasec_result_page_v2_asset_agent",
     "title": "RIASEC-RESULT-RENDER-PREVIEW-HANDOFF-01: docs(riasec):交付 rendered preview fixtures",
     "depends_on": [
@@ -56664,11 +56664,11 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": "259859f44611903584ce8990daf1f84ba260cfa4",
+    "commit_sha": "fe4a40b9f745e5ffe61168da58065a87ef57febb",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2237",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-21T17:56:16Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-21T22:06:47+08:00",
