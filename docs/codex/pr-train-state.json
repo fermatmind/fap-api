@@ -58447,7 +58447,7 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": "899e7bcb98bdbb07a1cde4e38873f560a17bc15f",
+    "commit_sha": null,
     "pr_url": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -59001,7 +59001,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-generated-readiness-artifact",
     "base": "main",
-    "status": "local_validated",
+    "status": "pr_open",
     "train_scope": "big5_result_page_agent_readiness_to_pilot",
     "title": "BIG5-RESULT-PAGE-AGENT-GENERATED-READINESS-ARTIFACT-01: Generate Big Five readiness artifact",
     "depends_on": [],
@@ -59031,12 +59031,12 @@
       },
       "github": {
         "status": "pending",
-        "evidence": "PR not opened yet."
+        "evidence": "Opened https://github.com/fermatmind/fap-api/pull/2326 on head bef2a9f4f2f7c40e71f93cba0ac1ac64e36976ed."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "bef2a9f4f2f7c40e71f93cba0ac1ac64e36976ed",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2326",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -59050,6 +59050,11 @@
         "at": "2026-06-23T00:15:00Z",
         "status": "local_validated",
         "note": "Added readiness.json to the audit artifact set, kept runtime/pilot/production flags false, and passed strict audit, focused AssetAgentTest, JSON/YAML parse, git diff check, and scope validation."
+      },
+      {
+        "at": "2026-06-23T00:45:00Z",
+        "status": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/2326 after local validation and scope validation passed."
       }
     ]
   },
