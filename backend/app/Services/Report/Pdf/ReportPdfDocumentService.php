@@ -418,12 +418,15 @@ final class ReportPdfDocumentService
         string $qualityLevel,
         array $sections
     ): string {
+        $normalizedScale = strtoupper($scaleCode);
         $lines = [
-            'Attempt ID: '.$attemptId,
-            'Scale: '.strtoupper($scaleCode),
+            'Scale: '.$normalizedScale,
             'Variant: '.strtolower($variant),
             'Locked: '.($locked ? 'true' : 'false'),
         ];
+        if ($normalizedScale !== 'ENNEAGRAM') {
+            array_unshift($lines, 'Attempt ID: '.$attemptId);
+        }
 
         if ($normsStatus !== '') {
             $lines[] = 'Norms Status: '.strtoupper($normsStatus);

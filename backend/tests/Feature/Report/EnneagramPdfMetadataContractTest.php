@@ -40,9 +40,9 @@ final class EnneagramPdfMetadataContractTest extends TestCase
         $response->assertHeader('X-Pdf-Surface-Version', 'enneagram.pdf_surface.v1');
         $response->assertHeader('X-Report-Form-Code', $formCode);
         $response->assertHeader('X-Report-Form-Label', $expectedLabel);
-        $response->assertHeader('X-Report-Schema-Version', 'enneagram.report.v2');
-        $response->assertHeader('X-Projection-Version', 'enneagram_projection.v2');
         $response->assertHeader('X-Cross-Form-Comparable', 'false');
+        $this->assertEnneagramPdfHeadersArePublicSafe($response->headers->all());
+        $this->assertEnneagramPdfBodyIsPublicSafe((string) $response->getContent(), $attemptId);
         $this->assertStringContainsString(
             sprintf('fermatmind-enneagram-%s-%s.pdf', $expectedSlug, now()->format('Y-m-d')),
             (string) $response->headers->get('Content-Disposition')
@@ -60,7 +60,52 @@ final class EnneagramPdfMetadataContractTest extends TestCase
         $this->assertSame($expectedLabel, $metadata['form_label']);
         $this->assertSame(false, $metadata['cross_form_comparable']);
         $this->assertNotSame('', (string) $metadata['filename_hint']);
+        $this->assertSame('enneagram.report.v2', $metadata['report_schema_version']);
+        $this->assertSame('enneagram_projection.v2', $metadata['projection_version']);
+        $this->assertNotSame('', (string) $metadata['interpretation_context_id']);
+        $this->assertNotSame('', (string) $metadata['content_release_hash']);
+        $this->assertNotSame('', (string) $metadata['content_snapshot_status']);
         $this->assertNotEmpty((array) $metadata['snapshot_binding_v1']);
+    }
+
+    /**
+     * @param  array<string,list<string|null>>  $headers
+     */
+    private function assertEnneagramPdfHeadersArePublicSafe(array $headers): void
+    {
+        foreach ([
+            'x-report-schema-version',
+            'x-projection-version',
+            'x-report-engine-version',
+            'x-interpretation-context-id',
+            'x-content-release-hash',
+            'x-content-snapshot-status',
+        ] as $header) {
+            $this->assertArrayNotHasKey($header, $headers, $header);
+        }
+    }
+
+    private function assertEnneagramPdfBodyIsPublicSafe(string $pdfBinary, string $attemptId): void
+    {
+        foreach ([
+            $attemptId,
+            'Attempt ID:',
+            'raw_score',
+            'raw_scores',
+            'raw_score_vector',
+            'score_vector',
+            'schema_version',
+            'report_schema_version',
+            'projection_version',
+            'interpretation_context_id',
+            'content_release_hash',
+            'content_snapshot_status',
+            'sha256:',
+            'enneagram.report.v2',
+            'enneagram_projection.v2',
+        ] as $forbidden) {
+            $this->assertStringNotContainsString($forbidden, $pdfBinary, $forbidden);
+        }
     }
 
     /**
