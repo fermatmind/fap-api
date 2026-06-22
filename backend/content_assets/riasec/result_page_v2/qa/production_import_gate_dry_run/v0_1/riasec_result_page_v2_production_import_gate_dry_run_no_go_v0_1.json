@@ -1,0 +1,59 @@
+{
+  "schema_version": "fap.riasec.result_page_v2.production_import_gate_dry_run.v0.1",
+  "task_id": "RIASEC-RESULT-V2-PRODUCTION-IMPORT-GATE-DRY-RUN-01",
+  "created_date": "2026-06-22",
+  "record_type": "production_import_gate_dry_run",
+  "decision": "NO-GO",
+  "dry_run_status": "blocked_external_no_go",
+  "external_blocker": {
+    "blocker_id": "production_approved_snapshot_missing_due_to_missing_human_approval",
+    "introduced_by_current_pr": false,
+    "source_task_id": "RIASEC-RESULT-V2-PRODUCTION-APPROVED-SNAPSHOT-ARTIFACT-01",
+    "source_artifact": "backend/content_assets/riasec/result_page_v2/governance/production_approval_evidence/v0_1/riasec_result_page_v2_production_approved_snapshot_artifact_no_go_v0_1.json",
+    "train_should_continue": true
+  },
+  "approved_snapshot_lookup": {
+    "directory": "backend/content_assets/riasec/result_page_v2/releases/production_approved/v0_1",
+    "approved_snapshot_found": false,
+    "approved_snapshot_id": null,
+    "approved_snapshot_sha256": null
+  },
+  "dry_run_check_matrix": {
+    "manifest": "NO-GO_no_authorized_production_import_manifest",
+    "sha256": "NO-GO_no_approved_snapshot_hash",
+    "release_snapshot": "NO-GO_no_production_approved_snapshot",
+    "approval_evidence": "NO-GO_missing_human_approval",
+    "rendered_qa_evidence": "REVIEW_INPUT_ONLY",
+    "all_surface_pass_evidence": "REVIEW_INPUT_ONLY",
+    "staging_only_rejection": "PASS_FAIL_CLOSED",
+    "safety": "PASS_NO_MUTATION"
+  },
+  "future_go_requirements": [
+    "production_approved_snapshot_artifact_present",
+    "complete_human_production_import_approval_evidence_present",
+    "approved_snapshot_sha256_verified",
+    "staging_only_artifacts_rejected",
+    "rollback_kill_switch_acknowledged",
+    "import_approval_does_not_claim_rollout_approval"
+  ],
+  "negative_guarantees": {
+    "runtime_change_performed": false,
+    "environment_change_performed": false,
+    "cms_write_performed": false,
+    "production_import_performed": false,
+    "production_rollout_performed": false,
+    "production_gate_enabled": false,
+    "approved_snapshot_generated": false,
+    "source_rc_snapshot_modified": false,
+    "staging_only_assets_marked_production_ready": false,
+    "codex_approved_production_activation": false
+  },
+  "go_no_go": {
+    "import_gate_dry_run_can_pass_now": false,
+    "production_import_allowed_now": false,
+    "cms_production_write_allowed_now": false,
+    "runtime_production_enablement_allowed_now": false,
+    "production_rollout_allowed_now": false,
+    "continue_train_with_external_no_go_sidecar": true
+  }
+}
