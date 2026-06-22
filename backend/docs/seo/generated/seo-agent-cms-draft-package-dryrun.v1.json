@@ -21,8 +21,10 @@
     "proposed_seo_title",
     "proposed_seo_description",
     "proposed_faq_items",
+    "proposed_internal_link_actions",
     "proposed_canonical_path",
     "proposed_indexability",
+    "proposal_quality",
     "draft_instructions",
     "claim_gate_required",
     "human_approval_required"
@@ -31,8 +33,20 @@
     "proposed_seo_title",
     "proposed_seo_description",
     "proposed_faq_items",
+    "proposed_internal_link_actions",
     "proposed_canonical_path",
-    "proposed_indexability"
+    "proposed_indexability",
+    "proposal_quality"
+  ],
+  "optional_proposal_quality_fields": [
+    "source",
+    "locale_preserved",
+    "slug_generated_copy",
+    "uses_runtime_title",
+    "uses_runtime_meta_description",
+    "proposed_actions_preserved",
+    "sample_internal_path_count",
+    "needs_human_approval"
   ],
   "negative_guarantees": {
     "database_write": false,

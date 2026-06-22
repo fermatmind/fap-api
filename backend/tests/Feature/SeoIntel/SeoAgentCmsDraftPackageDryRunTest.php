@@ -105,6 +105,52 @@ final class SeoAgentCmsDraftPackageDryRunTest extends TestCase
     }
 
     #[Test]
+    public function command_uses_gsc_cohort_payload_for_locale_aware_draft_proposals(): void
+    {
+        $this->createRows();
+        $artifactDir = $this->artifactDir();
+        $verdictPath = $this->writeVerdict([
+            $this->candidateVerdict('cms_draft_package_dry_run', true, [
+                'gsc_low_ctr_title_opportunity',
+                'gsc_low_ctr_description_opportunity',
+                'missing_visible_faq',
+            ], [
+                'source_family' => 'gsc_cohort_artifact',
+                'safe_path' => '/zh/articles/mbti-vs-holland-career-choice',
+                'proposal_payload' => $this->gscProposalPayload(),
+            ]),
+        ]);
+
+        $exitCode = Artisan::call('seo-agent:cms-draft-package-dry-run', [
+            '--verdict' => $verdictPath,
+            '--artifact-dir' => $artifactDir,
+            '--json' => true,
+        ]);
+
+        $summary = json_decode(trim(Artisan::output()), true);
+        $package = $this->readJson(data_get($summary, 'artifact.path'));
+        $brief = $package['draft_briefs'][0] ?? [];
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame('success', $summary['status'] ?? null);
+        $this->assertSame('用霍兰德职业兴趣代码理解 MBTI 职业选择 | FermatMind', $brief['proposed_seo_title'] ?? null);
+        $this->assertSame('这篇中文文章解释 MBTI 与霍兰德兴趣代码如何一起辅助职业选择。', $brief['proposed_seo_description'] ?? null);
+        $this->assertNotSame('Mbti Vs Holland Career Choice | FermatMind', $brief['proposed_seo_title'] ?? null);
+        $this->assertSame('这篇文章需要补充哪些常见问题？', data_get($brief, 'proposed_faq_items.0.question'));
+        $this->assertSame('Add internal link review targets from GSC cohort.', data_get($brief, 'proposed_internal_link_actions.0'));
+        $this->assertSame('gsc_cohort_artifact', data_get($brief, 'proposal_quality.source'));
+        $this->assertTrue((bool) data_get($brief, 'proposal_quality.locale_preserved'));
+        $this->assertFalse((bool) data_get($brief, 'proposal_quality.slug_generated_copy', true));
+        $this->assertTrue((bool) data_get($brief, 'proposal_quality.needs_human_approval'));
+
+        $encoded = json_encode([$summary, $package], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        $this->assertIsString($encoded);
+        foreach ($this->forbiddenStrings() as $forbidden) {
+            $this->assertStringNotContainsString($forbidden, $encoded, $forbidden);
+        }
+    }
+
+    #[Test]
     public function command_fails_closed_for_invalid_schema_and_forbidden_fields(): void
     {
         $invalidSchema = $this->writeJson(['schema_version' => 'wrong.v1']);
@@ -150,8 +196,10 @@ final class SeoAgentCmsDraftPackageDryRunTest extends TestCase
             'proposed_seo_title',
             'proposed_seo_description',
             'proposed_faq_items',
+            'proposed_internal_link_actions',
             'proposed_canonical_path',
             'proposed_indexability',
+            'proposal_quality',
         ], $artifact['proposal_fields'] ?? null);
         $this->assertFalse((bool) data_get($artifact, 'negative_guarantees.cms_write', true));
     }
@@ -263,6 +311,38 @@ final class SeoAgentCmsDraftPackageDryRunTest extends TestCase
             'forbidden_claims' => [],
             'status' => ContentPage::STATUS_PUBLISHED,
         ]);
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function gscProposalPayload(): array
+    {
+        return [
+            'source' => 'gsc_cohort_artifact',
+            'locale' => 'zh-CN',
+            'safe_path' => '/zh/articles/mbti-vs-holland-career-choice',
+            'draft_angle' => 'mbti-vs-holland-career-choice',
+            'proposed_actions' => [
+                'Add internal link review targets from GSC cohort.',
+                'Review visible FAQ candidates after claim gate.',
+            ],
+            'runtime' => [
+                'title' => '用霍兰德职业兴趣代码理解 MBTI 职业选择 | FermatMind',
+                'meta_description' => '这篇中文文章解释 MBTI 与霍兰德兴趣代码如何一起辅助职业选择。',
+                'title_length' => 37,
+                'meta_description_length' => 47,
+                'jsonld_total' => 0,
+                'internal_link_count' => 36,
+                'sample_internal_paths' => ['/zh/articles/riasec-holland-code', '/zh/careers'],
+            ],
+            'metrics' => [
+                'clicks' => 0,
+                'impressions' => 257,
+                'ctr_ppm' => 0,
+                'average_position_milli' => 8900,
+            ],
+        ];
     }
 
     /**

@@ -274,6 +274,12 @@ final class SeoAgentGscCohortHandoffCommand extends Command
                 'jsonld_total' => (int) ($runtime['jsonld_total'] ?? 0),
                 'internal_link_count' => (int) data_get($runtime, 'internal_link_summary.total_internal_links', 0),
             ],
+            'proposal_payload' => $this->proposalPayload($proposal, $safePath, $articleTarget['locale'], [
+                'clicks' => $clicks,
+                'impressions' => $impressions,
+                'ctr_ppm' => $ctrPpm,
+                'average_position_milli' => $positionMilli,
+            ]),
             'safe_path_hash' => hash('sha256', $safePath),
             'recommended_next_step' => 'codex_review_then_cms_draft_package_dry_run',
             'allowed_action' => 'cms_draft_package_dry_run',
@@ -286,6 +292,102 @@ final class SeoAgentGscCohortHandoffCommand extends Command
                 'indexing_request',
             ],
         ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $proposal
+     * @param  array<string, int|null>  $metrics
+     * @return array<string, mixed>
+     */
+    private function proposalPayload(array $proposal, string $safePath, string $locale, array $metrics): array
+    {
+        $runtime = (array) ($proposal['runtime_seo_check'] ?? []);
+
+        return [
+            'source' => self::SOURCE_FAMILY,
+            'locale' => $locale,
+            'safe_path' => $safePath,
+            'draft_angle' => $this->safeText((string) ($proposal['draft_angle'] ?? ''), 160),
+            'proposed_actions' => $this->safeTextList((array) ($proposal['proposed_actions'] ?? []), 8, 240),
+            'runtime' => [
+                'title' => $this->safeText((string) ($runtime['title'] ?? ''), 180),
+                'meta_description' => $this->safeText((string) ($runtime['meta_description'] ?? ''), 260),
+                'title_length' => (int) ($runtime['title_length'] ?? 0),
+                'meta_description_length' => (int) ($runtime['meta_description_length'] ?? 0),
+                'jsonld_total' => (int) ($runtime['jsonld_total'] ?? 0),
+                'internal_link_count' => (int) data_get($runtime, 'internal_link_summary.total_internal_links', 0),
+                'sample_internal_paths' => $this->safeInternalPaths((array) data_get($runtime, 'internal_link_summary.sample_internal_paths', [])),
+            ],
+            'metrics' => [
+                'clicks' => (int) ($metrics['clicks'] ?? 0),
+                'impressions' => (int) ($metrics['impressions'] ?? 0),
+                'ctr_ppm' => (int) ($metrics['ctr_ppm'] ?? 0),
+                'average_position_milli' => is_int($metrics['average_position_milli'] ?? null)
+                    ? $metrics['average_position_milli']
+                    : null,
+            ],
+        ];
+    }
+
+    private function safeText(string $value, int $maxLength): string
+    {
+        $value = trim(html_entity_decode($value, ENT_QUOTES | ENT_HTML5, 'UTF-8'));
+        $value = preg_replace('~https?://[^\s<>"\']+~iu', '', $value) ?: '';
+        $value = preg_replace('/\s+/u', ' ', $value) ?: '';
+
+        return mb_substr($value, 0, $maxLength);
+    }
+
+    /**
+     * @param  array<int, mixed>  $values
+     * @return list<string>
+     */
+    private function safeTextList(array $values, int $limit, int $maxLength): array
+    {
+        $items = [];
+        foreach ($values as $value) {
+            if (! is_scalar($value)) {
+                continue;
+            }
+
+            $text = $this->safeText((string) $value, $maxLength);
+            if ($text === '') {
+                continue;
+            }
+
+            $items[] = $text;
+            if (count($items) >= $limit) {
+                break;
+            }
+        }
+
+        return array_values(array_unique($items));
+    }
+
+    /**
+     * @param  array<int, mixed>  $paths
+     * @return list<string>
+     */
+    private function safeInternalPaths(array $paths): array
+    {
+        $safe = [];
+        foreach ($paths as $path) {
+            if (! is_scalar($path)) {
+                continue;
+            }
+
+            $parsed = parse_url((string) $path, PHP_URL_PATH);
+            if (! is_string($parsed) || ! str_starts_with($parsed, '/')) {
+                continue;
+            }
+
+            $safe[] = $parsed;
+            if (count($safe) >= 10) {
+                break;
+            }
+        }
+
+        return array_values(array_unique($safe));
     }
 
     /**
