@@ -130,6 +130,103 @@ final class RiasecResultPageAssetAgentTest extends TestCase
         }
     }
 
+    public function test_staging_import_dry_run_writes_inventory_leak_scan_and_fail_closed_reports(): void
+    {
+        $artifactRoot = $this->tempDir('riasec-result-staging-import-dry-run');
+
+        try {
+            $summary = app(RiasecResultPageAssetAgent::class)->stagingImportDryRun([
+                'run_id' => 'unit-staging-import',
+                'artifact_dir' => $artifactRoot,
+                'strict' => true,
+            ]);
+
+            $this->assertTrue((bool) ($summary['ok'] ?? false));
+            $this->assertSame('success', $summary['status'] ?? null);
+            $this->assertGreaterThanOrEqual(2, (int) data_get($summary, 'summary.selector_ready_package_count', 0));
+            $this->assertGreaterThanOrEqual(6, (int) data_get($summary, 'summary.selector_ready_asset_count', 0));
+            $this->assertSame(0, (int) data_get($summary, 'summary.leak_hit_count', -1));
+            $this->assertFalse((bool) data_get($summary, 'summary.cms_write_performed', true));
+            $this->assertFalse((bool) data_get($summary, 'summary.runtime_change_performed', true));
+
+            $runDir = $artifactRoot.'/unit-staging-import';
+            foreach ([
+                'staging_import_dry_run_report.json',
+                'checksum_inventory.json',
+                'public_leak_scan_report.json',
+                'fail_closed_report.json',
+                'go_no_go.md',
+            ] as $filename) {
+                $this->assertFileExists($runDir.'/'.$filename);
+            }
+
+            $dryRun = $this->readJson($runDir.'/staging_import_dry_run_report.json');
+            $this->assertSame('staging_only', $dryRun['runtime_use'] ?? null);
+            $this->assertFalse((bool) ($dryRun['production_use_allowed'] ?? true));
+            $this->assertFalse((bool) ($dryRun['ready_for_runtime'] ?? true));
+            $this->assertFalse((bool) ($dryRun['ready_for_production'] ?? true));
+            $this->assertFalse((bool) ($dryRun['cms_write_performed'] ?? true));
+            $this->assertFalse((bool) ($dryRun['runtime_change_performed'] ?? true));
+            $this->assertSame('pass', $dryRun['public_leak_scan_status'] ?? null);
+
+            $failClosed = $this->readJson($runDir.'/fail_closed_report.json');
+            $this->assertFalse((bool) ($failClosed['import_allowed'] ?? true));
+            $this->assertFalse((bool) ($failClosed['runtime_selector_wiring_allowed'] ?? true));
+            $this->assertFalse((bool) ($failClosed['production_rollout_allowed'] ?? true));
+
+            $goNoGo = (string) file_get_contents($runDir.'/go_no_go.md');
+            $this->assertStringContainsString('NO-GO for CMS import', $goNoGo);
+        } finally {
+            $this->deleteDirectory($artifactRoot);
+        }
+    }
+
+    public function test_staging_import_dry_run_fails_closed_for_public_payload_leaks(): void
+    {
+        $artifactRoot = $this->tempDir('riasec-result-staging-import-leak-artifacts');
+        $selectorReadyRoot = $this->tempDir('riasec-result-staging-import-leak-assets');
+        $packageRoot = $selectorReadyRoot.'/leaky_package';
+        mkdir($packageRoot, 0777, true);
+        file_put_contents($packageRoot.'/assets.jsonl', json_encode([
+            'version' => 'fap.riasec.result_page_v2.selector_asset.v0.1',
+            'asset_key' => 'leaky.asset',
+            'public_payload' => [
+                'title' => 'Leak fixture',
+                'attempt_id' => 'private-attempt-id',
+            ],
+        ], JSON_UNESCAPED_SLASHES)."\n");
+        file_put_contents($packageRoot.'/manifest.json', json_encode([
+            'runtime_use' => 'staging_only',
+            'production_use_allowed' => false,
+            'ready_for_runtime' => false,
+            'ready_for_production' => false,
+            'cms_write_performed' => false,
+            'runtime_change_performed' => false,
+            'frontend_fallback_allowed' => false,
+            'private_payload_exported' => false,
+        ], JSON_PRETTY_PRINT));
+
+        try {
+            $summary = app(RiasecResultPageAssetAgent::class)->stagingImportDryRun([
+                'run_id' => 'leaky-staging-import',
+                'artifact_dir' => $artifactRoot,
+                'content_asset_root' => $selectorReadyRoot,
+                'strict' => true,
+            ]);
+
+            $this->assertFalse((bool) ($summary['ok'] ?? true));
+            $this->assertSame('blocked', $summary['status'] ?? null);
+            $this->assertContains('forbidden_public_payload_leaks', (array) ($summary['errors'] ?? []));
+
+            $leakScan = $this->readJson($artifactRoot.'/leaky-staging-import/public_leak_scan_report.json');
+            $this->assertSame('blocked', data_get($leakScan, 'leak_scan.status'));
+            $this->assertSame('attempt_id', data_get($leakScan, 'leak_scan.hits.0.value'));
+        } finally {
+            $this->deleteDirectory($artifactRoot);
+            $this->deleteDirectory($selectorReadyRoot);
+        }
+    }
+
     private function tempDir(string $prefix): string
     {
         $path = sys_get_temp_dir().'/'.$prefix.'-'.bin2hex(random_bytes(4));

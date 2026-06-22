@@ -16,7 +16,9 @@ final class RiasecResultPageAssetAgent
 
     public const DEFAULT_ARTIFACT_RELATIVE_DIR = 'artifacts/riasec_result_page_v2_agent';
 
-    private const CONTENT_ASSET_RELATIVE_PATH = 'content_assets/riasec';
+    private const CONTENT_ASSET_RELATIVE_PATH = 'content_assets/riasec/result_page_v2';
+
+    private const SELECTOR_READY_RELATIVE_PATH = 'content_assets/riasec/result_page_v2/selector_ready_assets';
 
     private const SOURCE_LEDGER_RELATIVE_PATH = 'content_assets/riasec/result_page_v2/source_ledger';
 
@@ -164,6 +166,107 @@ final class RiasecResultPageAssetAgent
     }
 
     /**
+     * @param  array{
+     *   run_id?:string,
+     *   artifact_dir?:string,
+     *   content_asset_root?:string,
+     *   strict?:bool
+     * }  $options
+     * @return array<string,mixed>
+     */
+    public function stagingImportDryRun(array $options = []): array
+    {
+        $runId = $this->sanitizeRunId((string) ($options['run_id'] ?? 'riasec-result-page-staging-import-dry-run'));
+        $artifactDir = $this->artifactDir((string) ($options['artifact_dir'] ?? ''), $runId);
+        $selectorReadyRoot = $this->optionalPath(
+            (string) ($options['content_asset_root'] ?? ''),
+            base_path(self::SELECTOR_READY_RELATIVE_PATH)
+        );
+        $strict = ($options['strict'] ?? false) === true;
+
+        $checksumInventory = $this->selectorReadyChecksumInventory($selectorReadyRoot);
+        $publicLeakScan = $this->selectorReadyPublicLeakScan($selectorReadyRoot);
+        $failClosedReport = [
+            'schema_version' => self::SCHEMA_VERSION,
+            'task' => 'staging_import_fail_closed_policy',
+            'runtime_use' => 'staging_only',
+            'production_use_allowed' => false,
+            'ready_for_runtime' => false,
+            'ready_for_production' => false,
+            'cms_write_performed' => false,
+            'runtime_change_performed' => false,
+            'frontend_fallback_allowed' => false,
+            'private_payload_exported' => false,
+            'import_allowed' => false,
+            'runtime_selector_wiring_allowed' => false,
+            'production_rollout_allowed' => false,
+            'negative_guarantees' => $this->negativeGuarantees(),
+        ];
+        $errors = [];
+        if (! (bool) ($checksumInventory['valid'] ?? false)) {
+            $errors[] = 'selector_ready_inventory_invalid';
+        }
+        if (((int) data_get($publicLeakScan, 'leak_scan.hit_count', 0)) > 0) {
+            $errors[] = 'forbidden_public_payload_leaks';
+        }
+
+        $dryRunReport = [
+            'schema_version' => self::SCHEMA_VERSION,
+            'task' => 'staging_import_dry_run',
+            'run_id' => $runId,
+            'runtime_use' => 'staging_only',
+            'production_use_allowed' => false,
+            'ready_for_runtime' => false,
+            'ready_for_production' => false,
+            'cms_write_performed' => false,
+            'runtime_change_performed' => false,
+            'frontend_fallback_allowed' => false,
+            'private_payload_exported' => false,
+            'selector_ready_root' => $this->redactPath($selectorReadyRoot),
+            'selector_ready_package_count' => (int) ($checksumInventory['package_count'] ?? 0),
+            'selector_ready_asset_count' => (int) ($checksumInventory['asset_count'] ?? 0),
+            'checksum_inventory_valid' => (bool) ($checksumInventory['valid'] ?? false),
+            'public_leak_scan_status' => (string) data_get($publicLeakScan, 'leak_scan.status', 'blocked'),
+            'fail_closed_policy_present' => true,
+            'error_count' => count(array_unique($errors)),
+            'errors' => array_values(array_unique($errors)),
+            'negative_guarantees' => $this->negativeGuarantees(),
+        ];
+
+        $this->ensureDirectory($artifactDir);
+        $artifacts = [
+            'staging_import_dry_run_report.json' => $this->writeJson($artifactDir.'/staging_import_dry_run_report.json', $dryRunReport),
+            'checksum_inventory.json' => $this->writeJson($artifactDir.'/checksum_inventory.json', $checksumInventory),
+            'public_leak_scan_report.json' => $this->writeJson($artifactDir.'/public_leak_scan_report.json', $publicLeakScan),
+            'fail_closed_report.json' => $this->writeJson($artifactDir.'/fail_closed_report.json', $failClosedReport),
+            'go_no_go.md' => $this->writeText($artifactDir.'/go_no_go.md', $this->buildStagingImportGoNoGo($dryRunReport)),
+        ];
+        $ok = $errors === [];
+
+        return [
+            'schema_version' => self::SCHEMA_VERSION,
+            'ok' => ! $strict || $ok,
+            'status' => ($strict && ! $ok) ? 'blocked' : 'success',
+            'run_id' => $runId,
+            'artifact_dir' => $artifactDir,
+            'artifacts' => $artifacts,
+            'strict' => $strict,
+            'summary' => [
+                'selector_ready_package_count' => (int) ($checksumInventory['package_count'] ?? 0),
+                'selector_ready_asset_count' => (int) ($checksumInventory['asset_count'] ?? 0),
+                'checksum_inventory_valid' => (bool) ($checksumInventory['valid'] ?? false),
+                'leak_hit_count' => (int) data_get($publicLeakScan, 'leak_scan.hit_count', 0),
+                'cms_write_performed' => false,
+                'runtime_change_performed' => false,
+                'ready_for_runtime' => false,
+                'ready_for_production' => false,
+            ],
+            'errors' => array_values(array_unique($errors)),
+            'negative_guarantees' => $this->negativeGuarantees(),
+        ];
+    }
+
+    /**
      * @return array<string,mixed>
      */
     private function buildInventory(string $contentAssetRoot, string $sourceLedgerDir): array
@@ -243,9 +346,10 @@ final class RiasecResultPageAssetAgent
                 continue;
             }
 
-            foreach ((array) $decoded as $rowIndex => $payload) {
+            $payloads = array_is_list($decoded) ? $decoded : [$decoded];
+            foreach ($payloads as $rowIndex => $payload) {
                 if (is_array($payload)) {
-                    $hits = array_merge($hits, $this->scanPayload($payload, $relativePath, (string) $rowIndex));
+                    $hits = array_merge($hits, $this->scanPublicPayloads($payload, $relativePath, (string) $rowIndex));
                 }
             }
         }
@@ -480,6 +584,182 @@ final class RiasecResultPageAssetAgent
     }
 
     /**
+     * @return array<string,mixed>
+     */
+    private function selectorReadyChecksumInventory(string $selectorReadyRoot): array
+    {
+        $packages = [];
+        $assetCount = 0;
+        $errors = [];
+
+        foreach ($this->selectorReadyPackageDirs($selectorReadyRoot) as $packageDir) {
+            $assetsPath = $packageDir.'/assets.jsonl';
+            $manifestPath = $packageDir.'/manifest.json';
+            $package = [
+                'package_id' => basename($packageDir),
+                'assets_path' => $this->repoRelativePath($assetsPath),
+                'manifest_path' => is_file($manifestPath) ? $this->repoRelativePath($manifestPath) : null,
+                'assets_sha256' => is_file($assetsPath) ? hash_file('sha256', $assetsPath) : null,
+                'assets_line_count' => 0,
+                'manifest_valid' => is_file($manifestPath),
+                'assets_valid' => is_file($assetsPath),
+            ];
+
+            if (! is_file($assetsPath)) {
+                $errors[] = basename($packageDir).': missing_assets_jsonl';
+            } else {
+                $fileErrors = $this->structuredFileErrors($assetsPath);
+                if ($fileErrors !== []) {
+                    $errors[] = basename($packageDir).': '.implode(',', $fileErrors);
+                    $package['assets_valid'] = false;
+                }
+                $lineCount = count($this->readJsonLines($assetsPath));
+                $package['assets_line_count'] = $lineCount;
+                $assetCount += $lineCount;
+            }
+
+            if (is_file($manifestPath)) {
+                $manifest = $this->readJson($manifestPath);
+                foreach ($this->requiredFalseFlags() as $flag) {
+                    if (($manifest[$flag] ?? null) !== false) {
+                        $errors[] = basename($packageDir).': invalid_'.$flag;
+                    }
+                }
+                if (($manifest['runtime_use'] ?? null) !== 'staging_only') {
+                    $errors[] = basename($packageDir).': invalid_runtime_use';
+                }
+            } else {
+                $errors[] = basename($packageDir).': missing_manifest_json';
+            }
+
+            $packages[] = $package;
+        }
+
+        return [
+            'schema_version' => self::SCHEMA_VERSION,
+            'task' => 'staging_import_checksum_inventory',
+            'runtime_use' => 'staging_only',
+            'selector_ready_root' => $this->redactPath($selectorReadyRoot),
+            'package_count' => count($packages),
+            'asset_count' => $assetCount,
+            'packages' => $packages,
+            'valid' => is_dir($selectorReadyRoot) && $packages !== [] && $errors === [],
+            'errors' => $errors,
+            'negative_guarantees' => $this->negativeGuarantees(),
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function selectorReadyPublicLeakScan(string $selectorReadyRoot): array
+    {
+        $hits = [];
+        foreach ($this->selectorReadyPackageDirs($selectorReadyRoot) as $packageDir) {
+            $assetsPath = $packageDir.'/assets.jsonl';
+            if (! is_file($assetsPath)) {
+                continue;
+            }
+            foreach ($this->readJsonLines($assetsPath) as $rowIndex => $payload) {
+                $hits = array_merge(
+                    $hits,
+                    $this->scanPublicPayloads($payload, $this->repoRelativePath($assetsPath), (string) $rowIndex)
+                );
+            }
+        }
+
+        return [
+            'schema_version' => self::SCHEMA_VERSION,
+            'task' => 'staging_import_public_leak_scan',
+            'runtime_use' => 'staging_only',
+            'production_use_allowed' => false,
+            'ready_for_runtime' => false,
+            'ready_for_production' => false,
+            'forbidden_public_fields' => self::FORBIDDEN_PUBLIC_FIELDS,
+            'forbidden_public_terms' => self::FORBIDDEN_PUBLIC_TERMS,
+            'leak_scan' => [
+                'status' => $hits === [] ? 'pass' : 'blocked',
+                'hit_count' => count($hits),
+                'hits' => array_slice($hits, 0, 100),
+                'truncated' => count($hits) > 100,
+            ],
+            'negative_guarantees' => $this->negativeGuarantees(),
+        ];
+    }
+
+    /**
+     * @return list<array<string,string>>
+     */
+    private function scanPublicPayloads(array $payload, string $sourceFile, string $pathPrefix): array
+    {
+        $hits = [];
+        if (isset($payload['public_payload']) && is_array($payload['public_payload'])) {
+            $hits = array_merge($hits, $this->scanPayload($payload['public_payload'], $sourceFile, $pathPrefix.'.public_payload'));
+        }
+
+        foreach ($payload as $key => $value) {
+            if (is_array($value) && $key !== 'public_payload') {
+                $hits = array_merge($hits, $this->scanPublicPayloads($value, $sourceFile, $pathPrefix.'.'.(string) $key));
+            }
+        }
+
+        return $hits;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function selectorReadyPackageDirs(string $selectorReadyRoot): array
+    {
+        if (! is_dir($selectorReadyRoot)) {
+            return [];
+        }
+
+        $dirs = [];
+        foreach (scandir($selectorReadyRoot) ?: [] as $entry) {
+            if ($entry === '.' || $entry === '..') {
+                continue;
+            }
+            $path = $selectorReadyRoot.'/'.$entry;
+            if (is_dir($path)) {
+                $dirs[] = $path;
+            }
+        }
+        sort($dirs);
+
+        return $dirs;
+    }
+
+    private function buildStagingImportGoNoGo(array $dryRunReport): string
+    {
+        return implode("\n", [
+            '# RIASEC Result Page Staging Import Dry Run',
+            '',
+            'runtime_use: staging_only',
+            'production_use_allowed: false',
+            'ready_for_runtime: false',
+            'ready_for_production: false',
+            'cms_write_performed: false',
+            'runtime_change_performed: false',
+            'frontend_fallback_allowed: false',
+            'private_payload_exported: false',
+            '',
+            '## Summary',
+            '',
+            '- selector_ready_package_count: '.(string) ($dryRunReport['selector_ready_package_count'] ?? 0),
+            '- selector_ready_asset_count: '.(string) ($dryRunReport['selector_ready_asset_count'] ?? 0),
+            '- checksum_inventory_valid: '.($this->boolText((bool) ($dryRunReport['checksum_inventory_valid'] ?? false))),
+            '- public_leak_scan_status: '.(string) ($dryRunReport['public_leak_scan_status'] ?? 'blocked'),
+            '- error_count: '.(string) ($dryRunReport['error_count'] ?? 0),
+            '',
+            '## Decision',
+            '',
+            'GO for staging-only dry-run evidence when error_count is 0. NO-GO for CMS import, runtime wrapper enablement, pilot access, or production rollout.',
+            '',
+        ]);
+    }
+
+    /**
      * @return list<SplFileInfo>
      */
     private function assetFiles(string $root): array
@@ -555,6 +835,25 @@ final class RiasecResultPageAssetAgent
             return null;
         }
 
+        $rows = [];
+        foreach (file($path, FILE_IGNORE_NEW_LINES) ?: [] as $line) {
+            if (trim((string) $line) === '') {
+                continue;
+            }
+            $decoded = json_decode((string) $line, true, 512, JSON_THROW_ON_ERROR);
+            if (is_array($decoded)) {
+                $rows[] = $decoded;
+            }
+        }
+
+        return $rows;
+    }
+
+    /**
+     * @return list<array<string,mixed>>
+     */
+    private function readJsonLines(string $path): array
+    {
         $rows = [];
         foreach (file($path, FILE_IGNORE_NEW_LINES) ?: [] as $line) {
             if (trim((string) $line) === '') {
