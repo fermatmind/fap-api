@@ -1,0 +1,175 @@
+{
+  "schema_version": "fap.riasec.result_page_v2.post_deploy_staging_pilot_evidence.v0.1",
+  "task_id": "RIASEC-RESULT-V2-STAGING-PILOT-EVIDENCE-PACK-01",
+  "created_date": "2026-06-22",
+  "evidence_type": "redacted_summary",
+  "deployed_sha": "ce029ebf6baf8a1eb7dc3164d7ad121ea91054e9",
+  "required_merge_commits": [
+    {
+      "pr": 2276,
+      "merge_commit": "fb6e64468bc33063b229ca8ff5ced8076ddae088",
+      "status": "contained_in_deployed_sha_history"
+    }
+  ],
+  "production_gate_state": {
+    "enabled": false,
+    "staging_runtime_enabled": false,
+    "pilot_runtime_enabled": false,
+    "pilot_production_allowlist_enabled": false,
+    "production_runtime_enabled": false,
+    "production_rollout_enabled": false,
+    "production_rollout_configured": false,
+    "production_rollout_manual_approval_granted": false,
+    "production_import_gate_passed": false,
+    "production_release_snapshot_id": "",
+    "production_rollout_mode": "disabled",
+    "production_rollout_percentage": 0,
+    "production_rollout_max_percentage": 0,
+    "production_post_deploy_smoke_procedure_id": ""
+  },
+  "public_api_smoke": {
+    "flags_endpoint": {
+      "path": "/api/v0.3/flags",
+      "status": 200,
+      "riasec_result_page_v2_related_flags": []
+    },
+    "questions": [
+      {
+        "path": "/api/v0.3/scales/RIASEC/questions?locale=zh-CN&form_code=riasec_60",
+        "status": 200,
+        "question_count": 60,
+        "meta_question_count": 60
+      },
+      {
+        "path": "/api/v0.3/scales/RIASEC/questions?locale=zh-CN&form_code=riasec_140",
+        "status": 200,
+        "question_count": 140,
+        "meta_question_count": 140
+      }
+    ],
+    "healthz_note": {
+      "paths_checked": [
+        "/api/healthz",
+        "/api/v0.3/healthz"
+      ],
+      "observed_status": 404,
+      "used_as_riasec_result_page_v2_evidence": false
+    }
+  },
+  "staging_agent_audit": {
+    "status": "success",
+    "asset_file_count": 68,
+    "source_ledger_valid": true,
+    "asset_inventory_valid": true,
+    "validation_error_count": 0,
+    "leak_hit_count": 0,
+    "ready_for_runtime": false,
+    "ready_for_production": false
+  },
+  "staging_import_dry_run": {
+    "status": "success",
+    "selector_ready_package_count": 2,
+    "selector_ready_asset_count": 6,
+    "checksum_inventory_valid": true,
+    "leak_hit_count": 0,
+    "errors": [],
+    "ready_for_runtime": false,
+    "ready_for_production": false
+  },
+  "ops_staging_runner": {
+    "status": "success",
+    "staging_dry_run_report_created": true,
+    "render_preview_smoke_report_created": true,
+    "api_smoke_report_created": true,
+    "production_execution_allowed_for_agent": false,
+    "production_manual_gate_required": true,
+    "cms_write_performed": false,
+    "runtime_change_performed": false
+  },
+  "surface_coverage": [
+    {
+      "surface": "result_page",
+      "qa_decision": "pass_staging_only",
+      "expected_payload_state": "result_page_v2_wrapper_attached",
+      "redaction_state": "full_only"
+    },
+    {
+      "surface": "pdf",
+      "qa_decision": "pass_deferred_to_render_preview",
+      "expected_payload_state": "payload_omitted_fail_closed",
+      "redaction_state": "no_pdf_payload_export"
+    },
+    {
+      "surface": "share",
+      "qa_decision": "pass_deferred_to_render_preview",
+      "expected_payload_state": "payload_omitted_fail_closed",
+      "redaction_state": "no_share_block_leak"
+    },
+    {
+      "surface": "history",
+      "qa_decision": "pass_deferred_to_render_preview",
+      "expected_payload_state": "payload_omitted_fail_closed",
+      "redaction_state": "no_raw_history_vector"
+    },
+    {
+      "surface": "compare",
+      "qa_decision": "pass_deferred_to_render_preview",
+      "expected_payload_state": "payload_omitted_fail_closed",
+      "redaction_state": "no_raw_compare_vector"
+    },
+    {
+      "surface": "locked",
+      "qa_decision": "pass_fail_closed",
+      "expected_payload_state": "payload_omitted_fail_closed",
+      "redaction_state": "locked_payload_allowed_false"
+    },
+    {
+      "surface": "free",
+      "qa_decision": "pass_fail_closed",
+      "expected_payload_state": "payload_omitted_fail_closed",
+      "redaction_state": "free_payload_allowed_false"
+    },
+    {
+      "surface": "low_quality",
+      "qa_decision": "pass_staging_guarded",
+      "expected_payload_state": "selector_inputs_quality_state_only",
+      "redaction_state": "no_raw_quality_flags_export"
+    },
+    {
+      "surface": "fallback",
+      "qa_decision": "pass_fail_closed",
+      "expected_payload_state": "payload_omitted_fail_closed",
+      "redaction_state": "frontend_fallback_forbidden"
+    }
+  ],
+  "validation": {
+    "fap_api": {
+      "command": "php artisan test --filter='RiasecResultPage(V2RuntimeWrapper|AllSurfacePilotQa|StagingImportHandoff|ProductionRuntime|ImportGate|SelectorCoverageBatch|RouteMatrixQaReport|AssetAgent)Test' --no-ansi",
+      "tests_passed": 26,
+      "assertions": 623
+    },
+    "fap_web": {
+      "command": "./node_modules/.bin/vitest run tests/contracts/riasec-result-rendered-preview-qa.contract.test.tsx tests/contracts/riasec-trusted-result-v15-smoke-acceptance.contract.test.ts tests/contracts/riasec-lifecycle-feedback-boundary.contract.test.tsx",
+      "test_files_passed": 3,
+      "tests_passed": 14
+    }
+  },
+  "negative_guarantees": {
+    "runtime_use": "staging_only",
+    "production_use_allowed": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false,
+    "cms_write_performed": false,
+    "runtime_change_performed": false,
+    "production_activation_happened": false,
+    "production_write_happened": false,
+    "frontend_change_happened": false,
+    "frontend_fallback_allowed": false,
+    "private_payload_exported": false
+  },
+  "go_no_go": {
+    "staging_pilot_evidence_ready_for_review": true,
+    "automatic_production_rollout": "NO_GO",
+    "manual_production_gate_required": true
+  }
+}
