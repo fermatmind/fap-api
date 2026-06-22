@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: read
+  pull-requests: read
 
 env:
   TARGET: production
@@ -24,12 +25,123 @@ env:
   SSH_RETRY_DELAY_SECONDS: "10"
 
 jobs:
-  deploy-production:
-    name: Deploy fap-api production
+  policy-guard:
+    name: Production auto-deploy policy guard
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
     if: >-
       github.event.workflow_run.conclusion == 'success' &&
       github.event.workflow_run.event == 'push' &&
       github.event.workflow_run.head_branch == 'main'
+    outputs:
+      auto_deploy_allowed: ${{ steps.evaluate.outputs.auto_deploy_allowed }}
+      deploy_sha: ${{ steps.evaluate.outputs.deploy_sha }}
+      associated_pr: ${{ steps.evaluate.outputs.associated_pr }}
+    steps:
+      - name: Evaluate production auto-deploy policy
+        id: evaluate
+        uses: actions/github-script@v8
+        env:
+          WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+        with:
+          script: |
+            const deploySha = process.env.WORKFLOW_RUN_HEAD_SHA;
+
+            if (!deploySha) {
+              core.setFailed('Production auto-deploy policy failed closed: deploy SHA is empty.');
+              return;
+            }
+
+            core.setOutput('deploy_sha', deploySha);
+
+            const { owner, repo } = context.repo;
+            const associatedPulls = await github.paginate(
+              github.rest.repos.listPullRequestsAssociatedWithCommit,
+              { owner, repo, commit_sha: deploySha, per_page: 100 },
+            );
+            const mergedMainPulls = associatedPulls
+              .filter((pull) => pull.base?.ref === 'main' && pull.merged_at)
+              .sort((left, right) => new Date(right.merged_at) - new Date(left.merged_at));
+
+            if (mergedMainPulls.length !== 1) {
+              core.setFailed(
+                `Production auto-deploy policy failed closed: expected exactly one merged main PR for ${deploySha}, found ${mergedMainPulls.length}.`,
+              );
+              return;
+            }
+
+            const pull = mergedMainPulls[0];
+            core.setOutput('associated_pr', String(pull.number));
+            core.info(`Associated PR: #${pull.number} ${pull.title}`);
+
+            const labels = (pull.labels || []).map((label) => String(label.name || '').toLowerCase());
+            const riskyLabelPatterns = [
+              /(^|[-_: ])no[-_: ]?auto[-_: ]?production($|[-_: ])/,
+              /(^|[-_: ])manual[-_: ]?production($|[-_: ])/,
+              /(^|[-_: ])production[-_: ]?manual($|[-_: ])/,
+              /(^|[-_: ])requires[-_: ]?production[-_: ]?approval($|[-_: ])/,
+              /(^|[-_: ])cms($|[-_: ])/,
+              /(^|[-_: ])content($|[-_: ])/,
+              /(^|[-_: ])search($|[-_: ])/,
+              /(^|[-_: ])seo($|[-_: ])/,
+              /(^|[-_: ])sitemap($|[-_: ])/,
+              /(^|[-_: ])llms($|[-_: ])/,
+              /(^|[-_: ])database($|[-_: ])/,
+              /(^|[-_: ])migration(s)?($|[-_: ])/,
+              /(^|[-_: ])queue($|[-_: ])/,
+              /(^|[-_: ])deploy($|[-_: ])/,
+              /(^|[-_: ])secret(s)?($|[-_: ])/,
+            ];
+            const riskyLabels = labels.filter((label) => riskyLabelPatterns.some((pattern) => pattern.test(label)));
+
+            const files = await github.paginate(
+              github.rest.pulls.listFiles,
+              { owner, repo, pull_number: pull.number, per_page: 100 },
+            );
+            const riskyPathPatterns = [
+              /^\.github\/workflows\//,
+              /^\.github\/actions\//,
+              /^deploy\.php$/,
+              /^backend\/scripts\/deploy\//,
+              /^backend\/scripts\/.*(deploy|release|import|publish|search|sitemap|llms|queue)/i,
+              /^backend\/database\//,
+              /^backend\/config\//,
+              /^backend\/content_assets\//,
+              /^content_packages\//,
+              /^backend\/docs\/seo\//,
+              /^backend\/docs\/search\//,
+              /^backend\/app\/Console\/Commands\/.*(Cms|CMS|Search|Seo|SEO|Sitemap|Llms|LLMS|Queue|Import|Publish|Promote)/,
+              /^backend\/app\/Services\/Cms\//,
+              /^backend\/app\/Services\/SeoIntel\//,
+              /^backend\/app\/Services\/Search\//,
+              /^backend\/app\/Services\/Sitemap\//,
+              /^backend\/app\/Services\/Llms\//,
+              /^backend\/app\/Services\/ContentRelease\//,
+              /(^|\/)\.env($|\.|-)/,
+              /(^|\/).*secret.*$/i,
+            ];
+            const riskyFiles = files
+              .map((file) => file.filename)
+              .filter((filename) => riskyPathPatterns.some((pattern) => pattern.test(filename)));
+
+            if (riskyLabels.length > 0 || riskyFiles.length > 0) {
+              core.setOutput('auto_deploy_allowed', 'false');
+              core.setFailed([
+                'Production auto-deploy policy failed closed.',
+                riskyLabels.length > 0 ? `Risk labels: ${riskyLabels.join(', ')}` : 'Risk labels: none',
+                riskyFiles.length > 0 ? `Risk files: ${riskyFiles.join(', ')}` : 'Risk files: none',
+                'Use the manual deploy-readiness path for this change.',
+              ].join('\n'));
+              return;
+            }
+
+            core.setOutput('auto_deploy_allowed', 'true');
+            core.info('Production auto-deploy policy passed for ordinary backend runtime change.');
+
+  deploy-production:
+    name: Deploy fap-api production
+    needs: policy-guard
+    if: ${{ needs.policy-guard.outputs.auto_deploy_allowed == 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 30
     concurrency:
@@ -42,7 +154,7 @@ jobs:
       - name: Checkout deploy revision
         uses: actions/checkout@v6
         with:
-          ref: ${{ github.event.workflow_run.head_sha }}
+          ref: ${{ needs.policy-guard.outputs.deploy_sha }}
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -53,7 +165,7 @@ jobs:
       - name: Confirm approved revision is still latest main
         shell: bash
         env:
-          DEPLOY_SHA: ${{ github.event.workflow_run.head_sha }}
+          DEPLOY_SHA: ${{ needs.policy-guard.outputs.deploy_sha }}
         run: |
           set -euo pipefail
           git fetch --no-tags --depth=1 origin main:refs/remotes/origin/main
@@ -174,7 +286,7 @@ jobs:
         shell: bash
         env:
           DEPLOYER_NO_INTERACTION: "1"
-          DEPLOY_SHA: ${{ github.event.workflow_run.head_sha }}
+          DEPLOY_SHA: ${{ needs.policy-guard.outputs.deploy_sha }}
         run: |
           set -euo pipefail
           DEPLOY_LOCK_METADATA="$(php -r '
@@ -226,7 +338,7 @@ jobs:
       - name: Verify deployed revision
         shell: bash
         env:
-          DEPLOY_SHA: ${{ github.event.workflow_run.head_sha }}
+          DEPLOY_SHA: ${{ needs.policy-guard.outputs.deploy_sha }}
         run: |
           set -euo pipefail
           ssh_retry() {
