@@ -57747,7 +57747,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-v2-live-dry-run-pilot",
     "base": "main",
-    "status": "local_validated",
+    "status": "ready_to_merge",
     "train_scope": "big5_result_page_v2_asset_agent_execution_runner",
     "title": "B5-RESULT-LIVE-DRY-RUN-PILOT-01: Record Big Five V2 live PR mutation pilot",
     "depends_on": [
@@ -57777,6 +57777,10 @@
       "scope_validation": {
         "status": "pass",
         "evidence": "PR2 changed files are limited to backend/docs/big5/result-asset-agent-live-dry-run-pilot.md and docs/codex/pr-train-state.json. No fap-web copy, production import gate, release snapshot, rollout gate, runtime flag, CMS write, or DB write changed."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #2267 required GitHub checks completed successfully on head 345b8ba7b234dfc40a28eef2bdff17798bdaf334; mergeStateStatus CLEAN; PR title/body and changed-file scope were re-reviewed."
       }
     },
     "failure_reason": null,
@@ -57795,6 +57799,11 @@
         "at": "2026-06-22T02:20:00Z",
         "status": "pr_open",
         "note": "Opened PR #2267 after live dry-run evidence and scope validation passed; waiting for required GitHub checks."
+      },
+      {
+        "at": "2026-06-22T02:35:00Z",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed, mergeStateStatus is CLEAN, and PR title/body/scope were re-reviewed. Ready to merge under squash policy after this state update is pushed and checks remain green."
       }
     ]
   },
