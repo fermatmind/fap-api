@@ -81,7 +81,7 @@ final class UrlTruthHandoffArtifact
         ],
         self::CONTENT_PAGE_ENTITY_TYPE => [
             'mode' => 'two_stage_content_page_url_truth_handoff',
-            'route_regex' => '^/(en|zh)/(?!results(?:/|$)|orders(?:/|$)|share(?:/|$)|pay(?:/|$)|payment(?:/|$)|history(?:/|$)|private(?:/|$)|account(?:/|$)|admin(?:/|$)|ops(?:/|$))[a-z0-9][a-z0-9/_-]*$',
+            'route_regex' => '^(?:/(?:en|zh)/(?!results(?:/|$)|orders(?:/|$)|share(?:/|$)|pay(?:/|$)|payment(?:/|$)|history(?:/|$)|private(?:/|$)|account(?:/|$)|admin(?:/|$)|ops(?:/|$))[a-z0-9][a-z0-9/_-]*|/(?!en(?:/|$)|zh(?:/|$)|results(?:/|$)|orders(?:/|$)|share(?:/|$)|pay(?:/|$)|payment(?:/|$)|history(?:/|$)|private(?:/|$)|account(?:/|$)|admin(?:/|$)|ops(?:/|$))[a-z0-9][a-z0-9/_-]*)$',
             'entity_source' => 'content_pages',
             'route_fragment' => '/',
             'forbidden_route_fragments' => self::PRIVATE_ROUTE_FRAGMENTS,
@@ -384,7 +384,9 @@ final class UrlTruthHandoffArtifact
         $scheme = Str::lower((string) parse_url($url, PHP_URL_SCHEME));
         $host = Str::lower((string) parse_url($url, PHP_URL_HOST));
         $path = (string) (parse_url($url, PHP_URL_PATH) ?: '');
-        $pathLocale = Str::before(Str::after($path, '/'), '/');
+        $pathLocale = preg_match('#^/(en|zh)(?:/|$)#', $path, $localeMatches) === 1
+            ? (string) $localeMatches[1]
+            : null;
         $pathSlug = Str::after($path, $policy['route_fragment']);
         $locale = (string) ($candidate['locale'] ?? '');
 
@@ -441,7 +443,7 @@ final class UrlTruthHandoffArtifact
             }
         }
 
-        if (! in_array($pathLocale, ['en', 'zh'], true)) {
+        if ($pathLocale === null && ! ($pageEntityType === self::CONTENT_PAGE_ENTITY_TYPE && $locale === 'en')) {
             $issues[] = 'candidate_locale_path_invalid:'.$index;
         }
 

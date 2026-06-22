@@ -688,7 +688,16 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
             return $localeSegment === 'zh' ? '/' : '/en';
         }
 
+        if ($localeSegment === 'en' && $this->isRootLevelContentPagePath($path)) {
+            return $path;
+        }
+
         return '/'.$localeSegment.$path;
+    }
+
+    private function isRootLevelContentPagePath(string $path): bool
+    {
+        return preg_match('#^/[a-z0-9][a-z0-9_-]*$#', $path) === 1;
     }
 
     private function hasRequiredContentPageFields(ContentPage $page): bool

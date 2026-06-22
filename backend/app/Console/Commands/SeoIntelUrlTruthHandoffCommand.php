@@ -89,10 +89,17 @@ final class SeoIntelUrlTruthHandoffCommand extends Command
             ));
         }
 
-        usort($records, static fn (UrlTruthInventoryRecord $a, UrlTruthInventoryRecord $b): int => strcmp(
-            $a->canonicalUrlHash(),
-            $b->canonicalUrlHash(),
-        ));
+        usort($records, function (UrlTruthInventoryRecord $a, UrlTruthInventoryRecord $b) use ($canonicalPath): int {
+            if ($canonicalPath !== null) {
+                $exactCompare = ((int) $this->recordPathExactlyMatches($b, $canonicalPath))
+                    <=> ((int) $this->recordPathExactlyMatches($a, $canonicalPath));
+                if ($exactCompare !== 0) {
+                    return $exactCompare;
+                }
+            }
+
+            return strcmp($a->canonicalUrlHash(), $b->canonicalUrlHash());
+        });
 
         $payload = $artifact->fromRecords($records, $source->metadata(), $limit, $pageType);
         $validation = $artifact->validate($payload, $limit, $pageType);
@@ -346,6 +353,14 @@ final class SeoIntelUrlTruthHandoffCommand extends Command
 
         return $recordPath === $canonicalPath
             || $this->stripLocalePrefix($recordPath) === $canonicalPath;
+    }
+
+    private function recordPathExactlyMatches(UrlTruthInventoryRecord $record, string $canonicalPath): bool
+    {
+        $recordPath = (string) (parse_url($record->canonicalUrl, PHP_URL_PATH) ?: '');
+        $recordPath = $this->normalizedPathOption($recordPath) ?? '';
+
+        return $recordPath === $canonicalPath;
     }
 
     private function stripLocalePrefix(string $path): string

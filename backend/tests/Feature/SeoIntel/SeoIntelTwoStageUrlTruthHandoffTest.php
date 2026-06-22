@@ -224,6 +224,76 @@ final class SeoIntelTwoStageUrlTruthHandoffTest extends TestCase
     }
 
     #[Test]
+    public function command_exports_root_level_english_content_page_handoff_artifact_without_locale_prefix(): void
+    {
+        config([
+            'app.frontend_url' => 'https://www.fermatmind.com',
+            'seo_intel.public_canonical_host' => 'https://fermatmind.com',
+        ]);
+
+        $about = $this->createPublishedContentPage([
+            'slug' => 'about',
+            'path' => '/about',
+            'canonical_path' => '/about',
+            'kind' => ContentPage::KIND_COMPANY,
+            'page_type' => 'company_static',
+            'locale' => 'en',
+            'title' => 'About FermatMind',
+        ]);
+        $this->createPublishedContentPage([
+            'slug' => 'about',
+            'path' => '/about',
+            'canonical_path' => '/about',
+            'kind' => ContentPage::KIND_COMPANY,
+            'page_type' => 'company_static',
+            'locale' => 'zh-CN',
+            'title' => '关于 FermatMind',
+        ]);
+
+        $path = sys_get_temp_dir().'/root-content-page-url-truth-handoff-'.bin2hex(random_bytes(4)).'.json';
+
+        $exportExitCode = Artisan::call('seo-intel:url-truth-handoff', [
+            '--export' => $path,
+            '--dry-run' => true,
+            '--json' => true,
+            '--limit' => 1,
+            '--page-type' => 'content_page',
+            '--canonical-path' => '/about',
+        ]);
+        $exportOutput = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(0, $exportExitCode, json_encode($exportOutput, JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR));
+        $this->assertSame('success', $exportOutput['status'] ?? null);
+        $this->assertSame('/about', $exportOutput['canonical_path_filter'] ?? null);
+        $this->assertSame(1, $exportOutput['planned_url_count'] ?? null);
+        $this->assertFalse((bool) ($exportOutput['writes_committed'] ?? true));
+        $this->assertFalse((bool) ($exportOutput['search_url_submission'] ?? true));
+
+        $artifact = json_decode((string) file_get_contents($path), true);
+        $this->assertSame('content_page', data_get($artifact, 'constraints.allowed_page_entity_type'));
+        $this->assertSame('/about', parse_url((string) data_get($artifact, 'candidates.0.canonical_url'), PHP_URL_PATH));
+        $this->assertSame((string) $about->slug, data_get($artifact, 'candidates.0.entity_id_or_slug'));
+        $this->assertSame('content_pages', data_get($artifact, 'candidates.0.entity_source'));
+        $this->assertTrue((bool) data_get($artifact, 'candidates.0.attributes.claim_safe'));
+
+        $importExitCode = Artisan::call('seo-intel:url-truth-handoff', [
+            '--import' => $path,
+            '--dry-run' => true,
+            '--json' => true,
+            '--limit' => 1,
+            '--page-type' => 'content_page',
+        ]);
+        $importOutput = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(0, $importExitCode, json_encode($importOutput, JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR));
+        $this->assertSame('success', $importOutput['status'] ?? null);
+        $this->assertSame('import_dry_run', $importOutput['mode'] ?? null);
+        $this->assertSame(1, $importOutput['planned_url_count'] ?? null);
+        $this->assertFalse((bool) ($importOutput['writes_committed'] ?? true));
+        $this->assertFalse((bool) ($importOutput['search_url_submission'] ?? true));
+    }
+
+    #[Test]
     public function command_exports_and_validates_mbti64_variant_handoff_artifact_without_writes(): void
     {
         config([
