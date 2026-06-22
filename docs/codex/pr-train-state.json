@@ -40308,7 +40308,7 @@
     "repo": "fap-api",
     "branch": "codex/analytics-funnel-purchase-report-truth-bridge-03",
     "base": "main",
-    "status": "pr_open",
+    "status": "merged",
     "title": "ANALYTICS-FUNNEL-PURCHASE-REPORT-TRUTH-BRIDGE-03 freeze purchase report truth bridge",
     "depends_on": [
       "ANALYTICS-FUNNEL-GA4-BAIDU-MAPPING-SCAN-01",
@@ -43124,7 +43124,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-dash-collector-01-smoke-reconcile",
     "base": "main",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "train_scope": "seo_intel_collector_dry_run_smoke_evidence",
     "title": "docs(seo): record collector dry-run smoke evidence",
     "checks": {
@@ -58065,11 +58065,11 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": "64421c3904bf13b927d1b998932e499418fd653a",
+    "commit_sha": "04fd25695623031f7c91b36a672a6360f79beedf",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2271",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-22T03:09:21Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-22T03:05:00Z",
@@ -58085,6 +58085,11 @@
         "at": "2026-06-22T03:15:00Z",
         "status": "ready_to_merge",
         "note": "GitHub checks passed on head a144e3f6640fb4eb470383db0aa574437c0b4d8e, mergeStateStatus is CLEAN, and PR title/body/scope were re-reviewed. Ready to merge under squash policy after this state update is pushed and checks remain green."
+      },
+      {
+        "at": "2026-06-22T03:18:00Z",
+        "status": "merged",
+        "note": "PR #2271 merged with merge commit 04fd25695623031f7c91b36a672a6360f79beedf; origin/main contains the merge commit, local main was fast-forwarded, task branch was deleted locally/remotely, and post-merge JSON/YAML/diff plus AssetAgentTest validation passed."
       }
     ]
   },
@@ -58092,7 +58097,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-v2-auto-merge-live-pilot",
     "base": "main",
-    "status": "pending_dependency",
+    "status": "pr_open",
     "train_scope": "big5_result_page_v2_asset_agent_execution_runner",
     "title": "B5-RESULT-AUTO-MERGE-LIVE-PILOT-01: Record Big Five V2 live merge cleanup pilot",
     "depends_on": [
@@ -58104,16 +58109,56 @@
         "evidence": "User authorized this PR train item in the /goal execution request."
       },
       "dependency": {
-        "status": "pending",
-        "evidence": "Waiting for B5-RESULT-MECHANICAL-FIX-APPLY-01 to merge into main."
+        "status": "pass",
+        "evidence": "B5-RESULT-MECHANICAL-FIX-APPLY-01 is merged and origin/main contains merge commit 04fd25695623031f7c91b36a672a6360f79beedf."
+      },
+      "live_merge_pilot": {
+        "status": "pass",
+        "evidence": "Used low-risk artifact-only PR #2266. Pre-merge gate was OPEN, not draft, mergeStateStatus CLEAN, pending checks 0, failed checks 0, and changed files were confined to backend/content_assets/big5/result_page_v2/agent_runs/testing-live-dry-run/**. plan-merge-cleanup returned can_merge=true with zero blockers. execute-github-mutation live returned preflight_valid=true, step_count=5, github_merge_performed=true, remote_branch_deleted=true, local_branch_deleted=true, local_main_synced=true. GitHub reports PR #2266 merged at 2026-06-22T03:12:42Z with merge commit fbf0bd48e862429284e55d85fc1605357e5769b4."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent plan-merge-cleanup --run-id=merge-pilot-plan --artifact-dir=artifacts/big5_result_page_v2_agent/testing-merge-pilot --pr-state-json=/tmp/big5-merge-pilot/pr-2266-state.json --json --no-ansi",
+          "cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent execute-github-mutation --run-id=merge-pilot-execution --artifact-dir=artifacts/big5_result_page_v2_agent/testing-merge-pilot --execution-plan-json=artifacts/big5_result_page_v2_agent/testing-merge-pilot/merge-pilot-plan/auto_merge_cleanup_plan.json --repo-root=<clean-clone-root> --github-repo=fermatmind/fap-api --mutation-mode=live --allow-github-mutation --json --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi",
+          "git diff --check",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+        ],
+        "evidence": "Live merge pilot succeeded in a temporary clean clone. AssetAgentTest, git diff --check, JSON parse, and YAML parse passed before commit."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Current PR changes are limited to backend/docs/big5/result-asset-agent-auto-merge-live-pilot.md and docs/codex/pr-train-state.json. No fap-web copy, runtime flag, production gate, release snapshot, rollout gate, CMS write, or DB write changed."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #2272 required GitHub checks completed successfully on head f17891c1f4fd09e50a2060eca9deea4996f76f99; mergeStateStatus CLEAN; PR title/body and changed-file scope were re-reviewed."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "377d6430cffd4264b55c9b1d51567c47907f5831",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2272",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
-    "transitions": []
+    "transitions": [
+      {
+        "at": "2026-06-22T03:20:00Z",
+        "status": "local_validated",
+        "note": "Executed plan-merge-cleanup plus execute-github-mutation live against safe artifact-only PR #2266 from a temporary clean clone; GitHub merged #2266 and deleted the remote branch, clone main synced, and the local task branch was deleted."
+      },
+      {
+        "at": "2026-06-22T03:25:00Z",
+        "status": "pr_open",
+        "note": "Opened PR #2272 after live merge pilot evidence, local validation, and scope validation passed."
+      },
+      {
+        "at": "2026-06-22T03:30:00Z",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed on head f17891c1f4fd09e50a2060eca9deea4996f76f99, mergeStateStatus is CLEAN, and PR title/body/scope were re-reviewed. Ready to merge under squash policy after this state update is pushed and checks remain green."
+      }
+    ]
   }
 }
