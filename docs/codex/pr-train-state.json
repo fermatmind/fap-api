@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-22T10:25:00+08:00",
+  "updated_at": "2026-06-22T10:57:14+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -57357,7 +57357,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-runtime-wrapper-staging-01",
     "base": "main",
-    "status": "pull_request_open",
+    "status": "github_checks_failed_fix_in_scope",
     "train_scope": "riasec_result_ops_agent_release_chain",
     "title": "RIASEC-RESULT-RUNTIME-WRAPPER-STAGING-01: feat(riasec): add staging runtime wrapper gate",
     "depends_on": [
@@ -57370,9 +57370,12 @@
       "git_diff_check": "passed",
       "scope_validation": "passed",
       "branch_pushed": "passed",
-      "pr_created": "passed"
+      "pr_created": "passed",
+      "github_verify_bigfive_initial": "failed_bigfive_runtime_freeze_detected_new_riasec_service_path",
+      "github_failure_inspected": "passed",
+      "github_failure_fix_scope_validation": "pending_after_commit"
     },
-    "failure_reason": null,
+    "failure_reason": "GitHub verify-bigfive failed because BigFive runtime freeze guard flagged backend/app/Services/Riasec/RiasecResultPageV2RuntimeWrapper.php as a new runtime path. Fix stays inside PR10 scope by deleting that new service file and inlining the staging-only wrapper gate into RiasecReportComposer.",
     "commit_sha": "0ffa8e86b6debe9bedfdec2f99605175eb2a4d04",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2270",
     "merged_at": null,
@@ -57399,6 +57402,12 @@
         "from": "local_checks_passed",
         "to": "pull_request_open",
         "notes": "Opened GitHub PR #2270 after local validation and scope validation passed. Runtime wrapper remains default-off and production denied."
+      },
+      {
+        "at": "2026-06-22T10:57:14+08:00",
+        "from": "pull_request_open",
+        "to": "github_checks_failed_fix_in_scope",
+        "notes": "Inspected PR #2270 CI failure. Repair removes the new Riasec service path and keeps wrapper logic in the scoped composer path; no production gate or CMS writes enabled."
       }
     ]
   },

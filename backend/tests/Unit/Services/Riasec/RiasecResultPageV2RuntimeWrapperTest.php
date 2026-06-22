@@ -7,7 +7,7 @@ namespace Tests\Unit\Services\Riasec;
 use App\Models\Attempt;
 use App\Models\Result;
 use App\Services\Report\ReportAccess;
-use App\Services\Riasec\RiasecResultPageV2RuntimeWrapper;
+use App\Services\Report\RiasecReportComposer;
 use Tests\TestCase;
 
 final class RiasecResultPageV2RuntimeWrapperTest extends TestCase
@@ -17,13 +17,7 @@ final class RiasecResultPageV2RuntimeWrapperTest extends TestCase
         config()->set('riasec_result_page_v2.enabled', false);
         config()->set('riasec_result_page_v2.staging_runtime_enabled', false);
 
-        $payload = app(RiasecResultPageV2RuntimeWrapper::class)->build(
-            $this->attempt(),
-            $this->riasecResult(),
-            ReportAccess::VARIANT_FULL,
-            $this->projection(),
-            ['riasec_result_page_v2_staging' => true]
-        );
+        $payload = $this->compose(ReportAccess::VARIANT_FULL, ['riasec_result_page_v2_staging' => true]);
 
         $this->assertNull($payload);
     }
@@ -32,13 +26,7 @@ final class RiasecResultPageV2RuntimeWrapperTest extends TestCase
     {
         $this->enableStagingGate();
 
-        $payload = app(RiasecResultPageV2RuntimeWrapper::class)->build(
-            $this->attempt(),
-            $this->riasecResult(),
-            ReportAccess::VARIANT_FULL,
-            $this->projection(),
-            ['riasec_result_page_v2_staging' => true]
-        );
+        $payload = $this->compose(ReportAccess::VARIANT_FULL, ['riasec_result_page_v2_staging' => true]);
 
         $this->assertIsArray($payload);
         $this->assertSame('fap.riasec.result_page_v2.runtime_wrapper.v0.1', $payload['schema_version'] ?? null);
@@ -52,13 +40,7 @@ final class RiasecResultPageV2RuntimeWrapperTest extends TestCase
         $this->assertFalse((bool) data_get($payload, 'redaction_policy.locked_payload_allowed', true));
         $this->assertSame('riasec.deep_content_slots.v1', data_get($payload, 'selector_inputs.deep_content_slots_schema_version'));
 
-        $free = app(RiasecResultPageV2RuntimeWrapper::class)->build(
-            $this->attempt(),
-            $this->riasecResult(),
-            ReportAccess::VARIANT_FREE,
-            $this->projection(),
-            ['riasec_result_page_v2_staging' => true]
-        );
+        $free = $this->compose(ReportAccess::VARIANT_FREE, ['riasec_result_page_v2_staging' => true]);
         $this->assertNull($free);
     }
 
@@ -67,15 +49,25 @@ final class RiasecResultPageV2RuntimeWrapperTest extends TestCase
         $this->enableStagingGate();
         config()->set('riasec_result_page_v2.production_runtime_enabled', true);
 
-        $payload = app(RiasecResultPageV2RuntimeWrapper::class)->build(
-            $this->attempt(),
-            $this->riasecResult(),
-            ReportAccess::VARIANT_FULL,
-            $this->projection(),
-            ['riasec_result_page_v2_staging' => true]
-        );
+        $payload = $this->compose(ReportAccess::VARIANT_FULL, ['riasec_result_page_v2_staging' => true]);
 
         $this->assertNull($payload);
+    }
+
+    /**
+     * @param  array<string,mixed>  $ctx
+     */
+    private function compose(string $variant, array $ctx): ?array
+    {
+        $result = app(RiasecReportComposer::class)->composeVariant(
+            $this->attempt(),
+            $this->riasecResult(),
+            $variant,
+            array_merge(['snapshot_bound' => true], $ctx)
+        );
+        $this->assertTrue((bool) ($result['ok'] ?? false));
+
+        return data_get($result, 'report._meta.result_page_v2');
     }
 
     private function enableStagingGate(): void
@@ -104,37 +96,23 @@ final class RiasecResultPageV2RuntimeWrapperTest extends TestCase
         $result = new Result;
         $result->scale_code = 'RIASEC';
         $result->type_code = 'RIA';
-
-        return $result;
-    }
-
-    /**
-     * @return array<string,mixed>
-     */
-    private function projection(): array
-    {
-        return [
-            'schema_version' => 'riasec.public_projection.v2',
+        $result->result_json = [
             'top_code' => 'RIA',
-            'form' => [
-                'form_code' => 'riasec_60',
-            ],
-            'quality' => [
-                'quality_state' => 'normal',
-            ],
-            'interpretation_state' => [
-                'profile_shape' => 'clear_primary',
-            ],
-            'module_visibility_policy' => [
-                'schema_version' => 'riasec.module_visibility_policy.v1',
-                'policy_id' => 'riasec_module_visibility_policy_v1',
-            ],
-            'deep_content_slots_v1' => [
-                'schema_version' => 'riasec.deep_content_slots.v1',
-                'source_policy' => [
-                    'frontend_fallback_allowed' => false,
-                ],
+            'primary_type' => 'R',
+            'secondary_type' => 'I',
+            'tertiary_type' => 'A',
+            'form_code' => 'riasec_60',
+            'answer_count' => 60,
+            'scores_0_100' => [
+                'R' => 100,
+                'I' => 80,
+                'A' => 60,
+                'S' => 40,
+                'E' => 20,
+                'C' => 10,
             ],
         ];
+
+        return $result;
     }
 }
