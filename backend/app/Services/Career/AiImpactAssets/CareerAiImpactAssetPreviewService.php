@@ -110,7 +110,11 @@ final class CareerAiImpactAssetPreviewService
 
         $safePayload['sources'] = $this->readerSafeSources(is_array($payload['sources'] ?? null) ? $payload['sources'] : []);
 
-        return $safePayload;
+        return $this->applyPreviewProjectionRepair(
+            $safePayload,
+            (string) ($safePayload['slug'] ?? $payload['slug'] ?? ''),
+            (string) ($safePayload['locale'] ?? $payload['locale'] ?? ''),
+        );
     }
 
     /**
@@ -207,6 +211,7 @@ final class CareerAiImpactAssetPreviewService
             '岗位会消失',
             '职业会消失',
             '职业消失',
+            '失业',
             '失业风险',
             '降薪风险',
             '降薪',
@@ -222,15 +227,159 @@ final class CareerAiImpactAssetPreviewService
             '个人职业结果预测',
             '个人职业结果预测',
             '个人职业结果预测',
+            '个人职业结果预测',
         ], $text);
 
         $sanitized = str_replace('预测预测', '预测', $sanitized);
 
-        return preg_replace(
+        $sanitized = preg_replace(
             '/个人(?:职业|收入)结果预测(?:[、，,或和及以及\s]+个人(?:职业|收入)结果预测)+/u',
             '个人职业结果预测',
             $sanitized
         ) ?? $sanitized;
+
+        return str_replace([
+            '不把它当作个人职业结果预测',
+            '不把该分数当作个人职业结果预测',
+            '不将它当作个人职业结果预测',
+            '不将该分数当作个人职业结果预测',
+        ], '不是个人职业结果预测', $sanitized);
+    }
+
+    /**
+     * @param  array<string, mixed>  $payload
+     * @return array<string, mixed>
+     */
+    private function applyPreviewProjectionRepair(array $payload, string $slug, string $locale): array
+    {
+        $replacements = $this->previewProjectionReplacements($slug, $locale);
+
+        if ($replacements === []) {
+            return $payload;
+        }
+
+        return $this->replaceStringsRecursively($payload, $replacements);
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    private function previewProjectionReplacements(string $slug, string $locale): array
+    {
+        $normalizedSlug = $this->normalizeSlug($slug);
+        $normalizedLocale = $this->normalizeLocale($locale);
+
+        $commonZh = [
+            '运行安全、放行条件、天气改航、间隔限制、维护记录和旅客/机组安全' => '现场安全、记录完整性、异常处置、交付边界和最终责任',
+            '运行限制说明、异常处置日志、天气/NOTAM 核对和放行复盘' => '工作说明、异常记录、复核清单和交付复盘',
+            '调度系统、检查单、维护记录、航班/车辆运行日志' => '工作记录、检查单、复核步骤和交付日志',
+        ];
+
+        $commonEn = [
+            'operational safety, release conditions, weather diversion, separation limits, maintenance records, and crew or passenger safety' => 'operational context, exception handling, record quality, delivery boundaries, and final accountability',
+            'operational safety, release conditions, weather diversions, separation limits, maintenance records, and crew or passenger safety' => 'operational context, exception handling, record quality, delivery boundaries, and final accountability',
+            'an operating-limit note, abnormal-event log, weather or NOTAM check, and release review' => 'a work note, exception log, review checklist, and delivery review',
+            'dispatch systems, checklists, maintenance records, and flight or vehicle operation logs' => 'work records, checklists, review steps, and delivery logs',
+        ];
+
+        if ($normalizedSlug === 'writers-and-authors') {
+            return array_merge($normalizedLocale === 'en' ? $commonEn : $commonZh, $normalizedLocale === 'en' ? [
+                'species observations' => 'interview notes',
+                'habitat data' => 'background material',
+                'species misidentification, ecological uncertainty' => 'factual misreadings, voice inconsistency',
+                'field summaries, figure captions, grant or article sections' => 'chapter drafts, summaries, proposal sections, or article sections',
+                'operational context, exception handling, record quality, delivery boundaries, and final accountability' => 'voice, evidence quality, copyright boundaries, editorial choices, reader interpretation, and final accountability',
+                'a work note, exception log, review checklist, and delivery review' => 'a pitch note, interview log, citation check, and revision review',
+                'work records, checklists, review steps, and delivery logs' => 'outlines, version logs, citation sheets, editor feedback, and delivery notes',
+            ] : [
+                '物种观察' => '采访记录',
+                '栖息地数据' => '背景材料',
+                '物种误识、生态不确定性' => '事实误读、叙事不一致',
+                '野外摘要、图注、基金或文章段落' => '章节草稿、摘要、提案或文章段落',
+                '现场安全、记录完整性、异常处置、交付边界和最终责任' => '表达声音、证据质量、版权边界、编辑取舍、读者理解和最终责任',
+                '工作说明、异常记录、复核清单和交付复盘' => '选题说明、采访记录、引用核对和修订复盘',
+                '工作记录、检查单、复核步骤和交付日志' => '写作提纲、版本记录、引用清单、编辑反馈和交付记录',
+            ]);
+        }
+
+        if ($normalizedSlug === 'zoologists-and-wildlife-biologists') {
+            return array_merge($normalizedLocale === 'en' ? $commonEn : $commonZh, $normalizedLocale === 'en' ? [
+                'operational context, exception handling, record quality, delivery boundaries, and final accountability' => 'field safety, species identification, sample records, habitat boundaries, permit ethics, public explanation, and final accountability',
+                'a work note, exception log, review checklist, and delivery review' => 'a field note, sample log, permit check, and observation review',
+                'work records, checklists, review steps, and delivery logs' => 'field survey sheets, sample records, GIS or habitat notes, and review checklists',
+            ] : [
+                '现场安全、记录完整性、异常处置、交付边界和最终责任' => '野外安全、物种识别、样本记录、栖息地边界、许可伦理、公众解释和最终责任',
+                '工作说明、异常记录、复核清单和交付复盘' => '野外记录、样本日志、许可核对和观察复盘',
+                '工作记录、检查单、复核步骤和交付日志' => '野外调查表、样本记录、GIS或栖息地记录和复核清单',
+            ]);
+        }
+
+        if ($normalizedSlug === 'elementary-school-teachers-except-special-education') {
+            return array_merge($normalizedLocale === 'en' ? $commonEn : $commonZh, $normalizedLocale === 'en' ? [
+                'operational context, exception handling, record quality, delivery boundaries, and final accountability' => 'student differences, classroom feedback, learning pace, family communication, assessment boundaries, and child-safety responsibility',
+                'a work note, exception log, review checklist, and delivery review' => 'a lesson plan, student-work sample, feedback record, and intervention review',
+                'work records, checklists, review steps, and delivery logs' => 'classroom notes, rubrics, progress trackers, and family-communication records',
+            ] : [
+                '现场安全、记录完整性、异常处置、交付边界和最终责任' => '学生差异、课堂反馈、教学节奏、家校沟通、评价边界和未成年人责任',
+                '工作说明、异常记录、复核清单和交付复盘' => '课程计划、学生作业样本、反馈记录和干预复盘',
+                '工作记录、检查单、复核步骤和交付日志' => '课堂记录、评价量规、学习进展表和家校沟通记录',
+            ]);
+        }
+
+        if ($normalizedSlug === 'heavy-and-tractor-trailer-truck-drivers') {
+            return array_merge($normalizedLocale === 'en' ? $commonEn : $commonZh, $normalizedLocale === 'en' ? [
+                'operational context, exception handling, record quality, delivery boundaries, and final accountability' => 'road safety, vehicle inspection, hours-of-service compliance, weather and route risk, load responsibility, and delivery communication',
+                'a work note, exception log, review checklist, and delivery review' => 'a vehicle checklist, route-risk note, maintenance handoff, and safety review',
+                'work records, checklists, review steps, and delivery logs' => 'route logs, inspection reports, maintenance handoff records, and delivery notes',
+            ] : [
+                '现场安全、记录完整性、异常处置、交付边界和最终责任' => '道路安全、车辆检查、工时合规、天气路况、装载责任和交付沟通',
+                '工作说明、异常记录、复核清单和交付复盘' => '车辆检查单、路线风险记录、维修或交接日志和安全复盘',
+                '工作记录、检查单、复核步骤和交付日志' => '路线日志、车辆检查记录、维修交接记录和交付说明',
+            ]);
+        }
+
+        if ($normalizedSlug === 'wind-turbine-technicians') {
+            return array_merge($replacements, $normalizedLocale === 'en' ? [
+                'command chain' => 'site safety chain',
+                'weapons' => 'equipment',
+                'mission risk' => 'maintenance risk',
+            ] : [
+                '指挥链' => '现场安全链条',
+                '武器' => '设备',
+                '作战' => '检修',
+                '任务风险' => '维护风险',
+            ]);
+        }
+
+        return [];
+    }
+
+    /**
+     * @param  array<mixed>  $value
+     * @param  array<string, string>  $replacements
+     * @return array<mixed>
+     */
+    private function replaceStringsRecursively(array $value, array $replacements): array
+    {
+        $repaired = [];
+
+        foreach ($value as $key => $nestedValue) {
+            if (is_string($nestedValue)) {
+                $repaired[$key] = str_replace(array_keys($replacements), array_values($replacements), $nestedValue);
+
+                continue;
+            }
+
+            if (is_array($nestedValue)) {
+                $repaired[$key] = $this->replaceStringsRecursively($nestedValue, $replacements);
+
+                continue;
+            }
+
+            $repaired[$key] = $nestedValue;
+        }
+
+        return $repaired;
     }
 
     public function normalizeSlug(string $slug): string
