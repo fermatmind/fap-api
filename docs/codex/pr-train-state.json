@@ -57678,7 +57678,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-v2-runner-sop-runbook",
     "base": "main",
-    "status": "in_progress",
+    "status": "ready_to_merge",
     "train_scope": "big5_result_page_v2_asset_agent_execution_runner",
     "title": "B5-RESULT-RUNNER-SOP-RUNBOOK-01: Document Big Five V2 agent execution runner SOP",
     "depends_on": [],
@@ -57703,6 +57703,10 @@
       "scope_validation": {
         "status": "pass",
         "evidence": "Changed files are limited to backend/docs/big5/result-asset-agent-execution-runner-sop.md, docs/codex/pr-train.yaml, and docs/codex/pr-train-state.json. No runtime, scheduler, production gate, CMS, DB, or fap-web files changed."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #2264 required GitHub checks completed successfully on head 2226112bfef22b3bbc0ae74da99230bd8762cff4; mergeStateStatus CLEAN; PR title/body and changed-file scope were re-reviewed."
       }
     },
     "failure_reason": null,
@@ -57726,6 +57730,11 @@
         "at": "2026-06-22T09:10:00Z",
         "status": "pr_open",
         "note": "Opened PR #2264 after local validation and scope validation passed; waiting for required GitHub checks."
+      },
+      {
+        "at": "2026-06-22T09:25:00Z",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed, mergeStateStatus is CLEAN, and PR title/body/scope were re-reviewed. Ready to merge under squash policy after this state update is pushed and checks remain green."
       }
     ]
   },
