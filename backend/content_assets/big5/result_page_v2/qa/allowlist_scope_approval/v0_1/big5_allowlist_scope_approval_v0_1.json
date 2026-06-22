@@ -1,0 +1,110 @@
+{
+  "schema": "fap.big5.result_page_v2.allowlist_scope_approval.v0_1",
+  "package_key": "big5_result_page_v2.allowlist_scope_approval.v0_1",
+  "version": "0.1",
+  "mode": "allowlist_scope_approval",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "scope_shape_approved": true,
+  "live_allowlist_values_approved": false,
+  "ready_for_activation": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "approval_decision": "SCOPE_SHAPE_APPROVED_VALUES_PENDING",
+  "allowlist_dimensions": [
+    {
+      "dimension": "attempt",
+      "value_policy": "redacted_placeholder_only",
+      "live_value_committed": false,
+      "required_for_activation": false
+    },
+    {
+      "dimension": "user",
+      "value_policy": "redacted_placeholder_only",
+      "live_value_committed": false,
+      "required_for_activation": false
+    },
+    {
+      "dimension": "anonymous_session",
+      "value_policy": "redacted_placeholder_only",
+      "live_value_committed": false,
+      "required_for_activation": true
+    },
+    {
+      "dimension": "organization",
+      "value_policy": "redacted_placeholder_only",
+      "live_value_committed": false,
+      "required_for_activation": false
+    },
+    {
+      "dimension": "tenant",
+      "value_policy": "redacted_placeholder_only",
+      "live_value_committed": false,
+      "required_for_activation": false
+    },
+    {
+      "dimension": "form",
+      "value_policy": "enumerated_safe_value_only",
+      "allowed_values": [
+        "big5_90",
+        "big5_120"
+      ],
+      "live_value_committed": false,
+      "required_for_activation": true
+    },
+    {
+      "dimension": "locale",
+      "value_policy": "enumerated_safe_value_only",
+      "allowed_values": [
+        "zh",
+        "zh-CN"
+      ],
+      "live_value_committed": false,
+      "required_for_activation": true
+    },
+    {
+      "dimension": "scale",
+      "value_policy": "enumerated_safe_value_only",
+      "allowed_values": [
+        "BIG5_OCEAN"
+      ],
+      "live_value_committed": false,
+      "required_for_activation": true
+    }
+  ],
+  "activation_preconditions": {
+    "controlled_pilot_runtime_activation_merged": true,
+    "operator_must_authorize_live_values": true,
+    "public_percentage_bucket_must_remain_zero": true,
+    "production_percentage_must_remain_disabled": true,
+    "legacy_fallback_must_remain_available": true,
+    "post_activation_live_smoke_required_after_values": true
+  },
+  "negative_guarantees": {
+    "frontend_copy_write": false,
+    "cms_write": false,
+    "seo_runtime_change": false,
+    "production_import_gate_change": false,
+    "release_snapshot_activation": false,
+    "production_rollout_gate_change": false,
+    "manual_deploy": false,
+    "search_submission": false
+  },
+  "deferred_until_separate_authorization": [
+    "live_allowlist_values",
+    "runtime_flag_change",
+    "post_activation_live_smoke",
+    "production_import_activation",
+    "production_rollout",
+    "cms_publish",
+    "seo_runtime_or_search_submission",
+    "manual_or_production_deploy"
+  ],
+  "evidence_links": {
+    "controlled_pilot_runtime_activation": "backend/content_assets/big5/result_page_v2/qa/controlled_pilot_runtime_activation/v0_1/big5_controlled_pilot_runtime_activation_v0_1.json",
+    "controlled_pilot_gate": "backend/content_assets/big5/result_page_v2/qa/controlled_pilot_gate/v0_1/big5_controlled_pilot_gate_v0_1.json",
+    "rollback_evidence": "backend/content_assets/big5/result_page_v2/qa/pilot_run_evidence/v0_1/big5_v2_pilot_run_rollback_v0_1.json"
+  },
+  "redaction_status": "pass"
+}
+

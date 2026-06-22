@@ -59355,7 +59355,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-controlled-pilot-runtime-activation",
     "base": "main",
-    "status": "pr_open",
+    "status": "merged",
     "train_scope": "big5_strategic_completion_roadmap",
     "title": "BIG5-CONTROLLED-PILOT-RUNTIME-ACTIVATION-01: Enable Big Five controlled pilot runtime path",
     "depends_on": [
@@ -59390,16 +59390,16 @@
         "evidence": "Changed files are confined to BigFiveV2PilotAccessGate, BigFiveV2PublicPilotAccessGateTest, the controlled_pilot_runtime_activation QA package, the focused runtime activation artifact test, and docs/codex metadata. No fap-web copy, CMS, SEO runtime, routes, controllers, DB migrations, release snapshot activation, production import gate, production rollout gate, live smoke, deploy workflow, or real allowlist identifiers changed."
       },
       "github": {
-        "status": "pending",
-        "evidence": null
+        "status": "pass",
+        "evidence": "PR #2340 checks passed and GitHub reports the PR merged at 2026-06-22T18:16:55Z with merge commit 2afe26d8957ac78e5e009a934ff4613b57009cef."
       }
     },
     "failure_reason": null,
     "commit_sha": null,
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2340",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-22T18:16:55Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-22T18:06:09Z",
@@ -59415,6 +59415,72 @@
         "at": "2026-06-22T18:06:09Z",
         "status": "pr_open",
         "note": "Opened https://github.com/fermatmind/fap-api/pull/2340 after local validation and scope validation passed."
+      },
+      {
+        "at": "2026-06-22T18:16:55Z",
+        "status": "merged",
+        "note": "PR #2340 merged with merge commit 2afe26d8957ac78e5e009a934ff4613b57009cef. origin/main contains the merge commit, remote task branch was deleted, local task branch was deleted, and main equals origin/main."
+      }
+    ]
+  },
+  "BIG5-PILOT-ALLOWLIST-SCOPE-APPROVAL-01": {
+    "repo": "fap-api",
+    "branch": "codex/big5-allowlist-scope-approval",
+    "base": "main",
+    "status": "local_validated",
+    "train_scope": "big5_strategic_completion_roadmap",
+    "title": "BIG5-PILOT-ALLOWLIST-SCOPE-APPROVAL-01: Add Big Five pilot allowlist scope approval",
+    "depends_on": [
+      "BIG5-CONTROLLED-PILOT-RUNTIME-ACTIVATION-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly requested the Big Five strategic completion roadmap and listed Allowlist Scope Approval as the next scoped phase."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "BIG5-CONTROLLED-PILOT-RUNTIME-ACTIVATION-01 is merged as fap-api PR #2340, and origin/main contains merge commit 2afe26d8957ac78e5e009a934ff4613b57009cef."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "cd backend && php artisan test --filter=BigFiveResultPageV2AllowlistScopeApprovalTest --no-ansi",
+          "find backend/content_assets/big5/result_page_v2/qa/allowlist_scope_approval/v0_1 -name '*.json' -print -exec python3 -m json.tool {} >/dev/null \\;",
+          "cd backend/content_assets/big5/result_page_v2/qa/allowlist_scope_approval/v0_1 && shasum -a 256 -c SHA256SUMS",
+          "cd backend && vendor/bin/pint --test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2AllowlistScopeApprovalTest.php",
+          "cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='test_runtime_paths_have_no_uncommitted_diff' --no-ansi",
+          "git diff --check",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+        ],
+        "evidence": "Focused allowlist scope approval artifact test passed, JSON parse and SHA256SUMS passed, targeted Pint passed, runtime-freeze guard passed, and metadata/diff checks passed. PHPUnit warnings were limited to the known missing backend/.env in this temporary worktree and all commands exited 0."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are confined to the allowlist_scope_approval QA package, BigFiveResultPageV2AllowlistScopeApprovalTest, and docs/codex metadata. No runtime wrapper, fap-web copy, CMS, SEO runtime, routes, controllers, DB migrations, release snapshot activation, production import gate, production rollout gate, live smoke, deploy workflow, or real allowlist identifiers changed."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-22T18:16:55Z",
+        "status": "in_progress",
+        "note": "Started from origin/main after #2340 merge cleanup. Scope is redacted allowlist scope approval artifact only; real allowlist values remain separately authorized."
+      },
+      {
+        "at": "2026-06-22T18:16:55Z",
+        "status": "local_validated",
+        "note": "Added redacted allowlist scope approval evidence. Live values, runtime flag changes, live smoke, production import, rollout, CMS, SEO runtime, search submission, and deploy remain deferred."
       }
     ]
   },
