@@ -367,11 +367,15 @@ jobs:
                 return 0
               fi
 
+              if [ "$rc" -ne 255 ]; then
+                return "$rc"
+              fi
+
               if [ "$attempt" -ge "$max_attempts" ]; then
                 return "$rc"
               fi
 
-              echo "SSH attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
+              echo "SSH transport attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
               sleep "$retry_delay"
             done
           }
@@ -404,11 +408,15 @@ jobs:
                 return 0
               fi
 
+              if [ "$rc" -ne 255 ]; then
+                return "$rc"
+              fi
+
               if [ "$attempt" -ge "$max_attempts" ]; then
                 return "$rc"
               fi
 
-              echo "SSH attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
+              echo "SSH transport attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
               sleep "$retry_delay"
             done
           }
@@ -507,11 +515,15 @@ jobs:
                 return 0
               fi
 
+              if [ "$rc" -ne 255 ]; then
+                return "$rc"
+              fi
+
               if [ "$attempt" -ge "$max_attempts" ]; then
                 return "$rc"
               fi
 
-              echo "SSH attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
+              echo "SSH transport attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
               sleep "$retry_delay"
             done
           }
@@ -541,11 +553,15 @@ jobs:
                 return 0
               fi
 
+              if [ "$rc" -ne 255 ]; then
+                return "$rc"
+              fi
+
               if [ "$attempt" -ge "$max_attempts" ]; then
                 return "$rc"
               fi
 
-              echo "SSH attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
+              echo "SSH transport attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
               sleep "$retry_delay"
             done
           }
@@ -584,11 +600,15 @@ jobs:
                 return 0
               fi
 
+              if [ "$rc" -ne 255 ]; then
+                return "$rc"
+              fi
+
               if [ "$attempt" -ge "$max_attempts" ]; then
                 return "$rc"
               fi
 
-              echo "SSH attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
+              echo "SSH transport attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
               sleep "$retry_delay"
             done
           }
@@ -647,11 +667,15 @@ jobs:
                 return 0
               fi
 
+              if [ "$rc" -ne 255 ]; then
+                return "$rc"
+              fi
+
               if [ "$attempt" -ge "$max_attempts" ]; then
                 return "$rc"
               fi
 
-              echo "SSH attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
+              echo "SSH transport attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
               sleep "$retry_delay"
             done
           }
@@ -760,11 +784,15 @@ jobs:
                 return 0
               fi
 
+              if [ "$rc" -ne 255 ]; then
+                return "$rc"
+              fi
+
               if [ "$attempt" -ge "$max_attempts" ]; then
                 return "$rc"
               fi
 
-              echo "SSH attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
+              echo "SSH transport attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
               sleep "$retry_delay"
             done
           }
