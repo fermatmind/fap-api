@@ -58097,7 +58097,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-v2-auto-merge-live-pilot",
     "base": "main",
-    "status": "local_validated",
+    "status": "pr_open",
     "train_scope": "big5_result_page_v2_asset_agent_execution_runner",
     "title": "B5-RESULT-AUTO-MERGE-LIVE-PILOT-01: Record Big Five V2 live merge cleanup pilot",
     "depends_on": [
@@ -58134,8 +58134,8 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "377d6430cffd4264b55c9b1d51567c47907f5831",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2272",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -58144,6 +58144,11 @@
         "at": "2026-06-22T03:20:00Z",
         "status": "local_validated",
         "note": "Executed plan-merge-cleanup plus execute-github-mutation live against safe artifact-only PR #2266 from a temporary clean clone; GitHub merged #2266 and deleted the remote branch, clone main synced, and the local task branch was deleted."
+      },
+      {
+        "at": "2026-06-22T03:25:00Z",
+        "status": "pr_open",
+        "note": "Opened PR #2272 after live merge pilot evidence, local validation, and scope validation passed."
       }
     ]
   }
