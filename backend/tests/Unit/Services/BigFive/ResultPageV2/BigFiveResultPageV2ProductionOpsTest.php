@@ -15,6 +15,8 @@ final class BigFiveResultPageV2ProductionOpsTest extends TestCase
 {
     private const BASE_PATH = 'content_assets/big5/result_page_v2/qa/production_ops/v0_1';
 
+    private const POSTDEPLOY_LIVE_SMOKE_PATH = 'content_assets/big5/result_page_v2/qa/postdeploy_live_smoke_evidence/v0_1';
+
     public function test_production_ops_package_defines_redacted_metrics_without_enabling_rollout(): void
     {
         $manifest = $this->jsonFile('manifest.json');
@@ -90,6 +92,112 @@ final class BigFiveResultPageV2ProductionOpsTest extends TestCase
             $this->assertMatchesRegularExpression('/^[a-f0-9]{64}  [A-Za-z0-9_.-]+$/', $entry);
             [$expectedHash, $fileName] = explode('  ', $entry, 2);
             $path = base_path(self::BASE_PATH.'/'.$fileName);
+
+            $this->assertFileExists($path);
+            $this->assertSame($expectedHash, hash_file('sha256', $path), $fileName);
+        }
+    }
+
+    public function test_postdeploy_live_smoke_evidence_is_redacted_and_keeps_rollout_gated(): void
+    {
+        $manifest = $this->jsonFileFrom(self::POSTDEPLOY_LIVE_SMOKE_PATH, 'manifest.json');
+        $evidence = $this->jsonFileFrom(self::POSTDEPLOY_LIVE_SMOKE_PATH, 'big5_v2_postdeploy_live_smoke_evidence_v0_1.json');
+        $pdf = $this->jsonFileFrom(self::POSTDEPLOY_LIVE_SMOKE_PATH, 'big5_v2_postdeploy_pdf_text_extraction_evidence_v0_1.json');
+        $validation = $this->jsonFileFrom(self::POSTDEPLOY_LIVE_SMOKE_PATH, 'big5_v2_postdeploy_live_smoke_validation_v0_1.json');
+
+        $this->assertSame('postdeploy_live_smoke_evidence', $manifest['package'] ?? null);
+        $this->assertSame('big5_result_page_v2_rc_0_3', $manifest['release_snapshot_id'] ?? null);
+        $this->assertSame('LIVE_SMOKE_REDACTED_PASS_ROLLOUT_STILL_GATED', $validation['production_decision'] ?? null);
+
+        foreach ([$manifest, $evidence, $pdf, $validation] as $document) {
+            $this->assertSame('not_runtime', $document['runtime_use'] ?? null);
+            $this->assertFalse((bool) ($document['production_use_allowed'] ?? true));
+            $this->assertFalse((bool) ($document['ready_for_runtime'] ?? true));
+            $this->assertFalse((bool) ($document['ready_for_production'] ?? true));
+            $this->assertFalse((bool) ($document['production_runtime_enabled'] ?? true));
+            $this->assertFalse((bool) ($document['production_rollout_enabled'] ?? true));
+            $this->assertFalse((bool) ($document['rollout_allowed'] ?? true));
+        }
+
+        $this->assertSame('fresh_anonymous_big5_live_result', data_get($evidence, 'sample.sample_type'));
+        $this->assertSame('redacted', data_get($evidence, 'sample.identity'));
+        $this->assertSame('not_recorded', data_get($evidence, 'sample.result_link'));
+        $this->assertSame('not_recorded', data_get($evidence, 'sample.pdf_file'));
+        $this->assertSame('pass_redacted_summary_only', data_get($evidence, 'surface_checks.report_json_fetch'));
+        $this->assertSame('pass_redacted_text_summary_only', data_get($evidence, 'surface_checks.report_pdf_fetch'));
+
+        foreach ((array) ($evidence['forbidden_public_text_checks'] ?? []) as $check) {
+            $this->assertSame('not_found', $check['status'] ?? null);
+        }
+        $this->assertSame([
+            'private URL',
+            'footer leak',
+            'Big Five Report Engine',
+            'PR3B',
+            'AttemptReadController',
+            'payload',
+            'registry',
+            'raw scores',
+            'shareable percentiles',
+            'internal metadata',
+            '[object Object]',
+        ], array_column($evidence['forbidden_public_text_checks'] ?? [], 'token'));
+
+        $this->assertFalse((bool) data_get($pdf, 'pdf_text_extraction.text_stored', true));
+        $this->assertSame(0, data_get($pdf, 'pdf_text_extraction.forbidden_hit_count'));
+        $this->assertSame('pass_no_internal_footer_token', data_get($pdf, 'pdf_text_extraction.footer_status'));
+
+        $this->assertSame('pass', data_get($validation, 'checks.fresh_anonymous_live_sample_redacted'));
+        $this->assertSame('pass', data_get($validation, 'checks.pdf_text_extraction_redacted'));
+        $this->assertSame('pass', data_get($validation, 'checks.payload_word_absent_from_public_text'));
+        $this->assertSame('pass', data_get($validation, 'checks.registry_word_absent_from_public_text'));
+        $this->assertSame('blocked', data_get($validation, 'checks.runtime_default_change'));
+        $this->assertSame('blocked', data_get($validation, 'checks.rollout_default_change'));
+    }
+
+    public function test_postdeploy_live_smoke_evidence_files_do_not_store_sensitive_artifacts(): void
+    {
+        foreach (glob(base_path(self::POSTDEPLOY_LIVE_SMOKE_PATH.'/*')) ?: [] as $file) {
+            if (! is_file($file)) {
+                continue;
+            }
+
+            $contents = (string) file_get_contents($file);
+            $normalized = preg_replace('/\s+/', '', $contents);
+
+            foreach ([
+                'attempt_id',
+                'private_url',
+                'report_full_json',
+                'report_free_json',
+                'payload_json',
+                'raw_scores',
+                '/api/v0.3/attempts/',
+                'http://',
+                'https://',
+            ] as $forbiddenToken) {
+                $this->assertStringNotContainsString($forbiddenToken, $contents, $forbiddenToken);
+            }
+
+            $this->assertStringNotContainsString('"production_use_allowed":true', $normalized, $file);
+            $this->assertStringNotContainsString('"ready_for_runtime":true', $normalized, $file);
+            $this->assertStringNotContainsString('"ready_for_production":true', $normalized, $file);
+            $this->assertStringNotContainsString('"production_runtime_enabled":true', $normalized, $file);
+            $this->assertStringNotContainsString('"production_rollout_enabled":true', $normalized, $file);
+            $this->assertStringNotContainsString('"rollout_allowed":true', $normalized, $file);
+        }
+    }
+
+    public function test_postdeploy_live_smoke_sha256sums_are_reproducible(): void
+    {
+        $entries = file(base_path(self::POSTDEPLOY_LIVE_SMOKE_PATH.'/SHA256SUMS'), FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        $this->assertIsArray($entries);
+        $this->assertCount(5, $entries);
+
+        foreach ($entries as $entry) {
+            $this->assertMatchesRegularExpression('/^[a-f0-9]{64}  [A-Za-z0-9_.-]+$/', $entry);
+            [$expectedHash, $fileName] = explode('  ', $entry, 2);
+            $path = base_path(self::POSTDEPLOY_LIVE_SMOKE_PATH.'/'.$fileName);
 
             $this->assertFileExists($path);
             $this->assertSame($expectedHash, hash_file('sha256', $path), $fileName);
@@ -219,8 +327,16 @@ final class BigFiveResultPageV2ProductionOpsTest extends TestCase
      */
     private function jsonFile(string $fileName): array
     {
+        return $this->jsonFileFrom(self::BASE_PATH, $fileName);
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function jsonFileFrom(string $basePath, string $fileName): array
+    {
         $decoded = json_decode(
-            (string) file_get_contents(base_path(self::BASE_PATH.'/'.$fileName)),
+            (string) file_get_contents(base_path($basePath.'/'.$fileName)),
             true,
             flags: JSON_THROW_ON_ERROR,
         );

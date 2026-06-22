@@ -1,0 +1,39 @@
+{
+  "schema": "big5_result_page_v2.postdeploy_live_smoke_validation.v0_1",
+  "package": "postdeploy_live_smoke_evidence",
+  "version": "v0_1",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "production_runtime_enabled": false,
+  "production_rollout_enabled": false,
+  "rollout_allowed": false,
+  "production_decision": "LIVE_SMOKE_REDACTED_PASS_ROLLOUT_STILL_GATED",
+  "validation_status": "pass",
+  "checks": {
+    "fresh_anonymous_live_sample_redacted": "pass",
+    "pdf_text_extraction_redacted": "pass",
+    "private_link_absent": "pass",
+    "footer_internal_token_absent": "pass",
+    "legacy_engine_label_absent": "pass",
+    "controller_name_absent": "pass",
+    "payload_word_absent_from_public_text": "pass",
+    "registry_word_absent_from_public_text": "pass",
+    "raw_score_absent": "pass",
+    "object_string_absent": "pass",
+    "frontend_copy_out_of_scope": "pass",
+    "runtime_default_change": "blocked",
+    "rollout_default_change": "blocked"
+  },
+  "linked_evidence": {
+    "import_gate_pass": "content_assets/big5/result_page_v2/releases/v0_3/production_import_gate_pass_evidence_rc_0_3.json",
+    "runtime_enablement_prep": "content_assets/big5/result_page_v2/qa/production_runtime_enablement_prep/v0_1/big5_v2_production_runtime_enablement_prep_v0_1.json",
+    "allowlist_rollout_config": "content_assets/big5/result_page_v2/qa/production_allowlist_rollout_config/v0_1/big5_v2_production_allowlist_rollout_config_v0_1.json"
+  },
+  "remaining_blockers_before_broad_rollout": [
+    "operator_has_not_enabled_broad_rollout",
+    "weekly_ops_threshold_review_required",
+    "allowlist_values_not_recorded_in_repo"
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "schema": "big5_result_page_v2.postdeploy_live_smoke_evidence.v0_1",
+  "package": "postdeploy_live_smoke_evidence",
+  "version": "v0_1",
+  "generated_at": "2026-06-22T00:00:00Z",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "production_runtime_enabled": false,
+  "production_rollout_enabled": false,
+  "rollout_allowed": false,
+  "production_decision": "LIVE_SMOKE_REDACTED_PASS_ROLLOUT_STILL_GATED",
+  "sample": {
+    "sample_type": "fresh_anonymous_big5_live_result",
+    "identity": "redacted",
+    "result_link": "not_recorded",
+    "report_body": "not_recorded",
+    "score_values": "not_recorded",
+    "pdf_file": "not_recorded"
+  },
+  "surface_checks": {
+    "result_page": "pass_redacted",
+    "report_json_fetch": "pass_redacted_summary_only",
+    "report_pdf_fetch": "pass_redacted_text_summary_only",
+    "footer_check": "pass_no_internal_footer_token",
+    "private_link_check": "pass_not_found",
+    "legacy_engine_label_check": "pass_not_found",
+    "controller_name_check": "pass_not_found",
+    "object_string_check": "pass_not_found"
+  },
+  "forbidden_public_text_checks": [
+    {
+      "token": "private URL",
+      "status": "not_found"
+    },
+    {
+      "token": "footer leak",
+      "status": "not_found"
+    },
+    {
+      "token": "Big Five Report Engine",
+      "status": "not_found"
+    },
+    {
+      "token": "PR3B",
+      "status": "not_found"
+    },
+    {
+      "token": "AttemptReadController",
+      "status": "not_found"
+    },
+    {
+      "token": "payload",
+      "status": "not_found"
+    },
+    {
+      "token": "registry",
+      "status": "not_found"
+    },
+    {
+      "token": "raw scores",
+      "status": "not_found"
+    },
+    {
+      "token": "shareable percentiles",
+      "status": "not_found"
+    },
+    {
+      "token": "internal metadata",
+      "status": "not_found"
+    },
+    {
+      "token": "[object Object]",
+      "status": "not_found"
+    }
+  ],
+  "redaction": {
+    "stores_real_attempt_reference": false,
+    "stores_private_link": false,
+    "stores_pdf_file": false,
+    "stores_raw_report_body": false,
+    "stores_user_score_values": false,
+    "stores_raw_v2_body": false
+  }
+}

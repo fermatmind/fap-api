@@ -1,0 +1,29 @@
+{
+  "schema": "big5_result_page_v2.postdeploy_pdf_text_extraction_evidence.v0_1",
+  "package": "postdeploy_live_smoke_evidence",
+  "version": "v0_1",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "production_runtime_enabled": false,
+  "production_rollout_enabled": false,
+  "rollout_allowed": false,
+  "pdf_text_extraction": {
+    "source": "fresh_anonymous_big5_live_result_pdf",
+    "text_stored": false,
+    "summary_only": true,
+    "extraction_status": "pass",
+    "forbidden_hit_count": 0,
+    "footer_status": "pass_no_internal_footer_token",
+    "private_link_status": "pass_not_found",
+    "legacy_engine_label_status": "pass_not_found"
+  },
+  "redacted_evidence": {
+    "page_count": "redacted_count_only",
+    "text_character_count": "redacted_count_only",
+    "pdf_hash": "not_recorded",
+    "pdf_file": "not_recorded",
+    "raw_text": "not_recorded"
+  }
+}
