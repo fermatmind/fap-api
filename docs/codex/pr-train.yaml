@@ -26797,3 +26797,50 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: B5-RESULT-M8-PRODUCTION-OPS-METRICS-01
+    repo: fap-api
+    depends_on:
+      - B5-RESULT-AUTO-MERGE-LIVE-PILOT-01
+    branch: codex/big5-v2-m8-production-ops-metrics
+    title: "B5-RESULT-M8-PRODUCTION-OPS-METRICS-01: Connect Big Five V2 weekly ops to production metrics"
+    train_scope: big5_result_page_v2_production_ops
+    status: user_authorized
+    scope:
+      - Upgrade weekly-ops from contract-only reporting to default report_snapshots audit-field metrics.
+      - Keep production ops contract package as schema and smoke policy baseline.
+      - Reuse the same backend metrics service for weekly-ops and Report/PDF Center summary.
+      - Output redacted count, rate, enum, and timestamp artifacts only.
+    allowed_paths:
+      - backend/app/Console/Commands/BigFiveResultPageV2AssetAgentAuditCommand.php
+      - backend/app/Services/BigFive/ResultPageV2/AssetAgent/BigFiveResultPageV2AssetAgent.php
+      - backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2ProductionOpsMetrics.php
+      - backend/app/Filament/Ops/Resources/ReportSnapshotResource/Support/ReportSnapshotExplorerSupport.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2AssetAgentTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2ProductionOpsTest.php
+      - backend/tests/Feature/Ops/ReportPdfCenterTest.php
+      - backend/content_assets/big5/result_page_v2/qa/production_ops/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add or modify fap-web result-page copy.
+      - Generate final big5_result_page_v2 frontend payloads.
+      - Change production rollout gates.
+      - Change production import gates.
+      - Change release snapshots.
+      - Enable runtime or production use.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ProductionOpsTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=ReportPdfCenterTest --no-ansi
+      - git diff --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend

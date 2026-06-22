@@ -30,6 +30,8 @@ final class BigFiveResultPageV2AssetAgentAuditCommand extends Command
         {--github-repo= : GitHub repository slug, for example fermatmind/fap-api}
         {--mutation-mode=simulate : GitHub mutation execution mode: simulate or live}
         {--production-ops-dir= : Production ops contract directory for weekly-ops}
+        {--ops-source=report_snapshots : Weekly ops source: report_snapshots or contract}
+        {--window-days=45 : Weekly ops reporting window in days}
         {--apply-mechanical-fixes : Permit inspect-ci to apply supported mechanical fixes}
         {--allow-github-mutation : Permit execute-github-mutation to perform live git/GitHub mutations}
         {--allow-staging-write : Permit stage-candidates to write the reviewed staging package}
@@ -101,6 +103,8 @@ final class BigFiveResultPageV2AssetAgentAuditCommand extends Command
                     'run_id' => trim((string) $this->option('run-id')),
                     'artifact_dir' => trim((string) $this->option('artifact-dir')),
                     'production_ops_dir' => trim((string) $this->option('production-ops-dir')),
+                    'ops_source' => trim((string) $this->option('ops-source')),
+                    'window_days' => (int) $this->option('window-days'),
                 ]),
                 default => null,
             };

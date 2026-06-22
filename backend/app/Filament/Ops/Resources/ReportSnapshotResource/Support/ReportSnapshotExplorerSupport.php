@@ -9,6 +9,7 @@ use App\Filament\Ops\Resources\OrderResource;
 use App\Filament\Ops\Resources\ResultResource;
 use App\Filament\Ops\Support\StatusBadge;
 use App\Models\ReportSnapshot;
+use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2ProductionOpsMetrics;
 use App\Services\Commerce\OrderManager;
 use App\Support\SchemaBaseline;
 use Illuminate\Database\Eloquent\Builder;
@@ -749,98 +750,37 @@ final class ReportSnapshotExplorerSupport
      *     attached:int,
      *     fallback:int,
      *     invalid:int,
+     *     disabled_or_not_evaluated_count:int,
      *     coverage_rate:string,
      *     fallback_rate:string,
      *     window_days:int,
      *     validation_error_count:int,
+     *     latest_audited_at:?string,
      *     fallback_reasons:array<string,int>,
-     *     invalid_reasons:array<string,int>
+     *     invalid_reasons:array<string,int>,
+     *     malformed_rejection_reasons:array<string,int>
      * }
      */
     public function bigFiveResultPageV2CoverageSummary(): array
     {
-        if (! SchemaBaseline::hasColumn('report_snapshots', 'big5_result_page_v2_status')) {
-            return [
-                'total' => 0,
-                'attached' => 0,
-                'fallback' => 0,
-                'invalid' => 0,
-                'coverage_rate' => '0.0%',
-                'fallback_rate' => '0.0%',
-                'window_days' => self::INDEX_LOOKBACK_DAYS,
-                'validation_error_count' => 0,
-                'fallback_reasons' => [],
-                'invalid_reasons' => [],
-            ];
-        }
-
-        $rows = DB::table('report_snapshots')
-            ->selectRaw('lower(coalesce(big5_result_page_v2_status, \'\')) as v2_status, count(*) as aggregate')
-            ->whereRaw('upper(coalesce(scale_code, \'\')) = ?', ['BIG5_OCEAN'])
-            ->where(function (QueryBuilder $builder): void {
-                $this->applyRecentSnapshotWindow($builder);
-            })
-            ->groupBy('v2_status')
-            ->pluck('aggregate', 'v2_status')
-            ->mapWithKeys(fn ($count, $status): array => [(string) $status => (int) $count])
-            ->all();
-
-        $attached = (int) ($rows['attached'] ?? 0);
-        $fallback = (int) ($rows['fallback'] ?? 0);
-        $invalid = (int) ($rows['invalid'] ?? 0);
-        $disabled = (int) ($rows['disabled'] ?? 0);
-        $notEvaluated = (int) (($rows['not_evaluated'] ?? 0) + ($rows[''] ?? 0));
-        $total = $attached + $fallback + $invalid + $disabled + $notEvaluated;
-        $reasonRows = DB::table('report_snapshots')
-            ->selectRaw(
-                "lower(coalesce(big5_result_page_v2_status, '')) as v2_status, ".
-                "lower(coalesce(big5_result_page_v2_fallback_reason, '')) as fallback_reason, ".
-                'count(*) as aggregate, '.
-                'sum(coalesce(big5_result_page_v2_validation_error_count, 0)) as validation_errors'
-            )
-            ->whereRaw('upper(coalesce(scale_code, \'\')) = ?', ['BIG5_OCEAN'])
-            ->where(function (QueryBuilder $builder): void {
-                $this->applyRecentSnapshotWindow($builder);
-            })
-            ->whereIn(DB::raw("lower(coalesce(big5_result_page_v2_status, ''))"), ['fallback', 'invalid'])
-            ->groupBy('v2_status', 'fallback_reason')
-            ->get();
-        $fallbackReasons = [];
-        $invalidReasons = [];
-        $validationErrorCount = 0;
-
-        foreach ($reasonRows as $row) {
-            $status = strtolower(trim((string) ($row->v2_status ?? '')));
-            $reason = strtolower(trim((string) ($row->fallback_reason ?? '')));
-            if ($reason === '') {
-                $reason = 'unspecified';
-            }
-
-            $count = max(0, (int) ($row->aggregate ?? 0));
-            if ($status === 'fallback') {
-                $fallbackReasons[$reason] = ($fallbackReasons[$reason] ?? 0) + $count;
-            }
-
-            if ($status === 'invalid') {
-                $invalidReasons[$reason] = ($invalidReasons[$reason] ?? 0) + $count;
-                $validationErrorCount += max(0, (int) ($row->validation_errors ?? 0));
-            }
-        }
-
-        ksort($fallbackReasons);
-        ksort($invalidReasons);
+        $metrics = app(BigFiveResultPageV2ProductionOpsMetrics::class)->summarize(self::INDEX_LOOKBACK_DAYS);
+        $summary = (array) ($metrics['metrics'] ?? []);
+        $malformedReasons = (array) ($summary['malformed_rejection_reasons'] ?? []);
 
         return [
-            'total' => $total,
-            'attached' => $attached,
-            'fallback' => $fallback,
-            'invalid' => $invalid,
-            'coverage_rate' => $this->formatRate($attached, $total),
-            'fallback_rate' => $this->formatRate($fallback + $invalid, $total),
+            'total' => (int) ($summary['total_big5_reports'] ?? 0),
+            'attached' => (int) ($summary['attached_count'] ?? 0),
+            'fallback' => (int) ($summary['fallback_count'] ?? 0),
+            'invalid' => (int) ($summary['invalid_count'] ?? 0),
+            'disabled_or_not_evaluated_count' => (int) ($summary['disabled_or_not_evaluated_count'] ?? 0),
+            'coverage_rate' => (string) ($summary['v2_payload_coverage_rate'] ?? '0.0%'),
+            'fallback_rate' => (string) ($summary['fallback_hit_rate'] ?? '0.0%'),
             'window_days' => self::INDEX_LOOKBACK_DAYS,
-            'validation_error_count' => $validationErrorCount,
-            'fallback_reasons' => $fallbackReasons,
-            'invalid_reasons' => $invalidReasons,
+            'validation_error_count' => (int) ($summary['validation_error_count'] ?? 0),
+            'latest_audited_at' => $summary['latest_audited_at'] ?? null,
+            'fallback_reasons' => (array) ($summary['fallback_reasons'] ?? []),
+            'invalid_reasons' => $malformedReasons,
+            'malformed_rejection_reasons' => $malformedReasons,
         ];
     }
 
