@@ -59355,7 +59355,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-controlled-pilot-runtime-activation",
     "base": "main",
-    "status": "local_validated",
+    "status": "pr_open",
     "train_scope": "big5_strategic_completion_roadmap",
     "title": "BIG5-CONTROLLED-PILOT-RUNTIME-ACTIVATION-01: Enable Big Five controlled pilot runtime path",
     "depends_on": [
@@ -59396,7 +59396,7 @@
     },
     "failure_reason": null,
     "commit_sha": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2340",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -59410,6 +59410,11 @@
         "at": "2026-06-22T18:06:09Z",
         "status": "local_validated",
         "note": "Added redacted controlled pilot runtime activation evidence, blocked production public pilot percentage buckets for controlled pilot, and passed focused artifact/access-gate tests, JSON/SHA checks, Pint, runtime-freeze guard, metadata parse, and diff check."
+      },
+      {
+        "at": "2026-06-22T18:06:09Z",
+        "status": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/2340 after local validation and scope validation passed."
       }
     ]
   },
