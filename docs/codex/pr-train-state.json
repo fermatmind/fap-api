@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-23T02:12:00+08:00",
+  "updated_at": "2026-06-23T02:30:00+08:00",
   "SEO-AGENT-ARTICLE41-DRAFT-CLAIM-RISK-QA-01": {
     "repo": "fap-api",
     "branch": "codex/seo-agent-article41-draft-claim-risk-qa-01",
@@ -59360,7 +59360,7 @@
     "repo": "fap-api",
     "branch": "codex/fa30-api-08-content-pages-dry-run",
     "base": "main",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "train_scope": "fa30_trust_method_content_pages_dry_run_package",
     "title": "FA30-API-08: Extend trust/method ContentPage CMS dry-run package",
     "depends_on": [
@@ -59393,8 +59393,8 @@
         "evidence": "Changed files are limited to FA30-API-08 allowed paths: trust/method dry-run source package, generated artifact, dry-run report, focused PHPUnit contract, and docs/codex metadata. No CMS write, publish, search submission, provider call, deploy, sitemap, llms, canonical, JSON-LD, queue, scheduler, runtime route, or fap-web change."
       },
       "github": {
-        "status": "pending",
-        "evidence": null
+        "status": "pass",
+        "evidence": "PR #2334 GitHub checks passed on branch head 7a5fa12845744f6ef87e277aa05856d028f72bb4: hygiene, Semgrep blocking secrets, supply-chain, semgrep SARIF non-blocking upload, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, and Semgrep OSS. mergeStateStatus was CLEAN."
       }
     },
     "failure_reason": null,
@@ -59418,6 +59418,11 @@
         "at": "2026-06-23T02:12:00+08:00",
         "status": "pr_open",
         "note": "Opened PR #2334 after local validation and scope validation passed. Branch head is the source of truth for the exact current SHA after metadata commits."
+      },
+      {
+        "at": "2026-06-23T02:30:00+08:00",
+        "status": "ready_to_merge",
+        "note": "All PR #2334 GitHub checks passed and mergeStateStatus was CLEAN. Recording ready_to_merge before squash merge per PR-train ledger policy."
       }
     ]
   }
