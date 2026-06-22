@@ -24021,6 +24021,7 @@ prs:
       - backend/docs/seo/generated/seo-agent-gsc-draft-publish-gate-readiness.v1.json
       - backend/tests/Feature/SeoIntel/SeoAgentGscDraftPublishGateReadinessTest.php
       - backend/tests/Feature/SeoIntel/SeoAgentCmsPublishCanaryTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train-state.json
     do_not:
       - Publish content.
@@ -24030,6 +24031,7 @@ prs:
     validation:
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoAgentGscDraftPublishGateReadinessTest
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoAgentCmsPublishCanaryTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=seo_agent_gsc_draft_publish_gate_readiness
       - cd backend && vendor/bin/pint --test app/Console/Commands tests/Feature/SeoIntel
       - python3 -m json.tool backend/docs/seo/generated/seo-agent-gsc-draft-publish-gate-readiness.v1.json >/dev/null
       - git diff --check

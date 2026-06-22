@@ -1,0 +1,42 @@
+{
+  "version": "seo-agent-gsc-draft-publish-gate-readiness.v1",
+  "command": "php artisan seo-agent:gsc-draft-publish-gate-readiness",
+  "purpose": "Read-only publish gate readiness evidence for SEO Agent CMS drafts.",
+  "input_schemas": [
+    "seo-agent-controlled-cms-draft-write.v1",
+    "seo-agent-cms-draft-readback-qa.v1",
+    "seo-agent-article-draft-claim-risk-qa.v1",
+    "seo-agent-article-draft-preview-runtime-qa.v1"
+  ],
+  "verdicts": [
+    "publish_ready",
+    "review_required",
+    "blocked"
+  ],
+  "approval_policy": {
+    "emit_publish_phrase_only_when_all_required_qa_present_and_passing": true,
+    "publish_separate_from_draft_write": true,
+    "url_truth_sitemap_indexnow_search_separate_from_publish": true
+  },
+  "mutates_database": false,
+  "mutates_cms": false,
+  "publishes_content": false,
+  "writes_url_truth": false,
+  "submits_sitemap": false,
+  "submits_indexnow": false,
+  "submits_search": false,
+  "negative_guarantees": {
+    "database_write": false,
+    "cms_write": false,
+    "cms_publish": false,
+    "url_truth_write": false,
+    "sitemap_submission": false,
+    "indexnow_submit": false,
+    "search_channel_submit": false,
+    "indexing_request": false,
+    "scheduler_activation": false,
+    "queue_worker_start": false,
+    "external_model_api_call": false,
+    "live_gsc_api_call": false
+  }
+}
