@@ -1,0 +1,66 @@
+{
+  "version": "seo-agent-gsc-cohort-handoff.v1",
+  "task": "SEO-AGENT-GSC-COHORT-HANDOFF-01",
+  "repo": "fap-api",
+  "type": "readonly_gsc_cohort_artifact_to_cms_draft_dryrun_contract",
+  "command": "php artisan seo-agent:gsc-cohort-handoff",
+  "inputs": [
+    "fermatmind-gsc-seo-agent-cohort.v1",
+    "fermatmind-seo-agent-gsc-draft-proposals.v1"
+  ],
+  "outputs": [
+    "seo-agent-gsc-cohort-handoff.v1",
+    "seo-agent-opportunity-aggregate.v1",
+    "seo-agent-codex-review-handoff.v1",
+    "seo-agent-codex-review-verdict.v1",
+    "seo-agent-cms-draft-package-dry-run.v1"
+  ],
+  "candidate_contract": {
+    "source_family": "gsc_cohort_artifact",
+    "draft_eligible_proposal_type": "article_title_meta_faq_internal_link_draft",
+    "allowed_subject_types": ["article"],
+    "subject_ref": "article:<id>:<locale>",
+    "target_path_contract": "/<locale>/articles/<slug>",
+    "safe_path_only": true,
+    "deferred_groups": [
+      "mbti_personality_variant",
+      "career_job_longtail"
+    ],
+    "target_gap_types": [
+      "gsc_low_ctr_title_opportunity",
+      "gsc_low_ctr_description_opportunity",
+      "missing_structured_data",
+      "missing_visible_faq"
+    ]
+  },
+  "forbidden_input_or_output_fields": [
+    "raw_url",
+    "raw_query",
+    "credential_path",
+    "service_account_json",
+    "client_email",
+    "private_key",
+    "token",
+    "cookie",
+    "session",
+    "content_md",
+    "content_html",
+    "cms_draft_body"
+  ],
+  "negative_guarantees": {
+    "database_write": false,
+    "cms_write": false,
+    "cms_publish": false,
+    "search_channel_enqueue": false,
+    "search_channel_submit": false,
+    "indexing_request": false,
+    "sitemap_submission": false,
+    "scheduler_activation": false,
+    "queue_worker_started": false,
+    "production_env_change": false,
+    "google_search_console_api_call": false,
+    "google_indexing_api_call": false,
+    "external_model_api_call": false
+  },
+  "next_step": "A separate controlled CMS draft writer may consume the dry-run package after policy approval; this command never writes or publishes CMS content."
+}

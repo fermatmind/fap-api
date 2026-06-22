@@ -1,11 +1,75 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-06-11T20:24:49+08:00",
+  "updated_at": "2026-06-22T15:46:14+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
   "items": {
+    "SEO-AGENT-GSC-COHORT-HANDOFF-01": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "local_checks_passed",
+      "branch": "codex/seo-agent-gsc-cohort-handoff-01",
+      "commit_sha": "",
+      "pr_url": "",
+      "checks": {
+        "local": [
+          {
+            "command": "php artisan list | rg seo-agent:gsc-cohort-handoff",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/phpunit tests/Feature/SeoIntel/SeoAgentGscCohortHandoffTest.php",
+            "status": "passed",
+            "details": "4 tests and 102 assertions passed."
+          },
+          {
+            "command": "vendor/bin/phpunit tests/Feature/SeoIntel/SeoAgentCodexReviewRunnerTest.php tests/Feature/SeoIntel/SeoAgentCmsDraftPackageDryRunTest.php",
+            "status": "passed",
+            "details": "6 tests and 106 assertions passed."
+          },
+          {
+            "command": "vendor/bin/pint --test app/Console/Commands/SeoAgentGscCohortHandoffCommand.php tests/Feature/SeoIntel/SeoAgentGscCohortHandoffTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "python3 -m json.tool docs/seo/generated/seo-agent-gsc-cohort-handoff.v1.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "ruby -e 'require \"yaml\"; YAML.load_file(\"docs/codex/pr-train.yaml\")'",
+            "status": "passed"
+          },
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check && git diff --cached --check",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-06-22T15:42:32+08:00",
+          "status": "in_progress",
+          "summary": "Initialized SEO-AGENT-GSC-COHORT-HANDOFF-01 for a backend-only readonly GSC cohort artifact adapter that produces standard SEO Agent review and CMS draft dry-run artifacts without DB, CMS, publish, search, indexing, scheduler, worker, production, or fap-web mutation."
+        },
+        {
+          "at": "2026-06-22T15:46:14+08:00",
+          "status": "local_checks_passed",
+          "summary": "Added readonly GSC cohort artifact adapter, generated contract, command registration, and focused tests. Command discovery, focused PHPUnit, runner/draft-package regressions, Pint, JSON/YAML validation, and diff checks passed."
+        }
+      ]
+    },
     "PERSONALITY-EN-CONTENT-00": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
