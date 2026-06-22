@@ -58555,7 +58555,7 @@
     "repo": "fap-api",
     "branch": "codex/fa30-api-02-batch2-dry-run-gate",
     "base": "main",
-    "status": "in_progress",
+    "status": "pr_open",
     "train_scope": "fa30_batch2_backend_dry_run_gate",
     "title": "FA30-API-02: Add Batch 2 Big Five and Enneagram dry-run gate",
     "depends_on": [
@@ -58588,12 +58588,12 @@
       },
       "github": {
         "status": "pending",
-        "evidence": null
+        "evidence": "PR #2306 opened on head 6c3d2d301c8f8e9fbc3235e665708acd7865ab9a. Required GitHub checks have started on the Batch 2 dry-run gate scope."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "6c3d2d301c8f8e9fbc3235e665708acd7865ab9a",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2306",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -58607,6 +58607,11 @@
         "at": "2026-06-22T14:10:00Z",
         "status": "local_validated",
         "note": "Added a backend-only result-page Batch 2 dry-run gate that reuses Big Five stageCandidates in no-write mode and Enneagram content-batch evaluate. Targeted feature/runtime-freeze tests, Pint, YAML/JSON parse, and diff checks passed."
+      },
+      {
+        "at": "2026-06-22T14:13:30Z",
+        "status": "pr_open",
+        "note": "Opened PR #2306 on head 6c3d2d301c8f8e9fbc3235e665708acd7865ab9a after local validation and scope validation passed."
       }
     ]
   }
