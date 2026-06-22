@@ -1,0 +1,38 @@
+{
+  "schema_version": "fap.enneagram.result_page.content_batch_automation.v0.1",
+  "runner_schema_version": "fap.enneagram.result_page.agent_batch_runner.v0.1",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "batch_size_policy": {
+    "bulk_generation_allowed": false,
+    "max_fixture_payloads_in_this_pr": 1,
+    "one_batch_per_future_pr": true
+  },
+  "input_contract": {
+    "requires_source_ledger_row": true,
+    "requires_target_module": true,
+    "requires_type_or_scope": true,
+    "requires_forbidden_claim_policy": true,
+    "requires_public_payload": true
+  },
+  "output_contract": {
+    "writes_payload_json": true,
+    "writes_source_mapping_report": true,
+    "writes_safety_report": true,
+    "writes_diff_report": true,
+    "writes_rollback_report": true
+  },
+  "production_guard": {
+    "agent_may_import_candidate": false,
+    "agent_may_execute_production_rollout": false,
+    "production_requires_manual_gate": true
+  },
+  "negative_guarantees": {
+    "bulk_content_generation_happened": false,
+    "candidate_import_happened": false,
+    "production_activation_happened": false,
+    "runtime_switch_happened": false,
+    "production_write_happened": false,
+    "frontend_change_happened": false
+  }
+}
