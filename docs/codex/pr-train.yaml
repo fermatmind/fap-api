@@ -27535,3 +27535,41 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: BIG5-PILOT-ALLOWLIST-SCOPE-APPROVAL-01
+    repo: fap-api
+    depends_on:
+      - BIG5-CONTROLLED-PILOT-RUNTIME-ACTIVATION-01
+    branch: codex/big5-allowlist-scope-approval
+    title: "BIG5-PILOT-ALLOWLIST-SCOPE-APPROVAL-01: Add Big Five pilot allowlist scope approval"
+    train_scope: big5_strategic_completion_roadmap
+    status: user_authorized
+    scope:
+      - Add a redacted allowlist scope approval artifact for Big Five V2 controlled pilot.
+      - Fix the approved dimensions as attempt, user, anonymous session, organization, tenant, form, locale, and scale.
+      - Keep live values, runtime flag changes, live smoke, production import, rollout, CMS, SEO runtime, search submission, and deploy deferred.
+    allowed_paths:
+      - backend/content_assets/big5/result_page_v2/qa/allowlist_scope_approval/**
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2AllowlistScopeApprovalTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify fap-web, frontend result-page copy, runtime wrappers, routes, controllers, DB migrations, CMS, SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, release snapshots, production import gates, production rollout gates, dashboards, analytics refresh commands, live smoke, deploy workflows, or real allowlist identifiers.
+      - Enable runtime, commit real values, configure production traffic, trigger live smoke, publish CMS content, submit search, or deploy.
+    validation:
+      - cd backend && php artisan test --filter=BigFiveResultPageV2AllowlistScopeApprovalTest --no-ansi
+      - find backend/content_assets/big5/result_page_v2/qa/allowlist_scope_approval/v0_1 -name '*.json' -print -exec python3 -m json.tool {} >/dev/null \;
+      - cd backend/content_assets/big5/result_page_v2/qa/allowlist_scope_approval/v0_1 && shasum -a 256 -c SHA256SUMS
+      - cd backend && vendor/bin/pint --test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2AllowlistScopeApprovalTest.php
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='test_runtime_paths_have_no_uncommitted_diff' --no-ansi
+      - git diff --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
