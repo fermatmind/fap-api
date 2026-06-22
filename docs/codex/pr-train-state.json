@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-22T11:17:42+08:00",
+  "updated_at": "2026-06-22T11:18:19+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -57444,7 +57444,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-pilot-allowlist-gate-01",
     "base": "main",
-    "status": "local_checks_passed",
+    "status": "pull_request_open",
     "train_scope": "riasec_result_ops_agent_release_chain",
     "title": "RIASEC-RESULT-PILOT-ALLOWLIST-GATE-01: feat(riasec): add pilot allowlist gate",
     "depends_on": [
@@ -57457,11 +57457,13 @@
       "php_artisan_test_filter_RiasecResultPage": "passed",
       "php_artisan_test_filter_BigFive_runtime_paths": "passed",
       "git_diff_check": "passed",
-      "scope_validation": "passed"
+      "scope_validation": "passed",
+      "branch_pushed": "passed",
+      "pr_created": "passed"
     },
     "failure_reason": null,
-    "commit_sha": "f3aea0cb18df06c039b6fc18435e75a304bddf4f",
-    "pr_url": null,
+    "commit_sha": "e3401d23b3163ebf8340fd97f5bbe100370d3f0e",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2273",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -57492,6 +57494,12 @@
         "from": "local_checks_passed",
         "to": "local_checks_passed",
         "notes": "Recorded local implementation commit f3aea0cb18df06c039b6fc18435e75a304bddf4f before push."
+      },
+      {
+        "at": "2026-06-22T11:18:19+08:00",
+        "from": "local_checks_passed",
+        "to": "pull_request_open",
+        "notes": "Opened GitHub PR #2273 after local validation and scope validation passed. Pilot gate remains default-off and production denied by default."
       }
     ]
   },
