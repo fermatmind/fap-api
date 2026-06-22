@@ -579,6 +579,120 @@ final class BigFiveResultPageV2AssetAgent
      * @param  array{
      *   run_id?:string,
      *   artifact_dir?:string,
+     *   pr_state_json?:string,
+     *   pr_number?:string,
+     *   github_repo?:string
+     * }  $options
+     * @return array<string,mixed>
+     */
+    public function pollGithubChecks(array $options = []): array
+    {
+        $runId = $this->sanitizeRunId((string) ($options['run_id'] ?? ''));
+        $artifactDir = $this->artifactDir((string) ($options['artifact_dir'] ?? ''), $runId);
+        $prStateJson = trim((string) ($options['pr_state_json'] ?? '')) === ''
+            ? ''
+            : $this->absolutePath((string) ($options['pr_state_json'] ?? ''));
+        $prNumber = trim((string) ($options['pr_number'] ?? ''));
+        $githubRepo = trim((string) ($options['github_repo'] ?? ''));
+
+        $this->ensureDirectory($artifactDir);
+
+        $state = $this->pollGithubState($prStateJson, $prNumber, $githubRepo);
+        $checks = $this->readCheckRollupFromPayload($state);
+        $pending = array_values(array_filter($checks, static fn (array $check): bool => ($check['state'] ?? '') === 'pending'));
+        $failed = array_values(array_filter($checks, static fn (array $check): bool => ($check['state'] ?? '') === 'failed'));
+        $passed = array_values(array_filter($checks, static fn (array $check): bool => ($check['state'] ?? '') === 'passed'));
+        $blockingStatus = $state === []
+            ? 'missing_pr_state'
+            : ($failed !== [] ? 'failed_checks' : ($pending !== [] ? 'pending_checks' : 'green'));
+        $sidecarCandidates = $this->checkPollerSidecarCandidates($failed);
+
+        $rollup = [
+            'schema_version' => self::SCHEMA_VERSION,
+            'task' => 'github_check_poll_rollup',
+            'runtime_use' => 'not_runtime',
+            'production_use_allowed' => false,
+            'checks' => $checks,
+        ];
+        $report = [
+            'schema_version' => self::SCHEMA_VERSION,
+            'task' => 'github_check_poller',
+            'runtime_use' => 'not_runtime',
+            'production_use_allowed' => false,
+            'ready_for_pilot' => false,
+            'ready_for_runtime' => false,
+            'ready_for_production' => false,
+            'source' => $prStateJson !== '' ? 'exported_pr_state_json' : ($prNumber !== '' ? 'gh_pr_view' : 'missing'),
+            'pr_state_json' => $prStateJson === '' ? null : $this->redactPath($prStateJson),
+            'github_repo' => $this->redactGithubRepo($githubRepo),
+            'pr' => [
+                'number' => (string) ($state['number'] ?? $prNumber),
+                'state' => (string) ($state['state'] ?? ''),
+                'is_draft' => (bool) ($state['isDraft'] ?? false),
+                'merge_state_status' => (string) ($state['mergeStateStatus'] ?? ''),
+                'review_decision' => (string) ($state['reviewDecision'] ?? ''),
+                'head_ref_name' => (string) ($state['headRefName'] ?? ''),
+                'head_ref_oid' => (string) ($state['headRefOid'] ?? ''),
+                'url' => (string) ($state['url'] ?? ''),
+            ],
+            'required_check_summary' => [
+                'check_count' => count($checks),
+                'pending_check_count' => count($pending),
+                'failed_check_count' => count($failed),
+                'passed_check_count' => count($passed),
+                'blocking_status' => $blockingStatus,
+                'all_completed' => $checks !== [] && $pending === [],
+                'all_green' => $checks !== [] && $pending === [] && $failed === [],
+            ],
+            'sidecar_blocker_classification' => [
+                'sidecar_candidate_count' => count($sidecarCandidates),
+                'candidates' => $sidecarCandidates,
+            ],
+            'negative_guarantees' => $this->checkPollerNegativeGuarantees($prNumber !== '' && $prStateJson === ''),
+        ];
+
+        $artifacts = [
+            'github_check_poll_report.json' => $this->writeJson($artifactDir.'/github_check_poll_report.json', $report),
+            'status_check_rollup.redacted.json' => $this->writeJson($artifactDir.'/status_check_rollup.redacted.json', $rollup),
+            'repair_log.json' => $this->writeJson($artifactDir.'/repair_log.json', [
+                'schema_version' => self::SCHEMA_VERSION,
+                'task' => 'github_check_poller_repair_log',
+                'runtime_use' => 'not_runtime',
+                'production_use_allowed' => false,
+                'repair_required' => $blockingStatus !== 'green',
+                'entries' => array_values(array_map(
+                    static fn (array $check): string => (string) ($check['name'] ?? 'unknown').': '.(string) ($check['state'] ?? 'unknown'),
+                    array_merge($pending, $failed)
+                )),
+            ]),
+        ];
+
+        return [
+            'schema_version' => self::SCHEMA_VERSION,
+            'ok' => $state !== [] && $checks !== [],
+            'status' => ($state !== [] && $checks !== []) ? 'success' : 'blocked',
+            'run_id' => $runId,
+            'artifact_dir' => $artifactDir,
+            'artifacts' => $artifacts,
+            'summary' => [
+                'check_count' => count($checks),
+                'pending_check_count' => count($pending),
+                'failed_check_count' => count($failed),
+                'passed_check_count' => count($passed),
+                'blocking_status' => $blockingStatus,
+                'all_green' => $checks !== [] && $pending === [] && $failed === [],
+                'ready_for_pilot' => false,
+                'ready_for_runtime' => false,
+                'ready_for_production' => false,
+            ],
+            'negative_guarantees' => $this->checkPollerNegativeGuarantees($prNumber !== '' && $prStateJson === ''),
+        ];
+    }
+
+    /**
+     * @param  array{
+     *   run_id?:string,
+     *   artifact_dir?:string,
      *   pr_state_json?:string
      * }  $options
      * @return array<string,mixed>
@@ -2216,6 +2330,64 @@ final class BigFiveResultPageV2AssetAgent
     }
 
     /**
+     * @return array<string,mixed>
+     */
+    private function pollGithubState(string $prStateJson, string $prNumber, string $githubRepo): array
+    {
+        if ($prStateJson !== '') {
+            return $this->readOptionalJson($prStateJson) ?? [];
+        }
+
+        if ($prNumber === '' || $this->redactGithubRepo($githubRepo) === null) {
+            return [];
+        }
+
+        $process = new Process([
+            'gh',
+            'pr',
+            'view',
+            $prNumber,
+            '--repo',
+            $githubRepo,
+            '--json',
+            'number,title,state,isDraft,mergeStateStatus,reviewDecision,headRefName,headRefOid,url,statusCheckRollup',
+        ]);
+        $process->setTimeout(60);
+        $process->run();
+
+        if ($process->getExitCode() !== 0) {
+            return [];
+        }
+
+        $decoded = json_decode($process->getOutput(), true);
+
+        return is_array($decoded) ? $decoded : [];
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $failed
+     * @return list<array<string,mixed>>
+     */
+    private function checkPollerSidecarCandidates(array $failed): array
+    {
+        return array_map(function (array $check): array {
+            $failureClass = (string) ($check['failure_class'] ?? 'unknown');
+            $mechanicalFixAllowed = (bool) ($check['mechanical_fix_allowed'] ?? false);
+
+            return [
+                'name' => (string) ($check['name'] ?? 'unknown'),
+                'state' => (string) ($check['state'] ?? 'failed'),
+                'failure_class' => $failureClass,
+                'mechanical_fix_allowed' => $mechanicalFixAllowed,
+                'sidecar_candidate' => ! $mechanicalFixAllowed,
+                'sidecar_policy' => $mechanicalFixAllowed
+                    ? 'repair_in_current_scope_if_manifest_allows'
+                    : 'record_as_sidecar_if_not_current_pr_scope',
+            ];
+        }, $failed);
+    }
+
+    /**
      * @return array{valid:bool,blockers:list<string>,allowed_plan_tasks:list<string>}
      */
     private function githubMutationPreflight(
@@ -2782,6 +2954,36 @@ final class BigFiveResultPageV2AssetAgent
             'github_pr_created' => false,
             'mechanical_fix_apply_requested' => $applyRequested,
             'mechanical_fix_apply_performed' => false,
+            'auto_merge_performed' => false,
+        ];
+    }
+
+    /**
+     * @return array<string,bool>
+     */
+    private function checkPollerNegativeGuarantees(bool $liveRead): array
+    {
+        return [
+            'database_write' => false,
+            'cms_write' => false,
+            'content_assets_write' => false,
+            'frontend_copy_write' => false,
+            'final_result_payload_generation' => false,
+            'runtime_flag_change' => false,
+            'release_snapshot_change' => false,
+            'production_import_gate_change' => false,
+            'rollout_gate_change' => false,
+            'github_checks_read_live' => $liveRead,
+            'github_checks_mutation' => false,
+            'git_branch_created' => false,
+            'git_commit_created' => false,
+            'github_pr_created' => false,
+            'github_pr_mutation' => false,
+            'github_merge_performed' => false,
+            'remote_branch_deleted' => false,
+            'local_branch_deleted' => false,
+            'local_main_synced' => false,
+            'post_merge_revalidation_run' => false,
             'auto_merge_performed' => false,
         ];
     }

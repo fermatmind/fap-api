@@ -39995,7 +39995,7 @@
     "repo": "fap-api",
     "branch": "codex/career-search-channel-readiness-gate-01",
     "base": "main",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "title": "CAREER-SEARCH-CHANNEL-READINESS-GATE-01 career Search Channel readiness gate",
     "depends_on": [
       "CAREER-DIRECTORY-AUTHORITY-DRIFT-GATE-01"
@@ -57832,7 +57832,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-v2-live-dry-run-pilot",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "big5_result_page_v2_asset_agent_execution_runner",
     "title": "B5-RESULT-LIVE-DRY-RUN-PILOT-01: Record Big Five V2 live PR mutation pilot",
     "depends_on": [
@@ -57869,11 +57869,11 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "commit_sha": "aba183d5ccac3b75f6582b93024bc9c8b605ee7c",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2267",
+    "merged_at": "2026-06-22T02:29:09Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-22T02:15:00Z",
@@ -57889,6 +57889,11 @@
         "at": "2026-06-22T02:35:00Z",
         "status": "ready_to_merge",
         "note": "GitHub checks passed, mergeStateStatus is CLEAN, and PR title/body/scope were re-reviewed. Ready to merge under squash policy after this state update is pushed and checks remain green."
+      },
+      {
+        "at": "2026-06-22T02:40:00Z",
+        "status": "merged",
+        "note": "PR #2267 merged with merge commit aba183d5ccac3b75f6582b93024bc9c8b605ee7c; origin/main contains the merge commit, local main was fast-forwarded, task branch was deleted locally/remotely, and post-merge JSON/YAML/diff validation passed."
       }
     ]
   },
@@ -57896,7 +57901,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-v2-auto-check-poller",
     "base": "main",
-    "status": "pending_dependency",
+    "status": "pr_open",
     "train_scope": "big5_result_page_v2_asset_agent_execution_runner",
     "title": "B5-RESULT-AUTO-CHECK-POLLER-01: Add Big Five V2 GitHub check poller artifacts",
     "depends_on": [
@@ -57908,17 +57913,53 @@
         "evidence": "User authorized this PR train item in the /goal execution request."
       },
       "dependency": {
-        "status": "pending",
-        "evidence": "Waiting for B5-RESULT-LIVE-DRY-RUN-PILOT-01 to merge into main."
+        "status": "pass",
+        "evidence": "B5-RESULT-LIVE-DRY-RUN-PILOT-01 is merged and origin/main contains merge commit aba183d5ccac3b75f6582b93024bc9c8b605ee7c."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi",
+          "cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent poll-github-checks --run-id=check-poller --artifact-dir=artifacts/big5_result_page_v2_agent/testing-check-poller --pr-state-json=artifacts/big5_result_page_v2_agent/testing-check-poller/pr-state.json --json --no-ansi",
+          "cd backend && vendor/bin/pint --test app/Console/Commands/BigFiveResultPageV2AssetAgentAuditCommand.php app/Services/BigFive/ResultPageV2/AssetAgent/BigFiveResultPageV2AssetAgent.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2AssetAgentTest.php",
+          "git diff --check",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+        ],
+        "evidence": "AssetAgentTest passed with the new poll-github-checks fixture test; command smoke generated redacted github_check_poll_report.json, status_check_rollup.redacted.json, and repair_log.json from exported PR state without live mutation."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to the Big Five V2 asset agent command/service/test files and docs/codex PR-train state. git diff --check, JSON parse, and YAML parse passed."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #2269 required GitHub checks completed successfully on head d0053f7f8171724308e1bc535bbf58a711df5c8b; PR title/body and changed-file scope were re-reviewed."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "8ae13aa5c4d390827853859b4f0d124bcd3288f5",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2269",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
-    "transitions": []
+    "transitions": [
+      {
+        "at": "2026-06-22T02:45:00Z",
+        "status": "local_validated",
+        "note": "Implemented poll-github-checks read-only artifact generation with exported PR state fixture coverage and command smoke. No GitHub mutation, runtime, production gate, release snapshot, CMS write, DB write, or fap-web copy changed."
+      },
+      {
+        "at": "2026-06-22T02:50:00Z",
+        "status": "pr_open",
+        "note": "Opened PR #2269 for the auto check poller after local validation and scope validation passed."
+      },
+      {
+        "at": "2026-06-22T02:55:00Z",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed on head d0053f7f8171724308e1bc535bbf58a711df5c8b, and PR title/body/scope were re-reviewed. Ready to merge under squash policy after this state update is pushed and checks remain green."
+      }
+    ]
   },
   "B5-RESULT-MECHANICAL-FIX-APPLY-01": {
     "repo": "fap-api",

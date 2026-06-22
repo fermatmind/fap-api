@@ -568,6 +568,125 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
         }
     }
 
+    public function test_poll_github_checks_writes_redacted_rollup_without_mutation(): void
+    {
+        $artifactRoot = base_path('artifacts/big5_result_page_v2_agent/unit-check-poller');
+
+        $this->deleteDirectory($artifactRoot);
+        mkdir($artifactRoot, 0777, true);
+
+        try {
+            $statePath = $artifactRoot.'/pr-state.json';
+            file_put_contents($statePath, json_encode([
+                'number' => 2266,
+                'url' => 'https://github.com/fermatmind/fap-api/pull/2266',
+                'headRefName' => 'codex/big5-v2-live-dry-run-artifact',
+                'headRefOid' => 'abc123',
+                'state' => 'OPEN',
+                'isDraft' => false,
+                'mergeStateStatus' => 'UNSTABLE',
+                'reviewDecision' => '',
+                'statusCheckRollup' => [
+                    [
+                        'name' => 'hygiene',
+                        'status' => 'COMPLETED',
+                        'conclusion' => 'SUCCESS',
+                    ],
+                    [
+                        'name' => 'verify-bigfive',
+                        'status' => 'IN_PROGRESS',
+                        'conclusion' => '',
+                    ],
+                    [
+                        'name' => 'Semgrep blocking secrets',
+                        'status' => 'COMPLETED',
+                        'conclusion' => 'FAILURE',
+                    ],
+                ],
+            ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES).PHP_EOL);
+
+            $this->artisan('big5:result-page-v2-agent', [
+                'action' => 'poll-github-checks',
+                '--run-id' => 'check-poller',
+                '--artifact-dir' => $artifactRoot,
+                '--pr-state-json' => $statePath,
+                '--json' => true,
+            ])->assertExitCode(0);
+
+            $runDir = $artifactRoot.'/check-poller';
+            foreach ([
+                'github_check_poll_report.json',
+                'status_check_rollup.redacted.json',
+                'repair_log.json',
+            ] as $filename) {
+                $this->assertFileExists($runDir.'/'.$filename);
+            }
+
+            $report = $this->readJson($runDir.'/github_check_poll_report.json');
+            $rollup = $this->readJson($runDir.'/status_check_rollup.redacted.json');
+            $repairLog = $this->readJson($runDir.'/repair_log.json');
+
+            $this->assertSame('github_check_poller', $report['task'] ?? null);
+            $this->assertSame('not_runtime', $report['runtime_use'] ?? null);
+            $this->assertFalse((bool) ($report['production_use_allowed'] ?? true));
+            $this->assertSame('exported_pr_state_json', $report['source'] ?? null);
+            $this->assertSame('2266', data_get($report, 'pr.number'));
+            $this->assertSame('UNSTABLE', data_get($report, 'pr.merge_state_status'));
+            $this->assertSame(3, (int) data_get($report, 'required_check_summary.check_count', 0));
+            $this->assertSame(1, (int) data_get($report, 'required_check_summary.pending_check_count', 0));
+            $this->assertSame(1, (int) data_get($report, 'required_check_summary.failed_check_count', 0));
+            $this->assertSame(1, (int) data_get($report, 'required_check_summary.passed_check_count', 0));
+            $this->assertSame('failed_checks', data_get($report, 'required_check_summary.blocking_status'));
+            $this->assertFalse((bool) data_get($report, 'required_check_summary.all_green', true));
+            $this->assertSame(1, (int) data_get($report, 'sidecar_blocker_classification.sidecar_candidate_count', 0));
+            $this->assertSame('security', data_get($report, 'sidecar_blocker_classification.candidates.0.failure_class'));
+            $this->assertTrue((bool) data_get($report, 'sidecar_blocker_classification.candidates.0.sidecar_candidate'));
+
+            $this->assertSame('github_check_poll_rollup', $rollup['task'] ?? null);
+            $this->assertCount(3, (array) ($rollup['checks'] ?? []));
+            $this->assertTrue((bool) ($repairLog['repair_required'] ?? false));
+
+            foreach ([
+                'github_checks_read_live',
+                'github_checks_mutation',
+                'git_branch_created',
+                'git_commit_created',
+                'github_pr_created',
+                'github_pr_mutation',
+                'github_merge_performed',
+                'remote_branch_deleted',
+                'local_branch_deleted',
+                'local_main_synced',
+                'post_merge_revalidation_run',
+                'auto_merge_performed',
+                'runtime_flag_change',
+                'production_import_gate_change',
+                'rollout_gate_change',
+            ] as $guarantee) {
+                $this->assertFalse((bool) data_get($report, "negative_guarantees.{$guarantee}", true), $guarantee);
+            }
+
+            $allArtifacts = implode("\n", [
+                (string) file_get_contents($runDir.'/github_check_poll_report.json'),
+                (string) file_get_contents($runDir.'/status_check_rollup.redacted.json'),
+                (string) file_get_contents($runDir.'/repair_log.json'),
+            ]);
+            foreach ([
+                'private_url',
+                'attempt_id',
+                'raw_score',
+                'percentile',
+                'fixed_type',
+                'user_confirmed_type',
+                'type_code',
+            ] as $forbiddenToken) {
+                $this->assertStringNotContainsString($forbiddenToken, $allArtifacts);
+            }
+        } finally {
+            $this->deleteDirectory($artifactRoot);
+        }
+    }
+
     public function test_plan_merge_cleanup_requires_clean_green_pr_and_does_not_execute_merge(): void
     {
         $artifactRoot = base_path('artifacts/big5_result_page_v2_agent/unit-merge-cleanup');
