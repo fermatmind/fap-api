@@ -57289,7 +57289,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-staging-import-dry-run-01",
     "base": "main",
-    "status": "pull_request_open",
+    "status": "ready_to_merge",
     "train_scope": "riasec_result_ops_agent_release_chain",
     "title": "RIASEC-RESULT-STAGING-IMPORT-DRY-RUN-01: feat(riasec): add staging import dry-run",
     "depends_on": [
@@ -57303,10 +57303,12 @@
       "git_diff_check": "passed",
       "scope_validation": "passed",
       "branch_pushed": "passed",
-      "pr_created": "passed"
+      "pr_created": "passed",
+      "github_required_checks": "passed",
+      "pre_merge_scope_recheck": "passed"
     },
     "failure_reason": null,
-    "commit_sha": "d276f239983ff47a82e2120c69aac7e0e44d102e",
+    "commit_sha": "871a768ee148b836c6e2e550dabb5c4a24260f7d",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2268",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -57332,6 +57334,12 @@
         "from": "local_checks_passed",
         "to": "pull_request_open",
         "notes": "Opened GitHub PR #2268 after local validation and scope validation passed. No CMS write, runtime wrapper, frontend fallback, pilot gate, or production rollout."
+      },
+      {
+        "at": "2026-06-22T11:06:00+08:00",
+        "from": "pull_request_open",
+        "to": "ready_to_merge",
+        "notes": "GitHub checks passed for PR #2268 and pre-merge scope recheck stayed within PR9 allowed files."
       }
     ]
   },
