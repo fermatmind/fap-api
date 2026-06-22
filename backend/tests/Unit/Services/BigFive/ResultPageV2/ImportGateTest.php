@@ -11,6 +11,8 @@ final class ImportGateTest extends TestCase
 {
     private const RELEASE_PATH = 'content_assets/big5/result_page_v2/releases/v0_1';
 
+    private const APPROVAL_PREP_RELEASE_PATH = 'content_assets/big5/result_page_v2/releases/v0_2';
+
     private const GATE_POLICY_PATH = 'content_assets/big5/result_page_v2/governance/production_import_gate_v0_1';
 
     public function test_import_gate_policy_package_exists_without_runtime_enablement(): void
@@ -37,6 +39,32 @@ final class ImportGateTest extends TestCase
         $this->assertContains('rendered_qa_evidence_required', $result['reasons']);
         $this->assertContains('all_surface_pass_evidence_required', $result['reasons']);
         $this->assertContains('approval_evidence_required', $result['reasons']);
+    }
+
+    public function test_gate_sees_approval_prep_snapshot_as_preparable_but_still_blocked(): void
+    {
+        $result = $this->validateImportGate(base_path(self::APPROVAL_PREP_RELEASE_PATH));
+
+        $this->assertFalse($result['accepted']);
+        $this->assertContains('production_use_allowed_required', $result['reasons']);
+        $this->assertContains('approval_evidence_required', $result['reasons']);
+        $this->assertNotContains('release_candidate_required', $result['reasons']);
+        $this->assertNotContains('rendered_qa_evidence_required', $result['reasons']);
+        $this->assertNotContains('all_surface_pass_evidence_required', $result['reasons']);
+        $this->assertNotContains('staging_only_snapshot_rejected', $result['reasons']);
+        $this->assertNotContains('snapshot_sha256_mismatch', $result['reasons']);
+        $this->assertNotContains('release_snapshot_hash_mismatch', $result['reasons']);
+
+        $snapshotEvidence = $result['evidence']['snapshots'][0] ?? [];
+
+        $this->assertSame('big5_result_page_v2_rc_0_2', $snapshotEvidence['snapshot_id'] ?? null);
+        $this->assertSame('v0_2', $snapshotEvidence['snapshot_version'] ?? null);
+        $this->assertSame([
+            'release_snapshot',
+            'rendered_qa_evidence',
+            'all_surface_pass_evidence',
+            'approval_evidence',
+        ], $snapshotEvidence['required_evidence'] ?? null);
     }
 
     public function test_gate_rejects_missing_snapshot_and_sha256_mismatch(): void
