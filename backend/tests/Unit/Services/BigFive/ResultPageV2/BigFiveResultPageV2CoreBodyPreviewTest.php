@@ -2770,6 +2770,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ));
     }
 
+    public function test_runtime_freeze_classifier_ignores_riasec_result_page_ops_runner_orchestrator(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/RiasecResultPageOpsRunnerCommand.php',
+            'backend/app/Services/Riasec/Ops/RiasecResultPageOpsAgentRunOrchestrator.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_enneagram_forced_choice_question_pack_translation_changes(): void
     {
         $changed = [
@@ -4762,6 +4772,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isRiasecResultPageOpsRunnerOrchestratorFile($file)) {
+                continue;
+            }
+
             if ($this->isEnneagramForcedChoiceQuestionPackTranslationFile($file)) {
                 continue;
             }
@@ -6085,6 +6099,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/RiasecResultPageAssetAgentAuditCommand.php',
             'backend/app/Services/Riasec/AssetAgent/RiasecResultPageAssetAgent.php',
+        ], true);
+    }
+
+    private function isRiasecResultPageOpsRunnerOrchestratorFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/RiasecResultPageOpsRunnerCommand.php',
+            'backend/app/Services/Riasec/Ops/RiasecResultPageOpsAgentRunOrchestrator.php',
         ], true);
     }
 
