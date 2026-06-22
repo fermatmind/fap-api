@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-22T09:03:00+08:00",
+  "updated_at": "2026-06-22T09:10:00+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -57290,7 +57290,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-v2-ci-inspector-mechanical-fixer",
     "base": "main",
-    "status": "local_validated",
+    "status": "pr_open",
     "train_scope": "big5_result_page_v2_asset_agent_automation",
     "title": "B5-RESULT-CI-INSPECTOR-MECHANICAL-FIXER-01: Inspect Big Five V2 agent PR checks",
     "depends_on": [
@@ -57322,12 +57322,12 @@
       },
       "github": {
         "status": "pending",
-        "evidence": null
+        "evidence": "PR #2250 opened; waiting for GitHub checks."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "4622292c1a9d46a2f9c590a0f4ced8cdc8f77ae2",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2250",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -57336,6 +57336,11 @@
         "at": "2026-06-22T09:03:00+08:00",
         "status": "local_validated",
         "note": "Started PR3 from synced main after PR2 merge/cleanup. Local validation and scope validation passed for artifact-only CI check inspection and mechanical fix planning."
+      },
+      {
+        "at": "2026-06-22T09:10:00+08:00",
+        "status": "pr_open",
+        "note": "Opened PR #2250 after local validation and scope validation passed; waiting for required GitHub checks."
       }
     ]
   }
