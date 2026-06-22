@@ -568,6 +568,123 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
         }
     }
 
+    public function test_inspect_ci_applies_only_explicit_artifact_mechanical_fixes(): void
+    {
+        $artifactRoot = base_path('artifacts/big5_result_page_v2_agent/unit-ci-mechanical-apply');
+
+        $this->deleteDirectory($artifactRoot);
+        mkdir($artifactRoot, 0777, true);
+
+        try {
+            $targetRelativePath = 'artifacts/big5_result_page_v2_agent/unit-ci-mechanical-apply/malformed.json';
+            $targetPath = base_path($targetRelativePath);
+            file_put_contents($targetPath, '{"z":2,"a":1}');
+
+            $checksPath = $artifactRoot.'/checks.json';
+            file_put_contents($checksPath, json_encode([
+                'statusCheckRollup' => [
+                    [
+                        'name' => 'hygiene format',
+                        'status' => 'COMPLETED',
+                        'conclusion' => 'FAILURE',
+                        'mechanical_fix' => [
+                            'action' => 'format_json',
+                            'target_path' => $targetRelativePath,
+                        ],
+                    ],
+                    [
+                        'name' => 'Semgrep blocking secrets',
+                        'status' => 'COMPLETED',
+                        'conclusion' => 'FAILURE',
+                        'mechanical_fix' => [
+                            'action' => 'format_json',
+                            'target_path' => $targetRelativePath,
+                        ],
+                    ],
+                    [
+                        'name' => 'verify-bigfive',
+                        'status' => 'COMPLETED',
+                        'conclusion' => 'SUCCESS',
+                    ],
+                ],
+            ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES).PHP_EOL);
+
+            $this->artisan('big5:result-page-v2-agent', [
+                'action' => 'inspect-ci',
+                '--run-id' => 'mechanical-fix',
+                '--artifact-dir' => $artifactRoot,
+                '--checks-json' => $checksPath,
+                '--apply-mechanical-fixes' => true,
+                '--json' => true,
+            ])->assertExitCode(0);
+
+            $runDir = $artifactRoot.'/mechanical-fix';
+            $this->assertFileExists($runDir.'/ci_inspection_report.json');
+            $this->assertFileExists($runDir.'/mechanical_fix_plan.json');
+            $this->assertFileExists($runDir.'/repair_log.json');
+
+            $formatted = (string) file_get_contents($targetPath);
+            $this->assertStringContainsString(PHP_EOL, $formatted);
+            $this->assertSame(['z' => 2, 'a' => 1], $this->readJson($targetPath));
+
+            $report = $this->readJson($runDir.'/ci_inspection_report.json');
+            $fixPlan = $this->readJson($runDir.'/mechanical_fix_plan.json');
+            $repairLog = $this->readJson($runDir.'/repair_log.json');
+
+            $this->assertSame(3, (int) ($report['check_count'] ?? 0));
+            $this->assertSame(2, (int) ($report['failed_check_count'] ?? 0));
+            $this->assertSame(1, (int) ($report['mechanical_fix_candidate_count'] ?? 0));
+            $this->assertSame(1, (int) ($report['blocked_failure_count'] ?? 0));
+            $this->assertTrue((bool) data_get($report, 'mechanical_fix_application.apply_requested'));
+            $this->assertTrue((bool) data_get($report, 'mechanical_fix_application.apply_performed'));
+            $this->assertSame(1, (int) data_get($report, 'mechanical_fix_application.applied_fix_count', 0));
+            $this->assertSame(0, (int) data_get($report, 'mechanical_fix_application.rejected_fix_count', -1));
+            $this->assertSame('format_json', data_get($report, 'mechanical_fix_application.applied_fixes.0.action'));
+            $this->assertSame([$targetRelativePath], [
+                data_get($report, 'mechanical_fix_application.applied_fixes.0.target_path'),
+            ]);
+
+            $this->assertTrue((bool) ($fixPlan['apply_requested'] ?? false));
+            $this->assertTrue((bool) ($fixPlan['apply_performed'] ?? false));
+            $this->assertSame('security', data_get($fixPlan, 'blocked_failures.0.failure_class'));
+            $this->assertStringContainsString(
+                'hygiene format: applied format_json',
+                implode("\n", (array) ($repairLog['entries'] ?? []))
+            );
+
+            foreach ([
+                'database_write',
+                'cms_write',
+                'content_assets_write',
+                'frontend_copy_write',
+                'final_result_payload_generation',
+                'runtime_flag_change',
+                'production_import_gate_change',
+                'rollout_gate_change',
+                'github_checks_read_live',
+                'git_branch_created',
+                'git_commit_created',
+                'github_pr_created',
+                'auto_merge_performed',
+            ] as $guarantee) {
+                $this->assertFalse((bool) data_get($report, "negative_guarantees.{$guarantee}", true), $guarantee);
+            }
+            $this->assertTrue((bool) data_get($report, 'negative_guarantees.mechanical_fix_apply_requested'));
+            $this->assertTrue((bool) data_get($report, 'negative_guarantees.mechanical_fix_apply_performed'));
+
+            $allArtifacts = implode("\n", [
+                (string) file_get_contents($runDir.'/ci_inspection_report.json'),
+                (string) file_get_contents($runDir.'/mechanical_fix_plan.json'),
+                (string) file_get_contents($runDir.'/repair_log.json'),
+            ]);
+            foreach (['private_url', 'attempt_id', 'raw_score', 'percentile', 'fixed_type', 'user_confirmed_type', 'type_code'] as $forbiddenToken) {
+                $this->assertStringNotContainsString($forbiddenToken, $allArtifacts);
+            }
+        } finally {
+            $this->deleteDirectory($artifactRoot);
+        }
+    }
+
     public function test_poll_github_checks_writes_redacted_rollup_without_mutation(): void
     {
         $artifactRoot = base_path('artifacts/big5_result_page_v2_agent/unit-check-poller');

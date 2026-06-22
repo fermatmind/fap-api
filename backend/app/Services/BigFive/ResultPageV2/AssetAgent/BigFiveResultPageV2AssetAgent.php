@@ -506,10 +506,12 @@ final class BigFiveResultPageV2AssetAgent
         $failed = array_values(array_filter($classifications, static fn (array $check): bool => ($check['state'] ?? '') === 'failed'));
         $repairable = array_values(array_filter($failed, static fn (array $check): bool => ($check['mechanical_fix_allowed'] ?? false) === true));
         $blocked = array_values(array_filter($failed, static fn (array $check): bool => ($check['mechanical_fix_allowed'] ?? false) !== true));
+        $fixApplication = $this->applyMechanicalFixesForChecks($repairable, $applyMechanicalFixes);
         $repairLogEntries = array_map(
             static fn (array $check): string => (string) ($check['name'] ?? 'unknown').': '.(string) ($check['failure_class'] ?? 'unknown'),
             $failed
         );
+        $repairLogEntries = array_values(array_merge($repairLogEntries, (array) ($fixApplication['entries'] ?? [])));
 
         $report = [
             'schema_version' => self::SCHEMA_VERSION,
@@ -524,8 +526,12 @@ final class BigFiveResultPageV2AssetAgent
             'failed_check_count' => count($failed),
             'mechanical_fix_candidate_count' => count($repairable),
             'blocked_failure_count' => count($blocked),
+            'mechanical_fix_application' => $fixApplication,
             'checks' => $classifications,
-            'negative_guarantees' => $this->ciInspectorNegativeGuarantees($applyMechanicalFixes),
+            'negative_guarantees' => $this->ciInspectorNegativeGuarantees(
+                $applyMechanicalFixes,
+                (bool) ($fixApplication['apply_performed'] ?? false)
+            ),
         ];
         $fixPlan = [
             'schema_version' => self::SCHEMA_VERSION,
@@ -533,11 +539,15 @@ final class BigFiveResultPageV2AssetAgent
             'runtime_use' => 'not_runtime',
             'production_use_allowed' => false,
             'apply_requested' => $applyMechanicalFixes,
-            'apply_performed' => false,
+            'apply_performed' => (bool) ($fixApplication['apply_performed'] ?? false),
             'allowed_failure_classes' => ['schema', 'checksum', 'format', 'scope'],
             'candidates' => $repairable,
             'blocked_failures' => $blocked,
-            'negative_guarantees' => $this->ciInspectorNegativeGuarantees($applyMechanicalFixes),
+            'application' => $fixApplication,
+            'negative_guarantees' => $this->ciInspectorNegativeGuarantees(
+                $applyMechanicalFixes,
+                (bool) ($fixApplication['apply_performed'] ?? false)
+            ),
         ];
         $repairLog = [
             'schema_version' => self::SCHEMA_VERSION,
@@ -566,12 +576,16 @@ final class BigFiveResultPageV2AssetAgent
                 'failed_check_count' => count($failed),
                 'mechanical_fix_candidate_count' => count($repairable),
                 'blocked_failure_count' => count($blocked),
-                'apply_performed' => false,
+                'apply_performed' => (bool) ($fixApplication['apply_performed'] ?? false),
+                'applied_fix_count' => (int) ($fixApplication['applied_fix_count'] ?? 0),
                 'ready_for_pilot' => false,
                 'ready_for_runtime' => false,
                 'ready_for_production' => false,
             ],
-            'negative_guarantees' => $this->ciInspectorNegativeGuarantees($applyMechanicalFixes),
+            'negative_guarantees' => $this->ciInspectorNegativeGuarantees(
+                $applyMechanicalFixes,
+                (bool) ($fixApplication['apply_performed'] ?? false)
+            ),
         ];
     }
 
@@ -2685,7 +2699,236 @@ final class BigFiveResultPageV2AssetAgent
             'failure_class' => $failureClass,
             'mechanical_fix_allowed' => in_array($failureClass, ['schema', 'checksum', 'format', 'scope'], true),
             'mechanical_fix_policy' => $this->mechanicalFixPolicy($failureClass),
+            'mechanical_fix_instruction' => $this->mechanicalFixInstruction($check),
         ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $check
+     * @return array<string,string>|null
+     */
+    private function mechanicalFixInstruction(array $check): ?array
+    {
+        $instruction = $check['mechanical_fix'] ?? null;
+        if (! is_array($instruction)) {
+            return null;
+        }
+
+        $action = (string) ($instruction['action'] ?? '');
+        $targetPath = (string) ($instruction['target_path'] ?? '');
+        $sourcePath = (string) ($instruction['source_path'] ?? '');
+
+        return array_filter([
+            'action' => $action,
+            'target_path' => $targetPath,
+            'source_path' => $sourcePath,
+        ], static fn (string $value): bool => $value !== '');
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $repairable
+     * @return array<string,mixed>
+     */
+    private function applyMechanicalFixesForChecks(array $repairable, bool $applyRequested): array
+    {
+        $applied = [];
+        $rejected = [];
+        $skipped = [];
+        $entries = [];
+
+        foreach ($repairable as $check) {
+            $name = (string) ($check['name'] ?? 'unknown');
+            $instruction = is_array($check['mechanical_fix_instruction'] ?? null)
+                ? (array) $check['mechanical_fix_instruction']
+                : null;
+
+            if (! $applyRequested) {
+                $skipped[] = [
+                    'name' => $name,
+                    'reason' => 'apply_not_requested',
+                ];
+
+                continue;
+            }
+
+            if ($instruction === null) {
+                $skipped[] = [
+                    'name' => $name,
+                    'reason' => 'mechanical_fix_instruction_missing',
+                ];
+                $entries[] = $name.': skipped mechanical_fix_instruction_missing';
+
+                continue;
+            }
+
+            $result = $this->applyMechanicalFixInstruction($name, $instruction);
+            if (($result['applied'] ?? false) === true) {
+                $applied[] = $result;
+                $entries[] = $name.': applied '.(string) ($result['action'] ?? 'unknown');
+            } else {
+                $rejected[] = $result;
+                $entries[] = $name.': rejected '.(string) ($result['reason'] ?? 'unknown');
+            }
+        }
+
+        return [
+            'apply_requested' => $applyRequested,
+            'apply_performed' => $applied !== [],
+            'allowed_failure_classes' => ['schema', 'checksum', 'format', 'scope'],
+            'allowed_actions' => ['format_json', 'refresh_sha256', 'sort_json_list'],
+            'allowed_target_prefixes' => ['artifacts/big5_result_page_v2_agent/'],
+            'applied_fix_count' => count($applied),
+            'rejected_fix_count' => count($rejected),
+            'skipped_fix_count' => count($skipped),
+            'applied_fixes' => $applied,
+            'rejected_fixes' => $rejected,
+            'skipped_fixes' => $skipped,
+            'entries' => $entries,
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $instruction
+     * @return array<string,mixed>
+     */
+    private function applyMechanicalFixInstruction(string $name, array $instruction): array
+    {
+        $action = (string) ($instruction['action'] ?? '');
+        $targetRelativePath = (string) ($instruction['target_path'] ?? '');
+        $targetPath = $this->mechanicalFixArtifactPath($targetRelativePath);
+
+        if (! in_array($action, ['format_json', 'refresh_sha256', 'sort_json_list'], true)) {
+            return [
+                'name' => $name,
+                'action' => $action,
+                'applied' => false,
+                'reason' => 'unsupported_mechanical_fix_action',
+            ];
+        }
+
+        if ($targetPath === null) {
+            return [
+                'name' => $name,
+                'action' => $action,
+                'applied' => false,
+                'reason' => 'target_path_outside_artifact_allowlist',
+                'target_path' => $targetRelativePath,
+            ];
+        }
+
+        if ($action === 'format_json') {
+            return $this->applyFormatJsonFix($name, $action, $targetPath, $targetRelativePath);
+        }
+
+        if ($action === 'sort_json_list') {
+            return $this->applySortJsonListFix($name, $action, $targetPath, $targetRelativePath);
+        }
+
+        return $this->applyRefreshSha256Fix($name, $action, $targetPath, $targetRelativePath, (string) ($instruction['source_path'] ?? ''));
+    }
+
+    private function applyFormatJsonFix(string $name, string $action, string $targetPath, string $targetRelativePath): array
+    {
+        $payload = $this->readOptionalJson($targetPath);
+        if ($payload === null) {
+            return [
+                'name' => $name,
+                'action' => $action,
+                'applied' => false,
+                'reason' => 'target_json_missing_or_invalid',
+                'target_path' => $targetRelativePath,
+            ];
+        }
+
+        $this->writeJson($targetPath, $payload);
+
+        return [
+            'name' => $name,
+            'action' => $action,
+            'applied' => true,
+            'target_path' => $targetRelativePath,
+        ];
+    }
+
+    private function applySortJsonListFix(string $name, string $action, string $targetPath, string $targetRelativePath): array
+    {
+        $payload = $this->readOptionalJson($targetPath);
+        if ($payload === null || array_is_list($payload) === false) {
+            return [
+                'name' => $name,
+                'action' => $action,
+                'applied' => false,
+                'reason' => 'target_json_list_missing_or_invalid',
+                'target_path' => $targetRelativePath,
+            ];
+        }
+
+        $values = array_values(array_map('strval', $payload));
+        sort($values, SORT_STRING);
+        $this->writeJson($targetPath, $values);
+
+        return [
+            'name' => $name,
+            'action' => $action,
+            'applied' => true,
+            'target_path' => $targetRelativePath,
+        ];
+    }
+
+    private function applyRefreshSha256Fix(
+        string $name,
+        string $action,
+        string $targetPath,
+        string $targetRelativePath,
+        string $sourceRelativePath,
+    ): array {
+        $sourcePath = $this->mechanicalFixArtifactPath($sourceRelativePath);
+        $payload = $this->readOptionalJson($targetPath);
+        if ($sourcePath === null || ! is_file($sourcePath)) {
+            return [
+                'name' => $name,
+                'action' => $action,
+                'applied' => false,
+                'reason' => 'source_path_outside_artifact_allowlist_or_missing',
+                'target_path' => $targetRelativePath,
+                'source_path' => $sourceRelativePath,
+            ];
+        }
+        if ($payload === null || array_is_list($payload)) {
+            return [
+                'name' => $name,
+                'action' => $action,
+                'applied' => false,
+                'reason' => 'target_json_object_missing_or_invalid',
+                'target_path' => $targetRelativePath,
+            ];
+        }
+
+        $payload['sha256'] = hash_file('sha256', $sourcePath) ?: '';
+        $this->writeJson($targetPath, $payload);
+
+        return [
+            'name' => $name,
+            'action' => $action,
+            'applied' => true,
+            'target_path' => $targetRelativePath,
+            'source_path' => $sourceRelativePath,
+        ];
+    }
+
+    private function mechanicalFixArtifactPath(string $relativePath): ?string
+    {
+        $relativePath = trim(str_replace('\\', '/', $relativePath));
+        if ($relativePath === ''
+            || str_starts_with($relativePath, '/')
+            || str_contains($relativePath, '../')
+            || $relativePath === '..'
+            || ! str_starts_with($relativePath, 'artifacts/big5_result_page_v2_agent/')
+        ) {
+            return null;
+        }
+
+        return base_path($relativePath);
     }
 
     private function failureClassForCheck(string $name): string
@@ -2936,7 +3179,7 @@ final class BigFiveResultPageV2AssetAgent
     /**
      * @return array<string,bool>
      */
-    private function ciInspectorNegativeGuarantees(bool $applyRequested): array
+    private function ciInspectorNegativeGuarantees(bool $applyRequested, bool $applyPerformed = false): array
     {
         return [
             'database_write' => false,
@@ -2953,7 +3196,7 @@ final class BigFiveResultPageV2AssetAgent
             'git_commit_created' => false,
             'github_pr_created' => false,
             'mechanical_fix_apply_requested' => $applyRequested,
-            'mechanical_fix_apply_performed' => false,
+            'mechanical_fix_apply_performed' => $applyPerformed,
             'auto_merge_performed' => false,
         ];
     }
