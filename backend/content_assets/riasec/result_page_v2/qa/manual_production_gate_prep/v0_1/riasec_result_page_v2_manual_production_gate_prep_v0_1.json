@@ -1,0 +1,152 @@
+{
+  "schema_version": "fap.riasec.result_page_v2.manual_production_gate_prep.v0.1",
+  "task_id": "RIASEC-RESULT-V2-MANUAL-GATE-PREP-PACK-01",
+  "created_date": "2026-06-22",
+  "package_type": "manual_gate_preparation_only",
+  "approval_status": "not_approved",
+  "production_import_allowed": false,
+  "production_rollout_allowed": false,
+  "automatic_production_rollout_allowed": false,
+  "references": {
+    "post_deploy_staging_pilot_evidence_pr": 2285,
+    "manual_production_gate_readiness_audit_pr": 2286,
+    "post_deploy_staging_pilot_evidence": "backend/content_assets/riasec/result_page_v2/qa/post_deploy_staging_pilot_evidence/v0_1/riasec_result_page_v2_post_deploy_staging_pilot_evidence_v0_1.json",
+    "manual_production_gate_readiness_audit": "backend/content_assets/riasec/result_page_v2/qa/manual_production_gate_readiness_audit/v0_1/riasec_result_page_v2_manual_production_gate_readiness_audit_v0_1.json"
+  },
+  "required_exact_approval_evidence_fields": [
+    "approval_type",
+    "approved_by",
+    "approved_at",
+    "release_snapshot_id",
+    "release_snapshot_sha256",
+    "deployed_backend_sha",
+    "evidence_refs",
+    "scope.tenant_ids",
+    "scope.form_codes",
+    "scope.locales",
+    "scope.allowlist",
+    "scope.percentage",
+    "scope.max_percentage",
+    "post_deploy_smoke_procedure_id",
+    "rollback_plan_ref",
+    "kill_switch_ref",
+    "no_private_payload_leak_ack",
+    "staging_only_rejection_ack"
+  ],
+  "production_import_approval_checklist": [
+    "release_snapshot_is_production_release_candidate",
+    "production_use_allowed_true_on_approved_snapshot",
+    "ready_for_production_true_on_approved_snapshot",
+    "snapshot_sha256_matches_manifest",
+    "rendered_preview_evidence_passes",
+    "all_surface_pilot_qa_passes",
+    "public_payload_leak_scan_zero_private_leaks",
+    "staging_only_assets_rejected",
+    "production_import_gate_policy_fail_closed_before_import",
+    "cms_write_import_command_separately_reviewed",
+    "no_production_rollout_flag_enabled_as_part_of_import",
+    "exact_human_approval_evidence_recorded"
+  ],
+  "production_rollout_approval_checklist": [
+    "production_import_gate_passed_for_exact_snapshot",
+    "explicit_human_rollout_approval_exists",
+    "production_runtime_and_rollout_flags_intentionally_scoped",
+    "rollout_mode_not_automatic",
+    "tenant_scope_present_or_human_exception_documented",
+    "form_scope_explicit",
+    "locale_scope_explicit",
+    "first_rollout_allowlist_scope_explicit",
+    "percentage_and_max_percentage_explicit",
+    "kill_switch_reachable_and_documented",
+    "rollback_plan_documented_and_operator_executable",
+    "post_deploy_smoke_procedure_id_configured",
+    "post_deploy_smoke_surfaces_complete",
+    "frontend_fallback_content_not_enabled",
+    "cms_production_write_not_bundled"
+  ],
+  "post_deploy_smoke": {
+    "procedure_id_proposal": "riasec_result_page_v2_post_deploy_smoke_v0_1",
+    "required_surfaces": [
+      "result_page",
+      "pdf",
+      "share",
+      "history",
+      "compare",
+      "locked",
+      "free",
+      "low_quality",
+      "fallback"
+    ],
+    "minimum_assertions": [
+      "no_attempt_id_user_id_private_url_private_path",
+      "no_raw_score_score_vector_dimension_vector_percentile",
+      "no_editor_notes_qa_notes_selector_trace_source_refs_internal_metadata",
+      "payload_unavailable_outside_approved_scope",
+      "kill_switch_disables_rollout_path",
+      "release_disable_removes_snapshot_runtime_eligibility",
+      "post_disable_smoke_confirms_fail_closed_behavior"
+    ]
+  },
+  "scoped_rollout_template": {
+    "rollout_scope": {
+      "release_snapshot_id": "",
+      "tenant_ids": [],
+      "form_codes": [
+        "riasec_60"
+      ],
+      "locales": [
+        "zh-CN"
+      ],
+      "allowed_attempt_ids": [],
+      "allowed_user_ids": [],
+      "allowed_anon_ids": [],
+      "allowed_org_ids": [],
+      "percentage": 0,
+      "max_percentage": 0,
+      "mode": "disabled"
+    },
+    "required_flags_for_future_operator_review": {
+      "RIASEC_RESULT_PAGE_V2_PRODUCTION_RUNTIME_ENABLED": false,
+      "RIASEC_RESULT_PAGE_V2_PRODUCTION_ROLLOUT_ENABLED": false,
+      "RIASEC_RESULT_PAGE_V2_PRODUCTION_ROLLOUT_CONFIGURED": false,
+      "RIASEC_RESULT_PAGE_V2_PRODUCTION_MANUAL_APPROVAL_GRANTED": false,
+      "RIASEC_RESULT_PAGE_V2_PRODUCTION_IMPORT_GATE_PASSED": false,
+      "RIASEC_RESULT_PAGE_V2_PRODUCTION_RELEASE_SNAPSHOT_ID": "",
+      "RIASEC_RESULT_PAGE_V2_PRODUCTION_ROLLOUT_MODE": "disabled",
+      "RIASEC_RESULT_PAGE_V2_PRODUCTION_ROLLOUT_PERCENTAGE": 0,
+      "RIASEC_RESULT_PAGE_V2_PRODUCTION_ROLLOUT_MAX_PERCENTAGE": 0,
+      "RIASEC_RESULT_PAGE_V2_PRODUCTION_POST_DEPLOY_SMOKE_PROCEDURE_ID": "riasec_result_page_v2_post_deploy_smoke_v0_1"
+    }
+  },
+  "rollback_kill_switch_checklist": [
+    "kill_switch_config_reference_is_riasec_result_page_v2_production_emergency_disabled",
+    "release_snapshot_disable_mechanism_documented",
+    "disabled_snapshot_ids_can_block_approved_snapshot",
+    "rollout_percentage_can_reset_to_zero",
+    "rollout_mode_can_reset_to_disabled",
+    "production_runtime_can_disable_independently_from_import_evidence",
+    "post_disable_smoke_repeats_required_surfaces",
+    "operator_has_rollback_ownership_and_access_before_rollout",
+    "agent_not_authorized_to_perform_production_rollback_without_explicit_approval"
+  ],
+  "go_no_go": {
+    "manual_gate_preparation_material": true,
+    "production_approval": false,
+    "production_import_allowed_now": false,
+    "production_rollout_allowed_now": false,
+    "automatic_production_rollout_allowed": false,
+    "cms_production_write_allowed": false,
+    "runtime_production_flag_mutation_allowed": false
+  },
+  "negative_guarantees": {
+    "runtime_change_performed": false,
+    "environment_change_performed": false,
+    "cms_write_performed": false,
+    "production_import_performed": false,
+    "production_rollout_performed": false,
+    "production_gate_enabled": false,
+    "staging_only_assets_marked_production_ready": false,
+    "frontend_fallback_added": false,
+    "private_payload_exported": false
+  }
+}
