@@ -26,6 +26,12 @@ final class Mbti64CmsRevisionPromotionService
 
     private const AGENT_PROJECTION_VERSION = 'mbti64.agent_expansion_88_recommendations.v1';
 
+    private const VISIBLE_QUERY_BACKED_3_URLS = [
+        'https://fermatmind.com/en/personality/enfj-a',
+        'https://fermatmind.com/zh/personality/intp-a',
+        'https://fermatmind.com/zh/personality/esfp-a',
+    ];
+
     public function __construct(private readonly Mbti64BackendImportContractPlanner $planner)
     {
     }
@@ -57,7 +63,7 @@ final class Mbti64CmsRevisionPromotionService
      */
     private function buildSummary(array $package, string $sourceSha256, bool $write, array $options): array
     {
-        $contract = $this->promotionContract($package);
+        $contract = $this->promotionContract($package, $options);
         if (($contract['ok'] ?? false) !== true) {
             return array_merge($this->baseSummary($package, $sourceSha256, $write), [
                 'ok' => false,
@@ -140,10 +146,10 @@ final class Mbti64CmsRevisionPromotionService
      * @param  array<string,mixed>  $package
      * @return array<string,mixed>
      */
-    private function promotionContract(array $package): array
+    private function promotionContract(array $package, array $options): array
     {
         if ($this->isAgentProjectionPackage($package)) {
-            return $this->agentProjectionContract($package);
+            return $this->agentProjectionContract($package, $options);
         }
 
         return $this->planner->plan($package);
@@ -163,12 +169,25 @@ final class Mbti64CmsRevisionPromotionService
      * @param  array<string,mixed>  $package
      * @return array<string,mixed>
      */
-    private function agentProjectionContract(array $package): array
+    private function agentProjectionContract(array $package, array $options): array
     {
         $errors = [];
         $warnings = [];
         $summary = is_array($package['summary'] ?? null) ? $package['summary'] : [];
-        $recommendations = $this->recommendations($package);
+        $rawRecommendations = $this->recommendations($package);
+        $recommendations = array_map(
+            static function (array $recommendation, int $index): array {
+                $recommendation['__package_position'] = $index + 1;
+
+                return $recommendation;
+            },
+            $rawRecommendations,
+            array_keys($rawRecommendations)
+        );
+        $visibleQueryBacked3 = (bool) ($options['visible_query_backed_3'] ?? false);
+        $contractRecommendations = $visibleQueryBacked3
+            ? $this->visibleQueryBacked3Recommendations($recommendations)
+            : $recommendations;
 
         if ((string) ($package['artifact'] ?? '') !== self::AGENT_PROJECTION_ARTIFACT) {
             $errors[] = ['field' => 'artifact', 'code' => 'unsupported_package_artifact', 'message' => 'Unexpected MBTI64 agent projection artifact.'];
@@ -185,9 +204,16 @@ final class Mbti64CmsRevisionPromotionService
         if ((int) ($summary['variant_pages'] ?? -1) !== 58 || (int) ($summary['comparison_pages'] ?? -1) !== 30) {
             $errors[] = ['field' => 'summary', 'code' => 'unexpected_page_type_counts', 'message' => 'Expected 58 variant and 30 comparison recommendations.'];
         }
+        if ($visibleQueryBacked3 && count($contractRecommendations) !== 3) {
+            $errors[] = [
+                'field' => 'recommendations',
+                'code' => 'visible_query_backed_3_subset_incomplete',
+                'message' => 'Expected exactly the 3 approved query-backed visible MBTI64 recommendations.',
+            ];
+        }
 
         $rows = [];
-        foreach ($recommendations as $index => $recommendation) {
+        foreach ($contractRecommendations as $index => $recommendation) {
             $identity = $this->identityForRecommendation($recommendation);
             if ($identity === null) {
                 $errors[] = [
@@ -201,6 +227,7 @@ final class Mbti64CmsRevisionPromotionService
 
             $rows[] = [
                 'position' => $index + 1,
+                'package_position' => (int) ($recommendation['__package_position'] ?? ($index + 1)),
                 'url' => (string) $identity['url'],
                 'locale' => (string) $identity['locale'],
                 'page_type' => (string) $identity['page_type'],
@@ -219,6 +246,11 @@ final class Mbti64CmsRevisionPromotionService
             'status' => $errors === [] ? 'pass' : 'fail',
             'artifact' => 'MBTI64-CMS-PROJECTION-PROMOTE-88-CONTRACT-PATCH-01',
             'source_kind' => 'mbti64_agent_projection_draft_v1',
+            'subset' => [
+                'mode' => $visibleQueryBacked3 ? 'visible_query_backed_3' : 'full_agent_projection_88',
+                'enabled' => $visibleQueryBacked3,
+                'allowed_urls' => $visibleQueryBacked3 ? self::VISIBLE_QUERY_BACKED_3_URLS : [],
+            ],
             'row_count' => count($rows),
             'variant_row_count' => count(array_filter($rows, static fn (array $row): bool => ($row['page_type'] ?? null) === 'variant')),
             'comparison_row_count' => count(array_filter($rows, static fn (array $row): bool => ($row['page_type'] ?? null) === 'comparison')),
@@ -267,7 +299,8 @@ final class Mbti64CmsRevisionPromotionService
     {
         if (($contract['source_kind'] ?? null) === 'mbti64_agent_projection_draft_v1') {
             $recommendations = $this->recommendations($package);
-            $recommendation = $recommendations[$position - 1] ?? [];
+            $packagePosition = (int) ($contract['rows'][$position - 1]['package_position'] ?? $position);
+            $recommendation = $recommendations[$packagePosition - 1] ?? [];
 
             return is_array($recommendation) ? $recommendation : [];
         }
@@ -288,6 +321,30 @@ final class Mbti64CmsRevisionPromotionService
             is_array($package['recommendations'] ?? null) ? $package['recommendations'] : [],
             static fn (mixed $item): bool => is_array($item)
         ));
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $recommendations
+     * @return list<array<string,mixed>>
+     */
+    private function visibleQueryBacked3Recommendations(array $recommendations): array
+    {
+        $byUrl = [];
+        foreach ($recommendations as $recommendation) {
+            $url = (string) ($recommendation['target_url'] ?? '');
+            if (in_array($url, self::VISIBLE_QUERY_BACKED_3_URLS, true)) {
+                $byUrl[$url] = $recommendation;
+            }
+        }
+
+        $ordered = [];
+        foreach (self::VISIBLE_QUERY_BACKED_3_URLS as $url) {
+            if (isset($byUrl[$url])) {
+                $ordered[] = $byUrl[$url];
+            }
+        }
+
+        return $ordered;
     }
 
     /**
