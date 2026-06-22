@@ -1,0 +1,24 @@
+{
+  "schema_version": "fap.riasec.result_page_v2.selector_coverage_safety_report.v0.1",
+  "task_id": "RIASEC-RESULT-SELECTOR-COVERAGE-BATCH-01",
+  "run_id": "selector_coverage_batch_20260622T0948Z",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "cms_write_performed": false,
+  "runtime_change_performed": false,
+  "frontend_fallback_allowed": false,
+  "private_payload_exported": false,
+  "forbidden_claim_checks": {
+    "fixed_personality_type": false,
+    "diagnosis_or_treatment": false,
+    "hiring_screening": false,
+    "success_prediction": false,
+    "ability_measurement": false,
+    "raw_or_percentile_leak": false
+  },
+  "public_payload_forbidden_field_hits": [],
+  "share_leak_hits": [],
+  "status": "pass"
+}

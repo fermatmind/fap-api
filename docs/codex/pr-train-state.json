@@ -57148,7 +57148,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-backend-staging-import-handoff-01",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "riasec_result_ops_agent_release_chain",
     "title": "RIASEC-RESULT-BACKEND-STAGING-IMPORT-HANDOFF-01: docs(riasec): add staging import handoff",
     "depends_on": [
@@ -57162,14 +57162,17 @@
       "scope_validation": "passed",
       "pr_created": "passed",
       "github_required_checks": "passed",
-      "pre_merge_scope_recheck": "passed"
+      "pre_merge_scope_recheck": "passed",
+      "github_merge_confirmed": "passed",
+      "origin_main_contains_merge_commit": "passed",
+      "post_merge_cleanup": "passed"
     },
     "failure_reason": null,
-    "commit_sha": "8af3ba6b521cd7bdd287612320a9d7df33974ba5",
+    "commit_sha": "75180ce0a66db84968a5bf51d7698ed3ef8742d8",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2263",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-22T01:47:45Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_auto_rollout_allowed": false,
     "production_cms_write_allowed": false,
     "production_gate_auto_enable_allowed": false,
@@ -57197,6 +57200,12 @@
         "from": "pull_request_open",
         "to": "ready_to_merge",
         "notes": "GitHub required checks passed and pre-merge scope recheck stayed within PR7 allowed files."
+      },
+      {
+        "at": "2026-06-22T09:52:00+08:00",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "notes": "Reconciled before PR8: GitHub PR #2263 is merged, origin/main contains merge commit 75180ce0a66db84968a5bf51d7698ed3ef8742d8, and local/remote branch cleanup was completed."
       }
     ]
   },
@@ -57204,16 +57213,29 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-selector-coverage-batch-01",
     "base": "main",
-    "status": "pending_dependency",
+    "status": "ready_to_merge",
     "train_scope": "riasec_result_ops_agent_release_chain",
     "title": "RIASEC-RESULT-SELECTOR-COVERAGE-BATCH-01: content(riasec): fill selector coverage gaps",
     "depends_on": [
       "RIASEC-RESULT-BACKEND-STAGING-IMPORT-HANDOFF-01"
     ],
-    "checks": {},
-    "failure_reason": null,
-    "commit_sha": "b28ebdf17b37745d6a5dffc46c7ee01c0820b0d6",
-    "pr_url": "https://github.com/fermatmind/fap-api/pull/2264",
+    "checks": {
+      "dependency_pr7_merged": "passed",
+      "jq_empty_touched_json": "passed",
+      "php_artisan_riasec_result_page_v2_agent_audit_strict": "external_blocker_sidecar_registered",
+      "php_artisan_test_filter_RiasecResultPageAssetAgent": "passed",
+      "php_artisan_test_filter_RiasecResultPage": "passed",
+      "git_diff_check": "passed",
+      "scope_validation": "passed",
+      "commit_created": "passed",
+      "branch_pushed": "passed",
+      "pr_created": "passed",
+      "github_required_checks": "passed",
+      "pre_merge_scope_recheck": "passed"
+    },
+    "failure_reason": "Strict audit command returns exit code 1 only for pre-existing RIASEC leak-scan hits outside selector_coverage_batch_20260622T0948Z; current PR new hit count is 0. Registered sidecar issue at backend/content_assets/riasec/result_page_v2/qa/sidecar_issues/strict_audit_preexisting_leak_scan_20260622.json per user continuation protocol.",
+    "commit_sha": "2737fb131d9316eed77590d80314b5ef26e07b1d",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2265",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -57226,6 +57248,30 @@
         "from": "missing_from_manifest",
         "to": "pending_dependency",
         "notes": "Initialized from explicit RIASEC ops agent and release-chain /goal authorization."
+      },
+      {
+        "at": "2026-06-22T10:11:00+08:00",
+        "from": "pending_dependency",
+        "to": "local_checks_passed_with_external_sidecar",
+        "notes": "PR7 dependency reconciled merged. Selector coverage batch assets, selector_ready mirror, QA/safety reports, and PHPUnit coverage added. Strict audit is blocked by historical leak-scan hits not introduced by this PR; sidecar registered and scope validation passed."
+      },
+      {
+        "at": "2026-06-22T10:17:00+08:00",
+        "from": "local_checks_passed_with_external_sidecar",
+        "to": "commit_created",
+        "notes": "Created local commit ea60b4c866ad4c5e87f94f154a13c5fe001185a5 for selector coverage batch with external strict-audit sidecar recorded."
+      },
+      {
+        "at": "2026-06-22T10:24:00+08:00",
+        "from": "local_checks_passed_with_external_sidecar",
+        "to": "pull_request_open",
+        "notes": "Pushed branch and opened GitHub PR #2265. Strict audit external sidecar remains recorded; no CMS/runtime/production change."
+      },
+      {
+        "at": "2026-06-22T10:39:00+08:00",
+        "from": "pull_request_open",
+        "to": "ready_to_merge",
+        "notes": "GitHub checks passed for PR #2265 and pre-merge scope recheck stayed within PR8 allowed files. Strict audit external sidecar remains documented."
       }
     ]
   },
