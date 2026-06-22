@@ -11,7 +11,7 @@ use Throwable;
 final class BigFiveResultPageV2AssetAgentAuditCommand extends Command
 {
     protected $signature = 'big5:result-page-v2-agent
-        {action=audit : Supported actions: audit, generate-candidates, stage-candidates, plan-pr, inspect-ci}
+        {action=audit : Supported actions: audit, generate-candidates, stage-candidates, plan-pr, inspect-ci, plan-merge-cleanup}
         {--run-id= : Stable run identifier for the artifact directory}
         {--artifact-dir= : Optional artifact root; defaults to backend/artifacts/big5_result_page_v2_agent}
         {--content-asset-root= : Optional content asset root for tests}
@@ -23,6 +23,7 @@ final class BigFiveResultPageV2AssetAgentAuditCommand extends Command
         {--branch= : Planned branch for plan-pr}
         {--title= : Planned PR title for plan-pr}
         {--checks-json= : Exported GitHub statusCheckRollup JSON for inspect-ci}
+        {--pr-state-json= : Exported GitHub PR state JSON for plan-merge-cleanup}
         {--apply-mechanical-fixes : Permit inspect-ci to apply supported mechanical fixes}
         {--allow-staging-write : Permit stage-candidates to write the reviewed staging package}
         {--strict : Return non-zero when validator, inventory, source-ledger, or leak checks fail}
@@ -68,11 +69,16 @@ final class BigFiveResultPageV2AssetAgentAuditCommand extends Command
                     'checks_json' => trim((string) $this->option('checks-json')),
                     'apply_mechanical_fixes' => (bool) $this->option('apply-mechanical-fixes'),
                 ]),
+                'plan-merge-cleanup' => $agent->planMergeCleanup([
+                    'run_id' => trim((string) $this->option('run-id')),
+                    'artifact_dir' => trim((string) $this->option('artifact-dir')),
+                    'pr_state_json' => trim((string) $this->option('pr-state-json')),
+                ]),
                 default => null,
             };
 
             if (! is_array($summary)) {
-                $this->error('Unsupported action. Supported actions: audit, generate-candidates, stage-candidates, plan-pr, inspect-ci');
+                $this->error('Unsupported action. Supported actions: audit, generate-candidates, stage-candidates, plan-pr, inspect-ci, plan-merge-cleanup');
 
                 return self::FAILURE;
             }

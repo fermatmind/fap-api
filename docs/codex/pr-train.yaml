@@ -24543,6 +24543,43 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: B5-RESULT-AUTO-MERGE-CLEANUP-01
+    repo: fap-api
+    depends_on:
+      - B5-RESULT-CI-INSPECTOR-MECHANICAL-FIXER-01
+    branch: codex/big5-v2-auto-merge-cleanup
+    title: "B5-RESULT-AUTO-MERGE-CLEANUP-01: Plan Big Five V2 agent merge cleanup"
+    train_scope: big5_result_page_v2_asset_agent_automation
+    status: user_authorized
+    scope:
+      - Add an artifact-only merge/cleanup gate plan for exported GitHub PR state JSON.
+      - Require clean merge state, green completed checks, non-draft PR, and acceptable review state before planning squash merge and cleanup commands.
+      - Keep first version dry-run/artifact-only; no merge, branch deletion, local main sync, or post-merge command execution from the agent.
+    allowed_paths:
+      - backend/app/Console/Commands/BigFiveResultPageV2AssetAgentAuditCommand.php
+      - backend/app/Services/BigFive/ResultPageV2/AssetAgent/BigFiveResultPageV2AssetAgent.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2AssetAgentTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add fap-web copy, generate final frontend payloads, make big5_report_engine_v2 primary, enable production rollout, or touch release/import/rollout gates.
+      - Add weekly ops runner behavior in this PR.
+      - Execute merge, branch deletion, local main sync, or post-merge validation from plan-merge-cleanup.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi
+      - cd backend && mkdir -p artifacts/big5_result_page_v2_agent/testing-merge-cleanup && printf '%s\n' '{"number":2250,"headRefName":"codex/big5-v2-ci-inspector-mechanical-fixer","state":"OPEN","isDraft":false,"mergeStateStatus":"CLEAN","reviewDecision":"","statusCheckRollup":[{"name":"hygiene","status":"COMPLETED","conclusion":"SUCCESS"},{"name":"verify-bigfive","status":"COMPLETED","conclusion":"SUCCESS"}]}' > artifacts/big5_result_page_v2_agent/testing-merge-cleanup/pr-state.json && APP_ENV=testing php artisan big5:result-page-v2-agent plan-merge-cleanup --run-id=merge-cleanup --artifact-dir=artifacts/big5_result_page_v2_agent/testing-merge-cleanup --pr-state-json=artifacts/big5_result_page_v2_agent/testing-merge-cleanup/pr-state.json --json --no-ansi && rm -rf artifacts/big5_result_page_v2_agent/testing-merge-cleanup
+      - git diff --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: RIASEC-RESULT-ASSET-AGENT-RUNBOOK-01
     repo: fap-api
     branch: codex/riasec-result-asset-agent-runbook-01
