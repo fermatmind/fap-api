@@ -27454,3 +27454,43 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: BIG5-CONTROLLED-PILOT-GATE-01
+    repo: fap-api
+    depends_on:
+      - BIG5-RESULT-PAGE-SEO-GEO-CONTROL-HANDOFF-01
+    branch: codex/big5-controlled-pilot-gate
+    title: "BIG5-CONTROLLED-PILOT-GATE-01: Add Big Five controlled pilot gate"
+    train_scope: big5_result_page_agent_readiness_to_pilot
+    status: user_authorized
+    scope:
+      - Add a backend-owned, redacted advisory controlled pilot gate package for Big Five V2.
+      - Require readiness, free full-report runtime QA, analytics handoff, SEO/GEO handoff, M7 gate, and rollback/kill-switch evidence.
+      - Define allowlist-only mode with attempt, user, anonymous session, organization, tenant, form, locale, and scale scope dimensions.
+      - Keep pilot runtime activation, production runtime, CMS, SEO runtime, rollout, import, and deploy gates closed.
+    allowed_paths:
+      - backend/content_assets/big5/result_page_v2/qa/controlled_pilot_gate/**
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2ControlledPilotGateTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify fap-web, frontend result-page copy, CMS, SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, routes, controllers, DB migrations, runtime wrappers, rollout gates, release snapshots, production import gates, dashboards, analytics refresh commands, or deploy workflows.
+      - Store real allowlist identifiers, private links, PDF files, score data, comparative rank data, raw report bodies, user-level rows, or internal runtime objects.
+      - Enable runtime, configure live allowlist values, activate rollout, import production assets, trigger live smoke, or deploy.
+    validation:
+      - cd backend && php artisan test --filter=BigFiveResultPageV2ControlledPilotGateTest --no-ansi
+      - find backend/content_assets/big5/result_page_v2/qa/controlled_pilot_gate/v0_1 -name '*.json' -print -exec python3 -m json.tool {} >/dev/null \;
+      - cd backend/content_assets/big5/result_page_v2/qa/controlled_pilot_gate/v0_1 && shasum -a 256 -c SHA256SUMS
+      - cd backend && vendor/bin/pint --test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2ControlledPilotGateTest.php
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='test_runtime_paths_have_no_uncommitted_diff' --no-ansi
+      - git diff --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
