@@ -230,6 +230,8 @@ jobs:
       DEPLOY_PATH_STG: "/var/www/fap-api-staging"
       HEALTHCHECK_URL_STG: "https://staging.fermatmind.com/api/healthz"
       AUTH_GUEST_CHECK_URL_STG: "https://staging.fermatmind.com/api/v0.3/auth/guest"
+      SSH_RETRY_ATTEMPTS: "3"
+      SSH_RETRY_DELAY_SECONDS: "10"
 
     steps:
       - name: Checkout code
@@ -348,23 +350,70 @@ jobs:
         run: |
           set -euo pipefail
 
-          # ✅ 已删除 -o IdentitiesOnly=yes，确保使用 ssh-agent 中的 key
-          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
-            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-            'whoami; hostname; id'
+          ssh_retry() {
+            local attempt
+            local rc
+            local max_attempts="${SSH_RETRY_ATTEMPTS:-3}"
+            local retry_delay="${SSH_RETRY_DELAY_SECONDS:-10}"
 
-          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
-            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-            "test -d '$DEPLOY_PATH' && echo deploy_path_ok"
+            for attempt in $(seq 1 "$max_attempts"); do
+              set +e
+              ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+                -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$@"
+              rc=$?
+              set -e
+
+              if [ "$rc" -eq 0 ]; then
+                return 0
+              fi
+
+              if [ "$attempt" -ge "$max_attempts" ]; then
+                return "$rc"
+              fi
+
+              echo "SSH attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
+              sleep "$retry_delay"
+            done
+          }
+
+          # ✅ 已删除 -o IdentitiesOnly=yes，确保使用 ssh-agent 中的 key
+          ssh_retry 'whoami; hostname; id'
+
+          ssh_retry "test -d '$DEPLOY_PATH' && echo deploy_path_ok"
 
       - name: Remote deploy lock guard
         if: steps.stale_guard.outputs.skip_deploy != 'true'
         shell: bash
         run: |
           set -euo pipefail
-          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
-            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-            "TARGET='$TARGET' DEPLOY_PATH='$DEPLOY_PATH' bash -s" <<'REMOTE'
+
+          ssh_retry() {
+            local attempt
+            local rc
+            local max_attempts="${SSH_RETRY_ATTEMPTS:-3}"
+            local retry_delay="${SSH_RETRY_DELAY_SECONDS:-10}"
+
+            for attempt in $(seq 1 "$max_attempts"); do
+              set +e
+              ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+                -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$@"
+              rc=$?
+              set -e
+
+              if [ "$rc" -eq 0 ]; then
+                return 0
+              fi
+
+              if [ "$attempt" -ge "$max_attempts" ]; then
+                return "$rc"
+              fi
+
+              echo "SSH attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
+              sleep "$retry_delay"
+            done
+          }
+
+          ssh_retry "TARGET='$TARGET' DEPLOY_PATH='$DEPLOY_PATH' bash -s" <<'REMOTE'
           set -euo pipefail
 
           LOCK="$DEPLOY_PATH/.dep/deploy.lock"
@@ -440,21 +489,71 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
-            -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-            "cd '$DEPLOY_PATH/current/backend' && php artisan queue:restart"
+
+          ssh_retry() {
+            local attempt
+            local rc
+            local max_attempts="${SSH_RETRY_ATTEMPTS:-3}"
+            local retry_delay="${SSH_RETRY_DELAY_SECONDS:-10}"
+
+            for attempt in $(seq 1 "$max_attempts"); do
+              set +e
+              ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+                -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$@"
+              rc=$?
+              set -e
+
+              if [ "$rc" -eq 0 ]; then
+                return 0
+              fi
+
+              if [ "$attempt" -ge "$max_attempts" ]; then
+                return "$rc"
+              fi
+
+              echo "SSH attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
+              sleep "$retry_delay"
+            done
+          }
+
+          ssh_retry "cd '$DEPLOY_PATH/current/backend' && php artisan queue:restart"
 
       - name: Healthcheck (post deploy)
         if: steps.stale_guard.outputs.skip_deploy != 'true'
         shell: bash
         run: |
           set -euo pipefail
+
+          ssh_retry() {
+            local attempt
+            local rc
+            local max_attempts="${SSH_RETRY_ATTEMPTS:-3}"
+            local retry_delay="${SSH_RETRY_DELAY_SECONDS:-10}"
+
+            for attempt in $(seq 1 "$max_attempts"); do
+              set +e
+              ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+                -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$@"
+              rc=$?
+              set -e
+
+              if [ "$rc" -eq 0 ]; then
+                return 0
+              fi
+
+              if [ "$attempt" -ge "$max_attempts" ]; then
+                return "$rc"
+              fi
+
+              echo "SSH attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
+              sleep "$retry_delay"
+            done
+          }
+
           echo "Healthcheck: $HEALTHCHECK_URL"
           HEALTHCHECK_HOST="$(echo "$HEALTHCHECK_URL" | awk -F[/:] '{print $4}')"
           for i in 1 2 3 4 5 6 7 8 9 10; do
-            if ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
-              -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-              "curl -fsS --resolve '$HEALTHCHECK_HOST:443:127.0.0.1' 'https://$HEALTHCHECK_HOST/api/healthz' | jq -e '.ok==true'" >/dev/null; then
+            if ssh_retry "curl -fsS --resolve '$HEALTHCHECK_HOST:443:127.0.0.1' 'https://$HEALTHCHECK_HOST/api/healthz' | jq -e '.ok==true'" >/dev/null; then
               exit 0
             fi
             sleep 3
@@ -467,12 +566,37 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+
+          ssh_retry() {
+            local attempt
+            local rc
+            local max_attempts="${SSH_RETRY_ATTEMPTS:-3}"
+            local retry_delay="${SSH_RETRY_DELAY_SECONDS:-10}"
+
+            for attempt in $(seq 1 "$max_attempts"); do
+              set +e
+              ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+                -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$@"
+              rc=$?
+              set -e
+
+              if [ "$rc" -eq 0 ]; then
+                return 0
+              fi
+
+              if [ "$attempt" -ge "$max_attempts" ]; then
+                return "$rc"
+              fi
+
+              echo "SSH attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
+              sleep "$retry_delay"
+            done
+          }
+
           echo "Auth guest contract: $AUTH_GUEST_CHECK_URL"
           AUTH_HOST="$(echo "$AUTH_GUEST_CHECK_URL" | awk -F[/:] '{print $4}')"
           for i in 1 2 3 4 5; do
-            if ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
-              -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
-              "curl -fsS --resolve '$AUTH_HOST:443:127.0.0.1' -H 'Content-Type: application/json' -X POST 'https://$AUTH_HOST/api/v0.3/auth/guest' --data '{\"anon_id\":\"deploy_contract_probe\"}' | jq -e '.ok==true and .anon_id==\"deploy_contract_probe\"'" >/dev/null; then
+            if ssh_retry "curl -fsS --resolve '$AUTH_HOST:443:127.0.0.1' -H 'Content-Type: application/json' -X POST 'https://$AUTH_HOST/api/v0.3/auth/guest' --data '{\"anon_id\":\"deploy_contract_probe\"}' | jq -e '.ok==true and .anon_id==\"deploy_contract_probe\"'" >/dev/null; then
               exit 0
             fi
             sleep 2
@@ -507,8 +631,29 @@ jobs:
           LOGIN_URL="https://${OPS_HOST}/ops/login"
 
           ssh_remote() {
-            ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
-              -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$1"
+            local attempt
+            local rc
+            local max_attempts="${SSH_RETRY_ATTEMPTS:-3}"
+            local retry_delay="${SSH_RETRY_DELAY_SECONDS:-10}"
+
+            for attempt in $(seq 1 "$max_attempts"); do
+              set +e
+              ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+                -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$1"
+              rc=$?
+              set -e
+
+              if [ "$rc" -eq 0 ]; then
+                return 0
+              fi
+
+              if [ "$attempt" -ge "$max_attempts" ]; then
+                return "$rc"
+              fi
+
+              echo "SSH attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
+              sleep "$retry_delay"
+            done
           }
 
           fetch_headers() {
@@ -599,8 +744,29 @@ jobs:
           APP_JS_URL="https://${OPS_HOST}/js/filament/filament/app.js"
 
           ssh_remote() {
-            ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
-              -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$1"
+            local attempt
+            local rc
+            local max_attempts="${SSH_RETRY_ATTEMPTS:-3}"
+            local retry_delay="${SSH_RETRY_DELAY_SECONDS:-10}"
+
+            for attempt in $(seq 1 "$max_attempts"); do
+              set +e
+              ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+                -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$1"
+              rc=$?
+              set -e
+
+              if [ "$rc" -eq 0 ]; then
+                return 0
+              fi
+
+              if [ "$attempt" -ge "$max_attempts" ]; then
+                return "$rc"
+              fi
+
+              echo "SSH attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
+              sleep "$retry_delay"
+            done
           }
 
           assert_http_200() {
