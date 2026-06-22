@@ -471,6 +471,103 @@ final class BigFiveResultPageV2AssetAgent
     }
 
     /**
+     * @param  array{
+     *   run_id?:string,
+     *   artifact_dir?:string,
+     *   checks_json?:string,
+     *   apply_mechanical_fixes?:bool
+     * }  $options
+     * @return array<string,mixed>
+     */
+    public function inspectCi(array $options = []): array
+    {
+        $runId = $this->sanitizeRunId((string) ($options['run_id'] ?? ''));
+        $artifactDir = $this->artifactDir((string) ($options['artifact_dir'] ?? ''), $runId);
+        $checksJson = trim((string) ($options['checks_json'] ?? '')) === ''
+            ? ''
+            : $this->absolutePath((string) ($options['checks_json'] ?? ''));
+        $applyMechanicalFixes = ($options['apply_mechanical_fixes'] ?? false) === true;
+
+        $this->ensureDirectory($artifactDir);
+
+        $checks = $this->readCheckRollup($checksJson);
+        $classifications = array_map(
+            fn (array $check): array => $this->classifyCheckRun($check),
+            $checks
+        );
+        $failed = array_values(array_filter($classifications, static fn (array $check): bool => ($check['state'] ?? '') === 'failed'));
+        $repairable = array_values(array_filter($failed, static fn (array $check): bool => ($check['mechanical_fix_allowed'] ?? false) === true));
+        $blocked = array_values(array_filter($failed, static fn (array $check): bool => ($check['mechanical_fix_allowed'] ?? false) !== true));
+        $repairLogEntries = array_map(
+            static fn (array $check): string => (string) ($check['name'] ?? 'unknown').': '.(string) ($check['failure_class'] ?? 'unknown'),
+            $failed
+        );
+
+        $report = [
+            'schema_version' => self::SCHEMA_VERSION,
+            'task' => 'ci_inspector',
+            'runtime_use' => 'not_runtime',
+            'production_use_allowed' => false,
+            'ready_for_pilot' => false,
+            'ready_for_runtime' => false,
+            'ready_for_production' => false,
+            'checks_json' => $checksJson === '' ? null : $this->redactPath($checksJson),
+            'check_count' => count($classifications),
+            'failed_check_count' => count($failed),
+            'mechanical_fix_candidate_count' => count($repairable),
+            'blocked_failure_count' => count($blocked),
+            'checks' => $classifications,
+            'negative_guarantees' => $this->ciInspectorNegativeGuarantees($applyMechanicalFixes),
+        ];
+        $fixPlan = [
+            'schema_version' => self::SCHEMA_VERSION,
+            'task' => 'mechanical_fix_plan',
+            'runtime_use' => 'not_runtime',
+            'production_use_allowed' => false,
+            'apply_requested' => $applyMechanicalFixes,
+            'apply_performed' => false,
+            'allowed_failure_classes' => ['schema', 'checksum', 'format', 'scope'],
+            'candidates' => $repairable,
+            'blocked_failures' => $blocked,
+            'negative_guarantees' => $this->ciInspectorNegativeGuarantees($applyMechanicalFixes),
+        ];
+        $repairLog = [
+            'schema_version' => self::SCHEMA_VERSION,
+            'task' => 'ci_inspector_repair_log',
+            'runtime_use' => 'not_runtime',
+            'production_use_allowed' => false,
+            'repair_required' => $failed !== [],
+            'entries' => $repairLogEntries,
+        ];
+
+        $artifacts = [
+            'ci_inspection_report.json' => $this->writeJson($artifactDir.'/ci_inspection_report.json', $report),
+            'mechanical_fix_plan.json' => $this->writeJson($artifactDir.'/mechanical_fix_plan.json', $fixPlan),
+            'repair_log.json' => $this->writeJson($artifactDir.'/repair_log.json', $repairLog),
+        ];
+
+        return [
+            'schema_version' => self::SCHEMA_VERSION,
+            'ok' => $checks !== [],
+            'status' => $checks === [] ? 'blocked' : 'success',
+            'run_id' => $runId,
+            'artifact_dir' => $artifactDir,
+            'artifacts' => $artifacts,
+            'summary' => [
+                'check_count' => count($classifications),
+                'failed_check_count' => count($failed),
+                'mechanical_fix_candidate_count' => count($repairable),
+                'blocked_failure_count' => count($blocked),
+                'apply_performed' => false,
+                'ready_for_pilot' => false,
+                'ready_for_runtime' => false,
+                'ready_for_production' => false,
+            ],
+            'negative_guarantees' => $this->ciInspectorNegativeGuarantees($applyMechanicalFixes),
+        ];
+    }
+
+    /**
      * @return array<string,mixed>
      */
     private function buildInventory(string $contentAssetRoot, string $sourceLedgerDir): array
@@ -1756,6 +1853,87 @@ final class BigFiveResultPageV2AssetAgent
         return implode(PHP_EOL, $lines).PHP_EOL;
     }
 
+    /**
+     * @return list<array<string,mixed>>
+     */
+    private function readCheckRollup(string $checksJson): array
+    {
+        if ($checksJson === '' || ! is_file($checksJson)) {
+            return [];
+        }
+
+        $decoded = json_decode((string) file_get_contents($checksJson), true);
+        if (! is_array($decoded)) {
+            return [];
+        }
+
+        $rollup = is_array($decoded['statusCheckRollup'] ?? null)
+            ? (array) $decoded['statusCheckRollup']
+            : $decoded;
+
+        $checks = [];
+        foreach ($rollup as $row) {
+            if (is_array($row)) {
+                $checks[] = $row;
+            }
+        }
+
+        return $checks;
+    }
+
+    /**
+     * @param  array<string,mixed>  $check
+     * @return array<string,mixed>
+     */
+    private function classifyCheckRun(array $check): array
+    {
+        $name = (string) ($check['name'] ?? $check['context'] ?? 'unknown');
+        $status = strtoupper((string) ($check['status'] ?? ''));
+        $conclusion = strtoupper((string) ($check['conclusion'] ?? ''));
+        $state = ($status === 'COMPLETED' && in_array($conclusion, ['FAILURE', 'ERROR', 'TIMED_OUT', 'CANCELLED', 'ACTION_REQUIRED'], true))
+            ? 'failed'
+            : (($status === 'COMPLETED' && in_array($conclusion, ['SUCCESS', 'SKIPPED', 'NEUTRAL'], true)) ? 'passed' : 'pending');
+        $failureClass = $state === 'failed' ? $this->failureClassForCheck($name) : 'none';
+
+        return [
+            'name' => $name,
+            'status' => $status,
+            'conclusion' => $conclusion,
+            'state' => $state,
+            'failure_class' => $failureClass,
+            'mechanical_fix_allowed' => in_array($failureClass, ['schema', 'checksum', 'format', 'scope'], true),
+            'mechanical_fix_policy' => $this->mechanicalFixPolicy($failureClass),
+        ];
+    }
+
+    private function failureClassForCheck(string $name): string
+    {
+        $normalized = strtolower($name);
+
+        return match (true) {
+            str_contains($normalized, 'schema') => 'schema',
+            str_contains($normalized, 'checksum') || str_contains($normalized, 'hash') => 'checksum',
+            str_contains($normalized, 'format') || str_contains($normalized, 'hygiene') => 'format',
+            str_contains($normalized, 'scope') || str_contains($normalized, 'content-pack') => 'scope',
+            str_contains($normalized, 'semgrep') || str_contains($normalized, 'secret') => 'security',
+            str_contains($normalized, 'supply-chain') => 'supply_chain',
+            str_contains($normalized, 'verify') || str_contains($normalized, 'test') => 'test',
+            default => 'unknown',
+        };
+    }
+
+    private function mechanicalFixPolicy(string $failureClass): string
+    {
+        return match ($failureClass) {
+            'schema' => 'mechanical_schema_regeneration_only',
+            'checksum' => 'mechanical_checksum_refresh_only',
+            'format' => 'mechanical_formatting_only',
+            'scope' => 'mechanical_scope_manifest_or_artifact_list_only',
+            'none' => 'not_needed',
+            default => 'manual_inspection_required',
+        };
+    }
+
     private function ensureDirectory(string $path): void
     {
         if (! is_dir($path) && ! mkdir($path, 0775, true) && ! is_dir($path)) {
@@ -1921,6 +2099,31 @@ final class BigFiveResultPageV2AssetAgent
             'git_commit_created' => false,
             'github_pr_created' => false,
             'github_checks_polled' => false,
+            'auto_merge_performed' => false,
+        ];
+    }
+
+    /**
+     * @return array<string,bool>
+     */
+    private function ciInspectorNegativeGuarantees(bool $applyRequested): array
+    {
+        return [
+            'database_write' => false,
+            'cms_write' => false,
+            'content_assets_write' => false,
+            'frontend_copy_write' => false,
+            'final_result_payload_generation' => false,
+            'runtime_flag_change' => false,
+            'release_snapshot_change' => false,
+            'production_import_gate_change' => false,
+            'rollout_gate_change' => false,
+            'github_checks_read_live' => false,
+            'git_branch_created' => false,
+            'git_commit_created' => false,
+            'github_pr_created' => false,
+            'mechanical_fix_apply_requested' => $applyRequested,
+            'mechanical_fix_apply_performed' => false,
             'auto_merge_performed' => false,
         ];
     }

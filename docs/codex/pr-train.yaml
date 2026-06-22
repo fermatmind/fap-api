@@ -24505,6 +24505,44 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: B5-RESULT-CI-INSPECTOR-MECHANICAL-FIXER-01
+    repo: fap-api
+    depends_on:
+      - B5-RESULT-AUTO-PR-ORCHESTRATOR-01
+    branch: codex/big5-v2-ci-inspector-mechanical-fixer
+    title: "B5-RESULT-CI-INSPECTOR-MECHANICAL-FIXER-01: Inspect Big Five V2 agent PR checks"
+    train_scope: big5_result_page_v2_asset_agent_automation
+    status: user_authorized
+    scope:
+      - Add an artifact-only CI inspector for exported GitHub check rollup JSON.
+      - Classify failures into schema, checksum, format, scope, security, supply-chain, test, or unknown buckets.
+      - Generate a mechanical fix plan that only marks schema/checksum/format/scope failures as mechanically repairable.
+      - Keep first version dry-run/artifact-only; no live GitHub reads and no source mutation or auto merge.
+    allowed_paths:
+      - backend/app/Console/Commands/BigFiveResultPageV2AssetAgentAuditCommand.php
+      - backend/app/Services/BigFive/ResultPageV2/AssetAgent/BigFiveResultPageV2AssetAgent.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2AssetAgentTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add fap-web copy, generate final frontend payloads, make big5_report_engine_v2 primary, enable production rollout, or touch release/import/rollout gates.
+      - Add auto merge, cleanup, or weekly ops runner behavior in this PR.
+      - Apply non-mechanical fixes, inspect secrets beyond check names/statuses, or mutate source files from inspect-ci.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi
+      - cd backend && mkdir -p artifacts/big5_result_page_v2_agent/testing-ci-inspector && printf '%s\n' '{"statusCheckRollup":[{"name":"hygiene","status":"COMPLETED","conclusion":"FAILURE"},{"name":"Semgrep blocking secrets","status":"COMPLETED","conclusion":"FAILURE"},{"name":"verify-bigfive","status":"COMPLETED","conclusion":"SUCCESS"}]}' > artifacts/big5_result_page_v2_agent/testing-ci-inspector/checks.json && APP_ENV=testing php artisan big5:result-page-v2-agent inspect-ci --run-id=ci-inspection --artifact-dir=artifacts/big5_result_page_v2_agent/testing-ci-inspector --checks-json=artifacts/big5_result_page_v2_agent/testing-ci-inspector/checks.json --json --no-ansi && rm -rf artifacts/big5_result_page_v2_agent/testing-ci-inspector
+      - git diff --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: RIASEC-RESULT-ASSET-AGENT-RUNBOOK-01
     repo: fap-api
     branch: codex/riasec-result-asset-agent-runbook-01

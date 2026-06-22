@@ -11,7 +11,7 @@ use Throwable;
 final class BigFiveResultPageV2AssetAgentAuditCommand extends Command
 {
     protected $signature = 'big5:result-page-v2-agent
-        {action=audit : Supported actions: audit, generate-candidates, stage-candidates, plan-pr}
+        {action=audit : Supported actions: audit, generate-candidates, stage-candidates, plan-pr, inspect-ci}
         {--run-id= : Stable run identifier for the artifact directory}
         {--artifact-dir= : Optional artifact root; defaults to backend/artifacts/big5_result_page_v2_agent}
         {--content-asset-root= : Optional content asset root for tests}
@@ -22,6 +22,8 @@ final class BigFiveResultPageV2AssetAgentAuditCommand extends Command
         {--pr-id= : Planned PR id for plan-pr}
         {--branch= : Planned branch for plan-pr}
         {--title= : Planned PR title for plan-pr}
+        {--checks-json= : Exported GitHub statusCheckRollup JSON for inspect-ci}
+        {--apply-mechanical-fixes : Permit inspect-ci to apply supported mechanical fixes}
         {--allow-staging-write : Permit stage-candidates to write the reviewed staging package}
         {--strict : Return non-zero when validator, inventory, source-ledger, or leak checks fail}
         {--json : Emit machine-readable summary}';
@@ -60,11 +62,17 @@ final class BigFiveResultPageV2AssetAgentAuditCommand extends Command
                     'branch' => trim((string) $this->option('branch')),
                     'title' => trim((string) $this->option('title')),
                 ]),
+                'inspect-ci' => $agent->inspectCi([
+                    'run_id' => trim((string) $this->option('run-id')),
+                    'artifact_dir' => trim((string) $this->option('artifact-dir')),
+                    'checks_json' => trim((string) $this->option('checks-json')),
+                    'apply_mechanical_fixes' => (bool) $this->option('apply-mechanical-fixes'),
+                ]),
                 default => null,
             };
 
             if (! is_array($summary)) {
-                $this->error('Unsupported action. Supported actions: audit, generate-candidates, stage-candidates, plan-pr');
+                $this->error('Unsupported action. Supported actions: audit, generate-candidates, stage-candidates, plan-pr, inspect-ci');
 
                 return self::FAILURE;
             }

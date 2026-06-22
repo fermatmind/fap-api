@@ -345,6 +345,102 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
         }
     }
 
+    public function test_inspect_ci_classifies_failures_and_only_plans_mechanical_fixes(): void
+    {
+        $artifactRoot = base_path('artifacts/big5_result_page_v2_agent/unit-ci-inspector');
+
+        $this->deleteDirectory($artifactRoot);
+        mkdir($artifactRoot, 0777, true);
+
+        try {
+            $checksPath = $artifactRoot.'/checks.json';
+            file_put_contents($checksPath, json_encode([
+                'statusCheckRollup' => [
+                    [
+                        'name' => 'hygiene',
+                        'status' => 'COMPLETED',
+                        'conclusion' => 'FAILURE',
+                    ],
+                    [
+                        'name' => 'content-pack-build-validate',
+                        'status' => 'COMPLETED',
+                        'conclusion' => 'FAILURE',
+                    ],
+                    [
+                        'name' => 'Semgrep blocking secrets',
+                        'status' => 'COMPLETED',
+                        'conclusion' => 'FAILURE',
+                    ],
+                    [
+                        'name' => 'verify-bigfive',
+                        'status' => 'COMPLETED',
+                        'conclusion' => 'SUCCESS',
+                    ],
+                ],
+            ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES).PHP_EOL);
+
+            $this->artisan('big5:result-page-v2-agent', [
+                'action' => 'inspect-ci',
+                '--run-id' => 'ci-inspection',
+                '--artifact-dir' => $artifactRoot,
+                '--checks-json' => $checksPath,
+                '--json' => true,
+            ])->assertExitCode(0);
+
+            $runDir = $artifactRoot.'/ci-inspection';
+            foreach ([
+                'ci_inspection_report.json',
+                'mechanical_fix_plan.json',
+                'repair_log.json',
+            ] as $filename) {
+                $this->assertFileExists($runDir.'/'.$filename);
+            }
+
+            $report = $this->readJson($runDir.'/ci_inspection_report.json');
+            $fixPlan = $this->readJson($runDir.'/mechanical_fix_plan.json');
+
+            $this->assertSame('ci_inspector', $report['task'] ?? null);
+            $this->assertSame('not_runtime', $report['runtime_use'] ?? null);
+            $this->assertFalse((bool) ($report['production_use_allowed'] ?? true));
+            $this->assertSame(4, (int) ($report['check_count'] ?? 0));
+            $this->assertSame(3, (int) ($report['failed_check_count'] ?? 0));
+            $this->assertSame(2, (int) ($report['mechanical_fix_candidate_count'] ?? 0));
+            $this->assertSame(1, (int) ($report['blocked_failure_count'] ?? 0));
+
+            $this->assertSame('mechanical_fix_plan', $fixPlan['task'] ?? null);
+            $this->assertFalse((bool) ($fixPlan['apply_requested'] ?? true));
+            $this->assertFalse((bool) ($fixPlan['apply_performed'] ?? true));
+            $this->assertCount(2, (array) ($fixPlan['candidates'] ?? []));
+            $this->assertCount(1, (array) ($fixPlan['blocked_failures'] ?? []));
+            $this->assertSame('security', data_get($fixPlan, 'blocked_failures.0.failure_class'));
+
+            foreach ([
+                'github_checks_read_live',
+                'git_branch_created',
+                'git_commit_created',
+                'github_pr_created',
+                'mechanical_fix_apply_performed',
+                'auto_merge_performed',
+                'runtime_flag_change',
+                'production_import_gate_change',
+                'rollout_gate_change',
+            ] as $guarantee) {
+                $this->assertFalse((bool) data_get($report, "negative_guarantees.{$guarantee}", true), $guarantee);
+            }
+
+            $allArtifacts = implode("\n", [
+                (string) file_get_contents($runDir.'/ci_inspection_report.json'),
+                (string) file_get_contents($runDir.'/mechanical_fix_plan.json'),
+                (string) file_get_contents($runDir.'/repair_log.json'),
+            ]);
+            foreach (['private_url', 'attempt_id', 'raw_score', 'percentile', 'fixed_type', 'user_confirmed_type', 'type_code'] as $forbiddenToken) {
+                $this->assertStringNotContainsString($forbiddenToken, $allArtifacts);
+            }
+        } finally {
+            $this->deleteDirectory($artifactRoot);
+        }
+    }
+
     public function test_stage_candidates_fails_closed_without_human_review_manifest(): void
     {
         $artifactRoot = $this->tempDir('big5-v2-agent-stage-missing-review');
