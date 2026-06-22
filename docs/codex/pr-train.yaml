@@ -26607,3 +26607,192 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: B5-RESULT-RUNNER-SOP-RUNBOOK-01
+    repo: fap-api
+    branch: codex/big5-v2-runner-sop-runbook
+    title: "B5-RESULT-RUNNER-SOP-RUNBOOK-01: Document Big Five V2 agent execution runner SOP"
+    train_scope: big5_result_page_v2_asset_agent_execution_runner
+    status: user_authorized
+    scope:
+      - Add backend runbook/SOP for the real execution sequence audit -> generate-candidates -> stage-candidates -> plan-pr -> execute-github-mutation -> inspect-ci -> plan-merge-cleanup -> execute-github-mutation.
+      - Include exact command templates for simulate and live modes.
+      - Document redaction, artifact retention, sidecar issue rules, failure attribution, and stop/continue rules.
+      - Make clear that nightly/weekly scheduled jobs do not run live GitHub mutation.
+    allowed_paths:
+      - backend/docs/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify backend runtime code.
+      - Modify scheduler.
+      - Open live GitHub mutation from this PR.
+    validation:
+      - git diff --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: B5-RESULT-LIVE-DRY-RUN-PILOT-01
+    repo: fap-api
+    depends_on:
+      - B5-RESULT-RUNNER-SOP-RUNBOOK-01
+    branch: codex/big5-v2-live-dry-run-pilot
+    title: "B5-RESULT-LIVE-DRY-RUN-PILOT-01: Record Big Five V2 live PR mutation pilot"
+    train_scope: big5_result_page_v2_asset_agent_execution_runner
+    status: user_authorized
+    scope:
+      - Use a no-production-impact artifact-only pilot run to validate live GitHub mutation path.
+      - The live runner may create branch, commit, push, and create a pilot artifact PR.
+      - Do not merge the pilot artifact PR in this PR.
+      - Record redacted evidence including created branch, PR URL, command summary, preflight, scope validation, and negative guarantees.
+    allowed_paths:
+      - backend/docs/**
+      - backend/artifacts/big5_result_page_v2_agent/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify agent runtime code unless required to fix a bug introduced by this PR.
+      - Modify content_assets runtime packages.
+      - Merge the live-created pilot artifact PR.
+      - Touch production/import/rollout gates.
+    validation:
+      - cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent generate-candidates --run-id=live-dry-run-source --artifact-dir=artifacts/big5_result_page_v2_agent/testing-live-dry-run --json --no-ansi
+      - cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent plan-pr --run-id=live-dry-run-plan --artifact-dir=artifacts/big5_result_page_v2_agent/testing-live-dry-run --source-run-dir=artifacts/big5_result_page_v2_agent/testing-live-dry-run/live-dry-run-source --pr-id=B5-RESULT-LIVE-DRY-RUN-ARTIFACT-01 --branch=codex/big5-v2-live-dry-run-artifact --json --no-ansi
+      - cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent execute-github-mutation --run-id=live-dry-run-execution --artifact-dir=artifacts/big5_result_page_v2_agent/testing-live-dry-run --execution-plan-json=artifacts/big5_result_page_v2_agent/testing-live-dry-run/live-dry-run-plan/auto_pr_orchestration_plan.json --repo-root=<repo-root> --github-repo=fermatmind/fap-api --mutation-mode=live --allow-github-mutation --json --no-ansi
+      - git diff --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: B5-RESULT-AUTO-CHECK-POLLER-01
+    repo: fap-api
+    depends_on:
+      - B5-RESULT-LIVE-DRY-RUN-PILOT-01
+    branch: codex/big5-v2-auto-check-poller
+    title: "B5-RESULT-AUTO-CHECK-POLLER-01: Add Big Five V2 GitHub check poller artifacts"
+    train_scope: big5_result_page_v2_asset_agent_execution_runner
+    status: user_authorized
+    scope:
+      - Add a controlled poll-github-checks action.
+      - Output redacted statusCheckRollup artifact, pending/failed/success counts, required-check summary, mergeStateStatus, and sidecar blocker classification.
+      - Do not mutate source, branches, PRs, or checks.
+      - Do not auto-fix in this PR.
+    allowed_paths:
+      - backend/app/Console/Commands/BigFiveResultPageV2AssetAgentAuditCommand.php
+      - backend/app/Services/BigFive/ResultPageV2/AssetAgent/BigFiveResultPageV2AssetAgent.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2AssetAgentTest.php
+      - backend/tests/Feature/Console/BigFiveResultPageV2AgentAutomationTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Apply mechanical fixes.
+      - Merge PRs.
+      - Delete branches.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi
+      - cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent poll-github-checks --run-id=check-poller --artifact-dir=artifacts/big5_result_page_v2_agent/testing-check-poller --pr-state-json=<fixture-json> --json --no-ansi
+      - rm -rf backend/artifacts/big5_result_page_v2_agent/testing-check-poller
+      - git diff --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: B5-RESULT-MECHANICAL-FIX-APPLY-01
+    repo: fap-api
+    depends_on:
+      - B5-RESULT-AUTO-CHECK-POLLER-01
+    branch: codex/big5-v2-mechanical-fix-apply
+    title: "B5-RESULT-MECHANICAL-FIX-APPLY-01: Apply limited Big Five V2 mechanical fixes"
+    train_scope: big5_result_page_v2_asset_agent_execution_runner
+    status: user_authorized
+    scope:
+      - Extend inspect-ci / mechanical fix flow to allow only bounded mechanical fixes for schema, checksum, format, and scope manifest/artifact list.
+      - Add explicit allow flag and fail closed by default.
+      - Record repair_log entries for each applied fix.
+      - Reject security, supply-chain, test logic, content semantics, runtime, production, and frontend-copy fixes.
+    allowed_paths:
+      - backend/app/Console/Commands/BigFiveResultPageV2AssetAgentAuditCommand.php
+      - backend/app/Services/BigFive/ResultPageV2/AssetAgent/BigFiveResultPageV2AssetAgent.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2AssetAgentTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Auto-edit user-visible Big Five copy.
+      - Auto-edit production gates.
+      - Auto-edit tests to make failures pass.
+      - Auto-fix security/supply-chain/test failures.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi
+      - cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent inspect-ci --run-id=mechanical-fix --artifact-dir=artifacts/big5_result_page_v2_agent/testing-mechanical-fix --checks-json=<fixture-json> --apply-mechanical-fixes --json --no-ansi
+      - rm -rf backend/artifacts/big5_result_page_v2_agent/testing-mechanical-fix
+      - git diff --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: B5-RESULT-AUTO-MERGE-LIVE-PILOT-01
+    repo: fap-api
+    depends_on:
+      - B5-RESULT-MECHANICAL-FIX-APPLY-01
+    branch: codex/big5-v2-auto-merge-live-pilot
+    title: "B5-RESULT-AUTO-MERGE-LIVE-PILOT-01: Record Big Five V2 live merge cleanup pilot"
+    train_scope: big5_result_page_v2_asset_agent_execution_runner
+    status: user_authorized
+    scope:
+      - Use a low-risk PR created by the live dry-run/pilot flow or another explicitly safe artifact-only PR.
+      - Validate plan-merge-cleanup + execute-github-mutation live path including squash merge, branch cleanup, main sync, and post-merge revalidation.
+      - Record redacted evidence and negative guarantees.
+      - Keep this PR as evidence/runbook hardening, not production rollout.
+    allowed_paths:
+      - backend/docs/**
+      - backend/artifacts/big5_result_page_v2_agent/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Merge any PR that touches runtime/production/import/rollout gates.
+      - Merge any PR with failed required checks.
+      - Merge if scope validation is not green.
+    validation:
+      - cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent plan-merge-cleanup --run-id=merge-pilot-plan --artifact-dir=artifacts/big5_result_page_v2_agent/testing-merge-pilot --pr-state-json=<green-safe-pr-state-json> --json --no-ansi
+      - cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent execute-github-mutation --run-id=merge-pilot-execution --artifact-dir=artifacts/big5_result_page_v2_agent/testing-merge-pilot --execution-plan-json=artifacts/big5_result_page_v2_agent/testing-merge-pilot/merge-pilot-plan/auto_merge_cleanup_plan.json --repo-root=<repo-root> --github-repo=fermatmind/fap-api --mutation-mode=live --allow-github-mutation --json --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi
+      - git diff --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
