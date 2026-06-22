@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-22T11:03:44+08:00",
+  "updated_at": "2026-06-22T11:17:33+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -57357,7 +57357,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-runtime-wrapper-staging-01",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "riasec_result_ops_agent_release_chain",
     "title": "RIASEC-RESULT-RUNTIME-WRAPPER-STAGING-01: feat(riasec): add staging runtime wrapper gate",
     "depends_on": [
@@ -57380,14 +57380,18 @@
       "git_diff_check_after_ci_fix": "passed",
       "github_required_checks_after_ci_fix": "passed",
       "pre_merge_scope_validation": "passed",
-      "pre_merge_git_diff_check": "passed"
+      "pre_merge_git_diff_check": "passed",
+      "post_merge_php_artisan_test_filter_RiasecResultPage": "passed",
+      "post_merge_php_artisan_test_filter_RiasecAssessmentFlowTest": "passed",
+      "post_merge_php_artisan_test_filter_BigFive_runtime_paths": "passed",
+      "main_equals_origin_main": "passed"
     },
     "failure_reason": null,
-    "commit_sha": "471292a70218ca0389990c06ccd149c8622b360d",
+    "commit_sha": "f786c03aaaa6ecd41050f943bdd3e1a6e38dc53e",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2270",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-22T03:10:17Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_auto_rollout_allowed": false,
     "production_cms_write_allowed": false,
     "production_gate_auto_enable_allowed": false,
@@ -57427,6 +57431,12 @@
         "from": "pull_request_open_fix_pushed_pending_checks",
         "to": "ready_to_merge",
         "notes": "GitHub required checks are green on PR #2270. Pre-merge scope validation and git diff --check passed; production rollout remains disabled."
+      },
+      {
+        "at": "2026-06-22T11:17:08+08:00",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "notes": "Reconciled PR #2270 after squash merge. Merge commit f786c03aaaa6ecd41050f943bdd3e1a6e38dc53e is on origin/main; remote/local task branch cleanup and post-merge revalidation passed."
       }
     ]
   },
@@ -57434,13 +57444,21 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-pilot-allowlist-gate-01",
     "base": "main",
-    "status": "pending_dependency",
+    "status": "local_checks_passed",
     "train_scope": "riasec_result_ops_agent_release_chain",
     "title": "RIASEC-RESULT-PILOT-ALLOWLIST-GATE-01: feat(riasec): add pilot allowlist gate",
     "depends_on": [
       "RIASEC-RESULT-RUNTIME-WRAPPER-STAGING-01"
     ],
-    "checks": {},
+    "checks": {
+      "dependency_pr10_merged": "passed",
+      "manifest_scope_correction": "added_backend_app_Services_Report_for_runtime_wrapper_connection",
+      "php_artisan_test_filter_RiasecPilot": "passed",
+      "php_artisan_test_filter_RiasecResultPage": "passed",
+      "php_artisan_test_filter_BigFive_runtime_paths": "passed",
+      "git_diff_check": "passed",
+      "scope_validation": "passed"
+    },
     "failure_reason": null,
     "commit_sha": null,
     "pr_url": null,
@@ -57456,6 +57474,18 @@
         "from": "missing_from_manifest",
         "to": "pending_dependency",
         "notes": "Initialized from explicit RIASEC ops agent and release-chain /goal authorization."
+      },
+      {
+        "at": "2026-06-22T11:17:08+08:00",
+        "from": "pending_dependency",
+        "to": "local_checks_passed",
+        "notes": "Implemented pilot allowlist gate with attempt/user/anon/org/form/locale/environment checks, kill switch, and pilot gate observability. Corrected manifest allowed_paths to include the existing RiasecReportComposer runtime wrapper connection point."
+      },
+      {
+        "at": "2026-06-22T11:17:33+08:00",
+        "from": "local_checks_passed",
+        "to": "local_checks_passed",
+        "notes": "Scope validation passed after manifest allowed_paths correction; changed files are limited to config, Report composer wrapper gate, RiasecPilot test, and pr-train metadata."
       }
     ]
   },
