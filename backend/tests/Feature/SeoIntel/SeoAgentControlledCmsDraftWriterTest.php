@@ -111,6 +111,9 @@ final class SeoAgentControlledCmsDraftWriterTest extends TestCase
         $this->assertSame('SEO Agent controlled draft proposal', $articleRevision->change_note);
         $this->assertSame($sha, data_get($articleRevision->payload_json, 'seo_agent.package_sha256'));
         $this->assertSame('Article Candidate | FermatMind', data_get($articleRevision->payload_json, 'proposal.proposed_seo_title'));
+        $this->assertSame(['Add internal link review target.'], data_get($articleRevision->payload_json, 'proposal.proposed_internal_link_actions'));
+        $this->assertSame('gsc_cohort_artifact', data_get($articleRevision->payload_json, 'proposal.proposal_quality.source'));
+        $this->assertFalse((bool) data_get($articleRevision->payload_json, 'proposal.proposal_quality.slug_generated_copy', true));
 
         $pageRevision = CmsTranslationRevision::query()->firstOrFail();
         $this->assertSame(CmsTranslationRevision::STATUS_DRAFT, $pageRevision->revision_status);
@@ -314,6 +317,15 @@ final class SeoAgentControlledCmsDraftWriterTest extends TestCase
             'target_fields' => ['seo_title', 'seo_description'],
             'proposed_seo_title' => ($targetModel === 'article' ? 'Article Candidate' : 'Content Page Candidate').' | FermatMind',
             'proposed_seo_description' => 'Review candidate with FermatMind guidance.',
+            'proposed_internal_link_actions' => [
+                'Add internal link review target.',
+            ],
+            'proposal_quality' => [
+                'source' => 'gsc_cohort_artifact',
+                'locale_preserved' => true,
+                'slug_generated_copy' => false,
+                'needs_human_approval' => true,
+            ],
             'claim_gate_required' => true,
             'human_approval_required' => true,
             'execution_permission' => false,

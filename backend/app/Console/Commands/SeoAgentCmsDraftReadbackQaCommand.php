@@ -464,14 +464,39 @@ final class SeoAgentCmsDraftReadbackQaCommand extends Command
      */
     private function comparison(string $field, $expected, $actual): array
     {
+        $normalizedExpected = $this->canonicalComparableValue($expected);
+        $normalizedActual = $this->canonicalComparableValue($actual);
+
         return [
             'field' => $field,
-            'matched' => $expected === $actual,
-            'expected_hash' => hash('sha256', json_encode($expected, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?: ''),
-            'actual_hash' => hash('sha256', json_encode($actual, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?: ''),
+            'matched' => $normalizedExpected === $normalizedActual,
+            'expected_hash' => hash('sha256', json_encode($normalizedExpected, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?: ''),
+            'actual_hash' => hash('sha256', json_encode($normalizedActual, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?: ''),
             'expected_summary' => $this->summaryValue($expected),
             'actual_summary' => $this->summaryValue($actual),
         ];
+    }
+
+    /**
+     * @param  mixed  $value
+     * @return mixed
+     */
+    private function canonicalComparableValue($value)
+    {
+        if (! is_array($value)) {
+            return $value;
+        }
+
+        $normalized = [];
+        foreach ($value as $key => $item) {
+            $normalized[$key] = $this->canonicalComparableValue($item);
+        }
+
+        if (! array_is_list($normalized)) {
+            ksort($normalized);
+        }
+
+        return $normalized;
     }
 
     /**

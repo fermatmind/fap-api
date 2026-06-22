@@ -93,6 +93,35 @@ final class SeoAgentCmsDraftReadbackQaTest extends TestCase
     }
 
     #[Test]
+    public function it_normalizes_faq_object_key_order_before_comparing_readback_payload(): void
+    {
+        $article = $this->article();
+        $proposal = $this->proposal((int) $article->id);
+        $packagePath = $this->writePackage([$proposal]);
+        $sha = hash_file('sha256', $packagePath) ?: '';
+        $revision = $this->articleRevision($article, $proposal, $sha, includeOptionalProposalFields: true, reverseFaqKeyOrder: true);
+        $writeEvidencePath = $this->writeEvidence($sha, $proposal['subject_ref'], (int) $revision->id);
+
+        $exitCode = Artisan::call('seo-agent:cms-draft-readback-qa', [
+            '--package' => $packagePath,
+            '--write-evidence' => $writeEvidencePath,
+            '--target' => $proposal['subject_ref'],
+            '--package-sha256' => $sha,
+            '--artifact-dir' => $this->artifactDir(),
+            '--json' => true,
+        ]);
+
+        $summary = json_decode(trim(Artisan::output()), true);
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame('success', $summary['status'] ?? null);
+        $this->assertSame(0, $summary['mismatch_count'] ?? null);
+
+        $artifact = $this->readJson((string) data_get($summary, 'artifact.path'));
+        $this->assertContains('proposal.proposed_faq_items', $artifact['matched_fields'] ?? []);
+        $this->assertSame([], $artifact['qa_findings'] ?? []);
+    }
+
+    #[Test]
     public function it_fails_closed_for_wrong_schema_missing_target_and_forbidden_input(): void
     {
         $article = $this->article();
@@ -270,13 +299,29 @@ final class SeoAgentCmsDraftReadbackQaTest extends TestCase
     /**
      * @param  array<string, mixed>  $proposal
      */
-    private function articleRevision(Article $article, array $proposal, string $packageSha, bool $includeOptionalProposalFields): ArticleRevision
-    {
+    private function articleRevision(
+        Article $article,
+        array $proposal,
+        string $packageSha,
+        bool $includeOptionalProposalFields,
+        bool $reverseFaqKeyOrder = false
+    ): ArticleRevision {
+        $faqItems = $proposal['proposed_faq_items'];
+        if ($reverseFaqKeyOrder) {
+            $faqItems = array_map(
+                static fn (array $item): array => [
+                    'answer' => $item['answer'],
+                    'question' => $item['question'],
+                ],
+                $faqItems
+            );
+        }
+
         $proposalPayload = [
             'safe_path' => $proposal['safe_path'],
             'proposed_seo_title' => $proposal['proposed_seo_title'],
             'proposed_seo_description' => $proposal['proposed_seo_description'],
-            'proposed_faq_items' => $proposal['proposed_faq_items'],
+            'proposed_faq_items' => $faqItems,
             'proposed_canonical_path' => null,
             'proposed_indexability' => null,
         ];

@@ -28,6 +28,7 @@
     "matching article_revision exists for subject_ref + package_sha256 + target_fields",
     "draft revision is not the live published revision",
     "draft revision payload preserves title/meta/FAQ/internal-link/proposal-quality fields when present in the package",
+    "FAQ/object comparison canonicalizes associative key order before hashing",
     "live article state remains published separately from the draft revision"
   ],
   "forbidden_output": [

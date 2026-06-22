@@ -411,6 +411,21 @@ final class SeoAgentCmsDraftWriteCommand extends Command
      */
     private function revisionPayload(array $proposal, string $packageSha, array $targetFields): array
     {
+        $proposalPayload = [
+            'safe_path' => (string) ($proposal['safe_path'] ?? ''),
+            'proposed_seo_title' => $proposal['proposed_seo_title'] ?? null,
+            'proposed_seo_description' => $proposal['proposed_seo_description'] ?? null,
+            'proposed_faq_items' => $proposal['proposed_faq_items'] ?? [],
+            'proposed_canonical_path' => $proposal['proposed_canonical_path'] ?? null,
+            'proposed_indexability' => $proposal['proposed_indexability'] ?? null,
+        ];
+
+        foreach (['proposed_internal_link_actions', 'proposal_quality'] as $optionalField) {
+            if (array_key_exists($optionalField, $proposal)) {
+                $proposalPayload[$optionalField] = $proposal[$optionalField];
+            }
+        }
+
         return [
             'seo_agent' => [
                 'task' => self::TASK,
@@ -423,14 +438,7 @@ final class SeoAgentCmsDraftWriteCommand extends Command
                 'search_submit_allowed' => false,
                 'indexing_request_allowed' => false,
             ],
-            'proposal' => [
-                'safe_path' => (string) ($proposal['safe_path'] ?? ''),
-                'proposed_seo_title' => $proposal['proposed_seo_title'] ?? null,
-                'proposed_seo_description' => $proposal['proposed_seo_description'] ?? null,
-                'proposed_faq_items' => $proposal['proposed_faq_items'] ?? [],
-                'proposed_canonical_path' => $proposal['proposed_canonical_path'] ?? null,
-                'proposed_indexability' => $proposal['proposed_indexability'] ?? null,
-            ],
+            'proposal' => $proposalPayload,
         ];
     }
 
