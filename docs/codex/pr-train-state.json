@@ -58764,7 +58764,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-v2-m8-production-ops-metrics",
     "base": "main",
-    "status": "pr_open",
+    "status": "merged",
     "train_scope": "big5_result_page_v2_production_ops",
     "title": "B5-RESULT-M8-PRODUCTION-OPS-METRICS-01: Connect Big Five V2 weekly ops to production metrics",
     "depends_on": [
@@ -59318,16 +59318,16 @@
         "evidence": "Changed files are limited to the Big Five V2 controlled pilot gate QA package, focused PHPUnit, and docs/codex metadata including #2335 merge reconciliation. No runtime wrapper, controller, route, DB migration, fap-web copy, CMS, SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, search submission, rollout, import, release snapshot, dashboard, analytics refresh command, live smoke, or deploy file changed."
       },
       "github": {
-        "status": "pending",
-        "evidence": "Opened https://github.com/fermatmind/fap-api/pull/2336 on head a5c576b0c58653a2a1f77c016be51f3f8eb677db."
+        "status": "pass",
+        "evidence": "PR #2336 merged at 2026-06-22T17:39:45Z with merge commit 3c4b6b04c164928ce10c60f8bab2386fa5b4fb36; required GitHub checks passed before merge."
       }
     },
     "failure_reason": null,
-    "commit_sha": "a5c576b0c58653a2a1f77c016be51f3f8eb677db",
+    "commit_sha": "e4dd2c82521fe6a9180051d50fcf777991d56ae3",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2336",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-22T17:39:45Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-23T02:40:00Z",
@@ -59343,6 +59343,11 @@
         "at": "2026-06-23T03:05:00Z",
         "status": "pr_open",
         "note": "Opened https://github.com/fermatmind/fap-api/pull/2336 after local validation and scope validation passed."
+      },
+      {
+        "at": "2026-06-22T17:39:45Z",
+        "status": "merged",
+        "note": "PR #2336 merged with merge commit 3c4b6b04c164928ce10c60f8bab2386fa5b4fb36. origin/main contains the merge commit, the remote task branch was deleted, local main was synced, and local cleanup was executed."
       }
     ]
   },
