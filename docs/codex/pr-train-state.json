@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-22T12:30:29+08:00",
+  "updated_at": "2026-06-22T12:39:21+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -56970,7 +56970,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-ops-agent-staging-runner-01",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "riasec_result_ops_agent_release_chain",
     "title": "RIASEC-OPS-AGENT-STAGING-RUNNER-01: feat(riasec): add ops staging runner",
     "depends_on": [
@@ -57676,7 +57676,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-production-rollout-gate-01",
     "base": "main",
-    "status": "github_checks_passed_ready_to_merge",
+    "status": "merged",
     "train_scope": "riasec_result_ops_agent_release_chain",
     "title": "RIASEC-RESULT-PRODUCTION-ROLLOUT-GATE-01: test(riasec): add production rollout gate",
     "depends_on": [
@@ -57703,14 +57703,17 @@
       "php_artisan_test_bigfive_runtime_freeze_guard_after_github_fix": "passed",
       "github_checks_after_scoped_fix": "passed: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2",
       "pre_merge_scope_validation": "passed",
-      "pre_merge_github_merge_state": "CLEAN"
+      "pre_merge_github_merge_state": "CLEAN",
+      "github_merge_confirmed": "passed",
+      "origin_main_contains_merge_commit": "passed",
+      "post_merge_cleanup": "passed"
     },
     "failure_reason": null,
-    "commit_sha": "c0f2885a3286127216ba32ce353a8bbae0d23ad6",
+    "commit_sha": "fb6e64468bc33063b229ca8ff5ced8076ddae088",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2276",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-22T04:35:44Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_auto_rollout_allowed": false,
     "production_cms_write_allowed": false,
     "production_gate_auto_enable_allowed": false,
@@ -57756,6 +57759,12 @@
         "from": "github_checks_failed_scoped_fix_local_passed",
         "to": "github_checks_passed_ready_to_merge",
         "notes": "PR #2276 GitHub checks passed after scoped fix and pre-merge scope validation passed. GitHub mergeStateStatus=CLEAN. Production rollout remains manual-only and unexecuted."
+      },
+      {
+        "at": "2026-06-22T12:39:21+08:00",
+        "from": "github_checks_passed_ready_to_merge",
+        "to": "merged",
+        "notes": "Reconciled post-merge closeout: GitHub reports PR #2276 merged at 2026-06-22T04:35:44Z with merge commit fb6e64468bc33063b229ca8ff5ced8076ddae088; origin/main contains the merge commit; local and remote task branches are cleaned."
       }
     ]
   },
