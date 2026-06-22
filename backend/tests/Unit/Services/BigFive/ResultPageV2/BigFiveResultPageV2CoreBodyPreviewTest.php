@@ -1387,6 +1387,26 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_seo_agent_article_cms_publish_canary_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/SeoAgentArticleCmsPublishCanaryCommand.php',
+            'backend/app/Console/Kernel.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\SeoAgentArticleCmsPublishCanaryCommand;',
+            '+use App\\Console\\Commands\\SeoAgentAutoRollbackGuardCommand;',
+            '-use App\\Console\\Commands\\SeoAgentAutoRollbackGuardCommand;',
+            '+use App\\Console\\Commands\\SeoAgentGscCohortHandoffCommand;',
+            '-use App\\Console\\Commands\\SeoAgentGscCohortHandoffCommand;',
+            '+use App\\Console\\Commands\\SeoAgentGscDraftPublishGateReadinessCommand;',
+            '-use App\\Console\\Commands\\SeoAgentGscDraftPublishGateReadinessCommand;',
+            '+        SeoAgentArticleCmsPublishCanaryCommand::class,',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
+    }
+
     public function test_runtime_freeze_classifier_ignores_seo_agent_l5a_contentpage_publish_canary_files(): void
     {
         $changed = [
@@ -4536,6 +4556,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSeoAgentArticleCmsPublishCanaryFile($file)) {
+                continue;
+            }
+
             if ($this->isSeoAgentCmsPublishAutoCanaryFile($file)) {
                 continue;
             }
@@ -5292,6 +5316,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsSeoAgentWeeklyReadonlyRunnerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentWeeklyDraftWriteAutoOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentCmsPublishCanaryOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsSeoAgentArticleCmsPublishCanaryOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentL5aContentPagePublishCanaryOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentL5aIndexnowSubmitCanaryOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentCmsPublishAutoCanaryOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
@@ -6087,6 +6112,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return in_array($file, [
             'backend/app/Console/Commands/SeoAgentCmsPublishCanaryCommand.php',
+        ], true);
+    }
+
+    private function isSeoAgentArticleCmsPublishCanaryFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/SeoAgentArticleCmsPublishCanaryCommand.php',
         ], true);
     }
 
@@ -8358,6 +8390,28 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if (preg_match('/\bSeoAgentCmsPublishCanaryCommand\b/u', $line) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsSeoAgentArticleCmsPublishCanaryOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            if (preg_match('/\b(MBTI|Mbti|BigFive|Big5|Prewarm|ResultPage|Report)\b/u', $line) === 1) {
+                return false;
+            }
+
+            if (preg_match('/\b(SeoAgentArticleCmsPublishCanaryCommand|SeoAgentAutoRollbackGuardCommand|SeoAgentGscCohortHandoffCommand|SeoAgentGscDraftPublishGateReadinessCommand)\b/u', $line) !== 1) {
                 return false;
             }
         }
