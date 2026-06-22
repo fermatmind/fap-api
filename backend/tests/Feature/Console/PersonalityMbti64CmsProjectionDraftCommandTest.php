@@ -93,7 +93,8 @@ final class PersonalityMbti64CmsProjectionDraftCommandTest extends TestCase
         $this->assertSame(3, $payload['would_create_revision_count']);
         $this->assertSame('visible_query_backed_3', $payload['subset']['mode']);
         $this->assertTrue($payload['subset']['enabled']);
-        $this->assertTrue($payload['subset']['dry_run_only']);
+        $this->assertFalse($payload['subset']['dry_run_only']);
+        $this->assertTrue($payload['subset']['write_allowed_with_strict_approval']);
 
         $plannedUrls = array_map(
             static fn (array $row): string => (string) ($row['url'] ?? ''),
@@ -108,7 +109,7 @@ final class PersonalityMbti64CmsProjectionDraftCommandTest extends TestCase
         $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
     }
 
-    public function test_visible_query_backed_three_is_dry_run_only_and_rejects_write_mode(): void
+    public function test_visible_query_backed_three_write_requires_visible_three_approval_token(): void
     {
         $this->seedAllTargets();
         [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
@@ -121,9 +122,80 @@ final class PersonalityMbti64CmsProjectionDraftCommandTest extends TestCase
         $this->assertSame(1, $exitCode);
         $this->assertFalse($payload['ok']);
         $this->assertFalse($payload['writes_committed']);
-        $this->assertStringContainsString('dry-run only', (string) ($payload['errors'][0]['message'] ?? ''));
+        $this->assertStringContainsString(
+            '--operator-approved=MBTI64-CMS-PROJECTION-DRAFT-VISIBLE-3-WRITE-01 is required',
+            (string) ($payload['errors'][0]['message'] ?? '')
+        );
         $this->assertSame(0, PersonalityProfileRevision::query()->count());
         $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_visible_query_backed_three_write_creates_only_approved_variant_draft_revisions(): void
+    {
+        $targets = $this->seedAllTargets();
+        [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
+        $profileBefore = $this->profileLiveState($targets['en|ENFJ']);
+        $variantBefore = $this->variantLiveState($targets['en|ENFJ-A']);
+        $surfaceCountsBefore = $this->liveSurfaceCounts();
+        $options = $this->writeOptions($packagePath, $qaPath);
+        $options['--visible-query-backed-3'] = true;
+        $options['--operator-approved'] = 'MBTI64-CMS-PROJECTION-DRAFT-VISIBLE-3-WRITE-01';
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', $options);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertFalse($payload['dry_run']);
+        $this->assertTrue($payload['write']);
+        $this->assertTrue($payload['writes_committed']);
+        $this->assertSame(3, $payload['row_count']);
+        $this->assertSame(3, $payload['variant_row_count']);
+        $this->assertSame(0, $payload['comparison_row_count']);
+        $this->assertSame(3, $payload['created_revision_count']);
+        $this->assertSame(0, $payload['skipped_existing_count']);
+        $this->assertSame('visible_query_backed_3', $payload['subset']['mode']);
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(3, PersonalityProfileVariantRevision::query()->count());
+        $this->assertSame($profileBefore, $this->profileLiveState($targets['en|ENFJ']));
+        $this->assertSame($variantBefore, $this->variantLiveState($targets['en|ENFJ-A']));
+        $this->assertSame($surfaceCountsBefore, $this->liveSurfaceCounts());
+
+        $createdUrls = array_map(
+            static fn (array $row): string => (string) ($row['url'] ?? ''),
+            $payload['rows'] ?? []
+        );
+        sort($createdUrls);
+        $expectedUrls = self::VISIBLE_QUERY_BACKED_3_URLS;
+        sort($expectedUrls);
+        $this->assertSame($expectedUrls, $createdUrls);
+
+        foreach (PersonalityProfileVariantRevision::query()->get() as $revision) {
+            $this->assertProjectionSnapshot($revision->snapshot_json);
+        }
+    }
+
+    public function test_visible_query_backed_three_second_write_is_idempotent_for_same_source_hash(): void
+    {
+        $this->seedAllTargets();
+        [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
+        $options = $this->writeOptions($packagePath, $qaPath);
+        $options['--visible-query-backed-3'] = true;
+        $options['--operator-approved'] = 'MBTI64-CMS-PROJECTION-DRAFT-VISIBLE-3-WRITE-01';
+
+        $firstExit = Artisan::call('personality:mbti64-cms-projection-draft', $options);
+        $this->assertSame(0, $firstExit);
+
+        $secondExit = Artisan::call('personality:mbti64-cms-projection-draft', $options);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $secondExit);
+        $this->assertTrue($payload['ok']);
+        $this->assertFalse($payload['writes_committed']);
+        $this->assertSame(0, $payload['created_revision_count']);
+        $this->assertSame(3, $payload['skipped_existing_count']);
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(3, PersonalityProfileVariantRevision::query()->count());
     }
 
     public function test_visible_query_backed_three_fails_closed_when_allowlisted_url_is_missing(): void

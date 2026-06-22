@@ -14,6 +14,8 @@ final class PersonalityMbti64CmsProjectionDraft extends Command
 {
     private const OPERATOR_APPROVAL = 'MBTI64-CMS-PROJECTION-DRAFT-88-01';
 
+    private const VISIBLE_QUERY_BACKED_3_OPERATOR_APPROVAL = 'MBTI64-CMS-PROJECTION-DRAFT-VISIBLE-3-WRITE-01';
+
     private const WRITE_SAFETY_FLAGS = [
         'draft-only',
         'no-publish',
@@ -28,7 +30,7 @@ final class PersonalityMbti64CmsProjectionDraft extends Command
         {--qa= : Path to the MBTI64 agent expansion QA JSON artifact}
         {--dry-run : Validate and plan without database writes}
         {--write : Create CMS projection draft revision rows}
-        {--visible-query-backed-3 : Dry-run only; restrict planning to the approved 3 query-backed visible MBTI64 URLs}
+        {--visible-query-backed-3 : Restrict planning/write to the approved 3 query-backed visible MBTI64 URLs}
         {--json : Emit the full JSON summary}
         {--output= : Optional path to write the JSON summary}
         {--draft-only : Required for --write; confirms revision draft only}
@@ -71,10 +73,6 @@ final class PersonalityMbti64CmsProjectionDraft extends Command
 
         if (! $write && ! $dryRun) {
             throw new RuntimeException('Either --dry-run or --write is required.');
-        }
-
-        if ($write && (bool) $this->option('visible-query-backed-3')) {
-            throw new RuntimeException('--visible-query-backed-3 is dry-run only and cannot be combined with --write.');
         }
 
         if ($write) {
@@ -123,8 +121,12 @@ final class PersonalityMbti64CmsProjectionDraft extends Command
             }
         }
 
-        if ((string) $this->option('operator-approved') !== self::OPERATOR_APPROVAL) {
-            throw new RuntimeException('--operator-approved='.self::OPERATOR_APPROVAL.' is required with --write.');
+        $expectedApproval = (bool) $this->option('visible-query-backed-3')
+            ? self::VISIBLE_QUERY_BACKED_3_OPERATOR_APPROVAL
+            : self::OPERATOR_APPROVAL;
+
+        if ((string) $this->option('operator-approved') !== $expectedApproval) {
+            throw new RuntimeException('--operator-approved='.$expectedApproval.' is required with --write.');
         }
     }
 
