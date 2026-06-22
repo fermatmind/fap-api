@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-23T02:05:00+08:00",
+  "updated_at": "2026-06-23T02:12:00+08:00",
   "SEO-AGENT-ARTICLE41-DRAFT-CLAIM-RISK-QA-01": {
     "repo": "fap-api",
     "branch": "codex/seo-agent-article41-draft-claim-risk-qa-01",
@@ -59360,7 +59360,7 @@
     "repo": "fap-api",
     "branch": "codex/fa30-api-08-content-pages-dry-run",
     "base": "main",
-    "status": "local_validated",
+    "status": "pr_open",
     "train_scope": "fa30_trust_method_content_pages_dry_run_package",
     "title": "FA30-API-08: Extend trust/method ContentPage CMS dry-run package",
     "depends_on": [
@@ -59398,8 +59398,8 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "3b62691f661edac4b13d9a97e53645fadb93972e",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2334",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -59413,6 +59413,11 @@
         "at": "2026-06-23T02:05:00+08:00",
         "status": "local_validated",
         "note": "Focused PHPUnit, scoped Pint, JSON/YAML parsing, diff check, and explicit path allowlist scope validation passed. PHPUnit warnings were warning-only file_get_contents warnings and did not fail the suite."
+      },
+      {
+        "at": "2026-06-23T02:12:00+08:00",
+        "status": "pr_open",
+        "note": "Opened PR #2334 after local validation and scope validation passed. Branch head is the source of truth for the exact current SHA after metadata commits."
       }
     ]
   }
