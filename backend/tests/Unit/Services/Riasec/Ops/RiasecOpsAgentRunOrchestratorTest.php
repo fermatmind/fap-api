@@ -152,6 +152,75 @@ final class RiasecOpsAgentRunOrchestratorTest extends TestCase
         }
     }
 
+    public function test_reporting_sidecar_allows_external_blocker_when_current_pr_scope_is_clean(): void
+    {
+        $root = $this->tempDir('riasec-ops-runner-report');
+
+        try {
+            $summary = app(RiasecResultPageOpsAgentRunOrchestrator::class)->report([
+                'run_id' => 'report-run',
+                'artifact_dir' => $root,
+                'mode' => 'auto-to-report',
+                'scope_id' => 'ops-agent-reporting-sidecar',
+                'changed_files' => [
+                    'backend/app/Services/Riasec/Ops/RiasecResultPageOpsAgentRunOrchestrator.php',
+                ],
+                'simulate_external_blocker' => true,
+                'strict' => true,
+            ]);
+
+            $this->assertTrue((bool) ($summary['ok'] ?? false));
+            $this->assertSame('GO_FOR_TRAIN_CONTINUATION', data_get($summary, 'summary.go_no_go'));
+            $this->assertTrue((bool) data_get($summary, 'summary.external_blockers_recorded_as_sidecar', false));
+            $this->assertFalse((bool) data_get($summary, 'summary.production_execution_allowed_for_agent', true));
+
+            $goNoGo = $this->readJson($root.'/report-run/go_no_go_report.json');
+            $this->assertTrue((bool) ($goNoGo['train_can_continue'] ?? false));
+            $this->assertTrue((bool) ($goNoGo['external_blockers_do_not_stop_train'] ?? false));
+            $this->assertFalse((bool) ($goNoGo['production_use_allowed'] ?? true));
+
+            $failureAttribution = $this->readJson($root.'/report-run/failure_attribution_report.json');
+            $this->assertTrue((bool) ($failureAttribution['external_blockers_recorded_as_sidecar'] ?? false));
+            $this->assertFalse((bool) ($failureAttribution['current_pr_introduced_blocker'] ?? true));
+
+            $nextStep = $this->readJson($root.'/report-run/next_step_report.json');
+            $this->assertSame('continue_next_pr_after_merge_cleanup', $nextStep['recommended_next_action'] ?? null);
+            $this->assertSame('manual_approval_gate_only', $nextStep['production_rollout_next_action'] ?? null);
+            $this->assertFileExists($root.'/report-run/sidecar_issue_payload.json');
+        } finally {
+            $this->deleteDirectory($root);
+        }
+    }
+
+    public function test_reporting_sidecar_blocks_current_pr_scope_failure(): void
+    {
+        $root = $this->tempDir('riasec-ops-runner-report-block');
+
+        try {
+            $summary = app(RiasecResultPageOpsAgentRunOrchestrator::class)->report([
+                'run_id' => 'report-block',
+                'artifact_dir' => $root,
+                'mode' => 'auto-to-report',
+                'scope_id' => 'ops-agent-reporting-sidecar',
+                'simulate_current_scope_failure' => true,
+                'strict' => true,
+            ]);
+
+            $this->assertFalse((bool) ($summary['ok'] ?? true));
+            $this->assertSame('NO_GO_CURRENT_PR_BLOCKED', data_get($summary, 'summary.go_no_go'));
+            $this->assertContains('current_pr_scope_failure', $summary['errors'] ?? []);
+
+            $goNoGo = $this->readJson($root.'/report-block/go_no_go_report.json');
+            $this->assertFalse((bool) ($goNoGo['train_can_continue'] ?? true));
+            $this->assertTrue((bool) ($goNoGo['current_pr_scope_failure_stops_train'] ?? false));
+
+            $nextStep = $this->readJson($root.'/report-block/next_step_report.json');
+            $this->assertSame('stop_and_fix_current_pr_scope', $nextStep['recommended_next_action'] ?? null);
+        } finally {
+            $this->deleteDirectory($root);
+        }
+    }
+
     private function tempDir(string $prefix): string
     {
         $path = sys_get_temp_dir().'/'.$prefix.'-'.bin2hex(random_bytes(4));

@@ -131,6 +131,9 @@ final class RiasecResultPageOpsAgentRunOrchestrator
             'mode' => $mode,
             'scope_id' => $scopeId,
             'strict' => $strict,
+            'scope_validation' => $scopeReport,
+            'failure_classification' => $failureReport,
+            'sidecar_issue_payload' => $sidecarPayload,
             'summary' => [
                 'permission_model_valid' => $permissionErrors === [],
                 'scope_valid' => (bool) $scopeReport['valid'],
@@ -241,6 +244,129 @@ final class RiasecResultPageOpsAgentRunOrchestrator
                 'production_manual_gate_required' => true,
                 'cms_write_performed' => false,
                 'runtime_change_performed' => false,
+            ],
+            'artifacts' => $artifacts,
+            'errors' => array_values(array_unique($errors)),
+            'negative_guarantees' => $this->negativeGuarantees(),
+        ];
+    }
+
+    /**
+     * @param  array{
+     *     run_id?:string,
+     *     artifact_dir?:string,
+     *     permission_model_path?:string,
+     *     mode?:string,
+     *     scope_id?:string,
+     *     pr_title?:string,
+     *     base_branch?:string,
+     *     changed_files?:list<string>,
+     *     strict?:bool,
+     *     simulate_external_blocker?:bool,
+     *     simulate_current_scope_failure?:bool
+     * }  $options
+     * @return array<string,mixed>
+     */
+    public function report(array $options = []): array
+    {
+        $options['mode'] = $options['mode'] ?? 'auto-to-report';
+        $plan = $this->plan($options);
+        $runId = (string) ($plan['run_id'] ?? $this->runId('', 'auto-to-report', 'ops-agent-reporting-sidecar', 'main', 'RIASEC reporting sidecar'));
+        $scopeId = (string) ($plan['scope_id'] ?? $this->sanitizeSlug((string) ($options['scope_id'] ?? 'ops-agent-reporting-sidecar')));
+        $artifactDir = $this->artifactDir((string) ($options['artifact_dir'] ?? ''), $runId);
+        $this->ensureDirectory($artifactDir);
+
+        $scopeValid = (bool) data_get($plan, 'scope_validation.valid', false);
+        $permissionModelValid = (bool) data_get($plan, 'summary.permission_model_valid', false);
+        $failureReport = (array) ($plan['failure_classification'] ?? []);
+        $externalBlockersRecorded = (bool) ($failureReport['external_blockers_recorded_as_sidecar'] ?? false);
+        $currentScopeBlocked = in_array('current_pr_scope_failure', (array) ($failureReport['blocking_errors'] ?? []), true);
+        $trainCanContinue = $scopeValid && $permissionModelValid && ! $currentScopeBlocked;
+        $goNoGo = $trainCanContinue ? 'GO_FOR_TRAIN_CONTINUATION' : 'NO_GO_CURRENT_PR_BLOCKED';
+
+        $goNoGoReport = [
+            'schema_version' => self::SCHEMA_VERSION,
+            'task' => 'ops_reporting_go_no_go',
+            'run_id' => $runId,
+            'scope_id' => $scopeId,
+            'go_no_go' => $goNoGo,
+            'train_can_continue' => $trainCanContinue,
+            'external_blockers_do_not_stop_train' => $externalBlockersRecorded && $trainCanContinue,
+            'current_pr_scope_failure_stops_train' => $currentScopeBlocked,
+            'runtime_use' => 'staging_only',
+            'production_use_allowed' => false,
+            'ready_for_runtime' => false,
+            'ready_for_production' => false,
+            'cms_write_performed' => false,
+            'runtime_change_performed' => false,
+            'production_rollout_performed' => false,
+            'production_manual_gate_required' => true,
+            'negative_guarantees' => $this->negativeGuarantees(),
+        ];
+        $failureAttributionReport = [
+            'schema_version' => self::SCHEMA_VERSION,
+            'task' => 'ops_reporting_failure_attribution',
+            'run_id' => $runId,
+            'scope_id' => $scopeId,
+            'scope_valid' => $scopeValid,
+            'permission_model_valid' => $permissionModelValid,
+            'events' => (array) ($failureReport['events'] ?? []),
+            'blocking_errors' => (array) ($failureReport['blocking_errors'] ?? []),
+            'external_blockers_recorded_as_sidecar' => $externalBlockersRecorded,
+            'current_pr_introduced_blocker' => $currentScopeBlocked || ! $scopeValid,
+            'train_can_continue' => $trainCanContinue,
+        ];
+        $nextStepReport = [
+            'schema_version' => self::SCHEMA_VERSION,
+            'task' => 'ops_reporting_next_step',
+            'run_id' => $runId,
+            'scope_id' => $scopeId,
+            'recommended_next_action' => $trainCanContinue ? 'continue_next_pr_after_merge_cleanup' : 'stop_and_fix_current_pr_scope',
+            'sidecar_issue_required' => $externalBlockersRecorded,
+            'production_rollout_next_action' => 'manual_approval_gate_only',
+            'allowed_automation_modes' => self::ALLOWED_MODES,
+            'disallowed_actions' => [
+                'cms_production_write',
+                'production_rollout',
+                'runtime_wrapper_enablement',
+                'frontend_fallback',
+            ],
+        ];
+        $sidecarPayload = (array) ($plan['sidecar_issue_payload'] ?? $this->sidecarIssuePayload($runId, $scopeId, $failureReport));
+
+        $artifacts = [
+            'ops_agent_pr_train_orchestrator_plan.json' => (array) data_get($plan, 'artifacts.ops_agent_pr_train_orchestrator_plan.json', []),
+            'go_no_go_report.json' => $this->writeJson($artifactDir.'/go_no_go_report.json', $goNoGoReport),
+            'sidecar_issue_payload.json' => $this->writeJson($artifactDir.'/sidecar_issue_payload.json', $sidecarPayload),
+            'failure_attribution_report.json' => $this->writeJson($artifactDir.'/failure_attribution_report.json', $failureAttributionReport),
+            'next_step_report.json' => $this->writeJson($artifactDir.'/next_step_report.json', $nextStepReport),
+        ];
+
+        $errors = (array) ($plan['errors'] ?? []);
+        if (! $trainCanContinue && $errors === []) {
+            $errors[] = 'reporting_go_no_go_blocked';
+        }
+        if ($externalBlockersRecorded && $scopeValid && $permissionModelValid && ! $currentScopeBlocked) {
+            $errors = array_values(array_diff($errors, ['external_blocker_recorded']));
+        }
+
+        return [
+            'schema_version' => self::SCHEMA_VERSION,
+            'ok' => $trainCanContinue,
+            'status' => $trainCanContinue ? 'success' : 'blocked',
+            'run_id' => $runId,
+            'artifact_dir' => $this->redactPath($artifactDir),
+            'mode' => 'auto-to-report',
+            'scope_id' => $scopeId,
+            'summary' => [
+                'go_no_go' => $goNoGo,
+                'train_can_continue' => $trainCanContinue,
+                'sidecar_issue_payload_created' => true,
+                'failure_attribution_report_created' => true,
+                'next_step_report_created' => true,
+                'external_blockers_recorded_as_sidecar' => $externalBlockersRecorded,
+                'production_execution_allowed_for_agent' => false,
+                'production_manual_gate_required' => true,
             ],
             'artifacts' => $artifacts,
             'errors' => array_values(array_unique($errors)),
