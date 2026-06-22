@@ -19,6 +19,7 @@ use App\Console\Commands\ArticleUpdateImageMetadata;
 use App\Console\Commands\ArticleUpdateTranslationGroupId;
 use App\Console\Commands\ArticleWeeklySeoObservationExport;
 use App\Console\Commands\Batch2ResultPageDryRunGateCommand;
+use App\Console\Commands\Batch2ResultPageReadbackReviewLedgerCommand;
 use App\Console\Commands\Big5AttemptPurge;
 // ✅ 显式注册（更稳，避免自动扫描失效/缓存导致找不到）
 use App\Console\Commands\Big5PsychometricsReport;
@@ -249,6 +250,7 @@ class Kernel extends ConsoleKernel
         OpsHealthzSnapshot::class,
         ArchiveColdData::class,
         Batch2ResultPageDryRunGateCommand::class,
+        Batch2ResultPageReadbackReviewLedgerCommand::class,
         PaymentsPruneEvents::class,
         SeedScaleRegistry::class,
         SyncScaleSlugs::class,

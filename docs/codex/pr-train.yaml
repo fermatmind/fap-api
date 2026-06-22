@@ -26928,3 +26928,44 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: FA30-API-03
+    repo: fap-api
+    depends_on:
+      - FA30-API-02
+    branch: codex/fa30-api-03-readback-review-ledger
+    title: "FA30-API-03: Add Batch 2 readback and review ledger authority"
+    train_scope: fa30_batch2_backend_readback_review_ledger
+    status: user_authorized
+    scope:
+      - Add a backend-only Batch 2 readback/review ledger entrypoint that consolidates Big Five review-manifest authority with Enneagram source-ledger and content-batch readback evidence.
+      - Reuse the existing Big Five staging candidate validator, Enneagram source-ledger readiness audit, and Enneagram content-batch evaluator instead of introducing runtime or CMS write flows.
+      - Emit a combined authority report whose GO path advances only to FA30-WEB-02 frontend runtime QA work.
+      - Keep production activation, runtime switches, frontend rendering changes, CMS writes, and staging/import execution blocked.
+    allowed_paths:
+      - backend/app/Console/Commands/Batch2ResultPageReadbackReviewLedgerCommand.php
+      - backend/app/Console/Kernel.php
+      - backend/app/Services/Content/Batch2ResultPageReadbackReviewLedger.php
+      - backend/tests/Feature/Console/Batch2ResultPageReadbackReviewLedgerCommandTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Perform staging writes, candidate imports, activation, rollout, runtime switches, or frontend changes in this PR.
+      - Introduce controller, route, middleware, or DB migration changes in this PR.
+      - Generate new Big Five or Enneagram content assets in this PR.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Batch2ResultPageReadbackReviewLedgerCommandTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=batch2_result_page_readback_review_ledger --no-ansi
+      - cd backend && vendor/bin/pint --test app/Console/Commands/Batch2ResultPageReadbackReviewLedgerCommand.php app/Services/Content/Batch2ResultPageReadbackReviewLedger.php tests/Feature/Console/Batch2ResultPageReadbackReviewLedgerCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
