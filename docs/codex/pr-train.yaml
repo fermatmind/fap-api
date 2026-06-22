@@ -23981,6 +23981,7 @@ prs:
       - backend/docs/seo/generated/seo-agent-gsc-batch-draft-qa-support.v1.json
       - backend/tests/Feature/SeoIntel/SeoAgentGscBatchDraftQaSupportTest.php
       - backend/tests/Feature/SeoIntel/SeoAgentCmsDraftReadbackQaTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train-state.json
     do_not:
       - Execute CMS draft writes.
@@ -23990,6 +23991,7 @@ prs:
     validation:
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoAgentGscBatchDraftQaSupportTest
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoAgentCmsDraftReadbackQaTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=seo_agent_gsc_batch_draft_qa_support
       - cd backend && vendor/bin/pint --test app/Console/Commands tests/Feature/SeoIntel
       - python3 -m json.tool backend/docs/seo/generated/seo-agent-gsc-batch-draft-qa-support.v1.json >/dev/null
       - git diff --check

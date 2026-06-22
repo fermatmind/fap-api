@@ -198,6 +198,7 @@ use App\Console\Commands\SeoAgentCmsPublishCanaryCommand;
 use App\Console\Commands\SeoAgentCmsTdkGapScanCommand;
 use App\Console\Commands\SeoAgentCodexReviewRunnerCommand;
 use App\Console\Commands\SeoAgentGscCohortHandoffCommand;
+use App\Console\Commands\SeoAgentGscBatchDraftQaSupportCommand;
 use App\Console\Commands\SeoAgentGscOpportunityAutoDraftCommand;
 use App\Console\Commands\SeoAgentGscPostPublishFeedbackCommand;
 use App\Console\Commands\SeoAgentGscRemainingCandidateBatchPlanCommand;
@@ -434,6 +435,7 @@ class Kernel extends ConsoleKernel
         SeoAgentL5aContentPagePublishCanaryCommand::class,
         SeoAgentL5aIndexnowSubmitCanaryCommand::class,
         SeoAgentGscCohortHandoffCommand::class,
+        SeoAgentGscBatchDraftQaSupportCommand::class,
         SeoAgentGscOpportunityAutoDraftCommand::class,
         SeoAgentGscPostPublishFeedbackCommand::class,
         SeoAgentGscRemainingCandidateBatchPlanCommand::class,
