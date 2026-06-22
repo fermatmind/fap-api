@@ -43,6 +43,16 @@
     "article": "article_revisions.payload_json isolated SEO Agent revision",
     "content_page": "cms_translation_revisions.payload_json draft revision"
   },
+  "preserved_proposal_fields": [
+    "safe_path",
+    "proposed_seo_title",
+    "proposed_seo_description",
+    "proposed_faq_items",
+    "proposed_canonical_path",
+    "proposed_indexability",
+    "proposed_internal_link_actions",
+    "proposal_quality"
+  ],
   "idempotency_policy": "subject_ref + package_sha256 + sorted target_fields",
   "max_rows_per_execution": 10,
   "publishes_content": false,
