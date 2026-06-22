@@ -27327,3 +27327,42 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: BIG5-RESULT-PAGE-ANALYTICS-HANDOFF-01
+    repo: fap-api
+    depends_on:
+      - BIG5-FREE-FULL-REPORT-RUNTIME-QA-READINESS-01
+    branch: codex/big5-result-page-analytics-handoff
+    title: "BIG5-RESULT-PAGE-ANALYTICS-HANDOFF-01: Add Big Five result-page analytics handoff"
+    train_scope: big5_result_page_agent_readiness_to_pilot
+    status: user_authorized
+    scope:
+      - Add a backend-owned, redacted advisory analytics handoff package for Big Five V2 result-page growth measurement.
+      - Define full-report view, PDF, share, second-test, returning-user, and D1/D7/D14/D28 retention metric contracts.
+      - Define smoke, test, QA, synthetic, fixture, generated, Codex, and operator-only artifact exclusion rules.
+      - Keep pilot, runtime, production, CMS, SEO runtime, rollout, import, dashboard, event emission, and deploy gates closed.
+    allowed_paths:
+      - backend/content_assets/big5/result_page_v2/qa/analytics_handoff/**
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2AnalyticsHandoffTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify fap-web, frontend result-page copy, CMS, SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, routes, controllers, DB migrations, runtime wrappers, rollout gates, release snapshots, production import gates, dashboards, event emission, analytics refresh commands, or deploy workflows.
+      - Store real result identifiers, private links, PDF files, score data, comparative rank data, raw report bodies, user-level rows, or internal runtime objects.
+    validation:
+      - cd backend && php artisan test --filter=BigFiveResultPageV2AnalyticsHandoffTest --no-ansi
+      - find backend/content_assets/big5/result_page_v2/qa/analytics_handoff/v0_1 -name '*.json' -print -exec python3 -m json.tool {} >/dev/null \;
+      - cd backend/content_assets/big5/result_page_v2/qa/analytics_handoff/v0_1 && shasum -a 256 -c SHA256SUMS
+      - cd backend && vendor/bin/pint --test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2AnalyticsHandoffTest.php
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='test_runtime_paths_have_no_uncommitted_diff' --no-ansi
+      - git diff --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
