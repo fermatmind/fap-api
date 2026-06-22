@@ -396,6 +396,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_ci_scale_impact_resolver_changes(): void
+    {
+        $changed = [
+            'backend/app/Services/Ci/ScaleImpactResolver.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_sitemap_source_cache_command_changes(): void
     {
         $changed = [
@@ -4110,6 +4119,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isCiScaleImpactResolverFile($file)) {
+                continue;
+            }
+
             if ($this->isSitemapSourceCacheCommandFile($file)) {
                 continue;
             }
@@ -5316,6 +5329,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isCiScaleImpactCommandFile(string $file): bool
     {
         return $file === 'backend/app/Console/Commands/CiScaleImpact.php';
+    }
+
+    private function isCiScaleImpactResolverFile(string $file): bool
+    {
+        return $file === 'backend/app/Services/Ci/ScaleImpactResolver.php';
     }
 
     private function isSitemapSourceCacheCommandFile(string $file): bool

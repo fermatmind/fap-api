@@ -26862,6 +26862,7 @@ prs:
       - .github/workflows/ci.yml
       - backend/app/Services/Ci/ScaleImpactResolver.php
       - backend/scripts/ci_verify_mbti.sh
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - backend/tests/Unit/Ci/ScaleImpactResolverTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
@@ -26872,6 +26873,7 @@ prs:
       - Modify Batch 2 dry-run or readback authority flows.
     validation:
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=ScaleImpactResolverTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest --no-ansi
       - bash -n backend/scripts/ci_verify_mbti.sh
       - ruby -e "require 'yaml'; YAML.load_file('.github/workflows/ci.yml'); puts 'workflow yaml ok'"
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
