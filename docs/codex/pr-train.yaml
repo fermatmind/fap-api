@@ -23848,6 +23848,193 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: SEO-AGENT-ARTICLE41-DRAFT-CLAIM-RISK-QA-01
+    repo: fap-api
+    branch: codex/seo-agent-article41-draft-claim-risk-qa-01
+    title: "SEO-AGENT-ARTICLE41-DRAFT-CLAIM-RISK-QA-01 Add article draft claim-risk QA"
+    train_scope: seo_agent_gsc_draft_canary_closeout
+    status: user_authorized
+    scope:
+      - Add a backend-only read-only claim-risk QA command for article CMS draft proposals.
+      - Emit sanitized JSON evidence for title, meta, FAQ, and internal-link claim-risk verdicts.
+      - Register the command and generated contract documentation.
+      - Initialize this closeout train metadata for PR-E through PR-I.
+    allowed_paths:
+      - backend/app/Console/Commands/SeoAgentArticleDraftClaimRiskQaCommand.php
+      - backend/app/Console/Kernel.php
+      - backend/docs/seo/generated/seo-agent-article-draft-claim-risk-qa.v1.json
+      - backend/tests/Feature/SeoIntel/SeoAgentArticleDraftClaimRiskQaTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/sidecar/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Write CMS drafts.
+      - Publish content.
+      - Submit URL Truth, sitemap, IndexNow, or search/indexing requests.
+      - Start scheduler, queue workers, external model calls, or live GSC API calls.
+    validation:
+      - cd backend && php artisan list | rg seo-agent
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoAgentArticleDraftClaimRiskQaTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=seo_agent_article_draft_claim_risk_qa
+      - cd backend && vendor/bin/pint --test app/Console/Commands tests/Feature/SeoIntel
+      - python3 -m json.tool backend/docs/seo/generated/seo-agent-article-draft-claim-risk-qa.v1.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    publish_allowed: false
+    search_submit_allowed: false
+
+  - id: SEO-AGENT-ARTICLE41-DRAFT-PREVIEW-RUNTIME-QA-01
+    repo: fap-api
+    depends_on:
+      - SEO-AGENT-ARTICLE41-DRAFT-CLAIM-RISK-QA-01
+    branch: codex/seo-agent-article41-draft-preview-runtime-qa-01
+    title: "SEO-AGENT-ARTICLE41-DRAFT-PREVIEW-RUNTIME-QA-01 Add article draft preview runtime QA"
+    train_scope: seo_agent_gsc_draft_canary_closeout
+    status: user_authorized
+    scope:
+      - Add backend-only read-only preview/runtime QA for article draft revisions.
+      - Verify draft preview/read path evidence and live published revision isolation.
+      - Register the command and generated contract documentation.
+    allowed_paths:
+      - backend/app/Console/Commands/SeoAgentArticleDraftPreviewRuntimeQaCommand.php
+      - backend/app/Console/Kernel.php
+      - backend/docs/seo/generated/seo-agent-article-draft-preview-runtime-qa.v1.json
+      - backend/tests/Feature/SeoIntel/SeoAgentArticleDraftPreviewRuntimeQaTest.php
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Write CMS drafts.
+      - Publish content.
+      - Submit URL Truth, sitemap, IndexNow, or search/indexing requests.
+      - Modify public runtime content.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoAgentArticleDraftPreviewRuntimeQaTest
+      - cd backend && vendor/bin/pint --test app/Console/Commands tests/Feature/SeoIntel
+      - python3 -m json.tool backend/docs/seo/generated/seo-agent-article-draft-preview-runtime-qa.v1.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    publish_allowed: false
+    search_submit_allowed: false
+
+  - id: SEO-AGENT-GSC-REMAINING-CANDIDATE-BATCH-PLAN-01
+    repo: fap-api
+    depends_on:
+      - SEO-AGENT-ARTICLE41-DRAFT-PREVIEW-RUNTIME-QA-01
+    branch: codex/seo-agent-gsc-remaining-candidate-batch-plan-01
+    title: "SEO-AGENT-GSC-REMAINING-CANDIDATE-BATCH-PLAN-01 Plan remaining GSC draft candidates"
+    train_scope: seo_agent_gsc_draft_canary_closeout
+    status: user_authorized
+    scope:
+      - Add backend-only read-only planner for remaining GSC cohort article draft candidates.
+      - Exclude article:41:en and recommend a bounded limit=2 or limit=3 next write canary.
+      - Emit sanitized ranking and future approval phrase evidence.
+    allowed_paths:
+      - backend/app/Console/Commands/SeoAgentGscRemainingCandidateBatchPlanCommand.php
+      - backend/app/Console/Kernel.php
+      - backend/docs/seo/generated/seo-agent-gsc-remaining-candidate-batch-plan.v1.json
+      - backend/tests/Feature/SeoIntel/SeoAgentGscRemainingCandidateBatchPlanTest.php
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Execute CMS draft writes.
+      - Publish content.
+      - Submit URL Truth, sitemap, IndexNow, or search/indexing requests.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoAgentGscRemainingCandidateBatchPlanTest
+      - cd backend && vendor/bin/pint --test app/Console/Commands tests/Feature/SeoIntel
+      - python3 -m json.tool backend/docs/seo/generated/seo-agent-gsc-remaining-candidate-batch-plan.v1.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    publish_allowed: false
+    search_submit_allowed: false
+
+  - id: SEO-AGENT-GSC-BATCH-DRAFT-QA-SUPPORT-01
+    repo: fap-api
+    depends_on:
+      - SEO-AGENT-GSC-REMAINING-CANDIDATE-BATCH-PLAN-01
+    branch: codex/seo-agent-gsc-batch-draft-qa-support-01
+    title: "SEO-AGENT-GSC-BATCH-DRAFT-QA-SUPPORT-01 Add batch draft QA support"
+    train_scope: seo_agent_gsc_draft_canary_closeout
+    status: user_authorized
+    scope:
+      - Add backend-only read-only batch QA summary support for multi-target draft write evidence.
+      - Preserve existing single-target readback QA compatibility.
+      - Emit per-target matched fields, mismatches, locale, proposal quality, and claim-risk handoff status.
+    allowed_paths:
+      - backend/app/Console/Commands/SeoAgentGscBatchDraftQaSupportCommand.php
+      - backend/app/Console/Kernel.php
+      - backend/docs/seo/generated/seo-agent-gsc-batch-draft-qa-support.v1.json
+      - backend/tests/Feature/SeoIntel/SeoAgentGscBatchDraftQaSupportTest.php
+      - backend/tests/Feature/SeoIntel/SeoAgentCmsDraftReadbackQaTest.php
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Execute CMS draft writes.
+      - Publish content.
+      - Change publish behavior.
+      - Submit URL Truth, sitemap, IndexNow, or search/indexing requests.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoAgentGscBatchDraftQaSupportTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoAgentCmsDraftReadbackQaTest
+      - cd backend && vendor/bin/pint --test app/Console/Commands tests/Feature/SeoIntel
+      - python3 -m json.tool backend/docs/seo/generated/seo-agent-gsc-batch-draft-qa-support.v1.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    publish_allowed: false
+    search_submit_allowed: false
+
+  - id: SEO-AGENT-GSC-DRAFT-PUBLISH-GATE-READINESS-01
+    repo: fap-api
+    depends_on:
+      - SEO-AGENT-GSC-BATCH-DRAFT-QA-SUPPORT-01
+    branch: codex/seo-agent-gsc-draft-publish-gate-readiness-01
+    title: "SEO-AGENT-GSC-DRAFT-PUBLISH-GATE-READINESS-01 Add draft publish gate readiness"
+    train_scope: seo_agent_gsc_draft_canary_closeout
+    status: user_authorized
+    scope:
+      - Add backend-only read-only publish gate readiness evidence for SEO agent CMS drafts.
+      - Consume draft write, readback QA, claim-risk QA, and preview/runtime QA artifacts.
+      - Emit publish_ready, review_required, or blocked verdicts without publishing.
+    allowed_paths:
+      - backend/app/Console/Commands/SeoAgentGscDraftPublishGateReadinessCommand.php
+      - backend/app/Console/Kernel.php
+      - backend/docs/seo/generated/seo-agent-gsc-draft-publish-gate-readiness.v1.json
+      - backend/tests/Feature/SeoIntel/SeoAgentGscDraftPublishGateReadinessTest.php
+      - backend/tests/Feature/SeoIntel/SeoAgentCmsPublishCanaryTest.php
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Publish content.
+      - Execute CMS draft writes.
+      - Write URL Truth.
+      - Submit sitemap, IndexNow, or search/indexing requests.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoAgentGscDraftPublishGateReadinessTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoAgentCmsPublishCanaryTest
+      - cd backend && vendor/bin/pint --test app/Console/Commands tests/Feature/SeoIntel
+      - python3 -m json.tool backend/docs/seo/generated/seo-agent-gsc-draft-publish-gate-readiness.v1.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    publish_allowed: false
+    search_submit_allowed: false
+
   - id: SEO-GSC-DATA-QUALITY-01
     repo: fap-api
     branch: codex/seo-gsc-data-quality-01

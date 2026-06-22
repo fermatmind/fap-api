@@ -186,6 +186,7 @@ use App\Console\Commands\RiasecResultPageAssetAgentAuditCommand;
 use App\Console\Commands\SdsPsychometricsReport;
 use App\Console\Commands\SeedScaleRegistry;
 use App\Console\Commands\SeoAgentAutoRollbackGuardCommand;
+use App\Console\Commands\SeoAgentArticleDraftClaimRiskQaCommand;
 use App\Console\Commands\SeoAgentCmsDraftPackageDryRunCommand;
 use App\Console\Commands\SeoAgentCmsDraftPayloadRepairCanaryCommand;
 use App\Console\Commands\SeoAgentCmsDraftReadbackQaCommand;
@@ -418,6 +419,7 @@ class Kernel extends ConsoleKernel
         MediaAssetsImportSeoImageBundle::class,
         SeoAgentCmsFaqGapScanCommand::class,
         SeoAgentAutoRollbackGuardCommand::class,
+        SeoAgentArticleDraftClaimRiskQaCommand::class,
         SeoAgentCmsTdkGapScanCommand::class,
         SeoAgentCodexReviewRunnerCommand::class,
         SeoAgentCmsDraftPackageDryRunCommand::class,
