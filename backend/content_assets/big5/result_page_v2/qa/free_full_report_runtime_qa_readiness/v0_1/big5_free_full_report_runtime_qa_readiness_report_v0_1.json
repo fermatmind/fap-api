@@ -1,0 +1,134 @@
+{
+  "schema": "fap.big5.result_page_v2.free_full_report_runtime_qa_readiness_report.v0_1",
+  "package_key": "big5_result_page_v2.free_full_report_runtime_qa_readiness.v0_1",
+  "version": "0.1",
+  "mode": "free_full_report_runtime_qa_readiness_advisory",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_runtime_qa": true,
+  "ready_for_asset_review": true,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "free_full_report_experience": {
+    "status": "pass",
+    "no_paywall_contradiction": true,
+    "free_full_report_available_without_commerce_gate": true,
+    "locked_or_free_preview_state_covered": true,
+    "backend_authority": true,
+    "frontend_copy_added": false
+  },
+  "source_readiness": {
+    "readiness_artifact_source": "fap-api PR #2326 sanitized readiness artifact evidence",
+    "share_safety_missing_count": 0,
+    "share_safe_reading_mode_count": 13,
+    "validation_error_count": 0,
+    "leak_hit_count": 0,
+    "readiness_pass": true,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false
+  },
+  "surface_status": {
+    "result_route": {
+      "status": "pass",
+      "backend_authority": true,
+      "no_paywall_contradiction": true,
+      "private_boundary": "pass",
+      "evidence": [
+        "fap-web result route is private, dynamic, and noindex",
+        "fap-web ResultClient consumes report-access before report rendering",
+        "backend result-page V2 strict readiness artifact passed in fap-api PR #2326"
+      ]
+    },
+    "report_api": {
+      "status": "pass",
+      "backend_authority": true,
+      "no_paywall_contradiction": true,
+      "private_boundary": "pass",
+      "evidence": [
+        "backend report read path remains authoritative",
+        "BigFiveResultPageV2RuntimeGateTest covers V2 attach and fallback boundaries",
+        "BigFiveResultPageV2ValidatorTest covers result contract validation"
+      ]
+    },
+    "report_access_api": {
+      "status": "pass",
+      "backend_authority": true,
+      "no_paywall_contradiction": true,
+      "private_boundary": "pass",
+      "evidence": [
+        "AttemptReportAccessReadTest covers report-access action visibility",
+        "BigFivePdfDeliveryTest covers private PDF delivery boundary",
+        "report-access remains the PDF/action authority"
+      ]
+    },
+    "pdf": {
+      "status": "pass",
+      "backend_authority": true,
+      "no_paywall_contradiction": true,
+      "private_boundary": "pass",
+      "evidence": [
+        "BigFiveResultPageV2PdfPayloadAdapterTest",
+        "BigFivePdfDeliveryTest",
+        "fap-web big5 PDF rendered QA contract evidence"
+      ]
+    },
+    "share": {
+      "status": "pass",
+      "backend_authority": true,
+      "no_paywall_contradiction": true,
+      "private_boundary": "pass",
+      "evidence": [
+        "BigFiveResultPageV2ShareSafeSummaryAdapterTest",
+        "share_safety_missing_count=0",
+        "fap-web big5 share-card rendered QA contract evidence"
+      ]
+    },
+    "history": {
+      "status": "pass",
+      "backend_authority": true,
+      "no_paywall_contradiction": true,
+      "private_boundary": "pass",
+      "evidence": [
+        "BigFiveResultPageV2HistorySnapshotAdapterTest",
+        "history snapshot omits full body and private measurement fields",
+        "fap-web big5 history rendered QA contract evidence"
+      ]
+    },
+    "compare": {
+      "status": "pass",
+      "backend_authority": true,
+      "no_paywall_contradiction": true,
+      "private_boundary": "pass",
+      "evidence": [
+        "BigFiveResultPageV2CompareSnapshotAdapterTest",
+        "compare snapshot omits full body and private measurement fields",
+        "fap-web big5 compare rendered QA contract evidence"
+      ]
+    }
+  },
+  "status_counts": {
+    "pass": 7,
+    "pending": 0,
+    "fail": 0
+  },
+  "forbidden_token_scan": {
+    "status": "pass",
+    "checked_surface_count": 7,
+    "hit_count": 0,
+    "redaction_policy": "artifact stores counts, booleans, enum statuses, and sanitized evidence labels only"
+  },
+  "next_gate": "BIG5-RESULT-PAGE-ANALYTICS-HANDOFF-01",
+  "negative_guarantees": {
+    "database_write": false,
+    "cms_write": false,
+    "frontend_copy_write": false,
+    "runtime_flag_change": false,
+    "release_snapshot_change": false,
+    "production_import_gate_change": false,
+    "rollout_gate_change": false,
+    "search_or_seo_runtime_change": false,
+    "manual_deploy": false
+  }
+}
