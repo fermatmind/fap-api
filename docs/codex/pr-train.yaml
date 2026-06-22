@@ -23864,6 +23864,7 @@ prs:
       - backend/app/Console/Kernel.php
       - backend/docs/seo/generated/seo-agent-article-draft-claim-risk-qa.v1.json
       - backend/tests/Feature/SeoIntel/SeoAgentArticleDraftClaimRiskQaTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/sidecar/**
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
@@ -23875,6 +23876,7 @@ prs:
     validation:
       - cd backend && php artisan list | rg seo-agent
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoAgentArticleDraftClaimRiskQaTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=seo_agent_article_draft_claim_risk_qa
       - cd backend && vendor/bin/pint --test app/Console/Commands tests/Feature/SeoIntel
       - python3 -m json.tool backend/docs/seo/generated/seo-agent-article-draft-claim-risk-qa.v1.json >/dev/null
       - git diff --check

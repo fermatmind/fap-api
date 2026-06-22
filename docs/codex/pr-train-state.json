@@ -19,20 +19,36 @@
       },
       "scope_validation": {
         "status": "pass_with_external_sidecar",
-        "evidence": "Changed files are confined to PR-E command/test/doc registration, closeout train metadata, and docs/codex/sidecar/20260622-seo-agent-closeout-external-pint-blocker.md."
+        "evidence": "Changed files are confined to PR-E command/test/doc registration, BigFive runtime-freeze classifier allowance for this SEO Agent command, closeout train metadata, and docs/codex/sidecar/20260622-seo-agent-closeout-external-pint-blocker.md."
       },
       "local": {
         "status": "pass_with_external_pint_blocker",
         "commands": [
           "cd backend && php artisan list | rg seo-agent",
           "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoAgentArticleDraftClaimRiskQaTest --display-warnings",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=seo_agent_article_draft_claim_risk_qa --display-warnings",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|seo_agent_article_draft_claim_risk_qa' --display-warnings",
           "cd backend && vendor/bin/pint --test app/Console/Commands/SeoAgentArticleDraftClaimRiskQaCommand.php tests/Feature/SeoIntel/SeoAgentArticleDraftClaimRiskQaTest.php",
+          "cd backend && vendor/bin/pint --test app/Console/Commands/SeoAgentArticleDraftClaimRiskQaCommand.php tests/Feature/SeoIntel/SeoAgentArticleDraftClaimRiskQaTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
           "python3 -m json.tool backend/docs/seo/generated/seo-agent-article-draft-claim-risk-qa.v1.json >/dev/null",
           "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
           "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
           "cd backend && vendor/bin/pint --test app/Console/Commands tests/Feature/SeoIntel"
         ],
-        "notes": "Focused PR-E tests and scoped Pint passed. Broad Pint failed only on pre-existing files outside PR-E scope; recorded in docs/codex/sidecar/20260622-seo-agent-closeout-external-pint-blocker.md."
+        "notes": "Focused PR-E tests, BigFive runtime-freeze classifier coverage, and scoped Pint passed. Broad Pint failed only on pre-existing files outside PR-E scope; recorded in docs/codex/sidecar/20260622-seo-agent-closeout-external-pint-blocker.md."
+      },
+      "github_initial": {
+        "status": "fail",
+        "evidence": "PR #2315 verify-bigfive failed because BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff classified backend/app/Console/Commands/SeoAgentArticleDraftClaimRiskQaCommand.php and backend/app/Console/Kernel.php as runtime-impacting."
+      },
+      "ci_fix_local": {
+        "status": "pass",
+        "commands": [
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=seo_agent_article_draft_claim_risk_qa --display-warnings",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|seo_agent_article_draft_claim_risk_qa' --display-warnings",
+          "cd backend && vendor/bin/pint --test app/Console/Commands/SeoAgentArticleDraftClaimRiskQaCommand.php tests/Feature/SeoIntel/SeoAgentArticleDraftClaimRiskQaTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+        ],
+        "notes": "Added the new read-only SEO Agent claim-risk QA command to the existing BigFive runtime-freeze classifier allowlist."
       }
     },
     "failure_reason": null,
