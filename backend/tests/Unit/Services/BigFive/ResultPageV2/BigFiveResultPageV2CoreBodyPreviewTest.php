@@ -3011,6 +3011,27 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_batch2_result_page_readback_review_ledger_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/Batch2ResultPageReadbackReviewLedgerCommand.php',
+            'backend/app/Console/Kernel.php',
+            'backend/app/Services/Content/Batch2ResultPageReadbackReviewLedger.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\Batch2ResultPageReadbackReviewLedgerCommand;',
+            '+        Batch2ResultPageReadbackReviewLedgerCommand::class,',
+        ];
+
+        $blocked = [
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Transformer.php',
+            'backend/routes/api.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', '', $kernelChangedLines));
+    }
+
     public function test_runtime_freeze_classifier_ignores_enneagram_result_page_rendered_qa_smoke_harness_scaffold(): void
     {
         $changed = [
@@ -5038,6 +5059,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isBatch2ResultPageReadbackReviewLedgerFile($file)) {
+                continue;
+            }
+
             if ($this->isEnneagramResultPageRenderedQaSmokeHarnessFile($file)) {
                 continue;
             }
@@ -5166,6 +5191,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsEnneagramResultPageContentBatchAutomationOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsEnneagramResultPageCandidateStagingHarnessOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsBatch2ResultPageDryRunGateOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsBatch2ResultPageReadbackReviewLedgerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsEnneagramResultPageRenderedQaSmokeHarnessOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsEnneagramResultPageReportSidecarIssueOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsEnneagramResultPageProductionManualGateRunbookOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
@@ -7139,6 +7165,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ], true);
     }
 
+    private function isBatch2ResultPageReadbackReviewLedgerFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/Batch2ResultPageReadbackReviewLedgerCommand.php',
+            'backend/app/Services/Content/Batch2ResultPageReadbackReviewLedger.php',
+        ], true);
+    }
+
     private function isEnneagramResultPageRenderedQaSmokeHarnessFile(string $file): bool
     {
         return in_array($file, [
@@ -8460,6 +8494,23 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $allowed = [
             'use App\\Console\\Commands\\Batch2ResultPageDryRunGateCommand;',
             '        Batch2ResultPageDryRunGateCommand::class,',
+        ];
+        $normalized = array_map(
+            static fn (string $line): string => str_starts_with($line, '+') ? substr($line, 1) : $line,
+            $changedLines,
+        );
+
+        return $changedLines !== [] && array_values($normalized) === $allowed;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsBatch2ResultPageReadbackReviewLedgerOnly(array $changedLines): bool
+    {
+        $allowed = [
+            'use App\\Console\\Commands\\Batch2ResultPageReadbackReviewLedgerCommand;',
+            '        Batch2ResultPageReadbackReviewLedgerCommand::class,',
         ];
         $normalized = array_map(
             static fn (string $line): string => str_starts_with($line, '+') ? substr($line, 1) : $line,

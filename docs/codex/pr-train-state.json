@@ -58555,7 +58555,7 @@
     "repo": "fap-api",
     "branch": "codex/fa30-api-02-batch2-dry-run-gate",
     "base": "main",
-    "status": "pr_open",
+    "status": "merged",
     "train_scope": "fa30_batch2_backend_dry_run_gate",
     "title": "FA30-API-02: Add Batch 2 Big Five and Enneagram dry-run gate",
     "depends_on": [
@@ -58587,16 +58587,16 @@
         "evidence": "Changed files are limited to the new Batch2ResultPageDryRunGate command/service/test, backend/app/Console/Kernel.php registration, BigFiveResultPageV2CoreBodyPreviewTest allowlist coverage, and docs/codex metadata including FA30-API-01 merge reconciliation. No runtime route/controller files, deploy files, frontend files, candidate assets, staging writes, or Batch 2 readback/review ledger authority files changed."
       },
       "github": {
-        "status": "pending",
-        "evidence": "PR #2306 opened on head 6c3d2d301c8f8e9fbc3235e665708acd7865ab9a. Required GitHub checks have started on the Batch 2 dry-run gate scope."
+        "status": "pass",
+        "evidence": "PR #2306 required GitHub checks passed on head ddeed58fa9dc1675684bf6be1b4fc7669df2a25e; GitHub reports merge commit 05fe5f13b95b5bfeaa244ae3dd6f3c94153dc993 and origin/main contains it."
       }
     },
     "failure_reason": null,
-    "commit_sha": "6c3d2d301c8f8e9fbc3235e665708acd7865ab9a",
+    "commit_sha": "ddeed58fa9dc1675684bf6be1b4fc7669df2a25e",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2306",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-22T12:05:49Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-22T13:58:00Z",
@@ -58612,6 +58612,80 @@
         "at": "2026-06-22T14:13:30Z",
         "status": "pr_open",
         "note": "Opened PR #2306 on head 6c3d2d301c8f8e9fbc3235e665708acd7865ab9a after local validation and scope validation passed."
+      },
+      {
+        "at": "2026-06-22T20:05:30Z",
+        "status": "ready_to_merge",
+        "note": "GitHub required checks passed on head ddeed58fa9dc1675684bf6be1b4fc7669df2a25e, changed files remained inside the dry-run gate scope, and the PR title/body were re-reviewed before merge."
+      },
+      {
+        "at": "2026-06-22T20:07:00Z",
+        "status": "merged",
+        "note": "PR #2306 merged at 2026-06-22T12:05:49Z with merge commit 05fe5f13b95b5bfeaa244ae3dd6f3c94153dc993. origin/main contains the merge commit, the remote branch is deleted, and the local task worktree/branch were cleaned up."
+      }
+    ]
+  },
+  "FA30-API-03": {
+    "repo": "fap-api",
+    "branch": "codex/fa30-api-03-readback-review-ledger",
+    "base": "main",
+    "status": "pr_open",
+    "train_scope": "fa30_batch2_backend_readback_review_ledger",
+    "title": "FA30-API-03: Add Batch 2 readback and review ledger authority",
+    "depends_on": [
+      "FA30-API-02"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly ordered FA30-API-03 third in the FA30 train and previously authorized manifest/state entries for FA30-WEB-01, FA30-API-01, FA30-API-02, FA30-API-03, and FA30-WEB-02."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "FA30-API-02 is merged on GitHub as PR #2306, and origin/main contains merge commit 05fe5f13b95b5bfeaa244ae3dd6f3c94153dc993."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Batch2ResultPageReadbackReviewLedgerCommandTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=batch2_result_page_readback_review_ledger --no-ansi",
+          "cd backend && vendor/bin/pint --test app/Console/Commands/Batch2ResultPageReadbackReviewLedgerCommand.php app/Services/Content/Batch2ResultPageReadbackReviewLedger.php tests/Feature/Console/Batch2ResultPageReadbackReviewLedgerCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "git diff --check"
+        ],
+        "evidence": "Batch2ResultPageReadbackReviewLedgerCommandTest passed with a combined authority report that keeps Big Five review-manifest and Enneagram source-ledger/content-batch checks read-only. The runtime-freeze allowlist test for batch2_result_page_readback_review_ledger passed. Targeted Pint, YAML parse, JSON parse, and git diff checks passed."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to the new Batch2ResultPageReadbackReviewLedger command/service/test, backend/app/Console/Kernel.php registration, BigFiveResultPageV2CoreBodyPreviewTest allowlist coverage, and docs/codex metadata including FA30-API-02 merge reconciliation. No routes, controllers, middleware, migrations, deploy files, frontend files, runtime gates, CMS writes, or candidate import/activation flows changed."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": "PR #2309 opened on head 9cea70b51d2837edd78df1ca2debdbb55635a571. Required GitHub checks have started on the Batch 2 readback/review ledger scope."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": "9cea70b51d2837edd78df1ca2debdbb55635a571",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2309",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-22T20:14:00Z",
+        "status": "in_progress",
+        "note": "Started clean-worktree implementation from latest origin/main after FA30-API-02 merged. Scope is limited to a backend-only Batch 2 readback/review ledger authority report plus docs/codex metadata."
+      },
+      {
+        "at": "2026-06-22T20:31:00Z",
+        "status": "local_validated",
+        "note": "Added a backend-only Batch 2 readback/review ledger that reuses Big Five candidate review-manifest validation plus Enneagram source-ledger readiness and content-batch evaluation. Targeted feature/runtime-freeze tests, Pint, YAML/JSON parse, and diff checks passed."
+      },
+      {
+        "at": "2026-06-22T20:36:00Z",
+        "status": "pr_open",
+        "note": "Opened PR #2309 on head 9cea70b51d2837edd78df1ca2debdbb55635a571 after local validation and scope validation passed."
       }
     ]
   }
