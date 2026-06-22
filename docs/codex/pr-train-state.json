@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-22T16:19:48.289+00:00",
+  "updated_at": "2026-06-22T16:26:25.862+00:00",
   "SEO-AGENT-ARTICLE41-DRAFT-CLAIM-RISK-QA-01": {
     "repo": "fap-api",
     "branch": "codex/seo-agent-article41-draft-claim-risk-qa-01",
@@ -59065,7 +59065,7 @@
     "repo": "fap-api",
     "branch": "codex/fa30-api-05-analytics-smoke-exclusion",
     "base": "main",
-    "status": "ci_fix_local_validated",
+    "status": "ready_to_merge",
     "train_scope": "fa30_six_scale_smoke_analytics_exclusion",
     "title": "FA30-API-05: Centralize six-scale smoke attempt analytics exclusion",
     "depends_on": [
@@ -59098,12 +59098,12 @@
         "evidence": "Changed files remain limited to FA30-API-05 allowed paths, including the Big Five runtime freeze classifier test update needed to classify the analytics smoke exclusion policy as analytics-only support."
       },
       "github": {
-        "status": "retry_pending",
-        "evidence": "Initial PR CI failed only on verify-bigfive because the new analytics policy support file was classified as Big Five runtime drift. The current-scope fix updates the freeze classifier and passed local reproduction; retry pending after push."
+        "status": "pass",
+        "evidence": "PR #2324 GitHub checks passed after current-scope verify-bigfive classifier fix: hygiene, Semgrep blocking secrets, supply-chain, semgrep SARIF non-blocking upload, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, and Semgrep OSS."
       }
     },
     "failure_reason": null,
-    "commit_sha": "7a1c1a46d7cd55e075694b7a5f4921ad79f0a7c3",
+    "commit_sha": "258c20a92a67495c188b4da700cc2bc8d0a4ecd7",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2324",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -59133,6 +59133,11 @@
         "at": "2026-06-22T16:19:48.289+00:00",
         "status": "ci_fix_local_validated",
         "note": "Added the analytics smoke exclusion policy to the Big Five runtime freeze classifier and reran the failed test plus FA30-API-05 analytics suites, Pint, YAML/JSON parsing, and diff check successfully."
+      },
+      {
+        "at": "2026-06-22T16:26:25.862+00:00",
+        "status": "ready_to_merge",
+        "note": "All PR #2324 GitHub checks passed and scope was revalidated; ready for squash merge when final metadata commit checks pass."
       }
     ]
   }
