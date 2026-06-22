@@ -43959,7 +43959,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-article-publish-hold-gate-01",
     "base": "main",
-    "status": "pr_open",
+    "status": "ci_fix_local_validated",
     "train_scope": "seo_article_system_window_6",
     "title": "docs(seo): define article publish hold gate",
     "depends_on": [
@@ -58504,11 +58504,11 @@
       },
       "github": {
         "status": "pending",
-        "evidence": "PR #2302 opened on head f3c13fee84c8bbabf520c8d6efb82e485538c357. Required GitHub checks have started; mergeStateStatus is UNSTABLE while checks are still running."
+        "evidence": "PR #2302 now points at head 8e759f1522e2e9df626c350065e368dc4bb4965b after the scoped verify-bigfive repair. Required GitHub checks are pending again on the updated head."
       }
     },
     "failure_reason": null,
-    "commit_sha": "f3c13fee84c8bbabf520c8d6efb82e485538c357",
+    "commit_sha": "8e759f1522e2e9df626c350065e368dc4bb4965b",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2302",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -58533,6 +58533,11 @@
         "at": "2026-06-22T13:05:00Z",
         "status": "ci_fix_local_validated",
         "note": "Inspected the current-PR verify-bigfive failure and fixed the Big Five runtime freeze classifier to ignore backend/app/Services/Ci/ScaleImpactResolver.php. Targeted ScaleImpactResolver and BigFiveResultPageV2CoreBodyPreviewTest both passed, and the full BigFive|Big5|NonMbtiReportContractRegressionTest local filter completed successfully with 977 warnings, 3 passed, and 63069 assertions."
+      },
+      {
+        "at": "2026-06-22T13:08:00Z",
+        "status": "pr_open",
+        "note": "Pushed scoped verify-bigfive repair commit 8e759f1522e2e9df626c350065e368dc4bb4965b to PR #2302. Waiting for required GitHub checks on the updated head."
       }
     ]
   }
