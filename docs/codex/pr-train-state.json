@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-22T23:10:00+08:00",
+  "updated_at": "2026-06-22T23:14:00+08:00",
   "SEO-AGENT-ARTICLE41-DRAFT-CLAIM-RISK-QA-01": {
     "repo": "fap-api",
     "branch": "codex/seo-agent-article41-draft-claim-risk-qa-01",
@@ -92,7 +92,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-agent-article41-draft-preview-runtime-qa-01",
     "base": "main",
-    "status": "local_checks_passed_with_external_sidecar",
+    "status": "pr_open",
     "train_scope": "seo_agent_gsc_draft_canary_closeout",
     "title": "SEO-AGENT-ARTICLE41-DRAFT-PREVIEW-RUNTIME-QA-01 Add article draft preview runtime QA",
     "depends_on": [
@@ -125,8 +125,8 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "3e569f791eab80a9fdfd0400f6a7f3fe1d47d671",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2317",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -142,6 +142,12 @@
         "from": "planned",
         "to": "local_checks_passed_with_external_sidecar",
         "notes": "Implemented read-only article draft preview/runtime QA command and focused tests; broad Pint external blocker unchanged."
+      },
+      {
+        "at": "2026-06-22T23:14:00+08:00",
+        "from": "local_checks_passed_with_external_sidecar",
+        "to": "pr_open",
+        "notes": "Opened https://github.com/fermatmind/fap-api/pull/2317."
       }
     ]
   },
