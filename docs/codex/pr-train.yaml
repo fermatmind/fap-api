@@ -27366,3 +27366,43 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: BIG5-RESULT-PAGE-SEO-GEO-CONTROL-HANDOFF-01
+    repo: fap-api
+    depends_on:
+      - BIG5-RESULT-PAGE-ANALYTICS-HANDOFF-01
+    branch: codex/big5-result-page-seo-geo-control-handoff
+    title: "BIG5-RESULT-PAGE-SEO-GEO-CONTROL-HANDOFF-01: Add Big Five SEO/GEO control handoff"
+    train_scope: big5_result_page_agent_readiness_to_pilot
+    status: user_authorized
+    scope:
+      - Add a backend-owned, redacted advisory SEO/GEO control handoff package for Big Five V2.
+      - Plan Big Five Hub, Big Five vs MBTI, methodology, and OCEAN trait explainer control surfaces without publishing them.
+      - Define GEO/AEO control rules for answer blocks, comparison tables, FAQ, and citation policy.
+      - Keep pilot, runtime, production, CMS, SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, search submission, rollout, import, and deploy gates closed.
+    allowed_paths:
+      - backend/content_assets/big5/result_page_v2/qa/seo_geo_control_handoff/**
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2SeoGeoControlHandoffTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify fap-web, frontend result-page copy, CMS, SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, routes, controllers, DB migrations, runtime wrappers, rollout gates, release snapshots, production import gates, dashboards, analytics refresh commands, or deploy workflows.
+      - Store real result identifiers, private links, PDF files, score data, comparative rank data, raw report bodies, user-level rows, or internal runtime objects.
+      - Create publishable page body copy or submit URLs to any search channel.
+    validation:
+      - cd backend && php artisan test --filter=BigFiveResultPageV2SeoGeoControlHandoffTest --no-ansi
+      - find backend/content_assets/big5/result_page_v2/qa/seo_geo_control_handoff/v0_1 -name '*.json' -print -exec python3 -m json.tool {} >/dev/null \;
+      - cd backend/content_assets/big5/result_page_v2/qa/seo_geo_control_handoff/v0_1 && shasum -a 256 -c SHA256SUMS
+      - cd backend && vendor/bin/pint --test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2SeoGeoControlHandoffTest.php
+      - cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='test_runtime_paths_have_no_uncommitted_diff' --no-ansi
+      - git diff --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
