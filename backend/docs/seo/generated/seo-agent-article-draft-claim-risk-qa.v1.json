@@ -1,0 +1,58 @@
+{
+  "version": "seo-agent-article-draft-claim-risk-qa.v1",
+  "command": "php artisan seo-agent:article-draft-claim-risk-qa",
+  "mode": "read_only_claim_risk_qa",
+  "inputs": {
+    "package": "seo-agent-cms-draft-package-dry-run.v1 artifact path",
+    "write_evidence": "seo-agent-controlled-cms-draft-write.v1 artifact path",
+    "target": "Exact article subject_ref, for example article:41:en",
+    "revision_id": "Exact ArticleRevision id to review",
+    "artifact_dir": "Directory for sanitized JSON evidence"
+  },
+  "supported_targets": [
+    "article"
+  ],
+  "evaluated_fields": [
+    "title",
+    "meta",
+    "faq",
+    "internal_link"
+  ],
+  "risk_categories": [
+    "overclaim",
+    "unsupported_claim",
+    "clinical_or_diagnostic_claim",
+    "guaranteed_outcome_claim",
+    "ranking_or_certainty_claim",
+    "hiring_fit_claim",
+    "locale_mismatch",
+    "semantic_drift",
+    "unsafe_internal_link_action"
+  ],
+  "status_values": [
+    "success",
+    "review_required",
+    "blocked"
+  ],
+  "mutates_database": false,
+  "mutates_cms": false,
+  "publishes_content": false,
+  "calls_external_model": false,
+  "calls_live_gsc_api": false,
+  "negative_guarantees": {
+    "database_write": false,
+    "cms_write": false,
+    "cms_publish": false,
+    "published_revision_mutation": false,
+    "live_published_content_mutation": false,
+    "search_channel_enqueue": false,
+    "search_channel_submit": false,
+    "indexing_request": false,
+    "sitemap_submission": false,
+    "scheduler_activation": false,
+    "queue_worker_started": false,
+    "production_env_change": false,
+    "external_model_api_call": false,
+    "live_gsc_api_call": false
+  }
+}

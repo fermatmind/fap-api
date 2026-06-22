@@ -1,6 +1,201 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-22T13:35:55+08:00",
+  "updated_at": "2026-06-22T22:35:00+08:00",
+  "SEO-AGENT-ARTICLE41-DRAFT-CLAIM-RISK-QA-01": {
+    "repo": "fap-api",
+    "branch": "codex/seo-agent-article41-draft-claim-risk-qa-01",
+    "base": "main",
+    "status": "in_progress",
+    "train_scope": "seo_agent_gsc_draft_canary_closeout",
+    "title": "SEO-AGENT-ARTICLE41-DRAFT-CLAIM-RISK-QA-01 Add article draft claim-risk QA",
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized SEO-AGENT-GSC-DRAFT-CANARY-CLOSEOUT-TRAIN-01 and PR-E through PR-I manifest/state initialization."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "PR-E is the first item in this closeout train; production article:41:en revision 68 readback QA success is the stated input evidence."
+      },
+      "scope_validation": {
+        "status": "pass_with_external_sidecar",
+        "evidence": "Changed files are confined to PR-E command/test/doc registration, closeout train metadata, and docs/codex/sidecar/20260622-seo-agent-closeout-external-pint-blocker.md."
+      },
+      "local": {
+        "status": "pass_with_external_pint_blocker",
+        "commands": [
+          "cd backend && php artisan list | rg seo-agent",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoAgentArticleDraftClaimRiskQaTest --display-warnings",
+          "cd backend && vendor/bin/pint --test app/Console/Commands/SeoAgentArticleDraftClaimRiskQaCommand.php tests/Feature/SeoIntel/SeoAgentArticleDraftClaimRiskQaTest.php",
+          "python3 -m json.tool backend/docs/seo/generated/seo-agent-article-draft-claim-risk-qa.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "cd backend && vendor/bin/pint --test app/Console/Commands tests/Feature/SeoIntel"
+        ],
+        "notes": "Focused PR-E tests and scoped Pint passed. Broad Pint failed only on pre-existing files outside PR-E scope; recorded in docs/codex/sidecar/20260622-seo-agent-closeout-external-pint-blocker.md."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-22T22:35:00+08:00",
+        "from": "missing_from_manifest",
+        "to": "in_progress",
+        "notes": "Initialized from explicit SEO Agent GSC draft canary closeout /goal."
+      },
+      {
+        "at": "2026-06-22T22:48:00+08:00",
+        "from": "in_progress",
+        "to": "local_checks_passed_with_external_sidecar",
+        "notes": "Focused command registration, feature test, scoped Pint, JSON contract parse, state JSON parse, and YAML parse passed; unrelated broad Pint issues recorded as sidecar."
+      }
+    ]
+  },
+  "SEO-AGENT-ARTICLE41-DRAFT-PREVIEW-RUNTIME-QA-01": {
+    "repo": "fap-api",
+    "branch": "codex/seo-agent-article41-draft-preview-runtime-qa-01",
+    "base": "main",
+    "status": "planned",
+    "train_scope": "seo_agent_gsc_draft_canary_closeout",
+    "title": "SEO-AGENT-ARTICLE41-DRAFT-PREVIEW-RUNTIME-QA-01 Add article draft preview runtime QA",
+    "depends_on": [
+      "SEO-AGENT-ARTICLE41-DRAFT-CLAIM-RISK-QA-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized SEO-AGENT-GSC-DRAFT-CANARY-CLOSEOUT-TRAIN-01 and PR-E through PR-I manifest/state initialization."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Waiting for SEO-AGENT-ARTICLE41-DRAFT-CLAIM-RISK-QA-01."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-22T22:35:00+08:00",
+        "from": "missing_from_manifest",
+        "to": "planned",
+        "notes": "Initialized from explicit SEO Agent GSC draft canary closeout /goal."
+      }
+    ]
+  },
+  "SEO-AGENT-GSC-REMAINING-CANDIDATE-BATCH-PLAN-01": {
+    "repo": "fap-api",
+    "branch": "codex/seo-agent-gsc-remaining-candidate-batch-plan-01",
+    "base": "main",
+    "status": "planned",
+    "train_scope": "seo_agent_gsc_draft_canary_closeout",
+    "title": "SEO-AGENT-GSC-REMAINING-CANDIDATE-BATCH-PLAN-01 Plan remaining GSC draft candidates",
+    "depends_on": [
+      "SEO-AGENT-ARTICLE41-DRAFT-PREVIEW-RUNTIME-QA-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized SEO-AGENT-GSC-DRAFT-CANARY-CLOSEOUT-TRAIN-01 and PR-E through PR-I manifest/state initialization."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Waiting for SEO-AGENT-ARTICLE41-DRAFT-PREVIEW-RUNTIME-QA-01."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-22T22:35:00+08:00",
+        "from": "missing_from_manifest",
+        "to": "planned",
+        "notes": "Initialized from explicit SEO Agent GSC draft canary closeout /goal."
+      }
+    ]
+  },
+  "SEO-AGENT-GSC-BATCH-DRAFT-QA-SUPPORT-01": {
+    "repo": "fap-api",
+    "branch": "codex/seo-agent-gsc-batch-draft-qa-support-01",
+    "base": "main",
+    "status": "planned",
+    "train_scope": "seo_agent_gsc_draft_canary_closeout",
+    "title": "SEO-AGENT-GSC-BATCH-DRAFT-QA-SUPPORT-01 Add batch draft QA support",
+    "depends_on": [
+      "SEO-AGENT-GSC-REMAINING-CANDIDATE-BATCH-PLAN-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized SEO-AGENT-GSC-DRAFT-CANARY-CLOSEOUT-TRAIN-01 and PR-E through PR-I manifest/state initialization."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Waiting for SEO-AGENT-GSC-REMAINING-CANDIDATE-BATCH-PLAN-01."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-22T22:35:00+08:00",
+        "from": "missing_from_manifest",
+        "to": "planned",
+        "notes": "Initialized from explicit SEO Agent GSC draft canary closeout /goal."
+      }
+    ]
+  },
+  "SEO-AGENT-GSC-DRAFT-PUBLISH-GATE-READINESS-01": {
+    "repo": "fap-api",
+    "branch": "codex/seo-agent-gsc-draft-publish-gate-readiness-01",
+    "base": "main",
+    "status": "planned",
+    "train_scope": "seo_agent_gsc_draft_canary_closeout",
+    "title": "SEO-AGENT-GSC-DRAFT-PUBLISH-GATE-READINESS-01 Add draft publish gate readiness",
+    "depends_on": [
+      "SEO-AGENT-GSC-BATCH-DRAFT-QA-SUPPORT-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized SEO-AGENT-GSC-DRAFT-CANARY-CLOSEOUT-TRAIN-01 and PR-E through PR-I manifest/state initialization."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Waiting for SEO-AGENT-GSC-BATCH-DRAFT-QA-SUPPORT-01."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-22T22:35:00+08:00",
+        "from": "missing_from_manifest",
+        "to": "planned",
+        "notes": "Initialized from explicit SEO Agent GSC draft canary closeout /goal."
+      }
+    ]
+  },
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
