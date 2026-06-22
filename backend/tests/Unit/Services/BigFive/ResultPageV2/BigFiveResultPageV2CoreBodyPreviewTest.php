@@ -817,6 +817,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         $changed = [
             'backend/database/migrations/2026_06_23_000100_expand_content_release_id_columns.php',
+            'backend/database/migrations/2026_06_23_000200_expand_content_release_action_column.php',
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
@@ -6496,6 +6497,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/database/migrations/2026_02_11_090100_add_idx_idempotency_keys_provider_recorded_hash.php',
             'backend/database/migrations/2026_02_27_110000_ensure_norms_table_lookup_index.php',
             'backend/database/migrations/2026_06_23_000100_expand_content_release_id_columns.php',
+            'backend/database/migrations/2026_06_23_000200_expand_content_release_action_column.php',
         ], true);
     }
 

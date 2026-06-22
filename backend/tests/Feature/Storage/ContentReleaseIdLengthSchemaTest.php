@@ -18,11 +18,14 @@ final class ContentReleaseIdLengthSchemaTest extends TestCase
     public function test_content_release_tables_accept_exact_enneagram_candidate_release_id(): void
     {
         $releaseId = 'enneagram_1r_a_to_1r_h_phase8b_candidate_20260427_a9fd3eb4';
+        $action = 'enneagram_registry_import_inactive_candidate';
         $this->assertSame(58, strlen($releaseId));
+        $this->assertGreaterThan(32, strlen($action));
+        $this->assertLessThanOrEqual(128, strlen($action));
 
         DB::table('content_pack_releases')->insert([
             'id' => $releaseId,
-            'action' => 'enneagram_registry_import_inactive_candidate',
+            'action' => $action,
             'region' => 'GLOBAL',
             'locale' => 'global',
             'dir_alias' => 'v2',
@@ -85,7 +88,10 @@ final class ContentReleaseIdLengthSchemaTest extends TestCase
             'created_by' => 'test',
         ]);
 
-        $this->assertDatabaseHas('content_pack_releases', ['id' => $releaseId]);
+        $this->assertDatabaseHas('content_pack_releases', [
+            'id' => $releaseId,
+            'action' => $action,
+        ]);
         $this->assertDatabaseHas('content_release_manifests', ['content_pack_release_id' => $releaseId]);
         $this->assertDatabaseHas('content_release_exact_manifests', ['content_pack_release_id' => $releaseId]);
         $this->assertDatabaseHas('content_pack_activations', ['release_id' => $releaseId]);
