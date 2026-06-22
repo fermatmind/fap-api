@@ -27246,3 +27246,44 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: BIG5-FREE-FULL-REPORT-RUNTIME-QA-READINESS-01
+    repo: fap-api
+    depends_on:
+      - BIG5-RESULT-PAGE-AGENT-GENERATED-READINESS-ARTIFACT-01
+    branch: codex/big5-free-full-report-runtime-qa-readiness
+    title: "BIG5-FREE-FULL-REPORT-RUNTIME-QA-READINESS-01: Add Big Five free full-report runtime QA readiness"
+    train_scope: big5_result_page_agent_readiness_to_pilot
+    status: user_authorized
+    scope:
+      - Add a backend-owned, redacted advisory QA package for Big Five V2 free full-report readiness.
+      - Cover result route, report API, report-access API, PDF, share, history, and compare evidence.
+      - Prove no paywall contradiction, private-boundary pass, backend authority, and no frontend copy.
+      - Keep pilot, runtime, production, CMS, SEO runtime, rollout, import, and deploy gates closed.
+    allowed_paths:
+      - backend/content_assets/big5/result_page_v2/qa/free_full_report_runtime_qa_readiness/**
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2FreeFullReportRuntimeQaReadinessTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify fap-web, frontend result-page copy, CMS, SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, routes, controllers, DB migrations, runtime wrappers, rollout gates, release snapshots, production import gates, or deploy workflows.
+      - Store real result identifiers, private links, PDF files, raw score data, public rank data, raw report bodies, or internal runtime objects.
+    validation:
+      - cd backend && php artisan test --filter=BigFiveResultPageV2FreeFullReportRuntimeQaReadinessTest --no-ansi
+      - cd backend && php artisan test --filter=BigFiveResultPageV2PdfPayloadAdapterTest --no-ansi
+      - cd backend && php artisan test --filter=BigFiveResultPageV2ShareSafeSummaryAdapterTest --no-ansi
+      - cd backend && php artisan test --filter=BigFiveResultPageV2HistorySnapshotAdapterTest --no-ansi
+      - cd backend && php artisan test --filter=BigFiveResultPageV2CompareSnapshotAdapterTest --no-ansi
+      - find backend/content_assets/big5/result_page_v2/qa/free_full_report_runtime_qa_readiness/v0_1 -name '*.json' -print -exec python3 -m json.tool {} >/dev/null \;
+      - cd backend/content_assets/big5/result_page_v2/qa/free_full_report_runtime_qa_readiness/v0_1 && shasum -a 256 -c SHA256SUMS
+      - git diff --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend

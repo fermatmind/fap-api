@@ -313,7 +313,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-agent-gsc-draft-publish-gate-readiness-01",
     "base": "main",
-    "status": "pr_open",
+    "status": "merged",
     "train_scope": "seo_agent_gsc_draft_canary_closeout",
     "title": "SEO-AGENT-GSC-DRAFT-PUBLISH-GATE-READINESS-01 Add draft publish gate readiness",
     "depends_on": [
@@ -59030,16 +59030,16 @@
         "evidence": "Changed files are limited to the Big Five V2 AssetAgent service/test and docs/codex PR-train metadata. No fap-web copy, runtime flag, production import gate, release snapshot, rollout gate, CMS write, SEO runtime, deploy, or DB write changed."
       },
       "github": {
-        "status": "pending",
-        "evidence": "Opened https://github.com/fermatmind/fap-api/pull/2326 on head bef2a9f4f2f7c40e71f93cba0ac1ac64e36976ed."
+        "status": "pass",
+        "evidence": "PR #2326 merged at 2026-06-22T16:34:43Z with merge commit 4916776fe9de657443278628e6794bcc15832c01; required GitHub checks passed before merge."
       }
     },
     "failure_reason": null,
-    "commit_sha": "bef2a9f4f2f7c40e71f93cba0ac1ac64e36976ed",
+    "commit_sha": "ca9af5079add9914ed8d52fb18fb948585c138bf",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2326",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-22T16:34:43Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-23T00:00:00Z",
@@ -59055,6 +59055,76 @@
         "at": "2026-06-23T00:45:00Z",
         "status": "pr_open",
         "note": "Opened https://github.com/fermatmind/fap-api/pull/2326 after local validation and scope validation passed."
+      },
+      {
+        "at": "2026-06-22T16:34:43Z",
+        "status": "merged",
+        "note": "PR #2326 merged with merge commit 4916776fe9de657443278628e6794bcc15832c01. origin/main contains the merge commit, the remote task branch was deleted, local main was synced, and local cleanup was executed."
+      }
+    ]
+  },
+  "BIG5-FREE-FULL-REPORT-RUNTIME-QA-READINESS-01": {
+    "repo": "fap-api",
+    "branch": "codex/big5-free-full-report-runtime-qa-readiness",
+    "base": "main",
+    "status": "local_validated",
+    "train_scope": "big5_result_page_agent_readiness_to_pilot",
+    "title": "BIG5-FREE-FULL-REPORT-RUNTIME-QA-READINESS-01: Add Big Five free full-report runtime QA readiness",
+    "depends_on": [
+      "BIG5-RESULT-PAGE-AGENT-GENERATED-READINESS-ARTIFACT-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly provided the Big Five readiness-to-pilot /goal and listed this scoped PR."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "fap-api PR #2326 is merged into origin/main as 4916776fe9de657443278628e6794bcc15832c01; fap-web docs refresh PR #1333 is merged as external consumer-doc evidence."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "cd backend && php artisan test --filter=BigFiveResultPageV2FreeFullReportRuntimeQaReadinessTest --no-ansi",
+          "cd backend && php artisan test --filter=BigFiveResultPageV2PdfPayloadAdapterTest --no-ansi",
+          "cd backend && php artisan test --filter=BigFiveResultPageV2ShareSafeSummaryAdapterTest --no-ansi",
+          "cd backend && php artisan test --filter=BigFiveResultPageV2HistorySnapshotAdapterTest --no-ansi",
+          "cd backend && php artisan test --filter=BigFiveResultPageV2CompareSnapshotAdapterTest --no-ansi",
+          "find backend/content_assets/big5/result_page_v2/qa/free_full_report_runtime_qa_readiness/v0_1 -name '*.json' -print -exec python3 -m json.tool {} >/dev/null \\;",
+          "cd backend/content_assets/big5/result_page_v2/qa/free_full_report_runtime_qa_readiness/v0_1 && shasum -a 256 -c SHA256SUMS",
+          "cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='test_runtime_paths_have_no_uncommitted_diff' --no-ansi",
+          "cd backend && vendor/bin/pint --test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2FreeFullReportRuntimeQaReadinessTest.php",
+          "git diff --check",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+        ],
+        "evidence": "Free full-report runtime QA readiness, PDF, share, history, and compare adapter tests passed. JSON parse, SHA256SUMS verification, focused Pint, runtime freeze guard, YAML/JSON metadata parse, and git diff check passed."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to the Big Five V2 free full-report QA package, focused PHPUnit, and docs/codex metadata. No runtime wrapper, controller, route, DB migration, fap-web copy, CMS, SEO runtime, rollout, import, release snapshot, or deploy file changed."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": "PR not opened yet."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-23T00:55:00Z",
+        "status": "in_progress",
+        "note": "Started from synced fap-api main after #2326 merge cleanup. Scope is a backend-only free full-report runtime QA readiness evidence package and focused tests."
+      },
+      {
+        "at": "2026-06-23T01:05:00Z",
+        "status": "local_validated",
+        "note": "Added a redacted advisory QA package covering result route, report API, report-access API, PDF, share, history, compare, no-paywall contradiction, private boundary, and backend authority. Focused tests, adapter tests, checksum, metadata, Pint, runtime-freeze guard, and diff checks passed."
       }
     ]
   },
