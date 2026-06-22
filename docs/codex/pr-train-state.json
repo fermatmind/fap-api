@@ -58629,7 +58629,7 @@
     "repo": "fap-api",
     "branch": "codex/fa30-api-03-readback-review-ledger",
     "base": "main",
-    "status": "local_validated",
+    "status": "pr_open",
     "train_scope": "fa30_batch2_backend_readback_review_ledger",
     "title": "FA30-API-03: Add Batch 2 readback and review ledger authority",
     "depends_on": [
@@ -58662,12 +58662,12 @@
       },
       "github": {
         "status": "pending",
-        "evidence": null
+        "evidence": "PR #2309 opened on head 9cea70b51d2837edd78df1ca2debdbb55635a571. Required GitHub checks have started on the Batch 2 readback/review ledger scope."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "9cea70b51d2837edd78df1ca2debdbb55635a571",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2309",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -58681,6 +58681,11 @@
         "at": "2026-06-22T20:31:00Z",
         "status": "local_validated",
         "note": "Added a backend-only Batch 2 readback/review ledger that reuses Big Five candidate review-manifest validation plus Enneagram source-ledger readiness and content-batch evaluation. Targeted feature/runtime-freeze tests, Pint, YAML/JSON parse, and diff checks passed."
+      },
+      {
+        "at": "2026-06-22T20:36:00Z",
+        "status": "pr_open",
+        "note": "Opened PR #2309 on head 9cea70b51d2837edd78df1ca2debdbb55635a571 after local validation and scope validation passed."
       }
     ]
   }
