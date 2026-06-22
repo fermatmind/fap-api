@@ -1,0 +1,32 @@
+{
+  "schema_version": "fap.enneagram.result_page.report_sidecar_issue.v0.1",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "allowed_blocker_sources": ["none", "external", "current_pr"],
+  "continue_policy": {
+    "external_blocker_can_continue_when_github_checks_green": true,
+    "external_blocker_can_continue_when_scope_validation_green": true,
+    "current_pr_blocker_can_continue": false
+  },
+  "release_readiness_gates": [
+    "candidate_export_staging_import",
+    "web_rendered_qa",
+    "api_smoke",
+    "rollback_simulation",
+    "production_manual_gate"
+  ],
+  "sidecar_issue": {
+    "create_issue_directly": false,
+    "payload_only": true
+  },
+  "negative_guarantees": {
+    "github_issue_created": false,
+    "bulk_content_generation_happened": false,
+    "production_import_happened": false,
+    "production_activation_happened": false,
+    "production_rollback_happened": false,
+    "runtime_switch_happened": false,
+    "production_write_happened": false,
+    "frontend_change_happened": false
+  }
+}
