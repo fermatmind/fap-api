@@ -3810,3 +3810,39 @@ prs:
     cleanup:
       delete_remote_branch: true
       run_local_cleanup: true
+
+  - id: SEO-AGENT-GSC-COHORT-HANDOFF-01
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/seo-agent-gsc-cohort-handoff-01
+    base: main
+    depends_on: []
+    mode: execute
+    title: "SEO-AGENT-GSC-COHORT-HANDOFF-01: add GSC cohort artifact adapter"
+    scope: >
+      Backend-only readonly GSC cohort artifact adapter. Add an Artisan
+      command that consumes exported GSC cohort/proposal JSON artifacts and
+      converts article draft proposals into standard SEO Agent source,
+      aggregate, Codex review handoff, verdict, and CMS draft-package dry-run
+      artifacts. Do not write DB rows, write CMS drafts, publish content,
+      enqueue or submit search/indexing, call live GSC APIs, enable scheduler,
+      start workers, mutate production, or change fap-web.
+    checks:
+      - "php artisan list | rg seo-agent:gsc-cohort-handoff"
+      - "vendor/bin/phpunit tests/Feature/SeoIntel/SeoAgentGscCohortHandoffTest.php"
+      - "vendor/bin/phpunit tests/Feature/SeoIntel/SeoAgentCodexReviewRunnerTest.php tests/Feature/SeoIntel/SeoAgentCmsDraftPackageDryRunTest.php"
+      - "vendor/bin/pint --test app/Console/Commands/SeoAgentGscCohortHandoffCommand.php tests/Feature/SeoIntel/SeoAgentGscCohortHandoffTest.php"
+      - "python3 -m json.tool docs/seo/generated/seo-agent-gsc-cohort-handoff.v1.json >/dev/null"
+      - "ruby -e 'require \"yaml\"; YAML.load_file(\"docs/codex/pr-train.yaml\")'"
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "git diff --check"
+      - "git diff --cached --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
