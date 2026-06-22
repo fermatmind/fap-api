@@ -765,6 +765,155 @@ final class CareerAiImpactAssetPreviewImportTest extends TestCase
         $this->assertStringContainsString('不是个人职业结果预测', $asset['items']['reader_boundary']['body']);
     }
 
+    public function test_ai_impact_preview_asset_can_provide_restricted_detail_shell_when_bundle_is_missing(): void
+    {
+        Config::set('career_ai_impact_assets.staging_preview_enabled', true);
+        Config::set('career_ai_impact_assets.preview_slugs', ['emergency-medicine-physicians']);
+        $occupation = $this->seedOccupation('emergency-medicine-physicians');
+        $row = $this->assetRow('emergency-medicine-physicians', 'en');
+        $row['occupation']['title_en'] = 'Emergency Medicine Physicians';
+        $row['occupation']['title_zh'] = '急诊医学医师';
+
+        CareerJobAiImpactAsset::query()->create([
+            'occupation_id' => $occupation->id,
+            'career_job_slug' => 'emergency-medicine-physicians',
+            'locale' => 'en',
+            'asset_version' => CareerJobAiImpactAsset::ASSET_VERSION_V5,
+            'status' => CareerJobAiImpactAsset::STATUS_STAGING_PREVIEW,
+            'preview_allowlisted' => true,
+            'asset_payload_json' => $row,
+            'sources_json' => $row['sources'],
+            'evidence_used_json' => $row['evidence_used'],
+            'derived_from_synthesis_json' => $row['derived_from_synthesis'],
+            'audit_fields_json' => $row['audit_fields'],
+            'asset_row_hash' => $row['audit_fields']['row_hash'],
+        ]);
+
+        $this->assertNotNull(
+            app(\App\Services\Career\AiImpactAssets\CareerAiImpactPreviewDetailShellBuilder::class)
+                ->build('emergency-medicine-physicians', 'en')
+        );
+
+        $response = $this->getJson('/api/v0.5/career/jobs/emergency-medicine-physicians?locale=en')
+            ->assertOk()
+            ->assertJsonPath('identity.canonical_slug', 'emergency-medicine-physicians')
+            ->assertJsonPath('display_surface_v1.surface_version', 'display.surface.v1')
+            ->assertJsonPath('display_surface_v1.status', 'ready_for_pilot')
+            ->assertJsonPath('display_surface_v1.subject.canonical_slug', 'emergency-medicine-physicians')
+            ->assertJsonPath('display_surface_v1.page.en.path', '/en/career/jobs/emergency-medicine-physicians')
+            ->assertJsonPath('seo_contract.indexable', false)
+            ->assertJsonPath('seo_contract.jsonld_allowed', false);
+
+        $encoded = json_encode($response->json(), JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+        $this->assertStringNotContainsString('evidence_id', $encoded);
+        $this->assertStringNotContainsString('row_hash', $encoded);
+        $this->assertStringNotContainsString('source_id', $encoded);
+        $this->assertStringNotContainsString('search_projection', $encoded);
+
+        $this->getJson('/api/v0.5/career/jobs/emergency-medicine-physicians/ai-impact-asset?locale=en')
+            ->assertOk()
+            ->assertJsonPath('ai_impact_asset_v1.slug', 'emergency-medicine-physicians');
+    }
+
+    public function test_ai_impact_preview_detail_shell_fails_closed_when_disabled_or_not_allowlisted(): void
+    {
+        Config::set('career_ai_impact_assets.staging_preview_enabled', false);
+        Config::set('career_ai_impact_assets.preview_slugs', ['emergency-medicine-physicians']);
+        $occupation = $this->seedOccupation('emergency-medicine-physicians');
+        $row = $this->assetRow('emergency-medicine-physicians', 'en');
+
+        CareerJobAiImpactAsset::query()->create([
+            'occupation_id' => $occupation->id,
+            'career_job_slug' => 'emergency-medicine-physicians',
+            'locale' => 'en',
+            'asset_version' => CareerJobAiImpactAsset::ASSET_VERSION_V5,
+            'status' => CareerJobAiImpactAsset::STATUS_STAGING_PREVIEW,
+            'preview_allowlisted' => true,
+            'asset_payload_json' => $row,
+            'sources_json' => $row['sources'],
+            'evidence_used_json' => $row['evidence_used'],
+            'derived_from_synthesis_json' => $row['derived_from_synthesis'],
+            'audit_fields_json' => $row['audit_fields'],
+            'asset_row_hash' => $row['audit_fields']['row_hash'],
+        ]);
+
+        $this->getJson('/api/v0.5/career/jobs/emergency-medicine-physicians?locale=en')
+            ->assertNotFound();
+
+        Config::set('career_ai_impact_assets.staging_preview_enabled', true);
+        CareerJobAiImpactAsset::query()
+            ->where('career_job_slug', 'emergency-medicine-physicians')
+            ->where('locale', 'en')
+            ->update(['preview_allowlisted' => false]);
+
+        $this->getJson('/api/v0.5/career/jobs/emergency-medicine-physicians?locale=en')
+            ->assertNotFound();
+    }
+
+    public function test_ai_impact_preview_detail_shell_covers_preview_slugs_without_standard_detail_bundles(): void
+    {
+        $slugs = [
+            'emergency-medicine-physicians',
+            'pharmacists',
+            'diagnostic-medical-sonographers',
+            'medical-and-clinical-laboratory-technologists',
+            'genetic-counselors',
+            'physicians-and-surgeons',
+            'aviation-inspectors',
+            'aircraft-and-avionics-equipment-mechanics-and-technicians',
+            'judicial-law-clerks',
+            'military-careers',
+            'first-line-supervisors-of-air-crew-members',
+            'first-line-supervisors-of-weapons-specialists-crew-members',
+            'school-and-career-counselors',
+            'special-education-teachers-elementary-school',
+            'multimedia-artists-and-animators',
+            'police-and-sheriff-s-patrol-officers',
+            'heavy-and-tractor-trailer-truck-drivers',
+            'construction-and-building-inspectors',
+            'information-security-analysts',
+            'computer-systems-engineers-architects',
+        ];
+
+        Config::set('career_ai_impact_assets.staging_preview_enabled', true);
+        Config::set('career_ai_impact_assets.preview_slugs', $slugs);
+
+        foreach ($slugs as $slug) {
+            $occupation = $this->seedOccupation($slug);
+            foreach (['zh-CN', 'en'] as $locale) {
+                $row = $this->assetRow($slug, $locale);
+                CareerJobAiImpactAsset::query()->create([
+                    'occupation_id' => $occupation->id,
+                    'career_job_slug' => $slug,
+                    'locale' => $locale,
+                    'asset_version' => CareerJobAiImpactAsset::ASSET_VERSION_V5,
+                    'status' => CareerJobAiImpactAsset::STATUS_STAGING_PREVIEW,
+                    'preview_allowlisted' => true,
+                    'asset_payload_json' => $row,
+                    'sources_json' => $row['sources'],
+                    'evidence_used_json' => $row['evidence_used'],
+                    'derived_from_synthesis_json' => $row['derived_from_synthesis'],
+                    'audit_fields_json' => $row['audit_fields'],
+                    'asset_row_hash' => $row['audit_fields']['row_hash'],
+                ]);
+            }
+        }
+
+        foreach ($slugs as $slug) {
+            $this->getJson('/api/v0.5/career/jobs/'.$slug.'?locale=zh-CN')
+                ->assertOk()
+                ->assertJsonPath('identity.canonical_slug', $slug)
+                ->assertJsonPath('display_surface_v1.subject.canonical_slug', $slug)
+                ->assertJsonPath('display_surface_v1.page.zh.path', '/zh/career/jobs/'.$slug);
+
+            $this->getJson('/api/v0.5/career/jobs/'.$slug.'?locale=en')
+                ->assertOk()
+                ->assertJsonPath('identity.canonical_slug', $slug)
+                ->assertJsonPath('display_surface_v1.subject.canonical_slug', $slug)
+                ->assertJsonPath('display_surface_v1.page.en.path', '/en/career/jobs/'.$slug);
+        }
+    }
+
     public function test_preview_api_fails_closed_when_disabled_or_not_allowlisted(): void
     {
         Config::set('career_ai_impact_assets.staging_preview_enabled', false);

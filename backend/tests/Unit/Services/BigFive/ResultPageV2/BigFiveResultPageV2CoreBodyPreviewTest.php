@@ -207,6 +207,17 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_ai_impact_preview_route_readiness_changes(): void
+    {
+        $changed = [
+            'backend/app/Http/Controllers/API/V0_5/Career/CareerJobDetailController.php',
+            'backend/app/Services/Career/AiImpactAssets/CareerAiImpactPreviewDetailShellBuilder.php',
+            'backend/tests/Feature/Career/CareerAiImpactAssetPreviewImportTest.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_career_detail_ready_1048_audit_scanner_changes(): void
     {
         $changed = [
@@ -4174,6 +4185,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isCareerAiImpactPreviewRouteReadinessFile($file)) {
+                continue;
+            }
+
             if ($this->isCmsArticleReportCorrectnessFile($file)) {
                 continue;
             }
@@ -5355,6 +5370,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isCareerCliArtifactPathGuardFile(string $file): bool
     {
         return $file === 'backend/app/Services/Career/CareerCliArtifactPathGuard.php';
+    }
+
+    private function isCareerAiImpactPreviewRouteReadinessFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Http/Controllers/API/V0_5/Career/CareerJobDetailController.php',
+            'backend/app/Services/Career/AiImpactAssets/CareerAiImpactPreviewDetailShellBuilder.php',
+            'backend/tests/Feature/Career/CareerAiImpactAssetPreviewImportTest.php',
+        ], true);
     }
 
     private function isCmsArticleReportCorrectnessFile(string $file): bool
