@@ -1,0 +1,62 @@
+{
+  "version": "seo-agent-cms-draft-readback-qa.v1",
+  "task": "SEO-AGENT-GSC-ARTICLE41-DRAFT-READBACK-QA-01",
+  "repo": "fap-api",
+  "command": "php artisan seo-agent:cms-draft-readback-qa",
+  "input_schemas": [
+    "seo-agent-cms-draft-package-dry-run.v1",
+    "seo-agent-controlled-cms-draft-write.v1"
+  ],
+  "output_schema": "seo-agent-cms-draft-readback-qa.v1",
+  "default_mode": "read_only_qa_artifact",
+  "required_options": [
+    "--package=<seo-agent-cms-draft-package-dry-run.v1 path>",
+    "--write-evidence=<seo-agent-controlled-cms-draft-write.v1 path>",
+    "--target=<subject_ref>"
+  ],
+  "optional_options": [
+    "--package-sha256=<expected package sha256>",
+    "--artifact-dir=<directory>",
+    "--json"
+  ],
+  "supported_targets": [
+    "article"
+  ],
+  "checks": [
+    "target exists in dry-run package",
+    "target exists in write evidence",
+    "matching article_revision exists for subject_ref + package_sha256 + target_fields",
+    "draft revision is not the live published revision",
+    "draft revision payload preserves title/meta/FAQ/internal-link/proposal-quality fields when present in the package",
+    "live article state remains published separately from the draft revision"
+  ],
+  "forbidden_output": [
+    "raw_url",
+    "raw_query",
+    "credentials",
+    "cookies",
+    "tokens",
+    "content_html",
+    "content_md",
+    "cms_draft_body"
+  ],
+  "publishes_content": false,
+  "mutates_cms": false,
+  "mutates_published_revision": false,
+  "negative_guarantees": {
+    "database_write": false,
+    "cms_write": false,
+    "cms_publish": false,
+    "published_revision_mutation": false,
+    "live_published_content_mutation": false,
+    "search_channel_enqueue": false,
+    "search_channel_submit": false,
+    "indexing_request": false,
+    "sitemap_submission": false,
+    "scheduler_activation": false,
+    "queue_worker_started": false,
+    "production_env_change": false,
+    "external_model_api_call": false
+  },
+  "next_step": "Continue to additional CMS draft write canary only when readback evidence has ok=true and status=success."
+}

@@ -119,8 +119,8 @@ use App\Console\Commands\EnneagramResultPageContentBatchCommand;
 use App\Console\Commands\EnneagramResultPageOpsControlPlaneCommand;
 use App\Console\Commands\EnneagramResultPageOpsRunnerCommand;
 use App\Console\Commands\EnneagramResultPageProductionManualGateCommand;
-use App\Console\Commands\EnneagramResultPageReportSidecarIssueCommand;
 use App\Console\Commands\EnneagramResultPageRenderedQaSmokeHarnessCommand;
+use App\Console\Commands\EnneagramResultPageReportSidecarIssueCommand;
 use App\Console\Commands\EnneagramRollbackInactiveCandidateRelease;
 use App\Console\Commands\EnneagramRollbackRegistryRelease;
 use App\Console\Commands\Eq60PsychometricsReport;
@@ -185,6 +185,7 @@ use App\Console\Commands\SdsPsychometricsReport;
 use App\Console\Commands\SeedScaleRegistry;
 use App\Console\Commands\SeoAgentAutoRollbackGuardCommand;
 use App\Console\Commands\SeoAgentCmsDraftPackageDryRunCommand;
+use App\Console\Commands\SeoAgentCmsDraftReadbackQaCommand;
 use App\Console\Commands\SeoAgentCmsDraftWriteCommand;
 use App\Console\Commands\SeoAgentCmsFaqGapScanCommand;
 use App\Console\Commands\SeoAgentCmsPublishAutoCanaryCommand;
@@ -415,6 +416,7 @@ class Kernel extends ConsoleKernel
         SeoAgentCmsTdkGapScanCommand::class,
         SeoAgentCodexReviewRunnerCommand::class,
         SeoAgentCmsDraftPackageDryRunCommand::class,
+        SeoAgentCmsDraftReadbackQaCommand::class,
         SeoAgentCmsDraftWriteCommand::class,
         SeoAgentCmsPublishAutoCanaryCommand::class,
         SeoAgentCmsPublishCanaryCommand::class,
