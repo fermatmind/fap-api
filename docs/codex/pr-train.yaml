@@ -26493,6 +26493,7 @@ prs:
       - Keep production default denied.
     allowed_paths:
       - backend/config/**
+      - backend/app/Services/Report/**
       - backend/app/Services/Riasec/**
       - backend/tests/**/RiasecPilot*
       - backend/tests/**/RiasecResultPage*

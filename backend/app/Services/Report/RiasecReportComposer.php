@@ -7,6 +7,7 @@ namespace App\Services\Report;
 use App\Models\Attempt;
 use App\Models\Result;
 use App\Services\Riasec\RiasecPublicProjectionService;
+use Illuminate\Support\Facades\Log;
 
 final class RiasecReportComposer
 {
@@ -81,7 +82,12 @@ final class RiasecReportComposer
      */
     private function buildResultPageV2RuntimeWrapper(Attempt $attempt, Result $result, string $variant, array $projectionV2, array $ctx): ?array
     {
-        if (! $this->resultPageV2GateAllowsRuntime($ctx)) {
+        $gateDecision = $this->resultPageV2GateDecision($attempt, $projectionV2, $ctx);
+        if ((bool) ($ctx['riasec_result_page_v2_pilot'] ?? false)) {
+            $this->recordResultPageV2PilotGateDecision($gateDecision);
+        }
+
+        if (! (bool) $gateDecision['allowed']) {
             return null;
         }
         if ($variant !== ReportAccess::VARIANT_FULL) {
@@ -110,6 +116,12 @@ final class RiasecReportComposer
                 'pilot_runtime_enabled' => (bool) config('riasec_result_page_v2.pilot_runtime_enabled', false),
                 'production_runtime_enabled' => false,
                 'environment' => app()->environment(),
+                'mode' => $gateDecision['mode'],
+                'pilot_gate_decision' => $gateDecision['allowed'] ? 'allow' : 'deny',
+                'pilot_gate_reason' => $gateDecision['reason'],
+                'pilot_gate_matched_rule' => $gateDecision['matched_rule'],
+                'pilot_kill_switch_enabled' => (bool) config('riasec_result_page_v2.pilot_kill_switch_enabled', false),
+                'raw_identifier_exported' => false,
             ],
             'identity' => [
                 'scale_code' => 'RIASEC',
@@ -141,20 +153,24 @@ final class RiasecReportComposer
 
     /**
      * @param  array<string,mixed>  $ctx
+     * @param  array<string,mixed>  $projectionV2
+     * @return array{allowed: bool, mode: string, reason: string, matched_rule: string|null, context: array<string,string>}
      */
-    private function resultPageV2GateAllowsRuntime(array $ctx): bool
+    private function resultPageV2GateDecision(Attempt $attempt, array $projectionV2, array $ctx): array
     {
+        $context = $this->resultPageV2PilotContext($attempt, $projectionV2);
+
         if ((bool) config('riasec_result_page_v2.production_runtime_enabled', false)) {
-            return false;
+            return $this->resultPageV2GateDenied('none', 'production_runtime_flag_denied', $context);
         }
         if ((bool) config('riasec_result_page_v2.production_rollout_enabled', false)) {
-            return false;
+            return $this->resultPageV2GateDenied('none', 'production_rollout_flag_denied', $context);
         }
         if ((bool) config('riasec_result_page_v2.production_rollout_manual_approval_granted', false)) {
-            return false;
+            return $this->resultPageV2GateDenied('none', 'production_manual_approval_flag_denied', $context);
         }
         if (! (bool) config('riasec_result_page_v2.enabled', false)) {
-            return false;
+            return $this->resultPageV2GateDenied('none', 'runtime_gate_disabled', $context);
         }
 
         $allowedEnvironments = array_map(
@@ -162,15 +178,184 @@ final class RiasecReportComposer
             (array) config('riasec_result_page_v2.allowed_environments', [])
         );
         if (! in_array(app()->environment(), $allowedEnvironments, true)) {
-            return false;
+            return $this->resultPageV2GateDenied('none', 'runtime_environment_denied', $context);
         }
 
         if ((bool) ($ctx['riasec_result_page_v2_staging'] ?? false) && (bool) config('riasec_result_page_v2.staging_runtime_enabled', false)) {
-            return true;
+            return $this->resultPageV2GateAllowed('staging', 'staging_runtime_allowed', null, $context);
         }
 
-        return (bool) ($ctx['riasec_result_page_v2_pilot'] ?? false)
-            && (bool) config('riasec_result_page_v2.pilot_runtime_enabled', false);
+        if (! (bool) ($ctx['riasec_result_page_v2_pilot'] ?? false) || ! (bool) config('riasec_result_page_v2.pilot_runtime_enabled', false)) {
+            return $this->resultPageV2GateDenied('none', 'runtime_context_denied', $context);
+        }
+
+        return $this->resultPageV2PilotAllowlistDecision($context);
+    }
+
+    /**
+     * @param  array<string,string>  $context
+     * @return array{allowed: bool, mode: string, reason: string, matched_rule: string|null, context: array<string,string>}
+     */
+    private function resultPageV2PilotAllowlistDecision(array $context): array
+    {
+        if ((bool) config('riasec_result_page_v2.pilot_kill_switch_enabled', false)) {
+            return $this->resultPageV2GateDenied('pilot', 'pilot_kill_switch_enabled', $context);
+        }
+
+        if (! in_array($context['environment'], $this->resultPageV2ConfiguredList('pilot_allowed_environments'), true)) {
+            return $this->resultPageV2GateDenied('pilot', 'pilot_environment_denied', $context);
+        }
+
+        if ($context['environment'] === 'production' && ! (bool) config('riasec_result_page_v2.pilot_production_allowlist_enabled', false)) {
+            return $this->resultPageV2GateDenied('pilot', 'pilot_production_denied', $context);
+        }
+
+        $allowedFormCodes = $this->resultPageV2ConfiguredList('pilot_allowed_form_codes');
+        if ($allowedFormCodes !== [] && ! in_array($context['form_code'], $allowedFormCodes, true)) {
+            return $this->resultPageV2GateDenied('pilot', 'pilot_form_denied', $context);
+        }
+
+        $allowedLocales = $this->resultPageV2ConfiguredList('pilot_allowed_locales');
+        if ($allowedLocales !== [] && ! in_array($context['locale'], $allowedLocales, true)) {
+            return $this->resultPageV2GateDenied('pilot', 'pilot_locale_denied', $context);
+        }
+
+        $allowlists = [
+            'attempt_id' => $this->resultPageV2ConfiguredList('pilot_access_allowed_attempt_ids'),
+            'user_id' => $this->resultPageV2ConfiguredList('pilot_access_allowed_user_ids'),
+            'anon_id' => $this->resultPageV2ConfiguredList('pilot_access_allowed_anon_ids'),
+            'org_id' => $this->resultPageV2ConfiguredList('pilot_access_allowed_org_ids'),
+        ];
+
+        if (! $this->resultPageV2HasConfiguredAllowlist($allowlists)) {
+            return $this->resultPageV2GateDenied('pilot', 'pilot_allowlist_empty', $context);
+        }
+
+        foreach ($allowlists as $field => $allowedValues) {
+            $candidate = $context[$field] ?? '';
+            if ($candidate !== '' && in_array($candidate, $allowedValues, true)) {
+                return $this->resultPageV2GateAllowed('pilot', 'pilot_allowlist_allowed', $field, $context);
+            }
+        }
+
+        return $this->resultPageV2GateDenied('pilot', 'pilot_allowlist_denied', $context);
+    }
+
+    /**
+     * @param  array<string,mixed>  $projectionV2
+     * @return array<string,string>
+     */
+    private function resultPageV2PilotContext(Attempt $attempt, array $projectionV2): array
+    {
+        return [
+            'attempt_id' => trim((string) ($attempt->attempt_id ?? $attempt->id ?? '')),
+            'user_id' => trim((string) ($attempt->user_id ?? '')),
+            'anon_id' => trim((string) ($attempt->anon_id ?? '')),
+            'org_id' => trim((string) ($attempt->org_id ?? '')),
+            'scale_code' => strtoupper(trim((string) ($attempt->scale_code ?? ''))),
+            'environment' => (string) app()->environment(),
+            'form_code' => trim((string) (data_get($projectionV2, 'form.form_code') ?? data_get($attempt->answers_summary_json, 'meta.form_code', ''))),
+            'locale' => trim((string) ($attempt->locale ?? data_get($projectionV2, 'locale', ''))),
+        ];
+    }
+
+    /**
+     * @param  array<string,string>  $context
+     * @return array{allowed: bool, mode: string, reason: string, matched_rule: string|null, context: array<string,string>}
+     */
+    private function resultPageV2GateAllowed(string $mode, string $reason, ?string $matchedRule, array $context): array
+    {
+        return [
+            'allowed' => true,
+            'mode' => $mode,
+            'reason' => $reason,
+            'matched_rule' => $matchedRule,
+            'context' => $context,
+        ];
+    }
+
+    /**
+     * @param  array<string,string>  $context
+     * @return array{allowed: bool, mode: string, reason: string, matched_rule: string|null, context: array<string,string>}
+     */
+    private function resultPageV2GateDenied(string $mode, string $reason, array $context): array
+    {
+        return [
+            'allowed' => false,
+            'mode' => $mode,
+            'reason' => $reason,
+            'matched_rule' => null,
+            'context' => $context,
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function resultPageV2ConfiguredList(string $key): array
+    {
+        $configured = config('riasec_result_page_v2.'.$key, []);
+        if (is_string($configured)) {
+            $configured = explode(',', $configured);
+        }
+
+        if (! is_array($configured)) {
+            return [];
+        }
+
+        return array_values(array_filter(array_map(
+            static fn (mixed $value): string => trim((string) $value),
+            $configured,
+        )));
+    }
+
+    /**
+     * @param  array<string,list<string>>  $allowlists
+     */
+    private function resultPageV2HasConfiguredAllowlist(array $allowlists): bool
+    {
+        foreach ($allowlists as $allowedValues) {
+            if ($allowedValues !== []) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param  array{allowed: bool, mode: string, reason: string, matched_rule: string|null, context: array<string,string>}  $decision
+     */
+    private function recordResultPageV2PilotGateDecision(array $decision): void
+    {
+        $context = $decision['context'];
+
+        Log::info('RIASEC_RESULT_PAGE_V2_PILOT_GATE', [
+            'decision' => $decision['allowed'] ? 'allow' : 'deny',
+            'mode' => $decision['mode'],
+            'reason' => $decision['reason'],
+            'matched_rule' => $decision['matched_rule'],
+            'environment' => $context['environment'] ?? '',
+            'scale_code' => $context['scale_code'] ?? '',
+            'form_code' => $context['form_code'] ?? '',
+            'locale' => $context['locale'] ?? '',
+            'attempt_hash' => $this->resultPageV2HashIdentifier($context['attempt_id'] ?? ''),
+            'user_hash' => $this->resultPageV2HashIdentifier($context['user_id'] ?? ''),
+            'anon_hash' => $this->resultPageV2HashIdentifier($context['anon_id'] ?? ''),
+            'org_hash' => $this->resultPageV2HashIdentifier($context['org_id'] ?? ''),
+            'raw_identifier_exported' => false,
+            'production_rollout_enabled' => false,
+        ]);
+    }
+
+    private function resultPageV2HashIdentifier(string $identifier): string
+    {
+        $identifier = trim($identifier);
+        if ($identifier === '') {
+            return '';
+        }
+
+        return hash('sha256', $identifier);
     }
 
     /**
