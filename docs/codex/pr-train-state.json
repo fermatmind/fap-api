@@ -58470,7 +58470,7 @@
     "repo": "fap-api",
     "branch": "codex/fa30-api-01-analytics-smoke-exclusion",
     "base": "main",
-    "status": "local_validated",
+    "status": "pr_open",
     "train_scope": "fa30_batch2_backend_ci_boundary",
     "title": "FA30-API-01: Exclude analytics-only backend changes from MBTI smoke",
     "depends_on": [],
@@ -58500,11 +58500,15 @@
       "scope_validation": {
         "status": "pass",
         "evidence": "Changed files are limited to .github/workflows/ci.yml, backend/app/Services/Ci/ScaleImpactResolver.php, backend/scripts/ci_verify_mbti.sh, backend/tests/Unit/Ci/ScaleImpactResolverTest.php, and docs/codex PR-train metadata. No Batch 2 dry-run/readback authority files, frontend runtime files, deploy files, or production write paths changed."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": "PR #2302 opened on head f3c13fee84c8bbabf520c8d6efb82e485538c357. Required GitHub checks have started; mergeStateStatus is UNSTABLE while checks are still running."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "f3c13fee84c8bbabf520c8d6efb82e485538c357",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2302",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -58518,6 +58522,11 @@
         "at": "2026-06-22T11:20:47Z",
         "status": "local_validated",
         "note": "Implemented analytics-only path isolation in ScaleImpactResolver, added focused unit coverage, wired ci.yml to export RUN_MBTI_SMOKE/SCALE_SCOPE into ci_verify_mbti, and made the MBTI smoke/E2E block skippable while preserving later auth/OpenAPI/security/phpunit gates."
+      },
+      {
+        "at": "2026-06-22T11:22:35Z",
+        "status": "pr_open",
+        "note": "Opened PR #2302 after local validation and scope validation passed. GitHub checks started on head f3c13fee84c8bbabf520c8d6efb82e485538c357."
       }
     ]
   }
