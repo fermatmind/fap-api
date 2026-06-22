@@ -1,0 +1,71 @@
+{
+  "version": "seo-agent-gsc-remaining-candidate-batch-plan.v1",
+  "command": "php artisan seo-agent:gsc-remaining-candidate-batch-plan",
+  "purpose": "Read-only planner for remaining GSC cohort article candidates after the article:41:en CMS draft write canary.",
+  "input_schema": "seo-agent-cms-draft-package-dry-run.v1",
+  "inputs": {
+    "package": "Path to PR-B CMS draft package dry-run artifact.",
+    "completed_target": "Completed subject ref to exclude; defaults to article:41:en.",
+    "artifact_dir": "Directory for sanitized planning evidence.",
+    "json": "Emit machine-readable summary."
+  },
+  "outputs": [
+    "seo-agent-gsc-remaining-candidate-batch-plan-*.json"
+  ],
+  "planning_policy": {
+    "only_source_family": "gsc_cohort_artifact",
+    "only_target_model": "article",
+    "exclude_completed_target": "article:41:en",
+    "expected_remaining_candidate_count": 6,
+    "recommended_limit": "2 or 3, never all 6",
+    "ranking_inputs": [
+      "priority",
+      "impressions",
+      "locale risk",
+      "TDK quality",
+      "FAQ risk",
+      "internal-link risk",
+      "claim-risk surface"
+    ],
+    "chinese_candidate_caution": "Chinese TDK and FAQ proposals require extra review before any CMS draft write."
+  },
+  "approval_gate": {
+    "cms_draft_write_requires_separate_exact_approval": true,
+    "publish_requires_separate_exact_approval": true,
+    "search_or_indexing_requires_separate_exact_approval": true
+  },
+  "mutates_database": false,
+  "mutates_cms": false,
+  "publishes_content": false,
+  "submits_search": false,
+  "calls_external_model": false,
+  "calls_live_gsc_api": false,
+  "negative_guarantees": {
+    "database_write": false,
+    "cms_write": false,
+    "cms_publish": false,
+    "search_channel_enqueue": false,
+    "search_channel_submit": false,
+    "indexing_request": false,
+    "sitemap_submission": false,
+    "scheduler_activation": false,
+    "queue_worker_start": false,
+    "external_model_api_call": false,
+    "live_gsc_api_call": false
+  },
+  "forbidden_input_fields_or_strings": [
+    "raw_url",
+    "raw_query",
+    "credential_path",
+    "service_account_json",
+    "client_email",
+    "private_key",
+    "Bearer ",
+    "token",
+    "cookie",
+    "session",
+    "content_md",
+    "content_html",
+    "cms_draft_body"
+  ]
+}

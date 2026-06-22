@@ -23943,6 +23943,7 @@ prs:
       - backend/app/Console/Kernel.php
       - backend/docs/seo/generated/seo-agent-gsc-remaining-candidate-batch-plan.v1.json
       - backend/tests/Feature/SeoIntel/SeoAgentGscRemainingCandidateBatchPlanTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train-state.json
     do_not:
       - Execute CMS draft writes.
@@ -23950,6 +23951,7 @@ prs:
       - Submit URL Truth, sitemap, IndexNow, or search/indexing requests.
     validation:
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoAgentGscRemainingCandidateBatchPlanTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=seo_agent_gsc_remaining_candidate_batch_plan
       - cd backend && vendor/bin/pint --test app/Console/Commands tests/Feature/SeoIntel
       - python3 -m json.tool backend/docs/seo/generated/seo-agent-gsc-remaining-candidate-batch-plan.v1.json >/dev/null
       - git diff --check
