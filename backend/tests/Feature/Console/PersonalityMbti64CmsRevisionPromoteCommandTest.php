@@ -374,6 +374,48 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
             ->first());
     }
 
+    public function test_visible_query_backed_three_subset_is_idempotent_after_write(): void
+    {
+        $this->seedProjectionTargets();
+        [$packagePath, $qaPath] = $this->writeProjectionArtifacts($this->validProjectionPackage(), $this->validProjectionQa());
+        $this->createProjectionDraftRevisions($packagePath, $qaPath);
+        $options = $this->promoteWriteOptions($packagePath);
+        $options['--visible-query-backed-3'] = true;
+
+        $this->assertSame(0, Artisan::call('personality:mbti64-cms-revision-promote', $options), Artisan::output());
+        $this->reorderOnePromotedVisibleThreeJsonPayload();
+
+        $dryRunExit = Artisan::call('personality:mbti64-cms-revision-promote', [
+            '--package' => $packagePath,
+            '--dry-run' => true,
+            '--visible-query-backed-3' => true,
+            '--json' => true,
+        ]);
+
+        $dryRunPayload = $this->jsonOutput();
+        $this->assertSame(0, $dryRunExit, Artisan::output());
+        $this->assertTrue($dryRunPayload['ok']);
+        $this->assertSame(3, $dryRunPayload['row_count']);
+        $this->assertSame([], array_column(array_filter(
+            $dryRunPayload['rows'],
+            static fn (array $row): bool => ($row['live_matches_revision'] ?? false) !== true
+        ), 'url'));
+        $this->assertSame(0, $dryRunPayload['would_promote_count']);
+        $this->assertSame(3, $dryRunPayload['skipped_existing_count']);
+        $this->assertSame(array_fill(0, 3, 'would_skip_existing'), array_column($dryRunPayload['rows'], 'action'));
+        $this->assertSame(array_fill(0, 3, true), array_column($dryRunPayload['rows'], 'live_matches_revision'));
+
+        $secondWriteExit = Artisan::call('personality:mbti64-cms-revision-promote', $options);
+
+        $secondWritePayload = $this->jsonOutput();
+        $this->assertSame(0, $secondWriteExit, Artisan::output());
+        $this->assertTrue($secondWritePayload['ok']);
+        $this->assertFalse($secondWritePayload['writes_committed']);
+        $this->assertSame(0, $secondWritePayload['promoted_count']);
+        $this->assertSame(3, $secondWritePayload['skipped_existing_count']);
+        $this->assertSame(array_fill(0, 3, 'skipped_existing'), array_column($secondWritePayload['rows'], 'action'));
+    }
+
     public function test_visible_query_backed_three_subset_fails_closed_when_fixed_url_is_missing(): void
     {
         $this->seedProjectionTargets();
@@ -679,6 +721,32 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         ]);
 
         $this->assertSame(0, $exitCode, Artisan::output());
+    }
+
+    private function reorderOnePromotedVisibleThreeJsonPayload(): void
+    {
+        $seo = PersonalityProfileVariantSeoMeta::query()->firstOrFail();
+        $seo->jsonld_overrides_json = $this->reverseAssociativeKeys((array) $seo->jsonld_overrides_json);
+        $seo->save();
+
+        $section = PersonalityProfileVariantSection::query()
+            ->where('section_key', 'mbti64_promotion_metadata')
+            ->firstOrFail();
+        $section->payload_json = $this->reverseAssociativeKeys((array) $section->payload_json);
+        $section->save();
+    }
+
+    /**
+     * @param  array<string|int,mixed>  $value
+     * @return array<string|int,mixed>
+     */
+    private function reverseAssociativeKeys(array $value): array
+    {
+        foreach ($value as $key => $nested) {
+            $value[$key] = is_array($nested) ? $this->reverseAssociativeKeys($nested) : $nested;
+        }
+
+        return array_is_list($value) ? $value : array_reverse($value, true);
     }
 
     /**
