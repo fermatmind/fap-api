@@ -33,7 +33,7 @@ final class SeoAgentArticleDraftPreviewRuntimeQaTest extends TestCase
         ]);
 
         $summary = json_decode(trim(Artisan::output()), true);
-        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame(0, $exitCode, json_encode($summary, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?: Artisan::output());
         $this->assertSame('success', $summary['status'] ?? null);
         $this->assertTrue((bool) ($summary['preview_readable'] ?? false));
         $this->assertTrue((bool) ($summary['public_runtime_uses_published_revision'] ?? false));
@@ -78,6 +78,39 @@ final class SeoAgentArticleDraftPreviewRuntimeQaTest extends TestCase
         $artifact = $this->readJson((string) data_get($summary, 'artifact.path'));
         $this->assertContains('draft_revision_is_public_published_revision', array_column($artifact['qa_findings'] ?? [], 'issue'));
         $this->assertFalse((bool) data_get($artifact, 'preview_read.preview_readable', true));
+    }
+
+    #[Test]
+    public function it_accepts_legacy_inline_published_articles_when_revision_pointer_targets_another_article(): void
+    {
+        [$article, $foreignRevision, $draftRevision, $writeEvidencePath] = $this->legacyInlinePublishedFixture();
+
+        $exitCode = Artisan::call('seo-agent:article-draft-preview-runtime-qa', [
+            '--write-evidence' => $writeEvidencePath,
+            '--target' => 'article:'.$article->id.':en',
+            '--revision-id' => (string) $draftRevision->id,
+            '--artifact-dir' => $this->artifactDir(),
+            '--json' => true,
+        ]);
+
+        $summary = json_decode(trim(Artisan::output()), true);
+        $this->assertSame(0, $exitCode, json_encode($summary, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?: Artisan::output());
+        $this->assertSame('success', $summary['status'] ?? null);
+        $this->assertTrue((bool) ($summary['preview_readable'] ?? false));
+        $this->assertFalse((bool) ($summary['public_runtime_uses_published_revision'] ?? true));
+        $this->assertFalse((bool) ($summary['mutation_detected'] ?? true));
+
+        $artifact = $this->readJson((string) data_get($summary, 'artifact.path'));
+        $this->assertTrue((bool) ($artifact['ok'] ?? false));
+        $this->assertSame('article_inline_published_content', data_get($artifact, 'public_runtime.public_runtime_source'));
+        $this->assertTrue((bool) data_get($artifact, 'public_runtime.public_runtime_safe', false));
+        $this->assertFalse((bool) data_get($artifact, 'public_runtime.published_revision_exists', true));
+        $this->assertTrue((bool) data_get($artifact, 'public_runtime.published_revision_pointer_exists', false));
+        $this->assertSame((int) $foreignRevision->article_id, data_get($artifact, 'public_runtime.published_revision_pointer_article_id'));
+        $this->assertFalse((bool) data_get($artifact, 'public_runtime.draft_revision_leaked_to_public_runtime', true));
+        $this->assertSame(0, (int) data_get($artifact, 'critical_finding_count'));
+        $this->assertSame(1, (int) data_get($artifact, 'warning_finding_count'));
+        $this->assertContains('published_revision_pointer_not_same_article_using_inline_article_content', array_column($artifact['qa_findings'] ?? [], 'issue'));
     }
 
     #[Test]
@@ -202,6 +235,70 @@ final class SeoAgentArticleDraftPreviewRuntimeQaTest extends TestCase
             $publishedRevision,
             $draftRevision,
             $this->writeEvidence($packageSha, 'article:'.$article->id.':en', (int) $writeTargetRevision->id),
+        ];
+    }
+
+    /**
+     * @return array{0: Article, 1: ArticleRevision, 2: ArticleRevision, 3: string}
+     */
+    private function legacyInlinePublishedFixture(): array
+    {
+        $foreignArticle = Article::query()->create([
+            'org_id' => 0,
+            'slug' => 'foreign-article',
+            'locale' => 'en',
+            'title' => 'Foreign Article',
+            'excerpt' => 'Foreign excerpt.',
+            'content_md' => 'Foreign markdown.',
+            'content_html' => '<p>Foreign HTML.</p>',
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => now()->subDays(2),
+        ]);
+        $foreignRevision = $this->articleRevision($foreignArticle, 1, [
+            'seo_agent' => [
+                'task' => 'historical_foreign_publish',
+            ],
+        ]);
+
+        $article = Article::query()->create([
+            'org_id' => 0,
+            'slug' => 'legacy-inline-published',
+            'locale' => 'en',
+            'title' => 'Legacy Inline Published',
+            'excerpt' => 'Existing legacy excerpt.',
+            'content_md' => 'Existing legacy article markdown.',
+            'content_html' => '',
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => true,
+            'working_revision_id' => (int) $foreignRevision->id,
+            'published_revision_id' => (int) $foreignRevision->id,
+            'published_at' => now()->subDay(),
+        ]);
+
+        $packageSha = hash('sha256', 'package:legacy-inline:'.$article->id);
+        $draftRevision = $this->articleRevision($article, 1, [
+            'seo_agent' => [
+                'task' => 'SEO-AGENT-CONTROLLED-CMS-DRAFT-WRITER-01',
+                'package_sha256' => $packageSha,
+                'subject_ref' => 'article:'.$article->id.':en',
+                'target_fields' => ['seo_title', 'seo_description', 'faq_items'],
+                'publish_allowed' => false,
+                'search_submit_allowed' => false,
+                'indexing_request_allowed' => false,
+            ],
+            'proposal' => [
+                'safe_path' => '/en/articles/legacy-inline-published',
+            ],
+        ]);
+
+        return [
+            $article->refresh(),
+            $foreignRevision,
+            $draftRevision,
+            $this->writeEvidence($packageSha, 'article:'.$article->id.':en', (int) $draftRevision->id),
         ];
     }
 

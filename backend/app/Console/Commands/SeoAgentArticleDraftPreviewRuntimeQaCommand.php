@@ -122,15 +122,19 @@ final class SeoAgentArticleDraftPreviewRuntimeQaCommand extends Command
         }
 
         $publishedRevision = null;
+        $publishedRevisionPointer = null;
         if ($article->published_revision_id !== null) {
             $publishedRevision = ArticleRevision::query()->withoutGlobalScopes()
                 ->where('article_id', $articleId)
                 ->whereKey((int) $article->published_revision_id)
                 ->first();
+            $publishedRevisionPointer = ArticleRevision::query()->withoutGlobalScopes()
+                ->whereKey((int) $article->published_revision_id)
+                ->first();
         }
 
         $payload = is_array($revision->payload_json) ? $revision->payload_json : [];
-        $evidence = $this->evidence($writeEvidencePath, $writeEvidence, $writeRef, $article, $revision, $publishedRevision, $payload, $target, $beforeState);
+        $evidence = $this->evidence($writeEvidencePath, $writeEvidence, $writeRef, $article, $revision, $publishedRevision, $publishedRevisionPointer, $payload, $target, $beforeState);
         $artifactRef = $this->writeArtifact(
             $artifactDir,
             'seo-agent-article-draft-preview-runtime-qa-'.Carbon::now('UTC')->format('Ymd\THis\Z').'.json',
@@ -191,6 +195,7 @@ final class SeoAgentArticleDraftPreviewRuntimeQaCommand extends Command
      * @param  array<string, mixed>  $writeEvidence
      * @param  array<string, mixed>  $writeRef
      * @param  array<string, mixed>|null  $publishedRevision
+     * @param  array<string, mixed>|null  $publishedRevisionPointer
      * @param  array<string, mixed>  $payload
      * @param  array<string, mixed>  $beforeState
      * @return array<string, mixed>
@@ -202,17 +207,24 @@ final class SeoAgentArticleDraftPreviewRuntimeQaCommand extends Command
         Article $article,
         ArticleRevision $revision,
         ?ArticleRevision $publishedRevision,
+        ?ArticleRevision $publishedRevisionPointer,
         array $payload,
         string $target,
         array $beforeState
     ): array {
         $article->refresh();
         $afterState = $this->articleState($article);
+        $publicRuntimeMode = $this->publicRuntimeMode($article, $revision, $publishedRevision);
         $findings = $this->qaFindings($writeEvidence, $article, $revision, $publishedRevision, $payload, $target, $beforeState, $afterState);
         $criticalCount = count(array_filter($findings, static fn (array $finding): bool => ($finding['severity'] ?? '') === 'critical'));
+        $warningCount = count(array_filter($findings, static fn (array $finding): bool => ($finding['severity'] ?? '') === 'warning'));
         $status = $criticalCount > 0 ? 'blocked' : 'success';
 
         $isPublishedRevision = (int) ($article->published_revision_id ?? 0) === (int) $revision->id;
+        $publishedRevisionExists = $publishedRevision instanceof ArticleRevision;
+        $publicRuntimeSafe = $publicRuntimeMode !== 'unresolved'
+            && ! $isPublishedRevision
+            && (string) $article->status === 'published';
 
         return [
             'schema_version' => self::SCHEMA_VERSION,
@@ -254,8 +266,12 @@ final class SeoAgentArticleDraftPreviewRuntimeQaCommand extends Command
                 'is_indexable' => (bool) $article->is_indexable,
                 'working_revision_id' => $article->working_revision_id ? (int) $article->working_revision_id : null,
                 'published_revision_id' => $article->published_revision_id ? (int) $article->published_revision_id : null,
-                'published_revision_exists' => $publishedRevision instanceof ArticleRevision,
-                'public_runtime_uses_published_revision' => $publishedRevision instanceof ArticleRevision
+                'published_revision_exists' => $publishedRevisionExists,
+                'published_revision_pointer_exists' => $publishedRevisionPointer instanceof ArticleRevision,
+                'published_revision_pointer_article_id' => $publishedRevisionPointer instanceof ArticleRevision ? (int) $publishedRevisionPointer->article_id : null,
+                'public_runtime_source' => $publicRuntimeMode,
+                'public_runtime_safe' => $publicRuntimeSafe,
+                'public_runtime_uses_published_revision' => $publishedRevisionExists
                     && ! $isPublishedRevision
                     && (string) $article->status === 'published',
                 'draft_revision_leaked_to_public_runtime' => $isPublishedRevision,
@@ -271,6 +287,7 @@ final class SeoAgentArticleDraftPreviewRuntimeQaCommand extends Command
             ],
             'qa_findings' => $findings,
             'critical_finding_count' => $criticalCount,
+            'warning_finding_count' => $warningCount,
             'negative_guarantees' => $this->negativeGuarantees(),
         ];
     }
@@ -298,7 +315,11 @@ final class SeoAgentArticleDraftPreviewRuntimeQaCommand extends Command
             $findings[] = $this->finding('public_runtime', 'critical', 'article_not_published');
         }
         if (! $publishedRevision instanceof ArticleRevision) {
-            $findings[] = $this->finding('public_runtime', 'critical', 'published_revision_missing');
+            if ($this->publicRuntimeMode($article, $revision, $publishedRevision) === 'article_inline_published_content') {
+                $findings[] = $this->finding('public_runtime', 'warning', 'published_revision_pointer_not_same_article_using_inline_article_content');
+            } else {
+                $findings[] = $this->finding('public_runtime', 'critical', 'published_revision_missing');
+            }
         }
         if ((int) ($article->published_revision_id ?? 0) === (int) $revision->id) {
             $findings[] = $this->finding('public_runtime', 'critical', 'draft_revision_is_public_published_revision');
@@ -326,6 +347,23 @@ final class SeoAgentArticleDraftPreviewRuntimeQaCommand extends Command
         }
 
         return $findings;
+    }
+
+    private function publicRuntimeMode(Article $article, ArticleRevision $draftRevision, ?ArticleRevision $publishedRevision): string
+    {
+        $draftIsPublishedRevision = (int) ($article->published_revision_id ?? 0) === (int) $draftRevision->id;
+        if ($publishedRevision instanceof ArticleRevision && ! $draftIsPublishedRevision) {
+            return 'published_article_revision';
+        }
+
+        if (! $draftIsPublishedRevision
+            && (string) $article->status === 'published'
+            && (trim((string) $article->content_md) !== '' || trim((string) $article->content_html) !== '')
+        ) {
+            return 'article_inline_published_content';
+        }
+
+        return 'unresolved';
     }
 
     /**
