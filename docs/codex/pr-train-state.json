@@ -56970,7 +56970,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-ops-agent-staging-runner-01",
     "base": "main",
-    "status": "pull_request_open",
+    "status": "ready_to_merge",
     "train_scope": "riasec_result_ops_agent_release_chain",
     "title": "RIASEC-OPS-AGENT-STAGING-RUNNER-01: feat(riasec): add ops staging runner",
     "depends_on": [
@@ -56984,10 +56984,12 @@
       "staging_dry_run_command_smoke": "passed",
       "git_diff_check": "passed",
       "scope_validation": "passed",
-      "pr_created": "passed"
+      "pr_created": "passed",
+      "github_required_checks": "passed",
+      "pre_merge_scope_recheck": "passed"
     },
     "failure_reason": null,
-    "commit_sha": "98be3aaf571ce533ae4af0ed4706ed078464ae57",
+    "commit_sha": "07a361200f3021088cac9333ef1a6c10287e67f8",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2255",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -57019,6 +57021,12 @@
         "from": "local_checks_passed",
         "to": "pull_request_open",
         "notes": "Opened GitHub PR #2255 after local checks and path scope validation passed."
+      },
+      {
+        "at": "2026-06-22T08:40:31+08:00",
+        "from": "pull_request_open",
+        "to": "ready_to_merge",
+        "notes": "GitHub required checks passed after rebasing onto origin/main; pre-merge scope recheck stayed within PR4 allowed files."
       }
     ]
   },
