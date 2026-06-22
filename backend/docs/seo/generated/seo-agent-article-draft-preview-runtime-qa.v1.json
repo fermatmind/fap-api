@@ -25,8 +25,9 @@
     ],
     "public_runtime": [
       "article remains published",
-      "published_revision_id resolves to an ArticleRevision",
-      "public runtime uses published_revision_id, not the draft revision"
+      "published_revision_id resolves to an ArticleRevision for the same article when the revision graph is canonical",
+      "legacy inline-published articles may pass with public_runtime_source=article_inline_published_content when the published_revision_id pointer targets another article but the current Article row remains published and the draft revision is not leaked",
+      "public runtime uses the canonical published revision or inline published Article content, not the draft revision"
     ],
     "read_only_invariants": [
       "working_revision_id unchanged",
