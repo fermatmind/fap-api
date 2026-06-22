@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-23T00:13:00+08:00",
+  "updated_at": "2026-06-22T16:26:25.862+00:00",
   "SEO-AGENT-ARTICLE41-DRAFT-CLAIM-RISK-QA-01": {
     "repo": "fap-api",
     "branch": "codex/seo-agent-article41-draft-claim-risk-qa-01",
@@ -59058,6 +59058,86 @@
         "at": "2026-06-22T20:36:00Z",
         "status": "pr_open",
         "note": "Opened PR #2309 on head 9cea70b51d2837edd78df1ca2debdbb55635a571 after local validation and scope validation passed."
+      }
+    ]
+  },
+  "FA30-API-05": {
+    "repo": "fap-api",
+    "branch": "codex/fa30-api-05-analytics-smoke-exclusion",
+    "base": "main",
+    "status": "ready_to_merge",
+    "train_scope": "fa30_six_scale_smoke_analytics_exclusion",
+    "title": "FA30-API-05: Centralize six-scale smoke attempt analytics exclusion",
+    "depends_on": [
+      "FA30-API-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly provided FA30-API-05 id, title, scope, and authorized manifest/state updates in the FA30-NON-AGENT-PR-TRAIN-01 /goal request."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "FA30-API-01 is merged on GitHub as PR #2302, and origin/main contains merge commit 82c10c54cd03edd3380325fc0fa627915713d393."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=AnalyticsFunnelDailyBuilderTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoConversionDailyBuilderTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff --no-ansi",
+          "cd backend && vendor/bin/pint --test config/analytics.php app/Services/Analytics/AnalyticsTrafficExclusionPolicy.php app/Services/Analytics/AnalyticsFunnelDailyBuilder.php app/Services/Analytics/SeoConversionDailyBuilder.php tests/Feature/Analytics/AnalyticsFunnelDailyBuilderTest.php tests/Feature/Analytics/SeoConversionDailyBuilderTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "git diff --check"
+        ],
+        "evidence": "PASS after CI fix: AnalyticsFunnelDailyBuilderTest (8 warning-only existing file_get_contents warnings, 50 assertions)\nPASS after CI fix: SeoConversionDailyBuilderTest (5 warning-only existing file_get_contents warnings, 36 assertions)\nPASS after CI fix: BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff (1 warning-only existing file_get_contents warning, 3 assertions)\nPASS: Pint for 7 scoped PHP files\nPASS: YAML/JSON parse and git diff --check"
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files remain limited to FA30-API-05 allowed paths, including the Big Five runtime freeze classifier test update needed to classify the analytics smoke exclusion policy as analytics-only support."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #2324 GitHub checks passed after current-scope verify-bigfive classifier fix: hygiene, Semgrep blocking secrets, supply-chain, semgrep SARIF non-blocking upload, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, and Semgrep OSS."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": "258c20a92a67495c188b4da700cc2bc8d0a4ecd7",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2324",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-23T00:00:00+08:00",
+        "status": "in_progress",
+        "note": "Started from clean origin/main worktree. Scope is limited to analytics smoke/probe exclusion policy, funnel/SEO conversion aggregation use, focused tests, and docs/codex metadata. No production deploy, CMS write, search submission, scheduler, queue, sitemap, llms, canonical, noindex, JSON-LD, payment/order/report runtime, or fap-web scope is allowed."
+      },
+      {
+        "at": "2026-06-22T16:11:02.492+00:00",
+        "status": "local_validated",
+        "note": "Local tests, formatting, YAML/JSON parsing, diff check, and path scope validation passed after rebasing onto latest origin/main. PHPUnit warnings were warning-only and did not fail the targeted suites."
+      },
+      {
+        "at": "2026-06-22T16:12:20.759+00:00",
+        "status": "pr_open",
+        "note": "Opened PR #2324 after local validation and scope validation passed."
+      },
+      {
+        "at": "2026-06-22T16:19:48.289+00:00",
+        "status": "github_checks_failed_current_scope",
+        "note": "PR CI verify-bigfive failed on BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff because backend/app/Services/Analytics/AnalyticsTrafficExclusionPolicy.php needed an analytics-only freeze classifier exemption."
+      },
+      {
+        "at": "2026-06-22T16:19:48.289+00:00",
+        "status": "ci_fix_local_validated",
+        "note": "Added the analytics smoke exclusion policy to the Big Five runtime freeze classifier and reran the failed test plus FA30-API-05 analytics suites, Pint, YAML/JSON parsing, and diff check successfully."
+      },
+      {
+        "at": "2026-06-22T16:26:25.862+00:00",
+        "status": "ready_to_merge",
+        "note": "All PR #2324 GitHub checks passed and scope was revalidated; ready for squash merge when final metadata commit checks pass."
       }
     ]
   }

@@ -11,6 +11,13 @@ use Illuminate\Support\Facades\DB;
 
 final class AnalyticsFunnelDailyBuilder
 {
+    private readonly AnalyticsTrafficExclusionPolicy $trafficExclusionPolicy;
+
+    public function __construct(?AnalyticsTrafficExclusionPolicy $trafficExclusionPolicy = null)
+    {
+        $this->trafficExclusionPolicy = $trafficExclusionPolicy ?? new AnalyticsTrafficExclusionPolicy;
+    }
+
     private const SUBMISSION_SUCCESS_STATES = [
         'succeeded',
         'success',
@@ -262,7 +269,7 @@ final class AnalyticsFunnelDailyBuilder
         foreach (array_chunk($attemptIds, 500) as $attemptChunk) {
             $query = DB::table('attempts')
                 ->whereIn('id', $attemptChunk)
-                ->select('id', 'org_id', 'scale_code', 'locale');
+                ->select('id', 'anon_id', 'org_id', 'scale_code', 'locale');
 
             if (SchemaBaseline::hasColumn('attempts', 'scale_code_v2')) {
                 $query->addSelect('scale_code_v2');
@@ -276,7 +283,7 @@ final class AnalyticsFunnelDailyBuilder
 
             foreach ($query->get() as $row) {
                 $attemptId = trim((string) ($row->id ?? ''));
-                if ($attemptId === '') {
+                if ($attemptId === '' || $this->trafficExclusionPolicy->isExcludedAttemptRow($row)) {
                     continue;
                 }
 

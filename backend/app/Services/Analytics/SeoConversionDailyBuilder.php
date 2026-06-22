@@ -39,6 +39,13 @@ final class SeoConversionDailyBuilder
         'history',
     ];
 
+    private readonly AnalyticsTrafficExclusionPolicy $trafficExclusionPolicy;
+
+    public function __construct(?AnalyticsTrafficExclusionPolicy $trafficExclusionPolicy = null)
+    {
+        $this->trafficExclusionPolicy = $trafficExclusionPolicy ?? new AnalyticsTrafficExclusionPolicy;
+    }
+
     /**
      * @param  list<int>  $orgIds
      * @return array{rows:list<array<string,mixed>>,attempted_rows:int,org_scope:list<int>,from:string,to:string,skipped_rows:int}
@@ -66,6 +73,10 @@ final class SeoConversionDailyBuilder
             }
 
             $meta = $this->decodeJson($event->meta_json ?? null);
+            if ($this->trafficExclusionPolicy->isExcludedSeoConversionEvent($event, $meta)) {
+                continue;
+            }
+
             $seoConversion = is_array($meta['seo_conversion'] ?? null) ? $meta['seo_conversion'] : [];
             $dimensions = $this->resolveDimensions($seoConversion, $event);
             if ($dimensions === null) {
@@ -178,7 +189,7 @@ final class SeoConversionDailyBuilder
         $query = DB::table('events')
             ->whereBetween('occurred_at', [$from, $to])
             ->whereRaw('lower(event_code) in ('.$placeholders.')', $eventCodes)
-            ->select(['id', 'org_id', 'event_code', 'session_id', 'meta_json', 'occurred_at', 'locale']);
+            ->select(['id', 'org_id', 'event_code', 'anon_id', 'session_id', 'request_id', 'attempt_id', 'meta_json', 'occurred_at', 'locale']);
 
         if ($orgIds !== []) {
             $query->whereIn('org_id', $orgIds);
