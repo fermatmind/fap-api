@@ -33,6 +33,7 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
                 'qa_eval_summary.json',
                 'ops_report_summary.json',
                 'go_no_go.md',
+                'readiness.json',
             ] as $filename) {
                 $this->assertFileExists($runDir.'/'.$filename);
             }
@@ -99,6 +100,48 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
                 $this->assertArrayHasKey($metricKey, (array) ($opsReport['metrics'] ?? []));
             }
             $this->assertSame('no_previous_run', data_get($opsReport, 'diff_summary.comparison_status'));
+
+            $readiness = $this->readJson($runDir.'/readiness.json');
+            $this->assertSame('fap.big5.result_page_agent.readiness.v0.1', $readiness['schema_version'] ?? null);
+            $this->assertSame('big5_result_page_agent_readiness', $readiness['task'] ?? null);
+            $this->assertSame('big_five', $readiness['scale'] ?? null);
+            $this->assertSame('big5_result_page_v2', $readiness['source_contract'] ?? null);
+            $this->assertSame('not_runtime', $readiness['runtime_use'] ?? null);
+            $this->assertFalse((bool) ($readiness['production_use_allowed'] ?? true));
+            $this->assertSame('ready_readonly', $readiness['current_readiness'] ?? null);
+            $this->assertTrue((bool) ($readiness['readiness_pass'] ?? false));
+            $this->assertFalse((bool) ($readiness['ready_for_pilot'] ?? true));
+            $this->assertFalse((bool) ($readiness['ready_for_runtime'] ?? true));
+            $this->assertFalse((bool) ($readiness['ready_for_production'] ?? true));
+            $this->assertSame(0, (int) data_get($readiness, 'evidence_summary.share_safety_missing_count', -1));
+            $this->assertSame(13, (int) data_get($readiness, 'evidence_summary.share_safe_reading_mode_count', 0));
+            $this->assertSame(0, (int) data_get($readiness, 'evidence_summary.validation_error_count', -1));
+            $this->assertSame(0, (int) data_get($readiness, 'evidence_summary.leak_hit_count', -1));
+            $this->assertSame(0, (int) data_get($readiness, 'evidence_summary.p0_blocker_count', -1));
+            $this->assertTrue((bool) data_get($readiness, 'handoff_contract.backend_authority'));
+            $this->assertFalse((bool) data_get($readiness, 'handoff_contract.frontend_copy_allowed', true));
+            $this->assertFalse((bool) data_get($readiness, 'handoff_contract.production_import_allowed', true));
+            $this->assertFalse((bool) data_get($readiness, 'handoff_contract.rollout_allowed', true));
+            $this->assertSame([], (array) ($readiness['strict_failures'] ?? ['unexpected']));
+            $this->assertArrayHasKey('ops_report_summary.json', (array) ($readiness['source_artifacts'] ?? []));
+
+            $readinessText = (string) file_get_contents($runDir.'/readiness.json');
+            foreach ([
+                'attempt_id',
+                'private_url',
+                'report_json',
+                'report_full_json',
+                'report_free_json',
+                'raw score',
+                'raw_score',
+                'raw_scores',
+                'percentile',
+                'percentiles',
+                'body_zh',
+                '[object Object]',
+            ] as $forbiddenToken) {
+                $this->assertStringNotContainsString($forbiddenToken, $readinessText, $forbiddenToken);
+            }
 
             $allArtifacts = implode("\n", array_map(
                 static fn (string $filename): string => (string) file_get_contents($runDir.'/'.$filename),

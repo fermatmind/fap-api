@@ -13666,6 +13666,42 @@ prs:
     human_review_required: false
     production_approval_required: false
 
+  - id: BIG5-RESULT-PAGE-AGENT-GENERATED-READINESS-ARTIFACT-01
+    repo: fap-api
+    depends_on: []
+    branch: codex/big5-generated-readiness-artifact
+    base: main
+    title: "BIG5-RESULT-PAGE-AGENT-GENERATED-READINESS-ARTIFACT-01: Generate Big Five readiness artifact"
+    train_scope: big5_result_page_agent_readiness_to_pilot
+    status: user_authorized
+    allowed_paths:
+      - backend/app/Services/BigFive/ResultPageV2/AssetAgent/BigFiveResultPageV2AssetAgent.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2AssetAgentTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    scope:
+      - Generate a sanitized Big Five result-page agent readiness artifact from the strict audit evidence.
+      - Require share_safety_missing_count=0, validation_error_count=0, leak_hit_count=0, and p0_blocker_count=0 for read-only readiness PASS.
+      - Preserve runtime_use as not_runtime/staging evidence, production_use_allowed=false, and ready_for_pilot/runtime/production=false.
+    do_not:
+      - Generate a final Big Five result page runtime object.
+      - Add fap-web copy or frontend fallback interpretation.
+      - Change CMS, production import, release snapshot, rollout gate, runtime flags, sitemap, llms, canonical, noindex, JSON-LD, search submission, deploy, or production data.
+    validation:
+      - cd backend && php artisan big5:result-page-v2-agent audit --strict --json --no-ansi
+      - cd backend && php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi
+      - git diff --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: FERMAT-MARKETING-SKILLS-ADAPTATION-02
     repo: fap-api
     depends_on:
