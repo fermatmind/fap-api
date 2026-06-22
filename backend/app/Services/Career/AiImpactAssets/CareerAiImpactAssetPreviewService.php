@@ -198,18 +198,20 @@ final class CareerAiImpactAssetPreviewService
 
     private function sanitizeReaderText(string $text): string
     {
-        return str_replace([
+        $sanitized = str_replace([
             'career disappearance',
             'job-loss risk',
             'job loss risk',
             'wage-loss risk',
             'wage loss risk',
             '岗位会消失',
+            '职业会消失',
             '职业消失',
             '失业风险',
             '降薪风险',
+            '降薪',
         ], [
-            'individual career outcome',
+            'individual career outcome forecast',
             'individual career outcome forecast',
             'individual career outcome forecast',
             'individual wage outcome forecast',
@@ -217,8 +219,18 @@ final class CareerAiImpactAssetPreviewService
             '个人职业结果预测',
             '个人职业结果预测',
             '个人职业结果预测',
-            '个人收入结果预测',
+            '个人职业结果预测',
+            '个人职业结果预测',
+            '个人职业结果预测',
         ], $text);
+
+        $sanitized = str_replace('预测预测', '预测', $sanitized);
+
+        return preg_replace(
+            '/个人(?:职业|收入)结果预测(?:[、，,或和及以及\s]+个人(?:职业|收入)结果预测)+/u',
+            '个人职业结果预测',
+            $sanitized
+        ) ?? $sanitized;
     }
 
     public function normalizeSlug(string $slug): string

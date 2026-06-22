@@ -728,6 +728,43 @@ final class CareerAiImpactAssetPreviewImportTest extends TestCase
         $this->assertStringContainsString('individual career outcome', $asset['items']['reader_boundary']['body']);
     }
 
+    public function test_preview_api_normalizes_zh_boundary_outcome_wording(): void
+    {
+        Config::set('career_ai_impact_assets.staging_preview_enabled', true);
+        Config::set('career_ai_impact_assets.preview_slugs', ['accountants-and-auditors']);
+        $occupation = $this->seedOccupation('accountants-and-auditors');
+        $row = $this->assetRow('accountants-and-auditors', 'zh-CN');
+        $row['summary'] = '该分数不是岗位会消失或降薪预测。';
+        $row['items']['reader_boundary']['body'] = '该分数不是岗位会消失、降薪或个人职业结果预测预测。';
+
+        CareerJobAiImpactAsset::query()->create([
+            'occupation_id' => $occupation->id,
+            'career_job_slug' => 'accountants-and-auditors',
+            'locale' => 'zh-CN',
+            'asset_version' => CareerJobAiImpactAsset::ASSET_VERSION_V5,
+            'status' => CareerJobAiImpactAsset::STATUS_STAGING_PREVIEW,
+            'preview_allowlisted' => true,
+            'asset_payload_json' => $row,
+            'sources_json' => $row['sources'],
+            'evidence_used_json' => $row['evidence_used'],
+            'derived_from_synthesis_json' => $row['derived_from_synthesis'],
+            'audit_fields_json' => $row['audit_fields'],
+            'asset_row_hash' => $row['audit_fields']['row_hash'],
+        ]);
+
+        $asset = $this->getJson('/api/v0.5/career/jobs/accountants-and-auditors/ai-impact-asset?locale=zh-CN')
+            ->assertOk()
+            ->assertJsonPath('ai_impact_asset_v1.locale', 'zh-CN')
+            ->json('ai_impact_asset_v1');
+
+        $encodedAsset = json_encode($asset, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+        $this->assertStringNotContainsString('岗位会消失', $encodedAsset);
+        $this->assertStringNotContainsString('职业会消失', $encodedAsset);
+        $this->assertStringNotContainsString('降薪', $encodedAsset);
+        $this->assertStringNotContainsString('预测预测', $encodedAsset);
+        $this->assertStringContainsString('不是个人职业结果预测', $asset['items']['reader_boundary']['body']);
+    }
+
     public function test_preview_api_fails_closed_when_disabled_or_not_allowlisted(): void
     {
         Config::set('career_ai_impact_assets.staging_preview_enabled', false);
