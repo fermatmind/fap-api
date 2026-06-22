@@ -1,0 +1,113 @@
+{
+    "schema_version": "fap.enneagram.result_page.agent_readiness.v1",
+    "task": "control_packet",
+    "content_authority": "backend",
+    "scale": "ENNEAGRAM",
+    "surface": "private_result_page",
+    "candidate_contract": {
+        "baseline_candidate_manifest_sha256": "a9fd3eb474ea2ca0130d06ad2b1640305d9160ee1a74e559ad4f60bfc4db56c0",
+        "runtime_registry_manifest_sha256": "ac5bdaab3c761b0d01a56f92679aa58341110d64de0f47a1fa0062b64f76f97f",
+        "payload_count": 630,
+        "out_of_launch_scope_must_equal": [
+            "1R-I",
+            "1R-J"
+        ],
+        "launch_scope_batches": [
+            "1R-A",
+            "1R-B",
+            "1R-C",
+            "1R-D",
+            "1R-E",
+            "1R-F",
+            "1R-G",
+            "1R-H"
+        ]
+    },
+    "source_ledger_contract": {
+        "schema_version": "fap.enneagram.result_page.source_ledger.v0.1",
+        "default_relative_dir": "content_assets/enneagram/result_page/source_ledger",
+        "required_source_ids": [
+            "enneagram_v2_runtime_registry",
+            "enneagram_e105_compiled_questions",
+            "enneagram_fc144_compiled_questions",
+            "phase8b_candidate_baseline_a9fd",
+            "batch_1r_a_asset_stream",
+            "batch_1r_b_asset_stream",
+            "batch_1r_c_asset_stream",
+            "batch_1r_d_asset_stream",
+            "batch_1r_e_asset_stream",
+            "batch_1r_f_asset_stream",
+            "batch_1r_g_asset_stream",
+            "batch_1r_h_asset_stream",
+            "fc144_boundary_policy",
+            "forbidden_claim_policy"
+        ],
+        "allowed_source_labels": [
+            "runtime_contract",
+            "compiled_question_contract",
+            "candidate_baseline",
+            "asset_stream_contract",
+            "policy_contract"
+        ]
+    },
+    "agent_batches": [
+        {
+            "batch_id": "ENNEAGRAM-RESULT-AGENT-CONTROL-PACKET-01",
+            "state": "merged_ready",
+            "allowed_output": "docs, control packet, readiness artifacts",
+            "generation_allowed": false
+        },
+        {
+            "batch_id": "ENNEAGRAM-RESULT-SOURCE-LEDGER-01",
+            "state": "scaffold_only",
+            "allowed_output": "source ledger and validator harness artifacts",
+            "generation_allowed": false
+        },
+        {
+            "batch_id": "ENNEAGRAM-RESULT-PILOT-ASSET-BATCH-01",
+            "state": "blocked_until_validator_and_ledger_pass",
+            "allowed_output": "small candidate draft only after explicit PR authorization",
+            "generation_allowed": false
+        },
+        {
+            "batch_id": "ENNEAGRAM-RESULT-CANDIDATE-EXPORT-QA-01",
+            "state": "blocked_until_candidate_dir_is_provided",
+            "allowed_output": "Phase8B/Phase8D2B reports only",
+            "generation_allowed": false
+        }
+    ],
+    "allowed_actions": [
+        "read existing docs and code",
+        "write run-scoped readiness artifacts",
+        "write source ledger templates",
+        "validate a provided Phase8B candidate directory without import or activation",
+        "prepare small candidate drafts only in a future explicitly authorized PR"
+    ],
+    "forbidden_actions": [
+        "bulk content generation in this PR",
+        "candidate payload creation in this PR",
+        "production activation",
+        "content_pack_activations write",
+        "runtime registry switch",
+        "production import",
+        "frontend-side result copy fallback",
+        "fap-web runtime changes",
+        "sitemap or llms exposure",
+        "public SEO profile generation",
+        "private result identifier export"
+    ],
+    "negative_guarantees": {
+        "runtime_use": "not_runtime",
+        "production_use_allowed": false,
+        "ready_for_generation": false,
+        "ready_for_import": false,
+        "ready_for_runtime": false,
+        "ready_for_production": false,
+        "cms_write_performed": false,
+        "runtime_change_performed": false,
+        "activation_happened": false,
+        "bulk_content_generation_happened": false,
+        "candidate_payload_creation_happened": false,
+        "frontend_fallback_allowed": false
+    }
+}

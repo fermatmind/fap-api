@@ -1,0 +1,54 @@
+{
+    "schema_version": "fap.enneagram.result_page.agent_readiness.v1",
+    "task": "readiness_inventory",
+    "runtime_use": "staging_only",
+    "production_use_allowed": false,
+    "candidate_dir": {
+        "provided": false,
+        "path": null,
+        "required_files": [
+            "candidate_manifest.json",
+            "candidate_hashes.json",
+            "rollback_plan.md",
+            "import_diff_summary.json",
+            "replacement_additive_map.json",
+            "source_mapping_report.json",
+            "legacy_residual_scan.json",
+            "fc144_boundary_report.json",
+            "phase8b_summary.json",
+            "candidate_payloads_manifest.json",
+            "candidate_payload_hashes.json",
+            "candidate_payload_source_mapping.json",
+            "candidate_payloads/"
+        ],
+        "missing_required_files": []
+    },
+    "repo_contracts": {
+        "export_command": "php artisan enneagram:export-production-equivalent-candidate-payloads --candidate-dir=<candidate> --output-dir=<tmp> --json",
+        "inactive_import_command": "php artisan enneagram:import-inactive-candidate-release --candidate-dir=<candidate> --output-dir=<tmp> --json",
+        "activation_command": "php artisan enneagram:activate-registry-release --release-id=<inactive_release_id>",
+        "activation_allowed_in_this_program": false
+    },
+    "runtime_registry": {
+        "manifest_path": "content_packs/ENNEAGRAM/v2/registry/manifest.json",
+        "actual_sha256": "ac5bdaab3c761b0d01a56f92679aa58341110d64de0f47a1fa0062b64f76f97f",
+        "expected_sha256": "ac5bdaab3c761b0d01a56f92679aa58341110d64de0f47a1fa0062b64f76f97f",
+        "matches_expected": true
+    },
+    "expected_candidate_manifest_sha256": "a9fd3eb474ea2ca0130d06ad2b1640305d9160ee1a74e559ad4f60bfc4db56c0",
+    "expected_payload_count": 630,
+    "negative_guarantees": {
+        "runtime_use": "not_runtime",
+        "production_use_allowed": false,
+        "ready_for_generation": false,
+        "ready_for_import": false,
+        "ready_for_runtime": false,
+        "ready_for_production": false,
+        "cms_write_performed": false,
+        "runtime_change_performed": false,
+        "activation_happened": false,
+        "bulk_content_generation_happened": false,
+        "candidate_payload_creation_happened": false,
+        "frontend_fallback_allowed": false
+    }
+}

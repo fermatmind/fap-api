@@ -1,0 +1,21 @@
+# Enneagram Result Page Agent Go / No-Go
+
+- verdict: SOURCE_LEDGER_VALIDATOR_SCAFFOLD_ONLY
+- candidate_generation_allowed: false
+- ready_for_generation: false
+- ready_for_import: false
+- ready_for_activation: false
+- source_ledger_valid: true
+- candidate_dir_provided: false
+- candidate_contract_valid: true
+- expected_candidate_manifest_sha256: `a9fd3eb474ea2ca0130d06ad2b1640305d9160ee1a74e559ad4f60bfc4db56c0`
+- expected_runtime_registry_manifest_sha256: `ac5bdaab3c761b0d01a56f92679aa58341110d64de0f47a1fa0062b64f76f97f`
+- expected_payload_count: 630
+- runtime_registry_matches_expected: true
+- no bulk content generated
+- no candidate payloads created
+- no import
+- no production write
+- no activation
+- no runtime switch
+- no frontend fallback

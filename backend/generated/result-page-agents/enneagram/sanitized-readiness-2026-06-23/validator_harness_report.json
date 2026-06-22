@@ -1,0 +1,61 @@
+{
+    "schema_version": "fap.enneagram.result_page.agent_readiness.v1",
+    "task": "validator_harness_report",
+    "runtime_use": "not_runtime",
+    "production_use_allowed": false,
+    "candidate_dir": {
+        "provided": false,
+        "path": null,
+        "missing_candidate_dir_is_failure": false
+    },
+    "candidate_contract": {
+        "valid": true,
+        "expected_candidate_manifest_sha256": "a9fd3eb474ea2ca0130d06ad2b1640305d9160ee1a74e559ad4f60bfc4db56c0",
+        "expected_runtime_registry_manifest_sha256": "ac5bdaab3c761b0d01a56f92679aa58341110d64de0f47a1fa0062b64f76f97f",
+        "expected_payload_count": 630,
+        "launch_scope": [
+            "1R-A",
+            "1R-B",
+            "1R-C",
+            "1R-D",
+            "1R-E",
+            "1R-F",
+            "1R-G",
+            "1R-H"
+        ],
+        "out_of_launch_scope_must_equal": [
+            "1R-I",
+            "1R-J"
+        ]
+    },
+    "checks": {
+        "source_ledger_valid": true,
+        "candidate_dir_provided": false,
+        "candidate_required_artifacts_present": true,
+        "candidate_manifest_hash_matches": null,
+        "runtime_registry_hash_matches": null,
+        "candidate_payload_count_matches": null,
+        "out_of_launch_scope_matches": null,
+        "source_mapping_zero_failures": true,
+        "metadata_leakage_zero": true,
+        "forbidden_claim_zero": true,
+        "legacy_residual_zero": null,
+        "fc144_boundary_zero": null
+    },
+    "error_count": 0,
+    "errors": [],
+    "negative_guarantees": {
+        "runtime_use": "not_runtime",
+        "production_use_allowed": false,
+        "ready_for_generation": false,
+        "ready_for_import": false,
+        "ready_for_runtime": false,
+        "ready_for_production": false,
+        "cms_write_performed": false,
+        "runtime_change_performed": false,
+        "activation_happened": false,
+        "bulk_content_generation_happened": false,
+        "candidate_payload_creation_happened": false,
+        "frontend_fallback_allowed": false
+    }
+}

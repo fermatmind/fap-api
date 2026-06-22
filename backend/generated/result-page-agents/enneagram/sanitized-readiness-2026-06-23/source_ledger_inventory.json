@@ -1,0 +1,115 @@
+{
+    "schema_version": "fap.enneagram.result_page.agent_readiness.v1",
+    "task": "source_ledger_inventory",
+    "source_ledger": {
+        "schema_version": "fap.enneagram.result_page.source_ledger.v0.1",
+        "exists": true,
+        "valid": true,
+        "source_ledger_dir": "<backend>/content_assets/enneagram/result_page/source_ledger",
+        "primary_ledger_path": "<backend>/content_assets/enneagram/result_page/source_ledger/source_ledger.json",
+        "allowed_source_labels": [
+            "runtime_contract",
+            "compiled_question_contract",
+            "candidate_baseline",
+            "asset_stream_contract",
+            "policy_contract"
+        ],
+        "required_source_ids": [
+            "enneagram_v2_runtime_registry",
+            "enneagram_e105_compiled_questions",
+            "enneagram_fc144_compiled_questions",
+            "phase8b_candidate_baseline_a9fd",
+            "batch_1r_a_asset_stream",
+            "batch_1r_b_asset_stream",
+            "batch_1r_c_asset_stream",
+            "batch_1r_d_asset_stream",
+            "batch_1r_e_asset_stream",
+            "batch_1r_f_asset_stream",
+            "batch_1r_g_asset_stream",
+            "batch_1r_h_asset_stream",
+            "fc144_boundary_policy",
+            "forbidden_claim_policy"
+        ],
+        "required_source_ids_present": [
+            "batch_1r_a_asset_stream",
+            "batch_1r_b_asset_stream",
+            "batch_1r_c_asset_stream",
+            "batch_1r_d_asset_stream",
+            "batch_1r_e_asset_stream",
+            "batch_1r_f_asset_stream",
+            "batch_1r_g_asset_stream",
+            "batch_1r_h_asset_stream",
+            "enneagram_e105_compiled_questions",
+            "enneagram_fc144_compiled_questions",
+            "enneagram_v2_runtime_registry",
+            "fc144_boundary_policy",
+            "forbidden_claim_policy",
+            "phase8b_candidate_baseline_a9fd"
+        ],
+        "label_counts": {
+            "runtime_contract": 1,
+            "compiled_question_contract": 2,
+            "candidate_baseline": 1,
+            "asset_stream_contract": 8,
+            "policy_contract": 2
+        },
+        "candidate_baseline_hash": "a9fd3eb474ea2ca0130d06ad2b1640305d9160ee1a74e559ad4f60bfc4db56c0",
+        "runtime_registry_hash": "ac5bdaab3c761b0d01a56f92679aa58341110d64de0f47a1fa0062b64f76f97f",
+        "expected_payload_count": 630,
+        "launch_scope": [
+            "1R-A",
+            "1R-B",
+            "1R-C",
+            "1R-D",
+            "1R-E",
+            "1R-F",
+            "1R-G",
+            "1R-H"
+        ],
+        "out_of_launch_scope": [
+            "1R-I",
+            "1R-J"
+        ],
+        "negative_guarantees": {
+            "cms_write_performed": false,
+            "runtime_change_performed": false,
+            "frontend_fallback_allowed": false,
+            "activation_happened": false
+        },
+        "errors": [],
+        "files": [
+            {
+                "relative_path": "content_assets/enneagram/result_page/source_ledger/README.md",
+                "sha256": "8fe122399955c6cf0f6ba50c0ba3c673e022c4050918b58a694fddf9e5fa3c8c",
+                "size": 1868,
+                "json_valid": true
+            },
+            {
+                "relative_path": "content_assets/enneagram/result_page/source_ledger/source_ledger.json",
+                "sha256": "bf2aba1d2d93cc487334b12a48dc29bffd5961aba1113034bb6805b1b401cda1",
+                "size": 23413,
+                "json_valid": true
+            },
+            {
+                "relative_path": "content_assets/enneagram/result_page/source_ledger/source_ledger_template_v0_1.json",
+                "sha256": "ae4f693d377141b77a2e215a6de98a948f0f3cfd73df6b8c46a47cdd9c3c42df",
+                "size": 3051,
+                "json_valid": true
+            }
+        ]
+    },
+    "negative_guarantees": {
+        "runtime_use": "not_runtime",
+        "production_use_allowed": false,
+        "ready_for_generation": false,
+        "ready_for_import": false,
+        "ready_for_runtime": false,
+        "ready_for_production": false,
+        "cms_write_performed": false,
+        "runtime_change_performed": false,
+        "activation_happened": false,
+        "bulk_content_generation_happened": false,
+        "candidate_payload_creation_happened": false,
+        "frontend_fallback_allowed": false
+    }
+}
