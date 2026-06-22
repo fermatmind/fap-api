@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-22T12:12:44+08:00",
+  "updated_at": "2026-06-22T12:12:56+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -57691,7 +57691,7 @@
       "scope_validation": "passed"
     },
     "failure_reason": null,
-    "commit_sha": null,
+    "commit_sha": "31f1a9a9455ff8e97bd88aac24d8b79112f81985",
     "pr_url": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -57711,6 +57711,12 @@
         "from": "pending_dependency",
         "to": "local_checks_passed",
         "notes": "Added manual-only production rollout gate config/service, governance policy, QA validation, and tests for manual approval, import gate, snapshot, scoped tenant/form/locale, percentage max, kill switch, and post-deploy smoke procedure. No automatic production rollout."
+      },
+      {
+        "at": "2026-06-22T12:12:56+08:00",
+        "from": "local_checks_passed",
+        "to": "local_checks_passed",
+        "notes": "Recorded local implementation commit 31f1a9a9455ff8e97bd88aac24d8b79112f81985 before push."
       }
     ]
   },
