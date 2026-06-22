@@ -113,9 +113,9 @@ use App\Console\Commands\EnneagramActivateInactiveCandidateRelease;
 use App\Console\Commands\EnneagramActivateRegistryRelease;
 use App\Console\Commands\EnneagramExportProductionEquivalentCandidatePayloads;
 use App\Console\Commands\EnneagramImportInactiveCandidateRelease;
-use App\Console\Commands\EnneagramResultPageContentBatchCommand;
 use App\Console\Commands\EnneagramResultPageAgentReadinessCommand;
 use App\Console\Commands\EnneagramResultPageCandidateStagingHarnessCommand;
+use App\Console\Commands\EnneagramResultPageContentBatchCommand;
 use App\Console\Commands\EnneagramResultPageOpsControlPlaneCommand;
 use App\Console\Commands\EnneagramResultPageOpsRunnerCommand;
 use App\Console\Commands\EnneagramRollbackInactiveCandidateRelease;
@@ -190,6 +190,7 @@ use App\Console\Commands\SeoAgentCmsTdkGapScanCommand;
 use App\Console\Commands\SeoAgentCodexReviewRunnerCommand;
 use App\Console\Commands\SeoAgentGscOpportunityAutoDraftCommand;
 use App\Console\Commands\SeoAgentGscPostPublishFeedbackCommand;
+use App\Console\Commands\SeoAgentL5aContentPagePublishCanaryCommand;
 use App\Console\Commands\SeoAgentOpportunityAggregateCommand;
 use App\Console\Commands\SeoAgentPostPublishIndexnowAutoCommand;
 use App\Console\Commands\SeoAgentPostPublishSearchSubmitCommand;
@@ -409,6 +410,7 @@ class Kernel extends ConsoleKernel
         SeoAgentCmsDraftWriteCommand::class,
         SeoAgentCmsPublishAutoCanaryCommand::class,
         SeoAgentCmsPublishCanaryCommand::class,
+        SeoAgentL5aContentPagePublishCanaryCommand::class,
         SeoAgentGscOpportunityAutoDraftCommand::class,
         SeoAgentGscPostPublishFeedbackCommand::class,
         SeoAgentPostPublishIndexnowAutoCommand::class,
