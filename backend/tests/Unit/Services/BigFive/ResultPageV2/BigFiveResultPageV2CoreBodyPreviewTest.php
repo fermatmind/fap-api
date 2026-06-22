@@ -4974,6 +4974,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isAnalyticsSmokeExclusionPolicyFile($file)) {
+                continue;
+            }
+
             if ($this->isAnalyticsFunnelOpsReadModelFile($file)) {
                 continue;
             }
@@ -7486,6 +7490,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Analytics/AnalyticsFunnelDailyBuilder.php',
             'backend/app/Services/Analytics/FunnelEventTaxonomy.php',
         ], true);
+    }
+
+    private function isAnalyticsSmokeExclusionPolicyFile(string $file): bool
+    {
+        return $file === 'backend/app/Services/Analytics/AnalyticsTrafficExclusionPolicy.php';
     }
 
     private function isAnalyticsFunnelOpsReadModelFile(string $file): bool

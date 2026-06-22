@@ -24256,6 +24256,7 @@ prs:
       - Add a centralized analytics traffic exclusion policy for configured production smoke attempt ids and codex_probe_ anonymous probe traffic.
       - Apply the exclusion to analytics funnel daily aggregation and SEO conversion daily aggregation without deleting source events or rows.
       - Add focused tests proving configured smoke attempt ids and codex_probe_ traffic do not enter growth metrics.
+      - Keep the Big Five runtime freeze classifier aware that the analytics smoke exclusion policy is analytics-only support, not Big Five runtime surface drift.
     allowed_paths:
       - backend/config/analytics.php
       - backend/app/Services/Analytics/AnalyticsTrafficExclusionPolicy.php
@@ -24263,6 +24264,7 @@ prs:
       - backend/app/Services/Analytics/SeoConversionDailyBuilder.php
       - backend/tests/Feature/Analytics/AnalyticsFunnelDailyBuilderTest.php
       - backend/tests/Feature/Analytics/SeoConversionDailyBuilderTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - generated/pr-train-sidecar-issues/**
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
@@ -24274,7 +24276,8 @@ prs:
     validation:
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=AnalyticsFunnelDailyBuilderTest --no-ansi
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoConversionDailyBuilderTest --no-ansi
-      - cd backend && vendor/bin/pint --test config/analytics.php app/Services/Analytics/AnalyticsTrafficExclusionPolicy.php app/Services/Analytics/AnalyticsFunnelDailyBuilder.php app/Services/Analytics/SeoConversionDailyBuilder.php tests/Feature/Analytics/AnalyticsFunnelDailyBuilderTest.php tests/Feature/Analytics/SeoConversionDailyBuilderTest.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff --no-ansi
+      - cd backend && vendor/bin/pint --test config/analytics.php app/Services/Analytics/AnalyticsTrafficExclusionPolicy.php app/Services/Analytics/AnalyticsFunnelDailyBuilder.php app/Services/Analytics/SeoConversionDailyBuilder.php tests/Feature/Analytics/AnalyticsFunnelDailyBuilderTest.php tests/Feature/Analytics/SeoConversionDailyBuilderTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - git diff --check

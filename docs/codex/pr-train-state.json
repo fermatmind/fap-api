@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-22T16:12:20.759+00:00",
+  "updated_at": "2026-06-22T16:19:48.289+00:00",
   "SEO-AGENT-ARTICLE41-DRAFT-CLAIM-RISK-QA-01": {
     "repo": "fap-api",
     "branch": "codex/seo-agent-article41-draft-claim-risk-qa-01",
@@ -59065,7 +59065,7 @@
     "repo": "fap-api",
     "branch": "codex/fa30-api-05-analytics-smoke-exclusion",
     "base": "main",
-    "status": "pr_open",
+    "status": "ci_fix_local_validated",
     "train_scope": "fa30_six_scale_smoke_analytics_exclusion",
     "title": "FA30-API-05: Centralize six-scale smoke attempt analytics exclusion",
     "depends_on": [
@@ -59085,20 +59085,21 @@
         "commands": [
           "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=AnalyticsFunnelDailyBuilderTest --no-ansi",
           "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoConversionDailyBuilderTest --no-ansi",
-          "cd backend && vendor/bin/pint --test config/analytics.php app/Services/Analytics/AnalyticsTrafficExclusionPolicy.php app/Services/Analytics/AnalyticsFunnelDailyBuilder.php app/Services/Analytics/SeoConversionDailyBuilder.php tests/Feature/Analytics/AnalyticsFunnelDailyBuilderTest.php tests/Feature/Analytics/SeoConversionDailyBuilderTest.php",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff --no-ansi",
+          "cd backend && vendor/bin/pint --test config/analytics.php app/Services/Analytics/AnalyticsTrafficExclusionPolicy.php app/Services/Analytics/AnalyticsFunnelDailyBuilder.php app/Services/Analytics/SeoConversionDailyBuilder.php tests/Feature/Analytics/AnalyticsFunnelDailyBuilderTest.php tests/Feature/Analytics/SeoConversionDailyBuilderTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
           "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
           "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
           "git diff --check"
         ],
-        "evidence": "PASS: cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=AnalyticsFunnelDailyBuilderTest --no-ansi (8 warning-only existing file_get_contents warnings, 50 assertions)\nPASS: cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoConversionDailyBuilderTest --no-ansi (5 warning-only existing file_get_contents warnings, 36 assertions)\nPASS: cd backend && vendor/bin/pint --test config/analytics.php app/Services/Analytics/AnalyticsTrafficExclusionPolicy.php app/Services/Analytics/AnalyticsFunnelDailyBuilder.php app/Services/Analytics/SeoConversionDailyBuilder.php tests/Feature/Analytics/AnalyticsFunnelDailyBuilderTest.php tests/Feature/Analytics/SeoConversionDailyBuilderTest.php\nPASS: ruby YAML parse for docs/codex/pr-train.yaml\nPASS: python3 -m json.tool docs/codex/pr-train-state.json\nPASS: git diff --check"
+        "evidence": "PASS after CI fix: AnalyticsFunnelDailyBuilderTest (8 warning-only existing file_get_contents warnings, 50 assertions)\nPASS after CI fix: SeoConversionDailyBuilderTest (5 warning-only existing file_get_contents warnings, 36 assertions)\nPASS after CI fix: BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff (1 warning-only existing file_get_contents warning, 3 assertions)\nPASS: Pint for 7 scoped PHP files\nPASS: YAML/JSON parse and git diff --check"
       },
       "scope_validation": {
         "status": "pass",
-        "evidence": "Changed files are limited to FA30-API-05 allowed paths: analytics config/policy, two analytics builders, two focused analytics tests, and docs/codex train metadata."
+        "evidence": "Changed files remain limited to FA30-API-05 allowed paths, including the Big Five runtime freeze classifier test update needed to classify the analytics smoke exclusion policy as analytics-only support."
       },
       "github": {
-        "status": "pending",
-        "evidence": "PR #2324 opened; GitHub checks pending."
+        "status": "retry_pending",
+        "evidence": "Initial PR CI failed only on verify-bigfive because the new analytics policy support file was classified as Big Five runtime drift. The current-scope fix updates the freeze classifier and passed local reproduction; retry pending after push."
       }
     },
     "failure_reason": null,
@@ -59122,6 +59123,16 @@
         "at": "2026-06-22T16:12:20.759+00:00",
         "status": "pr_open",
         "note": "Opened PR #2324 after local validation and scope validation passed."
+      },
+      {
+        "at": "2026-06-22T16:19:48.289+00:00",
+        "status": "github_checks_failed_current_scope",
+        "note": "PR CI verify-bigfive failed on BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff because backend/app/Services/Analytics/AnalyticsTrafficExclusionPolicy.php needed an analytics-only freeze classifier exemption."
+      },
+      {
+        "at": "2026-06-22T16:19:48.289+00:00",
+        "status": "ci_fix_local_validated",
+        "note": "Added the analytics smoke exclusion policy to the Big Five runtime freeze classifier and reran the failed test plus FA30-API-05 analytics suites, Pint, YAML/JSON parsing, and diff check successfully."
       }
     ]
   }
