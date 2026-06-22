@@ -292,14 +292,6 @@ final class Mbti64CmsProjectionDraftWriter
             return $recommendations;
         }
 
-        if ($write) {
-            $errors[] = [
-                'field' => 'options.visible_query_backed_3',
-                'code' => 'visible_query_backed_subset_write_not_allowed',
-                'message' => 'Visible query-backed 3-page subset is dry-run only.',
-            ];
-        }
-
         $allowed = array_fill_keys(self::VISIBLE_QUERY_BACKED_3_URLS, true);
         $subset = array_values(array_filter(
             $recommendations,
@@ -587,7 +579,8 @@ final class Mbti64CmsProjectionDraftWriter
         return [
             'mode' => $enabled ? 'visible_query_backed_3' : 'full_88',
             'enabled' => $enabled,
-            'dry_run_only' => $enabled,
+            'dry_run_only' => false,
+            'write_allowed_with_strict_approval' => $enabled,
             'allowed_urls' => $enabled ? self::VISIBLE_QUERY_BACKED_3_URLS : [],
         ];
     }
