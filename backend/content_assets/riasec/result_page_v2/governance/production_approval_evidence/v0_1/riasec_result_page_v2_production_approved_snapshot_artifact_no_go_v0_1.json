@@ -1,0 +1,92 @@
+{
+  "schema_version": "fap.riasec.result_page_v2.production_approved_snapshot_artifact_no_go.v0.1",
+  "task_id": "RIASEC-RESULT-V2-PRODUCTION-APPROVED-SNAPSHOT-ARTIFACT-01",
+  "created_date": "2026-06-22",
+  "record_type": "production_approved_snapshot_artifact_decision",
+  "decision": "NO-GO",
+  "approved_snapshot_generated": false,
+  "human_authorization_status": "missing_complete_human_approval_block",
+  "source_snapshot": {
+    "snapshot_id": "riasec_result_page_v2_rc_0_1",
+    "snapshot_sha256": "4e5b7a3c356324bbd854ad2a3c8586caf07f0e05fee6bb26ab56af5c29f4b853",
+    "source_snapshot_modified": false,
+    "release_candidate": false,
+    "production_use_allowed": false,
+    "ready_for_production": false,
+    "production_rollout_enabled": false
+  },
+  "reviewed_approval_record": {
+    "path": "backend/content_assets/riasec/result_page_v2/qa/manual_production_gate_approval_evidence/v0_1/riasec_result_page_v2_manual_production_gate_approval_evidence_v0_1.json",
+    "approval_type": "production_import",
+    "decision": "NO-GO",
+    "status": "missing_human_approval",
+    "approved_by": null,
+    "approved_at": null,
+    "approval_channel": null,
+    "approval_evidence_url_or_ref": null,
+    "private_payload_leak_ack": false,
+    "staging_only_rejection_ack": false,
+    "production_import_allowed": false
+  },
+  "no_go_conditions_triggered": [
+    "approved_by_missing_or_agent_authored",
+    "approved_at_missing_partial_or_placeholder",
+    "approval_channel_missing",
+    "approval_evidence_ref_missing",
+    "scope_missing_or_placeholder",
+    "private_payload_leak_ack_not_true",
+    "staging_only_rejection_ack_not_true"
+  ],
+  "downstream_sidecar": {
+    "import_gate_dry_run_should_continue": true,
+    "external_blocker": "production_approved_snapshot_missing_due_to_missing_human_approval",
+    "production_import_allowed": false,
+    "cms_write_allowed": false,
+    "runtime_enablement_allowed": false,
+    "production_rollout_allowed": false
+  },
+  "required_future_human_authorization_fields": [
+    "approval_type",
+    "decision",
+    "approved_by",
+    "approver_role",
+    "approved_at",
+    "approval_channel",
+    "approval_evidence_url_or_ref",
+    "deployed_backend_sha",
+    "source_release_snapshot_id",
+    "source_release_snapshot_sha256",
+    "approved_release_snapshot_id",
+    "scope.tenant_ids",
+    "scope.form_codes",
+    "scope.locales",
+    "scope.allowlist",
+    "scope.percentage",
+    "scope.max_percentage",
+    "rollback_kill_switch_confirmed",
+    "kill_switch_ref",
+    "post_deploy_smoke_procedure_id",
+    "private_payload_leak_ack",
+    "staging_only_rejection_ack"
+  ],
+  "negative_guarantees": {
+    "runtime_change_performed": false,
+    "environment_change_performed": false,
+    "cms_write_performed": false,
+    "production_import_performed": false,
+    "production_rollout_performed": false,
+    "production_gate_enabled": false,
+    "approved_snapshot_generated": false,
+    "source_rc_snapshot_modified": false,
+    "staging_only_assets_marked_production_ready": false,
+    "codex_approved_production_activation": false
+  },
+  "go_no_go": {
+    "production_approved_snapshot_generated_now": false,
+    "current_approval_template_is_human_approval": false,
+    "production_import_allowed_now": false,
+    "cms_production_write_allowed_now": false,
+    "production_rollout_allowed_now": false,
+    "continue_train_with_external_no_go_sidecar": true
+  }
+}
