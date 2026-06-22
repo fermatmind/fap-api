@@ -10,6 +10,8 @@ use Tests\TestCase;
 
 final class RolloutGateTest extends TestCase
 {
+    private const ALLOWLIST_CONFIG_PATH = 'content_assets/big5/result_page_v2/qa/production_allowlist_rollout_config/v0_1';
+
     public function test_rollout_gate_defaults_disabled(): void
     {
         $decision = $this->gate()->decide($this->attempt());
@@ -34,6 +36,36 @@ final class RolloutGateTest extends TestCase
         $this->assertTrue($decision->allowed);
         $this->assertSame('production_rollout_allowed', $decision->reason);
         $this->assertSame('attempt_id', $decision->matchedBy);
+    }
+
+    public function test_allowlist_only_rollout_accepts_user_anon_and_org_scope(): void
+    {
+        $this->enableBaseRollout([
+            'production_rollout_mode' => 'allowlist_only',
+            'production_rollout_allowed_user_ids' => ['user_allowed'],
+        ]);
+        $this->assertSame(
+            'user_id',
+            $this->gate()->decide($this->attempt(['user_id' => 'user_allowed']))->matchedBy,
+        );
+
+        $this->enableBaseRollout([
+            'production_rollout_mode' => 'allowlist_only',
+            'production_rollout_allowed_anon_ids' => ['anon_allowed'],
+        ]);
+        $this->assertSame(
+            'anon_id',
+            $this->gate()->decide($this->attempt(['anon_id' => 'anon_allowed']))->matchedBy,
+        );
+
+        $this->enableBaseRollout([
+            'production_rollout_mode' => 'allowlist_only',
+            'production_rollout_allowed_org_ids' => ['42'],
+        ]);
+        $this->assertSame(
+            'org_id',
+            $this->gate()->decide($this->attempt())->matchedBy,
+        );
     }
 
     public function test_allowlist_only_rollout_denies_non_allowlisted_attempt(): void
@@ -176,6 +208,90 @@ final class RolloutGateTest extends TestCase
         $this->assertSame('production_rollout_snapshot_disabled', $decision->reason);
     }
 
+    public function test_allowlist_rollout_config_package_documents_scope_without_enabling_rollout(): void
+    {
+        $manifest = $this->loadAllowlistConfigJson('manifest.json');
+        $config = $this->loadAllowlistConfigJson('big5_v2_production_allowlist_rollout_config_v0_1.json');
+        $matrix = $this->loadAllowlistConfigJson('big5_v2_production_allowlist_scope_matrix_v0_1.json');
+        $validation = $this->loadAllowlistConfigJson('big5_v2_production_allowlist_rollout_validation_v0_1.json');
+
+        $this->assertSame('production_allowlist_rollout_config', $manifest['package'] ?? null);
+        $this->assertSame('allowlist_only', $manifest['rollout_mode_evidence'] ?? null);
+        $this->assertSame('allowlist_only', data_get($config, 'config_evidence.mode'));
+        $this->assertSame(0, data_get($config, 'config_evidence.percentage'));
+        $this->assertSame(0, data_get($config, 'config_evidence.max_percentage'));
+        $this->assertSame('blocked', data_get($config, 'config_evidence.broad_traffic'));
+        $this->assertSame('BIG5_RESULT_PAGE_V2_PRODUCTION_ROLLOUT_MODE', data_get($config, 'config_evidence.env_keys.rollout_mode'));
+        $this->assertSame([
+            'attempt',
+            'user',
+            'anon',
+            'org',
+            'tenant',
+            'form',
+            'locale',
+            'scale',
+        ], array_column($matrix['scope_dimensions'] ?? [], 'dimension'));
+        $this->assertSame('blocked', data_get($validation, 'checks.actual_rollout_enablement'));
+        $this->assertSame('blocked', data_get($validation, 'checks.post_deploy_live_smoke'));
+
+        foreach ([$manifest, $config, $matrix, $validation] as $document) {
+            $this->assertAllowlistConfigDisabled($document);
+        }
+    }
+
+    public function test_allowlist_rollout_config_files_are_redacted_and_hash_stable(): void
+    {
+        foreach (glob($this->allowlistConfigPath('*')) ?: [] as $file) {
+            if (! is_file($file)) {
+                continue;
+            }
+
+            $contents = (string) file_get_contents($file);
+            $normalized = preg_replace('/\s+/', '', $contents);
+
+            foreach ([
+                'private_url',
+                'report_json',
+                'report_full_json',
+                'report_free_json',
+                'payload_json',
+                'raw_scores',
+                'Big Five Report Engine',
+                'PR3B',
+                'AttemptReadController',
+                '[object Object]',
+            ] as $forbidden) {
+                $this->assertStringNotContainsString($forbidden, $contents, $file);
+            }
+
+            $this->assertStringNotContainsString('"production_use_allowed":true', $normalized, $file);
+            $this->assertStringNotContainsString('"ready_for_runtime":true', $normalized, $file);
+            $this->assertStringNotContainsString('"ready_for_production":true', $normalized, $file);
+            $this->assertStringNotContainsString('"production_runtime_enabled":true', $normalized, $file);
+            $this->assertStringNotContainsString('"production_rollout_enabled":true', $normalized, $file);
+            $this->assertStringNotContainsString('"rollout_allowed":true', $normalized, $file);
+        }
+
+        $lines = array_values(array_filter(array_map('trim', explode(
+            "\n",
+            (string) file_get_contents($this->allowlistConfigPath('SHA256SUMS')),
+        ))));
+
+        $this->assertCount(5, $lines);
+
+        foreach ($lines as $line) {
+            [$hash, $file] = preg_split('/\s+/', $line, 2) ?: ['', ''];
+            $file = trim($file);
+
+            $this->assertSame(
+                hash_file('sha256', $this->allowlistConfigPath($file)),
+                $hash,
+                $file,
+            );
+        }
+    }
+
     private function gate(): BigFiveV2ProductionRolloutGate
     {
         return new BigFiveV2ProductionRolloutGate;
@@ -237,5 +353,36 @@ final class RolloutGateTest extends TestCase
         }
 
         $this->fail('Unable to find deterministic rollout seed.');
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function loadAllowlistConfigJson(string $file): array
+    {
+        $decoded = json_decode((string) file_get_contents($this->allowlistConfigPath($file)), true, 512, JSON_THROW_ON_ERROR);
+
+        $this->assertIsArray($decoded);
+
+        return $decoded;
+    }
+
+    private function allowlistConfigPath(string $file): string
+    {
+        return base_path(self::ALLOWLIST_CONFIG_PATH.'/'.$file);
+    }
+
+    /**
+     * @param  array<string,mixed>  $document
+     */
+    private function assertAllowlistConfigDisabled(array $document): void
+    {
+        $this->assertSame('not_runtime', $document['runtime_use'] ?? null);
+        $this->assertFalse((bool) ($document['production_use_allowed'] ?? true));
+        $this->assertFalse((bool) ($document['ready_for_runtime'] ?? true));
+        $this->assertFalse((bool) ($document['ready_for_production'] ?? true));
+        $this->assertFalse((bool) ($document['production_runtime_enabled'] ?? true));
+        $this->assertFalse((bool) ($document['production_rollout_enabled'] ?? true));
+        $this->assertFalse((bool) ($document['rollout_allowed'] ?? true));
     }
 }

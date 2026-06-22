@@ -1,0 +1,30 @@
+{
+  "schema": "big5_result_page_v2.production_allowlist_rollout_validation.v0_1",
+  "package": "production_allowlist_rollout_config",
+  "version": "v0_1",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "production_runtime_enabled": false,
+  "production_rollout_enabled": false,
+  "rollout_allowed": false,
+  "production_decision": "ALLOWLIST_CONFIG_READY_ROLLOUT_DISABLED",
+  "validation_status": "pass",
+  "checks": {
+    "mode_documented_as_allowlist_only": "pass",
+    "attempt_user_anon_org_allowlist_dimensions": "pass",
+    "tenant_form_locale_scale_scope_dimensions": "pass",
+    "percentage_rollout_disabled": "pass",
+    "broad_traffic_blocked": "pass",
+    "rollback_kill_switch_linked": "pass",
+    "frontend_copy_out_of_scope": "pass",
+    "actual_rollout_enablement": "blocked",
+    "post_deploy_live_smoke": "blocked"
+  },
+  "remaining_blockers_before_actual_rollout": [
+    "operator_has_not_enabled_rollout_env",
+    "real_allowlist_values_not_recorded_in_repo",
+    "post_deploy_live_smoke_not_recorded"
+  ]
+}
