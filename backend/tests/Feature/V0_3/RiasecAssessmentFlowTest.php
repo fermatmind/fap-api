@@ -175,6 +175,7 @@ final class RiasecAssessmentFlowTest extends TestCase
         $report->assertJsonPath('riasec_form_v1.form_code', 'riasec_60');
         $report->assertJsonPath('riasec_form_v1.score_space_version', 'riasec_60_likert5_activity_sum_space.v1');
         $report->assertJsonPath('report._meta.riasec_public_projection_v2.schema_version', 'riasec.public_projection.v2');
+        $this->assertNull($report->json('report._meta.result_page_v2'));
         $report->assertJsonPath('riasec_public_projection_v2.measurement_evidence.score_space_version', 'riasec_60_likert5_activity_sum_space.v1');
         $report->assertJsonPath('riasec_public_projection_v2.measurement_evidence.interpretation_rule_version', 'riasec_interpretation_rule_spec_v2');
         $report->assertJsonPath('riasec_public_projection_v2.measurement_evidence.snapshot_bound', true);

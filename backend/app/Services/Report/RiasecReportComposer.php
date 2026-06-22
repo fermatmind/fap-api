@@ -29,6 +29,7 @@ final class RiasecReportComposer
         $snapshotBound = (bool) ($ctx['snapshot_bound'] ?? false);
         $projection = $this->projectionService->buildFromResult($result, $locale);
         $projectionV2 = $this->projectionService->buildV2FromResult($result, $locale, $snapshotBound);
+        $resultPageV2 = $this->buildResultPageV2RuntimeWrapper($attempt, $result, $variant, $projectionV2, $ctx);
         $topCode = trim((string) ($projection['top_code'] ?? $result->type_code ?? ''));
         if ($topCode === '') {
             return [
@@ -66,10 +67,121 @@ final class RiasecReportComposer
                     'riasec_public_projection_v1' => $projection,
                     'riasec_public_projection_v2' => $projectionV2,
                     'snapshot_binding_v1' => $snapshotBound ? $this->buildSnapshotBinding($ctx, $projectionV2) : null,
+                    'result_page_v2' => $resultPageV2,
                 ], static fn (mixed $value): bool => $value !== null),
                 'generated_at' => now()->toISOString(),
             ],
         ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $projectionV2
+     * @param  array<string,mixed>  $ctx
+     * @return array<string,mixed>|null
+     */
+    private function buildResultPageV2RuntimeWrapper(Attempt $attempt, Result $result, string $variant, array $projectionV2, array $ctx): ?array
+    {
+        if (! $this->resultPageV2GateAllowsRuntime($ctx)) {
+            return null;
+        }
+        if ($variant !== ReportAccess::VARIANT_FULL) {
+            return null;
+        }
+        if (! $this->resultPageV2ProjectionIsUsable($projectionV2)) {
+            return null;
+        }
+
+        $attemptId = (string) ($attempt->attempt_id ?? '');
+        $locale = trim((string) ($attempt->locale ?? data_get($projectionV2, 'locale', 'zh-CN')));
+
+        return [
+            'schema_version' => 'fap.riasec.result_page_v2.runtime_wrapper.v0.1',
+            'runtime_use' => 'staging_only',
+            'production_use_allowed' => false,
+            'ready_for_production' => false,
+            'cms_write_performed' => false,
+            'runtime_wrapper_enabled' => true,
+            'production_rollout_enabled' => false,
+            'frontend_fallback_allowed' => false,
+            'private_payload_exported' => false,
+            'gate' => [
+                'enabled' => true,
+                'staging_runtime_enabled' => (bool) config('riasec_result_page_v2.staging_runtime_enabled', false),
+                'pilot_runtime_enabled' => (bool) config('riasec_result_page_v2.pilot_runtime_enabled', false),
+                'production_runtime_enabled' => false,
+                'environment' => app()->environment(),
+            ],
+            'identity' => [
+                'scale_code' => 'RIASEC',
+                'attempt_id_included' => false,
+                'attempt_ref' => $attemptId === '' ? null : substr(hash('sha256', $attemptId), 0, 16),
+                'form_code' => (string) data_get($projectionV2, 'form.form_code', ''),
+                'locale' => $locale === '' ? 'zh-CN' : $locale,
+                'top_code' => (string) ($result->type_code ?? data_get($projectionV2, 'holland_code.code', '')),
+            ],
+            'selector_inputs' => [
+                'quality_state' => (string) data_get($projectionV2, 'quality.quality_state', 'normal'),
+                'profile_shape' => (string) data_get($projectionV2, 'interpretation_state.profile_shape', 'low_clarity'),
+                'module_visibility_policy_id' => (string) data_get($projectionV2, 'module_visibility_policy.policy_id', ''),
+                'deep_content_slots_schema_version' => (string) data_get($projectionV2, 'deep_content_slots_v1.schema_version', ''),
+            ],
+            'payload_refs' => [
+                'module_visibility_policy' => data_get($projectionV2, 'module_visibility_policy'),
+                'deep_content_slots_v1' => data_get($projectionV2, 'deep_content_slots_v1'),
+            ],
+            'redaction_policy' => [
+                'variant' => $variant,
+                'locked_payload_allowed' => false,
+                'free_payload_allowed' => false,
+                'omit_when_invalid' => true,
+                'fail_closed' => true,
+            ],
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $ctx
+     */
+    private function resultPageV2GateAllowsRuntime(array $ctx): bool
+    {
+        if ((bool) config('riasec_result_page_v2.production_runtime_enabled', false)) {
+            return false;
+        }
+        if ((bool) config('riasec_result_page_v2.production_rollout_enabled', false)) {
+            return false;
+        }
+        if ((bool) config('riasec_result_page_v2.production_rollout_manual_approval_granted', false)) {
+            return false;
+        }
+        if (! (bool) config('riasec_result_page_v2.enabled', false)) {
+            return false;
+        }
+
+        $allowedEnvironments = array_map(
+            static fn (mixed $environment): string => trim((string) $environment),
+            (array) config('riasec_result_page_v2.allowed_environments', [])
+        );
+        if (! in_array(app()->environment(), $allowedEnvironments, true)) {
+            return false;
+        }
+
+        if ((bool) ($ctx['riasec_result_page_v2_staging'] ?? false) && (bool) config('riasec_result_page_v2.staging_runtime_enabled', false)) {
+            return true;
+        }
+
+        return (bool) ($ctx['riasec_result_page_v2_pilot'] ?? false)
+            && (bool) config('riasec_result_page_v2.pilot_runtime_enabled', false);
+    }
+
+    /**
+     * @param  array<string,mixed>  $projectionV2
+     */
+    private function resultPageV2ProjectionIsUsable(array $projectionV2): bool
+    {
+        return (string) ($projectionV2['schema_version'] ?? '') === 'riasec.public_projection.v2'
+            && is_array($projectionV2['module_visibility_policy'] ?? null)
+            && is_array($projectionV2['deep_content_slots_v1'] ?? null)
+            && (bool) data_get($projectionV2, 'deep_content_slots_v1.source_policy.frontend_fallback_allowed', true) === false;
     }
 
     /**
