@@ -10,6 +10,8 @@ final class ReleaseSnapshotTest extends TestCase
 {
     private const RELEASE_PATH = 'content_assets/big5/result_page_v2/releases/v0_1';
 
+    private const APPROVAL_PREP_RELEASE_PATH = 'content_assets/big5/result_page_v2/releases/v0_2';
+
     private const FIXTURE_PATH = 'tests/Fixtures/big5_result_page_v2/release_snapshots/immutable_snapshot_fixture_v0_1.json';
 
     public function test_fixture_snapshot_is_immutable_reproducible_versioned_and_traceable(): void
@@ -73,6 +75,93 @@ final class ReleaseSnapshotTest extends TestCase
         $this->assertArrayNotHasKey('production_enable_path', $snapshot);
     }
 
+    public function test_approval_prep_snapshot_is_hash_stable_evidence_linked_and_not_runtime(): void
+    {
+        $manifest = $this->jsonFile(self::APPROVAL_PREP_RELEASE_PATH.'/manifest.json');
+        $snapshot = $this->jsonFile(self::APPROVAL_PREP_RELEASE_PATH.'/big5_v2_release_snapshot_rc_0_2.json');
+        $checklist = $this->jsonFile(self::APPROVAL_PREP_RELEASE_PATH.'/production_approval_checklist_rc_0_2.json');
+
+        $this->assertSame('big5_result_page_v2_rc_0_2', $snapshot['snapshot_id'] ?? null);
+        $this->assertSame('v0_2', $snapshot['snapshot_version'] ?? null);
+        $this->assertSame('not_runtime', $snapshot['runtime_use'] ?? null);
+        $this->assertTrue((bool) ($snapshot['production_approval_prep'] ?? false));
+        $this->assertTrue((bool) ($snapshot['import_gate_preparable'] ?? false));
+        $this->assertFalse($this->isProductionEnabled($snapshot));
+        $this->assertFalse($this->isProductionEnabled($manifest));
+        $this->assertFalse($this->isProductionEnabled($checklist));
+        $this->assertTrue(($snapshot['immutable'] ?? false) === true);
+        $this->assertTrue($this->snapshotHasStableHash($snapshot));
+        $this->assertTrue($this->manifestHasValidSnapshotHashes($manifest, self::APPROVAL_PREP_RELEASE_PATH));
+
+        $refKinds = array_column((array) ($snapshot['content_version_refs'] ?? []), 'kind');
+        foreach ([
+            'rendered_qa_evidence',
+            'all_surface_pass_evidence',
+            'pilot_run_evidence',
+            'production_ops_baseline',
+            'rollback_kill_switch_evidence',
+            'approval_checklist',
+            'approval_evidence',
+        ] as $kind) {
+            $this->assertContains($kind, $refKinds);
+        }
+
+        $this->assertSame(
+            hash_file('sha256', base_path(self::APPROVAL_PREP_RELEASE_PATH.'/production_approval_checklist_rc_0_2.json')),
+            $manifest['approval_checklist']['sha256'] ?? null,
+        );
+        $this->assertSame(
+            'pending_explicit_human_production_approval',
+            $this->contentRefStatus($snapshot, 'approval_evidence'),
+        );
+        $this->assertContains(
+            'explicit_human_production_approval_missing',
+            (array) ($snapshot['remaining_blockers_before_actual_production_activation'] ?? []),
+        );
+    }
+
+    public function test_approval_prep_checklist_is_redacted_and_documents_remaining_blockers(): void
+    {
+        $packageFiles = [
+            'README.md',
+            'manifest.json',
+            'big5_v2_release_snapshot_rc_0_2.json',
+            'production_approval_checklist_rc_0_2.json',
+        ];
+
+        foreach ($packageFiles as $file) {
+            $contents = (string) file_get_contents(base_path(self::APPROVAL_PREP_RELEASE_PATH.'/'.$file));
+
+            foreach ([
+                'attempt_id',
+                'private_url',
+                'report_json',
+                'report_full_json',
+                'report_free_json',
+                'payload_json',
+                'raw_scores',
+                'Big Five Report Engine',
+                'PR3B',
+                'AttemptReadController',
+                '[object Object]',
+            ] as $forbidden) {
+                $this->assertStringNotContainsString($forbidden, $contents, $file);
+            }
+        }
+
+        $checklist = $this->jsonFile(self::APPROVAL_PREP_RELEASE_PATH.'/production_approval_checklist_rc_0_2.json');
+
+        $this->assertSame('not_recorded', $checklist['redaction']['attempt_references'] ?? null);
+        $this->assertSame('not_recorded', $checklist['redaction']['result_access_links'] ?? null);
+        $this->assertSame('not_recorded', $checklist['redaction']['pdf_files'] ?? null);
+        $this->assertSame('not_recorded', $checklist['redaction']['raw_payload'] ?? null);
+        $this->assertSame('not_recorded', $checklist['redaction']['raw_score_values'] ?? null);
+        $this->assertContains(
+            'production_import_gate_pass_evidence_missing',
+            (array) ($checklist['remaining_blockers_before_actual_production_activation'] ?? []),
+        );
+    }
+
     public function test_rollback_is_supported_by_snapshot_revert_without_runtime_enablement(): void
     {
         $snapshot = $this->jsonFile(self::RELEASE_PATH.'/big5_v2_release_snapshot_rc_0_1.json');
@@ -86,14 +175,20 @@ final class ReleaseSnapshotTest extends TestCase
 
     public function test_sha256sums_are_reproducible(): void
     {
-        $entries = file(base_path(self::RELEASE_PATH.'/SHA256SUMS'), FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        $this->assertSha256SumsAreReproducible(self::RELEASE_PATH, 3);
+        $this->assertSha256SumsAreReproducible(self::APPROVAL_PREP_RELEASE_PATH, 4);
+    }
+
+    private function assertSha256SumsAreReproducible(string $releasePath, int $expectedCount): void
+    {
+        $entries = file(base_path($releasePath.'/SHA256SUMS'), FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
         $this->assertIsArray($entries);
-        $this->assertCount(3, $entries);
+        $this->assertCount($expectedCount, $entries);
 
         foreach ($entries as $entry) {
             $this->assertMatchesRegularExpression('/^[a-f0-9]{64}  [A-Za-z0-9_.-]+$/', $entry);
             [$expectedHash, $fileName] = explode('  ', $entry, 2);
-            $path = base_path(self::RELEASE_PATH.'/'.$fileName);
+            $path = base_path($releasePath.'/'.$fileName);
 
             $this->assertFileExists($path);
             $this->assertSame($expectedHash, hash_file('sha256', $path), $fileName);
@@ -142,8 +237,10 @@ final class ReleaseSnapshotTest extends TestCase
     /**
      * @param  array<string,mixed>  $manifest
      */
-    private function manifestHasValidSnapshotHashes(array $manifest): bool
+    private function manifestHasValidSnapshotHashes(array $manifest, ?string $releasePath = null): bool
     {
+        $releasePath ??= self::RELEASE_PATH;
+
         foreach ((array) ($manifest['snapshots'] ?? []) as $snapshot) {
             $fileName = (string) ($snapshot['file'] ?? '');
             $expectedHash = (string) ($snapshot['sha256'] ?? '');
@@ -151,13 +248,27 @@ final class ReleaseSnapshotTest extends TestCase
                 return false;
             }
 
-            $path = base_path(self::RELEASE_PATH.'/'.$fileName);
+            $path = base_path($releasePath.'/'.$fileName);
             if (! is_file($path) || hash_file('sha256', $path) !== $expectedHash) {
                 return false;
             }
         }
 
         return true;
+    }
+
+    /**
+     * @param  array<string,mixed>  $snapshot
+     */
+    private function contentRefStatus(array $snapshot, string $kind): ?string
+    {
+        foreach ((array) ($snapshot['content_version_refs'] ?? []) as $ref) {
+            if (is_array($ref) && ($ref['kind'] ?? null) === $kind) {
+                return (string) ($ref['status'] ?? '');
+            }
+        }
+
+        return null;
     }
 
     /**
