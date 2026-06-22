@@ -11,9 +11,9 @@ use Throwable;
 final class RiasecResultPageOpsRunnerCommand extends Command
 {
     protected $signature = 'riasec:result-page-ops-runner
-        {action=plan : Only plan is supported in this orchestrator PR}
+        {action=plan : Supported actions: plan, staging-dry-run}
         {--run-id= : Stable run identifier for the artifact directory}
-        {--artifact-dir= : Optional artifact root; defaults to backend/artifacts/riasec_result_page_ops_agent_runner}
+        {--artifact-dir= : Optional artifact root; defaults to backend/artifacts/riasec_result_page_v2_agent}
         {--permission-model-path= : Optional permission model path}
         {--mode=auto-to-pr : Requested mode: auto-to-pr, auto-to-staging, auto-to-report}
         {--scope-id=ops-agent-pr-train-orchestrator : Stable scope id for deterministic run and branch naming}
@@ -30,13 +30,7 @@ final class RiasecResultPageOpsRunnerCommand extends Command
     public function handle(RiasecResultPageOpsAgentRunOrchestrator $orchestrator): int
     {
         try {
-            if ($this->argument('action') !== 'plan') {
-                $this->error('Unsupported action. This PR supports only: plan');
-
-                return self::FAILURE;
-            }
-
-            $summary = $orchestrator->plan([
+            $options = [
                 'run_id' => trim((string) $this->option('run-id')),
                 'artifact_dir' => trim((string) $this->option('artifact-dir')),
                 'permission_model_path' => trim((string) $this->option('permission-model-path')),
@@ -48,7 +42,19 @@ final class RiasecResultPageOpsRunnerCommand extends Command
                 'simulate_external_blocker' => (bool) $this->option('simulate-external-blocker'),
                 'simulate_current_scope_failure' => (bool) $this->option('simulate-current-scope-failure'),
                 'strict' => (bool) $this->option('strict'),
-            ]);
+            ];
+
+            $summary = match ($this->argument('action')) {
+                'plan' => $orchestrator->plan($options),
+                'staging-dry-run' => $orchestrator->stagingDryRun($options),
+                default => null,
+            };
+
+            if (! is_array($summary)) {
+                $this->error('Unsupported action. Supported actions: plan, staging-dry-run');
+
+                return self::FAILURE;
+            }
 
             $this->render($summary);
 

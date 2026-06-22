@@ -56880,7 +56880,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-ops-agent-pr-train-orchestrator-01",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "riasec_result_ops_agent_release_chain",
     "title": "RIASEC-OPS-AGENT-PR-TRAIN-ORCHESTRATOR-01: feat(riasec): add ops PR train orchestrator",
     "depends_on": [
@@ -56902,14 +56902,15 @@
       "git_diff_check_after_repair": "passed",
       "github_required_checks_after_repair": "passed",
       "verify_bigfive_after_repair": "passed",
-      "merge_state": "clean"
+      "merge_state": "clean",
+      "post_merge_revalidation": "passed"
     },
     "failure_reason": null,
-    "commit_sha": "3a8c45d8408c9905bcc2c68856311d7fffb2b444",
+    "commit_sha": "d55037d3fdcd08222457c034c17d90064e6cc3d4",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2249",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-22T00:24:20Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_auto_rollout_allowed": false,
     "production_cms_write_allowed": false,
     "production_gate_auto_enable_allowed": false,
@@ -56955,20 +56956,35 @@
         "from": "local_checks_passed_after_repair",
         "to": "ready_to_merge",
         "notes": "GitHub required checks passed after the freeze-guard repair and PR merge state was CLEAN before merge."
+      },
+      {
+        "at": "2026-06-22T08:27:35+08:00",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "notes": "Reconciled PR #2249 after GitHub reported MERGED, origin/main contained merge commit d45ffac138bc8d417673e189a712ea417099e804, local main was fast-forwarded, and task branches were cleaned."
       }
-    ]
+    ],
+    "merge_commit": "d45ffac138bc8d417673e189a712ea417099e804"
   },
   "RIASEC-OPS-AGENT-STAGING-RUNNER-01": {
     "repo": "fap-api",
     "branch": "codex/riasec-ops-agent-staging-runner-01",
     "base": "main",
-    "status": "pending_dependency",
+    "status": "local_checks_passed",
     "train_scope": "riasec_result_ops_agent_release_chain",
     "title": "RIASEC-OPS-AGENT-STAGING-RUNNER-01: feat(riasec): add ops staging runner",
     "depends_on": [
       "RIASEC-OPS-AGENT-PR-TRAIN-ORCHESTRATOR-01"
     ],
-    "checks": {},
+    "checks": {
+      "php_lint_orchestrator": "passed",
+      "php_lint_command": "passed",
+      "php_artisan_test_filter_RiasecOpsAgent": "passed",
+      "php_artisan_test_filter_RiasecResultPage": "passed",
+      "staging_dry_run_command_smoke": "passed",
+      "git_diff_check": "passed",
+      "scope_validation": "passed"
+    },
     "failure_reason": null,
     "commit_sha": null,
     "pr_url": null,
@@ -56984,6 +57000,18 @@
         "from": "missing_from_manifest",
         "to": "pending_dependency",
         "notes": "Initialized from explicit RIASEC ops agent and release-chain /goal authorization."
+      },
+      {
+        "at": "2026-06-22T08:27:35+08:00",
+        "from": "pending_dependency",
+        "to": "local_checks_passed",
+        "notes": "Staging dry-run action wrote staging-only reports with cms_write_performed=false, runtime_change_performed=false, and production execution disabled."
+      },
+      {
+        "at": "2026-06-22T08:27:46+08:00",
+        "from": "local_checks_passed",
+        "to": "scope_validation_passed",
+        "notes": "Changed files were limited to Riasec ops command/service/tests and PR train state."
       }
     ]
   },
