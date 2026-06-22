@@ -511,6 +511,54 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
         }
     }
 
+    public function test_weekly_ops_writes_redacted_ops_and_smoke_report(): void
+    {
+        $artifactRoot = base_path('artifacts/big5_result_page_v2_agent/unit-weekly-ops');
+
+        $this->deleteDirectory($artifactRoot);
+
+        try {
+            $this->artisan('big5:result-page-v2-agent', [
+                'action' => 'weekly-ops',
+                '--run-id' => 'weekly',
+                '--artifact-dir' => $artifactRoot,
+                '--json' => true,
+            ])->assertExitCode(0);
+
+            $runDir = $artifactRoot.'/weekly';
+            $this->assertFileExists($runDir.'/weekly_ops_report.json');
+            $this->assertFileExists($runDir.'/weekly_ops_report.md');
+
+            $report = $this->readJson($runDir.'/weekly_ops_report.json');
+            $this->assertSame('weekly_ops_runner', $report['task'] ?? null);
+            $this->assertSame('not_runtime', $report['runtime_use'] ?? null);
+            $this->assertFalse((bool) ($report['production_use_allowed'] ?? true));
+            $this->assertTrue((bool) ($report['production_ops_reporting_ready'] ?? false));
+            $this->assertFalse((bool) ($report['production_rollout_enabled'] ?? true));
+            $this->assertSame('count_and_rate_only', data_get($report, 'metrics_contract.v2_payload_coverage_rate.redaction'));
+            $this->assertSame('count_and_rate_only', data_get($report, 'metrics_contract.fallback_hit_rate.redaction'));
+            $this->assertSame('enum_counts_only', data_get($report, 'metrics_contract.malformed_rejection_reasons.redaction'));
+            $this->assertSame('must_not_appear', data_get($report, 'smoke_contract.pdf_private_link_check'));
+            $this->assertSame('must_not_expose_internal_tokens', data_get($report, 'smoke_contract.footer_check'));
+            $this->assertGreaterThanOrEqual(10, (int) data_get($report, 'smoke_contract.forbidden_public_text_token_count', 0));
+
+            foreach ([
+                'stores_real_attempt_identifier',
+                'stores_private_link',
+                'stores_pdf_file',
+                'stores_raw_report_body',
+                'stores_user_score_values',
+                'runtime_flag_change',
+                'production_import_gate_change',
+                'rollout_gate_change',
+            ] as $guarantee) {
+                $this->assertFalse((bool) data_get($report, "negative_guarantees.{$guarantee}", true), $guarantee);
+            }
+        } finally {
+            $this->deleteDirectory($artifactRoot);
+        }
+    }
+
     public function test_stage_candidates_fails_closed_without_human_review_manifest(): void
     {
         $artifactRoot = $this->tempDir('big5-v2-agent-stage-missing-review');

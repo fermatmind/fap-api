@@ -31,6 +31,22 @@ final class BigFiveResultPageV2AgentAutomationTest extends TestCase
         $this->assertStringContainsString('--no-ansi', (string) $event['command']);
     }
 
+    public function test_weekly_ops_runner_is_registered_as_redacted_schedule(): void
+    {
+        $events = $this->scheduleListEvents();
+        $event = collect($events)->first(
+            fn (array $event): bool => str_contains(
+                (string) ($event['command'] ?? ''),
+                'big5:result-page-v2-agent weekly-ops --json --no-ansi'
+            )
+        );
+
+        $this->assertNotNull($event, 'schedule:list did not include the Big Five V2 weekly ops command.');
+        $this->assertSame('20 5 * * 1', $event['expression']);
+        $this->assertStringContainsString('--json', (string) $event['command']);
+        $this->assertStringContainsString('--no-ansi', (string) $event['command']);
+    }
+
     public function test_strict_nightly_audit_fails_closed_and_keeps_artifacts_redacted(): void
     {
         $root = base_path('artifacts/testing/big5-v2-nightly-audit');
