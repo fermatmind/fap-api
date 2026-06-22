@@ -1,0 +1,346 @@
+name: Deploy API Production
+
+on:
+  workflow_run:
+    workflows: ["Deploy Application"]
+    types: [completed]
+    branches: [main]
+
+permissions:
+  contents: read
+
+env:
+  TARGET: production
+  DEPLOYER_VERSION: "7.5.12"
+  DEPLOYER_SHA256: "b55c6609653e888c672d327c407f8bba6324b9c9cc24f9dcfb3f4b3922760632"
+  DEPLOY_USER: "ubuntu"
+  DEPLOY_PORT: "22"
+  DEPLOY_HOST: "139.224.130.204"
+  DEPLOY_PATH: "/var/www/fap-api"
+  HEALTHCHECK_URL: "https://api.fermatmind.com/api/healthz"
+  AUTH_GUEST_CHECK_URL: "https://api.fermatmind.com/api/v0.3/auth/guest"
+  OPS_HOST: "ops.fermatmind.com"
+  SSH_RETRY_ATTEMPTS: "3"
+  SSH_RETRY_DELAY_SECONDS: "10"
+
+jobs:
+  deploy-production:
+    name: Deploy fap-api production
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'push' &&
+      github.event.workflow_run.head_branch == 'main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    concurrency:
+      group: deploy-${{ github.repository }}-production
+      cancel-in-progress: false
+    environment:
+      name: production
+
+    steps:
+      - name: Checkout deploy revision
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+          coverage: none
+
+      - name: Confirm approved revision is still latest main
+        shell: bash
+        env:
+          DEPLOY_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          set -euo pipefail
+          git fetch --no-tags --depth=1 origin main:refs/remotes/origin/main
+          LATEST_MAIN_SHA="$(git rev-parse origin/main)"
+          echo "deploy_sha=$DEPLOY_SHA"
+          echo "latest_main_sha=$LATEST_MAIN_SHA"
+          test "$DEPLOY_SHA" = "$LATEST_MAIN_SHA"
+
+      - name: Refuse retired production target
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "$DEPLOY_HOST" = "122.152.221.126" ]; then
+            echo "Refusing production deploy to retired Tencent Node3"
+            exit 1
+          fi
+
+      - name: Install Deployer (pinned)
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/dep.phar "https://github.com/deployphp/deployer/releases/download/v${DEPLOYER_VERSION}/deployer.phar"
+          printf '%s  /tmp/dep.phar\n' "$DEPLOYER_SHA256" | sha256sum -c -
+          php /tmp/dep.phar --version
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Debug SSH agent (fingerprints only)
+        shell: bash
+        run: |
+          set -euo pipefail
+          ssh-add -l
+
+      - name: Install pinned SSH known_hosts
+        shell: bash
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          test -n "$SSH_KNOWN_HOSTS"
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
+      - name: SSH preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          ssh_retry() {
+            local attempt rc
+            local max_attempts="${SSH_RETRY_ATTEMPTS:-3}"
+            local retry_delay="${SSH_RETRY_DELAY_SECONDS:-10}"
+            for attempt in $(seq 1 "$max_attempts"); do
+              set +e
+              ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+                -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$@"
+              rc=$?
+              set -e
+              if [ "$rc" -eq 0 ]; then return 0; fi
+              if [ "$attempt" -ge "$max_attempts" ]; then return "$rc"; fi
+              echo "SSH attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
+              sleep "$retry_delay"
+            done
+          }
+          ssh_retry 'whoami; hostname; id'
+          ssh_retry "test -d '$DEPLOY_PATH' && echo deploy_path_ok"
+
+      - name: Remote deploy lock guard
+        shell: bash
+        run: |
+          set -euo pipefail
+          ssh_retry() {
+            local attempt rc
+            local max_attempts="${SSH_RETRY_ATTEMPTS:-3}"
+            local retry_delay="${SSH_RETRY_DELAY_SECONDS:-10}"
+            for attempt in $(seq 1 "$max_attempts"); do
+              set +e
+              ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+                -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$@"
+              rc=$?
+              set -e
+              if [ "$rc" -eq 0 ]; then return 0; fi
+              if [ "$attempt" -ge "$max_attempts" ]; then return "$rc"; fi
+              echo "SSH attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
+              sleep "$retry_delay"
+            done
+          }
+          ssh_retry "TARGET='$TARGET' DEPLOY_PATH='$DEPLOY_PATH' bash -s" <<'REMOTE'
+          set -euo pipefail
+          LOCK="$DEPLOY_PATH/.dep/deploy.lock"
+          META="$DEPLOY_PATH/.dep/deploy.lock.meta.json"
+          if [ ! -f "$LOCK" ]; then
+            echo "deploy lock guard: no existing lock"
+            exit 0
+          fi
+          OWNER="$(cat "$LOCK" 2>/dev/null || true)"
+          LOCK_MTIME="$(stat -c %Y "$LOCK")"
+          NOW="$(date +%s)"
+          AGE_SECONDS="$((NOW - LOCK_MTIME))"
+          echo "deploy lock guard: existing lock owner=${OWNER:-unknown} age_seconds=$AGE_SECONDS"
+          [ -f "$META" ] && sed -n '1,120p' "$META" || true
+          ACTIVE_PROCESSES="$(ps -eo pid,ppid,user,cmd \
+            | grep -E 'dep deploy|dep worker|deployer|composer install|artisan migrate|queue:reload-workers' \
+            | grep -v grep || true)"
+          if [ -n "$ACTIVE_PROCESSES" ]; then
+            echo "$ACTIVE_PROCESSES"
+            echo "deploy lock guard: active deploy-like process exists"
+            exit 1
+          fi
+          echo "deploy lock guard: production lock is not safe to remove automatically"
+          exit 1
+          REMOTE
+
+      - name: Deploy production with Deployer
+        shell: bash
+        env:
+          DEPLOYER_NO_INTERACTION: "1"
+          DEPLOY_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          set -euo pipefail
+          DEPLOY_LOCK_METADATA="$(php -r '
+          $serverUrl = getenv("GITHUB_SERVER_URL") ?: "https://github.com";
+          $repository = getenv("GITHUB_REPOSITORY") ?: "";
+          $runId = getenv("GITHUB_RUN_ID") ?: "";
+          echo json_encode([
+              "env" => getenv("TARGET") ?: "",
+              "run_id" => $runId,
+              "run_attempt" => getenv("GITHUB_RUN_ATTEMPT") ?: "",
+              "sha" => getenv("DEPLOY_SHA") ?: getenv("GITHUB_SHA") ?: "",
+              "actor" => getenv("GITHUB_ACTOR") ?: "",
+              "workflow" => getenv("GITHUB_WORKFLOW") ?: "",
+              "repository" => $repository,
+              "workflow_url" => rtrim($serverUrl, "/")."/".$repository."/actions/runs/".$runId,
+              "deploy_path" => getenv("DEPLOY_PATH") ?: "",
+              "started_at" => gmdate("Y-m-d\TH:i:s\Z"),
+          ], JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
+          ')"
+          export DEPLOY_LOCK_METADATA
+          export DEPLOY_LOCK_RUN_ID="$GITHUB_RUN_ID"
+          export DEPLOY_LOCK_RUN_ATTEMPT="$GITHUB_RUN_ATTEMPT"
+          php /tmp/dep.phar deploy production -f deploy.php \
+            -o release_name="production-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}-${DEPLOY_SHA:0:12}" \
+            -vvv --no-interaction
+
+      - name: Restart queue workers through Laravel queue restart
+        shell: bash
+        run: |
+          set -euo pipefail
+          ssh_retry() {
+            local attempt rc
+            local max_attempts="${SSH_RETRY_ATTEMPTS:-3}"
+            local retry_delay="${SSH_RETRY_DELAY_SECONDS:-10}"
+            for attempt in $(seq 1 "$max_attempts"); do
+              set +e
+              ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+                -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$@"
+              rc=$?
+              set -e
+              if [ "$rc" -eq 0 ]; then return 0; fi
+              if [ "$attempt" -ge "$max_attempts" ]; then return "$rc"; fi
+              echo "SSH attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
+              sleep "$retry_delay"
+            done
+          }
+          ssh_retry "cd '$DEPLOY_PATH/current/backend' && php artisan queue:restart"
+
+      - name: Verify deployed revision
+        shell: bash
+        env:
+          DEPLOY_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          set -euo pipefail
+          ssh_retry() {
+            local attempt rc
+            local max_attempts="${SSH_RETRY_ATTEMPTS:-3}"
+            local retry_delay="${SSH_RETRY_DELAY_SECONDS:-10}"
+            for attempt in $(seq 1 "$max_attempts"); do
+              set +e
+              ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+                -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$@"
+              rc=$?
+              set -e
+              if [ "$rc" -eq 0 ]; then return 0; fi
+              if [ "$attempt" -ge "$max_attempts" ]; then return "$rc"; fi
+              echo "SSH attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
+              sleep "$retry_delay"
+            done
+          }
+          DEPLOYED_SHA="$(ssh_retry "cd '$DEPLOY_PATH/current' && if [ -f REVISION ]; then tr -d '\n' < REVISION; else git rev-parse HEAD; fi")"
+          echo "deployed_sha=$DEPLOYED_SHA"
+          test "$DEPLOYED_SHA" = "$DEPLOY_SHA"
+
+      - name: Healthcheck and contract smoke
+        shell: bash
+        run: |
+          set -euo pipefail
+          ssh_retry() {
+            local attempt rc
+            local max_attempts="${SSH_RETRY_ATTEMPTS:-3}"
+            local retry_delay="${SSH_RETRY_DELAY_SECONDS:-10}"
+            for attempt in $(seq 1 "$max_attempts"); do
+              set +e
+              ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+                -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$@"
+              rc=$?
+              set -e
+              if [ "$rc" -eq 0 ]; then return 0; fi
+              if [ "$attempt" -ge "$max_attempts" ]; then return "$rc"; fi
+              echo "SSH attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
+              sleep "$retry_delay"
+            done
+          }
+          HEALTHCHECK_HOST="$(echo "$HEALTHCHECK_URL" | awk -F[/:] '{print $4}')"
+          AUTH_HOST="$(echo "$AUTH_GUEST_CHECK_URL" | awk -F[/:] '{print $4}')"
+          for i in 1 2 3 4 5 6 7 8 9 10; do
+            if ssh_retry "curl -fsS --resolve '$HEALTHCHECK_HOST:443:127.0.0.1' 'https://$HEALTHCHECK_HOST/api/healthz' | jq -e '.ok==true'" >/dev/null; then
+              break
+            fi
+            if [ "$i" -eq 10 ]; then
+              echo "Healthcheck failed"
+              exit 1
+            fi
+            sleep 3
+          done
+          ssh_retry "curl -fsS --resolve '$AUTH_HOST:443:127.0.0.1' -H 'Content-Type: application/json' -X POST 'https://$AUTH_HOST/api/v0.3/auth/guest' --data '{\"anon_id\":\"deploy_contract_probe\"}' | jq -e '.ok==true and .anon_id==\"deploy_contract_probe\"'" >/dev/null
+
+      - name: Ops entry and asset smoke
+        shell: bash
+        run: |
+          set -euo pipefail
+          ssh_remote() {
+            local attempt rc
+            local max_attempts="${SSH_RETRY_ATTEMPTS:-3}"
+            local retry_delay="${SSH_RETRY_DELAY_SECONDS:-10}"
+            for attempt in $(seq 1 "$max_attempts"); do
+              set +e
+              ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+                -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$1"
+              rc=$?
+              set -e
+              if [ "$rc" -eq 0 ]; then return 0; fi
+              if [ "$attempt" -ge "$max_attempts" ]; then return "$rc"; fi
+              echo "SSH attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
+              sleep "$retry_delay"
+            done
+          }
+          fetch_headers() {
+            local url="$1"
+            ssh_remote "curl -sSI --max-redirs 0 --resolve '${OPS_HOST}:443:127.0.0.1' '${url}'"
+          }
+          assert_redirect() {
+            local url="$1"
+            local expected_relative="$2"
+            local headers location
+            headers="$(fetch_headers "$url")"
+            printf '%s\n' "$headers" | grep -Eq '^HTTP/[0-9.]+ 30[12] '
+            location="$(printf '%s\n' "$headers" | tr -d '\r' | awk 'BEGIN { IGNORECASE = 1 } /^Location:/ { sub(/^Location:[[:space:]]*/, "", $0); print; exit }')"
+            [ -n "$location" ]
+            case "$location" in
+              "$expected_relative"|https://"${OPS_HOST}${expected_relative}") return 0 ;;
+            esac
+            return 1
+          }
+          assert_200() {
+            local url="$1"
+            local headers
+            headers="$(fetch_headers "$url")"
+            printf '%s\n' "$headers" | grep -Eq '^HTTP/[0-9.]+ 200 '
+          }
+          retry() {
+            local label="$1" attempts="$2"
+            shift 2
+            for i in $(seq 1 "$attempts"); do
+              if "$@"; then return 0; fi
+              sleep 2
+            done
+            echo "${label} failed"
+            return 1
+          }
+          retry "Ops root redirect" 5 assert_redirect "https://${OPS_HOST}/" "/ops"
+          retry "Ops admin redirect" 5 assert_redirect "https://${OPS_HOST}/admin" "/ops"
+          retry "Ops panel redirect" 5 assert_redirect "https://${OPS_HOST}/ops" "/ops/login"
+          retry "Ops login 200" 5 assert_200 "https://${OPS_HOST}/ops/login"
+          retry "Ops app.css smoke" 5 ssh_remote "curl -fsSI --resolve '${OPS_HOST}:443:127.0.0.1' 'https://${OPS_HOST}/css/filament/filament/app.css' >/dev/null"
+          retry "Ops forms.css smoke" 5 ssh_remote "curl -fsSI --resolve '${OPS_HOST}:443:127.0.0.1' 'https://${OPS_HOST}/css/filament/forms/forms.css' >/dev/null"
+          retry "Ops support.css smoke" 5 ssh_remote "curl -fsSI --resolve '${OPS_HOST}:443:127.0.0.1' 'https://${OPS_HOST}/css/filament/support/support.css' >/dev/null"
+          retry "Ops app.js smoke" 5 ssh_remote "curl -fsSI --resolve '${OPS_HOST}:443:127.0.0.1' 'https://${OPS_HOST}/js/filament/filament/app.js' >/dev/null"
