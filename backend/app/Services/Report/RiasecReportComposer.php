@@ -7,11 +7,13 @@ namespace App\Services\Report;
 use App\Models\Attempt;
 use App\Models\Result;
 use App\Services\Riasec\RiasecPublicProjectionService;
+use App\Services\Riasec\RiasecResultPageV2RuntimeWrapper;
 
 final class RiasecReportComposer
 {
     public function __construct(
         private readonly RiasecPublicProjectionService $projectionService,
+        private readonly RiasecResultPageV2RuntimeWrapper $resultPageV2RuntimeWrapper,
     ) {}
 
     /**
@@ -29,6 +31,7 @@ final class RiasecReportComposer
         $snapshotBound = (bool) ($ctx['snapshot_bound'] ?? false);
         $projection = $this->projectionService->buildFromResult($result, $locale);
         $projectionV2 = $this->projectionService->buildV2FromResult($result, $locale, $snapshotBound);
+        $resultPageV2 = $this->resultPageV2RuntimeWrapper->build($attempt, $result, $variant, $projectionV2, $ctx);
         $topCode = trim((string) ($projection['top_code'] ?? $result->type_code ?? ''));
         if ($topCode === '') {
             return [
@@ -66,6 +69,7 @@ final class RiasecReportComposer
                     'riasec_public_projection_v1' => $projection,
                     'riasec_public_projection_v2' => $projectionV2,
                     'snapshot_binding_v1' => $snapshotBound ? $this->buildSnapshotBinding($ctx, $projectionV2) : null,
+                    'result_page_v2' => $resultPageV2,
                 ], static fn (mixed $value): bool => $value !== null),
                 'generated_at' => now()->toISOString(),
             ],

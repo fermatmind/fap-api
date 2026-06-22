@@ -57289,7 +57289,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-staging-import-dry-run-01",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "riasec_result_ops_agent_release_chain",
     "title": "RIASEC-RESULT-STAGING-IMPORT-DRY-RUN-01: feat(riasec): add staging import dry-run",
     "depends_on": [
@@ -57305,14 +57305,18 @@
       "branch_pushed": "passed",
       "pr_created": "passed",
       "github_required_checks": "passed",
-      "pre_merge_scope_recheck": "passed"
+      "pre_merge_scope_recheck": "passed",
+      "github_merge_confirmed": "passed",
+      "origin_main_contains_merge_commit": "passed",
+      "post_merge_cleanup": "passed",
+      "post_merge_revalidate": "passed"
     },
     "failure_reason": null,
-    "commit_sha": "871a768ee148b836c6e2e550dabb5c4a24260f7d",
+    "commit_sha": "da5a141364577befa09863b20b4d277fb6ec9dff",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2268",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-22T02:42:10Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_auto_rollout_allowed": false,
     "production_cms_write_allowed": false,
     "production_gate_auto_enable_allowed": false,
@@ -57340,6 +57344,12 @@
         "from": "pull_request_open",
         "to": "ready_to_merge",
         "notes": "GitHub checks passed for PR #2268 and pre-merge scope recheck stayed within PR9 allowed files."
+      },
+      {
+        "at": "2026-06-22T11:15:00+08:00",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "notes": "Reconciled before PR10: GitHub PR #2268 merged as da5a141364577befa09863b20b4d277fb6ec9dff; origin/main contains the merge commit; local/remote branch cleanup and post-merge RiasecResultPage/audit/dry-run revalidation passed."
       }
     ]
   },
@@ -57347,16 +57357,22 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-runtime-wrapper-staging-01",
     "base": "main",
-    "status": "pending_dependency",
+    "status": "local_checks_passed",
     "train_scope": "riasec_result_ops_agent_release_chain",
     "title": "RIASEC-RESULT-RUNTIME-WRAPPER-STAGING-01: feat(riasec): add staging runtime wrapper gate",
     "depends_on": [
       "RIASEC-RESULT-STAGING-IMPORT-DRY-RUN-01"
     ],
-    "checks": {},
+    "checks": {
+      "dependency_pr9_merged": "passed",
+      "php_artisan_test_filter_RiasecResultPage": "passed",
+      "php_artisan_test_filter_RiasecAssessmentFlowTest": "passed",
+      "git_diff_check": "passed",
+      "scope_validation": "passed"
+    },
     "failure_reason": null,
-    "commit_sha": "7a4d75d8ef66deaf9f8d8fd0121f57d6989ba1f6",
-    "pr_url": "https://github.com/fermatmind/fap-api/pull/2267",
+    "commit_sha": null,
+    "pr_url": null,
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -57369,6 +57385,12 @@
         "from": "missing_from_manifest",
         "to": "pending_dependency",
         "notes": "Initialized from explicit RIASEC ops agent and release-chain /goal authorization."
+      },
+      {
+        "at": "2026-06-22T11:18:00+08:00",
+        "from": "pending_dependency",
+        "to": "local_checks_passed",
+        "notes": "PR9 dependency reconciled merged. Added default-off RIASEC result_page_v2 runtime wrapper gate, config, composer attachment, and tests for staging full-only and production-denied behavior."
       }
     ]
   },
