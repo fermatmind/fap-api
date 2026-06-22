@@ -15,6 +15,9 @@ final class EnneagramResultPageProductionManualGateCommand extends Command
         {--run-id=production-manual-gate : Stable run identifier for the artifact directory}
         {--artifact-dir= : Optional artifact root}
         {--contract-path= : Optional runbook contract path}
+        {--evidence-dir= : Evidence report directory required before writing a pending activation gate}
+        {--write-pending-gate : Write the singleton pending production activation gate}
+        {--pending-gate-ttl-minutes=120 : Pending activation gate expiry window in minutes}
         {--release-id= : Exact inactive release id}
         {--confirm-release-id= : Repeat exact inactive release id}
         {--candidate-manifest-sha256= : Exact candidate manifest SHA256}
@@ -39,6 +42,9 @@ final class EnneagramResultPageProductionManualGateCommand extends Command
                 'run_id' => trim((string) $this->option('run-id')),
                 'artifact_dir' => trim((string) $this->option('artifact-dir')),
                 'contract_path' => trim((string) $this->option('contract-path')),
+                'evidence_dir' => trim((string) $this->option('evidence-dir')),
+                'write_pending_gate' => (bool) $this->option('write-pending-gate'),
+                'pending_gate_ttl_minutes' => (int) $this->option('pending-gate-ttl-minutes'),
                 'release_id' => trim((string) $this->option('release-id')),
                 'confirm_release_id' => trim((string) $this->option('confirm-release-id')),
                 'candidate_manifest_sha256' => trim((string) $this->option('candidate-manifest-sha256')),
@@ -73,6 +79,7 @@ final class EnneagramResultPageProductionManualGateCommand extends Command
         $this->line('run_id='.(string) ($summary['run_id'] ?? ''));
         $this->line('release_id='.(string) data_get($summary, 'summary.release_id', ''));
         $this->line('manual_approval_packet_valid='.(((bool) data_get($summary, 'summary.manual_approval_packet_valid', false)) ? 'true' : 'false'));
+        $this->line('pending_gate_written='.(((bool) data_get($summary, 'summary.pending_gate_written', false)) ? 'true' : 'false'));
         $this->line('production_execution_allowed_for_agent='.(((bool) data_get($summary, 'summary.production_execution_allowed_for_agent', true)) ? 'true' : 'false'));
 
         foreach ((array) ($summary['artifacts'] ?? []) as $filename => $artifact) {

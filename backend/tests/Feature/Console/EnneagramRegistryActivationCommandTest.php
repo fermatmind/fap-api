@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Console;
 
+use App\Services\Enneagram\Assets\Agent\EnneagramResultPagePendingProductionGateStore;
 use App\Services\Enneagram\Assets\EnneagramInactiveCandidateReleaseImporter;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
@@ -85,6 +86,45 @@ final class EnneagramRegistryActivationCommandTest extends TestCase
         $this->assertSame($fixture['release_id'], DB::table('content_pack_activations')->where('pack_id', 'ENNEAGRAM')->where('pack_version', 'v2')->value('release_id'));
     }
 
+    public function test_inactive_candidate_activation_command_can_consume_pending_gate_with_simple_approval_phrase(): void
+    {
+        $fixture = $this->importInactiveFixture('inactive_candidate_activation_command_pending_gate');
+        $pendingGate = $this->writePendingGateForFixture($fixture, 'activation-pending-gate');
+        $outputDir = $fixture['output_dir'].'/inactive_candidate_activate_pending_gate';
+
+        $this->artisan('enneagram:activate-inactive-candidate-release', [
+            '--use-pending-gate' => true,
+            '--approval-phrase' => EnneagramResultPagePendingProductionGateStore::APPROVAL_PHRASE,
+            '--output-dir' => $outputDir,
+            '--actor' => 'activation_pending_gate_test',
+            '--json' => true,
+        ])->assertExitCode(0);
+
+        $summary = json_decode((string) File::get($outputDir.'/phase8d3_activation_summary.json'), true);
+        $this->assertSame('PASS_PRODUCTION_ACTIVATION_COMPLETED', $summary['verdict'] ?? null);
+        $this->assertTrue($summary['production_activation_happened'] ?? false);
+        $this->assertSame($fixture['release_id'], DB::table('content_pack_activations')->where('pack_id', 'ENNEAGRAM')->where('pack_version', 'v2')->value('release_id'));
+
+        $packet = json_decode((string) File::get(storage_path('app/'.EnneagramResultPagePendingProductionGateStore::DEFAULT_RELATIVE_PATH)), true);
+        $this->assertSame($pendingGate['pending_gate_id'], $packet['pending_gate_id'] ?? null);
+        $this->assertSame('activated', $packet['status'] ?? null);
+    }
+
+    public function test_inactive_candidate_activation_command_rejects_pending_gate_without_exact_approval_phrase(): void
+    {
+        $fixture = $this->importInactiveFixture('inactive_candidate_activation_command_pending_gate_bad_phrase');
+        $this->writePendingGateForFixture($fixture, 'activation-pending-gate-bad-phrase');
+
+        $this->artisan('enneagram:activate-inactive-candidate-release', [
+            '--use-pending-gate' => true,
+            '--approval-phrase' => '同意',
+            '--output-dir' => $fixture['output_dir'].'/inactive_candidate_activate_pending_gate_bad_phrase',
+            '--json' => true,
+        ])->assertExitCode(1);
+
+        $this->assertFalse(DB::table('content_pack_activations')->exists());
+    }
+
     public function test_inactive_candidate_activation_command_fails_closed_on_hash_mismatch(): void
     {
         $fixture = $this->importInactiveFixture('inactive_candidate_activation_command_hash_mismatch');
@@ -124,6 +164,35 @@ final class EnneagramRegistryActivationCommandTest extends TestCase
             'output_dir' => $outputDir,
             'contracts' => $contracts,
         ];
+    }
+
+    /**
+     * @param  array{release_id:string,output_dir:string,contracts:array{candidate_manifest_sha256:string,runtime_registry_manifest_sha256:string}}  $fixture
+     * @return array<string,mixed>
+     */
+    private function writePendingGateForFixture(array $fixture, string $runId): array
+    {
+        $evidenceDir = storage_path('framework/testing/enneagram_activation_command/'.$runId.'/evidence');
+        File::deleteDirectory($evidenceDir);
+        File::ensureDirectoryExists($evidenceDir);
+        foreach (['candidate_export_staging_import', 'web_rendered_qa', 'api_smoke', 'rollback_simulation'] as $gate) {
+            File::put($evidenceDir.'/'.$gate.'.json', json_encode(['gate' => $gate, 'ok' => true], JSON_PRETTY_PRINT));
+        }
+
+        $store = app(EnneagramResultPagePendingProductionGateStore::class);
+        $store->delete();
+
+        return $store->write([
+            'valid' => true,
+            'release_id' => $fixture['release_id'],
+            'confirm_release_id' => $fixture['release_id'],
+            'candidate_manifest_sha256' => $fixture['contracts']['candidate_manifest_sha256'],
+            'runtime_registry_sha256' => $fixture['contracts']['runtime_registry_manifest_sha256'],
+            'rollback_window' => '60 minutes after activation',
+            'post_activation_smoke_acknowledged' => true,
+            'production_execution_allowed_for_agent' => false,
+            'manual_human_approval_required' => true,
+        ], $runId, $evidenceDir, 120);
     }
 
     /**

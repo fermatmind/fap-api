@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Services\Enneagram\Assets\Agent\EnneagramResultPagePendingProductionGateStore;
 use App\Services\Ops\EnneagramRegistryActivationGateService;
 use Illuminate\Console\Command;
 use RuntimeException;
@@ -17,22 +18,43 @@ final class EnneagramActivateInactiveCandidateRelease extends Command
         {--runtime-registry-sha256= : Expected runtime registry manifest SHA256}
         {--output-dir= : Report output directory}
         {--actor=ops : Operator label recorded in release snapshots}
+        {--use-pending-gate : Load locked release/hash contract from the singleton pending production gate}
+        {--approval-phrase= : Exact human approval phrase for the pending gate}
         {--json : Emit JSON summary}';
 
     protected $description = 'Activate a validated ENNEAGRAM inactive candidate release with exact hash and release-id confirmations.';
 
     public function __construct(
         private readonly EnneagramRegistryActivationGateService $activationGateService,
+        private readonly EnneagramResultPagePendingProductionGateStore $pendingGateStore,
     ) {
         parent::__construct();
     }
 
     public function handle(): int
     {
-        $releaseId = trim((string) $this->option('release-id'));
-        $confirmReleaseId = trim((string) $this->option('confirm-release-id'));
-        $candidateManifestSha256 = trim((string) $this->option('candidate-manifest-sha256'));
-        $runtimeRegistrySha256 = trim((string) $this->option('runtime-registry-sha256'));
+        $usePendingGate = (bool) $this->option('use-pending-gate');
+        $pendingGateId = null;
+        if ($usePendingGate) {
+            try {
+                $pendingGate = $this->pendingGateStore->consume(trim((string) $this->option('approval-phrase')));
+            } catch (RuntimeException $e) {
+                $this->components->error($e->getMessage());
+
+                return self::FAILURE;
+            }
+
+            $pendingGateId = $pendingGate['pending_gate_id'];
+            $releaseId = $pendingGate['release_id'];
+            $confirmReleaseId = $pendingGate['confirm_release_id'];
+            $candidateManifestSha256 = $pendingGate['candidate_manifest_sha256'];
+            $runtimeRegistrySha256 = $pendingGate['runtime_registry_sha256'];
+        } else {
+            $releaseId = trim((string) $this->option('release-id'));
+            $confirmReleaseId = trim((string) $this->option('confirm-release-id'));
+            $candidateManifestSha256 = trim((string) $this->option('candidate-manifest-sha256'));
+            $runtimeRegistrySha256 = trim((string) $this->option('runtime-registry-sha256'));
+        }
         $outputDir = trim((string) $this->option('output-dir'));
         if ($outputDir === '') {
             $outputDir = $this->readOutputDirFromEnvironment();
@@ -77,6 +99,11 @@ final class EnneagramActivateInactiveCandidateRelease extends Command
                 $outputDir,
                 trim((string) $this->option('actor')),
             );
+            if ($usePendingGate && $pendingGateId !== null) {
+                $this->pendingGateStore->markActivated($pendingGateId, $releaseId, $summary);
+                $summary['pending_gate_id'] = $pendingGateId;
+                $summary['pending_gate_consumed'] = true;
+            }
         } catch (RuntimeException $e) {
             $this->components->error($e->getMessage());
 
