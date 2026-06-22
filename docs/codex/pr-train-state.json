@@ -57862,7 +57862,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-v2-auto-check-poller",
     "base": "main",
-    "status": "local_validated",
+    "status": "pr_open",
     "train_scope": "big5_result_page_v2_asset_agent_execution_runner",
     "title": "B5-RESULT-AUTO-CHECK-POLLER-01: Add Big Five V2 GitHub check poller artifacts",
     "depends_on": [
@@ -57895,8 +57895,8 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "8ae13aa5c4d390827853859b4f0d124bcd3288f5",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2269",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -57905,6 +57905,11 @@
         "at": "2026-06-22T02:45:00Z",
         "status": "local_validated",
         "note": "Implemented poll-github-checks read-only artifact generation with exported PR state fixture coverage and command smoke. No GitHub mutation, runtime, production gate, release snapshot, CMS write, DB write, or fap-web copy changed."
+      },
+      {
+        "at": "2026-06-22T02:50:00Z",
+        "status": "pr_open",
+        "note": "Opened PR #2269 for the auto check poller after local validation and scope validation passed."
       }
     ]
   },
