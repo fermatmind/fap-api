@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-22T09:22:00+08:00",
+  "updated_at": "2026-06-22T09:33:00+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -57290,7 +57290,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-v2-ci-inspector-mechanical-fixer",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "big5_result_page_v2_asset_agent_automation",
     "title": "B5-RESULT-CI-INSPECTOR-MECHANICAL-FIXER-01: Inspect Big Five V2 agent PR checks",
     "depends_on": [
@@ -57322,15 +57322,15 @@
       },
       "github": {
         "status": "pass",
-        "evidence": "PR #2250 checks completed successfully on head 3c07528c8f615919d4ece45c1517c97104f3baf0; mergeStateStatus CLEAN; PR title/body and changed-file scope re-reviewed."
+        "evidence": "PR #2250 merged with merge commit af20b19af64cb4aac2e71155a48a42f4dff2e948 after required GitHub checks passed."
       }
     },
     "failure_reason": null,
-    "commit_sha": "3c07528c8f615919d4ece45c1517c97104f3baf0",
+    "commit_sha": "af20b19af64cb4aac2e71155a48a42f4dff2e948",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2250",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-22T00:15:09Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-22T09:03:00+08:00",
@@ -57346,6 +57346,64 @@
         "at": "2026-06-22T09:22:00+08:00",
         "status": "ready_to_merge",
         "note": "GitHub checks passed, mergeStateStatus is CLEAN, and PR title/body/scope were re-reviewed. Ready to merge under squash policy after this state update is pushed and checks remain green."
+      },
+      {
+        "at": "2026-06-22T09:33:00+08:00",
+        "status": "merged",
+        "note": "Reconciled during B5-RESULT-AUTO-MERGE-CLEANUP-01: PR #2250 is merged, origin/main contains af20b19af64cb4aac2e71155a48a42f4dff2e948, local main was fast-forwarded, task branch is absent locally/remotely, and post-merge AssetAgentTest plus inspect-ci smoke passed."
+      }
+    ]
+  },
+  "B5-RESULT-AUTO-MERGE-CLEANUP-01": {
+    "repo": "fap-api",
+    "branch": "codex/big5-v2-auto-merge-cleanup",
+    "base": "main",
+    "status": "local_validated",
+    "train_scope": "big5_result_page_v2_asset_agent_automation",
+    "title": "B5-RESULT-AUTO-MERGE-CLEANUP-01: Plan Big Five V2 agent merge cleanup",
+    "depends_on": [
+      "B5-RESULT-CI-INSPECTOR-MECHANICAL-FIXER-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly requested the Big Five V2 result-page asset agent full-auto PR train and authorized manifest/state updates for this PR."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "PR #2250 for B5-RESULT-CI-INSPECTOR-MECHANICAL-FIXER-01 is merged and origin/main contains merge commit af20b19af64cb4aac2e71155a48a42f4dff2e948."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi",
+          "cd backend && mkdir -p artifacts/big5_result_page_v2_agent/testing-merge-cleanup && printf ... pr-state.json && APP_ENV=testing php artisan big5:result-page-v2-agent plan-merge-cleanup --run-id=merge-cleanup --artifact-dir=artifacts/big5_result_page_v2_agent/testing-merge-cleanup --pr-state-json=artifacts/big5_result_page_v2_agent/testing-merge-cleanup/pr-state.json --json --no-ansi && rm -rf artifacts/big5_result_page_v2_agent/testing-merge-cleanup",
+          "git diff --check",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+        ],
+        "evidence": "AssetAgentTest passed 11 tests/293 assertions; plan-merge-cleanup smoke succeeded with can_merge=true, blocker_count=0, merge_performed=false, cleanup_performed=false; diff check passed."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to allowed PR4 scope: BigFiveResultPageV2AssetAgentAuditCommand.php, BigFiveResultPageV2AssetAgent.php, BigFiveResultPageV2AssetAgentTest.php, docs/codex/pr-train.yaml, docs/codex/pr-train-state.json. No fap-web copy, production import gate, rollout gate, release snapshot, runtime flag, or weekly ops behavior changed."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-22T09:33:00+08:00",
+        "status": "local_validated",
+        "note": "Started PR4 from synced main after PR3 merge/cleanup. Local validation and scope validation passed for dry-run merge cleanup gate planning."
       }
     ]
   }

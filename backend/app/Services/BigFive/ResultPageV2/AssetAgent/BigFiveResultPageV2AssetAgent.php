@@ -568,6 +568,112 @@ final class BigFiveResultPageV2AssetAgent
     }
 
     /**
+     * @param  array{
+     *   run_id?:string,
+     *   artifact_dir?:string,
+     *   pr_state_json?:string
+     * }  $options
+     * @return array<string,mixed>
+     */
+    public function planMergeCleanup(array $options = []): array
+    {
+        $runId = $this->sanitizeRunId((string) ($options['run_id'] ?? ''));
+        $artifactDir = $this->artifactDir((string) ($options['artifact_dir'] ?? ''), $runId);
+        $prStateJson = trim((string) ($options['pr_state_json'] ?? '')) === ''
+            ? ''
+            : $this->absolutePath((string) ($options['pr_state_json'] ?? ''));
+
+        $this->ensureDirectory($artifactDir);
+
+        $state = $this->readOptionalJson($prStateJson) ?? [];
+        $checks = $this->readCheckRollupFromPayload($state);
+        $pending = array_values(array_filter($checks, static fn (array $check): bool => ($check['state'] ?? '') === 'pending'));
+        $failed = array_values(array_filter($checks, static fn (array $check): bool => ($check['state'] ?? '') === 'failed'));
+        $mergeState = strtoupper((string) ($state['mergeStateStatus'] ?? ''));
+        $reviewDecision = strtoupper((string) ($state['reviewDecision'] ?? ''));
+        $isDraft = (bool) ($state['isDraft'] ?? false);
+        $headRef = (string) ($state['headRefName'] ?? '');
+        $prNumber = (string) ($state['number'] ?? '');
+        $canMerge = $state !== []
+            && ! $isDraft
+            && $mergeState === 'CLEAN'
+            && $pending === []
+            && $failed === []
+            && in_array($reviewDecision, ['', 'APPROVED'], true);
+
+        $blockers = array_values(array_filter([
+            $state === [] ? 'pr_state_json_missing_or_invalid' : null,
+            $isDraft ? 'draft_pr' : null,
+            $mergeState !== 'CLEAN' ? 'merge_state_not_clean' : null,
+            $pending !== [] ? 'checks_pending' : null,
+            $failed !== [] ? 'checks_failed' : null,
+            ! in_array($reviewDecision, ['', 'APPROVED'], true) ? 'review_not_approved' : null,
+        ]));
+
+        $plan = [
+            'schema_version' => self::SCHEMA_VERSION,
+            'task' => 'auto_merge_cleanup_plan',
+            'runtime_use' => 'not_runtime',
+            'production_use_allowed' => false,
+            'ready_for_pilot' => false,
+            'ready_for_runtime' => false,
+            'ready_for_production' => false,
+            'execution_mode' => 'dry_run_artifact_only',
+            'pr_state_json' => $prStateJson === '' ? null : $this->redactPath($prStateJson),
+            'gate' => [
+                'can_merge' => $canMerge,
+                'blockers' => $blockers,
+                'merge_state' => $mergeState,
+                'review_decision' => $reviewDecision,
+                'is_draft' => $isDraft,
+                'pending_check_count' => count($pending),
+                'failed_check_count' => count($failed),
+            ],
+            'planned_commands' => $canMerge ? [
+                'gh pr merge '.$prNumber.' --squash --delete-branch',
+                'git fetch origin main --prune',
+                'git checkout main',
+                'git pull --ff-only origin main',
+                'git branch -d '.$headRef,
+            ] : [],
+            'negative_guarantees' => $this->mergeCleanupNegativeGuarantees(),
+        ];
+
+        $artifacts = [
+            'auto_merge_cleanup_plan.json' => $this->writeJson($artifactDir.'/auto_merge_cleanup_plan.json', $plan),
+            'repair_log.json' => $this->writeJson($artifactDir.'/repair_log.json', [
+                'schema_version' => self::SCHEMA_VERSION,
+                'task' => 'auto_merge_cleanup_repair_log',
+                'runtime_use' => 'not_runtime',
+                'production_use_allowed' => false,
+                'repair_required' => ! $canMerge,
+                'entries' => $blockers,
+            ]),
+        ];
+
+        return [
+            'schema_version' => self::SCHEMA_VERSION,
+            'ok' => $state !== [],
+            'status' => $state === [] ? 'blocked' : 'success',
+            'run_id' => $runId,
+            'artifact_dir' => $artifactDir,
+            'artifacts' => $artifacts,
+            'summary' => [
+                'can_merge' => $canMerge,
+                'blocker_count' => count($blockers),
+                'pending_check_count' => count($pending),
+                'failed_check_count' => count($failed),
+                'merge_performed' => false,
+                'cleanup_performed' => false,
+                'ready_for_pilot' => false,
+                'ready_for_runtime' => false,
+                'ready_for_production' => false,
+            ],
+            'negative_guarantees' => $this->mergeCleanupNegativeGuarantees(),
+        ];
+    }
+
+    /**
      * @return array<string,mixed>
      */
     private function buildInventory(string $contentAssetRoot, string $sourceLedgerDir): array
@@ -1882,6 +1988,25 @@ final class BigFiveResultPageV2AssetAgent
     }
 
     /**
+     * @param  array<string,mixed>  $payload
+     * @return list<array<string,mixed>>
+     */
+    private function readCheckRollupFromPayload(array $payload): array
+    {
+        $rollup = is_array($payload['statusCheckRollup'] ?? null)
+            ? (array) $payload['statusCheckRollup']
+            : [];
+        $checks = [];
+        foreach ($rollup as $row) {
+            if (is_array($row)) {
+                $checks[] = $this->classifyCheckRun($row);
+            }
+        }
+
+        return $checks;
+    }
+
+    /**
      * @param  array<string,mixed>  $check
      * @return array<string,mixed>
      */
@@ -2124,6 +2249,30 @@ final class BigFiveResultPageV2AssetAgent
             'github_pr_created' => false,
             'mechanical_fix_apply_requested' => $applyRequested,
             'mechanical_fix_apply_performed' => false,
+            'auto_merge_performed' => false,
+        ];
+    }
+
+    /**
+     * @return array<string,bool>
+     */
+    private function mergeCleanupNegativeGuarantees(): array
+    {
+        return [
+            'database_write' => false,
+            'cms_write' => false,
+            'content_assets_write' => false,
+            'frontend_copy_write' => false,
+            'final_result_payload_generation' => false,
+            'runtime_flag_change' => false,
+            'release_snapshot_change' => false,
+            'production_import_gate_change' => false,
+            'rollout_gate_change' => false,
+            'github_merge_performed' => false,
+            'remote_branch_deleted' => false,
+            'local_branch_deleted' => false,
+            'local_main_synced' => false,
+            'post_merge_revalidation_run' => false,
             'auto_merge_performed' => false,
         ];
     }

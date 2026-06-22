@@ -441,6 +441,76 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
         }
     }
 
+    public function test_plan_merge_cleanup_requires_clean_green_pr_and_does_not_execute_merge(): void
+    {
+        $artifactRoot = base_path('artifacts/big5_result_page_v2_agent/unit-merge-cleanup');
+
+        $this->deleteDirectory($artifactRoot);
+        mkdir($artifactRoot, 0777, true);
+
+        try {
+            $statePath = $artifactRoot.'/pr-state.json';
+            file_put_contents($statePath, json_encode([
+                'number' => 2250,
+                'headRefName' => 'codex/big5-v2-ci-inspector-mechanical-fixer',
+                'state' => 'OPEN',
+                'isDraft' => false,
+                'mergeStateStatus' => 'CLEAN',
+                'reviewDecision' => '',
+                'statusCheckRollup' => [
+                    [
+                        'name' => 'hygiene',
+                        'status' => 'COMPLETED',
+                        'conclusion' => 'SUCCESS',
+                    ],
+                    [
+                        'name' => 'verify-bigfive',
+                        'status' => 'COMPLETED',
+                        'conclusion' => 'SUCCESS',
+                    ],
+                ],
+            ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES).PHP_EOL);
+
+            $this->artisan('big5:result-page-v2-agent', [
+                'action' => 'plan-merge-cleanup',
+                '--run-id' => 'merge-cleanup',
+                '--artifact-dir' => $artifactRoot,
+                '--pr-state-json' => $statePath,
+                '--json' => true,
+            ])->assertExitCode(0);
+
+            $runDir = $artifactRoot.'/merge-cleanup';
+            $this->assertFileExists($runDir.'/auto_merge_cleanup_plan.json');
+            $this->assertFileExists($runDir.'/repair_log.json');
+
+            $plan = $this->readJson($runDir.'/auto_merge_cleanup_plan.json');
+            $this->assertSame('auto_merge_cleanup_plan', $plan['task'] ?? null);
+            $this->assertSame('not_runtime', $plan['runtime_use'] ?? null);
+            $this->assertFalse((bool) ($plan['production_use_allowed'] ?? true));
+            $this->assertTrue((bool) data_get($plan, 'gate.can_merge'));
+            $this->assertSame([], data_get($plan, 'gate.blockers'));
+            $this->assertSame(0, (int) data_get($plan, 'gate.pending_check_count', -1));
+            $this->assertSame(0, (int) data_get($plan, 'gate.failed_check_count', -1));
+            $this->assertContains('gh pr merge 2250 --squash --delete-branch', (array) ($plan['planned_commands'] ?? []));
+
+            foreach ([
+                'github_merge_performed',
+                'remote_branch_deleted',
+                'local_branch_deleted',
+                'local_main_synced',
+                'post_merge_revalidation_run',
+                'auto_merge_performed',
+                'runtime_flag_change',
+                'production_import_gate_change',
+                'rollout_gate_change',
+            ] as $guarantee) {
+                $this->assertFalse((bool) data_get($plan, "negative_guarantees.{$guarantee}", true), $guarantee);
+            }
+        } finally {
+            $this->deleteDirectory($artifactRoot);
+        }
+    }
+
     public function test_stage_candidates_fails_closed_without_human_review_manifest(): void
     {
         $artifactRoot = $this->tempDir('big5-v2-agent-stage-missing-review');
