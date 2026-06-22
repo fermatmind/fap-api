@@ -92,9 +92,9 @@ final class BigFiveResultPageV2SelectorAssetValidatorTest extends TestCase
     public function test_invalid_reading_mode_is_rejected(): void
     {
         $asset = $this->fixture('fixture.domain.o_mid_high');
-        $asset['reading_modes'][] = 'share_safe';
+        $asset['reading_modes'][] = 'unsafe_share';
 
-        $this->assertHasError('reading_mode is invalid: share_safe', $asset);
+        $this->assertHasError('reading_mode is invalid: unsafe_share', $asset);
     }
 
     public function test_trigger_reading_mode_must_be_declared_by_asset(): void

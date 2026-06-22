@@ -74,6 +74,7 @@ final class BigFiveResultPageV2SelectorAssetContract
         'quick',
         'standard',
         'deep',
+        'share_safe',
     ];
 
     public const SCENARIOS = [
