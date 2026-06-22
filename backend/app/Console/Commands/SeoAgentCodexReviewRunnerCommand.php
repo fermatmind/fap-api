@@ -216,7 +216,7 @@ final class SeoAgentCodexReviewRunnerCommand extends Command
         $riskFlags = array_values(array_unique(array_merge($riskFlags, $sourceRiskFlags)));
         $worthOptimizing = in_array($recommendedAction, ['cms_draft_package_dry_run', 'technical_review_required'], true);
 
-        return [
+        $verdict = [
             'source_id' => $sourceId !== '' ? $sourceId : hash('sha256', $subjectRef.$safePath.json_encode($candidate)),
             'source_family' => $sourceFamily,
             'subject_type' => $subjectType,
@@ -232,6 +232,13 @@ final class SeoAgentCodexReviewRunnerCommand extends Command
             'needs_human_approval' => true,
             'execution_permission' => false,
         ];
+
+        $proposalPayload = $this->sanitizedProposalPayload((array) ($candidate['proposal_payload'] ?? []));
+        if ($proposalPayload !== []) {
+            $verdict['proposal_payload'] = $proposalPayload;
+        }
+
+        return $verdict;
     }
 
     /**
@@ -312,6 +319,80 @@ final class SeoAgentCodexReviewRunnerCommand extends Command
             $refs,
             static fn (array $ref): bool => $ref['code'] !== '' || $ref['field_status'] !== ''
         ));
+    }
+
+    /**
+     * @param  array<string, mixed>  $payload
+     * @return array<string, mixed>
+     */
+    private function sanitizedProposalPayload(array $payload): array
+    {
+        if ($payload === []) {
+            return [];
+        }
+
+        $runtime = (array) ($payload['runtime'] ?? []);
+        $metrics = (array) ($payload['metrics'] ?? []);
+
+        return [
+            'source' => $this->cleanText((string) ($payload['source'] ?? '')),
+            'locale' => $this->cleanText((string) ($payload['locale'] ?? '')),
+            'safe_path' => (string) ($payload['safe_path'] ?? ''),
+            'draft_angle' => $this->cleanText((string) ($payload['draft_angle'] ?? '')),
+            'proposed_actions' => $this->cleanTextList((array) ($payload['proposed_actions'] ?? [])),
+            'runtime' => [
+                'title' => $this->cleanText((string) ($runtime['title'] ?? '')),
+                'meta_description' => $this->cleanText((string) ($runtime['meta_description'] ?? '')),
+                'title_length' => (int) ($runtime['title_length'] ?? 0),
+                'meta_description_length' => (int) ($runtime['meta_description_length'] ?? 0),
+                'jsonld_total' => (int) ($runtime['jsonld_total'] ?? 0),
+                'internal_link_count' => (int) ($runtime['internal_link_count'] ?? 0),
+                'sample_internal_paths' => array_values(array_filter(
+                    $this->strings((array) ($runtime['sample_internal_paths'] ?? [])),
+                    static fn (string $path): bool => str_starts_with($path, '/')
+                )),
+            ],
+            'metrics' => [
+                'clicks' => (int) ($metrics['clicks'] ?? 0),
+                'impressions' => (int) ($metrics['impressions'] ?? 0),
+                'ctr_ppm' => (int) ($metrics['ctr_ppm'] ?? 0),
+                'average_position_milli' => is_numeric($metrics['average_position_milli'] ?? null)
+                    ? (int) $metrics['average_position_milli']
+                    : null,
+            ],
+        ];
+    }
+
+    private function cleanText(string $value): string
+    {
+        $value = trim(html_entity_decode($value, ENT_QUOTES | ENT_HTML5, 'UTF-8'));
+        $value = preg_replace('~https?://[^\s<>"\']+~iu', '', $value) ?: '';
+
+        return preg_replace('/\s+/u', ' ', $value) ?: '';
+    }
+
+    /**
+     * @param  array<int, mixed>  $values
+     * @return list<string>
+     */
+    private function cleanTextList(array $values): array
+    {
+        return array_values(array_unique(array_filter(
+            array_map(fn (mixed $value): string => is_scalar($value) ? $this->cleanText((string) $value) : '', $values),
+            static fn (string $value): bool => $value !== ''
+        )));
+    }
+
+    /**
+     * @param  array<int, mixed>  $values
+     * @return list<string>
+     */
+    private function strings(array $values): array
+    {
+        return array_values(array_unique(array_filter(
+            array_map('strval', $values),
+            static fn (string $value): bool => $value !== ''
+        )));
     }
 
     /**

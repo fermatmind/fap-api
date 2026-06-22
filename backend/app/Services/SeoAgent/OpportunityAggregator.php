@@ -43,6 +43,7 @@ final class OpportunityAggregator
                 $dedupeKey = $this->dedupeKey($normalized);
                 if (! isset($merged[$dedupeKey])) {
                     $merged[$dedupeKey] = $normalized;
+
                     continue;
                 }
 
@@ -120,7 +121,7 @@ final class OpportunityAggregator
             $gapTypes = $this->gapTypesFromEvidence((array) ($candidate['evidence_refs'] ?? []));
         }
 
-        return [
+        $normalized = [
             'source_family' => $sourceFamily,
             'source_id' => (string) ($candidate['source_id'] ?? hash('sha256', json_encode($candidate) ?: 'candidate')),
             'subject_type' => $subjectType,
@@ -136,6 +137,13 @@ final class OpportunityAggregator
             'blocked_actions' => $this->strings((array) ($candidate['blocked_actions'] ?? [])),
             'source_ids' => [(string) ($candidate['source_id'] ?? '')],
         ];
+
+        $proposalPayload = $this->sanitizeProposalPayload((array) ($candidate['proposal_payload'] ?? []));
+        if ($proposalPayload !== []) {
+            $normalized['proposal_payload'] = $proposalPayload;
+        }
+
+        return $normalized;
     }
 
     /**
@@ -177,6 +185,10 @@ final class OpportunityAggregator
 
         if ($this->severityWeight((string) ($incoming['severity'] ?? 'p3')) > $this->severityWeight((string) ($existing['severity'] ?? 'p3'))) {
             $existing['severity'] = $incoming['severity'];
+        }
+
+        if (! isset($existing['proposal_payload']) && isset($incoming['proposal_payload'])) {
+            $existing['proposal_payload'] = $incoming['proposal_payload'];
         }
 
         return $existing;
@@ -259,6 +271,71 @@ final class OpportunityAggregator
         }
 
         return $refs;
+    }
+
+    /**
+     * @param  array<string, mixed>  $payload
+     * @return array<string, mixed>
+     */
+    private function sanitizeProposalPayload(array $payload): array
+    {
+        if ($payload === []) {
+            return [];
+        }
+
+        $runtime = (array) ($payload['runtime'] ?? []);
+        $metrics = (array) ($payload['metrics'] ?? []);
+
+        $safePath = (string) ($payload['safe_path'] ?? '');
+        if (! str_starts_with($safePath, '/')) {
+            $safePath = '';
+        }
+
+        return array_filter([
+            'source' => $this->cleanText((string) ($payload['source'] ?? '')),
+            'locale' => $this->cleanText((string) ($payload['locale'] ?? '')),
+            'safe_path' => $safePath,
+            'draft_angle' => $this->cleanText((string) ($payload['draft_angle'] ?? '')),
+            'proposed_actions' => $this->cleanTextList((array) ($payload['proposed_actions'] ?? [])),
+            'runtime' => array_filter([
+                'title' => $this->cleanText((string) ($runtime['title'] ?? '')),
+                'meta_description' => $this->cleanText((string) ($runtime['meta_description'] ?? '')),
+                'title_length' => (int) ($runtime['title_length'] ?? 0),
+                'meta_description_length' => (int) ($runtime['meta_description_length'] ?? 0),
+                'jsonld_total' => (int) ($runtime['jsonld_total'] ?? 0),
+                'internal_link_count' => (int) ($runtime['internal_link_count'] ?? 0),
+                'sample_internal_paths' => array_values(array_slice(array_filter(
+                    $this->cleanTextList((array) ($runtime['sample_internal_paths'] ?? [])),
+                    static fn (string $path): bool => str_starts_with($path, '/')
+                ), 0, 10)),
+            ], static fn (mixed $value): bool => $value !== '' && $value !== []),
+            'metrics' => array_filter([
+                'impressions' => (int) ($metrics['impressions'] ?? 0),
+                'clicks' => (int) ($metrics['clicks'] ?? 0),
+                'ctr_ppm' => (int) ($metrics['ctr_ppm'] ?? 0),
+                'average_position_milli' => (int) ($metrics['average_position_milli'] ?? 0),
+            ], static fn (mixed $value): bool => $value !== ''),
+        ], static fn (mixed $value): bool => $value !== '' && $value !== []);
+    }
+
+    private function cleanText(string $value): string
+    {
+        $value = preg_replace('#https?://\S+#i', '', $value) ?? '';
+        $value = preg_replace('/\s+/u', ' ', $value) ?? '';
+
+        return trim($value);
+    }
+
+    /**
+     * @param  array<int, mixed>  $values
+     * @return list<string>
+     */
+    private function cleanTextList(array $values): array
+    {
+        return array_values(array_slice(array_filter(
+            array_map(fn (mixed $value): string => is_scalar($value) ? $this->cleanText((string) $value) : '', $values),
+            static fn (string $value): bool => $value !== ''
+        ), 0, 20));
     }
 
     /**

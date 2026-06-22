@@ -62,6 +62,9 @@ final class SeoAgentGscCohortHandoffTest extends TestCase
         $this->assertSame('article:'.$articleTwo->id.':zh-CN', data_get($source, 'candidates.1.subject_ref'));
         $this->assertSame('/en/articles/what-is-riasec-holland-code-career-interest-test', data_get($source, 'candidates.0.safe_path'));
         $this->assertSame('/zh/articles/mbti-vs-holland-career-choice', data_get($source, 'candidates.1.safe_path'));
+        $this->assertSame('gsc_cohort_artifact', data_get($source, 'candidates.0.proposal_payload.source'));
+        $this->assertSame('What Is the RIASEC Holland Code Career Interest Test? | FermatMind', data_get($source, 'candidates.0.proposal_payload.runtime.title'));
+        $this->assertSame('/en/articles/career-interest-test', data_get($source, 'candidates.0.proposal_payload.runtime.sample_internal_paths.0'));
         $this->assertSame(2, $source['candidate_count'] ?? null);
         $this->assertCount(2, $source['deferred_non_draft_groups'] ?? []);
         $this->assertSame('mbti_personality_variant', data_get($source, 'deferred_non_draft_groups.0.group'));
@@ -69,10 +72,12 @@ final class SeoAgentGscCohortHandoffTest extends TestCase
 
         $this->assertSame('seo-agent-opportunity-aggregate.v1', $aggregate['schema_version'] ?? null);
         $this->assertSame(2, $aggregate['candidate_count'] ?? null);
+        $this->assertSame('zh-CN', data_get($aggregate, 'candidates.1.proposal_payload.locale'));
         $this->assertSame('seo-agent-codex-review-handoff.v1', $handoff['schema_version'] ?? null);
         $this->assertFalse((bool) ($handoff['execution_permission'] ?? true));
         $this->assertSame('seo-agent-codex-review-verdict.v1', $verdict['schema_version'] ?? null);
         $this->assertSame('cms_draft_package_dry_run', data_get($verdict, 'candidate_verdicts.0.recommended_action'));
+        $this->assertSame('Add internal link review targets from GSC cohort.', data_get($verdict, 'candidate_verdicts.0.proposal_payload.proposed_actions.0'));
         $this->assertSame('seo-agent-cms-draft-package-dry-run.v1', $draftPackage['schema_version'] ?? null);
         $this->assertSame(2, $draftPackage['draft_brief_count'] ?? null);
         $this->assertSame('article', data_get($draftPackage, 'draft_briefs.0.target_model'));
@@ -80,6 +85,13 @@ final class SeoAgentGscCohortHandoffTest extends TestCase
         $this->assertContains('seo_description', data_get($draftPackage, 'draft_briefs.1.target_fields'));
         $this->assertContains('faq_items', data_get($draftPackage, 'draft_briefs.1.target_fields'));
         $this->assertContains('manual_review_required', data_get($draftPackage, 'draft_briefs.1.target_fields'));
+        $this->assertSame('What Is the RIASEC Holland Code Career Interest Test? | FermatMind', data_get($draftPackage, 'draft_briefs.0.proposed_seo_title'));
+        $this->assertSame('用霍兰德职业兴趣代码理解 MBTI 职业选择 | FermatMind', data_get($draftPackage, 'draft_briefs.1.proposed_seo_title'));
+        $this->assertSame('这篇中文文章解释 MBTI 与霍兰德兴趣代码如何一起辅助职业选择。', data_get($draftPackage, 'draft_briefs.1.proposed_seo_description'));
+        $this->assertSame('gsc_cohort_artifact', data_get($draftPackage, 'draft_briefs.1.proposal_quality.source'));
+        $this->assertTrue((bool) data_get($draftPackage, 'draft_briefs.1.proposal_quality.locale_preserved'));
+        $this->assertFalse((bool) data_get($draftPackage, 'draft_briefs.1.proposal_quality.slug_generated_copy', true));
+        $this->assertSame('Add internal link review targets from GSC cohort.', data_get($draftPackage, 'draft_briefs.0.proposed_internal_link_actions.0'));
 
         $encoded = json_encode([$evidence, $source, $aggregate, $handoff, $verdict, $draftPackage], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         $this->assertIsString($encoded);
@@ -282,13 +294,20 @@ final class SeoAgentGscCohortHandoffTest extends TestCase
                 'position' => $position,
             ],
             'draft_angle' => basename($safePath),
+            'proposed_actions' => [
+                'Add internal link review targets from GSC cohort.',
+                'Review visible FAQ candidates after claim gate.',
+            ],
             'runtime_seo_check' => [
                 'http_status' => 200,
+                'title' => $this->runtimeTitle($safePath),
+                'meta_description' => $this->runtimeMetaDescription($safePath),
                 'title_length' => $titleLength,
                 'meta_description_length' => $metaLength,
                 'jsonld_total' => $jsonldTotal,
                 'internal_link_summary' => [
                     'total_internal_links' => 36,
+                    'sample_internal_paths' => $this->sampleInternalPaths($safePath),
                 ],
                 'checks' => [
                     'html_200' => true,
@@ -300,6 +319,30 @@ final class SeoAgentGscCohortHandoffTest extends TestCase
                 ],
             ],
         ];
+    }
+
+    private function runtimeTitle(string $safePath): string
+    {
+        return str_starts_with($safePath, '/zh/')
+            ? '用霍兰德职业兴趣代码理解 MBTI 职业选择 | FermatMind'
+            : 'What Is the RIASEC Holland Code Career Interest Test? | FermatMind';
+    }
+
+    private function runtimeMetaDescription(string $safePath): string
+    {
+        return str_starts_with($safePath, '/zh/')
+            ? '这篇中文文章解释 MBTI 与霍兰德兴趣代码如何一起辅助职业选择。'
+            : 'Learn how RIASEC Holland Codes connect interests, work environments, and career exploration with FermatMind.';
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function sampleInternalPaths(string $safePath): array
+    {
+        return str_starts_with($safePath, '/zh/')
+            ? ['/zh/articles/riasec-holland-code', 'https://fermatmind.com/zh/careers']
+            : ['/en/articles/career-interest-test', 'https://fermatmind.com/en/careers'];
     }
 
     /**

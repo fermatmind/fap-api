@@ -23,7 +23,10 @@ final class SeoAgentCodexReviewRunnerTest extends TestCase
         $this->createRows();
         $artifactDir = $this->artifactDir();
         $handoffPath = $this->writeHandoff([
-            $this->candidate('p1', 'title gap'),
+            $this->candidate('p1', 'title gap', [
+                'source_family' => 'gsc_cohort_artifact',
+                'proposal_payload' => $this->proposalPayload(),
+            ]),
             $this->candidate('p2', 'description gap'),
             $this->candidate('p1', 'canonical runtime', [
                 'source_family' => 'runtime_seo_qa',
@@ -96,6 +99,10 @@ final class SeoAgentCodexReviewRunnerTest extends TestCase
         $this->assertSame('runtime_seo_qa_requires_technical_review', data_get($verdict, 'candidate_verdicts.2.review_reason'));
         $this->assertSame('cms_faq_gap_ready_for_draft_dry_run', data_get($verdict, 'candidate_verdicts.3.review_reason'));
         $this->assertSame('gsc_candidate_without_cms_target', data_get($verdict, 'candidate_verdicts.4.review_reason'));
+        $this->assertSame('gsc_cohort_artifact', data_get($verdict, 'candidate_verdicts.0.proposal_payload.source'));
+        $this->assertSame('zh-CN', data_get($verdict, 'candidate_verdicts.0.proposal_payload.locale'));
+        $this->assertSame('中文 SEO 标题 | FermatMind', data_get($verdict, 'candidate_verdicts.0.proposal_payload.runtime.title'));
+        $this->assertSame('Review title/meta from sanitized GSC context.', data_get($verdict, 'candidate_verdicts.0.proposal_payload.proposed_actions.0'));
         $this->assertContains('technical_surface_requires_human_review', $verdict['risk_flags'] ?? []);
         $this->assertContains('cms_target_missing', $verdict['risk_flags'] ?? []);
         $this->assertContains('candidate_incomplete', $verdict['risk_flags'] ?? []);
@@ -262,6 +269,38 @@ final class SeoAgentCodexReviewRunnerTest extends TestCase
             'forbidden_claims' => [],
             'status' => ContentPage::STATUS_PUBLISHED,
         ]);
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function proposalPayload(): array
+    {
+        return [
+            'source' => 'gsc_cohort_artifact',
+            'locale' => 'zh-CN',
+            'safe_path' => '/zh/articles/title-gap',
+            'draft_angle' => 'title-gap',
+            'proposed_actions' => [
+                'Review title/meta from sanitized GSC context.',
+                'Add internal link from /zh/careers.',
+            ],
+            'runtime' => [
+                'title' => '中文 SEO 标题 | FermatMind',
+                'meta_description' => '中文描述需要原样保留用于 dry-run proposal。',
+                'title_length' => 23,
+                'meta_description_length' => 29,
+                'jsonld_total' => 0,
+                'internal_link_count' => 12,
+                'sample_internal_paths' => ['/zh/careers'],
+            ],
+            'metrics' => [
+                'clicks' => 0,
+                'impressions' => 257,
+                'ctr_ppm' => 0,
+                'average_position_milli' => 8900,
+            ],
+        ];
     }
 
     /**

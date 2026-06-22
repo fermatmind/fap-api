@@ -172,6 +172,7 @@ final class SeoAgentCmsDraftPackageDryRunCommand extends Command
         $subjectType = (string) ($candidate['subject_type'] ?? '');
         $targetModel = $subjectType === 'content_page' ? 'content_page' : 'article';
         $label = $this->labelFromSafePath($safePath);
+        $proposalPayload = $this->proposalPayload($candidate);
 
         return [
             'source_id' => (string) ($candidate['source_id'] ?? ''),
@@ -184,20 +185,22 @@ final class SeoAgentCmsDraftPackageDryRunCommand extends Command
             'target_model' => $targetModel,
             'target_fields' => $targetFields,
             'proposed_seo_title' => in_array('seo_title', $targetFields, true)
-                ? $this->proposedSeoTitle($label)
+                ? $this->proposedSeoTitle($label, $proposalPayload)
                 : null,
             'proposed_seo_description' => in_array('seo_description', $targetFields, true)
-                ? $this->proposedSeoDescription($label)
+                ? $this->proposedSeoDescription($label, $proposalPayload)
                 : null,
             'proposed_faq_items' => in_array('faq_items', $targetFields, true)
-                ? $this->proposedFaqItems($label)
+                ? $this->proposedFaqItems($label, $proposalPayload)
                 : [],
+            'proposed_internal_link_actions' => $this->proposedInternalLinkActions($proposalPayload),
             'proposed_canonical_path' => in_array('canonical_url_or_path', $targetFields, true)
                 ? $safePath
                 : null,
             'proposed_indexability' => in_array('is_indexable_or_robots', $targetFields, true)
                 ? 'indexable_after_manual_review'
                 : null,
+            'proposal_quality' => $this->proposalQuality($proposalPayload),
             'draft_instructions' => [
                 'prepare_field_level_proposal_only',
                 'do_not_generate_final_body_copy',
@@ -265,21 +268,51 @@ final class SeoAgentCmsDraftPackageDryRunCommand extends Command
         return $label !== '' ? ucwords($label) : 'FermatMind page';
     }
 
-    private function proposedSeoTitle(string $label): string
+    /**
+     * @param  array<string, mixed>  $proposalPayload
+     */
+    private function proposedSeoTitle(string $label, array $proposalPayload = []): string
     {
+        $runtimeTitle = trim((string) data_get($proposalPayload, 'runtime.title', ''));
+        if ($runtimeTitle !== '') {
+            return mb_substr($this->normalizeFermatMindTitle($runtimeTitle), 0, 70);
+        }
+
         return mb_substr($label.' | FermatMind', 0, 70);
     }
 
-    private function proposedSeoDescription(string $label): string
+    /**
+     * @param  array<string, mixed>  $proposalPayload
+     */
+    private function proposedSeoDescription(string $label, array $proposalPayload = []): string
     {
+        $runtimeDescription = trim((string) data_get($proposalPayload, 'runtime.meta_description', ''));
+        if ($runtimeDescription !== '') {
+            return mb_substr($runtimeDescription, 0, 155);
+        }
+
         return mb_substr('Review '.$label.' with FermatMind guidance, evidence, and next steps after claim-gate approval.', 0, 155);
     }
 
     /**
+     * @param  array<string, mixed>  $proposalPayload
      * @return list<array<string, string>>
      */
-    private function proposedFaqItems(string $label): array
+    private function proposedFaqItems(string $label, array $proposalPayload = []): array
     {
+        if ($this->isChineseLocale((string) ($proposalPayload['locale'] ?? ''))) {
+            return [
+                [
+                    'question' => '这篇文章需要补充哪些常见问题？',
+                    'answer' => '仅作为字段级草稿建议；答案需基于现有正文、claim gate 和人工审核后再写入。',
+                ],
+                [
+                    'question' => '读者下一步应该如何使用这篇文章？',
+                    'answer' => '仅作为字段级草稿建议；需人工确认内部链接和行动路径后再写入。',
+                ],
+            ];
+        }
+
         return [
             [
                 'question' => 'What should readers know about '.$label.'?',
@@ -290,6 +323,144 @@ final class SeoAgentCmsDraftPackageDryRunCommand extends Command
                 'answer' => 'Draft answer pending claim gate and human approval.',
             ],
         ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $candidate
+     * @return array<string, mixed>
+     */
+    private function proposalPayload(array $candidate): array
+    {
+        $payload = (array) ($candidate['proposal_payload'] ?? []);
+        if ($payload === [] || ($payload['source'] ?? '') !== 'gsc_cohort_artifact') {
+            return [];
+        }
+
+        $runtime = (array) ($payload['runtime'] ?? []);
+        $metrics = (array) ($payload['metrics'] ?? []);
+
+        return [
+            'source' => 'gsc_cohort_artifact',
+            'locale' => $this->cleanText((string) ($payload['locale'] ?? '')),
+            'safe_path' => (string) ($payload['safe_path'] ?? ''),
+            'draft_angle' => $this->cleanText((string) ($payload['draft_angle'] ?? '')),
+            'proposed_actions' => $this->cleanTextList((array) ($payload['proposed_actions'] ?? [])),
+            'runtime' => [
+                'title' => $this->cleanText((string) ($runtime['title'] ?? '')),
+                'meta_description' => $this->cleanText((string) ($runtime['meta_description'] ?? '')),
+                'title_length' => (int) ($runtime['title_length'] ?? 0),
+                'meta_description_length' => (int) ($runtime['meta_description_length'] ?? 0),
+                'jsonld_total' => (int) ($runtime['jsonld_total'] ?? 0),
+                'internal_link_count' => (int) ($runtime['internal_link_count'] ?? 0),
+                'sample_internal_paths' => array_values(array_filter(
+                    $this->strings((array) ($runtime['sample_internal_paths'] ?? [])),
+                    static fn (string $path): bool => str_starts_with($path, '/')
+                )),
+            ],
+            'metrics' => [
+                'clicks' => (int) ($metrics['clicks'] ?? 0),
+                'impressions' => (int) ($metrics['impressions'] ?? 0),
+                'ctr_ppm' => (int) ($metrics['ctr_ppm'] ?? 0),
+                'average_position_milli' => is_numeric($metrics['average_position_milli'] ?? null)
+                    ? (int) $metrics['average_position_milli']
+                    : null,
+            ],
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $proposalPayload
+     * @return list<string>
+     */
+    private function proposedInternalLinkActions(array $proposalPayload): array
+    {
+        if ($proposalPayload === []) {
+            return [];
+        }
+
+        return array_values(array_filter(
+            (array) ($proposalPayload['proposed_actions'] ?? []),
+            static fn (mixed $action): bool => is_string($action) && str_contains(strtolower($action), 'internal link')
+        ));
+    }
+
+    /**
+     * @param  array<string, mixed>  $proposalPayload
+     * @return array<string, mixed>
+     */
+    private function proposalQuality(array $proposalPayload): array
+    {
+        if ($proposalPayload === []) {
+            return [
+                'source' => 'fallback_slug_label',
+                'locale_preserved' => false,
+                'slug_generated_copy' => true,
+                'needs_human_approval' => true,
+            ];
+        }
+
+        return [
+            'source' => 'gsc_cohort_artifact',
+            'locale_preserved' => $this->isChineseLocale((string) ($proposalPayload['locale'] ?? ''))
+                ? $this->containsCjk((string) data_get($proposalPayload, 'runtime.title', '').' '.(string) data_get($proposalPayload, 'runtime.meta_description', ''))
+                : true,
+            'slug_generated_copy' => false,
+            'uses_runtime_title' => (string) data_get($proposalPayload, 'runtime.title', '') !== '',
+            'uses_runtime_meta_description' => (string) data_get($proposalPayload, 'runtime.meta_description', '') !== '',
+            'proposed_actions_preserved' => count((array) ($proposalPayload['proposed_actions'] ?? [])),
+            'sample_internal_path_count' => count((array) data_get($proposalPayload, 'runtime.sample_internal_paths', [])),
+            'needs_human_approval' => true,
+        ];
+    }
+
+    private function normalizeFermatMindTitle(string $title): string
+    {
+        $title = trim(preg_replace('/\s+/u', ' ', html_entity_decode($title, ENT_QUOTES | ENT_HTML5, 'UTF-8')) ?: '');
+        $title = preg_replace('/(?:\s*\|\s*FermatMind)+$/u', '', $title) ?: $title;
+
+        return trim($title).' | FermatMind';
+    }
+
+    private function isChineseLocale(string $locale): bool
+    {
+        return str_starts_with($locale, 'zh');
+    }
+
+    private function containsCjk(string $value): bool
+    {
+        return preg_match('/\p{Han}/u', $value) === 1;
+    }
+
+    private function cleanText(string $value): string
+    {
+        $value = trim(html_entity_decode($value, ENT_QUOTES | ENT_HTML5, 'UTF-8'));
+        $value = preg_replace('~https?://[^\s<>"\']+~iu', '', $value) ?: '';
+
+        return preg_replace('/\s+/u', ' ', $value) ?: '';
+    }
+
+    /**
+     * @param  array<int, mixed>  $values
+     * @return list<string>
+     */
+    private function cleanTextList(array $values): array
+    {
+        return array_values(array_unique(array_filter(
+            array_map(fn (mixed $value): string => is_scalar($value) ? $this->cleanText((string) $value) : '', $values),
+            static fn (string $value): bool => $value !== ''
+        )));
+    }
+
+    /**
+     * @param  array<int, mixed>  $values
+     * @return list<string>
+     */
+    private function strings(array $values): array
+    {
+        return array_values(array_unique(array_filter(
+            array_map('strval', $values),
+            static fn (string $value): bool => $value !== ''
+        )));
     }
 
     /**
