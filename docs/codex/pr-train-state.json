@@ -57270,8 +57270,8 @@
     ],
     "checks": {},
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "7a4d75d8ef66deaf9f8d8fd0121f57d6989ba1f6",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2267",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -57790,6 +57790,11 @@
         "at": "2026-06-22T02:15:00Z",
         "status": "local_validated",
         "note": "Live dry-run pilot created artifact-only PR #2266 via execute-github-mutation live mode. The pilot PR is open and unmerged for the later merge cleanup pilot."
+      },
+      {
+        "at": "2026-06-22T02:20:00Z",
+        "status": "pr_open",
+        "note": "Opened PR #2267 after live dry-run evidence and scope validation passed; waiting for required GitHub checks."
       }
     ]
   },
