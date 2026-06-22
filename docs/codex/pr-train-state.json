@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-22T16:45:26.941+00:00",
+  "updated_at": "2026-06-23T02:30:00+08:00",
   "SEO-AGENT-ARTICLE41-DRAFT-CLAIM-RISK-QA-01": {
     "repo": "fap-api",
     "branch": "codex/seo-agent-article41-draft-claim-risk-qa-01",
@@ -59428,7 +59428,7 @@
     "repo": "fap-api",
     "branch": "codex/fa30-api-04-gsc-live-smoke-evidence",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged_cleanup_complete",
     "train_scope": "fa30_free_assessment_gsc_live_smoke_evidence_contract",
     "title": "FA30-API-04: Add free-assessment GSC live-smoke evidence contract",
     "depends_on": [
@@ -59461,15 +59461,15 @@
       },
       "github": {
         "status": "pass",
-        "evidence": "PR #2327 GitHub checks passed: hygiene, Semgrep blocking secrets, supply-chain, semgrep SARIF non-blocking upload, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, and Semgrep OSS."
+        "evidence": "PR #2327 merged via squash. GitHub reported merge commit 3b3ce7143f3c9b3ac087db507089b97ca1aa0642; origin/main contains it; fap-api main was later synced cleanly beyond that merge; remote branch and local task branch were deleted."
       }
     },
     "failure_reason": null,
-    "commit_sha": "b12cff68782136210ade74b83e2f8ce8706282ae",
+    "commit_sha": "3b3ce7143f3c9b3ac087db507089b97ca1aa0642",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2327",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-22T16:53:31Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-22T16:37:20.369+00:00",
@@ -59490,6 +59490,81 @@
         "at": "2026-06-22T16:45:26.941+00:00",
         "status": "ready_to_merge",
         "note": "All PR #2327 GitHub checks passed and scope was revalidated; ready for squash merge when final metadata commit checks pass."
+      },
+      {
+        "at": "2026-06-23T01:45:00+08:00",
+        "status": "merged_cleanup_complete",
+        "note": "Reconciled stale FA30-API-04 ledger while starting dependent FA30-API-08: PR #2327 is merged, origin/main contains merge commit 3b3ce7143f3c9b3ac087db507089b97ca1aa0642, and branch cleanup had completed."
+      }
+    ]
+  },
+  "FA30-API-08": {
+    "repo": "fap-api",
+    "branch": "codex/fa30-api-08-content-pages-dry-run",
+    "base": "main",
+    "status": "ready_to_merge",
+    "train_scope": "fa30_trust_method_content_pages_dry_run_package",
+    "title": "FA30-API-08: Extend trust/method ContentPage CMS dry-run package",
+    "depends_on": [
+      "FA30-API-04"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly provided FA30-API-08 id, title, scope, and authorized manifest/state updates in the FA30-NON-AGENT-PR-TRAIN-01 /goal request."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "FA30-API-04 merged as PR #2327 at 2026-06-22T16:53:31Z; origin/main contains merge commit 3b3ce7143f3c9b3ac087db507089b97ca1aa0642."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=TrustMethodContentPagesDryRunPackageTest --no-ansi",
+          "cd backend && vendor/bin/pint --test tests/Feature/SeoIntel/TrustMethodContentPagesDryRunPackageTest.php",
+          "python3 -m json.tool backend/docs/seo/import-packages/trust-method-content-pages-dry-run/content_pages.trust_method_drafts_01.json >/dev/null",
+          "python3 -m json.tool backend/docs/seo/generated/trust-method-content-pages-dry-run-package.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "git diff --check"
+        ],
+        "evidence": "PASS: TrustMethodContentPagesDryRunPackageTest (3 warning-only file_get_contents warnings, 124 assertions); PASS: scoped Pint for the new test; PASS: JSON parse for source package, generated artifact, and state; PASS: YAML parse for manifest; PASS: git diff --check."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to FA30-API-08 allowed paths: trust/method dry-run source package, generated artifact, dry-run report, focused PHPUnit contract, and docs/codex metadata. No CMS write, publish, search submission, provider call, deploy, sitemap, llms, canonical, JSON-LD, queue, scheduler, runtime route, or fap-web change."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #2334 GitHub checks passed on branch head 7a5fa12845744f6ef87e277aa05856d028f72bb4: hygiene, Semgrep blocking secrets, supply-chain, semgrep SARIF non-blocking upload, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, and Semgrep OSS. mergeStateStatus was CLEAN."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": "3b62691f661edac4b13d9a97e53645fadb93972e",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2334",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-23T01:45:00+08:00",
+        "status": "in_progress",
+        "note": "Started from clean origin/main worktree. Scope is limited to a trust/method ContentPage dry-run source package, generated artifact, docs note, focused PHPUnit contract, and docs/codex metadata. No CMS write, publish, search submission, provider call, deploy, sitemap, llms, canonical, JSON-LD, queue, scheduler, or fap-web change is allowed."
+      },
+      {
+        "at": "2026-06-23T02:05:00+08:00",
+        "status": "local_validated",
+        "note": "Focused PHPUnit, scoped Pint, JSON/YAML parsing, diff check, and explicit path allowlist scope validation passed. PHPUnit warnings were warning-only file_get_contents warnings and did not fail the suite."
+      },
+      {
+        "at": "2026-06-23T02:12:00+08:00",
+        "status": "pr_open",
+        "note": "Opened PR #2334 after local validation and scope validation passed. Branch head is the source of truth for the exact current SHA after metadata commits."
+      },
+      {
+        "at": "2026-06-23T02:30:00+08:00",
+        "status": "ready_to_merge",
+        "note": "All PR #2334 GitHub checks passed and mergeStateStatus was CLEAN. Recording ready_to_merge before squash merge per PR-train ledger policy."
       }
     ]
   }

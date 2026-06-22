@@ -24366,6 +24366,54 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: FA30-API-08
+    repo: fap-api
+    depends_on:
+      - FA30-API-04
+    branch: codex/fa30-api-08-content-pages-dry-run
+    title: "FA30-API-08: Extend trust/method ContentPage CMS dry-run package"
+    train_scope: fa30_trust_method_content_pages_dry_run_package
+    status: user_authorized
+    scope:
+      - Add a backend-only ContentPage dry-run package for trust and method page candidates.
+      - Validate the package through the existing content-pages:import-local-baseline dry-run path with draft status and zero writes.
+      - Lock non-public, non-indexable, no-publish, no-search, no-provider-call, no-deploy, no-frontend-change boundaries in a focused PHPUnit contract.
+      - Reconcile FA30-API-04 merged dependency metadata needed to continue this train item.
+    allowed_paths:
+      - backend/docs/seo/import-packages/trust-method-content-pages-dry-run/content_pages.trust_method_drafts_01.json
+      - backend/docs/seo/generated/trust-method-content-pages-dry-run-package.v1.json
+      - backend/docs/seo/trust-method-content-pages-dry-run-package.md
+      - backend/tests/Feature/SeoIntel/TrustMethodContentPagesDryRunPackageTest.php
+      - generated/pr-train-sidecar-issues/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Write CMS rows, import to production, publish, or upsert existing ContentPage authority.
+      - Change sitemap, llms, canonical, noindex, JSON-LD, runtime routes, scheduler, queue, deploy, or environment configuration.
+      - Submit URLs, request indexing, enqueue Search Channel records, or call external providers.
+      - Modify fap-web or add frontend fallback authority.
+      - Implement FA30-WEB-07 or any future scope.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=TrustMethodContentPagesDryRunPackageTest --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Feature/SeoIntel/TrustMethodContentPagesDryRunPackageTest.php
+      - python3 -m json.tool backend/docs/seo/import-packages/trust-method-content-pages-dry-run/content_pages.trust_method_drafts_01.json >/dev/null
+      - python3 -m json.tool backend/docs/seo/generated/trust-method-content-pages-dry-run-package.v1.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: backend
+
   - id: BIG5-RESULT-SOURCE-LEDGER-01
     repo: fap-api
     depends_on:

@@ -1,0 +1,94 @@
+{
+  "schema_version": "trust-method-content-pages-dry-run-package.v1",
+  "task": "FA30-API-08",
+  "mode": "cms_dry_run_package_only",
+  "created_at": "2026-06-23T00:00:00Z",
+  "source_package": "backend/docs/seo/import-packages/trust-method-content-pages-dry-run/content_pages.trust_method_drafts_01.json",
+  "runtime_importer": "content-pages:import-local-baseline",
+  "recommended_dry_run_command": "cd backend && php artisan content-pages:import-local-baseline --dry-run --status=draft --source-dir=docs/seo/import-packages/trust-method-content-pages-dry-run",
+  "candidate_summary": {
+    "candidate_count": 4,
+    "locales": [
+      "en"
+    ],
+    "page_types": [
+      "methodology",
+      "boundary",
+      "privacy",
+      "trust"
+    ],
+    "kind": "policy",
+    "status": "draft",
+    "all_non_public": true,
+    "all_non_indexable": true,
+    "all_publish_blocked": true,
+    "all_operator_review_required": true,
+    "all_claim_gate_not_reviewed": true,
+    "all_schema_disabled": true
+  },
+  "candidate_slugs": [
+    "assessment-method",
+    "score-interpretation-boundaries",
+    "data-privacy-method",
+    "review-and-evidence-process"
+  ],
+  "dry_run_contract": {
+    "dry_run_required": true,
+    "writes_committed_must_be_zero": true,
+    "status_must_be_draft": true,
+    "upsert_must_not_be_used_without_separate_approval": true,
+    "publish_must_not_occur": true,
+    "search_submission_must_not_occur": true,
+    "sitemap_llms_footer_exposure_must_not_occur": true,
+    "provider_calls_must_not_occur": true,
+    "production_deploy_must_not_occur": true
+  },
+  "authority_boundary": {
+    "content_authority": "backend_cms_content_pages",
+    "frontend_fallback_authority_allowed": false,
+    "cms_write_authorized_in_this_pr": false,
+    "publication_authorized_in_this_pr": false,
+    "indexability_authorized_in_this_pr": false,
+    "future_publish_requires_operator_review": true,
+    "future_publish_requires_claim_gate_pass": true,
+    "future_publish_requires_legal_review_where_required": true
+  },
+  "forbidden_fields_or_patterns": [
+    "token=",
+    "payment_id",
+    "transaction_id",
+    "/orders/",
+    "/pay/",
+    "/payment/",
+    "/result/",
+    "/history/",
+    "private_key",
+    "client_secret",
+    "redis://",
+    "mysql://"
+  ],
+  "negative_guarantees": {
+    "cms_write_performed": false,
+    "publish_performed": false,
+    "search_submission_performed": false,
+    "url_submission_performed": false,
+    "sitemap_changed": false,
+    "llms_changed": false,
+    "canonical_changed": false,
+    "jsonld_changed": false,
+    "queue_or_scheduler_changed": false,
+    "provider_call_performed": false,
+    "production_deploy_performed": false,
+    "frontend_changed": false
+  },
+  "acceptance": {
+    "local_package_parse_required": true,
+    "focused_phpunit_contract_required": true,
+    "dry_run_smoke_required": true,
+    "expected_dry_run_will_create": 4,
+    "expected_dry_run_will_update": 0,
+    "expected_dry_run_will_skip": 0,
+    "final_status": "dry_run_package_ready_no_write"
+  },
+  "next_task": "FA30-WEB-07"
+}
