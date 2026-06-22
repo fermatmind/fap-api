@@ -59427,7 +59427,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-allowlist-scope-approval",
     "base": "main",
-    "status": "local_validated",
+    "status": "pr_open",
     "train_scope": "big5_strategic_completion_roadmap",
     "title": "BIG5-PILOT-ALLOWLIST-SCOPE-APPROVAL-01: Add Big Five pilot allowlist scope approval",
     "depends_on": [
@@ -59467,7 +59467,7 @@
     },
     "failure_reason": null,
     "commit_sha": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2343",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -59481,6 +59481,11 @@
         "at": "2026-06-22T18:16:55Z",
         "status": "local_validated",
         "note": "Added redacted allowlist scope approval evidence. Live values, runtime flag changes, live smoke, production import, rollout, CMS, SEO runtime, search submission, and deploy remain deferred."
+      },
+      {
+        "at": "2026-06-22T18:16:55Z",
+        "status": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/2343 after local validation and scope validation passed."
       }
     ]
   },
