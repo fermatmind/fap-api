@@ -1,0 +1,23 @@
+{
+  "schema_version": "riasec_result_page_v2_release_approval_evidence_v0_1",
+  "package": "riasec_result_page_v2_release_approval",
+  "version": "v0_1",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_import_approved": false,
+  "production_rollout_enabled": false,
+  "cms_write_performed": false,
+  "approval_status": "not_approved",
+  "human_approval_required": true,
+  "approver": null,
+  "approved_at": null,
+  "approval_evidence_status": "pending_human_approval",
+  "required_before_approval": [
+    "rendered_preview_qa_pass",
+    "all_surface_pilot_qa_pass",
+    "release_snapshot_hash_verified",
+    "staging_only_artifacts_rejected",
+    "production_rollout_gate_manual_approval"
+  ]
+}

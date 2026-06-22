@@ -1,0 +1,55 @@
+{
+    "schema_version": "riasec_result_page_v2_release_snapshot_v0_1",
+    "snapshot_id": "riasec_result_page_v2_rc_0_1",
+    "snapshot_version": "v0_1",
+    "snapshot_sha256": "c654f6bef380f61da13a97ef03967d93b7b1d80af618cc258da7b54cb69575eb",
+    "created_at": "2026-06-22T00:00:00Z",
+    "mode": "immutable_release_snapshot",
+    "runtime_use": "not_runtime",
+    "immutable": true,
+    "release_candidate": false,
+    "production_use_allowed": false,
+    "ready_for_production": false,
+    "production_rollout_enabled": false,
+    "cms_write_performed": false,
+    "content_version_refs": [
+        {
+            "kind": "production_import_gate_policy",
+            "path": "content_assets/riasec/result_page_v2/governance/production_import_gate_v0_1/manifest.json",
+            "version": "v0_1",
+            "status": "present"
+        },
+        {
+            "kind": "all_surface_pass_evidence",
+            "path": "content_assets/riasec/result_page_v2/qa/all_surface_pilot_qa/v0_1/riasec_result_page_v2_all_surface_pilot_qa_report_v0_1.json",
+            "version": "v0_1",
+            "status": "pass",
+            "sha256": "ea761e11cce83f972ee4d48e7074b820cef2827fae3ec498ba087b5a7bbc69af"
+        },
+        {
+            "kind": "approval_evidence",
+            "path": "content_assets/riasec/result_page_v2/governance/release_approval_v0_1/riasec_result_page_v2_release_approval_evidence_v0_1.json",
+            "version": "v0_1",
+            "status": "pending"
+        }
+    ],
+    "traceability": {
+        "import_gate_policy": "content_assets/riasec/result_page_v2/governance/production_import_gate_v0_1",
+        "approval_evidence": "content_assets/riasec/result_page_v2/governance/release_approval_v0_1",
+        "all_surface_qa": "content_assets/riasec/result_page_v2/qa/all_surface_pilot_qa/v0_1",
+        "previous_snapshot_id": null,
+        "snapshot_manifest": "content_assets/riasec/result_page_v2/releases/v0_1/manifest.json"
+    },
+    "rollback": {
+        "strategy": "do_not_import_until_approved",
+        "previous_snapshot_id": null,
+        "release_disable_supported": true,
+        "emergency_disable_supported": true
+    },
+    "immutability_contract": {
+        "overwrite_allowed": false,
+        "append_only_versions": true,
+        "hash_required": true,
+        "manifest_hash_required": true
+    }
+}
