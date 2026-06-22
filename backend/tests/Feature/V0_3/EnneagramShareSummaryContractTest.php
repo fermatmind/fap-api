@@ -42,18 +42,50 @@ final class EnneagramShareSummaryContractTest extends TestCase
             ->assertJsonPath('enneagram_public_summary_v1.third_candidate', '9')
             ->assertJsonPath('enneagram_public_summary_v1.interpretation_scope', 'clear')
             ->assertJsonPath('enneagram_public_summary_v1.cross_form_comparable', false)
-            ->assertJsonPath('enneagram_public_summary_v1.report_schema_version', 'enneagram.report.v2')
+            ->assertJsonMissingPath('attempt_id')
+            ->assertJsonMissingPath('org_id')
+            ->assertJsonMissingPath('content_package_version')
             ->assertJsonMissingPath('mbti_public_summary_v1');
 
         $this->assertCount(3, (array) $response->json('enneagram_public_summary_v1.top_types'));
         $this->assertCount(9, (array) $response->json('enneagram_public_summary_v1.all9_profile_mini'));
         $this->assertNotSame('', (string) $response->json('enneagram_public_summary_v1.compare_compatibility_group'));
-        $this->assertNotSame('', (string) $response->json('enneagram_public_summary_v1.registry_release_hash'));
-        $this->assertNotSame('', (string) $response->json('enneagram_public_summary_v1.projection_version'));
-        $this->assertNotSame('', (string) $response->json('enneagram_public_summary_v1.interpretation_context_id'));
         $this->assertNotSame('', (string) $response->json('enneagram_public_summary_v1.generated_at'));
-        $this->assertStringContainsString('最可能是 4 号', (string) $response->json('summary'));
+        $this->assertStringContainsString('当前结果更接近 4 号倾向', (string) $response->json('summary'));
+        $this->assertPublicSummaryHasNoForbiddenFields((array) $response->json('enneagram_public_summary_v1'));
         $this->assertSame('4', (string) $response->json('type_code'));
+    }
+
+    /**
+     * @param  array<string,mixed>  $summary
+     */
+    private function assertPublicSummaryHasNoForbiddenFields(array $summary): void
+    {
+        $encoded = json_encode($summary, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        $this->assertIsString($encoded);
+
+        foreach ([
+            'attempt_id',
+            'display_score',
+            'raw_score',
+            'raw_scores',
+            'raw_score_vector',
+            'dominance_gap_abs',
+            'dominance_gap_pct',
+            'registry_release_hash',
+            'content_release_hash',
+            'content_snapshot_status',
+            'report_schema_version',
+            'projection_version',
+            'interpretation_context_id',
+            'interpretation_reason',
+            'private_metadata',
+            'source_selection_notes',
+            'editor_notes',
+            'qa_notes',
+        ] as $forbiddenField) {
+            $this->assertStringNotContainsString($forbiddenField, $encoded);
+        }
     }
 
     /**
