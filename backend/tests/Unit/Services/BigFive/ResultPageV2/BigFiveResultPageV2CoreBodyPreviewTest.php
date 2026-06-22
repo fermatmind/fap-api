@@ -2969,6 +2969,29 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_enneagram_result_page_production_manual_gate_runbook(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/EnneagramResultPageProductionManualGateCommand.php',
+            'backend/app/Console/Kernel.php',
+            'backend/app/Services/Enneagram/Assets/Agent/EnneagramResultPageProductionManualGateRunbook.php',
+            'backend/content_assets/enneagram/result_page/production_manual_gate/README.md',
+            'backend/content_assets/enneagram/result_page/production_manual_gate/production_manual_gate_contract_v0_1.json',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\EnneagramResultPageProductionManualGateCommand;',
+            '+        EnneagramResultPageProductionManualGateCommand::class,',
+        ];
+
+        $blocked = [
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Transformer.php',
+            'backend/routes/api.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
+        $this->assertSame($blocked, $this->mbtiImpactingRuntimeChanges($blocked, '', '', $kernelChangedLines));
+    }
+
     public function test_runtime_freeze_classifier_ignores_enneagram_result_page_agent_runner_harness(): void
     {
         $changed = [
@@ -4901,6 +4924,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isEnneagramResultPageProductionManualGateRunbookFile($file)) {
+                continue;
+            }
+
             if ($this->isEnneagramResultPageAgentRunnerHarnessFile($file)) {
                 continue;
             }
@@ -5014,6 +5041,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsEnneagramResultPageCandidateStagingHarnessOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsEnneagramResultPageRenderedQaSmokeHarnessOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsEnneagramResultPageReportSidecarIssueOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsEnneagramResultPageProductionManualGateRunbookOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsEnneagramInactiveCandidateActivationOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                 )
             ) {
@@ -6962,6 +6990,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ], true);
     }
 
+    private function isEnneagramResultPageProductionManualGateRunbookFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/EnneagramResultPageProductionManualGateCommand.php',
+            'backend/app/Services/Enneagram/Assets/Agent/EnneagramResultPageProductionManualGateRunbook.php',
+            'backend/content_assets/enneagram/result_page/production_manual_gate/README.md',
+            'backend/content_assets/enneagram/result_page/production_manual_gate/production_manual_gate_contract_v0_1.json',
+        ], true);
+    }
+
     private function isEnneagramResultPageAgentRunnerHarnessFile(string $file): bool
     {
         return $file === 'backend/app/Services/Enneagram/Assets/Agent/EnneagramResultPageAgentBatchRunner.php';
@@ -8182,6 +8220,23 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $allowed = [
             'use App\\Console\\Commands\\EnneagramResultPageReportSidecarIssueCommand;',
             '        EnneagramResultPageReportSidecarIssueCommand::class,',
+        ];
+        $normalized = array_map(
+            static fn (string $line): string => str_starts_with($line, '+') ? substr($line, 1) : $line,
+            $changedLines,
+        );
+
+        return $changedLines !== [] && array_values($normalized) === $allowed;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsEnneagramResultPageProductionManualGateRunbookOnly(array $changedLines): bool
+    {
+        $allowed = [
+            'use App\\Console\\Commands\\EnneagramResultPageProductionManualGateCommand;',
+            '        EnneagramResultPageProductionManualGateCommand::class,',
         ];
         $normalized = array_map(
             static fn (string $line): string => str_starts_with($line, '+') ? substr($line, 1) : $line,

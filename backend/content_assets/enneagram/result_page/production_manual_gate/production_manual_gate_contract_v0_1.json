@@ -1,0 +1,30 @@
+{
+  "schema_version": "fap.enneagram.result_page.production_manual_gate.v0.1",
+  "runtime_use": "not_runtime_until_human_approval",
+  "production_use_allowed_for_agent": false,
+  "manual_approval_required": true,
+  "expected_release_id": "enneagram_1r_a_to_1r_h_phase8b_candidate_20260427_a9fd3eb4",
+  "expected_candidate_manifest_sha256": "a9fd3eb474ea2ca0130d06ad2b1640305d9160ee1a74e559ad4f60bfc4db56c0",
+  "expected_runtime_registry_sha256": "ac5bdaab3c761b0d01a56f92679aa58341110d64de0f47a1fa0062b64f76f97f",
+  "required_human_approval_fields": [
+    "release_id",
+    "confirm_release_id",
+    "candidate_manifest_sha256",
+    "runtime_registry_sha256",
+    "rollback_window",
+    "post_activation_smoke_acknowledged"
+  ],
+  "activation_command_template": "php artisan enneagram:activate-inactive-candidate-release --release-id=<exact-release-id> --confirm-release-id=<same-exact-release-id> --candidate-manifest-sha256=<exact-candidate-sha256> --runtime-registry-sha256=<exact-runtime-sha256> --output-dir=<output-dir> --json",
+  "rollback_command_template": "php artisan enneagram:rollback-inactive-candidate-release --release-id=<exact-release-id> --confirm-release-id=<same-exact-release-id> --output-dir=<output-dir> --json",
+  "negative_guarantees": {
+    "agent_production_activation_allowed": false,
+    "agent_production_rollback_allowed": false,
+    "bulk_content_generation_happened": false,
+    "production_import_happened": false,
+    "production_activation_happened": false,
+    "production_rollback_happened": false,
+    "runtime_switch_happened": false,
+    "production_write_happened": false,
+    "frontend_change_happened": false
+  }
+}

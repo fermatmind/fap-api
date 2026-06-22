@@ -118,6 +118,7 @@ use App\Console\Commands\EnneagramResultPageCandidateStagingHarnessCommand;
 use App\Console\Commands\EnneagramResultPageContentBatchCommand;
 use App\Console\Commands\EnneagramResultPageOpsControlPlaneCommand;
 use App\Console\Commands\EnneagramResultPageOpsRunnerCommand;
+use App\Console\Commands\EnneagramResultPageProductionManualGateCommand;
 use App\Console\Commands\EnneagramResultPageReportSidecarIssueCommand;
 use App\Console\Commands\EnneagramResultPageRenderedQaSmokeHarnessCommand;
 use App\Console\Commands\EnneagramRollbackInactiveCandidateRelease;
@@ -256,6 +257,7 @@ class Kernel extends ConsoleKernel
         EnneagramResultPageCandidateStagingHarnessCommand::class,
         EnneagramResultPageOpsControlPlaneCommand::class,
         EnneagramResultPageOpsRunnerCommand::class,
+        EnneagramResultPageProductionManualGateCommand::class,
         EnneagramResultPageReportSidecarIssueCommand::class,
         EnneagramResultPageRenderedQaSmokeHarnessCommand::class,
         EnneagramRollbackInactiveCandidateRelease::class,
