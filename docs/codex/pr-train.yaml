@@ -23905,6 +23905,7 @@ prs:
       - backend/app/Console/Kernel.php
       - backend/docs/seo/generated/seo-agent-article-draft-preview-runtime-qa.v1.json
       - backend/tests/Feature/SeoIntel/SeoAgentArticleDraftPreviewRuntimeQaTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train-state.json
     do_not:
       - Write CMS drafts.
@@ -23913,6 +23914,7 @@ prs:
       - Modify public runtime content.
     validation:
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoAgentArticleDraftPreviewRuntimeQaTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=seo_agent_article_draft_preview_runtime_qa
       - cd backend && vendor/bin/pint --test app/Console/Commands tests/Feature/SeoIntel
       - python3 -m json.tool backend/docs/seo/generated/seo-agent-article-draft-preview-runtime-qa.v1.json >/dev/null
       - git diff --check
