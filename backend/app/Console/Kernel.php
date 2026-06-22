@@ -185,6 +185,7 @@ use App\Console\Commands\SdsPsychometricsReport;
 use App\Console\Commands\SeedScaleRegistry;
 use App\Console\Commands\SeoAgentAutoRollbackGuardCommand;
 use App\Console\Commands\SeoAgentCmsDraftPackageDryRunCommand;
+use App\Console\Commands\SeoAgentCmsDraftPayloadRepairCanaryCommand;
 use App\Console\Commands\SeoAgentCmsDraftReadbackQaCommand;
 use App\Console\Commands\SeoAgentCmsDraftWriteCommand;
 use App\Console\Commands\SeoAgentCmsFaqGapScanCommand;
@@ -416,6 +417,7 @@ class Kernel extends ConsoleKernel
         SeoAgentCmsTdkGapScanCommand::class,
         SeoAgentCodexReviewRunnerCommand::class,
         SeoAgentCmsDraftPackageDryRunCommand::class,
+        SeoAgentCmsDraftPayloadRepairCanaryCommand::class,
         SeoAgentCmsDraftReadbackQaCommand::class,
         SeoAgentCmsDraftWriteCommand::class,
         SeoAgentCmsPublishAutoCanaryCommand::class,

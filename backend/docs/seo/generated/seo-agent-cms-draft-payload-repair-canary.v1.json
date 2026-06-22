@@ -1,0 +1,56 @@
+{
+  "version": "seo-agent-cms-draft-payload-repair-canary.v1",
+  "task": "SEO-AGENT-CMS-DRAFT-PAYLOAD-REPAIR-CANARY-01",
+  "repo": "fap-api",
+  "command": "php artisan seo-agent:cms-draft-payload-repair-canary",
+  "input_schemas": [
+    "seo-agent-cms-draft-package-dry-run.v1",
+    "seo-agent-controlled-cms-draft-write.v1"
+  ],
+  "output_schema": "seo-agent-cms-draft-payload-repair-canary.v1",
+  "default_mode": "dry_run_plan",
+  "execute_requires": [
+    "--execute",
+    "--confirm-package-sha256=<sha256>",
+    "--confirm-repair=<exact phrase>"
+  ],
+  "supported_targets": [
+    "article"
+  ],
+  "repair_mode": "append_article_revision",
+  "compatible_write_evidence_schema": "seo-agent-controlled-cms-draft-write.v1",
+  "allowed_mismatches": [
+    "proposal.proposed_internal_link_actions",
+    "proposal.proposal_quality"
+  ],
+  "copies_body_from_previous_draft_revision": true,
+  "mutates_old_revision": false,
+  "publishes_content": false,
+  "mutates_published_revision": false,
+  "search_submit_allowed": false,
+  "indexing_request_allowed": false,
+  "forbidden_input": [
+    "raw_url",
+    "raw_query",
+    "credentials",
+    "cookies",
+    "tokens",
+    "content_html",
+    "content_md",
+    "cms_draft_body"
+  ],
+  "negative_guarantees": {
+    "cms_publish": false,
+    "published_revision_mutation": false,
+    "live_published_content_mutation": false,
+    "search_channel_enqueue": false,
+    "search_channel_submit": false,
+    "indexing_request": false,
+    "sitemap_submission": false,
+    "scheduler_activation": false,
+    "queue_worker_started": false,
+    "production_env_change": false,
+    "external_model_api_call": false
+  },
+  "next_step": "After execute, pass the emitted compatible write evidence path to seo-agent:cms-draft-readback-qa and require ok=true before any further draft write canary."
+}
