@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-22T16:26:25.862+00:00",
+  "updated_at": "2026-06-22T16:45:26.941+00:00",
   "SEO-AGENT-ARTICLE41-DRAFT-CLAIM-RISK-QA-01": {
     "repo": "fap-api",
     "branch": "codex/seo-agent-article41-draft-claim-risk-qa-01",
@@ -59126,7 +59126,7 @@
     "repo": "fap-api",
     "branch": "codex/fa30-api-05-analytics-smoke-exclusion",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged_cleanup_complete",
     "train_scope": "fa30_six_scale_smoke_analytics_exclusion",
     "title": "FA30-API-05: Centralize six-scale smoke attempt analytics exclusion",
     "depends_on": [
@@ -59160,15 +59160,15 @@
       },
       "github": {
         "status": "pass",
-        "evidence": "PR #2324 GitHub checks passed after current-scope verify-bigfive classifier fix: hygiene, Semgrep blocking secrets, supply-chain, semgrep SARIF non-blocking upload, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, and Semgrep OSS."
+        "evidence": "PR #2324 merged via squash. GitHub reported merge commit 413e06c499be146ddd9bda87dc9f56b4793a4fd5; origin/main contains it; local main synced to origin/main; remote branch deleted; local task branch deleted after squash merge."
       }
     },
     "failure_reason": null,
     "commit_sha": "258c20a92a67495c188b4da700cc2bc8d0a4ecd7",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2324",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-22T16:32:27Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-23T00:00:00+08:00",
@@ -59199,6 +59199,80 @@
         "at": "2026-06-22T16:26:25.862+00:00",
         "status": "ready_to_merge",
         "note": "All PR #2324 GitHub checks passed and scope was revalidated; ready for squash merge when final metadata commit checks pass."
+      },
+      {
+        "at": "2026-06-22T16:37:20.369+00:00",
+        "status": "merged_cleanup_complete",
+        "note": "Reconciled after PR #2324 merge: origin/main contains merge commit 413e06c499be146ddd9bda87dc9f56b4793a4fd5, local main is synced and clean, remote branch is deleted, and local task branch was deleted."
+      }
+    ]
+  },
+  "FA30-API-04": {
+    "repo": "fap-api",
+    "branch": "codex/fa30-api-04-gsc-live-smoke-evidence",
+    "base": "main",
+    "status": "ready_to_merge",
+    "train_scope": "fa30_free_assessment_gsc_live_smoke_evidence_contract",
+    "title": "FA30-API-04: Add free-assessment GSC live-smoke evidence contract",
+    "depends_on": [
+      "FA30-API-05"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly provided FA30-API-04 id, title, scope, and authorized manifest/state updates in the FA30-NON-AGENT-PR-TRAIN-01 /goal request."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "FA30-API-05 merged as PR #2324 at 2026-06-22T16:32:27Z; origin/main contains merge commit 413e06c499be146ddd9bda87dc9f56b4793a4fd5."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=FreeAssessmentGscLiveSmokeEvidenceContractTest --no-ansi",
+          "cd backend && vendor/bin/pint --test tests/Feature/SeoIntel/FreeAssessmentGscLiveSmokeEvidenceContractTest.php",
+          "python3 -m json.tool backend/docs/seo/generated/free-assessment-gsc-live-smoke-evidence-contract.v1.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "git diff --check"
+        ],
+        "evidence": "PASS: FreeAssessmentGscLiveSmokeEvidenceContractTest (3 warning-only file_get_contents warnings, 107 assertions)\nPASS: Pint for FreeAssessmentGscLiveSmokeEvidenceContractTest.php\nPASS: JSON parse for free-assessment GSC live-smoke evidence contract\nPASS: YAML parse for docs/codex/pr-train.yaml\nPASS: JSON parse for docs/codex/pr-train-state.json\nPASS: git diff --check"
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to FA30-API-04 allowed paths: generated free-assessment GSC evidence contract, focused PHPUnit contract test, and docs/codex metadata. No live GSC call, URL submission, search queue, CMS write, import, sitemap, llms, canonical, noindex, JSON-LD, deploy, scheduler, or queue change."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #2327 GitHub checks passed: hygiene, Semgrep blocking secrets, supply-chain, semgrep SARIF non-blocking upload, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, and Semgrep OSS."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": "b12cff68782136210ade74b83e2f8ce8706282ae",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2327",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-22T16:37:20.369+00:00",
+        "status": "in_progress",
+        "note": "Started from clean origin/main worktree. Scope is limited to a docs/generated free-assessment GSC live-smoke evidence contract, focused PHPUnit contract, and docs/codex metadata. No live GSC API call, URL submission, indexing request, CMS write, search queue enqueue, import, sitemap, llms, canonical, noindex, JSON-LD, deploy, scheduler, queue, or fap-web scope is allowed."
+      },
+      {
+        "at": "2026-06-22T16:38:32.073+00:00",
+        "status": "local_validated",
+        "note": "Rebased onto latest origin/main, reran focused PHPUnit/Pint/JSON/YAML/diff checks, and validated path scope."
+      },
+      {
+        "at": "2026-06-22T16:39:26.087+00:00",
+        "status": "pr_open",
+        "note": "Opened PR #2327 after local validation and scope validation passed."
+      },
+      {
+        "at": "2026-06-22T16:45:26.941+00:00",
+        "status": "ready_to_merge",
+        "note": "All PR #2327 GitHub checks passed and scope was revalidated; ready for squash merge when final metadata commit checks pass."
       }
     ]
   }
