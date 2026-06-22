@@ -863,7 +863,11 @@ final class Mbti64CmsRevisionPromotionService
                 ->where('section_key', (string) ($section['section_key'] ?? ''))
                 ->first();
 
-            if (! $live instanceof PersonalityProfileVariantSection || ! $this->modelSubsetMatches($live, $section)) {
+            if (! $live instanceof PersonalityProfileVariantSection) {
+                return false;
+            }
+
+            if (! $this->modelSubsetMatches($live, $section)) {
                 return false;
             }
         }
@@ -881,21 +885,38 @@ final class Mbti64CmsRevisionPromotionService
                 continue;
             }
 
-            $actual = $model->getAttribute($key);
-            if (is_array($value)) {
-                if ($actual !== $value) {
-                    return false;
-                }
-
-                continue;
-            }
-
-            if ($actual !== $value) {
+            if (! $this->liveMatchValueEquals($model->getAttribute($key), $value)) {
                 return false;
             }
         }
 
         return true;
+    }
+
+    private function liveMatchValueEquals(mixed $actual, mixed $expected): bool
+    {
+        if (is_array($actual) || is_array($expected)) {
+            return $this->canonicalLiveMatchValue($actual) === $this->canonicalLiveMatchValue($expected);
+        }
+
+        return $actual === $expected;
+    }
+
+    private function canonicalLiveMatchValue(mixed $value): mixed
+    {
+        if (! is_array($value)) {
+            return $value;
+        }
+
+        foreach ($value as $key => $nested) {
+            $value[$key] = $this->canonicalLiveMatchValue($nested);
+        }
+
+        if (! array_is_list($value)) {
+            ksort($value);
+        }
+
+        return $value;
     }
 
     private function safeSectionKey(string $key): string
