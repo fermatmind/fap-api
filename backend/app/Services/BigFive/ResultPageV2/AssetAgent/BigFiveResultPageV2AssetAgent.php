@@ -46,6 +46,8 @@ final class BigFiveResultPageV2AssetAgent
 
     private const CONTENT_ASSET_SCHEMA_RELATIVE_PATH = 'content_assets/big5/result_page_v2/governance/content_asset_factory_spec/big5_content_asset_schema_v0_1.json';
 
+    private const PRODUCTION_OPS_RELATIVE_PATH = 'content_assets/big5/result_page_v2/qa/production_ops/v0_1';
+
     private const FORBIDDEN_PUBLIC_FIELDS = [
         'attempt_id',
         'private_url',
@@ -670,6 +672,87 @@ final class BigFiveResultPageV2AssetAgent
                 'ready_for_production' => false,
             ],
             'negative_guarantees' => $this->mergeCleanupNegativeGuarantees(),
+        ];
+    }
+
+    /**
+     * @param  array{
+     *   run_id?:string,
+     *   artifact_dir?:string,
+     *   production_ops_dir?:string
+     * }  $options
+     * @return array<string,mixed>
+     */
+    public function weeklyOps(array $options = []): array
+    {
+        $runId = $this->sanitizeRunId((string) ($options['run_id'] ?? ''));
+        $artifactDir = $this->artifactDir((string) ($options['artifact_dir'] ?? ''), $runId);
+        $productionOpsDir = $this->optionalPath(
+            (string) ($options['production_ops_dir'] ?? ''),
+            base_path(self::PRODUCTION_OPS_RELATIVE_PATH)
+        );
+
+        $this->ensureDirectory($artifactDir);
+
+        $opsReport = $this->readOptionalJson($productionOpsDir.'/big5_v2_production_ops_report_v0_1.json') ?? [];
+        $smoke = $this->readOptionalJson($productionOpsDir.'/big5_v2_production_ops_smoke_v0_1.json') ?? [];
+        $metrics = (array) ($opsReport['metrics'] ?? []);
+        $smokeContract = (array) ($smoke['smoke_contract'] ?? []);
+        $forbiddenTokens = array_values(array_map('strval', (array) ($smoke['forbidden_public_text_tokens'] ?? [])));
+
+        $report = [
+            'schema_version' => self::SCHEMA_VERSION,
+            'task' => 'weekly_ops_runner',
+            'runtime_use' => 'not_runtime',
+            'production_use_allowed' => false,
+            'ready_for_pilot' => false,
+            'ready_for_runtime' => false,
+            'ready_for_production' => false,
+            'run_id' => $runId,
+            'reporting_window_days' => (int) ($opsReport['reporting_window_days'] ?? 45),
+            'production_ops_reporting_ready' => (bool) ($opsReport['production_ops_reporting_ready'] ?? false),
+            'production_rollout_enabled' => (bool) ($opsReport['production_rollout_enabled'] ?? true),
+            'metrics_contract' => [
+                'v2_payload_coverage_rate' => $metrics['v2_payload_coverage_rate'] ?? null,
+                'fallback_hit_rate' => $metrics['fallback_hit_rate'] ?? null,
+                'malformed_rejection_reasons' => $metrics['malformed_rejection_reasons'] ?? null,
+                'validation_error_count' => $metrics['validation_error_count'] ?? null,
+                'audited_at_freshness' => $metrics['audited_at_freshness'] ?? null,
+            ],
+            'smoke_contract' => [
+                'pdf_private_link_check' => $smokeContract['pdf_private_link_check'] ?? null,
+                'footer_check' => $smokeContract['footer_check'] ?? null,
+                'legacy_engine_label_check' => $smokeContract['legacy_engine_label_check'] ?? null,
+                'controller_name_check' => $smokeContract['controller_name_check'] ?? null,
+                'payload_word_check' => $smokeContract['payload_word_check'] ?? null,
+                'registry_word_check' => $smokeContract['registry_word_check'] ?? null,
+                'forbidden_public_text_token_count' => count($forbiddenTokens),
+            ],
+            'evidence_output_policy' => $smoke['evidence_output_policy'] ?? [],
+            'negative_guarantees' => $this->weeklyOpsNegativeGuarantees(),
+        ];
+
+        $artifacts = [
+            'weekly_ops_report.json' => $this->writeJson($artifactDir.'/weekly_ops_report.json', $report),
+            'weekly_ops_report.md' => $this->writeText($artifactDir.'/weekly_ops_report.md', $this->buildWeeklyOpsMarkdown($report)),
+        ];
+
+        return [
+            'schema_version' => self::SCHEMA_VERSION,
+            'ok' => (bool) ($report['production_ops_reporting_ready'] ?? false) && ! (bool) ($report['production_rollout_enabled'] ?? true),
+            'status' => ((bool) ($report['production_ops_reporting_ready'] ?? false) && ! (bool) ($report['production_rollout_enabled'] ?? true)) ? 'success' : 'blocked',
+            'run_id' => $runId,
+            'artifact_dir' => $artifactDir,
+            'artifacts' => $artifacts,
+            'summary' => [
+                'production_ops_reporting_ready' => (bool) ($report['production_ops_reporting_ready'] ?? false),
+                'production_rollout_enabled' => (bool) ($report['production_rollout_enabled'] ?? true),
+                'forbidden_public_text_token_count' => count($forbiddenTokens),
+                'ready_for_pilot' => false,
+                'ready_for_runtime' => false,
+                'ready_for_production' => false,
+            ],
+            'negative_guarantees' => $this->weeklyOpsNegativeGuarantees(),
         ];
     }
 
@@ -2059,6 +2142,54 @@ final class BigFiveResultPageV2AssetAgent
         };
     }
 
+    /**
+     * @param  array<string,mixed>  $report
+     */
+    private function buildWeeklyOpsMarkdown(array $report): string
+    {
+        $lines = [
+            '# Big Five V2 Weekly Ops Report',
+            '',
+            '- runtime_use: not_runtime',
+            '- production_use_allowed: false',
+            '- ready_for_runtime: false',
+            '- ready_for_production: false',
+            '- production_rollout_enabled: '.$this->markdownScalar($report['production_rollout_enabled'] ?? null),
+            '- reporting_window_days: '.$this->markdownScalar($report['reporting_window_days'] ?? null),
+            '',
+            '## Metrics',
+            '',
+        ];
+
+        foreach ([
+            'v2_payload_coverage_rate',
+            'fallback_hit_rate',
+            'malformed_rejection_reasons',
+            'validation_error_count',
+            'audited_at_freshness',
+        ] as $metricKey) {
+            $lines[] = '- '.$metricKey.': '.(string) data_get($report, "metrics_contract.{$metricKey}.redaction", 'redacted_contract');
+        }
+
+        $lines = array_merge($lines, [
+            '',
+            '## Smoke',
+            '',
+            '- pdf_private_link_check: '.$this->markdownScalar(data_get($report, 'smoke_contract.pdf_private_link_check')),
+            '- footer_check: '.$this->markdownScalar(data_get($report, 'smoke_contract.footer_check')),
+            '- legacy_engine_label_check: '.$this->markdownScalar(data_get($report, 'smoke_contract.legacy_engine_label_check')),
+            '- controller_name_check: '.$this->markdownScalar(data_get($report, 'smoke_contract.controller_name_check')),
+            '- forbidden_public_text_token_count: '.$this->markdownScalar(data_get($report, 'smoke_contract.forbidden_public_text_token_count')),
+            '',
+            '## Deferred',
+            '',
+            '- No production rollout is enabled by this runner.',
+            '- No raw report bodies, private links, PDF files, attempt identifiers, or user score values are stored.',
+        ]);
+
+        return implode(PHP_EOL, $lines).PHP_EOL;
+    }
+
     private function ensureDirectory(string $path): void
     {
         if (! is_dir($path) && ! mkdir($path, 0775, true) && ! is_dir($path)) {
@@ -2274,6 +2405,29 @@ final class BigFiveResultPageV2AssetAgent
             'local_main_synced' => false,
             'post_merge_revalidation_run' => false,
             'auto_merge_performed' => false,
+        ];
+    }
+
+    /**
+     * @return array<string,bool>
+     */
+    private function weeklyOpsNegativeGuarantees(): array
+    {
+        return [
+            'database_write' => false,
+            'cms_write' => false,
+            'content_assets_write' => false,
+            'frontend_copy_write' => false,
+            'final_result_payload_generation' => false,
+            'runtime_flag_change' => false,
+            'release_snapshot_change' => false,
+            'production_import_gate_change' => false,
+            'rollout_gate_change' => false,
+            'stores_real_attempt_identifier' => false,
+            'stores_private_link' => false,
+            'stores_pdf_file' => false,
+            'stores_raw_report_body' => false,
+            'stores_user_score_values' => false,
         ];
     }
 }

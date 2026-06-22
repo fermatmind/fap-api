@@ -24580,6 +24580,46 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: B5-RESULT-WEEKLY-OPS-RUNNER-01
+    repo: fap-api
+    depends_on:
+      - B5-RESULT-AUTO-MERGE-CLEANUP-01
+    branch: codex/big5-v2-weekly-ops-runner
+    title: "B5-RESULT-WEEKLY-OPS-RUNNER-01: Schedule Big Five V2 weekly ops report"
+    train_scope: big5_result_page_v2_asset_agent_automation
+    status: user_authorized
+    scope:
+      - Add a weekly Big Five V2 ops report action that emits redacted artifact-only JSON and Markdown reports.
+      - Schedule the weekly ops runner without enabling production rollout, release snapshots, production imports, or frontend copy.
+      - Include V2 coverage, fallback, malformed reason, validation count, audit freshness, and PDF/private URL/footer/token smoke contract fields.
+    allowed_paths:
+      - backend/bootstrap/app.php
+      - backend/app/Console/Commands/BigFiveResultPageV2AssetAgentAuditCommand.php
+      - backend/app/Services/BigFive/ResultPageV2/AssetAgent/BigFiveResultPageV2AssetAgent.php
+      - backend/tests/Feature/Console/BigFiveResultPageV2AgentAutomationTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2AssetAgentTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add fap-web copy, generate final frontend payloads, make big5_report_engine_v2 primary, enable production rollout, or touch release/import/rollout gates.
+      - Store private URLs, attempt ids, PDF files, raw report bodies, user score values, or raw payloads in weekly ops artifacts.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AgentAutomationTest --no-ansi
+      - cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent weekly-ops --run-id=weekly-ops --artifact-dir=artifacts/big5_result_page_v2_agent/testing-weekly-ops --json --no-ansi && rm -rf backend/artifacts/big5_result_page_v2_agent/testing-weekly-ops
+      - cd backend && php artisan schedule:list --no-ansi
+      - git diff --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: RIASEC-RESULT-ASSET-AGENT-RUNBOOK-01
     repo: fap-api
     branch: codex/riasec-result-asset-agent-runbook-01
