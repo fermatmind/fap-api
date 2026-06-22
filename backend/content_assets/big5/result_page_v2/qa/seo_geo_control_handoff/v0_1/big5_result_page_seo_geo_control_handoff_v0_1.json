@@ -1,0 +1,139 @@
+{
+  "schema": "fap.big5.result_page_v2.seo_geo_control_handoff.v0_1",
+  "package_key": "big5_result_page_v2.seo_geo_control_handoff.v0_1",
+  "version": "0.1",
+  "mode": "seo_geo_control_handoff_advisory",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_seo_geo_review": true,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "source_readiness": {
+    "readiness_artifact_source": "fap-api sanitized readiness and analytics handoff evidence",
+    "share_safety_missing_count": 0,
+    "validation_error_count": 0,
+    "leak_hit_count": 0,
+    "analytics_handoff_available": true,
+    "readiness_pass": true
+  },
+  "control_surfaces": {
+    "big_five_hub": {
+      "status": "planned_control_only",
+      "purpose": "Coordinate a hub page for Big Five/OCEAN intent without publishing content in this PR.",
+      "primary_intents": [
+        "free Big Five personality test",
+        "Big Five full report",
+        "OCEAN personality test",
+        "Big Five personality traits",
+        "大五人格测试",
+        "大五人格完整报告"
+      ],
+      "required_boundaries": [
+        "backend_or_cms_authority_required",
+        "no_frontend_copy_fallback",
+        "method_boundary_required",
+        "share_boundary_required",
+        "report_access_boundary_required"
+      ],
+      "next_owner": "seo_control_agent"
+    },
+    "big_five_vs_mbti": {
+      "status": "planned_control_only",
+      "purpose": "Plan a comparison control surface that positions Big Five as trait-based and MBTI as label-oriented without unsupported superiority claims.",
+      "primary_intents": [
+        "Big Five vs MBTI",
+        "大五人格和 MBTI 区别",
+        "which personality test is more reliable"
+      ],
+      "required_boundaries": [
+        "no_diagnostic_claims",
+        "no_employment_screening_claims",
+        "no_success_prediction_claims",
+        "method_boundary_required",
+        "citation_policy_required"
+      ],
+      "next_owner": "seo_control_agent"
+    },
+    "methodology": {
+      "status": "planned_control_only",
+      "purpose": "Plan a methodology surface explaining OCEAN trait interpretation, limitations, and safe use.",
+      "primary_intents": [
+        "Big Five methodology",
+        "OCEAN model explanation",
+        "Big Five personality traits reliability",
+        "大五人格方法说明"
+      ],
+      "required_boundaries": [
+        "no_medical_or_clinical_diagnosis",
+        "no_hiring_screening_language",
+        "no_single_score_decision",
+        "source_ledger_required",
+        "claim_boundary_required"
+      ],
+      "next_owner": "seo_control_agent"
+    },
+    "ocean_trait_explainers": {
+      "status": "planned_control_only",
+      "purpose": "Plan individual OCEAN trait explainers without generating publishable page copy.",
+      "primary_intents": [
+        "openness personality trait",
+        "conscientiousness personality trait",
+        "extraversion personality trait",
+        "agreeableness personality trait",
+        "neuroticism personality trait",
+        "开放性",
+        "尽责性",
+        "外向性",
+        "宜人性",
+        "神经质"
+      ],
+      "required_boundaries": [
+        "continuous_trait_language",
+        "non_diagnostic",
+        "no_hiring_screening_language",
+        "no_fixed_type_language",
+        "public_safe_summary_only"
+      ],
+      "next_owner": "seo_control_agent"
+    }
+  },
+  "geo_aeo_controls": {
+    "status": "planned_control_only",
+    "answer_block_policy": "Future answer blocks must be backend/CMS-authoritative, source-bounded, and reviewed before publication.",
+    "comparison_table_policy": "Future comparison tables must separate trait explanation, label explanation, methodology, and safe-use limitations.",
+    "faq_policy": "Future FAQ entries must avoid diagnosis, hiring, income, partner-fit, and guaranteed outcome claims.",
+    "citation_policy": "Future citations must use source-ledger-approved references and avoid copying restricted instruments or protected text."
+  },
+  "blocked_actions": [
+    "cms_write",
+    "frontend_copy_write",
+    "runtime_seo_metadata_change",
+    "structured_data_runtime_change",
+    "url_publication",
+    "search_submission",
+    "sitemap_runtime_change",
+    "llms_runtime_change",
+    "canonical_runtime_change",
+    "noindex_runtime_change",
+    "json_ld_runtime_change",
+    "production_deploy",
+    "production_import",
+    "rollout_gate_change"
+  ],
+  "handoff_boundaries": {
+    "database_write": false,
+    "cms_write": false,
+    "frontend_copy_write": false,
+    "runtime_flag_change": false,
+    "seo_runtime_change": false,
+    "structured_data_change": false,
+    "search_submission": false,
+    "url_publication": false,
+    "production_import_gate_change": false,
+    "rollout_gate_change": false,
+    "manual_deploy": false
+  },
+  "next_gate": "BIG5-CONTROLLED-PILOT-GATE-01"
+}
+

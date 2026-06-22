@@ -1,0 +1,42 @@
+{
+  "schema": "fap.big5.result_page_v2.seo_geo_control_handoff_summary.v0_1",
+  "package_key": "big5_result_page_v2.seo_geo_control_handoff.v0_1",
+  "version": "0.1",
+  "mode": "seo_geo_control_handoff_advisory",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_seo_geo_review": true,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "surface_count": 4,
+  "surface_keys": [
+    "big_five_hub",
+    "big_five_vs_mbti",
+    "methodology",
+    "ocean_trait_explainers"
+  ],
+  "geo_aeo_control_count": 4,
+  "blocked_action_count": 14,
+  "share_safety_missing_count": 0,
+  "validation_error_count": 0,
+  "leak_hit_count": 0,
+  "redaction_status": "pass",
+  "production_blocked": true,
+  "backend_authority": true,
+  "frontend_copy_added": false,
+  "negative_guarantees": {
+    "database_write": false,
+    "cms_write": false,
+    "frontend_copy_write": false,
+    "runtime_flag_change": false,
+    "seo_runtime_change": false,
+    "structured_data_change": false,
+    "search_submission": false,
+    "url_publication": false,
+    "production_import_gate_change": false,
+    "rollout_gate_change": false,
+    "manual_deploy": false
+  }
+}
+

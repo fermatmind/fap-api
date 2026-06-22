@@ -57068,7 +57068,7 @@
     "repo": "fap-api",
     "branch": "codex/free-full-report-mode-feature-flag-01",
     "base": "main",
-    "status": "pr_open",
+    "status": "merged",
     "train_scope": "free_full_report_mode",
     "title": "feat(growth): add free full report mode for assessments",
     "checks": {
@@ -59176,16 +59176,16 @@
         "evidence": "Changed files are limited to the Big Five V2 analytics handoff QA package, focused PHPUnit, and docs/codex metadata including #2331 merge reconciliation. No runtime wrapper, controller, route, DB migration, fap-web copy, CMS, SEO runtime, rollout, import, release snapshot, dashboard, event emission, analytics refresh command, or deploy file changed."
       },
       "github": {
-        "status": "pending",
-        "evidence": "Opened https://github.com/fermatmind/fap-api/pull/2333 on head e90ca9c62774c0b726b7cfbc740a8019818fc3fa."
+        "status": "pass",
+        "evidence": "PR #2333 merged at 2026-06-22T17:15:47Z with merge commit 8d8e06142d89ebc29fd26211459d58a343710b0b; required GitHub checks passed before merge."
       }
     },
     "failure_reason": null,
-    "commit_sha": "e90ca9c62774c0b726b7cfbc740a8019818fc3fa",
+    "commit_sha": "ee57284d822f3795bb1c8766763778fd39ce595e",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2333",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-22T17:15:47Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-23T01:20:00Z",
@@ -59201,6 +59201,72 @@
         "at": "2026-06-23T01:45:00Z",
         "status": "pr_open",
         "note": "Opened https://github.com/fermatmind/fap-api/pull/2333 after local validation and scope validation passed."
+      },
+      {
+        "at": "2026-06-22T17:15:47Z",
+        "status": "merged",
+        "note": "PR #2333 merged with merge commit 8d8e06142d89ebc29fd26211459d58a343710b0b. origin/main contains the merge commit, the remote task branch was deleted, local main was synced, and local cleanup was executed."
+      }
+    ]
+  },
+  "BIG5-RESULT-PAGE-SEO-GEO-CONTROL-HANDOFF-01": {
+    "repo": "fap-api",
+    "branch": "codex/big5-result-page-seo-geo-control-handoff",
+    "base": "main",
+    "status": "local_validated",
+    "train_scope": "big5_result_page_agent_readiness_to_pilot",
+    "title": "BIG5-RESULT-PAGE-SEO-GEO-CONTROL-HANDOFF-01: Add Big Five SEO/GEO control handoff",
+    "depends_on": [
+      "BIG5-RESULT-PAGE-ANALYTICS-HANDOFF-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly provided the Big Five readiness-to-pilot /goal and listed this scoped PR."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "fap-api PR #2333 is merged into origin/main as 8d8e06142d89ebc29fd26211459d58a343710b0b."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "cd backend && php artisan test --filter=BigFiveResultPageV2SeoGeoControlHandoffTest --no-ansi",
+          "find backend/content_assets/big5/result_page_v2/qa/seo_geo_control_handoff/v0_1 -name '*.json' -print -exec python3 -m json.tool {} >/dev/null \\;",
+          "cd backend/content_assets/big5/result_page_v2/qa/seo_geo_control_handoff/v0_1 && shasum -a 256 -c SHA256SUMS",
+          "cd backend && vendor/bin/pint --test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2SeoGeoControlHandoffTest.php",
+          "cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='test_runtime_paths_have_no_uncommitted_diff' --no-ansi",
+          "git diff --check",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+        ],
+        "evidence": "Focused SeoGeoControlHandoffTest passed with 6 PHPUnit warning classifications and 119 assertions. JSON parse, SHA256SUMS verification, focused Pint, runtime-freeze guard, YAML/JSON metadata parse, and git diff check passed."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to the Big Five V2 SEO/GEO control handoff QA package, focused PHPUnit, and docs/codex metadata including #2333 merge reconciliation. No runtime wrapper, controller, route, DB migration, fap-web copy, CMS, SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, search submission, rollout, import, release snapshot, dashboard, analytics refresh command, or deploy file changed."
+      },
+      "github": {
+        "status": "not_started",
+        "evidence": "PR not opened yet."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-23T02:00:00Z",
+        "status": "in_progress",
+        "note": "Started from synced fap-api main after #2333 merge cleanup. Scope is a backend-only SEO/GEO control handoff evidence package and focused tests."
+      },
+      {
+        "at": "2026-06-23T02:15:00Z",
+        "status": "local_validated",
+        "note": "Added a redacted advisory SEO/GEO control handoff package covering Big Five Hub, Big Five vs MBTI, methodology, OCEAN trait explainer, GEO/AEO control, and blocked publish/runtime actions. Focused tests, checksum, metadata, Pint, runtime-freeze guard, and diff checks passed."
       }
     ]
   },
