@@ -57970,7 +57970,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-v2-mechanical-fix-apply",
     "base": "main",
-    "status": "local_validated",
+    "status": "pr_open",
     "train_scope": "big5_result_page_v2_asset_agent_execution_runner",
     "title": "B5-RESULT-MECHANICAL-FIX-APPLY-01: Apply limited Big Five V2 mechanical fixes",
     "depends_on": [
@@ -58003,8 +58003,8 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "64421c3904bf13b927d1b998932e499418fd653a",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2271",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -58013,6 +58013,11 @@
         "at": "2026-06-22T03:05:00Z",
         "status": "local_validated",
         "note": "Implemented explicit artifact-only mechanical fix apply for format_json, refresh_sha256, and sort_json_list; security, supply-chain, test logic, content semantic, runtime, production, and frontend-copy fixes remain blocked."
+      },
+      {
+        "at": "2026-06-22T03:10:00Z",
+        "status": "pr_open",
+        "note": "Opened PR #2271 after local validation and scope validation passed."
       }
     ]
   },
