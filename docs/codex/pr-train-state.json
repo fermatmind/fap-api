@@ -59213,7 +59213,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-result-page-seo-geo-control-handoff",
     "base": "main",
-    "status": "local_validated",
+    "status": "pr_open",
     "train_scope": "big5_result_page_agent_readiness_to_pilot",
     "title": "BIG5-RESULT-PAGE-SEO-GEO-CONTROL-HANDOFF-01: Add Big Five SEO/GEO control handoff",
     "depends_on": [
@@ -59247,13 +59247,13 @@
         "evidence": "Changed files are limited to the Big Five V2 SEO/GEO control handoff QA package, focused PHPUnit, and docs/codex metadata including #2333 merge reconciliation. No runtime wrapper, controller, route, DB migration, fap-web copy, CMS, SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, search submission, rollout, import, release snapshot, dashboard, analytics refresh command, or deploy file changed."
       },
       "github": {
-        "status": "not_started",
-        "evidence": "PR not opened yet."
+        "status": "pending",
+        "evidence": "Opened https://github.com/fermatmind/fap-api/pull/2335 on head 6628e1c25f5de6d21e2157bfe97f4e5b6791c997."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "6628e1c25f5de6d21e2157bfe97f4e5b6791c997",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2335",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -59267,6 +59267,11 @@
         "at": "2026-06-23T02:15:00Z",
         "status": "local_validated",
         "note": "Added a redacted advisory SEO/GEO control handoff package covering Big Five Hub, Big Five vs MBTI, methodology, OCEAN trait explainer, GEO/AEO control, and blocked publish/runtime actions. Focused tests, checksum, metadata, Pint, runtime-freeze guard, and diff checks passed."
+      },
+      {
+        "at": "2026-06-23T02:25:00Z",
+        "status": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/2335 after local validation and scope validation passed."
       }
     ]
   },
