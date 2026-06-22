@@ -115,6 +115,7 @@ use App\Console\Commands\EnneagramExportProductionEquivalentCandidatePayloads;
 use App\Console\Commands\EnneagramImportInactiveCandidateRelease;
 use App\Console\Commands\EnneagramResultPageContentBatchCommand;
 use App\Console\Commands\EnneagramResultPageAgentReadinessCommand;
+use App\Console\Commands\EnneagramResultPageCandidateStagingHarnessCommand;
 use App\Console\Commands\EnneagramResultPageOpsControlPlaneCommand;
 use App\Console\Commands\EnneagramResultPageOpsRunnerCommand;
 use App\Console\Commands\EnneagramRollbackInactiveCandidateRelease;
@@ -249,6 +250,7 @@ class Kernel extends ConsoleKernel
         EnneagramImportInactiveCandidateRelease::class,
         EnneagramResultPageContentBatchCommand::class,
         EnneagramResultPageAgentReadinessCommand::class,
+        EnneagramResultPageCandidateStagingHarnessCommand::class,
         EnneagramResultPageOpsControlPlaneCommand::class,
         EnneagramResultPageOpsRunnerCommand::class,
         EnneagramRollbackInactiveCandidateRelease::class,

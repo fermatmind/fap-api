@@ -1,0 +1,33 @@
+{
+  "schema_version": "fap.enneagram.result_page.candidate_staging_harness.v0.1",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "expected_payload_count": 630,
+  "launch_scope": ["1R-A", "1R-B", "1R-C", "1R-D", "1R-E", "1R-F", "1R-G", "1R-H"],
+  "out_of_launch_scope": ["1R-I", "1R-J"],
+  "checks": [
+    "candidate_manifest_hash",
+    "runtime_registry_hash",
+    "payload_count",
+    "scope",
+    "source_mapping_zero",
+    "metadata_leakage_zero",
+    "forbidden_claim_zero",
+    "legacy_residual_zero",
+    "fc144_boundary_zero"
+  ],
+  "staging_import_policy": {
+    "inactive_import_allowed": true,
+    "activation_allowed": false,
+    "production_import_allowed": false,
+    "runtime_switch_allowed": false
+  },
+  "negative_guarantees": {
+    "bulk_content_generation_happened": false,
+    "production_import_happened": false,
+    "production_activation_happened": false,
+    "runtime_switch_happened": false,
+    "production_write_happened": false,
+    "frontend_change_happened": false
+  }
+}
