@@ -58413,12 +58413,15 @@
           "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi",
           "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2ProductionOpsTest --no-ansi",
           "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=ReportPdfCenterTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=/tmp/fap-ci-bigfive-local-m8.sqlite QUEUE_CONNECTION=sync php artisan test --filter '(BigFive|Big5|NonMbtiReportContractRegressionTest)' --no-ansi",
           "cd backend && vendor/bin/pint --test app/Console/Commands/BigFiveResultPageV2AssetAgentAuditCommand.php app/Filament/Ops/Resources/ReportSnapshotResource/Support/ReportSnapshotExplorerSupport.php app/Services/BigFive/ResultPageV2/AssetAgent/BigFiveResultPageV2AssetAgent.php app/Services/BigFive/ResultPageV2/BigFiveResultPageV2ProductionOpsMetrics.php tests/Feature/Ops/ReportPdfCenterTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2AssetAgentTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2ProductionOpsTest.php",
+          "cd backend && vendor/bin/pint --test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2ProductionOpsTest.php",
           "git diff --check",
           "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
           "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
         ],
-        "evidence": "Targeted AssetAgentTest, ProductionOpsTest, ReportPdfCenterTest, Pint --test, git diff --check, JSON parse, and YAML parse passed locally."
+        "evidence": "Targeted AssetAgentTest, ProductionOpsTest, ReportPdfCenterTest, CoreBodyPreviewTest, CI-equivalent Big Five filter, Pint --test, git diff --check, JSON parse, and YAML parse passed locally. The first GitHub verify-bigfive failure was scoped to this PR: the new missing-table test dropped report_snapshots in a broad suite and the new production ops metrics service needed freeze classifier allowlisting; both were fixed in current scope."
       },
       "scope_validation": {
         "status": "pass",
@@ -58450,6 +58453,11 @@
         "at": "2026-06-22T05:41:11Z",
         "status": "pr_open",
         "note": "Opened PR #2279 after local validation and scope validation passed."
+      },
+      {
+        "at": "2026-06-22T05:54:15Z",
+        "status": "ci_fix_local_validated",
+        "note": "Inspected failed verify-bigfive jobs. Fixed current-scope test pollution from dropping report_snapshots in broad suites and added production ops metrics service to the Big Five V2 freeze classifier allowlist. Local CI-equivalent Big Five filter passed with 976 passed and 1 expected skip."
       }
     ]
   }
