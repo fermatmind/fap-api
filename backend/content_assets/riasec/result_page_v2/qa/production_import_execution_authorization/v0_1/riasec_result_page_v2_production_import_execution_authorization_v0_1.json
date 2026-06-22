@@ -1,0 +1,90 @@
+{
+  "schema_version": "fap.riasec.result_page_v2.production_import_execution_authorization.v0.1",
+  "task_id": "RIASEC-RESULT-V2-PRODUCTION-IMPORT-EXECUTION-AUTHORIZATION-01",
+  "created_date": "2026-06-23",
+  "record_type": "production_import_execution_authorization",
+  "decision": "NO-GO_PENDING_EXPLICIT_SECOND_AUTHORIZATION",
+  "authorization_status": "not_authorized_for_execution",
+  "scope": "docs_artifact_only_authorization_record",
+  "inputs_reviewed": {
+    "production_approved_snapshot": {
+      "snapshot_id": "riasec_result_page_v2_prod_approved_2026_06_22_01",
+      "path": "backend/content_assets/riasec/result_page_v2/releases/production_approved/v0_1/riasec_result_page_v2_prod_approved_2026_06_22_01.json",
+      "sha256": "999dc22a4c01b50891b342d75713a2fda1ce99b79933470f91fe1073744e0741",
+      "ready_for_production_import": true,
+      "ready_for_production_rollout": false
+    },
+    "production_import_approval_evidence": {
+      "approval_id": "riasec_result_page_v2_production_import_approval_2026_06_22_01",
+      "path": "backend/content_assets/riasec/result_page_v2/governance/production_approval_evidence/v0_1/riasec_result_page_v2_production_import_approval_2026_06_22_01.json",
+      "sha256": "1fecb849e2ee47d2234631ad10614e327463928be2a390a0836552acdff23095",
+      "decision": "GO"
+    },
+    "authorized_snapshot_import_gate_dry_run": {
+      "path": "backend/content_assets/riasec/result_page_v2/qa/production_import_gate_dry_run_authorized_snapshot/v0_1/riasec_result_page_v2_production_import_gate_dry_run_authorized_snapshot_v0_1.json",
+      "sha256": "038f8118a992caf58112ff06e225272bfdaeda603e4d5f26ad3ac30aab89b55d",
+      "dry_run_status": "pass_read_only",
+      "decision": "GO_FOR_IMPORT_EXECUTION_AUTHORIZATION_ONLY"
+    },
+    "prior_production_import_execution_no_go": {
+      "doc_path": "backend/docs/riasec/riasec-result-page-v2-production-import-execution-2026-06-22.md",
+      "artifact_path": "backend/content_assets/riasec/result_page_v2/qa/production_import_execution/v0_1/riasec_result_page_v2_production_import_execution_no_go_v0_1.json"
+    }
+  },
+  "preconditions": {
+    "production_approved_snapshot_exists": true,
+    "import_gate_dry_run_passed_for_exact_approved_snapshot": true,
+    "complete_human_import_approval_evidence_exists": true,
+    "explicit_second_execution_authorization_present": false,
+    "cms_import_command_target_authorized_for_execution": false,
+    "rollout_separation_preserved": true
+  },
+  "required_minimal_execution_authorization": {
+    "required_operator_statement": "我授权执行 RIASEC Result Page V2 production import execution。",
+    "approved_snapshot_id": "riasec_result_page_v2_prod_approved_2026_06_22_01",
+    "approved_snapshot_sha256": "999dc22a4c01b50891b342d75713a2fda1ce99b79933470f91fe1073744e0741",
+    "approval_evidence_id": "riasec_result_page_v2_production_import_approval_2026_06_22_01",
+    "dry_run_artifact_sha256": "038f8118a992caf58112ff06e225272bfdaeda603e4d5f26ad3ac30aab89b55d",
+    "scope": {
+      "tenant_ids": [
+        "single_owner_global"
+      ],
+      "form_codes": [
+        "riasec_60",
+        "riasec_140"
+      ],
+      "locales": [
+        "zh-CN"
+      ],
+      "allowlist": [
+        "owner_manual_import_only"
+      ]
+    },
+    "rollback_kill_switch_confirmed": "yes",
+    "kill_switch_ref": "riasec_result_page_v2.production_emergency_disabled",
+    "post_deploy_smoke_procedure_id": "riasec_result_page_v2_post_deploy_smoke_v0_1",
+    "rollout_separation_confirmation": "确认本授权只允许 production import execution，不允许 rollout。"
+  },
+  "negative_guarantees": {
+    "production_import_command_run": false,
+    "cms_write_performed": false,
+    "runtime_change_performed": false,
+    "environment_change_performed": false,
+    "production_rollout_opened": false,
+    "production_rollout_performed": false,
+    "production_gate_enabled": false,
+    "approved_snapshot_modified": false,
+    "source_rc_snapshot_modified": false,
+    "staging_only_assets_marked_production_ready": false,
+    "codex_approved_production_activation": false
+  },
+  "go_no_go": {
+    "ready_to_request_explicit_second_import_execution_authorization": true,
+    "production_import_execution_allowed_now": false,
+    "cms_production_write_allowed_now": false,
+    "runtime_production_enablement_allowed_now": false,
+    "production_rollout_allowed_now": false,
+    "import_approval_counts_as_rollout_approval": false,
+    "next_pr_after_explicit_authorization": "RIASEC-RESULT-V2-PRODUCTION-IMPORT-EXECUTION-01"
+  }
+}
