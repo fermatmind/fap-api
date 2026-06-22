@@ -28,6 +28,7 @@ final class PersonalityMbti64CmsProjectionDraft extends Command
         {--qa= : Path to the MBTI64 agent expansion QA JSON artifact}
         {--dry-run : Validate and plan without database writes}
         {--write : Create CMS projection draft revision rows}
+        {--visible-query-backed-3 : Dry-run only; restrict planning to the approved 3 query-backed visible MBTI64 URLs}
         {--json : Emit the full JSON summary}
         {--output= : Optional path to write the JSON summary}
         {--draft-only : Required for --write; confirms revision draft only}
@@ -70,6 +71,10 @@ final class PersonalityMbti64CmsProjectionDraft extends Command
 
         if (! $write && ! $dryRun) {
             throw new RuntimeException('Either --dry-run or --write is required.');
+        }
+
+        if ($write && (bool) $this->option('visible-query-backed-3')) {
+            throw new RuntimeException('--visible-query-backed-3 is dry-run only and cannot be combined with --write.');
         }
 
         if ($write) {
@@ -144,6 +149,7 @@ final class PersonalityMbti64CmsProjectionDraft extends Command
         return [
             'dry_run' => (bool) $this->option('dry-run'),
             'write' => (bool) $this->option('write'),
+            'visible_query_backed_3' => (bool) $this->option('visible-query-backed-3'),
             'draft_only' => (bool) $this->option('draft-only'),
             'no_publish' => (bool) $this->option('no-publish'),
             'no_index' => (bool) $this->option('no-index'),

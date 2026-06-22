@@ -18,6 +18,12 @@ final class Mbti64CmsProjectionDraftWriter
 
     private const QA_ARTIFACT = 'MBTI64-PUBLIC-PROFILE-AGENT-EXPANSION-88-QA-01';
 
+    private const VISIBLE_QUERY_BACKED_3_URLS = [
+        'https://fermatmind.com/en/personality/enfj-a',
+        'https://fermatmind.com/zh/personality/intp-a',
+        'https://fermatmind.com/zh/personality/esfp-a',
+    ];
+
     private const FORBIDDEN_ROUTE_PATTERNS = [
         '#/results?(?:/|$)#i',
         '#/orders?(?:/|$)#i',
@@ -69,9 +75,10 @@ final class Mbti64CmsProjectionDraftWriter
         $errors = $this->validatePackageAndQa($package, $qa);
         $warnings = array_values(array_filter((array) ($qa['warnings'] ?? []), static fn (mixed $warning): bool => is_string($warning)));
         $qaResultsByUrl = $this->qaResultsByUrl($qa);
+        $recommendations = $this->recommendationsForOptions($package, $options, $write, $errors);
 
         $preparedRows = [];
-        foreach ($this->recommendations($package) as $position => $recommendation) {
+        foreach ($recommendations as $position => $recommendation) {
             $identity = $this->identityForRecommendation($recommendation);
             if ($identity === null) {
                 $errors[] = [
@@ -136,7 +143,7 @@ final class Mbti64CmsProjectionDraftWriter
         }
 
         if ($errors !== []) {
-            return array_merge($this->baseSummary($package, $qa, $sourceSha256, $qaSha256, $write), [
+            return array_merge($this->baseSummary($package, $qa, $sourceSha256, $qaSha256, $write, $options), [
                 'ok' => false,
                 'status' => 'fail',
                 'row_count' => count($preparedRows),
@@ -180,7 +187,7 @@ final class Mbti64CmsProjectionDraftWriter
             unset($preparedRow);
         }
 
-        return array_merge($this->baseSummary($package, $qa, $sourceSha256, $qaSha256, $write), [
+        return array_merge($this->baseSummary($package, $qa, $sourceSha256, $qaSha256, $write, $options), [
             'ok' => true,
             'status' => 'pass',
             'row_count' => count($preparedRows),
@@ -270,6 +277,48 @@ final class Mbti64CmsProjectionDraftWriter
             is_array($package['recommendations'] ?? null) ? $package['recommendations'] : [],
             static fn (mixed $item): bool => is_array($item)
         ));
+    }
+
+    /**
+     * @param  array<string,mixed>  $package
+     * @param  array<string,mixed>  $options
+     * @param  list<array<string,string>>  $errors
+     * @return list<array<string,mixed>>
+     */
+    private function recommendationsForOptions(array $package, array $options, bool $write, array &$errors): array
+    {
+        $recommendations = $this->recommendations($package);
+        if (! (bool) ($options['visible_query_backed_3'] ?? false)) {
+            return $recommendations;
+        }
+
+        if ($write) {
+            $errors[] = [
+                'field' => 'options.visible_query_backed_3',
+                'code' => 'visible_query_backed_subset_write_not_allowed',
+                'message' => 'Visible query-backed 3-page subset is dry-run only.',
+            ];
+        }
+
+        $allowed = array_fill_keys(self::VISIBLE_QUERY_BACKED_3_URLS, true);
+        $subset = array_values(array_filter(
+            $recommendations,
+            static fn (array $item): bool => isset($allowed[(string) ($item['target_url'] ?? '')])
+        ));
+        $subsetUrls = array_map(static fn (array $item): string => (string) ($item['target_url'] ?? ''), $subset);
+        sort($subsetUrls);
+        $expectedUrls = self::VISIBLE_QUERY_BACKED_3_URLS;
+        sort($expectedUrls);
+
+        if ($subsetUrls !== $expectedUrls) {
+            $errors[] = [
+                'field' => 'recommendations',
+                'code' => 'visible_query_backed_subset_required_urls_missing',
+                'message' => 'The visible query-backed subset must resolve exactly the 3 approved URLs.',
+            ];
+        }
+
+        return $subset;
     }
 
     /**
@@ -504,7 +553,7 @@ final class Mbti64CmsProjectionDraftWriter
      * @param  array<string,mixed>  $qa
      * @return array<string,mixed>
      */
-    private function baseSummary(array $package, array $qa, string $sourceSha256, string $qaSha256, bool $write): array
+    private function baseSummary(array $package, array $qa, string $sourceSha256, string $qaSha256, bool $write, array $options): array
     {
         return [
             'artifact' => 'MBTI64-CMS-PROJECTION-DRAFT-88-01',
@@ -523,6 +572,23 @@ final class Mbti64CmsProjectionDraftWriter
             'sitemap_llms_release_attempted' => false,
             'search_release_attempted' => false,
             'writes_committed' => false,
+            'subset' => $this->subsetSummary($options),
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $options
+     * @return array<string,mixed>
+     */
+    private function subsetSummary(array $options): array
+    {
+        $enabled = (bool) ($options['visible_query_backed_3'] ?? false);
+
+        return [
+            'mode' => $enabled ? 'visible_query_backed_3' : 'full_88',
+            'enabled' => $enabled,
+            'dry_run_only' => $enabled,
+            'allowed_urls' => $enabled ? self::VISIBLE_QUERY_BACKED_3_URLS : [],
         ];
     }
 
