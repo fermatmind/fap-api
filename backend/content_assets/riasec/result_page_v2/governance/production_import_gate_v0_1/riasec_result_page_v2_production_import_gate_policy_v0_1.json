@@ -1,0 +1,45 @@
+{
+  "schema_version": "riasec_result_page_v2_production_import_gate_policy_v0_1",
+  "package": "riasec_result_page_v2_production_import_gate_policy",
+  "version": "v0_1",
+  "mode": "import_gate_policy",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_production": false,
+  "production_rollout_enabled": false,
+  "cms_write_performed": false,
+  "fail_closed": true,
+  "reject_staging_only_artifacts": true,
+  "required_checks": [
+    "manifest",
+    "sha256",
+    "release_snapshot",
+    "rendered_qa_evidence",
+    "all_surface_pass_evidence",
+    "approval_evidence"
+  ],
+  "reject_when": [
+    "missing_manifest",
+    "invalid_manifest_json",
+    "missing_snapshot",
+    "missing_snapshot_file",
+    "snapshot_sha256_mismatch",
+    "release_snapshot_hash_mismatch",
+    "release_snapshot_not_immutable",
+    "release_candidate_required",
+    "production_use_allowed_required",
+    "staging_only_manifest_rejected",
+    "staging_only_snapshot_rejected",
+    "rendered_qa_evidence_required",
+    "all_surface_pass_evidence_required",
+    "approval_evidence_required",
+    "cms_write_detected",
+    "production_rollout_enabled"
+  ],
+  "production_status": {
+    "current_state": "NO-GO",
+    "production_import_enabled": false,
+    "production_rollout_enabled": false,
+    "human_production_approval_required": true
+  }
+}
