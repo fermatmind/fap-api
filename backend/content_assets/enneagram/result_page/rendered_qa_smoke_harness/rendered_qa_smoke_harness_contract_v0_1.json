@@ -1,0 +1,34 @@
+{
+  "schema_version": "fap.enneagram.result_page.rendered_qa_smoke_harness.v0.1",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "allowed_modes": ["auto-to-staging", "auto-to-report"],
+  "required_evidence": [
+    "web_rendered_qa",
+    "api_smoke",
+    "rollback_simulation"
+  ],
+  "web_rendered_qa": {
+    "repo": "fap-web",
+    "command_template": "PHASE8B_CANDIDATE_DIR=<candidate-dir> pnpm exec playwright test tests/e2e/enneagram-phase8c-production-equivalent-candidate-e2e.spec.ts",
+    "production_execution_allowed": false
+  },
+  "api_smoke": {
+    "repo": "fap-api",
+    "command_template": "php artisan enneagram:result-page-candidate-staging-harness audit --candidate-dir=<candidate-dir> --strict --json",
+    "production_execution_allowed": false
+  },
+  "rollback_simulation": {
+    "execution_policy": "plan_only_until_manual_production_gate",
+    "production_rollback_allowed_for_agent": false
+  },
+  "negative_guarantees": {
+    "bulk_content_generation_happened": false,
+    "production_import_happened": false,
+    "production_activation_happened": false,
+    "production_rollback_happened": false,
+    "runtime_switch_happened": false,
+    "production_write_happened": false,
+    "frontend_change_happened": false
+  }
+}
