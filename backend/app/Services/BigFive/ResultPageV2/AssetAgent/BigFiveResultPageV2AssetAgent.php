@@ -21,6 +21,8 @@ final class BigFiveResultPageV2AssetAgent
 
     private const OPS_REPORT_SCHEMA_VERSION = 'fap.big5.result_page_v2.asset_agent.ops_report.v0.1';
 
+    private const READINESS_SCHEMA_VERSION = 'fap.big5.result_page_agent.readiness.v0.1';
+
     public const DEFAULT_ARTIFACT_RELATIVE_DIR = 'artifacts/big5_result_page_v2_agent';
 
     private const SOURCE_LEDGER_RELATIVE_PATH = 'content_assets/big5/result_page_v2/source_ledger';
@@ -143,6 +145,8 @@ final class BigFiveResultPageV2AssetAgent
             'ops_report_summary.json' => $this->writeJson($artifactDir.'/ops_report_summary.json', $opsReport),
             'go_no_go.md' => $this->writeText($artifactDir.'/go_no_go.md', $goNoGo),
         ];
+        $readiness = $this->buildReadinessArtifact($inventory, $validationReport, $safetyReport, $opsReport, $artifacts);
+        $artifacts['readiness.json'] = $this->writeJson($artifactDir.'/readiness.json', $readiness);
 
         return [
             'schema_version' => self::SCHEMA_VERSION,
@@ -1213,6 +1217,111 @@ final class BigFiveResultPageV2AssetAgent
             'ops_diff_summary' => $opsReport['diff_summary'] ?? [],
             'negative_guarantees' => $this->negativeGuarantees(),
         ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $inventory
+     * @param  array<string,mixed>  $validationReport
+     * @param  array<string,mixed>  $safetyReport
+     * @param  array<string,mixed>  $opsReport
+     * @param  array<string,array<string,mixed>>  $artifacts
+     * @return array<string,mixed>
+     */
+    private function buildReadinessArtifact(
+        array $inventory,
+        array $validationReport,
+        array $safetyReport,
+        array $opsReport,
+        array $artifacts,
+    ): array {
+        $metrics = (array) ($opsReport['metrics'] ?? []);
+        $strictFailures = $this->strictFailures($inventory, $validationReport, $safetyReport);
+        $readinessPass = $strictFailures === []
+            && (int) ($metrics['share_safety_missing_count'] ?? -1) === 0
+            && (int) ($metrics['validation_error_count'] ?? -1) === 0
+            && (int) ($metrics['forbidden_leak_hit_count'] ?? -1) === 0;
+
+        return [
+            'schema_version' => self::READINESS_SCHEMA_VERSION,
+            'task' => 'big5_result_page_agent_readiness',
+            'scale' => 'big_five',
+            'source_contract' => 'big5_result_page_v2',
+            'runtime_use' => 'not_runtime',
+            'production_use_allowed' => false,
+            'current_readiness' => $readinessPass ? 'ready_readonly' : 'blocked',
+            'readiness_pass' => $readinessPass,
+            'ready_for_pilot' => false,
+            'ready_for_runtime' => false,
+            'ready_for_production' => false,
+            'evidence_summary' => [
+                'selector_asset_count' => (int) ($validationReport['asset_count'] ?? 0),
+                'share_safety_missing_count' => (int) ($metrics['share_safety_missing_count'] ?? 0),
+                'share_safety_registry_count' => (int) ($metrics['share_safety_registry_count'] ?? 0),
+                'share_safe_reading_mode_count' => (int) ($metrics['share_safe_reading_mode_count'] ?? 0),
+                'shareable_true_count' => (int) ($metrics['shareable_true_count'] ?? 0),
+                'validation_error_count' => (int) ($metrics['validation_error_count'] ?? 0),
+                'leak_hit_count' => (int) data_get($safetyReport, 'leak_scan.hit_count', 0),
+                'source_ledger_valid' => (bool) data_get($inventory, 'source_ledger.valid'),
+                'asset_inventory_valid' => (bool) data_get($inventory, 'asset_inventory.valid'),
+                'p0_blocker_count' => (int) ($metrics['p0_blocker_count'] ?? 0),
+            ],
+            'source_artifacts' => $this->readinessSourceArtifacts($artifacts),
+            'handoff_contract' => [
+                'backend_authority' => true,
+                'frontend_copy_allowed' => false,
+                'final_result_object_generated' => false,
+                'legacy_engine_role' => 'fallback_only',
+                'cms_write_allowed' => false,
+                'seo_runtime_allowed' => false,
+                'production_import_allowed' => false,
+                'rollout_allowed' => false,
+            ],
+            'redaction' => [
+                'stores_user_result_identifiers' => false,
+                'stores_private_links' => false,
+                'stores_pdf_files' => false,
+                'stores_report_bodies' => false,
+                'stores_score_values' => false,
+                'stores_internal_metadata' => false,
+            ],
+            'remaining_gates' => [
+                'readiness_doc_refresh',
+                'free_full_report_runtime_qa',
+                'analytics_handoff',
+                'seo_geo_control_handoff',
+                'controlled_pilot_gate',
+            ],
+            'strict_failures' => $strictFailures,
+            'negative_guarantees' => $this->negativeGuarantees(),
+        ];
+    }
+
+    /**
+     * @param  array<string,array<string,mixed>>  $artifacts
+     * @return array<string,array<string,mixed>>
+     */
+    private function readinessSourceArtifacts(array $artifacts): array
+    {
+        $sourceArtifacts = [];
+        foreach ([
+            'validation_report.json',
+            'safety_report.json',
+            'qa_eval_summary.json',
+            'ops_report_summary.json',
+            'go_no_go.md',
+        ] as $filename) {
+            $artifact = $artifacts[$filename] ?? null;
+            if (! is_array($artifact)) {
+                continue;
+            }
+            $sourceArtifacts[$filename] = [
+                'relative_path' => (string) ($artifact['relative_path'] ?? ''),
+                'sha256' => (string) ($artifact['sha256'] ?? ''),
+                'redacted' => true,
+            ];
+        }
+
+        return $sourceArtifacts;
     }
 
     /**
