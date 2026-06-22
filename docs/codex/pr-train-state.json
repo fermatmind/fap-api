@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-22T16:39:26.087+00:00",
+  "updated_at": "2026-06-22T16:45:26.941+00:00",
   "SEO-AGENT-ARTICLE41-DRAFT-CLAIM-RISK-QA-01": {
     "repo": "fap-api",
     "branch": "codex/seo-agent-article41-draft-claim-risk-qa-01",
@@ -59211,7 +59211,7 @@
     "repo": "fap-api",
     "branch": "codex/fa30-api-04-gsc-live-smoke-evidence",
     "base": "main",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "train_scope": "fa30_free_assessment_gsc_live_smoke_evidence_contract",
     "title": "FA30-API-04: Add free-assessment GSC live-smoke evidence contract",
     "depends_on": [
@@ -59243,12 +59243,12 @@
         "evidence": "Changed files are limited to FA30-API-04 allowed paths: generated free-assessment GSC evidence contract, focused PHPUnit contract test, and docs/codex metadata. No live GSC call, URL submission, search queue, CMS write, import, sitemap, llms, canonical, noindex, JSON-LD, deploy, scheduler, or queue change."
       },
       "github": {
-        "status": "pending",
-        "evidence": "PR #2327 opened; GitHub checks pending."
+        "status": "pass",
+        "evidence": "PR #2327 GitHub checks passed: hygiene, Semgrep blocking secrets, supply-chain, semgrep SARIF non-blocking upload, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, and Semgrep OSS."
       }
     },
     "failure_reason": null,
-    "commit_sha": "46514420d056b2442dd847fc546825c48d9127b4",
+    "commit_sha": "b12cff68782136210ade74b83e2f8ce8706282ae",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2327",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -59268,6 +59268,11 @@
         "at": "2026-06-22T16:39:26.087+00:00",
         "status": "pr_open",
         "note": "Opened PR #2327 after local validation and scope validation passed."
+      },
+      {
+        "at": "2026-06-22T16:45:26.941+00:00",
+        "status": "ready_to_merge",
+        "note": "All PR #2327 GitHub checks passed and scope was revalidated; ready for squash merge when final metadata commit checks pass."
       }
     ]
   }
