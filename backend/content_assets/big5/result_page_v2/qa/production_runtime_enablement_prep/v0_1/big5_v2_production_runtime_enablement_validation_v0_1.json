@@ -1,0 +1,35 @@
+{
+  "schema": "big5_result_page_v2.production_runtime_enablement_validation.v0_1",
+  "package": "production_runtime_enablement_prep",
+  "version": "v0_1",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "production_runtime_enabled": false,
+  "production_rollout_enabled": false,
+  "rollout_allowed": false,
+  "production_decision": "PREP_ONLY_RUNTIME_DISABLED",
+  "validation_status": "pass",
+  "checks": {
+    "release_snapshot_import_gate_pass": "pass",
+    "runtime_switch_path_documented": "pass",
+    "default_runtime_disabled": "pass",
+    "default_rollout_disabled": "pass",
+    "fail_closed_matrix_documented": "pass",
+    "rollback_kill_switch_linked": "pass",
+    "frontend_copy_out_of_scope": "pass",
+    "production_runtime_enablement": "blocked",
+    "production_rollout_enablement": "blocked"
+  },
+  "linked_evidence": {
+    "release_snapshot": "content_assets/big5/result_page_v2/releases/v0_3/big5_v2_release_snapshot_rc_0_3.json",
+    "import_gate_pass": "content_assets/big5/result_page_v2/releases/v0_3/production_import_gate_pass_evidence_rc_0_3.json",
+    "rollback_kill_switch": "content_assets/big5/result_page_v2/qa/production_rollout_rollback_kill_switch/v0_1/big5_v2_production_rollout_rollback_kill_switch_validation_v0_1.json"
+  },
+  "remaining_blockers_before_actual_runtime_enablement": [
+    "operator_has_not_enabled_runtime_env",
+    "allowlist_rollout_config_not_attached",
+    "post_enable_smoke_not_recorded"
+  ]
+}

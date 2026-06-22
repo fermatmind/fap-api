@@ -1,0 +1,22 @@
+{
+  "schema": "big5_result_page_v2.production_runtime_enablement_prep_manifest.v0_1",
+  "package": "production_runtime_enablement_prep",
+  "version": "v0_1",
+  "generated_at": "2026-06-22T00:00:00Z",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "production_runtime_enabled": false,
+  "production_rollout_enabled": false,
+  "rollout_allowed": false,
+  "production_decision": "PREP_ONLY_RUNTIME_DISABLED",
+  "release_snapshot_id": "big5_result_page_v2_rc_0_3",
+  "files": [
+    "README.md",
+    "big5_v2_production_runtime_enablement_prep_v0_1.json",
+    "big5_v2_production_runtime_fail_closed_matrix_v0_1.json",
+    "big5_v2_production_runtime_enablement_validation_v0_1.json",
+    "SHA256SUMS"
+  ]
+}

@@ -18,6 +18,8 @@ final class ProductionRuntimeTest extends TestCase
     use BuildsBigFiveReportEngineBridgeFixture;
     use RefreshDatabase;
 
+    private const RUNTIME_ENABLEMENT_PREP_PATH = 'content_assets/big5/result_page_v2/qa/production_runtime_enablement_prep/v0_1';
+
     public function test_production_runtime_defaults_disabled(): void
     {
         $this->assertFalse((bool) config('big5_result_page_v2.production_runtime_enabled'));
@@ -25,6 +27,103 @@ final class ProductionRuntimeTest extends TestCase
         $this->assertFalse((bool) config('big5_result_page_v2.production_import_gate_passed'));
         $this->assertSame('', config('big5_result_page_v2.production_release_snapshot_id'));
         $this->assertSame([], config('big5_result_page_v2.production_approved_release_snapshot_ids'));
+    }
+
+    public function test_runtime_enablement_prep_package_documents_switch_path_without_enabling_runtime(): void
+    {
+        $manifest = $this->loadRuntimePrepJson('manifest.json');
+        $prep = $this->loadRuntimePrepJson('big5_v2_production_runtime_enablement_prep_v0_1.json');
+        $validation = $this->loadRuntimePrepJson('big5_v2_production_runtime_enablement_validation_v0_1.json');
+
+        $this->assertSame('production_runtime_enablement_prep', $manifest['package'] ?? null);
+        $this->assertSame('PREP_ONLY_RUNTIME_DISABLED', $manifest['production_decision'] ?? null);
+        $this->assertSame('big5_result_page_v2_rc_0_3', $manifest['release_snapshot_id'] ?? null);
+        $this->assertSame('big5_result_page_v2_rc_0_3', data_get($prep, 'release_snapshot.snapshot_id'));
+        $this->assertSame(
+            'BIG5_RESULT_PAGE_V2_PRODUCTION_RUNTIME_ENABLED',
+            data_get($prep, 'runtime_switch_path.env_keys.runtime_enabled'),
+        );
+        $this->assertSame(
+            'BIG5_RESULT_PAGE_V2_PRODUCTION_IMPORT_GATE_PASSED',
+            data_get($prep, 'runtime_switch_path.env_keys.import_gate_passed'),
+        );
+        $this->assertTrue((bool) data_get($prep, 'runtime_switch_path.required_values_before_runtime_enablement.production_import_gate_passed'));
+        $this->assertFalse((bool) data_get($prep, 'runtime_switch_path.required_values_remaining_disabled_in_this_pr.production_runtime_enabled'));
+        $this->assertFalse((bool) data_get($prep, 'runtime_switch_path.required_values_remaining_disabled_in_this_pr.production_rollout_enabled'));
+        $this->assertSame('blocked', data_get($validation, 'checks.production_runtime_enablement'));
+        $this->assertSame('blocked', data_get($validation, 'checks.production_rollout_enablement'));
+        $this->assertRuntimePrepDisabled($manifest);
+        $this->assertRuntimePrepDisabled($prep);
+        $this->assertRuntimePrepDisabled($validation);
+    }
+
+    public function test_runtime_enablement_prep_fail_closed_matrix_and_files_remain_redacted(): void
+    {
+        $matrix = $this->loadRuntimePrepJson('big5_v2_production_runtime_fail_closed_matrix_v0_1.json');
+
+        $this->assertSame([
+            'runtime_flag_default_off',
+            'import_gate_missing',
+            'snapshot_id_missing',
+            'snapshot_not_approved',
+            'release_disabled',
+            'emergency_disabled',
+            'rollout_not_configured',
+        ], array_column($matrix['fail_closed_matrix'] ?? [], 'id'));
+        $this->assertRuntimePrepDisabled($matrix);
+
+        foreach (glob($this->runtimePrepPath('*')) ?: [] as $file) {
+            if (! is_file($file)) {
+                continue;
+            }
+
+            $contents = (string) file_get_contents($file);
+            $normalized = preg_replace('/\s+/', '', $contents);
+
+            foreach ([
+                'attempt_id',
+                'private_url',
+                'report_json',
+                'report_full_json',
+                'report_free_json',
+                'payload_json',
+                'raw_scores',
+                'Big Five Report Engine',
+                'PR3B',
+                'AttemptReadController',
+                '[object Object]',
+            ] as $forbidden) {
+                $this->assertStringNotContainsString($forbidden, $contents, $file);
+            }
+
+            $this->assertStringNotContainsString('"production_use_allowed":true', $normalized, $file);
+            $this->assertStringNotContainsString('"ready_for_runtime":true', $normalized, $file);
+            $this->assertStringNotContainsString('"ready_for_production":true', $normalized, $file);
+            $this->assertStringNotContainsString('"production_runtime_enabled":true', $normalized, $file);
+            $this->assertStringNotContainsString('"production_rollout_enabled":true', $normalized, $file);
+            $this->assertStringNotContainsString('"rollout_allowed":true', $normalized, $file);
+        }
+    }
+
+    public function test_runtime_enablement_prep_sha256sums_are_reproducible(): void
+    {
+        $lines = array_values(array_filter(array_map('trim', explode(
+            "\n",
+            (string) file_get_contents($this->runtimePrepPath('SHA256SUMS')),
+        ))));
+
+        $this->assertCount(5, $lines);
+
+        foreach ($lines as $line) {
+            [$hash, $file] = preg_split('/\s+/', $line, 2) ?: ['', ''];
+            $file = trim($file);
+
+            $this->assertSame(
+                hash_file('sha256', $this->runtimePrepPath($file)),
+                $hash,
+                $file,
+            );
+        }
     }
 
     public function test_production_legacy_runtime_fails_closed_without_governance_gates(): void
@@ -244,5 +343,36 @@ final class ProductionRuntimeTest extends TestCase
                 ],
             ],
         );
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function loadRuntimePrepJson(string $file): array
+    {
+        $decoded = json_decode((string) file_get_contents($this->runtimePrepPath($file)), true, 512, JSON_THROW_ON_ERROR);
+
+        $this->assertIsArray($decoded);
+
+        return $decoded;
+    }
+
+    private function runtimePrepPath(string $file): string
+    {
+        return base_path(self::RUNTIME_ENABLEMENT_PREP_PATH.'/'.$file);
+    }
+
+    /**
+     * @param  array<string,mixed>  $document
+     */
+    private function assertRuntimePrepDisabled(array $document): void
+    {
+        $this->assertSame('not_runtime', $document['runtime_use'] ?? null);
+        $this->assertFalse((bool) ($document['production_use_allowed'] ?? true));
+        $this->assertFalse((bool) ($document['ready_for_runtime'] ?? true));
+        $this->assertFalse((bool) ($document['ready_for_production'] ?? true));
+        $this->assertFalse((bool) ($document['production_runtime_enabled'] ?? true));
+        $this->assertFalse((bool) ($document['production_rollout_enabled'] ?? true));
+        $this->assertFalse((bool) ($document['rollout_allowed'] ?? true));
     }
 }
