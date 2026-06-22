@@ -1,0 +1,57 @@
+{
+  "schema": "big5_result_page_v2.production_runtime_enablement_prep.v0_1",
+  "package": "production_runtime_enablement_prep",
+  "version": "v0_1",
+  "generated_at": "2026-06-22T00:00:00Z",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "production_runtime_enabled": false,
+  "production_rollout_enabled": false,
+  "rollout_allowed": false,
+  "production_decision": "PREP_ONLY_RUNTIME_DISABLED",
+  "release_snapshot": {
+    "snapshot_id": "big5_result_page_v2_rc_0_3",
+    "import_gate_pass_evidence": "content_assets/big5/result_page_v2/releases/v0_3/production_import_gate_pass_evidence_rc_0_3.json",
+    "human_approval_evidence": "content_assets/big5/result_page_v2/releases/v0_3/human_approval_evidence_rc_0_3.json"
+  },
+  "runtime_switch_path": {
+    "operator_sequence": [
+      "confirm release snapshot import gate pass",
+      "confirm approved snapshot allowlist contains the exact snapshot id",
+      "set runtime flag only in the target environment",
+      "keep rollout disabled until the allowlist rollout config gate passes",
+      "run post-enable fail-closed smoke before any allowlisted traffic"
+    ],
+    "env_keys": {
+      "runtime_enabled": "BIG5_RESULT_PAGE_V2_PRODUCTION_RUNTIME_ENABLED",
+      "import_gate_passed": "BIG5_RESULT_PAGE_V2_PRODUCTION_IMPORT_GATE_PASSED",
+      "release_snapshot_id": "BIG5_RESULT_PAGE_V2_PRODUCTION_RELEASE_SNAPSHOT_ID",
+      "approved_release_snapshot_ids": "BIG5_RESULT_PAGE_V2_PRODUCTION_APPROVED_RELEASE_SNAPSHOT_IDS",
+      "emergency_disable": "BIG5_RESULT_PAGE_V2_PRODUCTION_EMERGENCY_DISABLED",
+      "disabled_release_snapshot_ids": "BIG5_RESULT_PAGE_V2_PRODUCTION_DISABLED_RELEASE_SNAPSHOT_IDS"
+    },
+    "required_values_before_runtime_enablement": {
+      "production_import_gate_passed": true,
+      "production_release_snapshot_id": "big5_result_page_v2_rc_0_3",
+      "production_approved_release_snapshot_ids_contains": "big5_result_page_v2_rc_0_3",
+      "production_emergency_disabled": false,
+      "production_disabled_release_snapshot_ids_excludes": "big5_result_page_v2_rc_0_3"
+    },
+    "required_values_remaining_disabled_in_this_pr": {
+      "production_runtime_enabled": false,
+      "production_rollout_configured": false,
+      "production_rollout_enabled": false,
+      "production_rollout_manual_approval_granted": false,
+      "production_rollout_percentage": 0,
+      "production_rollout_max_percentage": 0
+    }
+  },
+  "deferred_to_next_gate": [
+    "allowlist_only rollout mode",
+    "attempt user anon org tenant form locale scale scope",
+    "rollout manual approval",
+    "post-deploy live smoke evidence"
+  ]
+}

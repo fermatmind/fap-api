@@ -1,0 +1,56 @@
+{
+  "schema": "big5_result_page_v2.production_runtime_fail_closed_matrix.v0_1",
+  "package": "production_runtime_enablement_prep",
+  "version": "v0_1",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "production_runtime_enabled": false,
+  "production_rollout_enabled": false,
+  "rollout_allowed": false,
+  "fail_closed_matrix": [
+    {
+      "id": "runtime_flag_default_off",
+      "condition": "production runtime flag remains false",
+      "expected_result": "no V2 runtime attachment"
+    },
+    {
+      "id": "import_gate_missing",
+      "condition": "runtime flag true but import gate flag false",
+      "expected_result": "no V2 runtime attachment"
+    },
+    {
+      "id": "snapshot_id_missing",
+      "condition": "runtime flag true but release snapshot id empty",
+      "expected_result": "no V2 runtime attachment"
+    },
+    {
+      "id": "snapshot_not_approved",
+      "condition": "release snapshot id is absent from approved snapshot list",
+      "expected_result": "no V2 runtime attachment"
+    },
+    {
+      "id": "release_disabled",
+      "condition": "release snapshot id appears in disabled snapshot list",
+      "expected_result": "no V2 runtime attachment"
+    },
+    {
+      "id": "emergency_disabled",
+      "condition": "emergency disable flag true",
+      "expected_result": "no V2 runtime attachment"
+    },
+    {
+      "id": "rollout_not_configured",
+      "condition": "runtime gate passes but rollout config remains disabled",
+      "expected_result": "no allowlisted traffic"
+    }
+  ],
+  "redaction": {
+    "attempt_references": "not_recorded",
+    "result_access_links": "not_recorded",
+    "pdf_artifacts": "not_recorded",
+    "raw_result_body": "not_recorded",
+    "raw_score_values": "not_recorded"
+  }
+}
