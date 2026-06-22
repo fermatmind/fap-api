@@ -59067,7 +59067,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-free-full-report-runtime-qa-readiness",
     "base": "main",
-    "status": "local_validated",
+    "status": "pr_open",
     "train_scope": "big5_result_page_agent_readiness_to_pilot",
     "title": "BIG5-FREE-FULL-REPORT-RUNTIME-QA-READINESS-01: Add Big Five free full-report runtime QA readiness",
     "depends_on": [
@@ -59106,12 +59106,12 @@
       },
       "github": {
         "status": "pending",
-        "evidence": "PR not opened yet."
+        "evidence": "Opened https://github.com/fermatmind/fap-api/pull/2331 on head a10f3d53e65e38d1bcdf264d3a4054ca384bf183."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "a10f3d53e65e38d1bcdf264d3a4054ca384bf183",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2331",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -59125,6 +59125,11 @@
         "at": "2026-06-23T01:05:00Z",
         "status": "local_validated",
         "note": "Added a redacted advisory QA package covering result route, report API, report-access API, PDF, share, history, compare, no-paywall contradiction, private boundary, and backend authority. Focused tests, adapter tests, checksum, metadata, Pint, runtime-freeze guard, and diff checks passed."
+      },
+      {
+        "at": "2026-06-23T01:10:00Z",
+        "status": "pr_open",
+        "note": "Opened https://github.com/fermatmind/fap-api/pull/2331 after local validation and scope validation passed."
       }
     ]
   },
