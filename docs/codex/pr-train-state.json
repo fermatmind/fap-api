@@ -43232,7 +43232,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-dash-collector-02-write-gate",
     "base": "main",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "train_scope": "seo_intel_controlled_collector_write_gate",
     "title": "docs(seo): define controlled collector write gate",
     "checks": {
@@ -58428,12 +58428,12 @@
         "evidence": "Changed files are limited to Big Five V2 asset agent command/service/tests, ReportSnapshotExplorerSupport Ops summary reuse, and docs/codex PR-train metadata. No fap-web copy, runtime flag, release snapshot, production import gate, rollout gate, CMS write, or DB write changed."
       },
       "github": {
-        "status": "pending",
-        "evidence": null
+        "status": "pass",
+        "evidence": "PR #2279 required GitHub checks passed on head 6ffa8e950ad1ec23064819884ecd241276e840b7; mergeStateStatus CLEAN; PR title/body and changed-file scope were re-reviewed."
       }
     },
     "failure_reason": null,
-    "commit_sha": "cffccbd93f0bd408a18681c628a2abbdbbeeb1e1",
+    "commit_sha": "6ffa8e950ad1ec23064819884ecd241276e840b7",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2279",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -58458,6 +58458,11 @@
         "at": "2026-06-22T05:54:15Z",
         "status": "ci_fix_local_validated",
         "note": "Inspected failed verify-bigfive jobs. Fixed current-scope test pollution from dropping report_snapshots in broad suites and added production ops metrics service to the Big Five V2 freeze classifier allowlist. Local CI-equivalent Big Five filter passed with 976 passed and 1 expected skip."
+      },
+      {
+        "at": "2026-06-22T06:00:39Z",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed on head 6ffa8e950ad1ec23064819884ecd241276e840b7, mergeStateStatus is CLEAN, and PR title/body/scope were re-reviewed. Ready to merge under squash policy after this state update is pushed and checks remain green."
       }
     ]
   }
