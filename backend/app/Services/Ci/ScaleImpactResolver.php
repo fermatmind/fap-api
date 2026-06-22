@@ -49,6 +49,7 @@ final class ScaleImpactResolver
         $normalized = $this->normalizePaths($paths);
 
         $sharedChanged = false;
+        $analyticsChanged = false;
         $mbtiChanged = false;
         $big5Changed = false;
         $clinicalChanged = false;
@@ -66,6 +67,10 @@ final class ScaleImpactResolver
                 $eqChanged = true;
 
                 continue;
+            }
+
+            if ($this->isAnalyticsIsolatedPath($path)) {
+                $analyticsChanged = true;
             }
 
             if ($this->isMbtiPath($path)) {
@@ -99,9 +104,17 @@ final class ScaleImpactResolver
         $runSds20Gate = $sharedChanged || $sdsChanged;
         $runEq60Gate = $sharedChanged || $eqChanged;
         $runSdsNormsGate = $sharedChanged || $sdsNormsChanged;
-        $runMbtiSmoke = true;
+        $runMbtiSmoke = ! $analyticsChanged
+            || $sharedChanged
+            || $mbtiChanged
+            || $big5Changed
+            || $clinicalChanged
+            || $sdsChanged
+            || $eqChanged
+            || $sdsNormsChanged;
 
         $scaleScope = $this->buildScaleScope(
+            $analyticsChanged,
             $runFullScaleRegression,
             $runBig5OceanGate,
             $runClinicalCombo68Gate,
@@ -134,6 +147,7 @@ final class ScaleImpactResolver
         return [
             'changed_files' => $normalized,
             'shared_changed' => $sharedChanged,
+            'analytics_changed' => $analyticsChanged,
             'mbti_changed' => $mbtiChanged,
             'big5_ocean_changed' => $big5Changed,
             'clinical_combo_68_changed' => $clinicalChanged,
@@ -149,7 +163,7 @@ final class ScaleImpactResolver
             'run_mbti_smoke' => $runMbtiSmoke,
             'scale_scope' => $scaleScope,
             'scales_changed' => $scalesChanged,
-            'reason' => $this->buildReason($sharedChanged, $mbtiChanged, $big5Changed, $clinicalChanged, $sdsChanged, $eqChanged, $sdsNormsChanged),
+            'reason' => $this->buildReason($sharedChanged, $analyticsChanged, $mbtiChanged, $big5Changed, $clinicalChanged, $sdsChanged, $eqChanged, $sdsNormsChanged),
         ];
     }
 
@@ -184,6 +198,10 @@ final class ScaleImpactResolver
             return false;
         }
 
+        if ($this->isAnalyticsIsolatedPath($path)) {
+            return false;
+        }
+
         if (in_array($path, self::SHARED_EXACT, true)) {
             return true;
         }
@@ -195,6 +213,56 @@ final class ScaleImpactResolver
         }
 
         return false;
+    }
+
+    private function isAnalyticsIsolatedPath(string $path): bool
+    {
+        $upper = strtoupper($path);
+
+        if (str_starts_with($path, 'backend/app/Services/Analytics/')) {
+            return true;
+        }
+
+        if (str_starts_with($path, 'backend/tests/Feature/Analytics/')) {
+            return true;
+        }
+
+        if (str_contains($upper, 'BACKEND/DATABASE/MIGRATIONS/') && str_contains($upper, 'ANALYTICS')) {
+            return true;
+        }
+
+        if (str_contains($upper, 'BACKEND/APP/MODELS/ANALYTICS')) {
+            return true;
+        }
+
+        if (str_contains($upper, 'BACKEND/APP/CONSOLE/COMMANDS/REFRESHANALYTICSFUNNELDAILYCOMMAND.PHP')) {
+            return true;
+        }
+
+        if (str_contains($upper, 'BACKEND/APP/CONSOLE/COMMANDS/REFRESHQUESTIONDAILYCOMMAND.PHP')) {
+            return true;
+        }
+
+        if (str_contains($upper, 'BACKEND/APP/CONSOLE/COMMANDS/REFRESHQUALITYDAILYCOMMAND.PHP')) {
+            return true;
+        }
+
+        if (str_contains($upper, 'BACKEND/APP/CONSOLE/COMMANDS/REFRESHTESTMETRICSDAILYCOMMAND.PHP')) {
+            return true;
+        }
+
+        if (str_contains($upper, 'BACKEND/APP/CONSOLE/COMMANDS/REFRESHMBTIATTRIBUTIONDAILYCOMMAND.PHP')) {
+            return true;
+        }
+
+        if (str_contains($upper, 'BACKEND/APP/CONSOLE/COMMANDS/REPORTMBTIATTRIBUTIONDAILYCOMMAND.PHP')) {
+            return true;
+        }
+
+        return str_contains($upper, 'BACKEND/APP/FILAMENT/OPS/PAGES/FUNNELCONVERSIONPAGE.PHP')
+            || str_contains($upper, 'BACKEND/APP/FILAMENT/OPS/PAGES/MBTIINSIGHTSPAGE.PHP')
+            || str_contains($upper, 'BACKEND/APP/FILAMENT/OPS/PAGES/QUESTIONANALYTICSPAGE.PHP')
+            || str_contains($upper, 'BACKEND/APP/FILAMENT/OPS/PAGES/TESTKPIDAILYPAGE.PHP');
     }
 
     private function isEqIsolatedPath(string $path): bool
@@ -292,6 +360,7 @@ final class ScaleImpactResolver
     }
 
     private function buildScaleScope(
+        bool $analyticsChanged,
         bool $runFullScaleRegression,
         bool $runBig5OceanGate,
         bool $runClinicalCombo68Gate,
@@ -305,6 +374,10 @@ final class ScaleImpactResolver
     ): string {
         if ($runFullScaleRegression) {
             return 'full_regression';
+        }
+
+        if ($analyticsChanged && ! $mbtiChanged && ! $big5Changed && ! $clinicalChanged && ! $sdsChanged && ! $eqChanged) {
+            return 'analytics_only_no_mbti_smoke';
         }
 
         if ($runBig5OceanGate && $runClinicalCombo68Gate && $runSds20Gate) {
@@ -380,6 +453,7 @@ final class ScaleImpactResolver
 
     private function buildReason(
         bool $sharedChanged,
+        bool $analyticsChanged,
         bool $mbtiChanged,
         bool $big5Changed,
         bool $clinicalChanged,
@@ -389,6 +463,10 @@ final class ScaleImpactResolver
     ): string {
         if ($sharedChanged) {
             return 'shared-layer changed: run full cross-scale regression';
+        }
+
+        if ($analyticsChanged && ! $mbtiChanged && ! $big5Changed && ! $clinicalChanged && ! $sdsChanged && ! $eqChanged && ! $sdsNormsChanged) {
+            return 'analytics-only change: skip MBTI smoke and keep backend analytics checks scoped';
         }
 
         if ($big5Changed && $clinicalChanged && $sdsChanged) {
