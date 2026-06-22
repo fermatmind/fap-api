@@ -1,0 +1,40 @@
+{
+    "schema_version": "fap.enneagram.result_page.agent_readiness.v1",
+    "task": "forbidden_claim_report",
+    "runtime_use": "not_runtime",
+    "production_use_allowed": false,
+    "candidate_dir": {
+        "provided": false,
+        "path": null
+    },
+    "forbidden_claim_families": [
+        "diagnosis_clinical_treatment",
+        "hiring_employment_screening",
+        "final_typing_you_are_this_type",
+        "fixed_type_certainty",
+        "e105_fc144_score_comparison",
+        "fc144_more_accurate_or_replacement_result",
+        "success_salary_performance_prediction",
+        "private_result_identifier_path_or_vector_leakage"
+    ],
+    "status": {
+        "forbidden_claim_zero": true
+    },
+    "hit_count": 0,
+    "hits": [],
+    "truncated": false,
+    "negative_guarantees": {
+        "runtime_use": "not_runtime",
+        "production_use_allowed": false,
+        "ready_for_generation": false,
+        "ready_for_import": false,
+        "ready_for_runtime": false,
+        "ready_for_production": false,
+        "cms_write_performed": false,
+        "runtime_change_performed": false,
+        "activation_happened": false,
+        "bulk_content_generation_happened": false,
+        "candidate_payload_creation_happened": false,
+        "frontend_fallback_allowed": false
+    }
+}

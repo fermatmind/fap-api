@@ -1,0 +1,29 @@
+{
+    "schema_version": "fap.enneagram.result_page.agent_readiness.v1",
+    "task": "safety_policy",
+    "forbidden_claim_families": [
+        "diagnosis_clinical_treatment",
+        "hiring_employment_screening",
+        "final_typing_you_are_this_type",
+        "fixed_type_certainty",
+        "e105_fc144_score_comparison",
+        "fc144_more_accurate_or_replacement_result",
+        "success_salary_performance_prediction",
+        "private_result_identifier_path_or_vector_leakage"
+    ],
+    "blocked_public_payload_field_families": [
+        "private_result_identifier_path_or_vector_leakage",
+        "editorial_or_qa_working_notes",
+        "internal_source_selection_metadata"
+    ],
+    "fc144_boundary_rules": [
+        "FC144 may be suggested as a second lens, not a more accurate final type.",
+        "E105 and FC144 scores must not be directly compared.",
+        "No final typing, retyping, diagnostic, hiring, or certainty claims."
+    ],
+    "source_mapping_rules": [
+        "Every candidate payload must map to one approved source batch and source asset checksum.",
+        "Fallback, blocked, duplicate selection, and branch provenance mismatch counts must be zero.",
+        "Machine-local private paths must be redacted from public reports."
+    ]
+}

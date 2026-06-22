@@ -1,0 +1,33 @@
+{
+    "schema_version": "fap.enneagram.result_page.agent_readiness.v1",
+    "task": "validation_commands",
+    "local_pr_validation": [
+        "php -l backend/app/Console/Commands/EnneagramResultPageAgentReadinessCommand.php",
+        "php -l backend/app/Services/Enneagram/Assets/Agent/EnneagramResultPageAgentReadiness.php",
+        "cd backend && php artisan test tests/Unit/Services/Enneagram/Assets/EnneagramResultPageAgentReadinessTest.php --no-ansi",
+        "cd backend && php artisan enneagram:result-page-agent audit --run-id=smoke --artifact-dir=<tmpdir> --json",
+        "cd backend && php artisan enneagram:result-page-agent audit --run-id=smoke-strict --artifact-dir=<tmpdir> --strict --json",
+        "git diff --check"
+    ],
+    "future_candidate_export_gate": [
+        "cd backend && PHASE8B_CANDIDATE_DIR=<candidate-dir> PHASE8B1_OUTPUT_DIR=<tmp-output> php artisan enneagram:export-production-equivalent-candidate-payloads --json",
+        "assert phase8b1_summary.json verdict starts with PASS_",
+        "assert total_payload_count == 630",
+        "assert metadata_leak_count == 0",
+        "assert source_mapping_failure_count == 0",
+        "assert fc144_boundary_violation_count == 0"
+    ],
+    "future_inactive_import_gate": [
+        "cd backend && PHASE8B_CANDIDATE_DIR=<candidate-dir> PHASE8D2B_OUTPUT_DIR=<tmp-output> php artisan enneagram:import-inactive-candidate-release --json",
+        "assert phase8d2b_summary.json verdict == PASS_FOR_PHASE_8D_3_ACTIVATION_ROLLBACK_GATE",
+        "assert activation_happened == false",
+        "assert production_import_happened == false",
+        "assert candidate_payload_count == 630"
+    ],
+    "deferred": [
+        "production activation",
+        "runtime registry switch",
+        "fap-web rendered QA",
+        "bulk asset generation"
+    ]
+}
