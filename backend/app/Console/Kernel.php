@@ -186,9 +186,10 @@ use App\Console\Commands\RiasecResultPageAssetAgentAuditCommand;
 use App\Console\Commands\RiasecResultPageV2ProductionImportCommand;
 use App\Console\Commands\SdsPsychometricsReport;
 use App\Console\Commands\SeedScaleRegistry;
-use App\Console\Commands\SeoAgentAutoRollbackGuardCommand;
+use App\Console\Commands\SeoAgentArticleCmsPublishCanaryCommand;
 use App\Console\Commands\SeoAgentArticleDraftClaimRiskQaCommand;
 use App\Console\Commands\SeoAgentArticleDraftPreviewRuntimeQaCommand;
+use App\Console\Commands\SeoAgentAutoRollbackGuardCommand;
 use App\Console\Commands\SeoAgentCmsDraftPackageDryRunCommand;
 use App\Console\Commands\SeoAgentCmsDraftPayloadRepairCanaryCommand;
 use App\Console\Commands\SeoAgentCmsDraftReadbackQaCommand;
@@ -198,11 +199,11 @@ use App\Console\Commands\SeoAgentCmsPublishAutoCanaryCommand;
 use App\Console\Commands\SeoAgentCmsPublishCanaryCommand;
 use App\Console\Commands\SeoAgentCmsTdkGapScanCommand;
 use App\Console\Commands\SeoAgentCodexReviewRunnerCommand;
-use App\Console\Commands\SeoAgentGscCohortHandoffCommand;
 use App\Console\Commands\SeoAgentGscBatchDraftQaSupportCommand;
+use App\Console\Commands\SeoAgentGscCohortHandoffCommand;
+use App\Console\Commands\SeoAgentGscDraftPublishGateReadinessCommand;
 use App\Console\Commands\SeoAgentGscOpportunityAutoDraftCommand;
 use App\Console\Commands\SeoAgentGscPostPublishFeedbackCommand;
-use App\Console\Commands\SeoAgentGscDraftPublishGateReadinessCommand;
 use App\Console\Commands\SeoAgentGscRemainingCandidateBatchPlanCommand;
 use App\Console\Commands\SeoAgentL5aContentPagePublishCanaryCommand;
 use App\Console\Commands\SeoAgentL5aIndexnowSubmitCanaryCommand;
@@ -425,6 +426,7 @@ class Kernel extends ConsoleKernel
         MediaAssetsImportSeoImageBundle::class,
         SeoAgentCmsFaqGapScanCommand::class,
         SeoAgentAutoRollbackGuardCommand::class,
+        SeoAgentArticleCmsPublishCanaryCommand::class,
         SeoAgentArticleDraftClaimRiskQaCommand::class,
         SeoAgentArticleDraftPreviewRuntimeQaCommand::class,
         SeoAgentCmsTdkGapScanCommand::class,
