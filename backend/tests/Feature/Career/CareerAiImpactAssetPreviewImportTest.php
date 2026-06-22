@@ -735,7 +735,7 @@ final class CareerAiImpactAssetPreviewImportTest extends TestCase
         $occupation = $this->seedOccupation('accountants-and-auditors');
         $row = $this->assetRow('accountants-and-auditors', 'zh-CN');
         $row['summary'] = '该分数不是岗位会消失或降薪预测。';
-        $row['items']['reader_boundary']['body'] = '该分数不是岗位会消失、降薪或个人职业结果预测预测。';
+        $row['items']['reader_boundary']['body'] = 'FermatMind 用它描述任务可被辅助的程度，不把它当作失业、个人职业结果预测。';
 
         CareerJobAiImpactAsset::query()->create([
             'occupation_id' => $occupation->id,
@@ -762,7 +762,95 @@ final class CareerAiImpactAssetPreviewImportTest extends TestCase
         $this->assertStringNotContainsString('职业会消失', $encodedAsset);
         $this->assertStringNotContainsString('降薪', $encodedAsset);
         $this->assertStringNotContainsString('预测预测', $encodedAsset);
+        $this->assertStringNotContainsString('失业', $encodedAsset);
         $this->assertStringContainsString('不是个人职业结果预测', $asset['items']['reader_boundary']['body']);
+    }
+
+    public function test_preview_api_repairs_known_cross_domain_context_in_reader_projection(): void
+    {
+        Config::set('career_ai_impact_assets.staging_preview_enabled', true);
+        Config::set('career_ai_impact_assets.preview_slugs', [
+            'writers-and-authors',
+            'heavy-and-tractor-trailer-truck-drivers',
+        ]);
+
+        $writerOccupation = $this->seedOccupation('writers-and-authors');
+        $writerZh = $this->assetRow('writers-and-authors', 'zh-CN');
+        $writerZh['items']['most_ai_exposed_workflows'][0]['body'] = '整理研究笔记、物种观察、采访材料、草稿段落、引用、栖息地数据和期刊或出版规则。';
+        $writerZh['items']['most_ai_exposed_workflows'][1] = [
+            'label' => '复核线索',
+            'body' => '正式采用仍要看运行安全、放行条件、天气改航、间隔限制、维护记录和旅客/机组安全。',
+        ];
+        $writerZh['items']['how_to_prepare'][0]['body'] = '把材料做成运行限制说明、异常处置日志、天气/NOTAM 核对和放行复盘。';
+        $writerEn = $this->assetRow('writers-and-authors', 'en');
+        $writerEn['items']['most_ai_exposed_workflows'][0]['body'] = 'organize research notes, species observations, interview material, draft sections, citations, habitat data, and journal or publisher rules.';
+        $writerEn['items']['human_accountability_anchors'][0]['body'] = 'The hard part is operational safety, release conditions, weather diversion, separation limits, maintenance records, and crew or passenger safety.';
+
+        foreach ([$writerZh, $writerEn] as $row) {
+            CareerJobAiImpactAsset::query()->create([
+                'occupation_id' => $writerOccupation->id,
+                'career_job_slug' => 'writers-and-authors',
+                'locale' => $row['locale'],
+                'asset_version' => CareerJobAiImpactAsset::ASSET_VERSION_V5,
+                'status' => CareerJobAiImpactAsset::STATUS_STAGING_PREVIEW,
+                'preview_allowlisted' => true,
+                'asset_payload_json' => $row,
+                'sources_json' => $row['sources'],
+                'evidence_used_json' => $row['evidence_used'],
+                'derived_from_synthesis_json' => $row['derived_from_synthesis'],
+                'audit_fields_json' => $row['audit_fields'],
+                'asset_row_hash' => $row['audit_fields']['row_hash'],
+            ]);
+        }
+
+        $truckOccupation = $this->seedOccupation('heavy-and-tractor-trailer-truck-drivers');
+        $truckZh = $this->assetRow('heavy-and-tractor-trailer-truck-drivers', 'zh-CN');
+        $truckZh['items']['human_accountability_anchors'][0]['body'] = '正式采用仍要看运行安全、放行条件、天气改航、间隔限制、维护记录和旅客/机组安全。';
+        CareerJobAiImpactAsset::query()->create([
+            'occupation_id' => $truckOccupation->id,
+            'career_job_slug' => 'heavy-and-tractor-trailer-truck-drivers',
+            'locale' => 'zh-CN',
+            'asset_version' => CareerJobAiImpactAsset::ASSET_VERSION_V5,
+            'status' => CareerJobAiImpactAsset::STATUS_STAGING_PREVIEW,
+            'preview_allowlisted' => true,
+            'asset_payload_json' => $truckZh,
+            'sources_json' => $truckZh['sources'],
+            'evidence_used_json' => $truckZh['evidence_used'],
+            'derived_from_synthesis_json' => $truckZh['derived_from_synthesis'],
+            'audit_fields_json' => $truckZh['audit_fields'],
+            'asset_row_hash' => $truckZh['audit_fields']['row_hash'],
+        ]);
+
+        $writerZhAsset = $this->getJson('/api/v0.5/career/jobs/writers-and-authors/ai-impact-asset?locale=zh-CN')
+            ->assertOk()
+            ->json('ai_impact_asset_v1');
+        $writerEnAsset = $this->getJson('/api/v0.5/career/jobs/writers-and-authors/ai-impact-asset?locale=en')
+            ->assertOk()
+            ->json('ai_impact_asset_v1');
+        $truckZhAsset = $this->getJson('/api/v0.5/career/jobs/heavy-and-tractor-trailer-truck-drivers/ai-impact-asset?locale=zh-CN')
+            ->assertOk()
+            ->json('ai_impact_asset_v1');
+
+        $writerZhText = json_encode($writerZhAsset, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+        $writerEnText = json_encode($writerEnAsset, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+        $truckZhText = json_encode($truckZhAsset, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+
+        $this->assertStringNotContainsString('物种观察', $writerZhText);
+        $this->assertStringNotContainsString('栖息地数据', $writerZhText);
+        $this->assertStringNotContainsString('天气改航', $writerZhText);
+        $this->assertStringContainsString('采访记录', $writerZhText);
+        $this->assertStringContainsString('编辑取舍', $writerZhText);
+
+        $this->assertStringNotContainsString('species observations', $writerEnText);
+        $this->assertStringNotContainsString('habitat data', $writerEnText);
+        $this->assertStringNotContainsString('weather diversion', $writerEnText);
+        $this->assertStringContainsString('interview notes', $writerEnText);
+        $this->assertStringContainsString('editorial choices', $writerEnText);
+
+        $this->assertStringNotContainsString('天气改航', $truckZhText);
+        $this->assertStringNotContainsString('旅客/机组安全', $truckZhText);
+        $this->assertStringContainsString('道路安全', $truckZhText);
+        $this->assertStringContainsString('工时合规', $truckZhText);
     }
 
     public function test_ai_impact_preview_asset_can_provide_restricted_detail_shell_when_bundle_is_missing(): void
