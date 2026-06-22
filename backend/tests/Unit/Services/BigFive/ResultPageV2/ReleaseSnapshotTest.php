@@ -12,6 +12,8 @@ final class ReleaseSnapshotTest extends TestCase
 
     private const APPROVAL_PREP_RELEASE_PATH = 'content_assets/big5/result_page_v2/releases/v0_2';
 
+    private const IMPORT_GATE_PASS_RELEASE_PATH = 'content_assets/big5/result_page_v2/releases/v0_3';
+
     private const FIXTURE_PATH = 'tests/Fixtures/big5_result_page_v2/release_snapshots/immutable_snapshot_fixture_v0_1.json';
 
     public function test_fixture_snapshot_is_immutable_reproducible_versioned_and_traceable(): void
@@ -162,6 +164,87 @@ final class ReleaseSnapshotTest extends TestCase
         );
     }
 
+    public function test_import_gate_pass_snapshot_is_hash_stable_evidence_linked_and_not_runtime(): void
+    {
+        $manifest = $this->jsonFile(self::IMPORT_GATE_PASS_RELEASE_PATH.'/manifest.json');
+        $snapshot = $this->jsonFile(self::IMPORT_GATE_PASS_RELEASE_PATH.'/big5_v2_release_snapshot_rc_0_3.json');
+        $approval = $this->jsonFile(self::IMPORT_GATE_PASS_RELEASE_PATH.'/human_approval_evidence_rc_0_3.json');
+        $gatePass = $this->jsonFile(self::IMPORT_GATE_PASS_RELEASE_PATH.'/production_import_gate_pass_evidence_rc_0_3.json');
+
+        $this->assertSame('big5_result_page_v2_rc_0_3', $snapshot['snapshot_id'] ?? null);
+        $this->assertSame('v0_3', $snapshot['snapshot_version'] ?? null);
+        $this->assertSame('not_runtime', $manifest['runtime_use'] ?? null);
+        $this->assertSame('not_runtime', $snapshot['runtime_use'] ?? null);
+        $this->assertSame('not_runtime', $approval['runtime_use'] ?? null);
+        $this->assertSame('not_runtime', $gatePass['runtime_use'] ?? null);
+        $this->assertFalse((bool) ($snapshot['production_use_allowed'] ?? true));
+        $this->assertFalse((bool) ($approval['production_use_allowed'] ?? true));
+        $this->assertFalse((bool) ($gatePass['production_use_allowed'] ?? true));
+        $this->assertTrue((bool) ($snapshot['production_import_gate_pass'] ?? false));
+        $this->assertTrue((bool) ($approval['production_import_gate_pass'] ?? false));
+        $this->assertTrue((bool) ($gatePass['production_import_gate_pass'] ?? false));
+        $this->assertFalse((bool) ($snapshot['ready_for_production'] ?? true));
+        $this->assertFalse((bool) ($snapshot['production_rollout_enabled'] ?? true));
+        $this->assertTrue(($snapshot['immutable'] ?? false) === true);
+        $this->assertTrue($this->snapshotHasStableHash($snapshot));
+        $this->assertTrue($this->manifestHasValidSnapshotHashes($manifest, self::IMPORT_GATE_PASS_RELEASE_PATH));
+        $this->assertSame('pass', $snapshot['import_gate_current_decision'] ?? null);
+        $this->assertSame('pass', $approval['approval_status'] ?? null);
+        $this->assertSame('pass', $gatePass['import_gate_decision'] ?? null);
+
+        $this->assertSame(
+            hash_file('sha256', base_path(self::IMPORT_GATE_PASS_RELEASE_PATH.'/human_approval_evidence_rc_0_3.json')),
+            $manifest['human_approval_evidence']['sha256'] ?? null,
+        );
+        $this->assertSame(
+            hash_file('sha256', base_path(self::IMPORT_GATE_PASS_RELEASE_PATH.'/production_import_gate_pass_evidence_rc_0_3.json')),
+            $manifest['production_import_gate_pass_evidence']['sha256'] ?? null,
+        );
+        $this->assertSame('pass', $this->contentRefStatus($snapshot, 'approval_evidence'));
+        $this->assertSame('pass', $this->contentRefStatus($snapshot, 'production_import_gate_pass_evidence'));
+        $this->assertContains(
+            'production_runtime_env_not_enabled',
+            (array) ($snapshot['remaining_blockers_before_actual_production_activation'] ?? []),
+        );
+    }
+
+    public function test_import_gate_pass_package_is_redacted_and_does_not_enable_runtime_or_rollout(): void
+    {
+        $packageFiles = [
+            'README.md',
+            'manifest.json',
+            'big5_v2_release_snapshot_rc_0_3.json',
+            'human_approval_evidence_rc_0_3.json',
+            'production_import_gate_pass_evidence_rc_0_3.json',
+        ];
+
+        foreach ($packageFiles as $file) {
+            $contents = (string) file_get_contents(base_path(self::IMPORT_GATE_PASS_RELEASE_PATH.'/'.$file));
+
+            foreach ([
+                'attempt_id',
+                'private_url',
+                'report_json',
+                'report_full_json',
+                'report_free_json',
+                'payload_json',
+                'raw_scores',
+                'Big Five Report Engine',
+                'PR3B',
+                'AttemptReadController',
+                '[object Object]',
+            ] as $forbidden) {
+                $this->assertStringNotContainsString($forbidden, $contents, $file);
+            }
+        }
+
+        $snapshot = $this->jsonFile(self::IMPORT_GATE_PASS_RELEASE_PATH.'/big5_v2_release_snapshot_rc_0_3.json');
+
+        $this->assertSame('not_runtime', $snapshot['runtime_use'] ?? null);
+        $this->assertFalse((bool) ($snapshot['ready_for_production'] ?? true));
+        $this->assertFalse((bool) ($snapshot['production_rollout_enabled'] ?? true));
+    }
+
     public function test_rollback_is_supported_by_snapshot_revert_without_runtime_enablement(): void
     {
         $snapshot = $this->jsonFile(self::RELEASE_PATH.'/big5_v2_release_snapshot_rc_0_1.json');
@@ -177,6 +260,7 @@ final class ReleaseSnapshotTest extends TestCase
     {
         $this->assertSha256SumsAreReproducible(self::RELEASE_PATH, 3);
         $this->assertSha256SumsAreReproducible(self::APPROVAL_PREP_RELEASE_PATH, 4);
+        $this->assertSha256SumsAreReproducible(self::IMPORT_GATE_PASS_RELEASE_PATH, 5);
     }
 
     private function assertSha256SumsAreReproducible(string $releasePath, int $expectedCount): void
