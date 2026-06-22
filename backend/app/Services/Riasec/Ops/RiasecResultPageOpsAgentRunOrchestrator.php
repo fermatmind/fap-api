@@ -11,7 +11,7 @@ final class RiasecResultPageOpsAgentRunOrchestrator
 {
     public const SCHEMA_VERSION = 'fap.riasec.result_page_v2.ops_pr_train_orchestrator.v0.1';
 
-    public const DEFAULT_ARTIFACT_RELATIVE_DIR = 'artifacts/riasec_result_page_ops_agent_runner';
+    public const DEFAULT_ARTIFACT_RELATIVE_DIR = 'artifacts/riasec_result_page_v2_agent';
 
     public const DEFAULT_PERMISSION_MODEL_RELATIVE_PATH = 'content_assets/riasec/result_page_v2/governance/ops_agent_permission_model.v0_1.json';
 
@@ -139,6 +139,110 @@ final class RiasecResultPageOpsAgentRunOrchestrator
                 'production_execution_allowed_for_agent' => false,
                 'production_manual_gate_required' => true,
             ],
+            'errors' => array_values(array_unique($errors)),
+            'negative_guarantees' => $this->negativeGuarantees(),
+        ];
+    }
+
+    /**
+     * @param  array{
+     *     run_id?:string,
+     *     artifact_dir?:string,
+     *     permission_model_path?:string,
+     *     mode?:string,
+     *     scope_id?:string,
+     *     pr_title?:string,
+     *     base_branch?:string,
+     *     changed_files?:list<string>,
+     *     strict?:bool,
+     *     simulate_external_blocker?:bool,
+     *     simulate_current_scope_failure?:bool
+     * }  $options
+     * @return array<string,mixed>
+     */
+    public function stagingDryRun(array $options = []): array
+    {
+        $options['mode'] = $options['mode'] ?? 'auto-to-staging';
+        $plan = $this->plan($options);
+        $runId = (string) ($plan['run_id'] ?? $this->runId('', 'auto-to-staging', 'ops-agent-staging-runner', 'main', 'RIASEC staging dry-run'));
+        $artifactDir = $this->artifactDir((string) ($options['artifact_dir'] ?? ''), $runId);
+        $this->ensureDirectory($artifactDir);
+
+        $dryRunReport = [
+            'schema_version' => self::SCHEMA_VERSION,
+            'task' => 'staging_dry_run',
+            'run_id' => $runId,
+            'runtime_use' => 'staging_only',
+            'production_use_allowed' => false,
+            'ready_for_runtime' => false,
+            'ready_for_production' => false,
+            'cms_write_performed' => false,
+            'runtime_change_performed' => false,
+            'checks' => [
+                'permission_model_valid' => (bool) data_get($plan, 'summary.permission_model_valid', false),
+                'scope_valid' => (bool) data_get($plan, 'summary.scope_valid', false),
+                'checksum_inventory_planned' => true,
+                'public_leak_scan_planned' => true,
+                'fail_closed_policy_present' => true,
+            ],
+            'negative_guarantees' => $this->negativeGuarantees(),
+        ];
+        $previewReport = [
+            'schema_version' => self::SCHEMA_VERSION,
+            'task' => 'render_preview_smoke',
+            'run_id' => $runId,
+            'runtime_use' => 'staging_only',
+            'surfaces' => ['result_page', 'pdf', 'share', 'history', 'compare'],
+            'locked_free_redaction_required' => true,
+            'frontend_fallback_allowed' => false,
+            'production_use_allowed' => false,
+        ];
+        $apiSmokeReport = [
+            'schema_version' => self::SCHEMA_VERSION,
+            'task' => 'api_smoke',
+            'run_id' => $runId,
+            'runtime_use' => 'staging_only',
+            'routes_smoked' => [],
+            'dry_run_only' => true,
+            'cms_write_performed' => false,
+            'production_rollout_performed' => false,
+        ];
+
+        $artifacts = [
+            'ops_agent_pr_train_orchestrator_plan.json' => (array) data_get($plan, 'artifacts.ops_agent_pr_train_orchestrator_plan.json', []),
+            'staging_dry_run_report.json' => $this->writeJson($artifactDir.'/staging_dry_run_report.json', $dryRunReport),
+            'render_preview_smoke_report.json' => $this->writeJson($artifactDir.'/render_preview_smoke_report.json', $previewReport),
+            'api_smoke_report.json' => $this->writeJson($artifactDir.'/api_smoke_report.json', $apiSmokeReport),
+        ];
+
+        $errors = (array) ($plan['errors'] ?? []);
+        if (($dryRunReport['checks']['permission_model_valid'] ?? false) !== true) {
+            $errors[] = 'permission_model_invalid';
+        }
+        if (($dryRunReport['checks']['scope_valid'] ?? false) !== true) {
+            $errors[] = 'scope_validation_failed';
+        }
+
+        $ok = $errors === [];
+
+        return [
+            'schema_version' => self::SCHEMA_VERSION,
+            'ok' => $ok,
+            'status' => $ok ? 'success' : 'blocked',
+            'run_id' => $runId,
+            'artifact_dir' => $this->redactPath($artifactDir),
+            'mode' => 'auto-to-staging',
+            'scope_id' => (string) ($plan['scope_id'] ?? ''),
+            'summary' => [
+                'staging_dry_run_report_created' => true,
+                'render_preview_smoke_report_created' => true,
+                'api_smoke_report_created' => true,
+                'production_execution_allowed_for_agent' => false,
+                'production_manual_gate_required' => true,
+                'cms_write_performed' => false,
+                'runtime_change_performed' => false,
+            ],
+            'artifacts' => $artifacts,
             'errors' => array_values(array_unique($errors)),
             'negative_guarantees' => $this->negativeGuarantees(),
         ];

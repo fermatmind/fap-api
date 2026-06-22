@@ -121,6 +121,37 @@ final class RiasecOpsAgentRunOrchestratorTest extends TestCase
         }
     }
 
+    public function test_staging_dry_run_writes_staging_only_reports_without_runtime_or_cms_writes(): void
+    {
+        $root = $this->tempDir('riasec-ops-runner-staging');
+
+        try {
+            $summary = app(RiasecResultPageOpsAgentRunOrchestrator::class)->stagingDryRun([
+                'run_id' => 'staging-run',
+                'artifact_dir' => $root,
+                'mode' => 'auto-to-staging',
+                'scope_id' => 'ops-agent-staging-runner',
+                'changed_files' => [
+                    'backend/app/Services/Riasec/Ops/RiasecResultPageOpsAgentRunOrchestrator.php',
+                ],
+                'strict' => true,
+            ]);
+
+            $this->assertTrue((bool) ($summary['ok'] ?? false));
+            $this->assertFalse((bool) data_get($summary, 'summary.cms_write_performed', true));
+            $this->assertFalse((bool) data_get($summary, 'summary.runtime_change_performed', true));
+
+            $report = $this->readJson($root.'/staging-run/staging_dry_run_report.json');
+            $this->assertSame('staging_only', $report['runtime_use'] ?? null);
+            $this->assertFalse((bool) ($report['ready_for_production'] ?? true));
+            $this->assertFalse((bool) ($report['runtime_change_performed'] ?? true));
+            $this->assertFileExists($root.'/staging-run/render_preview_smoke_report.json');
+            $this->assertFileExists($root.'/staging-run/api_smoke_report.json');
+        } finally {
+            $this->deleteDirectory($root);
+        }
+    }
+
     private function tempDir(string $prefix): string
     {
         $path = sys_get_temp_dir().'/'.$prefix.'-'.bin2hex(random_bytes(4));
