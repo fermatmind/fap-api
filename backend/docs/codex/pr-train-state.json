@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-06-22T15:46:14+08:00",
+  "updated_at": "2026-06-22T15:48:08+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -9,10 +9,10 @@
     "SEO-AGENT-GSC-COHORT-HANDOFF-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "branch": "codex/seo-agent-gsc-cohort-handoff-01",
       "commit_sha": "880117681",
-      "pr_url": "",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/2284",
       "checks": {
         "local": [
           {
@@ -67,6 +67,11 @@
           "at": "2026-06-22T15:46:14+08:00",
           "status": "local_checks_passed",
           "summary": "Added readonly GSC cohort artifact adapter, generated contract, command registration, and focused tests. Command discovery, focused PHPUnit, runner/draft-package regressions, Pint, JSON/YAML validation, and diff checks passed."
+        },
+        {
+          "at": "2026-06-22T15:48:08+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR #2284 for SEO-AGENT-GSC-COHORT-HANDOFF-01 after scoped local checks passed."
         }
       ]
     },
