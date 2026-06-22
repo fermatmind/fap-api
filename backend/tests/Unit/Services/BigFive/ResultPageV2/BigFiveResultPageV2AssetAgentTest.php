@@ -345,6 +345,133 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
         }
     }
 
+    public function test_execute_github_mutation_simulates_pr_plan_without_live_mutation(): void
+    {
+        $artifactRoot = base_path('artifacts/big5_result_page_v2_agent/unit-github-mutation-simulate');
+
+        $this->deleteDirectory($artifactRoot);
+
+        try {
+            app(BigFiveResultPageV2AssetAgent::class)->generateCandidates([
+                'run_id' => 'candidate-source',
+                'artifact_dir' => $artifactRoot,
+            ]);
+            app(BigFiveResultPageV2AssetAgent::class)->planPr([
+                'run_id' => 'orchestrator-plan',
+                'artifact_dir' => $artifactRoot,
+                'source_run_dir' => $artifactRoot.'/candidate-source',
+                'pr_id' => 'B5-RESULT-CANDIDATE-BATCH-SIMULATE-01',
+                'branch' => 'codex/big5-v2-candidate-batch-simulate',
+                'title' => 'B5-RESULT-CANDIDATE-BATCH-SIMULATE-01: Big Five V2 candidate batch simulate',
+            ]);
+
+            $this->artisan('big5:result-page-v2-agent', [
+                'action' => 'execute-github-mutation',
+                '--run-id' => 'github-mutation',
+                '--artifact-dir' => $artifactRoot,
+                '--execution-plan-json' => $artifactRoot.'/orchestrator-plan/auto_pr_orchestration_plan.json',
+                '--repo-root' => dirname(base_path()),
+                '--github-repo' => 'fermatmind/fap-api',
+                '--mutation-mode' => 'simulate',
+                '--json' => true,
+            ])->assertExitCode(0);
+
+            $runDir = $artifactRoot.'/github-mutation';
+            $this->assertFileExists($runDir.'/github_mutation_execution_report.json');
+            $this->assertFileExists($runDir.'/repair_log.json');
+
+            $report = $this->readJson($runDir.'/github_mutation_execution_report.json');
+            $this->assertSame('github_mutation_execution_runner', $report['task'] ?? null);
+            $this->assertSame('not_runtime', $report['runtime_use'] ?? null);
+            $this->assertFalse((bool) ($report['production_use_allowed'] ?? true));
+            $this->assertSame('auto_pr_orchestrator_plan', $report['source_plan_task'] ?? null);
+            $this->assertSame('simulate', $report['mutation_mode'] ?? null);
+            $this->assertFalse((bool) ($report['allow_github_mutation'] ?? true));
+            $this->assertFalse((bool) ($report['live_execution_performed'] ?? true));
+            $this->assertTrue((bool) data_get($report, 'preflight.valid'));
+            $this->assertSame([], data_get($report, 'preflight.blockers'));
+            $this->assertSame(8, (int) ($report['step_count'] ?? 0));
+            $this->assertFalse((bool) data_get($report, 'steps.0.executed', true));
+
+            foreach ([
+                'git_branch_created',
+                'git_commit_created',
+                'github_pr_created',
+                'github_merge_performed',
+                'auto_merge_performed',
+                'runtime_flag_change',
+                'production_import_gate_change',
+                'rollout_gate_change',
+            ] as $guarantee) {
+                $this->assertFalse((bool) data_get($report, "negative_guarantees.{$guarantee}", true), $guarantee);
+            }
+
+            $allArtifacts = implode("\n", [
+                (string) file_get_contents($runDir.'/github_mutation_execution_report.json'),
+                (string) file_get_contents($runDir.'/repair_log.json'),
+            ]);
+            foreach ([
+                sys_get_temp_dir(),
+                'private_url',
+                'attempt_id',
+                'raw_score',
+                'percentile',
+                'fixed_type',
+                'user_confirmed_type',
+                'type_code',
+            ] as $forbiddenToken) {
+                $this->assertStringNotContainsString($forbiddenToken, $allArtifacts);
+            }
+        } finally {
+            $this->deleteDirectory($artifactRoot);
+        }
+    }
+
+    public function test_execute_github_mutation_rejects_live_mode_without_explicit_authorization(): void
+    {
+        $artifactRoot = base_path('artifacts/big5_result_page_v2_agent/unit-github-mutation-live-blocked');
+
+        $this->deleteDirectory($artifactRoot);
+
+        try {
+            app(BigFiveResultPageV2AssetAgent::class)->generateCandidates([
+                'run_id' => 'candidate-source',
+                'artifact_dir' => $artifactRoot,
+            ]);
+            app(BigFiveResultPageV2AssetAgent::class)->planPr([
+                'run_id' => 'orchestrator-plan',
+                'artifact_dir' => $artifactRoot,
+                'source_run_dir' => $artifactRoot.'/candidate-source',
+                'pr_id' => 'B5-RESULT-CANDIDATE-BATCH-LIVE-BLOCKED-01',
+                'branch' => 'codex/big5-v2-candidate-batch-live-blocked',
+                'title' => 'B5-RESULT-CANDIDATE-BATCH-LIVE-BLOCKED-01: Big Five V2 candidate batch live blocked',
+            ]);
+
+            $this->artisan('big5:result-page-v2-agent', [
+                'action' => 'execute-github-mutation',
+                '--run-id' => 'github-mutation',
+                '--artifact-dir' => $artifactRoot,
+                '--execution-plan-json' => $artifactRoot.'/orchestrator-plan/auto_pr_orchestration_plan.json',
+                '--repo-root' => dirname(base_path()),
+                '--github-repo' => 'fermatmind/fap-api',
+                '--mutation-mode' => 'live',
+                '--json' => true,
+            ])->assertExitCode(1);
+
+            $report = $this->readJson($artifactRoot.'/github-mutation/github_mutation_execution_report.json');
+            $this->assertSame('live', $report['mutation_mode'] ?? null);
+            $this->assertFalse((bool) ($report['allow_github_mutation'] ?? true));
+            $this->assertFalse((bool) ($report['live_execution_performed'] ?? true));
+            $this->assertFalse((bool) data_get($report, 'preflight.valid', true));
+            $this->assertContains('live_github_mutation_not_allowed', (array) data_get($report, 'preflight.blockers', []));
+            $this->assertSame(8, (int) ($report['step_count'] ?? 0));
+            $this->assertFalse((bool) data_get($report, 'steps.0.executed', true));
+            $this->assertFalse((bool) data_get($report, 'negative_guarantees.github_pr_created', true));
+        } finally {
+            $this->deleteDirectory($artifactRoot);
+        }
+    }
+
     public function test_inspect_ci_classifies_failures_and_only_plans_mechanical_fixes(): void
     {
         $artifactRoot = base_path('artifacts/big5_result_page_v2_agent/unit-ci-inspector');
