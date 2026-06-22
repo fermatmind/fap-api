@@ -1,0 +1,139 @@
+{
+  "version": "free-assessment-gsc-live-smoke-evidence-contract.v1",
+  "task": "FA30-API-04",
+  "type": "gsc_readonly_live_smoke_evidence_contract",
+  "channel": "gsc",
+  "surface_group": "free_assessment_landings",
+  "site_property": {
+    "host": "fermatmind.com",
+    "property_scope": "sc-domain:fermatmind.com",
+    "property_hash": "63c1b1d353301bf50bad716597fe04c209c7d0ff70e327981bd5463743f9bd60"
+  },
+  "authority_boundary": {
+    "gsc_is_feedback_readiness_source": true,
+    "backend_url_truth_remains_authority": true,
+    "cms_publication_state_remains_authority": true,
+    "sitemap_llms_canonical_remain_backend_authority": true,
+    "gsc_is_content_authority": false,
+    "gsc_is_url_truth_authority": false,
+    "gsc_creates_urls": false,
+    "gsc_overrides_indexability": false
+  },
+  "allowed_live_smoke": {
+    "api": "google_search_console_searchanalytics_query",
+    "method": "read_only_searchanalytics",
+    "requires_explicit_live_read_gate": true,
+    "requires_safe_secret_channel": true,
+    "requires_dry_run": true,
+    "requires_no_write": true,
+    "max_row_limit": 250,
+    "recommended_window_days": 28,
+    "dimensions": [
+      "query",
+      "page"
+    ],
+    "evidence_format": "sanitized_hash_and_aggregate_only"
+  },
+  "free_assessment_surfaces": [
+    {
+      "scale_code": "MBTI",
+      "locale": "en",
+      "canonical_path": "/en/tests/mbti-personality-test-16-personality-types",
+      "canonical_url_hash": "4403609d40ab1dd5684e31ed159a60ca3652c3f6b84d33834e6093126412361a",
+      "expected_page_type": "test_landing_page"
+    },
+    {
+      "scale_code": "BIG5_OCEAN",
+      "locale": "en",
+      "canonical_path": "/en/tests/big-five-personality-test-ocean-model",
+      "canonical_url_hash": "6c9851d9ac655fcfa99275135cda32b4d0a992bd5af89ceb485d84e2d1faa56a",
+      "expected_page_type": "test_landing_page"
+    },
+    {
+      "scale_code": "RIASEC",
+      "locale": "en",
+      "canonical_path": "/en/tests/holland-career-interest-test-riasec",
+      "canonical_url_hash": "d42216023e19cd6460175c11a409665ad40db7ab0a6528177ad6bda81f500c3a",
+      "expected_page_type": "test_landing_page"
+    },
+    {
+      "scale_code": "IQ_RAVEN",
+      "locale": "en",
+      "canonical_path": "/en/tests/iq-test-intelligence-quotient-assessment",
+      "canonical_url_hash": "74fa5ffb0d5a86e51eb32f99cd3a7953976afab6182406394d6d1fb53bca90ca",
+      "expected_page_type": "test_landing_page"
+    },
+    {
+      "scale_code": "EQ_60",
+      "locale": "en",
+      "canonical_path": "/en/tests/eq-test-emotional-intelligence-assessment",
+      "canonical_url_hash": "32ab11ef5071c48447b54c6796cbd12aa2d19e1ea87f8f76d0002989bffcc09f",
+      "expected_page_type": "test_landing_page"
+    },
+    {
+      "scale_code": "ENNEAGRAM",
+      "locale": "en",
+      "canonical_path": "/en/tests/enneagram-personality-test-nine-types",
+      "canonical_url_hash": "c3e98d608640476f418e135abd71ce5ac594c5b2b1e1e07979eb3b5567a807c9",
+      "expected_page_type": "test_landing_page"
+    }
+  ],
+  "required_evidence_fields": [
+    "run_id",
+    "observed_at",
+    "date_window",
+    "row_limit",
+    "dimensions",
+    "surface_count",
+    "matched_surface_count",
+    "rows_seen",
+    "data_quality_gate",
+    "safe_row_preview",
+    "canonical_url_hash",
+    "query_hash",
+    "query_display_masked"
+  ],
+  "forbidden_evidence_fields": [
+    "raw_query",
+    "raw_url",
+    "access_token",
+    "service_account_json",
+    "private_key",
+    "client_email",
+    "credential_path",
+    "cookie",
+    "session",
+    "email",
+    "order_id",
+    "attempt_id",
+    "payment_id",
+    "raw_ip"
+  ],
+  "negative_guarantees": {
+    "live_api_call_in_this_pr": false,
+    "db_writes": false,
+    "seo_gsc_daily_import": false,
+    "cms_write": false,
+    "search_channel_enqueue": false,
+    "search_channel_submit": false,
+    "gsc_url_inspection_request_indexing": false,
+    "gsc_sitemap_submit": false,
+    "baidu_call": false,
+    "indexnow_call": false,
+    "scheduler_enabled": false,
+    "queue_worker_enabled": false,
+    "production_env_edited": false,
+    "sitemap_changed": false,
+    "llms_changed": false,
+    "canonical_changed": false,
+    "noindex_changed": false,
+    "jsonld_changed": false
+  },
+  "acceptance": {
+    "go_status": "contract_ready",
+    "future_live_smoke_must_report": "GO_or_NO_GO",
+    "future_live_smoke_must_not_submit_urls": true,
+    "future_live_smoke_must_not_publish_or_import": true
+  },
+  "next_task": "FA30-WEB-05"
+}

@@ -24326,6 +24326,46 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: FA30-API-04
+    repo: fap-api
+    depends_on:
+      - FA30-API-05
+    branch: codex/fa30-api-04-gsc-live-smoke-evidence
+    title: "FA30-API-04: Add free-assessment GSC live-smoke evidence contract"
+    train_scope: fa30_free_assessment_gsc_live_smoke_evidence_contract
+    status: user_authorized
+    scope:
+      - Add a read-only GSC live-smoke evidence contract for FermatMind free assessment landing pages.
+      - Cover the six public assessment surfaces with backend-authoritative canonical paths and sanitized URL hashes.
+      - Require future live-smoke evidence to be sanitized hash/aggregate only and to report GO/NO-GO without URL submission.
+      - Keep this PR as docs/generated plus PHPUnit contract only; do not activate live GSC reads, URL inspection, indexing, queueing, CMS writes, or search submissions.
+    allowed_paths:
+      - backend/docs/seo/generated/free-assessment-gsc-live-smoke-evidence-contract.v1.json
+      - backend/tests/Feature/SeoIntel/FreeAssessmentGscLiveSmokeEvidenceContractTest.php
+      - generated/pr-train-sidecar-issues/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Execute live Google Search Console API calls in this PR.
+      - Submit URLs, request indexing, enqueue Search Channel records, import GSC rows, or write seo_gsc_daily rows.
+      - Change CMS publication state, sitemap, llms, canonical, noindex, JSON-LD, runtime routes, scheduler, queue, deploy, or environment configuration.
+      - Implement FA30-WEB-05, FA30-API-08, FA30-WEB-07, or any frontend scope.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=FreeAssessmentGscLiveSmokeEvidenceContractTest --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Feature/SeoIntel/FreeAssessmentGscLiveSmokeEvidenceContractTest.php
+      - python3 -m json.tool backend/docs/seo/generated/free-assessment-gsc-live-smoke-evidence-contract.v1.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: BIG5-RESULT-SOURCE-LEDGER-01
     repo: fap-api
     depends_on:
