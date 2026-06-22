@@ -58392,7 +58392,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-v2-m8-production-ops-metrics",
     "base": "main",
-    "status": "local_validated",
+    "status": "pr_open",
     "train_scope": "big5_result_page_v2_production_ops",
     "title": "B5-RESULT-M8-PRODUCTION-OPS-METRICS-01: Connect Big Five V2 weekly ops to production metrics",
     "depends_on": [
@@ -58430,8 +58430,8 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "cffccbd93f0bd408a18681c628a2abbdbbeeb1e1",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2279",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -58445,6 +58445,11 @@
         "at": "2026-06-22T05:39:03Z",
         "status": "local_validated",
         "note": "Implemented report_snapshots-backed weekly ops metrics, preserved contract source mode, reused the metrics service in Report/PDF Center, and passed local target tests plus static validation."
+      },
+      {
+        "at": "2026-06-22T05:41:11Z",
+        "status": "pr_open",
+        "note": "Opened PR #2279 after local validation and scope validation passed."
       }
     ]
   }
