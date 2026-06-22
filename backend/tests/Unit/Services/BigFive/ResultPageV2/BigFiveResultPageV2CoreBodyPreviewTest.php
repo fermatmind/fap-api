@@ -813,6 +813,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_content_release_id_length_schema_fix(): void
+    {
+        $changed = [
+            'backend/database/migrations/2026_06_23_000100_expand_content_release_id_columns.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_article_public_recency_ordering_only(): void
     {
         $changed = [
@@ -6429,6 +6438,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/database/migrations/2026_02_10_160100_add_idx_idempo_payload.php',
             'backend/database/migrations/2026_02_11_090100_add_idx_idempotency_keys_provider_recorded_hash.php',
             'backend/database/migrations/2026_02_27_110000_ensure_norms_table_lookup_index.php',
+            'backend/database/migrations/2026_06_23_000100_expand_content_release_id_columns.php',
         ], true);
     }
 
