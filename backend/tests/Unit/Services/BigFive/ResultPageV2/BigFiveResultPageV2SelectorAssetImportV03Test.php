@@ -64,7 +64,7 @@ final class BigFiveResultPageV2SelectorAssetImportV03Test extends TestCase
         $manifest = $this->manifest();
 
         $this->assertSame(325, $manifest['asset_count'] ?? null);
-        $this->assertSame('37875b72dc149e43561734862657a9e736b614e1b70b86b82851e59a928ce165', hash_file('sha256', $this->path('assets.json')));
+        $this->assertSame('44c57f2976f0b46c36ddc76cb2873996e4c71085c1f7cf97c7d3a226e3efe336', hash_file('sha256', $this->path('assets.json')));
         $this->assertSame(hash_file('sha256', $this->path('assets.json')), $manifest['sha256_json'] ?? null);
     }
 
@@ -210,6 +210,7 @@ final class BigFiveResultPageV2SelectorAssetImportV03Test extends TestCase
         $this->assertSame(self::EXPECTED_MODULE_COUNTS, $report['module_counts_expected'] ?? null);
         $this->assertSame('pass', $report['validation_status'] ?? null);
         $this->assertSame(0, $report['validation_error_count'] ?? null);
+        $this->assertSame(13, data_get($report, 'reading_mode_counts.share_safe'));
         $this->assertContains('module_00_trust_bar only 1 asset', $report['warnings'] ?? []);
         $this->assertContains('module_07_collaboration_manual only 8 assets', $report['warnings'] ?? []);
         $this->assertContains('shareable assets only 3', $report['warnings'] ?? []);

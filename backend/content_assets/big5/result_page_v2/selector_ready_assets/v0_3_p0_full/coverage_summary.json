@@ -40,26 +40,27 @@
     "norm_unavailable": 2
   },
   "reading_mode_counts": {
-    "standard": 321,
     "deep": 217,
-    "quick": 141
+    "quick": 141,
+    "share_safe": 13,
+    "standard": 321
   },
   "evidence_level_counts": {
     "cross_trait_interpretation": 90,
-    "scenario_interpretation": 65,
     "facet_inference": 60,
-    "trait_band_interpretation": 50,
-    "method_boundary": 25,
     "feedback_prompt": 25,
-    "share_policy": 10
+    "method_boundary": 25,
+    "scenario_interpretation": 65,
+    "share_policy": 10,
+    "trait_band_interpretation": 50
   },
   "safety_level_counts": {
-    "normal": 216,
-    "sensitive_non_clinical": 68,
-    "required_boundary": 15,
     "degraded": 12,
-    "share_safety_required": 11,
-    "share_safe_behavioral": 3
+    "normal": 216,
+    "required_boundary": 15,
+    "sensitive_non_clinical": 68,
+    "share_safe_behavioral": 3,
+    "share_safety_required": 11
   },
   "shareable_assets": [
     "asset.module_07_collaboration_manual.share_safety_registry.collaboration_document_first.v0_3",
