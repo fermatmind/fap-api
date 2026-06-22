@@ -8,6 +8,7 @@ use App\Services\Analytics\AnalyticsFunnelDailyBuilder;
 use Carbon\CarbonImmutable;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use Tests\Concerns\SeedsFunnelAnalyticsScenario;
 use Tests\TestCase;
@@ -88,6 +89,58 @@ final class AnalyticsFunnelDailyBuilderTest extends TestCase
         $this->assertSame(2, (int) ($totals['first_view_attempts'] ?? 0), 'paywall_view must stay outside the main view stage');
         $this->assertSame(2, (int) ($totals['paid_attempts'] ?? 0));
         $this->assertSame(1, (int) ($totals['unlocked_attempts'] ?? 0), 'unlock_success must depend on active grants, not paid order status');
+    }
+
+    public function test_builder_excludes_configured_smoke_attempts_and_codex_probe_anons(): void
+    {
+        $scenario = $this->seedFunnelAnalyticsScenario(89);
+        $day = CarbonImmutable::parse($scenario['day'].' 08:00:00');
+        $configuredSmokeAttempt = (string) Str::uuid();
+        $codexProbeAttempt = (string) Str::uuid();
+
+        config([
+            'analytics.smoke_attempt_exclusion.attempt_ids' => [$configuredSmokeAttempt],
+            'analytics.smoke_attempt_exclusion.anon_id_prefixes' => ['codex_probe_'],
+        ]);
+
+        foreach ([
+            [$configuredSmokeAttempt, 'BIG5_OCEAN', 'anon_'.$configuredSmokeAttempt, $day->addHours(5)],
+            [$codexProbeAttempt, 'ENNEAGRAM', 'codex_probe_enneagram_live_result_smoke', $day->addHours(6)],
+        ] as [$attemptId, $scaleCode, $anonId, $createdAt]) {
+            $this->insertAttempt($attemptId, 89, 'en', $createdAt, $createdAt->addMinutes(5));
+            $updates = [
+                'anon_id' => $anonId,
+                'scale_code' => $scaleCode,
+            ];
+            if (Schema::hasColumn('attempts', 'scale_code_v2')) {
+                $updates['scale_code_v2'] = $scaleCode;
+            }
+
+            DB::table('attempts')->where('id', $attemptId)->update($updates);
+            $this->insertAttemptSubmission($attemptId, 89, $createdAt->addMinutes(6));
+            $this->insertResult($attemptId, 89, $createdAt->addMinutes(8));
+            $this->insertEvent(89, 'result_view', $attemptId, $createdAt->addMinutes(10));
+            $this->insertOrder('ord_smoke_'.$attemptId, $attemptId, 89, $createdAt->addMinutes(12), 999, $createdAt->addMinutes(15));
+            $this->insertBenefitGrant($attemptId, 'ord_smoke_'.$attemptId, 89, $createdAt->addMinutes(16));
+            $this->insertReportSnapshot($attemptId, 'ord_smoke_'.$attemptId, 89, $createdAt->addMinutes(20));
+        }
+
+        $payload = app(AnalyticsFunnelDailyBuilder::class)->build(
+            new \DateTimeImmutable($scenario['day']),
+            new \DateTimeImmutable($scenario['day']),
+            [89],
+        );
+
+        $rowsByScale = collect($payload['rows'])->groupBy('scale_code');
+        $this->assertFalse($rowsByScale->has('BIG5_OCEAN'));
+        $this->assertFalse($rowsByScale->has('ENNEAGRAM'));
+
+        $mbtiRows = $rowsByScale->get('MBTI');
+        $this->assertNotNull($mbtiRows);
+        $this->assertSame(3, (int) $mbtiRows->sum('started_attempts'));
+        $this->assertSame(3, (int) $mbtiRows->sum('submitted_attempts'));
+        $this->assertSame(2, (int) $mbtiRows->sum('first_view_attempts'));
+        $this->assertSame(2, (int) $mbtiRows->sum('paid_attempts'));
     }
 
     public function test_projection_ready_paid_access_counts_as_report_ready(): void

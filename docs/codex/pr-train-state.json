@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-23T00:13:00+08:00",
+  "updated_at": "2026-06-22T16:11:02.492+00:00",
   "SEO-AGENT-ARTICLE41-DRAFT-CLAIM-RISK-QA-01": {
     "repo": "fap-api",
     "branch": "codex/seo-agent-article41-draft-claim-risk-qa-01",
@@ -59058,6 +59058,65 @@
         "at": "2026-06-22T20:36:00Z",
         "status": "pr_open",
         "note": "Opened PR #2309 on head 9cea70b51d2837edd78df1ca2debdbb55635a571 after local validation and scope validation passed."
+      }
+    ]
+  },
+  "FA30-API-05": {
+    "repo": "fap-api",
+    "branch": "codex/fa30-api-05-analytics-smoke-exclusion",
+    "base": "main",
+    "status": "local_validated",
+    "train_scope": "fa30_six_scale_smoke_analytics_exclusion",
+    "title": "FA30-API-05: Centralize six-scale smoke attempt analytics exclusion",
+    "depends_on": [
+      "FA30-API-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly provided FA30-API-05 id, title, scope, and authorized manifest/state updates in the FA30-NON-AGENT-PR-TRAIN-01 /goal request."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "FA30-API-01 is merged on GitHub as PR #2302, and origin/main contains merge commit 82c10c54cd03edd3380325fc0fa627915713d393."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=AnalyticsFunnelDailyBuilderTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoConversionDailyBuilderTest --no-ansi",
+          "cd backend && vendor/bin/pint --test config/analytics.php app/Services/Analytics/AnalyticsTrafficExclusionPolicy.php app/Services/Analytics/AnalyticsFunnelDailyBuilder.php app/Services/Analytics/SeoConversionDailyBuilder.php tests/Feature/Analytics/AnalyticsFunnelDailyBuilderTest.php tests/Feature/Analytics/SeoConversionDailyBuilderTest.php",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "git diff --check"
+        ],
+        "evidence": "PASS: cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=AnalyticsFunnelDailyBuilderTest --no-ansi (8 warning-only existing file_get_contents warnings, 50 assertions)\nPASS: cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoConversionDailyBuilderTest --no-ansi (5 warning-only existing file_get_contents warnings, 36 assertions)\nPASS: cd backend && vendor/bin/pint --test config/analytics.php app/Services/Analytics/AnalyticsTrafficExclusionPolicy.php app/Services/Analytics/AnalyticsFunnelDailyBuilder.php app/Services/Analytics/SeoConversionDailyBuilder.php tests/Feature/Analytics/AnalyticsFunnelDailyBuilderTest.php tests/Feature/Analytics/SeoConversionDailyBuilderTest.php\nPASS: ruby YAML parse for docs/codex/pr-train.yaml\nPASS: python3 -m json.tool docs/codex/pr-train-state.json\nPASS: git diff --check"
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to FA30-API-05 allowed paths: analytics config/policy, two analytics builders, two focused analytics tests, and docs/codex train metadata."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": ""
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-23T00:00:00+08:00",
+        "status": "in_progress",
+        "note": "Started from clean origin/main worktree. Scope is limited to analytics smoke/probe exclusion policy, funnel/SEO conversion aggregation use, focused tests, and docs/codex metadata. No production deploy, CMS write, search submission, scheduler, queue, sitemap, llms, canonical, noindex, JSON-LD, payment/order/report runtime, or fap-web scope is allowed."
+      },
+      {
+        "at": "2026-06-22T16:11:02.492+00:00",
+        "status": "local_validated",
+        "note": "Local tests, formatting, YAML/JSON parsing, diff check, and path scope validation passed after rebasing onto latest origin/main. PHPUnit warnings were warning-only and did not fail the targeted suites."
       }
     ]
   }

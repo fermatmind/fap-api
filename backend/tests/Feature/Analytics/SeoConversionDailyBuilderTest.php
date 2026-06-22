@@ -92,6 +92,56 @@ final class SeoConversionDailyBuilderTest extends TestCase
         $this->assertSame(0, (int) $row->start_test_count);
     }
 
+    public function test_refresh_excludes_smoke_and_codex_probe_seo_conversion_events(): void
+    {
+        $day = CarbonImmutable::parse('2026-06-09 11:30:00');
+        $smokeAttemptId = (string) Str::uuid();
+
+        config([
+            'analytics.smoke_attempt_exclusion.attempt_ids' => [$smokeAttemptId],
+            'analytics.smoke_attempt_exclusion.anon_id_prefixes' => ['codex_probe_'],
+        ]);
+
+        $basePayload = [
+            'url' => 'https://fermatmind.com/en/articles/personality-types',
+            'lang' => 'en',
+            'page_type' => 'article',
+            'source_article' => 'personality-types',
+            'target_test' => '/en/tests/big-five-personality-test-ocean-model',
+            'scale_id' => 'BIG5_OCEAN',
+            'form_id' => 'big5_90',
+            'session_id' => 'seo_sess_real_user',
+        ];
+
+        $this->insertSeoEvent(0, 'landing_pv', $day, $basePayload);
+        $this->insertSeoEvent(0, 'start_test', $day->addMinute(), [
+            ...$basePayload,
+            'session_id' => 'codex_probe_big5_live_result_smoke',
+        ]);
+        $this->insertSeoEvent(0, 'complete_test', $day->addMinutes(2), [
+            ...$basePayload,
+            'attempt_id' => $smokeAttemptId,
+            'session_id' => 'seo_sess_configured_smoke',
+        ]);
+        $this->insertSeoEvent(0, 'view_result', $day->addMinutes(3), [
+            ...$basePayload,
+            'session_id' => 'seo_sess_traffic_quality_smoke',
+            'traffic_quality' => 'smoke',
+        ]);
+
+        $result = app(SeoConversionDailyBuilder::class)->refresh($day, $day, [], false);
+
+        $this->assertSame(1, (int) ($result['upserted_rows'] ?? 0));
+
+        $row = DB::table('analytics_seo_conversion_daily')->first();
+
+        $this->assertNotNull($row);
+        $this->assertSame(1, (int) $row->landing_pv_count);
+        $this->assertSame(0, (int) $row->start_test_count);
+        $this->assertSame(0, (int) $row->complete_test_count);
+        $this->assertSame(0, (int) $row->view_result_count);
+    }
+
     public function test_refresh_skips_private_urls_before_daily_storage(): void
     {
         $day = CarbonImmutable::parse('2026-06-09 12:00:00');
