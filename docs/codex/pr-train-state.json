@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-22T09:33:00+08:00",
+  "updated_at": "2026-06-22T09:41:00+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -57358,7 +57358,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-v2-auto-merge-cleanup",
     "base": "main",
-    "status": "local_validated",
+    "status": "pr_open",
     "train_scope": "big5_result_page_v2_asset_agent_automation",
     "title": "B5-RESULT-AUTO-MERGE-CLEANUP-01: Plan Big Five V2 agent merge cleanup",
     "depends_on": [
@@ -57390,12 +57390,12 @@
       },
       "github": {
         "status": "pending",
-        "evidence": null
+        "evidence": "PR #2253 opened; waiting for GitHub checks."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "1e70634add11c549e1da1a1a76c2532771fcc72a",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2253",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -57404,6 +57404,11 @@
         "at": "2026-06-22T09:33:00+08:00",
         "status": "local_validated",
         "note": "Started PR4 from synced main after PR3 merge/cleanup. Local validation and scope validation passed for dry-run merge cleanup gate planning."
+      },
+      {
+        "at": "2026-06-22T09:41:00+08:00",
+        "status": "pr_open",
+        "note": "Opened PR #2253 after local validation and scope validation passed; waiting for required GitHub checks."
       }
     ]
   }
