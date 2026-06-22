@@ -1,0 +1,57 @@
+{
+  "schema": "fap.big5.result_page_v2.analytics_handoff_summary.v0_1",
+  "package_key": "big5_result_page_v2.analytics_handoff.v0_1",
+  "version": "0.1",
+  "mode": "analytics_handoff_advisory",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_analytics_review": true,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "metric_count": 10,
+  "metric_keys": [
+    "full_report_view",
+    "pdf_download",
+    "share_create",
+    "share_open",
+    "second_test_rate",
+    "returning_user_rate",
+    "retention_d1",
+    "retention_d7",
+    "retention_d14",
+    "retention_d28"
+  ],
+  "required_exclusion_classes": [
+    "smoke_artifacts",
+    "test_artifacts",
+    "qa_artifacts",
+    "synthetic_artifacts",
+    "fixture_artifacts",
+    "codex_artifacts",
+    "generated_artifacts",
+    "operator_only_artifacts",
+    "internal_monitoring_artifacts"
+  ],
+  "share_safety_missing_count": 0,
+  "validation_error_count": 0,
+  "leak_hit_count": 0,
+  "redaction_status": "pass",
+  "production_blocked": true,
+  "backend_authority": true,
+  "frontend_copy_added": false,
+  "negative_guarantees": {
+    "database_write": false,
+    "event_emission": false,
+    "dashboard_change": false,
+    "cms_write": false,
+    "frontend_copy_write": false,
+    "runtime_flag_change": false,
+    "production_import_gate_change": false,
+    "rollout_gate_change": false,
+    "seo_runtime_change": false,
+    "search_submission": false,
+    "manual_deploy": false
+  }
+}
+

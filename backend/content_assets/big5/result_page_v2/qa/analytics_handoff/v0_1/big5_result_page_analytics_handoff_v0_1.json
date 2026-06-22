@@ -1,0 +1,214 @@
+{
+  "schema": "fap.big5.result_page_v2.analytics_handoff.v0_1",
+  "package_key": "big5_result_page_v2.analytics_handoff.v0_1",
+  "version": "0.1",
+  "mode": "analytics_handoff_advisory",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_analytics_review": true,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "source_readiness": {
+    "readiness_artifact_source": "fap-api sanitized readiness artifact evidence",
+    "share_safety_missing_count": 0,
+    "validation_error_count": 0,
+    "leak_hit_count": 0,
+    "readiness_pass": true
+  },
+  "metric_definitions": {
+    "full_report_view": {
+      "purpose": "Measure successful Big Five V2 full-report consumption after result access.",
+      "numerator": "Big Five V2 full-report result surfaces viewed with backend authority evidence.",
+      "denominator": "Eligible Big Five V2 completed results with report access allowed.",
+      "aggregation_grain": "daily aggregate count and rate",
+      "required_exclusions": [
+        "smoke_artifacts",
+        "test_artifacts",
+        "qa_artifacts",
+        "synthetic_artifacts",
+        "generated_artifacts",
+        "operator_only_artifacts"
+      ]
+    },
+    "pdf_download": {
+      "purpose": "Measure public-safe PDF action interest without storing files or private links.",
+      "numerator": "Big Five V2 PDF actions allowed by report-access authority.",
+      "denominator": "Eligible Big Five V2 full-report views.",
+      "aggregation_grain": "daily aggregate count and rate",
+      "required_exclusions": [
+        "smoke_artifacts",
+        "test_artifacts",
+        "qa_artifacts",
+        "synthetic_artifacts",
+        "generated_artifacts",
+        "operator_only_artifacts"
+      ]
+    },
+    "share_create": {
+      "purpose": "Measure creation of share-safe Big Five V2 summaries.",
+      "numerator": "Share-safe summaries created from Big Five V2 report-access authority.",
+      "denominator": "Eligible Big Five V2 full-report views.",
+      "aggregation_grain": "daily aggregate count and rate",
+      "required_exclusions": [
+        "smoke_artifacts",
+        "test_artifacts",
+        "qa_artifacts",
+        "synthetic_artifacts",
+        "generated_artifacts",
+        "operator_only_artifacts"
+      ]
+    },
+    "share_open": {
+      "purpose": "Measure opening of share-safe Big Five V2 summaries.",
+      "numerator": "Share-safe summary opens that pass public-boundary checks.",
+      "denominator": "Share-safe summaries created.",
+      "aggregation_grain": "daily aggregate count and rate",
+      "required_exclusions": [
+        "smoke_artifacts",
+        "test_artifacts",
+        "qa_artifacts",
+        "synthetic_artifacts",
+        "generated_artifacts",
+        "operator_only_artifacts"
+      ]
+    },
+    "second_test_rate": {
+      "purpose": "Measure movement from Big Five completion into another FermatMind assessment.",
+      "numerator": "Eligible users or anonymous sessions starting a different assessment after Big Five completion within the configured observation window.",
+      "denominator": "Eligible Big Five V2 completers.",
+      "aggregation_grain": "daily aggregate count and rate",
+      "required_exclusions": [
+        "smoke_artifacts",
+        "test_artifacts",
+        "qa_artifacts",
+        "synthetic_artifacts",
+        "generated_artifacts",
+        "operator_only_artifacts"
+      ]
+    },
+    "returning_user_rate": {
+      "purpose": "Measure return behavior after Big Five completion without storing direct identifiers in this handoff.",
+      "numerator": "Eligible users or anonymous sessions returning after Big Five completion within the configured observation window.",
+      "denominator": "Eligible Big Five V2 completers.",
+      "aggregation_grain": "daily aggregate count and rate",
+      "required_exclusions": [
+        "smoke_artifacts",
+        "test_artifacts",
+        "qa_artifacts",
+        "synthetic_artifacts",
+        "generated_artifacts",
+        "operator_only_artifacts"
+      ]
+    },
+    "retention_d1": {
+      "purpose": "Measure D1 return after Big Five completion.",
+      "numerator": "Eligible returns on day 1.",
+      "denominator": "Eligible Big Five V2 completers.",
+      "aggregation_grain": "cohort aggregate rate",
+      "required_exclusions": [
+        "smoke_artifacts",
+        "test_artifacts",
+        "qa_artifacts",
+        "synthetic_artifacts",
+        "generated_artifacts",
+        "operator_only_artifacts"
+      ]
+    },
+    "retention_d7": {
+      "purpose": "Measure D7 return after Big Five completion.",
+      "numerator": "Eligible returns on day 7.",
+      "denominator": "Eligible Big Five V2 completers.",
+      "aggregation_grain": "cohort aggregate rate",
+      "required_exclusions": [
+        "smoke_artifacts",
+        "test_artifacts",
+        "qa_artifacts",
+        "synthetic_artifacts",
+        "generated_artifacts",
+        "operator_only_artifacts"
+      ]
+    },
+    "retention_d14": {
+      "purpose": "Measure D14 return after Big Five completion.",
+      "numerator": "Eligible returns on day 14.",
+      "denominator": "Eligible Big Five V2 completers.",
+      "aggregation_grain": "cohort aggregate rate",
+      "required_exclusions": [
+        "smoke_artifacts",
+        "test_artifacts",
+        "qa_artifacts",
+        "synthetic_artifacts",
+        "generated_artifacts",
+        "operator_only_artifacts"
+      ]
+    },
+    "retention_d28": {
+      "purpose": "Measure D28 return after Big Five completion.",
+      "numerator": "Eligible returns on day 28.",
+      "denominator": "Eligible Big Five V2 completers.",
+      "aggregation_grain": "cohort aggregate rate",
+      "required_exclusions": [
+        "smoke_artifacts",
+        "test_artifacts",
+        "qa_artifacts",
+        "synthetic_artifacts",
+        "generated_artifacts",
+        "operator_only_artifacts"
+      ]
+    }
+  },
+  "exclusion_policy": {
+    "status": "required",
+    "excluded_artifact_classes": [
+      "smoke_artifacts",
+      "test_artifacts",
+      "qa_artifacts",
+      "synthetic_artifacts",
+      "fixture_artifacts",
+      "codex_artifacts",
+      "generated_artifacts",
+      "operator_only_artifacts",
+      "internal_monitoring_artifacts"
+    ],
+    "excluded_context_markers": [
+      "smoke",
+      "test",
+      "qa",
+      "synthetic",
+      "fixture",
+      "codex",
+      "generated",
+      "operator"
+    ],
+    "allowed_reporting_shape": [
+      "aggregate_counts",
+      "aggregate_rates",
+      "enum_statuses",
+      "cohort_window_labels"
+    ],
+    "disallowed_reporting_shape": [
+      "user_level_rows",
+      "direct_result_identifiers",
+      "private_links",
+      "report_bodies",
+      "measurement_vectors",
+      "internal_runtime_objects"
+    ]
+  },
+  "handoff_boundaries": {
+    "database_write": false,
+    "event_emission": false,
+    "dashboard_change": false,
+    "cms_write": false,
+    "frontend_copy_write": false,
+    "runtime_flag_change": false,
+    "production_import_gate_change": false,
+    "rollout_gate_change": false,
+    "seo_runtime_change": false,
+    "search_submission": false,
+    "manual_deploy": false
+  },
+  "next_gate": "BIG5-RESULT-PAGE-SEO-GEO-CONTROL-HANDOFF-01"
+}
+
