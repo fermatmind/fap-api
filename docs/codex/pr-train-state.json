@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-22T12:24:31+08:00",
+  "updated_at": "2026-06-22T12:30:29+08:00",
   "FREEMIUM-LOCALE-POLICY-SCAN-01": {
     "repo": "fap-api",
     "branch": "codex/freemium-locale-policy-scan-01",
@@ -57676,7 +57676,7 @@
     "repo": "fap-api",
     "branch": "codex/riasec-result-production-rollout-gate-01",
     "base": "main",
-    "status": "github_checks_failed_scoped_fix_local_passed",
+    "status": "github_checks_passed_ready_to_merge",
     "train_scope": "riasec_result_ops_agent_release_chain",
     "title": "RIASEC-RESULT-PRODUCTION-ROLLOUT-GATE-01: test(riasec): add production rollout gate",
     "depends_on": [
@@ -57700,10 +57700,13 @@
       "php_l_RolloutGateTest_after_github_fix": "passed",
       "git_diff_check_after_github_fix": "passed",
       "scope_validation_after_github_fix": "passed",
-      "php_artisan_test_bigfive_runtime_freeze_guard_after_github_fix": "passed"
+      "php_artisan_test_bigfive_runtime_freeze_guard_after_github_fix": "passed",
+      "github_checks_after_scoped_fix": "passed: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2",
+      "pre_merge_scope_validation": "passed",
+      "pre_merge_github_merge_state": "CLEAN"
     },
     "failure_reason": null,
-    "commit_sha": "20a7cf5d649c076557f8ffc77e3f455e65b4fa41",
+    "commit_sha": "c0f2885a3286127216ba32ce353a8bbae0d23ad6",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2276",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -57747,6 +57750,12 @@
         "from": "github_checks_failed_fix_in_scope",
         "to": "github_checks_failed_scoped_fix_local_passed",
         "notes": "Local validation passed after scoped GitHub fix: RiasecResultPage, ProductionRuntime, RolloutGate, php -l, git diff --check, BigFive runtime freeze guard, and scope validation."
+      },
+      {
+        "at": "2026-06-22T12:30:29+08:00",
+        "from": "github_checks_failed_scoped_fix_local_passed",
+        "to": "github_checks_passed_ready_to_merge",
+        "notes": "PR #2276 GitHub checks passed after scoped fix and pre-merge scope validation passed. GitHub mergeStateStatus=CLEAN. Production rollout remains manual-only and unexecuted."
       }
     ]
   },
