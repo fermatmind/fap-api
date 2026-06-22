@@ -1,0 +1,104 @@
+{
+  "schema": "fap.big5.result_page_v2.controlled_pilot_gate.v0_1",
+  "package_key": "big5_result_page_v2.controlled_pilot_gate.v0_1",
+  "version": "0.1",
+  "mode": "controlled_pilot_gate_advisory",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_controlled_pilot_review": true,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "pilot_gate_decision": "GO_FOR_ALLOWLIST_REVIEW_ONLY",
+  "runtime_activation_decision": "NO_GO",
+  "production_decision": "NO_GO",
+  "allowed_pilot_mode": "allowlist_only",
+  "blocked_modes": [
+    "anonymous_percentage_rollout",
+    "public_percentage_rollout",
+    "full_production_rollout",
+    "cms_publish",
+    "search_submission",
+    "frontend_copy_fallback"
+  ],
+  "required_evidence": {
+    "readiness_artifact": {
+      "status": "pass",
+      "evidence": "fap-api sanitized readiness artifact with share_safety_missing_count=0, validation_error_count=0, and leak_hit_count=0"
+    },
+    "free_full_report_runtime_qa": {
+      "status": "pass",
+      "evidence": "backend/content_assets/big5/result_page_v2/qa/free_full_report_runtime_qa_readiness/v0_1/big5_free_full_report_runtime_qa_readiness_report_v0_1.json"
+    },
+    "analytics_handoff": {
+      "status": "pass",
+      "evidence": "backend/content_assets/big5/result_page_v2/qa/analytics_handoff/v0_1/big5_result_page_analytics_handoff_v0_1.json"
+    },
+    "seo_geo_control_handoff": {
+      "status": "pass",
+      "evidence": "backend/content_assets/big5/result_page_v2/qa/seo_geo_control_handoff/v0_1/big5_result_page_seo_geo_control_handoff_v0_1.json"
+    },
+    "m7_pilot_gate": {
+      "status": "pass",
+      "evidence": "backend/content_assets/big5/result_page_v2/qa/m7_pilot_gate/v0_1/big5_v2_m7_pilot_gate_report_v0_1.json"
+    },
+    "rollback_kill_switch": {
+      "status": "pass",
+      "evidence": "backend/content_assets/big5/result_page_v2/qa/pilot_run_evidence/v0_1/big5_v2_pilot_run_rollback_v0_1.json"
+    }
+  },
+  "allowlist_scope_contract": {
+    "mode": "allowlist_only",
+    "traffic_policy": "small_scoped_review_only",
+    "scope_dimensions": [
+      "attempt",
+      "user",
+      "anonymous_session",
+      "organization",
+      "tenant",
+      "form",
+      "locale",
+      "scale"
+    ],
+    "required_scale": "BIG5_OCEAN",
+    "required_surface": "result_page_v2",
+    "identifier_policy": "redacted_placeholders_only",
+    "percentage_rollout_allowed": false,
+    "public_rollout_allowed": false
+  },
+  "rollback_controls": {
+    "disable_pilot_gate": true,
+    "clear_allowlist": true,
+    "keep_percentage_rollout_disabled": true,
+    "keep_production_import_disabled": true,
+    "keep_production_runtime_disabled": true,
+    "keep_legacy_fallback_available": true
+  },
+  "kill_switch_evidence": {
+    "default_access_decision": "deny",
+    "non_allowlisted_request_decision": "deny",
+    "missing_scope_dimension_decision": "deny",
+    "percentage_without_explicit_authorization_decision": "deny",
+    "production_without_runtime_approval_decision": "deny"
+  },
+  "handoff_boundaries": {
+    "database_write": false,
+    "cms_write": false,
+    "frontend_copy_write": false,
+    "runtime_flag_change": false,
+    "production_import_gate_change": false,
+    "rollout_gate_change": false,
+    "seo_runtime_change": false,
+    "search_submission": false,
+    "manual_deploy": false
+  },
+  "activation_blockers": [
+    "separate_runtime_activation_request_required",
+    "explicit_allowlist_values_required",
+    "operator_review_required",
+    "post_activation_live_smoke_required",
+    "no_production_rollout_in_this_package"
+  ],
+  "next_gate": "separate_explicit_runtime_activation_or_live_smoke_authorization"
+}
+

@@ -58691,7 +58691,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-v2-auto-merge-live-pilot",
     "base": "main",
-    "status": "pr_open",
+    "status": "merged",
     "train_scope": "big5_result_page_v2_asset_agent_execution_runner",
     "title": "B5-RESULT-AUTO-MERGE-LIVE-PILOT-01: Record Big Five V2 live merge cleanup pilot",
     "depends_on": [
@@ -59247,16 +59247,16 @@
         "evidence": "Changed files are limited to the Big Five V2 SEO/GEO control handoff QA package, focused PHPUnit, and docs/codex metadata including #2333 merge reconciliation. No runtime wrapper, controller, route, DB migration, fap-web copy, CMS, SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, search submission, rollout, import, release snapshot, dashboard, analytics refresh command, or deploy file changed."
       },
       "github": {
-        "status": "pending",
-        "evidence": "Opened https://github.com/fermatmind/fap-api/pull/2335 on head 6628e1c25f5de6d21e2157bfe97f4e5b6791c997."
+        "status": "pass",
+        "evidence": "PR #2335 merged at 2026-06-22T17:28:19Z with merge commit 65b7d5cde5b1ae1ac346e361b6ce253a96cbf225; required GitHub checks passed before merge."
       }
     },
     "failure_reason": null,
-    "commit_sha": "6628e1c25f5de6d21e2157bfe97f4e5b6791c997",
+    "commit_sha": "32c6e979b0aa8b620eab46258f54f8133181338b",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2335",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-22T17:28:19Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-23T02:00:00Z",
@@ -59272,6 +59272,72 @@
         "at": "2026-06-23T02:25:00Z",
         "status": "pr_open",
         "note": "Opened https://github.com/fermatmind/fap-api/pull/2335 after local validation and scope validation passed."
+      },
+      {
+        "at": "2026-06-22T17:28:19Z",
+        "status": "merged",
+        "note": "PR #2335 merged with merge commit 65b7d5cde5b1ae1ac346e361b6ce253a96cbf225. origin/main contains the merge commit, the remote task branch was deleted, local main was synced, and local cleanup was executed."
+      }
+    ]
+  },
+  "BIG5-CONTROLLED-PILOT-GATE-01": {
+    "repo": "fap-api",
+    "branch": "codex/big5-controlled-pilot-gate",
+    "base": "main",
+    "status": "local_validated",
+    "train_scope": "big5_result_page_agent_readiness_to_pilot",
+    "title": "BIG5-CONTROLLED-PILOT-GATE-01: Add Big Five controlled pilot gate",
+    "depends_on": [
+      "BIG5-RESULT-PAGE-SEO-GEO-CONTROL-HANDOFF-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly provided the Big Five readiness-to-pilot /goal and listed this scoped PR."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "fap-api PR #2335 is merged into origin/main as 65b7d5cde5b1ae1ac346e361b6ce253a96cbf225."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "cd backend && php artisan test --filter=BigFiveResultPageV2ControlledPilotGateTest --no-ansi",
+          "find backend/content_assets/big5/result_page_v2/qa/controlled_pilot_gate/v0_1 -name '*.json' -print -exec python3 -m json.tool {} >/dev/null \\;",
+          "cd backend/content_assets/big5/result_page_v2/qa/controlled_pilot_gate/v0_1 && shasum -a 256 -c SHA256SUMS",
+          "cd backend && vendor/bin/pint --test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2ControlledPilotGateTest.php",
+          "cd backend && php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='test_runtime_paths_have_no_uncommitted_diff' --no-ansi",
+          "git diff --check",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\""
+        ],
+        "evidence": "Focused ControlledPilotGateTest passed with 7 PHPUnit warning classifications and 122 assertions. JSON parse, SHA256SUMS verification, focused Pint, runtime-freeze guard, YAML/JSON metadata parse, and git diff check passed."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to the Big Five V2 controlled pilot gate QA package, focused PHPUnit, and docs/codex metadata including #2335 merge reconciliation. No runtime wrapper, controller, route, DB migration, fap-web copy, CMS, SEO runtime, sitemap, llms, canonical, noindex, JSON-LD, search submission, rollout, import, release snapshot, dashboard, analytics refresh command, live smoke, or deploy file changed."
+      },
+      "github": {
+        "status": "not_started",
+        "evidence": "PR not opened yet."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-23T02:40:00Z",
+        "status": "in_progress",
+        "note": "Started from synced fap-api main after #2335 merge cleanup. Scope is a backend-only controlled pilot gate evidence package and focused tests."
+      },
+      {
+        "at": "2026-06-23T02:55:00Z",
+        "status": "local_validated",
+        "note": "Added a redacted advisory controlled pilot gate package requiring readiness, free full-report QA, analytics handoff, SEO/GEO handoff, M7 gate, and rollback evidence. Allowlist-only scope, fail-closed kill switch evidence, checksum, metadata, Pint, runtime-freeze guard, and diff checks passed."
       }
     ]
   },
