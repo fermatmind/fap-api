@@ -1,11 +1,11 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-22T22:35:00+08:00",
+  "updated_at": "2026-06-22T23:10:00+08:00",
   "SEO-AGENT-ARTICLE41-DRAFT-CLAIM-RISK-QA-01": {
     "repo": "fap-api",
     "branch": "codex/seo-agent-article41-draft-claim-risk-qa-01",
     "base": "main",
-    "status": "pr_open",
+    "status": "merged",
     "train_scope": "seo_agent_gsc_draft_canary_closeout",
     "title": "SEO-AGENT-ARTICLE41-DRAFT-CLAIM-RISK-QA-01 Add article draft claim-risk QA",
     "checks": {
@@ -49,14 +49,18 @@
           "cd backend && vendor/bin/pint --test app/Console/Commands/SeoAgentArticleDraftClaimRiskQaCommand.php tests/Feature/SeoIntel/SeoAgentArticleDraftClaimRiskQaTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
         ],
         "notes": "Added the new read-only SEO Agent claim-risk QA command to the existing BigFive runtime-freeze classifier allowlist."
+      },
+      "github_final": {
+        "status": "pass",
+        "evidence": "GitHub PR #2315 merged with merge commit 77e606cb69ef467d79c0e90051e206eb11cd5bc1; origin/main contains the merge commit and remote branch was pruned/deleted."
       }
     },
     "failure_reason": null,
-    "commit_sha": "ac56924d4673c9eb08fcfdc38bd9ec241d32eae0",
+    "commit_sha": "77e606cb69ef467d79c0e90051e206eb11cd5bc1",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2315",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-22T15:00:48Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-22T22:35:00+08:00",
@@ -75,6 +79,12 @@
         "from": "local_checks_passed_with_external_sidecar",
         "to": "pr_open",
         "notes": "Opened https://github.com/fermatmind/fap-api/pull/2315."
+      },
+      {
+        "at": "2026-06-22T23:10:00+08:00",
+        "from": "pr_open",
+        "to": "merged",
+        "notes": "PR #2315 squash-merged; origin/main contains merge commit 77e606cb69ef467d79c0e90051e206eb11cd5bc1; local PR-E branch deleted after switching worktree to detached origin/main."
       }
     ]
   },
@@ -82,7 +92,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-agent-article41-draft-preview-runtime-qa-01",
     "base": "main",
-    "status": "planned",
+    "status": "local_checks_passed_with_external_sidecar",
     "train_scope": "seo_agent_gsc_draft_canary_closeout",
     "title": "SEO-AGENT-ARTICLE41-DRAFT-PREVIEW-RUNTIME-QA-01 Add article draft preview runtime QA",
     "depends_on": [
@@ -94,8 +104,24 @@
         "evidence": "User explicitly authorized SEO-AGENT-GSC-DRAFT-CANARY-CLOSEOUT-TRAIN-01 and PR-E through PR-I manifest/state initialization."
       },
       "dependency": {
-        "status": "pending",
-        "evidence": "Waiting for SEO-AGENT-ARTICLE41-DRAFT-CLAIM-RISK-QA-01."
+        "status": "pass",
+        "evidence": "SEO-AGENT-ARTICLE41-DRAFT-CLAIM-RISK-QA-01 merged via GitHub PR #2315 at 2026-06-22T15:00:48Z; origin/main contains merge commit 77e606cb69ef467d79c0e90051e206eb11cd5bc1."
+      },
+      "scope_validation": {
+        "status": "pass_with_external_sidecar",
+        "evidence": "Changed files are confined to PR-F command/test/doc registration, BigFive runtime-freeze classifier allowance for this SEO Agent command, and closeout train metadata."
+      },
+      "local": {
+        "status": "pass_with_external_pint_blocker",
+        "commands": [
+          "cd backend && php artisan list | rg 'seo-agent:article-draft-preview-runtime-qa|seo-agent:article-draft-claim-risk-qa'",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoAgentArticleDraftPreviewRuntimeQaTest --display-warnings",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter=seo_agent_article_draft_preview_runtime_qa --display-warnings",
+          "cd backend && vendor/bin/pint --test app/Console/Commands/SeoAgentArticleDraftPreviewRuntimeQaCommand.php tests/Feature/SeoIntel/SeoAgentArticleDraftPreviewRuntimeQaTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+          "python3 -m json.tool backend/docs/seo/generated/seo-agent-article-draft-preview-runtime-qa.v1.json >/dev/null",
+          "cd backend && vendor/bin/pint --test app/Console/Commands tests/Feature/SeoIntel"
+        ],
+        "notes": "Focused PR-F tests, BigFive runtime-freeze classifier coverage, scoped Pint, and JSON contract parse passed. Broad Pint still fails only on the existing external files recorded in docs/codex/sidecar/20260622-seo-agent-closeout-external-pint-blocker.md."
       }
     },
     "failure_reason": null,
@@ -110,6 +136,12 @@
         "from": "missing_from_manifest",
         "to": "planned",
         "notes": "Initialized from explicit SEO Agent GSC draft canary closeout /goal."
+      },
+      {
+        "at": "2026-06-22T23:10:00+08:00",
+        "from": "planned",
+        "to": "local_checks_passed_with_external_sidecar",
+        "notes": "Implemented read-only article draft preview/runtime QA command and focused tests; broad Pint external blocker unchanged."
       }
     ]
   },
