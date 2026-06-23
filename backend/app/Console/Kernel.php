@@ -189,6 +189,7 @@ use App\Console\Commands\SeedScaleRegistry;
 use App\Console\Commands\SeoAgentArticleCmsPublishCanaryCommand;
 use App\Console\Commands\SeoAgentArticleDraftClaimRiskQaCommand;
 use App\Console\Commands\SeoAgentArticleDraftPreviewRuntimeQaCommand;
+use App\Console\Commands\SeoAgentArticlePostPublishPropagationDryRunCommand;
 use App\Console\Commands\SeoAgentAutoRollbackGuardCommand;
 use App\Console\Commands\SeoAgentCmsDraftPackageDryRunCommand;
 use App\Console\Commands\SeoAgentCmsDraftPayloadRepairCanaryCommand;
@@ -427,6 +428,7 @@ class Kernel extends ConsoleKernel
         SeoAgentCmsFaqGapScanCommand::class,
         SeoAgentAutoRollbackGuardCommand::class,
         SeoAgentArticleCmsPublishCanaryCommand::class,
+        SeoAgentArticlePostPublishPropagationDryRunCommand::class,
         SeoAgentArticleDraftClaimRiskQaCommand::class,
         SeoAgentArticleDraftPreviewRuntimeQaCommand::class,
         SeoAgentCmsTdkGapScanCommand::class,

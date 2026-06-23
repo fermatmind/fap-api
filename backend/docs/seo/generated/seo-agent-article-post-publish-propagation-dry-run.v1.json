@@ -1,0 +1,58 @@
+{
+  "version": "seo-agent-article-post-publish-propagation-dry-run.v1",
+  "task": "SEO-AGENT-ARTICLE-POST-PUBLISH-PROPAGATION-DRY-RUN-01",
+  "repo": "fap-api",
+  "command": "php artisan seo-agent:article-post-publish-propagation-dry-run",
+  "input_schema": "seo-agent-article-cms-publish-canary.v1",
+  "output_schema": "seo-agent-article-post-publish-propagation-dry-run.v1",
+  "default_mode": "dry_run_only",
+  "supported_targets_v1": [
+    "article"
+  ],
+  "required_inputs": [
+    "--publish-evidence=<seo-agent-article-cms-publish-canary evidence>",
+    "--target=article:<id>:<locale>",
+    "--revision-id=<article_revision_id>",
+    "--limit=1"
+  ],
+  "dry_run_checks": [
+    "publish evidence success and one committed publish",
+    "target and revision lock match",
+    "article is published, public, and indexable",
+    "published revision pointer is valid",
+    "SEO title length is at most 60 characters",
+    "sitemap and llms eligibility is observed without mutation",
+    "URL Truth article support is reported without write",
+    "Search Channel and IndexNow article bridge support is reported without enqueue or submission"
+  ],
+  "status_values": [
+    "planned",
+    "ready_with_adapter_gap",
+    "blocked"
+  ],
+  "adapter_gap_behavior": {
+    "url_truth_article_page_type_not_supported": "reported as readiness gap only when the installed URL Truth artifact service does not support article page type; no DB write is attempted",
+    "post_publish_search_bridge_article_evidence_not_supported": "reported as readiness gap; no queue enqueue or live submission is attempted"
+  },
+  "negative_guarantees": {
+    "database_write": false,
+    "cms_write": false,
+    "cms_publish": false,
+    "url_truth_write": false,
+    "sitemap_llms_mutation": false,
+    "search_channel_enqueue": false,
+    "search_channel_submit": false,
+    "indexnow_submit": false,
+    "indexing_request": false,
+    "scheduler_activation": false,
+    "queue_worker_start": false,
+    "external_model_api_call": false,
+    "external_search_api_call": false,
+    "live_gsc_api_call": false
+  },
+  "post_dry_run_gates": [
+    "URL Truth write requires a separate exact approval",
+    "Search Channel enqueue requires a separate exact approval",
+    "IndexNow live submit requires a separate exact approval"
+  ]
+}
