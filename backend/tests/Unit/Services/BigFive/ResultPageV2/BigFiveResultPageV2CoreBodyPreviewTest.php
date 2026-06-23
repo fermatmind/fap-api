@@ -2803,8 +2803,20 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Iq/IqOwnerOriginal30BankService.php',
             'backend/routes/api.php',
         ];
+        $routeChangedLines = [
+            '+use App\\Http\\Controllers\\API\\V0_3\\AttemptQuestionDeliveryController;',
+            "+            Route::get('/attempts/{attempt_id}/questions', [AttemptQuestionDeliveryController::class, 'show'])",
+            "+                ->middleware([\\App\\Http\\Middleware\\FmTokenAuth::class, 'uuid:attempt_id'])",
+            "+                ->defaults('public_realm', true)",
+            "+                ->name('api.v0_3.attempts.questions');",
+        ];
 
-        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            routeChangedLines: $routeChangedLines,
+        ));
     }
 
     public function test_runtime_freeze_classifier_ignores_attempt_submission_reliability_hardening(): void
@@ -5180,6 +5192,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if (
+                $file === 'backend/routes/api.php'
+                && $this->routeDiffIsIqOwnerOriginal30SessionDeliveryOnly(
+                    $routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef)
+                )
+            ) {
+                continue;
+            }
+
             if ($this->isRiasecMeasurementContractComparePolicyFile($file)) {
                 continue;
             }
@@ -6600,7 +6621,6 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Attempts/AttemptStartService.php',
             'backend/app/Services/Attempts/AttemptSubmissionService.php',
             'backend/app/Services/Iq/IqOwnerOriginal30BankService.php',
-            'backend/routes/api.php',
         ], true);
     }
 
@@ -9319,6 +9339,28 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if (preg_match('/ResearchReportController|\/research|\/internal\/research-reports/u', $line) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function routeDiffIsIqOwnerOriginal30SessionDeliveryOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            if (str_starts_with($line, '-')) {
+                return false;
+            }
+
+            if (preg_match('/AttemptQuestionDeliveryController|\\/attempts\\/\\{attempt_id\\}\\/questions|FmTokenAuth|uuid:attempt_id|public_realm|api\\.v0_3\\.attempts\\.questions/u', $line) !== 1) {
                 return false;
             }
         }

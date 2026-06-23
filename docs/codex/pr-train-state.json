@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-23T16:18:00Z",
+  "updated_at": "2026-06-23T16:32:00Z",
   "SEO-AGENT-ARTICLE41-DRAFT-CLAIM-RISK-QA-01": {
     "repo": "fap-api",
     "branch": "codex/seo-agent-article41-draft-claim-risk-qa-01",
@@ -60147,7 +60147,7 @@
           "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
           "git diff --check"
         ],
-        "evidence": "PASS after CI fix: private scoring verifier; php artisan test --filter=IqOwnerOriginal30 --no-ansi (7 tests, 3454 assertions); BigFive runtime freeze classifier focused test; constructor injection limit gate scripts/pr74_verify.sh; OpenAPI snapshot check; scoped Pint --test (8 files); IQ bank JSON parse checks; docs/codex JSON/YAML parse checks; git diff --check; changed-file scope validation."
+        "evidence": "PASS after CI fix v2: private scoring verifier; php artisan test --filter=IqOwnerOriginal30 --no-ansi (7 tests, 3454 assertions); full BigFiveResultPageV2CoreBodyPreviewTest file (264 tests, 637 assertions); constructor injection limit gate scripts/pr74_verify.sh; OpenAPI snapshot check; scoped Pint --test (8 files); IQ bank JSON parse checks; docs/codex JSON/YAML parse checks; git diff --check; changed-file scope validation."
       },
       "scope_validation": {
         "status": "pass",
@@ -60155,7 +60155,7 @@
       },
       "github": {
         "status": "pending_after_current_scope_fix",
-        "evidence": "PR #2371 GitHub checks were inspected. OpenAPI drift was fixed in 8c0576593. Remaining failures were current-scope CI gates: AttemptStartService constructor dependency count exceeded scripts/pr74_verify.sh and BigFive runtime freeze classifier did not recognize the scoped IQ owner delivery backend files. The fixes remove the new AttemptStartService constructor dependency and add a focused BigFive classifier exception/test; local gates pass and GitHub checks will rerun after push."
+        "evidence": "PR #2371 GitHub checks were inspected again. verify-mbti-legacy passed after the constructor injection fix. verify-bigfive then failed because the first classifier fix treated backend/routes/api.php as a whole-file allowlist and weakened existing blocked-route regression expectations. The current-scope v2 fix narrows route allowance to the exact IQ owner current-question delivery diff lines; the full BigFiveResultPageV2CoreBodyPreviewTest file now passes locally and GitHub checks will rerun after push."
       }
     },
     "failure_reason": null,
@@ -60194,6 +60194,11 @@
         "at": "2026-06-23T16:18:00Z",
         "status": "local_revalidated_after_ci_gate_fix",
         "note": "Inspected remaining GitHub failures before editing. Fixed current-scope constructor injection gate by moving IQ owner bank lookup in AttemptStartService to an existing lazy resolver pattern, and fixed the BigFive runtime freeze gate with a narrow IQ_OWNER_ORIGINAL_30 session-delivery classifier exception plus focused test. Revalidated private scoring, IqOwnerOriginal30 tests, BigFive focused test, pr74 constructor gate, OpenAPI check, scoped Pint, docs parse, git diff --check, and changed-file scope validation."
+      },
+      {
+        "at": "2026-06-23T16:32:00Z",
+        "status": "local_revalidated_after_bigfive_route_classifier_fix",
+        "note": "Inspected verify-bigfive failure. The failure was introduced by the current PR CI classifier fix because routes/api.php was allowed too broadly. Narrowed route allowance to exact IQ owner delivery route diff lines and revalidated the full BigFiveResultPageV2CoreBodyPreviewTest file, pr74 constructor gate, IqOwnerOriginal30 tests, OpenAPI check, scoped Pint, docs parse, and git diff --check."
       }
     ]
   }
