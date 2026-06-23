@@ -1,0 +1,111 @@
+{
+  "schema_version": "competitor-alternatives-source-ledger.v1",
+  "task": "FA30-API-10",
+  "mode": "backend_source_ledger_contract_only",
+  "created_at": "2026-06-23T00:00:00Z",
+  "content_authority": "backend",
+  "surface": "future_competitor_alternatives_pages",
+  "publication_state": "internal_draft",
+  "source_boundary": {
+    "scraping_allowed": false,
+    "competitor_copy_allowed": false,
+    "review_rating_price_rank_fields_allowed": false,
+    "first_party_facts_required": true,
+    "operator_source_notes_required": true
+  },
+  "claim_gate": {
+    "claim_review_required": true,
+    "legal_review_required_before_indexing": true,
+    "forbidden_claim_families": [
+      "copied competitor copy",
+      "ranking or superiority claim",
+      "review or rating claim",
+      "pricing claim",
+      "official endorsement claim"
+    ]
+  },
+  "indexability_gate": {
+    "default_indexability_status": "noindex",
+    "indexable_requires_claim_review_status": "approved",
+    "indexable_requires_legal_review_status": "approved",
+    "sitemap_allowed_in_this_package": false,
+    "llms_allowed_in_this_package": false
+  },
+  "entries": [
+    {
+      "ledger_id": "assessment-method-alternative-ledger-draft",
+      "comparison_surface": "assessment_method_alternatives",
+      "competitor_reference_type": "category_level",
+      "operator_reviewed_source_notes": [
+        "Use only operator-reviewed notes about page type and method boundary.",
+        "Do not preserve or paraphrase competitor marketing copy."
+      ],
+      "fermatmind_first_party_facts": [
+        "FermatMind can describe its own assessment method, scoring boundary, and result interpretation limits.",
+        "FermatMind can state whether a public page has its own method note, privacy boundary, and source-ledger status."
+      ],
+      "allowed_claims": [
+        "This future ledger can support source-led comparison of method boundaries.",
+        "Claims must be phrased as FermatMind first-party facts and operator-reviewed notes."
+      ],
+      "forbidden_claims": [
+        "Ranking, superiority, review, rating, price, or endorsement claims are not allowed.",
+        "Copied competitor descriptions or user comments are not allowed."
+      ],
+      "source_review_status": "operator_review_required",
+      "claim_review_status": "not_reviewed",
+      "legal_review_status": "required",
+      "indexability_status": "noindex"
+    },
+    {
+      "ledger_id": "free-assessment-alternative-ledger-draft",
+      "comparison_surface": "free_assessment_alternatives",
+      "competitor_reference_type": "category_level",
+      "operator_reviewed_source_notes": [
+        "Use public page structure observations only when an operator records them manually.",
+        "Do not collect commercial tables, recommendation text, or page descriptions from competitor sites."
+      ],
+      "fermatmind_first_party_facts": [
+        "FermatMind can describe whether its own free assessment page exposes a public landing, test start path, and result boundary.",
+        "FermatMind can describe its own no-diagnosis and no-employment-prediction boundaries."
+      ],
+      "allowed_claims": [
+        "This ledger can support future pages that compare assessment scope and evidence boundaries.",
+        "The comparison must stay source-led and avoid claims of superiority."
+      ],
+      "forbidden_claims": [
+        "Do not claim that FermatMind is better, more accurate, cheaper, or top ranked.",
+        "Do not quote or summarize competitor reviews or ratings."
+      ],
+      "source_review_status": "operator_review_required",
+      "claim_review_status": "not_reviewed",
+      "legal_review_status": "required",
+      "indexability_status": "noindex"
+    },
+    {
+      "ledger_id": "career-interest-alternative-ledger-draft",
+      "comparison_surface": "career_interest_alternatives",
+      "competitor_reference_type": "category_level",
+      "operator_reviewed_source_notes": [
+        "Use only operator-reviewed source notes about career-interest test scope.",
+        "Do not infer competitor private scoring logic, traffic, conversion, or product performance."
+      ],
+      "fermatmind_first_party_facts": [
+        "FermatMind can describe its own RIASEC form variants, exploration boundary, and non-deterministic major/career claims.",
+        "FermatMind can state whether its own graph or ledger is draft, reviewed, or indexable."
+      ],
+      "allowed_claims": [
+        "This ledger can document reviewed differences in scope, evidence, and claim boundaries.",
+        "Future copy must identify source-review and legal-review status before publication."
+      ],
+      "forbidden_claims": [
+        "Do not predict admission, salary, employment, or career success versus another site.",
+        "Do not present competitor alternatives as a ranking table without review authority."
+      ],
+      "source_review_status": "operator_review_required",
+      "claim_review_status": "not_reviewed",
+      "legal_review_status": "required",
+      "indexability_status": "noindex"
+    }
+  ]
+}
