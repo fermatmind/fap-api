@@ -269,21 +269,84 @@ final class CareerAiImpactAssetPreviewService
         $normalizedSlug = $this->normalizeSlug($slug);
         $normalizedLocale = $this->normalizeLocale($locale);
 
-        $commonZh = [
+        $aviationZh = [
             '运行安全、放行条件、天气改航、间隔限制、维护记录和旅客/机组安全' => '现场安全、记录完整性、异常处置、交付边界和最终责任',
             '运行限制说明、异常处置日志、天气/NOTAM 核对和放行复盘' => '工作说明、异常记录、复核清单和交付复盘',
             '调度系统、检查单、维护记录、航班/车辆运行日志' => '工作记录、检查单、复核步骤和交付日志',
         ];
 
-        $commonEn = [
+        $aviationEn = [
             'operational safety, release conditions, weather diversion, separation limits, maintenance records, and crew or passenger safety' => 'operational context, exception handling, record quality, delivery boundaries, and final accountability',
             'operational safety, release conditions, weather diversions, separation limits, maintenance records, and crew or passenger safety' => 'operational context, exception handling, record quality, delivery boundaries, and final accountability',
             'an operating-limit note, abnormal-event log, weather or NOTAM check, and release review' => 'a work note, exception log, review checklist, and delivery review',
             'dispatch systems, checklists, maintenance records, and flight or vehicle operation logs' => 'work records, checklists, review steps, and delivery logs',
         ];
 
+        $wildlifeZh = [
+            '物种观察' => '现场观察',
+            '栖息地数据' => '现场资料',
+            '物种误识、生态不确定性' => '识别误差、现场不确定性',
+        ];
+
+        $wildlifeEn = [
+            'species observations' => 'field observations',
+            'habitat data' => 'field records',
+            'species misidentification, ecological uncertainty' => 'identification errors and field uncertainty',
+        ];
+
+        $clinicalZh = [
+            '临床升级、用药核对、转诊判断、患者沟通和病情变化记录' => '业务升级、关键核对、协作判断、对象沟通和状态变化记录',
+            '临床升级' => '业务升级',
+            '用药核对' => '关键核对',
+            '转诊判断' => '协作判断',
+            '患者沟通' => '对象沟通',
+            '患者安全' => '对象安全',
+            '急诊分诊' => '优先级分流',
+        ];
+
+        $clinicalEn = [
+            'clinical escalation, medication checks, referral judgment, patient communication, and change-in-condition records' => 'workflow escalation, critical checks, handoff judgment, stakeholder communication, and change records',
+            'clinical escalation' => 'workflow escalation',
+            'patient referral' => 'service referral',
+            'clinical referral' => 'service referral',
+            'medical referral' => 'service referral',
+            'medication' => 'critical check',
+            'patient safety' => 'user safety',
+            'emergency triage' => 'priority triage',
+        ];
+
+        $militaryZh = [
+            '态势判断、指挥链、人员安全、任务规则和升级交接' => '现场判断、责任链条、人员安全、规则约束和升级交接',
+            '指挥链' => '责任链条',
+            '态势判断' => '现场判断',
+            '武器' => '设备',
+            '交战规则' => '操作规则',
+        ];
+
+        $militaryEn = [
+            'situational judgment, chain of command, personnel safety, mission rules, and escalation handoff' => 'context judgment, accountability chain, people safety, operating rules, and escalation handoff',
+            'chain of command' => 'accountability chain',
+            'situational judgment' => 'context judgment',
+            'weapons' => 'equipment',
+            'rules of engagement' => 'operating rules',
+        ];
+
+        $replacements = [];
+        if (! $this->isAviationContextSlug($normalizedSlug)) {
+            $replacements = array_merge($replacements, $normalizedLocale === 'en' ? $aviationEn : $aviationZh);
+        }
+        if (! $this->isWildlifeContextSlug($normalizedSlug)) {
+            $replacements = array_merge($replacements, $normalizedLocale === 'en' ? $wildlifeEn : $wildlifeZh);
+        }
+        if (! $this->isMedicalContextSlug($normalizedSlug)) {
+            $replacements = array_merge($replacements, $normalizedLocale === 'en' ? $clinicalEn : $clinicalZh);
+        }
+        if (! $this->isMilitaryContextSlug($normalizedSlug)) {
+            $replacements = array_merge($replacements, $normalizedLocale === 'en' ? $militaryEn : $militaryZh);
+        }
+
         if ($normalizedSlug === 'writers-and-authors') {
-            return array_merge($normalizedLocale === 'en' ? $commonEn : $commonZh, $normalizedLocale === 'en' ? [
+            return array_merge($replacements, $normalizedLocale === 'en' ? [
                 'species observations' => 'interview notes',
                 'habitat data' => 'background material',
                 'species misidentification, ecological uncertainty' => 'factual misreadings, voice inconsistency',
@@ -303,7 +366,7 @@ final class CareerAiImpactAssetPreviewService
         }
 
         if ($normalizedSlug === 'zoologists-and-wildlife-biologists') {
-            return array_merge($normalizedLocale === 'en' ? $commonEn : $commonZh, $normalizedLocale === 'en' ? [
+            return array_merge($replacements, $normalizedLocale === 'en' ? [
                 'operational context, exception handling, record quality, delivery boundaries, and final accountability' => 'field safety, species identification, sample records, habitat boundaries, permit ethics, public explanation, and final accountability',
                 'a work note, exception log, review checklist, and delivery review' => 'a field note, sample log, permit check, and observation review',
                 'work records, checklists, review steps, and delivery logs' => 'field survey sheets, sample records, GIS or habitat notes, and review checklists',
@@ -315,7 +378,7 @@ final class CareerAiImpactAssetPreviewService
         }
 
         if ($normalizedSlug === 'elementary-school-teachers-except-special-education') {
-            return array_merge($normalizedLocale === 'en' ? $commonEn : $commonZh, $normalizedLocale === 'en' ? [
+            return array_merge($replacements, $normalizedLocale === 'en' ? [
                 'operational context, exception handling, record quality, delivery boundaries, and final accountability' => 'student differences, classroom feedback, learning pace, family communication, assessment boundaries, and child-safety responsibility',
                 'a work note, exception log, review checklist, and delivery review' => 'a lesson plan, student-work sample, feedback record, and intervention review',
                 'work records, checklists, review steps, and delivery logs' => 'classroom notes, rubrics, progress trackers, and family-communication records',
@@ -327,7 +390,7 @@ final class CareerAiImpactAssetPreviewService
         }
 
         if ($normalizedSlug === 'heavy-and-tractor-trailer-truck-drivers') {
-            return array_merge($normalizedLocale === 'en' ? $commonEn : $commonZh, $normalizedLocale === 'en' ? [
+            return array_merge($replacements, $normalizedLocale === 'en' ? [
                 'operational context, exception handling, record quality, delivery boundaries, and final accountability' => 'road safety, vehicle inspection, hours-of-service compliance, weather and route risk, load responsibility, and delivery communication',
                 'a work note, exception log, review checklist, and delivery review' => 'a vehicle checklist, route-risk note, maintenance handoff, and safety review',
                 'work records, checklists, review steps, and delivery logs' => 'route logs, inspection reports, maintenance handoff records, and delivery notes',
@@ -339,7 +402,7 @@ final class CareerAiImpactAssetPreviewService
         }
 
         if ($normalizedSlug === 'wind-turbine-technicians') {
-            return array_merge($normalizedLocale === 'en' ? $commonEn : $commonZh, $normalizedLocale === 'en' ? [
+            return array_merge($replacements, $normalizedLocale === 'en' ? [
                 'command chain' => 'site safety chain',
                 'weapons' => 'equipment',
                 'mission risk' => 'maintenance risk',
@@ -351,7 +414,27 @@ final class CareerAiImpactAssetPreviewService
             ]);
         }
 
-        return [];
+        return $replacements;
+    }
+
+    private function isAviationContextSlug(string $slug): bool
+    {
+        return (bool) preg_match('/aviation|air-traffic|aircraft|avionics|flight|pilot|air-crew|transportation-security/', $slug);
+    }
+
+    private function isWildlifeContextSlug(string $slug): bool
+    {
+        return (bool) preg_match('/zoologists|wildlife|animal|veterinar|forest|conservation|environmental/', $slug);
+    }
+
+    private function isMedicalContextSlug(string $slug): bool
+    {
+        return (bool) preg_match('/allerg|immunolog|anesthesiolog|audiolog|cardiovascular|dental|dentist|dietetic|dietitian|diagnostic|dosimetrist|emergency|genetic-counselor|health|medical|clinical|nurse|pharmac|phlebotom|physician|surgeon|psychiatr|psycholog|radiolog|respiratory|sonographer|therapist|therapy|veterinar|athletic-trainer|orthotist|prosthetist|optometrist|ophthalmolog|podiatrist|urologist|midwi|orderlies|paramedic|emt/', $slug);
+    }
+
+    private function isMilitaryContextSlug(string $slug): bool
+    {
+        return (bool) preg_match('/military|weapons|command|air-crew-members|armored|artillery|infantry|tactical|special-forces/', $slug);
     }
 
     /**

@@ -87,7 +87,9 @@ final class CareerPageAssemblyPreviewService
             'reader_boundary',
         ] as $readerKey) {
             if (array_key_exists($readerKey, $payload)) {
-                $safePayload[$readerKey] = $this->sanitizeReaderValue($payload[$readerKey]);
+                $safePayload[$readerKey] = $readerKey === 'occupation' && is_array($payload[$readerKey])
+                    ? $this->readerSafeOccupation($payload[$readerKey], (string) ($payload['locale'] ?? ''))
+                    : $this->sanitizeReaderValue($payload[$readerKey]);
             }
         }
 
@@ -116,6 +118,24 @@ final class CareerPageAssemblyPreviewService
             'zh', 'zh-cn', 'zh_cn' => 'zh-CN',
             default => null,
         };
+    }
+
+    /**
+     * @param  array<string, mixed>  $occupation
+     * @return array<string, mixed>
+     */
+    private function readerSafeOccupation(array $occupation, string $locale): array
+    {
+        $safeOccupation = $this->sanitizeReaderValue($occupation);
+        if (! is_array($safeOccupation)) {
+            return [];
+        }
+
+        if ($this->normalizeLocale($locale) === 'en') {
+            unset($safeOccupation['title_zh']);
+        }
+
+        return $safeOccupation;
     }
 
     private function sanitizeReaderValue(mixed $value): mixed
