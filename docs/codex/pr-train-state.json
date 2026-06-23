@@ -59810,19 +59810,20 @@
         "status": "pass",
         "commands": [
           "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=RiasecMajorGraphAuthorityTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_riasec_major_graph_authority_files --no-ansi",
           "cd backend && php artisan riasec:major-graph-authority-audit --json --strict --no-ansi",
-          "cd backend && vendor/bin/pint --test app/Console/Commands/RiasecMajorGraphAuthorityAuditCommand.php app/Services/SeoIntel/RiasecMajorGraphAuthorityValidator.php tests/Feature/SeoIntel/RiasecMajorGraphAuthorityTest.php",
+          "cd backend && vendor/bin/pint --test app/Console/Commands/RiasecMajorGraphAuthorityAuditCommand.php app/Services/SeoIntel/RiasecMajorGraphAuthorityValidator.php tests/Feature/SeoIntel/RiasecMajorGraphAuthorityTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
           "python3 -m json.tool backend/docs/seo/import-packages/riasec-major-graph-authority/riasec_major_graph_authority.v1.json >/dev/null",
           "python3 -m json.tool backend/docs/seo/generated/riasec-major-graph-authority.v1.json >/dev/null",
           "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
           "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
           "git diff --check"
         ],
-        "evidence": "PASS: RiasecMajorGraphAuthorityTest (4 tests, 220 assertions); PASS: read-only audit command emitted ok=true with 6 clusters, 0 indexable clusters, and 0 issues; PASS: scoped Pint; PASS: source/generated/state JSON parse; PASS: YAML parse; PASS: git diff --check."
+        "evidence": "PASS: RiasecMajorGraphAuthorityTest (4 tests, 220 assertions); PASS: BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_riasec_major_graph_authority_files (1 assertion); PASS: read-only audit command emitted ok=true with 6 clusters, 0 indexable clusters, and 0 issues; PASS: scoped Pint; PASS: source/generated/state JSON parse; PASS: YAML parse; PASS: git diff --check."
       },
       "scope_validation": {
         "status": "pass",
-        "evidence": "Changed files are limited to FA30-API-09 allowed paths: RIASEC major graph source package, generated artifact, docs note, read-only audit command, validator service, focused PHPUnit test, and docs/codex metadata. FA30-API-10 is only registered as a pending-dependency manifest/state entry; no source-ledger implementation was added. No public API route, frontend renderer, CMS write, production DB write, publish, search submission, sitemap, llms, canonical, JSON-LD, queue, scheduler, deploy, or fap-web change."
+        "evidence": "Changed files are limited to FA30-API-09 allowed paths: RIASEC major graph source package, generated artifact, docs note, read-only audit command, validator service, focused PHPUnit test, Big Five runtime-freeze classifier allowlist test, and docs/codex metadata. FA30-API-10 is only registered as a pending-dependency manifest/state entry; no source-ledger implementation was added. No public API route, frontend renderer, CMS write, production DB write, publish, search submission, sitemap, llms, canonical, JSON-LD, queue, scheduler, deploy, or fap-web change."
       },
       "github": {
         "status": "pending",
@@ -59850,6 +59851,11 @@
         "at": "2026-06-23T01:22:00Z",
         "status": "pr_open",
         "note": "Opened PR #2350 after local validation and scope validation passed."
+      },
+      {
+        "at": "2026-06-23T01:30:00Z",
+        "status": "github_checks_failed_scope_repaired",
+        "note": "GitHub verify-bigfive failed because BigFiveResultPageV2CoreBodyPreviewTest runtime-freeze classifier flagged the new RIASEC authority-only audit command and validator. Repaired within current scope by adding an explicit RIASEC major graph authority allowlist test and helper, then reran targeted Big Five classifier test, FA30-API-09 focused PHPUnit, audit command, scoped Pint, JSON/YAML parsing, and git diff checks."
       }
     ]
   },

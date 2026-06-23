@@ -24435,6 +24435,7 @@ prs:
       - backend/docs/seo/generated/riasec-major-graph-authority.v1.json
       - backend/docs/seo/riasec-major-graph-authority.md
       - backend/tests/Feature/SeoIntel/RiasecMajorGraphAuthorityTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - generated/pr-train-sidecar-issues/**
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
@@ -24446,8 +24447,9 @@ prs:
       - Modify fap-web or add frontend fallback authority.
     validation:
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=RiasecMajorGraphAuthorityTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_riasec_major_graph_authority_files --no-ansi
       - cd backend && php artisan riasec:major-graph-authority-audit --json --strict --no-ansi
-      - cd backend && vendor/bin/pint --test app/Console/Commands/RiasecMajorGraphAuthorityAuditCommand.php app/Services/SeoIntel/RiasecMajorGraphAuthorityValidator.php tests/Feature/SeoIntel/RiasecMajorGraphAuthorityTest.php
+      - cd backend && vendor/bin/pint --test app/Console/Commands/RiasecMajorGraphAuthorityAuditCommand.php app/Services/SeoIntel/RiasecMajorGraphAuthorityValidator.php tests/Feature/SeoIntel/RiasecMajorGraphAuthorityTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - python3 -m json.tool backend/docs/seo/import-packages/riasec-major-graph-authority/riasec_major_graph_authority.v1.json >/dev/null
       - python3 -m json.tool backend/docs/seo/generated/riasec-major-graph-authority.v1.json >/dev/null
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"

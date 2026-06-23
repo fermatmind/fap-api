@@ -2964,6 +2964,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ));
     }
 
+    public function test_runtime_freeze_classifier_ignores_riasec_major_graph_authority_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/RiasecMajorGraphAuthorityAuditCommand.php',
+            'backend/app/Services/SeoIntel/RiasecMajorGraphAuthorityValidator.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_riasec_result_page_ops_runner_orchestrator(): void
     {
         $changed = [
@@ -5195,6 +5205,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isRiasecMajorGraphAuthorityFile($file)) {
+                continue;
+            }
+
             if ($this->isEnneagramForcedChoiceQuestionPackTranslationFile($file)) {
                 continue;
             }
@@ -6669,6 +6683,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/RiasecResultPageV2ProductionImportCommand.php',
             'backend/app/Services/Riasec/RiasecResultPageV2ProductionImportExecutor.php',
+        ], true);
+    }
+
+    private function isRiasecMajorGraphAuthorityFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/RiasecMajorGraphAuthorityAuditCommand.php',
+            'backend/app/Services/SeoIntel/RiasecMajorGraphAuthorityValidator.php',
         ], true);
     }
 
