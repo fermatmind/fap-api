@@ -59427,7 +59427,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-allowlist-scope-approval",
     "base": "main",
-    "status": "pr_open",
+    "status": "local_revalidated_after_ci_fix",
     "train_scope": "big5_strategic_completion_roadmap",
     "title": "BIG5-PILOT-ALLOWLIST-SCOPE-APPROVAL-01: Add Big Five pilot allowlist scope approval",
     "depends_on": [
@@ -60139,19 +60139,20 @@
           "python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/items.json >/dev/null",
           "python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/answer_key.json >/dev/null",
           "python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/scoring_spec.json >/dev/null",
+          "cd backend && scripts/export_openapi.sh --check",
           "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
           "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
           "git diff --check"
         ],
-        "evidence": "PASS: private scoring verifier; PHP syntax checks for controller/service/middleware/route/test files; PHPUnit php artisan test --filter=IqOwnerOriginal30 --no-ansi (7 tests, 3454 assertions); scoped Pint --test (7 files); IQ bank JSON parse checks; docs/codex JSON/YAML parse checks; git diff --check."
+        "evidence": "PASS: private scoring verifier; PHP syntax checks for controller/service/middleware/route/test files; PHPUnit php artisan test --filter=IqOwnerOriginal30 --no-ansi (7 tests, 3454 assertions); scoped Pint --test (7 files); IQ bank JSON parse checks; OpenAPI snapshot check; docs/codex JSON/YAML parse checks; git diff --check."
       },
       "scope_validation": {
         "status": "pass",
-        "evidence": "Changed files are limited to 05A allowed paths: attempt question delivery controller, public attempt-realm middleware updates, attempt start/submission services, owner IQ bank service, API route, focused feature test, and docs/codex metadata. No frontend, CMS, SEO, sitemap, llms, DB migration, staging deploy, or production deploy changes."
+        "evidence": "Changed files are limited to 05A allowed paths: attempt question delivery controller, public attempt-realm middleware updates, attempt start/submission services, owner IQ bank service, API route, OpenAPI route contract snapshot, focused feature test, and docs/codex metadata. No frontend, CMS, SEO, sitemap, llms, DB migration, staging deploy, or production deploy changes."
       },
       "github": {
-        "status": "pending",
-        "evidence": "PR #2371 opened at https://github.com/fermatmind/fap-api/pull/2371 for branch codex/iq-session-question-delivery-05a. Initial GitHub checks are pending/in progress."
+        "status": "pending_after_current_scope_fix",
+        "evidence": "PR #2371 GitHub verify-mbti-legacy and verify-mbti-v2 failed at the OpenAPI diff gate because the scoped new route /api/v0.3/attempts/{attempt_id}/questions drifted backend/docs/contracts/openapi.snapshot.json. The current-scope fix regenerated backend/docs/contracts/openapi.snapshot.json and passed local OpenAPI snapshot check; GitHub checks will rerun after push."
       }
     },
     "failure_reason": null,
@@ -60175,6 +60176,16 @@
         "at": "2026-06-23T15:42:00Z",
         "status": "pr_open",
         "note": "Opened GitHub PR #2371 for 05A and began polling GitHub checks. No staging or production deploy was triggered."
+      },
+      {
+        "at": "2026-06-23T15:50:00Z",
+        "status": "ci_fix_in_progress",
+        "note": "Inspected failing GitHub jobs before changing code. Failure was OpenAPI snapshot drift from the current 05A route, so backend/docs/contracts/openapi.snapshot.json was added to the 05A scope and regenerated."
+      },
+      {
+        "at": "2026-06-23T15:58:00Z",
+        "status": "local_revalidated_after_ci_fix",
+        "note": "Revalidated 05A after OpenAPI snapshot fix: private scoring verifier, OpenAPI snapshot check, focused IqOwnerOriginal30 tests, scoped Pint, docs JSON/YAML parse, git diff --check, and changed-file scope validation all passed."
       }
     ]
   }

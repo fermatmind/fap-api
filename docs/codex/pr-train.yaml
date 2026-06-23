@@ -27793,6 +27793,7 @@ prs:
       - backend/app/Services/Attempts/AttemptSubmissionService.php
       - backend/app/Services/Iq/IqOwnerOriginal30BankService.php
       - backend/routes/api.php
+      - backend/docs/contracts/openapi.snapshot.json
       - backend/tests/Feature/V0_3/IqOwnerOriginal30SessionDeliveryTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
@@ -27817,6 +27818,7 @@ prs:
       - python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/items.json >/dev/null
       - python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/answer_key.json >/dev/null
       - python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/scoring_spec.json >/dev/null
+      - cd backend && scripts/export_openapi.sh --check
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - git diff --check
