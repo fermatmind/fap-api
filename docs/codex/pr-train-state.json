@@ -59873,7 +59873,7 @@
     "repo": "fap-api",
     "branch": "codex/fa30-api-10-competitor-alternatives-source-ledger",
     "base": "main",
-    "status": "local_validated",
+    "status": "pr_open",
     "train_scope": "fa30_competitor_alternatives_source_ledger",
     "title": "FA30-API-10: Add competitor alternatives source-ledger contract",
     "depends_on": [
@@ -59913,8 +59913,8 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "4de20a66e52b6a5ce1c962210c204fc9b8b334bc",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2353",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -59933,6 +59933,11 @@
         "at": "2026-06-23T01:46:00Z",
         "status": "local_validated",
         "note": "Focused PHPUnit, Big Five runtime-freeze classifier allowlist test, read-only audit command, scoped Pint, JSON/YAML parsing, diff check, and explicit path allowlist scope validation passed."
+      },
+      {
+        "at": "2026-06-23T01:49:00Z",
+        "status": "pr_open",
+        "note": "Opened PR #2353 after local validation and scope validation passed."
       }
     ]
   }
