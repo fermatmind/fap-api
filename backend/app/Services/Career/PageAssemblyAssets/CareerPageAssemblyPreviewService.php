@@ -41,16 +41,25 @@ final class CareerPageAssemblyPreviewService
 
     public function previewAsset(string $slug, string $locale): ?CareerJobPageAssemblyAsset
     {
+        $normalizedSlug = $this->normalizeSlug($slug);
         $normalizedLocale = $this->normalizePreviewLocale($locale);
-        if ($normalizedLocale === null || ! $this->previewEnabled()) {
+        if ($normalizedLocale === null) {
+            return null;
+        }
+
+        if (! $this->previewEnabled()) {
             return null;
         }
 
         return CareerJobPageAssemblyAsset::query()
-            ->where('career_job_slug', $this->normalizeSlug($slug))
+            ->where('career_job_slug', $normalizedSlug)
             ->where('locale', $normalizedLocale)
             ->where('asset_version', CareerJobPageAssemblyAsset::ASSET_VERSION_V1)
-            ->where('status', CareerJobPageAssemblyAsset::STATUS_STAGING_PREVIEW)
+            ->whereIn('status', [
+                CareerJobPageAssemblyAsset::STATUS_STAGING_PREVIEW,
+                CareerJobPageAssemblyAsset::STATUS_EDITORIAL_REVIEW,
+                CareerJobPageAssemblyAsset::STATUS_APPROVED,
+            ])
             ->where('preview_allowlisted', true)
             ->first();
     }

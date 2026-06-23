@@ -173,6 +173,125 @@ final class CareerPageAssemblyAssetPreviewImportTest extends TestCase
         $this->assertContains('--force --all-slugs-from-file requires --confirm-full-staging-preview.', $decoded['errors']);
     }
 
+    public function test_force_approved_requires_explicit_confirmation_and_artifacts(): void
+    {
+        $this->seedCareerJobBundleAuthority('accountants-and-auditors');
+        $file = $this->writeJsonl([
+            $this->assemblyRow('accountants-and-auditors', 'zh-CN'),
+            $this->assemblyRow('accountants-and-auditors', 'en'),
+        ]);
+        $report = storage_path('framework/testing/page-assembly-approved-missing-confirmation.json');
+
+        $exitCode = Artisan::call('career:page-assembly-assets-import-preview', [
+            '--file' => $file,
+            '--slugs' => 'accountants-and-auditors',
+            '--force' => true,
+            '--status' => CareerJobPageAssemblyAsset::STATUS_APPROVED,
+            '--output' => $report,
+        ]);
+
+        $this->assertSame(1, $exitCode);
+        $decoded = json_decode((string) file_get_contents($report), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertSame('fail', $decoded['decision']);
+        $this->assertFalse((bool) $decoded['approved_transition_performed']);
+        $this->assertStringContainsString('--confirm-approved-transition is required', implode(' ', $decoded['errors']));
+    }
+
+    public function test_force_approved_marks_existing_staging_rows_without_touching_production(): void
+    {
+        Config::set('career_content_page_assembly_assets.staging_preview_enabled', true);
+        Config::set('career_content_page_assembly_assets.preview_slugs', ['accountants-and-auditors']);
+        $this->seedCareerJobBundleAuthority('accountants-and-auditors');
+        $file = $this->writeJsonl([
+            $this->assemblyRow('accountants-and-auditors', 'zh-CN'),
+            $this->assemblyRow('accountants-and-auditors', 'en'),
+        ]);
+        $assetSha = hash_file('sha256', $file);
+        $stagingReport = storage_path('framework/testing/page-assembly-approved-staging-write.json');
+
+        $stagingExitCode = Artisan::call('career:page-assembly-assets-import-preview', [
+            '--file' => $file,
+            '--slugs' => 'accountants-and-auditors',
+            '--expected-sha256' => $assetSha,
+            '--force' => true,
+            '--status' => CareerJobPageAssemblyAsset::STATUS_STAGING_PREVIEW,
+            '--output' => $stagingReport,
+        ]);
+
+        $this->assertSame(0, $stagingExitCode);
+        $this->assertSame(2, CareerJobPageAssemblyAsset::query()->where('status', CareerJobPageAssemblyAsset::STATUS_STAGING_PREVIEW)->count());
+
+        [$approvalManifest, $approvalManifestSha] = $this->writeJsonArtifact('page-assembly-approval-manifest', [
+            'qa_final_conclusion' => 'CAREER_CONTENT_1046_STAGING_EDITORIAL_QA_PASS',
+            'approved_count' => 2,
+            'rejected_count' => 0,
+            'slug_count' => 1,
+            'production_import_approved' => false,
+            'approved_transition_allowed' => true,
+            'required_for_approved_transition' => [
+                'asset_sha256' => $assetSha,
+                'row_count' => 2,
+                'slug_count' => 1,
+            ],
+        ]);
+        [$editorialReport, $editorialReportSha] = $this->writeJsonArtifact('page-assembly-editorial-review', [
+            'final_conclusion' => 'CAREER_CONTENT_1046_EDITORIAL_REVIEW_PASS',
+            'approved_rows' => 2,
+            'rejected' => 0,
+            'production_import_approved' => false,
+            'metrics' => [
+                'slug_count' => 1,
+                'expected_locale_rows' => 2,
+                'finding_count' => 0,
+            ],
+            'inputs' => [
+                'final_repaired_asset_sha256' => $assetSha,
+            ],
+        ]);
+        $approvalReport = storage_path('framework/testing/page-assembly-approved-transition.json');
+
+        $approvalExitCode = Artisan::call('career:page-assembly-assets-import-preview', [
+            '--file' => $file,
+            '--slugs' => 'accountants-and-auditors',
+            '--expected-sha256' => $assetSha,
+            '--force' => true,
+            '--status' => CareerJobPageAssemblyAsset::STATUS_APPROVED,
+            '--confirm-approved-transition' => true,
+            '--approval-manifest' => $approvalManifest,
+            '--approval-manifest-sha256' => $approvalManifestSha,
+            '--editorial-review-report' => $editorialReport,
+            '--editorial-review-sha256' => $editorialReportSha,
+            '--output' => $approvalReport,
+        ]);
+
+        $this->assertSame(0, $approvalExitCode);
+        $this->assertSame(2, CareerJobPageAssemblyAsset::query()->where('status', CareerJobPageAssemblyAsset::STATUS_APPROVED)->count());
+        $this->assertSame(0, CareerJobPageAssemblyAsset::query()->where('status', CareerJobPageAssemblyAsset::STATUS_PRODUCTION_IMPORTED)->count());
+
+        $decoded = json_decode((string) file_get_contents($approvalReport), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertSame('pass', $decoded['decision']);
+        $this->assertSame('approved_transition', $decoded['mode']);
+        $this->assertTrue((bool) $decoded['approved_transition_performed']);
+        $this->assertFalse((bool) $decoded['production_import_allowed']);
+        $this->assertFalse((bool) $decoded['production_import_performed']);
+        $this->assertSame(2, $decoded['approved_count']);
+        $this->assertSame(0, $decoded['production_rows_touched']);
+        $this->assertSame($approvalManifestSha, $decoded['approval_manifest_sha256']);
+        $this->assertSame($editorialReportSha, $decoded['editorial_review_sha256']);
+
+        $this->getJson('/api/v0.5/career/jobs/accountants-and-auditors/page-assembly-asset?locale=en')
+            ->assertOk()
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('preview', true)
+            ->assertJsonPath('status', CareerJobPageAssemblyAsset::STATUS_APPROVED)
+            ->assertJsonPath('career_page_assembly_v1.slug', 'accountants-and-auditors')
+            ->assertJsonPath('career_page_assembly_v1.locale', 'en')
+            ->assertJsonMissingPath('career_page_assembly_v1.occupation.title_zh')
+            ->assertJsonMissingPath('career_page_assembly_v1.block_refs')
+            ->assertJsonMissingPath('career_page_assembly_v1.audit_fields')
+            ->assertJsonMissingPath('career_page_assembly_v1.search_projection');
+    }
+
     private function seedCareerJobBundleAuthority(string $slug): void
     {
         $this->seedRuntimeProjectionAuthority([$slug]);
@@ -279,6 +398,23 @@ final class CareerPageAssemblyAssetPreviewImportTest extends TestCase
         )));
 
         return $path;
+    }
+
+    /**
+     * @param  array<string, mixed>  $payload
+     * @return array{0: string, 1: string}
+     */
+    private function writeJsonArtifact(string $prefix, array $payload): array
+    {
+        $path = storage_path('framework/testing/'.$prefix.'-'.bin2hex(random_bytes(4)).'.json');
+        $dir = dirname($path);
+        if (! is_dir($dir)) {
+            mkdir($dir, 0775, true);
+        }
+
+        file_put_contents($path, json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE).PHP_EOL);
+
+        return [$path, hash_file('sha256', $path)];
     }
 
     /**
