@@ -2792,6 +2792,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ));
     }
 
+    public function test_runtime_freeze_classifier_ignores_iq_owner_original30_session_delivery_backend(): void
+    {
+        $changed = [
+            'backend/app/Http/Controllers/API/V0_3/AttemptQuestionDeliveryController.php',
+            'backend/app/Http/Middleware/FmTokenAuth.php',
+            'backend/app/Http/Middleware/ResolveOrgContext.php',
+            'backend/app/Services/Attempts/AttemptStartService.php',
+            'backend/app/Services/Attempts/AttemptSubmissionService.php',
+            'backend/app/Services/Iq/IqOwnerOriginal30BankService.php',
+            'backend/routes/api.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_attempt_submission_reliability_hardening(): void
     {
         $changed = [
@@ -5161,6 +5176,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isIqOwnerOriginal30SessionDeliveryBackendFile($file)) {
+                continue;
+            }
+
             if ($this->isRiasecMeasurementContractComparePolicyFile($file)) {
                 continue;
             }
@@ -6570,6 +6589,19 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isIqProductionObservabilityGuardFile(string $file): bool
     {
         return $file === 'backend/app/Services/Iq/IqProductionObservability.php';
+    }
+
+    private function isIqOwnerOriginal30SessionDeliveryBackendFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Http/Controllers/API/V0_3/AttemptQuestionDeliveryController.php',
+            'backend/app/Http/Middleware/FmTokenAuth.php',
+            'backend/app/Http/Middleware/ResolveOrgContext.php',
+            'backend/app/Services/Attempts/AttemptStartService.php',
+            'backend/app/Services/Attempts/AttemptSubmissionService.php',
+            'backend/app/Services/Iq/IqOwnerOriginal30BankService.php',
+            'backend/routes/api.php',
+        ], true);
     }
 
     private function isIqResultSecrecyRedactionFile(string $file): bool

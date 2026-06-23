@@ -27795,6 +27795,7 @@ prs:
       - backend/routes/api.php
       - backend/docs/contracts/openapi.snapshot.json
       - backend/tests/Feature/V0_3/IqOwnerOriginal30SessionDeliveryTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
@@ -27812,8 +27813,11 @@ prs:
       - php -l backend/app/Http/Middleware/ResolveOrgContext.php
       - php -l backend/routes/api.php
       - php -l backend/tests/Feature/V0_3/IqOwnerOriginal30SessionDeliveryTest.php
+      - php -l backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - cd backend && php artisan test --filter=IqOwnerOriginal30 --no-ansi
-      - cd backend && vendor/bin/pint --test app/Http/Controllers/API/V0_3/AttemptQuestionDeliveryController.php app/Services/Iq/IqOwnerOriginal30BankService.php app/Services/Attempts/AttemptStartService.php app/Services/Attempts/AttemptSubmissionService.php app/Http/Middleware/FmTokenAuth.php app/Http/Middleware/ResolveOrgContext.php tests/Feature/V0_3/IqOwnerOriginal30SessionDeliveryTest.php
+      - cd backend && php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_iq_owner_original30_session_delivery_backend' --no-ansi
+      - cd backend && bash scripts/pr74_verify.sh
+      - cd backend && vendor/bin/pint --test app/Http/Controllers/API/V0_3/AttemptQuestionDeliveryController.php app/Services/Iq/IqOwnerOriginal30BankService.php app/Services/Attempts/AttemptStartService.php app/Services/Attempts/AttemptSubmissionService.php app/Http/Middleware/FmTokenAuth.php app/Http/Middleware/ResolveOrgContext.php tests/Feature/V0_3/IqOwnerOriginal30SessionDeliveryTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/manifest.json >/dev/null
       - python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/items.json >/dev/null
       - python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/answer_key.json >/dev/null

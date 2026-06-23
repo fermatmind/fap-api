@@ -50,7 +50,6 @@ class AttemptStartService
         private Eq60PackLoader $eq60PackLoader,
         private AttemptRateLimitService $attemptRateLimitService,
         private AttemptProgressService $progressService,
-        private IqOwnerOriginal30BankService $iqOwnerOriginal30Bank,
     ) {}
 
     public function start(OrgContext $ctx, StartAttemptDTO $dto): array
@@ -175,10 +174,10 @@ class AttemptStartService
             || strtoupper($scaleCode) === IqOwnerOriginal30BankService::SCALE_CODE
         ) {
             $requestedBankId = is_array($dto->meta ?? null) ? (string) ($dto->meta['bank_id'] ?? '') : '';
-            if ($this->iqOwnerOriginal30Bank->isOwnerOriginalRequest($dto->formCode, $requestedBankId)) {
+            if ($this->iqOwnerOriginal30Bank()->isOwnerOriginalRequest($dto->formCode, $requestedBankId)) {
                 $dirVersion = IqOwnerOriginal30BankService::DIR_VERSION;
                 $resolvedFormCode = IqOwnerOriginal30BankService::FORM_CODE;
-                $resolvedQuestionCount = $this->iqOwnerOriginal30Bank->questionCount();
+                $resolvedQuestionCount = $this->iqOwnerOriginal30Bank()->questionCount();
             }
         }
 
@@ -296,7 +295,7 @@ class AttemptStartService
         if (($resolvedFormCode ?? null) === IqOwnerOriginal30BankService::FORM_CODE) {
             $answersMeta = array_merge(
                 $answersMeta,
-                $this->iqOwnerOriginal30Bank->startMetadata($packId, $dirVersion)
+                $this->iqOwnerOriginal30Bank()->startMetadata($packId, $dirVersion)
             );
         }
         if ($resolvedFormCode !== null && $resolvedFormCode !== '') {
@@ -810,6 +809,11 @@ class AttemptStartService
     private function inputGuard(): ScaleCodeInputGuard
     {
         return app(ScaleCodeInputGuard::class);
+    }
+
+    private function iqOwnerOriginal30Bank(): IqOwnerOriginal30BankService
+    {
+        return app(IqOwnerOriginal30BankService::class);
     }
 
     private function resolveQuestionCount(string $scaleCode, string $packId, string $dirVersion, ?int $expectedCount = null): int
