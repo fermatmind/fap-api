@@ -1,0 +1,63 @@
+{
+    "schema_version": "fm.iq.owner_image_bank.manifest.v1",
+    "scale_code": "IQ_INTELLIGENCE_QUOTIENT",
+    "bank_id": "IQ_OWNER_ORIGINAL_30",
+    "name": "FermatMind IQ Owner Original 30",
+    "status": "owner_original_imported_runtime_unbound",
+    "runtime_bound": false,
+    "locale": "zh-CN",
+    "market": "CN_MAINLAND",
+    "item_count": 30,
+    "option_count": 6,
+    "option_codes": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+    ],
+    "target_minutes": 20,
+    "files": {
+        "items": "items.json",
+        "asset_inventory": "asset_inventory.json",
+        "answer_key": "deferred_to_IQ_OWNER_30_BACKEND_SCORING_02",
+        "scoring_spec": "deferred_to_IQ_OWNER_30_BACKEND_SCORING_02"
+    },
+    "asset_root": "assets/iq_owner_original_30",
+    "ownership_policy": {
+        "source_mode": "owner_original_local_asset_import",
+        "declared_original_owner": "FermatMind / Rainie",
+        "rights_basis": "owner_declared_original_work_and_authorized_fermatmind_use",
+        "copied_from_third_party": false,
+        "traced_from_third_party": false,
+        "third_party_license_required": false,
+        "public_answer_or_solution_included": false
+    },
+    "public_payload_policy": {
+        "may_emit_items": true,
+        "may_emit_image_assets": true,
+        "may_emit_answer_key": false,
+        "may_emit_solution_rule": false,
+        "may_emit_source_capture_urls": false
+    },
+    "norm_policy": {
+        "iq_claims_enabled": false,
+        "percentile_claims_enabled": false,
+        "population_norm_table_required_before_production": true
+    },
+    "review_gates": [
+        "asset_integrity_gate",
+        "ownership_gate",
+        "answer_key_gate",
+        "scoring_gate",
+        "frontend_renderer_gate",
+        "runtime_switch_gate"
+    ],
+    "deferred_prs": [
+        "IQ-OWNER-30-BACKEND-SCORING-02",
+        "IQ-OWNER-30-FE-IMAGE-RENDERER-03",
+        "IQ-OWNER-30-FE-FORMCODE-04",
+        "IQ-SESSION-QUESTION-DELIVERY-05"
+    ]
+}

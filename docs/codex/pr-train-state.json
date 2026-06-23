@@ -59142,7 +59142,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-result-page-analytics-handoff",
     "base": "main",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "train_scope": "big5_result_page_agent_readiness_to_pilot",
     "title": "BIG5-RESULT-PAGE-ANALYTICS-HANDOFF-01: Add Big Five result-page analytics handoff",
     "depends_on": [
@@ -59395,7 +59395,7 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
+    "commit_sha": "2cfae204966038b5ce0c374e59bffed1663b6952",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2340",
     "merged_at": "2026-06-22T18:16:55Z",
     "remote_branch_deleted": true,
@@ -59943,6 +59943,77 @@
         "at": "2026-06-23T01:51:00Z",
         "status": "ready_to_merge",
         "note": "All PR #2353 GitHub checks passed on head f5b95c45a64f8d10c8ffb4ca03c175bf06e98835 and mergeStateStatus was CLEAN. Recording ready_to_merge before squash merge per PR-train ledger policy."
+      }
+    ]
+  },
+  "IQ-OWNER-30-BACKEND-ASSETS-01": {
+    "repo": "fap-api",
+    "branch": "codex/iq-owner-30-backend-assets-01",
+    "base": "main",
+    "status": "pr_open",
+    "train_scope": "iq_owner_original_30_launch",
+    "title": "IQ-OWNER-30-BACKEND-ASSETS-01: Import owner-original IQ 30 image bank",
+    "depends_on": [],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly provided /goal authorization for IQ_OWNER_ORIGINAL_30 PR train and allowed manifest/state initialization for missing PR entries."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "First PR in this IQ owner-original 30 launch train; no dependency required."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "php backend/scripts/iq/verify_iq_owner_original30_image_bank.php",
+          "php -l backend/scripts/iq/iq_owner_original30_image_bank_lib.php",
+          "php -l backend/scripts/iq/build_iq_owner_original30_image_bank.php",
+          "php -l backend/scripts/iq/verify_iq_owner_original30_image_bank.php",
+          "python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/manifest.json >/dev/null",
+          "python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/items.json >/dev/null",
+          "python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/asset_inventory.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "git diff --check"
+        ],
+        "evidence": "Asset bank verifier, PHP syntax checks, JSON/YAML parse checks, scoped Pint test for backend/scripts/iq/*.php, and git diff --check passed."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "PR1 changes are limited to backend/scripts/iq owner-original bank import/verify scripts, IQ_OWNER_ORIGINAL_30 bank JSON, iq_owner_original_30 image assets, and docs/codex manifest/state metadata. Existing backend/content_packs/EQ_60/v1/compiled drift is outside scope and will not be staged."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": "8b3cc91ac88c38e13f25a1fd28b056dda75ad411",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2362",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-23T07:58:33Z",
+        "status": "in_progress",
+        "note": "Started PR1 from latest fap-api main on codex/iq-owner-30-backend-assets-01. Scope is limited to runtime-unbound backend owner-original IQ image bank assets, deterministic import/verification scripts, and docs/codex metadata. Answers, scoring, runtime switching, frontend rendering, session delivery, staging deploy, and production deploy are deferred."
+      },
+      {
+        "at": "2026-06-23T07:58:33Z",
+        "status": "local_validated",
+        "note": "Required PR1 local validation and explicit allowed-path scope validation passed. Existing EQ_60 compiled drift is unrelated, outside current PR scope, and excluded from staging."
+      },
+      {
+        "at": "2026-06-23T08:03:16Z",
+        "status": "pr_open",
+        "note": "Opened PR #2362 after PR1 local validation, scoped Pint, and allowed-path scope validation passed."
+      },
+      {
+        "at": "2026-06-23T08:10:09Z",
+        "status": "ready_to_merge",
+        "note": "All PR #2362 GitHub checks passed on head 8b3cc91ac88c38e13f25a1fd28b056dda75ad411 and mergeStateStatus was CLEAN. Recording ready_to_merge before squash merge per PR-train ledger policy."
       }
     ]
   }
