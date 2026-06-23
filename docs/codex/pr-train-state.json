@@ -60026,7 +60026,7 @@
     "repo": "fap-api",
     "branch": "codex/iq-owner-30-backend-scoring-02",
     "base": "main",
-    "status": "local_validated",
+    "status": "pr_open",
     "train_scope": "iq_owner_original_30_launch",
     "title": "IQ-OWNER-30-BACKEND-SCORING-02: Add private scoring for owner-original IQ 30 bank",
     "depends_on": [
@@ -60069,8 +60069,8 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "9adbb0ac9898c12117b6cb5751b002f8c5e569b4",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2364",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -60084,6 +60084,11 @@
         "at": "2026-06-23T10:28:51Z",
         "status": "local_validated",
         "note": "Required PR2 local validation and explicit allowed-path scope validation passed. Composer vendor and backend .env were local ignored test dependencies only and are excluded from scope."
+      },
+      {
+        "at": "2026-06-23T10:31:20Z",
+        "status": "pr_open",
+        "note": "Opened PR #2364 after PR2 local validation and explicit allowed-path scope validation passed."
       }
     ]
   }
