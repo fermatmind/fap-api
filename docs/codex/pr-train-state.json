@@ -59001,7 +59001,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-generated-readiness-artifact",
     "base": "main",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "train_scope": "big5_result_page_agent_readiness_to_pilot",
     "title": "BIG5-RESULT-PAGE-AGENT-GENERATED-READINESS-ARTIFACT-01: Generate Big Five readiness artifact",
     "depends_on": [],
@@ -59461,8 +59461,8 @@
         "evidence": "Changed files are confined to the allowlist_scope_approval QA package, BigFiveResultPageV2AllowlistScopeApprovalTest, and docs/codex metadata. No runtime wrapper, fap-web copy, CMS, SEO runtime, routes, controllers, DB migrations, release snapshot activation, production import gate, production rollout gate, live smoke, deploy workflow, or real allowlist identifiers changed."
       },
       "github": {
-        "status": "pending",
-        "evidence": null
+        "status": "pass",
+        "evidence": "PR #2350 GitHub checks passed on branch head 86510c746b0cc3af56e63fc4cc09733309f81ced: hygiene, Semgrep blocking secrets, supply-chain, semgrep SARIF non-blocking upload, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, and Semgrep OSS. mergeStateStatus was CLEAN."
       }
     },
     "failure_reason": null,
@@ -59856,6 +59856,11 @@
         "at": "2026-06-23T01:30:00Z",
         "status": "github_checks_failed_scope_repaired",
         "note": "GitHub verify-bigfive failed because BigFiveResultPageV2CoreBodyPreviewTest runtime-freeze classifier flagged the new RIASEC authority-only audit command and validator. Repaired within current scope by adding an explicit RIASEC major graph authority allowlist test and helper, then reran targeted Big Five classifier test, FA30-API-09 focused PHPUnit, audit command, scoped Pint, JSON/YAML parsing, and git diff checks."
+      },
+      {
+        "at": "2026-06-23T01:32:00Z",
+        "status": "ready_to_merge",
+        "note": "All PR #2350 GitHub checks passed on head 86510c746b0cc3af56e63fc4cc09733309f81ced and mergeStateStatus was CLEAN. Recording ready_to_merge before squash merge per PR-train ledger policy."
       }
     ]
   },
