@@ -23,6 +23,13 @@ final class SeoAgentArticlePostPublishPropagationDryRunCommand extends Command
 
     private const ARTICLE_PAGE_TYPE = 'article';
 
+    private const PUBLIC_CANONICAL_BASE_URL = 'https://fermatmind.com';
+
+    private const PUBLIC_CANONICAL_HOSTS = [
+        'fermatmind.com',
+        'www.fermatmind.com',
+    ];
+
     private const FORBIDDEN_STRINGS = [
         'raw_url',
         'raw_query',
@@ -354,9 +361,10 @@ final class SeoAgentArticlePostPublishPropagationDryRunCommand extends Command
 
     private function canonicalUrl(string $canonicalPath): string
     {
-        $base = rtrim((string) config('app.url', 'https://fermatmind.com'), '/');
-        if ($base === '') {
-            $base = 'https://fermatmind.com';
+        $base = rtrim((string) config('seo_intel.public_canonical_host', self::PUBLIC_CANONICAL_BASE_URL), '/');
+        $host = strtolower((string) parse_url($base, PHP_URL_HOST));
+        if ($base === '' || ! in_array($host, self::PUBLIC_CANONICAL_HOSTS, true)) {
+            $base = self::PUBLIC_CANONICAL_BASE_URL;
         }
 
         return $base.$canonicalPath;

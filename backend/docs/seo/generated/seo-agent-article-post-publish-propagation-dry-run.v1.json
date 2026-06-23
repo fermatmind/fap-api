@@ -21,10 +21,20 @@
     "article is published, public, and indexable",
     "published revision pointer is valid",
     "SEO title length is at most 60 characters",
+    "canonical URL planning uses seo_intel.public_canonical_host and never app.url/ops host as public canonical authority",
     "sitemap and llms eligibility is observed without mutation",
     "URL Truth article support is reported without write",
     "Search Channel and IndexNow article bridge support is reported without enqueue or submission"
   ],
+  "canonical_host_policy": {
+    "config_key": "seo_intel.public_canonical_host",
+    "default": "https://fermatmind.com",
+    "allowed_hosts": [
+      "fermatmind.com",
+      "www.fermatmind.com"
+    ],
+    "app_url_usage": "not used for public canonical URL planning"
+  },
   "status_values": [
     "planned",
     "ready_with_adapter_gap",
