@@ -4601,6 +4601,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSeoAgentArticlePostPublishPropagationDryRunFile($file)) {
+                continue;
+            }
+
             if ($this->isSeoAgentCmsPublishAutoCanaryFile($file)) {
                 continue;
             }
@@ -6173,6 +6177,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return in_array($file, [
             'backend/app/Console/Commands/SeoAgentArticleCmsPublishCanaryCommand.php',
+        ], true);
+    }
+
+    private function isSeoAgentArticlePostPublishPropagationDryRunFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/SeoAgentArticlePostPublishPropagationDryRunCommand.php',
         ], true);
     }
 
@@ -8490,7 +8501,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 return false;
             }
 
-            if (preg_match('/\b(SeoAgentArticleCmsPublishCanaryCommand|SeoAgentAutoRollbackGuardCommand|SeoAgentGscCohortHandoffCommand|SeoAgentGscDraftPublishGateReadinessCommand)\b/u', $line) !== 1) {
+            if (preg_match('/\b(SeoAgentArticleCmsPublishCanaryCommand|SeoAgentArticlePostPublishPropagationDryRunCommand|SeoAgentAutoRollbackGuardCommand|SeoAgentGscCohortHandoffCommand|SeoAgentGscDraftPublishGateReadinessCommand)\b/u', $line) !== 1) {
                 return false;
             }
         }
