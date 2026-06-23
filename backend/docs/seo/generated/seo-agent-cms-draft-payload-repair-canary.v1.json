@@ -20,6 +20,15 @@
       "max_length": 60,
       "writes_repaired_package_artifact": true,
       "confirmation_sha256_target": "effective repaired package sha256"
+    },
+    "--override-proposed-faq-json": {
+      "field": "proposal.proposed_faq_items",
+      "input": "path to JSON array of {question, answer} objects",
+      "max_items": 6,
+      "max_question_length": 140,
+      "max_answer_length": 500,
+      "writes_repaired_package_artifact": true,
+      "confirmation_sha256_target": "effective repaired package sha256"
     }
   },
   "supported_targets": [
@@ -30,7 +39,8 @@
   "allowed_mismatches": [
     "proposal.proposed_internal_link_actions",
     "proposal.proposal_quality",
-    "proposal.proposed_seo_title when --override-proposed-seo-title is provided"
+    "proposal.proposed_seo_title when --override-proposed-seo-title is provided",
+    "proposal.proposed_faq_items when --override-proposed-faq-json is provided"
   ],
   "effective_package_behavior": "When a controlled field override is supplied, the command emits a repaired seo-agent-cms-draft-package-dry-run.v1 artifact and compatible write evidence references that repaired package sha256 so readback QA can compare against the repaired proposal.",
   "copies_body_from_previous_draft_revision": true,
