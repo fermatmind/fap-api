@@ -516,6 +516,175 @@ final class SeoIntelSearchChannelQueueRuntimeTest extends TestCase
     }
 
     #[Test]
+    public function submitted_queue_item_older_than_url_truth_lastmod_allows_article_requeue(): void
+    {
+        config(['seo_intel.search_channel_queue.write_enabled' => true]);
+        $canonicalUrl = 'https://fermatmind.com/zh/articles/big-five-tool-guide';
+        $newLastmod = now();
+        $oldLastmod = now()->subDays(9);
+
+        $this->seedSeoUrl([
+            'canonical_url' => $canonicalUrl,
+            'locale' => 'zh-CN',
+            'page_entity_type' => 'article',
+            'entity_id_or_slug' => '3',
+            'cluster' => 'article',
+            'source_authority' => 'backend_cms',
+            'lastmod_at' => $newLastmod,
+            'lastmod_source' => 'articles.updated_at',
+            'metadata_json' => [
+                'claim_safe' => true,
+                'claim_boundary_state' => 'approved',
+                'publication_state' => 'published',
+                'source_table' => 'articles',
+            ],
+        ]);
+        $submittedId = $this->seedQueueItem($canonicalUrl, [
+            'locale' => 'zh-CN',
+            'page_entity_type' => 'article',
+            'entity_id' => '3',
+            'approval_state' => 'approved',
+            'execution_state' => 'submitted',
+            'lastmod' => $oldLastmod,
+            'updated_at' => $oldLastmod,
+        ]);
+
+        $dryRun = $this->runQueueCommand([
+            '--dry-run' => true,
+            '--no-write' => true,
+            '--json' => true,
+            '--canonical-url' => $canonicalUrl,
+            '--channel' => 'indexnow',
+            '--page-type' => 'article',
+            '--limit' => 1,
+        ]);
+
+        $this->assertSame('success', $dryRun['status'] ?? null);
+        $this->assertSame(1, $dryRun['planned_queue_count'] ?? null);
+        $this->assertSame(0, $dryRun['blocked_count'] ?? null);
+        $this->assertFalse((bool) ($dryRun['duplicate_detected'] ?? true));
+
+        $write = $this->runQueueCommand([
+            '--enqueue' => true,
+            '--json' => true,
+            '--canonical-url' => $canonicalUrl,
+            '--channel' => 'indexnow',
+            '--page-type' => 'article',
+            '--limit' => 1,
+        ]);
+
+        $this->assertSame('success', $write['status'] ?? null);
+        $this->assertSame(1, $write['written_items'] ?? null);
+        $this->assertSame(2, DB::connection('seo_intel')->table('seo_search_channel_queue_items')->count());
+        $this->assertSame('submitted', DB::connection('seo_intel')->table('seo_search_channel_queue_items')->where('id', $submittedId)->value('execution_state'));
+
+        $newItem = DB::connection('seo_intel')
+            ->table('seo_search_channel_queue_items')
+            ->where('id', '!=', $submittedId)
+            ->first();
+
+        $this->assertNotNull($newItem);
+        $this->assertSame('pending', $newItem->approval_state);
+        $this->assertSame('dry_run_ready', $newItem->execution_state);
+        $this->assertSame($newLastmod->toDateTimeString(), $newItem->lastmod);
+    }
+
+    #[Test]
+    public function active_unsubmitted_queue_items_still_block_article_requeue_even_when_older(): void
+    {
+        foreach (['dry_run_ready', 'submitting'] as $state) {
+            $canonicalUrl = 'https://fermatmind.com/zh/articles/requeue-blocked-'.$state;
+            $this->seedSeoUrl([
+                'canonical_url' => $canonicalUrl,
+                'locale' => 'zh-CN',
+                'page_entity_type' => 'article',
+                'entity_id_or_slug' => $state,
+                'cluster' => 'article',
+                'source_authority' => 'backend_cms',
+                'lastmod_at' => now(),
+                'lastmod_source' => 'articles.updated_at',
+                'metadata_json' => [
+                    'claim_safe' => true,
+                    'claim_boundary_state' => 'approved',
+                    'publication_state' => 'published',
+                    'source_table' => 'articles',
+                ],
+            ]);
+            $this->seedQueueItem($canonicalUrl, [
+                'locale' => 'zh-CN',
+                'page_entity_type' => 'article',
+                'entity_id' => $state,
+                'execution_state' => $state,
+                'lastmod' => now()->subDays(9),
+                'updated_at' => now()->subDays(9),
+            ]);
+
+            $output = $this->runQueueCommand([
+                '--dry-run' => true,
+                '--no-write' => true,
+                '--json' => true,
+                '--canonical-url' => $canonicalUrl,
+                '--channel' => 'indexnow',
+                '--page-type' => 'article',
+                '--limit' => 1,
+            ], expectSuccess: false);
+
+            $this->assertSame('blocked', $output['status'] ?? null);
+            $this->assertSame(0, $output['planned_queue_count'] ?? null);
+            $this->assertTrue((bool) ($output['duplicate_detected'] ?? false));
+            $this->assertSame(1, data_get($output, 'reason_code_breakdown.existing_active_queue_item'));
+        }
+    }
+
+    #[Test]
+    public function submitted_queue_item_with_same_lastmod_still_dedupes(): void
+    {
+        $canonicalUrl = 'https://fermatmind.com/zh/articles/requeue-same-lastmod';
+        $lastmod = now()->subHour();
+
+        $this->seedSeoUrl([
+            'canonical_url' => $canonicalUrl,
+            'locale' => 'zh-CN',
+            'page_entity_type' => 'article',
+            'entity_id_or_slug' => 'same-lastmod',
+            'cluster' => 'article',
+            'source_authority' => 'backend_cms',
+            'lastmod_at' => $lastmod,
+            'lastmod_source' => 'articles.updated_at',
+            'metadata_json' => [
+                'claim_safe' => true,
+                'claim_boundary_state' => 'approved',
+                'publication_state' => 'published',
+                'source_table' => 'articles',
+            ],
+        ]);
+        $this->seedQueueItem($canonicalUrl, [
+            'locale' => 'zh-CN',
+            'page_entity_type' => 'article',
+            'entity_id' => 'same-lastmod',
+            'approval_state' => 'approved',
+            'execution_state' => 'submitted',
+            'lastmod' => $lastmod,
+            'updated_at' => $lastmod,
+        ]);
+
+        $output = $this->runQueueCommand([
+            '--dry-run' => true,
+            '--no-write' => true,
+            '--json' => true,
+            '--canonical-url' => $canonicalUrl,
+            '--channel' => 'indexnow',
+            '--page-type' => 'article',
+            '--limit' => 1,
+        ], expectSuccess: false);
+
+        $this->assertSame('blocked', $output['status'] ?? null);
+        $this->assertSame(0, $output['planned_queue_count'] ?? null);
+        $this->assertTrue((bool) ($output['duplicate_detected'] ?? false));
+        $this->assertSame(1, data_get($output, 'reason_code_breakdown.existing_active_queue_item'));
+    }
+
+    #[Test]
     public function audit_event_is_created_only_when_write_gate_is_enabled(): void
     {
         $this->seedSeoUrl();
@@ -616,7 +785,7 @@ final class SeoIntelSearchChannelQueueRuntimeTest extends TestCase
             'cluster' => $overrides['cluster'] ?? 'research',
             'source_authority' => $overrides['source_authority'] ?? 'backend_cms',
             'indexability_state' => $overrides['indexability_state'] ?? 'indexable',
-            'lastmod_at' => now()->subHour(),
+            'lastmod_at' => $overrides['lastmod_at'] ?? now()->subHour(),
             'lastmod_source' => $overrides['lastmod_source'] ?? 'research_reports.updated_at',
             'is_private_flow' => (bool) ($overrides['is_private_flow'] ?? false),
             'first_seen_at' => now()->subDay(),
@@ -704,5 +873,42 @@ final class SeoIntelSearchChannelQueueRuntimeTest extends TestCase
                 $schema->id();
             });
         }
+    }
+
+    /**
+     * @param  array<string, mixed>  $overrides
+     */
+    private function seedQueueItem(string $canonicalUrl, array $overrides = []): int
+    {
+        return (int) DB::connection('seo_intel')->table('seo_search_channel_queue_items')->insertGetId([
+            'batch_id' => null,
+            'canonical_url' => $canonicalUrl,
+            'locale' => $overrides['locale'] ?? 'en',
+            'page_entity_type' => $overrides['page_entity_type'] ?? 'research_report',
+            'entity_type' => $overrides['entity_type'] ?? ($overrides['page_entity_type'] ?? 'research_report'),
+            'entity_id' => $overrides['entity_id'] ?? 'safe-research-report',
+            'source_authority' => $overrides['source_authority'] ?? 'backend_cms',
+            'source_table' => $overrides['source_table'] ?? 'articles',
+            'channel' => $overrides['channel'] ?? 'indexnow',
+            'eligibility_state' => $overrides['eligibility_state'] ?? 'eligible',
+            'approval_state' => $overrides['approval_state'] ?? 'pending',
+            'execution_state' => $overrides['execution_state'] ?? 'dry_run_ready',
+            'indexability_state' => $overrides['indexability_state'] ?? 'indexable',
+            'claim_boundary_state' => $overrides['claim_boundary_state'] ?? 'claim_safe',
+            'private_flow' => (bool) ($overrides['private_flow'] ?? false),
+            'reason_codes' => json_encode($overrides['reason_codes'] ?? [], JSON_THROW_ON_ERROR),
+            'lastmod' => $overrides['lastmod'] ?? now()->subHour(),
+            'content_hash' => $overrides['content_hash'] ?? null,
+            'url_hash' => hash('sha256', $canonicalUrl),
+            'idempotency_key' => $overrides['idempotency_key'] ?? hash('sha256', implode('|', [
+                strtolower(trim($canonicalUrl)),
+                strtolower(trim((string) ($overrides['locale'] ?? 'en'))),
+                strtolower(trim((string) ($overrides['channel'] ?? 'indexnow'))),
+            ])),
+            'approved_by' => $overrides['approved_by'] ?? null,
+            'approved_at' => $overrides['approved_at'] ?? null,
+            'created_at' => $overrides['created_at'] ?? now()->subDay(),
+            'updated_at' => $overrides['updated_at'] ?? now()->subHour(),
+        ]);
     }
 }
