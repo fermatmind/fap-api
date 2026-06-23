@@ -1,0 +1,115 @@
+{
+  "schema": "fap.big5.result_page_v2.ready_readonly_cleared_handoff.v0_1",
+  "package_key": "big5_result_page_v2.ready_readonly_cleared_handoff.v0_1",
+  "version": "0.1",
+  "created_at": "2026-06-23",
+  "mode": "docs_only_handoff_evidence",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "verdict": "READY_READONLY_CLEARED",
+  "scale_code": "BIG5_OCEAN",
+  "agent_id": "big_five_result_page",
+  "authority_source": "fap-api sanitized evidence already merged on origin/main",
+  "source_evidence": [
+    {
+      "source": "backend/content_assets/big5/result_page_v2/qa/free_full_report_runtime_qa_readiness/v0_1",
+      "evidence_label": "PR #2326 sanitized readiness artifact evidence",
+      "share_safety_missing_count": 0,
+      "validation_error_count": 0,
+      "leak_hit_count": 0,
+      "ready_for_runtime": false,
+      "ready_for_production": false
+    },
+    {
+      "source": "backend/content_assets/big5/result_page_v2/qa/analytics_handoff/v0_1",
+      "evidence_label": "PR #2331 sanitized analytics handoff evidence",
+      "share_safety_missing_count": 0,
+      "validation_error_count": 0,
+      "leak_hit_count": 0,
+      "ready_for_runtime": false,
+      "ready_for_production": false
+    }
+  ],
+  "stale_evidence_reconciliation": {
+    "historical_consumer_state": "BLOCKED_SHARE_SAFETY",
+    "historical_consumer_evidence": "Older fap-web docs/contracts evidence preserved share_safety_missing_count=1.",
+    "current_backend_state": "READY_READONLY_CLEARED",
+    "current_backend_evidence": "Sanitized fap-api evidence reports share_safety_missing_count=0, validation_error_count=0, and leak_hit_count=0.",
+    "scope_of_clearance": "read-only share-safety evidence conflict only",
+    "consumer_action": "fap-web may reconcile stale docs/contracts evidence to READY_READONLY_CLEARED while preserving all runtime, pilot, production, CMS, search, and private-data holds."
+  },
+  "surface_evidence": {
+    "route_api_report_access": "mapped",
+    "free_full_report_runtime_qa": "ready_for_readonly_qa",
+    "pdf_boundary": "mapped",
+    "share_boundary": "share_safety_missing_count_0",
+    "history_compare_boundary": "mapped",
+    "renderer_boundary": "backend_authority_only",
+    "paywall_contradiction": "not_detected_in_sanitized_evidence"
+  },
+  "analytics_handoff": {
+    "status": "handoff_ready_for_planning_only",
+    "metric_keys": [
+      "full_report_view",
+      "pdf_click",
+      "share_event",
+      "second_test",
+      "returning_user",
+      "retention_d1",
+      "retention_d7",
+      "retention_d14",
+      "retention_d28"
+    ],
+    "required_exclusions": [
+      "smoke_artifacts",
+      "test_artifacts",
+      "qa_artifacts",
+      "synthetic_artifacts",
+      "fixture_artifacts",
+      "codex_artifacts",
+      "generated_artifacts",
+      "operator_only_artifacts",
+      "internal_monitoring_artifacts"
+    ],
+    "allowed_reporting_shape": [
+      "aggregate_counts",
+      "aggregate_rates",
+      "enum_statuses",
+      "cohort_window_labels"
+    ]
+  },
+  "not_authorized": [
+    "pilot",
+    "runtime_enablement",
+    "production_rollout",
+    "production_import",
+    "CMS",
+    "search",
+    "live_asset_merge",
+    "private_result_data",
+    "manual_deploy"
+  ],
+  "redaction_policy": {
+    "contains_attempt_id": false,
+    "contains_private_url": false,
+    "contains_pdf_file": false,
+    "contains_raw_payload": false,
+    "contains_raw_score": false,
+    "contains_percentile": false,
+    "contains_selector_trace": false,
+    "contains_report_json": false
+  },
+  "next_week_go_hold": {
+    "read_only_reconciliation": "GO",
+    "analytics_handoff": "GO",
+    "pilot": "HOLD",
+    "runtime_enablement": "HOLD",
+    "production_rollout": "HOLD",
+    "cms": "HOLD",
+    "search": "HOLD",
+    "private_result_data": "HOLD"
+  }
+}
