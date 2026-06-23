@@ -301,6 +301,42 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         $this->assertSame(0, PersonalityProfileSection::query()->count());
     }
 
+    public function test_dry_run_supports_fixed_fresh_query_backed_five_subset_without_live_writes(): void
+    {
+        $this->seedProjectionTargets();
+        [$packagePath, $qaPath] = $this->writeProjectionArtifacts($this->validProjectionPackage(), $this->validProjectionQa());
+        $this->createProjectionDraftRevisions($packagePath, $qaPath);
+
+        $exitCode = Artisan::call('personality:mbti64-cms-revision-promote', [
+            '--package' => $packagePath,
+            '--dry-run' => true,
+            '--fresh-query-backed-5' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertTrue($payload['ok']);
+        $this->assertTrue($payload['dry_run']);
+        $this->assertFalse($payload['write']);
+        $this->assertSame('fresh_query_backed_5', $payload['contract']['subset']['mode']);
+        $this->assertSame(5, $payload['row_count']);
+        $this->assertSame(5, $payload['variant_row_count']);
+        $this->assertSame(0, $payload['comparison_row_count']);
+        $this->assertSame(5, $payload['would_promote_count']);
+        $this->assertSame([
+            'https://fermatmind.com/en/personality/enfp-a',
+            'https://fermatmind.com/zh/personality/istp-a',
+            'https://fermatmind.com/en/personality/esfj-a',
+            'https://fermatmind.com/zh/personality/esfj-a',
+            'https://fermatmind.com/en/personality/intp-a',
+        ], array_column($payload['rows'], 'url'));
+        $this->assertFalse($payload['writes_committed']);
+        $this->assertSame(0, PersonalityProfileVariantSeoMeta::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantSection::query()->count());
+        $this->assertSame(0, PersonalityProfileSection::query()->count());
+    }
+
     public function test_write_promotes_eighty_eight_agent_projection_revisions_without_index_search_side_effects(): void
     {
         $targets = $this->seedProjectionTargets();
@@ -374,6 +410,42 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
             ->first());
     }
 
+    public function test_write_promotes_only_fixed_fresh_query_backed_five_subset(): void
+    {
+        $targets = $this->seedProjectionTargets();
+        [$packagePath, $qaPath] = $this->writeProjectionArtifacts($this->validProjectionPackage(), $this->validProjectionQa());
+        $this->createProjectionDraftRevisions($packagePath, $qaPath);
+        $options = $this->promoteWriteOptions($packagePath);
+        $options['--fresh-query-backed-5'] = true;
+
+        $exitCode = Artisan::call('personality:mbti64-cms-revision-promote', $options);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertTrue($payload['ok']);
+        $this->assertTrue($payload['write']);
+        $this->assertSame('fresh_query_backed_5', $payload['contract']['subset']['mode']);
+        $this->assertSame(5, $payload['row_count']);
+        $this->assertSame(5, $payload['variant_row_count']);
+        $this->assertSame(0, $payload['comparison_row_count']);
+        $this->assertSame(5, $payload['promoted_count']);
+        $this->assertSame(5, PersonalityProfileVariantSeoMeta::query()->count());
+        $this->assertSame(0, PersonalityProfileSection::query()->where('section_key', 'mbti64_comparison_a_vs_t')->count());
+
+        foreach (['en|ENFP-A', 'zh-CN|ISTP-A', 'en|ESFJ-A', 'zh-CN|ESFJ-A', 'en|INTP-A'] as $targetKey) {
+            PersonalityProfileVariantSeoMeta::query()
+                ->where('personality_profile_variant_id', (int) $targets[$targetKey]->id)
+                ->firstOrFail();
+        }
+
+        $this->assertNull(PersonalityProfileVariantSeoMeta::query()
+            ->where('personality_profile_variant_id', (int) $targets['en|ENTJ-A']->id)
+            ->first());
+        $this->assertNull(PersonalityProfileVariantSeoMeta::query()
+            ->where('personality_profile_variant_id', (int) $targets['zh-CN|ENFP-A']->id)
+            ->first());
+    }
+
     public function test_visible_query_backed_three_subset_is_idempotent_after_write(): void
     {
         $this->seedProjectionTargets();
@@ -439,6 +511,63 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         $this->assertSame(1, $exitCode, Artisan::output());
         $this->assertFalse($payload['ok']);
         $this->assertContains('visible_query_backed_3_subset_incomplete', array_map(
+            static fn (array $error): string => (string) ($error['code'] ?? ''),
+            $payload['errors'] ?? []
+        ));
+        $this->assertSame(0, PersonalityProfileVariantSeoMeta::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantSection::query()->count());
+        $this->assertSame(0, PersonalityProfileSection::query()->count());
+    }
+
+    public function test_fresh_query_backed_five_subset_fails_closed_when_fixed_url_is_missing(): void
+    {
+        $this->seedProjectionTargets();
+        $package = $this->validProjectionPackage();
+        foreach ($package['recommendations'] as &$recommendation) {
+            if (($recommendation['target_url'] ?? null) === 'https://fermatmind.com/en/personality/enfp-a') {
+                $recommendation['target_url'] = 'https://fermatmind.com/en/personality/enfp-x';
+            }
+        }
+        unset($recommendation);
+        [$packagePath] = $this->writeProjectionArtifacts($package, $this->validProjectionQa());
+
+        $exitCode = Artisan::call('personality:mbti64-cms-revision-promote', [
+            '--package' => $packagePath,
+            '--dry-run' => true,
+            '--fresh-query-backed-5' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode, Artisan::output());
+        $this->assertFalse($payload['ok']);
+        $this->assertContains('fresh_query_backed_5_subset_incomplete', array_map(
+            static fn (array $error): string => (string) ($error['code'] ?? ''),
+            $payload['errors'] ?? []
+        ));
+        $this->assertSame(0, PersonalityProfileVariantSeoMeta::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantSection::query()->count());
+        $this->assertSame(0, PersonalityProfileSection::query()->count());
+    }
+
+    public function test_agent_projection_subset_modes_are_mutually_exclusive(): void
+    {
+        $this->seedProjectionTargets();
+        [$packagePath, $qaPath] = $this->writeProjectionArtifacts($this->validProjectionPackage(), $this->validProjectionQa());
+        $this->createProjectionDraftRevisions($packagePath, $qaPath);
+
+        $exitCode = Artisan::call('personality:mbti64-cms-revision-promote', [
+            '--package' => $packagePath,
+            '--dry-run' => true,
+            '--visible-query-backed-3' => true,
+            '--fresh-query-backed-5' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode, Artisan::output());
+        $this->assertFalse($payload['ok']);
+        $this->assertContains('multiple_agent_projection_subset_modes', array_map(
             static fn (array $error): string => (string) ($error['code'] ?? ''),
             $payload['errors'] ?? []
         ));

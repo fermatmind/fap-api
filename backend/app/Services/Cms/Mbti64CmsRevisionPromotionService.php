@@ -32,6 +32,14 @@ final class Mbti64CmsRevisionPromotionService
         'https://fermatmind.com/zh/personality/esfp-a',
     ];
 
+    private const FRESH_QUERY_BACKED_5_URLS = [
+        'https://fermatmind.com/en/personality/enfp-a',
+        'https://fermatmind.com/zh/personality/istp-a',
+        'https://fermatmind.com/en/personality/esfj-a',
+        'https://fermatmind.com/zh/personality/esfj-a',
+        'https://fermatmind.com/en/personality/intp-a',
+    ];
+
     public function __construct(private readonly Mbti64BackendImportContractPlanner $planner)
     {
     }
@@ -185,8 +193,23 @@ final class Mbti64CmsRevisionPromotionService
             array_keys($rawRecommendations)
         );
         $visibleQueryBacked3 = (bool) ($options['visible_query_backed_3'] ?? false);
-        $contractRecommendations = $visibleQueryBacked3
-            ? $this->visibleQueryBacked3Recommendations($recommendations)
+        $freshQueryBacked5 = (bool) ($options['fresh_query_backed_5'] ?? false);
+        $subsetModeCount = ($visibleQueryBacked3 ? 1 : 0) + ($freshQueryBacked5 ? 1 : 0);
+        if ($subsetModeCount > 1) {
+            $errors[] = [
+                'field' => 'options',
+                'code' => 'multiple_agent_projection_subset_modes',
+                'message' => 'Only one agent projection subset mode can be used.',
+            ];
+        }
+
+        $subsetUrls = match (true) {
+            $visibleQueryBacked3 => self::VISIBLE_QUERY_BACKED_3_URLS,
+            $freshQueryBacked5 => self::FRESH_QUERY_BACKED_5_URLS,
+            default => [],
+        };
+        $contractRecommendations = $subsetUrls !== []
+            ? $this->recommendationsForFixedUrls($recommendations, $subsetUrls)
             : $recommendations;
 
         if ((string) ($package['artifact'] ?? '') !== self::AGENT_PROJECTION_ARTIFACT) {
@@ -209,6 +232,13 @@ final class Mbti64CmsRevisionPromotionService
                 'field' => 'recommendations',
                 'code' => 'visible_query_backed_3_subset_incomplete',
                 'message' => 'Expected exactly the 3 approved query-backed visible MBTI64 recommendations.',
+            ];
+        }
+        if ($freshQueryBacked5 && count($contractRecommendations) !== 5) {
+            $errors[] = [
+                'field' => 'recommendations',
+                'code' => 'fresh_query_backed_5_subset_incomplete',
+                'message' => 'Expected exactly the 5 fresh query-backed MBTI64 recommendations.',
             ];
         }
 
@@ -247,9 +277,13 @@ final class Mbti64CmsRevisionPromotionService
             'artifact' => 'MBTI64-CMS-PROJECTION-PROMOTE-88-CONTRACT-PATCH-01',
             'source_kind' => 'mbti64_agent_projection_draft_v1',
             'subset' => [
-                'mode' => $visibleQueryBacked3 ? 'visible_query_backed_3' : 'full_agent_projection_88',
-                'enabled' => $visibleQueryBacked3,
-                'allowed_urls' => $visibleQueryBacked3 ? self::VISIBLE_QUERY_BACKED_3_URLS : [],
+                'mode' => match (true) {
+                    $visibleQueryBacked3 => 'visible_query_backed_3',
+                    $freshQueryBacked5 => 'fresh_query_backed_5',
+                    default => 'full_agent_projection_88',
+                },
+                'enabled' => $subsetUrls !== [],
+                'allowed_urls' => $subsetUrls,
             ],
             'row_count' => count($rows),
             'variant_row_count' => count(array_filter($rows, static fn (array $row): bool => ($row['page_type'] ?? null) === 'variant')),
@@ -327,18 +361,18 @@ final class Mbti64CmsRevisionPromotionService
      * @param  list<array<string,mixed>>  $recommendations
      * @return list<array<string,mixed>>
      */
-    private function visibleQueryBacked3Recommendations(array $recommendations): array
+    private function recommendationsForFixedUrls(array $recommendations, array $urls): array
     {
         $byUrl = [];
         foreach ($recommendations as $recommendation) {
             $url = (string) ($recommendation['target_url'] ?? '');
-            if (in_array($url, self::VISIBLE_QUERY_BACKED_3_URLS, true)) {
+            if (in_array($url, $urls, true)) {
                 $byUrl[$url] = $recommendation;
             }
         }
 
         $ordered = [];
-        foreach (self::VISIBLE_QUERY_BACKED_3_URLS as $url) {
+        foreach ($urls as $url) {
             if (isset($byUrl[$url])) {
                 $ordered[] = $byUrl[$url];
             }
