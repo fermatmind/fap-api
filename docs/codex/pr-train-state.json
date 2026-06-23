@@ -59067,7 +59067,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-free-full-report-runtime-qa-readiness",
     "base": "main",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "train_scope": "big5_result_page_agent_readiness_to_pilot",
     "title": "BIG5-FREE-FULL-REPORT-RUNTIME-QA-READINESS-01: Add Big Five free full-report runtime QA readiness",
     "depends_on": [
@@ -59908,8 +59908,8 @@
         "evidence": "Changed files are limited to FA30-API-10 allowed paths: competitor alternatives source-ledger source package, generated artifact, docs note, read-only audit command, validator service, focused PHPUnit test, Big Five runtime-freeze classifier allowlist test, and docs/codex metadata. No scraping, competitor copy, public page, frontend route, SEO runtime, sitemap, llms, canonical, JSON-LD, CMS write, production DB write, queue, scheduler, external write, deploy, or search submission."
       },
       "github": {
-        "status": "pending",
-        "evidence": null
+        "status": "pass",
+        "evidence": "PR #2353 GitHub checks passed on branch head f5b95c45a64f8d10c8ffb4ca03c175bf06e98835: hygiene, Semgrep blocking secrets, supply-chain, semgrep SARIF non-blocking upload, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, and Semgrep OSS. mergeStateStatus was CLEAN."
       }
     },
     "failure_reason": null,
@@ -59938,6 +59938,11 @@
         "at": "2026-06-23T01:49:00Z",
         "status": "pr_open",
         "note": "Opened PR #2353 after local validation and scope validation passed."
+      },
+      {
+        "at": "2026-06-23T01:51:00Z",
+        "status": "ready_to_merge",
+        "note": "All PR #2353 GitHub checks passed on head f5b95c45a64f8d10c8ffb4ca03c175bf06e98835 and mergeStateStatus was CLEAN. Recording ready_to_merge before squash merge per PR-train ledger policy."
       }
     ]
   }
