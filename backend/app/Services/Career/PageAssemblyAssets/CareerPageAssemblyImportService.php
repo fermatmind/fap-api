@@ -434,6 +434,261 @@ final class CareerPageAssemblyImportService
      * @param  list<string>|null  $requestedSlugs
      * @return array<string, mixed>
      */
+    public function importApprovedAssetsToProduction(
+        string $file,
+        ?array $requestedSlugs = null,
+        ?string $expectedSha256 = null,
+        bool $allSlugsFromFile = false,
+        string $approvalManifestFile = '',
+        ?string $expectedApprovalManifestSha256 = null,
+        string $editorialReviewReportFile = '',
+        ?string $expectedEditorialReviewSha256 = null,
+        bool $confirmed = false,
+        bool $write = true,
+    ): array {
+        $baseReport = $this->baseReport($file, $requestedSlugs, $allSlugsFromFile, ! $allSlugsFromFile);
+        if (! $confirmed) {
+            return array_merge($baseReport, [
+                'mode' => $write ? 'production_import' : 'production_import_dry_run',
+                'status' => CareerJobPageAssemblyAsset::STATUS_PRODUCTION_IMPORTED,
+                'decision' => 'fail',
+                'approved_transition_performed' => false,
+                'production_import_allowed' => false,
+                'production_import_performed' => false,
+                'errors' => ['--confirm-production-import is required to import page assembly assets into production.'],
+            ]);
+        }
+
+        if ($this->normalizeSha256($expectedSha256) === null) {
+            return array_merge($baseReport, [
+                'mode' => $write ? 'production_import' : 'production_import_dry_run',
+                'status' => CareerJobPageAssemblyAsset::STATUS_PRODUCTION_IMPORTED,
+                'decision' => 'fail',
+                'approved_transition_performed' => false,
+                'production_import_allowed' => false,
+                'production_import_performed' => false,
+                'errors' => ['--expected-sha256 with the approved asset artifact SHA is required for production import.'],
+            ]);
+        }
+
+        $validation = $this->validateFile(
+            $file,
+            $requestedSlugs,
+            $expectedSha256,
+            $allSlugsFromFile,
+            false,
+        );
+        if (($validation['decision'] ?? null) !== 'pass') {
+            return array_merge($validation, [
+                'mode' => $write ? 'production_import' : 'production_import_dry_run',
+                'status' => CareerJobPageAssemblyAsset::STATUS_PRODUCTION_IMPORTED,
+                'production_import_allowed' => false,
+                'production_import_performed' => false,
+                'write_skipped_reason' => 'validation_failed',
+            ]);
+        }
+
+        $errors = [];
+        $sourceFileSha256 = is_string($validation['source_file_sha256'] ?? null)
+            ? (string) $validation['source_file_sha256']
+            : null;
+        $targetSlugs = array_values(array_map('strval', (array) ($validation['target_slugs'] ?? [])));
+        $expectedRows = (int) ($validation['expected_preview_rows'] ?? (count($targetSlugs) * 2));
+        $targetSlugCount = count($targetSlugs);
+
+        $approvalArtifact = $this->readJsonArtifact($approvalManifestFile, $expectedApprovalManifestSha256, 'approval manifest', $errors);
+        $editorialArtifact = $this->readJsonArtifact($editorialReviewReportFile, $expectedEditorialReviewSha256, 'editorial review report', $errors);
+        $approvalManifest = is_array($approvalArtifact['payload'] ?? null) ? $approvalArtifact['payload'] : [];
+        $editorialReview = is_array($editorialArtifact['payload'] ?? null) ? $editorialArtifact['payload'] : [];
+
+        $this->validateApprovalManifest($approvalManifest, $sourceFileSha256, $expectedRows, $targetSlugCount, $errors);
+        $this->validateEditorialReviewReport($editorialReview, $sourceFileSha256, $expectedRows, $targetSlugCount, $errors);
+
+        $assetVersion = CareerJobPageAssemblyAsset::ASSET_VERSION_V1;
+        $targetKeys = [];
+        foreach ($targetSlugs as $slug) {
+            foreach (['zh-CN', 'en'] as $locale) {
+                $targetKeys[$slug.'|'.$locale] = ['slug' => $slug, 'locale' => $locale];
+            }
+        }
+
+        $existingRows = CareerJobPageAssemblyAsset::query()
+            ->where('asset_version', $assetVersion)
+            ->whereIn('career_job_slug', $targetSlugs)
+            ->whereIn('locale', ['zh-CN', 'en'])
+            ->get();
+
+        $existingByKey = [];
+        foreach ($existingRows as $asset) {
+            $existingByKey[$asset->career_job_slug.'|'.$asset->locale] = $asset;
+        }
+
+        $rollbackRows = [];
+        $previousStatusCounts = [];
+        foreach ($targetKeys as $key => $target) {
+            $asset = $existingByKey[$key] ?? null;
+            if (! $asset instanceof CareerJobPageAssemblyAsset) {
+                $previousStatusCounts['missing'] = (int) ($previousStatusCounts['missing'] ?? 0) + 1;
+                $errors[] = "{$target['slug']}/{$target['locale']}: production import requires existing approved source rows, found missing.";
+                $rollbackRows[] = [
+                    'slug' => $target['slug'],
+                    'locale' => $target['locale'],
+                    'previous_status' => 'missing',
+                    'new_status' => CareerJobPageAssemblyAsset::STATUS_PRODUCTION_IMPORTED,
+                ];
+
+                continue;
+            }
+
+            $previousStatus = (string) $asset->status;
+            $previousStatusCounts[$previousStatus] = (int) ($previousStatusCounts[$previousStatus] ?? 0) + 1;
+            if (! in_array($previousStatus, [
+                CareerJobPageAssemblyAsset::STATUS_APPROVED,
+                CareerJobPageAssemblyAsset::STATUS_PRODUCTION_IMPORTED,
+            ], true)) {
+                $errors[] = "{$target['slug']}/{$target['locale']}: production import requires approved source rows, found {$previousStatus}.";
+            }
+
+            if (is_string($asset->source_artifact_sha256) && $sourceFileSha256 !== null && $asset->source_artifact_sha256 !== $sourceFileSha256) {
+                $errors[] = "{$target['slug']}/{$target['locale']}: existing source artifact SHA does not match the approved production artifact SHA.";
+            }
+
+            $rollbackRows[] = [
+                'slug' => $target['slug'],
+                'locale' => $target['locale'],
+                'previous_status' => $previousStatus,
+                'new_status' => CareerJobPageAssemblyAsset::STATUS_PRODUCTION_IMPORTED,
+            ];
+        }
+
+        if ($errors !== []) {
+            return array_merge($validation, [
+                'mode' => $write ? 'production_import' : 'production_import_dry_run',
+                'status' => CareerJobPageAssemblyAsset::STATUS_PRODUCTION_IMPORTED,
+                'decision' => 'fail',
+                'approved_transition_performed' => false,
+                'production_import_allowed' => false,
+                'production_import_performed' => false,
+                'approval_manifest_sha256' => $approvalArtifact['sha256'] ?? null,
+                'editorial_review_sha256' => $editorialArtifact['sha256'] ?? null,
+                'production_rows_touched' => 0,
+                'rollback_report' => [
+                    'available' => true,
+                    'target_key' => ['career_job_slug', 'locale', 'asset_version'],
+                    'previous_status_counts' => $previousStatusCounts,
+                    'rows' => $rollbackRows,
+                ],
+                'errors' => $errors,
+            ]);
+        }
+
+        if (! $write) {
+            return array_merge($validation, [
+                'mode' => 'production_import_dry_run',
+                'status' => CareerJobPageAssemblyAsset::STATUS_PRODUCTION_IMPORTED,
+                'decision' => 'pass',
+                'approved_transition_performed' => false,
+                'production_import_allowed' => true,
+                'production_import_performed' => false,
+                'staging_write_performed' => false,
+                'approval_manifest_file' => $approvalManifestFile,
+                'approval_manifest_sha256' => $approvalArtifact['sha256'] ?? null,
+                'editorial_review_report_file' => $editorialReviewReportFile,
+                'editorial_review_sha256' => $editorialArtifact['sha256'] ?? null,
+                'expected_written_count' => $expectedRows,
+                'production_rows_touched' => 0,
+                'rollback_report' => [
+                    'available' => true,
+                    'target_key' => ['career_job_slug', 'locale', 'asset_version'],
+                    'previous_status_counts' => $previousStatusCounts,
+                    'rows' => $rollbackRows,
+                    'rollback_sql_intent' => 'No rows were changed during dry-run. If executed, rollback restores each row to previous_status by career_job_slug, locale, asset_version, and import_run_id.',
+                ],
+                'errors' => [],
+            ]);
+        }
+
+        $targetRows = $this->targetRowsFromFile($file, array_keys($targetKeys));
+        $importRunId = (string) Str::uuid();
+        $writtenRows = [];
+
+        DB::transaction(function () use ($targetRows, $sourceFileSha256, $importRunId, &$writtenRows): void {
+            foreach ($targetRows as $key => $row) {
+                $slug = $this->previewService->normalizeSlug((string) ($row['slug'] ?? ''));
+                $locale = $this->previewService->normalizeLocale((string) ($row['locale'] ?? ''));
+                $occupation = Occupation::query()->where('canonical_slug', $slug)->firstOrFail();
+                $asset = CareerJobPageAssemblyAsset::query()->updateOrCreate(
+                    [
+                        'career_job_slug' => $slug,
+                        'locale' => $locale,
+                        'asset_version' => CareerJobPageAssemblyAsset::ASSET_VERSION_V1,
+                    ],
+                    [
+                        'occupation_id' => $occupation->id,
+                        'status' => CareerJobPageAssemblyAsset::STATUS_PRODUCTION_IMPORTED,
+                        'preview_allowlisted' => false,
+                        'asset_payload_json' => $row,
+                        'block_refs_json' => is_array($row['block_refs'] ?? null) ? $row['block_refs'] : null,
+                        'audit_fields_json' => is_array($row['audit_fields'] ?? null) ? $row['audit_fields'] : null,
+                        'asset_row_hash' => (string) data_get($row, 'audit_fields.row_hash'),
+                        'source_artifact_sha256' => $sourceFileSha256,
+                        'import_run_id' => $importRunId,
+                    ],
+                );
+                $writtenRows[] = [
+                    'slug' => $slug,
+                    'locale' => $locale,
+                    'row_id' => $asset->id,
+                    'status' => CareerJobPageAssemblyAsset::STATUS_PRODUCTION_IMPORTED,
+                    'operation' => $asset->wasRecentlyCreated ? 'created' : 'updated',
+                    'key' => $key,
+                ];
+            }
+        });
+
+        $productionImportedCount = CareerJobPageAssemblyAsset::query()
+            ->where('asset_version', $assetVersion)
+            ->whereIn('career_job_slug', $targetSlugs)
+            ->whereIn('locale', ['zh-CN', 'en'])
+            ->where('status', CareerJobPageAssemblyAsset::STATUS_PRODUCTION_IMPORTED)
+            ->count();
+        $decision = count($writtenRows) === $expectedRows && $productionImportedCount === $expectedRows ? 'pass' : 'fail';
+
+        return array_merge($validation, [
+            'mode' => 'production_import',
+            'status' => CareerJobPageAssemblyAsset::STATUS_PRODUCTION_IMPORTED,
+            'decision' => $decision,
+            'approved_transition_performed' => false,
+            'production_import_allowed' => true,
+            'production_import_performed' => true,
+            'staging_write_performed' => false,
+            'import_run_id' => $importRunId,
+            'approval_manifest_file' => $approvalManifestFile,
+            'approval_manifest_sha256' => $approvalArtifact['sha256'] ?? null,
+            'editorial_review_report_file' => $editorialReviewReportFile,
+            'editorial_review_sha256' => $editorialArtifact['sha256'] ?? null,
+            'written_count' => count($writtenRows),
+            'created_count' => count(array_filter($writtenRows, static fn (array $row): bool => ($row['operation'] ?? null) === 'created')),
+            'updated_count' => count(array_filter($writtenRows, static fn (array $row): bool => ($row['operation'] ?? null) === 'updated')),
+            'expected_written_count' => $expectedRows,
+            'production_imported_count' => $productionImportedCount,
+            'production_rows_touched' => count($writtenRows),
+            'written_rows' => $writtenRows,
+            'rollback_report' => [
+                'available' => true,
+                'target_key' => ['career_job_slug', 'locale', 'asset_version'],
+                'previous_status_counts' => $previousStatusCounts,
+                'rows' => $rollbackRows,
+                'rollback_sql_intent' => 'Restore each row to previous_status by career_job_slug, locale, asset_version, and import_run_id if rollback is required.',
+            ],
+            'errors' => $decision === 'pass' ? [] : ['Production import row count invariant failed.'],
+        ]);
+    }
+
+    /**
+     * @param  list<string>|null  $requestedSlugs
+     * @return array<string, mixed>
+     */
     private function baseReport(string $file, ?array $requestedSlugs, bool $allSlugsFromFile, bool $enforcePreviewAllowlist): array
     {
         return [
@@ -442,7 +697,15 @@ final class CareerPageAssemblyImportService
             'requested_slugs' => $requestedSlugs,
             'all_slugs_from_file' => $allSlugsFromFile,
             'preview_allowlist_enforced' => $enforcePreviewAllowlist,
-            'status_policy' => 'dry_run_staging_preview_or_approved_transition',
+            'status_policy' => 'dry_run_staging_preview_approved_transition_or_explicit_production_import',
+            'production_import_allowed' => false,
+            'production_import_gate' => [
+                'current_command_supports_production_import' => true,
+                'requires_expected_sha256' => true,
+                'requires_confirm_production_import' => true,
+                'requires_approved_source_rows' => true,
+                'requires_approval_manifest_and_editorial_report' => true,
+            ],
         ];
     }
 
@@ -695,8 +958,10 @@ final class CareerPageAssemblyImportService
             'dry_run_writes_database' => false,
             'staging_preview_write_supported_in_this_pr' => true,
             'approved_transition_supported_in_this_pr' => true,
-            'production_import_supported_in_this_pr' => false,
+            'production_import_supported_in_this_pr' => true,
             'production_import_requires_approved_status' => true,
+            'production_import_requires_exact_artifact_sha' => true,
+            'production_import_requires_explicit_confirmation' => true,
             'rollback_boundary' => 'Rows written by staging_preview or marked approved are scoped by import_run_id and target key.',
         ];
     }

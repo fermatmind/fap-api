@@ -18,17 +18,18 @@ final class CareerImportPageAssemblyAssetsPreview extends Command
         {--all-slugs-from-file : Dry-run every slug found in the source JSONL instead of the configured preview allowlist}
         {--confirm-full-staging-preview : Explicitly confirm that --force may write every slug found in the source JSONL to staging_preview}
         {--confirm-approved-transition : Explicitly confirm that --force may mark validated rows as approved}
+        {--confirm-production-import : Explicitly confirm that production import preflight or --force may import validated, approved page assembly rows into production_imported}
         {--approval-manifest= : Approval manifest JSON produced by the editorial review package}
         {--approval-manifest-sha256= : Optional expected SHA-256 for the approval manifest}
         {--editorial-review-report= : Editorial review JSON report that authorizes the approved transition}
         {--editorial-review-sha256= : Optional expected SHA-256 for the editorial review report}
-        {--dry-run : Validate only; do not write staging rows}
-        {--force : Write rows only when --status=staging_preview or perform explicit approved transition}
-        {--status=staging_preview : Target import status; staging_preview and approved are supported through their explicit gates}
+        {--dry-run : Validate only; do not write staging or production rows}
+        {--force : Write rows only when --status=staging_preview, perform explicit approved transition, or perform explicit production import}
+        {--status=staging_preview : Target import status; staging_preview, approved, and production_imported are supported through their explicit gates}
         {--json : Emit machine-readable JSON report}
         {--output= : Optional report output path}';
 
-    protected $description = 'Dry-run or staging-preview import of PASS v1 career page assembly asset rows.';
+    protected $description = 'Validate or write PASS v1 career page assembly asset rows through staging, approval, or explicit production gates.';
 
     public function __construct(
         private readonly CareerPageAssemblyImportService $importService,
@@ -61,10 +62,11 @@ final class CareerImportPageAssemblyAssetsPreview extends Command
             if (! in_array($status, [
                 CareerJobPageAssemblyAsset::STATUS_STAGING_PREVIEW,
                 CareerJobPageAssemblyAsset::STATUS_APPROVED,
+                CareerJobPageAssemblyAsset::STATUS_PRODUCTION_IMPORTED,
             ], true)) {
                 return $this->finish([
                     'decision' => 'fail',
-                    'errors' => ['Only --status=staging_preview or --status=approved is supported.'],
+                    'errors' => ['Only --status=staging_preview, --status=approved, or --status=production_imported is supported.'],
                 ], false);
             }
 
@@ -91,6 +93,19 @@ final class CareerImportPageAssemblyAssetsPreview extends Command
                     trim((string) $this->option('editorial-review-report')),
                     trim((string) $this->option('editorial-review-sha256')) ?: null,
                     (bool) $this->option('confirm-approved-transition'),
+                );
+            } elseif ($status === CareerJobPageAssemblyAsset::STATUS_PRODUCTION_IMPORTED && ($force || $dryRun)) {
+                $report = $this->importService->importApprovedAssetsToProduction(
+                    $file,
+                    $this->requestedSlugs(),
+                    trim((string) $this->option('expected-sha256')) ?: null,
+                    (bool) $this->option('all-slugs-from-file'),
+                    trim((string) $this->option('approval-manifest')),
+                    trim((string) $this->option('approval-manifest-sha256')) ?: null,
+                    trim((string) $this->option('editorial-review-report')),
+                    trim((string) $this->option('editorial-review-sha256')) ?: null,
+                    (bool) $this->option('confirm-production-import'),
+                    $force,
                 );
             } else {
                 $report = $force
