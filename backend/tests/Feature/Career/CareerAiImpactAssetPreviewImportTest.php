@@ -772,6 +772,8 @@ final class CareerAiImpactAssetPreviewImportTest extends TestCase
         Config::set('career_ai_impact_assets.preview_slugs', [
             'writers-and-authors',
             'heavy-and-tractor-trailer-truck-drivers',
+            'architects',
+            'biochemists-and-biophysicists',
         ]);
 
         $writerOccupation = $this->seedOccupation('writers-and-authors');
@@ -821,6 +823,56 @@ final class CareerAiImpactAssetPreviewImportTest extends TestCase
             'asset_row_hash' => $truckZh['audit_fields']['row_hash'],
         ]);
 
+        $architectOccupation = $this->seedOccupation('architects');
+        foreach (['zh-CN', 'en'] as $locale) {
+            $architectRow = $this->assetRow('architects', $locale);
+            if ($locale === 'zh-CN') {
+                $architectRow['items']['human_accountability_anchors'][0]['body'] = '正式采用仍要看态势判断、指挥链、人员安全、任务规则和升级交接。';
+            } else {
+                $architectRow['items']['human_accountability_anchors'][0]['body'] = 'Final use still depends on situational judgment, chain of command, personnel safety, mission rules, and escalation handoff.';
+            }
+
+            CareerJobAiImpactAsset::query()->create([
+                'occupation_id' => $architectOccupation->id,
+                'career_job_slug' => 'architects',
+                'locale' => $locale,
+                'asset_version' => CareerJobAiImpactAsset::ASSET_VERSION_V5,
+                'status' => CareerJobAiImpactAsset::STATUS_STAGING_PREVIEW,
+                'preview_allowlisted' => true,
+                'asset_payload_json' => $architectRow,
+                'sources_json' => $architectRow['sources'],
+                'evidence_used_json' => $architectRow['evidence_used'],
+                'derived_from_synthesis_json' => $architectRow['derived_from_synthesis'],
+                'audit_fields_json' => $architectRow['audit_fields'],
+                'asset_row_hash' => $architectRow['audit_fields']['row_hash'],
+            ]);
+        }
+
+        $biochemistOccupation = $this->seedOccupation('biochemists-and-biophysicists');
+        foreach (['zh-CN', 'en'] as $locale) {
+            $biochemistRow = $this->assetRow('biochemists-and-biophysicists', $locale);
+            if ($locale === 'zh-CN') {
+                $biochemistRow['items']['human_accountability_anchors'][0]['body'] = '正式采用仍要看临床升级、用药核对、转诊判断、患者沟通和病情变化记录。';
+            } else {
+                $biochemistRow['items']['human_accountability_anchors'][0]['body'] = 'Final use still depends on clinical escalation, medication checks, referral judgment, patient communication, and change-in-condition records.';
+            }
+
+            CareerJobAiImpactAsset::query()->create([
+                'occupation_id' => $biochemistOccupation->id,
+                'career_job_slug' => 'biochemists-and-biophysicists',
+                'locale' => $locale,
+                'asset_version' => CareerJobAiImpactAsset::ASSET_VERSION_V5,
+                'status' => CareerJobAiImpactAsset::STATUS_STAGING_PREVIEW,
+                'preview_allowlisted' => true,
+                'asset_payload_json' => $biochemistRow,
+                'sources_json' => $biochemistRow['sources'],
+                'evidence_used_json' => $biochemistRow['evidence_used'],
+                'derived_from_synthesis_json' => $biochemistRow['derived_from_synthesis'],
+                'audit_fields_json' => $biochemistRow['audit_fields'],
+                'asset_row_hash' => $biochemistRow['audit_fields']['row_hash'],
+            ]);
+        }
+
         $writerZhAsset = $this->getJson('/api/v0.5/career/jobs/writers-and-authors/ai-impact-asset?locale=zh-CN')
             ->assertOk()
             ->json('ai_impact_asset_v1');
@@ -830,10 +882,26 @@ final class CareerAiImpactAssetPreviewImportTest extends TestCase
         $truckZhAsset = $this->getJson('/api/v0.5/career/jobs/heavy-and-tractor-trailer-truck-drivers/ai-impact-asset?locale=zh-CN')
             ->assertOk()
             ->json('ai_impact_asset_v1');
+        $architectZhAsset = $this->getJson('/api/v0.5/career/jobs/architects/ai-impact-asset?locale=zh-CN')
+            ->assertOk()
+            ->json('ai_impact_asset_v1');
+        $architectEnAsset = $this->getJson('/api/v0.5/career/jobs/architects/ai-impact-asset?locale=en')
+            ->assertOk()
+            ->json('ai_impact_asset_v1');
+        $biochemistZhAsset = $this->getJson('/api/v0.5/career/jobs/biochemists-and-biophysicists/ai-impact-asset?locale=zh-CN')
+            ->assertOk()
+            ->json('ai_impact_asset_v1');
+        $biochemistEnAsset = $this->getJson('/api/v0.5/career/jobs/biochemists-and-biophysicists/ai-impact-asset?locale=en')
+            ->assertOk()
+            ->json('ai_impact_asset_v1');
 
         $writerZhText = json_encode($writerZhAsset, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
         $writerEnText = json_encode($writerEnAsset, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
         $truckZhText = json_encode($truckZhAsset, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+        $architectZhText = json_encode($architectZhAsset, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+        $architectEnText = json_encode($architectEnAsset, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+        $biochemistZhText = json_encode($biochemistZhAsset, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+        $biochemistEnText = json_encode($biochemistEnAsset, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
 
         $this->assertStringNotContainsString('物种观察', $writerZhText);
         $this->assertStringNotContainsString('栖息地数据', $writerZhText);
@@ -851,6 +919,26 @@ final class CareerAiImpactAssetPreviewImportTest extends TestCase
         $this->assertStringNotContainsString('旅客/机组安全', $truckZhText);
         $this->assertStringContainsString('道路安全', $truckZhText);
         $this->assertStringContainsString('工时合规', $truckZhText);
+
+        $this->assertStringNotContainsString('指挥链', $architectZhText);
+        $this->assertStringNotContainsString('态势判断', $architectZhText);
+        $this->assertStringContainsString('责任链条', $architectZhText);
+        $this->assertStringContainsString('现场判断', $architectZhText);
+
+        $this->assertStringNotContainsString('chain of command', $architectEnText);
+        $this->assertStringNotContainsString('situational judgment', $architectEnText);
+        $this->assertStringContainsString('accountability chain', $architectEnText);
+        $this->assertStringContainsString('context judgment', $architectEnText);
+
+        $this->assertStringNotContainsString('临床升级', $biochemistZhText);
+        $this->assertStringNotContainsString('用药核对', $biochemistZhText);
+        $this->assertStringContainsString('业务升级', $biochemistZhText);
+        $this->assertStringContainsString('关键核对', $biochemistZhText);
+
+        $this->assertStringNotContainsString('clinical escalation', $biochemistEnText);
+        $this->assertStringNotContainsString('medication checks', $biochemistEnText);
+        $this->assertStringContainsString('workflow escalation', $biochemistEnText);
+        $this->assertStringContainsString('critical checks', $biochemistEnText);
     }
 
     public function test_preview_api_projects_wind_turbine_technicians_without_projection_error(): void

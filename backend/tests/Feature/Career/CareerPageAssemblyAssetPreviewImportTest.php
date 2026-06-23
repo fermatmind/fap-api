@@ -115,6 +115,7 @@ final class CareerPageAssemblyAssetPreviewImportTest extends TestCase
             ->assertJsonPath('status', CareerJobPageAssemblyAsset::STATUS_STAGING_PREVIEW)
             ->assertJsonPath('career_page_assembly_v1.slug', 'accountants-and-auditors')
             ->assertJsonPath('career_page_assembly_v1.locale', 'en')
+            ->assertJsonMissingPath('career_page_assembly_v1.occupation.title_zh')
             ->assertJsonMissingPath('career_page_assembly_v1.block_refs')
             ->assertJsonMissingPath('career_page_assembly_v1.audit_fields')
             ->assertJsonMissingPath('career_page_assembly_v1.page_sections.0.source_row_hash')
