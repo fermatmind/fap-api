@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-23T16:32:00Z",
+  "updated_at": "2026-06-23T16:40:00Z",
   "SEO-AGENT-ARTICLE41-DRAFT-CLAIM-RISK-QA-01": {
     "repo": "fap-api",
     "branch": "codex/seo-agent-article41-draft-claim-risk-qa-01",
@@ -60106,7 +60106,7 @@
     "repo": "fap-api",
     "branch": "codex/iq-session-question-delivery-05a",
     "base": "main",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "train_scope": "iq_owner_original_30_launch",
     "title": "IQ-SESSION-QUESTION-DELIVERY-05A: Add owner IQ current-question backend delivery",
     "depends_on": [
@@ -60154,12 +60154,12 @@
         "evidence": "Changed files remain limited to 05A allowed paths, including the scoped BigFive runtime-freeze classifier test needed to satisfy existing GitHub required checks. No frontend, CMS, SEO, sitemap, llms, DB migration, staging deploy, or production deploy changes."
       },
       "github": {
-        "status": "pending_after_current_scope_fix",
-        "evidence": "PR #2371 GitHub checks were inspected again. verify-mbti-legacy passed after the constructor injection fix. verify-bigfive then failed because the first classifier fix treated backend/routes/api.php as a whole-file allowlist and weakened existing blocked-route regression expectations. The current-scope v2 fix narrows route allowance to the exact IQ owner current-question delivery diff lines; the full BigFiveResultPageV2CoreBodyPreviewTest file now passes locally and GitHub checks will rerun after push."
+        "status": "pass",
+        "evidence": "PR #2371 head a91a0d645c5d5f0459b2760723b6740314f50967 is open, not draft, mergeable, and all GitHub checks passed: Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2."
       }
     },
     "failure_reason": null,
-    "commit_sha": "97f9d140a04babb0c7dd915cd5fe60cafc52cfa2",
+    "commit_sha": "a91a0d645c5d5f0459b2760723b6740314f50967",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2371",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -60199,6 +60199,11 @@
         "at": "2026-06-23T16:32:00Z",
         "status": "local_revalidated_after_bigfive_route_classifier_fix",
         "note": "Inspected verify-bigfive failure. The failure was introduced by the current PR CI classifier fix because routes/api.php was allowed too broadly. Narrowed route allowance to exact IQ owner delivery route diff lines and revalidated the full BigFiveResultPageV2CoreBodyPreviewTest file, pr74 constructor gate, IqOwnerOriginal30 tests, OpenAPI check, scoped Pint, docs parse, and git diff --check."
+      },
+      {
+        "at": "2026-06-23T16:40:00Z",
+        "status": "ready_to_merge",
+        "note": "PR #2371 checks green, mergeable, and scope validation green for head a91a0d645c5d5f0459b2760723b6740314f50967. Ready for squash merge; no staging wait, production deploy, CMS write, SEO, sitemap, or llms changes included."
       }
     ]
   }
