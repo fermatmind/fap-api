@@ -339,7 +339,7 @@ final class CareerAiImpactAssetPreviewService
         }
 
         if ($normalizedSlug === 'wind-turbine-technicians') {
-            return array_merge($replacements, $normalizedLocale === 'en' ? [
+            return array_merge($normalizedLocale === 'en' ? $commonEn : $commonZh, $normalizedLocale === 'en' ? [
                 'command chain' => 'site safety chain',
                 'weapons' => 'equipment',
                 'mission risk' => 'maintenance risk',
