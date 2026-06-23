@@ -60106,7 +60106,7 @@
     "repo": "fap-api",
     "branch": "codex/iq-session-question-delivery-05a",
     "base": "main",
-    "status": "local_validated",
+    "status": "pr_open",
     "train_scope": "iq_owner_original_30_launch",
     "title": "IQ-SESSION-QUESTION-DELIVERY-05A: Add owner IQ current-question backend delivery",
     "depends_on": [
@@ -60151,12 +60151,12 @@
       },
       "github": {
         "status": "pending",
-        "evidence": "PR not opened yet."
+        "evidence": "PR #2371 opened at https://github.com/fermatmind/fap-api/pull/2371 for branch codex/iq-session-question-delivery-05a. Initial GitHub checks are pending/in progress."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "97f9d140a04babb0c7dd915cd5fe60cafc52cfa2",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2371",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -60170,6 +60170,11 @@
         "at": "2026-06-23T15:35:00Z",
         "status": "local_validated",
         "note": "All 05A manifest local checks passed and changed-file scope validation passed. Legacy full-bank route remains compatible; frontend adapter is deferred to 05B."
+      },
+      {
+        "at": "2026-06-23T15:42:00Z",
+        "status": "pr_open",
+        "note": "Opened GitHub PR #2371 for 05A and began polling GitHub checks. No staging or production deploy was triggered."
       }
     ]
   }
