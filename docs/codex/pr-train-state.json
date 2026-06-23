@@ -59284,7 +59284,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-controlled-pilot-gate",
     "base": "main",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "train_scope": "big5_result_page_agent_readiness_to_pilot",
     "title": "BIG5-CONTROLLED-PILOT-GATE-01: Add Big Five controlled pilot gate",
     "depends_on": [
@@ -60064,12 +60064,12 @@
         "evidence": "Changed files are limited to PR2 allowed paths: owner-original IQ private answer key, scoring spec, owner IQ verification helper/script, focused PHPUnit test, bank manifest/items answer-key status, and docs/codex metadata. Runtime question selection, public scale APIs, attempt submission, frontend rendering, CMS, SEO runtime, sitemap, llms, JSON-LD, staging deploy, and production deploy were not modified."
       },
       "github": {
-        "status": "pending",
-        "evidence": null
+        "status": "pass",
+        "evidence": "All PR #2364 GitHub checks passed on head 91026e907eae9e8fa7b7e10d9e6957f9dc2d4c15: hygiene, Semgrep blocking secrets, semgrep SARIF non-blocking upload, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, and Semgrep OSS. mergeStateStatus was CLEAN."
       }
     },
     "failure_reason": null,
-    "commit_sha": "9adbb0ac9898c12117b6cb5751b002f8c5e569b4",
+    "commit_sha": "91026e907eae9e8fa7b7e10d9e6957f9dc2d4c15",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2364",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -60089,6 +60089,11 @@
         "at": "2026-06-23T10:31:20Z",
         "status": "pr_open",
         "note": "Opened PR #2364 after PR2 local validation and explicit allowed-path scope validation passed."
+      },
+      {
+        "at": "2026-06-23T10:37:39Z",
+        "status": "ready_to_merge",
+        "note": "All PR #2364 GitHub checks passed on head 91026e907eae9e8fa7b7e10d9e6957f9dc2d4c15 and mergeStateStatus was CLEAN. Recording ready_to_merge before squash merge per PR-train ledger policy."
       }
     ]
   }
