@@ -1,0 +1,28 @@
+{
+  "schema": "fap.big5.result_page_v2.ready_readonly_cleared_handoff.manifest.v0_1",
+  "package_key": "big5_result_page_v2.ready_readonly_cleared_handoff.v0_1",
+  "version": "0.1",
+  "created_at": "2026-06-23",
+  "mode": "docs_only_handoff_evidence",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "files": [
+    "README.md",
+    "manifest.json",
+    "big5_ready_readonly_cleared_handoff_v0_1.json",
+    "big5_ready_readonly_cleared_handoff_summary_v0_1.json",
+    "SHA256SUMS"
+  ],
+  "validation": {
+    "json_parse_required": true,
+    "checksum_required": true,
+    "redacted": true,
+    "runtime_mutation_allowed": false,
+    "cms_mutation_allowed": false,
+    "search_mutation_allowed": false,
+    "production_gate_mutation_allowed": false
+  }
+}
