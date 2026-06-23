@@ -22,6 +22,11 @@ final class SeoAgentArticlePostPublishPropagationDryRunTest extends TestCase
     #[Test]
     public function dry_run_outputs_article_propagation_readiness_without_writes(): void
     {
+        config([
+            'app.url' => 'https://ops.fermatmind.com',
+            'seo_intel.public_canonical_host' => 'https://fermatmind.com',
+        ]);
+
         $fixture = $this->fixture();
         $countsBefore = $this->rowCounts();
 
@@ -39,6 +44,11 @@ final class SeoAgentArticlePostPublishPropagationDryRunTest extends TestCase
         $this->assertTrue((bool) ($summary['ok'] ?? false));
         $this->assertSame('ready_with_adapter_gap', $summary['status'] ?? null);
         $this->assertSame('/en/articles/article-candidate', data_get($summary, 'canonical.safe_path'));
+        $this->assertSame('fermatmind.com', data_get($summary, 'canonical.canonical_url_host'));
+        $this->assertSame(
+            hash('sha256', 'https://fermatmind.com/en/articles/article-candidate'),
+            data_get($summary, 'canonical.canonical_url_hash')
+        );
         $this->assertSame($fixture['target'], data_get($summary, 'runtime.target'));
         $this->assertSame($fixture['published_revision_id'], data_get($summary, 'runtime.published_revision_id'));
         $this->assertSame(35, data_get($summary, 'runtime.seo_title_length'));
@@ -55,6 +65,7 @@ final class SeoAgentArticlePostPublishPropagationDryRunTest extends TestCase
 
         $artifact = $this->readJson((string) data_get($summary, 'artifact.path'));
         $this->assertSame($summary['status'] ?? null, $artifact['status'] ?? null);
+        $this->assertSame('fermatmind.com', data_get($artifact, 'canonical.canonical_url_host'));
         $this->assertSame($fixture['publish_evidence_sha256'], $artifact['publish_evidence_sha256'] ?? null);
     }
 
