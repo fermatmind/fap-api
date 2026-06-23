@@ -44,6 +44,14 @@ final class PersonalityMbti64CmsProjectionDraftCommandTest extends TestCase
         'https://fermatmind.com/zh/personality/esfj-a',
     ];
 
+    private const FRESH_QUERY_BACKED_5_URLS = [
+        'https://fermatmind.com/en/personality/enfp-a',
+        'https://fermatmind.com/zh/personality/istp-a',
+        'https://fermatmind.com/en/personality/esfj-a',
+        'https://fermatmind.com/zh/personality/esfj-a',
+        'https://fermatmind.com/en/personality/intp-a',
+    ];
+
     public function test_dry_run_plans_eighty_eight_projection_drafts_without_writes(): void
     {
         $this->seedAllTargets();
@@ -365,6 +373,149 @@ final class PersonalityMbti64CmsProjectionDraftCommandTest extends TestCase
         $this->assertSame(1, $exitCode);
         $this->assertFalse($payload['ok']);
         $this->assertContains('exclusive_subset_modes_required', array_map(
+            static fn (array $error): string => (string) ($error['code'] ?? ''),
+            $payload['errors'] ?? []
+        ));
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_fresh_query_backed_five_dry_run_plans_only_fresh_approved_urls_without_writes(): void
+    {
+        $this->seedAllTargets();
+        [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', [
+            '--package' => $packagePath,
+            '--qa' => $qaPath,
+            '--dry-run' => true,
+            '--fresh-query-backed-5' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertTrue($payload['dry_run']);
+        $this->assertFalse($payload['write']);
+        $this->assertFalse($payload['writes_committed']);
+        $this->assertFalse($payload['publish_attempted']);
+        $this->assertFalse($payload['index_attempted']);
+        $this->assertFalse($payload['sitemap_llms_release_attempted']);
+        $this->assertFalse($payload['search_release_attempted']);
+        $this->assertSame(5, $payload['row_count']);
+        $this->assertSame(5, $payload['variant_row_count']);
+        $this->assertSame(0, $payload['comparison_row_count']);
+        $this->assertSame(5, $payload['would_create_revision_count']);
+        $this->assertSame('fresh_query_backed_5', $payload['subset']['mode']);
+        $this->assertTrue($payload['subset']['enabled']);
+        $this->assertFalse($payload['subset']['dry_run_only']);
+        $this->assertTrue($payload['subset']['write_allowed_with_strict_approval']);
+
+        $plannedUrls = array_map(
+            static fn (array $row): string => (string) ($row['url'] ?? ''),
+            $payload['rows'] ?? []
+        );
+        sort($plannedUrls);
+        $expectedUrls = self::FRESH_QUERY_BACKED_5_URLS;
+        sort($expectedUrls);
+        $this->assertSame($expectedUrls, $plannedUrls);
+        $this->assertSame($expectedUrls, array_values($this->sortedStrings((array) $payload['subset']['allowed_urls'])));
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_fresh_query_backed_five_write_requires_fresh_five_approval_token(): void
+    {
+        $this->seedAllTargets();
+        [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
+        $options = $this->writeOptions($packagePath, $qaPath);
+        $options['--fresh-query-backed-5'] = true;
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', $options);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertFalse($payload['writes_committed']);
+        $this->assertStringContainsString(
+            '--operator-approved=MBTI64-CMS-PROJECTION-DRAFT-FRESH-5-WRITE-01 is required',
+            (string) ($payload['errors'][0]['message'] ?? '')
+        );
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_fresh_query_backed_five_write_creates_only_fresh_approved_variant_draft_revisions(): void
+    {
+        $targets = $this->seedAllTargets();
+        [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
+        $profileBefore = $this->profileLiveState($targets['en|ENFP']);
+        $variantBefore = $this->variantLiveState($targets['en|ENFP-A']);
+        $surfaceCountsBefore = $this->liveSurfaceCounts();
+        $options = $this->writeOptions($packagePath, $qaPath);
+        $options['--fresh-query-backed-5'] = true;
+        $options['--operator-approved'] = 'MBTI64-CMS-PROJECTION-DRAFT-FRESH-5-WRITE-01';
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', $options);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertFalse($payload['dry_run']);
+        $this->assertTrue($payload['write']);
+        $this->assertTrue($payload['writes_committed']);
+        $this->assertSame(5, $payload['row_count']);
+        $this->assertSame(5, $payload['variant_row_count']);
+        $this->assertSame(0, $payload['comparison_row_count']);
+        $this->assertSame(5, $payload['created_revision_count']);
+        $this->assertSame(0, $payload['skipped_existing_count']);
+        $this->assertSame('fresh_query_backed_5', $payload['subset']['mode']);
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(5, PersonalityProfileVariantRevision::query()->count());
+        $this->assertSame($profileBefore, $this->profileLiveState($targets['en|ENFP']));
+        $this->assertSame($variantBefore, $this->variantLiveState($targets['en|ENFP-A']));
+        $this->assertSame($surfaceCountsBefore, $this->liveSurfaceCounts());
+
+        $createdUrls = array_map(
+            static fn (array $row): string => (string) ($row['url'] ?? ''),
+            $payload['rows'] ?? []
+        );
+        sort($createdUrls);
+        $expectedUrls = self::FRESH_QUERY_BACKED_5_URLS;
+        sort($expectedUrls);
+        $this->assertSame($expectedUrls, $createdUrls);
+
+        foreach (PersonalityProfileVariantRevision::query()->get() as $revision) {
+            $this->assertProjectionSnapshot($revision->snapshot_json);
+        }
+    }
+
+    public function test_fresh_query_backed_five_fails_closed_when_allowlisted_url_is_missing(): void
+    {
+        $this->seedAllTargets();
+        $package = $this->validPackage();
+        foreach ($package['recommendations'] as &$recommendation) {
+            if (($recommendation['target_url'] ?? null) === 'https://fermatmind.com/en/personality/enfp-a') {
+                $recommendation['target_url'] = 'https://fermatmind.com/en/personality/entp-a';
+                break;
+            }
+        }
+        unset($recommendation);
+        [$packagePath, $qaPath] = $this->writeArtifacts($package, $this->validQa());
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', [
+            '--package' => $packagePath,
+            '--qa' => $qaPath,
+            '--dry-run' => true,
+            '--fresh-query-backed-5' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertContains('fresh_query_backed_5_subset_required_urls_missing', array_map(
             static fn (array $error): string => (string) ($error['code'] ?? ''),
             $payload['errors'] ?? []
         ));

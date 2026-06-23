@@ -18,6 +18,8 @@ final class PersonalityMbti64CmsProjectionDraft extends Command
 
     private const FRESH_QUERY_BACKED_3_OPERATOR_APPROVAL = 'MBTI64-CMS-PROJECTION-DRAFT-FRESH-3-WRITE-01';
 
+    private const FRESH_QUERY_BACKED_5_OPERATOR_APPROVAL = 'MBTI64-CMS-PROJECTION-DRAFT-FRESH-5-WRITE-01';
+
     private const AGENT_BATCH_OPERATOR_APPROVAL = 'MBTI64-AGENT-CMS-DRAFT-BATCH-SAFE-WRITER-01';
 
     private const WRITE_SAFETY_FLAGS = [
@@ -36,6 +38,7 @@ final class PersonalityMbti64CmsProjectionDraft extends Command
         {--write : Create CMS projection draft revision rows}
         {--visible-query-backed-3 : Restrict planning/write to the approved 3 query-backed visible MBTI64 URLs}
         {--fresh-query-backed-3 : Restrict planning/write to the fresh 3 query-backed MBTI64 URLs}
+        {--fresh-query-backed-5 : Restrict planning/write to the fresh 5 query-backed MBTI64 URLs}
         {--agent-batch-size= : Restrict planning/write to an artifact-order batch; only 5 or 10 are allowed}
         {--agent-batch-offset= : Zero-based artifact-order offset for --agent-batch-size; defaults to 0}
         {--json : Emit the full JSON summary}
@@ -131,6 +134,7 @@ final class PersonalityMbti64CmsProjectionDraft extends Command
         $expectedApproval = match (true) {
             (bool) $this->option('visible-query-backed-3') => self::VISIBLE_QUERY_BACKED_3_OPERATOR_APPROVAL,
             (bool) $this->option('fresh-query-backed-3') => self::FRESH_QUERY_BACKED_3_OPERATOR_APPROVAL,
+            (bool) $this->option('fresh-query-backed-5') => self::FRESH_QUERY_BACKED_5_OPERATOR_APPROVAL,
             $this->agentBatchRequested() => self::AGENT_BATCH_OPERATOR_APPROVAL,
             default => self::OPERATOR_APPROVAL,
         };
@@ -163,6 +167,7 @@ final class PersonalityMbti64CmsProjectionDraft extends Command
             'write' => (bool) $this->option('write'),
             'visible_query_backed_3' => (bool) $this->option('visible-query-backed-3'),
             'fresh_query_backed_3' => (bool) $this->option('fresh-query-backed-3'),
+            'fresh_query_backed_5' => (bool) $this->option('fresh-query-backed-5'),
             'agent_batch_size' => trim((string) $this->option('agent-batch-size')),
             'agent_batch_offset' => trim((string) $this->option('agent-batch-offset')),
             'draft_only' => (bool) $this->option('draft-only'),

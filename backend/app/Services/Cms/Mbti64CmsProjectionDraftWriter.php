@@ -30,6 +30,14 @@ final class Mbti64CmsProjectionDraftWriter
         'https://fermatmind.com/zh/personality/esfj-a',
     ];
 
+    private const FRESH_QUERY_BACKED_5_URLS = [
+        'https://fermatmind.com/en/personality/enfp-a',
+        'https://fermatmind.com/zh/personality/istp-a',
+        'https://fermatmind.com/en/personality/esfj-a',
+        'https://fermatmind.com/zh/personality/esfj-a',
+        'https://fermatmind.com/en/personality/intp-a',
+    ];
+
     private const AGENT_BATCH_ALLOWED_SIZES = [5, 10];
 
     private const FORBIDDEN_ROUTE_PATTERNS = [
@@ -300,19 +308,23 @@ final class Mbti64CmsProjectionDraftWriter
         $recommendations = $this->recommendations($package);
         $visibleQueryBacked3 = (bool) ($options['visible_query_backed_3'] ?? false);
         $freshQueryBacked3 = (bool) ($options['fresh_query_backed_3'] ?? false);
+        $freshQueryBacked5 = (bool) ($options['fresh_query_backed_5'] ?? false);
         $agentBatchRequested = $this->agentBatchRequested($options);
 
-        if (($visibleQueryBacked3 ? 1 : 0) + ($freshQueryBacked3 ? 1 : 0) + ($agentBatchRequested ? 1 : 0) > 1) {
+        if (($visibleQueryBacked3 ? 1 : 0)
+            + ($freshQueryBacked3 ? 1 : 0)
+            + ($freshQueryBacked5 ? 1 : 0)
+            + ($agentBatchRequested ? 1 : 0) > 1) {
             $errors[] = [
                 'field' => 'options',
                 'code' => 'exclusive_subset_modes_required',
-                'message' => 'Only one subset mode can be used: --visible-query-backed-3, --fresh-query-backed-3, or agent batch options.',
+                'message' => 'Only one subset mode can be used: --visible-query-backed-3, --fresh-query-backed-3, --fresh-query-backed-5, or agent batch options.',
             ];
 
             return [];
         }
 
-        if (! $visibleQueryBacked3 && ! $freshQueryBacked3 && ! $agentBatchRequested) {
+        if (! $visibleQueryBacked3 && ! $freshQueryBacked3 && ! $freshQueryBacked5 && ! $agentBatchRequested) {
             return $recommendations;
         }
 
@@ -325,11 +337,23 @@ final class Mbti64CmsProjectionDraftWriter
             return array_values(array_slice($recommendations, $batchOptions['offset'], $batchOptions['size']));
         }
 
-        $expectedUrls = $freshQueryBacked3 ? self::FRESH_QUERY_BACKED_3_URLS : self::VISIBLE_QUERY_BACKED_3_URLS;
-        $subsetCode = $freshQueryBacked3
-            ? 'fresh_query_backed_subset_required_urls_missing'
-            : 'visible_query_backed_subset_required_urls_missing';
-        $subsetLabel = $freshQueryBacked3 ? 'fresh query-backed' : 'visible query-backed';
+        [$expectedUrls, $subsetCode, $subsetLabel] = match (true) {
+            $freshQueryBacked5 => [
+                self::FRESH_QUERY_BACKED_5_URLS,
+                'fresh_query_backed_5_subset_required_urls_missing',
+                'fresh query-backed 5',
+            ],
+            $freshQueryBacked3 => [
+                self::FRESH_QUERY_BACKED_3_URLS,
+                'fresh_query_backed_subset_required_urls_missing',
+                'fresh query-backed 3',
+            ],
+            default => [
+                self::VISIBLE_QUERY_BACKED_3_URLS,
+                'visible_query_backed_subset_required_urls_missing',
+                'visible query-backed 3',
+            ],
+        };
         $allowed = array_fill_keys($expectedUrls, true);
         $subset = array_values(array_filter(
             $recommendations,
@@ -343,7 +367,7 @@ final class Mbti64CmsProjectionDraftWriter
             $errors[] = [
                 'field' => 'recommendations',
                 'code' => $subsetCode,
-                'message' => 'The '.$subsetLabel.' subset must resolve exactly the 3 approved URLs.',
+                'message' => 'The '.$subsetLabel.' subset must resolve exactly the '.count($expectedUrls).' approved URLs.',
             ];
         }
 
@@ -693,6 +717,7 @@ final class Mbti64CmsProjectionDraftWriter
     {
         $visibleQueryBacked3 = (bool) ($options['visible_query_backed_3'] ?? false);
         $freshQueryBacked3 = (bool) ($options['fresh_query_backed_3'] ?? false);
+        $freshQueryBacked5 = (bool) ($options['fresh_query_backed_5'] ?? false);
         $agentBatchRequested = $this->agentBatchRequested($options);
         $selectedUrls = array_values(array_map(
             static fn (array $row): string => (string) ($row['url'] ?? ''),
@@ -722,6 +747,17 @@ final class Mbti64CmsProjectionDraftWriter
                 'dry_run_only' => false,
                 'write_allowed_with_strict_approval' => true,
                 'allowed_urls' => self::FRESH_QUERY_BACKED_3_URLS,
+                'selected_urls' => $selectedUrls,
+            ];
+        }
+
+        if ($freshQueryBacked5) {
+            return [
+                'mode' => 'fresh_query_backed_5',
+                'enabled' => true,
+                'dry_run_only' => false,
+                'write_allowed_with_strict_approval' => true,
+                'allowed_urls' => self::FRESH_QUERY_BACKED_5_URLS,
                 'selected_urls' => $selectedUrls,
             ];
         }
