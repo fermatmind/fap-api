@@ -38,6 +38,12 @@ final class PersonalityMbti64CmsProjectionDraftCommandTest extends TestCase
         'https://fermatmind.com/zh/personality/esfp-a',
     ];
 
+    private const FRESH_QUERY_BACKED_3_URLS = [
+        'https://fermatmind.com/zh/personality/istp-a',
+        'https://fermatmind.com/zh/personality/intp-a',
+        'https://fermatmind.com/zh/personality/esfj-a',
+    ];
+
     public function test_dry_run_plans_eighty_eight_projection_drafts_without_writes(): void
     {
         $this->seedAllTargets();
@@ -223,6 +229,142 @@ final class PersonalityMbti64CmsProjectionDraftCommandTest extends TestCase
         $this->assertSame(1, $exitCode);
         $this->assertFalse($payload['ok']);
         $this->assertContains('visible_query_backed_subset_required_urls_missing', array_map(
+            static fn (array $error): string => (string) ($error['code'] ?? ''),
+            $payload['errors'] ?? []
+        ));
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_fresh_query_backed_three_dry_run_plans_only_fresh_approved_urls_without_writes(): void
+    {
+        $this->seedAllTargets();
+        [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', [
+            '--package' => $packagePath,
+            '--qa' => $qaPath,
+            '--dry-run' => true,
+            '--fresh-query-backed-3' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertTrue($payload['dry_run']);
+        $this->assertFalse($payload['write']);
+        $this->assertFalse($payload['writes_committed']);
+        $this->assertFalse($payload['publish_attempted']);
+        $this->assertFalse($payload['index_attempted']);
+        $this->assertFalse($payload['sitemap_llms_release_attempted']);
+        $this->assertFalse($payload['search_release_attempted']);
+        $this->assertSame(3, $payload['row_count']);
+        $this->assertSame(3, $payload['variant_row_count']);
+        $this->assertSame(0, $payload['comparison_row_count']);
+        $this->assertSame(3, $payload['would_create_revision_count']);
+        $this->assertSame('fresh_query_backed_3', $payload['subset']['mode']);
+        $this->assertTrue($payload['subset']['enabled']);
+        $this->assertFalse($payload['subset']['dry_run_only']);
+        $this->assertTrue($payload['subset']['write_allowed_with_strict_approval']);
+
+        $plannedUrls = array_map(
+            static fn (array $row): string => (string) ($row['url'] ?? ''),
+            $payload['rows'] ?? []
+        );
+        sort($plannedUrls);
+        $expectedUrls = self::FRESH_QUERY_BACKED_3_URLS;
+        sort($expectedUrls);
+        $this->assertSame($expectedUrls, $plannedUrls);
+        $this->assertSame($expectedUrls, array_values($this->sortedStrings((array) $payload['subset']['allowed_urls'])));
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_fresh_query_backed_three_write_requires_fresh_three_approval_token(): void
+    {
+        $this->seedAllTargets();
+        [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
+        $options = $this->writeOptions($packagePath, $qaPath);
+        $options['--fresh-query-backed-3'] = true;
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', $options);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertFalse($payload['writes_committed']);
+        $this->assertStringContainsString(
+            '--operator-approved=MBTI64-CMS-PROJECTION-DRAFT-FRESH-3-WRITE-01 is required',
+            (string) ($payload['errors'][0]['message'] ?? '')
+        );
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_fresh_query_backed_three_write_creates_only_fresh_approved_variant_draft_revisions(): void
+    {
+        $targets = $this->seedAllTargets();
+        [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
+        $profileBefore = $this->profileLiveState($targets['zh-CN|ISTP']);
+        $variantBefore = $this->variantLiveState($targets['zh-CN|ISTP-A']);
+        $surfaceCountsBefore = $this->liveSurfaceCounts();
+        $options = $this->writeOptions($packagePath, $qaPath);
+        $options['--fresh-query-backed-3'] = true;
+        $options['--operator-approved'] = 'MBTI64-CMS-PROJECTION-DRAFT-FRESH-3-WRITE-01';
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', $options);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertFalse($payload['dry_run']);
+        $this->assertTrue($payload['write']);
+        $this->assertTrue($payload['writes_committed']);
+        $this->assertSame(3, $payload['row_count']);
+        $this->assertSame(3, $payload['variant_row_count']);
+        $this->assertSame(0, $payload['comparison_row_count']);
+        $this->assertSame(3, $payload['created_revision_count']);
+        $this->assertSame(0, $payload['skipped_existing_count']);
+        $this->assertSame('fresh_query_backed_3', $payload['subset']['mode']);
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(3, PersonalityProfileVariantRevision::query()->count());
+        $this->assertSame($profileBefore, $this->profileLiveState($targets['zh-CN|ISTP']));
+        $this->assertSame($variantBefore, $this->variantLiveState($targets['zh-CN|ISTP-A']));
+        $this->assertSame($surfaceCountsBefore, $this->liveSurfaceCounts());
+
+        $createdUrls = array_map(
+            static fn (array $row): string => (string) ($row['url'] ?? ''),
+            $payload['rows'] ?? []
+        );
+        sort($createdUrls);
+        $expectedUrls = self::FRESH_QUERY_BACKED_3_URLS;
+        sort($expectedUrls);
+        $this->assertSame($expectedUrls, $createdUrls);
+
+        foreach (PersonalityProfileVariantRevision::query()->get() as $revision) {
+            $this->assertProjectionSnapshot($revision->snapshot_json);
+        }
+    }
+
+    public function test_fresh_query_backed_three_rejects_other_subset_mode_combinations_without_writes(): void
+    {
+        $this->seedAllTargets();
+        [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', [
+            '--package' => $packagePath,
+            '--qa' => $qaPath,
+            '--dry-run' => true,
+            '--visible-query-backed-3' => true,
+            '--fresh-query-backed-3' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertContains('exclusive_subset_modes_required', array_map(
             static fn (array $error): string => (string) ($error['code'] ?? ''),
             $payload['errors'] ?? []
         ));

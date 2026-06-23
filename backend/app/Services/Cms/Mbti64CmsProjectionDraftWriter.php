@@ -24,6 +24,12 @@ final class Mbti64CmsProjectionDraftWriter
         'https://fermatmind.com/zh/personality/esfp-a',
     ];
 
+    private const FRESH_QUERY_BACKED_3_URLS = [
+        'https://fermatmind.com/zh/personality/istp-a',
+        'https://fermatmind.com/zh/personality/intp-a',
+        'https://fermatmind.com/zh/personality/esfj-a',
+    ];
+
     private const AGENT_BATCH_ALLOWED_SIZES = [5, 10];
 
     private const FORBIDDEN_ROUTE_PATTERNS = [
@@ -293,19 +299,20 @@ final class Mbti64CmsProjectionDraftWriter
     {
         $recommendations = $this->recommendations($package);
         $visibleQueryBacked3 = (bool) ($options['visible_query_backed_3'] ?? false);
+        $freshQueryBacked3 = (bool) ($options['fresh_query_backed_3'] ?? false);
         $agentBatchRequested = $this->agentBatchRequested($options);
 
-        if ($visibleQueryBacked3 && $agentBatchRequested) {
+        if (($visibleQueryBacked3 ? 1 : 0) + ($freshQueryBacked3 ? 1 : 0) + ($agentBatchRequested ? 1 : 0) > 1) {
             $errors[] = [
                 'field' => 'options',
                 'code' => 'exclusive_subset_modes_required',
-                'message' => '--visible-query-backed-3 cannot be combined with --agent-batch-size or --agent-batch-offset.',
+                'message' => 'Only one subset mode can be used: --visible-query-backed-3, --fresh-query-backed-3, or agent batch options.',
             ];
 
             return [];
         }
 
-        if (! $visibleQueryBacked3 && ! $agentBatchRequested) {
+        if (! $visibleQueryBacked3 && ! $freshQueryBacked3 && ! $agentBatchRequested) {
             return $recommendations;
         }
 
@@ -318,21 +325,25 @@ final class Mbti64CmsProjectionDraftWriter
             return array_values(array_slice($recommendations, $batchOptions['offset'], $batchOptions['size']));
         }
 
-        $allowed = array_fill_keys(self::VISIBLE_QUERY_BACKED_3_URLS, true);
+        $expectedUrls = $freshQueryBacked3 ? self::FRESH_QUERY_BACKED_3_URLS : self::VISIBLE_QUERY_BACKED_3_URLS;
+        $subsetCode = $freshQueryBacked3
+            ? 'fresh_query_backed_subset_required_urls_missing'
+            : 'visible_query_backed_subset_required_urls_missing';
+        $subsetLabel = $freshQueryBacked3 ? 'fresh query-backed' : 'visible query-backed';
+        $allowed = array_fill_keys($expectedUrls, true);
         $subset = array_values(array_filter(
             $recommendations,
             static fn (array $item): bool => isset($allowed[(string) ($item['target_url'] ?? '')])
         ));
         $subsetUrls = array_map(static fn (array $item): string => (string) ($item['target_url'] ?? ''), $subset);
         sort($subsetUrls);
-        $expectedUrls = self::VISIBLE_QUERY_BACKED_3_URLS;
         sort($expectedUrls);
 
         if ($subsetUrls !== $expectedUrls) {
             $errors[] = [
                 'field' => 'recommendations',
-                'code' => 'visible_query_backed_subset_required_urls_missing',
-                'message' => 'The visible query-backed subset must resolve exactly the 3 approved URLs.',
+                'code' => $subsetCode,
+                'message' => 'The '.$subsetLabel.' subset must resolve exactly the 3 approved URLs.',
             ];
         }
 
@@ -681,6 +692,7 @@ final class Mbti64CmsProjectionDraftWriter
     private function subsetSummary(array $options, array $preparedRows = []): array
     {
         $visibleQueryBacked3 = (bool) ($options['visible_query_backed_3'] ?? false);
+        $freshQueryBacked3 = (bool) ($options['fresh_query_backed_3'] ?? false);
         $agentBatchRequested = $this->agentBatchRequested($options);
         $selectedUrls = array_values(array_map(
             static fn (array $row): string => (string) ($row['url'] ?? ''),
@@ -699,6 +711,17 @@ final class Mbti64CmsProjectionDraftWriter
                     ? trim((string) ($options['agent_batch_offset'] ?? ''))
                     : '0',
                 'arbitrary_url_subset_allowed' => false,
+                'selected_urls' => $selectedUrls,
+            ];
+        }
+
+        if ($freshQueryBacked3) {
+            return [
+                'mode' => 'fresh_query_backed_3',
+                'enabled' => true,
+                'dry_run_only' => false,
+                'write_allowed_with_strict_approval' => true,
+                'allowed_urls' => self::FRESH_QUERY_BACKED_3_URLS,
                 'selected_urls' => $selectedUrls,
             ];
         }
