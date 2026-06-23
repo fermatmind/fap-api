@@ -185,6 +185,92 @@ final class SeoAgentCmsDraftPayloadRepairCanaryTest extends TestCase
     }
 
     #[Test]
+    public function execute_can_repair_only_proposed_faq_items_with_repaired_package_handoff(): void
+    {
+        $article = $this->article();
+        $proposal = [
+            ...$this->proposal((int) $article->id),
+            'proposed_faq_items' => [
+                [
+                    'question' => '这篇文章需要补充哪些常见问题？',
+                    'answer' => '仅作为字段级草稿建议；答案需基于现有正文、claim gate 和人工审核后再写入。',
+                ],
+            ],
+        ];
+        $packagePath = $this->writePackage([$proposal]);
+        $sourcePackageSha = hash_file('sha256', $packagePath) ?: '';
+        $oldRevision = $this->articleRevision($article, $proposal, $sourcePackageSha, includeOptionalProposalFields: true);
+        $writeEvidencePath = $this->writeEvidence($sourcePackageSha, $proposal['subject_ref'], (int) $oldRevision->id);
+        $faqItems = [
+            [
+                'question' => '大五人格测试可以诊断心理问题吗？',
+                'answer' => '不能。大五人格测试只能作为自我观察和教育参考，不能替代心理诊断、临床评估或专业建议。',
+            ],
+            [
+                'question' => '大五人格结果能预测职业成功吗？',
+                'answer' => '不能。它可以帮助你观察长期行为倾向和工作习惯，但职业结果还取决于技能、经验、环境和真实反馈。',
+            ],
+        ];
+        $faqPath = $this->writeJson('seo-agent-faq-override-', $faqItems);
+        $artifactDir = $this->artifactDir();
+
+        $exitCode = Artisan::call('seo-agent:cms-draft-payload-repair-canary', [
+            '--package' => $packagePath,
+            '--write-evidence' => $writeEvidencePath,
+            '--target' => $proposal['subject_ref'],
+            '--override-proposed-faq-json' => $faqPath,
+            '--artifact-dir' => $artifactDir,
+            '--json' => true,
+        ]);
+        $dryRun = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame('planned', $dryRun['status'] ?? null);
+        $this->assertSame(['proposal.proposed_faq_items'], $dryRun['mismatches_repaired'] ?? null);
+        $this->assertSame($sourcePackageSha, $dryRun['source_package_sha256'] ?? null);
+        $this->assertNotSame($sourcePackageSha, $dryRun['package_sha256'] ?? null);
+        $this->assertSame(2, $dryRun['field_overrides']['proposal.proposed_faq_items']['count'] ?? null);
+        $effectivePackagePath = (string) data_get($dryRun, 'effective_package.path');
+        $effectivePackageSha = (string) ($dryRun['package_sha256'] ?? '');
+        $this->assertFileExists($effectivePackagePath);
+
+        $phrase = $this->approvalPhrase($proposal['subject_ref'], $effectivePackageSha);
+        $exitCode = Artisan::call('seo-agent:cms-draft-payload-repair-canary', [
+            '--package' => $packagePath,
+            '--write-evidence' => $writeEvidencePath,
+            '--target' => $proposal['subject_ref'],
+            '--override-proposed-faq-json' => $faqPath,
+            '--confirm-package-sha256' => $effectivePackageSha,
+            '--confirm-repair' => $phrase,
+            '--artifact-dir' => $artifactDir,
+            '--execute' => true,
+            '--json' => true,
+        ]);
+        $summary = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame('success', $summary['status'] ?? null);
+        $newRevision = ArticleRevision::query()->findOrFail((int) data_get($summary, 'new_revision.revision_id'));
+        $this->assertSame($faqItems, data_get($newRevision->payload_json, 'proposal.proposed_faq_items'));
+        $this->assertSame($effectivePackageSha, data_get($newRevision->payload_json, 'seo_agent.package_sha256'));
+        $this->assertSame($sourcePackageSha, $summary['source_package_sha256'] ?? null);
+
+        $compatibleEvidencePath = (string) data_get($summary, 'compatible_write_evidence.path');
+        $exitCode = Artisan::call('seo-agent:cms-draft-readback-qa', [
+            '--package' => $effectivePackagePath,
+            '--write-evidence' => $compatibleEvidencePath,
+            '--target' => $proposal['subject_ref'],
+            '--package-sha256' => $effectivePackageSha,
+            '--artifact-dir' => $artifactDir,
+            '--json' => true,
+        ]);
+        $readback = json_decode(trim(Artisan::output()), true);
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame('success', $readback['status'] ?? null);
+        $this->assertSame(0, $readback['mismatch_count'] ?? null);
+    }
+
+    #[Test]
     public function it_blocks_mismatch_sets_outside_optional_payload_fields(): void
     {
         [, $proposal, $packagePath, , , $writeEvidencePath] = $this->oldDraftMissingOptionalFields([

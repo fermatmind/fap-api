@@ -31,6 +31,12 @@ final class SeoAgentCmsDraftPayloadRepairCanaryCommand extends Command
 
     private const SEO_TITLE_MAX_LENGTH = 60;
 
+    private const FAQ_MAX_ITEMS = 6;
+
+    private const FAQ_QUESTION_MAX_LENGTH = 140;
+
+    private const FAQ_ANSWER_MAX_LENGTH = 500;
+
     private const FORBIDDEN_STRINGS = [
         'raw_url',
         'raw_query',
@@ -51,6 +57,7 @@ final class SeoAgentCmsDraftPayloadRepairCanaryCommand extends Command
         {--target= : Exact article subject_ref, e.g. article:41:en}
         {--artifact-dir= : Directory for repair and compatible write evidence artifacts}
         {--override-proposed-seo-title= : Optional controlled replacement for proposal.proposed_seo_title, max 60 chars}
+        {--override-proposed-faq-json= : Optional path to a JSON array replacing proposal.proposed_faq_items}
         {--confirm-package-sha256= : Required package sha256 for execute mode}
         {--confirm-repair= : Exact confirmation phrase for execute mode}
         {--execute : Actually append one repaired ArticleRevision draft}
@@ -118,12 +125,23 @@ final class SeoAgentCmsDraftPayloadRepairCanaryCommand extends Command
                 'package_sha256' => $packageSha,
             ]));
         }
+        $overrideFaqItems = $this->proposedFaqOverride();
+        if (is_array($overrideFaqItems) && array_key_exists('issue', $overrideFaqItems)) {
+            return $this->finish($this->failureSummary((string) ($overrideFaqItems['issue'] ?? 'override_proposed_faq_json_invalid'), [
+                'package_sha256' => $packageSha,
+            ]));
+        }
         $effectivePackage = $package;
         $effectiveProposal = $proposal;
         $effectivePackageSha = $packageSha;
         $effectivePackageArtifact = null;
         if (is_string($overrideTitle)) {
             $effectiveProposal['proposed_seo_title'] = $overrideTitle;
+        }
+        if (is_array($overrideFaqItems)) {
+            $effectiveProposal['proposed_faq_items'] = $overrideFaqItems;
+        }
+        if (is_string($overrideTitle) || is_array($overrideFaqItems)) {
             $effectivePackage = $this->packageWithProposal($package, $target, $effectiveProposal);
             $effectivePackageArtifact = $this->writeArtifact($artifactDir, 'seo-agent-cms-draft-package-repaired-', $effectivePackage);
             $effectivePackageSha = (string) ($effectivePackageArtifact['sha256'] ?? '');
@@ -179,6 +197,9 @@ final class SeoAgentCmsDraftPayloadRepairCanaryCommand extends Command
         if (is_string($overrideTitle)) {
             $allowed[] = 'proposal.proposed_seo_title';
         }
+        if (is_array($overrideFaqItems)) {
+            $allowed[] = 'proposal.proposed_faq_items';
+        }
         sort($allowed);
 
         if ($mismatches === []) {
@@ -212,7 +233,7 @@ final class SeoAgentCmsDraftPayloadRepairCanaryCommand extends Command
                 'execute' => false,
                 'would_append_revision' => true,
                 'required_confirmation_phrase' => $confirmationPhrase,
-                'field_overrides' => $this->fieldOverridesEvidence($overrideTitle),
+                'field_overrides' => $this->fieldOverridesEvidence($overrideTitle, is_array($overrideFaqItems) ? $overrideFaqItems : null),
             ]);
             $artifact = $this->writeArtifact($artifactDir, 'seo-agent-cms-draft-payload-repair-canary-', $evidence);
 
@@ -254,7 +275,7 @@ final class SeoAgentCmsDraftPayloadRepairCanaryCommand extends Command
             'would_append_revision' => false,
             'rows_created' => 1,
             'compatible_write_evidence' => $compatibleArtifact,
-            'field_overrides' => $this->fieldOverridesEvidence($overrideTitle),
+            'field_overrides' => $this->fieldOverridesEvidence($overrideTitle, is_array($overrideFaqItems) ? $overrideFaqItems : null),
         ]);
         $artifact = $this->writeArtifact($artifactDir, 'seo-agent-cms-draft-payload-repair-canary-', $evidence);
 
@@ -298,6 +319,62 @@ final class SeoAgentCmsDraftPayloadRepairCanaryCommand extends Command
         }
 
         return $title;
+    }
+
+    /**
+     * @return list<array{question:string, answer:string}>|array{issue:string}|null
+     */
+    private function proposedFaqOverride(): ?array
+    {
+        $rawPath = $this->option('override-proposed-faq-json');
+        if ($rawPath === null) {
+            return null;
+        }
+
+        $path = $this->readablePath((string) $rawPath);
+        if ($path === null) {
+            return ['issue' => 'override_proposed_faq_json_unreadable'];
+        }
+
+        $raw = (string) file_get_contents($path);
+        if ($this->forbiddenStringsPresent($raw) !== []) {
+            return ['issue' => 'forbidden_input_field_present'];
+        }
+
+        $items = json_decode($raw, true);
+        if (! is_array($items) || ! array_is_list($items)) {
+            return ['issue' => 'override_proposed_faq_json_invalid'];
+        }
+        if ($items === [] || count($items) > self::FAQ_MAX_ITEMS) {
+            return ['issue' => 'override_proposed_faq_item_count_invalid'];
+        }
+
+        $normalized = [];
+        foreach ($items as $item) {
+            if (! is_array($item)) {
+                return ['issue' => 'override_proposed_faq_item_invalid'];
+            }
+            $question = trim((string) ($item['question'] ?? ''));
+            $answer = trim((string) ($item['answer'] ?? ''));
+            if ($question === '' || $answer === '' || str_contains($question, "\0") || str_contains($answer, "\0")) {
+                return ['issue' => 'override_proposed_faq_item_invalid'];
+            }
+            if ($this->forbiddenStringsPresent($question.$answer) !== []) {
+                return ['issue' => 'forbidden_input_field_present'];
+            }
+            if (mb_strlen($question) > self::FAQ_QUESTION_MAX_LENGTH) {
+                return ['issue' => 'override_proposed_faq_question_too_long'];
+            }
+            if (mb_strlen($answer) > self::FAQ_ANSWER_MAX_LENGTH) {
+                return ['issue' => 'override_proposed_faq_answer_too_long'];
+            }
+            $normalized[] = [
+                'question' => $question,
+                'answer' => $answer,
+            ];
+        }
+
+        return $normalized;
     }
 
     /**
@@ -648,8 +725,12 @@ final class SeoAgentCmsDraftPayloadRepairCanaryCommand extends Command
                 'allowed_mismatches' => [
                     ...self::ALLOWED_MISMATCHES,
                     'proposal.proposed_seo_title',
+                    'proposal.proposed_faq_items',
                 ],
                 'seo_title_max_length' => self::SEO_TITLE_MAX_LENGTH,
+                'faq_max_items' => self::FAQ_MAX_ITEMS,
+                'faq_question_max_length' => self::FAQ_QUESTION_MAX_LENGTH,
+                'faq_answer_max_length' => self::FAQ_ANSWER_MAX_LENGTH,
                 'copy_body_from_previous_draft_revision' => true,
                 'mutate_old_revision' => false,
             ],
@@ -683,19 +764,33 @@ final class SeoAgentCmsDraftPayloadRepairCanaryCommand extends Command
     /**
      * @return array<string, mixed>|null
      */
-    private function fieldOverridesEvidence(?string $overrideTitle): ?array
+    private function fieldOverridesEvidence(?string $overrideTitle, ?array $overrideFaqItems): ?array
     {
-        if ($overrideTitle === null) {
+        if ($overrideTitle === null && $overrideFaqItems === null) {
             return null;
         }
 
-        return [
-            'proposal.proposed_seo_title' => [
+        $evidence = [];
+        if ($overrideTitle !== null) {
+            $evidence['proposal.proposed_seo_title'] = [
                 'length' => mb_strlen($overrideTitle),
                 'max_length' => self::SEO_TITLE_MAX_LENGTH,
                 'sha256' => hash('sha256', $overrideTitle),
-            ],
-        ];
+            ];
+        }
+        if ($overrideFaqItems !== null) {
+            $evidence['proposal.proposed_faq_items'] = [
+                'count' => count($overrideFaqItems),
+                'max_items' => self::FAQ_MAX_ITEMS,
+                'sha256' => hash('sha256', json_encode($overrideFaqItems, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?: ''),
+                'question_hashes' => array_map(
+                    static fn (array $item): string => hash('sha256', (string) ($item['question'] ?? '')),
+                    $overrideFaqItems
+                ),
+            ];
+        }
+
+        return $evidence;
     }
 
     private function requiredConfirmationPhrase(string $target, string $packageSha): string
