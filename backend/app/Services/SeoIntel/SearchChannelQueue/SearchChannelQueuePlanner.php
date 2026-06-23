@@ -95,6 +95,8 @@ final class SearchChannelQueuePlanner
                     canonicalUrl: (string) ($row['canonical_url'] ?? ''),
                     locale: (string) ($row['locale'] ?? ''),
                     channel: $selectedChannel,
+                    sourceLastmod: $row['lastmod_at'] ?? null,
+                    sourceContentHash: $this->contentHash($row),
                 );
 
                 if ($duplicate !== null) {
@@ -172,9 +174,9 @@ final class SearchChannelQueuePlanner
             'private_flow' => (bool) ($row['is_private_flow'] ?? false),
             'reason_codes' => $result->reasonCodes,
             'lastmod' => $row['lastmod_at'] ?? null,
-            'content_hash' => is_string($metadata['content_hash'] ?? null) ? $metadata['content_hash'] : null,
+            'content_hash' => $this->contentHash($row),
             'url_hash' => $urlHash,
-            'idempotency_key' => $this->idempotency->key($canonicalUrl, $locale, $channel),
+            'idempotency_key' => $this->idempotency->key($canonicalUrl, $locale, $channel, $this->sourceVersion($row)),
         ];
     }
 
@@ -204,6 +206,32 @@ final class SearchChannelQueuePlanner
         }
 
         return str_contains($source, '.') ? explode('.', $source, 2)[0] : $source;
+    }
+
+    /**
+     * @param  array<string, mixed>  $row
+     */
+    private function sourceVersion(array $row): ?string
+    {
+        $contentHash = $this->contentHash($row);
+        if ($contentHash !== null) {
+            return 'content:'.$contentHash;
+        }
+
+        $lastmod = trim((string) ($row['lastmod_at'] ?? ''));
+
+        return $lastmod === '' ? null : 'lastmod:'.$lastmod;
+    }
+
+    /**
+     * @param  array<string, mixed>  $row
+     */
+    private function contentHash(array $row): ?string
+    {
+        $metadata = $this->metadata($row);
+        $hash = strtolower(trim((string) ($metadata['content_hash'] ?? '')));
+
+        return $hash === '' ? null : $hash;
     }
 
     /**
