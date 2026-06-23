@@ -1,0 +1,299 @@
+{
+  "schema_version": "riasec-major-graph-authority.v1",
+  "task": "FA30-API-09",
+  "mode": "backend_authority_contract_only",
+  "created_at": "2026-06-23T00:00:00Z",
+  "content_authority": "backend",
+  "surface": "riasec_major_cluster_graph",
+  "publication_state": "internal_draft",
+  "claim_gate": {
+    "allowed_claim_tiers": [
+      "exploration_only",
+      "reviewed_exploration"
+    ],
+    "default_claim_tier": "exploration_only",
+    "forbidden_claim_families": [
+      "best major recommendation",
+      "Gaokao admission prediction",
+      "employment or salary prediction",
+      "career success rate prediction",
+      "counselor or teacher replacement"
+    ]
+  },
+  "indexability_gate": {
+    "default_indexability_status": "noindex",
+    "indexable_requires_review_status": [
+      "operator_reviewed",
+      "approved"
+    ],
+    "indexable_requires_claim_tier": "reviewed_exploration",
+    "sitemap_allowed_in_this_package": false,
+    "llms_allowed_in_this_package": false
+  },
+  "clusters": [
+    {
+      "cluster_id": "investigative-science-research",
+      "cluster_name": "Investigative Science And Research",
+      "locale": "en",
+      "riasec_primary_codes": [
+        "I"
+      ],
+      "riasec_secondary_codes": [
+        "R",
+        "C"
+      ],
+      "discipline_family": "science_research_and_quantitative_methods",
+      "learning_activity_families": [
+        "lab_inquiry",
+        "data_analysis",
+        "technical_reading"
+      ],
+      "work_activity_families": [
+        "investigating",
+        "analyzing_information",
+        "documenting_evidence"
+      ],
+      "evidence_sources": [
+        {
+          "source_id": "riasec_interest_model",
+          "source_type": "psychometric_model_structure",
+          "allowed_use": "Map interest-code signals to exploration categories.",
+          "limitation": "Cannot determine admission outcome, school fit, job outcome, or personal success."
+        },
+        {
+          "source_id": "high_level_discipline_taxonomy",
+          "source_type": "operator_reviewed_taxonomy_note",
+          "allowed_use": "Group majors into broad discipline families for review.",
+          "limitation": "Not a school-specific or admissions-specific source."
+        }
+      ],
+      "review_status": "draft",
+      "claim_tier": "exploration_only",
+      "indexability_status": "noindex",
+      "allowed_claims": [
+        "This cluster can help a student explore science and research-oriented study environments.",
+        "RIASEC signals are used here as a starting point for questions to review with a counselor or teacher."
+      ]
+    },
+    {
+      "cluster_id": "realistic-engineering-applied-systems",
+      "cluster_name": "Realistic Engineering And Applied Systems",
+      "locale": "en",
+      "riasec_primary_codes": [
+        "R"
+      ],
+      "riasec_secondary_codes": [
+        "I",
+        "C"
+      ],
+      "discipline_family": "engineering_applied_technology_and_systems",
+      "learning_activity_families": [
+        "hands_on_projects",
+        "systems_troubleshooting",
+        "applied_math"
+      ],
+      "work_activity_families": [
+        "building",
+        "operating_equipment",
+        "solving_practical_problems"
+      ],
+      "evidence_sources": [
+        {
+          "source_id": "riasec_interest_model",
+          "source_type": "psychometric_model_structure",
+          "allowed_use": "Connect realistic and investigative signals to broad exploration clusters.",
+          "limitation": "Cannot rank engineering majors or select a school."
+        },
+        {
+          "source_id": "fermatmind_riasec_form_contract",
+          "source_type": "internal_measurement_contract",
+          "allowed_use": "Confirm the cluster consumes RIASEC code outputs rather than raw answers.",
+          "limitation": "Does not authorize public ranking or deterministic recommendations."
+        }
+      ],
+      "review_status": "draft",
+      "claim_tier": "exploration_only",
+      "indexability_status": "noindex",
+      "allowed_claims": [
+        "This cluster frames hands-on and applied systems study paths as areas to compare.",
+        "The cluster is suitable for exploration notes, not for choosing or rejecting a major by itself."
+      ]
+    },
+    {
+      "cluster_id": "artistic-design-communication",
+      "cluster_name": "Artistic Design And Communication",
+      "locale": "en",
+      "riasec_primary_codes": [
+        "A"
+      ],
+      "riasec_secondary_codes": [
+        "S",
+        "E"
+      ],
+      "discipline_family": "design_media_communication_and_creative_practice",
+      "learning_activity_families": [
+        "portfolio_projects",
+        "studio_critique",
+        "creative_brief_response"
+      ],
+      "work_activity_families": [
+        "creating",
+        "communicating",
+        "presenting_ideas"
+      ],
+      "evidence_sources": [
+        {
+          "source_id": "riasec_interest_model",
+          "source_type": "psychometric_model_structure",
+          "allowed_use": "Connect artistic interest signals to creative learning environments.",
+          "limitation": "Cannot assess portfolio quality or admission readiness."
+        },
+        {
+          "source_id": "operator_major_cluster_review",
+          "source_type": "operator_review_required_note",
+          "allowed_use": "Hold cluster membership for human review before public use.",
+          "limitation": "Draft-only until reviewed."
+        }
+      ],
+      "review_status": "operator_review_required",
+      "claim_tier": "exploration_only",
+      "indexability_status": "noindex",
+      "allowed_claims": [
+        "This cluster can help compare creative learning formats such as studio, media, or communication work.",
+        "It should be used as an exploration lens alongside portfolio, curriculum, and advisor review."
+      ]
+    },
+    {
+      "cluster_id": "social-education-public-service",
+      "cluster_name": "Social Education And Public Service",
+      "locale": "en",
+      "riasec_primary_codes": [
+        "S"
+      ],
+      "riasec_secondary_codes": [
+        "A",
+        "E"
+      ],
+      "discipline_family": "education_public_service_and_human_development",
+      "learning_activity_families": [
+        "discussion",
+        "field_observation",
+        "service_learning"
+      ],
+      "work_activity_families": [
+        "helping",
+        "teaching",
+        "coordinating_services"
+      ],
+      "evidence_sources": [
+        {
+          "source_id": "riasec_interest_model",
+          "source_type": "psychometric_model_structure",
+          "allowed_use": "Connect social interest signals to people-centered exploration clusters.",
+          "limitation": "Cannot evaluate suitability for regulated professions or licensing outcomes."
+        },
+        {
+          "source_id": "method_boundary_contract",
+          "source_type": "internal_claim_boundary",
+          "allowed_use": "Preserve non-diagnostic and non-deterministic wording.",
+          "limitation": "Does not authorize public health, clinical, or placement claims."
+        }
+      ],
+      "review_status": "draft",
+      "claim_tier": "exploration_only",
+      "indexability_status": "noindex",
+      "allowed_claims": [
+        "This cluster groups people-centered study environments for comparison.",
+        "Students can use it to prepare questions about service, teaching, or human development paths."
+      ]
+    },
+    {
+      "cluster_id": "enterprising-business-leadership",
+      "cluster_name": "Enterprising Business And Leadership",
+      "locale": "en",
+      "riasec_primary_codes": [
+        "E"
+      ],
+      "riasec_secondary_codes": [
+        "C",
+        "S"
+      ],
+      "discipline_family": "business_management_policy_and_entrepreneurship",
+      "learning_activity_families": [
+        "case_discussion",
+        "team_project",
+        "market_analysis"
+      ],
+      "work_activity_families": [
+        "persuading",
+        "organizing_people",
+        "making_decisions"
+      ],
+      "evidence_sources": [
+        {
+          "source_id": "riasec_interest_model",
+          "source_type": "psychometric_model_structure",
+          "allowed_use": "Map enterprising signals to broad business and leadership exploration.",
+          "limitation": "Cannot predict entrepreneurship, promotion, income, or leadership outcome."
+        },
+        {
+          "source_id": "operator_major_cluster_review",
+          "source_type": "operator_review_required_note",
+          "allowed_use": "Require human review of cluster boundaries before publication.",
+          "limitation": "Draft-only until reviewed."
+        }
+      ],
+      "review_status": "operator_review_required",
+      "claim_tier": "exploration_only",
+      "indexability_status": "noindex",
+      "allowed_claims": [
+        "This cluster can frame business, policy, and leadership-oriented study options for exploration.",
+        "It should be paired with curriculum review and advisor context before any decision."
+      ]
+    },
+    {
+      "cluster_id": "conventional-data-finance-compliance",
+      "cluster_name": "Conventional Data Finance And Compliance",
+      "locale": "en",
+      "riasec_primary_codes": [
+        "C"
+      ],
+      "riasec_secondary_codes": [
+        "I",
+        "E"
+      ],
+      "discipline_family": "data_accounting_finance_and_compliance_systems",
+      "learning_activity_families": [
+        "structured_problem_sets",
+        "data_tables",
+        "rules_and_standards"
+      ],
+      "work_activity_families": [
+        "organizing_information",
+        "checking_accuracy",
+        "following_procedures"
+      ],
+      "evidence_sources": [
+        {
+          "source_id": "riasec_interest_model",
+          "source_type": "psychometric_model_structure",
+          "allowed_use": "Connect conventional signals to structured information and compliance-oriented exploration.",
+          "limitation": "Cannot determine credential outcome, income, or job placement."
+        },
+        {
+          "source_id": "fermatmind_riasec_form_contract",
+          "source_type": "internal_measurement_contract",
+          "allowed_use": "Use only score-code outputs and public interpretation boundaries.",
+          "limitation": "No raw-answer, private attempt, or user-specific outcome authority."
+        }
+      ],
+      "review_status": "draft",
+      "claim_tier": "exploration_only",
+      "indexability_status": "noindex",
+      "allowed_claims": [
+        "This cluster helps compare structured data, finance, accounting, and compliance learning environments.",
+        "The graph supports exploration and review, not a final enrollment or career decision."
+      ]
+    }
+  ]
+}

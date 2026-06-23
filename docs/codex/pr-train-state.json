@@ -40585,7 +40585,7 @@
     "repo": "fap-api",
     "branch": "codex/analytics-funnel-ga4-baidu-mapping-scan-01",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged_cleanup_complete",
     "title": "ANALYTICS-FUNNEL-GA4-BAIDU-MAPPING-SCAN-01 freeze GA4 Baidu funnel mapping",
     "depends_on": [
       "ANALYTICS-FUNNEL-REPORT-READY-MERGE-TIMESTAMP-03"
@@ -59754,11 +59754,11 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": "3b62691f661edac4b13d9a97e53645fadb93972e",
+    "commit_sha": "9bbb7a069216cb514af9aad89cc6d92aecf7efe2",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2334",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-22T17:35:14Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-23T01:45:00+08:00",
@@ -59779,6 +59779,128 @@
         "at": "2026-06-23T02:30:00+08:00",
         "status": "ready_to_merge",
         "note": "All PR #2334 GitHub checks passed and mergeStateStatus was CLEAN. Recording ready_to_merge before squash merge per PR-train ledger policy."
+      },
+      {
+        "at": "2026-06-23T01:10:05Z",
+        "status": "merged_cleanup_complete",
+        "note": "Reconciled stale FA30-API-08 ledger while starting dependent FA30-API-09: PR #2334 is merged, origin/main contains merge commit 9bbb7a069216cb514af9aad89cc6d92aecf7efe2, and the remote task branch is absent."
+      }
+    ]
+  },
+  "FA30-API-09": {
+    "repo": "fap-api",
+    "branch": "codex/fa30-api-09-riasec-major-graph-authority",
+    "base": "main",
+    "status": "local_validated",
+    "train_scope": "fa30_riasec_major_graph_backend_authority",
+    "title": "FA30-API-09: Add RIASEC major graph backend authority contract",
+    "depends_on": [
+      "FA30-API-08"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly provided FA30-API-09 id, title, scope, and authorized manifest/state updates in the FermatMind FA30 Evidence And Backend Authority Sequence plan."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "FA30-API-08 merged as PR #2334 at 2026-06-22T17:35:14Z; origin/main contains merge commit 9bbb7a069216cb514af9aad89cc6d92aecf7efe2."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=RiasecMajorGraphAuthorityTest --no-ansi",
+          "cd backend && php artisan riasec:major-graph-authority-audit --json --strict --no-ansi",
+          "cd backend && vendor/bin/pint --test app/Console/Commands/RiasecMajorGraphAuthorityAuditCommand.php app/Services/SeoIntel/RiasecMajorGraphAuthorityValidator.php tests/Feature/SeoIntel/RiasecMajorGraphAuthorityTest.php",
+          "python3 -m json.tool backend/docs/seo/import-packages/riasec-major-graph-authority/riasec_major_graph_authority.v1.json >/dev/null",
+          "python3 -m json.tool backend/docs/seo/generated/riasec-major-graph-authority.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "git diff --check"
+        ],
+        "evidence": "PASS: RiasecMajorGraphAuthorityTest (4 tests, 220 assertions); PASS: read-only audit command emitted ok=true with 6 clusters, 0 indexable clusters, and 0 issues; PASS: scoped Pint; PASS: source/generated/state JSON parse; PASS: YAML parse; PASS: git diff --check."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to FA30-API-09 allowed paths: RIASEC major graph source package, generated artifact, docs note, read-only audit command, validator service, focused PHPUnit test, and docs/codex metadata. FA30-API-10 is only registered as a pending-dependency manifest/state entry; no source-ledger implementation was added. No public API route, frontend renderer, CMS write, production DB write, publish, search submission, sitemap, llms, canonical, JSON-LD, queue, scheduler, deploy, or fap-web change."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-23T01:10:05Z",
+        "status": "in_progress",
+        "note": "Started from clean origin/main worktree. Scope is limited to backend-only RIASEC major graph authority contract, source package, read-only validator/audit command, focused tests, and docs/codex metadata. No public API route, frontend renderer, CMS write, production DB write, publication, search submission, sitemap, llms, canonical, JSON-LD, deploy, queue, scheduler, or fap-web change is allowed."
+      },
+      {
+        "at": "2026-06-23T01:18:00Z",
+        "status": "local_validated",
+        "note": "Focused PHPUnit, read-only audit command, scoped Pint, JSON/YAML parsing, diff check, and explicit path allowlist scope validation passed."
+      }
+    ]
+  },
+  "FA30-API-10": {
+    "repo": "fap-api",
+    "branch": "codex/fa30-api-10-competitor-alternatives-source-ledger",
+    "base": "main",
+    "status": "blocked_dependency",
+    "train_scope": "fa30_competitor_alternatives_source_ledger",
+    "title": "FA30-API-10: Add competitor alternatives source-ledger contract",
+    "depends_on": [
+      "FA30-API-09"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly provided FA30-API-10 id, title, scope, and authorized manifest/state updates in the FermatMind FA30 Evidence And Backend Authority Sequence plan."
+      },
+      "dependency": {
+        "status": "blocked",
+        "evidence": "FA30-API-10 must wait until FA30-API-09 is merged."
+      },
+      "local": {
+        "status": "pending",
+        "commands": [
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=CompetitorAlternativesSourceLedgerTest --no-ansi",
+          "cd backend && php artisan competitor-alternatives:source-ledger-audit --json --strict --no-ansi",
+          "cd backend && vendor/bin/pint --test app/Console/Commands/CompetitorAlternativesSourceLedgerAuditCommand.php app/Services/SeoIntel/CompetitorAlternativesSourceLedgerValidator.php tests/Feature/SeoIntel/CompetitorAlternativesSourceLedgerTest.php",
+          "python3 -m json.tool backend/docs/seo/import-packages/competitor-alternatives-source-ledger/competitor_alternatives_source_ledger.v1.json >/dev/null",
+          "python3 -m json.tool backend/docs/seo/generated/competitor-alternatives-source-ledger.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "git diff --check"
+        ],
+        "evidence": null
+      },
+      "scope_validation": {
+        "status": "pending",
+        "evidence": null
+      },
+      "github": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "failure_reason": "Dependency FA30-API-09 is not merged yet.",
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-23T01:10:05Z",
+        "status": "blocked_dependency",
+        "note": "Manifest/state entry authorized for the future competitor alternatives source-ledger PR, but implementation must wait until FA30-API-09 is merged. No scraping, competitor copy, frontend route, SEO runtime, sitemap, llms, CMS write, DB write, deploy, or search submission is allowed."
       }
     ]
   }
