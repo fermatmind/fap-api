@@ -50,6 +50,34 @@ final class SeoAgentArticleCmsPublishCanaryTest extends TestCase
     }
 
     #[Test]
+    public function dry_run_blocks_seo_meta_title_that_exceeds_runtime_column_limit(): void
+    {
+        $fixture = $this->fixture([
+            'proposed_seo_title' => 'What Is RIASEC? Holland Code Test & 6 Career Types | FermatMind',
+        ]);
+        $countsBefore = $this->rowCounts();
+
+        $exitCode = Artisan::call('seo-agent:article-cms-publish-canary', [
+            '--package' => $fixture['package_path'],
+            '--write-evidence' => $fixture['write_evidence_path'],
+            '--publish-gate-evidence' => $fixture['gate_evidence_path'],
+            '--target' => $fixture['target'],
+            '--revision-id' => $fixture['draft_revision_id'],
+            '--artifact-dir' => $this->artifactDir(),
+            '--json' => true,
+        ]);
+        $summary = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertSame('blocked', $summary['status'] ?? null);
+        $this->assertContains('seo_meta_field_length_exceeded', $summary['issues'] ?? []);
+        $this->assertSame('fail', data_get($summary, 'field_length_preflight.status'));
+        $this->assertSame('article_seo_meta.seo_title', data_get($summary, 'field_length_preflight.violations.0.target_column'));
+        $this->assertFalse((bool) ($summary['writes_committed'] ?? true));
+        $this->assertSame($countsBefore, $this->rowCounts());
+    }
+
+    #[Test]
     public function execute_publishes_one_article_revision_through_translation_revision_without_search_side_effects(): void
     {
         $fixture = $this->fixture();
@@ -256,7 +284,8 @@ final class SeoAgentArticleCmsPublishCanaryTest extends TestCase
         ]);
 
         $target = 'article:'.$article->id.':en';
-        $packagePath = $this->writePackage($target);
+        $proposedSeoTitle = (string) ($overrides['proposed_seo_title'] ?? 'Improved Article Title | FermatMind');
+        $packagePath = $this->writePackage($target, $proposedSeoTitle);
         $packageSha = hash_file('sha256', $packagePath) ?: '';
         $draftRevision = ArticleRevision::query()->create([
             'org_id' => 0,
@@ -282,7 +311,7 @@ final class SeoAgentArticleCmsPublishCanaryTest extends TestCase
                 ],
                 'proposal' => [
                     'safe_path' => '/en/articles/article-candidate',
-                    'proposed_seo_title' => 'Improved Article Title | FermatMind',
+                    'proposed_seo_title' => $proposedSeoTitle,
                     'proposed_seo_description' => 'Improved description for search readers.',
                     'proposed_faq_items' => [],
                     'proposal_quality' => [
@@ -314,7 +343,7 @@ final class SeoAgentArticleCmsPublishCanaryTest extends TestCase
         ];
     }
 
-    private function writePackage(string $target): string
+    private function writePackage(string $target, string $proposedSeoTitle): string
     {
         return $this->writeJson('seo-agent-cms-draft-package-', [
             'schema_version' => 'seo-agent-cms-draft-package-dry-run.v1',
@@ -329,7 +358,7 @@ final class SeoAgentArticleCmsPublishCanaryTest extends TestCase
                     'subject_ref' => $target,
                     'safe_path' => '/en/articles/article-candidate',
                     'target_fields' => ['seo_title', 'seo_description'],
-                    'proposed_seo_title' => 'Improved Article Title | FermatMind',
+                    'proposed_seo_title' => $proposedSeoTitle,
                     'proposed_seo_description' => 'Improved description for search readers.',
                     'claim_gate_required' => true,
                     'human_approval_required' => true,

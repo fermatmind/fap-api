@@ -112,6 +112,79 @@ final class SeoAgentCmsDraftPayloadRepairCanaryTest extends TestCase
     }
 
     #[Test]
+    public function execute_can_repair_only_proposed_seo_title_with_repaired_package_handoff(): void
+    {
+        $article = $this->article();
+        $proposal = [
+            ...$this->proposal((int) $article->id),
+            'proposed_seo_title' => 'What Is RIASEC? Holland Code Test & 6 Career Types | FermatMind',
+        ];
+        $packagePath = $this->writePackage([$proposal]);
+        $sourcePackageSha = hash_file('sha256', $packagePath) ?: '';
+        $oldRevision = $this->articleRevision($article, $proposal, $sourcePackageSha, includeOptionalProposalFields: true);
+        $writeEvidencePath = $this->writeEvidence($sourcePackageSha, $proposal['subject_ref'], (int) $oldRevision->id);
+        $shortTitle = 'RIASEC Holland Code Test: 6 Career Types';
+        $artifactDir = $this->artifactDir();
+
+        $exitCode = Artisan::call('seo-agent:cms-draft-payload-repair-canary', [
+            '--package' => $packagePath,
+            '--write-evidence' => $writeEvidencePath,
+            '--target' => $proposal['subject_ref'],
+            '--override-proposed-seo-title' => $shortTitle,
+            '--artifact-dir' => $artifactDir,
+            '--json' => true,
+        ]);
+        $dryRun = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame('planned', $dryRun['status'] ?? null);
+        $this->assertSame(['proposal.proposed_seo_title'], $dryRun['mismatches_repaired'] ?? null);
+        $this->assertSame($sourcePackageSha, $dryRun['source_package_sha256'] ?? null);
+        $this->assertNotSame($sourcePackageSha, $dryRun['package_sha256'] ?? null);
+        $this->assertSame(mb_strlen($shortTitle), $dryRun['field_overrides']['proposal.proposed_seo_title']['length'] ?? null);
+        $effectivePackagePath = (string) data_get($dryRun, 'effective_package.path');
+        $effectivePackageSha = (string) ($dryRun['package_sha256'] ?? '');
+        $this->assertFileExists($effectivePackagePath);
+
+        $phrase = $this->approvalPhrase($proposal['subject_ref'], $effectivePackageSha);
+        $exitCode = Artisan::call('seo-agent:cms-draft-payload-repair-canary', [
+            '--package' => $packagePath,
+            '--write-evidence' => $writeEvidencePath,
+            '--target' => $proposal['subject_ref'],
+            '--override-proposed-seo-title' => $shortTitle,
+            '--confirm-package-sha256' => $effectivePackageSha,
+            '--confirm-repair' => $phrase,
+            '--artifact-dir' => $artifactDir,
+            '--execute' => true,
+            '--json' => true,
+        ]);
+        $summary = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame('success', $summary['status'] ?? null);
+        $newRevision = ArticleRevision::query()->findOrFail((int) data_get($summary, 'new_revision.revision_id'));
+        $this->assertSame($shortTitle, data_get($newRevision->payload_json, 'proposal.proposed_seo_title'));
+        $this->assertSame($effectivePackageSha, data_get($newRevision->payload_json, 'seo_agent.package_sha256'));
+
+        $compatibleEvidencePath = (string) data_get($summary, 'compatible_write_evidence.path');
+        $compatibleEvidence = $this->readJson($compatibleEvidencePath);
+        $this->assertSame($effectivePackageSha, $compatibleEvidence['package_sha256'] ?? null);
+
+        $exitCode = Artisan::call('seo-agent:cms-draft-readback-qa', [
+            '--package' => $effectivePackagePath,
+            '--write-evidence' => $compatibleEvidencePath,
+            '--target' => $proposal['subject_ref'],
+            '--package-sha256' => $effectivePackageSha,
+            '--artifact-dir' => $artifactDir,
+            '--json' => true,
+        ]);
+        $readback = json_decode(trim(Artisan::output()), true);
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame('success', $readback['status'] ?? null);
+        $this->assertSame(0, $readback['mismatch_count'] ?? null);
+    }
+
+    #[Test]
     public function it_blocks_mismatch_sets_outside_optional_payload_fields(): void
     {
         [, $proposal, $packagePath, , , $writeEvidencePath] = $this->oldDraftMissingOptionalFields([

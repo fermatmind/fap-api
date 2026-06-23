@@ -14,6 +14,14 @@
     "--confirm-package-sha256=<sha256>",
     "--confirm-repair=<exact phrase>"
   ],
+  "optional_repair_inputs": {
+    "--override-proposed-seo-title": {
+      "field": "proposal.proposed_seo_title",
+      "max_length": 60,
+      "writes_repaired_package_artifact": true,
+      "confirmation_sha256_target": "effective repaired package sha256"
+    }
+  },
   "supported_targets": [
     "article"
   ],
@@ -21,8 +29,10 @@
   "compatible_write_evidence_schema": "seo-agent-controlled-cms-draft-write.v1",
   "allowed_mismatches": [
     "proposal.proposed_internal_link_actions",
-    "proposal.proposal_quality"
+    "proposal.proposal_quality",
+    "proposal.proposed_seo_title when --override-proposed-seo-title is provided"
   ],
+  "effective_package_behavior": "When a controlled field override is supplied, the command emits a repaired seo-agent-cms-draft-package-dry-run.v1 artifact and compatible write evidence references that repaired package sha256 so readback QA can compare against the repaired proposal.",
   "copies_body_from_previous_draft_revision": true,
   "mutates_old_revision": false,
   "publishes_content": false,
