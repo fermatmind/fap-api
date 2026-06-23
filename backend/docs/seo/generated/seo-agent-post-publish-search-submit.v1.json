@@ -3,7 +3,10 @@
   "task": "SEO-AGENT-POST-PUBLISH-SEARCH-SUBMIT-01",
   "repo": "fap-api",
   "command": "php artisan seo-agent:post-publish-search-submit",
-  "input_schema": "seo-agent-cms-publish-canary.v1",
+  "input_schema": [
+    "seo-agent-cms-publish-canary.v1",
+    "seo-agent-article-cms-publish-canary.v1"
+  ],
   "output_schema": "seo-agent-post-publish-search-submit.v1",
   "default_mode": "dry_run_plan",
   "execute_requires": [
@@ -12,7 +15,8 @@
     "--confirm-evidence-sha256=<publish-evidence-sha256>"
   ],
   "supported_targets_v1": [
-    "content_page"
+    "content_page",
+    "article"
   ],
   "channels_v1": [
     "indexnow",
@@ -27,6 +31,12 @@
     "writes_committed": true,
     "published_count": 1,
     "rollback_evidence_available": true
+  },
+  "article_support": {
+    "input_schema": "seo-agent-article-cms-publish-canary.v1",
+    "safe_path_source": "article slug and locale",
+    "requires_article_public_indexable_published": true,
+    "live_submit": false
   },
   "write_targets": [
     "seo_search_channel_queue_items",

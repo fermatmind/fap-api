@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\SeoIntel;
 
+use App\Models\Article;
+use App\Models\ArticleTranslationRevision;
 use App\Models\ContentPage;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
@@ -80,7 +82,6 @@ final class SeoAgentPostPublishSearchSubmitTest extends TestCase
             '--json' => true,
         ]);
         $summary = json_decode(trim(Artisan::output()), true);
-
         $this->assertSame(0, $exitCode, Artisan::output());
         $this->assertSame('success', $summary['status'] ?? null);
         $this->assertTrue((bool) ($summary['search_channel_enqueue_attempted'] ?? false));
@@ -112,6 +113,72 @@ final class SeoAgentPostPublishSearchSubmitTest extends TestCase
     }
 
     #[Test]
+    public function dry_run_plans_article_publish_evidence_without_writing(): void
+    {
+        $article = $this->createPublishedArticle();
+        $canonicalUrl = 'https://www.fermatmind.com/en/articles/article-candidate';
+        $this->seedSeoUrl($canonicalUrl, (string) $article->id, 'article', 'en');
+        $evidencePath = $this->writeArticlePublishEvidence($article);
+
+        $exitCode = Artisan::call('seo-agent:post-publish-search-submit', [
+            '--publish-evidence' => $evidencePath,
+            '--channels' => 'indexnow',
+            '--limit' => 1,
+            '--json' => true,
+        ]);
+        $summary = json_decode(trim(Artisan::output()), true);
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame('planned', $summary['status'] ?? null);
+        $this->assertSame('/en/articles/article-candidate', $summary['safe_path'] ?? null);
+        $this->assertSame('article', $summary['target_model'] ?? null);
+        $this->assertSame('article', $summary['page_entity_type'] ?? null);
+        $this->assertSame(1, $summary['planned_queue_count'] ?? null);
+        $this->assertSame(1, data_get($summary, 'plans.indexnow.planned_queue_count'));
+        $this->assertFalse((bool) ($summary['search_channel_enqueue_attempted'] ?? true));
+        $this->assertFalse((bool) data_get($summary, 'boundaries.search_channel_enqueue', true));
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_search_channel_queue_items')->count());
+    }
+
+    #[Test]
+    public function execute_enqueues_article_publish_evidence_without_live_submission(): void
+    {
+        $article = $this->createPublishedArticle();
+        $canonicalUrl = 'https://www.fermatmind.com/en/articles/article-candidate';
+        $this->seedSeoUrl($canonicalUrl, (string) $article->id, 'article', 'en');
+        $evidencePath = $this->writeArticlePublishEvidence($article);
+        $evidenceSha = hash_file('sha256', $evidencePath) ?: '';
+
+        $exitCode = Artisan::call('seo-agent:post-publish-search-submit', [
+            '--publish-evidence' => $evidencePath,
+            '--channels' => 'indexnow',
+            '--limit' => 1,
+            '--confirm-evidence-sha256' => $evidenceSha,
+            '--execute' => true,
+            '--json' => true,
+        ]);
+        $summary = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame('success', $summary['status'] ?? null);
+        $this->assertSame('article', $summary['page_entity_type'] ?? null);
+        $this->assertTrue((bool) ($summary['search_channel_enqueue_attempted'] ?? false));
+        $this->assertTrue((bool) ($summary['search_channel_enqueue_committed'] ?? false));
+        $this->assertFalse((bool) ($summary['search_submission_attempted'] ?? true));
+        $this->assertFalse((bool) ($summary['google_indexing_live_api_called'] ?? true));
+        $this->assertFalse((bool) data_get($summary, 'boundaries.search_channel_submit', true));
+        $this->assertFalse((bool) data_get($summary, 'boundaries.indexing_request', true));
+        $this->assertSame(1, $summary['written_items'] ?? null);
+
+        $item = DB::connection('seo_intel')->table('seo_search_channel_queue_items')->first();
+        $this->assertNotNull($item);
+        $this->assertSame('indexnow', $item->channel);
+        $this->assertSame('article', $item->page_entity_type);
+        $this->assertSame((string) $article->id, $item->entity_id);
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_indexnow_submissions')->count());
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_domestic_submission_logs')->count());
+    }
+
+    #[Test]
     public function execute_fails_closed_for_bad_sha_or_unpublished_evidence(): void
     {
         $page = $this->createPublishedPage();
@@ -139,6 +206,19 @@ final class SeoAgentPostPublishSearchSubmitTest extends TestCase
         $summary = json_decode(trim(Artisan::output()), true);
         $this->assertSame(1, $exitCode);
         $this->assertContains('publish_evidence_missing_one_committed_publish', $summary['issues'] ?? []);
+
+        $article = $this->createPublishedArticle();
+        $mismatchedSchemaPath = $this->writeArticlePublishEvidence($article, [
+            'schema_version' => 'seo-agent-cms-publish-canary.v1',
+        ]);
+        $exitCode = Artisan::call('seo-agent:post-publish-search-submit', [
+            '--publish-evidence' => $mismatchedSchemaPath,
+            '--limit' => 1,
+            '--json' => true,
+        ]);
+        $summary = json_decode(trim(Artisan::output()), true);
+        $this->assertSame(1, $exitCode);
+        $this->assertContains('publish_evidence_schema_target_mismatch', $summary['issues'] ?? []);
     }
 
     #[Test]
@@ -150,6 +230,7 @@ final class SeoAgentPostPublishSearchSubmitTest extends TestCase
         $this->assertSame('php artisan seo-agent:post-publish-search-submit', $artifact['command'] ?? null);
         $this->assertSame(1, $artifact['max_published_urls_per_execution'] ?? null);
         $this->assertContains('content_page', $artifact['supported_targets_v1'] ?? []);
+        $this->assertContains('article', $artifact['supported_targets_v1'] ?? []);
         $this->assertFalse((bool) data_get($artifact, 'live_submission.search_channel_submit', true));
         $this->assertFalse((bool) data_get($artifact, 'live_submission.google_indexing_live_api_call', true));
     }
@@ -184,6 +265,49 @@ final class SeoAgentPostPublishSearchSubmitTest extends TestCase
         ]);
     }
 
+    private function createPublishedArticle(): Article
+    {
+        $article = Article::query()->create([
+            'org_id' => 0,
+            'slug' => 'article-candidate',
+            'locale' => 'en',
+            'translation_group_id' => (string) Str::uuid(),
+            'source_locale' => 'en',
+            'title' => 'Article Candidate',
+            'excerpt' => 'Existing excerpt.',
+            'content_md' => 'Existing article markdown.',
+            'content_html' => '<p>Existing article HTML.</p>',
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => true,
+            'sitemap_eligible' => true,
+            'llms_eligible' => true,
+            'published_at' => now()->subDay(),
+        ]);
+        $publishedRevision = ArticleTranslationRevision::query()->create([
+            'org_id' => 0,
+            'article_id' => (int) $article->id,
+            'source_article_id' => (int) $article->id,
+            'translation_group_id' => (string) $article->translation_group_id,
+            'locale' => 'en',
+            'source_locale' => 'en',
+            'revision_number' => 7,
+            'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
+            'title' => 'Article Candidate',
+            'excerpt' => 'Existing excerpt.',
+            'content_md' => 'Existing article markdown.',
+            'seo_title' => 'Article Candidate | FermatMind',
+            'seo_description' => 'Search-safe article candidate description.',
+            'published_at' => now()->subHour(),
+        ]);
+        $article->forceFill([
+            'working_revision_id' => (int) $publishedRevision->id,
+            'published_revision_id' => (int) $publishedRevision->id,
+        ])->save();
+
+        return $article->refresh();
+    }
+
     private function writePublishEvidence(ContentPage $page, array $overrides = []): string
     {
         return $this->writeJson('seo-agent-cms-publish-canary-', array_replace_recursive([
@@ -212,19 +336,59 @@ final class SeoAgentPostPublishSearchSubmitTest extends TestCase
         ], $overrides));
     }
 
-    private function seedSeoUrl(string $canonicalUrl, string $entityId): void
+    private function writeArticlePublishEvidence(Article $article, array $overrides = []): string
     {
+        return $this->writeJson('seo-agent-article-cms-publish-canary-', array_replace_recursive([
+            'schema_version' => 'seo-agent-article-cms-publish-canary.v1',
+            'ok' => true,
+            'status' => 'success',
+            'dry_run' => false,
+            'execute' => true,
+            'target' => 'article:'.(int) $article->id.':en',
+            'revision_id' => 71,
+            'writes_committed' => true,
+            'published_count' => 1,
+            'affected_refs' => [[
+                'status' => 'published',
+                'target_model' => 'article',
+                'subject_ref' => 'article:'.(int) $article->id.':en',
+                'revision_id' => 71,
+                'article_translation_revision_id' => (int) $article->published_revision_id,
+            ]],
+            'rollback_evidence' => [
+                'available' => true,
+            ],
+            'boundaries' => [
+                'cms_publish' => true,
+                'url_truth_write' => false,
+                'sitemap_submission' => false,
+                'indexnow_submit' => false,
+                'search_channel_enqueue' => false,
+                'search_channel_submit' => false,
+                'indexing_request' => false,
+                'scheduler_activation' => false,
+                'queue_worker_start' => false,
+            ],
+        ], $overrides));
+    }
+
+    private function seedSeoUrl(
+        string $canonicalUrl,
+        string $entityId,
+        string $pageEntityType = 'content_page',
+        string $locale = 'zh-CN'
+    ): void {
         DB::connection('seo_intel')->table('seo_urls')->insert([
             'canonical_url_hash' => hash('sha256', $canonicalUrl),
             'canonical_url' => $canonicalUrl,
-            'locale' => 'zh-CN',
-            'page_entity_type' => 'content_page',
+            'locale' => $locale,
+            'page_entity_type' => $pageEntityType,
             'entity_id_or_slug' => $entityId,
-            'cluster' => 'content_page',
+            'cluster' => $pageEntityType,
             'source_authority' => 'backend_cms',
             'indexability_state' => 'indexable',
             'lastmod_at' => now()->subMinute(),
-            'lastmod_source' => 'content_pages.updated_at',
+            'lastmod_source' => $pageEntityType === 'article' ? 'articles.updated_at' : 'content_pages.updated_at',
             'is_private_flow' => false,
             'first_seen_at' => now()->subDay(),
             'last_seen_at' => now(),
@@ -232,7 +396,7 @@ final class SeoAgentPostPublishSearchSubmitTest extends TestCase
                 'claim_safe' => true,
                 'claim_boundary_state' => 'approved',
                 'publication_state' => 'published',
-                'source_table' => 'content_pages',
+                'source_table' => $pageEntityType === 'article' ? 'articles' : 'content_pages',
             ], JSON_THROW_ON_ERROR),
             'created_at' => now(),
             'updated_at' => now(),
