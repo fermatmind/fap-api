@@ -278,6 +278,9 @@ final class CareerAiImpactAssetPreviewService
         $aviationEn = [
             'operational safety, release conditions, weather diversion, separation limits, maintenance records, and crew or passenger safety' => 'operational context, exception handling, record quality, delivery boundaries, and final accountability',
             'operational safety, release conditions, weather diversions, separation limits, maintenance records, and crew or passenger safety' => 'operational context, exception handling, record quality, delivery boundaries, and final accountability',
+            'passenger or crew safety' => 'user and field safety',
+            'passenger/crew safety' => 'user and field safety',
+            'crew safety' => 'field safety',
             'an operating-limit note, abnormal-event log, weather or NOTAM check, and release review' => 'a work note, exception log, review checklist, and delivery review',
             'dispatch systems, checklists, maintenance records, and flight or vehicle operation logs' => 'work records, checklists, review steps, and delivery logs',
         ];
@@ -296,6 +299,14 @@ final class CareerAiImpactAssetPreviewService
 
         $clinicalZh = [
             '临床升级、用药核对、转诊判断、患者沟通和病情变化记录' => '业务升级、关键核对、协作判断、对象沟通和状态变化记录',
+            '去标识病例复盘、交接记录、关键核对表和转诊说明' => '脱敏项目复盘、交接记录、关键核对表和协作说明',
+            '病历/EHR 摘要、医嘱核对、生命体征趋势和随访清单' => '项目记录摘要、关键要求核对、状态趋势和后续清单',
+            '病例复盘' => '项目复盘',
+            '转诊说明' => '协作说明',
+            '病历/EHR' => '项目记录',
+            '医嘱核对' => '关键要求核对',
+            '生命体征' => '状态指标',
+            '随访清单' => '后续清单',
             '临床升级' => '业务升级',
             '用药核对' => '关键核对',
             '转诊判断' => '协作判断',

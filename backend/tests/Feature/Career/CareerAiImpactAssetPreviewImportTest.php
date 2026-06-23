@@ -853,6 +853,7 @@ final class CareerAiImpactAssetPreviewImportTest extends TestCase
             $biochemistRow = $this->assetRow('biochemists-and-biophysicists', $locale);
             if ($locale === 'zh-CN') {
                 $biochemistRow['items']['human_accountability_anchors'][0]['body'] = '正式采用仍要看临床升级、用药核对、转诊判断、患者沟通和病情变化记录。';
+                $biochemistRow['items']['how_to_prepare'][0]['body'] = '把实验记录做成去标识病例复盘、交接记录、关键核对表和转诊说明；再围绕统计输出建立病历/EHR 摘要、医嘱核对、生命体征趋势和随访清单。';
             } else {
                 $biochemistRow['items']['human_accountability_anchors'][0]['body'] = 'Final use still depends on clinical escalation, medication checks, referral judgment, patient communication, and change-in-condition records.';
             }
@@ -895,6 +896,28 @@ final class CareerAiImpactAssetPreviewImportTest extends TestCase
             ->assertOk()
             ->json('ai_impact_asset_v1');
 
+        $equipmentOccupation = $this->seedOccupation('electrical-and-electronics-installers-and-repairers-transportation-equipment');
+        $equipmentEn = $this->assetRow('electrical-and-electronics-installers-and-repairers-transportation-equipment', 'en');
+        $equipmentEn['items']['human_accountability_anchors'][0]['body'] = 'When document lockout steps, passenger or crew safety, release tests, and responsible technician sign-off creates disagreement, the worker must own the final handoff.';
+        CareerJobAiImpactAsset::query()->create([
+            'occupation_id' => $equipmentOccupation->id,
+            'career_job_slug' => 'electrical-and-electronics-installers-and-repairers-transportation-equipment',
+            'locale' => 'en',
+            'asset_version' => CareerJobAiImpactAsset::ASSET_VERSION_V5,
+            'status' => CareerJobAiImpactAsset::STATUS_STAGING_PREVIEW,
+            'preview_allowlisted' => true,
+            'asset_payload_json' => $equipmentEn,
+            'sources_json' => $equipmentEn['sources'],
+            'evidence_used_json' => $equipmentEn['evidence_used'],
+            'derived_from_synthesis_json' => $equipmentEn['derived_from_synthesis'],
+            'audit_fields_json' => $equipmentEn['audit_fields'],
+            'asset_row_hash' => $equipmentEn['audit_fields']['row_hash'],
+        ]);
+
+        $equipmentEnAsset = $this->getJson('/api/v0.5/career/jobs/electrical-and-electronics-installers-and-repairers-transportation-equipment/ai-impact-asset?locale=en')
+            ->assertOk()
+            ->json('ai_impact_asset_v1');
+
         $writerZhText = json_encode($writerZhAsset, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
         $writerEnText = json_encode($writerEnAsset, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
         $truckZhText = json_encode($truckZhAsset, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
@@ -902,6 +925,7 @@ final class CareerAiImpactAssetPreviewImportTest extends TestCase
         $architectEnText = json_encode($architectEnAsset, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
         $biochemistZhText = json_encode($biochemistZhAsset, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
         $biochemistEnText = json_encode($biochemistEnAsset, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+        $equipmentEnText = json_encode($equipmentEnAsset, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
 
         $this->assertStringNotContainsString('物种观察', $writerZhText);
         $this->assertStringNotContainsString('栖息地数据', $writerZhText);
@@ -932,13 +956,24 @@ final class CareerAiImpactAssetPreviewImportTest extends TestCase
 
         $this->assertStringNotContainsString('临床升级', $biochemistZhText);
         $this->assertStringNotContainsString('用药核对', $biochemistZhText);
+        $this->assertStringNotContainsString('转诊说明', $biochemistZhText);
+        $this->assertStringNotContainsString('病历/EHR', $biochemistZhText);
+        $this->assertStringNotContainsString('医嘱核对', $biochemistZhText);
+        $this->assertStringNotContainsString('生命体征', $biochemistZhText);
+        $this->assertStringNotContainsString('随访清单', $biochemistZhText);
         $this->assertStringContainsString('业务升级', $biochemistZhText);
         $this->assertStringContainsString('关键核对', $biochemistZhText);
+        $this->assertStringContainsString('协作说明', $biochemistZhText);
+        $this->assertStringContainsString('项目记录摘要', $biochemistZhText);
 
         $this->assertStringNotContainsString('clinical escalation', $biochemistEnText);
         $this->assertStringNotContainsString('medication checks', $biochemistEnText);
         $this->assertStringContainsString('workflow escalation', $biochemistEnText);
         $this->assertStringContainsString('critical checks', $biochemistEnText);
+
+        $this->assertStringNotContainsString('passenger or crew safety', $equipmentEnText);
+        $this->assertStringNotContainsString('crew safety', $equipmentEnText);
+        $this->assertStringContainsString('user and field safety', $equipmentEnText);
     }
 
     public function test_preview_api_projects_wind_turbine_technicians_without_projection_error(): void
