@@ -17,9 +17,14 @@ final class CareerImportPageAssemblyAssetsPreview extends Command
         {--slugs= : Optional comma-separated preview slug subset}
         {--all-slugs-from-file : Dry-run every slug found in the source JSONL instead of the configured preview allowlist}
         {--confirm-full-staging-preview : Explicitly confirm that --force may write every slug found in the source JSONL to staging_preview}
+        {--confirm-approved-transition : Explicitly confirm that --force may mark validated rows as approved}
+        {--approval-manifest= : Approval manifest JSON produced by the editorial review package}
+        {--approval-manifest-sha256= : Optional expected SHA-256 for the approval manifest}
+        {--editorial-review-report= : Editorial review JSON report that authorizes the approved transition}
+        {--editorial-review-sha256= : Optional expected SHA-256 for the editorial review report}
         {--dry-run : Validate only; do not write staging rows}
-        {--force : Write rows only when --status=staging_preview}
-        {--status=staging_preview : Target import status; only staging_preview is supported}
+        {--force : Write rows only when --status=staging_preview or perform explicit approved transition}
+        {--status=staging_preview : Target import status; staging_preview and approved are supported through their explicit gates}
         {--json : Emit machine-readable JSON report}
         {--output= : Optional report output path}';
 
@@ -53,15 +58,19 @@ final class CareerImportPageAssemblyAssetsPreview extends Command
                 ], false);
             }
 
-            if ($status !== CareerJobPageAssemblyAsset::STATUS_STAGING_PREVIEW) {
+            if (! in_array($status, [
+                CareerJobPageAssemblyAsset::STATUS_STAGING_PREVIEW,
+                CareerJobPageAssemblyAsset::STATUS_APPROVED,
+            ], true)) {
                 return $this->finish([
                     'decision' => 'fail',
-                    'errors' => ['Only --status=staging_preview is supported.'],
+                    'errors' => ['Only --status=staging_preview or --status=approved is supported.'],
                 ], false);
             }
 
             if (
                 $force
+                && $status === CareerJobPageAssemblyAsset::STATUS_STAGING_PREVIEW
                 && (bool) $this->option('all-slugs-from-file')
                 && ! (bool) $this->option('confirm-full-staging-preview')
             ) {
@@ -71,20 +80,34 @@ final class CareerImportPageAssemblyAssetsPreview extends Command
                 ], false);
             }
 
-            $report = $force
-                ? $this->importService->importStagingPreview(
+            if ($force && $status === CareerJobPageAssemblyAsset::STATUS_APPROVED) {
+                $report = $this->importService->approveReviewedAssets(
                     $file,
                     $this->requestedSlugs(),
                     trim((string) $this->option('expected-sha256')) ?: null,
                     (bool) $this->option('all-slugs-from-file'),
-                    $status,
-                )
-                : $this->importService->validateFile(
-                    $file,
-                    $this->requestedSlugs(),
-                    trim((string) $this->option('expected-sha256')) ?: null,
-                    (bool) $this->option('all-slugs-from-file'),
+                    trim((string) $this->option('approval-manifest')),
+                    trim((string) $this->option('approval-manifest-sha256')) ?: null,
+                    trim((string) $this->option('editorial-review-report')),
+                    trim((string) $this->option('editorial-review-sha256')) ?: null,
+                    (bool) $this->option('confirm-approved-transition'),
                 );
+            } else {
+                $report = $force
+                    ? $this->importService->importStagingPreview(
+                        $file,
+                        $this->requestedSlugs(),
+                        trim((string) $this->option('expected-sha256')) ?: null,
+                        (bool) $this->option('all-slugs-from-file'),
+                        $status,
+                    )
+                    : $this->importService->validateFile(
+                        $file,
+                        $this->requestedSlugs(),
+                        trim((string) $this->option('expected-sha256')) ?: null,
+                        (bool) $this->option('all-slugs-from-file'),
+                    );
+            }
 
             return $this->finish($report, ($report['decision'] ?? null) === 'pass');
         } catch (Throwable $throwable) {

@@ -230,6 +230,210 @@ final class CareerPageAssemblyImportService
      * @param  list<string>|null  $requestedSlugs
      * @return array<string, mixed>
      */
+    public function approveReviewedAssets(
+        string $file,
+        ?array $requestedSlugs = null,
+        ?string $expectedSha256 = null,
+        bool $allSlugsFromFile = false,
+        string $approvalManifestFile = '',
+        ?string $expectedApprovalManifestSha256 = null,
+        string $editorialReviewReportFile = '',
+        ?string $expectedEditorialReviewSha256 = null,
+        bool $confirmed = false,
+    ): array {
+        $baseReport = $this->baseReport($file, $requestedSlugs, $allSlugsFromFile, ! $allSlugsFromFile);
+        if (! $confirmed) {
+            return array_merge($baseReport, [
+                'mode' => 'approved_transition',
+                'status' => CareerJobPageAssemblyAsset::STATUS_APPROVED,
+                'decision' => 'fail',
+                'approved_transition_performed' => false,
+                'production_import_allowed' => false,
+                'production_import_performed' => false,
+                'errors' => ['--confirm-approved-transition is required to mark page assembly assets as approved.'],
+            ]);
+        }
+
+        $validation = $this->validateFile(
+            $file,
+            $requestedSlugs,
+            $expectedSha256,
+            $allSlugsFromFile,
+            ! $allSlugsFromFile,
+        );
+        if (($validation['decision'] ?? null) !== 'pass') {
+            return array_merge($validation, [
+                'mode' => 'approved_transition',
+                'status' => CareerJobPageAssemblyAsset::STATUS_APPROVED,
+                'approved_transition_performed' => false,
+                'production_import_performed' => false,
+                'write_skipped_reason' => 'validation_failed',
+            ]);
+        }
+
+        $errors = [];
+        $sourceFileSha256 = is_string($validation['source_file_sha256'] ?? null)
+            ? (string) $validation['source_file_sha256']
+            : null;
+        $targetSlugs = array_values(array_map('strval', (array) ($validation['target_slugs'] ?? [])));
+        $expectedRows = (int) ($validation['expected_preview_rows'] ?? (count($targetSlugs) * 2));
+        $targetSlugCount = count($targetSlugs);
+
+        $approvalArtifact = $this->readJsonArtifact($approvalManifestFile, $expectedApprovalManifestSha256, 'approval manifest', $errors);
+        $editorialArtifact = $this->readJsonArtifact($editorialReviewReportFile, $expectedEditorialReviewSha256, 'editorial review report', $errors);
+        $approvalManifest = is_array($approvalArtifact['payload'] ?? null) ? $approvalArtifact['payload'] : [];
+        $editorialReview = is_array($editorialArtifact['payload'] ?? null) ? $editorialArtifact['payload'] : [];
+
+        $this->validateApprovalManifest($approvalManifest, $sourceFileSha256, $expectedRows, $targetSlugCount, $errors);
+        $this->validateEditorialReviewReport($editorialReview, $sourceFileSha256, $expectedRows, $targetSlugCount, $errors);
+
+        $assetVersion = CareerJobPageAssemblyAsset::ASSET_VERSION_V1;
+        $targetKeys = [];
+        foreach ($targetSlugs as $slug) {
+            foreach (['zh-CN', 'en'] as $locale) {
+                $targetKeys[$slug.'|'.$locale] = ['slug' => $slug, 'locale' => $locale];
+            }
+        }
+
+        $existingRows = CareerJobPageAssemblyAsset::query()
+            ->where('asset_version', $assetVersion)
+            ->whereIn('career_job_slug', $targetSlugs)
+            ->whereIn('locale', ['zh-CN', 'en'])
+            ->get();
+
+        $existingByKey = [];
+        foreach ($existingRows as $asset) {
+            $existingByKey[$asset->career_job_slug.'|'.$asset->locale] = $asset;
+        }
+
+        $rollbackRows = [];
+        $previousStatusCounts = [];
+        $approvableStatuses = [
+            CareerJobPageAssemblyAsset::STATUS_STAGING_PREVIEW,
+            CareerJobPageAssemblyAsset::STATUS_EDITORIAL_REVIEW,
+            CareerJobPageAssemblyAsset::STATUS_APPROVED,
+        ];
+
+        foreach ($targetKeys as $key => $target) {
+            $asset = $existingByKey[$key] ?? null;
+            if (! $asset instanceof CareerJobPageAssemblyAsset) {
+                $errors[] = "{$target['slug']}/{$target['locale']}: approved transition requires an existing staging_preview or editorial_review row.";
+
+                continue;
+            }
+
+            $previousStatus = (string) $asset->status;
+            $previousStatusCounts[$previousStatus] = (int) ($previousStatusCounts[$previousStatus] ?? 0) + 1;
+            if (! in_array($previousStatus, $approvableStatuses, true)) {
+                $errors[] = "{$target['slug']}/{$target['locale']}: cannot approve from status {$previousStatus}.";
+            }
+
+            if ($previousStatus === CareerJobPageAssemblyAsset::STATUS_PRODUCTION_IMPORTED) {
+                $errors[] = "{$target['slug']}/{$target['locale']}: production_imported rows are immutable in this command.";
+            }
+
+            if (is_string($asset->source_artifact_sha256) && $sourceFileSha256 !== null && $asset->source_artifact_sha256 !== $sourceFileSha256) {
+                $errors[] = "{$target['slug']}/{$target['locale']}: existing source artifact SHA does not match the approved asset artifact SHA.";
+            }
+
+            $rollbackRows[] = [
+                'slug' => $target['slug'],
+                'locale' => $target['locale'],
+                'previous_status' => $previousStatus,
+                'new_status' => CareerJobPageAssemblyAsset::STATUS_APPROVED,
+            ];
+        }
+
+        $productionRowsBefore = CareerJobPageAssemblyAsset::query()
+            ->where('asset_version', $assetVersion)
+            ->where('status', CareerJobPageAssemblyAsset::STATUS_PRODUCTION_IMPORTED)
+            ->count();
+
+        if ($errors !== []) {
+            return array_merge($validation, [
+                'mode' => 'approved_transition',
+                'status' => CareerJobPageAssemblyAsset::STATUS_APPROVED,
+                'decision' => 'fail',
+                'approved_transition_performed' => false,
+                'production_import_allowed' => false,
+                'production_import_performed' => false,
+                'approval_manifest_sha256' => $approvalArtifact['sha256'] ?? null,
+                'editorial_review_sha256' => $editorialArtifact['sha256'] ?? null,
+                'production_rows_touched' => 0,
+                'rollback_report' => [
+                    'available' => true,
+                    'target_key' => ['career_job_slug', 'locale', 'asset_version'],
+                    'previous_status_counts' => $previousStatusCounts,
+                    'rows' => $rollbackRows,
+                ],
+                'errors' => $errors,
+            ]);
+        }
+
+        $importRunId = (string) Str::uuid();
+        DB::transaction(function () use ($assetVersion, $targetSlugs, $importRunId): void {
+            CareerJobPageAssemblyAsset::query()
+                ->where('asset_version', $assetVersion)
+                ->whereIn('career_job_slug', $targetSlugs)
+                ->whereIn('locale', ['zh-CN', 'en'])
+                ->whereIn('status', [
+                    CareerJobPageAssemblyAsset::STATUS_STAGING_PREVIEW,
+                    CareerJobPageAssemblyAsset::STATUS_EDITORIAL_REVIEW,
+                    CareerJobPageAssemblyAsset::STATUS_APPROVED,
+                ])
+                ->update([
+                    'status' => CareerJobPageAssemblyAsset::STATUS_APPROVED,
+                    'preview_allowlisted' => true,
+                    'import_run_id' => $importRunId,
+                    'updated_at' => now(),
+                ]);
+        });
+
+        $approvedCount = CareerJobPageAssemblyAsset::query()
+            ->where('asset_version', $assetVersion)
+            ->whereIn('career_job_slug', $targetSlugs)
+            ->whereIn('locale', ['zh-CN', 'en'])
+            ->where('status', CareerJobPageAssemblyAsset::STATUS_APPROVED)
+            ->count();
+        $productionRowsAfter = CareerJobPageAssemblyAsset::query()
+            ->where('asset_version', $assetVersion)
+            ->where('status', CareerJobPageAssemblyAsset::STATUS_PRODUCTION_IMPORTED)
+            ->count();
+
+        $productionRowsTouched = $productionRowsAfter - $productionRowsBefore;
+        $decision = $approvedCount === $expectedRows && $productionRowsTouched === 0 ? 'pass' : 'fail';
+
+        return array_merge($validation, [
+            'mode' => 'approved_transition',
+            'status' => CareerJobPageAssemblyAsset::STATUS_APPROVED,
+            'decision' => $decision,
+            'approved_transition_performed' => true,
+            'production_import_allowed' => false,
+            'production_import_performed' => false,
+            'staging_write_performed' => false,
+            'import_run_id' => $importRunId,
+            'approval_manifest_file' => $approvalManifestFile,
+            'approval_manifest_sha256' => $approvalArtifact['sha256'] ?? null,
+            'editorial_review_report_file' => $editorialReviewReportFile,
+            'editorial_review_sha256' => $editorialArtifact['sha256'] ?? null,
+            'approved_count' => $approvedCount,
+            'expected_approved_count' => $expectedRows,
+            'production_rows_touched' => $productionRowsTouched,
+            'rollback_report' => [
+                'available' => true,
+                'target_key' => ['career_job_slug', 'locale', 'asset_version'],
+                'previous_status_counts' => $previousStatusCounts,
+                'rows' => $rollbackRows,
+                'rollback_sql_intent' => 'Restore each row to previous_status by career_job_slug, locale, asset_version, and import_run_id if rollback is required before production import.',
+            ],
+            'errors' => $decision === 'pass' ? [] : ['Approved row count or production row touch invariant failed.'],
+        ]);
+    }
+
+    /**
+     * @param  list<string>|null  $requestedSlugs
+     * @return array<string, mixed>
+     */
     private function baseReport(string $file, ?array $requestedSlugs, bool $allSlugsFromFile, bool $enforcePreviewAllowlist): array
     {
         return [
@@ -238,7 +442,7 @@ final class CareerPageAssemblyImportService
             'requested_slugs' => $requestedSlugs,
             'all_slugs_from_file' => $allSlugsFromFile,
             'preview_allowlist_enforced' => $enforcePreviewAllowlist,
-            'status_policy' => 'staging_preview_only',
+            'status_policy' => 'dry_run_staging_preview_or_approved_transition',
         ];
     }
 
@@ -490,8 +694,10 @@ final class CareerPageAssemblyImportService
         return [
             'dry_run_writes_database' => false,
             'staging_preview_write_supported_in_this_pr' => true,
+            'approved_transition_supported_in_this_pr' => true,
             'production_import_supported_in_this_pr' => false,
-            'rollback_boundary' => 'Rows written by staging_preview are scoped by import_run_id and target key.',
+            'production_import_requires_approved_status' => true,
+            'rollback_boundary' => 'Rows written by staging_preview or marked approved are scoped by import_run_id and target key.',
         ];
     }
 
@@ -505,6 +711,165 @@ final class CareerPageAssemblyImportService
         $targetKeyMap = array_fill_keys($targetKeys, true);
 
         return array_intersect_key($rowsByKey, $targetKeyMap);
+    }
+
+    /**
+     * @param  list<string>  $errors
+     * @return array{payload: array<string, mixed>|null, sha256: string|null}
+     */
+    private function readJsonArtifact(string $file, ?string $expectedSha256, string $label, array &$errors): array
+    {
+        $file = trim($file);
+        if ($file === '') {
+            $errors[] = ucfirst($label).' file is required.';
+
+            return ['payload' => null, 'sha256' => null];
+        }
+
+        if (! is_file($file) || ! is_readable($file)) {
+            $errors[] = ucfirst($label).' file is missing or unreadable.';
+
+            return ['payload' => null, 'sha256' => null];
+        }
+
+        $sha256 = hash_file('sha256', $file) ?: null;
+        $expectedSha256 = $this->normalizeSha256($expectedSha256);
+        if ($expectedSha256 !== null && $sha256 !== $expectedSha256) {
+            $errors[] = ucfirst($label).' SHA-256 does not match expected artifact SHA.';
+        }
+
+        try {
+            $payload = json_decode((string) file_get_contents($file), true, 512, JSON_THROW_ON_ERROR);
+        } catch (Throwable) {
+            $errors[] = ucfirst($label).' file must be valid JSON.';
+
+            return ['payload' => null, 'sha256' => $sha256];
+        }
+
+        if (! is_array($payload)) {
+            $errors[] = ucfirst($label).' JSON must be an object.';
+
+            return ['payload' => null, 'sha256' => $sha256];
+        }
+
+        return ['payload' => $payload, 'sha256' => $sha256];
+    }
+
+    /**
+     * @param  array<string, mixed>  $manifest
+     * @param  list<string>  $errors
+     */
+    private function validateApprovalManifest(array $manifest, ?string $assetSha256, int $expectedRows, int $expectedSlugs, array &$errors): void
+    {
+        if ($manifest === []) {
+            return;
+        }
+
+        $allowedQaConclusion = ($manifest['qa_final_conclusion'] ?? null) === 'CAREER_CONTENT_1046_STAGING_EDITORIAL_QA_PASS';
+        $allowedFinalConclusion = ($manifest['final_conclusion'] ?? null) === 'CAREER_CONTENT_1046_EDITORIAL_REVIEW_PASS';
+        if (! $allowedQaConclusion && ! $allowedFinalConclusion) {
+            $errors[] = 'Approval manifest must reference CAREER_CONTENT_1046_STAGING_EDITORIAL_QA_PASS or CAREER_CONTENT_1046_EDITORIAL_REVIEW_PASS.';
+        }
+
+        if ((bool) ($manifest['production_import_approved'] ?? false)) {
+            $errors[] = 'Approval manifest must not approve production import.';
+        }
+
+        if ((bool) ($manifest['production_import_allowed'] ?? false)) {
+            $errors[] = 'Approval manifest must not allow production import.';
+        }
+
+        if (($manifest['next_allowed_transition'] ?? CareerJobPageAssemblyAsset::STATUS_APPROVED) !== CareerJobPageAssemblyAsset::STATUS_APPROVED) {
+            $errors[] = 'Approval manifest next_allowed_transition must be approved when present.';
+        }
+
+        $approvedRows = (int) (($manifest['approved_rows'] ?? $manifest['approved_count'] ?? -1));
+        if ($approvedRows !== $expectedRows) {
+            $errors[] = "Approval manifest approved rows must be {$expectedRows}.";
+        }
+
+        $rejectedRows = (int) (($manifest['rejected_rows'] ?? $manifest['rejected_count'] ?? -1));
+        if ($rejectedRows !== 0) {
+            $errors[] = 'Approval manifest rejected rows must be 0.';
+        }
+
+        $slugCount = (int) (($manifest['unique_slugs'] ?? $manifest['slug_count'] ?? -1));
+        if ($slugCount !== $expectedSlugs) {
+            $errors[] = "Approval manifest slug count must be {$expectedSlugs}.";
+        }
+
+        $manifestAssetSha = $this->normalizeSha256((string) ($manifest['final_repaired_asset_sha256'] ?? ''))
+            ?? $this->normalizeSha256((string) (($manifest['required_for_approved_transition']['asset_sha256'] ?? '') ?: ''));
+        if ($assetSha256 !== null && $manifestAssetSha === null) {
+            $errors[] = 'Approval manifest asset SHA is required for approved transition.';
+        }
+
+        if ($assetSha256 !== null && $manifestAssetSha !== null && $manifestAssetSha !== $assetSha256) {
+            $errors[] = 'Approval manifest asset SHA does not match the source JSONL SHA.';
+        }
+
+        $required = is_array($manifest['required_for_approved_transition'] ?? null)
+            ? $manifest['required_for_approved_transition']
+            : [];
+        if ($required !== []) {
+            if ((int) ($required['row_count'] ?? -1) !== $expectedRows) {
+                $errors[] = "Approval manifest required row_count must be {$expectedRows}.";
+            }
+
+            if ((int) ($required['slug_count'] ?? -1) !== $expectedSlugs) {
+                $errors[] = "Approval manifest required slug_count must be {$expectedSlugs}.";
+            }
+        }
+    }
+
+    /**
+     * @param  array<string, mixed>  $report
+     * @param  list<string>  $errors
+     */
+    private function validateEditorialReviewReport(array $report, ?string $assetSha256, int $expectedRows, int $expectedSlugs, array &$errors): void
+    {
+        if ($report === []) {
+            return;
+        }
+
+        if (($report['final_conclusion'] ?? null) !== 'CAREER_CONTENT_1046_EDITORIAL_REVIEW_PASS') {
+            $errors[] = 'Editorial review final_conclusion must be CAREER_CONTENT_1046_EDITORIAL_REVIEW_PASS.';
+        }
+
+        $metrics = is_array($report['metrics'] ?? null) ? $report['metrics'] : [];
+        $rowCount = (int) (($report['approved_rows'] ?? $metrics['asset_rows'] ?? $metrics['expected_locale_rows'] ?? -1));
+        if ($rowCount !== $expectedRows) {
+            $errors[] = "Editorial review approved or asset rows must be {$expectedRows}.";
+        }
+
+        $slugCount = (int) (($metrics['unique_slugs'] ?? $metrics['slug_count'] ?? -1));
+        if ($slugCount !== $expectedSlugs) {
+            $errors[] = "Editorial review unique slugs must be {$expectedSlugs}.";
+        }
+
+        $findings = (int) (($metrics['findings'] ?? $metrics['finding_count'] ?? 0));
+        if ($findings !== 0) {
+            $errors[] = 'Editorial review findings must be 0.';
+        }
+
+        $rejectedRows = (int) (($report['rejected'] ?? $metrics['rejected_rows'] ?? 0));
+        if ($rejectedRows !== 0) {
+            $errors[] = 'Editorial review rejected rows must be 0.';
+        }
+
+        $inputs = is_array($report['inputs'] ?? null) ? $report['inputs'] : [];
+        $reportAssetSha = $this->normalizeSha256((string) (($inputs['final_repaired_asset_sha256'] ?? '') ?: ''));
+        if ($assetSha256 !== null && $reportAssetSha === null) {
+            $errors[] = 'Editorial review asset SHA is required for approved transition.';
+        }
+
+        if ($assetSha256 !== null && $reportAssetSha !== null && $reportAssetSha !== $assetSha256) {
+            $errors[] = 'Editorial review asset SHA does not match the source JSONL SHA.';
+        }
+
+        if ((bool) ($report['production_import_approved'] ?? false)) {
+            $errors[] = 'Editorial review must not approve production import.';
+        }
     }
 
     private function normalizeSha256(?string $value): ?string
