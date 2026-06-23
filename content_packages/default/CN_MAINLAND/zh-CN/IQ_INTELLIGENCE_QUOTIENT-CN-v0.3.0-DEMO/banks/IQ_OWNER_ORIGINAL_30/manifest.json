@@ -3,7 +3,7 @@
     "scale_code": "IQ_INTELLIGENCE_QUOTIENT",
     "bank_id": "IQ_OWNER_ORIGINAL_30",
     "name": "FermatMind IQ Owner Original 30",
-    "status": "owner_original_imported_runtime_unbound",
+    "status": "owner_original_private_scoring_ready_runtime_unbound",
     "runtime_bound": false,
     "locale": "zh-CN",
     "market": "CN_MAINLAND",
@@ -21,8 +21,8 @@
     "files": {
         "items": "items.json",
         "asset_inventory": "asset_inventory.json",
-        "answer_key": "deferred_to_IQ_OWNER_30_BACKEND_SCORING_02",
-        "scoring_spec": "deferred_to_IQ_OWNER_30_BACKEND_SCORING_02"
+        "answer_key": "answer_key.json",
+        "scoring_spec": "scoring_spec.json"
     },
     "asset_root": "assets/iq_owner_original_30",
     "ownership_policy": {

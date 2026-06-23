@@ -59213,7 +59213,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-result-page-seo-geo-control-handoff",
     "base": "main",
-    "status": "pr_open",
+    "status": "merged",
     "train_scope": "big5_result_page_agent_readiness_to_pilot",
     "title": "BIG5-RESULT-PAGE-SEO-GEO-CONTROL-HANDOFF-01: Add Big Five SEO/GEO control handoff",
     "depends_on": [
@@ -59984,16 +59984,16 @@
         "evidence": "PR1 changes are limited to backend/scripts/iq owner-original bank import/verify scripts, IQ_OWNER_ORIGINAL_30 bank JSON, iq_owner_original_30 image assets, and docs/codex manifest/state metadata. Existing backend/content_packs/EQ_60/v1/compiled drift is outside scope and will not be staged."
       },
       "github": {
-        "status": "pending",
-        "evidence": null
+        "status": "pass",
+        "evidence": "PR #2362 is MERGED at 2026-06-23T08:17:44Z with merge commit 8018703a39d50ecd77225efc482d95af69d26c70; origin/main contains the merge commit."
       }
     },
     "failure_reason": null,
-    "commit_sha": "8b3cc91ac88c38e13f25a1fd28b056dda75ad411",
+    "commit_sha": "9eeb91f57477072fe472b8269ac30ba83004691b",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2362",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-23T08:17:44Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-23T07:58:33Z",
@@ -60014,6 +60014,76 @@
         "at": "2026-06-23T08:10:09Z",
         "status": "ready_to_merge",
         "note": "All PR #2362 GitHub checks passed on head 8b3cc91ac88c38e13f25a1fd28b056dda75ad411 and mergeStateStatus was CLEAN. Recording ready_to_merge before squash merge per PR-train ledger policy."
+      },
+      {
+        "at": "2026-06-23T10:21:44Z",
+        "status": "merged",
+        "note": "Reconciled stale PR1 ledger while starting PR2: GitHub reports PR #2362 merged at 2026-06-23T08:17:44Z with merge commit 8018703a39d50ecd77225efc482d95af69d26c70; origin/main contains the merge commit; local branch codex/iq-owner-30-backend-assets-01 is absent; remote branch is absent."
+      }
+    ]
+  },
+  "IQ-OWNER-30-BACKEND-SCORING-02": {
+    "repo": "fap-api",
+    "branch": "codex/iq-owner-30-backend-scoring-02",
+    "base": "main",
+    "status": "local_validated",
+    "train_scope": "iq_owner_original_30_launch",
+    "title": "IQ-OWNER-30-BACKEND-SCORING-02: Add private scoring for owner-original IQ 30 bank",
+    "depends_on": [
+      "IQ-OWNER-30-BACKEND-ASSETS-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly provided /goal authorization for IQ_OWNER_ORIGINAL_30 PR train and confirmed the proposed owner-original answer scheme with: 就按照的方案开."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "IQ-OWNER-30-BACKEND-ASSETS-01 is merged: PR #2362 merged at 2026-06-23T08:17:44Z with merge commit 8018703a39d50ecd77225efc482d95af69d26c70, and origin/main contains that merge commit."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "php backend/scripts/iq/verify_iq_owner_original30_private_scoring.php",
+          "php -l backend/scripts/iq/iq_owner_original30_image_bank_lib.php",
+          "php -l backend/scripts/iq/verify_iq_owner_original30_private_scoring.php",
+          "cd backend && php artisan test --filter=IqOwnerOriginal30PrivateScoringTest --no-ansi",
+          "cd backend && vendor/bin/pint --test tests/Feature/Content/IqOwnerOriginal30PrivateScoringTest.php",
+          "python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/manifest.json >/dev/null",
+          "python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/items.json >/dev/null",
+          "python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/answer_key.json >/dev/null",
+          "python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/scoring_spec.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "git diff --check"
+        ],
+        "evidence": "PASS: private scoring verifier; PHP syntax checks for iq_owner_original30_image_bank_lib.php and verify_iq_owner_original30_private_scoring.php; PHPUnit IqOwnerOriginal30PrivateScoringTest (3 tests, 3326 assertions); scoped Pint; JSON/YAML parse checks; git diff --check."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to PR2 allowed paths: owner-original IQ private answer key, scoring spec, owner IQ verification helper/script, focused PHPUnit test, bank manifest/items answer-key status, and docs/codex metadata. Runtime question selection, public scale APIs, attempt submission, frontend rendering, CMS, SEO runtime, sitemap, llms, JSON-LD, staging deploy, and production deploy were not modified."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-23T10:21:44Z",
+        "status": "in_progress",
+        "note": "Started PR2 from latest fap-api main on codex/iq-owner-30-backend-scoring-02. Scope is limited to backend-only private answer key, raw scoring spec, no-answer-leak verification, focused test, and docs/codex metadata. Runtime formCode switching, public session delivery, frontend rendering, staging deploy, and production deploy are deferred."
+      },
+      {
+        "at": "2026-06-23T10:28:51Z",
+        "status": "local_validated",
+        "note": "Required PR2 local validation and explicit allowed-path scope validation passed. Composer vendor and backend .env were local ignored test dependencies only and are excluded from scope."
       }
     ]
   }

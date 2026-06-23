@@ -30,6 +30,8 @@ function iqOwner30FileMap(): array
         'manifest' => $dir.'/manifest.json',
         'items' => $dir.'/items.json',
         'asset_inventory' => $dir.'/asset_inventory.json',
+        'answer_key' => $dir.'/answer_key.json',
+        'scoring_spec' => $dir.'/scoring_spec.json',
     ];
 }
 
@@ -229,7 +231,7 @@ function iqOwner30BuildPayloadsFromSource(string $sourceDir, bool $copyAssets): 
                 'stem' => 'sha256:'.$stemMetadata['sha256'],
                 'options' => $optionHashes,
             ],
-            'answer_key_status' => 'deferred_to_IQ_OWNER_30_BACKEND_SCORING_02',
+            'answer_key_status' => 'private_backend_answer_key_available',
             'provenance' => iqOwner30Provenance(),
         ];
         $inventoryAssets[] = iqOwner30InventoryEntry($questionNumber, 'stem', null, $stemRelative, $stemMetadata);
@@ -284,8 +286,8 @@ function iqOwner30ManifestPayload(): array
         'files' => [
             'items' => 'items.json',
             'asset_inventory' => 'asset_inventory.json',
-            'answer_key' => 'deferred_to_IQ_OWNER_30_BACKEND_SCORING_02',
-            'scoring_spec' => 'deferred_to_IQ_OWNER_30_BACKEND_SCORING_02',
+            'answer_key' => 'answer_key.json',
+            'scoring_spec' => 'scoring_spec.json',
         ],
         'asset_root' => 'assets/iq_owner_original_30',
         'ownership_policy' => iqOwner30Provenance(),
@@ -421,8 +423,8 @@ function iqOwner30VerifyCommittedArtifacts(): void
             throw new RuntimeException('Missing or duplicate item id: '.$itemId);
         }
         $seenIds[$itemId] = true;
-        if (($item['answer_key_status'] ?? '') !== 'deferred_to_IQ_OWNER_30_BACKEND_SCORING_02') {
-            throw new RuntimeException($itemId.' must defer answer key to PR2');
+        if (($item['answer_key_status'] ?? '') !== 'private_backend_answer_key_available') {
+            throw new RuntimeException($itemId.' must declare private backend answer key availability');
         }
         iqOwner30VerifyAssetNode((array) ($item['stem'] ?? []), $questionNumber, 'stem');
         $options = $item['options'] ?? [];
@@ -440,6 +442,113 @@ function iqOwner30VerifyCommittedArtifacts(): void
 
     foreach ($assets as $asset) {
         iqOwner30VerifyInventoryAsset((array) $asset);
+    }
+}
+
+function iqOwner30VerifyPrivateScoringArtifacts(): void
+{
+    iqOwner30VerifyCommittedArtifacts();
+
+    $files = iqOwner30FileMap();
+    $manifest = iqOwner30ReadJson($files['manifest']);
+    $itemsPayload = iqOwner30ReadJson($files['items']);
+    $answerKey = iqOwner30ReadJson($files['answer_key']);
+    $scoring = iqOwner30ReadJson($files['scoring_spec']);
+
+    if (($manifest['files']['answer_key'] ?? null) !== 'answer_key.json') {
+        throw new RuntimeException('Manifest must point to the private answer_key.json');
+    }
+    if (($manifest['files']['scoring_spec'] ?? null) !== 'scoring_spec.json') {
+        throw new RuntimeException('Manifest must point to scoring_spec.json');
+    }
+    if (($manifest['public_payload_policy']['may_emit_answer_key'] ?? true) !== false) {
+        throw new RuntimeException('Manifest must keep answer key out of public payloads');
+    }
+    if (($manifest['public_payload_policy']['may_emit_solution_rule'] ?? true) !== false) {
+        throw new RuntimeException('Manifest must keep solution rules out of public payloads');
+    }
+    if (($answerKey['public_payload'] ?? true) !== false) {
+        throw new RuntimeException('Answer key must not be public payload');
+    }
+    if (($answerKey['storage_policy'] ?? '') !== 'backend_only_never_emit_to_public_api') {
+        throw new RuntimeException('Answer key storage policy must be backend-only');
+    }
+    if (($scoring['runtime_binding']['enabled'] ?? true) !== false) {
+        throw new RuntimeException('Scoring spec must remain runtime-unbound in PR2');
+    }
+    if (($scoring['norm_policy']['iq_claims_enabled'] ?? true) !== false) {
+        throw new RuntimeException('IQ claims must remain disabled before norm authority');
+    }
+
+    $items = $itemsPayload['items'] ?? [];
+    $answers = $answerKey['answers'] ?? [];
+    if (! is_array($items) || count($items) !== 30 || ! is_array($answers) || count($answers) !== 30) {
+        throw new RuntimeException('Expected 30 items and 30 private answers');
+    }
+
+    $dimensionCounts = [];
+    foreach ($items as $index => $item) {
+        $itemId = (string) ($item['item_id'] ?? '');
+        $questionId = (string) ($item['question_id'] ?? '');
+        if ($itemId === '' || ! isset($answers[$itemId])) {
+            throw new RuntimeException('Missing private answer for '.$itemId);
+        }
+
+        iqOwner30AssertNoPublicAnswerLeak((array) $item, $itemId);
+
+        $answer = (array) $answers[$itemId];
+        if (($answer['question_id'] ?? null) !== $questionId) {
+            throw new RuntimeException('Question id mismatch for '.$itemId);
+        }
+        $correct = (string) ($answer['correct_answer'] ?? '');
+        if (! in_array($correct, iqOwner30OptionCodes(), true)) {
+            throw new RuntimeException('Invalid correct answer for '.$itemId);
+        }
+        $dimension = (string) ($answer['dimension'] ?? '');
+        if ($dimension === '') {
+            throw new RuntimeException('Missing scoring dimension for '.$itemId);
+        }
+        $dimensionCounts[$dimension] = ($dimensionCounts[$dimension] ?? 0) + 1;
+        $difficulty = $answer['difficulty_level'] ?? null;
+        if (! is_int($difficulty) || $difficulty < 1 || $difficulty > 5) {
+            throw new RuntimeException('Invalid difficulty level for '.$itemId);
+        }
+
+        $expectedItemId = sprintf('IQ_OWNER_ORIGINAL_30_%02d', $index + 1);
+        if ($itemId !== $expectedItemId) {
+            throw new RuntimeException('Unexpected item id order: '.$itemId);
+        }
+    }
+
+    ksort($dimensionCounts);
+    $scoringCounts = (array) ($scoring['dimension_counts'] ?? []);
+    ksort($scoringCounts);
+    if ($scoringCounts !== $dimensionCounts) {
+        throw new RuntimeException('Scoring dimension counts do not match answer key');
+    }
+    if (($scoring['raw_score']['max'] ?? null) !== 30 || ($scoring['raw_score']['correct_item_value'] ?? null) !== 1) {
+        throw new RuntimeException('Raw score spec must score 30 one-point items');
+    }
+}
+
+function iqOwner30AssertNoPublicAnswerLeak(array $node, string $context): void
+{
+    $forbidden = [
+        'answer_key',
+        'answerKey',
+        'correct_answer',
+        'correctAnswer',
+        'solution_rule',
+        'solutionRule',
+    ];
+
+    foreach ($node as $key => $value) {
+        if (is_string($key) && in_array($key, $forbidden, true)) {
+            throw new RuntimeException('Public item payload leaks private field '.$key.' in '.$context);
+        }
+        if (is_array($value)) {
+            iqOwner30AssertNoPublicAnswerLeak($value, $context);
+        }
     }
 }
 
