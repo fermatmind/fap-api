@@ -59142,7 +59142,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-result-page-analytics-handoff",
     "base": "main",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "train_scope": "big5_result_page_agent_readiness_to_pilot",
     "title": "BIG5-RESULT-PAGE-ANALYTICS-HANDOFF-01: Add Big Five result-page analytics handoff",
     "depends_on": [
@@ -59989,7 +59989,7 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": "55b58f707814ebb35c54ca50b990f5d87553dc13",
+    "commit_sha": "8b3cc91ac88c38e13f25a1fd28b056dda75ad411",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2362",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -60009,6 +60009,11 @@
         "at": "2026-06-23T08:03:16Z",
         "status": "pr_open",
         "note": "Opened PR #2362 after PR1 local validation, scoped Pint, and allowed-path scope validation passed."
+      },
+      {
+        "at": "2026-06-23T08:10:09Z",
+        "status": "ready_to_merge",
+        "note": "All PR #2362 GitHub checks passed on head 8b3cc91ac88c38e13f25a1fd28b056dda75ad411 and mergeStateStatus was CLEAN. Recording ready_to_merge before squash merge per PR-train ledger policy."
       }
     ]
   }
