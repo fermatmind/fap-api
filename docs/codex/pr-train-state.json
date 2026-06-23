@@ -59950,7 +59950,7 @@
     "repo": "fap-api",
     "branch": "codex/iq-owner-30-backend-assets-01",
     "base": "main",
-    "status": "in_progress",
+    "status": "pr_open",
     "train_scope": "iq_owner_original_30_launch",
     "title": "IQ-OWNER-30-BACKEND-ASSETS-01: Import owner-original IQ 30 image bank",
     "depends_on": [],
@@ -59989,8 +59989,8 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "55b58f707814ebb35c54ca50b990f5d87553dc13",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2362",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -60004,6 +60004,11 @@
         "at": "2026-06-23T07:58:33Z",
         "status": "local_validated",
         "note": "Required PR1 local validation and explicit allowed-path scope validation passed. Existing EQ_60 compiled drift is unrelated, outside current PR scope, and excluded from staging."
+      },
+      {
+        "at": "2026-06-23T08:03:16Z",
+        "status": "pr_open",
+        "note": "Opened PR #2362 after PR1 local validation, scoped Pint, and allowed-path scope validation passed."
       }
     ]
   }
