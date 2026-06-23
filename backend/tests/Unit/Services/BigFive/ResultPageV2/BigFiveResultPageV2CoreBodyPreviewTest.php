@@ -949,9 +949,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $changed = [
             'backend/app/Console/Commands/SeoIntelGscReadModelImportCanaryCommand.php',
             'backend/app/Console/Commands/SeoIntelGscReadModelImportDryRunCommand.php',
+            'backend/app/Console/Commands/SeoIntelGscReadModelCanaryReadbackCommand.php',
             'backend/app/Console/Commands/SeoIntelGscSidecarRunnerCommand.php',
             'backend/app/Services/SeoIntel/Collectors/GscCollector.php',
             'backend/app/Services/SeoIntel/GscReadModelControlledImportCanary.php',
+            'backend/app/Services/SeoIntel/GscReadModelCanaryReadbackAuditor.php',
             'backend/app/Services/SeoIntel/GscReadonlyLiveAdapter.php',
             'backend/app/Services/SeoIntel/GscReadModelArtifactDryRunImporter.php',
             'backend/app/Services/SeoIntel/GscDataQualityGate.php',
@@ -5963,9 +5965,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/SeoIntelGscReadModelImportCanaryCommand.php',
             'backend/app/Console/Commands/SeoIntelGscReadModelImportDryRunCommand.php',
+            'backend/app/Console/Commands/SeoIntelGscReadModelCanaryReadbackCommand.php',
             'backend/app/Console/Commands/SeoIntelGscSidecarRunnerCommand.php',
             'backend/app/Services/SeoIntel/Collectors/GscCollector.php',
             'backend/app/Services/SeoIntel/GscReadModelControlledImportCanary.php',
+            'backend/app/Services/SeoIntel/GscReadModelCanaryReadbackAuditor.php',
             'backend/app/Services/SeoIntel/GscReadonlyLiveAdapter.php',
             'backend/app/Services/SeoIntel/GscReadModelArtifactDryRunImporter.php',
             'backend/app/Services/SeoIntel/GscDataQualityGate.php',
