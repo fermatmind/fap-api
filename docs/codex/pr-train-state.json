@@ -60026,7 +60026,7 @@
     "repo": "fap-api",
     "branch": "codex/iq-owner-30-backend-scoring-02",
     "base": "main",
-    "status": "pr_open",
+    "status": "merged",
     "train_scope": "iq_owner_original_30_launch",
     "title": "IQ-OWNER-30-BACKEND-SCORING-02: Add private scoring for owner-original IQ 30 bank",
     "depends_on": [
@@ -60065,14 +60065,14 @@
       },
       "github": {
         "status": "pass",
-        "evidence": "All PR #2364 GitHub checks passed on head 91026e907eae9e8fa7b7e10d9e6957f9dc2d4c15: hygiene, Semgrep blocking secrets, semgrep SARIF non-blocking upload, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, and Semgrep OSS. mergeStateStatus was CLEAN."
+        "evidence": "GitHub PR #2364 is MERGED with merge commit 1abc71e363303b6c4f957abdee0fa741c693b707; origin/main contains the merge commit. Head ref oid reported by GitHub: 75e550b7e8e35eac695477e3bbac787aad4eafd3."
       }
     },
     "failure_reason": null,
-    "commit_sha": "91026e907eae9e8fa7b7e10d9e6957f9dc2d4c15",
+    "commit_sha": "75e550b7e8e35eac695477e3bbac787aad4eafd3",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2364",
-    "merged_at": null,
-    "remote_branch_deleted": false,
+    "merged_at": "2026-06-23T10:45:52Z",
+    "remote_branch_deleted": true,
     "local_cleanup_executed": false,
     "transitions": [
       {
@@ -60094,6 +60094,82 @@
         "at": "2026-06-23T10:37:39Z",
         "status": "ready_to_merge",
         "note": "All PR #2364 GitHub checks passed on head 91026e907eae9e8fa7b7e10d9e6957f9dc2d4c15 and mergeStateStatus was CLEAN. Recording ready_to_merge before squash merge per PR-train ledger policy."
+      },
+      {
+        "at": "2026-06-23T10:45:52Z",
+        "status": "merged",
+        "note": "Reconciled by IQ-SESSION-QUESTION-DELIVERY-05A preflight: GitHub PR #2364 is MERGED and origin/main contains merge commit 1abc71e363303b6c4f957abdee0fa741c693b707. Local cleanup for the original PR2 worktree was not executed in this 05A worktree."
+      }
+    ]
+  },
+  "IQ-SESSION-QUESTION-DELIVERY-05A": {
+    "repo": "fap-api",
+    "branch": "codex/iq-session-question-delivery-05a",
+    "base": "main",
+    "status": "local_validated",
+    "train_scope": "iq_owner_original_30_launch",
+    "title": "IQ-SESSION-QUESTION-DELIVERY-05A: Add owner IQ current-question backend delivery",
+    "depends_on": [
+      "IQ-OWNER-30-BACKEND-SCORING-02"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly provided the IQ Session Delivery 05A/05B split plan and requested implementation."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "IQ-OWNER-30-BACKEND-SCORING-02 is merged: PR #2364 merged at 2026-06-23T10:45:52Z with merge commit 1abc71e363303b6c4f957abdee0fa741c693b707, and origin/main contains that merge commit."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "php backend/scripts/iq/verify_iq_owner_original30_private_scoring.php",
+          "php -l backend/app/Http/Controllers/API/V0_3/AttemptQuestionDeliveryController.php",
+          "php -l backend/app/Services/Iq/IqOwnerOriginal30BankService.php",
+          "php -l backend/app/Services/Attempts/AttemptStartService.php",
+          "php -l backend/app/Services/Attempts/AttemptSubmissionService.php",
+          "php -l backend/app/Http/Middleware/FmTokenAuth.php",
+          "php -l backend/app/Http/Middleware/ResolveOrgContext.php",
+          "php -l backend/routes/api.php",
+          "php -l backend/tests/Feature/V0_3/IqOwnerOriginal30SessionDeliveryTest.php",
+          "cd backend && php artisan test --filter=IqOwnerOriginal30 --no-ansi",
+          "cd backend && vendor/bin/pint --test app/Http/Controllers/API/V0_3/AttemptQuestionDeliveryController.php app/Services/Iq/IqOwnerOriginal30BankService.php app/Services/Attempts/AttemptStartService.php app/Services/Attempts/AttemptSubmissionService.php app/Http/Middleware/FmTokenAuth.php app/Http/Middleware/ResolveOrgContext.php tests/Feature/V0_3/IqOwnerOriginal30SessionDeliveryTest.php",
+          "python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/manifest.json >/dev/null",
+          "python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/items.json >/dev/null",
+          "python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/answer_key.json >/dev/null",
+          "python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/scoring_spec.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "git diff --check"
+        ],
+        "evidence": "PASS: private scoring verifier; PHP syntax checks for controller/service/middleware/route/test files; PHPUnit php artisan test --filter=IqOwnerOriginal30 --no-ansi (7 tests, 3454 assertions); scoped Pint --test (7 files); IQ bank JSON parse checks; docs/codex JSON/YAML parse checks; git diff --check."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to 05A allowed paths: attempt question delivery controller, public attempt-realm middleware updates, attempt start/submission services, owner IQ bank service, API route, focused feature test, and docs/codex metadata. No frontend, CMS, SEO, sitemap, llms, DB migration, staging deploy, or production deploy changes."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": "PR not opened yet."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-23T15:20:00Z",
+        "status": "in_progress",
+        "note": "Started 05A from latest fap-api origin/main in clean temp worktree. Scope limited to backend current-question delivery, owner IQ attempt binding, owner submit validation, route/middleware support, focused tests, and docs/codex metadata. Frontend adapter, legacy full-bank hard block, staging deploy, and production deploy are deferred."
+      },
+      {
+        "at": "2026-06-23T15:35:00Z",
+        "status": "local_validated",
+        "note": "All 05A manifest local checks passed and changed-file scope validation passed. Legacy full-bank route remains compatible; frontend adapter is deferred to 05B."
       }
     ]
   }

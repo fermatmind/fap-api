@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\V0_3\AttemptEmailBindingController;
 use App\Http\Controllers\API\V0_3\AttemptInviteUnlockController;
 use App\Http\Controllers\API\V0_3\AttemptProgressController;
+use App\Http\Controllers\API\V0_3\AttemptQuestionDeliveryController;
 use App\Http\Controllers\API\V0_3\AttemptReadController;
 use App\Http\Controllers\API\V0_3\AttemptWriteController;
 use App\Http\Controllers\API\V0_3\AuthGuestController as AuthGuestV03Controller;
@@ -249,6 +250,10 @@ Route::prefix('v0.3')->middleware([
                 ->middleware(['throttle:api_attempt_submit', \App\Http\Middleware\FmTokenAuth::class])
                 ->defaults('public_realm', true)
                 ->name('api.v0_3.attempts.submit');
+            Route::get('/attempts/{attempt_id}/questions', [AttemptQuestionDeliveryController::class, 'show'])
+                ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'uuid:attempt_id'])
+                ->defaults('public_realm', true)
+                ->name('api.v0_3.attempts.questions');
             Route::post('/attempts/{id}/email-bind', [AttemptEmailBindingController::class, 'store'])
                 ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'uuid:id'])
                 ->defaults('public_realm', true)
