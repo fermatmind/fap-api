@@ -853,6 +853,70 @@ final class CareerAiImpactAssetPreviewImportTest extends TestCase
         $this->assertStringContainsString('工时合规', $truckZhText);
     }
 
+    public function test_preview_api_projects_wind_turbine_technicians_without_projection_error(): void
+    {
+        Config::set('career_ai_impact_assets.staging_preview_enabled', true);
+        Config::set('career_ai_impact_assets.preview_slugs', ['wind-turbine-technicians']);
+
+        $occupation = $this->seedOccupation('wind-turbine-technicians');
+
+        foreach (['zh-CN', 'en'] as $locale) {
+            $row = $this->assetRow('wind-turbine-technicians', $locale);
+            $row['occupation']['title_en'] = 'Wind Turbine Technicians';
+            $row['occupation']['title_zh'] = '风力涡轮机技术员';
+
+            if ($locale === 'zh-CN') {
+                $row['items']['most_ai_exposed_workflows'][0]['body'] = '指挥链、武器和任务风险应当投射为风机现场维护语境。';
+            } else {
+                $row['items']['most_ai_exposed_workflows'][0]['body'] = 'command chain, weapons, and mission risk should project into wind-site maintenance context.';
+            }
+
+            CareerJobAiImpactAsset::query()->create([
+                'occupation_id' => $occupation->id,
+                'career_job_slug' => 'wind-turbine-technicians',
+                'locale' => $locale,
+                'asset_version' => CareerJobAiImpactAsset::ASSET_VERSION_V5,
+                'status' => CareerJobAiImpactAsset::STATUS_STAGING_PREVIEW,
+                'preview_allowlisted' => true,
+                'asset_payload_json' => $row,
+                'sources_json' => $row['sources'],
+                'evidence_used_json' => $row['evidence_used'],
+                'derived_from_synthesis_json' => $row['derived_from_synthesis'],
+                'audit_fields_json' => $row['audit_fields'],
+                'asset_row_hash' => $row['audit_fields']['row_hash'],
+            ]);
+        }
+
+        $zhAsset = $this->getJson('/api/v0.5/career/jobs/wind-turbine-technicians/ai-impact-asset?locale=zh-CN')
+            ->assertOk()
+            ->assertJsonPath('ai_impact_asset_v1.slug', 'wind-turbine-technicians')
+            ->assertJsonPath('ai_impact_asset_v1.locale', 'zh-CN')
+            ->json('ai_impact_asset_v1');
+
+        $enAsset = $this->getJson('/api/v0.5/career/jobs/wind-turbine-technicians/ai-impact-asset?locale=en')
+            ->assertOk()
+            ->assertJsonPath('ai_impact_asset_v1.slug', 'wind-turbine-technicians')
+            ->assertJsonPath('ai_impact_asset_v1.locale', 'en')
+            ->json('ai_impact_asset_v1');
+
+        $zhText = json_encode($zhAsset, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+        $enText = json_encode($enAsset, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+
+        $this->assertStringNotContainsString('指挥链', $zhText);
+        $this->assertStringNotContainsString('武器', $zhText);
+        $this->assertStringNotContainsString('任务风险', $zhText);
+        $this->assertStringContainsString('现场安全链条', $zhText);
+        $this->assertStringContainsString('设备', $zhText);
+        $this->assertStringContainsString('维护风险', $zhText);
+
+        $this->assertStringNotContainsString('command chain', $enText);
+        $this->assertStringNotContainsString('weapons', $enText);
+        $this->assertStringNotContainsString('mission risk', $enText);
+        $this->assertStringContainsString('site safety chain', $enText);
+        $this->assertStringContainsString('equipment', $enText);
+        $this->assertStringContainsString('maintenance risk', $enText);
+    }
+
     public function test_ai_impact_preview_asset_can_provide_restricted_detail_shell_when_bundle_is_missing(): void
     {
         Config::set('career_ai_impact_assets.staging_preview_enabled', true);
