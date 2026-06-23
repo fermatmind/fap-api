@@ -15,6 +15,7 @@ use App\Services\Content\Eq60PackLoader;
 use App\Services\Content\RiasecPackLoader;
 use App\Services\Content\Sds20PackLoader;
 use App\Services\Enneagram\EnneagramFormCatalog;
+use App\Services\Iq\IqOwnerOriginal30BankService;
 use App\Services\Mbti\MbtiFormCatalog;
 use App\Services\Observability\BigFiveTelemetry;
 use App\Services\Observability\ClinicalComboTelemetry;
@@ -169,6 +170,15 @@ class AttemptStartService
             $resolvedMeasurementContractVersion = trim((string) ($resolvedForm['measurement_contract_version'] ?? ''));
             $resolvedScoreSpaceVersion = trim((string) ($resolvedForm['score_space_version'] ?? ''));
             $resolvedCompareCompatibilityGroup = trim((string) ($resolvedForm['compare_compatibility_group'] ?? ''));
+        } elseif (strtoupper($scaleCode) === IqOwnerOriginal30BankService::LEGACY_SCALE_CODE
+            || strtoupper($scaleCode) === IqOwnerOriginal30BankService::SCALE_CODE
+        ) {
+            $requestedBankId = is_array($dto->meta ?? null) ? (string) ($dto->meta['bank_id'] ?? '') : '';
+            if ($this->iqOwnerOriginal30Bank()->isOwnerOriginalRequest($dto->formCode, $requestedBankId)) {
+                $dirVersion = IqOwnerOriginal30BankService::DIR_VERSION;
+                $resolvedFormCode = IqOwnerOriginal30BankService::FORM_CODE;
+                $resolvedQuestionCount = $this->iqOwnerOriginal30Bank()->questionCount();
+            }
         }
 
         if ($packId === '' || $dirVersion === '') {
@@ -282,6 +292,12 @@ class AttemptStartService
         }
 
         $answersMeta = is_array($answersSummaryMeta) ? $answersSummaryMeta : [];
+        if (($resolvedFormCode ?? null) === IqOwnerOriginal30BankService::FORM_CODE) {
+            $answersMeta = array_merge(
+                $answersMeta,
+                $this->iqOwnerOriginal30Bank()->startMetadata($packId, $dirVersion)
+            );
+        }
         if ($resolvedFormCode !== null && $resolvedFormCode !== '') {
             $answersMeta['form_code'] = $resolvedFormCode;
         }
@@ -793,6 +809,11 @@ class AttemptStartService
     private function inputGuard(): ScaleCodeInputGuard
     {
         return app(ScaleCodeInputGuard::class);
+    }
+
+    private function iqOwnerOriginal30Bank(): IqOwnerOriginal30BankService
+    {
+        return app(IqOwnerOriginal30BankService::class);
     }
 
     private function resolveQuestionCount(string $scaleCode, string $packId, string $dirVersion, ?int $expectedCount = null): int

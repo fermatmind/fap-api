@@ -8,6 +8,7 @@ use App\DTO\Attempts\SubmitAttemptDTO;
 use App\Exceptions\Api\ApiProblemException;
 use App\Jobs\ProcessAttemptSubmissionJob;
 use App\Models\Attempt;
+use App\Services\Iq\IqOwnerOriginal30BankService;
 use App\Support\OrgContext;
 use App\Support\SchemaBaseline;
 use Illuminate\Database\Eloquent\Builder;
@@ -21,6 +22,7 @@ final class AttemptSubmissionService
 {
     public function __construct(
         private readonly AttemptSubmitService $attemptSubmitService,
+        private readonly IqOwnerOriginal30BankService $iqOwnerOriginal30Bank,
     ) {}
 
     /**
@@ -32,6 +34,9 @@ final class AttemptSubmissionService
         $orgId = $ctx->scopedOrgId();
 
         $hasTable = SchemaBaseline::hasTable('attempt_submissions');
+        $actorUserId = $this->resolveUserId($ctx, $dto->userId);
+        $actorAnonId = $this->resolveAnonId($ctx, $dto->anonId);
+        $this->validateOwnerIqSubmitIfNeeded($ctx, $attemptId, $actorUserId, $actorAnonId, $dto);
 
         // sync: keep submit contract unchanged and mirror status into attempt_submissions for /submission.
         if (! $preferAsync || ! $hasTable) {
@@ -74,9 +79,6 @@ final class AttemptSubmissionService
         if ($attemptId === '') {
             throw new ApiProblemException(400, 'VALIDATION_FAILED', 'attempt_id is required.');
         }
-
-        $actorUserId = $this->resolveUserId($ctx, $dto->userId);
-        $actorAnonId = $this->resolveAnonId($ctx, $dto->anonId);
 
         $attempt = $this->ownedAttemptQuery($ctx, $attemptId, $actorUserId, $actorAnonId)->first();
         if (! $attempt) {
@@ -308,6 +310,25 @@ final class AttemptSubmissionService
             $this->markRetryableFailure($submissionId, 'SUBMISSION_JOB_FAILED', $e::class.': '.$e->getMessage());
             throw $e;
         }
+    }
+
+    private function validateOwnerIqSubmitIfNeeded(
+        OrgContext $ctx,
+        string $attemptId,
+        ?string $actorUserId,
+        ?string $actorAnonId,
+        SubmitAttemptDTO $dto
+    ): void {
+        if ($attemptId === '') {
+            return;
+        }
+
+        $attempt = $this->ownedAttemptQuery($ctx, $attemptId, $actorUserId, $actorAnonId)->first();
+        if (! $attempt instanceof Attempt) {
+            return;
+        }
+
+        $this->iqOwnerOriginal30Bank->validateSubmit($attempt, $dto);
     }
 
     /**

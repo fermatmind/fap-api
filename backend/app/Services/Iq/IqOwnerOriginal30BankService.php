@@ -1,0 +1,285 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Services\Iq;
+
+use App\DTO\Attempts\SubmitAttemptDTO;
+use App\Exceptions\Api\ApiProblemException;
+use App\Models\Attempt;
+use Illuminate\Support\Facades\File;
+
+final class IqOwnerOriginal30BankService
+{
+    public const SCALE_CODE = 'IQ_INTELLIGENCE_QUOTIENT';
+
+    public const LEGACY_SCALE_CODE = 'IQ_RAVEN';
+
+    public const BANK_ID = 'IQ_OWNER_ORIGINAL_30';
+
+    public const FORM_CODE = 'IQ_OWNER_ORIGINAL_30';
+
+    public const DIR_VERSION = 'IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO';
+
+    public const DELIVERY_MODE = 'current_question';
+
+    /**
+     * @return array<string,mixed>
+     */
+    public function startMetadata(string $packId, string $dirVersion): array
+    {
+        return [
+            'form_code' => self::FORM_CODE,
+            'bank_id' => self::BANK_ID,
+            'question_count' => $this->questionCount(),
+            'question_delivery_mode' => self::DELIVERY_MODE,
+            'question_delivery_contract' => 'attempt_current_question_v1',
+            'question_delivery_endpoint' => '/api/v0.3/attempts/{attempt_id}/questions?index={index}',
+            'owner_original_bank' => true,
+            'owner_original_bank_pack_id' => $packId,
+            'owner_original_bank_dir_version' => $dirVersion,
+        ];
+    }
+
+    public function isOwnerOriginalRequest(?string $formCode, ?string $bankId = null): bool
+    {
+        $candidates = [
+            $formCode,
+            $bankId,
+        ];
+
+        foreach ($candidates as $candidate) {
+            $normalized = strtoupper(trim((string) $candidate));
+            if ($normalized === self::FORM_CODE || $normalized === self::BANK_ID) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function isOwnerOriginalAttempt(Attempt $attempt): bool
+    {
+        $scaleCode = strtoupper(trim((string) ($attempt->scale_code ?? '')));
+        if (! in_array($scaleCode, [self::SCALE_CODE, self::LEGACY_SCALE_CODE], true)) {
+            return false;
+        }
+
+        $formCode = data_get($attempt->answers_summary_json, 'meta.form_code');
+        $bankId = data_get($attempt->answers_summary_json, 'meta.bank_id');
+
+        return $this->isOwnerOriginalRequest(
+            is_string($formCode) || is_numeric($formCode) ? (string) $formCode : null,
+            is_string($bankId) || is_numeric($bankId) ? (string) $bankId : null
+        );
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    public function publicQuestionPayload(Attempt $attempt, int $index): array
+    {
+        $items = $this->items();
+        $count = count($items);
+        if ($index < 0 || $index >= $count) {
+            throw new ApiProblemException(422, 'IQ_QUESTION_INDEX_INVALID', 'question index is out of range.');
+        }
+
+        $item = $items[$index] ?? null;
+        if (! is_array($item)) {
+            throw new ApiProblemException(500, 'IQ_OWNER_BANK_INVALID', 'owner IQ bank item is invalid.');
+        }
+
+        return [
+            'ok' => true,
+            'schema_version' => 'fm.iq.question_delivery.v1',
+            'attempt_id' => (string) $attempt->id,
+            'scale_code' => self::SCALE_CODE,
+            'scale_code_legacy' => self::LEGACY_SCALE_CODE,
+            'bank_id' => self::BANK_ID,
+            'form_code' => self::FORM_CODE,
+            'pack_id' => (string) ($attempt->pack_id ?? ''),
+            'dir_version' => (string) ($attempt->dir_version ?? self::DIR_VERSION),
+            'content_package_version' => (string) ($attempt->content_package_version ?? ''),
+            'question_count' => $count,
+            'delivery' => [
+                'mode' => self::DELIVERY_MODE,
+                'index' => $index,
+                'window_size' => 1,
+                'has_previous' => $index > 0,
+                'has_next' => $index < $count - 1,
+            ],
+            'questions' => [
+                'schema_version' => 'fm.iq.owner_image_bank.items.public.v1',
+                'items' => [$this->publicItem($item)],
+            ],
+            'meta' => [
+                'source' => 'attempt_bound_owner_bank',
+                'public_payload' => true,
+            ],
+        ];
+    }
+
+    public function questionCount(): int
+    {
+        return count($this->items());
+    }
+
+    public function validateSubmit(Attempt $attempt, SubmitAttemptDTO $dto): void
+    {
+        if (! $this->isOwnerOriginalAttempt($attempt)) {
+            return;
+        }
+
+        $expected = $this->optionCodesByQuestionId();
+        $seen = [];
+
+        foreach ($dto->answers as $answer) {
+            if (! is_array($answer)) {
+                continue;
+            }
+
+            $questionId = trim((string) ($answer['question_id'] ?? ''));
+            $code = strtoupper(trim((string) ($answer['code'] ?? $answer['option_code'] ?? '')));
+
+            if ($questionId === '' || ! array_key_exists($questionId, $expected)) {
+                throw new ApiProblemException(422, 'IQ_OWNER_SUBMIT_UNKNOWN_QUESTION', 'submitted IQ question_id is not in the attempt-bound bank.');
+            }
+
+            if (array_key_exists($questionId, $seen)) {
+                throw new ApiProblemException(422, 'IQ_OWNER_SUBMIT_DUPLICATE_QUESTION', 'submitted IQ answers contain duplicate question_id values.');
+            }
+            $seen[$questionId] = true;
+
+            if ($code === '' || ! in_array($code, $expected[$questionId], true)) {
+                throw new ApiProblemException(422, 'IQ_OWNER_SUBMIT_INVALID_OPTION', 'submitted IQ option code is invalid for the question.');
+            }
+        }
+
+        $missing = array_diff(array_keys($expected), array_keys($seen));
+        if ($missing !== []) {
+            throw new ApiProblemException(422, 'IQ_OWNER_SUBMIT_MISSING_QUESTION', 'submitted IQ answers must include every attempt-bound question.');
+        }
+    }
+
+    /**
+     * @return array<int,array<string,mixed>>
+     */
+    private function items(): array
+    {
+        $doc = $this->readJson('items.json');
+        $items = $doc['items'] ?? null;
+        if (! is_array($items)) {
+            throw new ApiProblemException(500, 'IQ_OWNER_BANK_INVALID', 'owner IQ bank items are invalid.');
+        }
+
+        return array_values(array_filter($items, 'is_array'));
+    }
+
+    /**
+     * @return array<string,array<int,string>>
+     */
+    private function optionCodesByQuestionId(): array
+    {
+        $map = [];
+        foreach ($this->items() as $item) {
+            $questionId = trim((string) ($item['question_id'] ?? ''));
+            $options = is_array($item['options'] ?? null) ? $item['options'] : [];
+            $codes = [];
+            foreach ($options as $option) {
+                if (! is_array($option)) {
+                    continue;
+                }
+                $code = strtoupper(trim((string) ($option['code'] ?? '')));
+                if ($code !== '') {
+                    $codes[] = $code;
+                }
+            }
+            if ($questionId !== '') {
+                $map[$questionId] = array_values(array_unique($codes));
+            }
+        }
+
+        return $map;
+    }
+
+    /**
+     * @param  array<string,mixed>  $item
+     * @return array<string,mixed>
+     */
+    private function publicItem(array $item): array
+    {
+        $options = [];
+        foreach (($item['options'] ?? []) as $option) {
+            if (is_array($option)) {
+                $options[] = $this->onlyPublicOptionFields($option);
+            }
+        }
+
+        return [
+            'schema_version' => (string) ($item['schema_version'] ?? 'fm.iq.owner_image_bank.item.v1'),
+            'scale_code' => self::SCALE_CODE,
+            'bank_id' => self::BANK_ID,
+            'question_id' => (string) ($item['question_id'] ?? ''),
+            'item_id' => (string) ($item['item_id'] ?? ''),
+            'sequence' => (int) ($item['sequence'] ?? 0),
+            'order' => (int) ($item['sequence'] ?? 0),
+            'title' => (string) ($item['title'] ?? ''),
+            'stem' => $this->onlyPublicMediaFields(is_array($item['stem'] ?? null) ? $item['stem'] : []),
+            'options' => $options,
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $option
+     * @return array<string,mixed>
+     */
+    private function onlyPublicOptionFields(array $option): array
+    {
+        return [
+            'code' => strtoupper(trim((string) ($option['code'] ?? ''))),
+            'label' => (string) ($option['label'] ?? $option['code'] ?? ''),
+            ...$this->onlyPublicMediaFields($option),
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $media
+     * @return array<string,mixed>
+     */
+    private function onlyPublicMediaFields(array $media): array
+    {
+        return [
+            'type' => (string) ($media['type'] ?? 'image'),
+            'media_type' => (string) ($media['media_type'] ?? 'image/webp'),
+            'assets' => is_array($media['assets'] ?? null) ? $media['assets'] : [],
+            'width' => (int) ($media['width'] ?? 0),
+            'height' => (int) ($media['height'] ?? 0),
+            'sha256' => (string) ($media['sha256'] ?? ''),
+            'accessibility_label' => (string) ($media['accessibility_label'] ?? ''),
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function readJson(string $file): array
+    {
+        $path = $this->bankDir().'/'.$file;
+        if (! File::exists($path)) {
+            throw new ApiProblemException(500, 'IQ_OWNER_BANK_MISSING', 'owner IQ bank file is missing.');
+        }
+
+        $decoded = json_decode((string) File::get($path), true);
+        if (! is_array($decoded)) {
+            throw new ApiProblemException(500, 'IQ_OWNER_BANK_INVALID', 'owner IQ bank file is invalid.');
+        }
+
+        return $decoded;
+    }
+
+    private function bankDir(): string
+    {
+        return base_path('../content_packages/default/CN_MAINLAND/zh-CN/'.self::DIR_VERSION.'/banks/'.self::BANK_ID);
+    }
+}

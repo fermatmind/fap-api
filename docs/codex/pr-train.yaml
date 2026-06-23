@@ -27770,3 +27770,67 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: IQ-SESSION-QUESTION-DELIVERY-05A
+    repo: fap-api
+    depends_on:
+      - IQ-OWNER-30-BACKEND-SCORING-02
+    branch: codex/iq-session-question-delivery-05a
+    title: "IQ-SESSION-QUESTION-DELIVERY-05A: Add owner IQ current-question backend delivery"
+    train_scope: iq_owner_original_30_launch
+    status: user_authorized
+    scope:
+      - Add a public attempt-realm current-question endpoint for IQ_OWNER_ORIGINAL_30 attempts.
+      - Return one public-safe owner IQ question by 0-based index with stem image, option images, labels, order, count, and delivery metadata.
+      - Bind owner-original IQ attempt starts to form_code, bank_id, question_count, pack/dir version, and current-question delivery metadata.
+      - Validate owner-original IQ submissions against the attempt-bound bank before sync and async submission paths.
+      - Keep the legacy full-bank route compatible and defer frontend adapter rollout, hard blocking old reads, staging deploy, and production deploy.
+    allowed_paths:
+      - backend/app/Http/Controllers/API/V0_3/AttemptQuestionDeliveryController.php
+      - backend/app/Http/Middleware/FmTokenAuth.php
+      - backend/app/Http/Middleware/ResolveOrgContext.php
+      - backend/app/Services/Attempts/AttemptStartService.php
+      - backend/app/Services/Attempts/AttemptSubmissionService.php
+      - backend/app/Services/Iq/IqOwnerOriginal30BankService.php
+      - backend/routes/api.php
+      - backend/docs/contracts/openapi.snapshot.json
+      - backend/tests/Feature/V0_3/IqOwnerOriginal30SessionDeliveryTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify frontend rendering, frontend adapters, CMS, SEO runtime, sitemap, llms, JSON-LD, production imports, staging deploy, or production deploy.
+      - Add DB migrations, production writes, or CMS writes.
+      - Hard-block legacy full-bank IQ question reads in this PR.
+      - Emit correct answers, answer keys, solution rules, generator metadata, private provenance, or source capture URLs in public question delivery payloads.
+    validation:
+      - php backend/scripts/iq/verify_iq_owner_original30_private_scoring.php
+      - php -l backend/app/Http/Controllers/API/V0_3/AttemptQuestionDeliveryController.php
+      - php -l backend/app/Services/Iq/IqOwnerOriginal30BankService.php
+      - php -l backend/app/Services/Attempts/AttemptStartService.php
+      - php -l backend/app/Services/Attempts/AttemptSubmissionService.php
+      - php -l backend/app/Http/Middleware/FmTokenAuth.php
+      - php -l backend/app/Http/Middleware/ResolveOrgContext.php
+      - php -l backend/routes/api.php
+      - php -l backend/tests/Feature/V0_3/IqOwnerOriginal30SessionDeliveryTest.php
+      - php -l backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - cd backend && php artisan test --filter=IqOwnerOriginal30 --no-ansi
+      - cd backend && php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_iq_owner_original30_session_delivery_backend' --no-ansi
+      - cd backend && bash scripts/pr74_verify.sh
+      - cd backend && vendor/bin/pint --test app/Http/Controllers/API/V0_3/AttemptQuestionDeliveryController.php app/Services/Iq/IqOwnerOriginal30BankService.php app/Services/Attempts/AttemptStartService.php app/Services/Attempts/AttemptSubmissionService.php app/Http/Middleware/FmTokenAuth.php app/Http/Middleware/ResolveOrgContext.php tests/Feature/V0_3/IqOwnerOriginal30SessionDeliveryTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/manifest.json >/dev/null
+      - python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/items.json >/dev/null
+      - python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/answer_key.json >/dev/null
+      - python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/scoring_spec.json >/dev/null
+      - cd backend && scripts/export_openapi.sh --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend

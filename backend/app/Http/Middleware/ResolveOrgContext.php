@@ -16,6 +16,7 @@ class ResolveOrgContext
     private const PUBLIC_ATTEMPT_ROUTE_NAMES = [
         'api.v0_3.attempts.start',
         'api.v0_3.attempts.submit',
+        'api.v0_3.attempts.questions',
         'api.v0_3.attempts.submission',
         'api.v0_3.attempts.show',
         'api.v0_3.attempts.result',
@@ -196,6 +197,7 @@ class ResolveOrgContext
     {
         return $request->is('api/v0.3/attempts/start')
             || $request->is('api/v0.3/attempts/submit')
+            || $request->is('api/v0.3/attempts/*/questions')
             || $request->is('api/v0.3/attempts/*/submission')
             || $request->is('api/v0.3/attempts/*/result')
             || $request->is('api/v0.3/attempts/*/report')

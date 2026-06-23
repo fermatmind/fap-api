@@ -263,6 +263,31 @@
                 ]
             }
         },
+        "/api/v0.3/attempts/{attempt_id}/questions": {
+            "get": {
+                "operationId": "api.v0_3.attempts.questions",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\AttemptQuestionDeliveryController@show",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\ForcePublicAttemptRealm",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\EnsureUuidRouteParams:attempt_id"
+                ],
+                "x-laravel-name": "api.v0_3.attempts.questions"
+            }
+        },
         "/api/v0.3/attempts/{attempt_id}/submission": {
             "get": {
                 "operationId": "api.v0_3.attempts.submission",
