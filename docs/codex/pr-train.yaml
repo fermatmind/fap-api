@@ -27721,3 +27721,52 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: IQ-OWNER-30-BACKEND-SCORING-02
+    repo: fap-api
+    depends_on:
+      - IQ-OWNER-30-BACKEND-ASSETS-01
+    branch: codex/iq-owner-30-backend-scoring-02
+    title: "IQ-OWNER-30-BACKEND-SCORING-02: Add private scoring for owner-original IQ 30 bank"
+    train_scope: iq_owner_original_30_launch
+    status: user_authorized
+    scope:
+      - Add the backend-only private answer key for IQ_OWNER_ORIGINAL_30 using the owner-approved answer scheme.
+      - Add raw-score scoring spec with IQ and percentile claims disabled until a norm table exists.
+      - Verify public item payloads do not expose correct answers, answer keys, or solution rules.
+      - Keep the bank runtime-unbound and defer formCode switching, session delivery, frontend rendering, staging deploy, and production deploy.
+    allowed_paths:
+      - backend/scripts/iq/iq_owner_original30_image_bank_lib.php
+      - backend/scripts/iq/verify_iq_owner_original30_private_scoring.php
+      - backend/tests/Feature/Content/IqOwnerOriginal30PrivateScoringTest.php
+      - content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/manifest.json
+      - content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/items.json
+      - content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/answer_key.json
+      - content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/scoring_spec.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify runtime question selection, public scale APIs, attempt submission, frontend rendering, CMS, SEO runtime, sitemap, llms, JSON-LD, production imports, staging deploy, or production deploy.
+      - Bind IQ_OWNER_ORIGINAL_30 to a public formCode or session delivery endpoint.
+      - Emit correct answers, answer keys, solution rules, or answer-source notes in public payloads.
+    validation:
+      - php backend/scripts/iq/verify_iq_owner_original30_private_scoring.php
+      - php -l backend/scripts/iq/iq_owner_original30_image_bank_lib.php
+      - php -l backend/scripts/iq/verify_iq_owner_original30_private_scoring.php
+      - cd backend && php artisan test --filter=IqOwnerOriginal30PrivateScoringTest --no-ansi
+      - cd backend && vendor/bin/pint --test tests/Feature/Content/IqOwnerOriginal30PrivateScoringTest.php
+      - python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/manifest.json >/dev/null
+      - python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/items.json >/dev/null
+      - python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/answer_key.json >/dev/null
+      - python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/scoring_spec.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend

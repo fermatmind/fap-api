@@ -1,0 +1,32 @@
+{
+    "schema_version": "fm.iq.scoring_spec.v1",
+    "bank_id": "IQ_OWNER_ORIGINAL_30",
+    "status": "owner_original_private_scoring_ready_runtime_unbound",
+    "raw_score": {
+        "min": 0,
+        "max": 30,
+        "correct_item_value": 1,
+        "incorrect_item_value": 0
+    },
+    "dimension_counts": {
+        "NPR": 3,
+        "VSI": 13,
+        "VSPR": 14
+    },
+    "norm_policy": {
+        "iq_claims_enabled": false,
+        "percentile_claims_enabled": false,
+        "population_norm_table_required_before_production": true,
+        "owner_original_bank_norm_table_required_before_iq_claims": true,
+        "beta_copy_allowed_claim": "practice-style cognitive reasoning score only"
+    },
+    "public_payload_policy": {
+        "may_emit_answer_key": false,
+        "may_emit_solution_rule": false,
+        "may_emit_scoring_key": false
+    },
+    "runtime_binding": {
+        "enabled": false,
+        "deferred_to_pr": "IQ-OWNER-30-FE-FORMCODE-04"
+    }
+}
