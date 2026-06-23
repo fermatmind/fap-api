@@ -24,6 +24,8 @@ final class Mbti64CmsProjectionDraftWriter
         'https://fermatmind.com/zh/personality/esfp-a',
     ];
 
+    private const AGENT_BATCH_ALLOWED_SIZES = [5, 10];
+
     private const FORBIDDEN_ROUTE_PATTERNS = [
         '#/results?(?:/|$)#i',
         '#/orders?(?:/|$)#i',
@@ -149,6 +151,7 @@ final class Mbti64CmsProjectionDraftWriter
                 'row_count' => count($preparedRows),
                 'variant_row_count' => $this->countRows($preparedRows, 'variant'),
                 'comparison_row_count' => $this->countRows($preparedRows, 'comparison'),
+                'subset' => $this->subsetSummary($options, $preparedRows),
                 'rows' => $preparedRows,
                 'errors' => $errors,
                 'warnings' => $warnings,
@@ -197,6 +200,7 @@ final class Mbti64CmsProjectionDraftWriter
             'skipped_existing_count' => $skippedExisting,
             'would_create_revision_count' => $write ? 0 : count($preparedRows) - $skippedExisting,
             'writes_committed' => $write && $created > 0,
+            'subset' => $this->subsetSummary($options, $preparedRows),
             'rows' => $preparedRows,
             'errors' => [],
             'warnings' => $warnings,
@@ -288,8 +292,30 @@ final class Mbti64CmsProjectionDraftWriter
     private function recommendationsForOptions(array $package, array $options, bool $write, array &$errors): array
     {
         $recommendations = $this->recommendations($package);
-        if (! (bool) ($options['visible_query_backed_3'] ?? false)) {
+        $visibleQueryBacked3 = (bool) ($options['visible_query_backed_3'] ?? false);
+        $agentBatchRequested = $this->agentBatchRequested($options);
+
+        if ($visibleQueryBacked3 && $agentBatchRequested) {
+            $errors[] = [
+                'field' => 'options',
+                'code' => 'exclusive_subset_modes_required',
+                'message' => '--visible-query-backed-3 cannot be combined with --agent-batch-size or --agent-batch-offset.',
+            ];
+
+            return [];
+        }
+
+        if (! $visibleQueryBacked3 && ! $agentBatchRequested) {
             return $recommendations;
+        }
+
+        if ($agentBatchRequested) {
+            $batchOptions = $this->agentBatchOptions($options, count($recommendations), $errors);
+            if ($batchOptions === null) {
+                return [];
+            }
+
+            return array_values(array_slice($recommendations, $batchOptions['offset'], $batchOptions['size']));
         }
 
         $allowed = array_fill_keys(self::VISIBLE_QUERY_BACKED_3_URLS, true);
@@ -311,6 +337,86 @@ final class Mbti64CmsProjectionDraftWriter
         }
 
         return $subset;
+    }
+
+    /**
+     * @param  array<string,mixed>  $options
+     */
+    private function agentBatchRequested(array $options): bool
+    {
+        return trim((string) ($options['agent_batch_size'] ?? '')) !== ''
+            || trim((string) ($options['agent_batch_offset'] ?? '')) !== '';
+    }
+
+    /**
+     * @param  array<string,mixed>  $options
+     * @param  list<array<string,string>>  $errors
+     * @return array{size:int,offset:int}|null
+     */
+    private function agentBatchOptions(array $options, int $recommendationCount, array &$errors): ?array
+    {
+        $rawSize = trim((string) ($options['agent_batch_size'] ?? ''));
+        $rawOffset = trim((string) ($options['agent_batch_offset'] ?? ''));
+
+        if ($rawSize === '') {
+            $errors[] = [
+                'field' => 'options.agent_batch_size',
+                'code' => 'agent_batch_size_required',
+                'message' => '--agent-batch-size is required when using agent batch mode.',
+            ];
+
+            return null;
+        }
+
+        if (! ctype_digit($rawSize)) {
+            $errors[] = [
+                'field' => 'options.agent_batch_size',
+                'code' => 'agent_batch_size_invalid',
+                'message' => '--agent-batch-size must be 5 or 10.',
+            ];
+
+            return null;
+        }
+
+        $size = (int) $rawSize;
+        if (! in_array($size, self::AGENT_BATCH_ALLOWED_SIZES, true)) {
+            $errors[] = [
+                'field' => 'options.agent_batch_size',
+                'code' => 'agent_batch_size_not_allowed',
+                'message' => '--agent-batch-size must be one of: '.implode(', ', self::AGENT_BATCH_ALLOWED_SIZES).'.',
+            ];
+
+            return null;
+        }
+
+        if ($rawOffset === '') {
+            $offset = 0;
+        } elseif (! ctype_digit($rawOffset)) {
+            $errors[] = [
+                'field' => 'options.agent_batch_offset',
+                'code' => 'agent_batch_offset_invalid',
+                'message' => '--agent-batch-offset must be a non-negative integer.',
+            ];
+
+            return null;
+        } else {
+            $offset = (int) $rawOffset;
+        }
+
+        if ($offset + $size > $recommendationCount) {
+            $errors[] = [
+                'field' => 'options.agent_batch_offset',
+                'code' => 'agent_batch_window_out_of_range',
+                'message' => 'The requested agent batch window must resolve exactly '.$size.' recommendations.',
+            ];
+
+            return null;
+        }
+
+        return [
+            'size' => $size,
+            'offset' => $offset,
+        ];
     }
 
     /**
@@ -572,16 +678,38 @@ final class Mbti64CmsProjectionDraftWriter
      * @param  array<string,mixed>  $options
      * @return array<string,mixed>
      */
-    private function subsetSummary(array $options): array
+    private function subsetSummary(array $options, array $preparedRows = []): array
     {
-        $enabled = (bool) ($options['visible_query_backed_3'] ?? false);
+        $visibleQueryBacked3 = (bool) ($options['visible_query_backed_3'] ?? false);
+        $agentBatchRequested = $this->agentBatchRequested($options);
+        $selectedUrls = array_values(array_map(
+            static fn (array $row): string => (string) ($row['url'] ?? ''),
+            $preparedRows
+        ));
+
+        if ($agentBatchRequested) {
+            return [
+                'mode' => 'agent_batch_safe',
+                'enabled' => true,
+                'dry_run_only' => false,
+                'write_allowed_with_strict_approval' => true,
+                'allowed_batch_sizes' => self::AGENT_BATCH_ALLOWED_SIZES,
+                'batch_size' => trim((string) ($options['agent_batch_size'] ?? '')),
+                'batch_offset' => trim((string) ($options['agent_batch_offset'] ?? '')) !== ''
+                    ? trim((string) ($options['agent_batch_offset'] ?? ''))
+                    : '0',
+                'arbitrary_url_subset_allowed' => false,
+                'selected_urls' => $selectedUrls,
+            ];
+        }
 
         return [
-            'mode' => $enabled ? 'visible_query_backed_3' : 'full_88',
-            'enabled' => $enabled,
+            'mode' => $visibleQueryBacked3 ? 'visible_query_backed_3' : 'full_88',
+            'enabled' => $visibleQueryBacked3,
             'dry_run_only' => false,
-            'write_allowed_with_strict_approval' => $enabled,
-            'allowed_urls' => $enabled ? self::VISIBLE_QUERY_BACKED_3_URLS : [],
+            'write_allowed_with_strict_approval' => $visibleQueryBacked3,
+            'allowed_urls' => $visibleQueryBacked3 ? self::VISIBLE_QUERY_BACKED_3_URLS : [],
+            'selected_urls' => $selectedUrls,
         ];
     }
 

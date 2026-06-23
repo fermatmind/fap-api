@@ -230,6 +230,228 @@ final class PersonalityMbti64CmsProjectionDraftCommandTest extends TestCase
         $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
     }
 
+    public function test_agent_batch_safe_dry_run_plans_five_artifact_order_rows_without_writes(): void
+    {
+        $this->seedAllTargets();
+        [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', [
+            '--package' => $packagePath,
+            '--qa' => $qaPath,
+            '--dry-run' => true,
+            '--agent-batch-size' => '5',
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $expectedUrls = $this->expectedBatchUrls(5, 0);
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertTrue($payload['dry_run']);
+        $this->assertFalse($payload['write']);
+        $this->assertFalse($payload['writes_committed']);
+        $this->assertFalse($payload['publish_attempted']);
+        $this->assertFalse($payload['index_attempted']);
+        $this->assertFalse($payload['sitemap_llms_release_attempted']);
+        $this->assertFalse($payload['search_release_attempted']);
+        $this->assertSame(5, $payload['row_count']);
+        $this->assertSame(5, $payload['would_create_revision_count']);
+        $this->assertSame('agent_batch_safe', $payload['subset']['mode']);
+        $this->assertSame('5', $payload['subset']['batch_size']);
+        $this->assertSame('0', $payload['subset']['batch_offset']);
+        $this->assertFalse($payload['subset']['arbitrary_url_subset_allowed']);
+        $this->assertSame([5, 10], $payload['subset']['allowed_batch_sizes']);
+        $this->assertSame($expectedUrls, $payload['subset']['selected_urls']);
+        $this->assertSame($expectedUrls, array_map(
+            static fn (array $row): string => (string) ($row['url'] ?? ''),
+            $payload['rows'] ?? []
+        ));
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_agent_batch_safe_dry_run_plans_ten_rows_with_offset_without_writes(): void
+    {
+        $this->seedAllTargets();
+        [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', [
+            '--package' => $packagePath,
+            '--qa' => $qaPath,
+            '--dry-run' => true,
+            '--agent-batch-size' => '10',
+            '--agent-batch-offset' => '5',
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $expectedUrls = $this->expectedBatchUrls(10, 5);
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertSame(10, $payload['row_count']);
+        $this->assertSame('agent_batch_safe', $payload['subset']['mode']);
+        $this->assertSame('10', $payload['subset']['batch_size']);
+        $this->assertSame('5', $payload['subset']['batch_offset']);
+        $this->assertSame($expectedUrls, $payload['subset']['selected_urls']);
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_agent_batch_safe_write_requires_batch_approval_token(): void
+    {
+        $this->seedAllTargets();
+        [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
+        $options = $this->writeOptions($packagePath, $qaPath);
+        $options['--agent-batch-size'] = '5';
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', $options);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertFalse($payload['writes_committed']);
+        $this->assertStringContainsString(
+            '--operator-approved=MBTI64-AGENT-CMS-DRAFT-BATCH-SAFE-WRITER-01 is required',
+            (string) ($payload['errors'][0]['message'] ?? '')
+        );
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_agent_batch_safe_write_creates_only_selected_draft_revisions(): void
+    {
+        $targets = $this->seedAllTargets();
+        [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
+        $profileBefore = $this->profileLiveState($targets['en|ENFJ']);
+        $variantBefore = $this->variantLiveState($targets['en|ENFJ-A']);
+        $surfaceCountsBefore = $this->liveSurfaceCounts();
+        $options = $this->writeOptions($packagePath, $qaPath);
+        $options['--agent-batch-size'] = '5';
+        $options['--operator-approved'] = 'MBTI64-AGENT-CMS-DRAFT-BATCH-SAFE-WRITER-01';
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', $options);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertFalse($payload['dry_run']);
+        $this->assertTrue($payload['write']);
+        $this->assertTrue($payload['writes_committed']);
+        $this->assertSame(5, $payload['row_count']);
+        $this->assertSame(5, $payload['created_revision_count']);
+        $this->assertSame(0, $payload['skipped_existing_count']);
+        $this->assertSame('agent_batch_safe', $payload['subset']['mode']);
+        $this->assertSame($this->expectedBatchUrls(5, 0), $payload['subset']['selected_urls']);
+        $this->assertSame($payload['comparison_row_count'], PersonalityProfileRevision::query()->count());
+        $this->assertSame($payload['variant_row_count'], PersonalityProfileVariantRevision::query()->count());
+        $this->assertSame($profileBefore, $this->profileLiveState($targets['en|ENFJ']));
+        $this->assertSame($variantBefore, $this->variantLiveState($targets['en|ENFJ-A']));
+        $this->assertSame($surfaceCountsBefore, $this->liveSurfaceCounts());
+
+        foreach (PersonalityProfileRevision::query()->get() as $revision) {
+            $this->assertProjectionSnapshot($revision->snapshot_json);
+        }
+        foreach (PersonalityProfileVariantRevision::query()->get() as $revision) {
+            $this->assertProjectionSnapshot($revision->snapshot_json);
+        }
+    }
+
+    public function test_agent_batch_safe_second_write_is_idempotent_for_same_source_hash(): void
+    {
+        $this->seedAllTargets();
+        [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
+        $options = $this->writeOptions($packagePath, $qaPath);
+        $options['--agent-batch-size'] = '5';
+        $options['--operator-approved'] = 'MBTI64-AGENT-CMS-DRAFT-BATCH-SAFE-WRITER-01';
+
+        $firstExit = Artisan::call('personality:mbti64-cms-projection-draft', $options);
+        $this->assertSame(0, $firstExit);
+
+        $secondExit = Artisan::call('personality:mbti64-cms-projection-draft', $options);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $secondExit);
+        $this->assertTrue($payload['ok']);
+        $this->assertFalse($payload['writes_committed']);
+        $this->assertSame(0, $payload['created_revision_count']);
+        $this->assertSame(5, $payload['skipped_existing_count']);
+        $this->assertSame(5, PersonalityProfileRevision::query()->count() + PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_agent_batch_safe_rejects_invalid_batch_size_without_writes(): void
+    {
+        $this->seedAllTargets();
+        [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', [
+            '--package' => $packagePath,
+            '--qa' => $qaPath,
+            '--dry-run' => true,
+            '--agent-batch-size' => '11',
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertContains('agent_batch_size_not_allowed', array_map(
+            static fn (array $error): string => (string) ($error['code'] ?? ''),
+            $payload['errors'] ?? []
+        ));
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_agent_batch_safe_rejects_out_of_range_offset_without_writes(): void
+    {
+        $this->seedAllTargets();
+        [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', [
+            '--package' => $packagePath,
+            '--qa' => $qaPath,
+            '--dry-run' => true,
+            '--agent-batch-size' => '10',
+            '--agent-batch-offset' => '79',
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertContains('agent_batch_window_out_of_range', array_map(
+            static fn (array $error): string => (string) ($error['code'] ?? ''),
+            $payload['errors'] ?? []
+        ));
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_agent_batch_safe_rejects_visible_three_combination_without_writes(): void
+    {
+        $this->seedAllTargets();
+        [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', [
+            '--package' => $packagePath,
+            '--qa' => $qaPath,
+            '--dry-run' => true,
+            '--visible-query-backed-3' => true,
+            '--agent-batch-size' => '5',
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertContains('exclusive_subset_modes_required', array_map(
+            static fn (array $error): string => (string) ($error['code'] ?? ''),
+            $payload['errors'] ?? []
+        ));
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
     public function test_write_creates_eighty_eight_draft_revisions_without_changing_live_records(): void
     {
         $targets = $this->seedAllTargets();
@@ -629,6 +851,17 @@ final class PersonalityMbti64CmsProjectionDraftCommandTest extends TestCase
         }
 
         return $paths;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function expectedBatchUrls(int $size, int $offset): array
+    {
+        return array_map(
+            static fn (string $path): string => 'https://fermatmind.com'.$path,
+            array_slice($this->targetPaths(), $offset, $size)
+        );
     }
 
     /**
