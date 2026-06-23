@@ -24414,6 +24414,109 @@ prs:
     frontend_fallback_authority: false
     content_authority: backend
 
+  - id: FA30-API-09
+    repo: fap-api
+    depends_on:
+      - FA30-API-08
+    branch: codex/fa30-api-09-riasec-major-graph-authority
+    title: "FA30-API-09: Add RIASEC major graph backend authority contract"
+    train_scope: fa30_riasec_major_graph_backend_authority
+    status: user_authorized
+    scope:
+      - Add a backend-only RIASEC major-cluster graph authority contract and source package.
+      - Add a read-only validator and audit command that reject deterministic major, Gaokao admission, salary, success, and advisor-replacement claims.
+      - Add focused tests proving required cluster fields, claim boundaries, noindex review gates, and zero CMS writes.
+      - Reconcile FA30-API-08 merged dependency metadata needed to continue this train item.
+      - Add the authorized FA30-API-10 manifest/state entry without implementing its source-ledger scope.
+    allowed_paths:
+      - backend/app/Console/Commands/RiasecMajorGraphAuthorityAuditCommand.php
+      - backend/app/Services/SeoIntel/RiasecMajorGraphAuthorityValidator.php
+      - backend/docs/seo/import-packages/riasec-major-graph-authority/**
+      - backend/docs/seo/generated/riasec-major-graph-authority.v1.json
+      - backend/docs/seo/riasec-major-graph-authority.md
+      - backend/tests/Feature/SeoIntel/RiasecMajorGraphAuthorityTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - generated/pr-train-sidecar-issues/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add public API routes, frontend renderers, CMS writes, production imports, publication, or runtime page authority.
+      - Change sitemap, llms, canonical, noindex, JSON-LD, scheduler, queue, deploy, or environment configuration.
+      - Submit URLs, request indexing, enqueue Search Channel records, or call external providers.
+      - Implement FA30-API-10 source-ledger behavior beyond authorized manifest/state entry.
+      - Modify fap-web or add frontend fallback authority.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=RiasecMajorGraphAuthorityTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_riasec_major_graph_authority_files --no-ansi
+      - cd backend && php artisan riasec:major-graph-authority-audit --json --strict --no-ansi
+      - cd backend && vendor/bin/pint --test app/Console/Commands/RiasecMajorGraphAuthorityAuditCommand.php app/Services/SeoIntel/RiasecMajorGraphAuthorityValidator.php tests/Feature/SeoIntel/RiasecMajorGraphAuthorityTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - python3 -m json.tool backend/docs/seo/import-packages/riasec-major-graph-authority/riasec_major_graph_authority.v1.json >/dev/null
+      - python3 -m json.tool backend/docs/seo/generated/riasec-major-graph-authority.v1.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: backend
+
+  - id: FA30-API-10
+    repo: fap-api
+    depends_on:
+      - FA30-API-09
+    branch: codex/fa30-api-10-competitor-alternatives-source-ledger
+    title: "FA30-API-10: Add competitor alternatives source-ledger contract"
+    train_scope: fa30_competitor_alternatives_source_ledger
+    status: user_authorized_pending_dependency
+    scope:
+      - Add a backend-only source-ledger contract for future competitor alternatives pages after FA30-API-09 is merged.
+      - Record operator-reviewed source notes, first-party FermatMind facts, claim/legal review state, allowed and forbidden comparison claims, and indexability gate.
+      - Keep the ledger internal and non-indexable; do not create public URL authority.
+    allowed_paths:
+      - backend/app/Console/Commands/CompetitorAlternativesSourceLedgerAuditCommand.php
+      - backend/app/Services/SeoIntel/CompetitorAlternativesSourceLedgerValidator.php
+      - backend/docs/seo/import-packages/competitor-alternatives-source-ledger/**
+      - backend/docs/seo/generated/competitor-alternatives-source-ledger.v1.json
+      - backend/docs/seo/competitor-alternatives-source-ledger.md
+      - backend/tests/Feature/SeoIntel/CompetitorAlternativesSourceLedgerTest.php
+      - generated/pr-train-sidecar-issues/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Scrape competitor sites, copy competitor descriptions, ratings, reviews, prices, rankings, testimonials, or recommendations.
+      - Add public pages, frontend renderers, runtime routes, SEO runtime changes, sitemap, llms, canonical, noindex, JSON-LD, deploy, or search submission.
+      - Make superiority, ranking, price, review, or endorsement claims without operator/legal review state.
+      - Write CMS rows, production DB rows, queues, or external provider records.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=CompetitorAlternativesSourceLedgerTest --no-ansi
+      - cd backend && php artisan competitor-alternatives:source-ledger-audit --json --strict --no-ansi
+      - cd backend && vendor/bin/pint --test app/Console/Commands/CompetitorAlternativesSourceLedgerAuditCommand.php app/Services/SeoIntel/CompetitorAlternativesSourceLedgerValidator.php tests/Feature/SeoIntel/CompetitorAlternativesSourceLedgerTest.php
+      - python3 -m json.tool backend/docs/seo/import-packages/competitor-alternatives-source-ledger/competitor_alternatives_source_ledger.v1.json >/dev/null
+      - python3 -m json.tool backend/docs/seo/generated/competitor-alternatives-source-ledger.v1.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    search_channel_action: false
+    url_submission: false
+    deploy_allowed: false
+    fap_web_commit_allowed: false
+    frontend_fallback_authority: false
+    content_authority: backend
+
   - id: BIG5-RESULT-SOURCE-LEDGER-01
     repo: fap-api
     depends_on:
