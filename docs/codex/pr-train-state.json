@@ -43496,7 +43496,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-dash-collector-01-smoke-reconcile",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged_cleanup_complete",
     "train_scope": "seo_intel_collector_dry_run_smoke_evidence",
     "title": "docs(seo): record collector dry-run smoke evidence",
     "checks": {
@@ -59067,7 +59067,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-free-full-report-runtime-qa-readiness",
     "base": "main",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "train_scope": "big5_result_page_agent_readiness_to_pilot",
     "title": "BIG5-FREE-FULL-REPORT-RUNTIME-QA-READINESS-01: Add Big Five free full-report runtime QA readiness",
     "depends_on": [
@@ -59826,16 +59826,16 @@
         "evidence": "Changed files are limited to FA30-API-09 allowed paths: RIASEC major graph source package, generated artifact, docs note, read-only audit command, validator service, focused PHPUnit test, Big Five runtime-freeze classifier allowlist test, and docs/codex metadata. FA30-API-10 is only registered as a pending-dependency manifest/state entry; no source-ledger implementation was added. No public API route, frontend renderer, CMS write, production DB write, publish, search submission, sitemap, llms, canonical, JSON-LD, queue, scheduler, deploy, or fap-web change."
       },
       "github": {
-        "status": "pending",
-        "evidence": null
+        "status": "pass",
+        "evidence": "PR #2350 GitHub checks passed on branch head 5bb65f6dc52da45a1439c5185d9173a596265865: hygiene, Semgrep blocking secrets, supply-chain, semgrep SARIF non-blocking upload, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, and Semgrep OSS. mergeStateStatus was CLEAN before squash merge."
       }
     },
     "failure_reason": null,
-    "commit_sha": "2ec4dd599354ca2e21e64e9ff0ef6179ac481850",
+    "commit_sha": "42fb4cfa2ddc29c6e36e37b5518ec4d6ebf26087",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2350",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-23T01:36:51Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-23T01:10:05Z",
@@ -59861,6 +59861,11 @@
         "at": "2026-06-23T01:32:00Z",
         "status": "ready_to_merge",
         "note": "All PR #2350 GitHub checks passed on head 86510c746b0cc3af56e63fc4cc09733309f81ced and mergeStateStatus was CLEAN. Recording ready_to_merge before squash merge per PR-train ledger policy."
+      },
+      {
+        "at": "2026-06-23T01:38:00Z",
+        "status": "merged_cleanup_complete",
+        "note": "PR #2350 is merged, origin/main contains merge commit 42fb4cfa2ddc29c6e36e37b5518ec4d6ebf26087, local main is synced to origin/main, the local task branch was deleted, and the remote task branch is absent."
       }
     ]
   },
@@ -59868,7 +59873,7 @@
     "repo": "fap-api",
     "branch": "codex/fa30-api-10-competitor-alternatives-source-ledger",
     "base": "main",
-    "status": "blocked_dependency",
+    "status": "pr_open",
     "train_scope": "fa30_competitor_alternatives_source_ledger",
     "title": "FA30-API-10: Add competitor alternatives source-ledger contract",
     "depends_on": [
@@ -59880,35 +59885,36 @@
         "evidence": "User explicitly provided FA30-API-10 id, title, scope, and authorized manifest/state updates in the FermatMind FA30 Evidence And Backend Authority Sequence plan."
       },
       "dependency": {
-        "status": "blocked",
-        "evidence": "FA30-API-10 must wait until FA30-API-09 is merged."
+        "status": "pass",
+        "evidence": "FA30-API-09 merged as PR #2350 at 2026-06-23T01:36:51Z; origin/main contains merge commit 42fb4cfa2ddc29c6e36e37b5518ec4d6ebf26087."
       },
       "local": {
-        "status": "pending",
+        "status": "pass",
         "commands": [
           "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=CompetitorAlternativesSourceLedgerTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_competitor_alternatives_source_ledger_files --no-ansi",
           "cd backend && php artisan competitor-alternatives:source-ledger-audit --json --strict --no-ansi",
-          "cd backend && vendor/bin/pint --test app/Console/Commands/CompetitorAlternativesSourceLedgerAuditCommand.php app/Services/SeoIntel/CompetitorAlternativesSourceLedgerValidator.php tests/Feature/SeoIntel/CompetitorAlternativesSourceLedgerTest.php",
+          "cd backend && vendor/bin/pint --test app/Console/Commands/CompetitorAlternativesSourceLedgerAuditCommand.php app/Services/SeoIntel/CompetitorAlternativesSourceLedgerValidator.php tests/Feature/SeoIntel/CompetitorAlternativesSourceLedgerTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
           "python3 -m json.tool backend/docs/seo/import-packages/competitor-alternatives-source-ledger/competitor_alternatives_source_ledger.v1.json >/dev/null",
           "python3 -m json.tool backend/docs/seo/generated/competitor-alternatives-source-ledger.v1.json >/dev/null",
           "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
           "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
           "git diff --check"
         ],
-        "evidence": null
+        "evidence": "PASS: CompetitorAlternativesSourceLedgerTest (4 tests, 125 assertions); PASS: BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_competitor_alternatives_source_ledger_files (1 assertion); PASS: read-only audit command emitted ok=true with 3 ledger entries, 0 indexable entries, and 0 issues; PASS: scoped Pint; PASS: source/generated/state JSON parse; PASS: YAML parse; PASS: git diff --check."
       },
       "scope_validation": {
-        "status": "pending",
-        "evidence": null
+        "status": "pass",
+        "evidence": "Changed files are limited to FA30-API-10 allowed paths: competitor alternatives source-ledger source package, generated artifact, docs note, read-only audit command, validator service, focused PHPUnit test, Big Five runtime-freeze classifier allowlist test, and docs/codex metadata. No scraping, competitor copy, public page, frontend route, SEO runtime, sitemap, llms, canonical, JSON-LD, CMS write, production DB write, queue, scheduler, external write, deploy, or search submission."
       },
       "github": {
-        "status": "pending",
-        "evidence": null
+        "status": "pass",
+        "evidence": "PR #2353 GitHub checks passed on branch head f5b95c45a64f8d10c8ffb4ca03c175bf06e98835: hygiene, Semgrep blocking secrets, supply-chain, semgrep SARIF non-blocking upload, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, and Semgrep OSS. mergeStateStatus was CLEAN."
       }
     },
-    "failure_reason": "Dependency FA30-API-09 is not merged yet.",
-    "commit_sha": null,
-    "pr_url": null,
+    "failure_reason": null,
+    "commit_sha": "4de20a66e52b6a5ce1c962210c204fc9b8b334bc",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2353",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -59917,6 +59923,26 @@
         "at": "2026-06-23T01:10:05Z",
         "status": "blocked_dependency",
         "note": "Manifest/state entry authorized for the future competitor alternatives source-ledger PR, but implementation must wait until FA30-API-09 is merged. No scraping, competitor copy, frontend route, SEO runtime, sitemap, llms, CMS write, DB write, deploy, or search submission is allowed."
+      },
+      {
+        "at": "2026-06-23T01:38:00Z",
+        "status": "in_progress",
+        "note": "Started from clean origin/main after FA30-API-09 merge cleanup. Scope is limited to backend-only competitor alternatives source-ledger contract, source package, read-only validator/audit command, focused tests, Big Five runtime-freeze classifier allowlist test, and docs/codex metadata. No scraping, competitor copy, public page, frontend route, SEO runtime, sitemap, llms, CMS write, production DB write, deploy, external write, or search submission is allowed."
+      },
+      {
+        "at": "2026-06-23T01:46:00Z",
+        "status": "local_validated",
+        "note": "Focused PHPUnit, Big Five runtime-freeze classifier allowlist test, read-only audit command, scoped Pint, JSON/YAML parsing, diff check, and explicit path allowlist scope validation passed."
+      },
+      {
+        "at": "2026-06-23T01:49:00Z",
+        "status": "pr_open",
+        "note": "Opened PR #2353 after local validation and scope validation passed."
+      },
+      {
+        "at": "2026-06-23T01:51:00Z",
+        "status": "ready_to_merge",
+        "note": "All PR #2353 GitHub checks passed on head f5b95c45a64f8d10c8ffb4ca03c175bf06e98835 and mergeStateStatus was CLEAN. Recording ready_to_merge before squash merge per PR-train ledger policy."
       }
     ]
   }

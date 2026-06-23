@@ -2974,6 +2974,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_competitor_alternatives_source_ledger_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/CompetitorAlternativesSourceLedgerAuditCommand.php',
+            'backend/app/Services/SeoIntel/CompetitorAlternativesSourceLedgerValidator.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_riasec_result_page_ops_runner_orchestrator(): void
     {
         $changed = [
@@ -5209,6 +5219,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isCompetitorAlternativesSourceLedgerFile($file)) {
+                continue;
+            }
+
             if ($this->isEnneagramForcedChoiceQuestionPackTranslationFile($file)) {
                 continue;
             }
@@ -6691,6 +6705,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/RiasecMajorGraphAuthorityAuditCommand.php',
             'backend/app/Services/SeoIntel/RiasecMajorGraphAuthorityValidator.php',
+        ], true);
+    }
+
+    private function isCompetitorAlternativesSourceLedgerFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/CompetitorAlternativesSourceLedgerAuditCommand.php',
+            'backend/app/Services/SeoIntel/CompetitorAlternativesSourceLedgerValidator.php',
         ], true);
     }
 
