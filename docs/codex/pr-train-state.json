@@ -59791,7 +59791,7 @@
     "repo": "fap-api",
     "branch": "codex/fa30-api-09-riasec-major-graph-authority",
     "base": "main",
-    "status": "local_validated",
+    "status": "pr_open",
     "train_scope": "fa30_riasec_major_graph_backend_authority",
     "title": "FA30-API-09: Add RIASEC major graph backend authority contract",
     "depends_on": [
@@ -59830,8 +59830,8 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "2ec4dd599354ca2e21e64e9ff0ef6179ac481850",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2350",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -59845,6 +59845,11 @@
         "at": "2026-06-23T01:18:00Z",
         "status": "local_validated",
         "note": "Focused PHPUnit, read-only audit command, scoped Pint, JSON/YAML parsing, diff check, and explicit path allowlist scope validation passed."
+      },
+      {
+        "at": "2026-06-23T01:22:00Z",
+        "status": "pr_open",
+        "note": "Opened PR #2350 after local validation and scope validation passed."
       }
     ]
   },
