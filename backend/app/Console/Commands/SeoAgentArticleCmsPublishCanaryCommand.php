@@ -30,6 +30,13 @@ final class SeoAgentArticleCmsPublishCanaryCommand extends Command
 
     private const TASK = 'SEO-AGENT-ARTICLE-CMS-PUBLISH-CANARY-01';
 
+    private const SEO_META_LIMITS = [
+        'seo_title' => 60,
+        'seo_description' => 160,
+        'og_title' => 90,
+        'og_description' => 200,
+    ];
+
     private const FORBIDDEN_STRINGS = [
         'raw_url',
         'raw_query',
@@ -118,6 +125,7 @@ final class SeoAgentArticleCmsPublishCanaryCommand extends Command
                 'package_sha256' => $packageSha,
                 'write_evidence_sha256' => $writeSha,
                 'required_confirmation_phrase' => $requiredPhrase,
+                'field_length_preflight' => (array) ($plan['field_length_preflight'] ?? []),
             ]);
             $summary['artifact'] = $this->writeArtifact($artifactDir, $summary);
 
@@ -348,6 +356,15 @@ final class SeoAgentArticleCmsPublishCanaryCommand extends Command
             if ((string) data_get($draftRevision->payload_json, 'seo_agent.subject_ref') !== $target) {
                 $issues[] = 'draft_revision_subject_ref_mismatch';
             }
+            $fieldLengthPreflight = $this->fieldLengthPreflight($draftRevision);
+            if (($fieldLengthPreflight['status'] ?? null) !== 'pass') {
+                $issues[] = 'seo_meta_field_length_exceeded';
+            }
+        } else {
+            $fieldLengthPreflight = [
+                'status' => 'not_checked',
+                'violations' => [],
+            ];
         }
         if ($article instanceof Article) {
             if ((string) $article->status !== 'published' || ! (bool) $article->is_public) {
@@ -383,6 +400,7 @@ final class SeoAgentArticleCmsPublishCanaryCommand extends Command
             'proposal' => $proposal,
             'write_ref' => $writeRef,
             'gate_verdict' => $gateVerdict,
+            'field_length_preflight' => $fieldLengthPreflight,
             'article' => $article,
             'draft_revision' => $draftRevision,
         ];
@@ -556,6 +574,64 @@ final class SeoAgentArticleCmsPublishCanaryCommand extends Command
     }
 
     /**
+     * @return array{status:string,violations:list<array<string, mixed>>}
+     */
+    private function fieldLengthPreflight(ArticleRevision $draftRevision): array
+    {
+        $proposal = is_array($draftRevision->payload_json)
+            ? (array) data_get($draftRevision->payload_json, 'proposal', [])
+            : [];
+        $checks = [
+            [
+                'source_field' => 'proposal.proposed_seo_title',
+                'target_column' => 'article_seo_meta.seo_title',
+                'value' => $proposal['proposed_seo_title'] ?? null,
+                'max_length' => self::SEO_META_LIMITS['seo_title'],
+            ],
+            [
+                'source_field' => 'proposal.proposed_seo_title',
+                'target_column' => 'article_seo_meta.og_title',
+                'value' => $proposal['proposed_seo_title'] ?? null,
+                'max_length' => self::SEO_META_LIMITS['og_title'],
+            ],
+            [
+                'source_field' => 'proposal.proposed_seo_description',
+                'target_column' => 'article_seo_meta.seo_description',
+                'value' => $proposal['proposed_seo_description'] ?? null,
+                'max_length' => self::SEO_META_LIMITS['seo_description'],
+            ],
+            [
+                'source_field' => 'proposal.proposed_seo_description',
+                'target_column' => 'article_seo_meta.og_description',
+                'value' => $proposal['proposed_seo_description'] ?? null,
+                'max_length' => self::SEO_META_LIMITS['og_description'],
+            ],
+        ];
+
+        $violations = [];
+        foreach ($checks as $check) {
+            $value = $check['value'];
+            if ($value === null || trim((string) $value) === '') {
+                continue;
+            }
+            $length = mb_strlen((string) $value);
+            if ($length > (int) $check['max_length']) {
+                $violations[] = [
+                    'source_field' => (string) $check['source_field'],
+                    'target_column' => (string) $check['target_column'],
+                    'length' => $length,
+                    'max_length' => (int) $check['max_length'],
+                ];
+            }
+        }
+
+        return [
+            'status' => $violations === [] ? 'pass' : 'fail',
+            'violations' => $violations,
+        ];
+    }
+
+    /**
      * @param  array<string, mixed>  $package
      * @return array<string, mixed>|null
      */
@@ -649,6 +725,7 @@ final class SeoAgentArticleCmsPublishCanaryCommand extends Command
             'publish_gate_evidence_sha256' => (string) ($plan['publish_gate_evidence_sha256'] ?? ''),
             'creates_article_translation_revision' => true,
             'promotes_existing_article_working_revision' => true,
+            'field_length_preflight' => (array) ($plan['field_length_preflight'] ?? []),
         ];
     }
 

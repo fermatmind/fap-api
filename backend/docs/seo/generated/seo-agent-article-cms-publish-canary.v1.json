@@ -33,8 +33,16 @@
     "runtime_publish_table": "article_translation_revisions",
     "behavior": "creates one approved article_translation_revision from the SEO Agent article draft, locks it as the article working revision, then promotes it through ArticlePublishService",
     "requires_publish_gate_status": "publish_ready",
+    "preflight_blocks_runtime_seo_meta_length_overflow": true,
     "requires_write_evidence_sha256_confirmation": true,
     "requires_exact_human_confirmation": true
+  },
+  "runtime_field_length_preflight": {
+    "article_seo_meta.seo_title": 60,
+    "article_seo_meta.seo_description": 160,
+    "article_seo_meta.og_title": 90,
+    "article_seo_meta.og_description": 200,
+    "blocked_issue": "seo_meta_field_length_exceeded"
   },
   "post_publish_boundaries": {
     "url_truth_write": false,

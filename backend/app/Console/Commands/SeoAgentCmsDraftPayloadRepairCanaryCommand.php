@@ -29,6 +29,8 @@ final class SeoAgentCmsDraftPayloadRepairCanaryCommand extends Command
         'proposal.proposal_quality',
     ];
 
+    private const SEO_TITLE_MAX_LENGTH = 60;
+
     private const FORBIDDEN_STRINGS = [
         'raw_url',
         'raw_query',
@@ -48,6 +50,7 @@ final class SeoAgentCmsDraftPayloadRepairCanaryCommand extends Command
         {--write-evidence= : Path to the old seo-agent-controlled-cms-draft-write.v1 JSON artifact}
         {--target= : Exact article subject_ref, e.g. article:41:en}
         {--artifact-dir= : Directory for repair and compatible write evidence artifacts}
+        {--override-proposed-seo-title= : Optional controlled replacement for proposal.proposed_seo_title, max 60 chars}
         {--confirm-package-sha256= : Required package sha256 for execute mode}
         {--confirm-repair= : Exact confirmation phrase for execute mode}
         {--execute : Actually append one repaired ArticleRevision draft}
@@ -101,16 +104,33 @@ final class SeoAgentCmsDraftPayloadRepairCanaryCommand extends Command
 
         $packageSha = hash_file('sha256', $packagePath) ?: '';
         $confirmedSha = trim((string) $this->option('confirm-package-sha256'));
-        if ($confirmedSha !== '' && $confirmedSha !== $packageSha) {
-            return $this->finish($this->failureSummary('package_sha256_confirmation_mismatch', [
-                'package_sha256' => $packageSha,
-            ]));
-        }
 
+        $artifactDir = $this->artifactDir();
         $proposal = $this->proposalForTarget($package, $target);
         if ($proposal === null) {
             return $this->finish($this->failureSummary('target_not_found_in_package', [
                 'package_sha256' => $packageSha,
+            ]));
+        }
+        $overrideTitle = $this->proposedSeoTitleOverride();
+        if (is_array($overrideTitle)) {
+            return $this->finish($this->failureSummary((string) ($overrideTitle['issue'] ?? 'override_proposed_seo_title_invalid'), [
+                'package_sha256' => $packageSha,
+            ]));
+        }
+        $effectivePackage = $package;
+        $effectiveProposal = $proposal;
+        $effectivePackageSha = $packageSha;
+        $effectivePackageArtifact = null;
+        if (is_string($overrideTitle)) {
+            $effectiveProposal['proposed_seo_title'] = $overrideTitle;
+            $effectivePackage = $this->packageWithProposal($package, $target, $effectiveProposal);
+            $effectivePackageArtifact = $this->writeArtifact($artifactDir, 'seo-agent-cms-draft-package-repaired-', $effectivePackage);
+            $effectivePackageSha = (string) ($effectivePackageArtifact['sha256'] ?? '');
+        }
+        if ($confirmedSha !== '' && $confirmedSha !== $effectivePackageSha) {
+            return $this->finish($this->failureSummary('package_sha256_confirmation_mismatch', [
+                'package_sha256' => $effectivePackageSha,
             ]));
         }
 
@@ -142,55 +162,59 @@ final class SeoAgentCmsDraftPayloadRepairCanaryCommand extends Command
             ]));
         }
 
-        $targetFields = $this->targetFields($proposal);
+        $targetFields = $this->targetFields($effectiveProposal);
         if (! $this->revisionCoreMatches($oldRevision, $packageSha, $target, $targetFields)) {
             return $this->finish($this->failureSummary('old_revision_identity_mismatch', [
                 'target' => $target,
             ]));
         }
 
-        $comparisons = $this->comparisons($proposal, is_array($oldRevision->payload_json) ? $oldRevision->payload_json : []);
+        $comparisons = $this->comparisons($effectiveProposal, is_array($oldRevision->payload_json) ? $oldRevision->payload_json : []);
         $mismatches = array_values(array_map(
             static fn (array $row): string => (string) ($row['field'] ?? ''),
             array_filter($comparisons, static fn (array $row): bool => ($row['matched'] ?? false) !== true)
         ));
         sort($mismatches);
         $allowed = self::ALLOWED_MISMATCHES;
+        if (is_string($overrideTitle)) {
+            $allowed[] = 'proposal.proposed_seo_title';
+        }
         sort($allowed);
 
         if ($mismatches === []) {
             return $this->finish($this->failureSummary('old_revision_already_clean', [
                 'target' => $target,
-                'package_sha256' => $packageSha,
+                'package_sha256' => $effectivePackageSha,
             ]));
         }
-        if ($mismatches !== $allowed) {
+        if (array_values(array_diff($mismatches, $allowed)) !== []) {
             return $this->finish($this->failureSummary('mismatch_set_not_repairable', [
                 'target' => $target,
-                'package_sha256' => $packageSha,
+                'package_sha256' => $effectivePackageSha,
                 'mismatches' => $mismatches,
                 'allowed_mismatches' => $allowed,
             ]));
         }
-        if ($this->matchingCleanRepairExists($articleId, $packageSha, $target, $proposal, (int) $oldRevision->id)) {
+        if ($this->matchingCleanRepairExists($articleId, $effectivePackageSha, $target, $effectiveProposal, (int) $oldRevision->id)) {
             return $this->finish($this->failureSummary('repaired_revision_already_exists', [
                 'target' => $target,
-                'package_sha256' => $packageSha,
+                'package_sha256' => $effectivePackageSha,
             ]));
         }
 
         $execute = (bool) $this->option('execute');
-        $confirmationPhrase = $this->requiredConfirmationPhrase($target, $packageSha);
+        $confirmationPhrase = $this->requiredConfirmationPhrase($target, $effectivePackageSha);
         if (! $execute) {
-            $evidence = $this->repairEvidence($packagePath, $writeEvidencePath, $packageSha, $target, $article, $oldRevision, null, $mismatches, [
+            $evidence = $this->repairEvidence($packagePath, $writeEvidencePath, $packageSha, $effectivePackageSha, $effectivePackageArtifact, $target, $article, $oldRevision, null, $mismatches, [
                 'ok' => true,
                 'status' => 'planned',
                 'dry_run' => true,
                 'execute' => false,
                 'would_append_revision' => true,
                 'required_confirmation_phrase' => $confirmationPhrase,
+                'field_overrides' => $this->fieldOverridesEvidence($overrideTitle),
             ]);
-            $artifact = $this->writeArtifact($this->artifactDir(), 'seo-agent-cms-draft-payload-repair-canary-', $evidence);
+            $artifact = $this->writeArtifact($artifactDir, 'seo-agent-cms-draft-payload-repair-canary-', $evidence);
 
             return $this->finish([
                 ...$evidence,
@@ -198,9 +222,9 @@ final class SeoAgentCmsDraftPayloadRepairCanaryCommand extends Command
             ]);
         }
 
-        if ($confirmedSha !== $packageSha) {
+        if ($confirmedSha !== $effectivePackageSha) {
             return $this->finish($this->failureSummary('package_sha256_confirmation_mismatch', [
-                'package_sha256' => $packageSha,
+                'package_sha256' => $effectivePackageSha,
                 'required_confirmation_phrase' => $confirmationPhrase,
             ]));
         }
@@ -212,18 +236,17 @@ final class SeoAgentCmsDraftPayloadRepairCanaryCommand extends Command
         }
 
         try {
-            $newRevision = DB::transaction(fn (): ArticleRevision => $this->appendRepairRevision($article, $oldRevision, $proposal, $packageSha, $targetFields));
+            $newRevision = DB::transaction(fn (): ArticleRevision => $this->appendRepairRevision($article, $oldRevision, $effectiveProposal, $effectivePackageSha, $targetFields));
         } catch (RuntimeException $exception) {
             return $this->finish($this->failureSummary($exception->getMessage(), [
                 'target' => $target,
-                'package_sha256' => $packageSha,
+                'package_sha256' => $effectivePackageSha,
             ]));
         }
 
-        $artifactDir = $this->artifactDir();
-        $compatibleWriteEvidence = $this->compatibleWriteEvidence($packageSha, $target, (int) $newRevision->id);
+        $compatibleWriteEvidence = $this->compatibleWriteEvidence($effectivePackageSha, $target, (int) $newRevision->id);
         $compatibleArtifact = $this->writeArtifact($artifactDir, 'seo-agent-controlled-cms-draft-write-repair-', $compatibleWriteEvidence);
-        $evidence = $this->repairEvidence($packagePath, $writeEvidencePath, $packageSha, $target, $article, $oldRevision, $newRevision, $mismatches, [
+        $evidence = $this->repairEvidence($packagePath, $writeEvidencePath, $packageSha, $effectivePackageSha, $effectivePackageArtifact, $target, $article, $oldRevision, $newRevision, $mismatches, [
             'ok' => true,
             'status' => 'success',
             'dry_run' => false,
@@ -231,6 +254,7 @@ final class SeoAgentCmsDraftPayloadRepairCanaryCommand extends Command
             'would_append_revision' => false,
             'rows_created' => 1,
             'compatible_write_evidence' => $compatibleArtifact,
+            'field_overrides' => $this->fieldOverridesEvidence($overrideTitle),
         ]);
         $artifact = $this->writeArtifact($artifactDir, 'seo-agent-cms-draft-payload-repair-canary-', $evidence);
 
@@ -250,6 +274,30 @@ final class SeoAgentCmsDraftPayloadRepairCanaryCommand extends Command
         $path = str_starts_with($path, '/') ? $path : base_path($path);
 
         return is_file($path) && is_readable($path) ? $path : null;
+    }
+
+    /**
+     * @return string|array{issue:string}|null
+     */
+    private function proposedSeoTitleOverride(): string|array|null
+    {
+        $raw = $this->option('override-proposed-seo-title');
+        if ($raw === null) {
+            return null;
+        }
+
+        $title = trim((string) $raw);
+        if ($title === '' || str_contains($title, "\0")) {
+            return ['issue' => 'override_proposed_seo_title_invalid'];
+        }
+        if ($this->forbiddenStringsPresent($title) !== []) {
+            return ['issue' => 'forbidden_input_field_present'];
+        }
+        if (mb_strlen($title) > self::SEO_TITLE_MAX_LENGTH) {
+            return ['issue' => 'override_proposed_seo_title_too_long'];
+        }
+
+        return $title;
     }
 
     /**
@@ -295,6 +343,30 @@ final class SeoAgentCmsDraftPayloadRepairCanaryCommand extends Command
         }
 
         return null;
+    }
+
+    /**
+     * @param  array<string, mixed>  $package
+     * @param  array<string, mixed>  $proposal
+     * @return array<string, mixed>
+     */
+    private function packageWithProposal(array $package, string $target, array $proposal): array
+    {
+        foreach (['proposal_items', 'draft_briefs'] as $key) {
+            if (! is_array($package[$key] ?? null)) {
+                continue;
+            }
+            foreach ($package[$key] as $index => $item) {
+                if (is_array($item) && (string) ($item['subject_ref'] ?? '') === $target) {
+                    $package[$key][$index] = [
+                        ...$item,
+                        ...$proposal,
+                    ];
+                }
+            }
+        }
+
+        return $package;
     }
 
     private function articleIdFromTarget(string $target): ?int
@@ -553,6 +625,8 @@ final class SeoAgentCmsDraftPayloadRepairCanaryCommand extends Command
         string $packagePath,
         string $writeEvidencePath,
         string $packageSha,
+        string $effectivePackageSha,
+        ?array $effectivePackageArtifact,
         string $target,
         Article $article,
         ArticleRevision $oldRevision,
@@ -564,12 +638,18 @@ final class SeoAgentCmsDraftPayloadRepairCanaryCommand extends Command
             'schema_version' => self::SCHEMA_VERSION,
             ...$state,
             'target' => $target,
-            'package' => $this->artifactRef($packagePath, self::PACKAGE_SCHEMA_VERSION),
+            'source_package' => $this->artifactRef($packagePath, self::PACKAGE_SCHEMA_VERSION),
+            'effective_package' => $effectivePackageArtifact ?? $this->artifactRef($packagePath, self::PACKAGE_SCHEMA_VERSION),
             'old_write_evidence' => $this->artifactRef($writeEvidencePath, self::WRITE_SCHEMA_VERSION),
-            'package_sha256' => $packageSha,
+            'source_package_sha256' => $packageSha,
+            'package_sha256' => $effectivePackageSha,
             'repair_policy' => [
                 'mode' => 'append_article_revision',
-                'allowed_mismatches' => self::ALLOWED_MISMATCHES,
+                'allowed_mismatches' => [
+                    ...self::ALLOWED_MISMATCHES,
+                    'proposal.proposed_seo_title',
+                ],
+                'seo_title_max_length' => self::SEO_TITLE_MAX_LENGTH,
                 'copy_body_from_previous_draft_revision' => true,
                 'mutate_old_revision' => false,
             ],
@@ -597,6 +677,24 @@ final class SeoAgentCmsDraftPayloadRepairCanaryCommand extends Command
             ],
             'mismatches_repaired' => $mismatches,
             'negative_guarantees' => $this->negativeGuarantees(),
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>|null
+     */
+    private function fieldOverridesEvidence(?string $overrideTitle): ?array
+    {
+        if ($overrideTitle === null) {
+            return null;
+        }
+
+        return [
+            'proposal.proposed_seo_title' => [
+                'length' => mb_strlen($overrideTitle),
+                'max_length' => self::SEO_TITLE_MAX_LENGTH,
+                'sha256' => hash('sha256', $overrideTitle),
+            ],
         ];
     }
 
