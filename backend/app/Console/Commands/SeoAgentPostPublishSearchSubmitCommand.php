@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Models\Article;
+use App\Models\ArticleTranslationRevision;
 use App\Models\ContentPage;
 use App\Services\SeoIntel\SearchChannelQueue\SearchChannelQueuePlanner;
 use App\Services\SeoIntel\SearchChannelQueue\SearchChannelQueueWriteService;
@@ -14,6 +16,8 @@ final class SeoAgentPostPublishSearchSubmitCommand extends Command
     private const SCHEMA_VERSION = 'seo-agent-post-publish-search-submit.v1';
 
     private const PUBLISH_SCHEMA_VERSION = 'seo-agent-cms-publish-canary.v1';
+
+    private const ARTICLE_PUBLISH_SCHEMA_VERSION = 'seo-agent-article-cms-publish-canary.v1';
 
     private const FORBIDDEN_STRINGS = [
         'raw_url',
@@ -32,7 +36,7 @@ final class SeoAgentPostPublishSearchSubmitCommand extends Command
     ];
 
     protected $signature = 'seo-agent:post-publish-search-submit
-        {--publish-evidence= : Path to seo-agent-cms-publish-canary.v1 JSON evidence}
+        {--publish-evidence= : Path to SEO Agent content_page or article publish evidence JSON}
         {--channels=indexnow,google_sitemap : Comma-separated Search Channel queue channels}
         {--limit=1 : First post-publish bridge requires exactly 1 published URL}
         {--base-url= : Public site base URL used to resolve safe paths; defaults to app.url}
@@ -77,12 +81,12 @@ final class SeoAgentPostPublishSearchSubmitCommand extends Command
             return $this->finish($this->failureSummary('published_ref_missing'));
         }
 
-        $targetIssue = $this->validatePublishedContentPage($affected);
-        if ($targetIssue !== null) {
-            return $this->finish($this->failureSummary($targetIssue));
+        $target = $this->publishedTarget($affected, (string) ($evidence['schema_version'] ?? ''));
+        if ($target['issue'] !== null) {
+            return $this->finish($this->failureSummary((string) $target['issue']));
         }
 
-        $safePath = (string) ($affected['safe_path'] ?? '');
+        $safePath = (string) $target['safe_path'];
         $canonicalUrl = $this->canonicalUrl($safePath);
         if ($canonicalUrl === null) {
             return $this->finish($this->failureSummary('canonical_url_resolution_failed'));
@@ -107,7 +111,7 @@ final class SeoAgentPostPublishSearchSubmitCommand extends Command
         $duplicates = 0;
 
         foreach ($channels as $channel) {
-            $plan = $planner->plan($channel, 'content_page', 20, $canonicalUrl);
+            $plan = $planner->plan($channel, (string) $target['page_entity_type'], 20, $canonicalUrl);
             $plans[$channel] = $this->safePlanSummary($plan);
             if ((int) ($plan['planned_queue_count'] ?? 0) > 0) {
                 $plannedItems = array_merge($plannedItems, (array) ($plan['planned_items'] ?? []));
@@ -130,6 +134,8 @@ final class SeoAgentPostPublishSearchSubmitCommand extends Command
                 'publish_evidence_sha256' => $evidenceSha,
                 'canonical_url_hash' => hash('sha256', $canonicalUrl),
                 'safe_path' => $safePath,
+                'target_model' => $target['target_model'],
+                'page_entity_type' => $target['page_entity_type'],
                 'channels' => $channels,
                 'planned_queue_count' => count($plannedItems),
                 'duplicate_count' => $duplicates,
@@ -163,6 +169,8 @@ final class SeoAgentPostPublishSearchSubmitCommand extends Command
             'publish_evidence_sha256' => $evidenceSha,
             'canonical_url_hash' => hash('sha256', $canonicalUrl),
             'safe_path' => $safePath,
+            'target_model' => $target['target_model'],
+            'page_entity_type' => $target['page_entity_type'],
             'channels' => $channels,
             'batch_ids' => $writeResult['batch_ids'],
             'written_items' => (int) $writeResult['written_items'],
@@ -194,7 +202,10 @@ final class SeoAgentPostPublishSearchSubmitCommand extends Command
      */
     private function validatePublishEvidence(array $evidence): ?string
     {
-        if (($evidence['schema_version'] ?? null) !== self::PUBLISH_SCHEMA_VERSION) {
+        if (! in_array(($evidence['schema_version'] ?? null), [
+            self::PUBLISH_SCHEMA_VERSION,
+            self::ARTICLE_PUBLISH_SCHEMA_VERSION,
+        ], true)) {
             return 'publish_evidence_schema_invalid';
         }
         if (($evidence['status'] ?? null) !== 'success' || (bool) ($evidence['execute'] ?? false) !== true) {
@@ -232,27 +243,83 @@ final class SeoAgentPostPublishSearchSubmitCommand extends Command
 
     /**
      * @param  array<string, mixed>  $affected
+     * @return array{issue: string|null, target_model?: string, page_entity_type?: string, safe_path?: string}
      */
-    private function validatePublishedContentPage(array $affected): ?string
+    private function publishedTarget(array $affected, string $schemaVersion): array
     {
-        if (($affected['target_model'] ?? null) !== 'content_page') {
-            return 'target_model_not_supported';
-        }
+        return match ((string) ($affected['target_model'] ?? '')) {
+            'content_page' => $schemaVersion === self::PUBLISH_SCHEMA_VERSION
+                ? $this->publishedContentPageTarget($affected)
+                : ['issue' => 'publish_evidence_schema_target_mismatch'],
+            'article' => $schemaVersion === self::ARTICLE_PUBLISH_SCHEMA_VERSION
+                ? $this->publishedArticleTarget($affected)
+                : ['issue' => 'publish_evidence_schema_target_mismatch'],
+            default => ['issue' => 'target_model_not_supported'],
+        };
+    }
 
+    /**
+     * @param  array<string, mixed>  $affected
+     * @return array{issue: string|null, target_model?: string, page_entity_type?: string, safe_path?: string}
+     */
+    private function publishedContentPageTarget(array $affected): array
+    {
         $pageId = $this->idFromSubjectRef((string) ($affected['subject_ref'] ?? ''), 'content_page');
         if ($pageId < 1) {
-            return 'subject_ref_invalid';
+            return ['issue' => 'subject_ref_invalid'];
         }
 
         $page = ContentPage::query()->withoutGlobalScopes()->find($pageId);
         if (! $page instanceof ContentPage) {
-            return 'content_page_not_found';
+            return ['issue' => 'content_page_not_found'];
         }
         if ((string) $page->status !== ContentPage::STATUS_PUBLISHED || ! (bool) $page->is_public || ! (bool) $page->is_indexable) {
-            return 'content_page_not_public_indexable';
+            return ['issue' => 'content_page_not_public_indexable'];
         }
 
-        return null;
+        return [
+            'issue' => null,
+            'target_model' => 'content_page',
+            'page_entity_type' => 'content_page',
+            'safe_path' => (string) ($affected['safe_path'] ?? ''),
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $affected
+     * @return array{issue: string|null, target_model?: string, page_entity_type?: string, safe_path?: string}
+     */
+    private function publishedArticleTarget(array $affected): array
+    {
+        $articleId = $this->idFromSubjectRef((string) ($affected['subject_ref'] ?? ''), 'article');
+        if ($articleId < 1) {
+            return ['issue' => 'subject_ref_invalid'];
+        }
+
+        $article = Article::query()
+            ->withoutGlobalScopes()
+            ->with(['publishedRevision' => static fn ($query) => $query->withoutGlobalScopes()])
+            ->find($articleId);
+        if (! $article instanceof Article) {
+            return ['issue' => 'article_not_found'];
+        }
+        if ((string) $article->status !== 'published' || ! (bool) $article->is_public || ! (bool) $article->is_indexable) {
+            return ['issue' => 'article_not_public_indexable'];
+        }
+
+        $publishedRevision = $article->publishedRevision;
+        if (! $publishedRevision instanceof ArticleTranslationRevision
+            || (int) $publishedRevision->article_id !== (int) $article->id
+            || (string) $publishedRevision->revision_status !== ArticleTranslationRevision::STATUS_PUBLISHED) {
+            return ['issue' => 'article_published_revision_invalid'];
+        }
+
+        return [
+            'issue' => null,
+            'target_model' => 'article',
+            'page_entity_type' => 'article',
+            'safe_path' => $this->canonicalPathForArticle($article),
+        ];
     }
 
     private function idFromSubjectRef(string $subjectRef, string $expectedType): int
@@ -279,6 +346,13 @@ final class SeoAgentPostPublishSearchSubmitCommand extends Command
         $url = rtrim($base, '/').$safePath;
 
         return filter_var($url, FILTER_VALIDATE_URL) ? $url : null;
+    }
+
+    private function canonicalPathForArticle(Article $article): string
+    {
+        $segment = str_starts_with(strtolower(trim((string) $article->locale)), 'zh') ? 'zh' : 'en';
+
+        return '/'.$segment.'/articles/'.rawurlencode((string) $article->slug);
     }
 
     /**
