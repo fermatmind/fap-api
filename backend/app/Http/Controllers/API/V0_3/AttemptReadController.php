@@ -427,6 +427,7 @@ class AttemptReadController extends Controller
     {
         $refreshRaw = strtolower(trim((string) $request->query('refresh', '0')));
         $forceRefresh = in_array($refreshRaw, ['1', 'true', 'yes', 'on'], true);
+        $requestedReportLocale = $this->normalizeReportLocale((string) $request->query('locale', ''));
 
         $orgId = $this->currentOrgContext()->orgId();
         $userId = $this->resolveUserId($request);
@@ -482,6 +483,7 @@ class AttemptReadController extends Controller
             $this->currentOrgContext()->role(),
             $this->shouldUsePublicArtifactFallback($request, $attempt),
             $forceRefresh,
+            $requestedReportLocale,
         );
 
         $scaleCode = strtoupper(trim((string) ($attempt->scale_code ?? '')));
@@ -1552,7 +1554,8 @@ class AttemptReadController extends Controller
         ?string $anonId,
         ?string $role,
         bool $forceSystemAccess,
-        bool $forceRefresh
+        bool $forceRefresh,
+        ?string $reportLocale = null
     ): array {
         $gate = $this->reportGatekeeper->resolve(
             $orgId,
@@ -1562,6 +1565,7 @@ class AttemptReadController extends Controller
             $role,
             $forceSystemAccess,
             $forceRefresh,
+            $reportLocale,
         );
 
         if ($gate['ok'] ?? false) {
@@ -1584,6 +1588,16 @@ class AttemptReadController extends Controller
         }
 
         throw new ApiProblemException($status, $errorCode !== '' ? $errorCode : 'REPORT_FAILED', $message);
+    }
+
+    private function normalizeReportLocale(string $locale): ?string
+    {
+        $locale = strtolower(trim($locale));
+        if ($locale === '') {
+            return null;
+        }
+
+        return str_starts_with($locale, 'zh') ? 'zh-CN' : 'en';
     }
 
     /**

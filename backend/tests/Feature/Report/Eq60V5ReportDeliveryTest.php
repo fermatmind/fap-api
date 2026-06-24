@@ -123,6 +123,58 @@ final class Eq60V5ReportDeliveryTest extends TestCase
         $this->assertSame('ready', (string) DB::table('report_snapshots')->where('attempt_id', $attemptId)->value('status'));
     }
 
+    public function test_eq60_report_query_locale_resolves_matching_v16_assets_without_overwriting_attempt_locale_snapshot(): void
+    {
+        config()->set('fap.features.report_snapshot_strict_v2', true);
+        $this->prepareEqContent();
+
+        $anonId = 'anon_eq_v16_locale_report_delivery';
+        $token = $this->issueFmToken($anonId);
+        $attemptId = $this->createEqAttemptWithResult($anonId, 'en');
+
+        $english = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson('/api/v0.3/attempts/'.$attemptId.'/report?locale=en');
+
+        $english->assertOk()
+            ->assertJsonPath('report.locale', 'en')
+            ->assertJsonPath('report.scores.global.label', 'Emotional & Relational Functioning Index');
+
+        $snapshot = DB::table('report_snapshots')->where('attempt_id', $attemptId)->first();
+        $this->assertNotNull($snapshot);
+        $this->assertSame('ready', (string) ($snapshot->status ?? ''));
+        $snapshotReport = json_decode((string) ($snapshot->report_full_json ?? ''), true);
+        $this->assertIsArray($snapshotReport);
+        $this->assertSame('en', (string) ($snapshotReport['locale'] ?? ''));
+
+        $chinese = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson('/api/v0.3/attempts/'.$attemptId.'/report?locale=zh-CN');
+
+        $chinese->assertOk()
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('generating', false)
+            ->assertJsonPath('report.locale', 'zh-CN')
+            ->assertJsonPath('report.scores.global.label', '情绪与关系综合指数');
+
+        $this->assertMatchesRegularExpression(
+            '/[\x{4e00}-\x{9fff}]/u',
+            (string) $chinese->json('report.assets.core_formulation.title')
+        );
+        $this->assertStringNotContainsString(
+            'Emotional & Relational Functioning Index',
+            json_encode($chinese->json('report.assets'), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?: ''
+        );
+
+        $snapshotAfter = DB::table('report_snapshots')->where('attempt_id', $attemptId)->first();
+        $this->assertNotNull($snapshotAfter);
+        $snapshotAfterReport = json_decode((string) ($snapshotAfter->report_full_json ?? ''), true);
+        $this->assertIsArray($snapshotAfterReport);
+        $this->assertSame('en', (string) ($snapshotAfterReport['locale'] ?? ''));
+    }
+
     public function test_strict_snapshot_behavior_for_mbti_is_unchanged(): void
     {
         config()->set('fap.features.report_snapshot_strict_v2', true);
@@ -200,8 +252,9 @@ final class Eq60V5ReportDeliveryTest extends TestCase
         return $token;
     }
 
-    private function createEqAttemptWithResult(string $anonId): string
+    private function createEqAttemptWithResult(string $anonId, string $locale = 'zh-CN'): string
     {
+        $locale = str_starts_with(strtolower(trim($locale)), 'zh') ? 'zh-CN' : 'en';
         $attemptId = (string) Str::uuid();
         $attempt = Attempt::create([
             'id' => $attemptId,
@@ -210,7 +263,7 @@ final class Eq60V5ReportDeliveryTest extends TestCase
             'scale_code' => 'EQ_60',
             'scale_version' => 'v0.3',
             'region' => 'CN_MAINLAND',
-            'locale' => 'zh-CN',
+            'locale' => $locale,
             'question_count' => 60,
             'client_platform' => 'test',
             'answers_summary_json' => ['stage' => 'seed'],
@@ -225,7 +278,7 @@ final class Eq60V5ReportDeliveryTest extends TestCase
         $score = $this->scoreEq60([
             'started_at' => $attempt->started_at,
             'submitted_at' => $attempt->submitted_at,
-            'locale' => 'zh-CN',
+            'locale' => $locale,
             'region' => 'CN_MAINLAND',
         ]);
 

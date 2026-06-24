@@ -28,7 +28,9 @@ final class Eq60ReportComposer
             $version = Eq60PackLoader::PACK_VERSION;
         }
 
-        $locale = $this->packLoader->normalizeLocale((string) ($attempt->locale ?? 'zh-CN'));
+        $locale = $this->packLoader->normalizeLocale(
+            (string) ($ctx['locale'] ?? ($attempt->locale ?? 'zh-CN'))
+        );
         $reportCompiled = $this->packLoader->readCompiledJson('report.compiled.json', $version);
         if (! is_array($reportCompiled)) {
             return [

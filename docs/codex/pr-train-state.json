@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-24T12:47:00Z",
+  "updated_at": "2026-06-24T21:12:00+08:00",
   "PR-EQ-ASSET-01": {
     "repo": "fap-api",
     "branch": "codex/pr-eq-asset-01-content-pack-v16",
@@ -60444,6 +60444,266 @@
         "at": "2026-06-24T12:47:00Z",
         "status": "ready_to_merge",
         "note": "PR #2392 checks are green and mergeStateStatus is CLEAN on head 79b7931eb59d29b9c778b0333bbcb9ccbcc45cd0. Ready for squash merge; no staging wait, production deploy, CMS write, SEO, sitemap, llms, queue, search, or indexing changes included."
+      }
+    ]
+  },
+  "PR-EQ-ASSET-04": {
+    "repo": "fap-api",
+    "branch": "codex/pr-eq-asset-04-report-locale-v16",
+    "base": "main",
+    "status": "pr_opened",
+    "train_scope": "eq_v16_content_asset_productization",
+    "title": "PR-EQ-ASSET-04 Fix EQ v1.6 report locale resolved assets",
+    "depends_on": [
+      "PR-EQ-ASSET-03"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized PR-EQ-ASSET-04, PR-EQ-ASSET-05, PR-EQ-AGENT-01, PR-EQ-AGENT-02, PR-EQ-AGENT-03, and PR-EQ-AGENT-04 manifest/state updates and sequential execution."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "Production deploy/readiness and acceptance audit confirmed PR-EQ-ASSET-01/02/03 are deployed; PR-EQ-ASSET-04 addresses the resulting EQ v1.6 locale P1."
+      },
+      "local_delivery_test": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportDeliveryTest",
+        "evidence": "4 passed, 82 assertions."
+      },
+      "local_contract_test": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest",
+        "evidence": "10 passed, 404 assertions."
+      },
+      "local_paywall_test": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ReportPaywallTest",
+        "evidence": "4 passed, 118 assertions."
+      },
+      "manifest_yaml": {
+        "status": "pass",
+        "command": "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+        "evidence": "yaml ok."
+      },
+      "state_json": {
+        "status": "pass",
+        "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+        "evidence": "JSON parse passed."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check",
+        "evidence": "No whitespace errors."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to PR-EQ-ASSET-04 allowed paths plus manifest/state entries explicitly authorized by the user."
+      },
+      "pr_opened": {
+        "status": "pass",
+        "evidence": "GitHub PR #2393 opened for codex/pr-eq-asset-04-report-locale-v16."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": "9a1e4d9829cb038ed0897b3d130ca3bc2310b307",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2393",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-24T20:45:00+08:00",
+        "from": "missing_from_manifest",
+        "to": "in_progress",
+        "notes": "Initialized from explicit EQ v1.6 baseline freeze and Agent-ready content OS authorization."
+      },
+      {
+        "at": "2026-06-24T21:05:00+08:00",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "notes": "Locale resolved-assets fix implemented and local PR validation passed."
+      },
+      {
+        "at": "2026-06-24T21:12:00+08:00",
+        "from": "local_checks_passed",
+        "to": "pr_opened",
+        "notes": "Opened https://github.com/fermatmind/fap-api/pull/2393 after local validation and scope validation passed."
+      }
+    ]
+  },
+  "PR-EQ-ASSET-05": {
+    "repo": "fap-api",
+    "branch": "codex/pr-eq-asset-05-freeze-v16-baseline",
+    "base": "main",
+    "status": "pending_dependency",
+    "train_scope": "eq_v16_content_asset_productization",
+    "title": "PR-EQ-ASSET-05 Freeze EQ v1.6 commercial content baseline",
+    "depends_on": [
+      "PR-EQ-ASSET-04"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized manifest/state updates and sequential execution."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Waiting for PR-EQ-ASSET-04 locale acceptance fix to merge."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-24T20:45:00+08:00",
+        "from": "missing_from_manifest",
+        "to": "pending_dependency",
+        "notes": "Initialized from explicit authorization."
+      }
+    ]
+  },
+  "PR-EQ-AGENT-01": {
+    "repo": "fap-api",
+    "branch": "codex/pr-eq-agent-01-knowledge-schema",
+    "base": "main",
+    "status": "pending_dependency",
+    "train_scope": "eq_agent_ready_content_os",
+    "title": "PR-EQ-AGENT-01 EQ Agent knowledge base schema and intent map",
+    "depends_on": [
+      "PR-EQ-ASSET-05"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized manifest/state updates and sequential execution."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Waiting for PR-EQ-ASSET-05 baseline freeze to merge."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-24T20:45:00+08:00",
+        "from": "missing_from_manifest",
+        "to": "pending_dependency",
+        "notes": "Initialized from explicit authorization."
+      }
+    ]
+  },
+  "PR-EQ-AGENT-02": {
+    "repo": "fap-api",
+    "branch": "codex/pr-eq-agent-02-context-payload-api",
+    "base": "main",
+    "status": "pending_dependency",
+    "train_scope": "eq_agent_ready_content_os",
+    "title": "PR-EQ-AGENT-02 Backend EQ Agent context payload and retrieval API",
+    "depends_on": [
+      "PR-EQ-AGENT-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized manifest/state updates and sequential execution."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Waiting for PR-EQ-AGENT-01 to merge."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-24T20:45:00+08:00",
+        "from": "missing_from_manifest",
+        "to": "pending_dependency",
+        "notes": "Initialized from explicit authorization."
+      }
+    ]
+  },
+  "PR-EQ-AGENT-03": {
+    "repo": "fap-web",
+    "branch": "codex/pr-eq-agent-03-frontend-entry-guard",
+    "base": "main",
+    "status": "pending_dependency",
+    "train_scope": "eq_agent_ready_content_os",
+    "title": "PR-EQ-AGENT-03 Frontend EQ Agent entry guard",
+    "depends_on": [
+      "PR-EQ-AGENT-02"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized manifest/state updates and sequential execution."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Waiting for PR-EQ-AGENT-02 to merge."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-24T20:45:00+08:00",
+        "from": "missing_from_manifest",
+        "to": "pending_dependency",
+        "notes": "Initialized from explicit authorization."
+      }
+    ]
+  },
+  "PR-EQ-AGENT-04": {
+    "repo": "fap-api",
+    "branch": "codex/pr-eq-agent-04-safety-evals",
+    "base": "main",
+    "status": "pending_dependency",
+    "train_scope": "eq_agent_ready_content_os",
+    "title": "PR-EQ-AGENT-04 EQ Agent safety and forbidden claims eval fixtures",
+    "depends_on": [
+      "PR-EQ-AGENT-03"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized manifest/state updates and sequential execution."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Waiting for PR-EQ-AGENT-03 to merge."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-24T20:45:00+08:00",
+        "from": "missing_from_manifest",
+        "to": "pending_dependency",
+        "notes": "Initialized from explicit authorization."
       }
     ]
   }
