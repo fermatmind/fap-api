@@ -16,6 +16,21 @@ final class CareerJobDetailController extends Controller
 {
     use RespondsWithNotFound;
 
+    private const INTERNAL_READER_PAYLOAD_KEYS = [
+        'source_id',
+        'source_ids',
+        'source_trace_id',
+        'evidence_id',
+        'row_hash',
+        'search_projection',
+        'audit_fields',
+        'compile_refs',
+        'crosswalk_ids',
+        'import_run_id',
+        'compile_run_id',
+        'index_state_id',
+    ];
+
     public function __construct(
         private readonly PublicCareerAuthorityResponseCache $responseCache,
         private readonly CareerCnProxyPublicOwnerSurfaceBuilder $cnProxySurfaceBuilder,
@@ -50,22 +65,24 @@ final class CareerJobDetailController extends Controller
      */
     private function projectReaderSafePayload(array $payload): array
     {
-        if (! is_array($payload['truth_layer']['source_refs'] ?? null)) {
-            return $payload;
+        return $this->stripInternalReaderPayloadKeys($payload);
+    }
+
+    /**
+     * @param  array<string, mixed>  $payload
+     * @return array<string, mixed>
+     */
+    private function stripInternalReaderPayloadKeys(array $payload): array
+    {
+        foreach (self::INTERNAL_READER_PAYLOAD_KEYS as $key) {
+            unset($payload[$key]);
         }
 
-        $payload['truth_layer']['source_refs'] = array_values(array_map(
-            static function (mixed $sourceRef): mixed {
-                if (! is_array($sourceRef)) {
-                    return $sourceRef;
-                }
-
-                unset($sourceRef['source_id'], $sourceRef['source_trace_id']);
-
-                return $sourceRef;
-            },
-            $payload['truth_layer']['source_refs'],
-        ));
+        foreach ($payload as $key => $value) {
+            if (is_array($value)) {
+                $payload[$key] = $this->stripInternalReaderPayloadKeys($value);
+            }
+        }
 
         return $payload;
     }
