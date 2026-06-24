@@ -73,6 +73,7 @@ final class Eq60ContentGateTest extends TestCase
             'commercial_conversion_assets',
             'quality_confidence',
             'psychometric_evidence_status',
+            'agent_knowledge_base_schema',
             'agent_dialogue_playbooks',
             'backend_integration_contract',
             'personalization_routes',
@@ -194,6 +195,37 @@ final class Eq60ContentGateTest extends TestCase
         $contentValidity = is_array($evidenceAssets['eq.evidence.content_validity'] ?? null) ? (array) $evidenceAssets['eq.evidence.content_validity'] : [];
         $this->assertNotSame('', (string) data_get($contentValidity, 'zh-CN.user_facing_status_label'));
         $this->assertNotSame('', (string) data_get($contentValidity, 'en.next_validation_step'));
+
+        $agentKnowledgeSchema = (array) data_get($assets, 'assets.agent_knowledge_base_schema', []);
+        $this->assertSame('eq60.report_assets.agent_knowledge_base_schema.v1', (string) data_get($agentKnowledgeSchema, 'schema'));
+        $this->assertSame('backend_content_pack_and_report_composer', (string) data_get($agentKnowledgeSchema, 'authority.report_authority'));
+        $this->assertContains('enable_sjt', (array) data_get($agentKnowledgeSchema, 'authority.agent_must_not', []));
+        $this->assertContains('risk:sjt_unavailable', (array) data_get($agentKnowledgeSchema, 'retrieval_tag_taxonomy.core_tags', []));
+        foreach (['SA', 'ER', 'EM', 'RM'] as $dimensionCode) {
+            $this->assertContains('dimension:'.$dimensionCode, (array) data_get($agentKnowledgeSchema, 'retrieval_tag_taxonomy.core_tags', []));
+        }
+        foreach ([
+            'understand_my_result',
+            'why_this_result',
+            'how_to_improve',
+            'career_environment_fit',
+            'relationship_or_conflict_help',
+            'quality_or_confidence_question',
+            'compare_with_other_tests',
+            'ask_for_sjt',
+            'share_or_save_report',
+            'clinical_or_hiring_request',
+        ] as $intentId) {
+            $this->assertSame($intentId, (string) data_get($agentKnowledgeSchema, 'user_intent_map.intents.'.$intentId.'.intent_id'));
+            $this->assertNotEmpty((array) data_get($agentKnowledgeSchema, 'user_intent_map.intents.'.$intentId.'.retrieval_tags'));
+            $this->assertNotSame('', (string) data_get($agentKnowledgeSchema, 'user_intent_map.intents.'.$intentId.'.zh-CN.safe_opening'));
+            $this->assertNotSame('', (string) data_get($agentKnowledgeSchema, 'user_intent_map.intents.'.$intentId.'.en.safe_opening'));
+        }
+        $this->assertSame('critical', (string) data_get($agentKnowledgeSchema, 'forbidden_claims.claims.true_emotional_ability.severity'));
+        $this->assertSame('critical', (string) data_get($agentKnowledgeSchema, 'forbidden_claims.claims.msceit_like.severity'));
+        $this->assertSame('high', (string) data_get($agentKnowledgeSchema, 'forbidden_claims.claims.paid_unlock_required.severity'));
+        $this->assertSame('not_implemented', (string) data_get($agentKnowledgeSchema, 'maintenance.agent_runtime_status'));
+        $this->assertSame('planned_unavailable', (string) data_get($agentKnowledgeSchema, 'maintenance.sjt_status'));
 
         $agentPlaybooks = (array) data_get($assets, 'assets.agent_dialogue_playbooks.assets', []);
         $understandResult = is_array($agentPlaybooks['eq.agent.playbook.understand_result'] ?? null) ? (array) $agentPlaybooks['eq.agent.playbook.understand_result'] : [];
