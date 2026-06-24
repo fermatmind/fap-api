@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-23T16:40:00Z",
+  "updated_at": "2026-06-24T12:40:00Z",
   "PR-EQ-ASSET-01": {
     "repo": "fap-api",
     "branch": "codex/pr-eq-asset-01-content-pack-v16",
@@ -60384,6 +60384,61 @@
         "at": "2026-06-23T16:40:00Z",
         "status": "ready_to_merge",
         "note": "PR #2371 checks green, mergeable, and scope validation green for head a91a0d645c5d5f0459b2760723b6740314f50967. Ready for squash merge; no staging wait, production deploy, CMS write, SEO, sitemap, or llms changes included."
+      }
+    ]
+  },
+  "BIG-FIVE-AGENT-APPROVAL-QUEUE-INTEGRATION-01": {
+    "repo": "fap-api",
+    "branch": "codex/big-five-agent-approval-queue-integration-01",
+    "base": "main",
+    "status": "local_validated",
+    "train_scope": "big_five_public_profile_agent_expansion",
+    "title": "BIG-FIVE-AGENT-APPROVAL-QUEUE-INTEGRATION-01: Add Big Five approval queue integration",
+    "depends_on": [],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly provided the Big Five public profile agent expansion train and authorized PR1-PR4 execution with PR3 scoped to backend approval queue integration."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "php -l backend/app/Services/Cms/PersonalityAgentApprovalQueueWriter.php",
+          "php -l backend/tests/Feature/Console/PersonalityAgentApprovalQueueCommandTest.php",
+          "cd backend && php artisan test --filter=PersonalityAgentApprovalQueueCommandTest --no-ansi",
+          "cd backend && vendor/bin/pint --test app/Services/Cms/PersonalityAgentApprovalQueueWriter.php tests/Feature/Console/PersonalityAgentApprovalQueueCommandTest.php",
+          "cd backend && bash scripts/ci_verify_mbti.sh",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "git diff --check"
+        ],
+        "evidence": "PASS: php syntax checks for writer and focused test; PersonalityAgentApprovalQueueCommandTest (11 tests, 161 assertions); scoped Pint --test (2 files); ci_verify_mbti.sh including BigFive, MBTI smoke, auth, openapi, order security, migration, dependency, and regression gates; docs/codex JSON/YAML parse; git diff --check."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to the PR3 allowed paths: PersonalityAgentApprovalQueueWriter.php, PersonalityAgentApprovalQueueCommandTest.php, docs/codex/pr-train.yaml, and docs/codex/pr-train-state.json. No CMS write, public API route, frontend runtime, publish, queue, search, indexing, sitemap, llms, staging deploy, or production deploy changes."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-24T00:00:00Z",
+        "status": "in_progress",
+        "note": "Started PR3 from latest fap-api origin/main in a clean temp worktree. Scope is backend-only approval queue integration for Big Five public profile package and QA artifacts; no CMS write, publish, queue, search, indexing, sitemap, llms, frontend runtime, staging deploy, or production deploy."
+      },
+      {
+        "at": "2026-06-24T12:40:00Z",
+        "status": "local_validated",
+        "note": "All PR3 local checks passed and scope validation passed. Validation covered focused approval queue PHPUnit, scoped Pint, ci_verify_mbti.sh, docs JSON/YAML parse, git diff --check, and changed-file scope validation."
       }
     ]
   }
