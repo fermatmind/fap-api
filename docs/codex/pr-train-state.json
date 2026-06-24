@@ -85,7 +85,7 @@
     "repo": "fap-api",
     "branch": "codex/pr-eq-asset-02-report-payload-fixtures-v16",
     "base": "main",
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "train_scope": "eq_v16_content_asset_productization",
     "title": "PR-EQ-ASSET-02 Backend EQ v1.6 report payload and canonical fixtures",
     "depends_on": [
@@ -113,11 +113,15 @@
           "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60SubmitQualityContractTest"
         ],
         "notes": "Focused PR-EQ-ASSET-02 report contract, fixture, paywall, golden case, and submit quality tests passed with existing PHPUnit warnings but zero failures."
+      },
+      "github_initial": {
+        "status": "pending",
+        "evidence": "PR #2385 opened; GitHub checks pending."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "66f1df191b01f112099045a00671ca94124b550d",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2385",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -133,6 +137,12 @@
         "from": "pending_dependency",
         "to": "local_checks_passed",
         "notes": "Resolved v1.6 assets in EQ report payload, refreshed canonical fixtures, and passed focused backend validations."
+      },
+      {
+        "at": "2026-06-24T00:00:00+08:00",
+        "from": "local_checks_passed",
+        "to": "pr_open",
+        "notes": "Opened https://github.com/fermatmind/fap-api/pull/2385."
       }
     ]
   },
