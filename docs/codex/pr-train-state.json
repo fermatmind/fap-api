@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-24T12:40:00Z",
+  "updated_at": "2026-06-24T12:47:00Z",
   "PR-EQ-ASSET-01": {
     "repo": "fap-api",
     "branch": "codex/pr-eq-asset-01-content-pack-v16",
@@ -60391,7 +60391,7 @@
     "repo": "fap-api",
     "branch": "codex/big-five-agent-approval-queue-integration-01",
     "base": "main",
-    "status": "local_validated",
+    "status": "ready_to_merge",
     "train_scope": "big_five_public_profile_agent_expansion",
     "title": "BIG-FIVE-AGENT-APPROVAL-QUEUE-INTEGRATION-01: Add Big Five approval queue integration",
     "depends_on": [],
@@ -60419,13 +60419,13 @@
         "evidence": "Changed files are limited to the PR3 allowed paths: PersonalityAgentApprovalQueueWriter.php, PersonalityAgentApprovalQueueCommandTest.php, docs/codex/pr-train.yaml, and docs/codex/pr-train-state.json. No CMS write, public API route, frontend runtime, publish, queue, search, indexing, sitemap, llms, staging deploy, or production deploy changes."
       },
       "github": {
-        "status": "pending",
-        "evidence": null
+        "status": "pass",
+        "evidence": "PR #2392 head 79b7931eb59d29b9c778b0333bbcb9ccbcc45cd0 is open, not draft, mergeStateStatus CLEAN, and all GitHub checks passed: hygiene, Semgrep blocking secrets, semgrep sarif non-blocking upload, Semgrep OSS, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, and verify-bigfive."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "79b7931eb59d29b9c778b0333bbcb9ccbcc45cd0",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2392",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -60439,6 +60439,11 @@
         "at": "2026-06-24T12:40:00Z",
         "status": "local_validated",
         "note": "All PR3 local checks passed and scope validation passed. Validation covered focused approval queue PHPUnit, scoped Pint, ci_verify_mbti.sh, docs JSON/YAML parse, git diff --check, and changed-file scope validation."
+      },
+      {
+        "at": "2026-06-24T12:47:00Z",
+        "status": "ready_to_merge",
+        "note": "PR #2392 checks are green and mergeStateStatus is CLEAN on head 79b7931eb59d29b9c778b0333bbcb9ccbcc45cd0. Ready for squash merge; no staging wait, production deploy, CMS write, SEO, sitemap, llms, queue, search, or indexing changes included."
       }
     ]
   }
