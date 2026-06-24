@@ -268,6 +268,142 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
         $this->assertSame(0, DB::table('personality_agent_approval_items')->count());
     }
 
+    public function test_big_five_dry_run_plans_thirty_four_public_content_asset_items_without_writes(): void
+    {
+        [$packagePath, $qaPath] = $this->writeArtifacts($this->validBigFivePackage(), $this->validBigFiveQa());
+
+        $exitCode = Artisan::call('personality:agent-approval-queue', [
+            '--package' => $packagePath,
+            '--qa' => $qaPath,
+            '--dry-run' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertSame('big_five', $payload['framework']);
+        $this->assertTrue($payload['dry_run']);
+        $this->assertFalse($payload['write']);
+        $this->assertFalse($payload['writes_committed']);
+        $this->assertFalse($payload['cms_write_attempted']);
+        $this->assertFalse($payload['publish_attempted']);
+        $this->assertFalse($payload['search_release_attempted']);
+        $this->assertSame(34, $payload['planned_item_count']);
+        $this->assertSame(0, $payload['blocked_item_count']);
+        $this->assertSame(0, $payload['created_item_count']);
+        $this->assertSame('PASS_READY_FOR_APPROVAL_QUEUE', $payload['qa_final_decision']);
+        $this->assertEquals(
+            ['personality_public_content_asset'],
+            array_values(array_unique(array_map(
+                static fn (array $item): string => (string) $item['page_type'],
+                $payload['items']
+            )))
+        );
+        $this->assertEquals(
+            ['en', 'zh-CN'],
+            collect($payload['items'])->pluck('locale')->unique()->sort()->values()->all()
+        );
+        $this->assertSame(0, DB::table('personality_agent_approval_batches')->count());
+        $this->assertSame(0, DB::table('personality_agent_approval_items')->count());
+    }
+
+    public function test_big_five_write_creates_pending_items_only_and_is_idempotent_for_same_hashes(): void
+    {
+        [$packagePath, $qaPath] = $this->writeArtifacts($this->validBigFivePackage(), $this->validBigFiveQa());
+        $options = $this->writeOptions($packagePath, $qaPath);
+
+        $firstExit = Artisan::call('personality:agent-approval-queue', $options);
+        $firstPayload = $this->jsonOutput();
+
+        $this->assertSame(0, $firstExit);
+        $this->assertTrue($firstPayload['ok']);
+        $this->assertSame('big_five', $firstPayload['framework']);
+        $this->assertTrue($firstPayload['writes_committed']);
+        $this->assertFalse($firstPayload['cms_write_attempted']);
+        $this->assertFalse($firstPayload['cms_mutation_attempted']);
+        $this->assertFalse($firstPayload['publish_attempted']);
+        $this->assertFalse($firstPayload['index_attempted']);
+        $this->assertFalse($firstPayload['sitemap_llms_release_attempted']);
+        $this->assertFalse($firstPayload['search_release_attempted']);
+        $this->assertFalse($firstPayload['enqueue_attempted']);
+        $this->assertFalse($firstPayload['external_calls_attempted']);
+        $this->assertSame(34, $firstPayload['created_item_count']);
+        $this->assertSame(1, DB::table('personality_agent_approval_batches')->where('framework', 'big_five')->count());
+        $this->assertSame(34, DB::table('personality_agent_approval_items')->where('framework', 'big_five')->count());
+        $this->assertSame(
+            ['pending'],
+            DB::table('personality_agent_approval_items')->distinct()->pluck('approval_state')->all()
+        );
+        $this->assertSame(0, DB::table('personality_agent_approval_items')->whereNotNull('approved_at')->count());
+        $this->assertSame(0, DB::table('personality_agent_approval_items')->whereNotNull('rejected_at')->count());
+        $this->assertSame(
+            ['personality_public_content_asset'],
+            DB::table('personality_agent_approval_items')->distinct()->pluck('page_type')->all()
+        );
+
+        $firstItem = DB::table('personality_agent_approval_items')
+            ->where('framework', 'big_five')
+            ->orderBy('id')
+            ->first();
+        $this->assertNotNull($firstItem);
+        $this->assertSame('big_five', (string) $firstItem->framework);
+        $this->assertSame('pending', (string) $firstItem->approval_state);
+        $this->assertNotSame('', (string) $firstItem->recommendation_sha256);
+        $this->assertStringStartsWith('https://fermatmind.com/', (string) $firstItem->target_url);
+        $this->assertSame('pass', (string) $firstItem->qa_decision);
+
+        $secondExit = Artisan::call('personality:agent-approval-queue', $options);
+        $secondPayload = $this->jsonOutput();
+        $this->assertSame(0, $secondExit);
+        $this->assertTrue($secondPayload['ok']);
+        $this->assertFalse($secondPayload['writes_committed']);
+        $this->assertSame(0, $secondPayload['created_item_count']);
+        $this->assertSame(34, $secondPayload['skipped_existing_item_count']);
+        $this->assertSame(1, DB::table('personality_agent_approval_batches')->where('framework', 'big_five')->count());
+        $this->assertSame(34, DB::table('personality_agent_approval_items')->where('framework', 'big_five')->count());
+    }
+
+    public function test_big_five_failed_qa_and_private_routes_do_not_enter_approval_queue(): void
+    {
+        $package = $this->validBigFivePackage();
+        $package['recommendations'][0]['target_url'] = 'https://fermatmind.com/en/results/private-big-five';
+        $qa = $this->validBigFiveQa();
+        foreach ($qa['evaluations'] as $index => $evaluation) {
+            if (($evaluation['target_url'] ?? null) === 'https://fermatmind.com/zh/personality/big-five') {
+                $qa['evaluations'][$index] = $this->qaEvaluationRow(
+                    'https://fermatmind.com/zh/personality/big-five',
+                    'failed',
+                    ['claim_safety_gate']
+                );
+                break;
+            }
+        }
+        [$packagePath, $qaPath] = $this->writeArtifacts($package, $qa);
+
+        $exitCode = Artisan::call('personality:agent-approval-queue', $this->writeOptions($packagePath, $qaPath));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertSame('big_five', $payload['framework']);
+        $this->assertSame(32, $payload['planned_item_count']);
+        $this->assertSame(2, $payload['blocked_item_count']);
+        $this->assertSame(32, DB::table('personality_agent_approval_items')->where('framework', 'big_five')->count());
+        $this->assertSame(
+            0,
+            DB::table('personality_agent_approval_items')
+                ->where('target_url', 'like', '%/results/%')
+                ->count()
+        );
+        $this->assertSame(
+            0,
+            DB::table('personality_agent_approval_items')
+                ->where('target_url', 'https://fermatmind.com/zh/personality/big-five')
+                ->count()
+        );
+    }
+
     /**
      * @return array<string,mixed>
      */
@@ -321,6 +457,69 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
                     'core_type'
                 ),
             ],
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function validBigFivePackage(): array
+    {
+        $paths = [
+            'big-five',
+            'big-five/agreeableness',
+            'big-five/conscientiousness',
+            'big-five/emotional-stability',
+            'big-five/extraversion',
+            'big-five/facets',
+            'big-five/high-agreeableness',
+            'big-five/high-conscientiousness',
+            'big-five/high-extraversion',
+            'big-five/high-neuroticism',
+            'big-five/high-openness',
+            'big-five/low-agreeableness',
+            'big-five/low-conscientiousness',
+            'big-five/low-extraversion',
+            'big-five/low-neuroticism',
+            'big-five/low-openness',
+            'big-five/openness',
+        ];
+        $recommendations = [];
+        foreach (['en' => 'en', 'zh-CN' => 'zh'] as $locale => $prefix) {
+            foreach ($paths as $path) {
+                $recommendations[] = $this->bigFiveRecommendation(
+                    'big-five-agent:/'.$prefix.'/personality/'.$path,
+                    'https://fermatmind.com/'.$prefix.'/personality/'.$path,
+                    $locale,
+                    $path === 'big-five' ? 'hub' : (str_contains($path, 'high-') || str_contains($path, 'low-') ? 'polarity' : ($path === 'big-five/facets' ? 'facet_hub' : 'domain'))
+                );
+            }
+        }
+
+        return [
+            'artifact' => 'BIG-FIVE-PUBLIC-PROFILE-AGENT-PILOT-01',
+            'version' => 'big_five.public_profile_agent_pilot.v1',
+            'status' => 'pass_ready_for_qa_gates',
+            'recommendations' => $recommendations,
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function validBigFiveQa(): array
+    {
+        return [
+            'artifact' => 'BIG-FIVE-PUBLIC-PROFILE-AGENT-QA-01',
+            'decision' => 'PASS_READY_FOR_APPROVAL_QUEUE',
+            'evaluations' => array_map(
+                fn (array $recommendation): array => $this->qaEvaluationRow(
+                    (string) $recommendation['target_url'],
+                    'pass',
+                    []
+                ),
+                $this->validBigFivePackage()['recommendations']
+            ),
         ];
     }
 
@@ -381,6 +580,29 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
     /**
      * @return array<string,mixed>
      */
+    private function bigFiveRecommendation(string $id, string $targetUrl, string $locale, string $entityType): array
+    {
+        return [
+            'recommendation_id' => $id,
+            'target_url' => $targetUrl,
+            'framework' => 'big_five',
+            'locale' => $locale,
+            'entity_type' => $entityType,
+            'recommendations' => [
+                'title' => ['recommended' => 'Big Five public profile title'],
+                'description' => ['recommended' => 'Big Five public profile description.'],
+                'h1' => ['recommended' => 'Big Five public profile H1'],
+                'quick_answer' => ['recommended' => 'Reflective Big Five quick answer.'],
+                'faq' => [],
+                'internal_links' => [],
+                'differentiation_notes' => [],
+            ],
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
     private function recommendation(string $id, string $targetUrl, string $locale): array
     {
         return [
@@ -415,6 +637,21 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
             'target_url' => $targetUrl,
             'decision' => $decision,
             'blockers' => $blockers,
+        ];
+    }
+
+    /**
+     * @param  list<string>  $failedGates
+     * @return array<string,mixed>
+     */
+    private function qaEvaluationRow(string $targetUrl, string $status, array $failedGates = []): array
+    {
+        return [
+            'target_url' => $targetUrl,
+            'qa_status' => $status,
+            'failed_gates' => $failedGates,
+            'eligible_for_approval_queue' => $status === 'pass' && $failedGates === [],
+            'eligible_for_cms_draft_path' => $status === 'pass' && $failedGates === [],
         ];
     }
 

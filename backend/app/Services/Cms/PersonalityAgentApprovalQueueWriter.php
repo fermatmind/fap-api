@@ -162,6 +162,7 @@ final class PersonalityAgentApprovalQueueWriter
     {
         $sources = [
             $qa['page_results'] ?? null,
+            $qa['evaluations'] ?? null,
             $qa['results'] ?? null,
             $qa['items'] ?? null,
             $qa['recommendations'] ?? null,
@@ -206,6 +207,7 @@ final class PersonalityAgentApprovalQueueWriter
             'target_url' => (string) ($recommendation['target_url'] ?? ''),
             'path' => (string) ($identity['path'] ?? ''),
             'locale' => (string) ($identity['locale'] ?? $recommendation['locale'] ?? ''),
+            'entity_type' => (string) ($recommendation['entity_type'] ?? $identity['entity_type'] ?? ''),
             'page_type' => (string) ($identity['page_type'] ?? $recommendation['page_type'] ?? ''),
             'recommendation_id' => (string) ($recommendation['recommendation_id'] ?? ''),
             'recommendation_sha256' => hash('sha256', $recommendationJson),
@@ -288,6 +290,16 @@ final class PersonalityAgentApprovalQueueWriter
             return [
                 'path' => $path,
                 'locale' => $this->localeFromPrefix((string) $matches['prefix']),
+                'entity_type' => 'enneagram_public_content_asset',
+                'page_type' => 'personality_public_content_asset',
+            ];
+        }
+
+        if ($this->isBigFivePublicContentAssetPath($path, $matches)) {
+            return [
+                'path' => $path,
+                'locale' => $this->localeFromPrefix((string) $matches['prefix']),
+                'entity_type' => 'big_five_public_content_asset',
                 'page_type' => 'personality_public_content_asset',
             ];
         }
@@ -317,6 +329,22 @@ final class PersonalityAgentApprovalQueueWriter
         }
 
         if (preg_match('#^/(?<prefix>en|zh)/personality/enneagram/type-[1-9]$#i', $path, $matches) === 1) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param  array<string,string>  $matches
+     */
+    private function isBigFivePublicContentAssetPath(string $path, ?array &$matches = null): bool
+    {
+        if (preg_match('#^/(?<prefix>en|zh)/personality/big-five$#i', $path, $matches) === 1) {
+            return true;
+        }
+
+        if (preg_match('#^/(?<prefix>en|zh)/personality/big-five/(?:facets|(?:high|low)-(?:agreeableness|conscientiousness|extraversion|neuroticism|openness)|agreeableness|conscientiousness|emotional-stability|extraversion|neuroticism|openness)$#i', $path, $matches) === 1) {
             return true;
         }
 
@@ -426,7 +454,7 @@ final class PersonalityAgentApprovalQueueWriter
             'summary_json' => $this->jsonString([
                 'source_version' => (string) ($package['version'] ?? ''),
                 'source_status' => (string) ($package['status'] ?? ''),
-                'qa_final_decision' => (string) ($qa['final_decision'] ?? ''),
+                'qa_final_decision' => (string) ($qa['final_decision'] ?? $qa['decision'] ?? ''),
                 'blocked_items' => array_map(
                     static fn (array $item): array => [
                         'target_url' => (string) ($item['target_url'] ?? ''),
@@ -484,7 +512,7 @@ final class PersonalityAgentApprovalQueueWriter
             'source_package_sha256' => $sourceSha256,
             'qa_artifact' => (string) ($qa['artifact'] ?? ''),
             'qa_sha256' => $qaSha256,
-            'qa_final_decision' => (string) ($qa['final_decision'] ?? ''),
+            'qa_final_decision' => (string) ($qa['final_decision'] ?? $qa['decision'] ?? ''),
             'package_path' => (string) ($metadata['package_path'] ?? ''),
             'qa_path' => (string) ($metadata['qa_path'] ?? ''),
             'dry_run' => ! $write,
