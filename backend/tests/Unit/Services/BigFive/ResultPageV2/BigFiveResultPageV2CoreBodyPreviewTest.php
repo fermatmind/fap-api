@@ -2834,6 +2834,28 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ));
     }
 
+    public function test_runtime_freeze_classifier_ignores_iq_owner_original30_asset_url_hotfix(): void
+    {
+        $changed = [
+            'backend/app/Http/Controllers/API/V0_3/IqOwnerOriginal30AssetController.php',
+            'backend/app/Services/Iq/IqOwnerOriginal30BankService.php',
+            'backend/routes/api.php',
+        ];
+        $routeChangedLines = [
+            '+use App\\Http\\Controllers\\API\\V0_3\\IqOwnerOriginal30AssetController;',
+            "+        Route::get('/iq-owner-original-30/assets/{path}', [IqOwnerOriginal30AssetController::class, 'show'])",
+            "+            ->where('path', '.*')",
+            "+            ->name('api.v0_3.iq_owner_original_30.assets.show');",
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            routeChangedLines: $routeChangedLines,
+        ));
+    }
+
     public function test_runtime_freeze_classifier_ignores_attempt_submission_reliability_hardening(): void
     {
         $changed = [
@@ -6633,6 +6655,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return in_array($file, [
             'backend/app/Http/Controllers/API/V0_3/AttemptQuestionDeliveryController.php',
+            'backend/app/Http/Controllers/API/V0_3/IqOwnerOriginal30AssetController.php',
             'backend/app/Http/Middleware/FmTokenAuth.php',
             'backend/app/Http/Middleware/ResolveOrgContext.php',
             'backend/app/Services/Attempts/AttemptStartService.php',
@@ -9396,7 +9419,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 return false;
             }
 
-            if (preg_match('/AttemptQuestionDeliveryController|\\/attempts\\/\\{attempt_id\\}\\/questions|FmTokenAuth|uuid:attempt_id|public_realm|api\\.v0_3\\.attempts\\.questions/u', $line) !== 1) {
+            if (preg_match('/AttemptQuestionDeliveryController|IqOwnerOriginal30AssetController|\\/attempts\\/\\{attempt_id\\}\\/questions|\\/iq-owner-original-30\\/assets\\/\\{path\\}|FmTokenAuth|uuid:attempt_id|public_realm|where\\(|api\\.v0_3\\.attempts\\.questions|api\\.v0_3\\.iq_owner_original_30\\.assets\\.show/u', $line) !== 1) {
                 return false;
             }
         }

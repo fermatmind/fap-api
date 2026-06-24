@@ -1062,6 +1062,28 @@
                 ]
             }
         },
+        "/api/v0.3/iq-owner-original-30/assets/{path}": {
+            "get": {
+                "operationId": "api.v0_3.iq_owner_original_30.assets.show",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\IqOwnerOriginal30AssetController@show",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext"
+                ],
+                "x-laravel-name": "api.v0_3.iq_owner_original_30.assets.show"
+            }
+        },
         "/api/v0.3/me/attempts": {
             "get": {
                 "operationId": "get_api_v0_3_me_attempts",

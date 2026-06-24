@@ -8,6 +8,7 @@ use App\DTO\Attempts\SubmitAttemptDTO;
 use App\Exceptions\Api\ApiProblemException;
 use App\Models\Attempt;
 use Illuminate\Support\Facades\File;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 final class IqOwnerOriginal30BankService
 {
@@ -22,6 +23,10 @@ final class IqOwnerOriginal30BankService
     public const DIR_VERSION = 'IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO';
 
     public const DELIVERY_MODE = 'current_question';
+
+    private const PUBLIC_ASSET_SOURCE_PREFIX = 'assets/iq_owner_original_30/';
+
+    private const PUBLIC_ASSET_ROUTE_PREFIX = 'iq_owner_original_30/';
 
     /**
      * @return array<string,mixed>
@@ -162,6 +167,17 @@ final class IqOwnerOriginal30BankService
         }
     }
 
+    public function publicAssetResponse(string $path): BinaryFileResponse
+    {
+        $absolutePath = $this->publicAssetAbsolutePath($path);
+
+        return response()->file($absolutePath, [
+            'Content-Type' => $this->contentTypeForAsset($absolutePath),
+            'Cache-Control' => 'public, max-age=31536000, immutable',
+            'X-Content-Type-Options' => 'nosniff',
+        ]);
+    }
+
     /**
      * @return array<int,array<string,mixed>>
      */
@@ -249,15 +265,90 @@ final class IqOwnerOriginal30BankService
      */
     private function onlyPublicMediaFields(array $media): array
     {
+        $assets = is_array($media['assets'] ?? null) ? $media['assets'] : [];
+        $publicUrl = $this->publicAssetUrl(is_string($assets['image'] ?? null) ? (string) $assets['image'] : '');
+
         return [
             'type' => (string) ($media['type'] ?? 'image'),
             'media_type' => (string) ($media['media_type'] ?? 'image/webp'),
-            'assets' => is_array($media['assets'] ?? null) ? $media['assets'] : [],
+            'assets' => $assets,
+            ...($publicUrl !== null ? [
+                'src' => $publicUrl,
+                'public_url' => $publicUrl,
+            ] : []),
             'width' => (int) ($media['width'] ?? 0),
             'height' => (int) ($media['height'] ?? 0),
             'sha256' => (string) ($media['sha256'] ?? ''),
             'accessibility_label' => (string) ($media['accessibility_label'] ?? ''),
         ];
+    }
+
+    private function publicAssetUrl(string $assetPath): ?string
+    {
+        $routePath = $this->publicRoutePathForAsset($assetPath);
+        if ($routePath === null) {
+            return null;
+        }
+
+        return url('/api/v0.3/iq-owner-original-30/assets/'.$this->encodePublicPath($routePath));
+    }
+
+    private function publicRoutePathForAsset(string $assetPath): ?string
+    {
+        $normalized = $this->normalizeAssetPath($assetPath);
+        if ($normalized === null || ! str_starts_with($normalized, self::PUBLIC_ASSET_SOURCE_PREFIX)) {
+            return null;
+        }
+
+        return substr($normalized, strlen('assets/'));
+    }
+
+    private function publicAssetAbsolutePath(string $routePath): string
+    {
+        $normalized = $this->normalizeAssetPath($routePath);
+        if ($normalized === null || ! str_starts_with($normalized, self::PUBLIC_ASSET_ROUTE_PREFIX)) {
+            throw new ApiProblemException(404, 'IQ_OWNER_ASSET_NOT_FOUND', 'owner IQ asset not found.');
+        }
+
+        $assetRoot = realpath($this->assetDir());
+        $assetPath = realpath($this->assetDir().'/'.$normalized);
+
+        if ($assetRoot === false || $assetPath === false || ! str_starts_with($assetPath, $assetRoot.DIRECTORY_SEPARATOR)) {
+            throw new ApiProblemException(404, 'IQ_OWNER_ASSET_NOT_FOUND', 'owner IQ asset not found.');
+        }
+
+        if (! is_file($assetPath)) {
+            throw new ApiProblemException(404, 'IQ_OWNER_ASSET_NOT_FOUND', 'owner IQ asset not found.');
+        }
+
+        return $assetPath;
+    }
+
+    private function normalizeAssetPath(string $path): ?string
+    {
+        $normalized = str_replace('\\', '/', trim($path));
+        $normalized = ltrim($normalized, '/');
+        if ($normalized === '' || str_contains($normalized, "\0") || str_contains($normalized, '..')) {
+            return null;
+        }
+
+        return $normalized;
+    }
+
+    private function encodePublicPath(string $path): string
+    {
+        return implode('/', array_map('rawurlencode', explode('/', $path)));
+    }
+
+    private function contentTypeForAsset(string $path): string
+    {
+        return match (strtolower((string) pathinfo($path, PATHINFO_EXTENSION))) {
+            'webp' => 'image/webp',
+            'png' => 'image/png',
+            'jpg', 'jpeg' => 'image/jpeg',
+            'svg' => 'image/svg+xml',
+            default => 'application/octet-stream',
+        };
     }
 
     /**
@@ -281,5 +372,10 @@ final class IqOwnerOriginal30BankService
     private function bankDir(): string
     {
         return base_path('../content_packages/default/CN_MAINLAND/zh-CN/'.self::DIR_VERSION.'/banks/'.self::BANK_ID);
+    }
+
+    private function assetDir(): string
+    {
+        return base_path('../content_packages/default/CN_MAINLAND/zh-CN/'.self::DIR_VERSION.'/assets');
     }
 }
