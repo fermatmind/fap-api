@@ -60760,7 +60760,7 @@
     "repo": "fap-api",
     "branch": "codex/pr-eq-agent-02-context-payload-api",
     "base": "main",
-    "status": "ci_fix_openapi_snapshot_pending_checks",
+    "status": "ready_to_merge",
     "train_scope": "eq_agent_ready_content_os",
     "title": "PR-EQ-AGENT-02 Backend EQ Agent context payload and retrieval API",
     "depends_on": [
@@ -60847,10 +60847,14 @@
         "status": "pass",
         "command": "cd backend && bash scripts/export_openapi.sh --check",
         "evidence": "OpenAPI snapshot regenerated for api.v0_3.attempts.eq.agent_context and check reports snapshot up-to-date."
+      },
+      "github_required_checks": {
+        "status": "pass",
+        "evidence": "GitHub PR #2399 required checks are green after the runtime freeze guard and OpenAPI snapshot fixes; mergeStateStatus is CLEAN."
       }
     },
     "failure_reason": null,
-    "commit_sha": "7f2e02a57",
+    "commit_sha": "e8b50c24f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2399",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -60891,6 +60895,12 @@
         "from": "ci_fix_pushed_pending_checks",
         "to": "ci_fix_openapi_snapshot_pending_checks",
         "notes": "Fixed required CI OpenAPI drift by regenerating backend/docs/contracts/openapi.snapshot.json and adding it to PR-EQ-AGENT-02 scope."
+      },
+      {
+        "at": "2026-06-25T00:06:00+08:00",
+        "from": "ci_fix_openapi_snapshot_pending_checks",
+        "to": "ready_to_merge",
+        "notes": "All GitHub checks passed and PR #2399 mergeStateStatus is CLEAN."
       }
     ]
   },
