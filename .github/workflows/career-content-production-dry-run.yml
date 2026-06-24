@@ -1,0 +1,248 @@
+name: Career Content Production Readiness Dry Run
+
+on:
+  workflow_dispatch:
+    inputs:
+      asset_channel:
+        description: "Career content asset channel to dry-run"
+        required: true
+        default: page_assembly
+        type: choice
+        options:
+          - page_assembly
+          - ai_impact
+      asset_file:
+        description: "Absolute path on the staging server to the approved JSONL asset"
+        required: true
+        type: string
+      expected_sha256:
+        description: "Expected SHA-256 for the approved JSONL asset"
+        required: true
+        type: string
+      approval_manifest:
+        description: "Absolute path on the staging server to the approval manifest JSON"
+        required: true
+        type: string
+      approval_manifest_sha256:
+        description: "Expected SHA-256 for the approval manifest"
+        required: true
+        type: string
+      editorial_review_report:
+        description: "Absolute path on the staging server to the editorial review JSON"
+        required: true
+        type: string
+      editorial_review_sha256:
+        description: "Expected SHA-256 for the editorial review report"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: career-content-production-readiness-dry-run-staging
+  cancel-in-progress: false
+
+jobs:
+  dry-run:
+    name: Production readiness dry-run (staging DB)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment:
+      name: staging
+
+    env:
+      DEPLOY_USER: "ubuntu"
+      DEPLOY_PORT: "22"
+      DEPLOY_HOST: "49.234.55.28"
+      DEPLOY_PATH: "/var/www/fap-api-staging"
+      SSH_RETRY_ATTEMPTS: "3"
+      SSH_RETRY_DELAY_SECONDS: "10"
+      ASSET_CHANNEL: ${{ github.event.inputs.asset_channel }}
+      ASSET_FILE: ${{ github.event.inputs.asset_file }}
+      EXPECTED_SHA256: ${{ github.event.inputs.expected_sha256 }}
+      APPROVAL_MANIFEST: ${{ github.event.inputs.approval_manifest }}
+      APPROVAL_MANIFEST_SHA256: ${{ github.event.inputs.approval_manifest_sha256 }}
+      EDITORIAL_REVIEW_REPORT: ${{ github.event.inputs.editorial_review_report }}
+      EDITORIAL_REVIEW_SHA256: ${{ github.event.inputs.editorial_review_sha256 }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Validate dispatch inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          case "$ASSET_CHANNEL" in
+            page_assembly|ai_impact) ;;
+            *)
+              echo "Invalid asset_channel=$ASSET_CHANNEL"
+              exit 2
+              ;;
+          esac
+
+          validate_sha() {
+            local name="$1"
+            local value="$2"
+            if ! [[ "$value" =~ ^[a-fA-F0-9]{64}$ ]]; then
+              echo "$name must be a 64-character SHA-256 hex value"
+              exit 2
+            fi
+          }
+
+          validate_remote_path() {
+            local name="$1"
+            local value="$2"
+            if [[ "$value" != /* ]]; then
+              echo "$name must be an absolute path on the staging server"
+              exit 2
+            fi
+            if [[ "$value" == *$'\n'* || "$value" == *$'\r'* || "$value" == *"'"* ]]; then
+              echo "$name contains unsupported characters"
+              exit 2
+            fi
+          }
+
+          validate_sha EXPECTED_SHA256 "$EXPECTED_SHA256"
+          validate_sha APPROVAL_MANIFEST_SHA256 "$APPROVAL_MANIFEST_SHA256"
+          validate_sha EDITORIAL_REVIEW_SHA256 "$EDITORIAL_REVIEW_SHA256"
+          validate_remote_path ASSET_FILE "$ASSET_FILE"
+          validate_remote_path APPROVAL_MANIFEST "$APPROVAL_MANIFEST"
+          validate_remote_path EDITORIAL_REVIEW_REPORT "$EDITORIAL_REVIEW_REPORT"
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install pinned SSH known_hosts
+        shell: bash
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          test -n "$SSH_KNOWN_HOSTS"
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
+      - name: Run remote production readiness dry-run
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          ssh_retry() {
+            local attempt
+            local rc
+            local max_attempts="${SSH_RETRY_ATTEMPTS:-3}"
+            local retry_delay="${SSH_RETRY_DELAY_SECONDS:-10}"
+
+            for attempt in $(seq 1 "$max_attempts"); do
+              set +e
+              ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+                -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$@"
+              rc=$?
+              set -e
+
+              if [ "$rc" -eq 0 ]; then
+                return 0
+              fi
+
+              if [ "$rc" -ne 255 ]; then
+                return "$rc"
+              fi
+
+              if [ "$attempt" -ge "$max_attempts" ]; then
+                return "$rc"
+              fi
+
+              echo "SSH transport attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
+              sleep "$retry_delay"
+            done
+          }
+
+          printf -v Q_ASSET_CHANNEL '%q' "$ASSET_CHANNEL"
+          printf -v Q_ASSET_FILE '%q' "$ASSET_FILE"
+          printf -v Q_EXPECTED_SHA256 '%q' "$EXPECTED_SHA256"
+          printf -v Q_APPROVAL_MANIFEST '%q' "$APPROVAL_MANIFEST"
+          printf -v Q_APPROVAL_MANIFEST_SHA256 '%q' "$APPROVAL_MANIFEST_SHA256"
+          printf -v Q_EDITORIAL_REVIEW_REPORT '%q' "$EDITORIAL_REVIEW_REPORT"
+          printf -v Q_EDITORIAL_REVIEW_SHA256 '%q' "$EDITORIAL_REVIEW_SHA256"
+          REMOTE_REPORT="$DEPLOY_PATH/shared/career-content-production-readiness-dry-run/${GITHUB_RUN_ID}-${ASSET_CHANNEL}.json"
+          REMOTE_EXIT="$DEPLOY_PATH/shared/career-content-production-readiness-dry-run/${GITHUB_RUN_ID}-${ASSET_CHANNEL}.exit"
+          printf -v Q_REMOTE_REPORT '%q' "$REMOTE_REPORT"
+          printf -v Q_REMOTE_EXIT '%q' "$REMOTE_EXIT"
+
+          set +e
+          ssh_retry \
+            "DEPLOY_PATH='$DEPLOY_PATH' ASSET_CHANNEL=$Q_ASSET_CHANNEL ASSET_FILE=$Q_ASSET_FILE EXPECTED_SHA256=$Q_EXPECTED_SHA256 APPROVAL_MANIFEST=$Q_APPROVAL_MANIFEST APPROVAL_MANIFEST_SHA256=$Q_APPROVAL_MANIFEST_SHA256 EDITORIAL_REVIEW_REPORT=$Q_EDITORIAL_REVIEW_REPORT EDITORIAL_REVIEW_SHA256=$Q_EDITORIAL_REVIEW_SHA256 REMOTE_REPORT=$Q_REMOTE_REPORT REMOTE_EXIT=$Q_REMOTE_EXIT bash -s" <<'REMOTE'
+          set -euo pipefail
+
+          mkdir -p "$(dirname "$REMOTE_REPORT")"
+          cd "$DEPLOY_PATH/current/backend"
+
+          test -r "$ASSET_FILE"
+          test -r "$APPROVAL_MANIFEST"
+          test -r "$EDITORIAL_REVIEW_REPORT"
+
+          case "$ASSET_CHANNEL" in
+            page_assembly)
+              ARTISAN_COMMAND="career:page-assembly-assets-import-preview"
+              ;;
+            ai_impact)
+              ARTISAN_COMMAND="career:ai-impact-assets-import-preview"
+              ;;
+            *)
+              echo "Invalid ASSET_CHANNEL=$ASSET_CHANNEL" >&2
+              exit 2
+              ;;
+          esac
+
+          set +e
+          php -d memory_limit=1024M artisan "$ARTISAN_COMMAND" \
+            --file="$ASSET_FILE" \
+            --expected-sha256="$EXPECTED_SHA256" \
+            --all-slugs-from-file \
+            --dry-run \
+            --status=production_imported \
+            --confirm-production-import \
+            --approval-manifest="$APPROVAL_MANIFEST" \
+            --approval-manifest-sha256="$APPROVAL_MANIFEST_SHA256" \
+            --editorial-review-report="$EDITORIAL_REVIEW_REPORT" \
+            --editorial-review-sha256="$EDITORIAL_REVIEW_SHA256" \
+            --output="$REMOTE_REPORT" \
+            --json
+          rc=$?
+          set -e
+
+          printf '%s\n' "$rc" > "$REMOTE_EXIT"
+          exit "$rc"
+          REMOTE
+          rc=$?
+          set -e
+
+          mkdir -p artifacts
+          ssh_retry "cat $Q_REMOTE_REPORT" > "artifacts/${ASSET_CHANNEL}_production_readiness_dry_run.json" || true
+          ssh_retry "cat $Q_REMOTE_EXIT" > "artifacts/${ASSET_CHANNEL}_production_readiness_dry_run.exit" || printf '%s\n' "$rc" > "artifacts/${ASSET_CHANNEL}_production_readiness_dry_run.exit"
+
+          {
+            echo "# Career Content Production Readiness Dry Run"
+            echo
+            echo "- asset_channel: \`$ASSET_CHANNEL\`"
+            echo "- target_environment: \`staging\`"
+            echo "- dry_run_only: \`true\`"
+            echo "- force_used: \`false\`"
+            echo "- remote_report: \`$REMOTE_REPORT\`"
+            echo "- exit_code: \`$rc\`"
+          } > artifacts/summary.md
+
+          exit "$rc"
+
+      - name: Upload dry-run report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: career-content-production-readiness-dry-run-${{ github.event.inputs.asset_channel }}
+          path: artifacts/
