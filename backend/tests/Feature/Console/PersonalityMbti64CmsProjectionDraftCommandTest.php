@@ -14,6 +14,7 @@ use App\Models\PersonalityProfileVariantSection;
 use App\Models\PersonalityProfileVariantSeoMeta;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Tests\TestCase;
 
@@ -555,6 +556,11 @@ final class PersonalityMbti64CmsProjectionDraftCommandTest extends TestCase
         $this->assertFalse($payload['subset']['arbitrary_url_subset_allowed']);
         $this->assertSame([5, 10], $payload['subset']['allowed_batch_sizes']);
         $this->assertSame($expectedUrls, $payload['subset']['selected_urls']);
+        $this->assertTrue($payload['approval_queue']['required_for_write']);
+        $this->assertFalse($payload['approval_queue']['ready_for_write']);
+        $this->assertTrue($payload['approval_queue']['write_blocked_until_approved']);
+        $this->assertSame(0, $payload['approval_queue']['approved_count']);
+        $this->assertSame(5, $payload['approval_queue']['missing_count']);
         $this->assertSame($expectedUrls, array_map(
             static fn (array $row): string => (string) ($row['url'] ?? ''),
             $payload['rows'] ?? []
@@ -611,10 +617,40 @@ final class PersonalityMbti64CmsProjectionDraftCommandTest extends TestCase
         $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
     }
 
+    public function test_agent_batch_safe_write_without_approved_queue_rows_fails_closed_without_revisions(): void
+    {
+        $this->seedAllTargets();
+        [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
+        $options = $this->writeOptions($packagePath, $qaPath);
+        $options['--agent-batch-size'] = '5';
+        $options['--operator-approved'] = 'MBTI64-AGENT-CMS-DRAFT-BATCH-SAFE-WRITER-01';
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', $options);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertFalse($payload['writes_committed']);
+        $this->assertSame(5, $payload['row_count']);
+        $this->assertSame(0, $payload['created_revision_count']);
+        $this->assertSame(0, $payload['approval_queue']['approved_count']);
+        $this->assertSame(5, $payload['approval_queue']['missing_count']);
+        $this->assertTrue($payload['approval_queue']['write_blocked_until_approved']);
+        $this->assertContains('agent_batch_approval_required', array_map(
+            static fn (array $error): string => (string) ($error['code'] ?? ''),
+            $payload['errors'] ?? []
+        ));
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
     public function test_agent_batch_safe_write_creates_only_selected_draft_revisions(): void
     {
         $targets = $this->seedAllTargets();
-        [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
+        $package = $this->validPackage();
+        $qa = $this->validQa();
+        [$packagePath, $qaPath] = $this->writeArtifacts($package, $qa);
+        $this->seedApprovedAgentApprovalRows($package, $qa, $packagePath, $qaPath, 5, 0);
         $profileBefore = $this->profileLiveState($targets['en|ENFJ']);
         $variantBefore = $this->variantLiveState($targets['en|ENFJ-A']);
         $surfaceCountsBefore = $this->liveSurfaceCounts();
@@ -634,6 +670,8 @@ final class PersonalityMbti64CmsProjectionDraftCommandTest extends TestCase
         $this->assertSame(5, $payload['created_revision_count']);
         $this->assertSame(0, $payload['skipped_existing_count']);
         $this->assertSame('agent_batch_safe', $payload['subset']['mode']);
+        $this->assertTrue($payload['approval_queue']['ready_for_write']);
+        $this->assertSame(5, $payload['approval_queue']['approved_count']);
         $this->assertSame($this->expectedBatchUrls(5, 0), $payload['subset']['selected_urls']);
         $this->assertSame($payload['comparison_row_count'], PersonalityProfileRevision::query()->count());
         $this->assertSame($payload['variant_row_count'], PersonalityProfileVariantRevision::query()->count());
@@ -652,7 +690,10 @@ final class PersonalityMbti64CmsProjectionDraftCommandTest extends TestCase
     public function test_agent_batch_safe_second_write_is_idempotent_for_same_source_hash(): void
     {
         $this->seedAllTargets();
-        [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
+        $package = $this->validPackage();
+        $qa = $this->validQa();
+        [$packagePath, $qaPath] = $this->writeArtifacts($package, $qa);
+        $this->seedApprovedAgentApprovalRows($package, $qa, $packagePath, $qaPath, 5, 0);
         $options = $this->writeOptions($packagePath, $qaPath);
         $options['--agent-batch-size'] = '5';
         $options['--operator-approved'] = 'MBTI64-AGENT-CMS-DRAFT-BATCH-SAFE-WRITER-01';
@@ -669,6 +710,127 @@ final class PersonalityMbti64CmsProjectionDraftCommandTest extends TestCase
         $this->assertSame(0, $payload['created_revision_count']);
         $this->assertSame(5, $payload['skipped_existing_count']);
         $this->assertSame(5, PersonalityProfileRevision::query()->count() + PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_agent_batch_safe_write_with_partial_approval_fails_closed_without_revisions(): void
+    {
+        $this->seedAllTargets();
+        $package = $this->validPackage();
+        $qa = $this->validQa();
+        [$packagePath, $qaPath] = $this->writeArtifacts($package, $qa);
+        $this->seedApprovedAgentApprovalRows($package, $qa, $packagePath, $qaPath, 4, 0);
+        $options = $this->writeOptions($packagePath, $qaPath);
+        $options['--agent-batch-size'] = '5';
+        $options['--operator-approved'] = 'MBTI64-AGENT-CMS-DRAFT-BATCH-SAFE-WRITER-01';
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', $options);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertFalse($payload['writes_committed']);
+        $this->assertSame(4, $payload['approval_queue']['approved_count']);
+        $this->assertSame(1, $payload['approval_queue']['missing_count']);
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_agent_batch_safe_write_with_rejected_item_fails_closed_without_revisions(): void
+    {
+        $this->seedAllTargets();
+        $package = $this->validPackage();
+        $qa = $this->validQa();
+        [$packagePath, $qaPath] = $this->writeArtifacts($package, $qa);
+        $this->seedApprovedAgentApprovalRows($package, $qa, $packagePath, $qaPath, 5, 0, [
+            $this->expectedBatchUrls(5, 0)[0] => [
+                'approval_state' => 'rejected',
+                'approved_at' => null,
+                'rejected_at' => now(),
+            ],
+        ]);
+        $options = $this->writeOptions($packagePath, $qaPath);
+        $options['--agent-batch-size'] = '5';
+        $options['--operator-approved'] = 'MBTI64-AGENT-CMS-DRAFT-BATCH-SAFE-WRITER-01';
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', $options);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertSame(4, $payload['approval_queue']['approved_count']);
+        $this->assertSame(1, $payload['approval_queue']['rejected_count']);
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_agent_batch_safe_write_with_stale_package_hash_approval_fails_closed_without_revisions(): void
+    {
+        $this->seedAllTargets();
+        $package = $this->validPackage();
+        $qa = $this->validQa();
+        [$packagePath, $qaPath] = $this->writeArtifacts($package, $qa);
+        $this->seedApprovedAgentApprovalRows($package, $qa, $packagePath, $qaPath, 5, 0, [], 'stale-package-sha');
+        $options = $this->writeOptions($packagePath, $qaPath);
+        $options['--agent-batch-size'] = '5';
+        $options['--operator-approved'] = 'MBTI64-AGENT-CMS-DRAFT-BATCH-SAFE-WRITER-01';
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', $options);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertSame(0, $payload['approval_queue']['approved_count']);
+        $this->assertSame(5, $payload['approval_queue']['missing_count']);
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_agent_batch_safe_write_with_stale_qa_hash_approval_fails_closed_without_revisions(): void
+    {
+        $this->seedAllTargets();
+        $package = $this->validPackage();
+        $qa = $this->validQa();
+        [$packagePath, $qaPath] = $this->writeArtifacts($package, $qa);
+        $this->seedApprovedAgentApprovalRows($package, $qa, $packagePath, $qaPath, 5, 0, [], null, 'stale-qa-sha');
+        $options = $this->writeOptions($packagePath, $qaPath);
+        $options['--agent-batch-size'] = '5';
+        $options['--operator-approved'] = 'MBTI64-AGENT-CMS-DRAFT-BATCH-SAFE-WRITER-01';
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', $options);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertSame(0, $payload['approval_queue']['approved_count']);
+        $this->assertSame(5, $payload['approval_queue']['missing_count']);
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_agent_batch_safe_write_with_recommendation_hash_mismatch_fails_closed_without_revisions(): void
+    {
+        $this->seedAllTargets();
+        $package = $this->validPackage();
+        $qa = $this->validQa();
+        [$packagePath, $qaPath] = $this->writeArtifacts($package, $qa);
+        $this->seedApprovedAgentApprovalRows($package, $qa, $packagePath, $qaPath, 5, 0, [
+            $this->expectedBatchUrls(5, 0)[0] => [
+                'recommendation_sha256' => str_repeat('a', 64),
+            ],
+        ]);
+        $options = $this->writeOptions($packagePath, $qaPath);
+        $options['--agent-batch-size'] = '5';
+        $options['--operator-approved'] = 'MBTI64-AGENT-CMS-DRAFT-BATCH-SAFE-WRITER-01';
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', $options);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertSame(4, $payload['approval_queue']['approved_count']);
+        $this->assertSame(1, $payload['approval_queue']['recommendation_hash_mismatch_count']);
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
     }
 
     public function test_agent_batch_safe_rejects_invalid_batch_size_without_writes(): void
@@ -1291,6 +1453,89 @@ final class PersonalityMbti64CmsProjectionDraftCommandTest extends TestCase
     }
 
     /**
+     * @param  array<string,mixed>  $package
+     * @param  array<string,mixed>  $qa
+     * @param  array<string,array<string,mixed>>  $overridesByUrl
+     */
+    private function seedApprovedAgentApprovalRows(
+        array $package,
+        array $qa,
+        string $packagePath,
+        string $qaPath,
+        int $size,
+        int $offset,
+        array $overridesByUrl = [],
+        ?string $sourceSha256 = null,
+        ?string $qaSha256 = null,
+    ): void {
+        $sourceSha256 ??= hash_file('sha256', $packagePath);
+        $qaSha256 ??= hash_file('sha256', $qaPath);
+        $recommendations = array_slice((array) $package['recommendations'], $offset, $size);
+        $qaResultsByUrl = [];
+        foreach ((array) $qa['page_results'] as $qaResult) {
+            if (is_array($qaResult)) {
+                $qaResultsByUrl[(string) ($qaResult['target_url'] ?? '')] = $qaResult;
+            }
+        }
+
+        $batchId = (int) DB::table('personality_agent_approval_batches')->insertGetId([
+            'framework' => 'mbti64',
+            'source_artifact' => (string) ($package['artifact'] ?? ''),
+            'source_artifact_path' => $packagePath,
+            'source_package_sha256' => $sourceSha256,
+            'qa_artifact' => (string) ($qa['artifact'] ?? ''),
+            'qa_artifact_path' => $qaPath,
+            'qa_sha256' => $qaSha256,
+            'status' => 'pending_review',
+            'planned_item_count' => count($recommendations),
+            'queued_item_count' => count($recommendations),
+            'blocked_item_count' => 0,
+            'safety_holds_json' => $this->jsonString([
+                'cms_write_attempted' => false,
+                'publish_attempted' => false,
+                'search_release_attempted' => false,
+            ]),
+            'summary_json' => $this->jsonString(['fixture' => true]),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        foreach ($recommendations as $recommendation) {
+            $this->assertIsArray($recommendation);
+            $targetUrl = (string) ($recommendation['target_url'] ?? '');
+            $path = (string) (parse_url($targetUrl, PHP_URL_PATH) ?: '');
+            $override = $overridesByUrl[$targetUrl] ?? [];
+            $qaResult = $qaResultsByUrl[$targetUrl] ?? [];
+            $row = array_merge([
+                'batch_id' => $batchId,
+                'framework' => 'mbti64',
+                'target_url' => $targetUrl,
+                'path' => $path,
+                'locale' => str_starts_with($path, '/zh/') ? 'zh-CN' : 'en',
+                'page_type' => str_contains($path, '-a-vs-') ? 'personality_profile_comparison' : 'personality_profile_variant',
+                'recommendation_id' => (string) ($recommendation['recommendation_id'] ?? ''),
+                'recommendation_sha256' => hash('sha256', $this->jsonString($recommendation)),
+                'qa_decision' => 'PASS_READY_FOR_CMS_DRAFT',
+                'approval_state' => 'approved',
+                'approved_at' => now(),
+                'rejected_at' => null,
+                'blocked_reason' => null,
+                'safety_holds_json' => $this->jsonString([
+                    'cms_write_attempted' => false,
+                    'publish_attempted' => false,
+                    'search_release_attempted' => false,
+                ]),
+                'recommendation_json' => $this->jsonString($recommendation),
+                'qa_json' => $this->jsonString(is_array($qaResult) ? $qaResult : []),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ], $override);
+
+            DB::table('personality_agent_approval_items')->insert($row);
+        }
+    }
+
+    /**
      * @return array<string,mixed>
      */
     private function jsonOutput(): array
@@ -1311,5 +1556,16 @@ final class PersonalityMbti64CmsProjectionDraftCommandTest extends TestCase
         sort($values);
 
         return $values;
+    }
+
+    /**
+     * @param  array<string,mixed>  $value
+     */
+    private function jsonString(array $value): string
+    {
+        return (string) json_encode(
+            $value,
+            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_INVALID_UTF8_SUBSTITUTE
+        );
     }
 }

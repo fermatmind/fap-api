@@ -134,6 +134,7 @@ final class Mbti64CmsProjectionDraftWriter
                 ? $this->nextRevisionNo($pageType, $targetField, $targetId)
                 : null;
             $qaResult = $qaResultsByUrl[(string) $recommendation['target_url']] ?? [];
+            $recommendationSha256 = hash('sha256', $this->jsonString($recommendation));
 
             $preparedRows[] = [
                 'position' => $position + 1,
@@ -149,6 +150,7 @@ final class Mbti64CmsProjectionDraftWriter
                 'snapshot_key' => self::SNAPSHOT_KEY,
                 'source_sha256' => $sourceSha256,
                 'qa_source_sha256' => $qaSha256,
+                'recommendation_sha256' => $recommendationSha256,
                 'existing_revision_id' => $existingRevision?->id !== null ? (int) $existingRevision->id : null,
                 'existing_revision_no' => $existingRevision?->revision_no !== null ? (int) $existingRevision->revision_no : null,
                 'next_revision_no' => $nextRevisionNo,
@@ -156,6 +158,18 @@ final class Mbti64CmsProjectionDraftWriter
                 'action' => 'pending',
                 'snapshot_preview' => $this->snapshotPayload($package, $qa, $recommendation, $identity, $sourceSha256, $qaSha256, $qaResult),
             ];
+        }
+
+        $approvalGate = $this->agentBatchApprovalGate($preparedRows, $sourceSha256, $qaSha256, $options);
+        if ((bool) ($approvalGate['required_for_write'] ?? false)) {
+            $approvalRowsByUrl = is_array($approvalGate['rows_by_url'] ?? null) ? $approvalGate['rows_by_url'] : [];
+            foreach ($preparedRows as &$preparedRow) {
+                $preparedRow['approval_queue'] = $approvalRowsByUrl[(string) ($preparedRow['url'] ?? '')] ?? [
+                    'ready' => false,
+                    'blocker' => 'approval_row_missing',
+                ];
+            }
+            unset($preparedRow);
         }
 
         if ($errors !== []) {
@@ -166,8 +180,32 @@ final class Mbti64CmsProjectionDraftWriter
                 'variant_row_count' => $this->countRows($preparedRows, 'variant'),
                 'comparison_row_count' => $this->countRows($preparedRows, 'comparison'),
                 'subset' => $this->subsetSummary($options, $preparedRows),
+                'approval_queue' => $this->approvalGateForOutput($approvalGate),
                 'rows' => $preparedRows,
                 'errors' => $errors,
+                'warnings' => $warnings,
+            ]);
+        }
+
+        if ($write && (bool) ($approvalGate['required_for_write'] ?? false) && ! (bool) ($approvalGate['ready_for_write'] ?? false)) {
+            return array_merge($this->baseSummary($package, $qa, $sourceSha256, $qaSha256, $write, $options), [
+                'ok' => false,
+                'status' => 'fail',
+                'row_count' => count($preparedRows),
+                'variant_row_count' => $this->countRows($preparedRows, 'variant'),
+                'comparison_row_count' => $this->countRows($preparedRows, 'comparison'),
+                'created_revision_count' => 0,
+                'skipped_existing_count' => 0,
+                'would_create_revision_count' => 0,
+                'writes_committed' => false,
+                'subset' => $this->subsetSummary($options, $preparedRows),
+                'approval_queue' => $this->approvalGateForOutput($approvalGate),
+                'rows' => $preparedRows,
+                'errors' => [[
+                    'field' => 'approval_queue',
+                    'code' => 'agent_batch_approval_required',
+                    'message' => 'Agent batch writes require every selected recommendation to have a matching approved personality agent approval queue item.',
+                ]],
                 'warnings' => $warnings,
             ]);
         }
@@ -215,6 +253,7 @@ final class Mbti64CmsProjectionDraftWriter
             'would_create_revision_count' => $write ? 0 : count($preparedRows) - $skippedExisting,
             'writes_committed' => $write && $created > 0,
             'subset' => $this->subsetSummary($options, $preparedRows),
+            'approval_queue' => $this->approvalGateForOutput($approvalGate),
             'rows' => $preparedRows,
             'errors' => [],
             'warnings' => $warnings,
@@ -576,6 +615,145 @@ final class Mbti64CmsProjectionDraftWriter
     }
 
     /**
+     * @param  list<array<string,mixed>>  $preparedRows
+     * @param  array<string,mixed>  $options
+     * @return array<string,mixed>
+     */
+    private function agentBatchApprovalGate(array $preparedRows, string $sourceSha256, string $qaSha256, array $options): array
+    {
+        if (! $this->agentBatchRequested($options)) {
+            return [
+                'required_for_write' => false,
+                'ready_for_write' => true,
+                'write_blocked_until_approved' => false,
+            ];
+        }
+
+        $batch = DB::table('personality_agent_approval_batches')
+            ->where('framework', 'mbti64')
+            ->where('source_package_sha256', $sourceSha256)
+            ->where('qa_sha256', $qaSha256)
+            ->first();
+
+        $rowsByUrl = [];
+        $counts = [
+            'approved_count' => 0,
+            'missing_count' => 0,
+            'pending_count' => 0,
+            'rejected_count' => 0,
+            'blocked_count' => 0,
+            'recommendation_hash_mismatch_count' => 0,
+            'qa_not_pass_count' => 0,
+            'approved_without_timestamp_count' => 0,
+        ];
+
+        foreach ($preparedRows as $row) {
+            $url = (string) ($row['url'] ?? '');
+            $expectedRecommendationSha = (string) ($row['recommendation_sha256'] ?? '');
+            $item = $batch === null
+                ? null
+                : DB::table('personality_agent_approval_items')
+                    ->where('batch_id', (int) $batch->id)
+                    ->where('target_url', $url)
+                    ->first();
+            $decision = $this->approvalDecisionForItem($item, $expectedRecommendationSha);
+            $blocker = (string) ($decision['blocker'] ?? '');
+
+            if ($blocker === '') {
+                $counts['approved_count']++;
+            } elseif (array_key_exists($blocker.'_count', $counts)) {
+                $counts[$blocker.'_count']++;
+            } else {
+                $counts['blocked_count']++;
+            }
+
+            $rowsByUrl[$url] = [
+                'ready' => (bool) $decision['ready'],
+                'blocker' => $blocker !== '' ? $blocker : null,
+                'approval_batch_id' => $batch?->id !== null ? (int) $batch->id : null,
+                'approval_item_id' => $item?->id !== null ? (int) $item->id : null,
+                'approval_state' => $item?->approval_state !== null ? (string) $item->approval_state : null,
+                'approved_at_present' => $item?->approved_at !== null,
+                'qa_decision' => $item?->qa_decision !== null ? (string) $item->qa_decision : null,
+                'expected_recommendation_sha256' => $expectedRecommendationSha,
+                'actual_recommendation_sha256' => $item?->recommendation_sha256 !== null ? (string) $item->recommendation_sha256 : null,
+            ];
+        }
+
+        $readyForWrite = count($preparedRows) > 0 && $counts['approved_count'] === count($preparedRows);
+
+        return array_merge([
+            'required_for_write' => true,
+            'ready_for_write' => $readyForWrite,
+            'write_blocked_until_approved' => ! $readyForWrite,
+            'approval_batch_id' => $batch?->id !== null ? (int) $batch->id : null,
+            'expected_source_package_sha256' => $sourceSha256,
+            'expected_qa_sha256' => $qaSha256,
+            'required_item_count' => count($preparedRows),
+            'rows_by_url' => $rowsByUrl,
+        ], $counts);
+    }
+
+    /**
+     * @return array{ready:bool,blocker:string|null}
+     */
+    private function approvalDecisionForItem(?object $item, string $expectedRecommendationSha): array
+    {
+        if ($item === null) {
+            return ['ready' => false, 'blocker' => 'missing'];
+        }
+
+        $blockedReason = $item->blocked_reason !== null ? trim((string) $item->blocked_reason) : '';
+        if ($blockedReason !== '') {
+            return ['ready' => false, 'blocker' => 'blocked'];
+        }
+
+        $state = (string) ($item->approval_state ?? '');
+        if ($state === 'rejected') {
+            return ['ready' => false, 'blocker' => 'rejected'];
+        }
+        if ($state !== 'approved') {
+            return ['ready' => false, 'blocker' => 'pending'];
+        }
+
+        if ($item->approved_at === null) {
+            return ['ready' => false, 'blocker' => 'approved_without_timestamp'];
+        }
+
+        if ((string) ($item->recommendation_sha256 ?? '') !== $expectedRecommendationSha) {
+            return ['ready' => false, 'blocker' => 'recommendation_hash_mismatch'];
+        }
+
+        if (! $this->approvalQaDecisionPasses((string) ($item->qa_decision ?? ''))) {
+            return ['ready' => false, 'blocker' => 'qa_not_pass'];
+        }
+
+        return ['ready' => true, 'blocker' => null];
+    }
+
+    private function approvalQaDecisionPasses(string $decision): bool
+    {
+        return in_array($decision, [
+            'pass',
+            'PASS',
+            'PASS_READY_FOR_CMS_DRAFT',
+            'READY_QUERY_BACKED_LOW_RISK_DRAFT_REVIEW',
+        ], true);
+    }
+
+    /**
+     * @param  array<string,mixed>  $approvalGate
+     * @return array<string,mixed>
+     */
+    private function approvalGateForOutput(array $approvalGate): array
+    {
+        $output = $approvalGate;
+        unset($output['rows_by_url']);
+
+        return $output;
+    }
+
+    /**
      * @param  array<string,mixed>  $preparedRow
      */
     private function createRevision(array $preparedRow): PersonalityProfileRevision|PersonalityProfileVariantRevision
@@ -797,5 +975,16 @@ final class Mbti64CmsProjectionDraftWriter
         }
 
         return false;
+    }
+
+    /**
+     * @param  array<string,mixed>  $value
+     */
+    private function jsonString(array $value): string
+    {
+        return (string) json_encode(
+            $value,
+            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_INVALID_UTF8_SUBSTITUTE
+        );
     }
 }
