@@ -93,9 +93,13 @@ final class CareerRuntimePublishProjectionLookup implements CareerRuntimePublish
     {
         $item = $this->itemForSlug($slug);
 
-        return is_array($item)
+        if (is_array($item)
             && ($item['public_resolution_type'] ?? null) === CareerPublicResolutionTypeMatrix::PUBLIC_FAMILY_HUB
-            && ($item['runtime_publish_state'] ?? null) === CareerRuntimePublishProjectionService::STATE_PUBLISHED;
+            && ($item['runtime_publish_state'] ?? null) === CareerRuntimePublishProjectionService::STATE_PUBLISHED) {
+            return true;
+        }
+
+        return $this->familyHubLiveFromPublishedChildren($slug);
     }
 
     /**
@@ -147,6 +151,44 @@ final class CareerRuntimePublishProjectionLookup implements CareerRuntimePublish
         ));
 
         return $items;
+    }
+
+    private function familyHubLiveFromPublishedChildren(string $slug): bool
+    {
+        $slug = $this->normalizeSlug($slug);
+        if ($slug === null || str_ends_with($slug, '-all-other')) {
+            return false;
+        }
+
+        try {
+            $family = OccupationFamily::query()
+                ->where('canonical_slug', $slug)
+                ->first();
+        } catch (Throwable) {
+            return false;
+        }
+
+        if (! $family instanceof OccupationFamily) {
+            return false;
+        }
+
+        $childSlugs = Occupation::query()
+            ->where('family_id', $family->id)
+            ->pluck('canonical_slug')
+            ->all();
+
+        foreach ($childSlugs as $childSlug) {
+            if (! is_scalar($childSlug)) {
+                continue;
+            }
+
+            if ($this->detailRouteEnabled((string) $childSlug)
+                && $this->releaseGatePass((string) $childSlug)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private function hydrate(): void
