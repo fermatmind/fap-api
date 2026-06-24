@@ -359,6 +359,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_mbti64_gsc_readonly_export_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/PersonalityMbti64GscQueryReadonlyExport.php',
+            'backend/app/Console/Kernel.php',
+            'backend/app/Services/SeoIntel/GscReadonlyLiveAdapter.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\PersonalityMbti64GscQueryReadonlyExport;',
+            '+        PersonalityMbti64GscQueryReadonlyExport::class,',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
+    }
+
     public function test_runtime_freeze_classifier_ignores_mbti_personality_at_difference_section_files(): void
     {
         $changed = [
@@ -5400,6 +5415,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsMbti64CmsInternalLinkDraftOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsMbti64CmsProjectionDraftOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsMbti64CmsRevisionPromoteOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsMbti64GscReadonlyExportOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentCmsTdkGapReadonlyScannerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentCodexReviewRunnerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentCmsDraftPackageDryRunOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
@@ -6003,6 +6019,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isSeoIntelGscFoundationFile(string $file): bool
     {
         return in_array($file, [
+            'backend/app/Console/Commands/PersonalityMbti64GscQueryReadonlyExport.php',
             'backend/app/Console/Commands/SeoIntelGscReadModelImportCanaryCommand.php',
             'backend/app/Console/Commands/SeoIntelGscReadModelImportDryRunCommand.php',
             'backend/app/Console/Commands/SeoIntelGscReadModelCanaryReadbackCommand.php',
@@ -9317,6 +9334,25 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         foreach ($changedLines as $line) {
             $normalized = ltrim($line, '+-');
             if (preg_match('/\bPersonalityMbti64CmsRevisionPromote\b/u', $normalized) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsMbti64GscReadonlyExportOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            $normalized = ltrim($line, '+-');
+            if (preg_match('/\bPersonalityMbti64GscQueryReadonlyExport\b/u', $normalized) !== 1) {
                 return false;
             }
         }
