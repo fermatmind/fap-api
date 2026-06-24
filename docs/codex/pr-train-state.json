@@ -60711,7 +60711,7 @@
     "repo": "fap-api",
     "branch": "codex/big-five-cms-draft-writer-contract-01",
     "base": "main",
-    "status": "local_validated",
+    "status": "ready_to_merge",
     "train_scope": "big_five_public_profile_agent_expansion",
     "title": "BIG-FIVE-CMS-DRAFT-WRITER-CONTRACT-01: Add Big Five CMS draft writer contract",
     "depends_on": [
@@ -60747,12 +60747,12 @@
         "evidence": "Changed files are scoped to backend command/service/tests, Kernel registration, runtime-freeze classifier allowance, and docs/codex manifest/state metadata for BIG-FIVE-CMS-DRAFT-WRITER-CONTRACT-01. No frontend runtime, CMS publish, production DB write, queue, search, indexing, sitemap, llms, deploy, or public route changes."
       },
       "github": {
-        "status": "pending",
-        "evidence": "PR #2395 opened and GitHub checks are pending on head 69bc2522bc19690c2979f770bea97e661b2f5393."
+        "status": "pass",
+        "evidence": "PR #2395 GitHub checks are green and mergeStateStatus is CLEAN on head ff047e4ad56faa92d156224aa36d1f29e3d4d7a6."
       }
     },
     "failure_reason": null,
-    "commit_sha": "69bc2522bc19690c2979f770bea97e661b2f5393",
+    "commit_sha": "ff047e4ad56faa92d156224aa36d1f29e3d4d7a6",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2395",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -60772,6 +60772,11 @@
         "at": "2026-06-24T13:12:32Z",
         "status": "github_checks_pending",
         "note": "Opened PR #2395 at https://github.com/fermatmind/fap-api/pull/2395 on head 69bc2522bc19690c2979f770bea97e661b2f5393. Waiting for required GitHub checks; no staging deploy wait, production deploy, CMS write, publish, search, indexing, sitemap, llms, or frontend runtime work."
+      },
+      {
+        "at": "2026-06-24T13:23:50Z",
+        "status": "ready_to_merge",
+        "note": "PR #2395 checks are green and mergeStateStatus is CLEAN on head ff047e4ad56faa92d156224aa36d1f29e3d4d7a6. Ready for squash merge; no staging wait, production deploy, CMS write, publish, search, indexing, sitemap, llms, or frontend runtime work included."
       }
     ]
   }
