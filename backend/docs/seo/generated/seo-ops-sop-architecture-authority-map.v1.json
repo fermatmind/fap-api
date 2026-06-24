@@ -18,6 +18,21 @@
     "chinese_claim_lint": "flag_or_block_only_no_auto_rewrite",
     "digital_pr_tracking": "manual_observation_only"
   },
+  "url_truth_effective_connection": {
+    "config_key": "seo_intel.connection",
+    "expected_production_value": "seo_intel",
+    "writer_code_path": "App\\Services\\SeoIntel\\UrlTruthInventoryRecordWriter",
+    "writer_connection": "DB::connection(config('seo_intel.connection', 'seo_intel'))",
+    "authority_tables": [
+      "seo_intel.seo_urls",
+      "seo_intel.seo_url_entities"
+    ],
+    "non_authority_default_tables": [
+      "mysql/fap_prod.seo_urls",
+      "mysql/fap_prod.seo_url_entities"
+    ],
+    "evidence_requirement": "record_effective_url_truth_connection_before_classifying_retention_drift_missing_rows_search_channel_eligibility_or_post_publish_propagation"
+  },
   "operator_surfaces": [
     "/ops/seo",
     "/ops/seo-operations",

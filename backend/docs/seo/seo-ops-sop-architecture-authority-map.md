@@ -34,6 +34,30 @@ Chinese Claim Lint flags or blocks unsafe wording. It does not auto-rewrite, aut
 
 Digital PR tracking is manual and observation-only. Mentions, referrals, and backlinks are signals, not URL Truth.
 
+## URL Truth Effective Connection
+
+URL Truth readback must use the configured SEO Intel connection, not the default
+Laravel application connection.
+
+Production rule:
+
+- Effective config key:
+  `seo_intel.connection`
+- Expected production value:
+  `seo_intel`
+- Writer code path:
+  `App\Services\SeoIntel\UrlTruthInventoryRecordWriter`
+- Writer connection:
+  `DB::connection(config('seo_intel.connection', 'seo_intel'))`
+- Correct authority tables:
+  `seo_intel.seo_urls` and `seo_intel.seo_url_entities`
+- Non-authority default tables:
+  `mysql` / `fap_prod` tables with the same names are not URL Truth authority.
+
+Operational evidence must record the effective URL Truth connection before
+classifying retention, drift, missing rows, Search Channel eligibility, or
+post-publish propagation readiness.
+
 ## Operator Surface Map
 
 - Daily observability: `/ops/seo`.
