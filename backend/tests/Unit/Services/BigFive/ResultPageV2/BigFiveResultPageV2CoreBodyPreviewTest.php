@@ -405,6 +405,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_big_five_public_profile_agent_draft_writer_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/PersonalityBigFivePublicProfileAgentDraft.php',
+            'backend/app/Console/Kernel.php',
+            'backend/app/Services/Cms/BigFivePublicProfileAgentDraftWriter.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\PersonalityBigFivePublicProfileAgentDraft;',
+            '+        PersonalityBigFivePublicProfileAgentDraft::class,',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
+    }
+
     public function test_runtime_freeze_classifier_ignores_mbti_personality_at_difference_section_files(): void
     {
         $changed = [
@@ -4408,6 +4423,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isBigFivePublicProfileAgentDraftFile($file)) {
+                continue;
+            }
+
             if ($this->isMbtiPersonalityAtDifferenceSectionFile($file)) {
                 continue;
             }
@@ -5479,6 +5498,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsMbti64GscReadonlyExportOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsPersonalityAgentApprovalQueueOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsEnneagramCmsDraftOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsBigFivePublicProfileAgentDraftOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentCmsTdkGapReadonlyScannerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentCodexReviewRunnerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentCmsDraftPackageDryRunOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
@@ -5708,6 +5728,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/PersonalityEnneagramCmsDraft.php',
             'backend/app/Services/Cms/EnneagramCmsDraftWriter.php',
+        ], true);
+    }
+
+    private function isBigFivePublicProfileAgentDraftFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/PersonalityBigFivePublicProfileAgentDraft.php',
+            'backend/app/Services/Cms/BigFivePublicProfileAgentDraftWriter.php',
         ], true);
     }
 
@@ -9472,6 +9500,25 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         foreach ($changedLines as $line) {
             $normalized = ltrim($line, '+-');
             if (preg_match('/\bPersonalityEnneagramCmsDraft\b/u', $normalized) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsBigFivePublicProfileAgentDraftOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            $normalized = ltrim($line, '+-');
+            if (preg_match('/\bPersonalityBigFivePublicProfileAgentDraft\b/u', $normalized) !== 1) {
                 return false;
             }
         }
