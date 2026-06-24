@@ -1,0 +1,1858 @@
+{
+  "artifact": "ENNEAGRAM-PUBLIC-PROFILE-AGENT-PILOT-01",
+  "generated_at": "2026-06-24T11:22:48.600Z",
+  "framework": "enneagram",
+  "status": "pass",
+  "final_decision": "PASS_READY_FOR_ENNEAGRAM_QA",
+  "run_mode": "artifact_only",
+  "input_artifacts": {
+    "source_authority_packet": "docs/public-personality/enneagram-public-personality-source-authority-packet.v1.json",
+    "claim_safety_packet": "docs/public-personality/enneagram-public-personality-claim-safety-packet.v1.json",
+    "candidate_cluster_packet": "docs/public-personality/enneagram-public-personality-candidate-cluster-packet.v1.json",
+    "route_contract": "lib/personality/enneagramPublicRoutes.ts"
+  },
+  "summary": {
+    "recommendation_count": 26,
+    "locale_counts": {
+      "en": 13,
+      "zh-CN": 13
+    },
+    "entity_type_counts": {
+      "hub": 2,
+      "center": 6,
+      "core_type": 18
+    },
+    "gsc_evidence_pending_count": 26,
+    "qa_required_count": 11,
+    "blocked_count": 0
+  },
+  "scope_lock": {
+    "allowed_entity_types": [
+      "hub",
+      "center",
+      "core_type"
+    ],
+    "forbidden_entity_types": [
+      "wing",
+      "instinctual_subtype",
+      "tritype",
+      "wing_instinct"
+    ],
+    "no_54_wing_instinct_pages": true,
+    "no_private_result_text": true,
+    "no_frontend_editorial_fallback": true
+  },
+  "recommendations": [
+    {
+      "target_url": "https://fermatmind.com/en/personality/enneagram",
+      "path": "/en/personality/enneagram",
+      "framework": "enneagram",
+      "locale": "en",
+      "entity_type": "hub",
+      "code": "enneagram",
+      "current_surface": {
+        "authority": "backend_cms_personality_public_content_assets",
+        "route_family": "public_personality_enneagram",
+        "indexability_posture": "noindex_follow_until_separate_publish_gate",
+        "source_notes": [
+          "docs/public-personality/enneagram-public-personality-source-authority-packet.v1.json",
+          "docs/public-personality/enneagram-public-personality-claim-safety-packet.v1.json",
+          "lib/personality/enneagramPublicRoutes.ts"
+        ]
+      },
+      "observed_signal": "GSC_EVIDENCE_PENDING",
+      "reference_patterns_used": [
+        "personality_public_profile_agent_runner_contract",
+        "enneagram_public_personality_source_authority_packet",
+        "enneagram_public_personality_claim_safety_packet",
+        "backend_cms_content_authority"
+      ],
+      "recommendations": {
+        "title": "Enneagram Personality Guide: Motivation Patterns and Method Boundaries",
+        "description": "Draft recommendation for a public SEO profile that explains Enneagram patterns with reflective, non-diagnostic language and no fixed-outcome claims.",
+        "h1": "Enneagram Public Profile",
+        "quick_answer": "Enneagram can frame motivation, stress response, and communication reflection, but it should not be presented as diagnosis, screening, or a final identity label.",
+        "faq": [
+          {
+            "question": "Does Enneagram identify my final personality type?",
+            "answer": "No. The public page should use reflective language to explain possible motivation cues, not a final or official type conclusion."
+          },
+          {
+            "question": "Can this Enneagram page be used for hiring or clinical decisions?",
+            "answer": "No. It is only a self-reflection and communication resource, not a hiring, diagnostic, treatment, or performance prediction tool."
+          }
+        ],
+        "internal_links": [
+          {
+            "target_url": "https://fermatmind.com/en/personality/enneagram",
+            "anchor_text": "Enneagram overview",
+            "safe_public_route": true
+          },
+          {
+            "target_url": "https://fermatmind.com/en/tests/enneagram-personality-test-nine-types",
+            "anchor_text": "Enneagram personality test",
+            "safe_public_route": true
+          }
+        ],
+        "differentiation_notes": "Enneagram should differentiate around motivation reflection, common misreads, and method boundaries without copying private result text."
+      },
+      "qa_required": [
+        "schema_validation",
+        "method_evidence_boundary_gate",
+        "no_clinical_diagnosis_gate",
+        "no_hiring_or_screening_gate",
+        "no_deterministic_claim_gate",
+        "no_wing_instinct_tritype_expansion_gate",
+        "duplicate_template_gate",
+        "private_route_gate",
+        "result_page_leakage_gate",
+        "seo_projection_gate",
+        "bilingual_consistency_gate"
+      ],
+      "blocked_reason": null,
+      "recommended_next_task": "ENNEAGRAM-PUBLIC-PROFILE-AGENT-QA-01"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/enneagram",
+      "path": "/zh/personality/enneagram",
+      "framework": "enneagram",
+      "locale": "zh-CN",
+      "entity_type": "hub",
+      "code": "enneagram",
+      "current_surface": {
+        "authority": "backend_cms_personality_public_content_assets",
+        "route_family": "public_personality_enneagram",
+        "indexability_posture": "noindex_follow_until_separate_publish_gate",
+        "source_notes": [
+          "docs/public-personality/enneagram-public-personality-source-authority-packet.v1.json",
+          "docs/public-personality/enneagram-public-personality-claim-safety-packet.v1.json",
+          "lib/personality/enneagramPublicRoutes.ts"
+        ]
+      },
+      "observed_signal": "GSC_EVIDENCE_PENDING",
+      "reference_patterns_used": [
+        "personality_public_profile_agent_runner_contract",
+        "enneagram_public_personality_source_authority_packet",
+        "enneagram_public_personality_claim_safety_packet",
+        "backend_cms_content_authority"
+      ],
+      "recommendations": {
+        "title": "九型人格公开指南：动机模式、类型边界与自我观察",
+        "description": "面向公开 SEO 页面的草稿建议，仅使用反思性语言解释九型人格，不诊断、不招聘筛选，也不承诺固定结果。",
+        "h1": "九型人格公开说明",
+        "quick_answer": "九型人格可以作为观察动机、压力反应和沟通偏好的公共入口，但不应被写成诊断、筛选或最终身份判定。",
+        "faq": [
+          {
+            "question": "九型人格能说明我的最终人格类型吗？",
+            "answer": "不能。公开页面应使用反思性语言，帮助读者理解可能的动机线索，而不是给出最终或官方类型结论。"
+          },
+          {
+            "question": "九型人格页面可以用于招聘或临床判断吗？",
+            "answer": "不能。该页面只能作为自我观察和沟通反思材料，不应支持招聘筛选、诊断、治疗或绩效预测。"
+          }
+        ],
+        "internal_links": [
+          {
+            "target_url": "https://fermatmind.com/zh/personality/enneagram",
+            "anchor_text": "九型人格总览",
+            "safe_public_route": true
+          },
+          {
+            "target_url": "https://fermatmind.com/zh/tests/enneagram-personality-test-nine-types",
+            "anchor_text": "九型人格测试",
+            "safe_public_route": true
+          }
+        ],
+        "differentiation_notes": "九型人格应围绕动机观察、常见误读和方法边界区分，不复制私有结果页文本。"
+      },
+      "qa_required": [
+        "schema_validation",
+        "method_evidence_boundary_gate",
+        "no_clinical_diagnosis_gate",
+        "no_hiring_or_screening_gate",
+        "no_deterministic_claim_gate",
+        "no_wing_instinct_tritype_expansion_gate",
+        "duplicate_template_gate",
+        "private_route_gate",
+        "result_page_leakage_gate",
+        "seo_projection_gate",
+        "bilingual_consistency_gate"
+      ],
+      "blocked_reason": null,
+      "recommended_next_task": "ENNEAGRAM-PUBLIC-PROFILE-AGENT-QA-01"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/enneagram/centers/gut",
+      "path": "/en/personality/enneagram/centers/gut",
+      "framework": "enneagram",
+      "locale": "en",
+      "entity_type": "center",
+      "code": "gut",
+      "current_surface": {
+        "authority": "backend_cms_personality_public_content_assets",
+        "route_family": "public_personality_enneagram",
+        "indexability_posture": "noindex_follow_until_separate_publish_gate",
+        "source_notes": [
+          "docs/public-personality/enneagram-public-personality-source-authority-packet.v1.json",
+          "docs/public-personality/enneagram-public-personality-claim-safety-packet.v1.json",
+          "lib/personality/enneagramPublicRoutes.ts"
+        ]
+      },
+      "observed_signal": "GSC_EVIDENCE_PENDING",
+      "reference_patterns_used": [
+        "personality_public_profile_agent_runner_contract",
+        "enneagram_public_personality_source_authority_packet",
+        "enneagram_public_personality_claim_safety_packet",
+        "backend_cms_content_authority"
+      ],
+      "recommendations": {
+        "title": "Gut Center: Motivation Cues and Enneagram Center Boundaries",
+        "description": "Draft recommendation for a public SEO profile that explains Enneagram patterns with reflective, non-diagnostic language and no fixed-outcome claims.",
+        "h1": "Gut Center Public Profile",
+        "quick_answer": "Gut Center can frame motivation, stress response, and communication reflection, but it should not be presented as diagnosis, screening, or a final identity label.",
+        "faq": [
+          {
+            "question": "Does Gut Center identify my final personality type?",
+            "answer": "No. The public page should use reflective language to explain possible motivation cues, not a final or official type conclusion."
+          },
+          {
+            "question": "Can this Enneagram page be used for hiring or clinical decisions?",
+            "answer": "No. It is only a self-reflection and communication resource, not a hiring, diagnostic, treatment, or performance prediction tool."
+          }
+        ],
+        "internal_links": [
+          {
+            "target_url": "https://fermatmind.com/en/personality/enneagram",
+            "anchor_text": "Enneagram overview",
+            "safe_public_route": true
+          },
+          {
+            "target_url": "https://fermatmind.com/en/tests/enneagram-personality-test-nine-types",
+            "anchor_text": "Enneagram personality test",
+            "safe_public_route": true
+          }
+        ],
+        "differentiation_notes": "Gut Center should differentiate around motivation reflection, common misreads, and method boundaries without copying private result text."
+      },
+      "qa_required": [
+        "schema_validation",
+        "method_evidence_boundary_gate",
+        "no_clinical_diagnosis_gate",
+        "no_hiring_or_screening_gate",
+        "no_deterministic_claim_gate",
+        "no_wing_instinct_tritype_expansion_gate",
+        "duplicate_template_gate",
+        "private_route_gate",
+        "result_page_leakage_gate",
+        "seo_projection_gate",
+        "bilingual_consistency_gate"
+      ],
+      "blocked_reason": null,
+      "recommended_next_task": "ENNEAGRAM-PUBLIC-PROFILE-AGENT-QA-01"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/enneagram/centers/gut",
+      "path": "/zh/personality/enneagram/centers/gut",
+      "framework": "enneagram",
+      "locale": "zh-CN",
+      "entity_type": "center",
+      "code": "gut",
+      "current_surface": {
+        "authority": "backend_cms_personality_public_content_assets",
+        "route_family": "public_personality_enneagram",
+        "indexability_posture": "noindex_follow_until_separate_publish_gate",
+        "source_notes": [
+          "docs/public-personality/enneagram-public-personality-source-authority-packet.v1.json",
+          "docs/public-personality/enneagram-public-personality-claim-safety-packet.v1.json",
+          "lib/personality/enneagramPublicRoutes.ts"
+        ]
+      },
+      "observed_signal": "GSC_EVIDENCE_PENDING",
+      "reference_patterns_used": [
+        "personality_public_profile_agent_runner_contract",
+        "enneagram_public_personality_source_authority_packet",
+        "enneagram_public_personality_claim_safety_packet",
+        "backend_cms_content_authority"
+      ],
+      "recommendations": {
+        "title": "本能中心：九型人格中心的动机线索与观察边界",
+        "description": "面向公开 SEO 页面的草稿建议，仅使用反思性语言解释九型人格，不诊断、不招聘筛选，也不承诺固定结果。",
+        "h1": "本能中心公开说明",
+        "quick_answer": "本能中心可以作为观察动机、压力反应和沟通偏好的公共入口，但不应被写成诊断、筛选或最终身份判定。",
+        "faq": [
+          {
+            "question": "本能中心能说明我的最终人格类型吗？",
+            "answer": "不能。公开页面应使用反思性语言，帮助读者理解可能的动机线索，而不是给出最终或官方类型结论。"
+          },
+          {
+            "question": "九型人格页面可以用于招聘或临床判断吗？",
+            "answer": "不能。该页面只能作为自我观察和沟通反思材料，不应支持招聘筛选、诊断、治疗或绩效预测。"
+          }
+        ],
+        "internal_links": [
+          {
+            "target_url": "https://fermatmind.com/zh/personality/enneagram",
+            "anchor_text": "九型人格总览",
+            "safe_public_route": true
+          },
+          {
+            "target_url": "https://fermatmind.com/zh/tests/enneagram-personality-test-nine-types",
+            "anchor_text": "九型人格测试",
+            "safe_public_route": true
+          }
+        ],
+        "differentiation_notes": "本能中心应围绕动机观察、常见误读和方法边界区分，不复制私有结果页文本。"
+      },
+      "qa_required": [
+        "schema_validation",
+        "method_evidence_boundary_gate",
+        "no_clinical_diagnosis_gate",
+        "no_hiring_or_screening_gate",
+        "no_deterministic_claim_gate",
+        "no_wing_instinct_tritype_expansion_gate",
+        "duplicate_template_gate",
+        "private_route_gate",
+        "result_page_leakage_gate",
+        "seo_projection_gate",
+        "bilingual_consistency_gate"
+      ],
+      "blocked_reason": null,
+      "recommended_next_task": "ENNEAGRAM-PUBLIC-PROFILE-AGENT-QA-01"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/enneagram/centers/heart",
+      "path": "/en/personality/enneagram/centers/heart",
+      "framework": "enneagram",
+      "locale": "en",
+      "entity_type": "center",
+      "code": "heart",
+      "current_surface": {
+        "authority": "backend_cms_personality_public_content_assets",
+        "route_family": "public_personality_enneagram",
+        "indexability_posture": "noindex_follow_until_separate_publish_gate",
+        "source_notes": [
+          "docs/public-personality/enneagram-public-personality-source-authority-packet.v1.json",
+          "docs/public-personality/enneagram-public-personality-claim-safety-packet.v1.json",
+          "lib/personality/enneagramPublicRoutes.ts"
+        ]
+      },
+      "observed_signal": "GSC_EVIDENCE_PENDING",
+      "reference_patterns_used": [
+        "personality_public_profile_agent_runner_contract",
+        "enneagram_public_personality_source_authority_packet",
+        "enneagram_public_personality_claim_safety_packet",
+        "backend_cms_content_authority"
+      ],
+      "recommendations": {
+        "title": "Heart Center: Motivation Cues and Enneagram Center Boundaries",
+        "description": "Draft recommendation for a public SEO profile that explains Enneagram patterns with reflective, non-diagnostic language and no fixed-outcome claims.",
+        "h1": "Heart Center Public Profile",
+        "quick_answer": "Heart Center can frame motivation, stress response, and communication reflection, but it should not be presented as diagnosis, screening, or a final identity label.",
+        "faq": [
+          {
+            "question": "Does Heart Center identify my final personality type?",
+            "answer": "No. The public page should use reflective language to explain possible motivation cues, not a final or official type conclusion."
+          },
+          {
+            "question": "Can this Enneagram page be used for hiring or clinical decisions?",
+            "answer": "No. It is only a self-reflection and communication resource, not a hiring, diagnostic, treatment, or performance prediction tool."
+          }
+        ],
+        "internal_links": [
+          {
+            "target_url": "https://fermatmind.com/en/personality/enneagram",
+            "anchor_text": "Enneagram overview",
+            "safe_public_route": true
+          },
+          {
+            "target_url": "https://fermatmind.com/en/tests/enneagram-personality-test-nine-types",
+            "anchor_text": "Enneagram personality test",
+            "safe_public_route": true
+          }
+        ],
+        "differentiation_notes": "Heart Center should differentiate around motivation reflection, common misreads, and method boundaries without copying private result text."
+      },
+      "qa_required": [
+        "schema_validation",
+        "method_evidence_boundary_gate",
+        "no_clinical_diagnosis_gate",
+        "no_hiring_or_screening_gate",
+        "no_deterministic_claim_gate",
+        "no_wing_instinct_tritype_expansion_gate",
+        "duplicate_template_gate",
+        "private_route_gate",
+        "result_page_leakage_gate",
+        "seo_projection_gate",
+        "bilingual_consistency_gate"
+      ],
+      "blocked_reason": null,
+      "recommended_next_task": "ENNEAGRAM-PUBLIC-PROFILE-AGENT-QA-01"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/enneagram/centers/heart",
+      "path": "/zh/personality/enneagram/centers/heart",
+      "framework": "enneagram",
+      "locale": "zh-CN",
+      "entity_type": "center",
+      "code": "heart",
+      "current_surface": {
+        "authority": "backend_cms_personality_public_content_assets",
+        "route_family": "public_personality_enneagram",
+        "indexability_posture": "noindex_follow_until_separate_publish_gate",
+        "source_notes": [
+          "docs/public-personality/enneagram-public-personality-source-authority-packet.v1.json",
+          "docs/public-personality/enneagram-public-personality-claim-safety-packet.v1.json",
+          "lib/personality/enneagramPublicRoutes.ts"
+        ]
+      },
+      "observed_signal": "GSC_EVIDENCE_PENDING",
+      "reference_patterns_used": [
+        "personality_public_profile_agent_runner_contract",
+        "enneagram_public_personality_source_authority_packet",
+        "enneagram_public_personality_claim_safety_packet",
+        "backend_cms_content_authority"
+      ],
+      "recommendations": {
+        "title": "情感中心：九型人格中心的动机线索与观察边界",
+        "description": "面向公开 SEO 页面的草稿建议，仅使用反思性语言解释九型人格，不诊断、不招聘筛选，也不承诺固定结果。",
+        "h1": "情感中心公开说明",
+        "quick_answer": "情感中心可以作为观察动机、压力反应和沟通偏好的公共入口，但不应被写成诊断、筛选或最终身份判定。",
+        "faq": [
+          {
+            "question": "情感中心能说明我的最终人格类型吗？",
+            "answer": "不能。公开页面应使用反思性语言，帮助读者理解可能的动机线索，而不是给出最终或官方类型结论。"
+          },
+          {
+            "question": "九型人格页面可以用于招聘或临床判断吗？",
+            "answer": "不能。该页面只能作为自我观察和沟通反思材料，不应支持招聘筛选、诊断、治疗或绩效预测。"
+          }
+        ],
+        "internal_links": [
+          {
+            "target_url": "https://fermatmind.com/zh/personality/enneagram",
+            "anchor_text": "九型人格总览",
+            "safe_public_route": true
+          },
+          {
+            "target_url": "https://fermatmind.com/zh/tests/enneagram-personality-test-nine-types",
+            "anchor_text": "九型人格测试",
+            "safe_public_route": true
+          }
+        ],
+        "differentiation_notes": "情感中心应围绕动机观察、常见误读和方法边界区分，不复制私有结果页文本。"
+      },
+      "qa_required": [
+        "schema_validation",
+        "method_evidence_boundary_gate",
+        "no_clinical_diagnosis_gate",
+        "no_hiring_or_screening_gate",
+        "no_deterministic_claim_gate",
+        "no_wing_instinct_tritype_expansion_gate",
+        "duplicate_template_gate",
+        "private_route_gate",
+        "result_page_leakage_gate",
+        "seo_projection_gate",
+        "bilingual_consistency_gate"
+      ],
+      "blocked_reason": null,
+      "recommended_next_task": "ENNEAGRAM-PUBLIC-PROFILE-AGENT-QA-01"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/enneagram/centers/head",
+      "path": "/en/personality/enneagram/centers/head",
+      "framework": "enneagram",
+      "locale": "en",
+      "entity_type": "center",
+      "code": "head",
+      "current_surface": {
+        "authority": "backend_cms_personality_public_content_assets",
+        "route_family": "public_personality_enneagram",
+        "indexability_posture": "noindex_follow_until_separate_publish_gate",
+        "source_notes": [
+          "docs/public-personality/enneagram-public-personality-source-authority-packet.v1.json",
+          "docs/public-personality/enneagram-public-personality-claim-safety-packet.v1.json",
+          "lib/personality/enneagramPublicRoutes.ts"
+        ]
+      },
+      "observed_signal": "GSC_EVIDENCE_PENDING",
+      "reference_patterns_used": [
+        "personality_public_profile_agent_runner_contract",
+        "enneagram_public_personality_source_authority_packet",
+        "enneagram_public_personality_claim_safety_packet",
+        "backend_cms_content_authority"
+      ],
+      "recommendations": {
+        "title": "Head Center: Motivation Cues and Enneagram Center Boundaries",
+        "description": "Draft recommendation for a public SEO profile that explains Enneagram patterns with reflective, non-diagnostic language and no fixed-outcome claims.",
+        "h1": "Head Center Public Profile",
+        "quick_answer": "Head Center can frame motivation, stress response, and communication reflection, but it should not be presented as diagnosis, screening, or a final identity label.",
+        "faq": [
+          {
+            "question": "Does Head Center identify my final personality type?",
+            "answer": "No. The public page should use reflective language to explain possible motivation cues, not a final or official type conclusion."
+          },
+          {
+            "question": "Can this Enneagram page be used for hiring or clinical decisions?",
+            "answer": "No. It is only a self-reflection and communication resource, not a hiring, diagnostic, treatment, or performance prediction tool."
+          }
+        ],
+        "internal_links": [
+          {
+            "target_url": "https://fermatmind.com/en/personality/enneagram",
+            "anchor_text": "Enneagram overview",
+            "safe_public_route": true
+          },
+          {
+            "target_url": "https://fermatmind.com/en/tests/enneagram-personality-test-nine-types",
+            "anchor_text": "Enneagram personality test",
+            "safe_public_route": true
+          }
+        ],
+        "differentiation_notes": "Head Center should differentiate around motivation reflection, common misreads, and method boundaries without copying private result text."
+      },
+      "qa_required": [
+        "schema_validation",
+        "method_evidence_boundary_gate",
+        "no_clinical_diagnosis_gate",
+        "no_hiring_or_screening_gate",
+        "no_deterministic_claim_gate",
+        "no_wing_instinct_tritype_expansion_gate",
+        "duplicate_template_gate",
+        "private_route_gate",
+        "result_page_leakage_gate",
+        "seo_projection_gate",
+        "bilingual_consistency_gate"
+      ],
+      "blocked_reason": null,
+      "recommended_next_task": "ENNEAGRAM-PUBLIC-PROFILE-AGENT-QA-01"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/enneagram/centers/head",
+      "path": "/zh/personality/enneagram/centers/head",
+      "framework": "enneagram",
+      "locale": "zh-CN",
+      "entity_type": "center",
+      "code": "head",
+      "current_surface": {
+        "authority": "backend_cms_personality_public_content_assets",
+        "route_family": "public_personality_enneagram",
+        "indexability_posture": "noindex_follow_until_separate_publish_gate",
+        "source_notes": [
+          "docs/public-personality/enneagram-public-personality-source-authority-packet.v1.json",
+          "docs/public-personality/enneagram-public-personality-claim-safety-packet.v1.json",
+          "lib/personality/enneagramPublicRoutes.ts"
+        ]
+      },
+      "observed_signal": "GSC_EVIDENCE_PENDING",
+      "reference_patterns_used": [
+        "personality_public_profile_agent_runner_contract",
+        "enneagram_public_personality_source_authority_packet",
+        "enneagram_public_personality_claim_safety_packet",
+        "backend_cms_content_authority"
+      ],
+      "recommendations": {
+        "title": "思维中心：九型人格中心的动机线索与观察边界",
+        "description": "面向公开 SEO 页面的草稿建议，仅使用反思性语言解释九型人格，不诊断、不招聘筛选，也不承诺固定结果。",
+        "h1": "思维中心公开说明",
+        "quick_answer": "思维中心可以作为观察动机、压力反应和沟通偏好的公共入口，但不应被写成诊断、筛选或最终身份判定。",
+        "faq": [
+          {
+            "question": "思维中心能说明我的最终人格类型吗？",
+            "answer": "不能。公开页面应使用反思性语言，帮助读者理解可能的动机线索，而不是给出最终或官方类型结论。"
+          },
+          {
+            "question": "九型人格页面可以用于招聘或临床判断吗？",
+            "answer": "不能。该页面只能作为自我观察和沟通反思材料，不应支持招聘筛选、诊断、治疗或绩效预测。"
+          }
+        ],
+        "internal_links": [
+          {
+            "target_url": "https://fermatmind.com/zh/personality/enneagram",
+            "anchor_text": "九型人格总览",
+            "safe_public_route": true
+          },
+          {
+            "target_url": "https://fermatmind.com/zh/tests/enneagram-personality-test-nine-types",
+            "anchor_text": "九型人格测试",
+            "safe_public_route": true
+          }
+        ],
+        "differentiation_notes": "思维中心应围绕动机观察、常见误读和方法边界区分，不复制私有结果页文本。"
+      },
+      "qa_required": [
+        "schema_validation",
+        "method_evidence_boundary_gate",
+        "no_clinical_diagnosis_gate",
+        "no_hiring_or_screening_gate",
+        "no_deterministic_claim_gate",
+        "no_wing_instinct_tritype_expansion_gate",
+        "duplicate_template_gate",
+        "private_route_gate",
+        "result_page_leakage_gate",
+        "seo_projection_gate",
+        "bilingual_consistency_gate"
+      ],
+      "blocked_reason": null,
+      "recommended_next_task": "ENNEAGRAM-PUBLIC-PROFILE-AGENT-QA-01"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/enneagram/type-1",
+      "path": "/en/personality/enneagram/type-1",
+      "framework": "enneagram",
+      "locale": "en",
+      "entity_type": "core_type",
+      "code": "type-1",
+      "current_surface": {
+        "authority": "backend_cms_personality_public_content_assets",
+        "route_family": "public_personality_enneagram",
+        "indexability_posture": "noindex_follow_until_separate_publish_gate",
+        "source_notes": [
+          "docs/public-personality/enneagram-public-personality-source-authority-packet.v1.json",
+          "docs/public-personality/enneagram-public-personality-claim-safety-packet.v1.json",
+          "lib/personality/enneagramPublicRoutes.ts"
+        ]
+      },
+      "observed_signal": "GSC_EVIDENCE_PENDING",
+      "reference_patterns_used": [
+        "personality_public_profile_agent_runner_contract",
+        "enneagram_public_personality_source_authority_packet",
+        "enneagram_public_personality_claim_safety_packet",
+        "backend_cms_content_authority"
+      ],
+      "recommendations": {
+        "title": "Enneagram Type 1: Motivation Patterns, Misreads, and Reflection",
+        "description": "Draft recommendation for a public SEO profile that explains Enneagram patterns with reflective, non-diagnostic language and no fixed-outcome claims.",
+        "h1": "Type 1 Public Profile",
+        "quick_answer": "Type 1 can frame motivation, stress response, and communication reflection, but it should not be presented as diagnosis, screening, or a final identity label.",
+        "faq": [
+          {
+            "question": "Does Type 1 identify my final personality type?",
+            "answer": "No. The public page should use reflective language to explain possible motivation cues, not a final or official type conclusion."
+          },
+          {
+            "question": "Can this Enneagram page be used for hiring or clinical decisions?",
+            "answer": "No. It is only a self-reflection and communication resource, not a hiring, diagnostic, treatment, or performance prediction tool."
+          }
+        ],
+        "internal_links": [
+          {
+            "target_url": "https://fermatmind.com/en/personality/enneagram",
+            "anchor_text": "Enneagram overview",
+            "safe_public_route": true
+          },
+          {
+            "target_url": "https://fermatmind.com/en/tests/enneagram-personality-test-nine-types",
+            "anchor_text": "Enneagram personality test",
+            "safe_public_route": true
+          }
+        ],
+        "differentiation_notes": "Type 1 should differentiate around motivation reflection, common misreads, and method boundaries without copying private result text."
+      },
+      "qa_required": [
+        "schema_validation",
+        "method_evidence_boundary_gate",
+        "no_clinical_diagnosis_gate",
+        "no_hiring_or_screening_gate",
+        "no_deterministic_claim_gate",
+        "no_wing_instinct_tritype_expansion_gate",
+        "duplicate_template_gate",
+        "private_route_gate",
+        "result_page_leakage_gate",
+        "seo_projection_gate",
+        "bilingual_consistency_gate"
+      ],
+      "blocked_reason": null,
+      "recommended_next_task": "ENNEAGRAM-PUBLIC-PROFILE-AGENT-QA-01"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/enneagram/type-1",
+      "path": "/zh/personality/enneagram/type-1",
+      "framework": "enneagram",
+      "locale": "zh-CN",
+      "entity_type": "core_type",
+      "code": "type-1",
+      "current_surface": {
+        "authority": "backend_cms_personality_public_content_assets",
+        "route_family": "public_personality_enneagram",
+        "indexability_posture": "noindex_follow_until_separate_publish_gate",
+        "source_notes": [
+          "docs/public-personality/enneagram-public-personality-source-authority-packet.v1.json",
+          "docs/public-personality/enneagram-public-personality-claim-safety-packet.v1.json",
+          "lib/personality/enneagramPublicRoutes.ts"
+        ]
+      },
+      "observed_signal": "GSC_EVIDENCE_PENDING",
+      "reference_patterns_used": [
+        "personality_public_profile_agent_runner_contract",
+        "enneagram_public_personality_source_authority_packet",
+        "enneagram_public_personality_claim_safety_packet",
+        "backend_cms_content_authority"
+      ],
+      "recommendations": {
+        "title": "第 1 型人格：动机模式、常见误读与自我观察",
+        "description": "面向公开 SEO 页面的草稿建议，仅使用反思性语言解释九型人格，不诊断、不招聘筛选，也不承诺固定结果。",
+        "h1": "第 1 型公开说明",
+        "quick_answer": "第 1 型可以作为观察动机、压力反应和沟通偏好的公共入口，但不应被写成诊断、筛选或最终身份判定。",
+        "faq": [
+          {
+            "question": "第 1 型能说明我的最终人格类型吗？",
+            "answer": "不能。公开页面应使用反思性语言，帮助读者理解可能的动机线索，而不是给出最终或官方类型结论。"
+          },
+          {
+            "question": "九型人格页面可以用于招聘或临床判断吗？",
+            "answer": "不能。该页面只能作为自我观察和沟通反思材料，不应支持招聘筛选、诊断、治疗或绩效预测。"
+          }
+        ],
+        "internal_links": [
+          {
+            "target_url": "https://fermatmind.com/zh/personality/enneagram",
+            "anchor_text": "九型人格总览",
+            "safe_public_route": true
+          },
+          {
+            "target_url": "https://fermatmind.com/zh/tests/enneagram-personality-test-nine-types",
+            "anchor_text": "九型人格测试",
+            "safe_public_route": true
+          }
+        ],
+        "differentiation_notes": "第 1 型应围绕动机观察、常见误读和方法边界区分，不复制私有结果页文本。"
+      },
+      "qa_required": [
+        "schema_validation",
+        "method_evidence_boundary_gate",
+        "no_clinical_diagnosis_gate",
+        "no_hiring_or_screening_gate",
+        "no_deterministic_claim_gate",
+        "no_wing_instinct_tritype_expansion_gate",
+        "duplicate_template_gate",
+        "private_route_gate",
+        "result_page_leakage_gate",
+        "seo_projection_gate",
+        "bilingual_consistency_gate"
+      ],
+      "blocked_reason": null,
+      "recommended_next_task": "ENNEAGRAM-PUBLIC-PROFILE-AGENT-QA-01"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/enneagram/type-2",
+      "path": "/en/personality/enneagram/type-2",
+      "framework": "enneagram",
+      "locale": "en",
+      "entity_type": "core_type",
+      "code": "type-2",
+      "current_surface": {
+        "authority": "backend_cms_personality_public_content_assets",
+        "route_family": "public_personality_enneagram",
+        "indexability_posture": "noindex_follow_until_separate_publish_gate",
+        "source_notes": [
+          "docs/public-personality/enneagram-public-personality-source-authority-packet.v1.json",
+          "docs/public-personality/enneagram-public-personality-claim-safety-packet.v1.json",
+          "lib/personality/enneagramPublicRoutes.ts"
+        ]
+      },
+      "observed_signal": "GSC_EVIDENCE_PENDING",
+      "reference_patterns_used": [
+        "personality_public_profile_agent_runner_contract",
+        "enneagram_public_personality_source_authority_packet",
+        "enneagram_public_personality_claim_safety_packet",
+        "backend_cms_content_authority"
+      ],
+      "recommendations": {
+        "title": "Enneagram Type 2: Motivation Patterns, Misreads, and Reflection",
+        "description": "Draft recommendation for a public SEO profile that explains Enneagram patterns with reflective, non-diagnostic language and no fixed-outcome claims.",
+        "h1": "Type 2 Public Profile",
+        "quick_answer": "Type 2 can frame motivation, stress response, and communication reflection, but it should not be presented as diagnosis, screening, or a final identity label.",
+        "faq": [
+          {
+            "question": "Does Type 2 identify my final personality type?",
+            "answer": "No. The public page should use reflective language to explain possible motivation cues, not a final or official type conclusion."
+          },
+          {
+            "question": "Can this Enneagram page be used for hiring or clinical decisions?",
+            "answer": "No. It is only a self-reflection and communication resource, not a hiring, diagnostic, treatment, or performance prediction tool."
+          }
+        ],
+        "internal_links": [
+          {
+            "target_url": "https://fermatmind.com/en/personality/enneagram",
+            "anchor_text": "Enneagram overview",
+            "safe_public_route": true
+          },
+          {
+            "target_url": "https://fermatmind.com/en/tests/enneagram-personality-test-nine-types",
+            "anchor_text": "Enneagram personality test",
+            "safe_public_route": true
+          }
+        ],
+        "differentiation_notes": "Type 2 should differentiate around motivation reflection, common misreads, and method boundaries without copying private result text."
+      },
+      "qa_required": [
+        "schema_validation",
+        "method_evidence_boundary_gate",
+        "no_clinical_diagnosis_gate",
+        "no_hiring_or_screening_gate",
+        "no_deterministic_claim_gate",
+        "no_wing_instinct_tritype_expansion_gate",
+        "duplicate_template_gate",
+        "private_route_gate",
+        "result_page_leakage_gate",
+        "seo_projection_gate",
+        "bilingual_consistency_gate"
+      ],
+      "blocked_reason": null,
+      "recommended_next_task": "ENNEAGRAM-PUBLIC-PROFILE-AGENT-QA-01"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/enneagram/type-2",
+      "path": "/zh/personality/enneagram/type-2",
+      "framework": "enneagram",
+      "locale": "zh-CN",
+      "entity_type": "core_type",
+      "code": "type-2",
+      "current_surface": {
+        "authority": "backend_cms_personality_public_content_assets",
+        "route_family": "public_personality_enneagram",
+        "indexability_posture": "noindex_follow_until_separate_publish_gate",
+        "source_notes": [
+          "docs/public-personality/enneagram-public-personality-source-authority-packet.v1.json",
+          "docs/public-personality/enneagram-public-personality-claim-safety-packet.v1.json",
+          "lib/personality/enneagramPublicRoutes.ts"
+        ]
+      },
+      "observed_signal": "GSC_EVIDENCE_PENDING",
+      "reference_patterns_used": [
+        "personality_public_profile_agent_runner_contract",
+        "enneagram_public_personality_source_authority_packet",
+        "enneagram_public_personality_claim_safety_packet",
+        "backend_cms_content_authority"
+      ],
+      "recommendations": {
+        "title": "第 2 型人格：动机模式、常见误读与自我观察",
+        "description": "面向公开 SEO 页面的草稿建议，仅使用反思性语言解释九型人格，不诊断、不招聘筛选，也不承诺固定结果。",
+        "h1": "第 2 型公开说明",
+        "quick_answer": "第 2 型可以作为观察动机、压力反应和沟通偏好的公共入口，但不应被写成诊断、筛选或最终身份判定。",
+        "faq": [
+          {
+            "question": "第 2 型能说明我的最终人格类型吗？",
+            "answer": "不能。公开页面应使用反思性语言，帮助读者理解可能的动机线索，而不是给出最终或官方类型结论。"
+          },
+          {
+            "question": "九型人格页面可以用于招聘或临床判断吗？",
+            "answer": "不能。该页面只能作为自我观察和沟通反思材料，不应支持招聘筛选、诊断、治疗或绩效预测。"
+          }
+        ],
+        "internal_links": [
+          {
+            "target_url": "https://fermatmind.com/zh/personality/enneagram",
+            "anchor_text": "九型人格总览",
+            "safe_public_route": true
+          },
+          {
+            "target_url": "https://fermatmind.com/zh/tests/enneagram-personality-test-nine-types",
+            "anchor_text": "九型人格测试",
+            "safe_public_route": true
+          }
+        ],
+        "differentiation_notes": "第 2 型应围绕动机观察、常见误读和方法边界区分，不复制私有结果页文本。"
+      },
+      "qa_required": [
+        "schema_validation",
+        "method_evidence_boundary_gate",
+        "no_clinical_diagnosis_gate",
+        "no_hiring_or_screening_gate",
+        "no_deterministic_claim_gate",
+        "no_wing_instinct_tritype_expansion_gate",
+        "duplicate_template_gate",
+        "private_route_gate",
+        "result_page_leakage_gate",
+        "seo_projection_gate",
+        "bilingual_consistency_gate"
+      ],
+      "blocked_reason": null,
+      "recommended_next_task": "ENNEAGRAM-PUBLIC-PROFILE-AGENT-QA-01"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/enneagram/type-3",
+      "path": "/en/personality/enneagram/type-3",
+      "framework": "enneagram",
+      "locale": "en",
+      "entity_type": "core_type",
+      "code": "type-3",
+      "current_surface": {
+        "authority": "backend_cms_personality_public_content_assets",
+        "route_family": "public_personality_enneagram",
+        "indexability_posture": "noindex_follow_until_separate_publish_gate",
+        "source_notes": [
+          "docs/public-personality/enneagram-public-personality-source-authority-packet.v1.json",
+          "docs/public-personality/enneagram-public-personality-claim-safety-packet.v1.json",
+          "lib/personality/enneagramPublicRoutes.ts"
+        ]
+      },
+      "observed_signal": "GSC_EVIDENCE_PENDING",
+      "reference_patterns_used": [
+        "personality_public_profile_agent_runner_contract",
+        "enneagram_public_personality_source_authority_packet",
+        "enneagram_public_personality_claim_safety_packet",
+        "backend_cms_content_authority"
+      ],
+      "recommendations": {
+        "title": "Enneagram Type 3: Motivation Patterns, Misreads, and Reflection",
+        "description": "Draft recommendation for a public SEO profile that explains Enneagram patterns with reflective, non-diagnostic language and no fixed-outcome claims.",
+        "h1": "Type 3 Public Profile",
+        "quick_answer": "Type 3 can frame motivation, stress response, and communication reflection, but it should not be presented as diagnosis, screening, or a final identity label.",
+        "faq": [
+          {
+            "question": "Does Type 3 identify my final personality type?",
+            "answer": "No. The public page should use reflective language to explain possible motivation cues, not a final or official type conclusion."
+          },
+          {
+            "question": "Can this Enneagram page be used for hiring or clinical decisions?",
+            "answer": "No. It is only a self-reflection and communication resource, not a hiring, diagnostic, treatment, or performance prediction tool."
+          }
+        ],
+        "internal_links": [
+          {
+            "target_url": "https://fermatmind.com/en/personality/enneagram",
+            "anchor_text": "Enneagram overview",
+            "safe_public_route": true
+          },
+          {
+            "target_url": "https://fermatmind.com/en/tests/enneagram-personality-test-nine-types",
+            "anchor_text": "Enneagram personality test",
+            "safe_public_route": true
+          }
+        ],
+        "differentiation_notes": "Type 3 should differentiate around motivation reflection, common misreads, and method boundaries without copying private result text."
+      },
+      "qa_required": [
+        "schema_validation",
+        "method_evidence_boundary_gate",
+        "no_clinical_diagnosis_gate",
+        "no_hiring_or_screening_gate",
+        "no_deterministic_claim_gate",
+        "no_wing_instinct_tritype_expansion_gate",
+        "duplicate_template_gate",
+        "private_route_gate",
+        "result_page_leakage_gate",
+        "seo_projection_gate",
+        "bilingual_consistency_gate"
+      ],
+      "blocked_reason": null,
+      "recommended_next_task": "ENNEAGRAM-PUBLIC-PROFILE-AGENT-QA-01"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/enneagram/type-3",
+      "path": "/zh/personality/enneagram/type-3",
+      "framework": "enneagram",
+      "locale": "zh-CN",
+      "entity_type": "core_type",
+      "code": "type-3",
+      "current_surface": {
+        "authority": "backend_cms_personality_public_content_assets",
+        "route_family": "public_personality_enneagram",
+        "indexability_posture": "noindex_follow_until_separate_publish_gate",
+        "source_notes": [
+          "docs/public-personality/enneagram-public-personality-source-authority-packet.v1.json",
+          "docs/public-personality/enneagram-public-personality-claim-safety-packet.v1.json",
+          "lib/personality/enneagramPublicRoutes.ts"
+        ]
+      },
+      "observed_signal": "GSC_EVIDENCE_PENDING",
+      "reference_patterns_used": [
+        "personality_public_profile_agent_runner_contract",
+        "enneagram_public_personality_source_authority_packet",
+        "enneagram_public_personality_claim_safety_packet",
+        "backend_cms_content_authority"
+      ],
+      "recommendations": {
+        "title": "第 3 型人格：动机模式、常见误读与自我观察",
+        "description": "面向公开 SEO 页面的草稿建议，仅使用反思性语言解释九型人格，不诊断、不招聘筛选，也不承诺固定结果。",
+        "h1": "第 3 型公开说明",
+        "quick_answer": "第 3 型可以作为观察动机、压力反应和沟通偏好的公共入口，但不应被写成诊断、筛选或最终身份判定。",
+        "faq": [
+          {
+            "question": "第 3 型能说明我的最终人格类型吗？",
+            "answer": "不能。公开页面应使用反思性语言，帮助读者理解可能的动机线索，而不是给出最终或官方类型结论。"
+          },
+          {
+            "question": "九型人格页面可以用于招聘或临床判断吗？",
+            "answer": "不能。该页面只能作为自我观察和沟通反思材料，不应支持招聘筛选、诊断、治疗或绩效预测。"
+          }
+        ],
+        "internal_links": [
+          {
+            "target_url": "https://fermatmind.com/zh/personality/enneagram",
+            "anchor_text": "九型人格总览",
+            "safe_public_route": true
+          },
+          {
+            "target_url": "https://fermatmind.com/zh/tests/enneagram-personality-test-nine-types",
+            "anchor_text": "九型人格测试",
+            "safe_public_route": true
+          }
+        ],
+        "differentiation_notes": "第 3 型应围绕动机观察、常见误读和方法边界区分，不复制私有结果页文本。"
+      },
+      "qa_required": [
+        "schema_validation",
+        "method_evidence_boundary_gate",
+        "no_clinical_diagnosis_gate",
+        "no_hiring_or_screening_gate",
+        "no_deterministic_claim_gate",
+        "no_wing_instinct_tritype_expansion_gate",
+        "duplicate_template_gate",
+        "private_route_gate",
+        "result_page_leakage_gate",
+        "seo_projection_gate",
+        "bilingual_consistency_gate"
+      ],
+      "blocked_reason": null,
+      "recommended_next_task": "ENNEAGRAM-PUBLIC-PROFILE-AGENT-QA-01"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/enneagram/type-4",
+      "path": "/en/personality/enneagram/type-4",
+      "framework": "enneagram",
+      "locale": "en",
+      "entity_type": "core_type",
+      "code": "type-4",
+      "current_surface": {
+        "authority": "backend_cms_personality_public_content_assets",
+        "route_family": "public_personality_enneagram",
+        "indexability_posture": "noindex_follow_until_separate_publish_gate",
+        "source_notes": [
+          "docs/public-personality/enneagram-public-personality-source-authority-packet.v1.json",
+          "docs/public-personality/enneagram-public-personality-claim-safety-packet.v1.json",
+          "lib/personality/enneagramPublicRoutes.ts"
+        ]
+      },
+      "observed_signal": "GSC_EVIDENCE_PENDING",
+      "reference_patterns_used": [
+        "personality_public_profile_agent_runner_contract",
+        "enneagram_public_personality_source_authority_packet",
+        "enneagram_public_personality_claim_safety_packet",
+        "backend_cms_content_authority"
+      ],
+      "recommendations": {
+        "title": "Enneagram Type 4: Motivation Patterns, Misreads, and Reflection",
+        "description": "Draft recommendation for a public SEO profile that explains Enneagram patterns with reflective, non-diagnostic language and no fixed-outcome claims.",
+        "h1": "Type 4 Public Profile",
+        "quick_answer": "Type 4 can frame motivation, stress response, and communication reflection, but it should not be presented as diagnosis, screening, or a final identity label.",
+        "faq": [
+          {
+            "question": "Does Type 4 identify my final personality type?",
+            "answer": "No. The public page should use reflective language to explain possible motivation cues, not a final or official type conclusion."
+          },
+          {
+            "question": "Can this Enneagram page be used for hiring or clinical decisions?",
+            "answer": "No. It is only a self-reflection and communication resource, not a hiring, diagnostic, treatment, or performance prediction tool."
+          }
+        ],
+        "internal_links": [
+          {
+            "target_url": "https://fermatmind.com/en/personality/enneagram",
+            "anchor_text": "Enneagram overview",
+            "safe_public_route": true
+          },
+          {
+            "target_url": "https://fermatmind.com/en/tests/enneagram-personality-test-nine-types",
+            "anchor_text": "Enneagram personality test",
+            "safe_public_route": true
+          }
+        ],
+        "differentiation_notes": "Type 4 should differentiate around motivation reflection, common misreads, and method boundaries without copying private result text."
+      },
+      "qa_required": [
+        "schema_validation",
+        "method_evidence_boundary_gate",
+        "no_clinical_diagnosis_gate",
+        "no_hiring_or_screening_gate",
+        "no_deterministic_claim_gate",
+        "no_wing_instinct_tritype_expansion_gate",
+        "duplicate_template_gate",
+        "private_route_gate",
+        "result_page_leakage_gate",
+        "seo_projection_gate",
+        "bilingual_consistency_gate"
+      ],
+      "blocked_reason": null,
+      "recommended_next_task": "ENNEAGRAM-PUBLIC-PROFILE-AGENT-QA-01"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/enneagram/type-4",
+      "path": "/zh/personality/enneagram/type-4",
+      "framework": "enneagram",
+      "locale": "zh-CN",
+      "entity_type": "core_type",
+      "code": "type-4",
+      "current_surface": {
+        "authority": "backend_cms_personality_public_content_assets",
+        "route_family": "public_personality_enneagram",
+        "indexability_posture": "noindex_follow_until_separate_publish_gate",
+        "source_notes": [
+          "docs/public-personality/enneagram-public-personality-source-authority-packet.v1.json",
+          "docs/public-personality/enneagram-public-personality-claim-safety-packet.v1.json",
+          "lib/personality/enneagramPublicRoutes.ts"
+        ]
+      },
+      "observed_signal": "GSC_EVIDENCE_PENDING",
+      "reference_patterns_used": [
+        "personality_public_profile_agent_runner_contract",
+        "enneagram_public_personality_source_authority_packet",
+        "enneagram_public_personality_claim_safety_packet",
+        "backend_cms_content_authority"
+      ],
+      "recommendations": {
+        "title": "第 4 型人格：动机模式、常见误读与自我观察",
+        "description": "面向公开 SEO 页面的草稿建议，仅使用反思性语言解释九型人格，不诊断、不招聘筛选，也不承诺固定结果。",
+        "h1": "第 4 型公开说明",
+        "quick_answer": "第 4 型可以作为观察动机、压力反应和沟通偏好的公共入口，但不应被写成诊断、筛选或最终身份判定。",
+        "faq": [
+          {
+            "question": "第 4 型能说明我的最终人格类型吗？",
+            "answer": "不能。公开页面应使用反思性语言，帮助读者理解可能的动机线索，而不是给出最终或官方类型结论。"
+          },
+          {
+            "question": "九型人格页面可以用于招聘或临床判断吗？",
+            "answer": "不能。该页面只能作为自我观察和沟通反思材料，不应支持招聘筛选、诊断、治疗或绩效预测。"
+          }
+        ],
+        "internal_links": [
+          {
+            "target_url": "https://fermatmind.com/zh/personality/enneagram",
+            "anchor_text": "九型人格总览",
+            "safe_public_route": true
+          },
+          {
+            "target_url": "https://fermatmind.com/zh/tests/enneagram-personality-test-nine-types",
+            "anchor_text": "九型人格测试",
+            "safe_public_route": true
+          }
+        ],
+        "differentiation_notes": "第 4 型应围绕动机观察、常见误读和方法边界区分，不复制私有结果页文本。"
+      },
+      "qa_required": [
+        "schema_validation",
+        "method_evidence_boundary_gate",
+        "no_clinical_diagnosis_gate",
+        "no_hiring_or_screening_gate",
+        "no_deterministic_claim_gate",
+        "no_wing_instinct_tritype_expansion_gate",
+        "duplicate_template_gate",
+        "private_route_gate",
+        "result_page_leakage_gate",
+        "seo_projection_gate",
+        "bilingual_consistency_gate"
+      ],
+      "blocked_reason": null,
+      "recommended_next_task": "ENNEAGRAM-PUBLIC-PROFILE-AGENT-QA-01"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/enneagram/type-5",
+      "path": "/en/personality/enneagram/type-5",
+      "framework": "enneagram",
+      "locale": "en",
+      "entity_type": "core_type",
+      "code": "type-5",
+      "current_surface": {
+        "authority": "backend_cms_personality_public_content_assets",
+        "route_family": "public_personality_enneagram",
+        "indexability_posture": "noindex_follow_until_separate_publish_gate",
+        "source_notes": [
+          "docs/public-personality/enneagram-public-personality-source-authority-packet.v1.json",
+          "docs/public-personality/enneagram-public-personality-claim-safety-packet.v1.json",
+          "lib/personality/enneagramPublicRoutes.ts"
+        ]
+      },
+      "observed_signal": "GSC_EVIDENCE_PENDING",
+      "reference_patterns_used": [
+        "personality_public_profile_agent_runner_contract",
+        "enneagram_public_personality_source_authority_packet",
+        "enneagram_public_personality_claim_safety_packet",
+        "backend_cms_content_authority"
+      ],
+      "recommendations": {
+        "title": "Enneagram Type 5: Motivation Patterns, Misreads, and Reflection",
+        "description": "Draft recommendation for a public SEO profile that explains Enneagram patterns with reflective, non-diagnostic language and no fixed-outcome claims.",
+        "h1": "Type 5 Public Profile",
+        "quick_answer": "Type 5 can frame motivation, stress response, and communication reflection, but it should not be presented as diagnosis, screening, or a final identity label.",
+        "faq": [
+          {
+            "question": "Does Type 5 identify my final personality type?",
+            "answer": "No. The public page should use reflective language to explain possible motivation cues, not a final or official type conclusion."
+          },
+          {
+            "question": "Can this Enneagram page be used for hiring or clinical decisions?",
+            "answer": "No. It is only a self-reflection and communication resource, not a hiring, diagnostic, treatment, or performance prediction tool."
+          }
+        ],
+        "internal_links": [
+          {
+            "target_url": "https://fermatmind.com/en/personality/enneagram",
+            "anchor_text": "Enneagram overview",
+            "safe_public_route": true
+          },
+          {
+            "target_url": "https://fermatmind.com/en/tests/enneagram-personality-test-nine-types",
+            "anchor_text": "Enneagram personality test",
+            "safe_public_route": true
+          }
+        ],
+        "differentiation_notes": "Type 5 should differentiate around motivation reflection, common misreads, and method boundaries without copying private result text."
+      },
+      "qa_required": [
+        "schema_validation",
+        "method_evidence_boundary_gate",
+        "no_clinical_diagnosis_gate",
+        "no_hiring_or_screening_gate",
+        "no_deterministic_claim_gate",
+        "no_wing_instinct_tritype_expansion_gate",
+        "duplicate_template_gate",
+        "private_route_gate",
+        "result_page_leakage_gate",
+        "seo_projection_gate",
+        "bilingual_consistency_gate"
+      ],
+      "blocked_reason": null,
+      "recommended_next_task": "ENNEAGRAM-PUBLIC-PROFILE-AGENT-QA-01"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/enneagram/type-5",
+      "path": "/zh/personality/enneagram/type-5",
+      "framework": "enneagram",
+      "locale": "zh-CN",
+      "entity_type": "core_type",
+      "code": "type-5",
+      "current_surface": {
+        "authority": "backend_cms_personality_public_content_assets",
+        "route_family": "public_personality_enneagram",
+        "indexability_posture": "noindex_follow_until_separate_publish_gate",
+        "source_notes": [
+          "docs/public-personality/enneagram-public-personality-source-authority-packet.v1.json",
+          "docs/public-personality/enneagram-public-personality-claim-safety-packet.v1.json",
+          "lib/personality/enneagramPublicRoutes.ts"
+        ]
+      },
+      "observed_signal": "GSC_EVIDENCE_PENDING",
+      "reference_patterns_used": [
+        "personality_public_profile_agent_runner_contract",
+        "enneagram_public_personality_source_authority_packet",
+        "enneagram_public_personality_claim_safety_packet",
+        "backend_cms_content_authority"
+      ],
+      "recommendations": {
+        "title": "第 5 型人格：动机模式、常见误读与自我观察",
+        "description": "面向公开 SEO 页面的草稿建议，仅使用反思性语言解释九型人格，不诊断、不招聘筛选，也不承诺固定结果。",
+        "h1": "第 5 型公开说明",
+        "quick_answer": "第 5 型可以作为观察动机、压力反应和沟通偏好的公共入口，但不应被写成诊断、筛选或最终身份判定。",
+        "faq": [
+          {
+            "question": "第 5 型能说明我的最终人格类型吗？",
+            "answer": "不能。公开页面应使用反思性语言，帮助读者理解可能的动机线索，而不是给出最终或官方类型结论。"
+          },
+          {
+            "question": "九型人格页面可以用于招聘或临床判断吗？",
+            "answer": "不能。该页面只能作为自我观察和沟通反思材料，不应支持招聘筛选、诊断、治疗或绩效预测。"
+          }
+        ],
+        "internal_links": [
+          {
+            "target_url": "https://fermatmind.com/zh/personality/enneagram",
+            "anchor_text": "九型人格总览",
+            "safe_public_route": true
+          },
+          {
+            "target_url": "https://fermatmind.com/zh/tests/enneagram-personality-test-nine-types",
+            "anchor_text": "九型人格测试",
+            "safe_public_route": true
+          }
+        ],
+        "differentiation_notes": "第 5 型应围绕动机观察、常见误读和方法边界区分，不复制私有结果页文本。"
+      },
+      "qa_required": [
+        "schema_validation",
+        "method_evidence_boundary_gate",
+        "no_clinical_diagnosis_gate",
+        "no_hiring_or_screening_gate",
+        "no_deterministic_claim_gate",
+        "no_wing_instinct_tritype_expansion_gate",
+        "duplicate_template_gate",
+        "private_route_gate",
+        "result_page_leakage_gate",
+        "seo_projection_gate",
+        "bilingual_consistency_gate"
+      ],
+      "blocked_reason": null,
+      "recommended_next_task": "ENNEAGRAM-PUBLIC-PROFILE-AGENT-QA-01"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/enneagram/type-6",
+      "path": "/en/personality/enneagram/type-6",
+      "framework": "enneagram",
+      "locale": "en",
+      "entity_type": "core_type",
+      "code": "type-6",
+      "current_surface": {
+        "authority": "backend_cms_personality_public_content_assets",
+        "route_family": "public_personality_enneagram",
+        "indexability_posture": "noindex_follow_until_separate_publish_gate",
+        "source_notes": [
+          "docs/public-personality/enneagram-public-personality-source-authority-packet.v1.json",
+          "docs/public-personality/enneagram-public-personality-claim-safety-packet.v1.json",
+          "lib/personality/enneagramPublicRoutes.ts"
+        ]
+      },
+      "observed_signal": "GSC_EVIDENCE_PENDING",
+      "reference_patterns_used": [
+        "personality_public_profile_agent_runner_contract",
+        "enneagram_public_personality_source_authority_packet",
+        "enneagram_public_personality_claim_safety_packet",
+        "backend_cms_content_authority"
+      ],
+      "recommendations": {
+        "title": "Enneagram Type 6: Motivation Patterns, Misreads, and Reflection",
+        "description": "Draft recommendation for a public SEO profile that explains Enneagram patterns with reflective, non-diagnostic language and no fixed-outcome claims.",
+        "h1": "Type 6 Public Profile",
+        "quick_answer": "Type 6 can frame motivation, stress response, and communication reflection, but it should not be presented as diagnosis, screening, or a final identity label.",
+        "faq": [
+          {
+            "question": "Does Type 6 identify my final personality type?",
+            "answer": "No. The public page should use reflective language to explain possible motivation cues, not a final or official type conclusion."
+          },
+          {
+            "question": "Can this Enneagram page be used for hiring or clinical decisions?",
+            "answer": "No. It is only a self-reflection and communication resource, not a hiring, diagnostic, treatment, or performance prediction tool."
+          }
+        ],
+        "internal_links": [
+          {
+            "target_url": "https://fermatmind.com/en/personality/enneagram",
+            "anchor_text": "Enneagram overview",
+            "safe_public_route": true
+          },
+          {
+            "target_url": "https://fermatmind.com/en/tests/enneagram-personality-test-nine-types",
+            "anchor_text": "Enneagram personality test",
+            "safe_public_route": true
+          }
+        ],
+        "differentiation_notes": "Type 6 should differentiate around motivation reflection, common misreads, and method boundaries without copying private result text."
+      },
+      "qa_required": [
+        "schema_validation",
+        "method_evidence_boundary_gate",
+        "no_clinical_diagnosis_gate",
+        "no_hiring_or_screening_gate",
+        "no_deterministic_claim_gate",
+        "no_wing_instinct_tritype_expansion_gate",
+        "duplicate_template_gate",
+        "private_route_gate",
+        "result_page_leakage_gate",
+        "seo_projection_gate",
+        "bilingual_consistency_gate"
+      ],
+      "blocked_reason": null,
+      "recommended_next_task": "ENNEAGRAM-PUBLIC-PROFILE-AGENT-QA-01"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/enneagram/type-6",
+      "path": "/zh/personality/enneagram/type-6",
+      "framework": "enneagram",
+      "locale": "zh-CN",
+      "entity_type": "core_type",
+      "code": "type-6",
+      "current_surface": {
+        "authority": "backend_cms_personality_public_content_assets",
+        "route_family": "public_personality_enneagram",
+        "indexability_posture": "noindex_follow_until_separate_publish_gate",
+        "source_notes": [
+          "docs/public-personality/enneagram-public-personality-source-authority-packet.v1.json",
+          "docs/public-personality/enneagram-public-personality-claim-safety-packet.v1.json",
+          "lib/personality/enneagramPublicRoutes.ts"
+        ]
+      },
+      "observed_signal": "GSC_EVIDENCE_PENDING",
+      "reference_patterns_used": [
+        "personality_public_profile_agent_runner_contract",
+        "enneagram_public_personality_source_authority_packet",
+        "enneagram_public_personality_claim_safety_packet",
+        "backend_cms_content_authority"
+      ],
+      "recommendations": {
+        "title": "第 6 型人格：动机模式、常见误读与自我观察",
+        "description": "面向公开 SEO 页面的草稿建议，仅使用反思性语言解释九型人格，不诊断、不招聘筛选，也不承诺固定结果。",
+        "h1": "第 6 型公开说明",
+        "quick_answer": "第 6 型可以作为观察动机、压力反应和沟通偏好的公共入口，但不应被写成诊断、筛选或最终身份判定。",
+        "faq": [
+          {
+            "question": "第 6 型能说明我的最终人格类型吗？",
+            "answer": "不能。公开页面应使用反思性语言，帮助读者理解可能的动机线索，而不是给出最终或官方类型结论。"
+          },
+          {
+            "question": "九型人格页面可以用于招聘或临床判断吗？",
+            "answer": "不能。该页面只能作为自我观察和沟通反思材料，不应支持招聘筛选、诊断、治疗或绩效预测。"
+          }
+        ],
+        "internal_links": [
+          {
+            "target_url": "https://fermatmind.com/zh/personality/enneagram",
+            "anchor_text": "九型人格总览",
+            "safe_public_route": true
+          },
+          {
+            "target_url": "https://fermatmind.com/zh/tests/enneagram-personality-test-nine-types",
+            "anchor_text": "九型人格测试",
+            "safe_public_route": true
+          }
+        ],
+        "differentiation_notes": "第 6 型应围绕动机观察、常见误读和方法边界区分，不复制私有结果页文本。"
+      },
+      "qa_required": [
+        "schema_validation",
+        "method_evidence_boundary_gate",
+        "no_clinical_diagnosis_gate",
+        "no_hiring_or_screening_gate",
+        "no_deterministic_claim_gate",
+        "no_wing_instinct_tritype_expansion_gate",
+        "duplicate_template_gate",
+        "private_route_gate",
+        "result_page_leakage_gate",
+        "seo_projection_gate",
+        "bilingual_consistency_gate"
+      ],
+      "blocked_reason": null,
+      "recommended_next_task": "ENNEAGRAM-PUBLIC-PROFILE-AGENT-QA-01"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/enneagram/type-7",
+      "path": "/en/personality/enneagram/type-7",
+      "framework": "enneagram",
+      "locale": "en",
+      "entity_type": "core_type",
+      "code": "type-7",
+      "current_surface": {
+        "authority": "backend_cms_personality_public_content_assets",
+        "route_family": "public_personality_enneagram",
+        "indexability_posture": "noindex_follow_until_separate_publish_gate",
+        "source_notes": [
+          "docs/public-personality/enneagram-public-personality-source-authority-packet.v1.json",
+          "docs/public-personality/enneagram-public-personality-claim-safety-packet.v1.json",
+          "lib/personality/enneagramPublicRoutes.ts"
+        ]
+      },
+      "observed_signal": "GSC_EVIDENCE_PENDING",
+      "reference_patterns_used": [
+        "personality_public_profile_agent_runner_contract",
+        "enneagram_public_personality_source_authority_packet",
+        "enneagram_public_personality_claim_safety_packet",
+        "backend_cms_content_authority"
+      ],
+      "recommendations": {
+        "title": "Enneagram Type 7: Motivation Patterns, Misreads, and Reflection",
+        "description": "Draft recommendation for a public SEO profile that explains Enneagram patterns with reflective, non-diagnostic language and no fixed-outcome claims.",
+        "h1": "Type 7 Public Profile",
+        "quick_answer": "Type 7 can frame motivation, stress response, and communication reflection, but it should not be presented as diagnosis, screening, or a final identity label.",
+        "faq": [
+          {
+            "question": "Does Type 7 identify my final personality type?",
+            "answer": "No. The public page should use reflective language to explain possible motivation cues, not a final or official type conclusion."
+          },
+          {
+            "question": "Can this Enneagram page be used for hiring or clinical decisions?",
+            "answer": "No. It is only a self-reflection and communication resource, not a hiring, diagnostic, treatment, or performance prediction tool."
+          }
+        ],
+        "internal_links": [
+          {
+            "target_url": "https://fermatmind.com/en/personality/enneagram",
+            "anchor_text": "Enneagram overview",
+            "safe_public_route": true
+          },
+          {
+            "target_url": "https://fermatmind.com/en/tests/enneagram-personality-test-nine-types",
+            "anchor_text": "Enneagram personality test",
+            "safe_public_route": true
+          }
+        ],
+        "differentiation_notes": "Type 7 should differentiate around motivation reflection, common misreads, and method boundaries without copying private result text."
+      },
+      "qa_required": [
+        "schema_validation",
+        "method_evidence_boundary_gate",
+        "no_clinical_diagnosis_gate",
+        "no_hiring_or_screening_gate",
+        "no_deterministic_claim_gate",
+        "no_wing_instinct_tritype_expansion_gate",
+        "duplicate_template_gate",
+        "private_route_gate",
+        "result_page_leakage_gate",
+        "seo_projection_gate",
+        "bilingual_consistency_gate"
+      ],
+      "blocked_reason": null,
+      "recommended_next_task": "ENNEAGRAM-PUBLIC-PROFILE-AGENT-QA-01"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/enneagram/type-7",
+      "path": "/zh/personality/enneagram/type-7",
+      "framework": "enneagram",
+      "locale": "zh-CN",
+      "entity_type": "core_type",
+      "code": "type-7",
+      "current_surface": {
+        "authority": "backend_cms_personality_public_content_assets",
+        "route_family": "public_personality_enneagram",
+        "indexability_posture": "noindex_follow_until_separate_publish_gate",
+        "source_notes": [
+          "docs/public-personality/enneagram-public-personality-source-authority-packet.v1.json",
+          "docs/public-personality/enneagram-public-personality-claim-safety-packet.v1.json",
+          "lib/personality/enneagramPublicRoutes.ts"
+        ]
+      },
+      "observed_signal": "GSC_EVIDENCE_PENDING",
+      "reference_patterns_used": [
+        "personality_public_profile_agent_runner_contract",
+        "enneagram_public_personality_source_authority_packet",
+        "enneagram_public_personality_claim_safety_packet",
+        "backend_cms_content_authority"
+      ],
+      "recommendations": {
+        "title": "第 7 型人格：动机模式、常见误读与自我观察",
+        "description": "面向公开 SEO 页面的草稿建议，仅使用反思性语言解释九型人格，不诊断、不招聘筛选，也不承诺固定结果。",
+        "h1": "第 7 型公开说明",
+        "quick_answer": "第 7 型可以作为观察动机、压力反应和沟通偏好的公共入口，但不应被写成诊断、筛选或最终身份判定。",
+        "faq": [
+          {
+            "question": "第 7 型能说明我的最终人格类型吗？",
+            "answer": "不能。公开页面应使用反思性语言，帮助读者理解可能的动机线索，而不是给出最终或官方类型结论。"
+          },
+          {
+            "question": "九型人格页面可以用于招聘或临床判断吗？",
+            "answer": "不能。该页面只能作为自我观察和沟通反思材料，不应支持招聘筛选、诊断、治疗或绩效预测。"
+          }
+        ],
+        "internal_links": [
+          {
+            "target_url": "https://fermatmind.com/zh/personality/enneagram",
+            "anchor_text": "九型人格总览",
+            "safe_public_route": true
+          },
+          {
+            "target_url": "https://fermatmind.com/zh/tests/enneagram-personality-test-nine-types",
+            "anchor_text": "九型人格测试",
+            "safe_public_route": true
+          }
+        ],
+        "differentiation_notes": "第 7 型应围绕动机观察、常见误读和方法边界区分，不复制私有结果页文本。"
+      },
+      "qa_required": [
+        "schema_validation",
+        "method_evidence_boundary_gate",
+        "no_clinical_diagnosis_gate",
+        "no_hiring_or_screening_gate",
+        "no_deterministic_claim_gate",
+        "no_wing_instinct_tritype_expansion_gate",
+        "duplicate_template_gate",
+        "private_route_gate",
+        "result_page_leakage_gate",
+        "seo_projection_gate",
+        "bilingual_consistency_gate"
+      ],
+      "blocked_reason": null,
+      "recommended_next_task": "ENNEAGRAM-PUBLIC-PROFILE-AGENT-QA-01"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/enneagram/type-8",
+      "path": "/en/personality/enneagram/type-8",
+      "framework": "enneagram",
+      "locale": "en",
+      "entity_type": "core_type",
+      "code": "type-8",
+      "current_surface": {
+        "authority": "backend_cms_personality_public_content_assets",
+        "route_family": "public_personality_enneagram",
+        "indexability_posture": "noindex_follow_until_separate_publish_gate",
+        "source_notes": [
+          "docs/public-personality/enneagram-public-personality-source-authority-packet.v1.json",
+          "docs/public-personality/enneagram-public-personality-claim-safety-packet.v1.json",
+          "lib/personality/enneagramPublicRoutes.ts"
+        ]
+      },
+      "observed_signal": "GSC_EVIDENCE_PENDING",
+      "reference_patterns_used": [
+        "personality_public_profile_agent_runner_contract",
+        "enneagram_public_personality_source_authority_packet",
+        "enneagram_public_personality_claim_safety_packet",
+        "backend_cms_content_authority"
+      ],
+      "recommendations": {
+        "title": "Enneagram Type 8: Motivation Patterns, Misreads, and Reflection",
+        "description": "Draft recommendation for a public SEO profile that explains Enneagram patterns with reflective, non-diagnostic language and no fixed-outcome claims.",
+        "h1": "Type 8 Public Profile",
+        "quick_answer": "Type 8 can frame motivation, stress response, and communication reflection, but it should not be presented as diagnosis, screening, or a final identity label.",
+        "faq": [
+          {
+            "question": "Does Type 8 identify my final personality type?",
+            "answer": "No. The public page should use reflective language to explain possible motivation cues, not a final or official type conclusion."
+          },
+          {
+            "question": "Can this Enneagram page be used for hiring or clinical decisions?",
+            "answer": "No. It is only a self-reflection and communication resource, not a hiring, diagnostic, treatment, or performance prediction tool."
+          }
+        ],
+        "internal_links": [
+          {
+            "target_url": "https://fermatmind.com/en/personality/enneagram",
+            "anchor_text": "Enneagram overview",
+            "safe_public_route": true
+          },
+          {
+            "target_url": "https://fermatmind.com/en/tests/enneagram-personality-test-nine-types",
+            "anchor_text": "Enneagram personality test",
+            "safe_public_route": true
+          }
+        ],
+        "differentiation_notes": "Type 8 should differentiate around motivation reflection, common misreads, and method boundaries without copying private result text."
+      },
+      "qa_required": [
+        "schema_validation",
+        "method_evidence_boundary_gate",
+        "no_clinical_diagnosis_gate",
+        "no_hiring_or_screening_gate",
+        "no_deterministic_claim_gate",
+        "no_wing_instinct_tritype_expansion_gate",
+        "duplicate_template_gate",
+        "private_route_gate",
+        "result_page_leakage_gate",
+        "seo_projection_gate",
+        "bilingual_consistency_gate"
+      ],
+      "blocked_reason": null,
+      "recommended_next_task": "ENNEAGRAM-PUBLIC-PROFILE-AGENT-QA-01"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/enneagram/type-8",
+      "path": "/zh/personality/enneagram/type-8",
+      "framework": "enneagram",
+      "locale": "zh-CN",
+      "entity_type": "core_type",
+      "code": "type-8",
+      "current_surface": {
+        "authority": "backend_cms_personality_public_content_assets",
+        "route_family": "public_personality_enneagram",
+        "indexability_posture": "noindex_follow_until_separate_publish_gate",
+        "source_notes": [
+          "docs/public-personality/enneagram-public-personality-source-authority-packet.v1.json",
+          "docs/public-personality/enneagram-public-personality-claim-safety-packet.v1.json",
+          "lib/personality/enneagramPublicRoutes.ts"
+        ]
+      },
+      "observed_signal": "GSC_EVIDENCE_PENDING",
+      "reference_patterns_used": [
+        "personality_public_profile_agent_runner_contract",
+        "enneagram_public_personality_source_authority_packet",
+        "enneagram_public_personality_claim_safety_packet",
+        "backend_cms_content_authority"
+      ],
+      "recommendations": {
+        "title": "第 8 型人格：动机模式、常见误读与自我观察",
+        "description": "面向公开 SEO 页面的草稿建议，仅使用反思性语言解释九型人格，不诊断、不招聘筛选，也不承诺固定结果。",
+        "h1": "第 8 型公开说明",
+        "quick_answer": "第 8 型可以作为观察动机、压力反应和沟通偏好的公共入口，但不应被写成诊断、筛选或最终身份判定。",
+        "faq": [
+          {
+            "question": "第 8 型能说明我的最终人格类型吗？",
+            "answer": "不能。公开页面应使用反思性语言，帮助读者理解可能的动机线索，而不是给出最终或官方类型结论。"
+          },
+          {
+            "question": "九型人格页面可以用于招聘或临床判断吗？",
+            "answer": "不能。该页面只能作为自我观察和沟通反思材料，不应支持招聘筛选、诊断、治疗或绩效预测。"
+          }
+        ],
+        "internal_links": [
+          {
+            "target_url": "https://fermatmind.com/zh/personality/enneagram",
+            "anchor_text": "九型人格总览",
+            "safe_public_route": true
+          },
+          {
+            "target_url": "https://fermatmind.com/zh/tests/enneagram-personality-test-nine-types",
+            "anchor_text": "九型人格测试",
+            "safe_public_route": true
+          }
+        ],
+        "differentiation_notes": "第 8 型应围绕动机观察、常见误读和方法边界区分，不复制私有结果页文本。"
+      },
+      "qa_required": [
+        "schema_validation",
+        "method_evidence_boundary_gate",
+        "no_clinical_diagnosis_gate",
+        "no_hiring_or_screening_gate",
+        "no_deterministic_claim_gate",
+        "no_wing_instinct_tritype_expansion_gate",
+        "duplicate_template_gate",
+        "private_route_gate",
+        "result_page_leakage_gate",
+        "seo_projection_gate",
+        "bilingual_consistency_gate"
+      ],
+      "blocked_reason": null,
+      "recommended_next_task": "ENNEAGRAM-PUBLIC-PROFILE-AGENT-QA-01"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/enneagram/type-9",
+      "path": "/en/personality/enneagram/type-9",
+      "framework": "enneagram",
+      "locale": "en",
+      "entity_type": "core_type",
+      "code": "type-9",
+      "current_surface": {
+        "authority": "backend_cms_personality_public_content_assets",
+        "route_family": "public_personality_enneagram",
+        "indexability_posture": "noindex_follow_until_separate_publish_gate",
+        "source_notes": [
+          "docs/public-personality/enneagram-public-personality-source-authority-packet.v1.json",
+          "docs/public-personality/enneagram-public-personality-claim-safety-packet.v1.json",
+          "lib/personality/enneagramPublicRoutes.ts"
+        ]
+      },
+      "observed_signal": "GSC_EVIDENCE_PENDING",
+      "reference_patterns_used": [
+        "personality_public_profile_agent_runner_contract",
+        "enneagram_public_personality_source_authority_packet",
+        "enneagram_public_personality_claim_safety_packet",
+        "backend_cms_content_authority"
+      ],
+      "recommendations": {
+        "title": "Enneagram Type 9: Motivation Patterns, Misreads, and Reflection",
+        "description": "Draft recommendation for a public SEO profile that explains Enneagram patterns with reflective, non-diagnostic language and no fixed-outcome claims.",
+        "h1": "Type 9 Public Profile",
+        "quick_answer": "Type 9 can frame motivation, stress response, and communication reflection, but it should not be presented as diagnosis, screening, or a final identity label.",
+        "faq": [
+          {
+            "question": "Does Type 9 identify my final personality type?",
+            "answer": "No. The public page should use reflective language to explain possible motivation cues, not a final or official type conclusion."
+          },
+          {
+            "question": "Can this Enneagram page be used for hiring or clinical decisions?",
+            "answer": "No. It is only a self-reflection and communication resource, not a hiring, diagnostic, treatment, or performance prediction tool."
+          }
+        ],
+        "internal_links": [
+          {
+            "target_url": "https://fermatmind.com/en/personality/enneagram",
+            "anchor_text": "Enneagram overview",
+            "safe_public_route": true
+          },
+          {
+            "target_url": "https://fermatmind.com/en/tests/enneagram-personality-test-nine-types",
+            "anchor_text": "Enneagram personality test",
+            "safe_public_route": true
+          }
+        ],
+        "differentiation_notes": "Type 9 should differentiate around motivation reflection, common misreads, and method boundaries without copying private result text."
+      },
+      "qa_required": [
+        "schema_validation",
+        "method_evidence_boundary_gate",
+        "no_clinical_diagnosis_gate",
+        "no_hiring_or_screening_gate",
+        "no_deterministic_claim_gate",
+        "no_wing_instinct_tritype_expansion_gate",
+        "duplicate_template_gate",
+        "private_route_gate",
+        "result_page_leakage_gate",
+        "seo_projection_gate",
+        "bilingual_consistency_gate"
+      ],
+      "blocked_reason": null,
+      "recommended_next_task": "ENNEAGRAM-PUBLIC-PROFILE-AGENT-QA-01"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/enneagram/type-9",
+      "path": "/zh/personality/enneagram/type-9",
+      "framework": "enneagram",
+      "locale": "zh-CN",
+      "entity_type": "core_type",
+      "code": "type-9",
+      "current_surface": {
+        "authority": "backend_cms_personality_public_content_assets",
+        "route_family": "public_personality_enneagram",
+        "indexability_posture": "noindex_follow_until_separate_publish_gate",
+        "source_notes": [
+          "docs/public-personality/enneagram-public-personality-source-authority-packet.v1.json",
+          "docs/public-personality/enneagram-public-personality-claim-safety-packet.v1.json",
+          "lib/personality/enneagramPublicRoutes.ts"
+        ]
+      },
+      "observed_signal": "GSC_EVIDENCE_PENDING",
+      "reference_patterns_used": [
+        "personality_public_profile_agent_runner_contract",
+        "enneagram_public_personality_source_authority_packet",
+        "enneagram_public_personality_claim_safety_packet",
+        "backend_cms_content_authority"
+      ],
+      "recommendations": {
+        "title": "第 9 型人格：动机模式、常见误读与自我观察",
+        "description": "面向公开 SEO 页面的草稿建议，仅使用反思性语言解释九型人格，不诊断、不招聘筛选，也不承诺固定结果。",
+        "h1": "第 9 型公开说明",
+        "quick_answer": "第 9 型可以作为观察动机、压力反应和沟通偏好的公共入口，但不应被写成诊断、筛选或最终身份判定。",
+        "faq": [
+          {
+            "question": "第 9 型能说明我的最终人格类型吗？",
+            "answer": "不能。公开页面应使用反思性语言，帮助读者理解可能的动机线索，而不是给出最终或官方类型结论。"
+          },
+          {
+            "question": "九型人格页面可以用于招聘或临床判断吗？",
+            "answer": "不能。该页面只能作为自我观察和沟通反思材料，不应支持招聘筛选、诊断、治疗或绩效预测。"
+          }
+        ],
+        "internal_links": [
+          {
+            "target_url": "https://fermatmind.com/zh/personality/enneagram",
+            "anchor_text": "九型人格总览",
+            "safe_public_route": true
+          },
+          {
+            "target_url": "https://fermatmind.com/zh/tests/enneagram-personality-test-nine-types",
+            "anchor_text": "九型人格测试",
+            "safe_public_route": true
+          }
+        ],
+        "differentiation_notes": "第 9 型应围绕动机观察、常见误读和方法边界区分，不复制私有结果页文本。"
+      },
+      "qa_required": [
+        "schema_validation",
+        "method_evidence_boundary_gate",
+        "no_clinical_diagnosis_gate",
+        "no_hiring_or_screening_gate",
+        "no_deterministic_claim_gate",
+        "no_wing_instinct_tritype_expansion_gate",
+        "duplicate_template_gate",
+        "private_route_gate",
+        "result_page_leakage_gate",
+        "seo_projection_gate",
+        "bilingual_consistency_gate"
+      ],
+      "blocked_reason": null,
+      "recommended_next_task": "ENNEAGRAM-PUBLIC-PROFILE-AGENT-QA-01"
+    }
+  ],
+  "safety_boundary": {
+    "artifact_only": true,
+    "cms_write_attempted": false,
+    "cms_live_promotion_attempted": false,
+    "frontend_runtime_change_attempted": false,
+    "search_queue_mutation_attempted": false,
+    "live_search_submit_attempted": false,
+    "sitemap_llms_mutation_attempted": false,
+    "publish_indexability_change_attempted": false,
+    "gsc_request_indexing_attempted": false,
+    "production_deploy_attempted": false
+  },
+  "blockers": [],
+  "warnings": [
+    "GSC query evidence is pending for all Enneagram public profile targets."
+  ],
+  "recommended_next_task": "ENNEAGRAM-PUBLIC-PROFILE-AGENT-QA-01"
+}

@@ -1,0 +1,723 @@
+{
+  "artifact": "ENNEAGRAM-PUBLIC-PROFILE-AGENT-QA-01",
+  "generated_at": "2026-06-24T11:37:07.178Z",
+  "status": "pass",
+  "final_decision": "PASS_READY_FOR_APPROVAL_QUEUE",
+  "input_artifact": "docs/seo/personality/enneagram-public-profile-agent-pilot-2026-06-24.json",
+  "scope": "Artifact-only Enneagram QA. No CMS write, no publish, no index/search release, no sitemap/llms mutation, no frontend runtime change.",
+  "summary": {
+    "checked_recommendation_count": 26,
+    "pass_ready_for_approval_queue_count": 26,
+    "blocked_count": 0,
+    "gsc_evidence_state": "GSC_EVIDENCE_PENDING",
+    "no_wings_instincts_tritype_count": 26
+  },
+  "gate_rollup": {
+    "schema_validation": 0,
+    "method_evidence_boundary_gate": 0,
+    "no_clinical_diagnosis_gate": 0,
+    "no_hiring_or_screening_gate": 0,
+    "no_deterministic_claim_gate": 0,
+    "no_wing_instinct_tritype_expansion_gate": 0,
+    "duplicate_template_gate": 0,
+    "private_route_gate": 0,
+    "result_page_leakage_gate": 0,
+    "seo_projection_gate": 0,
+    "bilingual_consistency_gate": 0,
+    "trademark_affiliation_gate": 0
+  },
+  "page_results": [
+    {
+      "target_url": "https://fermatmind.com/en/personality/enneagram",
+      "path": "/en/personality/enneagram",
+      "locale": "en",
+      "entity_type": "hub",
+      "code": "enneagram",
+      "decision": "PASS_READY_FOR_APPROVAL_QUEUE",
+      "gates": {
+        "schema_validation": "pass",
+        "method_evidence_boundary_gate": "pass",
+        "no_clinical_diagnosis_gate": "pass",
+        "no_hiring_or_screening_gate": "pass",
+        "no_deterministic_claim_gate": "pass",
+        "no_wing_instinct_tritype_expansion_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass",
+        "trademark_affiliation_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ]
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/enneagram",
+      "path": "/zh/personality/enneagram",
+      "locale": "zh-CN",
+      "entity_type": "hub",
+      "code": "enneagram",
+      "decision": "PASS_READY_FOR_APPROVAL_QUEUE",
+      "gates": {
+        "schema_validation": "pass",
+        "method_evidence_boundary_gate": "pass",
+        "no_clinical_diagnosis_gate": "pass",
+        "no_hiring_or_screening_gate": "pass",
+        "no_deterministic_claim_gate": "pass",
+        "no_wing_instinct_tritype_expansion_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass",
+        "trademark_affiliation_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ]
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/enneagram/centers/gut",
+      "path": "/en/personality/enneagram/centers/gut",
+      "locale": "en",
+      "entity_type": "center",
+      "code": "gut",
+      "decision": "PASS_READY_FOR_APPROVAL_QUEUE",
+      "gates": {
+        "schema_validation": "pass",
+        "method_evidence_boundary_gate": "pass",
+        "no_clinical_diagnosis_gate": "pass",
+        "no_hiring_or_screening_gate": "pass",
+        "no_deterministic_claim_gate": "pass",
+        "no_wing_instinct_tritype_expansion_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass",
+        "trademark_affiliation_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ]
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/enneagram/centers/gut",
+      "path": "/zh/personality/enneagram/centers/gut",
+      "locale": "zh-CN",
+      "entity_type": "center",
+      "code": "gut",
+      "decision": "PASS_READY_FOR_APPROVAL_QUEUE",
+      "gates": {
+        "schema_validation": "pass",
+        "method_evidence_boundary_gate": "pass",
+        "no_clinical_diagnosis_gate": "pass",
+        "no_hiring_or_screening_gate": "pass",
+        "no_deterministic_claim_gate": "pass",
+        "no_wing_instinct_tritype_expansion_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass",
+        "trademark_affiliation_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ]
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/enneagram/centers/heart",
+      "path": "/en/personality/enneagram/centers/heart",
+      "locale": "en",
+      "entity_type": "center",
+      "code": "heart",
+      "decision": "PASS_READY_FOR_APPROVAL_QUEUE",
+      "gates": {
+        "schema_validation": "pass",
+        "method_evidence_boundary_gate": "pass",
+        "no_clinical_diagnosis_gate": "pass",
+        "no_hiring_or_screening_gate": "pass",
+        "no_deterministic_claim_gate": "pass",
+        "no_wing_instinct_tritype_expansion_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass",
+        "trademark_affiliation_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ]
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/enneagram/centers/heart",
+      "path": "/zh/personality/enneagram/centers/heart",
+      "locale": "zh-CN",
+      "entity_type": "center",
+      "code": "heart",
+      "decision": "PASS_READY_FOR_APPROVAL_QUEUE",
+      "gates": {
+        "schema_validation": "pass",
+        "method_evidence_boundary_gate": "pass",
+        "no_clinical_diagnosis_gate": "pass",
+        "no_hiring_or_screening_gate": "pass",
+        "no_deterministic_claim_gate": "pass",
+        "no_wing_instinct_tritype_expansion_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass",
+        "trademark_affiliation_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ]
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/enneagram/centers/head",
+      "path": "/en/personality/enneagram/centers/head",
+      "locale": "en",
+      "entity_type": "center",
+      "code": "head",
+      "decision": "PASS_READY_FOR_APPROVAL_QUEUE",
+      "gates": {
+        "schema_validation": "pass",
+        "method_evidence_boundary_gate": "pass",
+        "no_clinical_diagnosis_gate": "pass",
+        "no_hiring_or_screening_gate": "pass",
+        "no_deterministic_claim_gate": "pass",
+        "no_wing_instinct_tritype_expansion_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass",
+        "trademark_affiliation_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ]
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/enneagram/centers/head",
+      "path": "/zh/personality/enneagram/centers/head",
+      "locale": "zh-CN",
+      "entity_type": "center",
+      "code": "head",
+      "decision": "PASS_READY_FOR_APPROVAL_QUEUE",
+      "gates": {
+        "schema_validation": "pass",
+        "method_evidence_boundary_gate": "pass",
+        "no_clinical_diagnosis_gate": "pass",
+        "no_hiring_or_screening_gate": "pass",
+        "no_deterministic_claim_gate": "pass",
+        "no_wing_instinct_tritype_expansion_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass",
+        "trademark_affiliation_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ]
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/enneagram/type-1",
+      "path": "/en/personality/enneagram/type-1",
+      "locale": "en",
+      "entity_type": "core_type",
+      "code": "type-1",
+      "decision": "PASS_READY_FOR_APPROVAL_QUEUE",
+      "gates": {
+        "schema_validation": "pass",
+        "method_evidence_boundary_gate": "pass",
+        "no_clinical_diagnosis_gate": "pass",
+        "no_hiring_or_screening_gate": "pass",
+        "no_deterministic_claim_gate": "pass",
+        "no_wing_instinct_tritype_expansion_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass",
+        "trademark_affiliation_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ]
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/enneagram/type-1",
+      "path": "/zh/personality/enneagram/type-1",
+      "locale": "zh-CN",
+      "entity_type": "core_type",
+      "code": "type-1",
+      "decision": "PASS_READY_FOR_APPROVAL_QUEUE",
+      "gates": {
+        "schema_validation": "pass",
+        "method_evidence_boundary_gate": "pass",
+        "no_clinical_diagnosis_gate": "pass",
+        "no_hiring_or_screening_gate": "pass",
+        "no_deterministic_claim_gate": "pass",
+        "no_wing_instinct_tritype_expansion_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass",
+        "trademark_affiliation_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ]
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/enneagram/type-2",
+      "path": "/en/personality/enneagram/type-2",
+      "locale": "en",
+      "entity_type": "core_type",
+      "code": "type-2",
+      "decision": "PASS_READY_FOR_APPROVAL_QUEUE",
+      "gates": {
+        "schema_validation": "pass",
+        "method_evidence_boundary_gate": "pass",
+        "no_clinical_diagnosis_gate": "pass",
+        "no_hiring_or_screening_gate": "pass",
+        "no_deterministic_claim_gate": "pass",
+        "no_wing_instinct_tritype_expansion_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass",
+        "trademark_affiliation_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ]
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/enneagram/type-2",
+      "path": "/zh/personality/enneagram/type-2",
+      "locale": "zh-CN",
+      "entity_type": "core_type",
+      "code": "type-2",
+      "decision": "PASS_READY_FOR_APPROVAL_QUEUE",
+      "gates": {
+        "schema_validation": "pass",
+        "method_evidence_boundary_gate": "pass",
+        "no_clinical_diagnosis_gate": "pass",
+        "no_hiring_or_screening_gate": "pass",
+        "no_deterministic_claim_gate": "pass",
+        "no_wing_instinct_tritype_expansion_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass",
+        "trademark_affiliation_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ]
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/enneagram/type-3",
+      "path": "/en/personality/enneagram/type-3",
+      "locale": "en",
+      "entity_type": "core_type",
+      "code": "type-3",
+      "decision": "PASS_READY_FOR_APPROVAL_QUEUE",
+      "gates": {
+        "schema_validation": "pass",
+        "method_evidence_boundary_gate": "pass",
+        "no_clinical_diagnosis_gate": "pass",
+        "no_hiring_or_screening_gate": "pass",
+        "no_deterministic_claim_gate": "pass",
+        "no_wing_instinct_tritype_expansion_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass",
+        "trademark_affiliation_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ]
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/enneagram/type-3",
+      "path": "/zh/personality/enneagram/type-3",
+      "locale": "zh-CN",
+      "entity_type": "core_type",
+      "code": "type-3",
+      "decision": "PASS_READY_FOR_APPROVAL_QUEUE",
+      "gates": {
+        "schema_validation": "pass",
+        "method_evidence_boundary_gate": "pass",
+        "no_clinical_diagnosis_gate": "pass",
+        "no_hiring_or_screening_gate": "pass",
+        "no_deterministic_claim_gate": "pass",
+        "no_wing_instinct_tritype_expansion_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass",
+        "trademark_affiliation_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ]
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/enneagram/type-4",
+      "path": "/en/personality/enneagram/type-4",
+      "locale": "en",
+      "entity_type": "core_type",
+      "code": "type-4",
+      "decision": "PASS_READY_FOR_APPROVAL_QUEUE",
+      "gates": {
+        "schema_validation": "pass",
+        "method_evidence_boundary_gate": "pass",
+        "no_clinical_diagnosis_gate": "pass",
+        "no_hiring_or_screening_gate": "pass",
+        "no_deterministic_claim_gate": "pass",
+        "no_wing_instinct_tritype_expansion_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass",
+        "trademark_affiliation_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ]
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/enneagram/type-4",
+      "path": "/zh/personality/enneagram/type-4",
+      "locale": "zh-CN",
+      "entity_type": "core_type",
+      "code": "type-4",
+      "decision": "PASS_READY_FOR_APPROVAL_QUEUE",
+      "gates": {
+        "schema_validation": "pass",
+        "method_evidence_boundary_gate": "pass",
+        "no_clinical_diagnosis_gate": "pass",
+        "no_hiring_or_screening_gate": "pass",
+        "no_deterministic_claim_gate": "pass",
+        "no_wing_instinct_tritype_expansion_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass",
+        "trademark_affiliation_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ]
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/enneagram/type-5",
+      "path": "/en/personality/enneagram/type-5",
+      "locale": "en",
+      "entity_type": "core_type",
+      "code": "type-5",
+      "decision": "PASS_READY_FOR_APPROVAL_QUEUE",
+      "gates": {
+        "schema_validation": "pass",
+        "method_evidence_boundary_gate": "pass",
+        "no_clinical_diagnosis_gate": "pass",
+        "no_hiring_or_screening_gate": "pass",
+        "no_deterministic_claim_gate": "pass",
+        "no_wing_instinct_tritype_expansion_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass",
+        "trademark_affiliation_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ]
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/enneagram/type-5",
+      "path": "/zh/personality/enneagram/type-5",
+      "locale": "zh-CN",
+      "entity_type": "core_type",
+      "code": "type-5",
+      "decision": "PASS_READY_FOR_APPROVAL_QUEUE",
+      "gates": {
+        "schema_validation": "pass",
+        "method_evidence_boundary_gate": "pass",
+        "no_clinical_diagnosis_gate": "pass",
+        "no_hiring_or_screening_gate": "pass",
+        "no_deterministic_claim_gate": "pass",
+        "no_wing_instinct_tritype_expansion_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass",
+        "trademark_affiliation_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ]
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/enneagram/type-6",
+      "path": "/en/personality/enneagram/type-6",
+      "locale": "en",
+      "entity_type": "core_type",
+      "code": "type-6",
+      "decision": "PASS_READY_FOR_APPROVAL_QUEUE",
+      "gates": {
+        "schema_validation": "pass",
+        "method_evidence_boundary_gate": "pass",
+        "no_clinical_diagnosis_gate": "pass",
+        "no_hiring_or_screening_gate": "pass",
+        "no_deterministic_claim_gate": "pass",
+        "no_wing_instinct_tritype_expansion_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass",
+        "trademark_affiliation_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ]
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/enneagram/type-6",
+      "path": "/zh/personality/enneagram/type-6",
+      "locale": "zh-CN",
+      "entity_type": "core_type",
+      "code": "type-6",
+      "decision": "PASS_READY_FOR_APPROVAL_QUEUE",
+      "gates": {
+        "schema_validation": "pass",
+        "method_evidence_boundary_gate": "pass",
+        "no_clinical_diagnosis_gate": "pass",
+        "no_hiring_or_screening_gate": "pass",
+        "no_deterministic_claim_gate": "pass",
+        "no_wing_instinct_tritype_expansion_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass",
+        "trademark_affiliation_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ]
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/enneagram/type-7",
+      "path": "/en/personality/enneagram/type-7",
+      "locale": "en",
+      "entity_type": "core_type",
+      "code": "type-7",
+      "decision": "PASS_READY_FOR_APPROVAL_QUEUE",
+      "gates": {
+        "schema_validation": "pass",
+        "method_evidence_boundary_gate": "pass",
+        "no_clinical_diagnosis_gate": "pass",
+        "no_hiring_or_screening_gate": "pass",
+        "no_deterministic_claim_gate": "pass",
+        "no_wing_instinct_tritype_expansion_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass",
+        "trademark_affiliation_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ]
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/enneagram/type-7",
+      "path": "/zh/personality/enneagram/type-7",
+      "locale": "zh-CN",
+      "entity_type": "core_type",
+      "code": "type-7",
+      "decision": "PASS_READY_FOR_APPROVAL_QUEUE",
+      "gates": {
+        "schema_validation": "pass",
+        "method_evidence_boundary_gate": "pass",
+        "no_clinical_diagnosis_gate": "pass",
+        "no_hiring_or_screening_gate": "pass",
+        "no_deterministic_claim_gate": "pass",
+        "no_wing_instinct_tritype_expansion_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass",
+        "trademark_affiliation_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ]
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/enneagram/type-8",
+      "path": "/en/personality/enneagram/type-8",
+      "locale": "en",
+      "entity_type": "core_type",
+      "code": "type-8",
+      "decision": "PASS_READY_FOR_APPROVAL_QUEUE",
+      "gates": {
+        "schema_validation": "pass",
+        "method_evidence_boundary_gate": "pass",
+        "no_clinical_diagnosis_gate": "pass",
+        "no_hiring_or_screening_gate": "pass",
+        "no_deterministic_claim_gate": "pass",
+        "no_wing_instinct_tritype_expansion_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass",
+        "trademark_affiliation_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ]
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/enneagram/type-8",
+      "path": "/zh/personality/enneagram/type-8",
+      "locale": "zh-CN",
+      "entity_type": "core_type",
+      "code": "type-8",
+      "decision": "PASS_READY_FOR_APPROVAL_QUEUE",
+      "gates": {
+        "schema_validation": "pass",
+        "method_evidence_boundary_gate": "pass",
+        "no_clinical_diagnosis_gate": "pass",
+        "no_hiring_or_screening_gate": "pass",
+        "no_deterministic_claim_gate": "pass",
+        "no_wing_instinct_tritype_expansion_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass",
+        "trademark_affiliation_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ]
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/enneagram/type-9",
+      "path": "/en/personality/enneagram/type-9",
+      "locale": "en",
+      "entity_type": "core_type",
+      "code": "type-9",
+      "decision": "PASS_READY_FOR_APPROVAL_QUEUE",
+      "gates": {
+        "schema_validation": "pass",
+        "method_evidence_boundary_gate": "pass",
+        "no_clinical_diagnosis_gate": "pass",
+        "no_hiring_or_screening_gate": "pass",
+        "no_deterministic_claim_gate": "pass",
+        "no_wing_instinct_tritype_expansion_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass",
+        "trademark_affiliation_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ]
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/enneagram/type-9",
+      "path": "/zh/personality/enneagram/type-9",
+      "locale": "zh-CN",
+      "entity_type": "core_type",
+      "code": "type-9",
+      "decision": "PASS_READY_FOR_APPROVAL_QUEUE",
+      "gates": {
+        "schema_validation": "pass",
+        "method_evidence_boundary_gate": "pass",
+        "no_clinical_diagnosis_gate": "pass",
+        "no_hiring_or_screening_gate": "pass",
+        "no_deterministic_claim_gate": "pass",
+        "no_wing_instinct_tritype_expansion_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass",
+        "trademark_affiliation_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "GSC_EVIDENCE_PENDING"
+      ]
+    }
+  ],
+  "safety_boundary": {
+    "artifact_only": true,
+    "cms_write_attempted": false,
+    "cms_live_promotion_attempted": false,
+    "frontend_runtime_change_attempted": false,
+    "publish_indexability_change_attempted": false,
+    "sitemap_llms_mutation_attempted": false,
+    "search_queue_mutation_attempted": false,
+    "live_search_submit_attempted": false,
+    "production_deploy_attempted": false
+  },
+  "blockers": [],
+  "warnings": [
+    "GSC_EVIDENCE_PENDING"
+  ],
+  "recommended_next_task": "ENNEAGRAM-AGENT-APPROVAL-QUEUE-INTEGRATION-01"
+}
