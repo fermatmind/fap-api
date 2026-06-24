@@ -4,22 +4,112 @@
   "assets": {
     "eq.sjt_bridge.planned": {
       "zh-CN": {
-        "title": "未来将支持 16 道情境判断模块",
-        "status": "planned",
-        "description": "当前报告基于 EQ-60 自我报告。未来 EQ-SJT 16 会补充你在反馈、冲突、边界和压力情境中的选择方式。",
-        "what_it_adds": "它用于补充 self-report，帮助比较自我感知与情境选择之间的一致和差距。",
-        "what_it_is_not": "它不是 MSCEIT，不是认证能力测验，也不用于招聘筛选或临床判断。",
-        "button_label": "情境判断模块规划中",
-        "available": false
+        "title": "未来情境判断模块",
+        "status": "planned_unavailable",
+        "description": "你现在看到的是自我报告结果。未来的情境判断模块会补充你在反馈、冲突、边界和压力场景中倾向选择的回应。",
+        "what_it_adds": "未来补充情境选择信息。",
+        "what_it_is_not": "当前未开放，不是 MSCEIT，也不是认证测评。",
+        "button_label": "暂未开放",
+        "available": false,
+        "do_not_overread": "当前没有开放题库、入口或综合报告。"
       },
       "en": {
-        "title": "A 16-item scenario module is planned",
-        "status": "planned",
-        "description": "The current report is based on EQ-60 self-report. A future EQ-SJT 16 module will add how you choose responses in feedback, conflict, boundary, and pressure situations.",
-        "what_it_adds": "It supplements self-report by comparing self-perception with scenario choices.",
-        "what_it_is_not": "It is not MSCEIT, not a certified ability assessment, and not for hiring or clinical decisions.",
-        "button_label": "Scenario module planned",
-        "available": false
+        "title": "Future scenario module",
+        "status": "planned_unavailable",
+        "description": "You are seeing a self-report result. A future scenario module will add how you tend to choose responses in feedback, conflict, boundary, and pressure situations.",
+        "what_it_adds": "It supplements self-report with future scenario choices.",
+        "what_it_is_not": "It is not live, not MSCEIT, and not a certified assessment.",
+        "button_label": "Not available yet",
+        "available": false,
+        "do_not_overread": "There is no public item bank, entry point, or integrated report yet."
+      }
+    },
+    "eq.sjt_bridge.what_it_adds": {
+      "zh-CN": {
+        "title": "它会补充什么",
+        "status": "planned_unavailable",
+        "description": "它会补充情境选择、压力下回应、边界和修复策略等信息，帮助形成自我感知 × 情境选择的综合报告。",
+        "what_it_adds": "未来补充情境选择信息。",
+        "what_it_is_not": "当前未开放，不是 MSCEIT，也不是认证测评。",
+        "button_label": "暂未开放",
+        "available": false,
+        "do_not_overread": "当前没有开放题库、入口或综合报告。"
+      },
+      "en": {
+        "title": "What it will add",
+        "status": "planned_unavailable",
+        "description": "It will add response choices, pressure reactions, boundary patterns, and repair strategies, supporting an integrated self-perception × scenario-choice report.",
+        "what_it_adds": "It supplements self-report with future scenario choices.",
+        "what_it_is_not": "It is not live, not MSCEIT, and not a certified assessment.",
+        "button_label": "Not available yet",
+        "available": false,
+        "do_not_overread": "There is no public item bank, entry point, or integrated report yet."
+      }
+    },
+    "eq.sjt_bridge.what_it_is_not": {
+      "zh-CN": {
+        "title": "它不是什么",
+        "status": "planned_unavailable",
+        "description": "它不是受控专业能力工具，不提供资格凭证，不用于高风险判断。",
+        "what_it_adds": "未来补充情境选择信息。",
+        "what_it_is_not": "当前未开放，不是 MSCEIT，也不是认证测评。",
+        "button_label": "暂未开放",
+        "available": false,
+        "do_not_overread": "当前没有开放题库、入口或综合报告。"
+      },
+      "en": {
+        "title": "What it is not",
+        "status": "planned_unavailable",
+        "description": "It is not a controlled professional ability instrument, does not provide a credential, and is not for high-stakes decisions.",
+        "what_it_adds": "It supplements self-report with future scenario choices.",
+        "what_it_is_not": "It is not live, not MSCEIT, and not a certified assessment.",
+        "button_label": "Not available yet",
+        "available": false,
+        "do_not_overread": "There is no public item bank, entry point, or integrated report yet."
+      }
+    },
+    "eq.sjt_bridge.future_integrated_report": {
+      "zh-CN": {
+        "title": "未来综合报告",
+        "status": "planned_unavailable",
+        "description": "未来综合报告会比较你如何看待自己，以及你在情境中倾向如何选择，从而显示一致处和差距。",
+        "what_it_adds": "未来补充情境选择信息。",
+        "what_it_is_not": "当前未开放，不是 MSCEIT，也不是认证测评。",
+        "button_label": "暂未开放",
+        "available": false,
+        "do_not_overread": "当前没有开放题库、入口或综合报告。"
+      },
+      "en": {
+        "title": "Future integrated report",
+        "status": "planned_unavailable",
+        "description": "The future integrated report will compare how you see yourself with how you tend to choose in scenarios, showing alignment and gaps.",
+        "what_it_adds": "It supplements self-report with future scenario choices.",
+        "what_it_is_not": "It is not live, not MSCEIT, and not a certified assessment.",
+        "button_label": "Not available yet",
+        "available": false,
+        "do_not_overread": "There is no public item bank, entry point, or integrated report yet."
+      }
+    },
+    "eq.sjt_bridge.unavailable_note": {
+      "zh-CN": {
+        "title": "暂未开放说明",
+        "status": "planned_unavailable",
+        "description": "该模块仍在 planned 状态。前端不应提供可点击开始入口。",
+        "what_it_adds": "未来补充情境选择信息。",
+        "what_it_is_not": "当前未开放，不是 MSCEIT，也不是认证测评。",
+        "button_label": "暂未开放",
+        "available": false,
+        "do_not_overread": "当前没有开放题库、入口或综合报告。"
+      },
+      "en": {
+        "title": "Unavailable note",
+        "status": "planned_unavailable",
+        "description": "This module remains planned. The frontend should not provide a clickable start entry.",
+        "what_it_adds": "It supplements self-report with future scenario choices.",
+        "what_it_is_not": "It is not live, not MSCEIT, and not a certified assessment.",
+        "button_label": "Not available yet",
+        "available": false,
+        "do_not_overread": "There is no public item bank, entry point, or integrated report yet."
       }
     }
   }

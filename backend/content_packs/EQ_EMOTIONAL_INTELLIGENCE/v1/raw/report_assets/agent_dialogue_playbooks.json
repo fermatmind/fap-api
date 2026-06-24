@@ -1,0 +1,206 @@
+{
+  "schema": "eq60.report_assets.agent_dialogue_playbooks.v1",
+  "pack_id": "EQ_60",
+  "assets": {
+    "eq.agent.playbook.understand_result": {
+      "zh-CN": {
+        "title": "理解我的结果",
+        "response_policy": "先引用用户 formulation，再问一个现实场景。",
+        "clarifying_question": "你想讨论哪个具体场景？反馈、冲突、边界、协作还是压力恢复？",
+        "safe_response_example": "我会基于你的报告资产解释这个场景，不会重新打分或替你做高风险判断。",
+        "refusal_example": "我不能用 EQ 结果来筛选、诊断或评价他人，但可以帮你理解自己的沟通和恢复模式。",
+        "escalation_rule": "涉及伤害风险、临床困扰、招聘筛选或要求改分时转人工/边界说明。"
+      },
+      "en": {
+        "title": "Understand my result",
+        "response_policy": "Use the user’s formulation first, then ask for one real scene.",
+        "clarifying_question": "Which scene do you want to discuss: feedback, conflict, boundary, collaboration, or recovery?",
+        "safe_response_example": "I will explain this scene using your report assets; I will not rescore you or make high-risk judgments.",
+        "refusal_example": "I cannot use EQ results to screen, diagnose, or evaluate another person, but I can help you understand your communication and recovery pattern.",
+        "escalation_rule": "Escalate or set boundaries for safety risk, clinical distress, hiring use, or requests to change scores."
+      },
+      "meta": {
+        "id": "eq.agent.playbook.understand_result",
+        "asset_type": "agent_dialogue_playbook",
+        "purpose": "Agent response policy and examples",
+        "trigger_logic": {
+          "user_intent": "understand_result"
+        },
+        "claim_sensitivity": "medium",
+        "retrieval_tags": [
+          "eq60",
+          "self_report",
+          "result_explanation",
+          "understand_result"
+        ],
+        "content_change_flow": [
+          "draft suggestion",
+          "lint against forbidden claims",
+          "human review",
+          "backend asset update",
+          "fixture validation"
+        ]
+      }
+    },
+    "eq.agent.playbook.scene_advice": {
+      "zh-CN": {
+        "title": "某个场景怎么办",
+        "response_policy": "只处理一个场景，调用 reality_translation 和 action_prescription。",
+        "clarifying_question": "你想讨论哪个具体场景？反馈、冲突、边界、协作还是压力恢复？",
+        "safe_response_example": "我会基于你的报告资产解释这个场景，不会重新打分或替你做高风险判断。",
+        "refusal_example": "我不能用 EQ 结果来筛选、诊断或评价他人，但可以帮你理解自己的沟通和恢复模式。",
+        "escalation_rule": "涉及伤害风险、临床困扰、招聘筛选或要求改分时转人工/边界说明。"
+      },
+      "en": {
+        "title": "What should I do in this situation?",
+        "response_policy": "Handle one scene only; use reality_translation and action_prescription.",
+        "clarifying_question": "Which scene do you want to discuss: feedback, conflict, boundary, collaboration, or recovery?",
+        "safe_response_example": "I will explain this scene using your report assets; I will not rescore you or make high-risk judgments.",
+        "refusal_example": "I cannot use EQ results to screen, diagnose, or evaluate another person, but I can help you understand your communication and recovery pattern.",
+        "escalation_rule": "Escalate or set boundaries for safety risk, clinical distress, hiring use, or requests to change scores."
+      },
+      "meta": {
+        "id": "eq.agent.playbook.scene_advice",
+        "asset_type": "agent_dialogue_playbook",
+        "purpose": "Agent response policy and examples",
+        "trigger_logic": {
+          "user_intent": "scene_advice"
+        },
+        "claim_sensitivity": "medium",
+        "retrieval_tags": [
+          "eq60",
+          "self_report",
+          "result_explanation",
+          "scene_advice"
+        ],
+        "content_change_flow": [
+          "draft suggestion",
+          "lint against forbidden claims",
+          "human review",
+          "backend asset update",
+          "fixture validation"
+        ]
+      }
+    },
+    "eq.agent.playbook.career_environment": {
+      "zh-CN": {
+        "title": "我适合什么工作环境",
+        "response_policy": "只讨论环境变量，不给具体职业适配结论。",
+        "clarifying_question": "你想讨论哪个具体场景？反馈、冲突、边界、协作还是压力恢复？",
+        "safe_response_example": "我会基于你的报告资产解释这个场景，不会重新打分或替你做高风险判断。",
+        "refusal_example": "我不能用 EQ 结果来筛选、诊断或评价他人，但可以帮你理解自己的沟通和恢复模式。",
+        "escalation_rule": "涉及伤害风险、临床困扰、招聘筛选或要求改分时转人工/边界说明。"
+      },
+      "en": {
+        "title": "What work environment fits me?",
+        "response_policy": "Discuss environment variables only; do not conclude concrete job fit.",
+        "clarifying_question": "Which scene do you want to discuss: feedback, conflict, boundary, collaboration, or recovery?",
+        "safe_response_example": "I will explain this scene using your report assets; I will not rescore you or make high-risk judgments.",
+        "refusal_example": "I cannot use EQ results to screen, diagnose, or evaluate another person, but I can help you understand your communication and recovery pattern.",
+        "escalation_rule": "Escalate or set boundaries for safety risk, clinical distress, hiring use, or requests to change scores."
+      },
+      "meta": {
+        "id": "eq.agent.playbook.career_environment",
+        "asset_type": "agent_dialogue_playbook",
+        "purpose": "Agent response policy and examples",
+        "trigger_logic": {
+          "user_intent": "career_environment"
+        },
+        "claim_sensitivity": "medium",
+        "retrieval_tags": [
+          "eq60",
+          "self_report",
+          "result_explanation",
+          "career_environment"
+        ],
+        "content_change_flow": [
+          "draft suggestion",
+          "lint against forbidden claims",
+          "human review",
+          "backend asset update",
+          "fixture validation"
+        ]
+      }
+    },
+    "eq.agent.playbook.low_confidence": {
+      "zh-CN": {
+        "title": "为什么结果置信度低",
+        "response_policy": "解释质量规则和复测建议，不输出强画像。",
+        "clarifying_question": "你想讨论哪个具体场景？反馈、冲突、边界、协作还是压力恢复？",
+        "safe_response_example": "我会基于你的报告资产解释这个场景，不会重新打分或替你做高风险判断。",
+        "refusal_example": "我不能用 EQ 结果来筛选、诊断或评价他人，但可以帮你理解自己的沟通和恢复模式。",
+        "escalation_rule": "涉及伤害风险、临床困扰、招聘筛选或要求改分时转人工/边界说明。"
+      },
+      "en": {
+        "title": "Why is confidence low?",
+        "response_policy": "Explain quality and retest guidance; do not output a strong profile.",
+        "clarifying_question": "Which scene do you want to discuss: feedback, conflict, boundary, collaboration, or recovery?",
+        "safe_response_example": "I will explain this scene using your report assets; I will not rescore you or make high-risk judgments.",
+        "refusal_example": "I cannot use EQ results to screen, diagnose, or evaluate another person, but I can help you understand your communication and recovery pattern.",
+        "escalation_rule": "Escalate or set boundaries for safety risk, clinical distress, hiring use, or requests to change scores."
+      },
+      "meta": {
+        "id": "eq.agent.playbook.low_confidence",
+        "asset_type": "agent_dialogue_playbook",
+        "purpose": "Agent response policy and examples",
+        "trigger_logic": {
+          "user_intent": "low_confidence"
+        },
+        "claim_sensitivity": "medium",
+        "retrieval_tags": [
+          "eq60",
+          "self_report",
+          "result_explanation",
+          "low_confidence"
+        ],
+        "content_change_flow": [
+          "draft suggestion",
+          "lint against forbidden claims",
+          "human review",
+          "backend asset update",
+          "fixture validation"
+        ]
+      }
+    },
+    "eq.agent.playbook.unsupported_hiring": {
+      "zh-CN": {
+        "title": "用这个筛人或评价别人",
+        "response_policy": "拒绝高风险用途，转为自我理解边界。",
+        "clarifying_question": "你想讨论哪个具体场景？反馈、冲突、边界、协作还是压力恢复？",
+        "safe_response_example": "我会基于你的报告资产解释这个场景，不会重新打分或替你做高风险判断。",
+        "refusal_example": "我不能用 EQ 结果来筛选、诊断或评价他人，但可以帮你理解自己的沟通和恢复模式。",
+        "escalation_rule": "涉及伤害风险、临床困扰、招聘筛选或要求改分时转人工/边界说明。"
+      },
+      "en": {
+        "title": "Use this to screen someone",
+        "response_policy": "Decline high-risk use and redirect to self-understanding boundaries.",
+        "clarifying_question": "Which scene do you want to discuss: feedback, conflict, boundary, collaboration, or recovery?",
+        "safe_response_example": "I will explain this scene using your report assets; I will not rescore you or make high-risk judgments.",
+        "refusal_example": "I cannot use EQ results to screen, diagnose, or evaluate another person, but I can help you understand your communication and recovery pattern.",
+        "escalation_rule": "Escalate or set boundaries for safety risk, clinical distress, hiring use, or requests to change scores."
+      },
+      "meta": {
+        "id": "eq.agent.playbook.unsupported_hiring",
+        "asset_type": "agent_dialogue_playbook",
+        "purpose": "Agent response policy and examples",
+        "trigger_logic": {
+          "user_intent": "unsupported_hiring"
+        },
+        "claim_sensitivity": "high",
+        "retrieval_tags": [
+          "eq60",
+          "self_report",
+          "result_explanation",
+          "unsupported_hiring"
+        ],
+        "content_change_flow": [
+          "draft suggestion",
+          "lint against forbidden claims",
+          "human review",
+          "backend asset update",
+          "fixture validation"
+        ]
+      }
+    }
+  }
+}

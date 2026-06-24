@@ -1,0 +1,572 @@
+{
+  "schema": "eq60.report_assets.result_snapshot.v1",
+  "pack_id": "EQ_60",
+  "assets": {
+    "eq.snapshot.balanced_integrated": {
+      "zh-CN": {
+        "headline": "均衡整合型",
+        "core_judgment": "你能同时照顾自己的状态、他人的感受和关系目标。",
+        "evidence_point": "依据四维分数、维度差距、答题质量和机制组合生成。",
+        "three_sentence_summary": [
+          "你能同时照顾自己的状态、他人的感受和关系目标。",
+          "你能把情绪、关系和任务放在同一个画面里思考。",
+          "下一步：把“我来稳住”改成“我们一起定规则”。"
+        ],
+        "top_strength": "你能把情绪、关系和任务放在同一个画面里思考。",
+        "likely_cost": "别人可能默认你来稳定局面，久了会变成隐形情绪劳动。",
+        "minimal_action": "把“我来稳住”改成“我们一起定规则”。",
+        "share_safe_sentence": "我能稳定关系，但不必独自维护整个关系系统。",
+        "continue_path": "保存报告，7 天后复测；也可以用 Agent 追问一个具体场景。",
+        "conversion_actions": [
+          "save_report",
+          "email_revisit",
+          "share_card",
+          "talk_to_agent",
+          "related_tests"
+        ],
+        "do_not_overread": "首屏只给核心阅读路径，不替代完整报告。"
+      },
+      "en": {
+        "headline": "Balanced Integrator",
+        "core_judgment": "You can hold your own state, other people, and the relationship goal in view at the same time.",
+        "evidence_point": "Based on the four dimension scores, score gaps, response quality, and mechanism pattern.",
+        "three_sentence_summary": [
+          "You can hold your own state, other people, and the relationship goal in view at the same time.",
+          "You can keep emotion, relationship, and task in the same frame.",
+          "Next move: Move from “I will steady this” to “we need a shared rule.”"
+        ],
+        "top_strength": "You can keep emotion, relationship, and task in the same frame.",
+        "likely_cost": "Others may quietly expect you to stabilize the room, turning your steadiness into hidden labor.",
+        "minimal_action": "Move from “I will steady this” to “we need a shared rule.”",
+        "share_safe_sentence": "I can steady a relationship without maintaining the whole system alone.",
+        "continue_path": "Save the report, retest later, or ask the Agent about one real scene.",
+        "conversion_actions": [
+          "save_report",
+          "email_revisit",
+          "share_card",
+          "talk_to_agent",
+          "related_tests"
+        ],
+        "do_not_overread": "The first screen is a reading path, not a replacement for the full report."
+      },
+      "meta": {
+        "id": "eq.snapshot.balanced_integrated",
+        "asset_type": "result_snapshot",
+        "purpose": "30-second first-screen commercial summary",
+        "trigger_logic": {
+          "formulation_id": "balanced_integrated"
+        },
+        "claim_sensitivity": "medium"
+      }
+    },
+    "eq.snapshot.high_empathy_low_recovery": {
+      "zh-CN": {
+        "headline": "高共情，低恢复",
+        "core_judgment": "你很快读到别人的状态，但恢复系统常常追不上共情速度。",
+        "evidence_point": "依据四维分数、维度差距、答题质量和机制组合生成。",
+        "three_sentence_summary": [
+          "你很快读到别人的状态，但恢复系统常常追不上共情速度。",
+          "你容易让别人感到被理解，尤其在情绪强烈的时刻。",
+          "下一步：练习“理解但不接管”，让共情后面跟着边界。"
+        ],
+        "top_strength": "你容易让别人感到被理解，尤其在情绪强烈的时刻。",
+        "likely_cost": "你可能把别人的压力带回自己身上，离开场景后还在消化。",
+        "minimal_action": "练习“理解但不接管”，让共情后面跟着边界。",
+        "share_safe_sentence": "我可以理解别人，但不必替别人承受全部情绪。",
+        "continue_path": "保存报告，7 天后复测；也可以用 Agent 追问一个具体场景。",
+        "conversion_actions": [
+          "save_report",
+          "email_revisit",
+          "share_card",
+          "talk_to_agent",
+          "related_tests"
+        ],
+        "do_not_overread": "首屏只给核心阅读路径，不替代完整报告。"
+      },
+      "en": {
+        "headline": "High Empathy, Slow Recovery",
+        "core_judgment": "You read the room quickly, but recovery can lag behind empathy.",
+        "evidence_point": "Based on the four dimension scores, score gaps, response quality, and mechanism pattern.",
+        "three_sentence_summary": [
+          "You read the room quickly, but recovery can lag behind empathy.",
+          "You can make people feel understood, especially when emotions run high.",
+          "Next move: Practice understanding without taking over, so empathy is followed by boundary."
+        ],
+        "top_strength": "You can make people feel understood, especially when emotions run high.",
+        "likely_cost": "You may carry other people’s pressure with you long after the moment ends.",
+        "minimal_action": "Practice understanding without taking over, so empathy is followed by boundary.",
+        "share_safe_sentence": "I can understand someone without carrying the whole emotional load.",
+        "continue_path": "Save the report, retest later, or ask the Agent about one real scene.",
+        "conversion_actions": [
+          "save_report",
+          "email_revisit",
+          "share_card",
+          "talk_to_agent",
+          "related_tests"
+        ],
+        "do_not_overread": "The first screen is a reading path, not a replacement for the full report."
+      },
+      "meta": {
+        "id": "eq.snapshot.high_empathy_low_recovery",
+        "asset_type": "result_snapshot",
+        "purpose": "30-second first-screen commercial summary",
+        "trigger_logic": {
+          "formulation_id": "high_empathy_low_recovery"
+        },
+        "claim_sensitivity": "medium"
+      }
+    },
+    "eq.snapshot.aware_but_unregulated": {
+      "zh-CN": {
+        "headline": "有觉察，调节不足",
+        "core_judgment": "你常知道自己怎么了，但把自己带回来需要更长时间。",
+        "evidence_point": "依据四维分数、维度差距、答题质量和机制组合生成。",
+        "three_sentence_summary": [
+          "你常知道自己怎么了，但把自己带回来需要更长时间。",
+          "你能清楚识别触发点、感受和需要。",
+          "下一步：把觉察压缩成一个暂停动作，而不是继续解释。"
+        ],
+        "top_strength": "你能清楚识别触发点、感受和需要。",
+        "likely_cost": "越清楚自己被触发，越可能陷入反复分析或即时反应。",
+        "minimal_action": "把觉察压缩成一个暂停动作，而不是继续解释。",
+        "share_safe_sentence": "我知道自己怎么了，下一步是把自己带回来。",
+        "continue_path": "保存报告，7 天后复测；也可以用 Agent 追问一个具体场景。",
+        "conversion_actions": [
+          "save_report",
+          "email_revisit",
+          "share_card",
+          "talk_to_agent",
+          "related_tests"
+        ],
+        "do_not_overread": "首屏只给核心阅读路径，不替代完整报告。"
+      },
+      "en": {
+        "headline": "Aware, Still Reactive",
+        "core_judgment": "You often know what is happening inside, but the reset button is slower than the insight.",
+        "evidence_point": "Based on the four dimension scores, score gaps, response quality, and mechanism pattern.",
+        "three_sentence_summary": [
+          "You often know what is happening inside, but the reset button is slower than the insight.",
+          "You can identify triggers, feelings, and needs with unusual clarity.",
+          "Next move: Turn awareness into one pause action instead of another layer of explanation."
+        ],
+        "top_strength": "You can identify triggers, feelings, and needs with unusual clarity.",
+        "likely_cost": "The clearer the trigger feels, the easier it can be to over-analyze or react too soon.",
+        "minimal_action": "Turn awareness into one pause action instead of another layer of explanation.",
+        "share_safe_sentence": "I know what is happening; the next skill is bringing myself back.",
+        "continue_path": "Save the report, retest later, or ask the Agent about one real scene.",
+        "conversion_actions": [
+          "save_report",
+          "email_revisit",
+          "share_card",
+          "talk_to_agent",
+          "related_tests"
+        ],
+        "do_not_overread": "The first screen is a reading path, not a replacement for the full report."
+      },
+      "meta": {
+        "id": "eq.snapshot.aware_but_unregulated",
+        "asset_type": "result_snapshot",
+        "purpose": "30-second first-screen commercial summary",
+        "trigger_logic": {
+          "formulation_id": "aware_but_unregulated"
+        },
+        "claim_sensitivity": "medium"
+      }
+    },
+    "eq.snapshot.calm_but_distant": {
+      "zh-CN": {
+        "headline": "冷静稳定，但距离感强",
+        "core_judgment": "你能稳住事情，但别人不一定感到被情绪上接住。",
+        "evidence_point": "依据四维分数、维度差距、答题质量和机制组合生成。",
+        "three_sentence_summary": [
+          "你能稳住事情，但别人不一定感到被情绪上接住。",
+          "你不容易被情绪推着走，能保留判断和节奏。",
+          "下一步：先回应一句感受，再给建议或方案。"
+        ],
+        "top_strength": "你不容易被情绪推着走，能保留判断和节奏。",
+        "likely_cost": "关系里的人可能觉得你有答案，但没有真正回应他们。",
+        "minimal_action": "先回应一句感受，再给建议或方案。",
+        "share_safe_sentence": "我能稳住事情，也要让人感到被看见。",
+        "continue_path": "保存报告，7 天后复测；也可以用 Agent 追问一个具体场景。",
+        "conversion_actions": [
+          "save_report",
+          "email_revisit",
+          "share_card",
+          "talk_to_agent",
+          "related_tests"
+        ],
+        "do_not_overread": "首屏只给核心阅读路径，不替代完整报告。"
+      },
+      "en": {
+        "headline": "Steady, Less Attuned",
+        "core_judgment": "You can steady the situation, but people may not always feel emotionally met.",
+        "evidence_point": "Based on the four dimension scores, score gaps, response quality, and mechanism pattern.",
+        "three_sentence_summary": [
+          "You can steady the situation, but people may not always feel emotionally met.",
+          "You are less likely to be pushed around by emotion and can keep judgment and pace.",
+          "Next move: Acknowledge one feeling before offering advice or a solution."
+        ],
+        "top_strength": "You are less likely to be pushed around by emotion and can keep judgment and pace.",
+        "likely_cost": "People may feel that you have answers without feeling that you have responded to them.",
+        "minimal_action": "Acknowledge one feeling before offering advice or a solution.",
+        "share_safe_sentence": "I can steady the situation and still help people feel seen.",
+        "continue_path": "Save the report, retest later, or ask the Agent about one real scene.",
+        "conversion_actions": [
+          "save_report",
+          "email_revisit",
+          "share_card",
+          "talk_to_agent",
+          "related_tests"
+        ],
+        "do_not_overread": "The first screen is a reading path, not a replacement for the full report."
+      },
+      "meta": {
+        "id": "eq.snapshot.calm_but_distant",
+        "asset_type": "result_snapshot",
+        "purpose": "30-second first-screen commercial summary",
+        "trigger_logic": {
+          "formulation_id": "calm_but_distant"
+        },
+        "claim_sensitivity": "medium"
+      }
+    },
+    "eq.snapshot.relationship_first_self_later": {
+      "zh-CN": {
+        "headline": "关系优先，自我后置",
+        "core_judgment": "你会先保护关系，再回头找自己的真实立场。",
+        "evidence_point": "依据四维分数、维度差距、答题质量和机制组合生成。",
+        "three_sentence_summary": [
+          "你会先保护关系，再回头找自己的真实立场。",
+          "你敏感于关系气氛，愿意让互动维持可进行。",
+          "下一步：在照顾关系前，先给自己的感受一个位置。"
+        ],
+        "top_strength": "你敏感于关系气氛，愿意让互动维持可进行。",
+        "likely_cost": "你可能很晚才意识到自己其实不愿意、不同意或已经累了。",
+        "minimal_action": "在照顾关系前，先给自己的感受一个位置。",
+        "share_safe_sentence": "关系重要，我的感受也需要在场。",
+        "continue_path": "保存报告，7 天后复测；也可以用 Agent 追问一个具体场景。",
+        "conversion_actions": [
+          "save_report",
+          "email_revisit",
+          "share_card",
+          "talk_to_agent",
+          "related_tests"
+        ],
+        "do_not_overread": "首屏只给核心阅读路径，不替代完整报告。"
+      },
+      "en": {
+        "headline": "Relationship First, Self Later",
+        "core_judgment": "You protect the relationship first and find your own position later.",
+        "evidence_point": "Based on the four dimension scores, score gaps, response quality, and mechanism pattern.",
+        "three_sentence_summary": [
+          "You protect the relationship first and find your own position later.",
+          "You are sensitive to relational tone and often keep interaction workable.",
+          "Next move: Give your own feeling a place before you manage the relationship."
+        ],
+        "top_strength": "You are sensitive to relational tone and often keep interaction workable.",
+        "likely_cost": "You may notice too late that you disagreed, felt unwilling, or were already depleted.",
+        "minimal_action": "Give your own feeling a place before you manage the relationship.",
+        "share_safe_sentence": "The relationship matters, and my own state belongs in the room too.",
+        "continue_path": "Save the report, retest later, or ask the Agent about one real scene.",
+        "conversion_actions": [
+          "save_report",
+          "email_revisit",
+          "share_card",
+          "talk_to_agent",
+          "related_tests"
+        ],
+        "do_not_overread": "The first screen is a reading path, not a replacement for the full report."
+      },
+      "meta": {
+        "id": "eq.snapshot.relationship_first_self_later",
+        "asset_type": "result_snapshot",
+        "purpose": "30-second first-screen commercial summary",
+        "trigger_logic": {
+          "formulation_id": "relationship_first_self_later"
+        },
+        "claim_sensitivity": "medium"
+      }
+    },
+    "eq.snapshot.self_clear_repair_weak": {
+      "zh-CN": {
+        "headline": "自我清楚，修复不足",
+        "core_judgment": "你知道自己的立场，但冲突后的修复需要更明确的工具。",
+        "evidence_point": "依据四维分数、维度差距、答题质量和机制组合生成。",
+        "three_sentence_summary": [
+          "你知道自己的立场，但冲突后的修复需要更明确的工具。",
+          "你不容易在关系压力里丢掉自己的判断。",
+          "下一步：把“我说清楚了”补成“我们怎么重新对齐”。"
+        ],
+        "top_strength": "你不容易在关系压力里丢掉自己的判断。",
+        "likely_cost": "如果表达后缺少修复，对方可能只记得强度，而不是你的重点。",
+        "minimal_action": "把“我说清楚了”补成“我们怎么重新对齐”。",
+        "share_safe_sentence": "我可以清楚表达，也可以把关系重新接上。",
+        "continue_path": "保存报告，7 天后复测；也可以用 Agent 追问一个具体场景。",
+        "conversion_actions": [
+          "save_report",
+          "email_revisit",
+          "share_card",
+          "talk_to_agent",
+          "related_tests"
+        ],
+        "do_not_overread": "首屏只给核心阅读路径，不替代完整报告。"
+      },
+      "en": {
+        "headline": "Clear Self, Repair Gap",
+        "core_judgment": "You know your position, but repair after tension needs a clearer tool.",
+        "evidence_point": "Based on the four dimension scores, score gaps, response quality, and mechanism pattern.",
+        "three_sentence_summary": [
+          "You know your position, but repair after tension needs a clearer tool.",
+          "You are less likely to lose your judgment under relational pressure.",
+          "Next move: Add “how do we realign?” after “I made my point.”"
+        ],
+        "top_strength": "You are less likely to lose your judgment under relational pressure.",
+        "likely_cost": "Without repair, others may remember the force of the moment more than your point.",
+        "minimal_action": "Add “how do we realign?” after “I made my point.”",
+        "share_safe_sentence": "I can be clear and still reconnect the relationship.",
+        "continue_path": "Save the report, retest later, or ask the Agent about one real scene.",
+        "conversion_actions": [
+          "save_report",
+          "email_revisit",
+          "share_card",
+          "talk_to_agent",
+          "related_tests"
+        ],
+        "do_not_overread": "The first screen is a reading path, not a replacement for the full report."
+      },
+      "meta": {
+        "id": "eq.snapshot.self_clear_repair_weak",
+        "asset_type": "result_snapshot",
+        "purpose": "30-second first-screen commercial summary",
+        "trigger_logic": {
+          "formulation_id": "self_clear_repair_weak"
+        },
+        "claim_sensitivity": "medium"
+      }
+    },
+    "eq.snapshot.steady_collaborator": {
+      "zh-CN": {
+        "headline": "稳定协作型",
+        "core_judgment": "你能在压力下维持合作推进，但别让稳定只靠你一个人。",
+        "evidence_point": "依据四维分数、维度差距、答题质量和机制组合生成。",
+        "three_sentence_summary": [
+          "你能在压力下维持合作推进，但别让稳定只靠你一个人。",
+          "你能把紧张对话拉回事实、目标和下一步。",
+          "下一步：把个人稳定能力变成团队流程。"
+        ],
+        "top_strength": "你能把紧张对话拉回事实、目标和下一步。",
+        "likely_cost": "团队可能习惯让你来降温、翻译和收尾。",
+        "minimal_action": "把个人稳定能力变成团队流程。",
+        "share_safe_sentence": "我能帮助协作，但协作规则不能只靠我承担。",
+        "continue_path": "保存报告，7 天后复测；也可以用 Agent 追问一个具体场景。",
+        "conversion_actions": [
+          "save_report",
+          "email_revisit",
+          "share_card",
+          "talk_to_agent",
+          "related_tests"
+        ],
+        "do_not_overread": "首屏只给核心阅读路径，不替代完整报告。"
+      },
+      "en": {
+        "headline": "Steady Collaborator",
+        "core_judgment": "You keep collaboration moving under pressure, but steadiness should not depend only on you.",
+        "evidence_point": "Based on the four dimension scores, score gaps, response quality, and mechanism pattern.",
+        "three_sentence_summary": [
+          "You keep collaboration moving under pressure, but steadiness should not depend only on you.",
+          "You can bring tense conversations back to facts, goals, and next steps.",
+          "Next move: Turn personal steadiness into team process."
+        ],
+        "top_strength": "You can bring tense conversations back to facts, goals, and next steps.",
+        "likely_cost": "Teams may get used to you cooling things down, translating tension, and closing loops.",
+        "minimal_action": "Turn personal steadiness into team process.",
+        "share_safe_sentence": "I can help collaboration, but the rules cannot live only in me.",
+        "continue_path": "Save the report, retest later, or ask the Agent about one real scene.",
+        "conversion_actions": [
+          "save_report",
+          "email_revisit",
+          "share_card",
+          "talk_to_agent",
+          "related_tests"
+        ],
+        "do_not_overread": "The first screen is a reading path, not a replacement for the full report."
+      },
+      "meta": {
+        "id": "eq.snapshot.steady_collaborator",
+        "asset_type": "result_snapshot",
+        "purpose": "30-second first-screen commercial summary",
+        "trigger_logic": {
+          "formulation_id": "steady_collaborator"
+        },
+        "claim_sensitivity": "medium"
+      }
+    },
+    "eq.snapshot.sensitive_absorber": {
+      "zh-CN": {
+        "headline": "高敏感，易吸收",
+        "core_judgment": "你能捕捉细微变化，但敏感也容易变成情绪负重。",
+        "evidence_point": "依据四维分数、维度差距、答题质量和机制组合生成。",
+        "three_sentence_summary": [
+          "你能捕捉细微变化，但敏感也容易变成情绪负重。",
+          "你很快发现气氛、语气和关系位置的变化。",
+          "下一步：把“我感到了”区分成“我要不要回应”。"
+        ],
+        "top_strength": "你很快发现气氛、语气和关系位置的变化。",
+        "likely_cost": "你可能回应了太多信号，最后分不清哪些真的需要你处理。",
+        "minimal_action": "把“我感到了”区分成“我要不要回应”。",
+        "share_safe_sentence": "我能感到很多东西，但不需要回应所有东西。",
+        "continue_path": "保存报告，7 天后复测；也可以用 Agent 追问一个具体场景。",
+        "conversion_actions": [
+          "save_report",
+          "email_revisit",
+          "share_card",
+          "talk_to_agent",
+          "related_tests"
+        ],
+        "do_not_overread": "首屏只给核心阅读路径，不替代完整报告。"
+      },
+      "en": {
+        "headline": "Sensitive Absorber",
+        "core_judgment": "You catch subtle shifts fast, and that sensitivity can become emotional load.",
+        "evidence_point": "Based on the four dimension scores, score gaps, response quality, and mechanism pattern.",
+        "three_sentence_summary": [
+          "You catch subtle shifts fast, and that sensitivity can become emotional load.",
+          "You quickly notice shifts in tone, mood, and relational position.",
+          "Next move: Separate “I noticed it” from “I need to respond.”"
+        ],
+        "top_strength": "You quickly notice shifts in tone, mood, and relational position.",
+        "likely_cost": "You may respond to too many signals and lose track of which ones actually need your action.",
+        "minimal_action": "Separate “I noticed it” from “I need to respond.”",
+        "share_safe_sentence": "I can feel a lot without responding to everything.",
+        "continue_path": "Save the report, retest later, or ask the Agent about one real scene.",
+        "conversion_actions": [
+          "save_report",
+          "email_revisit",
+          "share_card",
+          "talk_to_agent",
+          "related_tests"
+        ],
+        "do_not_overread": "The first screen is a reading path, not a replacement for the full report."
+      },
+      "meta": {
+        "id": "eq.snapshot.sensitive_absorber",
+        "asset_type": "result_snapshot",
+        "purpose": "30-second first-screen commercial summary",
+        "trigger_logic": {
+          "formulation_id": "sensitive_absorber"
+        },
+        "claim_sensitivity": "medium"
+      }
+    },
+    "eq.snapshot.developing_foundation": {
+      "zh-CN": {
+        "headline": "基础发展中",
+        "core_judgment": "你的情绪与关系模式还在建立，最有效的是先练一个稳定小动作。",
+        "evidence_point": "依据四维分数、维度差距、答题质量和机制组合生成。",
+        "three_sentence_summary": [
+          "你的情绪与关系模式还在建立，最有效的是先练一个稳定小动作。",
+          "你已经开始把情绪和关系当成可以观察、可以练习的对象。",
+          "下一步：先把一个情绪命名清楚，再谈复杂改变。"
+        ],
+        "top_strength": "你已经开始把情绪和关系当成可以观察、可以练习的对象。",
+        "likely_cost": "如果一次想改太多，容易很快放弃或自我否定。",
+        "minimal_action": "先把一个情绪命名清楚，再谈复杂改变。",
+        "share_safe_sentence": "先练一个小动作，就已经是在建立基础。",
+        "continue_path": "保存报告，7 天后复测；也可以用 Agent 追问一个具体场景。",
+        "conversion_actions": [
+          "save_report",
+          "email_revisit",
+          "share_card",
+          "talk_to_agent",
+          "related_tests"
+        ],
+        "do_not_overread": "首屏只给核心阅读路径，不替代完整报告。"
+      },
+      "en": {
+        "headline": "Developing Foundation",
+        "core_judgment": "Your emotional and relational pattern is still forming; one reliable practice matters more than a full reset.",
+        "evidence_point": "Based on the four dimension scores, score gaps, response quality, and mechanism pattern.",
+        "three_sentence_summary": [
+          "Your emotional and relational pattern is still forming; one reliable practice matters more than a full reset.",
+          "You are beginning to treat emotion and relationships as observable and trainable.",
+          "Next move: Name one feeling clearly before attempting a larger change."
+        ],
+        "top_strength": "You are beginning to treat emotion and relationships as observable and trainable.",
+        "likely_cost": "Trying to change everything at once can lead to quick discouragement or self-criticism.",
+        "minimal_action": "Name one feeling clearly before attempting a larger change.",
+        "share_safe_sentence": "One small practice is already foundation-building.",
+        "continue_path": "Save the report, retest later, or ask the Agent about one real scene.",
+        "conversion_actions": [
+          "save_report",
+          "email_revisit",
+          "share_card",
+          "talk_to_agent",
+          "related_tests"
+        ],
+        "do_not_overread": "The first screen is a reading path, not a replacement for the full report."
+      },
+      "meta": {
+        "id": "eq.snapshot.developing_foundation",
+        "asset_type": "result_snapshot",
+        "purpose": "30-second first-screen commercial summary",
+        "trigger_logic": {
+          "formulation_id": "developing_foundation"
+        },
+        "claim_sensitivity": "medium"
+      }
+    },
+    "eq.snapshot.low_confidence_result": {
+      "zh-CN": {
+        "headline": "本次结果置信度较低",
+        "core_judgment": "这次结果应轻一点读，最有价值的是理解本次作答状态。",
+        "evidence_point": "由于本次作答质量不足，系统不会输出强画像判断。",
+        "three_sentence_summary": [
+          "这次结果应轻一点读，最有价值的是理解本次作答状态。",
+          "即使不适合强结论，也能提醒你观察最近的压力、疲劳或作答方式。",
+          "下一步：先记录状态，之后在更稳定的时间复测。"
+        ],
+        "top_strength": "即使不适合强结论，也能提醒你观察最近的压力、疲劳或作答方式。",
+        "likely_cost": "如果强行套用画像，可能比不看结果更误导。",
+        "minimal_action": "先记录状态，之后在更稳定的时间复测。",
+        "share_safe_sentence": "这次结果不是不能看，而是要轻一点看。",
+        "continue_path": "先记录本次作答状态，之后在更稳定的时间复测。",
+        "conversion_actions": [
+          "save_report",
+          "retest_reminder",
+          "talk_to_agent"
+        ],
+        "do_not_overread": "首屏只给核心阅读路径，不替代完整报告。"
+      },
+      "en": {
+        "headline": "Lower-Confidence Result",
+        "core_judgment": "Read this result lightly; the most useful signal is the response context of this session.",
+        "evidence_point": "Because response confidence is limited, the system avoids a strong profile statement.",
+        "three_sentence_summary": [
+          "Read this result lightly; the most useful signal is the response context of this session.",
+          "Even without a strong conclusion, it can point you toward stress, fatigue, or response style to observe.",
+          "Next move: Record the context first, then retest when conditions are steadier."
+        ],
+        "top_strength": "Even without a strong conclusion, it can point you toward stress, fatigue, or response style to observe.",
+        "likely_cost": "Forcing a profile onto this result could be more misleading than useful.",
+        "minimal_action": "Record the context first, then retest when conditions are steadier.",
+        "share_safe_sentence": "This result is not useless; it simply needs a lighter reading.",
+        "continue_path": "Record the response context first, then retest when conditions are steadier.",
+        "conversion_actions": [
+          "save_report",
+          "retest_reminder",
+          "talk_to_agent"
+        ],
+        "do_not_overread": "The first screen is a reading path, not a replacement for the full report."
+      },
+      "meta": {
+        "id": "eq.snapshot.low_confidence_result",
+        "asset_type": "result_snapshot",
+        "purpose": "30-second first-screen commercial summary",
+        "trigger_logic": {
+          "formulation_id": "low_confidence_result"
+        },
+        "claim_sensitivity": "high"
+      }
+    }
+  }
+}

@@ -1,0 +1,181 @@
+{
+  "schema": "eq60.report_assets.commercial_conversion_assets.v1",
+  "pack_id": "EQ_60",
+  "assets": {
+    "eq.conversion.save_report": {
+      "zh-CN": {
+        "title": "保存报告",
+        "body": "把这次核心模式、行动处方和复测入口留住。",
+        "cta_label": "保存报告",
+        "placement": "结果页底部、首屏次级动作或报告保存区域。",
+        "do_not_overread": "这是免费产品动作，不改变报告权限。"
+      },
+      "en": {
+        "title": "Save your report",
+        "body": "Keep your pattern, action prescription, and retest path in one place.",
+        "cta_label": "Save report",
+        "placement": "Use in result-page footer, secondary hero action, or saved-report area.",
+        "do_not_overread": "This is a free product action, it does not change report access."
+      },
+      "meta": {
+        "id": "eq.conversion.save_report",
+        "asset_type": "commercial_conversion",
+        "purpose": "Commercial retention/conversion action",
+        "trigger_logic": {
+          "conversion_action": "save_report"
+        },
+        "claim_sensitivity": "low"
+      }
+    },
+    "eq.conversion.email_revisit": {
+      "zh-CN": {
+        "title": "邮件回看",
+        "body": "把报告发送给自己，适合之后复盘或继续和 Agent 对话。",
+        "cta_label": "发送到邮箱",
+        "placement": "结果页底部、首屏次级动作或报告保存区域。",
+        "do_not_overread": "这是免费产品动作，不改变报告权限。"
+      },
+      "en": {
+        "title": "Email revisit",
+        "body": "Send the report to yourself so you can revisit it or continue with the Agent later.",
+        "cta_label": "Email me",
+        "placement": "Use in result-page footer, secondary hero action, or saved-report area.",
+        "do_not_overread": "This is a free product action, it does not change report access."
+      },
+      "meta": {
+        "id": "eq.conversion.email_revisit",
+        "asset_type": "commercial_conversion",
+        "purpose": "Commercial retention/conversion action",
+        "trigger_logic": {
+          "conversion_action": "email_revisit"
+        },
+        "claim_sensitivity": "low"
+      }
+    },
+    "eq.conversion.pdf_export": {
+      "zh-CN": {
+        "title": "PDF 报告",
+        "body": "生成可保存版本，适合个人复盘，不建议用于招聘或评估他人。",
+        "cta_label": "生成 PDF",
+        "placement": "结果页底部、首屏次级动作或报告保存区域。",
+        "do_not_overread": "这是免费产品动作，不改变报告权限。"
+      },
+      "en": {
+        "title": "PDF report",
+        "body": "Create a saved copy for personal reflection, not for hiring or evaluating another person.",
+        "cta_label": "Create PDF",
+        "placement": "Use in result-page footer, secondary hero action, or saved-report area.",
+        "do_not_overread": "This is a free product action, it does not change report access."
+      },
+      "meta": {
+        "id": "eq.conversion.pdf_export",
+        "asset_type": "commercial_conversion",
+        "purpose": "Commercial retention/conversion action",
+        "trigger_logic": {
+          "conversion_action": "pdf_export"
+        },
+        "claim_sensitivity": "low"
+      }
+    },
+    "eq.conversion.share_card": {
+      "zh-CN": {
+        "title": "分享卡",
+        "body": "只分享模式句，不分享详细分数和敏感解释。",
+        "cta_label": "生成分享卡",
+        "placement": "结果页底部、首屏次级动作或报告保存区域。",
+        "do_not_overread": "这是免费产品动作，不改变报告权限。"
+      },
+      "en": {
+        "title": "Share card",
+        "body": "Share the pattern sentence, not detailed scores or sensitive interpretation.",
+        "cta_label": "Create share card",
+        "placement": "Use in result-page footer, secondary hero action, or saved-report area.",
+        "do_not_overread": "This is a free product action, it does not change report access."
+      },
+      "meta": {
+        "id": "eq.conversion.share_card",
+        "asset_type": "commercial_conversion",
+        "purpose": "Commercial retention/conversion action",
+        "trigger_logic": {
+          "conversion_action": "share_card"
+        },
+        "claim_sensitivity": "low"
+      }
+    },
+    "eq.conversion.retest_reminder": {
+      "zh-CN": {
+        "title": "复测提醒",
+        "body": "4–8 周后重新查看模式是否稳定，低置信结果可更早复测。",
+        "cta_label": "设置复测提醒",
+        "placement": "结果页底部、首屏次级动作或报告保存区域。",
+        "do_not_overread": "这是免费产品动作，不改变报告权限。"
+      },
+      "en": {
+        "title": "Retest reminder",
+        "body": "Check whether the pattern is stable after 4–8 weeks; low-confidence results can be retested sooner.",
+        "cta_label": "Set reminder",
+        "placement": "Use in result-page footer, secondary hero action, or saved-report area.",
+        "do_not_overread": "This is a free product action, it does not change report access."
+      },
+      "meta": {
+        "id": "eq.conversion.retest_reminder",
+        "asset_type": "commercial_conversion",
+        "purpose": "Commercial retention/conversion action",
+        "trigger_logic": {
+          "conversion_action": "retest_reminder"
+        },
+        "claim_sensitivity": "low"
+      }
+    },
+    "eq.conversion.related_tests": {
+      "zh-CN": {
+        "title": "相关测试",
+        "body": "用 Big Five、RIASEC、MBTI 作为补充视角，不把 EQ 当成唯一结论。",
+        "cta_label": "继续探索",
+        "placement": "结果页底部、首屏次级动作或报告保存区域。",
+        "do_not_overread": "这是免费产品动作，不改变报告权限。"
+      },
+      "en": {
+        "title": "Related tests",
+        "body": "Use Big Five, RIASEC, or MBTI as complementary lenses, not as replacements for EQ.",
+        "cta_label": "Explore related tests",
+        "placement": "Use in result-page footer, secondary hero action, or saved-report area.",
+        "do_not_overread": "This is a free product action, it does not change report access."
+      },
+      "meta": {
+        "id": "eq.conversion.related_tests",
+        "asset_type": "commercial_conversion",
+        "purpose": "Commercial retention/conversion action",
+        "trigger_logic": {
+          "conversion_action": "related_tests"
+        },
+        "claim_sensitivity": "low"
+      }
+    },
+    "eq.conversion.agent_entry": {
+      "zh-CN": {
+        "title": "问问 Agent",
+        "body": "带着一个真实场景提问，例如反馈、冲突、边界或压力恢复。",
+        "cta_label": "问 Agent",
+        "placement": "结果页底部、首屏次级动作或报告保存区域。",
+        "do_not_overread": "这是免费产品动作，不改变报告权限。"
+      },
+      "en": {
+        "title": "Ask the Agent",
+        "body": "Ask about one real scene, such as feedback, conflict, boundaries, or recovery.",
+        "cta_label": "Ask the Agent",
+        "placement": "Use in result-page footer, secondary hero action, or saved-report area.",
+        "do_not_overread": "This is a free product action, it does not change report access."
+      },
+      "meta": {
+        "id": "eq.conversion.agent_entry",
+        "asset_type": "commercial_conversion",
+        "purpose": "Commercial retention/conversion action",
+        "trigger_logic": {
+          "conversion_action": "agent_entry"
+        },
+        "claim_sensitivity": "low"
+      }
+    }
+  }
+}

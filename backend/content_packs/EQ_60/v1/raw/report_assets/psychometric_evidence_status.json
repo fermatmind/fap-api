@@ -1,0 +1,195 @@
+{
+  "schema": "eq60.report_assets.psychometric_evidence_status.v1",
+  "pack_id": "EQ_60",
+  "assets": {
+    "eq.evidence.content_validity": {
+      "zh-CN": {
+        "status": "preliminary",
+        "body": "题项和报告维度已有内容映射，但需要持续专家复核和用户反馈。",
+        "do_not_overread": "证据状态透明不是削弱产品，而是防止过度解释。",
+        "user_facing_status_label": "证据持续建设中",
+        "what_this_means_for_user": "你可以把结果用于自我理解、沟通反思和成长计划，但不应用于高风险决策。",
+        "next_validation_step": "后续应通过样本扩展、复测稳定性、用户反馈和专家复核持续验证。"
+      },
+      "en": {
+        "status": "preliminary",
+        "body": "Items and report dimensions have content mapping, with ongoing need for expert review and user feedback.",
+        "do_not_overread": "Transparent evidence status strengthens proper interpretation.",
+        "user_facing_status_label": "Evidence is still being built",
+        "what_this_means_for_user": "Use the result for self-understanding, communication reflection, and growth planning, not high-risk decisions.",
+        "next_validation_step": "Next validation should include larger samples, retest stability, user feedback, and expert review."
+      },
+      "meta": {
+        "id": "eq.evidence.content_validity",
+        "asset_type": "psychometric_evidence_status",
+        "purpose": "State evidence maturity",
+        "trigger_logic": {
+          "evidence_area": "content_validity"
+        },
+        "claim_sensitivity": "high"
+      }
+    },
+    "eq.evidence.internal_consistency": {
+      "zh-CN": {
+        "status": "planned",
+        "body": "后续应按语言、地区和维度计算内部一致性，并记录版本。",
+        "do_not_overread": "证据状态透明不是削弱产品，而是防止过度解释。",
+        "user_facing_status_label": "证据持续建设中",
+        "what_this_means_for_user": "你可以把结果用于自我理解、沟通反思和成长计划，但不应用于高风险决策。",
+        "next_validation_step": "后续应通过样本扩展、复测稳定性、用户反馈和专家复核持续验证。"
+      },
+      "en": {
+        "status": "planned",
+        "body": "Future work should estimate internal consistency by language, region, and dimension with version tracking.",
+        "do_not_overread": "Transparent evidence status strengthens proper interpretation.",
+        "user_facing_status_label": "Evidence is still being built",
+        "what_this_means_for_user": "Use the result for self-understanding, communication reflection, and growth planning, not high-risk decisions.",
+        "next_validation_step": "Next validation should include larger samples, retest stability, user feedback, and expert review."
+      },
+      "meta": {
+        "id": "eq.evidence.internal_consistency",
+        "asset_type": "psychometric_evidence_status",
+        "purpose": "State evidence maturity",
+        "trigger_logic": {
+          "evidence_area": "internal_consistency"
+        },
+        "claim_sensitivity": "high"
+      }
+    },
+    "eq.evidence.test_retest": {
+      "zh-CN": {
+        "status": "planned",
+        "body": "建议在 30–90 天窗口评估稳定性和可变性。",
+        "do_not_overread": "证据状态透明不是削弱产品，而是防止过度解释。",
+        "user_facing_status_label": "证据持续建设中",
+        "what_this_means_for_user": "你可以把结果用于自我理解、沟通反思和成长计划，但不应用于高风险决策。",
+        "next_validation_step": "后续应通过样本扩展、复测稳定性、用户反馈和专家复核持续验证。"
+      },
+      "en": {
+        "status": "planned",
+        "body": "A 30–90 day window should be used to evaluate stability and change.",
+        "do_not_overread": "Transparent evidence status strengthens proper interpretation.",
+        "user_facing_status_label": "Evidence is still being built",
+        "what_this_means_for_user": "Use the result for self-understanding, communication reflection, and growth planning, not high-risk decisions.",
+        "next_validation_step": "Next validation should include larger samples, retest stability, user feedback, and expert review."
+      },
+      "meta": {
+        "id": "eq.evidence.test_retest",
+        "asset_type": "psychometric_evidence_status",
+        "purpose": "State evidence maturity",
+        "trigger_logic": {
+          "evidence_area": "test_retest"
+        },
+        "claim_sensitivity": "high"
+      }
+    },
+    "eq.evidence.factor_structure": {
+      "zh-CN": {
+        "status": "planned",
+        "body": "需要用 EFA/CFA 或其他合适方法验证四维结构。",
+        "do_not_overread": "证据状态透明不是削弱产品，而是防止过度解释。",
+        "user_facing_status_label": "证据持续建设中",
+        "what_this_means_for_user": "你可以把结果用于自我理解、沟通反思和成长计划，但不应用于高风险决策。",
+        "next_validation_step": "后续应通过样本扩展、复测稳定性、用户反馈和专家复核持续验证。"
+      },
+      "en": {
+        "status": "planned",
+        "body": "The four-dimension structure should be evaluated with EFA/CFA or suitable methods.",
+        "do_not_overread": "Transparent evidence status strengthens proper interpretation.",
+        "user_facing_status_label": "Evidence is still being built",
+        "what_this_means_for_user": "Use the result for self-understanding, communication reflection, and growth planning, not high-risk decisions.",
+        "next_validation_step": "Next validation should include larger samples, retest stability, user feedback, and expert review."
+      },
+      "meta": {
+        "id": "eq.evidence.factor_structure",
+        "asset_type": "psychometric_evidence_status",
+        "purpose": "State evidence maturity",
+        "trigger_logic": {
+          "evidence_area": "factor_structure"
+        },
+        "claim_sensitivity": "high"
+      }
+    },
+    "eq.evidence.criterion_validity": {
+      "zh-CN": {
+        "status": "planned",
+        "body": "可探索与工作满意、关系满意、压力恢复等低风险外部指标的关联。",
+        "do_not_overread": "证据状态透明不是削弱产品，而是防止过度解释。",
+        "user_facing_status_label": "证据持续建设中",
+        "what_this_means_for_user": "你可以把结果用于自我理解、沟通反思和成长计划，但不应用于高风险决策。",
+        "next_validation_step": "后续应通过样本扩展、复测稳定性、用户反馈和专家复核持续验证。"
+      },
+      "en": {
+        "status": "planned",
+        "body": "Associations with low-risk external indicators such as work satisfaction, relationship satisfaction, and recovery may be explored.",
+        "do_not_overread": "Transparent evidence status strengthens proper interpretation.",
+        "user_facing_status_label": "Evidence is still being built",
+        "what_this_means_for_user": "Use the result for self-understanding, communication reflection, and growth planning, not high-risk decisions.",
+        "next_validation_step": "Next validation should include larger samples, retest stability, user feedback, and expert review."
+      },
+      "meta": {
+        "id": "eq.evidence.criterion_validity",
+        "asset_type": "psychometric_evidence_status",
+        "purpose": "State evidence maturity",
+        "trigger_logic": {
+          "evidence_area": "criterion_validity"
+        },
+        "claim_sensitivity": "high"
+      }
+    },
+    "eq.evidence.measurement_invariance": {
+      "zh-CN": {
+        "status": "planned",
+        "body": "中英文和主要人群组之间需要做等值或 DIF 检查。",
+        "do_not_overread": "证据状态透明不是削弱产品，而是防止过度解释。",
+        "user_facing_status_label": "证据持续建设中",
+        "what_this_means_for_user": "你可以把结果用于自我理解、沟通反思和成长计划，但不应用于高风险决策。",
+        "next_validation_step": "后续应通过样本扩展、复测稳定性、用户反馈和专家复核持续验证。"
+      },
+      "en": {
+        "status": "planned",
+        "body": "Chinese/English and major user groups require invariance or DIF checks.",
+        "do_not_overread": "Transparent evidence status strengthens proper interpretation.",
+        "user_facing_status_label": "Evidence is still being built",
+        "what_this_means_for_user": "Use the result for self-understanding, communication reflection, and growth planning, not high-risk decisions.",
+        "next_validation_step": "Next validation should include larger samples, retest stability, user feedback, and expert review."
+      },
+      "meta": {
+        "id": "eq.evidence.measurement_invariance",
+        "asset_type": "psychometric_evidence_status",
+        "purpose": "State evidence maturity",
+        "trigger_logic": {
+          "evidence_area": "measurement_invariance"
+        },
+        "claim_sensitivity": "high"
+      }
+    },
+    "eq.evidence.norm_status": {
+      "zh-CN": {
+        "status": "provisional",
+        "body": "当前常模解释为阶段性版本，不应被理解为最终全球常模。",
+        "do_not_overread": "证据状态透明不是削弱产品，而是防止过度解释。",
+        "user_facing_status_label": "证据持续建设中",
+        "what_this_means_for_user": "你可以把结果用于自我理解、沟通反思和成长计划，但不应用于高风险决策。",
+        "next_validation_step": "后续应通过样本扩展、复测稳定性、用户反馈和专家复核持续验证。"
+      },
+      "en": {
+        "status": "provisional",
+        "body": "Current norms are provisional and should not be read as final global norms.",
+        "do_not_overread": "Transparent evidence status strengthens proper interpretation.",
+        "user_facing_status_label": "Evidence is still being built",
+        "what_this_means_for_user": "Use the result for self-understanding, communication reflection, and growth planning, not high-risk decisions.",
+        "next_validation_step": "Next validation should include larger samples, retest stability, user feedback, and expert review."
+      },
+      "meta": {
+        "id": "eq.evidence.norm_status",
+        "asset_type": "psychometric_evidence_status",
+        "purpose": "State evidence maturity",
+        "trigger_logic": {
+          "evidence_area": "norm_status"
+        },
+        "claim_sensitivity": "high"
+      }
+    }
+  }
+}

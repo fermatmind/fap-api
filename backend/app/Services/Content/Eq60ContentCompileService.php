@@ -731,6 +731,12 @@ final class Eq60ContentCompileService
             'cross_assessment_context',
             'seo_geo_authority',
             'sjt_bridge',
+            'result_snapshot',
+            'commercial_conversion_assets',
+            'quality_confidence',
+            'psychometric_evidence_status',
+            'agent_dialogue_playbooks',
+            'backend_integration_contract',
         ] as $key) {
             $doc = $this->loader->readJson($this->loader->rawPath('report_assets/'.$key.'.json', $version));
             if (is_array($doc)) {
