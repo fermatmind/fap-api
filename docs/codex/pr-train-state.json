@@ -60706,5 +60706,78 @@
         "notes": "Initialized from explicit authorization."
       }
     ]
+  },
+  "BIG-FIVE-CMS-DRAFT-WRITER-CONTRACT-01": {
+    "repo": "fap-api",
+    "branch": "codex/big-five-cms-draft-writer-contract-01",
+    "base": "main",
+    "status": "ready_to_merge",
+    "train_scope": "big_five_public_profile_agent_expansion",
+    "title": "BIG-FIVE-CMS-DRAFT-WRITER-CONTRACT-01: Add Big Five CMS draft writer contract",
+    "depends_on": [
+      "BIG-FIVE-AGENT-APPROVAL-QUEUE-INTEGRATION-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly provided the Big Five public profile agent expansion train and authorized PR4 scoped to backend CMS draft writer contract."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "BIG-FIVE-AGENT-APPROVAL-QUEUE-INTEGRATION-01 is merged as PR #2392 with merge commit 52d9e9961acfe43651c0663d8e517d8ffc054407, and origin/main contains that merge commit."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "php -l backend/app/Console/Commands/PersonalityBigFivePublicProfileAgentDraft.php",
+          "php -l backend/app/Services/Cms/BigFivePublicProfileAgentDraftWriter.php",
+          "php -l backend/tests/Feature/Console/PersonalityBigFivePublicProfileAgentDraftCommandTest.php",
+          "cd backend && php artisan test --filter=PersonalityBigFivePublicProfileAgentDraftCommandTest --no-ansi",
+          "cd backend && php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_big_five_public_profile_agent_draft_writer_files' --no-ansi",
+          "cd backend && vendor/bin/pint --test app/Console/Commands/PersonalityBigFivePublicProfileAgentDraft.php app/Services/Cms/BigFivePublicProfileAgentDraftWriter.php tests/Feature/Console/PersonalityBigFivePublicProfileAgentDraftCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+          "cd backend && bash scripts/ci_verify_mbti.sh",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "git diff --check"
+        ],
+        "evidence": "All PR4 local checks passed: PHP syntax checks, focused PersonalityBigFivePublicProfileAgentDraftCommandTest, focused runtime-freeze classifier test, scoped Pint --test, full backend ci_verify_mbti.sh, docs JSON/YAML parse, and git diff --check."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are scoped to backend command/service/tests, Kernel registration, runtime-freeze classifier allowance, and docs/codex manifest/state metadata for BIG-FIVE-CMS-DRAFT-WRITER-CONTRACT-01. No frontend runtime, CMS publish, production DB write, queue, search, indexing, sitemap, llms, deploy, or public route changes."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #2395 GitHub checks are green and mergeStateStatus is CLEAN on head ff047e4ad56faa92d156224aa36d1f29e3d4d7a6."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": "ff047e4ad56faa92d156224aa36d1f29e3d4d7a6",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2395",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-24T13:00:00Z",
+        "status": "in_progress",
+        "note": "Started PR4 from latest fap-api origin/main after PR3 merge cleanup. Scope is backend-only Big Five public profile CMS draft writer contract for personality_public_content_assets; no live content mutation, CMS publish, queue, search, indexing, sitemap, llms, frontend runtime, staging deploy, or production deploy."
+      },
+      {
+        "at": "2026-06-24T13:10:23Z",
+        "status": "local_validated",
+        "note": "All local checks passed and scope validation passed. Validation covered syntax checks, focused command PHPUnit, focused runtime-freeze classifier PHPUnit, scoped Pint, full ci_verify_mbti.sh, docs JSON/YAML parse, git diff --check, and changed-file scope validation."
+      },
+      {
+        "at": "2026-06-24T13:12:32Z",
+        "status": "github_checks_pending",
+        "note": "Opened PR #2395 at https://github.com/fermatmind/fap-api/pull/2395 on head 69bc2522bc19690c2979f770bea97e661b2f5393. Waiting for required GitHub checks; no staging deploy wait, production deploy, CMS write, publish, search, indexing, sitemap, llms, or frontend runtime work."
+      },
+      {
+        "at": "2026-06-24T13:23:50Z",
+        "status": "ready_to_merge",
+        "note": "PR #2395 checks are green and mergeStateStatus is CLEAN on head ff047e4ad56faa92d156224aa36d1f29e3d4d7a6. Ready for squash merge; no staging wait, production deploy, CMS write, publish, search, indexing, sitemap, llms, or frontend runtime work included."
+      }
+    ]
   }
 }

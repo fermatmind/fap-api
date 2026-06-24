@@ -134,6 +134,52 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: BIG-FIVE-CMS-DRAFT-WRITER-CONTRACT-01
+    repo: fap-api
+    depends_on:
+      - BIG-FIVE-AGENT-APPROVAL-QUEUE-INTEGRATION-01
+    branch: codex/big-five-cms-draft-writer-contract-01
+    title: "BIG-FIVE-CMS-DRAFT-WRITER-CONTRACT-01: Add Big Five CMS draft writer contract"
+    train_scope: big_five_public_profile_agent_expansion
+    status: user_authorized
+    scope:
+      - Add a backend-only Big Five public profile agent draft writer command and service for personality_public_content_assets.
+      - Support dry-run planning for 34 Big Five public profile rows without database writes.
+      - Require QA PASS plus approved approval queue items before write mode can create or update draft-only rows.
+      - Keep all writes draft/review, non-public, noindex, and excluded from sitemap, llms, search, queues, frontend runtime, and publication.
+    allowed_paths:
+      - backend/app/Console/Commands/PersonalityBigFivePublicProfileAgentDraft.php
+      - backend/app/Console/Kernel.php
+      - backend/app/Services/Cms/BigFivePublicProfileAgentDraftWriter.php
+      - backend/tests/Feature/Console/PersonalityBigFivePublicProfileAgentDraftCommandTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Reuse MBTI64 personality_profile or variant writers.
+      - Publish content, mutate live content, enqueue jobs, submit search/indexing requests, or mutate sitemap/llms/canonical/JSON-LD.
+      - Add frontend runtime rendering, public SEO route enumeration, staging deploy, or production deploy.
+      - Allow failed QA, unapproved approval queue rows, private/result/order/payment/account/share routes, or live/indexable assets into write mode.
+    validation:
+      - php -l backend/app/Console/Commands/PersonalityBigFivePublicProfileAgentDraft.php
+      - php -l backend/app/Services/Cms/BigFivePublicProfileAgentDraftWriter.php
+      - php -l backend/tests/Feature/Console/PersonalityBigFivePublicProfileAgentDraftCommandTest.php
+      - cd backend && php artisan test --filter=PersonalityBigFivePublicProfileAgentDraftCommandTest --no-ansi
+      - cd backend && php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_big_five_public_profile_agent_draft_writer_files' --no-ansi
+      - cd backend && vendor/bin/pint --test app/Console/Commands/PersonalityBigFivePublicProfileAgentDraft.php app/Services/Cms/BigFivePublicProfileAgentDraftWriter.php tests/Feature/Console/PersonalityBigFivePublicProfileAgentDraftCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - cd backend && bash scripts/ci_verify_mbti.sh
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: PR-EQ-ASSET-03
     repo: fap-web
     depends_on: [PR-EQ-ASSET-02]
