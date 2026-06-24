@@ -1,0 +1,473 @@
+name: Career Content Production Import
+
+on:
+  workflow_dispatch:
+    inputs:
+      operator_approval_phrase:
+        description: "Exact human approval phrase for this production import"
+        required: true
+        type: string
+      page_assembly_staging_asset_file:
+        description: "Absolute path on staging server to approved page assembly JSONL"
+        required: true
+        default: "/tmp/career-content-approved-transition/career_page_assembly_1046_v1.matching_staging_rows.jsonl"
+        type: string
+      page_assembly_expected_sha256:
+        description: "Expected SHA-256 for approved page assembly JSONL"
+        required: true
+        default: "148f35732bdf4c08df64ac6aad02946417c5b63420c3a2f67a9cfb13c735650e"
+        type: string
+      page_assembly_staging_approval_manifest:
+        description: "Absolute path on staging server to page assembly approval manifest"
+        required: true
+        default: "/tmp/career-content-approved-transition/page_assembly_approval_manifest.matching_staging_rows.json"
+        type: string
+      page_assembly_approval_manifest_sha256:
+        description: "Expected SHA-256 for page assembly approval manifest"
+        required: true
+        default: "dae859b6d1972ede7ea78cf761c9e0593c7a384e41d14544ae8c9a055364c8bb"
+        type: string
+      page_assembly_staging_editorial_review_report:
+        description: "Absolute path on staging server to page assembly editorial review report"
+        required: true
+        default: "/tmp/career-content-approved-transition/page_assembly_editorial_review.matching_staging_rows.json"
+        type: string
+      page_assembly_editorial_review_sha256:
+        description: "Expected SHA-256 for page assembly editorial review report"
+        required: true
+        default: "bd934d00e427b02cf35e358aba7c422448352aea1f156901780048de55ec1ab5"
+        type: string
+      ai_impact_staging_asset_file:
+        description: "Absolute path on staging server to approved AI Impact JSONL"
+        required: true
+        default: "/tmp/career-ai-impact-v5-approved-transition/career_risk_future_ai_impact_1046_v5_final_repaired_assets.jsonl"
+        type: string
+      ai_impact_expected_sha256:
+        description: "Expected SHA-256 for approved AI Impact JSONL"
+        required: true
+        default: "f22e0266f9b8aa904b00466c9cf751efa72835aebcee41c959d454ffacf96a92"
+        type: string
+      ai_impact_staging_approval_manifest:
+        description: "Absolute path on staging server to AI Impact approval manifest"
+        required: true
+        default: "/tmp/career-ai-impact-v5-approved-transition/approval_manifest.json"
+        type: string
+      ai_impact_approval_manifest_sha256:
+        description: "Expected SHA-256 for AI Impact approval manifest"
+        required: true
+        default: "f07686a30aba34452b9c6faecd1367b003ad19dd17d6896020d3e9e091753646"
+        type: string
+      ai_impact_staging_editorial_review_report:
+        description: "Absolute path on staging server to AI Impact editorial review report"
+        required: true
+        default: "/tmp/career-ai-impact-v5-approved-transition/editorial_review.json"
+        type: string
+      ai_impact_editorial_review_sha256:
+        description: "Expected SHA-256 for AI Impact editorial review report"
+        required: true
+        default: "be3a5810b2cdd54a726150c7024c14ec806aacea8f870f919b80e67e4fba22cb"
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: career-content-production-import
+  cancel-in-progress: false
+
+jobs:
+  production-import:
+    name: Import approved career content to production
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    environment:
+      name: production
+
+    env:
+      SSH_RETRY_ATTEMPTS: "3"
+      SSH_RETRY_DELAY_SECONDS: "10"
+      STAGING_USER: "ubuntu"
+      STAGING_HOST: "49.234.55.28"
+      STAGING_PORT: "22"
+      PRODUCTION_USER: "ubuntu"
+      PRODUCTION_HOST: "139.224.130.204"
+      PRODUCTION_PORT: "22"
+      PRODUCTION_DEPLOY_PATH: "/var/www/fap-api"
+      OPERATOR_APPROVAL_PHRASE: ${{ github.event.inputs.operator_approval_phrase }}
+      PAGE_ASSEMBLY_STAGING_ASSET_FILE: ${{ github.event.inputs.page_assembly_staging_asset_file }}
+      PAGE_ASSEMBLY_EXPECTED_SHA256: ${{ github.event.inputs.page_assembly_expected_sha256 }}
+      PAGE_ASSEMBLY_STAGING_APPROVAL_MANIFEST: ${{ github.event.inputs.page_assembly_staging_approval_manifest }}
+      PAGE_ASSEMBLY_APPROVAL_MANIFEST_SHA256: ${{ github.event.inputs.page_assembly_approval_manifest_sha256 }}
+      PAGE_ASSEMBLY_STAGING_EDITORIAL_REVIEW_REPORT: ${{ github.event.inputs.page_assembly_staging_editorial_review_report }}
+      PAGE_ASSEMBLY_EDITORIAL_REVIEW_SHA256: ${{ github.event.inputs.page_assembly_editorial_review_sha256 }}
+      AI_IMPACT_STAGING_ASSET_FILE: ${{ github.event.inputs.ai_impact_staging_asset_file }}
+      AI_IMPACT_EXPECTED_SHA256: ${{ github.event.inputs.ai_impact_expected_sha256 }}
+      AI_IMPACT_STAGING_APPROVAL_MANIFEST: ${{ github.event.inputs.ai_impact_staging_approval_manifest }}
+      AI_IMPACT_APPROVAL_MANIFEST_SHA256: ${{ github.event.inputs.ai_impact_approval_manifest_sha256 }}
+      AI_IMPACT_STAGING_EDITORIAL_REVIEW_REPORT: ${{ github.event.inputs.ai_impact_staging_editorial_review_report }}
+      AI_IMPACT_EDITORIAL_REVIEW_SHA256: ${{ github.event.inputs.ai_impact_editorial_review_sha256 }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Validate dispatch inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          validate_sha() {
+            local name="$1"
+            local value="$2"
+            if ! [[ "$value" =~ ^[a-fA-F0-9]{64}$ ]]; then
+              echo "$name must be a 64-character SHA-256 hex value"
+              exit 2
+            fi
+          }
+
+          validate_remote_path() {
+            local name="$1"
+            local value="$2"
+            if [[ "$value" != /* ]]; then
+              echo "$name must be an absolute remote path"
+              exit 2
+            fi
+            if [[ "$value" == *$'\n'* || "$value" == *$'\r'* || "$value" == *"'"* || "$value" == *" "* ]]; then
+              echo "$name contains unsupported characters"
+              exit 2
+            fi
+          }
+
+          validate_sha PAGE_ASSEMBLY_EXPECTED_SHA256 "$PAGE_ASSEMBLY_EXPECTED_SHA256"
+          validate_sha PAGE_ASSEMBLY_APPROVAL_MANIFEST_SHA256 "$PAGE_ASSEMBLY_APPROVAL_MANIFEST_SHA256"
+          validate_sha PAGE_ASSEMBLY_EDITORIAL_REVIEW_SHA256 "$PAGE_ASSEMBLY_EDITORIAL_REVIEW_SHA256"
+          validate_sha AI_IMPACT_EXPECTED_SHA256 "$AI_IMPACT_EXPECTED_SHA256"
+          validate_sha AI_IMPACT_APPROVAL_MANIFEST_SHA256 "$AI_IMPACT_APPROVAL_MANIFEST_SHA256"
+          validate_sha AI_IMPACT_EDITORIAL_REVIEW_SHA256 "$AI_IMPACT_EDITORIAL_REVIEW_SHA256"
+          validate_remote_path PAGE_ASSEMBLY_STAGING_ASSET_FILE "$PAGE_ASSEMBLY_STAGING_ASSET_FILE"
+          validate_remote_path PAGE_ASSEMBLY_STAGING_APPROVAL_MANIFEST "$PAGE_ASSEMBLY_STAGING_APPROVAL_MANIFEST"
+          validate_remote_path PAGE_ASSEMBLY_STAGING_EDITORIAL_REVIEW_REPORT "$PAGE_ASSEMBLY_STAGING_EDITORIAL_REVIEW_REPORT"
+          validate_remote_path AI_IMPACT_STAGING_ASSET_FILE "$AI_IMPACT_STAGING_ASSET_FILE"
+          validate_remote_path AI_IMPACT_STAGING_APPROVAL_MANIFEST "$AI_IMPACT_STAGING_APPROVAL_MANIFEST"
+          validate_remote_path AI_IMPACT_STAGING_EDITORIAL_REVIEW_REPORT "$AI_IMPACT_STAGING_EDITORIAL_REVIEW_REPORT"
+
+          expected_phrase="批准 career content 1046 production import, using page assembly SHA ${PAGE_ASSEMBLY_EXPECTED_SHA256} and AI Impact SHA ${AI_IMPACT_EXPECTED_SHA256}"
+          if [ "$OPERATOR_APPROVAL_PHRASE" != "$expected_phrase" ]; then
+            echo "operator_approval_phrase does not match the exact SHA-bound approval phrase."
+            echo "Expected: $expected_phrase"
+            exit 2
+          fi
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install pinned SSH known_hosts
+        shell: bash
+        env:
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          test -n "$SSH_KNOWN_HOSTS"
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
+      - name: Copy approved artifacts from staging to production
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          ssh_retry() {
+            local attempt
+            local rc
+            local max_attempts="${SSH_RETRY_ATTEMPTS:-3}"
+            local retry_delay="${SSH_RETRY_DELAY_SECONDS:-10}"
+            local port="$1"
+            local host="$2"
+            shift 2
+
+            for attempt in $(seq 1 "$max_attempts"); do
+              set +e
+              ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+                -p "$port" "$host" "$@"
+              rc=$?
+              set -e
+
+              if [ "$rc" -eq 0 ]; then
+                return 0
+              fi
+
+              if [ "$rc" -ne 255 ]; then
+                return "$rc"
+              fi
+
+              if [ "$attempt" -ge "$max_attempts" ]; then
+                return "$rc"
+              fi
+
+              echo "SSH transport attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
+              sleep "$retry_delay"
+            done
+          }
+
+          scp_retry() {
+            local attempt
+            local rc
+            local max_attempts="${SSH_RETRY_ATTEMPTS:-3}"
+            local retry_delay="${SSH_RETRY_DELAY_SECONDS:-10}"
+            local port="$1"
+            shift
+
+            for attempt in $(seq 1 "$max_attempts"); do
+              set +e
+              scp -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+                -P "$port" "$@"
+              rc=$?
+              set -e
+
+              if [ "$rc" -eq 0 ]; then
+                return 0
+              fi
+
+              if [ "$rc" -ne 255 ]; then
+                return "$rc"
+              fi
+
+              if [ "$attempt" -ge "$max_attempts" ]; then
+                return "$rc"
+              fi
+
+              echo "SCP transport attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
+              sleep "$retry_delay"
+            done
+          }
+
+          mkdir -p artifacts/input artifacts/reports
+
+          staging_target="${STAGING_USER}@${STAGING_HOST}"
+          production_target="${PRODUCTION_USER}@${PRODUCTION_HOST}"
+          production_import_dir="/tmp/career-content-1046-production-import-${GITHUB_RUN_ID}"
+
+          ssh_retry "$PRODUCTION_PORT" "$production_target" "mkdir -p '$production_import_dir'"
+
+          scp_retry "$STAGING_PORT" "$staging_target:$PAGE_ASSEMBLY_STAGING_ASSET_FILE" artifacts/input/page_assembly_assets.jsonl
+          scp_retry "$STAGING_PORT" "$staging_target:$PAGE_ASSEMBLY_STAGING_APPROVAL_MANIFEST" artifacts/input/page_assembly_approval_manifest.json
+          scp_retry "$STAGING_PORT" "$staging_target:$PAGE_ASSEMBLY_STAGING_EDITORIAL_REVIEW_REPORT" artifacts/input/page_assembly_editorial_review.json
+          scp_retry "$STAGING_PORT" "$staging_target:$AI_IMPACT_STAGING_ASSET_FILE" artifacts/input/ai_impact_assets.jsonl
+          scp_retry "$STAGING_PORT" "$staging_target:$AI_IMPACT_STAGING_APPROVAL_MANIFEST" artifacts/input/ai_impact_approval_manifest.json
+          scp_retry "$STAGING_PORT" "$staging_target:$AI_IMPACT_STAGING_EDITORIAL_REVIEW_REPORT" artifacts/input/ai_impact_editorial_review.json
+
+          printf '%s  artifacts/input/page_assembly_assets.jsonl\n' "$PAGE_ASSEMBLY_EXPECTED_SHA256" | sha256sum -c -
+          printf '%s  artifacts/input/page_assembly_approval_manifest.json\n' "$PAGE_ASSEMBLY_APPROVAL_MANIFEST_SHA256" | sha256sum -c -
+          printf '%s  artifacts/input/page_assembly_editorial_review.json\n' "$PAGE_ASSEMBLY_EDITORIAL_REVIEW_SHA256" | sha256sum -c -
+          printf '%s  artifacts/input/ai_impact_assets.jsonl\n' "$AI_IMPACT_EXPECTED_SHA256" | sha256sum -c -
+          printf '%s  artifacts/input/ai_impact_approval_manifest.json\n' "$AI_IMPACT_APPROVAL_MANIFEST_SHA256" | sha256sum -c -
+          printf '%s  artifacts/input/ai_impact_editorial_review.json\n' "$AI_IMPACT_EDITORIAL_REVIEW_SHA256" | sha256sum -c -
+
+          scp_retry "$PRODUCTION_PORT" artifacts/input/page_assembly_assets.jsonl "$production_target:$production_import_dir/page_assembly_assets.jsonl"
+          scp_retry "$PRODUCTION_PORT" artifacts/input/page_assembly_approval_manifest.json "$production_target:$production_import_dir/page_assembly_approval_manifest.json"
+          scp_retry "$PRODUCTION_PORT" artifacts/input/page_assembly_editorial_review.json "$production_target:$production_import_dir/page_assembly_editorial_review.json"
+          scp_retry "$PRODUCTION_PORT" artifacts/input/ai_impact_assets.jsonl "$production_target:$production_import_dir/ai_impact_assets.jsonl"
+          scp_retry "$PRODUCTION_PORT" artifacts/input/ai_impact_approval_manifest.json "$production_target:$production_import_dir/ai_impact_approval_manifest.json"
+          scp_retry "$PRODUCTION_PORT" artifacts/input/ai_impact_editorial_review.json "$production_target:$production_import_dir/ai_impact_editorial_review.json"
+
+          {
+            echo "PRODUCTION_IMPORT_DIR=$production_import_dir"
+            echo "PAGE_ASSEMBLY_PROD_ASSET_FILE=$production_import_dir/page_assembly_assets.jsonl"
+            echo "PAGE_ASSEMBLY_PROD_APPROVAL_MANIFEST=$production_import_dir/page_assembly_approval_manifest.json"
+            echo "PAGE_ASSEMBLY_PROD_EDITORIAL_REVIEW=$production_import_dir/page_assembly_editorial_review.json"
+            echo "AI_IMPACT_PROD_ASSET_FILE=$production_import_dir/ai_impact_assets.jsonl"
+            echo "AI_IMPACT_PROD_APPROVAL_MANIFEST=$production_import_dir/ai_impact_approval_manifest.json"
+            echo "AI_IMPACT_PROD_EDITORIAL_REVIEW=$production_import_dir/ai_impact_editorial_review.json"
+          } > artifacts/production_import_paths.env
+
+      - name: Run production import
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          source artifacts/production_import_paths.env
+
+          ssh_retry() {
+            local attempt
+            local rc
+            local max_attempts="${SSH_RETRY_ATTEMPTS:-3}"
+            local retry_delay="${SSH_RETRY_DELAY_SECONDS:-10}"
+            local port="$1"
+            local host="$2"
+            shift 2
+
+            for attempt in $(seq 1 "$max_attempts"); do
+              set +e
+              ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+                -p "$port" "$host" "$@"
+              rc=$?
+              set -e
+
+              if [ "$rc" -eq 0 ]; then
+                return 0
+              fi
+
+              if [ "$rc" -ne 255 ]; then
+                return "$rc"
+              fi
+
+              if [ "$attempt" -ge "$max_attempts" ]; then
+                return "$rc"
+              fi
+
+              echo "SSH transport attempt ${attempt}/${max_attempts} failed with exit ${rc}; retrying in ${retry_delay}s" >&2
+              sleep "$retry_delay"
+            done
+          }
+
+          production_target="${PRODUCTION_USER}@${PRODUCTION_HOST}"
+
+          printf -v Q_DEPLOY_PATH '%q' "$PRODUCTION_DEPLOY_PATH"
+          printf -v Q_PRODUCTION_IMPORT_DIR '%q' "$PRODUCTION_IMPORT_DIR"
+          printf -v Q_PAGE_ASSEMBLY_PROD_ASSET_FILE '%q' "$PAGE_ASSEMBLY_PROD_ASSET_FILE"
+          printf -v Q_PAGE_ASSEMBLY_EXPECTED_SHA256 '%q' "$PAGE_ASSEMBLY_EXPECTED_SHA256"
+          printf -v Q_PAGE_ASSEMBLY_PROD_APPROVAL_MANIFEST '%q' "$PAGE_ASSEMBLY_PROD_APPROVAL_MANIFEST"
+          printf -v Q_PAGE_ASSEMBLY_APPROVAL_MANIFEST_SHA256 '%q' "$PAGE_ASSEMBLY_APPROVAL_MANIFEST_SHA256"
+          printf -v Q_PAGE_ASSEMBLY_PROD_EDITORIAL_REVIEW '%q' "$PAGE_ASSEMBLY_PROD_EDITORIAL_REVIEW"
+          printf -v Q_PAGE_ASSEMBLY_EDITORIAL_REVIEW_SHA256 '%q' "$PAGE_ASSEMBLY_EDITORIAL_REVIEW_SHA256"
+          printf -v Q_AI_IMPACT_PROD_ASSET_FILE '%q' "$AI_IMPACT_PROD_ASSET_FILE"
+          printf -v Q_AI_IMPACT_EXPECTED_SHA256 '%q' "$AI_IMPACT_EXPECTED_SHA256"
+          printf -v Q_AI_IMPACT_PROD_APPROVAL_MANIFEST '%q' "$AI_IMPACT_PROD_APPROVAL_MANIFEST"
+          printf -v Q_AI_IMPACT_APPROVAL_MANIFEST_SHA256 '%q' "$AI_IMPACT_APPROVAL_MANIFEST_SHA256"
+          printf -v Q_AI_IMPACT_PROD_EDITORIAL_REVIEW '%q' "$AI_IMPACT_PROD_EDITORIAL_REVIEW"
+          printf -v Q_AI_IMPACT_EDITORIAL_REVIEW_SHA256 '%q' "$AI_IMPACT_EDITORIAL_REVIEW_SHA256"
+
+          set +e
+          ssh_retry "$PRODUCTION_PORT" "$production_target" \
+            "PRODUCTION_DEPLOY_PATH=$Q_DEPLOY_PATH PRODUCTION_IMPORT_DIR=$Q_PRODUCTION_IMPORT_DIR PAGE_ASSEMBLY_PROD_ASSET_FILE=$Q_PAGE_ASSEMBLY_PROD_ASSET_FILE PAGE_ASSEMBLY_EXPECTED_SHA256=$Q_PAGE_ASSEMBLY_EXPECTED_SHA256 PAGE_ASSEMBLY_PROD_APPROVAL_MANIFEST=$Q_PAGE_ASSEMBLY_PROD_APPROVAL_MANIFEST PAGE_ASSEMBLY_APPROVAL_MANIFEST_SHA256=$Q_PAGE_ASSEMBLY_APPROVAL_MANIFEST_SHA256 PAGE_ASSEMBLY_PROD_EDITORIAL_REVIEW=$Q_PAGE_ASSEMBLY_PROD_EDITORIAL_REVIEW PAGE_ASSEMBLY_EDITORIAL_REVIEW_SHA256=$Q_PAGE_ASSEMBLY_EDITORIAL_REVIEW_SHA256 AI_IMPACT_PROD_ASSET_FILE=$Q_AI_IMPACT_PROD_ASSET_FILE AI_IMPACT_EXPECTED_SHA256=$Q_AI_IMPACT_EXPECTED_SHA256 AI_IMPACT_PROD_APPROVAL_MANIFEST=$Q_AI_IMPACT_PROD_APPROVAL_MANIFEST AI_IMPACT_APPROVAL_MANIFEST_SHA256=$Q_AI_IMPACT_APPROVAL_MANIFEST_SHA256 AI_IMPACT_PROD_EDITORIAL_REVIEW=$Q_AI_IMPACT_PROD_EDITORIAL_REVIEW AI_IMPACT_EDITORIAL_REVIEW_SHA256=$Q_AI_IMPACT_EDITORIAL_REVIEW_SHA256 bash -s" <<'REMOTE'
+          set -euo pipefail
+
+          cd "$PRODUCTION_DEPLOY_PATH/current/backend"
+          test -f artisan
+          test -r "$PAGE_ASSEMBLY_PROD_ASSET_FILE"
+          test -r "$PAGE_ASSEMBLY_PROD_APPROVAL_MANIFEST"
+          test -r "$PAGE_ASSEMBLY_PROD_EDITORIAL_REVIEW"
+          test -r "$AI_IMPACT_PROD_ASSET_FILE"
+          test -r "$AI_IMPACT_PROD_APPROVAL_MANIFEST"
+          test -r "$AI_IMPACT_PROD_EDITORIAL_REVIEW"
+
+          printf '%s  %s\n' "$PAGE_ASSEMBLY_EXPECTED_SHA256" "$PAGE_ASSEMBLY_PROD_ASSET_FILE" | sha256sum -c -
+          printf '%s  %s\n' "$PAGE_ASSEMBLY_APPROVAL_MANIFEST_SHA256" "$PAGE_ASSEMBLY_PROD_APPROVAL_MANIFEST" | sha256sum -c -
+          printf '%s  %s\n' "$PAGE_ASSEMBLY_EDITORIAL_REVIEW_SHA256" "$PAGE_ASSEMBLY_PROD_EDITORIAL_REVIEW" | sha256sum -c -
+          printf '%s  %s\n' "$AI_IMPACT_EXPECTED_SHA256" "$AI_IMPACT_PROD_ASSET_FILE" | sha256sum -c -
+          printf '%s  %s\n' "$AI_IMPACT_APPROVAL_MANIFEST_SHA256" "$AI_IMPACT_PROD_APPROVAL_MANIFEST" | sha256sum -c -
+          printf '%s  %s\n' "$AI_IMPACT_EDITORIAL_REVIEW_SHA256" "$AI_IMPACT_PROD_EDITORIAL_REVIEW" | sha256sum -c -
+
+          page_assembly_report="$PRODUCTION_IMPORT_DIR/page_assembly_production_import_report.json"
+          ai_impact_report="$PRODUCTION_IMPORT_DIR/ai_impact_production_import_report.json"
+
+          validate_import_report() {
+            local report_file="$1"
+            local channel="$2"
+            local expected_sha="$3"
+
+            php -r '
+              $report = json_decode(file_get_contents($argv[1]), true, 512, JSON_THROW_ON_ERROR);
+              $channel = $argv[2];
+              $expectedSha = $argv[3];
+              $errors = [];
+
+              $checks = [
+                "decision" => "pass",
+                "mode" => "production_import",
+                "status" => "production_imported",
+                "source_file_sha256" => $expectedSha,
+              ];
+
+              foreach ($checks as $key => $expected) {
+                if (($report[$key] ?? null) !== $expected) {
+                  $actual = json_encode($report[$key] ?? null);
+                  $errors[] = "{$channel}: {$key} expected {$expected}, got {$actual}";
+                }
+              }
+
+              if (($report["production_import_allowed"] ?? null) !== true) {
+                $errors[] = "{$channel}: production_import_allowed is not true";
+              }
+              if (($report["production_import_performed"] ?? null) !== true) {
+                $errors[] = "{$channel}: production_import_performed is not true";
+              }
+              if ((int) ($report["production_rows_touched"] ?? -1) !== 2092) {
+                $errors[] = "{$channel}: production_rows_touched is not 2092";
+              }
+              if ((int) ($report["expected_written_count"] ?? -1) !== 2092) {
+                $errors[] = "{$channel}: expected_written_count is not 2092";
+              }
+              if (($report["errors"] ?? []) !== []) {
+                $errors[] = "{$channel}: report contains errors";
+              }
+
+              if ($errors !== []) {
+                fwrite(STDERR, implode(PHP_EOL, $errors).PHP_EOL);
+                exit(1);
+              }
+            ' "$report_file" "$channel" "$expected_sha"
+          }
+
+          php -d memory_limit=1024M artisan career:page-assembly-assets-import-preview \
+            --file="$PAGE_ASSEMBLY_PROD_ASSET_FILE" \
+            --expected-sha256="$PAGE_ASSEMBLY_EXPECTED_SHA256" \
+            --all-slugs-from-file \
+            --force \
+            --status=production_imported \
+            --confirm-production-import \
+            --approval-manifest="$PAGE_ASSEMBLY_PROD_APPROVAL_MANIFEST" \
+            --approval-manifest-sha256="$PAGE_ASSEMBLY_APPROVAL_MANIFEST_SHA256" \
+            --editorial-review-report="$PAGE_ASSEMBLY_PROD_EDITORIAL_REVIEW" \
+            --editorial-review-sha256="$PAGE_ASSEMBLY_EDITORIAL_REVIEW_SHA256" \
+            --output="$page_assembly_report" \
+            --json
+          validate_import_report "$page_assembly_report" "page_assembly" "$PAGE_ASSEMBLY_EXPECTED_SHA256"
+
+          php -d memory_limit=1024M artisan career:ai-impact-assets-import-preview \
+            --file="$AI_IMPACT_PROD_ASSET_FILE" \
+            --expected-sha256="$AI_IMPACT_EXPECTED_SHA256" \
+            --all-slugs-from-file \
+            --force \
+            --status=production_imported \
+            --confirm-production-import \
+            --approval-manifest="$AI_IMPACT_PROD_APPROVAL_MANIFEST" \
+            --approval-manifest-sha256="$AI_IMPACT_APPROVAL_MANIFEST_SHA256" \
+            --editorial-review-report="$AI_IMPACT_PROD_EDITORIAL_REVIEW" \
+            --editorial-review-sha256="$AI_IMPACT_EDITORIAL_REVIEW_SHA256" \
+            --output="$ai_impact_report" \
+            --json
+          validate_import_report "$ai_impact_report" "ai_impact" "$AI_IMPACT_EXPECTED_SHA256"
+
+          REMOTE
+          rc=$?
+          set -e
+
+          if [ "$rc" -ne 0 ]; then
+            echo "Production import failed with exit code $rc"
+            exit "$rc"
+          fi
+
+          ssh_retry "$PRODUCTION_PORT" "$production_target" "cat '$PRODUCTION_IMPORT_DIR/page_assembly_production_import_report.json'" > artifacts/reports/page_assembly_production_import_report.json
+          ssh_retry "$PRODUCTION_PORT" "$production_target" "cat '$PRODUCTION_IMPORT_DIR/ai_impact_production_import_report.json'" > artifacts/reports/ai_impact_production_import_report.json
+
+          {
+            echo "# Career Content 1046 Production Import"
+            echo
+            echo "- page_assembly_sha256: \`$PAGE_ASSEMBLY_EXPECTED_SHA256\`"
+            echo "- ai_impact_sha256: \`$AI_IMPACT_EXPECTED_SHA256\`"
+            echo "- production_import_performed: \`true\`"
+            echo "- page_assembly_rows_touched: \`2092\`"
+            echo "- ai_impact_rows_touched: \`2092\`"
+            echo "- production_import_dir: \`$PRODUCTION_IMPORT_DIR\`"
+          } > artifacts/summary.md
+
+      - name: Upload production import reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: career-content-1046-production-import
+          path: artifacts/
