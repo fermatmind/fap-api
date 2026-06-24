@@ -91,6 +91,7 @@ final class Eq60V5ReportContractTest extends TestCase
         $this->assertSame($formulation, (string) data_get($fixture, 'report.interpretation.core_formulation_id'));
         $this->assertSame($formulation, (string) data_get($fixture, 'report.interpretation.route_id'));
         $this->assertSame($formulation, (string) data_get($fixture, 'report.assets.core_formulation.id'));
+        $this->assertSame('eq.snapshot.'.$formulation, (string) data_get($fixture, 'report.assets.result_snapshot.id'));
         $this->assertSame($action, (string) data_get($fixture, 'report.interpretation.action_prescription_id'));
         $this->assertSame($action, (string) data_get($fixture, 'report.assets.action_prescription.id'));
         $this->assertSame($formulation, (string) data_get($fixture, 'report.asset_refs.personalization_route_id'));
@@ -113,6 +114,16 @@ final class Eq60V5ReportContractTest extends TestCase
         $this->assertNotEmpty((array) data_get($fixture, 'report.assets.mechanisms'));
         $this->assertNotEmpty((array) data_get($fixture, 'report.assets.reality_scenes'));
         $this->assertNotEmpty((array) data_get($fixture, 'report.assets.career_environment'));
+        $this->assertSame('eq.snapshot.high_empathy_low_recovery', (string) data_get($fixture, 'report.asset_refs.result_snapshot_id'));
+        $this->assertNotSame('', (string) data_get($fixture, 'report.assets.result_snapshot.core_judgment'));
+        $this->assertNotEmpty((array) data_get($fixture, 'report.assets.result_snapshot.conversion_actions'));
+        $this->assertCount(7, (array) data_get($fixture, 'report.assets.commercial_conversion_actions'));
+        $this->assertNotSame('', (string) data_get($fixture, 'report.assets.quality_confidence.why_this_level'));
+        $this->assertNotEmpty((array) data_get($fixture, 'report.assets.psychometric_evidence_status'));
+        $this->assertNotEmpty((array) data_get($fixture, 'report.assets.agent_dialogue_playbooks'));
+        $this->assertNotEmpty((array) data_get($fixture, 'report.assets.backend_integration_contract'));
+        $this->assertNotSame('', (string) data_get($fixture, 'report.assets.career_environment.0.interview_question'));
+        $this->assertNotEmpty((array) data_get($fixture, 'report.assets.career_environment.0.role_observation_checklist'));
     }
 
     public function test_low_confidence_contract_routes_to_cautious_formulation(): void
@@ -129,6 +140,8 @@ final class Eq60V5ReportContractTest extends TestCase
         $this->assertSame([], (array) data_get($fixture, 'report.interpretation.primary_mechanism_ids'));
         $this->assertNotSame('high_empathy_low_recovery', (string) data_get($fixture, 'report.assets.core_formulation.id'));
         $this->assertNotSame('balanced_integrated', (string) data_get($fixture, 'report.assets.core_formulation.id'));
+        $this->assertSame('eq.snapshot.low_confidence_result', (string) data_get($fixture, 'report.assets.result_snapshot.id'));
+        $this->assertSame('eq.quality.level.C', (string) data_get($fixture, 'report.assets.quality_confidence.id'));
     }
 
     public function test_aware_but_unregulated_route_matrix_selects_deterministic_asset_ids(): void
@@ -311,7 +324,16 @@ final class Eq60V5ReportContractTest extends TestCase
         $this->assertNotEmpty((array) data_get($fixture, 'report.assets'));
         $this->assertFalse((bool) data_get($fixture, 'report.next_module.available', true));
         $this->assertSame('planned', (string) data_get($fixture, 'report.next_module.status'));
-        $this->assertNotSame('', (string) data_get($fixture, 'report.methodology.report_version'));
+        $this->assertSame('eq_report_v5_assets_commercial_ready_v1_6', (string) data_get($fixture, 'report.methodology.report_version'));
+        $this->assertNotSame('', (string) data_get($fixture, 'report.asset_refs.result_snapshot_id'));
+        $this->assertCount(7, (array) data_get($fixture, 'report.asset_refs.commercial_conversion_ids'));
+        $this->assertNotSame('', (string) data_get($fixture, 'report.asset_refs.quality_confidence_id'));
+        $this->assertNotEmpty((array) data_get($fixture, 'report.asset_refs.psychometric_evidence_ids'));
+        $this->assertNotEmpty((array) data_get($fixture, 'report.assets.result_snapshot'));
+        $this->assertNotEmpty((array) data_get($fixture, 'report.assets.commercial_conversion_actions'));
+        $this->assertNotEmpty((array) data_get($fixture, 'report.assets.quality_confidence'));
+        $this->assertNotEmpty((array) data_get($fixture, 'report.assets.psychometric_evidence_status'));
+        $this->assertNotEmpty((array) data_get($fixture, 'report.assets.score_system.band_details'));
     }
 
     /**
