@@ -82,7 +82,7 @@ final class CareerImportAiImpactAssetsPreview extends Command
                     trim((string) $this->option('editorial-review-sha256')) ?: null,
                     (bool) $this->option('confirm-approved-transition'),
                 );
-            } elseif ($force && $status === 'production_imported') {
+            } elseif ($status === 'production_imported' && ($force || $dryRun)) {
                 $report = $this->importService->importApprovedAssetsToProduction(
                     $file,
                     $this->requestedSlugs(),
@@ -93,6 +93,7 @@ final class CareerImportAiImpactAssetsPreview extends Command
                     trim((string) $this->option('editorial-review-report')),
                     trim((string) $this->option('editorial-review-sha256')) ?: null,
                     (bool) $this->option('confirm-production-import'),
+                    $force,
                 );
             } else {
                 $report = $force
