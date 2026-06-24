@@ -368,8 +368,58 @@ jobs:
           printf '%s  %s\n' "$AI_IMPACT_APPROVAL_MANIFEST_SHA256" "$AI_IMPACT_PROD_APPROVAL_MANIFEST" | sha256sum -c -
           printf '%s  %s\n' "$AI_IMPACT_EDITORIAL_REVIEW_SHA256" "$AI_IMPACT_PROD_EDITORIAL_REVIEW" | sha256sum -c -
 
+          page_assembly_approved_report="$PRODUCTION_IMPORT_DIR/page_assembly_approved_transition_report.json"
           page_assembly_report="$PRODUCTION_IMPORT_DIR/page_assembly_production_import_report.json"
+          ai_impact_approved_report="$PRODUCTION_IMPORT_DIR/ai_impact_approved_transition_report.json"
           ai_impact_report="$PRODUCTION_IMPORT_DIR/ai_impact_production_import_report.json"
+
+          validate_approved_report() {
+            local report_file="$1"
+            local channel="$2"
+            local expected_sha="$3"
+
+            php -r '
+              $report = json_decode(file_get_contents($argv[1]), true, 512, JSON_THROW_ON_ERROR);
+              $channel = $argv[2];
+              $expectedSha = $argv[3];
+              $errors = [];
+
+              $checks = [
+                "decision" => "pass",
+                "mode" => "approved_transition",
+                "status" => "approved",
+                "source_file_sha256" => $expectedSha,
+              ];
+
+              foreach ($checks as $key => $expected) {
+                if (($report[$key] ?? null) !== $expected) {
+                  $actual = json_encode($report[$key] ?? null);
+                  $errors[] = "{$channel}: {$key} expected {$expected}, got {$actual}";
+                }
+              }
+
+              if (($report["approved_transition_performed"] ?? null) !== true) {
+                $errors[] = "{$channel}: approved_transition_performed is not true";
+              }
+              if ((int) ($report["approved_count"] ?? -1) !== 2092) {
+                $errors[] = "{$channel}: approved_count is not 2092";
+              }
+              if ((int) ($report["expected_approved_count"] ?? -1) !== 2092) {
+                $errors[] = "{$channel}: expected_approved_count is not 2092";
+              }
+              if (($report["production_import_performed"] ?? null) !== false) {
+                $errors[] = "{$channel}: approved transition unexpectedly performed production import";
+              }
+              if (($report["errors"] ?? []) !== []) {
+                $errors[] = "{$channel}: approved transition report contains errors";
+              }
+
+              if ($errors !== []) {
+                fwrite(STDERR, implode(PHP_EOL, $errors).PHP_EOL);
+                exit(1);
+              }
+            ' "$report_file" "$channel" "$expected_sha"
+          }
 
           validate_import_report() {
             local report_file="$1"
@@ -424,6 +474,21 @@ jobs:
             --expected-sha256="$PAGE_ASSEMBLY_EXPECTED_SHA256" \
             --all-slugs-from-file \
             --force \
+            --status=approved \
+            --confirm-approved-transition \
+            --approval-manifest="$PAGE_ASSEMBLY_PROD_APPROVAL_MANIFEST" \
+            --approval-manifest-sha256="$PAGE_ASSEMBLY_APPROVAL_MANIFEST_SHA256" \
+            --editorial-review-report="$PAGE_ASSEMBLY_PROD_EDITORIAL_REVIEW" \
+            --editorial-review-sha256="$PAGE_ASSEMBLY_EDITORIAL_REVIEW_SHA256" \
+            --output="$page_assembly_approved_report" \
+            --json
+          validate_approved_report "$page_assembly_approved_report" "page_assembly" "$PAGE_ASSEMBLY_EXPECTED_SHA256"
+
+          php -d memory_limit=1024M artisan career:page-assembly-assets-import-preview \
+            --file="$PAGE_ASSEMBLY_PROD_ASSET_FILE" \
+            --expected-sha256="$PAGE_ASSEMBLY_EXPECTED_SHA256" \
+            --all-slugs-from-file \
+            --force \
             --status=production_imported \
             --confirm-production-import \
             --approval-manifest="$PAGE_ASSEMBLY_PROD_APPROVAL_MANIFEST" \
@@ -433,6 +498,21 @@ jobs:
             --output="$page_assembly_report" \
             --json
           validate_import_report "$page_assembly_report" "page_assembly" "$PAGE_ASSEMBLY_EXPECTED_SHA256"
+
+          php -d memory_limit=1024M artisan career:ai-impact-assets-import-preview \
+            --file="$AI_IMPACT_PROD_ASSET_FILE" \
+            --expected-sha256="$AI_IMPACT_EXPECTED_SHA256" \
+            --all-slugs-from-file \
+            --force \
+            --status=approved \
+            --confirm-approved-transition \
+            --approval-manifest="$AI_IMPACT_PROD_APPROVAL_MANIFEST" \
+            --approval-manifest-sha256="$AI_IMPACT_APPROVAL_MANIFEST_SHA256" \
+            --editorial-review-report="$AI_IMPACT_PROD_EDITORIAL_REVIEW" \
+            --editorial-review-sha256="$AI_IMPACT_EDITORIAL_REVIEW_SHA256" \
+            --output="$ai_impact_approved_report" \
+            --json
+          validate_approved_report "$ai_impact_approved_report" "ai_impact" "$AI_IMPACT_EXPECTED_SHA256"
 
           php -d memory_limit=1024M artisan career:ai-impact-assets-import-preview \
             --file="$AI_IMPACT_PROD_ASSET_FILE" \
@@ -458,7 +538,9 @@ jobs:
             exit "$rc"
           fi
 
+          ssh_retry "$PRODUCTION_PORT" "$production_target" "cat '$PRODUCTION_IMPORT_DIR/page_assembly_approved_transition_report.json'" > artifacts/reports/page_assembly_approved_transition_report.json
           ssh_retry "$PRODUCTION_PORT" "$production_target" "cat '$PRODUCTION_IMPORT_DIR/page_assembly_production_import_report.json'" > artifacts/reports/page_assembly_production_import_report.json
+          ssh_retry "$PRODUCTION_PORT" "$production_target" "cat '$PRODUCTION_IMPORT_DIR/ai_impact_approved_transition_report.json'" > artifacts/reports/ai_impact_approved_transition_report.json
           ssh_retry "$PRODUCTION_PORT" "$production_target" "cat '$PRODUCTION_IMPORT_DIR/ai_impact_production_import_report.json'" > artifacts/reports/ai_impact_production_import_report.json
 
           {
@@ -466,6 +548,7 @@ jobs:
             echo
             echo "- page_assembly_sha256: \`$PAGE_ASSEMBLY_EXPECTED_SHA256\`"
             echo "- ai_impact_sha256: \`$AI_IMPACT_EXPECTED_SHA256\`"
+            echo "- production_approved_transition_performed: \`true\`"
             echo "- production_import_performed: \`true\`"
             echo "- page_assembly_rows_touched: \`2092\`"
             echo "- ai_impact_rows_touched: \`2092\`"
