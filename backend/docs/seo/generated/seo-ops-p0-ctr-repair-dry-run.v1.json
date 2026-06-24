@@ -1,0 +1,64 @@
+{
+  "version": "seo-ops-p0-ctr-repair-dry-run.v1",
+  "command": "php artisan seo-ops:p0-ctr-repair-dry-run",
+  "purpose": "Read-only backend/CMS authority dry-run for the P0 CTR repair artifact.",
+  "input_schema": "fermatmind-seo-ops-ctr-repair-p0-dry-run-preview.v1",
+  "required_options": [
+    "--artifact",
+    "--confirm-artifact-sha256",
+    "--artifact-dir",
+    "--json"
+  ],
+  "resolves": {
+    "landing_surfaces": {
+      "authority": "backend.landing_surfaces",
+      "lookup": "surface_key + normalized locale",
+      "expected_count": 2
+    },
+    "article_cms_updates": {
+      "authority": "backend.articles + article_seo_meta + article_translation_revisions",
+      "lookup": "slug + normalized locale",
+      "expected_count": 3
+    }
+  },
+  "protected_diff": {
+    "slug": "no_change",
+    "canonical": "no_change",
+    "locale": "no_change",
+    "article_id": "resolved_no_change",
+    "publication": "no_change",
+    "schema": "hold_no_change",
+    "hreflang": "hold_no_change",
+    "sitemap": "no_change",
+    "llms": "no_change"
+  },
+  "evidence_outputs": [
+    "evidence.path",
+    "evidence.sha256",
+    "planned_write_count",
+    "authority_sources",
+    "landing_surface_plans",
+    "article_plans",
+    "negative_guarantees"
+  ],
+  "negative_guarantees": {
+    "database_write": false,
+    "cms_write": false,
+    "cms_draft_create": false,
+    "cms_publish": false,
+    "url_truth_write": false,
+    "schema_enable": false,
+    "hreflang_enable": false,
+    "sitemap_write": false,
+    "llms_write": false,
+    "search_channel_enqueue": false,
+    "indexnow_submit": false,
+    "baidu_submit": false,
+    "gsc_request_indexing": false,
+    "scheduler_start": false,
+    "queue_worker_start": false,
+    "external_api_call": false,
+    "revalidation": false,
+    "deploy": false
+  }
+}
