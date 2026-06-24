@@ -63,6 +63,47 @@ final class PersonalityBigFivePublicProfileAgentDraftCommandTest extends TestCas
         $this->assertSame(0, PersonalityPublicContentAsset::query()->count());
     }
 
+    public function test_emotional_stability_maps_to_big_five_polarity_not_domain(): void
+    {
+        $package = [
+            'artifact' => 'BIG-FIVE-PUBLIC-PROFILE-AGENT-PILOT-01',
+            'recommendations' => [
+                $this->recommendation('https://fermatmind.com/en/personality/big-five/emotional-stability', 'en', 'polarity'),
+                $this->recommendation('https://fermatmind.com/zh/personality/big-five/emotional-stability', 'zh-CN', 'polarity'),
+                $this->recommendation('https://fermatmind.com/en/personality/big-five/neuroticism', 'en', 'domain'),
+                $this->recommendation('https://fermatmind.com/en/personality/big-five/high-neuroticism', 'en', 'polarity'),
+            ],
+        ];
+        $qa = [
+            'artifact' => 'BIG-FIVE-PUBLIC-PROFILE-AGENT-QA-01',
+            'decision' => 'PASS_READY_FOR_APPROVAL_QUEUE',
+            'evaluations' => array_map(
+                fn (array $recommendation): array => $this->qaRow((string) $recommendation['target_url']),
+                $package['recommendations']
+            ),
+        ];
+        [$packagePath, $qaPath] = $this->writeArtifacts($package, $qa);
+
+        $exitCode = Artisan::call('personality:big-five-public-profile-agent-draft', [
+            '--package' => $packagePath,
+            '--qa' => $qaPath,
+            '--dry-run' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertSame(1, $payload['domain_row_count']);
+        $this->assertSame(3, $payload['polarity_row_count']);
+
+        $rowsByPath = collect($payload['rows'])->keyBy('path');
+        $this->assertSame(PersonalityPublicContentAsset::ENTITY_POLARITY, $rowsByPath['/en/personality/big-five/emotional-stability']['entity_type']);
+        $this->assertSame(PersonalityPublicContentAsset::ENTITY_POLARITY, $rowsByPath['/zh/personality/big-five/emotional-stability']['entity_type']);
+        $this->assertSame(PersonalityPublicContentAsset::ENTITY_DOMAIN, $rowsByPath['/en/personality/big-five/neuroticism']['entity_type']);
+        $this->assertSame(PersonalityPublicContentAsset::ENTITY_POLARITY, $rowsByPath['/en/personality/big-five/high-neuroticism']['entity_type']);
+    }
+
     public function test_write_creates_non_public_noindex_draft_assets_after_approval_only(): void
     {
         $package = $this->validPackage();
