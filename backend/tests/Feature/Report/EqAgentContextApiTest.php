@@ -12,6 +12,7 @@ use Database\Seeders\Pr19CommerceSeeder;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
@@ -135,6 +136,133 @@ final class EqAgentContextApiTest extends TestCase
             ->assertJsonPath('error_code', 'SCALE_NOT_SUPPORTED');
     }
 
+    public function test_eq_agent_forbidden_claim_fixture_is_exposed_with_boundaries_and_escalation_metadata(): void
+    {
+        config()->set('fap.features.report_snapshot_strict_v2', true);
+        $this->prepareEqContent();
+
+        $anonId = 'anon_eq_agent_forbidden_claims';
+        $token = $this->issueFmToken($anonId);
+        $attemptId = $this->createEqAttemptWithResult($anonId, 'en');
+
+        $response = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson('/api/v0.3/attempts/'.$attemptId.'/eq/agent-context?locale=en&intent=understand_my_result');
+
+        $response->assertOk()
+            ->assertJsonPath('ready', true)
+            ->assertJsonPath('guardrails.read_only', true)
+            ->assertJsonPath('guardrails.can_mutate_report', false)
+            ->assertJsonPath('guardrails.can_mutate_scores', false)
+            ->assertJsonPath('guardrails.can_override_formulation', false)
+            ->assertJsonPath('guardrails.can_enable_sjt', false);
+
+        foreach ($this->forbiddenClaimCases() as $case) {
+            $claimId = (string) ($case['claim_id'] ?? '');
+            $intent = (string) ($case['intent'] ?? '');
+
+            $this->assertNotSame('', $claimId, 'Fixture claim_id must be present.');
+            $this->assertNotSame('', $intent, 'Fixture intent must be present.');
+            $this->assertNotEmpty(
+                (array) $response->json('agent_knowledge.forbidden_claims.claims.'.$claimId.'.blocked_patterns'),
+                'Expected blocked_patterns for '.$claimId
+            );
+            $this->assertNotSame(
+                '',
+                (string) $response->json('agent_knowledge.forbidden_claims.claims.'.$claimId.'.replacement_boundary.en'),
+                'Expected English replacement boundary for '.$claimId
+            );
+            $this->assertNotSame(
+                '',
+                (string) $response->json('agent_knowledge.forbidden_claims.claims.'.$claimId.'.replacement_boundary.zh-CN'),
+                'Expected Chinese replacement boundary for '.$claimId
+            );
+            $this->assertNotEmpty(
+                (array) $response->json('agent_knowledge.user_intent_map.intents.'.$intent.'.forbidden_claim_ids'),
+                'Expected forbidden claim ids for intent '.$intent
+            );
+        }
+
+        $this->assertNotEmpty((array) $response->json('agent_knowledge.escalation_flags.clinical_distress'));
+        $this->assertNotEmpty((array) $response->json('agent_knowledge.escalation_flags.workplace_hiring_decision'));
+        $this->assertNotEmpty((array) $response->json('agent_knowledge.locale_policy.supported_locales'));
+    }
+
+    public function test_eq_agent_context_keeps_sjt_planned_unavailable_and_blocks_sjt_overclaim_intent(): void
+    {
+        config()->set('fap.features.report_snapshot_strict_v2', true);
+        $this->prepareEqContent();
+
+        $anonId = 'anon_eq_agent_sjt_guard';
+        $token = $this->issueFmToken($anonId);
+        $attemptId = $this->createEqAttemptWithResult($anonId, 'en');
+
+        $response = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson('/api/v0.3/attempts/'.$attemptId.'/eq/agent-context?locale=en&intent=ask_for_sjt');
+
+        $response->assertOk()
+            ->assertJsonPath('ready', true)
+            ->assertJsonPath('report_context.next_module.available', false)
+            ->assertJsonPath('report_context.next_module.status', 'planned')
+            ->assertJsonPath('guardrails.can_enable_sjt', false)
+            ->assertJsonPath('intent_context.matched', true)
+            ->assertJsonPath('intent_context.matched_intent', 'ask_for_sjt')
+            ->assertJsonPath('intent_context.allowed_response_mode', 'planned_unavailable_boundary');
+
+        $this->assertContains('msceit_like', (array) $response->json('intent_context.forbidden_claim_ids'));
+        $this->assertContains('true_emotional_ability', (array) $response->json('intent_context.forbidden_claim_ids'));
+        $this->assertContains('certified_ei', (array) $response->json('intent_context.forbidden_claim_ids'));
+        $this->assertContains('sjt_availability_request', (array) $response->json('intent_context.escalation_flags'));
+
+        $json = json_encode($response->json(), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?: '';
+        $this->assertStringNotContainsString('/take', $json);
+        $this->assertStringNotContainsString('available":true', $json);
+        $this->assertStringNotContainsString('start_sjt', $json);
+    }
+
+    public function test_eq_agent_context_low_confidence_result_uses_retest_boundary_in_both_locales(): void
+    {
+        config()->set('fap.features.report_snapshot_strict_v2', true);
+        $this->prepareEqContent();
+
+        foreach (['zh-CN', 'en'] as $locale) {
+            $anonId = 'anon_eq_agent_low_confidence_'.str_replace('-', '_', strtolower($locale));
+            $token = $this->issueFmToken($anonId);
+            $attemptId = $this->createEqAttemptWithResult($anonId, $locale, [
+                'quality' => [
+                    'level' => 'C',
+                    'flags' => ['low_variance', 'short_duration'],
+                ],
+            ]);
+
+            $response = $this->withHeaders([
+                'X-Anon-Id' => $anonId,
+                'Authorization' => 'Bearer '.$token,
+            ])->getJson('/api/v0.3/attempts/'.$attemptId.'/eq/agent-context?locale='.$locale.'&intent=quality_or_confidence_question');
+
+            $response->assertOk()
+                ->assertJsonPath('ready', true)
+                ->assertJsonPath('locale', $locale)
+                ->assertJsonPath('report_context.interpretation.core_formulation_id', 'low_confidence_result')
+                ->assertJsonPath('report_context.interpretation.action_prescription_id', 'retest_reflection')
+                ->assertJsonPath('report_context.next_module.available', false)
+                ->assertJsonPath('guardrails.read_only', true)
+                ->assertJsonPath('guardrails.can_mutate_report', false)
+                ->assertJsonPath('guardrails.can_enable_sjt', false)
+                ->assertJsonPath('intent_context.matched_intent', 'quality_or_confidence_question')
+                ->assertJsonPath('intent_context.allowed_response_mode', 'confidence_boundary_and_retest_guidance');
+
+            $this->assertContains('low_confidence_result', (array) $response->json('intent_context.escalation_flags'));
+            $this->assertContains('true_emotional_ability', (array) $response->json('intent_context.forbidden_claim_ids'));
+            $this->assertContains('clinical_diagnosis', (array) $response->json('intent_context.forbidden_claim_ids'));
+            $this->assertNotEmpty((array) $response->json('resolved_assets.action_prescription'));
+            $this->assertSame('retest_reflection', (string) $response->json('resolved_assets.action_prescription.id'));
+        }
+    }
+
     private function prepareEqContent(): void
     {
         $this->artisan('content:compile --pack=EQ_60 --pack-version=v1')->assertExitCode(0);
@@ -179,7 +307,10 @@ final class EqAgentContextApiTest extends TestCase
         return $token;
     }
 
-    private function createEqAttemptWithResult(string $anonId, string $locale = 'zh-CN'): string
+    /**
+     * @param  array<string,mixed>  $scoreOverrides
+     */
+    private function createEqAttemptWithResult(string $anonId, string $locale = 'zh-CN', array $scoreOverrides = []): string
     {
         $locale = str_starts_with(strtolower(trim($locale)), 'zh') ? 'zh-CN' : 'en';
         $attemptId = (string) Str::uuid();
@@ -208,6 +339,8 @@ final class EqAgentContextApiTest extends TestCase
             'locale' => $locale,
             'region' => 'CN_MAINLAND',
         ]);
+
+        $score = array_replace_recursive($score, $scoreOverrides);
 
         Result::create([
             'id' => (string) Str::uuid(),
@@ -323,5 +456,18 @@ final class EqAgentContextApiTest extends TestCase
                 'server_duration_seconds' => 420,
             ], $ctx)
         );
+    }
+
+    /**
+     * @return list<array<string,mixed>>
+     */
+    private function forbiddenClaimCases(): array
+    {
+        $path = base_path('tests/Fixtures/eq/agent/forbidden_claims.json');
+        $payload = json_decode(File::get($path), true);
+
+        $this->assertSame('eq.agent_safety_eval.forbidden_claims.v1', (string) data_get($payload, 'schema'));
+
+        return array_values(array_filter((array) data_get($payload, 'cases', []), 'is_array'));
     }
 }
