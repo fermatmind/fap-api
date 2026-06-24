@@ -390,6 +390,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_enneagram_cms_draft_writer_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/PersonalityEnneagramCmsDraft.php',
+            'backend/app/Console/Kernel.php',
+            'backend/app/Services/Cms/EnneagramCmsDraftWriter.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\PersonalityEnneagramCmsDraft;',
+            '+        PersonalityEnneagramCmsDraft::class,',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
+    }
+
     public function test_runtime_freeze_classifier_ignores_mbti_personality_at_difference_section_files(): void
     {
         $changed = [
@@ -4389,6 +4404,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isEnneagramCmsDraftFile($file)) {
+                continue;
+            }
+
             if ($this->isMbtiPersonalityAtDifferenceSectionFile($file)) {
                 continue;
             }
@@ -5459,6 +5478,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsMbti64CmsRevisionPromoteOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsMbti64GscReadonlyExportOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsPersonalityAgentApprovalQueueOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsEnneagramCmsDraftOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentCmsTdkGapReadonlyScannerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentCodexReviewRunnerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentCmsDraftPackageDryRunOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
@@ -5680,6 +5700,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Console/Commands/PersonalityAgentApprovalQueueCommand.php',
             'backend/app/Services/Cms/PersonalityAgentApprovalQueueWriter.php',
             'backend/database/migrations/2026_06_24_000100_create_personality_agent_approval_queue_tables.php',
+        ], true);
+    }
+
+    private function isEnneagramCmsDraftFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/PersonalityEnneagramCmsDraft.php',
+            'backend/app/Services/Cms/EnneagramCmsDraftWriter.php',
         ], true);
     }
 
@@ -9425,6 +9453,25 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         foreach ($changedLines as $line) {
             $normalized = ltrim($line, '+-');
             if (preg_match('/\bPersonalityAgentApprovalQueueCommand\b/u', $normalized) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsEnneagramCmsDraftOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            $normalized = ltrim($line, '+-');
+            if (preg_match('/\bPersonalityEnneagramCmsDraft\b/u', $normalized) !== 1) {
                 return false;
             }
         }
