@@ -175,11 +175,31 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
             ->assertOk()
             ->assertJsonPath('identity.canonical_slug', 'accountants-and-auditors')
             ->assertJsonMissingPath('truth_layer.source_refs.0.source_id')
-            ->assertJsonMissingPath('truth_layer.source_refs.0.source_trace_id');
+            ->assertJsonMissingPath('truth_layer.source_refs.0.source_trace_id')
+            ->assertJsonMissingPath('provenance_meta.source_trace_id')
+            ->assertJsonMissingPath('provenance_meta.compile_refs')
+            ->assertJsonMissingPath('provenance_meta.import_run_id')
+            ->assertJsonMissingPath('provenance_meta.compile_run_id')
+            ->assertJsonMissingPath('provenance_meta.index_state_id');
 
-        $encoded = json_encode($response->json('truth_layer.source_refs'), JSON_THROW_ON_ERROR);
-        $this->assertStringNotContainsString('source_id', $encoded);
-        $this->assertStringNotContainsString('source_trace_id', $encoded);
+        $encoded = json_encode($response->json(), JSON_THROW_ON_ERROR);
+
+        foreach ([
+            'source_id',
+            'source_ids',
+            'source_trace_id',
+            'evidence_id',
+            'row_hash',
+            'search_projection',
+            'audit_fields',
+            'compile_refs',
+            'crosswalk_ids',
+            'import_run_id',
+            'compile_run_id',
+            'index_state_id',
+        ] as $internalKey) {
+            $this->assertStringNotContainsString($internalKey, $encoded);
+        }
     }
 
     public function test_it_adds_display_surface_for_selected_d5_assets(): void
