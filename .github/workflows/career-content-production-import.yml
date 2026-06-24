@@ -520,6 +520,84 @@ jobs:
             ' "$report_file" "$channel" "$expected_sha"
           }
 
+          existing_production_imported_count() {
+            local model_class="$1"
+            local asset_version="$2"
+            local expected_sha="$3"
+
+            php -r '
+              require "vendor/autoload.php";
+              $app = require "bootstrap/app.php";
+              $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+
+              $modelClass = $argv[1];
+              $assetVersion = $argv[2];
+              $expectedSha = $argv[3];
+
+              echo $modelClass::query()
+                  ->where("asset_version", $assetVersion)
+                  ->where("source_artifact_sha256", $expectedSha)
+                  ->where("status", "production_imported")
+                  ->whereIn("locale", ["zh-CN", "en"])
+                  ->count();
+            ' "$model_class" "$asset_version" "$expected_sha"
+          }
+
+          write_existing_production_reports() {
+            local staging_report="$1"
+            local approved_report="$2"
+            local import_report="$3"
+            local channel="$4"
+            local expected_sha="$5"
+
+            php -r '
+              $stagingReport = $argv[1];
+              $approvedReport = $argv[2];
+              $importReport = $argv[3];
+              $channel = $argv[4];
+              $expectedSha = $argv[5];
+
+              $base = [
+                "decision" => "pass",
+                "channel" => $channel,
+                "status" => "production_imported",
+                "source_file_sha256" => $expectedSha,
+                "expected_written_count" => 2092,
+                "production_imported_count" => 2092,
+                "errors" => [],
+              ];
+
+              file_put_contents($stagingReport, json_encode($base + [
+                "mode" => "skip_existing_production_import",
+                "staging_write_performed" => false,
+                "production_import_performed" => false,
+                "written_count" => 0,
+              ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES).PHP_EOL);
+
+              file_put_contents($approvedReport, json_encode($base + [
+                "mode" => "skip_existing_production_import",
+                "approved_transition_performed" => false,
+                "production_import_performed" => false,
+                "approved_count" => 0,
+              ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES).PHP_EOL);
+
+              file_put_contents($importReport, json_encode($base + [
+                "mode" => "production_import_existing",
+                "production_import_allowed" => true,
+                "production_import_performed" => false,
+                "production_rows_touched" => 0,
+                "rollback_report" => [
+                  "available" => true,
+                  "rollback_sql_intent" => "No rows changed; channel already had 2092 production_imported rows for the approved artifact SHA.",
+                ],
+              ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES).PHP_EOL);
+            ' "$staging_report" "$approved_report" "$import_report" "$channel" "$expected_sha"
+          }
+
+          page_assembly_existing_production_count="$(existing_production_imported_count 'App\Models\CareerJobPageAssemblyAsset' 'career_page_assembly_v1' "$PAGE_ASSEMBLY_EXPECTED_SHA256")"
+          if [ "$page_assembly_existing_production_count" = "2092" ]; then
+            write_existing_production_reports "$page_assembly_staging_report" "$page_assembly_approved_report" "$page_assembly_report" "page_assembly" "$PAGE_ASSEMBLY_EXPECTED_SHA256"
+          else
           php -d memory_limit=1024M artisan career:page-assembly-assets-import-preview \
             --file="$PAGE_ASSEMBLY_PROD_ASSET_FILE" \
             --expected-sha256="$PAGE_ASSEMBLY_EXPECTED_SHA256" \
@@ -528,7 +606,7 @@ jobs:
             --status=staging_preview \
             --confirm-full-staging-preview \
             --output="$page_assembly_staging_report" \
-            --json
+            --json > /dev/null
           validate_staging_report "$page_assembly_staging_report" "page_assembly" "$PAGE_ASSEMBLY_EXPECTED_SHA256"
 
           php -d memory_limit=1024M artisan career:page-assembly-assets-import-preview \
@@ -543,7 +621,7 @@ jobs:
             --editorial-review-report="$PAGE_ASSEMBLY_PROD_EDITORIAL_REVIEW" \
             --editorial-review-sha256="$PAGE_ASSEMBLY_EDITORIAL_REVIEW_SHA256" \
             --output="$page_assembly_approved_report" \
-            --json
+            --json > /dev/null
           validate_approved_report "$page_assembly_approved_report" "page_assembly" "$PAGE_ASSEMBLY_EXPECTED_SHA256"
 
           php -d memory_limit=1024M artisan career:page-assembly-assets-import-preview \
@@ -558,9 +636,14 @@ jobs:
             --editorial-review-report="$PAGE_ASSEMBLY_PROD_EDITORIAL_REVIEW" \
             --editorial-review-sha256="$PAGE_ASSEMBLY_EDITORIAL_REVIEW_SHA256" \
             --output="$page_assembly_report" \
-            --json
+            --json > /dev/null
           validate_import_report "$page_assembly_report" "page_assembly" "$PAGE_ASSEMBLY_EXPECTED_SHA256"
+          fi
 
+          ai_impact_existing_production_count="$(existing_production_imported_count 'App\Models\CareerJobAiImpactAsset' 'career_risk_future_ai_impact_v5' "$AI_IMPACT_EXPECTED_SHA256")"
+          if [ "$ai_impact_existing_production_count" = "2092" ]; then
+            write_existing_production_reports "$ai_impact_staging_report" "$ai_impact_approved_report" "$ai_impact_report" "ai_impact" "$AI_IMPACT_EXPECTED_SHA256"
+          else
           php -d memory_limit=1024M artisan career:ai-impact-assets-import-preview \
             --file="$AI_IMPACT_PROD_ASSET_FILE" \
             --expected-sha256="$AI_IMPACT_EXPECTED_SHA256" \
@@ -569,7 +652,7 @@ jobs:
             --status=staging_preview \
             --confirm-full-staging-preview \
             --output="$ai_impact_staging_report" \
-            --json
+            --json > /dev/null
           validate_staging_report "$ai_impact_staging_report" "ai_impact" "$AI_IMPACT_EXPECTED_SHA256"
 
           php -d memory_limit=1024M artisan career:ai-impact-assets-import-preview \
@@ -584,7 +667,7 @@ jobs:
             --editorial-review-report="$AI_IMPACT_PROD_EDITORIAL_REVIEW" \
             --editorial-review-sha256="$AI_IMPACT_EDITORIAL_REVIEW_SHA256" \
             --output="$ai_impact_approved_report" \
-            --json
+            --json > /dev/null
           validate_approved_report "$ai_impact_approved_report" "ai_impact" "$AI_IMPACT_EXPECTED_SHA256"
 
           php -d memory_limit=1024M artisan career:ai-impact-assets-import-preview \
@@ -599,8 +682,9 @@ jobs:
             --editorial-review-report="$AI_IMPACT_PROD_EDITORIAL_REVIEW" \
             --editorial-review-sha256="$AI_IMPACT_EDITORIAL_REVIEW_SHA256" \
             --output="$ai_impact_report" \
-            --json
+            --json > /dev/null
           validate_import_report "$ai_impact_report" "ai_impact" "$AI_IMPACT_EXPECTED_SHA256"
+          fi
 
           REMOTE
           rc=$?
