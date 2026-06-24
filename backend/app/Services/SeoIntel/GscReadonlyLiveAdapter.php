@@ -364,7 +364,7 @@ final class GscReadonlyLiveAdapter
             (int) config('seo_intel.gsc_readonly_adapter.max_limit', 250)
         ));
 
-        return [
+        $payload = [
             'startDate' => substr((string) ($request['startDate'] ?? now()->subDays(30)->toDateString()), 0, 10),
             'endDate' => substr((string) ($request['endDate'] ?? now()->subDays(3)->toDateString()), 0, 10),
             'dimensions' => array_values(array_intersect(
@@ -374,6 +374,62 @@ final class GscReadonlyLiveAdapter
             'type' => 'web',
             'rowLimit' => $limit,
         ];
+
+        $filterGroups = $this->safeDimensionFilterGroups($request['dimensionFilterGroups'] ?? null);
+        if ($filterGroups !== []) {
+            $payload['dimensionFilterGroups'] = $filterGroups;
+        }
+
+        return $payload;
+    }
+
+    /**
+     * @return list<array<string, mixed>>
+     */
+    private function safeDimensionFilterGroups(mixed $groups): array
+    {
+        if (! is_array($groups)) {
+            return [];
+        }
+
+        $safeGroups = [];
+        foreach ($groups as $group) {
+            if (! is_array($group) || ! is_array($group['filters'] ?? null)) {
+                continue;
+            }
+
+            $filters = [];
+            foreach ($group['filters'] as $filter) {
+                if (! is_array($filter)) {
+                    continue;
+                }
+
+                $dimension = (string) ($filter['dimension'] ?? '');
+                $operator = (string) ($filter['operator'] ?? '');
+                $expression = trim((string) ($filter['expression'] ?? ''));
+                if (! in_array($dimension, ['page', 'query', 'country', 'device', 'searchAppearance'], true)) {
+                    continue;
+                }
+                if (! in_array($operator, ['equals', 'contains', 'notContains', 'includingRegex', 'excludingRegex'], true)) {
+                    continue;
+                }
+                if ($expression === '') {
+                    continue;
+                }
+
+                $filters[] = [
+                    'dimension' => $dimension,
+                    'operator' => $operator,
+                    'expression' => mb_substr($expression, 0, 2048, 'UTF-8'),
+                ];
+            }
+
+            if ($filters !== []) {
+                $safeGroups[] = ['filters' => $filters];
+            }
+        }
+
+        return $safeGroups;
     }
 
     /**
