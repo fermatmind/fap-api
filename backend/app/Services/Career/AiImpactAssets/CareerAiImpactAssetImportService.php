@@ -558,11 +558,12 @@ final class CareerAiImpactAssetImportService
         string $editorialReviewReportFile = '',
         ?string $expectedEditorialReviewSha256 = null,
         bool $confirmed = false,
+        bool $write = true,
     ): array {
         $baseReport = $this->baseReport($file, $requestedSlugs, $allSlugsFromFile);
         if (! $confirmed) {
             return array_merge($baseReport, [
-                'mode' => 'production_import',
+                'mode' => $write ? 'production_import' : 'production_import_dry_run',
                 'status' => CareerJobAiImpactAsset::STATUS_PRODUCTION_IMPORTED,
                 'decision' => 'fail',
                 'approved_transition_performed' => false,
@@ -574,7 +575,7 @@ final class CareerAiImpactAssetImportService
 
         if ($this->normalizeSha256($expectedSha256) === null) {
             return array_merge($baseReport, [
-                'mode' => 'production_import',
+                'mode' => $write ? 'production_import' : 'production_import_dry_run',
                 'status' => CareerJobAiImpactAsset::STATUS_PRODUCTION_IMPORTED,
                 'decision' => 'fail',
                 'approved_transition_performed' => false,
@@ -587,7 +588,7 @@ final class CareerAiImpactAssetImportService
         $validation = $this->validateFile($file, $requestedSlugs, $expectedSha256, $allSlugsFromFile, false);
         if (($validation['decision'] ?? null) !== 'pass') {
             return array_merge($validation, [
-                'mode' => 'production_import',
+                'mode' => $write ? 'production_import' : 'production_import_dry_run',
                 'status' => CareerJobAiImpactAsset::STATUS_PRODUCTION_IMPORTED,
                 'production_import_allowed' => false,
                 'production_import_performed' => false,
@@ -660,7 +661,7 @@ final class CareerAiImpactAssetImportService
 
         if ($errors !== []) {
             return array_merge($validation, [
-                'mode' => 'production_import',
+                'mode' => $write ? 'production_import' : 'production_import_dry_run',
                 'status' => CareerJobAiImpactAsset::STATUS_PRODUCTION_IMPORTED,
                 'decision' => 'fail',
                 'approved_transition_performed' => false,
@@ -676,6 +677,32 @@ final class CareerAiImpactAssetImportService
                     'rows' => $rollbackRows,
                 ],
                 'errors' => $errors,
+            ]);
+        }
+
+        if (! $write) {
+            return array_merge($validation, [
+                'mode' => 'production_import_dry_run',
+                'status' => CareerJobAiImpactAsset::STATUS_PRODUCTION_IMPORTED,
+                'decision' => 'pass',
+                'approved_transition_performed' => false,
+                'production_import_allowed' => true,
+                'production_import_performed' => false,
+                'staging_write_performed' => false,
+                'approval_manifest_file' => $approvalManifestFile,
+                'approval_manifest_sha256' => $approvalArtifact['sha256'] ?? null,
+                'editorial_review_report_file' => $editorialReviewReportFile,
+                'editorial_review_sha256' => $editorialArtifact['sha256'] ?? null,
+                'expected_written_count' => $expectedRows,
+                'production_rows_touched' => 0,
+                'rollback_report' => [
+                    'available' => true,
+                    'target_key' => ['career_job_slug', 'locale', 'asset_version'],
+                    'previous_status_counts' => $previousStatusCounts,
+                    'rows' => $rollbackRows,
+                    'rollback_sql_intent' => 'No rows were changed during dry-run. If executed, rollback restores each row to previous_status, or deletes rows whose previous_status was missing, by career_job_slug, locale, asset_version, and import_run_id.',
+                ],
+                'errors' => [],
             ]);
         }
 
