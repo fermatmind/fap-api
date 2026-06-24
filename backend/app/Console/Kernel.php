@@ -174,6 +174,7 @@ use App\Console\Commands\Packs2Rollback;
 use App\Console\Commands\PacksPublish;
 use App\Console\Commands\PacksRollback;
 use App\Console\Commands\PaymentsPruneEvents;
+use App\Console\Commands\PersonalityAgentApprovalQueueCommand;
 use App\Console\Commands\PersonalityImportDesktopCloneBaseline;
 use App\Console\Commands\PersonalityMbti64GscQueryReadonlyExport;
 use App\Console\Commands\PersonalityMbti64BackendImportContract;
@@ -245,6 +246,7 @@ class Kernel extends ConsoleKernel
         FapSelfCheck::class,
         FapValidateReport::class,
         FapWeeklyReport::class,
+        PersonalityAgentApprovalQueueCommand::class,
         PersonalityImportDesktopCloneBaseline::class,
         PersonalityMbti64GscQueryReadonlyExport::class,
         PersonalityMbti64CmsInternalLinkDraft::class,
