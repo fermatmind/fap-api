@@ -165,6 +165,23 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
         }
     }
 
+    public function test_job_detail_projection_does_not_expose_internal_source_ids(): void
+    {
+        $occupation = $this->seedCompiledOccupation('accountants-and-auditors');
+        $this->addCrosswalks($occupation, 'accountants-and-auditors');
+        $this->createDisplayAsset($occupation);
+
+        $response = $this->getJson('/api/v0.5/career/jobs/accountants-and-auditors?locale=en')
+            ->assertOk()
+            ->assertJsonPath('identity.canonical_slug', 'accountants-and-auditors')
+            ->assertJsonMissingPath('truth_layer.source_refs.0.source_id')
+            ->assertJsonMissingPath('truth_layer.source_refs.0.source_trace_id');
+
+        $encoded = json_encode($response->json('truth_layer.source_refs'), JSON_THROW_ON_ERROR);
+        $this->assertStringNotContainsString('source_id', $encoded);
+        $this->assertStringNotContainsString('source_trace_id', $encoded);
+    }
+
     public function test_it_adds_display_surface_for_selected_d5_assets(): void
     {
         foreach ([
