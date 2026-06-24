@@ -286,6 +286,10 @@ Route::prefix('v0.3')->middleware([
                 ->middleware('uuid:id')
                 ->defaults('public_realm', true)
                 ->name('api.v0_3.attempts.report_access');
+            Route::get('/attempts/{id}/eq/agent-context', [AttemptReadController::class, 'eqAgentContext'])
+                ->middleware('uuid:id')
+                ->defaults('public_realm', true)
+                ->name('api.v0_3.attempts.eq.agent_context');
             Route::get('/attempts/{id}/report.pdf', [AttemptReadController::class, 'reportPdf'])
                 ->middleware('uuid:id')
                 ->defaults('public_realm', true)
