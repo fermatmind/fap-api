@@ -238,13 +238,13 @@ final class LandingSurfacePublicApiTest extends TestCase
         $this->assertIsArray($homeIqCard);
         $this->assertSame('IQ Reasoning Practice', (string) data_get($homeIqCard, 'title'));
         $this->assertSame('30 questions', (string) data_get($homeIqCard, 'questionsLabel'));
-        $this->assertSame('IQ_BETA_30_ORIGINAL', (string) data_get($homeIqCard, 'primaryActions.0.form_code'));
-        $this->assertSame('iq-beta30-original-card', (string) data_get($homeIqCard, 'media.asset_key'));
+        $this->assertSame('IQ_OWNER_ORIGINAL_30', (string) data_get($homeIqCard, 'primaryActions.0.form_code'));
+        $this->assertSame('iq-owner-original-30-card', (string) data_get($homeIqCard, 'media.asset_key'));
         $this->assertSame('media_library_required', (string) data_get($homeIqCard, 'media.source'));
         $this->assertSame('backend_cms_media_library', (string) data_get($homeIqCard, 'media.authority'));
         $this->assertSame('metadata_only_no_frontend_asset', (string) data_get($homeIqCard, 'media.status'));
         $this->assertFalse((bool) data_get($homeIqCard, 'media.fallback_allowed', true));
-        $this->assertSame('iq-beta30-original-og', (string) data_get($homeIqCard, 'media.variants.og_asset_key'));
+        $this->assertSame('iq-owner-original-30-og', (string) data_get($homeIqCard, 'media.variants.og_asset_key'));
         $this->assertTrue((bool) data_get($homeIqCard, 'claim_policy.norm_authority_required'));
         $this->assertFalse((bool) data_get($homeIqCard, 'claim_policy.iq_estimate_claims_enabled'));
         $this->assertFalse((bool) data_get($homeIqCard, 'claim_policy.percentile_claims_enabled'));
@@ -266,8 +266,8 @@ final class LandingSurfacePublicApiTest extends TestCase
         $this->assertSame('30 题', (string) data_get($iqCard, 'questionsLabel'));
         $this->assertSame('约 20 分钟', (string) data_get($iqCard, 'durationLabel'));
         $this->assertSame('/zh/tests/iq-test-intelligence-quotient-assessment/take', (string) data_get($iqCard, 'href'));
-        $this->assertSame('IQ_BETA_30_ORIGINAL', (string) data_get($iqCard, 'primaryActions.0.form_code'));
-        $this->assertSame('iq-beta30-original-card', (string) data_get($iqCard, 'media.asset_key'));
+        $this->assertSame('IQ_OWNER_ORIGINAL_30', (string) data_get($iqCard, 'primaryActions.0.form_code'));
+        $this->assertSame('iq-owner-original-30-card', (string) data_get($iqCard, 'media.asset_key'));
         $this->assertSame('media_library_required', (string) data_get($iqCard, 'media.source'));
         $this->assertSame('backend_cms_media_library', (string) data_get($iqCard, 'media.authority'));
         $this->assertFalse((bool) data_get($iqCard, 'media.fallback_allowed', true));
@@ -285,18 +285,18 @@ final class LandingSurfacePublicApiTest extends TestCase
             JSON_THROW_ON_ERROR
         ))->keyBy(fn (array $row): string => (string) ($row['asset_key'] ?? ''));
 
-        foreach (['iq-beta30-original-card', 'iq-beta30-original-og', 'iq-full-report-cover'] as $assetKey) {
+        foreach (['iq-owner-original-30-card', 'iq-owner-original-30-og', 'iq-full-report-cover'] as $assetKey) {
             $asset = $mediaRows->get($assetKey);
             $this->assertIsArray($asset, $assetKey.' media asset baseline is missing');
             $this->assertSame('media_library', (string) data_get($asset, 'disk'));
             $this->assertSame('backend_cms_media_library', (string) data_get($asset, 'payload_json.authority'));
             $this->assertFalse((bool) data_get($asset, 'payload_json.frontend_fallback_allowed', true));
-            $this->assertSame('IQ_BETA_30_ORIGINAL', (string) data_get($asset, 'payload_json.applies_to.scale_code.0'));
+            $this->assertSame('IQ_OWNER_ORIGINAL_30', (string) data_get($asset, 'payload_json.applies_to.scale_code.0'));
             $this->assertStringNotContainsString('/public/', json_encode($asset, JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR));
             $this->assertStringNotContainsString('fap-web', json_encode($asset, JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR));
         }
 
-        $this->assertContains('seo_og', data_get($mediaRows->get('iq-beta30-original-og'), 'payload_json.render_surface'));
+        $this->assertContains('seo_og', data_get($mediaRows->get('iq-owner-original-30-og'), 'payload_json.render_surface'));
         $this->assertContains('paid_report', data_get($mediaRows->get('iq-full-report-cover'), 'payload_json.render_surface'));
     }
 

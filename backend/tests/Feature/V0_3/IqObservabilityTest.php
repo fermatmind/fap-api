@@ -32,9 +32,9 @@ final class IqObservabilityTest extends TestCase
             'answers_summary_json' => ['stage' => 'seed'],
             'started_at' => now()->subMinutes(15),
             'submitted_at' => now()->subMinute(),
-            'pack_id' => 'IQ_BETA_30_ORIGINAL',
-            'dir_version' => 'iq_beta30_original_v1',
-            'content_package_version' => 'iq_beta30_original_v1',
+            'pack_id' => 'IQ_OWNER_ORIGINAL_30',
+            'dir_version' => 'iq_owner_original_30_v1',
+            'content_package_version' => 'iq_owner_original_30_v1',
             'scoring_spec_version' => 'iq_spec_v1',
         ]);
 
@@ -42,7 +42,7 @@ final class IqObservabilityTest extends TestCase
             'scale_code' => 'IQ_INTELLIGENCE_QUOTIENT',
             'status' => 'scored',
             'scoring_mode' => 'scored',
-            'bank_id' => 'IQ_BETA_30_ORIGINAL',
+            'bank_id' => 'IQ_OWNER_ORIGINAL_30',
             'answer_key_version' => 'must_not_emit',
             'norm_table_version' => 'unavailable',
             'scoring_engine_version' => 'iq_scoring_v2',
@@ -64,8 +64,8 @@ final class IqObservabilityTest extends TestCase
                 'NPR' => ['raw_score' => 10],
             ],
             'version_snapshot' => [
-                'pack_id' => 'IQ_BETA_30_ORIGINAL',
-                'pack_version' => 'iq_beta30_original_v1',
+                'pack_id' => 'IQ_OWNER_ORIGINAL_30',
+                'pack_version' => 'iq_owner_original_30_v1',
                 'scoring_spec_version' => 'iq_spec_v1',
                 'content_manifest_hash' => 'manifest_safe_hash',
             ],
@@ -90,14 +90,14 @@ final class IqObservabilityTest extends TestCase
             'scores_json' => [],
             'scores_pct' => [],
             'axis_states' => [],
-            'content_package_version' => 'iq_beta30_result_drift',
+            'content_package_version' => 'iq_owner_original_30_result_drift',
             'result_json' => [
                 'normed_json' => $score,
                 'breakdown_json' => ['score_result' => $score],
                 'axis_scores_json' => ['score_result' => $score],
             ],
-            'pack_id' => 'IQ_BETA_30_ORIGINAL',
-            'dir_version' => 'iq_beta30_result_drift',
+            'pack_id' => 'IQ_OWNER_ORIGINAL_30',
+            'dir_version' => 'iq_owner_original_30_result_drift',
             'scoring_spec_version' => 'iq_spec_v2',
             'report_engine_version' => 'v1.2',
             'is_valid' => true,
@@ -132,7 +132,7 @@ final class IqObservabilityTest extends TestCase
             $meta = $this->decodeMeta($event->meta_json ?? null);
             $this->assertSame('IQ_INTELLIGENCE_QUOTIENT', (string) ($meta['scale_code'] ?? ''));
             $this->assertSame('iq.production_observability.v1', (string) ($meta['observability_schema'] ?? ''));
-            $this->assertSame('IQ_BETA_30_ORIGINAL', (string) ($meta['bank_id'] ?? ''));
+            $this->assertSame('IQ_OWNER_ORIGINAL_30', (string) ($meta['bank_id'] ?? ''));
             $this->assertArrayNotHasKey('iq_estimate', $meta);
             $this->assertArrayNotHasKey('percentile', $meta);
             $this->assertArrayNotHasKey('confidence_interval', $meta);

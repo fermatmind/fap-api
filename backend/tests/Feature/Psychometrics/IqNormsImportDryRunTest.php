@@ -16,7 +16,7 @@ final class IqNormsImportDryRunTest extends TestCase
     {
         $this->artisan('norms:iq:import --file=tests/Fixtures/iq/norms/iq_norm_dry_run_valid.json --dry-run=1')
             ->expectsOutputToContain('dry-run=1, no write performed.')
-            ->expectsOutputToContain('validated scale=IQ_INTELLIGENCE_QUOTIENT bank=IQ_BETA_30_ORIGINAL version=iq_norm_dryrun_fixture_v1 rows=3 claim_eligible=false')
+            ->expectsOutputToContain('validated scale=IQ_INTELLIGENCE_QUOTIENT bank=IQ_OWNER_ORIGINAL_30 version=iq_norm_dryrun_fixture_v1 rows=3 claim_eligible=false')
             ->expectsOutputToContain('version_lock=new_authority_candidate')
             ->assertExitCode(0);
 

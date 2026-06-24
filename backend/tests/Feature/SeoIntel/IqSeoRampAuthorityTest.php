@@ -38,7 +38,7 @@ final class IqSeoRampAuthorityTest extends TestCase
         $this->assertSame('iq.seo_ramp_authority.v1', (string) ($enAuthority['schema'] ?? ''));
         $this->assertSame('backend_cms_landing_surface', (string) ($enAuthority['authority_source'] ?? ''));
         $this->assertSame('iq-test-intelligence-quotient-assessment', (string) ($enAuthority['test_slug'] ?? ''));
-        $this->assertSame('IQ_BETA_30_ORIGINAL', (string) ($enAuthority['form_code'] ?? ''));
+        $this->assertSame('IQ_OWNER_ORIGINAL_30', (string) ($enAuthority['form_code'] ?? ''));
         $this->assertSame('/en/tests/iq-test-intelligence-quotient-assessment', (string) ($enAuthority['canonical_path'] ?? ''));
         $this->assertSame('/zh/tests/iq-test-intelligence-quotient-assessment', (string) data_get($enAuthority, 'localized_paths.zh'));
         $this->assertSame('index,follow', (string) ($enAuthority['robots'] ?? ''));
@@ -49,7 +49,7 @@ final class IqSeoRampAuthorityTest extends TestCase
 
         $this->assertSame('/zh/tests/iq-test-intelligence-quotient-assessment', (string) ($zhAuthority['canonical_path'] ?? ''));
         $this->assertSame('zh-CN', (string) ($zhAuthority['locale'] ?? ''));
-        $this->assertSame('iq-beta30-original-og', (string) data_get($zhAuthority, 'media.og_asset_key'));
+        $this->assertSame('iq-owner-original-30-og', (string) data_get($zhAuthority, 'media.og_asset_key'));
         $this->assertSame('iq-full-report-cover', (string) data_get($zhAuthority, 'media.report_cover_asset_key'));
 
         $this->assertTrue((bool) data_get($enAuthority, 'claim_policy.norm_authority_required'));

@@ -180,8 +180,8 @@ final class IqReportBuilderTest extends TestCase
         return [
             'status' => 'scored',
             'scoring_mode' => 'scored',
-            'bank_id' => 'IQ_BETA_30_ORIGINAL',
-            'answer_key_version' => 'iq_beta30_original_answer_key_v1',
+            'bank_id' => 'IQ_OWNER_ORIGINAL_30',
+            'answer_key_version' => 'iq_owner_original_30_answer_key_v1',
             'norm_table_version' => 'iq_norm_prod_v1',
             'scoring_engine_version' => 'iq_scoring_v2',
             'raw_score' => 18.0,

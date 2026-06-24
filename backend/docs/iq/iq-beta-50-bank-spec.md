@@ -12,7 +12,7 @@ Scope: backend-authoritative planning contract for the future 50-item FermatMind
 | Scale code | `IQ_INTELLIGENCE_QUOTIENT` |
 | Legacy compatibility | `IQ_RAVEN` remains an input alias only; it is not user-facing copy. |
 | Frontend display key | `beta_50` |
-| Relationship to beta30 | `IQ_BETA_30_ORIGINAL` remains the current available free beta form. |
+| Relationship to owner_original_30 | `IQ_OWNER_ORIGINAL_30` remains the current available free beta form. |
 | Item count target | `50` |
 | Option count target | `6` options per item, `A` through `F` |
 | Runtime status | `future_placeholder_spec_only` |
