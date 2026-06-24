@@ -26,7 +26,6 @@ final class BigFivePublicProfileAgentDraftWriter
     private const DOMAIN_SLUGS = [
         'agreeableness',
         'conscientiousness',
-        'emotional-stability',
         'extraversion',
         'neuroticism',
         'openness',
@@ -336,6 +335,10 @@ final class BigFivePublicProfileAgentDraftWriter
         }
 
         $slug = strtolower((string) $matches['slug']);
+        if ($slug === 'emotional-stability') {
+            return $this->identity($path, (string) $matches['prefix'], PersonalityPublicContentAsset::ENTITY_POLARITY, $slug, 'big-five/'.$slug);
+        }
+
         if (in_array($slug, self::DOMAIN_SLUGS, true)) {
             return $this->identity($path, (string) $matches['prefix'], PersonalityPublicContentAsset::ENTITY_DOMAIN, $slug, 'big-five/'.$slug);
         }
