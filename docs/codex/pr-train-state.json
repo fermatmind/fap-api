@@ -60760,7 +60760,7 @@
     "repo": "fap-api",
     "branch": "codex/pr-eq-agent-02-context-payload-api",
     "base": "main",
-    "status": "ci_fix_pushed_pending_checks",
+    "status": "ci_fix_openapi_snapshot_pending_checks",
     "train_scope": "eq_agent_ready_content_os",
     "title": "PR-EQ-AGENT-02 Backend EQ Agent context payload and retrieval API",
     "depends_on": [
@@ -60834,10 +60834,23 @@
         "status": "pass",
         "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_eq_agent_context_read_only_contract_changes'",
         "evidence": "1 test passed, 1 assertion."
+      },
+      "github_checks_after_runtime_guard_fix": {
+        "status": "fail",
+        "evidence": "GitHub PR #2399 verify-mbti-legacy and verify-mbti-v2 failed after the runtime guard fix because backend/docs/contracts/openapi.snapshot.json drifted for GET /api/v0.3/attempts/{id}/eq/agent-context."
+      },
+      "openapi_snapshot_scope": {
+        "status": "pass",
+        "evidence": "User authorized fixing CI; PR-EQ-AGENT-02 allowed_paths and validation now include backend/docs/contracts/openapi.snapshot.json for the scoped read-only EQ Agent context route contract."
+      },
+      "openapi_snapshot": {
+        "status": "pass",
+        "command": "cd backend && bash scripts/export_openapi.sh --check",
+        "evidence": "OpenAPI snapshot regenerated for api.v0_3.attempts.eq.agent_context and check reports snapshot up-to-date."
       }
     },
     "failure_reason": null,
-    "commit_sha": "2d501ca8f",
+    "commit_sha": "pending_openapi_snapshot_fix_commit",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2399",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -60872,6 +60885,12 @@
         "from": "pr_opened",
         "to": "ci_fix_pushed_pending_checks",
         "notes": "Fixed required CI by adding a scoped EQ Agent context read-only runtime freeze exception and amending PR-EQ-AGENT-02 allowed_paths."
+      },
+      {
+        "at": "2026-06-25T00:02:00+08:00",
+        "from": "ci_fix_pushed_pending_checks",
+        "to": "ci_fix_openapi_snapshot_pending_checks",
+        "notes": "Fixed required CI OpenAPI drift by regenerating backend/docs/contracts/openapi.snapshot.json and adding it to PR-EQ-AGENT-02 scope."
       }
     ]
   },
