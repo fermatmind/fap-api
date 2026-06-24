@@ -30,6 +30,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withCommands([
         __DIR__.'/../app/Console/Commands',
+        \App\Console\Commands\PersonalityEnneagramCmsPromote::class,
         \App\Console\Commands\FapResolvePack::class,
         \App\Console\Commands\RiasecResultPageAssetAgentAuditCommand::class,
     ])

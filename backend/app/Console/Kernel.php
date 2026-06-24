@@ -184,6 +184,7 @@ use App\Console\Commands\PersonalityMbti64CmsInternalLinkDraft;
 use App\Console\Commands\PersonalityMbti64CmsProjectionDraft;
 use App\Console\Commands\PersonalityMbti64CmsRevisionDraft;
 use App\Console\Commands\PersonalityMbti64CmsRevisionPromote;
+use App\Console\Commands\PersonalityEnneagramCmsPromote;
 use App\Console\Commands\QualityDailySummary;
 use App\Console\Commands\RefreshCareerAttributionDailyCommand;
 use App\Console\Commands\RiasecResultPageAssetAgentAuditCommand;
@@ -250,6 +251,7 @@ class Kernel extends ConsoleKernel
         FapWeeklyReport::class,
         PersonalityAgentApprovalQueueCommand::class,
         PersonalityBigFivePublicProfileAgentDraft::class,
+        PersonalityEnneagramCmsPromote::class,
         PersonalityEnneagramCmsDraft::class,
         PersonalityImportDesktopCloneBaseline::class,
         PersonalityMbti64GscQueryReadonlyExport::class,
