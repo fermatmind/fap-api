@@ -69,6 +69,12 @@ final class Eq60ContentGateTest extends TestCase
             'cross_assessment_context',
             'seo_geo_authority',
             'sjt_bridge',
+            'result_snapshot',
+            'commercial_conversion_assets',
+            'quality_confidence',
+            'psychometric_evidence_status',
+            'agent_dialogue_playbooks',
+            'backend_integration_contract',
             'personalization_routes',
         ], array_keys((array) data_get($assets, 'assets', [])));
 
@@ -152,6 +158,52 @@ final class Eq60ContentGateTest extends TestCase
         $plannedSjt = is_array($sjtAssets['eq.sjt_bridge.planned'] ?? null) ? $sjtAssets['eq.sjt_bridge.planned'] : [];
         $this->assertFalse((bool) data_get($plannedSjt, 'zh-CN.available', true));
         $this->assertStringContainsString('not MSCEIT', (string) data_get($plannedSjt, 'en.what_it_is_not'));
+
+        $resultSnapshotAssets = (array) data_get($assets, 'assets.result_snapshot.assets', []);
+        $highEmpathySnapshot = is_array($resultSnapshotAssets['eq.snapshot.high_empathy_low_recovery'] ?? null)
+            ? (array) $resultSnapshotAssets['eq.snapshot.high_empathy_low_recovery']
+            : [];
+        $this->assertStringContainsString('恢复系统', (string) data_get($highEmpathySnapshot, 'zh-CN.core_judgment'));
+        $this->assertStringContainsString('recovery can lag', (string) data_get($highEmpathySnapshot, 'en.core_judgment'));
+        $this->assertNotEmpty((array) data_get($highEmpathySnapshot, 'en.conversion_actions'));
+
+        $conversionAssets = (array) data_get($assets, 'assets.commercial_conversion_assets.assets', []);
+        foreach ([
+            'eq.conversion.save_report',
+            'eq.conversion.email_revisit',
+            'eq.conversion.pdf_export',
+            'eq.conversion.share_card',
+            'eq.conversion.retest_reminder',
+            'eq.conversion.related_tests',
+            'eq.conversion.agent_entry',
+        ] as $assetId) {
+            $asset = is_array($conversionAssets[$assetId] ?? null) ? (array) $conversionAssets[$assetId] : [];
+            $this->assertNotSame('', (string) data_get($asset, 'zh-CN.cta_label'));
+            $this->assertNotSame('', (string) data_get($asset, 'en.cta_label'));
+        }
+        $this->assertStringNotContainsString('SKU_EQ_60_FULL_299', json_encode($conversionAssets, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?: '');
+        $this->assertStringNotContainsString('购买', json_encode($conversionAssets, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?: '');
+        $this->assertStringNotContainsString('解锁', json_encode($conversionAssets, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?: '');
+
+        $qualityAssets = (array) data_get($assets, 'assets.quality_confidence.assets', []);
+        $qualityA = is_array($qualityAssets['eq.quality.level.A'] ?? null) ? (array) $qualityAssets['eq.quality.level.A'] : [];
+        $this->assertNotSame('', (string) data_get($qualityA, 'zh-CN.why_this_level'));
+        $this->assertNotSame('', (string) data_get($qualityA, 'en.how_to_read'));
+
+        $evidenceAssets = (array) data_get($assets, 'assets.psychometric_evidence_status.assets', []);
+        $contentValidity = is_array($evidenceAssets['eq.evidence.content_validity'] ?? null) ? (array) $evidenceAssets['eq.evidence.content_validity'] : [];
+        $this->assertNotSame('', (string) data_get($contentValidity, 'zh-CN.user_facing_status_label'));
+        $this->assertNotSame('', (string) data_get($contentValidity, 'en.next_validation_step'));
+
+        $agentPlaybooks = (array) data_get($assets, 'assets.agent_dialogue_playbooks.assets', []);
+        $understandResult = is_array($agentPlaybooks['eq.agent.playbook.understand_result'] ?? null) ? (array) $agentPlaybooks['eq.agent.playbook.understand_result'] : [];
+        $this->assertNotSame('', (string) data_get($understandResult, 'zh-CN.clarifying_question'));
+        $this->assertNotSame('', (string) data_get($understandResult, 'en.refusal_example'));
+
+        $backendContractAssets = (array) data_get($assets, 'assets.backend_integration_contract.assets', []);
+        $schemaMapping = is_array($backendContractAssets['eq.backend_contract.schema_mapping'] ?? null) ? (array) $backendContractAssets['eq.backend_contract.schema_mapping'] : [];
+        $this->assertNotSame('', (string) data_get($schemaMapping, 'zh-CN.requirement'));
+        $this->assertStringContainsString('compiler', (string) data_get($schemaMapping, 'en.requirement'));
 
         $seoGeoAssets = (array) data_get($assets, 'assets.seo_geo_authority.assets', []);
         $seoGeoAsset = is_array($seoGeoAssets['eq.seo_geo_authority.en_landing.default'] ?? null)

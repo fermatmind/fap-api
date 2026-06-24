@@ -4,86 +4,662 @@
   "variables": {
     "interpersonal_density": {
       "low": {
-        "zh-CN": {"label": "低人际密度", "meaning": "多数时间独立推进，互动频率较低。", "fit_signal": "适合需要恢复空间或深度专注的人。", "strain_signal": "可能减少练习关系动作的机会。", "what_to_verify": "确认岗位是否真的允许长时间独立工作。"},
-        "en": {"label": "Low Interpersonal Density", "meaning": "Most work is independent with fewer interactions.", "fit_signal": "Can fit people who need recovery space or deep focus.", "strain_signal": "May reduce practice opportunities for relational action.", "what_to_verify": "Check whether the role truly allows long independent work blocks."}
+        "zh-CN": {
+          "label": "人际密度：低",
+          "meaning": "工作中需要和多少人、以多高频率互动。 当前档位表示更少、更慢、更可控。",
+          "fit_signal": "如果你的报告优势需要稳定节奏或清晰边界，人际密度低档可能更容易发挥；如果你的优势来自高互动，也要确认机会是否足够。",
+          "strain_signal": "当人际密度与恢复空间、反馈方式或责任边界不匹配时，容易放大消耗。",
+          "what_to_verify": "面试或试岗时验证：这里的人际密度真实强度是多少？谁负责调节关系和处理冲突？",
+          "do_not_overread": "这是职业环境变量，不是具体职业推荐，也不用于招聘筛选。",
+          "interview_question": "我想了解这个岗位日常的人际密度大概是什么水平？高压时通常如何分工和复盘？",
+          "role_observation_checklist": [
+            "一天内高互动时段数量",
+            "反馈是私下还是公开",
+            "冲突由个人消化还是团队处理",
+            "是否有低输入恢复窗口"
+          ],
+          "team_risk": "如果团队默认由高 EQ 的人承担关系维护，这个环境会把优势变成隐形负担。",
+          "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。"
+        },
+        "en": {
+          "label": "Interpersonal density: low",
+          "meaning": "How many people you interact with, and how often. This level is lower, slower, and more controlled.",
+          "fit_signal": "If your EQ pattern works best with clear rhythm and boundaries, low interpersonal density may support it; if your strengths need high interaction, verify that the environment provides enough of it.",
+          "strain_signal": "Strain increases when interpersonal density does not match recovery space, feedback style, or responsibility boundaries.",
+          "what_to_verify": "In interviews or trials, verify the real level of interpersonal density: who handles relationship tension and how conflict is reviewed.",
+          "do_not_overread": "This is a career-environment variable, not a job recommendation or hiring screen.",
+          "interview_question": "What is the usual level of interpersonal density in this role, and how does the team divide responsibility under pressure?",
+          "role_observation_checklist": [
+            "number of high-interaction periods in a day",
+            "private vs public feedback",
+            "whether conflict is handled individually or by the team",
+            "availability of low-input recovery windows"
+          ],
+          "team_risk": "If the team expects emotionally skilled people to maintain the relationship system, this environment can turn strength into invisible labor.",
+          "safe_experiment": "Observe rhythm and recovery space for one week before judging fit from a job title."
+        }
       },
       "medium": {
-        "zh-CN": {"label": "中等人际密度", "meaning": "日常有固定协作，但不是持续社交。", "fit_signal": "适合在协作和独立之间切换。", "strain_signal": "会议过多时仍会消耗。", "what_to_verify": "确认每周会议、同步和跨团队协作频率。"},
-        "en": {"label": "Medium Interpersonal Density", "meaning": "Regular collaboration without constant social demand.", "fit_signal": "Fits switching between collaboration and independent work.", "strain_signal": "Too many meetings can still drain.", "what_to_verify": "Check weekly meetings, syncs, and cross-team collaboration frequency."}
+        "zh-CN": {
+          "label": "人际密度：中",
+          "meaning": "工作中需要和多少人、以多高频率互动。 当前档位表示有一定强度，但仍可通过规则管理。",
+          "fit_signal": "如果你的报告优势需要稳定节奏或清晰边界，人际密度中档可能更容易发挥；如果你的优势来自高互动，也要确认机会是否足够。",
+          "strain_signal": "当人际密度与恢复空间、反馈方式或责任边界不匹配时，容易放大消耗。",
+          "what_to_verify": "面试或试岗时验证：这里的人际密度真实强度是多少？谁负责调节关系和处理冲突？",
+          "do_not_overread": "这是职业环境变量，不是具体职业推荐，也不用于招聘筛选。",
+          "interview_question": "我想了解这个岗位日常的人际密度大概是什么水平？高压时通常如何分工和复盘？",
+          "role_observation_checklist": [
+            "一天内高互动时段数量",
+            "反馈是私下还是公开",
+            "冲突由个人消化还是团队处理",
+            "是否有低输入恢复窗口"
+          ],
+          "team_risk": "如果团队默认由高 EQ 的人承担关系维护，这个环境会把优势变成隐形负担。",
+          "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。"
+        },
+        "en": {
+          "label": "Interpersonal density: medium",
+          "meaning": "How many people you interact with, and how often. This level is moderate, but manageable with rules.",
+          "fit_signal": "If your EQ pattern works best with clear rhythm and boundaries, medium interpersonal density may support it; if your strengths need high interaction, verify that the environment provides enough of it.",
+          "strain_signal": "Strain increases when interpersonal density does not match recovery space, feedback style, or responsibility boundaries.",
+          "what_to_verify": "In interviews or trials, verify the real level of interpersonal density: who handles relationship tension and how conflict is reviewed.",
+          "do_not_overread": "This is a career-environment variable, not a job recommendation or hiring screen.",
+          "interview_question": "What is the usual level of interpersonal density in this role, and how does the team divide responsibility under pressure?",
+          "role_observation_checklist": [
+            "number of high-interaction periods in a day",
+            "private vs public feedback",
+            "whether conflict is handled individually or by the team",
+            "availability of low-input recovery windows"
+          ],
+          "team_risk": "If the team expects emotionally skilled people to maintain the relationship system, this environment can turn strength into invisible labor.",
+          "safe_experiment": "Observe rhythm and recovery space for one week before judging fit from a job title."
+        }
       },
       "high": {
-        "zh-CN": {"label": "高人际密度", "meaning": "大量沟通、协调和即时互动。", "fit_signal": "可发挥共情、协作和关系管理优势。", "strain_signal": "恢复不足时容易情绪过载。", "what_to_verify": "确认是否有可控的独处和恢复窗口。"},
-        "en": {"label": "High Interpersonal Density", "meaning": "Frequent communication, coordination, and real-time interaction.", "fit_signal": "Can use empathy, collaboration, and relationship-management strengths.", "strain_signal": "Weak recovery can lead to overload.", "what_to_verify": "Check whether protected solo recovery windows exist."}
+        "zh-CN": {
+          "label": "人际密度：高",
+          "meaning": "工作中需要和多少人、以多高频率互动。 当前档位表示强度高、频率高，对恢复和边界要求更高。",
+          "fit_signal": "如果你的报告优势需要稳定节奏或清晰边界，人际密度高档可能更容易发挥；如果你的优势来自高互动，也要确认机会是否足够。",
+          "strain_signal": "当人际密度与恢复空间、反馈方式或责任边界不匹配时，容易放大消耗。",
+          "what_to_verify": "面试或试岗时验证：这里的人际密度真实强度是多少？谁负责调节关系和处理冲突？",
+          "do_not_overread": "这是职业环境变量，不是具体职业推荐，也不用于招聘筛选。",
+          "interview_question": "我想了解这个岗位日常的人际密度大概是什么水平？高压时通常如何分工和复盘？",
+          "role_observation_checklist": [
+            "一天内高互动时段数量",
+            "反馈是私下还是公开",
+            "冲突由个人消化还是团队处理",
+            "是否有低输入恢复窗口"
+          ],
+          "team_risk": "如果团队默认由高 EQ 的人承担关系维护，这个环境会把优势变成隐形负担。",
+          "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。"
+        },
+        "en": {
+          "label": "Interpersonal density: high",
+          "meaning": "How many people you interact with, and how often. This level is high intensity and frequency, requiring stronger recovery and boundaries.",
+          "fit_signal": "If your EQ pattern works best with clear rhythm and boundaries, high interpersonal density may support it; if your strengths need high interaction, verify that the environment provides enough of it.",
+          "strain_signal": "Strain increases when interpersonal density does not match recovery space, feedback style, or responsibility boundaries.",
+          "what_to_verify": "In interviews or trials, verify the real level of interpersonal density: who handles relationship tension and how conflict is reviewed.",
+          "do_not_overread": "This is a career-environment variable, not a job recommendation or hiring screen.",
+          "interview_question": "What is the usual level of interpersonal density in this role, and how does the team divide responsibility under pressure?",
+          "role_observation_checklist": [
+            "number of high-interaction periods in a day",
+            "private vs public feedback",
+            "whether conflict is handled individually or by the team",
+            "availability of low-input recovery windows"
+          ],
+          "team_risk": "If the team expects emotionally skilled people to maintain the relationship system, this environment can turn strength into invisible labor.",
+          "safe_experiment": "Observe rhythm and recovery space for one week before judging fit from a job title."
+        }
       }
     },
     "emotional_labor": {
       "low": {
-        "zh-CN": {"label": "低情绪劳动", "meaning": "较少承接他人情绪或安抚关系。", "fit_signal": "适合需要降低情绪消耗的人。", "strain_signal": "可能缺少运用共情优势的空间。", "what_to_verify": "确认用户、客户或团队情绪压力是否较低。"},
-        "en": {"label": "Low Emotional Labor", "meaning": "Less need to hold or soothe others' emotions.", "fit_signal": "Fits people who need lower emotional load.", "strain_signal": "May offer less space to use empathy strengths.", "what_to_verify": "Check whether user, client, or team emotional pressure is actually low."}
+        "zh-CN": {
+          "label": "情绪劳动：低",
+          "meaning": "你是否需要长期承接、安抚或调节他人情绪。 当前档位表示更少、更慢、更可控。",
+          "fit_signal": "如果你的报告优势需要稳定节奏或清晰边界，情绪劳动低档可能更容易发挥；如果你的优势来自高互动，也要确认机会是否足够。",
+          "strain_signal": "当情绪劳动与恢复空间、反馈方式或责任边界不匹配时，容易放大消耗。",
+          "what_to_verify": "面试或试岗时验证：这里的情绪劳动真实强度是多少？谁负责调节关系和处理冲突？",
+          "do_not_overread": "这是职业环境变量，不是具体职业推荐，也不用于招聘筛选。",
+          "interview_question": "我想了解这个岗位日常的情绪劳动大概是什么水平？高压时通常如何分工和复盘？",
+          "role_observation_checklist": [
+            "一天内高互动时段数量",
+            "反馈是私下还是公开",
+            "冲突由个人消化还是团队处理",
+            "是否有低输入恢复窗口"
+          ],
+          "team_risk": "如果团队默认由高 EQ 的人承担关系维护，这个环境会把优势变成隐形负担。",
+          "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。"
+        },
+        "en": {
+          "label": "Emotional labor: low",
+          "meaning": "How often you must absorb, soothe, or regulate others’ emotions. This level is lower, slower, and more controlled.",
+          "fit_signal": "If your EQ pattern works best with clear rhythm and boundaries, low emotional labor may support it; if your strengths need high interaction, verify that the environment provides enough of it.",
+          "strain_signal": "Strain increases when emotional labor does not match recovery space, feedback style, or responsibility boundaries.",
+          "what_to_verify": "In interviews or trials, verify the real level of emotional labor: who handles relationship tension and how conflict is reviewed.",
+          "do_not_overread": "This is a career-environment variable, not a job recommendation or hiring screen.",
+          "interview_question": "What is the usual level of emotional labor in this role, and how does the team divide responsibility under pressure?",
+          "role_observation_checklist": [
+            "number of high-interaction periods in a day",
+            "private vs public feedback",
+            "whether conflict is handled individually or by the team",
+            "availability of low-input recovery windows"
+          ],
+          "team_risk": "If the team expects emotionally skilled people to maintain the relationship system, this environment can turn strength into invisible labor.",
+          "safe_experiment": "Observe rhythm and recovery space for one week before judging fit from a job title."
+        }
       },
       "medium": {
-        "zh-CN": {"label": "中等情绪劳动", "meaning": "需要一定理解和安抚，但通常有边界。", "fit_signal": "适合练习共情与边界并存。", "strain_signal": "边界不清时会累积消耗。", "what_to_verify": "确认是否有升级、转介或交接机制。"},
-        "en": {"label": "Medium Emotional Labor", "meaning": "Some understanding and soothing are needed, usually with boundaries.", "fit_signal": "Fits practicing empathy with boundaries.", "strain_signal": "Unclear boundaries accumulate cost.", "what_to_verify": "Check whether escalation, referral, or handoff mechanisms exist."}
+        "zh-CN": {
+          "label": "情绪劳动：中",
+          "meaning": "你是否需要长期承接、安抚或调节他人情绪。 当前档位表示有一定强度，但仍可通过规则管理。",
+          "fit_signal": "如果你的报告优势需要稳定节奏或清晰边界，情绪劳动中档可能更容易发挥；如果你的优势来自高互动，也要确认机会是否足够。",
+          "strain_signal": "当情绪劳动与恢复空间、反馈方式或责任边界不匹配时，容易放大消耗。",
+          "what_to_verify": "面试或试岗时验证：这里的情绪劳动真实强度是多少？谁负责调节关系和处理冲突？",
+          "do_not_overread": "这是职业环境变量，不是具体职业推荐，也不用于招聘筛选。",
+          "interview_question": "我想了解这个岗位日常的情绪劳动大概是什么水平？高压时通常如何分工和复盘？",
+          "role_observation_checklist": [
+            "一天内高互动时段数量",
+            "反馈是私下还是公开",
+            "冲突由个人消化还是团队处理",
+            "是否有低输入恢复窗口"
+          ],
+          "team_risk": "如果团队默认由高 EQ 的人承担关系维护，这个环境会把优势变成隐形负担。",
+          "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。"
+        },
+        "en": {
+          "label": "Emotional labor: medium",
+          "meaning": "How often you must absorb, soothe, or regulate others’ emotions. This level is moderate, but manageable with rules.",
+          "fit_signal": "If your EQ pattern works best with clear rhythm and boundaries, medium emotional labor may support it; if your strengths need high interaction, verify that the environment provides enough of it.",
+          "strain_signal": "Strain increases when emotional labor does not match recovery space, feedback style, or responsibility boundaries.",
+          "what_to_verify": "In interviews or trials, verify the real level of emotional labor: who handles relationship tension and how conflict is reviewed.",
+          "do_not_overread": "This is a career-environment variable, not a job recommendation or hiring screen.",
+          "interview_question": "What is the usual level of emotional labor in this role, and how does the team divide responsibility under pressure?",
+          "role_observation_checklist": [
+            "number of high-interaction periods in a day",
+            "private vs public feedback",
+            "whether conflict is handled individually or by the team",
+            "availability of low-input recovery windows"
+          ],
+          "team_risk": "If the team expects emotionally skilled people to maintain the relationship system, this environment can turn strength into invisible labor.",
+          "safe_experiment": "Observe rhythm and recovery space for one week before judging fit from a job title."
+        }
       },
       "high": {
-        "zh-CN": {"label": "高情绪劳动", "meaning": "经常承接焦虑、投诉、冲突或脆弱情绪。", "fit_signal": "高共情者能建立信任。", "strain_signal": "低恢复者容易被情绪场拖走。", "what_to_verify": "确认督导、复盘和休息制度是否真实存在。"},
-        "en": {"label": "High Emotional Labor", "meaning": "Frequent exposure to anxiety, complaints, conflict, or vulnerability.", "fit_signal": "High-empathy people can build trust.", "strain_signal": "Low recovery can make the emotional field pull you in.", "what_to_verify": "Check whether supervision, review, and rest systems are real."}
+        "zh-CN": {
+          "label": "情绪劳动：高",
+          "meaning": "你是否需要长期承接、安抚或调节他人情绪。 当前档位表示强度高、频率高，对恢复和边界要求更高。",
+          "fit_signal": "如果你的报告优势需要稳定节奏或清晰边界，情绪劳动高档可能更容易发挥；如果你的优势来自高互动，也要确认机会是否足够。",
+          "strain_signal": "当情绪劳动与恢复空间、反馈方式或责任边界不匹配时，容易放大消耗。",
+          "what_to_verify": "面试或试岗时验证：这里的情绪劳动真实强度是多少？谁负责调节关系和处理冲突？",
+          "do_not_overread": "这是职业环境变量，不是具体职业推荐，也不用于招聘筛选。",
+          "interview_question": "我想了解这个岗位日常的情绪劳动大概是什么水平？高压时通常如何分工和复盘？",
+          "role_observation_checklist": [
+            "一天内高互动时段数量",
+            "反馈是私下还是公开",
+            "冲突由个人消化还是团队处理",
+            "是否有低输入恢复窗口"
+          ],
+          "team_risk": "如果团队默认由高 EQ 的人承担关系维护，这个环境会把优势变成隐形负担。",
+          "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。"
+        },
+        "en": {
+          "label": "Emotional labor: high",
+          "meaning": "How often you must absorb, soothe, or regulate others’ emotions. This level is high intensity and frequency, requiring stronger recovery and boundaries.",
+          "fit_signal": "If your EQ pattern works best with clear rhythm and boundaries, high emotional labor may support it; if your strengths need high interaction, verify that the environment provides enough of it.",
+          "strain_signal": "Strain increases when emotional labor does not match recovery space, feedback style, or responsibility boundaries.",
+          "what_to_verify": "In interviews or trials, verify the real level of emotional labor: who handles relationship tension and how conflict is reviewed.",
+          "do_not_overread": "This is a career-environment variable, not a job recommendation or hiring screen.",
+          "interview_question": "What is the usual level of emotional labor in this role, and how does the team divide responsibility under pressure?",
+          "role_observation_checklist": [
+            "number of high-interaction periods in a day",
+            "private vs public feedback",
+            "whether conflict is handled individually or by the team",
+            "availability of low-input recovery windows"
+          ],
+          "team_risk": "If the team expects emotionally skilled people to maintain the relationship system, this environment can turn strength into invisible labor.",
+          "safe_experiment": "Observe rhythm and recovery space for one week before judging fit from a job title."
+        }
       }
     },
     "conflict_frequency": {
       "low": {
-        "zh-CN": {"label": "低冲突频率", "meaning": "较少谈判、投诉或强分歧。", "fit_signal": "降低情绪调节压力。", "strain_signal": "可能较少训练冲突修复。", "what_to_verify": "确认冲突是否只是被隐藏到异步沟通中。"},
-        "en": {"label": "Low Conflict Frequency", "meaning": "Fewer negotiations, complaints, or strong disagreements.", "fit_signal": "Reduces regulation pressure.", "strain_signal": "May offer less practice in conflict repair.", "what_to_verify": "Check whether conflict is merely hidden in async communication."}
+        "zh-CN": {
+          "label": "冲突频率：低",
+          "meaning": "分歧、投诉、谈判、博弈出现的频率。 当前档位表示更少、更慢、更可控。",
+          "fit_signal": "如果你的报告优势需要稳定节奏或清晰边界，冲突频率低档可能更容易发挥；如果你的优势来自高互动，也要确认机会是否足够。",
+          "strain_signal": "当冲突频率与恢复空间、反馈方式或责任边界不匹配时，容易放大消耗。",
+          "what_to_verify": "面试或试岗时验证：这里的冲突频率真实强度是多少？谁负责调节关系和处理冲突？",
+          "do_not_overread": "这是职业环境变量，不是具体职业推荐，也不用于招聘筛选。",
+          "interview_question": "我想了解这个岗位日常的冲突频率大概是什么水平？高压时通常如何分工和复盘？",
+          "role_observation_checklist": [
+            "一天内高互动时段数量",
+            "反馈是私下还是公开",
+            "冲突由个人消化还是团队处理",
+            "是否有低输入恢复窗口"
+          ],
+          "team_risk": "如果团队默认由高 EQ 的人承担关系维护，这个环境会把优势变成隐形负担。",
+          "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。"
+        },
+        "en": {
+          "label": "Conflict frequency: low",
+          "meaning": "How often disagreement, complaints, negotiation, or tension appear. This level is lower, slower, and more controlled.",
+          "fit_signal": "If your EQ pattern works best with clear rhythm and boundaries, low conflict frequency may support it; if your strengths need high interaction, verify that the environment provides enough of it.",
+          "strain_signal": "Strain increases when conflict frequency does not match recovery space, feedback style, or responsibility boundaries.",
+          "what_to_verify": "In interviews or trials, verify the real level of conflict frequency: who handles relationship tension and how conflict is reviewed.",
+          "do_not_overread": "This is a career-environment variable, not a job recommendation or hiring screen.",
+          "interview_question": "What is the usual level of conflict frequency in this role, and how does the team divide responsibility under pressure?",
+          "role_observation_checklist": [
+            "number of high-interaction periods in a day",
+            "private vs public feedback",
+            "whether conflict is handled individually or by the team",
+            "availability of low-input recovery windows"
+          ],
+          "team_risk": "If the team expects emotionally skilled people to maintain the relationship system, this environment can turn strength into invisible labor.",
+          "safe_experiment": "Observe rhythm and recovery space for one week before judging fit from a job title."
+        }
       },
       "medium": {
-        "zh-CN": {"label": "中等冲突频率", "meaning": "有周期性分歧，但通常有流程。", "fit_signal": "适合练习稳定沟通。", "strain_signal": "流程不清时会放大关系压力。", "what_to_verify": "确认冲突如何升级、记录和收口。"},
-        "en": {"label": "Medium Conflict Frequency", "meaning": "Periodic disagreement with some process.", "fit_signal": "Good for practicing steady communication.", "strain_signal": "Unclear process amplifies relational pressure.", "what_to_verify": "Check how conflict is escalated, recorded, and closed."}
+        "zh-CN": {
+          "label": "冲突频率：中",
+          "meaning": "分歧、投诉、谈判、博弈出现的频率。 当前档位表示有一定强度，但仍可通过规则管理。",
+          "fit_signal": "如果你的报告优势需要稳定节奏或清晰边界，冲突频率中档可能更容易发挥；如果你的优势来自高互动，也要确认机会是否足够。",
+          "strain_signal": "当冲突频率与恢复空间、反馈方式或责任边界不匹配时，容易放大消耗。",
+          "what_to_verify": "面试或试岗时验证：这里的冲突频率真实强度是多少？谁负责调节关系和处理冲突？",
+          "do_not_overread": "这是职业环境变量，不是具体职业推荐，也不用于招聘筛选。",
+          "interview_question": "我想了解这个岗位日常的冲突频率大概是什么水平？高压时通常如何分工和复盘？",
+          "role_observation_checklist": [
+            "一天内高互动时段数量",
+            "反馈是私下还是公开",
+            "冲突由个人消化还是团队处理",
+            "是否有低输入恢复窗口"
+          ],
+          "team_risk": "如果团队默认由高 EQ 的人承担关系维护，这个环境会把优势变成隐形负担。",
+          "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。"
+        },
+        "en": {
+          "label": "Conflict frequency: medium",
+          "meaning": "How often disagreement, complaints, negotiation, or tension appear. This level is moderate, but manageable with rules.",
+          "fit_signal": "If your EQ pattern works best with clear rhythm and boundaries, medium conflict frequency may support it; if your strengths need high interaction, verify that the environment provides enough of it.",
+          "strain_signal": "Strain increases when conflict frequency does not match recovery space, feedback style, or responsibility boundaries.",
+          "what_to_verify": "In interviews or trials, verify the real level of conflict frequency: who handles relationship tension and how conflict is reviewed.",
+          "do_not_overread": "This is a career-environment variable, not a job recommendation or hiring screen.",
+          "interview_question": "What is the usual level of conflict frequency in this role, and how does the team divide responsibility under pressure?",
+          "role_observation_checklist": [
+            "number of high-interaction periods in a day",
+            "private vs public feedback",
+            "whether conflict is handled individually or by the team",
+            "availability of low-input recovery windows"
+          ],
+          "team_risk": "If the team expects emotionally skilled people to maintain the relationship system, this environment can turn strength into invisible labor.",
+          "safe_experiment": "Observe rhythm and recovery space for one week before judging fit from a job title."
+        }
       },
       "high": {
-        "zh-CN": {"label": "高冲突频率", "meaning": "经常面对投诉、博弈、谈判或利益冲突。", "fit_signal": "高调节和高关系管理者可发挥优势。", "strain_signal": "ER 或 RM 低时消耗显著。", "what_to_verify": "确认是否有明确授权、边界和复盘支持。"},
-        "en": {"label": "High Conflict Frequency", "meaning": "Frequent complaints, negotiation, bargaining, or interest conflict.", "fit_signal": "High ER and RM can become strengths.", "strain_signal": "Low ER or RM is costly here.", "what_to_verify": "Check whether authority, boundaries, and review support are clear."}
+        "zh-CN": {
+          "label": "冲突频率：高",
+          "meaning": "分歧、投诉、谈判、博弈出现的频率。 当前档位表示强度高、频率高，对恢复和边界要求更高。",
+          "fit_signal": "如果你的报告优势需要稳定节奏或清晰边界，冲突频率高档可能更容易发挥；如果你的优势来自高互动，也要确认机会是否足够。",
+          "strain_signal": "当冲突频率与恢复空间、反馈方式或责任边界不匹配时，容易放大消耗。",
+          "what_to_verify": "面试或试岗时验证：这里的冲突频率真实强度是多少？谁负责调节关系和处理冲突？",
+          "do_not_overread": "这是职业环境变量，不是具体职业推荐，也不用于招聘筛选。",
+          "interview_question": "我想了解这个岗位日常的冲突频率大概是什么水平？高压时通常如何分工和复盘？",
+          "role_observation_checklist": [
+            "一天内高互动时段数量",
+            "反馈是私下还是公开",
+            "冲突由个人消化还是团队处理",
+            "是否有低输入恢复窗口"
+          ],
+          "team_risk": "如果团队默认由高 EQ 的人承担关系维护，这个环境会把优势变成隐形负担。",
+          "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。"
+        },
+        "en": {
+          "label": "Conflict frequency: high",
+          "meaning": "How often disagreement, complaints, negotiation, or tension appear. This level is high intensity and frequency, requiring stronger recovery and boundaries.",
+          "fit_signal": "If your EQ pattern works best with clear rhythm and boundaries, high conflict frequency may support it; if your strengths need high interaction, verify that the environment provides enough of it.",
+          "strain_signal": "Strain increases when conflict frequency does not match recovery space, feedback style, or responsibility boundaries.",
+          "what_to_verify": "In interviews or trials, verify the real level of conflict frequency: who handles relationship tension and how conflict is reviewed.",
+          "do_not_overread": "This is a career-environment variable, not a job recommendation or hiring screen.",
+          "interview_question": "What is the usual level of conflict frequency in this role, and how does the team divide responsibility under pressure?",
+          "role_observation_checklist": [
+            "number of high-interaction periods in a day",
+            "private vs public feedback",
+            "whether conflict is handled individually or by the team",
+            "availability of low-input recovery windows"
+          ],
+          "team_risk": "If the team expects emotionally skilled people to maintain the relationship system, this environment can turn strength into invisible labor.",
+          "safe_experiment": "Observe rhythm and recovery space for one week before judging fit from a job title."
+        }
       }
     },
     "feedback_intensity": {
       "low": {
-        "zh-CN": {"label": "低反馈强度", "meaning": "评价和修改频率较低。", "fit_signal": "适合对评价敏感且需要稳定节奏的人。", "strain_signal": "成长反馈可能不足。", "what_to_verify": "确认是否仍有清晰目标和周期复盘。"},
-        "en": {"label": "Low Feedback Intensity", "meaning": "Evaluation and revision are less frequent.", "fit_signal": "Fits people sensitive to evaluation who need a steadier rhythm.", "strain_signal": "Growth feedback may be insufficient.", "what_to_verify": "Check whether clear goals and periodic review still exist."}
+        "zh-CN": {
+          "label": "反馈强度：低",
+          "meaning": "你被评价、修改、复盘或公开比较的频率。 当前档位表示更少、更慢、更可控。",
+          "fit_signal": "如果你的报告优势需要稳定节奏或清晰边界，反馈强度低档可能更容易发挥；如果你的优势来自高互动，也要确认机会是否足够。",
+          "strain_signal": "当反馈强度与恢复空间、反馈方式或责任边界不匹配时，容易放大消耗。",
+          "what_to_verify": "面试或试岗时验证：这里的反馈强度真实强度是多少？谁负责调节关系和处理冲突？",
+          "do_not_overread": "这是职业环境变量，不是具体职业推荐，也不用于招聘筛选。",
+          "interview_question": "我想了解这个岗位日常的反馈强度大概是什么水平？高压时通常如何分工和复盘？",
+          "role_observation_checklist": [
+            "一天内高互动时段数量",
+            "反馈是私下还是公开",
+            "冲突由个人消化还是团队处理",
+            "是否有低输入恢复窗口"
+          ],
+          "team_risk": "如果团队默认由高 EQ 的人承担关系维护，这个环境会把优势变成隐形负担。",
+          "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。"
+        },
+        "en": {
+          "label": "Feedback intensity: low",
+          "meaning": "How often your work is evaluated, revised, reviewed, or compared. This level is lower, slower, and more controlled.",
+          "fit_signal": "If your EQ pattern works best with clear rhythm and boundaries, low feedback intensity may support it; if your strengths need high interaction, verify that the environment provides enough of it.",
+          "strain_signal": "Strain increases when feedback intensity does not match recovery space, feedback style, or responsibility boundaries.",
+          "what_to_verify": "In interviews or trials, verify the real level of feedback intensity: who handles relationship tension and how conflict is reviewed.",
+          "do_not_overread": "This is a career-environment variable, not a job recommendation or hiring screen.",
+          "interview_question": "What is the usual level of feedback intensity in this role, and how does the team divide responsibility under pressure?",
+          "role_observation_checklist": [
+            "number of high-interaction periods in a day",
+            "private vs public feedback",
+            "whether conflict is handled individually or by the team",
+            "availability of low-input recovery windows"
+          ],
+          "team_risk": "If the team expects emotionally skilled people to maintain the relationship system, this environment can turn strength into invisible labor.",
+          "safe_experiment": "Observe rhythm and recovery space for one week before judging fit from a job title."
+        }
       },
       "medium": {
-        "zh-CN": {"label": "中等反馈强度", "meaning": "定期复盘、修改和评价。", "fit_signal": "适合把反馈转成学习。", "strain_signal": "恢复不足时可能反复回想。", "what_to_verify": "确认反馈是否具体、可执行、不过度公开。"},
-        "en": {"label": "Medium Feedback Intensity", "meaning": "Regular review, revision, and evaluation.", "fit_signal": "Fits turning feedback into learning.", "strain_signal": "Weak recovery may lead to replaying feedback.", "what_to_verify": "Check whether feedback is specific, actionable, and not overly public."}
+        "zh-CN": {
+          "label": "反馈强度：中",
+          "meaning": "你被评价、修改、复盘或公开比较的频率。 当前档位表示有一定强度，但仍可通过规则管理。",
+          "fit_signal": "如果你的报告优势需要稳定节奏或清晰边界，反馈强度中档可能更容易发挥；如果你的优势来自高互动，也要确认机会是否足够。",
+          "strain_signal": "当反馈强度与恢复空间、反馈方式或责任边界不匹配时，容易放大消耗。",
+          "what_to_verify": "面试或试岗时验证：这里的反馈强度真实强度是多少？谁负责调节关系和处理冲突？",
+          "do_not_overread": "这是职业环境变量，不是具体职业推荐，也不用于招聘筛选。",
+          "interview_question": "我想了解这个岗位日常的反馈强度大概是什么水平？高压时通常如何分工和复盘？",
+          "role_observation_checklist": [
+            "一天内高互动时段数量",
+            "反馈是私下还是公开",
+            "冲突由个人消化还是团队处理",
+            "是否有低输入恢复窗口"
+          ],
+          "team_risk": "如果团队默认由高 EQ 的人承担关系维护，这个环境会把优势变成隐形负担。",
+          "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。"
+        },
+        "en": {
+          "label": "Feedback intensity: medium",
+          "meaning": "How often your work is evaluated, revised, reviewed, or compared. This level is moderate, but manageable with rules.",
+          "fit_signal": "If your EQ pattern works best with clear rhythm and boundaries, medium feedback intensity may support it; if your strengths need high interaction, verify that the environment provides enough of it.",
+          "strain_signal": "Strain increases when feedback intensity does not match recovery space, feedback style, or responsibility boundaries.",
+          "what_to_verify": "In interviews or trials, verify the real level of feedback intensity: who handles relationship tension and how conflict is reviewed.",
+          "do_not_overread": "This is a career-environment variable, not a job recommendation or hiring screen.",
+          "interview_question": "What is the usual level of feedback intensity in this role, and how does the team divide responsibility under pressure?",
+          "role_observation_checklist": [
+            "number of high-interaction periods in a day",
+            "private vs public feedback",
+            "whether conflict is handled individually or by the team",
+            "availability of low-input recovery windows"
+          ],
+          "team_risk": "If the team expects emotionally skilled people to maintain the relationship system, this environment can turn strength into invisible labor.",
+          "safe_experiment": "Observe rhythm and recovery space for one week before judging fit from a job title."
+        }
       },
       "high": {
-        "zh-CN": {"label": "高反馈强度", "meaning": "频繁被评价、迭代或公开比较。", "fit_signal": "高觉察和高调节者可快速迭代。", "strain_signal": "低调节者容易把反馈体验成否定。", "what_to_verify": "确认是否有安全反馈文化和恢复空间。"},
-        "en": {"label": "High Feedback Intensity", "meaning": "Frequent evaluation, iteration, or public comparison.", "fit_signal": "High SA and ER can support fast iteration.", "strain_signal": "Low ER may make feedback feel like rejection.", "what_to_verify": "Check for a safe feedback culture and recovery space."}
+        "zh-CN": {
+          "label": "反馈强度：高",
+          "meaning": "你被评价、修改、复盘或公开比较的频率。 当前档位表示强度高、频率高，对恢复和边界要求更高。",
+          "fit_signal": "如果你的报告优势需要稳定节奏或清晰边界，反馈强度高档可能更容易发挥；如果你的优势来自高互动，也要确认机会是否足够。",
+          "strain_signal": "当反馈强度与恢复空间、反馈方式或责任边界不匹配时，容易放大消耗。",
+          "what_to_verify": "面试或试岗时验证：这里的反馈强度真实强度是多少？谁负责调节关系和处理冲突？",
+          "do_not_overread": "这是职业环境变量，不是具体职业推荐，也不用于招聘筛选。",
+          "interview_question": "我想了解这个岗位日常的反馈强度大概是什么水平？高压时通常如何分工和复盘？",
+          "role_observation_checklist": [
+            "一天内高互动时段数量",
+            "反馈是私下还是公开",
+            "冲突由个人消化还是团队处理",
+            "是否有低输入恢复窗口"
+          ],
+          "team_risk": "如果团队默认由高 EQ 的人承担关系维护，这个环境会把优势变成隐形负担。",
+          "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。"
+        },
+        "en": {
+          "label": "Feedback intensity: high",
+          "meaning": "How often your work is evaluated, revised, reviewed, or compared. This level is high intensity and frequency, requiring stronger recovery and boundaries.",
+          "fit_signal": "If your EQ pattern works best with clear rhythm and boundaries, high feedback intensity may support it; if your strengths need high interaction, verify that the environment provides enough of it.",
+          "strain_signal": "Strain increases when feedback intensity does not match recovery space, feedback style, or responsibility boundaries.",
+          "what_to_verify": "In interviews or trials, verify the real level of feedback intensity: who handles relationship tension and how conflict is reviewed.",
+          "do_not_overread": "This is a career-environment variable, not a job recommendation or hiring screen.",
+          "interview_question": "What is the usual level of feedback intensity in this role, and how does the team divide responsibility under pressure?",
+          "role_observation_checklist": [
+            "number of high-interaction periods in a day",
+            "private vs public feedback",
+            "whether conflict is handled individually or by the team",
+            "availability of low-input recovery windows"
+          ],
+          "team_risk": "If the team expects emotionally skilled people to maintain the relationship system, this environment can turn strength into invisible labor.",
+          "safe_experiment": "Observe rhythm and recovery space for one week before judging fit from a job title."
+        }
       }
     },
     "autonomy_recovery": {
       "low": {
-        "zh-CN": {"label": "低自主恢复空间", "meaning": "节奏常被外部打断，难以独处恢复。", "fit_signal": "适合恢复需求低且即时响应强的人。", "strain_signal": "高共情低恢复者风险较高。", "what_to_verify": "确认是否允许暂停、调班或离线恢复。"},
-        "en": {"label": "Low Autonomy Recovery", "meaning": "Rhythm is often interrupted, with little solo recovery.", "fit_signal": "Fits people with low recovery needs and strong real-time response.", "strain_signal": "High empathy with low recovery is risky here.", "what_to_verify": "Check whether pauses, shift changes, or offline recovery are allowed."}
+        "zh-CN": {
+          "label": "自主恢复空间：低",
+          "meaning": "你是否能安排独处、节奏和低输入恢复时间。 当前档位表示更少、更慢、更可控。",
+          "fit_signal": "如果你的报告优势需要稳定节奏或清晰边界，自主恢复空间低档可能更容易发挥；如果你的优势来自高互动，也要确认机会是否足够。",
+          "strain_signal": "当自主恢复空间与恢复空间、反馈方式或责任边界不匹配时，容易放大消耗。",
+          "what_to_verify": "面试或试岗时验证：这里的自主恢复空间真实强度是多少？谁负责调节关系和处理冲突？",
+          "do_not_overread": "这是职业环境变量，不是具体职业推荐，也不用于招聘筛选。",
+          "interview_question": "我想了解这个岗位日常的自主恢复空间大概是什么水平？高压时通常如何分工和复盘？",
+          "role_observation_checklist": [
+            "一天内高互动时段数量",
+            "反馈是私下还是公开",
+            "冲突由个人消化还是团队处理",
+            "是否有低输入恢复窗口"
+          ],
+          "team_risk": "如果团队默认由高 EQ 的人承担关系维护，这个环境会把优势变成隐形负担。",
+          "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。"
+        },
+        "en": {
+          "label": "Autonomy and recovery: low",
+          "meaning": "How much control you have over solitude, rhythm, and low-input recovery. This level is lower, slower, and more controlled.",
+          "fit_signal": "If your EQ pattern works best with clear rhythm and boundaries, low autonomy and recovery may support it; if your strengths need high interaction, verify that the environment provides enough of it.",
+          "strain_signal": "Strain increases when autonomy and recovery does not match recovery space, feedback style, or responsibility boundaries.",
+          "what_to_verify": "In interviews or trials, verify the real level of autonomy and recovery: who handles relationship tension and how conflict is reviewed.",
+          "do_not_overread": "This is a career-environment variable, not a job recommendation or hiring screen.",
+          "interview_question": "What is the usual level of autonomy and recovery in this role, and how does the team divide responsibility under pressure?",
+          "role_observation_checklist": [
+            "number of high-interaction periods in a day",
+            "private vs public feedback",
+            "whether conflict is handled individually or by the team",
+            "availability of low-input recovery windows"
+          ],
+          "team_risk": "If the team expects emotionally skilled people to maintain the relationship system, this environment can turn strength into invisible labor.",
+          "safe_experiment": "Observe rhythm and recovery space for one week before judging fit from a job title."
+        }
       },
       "medium": {
-        "zh-CN": {"label": "中等自主恢复空间", "meaning": "有一定独立安排，但仍受团队节奏影响。", "fit_signal": "适合多数人维持稳定表现。", "strain_signal": "忙季或危机期可能被压缩。", "what_to_verify": "确认高峰期的恢复安排。"},
-        "en": {"label": "Medium Autonomy Recovery", "meaning": "Some independent rhythm exists, though team rhythm still matters.", "fit_signal": "Helps most people sustain performance.", "strain_signal": "Busy or crisis periods may compress it.", "what_to_verify": "Check recovery arrangements during peak periods."}
+        "zh-CN": {
+          "label": "自主恢复空间：中",
+          "meaning": "你是否能安排独处、节奏和低输入恢复时间。 当前档位表示有一定强度，但仍可通过规则管理。",
+          "fit_signal": "如果你的报告优势需要稳定节奏或清晰边界，自主恢复空间中档可能更容易发挥；如果你的优势来自高互动，也要确认机会是否足够。",
+          "strain_signal": "当自主恢复空间与恢复空间、反馈方式或责任边界不匹配时，容易放大消耗。",
+          "what_to_verify": "面试或试岗时验证：这里的自主恢复空间真实强度是多少？谁负责调节关系和处理冲突？",
+          "do_not_overread": "这是职业环境变量，不是具体职业推荐，也不用于招聘筛选。",
+          "interview_question": "我想了解这个岗位日常的自主恢复空间大概是什么水平？高压时通常如何分工和复盘？",
+          "role_observation_checklist": [
+            "一天内高互动时段数量",
+            "反馈是私下还是公开",
+            "冲突由个人消化还是团队处理",
+            "是否有低输入恢复窗口"
+          ],
+          "team_risk": "如果团队默认由高 EQ 的人承担关系维护，这个环境会把优势变成隐形负担。",
+          "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。"
+        },
+        "en": {
+          "label": "Autonomy and recovery: medium",
+          "meaning": "How much control you have over solitude, rhythm, and low-input recovery. This level is moderate, but manageable with rules.",
+          "fit_signal": "If your EQ pattern works best with clear rhythm and boundaries, medium autonomy and recovery may support it; if your strengths need high interaction, verify that the environment provides enough of it.",
+          "strain_signal": "Strain increases when autonomy and recovery does not match recovery space, feedback style, or responsibility boundaries.",
+          "what_to_verify": "In interviews or trials, verify the real level of autonomy and recovery: who handles relationship tension and how conflict is reviewed.",
+          "do_not_overread": "This is a career-environment variable, not a job recommendation or hiring screen.",
+          "interview_question": "What is the usual level of autonomy and recovery in this role, and how does the team divide responsibility under pressure?",
+          "role_observation_checklist": [
+            "number of high-interaction periods in a day",
+            "private vs public feedback",
+            "whether conflict is handled individually or by the team",
+            "availability of low-input recovery windows"
+          ],
+          "team_risk": "If the team expects emotionally skilled people to maintain the relationship system, this environment can turn strength into invisible labor.",
+          "safe_experiment": "Observe rhythm and recovery space for one week before judging fit from a job title."
+        }
       },
       "high": {
-        "zh-CN": {"label": "高自主恢复空间", "meaning": "可以较多控制节奏、沟通窗口和深度工作时间。", "fit_signal": "有利于敏感、深度复盘或高恢复需求者。", "strain_signal": "也可能带来孤立或反馈不足。", "what_to_verify": "确认独立性不会变成缺少支持。"},
-        "en": {"label": "High Autonomy Recovery", "meaning": "More control over rhythm, communication windows, and deep-work time.", "fit_signal": "Helpful for sensitive, reflective, or high-recovery-need people.", "strain_signal": "Can also create isolation or insufficient feedback.", "what_to_verify": "Check that autonomy does not mean lack of support."}
+        "zh-CN": {
+          "label": "自主恢复空间：高",
+          "meaning": "你是否能安排独处、节奏和低输入恢复时间。 当前档位表示强度高、频率高，对恢复和边界要求更高。",
+          "fit_signal": "如果你的报告优势需要稳定节奏或清晰边界，自主恢复空间高档可能更容易发挥；如果你的优势来自高互动，也要确认机会是否足够。",
+          "strain_signal": "当自主恢复空间与恢复空间、反馈方式或责任边界不匹配时，容易放大消耗。",
+          "what_to_verify": "面试或试岗时验证：这里的自主恢复空间真实强度是多少？谁负责调节关系和处理冲突？",
+          "do_not_overread": "这是职业环境变量，不是具体职业推荐，也不用于招聘筛选。",
+          "interview_question": "我想了解这个岗位日常的自主恢复空间大概是什么水平？高压时通常如何分工和复盘？",
+          "role_observation_checklist": [
+            "一天内高互动时段数量",
+            "反馈是私下还是公开",
+            "冲突由个人消化还是团队处理",
+            "是否有低输入恢复窗口"
+          ],
+          "team_risk": "如果团队默认由高 EQ 的人承担关系维护，这个环境会把优势变成隐形负担。",
+          "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。"
+        },
+        "en": {
+          "label": "Autonomy and recovery: high",
+          "meaning": "How much control you have over solitude, rhythm, and low-input recovery. This level is high intensity and frequency, requiring stronger recovery and boundaries.",
+          "fit_signal": "If your EQ pattern works best with clear rhythm and boundaries, high autonomy and recovery may support it; if your strengths need high interaction, verify that the environment provides enough of it.",
+          "strain_signal": "Strain increases when autonomy and recovery does not match recovery space, feedback style, or responsibility boundaries.",
+          "what_to_verify": "In interviews or trials, verify the real level of autonomy and recovery: who handles relationship tension and how conflict is reviewed.",
+          "do_not_overread": "This is a career-environment variable, not a job recommendation or hiring screen.",
+          "interview_question": "What is the usual level of autonomy and recovery in this role, and how does the team divide responsibility under pressure?",
+          "role_observation_checklist": [
+            "number of high-interaction periods in a day",
+            "private vs public feedback",
+            "whether conflict is handled individually or by the team",
+            "availability of low-input recovery windows"
+          ],
+          "team_risk": "If the team expects emotionally skilled people to maintain the relationship system, this environment can turn strength into invisible labor.",
+          "safe_experiment": "Observe rhythm and recovery space for one week before judging fit from a job title."
+        }
       }
     },
     "collaboration_complexity": {
       "low": {
-        "zh-CN": {"label": "低协作复杂度", "meaning": "角色、接口和责任较清楚。", "fit_signal": "降低关系误解和协调成本。", "strain_signal": "可能较少发挥复杂协调优势。", "what_to_verify": "确认职责是否稳定且边界清楚。"},
-        "en": {"label": "Low Collaboration Complexity", "meaning": "Roles, interfaces, and responsibilities are clear.", "fit_signal": "Lowers misunderstanding and coordination cost.", "strain_signal": "May offer less space for complex coordination strengths.", "what_to_verify": "Check whether responsibilities are stable and boundaries clear."}
+        "zh-CN": {
+          "label": "协作复杂度：低",
+          "meaning": "你需要协调多少角色、目标和隐性关系规则。 当前档位表示更少、更慢、更可控。",
+          "fit_signal": "如果你的报告优势需要稳定节奏或清晰边界，协作复杂度低档可能更容易发挥；如果你的优势来自高互动，也要确认机会是否足够。",
+          "strain_signal": "当协作复杂度与恢复空间、反馈方式或责任边界不匹配时，容易放大消耗。",
+          "what_to_verify": "面试或试岗时验证：这里的协作复杂度真实强度是多少？谁负责调节关系和处理冲突？",
+          "do_not_overread": "这是职业环境变量，不是具体职业推荐，也不用于招聘筛选。",
+          "interview_question": "我想了解这个岗位日常的协作复杂度大概是什么水平？高压时通常如何分工和复盘？",
+          "role_observation_checklist": [
+            "一天内高互动时段数量",
+            "反馈是私下还是公开",
+            "冲突由个人消化还是团队处理",
+            "是否有低输入恢复窗口"
+          ],
+          "team_risk": "如果团队默认由高 EQ 的人承担关系维护，这个环境会把优势变成隐形负担。",
+          "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。"
+        },
+        "en": {
+          "label": "Collaboration complexity: low",
+          "meaning": "How many roles, goals, and unstated relational rules you must coordinate. This level is lower, slower, and more controlled.",
+          "fit_signal": "If your EQ pattern works best with clear rhythm and boundaries, low collaboration complexity may support it; if your strengths need high interaction, verify that the environment provides enough of it.",
+          "strain_signal": "Strain increases when collaboration complexity does not match recovery space, feedback style, or responsibility boundaries.",
+          "what_to_verify": "In interviews or trials, verify the real level of collaboration complexity: who handles relationship tension and how conflict is reviewed.",
+          "do_not_overread": "This is a career-environment variable, not a job recommendation or hiring screen.",
+          "interview_question": "What is the usual level of collaboration complexity in this role, and how does the team divide responsibility under pressure?",
+          "role_observation_checklist": [
+            "number of high-interaction periods in a day",
+            "private vs public feedback",
+            "whether conflict is handled individually or by the team",
+            "availability of low-input recovery windows"
+          ],
+          "team_risk": "If the team expects emotionally skilled people to maintain the relationship system, this environment can turn strength into invisible labor.",
+          "safe_experiment": "Observe rhythm and recovery space for one week before judging fit from a job title."
+        }
       },
       "medium": {
-        "zh-CN": {"label": "中等协作复杂度", "meaning": "需要跨角色协作，但仍有明确流程。", "fit_signal": "适合练习关系管理和反馈沟通。", "strain_signal": "流程缺失时容易消耗。", "what_to_verify": "确认决策权、优先级和冲突处理方式。"},
-        "en": {"label": "Medium Collaboration Complexity", "meaning": "Cross-role collaboration is needed with some clear process.", "fit_signal": "Good for practicing relationship management and feedback communication.", "strain_signal": "Missing process can be draining.", "what_to_verify": "Check decision rights, priorities, and conflict-handling process."}
+        "zh-CN": {
+          "label": "协作复杂度：中",
+          "meaning": "你需要协调多少角色、目标和隐性关系规则。 当前档位表示有一定强度，但仍可通过规则管理。",
+          "fit_signal": "如果你的报告优势需要稳定节奏或清晰边界，协作复杂度中档可能更容易发挥；如果你的优势来自高互动，也要确认机会是否足够。",
+          "strain_signal": "当协作复杂度与恢复空间、反馈方式或责任边界不匹配时，容易放大消耗。",
+          "what_to_verify": "面试或试岗时验证：这里的协作复杂度真实强度是多少？谁负责调节关系和处理冲突？",
+          "do_not_overread": "这是职业环境变量，不是具体职业推荐，也不用于招聘筛选。",
+          "interview_question": "我想了解这个岗位日常的协作复杂度大概是什么水平？高压时通常如何分工和复盘？",
+          "role_observation_checklist": [
+            "一天内高互动时段数量",
+            "反馈是私下还是公开",
+            "冲突由个人消化还是团队处理",
+            "是否有低输入恢复窗口"
+          ],
+          "team_risk": "如果团队默认由高 EQ 的人承担关系维护，这个环境会把优势变成隐形负担。",
+          "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。"
+        },
+        "en": {
+          "label": "Collaboration complexity: medium",
+          "meaning": "How many roles, goals, and unstated relational rules you must coordinate. This level is moderate, but manageable with rules.",
+          "fit_signal": "If your EQ pattern works best with clear rhythm and boundaries, medium collaboration complexity may support it; if your strengths need high interaction, verify that the environment provides enough of it.",
+          "strain_signal": "Strain increases when collaboration complexity does not match recovery space, feedback style, or responsibility boundaries.",
+          "what_to_verify": "In interviews or trials, verify the real level of collaboration complexity: who handles relationship tension and how conflict is reviewed.",
+          "do_not_overread": "This is a career-environment variable, not a job recommendation or hiring screen.",
+          "interview_question": "What is the usual level of collaboration complexity in this role, and how does the team divide responsibility under pressure?",
+          "role_observation_checklist": [
+            "number of high-interaction periods in a day",
+            "private vs public feedback",
+            "whether conflict is handled individually or by the team",
+            "availability of low-input recovery windows"
+          ],
+          "team_risk": "If the team expects emotionally skilled people to maintain the relationship system, this environment can turn strength into invisible labor.",
+          "safe_experiment": "Observe rhythm and recovery space for one week before judging fit from a job title."
+        }
       },
       "high": {
-        "zh-CN": {"label": "高协作复杂度", "meaning": "多方目标、利益和节奏需要持续协调。", "fit_signal": "高 RM 与稳定 ER 能发挥明显优势。", "strain_signal": "边界不清时容易长期过载。", "what_to_verify": "确认是否有正式协调机制和优先级裁决。"},
-        "en": {"label": "High Collaboration Complexity", "meaning": "Multiple goals, interests, and rhythms require ongoing coordination.", "fit_signal": "High RM and stable ER can become clear strengths.", "strain_signal": "Unclear boundaries can cause chronic overload.", "what_to_verify": "Check formal coordination mechanisms and priority arbitration."}
+        "zh-CN": {
+          "label": "协作复杂度：高",
+          "meaning": "你需要协调多少角色、目标和隐性关系规则。 当前档位表示强度高、频率高，对恢复和边界要求更高。",
+          "fit_signal": "如果你的报告优势需要稳定节奏或清晰边界，协作复杂度高档可能更容易发挥；如果你的优势来自高互动，也要确认机会是否足够。",
+          "strain_signal": "当协作复杂度与恢复空间、反馈方式或责任边界不匹配时，容易放大消耗。",
+          "what_to_verify": "面试或试岗时验证：这里的协作复杂度真实强度是多少？谁负责调节关系和处理冲突？",
+          "do_not_overread": "这是职业环境变量，不是具体职业推荐，也不用于招聘筛选。",
+          "interview_question": "我想了解这个岗位日常的协作复杂度大概是什么水平？高压时通常如何分工和复盘？",
+          "role_observation_checklist": [
+            "一天内高互动时段数量",
+            "反馈是私下还是公开",
+            "冲突由个人消化还是团队处理",
+            "是否有低输入恢复窗口"
+          ],
+          "team_risk": "如果团队默认由高 EQ 的人承担关系维护，这个环境会把优势变成隐形负担。",
+          "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。"
+        },
+        "en": {
+          "label": "Collaboration complexity: high",
+          "meaning": "How many roles, goals, and unstated relational rules you must coordinate. This level is high intensity and frequency, requiring stronger recovery and boundaries.",
+          "fit_signal": "If your EQ pattern works best with clear rhythm and boundaries, high collaboration complexity may support it; if your strengths need high interaction, verify that the environment provides enough of it.",
+          "strain_signal": "Strain increases when collaboration complexity does not match recovery space, feedback style, or responsibility boundaries.",
+          "what_to_verify": "In interviews or trials, verify the real level of collaboration complexity: who handles relationship tension and how conflict is reviewed.",
+          "do_not_overread": "This is a career-environment variable, not a job recommendation or hiring screen.",
+          "interview_question": "What is the usual level of collaboration complexity in this role, and how does the team divide responsibility under pressure?",
+          "role_observation_checklist": [
+            "number of high-interaction periods in a day",
+            "private vs public feedback",
+            "whether conflict is handled individually or by the team",
+            "availability of low-input recovery windows"
+          ],
+          "team_risk": "If the team expects emotionally skilled people to maintain the relationship system, this environment can turn strength into invisible labor.",
+          "safe_experiment": "Observe rhythm and recovery space for one week before judging fit from a job title."
+        }
       }
     }
   }

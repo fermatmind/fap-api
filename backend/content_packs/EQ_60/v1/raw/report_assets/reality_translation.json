@@ -4,98 +4,1608 @@
   "scenes": {
     "feedback": {
       "zh-CN": {
-        "title": "反馈场景",
-        "typical_response": "收到评价或修改意见时，你可能先捕捉语气和关系信号，再处理信息本身。",
-        "strength": "能注意到反馈背后的真实意图和关系温度。",
-        "cost": "如果恢复不足，容易把反馈体验成否定。",
-        "better_move": "先拆分事实、情绪和下一步：对方说了什么，我有什么感受，我要确认什么。"
+        "title": "反馈",
+        "typical_response": "收到反馈时，这次结果应轻一点读，最有价值的是理解本次作答状态。 你最容易受影响的不是分数本身，而是反馈背后的关系信号。",
+        "strength": "即使不适合强结论，也能提醒你观察最近的压力、疲劳或作答方式。",
+        "cost": "如果强行套用画像，可能比不看结果更误导。",
+        "better_move": "先问清反馈指向，再决定解释或调整。",
+        "context": "别人指出问题、要求修改或评价你的表现时。",
+        "one_sentence_script": "我想先确认一下，你最希望我调整的是结果、过程，还是沟通方式？",
+        "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。",
+        "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。"
       },
       "en": {
         "title": "Feedback",
-        "typical_response": "When receiving critique or edits, you may notice tone and relational cues before processing the information.",
-        "strength": "You can notice intent and relational temperature behind feedback.",
-        "cost": "When recovery is weak, feedback may feel like rejection.",
-        "better_move": "Separate facts, feeling, and next step: what was said, what I feel, what I need to clarify."
+        "typical_response": "In feedback, Read this result lightly; the most useful signal is the response context of this session. The sensitive point is often not the score itself, but the relationship signal behind the feedback.",
+        "strength": "Even without a strong conclusion, it can point you toward stress, fatigue, or response style to observe.",
+        "cost": "Forcing a profile onto this result could be more misleading than useful.",
+        "better_move": "Clarify the target of the feedback before explaining or changing.",
+        "context": "When someone points out a problem, requests changes, or evaluates your work.",
+        "one_sentence_script": "Can I clarify whether you want me to change the outcome, the process, or the way I communicated?",
+        "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison.",
+        "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction."
       }
     },
     "conflict": {
       "zh-CN": {
-        "title": "冲突场景",
-        "typical_response": "出现分歧时，你可能在维护关系和表达自己之间摇摆。",
-        "strength": "有机会同时看见双方需求。",
-        "cost": "如果没有暂停流程，容易过度解释、回避或急于修复。",
-        "better_move": "先确认共同目标，再只讨论一个具体问题。"
+        "title": "冲突",
+        "typical_response": "冲突中，这次结果应轻一点读，最有价值的是理解本次作答状态。 这个模式会决定你是先稳住、先解释、先承接，还是先退出。",
+        "strength": "即使不适合强结论，也能提醒你观察最近的压力、疲劳或作答方式。",
+        "cost": "如果强行套用画像，可能比不看结果更误导。",
+        "better_move": "先把冲突缩小成一个可处理的问题。",
+        "context": "意见分歧、语气升高或彼此防御时。",
+        "one_sentence_script": "我们先把问题缩小到一个点：现在最需要解决的是什么？",
+        "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。",
+        "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。"
       },
       "en": {
         "title": "Conflict",
-        "typical_response": "During disagreement, you may move between preserving the relationship and expressing yourself.",
-        "strength": "You can often see needs on both sides.",
-        "cost": "Without a pause process, you may over-explain, avoid, or rush repair.",
-        "better_move": "Name the shared goal first, then discuss one specific issue."
+        "typical_response": "In conflict, Read this result lightly; the most useful signal is the response context of this session. This pattern shapes whether you stabilize, explain, absorb, or exit first.",
+        "strength": "Even without a strong conclusion, it can point you toward stress, fatigue, or response style to observe.",
+        "cost": "Forcing a profile onto this result could be more misleading than useful.",
+        "better_move": "Narrow the conflict to one workable issue first.",
+        "context": "When disagreement, sharper tone, or mutual defensiveness appears.",
+        "one_sentence_script": "Let’s narrow this to one issue: what needs to be solved first?",
+        "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison.",
+        "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction."
       }
     },
     "relationship_boundary": {
       "zh-CN": {
         "title": "关系边界",
-        "typical_response": "当别人需要你支持时，你可能很快进入理解或承担。",
-        "strength": "容易让对方感到被接住。",
-        "cost": "支持和代替之间的边界可能变模糊。",
-        "better_move": "先问自己：我能支持到哪里，哪一部分仍然属于对方。"
+        "typical_response": "边界场景里，如果强行套用画像，可能比不看结果更误导。 你需要把理解和可承接范围分开。",
+        "strength": "即使不适合强结论，也能提醒你观察最近的压力、疲劳或作答方式。",
+        "cost": "如果强行套用画像，可能比不看结果更误导。",
+        "better_move": "先承认对方感受，再说明自己的可承接范围。",
+        "context": "别人期待你理解、帮忙、让步或继续承接时。",
+        "one_sentence_script": "我理解这对你很重要，我现在能承接的是这一部分。",
+        "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。",
+        "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。"
       },
       "en": {
-        "title": "Relationship Boundaries",
-        "typical_response": "When someone needs support, you may quickly move into understanding or taking responsibility.",
-        "strength": "Others may feel received and understood.",
-        "cost": "The line between supporting and replacing can blur.",
-        "better_move": "Ask yourself: how far can I support, and which part remains theirs?"
+        "title": "Relationship boundary",
+        "typical_response": "In boundary moments, Forcing a profile onto this result could be more misleading than useful. The skill is separating understanding from what you can realistically take on.",
+        "strength": "Even without a strong conclusion, it can point you toward stress, fatigue, or response style to observe.",
+        "cost": "Forcing a profile onto this result could be more misleading than useful.",
+        "better_move": "Acknowledge the feeling, then state what you can realistically take on.",
+        "context": "When someone expects understanding, help, concession, or continued emotional availability.",
+        "one_sentence_script": "I understand this matters to you. What I can take on right now is this part.",
+        "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison.",
+        "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction."
       }
     },
     "team_collaboration": {
       "zh-CN": {
         "title": "团队协作",
-        "typical_response": "在多人协作中，你可能同时追踪任务、关系和现场情绪。",
-        "strength": "能发现协作中的隐性阻力。",
-        "cost": "如果总是主动协调，容易承担过多情绪劳动。",
-        "better_move": "把观察转成具体协作请求，而不是默默补位。"
+        "typical_response": "协作中，即使不适合强结论，也能提醒你观察最近的压力、疲劳或作答方式。 但如果规则不清，如果强行套用画像，可能比不看结果更误导。",
+        "strength": "即使不适合强结论，也能提醒你观察最近的压力、疲劳或作答方式。",
+        "cost": "如果强行套用画像，可能比不看结果更误导。",
+        "better_move": "把气氛问题转成角色、节奏和下一步。",
+        "context": "多人协作、目标不清或责任交叉时。",
+        "one_sentence_script": "我们先确认角色、截止时间和下一步，不让情绪替我们做决定。",
+        "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。",
+        "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。"
       },
       "en": {
-        "title": "Team Collaboration",
-        "typical_response": "In group work, you may track task, relationship, and emotional climate at the same time.",
-        "strength": "You can notice hidden friction in collaboration.",
-        "cost": "If you always coordinate, you may carry too much emotional labor.",
-        "better_move": "Turn observations into concrete collaboration requests instead of silently compensating."
+        "title": "Team collaboration",
+        "typical_response": "In collaboration, Even without a strong conclusion, it can point you toward stress, fatigue, or response style to observe. But when rules are unclear, forcing a profile onto this result could be more misleading than useful.",
+        "strength": "Even without a strong conclusion, it can point you toward stress, fatigue, or response style to observe.",
+        "cost": "Forcing a profile onto this result could be more misleading than useful.",
+        "better_move": "Turn emotional friction into roles, rhythm, and next steps.",
+        "context": "When several people collaborate with unclear goals or overlapping responsibility.",
+        "one_sentence_script": "Let’s clarify roles, timing, and the next step so emotion does not make the decision for us.",
+        "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison.",
+        "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction."
       }
     },
     "pressure_recovery": {
       "zh-CN": {
         "title": "压力恢复",
-        "typical_response": "高压后你可能仍在脑内回放对话、评价或细节。",
-        "strength": "复盘能力可以帮助你学习模式。",
-        "cost": "没有恢复边界时，复盘会变成反刍。",
-        "better_move": "给复盘设限：只写三个事实、一个感受、一个下次动作。"
+        "typical_response": "高压互动结束后，真正的信号是你多久能回到自己。对你来说，先记录状态，之后在更稳定的时间复测。",
+        "strength": "即使不适合强结论，也能提醒你观察最近的压力、疲劳或作答方式。",
+        "cost": "如果强行套用画像，可能比不看结果更误导。",
+        "better_move": "离开场景后安排一个低输入恢复动作。",
+        "context": "一段高压互动结束后，你需要重新回到自己。",
+        "one_sentence_script": "我需要十分钟低输入时间，之后再回来处理下一步。",
+        "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。",
+        "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。"
       },
       "en": {
-        "title": "Pressure Recovery",
-        "typical_response": "After pressure, you may replay conversations, judgments, or details in your head.",
-        "strength": "Review can help you learn patterns.",
-        "cost": "Without recovery boundaries, review turns into rumination.",
-        "better_move": "Limit review to three facts, one feeling, and one next action."
+        "title": "Pressure recovery",
+        "typical_response": "After pressure, the real signal is how long it takes to return to yourself. For this pattern, record the context first, then retest when conditions are steadier.",
+        "strength": "Even without a strong conclusion, it can point you toward stress, fatigue, or response style to observe.",
+        "cost": "Forcing a profile onto this result could be more misleading than useful.",
+        "better_move": "After the scene, schedule one low-input recovery move.",
+        "context": "After a high-pressure interaction, when you need to return to yourself.",
+        "one_sentence_script": "I need ten minutes of low input, then I can come back to the next step.",
+        "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison.",
+        "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction."
       }
     },
     "career_environment": {
       "zh-CN": {
         "title": "职业环境",
-        "typical_response": "你对岗位中的人际密度、情绪劳动和反馈强度会有不同消耗。",
-        "strength": "理解环境变量后，更容易选择适合自己的工作节奏。",
-        "cost": "只看职位名称，容易忽略真正消耗你的工作条件。",
-        "better_move": "评估岗位时优先询问互动频率、冲突频率和恢复空间。"
+        "typical_response": "选择环境时，重点不是哪个职业适合你，而是哪类互动密度、反馈强度和恢复空间会放大这个模式。",
+        "strength": "即使不适合强结论，也能提醒你观察最近的压力、疲劳或作答方式。",
+        "cost": "如果强行套用画像，可能比不看结果更误导。",
+        "better_move": "验证环境变量，不用 EQ 直接推导职业。",
+        "context": "你判断一个工作环境会滋养你还是消耗你时。",
+        "one_sentence_script": "我想验证这个环境的互动频率、反馈方式和恢复空间。",
+        "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。",
+        "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。"
       },
       "en": {
-        "title": "Career Environment",
-        "typical_response": "Interpersonal density, emotional labor, and feedback intensity can drain you differently across roles.",
-        "strength": "Understanding environmental variables helps you choose a better work rhythm.",
-        "cost": "Job titles alone can hide the conditions that actually drain you.",
-        "better_move": "When evaluating roles, ask about interaction frequency, conflict frequency, and recovery space."
+        "title": "Career environment",
+        "typical_response": "When choosing a work setting, the question is not which job fits you; it is which interaction density, feedback intensity, and recovery space amplify this pattern.",
+        "strength": "Even without a strong conclusion, it can point you toward stress, fatigue, or response style to observe.",
+        "cost": "Forcing a profile onto this result could be more misleading than useful.",
+        "better_move": "Verify environment variables instead of deriving a job from EQ.",
+        "context": "When you judge whether a work setting will support or drain your emotional pattern.",
+        "one_sentence_script": "I want to verify the interaction pace, feedback style, and recovery space in this environment.",
+        "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison.",
+        "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction."
+      }
+    }
+  },
+  "formulation_scenes": {
+    "balanced_integrated": {
+      "feedback": {
+        "zh-CN": {
+          "scene_label": "反馈",
+          "context": "别人指出问题、要求修改或评价你的表现时。",
+          "typical_response": "收到反馈时，你能同时照顾自己的状态、他人的感受和关系目标。 你最容易受影响的不是分数本身，而是反馈背后的关系信号。",
+          "strength": "你能把情绪、关系和任务放在同一个画面里思考。",
+          "cost": "别人可能默认你来稳定局面，久了会变成隐形情绪劳动。",
+          "better_move": "先问清反馈指向，再决定解释或调整。",
+          "one_sentence_script": "我想先确认一下，你最希望我调整的是结果、过程，还是沟通方式？",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Feedback",
+          "context": "When someone points out a problem, requests changes, or evaluates your work.",
+          "typical_response": "In feedback, You can hold your own state, other people, and the relationship goal in view at the same time. The sensitive point is often not the score itself, but the relationship signal behind the feedback.",
+          "strength": "You can keep emotion, relationship, and task in the same frame.",
+          "cost": "Others may quietly expect you to stabilize the room, turning your steadiness into hidden labor.",
+          "better_move": "Clarify the target of the feedback before explaining or changing.",
+          "one_sentence_script": "Can I clarify whether you want me to change the outcome, the process, or the way I communicated?",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "conflict": {
+        "zh-CN": {
+          "scene_label": "冲突",
+          "context": "意见分歧、语气升高或彼此防御时。",
+          "typical_response": "冲突中，你能同时照顾自己的状态、他人的感受和关系目标。 这个模式会决定你是先稳住、先解释、先承接，还是先退出。",
+          "strength": "你能把情绪、关系和任务放在同一个画面里思考。",
+          "cost": "别人可能默认你来稳定局面，久了会变成隐形情绪劳动。",
+          "better_move": "先把冲突缩小成一个可处理的问题。",
+          "one_sentence_script": "我们先把问题缩小到一个点：现在最需要解决的是什么？",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Conflict",
+          "context": "When disagreement, sharper tone, or mutual defensiveness appears.",
+          "typical_response": "In conflict, You can hold your own state, other people, and the relationship goal in view at the same time. This pattern shapes whether you stabilize, explain, absorb, or exit first.",
+          "strength": "You can keep emotion, relationship, and task in the same frame.",
+          "cost": "Others may quietly expect you to stabilize the room, turning your steadiness into hidden labor.",
+          "better_move": "Narrow the conflict to one workable issue first.",
+          "one_sentence_script": "Let’s narrow this to one issue: what needs to be solved first?",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "relationship_boundary": {
+        "zh-CN": {
+          "scene_label": "关系边界",
+          "context": "别人期待你理解、帮忙、让步或继续承接时。",
+          "typical_response": "边界场景里，别人可能默认你来稳定局面，久了会变成隐形情绪劳动。 你需要把理解和可承接范围分开。",
+          "strength": "你能把情绪、关系和任务放在同一个画面里思考。",
+          "cost": "别人可能默认你来稳定局面，久了会变成隐形情绪劳动。",
+          "better_move": "先承认对方感受，再说明自己的可承接范围。",
+          "one_sentence_script": "我理解这对你很重要，我现在能承接的是这一部分。",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Relationship boundary",
+          "context": "When someone expects understanding, help, concession, or continued emotional availability.",
+          "typical_response": "In boundary moments, Others may quietly expect you to stabilize the room, turning your steadiness into hidden labor. The skill is separating understanding from what you can realistically take on.",
+          "strength": "You can keep emotion, relationship, and task in the same frame.",
+          "cost": "Others may quietly expect you to stabilize the room, turning your steadiness into hidden labor.",
+          "better_move": "Acknowledge the feeling, then state what you can realistically take on.",
+          "one_sentence_script": "I understand this matters to you. What I can take on right now is this part.",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "team_collaboration": {
+        "zh-CN": {
+          "scene_label": "团队协作",
+          "context": "多人协作、目标不清或责任交叉时。",
+          "typical_response": "协作中，你能把情绪、关系和任务放在同一个画面里思考。 但如果规则不清，别人可能默认你来稳定局面，久了会变成隐形情绪劳动。",
+          "strength": "你能把情绪、关系和任务放在同一个画面里思考。",
+          "cost": "别人可能默认你来稳定局面，久了会变成隐形情绪劳动。",
+          "better_move": "把气氛问题转成角色、节奏和下一步。",
+          "one_sentence_script": "我们先确认角色、截止时间和下一步，不让情绪替我们做决定。",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Team collaboration",
+          "context": "When several people collaborate with unclear goals or overlapping responsibility.",
+          "typical_response": "In collaboration, You can keep emotion, relationship, and task in the same frame. But when rules are unclear, others may quietly expect you to stabilize the room, turning your steadiness into hidden labor.",
+          "strength": "You can keep emotion, relationship, and task in the same frame.",
+          "cost": "Others may quietly expect you to stabilize the room, turning your steadiness into hidden labor.",
+          "better_move": "Turn emotional friction into roles, rhythm, and next steps.",
+          "one_sentence_script": "Let’s clarify roles, timing, and the next step so emotion does not make the decision for us.",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "pressure_recovery": {
+        "zh-CN": {
+          "scene_label": "压力恢复",
+          "context": "一段高压互动结束后，你需要重新回到自己。",
+          "typical_response": "高压互动结束后，真正的信号是你多久能回到自己。对你来说，把“我来稳住”改成“我们一起定规则”。",
+          "strength": "你能把情绪、关系和任务放在同一个画面里思考。",
+          "cost": "别人可能默认你来稳定局面，久了会变成隐形情绪劳动。",
+          "better_move": "离开场景后安排一个低输入恢复动作。",
+          "one_sentence_script": "我需要十分钟低输入时间，之后再回来处理下一步。",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Pressure recovery",
+          "context": "After a high-pressure interaction, when you need to return to yourself.",
+          "typical_response": "After pressure, the real signal is how long it takes to return to yourself. For this pattern, move from “i will steady this” to “we need a shared rule.”",
+          "strength": "You can keep emotion, relationship, and task in the same frame.",
+          "cost": "Others may quietly expect you to stabilize the room, turning your steadiness into hidden labor.",
+          "better_move": "After the scene, schedule one low-input recovery move.",
+          "one_sentence_script": "I need ten minutes of low input, then I can come back to the next step.",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "career_environment": {
+        "zh-CN": {
+          "scene_label": "职业环境",
+          "context": "你判断一个工作环境会滋养你还是消耗你时。",
+          "typical_response": "选择环境时，重点不是哪个职业适合你，而是哪类互动密度、反馈强度和恢复空间会放大这个模式。",
+          "strength": "你能把情绪、关系和任务放在同一个画面里思考。",
+          "cost": "别人可能默认你来稳定局面，久了会变成隐形情绪劳动。",
+          "better_move": "验证环境变量，不用 EQ 直接推导职业。",
+          "one_sentence_script": "我想验证这个环境的互动频率、反馈方式和恢复空间。",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Career environment",
+          "context": "When you judge whether a work setting will support or drain your emotional pattern.",
+          "typical_response": "When choosing a work setting, the question is not which job fits you; it is which interaction density, feedback intensity, and recovery space amplify this pattern.",
+          "strength": "You can keep emotion, relationship, and task in the same frame.",
+          "cost": "Others may quietly expect you to stabilize the room, turning your steadiness into hidden labor.",
+          "better_move": "Verify environment variables instead of deriving a job from EQ.",
+          "one_sentence_script": "I want to verify the interaction pace, feedback style, and recovery space in this environment.",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      }
+    },
+    "high_empathy_low_recovery": {
+      "feedback": {
+        "zh-CN": {
+          "scene_label": "反馈",
+          "context": "别人指出问题、要求修改或评价你的表现时。",
+          "typical_response": "收到反馈时，你很快读到别人的状态，但恢复系统常常追不上共情速度。 你最容易受影响的不是分数本身，而是反馈背后的关系信号。",
+          "strength": "你容易让别人感到被理解，尤其在情绪强烈的时刻。",
+          "cost": "你可能把别人的压力带回自己身上，离开场景后还在消化。",
+          "better_move": "先问清反馈指向，再决定解释或调整。",
+          "one_sentence_script": "我想先确认一下，你最希望我调整的是结果、过程，还是沟通方式？",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Feedback",
+          "context": "When someone points out a problem, requests changes, or evaluates your work.",
+          "typical_response": "In feedback, You read the room quickly, but recovery can lag behind empathy. The sensitive point is often not the score itself, but the relationship signal behind the feedback.",
+          "strength": "You can make people feel understood, especially when emotions run high.",
+          "cost": "You may carry other people’s pressure with you long after the moment ends.",
+          "better_move": "Clarify the target of the feedback before explaining or changing.",
+          "one_sentence_script": "Can I clarify whether you want me to change the outcome, the process, or the way I communicated?",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "conflict": {
+        "zh-CN": {
+          "scene_label": "冲突",
+          "context": "意见分歧、语气升高或彼此防御时。",
+          "typical_response": "冲突中，你很快读到别人的状态，但恢复系统常常追不上共情速度。 这个模式会决定你是先稳住、先解释、先承接，还是先退出。",
+          "strength": "你容易让别人感到被理解，尤其在情绪强烈的时刻。",
+          "cost": "你可能把别人的压力带回自己身上，离开场景后还在消化。",
+          "better_move": "先把冲突缩小成一个可处理的问题。",
+          "one_sentence_script": "我们先把问题缩小到一个点：现在最需要解决的是什么？",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Conflict",
+          "context": "When disagreement, sharper tone, or mutual defensiveness appears.",
+          "typical_response": "In conflict, You read the room quickly, but recovery can lag behind empathy. This pattern shapes whether you stabilize, explain, absorb, or exit first.",
+          "strength": "You can make people feel understood, especially when emotions run high.",
+          "cost": "You may carry other people’s pressure with you long after the moment ends.",
+          "better_move": "Narrow the conflict to one workable issue first.",
+          "one_sentence_script": "Let’s narrow this to one issue: what needs to be solved first?",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "relationship_boundary": {
+        "zh-CN": {
+          "scene_label": "关系边界",
+          "context": "别人期待你理解、帮忙、让步或继续承接时。",
+          "typical_response": "边界场景里，你可能把别人的压力带回自己身上，离开场景后还在消化。 你需要把理解和可承接范围分开。",
+          "strength": "你容易让别人感到被理解，尤其在情绪强烈的时刻。",
+          "cost": "你可能把别人的压力带回自己身上，离开场景后还在消化。",
+          "better_move": "先承认对方感受，再说明自己的可承接范围。",
+          "one_sentence_script": "我理解这对你很重要，我现在能承接的是这一部分。",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Relationship boundary",
+          "context": "When someone expects understanding, help, concession, or continued emotional availability.",
+          "typical_response": "In boundary moments, You may carry other people’s pressure with you long after the moment ends. The skill is separating understanding from what you can realistically take on.",
+          "strength": "You can make people feel understood, especially when emotions run high.",
+          "cost": "You may carry other people’s pressure with you long after the moment ends.",
+          "better_move": "Acknowledge the feeling, then state what you can realistically take on.",
+          "one_sentence_script": "I understand this matters to you. What I can take on right now is this part.",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "team_collaboration": {
+        "zh-CN": {
+          "scene_label": "团队协作",
+          "context": "多人协作、目标不清或责任交叉时。",
+          "typical_response": "协作中，你容易让别人感到被理解，尤其在情绪强烈的时刻。 但如果规则不清，你可能把别人的压力带回自己身上，离开场景后还在消化。",
+          "strength": "你容易让别人感到被理解，尤其在情绪强烈的时刻。",
+          "cost": "你可能把别人的压力带回自己身上，离开场景后还在消化。",
+          "better_move": "把气氛问题转成角色、节奏和下一步。",
+          "one_sentence_script": "我们先确认角色、截止时间和下一步，不让情绪替我们做决定。",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Team collaboration",
+          "context": "When several people collaborate with unclear goals or overlapping responsibility.",
+          "typical_response": "In collaboration, You can make people feel understood, especially when emotions run high. But when rules are unclear, you may carry other people’s pressure with you long after the moment ends.",
+          "strength": "You can make people feel understood, especially when emotions run high.",
+          "cost": "You may carry other people’s pressure with you long after the moment ends.",
+          "better_move": "Turn emotional friction into roles, rhythm, and next steps.",
+          "one_sentence_script": "Let’s clarify roles, timing, and the next step so emotion does not make the decision for us.",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "pressure_recovery": {
+        "zh-CN": {
+          "scene_label": "压力恢复",
+          "context": "一段高压互动结束后，你需要重新回到自己。",
+          "typical_response": "高压互动结束后，真正的信号是你多久能回到自己。对你来说，练习“理解但不接管”，让共情后面跟着边界。",
+          "strength": "你容易让别人感到被理解，尤其在情绪强烈的时刻。",
+          "cost": "你可能把别人的压力带回自己身上，离开场景后还在消化。",
+          "better_move": "离开场景后安排一个低输入恢复动作。",
+          "one_sentence_script": "我需要十分钟低输入时间，之后再回来处理下一步。",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Pressure recovery",
+          "context": "After a high-pressure interaction, when you need to return to yourself.",
+          "typical_response": "After pressure, the real signal is how long it takes to return to yourself. For this pattern, practice understanding without taking over, so empathy is followed by boundary.",
+          "strength": "You can make people feel understood, especially when emotions run high.",
+          "cost": "You may carry other people’s pressure with you long after the moment ends.",
+          "better_move": "After the scene, schedule one low-input recovery move.",
+          "one_sentence_script": "I need ten minutes of low input, then I can come back to the next step.",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "career_environment": {
+        "zh-CN": {
+          "scene_label": "职业环境",
+          "context": "你判断一个工作环境会滋养你还是消耗你时。",
+          "typical_response": "选择环境时，重点不是哪个职业适合你，而是哪类互动密度、反馈强度和恢复空间会放大这个模式。",
+          "strength": "你容易让别人感到被理解，尤其在情绪强烈的时刻。",
+          "cost": "你可能把别人的压力带回自己身上，离开场景后还在消化。",
+          "better_move": "验证环境变量，不用 EQ 直接推导职业。",
+          "one_sentence_script": "我想验证这个环境的互动频率、反馈方式和恢复空间。",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Career environment",
+          "context": "When you judge whether a work setting will support or drain your emotional pattern.",
+          "typical_response": "When choosing a work setting, the question is not which job fits you; it is which interaction density, feedback intensity, and recovery space amplify this pattern.",
+          "strength": "You can make people feel understood, especially when emotions run high.",
+          "cost": "You may carry other people’s pressure with you long after the moment ends.",
+          "better_move": "Verify environment variables instead of deriving a job from EQ.",
+          "one_sentence_script": "I want to verify the interaction pace, feedback style, and recovery space in this environment.",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      }
+    },
+    "aware_but_unregulated": {
+      "feedback": {
+        "zh-CN": {
+          "scene_label": "反馈",
+          "context": "别人指出问题、要求修改或评价你的表现时。",
+          "typical_response": "收到反馈时，你常知道自己怎么了，但把自己带回来需要更长时间。 你最容易受影响的不是分数本身，而是反馈背后的关系信号。",
+          "strength": "你能清楚识别触发点、感受和需要。",
+          "cost": "越清楚自己被触发，越可能陷入反复分析或即时反应。",
+          "better_move": "先问清反馈指向，再决定解释或调整。",
+          "one_sentence_script": "我想先确认一下，你最希望我调整的是结果、过程，还是沟通方式？",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Feedback",
+          "context": "When someone points out a problem, requests changes, or evaluates your work.",
+          "typical_response": "In feedback, You often know what is happening inside, but the reset button is slower than the insight. The sensitive point is often not the score itself, but the relationship signal behind the feedback.",
+          "strength": "You can identify triggers, feelings, and needs with unusual clarity.",
+          "cost": "The clearer the trigger feels, the easier it can be to over-analyze or react too soon.",
+          "better_move": "Clarify the target of the feedback before explaining or changing.",
+          "one_sentence_script": "Can I clarify whether you want me to change the outcome, the process, or the way I communicated?",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "conflict": {
+        "zh-CN": {
+          "scene_label": "冲突",
+          "context": "意见分歧、语气升高或彼此防御时。",
+          "typical_response": "冲突中，你常知道自己怎么了，但把自己带回来需要更长时间。 这个模式会决定你是先稳住、先解释、先承接，还是先退出。",
+          "strength": "你能清楚识别触发点、感受和需要。",
+          "cost": "越清楚自己被触发，越可能陷入反复分析或即时反应。",
+          "better_move": "先把冲突缩小成一个可处理的问题。",
+          "one_sentence_script": "我们先把问题缩小到一个点：现在最需要解决的是什么？",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Conflict",
+          "context": "When disagreement, sharper tone, or mutual defensiveness appears.",
+          "typical_response": "In conflict, You often know what is happening inside, but the reset button is slower than the insight. This pattern shapes whether you stabilize, explain, absorb, or exit first.",
+          "strength": "You can identify triggers, feelings, and needs with unusual clarity.",
+          "cost": "The clearer the trigger feels, the easier it can be to over-analyze or react too soon.",
+          "better_move": "Narrow the conflict to one workable issue first.",
+          "one_sentence_script": "Let’s narrow this to one issue: what needs to be solved first?",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "relationship_boundary": {
+        "zh-CN": {
+          "scene_label": "关系边界",
+          "context": "别人期待你理解、帮忙、让步或继续承接时。",
+          "typical_response": "边界场景里，越清楚自己被触发，越可能陷入反复分析或即时反应。 你需要把理解和可承接范围分开。",
+          "strength": "你能清楚识别触发点、感受和需要。",
+          "cost": "越清楚自己被触发，越可能陷入反复分析或即时反应。",
+          "better_move": "先承认对方感受，再说明自己的可承接范围。",
+          "one_sentence_script": "我理解这对你很重要，我现在能承接的是这一部分。",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Relationship boundary",
+          "context": "When someone expects understanding, help, concession, or continued emotional availability.",
+          "typical_response": "In boundary moments, The clearer the trigger feels, the easier it can be to over-analyze or react too soon. The skill is separating understanding from what you can realistically take on.",
+          "strength": "You can identify triggers, feelings, and needs with unusual clarity.",
+          "cost": "The clearer the trigger feels, the easier it can be to over-analyze or react too soon.",
+          "better_move": "Acknowledge the feeling, then state what you can realistically take on.",
+          "one_sentence_script": "I understand this matters to you. What I can take on right now is this part.",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "team_collaboration": {
+        "zh-CN": {
+          "scene_label": "团队协作",
+          "context": "多人协作、目标不清或责任交叉时。",
+          "typical_response": "协作中，你能清楚识别触发点、感受和需要。 但如果规则不清，越清楚自己被触发，越可能陷入反复分析或即时反应。",
+          "strength": "你能清楚识别触发点、感受和需要。",
+          "cost": "越清楚自己被触发，越可能陷入反复分析或即时反应。",
+          "better_move": "把气氛问题转成角色、节奏和下一步。",
+          "one_sentence_script": "我们先确认角色、截止时间和下一步，不让情绪替我们做决定。",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Team collaboration",
+          "context": "When several people collaborate with unclear goals or overlapping responsibility.",
+          "typical_response": "In collaboration, You can identify triggers, feelings, and needs with unusual clarity. But when rules are unclear, the clearer the trigger feels, the easier it can be to over-analyze or react too soon.",
+          "strength": "You can identify triggers, feelings, and needs with unusual clarity.",
+          "cost": "The clearer the trigger feels, the easier it can be to over-analyze or react too soon.",
+          "better_move": "Turn emotional friction into roles, rhythm, and next steps.",
+          "one_sentence_script": "Let’s clarify roles, timing, and the next step so emotion does not make the decision for us.",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "pressure_recovery": {
+        "zh-CN": {
+          "scene_label": "压力恢复",
+          "context": "一段高压互动结束后，你需要重新回到自己。",
+          "typical_response": "高压互动结束后，真正的信号是你多久能回到自己。对你来说，把觉察压缩成一个暂停动作，而不是继续解释。",
+          "strength": "你能清楚识别触发点、感受和需要。",
+          "cost": "越清楚自己被触发，越可能陷入反复分析或即时反应。",
+          "better_move": "离开场景后安排一个低输入恢复动作。",
+          "one_sentence_script": "我需要十分钟低输入时间，之后再回来处理下一步。",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Pressure recovery",
+          "context": "After a high-pressure interaction, when you need to return to yourself.",
+          "typical_response": "After pressure, the real signal is how long it takes to return to yourself. For this pattern, turn awareness into one pause action instead of another layer of explanation.",
+          "strength": "You can identify triggers, feelings, and needs with unusual clarity.",
+          "cost": "The clearer the trigger feels, the easier it can be to over-analyze or react too soon.",
+          "better_move": "After the scene, schedule one low-input recovery move.",
+          "one_sentence_script": "I need ten minutes of low input, then I can come back to the next step.",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "career_environment": {
+        "zh-CN": {
+          "scene_label": "职业环境",
+          "context": "你判断一个工作环境会滋养你还是消耗你时。",
+          "typical_response": "选择环境时，重点不是哪个职业适合你，而是哪类互动密度、反馈强度和恢复空间会放大这个模式。",
+          "strength": "你能清楚识别触发点、感受和需要。",
+          "cost": "越清楚自己被触发，越可能陷入反复分析或即时反应。",
+          "better_move": "验证环境变量，不用 EQ 直接推导职业。",
+          "one_sentence_script": "我想验证这个环境的互动频率、反馈方式和恢复空间。",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Career environment",
+          "context": "When you judge whether a work setting will support or drain your emotional pattern.",
+          "typical_response": "When choosing a work setting, the question is not which job fits you; it is which interaction density, feedback intensity, and recovery space amplify this pattern.",
+          "strength": "You can identify triggers, feelings, and needs with unusual clarity.",
+          "cost": "The clearer the trigger feels, the easier it can be to over-analyze or react too soon.",
+          "better_move": "Verify environment variables instead of deriving a job from EQ.",
+          "one_sentence_script": "I want to verify the interaction pace, feedback style, and recovery space in this environment.",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      }
+    },
+    "calm_but_distant": {
+      "feedback": {
+        "zh-CN": {
+          "scene_label": "反馈",
+          "context": "别人指出问题、要求修改或评价你的表现时。",
+          "typical_response": "收到反馈时，你能稳住事情，但别人不一定感到被情绪上接住。 你最容易受影响的不是分数本身，而是反馈背后的关系信号。",
+          "strength": "你不容易被情绪推着走，能保留判断和节奏。",
+          "cost": "关系里的人可能觉得你有答案，但没有真正回应他们。",
+          "better_move": "先问清反馈指向，再决定解释或调整。",
+          "one_sentence_script": "我想先确认一下，你最希望我调整的是结果、过程，还是沟通方式？",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Feedback",
+          "context": "When someone points out a problem, requests changes, or evaluates your work.",
+          "typical_response": "In feedback, You can steady the situation, but people may not always feel emotionally met. The sensitive point is often not the score itself, but the relationship signal behind the feedback.",
+          "strength": "You are less likely to be pushed around by emotion and can keep judgment and pace.",
+          "cost": "People may feel that you have answers without feeling that you have responded to them.",
+          "better_move": "Clarify the target of the feedback before explaining or changing.",
+          "one_sentence_script": "Can I clarify whether you want me to change the outcome, the process, or the way I communicated?",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "conflict": {
+        "zh-CN": {
+          "scene_label": "冲突",
+          "context": "意见分歧、语气升高或彼此防御时。",
+          "typical_response": "冲突中，你能稳住事情，但别人不一定感到被情绪上接住。 这个模式会决定你是先稳住、先解释、先承接，还是先退出。",
+          "strength": "你不容易被情绪推着走，能保留判断和节奏。",
+          "cost": "关系里的人可能觉得你有答案，但没有真正回应他们。",
+          "better_move": "先把冲突缩小成一个可处理的问题。",
+          "one_sentence_script": "我们先把问题缩小到一个点：现在最需要解决的是什么？",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Conflict",
+          "context": "When disagreement, sharper tone, or mutual defensiveness appears.",
+          "typical_response": "In conflict, You can steady the situation, but people may not always feel emotionally met. This pattern shapes whether you stabilize, explain, absorb, or exit first.",
+          "strength": "You are less likely to be pushed around by emotion and can keep judgment and pace.",
+          "cost": "People may feel that you have answers without feeling that you have responded to them.",
+          "better_move": "Narrow the conflict to one workable issue first.",
+          "one_sentence_script": "Let’s narrow this to one issue: what needs to be solved first?",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "relationship_boundary": {
+        "zh-CN": {
+          "scene_label": "关系边界",
+          "context": "别人期待你理解、帮忙、让步或继续承接时。",
+          "typical_response": "边界场景里，关系里的人可能觉得你有答案，但没有真正回应他们。 你需要把理解和可承接范围分开。",
+          "strength": "你不容易被情绪推着走，能保留判断和节奏。",
+          "cost": "关系里的人可能觉得你有答案，但没有真正回应他们。",
+          "better_move": "先承认对方感受，再说明自己的可承接范围。",
+          "one_sentence_script": "我理解这对你很重要，我现在能承接的是这一部分。",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Relationship boundary",
+          "context": "When someone expects understanding, help, concession, or continued emotional availability.",
+          "typical_response": "In boundary moments, People may feel that you have answers without feeling that you have responded to them. The skill is separating understanding from what you can realistically take on.",
+          "strength": "You are less likely to be pushed around by emotion and can keep judgment and pace.",
+          "cost": "People may feel that you have answers without feeling that you have responded to them.",
+          "better_move": "Acknowledge the feeling, then state what you can realistically take on.",
+          "one_sentence_script": "I understand this matters to you. What I can take on right now is this part.",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "team_collaboration": {
+        "zh-CN": {
+          "scene_label": "团队协作",
+          "context": "多人协作、目标不清或责任交叉时。",
+          "typical_response": "协作中，你不容易被情绪推着走，能保留判断和节奏。 但如果规则不清，关系里的人可能觉得你有答案，但没有真正回应他们。",
+          "strength": "你不容易被情绪推着走，能保留判断和节奏。",
+          "cost": "关系里的人可能觉得你有答案，但没有真正回应他们。",
+          "better_move": "把气氛问题转成角色、节奏和下一步。",
+          "one_sentence_script": "我们先确认角色、截止时间和下一步，不让情绪替我们做决定。",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Team collaboration",
+          "context": "When several people collaborate with unclear goals or overlapping responsibility.",
+          "typical_response": "In collaboration, You are less likely to be pushed around by emotion and can keep judgment and pace. But when rules are unclear, people may feel that you have answers without feeling that you have responded to them.",
+          "strength": "You are less likely to be pushed around by emotion and can keep judgment and pace.",
+          "cost": "People may feel that you have answers without feeling that you have responded to them.",
+          "better_move": "Turn emotional friction into roles, rhythm, and next steps.",
+          "one_sentence_script": "Let’s clarify roles, timing, and the next step so emotion does not make the decision for us.",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "pressure_recovery": {
+        "zh-CN": {
+          "scene_label": "压力恢复",
+          "context": "一段高压互动结束后，你需要重新回到自己。",
+          "typical_response": "高压互动结束后，真正的信号是你多久能回到自己。对你来说，先回应一句感受，再给建议或方案。",
+          "strength": "你不容易被情绪推着走，能保留判断和节奏。",
+          "cost": "关系里的人可能觉得你有答案，但没有真正回应他们。",
+          "better_move": "离开场景后安排一个低输入恢复动作。",
+          "one_sentence_script": "我需要十分钟低输入时间，之后再回来处理下一步。",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Pressure recovery",
+          "context": "After a high-pressure interaction, when you need to return to yourself.",
+          "typical_response": "After pressure, the real signal is how long it takes to return to yourself. For this pattern, acknowledge one feeling before offering advice or a solution.",
+          "strength": "You are less likely to be pushed around by emotion and can keep judgment and pace.",
+          "cost": "People may feel that you have answers without feeling that you have responded to them.",
+          "better_move": "After the scene, schedule one low-input recovery move.",
+          "one_sentence_script": "I need ten minutes of low input, then I can come back to the next step.",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "career_environment": {
+        "zh-CN": {
+          "scene_label": "职业环境",
+          "context": "你判断一个工作环境会滋养你还是消耗你时。",
+          "typical_response": "选择环境时，重点不是哪个职业适合你，而是哪类互动密度、反馈强度和恢复空间会放大这个模式。",
+          "strength": "你不容易被情绪推着走，能保留判断和节奏。",
+          "cost": "关系里的人可能觉得你有答案，但没有真正回应他们。",
+          "better_move": "验证环境变量，不用 EQ 直接推导职业。",
+          "one_sentence_script": "我想验证这个环境的互动频率、反馈方式和恢复空间。",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Career environment",
+          "context": "When you judge whether a work setting will support or drain your emotional pattern.",
+          "typical_response": "When choosing a work setting, the question is not which job fits you; it is which interaction density, feedback intensity, and recovery space amplify this pattern.",
+          "strength": "You are less likely to be pushed around by emotion and can keep judgment and pace.",
+          "cost": "People may feel that you have answers without feeling that you have responded to them.",
+          "better_move": "Verify environment variables instead of deriving a job from EQ.",
+          "one_sentence_script": "I want to verify the interaction pace, feedback style, and recovery space in this environment.",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      }
+    },
+    "relationship_first_self_later": {
+      "feedback": {
+        "zh-CN": {
+          "scene_label": "反馈",
+          "context": "别人指出问题、要求修改或评价你的表现时。",
+          "typical_response": "收到反馈时，你会先保护关系，再回头找自己的真实立场。 你最容易受影响的不是分数本身，而是反馈背后的关系信号。",
+          "strength": "你敏感于关系气氛，愿意让互动维持可进行。",
+          "cost": "你可能很晚才意识到自己其实不愿意、不同意或已经累了。",
+          "better_move": "先问清反馈指向，再决定解释或调整。",
+          "one_sentence_script": "我想先确认一下，你最希望我调整的是结果、过程，还是沟通方式？",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Feedback",
+          "context": "When someone points out a problem, requests changes, or evaluates your work.",
+          "typical_response": "In feedback, You protect the relationship first and find your own position later. The sensitive point is often not the score itself, but the relationship signal behind the feedback.",
+          "strength": "You are sensitive to relational tone and often keep interaction workable.",
+          "cost": "You may notice too late that you disagreed, felt unwilling, or were already depleted.",
+          "better_move": "Clarify the target of the feedback before explaining or changing.",
+          "one_sentence_script": "Can I clarify whether you want me to change the outcome, the process, or the way I communicated?",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "conflict": {
+        "zh-CN": {
+          "scene_label": "冲突",
+          "context": "意见分歧、语气升高或彼此防御时。",
+          "typical_response": "冲突中，你会先保护关系，再回头找自己的真实立场。 这个模式会决定你是先稳住、先解释、先承接，还是先退出。",
+          "strength": "你敏感于关系气氛，愿意让互动维持可进行。",
+          "cost": "你可能很晚才意识到自己其实不愿意、不同意或已经累了。",
+          "better_move": "先把冲突缩小成一个可处理的问题。",
+          "one_sentence_script": "我们先把问题缩小到一个点：现在最需要解决的是什么？",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Conflict",
+          "context": "When disagreement, sharper tone, or mutual defensiveness appears.",
+          "typical_response": "In conflict, You protect the relationship first and find your own position later. This pattern shapes whether you stabilize, explain, absorb, or exit first.",
+          "strength": "You are sensitive to relational tone and often keep interaction workable.",
+          "cost": "You may notice too late that you disagreed, felt unwilling, or were already depleted.",
+          "better_move": "Narrow the conflict to one workable issue first.",
+          "one_sentence_script": "Let’s narrow this to one issue: what needs to be solved first?",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "relationship_boundary": {
+        "zh-CN": {
+          "scene_label": "关系边界",
+          "context": "别人期待你理解、帮忙、让步或继续承接时。",
+          "typical_response": "边界场景里，你可能很晚才意识到自己其实不愿意、不同意或已经累了。 你需要把理解和可承接范围分开。",
+          "strength": "你敏感于关系气氛，愿意让互动维持可进行。",
+          "cost": "你可能很晚才意识到自己其实不愿意、不同意或已经累了。",
+          "better_move": "先承认对方感受，再说明自己的可承接范围。",
+          "one_sentence_script": "我理解这对你很重要，我现在能承接的是这一部分。",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Relationship boundary",
+          "context": "When someone expects understanding, help, concession, or continued emotional availability.",
+          "typical_response": "In boundary moments, You may notice too late that you disagreed, felt unwilling, or were already depleted. The skill is separating understanding from what you can realistically take on.",
+          "strength": "You are sensitive to relational tone and often keep interaction workable.",
+          "cost": "You may notice too late that you disagreed, felt unwilling, or were already depleted.",
+          "better_move": "Acknowledge the feeling, then state what you can realistically take on.",
+          "one_sentence_script": "I understand this matters to you. What I can take on right now is this part.",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "team_collaboration": {
+        "zh-CN": {
+          "scene_label": "团队协作",
+          "context": "多人协作、目标不清或责任交叉时。",
+          "typical_response": "协作中，你敏感于关系气氛，愿意让互动维持可进行。 但如果规则不清，你可能很晚才意识到自己其实不愿意、不同意或已经累了。",
+          "strength": "你敏感于关系气氛，愿意让互动维持可进行。",
+          "cost": "你可能很晚才意识到自己其实不愿意、不同意或已经累了。",
+          "better_move": "把气氛问题转成角色、节奏和下一步。",
+          "one_sentence_script": "我们先确认角色、截止时间和下一步，不让情绪替我们做决定。",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Team collaboration",
+          "context": "When several people collaborate with unclear goals or overlapping responsibility.",
+          "typical_response": "In collaboration, You are sensitive to relational tone and often keep interaction workable. But when rules are unclear, you may notice too late that you disagreed, felt unwilling, or were already depleted.",
+          "strength": "You are sensitive to relational tone and often keep interaction workable.",
+          "cost": "You may notice too late that you disagreed, felt unwilling, or were already depleted.",
+          "better_move": "Turn emotional friction into roles, rhythm, and next steps.",
+          "one_sentence_script": "Let’s clarify roles, timing, and the next step so emotion does not make the decision for us.",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "pressure_recovery": {
+        "zh-CN": {
+          "scene_label": "压力恢复",
+          "context": "一段高压互动结束后，你需要重新回到自己。",
+          "typical_response": "高压互动结束后，真正的信号是你多久能回到自己。对你来说，在照顾关系前，先给自己的感受一个位置。",
+          "strength": "你敏感于关系气氛，愿意让互动维持可进行。",
+          "cost": "你可能很晚才意识到自己其实不愿意、不同意或已经累了。",
+          "better_move": "离开场景后安排一个低输入恢复动作。",
+          "one_sentence_script": "我需要十分钟低输入时间，之后再回来处理下一步。",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Pressure recovery",
+          "context": "After a high-pressure interaction, when you need to return to yourself.",
+          "typical_response": "After pressure, the real signal is how long it takes to return to yourself. For this pattern, give your own feeling a place before you manage the relationship.",
+          "strength": "You are sensitive to relational tone and often keep interaction workable.",
+          "cost": "You may notice too late that you disagreed, felt unwilling, or were already depleted.",
+          "better_move": "After the scene, schedule one low-input recovery move.",
+          "one_sentence_script": "I need ten minutes of low input, then I can come back to the next step.",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "career_environment": {
+        "zh-CN": {
+          "scene_label": "职业环境",
+          "context": "你判断一个工作环境会滋养你还是消耗你时。",
+          "typical_response": "选择环境时，重点不是哪个职业适合你，而是哪类互动密度、反馈强度和恢复空间会放大这个模式。",
+          "strength": "你敏感于关系气氛，愿意让互动维持可进行。",
+          "cost": "你可能很晚才意识到自己其实不愿意、不同意或已经累了。",
+          "better_move": "验证环境变量，不用 EQ 直接推导职业。",
+          "one_sentence_script": "我想验证这个环境的互动频率、反馈方式和恢复空间。",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Career environment",
+          "context": "When you judge whether a work setting will support or drain your emotional pattern.",
+          "typical_response": "When choosing a work setting, the question is not which job fits you; it is which interaction density, feedback intensity, and recovery space amplify this pattern.",
+          "strength": "You are sensitive to relational tone and often keep interaction workable.",
+          "cost": "You may notice too late that you disagreed, felt unwilling, or were already depleted.",
+          "better_move": "Verify environment variables instead of deriving a job from EQ.",
+          "one_sentence_script": "I want to verify the interaction pace, feedback style, and recovery space in this environment.",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      }
+    },
+    "self_clear_repair_weak": {
+      "feedback": {
+        "zh-CN": {
+          "scene_label": "反馈",
+          "context": "别人指出问题、要求修改或评价你的表现时。",
+          "typical_response": "收到反馈时，你知道自己的立场，但冲突后的修复需要更明确的工具。 你最容易受影响的不是分数本身，而是反馈背后的关系信号。",
+          "strength": "你不容易在关系压力里丢掉自己的判断。",
+          "cost": "如果表达后缺少修复，对方可能只记得强度，而不是你的重点。",
+          "better_move": "先问清反馈指向，再决定解释或调整。",
+          "one_sentence_script": "我想先确认一下，你最希望我调整的是结果、过程，还是沟通方式？",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Feedback",
+          "context": "When someone points out a problem, requests changes, or evaluates your work.",
+          "typical_response": "In feedback, You know your position, but repair after tension needs a clearer tool. The sensitive point is often not the score itself, but the relationship signal behind the feedback.",
+          "strength": "You are less likely to lose your judgment under relational pressure.",
+          "cost": "Without repair, others may remember the force of the moment more than your point.",
+          "better_move": "Clarify the target of the feedback before explaining or changing.",
+          "one_sentence_script": "Can I clarify whether you want me to change the outcome, the process, or the way I communicated?",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "conflict": {
+        "zh-CN": {
+          "scene_label": "冲突",
+          "context": "意见分歧、语气升高或彼此防御时。",
+          "typical_response": "冲突中，你知道自己的立场，但冲突后的修复需要更明确的工具。 这个模式会决定你是先稳住、先解释、先承接，还是先退出。",
+          "strength": "你不容易在关系压力里丢掉自己的判断。",
+          "cost": "如果表达后缺少修复，对方可能只记得强度，而不是你的重点。",
+          "better_move": "先把冲突缩小成一个可处理的问题。",
+          "one_sentence_script": "我们先把问题缩小到一个点：现在最需要解决的是什么？",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Conflict",
+          "context": "When disagreement, sharper tone, or mutual defensiveness appears.",
+          "typical_response": "In conflict, You know your position, but repair after tension needs a clearer tool. This pattern shapes whether you stabilize, explain, absorb, or exit first.",
+          "strength": "You are less likely to lose your judgment under relational pressure.",
+          "cost": "Without repair, others may remember the force of the moment more than your point.",
+          "better_move": "Narrow the conflict to one workable issue first.",
+          "one_sentence_script": "Let’s narrow this to one issue: what needs to be solved first?",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "relationship_boundary": {
+        "zh-CN": {
+          "scene_label": "关系边界",
+          "context": "别人期待你理解、帮忙、让步或继续承接时。",
+          "typical_response": "边界场景里，如果表达后缺少修复，对方可能只记得强度，而不是你的重点。 你需要把理解和可承接范围分开。",
+          "strength": "你不容易在关系压力里丢掉自己的判断。",
+          "cost": "如果表达后缺少修复，对方可能只记得强度，而不是你的重点。",
+          "better_move": "先承认对方感受，再说明自己的可承接范围。",
+          "one_sentence_script": "我理解这对你很重要，我现在能承接的是这一部分。",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Relationship boundary",
+          "context": "When someone expects understanding, help, concession, or continued emotional availability.",
+          "typical_response": "In boundary moments, Without repair, others may remember the force of the moment more than your point. The skill is separating understanding from what you can realistically take on.",
+          "strength": "You are less likely to lose your judgment under relational pressure.",
+          "cost": "Without repair, others may remember the force of the moment more than your point.",
+          "better_move": "Acknowledge the feeling, then state what you can realistically take on.",
+          "one_sentence_script": "I understand this matters to you. What I can take on right now is this part.",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "team_collaboration": {
+        "zh-CN": {
+          "scene_label": "团队协作",
+          "context": "多人协作、目标不清或责任交叉时。",
+          "typical_response": "协作中，你不容易在关系压力里丢掉自己的判断。 但如果规则不清，如果表达后缺少修复，对方可能只记得强度，而不是你的重点。",
+          "strength": "你不容易在关系压力里丢掉自己的判断。",
+          "cost": "如果表达后缺少修复，对方可能只记得强度，而不是你的重点。",
+          "better_move": "把气氛问题转成角色、节奏和下一步。",
+          "one_sentence_script": "我们先确认角色、截止时间和下一步，不让情绪替我们做决定。",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Team collaboration",
+          "context": "When several people collaborate with unclear goals or overlapping responsibility.",
+          "typical_response": "In collaboration, You are less likely to lose your judgment under relational pressure. But when rules are unclear, without repair, others may remember the force of the moment more than your point.",
+          "strength": "You are less likely to lose your judgment under relational pressure.",
+          "cost": "Without repair, others may remember the force of the moment more than your point.",
+          "better_move": "Turn emotional friction into roles, rhythm, and next steps.",
+          "one_sentence_script": "Let’s clarify roles, timing, and the next step so emotion does not make the decision for us.",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "pressure_recovery": {
+        "zh-CN": {
+          "scene_label": "压力恢复",
+          "context": "一段高压互动结束后，你需要重新回到自己。",
+          "typical_response": "高压互动结束后，真正的信号是你多久能回到自己。对你来说，把“我说清楚了”补成“我们怎么重新对齐”。",
+          "strength": "你不容易在关系压力里丢掉自己的判断。",
+          "cost": "如果表达后缺少修复，对方可能只记得强度，而不是你的重点。",
+          "better_move": "离开场景后安排一个低输入恢复动作。",
+          "one_sentence_script": "我需要十分钟低输入时间，之后再回来处理下一步。",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Pressure recovery",
+          "context": "After a high-pressure interaction, when you need to return to yourself.",
+          "typical_response": "After pressure, the real signal is how long it takes to return to yourself. For this pattern, add “how do we realign?” after “i made my point.”",
+          "strength": "You are less likely to lose your judgment under relational pressure.",
+          "cost": "Without repair, others may remember the force of the moment more than your point.",
+          "better_move": "After the scene, schedule one low-input recovery move.",
+          "one_sentence_script": "I need ten minutes of low input, then I can come back to the next step.",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "career_environment": {
+        "zh-CN": {
+          "scene_label": "职业环境",
+          "context": "你判断一个工作环境会滋养你还是消耗你时。",
+          "typical_response": "选择环境时，重点不是哪个职业适合你，而是哪类互动密度、反馈强度和恢复空间会放大这个模式。",
+          "strength": "你不容易在关系压力里丢掉自己的判断。",
+          "cost": "如果表达后缺少修复，对方可能只记得强度，而不是你的重点。",
+          "better_move": "验证环境变量，不用 EQ 直接推导职业。",
+          "one_sentence_script": "我想验证这个环境的互动频率、反馈方式和恢复空间。",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Career environment",
+          "context": "When you judge whether a work setting will support or drain your emotional pattern.",
+          "typical_response": "When choosing a work setting, the question is not which job fits you; it is which interaction density, feedback intensity, and recovery space amplify this pattern.",
+          "strength": "You are less likely to lose your judgment under relational pressure.",
+          "cost": "Without repair, others may remember the force of the moment more than your point.",
+          "better_move": "Verify environment variables instead of deriving a job from EQ.",
+          "one_sentence_script": "I want to verify the interaction pace, feedback style, and recovery space in this environment.",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      }
+    },
+    "steady_collaborator": {
+      "feedback": {
+        "zh-CN": {
+          "scene_label": "反馈",
+          "context": "别人指出问题、要求修改或评价你的表现时。",
+          "typical_response": "收到反馈时，你能在压力下维持合作推进，但别让稳定只靠你一个人。 你最容易受影响的不是分数本身，而是反馈背后的关系信号。",
+          "strength": "你能把紧张对话拉回事实、目标和下一步。",
+          "cost": "团队可能习惯让你来降温、翻译和收尾。",
+          "better_move": "先问清反馈指向，再决定解释或调整。",
+          "one_sentence_script": "我想先确认一下，你最希望我调整的是结果、过程，还是沟通方式？",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Feedback",
+          "context": "When someone points out a problem, requests changes, or evaluates your work.",
+          "typical_response": "In feedback, You keep collaboration moving under pressure, but steadiness should not depend only on you. The sensitive point is often not the score itself, but the relationship signal behind the feedback.",
+          "strength": "You can bring tense conversations back to facts, goals, and next steps.",
+          "cost": "Teams may get used to you cooling things down, translating tension, and closing loops.",
+          "better_move": "Clarify the target of the feedback before explaining or changing.",
+          "one_sentence_script": "Can I clarify whether you want me to change the outcome, the process, or the way I communicated?",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "conflict": {
+        "zh-CN": {
+          "scene_label": "冲突",
+          "context": "意见分歧、语气升高或彼此防御时。",
+          "typical_response": "冲突中，你能在压力下维持合作推进，但别让稳定只靠你一个人。 这个模式会决定你是先稳住、先解释、先承接，还是先退出。",
+          "strength": "你能把紧张对话拉回事实、目标和下一步。",
+          "cost": "团队可能习惯让你来降温、翻译和收尾。",
+          "better_move": "先把冲突缩小成一个可处理的问题。",
+          "one_sentence_script": "我们先把问题缩小到一个点：现在最需要解决的是什么？",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Conflict",
+          "context": "When disagreement, sharper tone, or mutual defensiveness appears.",
+          "typical_response": "In conflict, You keep collaboration moving under pressure, but steadiness should not depend only on you. This pattern shapes whether you stabilize, explain, absorb, or exit first.",
+          "strength": "You can bring tense conversations back to facts, goals, and next steps.",
+          "cost": "Teams may get used to you cooling things down, translating tension, and closing loops.",
+          "better_move": "Narrow the conflict to one workable issue first.",
+          "one_sentence_script": "Let’s narrow this to one issue: what needs to be solved first?",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "relationship_boundary": {
+        "zh-CN": {
+          "scene_label": "关系边界",
+          "context": "别人期待你理解、帮忙、让步或继续承接时。",
+          "typical_response": "边界场景里，团队可能习惯让你来降温、翻译和收尾。 你需要把理解和可承接范围分开。",
+          "strength": "你能把紧张对话拉回事实、目标和下一步。",
+          "cost": "团队可能习惯让你来降温、翻译和收尾。",
+          "better_move": "先承认对方感受，再说明自己的可承接范围。",
+          "one_sentence_script": "我理解这对你很重要，我现在能承接的是这一部分。",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Relationship boundary",
+          "context": "When someone expects understanding, help, concession, or continued emotional availability.",
+          "typical_response": "In boundary moments, Teams may get used to you cooling things down, translating tension, and closing loops. The skill is separating understanding from what you can realistically take on.",
+          "strength": "You can bring tense conversations back to facts, goals, and next steps.",
+          "cost": "Teams may get used to you cooling things down, translating tension, and closing loops.",
+          "better_move": "Acknowledge the feeling, then state what you can realistically take on.",
+          "one_sentence_script": "I understand this matters to you. What I can take on right now is this part.",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "team_collaboration": {
+        "zh-CN": {
+          "scene_label": "团队协作",
+          "context": "多人协作、目标不清或责任交叉时。",
+          "typical_response": "协作中，你能把紧张对话拉回事实、目标和下一步。 但如果规则不清，团队可能习惯让你来降温、翻译和收尾。",
+          "strength": "你能把紧张对话拉回事实、目标和下一步。",
+          "cost": "团队可能习惯让你来降温、翻译和收尾。",
+          "better_move": "把气氛问题转成角色、节奏和下一步。",
+          "one_sentence_script": "我们先确认角色、截止时间和下一步，不让情绪替我们做决定。",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Team collaboration",
+          "context": "When several people collaborate with unclear goals or overlapping responsibility.",
+          "typical_response": "In collaboration, You can bring tense conversations back to facts, goals, and next steps. But when rules are unclear, teams may get used to you cooling things down, translating tension, and closing loops.",
+          "strength": "You can bring tense conversations back to facts, goals, and next steps.",
+          "cost": "Teams may get used to you cooling things down, translating tension, and closing loops.",
+          "better_move": "Turn emotional friction into roles, rhythm, and next steps.",
+          "one_sentence_script": "Let’s clarify roles, timing, and the next step so emotion does not make the decision for us.",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "pressure_recovery": {
+        "zh-CN": {
+          "scene_label": "压力恢复",
+          "context": "一段高压互动结束后，你需要重新回到自己。",
+          "typical_response": "高压互动结束后，真正的信号是你多久能回到自己。对你来说，把个人稳定能力变成团队流程。",
+          "strength": "你能把紧张对话拉回事实、目标和下一步。",
+          "cost": "团队可能习惯让你来降温、翻译和收尾。",
+          "better_move": "离开场景后安排一个低输入恢复动作。",
+          "one_sentence_script": "我需要十分钟低输入时间，之后再回来处理下一步。",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Pressure recovery",
+          "context": "After a high-pressure interaction, when you need to return to yourself.",
+          "typical_response": "After pressure, the real signal is how long it takes to return to yourself. For this pattern, turn personal steadiness into team process.",
+          "strength": "You can bring tense conversations back to facts, goals, and next steps.",
+          "cost": "Teams may get used to you cooling things down, translating tension, and closing loops.",
+          "better_move": "After the scene, schedule one low-input recovery move.",
+          "one_sentence_script": "I need ten minutes of low input, then I can come back to the next step.",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "career_environment": {
+        "zh-CN": {
+          "scene_label": "职业环境",
+          "context": "你判断一个工作环境会滋养你还是消耗你时。",
+          "typical_response": "选择环境时，重点不是哪个职业适合你，而是哪类互动密度、反馈强度和恢复空间会放大这个模式。",
+          "strength": "你能把紧张对话拉回事实、目标和下一步。",
+          "cost": "团队可能习惯让你来降温、翻译和收尾。",
+          "better_move": "验证环境变量，不用 EQ 直接推导职业。",
+          "one_sentence_script": "我想验证这个环境的互动频率、反馈方式和恢复空间。",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Career environment",
+          "context": "When you judge whether a work setting will support or drain your emotional pattern.",
+          "typical_response": "When choosing a work setting, the question is not which job fits you; it is which interaction density, feedback intensity, and recovery space amplify this pattern.",
+          "strength": "You can bring tense conversations back to facts, goals, and next steps.",
+          "cost": "Teams may get used to you cooling things down, translating tension, and closing loops.",
+          "better_move": "Verify environment variables instead of deriving a job from EQ.",
+          "one_sentence_script": "I want to verify the interaction pace, feedback style, and recovery space in this environment.",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      }
+    },
+    "sensitive_absorber": {
+      "feedback": {
+        "zh-CN": {
+          "scene_label": "反馈",
+          "context": "别人指出问题、要求修改或评价你的表现时。",
+          "typical_response": "收到反馈时，你能捕捉细微变化，但敏感也容易变成情绪负重。 你最容易受影响的不是分数本身，而是反馈背后的关系信号。",
+          "strength": "你很快发现气氛、语气和关系位置的变化。",
+          "cost": "你可能回应了太多信号，最后分不清哪些真的需要你处理。",
+          "better_move": "先问清反馈指向，再决定解释或调整。",
+          "one_sentence_script": "我想先确认一下，你最希望我调整的是结果、过程，还是沟通方式？",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Feedback",
+          "context": "When someone points out a problem, requests changes, or evaluates your work.",
+          "typical_response": "In feedback, You catch subtle shifts fast, and that sensitivity can become emotional load. The sensitive point is often not the score itself, but the relationship signal behind the feedback.",
+          "strength": "You quickly notice shifts in tone, mood, and relational position.",
+          "cost": "You may respond to too many signals and lose track of which ones actually need your action.",
+          "better_move": "Clarify the target of the feedback before explaining or changing.",
+          "one_sentence_script": "Can I clarify whether you want me to change the outcome, the process, or the way I communicated?",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "conflict": {
+        "zh-CN": {
+          "scene_label": "冲突",
+          "context": "意见分歧、语气升高或彼此防御时。",
+          "typical_response": "冲突中，你能捕捉细微变化，但敏感也容易变成情绪负重。 这个模式会决定你是先稳住、先解释、先承接，还是先退出。",
+          "strength": "你很快发现气氛、语气和关系位置的变化。",
+          "cost": "你可能回应了太多信号，最后分不清哪些真的需要你处理。",
+          "better_move": "先把冲突缩小成一个可处理的问题。",
+          "one_sentence_script": "我们先把问题缩小到一个点：现在最需要解决的是什么？",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Conflict",
+          "context": "When disagreement, sharper tone, or mutual defensiveness appears.",
+          "typical_response": "In conflict, You catch subtle shifts fast, and that sensitivity can become emotional load. This pattern shapes whether you stabilize, explain, absorb, or exit first.",
+          "strength": "You quickly notice shifts in tone, mood, and relational position.",
+          "cost": "You may respond to too many signals and lose track of which ones actually need your action.",
+          "better_move": "Narrow the conflict to one workable issue first.",
+          "one_sentence_script": "Let’s narrow this to one issue: what needs to be solved first?",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "relationship_boundary": {
+        "zh-CN": {
+          "scene_label": "关系边界",
+          "context": "别人期待你理解、帮忙、让步或继续承接时。",
+          "typical_response": "边界场景里，你可能回应了太多信号，最后分不清哪些真的需要你处理。 你需要把理解和可承接范围分开。",
+          "strength": "你很快发现气氛、语气和关系位置的变化。",
+          "cost": "你可能回应了太多信号，最后分不清哪些真的需要你处理。",
+          "better_move": "先承认对方感受，再说明自己的可承接范围。",
+          "one_sentence_script": "我理解这对你很重要，我现在能承接的是这一部分。",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Relationship boundary",
+          "context": "When someone expects understanding, help, concession, or continued emotional availability.",
+          "typical_response": "In boundary moments, You may respond to too many signals and lose track of which ones actually need your action. The skill is separating understanding from what you can realistically take on.",
+          "strength": "You quickly notice shifts in tone, mood, and relational position.",
+          "cost": "You may respond to too many signals and lose track of which ones actually need your action.",
+          "better_move": "Acknowledge the feeling, then state what you can realistically take on.",
+          "one_sentence_script": "I understand this matters to you. What I can take on right now is this part.",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "team_collaboration": {
+        "zh-CN": {
+          "scene_label": "团队协作",
+          "context": "多人协作、目标不清或责任交叉时。",
+          "typical_response": "协作中，你很快发现气氛、语气和关系位置的变化。 但如果规则不清，你可能回应了太多信号，最后分不清哪些真的需要你处理。",
+          "strength": "你很快发现气氛、语气和关系位置的变化。",
+          "cost": "你可能回应了太多信号，最后分不清哪些真的需要你处理。",
+          "better_move": "把气氛问题转成角色、节奏和下一步。",
+          "one_sentence_script": "我们先确认角色、截止时间和下一步，不让情绪替我们做决定。",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Team collaboration",
+          "context": "When several people collaborate with unclear goals or overlapping responsibility.",
+          "typical_response": "In collaboration, You quickly notice shifts in tone, mood, and relational position. But when rules are unclear, you may respond to too many signals and lose track of which ones actually need your action.",
+          "strength": "You quickly notice shifts in tone, mood, and relational position.",
+          "cost": "You may respond to too many signals and lose track of which ones actually need your action.",
+          "better_move": "Turn emotional friction into roles, rhythm, and next steps.",
+          "one_sentence_script": "Let’s clarify roles, timing, and the next step so emotion does not make the decision for us.",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "pressure_recovery": {
+        "zh-CN": {
+          "scene_label": "压力恢复",
+          "context": "一段高压互动结束后，你需要重新回到自己。",
+          "typical_response": "高压互动结束后，真正的信号是你多久能回到自己。对你来说，把“我感到了”区分成“我要不要回应”。",
+          "strength": "你很快发现气氛、语气和关系位置的变化。",
+          "cost": "你可能回应了太多信号，最后分不清哪些真的需要你处理。",
+          "better_move": "离开场景后安排一个低输入恢复动作。",
+          "one_sentence_script": "我需要十分钟低输入时间，之后再回来处理下一步。",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Pressure recovery",
+          "context": "After a high-pressure interaction, when you need to return to yourself.",
+          "typical_response": "After pressure, the real signal is how long it takes to return to yourself. For this pattern, separate “i noticed it” from “i need to respond.”",
+          "strength": "You quickly notice shifts in tone, mood, and relational position.",
+          "cost": "You may respond to too many signals and lose track of which ones actually need your action.",
+          "better_move": "After the scene, schedule one low-input recovery move.",
+          "one_sentence_script": "I need ten minutes of low input, then I can come back to the next step.",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "career_environment": {
+        "zh-CN": {
+          "scene_label": "职业环境",
+          "context": "你判断一个工作环境会滋养你还是消耗你时。",
+          "typical_response": "选择环境时，重点不是哪个职业适合你，而是哪类互动密度、反馈强度和恢复空间会放大这个模式。",
+          "strength": "你很快发现气氛、语气和关系位置的变化。",
+          "cost": "你可能回应了太多信号，最后分不清哪些真的需要你处理。",
+          "better_move": "验证环境变量，不用 EQ 直接推导职业。",
+          "one_sentence_script": "我想验证这个环境的互动频率、反馈方式和恢复空间。",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Career environment",
+          "context": "When you judge whether a work setting will support or drain your emotional pattern.",
+          "typical_response": "When choosing a work setting, the question is not which job fits you; it is which interaction density, feedback intensity, and recovery space amplify this pattern.",
+          "strength": "You quickly notice shifts in tone, mood, and relational position.",
+          "cost": "You may respond to too many signals and lose track of which ones actually need your action.",
+          "better_move": "Verify environment variables instead of deriving a job from EQ.",
+          "one_sentence_script": "I want to verify the interaction pace, feedback style, and recovery space in this environment.",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      }
+    },
+    "developing_foundation": {
+      "feedback": {
+        "zh-CN": {
+          "scene_label": "反馈",
+          "context": "别人指出问题、要求修改或评价你的表现时。",
+          "typical_response": "收到反馈时，你的情绪与关系模式还在建立，最有效的是先练一个稳定小动作。 你最容易受影响的不是分数本身，而是反馈背后的关系信号。",
+          "strength": "你已经开始把情绪和关系当成可以观察、可以练习的对象。",
+          "cost": "如果一次想改太多，容易很快放弃或自我否定。",
+          "better_move": "先问清反馈指向，再决定解释或调整。",
+          "one_sentence_script": "我想先确认一下，你最希望我调整的是结果、过程，还是沟通方式？",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Feedback",
+          "context": "When someone points out a problem, requests changes, or evaluates your work.",
+          "typical_response": "In feedback, Your emotional and relational pattern is still forming; one reliable practice matters more than a full reset. The sensitive point is often not the score itself, but the relationship signal behind the feedback.",
+          "strength": "You are beginning to treat emotion and relationships as observable and trainable.",
+          "cost": "Trying to change everything at once can lead to quick discouragement or self-criticism.",
+          "better_move": "Clarify the target of the feedback before explaining or changing.",
+          "one_sentence_script": "Can I clarify whether you want me to change the outcome, the process, or the way I communicated?",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "conflict": {
+        "zh-CN": {
+          "scene_label": "冲突",
+          "context": "意见分歧、语气升高或彼此防御时。",
+          "typical_response": "冲突中，你的情绪与关系模式还在建立，最有效的是先练一个稳定小动作。 这个模式会决定你是先稳住、先解释、先承接，还是先退出。",
+          "strength": "你已经开始把情绪和关系当成可以观察、可以练习的对象。",
+          "cost": "如果一次想改太多，容易很快放弃或自我否定。",
+          "better_move": "先把冲突缩小成一个可处理的问题。",
+          "one_sentence_script": "我们先把问题缩小到一个点：现在最需要解决的是什么？",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Conflict",
+          "context": "When disagreement, sharper tone, or mutual defensiveness appears.",
+          "typical_response": "In conflict, Your emotional and relational pattern is still forming; one reliable practice matters more than a full reset. This pattern shapes whether you stabilize, explain, absorb, or exit first.",
+          "strength": "You are beginning to treat emotion and relationships as observable and trainable.",
+          "cost": "Trying to change everything at once can lead to quick discouragement or self-criticism.",
+          "better_move": "Narrow the conflict to one workable issue first.",
+          "one_sentence_script": "Let’s narrow this to one issue: what needs to be solved first?",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "relationship_boundary": {
+        "zh-CN": {
+          "scene_label": "关系边界",
+          "context": "别人期待你理解、帮忙、让步或继续承接时。",
+          "typical_response": "边界场景里，如果一次想改太多，容易很快放弃或自我否定。 你需要把理解和可承接范围分开。",
+          "strength": "你已经开始把情绪和关系当成可以观察、可以练习的对象。",
+          "cost": "如果一次想改太多，容易很快放弃或自我否定。",
+          "better_move": "先承认对方感受，再说明自己的可承接范围。",
+          "one_sentence_script": "我理解这对你很重要，我现在能承接的是这一部分。",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Relationship boundary",
+          "context": "When someone expects understanding, help, concession, or continued emotional availability.",
+          "typical_response": "In boundary moments, Trying to change everything at once can lead to quick discouragement or self-criticism. The skill is separating understanding from what you can realistically take on.",
+          "strength": "You are beginning to treat emotion and relationships as observable and trainable.",
+          "cost": "Trying to change everything at once can lead to quick discouragement or self-criticism.",
+          "better_move": "Acknowledge the feeling, then state what you can realistically take on.",
+          "one_sentence_script": "I understand this matters to you. What I can take on right now is this part.",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "team_collaboration": {
+        "zh-CN": {
+          "scene_label": "团队协作",
+          "context": "多人协作、目标不清或责任交叉时。",
+          "typical_response": "协作中，你已经开始把情绪和关系当成可以观察、可以练习的对象。 但如果规则不清，如果一次想改太多，容易很快放弃或自我否定。",
+          "strength": "你已经开始把情绪和关系当成可以观察、可以练习的对象。",
+          "cost": "如果一次想改太多，容易很快放弃或自我否定。",
+          "better_move": "把气氛问题转成角色、节奏和下一步。",
+          "one_sentence_script": "我们先确认角色、截止时间和下一步，不让情绪替我们做决定。",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Team collaboration",
+          "context": "When several people collaborate with unclear goals or overlapping responsibility.",
+          "typical_response": "In collaboration, You are beginning to treat emotion and relationships as observable and trainable. But when rules are unclear, trying to change everything at once can lead to quick discouragement or self-criticism.",
+          "strength": "You are beginning to treat emotion and relationships as observable and trainable.",
+          "cost": "Trying to change everything at once can lead to quick discouragement or self-criticism.",
+          "better_move": "Turn emotional friction into roles, rhythm, and next steps.",
+          "one_sentence_script": "Let’s clarify roles, timing, and the next step so emotion does not make the decision for us.",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "pressure_recovery": {
+        "zh-CN": {
+          "scene_label": "压力恢复",
+          "context": "一段高压互动结束后，你需要重新回到自己。",
+          "typical_response": "高压互动结束后，真正的信号是你多久能回到自己。对你来说，先把一个情绪命名清楚，再谈复杂改变。",
+          "strength": "你已经开始把情绪和关系当成可以观察、可以练习的对象。",
+          "cost": "如果一次想改太多，容易很快放弃或自我否定。",
+          "better_move": "离开场景后安排一个低输入恢复动作。",
+          "one_sentence_script": "我需要十分钟低输入时间，之后再回来处理下一步。",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Pressure recovery",
+          "context": "After a high-pressure interaction, when you need to return to yourself.",
+          "typical_response": "After pressure, the real signal is how long it takes to return to yourself. For this pattern, name one feeling clearly before attempting a larger change.",
+          "strength": "You are beginning to treat emotion and relationships as observable and trainable.",
+          "cost": "Trying to change everything at once can lead to quick discouragement or self-criticism.",
+          "better_move": "After the scene, schedule one low-input recovery move.",
+          "one_sentence_script": "I need ten minutes of low input, then I can come back to the next step.",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "career_environment": {
+        "zh-CN": {
+          "scene_label": "职业环境",
+          "context": "你判断一个工作环境会滋养你还是消耗你时。",
+          "typical_response": "选择环境时，重点不是哪个职业适合你，而是哪类互动密度、反馈强度和恢复空间会放大这个模式。",
+          "strength": "你已经开始把情绪和关系当成可以观察、可以练习的对象。",
+          "cost": "如果一次想改太多，容易很快放弃或自我否定。",
+          "better_move": "验证环境变量，不用 EQ 直接推导职业。",
+          "one_sentence_script": "我想验证这个环境的互动频率、反馈方式和恢复空间。",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Career environment",
+          "context": "When you judge whether a work setting will support or drain your emotional pattern.",
+          "typical_response": "When choosing a work setting, the question is not which job fits you; it is which interaction density, feedback intensity, and recovery space amplify this pattern.",
+          "strength": "You are beginning to treat emotion and relationships as observable and trainable.",
+          "cost": "Trying to change everything at once can lead to quick discouragement or self-criticism.",
+          "better_move": "Verify environment variables instead of deriving a job from EQ.",
+          "one_sentence_script": "I want to verify the interaction pace, feedback style, and recovery space in this environment.",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      }
+    },
+    "low_confidence_result": {
+      "feedback": {
+        "zh-CN": {
+          "scene_label": "反馈",
+          "context": "别人指出问题、要求修改或评价你的表现时。",
+          "typical_response": "收到反馈时，这次结果应轻一点读，最有价值的是理解本次作答状态。 你最容易受影响的不是分数本身，而是反馈背后的关系信号。",
+          "strength": "即使不适合强结论，也能提醒你观察最近的压力、疲劳或作答方式。",
+          "cost": "如果强行套用画像，可能比不看结果更误导。",
+          "better_move": "先问清反馈指向，再决定解释或调整。",
+          "one_sentence_script": "我想先确认一下，你最希望我调整的是结果、过程，还是沟通方式？",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Feedback",
+          "context": "When someone points out a problem, requests changes, or evaluates your work.",
+          "typical_response": "In feedback, Read this result lightly; the most useful signal is the response context of this session. The sensitive point is often not the score itself, but the relationship signal behind the feedback.",
+          "strength": "Even without a strong conclusion, it can point you toward stress, fatigue, or response style to observe.",
+          "cost": "Forcing a profile onto this result could be more misleading than useful.",
+          "better_move": "Clarify the target of the feedback before explaining or changing.",
+          "one_sentence_script": "Can I clarify whether you want me to change the outcome, the process, or the way I communicated?",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "conflict": {
+        "zh-CN": {
+          "scene_label": "冲突",
+          "context": "意见分歧、语气升高或彼此防御时。",
+          "typical_response": "冲突中，这次结果应轻一点读，最有价值的是理解本次作答状态。 这个模式会决定你是先稳住、先解释、先承接，还是先退出。",
+          "strength": "即使不适合强结论，也能提醒你观察最近的压力、疲劳或作答方式。",
+          "cost": "如果强行套用画像，可能比不看结果更误导。",
+          "better_move": "先把冲突缩小成一个可处理的问题。",
+          "one_sentence_script": "我们先把问题缩小到一个点：现在最需要解决的是什么？",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Conflict",
+          "context": "When disagreement, sharper tone, or mutual defensiveness appears.",
+          "typical_response": "In conflict, Read this result lightly; the most useful signal is the response context of this session. This pattern shapes whether you stabilize, explain, absorb, or exit first.",
+          "strength": "Even without a strong conclusion, it can point you toward stress, fatigue, or response style to observe.",
+          "cost": "Forcing a profile onto this result could be more misleading than useful.",
+          "better_move": "Narrow the conflict to one workable issue first.",
+          "one_sentence_script": "Let’s narrow this to one issue: what needs to be solved first?",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "relationship_boundary": {
+        "zh-CN": {
+          "scene_label": "关系边界",
+          "context": "别人期待你理解、帮忙、让步或继续承接时。",
+          "typical_response": "边界场景里，如果强行套用画像，可能比不看结果更误导。 你需要把理解和可承接范围分开。",
+          "strength": "即使不适合强结论，也能提醒你观察最近的压力、疲劳或作答方式。",
+          "cost": "如果强行套用画像，可能比不看结果更误导。",
+          "better_move": "先承认对方感受，再说明自己的可承接范围。",
+          "one_sentence_script": "我理解这对你很重要，我现在能承接的是这一部分。",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Relationship boundary",
+          "context": "When someone expects understanding, help, concession, or continued emotional availability.",
+          "typical_response": "In boundary moments, Forcing a profile onto this result could be more misleading than useful. The skill is separating understanding from what you can realistically take on.",
+          "strength": "Even without a strong conclusion, it can point you toward stress, fatigue, or response style to observe.",
+          "cost": "Forcing a profile onto this result could be more misleading than useful.",
+          "better_move": "Acknowledge the feeling, then state what you can realistically take on.",
+          "one_sentence_script": "I understand this matters to you. What I can take on right now is this part.",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "team_collaboration": {
+        "zh-CN": {
+          "scene_label": "团队协作",
+          "context": "多人协作、目标不清或责任交叉时。",
+          "typical_response": "协作中，即使不适合强结论，也能提醒你观察最近的压力、疲劳或作答方式。 但如果规则不清，如果强行套用画像，可能比不看结果更误导。",
+          "strength": "即使不适合强结论，也能提醒你观察最近的压力、疲劳或作答方式。",
+          "cost": "如果强行套用画像，可能比不看结果更误导。",
+          "better_move": "把气氛问题转成角色、节奏和下一步。",
+          "one_sentence_script": "我们先确认角色、截止时间和下一步，不让情绪替我们做决定。",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Team collaboration",
+          "context": "When several people collaborate with unclear goals or overlapping responsibility.",
+          "typical_response": "In collaboration, Even without a strong conclusion, it can point you toward stress, fatigue, or response style to observe. But when rules are unclear, forcing a profile onto this result could be more misleading than useful.",
+          "strength": "Even without a strong conclusion, it can point you toward stress, fatigue, or response style to observe.",
+          "cost": "Forcing a profile onto this result could be more misleading than useful.",
+          "better_move": "Turn emotional friction into roles, rhythm, and next steps.",
+          "one_sentence_script": "Let’s clarify roles, timing, and the next step so emotion does not make the decision for us.",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "pressure_recovery": {
+        "zh-CN": {
+          "scene_label": "压力恢复",
+          "context": "一段高压互动结束后，你需要重新回到自己。",
+          "typical_response": "高压互动结束后，真正的信号是你多久能回到自己。对你来说，先记录状态，之后在更稳定的时间复测。",
+          "strength": "即使不适合强结论，也能提醒你观察最近的压力、疲劳或作答方式。",
+          "cost": "如果强行套用画像，可能比不看结果更误导。",
+          "better_move": "离开场景后安排一个低输入恢复动作。",
+          "one_sentence_script": "我需要十分钟低输入时间，之后再回来处理下一步。",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Pressure recovery",
+          "context": "After a high-pressure interaction, when you need to return to yourself.",
+          "typical_response": "After pressure, the real signal is how long it takes to return to yourself. For this pattern, record the context first, then retest when conditions are steadier.",
+          "strength": "Even without a strong conclusion, it can point you toward stress, fatigue, or response style to observe.",
+          "cost": "Forcing a profile onto this result could be more misleading than useful.",
+          "better_move": "After the scene, schedule one low-input recovery move.",
+          "one_sentence_script": "I need ten minutes of low input, then I can come back to the next step.",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
+      },
+      "career_environment": {
+        "zh-CN": {
+          "scene_label": "职业环境",
+          "context": "你判断一个工作环境会滋养你还是消耗你时。",
+          "typical_response": "选择环境时，重点不是哪个职业适合你，而是哪类互动密度、反馈强度和恢复空间会放大这个模式。",
+          "strength": "即使不适合强结论，也能提醒你观察最近的压力、疲劳或作答方式。",
+          "cost": "如果强行套用画像，可能比不看结果更误导。",
+          "better_move": "验证环境变量，不用 EQ 直接推导职业。",
+          "one_sentence_script": "我想验证这个环境的互动频率、反馈方式和恢复空间。",
+          "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
+          "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。"
+        },
+        "en": {
+          "scene_label": "Career environment",
+          "context": "When you judge whether a work setting will support or drain your emotional pattern.",
+          "typical_response": "When choosing a work setting, the question is not which job fits you; it is which interaction density, feedback intensity, and recovery space amplify this pattern.",
+          "strength": "Even without a strong conclusion, it can point you toward stress, fatigue, or response style to observe.",
+          "cost": "Forcing a profile onto this result could be more misleading than useful.",
+          "better_move": "Verify environment variables instead of deriving a job from EQ.",
+          "one_sentence_script": "I want to verify the interaction pace, feedback style, and recovery space in this environment.",
+          "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
+          "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison."
+        }
       }
     }
   }

@@ -811,6 +811,12 @@ final class Eq60ContentLintService
             'cross_assessment_context',
             'seo_geo_authority',
             'sjt_bridge',
+            'result_snapshot',
+            'commercial_conversion_assets',
+            'quality_confidence',
+            'psychometric_evidence_status',
+            'agent_dialogue_playbooks',
+            'backend_integration_contract',
         ];
 
         $docs = [];
@@ -976,6 +982,86 @@ final class Eq60ContentLintService
             'button_label',
             'available',
         ], $errors);
+
+        $resultSnapshotAssets = (array) data_get($docs, 'result_snapshot.assets', []);
+        $this->lintLocalizedAssetFields($this->loader->rawPath('report_assets/result_snapshot.json', $version), (array) ($resultSnapshotAssets['eq.snapshot.high_empathy_low_recovery'] ?? []), [
+            'headline',
+            'core_judgment',
+            'evidence_point',
+            'minimal_action',
+            'share_safe_sentence',
+            'continue_path',
+        ], $errors);
+        $highEmpathySnapshot = (array) ($resultSnapshotAssets['eq.snapshot.high_empathy_low_recovery'] ?? []);
+        foreach (['zh-CN', 'en'] as $locale) {
+            if ((array) data_get($highEmpathySnapshot, $locale.'.conversion_actions', []) === []) {
+                $errors[] = $this->error($this->loader->rawPath('report_assets/result_snapshot.json', $version), 1, $locale.'.conversion_actions cannot be empty.');
+            }
+        }
+
+        $conversionAssets = (array) data_get($docs, 'commercial_conversion_assets.assets', []);
+        foreach ([
+            'eq.conversion.save_report',
+            'eq.conversion.email_revisit',
+            'eq.conversion.pdf_export',
+            'eq.conversion.share_card',
+            'eq.conversion.retest_reminder',
+            'eq.conversion.related_tests',
+            'eq.conversion.agent_entry',
+        ] as $assetId) {
+            $this->lintLocalizedAssetFields($this->loader->rawPath('report_assets/commercial_conversion_assets.json', $version), (array) ($conversionAssets[$assetId] ?? []), [
+                'title',
+                'body',
+                'cta_label',
+                'do_not_overread',
+            ], $errors);
+        }
+
+        $conversionJson = json_encode(data_get($docs, 'commercial_conversion_assets.assets', []), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?: '';
+        foreach (['购买', '解锁', 'paywall', 'SKU_EQ_60_FULL_299', 'EQ_60_FULL'] as $blockedTerm) {
+            if (str_contains($conversionJson, $blockedTerm)) {
+                $errors[] = $this->error($this->loader->rawPath('report_assets/commercial_conversion_assets.json', $version), 1, 'commercial conversion assets must not contain blocked term: '.$blockedTerm);
+            }
+        }
+
+        $qualityAssets = (array) data_get($docs, 'quality_confidence.assets', []);
+        foreach (['eq.quality.level.A', 'eq.quality.level.B', 'eq.quality.level.C', 'eq.quality.level.D'] as $assetId) {
+            $this->lintLocalizedAssetFields($this->loader->rawPath('report_assets/quality_confidence.json', $version), (array) ($qualityAssets[$assetId] ?? []), [
+                'label',
+                'body',
+                'user_guidance',
+                'retest_note',
+                'why_this_level',
+                'how_to_read',
+            ], $errors);
+        }
+
+        $evidenceAssets = (array) data_get($docs, 'psychometric_evidence_status.assets', []);
+        $this->lintLocalizedAssetFields($this->loader->rawPath('report_assets/psychometric_evidence_status.json', $version), (array) ($evidenceAssets['eq.evidence.content_validity'] ?? []), [
+            'status',
+            'body',
+            'user_facing_status_label',
+            'what_this_means_for_user',
+            'next_validation_step',
+        ], $errors);
+
+        $agentPlaybookAssets = (array) data_get($docs, 'agent_dialogue_playbooks.assets', []);
+        $this->lintLocalizedAssetFields($this->loader->rawPath('report_assets/agent_dialogue_playbooks.json', $version), (array) ($agentPlaybookAssets['eq.agent.playbook.understand_result'] ?? []), [
+            'title',
+            'response_policy',
+            'clarifying_question',
+            'safe_response_example',
+            'refusal_example',
+            'escalation_rule',
+        ], $errors);
+
+        $backendContractAssets = (array) data_get($docs, 'backend_integration_contract.assets', []);
+        $this->lintLocalizedAssetFields($this->loader->rawPath('report_assets/backend_integration_contract.json', $version), (array) ($backendContractAssets['eq.backend_contract.schema_mapping'] ?? []), [
+            'title',
+            'requirement',
+            'acceptance',
+            'do_not_overread',
+        ], $errors);
     }
 
     /**
@@ -1086,7 +1172,13 @@ final class Eq60ContentLintService
         }
 
         foreach (['zh-CN', 'en'] as $locale) {
-            if (trim((string) ($node[$locale] ?? '')) === '') {
+            $value = $node[$locale] ?? '';
+            if (is_array($value)) {
+                $errors[] = $this->error($file, 1, $path.'.'.$locale.' must be scalar text.');
+
+                continue;
+            }
+            if (trim((string) $value) === '') {
                 $errors[] = $this->error($file, 1, $path.'.'.$locale.' is required.');
             }
         }

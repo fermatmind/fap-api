@@ -11,6 +11,131 @@ continuation_protocol:
     do_not_stop_train_when_external_and_required_checks_green: true
 prs:
 
+  - id: PR-EQ-ASSET-01
+    repo: fap-api
+    branch: codex/pr-eq-asset-01-content-pack-v16
+    title: "PR-EQ-ASSET-01 Backend EQ v1.6 content-pack import and compile lint"
+    train_scope: eq_v16_content_asset_productization
+    scope:
+      - Adapt the desktop EQ v1.6 commercial-ready content package into existing EQ_60/v1 raw report asset structures.
+      - Add the v1.6 result snapshot, commercial conversion, quality confidence, psychometric evidence, agent playbook, and backend integration asset layers.
+      - Extend EQ content compile and lint coverage for the new asset layers.
+      - Keep EQ_EMOTIONAL_INTELLIGENCE/v1 raw and compiled report assets mirrored with EQ_60/v1.
+    allowed_paths:
+      - backend/app/Services/Content/Eq60ContentCompileService.php
+      - backend/app/Services/Content/Eq60ContentLintService.php
+      - backend/content_packs/EQ_60/v1/raw/report_assets/**
+      - backend/content_packs/EQ_60/v1/compiled/report_assets.compiled.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/**
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/report_assets.compiled.json
+      - backend/tests/Feature/Content/Eq60ContentGateTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change EQ-60 questions, options, reverse keys, scoring semantics, or norm algorithms.
+      - Change report composer payload behavior.
+      - Modify fap-web.
+      - Implement EQ-SJT runtime, scorer, routes, or take flow.
+      - Add paid, locked, blur, SKU, or access-wall semantics.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:lint --pack=EQ_60 --pack-version=v1
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:compile --pack=EQ_60 --pack-version=v1
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ContentGateTest
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: PR-EQ-ASSET-02
+    repo: fap-api
+    depends_on: [PR-EQ-ASSET-01]
+    branch: codex/pr-eq-asset-02-report-payload-fixtures-v16
+    title: "PR-EQ-ASSET-02 Backend EQ v1.6 report payload and canonical fixtures"
+    train_scope: eq_v16_content_asset_productization
+    scope:
+      - Resolve v1.6 assets in Eq60ReportComposer while preserving the EQ v5 all-free contract.
+      - Upgrade methodology.report_version to eq_report_v5_assets_commercial_ready_v1_6.
+      - Regenerate backend canonical fixtures for balanced, high-empathy-low-recovery, and low-confidence cases in zh-CN and en.
+      - Keep next_module.available=false and no paid, locked, blur, SKU, or access-wall semantics.
+    allowed_paths:
+      - backend/app/Services/Report/Eq60ReportComposer.php
+      - backend/tests/Fixtures/eq/v5/**
+      - backend/tests/Feature/Report/*Eq60*
+      - backend/tests/Feature/Content/Eq60*
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify raw EQ content assets except for fixture-required metadata fixes.
+      - Change EQ-60 questions, options, reverse keys, scoring semantics, or norm algorithms.
+      - Modify fap-web.
+      - Implement EQ-SJT runtime, scorer, routes, or take flow.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60GoldenCasesTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ReportPaywallTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60SubmitQualityContractTest
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: PR-EQ-ASSET-03
+    repo: fap-web
+    depends_on: [PR-EQ-ASSET-02]
+    branch: codex/pr-eq-asset-03-frontend-v16-fixtures
+    title: "PR-EQ-ASSET-03 Frontend EQ v1.6 contract fixture consumption"
+    train_scope: eq_v16_content_asset_productization
+    scope:
+      - Sync frontend EQ fixtures with backend v1.6 canonical payloads.
+      - Extend EQResultV5 contract and e2e assertions for snapshot, conversion actions, career decision support, quality evidence, and Agent entry copy.
+      - Keep the page structure stable and consume backend resolved assets without hardcoded report prose.
+      - Preserve no paid CTA, no locked, no blur, no access wall, no SKU, and no raw technical tags.
+    allowed_paths:
+      - components/result/eq/**
+      - lib/api/v0_3.ts
+      - tests/contracts/eq-result-v5-renderer.contract.test.tsx
+      - tests/e2e/iq-eq-result-regression.spec.ts
+      - tests/fixtures/eq/v5/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify fap-api.
+      - Add frontend-owned official EQ report copy.
+      - Add SJT take entry before EQ-SJT frontend route is implemented in a later PR.
+      - Add paid, locked, blur, SKU, or access-wall semantics.
+    validation:
+      - pnpm typecheck
+      - pnpm test:contract
+      - pnpm exec playwright test tests/e2e/iq-eq-result-regression.spec.ts
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: PR-EQ-PER-01
     repo: fap-api
     branch: codex/pr-eq-per-01-all-free-copy-contract-cleanup

@@ -1,0 +1,121 @@
+{
+  "schema": "eq60.report_assets.backend_integration_contract.v1",
+  "pack_id": "EQ_60",
+  "assets": {
+    "eq.backend_contract.schema_mapping": {
+      "zh-CN": {
+        "title": "Schema 映射",
+        "requirement": "将每个资产文件映射到后端 content-pack compiler 可识别的字段。",
+        "acceptance": "后端 schema、compiler、fixture、contract test 通过后才可生产使用。",
+        "do_not_overread": "这是导入契约，不是运行时代码。"
+      },
+      "en": {
+        "title": "Map every asset file into backend content-pack compiler fields before production",
+        "requirement": "Map every asset file into backend content-pack compiler fields before production.",
+        "acceptance": "Backend schema, compiler, fixtures, and contract tests must pass before production use.",
+        "do_not_overread": "This is an import contract, not runtime code."
+      },
+      "meta": {
+        "id": "eq.backend_contract.schema_mapping",
+        "asset_type": "backend_integration_contract",
+        "purpose": "Production import and contract requirement",
+        "trigger_logic": {
+          "contract_gate": "schema_mapping"
+        },
+        "claim_sensitivity": "high"
+      }
+    },
+    "eq.backend_contract.canonical_fixtures": {
+      "zh-CN": {
+        "title": "Canonical fixtures",
+        "requirement": "为 balanced、high_empathy_low_recovery、low_confidence 三条路径生成 zh-CN / en canonical fixtures。",
+        "acceptance": "后端 schema、compiler、fixture、contract test 通过后才可生产使用。",
+        "do_not_overread": "这是导入契约，不是运行时代码。"
+      },
+      "en": {
+        "title": "Generate zh-CN/en fixtures for balanced, high empathy low recovery, and low confidence paths",
+        "requirement": "Generate zh-CN/en fixtures for balanced, high empathy low recovery, and low confidence paths.",
+        "acceptance": "Backend schema, compiler, fixtures, and contract tests must pass before production use.",
+        "do_not_overread": "This is an import contract, not runtime code."
+      },
+      "meta": {
+        "id": "eq.backend_contract.canonical_fixtures",
+        "asset_type": "backend_integration_contract",
+        "purpose": "Production import and contract requirement",
+        "trigger_logic": {
+          "contract_gate": "canonical_fixtures"
+        },
+        "claim_sensitivity": "high"
+      }
+    },
+    "eq.backend_contract.contract_tests": {
+      "zh-CN": {
+        "title": "契约测试",
+        "requirement": "断言 report payload 包含 v1.6 assets、免费转化动作、无权限门槛，且 SJT 保持 unavailable。",
+        "acceptance": "后端 schema、compiler、fixture、contract test 通过后才可生产使用。",
+        "do_not_overread": "这是导入契约，不是运行时代码。"
+      },
+      "en": {
+        "title": "Assert report payload contains v1",
+        "requirement": "Assert report payload contains v1.6 assets, conversion actions, no access wall, and SJT unavailable.",
+        "acceptance": "Backend schema, compiler, fixtures, and contract tests must pass before production use.",
+        "do_not_overread": "This is an import contract, not runtime code."
+      },
+      "meta": {
+        "id": "eq.backend_contract.contract_tests",
+        "asset_type": "backend_integration_contract",
+        "purpose": "Production import and contract requirement",
+        "trigger_logic": {
+          "contract_gate": "contract_tests"
+        },
+        "claim_sensitivity": "high"
+      }
+    },
+    "eq.backend_contract.frontend_consumption": {
+      "zh-CN": {
+        "title": "前端消费契约",
+        "requirement": "前端必须渲染后端 resolved assets，不得硬编码正式报告解释文案。",
+        "acceptance": "后端 schema、compiler、fixture、contract test 通过后才可生产使用。",
+        "do_not_overread": "这是导入契约，不是运行时代码。"
+      },
+      "en": {
+        "title": "Frontend must render resolved assets and must not hardcode official report explanation",
+        "requirement": "Frontend must render resolved assets and must not hardcode official report explanation.",
+        "acceptance": "Backend schema, compiler, fixtures, and contract tests must pass before production use.",
+        "do_not_overread": "This is an import contract, not runtime code."
+      },
+      "meta": {
+        "id": "eq.backend_contract.frontend_consumption",
+        "asset_type": "backend_integration_contract",
+        "purpose": "Production import and contract requirement",
+        "trigger_logic": {
+          "contract_gate": "frontend_consumption"
+        },
+        "claim_sensitivity": "high"
+      }
+    },
+    "eq.backend_contract.agent_readiness": {
+      "zh-CN": {
+        "title": "Agent 就绪契约",
+        "requirement": "Agent 在检索、拒答和边界评测通过前，只能解释已解析报告资产。",
+        "acceptance": "后端 schema、compiler、fixture、contract test 通过后才可生产使用。",
+        "do_not_overread": "这是导入契约，不是运行时代码。"
+      },
+      "en": {
+        "title": "Agent can only explain resolved assets until retrieval and refusal evals pass",
+        "requirement": "Agent can only explain resolved assets until retrieval and refusal evals pass.",
+        "acceptance": "Backend schema, compiler, fixtures, and contract tests must pass before production use.",
+        "do_not_overread": "This is an import contract, not runtime code."
+      },
+      "meta": {
+        "id": "eq.backend_contract.agent_readiness",
+        "asset_type": "backend_integration_contract",
+        "purpose": "Production import and contract requirement",
+        "trigger_logic": {
+          "contract_gate": "agent_readiness"
+        },
+        "claim_sensitivity": "high"
+      }
+    }
+  }
+}
