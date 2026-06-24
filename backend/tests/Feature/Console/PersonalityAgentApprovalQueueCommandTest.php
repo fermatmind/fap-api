@@ -147,6 +147,127 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
         );
     }
 
+    public function test_enneagram_dry_run_accepts_hub_centers_and_core_type_public_asset_paths(): void
+    {
+        [$packagePath, $qaPath] = $this->writeArtifacts($this->validEnneagramPackage(), $this->validEnneagramQa());
+
+        $exitCode = Artisan::call('personality:agent-approval-queue', [
+            '--package' => $packagePath,
+            '--qa' => $qaPath,
+            '--dry-run' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertSame('enneagram', $payload['framework']);
+        $this->assertSame(3, $payload['planned_item_count']);
+        $this->assertSame(0, $payload['blocked_item_count']);
+        $this->assertSame(0, $payload['created_item_count']);
+        $this->assertFalse($payload['writes_committed']);
+        $this->assertFalse($payload['cms_write_attempted']);
+        $this->assertFalse($payload['publish_attempted']);
+        $this->assertFalse($payload['search_release_attempted']);
+        $this->assertEquals(
+            ['personality_public_content_asset'],
+            array_values(array_unique(array_map(
+                static fn (array $item): string => (string) $item['page_type'],
+                $payload['items']
+            )))
+        );
+        $this->assertSame(0, DB::table('personality_agent_approval_batches')->count());
+        $this->assertSame(0, DB::table('personality_agent_approval_items')->count());
+    }
+
+    public function test_enneagram_write_creates_pending_items_without_cms_or_search_side_effects(): void
+    {
+        [$packagePath, $qaPath] = $this->writeArtifacts($this->validEnneagramPackage(), $this->validEnneagramQa());
+
+        $exitCode = Artisan::call('personality:agent-approval-queue', $this->writeOptions($packagePath, $qaPath));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertSame('enneagram', $payload['framework']);
+        $this->assertSame(3, $payload['planned_item_count']);
+        $this->assertSame(3, $payload['created_item_count']);
+        $this->assertTrue($payload['writes_committed']);
+        $this->assertFalse($payload['cms_write_attempted']);
+        $this->assertFalse($payload['cms_mutation_attempted']);
+        $this->assertFalse($payload['publish_attempted']);
+        $this->assertFalse($payload['index_attempted']);
+        $this->assertFalse($payload['sitemap_llms_release_attempted']);
+        $this->assertFalse($payload['search_release_attempted']);
+        $this->assertFalse($payload['enqueue_attempted']);
+        $this->assertFalse($payload['external_calls_attempted']);
+
+        $this->assertSame(1, DB::table('personality_agent_approval_batches')->where('framework', 'enneagram')->count());
+        $this->assertSame(3, DB::table('personality_agent_approval_items')->where('framework', 'enneagram')->count());
+        $this->assertSame(
+            ['pending'],
+            DB::table('personality_agent_approval_items')->distinct()->pluck('approval_state')->all()
+        );
+        $this->assertSame(
+            ['personality_public_content_asset'],
+            DB::table('personality_agent_approval_items')->distinct()->pluck('page_type')->all()
+        );
+    }
+
+    public function test_enneagram_wing_instinct_and_tritype_urls_fail_closed(): void
+    {
+        $package = [
+            'artifact' => 'ENNEAGRAM-PUBLIC-PROFILE-AGENT-PILOT-01',
+            'version' => 'enneagram.agent_pilot.v1',
+            'status' => 'pass_ready_for_qa_gates',
+            'recommendations' => [
+                $this->enneagramRecommendation(
+                    'enneagram-agent:/en/personality/enneagram/type-1-wing-9',
+                    'https://fermatmind.com/en/personality/enneagram/type-1-wing-9',
+                    'en',
+                    'wing'
+                ),
+                $this->enneagramRecommendation(
+                    'enneagram-agent:/en/personality/enneagram/instinctual-subtypes',
+                    'https://fermatmind.com/en/personality/enneagram/instinctual-subtypes',
+                    'en',
+                    'instinctual_subtype'
+                ),
+                $this->enneagramRecommendation(
+                    'enneagram-agent:/zh/personality/enneagram/tritype',
+                    'https://fermatmind.com/zh/personality/enneagram/tritype',
+                    'zh-CN',
+                    'tritype'
+                ),
+            ],
+        ];
+        [$packagePath, $qaPath] = $this->writeArtifacts($package, [
+            'artifact' => 'ENNEAGRAM-PUBLIC-PROFILE-AGENT-QA-01',
+            'final_decision' => 'PASS_READY_FOR_APPROVAL_QUEUE',
+            'page_results' => [
+                $this->qaRow('https://fermatmind.com/en/personality/enneagram/type-1-wing-9', 'PASS_READY_FOR_APPROVAL_QUEUE'),
+                $this->qaRow('https://fermatmind.com/en/personality/enneagram/instinctual-subtypes', 'PASS_READY_FOR_APPROVAL_QUEUE'),
+                $this->qaRow('https://fermatmind.com/zh/personality/enneagram/tritype', 'PASS_READY_FOR_APPROVAL_QUEUE'),
+            ],
+        ]);
+
+        $exitCode = Artisan::call('personality:agent-approval-queue', [
+            '--package' => $packagePath,
+            '--qa' => $qaPath,
+            '--dry-run' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertSame(0, $payload['planned_item_count']);
+        $this->assertSame(3, $payload['blocked_item_count']);
+        $this->assertContains('no_queueable_qa_passed_items', array_column($payload['errors'], 'code'));
+        $this->assertSame(0, DB::table('personality_agent_approval_batches')->count());
+        $this->assertSame(0, DB::table('personality_agent_approval_items')->count());
+    }
+
     /**
      * @return array<string,mixed>
      */
@@ -174,6 +295,54 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
     /**
      * @return array<string,mixed>
      */
+    private function validEnneagramPackage(): array
+    {
+        return [
+            'artifact' => 'ENNEAGRAM-PUBLIC-PROFILE-AGENT-PILOT-01',
+            'version' => 'enneagram.agent_pilot.v1',
+            'status' => 'pass_ready_for_qa_gates',
+            'recommendations' => [
+                $this->enneagramRecommendation(
+                    'enneagram-agent:/en/personality/enneagram',
+                    'https://fermatmind.com/en/personality/enneagram',
+                    'en',
+                    'hub'
+                ),
+                $this->enneagramRecommendation(
+                    'enneagram-agent:/zh/personality/enneagram/centers/gut',
+                    'https://fermatmind.com/zh/personality/enneagram/centers/gut',
+                    'zh-CN',
+                    'center'
+                ),
+                $this->enneagramRecommendation(
+                    'enneagram-agent:/en/personality/enneagram/type-1',
+                    'https://fermatmind.com/en/personality/enneagram/type-1',
+                    'en',
+                    'core_type'
+                ),
+            ],
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function validEnneagramQa(): array
+    {
+        return [
+            'artifact' => 'ENNEAGRAM-PUBLIC-PROFILE-AGENT-QA-01',
+            'final_decision' => 'PASS_READY_FOR_APPROVAL_QUEUE',
+            'page_results' => [
+                $this->qaRow('https://fermatmind.com/en/personality/enneagram', 'PASS_READY_FOR_APPROVAL_QUEUE'),
+                $this->qaRow('https://fermatmind.com/zh/personality/enneagram/centers/gut', 'PASS_READY_FOR_APPROVAL_QUEUE'),
+                $this->qaRow('https://fermatmind.com/en/personality/enneagram/type-1', 'PASS_READY_FOR_APPROVAL_QUEUE'),
+            ],
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
     private function validQa(): array
     {
         return [
@@ -182,6 +351,29 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
             'page_results' => [
                 $this->qaRow('https://fermatmind.com/en/personality/enfj-a', 'PASS_READY_FOR_CMS_DRAFT'),
                 $this->qaRow('https://fermatmind.com/zh/personality/intp-a', 'PASS_READY_FOR_CMS_DRAFT'),
+            ],
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function enneagramRecommendation(string $id, string $targetUrl, string $locale, string $entityType): array
+    {
+        return [
+            'recommendation_id' => $id,
+            'target_url' => $targetUrl,
+            'framework' => 'enneagram',
+            'locale' => $locale,
+            'entity_type' => $entityType,
+            'recommendations' => [
+                'title' => 'Enneagram title',
+                'description' => 'Enneagram description',
+                'h1' => 'Enneagram H1',
+                'quick_answer' => 'Reflective Enneagram quick answer.',
+                'faq' => [],
+                'internal_links' => [],
+                'differentiation_notes' => [],
             ],
         ];
     }
