@@ -70,7 +70,19 @@ final class IqOwnerOriginal30SessionDeliveryTest extends TestCase
         ]);
         $this->assertCount(1, $response->json('questions.items'));
         $this->assertSame('IQOWNER30-Q01', $response->json('questions.items.0.question_id'));
+        $this->assertOwnerOriginalQ1AssetsArePubliclyResolvable($response->json('questions.items.0'));
         $this->assertPayloadHasNoPrivateIqFields($response->json());
+    }
+
+    #[Test]
+    public function owner_original_asset_route_rejects_invalid_paths(): void
+    {
+        $response = $this->getJson('/api/v0.3/iq-owner-original-30/assets/iq_owner_original_30/../banks/IQ_OWNER_ORIGINAL_30/answer_key.json');
+
+        $response->assertStatus(404);
+        $response->assertJson([
+            'error_code' => 'IQ_OWNER_ASSET_NOT_FOUND',
+        ]);
     }
 
     #[Test]
@@ -234,5 +246,49 @@ final class IqOwnerOriginal30SessionDeliveryTest extends TestCase
                 $this->assertPayloadHasNoPrivateIqFields($value);
             }
         }
+    }
+
+    private function assertOwnerOriginalQ1AssetsArePubliclyResolvable(array $item): void
+    {
+        $media = [
+            'stem' => data_get($item, 'stem'),
+        ];
+
+        foreach (['A', 'B', 'C', 'D', 'E', 'F'] as $code) {
+            $option = collect(data_get($item, 'options', []))
+                ->first(static fn (array $candidate): bool => ($candidate['code'] ?? null) === $code);
+            $this->assertIsArray($option, 'missing option '.$code);
+            $media['option_'.$code] = $option;
+        }
+
+        foreach ($media as $label => $payload) {
+            $this->assertIsArray($payload, $label.' media payload missing');
+            $src = (string) data_get($payload, 'src');
+            $publicUrl = (string) data_get($payload, 'public_url');
+            $assetPath = (string) data_get($payload, 'assets.image');
+
+            $this->assertNotSame('', $src, $label.' src missing');
+            $this->assertSame($src, $publicUrl, $label.' public_url should match src');
+            $this->assertStringStartsWith(url('/api/v0.3/iq-owner-original-30/assets/iq_owner_original_30/q01/'), $src);
+            $this->assertStringStartsWith('assets/iq_owner_original_30/q01/', $assetPath);
+            $this->assertStringNotContainsString(base_path(), $src);
+            $this->assertStringNotContainsString('/private/', $src);
+            $this->assertStringNotContainsString('../', $src);
+
+            $assetResponse = $this->get($this->pathFromPublicUrl($src));
+            $assetResponse->assertStatus(200);
+            $assetResponse->assertHeader('X-Content-Type-Options', 'nosniff');
+            $this->assertStringStartsWith('image/webp', (string) $assetResponse->headers->get('content-type'));
+            $this->assertGreaterThan(0, $assetResponse->baseResponse->getFile()->getSize());
+        }
+    }
+
+    private function pathFromPublicUrl(string $url): string
+    {
+        $path = parse_url($url, PHP_URL_PATH);
+        $this->assertIsString($path);
+        $this->assertStringStartsWith('/api/v0.3/iq-owner-original-30/assets/', $path);
+
+        return $path;
     }
 }

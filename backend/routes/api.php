@@ -15,6 +15,7 @@ use App\Http\Controllers\API\V0_3\ClaimController as ClaimV03Controller;
 use App\Http\Controllers\API\V0_3\ComplianceDsarController;
 use App\Http\Controllers\API\V0_3\EmailCaptureController;
 use App\Http\Controllers\API\V0_3\EmailPreferenceController;
+use App\Http\Controllers\API\V0_3\IqOwnerOriginal30AssetController;
 use App\Http\Controllers\API\V0_3\MbtiAttributionEventController;
 use App\Http\Controllers\API\V0_3\MbtiCompareInviteController;
 use App\Http\Controllers\API\V0_3\MeController as MeV03Controller;
@@ -231,6 +232,9 @@ Route::prefix('v0.3')->middleware([
         Route::get('/public-gateways/tests', [PublicGatewaySurfaceController::class, 'tests']);
         Route::get('/public-gateways/help', [PublicGatewaySurfaceController::class, 'help']);
         Route::get('/public-gateways/help/{slug}', [PublicGatewaySurfaceController::class, 'helpDetail']);
+        Route::get('/iq-owner-original-30/assets/{path}', [IqOwnerOriginal30AssetController::class, 'show'])
+            ->where('path', '.*')
+            ->name('api.v0_3.iq_owner_original_30.assets.show');
         Route::get('/scales/{scale_code}/questions', [ScalesController::class, 'questions']);
         Route::get('/scales/{scale_code}/technical-note', [ScalesController::class, 'technicalNote']);
         Route::get('/scales/{scale_code}', [ScalesController::class, 'show']);
