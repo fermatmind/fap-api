@@ -60640,7 +60640,7 @@
     "repo": "fap-api",
     "branch": "codex/pr-eq-agent-01-knowledge-schema",
     "base": "main",
-    "status": "local_checks_passed",
+    "status": "pr_opened",
     "train_scope": "eq_agent_ready_content_os",
     "title": "PR-EQ-AGENT-01 EQ Agent knowledge base schema and intent map",
     "depends_on": [
@@ -60693,11 +60693,15 @@
       "commit_created": {
         "status": "pass",
         "evidence": "Local commit created: 4a7d31e9e471145627dc15338646abc50d5448b9."
+      },
+      "pr_opened": {
+        "status": "pass",
+        "evidence": "GitHub PR #2397 opened for codex/pr-eq-agent-01-knowledge-schema."
       }
     },
     "failure_reason": null,
     "commit_sha": "4a7d31e9e471145627dc15338646abc50d5448b9",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2397",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -60719,6 +60723,12 @@
         "from": "in_progress",
         "to": "local_checks_passed",
         "notes": "Added EQ Agent knowledge base schema asset, compiler/lint/test coverage, mirror assets, and passed local validation."
+      },
+      {
+        "at": "2026-06-24T22:55:00+08:00",
+        "from": "local_checks_passed",
+        "to": "pr_opened",
+        "notes": "Opened https://github.com/fermatmind/fap-api/pull/2397 after local validation and scope validation passed."
       }
     ]
   },
