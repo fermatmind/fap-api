@@ -31,6 +31,19 @@ final class CareerJobDetailController extends Controller
         'index_state_id',
     ];
 
+    private const RAW_READER_PAYLOAD_VALUE_REPLACEMENTS = [
+        'industry_proxy_or_recruitment_sample_only' => 'recruitment-market reference only',
+        'industry_proxy / recruitment_sample' => 'recruitment-market reference',
+        'candidate_only_not_runtime_seo' => 'candidate reference only',
+        'source_bounded_reference_only' => 'source-bounded reference only',
+        'backend projection review' => 'reader projection review',
+        'search candidate only' => 'search reference candidate only',
+        'salary_and_outlook' => 'salary and outlook context',
+        'staging_preview_only' => 'preview only',
+        'industry_proxy' => 'recruitment-market reference',
+        'raw enum' => 'reader label',
+    ];
+
     public function __construct(
         private readonly PublicCareerAuthorityResponseCache $responseCache,
         private readonly CareerCnProxyPublicOwnerSurfaceBuilder $cnProxySurfaceBuilder,
@@ -81,9 +94,20 @@ final class CareerJobDetailController extends Controller
         foreach ($payload as $key => $value) {
             if (is_array($value)) {
                 $payload[$key] = $this->stripInternalReaderPayloadKeys($value);
+            } elseif (is_string($value)) {
+                $payload[$key] = $this->projectReaderSafeString($value);
             }
         }
 
         return $payload;
+    }
+
+    private function projectReaderSafeString(string $value): string
+    {
+        foreach (self::RAW_READER_PAYLOAD_VALUE_REPLACEMENTS as $rawValue => $readerSafeValue) {
+            $value = str_replace($rawValue, $readerSafeValue, $value);
+        }
+
+        return $value;
     }
 }

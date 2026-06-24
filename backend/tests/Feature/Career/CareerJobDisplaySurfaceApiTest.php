@@ -202,6 +202,54 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
         }
     }
 
+    public function test_job_detail_projection_rewrites_internal_raw_enum_values(): void
+    {
+        $occupation = $this->seedCompiledOccupation('accountants-and-auditors');
+        $this->addCrosswalks($occupation, 'accountants-and-auditors');
+        $asset = $this->createDisplayAsset($occupation);
+
+        $pagePayload = $asset->page_payload_json;
+        $pagePayload['en']['fermat_decision_card'] = [
+            'search_intent_type' => ['career_exploration', 'salary_and_outlook'],
+            'body' => 'This source_bounded_reference_only signal is not candidate_only_not_runtime_seo.',
+        ];
+        $pagePayload['en']['market_signal_card'] = [
+            'salary_data_type' => 'industry_proxy_or_recruitment_sample_only',
+            'body' => 'Use industry_proxy / recruitment_sample, not raw enum text.',
+        ];
+        $pagePayload['zh']['fermat_decision_card'] = [
+            'search_intent_type' => ['career_exploration', 'salary_and_outlook'],
+            'body' => '这里是 source_bounded_reference_only，不应暴露 backend projection review。',
+        ];
+        $pagePayload['zh']['market_signal_card'] = [
+            'salary_data_type' => 'industry_proxy / recruitment_sample',
+            'body' => '只应展示 industry_proxy 的读者安全文案。',
+        ];
+        $asset->forceFill(['page_payload_json' => $pagePayload])->save();
+
+        $response = $this->getJson('/api/v0.5/career/jobs/accountants-and-auditors?locale=en')
+            ->assertOk()
+            ->assertJsonPath('identity.canonical_slug', 'accountants-and-auditors');
+
+        $encoded = json_encode($response->json(), JSON_THROW_ON_ERROR);
+
+        foreach ([
+            'salary_and_outlook',
+            'industry_proxy',
+            'source_bounded_reference_only',
+            'candidate_only_not_runtime_seo',
+            'backend projection review',
+            'raw enum',
+            'staging_preview_only',
+        ] as $rawValue) {
+            $this->assertStringNotContainsString($rawValue, $encoded);
+        }
+
+        $this->assertStringContainsString('salary and outlook context', $encoded);
+        $this->assertStringContainsString('recruitment-market reference', $encoded);
+        $this->assertStringContainsString('source-bounded reference only', $encoded);
+    }
+
     public function test_it_adds_display_surface_for_selected_d5_assets(): void
     {
         foreach ([
