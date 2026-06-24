@@ -24,6 +24,7 @@ use App\Services\Content\EnneagramPackLoader;
 use App\Services\Enneagram\EnneagramObservationStateService;
 use App\Services\Enneagram\EnneagramPublicFormSummaryBuilder;
 use App\Services\Enneagram\EnneagramPublicProjectionService;
+use App\Services\Eq\EqAgentContextBuilder;
 use App\Services\Eq\EqJourneyStateService;
 use App\Services\Iq\IqResultPayloadRedactor;
 use App\Services\Mbti\MbtiActionJourneyContractService;
@@ -73,6 +74,7 @@ class AttemptReadController extends Controller
         private EnneagramPublicProjectionService $enneagramPublicProjectionService,
         private EnneagramPublicFormSummaryBuilder $enneagramPublicFormSummaryBuilder,
         private EnneagramObservationStateService $enneagramObservationStateService,
+        private EqAgentContextBuilder $eqAgentContextBuilder,
         private EqJourneyStateService $eqJourneyStateService,
         private RiasecPublicProjectionService $riasecPublicProjectionService,
         private RiasecPublicFormSummaryBuilder $riasecPublicFormSummaryBuilder,
@@ -708,6 +710,115 @@ class AttemptReadController extends Controller
         }
 
         return response()->json($responsePayload);
+    }
+
+    /**
+     * GET /api/v0.3/attempts/{id}/eq/agent-context
+     */
+    public function eqAgentContext(Request $request, string $id): JsonResponse
+    {
+        $requestedReportLocale = $this->normalizeReportLocale((string) $request->query('locale', ''));
+        $orgId = $this->currentOrgContext()->orgId();
+        $userId = $this->resolveUserId($request);
+        $anonId = $this->resolveAnonId($request);
+        $submissionPayload = $this->latestReadableSubmission($request, $id);
+        if (($submissionPayload['ok'] ?? false) === true) {
+            $submissionState = strtolower(trim((string) data_get($submissionPayload, 'submission.state', 'pending')));
+            if (in_array($submissionState, ['pending', 'running'], true)) {
+                return response()->json(array_merge(
+                    $this->eqAgentContextBuilder->nonReady($id, 'submission_pending', 'EQ_60'),
+                    [
+                        'submission_state' => $submissionState,
+                        'submission' => is_array($submissionPayload['submission'] ?? null) ? $submissionPayload['submission'] : [],
+                    ]
+                ), 202);
+            }
+
+            if ($submissionState === 'failed') {
+                return response()->json(array_merge(
+                    $this->eqAgentContextBuilder->nonReady($id, 'submission_failed', 'EQ_60'),
+                    [
+                        'ok' => false,
+                        'submission_state' => $submissionState,
+                        'submission' => is_array($submissionPayload['submission'] ?? null) ? $submissionPayload['submission'] : [],
+                    ]
+                ), 409);
+            }
+        }
+
+        $result = Result::query()->where('org_id', $orgId)->where('attempt_id', $id)->first();
+        if (! $result instanceof Result) {
+            if (($submissionPayload['ok'] ?? false) === true) {
+                $submissionState = strtolower(trim((string) data_get($submissionPayload, 'submission.state', 'pending')));
+                if ($submissionState === 'succeeded') {
+                    return response()->json(array_merge(
+                        $this->eqAgentContextBuilder->nonReady($id, 'result_not_ready', 'EQ_60'),
+                        [
+                            'submission_state' => $submissionState,
+                            'submission' => is_array($submissionPayload['submission'] ?? null) ? $submissionPayload['submission'] : [],
+                        ]
+                    ), 202);
+                }
+            }
+
+            throw new ApiProblemException(404, 'RESULT_NOT_FOUND', 'result not found.');
+        }
+
+        $responseCodes = $this->resolveResponseScaleCodes($result);
+        $scaleCode = $this->resolveNormalizedScaleCode($responseCodes);
+        $attempt = $this->resolveAttemptForReportRead($request, $id, $scaleCode);
+        $this->enforceEmailBindingForRead($request, $orgId, $attempt, $scaleCode);
+        if (! in_array($scaleCode, ['EQ_60', 'EQ_EMOTIONAL_INTELLIGENCE'], true)) {
+            throw new ApiProblemException(422, 'SCALE_NOT_SUPPORTED', 'Agent context is only available for EQ attempts.');
+        }
+        $emailTokenActor = $this->resultEmailReadAccess()->tokenActorForRequest($request, $orgId, $id);
+        $readUserId = $emailTokenActor['user_id'] ?? ($userId !== null ? (string) $userId : null);
+        $readAnonId = $emailTokenActor['anon_id'] ?? $anonId;
+
+        $gate = $this->resolveReportGate(
+            $orgId,
+            $id,
+            $readUserId,
+            $readAnonId,
+            $this->currentOrgContext()->role(),
+            $this->shouldUsePublicArtifactFallback($request, $attempt),
+            false,
+            $requestedReportLocale,
+        );
+
+        if (isset($gate['report']) && is_array($gate['report'])) {
+            $gate['report'] = $this->projectScaleCodePayload($gate['report'], $responseCodes);
+        }
+
+        if ((bool) ($gate['generating'] ?? false) || ! is_array($gate['report'] ?? null)) {
+            return response()->json(array_merge(
+                $this->eqAgentContextBuilder->nonReady($id, 'report_not_ready', $responseCodes['scale_code']),
+                [
+                    'access_state' => (string) ($gate['access_state'] ?? ''),
+                    'report_state' => (string) ($gate['report_state'] ?? ''),
+                    'variant' => (string) ($gate['variant'] ?? ''),
+                    'access_level' => (string) ($gate['access_level'] ?? ''),
+                ]
+            ), 202);
+        }
+
+        $reportEnvelope = array_merge($gate, [
+            'scale_code' => $responseCodes['scale_code'],
+            'scale_code_legacy' => $responseCodes['scale_code_legacy'],
+            'scale_code_v2' => $responseCodes['scale_code_v2'],
+            'scale_uid' => $responseCodes['scale_uid'],
+        ]);
+
+        $payload = $this->eqAgentContextBuilder->build(
+            $attempt,
+            $result,
+            $reportEnvelope,
+            $responseCodes,
+            $requestedReportLocale,
+            (string) $request->query('intent', '')
+        );
+
+        return response()->json($payload);
     }
 
     /**

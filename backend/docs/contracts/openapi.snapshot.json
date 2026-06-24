@@ -461,6 +461,30 @@
                 "x-laravel-name": "api.v0_3.attempts.enneagram.observation.day7"
             }
         },
+        "/api/v0.3/attempts/{id}/eq/agent-context": {
+            "get": {
+                "operationId": "api.v0_3.attempts.eq.agent_context",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\AttemptReadController@eqAgentContext",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\ForcePublicAttemptRealm",
+                    "App\\Http\\Middleware\\EnsureUuidRouteParams:id"
+                ],
+                "x-laravel-name": "api.v0_3.attempts.eq.agent_context"
+            }
+        },
         "/api/v0.3/attempts/{id}/eq/journey": {
             "get": {
                 "operationId": "api.v0_3.attempts.eq.journey.show",

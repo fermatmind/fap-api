@@ -355,8 +355,10 @@ prs:
       - backend/app/Http/Controllers/API/V0_3/**
       - backend/app/Services/Eq/**
       - backend/app/Services/Report/Eq60ReportComposer.php
+      - backend/docs/contracts/openapi.snapshot.json
       - backend/tests/Feature/**/Eq*Agent*
       - backend/tests/Feature/Report/*Eq60*
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/audits/eq/**
       - docs/product/eq/**
       - docs/codex/pr-train.yaml
@@ -369,6 +371,8 @@ prs:
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan route:list
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=EqAgent
+      - cd backend && bash scripts/export_openapi.sh --check
+      - python3 -m json.tool backend/docs/contracts/openapi.snapshot.json >/dev/null
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - git diff --check

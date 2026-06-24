@@ -801,6 +801,27 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ));
     }
 
+    public function test_runtime_freeze_classifier_ignores_eq_agent_context_read_only_contract_changes(): void
+    {
+        $changed = [
+            'backend/app/Services/Eq/EqAgentContextBuilder.php',
+            'backend/routes/api.php',
+        ];
+        $routeChangedLines = [
+            "+            Route::get('/attempts/{id}/eq/agent-context', [AttemptReadController::class, 'eqAgentContext'])",
+            "+                ->middleware('uuid:id')",
+            "+                ->defaults('public_realm', true)",
+            "+                ->name('api.v0_3.attempts.eq.agent_context');",
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            routeChangedLines: $routeChangedLines
+        ));
+    }
+
     public function test_runtime_freeze_classifier_ignores_public_content_release_guard_command_changes(): void
     {
         $changed = [
@@ -5262,6 +5283,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isEqAgentContextReadOnlyContractChange($file)) {
+                continue;
+            }
+
             if ($this->isEq60FreeReportContractChange($file, $repoRoot, $baseRef)) {
                 continue;
             }
@@ -5269,6 +5294,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             if (
                 $file === 'backend/routes/api.php'
                 && $this->routeDiffIsEq60JourneyStateContractOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
+            ) {
+                continue;
+            }
+
+            if (
+                $file === 'backend/routes/api.php'
+                && $this->routeDiffIsEqAgentContextReadOnlyContractOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
             ) {
                 continue;
             }
@@ -7207,6 +7239,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Eq/EqJourneyStateService.php',
             'backend/database/migrations/2026_05_31_083300_create_eq_journey_states_table.php',
         ], true);
+    }
+
+    private function isEqAgentContextReadOnlyContractChange(string $file): bool
+    {
+        return $file === 'backend/app/Services/Eq/EqAgentContextBuilder.php';
     }
 
     private function isCiAuthBypassHardeningFile(string $file): bool
@@ -9871,6 +9908,32 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if (preg_match('/eq\\/journey|eqJourney|submitEqJourney|api\\.v0_3\\.attempts\\.eq\\.journey|FmTokenAuth|uuid:id|public_realm/u', $line) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function routeDiffIsEqAgentContextReadOnlyContractOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            if (str_starts_with($line, '-')) {
+                return false;
+            }
+
+            if (preg_match('/^\+\s*$/u', $line) === 1) {
+                continue;
+            }
+
+            if (preg_match('/eq\\/agent-context|eqAgentContext|api\\.v0_3\\.attempts\\.eq\\.agent_context|uuid:id|public_realm/u', $line) !== 1) {
                 return false;
             }
         }
