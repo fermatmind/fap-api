@@ -5,7 +5,7 @@
     "repo": "fap-api",
     "branch": "codex/pr-eq-asset-01-content-pack-v16",
     "base": "main",
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "train_scope": "eq_v16_content_asset_productization",
     "title": "PR-EQ-ASSET-01 Backend EQ v1.6 content-pack import and compile lint",
     "checks": {
@@ -32,11 +32,15 @@
           "git diff --check"
         ],
         "notes": "Focused PR-EQ-ASSET-01 content lint, compile, content gate, metadata parse, and diff checks passed. Non-report-assets compile timestamp side effects were restored before staging."
+      },
+      "github_initial": {
+        "status": "pending",
+        "evidence": "PR #2384 opened; GitHub checks pending."
       }
     },
     "failure_reason": null,
     "commit_sha": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2384",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -58,6 +62,12 @@
         "from": "local_checks_passed",
         "to": "committed",
         "notes": "Committed PR-EQ-ASSET-01 scoped content-pack import changes; branch head will be recorded after PR open or merge."
+      },
+      {
+        "at": "2026-06-24T00:00:00+08:00",
+        "from": "committed",
+        "to": "pr_open",
+        "notes": "Opened https://github.com/fermatmind/fap-api/pull/2384."
       }
     ]
   },
