@@ -67,8 +67,8 @@ final class RiasecExplanationMediaSelectionReadinessTest extends TestCase
             'share.mbti.default',
             'social.wechat.official_qr',
             'social.wechat.qr',
-            'iq-beta30-original-card',
-            'iq-beta30-original-og',
+            'iq-owner-original-30-card',
+            'iq-owner-original-30-og',
             'iq-full-report-cover',
         ] as $assetKey) {
             $this->assertArrayHasKey($assetKey, $rejected);

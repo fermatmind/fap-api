@@ -59,7 +59,7 @@ final class IqNormAuthorityTest extends TestCase
     {
         $gate = IqNormAuthorityContract::publicClaimGate([
             'scale_code' => 'IQ_INTELLIGENCE_QUOTIENT',
-            'bank_id' => 'IQ_BETA_30_ORIGINAL',
+            'bank_id' => 'IQ_OWNER_ORIGINAL_30',
             'norm_table_version' => 'iq_norm_prod_v1',
             'status' => 'production_normed',
             'population_key' => 'general_adult_online',
@@ -87,7 +87,7 @@ final class IqNormAuthorityTest extends TestCase
             'id' => (string) Str::uuid(),
             'org_id' => 0,
             'scale_code' => 'IQ_INTELLIGENCE_QUOTIENT',
-            'bank_id' => 'IQ_BETA_30_ORIGINAL',
+            'bank_id' => 'IQ_OWNER_ORIGINAL_30',
             'norm_table_version' => 'iq_norm_prod_v1',
             'status' => 'production_normed',
             'population_key' => 'general_adult_online',
@@ -119,7 +119,7 @@ final class IqNormAuthorityTest extends TestCase
     {
         $gate = IqNormAuthorityContract::publicClaimGate([
             'scale_code' => 'BIG5_OCEAN',
-            'bank_id' => 'IQ_BETA_30_ORIGINAL',
+            'bank_id' => 'IQ_OWNER_ORIGINAL_30',
             'norm_table_version' => 'iq_norm_prod_v1',
             'status' => 'production_normed',
             'population_key' => 'general_adult_online',

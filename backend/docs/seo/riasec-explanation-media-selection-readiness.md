@@ -36,8 +36,8 @@ An acceptable Article cover media asset must satisfy the backend ArticleResource
 | `share.mbti.default` | reject: MBTI-specific |
 | `social.wechat.official_qr` | reject: QR code, not article cover |
 | `social.wechat.qr` | reject: QR code, not article cover |
-| `iq-beta30-original-card` | reject: IQ-specific |
-| `iq-beta30-original-og` | reject: IQ-specific |
+| `iq-owner-original-30-card` | reject: IQ-specific |
+| `iq-owner-original-30-og` | reject: IQ-specific |
 | `iq-full-report-cover` | reject: IQ-specific |
 
 ## Recommended Media Request
