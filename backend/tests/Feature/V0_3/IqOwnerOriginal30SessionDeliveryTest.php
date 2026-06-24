@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Tests\Feature\V0_3;
 
 use App\Models\Attempt;
+use App\Services\Iq\IqOwnerOriginal30BankService;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use PHPUnit\Framework\Attributes\Test;
@@ -52,7 +54,12 @@ final class IqOwnerOriginal30SessionDeliveryTest extends TestCase
 
         $response = $this->withHeaders([
             'X-Anon-Id' => $anonId,
+            'X-Forwarded-Proto' => 'https',
+            'X-Forwarded-Host' => 'api.fermatmind.com',
             'Authorization' => 'Bearer '.$token,
+        ])->withServerVariables([
+            'HTTPS' => 'on',
+            'HTTP_HOST' => 'api.fermatmind.com',
         ])->getJson('/api/v0.3/attempts/'.$attempt->id.'/questions?index=0');
 
         $response->assertStatus(200);
@@ -72,6 +79,38 @@ final class IqOwnerOriginal30SessionDeliveryTest extends TestCase
         $this->assertSame('IQOWNER30-Q01', $response->json('questions.items.0.question_id'));
         $this->assertOwnerOriginalQ1AssetsArePubliclyResolvable($response->json('questions.items.0'));
         $this->assertPayloadHasNoPrivateIqFields($response->json());
+    }
+
+    #[Test]
+    public function current_question_payload_uses_request_origin_instead_of_app_url_for_asset_urls(): void
+    {
+        config(['app.url' => 'https://139.224.130.204']);
+
+        $attempt = $this->createOwnerAttempt('anon_iq_owner_public_origin');
+        $request = Request::create(
+            '/api/v0.3/attempts/'.$attempt->id.'/questions?index=0',
+            'GET',
+            [],
+            [],
+            [],
+            [
+                'HTTPS' => 'on',
+                'HTTP_HOST' => 'api.fermatmind.com',
+                'HTTP_X_FORWARDED_PROTO' => 'https',
+                'HTTP_X_FORWARDED_HOST' => 'api.fermatmind.com',
+            ]
+        );
+
+        $this->assertSame('api.fermatmind.com', $request->getHost());
+        $this->assertSame('https', $request->headers->get('x-forwarded-proto'));
+
+        $payload = app(IqOwnerOriginal30BankService::class)->publicQuestionPayload($attempt, 0, $request);
+
+        $this->assertOwnerOriginalQ1AssetsArePubliclyResolvable(
+            $payload['questions']['items'][0],
+            'https://api.fermatmind.com'
+        );
+        $this->assertPayloadHasNoPrivateIqFields($payload);
     }
 
     #[Test]
@@ -248,7 +287,7 @@ final class IqOwnerOriginal30SessionDeliveryTest extends TestCase
         }
     }
 
-    private function assertOwnerOriginalQ1AssetsArePubliclyResolvable(array $item): void
+    private function assertOwnerOriginalQ1AssetsArePubliclyResolvable(array $item, ?string $expectedOrigin = null): void
     {
         $media = [
             'stem' => data_get($item, 'stem'),
@@ -269,8 +308,12 @@ final class IqOwnerOriginal30SessionDeliveryTest extends TestCase
 
             $this->assertNotSame('', $src, $label.' src missing');
             $this->assertSame($src, $publicUrl, $label.' public_url should match src');
-            $this->assertStringStartsWith(url('/api/v0.3/iq-owner-original-30/assets/iq_owner_original_30/q01/'), $src);
+            if ($expectedOrigin !== null) {
+                $this->assertStringStartsWith($expectedOrigin.'/api/v0.3/iq-owner-original-30/assets/iq_owner_original_30/q01/', $src);
+            }
+            $this->assertStringContainsString('/api/v0.3/iq-owner-original-30/assets/iq_owner_original_30/q01/', $src);
             $this->assertStringStartsWith('assets/iq_owner_original_30/q01/', $assetPath);
+            $this->assertStringNotContainsString('139.224.130.204', $src);
             $this->assertStringNotContainsString(base_path(), $src);
             $this->assertStringNotContainsString('/private/', $src);
             $this->assertStringNotContainsString('../', $src);

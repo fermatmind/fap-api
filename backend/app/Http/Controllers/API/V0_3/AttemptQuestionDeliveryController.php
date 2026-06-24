@@ -45,7 +45,7 @@ final class AttemptQuestionDeliveryController extends Controller
         }
 
         return response()->json(
-            $this->ownerBank->publicQuestionPayload($attempt, (int) $index)
+            $this->ownerBank->publicQuestionPayload($attempt, (int) $index, $request)
         );
     }
 
