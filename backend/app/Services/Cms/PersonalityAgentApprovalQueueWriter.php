@@ -284,6 +284,14 @@ final class PersonalityAgentApprovalQueueWriter
             ];
         }
 
+        if ($this->isEnneagramPublicContentAssetPath($path, $matches)) {
+            return [
+                'path' => $path,
+                'locale' => $this->localeFromPrefix((string) $matches['prefix']),
+                'page_type' => 'personality_public_content_asset',
+            ];
+        }
+
         if (preg_match('#^/(?<prefix>en|zh)/personality/[a-z0-9-]+$#i', $path, $matches) === 1) {
             return [
                 'path' => $path,
@@ -293,6 +301,26 @@ final class PersonalityAgentApprovalQueueWriter
         }
 
         return null;
+    }
+
+    /**
+     * @param  array<string,string>  $matches
+     */
+    private function isEnneagramPublicContentAssetPath(string $path, ?array &$matches = null): bool
+    {
+        if (preg_match('#^/(?<prefix>en|zh)/personality/enneagram$#i', $path, $matches) === 1) {
+            return true;
+        }
+
+        if (preg_match('#^/(?<prefix>en|zh)/personality/enneagram/centers/(?:gut|heart|head)$#i', $path, $matches) === 1) {
+            return true;
+        }
+
+        if (preg_match('#^/(?<prefix>en|zh)/personality/enneagram/type-[1-9]$#i', $path, $matches) === 1) {
+            return true;
+        }
+
+        return false;
     }
 
     private function localeFromPrefix(string $prefix): string
@@ -306,6 +334,7 @@ final class PersonalityAgentApprovalQueueWriter
             'pass',
             'PASS',
             'PASS_READY_FOR_CMS_DRAFT',
+            'PASS_READY_FOR_APPROVAL_QUEUE',
             'READY_QUERY_BACKED_LOW_RISK_DRAFT_REVIEW',
         ], true);
     }
