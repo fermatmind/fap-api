@@ -1244,6 +1244,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_seo_ops_p0_ctr_repair_dry_run_adapter(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/SeoOpsP0CtrRepairDryRunCommand.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_seo_agent_codex_review_runner_files(): void
     {
         $changed = [
@@ -4701,6 +4710,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSeoOpsP0CtrRepairDryRunFile($file)) {
+                continue;
+            }
+
             if ($this->isSeoAgentCmsTdkGapReadonlyScannerFile($file)) {
                 continue;
             }
@@ -6291,6 +6304,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/SeoIntel/OpsDashboard/SeoDashboardApiReadService.php',
             'backend/app/Support/Rbac/PermissionNames.php',
         ], true);
+    }
+
+    private function isSeoOpsP0CtrRepairDryRunFile(string $file): bool
+    {
+        return $file === 'backend/app/Console/Commands/SeoOpsP0CtrRepairDryRunCommand.php';
     }
 
     private function isSeoAgentCmsTdkGapReadonlyScannerFile(string $file): bool
