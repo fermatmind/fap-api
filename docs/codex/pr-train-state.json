@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-24T22:22:00+08:00",
+  "updated_at": "2026-06-25T01:20:00+08:00",
   "PR-EQ-ASSET-01": {
     "repo": "fap-api",
     "branch": "codex/pr-eq-asset-01-content-pack-v16",
@@ -60760,7 +60760,7 @@
     "repo": "fap-api",
     "branch": "codex/pr-eq-agent-02-context-payload-api",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "eq_agent_ready_content_os",
     "title": "PR-EQ-AGENT-02 Backend EQ Agent context payload and retrieval API",
     "depends_on": [
@@ -60851,14 +60851,18 @@
       "github_required_checks": {
         "status": "pass",
         "evidence": "GitHub PR #2399 required checks are green after the runtime freeze guard and OpenAPI snapshot fixes; mergeStateStatus is CLEAN."
+      },
+      "merge_reconciled": {
+        "status": "pass",
+        "evidence": "GitHub PR #2399 is MERGED at c78654fc605d26d95a05c560efe6c3999952b56f; origin/main contains the merge commit."
       }
     },
     "failure_reason": null,
-    "commit_sha": "e8b50c24f",
+    "commit_sha": "c78654fc605d26d95a05c560efe6c3999952b56f",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2399",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-24T16:01:56Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-24T20:45:00+08:00",
@@ -60901,6 +60905,12 @@
         "from": "ci_fix_openapi_snapshot_pending_checks",
         "to": "ready_to_merge",
         "notes": "All GitHub checks passed and PR #2399 mergeStateStatus is CLEAN."
+      },
+      {
+        "at": "2026-06-25T01:05:00+08:00",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "notes": "Reconciled PR-EQ-AGENT-02 merge while starting PR-EQ-AGENT-04."
       }
     ]
   },
@@ -60908,7 +60918,7 @@
     "repo": "fap-web",
     "branch": "codex/pr-eq-agent-03-frontend-entry-guard",
     "base": "main",
-    "status": "pending_dependency",
+    "status": "merged",
     "train_scope": "eq_agent_ready_content_os",
     "title": "PR-EQ-AGENT-03 Frontend EQ Agent entry guard",
     "depends_on": [
@@ -60920,22 +60930,32 @@
         "evidence": "User explicitly authorized manifest/state updates and sequential execution."
       },
       "dependency": {
-        "status": "pending",
-        "evidence": "Waiting for PR-EQ-AGENT-02 to merge."
+        "status": "pass",
+        "evidence": "PR-EQ-AGENT-02 is merged in fap-api."
+      },
+      "merge_reconciled": {
+        "status": "pass",
+        "evidence": "GitHub fap-web PR #1417 is MERGED at 4c13a53873cf2865b760b67a95acc7ba99a8b5b6; fap-web main was synced and branch cleaned in the fap-web clone."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "commit_sha": "4c13a53873cf2865b760b67a95acc7ba99a8b5b6",
+    "pr_url": "https://github.com/fermatmind/fap-web/pull/1417",
+    "merged_at": "2026-06-24T16:45:54Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-24T20:45:00+08:00",
         "from": "missing_from_manifest",
         "to": "pending_dependency",
         "notes": "Initialized from explicit authorization."
+      },
+      {
+        "at": "2026-06-25T01:05:00+08:00",
+        "from": "pending_dependency",
+        "to": "merged",
+        "notes": "Reconciled external fap-web PR-EQ-AGENT-03 merge as dependency for PR-EQ-AGENT-04."
       }
     ]
   },
@@ -60943,7 +60963,7 @@
     "repo": "fap-api",
     "branch": "codex/pr-eq-agent-04-safety-evals",
     "base": "main",
-    "status": "pending_dependency",
+    "status": "local_checks_passed",
     "train_scope": "eq_agent_ready_content_os",
     "title": "PR-EQ-AGENT-04 EQ Agent safety and forbidden claims eval fixtures",
     "depends_on": [
@@ -60955,8 +60975,46 @@
         "evidence": "User explicitly authorized manifest/state updates and sequential execution."
       },
       "dependency": {
-        "status": "pending",
-        "evidence": "Waiting for PR-EQ-AGENT-03 to merge."
+        "status": "pass",
+        "evidence": "PR-EQ-AGENT-03 merged in fap-web as PR #1417 at 4c13a53873cf2865b760b67a95acc7ba99a8b5b6."
+      },
+      "branch_base": {
+        "status": "pass",
+        "evidence": "Created codex/pr-eq-agent-04-safety-evals from fap-api origin/main c78654fc605d26d95a05c560efe6c3999952b56f."
+      },
+      "route_list": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan route:list",
+        "evidence": "route-list completed; output saved to /tmp/eq-agent-04-route-list.txt."
+      },
+      "eq_agent_test": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=EqAgent",
+        "evidence": "6 tests passed, 168 assertions."
+      },
+      "eq60_v5_report_contract_test": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest",
+        "evidence": "10 tests passed, 404 assertions."
+      },
+      "manifest_yaml": {
+        "status": "pass",
+        "command": "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+        "evidence": "yaml ok."
+      },
+      "state_json": {
+        "status": "pass",
+        "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+        "evidence": "JSON parse passed."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check && git diff --cached --check",
+        "evidence": "No whitespace errors."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to backend/tests/Fixtures/eq/agent/forbidden_claims.json, backend/tests/Feature/Report/EqAgentContextApiTest.php, and docs/codex/pr-train-state.json."
       }
     },
     "failure_reason": null,
@@ -60971,6 +61029,18 @@
         "from": "missing_from_manifest",
         "to": "pending_dependency",
         "notes": "Initialized from explicit authorization."
+      },
+      {
+        "at": "2026-06-25T01:05:00+08:00",
+        "from": "pending_dependency",
+        "to": "in_progress",
+        "notes": "Started PR-EQ-AGENT-04 after reconciling fap-api PR02 and fap-web PR03 merged dependencies."
+      },
+      {
+        "at": "2026-06-25T01:20:00+08:00",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "notes": "Added forbidden-claim eval fixture and EqAgent safety tests; local route, EqAgent, Eq60 report contract, metadata parse, diff, and scope checks passed."
       }
     ]
   },
