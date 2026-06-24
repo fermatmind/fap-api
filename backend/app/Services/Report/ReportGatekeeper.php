@@ -118,7 +118,8 @@ class ReportGatekeeper
         ?string $anonId,
         ?string $role = null,
         bool $forceSystemAccess = false,
-        bool $forceRefresh = false
+        bool $forceRefresh = false,
+        ?string $reportLocale = null
     ): array {
         $attemptId = trim($attemptId);
         if ($attemptId === '') {
@@ -140,6 +141,11 @@ class ReportGatekeeper
         if ($scaleCode === '') {
             return $this->badRequest('SCALE_REQUIRED', 'scale_code missing on attempt.');
         }
+        $requestedReportLocale = $this->normalizeReportLocale($reportLocale);
+        $attemptReportLocale = $this->normalizeReportLocale((string) ($attempt->locale ?? config('content_packs.default_locale', 'zh-CN')));
+        $localeSpecificLiveRender = $scaleCode === ReportAccess::SCALE_EQ_60
+            && $requestedReportLocale !== null
+            && $requestedReportLocale !== $attemptReportLocale;
         $scaleCodeV2 = strtoupper(trim((string) ($attempt->scale_code_v2 ?? $result->scale_code_v2 ?? '')));
         $isMbtiContract = $this->isMbtiReportContractEnabled($scaleCode, $scaleCodeV2);
 
@@ -452,6 +458,12 @@ class ReportGatekeeper
 
                 if ($snapshotRow) {
                     $report = $this->snapshotReportForVariant($snapshotRow, $renderVariant);
+                    $snapshotLocaleMismatch = false;
+                    if ($localeSpecificLiveRender && $this->reportLocale($report) !== $requestedReportLocale) {
+                        $report = [];
+                        $snapshotLocaleMismatch = true;
+                    }
+
                     if ($report !== []) {
                         return $this->responsePayload(
                             $locked,
@@ -473,7 +485,7 @@ class ReportGatekeeper
                         );
                     }
 
-                    if ($snapshotStrictMode) {
+                    if ($snapshotStrictMode && ! $snapshotLocaleMismatch) {
                         $this->enqueueSnapshotBuild($effectiveOrgId, $attempt, $result);
 
                         return $this->responsePayload(
@@ -534,7 +546,8 @@ class ReportGatekeeper
             $result,
             $renderVariant,
             $modulesAllowed,
-            $modulesPreview
+            $modulesPreview,
+            $requestedReportLocale
         );
         if (! ($built['ok'] ?? false)) {
             return $built;
@@ -551,14 +564,15 @@ class ReportGatekeeper
             $report = $this->applyTeaser($report, $viewPolicy);
         }
 
-        if ($shouldUseSnapshot && $renderVariant === ReportAccess::VARIANT_FULL) {
+        if ($shouldUseSnapshot && $renderVariant === ReportAccess::VARIANT_FULL && ! $localeSpecificLiveRender) {
             $reportFreeBuilt = $this->buildReportVariant(
                 $scaleCode,
                 $attempt,
                 $result,
                 ReportAccess::VARIANT_FREE,
                 ReportAccess::defaultModulesAllowedForLocked($scaleCode),
-                $modulesPreview
+                $modulesPreview,
+                $requestedReportLocale
             );
             $reportFree = is_array($reportFreeBuilt['report'] ?? null) ? $reportFreeBuilt['report'] : [];
             $this->upsertSnapshotVariants($effectiveOrgId, $attempt, $result, $reportFree, $report);
@@ -839,7 +853,8 @@ class ReportGatekeeper
         Result $result,
         string $variant,
         array $modulesAllowed = [],
-        array $modulesPreview = []
+        array $modulesPreview = [],
+        ?string $reportLocale = null
     ): array {
         try {
             $composed = $this->composerRegistry->composeVariant(
@@ -857,6 +872,7 @@ class ReportGatekeeper
                     },
                     'modules_allowed' => $modulesAllowed,
                     'modules_preview' => $modulesPreview,
+                    ...($reportLocale !== null ? ['locale' => $reportLocale] : []),
                 ]
             );
             if (! ($composed['ok'] ?? false)) {
@@ -902,6 +918,24 @@ class ReportGatekeeper
         }
 
         return [];
+    }
+
+    private function normalizeReportLocale(?string $locale): ?string
+    {
+        $locale = strtolower(trim((string) $locale));
+        if ($locale === '') {
+            return null;
+        }
+
+        return str_starts_with($locale, 'zh') ? 'zh-CN' : 'en';
+    }
+
+    /**
+     * @param  array<string,mixed>  $report
+     */
+    private function reportLocale(array $report): ?string
+    {
+        return $this->normalizeReportLocale((string) ($report['locale'] ?? ''));
     }
 
     private function snapshotReportForVariant(object $snapshotRow, string $variant): array

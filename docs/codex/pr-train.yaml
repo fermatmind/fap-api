@@ -175,6 +175,248 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+
+  - id: PR-EQ-ASSET-04
+    repo: fap-api
+    depends_on: [PR-EQ-ASSET-03]
+    branch: codex/pr-eq-asset-04-report-locale-v16
+    title: "PR-EQ-ASSET-04 Fix EQ v1.6 report locale resolved assets"
+    train_scope: eq_v16_content_asset_productization
+    scope:
+      - Fix EQ_60 report delivery so an explicit /report locale query resolves the matching v1.6 report assets.
+      - Ensure /report?locale=zh-CN and /report?locale=zh return locale=zh-CN and Chinese resolved assets even when the attempt was submitted in English.
+      - Include the EQ v1.6 production acceptance audit report as evidence for the P1 blocker.
+      - Keep report snapshots attempt-locale-bound; do not overwrite an English attempt snapshot with a Chinese live render.
+    allowed_paths:
+      - backend/app/Http/Controllers/API/V0_3/AttemptReadController.php
+      - backend/app/Services/Report/ReportGatekeeper.php
+      - backend/app/Services/Report/Eq60ReportComposer.php
+      - backend/tests/Feature/Report/Eq60V5ReportDeliveryTest.php
+      - docs/audits/eq/eq_v1_6_productization_acceptance_2026-06-24.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change EQ-60 questions, options, reverse keys, scoring semantics, or norm algorithms.
+      - Modify raw EQ content prose.
+      - Modify fap-web.
+      - Implement or enable EQ-SJT.
+      - Add paid, locked, blur, SKU, or access-wall semantics.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportDeliveryTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ReportPaywallTest
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: PR-EQ-ASSET-05
+    repo: fap-api
+    depends_on: [PR-EQ-ASSET-04]
+    branch: codex/pr-eq-asset-05-freeze-v16-baseline
+    title: "PR-EQ-ASSET-05 Freeze EQ v1.6 commercial content baseline"
+    train_scope: eq_v16_content_asset_productization
+    scope:
+      - Mark EQ v1.6 as the first commercial content baseline after locale acceptance passes.
+      - Document frozen asset IDs, trigger rules, claim boundaries, risk notes, and Agent maintenance rules.
+      - State that future Agent workflows maintain structured assets and metadata, not ad-hoc report prose.
+    allowed_paths:
+      - docs/audits/eq/**
+      - docs/product/eq/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Change runtime code.
+      - Modify EQ content assets.
+      - Modify fap-web.
+      - Implement Agent runtime.
+    validation:
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: PR-EQ-AGENT-01
+    repo: fap-api
+    depends_on: [PR-EQ-ASSET-05]
+    branch: codex/pr-eq-agent-01-knowledge-schema
+    title: "PR-EQ-AGENT-01 EQ Agent knowledge base schema and intent map"
+    train_scope: eq_agent_ready_content_os
+    scope:
+      - Define Agent-consumable EQ knowledge schema over existing v1.6 assets.
+      - Add retrieval tags, user intent map, asset type taxonomy, forbidden-claim metadata, and escalation flags.
+      - Keep this as schema/content-contract work with no runtime Agent behavior.
+    allowed_paths:
+      - backend/content_packs/EQ_60/v1/raw/report_assets/**
+      - backend/content_packs/EQ_60/v1/compiled/report_assets.compiled.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/**
+      - backend/app/Services/Content/Eq60ContentCompileService.php
+      - backend/app/Services/Content/Eq60ContentLintService.php
+      - backend/tests/Feature/Content/Eq60ContentGateTest.php
+      - docs/audits/eq/**
+      - docs/product/eq/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add Agent runtime endpoints.
+      - Modify scoring, norms, questions, or SJT availability.
+      - Modify fap-web.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:lint --pack=EQ_60 --pack-version=v1
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:compile --pack=EQ_60 --pack-version=v1
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ContentGateTest
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: PR-EQ-AGENT-02
+    repo: fap-api
+    depends_on: [PR-EQ-AGENT-01]
+    branch: codex/pr-eq-agent-02-context-payload-api
+    title: "PR-EQ-AGENT-02 Backend EQ Agent context payload and retrieval API"
+    train_scope: eq_agent_ready_content_os
+    scope:
+      - Expose read-only EQ Agent context from authoritative report/content-pack assets.
+      - Add a backend context payload or retrieval API that cannot mutate reports or override scoring and interpretation.
+      - Preserve backend report composer and content pack authority.
+    allowed_paths:
+      - backend/routes/api.php
+      - backend/app/Http/Controllers/API/V0_3/**
+      - backend/app/Services/Eq/**
+      - backend/app/Services/Report/Eq60ReportComposer.php
+      - backend/tests/Feature/**/Eq*Agent*
+      - backend/tests/Feature/Report/*Eq60*
+      - docs/audits/eq/**
+      - docs/product/eq/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Allow Agent writes or report mutation.
+      - Modify scoring, norms, questions, or SJT availability.
+      - Modify fap-web.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan route:list
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=EqAgent
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: PR-EQ-AGENT-03
+    repo: fap-web
+    depends_on: [PR-EQ-AGENT-02]
+    branch: codex/pr-eq-agent-03-frontend-entry-guard
+    title: "PR-EQ-AGENT-03 Frontend EQ Agent entry guard"
+    train_scope: eq_agent_ready_content_os
+    scope:
+      - Add a guarded Agent entry on the EQ result page after backend context contract exists.
+      - Keep Agent entry assistive and informational, not a report-authoring surface.
+      - Prevent Agent from altering report sections, scores, formulations, or content authority.
+    allowed_paths:
+      - components/result/eq/**
+      - lib/api/v0_3.ts
+      - tests/contracts/eq-result-v5-renderer.contract.test.tsx
+      - tests/e2e/iq-eq-result-regression.spec.ts
+      - tests/fixtures/eq/v5/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add frontend-owned official EQ report prose.
+      - Add SJT take entry.
+      - Add Agent report mutation controls.
+      - Add paid, locked, blur, SKU, or access-wall semantics.
+    validation:
+      - pnpm typecheck
+      - pnpm test:contract
+      - pnpm exec playwright test tests/e2e/iq-eq-result-regression.spec.ts
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: PR-EQ-AGENT-04
+    repo: fap-api
+    depends_on: [PR-EQ-AGENT-03]
+    branch: codex/pr-eq-agent-04-safety-evals
+    title: "PR-EQ-AGENT-04 EQ Agent safety and forbidden claims eval fixtures"
+    train_scope: eq_agent_ready_content_os
+    scope:
+      - Add EQ Agent safety fixtures and forbidden-claim tests.
+      - Cover ability-test, MSCEIT-like, hiring suitability, clinical diagnosis, guaranteed outcome, and job-performance prediction claims.
+      - Cover locale behavior, low-confidence behavior, no-paywall, and no-SJT-entry invariants.
+    allowed_paths:
+      - backend/tests/Fixtures/eq/agent/**
+      - backend/tests/Feature/**/Eq*Agent*
+      - backend/tests/Feature/Report/*Eq60*
+      - backend/content_packs/EQ_60/v1/raw/report_assets/**
+      - backend/content_packs/EQ_60/v1/compiled/report_assets.compiled.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/**
+      - docs/audits/eq/**
+      - docs/product/eq/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add Agent runtime write paths.
+      - Modify scoring, norms, questions, or SJT availability.
+      - Modify fap-web unless split into a separate frontend PR.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=EqAgent
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: PR-EQ-PER-01
     repo: fap-api
     branch: codex/pr-eq-per-01-all-free-copy-contract-cleanup
