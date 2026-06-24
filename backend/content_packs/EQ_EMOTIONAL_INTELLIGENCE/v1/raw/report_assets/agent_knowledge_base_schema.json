@@ -1,0 +1,755 @@
+{
+  "schema": "eq60.report_assets.agent_knowledge_base_schema.v1",
+  "pack_id": "EQ_60",
+  "asset_pack_id": "eq.agent_knowledge_base_schema.v1",
+  "baseline_version": "eq_v1_6_commercial_ready",
+  "status": "schema_seed",
+  "authority": {
+    "report_authority": "backend_content_pack_and_report_composer",
+    "agent_may": [
+      "explain_resolved_report_assets",
+      "route_user_intents_to_existing_assets",
+      "reference_claim_boundaries",
+      "suggest_existing_action_prescriptions",
+      "collect_feedback_for_human_review"
+    ],
+    "agent_must_not": [
+      "mutate_scores",
+      "override_formulation_selection",
+      "rewrite_report_authority",
+      "enable_sjt",
+      "create_paid_unlock_language",
+      "expose_raw_technical_tags",
+      "make_clinical_or_hiring_decisions"
+    ],
+    "change_flow": [
+      "propose structured asset change",
+      "validate retrieval tags and forbidden claims",
+      "human review",
+      "backend content-pack update",
+      "compiler and fixture validation",
+      "frontend contract validation"
+    ]
+  },
+  "retrieval_tag_taxonomy": {
+    "required_prefixes": [
+      "asset:",
+      "dimension:",
+      "mode:",
+      "quality:",
+      "formulation:",
+      "scene:",
+      "action:",
+      "context:",
+      "risk:",
+      "locale:"
+    ],
+    "core_tags": [
+      "asset:scientific_contract",
+      "asset:score_system",
+      "asset:core_formulation",
+      "asset:mechanism",
+      "asset:reality_scene",
+      "asset:career_environment",
+      "asset:action_prescription",
+      "asset:quality_confidence",
+      "asset:psychometric_evidence",
+      "asset:conversion_action",
+      "asset:sjt_bridge",
+      "asset:cross_assessment_context",
+      "dimension:SA",
+      "dimension:ER",
+      "dimension:EM",
+      "dimension:RM",
+      "mode:self_report",
+      "mode:integrated_planned",
+      "quality:A",
+      "quality:B",
+      "quality:C",
+      "quality:D",
+      "quality:low_confidence",
+      "scene:feedback",
+      "scene:conflict",
+      "scene:relationship_boundary",
+      "scene:team_collaboration",
+      "scene:pressure_recovery",
+      "scene:career_environment",
+      "context:work",
+      "context:relationship",
+      "context:learning",
+      "context:sharing",
+      "risk:self_report_bias",
+      "risk:clinical_boundary",
+      "risk:hiring_boundary",
+      "risk:ability_claim",
+      "risk:sjt_unavailable"
+    ]
+  },
+  "asset_type_taxonomy": {
+    "scientific_contract": {
+      "source_key": "scientific_contract",
+      "retrieval_tags": [
+        "asset:scientific_contract",
+        "mode:self_report",
+        "risk:self_report_bias",
+        "risk:clinical_boundary",
+        "risk:hiring_boundary",
+        "risk:ability_claim"
+      ],
+      "allowed_use": "Explain what the EQ-60 report can and cannot support.",
+      "blocked_use": "Do not turn boundaries into a diagnosis, hiring recommendation, or ability claim.",
+      "claim_risk": "high"
+    },
+    "score_system": {
+      "source_key": "score_system",
+      "retrieval_tags": [
+        "asset:score_system",
+        "dimension:SA",
+        "dimension:ER",
+        "dimension:EM",
+        "dimension:RM"
+      ],
+      "allowed_use": "Explain score labels, dimensions, percentile language, and band meaning.",
+      "blocked_use": "Do not rank the user as globally superior or inferior.",
+      "claim_risk": "medium"
+    },
+    "core_formulation": {
+      "source_key": "core_formulations",
+      "retrieval_tags": [
+        "asset:core_formulation",
+        "mode:self_report",
+        "formulation:selected"
+      ],
+      "allowed_use": "Explain the selected backend formulation and its evidence basis.",
+      "blocked_use": "Do not invent a new formulation or override the backend-selected one.",
+      "claim_risk": "medium"
+    },
+    "mechanism": {
+      "source_key": "mechanism_map",
+      "retrieval_tags": [
+        "asset:mechanism",
+        "dimension:SA",
+        "dimension:ER",
+        "dimension:EM",
+        "dimension:RM"
+      ],
+      "allowed_use": "Explain one or two backend-selected interaction mechanisms.",
+      "blocked_use": "Do not display every mechanism or imply hidden diagnostic certainty.",
+      "claim_risk": "medium"
+    },
+    "reality_scene": {
+      "source_key": "reality_translation",
+      "retrieval_tags": [
+        "asset:reality_scene",
+        "scene:feedback",
+        "scene:conflict",
+        "scene:relationship_boundary",
+        "scene:team_collaboration",
+        "scene:pressure_recovery"
+      ],
+      "allowed_use": "Translate the report into user-selected daily scenes.",
+      "blocked_use": "Do not make claims about another person's motives or pathology.",
+      "claim_risk": "medium"
+    },
+    "career_environment": {
+      "source_key": "career_environment",
+      "retrieval_tags": [
+        "asset:career_environment",
+        "scene:career_environment",
+        "context:work"
+      ],
+      "allowed_use": "Discuss work-environment variables, interview questions, and observation checklists.",
+      "blocked_use": "Do not recommend or exclude concrete jobs from EQ alone.",
+      "claim_risk": "high"
+    },
+    "action_prescription": {
+      "source_key": "action_prescriptions",
+      "retrieval_tags": [
+        "asset:action_prescription",
+        "action:selected",
+        "context:learning"
+      ],
+      "allowed_use": "Suggest the backend-selected practice, script, and short practice plan.",
+      "blocked_use": "Do not present practices as therapy or guaranteed outcomes.",
+      "claim_risk": "medium"
+    },
+    "quality_confidence": {
+      "source_key": "quality_confidence",
+      "retrieval_tags": [
+        "asset:quality_confidence",
+        "quality:A",
+        "quality:B",
+        "quality:C",
+        "quality:D",
+        "quality:low_confidence"
+      ],
+      "allowed_use": "Explain confidence and retest guidance without blame.",
+      "blocked_use": "Do not accuse the user or force a strong profile when quality is low.",
+      "claim_risk": "high"
+    },
+    "psychometric_evidence": {
+      "source_key": "psychometric_evidence_status",
+      "retrieval_tags": [
+        "asset:psychometric_evidence",
+        "risk:self_report_bias"
+      ],
+      "allowed_use": "Explain current evidence status and future validation steps.",
+      "blocked_use": "Do not imply completed external validation beyond the asset status.",
+      "claim_risk": "high"
+    },
+    "conversion_action": {
+      "source_key": "commercial_conversion_assets",
+      "retrieval_tags": [
+        "asset:conversion_action",
+        "context:sharing",
+        "context:learning"
+      ],
+      "allowed_use": "Route to free save, share, revisit, related tests, or Agent entry actions.",
+      "blocked_use": "Do not create purchase, unlock, premium, or SKU language.",
+      "claim_risk": "medium"
+    },
+    "sjt_bridge": {
+      "source_key": "sjt_bridge",
+      "retrieval_tags": [
+        "asset:sjt_bridge",
+        "mode:integrated_planned",
+        "risk:sjt_unavailable",
+        "risk:ability_claim"
+      ],
+      "allowed_use": "Explain that EQ-SJT is planned and currently unavailable.",
+      "blocked_use": "Do not offer a clickable SJT entry or describe it as an ability test.",
+      "claim_risk": "high"
+    },
+    "cross_assessment_context": {
+      "source_key": "cross_assessment_context",
+      "retrieval_tags": [
+        "asset:cross_assessment_context",
+        "context:learning"
+      ],
+      "allowed_use": "Explain how EQ can be read alongside MBTI, Big Five, and Enneagram.",
+      "blocked_use": "Do not fuse multiple assessments into one unsupported total score.",
+      "claim_risk": "high"
+    }
+  },
+  "user_intent_map": {
+    "intents": {
+      "understand_my_result": {
+        "intent_id": "understand_my_result",
+        "retrieval_tags": [
+          "asset:core_formulation",
+          "asset:score_system",
+          "mode:self_report"
+        ],
+        "preferred_asset_types": [
+          "core_formulation",
+          "score_system",
+          "result_snapshot"
+        ],
+        "allowed_response_mode": "explain_selected_report_assets",
+        "escalation_flags": [],
+        "forbidden_claim_ids": [
+          "true_emotional_ability",
+          "clinical_diagnosis",
+          "hiring_suitability"
+        ],
+        "zh-CN": {
+          "label": "理解我的结果",
+          "agent_goal": "帮助用户看懂后端已选择的核心 formulation、证据点和发展杠杆。",
+          "safe_opening": "我会先按报告里的核心判断解释，不会重新打分或替换你的结果。"
+        },
+        "en": {
+          "label": "Understand my result",
+          "agent_goal": "Help the user understand the backend-selected formulation, evidence, and development lever.",
+          "safe_opening": "I will explain the core judgment already in your report; I will not rescore or replace it."
+        }
+      },
+      "why_this_result": {
+        "intent_id": "why_this_result",
+        "retrieval_tags": [
+          "asset:score_system",
+          "asset:mechanism",
+          "asset:quality_confidence"
+        ],
+        "preferred_asset_types": [
+          "score_system",
+          "mechanism",
+          "quality_confidence"
+        ],
+        "allowed_response_mode": "explain_evidence_and_confidence",
+        "escalation_flags": [],
+        "forbidden_claim_ids": [
+          "true_emotional_ability",
+          "guaranteed_outcome"
+        ],
+        "zh-CN": {
+          "label": "为什么是这个结果",
+          "agent_goal": "解释分数、维度、机制和置信度如何支持当前报告。",
+          "safe_opening": "我可以解释这份报告用了哪些分数和质量信号，但不会把它说成客观能力证明。"
+        },
+        "en": {
+          "label": "Why did I get this result?",
+          "agent_goal": "Explain how scores, dimensions, mechanisms, and confidence support the current report.",
+          "safe_opening": "I can explain the score and quality signals behind the report without treating them as objective ability proof."
+        }
+      },
+      "how_to_improve": {
+        "intent_id": "how_to_improve",
+        "retrieval_tags": [
+          "asset:action_prescription",
+          "action:selected",
+          "context:learning"
+        ],
+        "preferred_asset_types": [
+          "action_prescription",
+          "reality_scene"
+        ],
+        "allowed_response_mode": "suggest_existing_practice",
+        "escalation_flags": [],
+        "forbidden_claim_ids": [
+          "guaranteed_outcome",
+          "clinical_diagnosis"
+        ],
+        "zh-CN": {
+          "label": "我下一步怎么练",
+          "agent_goal": "把后端选中的行动处方转成一个短、可执行的练习计划。",
+          "safe_opening": "我会基于报告里的行动处方给你一个练习方式，不会把它当作治疗方案。"
+        },
+        "en": {
+          "label": "What should I practice next?",
+          "agent_goal": "Turn the backend-selected action prescription into a short, practical practice path.",
+          "safe_opening": "I will use the action prescription in your report as practice guidance, not as treatment."
+        }
+      },
+      "career_environment_fit": {
+        "intent_id": "career_environment_fit",
+        "retrieval_tags": [
+          "asset:career_environment",
+          "scene:career_environment",
+          "context:work"
+        ],
+        "preferred_asset_types": [
+          "career_environment",
+          "scientific_contract"
+        ],
+        "allowed_response_mode": "environment_variables_only",
+        "escalation_flags": [
+          "workplace_hiring_decision"
+        ],
+        "forbidden_claim_ids": [
+          "hiring_suitability",
+          "job_performance_prediction",
+          "certified_ei"
+        ],
+        "zh-CN": {
+          "label": "我适合什么工作环境",
+          "agent_goal": "只讨论职业环境变量、验证问题和观察清单，不推荐具体职业。",
+          "safe_opening": "我可以帮你看哪些工作环境变量值得验证，但不会用 EQ 结果直接决定职业适配。"
+        },
+        "en": {
+          "label": "What work environment fits me?",
+          "agent_goal": "Discuss work-environment variables, verification questions, and observation checklists without recommending specific jobs.",
+          "safe_opening": "I can help you examine work-environment variables, but I will not decide job fit from EQ alone."
+        }
+      },
+      "relationship_or_conflict_help": {
+        "intent_id": "relationship_or_conflict_help",
+        "retrieval_tags": [
+          "asset:reality_scene",
+          "scene:conflict",
+          "scene:relationship_boundary",
+          "asset:action_prescription"
+        ],
+        "preferred_asset_types": [
+          "reality_scene",
+          "action_prescription",
+          "mechanism"
+        ],
+        "allowed_response_mode": "one_scene_practical_support",
+        "escalation_flags": [
+          "clinical_distress",
+          "self_harm_or_crisis"
+        ],
+        "forbidden_claim_ids": [
+          "clinical_diagnosis",
+          "guaranteed_outcome"
+        ],
+        "zh-CN": {
+          "label": "关系或冲突怎么处理",
+          "agent_goal": "围绕一个具体场景调用现实转译和行动处方。",
+          "safe_opening": "我们可以先选一个具体场景处理；如果涉及安全风险，我会先建议你寻求现实支持。"
+        },
+        "en": {
+          "label": "Help with a relationship or conflict",
+          "agent_goal": "Use reality translation and action prescription assets for one specific scene.",
+          "safe_opening": "We can focus on one concrete scene first; if safety risk is involved, I will point you to real support."
+        }
+      },
+      "quality_or_confidence_question": {
+        "intent_id": "quality_or_confidence_question",
+        "retrieval_tags": [
+          "asset:quality_confidence",
+          "quality:low_confidence",
+          "asset:scientific_contract"
+        ],
+        "preferred_asset_types": [
+          "quality_confidence",
+          "scientific_contract",
+          "psychometric_evidence"
+        ],
+        "allowed_response_mode": "confidence_boundary_and_retest_guidance",
+        "escalation_flags": [
+          "low_confidence_result"
+        ],
+        "forbidden_claim_ids": [
+          "true_emotional_ability",
+          "clinical_diagnosis"
+        ],
+        "zh-CN": {
+          "label": "为什么置信度低",
+          "agent_goal": "解释质量等级、复测建议和谨慎阅读边界。",
+          "safe_opening": "如果本次置信度较低，我会先解释为什么要谨慎阅读，而不是输出强画像。"
+        },
+        "en": {
+          "label": "Why is confidence low?",
+          "agent_goal": "Explain quality level, retest guidance, and cautious-reading boundaries.",
+          "safe_opening": "If confidence is low, I will explain why the result should be read cautiously instead of giving a strong profile."
+        }
+      },
+      "compare_with_other_tests": {
+        "intent_id": "compare_with_other_tests",
+        "retrieval_tags": [
+          "asset:cross_assessment_context",
+          "context:learning"
+        ],
+        "preferred_asset_types": [
+          "cross_assessment_context",
+          "scientific_contract"
+        ],
+        "allowed_response_mode": "separate_constructs_no_total_score",
+        "escalation_flags": [],
+        "forbidden_claim_ids": [
+          "job_performance_prediction",
+          "hiring_suitability"
+        ],
+        "zh-CN": {
+          "label": "和 MBTI / 大五 / 九型一起看",
+          "agent_goal": "解释不同测评的边界和互补关系，不合成一个总分。",
+          "safe_opening": "我可以帮你并排理解不同测评，但不会把它们混成一个万能结论。"
+        },
+        "en": {
+          "label": "Compare with MBTI, Big Five, or Enneagram",
+          "agent_goal": "Explain boundaries and complements across assessments without fusing them into one score.",
+          "safe_opening": "I can help you read assessments side by side, but I will not turn them into one universal verdict."
+        }
+      },
+      "ask_for_sjt": {
+        "intent_id": "ask_for_sjt",
+        "retrieval_tags": [
+          "asset:sjt_bridge",
+          "mode:integrated_planned",
+          "risk:sjt_unavailable"
+        ],
+        "preferred_asset_types": [
+          "sjt_bridge",
+          "scientific_contract"
+        ],
+        "allowed_response_mode": "planned_unavailable_boundary",
+        "escalation_flags": [
+          "sjt_availability_request"
+        ],
+        "forbidden_claim_ids": [
+          "msceit_like",
+          "true_emotional_ability",
+          "certified_ei"
+        ],
+        "zh-CN": {
+          "label": "我想做情境题",
+          "agent_goal": "说明 EQ-SJT 仍是 planned/unavailable，不能提供测试入口。",
+          "safe_opening": "情境判断模块目前还没有开放，我只能说明它未来会补充什么和不是什么。"
+        },
+        "en": {
+          "label": "I want the scenario module",
+          "agent_goal": "Explain that EQ-SJT remains planned and unavailable, with no test entry.",
+          "safe_opening": "The scenario module is not open yet; I can only explain what it will add and what it is not."
+        }
+      },
+      "share_or_save_report": {
+        "intent_id": "share_or_save_report",
+        "retrieval_tags": [
+          "asset:conversion_action",
+          "context:sharing"
+        ],
+        "preferred_asset_types": [
+          "conversion_action",
+          "result_snapshot"
+        ],
+        "allowed_response_mode": "free_conversion_action_routing",
+        "escalation_flags": [],
+        "forbidden_claim_ids": [
+          "paid_unlock_required",
+          "guaranteed_outcome"
+        ],
+        "zh-CN": {
+          "label": "保存或分享报告",
+          "agent_goal": "引导用户使用免费保存、分享、PDF、邮件回看或相关测试入口。",
+          "safe_opening": "我可以帮你选择保存或分享方式，这些动作不会改变报告结论。"
+        },
+        "en": {
+          "label": "Save or share my report",
+          "agent_goal": "Route the user to free save, share, PDF, email revisit, or related-test actions.",
+          "safe_opening": "I can help you choose a save or share action; it will not change the report."
+        }
+      },
+      "clinical_or_hiring_request": {
+        "intent_id": "clinical_or_hiring_request",
+        "retrieval_tags": [
+          "asset:scientific_contract",
+          "risk:clinical_boundary",
+          "risk:hiring_boundary"
+        ],
+        "preferred_asset_types": [
+          "scientific_contract",
+          "agent_dialogue_playbook"
+        ],
+        "allowed_response_mode": "boundary_refusal",
+        "escalation_flags": [
+          "clinical_distress",
+          "workplace_hiring_decision"
+        ],
+        "forbidden_claim_ids": [
+          "clinical_diagnosis",
+          "hiring_suitability",
+          "job_performance_prediction"
+        ],
+        "zh-CN": {
+          "label": "临床或招聘用途",
+          "agent_goal": "拒绝用 EQ 报告做临床、招聘或评价他人的高风险判断。",
+          "safe_opening": "这份报告不能用于诊断、筛选或评价他人；我可以帮你回到自我理解和成长用途。"
+        },
+        "en": {
+          "label": "Clinical or hiring use",
+          "agent_goal": "Decline clinical, hiring, or third-person evaluation use of the EQ report.",
+          "safe_opening": "This report cannot be used to diagnose, screen, or evaluate another person; I can redirect to self-understanding and growth use."
+        }
+      }
+    }
+  },
+  "forbidden_claims": {
+    "claims": {
+      "true_emotional_ability": {
+        "severity": "critical",
+        "blocked_patterns": [
+          "true emotional ability",
+          "objective emotional ability",
+          "真实情商能力",
+          "客观情商能力"
+        ],
+        "replacement_boundary": {
+          "zh-CN": "这是一份自我报告型情绪与关系模式报告，不能当作客观能力测验。",
+          "en": "This is a self-report emotional and relational pattern report, not an objective ability test."
+        }
+      },
+      "msceit_like": {
+        "severity": "critical",
+        "blocked_patterns": [
+          "MSCEIT-like",
+          "like MSCEIT",
+          "类似 MSCEIT"
+        ],
+        "replacement_boundary": {
+          "zh-CN": "EQ-SJT 未来只作为费马的情境判断模块，不应被描述为 MSCEIT 或同类认证工具。",
+          "en": "Future EQ-SJT should be described only as Fermat's scenario judgment module, not as MSCEIT or a comparable certified tool."
+        }
+      },
+      "certified_ei": {
+        "severity": "critical",
+        "blocked_patterns": [
+          "certified emotional intelligence",
+          "certified EQ",
+          "认证情商"
+        ],
+        "replacement_boundary": {
+          "zh-CN": "报告可用于自我理解和成长规划，不提供认证结论。",
+          "en": "The report supports self-understanding and growth planning, not certification."
+        }
+      },
+      "clinical_diagnosis": {
+        "severity": "critical",
+        "blocked_patterns": [
+          "clinical diagnosis",
+          "diagnose",
+          "临床诊断",
+          "诊断"
+        ],
+        "replacement_boundary": {
+          "zh-CN": "这不是临床评估；如果涉及持续痛苦或安全风险，应寻求合适的现实支持。",
+          "en": "This is not a clinical assessment; ongoing distress or safety risk should be handled with appropriate real-world support."
+        }
+      },
+      "hiring_suitability": {
+        "severity": "critical",
+        "blocked_patterns": [
+          "hiring suitable",
+          "screen candidates",
+          "招聘筛选",
+          "候选人筛选"
+        ],
+        "replacement_boundary": {
+          "zh-CN": "EQ 结果不能用于招聘筛选；最多讨论用户自己的工作环境验证问题。",
+          "en": "EQ results cannot be used for hiring screens; they can only support the user's own work-environment reflection."
+        }
+      },
+      "job_performance_prediction": {
+        "severity": "high",
+        "blocked_patterns": [
+          "predicts job performance",
+          "predict work success",
+          "预测工作表现",
+          "决定职业成功"
+        ],
+        "replacement_boundary": {
+          "zh-CN": "报告不预测工作表现，只帮助用户识别可能消耗或支持自己的环境变量。",
+          "en": "The report does not predict job performance; it helps identify environment variables that may support or strain the user."
+        }
+      },
+      "guaranteed_outcome": {
+        "severity": "high",
+        "blocked_patterns": [
+          "guaranteed outcome",
+          "will definitely",
+          "保证改善",
+          "一定会"
+        ],
+        "replacement_boundary": {
+          "zh-CN": "行动建议是练习方向，不保证固定结果。",
+          "en": "Action guidance is a practice direction, not a guaranteed outcome."
+        }
+      },
+      "paid_unlock_required": {
+        "severity": "high",
+        "blocked_patterns": [
+          "paywall",
+          "SKU_EQ_60_FULL_299",
+          "EQ_60_FULL",
+          "购买完整报告",
+          "解锁报告"
+        ],
+        "replacement_boundary": {
+          "zh-CN": "EQ-60 v1.6 当前报告免费，深度由完成的数据决定。",
+          "en": "EQ-60 v1.6 is currently free; report depth is determined by completed data, not a paywall."
+        }
+      }
+    }
+  },
+  "escalation_flags": {
+    "self_harm_or_crisis": {
+      "severity": "critical",
+      "routing": "safety_boundary",
+      "zh-CN": {
+        "label": "伤害或危机风险",
+        "agent_action": "停止普通报告解释，建议用户寻求即时现实支持。"
+      },
+      "en": {
+        "label": "Safety or crisis risk",
+        "agent_action": "Stop normal report explanation and point the user to immediate real-world support."
+      }
+    },
+    "clinical_distress": {
+      "severity": "high",
+      "routing": "clinical_boundary",
+      "zh-CN": {
+        "label": "临床困扰",
+        "agent_action": "声明非临床边界，避免诊断或治疗建议。"
+      },
+      "en": {
+        "label": "Clinical distress",
+        "agent_action": "State non-clinical boundaries and avoid diagnosis or treatment advice."
+      }
+    },
+    "workplace_hiring_decision": {
+      "severity": "high",
+      "routing": "hiring_boundary",
+      "zh-CN": {
+        "label": "招聘或筛选用途",
+        "agent_action": "拒绝招聘筛选用途，回到用户自己的环境验证问题。"
+      },
+      "en": {
+        "label": "Hiring or screening use",
+        "agent_action": "Decline hiring-screen use and redirect to the user's own environment checks."
+      }
+    },
+    "legal_or_medical_advice": {
+      "severity": "high",
+      "routing": "professional_boundary",
+      "zh-CN": {
+        "label": "法律或医疗建议",
+        "agent_action": "声明边界，不替代专业建议。"
+      },
+      "en": {
+        "label": "Legal or medical advice",
+        "agent_action": "State boundaries and do not replace professional advice."
+      }
+    },
+    "sjt_availability_request": {
+      "severity": "medium",
+      "routing": "planned_unavailable",
+      "zh-CN": {
+        "label": "SJT 可用性请求",
+        "agent_action": "说明 SJT 尚未开放，不提供入口。"
+      },
+      "en": {
+        "label": "SJT availability request",
+        "agent_action": "Explain that SJT is not open yet and provide no entry point."
+      }
+    },
+    "low_confidence_result": {
+      "severity": "medium",
+      "routing": "cautious_interpretation",
+      "zh-CN": {
+        "label": "低置信结果",
+        "agent_action": "优先解释质量与复测，不输出强人格判断。"
+      },
+      "en": {
+        "label": "Low-confidence result",
+        "agent_action": "Prioritize quality and retest guidance; do not output a strong profile."
+      }
+    },
+    "raw_payload_debug_request": {
+      "severity": "medium",
+      "routing": "privacy_and_abstraction_boundary",
+      "zh-CN": {
+        "label": "原始 payload 请求",
+        "agent_action": "不要暴露内部 tag 或调试字段，只解释用户可见资产。"
+      },
+      "en": {
+        "label": "Raw payload request",
+        "agent_action": "Do not expose internal tags or debug fields; explain user-visible assets only."
+      }
+    }
+  },
+  "locale_policy": {
+    "supported_locales": [
+      "zh-CN",
+      "en"
+    ],
+    "retrieval_tags": [
+      "locale:zh-CN",
+      "locale:en"
+    ],
+    "fallback_policy": "Use the requested locale when available. If a localized asset is missing, return a conservative empty state for the Agent layer rather than inventing report prose.",
+    "agent_must_not_translate_authoritative_copy_without_review": true
+  },
+  "maintenance": {
+    "owner_layer": "backend_content_pack",
+    "agent_runtime_status": "not_implemented",
+    "sjt_status": "planned_unavailable",
+    "required_validation": [
+      "content_lint",
+      "content_compile",
+      "canonical_fixture_contract",
+      "forbidden_claim_eval",
+      "locale_contract"
+    ],
+    "next_pr": "PR-EQ-AGENT-02"
+  }
+}

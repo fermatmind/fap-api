@@ -735,6 +735,7 @@ final class Eq60ContentCompileService
             'commercial_conversion_assets',
             'quality_confidence',
             'psychometric_evidence_status',
+            'agent_knowledge_base_schema',
             'agent_dialogue_playbooks',
             'backend_integration_contract',
         ] as $key) {

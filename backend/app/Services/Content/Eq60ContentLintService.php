@@ -815,6 +815,7 @@ final class Eq60ContentLintService
             'commercial_conversion_assets',
             'quality_confidence',
             'psychometric_evidence_status',
+            'agent_knowledge_base_schema',
             'agent_dialogue_playbooks',
             'backend_integration_contract',
         ];
@@ -1044,6 +1045,149 @@ final class Eq60ContentLintService
             'what_this_means_for_user',
             'next_validation_step',
         ], $errors);
+
+        $agentKnowledgeFile = $this->loader->rawPath('report_assets/agent_knowledge_base_schema.json', $version);
+        if ((string) data_get($docs, 'agent_knowledge_base_schema.schema') !== 'eq60.report_assets.agent_knowledge_base_schema.v1') {
+            $errors[] = $this->error($agentKnowledgeFile, 1, 'schema must be eq60.report_assets.agent_knowledge_base_schema.v1.');
+        }
+        if ((string) data_get($docs, 'agent_knowledge_base_schema.authority.report_authority') !== 'backend_content_pack_and_report_composer') {
+            $errors[] = $this->error($agentKnowledgeFile, 1, 'authority.report_authority must remain backend_content_pack_and_report_composer.');
+        }
+
+        foreach ([
+            'mutate_scores',
+            'override_formulation_selection',
+            'rewrite_report_authority',
+            'enable_sjt',
+            'create_paid_unlock_language',
+            'expose_raw_technical_tags',
+            'make_clinical_or_hiring_decisions',
+        ] as $blockedAgentAction) {
+            if (! in_array($blockedAgentAction, (array) data_get($docs, 'agent_knowledge_base_schema.authority.agent_must_not', []), true)) {
+                $errors[] = $this->error($agentKnowledgeFile, 1, 'authority.agent_must_not missing: '.$blockedAgentAction);
+            }
+        }
+
+        foreach ([
+            'asset:scientific_contract',
+            'asset:core_formulation',
+            'asset:action_prescription',
+            'dimension:SA',
+            'dimension:ER',
+            'dimension:EM',
+            'dimension:RM',
+            'quality:low_confidence',
+            'risk:sjt_unavailable',
+        ] as $requiredRetrievalTag) {
+            if (! in_array($requiredRetrievalTag, (array) data_get($docs, 'agent_knowledge_base_schema.retrieval_tag_taxonomy.core_tags', []), true)) {
+                $errors[] = $this->error($agentKnowledgeFile, 1, 'retrieval_tag_taxonomy.core_tags missing: '.$requiredRetrievalTag);
+            }
+        }
+
+        foreach ([
+            'scientific_contract',
+            'score_system',
+            'core_formulation',
+            'mechanism',
+            'reality_scene',
+            'career_environment',
+            'action_prescription',
+            'quality_confidence',
+            'psychometric_evidence',
+            'conversion_action',
+            'sjt_bridge',
+            'cross_assessment_context',
+        ] as $assetType) {
+            $assetTypeNode = (array) data_get($docs, 'agent_knowledge_base_schema.asset_type_taxonomy.'.$assetType, []);
+            if ($assetTypeNode === []) {
+                $errors[] = $this->error($agentKnowledgeFile, 1, 'asset_type_taxonomy missing: '.$assetType);
+
+                continue;
+            }
+            foreach (['allowed_use', 'blocked_use', 'claim_risk'] as $field) {
+                if (trim((string) ($assetTypeNode[$field] ?? '')) === '') {
+                    $errors[] = $this->error($agentKnowledgeFile, 1, 'asset_type_taxonomy.'.$assetType.'.'.$field.' is required.');
+                }
+            }
+        }
+
+        foreach ([
+            'understand_my_result',
+            'why_this_result',
+            'how_to_improve',
+            'career_environment_fit',
+            'relationship_or_conflict_help',
+            'quality_or_confidence_question',
+            'compare_with_other_tests',
+            'ask_for_sjt',
+            'share_or_save_report',
+            'clinical_or_hiring_request',
+        ] as $intentId) {
+            $intent = (array) data_get($docs, 'agent_knowledge_base_schema.user_intent_map.intents.'.$intentId, []);
+            if ((string) ($intent['intent_id'] ?? '') !== $intentId) {
+                $errors[] = $this->error($agentKnowledgeFile, 1, 'user_intent_map intent_id mismatch: '.$intentId);
+            }
+            foreach (['retrieval_tags', 'preferred_asset_types', 'forbidden_claim_ids'] as $arrayField) {
+                if ((array) ($intent[$arrayField] ?? []) === []) {
+                    $errors[] = $this->error($agentKnowledgeFile, 1, 'user_intent_map.'.$intentId.'.'.$arrayField.' cannot be empty.');
+                }
+            }
+            $this->lintLocalizedAssetFields($agentKnowledgeFile, $intent, [
+                'label',
+                'agent_goal',
+                'safe_opening',
+            ], $errors);
+        }
+
+        foreach ([
+            'true_emotional_ability',
+            'msceit_like',
+            'certified_ei',
+            'clinical_diagnosis',
+            'hiring_suitability',
+            'job_performance_prediction',
+            'guaranteed_outcome',
+            'paid_unlock_required',
+        ] as $claimId) {
+            $claim = (array) data_get($docs, 'agent_knowledge_base_schema.forbidden_claims.claims.'.$claimId, []);
+            if ($claim === []) {
+                $errors[] = $this->error($agentKnowledgeFile, 1, 'forbidden_claims missing: '.$claimId);
+
+                continue;
+            }
+            if ((array) ($claim['blocked_patterns'] ?? []) === []) {
+                $errors[] = $this->error($agentKnowledgeFile, 1, 'forbidden_claims.'.$claimId.'.blocked_patterns cannot be empty.');
+            }
+            $this->lintLocalizedScalar($agentKnowledgeFile, (array) ($claim['replacement_boundary'] ?? []), 'forbidden_claims.'.$claimId.'.replacement_boundary', $errors);
+        }
+
+        foreach ([
+            'self_harm_or_crisis',
+            'clinical_distress',
+            'workplace_hiring_decision',
+            'legal_or_medical_advice',
+            'sjt_availability_request',
+            'low_confidence_result',
+            'raw_payload_debug_request',
+        ] as $flagId) {
+            $flag = (array) data_get($docs, 'agent_knowledge_base_schema.escalation_flags.'.$flagId, []);
+            if ($flag === []) {
+                $errors[] = $this->error($agentKnowledgeFile, 1, 'escalation_flags missing: '.$flagId);
+
+                continue;
+            }
+            $this->lintLocalizedAssetFields($agentKnowledgeFile, $flag, [
+                'label',
+                'agent_action',
+            ], $errors);
+        }
+
+        if ((string) data_get($docs, 'agent_knowledge_base_schema.maintenance.agent_runtime_status') !== 'not_implemented') {
+            $errors[] = $this->error($agentKnowledgeFile, 1, 'maintenance.agent_runtime_status must remain not_implemented.');
+        }
+        if ((string) data_get($docs, 'agent_knowledge_base_schema.maintenance.sjt_status') !== 'planned_unavailable') {
+            $errors[] = $this->error($agentKnowledgeFile, 1, 'maintenance.sjt_status must remain planned_unavailable.');
+        }
 
         $agentPlaybookAssets = (array) data_get($docs, 'agent_dialogue_playbooks.assets', []);
         $this->lintLocalizedAssetFields($this->loader->rawPath('report_assets/agent_dialogue_playbooks.json', $version), (array) ($agentPlaybookAssets['eq.agent.playbook.understand_result'] ?? []), [
