@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-24T21:12:00+08:00",
+  "updated_at": "2026-06-24T22:08:00+08:00",
   "PR-EQ-ASSET-01": {
     "repo": "fap-api",
     "branch": "codex/pr-eq-asset-01-content-pack-v16",
@@ -60536,7 +60536,7 @@
     "repo": "fap-api",
     "branch": "codex/pr-eq-asset-05-freeze-v16-baseline",
     "base": "main",
-    "status": "pending_dependency",
+    "status": "local_checks_passed",
     "train_scope": "eq_v16_content_asset_productization",
     "title": "PR-EQ-ASSET-05 Freeze EQ v1.6 commercial content baseline",
     "depends_on": [
@@ -60548,8 +60548,35 @@
         "evidence": "User explicitly authorized manifest/state updates and sequential execution."
       },
       "dependency": {
-        "status": "pending",
-        "evidence": "Waiting for PR-EQ-ASSET-04 locale acceptance fix to merge."
+        "status": "pass",
+        "evidence": "PR-EQ-ASSET-04 merged into main and production smoke verified /report?locale=zh-CN returns Chinese v1.6 resolved assets."
+      },
+      "production_locale_smoke": {
+        "status": "pass",
+        "evidence": "Production anonymous attempt 1f869cf8-027b-4298-ab5a-a368a4c53fb9 returned report.locale=zh-CN, Chinese global label, Chinese resolved assets, no English global label leakage, report_version=eq_report_v5_assets_commercial_ready_v1_6, next_module.available=false."
+      },
+      "acceptance_report_updated": {
+        "status": "pass",
+        "evidence": "Acceptance report updated to P1 closed and Agent phase allowed yes after production locale retest."
+      },
+      "baseline_freeze_doc": {
+        "status": "pass",
+        "evidence": "Added docs/product/eq/eq_v1_6_commercial_content_baseline_freeze_2026-06-24.md."
+      },
+      "manifest_yaml": {
+        "status": "pass",
+        "command": "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+        "evidence": "yaml ok."
+      },
+      "state_json": {
+        "status": "pass",
+        "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+        "evidence": "JSON parse passed."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check",
+        "evidence": "No whitespace errors."
       }
     },
     "failure_reason": null,
@@ -60564,6 +60591,18 @@
         "from": "missing_from_manifest",
         "to": "pending_dependency",
         "notes": "Initialized from explicit authorization."
+      },
+      {
+        "at": "2026-06-24T22:00:00+08:00",
+        "from": "pending_dependency",
+        "to": "in_progress",
+        "notes": "Started PR-EQ-ASSET-05 after PR04 production locale smoke closed the P1 blocker."
+      },
+      {
+        "at": "2026-06-24T22:08:00+08:00",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "notes": "Updated EQ v1.6 acceptance audit and froze the commercial content baseline after production locale smoke passed."
       }
     ]
   },

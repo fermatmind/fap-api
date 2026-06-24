@@ -21,24 +21,23 @@ EQ v1.6 production smoke confirms that the core backend and frontend delivery pa
 - v1.6 resolved assets are present, including result snapshot, conversion actions, quality confidence, psychometric evidence, career environment, Agent playbook assets, and SJT bridge.
 - SJT remains planned/unavailable and no clickable SJT take entry was found.
 - No visible paywall/SKU/raw technical tag leakage was found on the checked result pages.
-
-However, acceptance is **blocked by one P1 issue**:
-
-- `zh-CN` result route renders, but the report API still returns `locale=en` and English resolved assets for `?locale=zh-CN` and `?locale=zh`. This means the Chinese product path is not commercially acceptable yet.
+- The previous Chinese locale P1 was retested after PR-EQ-ASSET-04 reached production: `/report?locale=zh-CN` now returns `locale=zh-CN`, Chinese score labels, and Chinese resolved assets.
 
 Final gate:
 
-- Agent phase allowed: **No**
-- Reason: P1 locale resolution / resolved asset localization blocker on Chinese result path.
+- Agent phase allowed: **Yes**
+- Reason: EQ v1.6 all-free report delivery, resolved assets, no-paywall boundary, SJT planned boundary, and locale-specific resolved assets are production-verified.
 
 ## 2. Deployed SHAs And PR Coverage
 
 Backend production:
 
-- SHA: `8969804e481b3aeb271ed34b8ea80f26cba0213a`
-- Release: `eq-v16-assets-20260624`
+- Initial smoke SHA: `8969804e481b3aeb271ed34b8ea80f26cba0213a`
+- Locale retest SHA: `a189285dc43977e0a185a1c72857423f69b6e07e`
+- Release/revision: production `REVISION` verified at `a189285dc43977e0a185a1c72857423f69b6e07e`
 - Contains PR-EQ-ASSET-01: yes, previously verified in deploy readiness/deploy output
 - Contains PR-EQ-ASSET-02: yes, previously verified in deploy readiness/deploy output
+- Contains PR-EQ-ASSET-04: yes, `27f5b37dff2f8330d08fe382d3f46bf5fe9b3727` is included in deployed main history
 
 Frontend production:
 
@@ -70,6 +69,21 @@ Two production anonymous attempts were used because the first direct API smoke s
 - Interpretation: `developing_foundation`
 - Mechanism IDs: `ER_RM_low_low`
 - Action prescription: `emotion_labeling`
+
+### Attempt C: Locale Retest After PR-EQ-ASSET-04
+
+- Attempt ID: `1f869cf8-027b-4298-ab5a-a368a4c53fb9`
+- Session marker: `codex_eq_v16_locale_retest_20260624135749_lcbyq8`
+- Evidence directory: `/tmp/eq_v16_locale_retest_20260624135749/`
+- Purpose: verifies `/report?locale=zh-CN` resolves Chinese EQ v1.6 assets after PR-EQ-ASSET-04.
+- Question count: 60 in `en`, 60 in `zh-CN`
+- `report-access`: ready/full/all-free, `locked=false`, `offers=[]`, `upgrade_sku=null`, `blur_others=false`
+- `/report?locale=en`: `locale=en`, global label `Emotional & Relational Functioning Index`
+- `/report?locale=zh-CN`: `locale=zh-CN`, global label `情绪与关系综合指数`
+- Chinese resolved assets: present
+- English global label leakage in Chinese assets: not observed
+- `methodology.report_version`: `eq_report_v5_assets_commercial_ready_v1_6`
+- `next_module.available`: `false`
 
 Screenshots and raw JSON evidence are stored locally under:
 
@@ -258,7 +272,7 @@ Chinese route visible sections found:
 
 Important caveat:
 
-- Chinese route UI chrome is partially localized, but resolved report content remains English. See P1 below.
+- The initial smoke found English resolved assets on the Chinese route. The PR-EQ-ASSET-04 production retest closed this issue at the API payload layer. A separate browser visual smoke can still be used before a major launch campaign, but it is no longer a P1 blocker for the Agent-ready baseline.
 
 ## 8. Forbidden Terms / Fields Check
 
@@ -325,7 +339,7 @@ The low-confidence attempt was created by the audit's fast API submission and sh
 
 ## 11. Issues And Risks
 
-### P1: Chinese Result Path Receives English Resolved Assets
+### Closed P1: Chinese Result Path Previously Received English Resolved Assets
 
 Evidence:
 
@@ -333,16 +347,22 @@ Evidence:
 - `GET /api/v0.3/attempts/adbc27ed-f1f4-47be-8548-e69cc54bbd47/report?locale=zh` also returned `locale=en`.
 - Chinese result route displayed Chinese UI chrome, but core resolved report assets such as `core_formulation`, `result_snapshot`, `quality_confidence`, and `action_prescription` were English.
 
-Impact:
+Original impact:
 
 - Blocks Chinese commercial-quality acceptance.
 - Blocks Agent phase because the Agent should not inherit unresolved locale authority behavior.
 
-Recommended follow-up:
+Resolution:
 
-- Fix report locale resolution so `/report?locale=zh-CN` returns Chinese resolved assets and `locale=zh-CN`.
-- Add production-safe contract coverage for report locale resolution.
-- Add frontend contract/e2e assertion that zh result route renders localized resolved assets, not English fallback.
+- PR-EQ-ASSET-04 fixed report locale resolution so explicit report locale requests are passed through report delivery and composer resolution.
+- Production retest attempt `1f869cf8-027b-4298-ab5a-a368a4c53fb9` confirmed `/report?locale=zh-CN` returns `locale=zh-CN`, Chinese score labels, and Chinese resolved assets.
+- The report snapshot remains attempt-locale-bound; localized live render does not overwrite the original attempt-locale snapshot.
+
+Status:
+
+- P1 closed.
+- Chinese commercial-quality API payload path accepted.
+- Agent phase gate can open after the v1.6 content baseline is frozen.
 
 ### P2: report-access Projection Latency
 
@@ -378,7 +398,7 @@ Recommended follow-up:
 
 ## 12. Final Acceptance Decision
 
-Production EQ v1.6 is partially accepted:
+Production EQ v1.6 is accepted as the first commercial-ready content baseline:
 
 - Backend v1.6 payload delivery: pass
 - Frontend EQResultV5 rendering: pass
@@ -386,14 +406,14 @@ Production EQ v1.6 is partially accepted:
 - SJT planned/unavailable boundary: pass
 - Low-confidence path safety: pass
 - English commercial result path: pass
-- Chinese commercial result path: **fail / P1**
+- Chinese commercial result path: pass after PR-EQ-ASSET-04 production retest
 
-Agent phase allowed: **No**
+Agent phase allowed: **Yes**
 
 Reason:
 
-- The Chinese result path currently receives English resolved assets from `/report`. The EQ Agent should not be built on top of a locale authority mismatch.
+- EQ v1.6 content authority, resolved assets, locale-specific report delivery, no-paywall contract, low-confidence safety path, and SJT planned boundary are now production-verified.
 
 Next recommended task:
 
-- PR-EQ-ASSET-04: Fix EQ report locale resolution for v1.6 resolved assets, then rerun this acceptance audit.
+- PR-EQ-ASSET-05: Freeze EQ v1.6 as the first commercial content baseline, then proceed to the Agent-ready content operating system train.
