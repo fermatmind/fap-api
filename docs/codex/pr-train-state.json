@@ -5,7 +5,7 @@
     "repo": "fap-api",
     "branch": "codex/pr-eq-asset-01-content-pack-v16",
     "base": "main",
-    "status": "pr_open",
+    "status": "merged",
     "train_scope": "eq_v16_content_asset_productization",
     "title": "PR-EQ-ASSET-01 Backend EQ v1.6 content-pack import and compile lint",
     "checks": {
@@ -36,14 +36,18 @@
       "github_initial": {
         "status": "pending",
         "evidence": "PR #2384 opened; GitHub checks pending."
+      },
+      "github_final": {
+        "status": "pass",
+        "evidence": "PR #2384 merged with merge commit 1955ff3bd1620b16430ae4c07ae992cb23393b86; origin/main contains the merge commit and remote branch was deleted."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
+    "commit_sha": "1955ff3bd1620b16430ae4c07ae992cb23393b86",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2384",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-24T09:54:11Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-24T00:00:00+08:00",
@@ -68,6 +72,12 @@
         "from": "committed",
         "to": "pr_open",
         "notes": "Opened https://github.com/fermatmind/fap-api/pull/2384."
+      },
+      {
+        "at": "2026-06-24T00:00:00+08:00",
+        "from": "pr_open",
+        "to": "merged",
+        "notes": "Reconciled during PR-EQ-ASSET-02 after GitHub showed PR #2384 merged."
       }
     ]
   },
@@ -75,7 +85,7 @@
     "repo": "fap-api",
     "branch": "codex/pr-eq-asset-02-report-payload-fixtures-v16",
     "base": "main",
-    "status": "pending_dependency",
+    "status": "pr_open",
     "train_scope": "eq_v16_content_asset_productization",
     "title": "PR-EQ-ASSET-02 Backend EQ v1.6 report payload and canonical fixtures",
     "depends_on": [
@@ -87,13 +97,31 @@
         "evidence": "User explicitly authorized PR-EQ-ASSET-01, PR-EQ-ASSET-02, and PR-EQ-ASSET-03 manifest/state updates and sequential execution."
       },
       "dependency": {
+        "status": "pass",
+        "evidence": "PR-EQ-ASSET-01 merged into origin/main as 1955ff3bd1620b16430ae4c07ae992cb23393b86."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are confined to Eq60ReportComposer, EQ v5 canonical fixtures, EQ report tests, and authorized PR train state reconciliation."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60GoldenCasesTest",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ReportPaywallTest",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60SubmitQualityContractTest"
+        ],
+        "notes": "Focused PR-EQ-ASSET-02 report contract, fixture, paywall, golden case, and submit quality tests passed with existing PHPUnit warnings but zero failures."
+      },
+      "github_initial": {
         "status": "pending",
-        "evidence": "Waiting for PR-EQ-ASSET-01 to merge into main."
+        "evidence": "PR #2385 opened; GitHub checks pending."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "66f1df191b01f112099045a00671ca94124b550d",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2385",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -103,6 +131,18 @@
         "from": "missing_from_manifest",
         "to": "pending_dependency",
         "notes": "Initialized from explicit EQ v1.6 content asset productization authorization."
+      },
+      {
+        "at": "2026-06-24T00:00:00+08:00",
+        "from": "pending_dependency",
+        "to": "local_checks_passed",
+        "notes": "Resolved v1.6 assets in EQ report payload, refreshed canonical fixtures, and passed focused backend validations."
+      },
+      {
+        "at": "2026-06-24T00:00:00+08:00",
+        "from": "local_checks_passed",
+        "to": "pr_open",
+        "notes": "Opened https://github.com/fermatmind/fap-api/pull/2385."
       }
     ]
   },

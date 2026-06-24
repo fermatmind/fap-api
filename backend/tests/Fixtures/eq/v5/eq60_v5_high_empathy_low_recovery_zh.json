@@ -11,10 +11,33 @@
         },
         "asset_refs": {
             "action_prescription_id": "empathy_boundary",
+            "agent_playbook_ids": [
+                "eq.agent.playbook.understand_result",
+                "eq.agent.playbook.scene_advice",
+                "eq.agent.playbook.career_environment",
+                "eq.agent.playbook.low_confidence",
+                "eq.agent.playbook.unsupported_hiring"
+            ],
+            "backend_integration_contract_ids": [
+                "eq.backend_contract.schema_mapping",
+                "eq.backend_contract.frontend_consumption",
+                "eq.backend_contract.canonical_fixtures",
+                "eq.backend_contract.contract_tests",
+                "eq.backend_contract.agent_readiness"
+            ],
             "career_environment_ids": [
                 "emotional_labor_high",
                 "autonomy_recovery_medium",
                 "interpersonal_density_medium"
+            ],
+            "commercial_conversion_ids": [
+                "eq.conversion.save_report",
+                "eq.conversion.email_revisit",
+                "eq.conversion.pdf_export",
+                "eq.conversion.share_card",
+                "eq.conversion.retest_reminder",
+                "eq.conversion.related_tests",
+                "eq.conversion.agent_entry"
             ],
             "core_formulation_id": "high_empathy_low_recovery",
             "cross_assessment_boundary_id": "eq.cross_context.boundary.default",
@@ -23,7 +46,18 @@
                 "EM_ER_high_low"
             ],
             "personalization_route_id": "high_empathy_low_recovery",
+            "psychometric_evidence_ids": [
+                "eq.evidence.norm_status",
+                "eq.evidence.content_validity",
+                "eq.evidence.internal_consistency",
+                "eq.evidence.factor_structure",
+                "eq.evidence.test_retest",
+                "eq.evidence.measurement_invariance",
+                "eq.evidence.criterion_validity"
+            ],
+            "quality_confidence_id": "eq.quality.level.A",
             "quality_explanation_asset_id": "eq.quality.level.A",
+            "result_snapshot_id": "eq.snapshot.high_empathy_low_recovery",
             "scene_ids": [
                 "feedback",
                 "conflict",
@@ -68,67 +102,264 @@
         },
         "assets": {
             "action_prescription": {
-                "do_today": "支持别人前先确认自己能支持到哪里。",
+                "do_not_overread": "行动处方是练习建议，不承诺改变结果或替代专业支持。",
+                "do_today": "今天练习一句“理解但不接管”的话。",
                 "id": "empathy_boundary",
-                "script": "我愿意听你说十分钟，然后我们一起看下一步。",
+                "script": "我理解这件事很难，我能帮你一起理清下一步，但不能替你承担全部。",
                 "seven_day_plan": [
-                    "第 1 天：识别一次我在承担什么。",
-                    "第 2 天：练习时间边界。",
-                    "第 3 天：练习责任边界。",
-                    "第 4 天：支持后做恢复。",
-                    "第 5 天：区分理解和代替。",
-                    "第 6 天：复盘一次求助场景。",
-                    "第 7 天：写下自己的支持边界。"
+                    {
+                        "day": 1,
+                        "practice": "识别一个你容易接管的场景。"
+                    },
+                    {
+                        "day": 2,
+                        "practice": "写下对方责任和你责任的边界。"
+                    },
+                    {
+                        "day": 3,
+                        "practice": "练习一句支持但不接管的话。"
+                    },
+                    {
+                        "day": 4,
+                        "practice": "在一次对话中只提供一个具体帮助。"
+                    },
+                    {
+                        "day": 5,
+                        "practice": "对一个请求说出可承担范围。"
+                    },
+                    {
+                        "day": 6,
+                        "practice": "复盘说边界后的真实后果。"
+                    },
+                    {
+                        "day": 7,
+                        "practice": "写下你的恢复动作。"
+                    }
                 ],
-                "title": "共情边界处方",
-                "watch_out": "不要用冷漠来替代边界。",
-                "why_this_matters": "高共情需要边界，才能长期有效。"
+                "title": "共情边界",
+                "watch_out": "不要把练习做成自我批评；只观察一个小动作是否变得更清楚。",
+                "when_to_use": "当你理解别人后容易承担过多时使用。",
+                "why_this_matters": "当你理解别人后容易承担过多时使用。"
             },
+            "agent_dialogue_playbooks": [
+                {
+                    "clarifying_question": "你想讨论哪个具体场景？反馈、冲突、边界、协作还是压力恢复？",
+                    "escalation_rule": "涉及伤害风险、临床困扰、招聘筛选或要求改分时转人工/边界说明。",
+                    "id": "eq.agent.playbook.understand_result",
+                    "refusal_example": "我不能用 EQ 结果来筛选、诊断或评价他人，但可以帮你理解自己的沟通和恢复模式。",
+                    "response_policy": "先引用用户 formulation，再问一个现实场景。",
+                    "safe_response_example": "我会基于你的报告资产解释这个场景，不会重新打分或替你做高风险判断。",
+                    "title": "理解我的结果"
+                },
+                {
+                    "clarifying_question": "你想讨论哪个具体场景？反馈、冲突、边界、协作还是压力恢复？",
+                    "escalation_rule": "涉及伤害风险、临床困扰、招聘筛选或要求改分时转人工/边界说明。",
+                    "id": "eq.agent.playbook.scene_advice",
+                    "refusal_example": "我不能用 EQ 结果来筛选、诊断或评价他人，但可以帮你理解自己的沟通和恢复模式。",
+                    "response_policy": "只处理一个场景，调用 reality_translation 和 action_prescription。",
+                    "safe_response_example": "我会基于你的报告资产解释这个场景，不会重新打分或替你做高风险判断。",
+                    "title": "某个场景怎么办"
+                },
+                {
+                    "clarifying_question": "你想讨论哪个具体场景？反馈、冲突、边界、协作还是压力恢复？",
+                    "escalation_rule": "涉及伤害风险、临床困扰、招聘筛选或要求改分时转人工/边界说明。",
+                    "id": "eq.agent.playbook.career_environment",
+                    "refusal_example": "我不能用 EQ 结果来筛选、诊断或评价他人，但可以帮你理解自己的沟通和恢复模式。",
+                    "response_policy": "只讨论环境变量，不给具体职业适配结论。",
+                    "safe_response_example": "我会基于你的报告资产解释这个场景，不会重新打分或替你做高风险判断。",
+                    "title": "我适合什么工作环境"
+                },
+                {
+                    "clarifying_question": "你想讨论哪个具体场景？反馈、冲突、边界、协作还是压力恢复？",
+                    "escalation_rule": "涉及伤害风险、临床困扰、招聘筛选或要求改分时转人工/边界说明。",
+                    "id": "eq.agent.playbook.low_confidence",
+                    "refusal_example": "我不能用 EQ 结果来筛选、诊断或评价他人，但可以帮你理解自己的沟通和恢复模式。",
+                    "response_policy": "解释质量规则和复测建议，不输出强画像。",
+                    "safe_response_example": "我会基于你的报告资产解释这个场景，不会重新打分或替你做高风险判断。",
+                    "title": "为什么结果置信度低"
+                },
+                {
+                    "clarifying_question": "你想讨论哪个具体场景？反馈、冲突、边界、协作还是压力恢复？",
+                    "escalation_rule": "涉及伤害风险、临床困扰、招聘筛选或要求改分时转人工/边界说明。",
+                    "id": "eq.agent.playbook.unsupported_hiring",
+                    "refusal_example": "我不能用 EQ 结果来筛选、诊断或评价他人，但可以帮你理解自己的沟通和恢复模式。",
+                    "response_policy": "拒绝高风险用途，转为自我理解边界。",
+                    "safe_response_example": "我会基于你的报告资产解释这个场景，不会重新打分或替你做高风险判断。",
+                    "title": "用这个筛人或评价别人"
+                }
+            ],
+            "backend_integration_contract": [
+                {
+                    "acceptance": "后端 schema、compiler、fixture、contract test 通过后才可生产使用。",
+                    "do_not_overread": "这是导入契约，不是运行时代码。",
+                    "id": "eq.backend_contract.schema_mapping",
+                    "requirement": "将每个资产文件映射到后端 content-pack compiler 可识别的字段。",
+                    "title": "Schema 映射"
+                },
+                {
+                    "acceptance": "后端 schema、compiler、fixture、contract test 通过后才可生产使用。",
+                    "do_not_overread": "这是导入契约，不是运行时代码。",
+                    "id": "eq.backend_contract.frontend_consumption",
+                    "requirement": "前端必须渲染后端 resolved assets，不得硬编码正式报告解释文案。",
+                    "title": "前端消费契约"
+                },
+                {
+                    "acceptance": "后端 schema、compiler、fixture、contract test 通过后才可生产使用。",
+                    "do_not_overread": "这是导入契约，不是运行时代码。",
+                    "id": "eq.backend_contract.canonical_fixtures",
+                    "requirement": "为 balanced、high_empathy_low_recovery、low_confidence 三条路径生成 zh-CN / en canonical fixtures。",
+                    "title": "Canonical fixtures"
+                },
+                {
+                    "acceptance": "后端 schema、compiler、fixture、contract test 通过后才可生产使用。",
+                    "do_not_overread": "这是导入契约，不是运行时代码。",
+                    "id": "eq.backend_contract.contract_tests",
+                    "requirement": "断言 report payload 包含 v1.6 assets、免费转化动作、无权限门槛，且 SJT 保持 unavailable。",
+                    "title": "契约测试"
+                },
+                {
+                    "acceptance": "后端 schema、compiler、fixture、contract test 通过后才可生产使用。",
+                    "do_not_overread": "这是导入契约，不是运行时代码。",
+                    "id": "eq.backend_contract.agent_readiness",
+                    "requirement": "Agent 在检索、拒答和边界评测通过前，只能解释已解析报告资产。",
+                    "title": "Agent 就绪契约"
+                }
+            ],
             "career_environment": [
                 {
-                    "fit_signal": "高共情者能建立信任。",
+                    "do_not_overread": "这是职业环境变量，不是具体职业推荐，也不用于招聘筛选。",
+                    "fit_signal": "如果你的报告优势需要稳定节奏或清晰边界，情绪劳动高档可能更容易发挥；如果你的优势来自高互动，也要确认机会是否足够。",
                     "id": "emotional_labor_high",
-                    "label": "高情绪劳动",
+                    "interview_question": "我想了解这个岗位日常的情绪劳动大概是什么水平？高压时通常如何分工和复盘？",
+                    "label": "情绪劳动：高",
                     "level": "high",
-                    "meaning": "经常承接焦虑、投诉、冲突或脆弱情绪。",
-                    "strain_signal": "低恢复者容易被情绪场拖走。",
+                    "meaning": "你是否需要长期承接、安抚或调节他人情绪。 当前档位表示强度高、频率高，对恢复和边界要求更高。",
+                    "role_observation_checklist": [
+                        "一天内高互动时段数量",
+                        "反馈是私下还是公开",
+                        "冲突由个人消化还是团队处理",
+                        "是否有低输入恢复窗口"
+                    ],
+                    "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。",
+                    "strain_signal": "当情绪劳动与恢复空间、反馈方式或责任边界不匹配时，容易放大消耗。",
+                    "team_risk": "如果团队默认由高 EQ 的人承担关系维护，这个环境会把优势变成隐形负担。",
                     "variable": "emotional_labor",
-                    "what_to_verify": "确认督导、复盘和休息制度是否真实存在。"
+                    "what_to_verify": "面试或试岗时验证：这里的情绪劳动真实强度是多少？谁负责调节关系和处理冲突？"
                 },
                 {
-                    "fit_signal": "适合多数人维持稳定表现。",
+                    "do_not_overread": "这是职业环境变量，不是具体职业推荐，也不用于招聘筛选。",
+                    "fit_signal": "如果你的报告优势需要稳定节奏或清晰边界，自主恢复空间中档可能更容易发挥；如果你的优势来自高互动，也要确认机会是否足够。",
                     "id": "autonomy_recovery_medium",
-                    "label": "中等自主恢复空间",
+                    "interview_question": "我想了解这个岗位日常的自主恢复空间大概是什么水平？高压时通常如何分工和复盘？",
+                    "label": "自主恢复空间：中",
                     "level": "medium",
-                    "meaning": "有一定独立安排，但仍受团队节奏影响。",
-                    "strain_signal": "忙季或危机期可能被压缩。",
+                    "meaning": "你是否能安排独处、节奏和低输入恢复时间。 当前档位表示有一定强度，但仍可通过规则管理。",
+                    "role_observation_checklist": [
+                        "一天内高互动时段数量",
+                        "反馈是私下还是公开",
+                        "冲突由个人消化还是团队处理",
+                        "是否有低输入恢复窗口"
+                    ],
+                    "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。",
+                    "strain_signal": "当自主恢复空间与恢复空间、反馈方式或责任边界不匹配时，容易放大消耗。",
+                    "team_risk": "如果团队默认由高 EQ 的人承担关系维护，这个环境会把优势变成隐形负担。",
                     "variable": "autonomy_recovery",
-                    "what_to_verify": "确认高峰期的恢复安排。"
+                    "what_to_verify": "面试或试岗时验证：这里的自主恢复空间真实强度是多少？谁负责调节关系和处理冲突？"
                 },
                 {
-                    "fit_signal": "适合在协作和独立之间切换。",
+                    "do_not_overread": "这是职业环境变量，不是具体职业推荐，也不用于招聘筛选。",
+                    "fit_signal": "如果你的报告优势需要稳定节奏或清晰边界，人际密度中档可能更容易发挥；如果你的优势来自高互动，也要确认机会是否足够。",
                     "id": "interpersonal_density_medium",
-                    "label": "中等人际密度",
+                    "interview_question": "我想了解这个岗位日常的人际密度大概是什么水平？高压时通常如何分工和复盘？",
+                    "label": "人际密度：中",
                     "level": "medium",
-                    "meaning": "日常有固定协作，但不是持续社交。",
-                    "strain_signal": "会议过多时仍会消耗。",
+                    "meaning": "工作中需要和多少人、以多高频率互动。 当前档位表示有一定强度，但仍可通过规则管理。",
+                    "role_observation_checklist": [
+                        "一天内高互动时段数量",
+                        "反馈是私下还是公开",
+                        "冲突由个人消化还是团队处理",
+                        "是否有低输入恢复窗口"
+                    ],
+                    "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。",
+                    "strain_signal": "当人际密度与恢复空间、反馈方式或责任边界不匹配时，容易放大消耗。",
+                    "team_risk": "如果团队默认由高 EQ 的人承担关系维护，这个环境会把优势变成隐形负担。",
                     "variable": "interpersonal_density",
-                    "what_to_verify": "确认每周会议、同步和跨团队协作频率。"
+                    "what_to_verify": "面试或试岗时验证：这里的人际密度真实强度是多少？谁负责调节关系和处理冲突？"
+                }
+            ],
+            "commercial_conversion_actions": [
+                {
+                    "body": "把这次核心模式、行动处方和复测入口留住。",
+                    "cta_label": "保存报告",
+                    "do_not_overread": "这是免费产品动作，不改变报告权限。",
+                    "id": "eq.conversion.save_report",
+                    "placement": "结果页底部、首屏次级动作或报告保存区域。",
+                    "title": "保存报告"
+                },
+                {
+                    "body": "把报告发送给自己，适合之后复盘或继续和 Agent 对话。",
+                    "cta_label": "发送到邮箱",
+                    "do_not_overread": "这是免费产品动作，不改变报告权限。",
+                    "id": "eq.conversion.email_revisit",
+                    "placement": "结果页底部、首屏次级动作或报告保存区域。",
+                    "title": "邮件回看"
+                },
+                {
+                    "body": "生成可保存版本，适合个人复盘，不建议用于招聘或评估他人。",
+                    "cta_label": "生成 PDF",
+                    "do_not_overread": "这是免费产品动作，不改变报告权限。",
+                    "id": "eq.conversion.pdf_export",
+                    "placement": "结果页底部、首屏次级动作或报告保存区域。",
+                    "title": "PDF 报告"
+                },
+                {
+                    "body": "只分享模式句，不分享详细分数和敏感解释。",
+                    "cta_label": "生成分享卡",
+                    "do_not_overread": "这是免费产品动作，不改变报告权限。",
+                    "id": "eq.conversion.share_card",
+                    "placement": "结果页底部、首屏次级动作或报告保存区域。",
+                    "title": "分享卡"
+                },
+                {
+                    "body": "4–8 周后重新查看模式是否稳定，低置信结果可更早复测。",
+                    "cta_label": "设置复测提醒",
+                    "do_not_overread": "这是免费产品动作，不改变报告权限。",
+                    "id": "eq.conversion.retest_reminder",
+                    "placement": "结果页底部、首屏次级动作或报告保存区域。",
+                    "title": "复测提醒"
+                },
+                {
+                    "body": "用 Big Five、RIASEC、MBTI 作为补充视角，不把 EQ 当成唯一结论。",
+                    "cta_label": "继续探索",
+                    "do_not_overread": "这是免费产品动作，不改变报告权限。",
+                    "id": "eq.conversion.related_tests",
+                    "placement": "结果页底部、首屏次级动作或报告保存区域。",
+                    "title": "相关测试"
+                },
+                {
+                    "body": "带着一个真实场景提问，例如反馈、冲突、边界或压力恢复。",
+                    "cta_label": "问 Agent",
+                    "do_not_overread": "这是免费产品动作，不改变报告权限。",
+                    "id": "eq.conversion.agent_entry",
+                    "placement": "结果页底部、首屏次级动作或报告保存区域。",
+                    "title": "问问 Agent"
                 }
             ],
             "core_formulation": {
-                "core_claim": "你可能很快接住别人的情绪，却不一定能及时把对方状态和自己的状态分开。",
-                "development_lever": "共情之后建立边界和恢复动作。",
-                "do_not_overread": "发展方向不是减少共情，而是让共情更有边界。",
+                "conversion_hook": "保存报告后，可在复测时比较这个模式是否稳定。",
+                "core_claim": "你很快读到别人的状态，但恢复系统常常追不上共情速度。",
+                "development_lever": "练习“理解但不接管”，让共情后面跟着边界。",
+                "do_not_overread": "这是本次结果的组织方式，不是永久人格标签，也不适合用于临床、招聘或高风险判断。",
                 "evidence_basis": [
-                    "EM 明显高于 ER",
-                    "共情信号强于恢复信号"
+                    "由四维分数、维度差距、质量等级和组合机制共同触发。"
                 ],
+                "hero_summary": "你很快读到别人的状态，但恢复系统常常追不上共情速度。 最值得看的不是一个高低标签，而是它在哪个场景反复出现，以及今天能练哪一个动作。",
                 "id": "high_empathy_low_recovery",
-                "likely_cost": "在冲突、求助或高情绪劳动场景中容易被卷入。",
-                "one_liner": "你容易理解他人感受，但恢复和边界是当前杠杆。",
-                "primary_strength": "对他人状态敏感，容易建立信任。",
-                "title": "高共情，低恢复"
+                "likely_cost": "你可能把别人的压力带回自己身上，离开场景后还在消化。",
+                "one_liner": "你很快读到别人的状态，但恢复系统常常追不上共情速度。",
+                "primary_strength": "你容易让别人感到被理解，尤其在情绪强烈的时刻。",
+                "title": "高共情，低恢复",
+                "user_memory_sentence": "我可以理解别人，但不必替别人承受全部情绪。"
             },
             "cross_assessment_context": {
                 "boundary": {
@@ -145,16 +376,18 @@
             },
             "mechanisms": [
                 {
-                    "cost": "容易吸收过多情绪劳动。",
-                    "development_lever": "共情后加一句边界确认。",
+                    "cost": "强项可能因为后续动作不足而变成消耗。",
+                    "development_lever": "把机制放回一个具体场景，只练一个最小动作。",
+                    "do_not_overread": "机制解释不是人格标签，也不是对每段关系的固定判断。",
                     "id": "EM_ER_high_low",
-                    "micro_action": "在心里说：这是对方的感受，我可以支持，但不需要代替。",
+                    "mechanism": "这个机制解释理解别人之后，能不能保留自己的节奏和恢复空间。强项会让你更早发现问题，但弱项决定你能否把它落地。",
+                    "micro_action": "下次类似场景出现时，先说一句准备好的降温或澄清句。",
                     "pair": "EM_ER",
                     "state": "high_low",
-                    "strength": "容易让人感到被看见。",
-                    "title": "共情强，边界和恢复偏弱",
-                    "what_it_feels_like": "别人难受时，你可能很快进入帮助或自责状态。",
-                    "why_it_matters": "你越能理解别人，越需要知道哪些情绪不是你要承担的。"
+                    "strength": "强项能成为练习入口。",
+                    "title": "共情理解 × 情绪调节｜前者强，后者需要补位",
+                    "what_it_feels_like": "你知道很多或感到很多，但后一步不够稳。",
+                    "why_it_matters": "单个维度告诉你哪里强弱，组合机制解释为什么同一个分数会在现实关系里变成优势、代价或练习入口。"
                 }
             ],
             "personalization_route": {
@@ -193,118 +426,269 @@
                     "strongest_dimension": "EM"
                 }
             },
+            "psychometric_evidence_status": [
+                {
+                    "body": "当前常模解释为阶段性版本，不应被理解为最终全球常模。",
+                    "do_not_overread": "证据状态透明不是削弱产品，而是防止过度解释。",
+                    "id": "eq.evidence.norm_status",
+                    "next_validation_step": "后续应通过样本扩展、复测稳定性、用户反馈和专家复核持续验证。",
+                    "status": "provisional",
+                    "user_facing_status_label": "证据持续建设中",
+                    "what_this_means_for_user": "你可以把结果用于自我理解、沟通反思和成长计划，但不应用于高风险决策。"
+                },
+                {
+                    "body": "题项和报告维度已有内容映射，但需要持续专家复核和用户反馈。",
+                    "do_not_overread": "证据状态透明不是削弱产品，而是防止过度解释。",
+                    "id": "eq.evidence.content_validity",
+                    "next_validation_step": "后续应通过样本扩展、复测稳定性、用户反馈和专家复核持续验证。",
+                    "status": "preliminary",
+                    "user_facing_status_label": "证据持续建设中",
+                    "what_this_means_for_user": "你可以把结果用于自我理解、沟通反思和成长计划，但不应用于高风险决策。"
+                },
+                {
+                    "body": "后续应按语言、地区和维度计算内部一致性，并记录版本。",
+                    "do_not_overread": "证据状态透明不是削弱产品，而是防止过度解释。",
+                    "id": "eq.evidence.internal_consistency",
+                    "next_validation_step": "后续应通过样本扩展、复测稳定性、用户反馈和专家复核持续验证。",
+                    "status": "planned",
+                    "user_facing_status_label": "证据持续建设中",
+                    "what_this_means_for_user": "你可以把结果用于自我理解、沟通反思和成长计划，但不应用于高风险决策。"
+                },
+                {
+                    "body": "需要用 EFA/CFA 或其他合适方法验证四维结构。",
+                    "do_not_overread": "证据状态透明不是削弱产品，而是防止过度解释。",
+                    "id": "eq.evidence.factor_structure",
+                    "next_validation_step": "后续应通过样本扩展、复测稳定性、用户反馈和专家复核持续验证。",
+                    "status": "planned",
+                    "user_facing_status_label": "证据持续建设中",
+                    "what_this_means_for_user": "你可以把结果用于自我理解、沟通反思和成长计划，但不应用于高风险决策。"
+                },
+                {
+                    "body": "建议在 30–90 天窗口评估稳定性和可变性。",
+                    "do_not_overread": "证据状态透明不是削弱产品，而是防止过度解释。",
+                    "id": "eq.evidence.test_retest",
+                    "next_validation_step": "后续应通过样本扩展、复测稳定性、用户反馈和专家复核持续验证。",
+                    "status": "planned",
+                    "user_facing_status_label": "证据持续建设中",
+                    "what_this_means_for_user": "你可以把结果用于自我理解、沟通反思和成长计划，但不应用于高风险决策。"
+                },
+                {
+                    "body": "中英文和主要人群组之间需要做等值或 DIF 检查。",
+                    "do_not_overread": "证据状态透明不是削弱产品，而是防止过度解释。",
+                    "id": "eq.evidence.measurement_invariance",
+                    "next_validation_step": "后续应通过样本扩展、复测稳定性、用户反馈和专家复核持续验证。",
+                    "status": "planned",
+                    "user_facing_status_label": "证据持续建设中",
+                    "what_this_means_for_user": "你可以把结果用于自我理解、沟通反思和成长计划，但不应用于高风险决策。"
+                },
+                {
+                    "body": "可探索与工作满意、关系满意、压力恢复等低风险外部指标的关联。",
+                    "do_not_overread": "证据状态透明不是削弱产品，而是防止过度解释。",
+                    "id": "eq.evidence.criterion_validity",
+                    "next_validation_step": "后续应通过样本扩展、复测稳定性、用户反馈和专家复核持续验证。",
+                    "status": "planned",
+                    "user_facing_status_label": "证据持续建设中",
+                    "what_this_means_for_user": "你可以把结果用于自我理解、沟通反思和成长计划，但不应用于高风险决策。"
+                }
+            ],
             "quality": {
                 "confidence_label": "high",
                 "explanation_asset_id": "eq.quality.level.A"
             },
+            "quality_confidence": {
+                "body": "本次作答节奏和一致性支持较稳定解释。",
+                "commercial_display": "建议在结果页用质量 Banner 明示，不隐藏在页脚。",
+                "how_to_read": "置信度决定阅读力度：高置信可看模式与行动，低置信先看作答状态和复测建议。",
+                "id": "eq.quality.level.A",
+                "label": "高置信",
+                "retest_note": "可在未来复测观察稳定变化。",
+                "user_guidance": "根据置信度调整阅读力度，不要用它评价自己。",
+                "why_this_level": "根据作答完整度、节奏、一致性、极端/中立倾向和反应模式综合判断。"
+            },
             "reality_scenes": [
                 {
-                    "better_move": "先拆分事实、情绪和下一步：对方说了什么，我有什么感受，我要确认什么。",
-                    "cost": "如果恢复不足，容易把反馈体验成否定。",
+                    "better_move": "先问清反馈指向，再决定解释或调整。",
+                    "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。",
+                    "context": "别人指出问题、要求修改或评价你的表现时。",
+                    "cost": "如果强行套用画像，可能比不看结果更误导。",
+                    "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
                     "id": "feedback",
-                    "strength": "能注意到反馈背后的真实意图和关系温度。",
-                    "title": "反馈场景",
-                    "typical_response": "收到评价或修改意见时，你可能先捕捉语气和关系信号，再处理信息本身。"
+                    "one_sentence_script": "我想先确认一下，你最希望我调整的是结果、过程，还是沟通方式？",
+                    "strength": "即使不适合强结论，也能提醒你观察最近的压力、疲劳或作答方式。",
+                    "title": "反馈",
+                    "typical_response": "收到反馈时，这次结果应轻一点读，最有价值的是理解本次作答状态。 你最容易受影响的不是分数本身，而是反馈背后的关系信号。"
                 },
                 {
-                    "better_move": "先确认共同目标，再只讨论一个具体问题。",
-                    "cost": "如果没有暂停流程，容易过度解释、回避或急于修复。",
+                    "better_move": "先把冲突缩小成一个可处理的问题。",
+                    "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。",
+                    "context": "意见分歧、语气升高或彼此防御时。",
+                    "cost": "如果强行套用画像，可能比不看结果更误导。",
+                    "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
                     "id": "conflict",
-                    "strength": "有机会同时看见双方需求。",
-                    "title": "冲突场景",
-                    "typical_response": "出现分歧时，你可能在维护关系和表达自己之间摇摆。"
+                    "one_sentence_script": "我们先把问题缩小到一个点：现在最需要解决的是什么？",
+                    "strength": "即使不适合强结论，也能提醒你观察最近的压力、疲劳或作答方式。",
+                    "title": "冲突",
+                    "typical_response": "冲突中，这次结果应轻一点读，最有价值的是理解本次作答状态。 这个模式会决定你是先稳住、先解释、先承接，还是先退出。"
                 },
                 {
-                    "better_move": "先问自己：我能支持到哪里，哪一部分仍然属于对方。",
-                    "cost": "支持和代替之间的边界可能变模糊。",
+                    "better_move": "先承认对方感受，再说明自己的可承接范围。",
+                    "commercial_use": "可用于结果页场景卡、Agent 场景追问和复测对比。",
+                    "context": "别人期待你理解、帮忙、让步或继续承接时。",
+                    "cost": "如果强行套用画像，可能比不看结果更误导。",
+                    "do_not_overread": "这是场景化解释，不是对每次互动的固定预测。",
                     "id": "relationship_boundary",
-                    "strength": "容易让对方感到被接住。",
+                    "one_sentence_script": "我理解这对你很重要，我现在能承接的是这一部分。",
+                    "strength": "即使不适合强结论，也能提醒你观察最近的压力、疲劳或作答方式。",
                     "title": "关系边界",
-                    "typical_response": "当别人需要你支持时，你可能很快进入理解或承担。"
+                    "typical_response": "边界场景里，如果强行套用画像，可能比不看结果更误导。 你需要把理解和可承接范围分开。"
                 }
             ],
+            "result_snapshot": {
+                "continue_path": "保存报告，7 天后复测；也可以用 Agent 追问一个具体场景。",
+                "conversion_actions": [
+                    "save_report",
+                    "email_revisit",
+                    "share_card",
+                    "talk_to_agent",
+                    "related_tests"
+                ],
+                "core_judgment": "你很快读到别人的状态，但恢复系统常常追不上共情速度。",
+                "do_not_overread": "首屏只给核心阅读路径，不替代完整报告。",
+                "evidence_point": "依据四维分数、维度差距、答题质量和机制组合生成。",
+                "headline": "高共情，低恢复",
+                "id": "eq.snapshot.high_empathy_low_recovery",
+                "likely_cost": "你可能把别人的压力带回自己身上，离开场景后还在消化。",
+                "minimal_action": "练习“理解但不接管”，让共情后面跟着边界。",
+                "share_safe_sentence": "我可以理解别人，但不必替别人承受全部情绪。",
+                "three_sentence_summary": [
+                    "你很快读到别人的状态，但恢复系统常常追不上共情速度。",
+                    "你容易让别人感到被理解，尤其在情绪强烈的时刻。",
+                    "下一步：练习“理解但不接管”，让共情后面跟着边界。"
+                ],
+                "top_strength": "你容易让别人感到被理解，尤其在情绪强烈的时刻。"
+            },
             "scientific_contract": {
-                "non_ability_statement": "本报告不是认证能力测验，也不声称测量真实情商能力。",
-                "non_clinical_statement": "本报告不用于临床诊断、治疗建议或危机评估。",
-                "non_hiring_statement": "本报告不用于招聘筛选、录用、晋升或其他高风险人事决策。",
-                "norm_status_statement": "当前常模为阶段性常模，百分位和标准分用于解释相对位置，后续会随样本增长持续校准。",
-                "quality_rules_statement": "系统会参考作答时长、长串作答、极端反应、中立反应和一致性信号，给出解释置信度。",
-                "self_report_statement": "本报告反映你对自身情绪与关系模式的主观感知，不等同于客观能力测验。",
-                "test_definition": "这是一份基于 60 道自我报告题的情绪与关系模式报告，用于解释你如何感知、调节、回应和管理自己与他人的情绪。",
-                "version_statement": "报告版本 eq_report_v5_assets，计分版本 v1.0_normed_validity，内容版本 EQ_60/v1。"
+                "do_not_overread": "不要把自我报告结果当作他人观察或现场行为记录。",
+                "non_ability_statement": "EQ-60 解释的是自我感知中的情绪与关系模式，不等同于认证能力评估，也不应作为高风险决策依据。未来的情境判断模块也只会补充情境选择数据，而不是把结果变成能力认证。",
+                "non_clinical_statement": "本报告不用于医疗、治疗或风险处置决定。如果困扰持续影响睡眠、工作、人际安全或日常功能，应寻求合格专业人士支持。",
+                "non_hiring_statement": "本结果不应用于录用、淘汰、晋升或岗位分配。它更适合个人发展、团队沟通和自我反思。",
+                "norm_status_statement": "当前分数使用阶段性常模和版本化解释。百分位用于提供相对位置感，而不是精确排名。随着样本和版本更新，报告会保留当时版本以便复测对比。",
+                "quality_rules_statement": "报告会参考作答速度、连续相同选择、极端选择、中立选择和一致性线索来判断解释置信度。低置信不等于结果无用，而是需要更谨慎地读。",
+                "self_report_statement": "这份报告基于你对 60 道题的作答，解释你如何理解、调节和回应自己与他人的情绪。它的价值在于把自我感知转化为可复盘的关系线索、行动入口和职业环境变量；它不是对所有现场行为的直接观察。",
+                "test_definition": "这份报告基于你对 60 道题的作答，解释你如何理解、调节和回应自己与他人的情绪。它的价值在于把自我感知转化为可复盘的关系线索、行动入口和职业环境变量；它不是对所有现场行为的直接观察。",
+                "user_safe_summary": "适合用于自我理解、关系复盘和成长规划。",
+                "version_statement": "报告由题库版本、计分版本、常模版本和内容资产版本共同决定。版本记录让复测、客服和内容审校能追踪同一结果如何生成。"
             },
             "score_system": {
+                "band_details": {
+                    "developing": {
+                        "do_not_overread": "总分用于定位阅读入口，不能替代四维、质量和场景解释。",
+                        "label": "发展中",
+                        "meaning": "你已有可用基础，但在反馈、压力或关系拉扯中稳定性还会下降。",
+                        "practice_focus": "选择一个高频场景，提前准备一句回应。",
+                        "risk": "最容易卡在“知道一点，但现场用不上”。",
+                        "strength": "你已经能抓住一部分线索，适合把它们转成固定流程。"
+                    },
+                    "foundational": {
+                        "do_not_overread": "总分用于定位阅读入口，不能替代四维、质量和场景解释。",
+                        "label": "基础发展中",
+                        "meaning": "当前信号提示你需要先建立更清晰的识别、命名和复位习惯。",
+                        "practice_focus": "每天一次情绪命名，配合一个低成本复位动作。",
+                        "risk": "如果直接追求复杂沟通技巧，容易因为基础信号不清而挫败。",
+                        "strength": "从一个小而重复的动作开始，进步会更稳定。"
+                    },
+                    "integrated": {
+                        "do_not_overread": "总分用于定位阅读入口，不能替代四维、质量和场景解释。",
+                        "label": "高度整合",
+                        "meaning": "四维信号通常能协同工作，帮助你兼顾自己、他人和关系目标。",
+                        "practice_focus": "建立恢复边界，避免把稳定别人变成默认责任。",
+                        "risk": "高整合也可能带来过度承担和高标准疲劳。",
+                        "strength": "你适合把优势系统化，形成边界、修复和恢复节奏。"
+                    },
+                    "proficient": {
+                        "do_not_overread": "总分用于定位阅读入口，不能替代四维、质量和场景解释。",
+                        "label": "熟练成熟",
+                        "meaning": "你通常能较稳定地识别、调节和处理关系信号。",
+                        "practice_focus": "把“我能处理”升级为“我选择如何处理”。",
+                        "risk": "他人可能默认你应该一直承担稳定局面的角色。",
+                        "strength": "你可以把个人优势转成可复制的沟通习惯。"
+                    },
+                    "stable": {
+                        "do_not_overread": "总分用于定位阅读入口，不能替代四维、质量和场景解释。",
+                        "label": "稳定可用",
+                        "meaning": "多数日常场景中，你能使用这些情绪与关系能力，但仍有明确触发点。",
+                        "practice_focus": "找出最容易失稳的一个场景，做事后复盘。",
+                        "risk": "稳定不等于没有代价，尤其在高强度关系环境中。",
+                        "strength": "你的结果已经能支持更精细的场景训练。"
+                    }
+                },
                 "bands": {
-                    "developing": "发展中：已经有可用基础，但在压力或复杂关系中可能不够稳定。",
-                    "foundational": "基础发展中：当前信号提示该能力更需要外部结构、练习和复盘支持。",
-                    "integrated": "高度整合：该维度表现突出，重点是避免过度使用并保持情境灵活性。",
-                    "proficient": "熟练成熟：该维度通常是可依赖的优势信号，也可能带来相应消耗。",
-                    "stable": "稳定可用：多数日常场景中可以发挥作用，但仍需要看和其他维度的组合。"
+                    "developing": "发展中",
+                    "foundational": "基础发展中",
+                    "integrated": "高度整合",
+                    "proficient": "熟练成熟",
+                    "stable": "稳定可用"
                 },
                 "dimensions": {
                     "EM": {
-                        "band_explanations": {
-                            "developing": "共情理解已有基础，但可能错过隐性情绪或真实需求。",
-                            "foundational": "共情理解处于基础发展中，建议先练习确认对方感受。",
-                            "integrated": "共情理解高度整合，重点是避免过度承接他人情绪。",
-                            "proficient": "共情理解较成熟，能较细腻地捕捉关系和情绪线索。",
-                            "stable": "共情理解稳定可用，多数场景能把握他人基本感受。"
-                        },
-                        "definition": "理解他人情绪、立场和关系线索的倾向。",
-                        "label": "共情理解"
+                        "definition": "理解他人情绪、立场和未说出口感受的倾向。",
+                        "development_question": "对方真正担心或在意的是什么？",
+                        "do_not_overread": "高低分都不是固定标签，它们描述的是当前自我报告倾向。",
+                        "label": "共情理解",
+                        "short_label": "共情理解",
+                        "what_high_can_look_like": "你能敏锐捕捉他人的状态，但需要避免过度吸收。",
+                        "what_low_can_look_like": "可能更关注任务或事实，较容易漏过对方的情绪线索。"
                     },
                     "ER": {
-                        "band_explanations": {
-                            "developing": "情绪调节已有基础，但强反馈或冲突中仍可能不稳定。",
-                            "foundational": "情绪调节处于基础发展中，建议先建立暂停和恢复流程。",
-                            "integrated": "情绪调节高度整合，重点是避免过度控制并保留真实感受。",
-                            "proficient": "情绪调节较成熟，能在触发后较快回到可沟通状态。",
-                            "stable": "情绪调节稳定可用，多数日常压力下能找到恢复方式。"
-                        },
-                        "definition": "在压力、反馈或冲突中恢复、暂停和选择回应方式的倾向。",
-                        "label": "情绪调节"
+                        "definition": "在压力、反馈、挫败或冲突中稳定和恢复自己的倾向。",
+                        "development_question": "我能不能先让自己降一点温，再决定怎么回应？",
+                        "do_not_overread": "高低分都不是固定标签，它们描述的是当前自我报告倾向。",
+                        "label": "情绪调节",
+                        "short_label": "情绪调节",
+                        "what_high_can_look_like": "你在压力中较能暂停、恢复和选择回应，但不代表没有情绪。",
+                        "what_low_can_look_like": "被触发后恢复较慢，容易用回避、解释或压抑处理。"
                     },
                     "RM": {
-                        "band_explanations": {
-                            "developing": "关系管理已有基础，但在冲突、边界或修复中可能不稳定。",
-                            "foundational": "关系管理处于基础发展中，建议先学习低风险沟通脚本。",
-                            "integrated": "关系管理高度整合，重点是避免承担过多协调责任。",
-                            "proficient": "关系管理较成熟，能主动推进沟通、协调和修复。",
-                            "stable": "关系管理稳定可用，多数协作场景中能采取建设性行动。"
-                        },
-                        "definition": "在沟通、协作、修复和边界中采取建设性行动的倾向。",
-                        "label": "关系管理"
+                        "definition": "通过表达、协作、边界和修复维持关系质量的倾向。",
+                        "development_question": "这句话怎样说，既真实又能让关系继续对话？",
+                        "do_not_overread": "高低分都不是固定标签，它们描述的是当前自我报告倾向。",
+                        "label": "关系管理",
+                        "short_label": "关系管理",
+                        "what_high_can_look_like": "你能维护沟通和关系质量，但仍需留意真实表达和边界。",
+                        "what_low_can_look_like": "知道自己或对方感受后，不一定能把对话修复或推进。"
                     },
                     "SA": {
-                        "band_explanations": {
-                            "developing": "自我觉察已有基础，但在压力下可能较晚发现真实触发点。",
-                            "foundational": "自我觉察处于基础发展中，建议先练习用具体词语命名情绪。",
-                            "integrated": "自我觉察高度整合，重点是避免过度分析并转向行动。",
-                            "proficient": "自我觉察较成熟，能较快捕捉情绪变化和背后需求。",
-                            "stable": "自我觉察稳定可用，通常能理解自己的主要情绪线索。"
-                        },
-                        "definition": "识别、命名和理解自身情绪线索的倾向。",
-                        "label": "自我觉察"
+                        "definition": "识别、命名和理解自己情绪的倾向。",
+                        "development_question": "我此刻真正的感受和需要是什么？",
+                        "do_not_overread": "高低分都不是固定标签，它们描述的是当前自我报告倾向。",
+                        "label": "自我觉察",
+                        "short_label": "自我觉察",
+                        "what_high_can_look_like": "你能较快识别自己的感受和触发点，但仍需把觉察转化为行动。",
+                        "what_low_can_look_like": "情绪常在事后才变清楚，容易先反应后理解。"
                     }
                 },
                 "global_index": {
+                    "definition": "综合指数把四个维度合并成一个整体视角，用来帮助你快速理解当前情绪与关系模式。",
+                    "how_to_use": "先看总览，再回到四维、质量提示和行动处方。",
                     "label": "情绪与关系综合指数",
-                    "meaning": "综合四个维度的自我报告信号，描述当前情绪与关系功能的整体稳定度。"
+                    "not_a_capability_score": "它不是现场表现的能力凭证，也不应单独决定任何重要选择。"
                 },
                 "score_notes": {
-                    "percentile": "百分位表示在当前参考样本中的相对位置，不代表能力认证。",
-                    "standard_score": "标准分以阶段性常模为参照，平均附近代表稳定可用。"
+                    "commercial_boundary": "总分用于定位阅读入口，最终解释以四维、质量和场景为准。",
+                    "percentile": "百分位用于说明相对位置，不代表固定能力标签。",
+                    "standard_score": "标准分用于稳定展示和维度比较。"
                 }
             },
             "sjt_bridge": {
                 "available": false,
-                "button_label": "情境判断模块规划中",
-                "description": "当前报告基于 EQ-60 自我报告。未来 EQ-SJT 16 会补充你在反馈、冲突、边界和压力情境中的选择方式。",
+                "button_label": "暂未开放",
+                "description": "你现在看到的是自我报告结果。未来的情境判断模块会补充你在反馈、冲突、边界和压力场景中倾向选择的回应。",
+                "do_not_overread": "当前没有开放题库、入口或综合报告。",
                 "id": "eq.sjt_bridge.planned",
-                "status": "planned",
-                "title": "未来将支持 16 道情境判断模块",
-                "what_it_adds": "它用于补充 self-report，帮助比较自我感知与情境选择之间的一致和差距。",
-                "what_it_is_not": "它不是 MSCEIT，不是认证能力测验，也不用于招聘筛选或临床判断。"
+                "status": "planned_unavailable",
+                "title": "未来情境判断模块",
+                "what_it_adds": "未来补充情境选择信息。",
+                "what_it_is_not": "当前未开放，不是 MSCEIT，也不是认证测评。"
             }
         },
         "compat": {
@@ -616,7 +1000,7 @@
         "methodology": {
             "content_version": "EQ_60/v1",
             "norm_status": "provisional",
-            "report_version": "eq_report_v5_assets",
+            "report_version": "eq_report_v5_assets_commercial_ready_v1_6",
             "scoring_version": "v1.0_normed_validity"
         },
         "next_module": {

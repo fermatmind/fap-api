@@ -200,7 +200,7 @@ final class Eq60ReportComposer
                 'methodology' => [
                     'norm_status' => strtolower(trim((string) data_get($score, 'norms.status', 'provisional'))) ?: 'provisional',
                     'scoring_version' => (string) data_get($score, 'version_snapshot.engine_version', 'v1.0_normed_validity'),
-                    'report_version' => 'eq_report_v5_assets',
+                    'report_version' => 'eq_report_v5_assets_commercial_ready_v1_6',
                     'content_version' => Eq60PackLoader::PACK_ID.'/'.$version,
                 ],
                 'generated_at' => now()->toISOString(),
@@ -647,6 +647,40 @@ final class Eq60ReportComposer
             'cross_assessment_context_ids' => array_values(array_map('strval', (array) ($crossAssessmentContext['context_asset_ids'] ?? []))),
             'cross_assessment_boundary_id' => (string) ($crossAssessmentContext['boundary_asset_id'] ?? ''),
             'sjt_bridge_id' => 'eq.sjt_bridge.planned',
+            'result_snapshot_id' => 'eq.snapshot.'.(string) ($interpretation['core_formulation_id'] ?? ''),
+            'commercial_conversion_ids' => [
+                'eq.conversion.save_report',
+                'eq.conversion.email_revisit',
+                'eq.conversion.pdf_export',
+                'eq.conversion.share_card',
+                'eq.conversion.retest_reminder',
+                'eq.conversion.related_tests',
+                'eq.conversion.agent_entry',
+            ],
+            'quality_confidence_id' => (string) ($quality['explanation_asset_id'] ?? ''),
+            'psychometric_evidence_ids' => [
+                'eq.evidence.norm_status',
+                'eq.evidence.content_validity',
+                'eq.evidence.internal_consistency',
+                'eq.evidence.factor_structure',
+                'eq.evidence.test_retest',
+                'eq.evidence.measurement_invariance',
+                'eq.evidence.criterion_validity',
+            ],
+            'agent_playbook_ids' => [
+                'eq.agent.playbook.understand_result',
+                'eq.agent.playbook.scene_advice',
+                'eq.agent.playbook.career_environment',
+                'eq.agent.playbook.low_confidence',
+                'eq.agent.playbook.unsupported_hiring',
+            ],
+            'backend_integration_contract_ids' => [
+                'eq.backend_contract.schema_mapping',
+                'eq.backend_contract.frontend_consumption',
+                'eq.backend_contract.canonical_fixtures',
+                'eq.backend_contract.contract_tests',
+                'eq.backend_contract.agent_readiness',
+            ],
         ];
     }
 
@@ -667,8 +701,22 @@ final class Eq60ReportComposer
         $scientificAssets = (array) data_get($docs, 'scientific_contract.assets', []);
         $sjtAssets = (array) data_get($docs, 'sjt_bridge.assets', []);
         $crossContextAssets = (array) data_get($docs, 'cross_assessment_context.assets', []);
+        $snapshotAssets = (array) data_get($docs, 'result_snapshot.assets', []);
+        $conversionAssets = (array) data_get($docs, 'commercial_conversion_assets.assets', []);
+        $qualityConfidenceAssets = (array) data_get($docs, 'quality_confidence.assets', []);
+        $evidenceAssets = (array) data_get($docs, 'psychometric_evidence_status.assets', []);
+        $agentAssets = (array) data_get($docs, 'agent_dialogue_playbooks.assets', []);
+        $backendContractAssets = (array) data_get($docs, 'backend_integration_contract.assets', []);
         $formulationId = (string) ($interpretation['core_formulation_id'] ?? '');
         $actionId = (string) ($interpretation['action_prescription_id'] ?? '');
+        $snapshotId = 'eq.snapshot.'.$formulationId;
+        if (! isset($snapshotAssets[$snapshotId])) {
+            $snapshotId = 'eq.snapshot.low_confidence_result';
+        }
+        $resultSnapshot = array_merge(
+            ['id' => $snapshotId],
+            $this->localizedAsset((array) ($snapshotAssets[$snapshotId] ?? []), $locale)
+        );
 
         $mechanisms = [];
         foreach ((array) ($interpretation['primary_mechanism_ids'] ?? []) as $idRaw) {
@@ -696,8 +744,69 @@ final class Eq60ReportComposer
                 $career[] = $asset;
             }
         }
+        $conversionActions = [];
+        foreach ([
+            'eq.conversion.save_report',
+            'eq.conversion.email_revisit',
+            'eq.conversion.pdf_export',
+            'eq.conversion.share_card',
+            'eq.conversion.retest_reminder',
+            'eq.conversion.related_tests',
+            'eq.conversion.agent_entry',
+        ] as $id) {
+            $asset = $this->localizedAsset((array) ($conversionAssets[$id] ?? []), $locale);
+            if ($asset !== []) {
+                $conversionActions[] = array_merge(['id' => $id], $asset);
+            }
+        }
+
+        $psychometricEvidence = [];
+        foreach ([
+            'eq.evidence.norm_status',
+            'eq.evidence.content_validity',
+            'eq.evidence.internal_consistency',
+            'eq.evidence.factor_structure',
+            'eq.evidence.test_retest',
+            'eq.evidence.measurement_invariance',
+            'eq.evidence.criterion_validity',
+        ] as $id) {
+            $asset = $this->localizedAsset((array) ($evidenceAssets[$id] ?? []), $locale);
+            if ($asset !== []) {
+                $psychometricEvidence[] = array_merge(['id' => $id], $asset);
+            }
+        }
+
+        $agentPlaybooks = [];
+        foreach ([
+            'eq.agent.playbook.understand_result',
+            'eq.agent.playbook.scene_advice',
+            'eq.agent.playbook.career_environment',
+            'eq.agent.playbook.low_confidence',
+            'eq.agent.playbook.unsupported_hiring',
+        ] as $id) {
+            $asset = $this->localizedAsset((array) ($agentAssets[$id] ?? []), $locale);
+            if ($asset !== []) {
+                $agentPlaybooks[] = array_merge(['id' => $id], $asset);
+            }
+        }
+
+        $backendIntegrationContract = [];
+        foreach ([
+            'eq.backend_contract.schema_mapping',
+            'eq.backend_contract.frontend_consumption',
+            'eq.backend_contract.canonical_fixtures',
+            'eq.backend_contract.contract_tests',
+            'eq.backend_contract.agent_readiness',
+        ] as $id) {
+            $asset = $this->localizedAsset((array) ($backendContractAssets[$id] ?? []), $locale);
+            if ($asset !== []) {
+                $backendIntegrationContract[] = array_merge(['id' => $id], $asset);
+            }
+        }
 
         return [
+            'result_snapshot' => $resultSnapshot,
+            'commercial_conversion_actions' => $conversionActions,
             'scientific_contract' => $this->localizedAsset((array) ($scientificAssets['eq.scientific_contract.default'] ?? []), $locale),
             'score_system' => $this->localizedScoreSystem((array) ($docs['score_system'] ?? []), $locale),
             'core_formulation' => array_merge(
@@ -720,6 +829,13 @@ final class Eq60ReportComposer
                 'explanation_asset_id' => (string) ($quality['explanation_asset_id'] ?? ''),
                 'confidence_label' => (string) ($quality['confidence_label'] ?? ''),
             ],
+            'quality_confidence' => array_merge(
+                ['id' => (string) ($quality['explanation_asset_id'] ?? '')],
+                $this->localizedAsset((array) ($qualityConfidenceAssets[(string) ($quality['explanation_asset_id'] ?? '')] ?? []), $locale)
+            ),
+            'psychometric_evidence_status' => $psychometricEvidence,
+            'agent_dialogue_playbooks' => $agentPlaybooks,
+            'backend_integration_contract' => $backendIntegrationContract,
             'personalization_route' => [
                 'id' => (string) ($interpretation['route_id'] ?? ''),
                 'signal_signature' => is_array($interpretation['signal_signature'] ?? null) ? $interpretation['signal_signature'] : [],
@@ -844,6 +960,7 @@ final class Eq60ReportComposer
             'global_index' => $this->localizedAsset((array) ($scoreSystem['global_index'] ?? []), $locale),
             'score_notes' => $this->localizedAsset((array) ($scoreSystem['score_notes'] ?? []), $locale),
             'bands' => [],
+            'band_details' => [],
             'dimensions' => [],
         ];
 
@@ -854,6 +971,11 @@ final class Eq60ReportComposer
             $localized = $this->localizedScalar($node, $locale);
             if ($localized !== '') {
                 $out['bands'][(string) $band] = $localized;
+            }
+        }
+        foreach ((array) ($scoreSystem['band_details'] ?? []) as $band => $node) {
+            if (is_array($node)) {
+                $out['band_details'][(string) $band] = $this->localizedAsset($node, $locale);
             }
         }
 
