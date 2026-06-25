@@ -62440,7 +62440,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-ops-gaokao-v5-propagation-gate-readiness-01",
     "base": "main",
-    "status": "in_progress",
+    "status": "pr_opened",
     "train_scope": "fermatmind_seo_ops_p2_p4_20260625",
     "title": "SEO-OPS-GAOKAO-V5-PROPAGATION-GATE-READINESS-01: Add Gaokao v5 propagation gate readiness",
     "depends_on": [
@@ -62477,12 +62477,12 @@
       },
       "github": {
         "status": "pending",
-        "evidence": null
+        "evidence": "Opened PR #2428 and waiting for GitHub checks."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "c99c508db3c8b6d407df6f6d2f135fb488fda16a",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2428",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -62496,6 +62496,11 @@
         "at": "2026-06-25T21:24:00+08:00",
         "status": "local_validated",
         "note": "Implemented read-only Gaokao v5 propagation gate readiness command and focused tests. Local scoped checks passed; no execution path for CMS write/import, publish, URL Truth, sitemap/llms, schema/hreflang, Search Channel, IndexNow, deploy, or revalidation was added."
+      },
+      {
+        "at": "2026-06-25T21:28:00+08:00",
+        "status": "github_checks_pending",
+        "note": "Opened PR #2428 at https://github.com/fermatmind/fap-api/pull/2428 from commit c99c508db3c8b6d407df6f6d2f135fb488fda16a. Waiting for GitHub checks; no staging wait, production deploy, CMS write/import, publish, URL Truth, search, sitemap, llms, schema, hreflang, or revalidation."
       }
     ]
   }
