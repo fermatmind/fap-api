@@ -6,6 +6,7 @@ namespace Tests\Unit\Assessment;
 
 use App\Services\Assessment\Drivers\IqTestDriver;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
@@ -92,6 +93,88 @@ final class IqTestDriverTest extends TestCase
         $this->assertSame('blocked_unscored', data_get($result->normedJson, 'status'));
     }
 
+    public function test_owner_original_runtime_binds_claim_eligible_norm_authority(): void
+    {
+        $this->migrateIqNormAuthority();
+        $this->insertIqNormAuthority([
+            'norm_table_version' => 'iq_owner30_norm_fixture_v1',
+            'mean' => 2.0,
+            'standard_deviation' => 1.0,
+            'min_raw_score' => 0.0,
+            'max_raw_score' => 3.0,
+        ]);
+
+        $driver = new IqTestDriver;
+        $result = $driver->score(
+            [
+                ['question_id' => 'IQ001', 'code' => 'A'],
+                ['question_id' => 'IQ002', 'code' => 'C'],
+                ['question_id' => 'IQ003', 'code' => 'D'],
+            ],
+            $this->ownerOriginalScoringSpec(),
+            [
+                'org_id' => 0,
+                'locale' => 'zh-CN',
+                'population_key' => 'general_adult_online',
+                'duration_ms' => 45000,
+                'pack_id' => 'default',
+                'content_package_version' => 'iq_owner_original_30_v1',
+                'scoring_spec_version' => 'iq_owner_original_30_runtime_scoring_v1',
+            ]
+        );
+
+        $this->assertSame(2.0, $result->rawScore);
+        $this->assertSame('iq_estimate', data_get($result->normedJson, 'score_claim_level'));
+        $this->assertSame('iq_owner30_norm_fixture_v1', data_get($result->normedJson, 'norm_table_version'));
+        $this->assertSame('production_normed', data_get($result->normedJson, 'norms.status'));
+        $this->assertSame('iq_estimate', data_get($result->normedJson, 'norms.score_claim_level'));
+        $this->assertTrue((bool) data_get($result->normedJson, 'norms.claim_policy.claim_eligible'));
+        $this->assertSame('iq_owner30_norm_fixture_v1', data_get($result->normedJson, 'norms.norm_table_version'));
+        $this->assertSame(100.0, data_get($result->normedJson, 'norms.iq_estimate'));
+        $this->assertSame(50.0, data_get($result->normedJson, 'norms.percentile'));
+        $this->assertSame([95.5, 104.5], data_get($result->normedJson, 'norms.confidence_interval'));
+        $this->assertStringNotContainsString('correct_answer', json_encode($result->toArray(), JSON_THROW_ON_ERROR));
+    }
+
+    public function test_owner_original_runtime_without_claim_eligible_authority_stays_raw_score_only(): void
+    {
+        $this->migrateIqNormAuthority();
+        $this->insertIqNormAuthority([
+            'norm_table_version' => 'iq_owner30_draft_fixture_v1',
+            'status' => 'draft',
+            'license_verified' => false,
+            'locked' => false,
+        ]);
+
+        $driver = new IqTestDriver;
+        $result = $driver->score(
+            [
+                ['question_id' => 'IQ001', 'code' => 'A'],
+                ['question_id' => 'IQ002', 'code' => 'C'],
+                ['question_id' => 'IQ003', 'code' => 'D'],
+            ],
+            $this->ownerOriginalScoringSpec(),
+            [
+                'org_id' => 0,
+                'locale' => 'zh-CN',
+                'population_key' => 'general_adult_online',
+                'duration_ms' => 45000,
+                'pack_id' => 'default',
+                'content_package_version' => 'iq_owner_original_30_v1',
+                'scoring_spec_version' => 'iq_owner_original_30_runtime_scoring_v1',
+            ]
+        );
+
+        $this->assertSame(2.0, $result->rawScore);
+        $this->assertSame('raw_score_only', data_get($result->normedJson, 'score_claim_level'));
+        $this->assertSame('unavailable', data_get($result->normedJson, 'norm_table_version'));
+        $this->assertSame('unavailable_without_norm_table', data_get($result->normedJson, 'norms.status'));
+        $this->assertNull(data_get($result->normedJson, 'norms.iq_estimate'));
+        $this->assertFalse((bool) data_get($result->normedJson, 'norms.claim_policy.claim_eligible'));
+        $this->assertContains('no_norm_table', data_get($result->normedJson, 'norms.claim_warnings'));
+        $this->assertStringNotContainsString('correct_answer', json_encode($result->toArray(), JSON_THROW_ON_ERROR));
+    }
+
     private function completeScoringSpec(): array
     {
         return [
@@ -138,8 +221,20 @@ final class IqTestDriverTest extends TestCase
         ];
     }
 
+    private function ownerOriginalScoringSpec(): array
+    {
+        $spec = $this->completeScoringSpec();
+        $spec['item_bank']['bank_id'] = 'IQ_OWNER_ORIGINAL_30';
+        $spec['answer_key_version'] = 'iq_owner_original_30_answer_key_v1';
+        $spec['scoring_engine_version'] = 'iq_scoring_v2';
+
+        return $spec;
+    }
+
     private function migrateIqNormAuthority(): void
     {
+        Schema::dropIfExists('iq_norm_authorities');
+
         $migration = require base_path('database/migrations/2026_05_31_090000_create_iq_norm_authorities_table.php');
         $migration->up();
     }

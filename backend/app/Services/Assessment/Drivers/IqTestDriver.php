@@ -11,6 +11,8 @@ class IqTestDriver implements DriverInterface
 {
     private const DIMENSIONS = ['VSPR', 'VSI', 'NPR'];
 
+    private const OWNER_ORIGINAL_BANK_ID = 'IQ_OWNER_ORIGINAL_30';
+
     /**
      * @var array<string,string>
      */
@@ -71,7 +73,8 @@ class IqTestDriver implements DriverInterface
             'status' => 'scored',
             'scoring_mode' => 'scored',
             'answer_key_version' => $contract['answer_key_version'],
-            'norm_table_version' => $contract['norm_table_version'],
+            'norm_table_version' => $this->nullableTrimmedString($norms['norm_table_version'] ?? null)
+                ?? $contract['norm_table_version'],
             'score_claim_level' => $scoreClaimLevel !== '' ? $scoreClaimLevel : 'raw_score_only',
             'claim_policy' => $claimPolicy,
             'claim_warnings' => $claimWarnings,
@@ -534,6 +537,7 @@ class IqTestDriver implements DriverInterface
      */
     private function resolveNorms(string $scaleCode, string $bankId, ?string $normTableVersion, float $rawScore, array $ctx): array
     {
+        $normTableVersion = $this->resolveRuntimeNormTableVersion($scaleCode, $bankId, $normTableVersion, $ctx);
         $base = [
             'status' => $this->resolveNormStatus($normTableVersion),
             'iq_estimate' => null,
@@ -657,6 +661,62 @@ class IqTestDriver implements DriverInterface
         ];
 
         return $base;
+    }
+
+    /**
+     * @param  array<string,mixed>  $ctx
+     */
+    private function resolveRuntimeNormTableVersion(
+        string $scaleCode,
+        string $bankId,
+        ?string $normTableVersion,
+        array $ctx
+    ): ?string {
+        $normalizedVersion = strtolower(trim((string) $normTableVersion));
+        if ($normalizedVersion !== '' && ! in_array($normalizedVersion, ['unavailable', 'not_found', 'pending'], true)) {
+            return $normTableVersion;
+        }
+
+        if (
+            $scaleCode !== IqNormAuthorityContract::SCALE_CODE
+            || strtoupper(trim($bankId)) !== self::OWNER_ORIGINAL_BANK_ID
+            || ! Schema::hasTable('iq_norm_authorities')
+        ) {
+            return $normTableVersion;
+        }
+
+        $locale = trim((string) ($ctx['locale'] ?? 'zh-CN'));
+        $locale = $locale === '' ? 'zh-CN' : $locale;
+        $populationKey = trim((string) ($ctx['population_key'] ?? IqNormAuthorityContract::DEFAULT_POPULATION_KEY));
+        $populationKey = $populationKey === '' ? IqNormAuthorityContract::DEFAULT_POPULATION_KEY : $populationKey;
+
+        $records = DB::table('iq_norm_authorities')
+            ->where('org_id', (int) ($ctx['org_id'] ?? 0))
+            ->where('scale_code', IqNormAuthorityContract::SCALE_CODE)
+            ->where('bank_id', self::OWNER_ORIGINAL_BANK_ID)
+            ->where('population_key', $populationKey)
+            ->where('locale', $locale)
+            ->whereNull('retired_at')
+            ->whereIn('status', IqNormAuthorityContract::claimEligibleStatuses())
+            ->orderByDesc('effective_at')
+            ->orderByDesc('updated_at')
+            ->limit(10)
+            ->get();
+
+        foreach ($records as $record) {
+            $authority = (array) $record;
+            $gate = IqNormAuthorityContract::publicClaimGate($authority);
+            if (! (bool) ($gate['claim_eligible'] ?? false)) {
+                continue;
+            }
+
+            $boundVersion = $this->nullableTrimmedString($authority['norm_table_version'] ?? null);
+            if ($boundVersion !== null) {
+                return $boundVersion;
+            }
+        }
+
+        return $normTableVersion;
     }
 
     private function normalCdf(float $zScore): float

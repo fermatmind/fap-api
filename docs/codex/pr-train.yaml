@@ -281,6 +281,50 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: IQ-OWNER-30-NORM-RUNTIME-BIND-04B
+    repo: fap-api
+    depends_on:
+      - IQ-OWNER-30-NORM-AUTHORITY-04A
+    branch: codex/iq-owner-30-norm-runtime-bind-04b
+    title: "IQ-OWNER-30-NORM-RUNTIME-BIND-04B: Bind owner IQ 30 runtime norms"
+    train_scope: iq_owner_original_30_launch
+    status: user_authorized
+    scope:
+      - Bind Owner 30 runtime scoring to an activated, claim-eligible iq_norm_authorities version when the scoring spec has no fixed norm table.
+      - Emit IQ estimate, percentile, confidence interval, and norm table version only when backend authority passes the public claim gate.
+      - Keep raw_score_only fallback with no IQ claim when no eligible authority exists.
+      - Preserve private answer-key and solution metadata redaction from public submit/report payloads.
+    allowed_paths:
+      - backend/app/Services/Assessment/Drivers/IqTestDriver.php
+      - backend/tests/Unit/Assessment/IqTestDriverTest.php
+      - backend/tests/Feature/V0_3/IqOwnerOriginal30SessionDeliveryTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify frontend rendering, question bank assets, answer keys, norm import command behavior, CMS, SEO runtime, sitemap, llms, JSON-LD, staging deploy, or production deploy.
+      - Import production norm data or trigger production writes.
+      - Show IQ estimate, percentile, ranking, or confidence interval without an activated claim-eligible backend norm authority.
+      - Emit correct answers, answer keys, solution rules, generator metadata, private provenance, or source capture URLs in public payloads.
+    validation:
+      - php -l backend/app/Services/Assessment/Drivers/IqTestDriver.php
+      - php -l backend/tests/Unit/Assessment/IqTestDriverTest.php
+      - php -l backend/tests/Feature/V0_3/IqOwnerOriginal30SessionDeliveryTest.php
+      - cd backend && php artisan test tests/Unit/Assessment/IqTestDriverTest.php --no-ansi
+      - cd backend && php artisan test tests/Feature/V0_3/IqOwnerOriginal30SessionDeliveryTest.php --filter='owner_original_submit_scores_with_private_answer_key_without_public_answer_leak|owner_original_submit_emits_iq_claims_when_claim_eligible_norm_authority_exists' --no-ansi
+      - cd backend && php artisan test --filter=IqOwnerOriginal30 --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/Assessment/Drivers/IqTestDriver.php tests/Unit/Assessment/IqTestDriverTest.php tests/Feature/V0_3/IqOwnerOriginal30SessionDeliveryTest.php
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: BIG-FIVE-AGENT-APPROVAL-QUEUE-INTEGRATION-01
     repo: fap-api
     depends_on: []

@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-25T18:51:42+08:00",
+  "updated_at": "2026-06-25T21:42:05+08:00",
   "PR-EQ-ASSET-01": {
     "repo": "fap-api",
     "branch": "codex/pr-eq-asset-01-content-pack-v16",
@@ -62334,7 +62334,7 @@
     "repo": "fap-api",
     "branch": "codex/iq-owner-30-norm-authority-04a",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "iq_owner_original_30_launch",
     "title": "IQ-OWNER-30-NORM-AUTHORITY-04A: Add owner IQ 30 norm authority activation",
     "depends_on": [
@@ -62370,15 +62370,19 @@
       },
       "github": {
         "status": "pass",
-        "evidence": "PR #2424 GitHub checks passed for head 745b140a41acd530a3519e5bab4367d33cb02777 and mergeStateStatus was CLEAN."
+        "evidence": "PR #2424 was merged on GitHub with squash merge commit fed95c351d57ed918d9f025100ec693f8fb9ac5d; origin/main contains that merge commit and the remote task branch is deleted."
+      },
+      "post_merge_cleanup": {
+        "status": "pass",
+        "evidence": "Post-merge cleanup completed in the prior run: origin/main contained fed95c351d57ed918d9f025100ec693f8fb9ac5d, local main was synced, worktree was clean, and local/remote task branches were deleted."
       }
     },
     "failure_reason": null,
-    "commit_sha": "745b140a41acd530a3519e5bab4367d33cb02777",
+    "commit_sha": "fed95c351d57ed918d9f025100ec693f8fb9ac5d",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2424",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-25T10:57:40Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-25T10:32:26Z",
@@ -62404,6 +62408,11 @@
         "at": "2026-06-25T18:51:42+08:00",
         "status": "ready_to_merge",
         "note": "PR #2424 GitHub checks passed and mergeStateStatus was CLEAN. Ready for squash merge; no staging wait, production deploy, CMS write, SEO, frontend, runtime scoring bind, or production norm data import included."
+      },
+      {
+        "at": "2026-06-25T13:20:02.467Z",
+        "status": "merged_reconciled_for_04b_dependency",
+        "note": "Reconciled stale 04A ledger while starting IQ-OWNER-30-NORM-RUNTIME-BIND-04B. GitHub shows PR #2424 merged with squash commit fed95c351d57ed918d9f025100ec693f8fb9ac5d; origin/main contains it and branches are cleaned. This is bookkeeping needed to satisfy the 04B dependency, not a retry of 04A."
       }
     ]
   },
@@ -62642,6 +62651,84 @@
         "at": "2026-06-25T22:07:00+08:00",
         "status": "ready_to_merge",
         "note": "PR #2429 GitHub checks passed and mergeStateStatus is CLEAN at head e842142a6bdc59a268cd979a61b9bd915a5a276b. Ready for squash merge under repo policy."
+      }
+    ]
+  },
+  "IQ-OWNER-30-NORM-RUNTIME-BIND-04B": {
+    "repo": "fap-api",
+    "branch": "codex/iq-owner-30-norm-runtime-bind-04b",
+    "base": "main",
+    "status": "ready_to_merge",
+    "train_scope": "iq_owner_original_30_launch",
+    "title": "IQ-OWNER-30-NORM-RUNTIME-BIND-04B: Bind owner IQ 30 runtime norms",
+    "depends_on": [
+      "IQ-OWNER-30-NORM-AUTHORITY-04A"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized fap-api docs/codex/pr-train.yaml and docs/codex/pr-train-state.json updates for IQ-OWNER-30-NORM-RUNTIME-BIND-04B and requested backend Owner 30 runtime scoring spec binding to an activated norm version, with raw_score_only fallback and no answer leakage."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "IQ-OWNER-30-NORM-AUTHORITY-04A is reconciled as merged with squash commit fed95c351d57ed918d9f025100ec693f8fb9ac5d before this branch started."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "php -l backend/app/Services/Assessment/Drivers/IqTestDriver.php",
+          "php -l backend/tests/Unit/Assessment/IqTestDriverTest.php",
+          "php -l backend/tests/Feature/V0_3/IqOwnerOriginal30SessionDeliveryTest.php",
+          "cd backend && php artisan test tests/Unit/Assessment/IqTestDriverTest.php --no-ansi",
+          "cd backend && php artisan test tests/Feature/V0_3/IqOwnerOriginal30SessionDeliveryTest.php --filter='owner_original_submit_scores_with_private_answer_key_without_public_answer_leak|owner_original_submit_emits_iq_claims_when_claim_eligible_norm_authority_exists' --no-ansi",
+          "cd backend && php artisan test --filter=IqOwnerOriginal30 --no-ansi",
+          "cd backend && vendor/bin/pint --test app/Services/Assessment/Drivers/IqTestDriver.php tests/Unit/Assessment/IqTestDriverTest.php tests/Feature/V0_3/IqOwnerOriginal30SessionDeliveryTest.php",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "git diff --check"
+        ],
+        "evidence": "PASS after rebase to latest origin/main: PHP syntax checks for IqTestDriver.php, IqTestDriverTest.php, and IqOwnerOriginal30SessionDeliveryTest.php; IqTestDriverTest.php (4 tests, 43 assertions, exit 0 with existing file_get_contents warnings); focused Owner 30 submit tests (2 tests, 2420 assertions, exit 0 with existing file_get_contents warnings); php artisan test --filter=IqOwnerOriginal30 (12 tests, 6535 assertions, exit 0 with existing file_get_contents warnings); scoped Pint; docs/codex state JSON parse; pr-train YAML parse; git diff --check."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to IQ-OWNER-30-NORM-RUNTIME-BIND-04B scope: IqTestDriver runtime authority binding, focused Owner 30 driver/session delivery tests, and authorized docs/codex train metadata. No frontend, question bank assets, answer keys, norm import command behavior, production data import, CMS, SEO, staging deploy, or production deploy changes."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #2432 GitHub checks passed at head eb406a80b5b5e6092e87d69bde5b906f9794ec9e: Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 all passed; mergeStateStatus is CLEAN and PR is mergeable."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": "eb406a80b5b5e6092e87d69bde5b906f9794ec9e",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2432",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-25T13:20:02.467Z",
+        "status": "in_progress",
+        "note": "Started backend-only Owner 30 runtime norm binding from latest fap-api origin/main in an isolated clean worktree. Scope is IqTestDriver runtime authority binding, focused Owner 30 tests, and authorized docs/codex train metadata. No frontend, question assets, answer-key changes, norm import behavior, production data import, CMS, SEO, staging deploy, or production deploy."
+      },
+      {
+        "at": "2026-06-25T13:24:42.448Z",
+        "status": "local_validated",
+        "note": "Local checks and scope validation passed. Owner 30 runtime scoring now binds an unavailable scoring spec to the latest activated claim-eligible norm authority for the same org/locale/population, emits IQ estimate only when that authority passes the public claim gate, and preserves raw_score_only fallback plus private-answer redaction otherwise."
+      },
+      {
+        "at": "2026-06-25T13:28:12.915Z",
+        "status": "rebased_revalidated_committed",
+        "note": "Rebased onto latest origin/main and reran required local checks successfully. Scoped commit prepared from 3f3c72873b621c4a1e2ff4e286d79d35c4c5edac; no frontend, deploy, CMS, SEO, or production norm import included."
+      },
+      {
+        "at": "2026-06-25T13:30:18.180Z",
+        "status": "github_checks_pending",
+        "note": "Opened PR #2432 at https://github.com/fermatmind/fap-api/pull/2432. Waiting for required GitHub checks; no staging deploy wait, production deploy, CMS write, SEO, frontend, question asset, answer-key, norm import, or production norm data import included."
+      },
+      {
+        "at": "2026-06-25T21:42:05+08:00",
+        "status": "ready_to_merge",
+        "note": "PR #2432 GitHub checks passed at head eb406a80b5b5e6092e87d69bde5b906f9794ec9e and mergeStateStatus is CLEAN. Ready for squash merge under repo policy; no staging deploy wait, production deploy, CMS write, SEO, frontend, question asset, answer-key, norm import behavior, or production norm data import included."
       }
     ]
   }
