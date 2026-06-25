@@ -62596,7 +62596,7 @@
     "repo": "fap-api",
     "branch": "codex/personality-tdk-runtime-promotion-search-gate-readiness-01",
     "base": "main",
-    "status": "local_validated",
+    "status": "pr_opened",
     "train_scope": "fermatmind_seo_ops_p2_p4_20260625",
     "title": "PERSONALITY-TDK-RUNTIME-PROMOTION-SEARCH-GATE-READINESS-01: Add personality TDK runtime promotion search gate readiness",
     "depends_on": [
@@ -62633,13 +62633,13 @@
         "evidence": "Changed files are limited to PersonalityTdkRuntimePromotionSearchGateReadinessCommand.php, Kernel registration, generated command contract doc, focused Feature test, BigFive freeze classifier allowlist for this read-only command, and authorized docs/codex train metadata. No production approval queue write, CMS draft write, promotion, publish, index/search, sitemap/llms, frontend metadata edit, deploy, or revalidation changes."
       },
       "github": {
-        "status": "not_started",
-        "evidence": null
+        "status": "pending",
+        "evidence": "Opened PR #2431 at https://github.com/fermatmind/fap-api/pull/2431 from commit d97c5318e235665b1d36d9069ffc0316c37ee394. Waiting for GitHub checks."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "d97c5318e235665b1d36d9069ffc0316c37ee394",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2431",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -62653,6 +62653,11 @@
         "at": "2026-06-25T22:37:00+08:00",
         "status": "local_validated",
         "note": "Implemented read-only personality TDK runtime/promotion/search gate readiness command and focused tests. Local scoped checks passed; no production approval queue write, CMS draft write, promotion, publish, index/search, sitemap/llms, frontend metadata edit, deploy, or revalidation path was added."
+      },
+      {
+        "at": "2026-06-25T22:40:00+08:00",
+        "status": "github_checks_pending",
+        "note": "Opened PR #2431 at https://github.com/fermatmind/fap-api/pull/2431 from commit d97c5318e235665b1d36d9069ffc0316c37ee394. Waiting for GitHub checks; no staging wait, production deploy, approval queue write, CMS draft write, promotion, publish, search, sitemap, llms, frontend metadata edit, or revalidation."
       }
     ]
   }
