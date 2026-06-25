@@ -1,0 +1,37 @@
+{
+  "version": "personality-tdk-next-batch-approval-draft-gate.v1",
+  "command": "php artisan personality:tdk-next-batch-approval-draft-gate",
+  "purpose": "Read-only backend gate evidence for the 3 personality TDK next-batch targets before any approval queue write or CMS projection draft write.",
+  "inputs": {
+    "recommendations": "personality-agent-operations-next-batch-recommendations-2026-06-25.json",
+    "qa": "personality-agent-operations-next-batch-qa-2026-06-25.json",
+    "artifact_dir": "Evidence output directory.",
+    "json": "Emit JSON summary."
+  },
+  "expected_targets": [
+    "/zh/personality/intp-a",
+    "/zh/personality/esfp-a",
+    "/en/personality/enfj-a"
+  ],
+  "accepted_qa_decision": "PASS_READY_FOR_APPROVAL_REVIEW",
+  "gate_sequence": [
+    "personality:agent-approval-queue --dry-run",
+    "approval queue write after separate exact approval",
+    "personality:mbti64-cms-projection-draft --dry-run",
+    "CMS projection draft write after separate exact approval",
+    "runtime readback and promotion gates in later PR"
+  ],
+  "negative_guarantees": {
+    "database_write": false,
+    "approval_queue_write": false,
+    "cms_draft_write": false,
+    "cms_promotion": false,
+    "cms_publish": false,
+    "indexability_change": false,
+    "sitemap_llms_mutation": false,
+    "search_channel_enqueue": false,
+    "live_submit": false,
+    "frontend_metadata_edit": false,
+    "deploy": false
+  }
+}

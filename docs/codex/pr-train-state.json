@@ -60567,7 +60567,7 @@
     "repo": "fap-api",
     "branch": "codex/pr-eq-asset-04-report-locale-v16",
     "base": "main",
-    "status": "pr_opened",
+    "status": "ready_to_merge",
     "train_scope": "eq_v16_content_asset_productization",
     "title": "PR-EQ-ASSET-04 Fix EQ v1.6 report locale resolved assets",
     "depends_on": [
@@ -62440,7 +62440,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-ops-gaokao-v5-propagation-gate-readiness-01",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "fermatmind_seo_ops_p2_p4_20260625",
     "title": "SEO-OPS-GAOKAO-V5-PROPAGATION-GATE-READINESS-01: Add Gaokao v5 propagation gate readiness",
     "depends_on": [
@@ -62477,15 +62477,15 @@
       },
       "github": {
         "status": "pass",
-        "evidence": "GitHub checks passed for PR #2428 at head 2bf5c0440aaa9b6b613be5e4c022faf11d282ae4: hygiene, supply-chain, content-pack-build-validate, Semgrep, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 all passed. mergeStateStatus=CLEAN."
+        "evidence": "GitHub checks passed for PR #2428 at final head f0f6dc7a18ef76e1eb3ca1a0b1685b0aa7944fa5. Squash merge commit 6a779c543dec95447d3512382d55c097e0a91051 is contained in origin/main; remote branch was deleted and local task branch cleanup completed."
       }
     },
     "failure_reason": null,
-    "commit_sha": "2bf5c0440aaa9b6b613be5e4c022faf11d282ae4",
+    "commit_sha": "6a779c543dec95447d3512382d55c097e0a91051",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2428",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-25T21:42:00+08:00",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-25T21:16:00+08:00",
@@ -62506,6 +62506,84 @@
         "at": "2026-06-25T21:36:00+08:00",
         "status": "ready_to_merge",
         "note": "All GitHub checks passed for PR #2428 at head 2bf5c0440aaa9b6b613be5e4c022faf11d282ae4 and mergeStateStatus was CLEAN. Recording ready_to_merge before squash merge per PR-train ledger policy."
+      },
+      {
+        "at": "2026-06-25T21:42:00+08:00",
+        "status": "merged",
+        "note": "PR #2428 was squash merged as 6a779c543dec95447d3512382d55c097e0a91051. origin/main contains the merge commit; local main was fast-forwarded to origin/main; local and remote task branches were cleaned."
+      }
+    ]
+  },
+  "PERSONALITY-TDK-NEXT-BATCH-APPROVAL-DRAFT-GATE-01": {
+    "repo": "fap-api",
+    "branch": "codex/personality-tdk-next-batch-approval-draft-gate-01",
+    "base": "main",
+    "status": "pr_opened",
+    "train_scope": "fermatmind_seo_ops_p2_p4_20260625",
+    "title": "PERSONALITY-TDK-NEXT-BATCH-APPROVAL-DRAFT-GATE-01: Add personality TDK next-batch approval draft gate",
+    "depends_on": [],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User provided /goal FERMATMIND-SEO-OPS-P2-P4-PR-TRAIN-20260625-01 and explicitly authorized adding missing docs/codex/pr-train.yaml and docs/codex/pr-train-state.json entries for this PR train."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "No PR dependency declared for P4-A; P3-C already merged before starting this branch."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "php -l backend/app/Console/Commands/PersonalityTdkNextBatchApprovalDraftGateCommand.php",
+          "php -l backend/tests/Feature/Console/PersonalityTdkNextBatchApprovalDraftGateCommandTest.php",
+          "cd backend && php artisan list | rg personality:tdk-next-batch-approval-draft-gate",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=PersonalityTdkNextBatchApprovalDraftGateCommandTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=PersonalityAgentApprovalQueueCommandTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=PersonalityMbti64CmsProjectionDraftCommandTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_personality_tdk_next_batch_gate_files' --no-ansi",
+          "cd backend && vendor/bin/pint --test app/Console/Commands/PersonalityTdkNextBatchApprovalDraftGateCommand.php tests/Feature/Console/PersonalityTdkNextBatchApprovalDraftGateCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+          "python3 -m json.tool backend/docs/seo/generated/personality-tdk-next-batch-approval-draft-gate.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "git diff --check && git diff --cached --check"
+        ],
+        "evidence": "PASS: PHP syntax; artisan command registration; focused PersonalityTdkNextBatchApprovalDraftGateCommandTest (3 tests, 25 assertions); PersonalityAgentApprovalQueueCommandTest (12 tests, 188 assertions); PersonalityMbti64CmsProjectionDraftCommandTest (35 tests, 674 assertions); BigFive freeze classifier focused test for this command; scoped Pint; JSON/YAML parse; diff checks."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to PersonalityTdkNextBatchApprovalDraftGateCommand.php, Kernel registration, generated command contract doc, focused Feature test, BigFive freeze classifier allowlist test for this read-only command, and authorized docs/codex train metadata. No production approval queue write, CMS draft write, promotion, publish, index/search, sitemap/llms, frontend metadata edit, deploy, or revalidation changes."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "GitHub checks are green for PR #2429: hygiene, supply-chain, content-pack-build-validate, Semgrep, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 all passed. Merge state is CLEAN."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": "e842142a6bdc59a268cd979a61b9bd915a5a276b",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2429",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-25T21:47:00+08:00",
+        "status": "in_progress",
+        "note": "Started P4-A from synced fap-api main 6a779c543dec95447d3512382d55c097e0a91051. Scope is backend-only read-only personality TDK next-batch approval/draft gate; no approval queue write, CMS draft write, promotion, publish, index/search, sitemap/llms, frontend metadata edit, deploy, or revalidation."
+      },
+      {
+        "at": "2026-06-25T21:58:00+08:00",
+        "status": "local_validated",
+        "note": "Implemented read-only personality TDK next-batch approval/draft gate adapter. Local scoped checks passed; no production approval queue write, CMS draft write, promotion, publish, index/search, sitemap/llms, frontend metadata edit, deploy, or revalidation path was added."
+      },
+      {
+        "at": "2026-06-25T22:01:00+08:00",
+        "status": "github_checks_pending",
+        "note": "Opened PR #2429 at https://github.com/fermatmind/fap-api/pull/2429 from commit 3e96f907d5e58280431378bc4046c38ff353fbbb. Waiting for GitHub checks; no staging wait, production deploy, approval queue write, CMS draft write, promotion, publish, search, sitemap, llms, frontend metadata edit, or revalidation."
+      },
+      {
+        "at": "2026-06-25T22:07:00+08:00",
+        "status": "ready_to_merge",
+        "note": "PR #2429 GitHub checks passed and mergeStateStatus is CLEAN at head e842142a6bdc59a268cd979a61b9bd915a5a276b. Ready for squash merge under repo policy."
       }
     ]
   }
