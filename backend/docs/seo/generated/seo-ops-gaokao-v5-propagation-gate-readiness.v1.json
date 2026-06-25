@@ -1,0 +1,62 @@
+{
+  "version": "seo-ops-gaokao-v5-propagation-gate-readiness.v1",
+  "command": "php artisan seo-ops:gaokao-v5-propagation-gate-readiness",
+  "purpose": "Read-only preview, publish, URL Truth, Search Channel, and IndexNow gate readiness evidence for the Gaokao v5 article after CMS draft creation.",
+  "inputs": {
+    "draft_gate_evidence": "Optional seo-ops-gaokao-v5-cms-draft-gate.v1 dry-run artifact.",
+    "draft_write_evidence": "Optional future draft write evidence artifact.",
+    "readback_qa": "Optional future draft readback QA artifact.",
+    "preview_qa": "Optional future preview QA artifact.",
+    "publish_evidence": "Optional future publish canary evidence artifact.",
+    "artifact_dir": "Evidence output directory.",
+    "json": "Emit JSON summary."
+  },
+  "target": {
+    "model": "article",
+    "locale": "zh-CN",
+    "canonical_path": "/zh/articles/gaokao-major-choice-parent-conflict-riasec-course-checklist",
+    "canonical_url": "https://fermatmind.com/zh/articles/gaokao-major-choice-parent-conflict-riasec-course-checklist"
+  },
+  "gate_sequence": [
+    "CMS draft write after separate exact approval",
+    "draft readback QA",
+    "preview/runtime QA",
+    "publish dry-run",
+    "publish execute after separate exact approval",
+    "post-publish URL Truth export/import dry-run",
+    "URL Truth bounded write after separate exact approval",
+    "Search Channel bridge dry-run",
+    "Search Channel enqueue after separate exact approval",
+    "queue approval",
+    "IndexNow live submit after separate exact approval"
+  ],
+  "status_semantics": {
+    "review_required": "Required future evidence is missing or not passing.",
+    "publish_dry_run_ready": "Draft write, readback QA, and preview QA evidence are present and passing.",
+    "post_publish_gate_ready": "Publish evidence is present and passing; URL Truth and Search bridge gates may be planned separately."
+  },
+  "approval_boundaries": {
+    "draft_write_is_separate_from_publish": true,
+    "publish_is_separate_from_url_truth": true,
+    "url_truth_is_separate_from_search_enqueue": true,
+    "search_enqueue_is_separate_from_indexnow_live_submit": true,
+    "no_approval_phrase_is_execution": true
+  },
+  "negative_guarantees": {
+    "database_write": false,
+    "cms_write": false,
+    "cms_import": false,
+    "cms_publish": false,
+    "url_truth_write": false,
+    "schema_hreflang_write": false,
+    "sitemap_llms_mutation": false,
+    "search_channel_enqueue": false,
+    "indexnow_submit": false,
+    "baidu_submit": false,
+    "gsc_request_indexing": false,
+    "scheduler_activation": false,
+    "queue_worker_start": false,
+    "deploy": false,
+    "revalidation": false
+  }
+}

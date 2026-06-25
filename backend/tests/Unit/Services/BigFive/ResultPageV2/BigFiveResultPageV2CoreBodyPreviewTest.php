@@ -1352,15 +1352,18 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
-    public function test_runtime_freeze_classifier_ignores_seo_ops_gaokao_v5_cms_draft_gate_adapter(): void
+    public function test_runtime_freeze_classifier_ignores_seo_ops_gaokao_v5_gate_adapters(): void
     {
         $changed = [
             'backend/app/Console/Commands/SeoOpsGaokaoV5CmsDraftGateCommand.php',
+            'backend/app/Console/Commands/SeoOpsGaokaoV5PropagationGateReadinessCommand.php',
             'backend/app/Console/Kernel.php',
         ];
         $kernelChangedLines = [
             '+use App\\Console\\Commands\\SeoOpsGaokaoV5CmsDraftGateCommand;',
+            '+use App\\Console\\Commands\\SeoOpsGaokaoV5PropagationGateReadinessCommand;',
             '+        SeoOpsGaokaoV5CmsDraftGateCommand::class,',
+            '+        SeoOpsGaokaoV5PropagationGateReadinessCommand::class,',
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
@@ -4906,7 +4909,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
-            if ($this->isSeoOpsGaokaoV5CmsDraftGateFile($file)) {
+            if ($this->isSeoOpsGaokaoV5GateFile($file)) {
                 continue;
             }
 
@@ -5809,7 +5812,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsSeoOpsP0CtrArticleCmsUpdateWriterOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoOpsZhArticleQualityRepairDryRunOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoOpsZhArticleQualityWriterOrReadbackOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
-                    || $this->kernelDiffIsSeoOpsGaokaoV5CmsDraftGateOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsSeoOpsGaokaoV5GateOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentCmsTdkGapReadonlyScannerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentCodexReviewRunnerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentCmsDraftPackageDryRunOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
@@ -6583,9 +6586,12 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ], true);
     }
 
-    private function isSeoOpsGaokaoV5CmsDraftGateFile(string $file): bool
+    private function isSeoOpsGaokaoV5GateFile(string $file): bool
     {
-        return $file === 'backend/app/Console/Commands/SeoOpsGaokaoV5CmsDraftGateCommand.php';
+        return in_array($file, [
+            'backend/app/Console/Commands/SeoOpsGaokaoV5CmsDraftGateCommand.php',
+            'backend/app/Console/Commands/SeoOpsGaokaoV5PropagationGateReadinessCommand.php',
+        ], true);
     }
 
     private function isSeoAgentCmsTdkGapReadonlyScannerFile(string $file): bool
@@ -8774,7 +8780,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     /**
      * @param  list<string>  $changedLines
      */
-    private function kernelDiffIsSeoOpsGaokaoV5CmsDraftGateOnly(array $changedLines): bool
+    private function kernelDiffIsSeoOpsGaokaoV5GateOnly(array $changedLines): bool
     {
         if ($changedLines === []) {
             return false;
@@ -8785,7 +8791,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 return false;
             }
 
-            if (preg_match('/\bSeoOpsGaokaoV5CmsDraftGateCommand\b/u', $line) !== 1) {
+            if (preg_match('/\bSeoOpsGaokaoV5(CmsDraftGate|PropagationGateReadiness)Command\b/u', $line) !== 1) {
                 return false;
             }
         }

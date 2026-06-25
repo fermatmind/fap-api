@@ -28876,3 +28876,47 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: SEO-OPS-GAOKAO-V5-PROPAGATION-GATE-READINESS-01
+    repo: fap-api
+    depends_on:
+      - SEO-OPS-GAOKAO-V5-CMS-DRAFT-GATE-01
+    branch: codex/seo-ops-gaokao-v5-propagation-gate-readiness-01
+    title: "SEO-OPS-GAOKAO-V5-PROPAGATION-GATE-READINESS-01: Add Gaokao v5 propagation gate readiness"
+    train_scope: fermatmind_seo_ops_p2_p4_20260625
+    status: user_authorized
+    scope:
+      - Add a backend-only read-only command that emits the future Gaokao v5 preview, publish, URL Truth, Search Channel, and IndexNow gate checklist.
+      - Consume optional future draft gate, draft write, readback QA, preview QA, and publish artifacts as sanitized evidence inputs.
+      - Emit gate statuses, approval phrase templates, future command templates, and no-side-effect guarantees.
+      - Preserve all execution actions as later separate exact approvals.
+    allowed_paths:
+      - backend/app/Console/Commands/SeoOpsGaokaoV5PropagationGateReadinessCommand.php
+      - backend/app/Console/Kernel.php
+      - backend/docs/seo/generated/seo-ops-gaokao-v5-propagation-gate-readiness.v1.json
+      - backend/tests/Feature/SeoIntel/SeoOpsGaokaoV5PropagationGateReadinessTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run production CMS import/write, create production drafts, publish, URL Truth, sitemap, llms, schema, hreflang, Search Channel, IndexNow, Baidu, GSC, scheduler, queue worker, frontend runtime, staging deploy, production deploy, or revalidation.
+      - Add any command execution path for publish, URL Truth write, Search Channel enqueue, or live submission.
+    validation:
+      - php -l backend/app/Console/Commands/SeoOpsGaokaoV5PropagationGateReadinessCommand.php
+      - php -l backend/tests/Feature/SeoIntel/SeoOpsGaokaoV5PropagationGateReadinessTest.php
+      - cd backend && php artisan list | rg seo-ops:gaokao-v5-propagation-gate-readiness
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoOpsGaokaoV5PropagationGateReadinessTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_seo_ops_gaokao_v5_gate_adapters' --no-ansi
+      - cd backend && vendor/bin/pint --test app/Console/Commands/SeoOpsGaokaoV5PropagationGateReadinessCommand.php tests/Feature/SeoIntel/SeoOpsGaokaoV5PropagationGateReadinessTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - python3 -m json.tool backend/docs/seo/generated/seo-ops-gaokao-v5-propagation-gate-readiness.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
