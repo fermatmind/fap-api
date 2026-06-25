@@ -61837,7 +61837,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-commercial-field-backend-authority-fix-01",
     "base": "main",
-    "status": "github_checks_retry_pending",
+    "status": "ready_to_merge",
     "train_scope": "big5_commercial_field_backend_authority_fix",
     "title": "BIG5-COMMERCIAL-FIELD-BACKEND-AUTHORITY-FIX-01: Reconcile Big Five public commercial lookup state",
     "depends_on": [],
@@ -61872,8 +61872,9 @@
         "evidence": "Changed files are limited to the Big Five public scale lookup projection, focused ScalesLookupTest coverage, the required BigFive runtime freeze harness allowance for this public lookup controller change, and authorized docs/codex train metadata."
       },
       "github": {
-        "status": "retry_pending",
-        "evidence": "Initial PR #2418 verify-bigfive check failed because the Big Five runtime freeze classifier did not allow the scoped ScalesLookupController public commercial projection. Local focused classifier fix passed; waiting for rerun after push."
+        "status": "pass",
+        "evidence": "GitHub checks passed for PR #2418 at head 00926cbf71497a0ca08b55d5a3fd73d766a797a7; mergeStateStatus CLEAN.",
+        "checked_at": "2026-06-25T12:40:58+08:00"
       }
     },
     "failure_reason": null,
@@ -61907,6 +61908,11 @@
         "at": "2026-06-25T12:35:12+08:00",
         "status": "github_checks_retry_pending",
         "note": "Local retry checks passed after the freeze harness fix, including the previously failing runtime path diff guard. Pushing the fix to rerun GitHub checks."
+      },
+      {
+        "at": "2026-06-25T12:40:58+08:00",
+        "status": "ready_to_merge",
+        "note": "PR #2418 GitHub checks passed after the freeze harness fix and mergeStateStatus was CLEAN. Ready for squash merge; no staging wait, production deploy, CMS write, search, sitemap, llms, schema, hreflang, canonical, noindex, payment, order, benefit, entitlement, or fap-web work included."
       }
     ]
   }
