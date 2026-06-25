@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-25T02:47:02.247762Z",
+  "updated_at": "2026-06-25T02:58:10Z",
   "PR-EQ-ASSET-01": {
     "repo": "fap-api",
     "branch": "codex/pr-eq-asset-01-content-pack-v16",
@@ -25051,6 +25051,11 @@
             "python3 -m json.tool changed JSON files; ruby YAML.load_file docs/codex/pr-train.yaml; git diff --check"
           ],
           "completed_at": "2026-06-25T02:47:02.247762Z"
+        },
+        "github": {
+          "status": "pass",
+          "evidence": "GitHub checks passed for PR #2409 at head cf6a960dfe22be7c5cdd5f899efda6bc265b419d; mergeStateStatus CLEAN; PR open and non-draft.",
+          "checked_at": "2026-06-25T02:58:10Z"
         }
       },
       "failure_reason": null,
@@ -25103,11 +25108,19 @@
           "note": "Local Big Five freeze classifier fix and IQ_OWNER_ORIGINAL_30 runtime scoring validation passed; ready to commit and push CI fix."
         }
       ],
-      "status": "ci_fix_validated",
-      "commit_sha": "ffc7ff2bc2a0ad2d8f7c1931d9dee09002aba971",
+      "status": "ready_to_merge",
+      "commit_sha": "cf6a960dfe22be7c5cdd5f899efda6bc265b419d",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/2409",
       "pr_number": 2409,
-      "updated_at": "2026-06-25T02:47:02.247762Z"
+      "updated_at": "2026-06-25T02:47:02.247762Z",
+      "timeline": [
+        {
+          "at": "2026-06-25T02:58:10Z",
+          "from": "ci_fix_validated",
+          "to": "ready_to_merge",
+          "note": "All GitHub checks passed for PR #2409 at head cf6a960dfe22be7c5cdd5f899efda6bc265b419d and mergeStateStatus was CLEAN. Recording ready_to_merge before squash merge per PR-train ledger policy."
+        }
+      ]
     }
   },
   "SEO-DASH-PROD-03D-FIX": {
@@ -61235,7 +61248,7 @@
     "repo": "fap-api",
     "branch": "codex/iq-owner-30-scoring-runtime-bind-01",
     "base": "main",
-    "status": "in_progress",
+    "status": "ready_to_merge",
     "train_scope": "iq_owner_original_30_launch",
     "title": "IQ-OWNER-30-SCORING-RUNTIME-BIND-01: Bind owner IQ 30 runtime scoring",
     "depends_on": [
@@ -61278,13 +61291,14 @@
         "evidence": "Changed files are limited to the IQ_OWNER_ORIGINAL_30 backend runtime scoring binding scope: AssessmentEngine, submit canonicalization score context, owner bank service/verifier, focused IQ tests, owner bank manifest/scoring_spec, and docs/codex train metadata."
       },
       "github": {
-        "status": "not_started",
-        "evidence": null
+        "status": "pass",
+        "evidence": "GitHub checks passed for PR #2409 at head cf6a960dfe22be7c5cdd5f899efda6bc265b419d; mergeStateStatus CLEAN; PR open and non-draft.",
+        "checked_at": "2026-06-25T02:58:10Z"
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "cf6a960dfe22be7c5cdd5f899efda6bc265b419d",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2409",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -61303,6 +61317,14 @@
         "at": "2026-06-25T02:18:36Z",
         "status": "committed",
         "note": "Created local scoped commit 36c2aacd470b839a6d6ff0a62fc5ae5285f32cd1."
+      }
+    ],
+    "timeline": [
+      {
+        "at": "2026-06-25T02:58:10Z",
+        "from": "in_progress",
+        "to": "ready_to_merge",
+        "note": "All GitHub checks passed for PR #2409 at head cf6a960dfe22be7c5cdd5f899efda6bc265b419d and mergeStateStatus was CLEAN. Recording ready_to_merge before squash merge per PR-train ledger policy."
       }
     ]
   }
