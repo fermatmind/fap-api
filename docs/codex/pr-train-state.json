@@ -61832,5 +61832,65 @@
         "notes": "Initialized from explicit user authorization; waits for PR-EQ-AGENT-HARDEN-01."
       }
     ]
+  },
+  "BIG5-COMMERCIAL-FIELD-BACKEND-AUTHORITY-FIX-01": {
+    "repo": "fap-api",
+    "branch": "codex/big5-commercial-field-backend-authority-fix-01",
+    "base": "main",
+    "status": "local_validated",
+    "train_scope": "big5_commercial_field_backend_authority_fix",
+    "title": "BIG5-COMMERCIAL-FIELD-BACKEND-AUTHORITY-FIX-01: Reconcile Big Five public commercial lookup state",
+    "depends_on": [],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding docs/codex/pr-train.yaml and docs/codex/pr-train-state.json entries for BIG5-COMMERCIAL-FIELD-BACKEND-AUTHORITY-FIX-01 if missing."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "No explicit dependencies were declared for this scoped backend authority fix."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "php -l backend/app/Http/Controllers/API/V0_3/ScalesLookupController.php",
+          "php -l backend/tests/Feature/V0_3/ScalesLookupTest.php",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=ScalesLookupTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan route:list --path=api/v0.3/scales --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan migrate --force --no-ansi",
+          "cd backend && vendor/bin/pint --test app/Http/Controllers/API/V0_3/ScalesLookupController.php tests/Feature/V0_3/ScalesLookupTest.php",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "git diff --check"
+        ],
+        "evidence": "PASS: PHP syntax checks for ScalesLookupController.php and ScalesLookupTest.php; ScalesLookupTest (11 tests, 220 assertions, existing file_get_contents warnings only, exit code 0); scoped API route list; sqlite in-memory migrate; scoped Pint; JSON/YAML parse checks; git diff --check."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to the Big Five public scale lookup projection, focused ScalesLookupTest coverage, and authorized docs/codex train metadata."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-25T12:20:06+08:00",
+        "status": "in_progress",
+        "note": "Started backend-only Big Five commercial field public lookup authority fix from latest fap-api origin/main. Scope is limited to public scale lookup projection, focused tests, and authorized train metadata; no fap-web, payments, orders, benefits, private result routes, CMS, SEO, sitemap, llms, schema, hreflang, canonical, noindex, migration, staging deploy, or production deploy work is included."
+      },
+      {
+        "at": "2026-06-25T12:22:35+08:00",
+        "status": "local_validated",
+        "note": "Local checks and scope validation passed. Public Big Five lookup now projects free_only commercial state as FREE with report unlock SKU, upgrade SKU, upgrade SKU anchor, and offers suppressed, while the raw registry PAID/SKU authority remains unchanged."
+      }
+    ]
   }
 }
