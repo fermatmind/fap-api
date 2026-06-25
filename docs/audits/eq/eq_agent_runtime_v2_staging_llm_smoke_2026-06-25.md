@@ -4,11 +4,11 @@ Date: 2026-06-25
 
 ## 1. Executive Summary
 
-Verdict: **blocked for live LLM mode; deterministic fallback accepted**.
+Verdict: **LLM mode deferred by product decision; deterministic fallback accepted**.
 
 The EQ Agent Runtime V2 provider code was present on staging and staging had OpenAI provider configuration present, but direct outbound access from staging to the OpenAI Responses API timed out. The runtime correctly failed closed into deterministic read-only mode, kept all report/content authority guardrails intact, and did not expose paywall, SKU, SJT entry, or raw technical tags.
 
-This report should be merged as evidence for `PR-EQ-AGENT-RUNTIME-V2-04`, but it does **not** approve live LLM rollout.
+This report was merged as evidence for `PR-EQ-AGENT-RUNTIME-V2-04`, but it does **not** approve live LLM rollout. On 2026-06-25, the product decision changed: keep EQ Agent on deterministic/read-only runtime and do not continue the LLM smoke lane now.
 
 ## 2. Scope
 
@@ -59,18 +59,28 @@ Final safe state after smoke:
 
 No secret value is recorded in this report.
 
+Latest closeout state after the 2026-06-25 manual follow-up:
+- `EQ_AGENT_LLM_ENABLED=false`
+- `EQ_AGENT_LLM_PROVIDER=openai`
+- `EQ_AGENT_OPENAI_API_KEY` present in staging configuration
+- `EQ_AGENT_OPENAI_MODEL=gpt-4.1-mini`
+- `EQ_AGENT_OPENAI_BASE_URL=https://api.openai.com/v1`
+
+The provider configuration may remain present, but live LLM calls must remain disabled unless a later product decision explicitly reopens this lane.
+
 ## 5. Credential Hygiene
 
 An initial UI-created key named `eq-agent-staging` was exposed during setup and was treated as compromised.
 
 Final credential status:
 - `eq-agent-staging`: **deleted / revoked by user**
-- `eq-agent-staging-v2`: retained as the staging key
+- `eq-agent-staging-v2`: retained but not used for active LLM runtime
+- `eq-agent-staging-v3`: created by the user for the manual follow-up, written to staging, and kept with `EQ_AGENT_LLM_ENABLED=false`
 
 Required policy going forward:
 - Do not use `eq-agent-staging`.
-- Keep `eq-agent-staging-v2` as the only staging OpenAI key for this lane.
 - Do not paste API keys into chat, logs, reports, PR bodies, or repo files.
+- Do not re-enable EQ Agent LLM mode without a new explicit product decision and a scoped smoke plan.
 
 ## 6. Smoke Attempt
 
@@ -164,6 +174,12 @@ Root-cause classification:
 - Staging outbound connectivity failure: **yes**
 - Production issue: **not tested / not changed**
 
+Manual follow-up after this report found an additional constraint:
+- A temporary local relay plus SSH reverse tunnel proved that staging could reach the OpenAI Responses API through the relay path.
+- OpenAI then returned `429 insufficient_quota`.
+- This means the original direct staging timeout was not the only blocker; the OpenAI project/key also lacked usable quota for live smoke.
+- The product decision is now to stop pursuing LLM mode, so quota remediation is not required for the current EQ Agent path.
+
 ## 11. Forbidden Text / Field Scan
 
 The redacted smoke artifacts did not expose these forbidden values:
@@ -189,15 +205,17 @@ The redacted smoke artifacts did not expose these forbidden values:
 | Live LLM staging smoke accepted | no |
 | Proceed to controlled live LLM rollout | no |
 | Production LLM enablement allowed | no |
+| Continue EQ Agent Runtime V2 LLM smoke | no |
+| Keep deterministic/read-only EQ Agent runtime | yes |
 
 Final verdict:
 
-`Live LLM staging smoke blocked by staging outbound timeout to OpenAI Responses API. Deterministic fallback accepted. Exposed old key has been revoked.`
+`LLM mode is deferred / not pursuing now. Keep EQ_AGENT_LLM_ENABLED=false. Deterministic/read-only EQ Agent runtime remains the accepted product path.`
 
 ## 13. Required Next Actions
 
-1. Keep `EQ_AGENT_LLM_ENABLED=false` on staging until egress is fixed.
-2. Investigate staging outbound connectivity to `https://api.openai.com/v1/responses`.
-3. Confirm whether staging requires proxy, firewall allowlist, DNS change, or VPC/NAT egress adjustment.
-4. After connectivity is fixed, temporarily re-enable staging-only LLM flag.
-5. Re-run V2-04 smoke and require `mode=llm_provider_read_only` before approving any controlled rollout.
+1. Keep `EQ_AGENT_LLM_ENABLED=false` on staging and production.
+2. Do not continue EQ Agent Runtime V2 live LLM smoke.
+3. Treat the LLM provider lane as `deferred / not pursuing now`.
+4. Continue improving the deterministic/read-only Agent path through structured assets, intent routing, playbooks, safety fixtures, locale quality, and result-page integration.
+5. If a future decision reopens LLM mode, create a new explicit PR train and smoke gate instead of resuming this one implicitly.
