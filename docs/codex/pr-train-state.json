@@ -61675,6 +61675,11 @@
       "scope_validation": {
         "status": "pass",
         "evidence": "Changed files are limited to the backend owner IQ 30 claim policy scope: IqTestDriver, IqReportBuilder, focused owner 30/report tests, and docs/codex train metadata."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "GitHub checks passed for PR #2413 at head bdf632e941af4635de440315e96ab6b52433aa85; mergeStateStatus CLEAN; PR open and non-draft.",
+        "checked_at": "2026-06-25T04:01:50Z"
       }
     },
     "failure_reason": null,
@@ -61703,6 +61708,11 @@
         "at": "2026-06-25T03:54:44Z",
         "status": "github_checks_pending",
         "note": "Rebased PR #2413 onto latest origin/main after GitHub reported mergeStateStatus DIRTY. The only rebase conflict was docs/codex/pr-train-state.json; main-side fap-web EQ Agent closeout facts were preserved and 02A state was updated to head 6f3ffe1626c80cda7ed4605758213575b7f61188."
+      },
+      {
+        "at": "2026-06-25T04:01:50Z",
+        "status": "ready_to_merge",
+        "note": "PR #2413 checks passed at head bdf632e941af4635de440315e96ab6b52433aa85 and mergeStateStatus was CLEAN. Ready for squash merge; no staging wait, production deploy, CMS write, SEO, sitemap, llms, DB migration, or frontend work included."
       }
     ]
   }
