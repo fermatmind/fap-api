@@ -74,7 +74,12 @@ final class SeoOpsZhArticleQualityControlledWriterTest extends TestCase
 
         $first = Article::query()->withoutGlobalScopes()->with('publishedRevision')->findOrFail((int) $articles[0]->id);
         $this->assertStringNotContainsString('Dynamic next steps', (string) $first->content_md);
+        $this->assertStringNotContainsString('](/tests/mbti-personality-test-16-personality-types)', (string) $first->content_md);
+        $this->assertStringNotContainsString('href="/tests/mbti-personality-test-16-personality-types"', (string) $first->content_html);
+        $this->assertStringNotContainsString('](/tests/mbti-personality-test-16-personality-types)', (string) $first->publishedRevision?->content_md);
         $this->assertStringContainsString('下一步怎么做', (string) $first->content_md);
+        $this->assertStringContainsString('/zh/tests/mbti-personality-test-16-personality-types', (string) $first->content_md);
+        $this->assertStringContainsString('href="/zh/tests/mbti-personality-test-16-personality-types"', (string) $first->content_html);
         $this->assertStringContainsString('常见问题', (string) $first->publishedRevision?->content_md);
 
         $writerArtifact = $this->readJson((string) data_get($summary, 'evidence.path'));
@@ -263,8 +268,8 @@ final class SeoOpsZhArticleQualityControlledWriterTest extends TestCase
                         ['find' => 'Trust links', 'replace_with' => '可信度与边界', 'scope' => 'cms_article_body_or_module_heading'],
                     ],
                     'link_replacements' => [
-                        ['find' => '/tests/mbti-personality-test-16-personality-types', 'replace_with' => '/zh/tests/mbti-personality-test-16-personality-types', 'scope' => 'cms_article_body_or_module_link'],
-                        ['find' => '/science', 'replace_with' => '/zh/science', 'scope' => 'cms_article_body_or_module_link'],
+                        ['find_href' => '/tests/mbti-personality-test-16-personality-types', 'replace_with_href' => '/zh/tests/mbti-personality-test-16-personality-types', 'scope' => 'cms_article_body_or_module_link'],
+                        ['find_href' => '/science', 'replace_with_href' => '/zh/science', 'scope' => 'cms_article_body_or_module_link'],
                     ],
                 ],
                 'issues' => [],

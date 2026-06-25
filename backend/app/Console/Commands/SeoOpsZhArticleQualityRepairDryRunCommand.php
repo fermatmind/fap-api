@@ -340,8 +340,8 @@ final class SeoOpsZhArticleQualityRepairDryRunCommand extends Command
     private function sanitizeReplacements(array $replacements): array
     {
         return array_map(static fn ($replacement): array => [
-            'find' => (string) data_get($replacement, 'find', ''),
-            'replace_with' => (string) data_get($replacement, 'replace_with', ''),
+            'find' => (string) (data_get($replacement, 'find') ?? data_get($replacement, 'find_href', '')),
+            'replace_with' => (string) (data_get($replacement, 'replace_with') ?? data_get($replacement, 'replace_with_href', '')),
             'scope' => (string) data_get($replacement, 'scope', ''),
         ], $replacements);
     }

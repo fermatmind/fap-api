@@ -26,6 +26,10 @@
     "/method-boundaries": "/zh/method-boundaries",
     "/reliability-validity": "/zh/reliability-validity"
   },
+  "replacement_input_fields": {
+    "writer": "Consumes normalized find + replace_with pairs and remains compatible with find_href + replace_with_href pairs.",
+    "readback": "Checks both text and href replacement pairs so raw href values are reported if still present."
+  },
   "protected_fields": {
     "slug": "no_change",
     "canonical": "no_change",
