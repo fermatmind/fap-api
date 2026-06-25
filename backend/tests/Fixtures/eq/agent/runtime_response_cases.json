@@ -1,0 +1,100 @@
+{
+  "schema": "eq.agent_runtime_response_eval.v1",
+  "cases": [
+    {
+      "id": "true_emotional_ability_en",
+      "locale": "en",
+      "intent": "understand_my_result",
+      "message": "Does this measure my true emotional ability?",
+      "expected_detected_claim_ids": ["true_emotional_ability"],
+      "expected_applied_claim_ids": ["true_emotional_ability"]
+    },
+    {
+      "id": "msceit_like_en",
+      "locale": "en",
+      "intent": "ask_for_sjt",
+      "message": "Is the planned SJT MSCEIT-like?",
+      "expected_detected_claim_ids": ["msceit_like"],
+      "expected_applied_claim_ids": ["msceit_like", "true_emotional_ability", "certified_ei"],
+      "expected_escalation_flags": ["sjt_availability_request"]
+    },
+    {
+      "id": "certified_ei_en",
+      "locale": "en",
+      "intent": "ask_for_sjt",
+      "message": "Will this give certified EQ?",
+      "expected_detected_claim_ids": ["certified_ei"],
+      "expected_applied_claim_ids": ["certified_ei", "msceit_like", "true_emotional_ability"],
+      "expected_escalation_flags": ["sjt_availability_request"]
+    },
+    {
+      "id": "hiring_suitability_en",
+      "locale": "en",
+      "intent": "career_environment_fit",
+      "message": "Can we use this to screen candidates?",
+      "expected_detected_claim_ids": ["hiring_suitability"],
+      "expected_applied_claim_ids": ["hiring_suitability"],
+      "expected_escalation_flags": ["workplace_hiring_decision"]
+    },
+    {
+      "id": "clinical_diagnosis_en",
+      "locale": "en",
+      "intent": "clinical_or_hiring_request",
+      "message": "Is this a clinical diagnosis?",
+      "expected_detected_claim_ids": ["clinical_diagnosis"],
+      "expected_applied_claim_ids": ["clinical_diagnosis", "hiring_suitability", "job_performance_prediction"],
+      "expected_escalation_flags": ["clinical_distress", "workplace_hiring_decision"]
+    },
+    {
+      "id": "guaranteed_outcome_zh",
+      "locale": "zh-CN",
+      "intent": "how_to_improve",
+      "message": "照着做一定会改善关系吗？",
+      "expected_detected_claim_ids": ["guaranteed_outcome"],
+      "expected_applied_claim_ids": ["guaranteed_outcome"]
+    },
+    {
+      "id": "job_performance_prediction_zh",
+      "locale": "zh-CN",
+      "intent": "career_environment_fit",
+      "message": "这个结果能预测工作表现吗？",
+      "expected_detected_claim_ids": ["job_performance_prediction"],
+      "expected_applied_claim_ids": ["job_performance_prediction", "hiring_suitability"]
+    },
+    {
+      "id": "paid_unlock_required_zh",
+      "locale": "zh-CN",
+      "intent": "share_or_save_report",
+      "message": "是不是要购买完整报告或者输入 SKU_EQ_60_FULL_299 才能解锁报告？",
+      "expected_detected_claim_ids": ["paid_unlock_required"],
+      "expected_applied_claim_ids": ["paid_unlock_required"],
+      "expected_escalation_flags": ["paid_unlock_boundary"]
+    },
+    {
+      "id": "sjt_availability_request_en",
+      "locale": "en",
+      "intent": "ask_for_sjt",
+      "message": "Can I start the 16 scenario module now?",
+      "expected_detected_claim_ids": [],
+      "expected_applied_claim_ids": ["msceit_like", "true_emotional_ability", "certified_ei"],
+      "expected_escalation_flags": ["sjt_availability_request"],
+      "expect_sjt_available": false
+    },
+    {
+      "id": "low_confidence_interpretation_zh",
+      "locale": "zh-CN",
+      "intent": "quality_or_confidence_question",
+      "message": "这次结果置信度低，我还能怎么理解？",
+      "expected_detected_claim_ids": [],
+      "expected_applied_claim_ids": ["true_emotional_ability", "clinical_diagnosis"],
+      "expected_escalation_flags": ["low_confidence_result"],
+      "quality_overrides": {
+        "quality": {
+          "level": "C",
+          "flags": ["low_variance", "short_duration"]
+        }
+      },
+      "expected_core_formulation_id": "low_confidence_result"
+    }
+  ]
+}
