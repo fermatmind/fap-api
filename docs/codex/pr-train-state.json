@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-25T03:08:48Z",
+  "updated_at": "2026-06-25T11:35:00+08:00",
   "PR-EQ-ASSET-01": {
     "repo": "fap-api",
     "branch": "codex/pr-eq-asset-01-content-pack-v16",
@@ -61340,7 +61340,7 @@
     "repo": "fap-web",
     "branch": "codex/pr-eq-agent-runtime-03-frontend-drawer",
     "base": "main",
-    "status": "pending_dependency",
+    "status": "merged_deployed",
     "train_scope": "eq_agent_runtime",
     "title": "PR-EQ-AGENT-RUNTIME-03 Frontend EQ Agent chat drawer",
     "depends_on": [
@@ -61350,20 +61350,30 @@
       "authorization": {
         "status": "pass",
         "evidence": "User explicitly authorized the EQ Agent Runtime 4-PR plan and manifest/state updates."
+      },
+      "production_deploy": {
+        "status": "passed",
+        "evidence": "fap-web Deploy Web Production run 28144420014 completed successfully for fca1b41153709c39580ee3a1f9f5e939ebce3c16."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "commit_sha": "fca1b41153709c39580ee3a1f9f5e939ebce3c16",
+    "pr_url": "https://github.com/fermatmind/fap-web/pull/1433",
+    "merged_at": "2026-06-25T03:13:19Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-25T09:55:00+08:00",
         "from": "missing_from_manifest",
         "to": "pending_dependency",
         "notes": "Initialized from explicit user authorization; waits for PR-EQ-AGENT-RUNTIME-02."
+      },
+      {
+        "at": "2026-06-25T11:35:00+08:00",
+        "from": "pending_dependency",
+        "to": "merged_deployed",
+        "notes": "Reconciled from fap-web PR #1433 merge and production deploy before PR-EQ-AGENT-RUNTIME-04 acceptance report."
       }
     ]
   },
@@ -61371,7 +61381,7 @@
     "repo": "fap-api",
     "branch": "codex/pr-eq-agent-runtime-04-acceptance-report",
     "base": "main",
-    "status": "pending_dependency",
+    "status": "pr_open_p0_blocked_report",
     "train_scope": "eq_agent_runtime",
     "title": "PR-EQ-AGENT-RUNTIME-04 EQ Agent runtime production acceptance report",
     "depends_on": [
@@ -61381,11 +61391,38 @@
       "authorization": {
         "status": "pass",
         "evidence": "User explicitly authorized the EQ Agent Runtime 4-PR plan and manifest/state updates."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "fap-web PR #1433 merged as fca1b41153709c39580ee3a1f9f5e939ebce3c16 and Deploy Web Production run 28144420014 succeeded."
+      },
+      "production_smoke": {
+        "status": "failed_p0",
+        "artifact_dir": "/tmp/eq_agent_runtime_prod_smoke_20260625_112156",
+        "attempt_id": "f5b08634-0322-4509-b4c4-b1652189496a",
+        "summary": "EQ report and agent-context are production ready, but POST /eq/agent-runtime/messages returns 404 NOT_FOUND; frontend drawer opens but cannot produce a runtime response."
+      },
+      "local_validation": {
+        "status": "passed",
+        "commands": [
+          {
+            "cmd": "git diff --check",
+            "result": "passed"
+          },
+          {
+            "cmd": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "result": "passed"
+          },
+          {
+            "cmd": "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+            "result": "passed"
+          }
+        ]
       }
     },
-    "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "failure_reason": "P0: production backend runtime message endpoint returns 404 NOT_FOUND; P1: context guardrail field mismatch can_create_paid_unlock_language vs frontend can_use_paid_unlock_language.",
+    "commit_sha": "b92ec13061aaa032f7a2424043b1bb75edfdb936",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2412",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -61395,8 +61432,38 @@
         "from": "missing_from_manifest",
         "to": "pending_dependency",
         "notes": "Initialized from explicit user authorization; waits for PR-EQ-AGENT-RUNTIME-03 production availability."
+      },
+      {
+        "at": "2026-06-25T11:35:00+08:00",
+        "from": "pending_dependency",
+        "to": "acceptance_report_generated_p0_blocked",
+        "notes": "Generated docs-only production smoke acceptance report. Agent runtime phase is not allowed until P0/P1 are closed."
+      },
+      {
+        "at": "2026-06-25T11:45:00+08:00",
+        "from": "acceptance_report_generated_p0_blocked",
+        "to": "local_checks_passed_p0_blocked_report_ready",
+        "notes": "Docs-only acceptance report and state ledger validated with diff, JSON, YAML, and scope checks. Report records P0/P1 and Agent runtime phase allowed=no."
+      },
+      {
+        "at": "2026-06-25T11:55:00+08:00",
+        "from": "local_checks_passed_p0_blocked_report_ready",
+        "to": "pr_open_p0_blocked_report",
+        "notes": "Opened PR #2412 with docs-only acceptance report. PR is safe to merge as evidence, but runtime rollout remains blocked by P0/P1."
       }
-    ]
+    ],
+    "scope_validation": {
+      "status": "passed",
+      "allowed_files": [
+        "docs/audits/eq/**",
+        "docs/codex/pr-train-state.json"
+      ],
+      "changed_files": [
+        "docs/audits/eq/eq_agent_runtime_acceptance_2026-06-25.md",
+        "docs/codex/pr-train-state.json"
+      ],
+      "outside_scope_files": []
+    }
   },
   "BIG-FIVE-CMS-DRAFT-WRITER-CONTRACT-01": {
     "repo": "fap-api",
