@@ -62205,8 +62205,8 @@
       }
     },
     "failure_reason": "Live LLM staging smoke blocked by staging outbound timeout to OpenAI Responses API; deterministic fallback passed. Exposed UI-created eq-agent-staging key has been deleted/revoked.",
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "2b132f4335e7edd7f3aac7d586a3c9d2c817011b",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2430",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -62228,6 +62228,12 @@
         "from": "local_validated_blocked_smoke_report",
         "to": "local_validated_blocked_smoke_report",
         "notes": "Updated docs-only smoke report to record eq-agent-staging revoked, eq-agent-staging-v2 retained, staging LLM disabled, and live LLM blocked by OpenAI outbound timeout while deterministic fallback passed."
+      },
+      {
+        "at": "2026-06-25T21:25:00+08:00",
+        "from": "local_validated_blocked_smoke_report",
+        "to": "pr_opened",
+        "notes": "Opened docs-only PR #2430 for V2-04 blocked staging LLM smoke report."
       }
     ]
   },
