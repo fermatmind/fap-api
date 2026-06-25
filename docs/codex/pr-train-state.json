@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-25T10:10:00Z",
+  "updated_at": "2026-06-25T10:32:00Z",
   "PR-EQ-ASSET-01": {
     "repo": "fap-api",
     "branch": "codex/pr-eq-asset-01-content-pack-v16",
@@ -61994,7 +61994,7 @@
     "repo": "fap-api",
     "branch": "codex/pr-eq-agent-runtime-v2-02-safety-eval-fixtures",
     "base": "main",
-    "status": "pr_opened",
+    "status": "merged",
     "train_scope": "eq_agent_runtime_v2",
     "title": "PR-EQ-AGENT-RUNTIME-V2-02 EQ Agent LLM safety eval fixtures",
     "depends_on": [
@@ -62032,14 +62032,18 @@
       "github_checks": {
         "status": "pending",
         "evidence": "Waiting for GitHub checks on PR #2422."
+      },
+      "merge_reconciliation": {
+        "status": "pass",
+        "evidence": "GitHub PR #2422 is merged at 0a991a5e732132fdfe5abbb7cfa94597e68803b2 and origin/main contains the merge commit."
       }
     },
     "failure_reason": null,
-    "commit_sha": "faa72e503cc8af4f0d4d81b0a9f7a1072b23179f",
+    "commit_sha": "e396baf787e7b4a7b095d1b0927cd48952c11a72",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2422",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-25T10:12:54Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-25T17:48:04+08:00",
@@ -62058,6 +62062,12 @@
         "from": "local_checks_passed",
         "to": "pr_opened",
         "notes": "Opened GitHub PR #2422 after local validation and scope validation passed."
+      },
+      {
+        "at": "2026-06-25T18:20:00+08:00",
+        "from": "pr_opened",
+        "to": "merged",
+        "notes": "Reconciled while starting PR-EQ-AGENT-RUNTIME-V2-03 after verifying GitHub PR #2422 merged and origin/main contains 0a991a5e732132fdfe5abbb7cfa94597e68803b2."
       }
     ]
   },
@@ -62065,7 +62075,7 @@
     "repo": "fap-api",
     "branch": "codex/pr-eq-agent-runtime-v2-03-provider-abstraction",
     "base": "main",
-    "status": "pending_dependency",
+    "status": "pr_opened",
     "train_scope": "eq_agent_runtime_v2",
     "title": "PR-EQ-AGENT-RUNTIME-V2-03 EQ Agent provider abstraction and feature flag",
     "depends_on": [
@@ -62077,13 +62087,43 @@
         "evidence": "User explicitly requested the EQ Agent Runtime V2 four-PR plan and authorized adding the PRs to manifest/state before execution."
       },
       "dependency": {
+        "status": "pass",
+        "evidence": "PR-EQ-AGENT-RUNTIME-V2-02 merged as GitHub PR #2422 at 0a991a5e732132fdfe5abbb7cfa94597e68803b2 and is present in origin/main."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan route:list --path=api/v0.3/attempts --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=EqAgent --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='test_runtime_paths_have_no_uncommitted_diff' --no-ansi",
+          "find backend/tests/Fixtures/eq/agent -name '*.json' -print -exec python3 -m json.tool {} >/dev/null \\;",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "git diff --check"
+        ],
+        "evidence": "Provider abstraction, default-off OpenAI adapter, fallback behavior, EqAgent, Eq60V5, route-list, runtime freeze, fixture parse, JSON/YAML, and diff checks passed."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are within PR-EQ-AGENT-RUNTIME-V2-03 allowed_paths."
+      },
+      "github_pr": {
+        "status": "opened",
+        "evidence": "GitHub PR #2423 opened for codex/pr-eq-agent-runtime-v2-03-provider-abstraction."
+      },
+      "github_checks": {
         "status": "pending",
-        "evidence": "Waiting for PR-EQ-AGENT-RUNTIME-V2-02 to merge."
+        "evidence": "Waiting for GitHub checks on PR #2423."
+      },
+      "ci_fix": {
+        "status": "pass",
+        "evidence": "Added BigFive runtime freeze exception for default-off EQ Agent provider abstraction files and verified focused freeze tests locally."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "9ca71110ef9b8b7fa0d06c159050cf6c0db9a260",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2423",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -62093,6 +62133,24 @@
         "from": "missing_from_manifest",
         "to": "pending_dependency",
         "notes": "Initialized from explicit user authorization; waits for PR-EQ-AGENT-RUNTIME-V2-02."
+      },
+      {
+        "at": "2026-06-25T18:20:00+08:00",
+        "from": "pending_dependency",
+        "to": "local_checks_passed",
+        "notes": "Added provider abstraction, default-off OpenAI adapter, safe provider normalization, and fallback tests; local validation passed."
+      },
+      {
+        "at": "2026-06-25T18:22:00+08:00",
+        "from": "local_checks_passed",
+        "to": "pr_opened",
+        "notes": "Opened GitHub PR #2423 after local validation and scope validation passed."
+      },
+      {
+        "at": "2026-06-25T18:32:00+08:00",
+        "from": "pr_opened",
+        "to": "pr_opened_ci_fix_pushed",
+        "notes": "Fixed verify-bigfive failure by adding a scoped runtime freeze classifier exception for default-off EQ Agent provider abstraction files."
       }
     ]
   },

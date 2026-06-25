@@ -13,6 +13,7 @@ use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
@@ -184,6 +185,186 @@ final class EqAgentContextApiTest extends TestCase
         ] as $forbidden) {
             $this->assertStringNotContainsString($forbidden, $json);
         }
+    }
+
+    public function test_eq_agent_runtime_provider_disabled_keeps_deterministic_fallback(): void
+    {
+        config()->set('fap.features.report_snapshot_strict_v2', true);
+        config()->set('ai.eq_agent.llm_enabled', false);
+        config()->set('ai.eq_agent.openai.api_key', 'test-key');
+        config()->set('ai.eq_agent.openai.model', 'gpt-test');
+        $this->prepareEqContent();
+        Http::fake();
+
+        $anonId = 'anon_eq_agent_provider_disabled';
+        $token = $this->issueFmToken($anonId);
+        $attemptId = $this->createEqAttemptWithResult($anonId, 'en');
+
+        $response = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->postJson('/api/v0.3/attempts/'.$attemptId.'/eq/agent-runtime/messages', [
+            'locale' => 'en',
+            'intent' => 'understand_my_result',
+            'message' => 'Help me understand my report.',
+        ]);
+
+        $response->assertOk()
+            ->assertJsonPath('mode', 'deterministic_read_only')
+            ->assertJsonPath('guardrails.read_only', true)
+            ->assertJsonPath('guardrails.can_mutate_report', false)
+            ->assertJsonPath('next_module.available', false);
+        $this->assertNull($response->json('provider'));
+        Http::assertNothingSent();
+    }
+
+    public function test_eq_agent_runtime_provider_missing_config_fails_closed_to_deterministic(): void
+    {
+        config()->set('fap.features.report_snapshot_strict_v2', true);
+        config()->set('ai.eq_agent.llm_enabled', true);
+        config()->set('ai.eq_agent.staging_only', false);
+        config()->set('ai.eq_agent.openai.api_key', '');
+        config()->set('ai.eq_agent.openai.model', 'gpt-test');
+        $this->prepareEqContent();
+        Http::fake();
+
+        $anonId = 'anon_eq_agent_provider_missing_config';
+        $token = $this->issueFmToken($anonId);
+        $attemptId = $this->createEqAttemptWithResult($anonId, 'en');
+
+        $response = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->postJson('/api/v0.3/attempts/'.$attemptId.'/eq/agent-runtime/messages', [
+            'locale' => 'en',
+            'intent' => 'understand_my_result',
+            'message' => 'Help me understand my report.',
+        ]);
+
+        $response->assertOk()
+            ->assertJsonPath('mode', 'deterministic_read_only')
+            ->assertJsonPath('guardrails.read_only', true)
+            ->assertJsonPath('guardrails.can_enable_sjt', false);
+        $this->assertNull($response->json('provider'));
+        Http::assertNothingSent();
+    }
+
+    public function test_eq_agent_runtime_openai_provider_response_is_normalized_when_feature_flag_enabled(): void
+    {
+        config()->set('fap.features.report_snapshot_strict_v2', true);
+        config()->set('ai.eq_agent.llm_enabled', true);
+        config()->set('ai.eq_agent.staging_only', false);
+        config()->set('ai.eq_agent.openai.base_url', 'https://api.openai.test/v1');
+        config()->set('ai.eq_agent.openai.api_key', 'test-key');
+        config()->set('ai.eq_agent.openai.model', 'gpt-test');
+        $this->prepareEqContent();
+
+        Http::fake([
+            'https://api.openai.test/v1/responses' => Http::response([
+                'id' => 'resp_eq_agent_test',
+                'output' => [[
+                    'type' => 'message',
+                    'content' => [[
+                        'type' => 'output_text',
+                        'text' => json_encode([
+                            'text' => 'Your report points to a practical self-report pattern that can be discussed safely.',
+                            'summary_points' => ['Use the report assets.', 'Keep the response read-only.'],
+                            'follow_up_question' => 'Which everyday scene should we discuss first?',
+                            'source_asset_ids' => ['eq.conversion.agent_entry'],
+                            'boundary_claim_ids' => [],
+                        ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                    ]],
+                ]],
+            ], 200),
+        ]);
+
+        $anonId = 'anon_eq_agent_provider_success';
+        $token = $this->issueFmToken($anonId);
+        $attemptId = $this->createEqAttemptWithResult($anonId, 'en');
+
+        $response = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->postJson('/api/v0.3/attempts/'.$attemptId.'/eq/agent-runtime/messages', [
+            'locale' => 'en',
+            'intent' => 'understand_my_result',
+            'message' => 'Help me understand my report.',
+        ]);
+
+        $response->assertOk()
+            ->assertJsonPath('mode', 'llm_provider_read_only')
+            ->assertJsonPath('assistant_response.text', 'Your report points to a practical self-report pattern that can be discussed safely.')
+            ->assertJsonPath('safety.provider_response_validated', true)
+            ->assertJsonPath('provider.name', 'openai')
+            ->assertJsonPath('provider.fallback_used', false)
+            ->assertJsonPath('provider.response_id', 'resp_eq_agent_test')
+            ->assertJsonPath('guardrails.read_only', true)
+            ->assertJsonPath('guardrails.can_mutate_report', false)
+            ->assertJsonPath('next_module.available', false);
+
+        Http::assertSent(function ($request): bool {
+            $payload = $request->data();
+
+            return $request->url() === 'https://api.openai.test/v1/responses'
+                && data_get($payload, 'model') === 'gpt-test'
+                && data_get($payload, 'text.format.name') === 'eq_agent_provider_response'
+                && str_contains((string) data_get($payload, 'input.1.content.0.text'), 'safe_context')
+                && ! str_contains((string) data_get($payload, 'input.1.content.0.text'), 'profile:');
+        });
+    }
+
+    public function test_eq_agent_runtime_unsafe_provider_output_falls_back_to_deterministic(): void
+    {
+        config()->set('fap.features.report_snapshot_strict_v2', true);
+        config()->set('ai.eq_agent.llm_enabled', true);
+        config()->set('ai.eq_agent.staging_only', false);
+        config()->set('ai.eq_agent.openai.base_url', 'https://api.openai.test/v1');
+        config()->set('ai.eq_agent.openai.api_key', 'test-key');
+        config()->set('ai.eq_agent.openai.model', 'gpt-test');
+        $this->prepareEqContent();
+
+        Http::fake([
+            'https://api.openai.test/v1/responses' => Http::response([
+                'id' => 'resp_eq_agent_unsafe',
+                'output' => [[
+                    'type' => 'message',
+                    'content' => [[
+                        'type' => 'output_text',
+                        'text' => json_encode([
+                            'text' => 'Pay to unlock SKU_EQ_60_FULL_299 for the premium report.',
+                            'summary_points' => ['unlock'],
+                            'follow_up_question' => 'Do you want the premium version?',
+                            'source_asset_ids' => ['eq.conversion.agent_entry'],
+                            'boundary_claim_ids' => [],
+                        ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                    ]],
+                ]],
+            ], 200),
+        ]);
+
+        $anonId = 'anon_eq_agent_provider_unsafe';
+        $token = $this->issueFmToken($anonId);
+        $attemptId = $this->createEqAttemptWithResult($anonId, 'en');
+
+        $response = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->postJson('/api/v0.3/attempts/'.$attemptId.'/eq/agent-runtime/messages', [
+            'locale' => 'en',
+            'intent' => 'understand_my_result',
+            'message' => 'Help me understand my report.',
+        ]);
+
+        $response->assertOk()
+            ->assertJsonPath('mode', 'deterministic_read_only')
+            ->assertJsonPath('guardrails.read_only', true)
+            ->assertJsonPath('guardrails.can_create_paid_unlock_language', false)
+            ->assertJsonPath('guardrails.can_use_paid_unlock_language', false);
+        $this->assertNull($response->json('provider'));
+
+        $json = json_encode($response->json(), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?: '';
+        $this->assertStringNotContainsString('SKU_EQ_60_FULL_299', $json);
+        $this->assertStringNotContainsString('premium report', $json);
     }
 
     public function test_eq_agent_runtime_message_applies_forbidden_claim_boundary(): void

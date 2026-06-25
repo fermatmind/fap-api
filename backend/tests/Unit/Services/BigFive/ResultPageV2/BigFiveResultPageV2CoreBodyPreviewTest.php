@@ -871,6 +871,19 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ));
     }
 
+    public function test_runtime_freeze_classifier_ignores_eq_agent_provider_abstraction_default_off_changes(): void
+    {
+        $changed = [
+            'backend/app/Services/Eq/EqAgentProviderClient.php',
+            'backend/app/Services/Eq/EqAgentProviderManager.php',
+            'backend/app/Services/Eq/EqAgentProviderRequest.php',
+            'backend/app/Services/Eq/EqAgentProviderResponse.php',
+            'backend/app/Services/Eq/OpenAiEqAgentProviderClient.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_public_content_release_guard_command_changes(): void
     {
         $changed = [
@@ -5430,6 +5443,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isEqAgentProviderAbstractionDefaultOffChange($file)) {
+                continue;
+            }
+
             if ($this->isEq60FreeReportContractChange($file, $repoRoot, $baseRef)) {
                 continue;
             }
@@ -7505,6 +7522,17 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isEqAgentRuntimeReadOnlyShellChange(string $file): bool
     {
         return $file === 'backend/app/Services/Eq/EqAgentRuntimeResponder.php';
+    }
+
+    private function isEqAgentProviderAbstractionDefaultOffChange(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Services/Eq/EqAgentProviderClient.php',
+            'backend/app/Services/Eq/EqAgentProviderManager.php',
+            'backend/app/Services/Eq/EqAgentProviderRequest.php',
+            'backend/app/Services/Eq/EqAgentProviderResponse.php',
+            'backend/app/Services/Eq/OpenAiEqAgentProviderClient.php',
+        ], true);
     }
 
     private function isCiAuthBypassHardeningFile(string $file): bool

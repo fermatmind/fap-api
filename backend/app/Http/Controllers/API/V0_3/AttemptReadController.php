@@ -846,7 +846,7 @@ class AttemptReadController extends Controller
         $context = json_decode((string) $contextResponse->getContent(), true);
         if (! is_array($context)) {
             return response()->json(
-                $this->eqAgentRuntimeResponder->nonReady($id, 'context_decode_failed', $locale),
+                $this->eqAgentRuntimeResponder->nonReady($id, 'context_decode_failed', [], $locale),
                 202
             );
         }
@@ -856,8 +856,8 @@ class AttemptReadController extends Controller
             : $this->eqAgentRuntimeResponder->nonReady(
                 $id,
                 (string) ($context['reason_code'] ?? 'context_not_ready'),
-                $locale,
-                is_array($context['guardrails'] ?? null) ? $context['guardrails'] : []
+                is_array($context['guardrails'] ?? null) ? $context['guardrails'] : [],
+                $locale
             );
 
         $status = (int) $contextResponse->getStatusCode();
