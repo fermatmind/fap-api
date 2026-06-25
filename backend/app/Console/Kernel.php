@@ -223,6 +223,7 @@ use App\Console\Commands\SeoAgentRuntimeSeoQaScanCommand;
 use App\Console\Commands\SeoAgentWeeklyDraftWriteAutoCommand;
 use App\Console\Commands\SeoAgentWeeklyReadonlyRunnerCommand;
 use App\Console\Commands\SeoOpsP0CtrArticleCmsUpdateWriterCommand;
+use App\Console\Commands\SeoOpsZhArticleQualityRepairDryRunCommand;
 use App\Console\Commands\SeoIntelSearchChannelQueueCommand;
 use App\Console\Commands\SeoIntelUrlTruthHandoffCommand;
 use App\Console\Commands\StorageControlPlaneSnapshot;
@@ -469,6 +470,7 @@ class Kernel extends ConsoleKernel
         SeoAgentWeeklyDraftWriteAutoCommand::class,
         SeoAgentWeeklyReadonlyRunnerCommand::class,
         SeoOpsP0CtrArticleCmsUpdateWriterCommand::class,
+        SeoOpsZhArticleQualityRepairDryRunCommand::class,
         SeoIntelUrlTruthHandoffCommand::class,
         SeoIntelSearchChannelQueueCommand::class,
         ContentReleaseRevalidate::class,

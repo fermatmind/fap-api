@@ -6,6 +6,40 @@ require_clean_worktree: true
 execution_mode: local_clone_preferred
 
 prs:
+  - id: SEO-OPS-ZH-ARTICLE-QUALITY-DRY-RUN-ADAPTER-01
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/seo-ops-zh-article-quality-dry-run-adapter-01
+    base: main
+    depends_on: []
+    mode: execute
+    scope: >
+      P2-A backend-only read-only dry-run adapter for the existing 9-page
+      zh-CN article quality CMS repair package. Validate package schema and
+      SHA, resolve Article / ArticleTranslation authority, emit protected
+      diff and planned operation evidence, and preserve no DB/CMS/publish,
+      URL Truth, sitemap, llms, schema, hreflang, Search Channel, IndexNow,
+      Baidu, GSC, revalidation, or deploy side effects. Include the narrow
+      BigFive runtime-freeze classifier allowlist required for this read-only
+      Artisan adapter and Kernel registration.
+    checks:
+      - "php artisan list | rg seo-ops:zh-article-quality-repair-dry-run"
+      - "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoOpsZhArticleQualityRepairDryRunCommandTest"
+      - "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|seo_ops_zh_article_quality'"
+      - "vendor/bin/pint --test app/Console/Commands/SeoOpsZhArticleQualityRepairDryRunCommand.php tests/Feature/SeoIntel/SeoOpsZhArticleQualityRepairDryRunCommandTest.php"
+      - "python3 -m json.tool docs/seo/generated/seo-ops-zh-article-quality-repair-dry-run.v1.json >/dev/null"
+      - "git diff --check"
+      - "git diff --cached --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-CANDIDATE-SEMANTICS-PREROUTE
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend

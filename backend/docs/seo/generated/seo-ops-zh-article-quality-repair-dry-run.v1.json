@@ -1,0 +1,55 @@
+{
+  "version": "seo-ops-zh-article-quality-repair-dry-run.v1",
+  "command": "php artisan seo-ops:zh-article-quality-repair-dry-run",
+  "input_schema": "fermatmind-zh-article-quality-cms-repair-package.v1",
+  "output_schema": "seo-ops-zh-article-quality-repair-dry-run.v1",
+  "purpose": "Read-only backend authority dry-run for the deterministic zh-CN article quality repair package.",
+  "inputs": {
+    "package": "Path to fermatmind-zh-article-quality-cms-repair-package.v1 JSON package.",
+    "confirm_package_sha256": "Required exact SHA-256 of the source package.",
+    "artifact_dir": "Directory where read-only evidence JSON is written.",
+    "json": "Emit JSON summary."
+  },
+  "resolves": {
+    "article_quality_repair": {
+      "expected_count": 9,
+      "authority_source": "backend.articles + article_seo_meta + article_translation_revisions",
+      "path_policy": "/zh/articles/<slug>",
+      "locale": "zh-CN"
+    }
+  },
+  "protected_diff": {
+    "slug": "no_change",
+    "canonical": "no_change",
+    "locale": "no_change",
+    "article_id": "resolved_no_change",
+    "publication": "no_change",
+    "schema": "hold_no_change",
+    "hreflang": "hold_no_change",
+    "sitemap": "no_change",
+    "llms": "no_change",
+    "search_submission": "hold_no_change"
+  },
+  "negative_guarantees": {
+    "database_write": false,
+    "cms_write": false,
+    "cms_draft_create": false,
+    "cms_publish": false,
+    "url_truth_write": false,
+    "schema_enable": false,
+    "hreflang_enable": false,
+    "sitemap_write": false,
+    "llms_write": false,
+    "search_channel_enqueue": false,
+    "indexnow_submit": false,
+    "baidu_submit": false,
+    "gsc_request_indexing": false,
+    "scheduler_start": false,
+    "queue_worker_start": false,
+    "external_api_call": false,
+    "revalidation": false,
+    "deploy": false
+  },
+  "write_behavior": "Writes only an evidence JSON file under artifact-dir. It does not mutate database, CMS, publish state, URL Truth, sitemap, llms, schema, hreflang, Search Channel, or external search providers.",
+  "next_gate": "A separate controlled writer/readback PR and exact operator approval are required before any CMS repair write."
+}
