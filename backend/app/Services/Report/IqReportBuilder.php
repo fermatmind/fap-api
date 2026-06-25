@@ -145,7 +145,10 @@ final class IqReportBuilder
                 'scoring_mode' => $this->stringOrNull($score['scoring_mode'] ?? null),
                 'bank_id' => $this->stringOrNull($score['bank_id'] ?? null),
                 'answer_key_version' => $this->stringOrNull($score['answer_key_version'] ?? null),
-                'norm_table_version' => $this->stringOrNull($score['norm_table_version'] ?? null),
+                'norm_table_version' => $this->stringOrNull($summary['norm_table_version'] ?? null),
+                'score_claim_level' => $this->stringOrNull($summary['score_claim_level'] ?? null) ?? 'raw_score_only',
+                'claim_policy' => is_array($summary['claim_policy'] ?? null) ? $summary['claim_policy'] : [],
+                'claim_warnings' => is_array($summary['claim_warnings'] ?? null) ? $summary['claim_warnings'] : [],
                 'scoring_engine_version' => $this->stringOrNull($score['scoring_engine_version'] ?? null),
             ],
             'access' => [
@@ -199,6 +202,10 @@ final class IqReportBuilder
                 'percentile' => null,
                 'confidence_interval' => null,
                 'norms_status' => $this->stringOrNull($summary['norms_status'] ?? null),
+                'norm_table_version' => $this->stringOrNull($summary['norm_table_version'] ?? null),
+                'score_claim_level' => $this->stringOrNull($summary['score_claim_level'] ?? null) ?? 'raw_score_only',
+                'claim_policy' => is_array($summary['claim_policy'] ?? null) ? $summary['claim_policy'] : [],
+                'claim_warnings' => is_array($summary['claim_warnings'] ?? null) ? $summary['claim_warnings'] : [],
             ],
             'access' => [
                 'report_access_level' => $reportAccessLevel,
@@ -266,6 +273,10 @@ final class IqReportBuilder
         $norms = is_array($score['norms'] ?? null) ? $score['norms'] : [];
         $scored = $status === 'scored';
         $hasNormAuthority = $this->hasNormAuthority($norms);
+        $claimPolicy = $this->normalizeClaimPolicy($norms);
+        $scoreClaimLevel = $this->stringOrNull($norms['score_claim_level'] ?? ($claimPolicy['score_claim_level'] ?? null))
+            ?? 'raw_score_only';
+        $claimWarnings = $this->normalizeStringList($norms['claim_warnings'] ?? ($claimPolicy['claim_warnings'] ?? []));
 
         return [
             'raw_score' => $scored ? $this->floatOrNull($score['raw_score'] ?? null) : null,
@@ -275,7 +286,52 @@ final class IqReportBuilder
                 ? $norms['confidence_interval']
                 : null,
             'norms_status' => $this->stringOrNull($norms['status'] ?? null),
+            'norm_table_version' => $this->stringOrNull($norms['norm_table_version'] ?? null),
+            'score_claim_level' => $scoreClaimLevel,
+            'claim_policy' => $claimPolicy,
+            'claim_warnings' => $claimWarnings,
         ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $norms
+     * @return array<string,mixed>
+     */
+    private function normalizeClaimPolicy(array $norms): array
+    {
+        $claimPolicy = is_array($norms['claim_policy'] ?? null) ? $norms['claim_policy'] : [];
+        $claimEligible = ($claimPolicy['claim_eligible'] ?? null) === true;
+        $scoreClaimLevel = $this->stringOrNull($norms['score_claim_level'] ?? ($claimPolicy['score_claim_level'] ?? null))
+            ?? ($claimEligible ? 'iq_estimate' : 'raw_score_only');
+        $claimWarnings = $this->normalizeStringList($norms['claim_warnings'] ?? ($claimPolicy['claim_warnings'] ?? []));
+
+        $claimPolicy['claim_eligible'] = $claimEligible;
+        $claimPolicy['score_claim_level'] = $scoreClaimLevel;
+        $claimPolicy['claim_warnings'] = $claimWarnings;
+        $claimPolicy['iq_estimate_allowed'] = $scoreClaimLevel !== 'raw_score_only';
+        $claimPolicy['source'] = $this->stringOrNull($claimPolicy['source'] ?? null) ?? 'iq_norm_authority';
+
+        return $claimPolicy;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function normalizeStringList(mixed $value): array
+    {
+        if (! is_array($value)) {
+            return [];
+        }
+
+        $items = [];
+        foreach ($value as $item) {
+            $normalized = trim((string) $item);
+            if ($normalized !== '') {
+                $items[] = $normalized;
+            }
+        }
+
+        return array_values(array_unique($items));
     }
 
     /**

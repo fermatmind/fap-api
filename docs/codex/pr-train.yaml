@@ -154,6 +154,52 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: IQ-OWNER-30-NORM-CLAIM-POLICY-02A
+    repo: fap-api
+    depends_on:
+      - IQ-OWNER-30-SCORING-RUNTIME-BIND-01
+    branch: codex/iq-owner-30-norm-claim-policy-02a
+    title: "IQ-OWNER-30-NORM-CLAIM-POLICY-02A: Bind owner IQ 30 raw-score-only claim policy"
+    train_scope: iq_owner_original_30_launch
+    status: user_authorized
+    scope:
+      - Add backend-authoritative raw-score-only claim policy for IQ_OWNER_ORIGINAL_30 result and report payloads.
+      - Keep IQ estimate, percentile, confidence interval, and norm table claims null until a claim-eligible norm authority exists.
+      - Preserve raw_score, dimension_scores, quality, and stability without exposing answer keys or private scoring metadata.
+    allowed_paths:
+      - backend/app/Services/Assessment/Drivers/IqTestDriver.php
+      - backend/app/Services/Report/IqReportBuilder.php
+      - backend/tests/Feature/V0_3/IqOwnerOriginal30SessionDeliveryTest.php
+      - backend/tests/Feature/V0_3/IqReportContractTest.php
+      - backend/tests/Unit/Services/Report/IqReportBuilderTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify frontend rendering, question bank assets, answer keys, CMS, SEO runtime, sitemap, llms, JSON-LD, production imports, staging deploy, or production deploy.
+      - Add DB migrations, production writes, or CMS writes.
+      - Enable IQ estimate, percentile, ranking, or normed IQ claims without a claim-eligible backend norm authority.
+      - Emit correct answers, answer keys, solution rules, generator metadata, private provenance, or source capture URLs in public result/report payloads.
+    validation:
+      - php -l backend/app/Services/Assessment/Drivers/IqTestDriver.php
+      - php -l backend/app/Services/Report/IqReportBuilder.php
+      - php -l backend/tests/Feature/V0_3/IqOwnerOriginal30SessionDeliveryTest.php
+      - php -l backend/tests/Feature/V0_3/IqReportContractTest.php
+      - php -l backend/tests/Unit/Services/Report/IqReportBuilderTest.php
+      - cd backend && php artisan test --filter=IqOwnerOriginal30 --no-ansi
+      - cd backend && php artisan test tests/Unit/Services/Report/IqReportBuilderTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/Assessment/Drivers/IqTestDriver.php app/Services/Report/IqReportBuilder.php tests/Feature/V0_3/IqOwnerOriginal30SessionDeliveryTest.php tests/Feature/V0_3/IqReportContractTest.php tests/Unit/Services/Report/IqReportBuilderTest.php
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: BIG-FIVE-AGENT-APPROVAL-QUEUE-INTEGRATION-01
     repo: fap-api
     depends_on: []

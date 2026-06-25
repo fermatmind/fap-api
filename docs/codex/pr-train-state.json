@@ -61635,5 +61635,85 @@
     "pr_head_sha": "4e1cbe9ae0956f903948231a301761a39bfe73c5",
     "pr_number": 2409,
     "merge_commit_sha": "953ba036a0d5ca8dad855b9f0f226664dc376fef"
+  },
+  "IQ-OWNER-30-NORM-CLAIM-POLICY-02A": {
+    "repo": "fap-api",
+    "branch": "codex/iq-owner-30-norm-claim-policy-02a",
+    "base": "main",
+    "status": "in_progress",
+    "train_scope": "iq_owner_original_30_launch",
+    "title": "IQ-OWNER-30-NORM-CLAIM-POLICY-02A: Bind owner IQ 30 raw-score-only claim policy",
+    "depends_on": [
+      "IQ-OWNER-30-SCORING-RUNTIME-BIND-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized fap-api docs/codex/pr-train.yaml and docs/codex/pr-train-state.json updates for IQ-OWNER-30-NORM-CLAIM-POLICY-02A and requested backend runtime claim policy binding."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "IQ-OWNER-30-SCORING-RUNTIME-BIND-01 is recorded merged with merge commit 953ba036a0d5ca8dad855b9f0f226664dc376fef and origin/main contained it before this branch started."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "php -l backend/app/Services/Assessment/Drivers/IqTestDriver.php",
+          "php -l backend/app/Services/Report/IqReportBuilder.php",
+          "php -l backend/tests/Feature/V0_3/IqOwnerOriginal30SessionDeliveryTest.php",
+          "php -l backend/tests/Feature/V0_3/IqReportContractTest.php",
+          "php -l backend/tests/Unit/Services/Report/IqReportBuilderTest.php",
+          "cd backend && php artisan test --filter=IqOwnerOriginal30 --no-ansi",
+          "cd backend && php artisan test tests/Unit/Services/Report/IqReportBuilderTest.php --no-ansi",
+          "cd backend && vendor/bin/pint --test app/Services/Assessment/Drivers/IqTestDriver.php app/Services/Report/IqReportBuilder.php tests/Feature/V0_3/IqOwnerOriginal30SessionDeliveryTest.php tests/Feature/V0_3/IqReportContractTest.php tests/Unit/Services/Report/IqReportBuilderTest.php",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "git diff --check"
+        ],
+        "evidence": "PASS: PHP syntax checks for IqTestDriver.php, IqReportBuilder.php, IqOwnerOriginal30SessionDeliveryTest.php, IqReportContractTest.php, and IqReportBuilderTest.php; php artisan test --filter=IqOwnerOriginal30 (11 tests, 5323 assertions); IqReportBuilderTest (3 tests, 41 assertions); scoped Pint; JSON/YAML parse checks; git diff --check."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to the backend owner IQ 30 claim policy scope: IqTestDriver, IqReportBuilder, focused owner 30/report tests, and docs/codex train metadata."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "GitHub checks passed for PR #2413 at head bdf632e941af4635de440315e96ab6b52433aa85; mergeStateStatus CLEAN; PR open and non-draft.",
+        "checked_at": "2026-06-25T04:01:50Z"
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": "6f3ffe1626c80cda7ed4605758213575b7f61188",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2413",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-25T03:37:25Z",
+        "status": "in_progress",
+        "note": "Started backend-only owner IQ 30 claim policy binding from latest fap-api origin/main. Scope is result/report payload claim policy for raw-score-only display without IQ estimate, percentile, confidence interval, norm table claim, answer leak, frontend, CMS, SEO, DB migration, staging deploy, or production deploy."
+      },
+      {
+        "at": "2026-06-25T03:46:50Z",
+        "status": "local_validated",
+        "note": "Local checks and scope validation passed. Owner 30 submit/report payloads now carry backend-authoritative raw_score_only claim policy, null IQ estimate/percentile/confidence interval/norm table claims, no_norm_table warning, and no public answer leakage."
+      },
+      {
+        "at": "2026-06-25T03:49:40Z",
+        "status": "github_checks_pending",
+        "note": "Opened PR #2413 at https://github.com/fermatmind/fap-api/pull/2413 on head 1932d42e71661a0be4e28d8d9503e10a52992c15. Waiting for required GitHub checks; no staging deploy wait, production deploy, CMS write, SEO, sitemap, llms, DB migration, or frontend work included."
+      },
+      {
+        "at": "2026-06-25T03:54:44Z",
+        "status": "github_checks_pending",
+        "note": "Rebased PR #2413 onto latest origin/main after GitHub reported mergeStateStatus DIRTY. The only rebase conflict was docs/codex/pr-train-state.json; main-side fap-web EQ Agent closeout facts were preserved and 02A state was updated to head 6f3ffe1626c80cda7ed4605758213575b7f61188."
+      },
+      {
+        "at": "2026-06-25T04:01:50Z",
+        "status": "ready_to_merge",
+        "note": "PR #2413 checks passed at head bdf632e941af4635de440315e96ab6b52433aa85 and mergeStateStatus was CLEAN. Ready for squash merge; no staging wait, production deploy, CMS write, SEO, sitemap, llms, DB migration, or frontend work included."
+      }
+    ]
   }
 }

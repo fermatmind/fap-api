@@ -60,6 +60,11 @@ class IqTestDriver implements DriverInterface
             $rawScore,
             $ctx
         );
+        $claimPolicy = is_array($norms['claim_policy'] ?? null) ? $norms['claim_policy'] : [];
+        $scoreClaimLevel = trim((string) ($norms['score_claim_level'] ?? ($claimPolicy['score_claim_level'] ?? 'raw_score_only')));
+        $claimWarnings = is_array($norms['claim_warnings'] ?? null)
+            ? array_values(array_map('strval', $norms['claim_warnings']))
+            : [];
         $scorePayload = [
             'scale_code' => $contract['scale_code'],
             'bank_id' => $contract['bank_id'],
@@ -67,6 +72,9 @@ class IqTestDriver implements DriverInterface
             'scoring_mode' => 'scored',
             'answer_key_version' => $contract['answer_key_version'],
             'norm_table_version' => $contract['norm_table_version'],
+            'score_claim_level' => $scoreClaimLevel !== '' ? $scoreClaimLevel : 'raw_score_only',
+            'claim_policy' => $claimPolicy,
+            'claim_warnings' => $claimWarnings,
             'scoring_engine_version' => $contract['scoring_engine_version'],
             'raw_score' => $rawScore,
             'final_score' => $rawScore,
@@ -531,22 +539,29 @@ class IqTestDriver implements DriverInterface
             'iq_estimate' => null,
             'percentile' => null,
             'confidence_interval' => null,
-            'norm_table_version' => $normTableVersion,
+            'norm_table_version' => null,
+            'score_claim_level' => 'raw_score_only',
+            'claim_warnings' => ['no_norm_table'],
             'claim_policy' => [
                 'claim_eligible' => false,
+                'score_claim_level' => 'raw_score_only',
                 'reason_code' => null,
+                'claim_warnings' => ['no_norm_table'],
+                'iq_estimate_allowed' => false,
                 'source' => 'iq_norm_authority',
             ],
         ];
 
         if ($base['status'] === 'unavailable_without_norm_table') {
-            $base['claim_policy']['reason_code'] = 'norm_table_version_unavailable';
+            $base['claim_policy']['reason_code'] = 'no_norm_table';
 
             return $base;
         }
 
         if ($scaleCode !== IqNormAuthorityContract::SCALE_CODE || ! Schema::hasTable('iq_norm_authorities')) {
             $base['claim_policy']['reason_code'] = 'iq_norm_authority_unavailable';
+            $base['claim_warnings'] = ['iq_norm_authority_unavailable'];
+            $base['claim_policy']['claim_warnings'] = $base['claim_warnings'];
 
             return $base;
         }
@@ -570,6 +585,8 @@ class IqTestDriver implements DriverInterface
 
         if (! $record) {
             $base['claim_policy']['reason_code'] = 'iq_norm_authority_not_found';
+            $base['claim_warnings'] = ['iq_norm_authority_not_found'];
+            $base['claim_policy']['claim_warnings'] = $base['claim_warnings'];
 
             return $base;
         }
@@ -588,14 +605,22 @@ class IqTestDriver implements DriverInterface
         $base['status'] = (bool) ($gate['claim_eligible'] ?? false)
             ? strtolower(trim((string) ($authority['status'] ?? 'production_normed')))
             : 'unavailable_without_claim_eligible_norm_authority';
-        $base['norm_table_version'] = (string) ($authority['norm_table_version'] ?? $normTableVersion);
         $base['population_key'] = (string) ($authority['population_key'] ?? $populationKey);
         $base['locale'] = (string) ($authority['locale'] ?? $locale);
         $base['sample_size'] = (int) ($authority['sample_size'] ?? 0);
+        $base['claim_warnings'] = (bool) ($gate['claim_eligible'] ?? false)
+            ? []
+            : array_values(array_unique(array_filter(array_map(
+                'strval',
+                (array) ($gate['errors'] ?? [$gate['reason_code'] ?? 'iq_norm_authority_not_claim_eligible'])
+            ))));
         $base['claim_policy'] = [
             'claim_eligible' => (bool) ($gate['claim_eligible'] ?? false),
+            'score_claim_level' => (bool) ($gate['claim_eligible'] ?? false) ? 'iq_estimate' : 'raw_score_only',
             'reason_code' => $gate['reason_code'] ?? null,
             'errors' => $gate['errors'] ?? [],
+            'claim_warnings' => $base['claim_warnings'],
+            'iq_estimate_allowed' => (bool) ($gate['claim_eligible'] ?? false),
             'source' => 'iq_norm_authority',
         ];
 
@@ -603,13 +628,21 @@ class IqTestDriver implements DriverInterface
             return $base;
         }
 
+        $base['norm_table_version'] = (string) ($authority['norm_table_version'] ?? $normTableVersion);
+        $base['score_claim_level'] = 'iq_estimate';
         $mean = (float) ($authority['mean'] ?? 0.0);
         $standardDeviation = (float) ($authority['standard_deviation'] ?? 0.0);
         if ($standardDeviation <= 0.0) {
             $base['status'] = 'unavailable_without_claim_eligible_norm_authority';
+            $base['norm_table_version'] = null;
+            $base['score_claim_level'] = 'raw_score_only';
+            $base['claim_warnings'] = ['standard_deviation_must_be_positive'];
             $base['claim_policy']['claim_eligible'] = false;
+            $base['claim_policy']['score_claim_level'] = 'raw_score_only';
             $base['claim_policy']['reason_code'] = 'standard_deviation_must_be_positive';
             $base['claim_policy']['errors'] = ['standard_deviation_must_be_positive'];
+            $base['claim_policy']['claim_warnings'] = $base['claim_warnings'];
+            $base['claim_policy']['iq_estimate_allowed'] = false;
 
             return $base;
         }

@@ -87,6 +87,9 @@ final class IqReportBuilderTest extends TestCase
         $this->assertNull(data_get($payload, 'report.summary.percentile'));
         $this->assertNull(data_get($payload, 'report.summary.confidence_interval'));
         $this->assertSame('unavailable_without_norm_table', data_get($payload, 'report.summary.norms_status'));
+        $this->assertSame('raw_score_only', data_get($payload, 'report.summary.score_claim_level'));
+        $this->assertSame('raw_score_only', data_get($payload, 'report.scoring.score_claim_level'));
+        $this->assertFalse((bool) data_get($payload, 'report.summary.claim_policy.claim_eligible'));
         $this->assertSame('stable', data_get($payload, 'report.stability.status'));
         $this->assertSame('A', data_get($payload, 'report.quality.level'));
         $this->assertSame(75.0, data_get($payload, 'report.dimensions.visual_spatial_insight.percent_correct'));
@@ -117,6 +120,8 @@ final class IqReportBuilderTest extends TestCase
         $this->assertSame(109.0, data_get($payload, 'report.summary.iq_estimate'));
         $this->assertSame(72.57, data_get($payload, 'report.summary.percentile'));
         $this->assertSame([104.5, 113.5], data_get($payload, 'report.summary.confidence_interval'));
+        $this->assertSame('iq_estimate', data_get($payload, 'report.summary.score_claim_level'));
+        $this->assertTrue((bool) data_get($payload, 'report.summary.claim_policy.claim_eligible'));
 
         $lockedResult = new Result([
             'scale_code' => 'IQ_INTELLIGENCE_QUOTIENT',
@@ -131,6 +136,9 @@ final class IqReportBuilderTest extends TestCase
         $this->assertNull(data_get($lockedPayload, 'report.summary.iq_estimate'));
         $this->assertNull(data_get($lockedPayload, 'report.summary.percentile'));
         $this->assertNull(data_get($lockedPayload, 'report.summary.confidence_interval'));
+        $this->assertSame('raw_score_only', data_get($lockedPayload, 'report.summary.score_claim_level'));
+        $this->assertSame('raw_score_only', data_get($lockedPayload, 'report.scoring.score_claim_level'));
+        $this->assertFalse((bool) data_get($lockedPayload, 'report.summary.claim_policy.claim_eligible'));
     }
 
     public function test_builder_keeps_blocked_unscored_legacy_demo_report_explicit(): void
@@ -198,9 +206,15 @@ final class IqReportBuilderTest extends TestCase
                 'iq_estimate' => 109.0,
                 'percentile' => 72.57,
                 'confidence_interval' => [104.5, 113.5],
+                'norm_table_version' => $claimEligible ? 'iq_norm_prod_v1' : null,
+                'score_claim_level' => $claimEligible ? 'iq_estimate' : 'raw_score_only',
+                'claim_warnings' => $claimEligible ? [] : ['license_verification_required'],
                 'claim_policy' => [
                     'claim_eligible' => $claimEligible,
+                    'score_claim_level' => $claimEligible ? 'iq_estimate' : 'raw_score_only',
                     'reason_code' => $claimEligible ? null : 'license_verification_required',
+                    'claim_warnings' => $claimEligible ? [] : ['license_verification_required'],
+                    'iq_estimate_allowed' => $claimEligible,
                     'source' => 'iq_norm_authority',
                 ],
             ],

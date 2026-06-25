@@ -229,10 +229,24 @@ final class IqOwnerOriginal30SessionDeliveryTest extends TestCase
                     'norms' => [
                         'iq_estimate' => null,
                         'percentile' => null,
+                        'confidence_interval' => null,
+                        'norm_table_version' => null,
+                        'score_claim_level' => 'raw_score_only',
+                        'claim_warnings' => ['no_norm_table'],
+                        'claim_policy' => [
+                            'claim_eligible' => false,
+                            'score_claim_level' => 'raw_score_only',
+                        ],
                     ],
                 ],
             ],
         ]);
+        $this->assertSame('raw_score_only', $response->json('result.normed_json.score_claim_level'));
+        $this->assertContains('no_norm_table', $response->json('result.normed_json.claim_warnings'));
+        $this->assertFalse((bool) $response->json('result.normed_json.claim_policy.claim_eligible'));
+        $this->assertSame('raw_score_only', $response->json('result.normed_json.claim_policy.score_claim_level'));
+        $this->assertFalse((bool) $response->json('result.normed_json.norms.claim_policy.claim_eligible'));
+        $this->assertContains('no_norm_table', $response->json('result.normed_json.norms.claim_warnings'));
         $this->assertSame('iq_owner_original_30_runtime_scoring_v1', $response->json('meta.scoring_spec_version'));
         $this->assertCount(3, $response->json('result.normed_json.dimension_scores'));
         $this->assertSame(30, array_sum(array_map(
