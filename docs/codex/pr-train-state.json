@@ -61640,7 +61640,7 @@
     "repo": "fap-api",
     "branch": "codex/iq-owner-30-norm-claim-policy-02a",
     "base": "main",
-    "status": "local_validated",
+    "status": "github_checks_pending",
     "train_scope": "iq_owner_original_30_launch",
     "title": "IQ-OWNER-30-NORM-CLAIM-POLICY-02A: Bind owner IQ 30 raw-score-only claim policy",
     "depends_on": [
@@ -62175,8 +62175,8 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "60b652737a42554c7f11b809272e784cb822ad29",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2427",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -62407,6 +62407,11 @@
         "at": "2026-06-25T20:35:00+08:00",
         "status": "local_validated",
         "note": "Implemented read-only Gaokao v5 CMS draft gate adapter. Local scoped checks passed with command registration, focused feature test, existing importer regression, scoped Pint, generated contract JSON parse, train YAML/JSON parse, and diff checks. No write or runtime mutation path added."
+      },
+      {
+        "at": "2026-06-25T20:40:00+08:00",
+        "status": "github_checks_pending",
+        "note": "Opened PR #2427 at https://github.com/fermatmind/fap-api/pull/2427 from commit 60b652737a42554c7f11b809272e784cb822ad29. Waiting for GitHub checks; no staging wait, production deploy, CMS write, publish, search, sitemap, llms, schema, hreflang, URL Truth, or revalidation."
       }
     ]
   }
