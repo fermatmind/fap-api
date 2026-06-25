@@ -6,6 +6,10 @@ namespace App\Services\Eq;
 
 final class EqAgentRuntimeResponder
 {
+    public function __construct(
+        private EqAgentProviderManager $providerManager,
+    ) {}
+
     /**
      * @param  array<string,mixed>  $context
      * @return array<string,mixed>
@@ -28,7 +32,7 @@ final class EqAgentRuntimeResponder
         $boundaryIds = array_values(array_unique(array_merge($intentClaimIds, $detectedClaimIds)));
         $sourceAssetIds = $this->sourceAssetIds($resolvedAssets);
 
-        return [
+        $payload = [
             'schema' => 'eq.agent_runtime_response.v1',
             'ok' => true,
             'ready' => true,
@@ -75,6 +79,27 @@ final class EqAgentRuntimeResponder
                 'confidence_label' => (string) data_get($reportContext, 'quality.confidence_label', ''),
             ],
         ];
+
+        $providerResponse = $this->providerManager->tryGenerate(new EqAgentProviderRequest(
+            $context,
+            $payload,
+            $messageText,
+            $intent,
+            $resolvedLocale,
+        ));
+
+        if ($providerResponse !== null && $this->providerResponseIsSafe($providerResponse, $agentKnowledge, $sourceAssetIds, $boundaryIds)) {
+            $payload['mode'] = 'llm_provider_read_only';
+            $payload['assistant_response'] = $this->safeProviderAssistantResponse($providerResponse, $payload['assistant_response'], $sourceAssetIds, $boundaryIds);
+            $payload['safety']['provider_response_validated'] = true;
+            $payload['provider'] = [
+                'name' => 'openai',
+                'fallback_used' => false,
+                'response_id' => (string) ($providerResponse->metadata['response_id'] ?? ''),
+            ];
+        }
+
+        return $payload;
     }
 
     /**
@@ -298,6 +323,77 @@ final class EqAgentRuntimeResponder
             && $guardrails['can_create_paid_unlock_language'] === false
             && $guardrails['can_use_paid_unlock_language'] === false
             && $guardrails['can_expose_raw_technical_tags'] === false;
+    }
+
+    /**
+     * @param  array<string,mixed>  $agentKnowledge
+     * @param  list<string>  $allowedSourceAssetIds
+     * @param  list<string>  $boundaryIds
+     */
+    private function providerResponseIsSafe(
+        EqAgentProviderResponse $response,
+        array $agentKnowledge,
+        array $allowedSourceAssetIds,
+        array $boundaryIds
+    ): bool {
+        if (trim($response->text) === '') {
+            return false;
+        }
+
+        $combinedText = implode("\n", array_merge(
+            [$response->text, $response->followUpQuestion],
+            $response->summaryPoints
+        ));
+
+        if ($this->detectForbiddenClaims($combinedText, $agentKnowledge) !== []) {
+            return false;
+        }
+
+        foreach (['SKU_EQ_60_FULL_299', 'EQ_60_FULL', 'paywall', 'premium', 'unlock', '购买完整报告', '解锁报告', 'profile:', 'quality_level:', 'focus:', 'bucket:', '/take'] as $fragment) {
+            if (str_contains(mb_strtolower($combinedText), mb_strtolower($fragment))) {
+                return false;
+            }
+        }
+
+        if (array_values(array_intersect($response->sourceAssetIds, $allowedSourceAssetIds)) === []) {
+            return false;
+        }
+
+        foreach ($response->boundaryClaimIds as $claimId) {
+            if (! in_array($claimId, $boundaryIds, true)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  array<string,mixed>  $fallback
+     * @param  list<string>  $allowedSourceAssetIds
+     * @param  list<string>  $boundaryIds
+     * @return array<string,mixed>
+     */
+    private function safeProviderAssistantResponse(
+        EqAgentProviderResponse $response,
+        array $fallback,
+        array $allowedSourceAssetIds,
+        array $boundaryIds
+    ): array {
+        $sourceAssetIds = array_values(array_intersect($response->sourceAssetIds, $allowedSourceAssetIds));
+        $providerBoundaryIds = array_values(array_intersect($response->boundaryClaimIds, $boundaryIds));
+
+        return [
+            'role' => 'assistant',
+            'text' => $response->text,
+            'summary_points' => array_slice($response->summaryPoints, 0, 4),
+            'follow_up_question' => $response->followUpQuestion,
+            'source_asset_ids' => $sourceAssetIds !== [] ? $sourceAssetIds : (array) ($fallback['source_asset_ids'] ?? []),
+            'boundary_claim_ids' => array_values(array_unique(array_merge(
+                (array) ($fallback['boundary_claim_ids'] ?? []),
+                $providerBoundaryIds
+            ))),
+        ];
     }
 
     /**
