@@ -3,8 +3,8 @@
     "scale_code": "IQ_INTELLIGENCE_QUOTIENT",
     "bank_id": "IQ_OWNER_ORIGINAL_30",
     "name": "FermatMind IQ Owner Original 30",
-    "status": "owner_original_private_scoring_ready_runtime_unbound",
-    "runtime_bound": false,
+    "status": "owner_original_runtime_scoring_bound",
+    "runtime_bound": true,
     "locale": "zh-CN",
     "market": "CN_MAINLAND",
     "item_count": 30,
@@ -50,14 +50,13 @@
         "asset_integrity_gate",
         "ownership_gate",
         "answer_key_gate",
-        "scoring_gate",
+        "scoring_runtime_binding_gate",
         "frontend_renderer_gate",
         "runtime_switch_gate"
     ],
     "deferred_prs": [
-        "IQ-OWNER-30-BACKEND-SCORING-02",
         "IQ-OWNER-30-FE-IMAGE-RENDERER-03",
         "IQ-OWNER-30-FE-FORMCODE-04",
-        "IQ-SESSION-QUESTION-DELIVERY-05"
+        "IQ-SESSION-QUESTION-DELIVERY-05B"
     ]
 }

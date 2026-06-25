@@ -4,6 +4,7 @@ namespace App\Services\Assessment;
 
 use App\Services\Assessment\Drivers\DriverInterface;
 use App\Services\Content\ContentPacksIndex;
+use App\Services\Iq\IqOwnerOriginal30BankService;
 use App\Services\Scale\ScaleRegistry;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
@@ -137,10 +138,14 @@ class AssessmentEngine
         if (! is_array($scoringSpec)) {
             return $this->error('SCORING_SPEC_NOT_FOUND', 'scoring_spec.json not found or invalid.');
         }
+        $ownerOriginalIqScoringSpec = $this->ownerOriginalIqScoringSpecIfNeeded($scaleCode, $ctx);
+        if ($ownerOriginalIqScoringSpec !== null) {
+            $scoringSpec = $ownerOriginalIqScoringSpec;
+        }
 
         $scoringSpecVersion = (string) ($scoringSpec['version'] ?? ($scoringSpec['scoring_spec_version'] ?? ''));
         $selectedSpecVersion = trim((string) ($modelSelection['scoring_spec_version'] ?? ''));
-        if ($selectedSpecVersion !== '') {
+        if ($selectedSpecVersion !== '' && $ownerOriginalIqScoringSpec === null) {
             $scoringSpecVersion = $selectedSpecVersion;
         }
         $contentPackageVersion = (string) ($pack['content_package_version'] ?? '');
@@ -330,6 +335,28 @@ class AssessmentEngine
         $decoded = json_decode($raw, true);
 
         return is_array($decoded) ? $decoded : null;
+    }
+
+    private function ownerOriginalIqScoringSpecIfNeeded(string $scaleCode, array $ctx): ?array
+    {
+        if (! in_array($scaleCode, [IqOwnerOriginal30BankService::SCALE_CODE, IqOwnerOriginal30BankService::LEGACY_SCALE_CODE], true)) {
+            return null;
+        }
+
+        $formCodeValue = $ctx['form_code'] ?? null;
+        $bankIdValue = $ctx['bank_id'] ?? null;
+        $formCode = is_string($formCodeValue) || is_numeric($formCodeValue)
+            ? (string) $formCodeValue
+            : null;
+        $bankId = is_string($bankIdValue) || is_numeric($bankIdValue)
+            ? (string) $bankIdValue
+            : null;
+        $service = app(IqOwnerOriginal30BankService::class);
+        if (! $service->isOwnerOriginalRequest($formCode, $bankId)) {
+            return null;
+        }
+
+        return $service->runtimeScoringSpec();
     }
 
     private function resolveDriver(string $driverType): ?DriverInterface

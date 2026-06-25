@@ -396,8 +396,8 @@ function iqOwner30VerifyCommittedArtifacts(): void
     if (($manifest['bank_id'] ?? null) !== iqOwner30BankId() || ($itemsPayload['bank_id'] ?? null) !== iqOwner30BankId()) {
         throw new RuntimeException('Bank id mismatch');
     }
-    if (($manifest['runtime_bound'] ?? true) !== false) {
-        throw new RuntimeException('Owner bank must remain runtime-unbound in PR1');
+    if (($manifest['runtime_bound'] ?? false) !== true) {
+        throw new RuntimeException('Owner bank must be runtime-bound after scoring runtime bind');
     }
     if (($manifest['public_payload_policy']['may_emit_answer_key'] ?? true) !== false) {
         throw new RuntimeException('Manifest must not allow public answer key emission');
@@ -473,8 +473,11 @@ function iqOwner30VerifyPrivateScoringArtifacts(): void
     if (($answerKey['storage_policy'] ?? '') !== 'backend_only_never_emit_to_public_api') {
         throw new RuntimeException('Answer key storage policy must be backend-only');
     }
-    if (($scoring['runtime_binding']['enabled'] ?? true) !== false) {
-        throw new RuntimeException('Scoring spec must remain runtime-unbound in PR2');
+    if (($scoring['runtime_binding']['enabled'] ?? false) !== true) {
+        throw new RuntimeException('Scoring spec must be runtime-bound');
+    }
+    if (($scoring['runtime_binding']['mode'] ?? '') !== 'backend_private_answer_key') {
+        throw new RuntimeException('Scoring runtime binding must use backend private answer key mode');
     }
     if (($scoring['norm_policy']['iq_claims_enabled'] ?? true) !== false) {
         throw new RuntimeException('IQ claims must remain disabled before norm authority');

@@ -2983,6 +2983,71 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ));
     }
 
+    public function test_runtime_freeze_classifier_ignores_iq_owner_original30_runtime_scoring_bind(): void
+    {
+        $changed = [
+            'backend/app/Services/Assessment/AssessmentEngine.php',
+            'backend/app/Services/Attempts/AttemptSubmitCanonicalizeService.php',
+            'backend/app/Services/Iq/IqOwnerOriginal30BankService.php',
+        ];
+        $assessmentEngineChangedLines = [
+            '+use App\\Services\\Iq\\IqOwnerOriginal30BankService;',
+            '+        $ownerOriginalIqScoringSpec = $this->ownerOriginalIqScoringSpecIfNeeded($scaleCode, $ctx);',
+            '+        if ($ownerOriginalIqScoringSpec !== null) {',
+            '+            $scoringSpec = $ownerOriginalIqScoringSpec;',
+            '+        }',
+            "-        if (\$selectedSpecVersion !== '') {",
+            "+        if (\$selectedSpecVersion !== '' && \$ownerOriginalIqScoringSpec === null) {",
+            '+    private function ownerOriginalIqScoringSpecIfNeeded(string $scaleCode, array $ctx): ?array',
+            '+    {',
+            '+        if (! in_array($scaleCode, [IqOwnerOriginal30BankService::SCALE_CODE, IqOwnerOriginal30BankService::LEGACY_SCALE_CODE], true)) {',
+            '+            return null;',
+            '+        }',
+            '+',
+            "+        \$formCodeValue = \$ctx['form_code'] ?? null;",
+            "+        \$bankIdValue = \$ctx['bank_id'] ?? null;",
+            '+        $formCode = is_string($formCodeValue) || is_numeric($formCodeValue)',
+            '+            ? (string) $formCodeValue',
+            '+            : null;',
+            '+        $bankId = is_string($bankIdValue) || is_numeric($bankIdValue)',
+            '+            ? (string) $bankIdValue',
+            '+            : null;',
+            '+        $service = app(IqOwnerOriginal30BankService::class);',
+            '+        if (! $service->isOwnerOriginalRequest($formCode, $bankId)) {',
+            '+            return null;',
+            '+        }',
+            '+',
+            '+        return $service->runtimeScoringSpec();',
+            '+    }',
+            '+',
+        ];
+        $attemptSubmitCanonicalizeChangedLines = [
+            "+        \$formCode = trim((string) (\$attemptMeta['form_code'] ?? ''));",
+            "+        \$bankId = trim((string) (\$attemptMeta['bank_id'] ?? ''));",
+            "+            'form_code' => \$formCode,",
+            "+            'bank_id' => \$bankId,",
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges(
+            $changed,
+            '',
+            '',
+            assessmentEngineChangedLines: $assessmentEngineChangedLines,
+            attemptSubmitCanonicalizeChangedLines: $attemptSubmitCanonicalizeChangedLines,
+        ));
+        $this->assertSame(
+            ['backend/app/Services/Assessment/AssessmentEngine.php'],
+            $this->mbtiImpactingRuntimeChanges(
+                ['backend/app/Services/Assessment/AssessmentEngine.php'],
+                '',
+                '',
+                assessmentEngineChangedLines: [
+                    '+        $driverType = "big_five";',
+                ],
+            ),
+        );
+    }
+
     public function test_runtime_freeze_classifier_ignores_attempt_submission_reliability_hardening(): void
     {
         $changed = [
@@ -4432,10 +4497,12 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         ?array $articleControllerChangedLines = null,
         ?array $attributionControllerChangedLines = null,
         ?array $attemptSubmitServiceChangedLines = null,
+        ?array $attemptSubmitCanonicalizeChangedLines = null,
         ?array $webRouteChangedLines = null,
         ?array $resolveOrgContextChangedLines = null,
         ?array $contentPacksIndexChangedLines = null,
         ?array $bootstrapAppChangedLines = null,
+        ?array $assessmentEngineChangedLines = null,
     ): array {
         $impacting = [];
 
@@ -5399,6 +5466,32 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isIqOwnerOriginal30SessionDeliveryBackendFile($file)) {
+                continue;
+            }
+
+            if (
+                $file === 'backend/app/Services/Assessment/AssessmentEngine.php'
+                && $this->assessmentEngineDiffIsIqOwnerOriginal30RuntimeScoringOnly(
+                    $assessmentEngineChangedLines ?? (
+                        $repoRoot !== '' && $baseRef !== ''
+                            ? $this->changedLinesForFile($repoRoot, $baseRef, $file)
+                            : []
+                    )
+                )
+            ) {
+                continue;
+            }
+
+            if (
+                $file === 'backend/app/Services/Attempts/AttemptSubmitCanonicalizeService.php'
+                && $this->attemptSubmitCanonicalizeDiffIsIqOwnerOriginal30RuntimeScoringOnly(
+                    $attemptSubmitCanonicalizeChangedLines ?? (
+                        $repoRoot !== '' && $baseRef !== ''
+                            ? $this->changedLinesForFile($repoRoot, $baseRef, $file)
+                            : []
+                    )
+                )
+            ) {
                 continue;
             }
 
@@ -6891,6 +6984,57 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isIqResultSecrecyRedactionFile(string $file): bool
     {
         return $file === 'backend/app/Services/Iq/IqResultPayloadRedactor.php';
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function assessmentEngineDiffIsIqOwnerOriginal30RuntimeScoringOnly(array $changedLines): bool
+    {
+        return $changedLines === [
+            '+use App\\Services\\Iq\\IqOwnerOriginal30BankService;',
+            '+        $ownerOriginalIqScoringSpec = $this->ownerOriginalIqScoringSpecIfNeeded($scaleCode, $ctx);',
+            '+        if ($ownerOriginalIqScoringSpec !== null) {',
+            '+            $scoringSpec = $ownerOriginalIqScoringSpec;',
+            '+        }',
+            "-        if (\$selectedSpecVersion !== '') {",
+            "+        if (\$selectedSpecVersion !== '' && \$ownerOriginalIqScoringSpec === null) {",
+            '+    private function ownerOriginalIqScoringSpecIfNeeded(string $scaleCode, array $ctx): ?array',
+            '+    {',
+            '+        if (! in_array($scaleCode, [IqOwnerOriginal30BankService::SCALE_CODE, IqOwnerOriginal30BankService::LEGACY_SCALE_CODE], true)) {',
+            '+            return null;',
+            '+        }',
+            '+',
+            "+        \$formCodeValue = \$ctx['form_code'] ?? null;",
+            "+        \$bankIdValue = \$ctx['bank_id'] ?? null;",
+            '+        $formCode = is_string($formCodeValue) || is_numeric($formCodeValue)',
+            '+            ? (string) $formCodeValue',
+            '+            : null;',
+            '+        $bankId = is_string($bankIdValue) || is_numeric($bankIdValue)',
+            '+            ? (string) $bankIdValue',
+            '+            : null;',
+            '+        $service = app(IqOwnerOriginal30BankService::class);',
+            '+        if (! $service->isOwnerOriginalRequest($formCode, $bankId)) {',
+            '+            return null;',
+            '+        }',
+            '+',
+            '+        return $service->runtimeScoringSpec();',
+            '+    }',
+            '+',
+        ];
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function attemptSubmitCanonicalizeDiffIsIqOwnerOriginal30RuntimeScoringOnly(array $changedLines): bool
+    {
+        return $changedLines === [
+            "+        \$formCode = trim((string) (\$attemptMeta['form_code'] ?? ''));",
+            "+        \$bankId = trim((string) (\$attemptMeta['bank_id'] ?? ''));",
+            "+            'form_code' => \$formCode,",
+            "+            'bank_id' => \$bankId,",
+        ];
     }
 
     /**

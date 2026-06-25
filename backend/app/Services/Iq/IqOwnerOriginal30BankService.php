@@ -132,6 +132,75 @@ final class IqOwnerOriginal30BankService
         return count($this->items());
     }
 
+    /**
+     * @return array<string,mixed>
+     */
+    public function runtimeScoringSpec(): array
+    {
+        $scoringSpec = $this->readJson('scoring_spec.json');
+        $answerKeyDoc = $this->readJson('answer_key.json');
+        $answers = $answerKeyDoc['answers'] ?? null;
+        if (! is_array($answers)) {
+            throw new ApiProblemException(500, 'IQ_OWNER_ANSWER_KEY_INVALID', 'owner IQ answer key is invalid.');
+        }
+
+        $runtimeItems = [];
+        foreach ($this->items() as $item) {
+            $runtimeItems[] = $this->runtimeScoringItem($item, $answers);
+        }
+
+        if (count($runtimeItems) !== $this->questionCount()) {
+            throw new ApiProblemException(500, 'IQ_OWNER_ANSWER_KEY_INVALID', 'owner IQ runtime scoring item count is invalid.');
+        }
+
+        return [
+            'schema_version' => 'fm.iq.runtime_scoring_spec.v1',
+            'version' => 'iq_owner_original_30_runtime_scoring_v1',
+            'scoring_spec_version' => 'iq_owner_original_30_runtime_scoring_v1',
+            'scale_code' => self::SCALE_CODE,
+            'driver_type' => 'iq_test',
+            'engine_version' => 'owner_original_30_runtime_scoring_v1',
+            'scoring_engine_version' => 'iq_scoring_v2',
+            'scoring_mode' => 'scored',
+            'answer_key_version' => 'owner_original_30_answer_key_2026_06_23',
+            'norm_table_version' => 'unavailable',
+            'item_bank' => [
+                'bank_id' => self::BANK_ID,
+                'schema_version' => 'fm.iq.owner_image_bank.items.v1',
+                'status' => 'owner_original_runtime_scoring_bound',
+                'production_ready' => false,
+                'canonical_scale_code' => self::SCALE_CODE,
+                'item_count' => count($runtimeItems),
+                'option_codes' => ['A', 'B', 'C', 'D', 'E', 'F'],
+            ],
+            'quality_rules' => [
+                'speeding_seconds_lt' => 30,
+                'straightlining_run_len_gte' => 8,
+                'abnormal_quality_policy' => 'review_with_caution',
+            ],
+            'raw_score' => is_array($scoringSpec['raw_score'] ?? null) ? $scoringSpec['raw_score'] : [
+                'min' => 0,
+                'max' => count($runtimeItems),
+                'correct_item_value' => 1,
+                'incorrect_item_value' => 0,
+            ],
+            'dimension_counts' => is_array($scoringSpec['dimension_counts'] ?? null) ? $scoringSpec['dimension_counts'] : [],
+            'norm_policy' => is_array($scoringSpec['norm_policy'] ?? null) ? $scoringSpec['norm_policy'] : [],
+            'public_payload_policy' => [
+                'may_emit_answer_key' => false,
+                'may_emit_solution_rule' => false,
+                'may_emit_scoring_key' => false,
+            ],
+            'runtime_binding' => [
+                'enabled' => true,
+                'bound_by_pr' => 'IQ-OWNER-30-SCORING-RUNTIME-BIND-01',
+                'mode' => 'backend_private_answer_key',
+            ],
+            'items' => $runtimeItems,
+            'schema' => 'fap.report.rules.v1',
+        ];
+    }
+
     public function validateSubmit(Attempt $attempt, SubmitAttemptDTO $dto): void
     {
         if (! $this->isOwnerOriginalAttempt($attempt)) {
@@ -219,6 +288,77 @@ final class IqOwnerOriginal30BankService
         }
 
         return $map;
+    }
+
+    /**
+     * @param  array<string,mixed>  $item
+     * @param  array<string,mixed>  $answers
+     * @return array<string,mixed>
+     */
+    private function runtimeScoringItem(array $item, array $answers): array
+    {
+        $itemId = strtoupper(trim((string) ($item['item_id'] ?? '')));
+        $questionId = strtoupper(trim((string) ($item['question_id'] ?? '')));
+        $answer = is_array($answers[$itemId] ?? null) ? $answers[$itemId] : null;
+
+        if ($itemId === '' || $questionId === '' || ! is_array($answer)) {
+            throw new ApiProblemException(500, 'IQ_OWNER_ANSWER_KEY_INVALID', 'owner IQ answer key is missing an item.');
+        }
+
+        $answerQuestionId = strtoupper(trim((string) ($answer['question_id'] ?? '')));
+        $correctAnswer = strtoupper(trim((string) ($answer['correct_answer'] ?? '')));
+        $dimension = strtoupper(trim((string) ($answer['dimension'] ?? '')));
+        if (
+            $answerQuestionId !== $questionId
+            || preg_match('/^[A-F]$/', $correctAnswer) !== 1
+            || ! in_array($dimension, ['VSPR', 'VSI', 'NPR'], true)
+        ) {
+            throw new ApiProblemException(500, 'IQ_OWNER_ANSWER_KEY_INVALID', 'owner IQ answer key has invalid item data.');
+        }
+
+        return [
+            'item_id' => $itemId,
+            'question_id' => $questionId,
+            'dimension' => $dimension,
+            'correct_answer' => $correctAnswer,
+            'raw_points' => 1.0,
+            'item_family' => 'owner_original_30_visual_reasoning',
+            'difficulty_level' => 'level_'.max(1, (int) ($answer['difficulty_level'] ?? 1)),
+            'solution_rule' => 'backend_private_owner_answer_key',
+            'distractor_logic' => 'owner_original_six_option_bank',
+            'assets' => $this->runtimeScoringAssets($item),
+            'asset_hashes' => is_array($item['asset_hashes'] ?? null) ? $item['asset_hashes'] : [],
+            'generator_metadata' => [
+                'source' => 'owner_original_backend_private_runtime_contract',
+                'bank_id' => self::BANK_ID,
+                'runtime_binding' => true,
+            ],
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $item
+     * @return array<string,mixed>
+     */
+    private function runtimeScoringAssets(array $item): array
+    {
+        $options = [];
+        foreach (($item['options'] ?? []) as $option) {
+            if (! is_array($option)) {
+                continue;
+            }
+
+            $code = strtoupper(trim((string) ($option['code'] ?? '')));
+            $image = trim((string) data_get($option, 'assets.image', ''));
+            if ($code !== '' && $image !== '') {
+                $options[$code] = $image;
+            }
+        }
+
+        return [
+            'stem' => trim((string) data_get($item, 'stem.assets.image', '')),
+            'options' => $options,
+        ];
     }
 
     /**

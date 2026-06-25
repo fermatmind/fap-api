@@ -1,7 +1,7 @@
 {
     "schema_version": "fm.iq.scoring_spec.v1",
     "bank_id": "IQ_OWNER_ORIGINAL_30",
-    "status": "owner_original_private_scoring_ready_runtime_unbound",
+    "status": "owner_original_runtime_scoring_bound",
     "raw_score": {
         "min": 0,
         "max": 30,
@@ -26,7 +26,8 @@
         "may_emit_scoring_key": false
     },
     "runtime_binding": {
-        "enabled": false,
-        "deferred_to_pr": "IQ-OWNER-30-FE-FORMCODE-04"
+        "enabled": true,
+        "bound_by_pr": "IQ-OWNER-30-SCORING-RUNTIME-BIND-01",
+        "mode": "backend_private_answer_key"
     }
 }
