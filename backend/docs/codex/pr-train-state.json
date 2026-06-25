@@ -7350,10 +7350,10 @@
     "SEO-OPS-ZH-ARTICLE-QUALITY-CONTROLLED-WRITER-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "branch": "codex/seo-ops-zh-article-quality-controlled-writer-01",
       "commit_sha": "",
-      "pr_url": "",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/2426",
       "checks": {
         "php_artisan_list_rg": "passed",
         "focused_phpunit": "passed",
@@ -7377,6 +7377,11 @@
           "at": "2026-06-25T00:00:00+08:00",
           "status": "local_checks_passed",
           "summary": "P2-B local command registration, focused writer/readback PHPUnit, BigFive freeze classifier, Pint, contract JSON, and diff checks passed."
+        },
+        {
+          "at": "2026-06-25T00:00:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR https://github.com/fermatmind/fap-api/pull/2426."
         }
       ],
       "updated_at": "2026-06-25T00:00:00+08:00"
