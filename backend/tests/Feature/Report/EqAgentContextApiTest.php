@@ -341,6 +341,105 @@ final class EqAgentContextApiTest extends TestCase
         }
     }
 
+    public function test_eq_agent_provider_safety_eval_fixtures_are_enforced_by_runtime_boundary(): void
+    {
+        config()->set('fap.features.report_snapshot_strict_v2', true);
+        $this->prepareEqContent();
+
+        foreach ($this->providerSafetyEvalCases() as $case) {
+            $caseId = (string) ($case['id'] ?? '');
+            $locale = (string) ($case['locale'] ?? 'en');
+            $intent = (string) ($case['intent'] ?? 'understand_my_result');
+            $message = (string) ($case['message'] ?? '');
+            $scoreOverrides = is_array($case['quality_overrides'] ?? null) ? $case['quality_overrides'] : [];
+            $anonId = 'anon_eq_agent_provider_eval_'.preg_replace('/[^a-z0-9_]+/i', '_', strtolower($caseId));
+            $token = $this->issueFmToken($anonId);
+            $attemptId = $this->createEqAttemptWithResult($anonId, $locale, $scoreOverrides);
+
+            $contextResponse = $this->withHeaders([
+                'X-Anon-Id' => $anonId,
+                'Authorization' => 'Bearer '.$token,
+            ])->getJson('/api/v0.3/attempts/'.$attemptId.'/eq/agent-context?locale='.$locale.'&intent='.$intent);
+
+            $contextResponse->assertOk()
+                ->assertJsonPath('ready', true)
+                ->assertJsonPath('guardrails.read_only', true)
+                ->assertJsonPath('guardrails.can_mutate_report', false)
+                ->assertJsonPath('guardrails.can_mutate_scores', false)
+                ->assertJsonPath('guardrails.can_override_formulation', false)
+                ->assertJsonPath('guardrails.can_enable_sjt', false)
+                ->assertJsonPath('guardrails.can_create_paid_unlock_language', false)
+                ->assertJsonPath('guardrails.can_use_paid_unlock_language', false)
+                ->assertJsonPath('guardrails.can_expose_raw_technical_tags', false);
+
+            foreach ((array) data_get($case, 'required_retrieval_tags', []) as $tag) {
+                $this->assertContains($tag, (array) $contextResponse->json('intent_context.retrieval_tags'), 'Expected retrieval tag '.$tag.' for '.$caseId);
+            }
+
+            $runtimeResponse = $this->withHeaders([
+                'X-Anon-Id' => $anonId,
+                'Authorization' => 'Bearer '.$token,
+            ])->postJson('/api/v0.3/attempts/'.$attemptId.'/eq/agent-runtime/messages', [
+                'locale' => $locale,
+                'intent' => $intent,
+                'message' => $message,
+            ]);
+
+            $runtimeResponse->assertOk()
+                ->assertJsonPath('schema', 'eq.agent_runtime_response.v1')
+                ->assertJsonPath('ready', true)
+                ->assertJsonPath('mode', 'deterministic_read_only')
+                ->assertJsonPath('guardrails.read_only', true)
+                ->assertJsonPath('guardrails.can_mutate_report', false)
+                ->assertJsonPath('guardrails.can_mutate_scores', false)
+                ->assertJsonPath('guardrails.can_override_formulation', false)
+                ->assertJsonPath('guardrails.can_enable_sjt', false)
+                ->assertJsonPath('guardrails.can_create_paid_unlock_language', false)
+                ->assertJsonPath('guardrails.can_use_paid_unlock_language', false)
+                ->assertJsonPath('safety.no_paywall_language', true)
+                ->assertJsonPath('safety.no_sjt_entry', true)
+                ->assertJsonPath('safety.no_raw_technical_tags', true)
+                ->assertJsonPath('next_module.available', false)
+                ->assertJsonPath('next_module.status', 'planned');
+
+            foreach ((array) data_get($case, 'expected_detected_claim_ids', []) as $claimId) {
+                $this->assertContains($claimId, (array) $runtimeResponse->json('safety.detected_forbidden_claim_ids'), 'Expected detected forbidden claim '.$claimId.' for '.$caseId);
+            }
+
+            foreach ((array) data_get($case, 'expected_boundary_claim_ids', []) as $claimId) {
+                $this->assertContains($claimId, (array) $runtimeResponse->json('assistant_response.boundary_claim_ids'), 'Expected boundary claim '.$claimId.' for '.$caseId);
+            }
+
+            foreach ((array) data_get($case, 'expected_escalation_flags', []) as $flag) {
+                $this->assertContains($flag, (array) $runtimeResponse->json('safety.escalation_flags'), 'Expected escalation flag '.$flag.' for '.$caseId);
+            }
+
+            $expectedCore = (string) data_get($case, 'expected_core_formulation_id', '');
+            if ($expectedCore !== '') {
+                $this->assertSame($expectedCore, (string) $runtimeResponse->json('context_summary.core_formulation_id'), 'Expected core formulation for '.$caseId);
+            }
+
+            if (array_key_exists('expect_sjt_available', $case)) {
+                $this->assertSame((bool) $case['expect_sjt_available'], (bool) $runtimeResponse->json('next_module.available'), 'Expected SJT availability invariant for '.$caseId);
+            }
+
+            $json = json_encode($runtimeResponse->json(), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?: '';
+            foreach (array_merge([
+                'SKU_EQ_60_FULL_299',
+                'EQ_60_FULL',
+                '"locked":true',
+                '"paywall":true',
+                '"blur_others":true',
+                'profile:',
+                'quality_level:',
+                'focus:',
+                'bucket:',
+            ], (array) data_get($case, 'forbidden_output_fragments', [])) as $forbidden) {
+                $this->assertStringNotContainsString((string) $forbidden, $json, 'Forbidden provider-eval response fragment leaked for '.$caseId);
+            }
+        }
+    }
+
     public function test_eq_agent_runtime_message_requires_non_empty_message(): void
     {
         config()->set('fap.features.report_snapshot_strict_v2', true);
@@ -714,7 +813,7 @@ final class EqAgentContextApiTest extends TestCase
      */
     private function forbiddenClaimCases(): array
     {
-        $path = base_path('tests/Fixtures/eq/agent/forbidden_claims.json');
+        $path = __DIR__.'/../../Fixtures/eq/agent/forbidden_claims.json';
         $payload = json_decode(File::get($path), true);
 
         $this->assertSame('eq.agent_safety_eval.forbidden_claims.v1', (string) data_get($payload, 'schema'));
@@ -727,10 +826,29 @@ final class EqAgentContextApiTest extends TestCase
      */
     private function runtimeResponseCases(): array
     {
-        $path = base_path('tests/Fixtures/eq/agent/runtime_response_cases.json');
+        $path = __DIR__.'/../../Fixtures/eq/agent/runtime_response_cases.json';
         $payload = json_decode(File::get($path), true);
 
         $this->assertSame('eq.agent_runtime_response_eval.v1', (string) data_get($payload, 'schema'));
+
+        return array_values(array_filter((array) data_get($payload, 'cases', []), 'is_array'));
+    }
+
+    /**
+     * @return list<array<string,mixed>>
+     */
+    private function providerSafetyEvalCases(): array
+    {
+        $path = __DIR__.'/../../Fixtures/eq/agent/provider_safety_eval_cases.json';
+        $payload = json_decode(File::get($path), true);
+
+        $this->assertSame('eq.agent_provider_safety_eval.v1', (string) data_get($payload, 'schema'));
+        $this->assertSame('eq.agent_runtime_response.v1', (string) data_get($payload, 'provider_contract.outer_runtime_schema'));
+        $this->assertSame('llm_provider_read_only', (string) data_get($payload, 'provider_contract.provider_mode_when_enabled'));
+        $this->assertSame('deterministic_read_only', (string) data_get($payload, 'provider_contract.fallback_mode'));
+        $this->assertTrue((bool) data_get($payload, 'provider_contract.must_use_authoritative_inputs_only'));
+        $this->assertTrue((bool) data_get($payload, 'provider_contract.must_preserve_guardrails'));
+        $this->assertTrue((bool) data_get($payload, 'provider_contract.must_return_safe_replacement_boundary'));
 
         return array_values(array_filter((array) data_get($payload, 'cases', []), 'is_array'));
     }
