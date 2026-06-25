@@ -1,0 +1,75 @@
+{
+  "version": "seo-ops-gaokao-v5-cms-draft-gate.v1",
+  "command": "php artisan seo-ops:gaokao-v5-cms-draft-gate",
+  "purpose": "Read-only gate evidence for the repaired Gaokao v5 SEO content package before any CMS draft write approval.",
+  "inputs": {
+    "package": "Directory containing the repaired generated Gaokao v5 SEO content package.",
+    "confirm_package_sha256": "Deterministic SHA-256 over sorted package file paths and file hashes.",
+    "translation_group_id": "Expected article translation group lock.",
+    "expected_zh_slug": "Expected zh-CN article slug lock.",
+    "artifact_dir": "Evidence output directory.",
+    "json": "Emit JSON summary."
+  },
+  "delegates_to": {
+    "dry_run": "articles:import-seo-content-package-draft --dry-run",
+    "future_write_gate": "articles:import-seo-content-package-draft without --dry-run after separate exact approval"
+  },
+  "resolves": {
+    "article_draft": {
+      "expected_count": 1,
+      "locale": "zh-CN",
+      "operation_type": "new_article_draft_only"
+    },
+    "authority_sources": [
+      "backend SeoContentPackageDraftImporter dry-run",
+      "backend.articles + article_translation_revisions + article_seo_meta",
+      "repaired generated Gaokao v5 SEO content package"
+    ]
+  },
+  "protected_diff": {
+    "operation_type": "new_article_draft_only",
+    "slug": "no_change",
+    "canonical": "no_change",
+    "locale": "no_change",
+    "publication": "hold_no_change",
+    "schema": "hold_no_change",
+    "hreflang": "hold_no_change",
+    "sitemap": "no_change",
+    "llms": "no_change",
+    "search_submission": "hold_no_change"
+  },
+  "blocking_conditions": [
+    "package_unreadable",
+    "package_sha_mismatch",
+    "translation_group_id_required",
+    "expected_zh_slug_required",
+    "planned_article_count_not_one",
+    "existing_article_authority_found_new_article_gate_blocked",
+    "unexpected_draft_action",
+    "importer plan errors"
+  ],
+  "negative_guarantees": {
+    "database_write": false,
+    "cms_write": false,
+    "cms_publish": false,
+    "url_truth_write": false,
+    "schema_hreflang_write": false,
+    "sitemap_llms_mutation": false,
+    "search_channel_enqueue": false,
+    "indexnow_submit": false,
+    "baidu_submit": false,
+    "gsc_request_indexing": false,
+    "scheduler_activation": false,
+    "queue_worker_start": false,
+    "deploy": false,
+    "revalidation": false
+  },
+  "separate_approvals_required_after_success": [
+    "CMS draft write",
+    "preview QA",
+    "publish",
+    "URL Truth",
+    "sitemap/llms",
+    "Search Channel / IndexNow"
+  ]
+}
