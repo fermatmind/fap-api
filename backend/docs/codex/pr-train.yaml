@@ -19,10 +19,13 @@ prs:
       SHA, resolve Article / ArticleTranslation authority, emit protected
       diff and planned operation evidence, and preserve no DB/CMS/publish,
       URL Truth, sitemap, llms, schema, hreflang, Search Channel, IndexNow,
-      Baidu, GSC, revalidation, or deploy side effects.
+      Baidu, GSC, revalidation, or deploy side effects. Include the narrow
+      BigFive runtime-freeze classifier allowlist required for this read-only
+      Artisan adapter and Kernel registration.
     checks:
       - "php artisan list | rg seo-ops:zh-article-quality-repair-dry-run"
       - "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoOpsZhArticleQualityRepairDryRunCommandTest"
+      - "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|seo_ops_zh_article_quality'"
       - "vendor/bin/pint --test app/Console/Commands/SeoOpsZhArticleQualityRepairDryRunCommand.php tests/Feature/SeoIntel/SeoOpsZhArticleQualityRepairDryRunCommandTest.php"
       - "python3 -m json.tool docs/seo/generated/seo-ops-zh-article-quality-repair-dry-run.v1.json >/dev/null"
       - "git diff --check"

@@ -7298,7 +7298,7 @@
     "SEO-OPS-ZH-ARTICLE-QUALITY-DRY-RUN-ADAPTER-01": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open",
+      "status": "ci_fix_pushed",
       "branch": "codex/seo-ops-zh-article-quality-dry-run-adapter-01",
       "commit_sha": "pending_after_push",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/2425",
@@ -7307,7 +7307,8 @@
         "focused_phpunit": "passed",
         "pint_touched_files": "passed",
         "contract_json_tool": "passed",
-        "git_diff_check": "passed"
+        "git_diff_check": "passed",
+        "bigfive_freeze_classifier_focused": "passed"
       },
       "failure_reason": null,
       "resume_policy": "manual_only",
@@ -7334,9 +7335,17 @@
           "at": "2026-06-25T00:00:00+08:00",
           "status": "pr_open",
           "summary": "Opened PR https://github.com/fermatmind/fap-api/pull/2425."
+        },
+        {
+          "at": "2026-06-25T00:00:00+08:00",
+          "status": "ci_fix_pushed",
+          "summary": "Added BigFive runtime freeze classifier allowlist/test for the read-only SEO Ops zh article quality dry-run adapter after verify-bigfive identified the new command and Kernel registration."
         }
       ],
-      "updated_at": "2026-06-25T00:00:00+08:00"
+      "updated_at": "2026-06-25T00:00:00+08:00",
+      "github_checks": {
+        "verify-bigfive": "failed_before_ci_fix_current_pr_scope"
+      }
     }
   },
   "career_display_surface": {
