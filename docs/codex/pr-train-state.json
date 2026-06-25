@@ -62518,7 +62518,7 @@
     "repo": "fap-api",
     "branch": "codex/personality-tdk-next-batch-approval-draft-gate-01",
     "base": "main",
-    "status": "in_progress",
+    "status": "pr_opened",
     "train_scope": "fermatmind_seo_ops_p2_p4_20260625",
     "title": "PERSONALITY-TDK-NEXT-BATCH-APPROVAL-DRAFT-GATE-01: Add personality TDK next-batch approval draft gate",
     "depends_on": [],
@@ -62555,12 +62555,12 @@
       },
       "github": {
         "status": "pending",
-        "evidence": null
+        "evidence": "Opened PR #2429 and waiting for GitHub checks."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "3e96f907d5e58280431378bc4046c38ff353fbbb",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2429",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -62574,6 +62574,11 @@
         "at": "2026-06-25T21:58:00+08:00",
         "status": "local_validated",
         "note": "Implemented read-only personality TDK next-batch approval/draft gate adapter. Local scoped checks passed; no production approval queue write, CMS draft write, promotion, publish, index/search, sitemap/llms, frontend metadata edit, deploy, or revalidation path was added."
+      },
+      {
+        "at": "2026-06-25T22:01:00+08:00",
+        "status": "github_checks_pending",
+        "note": "Opened PR #2429 at https://github.com/fermatmind/fap-api/pull/2429 from commit 3e96f907d5e58280431378bc4046c38ff353fbbb. Waiting for GitHub checks; no staging wait, production deploy, approval queue write, CMS draft write, promotion, publish, search, sitemap, llms, frontend metadata edit, or revalidation."
       }
     ]
   }
