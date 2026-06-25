@@ -61837,7 +61837,7 @@
     "repo": "fap-api",
     "branch": "codex/big5-commercial-field-backend-authority-fix-01",
     "base": "main",
-    "status": "local_validated",
+    "status": "github_checks_pending",
     "train_scope": "big5_commercial_field_backend_authority_fix",
     "title": "BIG5-COMMERCIAL-FIELD-BACKEND-AUTHORITY-FIX-01: Reconcile Big Five public commercial lookup state",
     "depends_on": [],
@@ -61871,12 +61871,12 @@
       },
       "github": {
         "status": "pending",
-        "evidence": null
+        "evidence": "Opened PR #2418 at https://github.com/fermatmind/fap-api/pull/2418 after local validation and scope validation passed."
       }
     },
     "failure_reason": null,
     "commit_sha": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2418",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -61890,6 +61890,11 @@
         "at": "2026-06-25T12:22:35+08:00",
         "status": "local_validated",
         "note": "Local checks and scope validation passed. Public Big Five lookup now projects free_only commercial state as FREE with report unlock SKU, upgrade SKU, upgrade SKU anchor, and offers suppressed, while the raw registry PAID/SKU authority remains unchanged."
+      },
+      {
+        "at": "2026-06-25T12:26:34+08:00",
+        "status": "github_checks_pending",
+        "note": "Opened PR #2418 at https://github.com/fermatmind/fap-api/pull/2418. Waiting for required GitHub checks; no staging deploy wait, production deploy, CMS write, search, sitemap, llms, schema, hreflang, canonical, noindex, payment, order, benefit, entitlement, or fap-web work included."
       }
     ]
   }
