@@ -62440,7 +62440,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-ops-gaokao-v5-propagation-gate-readiness-01",
     "base": "main",
-    "status": "pr_opened",
+    "status": "ready_to_merge",
     "train_scope": "fermatmind_seo_ops_p2_p4_20260625",
     "title": "SEO-OPS-GAOKAO-V5-PROPAGATION-GATE-READINESS-01: Add Gaokao v5 propagation gate readiness",
     "depends_on": [
@@ -62476,12 +62476,12 @@
         "evidence": "Changed files are limited to SeoOpsGaokaoV5PropagationGateReadinessCommand.php, Kernel registration, generated command contract doc, focused Feature test, BigFive freeze classifier allowlist for Gaokao v5 gate adapters, and authorized docs/codex train metadata. No production CMS write/import, publish, URL Truth, sitemap, llms, schema, hreflang, Search Channel, IndexNow, frontend runtime, deploy, or revalidation changes."
       },
       "github": {
-        "status": "pending",
-        "evidence": "Opened PR #2428 and waiting for GitHub checks."
+        "status": "pass",
+        "evidence": "GitHub checks passed for PR #2428 at head 2bf5c0440aaa9b6b613be5e4c022faf11d282ae4: hygiene, supply-chain, content-pack-build-validate, Semgrep, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 all passed. mergeStateStatus=CLEAN."
       }
     },
     "failure_reason": null,
-    "commit_sha": "c99c508db3c8b6d407df6f6d2f135fb488fda16a",
+    "commit_sha": "2bf5c0440aaa9b6b613be5e4c022faf11d282ae4",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2428",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -62501,6 +62501,11 @@
         "at": "2026-06-25T21:28:00+08:00",
         "status": "github_checks_pending",
         "note": "Opened PR #2428 at https://github.com/fermatmind/fap-api/pull/2428 from commit c99c508db3c8b6d407df6f6d2f135fb488fda16a. Waiting for GitHub checks; no staging wait, production deploy, CMS write/import, publish, URL Truth, search, sitemap, llms, schema, hreflang, or revalidation."
+      },
+      {
+        "at": "2026-06-25T21:36:00+08:00",
+        "status": "ready_to_merge",
+        "note": "All GitHub checks passed for PR #2428 at head 2bf5c0440aaa9b6b613be5e4c022faf11d282ae4 and mergeStateStatus was CLEAN. Recording ready_to_merge before squash merge per PR-train ledger policy."
       }
     ]
   }
