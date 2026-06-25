@@ -88,6 +88,17 @@ final class IqReportContractTest extends TestCase
                 'iq_estimate' => null,
                 'percentile' => null,
                 'confidence_interval' => null,
+                'norm_table_version' => null,
+                'score_claim_level' => 'raw_score_only',
+                'claim_warnings' => ['no_norm_table'],
+                'claim_policy' => [
+                    'claim_eligible' => false,
+                    'score_claim_level' => 'raw_score_only',
+                    'reason_code' => 'no_norm_table',
+                    'claim_warnings' => ['no_norm_table'],
+                    'iq_estimate_allowed' => false,
+                    'source' => 'iq_norm_authority',
+                ],
             ],
             'dimension_scores' => [
                 'VSI' => [
@@ -385,6 +396,11 @@ final class IqReportContractTest extends TestCase
         $this->assertNull(data_get($payload, 'report.summary.iq_estimate'));
         $this->assertNull(data_get($payload, 'report.summary.percentile'));
         $this->assertNull(data_get($payload, 'report.summary.confidence_interval'));
+        $this->assertNull(data_get($payload, 'report.summary.norm_table_version'));
+        $this->assertSame('raw_score_only', data_get($payload, 'report.summary.score_claim_level'));
+        $this->assertSame('raw_score_only', data_get($payload, 'report.scoring.score_claim_level'));
+        $this->assertContains('no_norm_table', data_get($payload, 'report.summary.claim_warnings'));
+        $this->assertFalse((bool) data_get($payload, 'report.summary.claim_policy.claim_eligible'));
         $this->assertNull(data_get($payload, 'report.answer_key'));
         $this->assertNull(data_get($payload, 'report.correct_answers'));
     }
