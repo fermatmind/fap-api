@@ -256,6 +256,65 @@ final class IqOwnerOriginal30SessionDeliveryTest extends TestCase
         $this->assertPayloadHasNoPrivateIqFields($response->json());
     }
 
+    #[Test]
+    public function owner_original_submit_emits_iq_claims_when_claim_eligible_norm_authority_exists(): void
+    {
+        (new ScaleRegistrySeeder)->run();
+        $this->insertClaimEligibleIqNormAuthority();
+
+        $anonId = 'anon_iq_owner_runtime_normed_score';
+        $token = $this->issueAnonToken($anonId);
+        $attempt = $this->createOwnerAttempt($anonId);
+
+        $response = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->postJson('/api/v0.3/attempts/submit?mode=sync_legacy', [
+            'attempt_id' => (string) $attempt->id,
+            'answers' => $this->perfectAnswers(),
+            'duration_ms' => 120000,
+        ]);
+
+        $response->assertStatus(200);
+        $response->assertJson([
+            'ok' => true,
+            'result' => [
+                'raw_score' => 30,
+                'final_score' => 30,
+                'normed_json' => [
+                    'scale_code' => 'IQ_INTELLIGENCE_QUOTIENT',
+                    'bank_id' => 'IQ_OWNER_ORIGINAL_30',
+                    'status' => 'scored',
+                    'raw_score' => 30,
+                    'norm_table_version' => 'iq_owner30_norm_fixture_v1',
+                    'score_claim_level' => 'iq_estimate',
+                    'claim_policy' => [
+                        'claim_eligible' => true,
+                        'score_claim_level' => 'iq_estimate',
+                        'iq_estimate_allowed' => true,
+                    ],
+                    'claim_warnings' => [],
+                    'norms' => [
+                        'status' => 'production_normed',
+                        'iq_estimate' => 145.0,
+                        'percentile' => 99.87,
+                        'confidence_interval' => [140.5, 149.5],
+                        'norm_table_version' => 'iq_owner30_norm_fixture_v1',
+                        'score_claim_level' => 'iq_estimate',
+                        'claim_warnings' => [],
+                        'claim_policy' => [
+                            'claim_eligible' => true,
+                            'score_claim_level' => 'iq_estimate',
+                            'iq_estimate_allowed' => true,
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+        $this->assertSame('iq_owner_original_30_runtime_scoring_v1', $response->json('meta.scoring_spec_version'));
+        $this->assertPayloadHasNoPrivateIqFields($response->json());
+    }
+
     private function issueAnonToken(string $anonId): string
     {
         $token = 'fm_'.(string) Str::uuid();
@@ -307,6 +366,34 @@ final class IqOwnerOriginal30SessionDeliveryTest extends TestCase
         $attempt->saveOrFail();
 
         return $attempt;
+    }
+
+    private function insertClaimEligibleIqNormAuthority(): void
+    {
+        DB::table('iq_norm_authorities')->insert([
+            'id' => (string) Str::uuid(),
+            'org_id' => 0,
+            'scale_code' => 'IQ_INTELLIGENCE_QUOTIENT',
+            'bank_id' => 'IQ_OWNER_ORIGINAL_30',
+            'norm_table_version' => 'iq_owner30_norm_fixture_v1',
+            'status' => 'production_normed',
+            'population_key' => 'general_adult_online',
+            'locale' => 'zh-CN',
+            'sample_size' => 1200,
+            'mean' => 15.0,
+            'standard_deviation' => 5.0,
+            'min_raw_score' => 0.0,
+            'max_raw_score' => 30.0,
+            'source_kind' => 'internal_calibration',
+            'source_ref' => 'iq-owner30-runtime-bind-test-fixture',
+            'license_verified' => true,
+            'locked' => true,
+            'effective_at' => now(),
+            'retired_at' => null,
+            'metadata' => null,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 
     /**
