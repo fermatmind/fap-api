@@ -6,13 +6,18 @@ namespace Tests\Unit\Services\Career;
 
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionExporter;
 use App\Domain\Career\Publish\CareerRuntimePublishProjectionLookup;
+use App\Models\Occupation;
+use App\Models\OccupationFamily;
 use App\Services\Career\PublicCareerAuthorityResponseCache;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
 use Tests\TestCase;
 
 final class CareerRuntimePublishProjectionLookupTest extends TestCase
 {
+    use RefreshDatabase;
+
     private string $projectionTimestamp = '99999999T999999Z';
 
     /**
@@ -77,6 +82,95 @@ final class CareerRuntimePublishProjectionLookupTest extends TestCase
         $this->assertFalse($lookup->robotsIndexable('software-developers'));
         $this->assertFalse($lookup->releaseGatePass('software-developers'));
         $this->assertFalse($lookup->familyHubLive('computer-and-information-technology'));
+    }
+
+    public function test_it_infers_family_hub_authority_from_published_child_projection_without_explicit_family_row(): void
+    {
+        $family = OccupationFamily::query()->create([
+            'canonical_slug' => 'computer-and-information-technology',
+            'title_en' => 'Computer and Information Technology',
+            'title_zh' => '计算机与信息技术',
+        ]);
+
+        Occupation::query()->create([
+            'family_id' => $family->id,
+            'canonical_slug' => 'data-scientists',
+            'entity_level' => 'market_child',
+            'truth_market' => 'US',
+            'display_market' => 'CN',
+            'crosswalk_mode' => 'direct_match',
+            'canonical_title_en' => 'Data Scientists',
+            'canonical_title_zh' => '数据科学家',
+            'search_h1_zh' => '数据科学家职业',
+            'structural_stability' => 0.84,
+            'task_prototype_signature' => ['analysis' => 0.9],
+            'market_semantics_gap' => 0.1,
+            'regulatory_divergence' => 0.1,
+            'toolchain_divergence' => 0.1,
+            'skill_gap_threshold' => 0.4,
+            'trust_inheritance_scope' => ['allow_task_truth' => true],
+        ]);
+
+        $this->writeProjection($this->projectionTimestamp, [
+            [
+                'slug' => 'data-scientists',
+                'locale' => 'en',
+                'public_resolution_type' => 'public_canonical_job',
+                'runtime_publish_state' => 'published',
+                'detail_route_enabled' => true,
+                'dataset_visible' => true,
+                'search_visible' => true,
+                'sitemap_live' => true,
+                'llms_live' => true,
+                'llms_full_live' => true,
+                'canonical_self' => true,
+                'robots_indexable' => true,
+                'release_gate_pass' => true,
+            ],
+        ]);
+
+        $lookup = app(CareerRuntimePublishProjectionLookup::class);
+
+        $this->assertSame(1, Occupation::query()->where('family_id', $family->id)->count());
+        $this->assertTrue($lookup->detailRouteEnabled('data-scientists'));
+        $this->assertTrue($lookup->familyHubLive('computer-and-information-technology'));
+    }
+
+    public function test_it_does_not_infer_family_hub_authority_without_published_children_or_for_broad_holds(): void
+    {
+        OccupationFamily::query()->create([
+            'canonical_slug' => 'empty-family',
+            'title_en' => 'Empty Family',
+            'title_zh' => '空家族',
+        ]);
+        OccupationFamily::query()->create([
+            'canonical_slug' => 'agricultural-workers-all-other',
+            'title_en' => 'Agricultural Workers, All Other',
+            'title_zh' => '其他农业工作者',
+        ]);
+
+        $this->writeProjection($this->projectionTimestamp, [
+            [
+                'slug' => 'data-scientists',
+                'locale' => 'en',
+                'public_resolution_type' => 'public_canonical_job',
+                'runtime_publish_state' => 'published',
+                'detail_route_enabled' => true,
+                'dataset_visible' => true,
+                'search_visible' => true,
+                'sitemap_live' => true,
+                'llms_live' => true,
+                'llms_full_live' => true,
+                'canonical_self' => true,
+                'robots_indexable' => true,
+                'release_gate_pass' => true,
+            ],
+        ]);
+
+        $lookup = app(CareerRuntimePublishProjectionLookup::class);
+
+        $this->assertFalse($lookup->familyHubLive('empty-family'));
+        $this->assertFalse($lookup->familyHubLive('agricultural-workers-all-other'));
     }
 
     public function test_it_uses_newest_valid_projection_artifact_instead_of_lexical_directory_order(): void
