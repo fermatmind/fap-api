@@ -378,13 +378,17 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         $changed = [
             'backend/app/Console/Commands/PersonalityAgentApprovalQueueCommand.php',
+            'backend/app/Console/Commands/PersonalityAgentApprovalQueueReviewCommand.php',
             'backend/app/Console/Kernel.php',
+            'backend/app/Services/Cms/PersonalityAgentApprovalQueueReadModel.php',
             'backend/app/Services/Cms/PersonalityAgentApprovalQueueWriter.php',
             'backend/database/migrations/2026_06_24_000100_create_personality_agent_approval_queue_tables.php',
         ];
         $kernelChangedLines = [
             '+use App\\Console\\Commands\\PersonalityAgentApprovalQueueCommand;',
+            '+use App\\Console\\Commands\\PersonalityAgentApprovalQueueReviewCommand;',
             '+        PersonalityAgentApprovalQueueCommand::class,',
+            '+        PersonalityAgentApprovalQueueReviewCommand::class,',
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
@@ -5928,6 +5932,8 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return in_array($file, [
             'backend/app/Console/Commands/PersonalityAgentApprovalQueueCommand.php',
+            'backend/app/Console/Commands/PersonalityAgentApprovalQueueReviewCommand.php',
+            'backend/app/Services/Cms/PersonalityAgentApprovalQueueReadModel.php',
             'backend/app/Services/Cms/PersonalityAgentApprovalQueueWriter.php',
             'backend/database/migrations/2026_06_24_000100_create_personality_agent_approval_queue_tables.php',
         ], true);
@@ -9772,7 +9778,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
 
         foreach ($changedLines as $line) {
             $normalized = ltrim($line, '+-');
-            if (preg_match('/\bPersonalityAgentApprovalQueueCommand\b/u', $normalized) !== 1) {
+            if (preg_match('/\bPersonalityAgentApprovalQueue(?:Review)?Command\b/u', $normalized) !== 1) {
                 return false;
             }
         }
