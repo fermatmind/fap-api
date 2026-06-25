@@ -62075,7 +62075,7 @@
     "repo": "fap-api",
     "branch": "codex/pr-eq-agent-runtime-v2-03-provider-abstraction",
     "base": "main",
-    "status": "pr_opened",
+    "status": "merged",
     "train_scope": "eq_agent_runtime_v2",
     "title": "PR-EQ-AGENT-RUNTIME-V2-03 EQ Agent provider abstraction and feature flag",
     "depends_on": [
@@ -62119,14 +62119,18 @@
       "ci_fix": {
         "status": "pass",
         "evidence": "Added BigFive runtime freeze exception for default-off EQ Agent provider abstraction files and verified focused freeze tests locally."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #2423 checks passed and mergeStateStatus was CLEAN before squash merge."
       }
     },
     "failure_reason": null,
-    "commit_sha": "9ca71110ef9b8b7fa0d06c159050cf6c0db9a260",
+    "commit_sha": "c0f0169ca1d61bed029198095c57772b5eb4bebf",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2423",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-25T10:37:49Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-25T17:48:04+08:00",
@@ -62151,6 +62155,12 @@
         "from": "pr_opened",
         "to": "pr_opened_ci_fix_pushed",
         "notes": "Fixed verify-bigfive failure by adding a scoped runtime freeze classifier exception for default-off EQ Agent provider abstraction files."
+      },
+      {
+        "at": "2026-06-25T19:20:00+08:00",
+        "from": "pr_opened",
+        "to": "merged",
+        "notes": "Reconciled after GitHub PR #2423 squash merge; origin/main contains c0f0169ca1d61bed029198095c57772b5eb4bebf and remote branch was deleted."
       }
     ]
   },
@@ -62158,7 +62168,7 @@
     "repo": "fap-api",
     "branch": "codex/pr-eq-agent-runtime-v2-04-staging-smoke-report",
     "base": "main",
-    "status": "pending_dependency",
+    "status": "ready_to_merge",
     "train_scope": "eq_agent_runtime_v2",
     "title": "PR-EQ-AGENT-RUNTIME-V2-04 EQ Agent staging LLM smoke report",
     "depends_on": [
@@ -62170,13 +62180,37 @@
         "evidence": "User explicitly requested the EQ Agent Runtime V2 four-PR plan and authorized adding the PRs to manifest/state before execution."
       },
       "dependency": {
-        "status": "pending",
-        "evidence": "Waiting for PR-EQ-AGENT-RUNTIME-V2-03 to merge."
+        "status": "pass",
+        "evidence": "PR-EQ-AGENT-RUNTIME-V2-03 merged at c0f0169ca1d61bed029198095c57772b5eb4bebf and is included in staging revision fed95c351d57ed918d9f025100ec693f8fb9ac5d."
+      },
+      "staging_smoke": {
+        "status": "blocked",
+        "evidence": "Staging deployed provider code and had OpenAI config present, but direct request to https://api.openai.com/v1/responses timed out after 60001 ms; runtime fell back to deterministic_read_only."
+      },
+      "safety_fallback": {
+        "status": "pass",
+        "evidence": "EQ report/context/runtime stayed ready/read-only, no paywall/SKU/raw tags/SJT entry, and forbidden prompt remained bounded."
+      },
+      "docs": {
+        "status": "pass",
+        "evidence": "Added docs/audits/eq/eq_agent_runtime_v2_staging_llm_smoke_2026-06-25.md with blocked LLM smoke evidence and next required actions."
+      },
+      "credential_hygiene": {
+        "status": "pass",
+        "evidence": "The exposed UI-created eq-agent-staging key was deleted/revoked by the user; eq-agent-staging-v2 remains the staging key. No secret value is recorded in repo artifacts."
+      },
+      "staging_safe_state": {
+        "status": "pass",
+        "evidence": "Staging was returned to EQ_AGENT_LLM_ENABLED=false after the OpenAI outbound timeout was confirmed; provider/key/model may remain configured but live calls are disabled until connectivity is fixed."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "PR #2430 checks passed on head a06d8a8cfa1182fd197d67167fe1c0d82de1d70a: hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep blocking secrets, semgrep SARIF upload, and Semgrep OSS. mergeStateStatus=CLEAN."
       }
     },
-    "failure_reason": null,
-    "commit_sha": "60b652737a42554c7f11b809272e784cb822ad29",
-    "pr_url": "https://github.com/fermatmind/fap-api/pull/2427",
+    "failure_reason": "Live LLM staging smoke blocked by staging outbound timeout to OpenAI Responses API; deterministic fallback passed. Exposed UI-created eq-agent-staging key has been deleted/revoked.",
+    "commit_sha": "a06d8a8cfa1182fd197d67167fe1c0d82de1d70a",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2430",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -62186,6 +62220,30 @@
         "from": "missing_from_manifest",
         "to": "pending_dependency",
         "notes": "Initialized from explicit user authorization; waits for PR-EQ-AGENT-RUNTIME-V2-03."
+      },
+      {
+        "at": "2026-06-25T19:20:00+08:00",
+        "from": "pending_dependency",
+        "to": "local_validated_blocked_smoke_report",
+        "notes": "Ran staging smoke after deploying provider code and enabling staging OpenAI config; live provider mode blocked by OpenAI connectivity timeout, fallback passed, docs-only report added."
+      },
+      {
+        "at": "2026-06-25T21:20:00+08:00",
+        "from": "local_validated_blocked_smoke_report",
+        "to": "local_validated_blocked_smoke_report",
+        "notes": "Updated docs-only smoke report to record eq-agent-staging revoked, eq-agent-staging-v2 retained, staging LLM disabled, and live LLM blocked by OpenAI outbound timeout while deterministic fallback passed."
+      },
+      {
+        "at": "2026-06-25T21:25:00+08:00",
+        "from": "local_validated_blocked_smoke_report",
+        "to": "pr_opened",
+        "notes": "Opened docs-only PR #2430 for V2-04 blocked staging LLM smoke report."
+      },
+      {
+        "at": "2026-06-25T21:26:00+08:00",
+        "from": "pr_opened",
+        "to": "ready_to_merge",
+        "notes": "GitHub checks passed and mergeStateStatus was CLEAN for PR #2430."
       }
     ]
   },
