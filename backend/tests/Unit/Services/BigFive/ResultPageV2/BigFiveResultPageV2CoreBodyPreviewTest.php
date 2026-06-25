@@ -1352,6 +1352,20 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_seo_ops_gaokao_v5_cms_draft_gate_adapter(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/SeoOpsGaokaoV5CmsDraftGateCommand.php',
+            'backend/app/Console/Kernel.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\SeoOpsGaokaoV5CmsDraftGateCommand;',
+            '+        SeoOpsGaokaoV5CmsDraftGateCommand::class,',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
+    }
+
     public function test_runtime_freeze_classifier_ignores_seo_agent_codex_review_runner_files(): void
     {
         $changed = [
@@ -4892,6 +4906,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSeoOpsGaokaoV5CmsDraftGateFile($file)) {
+                continue;
+            }
+
             if ($this->isSeoAgentCmsTdkGapReadonlyScannerFile($file)) {
                 continue;
             }
@@ -5791,6 +5809,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsSeoOpsP0CtrArticleCmsUpdateWriterOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoOpsZhArticleQualityRepairDryRunOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoOpsZhArticleQualityWriterOrReadbackOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsSeoOpsGaokaoV5CmsDraftGateOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentCmsTdkGapReadonlyScannerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentCodexReviewRunnerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentCmsDraftPackageDryRunOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
@@ -6562,6 +6581,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Console/Commands/SeoOpsZhArticleQualityControlledWriterCommand.php',
             'backend/app/Console/Commands/SeoOpsZhArticleQualityReadbackCommand.php',
         ], true);
+    }
+
+    private function isSeoOpsGaokaoV5CmsDraftGateFile(string $file): bool
+    {
+        return $file === 'backend/app/Console/Commands/SeoOpsGaokaoV5CmsDraftGateCommand.php';
     }
 
     private function isSeoAgentCmsTdkGapReadonlyScannerFile(string $file): bool
@@ -8740,6 +8764,28 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if (preg_match('/\bSeoOpsZhArticleQuality(ControlledWriter|Readback)Command\b/u', $line) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsSeoOpsGaokaoV5CmsDraftGateOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            if (preg_match('/\b(MBTI|Mbti|BigFive|Big5|Prewarm|ResultPage|Report)\b/u', $line) === 1) {
+                return false;
+            }
+
+            if (preg_match('/\bSeoOpsGaokaoV5CmsDraftGateCommand\b/u', $line) !== 1) {
                 return false;
             }
         }

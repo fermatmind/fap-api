@@ -28850,6 +28850,7 @@ prs:
       - backend/app/Console/Kernel.php
       - backend/docs/seo/generated/seo-ops-gaokao-v5-cms-draft-gate.v1.json
       - backend/tests/Feature/SeoIntel/SeoOpsGaokaoV5CmsDraftGateCommandTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
@@ -28861,6 +28862,7 @@ prs:
       - cd backend && php artisan list | rg seo-ops:gaokao-v5-cms-draft-gate
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoOpsGaokaoV5CmsDraftGateCommandTest --no-ansi
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=ArticleImportSeoContentPackageDraftCommandTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_seo_ops_gaokao_v5_cms_draft_gate_adapter' --no-ansi
       - cd backend && vendor/bin/pint --test app/Console/Commands/SeoOpsGaokaoV5CmsDraftGateCommand.php tests/Feature/SeoIntel/SeoOpsGaokaoV5CmsDraftGateCommandTest.php
       - python3 -m json.tool backend/docs/seo/generated/seo-ops-gaokao-v5-cms-draft-gate.v1.json >/dev/null
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
