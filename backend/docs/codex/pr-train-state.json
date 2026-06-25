@@ -7346,6 +7346,45 @@
       "github_checks": {
         "verify-bigfive": "failed_before_ci_fix_current_pr_scope"
       }
+    },
+    "SEO-OPS-ZH-ARTICLE-QUALITY-CONTROLLED-WRITER-01": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "pr_open",
+      "branch": "codex/seo-ops-zh-article-quality-controlled-writer-01",
+      "commit_sha": "",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/2426",
+      "checks": {
+        "php_artisan_list_rg": "passed",
+        "focused_phpunit": "passed",
+        "bigfive_freeze_classifier_focused": "passed",
+        "pint_touched_files": "passed",
+        "contract_json_tool": "passed",
+        "git_diff_check": "passed"
+      },
+      "failure_reason": null,
+      "resume_policy": "manual_only",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-06-25T00:00:00+08:00",
+          "status": "in_progress",
+          "summary": "Initialized P2-B ledger entry for zh-CN article quality controlled writer/readback support."
+        },
+        {
+          "at": "2026-06-25T00:00:00+08:00",
+          "status": "local_checks_passed",
+          "summary": "P2-B local command registration, focused writer/readback PHPUnit, BigFive freeze classifier, Pint, contract JSON, and diff checks passed."
+        },
+        {
+          "at": "2026-06-25T00:00:00+08:00",
+          "status": "pr_open",
+          "summary": "Opened PR https://github.com/fermatmind/fap-api/pull/2426."
+        }
+      ],
+      "updated_at": "2026-06-25T00:00:00+08:00"
     }
   },
   "career_display_surface": {

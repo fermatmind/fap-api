@@ -40,6 +40,41 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: SEO-OPS-ZH-ARTICLE-QUALITY-CONTROLLED-WRITER-01
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/seo-ops-zh-article-quality-controlled-writer-01
+    base: main
+    depends_on:
+      - SEO-OPS-ZH-ARTICLE-QUALITY-DRY-RUN-ADAPTER-01
+    mode: execute
+    scope: >
+      P2-B backend controlled writer and readback support for the existing
+      9-page zh-CN article quality repair package. Consume verified P2-A
+      dry-run evidence, allow only deterministic package heading/link
+      replacements, preserve slug/canonical/locale/publication/schema,
+      hreflang, sitemap, llms, URL Truth, Search Channel, IndexNow, Baidu,
+      GSC, revalidation, and deploy boundaries, and include the narrow
+      BigFive runtime-freeze classifier allowlist for the read-only/writer
+      Artisan adapters and Kernel registration.
+    checks:
+      - "php artisan list | rg 'seo-ops:zh-article-quality'"
+      - "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoOpsZhArticleQualityControlledWriterTest"
+      - "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='runtime_paths_have_no_uncommitted_diff|seo_ops_zh_article_quality'"
+      - "vendor/bin/pint --test app/Console/Commands/SeoOpsZhArticleQualityControlledWriterCommand.php app/Console/Commands/SeoOpsZhArticleQualityReadbackCommand.php tests/Feature/SeoIntel/SeoOpsZhArticleQualityControlledWriterTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php"
+      - "python3 -m json.tool docs/seo/generated/seo-ops-zh-article-quality-controlled-writer.v1.json >/dev/null"
+      - "git diff --check"
+      - "git diff --cached --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-CANDIDATE-SEMANTICS-PREROUTE
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
