@@ -61678,8 +61678,8 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "6f3ffe1626c80cda7ed4605758213575b7f61188",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2413",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -61698,6 +61698,11 @@
         "at": "2026-06-25T03:49:40Z",
         "status": "github_checks_pending",
         "note": "Opened PR #2413 at https://github.com/fermatmind/fap-api/pull/2413 on head 1932d42e71661a0be4e28d8d9503e10a52992c15. Waiting for required GitHub checks; no staging deploy wait, production deploy, CMS write, SEO, sitemap, llms, DB migration, or frontend work included."
+      },
+      {
+        "at": "2026-06-25T03:54:44Z",
+        "status": "github_checks_pending",
+        "note": "Rebased PR #2413 onto latest origin/main after GitHub reported mergeStateStatus DIRTY. The only rebase conflict was docs/codex/pr-train-state.json; main-side fap-web EQ Agent closeout facts were preserved and 02A state was updated to head 6f3ffe1626c80cda7ed4605758213575b7f61188."
       }
     ]
   }
