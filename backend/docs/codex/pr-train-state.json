@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-06-22T15:57:46+08:00",
+  "updated_at": "2026-06-25T00:00:00+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -7294,6 +7294,44 @@
         "d23b_workbook_sha256": "c30f8743cfd0d8baa14ac931cc7270807425164952f6a44953b5b4ab448778ef",
         "d23b_validation": "/tmp/d23b_schema_repair_validation.json"
       }
+    },
+    "SEO-OPS-ZH-ARTICLE-QUALITY-DRY-RUN-ADAPTER-01": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "committed",
+      "branch": "codex/seo-ops-zh-article-quality-dry-run-adapter-01",
+      "commit_sha": "pending_after_push",
+      "pr_url": "",
+      "checks": {
+        "php_artisan_list_rg": "passed",
+        "focused_phpunit": "passed",
+        "pint_touched_files": "passed",
+        "contract_json_tool": "passed",
+        "git_diff_check": "passed"
+      },
+      "failure_reason": null,
+      "resume_policy": "manual_only",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-06-25T00:00:00+08:00",
+          "status": "in_progress",
+          "summary": "Initialized P2-A ledger entry from FERMATMIND-SEO-OPS-P2-P4-PR-TRAIN-20260625-01 for backend read-only zh-CN article quality repair dry-run adapter."
+        },
+        {
+          "at": "2026-06-25T00:00:00+08:00",
+          "status": "local_checks_passed",
+          "summary": "Local command registration, focused PHPUnit, Pint, contract JSON, and git diff checks passed for P2-A."
+        },
+        {
+          "at": "2026-06-25T00:00:00+08:00",
+          "status": "committed",
+          "summary": "Committed P2-A backend dry-run adapter changes."
+        }
+      ],
+      "updated_at": "2026-06-25T00:00:00+08:00"
     }
   },
   "career_display_surface": {
