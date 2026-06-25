@@ -62168,7 +62168,7 @@
     "repo": "fap-api",
     "branch": "codex/pr-eq-agent-runtime-v2-04-staging-smoke-report",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged_deferred_followup",
     "train_scope": "eq_agent_runtime_v2",
     "title": "PR-EQ-AGENT-RUNTIME-V2-04 EQ Agent staging LLM smoke report",
     "depends_on": [
@@ -62206,14 +62206,30 @@
       "github_checks": {
         "status": "pass",
         "evidence": "PR #2430 checks passed on head a06d8a8cfa1182fd197d67167fe1c0d82de1d70a: hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep blocking secrets, semgrep SARIF upload, and Semgrep OSS. mergeStateStatus=CLEAN."
+      },
+      "merge_reconciliation": {
+        "status": "pass",
+        "evidence": "PR #2430 was squash merged into origin/main as 8b28204a0b2bc9ef6172885b50cec3f2e8c44751; current branch is based on origin/main cf53d5f57."
+      },
+      "user_policy_decision": {
+        "status": "deferred",
+        "evidence": "User explicitly instructed to keep EQ_AGENT_LLM_ENABLED=false, stop EQ Agent Runtime V2 LLM smoke, and mark the V2 LLM train as deferred / not pursuing now."
+      },
+      "staging_safe_state_latest": {
+        "status": "pass",
+        "evidence": "Staging was returned to EQ_AGENT_LLM_ENABLED=false after a manual eq-agent-staging-v3 credential test. Provider/key/model may remain configured, but live LLM calls are disabled."
+      },
+      "latest_blocker": {
+        "status": "deferred",
+        "evidence": "Temporary relay proved the network path could reach OpenAI, but OpenAI returned 429 insufficient_quota. This is no longer pursued because the user chose not to use LLM mode."
       }
     },
-    "failure_reason": "Live LLM staging smoke blocked by staging outbound timeout to OpenAI Responses API; deterministic fallback passed. Exposed UI-created eq-agent-staging key has been deleted/revoked.",
-    "commit_sha": "a06d8a8cfa1182fd197d67167fe1c0d82de1d70a",
+    "failure_reason": "Live LLM staging smoke is deferred by user decision on 2026-06-25. Deterministic/read-only Agent runtime remains the accepted path; EQ_AGENT_LLM_ENABLED must stay false. A later manual decision is required before any LLM smoke or rollout resumes.",
+    "commit_sha": "8b28204a0b2bc9ef6172885b50cec3f2e8c44751",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2430",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-25T13:16:08Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-25T17:48:04+08:00",
