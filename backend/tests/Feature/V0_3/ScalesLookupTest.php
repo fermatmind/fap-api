@@ -90,6 +90,40 @@ class ScalesLookupTest extends TestCase
         }
     }
 
+    public function test_big_five_free_only_lookup_projects_public_commercial_as_free(): void
+    {
+        $this->artisan('migrate', ['--force' => true]);
+        $this->artisan('fap:scales:seed-default');
+        $this->artisan('fap:scales:sync-slugs');
+
+        $rawCommercial = DB::table('scales_registry')
+            ->where('code', 'BIG5_OCEAN')
+            ->value('commercial_json');
+        $rawCommercial = is_string($rawCommercial) ? json_decode($rawCommercial, true) : $rawCommercial;
+
+        $this->assertSame('PAID', data_get($rawCommercial, 'price_tier'));
+        $this->assertSame('SKU_BIG5_FULL_REPORT_299', data_get($rawCommercial, 'report_unlock_sku'));
+
+        foreach (['en', 'zh'] as $locale) {
+            $response = $this->getJson('/api/v0.3/scales/lookup?slug=big-five-personality-test-ocean-model&locale='.$locale);
+
+            $response->assertStatus(200);
+            $response->assertJsonPath('ok', true);
+            $response->assertJsonPath('scale_code', 'BIG5_OCEAN');
+            $response->assertJsonPath('scale_code_legacy', 'BIG5_OCEAN');
+            $response->assertJsonPath('scale_code_v2', 'BIG_FIVE_OCEAN_MODEL');
+            $response->assertJsonPath('capabilities.paywall_mode', 'free_only');
+            $response->assertJsonPath('commercial.price_tier', 'FREE');
+            $response->assertJsonPath('commercial.report_unlock_sku', null);
+            $response->assertJsonPath('commercial.upgrade_sku', null);
+            $response->assertJsonPath('commercial.upgrade_sku_anchor', null);
+            $response->assertJsonPath('commercial.offers', []);
+            $response->assertJsonPath('forms.0.form_code', 'big5_120');
+            $response->assertJsonPath('forms.1.form_code', 'big5_90');
+            $this->assertStringNotContainsString('SKU_BIG5_FULL_REPORT_299', $response->getContent());
+        }
+    }
+
     public function test_catalog_returns_backend_owned_test_landing_metadata(): void
     {
         $this->artisan('migrate', ['--force' => true]);

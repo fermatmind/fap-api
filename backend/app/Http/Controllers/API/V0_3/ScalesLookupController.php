@@ -111,7 +111,7 @@ class ScalesLookupController extends Controller
             'driver_type' => $row['driver_type'] ?? '',
             'view_policy' => $row['view_policy_json'] ?? null,
             'capabilities' => $row['capabilities_json'] ?? null,
-            'commercial' => $row['commercial_json'] ?? null,
+            'commercial' => $this->projectPublicCommercial($row),
             'forms' => $this->publicScaleFormsProjector->projectForRegistryRow($row, $locale),
             'seo_title' => $seo['title'],
             'seo_description' => $seo['description'],
@@ -254,6 +254,34 @@ class ScalesLookupController extends Controller
         }
 
         return true;
+    }
+
+    /**
+     * @param  array<string,mixed>  $row
+     * @return array<string,mixed>|null
+     */
+    private function projectPublicCommercial(array $row): ?array
+    {
+        $commercial = $this->toArray($row['commercial_json'] ?? null);
+        if ($commercial === []) {
+            return null;
+        }
+
+        $scaleCode = strtoupper(trim((string) ($row['code'] ?? '')));
+        $capabilities = $this->toArray($row['capabilities_json'] ?? null);
+        $paywallMode = strtolower(trim((string) ($capabilities['paywall_mode'] ?? '')));
+
+        if ($scaleCode !== 'BIG5_OCEAN' || $paywallMode !== 'free_only') {
+            return $commercial;
+        }
+
+        $commercial['price_tier'] = 'FREE';
+        $commercial['report_unlock_sku'] = null;
+        $commercial['upgrade_sku'] = null;
+        $commercial['upgrade_sku_anchor'] = null;
+        $commercial['offers'] = [];
+
+        return $commercial;
     }
 
     /**

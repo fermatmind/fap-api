@@ -95,6 +95,44 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: BIG5-COMMERCIAL-FIELD-BACKEND-AUTHORITY-FIX-01
+    repo: fap-api
+    branch: codex/big5-commercial-field-backend-authority-fix-01
+    title: "BIG5-COMMERCIAL-FIELD-BACKEND-AUTHORITY-FIX-01: Reconcile Big Five public commercial lookup state"
+    train_scope: big5_commercial_field_backend_authority_fix
+    status: user_authorized
+    scope:
+      - Fix the public scale lookup projection for Big Five so free-only report mode does not expose an active paid unlock offer.
+      - Preserve backend SKU, payment, order, benefit, entitlement, private result, CMS, SEO, sitemap, llms, schema, hreflang, canonical, noindex, and production state.
+      - Add focused lookup coverage proving the public response is free while the raw registry SKU/commercial authority is not deleted.
+    allowed_paths:
+      - backend/app/Http/Controllers/API/V0_3/ScalesLookupController.php
+      - backend/tests/Feature/V0_3/ScalesLookupTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify fap-web.
+      - Modify payment webhooks, checkout, refunds, orders, benefit grants, entitlement writes, private result routes, report tokens, provider integrations, CMS, search, sitemap, llms, schema, hreflang, canonical, noindex, migrations, seed SKU definitions, staging deploy, or production deploy.
+      - Delete or rewrite SKU_BIG5_FULL_REPORT_299 or any Big Five payment/order/benefit authority data.
+    validation:
+      - php -l backend/app/Http/Controllers/API/V0_3/ScalesLookupController.php
+      - php -l backend/tests/Feature/V0_3/ScalesLookupTest.php
+      - php -l backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=ScalesLookupTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_scale_lookup_public_commercial_projection' --no-ansi
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: IQ-OWNER-30-SCORING-RUNTIME-BIND-01
     repo: fap-api
     depends_on:
