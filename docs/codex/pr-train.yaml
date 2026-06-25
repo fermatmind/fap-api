@@ -238,6 +238,49 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: IQ-OWNER-30-NORM-AUTHORITY-04A
+    repo: fap-api
+    depends_on:
+      - IQ-OWNER-30-SCORING-RUNTIME-BIND-01
+    branch: codex/iq-owner-30-norm-authority-04a
+    title: "IQ-OWNER-30-NORM-AUTHORITY-04A: Add owner IQ 30 norm authority activation"
+    train_scope: iq_owner_original_30_launch
+    status: user_authorized
+    scope:
+      - Add guarded backend import/activation for claim-eligible IQ_OWNER_ORIGINAL_30 norm authority records.
+      - Preserve dry-run validation by default and require explicit activate plus public-claim gate for writes.
+      - Reject non-owner banks, non-claim-ready payloads, and duplicate authority versions.
+      - Store authority evidence metadata without changing runtime scoring, frontend rendering, question bank assets, CMS, SEO, or deployment.
+    allowed_paths:
+      - backend/app/Console/Commands/NormsIqImport.php
+      - backend/tests/Feature/Psychometrics/IqNormsImportDryRunTest.php
+      - backend/tests/Fixtures/iq/norms/iq_owner30_claim_ready_valid.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify frontend rendering, runtime scoring binding, question bank assets, answer keys, CMS, SEO runtime, sitemap, llms, JSON-LD, staging deploy, or production deploy.
+      - Import production norm data or trigger production writes outside the guarded command and test fixtures.
+      - Enable IQ estimate, percentile, ranking, or normed IQ claims without a claim-eligible backend norm authority.
+      - Emit correct answers, answer keys, solution rules, generator metadata, private provenance, or source capture URLs in public payloads.
+    validation:
+      - php -l backend/app/Console/Commands/NormsIqImport.php
+      - php -l backend/tests/Feature/Psychometrics/IqNormsImportDryRunTest.php
+      - cd backend && php artisan test tests/Feature/Psychometrics/IqNormsImportDryRunTest.php --no-ansi
+      - cd backend && php artisan test tests/Feature/Content/IqNormAuthorityTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Console/Commands/NormsIqImport.php tests/Feature/Psychometrics/IqNormsImportDryRunTest.php
+      - python3 -m json.tool backend/tests/Fixtures/iq/norms/iq_owner30_claim_ready_valid.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: BIG-FIVE-AGENT-APPROVAL-QUEUE-INTEGRATION-01
     repo: fap-api
     depends_on: []
