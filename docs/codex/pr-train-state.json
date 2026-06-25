@@ -62353,7 +62353,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-ops-gaokao-v5-cms-draft-gate-01",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "fermatmind_seo_ops_p2_p4_20260625",
     "title": "SEO-OPS-GAOKAO-V5-CMS-DRAFT-GATE-01: Add Gaokao v5 CMS draft gate",
     "depends_on": [],
@@ -62389,15 +62389,15 @@
       },
       "github": {
         "status": "pass",
-        "evidence": "GitHub checks passed for PR #2427 at head d4a42a7127f91bd0ac1a0d00c925c2c815bc7628 after the scoped BigFive freeze-classifier allowlist fix: hygiene, supply-chain, content-pack-build-validate, Semgrep, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 all passed. mergeStateStatus=CLEAN."
+        "evidence": "GitHub checks passed for PR #2427 at final head c833f530b2c6c56f568c7857c7a9c95a7b120d3f. Squash merge commit 42ef31190f68ebda879a9362bad511052d50a7a9 is contained in origin/main; remote branch was deleted and local task branch/worktree cleanup completed."
       }
     },
     "failure_reason": null,
-    "commit_sha": "d4a42a7127f91bd0ac1a0d00c925c2c815bc7628",
+    "commit_sha": "42ef31190f68ebda879a9362bad511052d50a7a9",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2427",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-25T21:12:00+08:00",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-25T20:20:00+08:00",
@@ -62428,6 +62428,74 @@
         "at": "2026-06-25T21:05:00+08:00",
         "status": "ready_to_merge",
         "note": "All GitHub checks passed for PR #2427 at head d4a42a7127f91bd0ac1a0d00c925c2c815bc7628 and mergeStateStatus was CLEAN. Recording ready_to_merge before squash merge per PR-train ledger policy."
+      },
+      {
+        "at": "2026-06-25T21:12:00+08:00",
+        "status": "merged",
+        "note": "PR #2427 was squash merged as 42ef31190f68ebda879a9362bad511052d50a7a9. origin/main contains the merge commit; local main worktree /private/tmp/fap-api-p2a-zh-quality-dry-run was fast-forwarded to origin/main; local and remote task branches were cleaned."
+      }
+    ]
+  },
+  "SEO-OPS-GAOKAO-V5-PROPAGATION-GATE-READINESS-01": {
+    "repo": "fap-api",
+    "branch": "codex/seo-ops-gaokao-v5-propagation-gate-readiness-01",
+    "base": "main",
+    "status": "in_progress",
+    "train_scope": "fermatmind_seo_ops_p2_p4_20260625",
+    "title": "SEO-OPS-GAOKAO-V5-PROPAGATION-GATE-READINESS-01: Add Gaokao v5 propagation gate readiness",
+    "depends_on": [
+      "SEO-OPS-GAOKAO-V5-CMS-DRAFT-GATE-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User provided /goal FERMATMIND-SEO-OPS-P2-P4-PR-TRAIN-20260625-01 and explicitly authorized adding missing docs/codex/pr-train.yaml and docs/codex/pr-train-state.json entries for this PR train."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "P3-B PR #2427 merged with squash merge commit 42ef31190f68ebda879a9362bad511052d50a7a9 before P3-C implementation."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "php -l backend/app/Console/Commands/SeoOpsGaokaoV5PropagationGateReadinessCommand.php",
+          "php -l backend/tests/Feature/SeoIntel/SeoOpsGaokaoV5PropagationGateReadinessTest.php",
+          "cd backend && php artisan list | rg seo-ops:gaokao-v5-propagation-gate-readiness",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=SeoOpsGaokaoV5PropagationGateReadinessTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_seo_ops_gaokao_v5_gate_adapters' --no-ansi",
+          "cd backend && vendor/bin/pint --test app/Console/Commands/SeoOpsGaokaoV5PropagationGateReadinessCommand.php tests/Feature/SeoIntel/SeoOpsGaokaoV5PropagationGateReadinessTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+          "python3 -m json.tool backend/docs/seo/generated/seo-ops-gaokao-v5-propagation-gate-readiness.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "git diff --check && git diff --cached --check"
+        ],
+        "evidence": "PASS: PHP syntax; artisan command registration; focused SeoOpsGaokaoV5PropagationGateReadinessTest (4 tests, 32 assertions); BigFive freeze classifier focused test for Gaokao v5 gate adapters (1 assertion); scoped Pint; generated contract JSON parse; train state JSON parse; train manifest YAML parse; diff checks."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to SeoOpsGaokaoV5PropagationGateReadinessCommand.php, Kernel registration, generated command contract doc, focused Feature test, BigFive freeze classifier allowlist for Gaokao v5 gate adapters, and authorized docs/codex train metadata. No production CMS write/import, publish, URL Truth, sitemap, llms, schema, hreflang, Search Channel, IndexNow, frontend runtime, deploy, or revalidation changes."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": null
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-25T21:16:00+08:00",
+        "status": "in_progress",
+        "note": "Started P3-C from synced fap-api main 42ef31190f68ebda879a9362bad511052d50a7a9. Scope is backend-only read-only Gaokao v5 propagation gate readiness; no production CMS write/import, publish, URL Truth, sitemap, llms, schema, hreflang, Search Channel, IndexNow, deploy, or revalidation."
+      },
+      {
+        "at": "2026-06-25T21:24:00+08:00",
+        "status": "local_validated",
+        "note": "Implemented read-only Gaokao v5 propagation gate readiness command and focused tests. Local scoped checks passed; no execution path for CMS write/import, publish, URL Truth, sitemap/llms, schema/hreflang, Search Channel, IndexNow, deploy, or revalidation was added."
       }
     ]
   }

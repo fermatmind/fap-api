@@ -224,6 +224,7 @@ use App\Console\Commands\SeoAgentWeeklyDraftWriteAutoCommand;
 use App\Console\Commands\SeoAgentWeeklyReadonlyRunnerCommand;
 use App\Console\Commands\SeoOpsP0CtrArticleCmsUpdateWriterCommand;
 use App\Console\Commands\SeoOpsGaokaoV5CmsDraftGateCommand;
+use App\Console\Commands\SeoOpsGaokaoV5PropagationGateReadinessCommand;
 use App\Console\Commands\SeoOpsZhArticleQualityControlledWriterCommand;
 use App\Console\Commands\SeoOpsZhArticleQualityRepairDryRunCommand;
 use App\Console\Commands\SeoOpsZhArticleQualityReadbackCommand;
@@ -474,6 +475,7 @@ class Kernel extends ConsoleKernel
         SeoAgentWeeklyReadonlyRunnerCommand::class,
         SeoOpsP0CtrArticleCmsUpdateWriterCommand::class,
         SeoOpsGaokaoV5CmsDraftGateCommand::class,
+        SeoOpsGaokaoV5PropagationGateReadinessCommand::class,
         SeoOpsZhArticleQualityControlledWriterCommand::class,
         SeoOpsZhArticleQualityRepairDryRunCommand::class,
         SeoOpsZhArticleQualityReadbackCommand::class,
