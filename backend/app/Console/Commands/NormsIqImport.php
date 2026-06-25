@@ -8,17 +8,21 @@ use App\Services\Iq\IqNormAuthorityContract;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 
 final class NormsIqImport extends Command
 {
     private const SCHEMA_VERSION = 'iq.norm_table.v1';
 
+    private const OWNER_BANK_ID = 'IQ_OWNER_ORIGINAL_30';
+
     protected $signature = 'norms:iq:import
         {--file= : IQ norm table JSON file path}
-        {--dry-run=1 : Validate only; writes are intentionally disabled in IQ-NORM-02}
+        {--dry-run=1 : Validate only; set to 0 only for guarded authority activation}
+        {--activate=0 : Persist the validated owner IQ 30 norm authority when dry-run=0}
         {--require-claim-ready=0 : Fail unless the authority metadata is already public-claim eligible}';
 
-    protected $description = 'Validate IQ norm table authority payloads in dry-run mode without importing production data.';
+    protected $description = 'Validate or activate owner IQ 30 norm authority payloads behind the public-claim gate.';
 
     public function handle(): int
     {
@@ -29,8 +33,10 @@ final class NormsIqImport extends Command
         }
 
         $dryRun = $this->isTruthy($this->option('dry-run'));
-        if (! $dryRun) {
-            $this->error('IQ norm import writes are disabled in IQ-NORM-02. Use --dry-run=1.');
+        $activate = $this->isTruthy($this->option('activate'));
+        $requireClaimReady = $this->isTruthy($this->option('require-claim-ready'));
+        if ($dryRun && $activate) {
+            $this->error('activate_requires_dry_run_0');
 
             return self::FAILURE;
         }
@@ -51,9 +57,28 @@ final class NormsIqImport extends Command
 
         $errors = $this->validatePayload($payload);
         $gate = IqNormAuthorityContract::publicClaimGate($this->authorityRecord($payload));
-        $requireClaimReady = $this->isTruthy($this->option('require-claim-ready'));
+        if (! $dryRun && ! $activate) {
+            $errors[] = 'write_mode_requires_activate_1';
+        }
+        if (! $dryRun && ! $requireClaimReady) {
+            $errors[] = 'activate_requires_require_claim_ready_1';
+        }
+        if (! $dryRun && (string) ($payload['bank_id'] ?? '') !== self::OWNER_BANK_ID) {
+            $errors[] = 'owner30_authority_import_requires_bank_iq_owner_original_30';
+        }
         if ($requireClaimReady && ! (bool) ($gate['claim_eligible'] ?? false)) {
             $errors[] = 'authority_not_public_claim_ready:'.(string) ($gate['reason_code'] ?? 'unknown');
+        }
+
+        $existing = DB::table('iq_norm_authorities')
+            ->where('scale_code', IqNormAuthorityContract::SCALE_CODE)
+            ->where('bank_id', (string) ($payload['bank_id'] ?? ''))
+            ->where('norm_table_version', (string) ($payload['norm_table_version'] ?? ''))
+            ->where('population_key', (string) ($payload['population_key'] ?? IqNormAuthorityContract::DEFAULT_POPULATION_KEY))
+            ->where('locale', (string) ($payload['locale'] ?? ''))
+            ->first();
+        if (! $dryRun && $existing !== null) {
+            $errors[] = 'authority_version_already_exists';
         }
 
         if ($errors !== []) {
@@ -65,7 +90,9 @@ final class NormsIqImport extends Command
         }
 
         $rows = (array) ($payload['rows'] ?? []);
-        $this->info('dry-run=1, no write performed.');
+        if ($dryRun) {
+            $this->info('dry-run=1, no write performed.');
+        }
         $this->line(sprintf(
             'validated scale=%s bank=%s version=%s rows=%d claim_eligible=%s',
             (string) ($payload['scale_code'] ?? ''),
@@ -75,15 +102,13 @@ final class NormsIqImport extends Command
             (bool) ($gate['claim_eligible'] ?? false) ? 'true' : 'false'
         ));
 
-        $existing = DB::table('iq_norm_authorities')
-            ->where('scale_code', IqNormAuthorityContract::SCALE_CODE)
-            ->where('bank_id', (string) ($payload['bank_id'] ?? ''))
-            ->where('norm_table_version', (string) ($payload['norm_table_version'] ?? ''))
-            ->where('population_key', (string) ($payload['population_key'] ?? IqNormAuthorityContract::DEFAULT_POPULATION_KEY))
-            ->where('locale', (string) ($payload['locale'] ?? ''))
-            ->exists();
+        if (! $dryRun) {
+            $authorityId = $this->insertAuthority($payload, $gate);
+            $this->info('activated owner IQ 30 norm authority.');
+            $this->line('imported_authority_id='.$authorityId);
+        }
 
-        $this->line('version_lock='.($existing ? 'existing_authority_detected' : 'new_authority_candidate'));
+        $this->line('version_lock='.($existing !== null ? 'existing_authority_detected' : 'new_authority_candidate'));
 
         return self::SUCCESS;
     }
@@ -230,6 +255,7 @@ final class NormsIqImport extends Command
     private function authorityRecord(array $payload): array
     {
         return [
+            'org_id' => $payload['org_id'] ?? 0,
             'scale_code' => $payload['scale_code'] ?? null,
             'bank_id' => $payload['bank_id'] ?? null,
             'norm_table_version' => $payload['norm_table_version'] ?? null,
@@ -247,6 +273,53 @@ final class NormsIqImport extends Command
             'locked' => $payload['locked'] ?? false,
             'retired_at' => $payload['retired_at'] ?? null,
         ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     * @param  array<string,mixed>  $gate
+     */
+    private function insertAuthority(array $payload, array $gate): string
+    {
+        $authority = $this->authorityRecord($payload);
+        $rows = (array) ($payload['rows'] ?? []);
+        $authorityId = (string) Str::uuid();
+        $now = now();
+
+        DB::table('iq_norm_authorities')->insert([
+            'id' => $authorityId,
+            'org_id' => (int) ($authority['org_id'] ?? 0),
+            'scale_code' => IqNormAuthorityContract::SCALE_CODE,
+            'bank_id' => self::OWNER_BANK_ID,
+            'norm_table_version' => (string) ($authority['norm_table_version'] ?? ''),
+            'status' => strtolower((string) ($authority['status'] ?? 'production_normed')),
+            'population_key' => (string) ($authority['population_key'] ?? IqNormAuthorityContract::DEFAULT_POPULATION_KEY),
+            'locale' => (string) ($authority['locale'] ?? 'zh-CN'),
+            'sample_size' => (int) ($authority['sample_size'] ?? 0),
+            'mean' => (float) ($authority['mean'] ?? 0.0),
+            'standard_deviation' => (float) ($authority['standard_deviation'] ?? 0.0),
+            'min_raw_score' => (float) ($authority['min_raw_score'] ?? 0.0),
+            'max_raw_score' => (float) ($authority['max_raw_score'] ?? 0.0),
+            'source_kind' => (string) ($authority['source_kind'] ?? 'internal_calibration'),
+            'source_ref' => (string) ($authority['source_ref'] ?? ''),
+            'license_verified' => (bool) ($authority['license_verified'] ?? false),
+            'locked' => (bool) ($authority['locked'] ?? false),
+            'effective_at' => $now,
+            'retired_at' => null,
+            'metadata' => json_encode([
+                'schema_version' => self::SCHEMA_VERSION,
+                'import_scope' => 'IQ-OWNER-30-NORM-AUTHORITY-04A',
+                'bank_id' => self::OWNER_BANK_ID,
+                'rows_count' => count($rows),
+                'rows_sha256' => hash('sha256', json_encode($rows, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?: ''),
+                'claim_gate' => $gate,
+                'evidence' => $payload['evidence'] ?? null,
+            ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
+            'created_at' => $now,
+            'updated_at' => $now,
+        ]);
+
+        return $authorityId;
     }
 
     private function numericOrNull(mixed $value): ?float

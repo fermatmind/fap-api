@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-25T10:32:00Z",
+  "updated_at": "2026-06-25T10:38:20Z",
   "PR-EQ-ASSET-01": {
     "repo": "fap-api",
     "branch": "codex/pr-eq-asset-01-content-pack-v16",
@@ -62269,6 +62269,69 @@
         "at": "2026-06-25T12:40:58+08:00",
         "status": "ready_to_merge",
         "note": "PR #2418 GitHub checks passed after the freeze harness fix and mergeStateStatus was CLEAN. Ready for squash merge; no staging wait, production deploy, CMS write, search, sitemap, llms, schema, hreflang, canonical, noindex, payment, order, benefit, entitlement, or fap-web work included."
+      }
+    ]
+  },
+  "IQ-OWNER-30-NORM-AUTHORITY-04A": {
+    "repo": "fap-api",
+    "branch": "codex/iq-owner-30-norm-authority-04a",
+    "base": "main",
+    "status": "local_validated",
+    "train_scope": "iq_owner_original_30_launch",
+    "title": "IQ-OWNER-30-NORM-AUTHORITY-04A: Add owner IQ 30 norm authority activation",
+    "depends_on": [
+      "IQ-OWNER-30-SCORING-RUNTIME-BIND-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized fap-api docs/codex/pr-train.yaml and docs/codex/pr-train-state.json updates for IQ-OWNER-30-NORM-AUTHORITY-04A and requested backend Owner 30 norm authority import/activation capability."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "IQ-OWNER-30-SCORING-RUNTIME-BIND-01 is recorded merged with merge commit 953ba036a0d5ca8dad855b9f0f226664dc376fef before this branch started."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "php -l backend/app/Console/Commands/NormsIqImport.php",
+          "php -l backend/tests/Feature/Psychometrics/IqNormsImportDryRunTest.php",
+          "cd backend && php artisan test tests/Feature/Psychometrics/IqNormsImportDryRunTest.php --no-ansi",
+          "cd backend && php artisan test tests/Feature/Content/IqNormAuthorityTest.php --no-ansi",
+          "cd backend && vendor/bin/pint --test app/Console/Commands/NormsIqImport.php tests/Feature/Psychometrics/IqNormsImportDryRunTest.php",
+          "python3 -m json.tool backend/tests/Fixtures/iq/norms/iq_owner30_claim_ready_valid.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "git diff --check"
+        ],
+        "evidence": "PASS: PHP syntax checks; IqNormsImportDryRunTest (7 tests, 45 assertions, existing warnings only, exit 0); IqNormAuthorityTest (4 tests, 32 assertions, existing warnings only, exit 0); scoped Pint; fixture/state JSON parse; manifest YAML parse; git diff --check."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to IQ-OWNER-30-NORM-AUTHORITY-04A scope: NormsIqImport command, focused importer tests, claim-ready fixture, and docs/codex train metadata. No frontend, runtime scoring binding, CMS, SEO, deployment, or production norm data import changes."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": "cdf77981324c5aaba4317fff6701607559cd3416",
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-25T10:32:26Z",
+        "status": "in_progress",
+        "note": "Started backend-only Owner 30 norm authority activation from latest fap-api origin/main in an isolated clean worktree. Scope is guarded norms:iq:import activation, claim-ready fixture/tests, and docs/codex train metadata. No frontend, CMS, SEO, runtime scoring binding, staging deploy, production deploy, or production norm data import."
+      },
+      {
+        "at": "2026-06-25T10:37:20Z",
+        "status": "local_validated",
+        "note": "Local checks and scope validation passed. Guarded activation now requires dry-run=0, activate=1, require-claim-ready=1, IQ_OWNER_ORIGINAL_30 bank, public claim gate pass, and no duplicate authority version."
+      },
+      {
+        "at": "2026-06-25T10:38:20Z",
+        "status": "committed",
+        "note": "Created local scoped commit cdf77981324c5aaba4317fff6701607559cd3416."
       }
     ]
   }

@@ -1,0 +1,30 @@
+{
+  "schema_version": "iq.norm_table.v1",
+  "scale_code": "IQ_INTELLIGENCE_QUOTIENT",
+  "bank_id": "IQ_OWNER_ORIGINAL_30",
+  "norm_table_version": "iq_owner30_norm_fixture_v1",
+  "status": "production_normed",
+  "population_key": "general_adult_online",
+  "locale": "zh-CN",
+  "sample_size": 1200,
+  "mean": 15.0,
+  "standard_deviation": 5.0,
+  "min_raw_score": 0,
+  "max_raw_score": 30,
+  "source_kind": "internal_calibration",
+  "source_ref": "fixture://iq_owner30_norm_fixture_v1",
+  "license_verified": true,
+  "locked": true,
+  "evidence": {
+    "authority_kind": "owner_original_30_calibration_fixture",
+    "claim_basis": "test fixture only; production imports require reviewed calibration evidence",
+    "standardization_population": "general_adult_online",
+    "administration_mode": "online",
+    "score_interpretation": "norm-referenced IQ estimate allowed only after claim gate passes"
+  },
+  "rows": [
+    {"raw_score": 0, "iq_estimate": 55, "percentile": 1, "ci_low": 50, "ci_high": 60},
+    {"raw_score": 15, "iq_estimate": 100, "percentile": 50, "ci_low": 96, "ci_high": 104},
+    {"raw_score": 30, "iq_estimate": 145, "percentile": 99, "ci_low": 140, "ci_high": 150}
+  ]
+}
