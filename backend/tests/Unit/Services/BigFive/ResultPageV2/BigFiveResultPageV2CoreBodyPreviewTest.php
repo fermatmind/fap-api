@@ -398,11 +398,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         $changed = [
             'backend/app/Console/Commands/PersonalityTdkNextBatchApprovalDraftGateCommand.php',
+            'backend/app/Console/Commands/PersonalityTdkRuntimePromotionSearchGateReadinessCommand.php',
             'backend/app/Console/Kernel.php',
         ];
         $kernelChangedLines = [
             '+use App\\Console\\Commands\\PersonalityTdkNextBatchApprovalDraftGateCommand;',
+            '+use App\\Console\\Commands\\PersonalityTdkRuntimePromotionSearchGateReadinessCommand;',
             '+        PersonalityTdkNextBatchApprovalDraftGateCommand::class,',
+            '+        PersonalityTdkRuntimePromotionSearchGateReadinessCommand::class,',
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
@@ -6060,7 +6063,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
 
     private function isPersonalityTdkNextBatchGateFile(string $file): bool
     {
-        return $file === 'backend/app/Console/Commands/PersonalityTdkNextBatchApprovalDraftGateCommand.php';
+        return in_array($file, [
+            'backend/app/Console/Commands/PersonalityTdkNextBatchApprovalDraftGateCommand.php',
+            'backend/app/Console/Commands/PersonalityTdkRuntimePromotionSearchGateReadinessCommand.php',
+        ], true);
     }
 
     private function isEnneagramCmsDraftFile(string $file): bool
@@ -10049,7 +10055,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
 
         foreach ($changedLines as $line) {
             $normalized = ltrim($line, '+-');
-            if (preg_match('/\bPersonalityTdkNextBatchApprovalDraftGateCommand\b/u', $normalized) !== 1) {
+            if (preg_match('/\bPersonalityTdk(?:NextBatchApprovalDraftGate|RuntimePromotionSearchGateReadiness)Command\b/u', $normalized) !== 1) {
                 return false;
             }
         }
