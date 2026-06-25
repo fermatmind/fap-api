@@ -28920,3 +28920,48 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: PERSONALITY-TDK-NEXT-BATCH-APPROVAL-DRAFT-GATE-01
+    repo: fap-api
+    depends_on: []
+    branch: codex/personality-tdk-next-batch-approval-draft-gate-01
+    title: "PERSONALITY-TDK-NEXT-BATCH-APPROVAL-DRAFT-GATE-01: Add personality TDK next-batch approval draft gate"
+    train_scope: fermatmind_seo_ops_p2_p4_20260625
+    status: user_authorized
+    scope:
+      - Add a backend-only read-only adapter for the three personality TDK next-batch recommendation and QA artifacts.
+      - Validate the exact target set and PASS_READY_FOR_APPROVAL_REVIEW state.
+      - Emit approval queue and CMS projection draft dry-run command templates plus separate approval templates.
+      - Keep approval queue writes and CMS draft writes as later separate exact approvals.
+    allowed_paths:
+      - backend/app/Console/Commands/PersonalityTdkNextBatchApprovalDraftGateCommand.php
+      - backend/app/Console/Kernel.php
+      - backend/docs/seo/generated/personality-tdk-next-batch-approval-draft-gate.v1.json
+      - backend/tests/Feature/Console/PersonalityTdkNextBatchApprovalDraftGateCommandTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Run production approval queue write, production CMS draft write, promotion, publish, index/search, sitemap, llms, Search Channel, live submit, frontend metadata edit, staging deploy, production deploy, or revalidation.
+      - Edit frontend TDK metadata directly.
+    validation:
+      - php -l backend/app/Console/Commands/PersonalityTdkNextBatchApprovalDraftGateCommand.php
+      - php -l backend/tests/Feature/Console/PersonalityTdkNextBatchApprovalDraftGateCommandTest.php
+      - cd backend && php artisan list | rg personality:tdk-next-batch-approval-draft-gate
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=PersonalityTdkNextBatchApprovalDraftGateCommandTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=PersonalityAgentApprovalQueueCommandTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=PersonalityMbti64CmsProjectionDraftCommandTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_personality_tdk_next_batch_gate_files' --no-ansi
+      - cd backend && vendor/bin/pint --test app/Console/Commands/PersonalityTdkNextBatchApprovalDraftGateCommand.php tests/Feature/Console/PersonalityTdkNextBatchApprovalDraftGateCommandTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - python3 -m json.tool backend/docs/seo/generated/personality-tdk-next-batch-approval-draft-gate.v1.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend

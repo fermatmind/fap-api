@@ -185,6 +185,7 @@ use App\Console\Commands\PersonalityMbti64CmsInternalLinkDraft;
 use App\Console\Commands\PersonalityMbti64CmsProjectionDraft;
 use App\Console\Commands\PersonalityMbti64CmsRevisionDraft;
 use App\Console\Commands\PersonalityMbti64CmsRevisionPromote;
+use App\Console\Commands\PersonalityTdkNextBatchApprovalDraftGateCommand;
 use App\Console\Commands\PersonalityEnneagramCmsPromote;
 use App\Console\Commands\QualityDailySummary;
 use App\Console\Commands\RefreshCareerAttributionDailyCommand;
@@ -267,6 +268,7 @@ class Kernel extends ConsoleKernel
         PersonalityMbti64CmsProjectionDraft::class,
         PersonalityMbti64CmsRevisionDraft::class,
         PersonalityMbti64CmsRevisionPromote::class,
+        PersonalityTdkNextBatchApprovalDraftGateCommand::class,
         PersonalityMbti64BackendImportContract::class,
         MetricsWeeklyValidity::class,
         MbtiPrewarm::class,
