@@ -298,8 +298,8 @@ final class SeoOpsZhArticleQualityControlledWriterCommand extends Command
 
         $out = [];
         foreach ($raw as $replacement) {
-            $find = (string) data_get($replacement, 'find', '');
-            $replace = (string) data_get($replacement, 'replace_with', '');
+            $find = (string) (data_get($replacement, 'find') ?? data_get($replacement, 'find_href', ''));
+            $replace = (string) (data_get($replacement, 'replace_with') ?? data_get($replacement, 'replace_with_href', ''));
             if (($allowed[$find] ?? null) !== $replace) {
                 continue;
             }

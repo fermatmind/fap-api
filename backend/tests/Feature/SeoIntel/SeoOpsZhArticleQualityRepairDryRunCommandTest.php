@@ -60,6 +60,18 @@ final class SeoOpsZhArticleQualityRepairDryRunCommandTest extends TestCase
         $this->assertSame('article:1:zh-CN', data_get($artifact, 'article_operation_plans.0.target'));
         $this->assertSame('/zh/articles/riasec-holland-career-interest-test-explained', data_get($artifact, 'article_operation_plans.0.current.canonical_path'));
         $this->assertSame('下一步怎么做', data_get($artifact, 'article_operation_plans.0.planned_repairs.heading_replacements.0.replace_with'));
+        $linkRepairs = data_get($artifact, 'article_operation_plans.7.planned_repairs.link_replacements');
+        $this->assertIsArray($linkRepairs);
+        $this->assertContains([
+            'find' => '/tests/mbti-personality-test-16-personality-types',
+            'replace_with' => '/zh/tests/mbti-personality-test-16-personality-types',
+            'scope' => 'cms_article_body_or_internal_link',
+        ], $linkRepairs);
+        $this->assertNotContains([
+            'find' => '',
+            'replace_with' => '',
+            'scope' => 'cms_article_body_or_internal_link',
+        ], $linkRepairs);
     }
 
     #[Test]
@@ -280,8 +292,8 @@ final class SeoOpsZhArticleQualityRepairDryRunCommandTest extends TestCase
                 'scope' => 'cms_article_body_or_module_heading',
             ], $headingFinds),
             'link_replacements' => array_map(static fn (array $pair): array => [
-                'find' => $pair[0],
-                'replace_with' => $pair[1],
+                'find_href' => $pair[0],
+                'replace_with_href' => $pair[1],
                 'scope' => 'cms_article_body_or_internal_link',
             ], $linkPairs),
             'protected_fields' => [

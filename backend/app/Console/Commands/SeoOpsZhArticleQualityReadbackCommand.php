@@ -177,8 +177,8 @@ final class SeoOpsZhArticleQualityReadbackCommand extends Command
         ];
         $replacementReadback = [];
         foreach ((array) ($plan['replacements'] ?? []) as $replacement) {
-            $find = (string) ($replacement['find'] ?? '');
-            $replace = (string) ($replacement['replace_with'] ?? '');
+            $find = (string) (($replacement['find'] ?? null) ?? ($replacement['find_href'] ?? ''));
+            $replace = (string) (($replacement['replace_with'] ?? null) ?? ($replacement['replace_with_href'] ?? ''));
             $fieldReadback = [];
             foreach ($texts as $field => $text) {
                 $present = substr_count($text, $replace);
