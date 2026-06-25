@@ -61381,7 +61381,7 @@
     "repo": "fap-api",
     "branch": "codex/pr-eq-agent-runtime-04-acceptance-report",
     "base": "main",
-    "status": "local_checks_passed_p0_blocked_report_ready",
+    "status": "pr_open_p0_blocked_report",
     "train_scope": "eq_agent_runtime",
     "title": "PR-EQ-AGENT-RUNTIME-04 EQ Agent runtime production acceptance report",
     "depends_on": [
@@ -61421,8 +61421,8 @@
       }
     },
     "failure_reason": "P0: production backend runtime message endpoint returns 404 NOT_FOUND; P1: context guardrail field mismatch can_create_paid_unlock_language vs frontend can_use_paid_unlock_language.",
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "b92ec13061aaa032f7a2424043b1bb75edfdb936",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2412",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -61444,6 +61444,12 @@
         "from": "acceptance_report_generated_p0_blocked",
         "to": "local_checks_passed_p0_blocked_report_ready",
         "notes": "Docs-only acceptance report and state ledger validated with diff, JSON, YAML, and scope checks. Report records P0/P1 and Agent runtime phase allowed=no."
+      },
+      {
+        "at": "2026-06-25T11:55:00+08:00",
+        "from": "local_checks_passed_p0_blocked_report_ready",
+        "to": "pr_open_p0_blocked_report",
+        "notes": "Opened PR #2412 with docs-only acceptance report. PR is safe to merge as evidence, but runtime rollout remains blocked by P0/P1."
       }
     ],
     "scope_validation": {
