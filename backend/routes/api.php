@@ -290,6 +290,10 @@ Route::prefix('v0.3')->middleware([
                 ->middleware('uuid:id')
                 ->defaults('public_realm', true)
                 ->name('api.v0_3.attempts.eq.agent_context');
+            Route::post('/attempts/{id}/eq/agent-runtime/messages', [AttemptReadController::class, 'eqAgentRuntimeMessage'])
+                ->middleware('uuid:id')
+                ->defaults('public_realm', true)
+                ->name('api.v0_3.attempts.eq.agent_runtime.messages');
             Route::get('/attempts/{id}/report.pdf', [AttemptReadController::class, 'reportPdf'])
                 ->middleware('uuid:id')
                 ->defaults('public_realm', true)

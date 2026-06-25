@@ -467,6 +467,152 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: PR-EQ-AGENT-RUNTIME-01
+    repo: fap-api
+    depends_on: [PR-EQ-AGENT-04]
+    branch: codex/pr-eq-agent-runtime-01-backend-shell
+    title: "PR-EQ-AGENT-RUNTIME-01 Backend read-only EQ Agent runtime shell"
+    train_scope: eq_agent_runtime
+    scope:
+      - Add deterministic read-only EQ Agent runtime message endpoint.
+      - Reuse existing EQ Agent context, report read guard, resolved assets, intent map, playbooks, and forbidden-claim metadata.
+      - Return eq.agent_runtime_response.v1 without persistence, external model calls, report mutation, score mutation, formulation override, SJT enablement, or paid unlock language.
+    allowed_paths:
+      - backend/routes/api.php
+      - backend/app/Http/Controllers/API/V0_3/AttemptReadController.php
+      - backend/app/Services/Eq/**
+      - backend/tests/Feature/Report/EqAgentContextApiTest.php
+      - backend/tests/Feature/Report/Eq60V5ReportContractTest.php
+      - backend/docs/contracts/openapi.snapshot.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add live LLM/provider integration.
+      - Persist chat history or Agent messages.
+      - Add Agent write endpoints or content/report mutation.
+      - Modify EQ questions, scoring, norms, formulation selection, SJT availability, commerce, frontend, CMS, SEO, deploy, or production state.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan route:list
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=EqAgent
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest
+      - cd backend && bash scripts/export_openapi.sh --check
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: PR-EQ-AGENT-RUNTIME-02
+    repo: fap-api
+    depends_on: [PR-EQ-AGENT-RUNTIME-01]
+    branch: codex/pr-eq-agent-runtime-02-response-evals
+    title: "PR-EQ-AGENT-RUNTIME-02 EQ Agent response safety eval fixtures"
+    train_scope: eq_agent_runtime
+    scope:
+      - Add deterministic runtime message fixtures for forbidden claims and safety boundaries.
+      - Assert runtime responses remain read-only, cite stable asset IDs, preserve low-confidence boundaries, keep SJT planned/unavailable, and avoid paywall/SKU/unlock/raw-tag wording.
+    allowed_paths:
+      - backend/tests/Fixtures/eq/agent/**
+      - backend/tests/Feature/Report/EqAgentContextApiTest.php
+      - backend/tests/Feature/Report/Eq60V5ReportContractTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify frontend.
+      - Add live LLM/provider integration.
+      - Add Agent write endpoints or persistence.
+      - Modify EQ questions, scoring, norms, content assets, SJT runtime, or commerce.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=EqAgent
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: PR-EQ-AGENT-RUNTIME-03
+    repo: fap-web
+    depends_on: [PR-EQ-AGENT-RUNTIME-02]
+    branch: codex/pr-eq-agent-runtime-03-frontend-drawer
+    title: "PR-EQ-AGENT-RUNTIME-03 Frontend EQ Agent chat drawer"
+    train_scope: eq_agent_runtime
+    scope:
+      - Replace EQ Agent ready panel with a guarded read-only drawer.
+      - Lazy-load EQ Agent context and post messages to deterministic runtime endpoint.
+      - Fail closed when guardrails are missing or unsafe.
+    allowed_paths:
+      - app/(localized)/[locale]/(app)/result/[id]/ResultClient.tsx
+      - components/result/eq/**
+      - lib/api/v0_3.ts
+      - tests/contracts/**
+      - tests/e2e/iq-eq-result-regression.spec.ts
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Add official report prose in frontend.
+      - Add Agent mutation controls, SJT take entry, paywall, SKU, unlock copy, or raw technical tag rendering.
+      - Modify backend, EQ questions, scoring, norms, content assets, CMS, SEO, deploy, or production state.
+    validation:
+      - pnpm typecheck
+      - pnpm test:contract
+      - pnpm exec playwright test tests/e2e/iq-eq-result-regression.spec.ts
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: PR-EQ-AGENT-RUNTIME-04
+    repo: fap-api
+    depends_on: [PR-EQ-AGENT-RUNTIME-03]
+    branch: codex/pr-eq-agent-runtime-04-acceptance-report
+    title: "PR-EQ-AGENT-RUNTIME-04 EQ Agent runtime production acceptance report"
+    train_scope: eq_agent_runtime
+    scope:
+      - Add docs-only production smoke acceptance report for EQ Agent runtime.
+      - Record deployed SHAs, attempt IDs, endpoint summaries, screenshots in /tmp, risks, and Agent runtime phase allowed yes/no.
+    allowed_paths:
+      - docs/audits/eq/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify runtime code, frontend, content assets, scoring, SJT runtime, CMS, SEO, deploy, or production state.
+    validation:
+      - git diff --check
+      - git diff --cached --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: PR-EQ-PER-01
     repo: fap-api
     branch: codex/pr-eq-per-01-all-free-copy-contract-cleanup
