@@ -61720,7 +61720,7 @@
     "repo": "fap-api",
     "branch": "codex/pr-eq-agent-harden-01-guardrail-alias",
     "base": "main",
-    "status": "pr_opened_rebased",
+    "status": "merged_deployed_reconciled",
     "train_scope": "eq_agent_runtime_hardening",
     "title": "PR-EQ-AGENT-HARDEN-01 EQ Agent guardrail alias normalization",
     "depends_on": [
@@ -61763,14 +61763,22 @@
       "scope_validation": {
         "status": "pass",
         "evidence": "Changed files are limited to EQ Agent guardrail services, EqAgent contract test, and PR train metadata."
+      },
+      "github_pr_merge": {
+        "status": "pass",
+        "evidence": "GitHub PR #2416 is MERGED with merge commit 37f8423392628068eecf952aaf918c5a73a9939d."
+      },
+      "production_deploy": {
+        "status": "pass",
+        "evidence": "Production backend REVISION 950b81cd23df85fb1de4ada2dfc5205f758f3284 contains 37f8423392628068eecf952aaf918c5a73a9939d and returned both paid-language aliases in EQ Agent context/runtime."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
+    "commit_sha": "37f8423392628068eecf952aaf918c5a73a9939d",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2416",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-25T04:20:37Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-25T12:10:00+08:00",
@@ -61795,6 +61803,12 @@
         "from": "pr_opened",
         "to": "pr_opened_rebased",
         "notes": "Rebased onto latest origin/main and reconciled PR train state with upstream ledger changes."
+      },
+      {
+        "at": "2026-06-25T07:39:33.984901Z",
+        "from": "pr_opened_rebased",
+        "to": "merged_deployed_reconciled",
+        "notes": "Reconciled during PR-EQ-AGENT-SMOKE-02 after PR #2416 merged and production backend revision included the guardrail alias normalization."
       }
     ]
   },
@@ -61802,7 +61816,7 @@
     "repo": "fap-api",
     "branch": "codex/pr-eq-agent-smoke-02-normal-confidence-report",
     "base": "main",
-    "status": "pending_dependency",
+    "status": "ready_to_merge",
     "train_scope": "eq_agent_runtime_hardening",
     "title": "PR-EQ-AGENT-SMOKE-02 EQ Agent normal-confidence production smoke report",
     "depends_on": [
@@ -61814,13 +61828,46 @@
         "evidence": "User explicitly authorized PR-EQ-AGENT-HARDEN-01 and PR-EQ-AGENT-SMOKE-02 as PR-train items."
       },
       "dependency": {
-        "status": "pending",
-        "evidence": "Waits for PR-EQ-AGENT-HARDEN-01 to merge and deploy before production normal-confidence smoke."
+        "status": "pass",
+        "evidence": "PR-EQ-AGENT-HARDEN-01 merged as PR #2416 and production backend revision 950b81cd23df85fb1de4ada2dfc5205f758f3284 contains the merge commit."
+      },
+      "production_normal_confidence_smoke": {
+        "status": "pass",
+        "evidence": "Production attempt 6ffd0531-fa93-496e-aadc-03a9e3870623 submitted after 372 server seconds with quality.level=A and no flags."
+      },
+      "report_access": {
+        "status": "pass",
+        "evidence": "report-access returned ready/full/all-free with locked=false, upgrade_sku=null, offers=[], blur_others=false."
+      },
+      "report_payload": {
+        "status": "pass",
+        "evidence": "/report returned eq_report_mode=self_report, v1.6 report version, scores.dimensions, assets, next_module planned/unavailable in en and zh-CN."
+      },
+      "agent_context_runtime": {
+        "status": "pass",
+        "evidence": "/eq/agent-context and /eq/agent-runtime/messages returned 200 in en and zh-CN with both paid-language aliases false."
+      },
+      "frontend_page_smoke": {
+        "status": "pass",
+        "evidence": "Production en/zh result pages opened, Agent entry did not auto-fetch, click lazy-fetched context, send lazy-posted runtime, no paywall/SKU/raw tag visible text."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check",
+        "evidence": "No whitespace errors."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to docs/audits/eq normal-confidence acceptance report and PR train state reconciliation."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "GitHub checks pass: Semgrep, hygiene, content-pack-build-validate, supply-chain, verify-bigfive, verify-mbti-legacy, verify-mbti-v2."
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "ffb3dd8fdc976ab59e4036380d8b2f6083d09298",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2420",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -61830,6 +61877,18 @@
         "from": "missing_from_manifest",
         "to": "pending_dependency",
         "notes": "Initialized from explicit user authorization; waits for PR-EQ-AGENT-HARDEN-01."
+      },
+      {
+        "at": "2026-06-25T07:39:33.984901Z",
+        "from": "pending_dependency",
+        "to": "local_checks_passed",
+        "notes": "Normal-confidence production smoke passed and acceptance report was added."
+      },
+      {
+        "at": "2026-06-25T07:46:48.076868Z",
+        "from": "local_checks_passed",
+        "to": "ready_to_merge",
+        "notes": "GitHub checks passed and PR #2420 mergeStateStatus is CLEAN."
       }
     ]
   },
