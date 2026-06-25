@@ -62075,7 +62075,7 @@
     "repo": "fap-api",
     "branch": "codex/pr-eq-agent-runtime-v2-03-provider-abstraction",
     "base": "main",
-    "status": "pr_opened",
+    "status": "ready_to_merge",
     "train_scope": "eq_agent_runtime_v2",
     "title": "PR-EQ-AGENT-RUNTIME-V2-03 EQ Agent provider abstraction and feature flag",
     "depends_on": [
@@ -62633,12 +62633,12 @@
         "evidence": "Changed files are limited to PersonalityTdkRuntimePromotionSearchGateReadinessCommand.php, Kernel registration, generated command contract doc, focused Feature test, BigFive freeze classifier allowlist for this read-only command, and authorized docs/codex train metadata. No production approval queue write, CMS draft write, promotion, publish, index/search, sitemap/llms, frontend metadata edit, deploy, or revalidation changes."
       },
       "github": {
-        "status": "pending",
-        "evidence": "Opened PR #2431 at https://github.com/fermatmind/fap-api/pull/2431 from commit d97c5318e235665b1d36d9069ffc0316c37ee394. Waiting for GitHub checks."
+        "status": "pass",
+        "evidence": "GitHub checks are green for PR #2431: hygiene, supply-chain, content-pack-build-validate, Semgrep, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 all passed. Merge state is CLEAN."
       }
     },
     "failure_reason": null,
-    "commit_sha": "d97c5318e235665b1d36d9069ffc0316c37ee394",
+    "commit_sha": "e0a7f66867342369b60d983d6c0e7b9f96460fab",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2431",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -62658,6 +62658,11 @@
         "at": "2026-06-25T22:40:00+08:00",
         "status": "github_checks_pending",
         "note": "Opened PR #2431 at https://github.com/fermatmind/fap-api/pull/2431 from commit d97c5318e235665b1d36d9069ffc0316c37ee394. Waiting for GitHub checks; no staging wait, production deploy, approval queue write, CMS draft write, promotion, publish, search, sitemap, llms, frontend metadata edit, or revalidation."
+      },
+      {
+        "at": "2026-06-25T22:48:00+08:00",
+        "status": "ready_to_merge",
+        "note": "PR #2431 GitHub checks passed and mergeStateStatus is CLEAN at head e0a7f66867342369b60d983d6c0e7b9f96460fab. Ready for squash merge under repo policy."
       }
     ]
   }
