@@ -296,6 +296,7 @@ final class EqAgentRuntimeResponder
             && $guardrails['can_override_formulation'] === false
             && $guardrails['can_enable_sjt'] === false
             && $guardrails['can_create_paid_unlock_language'] === false
+            && $guardrails['can_use_paid_unlock_language'] === false
             && $guardrails['can_expose_raw_technical_tags'] === false;
     }
 

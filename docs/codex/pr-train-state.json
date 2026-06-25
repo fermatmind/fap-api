@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-25T11:35:00+08:00",
+  "updated_at": "2026-06-25T12:40:00+08:00",
   "PR-EQ-ASSET-01": {
     "repo": "fap-api",
     "branch": "codex/pr-eq-asset-01-content-pack-v16",
@@ -61713,6 +61713,123 @@
         "at": "2026-06-25T04:01:50Z",
         "status": "ready_to_merge",
         "note": "PR #2413 checks passed at head bdf632e941af4635de440315e96ab6b52433aa85 and mergeStateStatus was CLEAN. Ready for squash merge; no staging wait, production deploy, CMS write, SEO, sitemap, llms, DB migration, or frontend work included."
+      }
+    ]
+  },
+  "PR-EQ-AGENT-HARDEN-01": {
+    "repo": "fap-api",
+    "branch": "codex/pr-eq-agent-harden-01-guardrail-alias",
+    "base": "main",
+    "status": "pr_opened_rebased",
+    "train_scope": "eq_agent_runtime_hardening",
+    "title": "PR-EQ-AGENT-HARDEN-01 EQ Agent guardrail alias normalization",
+    "depends_on": [
+      "PR-EQ-AGENT-RUNTIME-04"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized PR-EQ-AGENT-HARDEN-01 and PR-EQ-AGENT-SMOKE-02 as PR-train items."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "PR-EQ-AGENT-RUNTIME-04 acceptance update merged as PR #2414 and origin/main contains 7af581948918e05fe81e4ad83fee578b32f22223."
+      },
+      "eq_agent_test": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=EqAgent",
+        "evidence": "10 tests passed, 628 assertions. PHPUnit emitted existing file_get_contents warnings, exit code 0."
+      },
+      "eq60_v5_report_contract_test": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest",
+        "evidence": "10 tests passed, 404 assertions. PHPUnit emitted existing file_get_contents warnings, exit code 0."
+      },
+      "manifest_yaml": {
+        "status": "pass",
+        "command": "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+        "evidence": "yaml ok."
+      },
+      "state_json": {
+        "status": "pass",
+        "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+        "evidence": "json ok."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check",
+        "evidence": "No whitespace errors."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to EQ Agent guardrail services, EqAgent contract test, and PR train metadata."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2416",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-25T12:10:00+08:00",
+        "from": "missing_from_manifest",
+        "to": "in_progress",
+        "notes": "Initialized from explicit user authorization and started from latest origin/main in a clean temporary worktree."
+      },
+      {
+        "at": "2026-06-25T12:20:00+08:00",
+        "from": "in_progress",
+        "to": "local_checks_passed",
+        "notes": "Normalized paid-language guardrail aliases in context/runtime payloads and extended EqAgent contract assertions; local checks passed."
+      },
+      {
+        "at": "2026-06-25T12:30:00+08:00",
+        "from": "local_checks_passed",
+        "to": "pr_opened",
+        "notes": "Opened GitHub PR #2416 after local validation and scope validation passed."
+      },
+      {
+        "at": "2026-06-25T12:40:00+08:00",
+        "from": "pr_opened",
+        "to": "pr_opened_rebased",
+        "notes": "Rebased onto latest origin/main and reconciled PR train state with upstream ledger changes."
+      }
+    ]
+  },
+  "PR-EQ-AGENT-SMOKE-02": {
+    "repo": "fap-api",
+    "branch": "codex/pr-eq-agent-smoke-02-normal-confidence-report",
+    "base": "main",
+    "status": "pending_dependency",
+    "train_scope": "eq_agent_runtime_hardening",
+    "title": "PR-EQ-AGENT-SMOKE-02 EQ Agent normal-confidence production smoke report",
+    "depends_on": [
+      "PR-EQ-AGENT-HARDEN-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized PR-EQ-AGENT-HARDEN-01 and PR-EQ-AGENT-SMOKE-02 as PR-train items."
+      },
+      "dependency": {
+        "status": "pending",
+        "evidence": "Waits for PR-EQ-AGENT-HARDEN-01 to merge and deploy before production normal-confidence smoke."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-25T12:10:00+08:00",
+        "from": "missing_from_manifest",
+        "to": "pending_dependency",
+        "notes": "Initialized from explicit user authorization; waits for PR-EQ-AGENT-HARDEN-01."
       }
     ]
   }
