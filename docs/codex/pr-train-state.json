@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-25T02:58:10Z",
+  "updated_at": "2026-06-25T03:08:48Z",
   "PR-EQ-ASSET-01": {
     "repo": "fap-api",
     "branch": "codex/pr-eq-asset-01-content-pack-v16",
@@ -25056,12 +25056,17 @@
           "status": "pass",
           "evidence": "GitHub checks passed for PR #2409 at head cf6a960dfe22be7c5cdd5f899efda6bc265b419d; mergeStateStatus CLEAN; PR open and non-draft.",
           "checked_at": "2026-06-25T02:58:10Z"
+        },
+        "post_merge": {
+          "status": "pass",
+          "evidence": "PR #2409 is MERGED; origin/main contains merge commit 953ba036a0d5ca8dad855b9f0f226664dc376fef; local main equals origin/main; worktree clean; local and remote task branches deleted or absent. No deploy was triggered.",
+          "checked_at": "2026-06-25T03:08:48Z"
         }
       },
       "failure_reason": null,
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-06-25T03:06:01Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "scope_validation": {
         "allowed_paths_only": true,
         "local_validation_passed": true,
@@ -25108,8 +25113,8 @@
           "note": "Local Big Five freeze classifier fix and IQ_OWNER_ORIGINAL_30 runtime scoring validation passed; ready to commit and push CI fix."
         }
       ],
-      "status": "ready_to_merge",
-      "commit_sha": "cf6a960dfe22be7c5cdd5f899efda6bc265b419d",
+      "status": "merged",
+      "commit_sha": "953ba036a0d5ca8dad855b9f0f226664dc376fef",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/2409",
       "pr_number": 2409,
       "updated_at": "2026-06-25T02:47:02.247762Z",
@@ -25119,8 +25124,16 @@
           "from": "ci_fix_validated",
           "to": "ready_to_merge",
           "note": "All GitHub checks passed for PR #2409 at head cf6a960dfe22be7c5cdd5f899efda6bc265b419d and mergeStateStatus was CLEAN. Recording ready_to_merge before squash merge per PR-train ledger policy."
+        },
+        {
+          "at": "2026-06-25T03:08:48Z",
+          "from": "ready_to_merge",
+          "to": "merged",
+          "note": "Closed ledger after PR #2409 squash merge. Merge commit 953ba036a0d5ca8dad855b9f0f226664dc376fef is on origin/main; local main is synced and clean; task branch is deleted locally and remotely."
         }
-      ]
+      ],
+      "pr_head_sha": "4e1cbe9ae0956f903948231a301761a39bfe73c5",
+      "merge_commit_sha": "953ba036a0d5ca8dad855b9f0f226664dc376fef"
     }
   },
   "SEO-DASH-PROD-03D-FIX": {
@@ -61462,7 +61475,7 @@
     "repo": "fap-api",
     "branch": "codex/iq-owner-30-scoring-runtime-bind-01",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "iq_owner_original_30_launch",
     "title": "IQ-OWNER-30-SCORING-RUNTIME-BIND-01: Bind owner IQ 30 runtime scoring",
     "depends_on": [
@@ -61508,14 +61521,19 @@
         "status": "pass",
         "evidence": "GitHub checks passed for PR #2409 at head cf6a960dfe22be7c5cdd5f899efda6bc265b419d; mergeStateStatus CLEAN; PR open and non-draft.",
         "checked_at": "2026-06-25T02:58:10Z"
+      },
+      "post_merge": {
+        "status": "pass",
+        "evidence": "PR #2409 is MERGED; origin/main contains merge commit 953ba036a0d5ca8dad855b9f0f226664dc376fef; local main equals origin/main; worktree clean; local and remote task branches deleted or absent. No deploy was triggered.",
+        "checked_at": "2026-06-25T03:08:48Z"
       }
     },
     "failure_reason": null,
-    "commit_sha": "cf6a960dfe22be7c5cdd5f899efda6bc265b419d",
+    "commit_sha": "953ba036a0d5ca8dad855b9f0f226664dc376fef",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2409",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-25T03:06:01Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-25T00:00:00Z",
@@ -61539,7 +61557,16 @@
         "from": "in_progress",
         "to": "ready_to_merge",
         "note": "All GitHub checks passed for PR #2409 at head cf6a960dfe22be7c5cdd5f899efda6bc265b419d and mergeStateStatus was CLEAN. Recording ready_to_merge before squash merge per PR-train ledger policy."
+      },
+      {
+        "at": "2026-06-25T03:08:48Z",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "note": "Closed ledger after PR #2409 squash merge. Merge commit 953ba036a0d5ca8dad855b9f0f226664dc376fef is on origin/main; local main is synced and clean; task branch is deleted locally and remotely."
       }
-    ]
+    ],
+    "pr_head_sha": "4e1cbe9ae0956f903948231a301761a39bfe73c5",
+    "pr_number": 2409,
+    "merge_commit_sha": "953ba036a0d5ca8dad855b9f0f226664dc376fef"
   }
 }
