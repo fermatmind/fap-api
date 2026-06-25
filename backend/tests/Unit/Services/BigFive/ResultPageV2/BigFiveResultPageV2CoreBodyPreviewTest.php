@@ -1284,13 +1284,19 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
-    public function test_runtime_freeze_classifier_ignores_seo_ops_p0_ctr_repair_dry_run_adapter(): void
+    public function test_runtime_freeze_classifier_ignores_seo_ops_p0_ctr_repair_adapters(): void
     {
         $changed = [
+            'backend/app/Console/Commands/SeoOpsP0CtrArticleCmsUpdateWriterCommand.php',
             'backend/app/Console/Commands/SeoOpsP0CtrRepairDryRunCommand.php',
+            'backend/app/Console/Kernel.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\SeoOpsP0CtrArticleCmsUpdateWriterCommand;',
+            '+        SeoOpsP0CtrArticleCmsUpdateWriterCommand::class,',
         ];
 
-        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
     public function test_runtime_freeze_classifier_ignores_seo_agent_codex_review_runner_files(): void
@@ -5713,6 +5719,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsEnneagramCmsPromotionOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsBigFivePublicProfileAgentDraftOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsBigFivePublicProfileAgentPromotionOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsSeoOpsP0CtrArticleCmsUpdateWriterOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentCmsTdkGapReadonlyScannerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentCodexReviewRunnerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentCmsDraftPackageDryRunOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
@@ -6467,7 +6474,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
 
     private function isSeoOpsP0CtrRepairDryRunFile(string $file): bool
     {
-        return $file === 'backend/app/Console/Commands/SeoOpsP0CtrRepairDryRunCommand.php';
+        return in_array($file, [
+            'backend/app/Console/Commands/SeoOpsP0CtrArticleCmsUpdateWriterCommand.php',
+            'backend/app/Console/Commands/SeoOpsP0CtrRepairDryRunCommand.php',
+        ], true);
     }
 
     private function isSeoAgentCmsTdkGapReadonlyScannerFile(string $file): bool
@@ -8564,6 +8574,28 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if (preg_match('/\b(ArticleDiscoverabilityRelease|ArticleEnsureSeoMetaBaseline|ArticleTaxonomyHygiene|ArticleUpdateExistingSeoContentPackage|ArticleSeoGateRollout|ContentReleaseRevalidate|SeoIntelSearchChannelQueueCommand|SeoIntelUrlTruthHandoffCommand)\b/u', $line) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsSeoOpsP0CtrArticleCmsUpdateWriterOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            if (preg_match('/\b(MBTI|Mbti|BigFive|Big5|Prewarm|ResultPage|Report)\b/u', $line) === 1) {
+                return false;
+            }
+
+            if (preg_match('/\bSeoOpsP0CtrArticleCmsUpdateWriterCommand\b/u', $line) !== 1) {
                 return false;
             }
         }

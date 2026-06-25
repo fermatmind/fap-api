@@ -1,0 +1,85 @@
+{
+  "version": "seo-ops-p0-ctr-article-cms-update-writer.v1",
+  "command": "php artisan seo-ops:p0-ctr-article-cms-update-writer",
+  "purpose": "Controlled Gate B writer for P0 CTR article CMS updates from verified seo-ops-p0-ctr-repair-dry-run.v1 evidence.",
+  "input_schema": "seo-ops-p0-ctr-repair-dry-run.v1",
+  "required_options": [
+    "--dry-run-evidence",
+    "--confirm-dry-run-evidence-sha256",
+    "--artifact-dir",
+    "--json"
+  ],
+  "execute_options": [
+    "--execute",
+    "--confirm-write"
+  ],
+  "default_mode": {
+    "dry_run": true,
+    "execute": false,
+    "database_write": false
+  },
+  "execute_gate": {
+    "requires_exact_confirmation_phrase": true,
+    "phrase_source": "required_confirmation_phrase emitted by dry-run",
+    "bounded_targets": 3,
+    "target_family": "article_cms_updates"
+  },
+  "writes_when_executed": {
+    "article_translation_revisions": [
+      "published revision seo_title",
+      "published revision seo_description"
+    ],
+    "article_seo_meta": [
+      "seo_title",
+      "seo_description",
+      "og_title",
+      "og_description",
+      "editorial_package_v1 CTA/internal-link/readback metadata"
+    ]
+  },
+  "protected_fields": {
+    "slug": "no_change",
+    "canonical": "no_change",
+    "locale": "no_change",
+    "article_id": "resolved_no_change",
+    "publication": "no_change",
+    "published_revision_id": "no_change",
+    "working_revision_id": "no_change",
+    "schema": "hold_no_change",
+    "hreflang": "hold_no_change",
+    "sitemap": "no_change",
+    "llms": "no_change"
+  },
+  "runtime_projection": {
+    "title_meta": "published revision + article_seo_meta",
+    "cta": "article_seo_meta.schema_json.editorial_package_v1.cta_slots -> landing_surface_v1.cta_bundle and answer_surface_v1.next_step_blocks",
+    "body_internal_link_rewrite": false
+  },
+  "evidence_outputs": [
+    "evidence.path",
+    "evidence.sha256",
+    "planned_write_count",
+    "article_update_plans",
+    "write_results",
+    "side_effects",
+    "protected_diff_summary"
+  ],
+  "side_effect_boundaries": {
+    "landing_surface_write": false,
+    "cms_publish": false,
+    "url_truth_write": false,
+    "schema_enable": false,
+    "hreflang_enable": false,
+    "sitemap_write": false,
+    "llms_write": false,
+    "search_channel_enqueue": false,
+    "indexnow_submit": false,
+    "baidu_submit": false,
+    "gsc_request_indexing": false,
+    "scheduler_start": false,
+    "queue_worker_start": false,
+    "external_api_call": false,
+    "revalidation": false,
+    "deploy": false
+  }
+}
