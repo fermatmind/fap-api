@@ -685,6 +685,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_scale_lookup_public_commercial_projection(): void
+    {
+        $changed = [
+            'backend/app/Http/Controllers/API/V0_3/ScalesLookupController.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_clinical_combo_en_paid_parity_changes(): void
     {
         $changed = [
@@ -5640,6 +5649,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isScaleLookupPublicCommercialProjectionFile($file)) {
+                continue;
+            }
+
             if ($this->isClinicalComboEnPaidParityFile($file)) {
                 continue;
             }
@@ -7239,6 +7252,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Report/Resolvers/AccessResolver.php',
             'backend/config/fap.php',
         ], true);
+    }
+
+    private function isScaleLookupPublicCommercialProjectionFile(string $file): bool
+    {
+        return $file === 'backend/app/Http/Controllers/API/V0_3/ScalesLookupController.php';
     }
 
     private function isClinicalComboEnPaidParityFile(string $file): bool

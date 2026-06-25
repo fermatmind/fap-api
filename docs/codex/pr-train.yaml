@@ -108,6 +108,7 @@ prs:
     allowed_paths:
       - backend/app/Http/Controllers/API/V0_3/ScalesLookupController.php
       - backend/tests/Feature/V0_3/ScalesLookupTest.php
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - docs/codex/pr-train.yaml
       - docs/codex/pr-train-state.json
     do_not:
@@ -117,7 +118,9 @@ prs:
     validation:
       - php -l backend/app/Http/Controllers/API/V0_3/ScalesLookupController.php
       - php -l backend/tests/Feature/V0_3/ScalesLookupTest.php
+      - php -l backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
       - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=ScalesLookupTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_scale_lookup_public_commercial_projection' --no-ansi
       - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
       - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
       - git diff --check
