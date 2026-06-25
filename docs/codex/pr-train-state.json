@@ -62168,7 +62168,7 @@
     "repo": "fap-api",
     "branch": "codex/pr-eq-agent-runtime-v2-04-staging-smoke-report",
     "base": "main",
-    "status": "local_validated_blocked_smoke_report",
+    "status": "ready_to_merge",
     "train_scope": "eq_agent_runtime_v2",
     "title": "PR-EQ-AGENT-RUNTIME-V2-04 EQ Agent staging LLM smoke report",
     "depends_on": [
@@ -62202,10 +62202,14 @@
       "staging_safe_state": {
         "status": "pass",
         "evidence": "Staging was returned to EQ_AGENT_LLM_ENABLED=false after the OpenAI outbound timeout was confirmed; provider/key/model may remain configured but live calls are disabled until connectivity is fixed."
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "PR #2430 checks passed on head a06d8a8cfa1182fd197d67167fe1c0d82de1d70a: hygiene, supply-chain, content-pack-build-validate, verify-mbti-legacy, verify-mbti-v2, verify-bigfive, Semgrep blocking secrets, semgrep SARIF upload, and Semgrep OSS. mergeStateStatus=CLEAN."
       }
     },
     "failure_reason": "Live LLM staging smoke blocked by staging outbound timeout to OpenAI Responses API; deterministic fallback passed. Exposed UI-created eq-agent-staging key has been deleted/revoked.",
-    "commit_sha": "2b132f4335e7edd7f3aac7d586a3c9d2c817011b",
+    "commit_sha": "a06d8a8cfa1182fd197d67167fe1c0d82de1d70a",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2430",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -62234,6 +62238,12 @@
         "from": "local_validated_blocked_smoke_report",
         "to": "pr_opened",
         "notes": "Opened docs-only PR #2430 for V2-04 blocked staging LLM smoke report."
+      },
+      {
+        "at": "2026-06-25T21:26:00+08:00",
+        "from": "pr_opened",
+        "to": "ready_to_merge",
+        "notes": "GitHub checks passed and mergeStateStatus was CLEAN for PR #2430."
       }
     ]
   },
