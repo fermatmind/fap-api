@@ -168,6 +168,7 @@ final class EqAgentContextBuilder
             'can_override_formulation' => false,
             'can_enable_sjt' => false,
             'can_create_paid_unlock_language' => false,
+            'can_use_paid_unlock_language' => false,
             'can_expose_raw_technical_tags' => false,
             'content_authority' => 'backend_content_pack_and_report_composer',
         ];

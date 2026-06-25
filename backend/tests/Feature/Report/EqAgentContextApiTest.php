@@ -48,6 +48,8 @@ final class EqAgentContextApiTest extends TestCase
             ->assertJsonPath('guardrails.can_mutate_scores', false)
             ->assertJsonPath('guardrails.can_override_formulation', false)
             ->assertJsonPath('guardrails.can_enable_sjt', false)
+            ->assertJsonPath('guardrails.can_create_paid_unlock_language', false)
+            ->assertJsonPath('guardrails.can_use_paid_unlock_language', false)
             ->assertJsonPath('guardrails.content_authority', 'backend_content_pack_and_report_composer')
             ->assertJsonPath('agent_knowledge.authority.report_authority', 'backend_content_pack_and_report_composer')
             ->assertJsonPath('intent_context.matched', true)
@@ -113,7 +115,9 @@ final class EqAgentContextApiTest extends TestCase
             ->assertJsonPath('intent_context.matched_intent', 'understand_my_result')
             ->assertJsonPath('intent_context.reason_code', 'unknown_intent_defaulted')
             ->assertJsonPath('guardrails.can_mutate_report', false)
-            ->assertJsonPath('guardrails.can_enable_sjt', false);
+            ->assertJsonPath('guardrails.can_enable_sjt', false)
+            ->assertJsonPath('guardrails.can_create_paid_unlock_language', false)
+            ->assertJsonPath('guardrails.can_use_paid_unlock_language', false);
 
         $this->assertContains('asset:core_formulation', (array) $response->json('intent_context.retrieval_tags'));
     }
@@ -146,6 +150,7 @@ final class EqAgentContextApiTest extends TestCase
             ->assertJsonPath('guardrails.can_mutate_scores', false)
             ->assertJsonPath('guardrails.can_override_formulation', false)
             ->assertJsonPath('guardrails.can_enable_sjt', false)
+            ->assertJsonPath('guardrails.can_create_paid_unlock_language', false)
             ->assertJsonPath('guardrails.can_use_paid_unlock_language', false)
             ->assertJsonPath('assistant_response.role', 'assistant')
             ->assertJsonPath('safety.no_paywall_language', true)
@@ -203,7 +208,9 @@ final class EqAgentContextApiTest extends TestCase
             ->assertJsonPath('ready', true)
             ->assertJsonPath('guardrails.read_only', true)
             ->assertJsonPath('guardrails.can_mutate_report', false)
-            ->assertJsonPath('guardrails.can_enable_sjt', false);
+            ->assertJsonPath('guardrails.can_enable_sjt', false)
+            ->assertJsonPath('guardrails.can_create_paid_unlock_language', false)
+            ->assertJsonPath('guardrails.can_use_paid_unlock_language', false);
 
         $this->assertContains('clinical_diagnosis', (array) $response->json('safety.detected_forbidden_claim_ids'));
         $this->assertContains('hiring_suitability', (array) $response->json('safety.detected_forbidden_claim_ids'));
@@ -252,6 +259,7 @@ final class EqAgentContextApiTest extends TestCase
                 ->assertJsonPath('guardrails.can_mutate_scores', false)
                 ->assertJsonPath('guardrails.can_override_formulation', false)
                 ->assertJsonPath('guardrails.can_enable_sjt', false)
+                ->assertJsonPath('guardrails.can_create_paid_unlock_language', false)
                 ->assertJsonPath('guardrails.can_use_paid_unlock_language', false)
                 ->assertJsonPath('safety.no_paywall_language', true)
                 ->assertJsonPath('safety.no_sjt_entry', true)
@@ -393,7 +401,9 @@ final class EqAgentContextApiTest extends TestCase
             ->assertJsonPath('guardrails.can_mutate_report', false)
             ->assertJsonPath('guardrails.can_mutate_scores', false)
             ->assertJsonPath('guardrails.can_override_formulation', false)
-            ->assertJsonPath('guardrails.can_enable_sjt', false);
+            ->assertJsonPath('guardrails.can_enable_sjt', false)
+            ->assertJsonPath('guardrails.can_create_paid_unlock_language', false)
+            ->assertJsonPath('guardrails.can_use_paid_unlock_language', false);
 
         foreach ($this->forbiddenClaimCases() as $case) {
             $claimId = (string) ($case['claim_id'] ?? '');
@@ -445,6 +455,8 @@ final class EqAgentContextApiTest extends TestCase
             ->assertJsonPath('report_context.next_module.available', false)
             ->assertJsonPath('report_context.next_module.status', 'planned')
             ->assertJsonPath('guardrails.can_enable_sjt', false)
+            ->assertJsonPath('guardrails.can_create_paid_unlock_language', false)
+            ->assertJsonPath('guardrails.can_use_paid_unlock_language', false)
             ->assertJsonPath('intent_context.matched', true)
             ->assertJsonPath('intent_context.matched_intent', 'ask_for_sjt')
             ->assertJsonPath('intent_context.allowed_response_mode', 'planned_unavailable_boundary');
@@ -489,6 +501,8 @@ final class EqAgentContextApiTest extends TestCase
                 ->assertJsonPath('guardrails.read_only', true)
                 ->assertJsonPath('guardrails.can_mutate_report', false)
                 ->assertJsonPath('guardrails.can_enable_sjt', false)
+                ->assertJsonPath('guardrails.can_create_paid_unlock_language', false)
+                ->assertJsonPath('guardrails.can_use_paid_unlock_language', false)
                 ->assertJsonPath('intent_context.matched_intent', 'quality_or_confidence_question')
                 ->assertJsonPath('intent_context.allowed_response_mode', 'confidence_boundary_and_retest_guidance');
 

@@ -718,6 +718,74 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: PR-EQ-AGENT-HARDEN-01
+    repo: fap-api
+    depends_on: [PR-EQ-AGENT-RUNTIME-04]
+    branch: codex/pr-eq-agent-harden-01-guardrail-alias
+    title: "PR-EQ-AGENT-HARDEN-01 EQ Agent guardrail alias normalization"
+    train_scope: eq_agent_runtime_hardening
+    scope:
+      - Normalize EQ Agent guardrail aliases so context and runtime payloads both expose paid-language guardrails.
+      - Add backend contract coverage for context and runtime read-only guardrails across key EQ Agent paths.
+    allowed_paths:
+      - backend/app/Services/Eq/EqAgentContextBuilder.php
+      - backend/app/Services/Eq/EqAgentRuntimeResponder.php
+      - backend/tests/Feature/Report/EqAgentContextApiTest.php
+      - backend/tests/Feature/Report/Eq60V5ReportContractTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify frontend.
+      - Add live LLM/provider integration.
+      - Add Agent write endpoints or persistence.
+      - Modify EQ questions, scoring, norms, report prose, SJT runtime, commerce, CMS, SEO, deploy, or production state.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=EqAgent
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: PR-EQ-AGENT-SMOKE-02
+    repo: fap-api
+    depends_on: [PR-EQ-AGENT-HARDEN-01]
+    branch: codex/pr-eq-agent-smoke-02-normal-confidence-report
+    title: "PR-EQ-AGENT-SMOKE-02 EQ Agent normal-confidence production smoke report"
+    train_scope: eq_agent_runtime_hardening
+    scope:
+      - Add docs-only production smoke acceptance report for a normal-confidence EQ Agent runtime flow.
+      - Record deployed SHAs, attempt/session details, context/runtime summaries, screenshot paths, risks, and normal-confidence acceptance decision.
+    allowed_paths:
+      - docs/audits/eq/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify runtime code, frontend, content assets, scoring, SJT runtime, CMS, SEO, deploy, or production state.
+      - Enable live LLM/provider integration.
+      - Create paid/unlock/SKU behavior.
+    validation:
+      - git diff --check
+      - git diff --cached --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: PR-EQ-PER-01
     repo: fap-api
     branch: codex/pr-eq-per-01-all-free-copy-contract-cleanup
