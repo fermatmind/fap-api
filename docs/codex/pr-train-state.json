@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-25T18:45:11+08:00",
+  "updated_at": "2026-06-25T18:51:42+08:00",
   "PR-EQ-ASSET-01": {
     "repo": "fap-api",
     "branch": "codex/pr-eq-asset-01-content-pack-v16",
@@ -62276,7 +62276,7 @@
     "repo": "fap-api",
     "branch": "codex/iq-owner-30-norm-authority-04a",
     "base": "main",
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "train_scope": "iq_owner_original_30_launch",
     "title": "IQ-OWNER-30-NORM-AUTHORITY-04A: Add owner IQ 30 norm authority activation",
     "depends_on": [
@@ -62311,12 +62311,12 @@
         "evidence": "Changed files are limited to IQ-OWNER-30-NORM-AUTHORITY-04A scope: NormsIqImport command, focused importer tests, claim-ready fixture, and docs/codex train metadata. No frontend, runtime scoring binding, CMS, SEO, deployment, or production norm data import changes."
       },
       "github": {
-        "status": "pending",
-        "evidence": "PR #2424 opened; waiting for GitHub required checks."
+        "status": "pass",
+        "evidence": "PR #2424 GitHub checks passed for head 745b140a41acd530a3519e5bab4367d33cb02777 and mergeStateStatus was CLEAN."
       }
     },
     "failure_reason": null,
-    "commit_sha": "454841ba95ef074852658cdcb5a8596efd806f19",
+    "commit_sha": "745b140a41acd530a3519e5bab4367d33cb02777",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2424",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -62341,6 +62341,11 @@
         "at": "2026-06-25T18:45:11+08:00",
         "status": "github_checks_pending",
         "note": "Opened PR #2424 at https://github.com/fermatmind/fap-api/pull/2424. Waiting for GitHub checks; no staging wait, production deploy, CMS write, SEO, frontend, runtime scoring bind, or production norm data import included."
+      },
+      {
+        "at": "2026-06-25T18:51:42+08:00",
+        "status": "ready_to_merge",
+        "note": "PR #2424 GitHub checks passed and mergeStateStatus was CLEAN. Ready for squash merge; no staging wait, production deploy, CMS write, SEO, frontend, runtime scoring bind, or production norm data import included."
       }
     ]
   }
