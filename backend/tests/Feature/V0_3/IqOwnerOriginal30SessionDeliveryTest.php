@@ -192,6 +192,56 @@ final class IqOwnerOriginal30SessionDeliveryTest extends TestCase
         }
     }
 
+    #[Test]
+    public function owner_original_submit_scores_with_private_answer_key_without_public_answer_leak(): void
+    {
+        (new ScaleRegistrySeeder)->run();
+
+        $anonId = 'anon_iq_owner_runtime_score';
+        $token = $this->issueAnonToken($anonId);
+        $attempt = $this->createOwnerAttempt($anonId);
+
+        $response = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->postJson('/api/v0.3/attempts/submit?mode=sync_legacy', [
+            'attempt_id' => (string) $attempt->id,
+            'answers' => $this->perfectAnswers(),
+            'duration_ms' => 120000,
+        ]);
+
+        $response->assertStatus(200);
+        $response->assertJson([
+            'ok' => true,
+            'result' => [
+                'raw_score' => 30,
+                'final_score' => 30,
+                'normed_json' => [
+                    'scale_code' => 'IQ_INTELLIGENCE_QUOTIENT',
+                    'bank_id' => 'IQ_OWNER_ORIGINAL_30',
+                    'status' => 'scored',
+                    'scoring_mode' => 'scored',
+                    'raw_score' => 30,
+                    'quality' => [
+                        'level' => 'A',
+                        'flags' => [],
+                    ],
+                    'norms' => [
+                        'iq_estimate' => null,
+                        'percentile' => null,
+                    ],
+                ],
+            ],
+        ]);
+        $this->assertSame('iq_owner_original_30_runtime_scoring_v1', $response->json('meta.scoring_spec_version'));
+        $this->assertCount(3, $response->json('result.normed_json.dimension_scores'));
+        $this->assertSame(30, array_sum(array_map(
+            static fn (array $row): int => (int) ($row['correct_count'] ?? 0),
+            $response->json('result.normed_json.dimension_scores')
+        )));
+        $this->assertPayloadHasNoPrivateIqFields($response->json());
+    }
+
     private function issueAnonToken(string $anonId): string
     {
         $token = 'fm_'.(string) Str::uuid();
@@ -257,6 +307,29 @@ final class IqOwnerOriginal30SessionDeliveryTest extends TestCase
                 'code' => 'A',
             ];
         }
+
+        return $answers;
+    }
+
+    /**
+     * @return array<int,array{question_id:string,code:string}>
+     */
+    private function perfectAnswers(): array
+    {
+        $path = base_path('../content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/answer_key.json');
+        $doc = json_decode((string) file_get_contents($path), true);
+        $this->assertIsArray($doc);
+
+        $answers = [];
+        foreach (($doc['answers'] ?? []) as $item) {
+            $this->assertIsArray($item);
+            $answers[] = [
+                'question_id' => (string) ($item['question_id'] ?? ''),
+                'code' => (string) ($item['correct_answer'] ?? ''),
+            ];
+        }
+
+        $this->assertCount(30, $answers);
 
         return $answers;
     }

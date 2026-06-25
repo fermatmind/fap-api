@@ -95,6 +95,62 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: IQ-OWNER-30-SCORING-RUNTIME-BIND-01
+    repo: fap-api
+    depends_on:
+      - IQ-SESSION-QUESTION-DELIVERY-05A
+    branch: codex/iq-owner-30-scoring-runtime-bind-01
+    title: "IQ-OWNER-30-SCORING-RUNTIME-BIND-01: Bind owner IQ 30 runtime scoring"
+    train_scope: iq_owner_original_30_launch
+    status: user_authorized
+    scope:
+      - Bind IQ_OWNER_ORIGINAL_30 owner attempts to the backend-private runtime scoring contract.
+      - Convert private items, answer_key, and scoring_spec into an IqTestDriver scored contract at submit time.
+      - Persist raw_score, dimension_scores, quality, and result stability without emitting answer keys, correct answers, solution rules, or generator metadata in public result payloads.
+      - Keep IQ and percentile claims disabled until a norm authority exists.
+    allowed_paths:
+      - backend/app/Services/Assessment/AssessmentEngine.php
+      - backend/app/Services/Attempts/AttemptSubmitCanonicalizeService.php
+      - backend/app/Services/Iq/IqOwnerOriginal30BankService.php
+      - backend/scripts/iq/iq_owner_original30_image_bank_lib.php
+      - backend/tests/Feature/Content/IqOwnerOriginal30PrivateScoringTest.php
+      - backend/tests/Feature/V0_3/IqOwnerOriginal30SessionDeliveryTest.php
+      - content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/manifest.json
+      - content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/scoring_spec.json
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify frontend rendering, frontend adapters, CMS, SEO runtime, sitemap, llms, JSON-LD, production imports, staging deploy, or production deploy.
+      - Add DB migrations, production writes, or CMS writes.
+      - Enable IQ estimate or percentile claims without a norm authority.
+      - Emit correct answers, answer keys, solution rules, generator metadata, private provenance, or source capture URLs in public delivery or result payloads.
+    validation:
+      - php backend/scripts/iq/verify_iq_owner_original30_private_scoring.php
+      - php -l backend/app/Services/Assessment/AssessmentEngine.php
+      - php -l backend/app/Services/Attempts/AttemptSubmitCanonicalizeService.php
+      - php -l backend/app/Services/Iq/IqOwnerOriginal30BankService.php
+      - php -l backend/scripts/iq/iq_owner_original30_image_bank_lib.php
+      - php -l backend/tests/Feature/Content/IqOwnerOriginal30PrivateScoringTest.php
+      - php -l backend/tests/Feature/V0_3/IqOwnerOriginal30SessionDeliveryTest.php
+      - cd backend && php artisan test --filter=IqOwnerOriginal30 --no-ansi
+      - cd backend && bash scripts/pr74_verify.sh
+      - cd backend && vendor/bin/pint --test app/Services/Assessment/AssessmentEngine.php app/Services/Attempts/AttemptSubmitCanonicalizeService.php app/Services/Iq/IqOwnerOriginal30BankService.php tests/Feature/Content/IqOwnerOriginal30PrivateScoringTest.php tests/Feature/V0_3/IqOwnerOriginal30SessionDeliveryTest.php
+      - python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/manifest.json >/dev/null
+      - python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/items.json >/dev/null
+      - python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/answer_key.json >/dev/null
+      - python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/scoring_spec.json >/dev/null
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: BIG-FIVE-AGENT-APPROVAL-QUEUE-INTEGRATION-01
     repo: fap-api
     depends_on: []

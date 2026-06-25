@@ -46,6 +46,8 @@ class AttemptSubmitCanonicalizeService
         $packReleaseManifestHash = trim((string) ($attemptMeta['pack_release_manifest_hash'] ?? ''));
         $policyHash = trim((string) ($attemptMeta['policy_hash'] ?? ''));
         $engineVersion = trim((string) ($attemptMeta['engine_version'] ?? ''));
+        $formCode = trim((string) ($attemptMeta['form_code'] ?? ''));
+        $bankId = trim((string) ($attemptMeta['bank_id'] ?? ''));
         $scoringSpecVersion = trim((string) ($attempt->scoring_spec_version ?? ''));
         $normVersion = trim((string) ($attempt->norm_version ?? ''));
         $submittedAt = now();
@@ -65,6 +67,8 @@ class AttemptSubmitCanonicalizeService
             'attempt_id' => $attemptId,
             'anon_id' => $actorAnonId,
             'user_id' => $actorUserId,
+            'form_code' => $formCode,
+            'bank_id' => $bankId,
             'validity_items' => $validityItems,
             'content_manifest_hash' => $packReleaseManifestHash,
             'policy_hash' => $policyHash,

@@ -167,7 +167,7 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
+    "commit_sha": "36c2aacd470b839a6d6ff0a62fc5ae5285f32cd1",
     "pr_url": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -43784,7 +43784,7 @@
     "repo": "fap-api",
     "branch": "codex/seo-dash-collector-02-write-gate",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "seo_intel_controlled_collector_write_gate",
     "title": "docs(seo): define controlled collector write gate",
     "checks": {
@@ -61138,6 +61138,81 @@
         "at": "2026-06-24T13:23:50Z",
         "status": "ready_to_merge",
         "note": "PR #2395 checks are green and mergeStateStatus is CLEAN on head ff047e4ad56faa92d156224aa36d1f29e3d4d7a6. Ready for squash merge; no staging wait, production deploy, CMS write, publish, search, indexing, sitemap, llms, or frontend runtime work included."
+      }
+    ]
+  },
+  "IQ-OWNER-30-SCORING-RUNTIME-BIND-01": {
+    "repo": "fap-api",
+    "branch": "codex/iq-owner-30-scoring-runtime-bind-01",
+    "base": "main",
+    "status": "in_progress",
+    "train_scope": "iq_owner_original_30_launch",
+    "title": "IQ-OWNER-30-SCORING-RUNTIME-BIND-01: Bind owner IQ 30 runtime scoring",
+    "depends_on": [
+      "IQ-SESSION-QUESTION-DELIVERY-05A"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized updating docs/codex/pr-train.yaml and docs/codex/pr-train-state.json for IQ-OWNER-30-SCORING-RUNTIME-BIND-01, then implementing backend runtime scoring binding."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "IQ-SESSION-QUESTION-DELIVERY-05A is merged: PR #2371 merged at 2026-06-23T16:16:38Z with merge commit ab7af7144bbb4016e19928dcf8081a95d8e36201, and origin/main contains that merge commit."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "php backend/scripts/iq/verify_iq_owner_original30_private_scoring.php",
+          "php -l backend/app/Services/Assessment/AssessmentEngine.php",
+          "php -l backend/app/Services/Attempts/AttemptSubmitCanonicalizeService.php",
+          "php -l backend/app/Services/Iq/IqOwnerOriginal30BankService.php",
+          "php -l backend/scripts/iq/iq_owner_original30_image_bank_lib.php",
+          "php -l backend/tests/Feature/Content/IqOwnerOriginal30PrivateScoringTest.php",
+          "php -l backend/tests/Feature/V0_3/IqOwnerOriginal30SessionDeliveryTest.php",
+          "cd backend && php artisan test --filter=IqOwnerOriginal30 --no-ansi",
+          "cd backend && bash scripts/pr74_verify.sh",
+          "cd backend && vendor/bin/pint --test app/Services/Assessment/AssessmentEngine.php app/Services/Attempts/AttemptSubmitCanonicalizeService.php app/Services/Iq/IqOwnerOriginal30BankService.php tests/Feature/Content/IqOwnerOriginal30PrivateScoringTest.php tests/Feature/V0_3/IqOwnerOriginal30SessionDeliveryTest.php",
+          "python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/manifest.json >/dev/null",
+          "python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/items.json >/dev/null",
+          "python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/answer_key.json >/dev/null",
+          "python3 -m json.tool content_packages/default/CN_MAINLAND/zh-CN/IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO/banks/IQ_OWNER_ORIGINAL_30/scoring_spec.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "git diff --check"
+        ],
+        "evidence": "PASS: private scoring verifier; PHP syntax checks for AssessmentEngine.php, AttemptSubmitCanonicalizeService.php, IqOwnerOriginal30BankService.php, iq_owner_original30_image_bank_lib.php, IqOwnerOriginal30PrivateScoringTest.php, and IqOwnerOriginal30SessionDeliveryTest.php; php artisan test --filter=IqOwnerOriginal30 (11 tests, 5244 assertions); PR74 constructor injection check; scoped Pint; JSON/YAML parse checks; git diff --check."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to the IQ_OWNER_ORIGINAL_30 backend runtime scoring binding scope: AssessmentEngine, submit canonicalization score context, owner bank service/verifier, focused IQ tests, owner bank manifest/scoring_spec, and docs/codex train metadata."
+      },
+      "github": {
+        "status": "not_started",
+        "evidence": null
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-25T00:00:00Z",
+        "status": "in_progress",
+        "note": "Started backend-only runtime scoring binding from latest fap-api origin/main. Scope is IQ_OWNER_ORIGINAL_30 submit-time scoring with private answer key, owner bank runtime metadata, focused tests, and docs/codex train metadata. No frontend, CMS, SEO, sitemap, llms, DB migration, staging deploy, or production deploy."
+      },
+      {
+        "at": "2026-06-25T02:18:36Z",
+        "status": "local_validated",
+        "note": "Local acceptance and scope validation passed. Runtime scoring binding produces raw score, dimension scores, and quality metadata for IQ_OWNER_ORIGINAL_30 while public IQ payload redaction keeps answer keys, correct answers, solution rules, asset hashes, and generator metadata out of submit/read responses."
+      },
+      {
+        "at": "2026-06-25T02:18:36Z",
+        "status": "committed",
+        "note": "Created local scoped commit 36c2aacd470b839a6d6ff0a62fc5ae5285f32cd1."
       }
     ]
   }

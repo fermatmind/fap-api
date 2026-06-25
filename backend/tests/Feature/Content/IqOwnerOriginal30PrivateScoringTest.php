@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Content;
 
+use App\Services\Iq\IqOwnerOriginal30BankService;
 use App\Services\Iq\IqResultPayloadRedactor;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
@@ -24,7 +25,7 @@ final class IqOwnerOriginal30PrivateScoringTest extends TestCase
     }
 
     #[Test]
-    public function private_answer_key_and_scoring_spec_are_present_but_runtime_unbound(): void
+    public function private_answer_key_and_scoring_spec_are_present_and_runtime_bound(): void
     {
         $manifest = $this->readJson('manifest.json');
         $answerKey = $this->readJson('answer_key.json');
@@ -33,7 +34,7 @@ final class IqOwnerOriginal30PrivateScoringTest extends TestCase
         $this->assertSame('IQ_OWNER_ORIGINAL_30', $manifest['bank_id']);
         $this->assertSame('answer_key.json', $manifest['files']['answer_key']);
         $this->assertSame('scoring_spec.json', $manifest['files']['scoring_spec']);
-        $this->assertFalse($manifest['runtime_bound']);
+        $this->assertTrue($manifest['runtime_bound']);
         $this->assertFalse($manifest['public_payload_policy']['may_emit_answer_key']);
         $this->assertFalse($answerKey['public_payload']);
         $this->assertSame('backend_only_never_emit_to_public_api', $answerKey['storage_policy']);
@@ -41,7 +42,33 @@ final class IqOwnerOriginal30PrivateScoringTest extends TestCase
         $this->assertSame(30, $scoring['raw_score']['max']);
         $this->assertSame(1, $scoring['raw_score']['correct_item_value']);
         $this->assertFalse($scoring['norm_policy']['iq_claims_enabled']);
-        $this->assertFalse($scoring['runtime_binding']['enabled']);
+        $this->assertTrue($scoring['runtime_binding']['enabled']);
+        $this->assertSame('backend_private_answer_key', $scoring['runtime_binding']['mode']);
+    }
+
+    #[Test]
+    public function runtime_scoring_spec_matches_driver_contract_without_becoming_public_payload(): void
+    {
+        $spec = app(IqOwnerOriginal30BankService::class)->runtimeScoringSpec();
+
+        $this->assertSame('IQ_OWNER_ORIGINAL_30', data_get($spec, 'item_bank.bank_id'));
+        $this->assertSame('scored', $spec['scoring_mode'] ?? null);
+        $this->assertSame('unavailable', $spec['norm_table_version'] ?? null);
+        $this->assertFalse((bool) data_get($spec, 'norm_policy.iq_claims_enabled'));
+        $this->assertFalse((bool) data_get($spec, 'public_payload_policy.may_emit_answer_key'));
+        $this->assertCount(30, $spec['items'] ?? []);
+
+        foreach (($spec['items'] ?? []) as $item) {
+            $this->assertContains($item['correct_answer'] ?? null, ['A', 'B', 'C', 'D', 'E', 'F']);
+            $this->assertContains($item['dimension'] ?? null, ['VSPR', 'VSI', 'NPR']);
+            $this->assertNotEmpty($item['item_family'] ?? '');
+            $this->assertNotEmpty($item['difficulty_level'] ?? '');
+            $this->assertNotEmpty($item['solution_rule'] ?? '');
+            $this->assertNotEmpty($item['distractor_logic'] ?? '');
+            $this->assertNotEmpty($item['assets'] ?? []);
+            $this->assertNotEmpty($item['asset_hashes'] ?? []);
+            $this->assertNotEmpty($item['generator_metadata'] ?? []);
+        }
     }
 
     #[Test]
