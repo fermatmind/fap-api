@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-25T18:51:42+08:00",
+  "updated_at": "2026-06-25T21:42:05+08:00",
   "PR-EQ-ASSET-01": {
     "repo": "fap-api",
     "branch": "codex/pr-eq-asset-01-content-pack-v16",
@@ -62600,7 +62600,7 @@
     "repo": "fap-api",
     "branch": "codex/iq-owner-30-norm-runtime-bind-04b",
     "base": "main",
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "train_scope": "iq_owner_original_30_launch",
     "title": "IQ-OWNER-30-NORM-RUNTIME-BIND-04B: Bind owner IQ 30 runtime norms",
     "depends_on": [
@@ -62636,12 +62636,12 @@
         "evidence": "Changed files are limited to IQ-OWNER-30-NORM-RUNTIME-BIND-04B scope: IqTestDriver runtime authority binding, focused Owner 30 driver/session delivery tests, and authorized docs/codex train metadata. No frontend, question bank assets, answer keys, norm import command behavior, production data import, CMS, SEO, staging deploy, or production deploy changes."
       },
       "github": {
-        "status": "pending",
-        "evidence": "Opened PR #2432 at https://github.com/fermatmind/fap-api/pull/2432; waiting for required GitHub checks."
+        "status": "pass",
+        "evidence": "PR #2432 GitHub checks passed at head eb406a80b5b5e6092e87d69bde5b906f9794ec9e: Semgrep OSS, Semgrep blocking secrets, semgrep sarif non-blocking upload, hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 all passed; mergeStateStatus is CLEAN and PR is mergeable."
       }
     },
     "failure_reason": null,
-    "commit_sha": "2672436e04b0a262c431d0b27ed1d069bf322e6c",
+    "commit_sha": "eb406a80b5b5e6092e87d69bde5b906f9794ec9e",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2432",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -62666,6 +62666,11 @@
         "at": "2026-06-25T13:30:18.180Z",
         "status": "github_checks_pending",
         "note": "Opened PR #2432 at https://github.com/fermatmind/fap-api/pull/2432. Waiting for required GitHub checks; no staging deploy wait, production deploy, CMS write, SEO, frontend, question asset, answer-key, norm import, or production norm data import included."
+      },
+      {
+        "at": "2026-06-25T21:42:05+08:00",
+        "status": "ready_to_merge",
+        "note": "PR #2432 GitHub checks passed at head eb406a80b5b5e6092e87d69bde5b906f9794ec9e and mergeStateStatus is CLEAN. Ready for squash merge under repo policy; no staging deploy wait, production deploy, CMS write, SEO, frontend, question asset, answer-key, norm import behavior, or production norm data import included."
       }
     ]
   }
