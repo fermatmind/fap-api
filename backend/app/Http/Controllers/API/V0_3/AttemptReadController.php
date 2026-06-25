@@ -25,6 +25,7 @@ use App\Services\Enneagram\EnneagramObservationStateService;
 use App\Services\Enneagram\EnneagramPublicFormSummaryBuilder;
 use App\Services\Enneagram\EnneagramPublicProjectionService;
 use App\Services\Eq\EqAgentContextBuilder;
+use App\Services\Eq\EqAgentRuntimeResponder;
 use App\Services\Eq\EqJourneyStateService;
 use App\Services\Iq\IqResultPayloadRedactor;
 use App\Services\Mbti\MbtiActionJourneyContractService;
@@ -75,6 +76,7 @@ class AttemptReadController extends Controller
         private EnneagramPublicFormSummaryBuilder $enneagramPublicFormSummaryBuilder,
         private EnneagramObservationStateService $enneagramObservationStateService,
         private EqAgentContextBuilder $eqAgentContextBuilder,
+        private EqAgentRuntimeResponder $eqAgentRuntimeResponder,
         private EqJourneyStateService $eqJourneyStateService,
         private RiasecPublicProjectionService $riasecPublicProjectionService,
         private RiasecPublicFormSummaryBuilder $riasecPublicFormSummaryBuilder,
@@ -819,6 +821,53 @@ class AttemptReadController extends Controller
         );
 
         return response()->json($payload);
+    }
+
+    /**
+     * POST /api/v0.3/attempts/{id}/eq/agent-runtime/messages
+     */
+    public function eqAgentRuntimeMessage(Request $request, string $id): JsonResponse
+    {
+        $message = trim((string) $request->input('message', ''));
+        if ($message === '') {
+            throw new ApiProblemException(422, 'MESSAGE_REQUIRED', 'message is required.');
+        }
+
+        if (mb_strlen($message) > 1200) {
+            throw new ApiProblemException(422, 'MESSAGE_TOO_LONG', 'message must be 1200 characters or fewer.');
+        }
+
+        $locale = $this->normalizeReportLocale((string) $request->input('locale', $request->query('locale', '')));
+        $intent = trim((string) $request->input('intent', $request->query('intent', '')));
+        $request->query->set('locale', $locale);
+        $request->query->set('intent', $intent);
+
+        $contextResponse = $this->eqAgentContext($request, $id);
+        $context = json_decode((string) $contextResponse->getContent(), true);
+        if (! is_array($context)) {
+            return response()->json(
+                $this->eqAgentRuntimeResponder->nonReady($id, 'context_decode_failed', $locale),
+                202
+            );
+        }
+
+        $runtimePayload = ((bool) ($context['ready'] ?? false))
+            ? $this->eqAgentRuntimeResponder->respond($context, $message, $intent, $locale)
+            : $this->eqAgentRuntimeResponder->nonReady(
+                $id,
+                (string) ($context['reason_code'] ?? 'context_not_ready'),
+                $locale,
+                is_array($context['guardrails'] ?? null) ? $context['guardrails'] : []
+            );
+
+        $status = (int) $contextResponse->getStatusCode();
+        if ((bool) ($runtimePayload['ready'] ?? false)) {
+            $status = Response::HTTP_OK;
+        } elseif ($status < Response::HTTP_BAD_REQUEST) {
+            $status = Response::HTTP_ACCEPTED;
+        }
+
+        return response()->json($runtimePayload, $status);
     }
 
     /**

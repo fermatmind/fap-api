@@ -61030,11 +61030,11 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": "5ec2d1c1a2f57c7b64337c4e526ae30ee730028e",
+    "commit_sha": "a77bd63b761f254a55d0ef9472fdf3baafd792a0",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2401",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-24T17:07:37Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-24T20:45:00+08:00",
@@ -61065,6 +61065,158 @@
         "from": "pr_opened",
         "to": "ready_to_merge",
         "notes": "GitHub checks passed and merge state is clean."
+      },
+      {
+        "at": "2026-06-25T09:55:00+08:00",
+        "from": "ready_to_merge",
+        "to": "merged",
+        "notes": "Reconciled while starting PR-EQ-AGENT-RUNTIME-01 after verifying GitHub PR #2401 merged and origin/main contains a77bd63b761f254a55d0ef9472fdf3baafd792a0."
+      }
+    ]
+  },
+  "PR-EQ-AGENT-RUNTIME-01": {
+    "repo": "fap-api",
+    "branch": "codex/pr-eq-agent-runtime-01-backend-shell",
+    "base": "main",
+    "status": "in_progress",
+    "train_scope": "eq_agent_runtime",
+    "title": "PR-EQ-AGENT-RUNTIME-01 Backend read-only EQ Agent runtime shell",
+    "depends_on": [
+      "PR-EQ-AGENT-04"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized the EQ Agent Runtime 4-PR plan and manifest/state updates."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "PR-EQ-AGENT-04 merged as GitHub PR #2401 at a77bd63b761f254a55d0ef9472fdf3baafd792a0 and is present in origin/main."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan route:list",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=EqAgent",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest",
+          "cd backend && bash scripts/export_openapi.sh --check",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "git diff --check",
+          "git diff --cached --check"
+        ],
+        "evidence": "All scoped commands passed. Eq60V5ReportContractTest was rerun serially after a concurrent content compile race in the first parallel attempt."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Staged diff is limited to EQ Agent runtime route/controller/service/tests, OpenAPI snapshot, and EQ runtime PR train metadata. Existing unrelated IQ dirty files and IQ manifest/state hunks remain unstaged."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-25T09:55:00+08:00",
+        "from": "missing_from_manifest",
+        "to": "in_progress",
+        "notes": "Initialized from explicit user authorization and started from latest main."
+      }
+    ]
+  },
+  "PR-EQ-AGENT-RUNTIME-02": {
+    "repo": "fap-api",
+    "branch": "codex/pr-eq-agent-runtime-02-response-evals",
+    "base": "main",
+    "status": "pending_dependency",
+    "train_scope": "eq_agent_runtime",
+    "title": "PR-EQ-AGENT-RUNTIME-02 EQ Agent response safety eval fixtures",
+    "depends_on": [
+      "PR-EQ-AGENT-RUNTIME-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized the EQ Agent Runtime 4-PR plan and manifest/state updates."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-25T09:55:00+08:00",
+        "from": "missing_from_manifest",
+        "to": "pending_dependency",
+        "notes": "Initialized from explicit user authorization; waits for PR-EQ-AGENT-RUNTIME-01."
+      }
+    ]
+  },
+  "PR-EQ-AGENT-RUNTIME-03": {
+    "repo": "fap-web",
+    "branch": "codex/pr-eq-agent-runtime-03-frontend-drawer",
+    "base": "main",
+    "status": "pending_dependency",
+    "train_scope": "eq_agent_runtime",
+    "title": "PR-EQ-AGENT-RUNTIME-03 Frontend EQ Agent chat drawer",
+    "depends_on": [
+      "PR-EQ-AGENT-RUNTIME-02"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized the EQ Agent Runtime 4-PR plan and manifest/state updates."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-25T09:55:00+08:00",
+        "from": "missing_from_manifest",
+        "to": "pending_dependency",
+        "notes": "Initialized from explicit user authorization; waits for PR-EQ-AGENT-RUNTIME-02."
+      }
+    ]
+  },
+  "PR-EQ-AGENT-RUNTIME-04": {
+    "repo": "fap-api",
+    "branch": "codex/pr-eq-agent-runtime-04-acceptance-report",
+    "base": "main",
+    "status": "pending_dependency",
+    "train_scope": "eq_agent_runtime",
+    "title": "PR-EQ-AGENT-RUNTIME-04 EQ Agent runtime production acceptance report",
+    "depends_on": [
+      "PR-EQ-AGENT-RUNTIME-03"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized the EQ Agent Runtime 4-PR plan and manifest/state updates."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-25T09:55:00+08:00",
+        "from": "missing_from_manifest",
+        "to": "pending_dependency",
+        "notes": "Initialized from explicit user authorization; waits for PR-EQ-AGENT-RUNTIME-03 production availability."
       }
     ]
   },

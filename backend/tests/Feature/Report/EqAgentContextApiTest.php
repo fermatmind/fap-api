@@ -118,6 +118,129 @@ final class EqAgentContextApiTest extends TestCase
         $this->assertContains('asset:core_formulation', (array) $response->json('intent_context.retrieval_tags'));
     }
 
+    public function test_eq_agent_runtime_message_returns_deterministic_read_only_response(): void
+    {
+        config()->set('fap.features.report_snapshot_strict_v2', true);
+        $this->prepareEqContent();
+
+        $anonId = 'anon_eq_agent_runtime_ready';
+        $token = $this->issueFmToken($anonId);
+        $attemptId = $this->createEqAttemptWithResult($anonId, 'en');
+
+        $response = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->postJson('/api/v0.3/attempts/'.$attemptId.'/eq/agent-runtime/messages', [
+            'locale' => 'en',
+            'intent' => 'understand_my_result',
+            'message' => 'Help me understand what this EQ result means.',
+        ]);
+
+        $response->assertOk()
+            ->assertJsonPath('schema', 'eq.agent_runtime_response.v1')
+            ->assertJsonPath('ready', true)
+            ->assertJsonPath('mode', 'deterministic_read_only')
+            ->assertJsonPath('locale', 'en')
+            ->assertJsonPath('guardrails.read_only', true)
+            ->assertJsonPath('guardrails.can_mutate_report', false)
+            ->assertJsonPath('guardrails.can_mutate_scores', false)
+            ->assertJsonPath('guardrails.can_override_formulation', false)
+            ->assertJsonPath('guardrails.can_enable_sjt', false)
+            ->assertJsonPath('guardrails.can_use_paid_unlock_language', false)
+            ->assertJsonPath('assistant_response.role', 'assistant')
+            ->assertJsonPath('safety.no_paywall_language', true)
+            ->assertJsonPath('safety.no_sjt_entry', true)
+            ->assertJsonPath('safety.no_raw_technical_tags', true)
+            ->assertJsonPath('next_module.available', false)
+            ->assertJsonPath('next_module.status', 'planned')
+            ->assertJsonPath('context_summary.eq_report_mode', 'self_report')
+            ->assertJsonPath('context_summary.measurement_type', 'self_report_trait_mixed_ei');
+
+        $this->assertNotSame('', (string) $response->json('assistant_response.text'));
+        $this->assertNotEmpty((array) $response->json('assistant_response.summary_points'));
+        $sourceAssetIds = (array) $response->json('assistant_response.source_asset_ids');
+        $this->assertNotEmpty($sourceAssetIds);
+        $this->assertNotContains('', $sourceAssetIds);
+        $this->assertContains('asset:core_formulation', (array) $response->json('intent_context.retrieval_tags'));
+
+        $json = json_encode($response->json(), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?: '';
+        foreach ([
+            'SKU_EQ_60_FULL_299',
+            'EQ_60_FULL',
+            '"locked":true',
+            '"paywall":true',
+            '"blur_others":true',
+            'profile:',
+            'quality_level:',
+            'focus:',
+            'bucket:',
+            '/take',
+            'available":true',
+        ] as $forbidden) {
+            $this->assertStringNotContainsString($forbidden, $json);
+        }
+    }
+
+    public function test_eq_agent_runtime_message_applies_forbidden_claim_boundary(): void
+    {
+        config()->set('fap.features.report_snapshot_strict_v2', true);
+        $this->prepareEqContent();
+
+        $anonId = 'anon_eq_agent_runtime_forbidden_claim';
+        $token = $this->issueFmToken($anonId);
+        $attemptId = $this->createEqAttemptWithResult($anonId, 'en');
+
+        $response = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->postJson('/api/v0.3/attempts/'.$attemptId.'/eq/agent-runtime/messages', [
+            'locale' => 'en',
+            'intent' => 'clinical_or_hiring_boundary',
+            'message' => 'Can this diagnose me or be used for hiring suitability?',
+        ]);
+
+        $response->assertOk()
+            ->assertJsonPath('ready', true)
+            ->assertJsonPath('guardrails.read_only', true)
+            ->assertJsonPath('guardrails.can_mutate_report', false)
+            ->assertJsonPath('guardrails.can_enable_sjt', false);
+
+        $this->assertContains('clinical_diagnosis', (array) $response->json('safety.detected_forbidden_claim_ids'));
+        $this->assertContains('hiring_suitability', (array) $response->json('safety.detected_forbidden_claim_ids'));
+        $this->assertContains('clinical_diagnosis', (array) $response->json('assistant_response.boundary_claim_ids'));
+        $this->assertContains('hiring_suitability', (array) $response->json('assistant_response.boundary_claim_ids'));
+        $this->assertContains('clinical_diagnosis', (array) $response->json('safety.escalation_flags'));
+        $this->assertContains('workplace_hiring_decision', (array) $response->json('safety.escalation_flags'));
+
+        $json = json_encode($response->json(), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?: '';
+        $this->assertStringNotContainsString('SKU_EQ_60_FULL_299', $json);
+        $this->assertStringNotContainsString('EQ_60_FULL', $json);
+        $this->assertStringNotContainsString('"paywall":true', $json);
+        $this->assertStringNotContainsString('"locked":true', $json);
+    }
+
+    public function test_eq_agent_runtime_message_requires_non_empty_message(): void
+    {
+        config()->set('fap.features.report_snapshot_strict_v2', true);
+        $this->prepareEqContent();
+
+        $anonId = 'anon_eq_agent_runtime_message_required';
+        $token = $this->issueFmToken($anonId);
+        $attemptId = $this->createEqAttemptWithResult($anonId, 'en');
+
+        $response = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->postJson('/api/v0.3/attempts/'.$attemptId.'/eq/agent-runtime/messages', [
+            'locale' => 'en',
+            'intent' => 'understand_my_result',
+            'message' => '   ',
+        ]);
+
+        $response->assertStatus(422)
+            ->assertJsonPath('error_code', 'MESSAGE_REQUIRED');
+    }
+
     public function test_eq_agent_context_rejects_non_eq_attempt_after_report_read_guard(): void
     {
         (new ScaleRegistrySeeder)->run();
