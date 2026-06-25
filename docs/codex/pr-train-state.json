@@ -61253,7 +61253,7 @@
     "repo": "fap-api",
     "branch": "codex/pr-eq-agent-runtime-02-response-evals",
     "base": "main",
-    "status": "pr_opened",
+    "status": "merged",
     "train_scope": "eq_agent_runtime",
     "title": "PR-EQ-AGENT-RUNTIME-02 EQ Agent response safety eval fixtures",
     "depends_on": [
@@ -62555,15 +62555,15 @@
       },
       "github": {
         "status": "pass",
-        "evidence": "GitHub checks are green for PR #2429: hygiene, supply-chain, content-pack-build-validate, Semgrep, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 all passed. Merge state is CLEAN."
+        "evidence": "GitHub checks passed for PR #2429; squash merge commit ec0ee01f84204e64f9891f33d6126a7de344a97d is contained in origin/main. Remote branch was deleted and local task branch cleanup completed."
       }
     },
     "failure_reason": null,
-    "commit_sha": "e842142a6bdc59a268cd979a61b9bd915a5a276b",
+    "commit_sha": "ec0ee01f84204e64f9891f33d6126a7de344a97d",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2429",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-25T22:19:24+08:00",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-25T21:47:00+08:00",
@@ -62584,6 +62584,75 @@
         "at": "2026-06-25T22:07:00+08:00",
         "status": "ready_to_merge",
         "note": "PR #2429 GitHub checks passed and mergeStateStatus is CLEAN at head e842142a6bdc59a268cd979a61b9bd915a5a276b. Ready for squash merge under repo policy."
+      },
+      {
+        "at": "2026-06-25T22:21:00+08:00",
+        "status": "merged",
+        "note": "PR #2429 was squash merged as ec0ee01f84204e64f9891f33d6126a7de344a97d. origin/main contains the merge commit; local main was fast-forwarded to origin/main; local and remote task branches were cleaned."
+      }
+    ]
+  },
+  "PERSONALITY-TDK-RUNTIME-PROMOTION-SEARCH-GATE-READINESS-01": {
+    "repo": "fap-api",
+    "branch": "codex/personality-tdk-runtime-promotion-search-gate-readiness-01",
+    "base": "main",
+    "status": "local_validated",
+    "train_scope": "fermatmind_seo_ops_p2_p4_20260625",
+    "title": "PERSONALITY-TDK-RUNTIME-PROMOTION-SEARCH-GATE-READINESS-01: Add personality TDK runtime promotion search gate readiness",
+    "depends_on": [
+      "PERSONALITY-TDK-NEXT-BATCH-APPROVAL-DRAFT-GATE-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User provided /goal FERMATMIND-SEO-OPS-P2-P4-PR-TRAIN-20260625-01 and explicitly authorized adding missing docs/codex/pr-train.yaml and docs/codex/pr-train-state.json entries for this PR train."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "PERSONALITY-TDK-NEXT-BATCH-APPROVAL-DRAFT-GATE-01 merged as ec0ee01f84204e64f9891f33d6126a7de344a97d and local main is synced to origin/main before starting P4-B."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "php -l backend/app/Console/Commands/PersonalityTdkRuntimePromotionSearchGateReadinessCommand.php",
+          "php -l backend/tests/Feature/Console/PersonalityTdkRuntimePromotionSearchGateReadinessTest.php",
+          "cd backend && php artisan list | rg personality:tdk-runtime-promotion-search-gate-readiness",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=PersonalityTdkRuntimePromotionSearchGateReadinessTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=PersonalityMbti64CmsRevisionPromoteCommandTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_personality_tdk_next_batch_gate_files' --no-ansi",
+          "cd backend && vendor/bin/pint --test app/Console/Commands/PersonalityTdkRuntimePromotionSearchGateReadinessCommand.php tests/Feature/Console/PersonalityTdkRuntimePromotionSearchGateReadinessTest.php tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+          "python3 -m json.tool backend/docs/seo/generated/personality-tdk-runtime-promotion-search-gate-readiness.v1.json >/dev/null",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "git diff --check"
+        ],
+        "evidence": "PASS: PHP syntax; artisan command registration; focused PersonalityTdkRuntimePromotionSearchGateReadinessTest (4 tests, 35 assertions); PersonalityMbti64CmsRevisionPromoteCommandTest (19 tests, 232 assertions); BigFive freeze classifier focused test for this read-only gate; scoped Pint; generated contract JSON parse; train state JSON parse; train manifest YAML parse; diff checks."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to PersonalityTdkRuntimePromotionSearchGateReadinessCommand.php, Kernel registration, generated command contract doc, focused Feature test, BigFive freeze classifier allowlist for this read-only command, and authorized docs/codex train metadata. No production approval queue write, CMS draft write, promotion, publish, index/search, sitemap/llms, frontend metadata edit, deploy, or revalidation changes."
+      },
+      "github": {
+        "status": "not_started",
+        "evidence": null
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-25T22:22:00+08:00",
+        "status": "in_progress",
+        "note": "Started P4-B from synced fap-api main ec0ee01f84204e64f9891f33d6126a7de344a97d. Scope is backend-only read-only runtime/promotion/search gate readiness; no production approval queue write, CMS draft write, promotion, publish, index/search, sitemap/llms, frontend metadata edit, deploy, or revalidation."
+      },
+      {
+        "at": "2026-06-25T22:37:00+08:00",
+        "status": "local_validated",
+        "note": "Implemented read-only personality TDK runtime/promotion/search gate readiness command and focused tests. Local scoped checks passed; no production approval queue write, CMS draft write, promotion, publish, index/search, sitemap/llms, frontend metadata edit, deploy, or revalidation path was added."
       }
     ]
   }
