@@ -824,6 +824,148 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: PR-EQ-AGENT-RUNTIME-V2-01
+    repo: fap-api
+    depends_on: [PR-EQ-AGENT-SMOKE-02]
+    branch: codex/pr-eq-agent-runtime-v2-01-provider-design
+    title: "PR-EQ-AGENT-RUNTIME-V2-01 EQ Agent LLM provider design"
+    train_scope: eq_agent_runtime_v2
+    scope:
+      - Add a docs-only EQ Agent Runtime V2 provider design.
+      - Define OpenAI-first provider strategy, prompt boundary, retrieval input, response schema, feature flags, fallback, and staging-only rollout gates.
+      - Preserve deterministic read-only runtime as the default production path.
+    allowed_paths:
+      - docs/audits/eq/eq_agent_runtime_v2_provider_design_2026-06-25.md
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify runtime code, routes, frontend, content assets, scoring, SJT runtime, CMS, SEO, deploy, provider credentials, or production state.
+      - Enable live LLM/provider integration.
+    validation:
+      - git diff --check
+      - git diff --cached --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: PR-EQ-AGENT-RUNTIME-V2-02
+    repo: fap-api
+    depends_on: [PR-EQ-AGENT-RUNTIME-V2-01]
+    branch: codex/pr-eq-agent-runtime-v2-02-safety-eval-fixtures
+    title: "PR-EQ-AGENT-RUNTIME-V2-02 EQ Agent LLM safety eval fixtures"
+    train_scope: eq_agent_runtime_v2
+    scope:
+      - Add LLM provider safety/eval fixtures for forbidden claims, refusal boundaries, low-confidence behavior, hiring/clinical boundaries, paid unlock requests, and SJT availability requests.
+      - Add tests for provider request/response schema, boundary metadata, safe replacement boundaries, and deterministic fallback.
+      - Keep live model calls disabled.
+    allowed_paths:
+      - backend/tests/Fixtures/eq/agent/**
+      - backend/tests/Feature/Report/EqAgentContextApiTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify frontend.
+      - Add live LLM/provider integration or credentials.
+      - Modify EQ questions, scoring, norms, report prose, SJT runtime, commerce, CMS, SEO, deploy, or production state.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=EqAgent
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest
+      - find backend/tests/Fixtures/eq/agent -name '*.json' -print -exec python3 -m json.tool {} >/dev/null \;
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: PR-EQ-AGENT-RUNTIME-V2-03
+    repo: fap-api
+    depends_on: [PR-EQ-AGENT-RUNTIME-V2-02]
+    branch: codex/pr-eq-agent-runtime-v2-03-provider-abstraction
+    title: "PR-EQ-AGENT-RUNTIME-V2-03 EQ Agent provider abstraction and feature flag"
+    train_scope: eq_agent_runtime_v2
+    scope:
+      - Add backend EQ Agent provider abstraction and OpenAI-first adapter behind default-off feature flags.
+      - Preserve deterministic read-only runtime as default and fallback.
+      - Add tests for disabled provider, missing config, invalid/unsafe provider output, fallback, and read-only guardrails.
+    allowed_paths:
+      - backend/app/Services/Eq/**
+      - backend/config/ai.php
+      - backend/config/services.php
+      - backend/tests/Feature/Report/EqAgentContextApiTest.php
+      - backend/tests/Fixtures/eq/agent/**
+      - backend/docs/contracts/openapi.snapshot.json
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify frontend.
+      - Enable production LLM traffic.
+      - Persist chat history or raw provider prompt/response business records.
+      - Modify EQ questions, scoring, norms, report prose, SJT runtime, commerce, CMS, SEO, deploy, or production state.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan route:list --path=api/v0.3/attempts --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=EqAgent
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php --filter='test_runtime_paths_have_no_uncommitted_diff' --no-ansi
+      - find backend/tests/Fixtures/eq/agent -name '*.json' -print -exec python3 -m json.tool {} >/dev/null \;
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: PR-EQ-AGENT-RUNTIME-V2-04
+    repo: fap-api
+    depends_on: [PR-EQ-AGENT-RUNTIME-V2-03]
+    branch: codex/pr-eq-agent-runtime-v2-04-staging-smoke-report
+    title: "PR-EQ-AGENT-RUNTIME-V2-04 EQ Agent staging LLM smoke report"
+    train_scope: eq_agent_runtime_v2
+    scope:
+      - Add docs-only staging LLM smoke acceptance report after an explicit staging deploy and staging flag enablement.
+      - Verify response quality, safety boundaries, forbidden-claim behavior, latency, cost, fallback, locale behavior, and SJT planned/unavailable state.
+      - Confirm production LLM remains disabled.
+    allowed_paths:
+      - docs/audits/eq/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify runtime code, frontend, content assets, scoring, SJT runtime, CMS, SEO, deploy workflows, provider credentials, or production state.
+      - Enable production LLM/provider traffic.
+    validation:
+      - git diff --check
+      - git diff --cached --check
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: PR-EQ-PER-01
     repo: fap-api
     branch: codex/pr-eq-per-01-all-free-copy-contract-cleanup
