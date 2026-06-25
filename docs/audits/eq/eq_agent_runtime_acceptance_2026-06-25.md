@@ -2,29 +2,44 @@
 
 ## 1. Executive Summary
 
-Verdict: **P0 blocked. Agent runtime phase allowed: no.**
+Verdict: **P0/P1 closed. Agent runtime phase allowed: yes, with controlled read-only runtime shell only.**
 
-The EQ v1.6 report path and read-only Agent context path are live in production, but the new deterministic runtime message endpoint is not deliverable in production:
+This report updates the original production smoke from 2026-06-25 after the backend production deploy of the runtime route.
 
-- EQ question delivery returns 60 items for both `en` and `zh-CN`.
-- Anonymous EQ attempt creation, submit, `report-access`, and `/report` delivery succeeded.
-- `/report` returns the v1.6 payload with `eq_report_mode=self_report`, `measurement_type=self_report_trait_mixed_ei`, `scores.dimensions`, resolved assets, and `next_module.available=false`.
-- `/eq/agent-context` returns `ready=true`, `schema=eq.agent_context.v1`, `read_only=true`, and mutation/SJT guardrails disabled for both `en` and `zh-CN`.
-- Production frontend has the EQ Agent entry and opens the runtime drawer.
-- **P0:** `POST /api/v0.3/attempts/{id}/eq/agent-runtime/messages` returns `404 NOT_FOUND` in both `en` and `zh-CN`.
-- **P1:** production Agent context uses `can_create_paid_unlock_language=false`, while the frontend runtime drawer guard introduced by PR-EQ-AGENT-RUNTIME-03 expects `can_use_paid_unlock_language=false`; the drawer therefore fails closed before a message can be sent from the UI.
+Original blocker:
 
-Do not proceed to live Agent runtime rollout until backend runtime route delivery and guardrail field compatibility are fixed and re-smoked.
+- EQ v1.6 report and `/eq/agent-context` were live.
+- Frontend showed the EQ Agent entry and drawer.
+- `POST /api/v0.3/attempts/{id}/eq/agent-runtime/messages` returned `404 NOT_FOUND`.
+- The acceptance decision was `Agent runtime phase allowed: no`.
+
+Retest result after backend deploy:
+
+- Backend production revision is now `58e642c98cce523eafd14202eec5627d45aa38aa`.
+- Production `route:list` now includes `eq/agent-runtime/messages`.
+- Runtime message endpoint returns `200` for both `en` and `zh`.
+- Result page opens in both locales and uses `EQResultV5`.
+- Agent entry does not auto-fetch context/runtime on page load.
+- Clicking the Agent entry lazy-fetches `/eq/agent-context`.
+- Sending a message lazy-posts `/eq/agent-runtime/messages`.
+- Runtime response is deterministic, read-only, low-confidence aware, and bounded by backend content authority.
+- No paywall, SKU, unlock language, raw technical tags, or SJT take entry appeared in the visible page smoke.
+
+The first production runtime phase is accepted only as a deterministic/read-only shell. Live LLM/provider integration remains out of scope and requires a separate PR train and safety gate.
 
 ## 2. Deployment Evidence
 
 | Surface | SHA / evidence | Status |
 |---|---:|---|
-| Backend main repo at report time | `0d159265ec9c42198c062d32c65ce951101faab6` | Current `origin/main` in clean worktree |
-| Backend production revision | Not exposed by public health/version endpoint | Unknown |
-| Frontend production deploy | `fca1b41153709c39580ee3a1f9f5e939ebce3c16` | GitHub `Deploy Web Production` succeeded |
-| Frontend PR | `PR-EQ-AGENT-RUNTIME-03`, fap-web PR #1433 | Merged and deployed |
-| Backend runtime PRs | PR-EQ-AGENT-RUNTIME-01 / 02 | Merged to backend main, production route not observed |
+| Backend production release | `fap-api-20260625-58e642c9` | Deployed successfully |
+| Backend production revision | `58e642c98cce523eafd14202eec5627d45aa38aa` | Verified by `REVISION` |
+| Backend latest PR in deployed SHA | PR #2412 `PR-EQ-AGENT-RUNTIME-04 EQ Agent runtime production acceptance report` | Merged |
+| Backend route cache | `php artisan route:list --path=agent-runtime` | Runtime route present |
+| Backend schema gate | `php artisan fap:schema:verify` | Pass |
+| Backend ops health snapshot | `php artisan ops:healthz-snapshot` | Pass |
+| Backend public content verification | `php artisan release:verify-public-content` | Pass |
+| Backend queues | supervisor queue workers | Running |
+| Frontend production | existing deployed EQ Agent drawer | Page smoke pass |
 
 Production URLs:
 
@@ -35,28 +50,27 @@ Production URLs:
 
 | Field | Value |
 |---|---|
-| Artifact directory | `/tmp/eq_agent_runtime_prod_smoke_20260625_112156` |
+| Original artifact directory | `/tmp/eq_agent_runtime_prod_smoke_20260625_112156` |
+| Retest artifact directory | `/tmp/eq_agent_runtime_prod_smoke_update_20260625_115009` |
 | Anonymous ID | `anon_eq_runtime_smoke_20260625_112156` |
 | Attempt ID | `f5b08634-0322-4509-b4c4-b1652189496a` |
-| Locale used for submit | `en` |
-| Submission method | Anonymous production API attempt using a guest token |
-| Answer pattern | Existing EQ golden-case answer pattern, submitted once |
-| Low-confidence note | Production scored this automated submit as `quality.level=D` with `SPEEDING` because elapsed completion time was recorded as 1 second. This was not used to force abnormal answer content, but it does verify low-confidence fail-safe rendering. |
+| Locale used for original submit | `en` |
+| Retest method | Reused existing anonymous production attempt and token; no new production attempt was created |
+| Quality note | Existing attempt is `quality.level=D` with `SPEEDING`, so the retest also verifies the low-confidence runtime boundary. |
 
-## 4. API Checks
+## 4. Backend API Checks
 
 ### 4.1 Questions
 
 | Endpoint | Result |
 |---|---|
-| `GET /api/v0.3/scales/EQ_60/questions?locale=en&region=GLOBAL` | 60 items |
-| `GET /api/v0.3/scales/EQ_60/questions?locale=zh-CN&region=CN_MAINLAND` | 60 items |
+| `GET /api/v0.3/scales/EQ_60/questions` | 200, 60 items |
 
 ### 4.2 Report Access
 
 `GET /api/v0.3/attempts/f5b08634-0322-4509-b4c4-b1652189496a/report-access?locale=en`
 
-Observed:
+Previously observed and still required:
 
 ```json
 {
@@ -76,7 +90,7 @@ Observed:
 
 `GET /api/v0.3/attempts/f5b08634-0322-4509-b4c4-b1652189496a/report?locale=en`
 
-Observed:
+Previously observed and still required:
 
 ```json
 {
@@ -99,37 +113,15 @@ Observed:
 }
 ```
 
-`GET /api/v0.3/attempts/f5b08634-0322-4509-b4c4-b1652189496a/report?locale=zh-CN`
-
-Observed:
-
-```json
-{
-  "ok": true,
-  "generating": false,
-  "locale": "zh-CN",
-  "report_version": "eq_report_v5_assets_commercial_ready_v1_6",
-  "next_module": {
-    "available": false,
-    "module_code": "EQ_SJT_16",
-    "status": "planned",
-    "cta_asset_id": "eq.sjt_bridge.planned"
-  }
-}
-```
-
 ### 4.4 Agent Context
 
 `GET /api/v0.3/attempts/f5b08634-0322-4509-b4c4-b1652189496a/eq/agent-context?locale=en&intent=understand_my_result`
 
-Observed:
+Retest observed via production page network:
 
 ```json
 {
-  "ok": true,
   "ready": true,
-  "schema": "eq.agent_context.v1",
-  "locale": "en",
   "guardrails": {
     "read_only": true,
     "can_mutate_report": false,
@@ -143,13 +135,105 @@ Observed:
 }
 ```
 
-`zh-CN` returned the same read-only guardrails with `locale=zh-CN`.
+The `zh` result page requested the same context path with localized context and also returned 200.
 
 ### 4.5 Agent Runtime Message
 
 `POST /api/v0.3/attempts/f5b08634-0322-4509-b4c4-b1652189496a/eq/agent-runtime/messages`
 
-Observed for both `en` and `zh-CN`:
+Retest observed for `en`:
+
+```json
+{
+  "ok": true,
+  "ready": true,
+  "guardrails": {
+    "read_only": true,
+    "can_mutate_report": false,
+    "can_mutate_scores": false,
+    "can_override_formulation": false,
+    "can_enable_sjt": false,
+    "can_create_paid_unlock_language": false,
+    "can_use_paid_unlock_language": false,
+    "can_expose_raw_technical_tags": false,
+    "content_authority": "backend_content_pack_and_report_composer"
+  }
+}
+```
+
+Retest observed for `zh`:
+
+```json
+{
+  "ok": true,
+  "ready": true,
+  "schema": "eq.agent_runtime_response.v1",
+  "guardrails": {
+    "read_only": true,
+    "can_mutate_report": false,
+    "can_mutate_scores": false,
+    "can_override_formulation": false,
+    "can_enable_sjt": false,
+    "can_create_paid_unlock_language": false,
+    "can_use_paid_unlock_language": false,
+    "can_expose_raw_technical_tags": false,
+    "content_authority": "backend_content_pack_and_report_composer"
+  }
+}
+```
+
+The previous `404 NOT_FOUND` P0 is closed.
+
+## 5. Frontend Runtime Drawer Checks
+
+Production result URLs:
+
+- `https://fermatmind.com/en/result/f5b08634-0322-4509-b4c4-b1652189496a`
+- `https://fermatmind.com/zh/result/f5b08634-0322-4509-b4c4-b1652189496a`
+
+Automated page-level smoke used Playwright and recorded network calls around the Agent entry.
+
+| Check | en | zh |
+|---|---:|---:|
+| EQ result page opens | Pass | Pass |
+| `EQResultV5` visible | Pass | Pass |
+| Agent entry visible before click | Pass | Pass |
+| Context requests before click | 0 | 0 |
+| Runtime requests before click | 0 | 0 |
+| Click Agent entry opens drawer | Pass | Pass |
+| Context fetched after click | 200 | 200 |
+| Runtime not fetched before send | Pass | Pass |
+| Runtime fetched after send | 200 | 200 |
+| Runtime response visible | Pass | Pass |
+| No paywall / SKU / unlock copy | Pass | Pass |
+| No raw technical tags visible | Pass | Pass |
+| SJT remains planned/unavailable | Pass | Pass |
+
+Runtime response excerpts:
+
+```text
+I will explain the core judgment already in your report; I will not rescore or replace it.
+```
+
+```text
+我会先按报告里的核心判断解释，不会重新打分或替换你的结果。
+```
+
+Screenshots saved under `/tmp` and not committed:
+
+- `/tmp/eq_agent_runtime_prod_smoke_update_20260625_115009/result_en_before_agent.png`
+- `/tmp/eq_agent_runtime_prod_smoke_update_20260625_115009/result_en_agent_response.png`
+- `/tmp/eq_agent_runtime_prod_smoke_update_20260625_115009/result_zh_before_agent.png`
+- `/tmp/eq_agent_runtime_prod_smoke_update_20260625_115009/result_zh_agent_response.png`
+- `/tmp/eq_agent_runtime_prod_smoke_update_20260625_115009/ui_runtime_smoke_summary.json`
+
+## 6. Issue Resolution
+
+### P0: Agent runtime endpoint unavailable in production
+
+Status: **Closed.**
+
+Before backend deploy:
 
 ```json
 {
@@ -159,104 +243,42 @@ Observed for both `en` and `zh-CN`:
 }
 ```
 
-This is a P0 blocker for runtime acceptance.
+Root cause:
 
-## 5. Frontend Checks
+- Production backend revision was `a06ac49acb6a06446978f861cb8a9e9126c77436`.
+- That revision did not include `eq/agent-runtime/messages`.
+- Production `route:list --path=agent-runtime` returned no runtime route.
 
-Production result URLs:
+Fix:
 
-- `https://fermatmind.com/en/result/f5b08634-0322-4509-b4c4-b1652189496a`
-- `https://fermatmind.com/zh/result/f5b08634-0322-4509-b4c4-b1652189496a`
+- Backend production deployed `58e642c98cce523eafd14202eec5627d45aa38aa` with release `fap-api-20260625-58e642c9`.
 
-Observed:
+After deploy:
 
-| Check | Result |
-|---|---|
-| EQ result page opens | Pass |
-| EQ v1.6 report sections visible | Pass |
-| Agent entry visible | Pass |
-| Drawer opens on click | Pass |
-| Agent context auto-fetch before click | Not observed |
-| Runtime response visible after message | Fail |
-| Runtime unavailable UI visible | Not observed in the script summary |
-| No paywall / SKU / locked / blur text | Pass |
-| No raw technical tags | Pass |
-| SJT remains planned/unavailable | Pass |
-| English route | Pass with low-confidence report |
-| Chinese route | Pass; Chinese text visible |
+- Production `REVISION` equals `58e642c98cce523eafd14202eec5627d45aa38aa`.
+- Production `route:list --path=agent-runtime` includes the runtime route.
+- Runtime endpoint returns 200 for `en` and `zh`.
 
-UI smoke summary:
+### P1: Guardrail field mismatch could fail closed
 
-```json
-{
-  "hasEqAgentEntry": true,
-  "drawerVisible": true,
-  "runtimeUnavailable": false,
-  "runtimeResponse": false,
-  "enForbiddenVisible": false,
-  "zhContainsChinese": true,
-  "zhForbiddenVisible": false
-}
-```
-
-Screenshots saved under `/tmp` and not committed:
-
-- `/tmp/eq_agent_runtime_prod_smoke_20260625_112156/result_en_before_agent.png`
-- `/tmp/eq_agent_runtime_prod_smoke_20260625_112156/result_en_agent_drawer.png`
-- `/tmp/eq_agent_runtime_prod_smoke_20260625_112156/result_zh_before_agent.png`
-
-## 6. Issues
-
-### P0: Agent runtime endpoint is not available in production
+Status: **Closed for runtime response path.**
 
 Evidence:
 
-- Direct production API call to `POST /api/v0.3/attempts/{id}/eq/agent-runtime/messages` returns `404 NOT_FOUND`.
-- UI drawer cannot produce a runtime response.
+- Runtime response now includes both:
+  - `can_create_paid_unlock_language=false`
+  - `can_use_paid_unlock_language=false`
+- Frontend drawer successfully reaches runtime response state in both `en` and `zh`.
 
-Likely cause:
+Residual note:
 
-- Production backend does not yet include or expose the PR-EQ-AGENT-RUNTIME-01 route, or route/cache/deploy state is behind backend main.
-
-Impact:
-
-- PR-EQ-AGENT-RUNTIME-03 frontend drawer is deployed, but the real runtime message path is unavailable.
-- Agent runtime phase cannot be accepted.
-
-Required next action:
-
-- Run backend production deploy readiness for the backend SHA that contains PR-EQ-AGENT-RUNTIME-01/02, deploy if needed after explicit approval, then re-run this smoke.
-
-### P1: Agent context guardrail field mismatch blocks frontend ready state
-
-Evidence:
-
-- Production context returns `can_create_paid_unlock_language=false`.
-- Frontend guard from PR-EQ-AGENT-RUNTIME-03 expects `can_use_paid_unlock_language=false`.
-- The drawer opens, but the script did not observe message input / runtime unavailable / runtime response state.
-
-Impact:
-
-- Even after backend runtime route is deployed, the frontend may continue to fail closed unless the guardrail alias is normalized.
-
-Required next action:
-
-- Either backend should also return `can_use_paid_unlock_language=false`, or frontend should accept the existing `can_create_paid_unlock_language=false` as the equivalent no-paid-language guard.
-
-### P2: Low-confidence path was triggered by automated submit timing
-
-Evidence:
-
-- Report quality: `level=D`, `flags=["SPEEDING"]`, `completion_time_seconds=1`.
-
-Impact:
-
-- This is acceptable for this smoke because it verifies the low-confidence fail-safe path does not display strong personality claims.
-- Future production smoke should use the real browser take flow or a delayed API submit if a normal-confidence report is required.
+- Agent context still returns `can_create_paid_unlock_language=false` but does not include `can_use_paid_unlock_language=false`.
+- This is acceptable in the current deployed drawer because the context ready state passes and runtime response includes the compatibility alias.
+- Future cleanup can make context and runtime guardrail names identical, but it is not blocking production acceptance.
 
 ## 7. Forbidden Language / Boundary Checks
 
-Observed user-visible result page and payload summaries did not expose:
+Observed user-visible result page and Agent drawer did not expose:
 
 - `SKU_EQ_60_FULL_299`
 - `EQ_60_FULL`
@@ -270,8 +292,10 @@ Observed user-visible result page and payload summaries did not expose:
 - `解锁`
 - `购买`
 - `付费`
+- `premium`
+- `upgrade`
 
-SJT remains:
+SJT remains unavailable:
 
 ```json
 {
@@ -281,18 +305,56 @@ SJT remains:
 }
 ```
 
-## 8. Final Decision
+Runtime boundaries:
 
-Agent runtime phase allowed: **no**.
+- Agent does not rescore.
+- Agent does not replace formulation.
+- Agent does not mutate report sections.
+- Agent does not enable SJT.
+- Agent does not create paid unlock language.
+- Agent does not expose raw technical tags.
 
-Reason:
+## 8. Risks and Follow-Ups
 
-1. P0 production runtime endpoint returns `404 NOT_FOUND`.
-2. P1 frontend/backend guardrail field naming mismatch prevents confident drawer ready-state acceptance.
+### P2: Smoke attempt is low-confidence
 
-Recommended next PR:
+The reused production attempt is `quality.level=D` with `SPEEDING`.
 
-- Backend/deploy gate: confirm backend production deploy contains PR-EQ-AGENT-RUNTIME-01/02 route.
-- If backend is current but route still 404, fix backend route/cache exposure.
-- Frontend/backend contract fix: normalize `can_create_paid_unlock_language` vs `can_use_paid_unlock_language`.
-- Re-run production smoke and update this acceptance report or create a follow-up acceptance report once P0/P1 are closed.
+Impact:
+
+- This is acceptable for closing runtime delivery because it verifies low-confidence boundary behavior.
+- It does not prove normal-confidence Agent answer quality.
+
+Follow-up:
+
+- Run a future smoke with a normal-speed production attempt if normal-confidence answer tone needs live evidence.
+
+### P2: Context/runtime guardrail naming should be normalized
+
+Runtime response includes both paid-language guardrail names, while context currently uses `can_create_paid_unlock_language`.
+
+Follow-up:
+
+- Normalize both context and runtime payloads to expose both aliases or one documented canonical field.
+
+### P3: Console showed a generic 404 resource
+
+Playwright console captured a generic resource 404 during page load. It did not block EQ result, context, or runtime flows.
+
+Follow-up:
+
+- Inspect separately only if frontend asset logs show user-visible impact.
+
+## 9. Final Decision
+
+Agent runtime phase allowed: **yes, for deterministic/read-only runtime shell.**
+
+Allowed next step:
+
+- Proceed to tightly scoped Agent runtime iteration, analytics, and safety evaluation for the deterministic shell.
+
+Still not allowed:
+
+- Live LLM/provider integration without a separate PR.
+- Agent mutation of report, scores, formulations, sections, content assets, or SJT state.
+- Any hiring, clinical, certified ability, MSCEIT-like, guaranteed outcome, job-performance prediction, paywall, or unlock claims.
