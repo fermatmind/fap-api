@@ -1,0 +1,70 @@
+{
+  "version": "seo-ops-zh-article-quality-controlled-writer.v1",
+  "commands": [
+    "php artisan seo-ops:zh-article-quality-controlled-writer",
+    "php artisan seo-ops:zh-article-quality-readback"
+  ],
+  "input_schema": "seo-ops-zh-article-quality-repair-dry-run.v1",
+  "scope": {
+    "repo": "fap-api",
+    "page_entity_type": "article",
+    "locale": "zh-CN",
+    "expected_article_count": 9,
+    "source_family": "seo_ops_zh_article_quality_repair"
+  },
+  "allowed_replacements": {
+    "Dynamic next steps": "下一步怎么做",
+    "Frequently asked questions": "常见问题",
+    "Frequently Asked Questions": "常见问题",
+    "Related reading": "相关阅读",
+    "Related reading / internal links": "相关阅读",
+    "Trust links": "可信度与边界",
+    "/tests/mbti-personality-test-16-personality-types": "/zh/tests/mbti-personality-test-16-personality-types",
+    "/tests/holland-career-interest-test-riasec": "/zh/tests/holland-career-interest-test-riasec",
+    "/tests/big-five-personality-test-ocean-model": "/zh/tests/big-five-personality-test-ocean-model",
+    "/science": "/zh/science",
+    "/method-boundaries": "/zh/method-boundaries",
+    "/reliability-validity": "/zh/reliability-validity"
+  },
+  "protected_fields": {
+    "slug": "no_change",
+    "canonical": "no_change",
+    "locale": "no_change",
+    "publication": "no_change",
+    "schema": "hold_no_change",
+    "hreflang": "hold_no_change",
+    "sitemap": "no_change",
+    "llms": "no_change",
+    "search_submission": "hold_no_change"
+  },
+  "execute_gate": {
+    "default_mode": "dry_run",
+    "requires_execute_flag": true,
+    "requires_confirm_dry_run_evidence_sha256": true,
+    "requires_exact_confirmation_phrase": true
+  },
+  "readback": {
+    "requires_writer_evidence_sha256": true,
+    "verifies_replacement_find_absent": true,
+    "verifies_protected_snapshot_unchanged": true,
+    "writes_evidence_only": true
+  },
+  "negative_guarantees": {
+    "cms_draft_create": false,
+    "cms_publish": false,
+    "url_truth_write": false,
+    "schema_enable": false,
+    "hreflang_enable": false,
+    "sitemap_write": false,
+    "llms_write": false,
+    "search_channel_enqueue": false,
+    "indexnow_submit": false,
+    "baidu_submit": false,
+    "gsc_request_indexing": false,
+    "scheduler_start": false,
+    "queue_worker_start": false,
+    "external_api_call": false,
+    "revalidation": false,
+    "deploy": false
+  }
+}

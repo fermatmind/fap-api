@@ -1335,6 +1335,23 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_seo_ops_zh_article_quality_writer_and_readback_adapters(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/SeoOpsZhArticleQualityControlledWriterCommand.php',
+            'backend/app/Console/Commands/SeoOpsZhArticleQualityReadbackCommand.php',
+            'backend/app/Console/Kernel.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\SeoOpsZhArticleQualityControlledWriterCommand;',
+            '+use App\\Console\\Commands\\SeoOpsZhArticleQualityReadbackCommand;',
+            '+        SeoOpsZhArticleQualityControlledWriterCommand::class,',
+            '+        SeoOpsZhArticleQualityReadbackCommand::class,',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
+    }
+
     public function test_runtime_freeze_classifier_ignores_seo_agent_codex_review_runner_files(): void
     {
         $changed = [
@@ -4871,6 +4888,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSeoOpsZhArticleQualityWriterOrReadbackFile($file)) {
+                continue;
+            }
+
             if ($this->isSeoAgentCmsTdkGapReadonlyScannerFile($file)) {
                 continue;
             }
@@ -5769,6 +5790,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsBigFivePublicProfileAgentPromotionOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoOpsP0CtrArticleCmsUpdateWriterOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoOpsZhArticleQualityRepairDryRunOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsSeoOpsZhArticleQualityWriterOrReadbackOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentCmsTdkGapReadonlyScannerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentCodexReviewRunnerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsSeoAgentCmsDraftPackageDryRunOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
@@ -6532,6 +6554,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isSeoOpsZhArticleQualityRepairDryRunFile(string $file): bool
     {
         return $file === 'backend/app/Console/Commands/SeoOpsZhArticleQualityRepairDryRunCommand.php';
+    }
+
+    private function isSeoOpsZhArticleQualityWriterOrReadbackFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/SeoOpsZhArticleQualityControlledWriterCommand.php',
+            'backend/app/Console/Commands/SeoOpsZhArticleQualityReadbackCommand.php',
+        ], true);
     }
 
     private function isSeoAgentCmsTdkGapReadonlyScannerFile(string $file): bool
@@ -8688,6 +8718,28 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if (preg_match('/\bSeoOpsZhArticleQualityRepairDryRunCommand\b/u', $line) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsSeoOpsZhArticleQualityWriterOrReadbackOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            if (preg_match('/\b(MBTI|Mbti|BigFive|Big5|Prewarm|ResultPage|Report)\b/u', $line) === 1) {
+                return false;
+            }
+
+            if (preg_match('/\bSeoOpsZhArticleQuality(ControlledWriter|Readback)Command\b/u', $line) !== 1) {
                 return false;
             }
         }
