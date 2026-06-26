@@ -2,7 +2,7 @@
     "schema": "eq_60.report_assets.compiled.v1",
     "pack_id": "EQ_60",
     "pack_version": "v1",
-    "generated_at": "2026-06-26T15:26:31.228950Z",
+    "generated_at": "2026-06-26T15:43:46.987090Z",
     "assets": {
         "scientific_contract": {
             "schema": "eq60.report_assets.scientific_contract.v1",
@@ -9210,6 +9210,75 @@
                             "evidence_area": "norm_status"
                         },
                         "claim_sensitivity": "high"
+                    }
+                }
+            }
+        },
+        "result_page_depth_modules": {
+            "schema": "eq60.report_assets.result_page_depth_modules.v1",
+            "pack_id": "EQ_60",
+            "assets": {
+                "eq.depth.evidence_stack.default": {
+                    "zh-CN": {
+                        "title": "为什么这个结果可信",
+                        "body": "这份报告同时看四个维度、维度之间的差距、答题质量和内容路线。它不是只用一个总分判断你。",
+                        "bullets": [
+                            "四维信号：SA / ER / EM / RM",
+                            "差距信号：最强维度与发展杠杆",
+                            "质量信号：本次结果的解释置信度",
+                            "路线信号：最相关场景和行动处方"
+                        ]
+                    },
+                    "en": {
+                        "title": "Why this result is interpretable",
+                        "body": "This report looks at the four dimensions, the gaps between them, response quality, and the selected content route. It does not reduce you to one score.",
+                        "bullets": [
+                            "Dimension signals: SA / ER / EM / RM",
+                            "Gap signals: strongest dimension and development lever",
+                            "Quality signal: interpretation confidence",
+                            "Route signal: relevant scenes and action prescription"
+                        ]
+                    },
+                    "meta": {
+                        "id": "eq.depth.evidence_stack.default",
+                        "asset_type": "result_page_depth_module",
+                        "placement": "Evidence Snapshot",
+                        "claim_risk": "low",
+                        "source_version": "v1.9_commercial_depth"
+                    }
+                },
+                "eq.depth.how_to_read.default": {
+                    "zh-CN": {
+                        "title": "30 秒读法",
+                        "body": "先记住一句核心模式，再看一个证据点，最后只选一个行动。不要一口气把整份报告当成性格判决。"
+                    },
+                    "en": {
+                        "title": "How to read this in 30 seconds",
+                        "body": "Remember one core pattern, check one evidence point, then choose one action. Do not treat the whole report as a verdict on your personality."
+                    },
+                    "meta": {
+                        "id": "eq.depth.how_to_read.default",
+                        "asset_type": "result_page_depth_module",
+                        "placement": "Core Insight Hero",
+                        "claim_risk": "low",
+                        "source_version": "v1.9_commercial_depth"
+                    }
+                },
+                "eq.depth.reality_check.default": {
+                    "zh-CN": {
+                        "title": "现实验证法",
+                        "body": "未来一周观察三件事：你最先读到谁的情绪、你是否能说清边界、你事后恢复需要多久。"
+                    },
+                    "en": {
+                        "title": "Reality check",
+                        "body": "For the next week, observe three things: whose emotion you notice first, whether you can state a boundary, and how long recovery takes afterward."
+                    },
+                    "meta": {
+                        "id": "eq.depth.reality_check.default",
+                        "asset_type": "result_page_depth_module",
+                        "placement": "Reality Translation",
+                        "claim_risk": "low",
+                        "source_version": "v1.9_commercial_depth"
                     }
                 }
             }
