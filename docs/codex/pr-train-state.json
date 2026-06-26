@@ -62832,4 +62832,80 @@
       }
     ]
   }
+  ,
+  "MBTI-PDF-PRODUCT-01": {
+    "repo": "fap-api",
+    "branch": "codex/mbti-pdf-product-01-payload-authority",
+    "base": "main",
+    "status": "ready_to_merge",
+    "train_scope": "mbti_pdf_product",
+    "title": "MBTI-PDF-PRODUCT-01: add MBTI PDF payload authority",
+    "depends_on": [],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly provided /goal MBTI-PDF-PRODUCT-PR-TRAIN-01 with MBTI-PDF-PRODUCT-01 scope and requested continuous backend-only PR train execution."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Report/Pdf/Mbti/MbtiPdfPayloadBuilderTest.php --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=MbtiReadPathParityContractTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=AttemptPublicReportPdfParityTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_mbti_pdf_payload_authority_files|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff' --no-ansi",
+          "cd backend && vendor/bin/pint --test app/Services/Report/Pdf/Mbti tests/Unit/Services/Report/Pdf/Mbti tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "git diff --check"
+        ],
+        "evidence": "PASS: syntax check for MbtiPdfPayloadBuilder.php and MbtiPdfPayloadBuilderTest.php; focused payload test passed (2 tests, 17 assertions); MbtiReadPathParityContractTest passed after composer install restored locked mpdf/mpdf local dependency (3 tests, 174 assertions); AttemptPublicReportPdfParityTest passed (2 tests, 14 assertions); focused BigFive runtime freeze retry passed for MBTI PDF payload authority and runtime path diff guard (2 tests, 4 assertions); scoped Pint --test passed; docs/codex state JSON parse passed; pr-train YAML parse passed; git diff --check passed."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to MBTI-PDF-PRODUCT-01 scope: backend/app/Services/Report/Pdf/Mbti/MbtiPdfPayloadBuilder.php, backend/tests/Unit/Services/Report/Pdf/Mbti/MbtiPdfPayloadBuilderTest.php, the required BigFive runtime freeze harness allowance for this backend-only MBTI PDF payload authority file, and authorized docs/codex train metadata. No fap-web, public route, CMS, DB migration, sitemap, llms, canonical, noindex, JSON-LD, search, scheduler, queue, staging deploy, production deploy, PDF layout, or expanded PDF prose change."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "GitHub checks passed for PR #2448 head 8c833239a1c14fc79aebaf5a09be8e004f9aa537 after the scoped runtime freeze fix: hygiene, supply-chain, content-pack-build-validate, Semgrep, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 all succeeded. mergeStateStatus was CLEAN."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": "8c833239a1c14fc79aebaf5a09be8e004f9aa537",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2448",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-26T20:17:06+08:00",
+        "status": "in_progress",
+        "note": "Started MBTI PDF payload authority PR from latest origin/main in a clean fap-api worktree. Scope is backend-only payload adapter/builder, focused tests, and authorized docs/codex train metadata. No frontend, CMS write, SEO runtime, search, queue, scheduler, staging deploy, or production deploy."
+      },
+      {
+        "at": "2026-06-26T20:17:06+08:00",
+        "status": "local_validated",
+        "note": "Added MBTI PDF payload builder that projects reader-safe payload from backend MBTI content package and legacy composer authority. Local focused tests, existing MBTI PDF/read-path contracts, scoped Pint, JSON/YAML parse, git diff --check, and scope validation passed."
+      },
+      {
+        "at": "2026-06-26T20:17:06+08:00",
+        "status": "committed",
+        "note": "Prepared scoped commit 550506b535e1c2c4f4a02694e8f391ba0d4969d3 for MBTI PDF payload authority. No frontend, CMS, SEO runtime, search, queue, scheduler, staging deploy, or production deploy included."
+      },
+      {
+        "at": "2026-06-26T20:17:06+08:00",
+        "status": "github_checks_pending",
+        "note": "Opened PR #2448 at https://github.com/fermatmind/fap-api/pull/2448. Waiting for required GitHub checks; no staging deploy wait, server verification, manual deploy, or production deploy included."
+      },
+      {
+        "at": "2026-06-26T20:37:28+08:00",
+        "status": "github_checks_failed_fix_prepared",
+        "note": "Required verify-bigfive failed because the Big Five runtime freeze guard did not yet allow the backend-only MBTI PDF payload authority file. Added a narrow classifier allowance and focused test, updated PR manifest validation, and re-ran focused BigFive freeze, MBTI PDF payload, MBTI read-path parity, public report PDF parity, scoped Pint, YAML/JSON parse, and git diff checks successfully."
+      },
+      {
+        "at": "2026-06-26T20:45:24+08:00",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed for PR #2448 head 8c833239a1c14fc79aebaf5a09be8e004f9aa537 and mergeStateStatus was CLEAN. Ready for squash merge; no staging deploy wait, production deploy, CMS write, search, sitemap, llms, canonical, noindex, JSON-LD, queue, or scheduler change included."
+      }
+    ]
+  }
 }

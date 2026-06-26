@@ -54,6 +54,46 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: MBTI-PDF-PRODUCT-01
+    repo: fap-api
+    branch: codex/mbti-pdf-product-01-payload-authority
+    title: "MBTI-PDF-PRODUCT-01: add MBTI PDF payload authority"
+    train_scope: mbti_pdf_product
+    status: user_authorized
+    scope:
+      - Add an MBTI PDF dedicated payload adapter/builder.
+      - Extract user-readable PDF payload from existing MBTI result, content package, and legacy composer authority.
+      - Filter attempt ids, raw answers, raw scores, debug fields, quality/internal state, internal paths, and source traces that are not meant for users.
+      - Follow the safety pattern of the Big Five PDF payload adapter without changing PDF visual layout or expanding prose depth.
+    allowed_paths:
+      - backend/app/Services/Report/Pdf/Mbti/**
+      - backend/tests/Unit/Services/Report/Pdf/Mbti/**
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web.
+      - Change public API route paths, frontend download behavior, CMS, sitemap, llms, canonical, noindex, JSON-LD, search submission, scheduler, queue, secrets, staging deploy, or production deploy.
+      - Write CMS, run production import, run production smoke, or expand MBTI PDF prose/pagination beyond the payload authority contract.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Report/Pdf/Mbti/MbtiPdfPayloadBuilderTest.php --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=MbtiReadPathParityContractTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=AttemptPublicReportPdfParityTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_mbti_pdf_payload_authority_files|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff' --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/Report/Pdf/Mbti tests/Unit/Services/Report/Pdf/Mbti tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: PR-EQ-ASSET-02
     repo: fap-api
     depends_on: [PR-EQ-ASSET-01]
