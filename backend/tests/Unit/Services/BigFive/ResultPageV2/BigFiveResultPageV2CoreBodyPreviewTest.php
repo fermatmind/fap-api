@@ -1373,13 +1373,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         $changed = [
             'backend/app/Console/Commands/SeoOpsGaokaoV5CmsDraftGateCommand.php',
+            'backend/app/Console/Commands/SeoOpsGaokaoV5PublishGateRepairCommand.php',
             'backend/app/Console/Commands/SeoOpsGaokaoV5PropagationGateReadinessCommand.php',
             'backend/app/Console/Kernel.php',
         ];
         $kernelChangedLines = [
             '+use App\\Console\\Commands\\SeoOpsGaokaoV5CmsDraftGateCommand;',
+            '+use App\\Console\\Commands\\SeoOpsGaokaoV5PublishGateRepairCommand;',
             '+use App\\Console\\Commands\\SeoOpsGaokaoV5PropagationGateReadinessCommand;',
             '+        SeoOpsGaokaoV5CmsDraftGateCommand::class,',
+            '+        SeoOpsGaokaoV5PublishGateRepairCommand::class,',
             '+        SeoOpsGaokaoV5PropagationGateReadinessCommand::class,',
         ];
 
@@ -6620,6 +6623,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return in_array($file, [
             'backend/app/Console/Commands/SeoOpsGaokaoV5CmsDraftGateCommand.php',
+            'backend/app/Console/Commands/SeoOpsGaokaoV5PublishGateRepairCommand.php',
             'backend/app/Console/Commands/SeoOpsGaokaoV5PropagationGateReadinessCommand.php',
         ], true);
     }
@@ -8821,7 +8825,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 return false;
             }
 
-            if (preg_match('/\bSeoOpsGaokaoV5(CmsDraftGate|PropagationGateReadiness)Command\b/u', $line) !== 1) {
+            if (preg_match('/\bSeoOpsGaokaoV5(CmsDraftGate|PublishGateRepair|PropagationGateReadiness)Command\b/u', $line) !== 1) {
                 return false;
             }
         }
