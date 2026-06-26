@@ -26,6 +26,8 @@ final class Mbti64CmsRevisionPromotionService
 
     private const AGENT_PROJECTION_VERSION = 'mbti64.agent_expansion_88_recommendations.v1';
 
+    private const NEXT_BATCH_6_PACKAGE_ARTIFACT = 'PERSONALITY-AGENT-OPERATIONS-NEXT-BATCH-6-HANDOFF-01';
+
     private const VISIBLE_QUERY_BACKED_3_URLS = [
         'https://fermatmind.com/en/personality/enfj-a',
         'https://fermatmind.com/zh/personality/intp-a',
@@ -38,6 +40,15 @@ final class Mbti64CmsRevisionPromotionService
         'https://fermatmind.com/en/personality/esfj-a',
         'https://fermatmind.com/zh/personality/esfj-a',
         'https://fermatmind.com/en/personality/intp-a',
+    ];
+
+    private const NEXT_BATCH_6_URLS = [
+        'https://fermatmind.com/zh/personality/intp-a',
+        'https://fermatmind.com/en/personality/intp-a',
+        'https://fermatmind.com/zh/personality/esfp-a',
+        'https://fermatmind.com/en/personality/esfp-a',
+        'https://fermatmind.com/en/personality/enfj-a',
+        'https://fermatmind.com/zh/personality/enfj-a',
     ];
 
     public function __construct(private readonly Mbti64BackendImportContractPlanner $planner)
@@ -194,7 +205,8 @@ final class Mbti64CmsRevisionPromotionService
         );
         $visibleQueryBacked3 = (bool) ($options['visible_query_backed_3'] ?? false);
         $freshQueryBacked5 = (bool) ($options['fresh_query_backed_5'] ?? false);
-        $subsetModeCount = ($visibleQueryBacked3 ? 1 : 0) + ($freshQueryBacked5 ? 1 : 0);
+        $nextBatch6 = (bool) ($options['next_batch_6'] ?? false);
+        $subsetModeCount = ($visibleQueryBacked3 ? 1 : 0) + ($freshQueryBacked5 ? 1 : 0) + ($nextBatch6 ? 1 : 0);
         if ($subsetModeCount > 1) {
             $errors[] = [
                 'field' => 'options',
@@ -206,26 +218,31 @@ final class Mbti64CmsRevisionPromotionService
         $subsetUrls = match (true) {
             $visibleQueryBacked3 => self::VISIBLE_QUERY_BACKED_3_URLS,
             $freshQueryBacked5 => self::FRESH_QUERY_BACKED_5_URLS,
+            $nextBatch6 => self::NEXT_BATCH_6_URLS,
             default => [],
         };
         $contractRecommendations = $subsetUrls !== []
             ? $this->recommendationsForFixedUrls($recommendations, $subsetUrls)
             : $recommendations;
 
-        if ((string) ($package['artifact'] ?? '') !== self::AGENT_PROJECTION_ARTIFACT) {
-            $errors[] = ['field' => 'artifact', 'code' => 'unsupported_package_artifact', 'message' => 'Unexpected MBTI64 agent projection artifact.'];
-        }
-        if ((string) ($package['version'] ?? '') !== self::AGENT_PROJECTION_VERSION) {
-            $errors[] = ['field' => 'version', 'code' => 'unsupported_package_version', 'message' => 'Unexpected MBTI64 agent projection version.'];
-        }
-        if ((string) ($package['status'] ?? '') !== 'pass_ready_for_qa_gates') {
-            $errors[] = ['field' => 'status', 'code' => 'package_status_not_ready_for_qa', 'message' => 'Package must be ready for QA gates before promotion planning.'];
-        }
-        if (count($recommendations) !== 88 || (int) ($summary['recommendation_count'] ?? -1) !== 88) {
-            $errors[] = ['field' => 'recommendations', 'code' => 'unexpected_recommendation_count', 'message' => 'Expected exactly 88 MBTI64 agent projection recommendations.'];
-        }
-        if ((int) ($summary['variant_pages'] ?? -1) !== 58 || (int) ($summary['comparison_pages'] ?? -1) !== 30) {
-            $errors[] = ['field' => 'summary', 'code' => 'unexpected_page_type_counts', 'message' => 'Expected 58 variant and 30 comparison recommendations.'];
+        if ($nextBatch6) {
+            $this->validateNextBatch6ContractPackage($package, $recommendations, $errors);
+        } else {
+            if ((string) ($package['artifact'] ?? '') !== self::AGENT_PROJECTION_ARTIFACT) {
+                $errors[] = ['field' => 'artifact', 'code' => 'unsupported_package_artifact', 'message' => 'Unexpected MBTI64 agent projection artifact.'];
+            }
+            if ((string) ($package['version'] ?? '') !== self::AGENT_PROJECTION_VERSION) {
+                $errors[] = ['field' => 'version', 'code' => 'unsupported_package_version', 'message' => 'Unexpected MBTI64 agent projection version.'];
+            }
+            if ((string) ($package['status'] ?? '') !== 'pass_ready_for_qa_gates') {
+                $errors[] = ['field' => 'status', 'code' => 'package_status_not_ready_for_qa', 'message' => 'Package must be ready for QA gates before promotion planning.'];
+            }
+            if (count($recommendations) !== 88 || (int) ($summary['recommendation_count'] ?? -1) !== 88) {
+                $errors[] = ['field' => 'recommendations', 'code' => 'unexpected_recommendation_count', 'message' => 'Expected exactly 88 MBTI64 agent projection recommendations.'];
+            }
+            if ((int) ($summary['variant_pages'] ?? -1) !== 58 || (int) ($summary['comparison_pages'] ?? -1) !== 30) {
+                $errors[] = ['field' => 'summary', 'code' => 'unexpected_page_type_counts', 'message' => 'Expected 58 variant and 30 comparison recommendations.'];
+            }
         }
         if ($visibleQueryBacked3 && count($contractRecommendations) !== 3) {
             $errors[] = [
@@ -239,6 +256,13 @@ final class Mbti64CmsRevisionPromotionService
                 'field' => 'recommendations',
                 'code' => 'fresh_query_backed_5_subset_incomplete',
                 'message' => 'Expected exactly the 5 fresh query-backed MBTI64 recommendations.',
+            ];
+        }
+        if ($nextBatch6 && count($contractRecommendations) !== 6) {
+            $errors[] = [
+                'field' => 'recommendations',
+                'code' => 'next_batch_6_subset_incomplete',
+                'message' => 'Expected exactly the 6 approved next-batch MBTI64 recommendations.',
             ];
         }
 
@@ -280,10 +304,12 @@ final class Mbti64CmsRevisionPromotionService
                 'mode' => match (true) {
                     $visibleQueryBacked3 => 'visible_query_backed_3',
                     $freshQueryBacked5 => 'fresh_query_backed_5',
+                    $nextBatch6 => 'next_batch_6',
                     default => 'full_agent_projection_88',
                 },
                 'enabled' => $subsetUrls !== [],
                 'allowed_urls' => $subsetUrls,
+                'arbitrary_url_subset_allowed' => false,
             ],
             'row_count' => count($rows),
             'variant_row_count' => count(array_filter($rows, static fn (array $row): bool => ($row['page_type'] ?? null) === 'variant')),
@@ -292,6 +318,58 @@ final class Mbti64CmsRevisionPromotionService
             'errors' => $errors,
             'warnings' => $warnings,
         ];
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $recommendations
+     * @param  list<array<string,string>>  $errors
+     */
+    private function validateNextBatch6ContractPackage(array $package, array $recommendations, array &$errors): void
+    {
+        $summary = is_array($package['summary'] ?? null) ? $package['summary'] : [];
+        $actualUrls = array_map(
+            static fn (array $recommendation): string => (string) ($recommendation['target_url'] ?? ''),
+            $recommendations
+        );
+        $expectedUrls = self::NEXT_BATCH_6_URLS;
+        sort($actualUrls);
+        sort($expectedUrls);
+
+        if ((string) ($package['artifact'] ?? '') !== self::NEXT_BATCH_6_PACKAGE_ARTIFACT) {
+            $errors[] = [
+                'field' => 'artifact',
+                'code' => 'unsupported_next_batch_6_package_artifact',
+                'message' => 'Unexpected MBTI64 next-batch-6 handoff artifact.',
+            ];
+        }
+        if ((string) ($package['status'] ?? '') !== 'pass') {
+            $errors[] = [
+                'field' => 'status',
+                'code' => 'next_batch_6_package_status_not_pass',
+                'message' => 'Next-batch-6 package must have pass status before promotion planning.',
+            ];
+        }
+        if (count($recommendations) !== 6 || (int) ($summary['recommendation_count'] ?? -1) !== 6) {
+            $errors[] = [
+                'field' => 'recommendations',
+                'code' => 'unexpected_next_batch_6_recommendation_count',
+                'message' => 'Expected exactly 6 next-batch MBTI64 recommendations.',
+            ];
+        }
+        if ((int) ($summary['variant_pages'] ?? -1) !== 6 || (int) ($summary['comparison_pages'] ?? -1) !== 0) {
+            $errors[] = [
+                'field' => 'summary',
+                'code' => 'unexpected_next_batch_6_page_type_counts',
+                'message' => 'Expected 6 variant and 0 comparison recommendations for next-batch-6.',
+            ];
+        }
+        if ($actualUrls !== $expectedUrls) {
+            $errors[] = [
+                'field' => 'recommendations',
+                'code' => 'next_batch_6_url_set_mismatch',
+                'message' => 'Next-batch-6 package must contain exactly the fixed approved URL set.',
+            ];
+        }
     }
 
     /**

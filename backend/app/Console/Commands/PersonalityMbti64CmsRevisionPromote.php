@@ -28,6 +28,7 @@ final class PersonalityMbti64CmsRevisionPromote extends Command
         {--write : Promote latest matching revision snapshots to live CMS content fields}
         {--visible-query-backed-3 : Restrict agent projection promotion planning/write to the approved 3 query-backed visible MBTI64 URLs}
         {--fresh-query-backed-5 : Restrict agent projection promotion planning/write to the fresh 5 query-backed MBTI64 URLs}
+        {--next-batch-6 : Restrict agent projection promotion planning/write to the approved next-batch 6 MBTI64 URLs}
         {--json : Emit the full JSON summary}
         {--output= : Optional path to write the JSON summary}
         {--promote-live-content : Required for --write; confirms live CMS content promotion intent}
@@ -139,6 +140,7 @@ final class PersonalityMbti64CmsRevisionPromote extends Command
             'operator_approved' => (string) $this->option('operator-approved'),
             'visible_query_backed_3' => (bool) $this->option('visible-query-backed-3'),
             'fresh_query_backed_5' => (bool) $this->option('fresh-query-backed-5'),
+            'next_batch_6' => (bool) $this->option('next-batch-6'),
         ];
     }
 
