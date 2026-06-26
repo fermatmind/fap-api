@@ -10,7 +10,7 @@
             "paywall": false
         },
         "asset_refs": {
-            "action_prescription_id": "emotion_labeling",
+            "action_prescription_id": "relationship_energy_management",
             "agent_playbook_ids": [
                 "eq.agent.playbook.understand_result",
                 "eq.agent.playbook.scene_advice",
@@ -26,8 +26,7 @@
                 "eq.backend_contract.agent_readiness"
             ],
             "career_environment_ids": [
-                "interpersonal_density_medium",
-                "feedback_intensity_medium",
+                "emotional_labor_medium",
                 "autonomy_recovery_medium"
             ],
             "commercial_conversion_ids": [
@@ -46,7 +45,7 @@
                 "SA_ER_high_high",
                 "EM_RM_high_high"
             ],
-            "personalization_route_id": "balanced_integrated",
+            "personalization_route_id": "route.eq.001.balanced.high_quality",
             "psychometric_evidence_ids": [
                 "eq.evidence.norm_status",
                 "eq.evidence.content_validity",
@@ -58,19 +57,28 @@
             ],
             "quality_confidence_id": "eq.quality.level.A",
             "quality_explanation_asset_id": "eq.quality.level.A",
+            "result_page_depth_module_ids": [
+                "eq.depth.how_to_read.default",
+                "eq.depth.evidence_stack.default",
+                "eq.depth.reality_check.default"
+            ],
             "result_snapshot_id": "eq.snapshot.balanced_integrated",
             "scene_ids": [
                 "feedback",
                 "team_collaboration",
-                "career_environment"
+                "pressure_recovery"
+            ],
+            "scene_variant_ids": [
+                "eq.scene.feedback.balanced_integrated.primary",
+                "eq.scene.team_collaboration.balanced_integrated.primary",
+                "eq.scene.pressure_recovery.balanced_integrated.primary"
             ],
             "scientific_contract_id": "eq.scientific_contract.default",
             "score_system_id": "eq.score_system.default",
             "selected_asset_ids": {
-                "action_prescription_id": "emotion_labeling",
+                "action_prescription_id": "relationship_energy_management",
                 "career_environment_ids": [
-                    "interpersonal_density_medium",
-                    "feedback_intensity_medium",
+                    "emotional_labor_medium",
                     "autonomy_recovery_medium"
                 ],
                 "core_formulation_id": "balanced_integrated",
@@ -81,7 +89,12 @@
                 "scene_ids": [
                     "feedback",
                     "team_collaboration",
-                    "career_environment"
+                    "pressure_recovery"
+                ],
+                "scene_variant_ids": [
+                    "eq.scene.feedback.balanced_integrated.primary",
+                    "eq.scene.team_collaboration.balanced_integrated.primary",
+                    "eq.scene.pressure_recovery.balanced_integrated.primary"
                 ]
             },
             "signal_signature": {
@@ -94,9 +107,11 @@
                     "SA": "high"
                 },
                 "formulation_id": "balanced_integrated",
-                "match_pattern": "all_high_or_default_balanced",
+                "match_pattern": "EM_high_ER_high_RM_high_SA_high",
                 "quality_level": "A",
-                "route_id": "balanced_integrated",
+                "route_claim_risk": "medium",
+                "route_id": "route.eq.001.balanced.high_quality",
+                "route_priority": 10,
                 "schema": "eq60.signal_signature.v1",
                 "strongest_dimension": "SA"
             },
@@ -104,44 +119,56 @@
         },
         "assets": {
             "action_prescription": {
-                "do_not_overread": "An action prescription is a practice suggestion, not a promised outcome or substitute for qualified support.",
-                "do_today": "Today, turn one vague feeling into three more precise words.",
-                "id": "emotion_labeling",
-                "script": "I am not simply upset; I may be disappointed, tense, and needing clarity.",
+                "agent_followup_prompt": "Later, you can ask the Agent to help you practice this prescription.",
+                "agent_prompt_seed": "Help me apply this prescription to a recent real situation.",
+                "do_not_overread": "This is a self-development practice, not a treatment plan.",
+                "do_today": "At the end of today, list which emotions were yours and which ones you merely encountered.",
+                "id": "relationship_energy_management",
+                "one_minute_version": "Take a 60-second pause, then name the fact, feeling, and next step in one sentence.",
+                "progress_markers": [
+                    "You can name your state sooner.",
+                    "You can state the scope of support more clearly.",
+                    "You spend less time replaying conflict afterward."
+                ],
+                "retest_prompt": "After practicing, retake the assessment to see whether your self-view has become steadier.",
+                "save_prompt": "Save this prescription and practice only this one move for the week.",
+                "script": "“I’ll follow up on the part I own; the rest needs to be handled separately.”",
                 "seven_day_plan": [
                     {
                         "day": 1,
-                        "practice": "Notice one relevant real situation."
+                        "practice": "List three high-interaction moments."
                     },
                     {
                         "day": 2,
-                        "practice": "Write the fact, feeling, and need separately."
+                        "practice": "Mark the one that drained you most."
                     },
                     {
                         "day": 3,
-                        "practice": "Practice the key sentence once out loud."
+                        "practice": "Name the part you truly owned."
                     },
                     {
                         "day": 4,
-                        "practice": "Use the practice in a low-risk interaction."
+                        "practice": "Name the part you did not own."
                     },
                     {
                         "day": 5,
-                        "practice": "Record what changed before and after."
+                        "practice": "Schedule ten minutes of recovery."
                     },
                     {
                         "day": 6,
-                        "practice": "Adjust the wording to sound natural."
+                        "practice": "Set a boundary earlier next time."
                     },
                     {
                         "day": 7,
-                        "practice": "Choose one version to keep using next week."
+                        "practice": "Review which interactions need limits."
                     }
                 ],
-                "title": "Emotion labeling",
-                "watch_out": "Do not turn the practice into self-criticism; observe one small behavior becoming clearer.",
-                "when_to_use": "Use when feelings are vague or only become clear afterward.",
-                "why_this_matters": "Use when feelings are vague or only become clear afterward."
+                "share_prompt": "If you share anything, share the action rather than your score.",
+                "title": "Manage Relational Energy",
+                "watch_out": "Do not treat one exercise as a promise that a relationship will change immediately.",
+                "when_not_to_use": "If safety, trauma, ongoing harm, medical, or legal issues are involved, do not use report guidance as a substitute for professional support.",
+                "when_to_use": "Use this when you understand the pattern but need help with what to say, where to pause, or how to repair.",
+                "why_this_matters": "You may be able to handle many interactions, but ability does not mean every interaction belongs to you."
             },
             "agent_dialogue_playbooks": [
                 {
@@ -229,139 +256,140 @@
             ],
             "career_environment": [
                 {
-                    "do_not_overread": "This is a career-environment variable, not a job recommendation or hiring screen.",
-                    "fit_signal": "If your EQ pattern works best with clear rhythm and boundaries, medium interpersonal density may support it; if your strengths need high interaction, verify that the environment provides enough of it.",
-                    "id": "interpersonal_density_medium",
-                    "interview_question": "What is the usual level of interpersonal density in this role, and how does the team divide responsibility under pressure?",
-                    "label": "Interpersonal density: medium",
+                    "do_not_overread": "This is not an occupation recommendation. It is a lens for reading the work environment.",
+                    "fit_signal": "When emotional labor is medium: This setting gives you enough interaction to use relational strengths while still leaving some independent rhythm. For this EQ report, the question is whether the setting lets your strengths operate naturally instead of making you the default emotional coordinator.",
+                    "id": "emotional_labor_medium",
+                    "interview_question": "What level of emotional labor does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?",
+                    "label": "Emotional labor: medium",
                     "level": "medium",
-                    "meaning": "How many people you interact with, and how often. This level is moderate, but manageable with rules.",
+                    "manager_note": "Ask how the team routes complaints, conflict, or other people’s stress instead of letting one responsive person absorb it.",
+                    "meaning": "occasional need to reassure, explain, or handle frustration",
                     "role_observation_checklist": [
-                        "number of high-interaction periods in a day",
-                        "private vs public feedback",
-                        "whether conflict is handled individually or by the team",
-                        "availability of low-input recovery windows"
+                        "Notice whether emotional labor is predictable or spikes without warning.",
+                        "Notice whether emotional coordination has a clear owner or falls to the most responsive person.",
+                        "Notice whether you end the day clearer and steadier, or still replaying conversations."
                     ],
                     "safe_experiment": "Observe rhythm and recovery space for one week before judging fit from a job title.",
-                    "strain_signal": "Strain increases when interpersonal density does not match recovery space, feedback style, or responsibility boundaries.",
-                    "team_risk": "If the team expects emotionally skilled people to maintain the relationship system, this environment can turn strength into invisible labor.",
-                    "variable": "interpersonal_density",
-                    "what_to_verify": "In interviews or trials, verify the real level of interpersonal density: who handles relationship tension and how conflict is reviewed."
+                    "strain_signal": "The strain point at medium emotional labor: The risk is blurred boundaries: some conversations deserve investment, while others only drain attention. If your development lever sits in ER or RM, verify this variable early.",
+                    "team_risk": "If emotional labor is underestimated, the team may treat invisible coordination as something emotionally capable people will simply absorb.",
+                    "variable": "emotional_labor",
+                    "what_to_verify": "What level of emotional labor does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?"
                 },
                 {
-                    "do_not_overread": "This is a career-environment variable, not a job recommendation or hiring screen.",
-                    "fit_signal": "If your EQ pattern works best with clear rhythm and boundaries, medium feedback intensity may support it; if your strengths need high interaction, verify that the environment provides enough of it.",
-                    "id": "feedback_intensity_medium",
-                    "interview_question": "What is the usual level of feedback intensity in this role, and how does the team divide responsibility under pressure?",
-                    "label": "Feedback intensity: medium",
-                    "level": "medium",
-                    "meaning": "How often your work is evaluated, revised, reviewed, or compared. This level is moderate, but manageable with rules.",
-                    "role_observation_checklist": [
-                        "number of high-interaction periods in a day",
-                        "private vs public feedback",
-                        "whether conflict is handled individually or by the team",
-                        "availability of low-input recovery windows"
-                    ],
-                    "safe_experiment": "Observe rhythm and recovery space for one week before judging fit from a job title.",
-                    "strain_signal": "Strain increases when feedback intensity does not match recovery space, feedback style, or responsibility boundaries.",
-                    "team_risk": "If the team expects emotionally skilled people to maintain the relationship system, this environment can turn strength into invisible labor.",
-                    "variable": "feedback_intensity",
-                    "what_to_verify": "In interviews or trials, verify the real level of feedback intensity: who handles relationship tension and how conflict is reviewed."
-                },
-                {
-                    "do_not_overread": "This is a career-environment variable, not a job recommendation or hiring screen.",
-                    "fit_signal": "If your EQ pattern works best with clear rhythm and boundaries, medium autonomy and recovery may support it; if your strengths need high interaction, verify that the environment provides enough of it.",
+                    "do_not_overread": "This is not an occupation recommendation. It is a lens for reading the work environment.",
+                    "fit_signal": "When recovery autonomy is medium: This setting gives you enough interaction to use relational strengths while still leaving some independent rhythm. For this EQ report, the question is whether the setting lets your strengths operate naturally instead of making you the default emotional coordinator.",
                     "id": "autonomy_recovery_medium",
-                    "interview_question": "What is the usual level of autonomy and recovery in this role, and how does the team divide responsibility under pressure?",
-                    "label": "Autonomy and recovery: medium",
+                    "interview_question": "What level of recovery autonomy does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?",
+                    "label": "Autonomy and recovery space: medium",
                     "level": "medium",
-                    "meaning": "How much control you have over solitude, rhythm, and low-input recovery. This level is moderate, but manageable with rules.",
+                    "manager_note": "Ask whether high-pressure work is followed by quiet review time, pace control, or task switching.",
+                    "meaning": "some control over pacing and recovery",
                     "role_observation_checklist": [
-                        "number of high-interaction periods in a day",
-                        "private vs public feedback",
-                        "whether conflict is handled individually or by the team",
-                        "availability of low-input recovery windows"
+                        "Notice whether recovery autonomy is predictable or spikes without warning.",
+                        "Notice whether emotional coordination has a clear owner or falls to the most responsive person.",
+                        "Notice whether you end the day clearer and steadier, or still replaying conversations."
                     ],
                     "safe_experiment": "Observe rhythm and recovery space for one week before judging fit from a job title.",
-                    "strain_signal": "Strain increases when autonomy and recovery does not match recovery space, feedback style, or responsibility boundaries.",
-                    "team_risk": "If the team expects emotionally skilled people to maintain the relationship system, this environment can turn strength into invisible labor.",
+                    "strain_signal": "The strain point at medium recovery autonomy: The risk is blurred boundaries: some conversations deserve investment, while others only drain attention. If your development lever sits in ER or RM, verify this variable early.",
+                    "team_risk": "If recovery autonomy is underestimated, the team may treat invisible coordination as something emotionally capable people will simply absorb.",
                     "variable": "autonomy_recovery",
-                    "what_to_verify": "In interviews or trials, verify the real level of autonomy and recovery: who handles relationship tension and how conflict is reviewed."
+                    "what_to_verify": "What level of recovery autonomy does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?"
                 }
             ],
             "commercial_conversion_actions": [
                 {
-                    "body": "Keep your pattern, action prescription, and retest path in one place.",
+                    "body": "Keep a copy of this result so you can compare it after a few weeks.",
                     "cta_label": "Save report",
-                    "do_not_overread": "This is a free product action, it does not change report access.",
+                    "do_not_overread": "This is a way to use the report, not a change to the interpretation.",
                     "id": "eq.conversion.save_report",
                     "placement": "Use in result-page footer, secondary hero action, or saved-report area.",
-                    "title": "Save your report"
+                    "retention_reason": "The user can return to the same route, prescription, and scenes after leaving the page.",
+                    "title": "Save this report for later reflection",
+                    "trust_note": "This action helps you use the report; it does not change scores or conclusions."
                 },
                 {
-                    "body": "Send the report to yourself so you can revisit it or continue with the Agent later.",
-                    "cta_label": "Email me",
-                    "do_not_overread": "This is a free product action, it does not change report access.",
+                    "body": "Use this when you want to revisit the result without keeping the page open.",
+                    "cta_label": "Send report link to yourself",
+                    "do_not_overread": "This is a way to use the report, not a change to the interpretation.",
                     "id": "eq.conversion.email_revisit",
                     "placement": "Use in result-page footer, secondary hero action, or saved-report area.",
-                    "title": "Email revisit"
+                    "retention_reason": "The user can return to the same route, prescription, and scenes after leaving the page.",
+                    "title": "Send report link to yourself",
+                    "trust_note": "This action helps you use the report; it does not change scores or conclusions."
                 },
                 {
-                    "body": "Create a saved copy for personal reflection, not for hiring or evaluating another person.",
-                    "cta_label": "Create PDF",
-                    "do_not_overread": "This is a free product action, it does not change report access.",
+                    "body": "Use a plain copy for personal notes or coaching conversations where appropriate.",
+                    "cta_label": "Export a clean copy",
+                    "do_not_overread": "This is a way to use the report, not a change to the interpretation.",
                     "id": "eq.conversion.pdf_export",
                     "placement": "Use in result-page footer, secondary hero action, or saved-report area.",
-                    "title": "PDF report"
+                    "retention_reason": "The user can return to the same route, prescription, and scenes after leaving the page.",
+                    "title": "Export a clean copy",
+                    "trust_note": "This action helps you use the report; it does not change scores or conclusions."
                 },
                 {
-                    "body": "Share the pattern sentence, not detailed scores or sensitive interpretation.",
-                    "cta_label": "Create share card",
-                    "do_not_overread": "This is a free product action, it does not change report access.",
+                    "body": "Share the pattern sentence without score details or sensitive flags.",
+                    "cta_label": "Create a safe share card",
+                    "do_not_overread": "This is a way to use the report, not a change to the interpretation.",
                     "id": "eq.conversion.share_card",
                     "placement": "Use in result-page footer, secondary hero action, or saved-report area.",
-                    "title": "Share card"
+                    "retention_reason": "The user can return to the same route, prescription, and scenes after leaving the page.",
+                    "title": "Create a safe share card",
+                    "trust_note": "This action helps you use the report; it does not change scores or conclusions."
                 },
                 {
-                    "body": "Check whether the pattern is stable after 4–8 weeks; low-confidence results can be retested sooner.",
-                    "cta_label": "Set reminder",
-                    "do_not_overread": "This is a free product action, it does not change report access.",
+                    "body": "Useful when you are practicing one action prescription.",
+                    "cta_label": "Set a 30-day retest reminder",
+                    "do_not_overread": "This is a way to use the report, not a change to the interpretation.",
                     "id": "eq.conversion.retest_reminder",
                     "placement": "Use in result-page footer, secondary hero action, or saved-report area.",
-                    "title": "Retest reminder"
+                    "retention_reason": "The user can return to the same route, prescription, and scenes after leaving the page.",
+                    "title": "Set a 30-day retest reminder",
+                    "trust_note": "This action helps you use the report; it does not change scores or conclusions."
                 },
                 {
-                    "body": "Use Big Five, RIASEC, or MBTI as complementary lenses, not as replacements for EQ.",
-                    "cta_label": "Explore related tests",
-                    "do_not_overread": "This is a free product action, it does not change report access.",
+                    "body": "Compare this report with broader personality or interest signals.",
+                    "cta_label": "Explore related assessments",
+                    "do_not_overread": "This is a way to use the report, not a change to the interpretation.",
                     "id": "eq.conversion.related_tests",
                     "placement": "Use in result-page footer, secondary hero action, or saved-report area.",
-                    "title": "Related tests"
+                    "retention_reason": "The user can return to the same route, prescription, and scenes after leaving the page.",
+                    "title": "Explore related assessments",
+                    "trust_note": "This action helps you use the report; it does not change scores or conclusions."
                 },
                 {
-                    "body": "Ask about one real scene, such as feedback, conflict, boundaries, or recovery.",
-                    "cta_label": "Ask the Agent",
-                    "do_not_overread": "This is a free product action, it does not change report access.",
+                    "body": "Ask the Agent to explain one scene or practice from this report. It cannot change scores or conclusions.",
+                    "cta_label": "Ask the report Agent",
+                    "do_not_overread": "This is a way to use the report, not a change to the interpretation.",
                     "id": "eq.conversion.agent_entry",
                     "placement": "Use in result-page footer, secondary hero action, or saved-report area.",
-                    "title": "Ask the Agent"
+                    "retention_reason": "The user can return to the same route, prescription, and scenes after leaving the page.",
+                    "title": "Ask the EQ Agent",
+                    "trust_note": "This action helps you use the report; it does not change scores or conclusions."
                 }
             ],
             "core_formulation": {
                 "conversion_hook": "Save this report so a future retest can show whether the pattern is stable or changing.",
-                "core_claim": "You can hold your own state, other people, and the relationship goal in view at the same time.",
-                "development_lever": "Move from “I will steady this” to “we need a shared rule.”",
-                "do_not_overread": "This is how the current result is organized; it is not a permanent personality label or a basis for clinical, hiring, or high-risk decisions.",
+                "core_claim": "You tend to hold three pieces of information at once: what you feel, what the other person may be experiencing, and what the relationship or task needs next.",
+                "development_lever": "Practice separating “I can handle this” from “I should be the one to handle this.”",
+                "do_not_overread": "Do not mistake steadiness for responsibility for everyone’s emotions.",
                 "evidence_basis": [
-                    "Triggered by dimension scores, score gaps, quality level, and mechanism pattern."
+                    "The four-dimension pattern points to Balanced Integrator: You can hold self, other, and task needs at the same time.",
+                    "This is not a single-score judgment; it comes from the relative pattern across SA / ER / EM / RM.",
+                    "If confidence is lower, use this insight as a working hypothesis rather than a firm conclusion."
                 ],
-                "hero_summary": "You can hold your own state, other people, and the relationship goal in view at the same time. The useful part is not a high-or-low label; it is the scene where the pattern shows up and the one move to practice next.",
+                "hero_summary": "You tend to hold three pieces of information at once: what you feel, what the other person may be experiencing, and what the relationship or task needs next. The report points to one practice priority: Practice separating “I can handle this” from “I should be the one to handle this.”",
                 "id": "balanced_integrated",
-                "likely_cost": "Others may quietly expect you to stabilize the room, turning your steadiness into hidden labor.",
-                "one_liner": "You can hold your own state, other people, and the relationship goal in view at the same time.",
-                "primary_strength": "You can keep emotion, relationship, and task in the same frame.",
+                "likely_cost": "When the pace is high or many people rely on you, you may quietly become the stabilizer and take on more coordination than you need to.",
+                "most_likely_real_life_signal": "You are likely to notice this pattern in feedback, conflict, boundaries, or collaboration moments.",
+                "one_liner": "Your emotional awareness, regulation, empathy, and relationship skills tend to work in coordination.",
+                "primary_strength": "You can often stay thoughtful, responsive, and repair-oriented in everyday interactions.",
+                "share_safe_sentence": "I can steady a situation without becoming responsible for everyone’s emotional load.",
+                "skeptic_note": "If this does not sound like you, check the quality note and dimension gaps before accepting it.",
                 "title": "Balanced Integrator",
-                "user_memory_sentence": "I can steady a relationship without maintaining the whole system alone."
+                "user_memory_sentence": "I can steady a situation without becoming responsible for everyone’s emotional load.",
+                "what_to_try_first": "Pick one recent real situation and practice one script or one pause.",
+                "what_user_should_remember": "You can hold self, other, and task needs at the same time."
             },
             "cross_assessment_context": {
                 "boundary": {
@@ -407,12 +435,24 @@
                 }
             ],
             "personalization_route": {
-                "id": "balanced_integrated",
+                "claim_risk": "medium",
+                "commercial_depth": {
+                    "fallback_strategy": "if any selected asset is missing, render formulation + dimension summary + scientific boundary only",
+                    "first_screen_strategy": "show one core claim, one evidence point, one next action",
+                    "reader_trust_strategy": "explain why this route was selected without exposing scoring internals"
+                },
+                "do_not_overread": "The route controls content selection and reading order only. It is not a permanent personality label and does not replace real-world feedback.",
+                "evidence_snapshot_label": "Route evidence: dimension pattern, gap direction, response quality, and selected content assets.",
+                "formulation_id": "balanced_integrated",
+                "id": "route.eq.001.balanced.high_quality",
+                "next_best_action": "Read the three scenes first, then practice one prescription for seven days.",
+                "priority": 10,
+                "route_headline": "Your reading path: how Balanced Integrator shows up in real situations",
+                "save_reason": "Save this route so you can compare it with real interactions later.",
                 "selected_asset_ids": {
-                    "action_prescription_id": "emotion_labeling",
+                    "action_prescription_id": "relationship_energy_management",
                     "career_environment_ids": [
-                        "interpersonal_density_medium",
-                        "feedback_intensity_medium",
+                        "emotional_labor_medium",
                         "autonomy_recovery_medium"
                     ],
                     "core_formulation_id": "balanced_integrated",
@@ -423,7 +463,12 @@
                     "scene_ids": [
                         "feedback",
                         "team_collaboration",
-                        "career_environment"
+                        "pressure_recovery"
+                    ],
+                    "scene_variant_ids": [
+                        "eq.scene.feedback.balanced_integrated.primary",
+                        "eq.scene.team_collaboration.balanced_integrated.primary",
+                        "eq.scene.pressure_recovery.balanced_integrated.primary"
                     ]
                 },
                 "signal_signature": {
@@ -436,12 +481,16 @@
                         "SA": "high"
                     },
                     "formulation_id": "balanced_integrated",
-                    "match_pattern": "all_high_or_default_balanced",
+                    "match_pattern": "EM_high_ER_high_RM_high_SA_high",
                     "quality_level": "A",
-                    "route_id": "balanced_integrated",
+                    "route_claim_risk": "medium",
+                    "route_id": "route.eq.001.balanced.high_quality",
+                    "route_priority": 10,
                     "schema": "eq60.signal_signature.v1",
                     "strongest_dimension": "SA"
-                }
+                },
+                "why_this_feels_specific": "This path is not a label. It turns score gaps into the scenes and smallest actions most worth checking first.",
+                "why_this_route_exists": "This route turns the Balanced Integrator pattern (SA:high, ER:high, EM:high, RM:high) into a focused reading path: the most relevant scenes (feedback / team_collaboration / pressure_recovery) and the relationship energy management prescription. It decides what to read and practice first; it does not rescore the result."
             },
             "psychometric_evidence_status": [
                 {
@@ -524,40 +573,96 @@
             },
             "reality_scenes": [
                 {
-                    "better_move": "Clarify the target of the feedback before explaining or changing.",
-                    "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison.",
-                    "context": "When someone points out a problem, requests changes, or evaluates your work.",
-                    "cost": "Forcing a profile onto this result could be more misleading than useful.",
-                    "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
-                    "id": "feedback",
-                    "one_sentence_script": "Can I clarify whether you want me to change the outcome, the process, or the way I communicated?",
-                    "strength": "Even without a strong conclusion, it can point you toward stress, fatigue, or response style to observe.",
-                    "title": "Feedback",
-                    "typical_response": "In feedback, Read this result lightly; the most useful signal is the response context of this session. The sensitive point is often not the score itself, but the relationship signal behind the feedback."
+                    "better_move": "Name the most specific concern first, then decide whether to explain, acknowledge, or ask one more question.",
+                    "cost": "Cost to watch: When the pace is high or many people rely on you, you may quietly become the stabilizer and take on more coordination than you need to.",
+                    "do_not_overread": "This is a likely scene pattern, not a prediction of how you will respond every time.",
+                    "evidence_signals": [
+                        "Whose emotion you notice first in this situation.",
+                        "Whether you can separate facts, feelings, and responsibility.",
+                        "Whether you feel clearer afterward or keep replaying the exchange."
+                    ],
+                    "fallback_scene_id": "feedback",
+                    "id": "eq.scene.feedback.balanced_integrated.primary",
+                    "micro_script": "“Let me check the main point: are you most concerned about the result, the process, or what we do next?”",
+                    "reflection_prompt": "Think of the last similar moment: were you trying to protect the relationship, efficiency, yourself, or the other person first?",
+                    "result_page_depth": "Use in Reality Translation cards and Agent follow-up prompts.",
+                    "scene_family": "feedback",
+                    "strength": "Strength in this scene: You can often stay thoughtful, responsive, and repair-oriented in everyday interactions.",
+                    "tiny_experiment": "Next time, change only one move: pause first, reflect first, set a boundary first, or name your need first.",
+                    "title": "Feedback moment: the Balanced Integrator move",
+                    "typical_response": "when someone points out a problem, asks for changes, or challenges your judgment, you often see yourself, the other person, and the relationship goal at once; the work here is not to take over all coordination.",
+                    "variant": "primary",
+                    "why_this_matters": "This scene helps test whether Balanced Integrator is only a score interpretation or a pattern that repeats in real interactions."
                 },
                 {
-                    "better_move": "Turn emotional friction into roles, rhythm, and next steps.",
-                    "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison.",
-                    "context": "When several people collaborate with unclear goals or overlapping responsibility.",
-                    "cost": "Forcing a profile onto this result could be more misleading than useful.",
-                    "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
-                    "id": "team_collaboration",
-                    "one_sentence_script": "Let’s clarify roles, timing, and the next step so emotion does not make the decision for us.",
-                    "strength": "Even without a strong conclusion, it can point you toward stress, fatigue, or response style to observe.",
-                    "title": "Team collaboration",
-                    "typical_response": "In collaboration, Even without a strong conclusion, it can point you toward stress, fatigue, or response style to observe. But when rules are unclear, forcing a profile onto this result could be more misleading than useful."
+                    "better_move": "Separate emotion, facts, and next steps so the most responsive person does not become the default coordinator.",
+                    "cost": "Cost to watch: When the pace is high or many people rely on you, you may quietly become the stabilizer and take on more coordination than you need to.",
+                    "do_not_overread": "This is a likely scene pattern, not a prediction of how you will respond every time.",
+                    "evidence_signals": [
+                        "Whose emotion you notice first in this situation.",
+                        "Whether you can separate facts, feelings, and responsibility.",
+                        "Whether you feel clearer afterward or keep replaying the exchange."
+                    ],
+                    "fallback_scene_id": "team_collaboration",
+                    "id": "eq.scene.team_collaboration.balanced_integrated.primary",
+                    "micro_script": "“Let’s separate three things: what happened, what each person is worried about, and who owns the next step.”",
+                    "reflection_prompt": "Think of the last similar moment: were you trying to protect the relationship, efficiency, yourself, or the other person first?",
+                    "result_page_depth": "Use in Reality Translation cards and Agent follow-up prompts.",
+                    "scene_family": "team_collaboration",
+                    "strength": "Strength in this scene: You can often stay thoughtful, responsive, and repair-oriented in everyday interactions.",
+                    "tiny_experiment": "Next time, change only one move: pause first, reflect first, set a boundary first, or name your need first.",
+                    "title": "When collaboration gets stuck: the Balanced Integrator move",
+                    "typical_response": "when several people need alignment on goals, emotions, and next steps, you often see yourself, the other person, and the relationship goal at once; the work here is not to take over all coordination.",
+                    "variant": "primary",
+                    "why_this_matters": "This scene helps test whether Balanced Integrator is only a score interpretation or a pattern that repeats in real interactions."
                 },
                 {
-                    "better_move": "Verify environment variables instead of deriving a job from EQ.",
-                    "commercial_use": "Use in result scene cards, Agent scene follow-ups, and retest comparison.",
-                    "context": "When you judge whether a work setting will support or drain your emotional pattern.",
-                    "cost": "Forcing a profile onto this result could be more misleading than useful.",
-                    "do_not_overread": "This is a scene translation, not a fixed prediction for every interaction.",
-                    "id": "career_environment",
-                    "one_sentence_script": "I want to verify the interaction pace, feedback style, and recovery space in this environment.",
-                    "strength": "Even without a strong conclusion, it can point you toward stress, fatigue, or response style to observe.",
-                    "title": "Career environment",
-                    "typical_response": "When choosing a work setting, the question is not which job fits you; it is which interaction density, feedback intensity, and recovery space amplify this pattern."
+                    "better_move": "Recover before interpreting. Do not draw big conclusions while your system is still activated.",
+                    "cost": "Cost to watch: When the pace is high or many people rely on you, you may quietly become the stabilizer and take on more coordination than you need to.",
+                    "do_not_overread": "This is a likely scene pattern, not a prediction of how you will respond every time.",
+                    "evidence_signals": [
+                        "Whose emotion you notice first in this situation.",
+                        "Whether you can separate facts, feelings, and responsibility.",
+                        "Whether you feel clearer afterward or keep replaying the exchange."
+                    ],
+                    "fallback_scene_id": "pressure_recovery",
+                    "id": "eq.scene.pressure_recovery.balanced_integrated.primary",
+                    "micro_script": "“I’m going to take ten minutes, then come back to the next step.”",
+                    "reflection_prompt": "Think of the last similar moment: were you trying to protect the relationship, efficiency, yourself, or the other person first?",
+                    "result_page_depth": "Use in Reality Translation cards and Agent follow-up prompts.",
+                    "scene_family": "pressure_recovery",
+                    "strength": "Strength in this scene: You can often stay thoughtful, responsive, and repair-oriented in everyday interactions.",
+                    "tiny_experiment": "Next time, change only one move: pause first, reflect first, set a boundary first, or name your need first.",
+                    "title": "After a pressure spike: the Balanced Integrator move",
+                    "typical_response": "after a high-pressure exchange, when your body is still tense or your mind keeps replaying it, you often see yourself, the other person, and the relationship goal at once; the work here is not to take over all coordination.",
+                    "variant": "primary",
+                    "why_this_matters": "This scene helps test whether Balanced Integrator is only a score interpretation or a pattern that repeats in real interactions."
+                }
+            ],
+            "result_page_depth_modules": [
+                {
+                    "body": "Remember one core pattern, check one evidence point, then choose one action. Do not treat the whole report as a verdict on your personality.",
+                    "id": "eq.depth.how_to_read.default",
+                    "placement": "",
+                    "title": "How to read this in 30 seconds"
+                },
+                {
+                    "body": "This report looks at the four dimensions, the gaps between them, response quality, and the selected content route. It does not reduce you to one score.",
+                    "bullets": [
+                        "Dimension signals: SA / ER / EM / RM",
+                        "Gap signals: strongest dimension and development lever",
+                        "Quality signal: interpretation confidence",
+                        "Route signal: relevant scenes and action prescription"
+                    ],
+                    "id": "eq.depth.evidence_stack.default",
+                    "placement": "",
+                    "title": "Why this result is interpretable"
+                },
+                {
+                    "body": "For the next week, observe three things: whose emotion you notice first, whether you can state a boundary, and how long recovery takes afterward.",
+                    "id": "eq.depth.reality_check.default",
+                    "placement": "",
+                    "title": "Reality check"
                 }
             ],
             "result_snapshot": {
@@ -861,14 +966,48 @@
         "eq_report_mode": "self_report",
         "generated_at": "2026-05-21T00:00:00.000000Z",
         "interpretation": {
-            "action_prescription_id": "emotion_labeling",
+            "action_prescription_id": "relationship_energy_management",
             "career_environment_ids": [
-                "interpersonal_density_medium",
-                "feedback_intensity_medium",
+                "emotional_labor_medium",
                 "autonomy_recovery_medium"
             ],
             "core_formulation_id": "balanced_integrated",
             "development_lever": "SA",
+            "personalization_route": {
+                "claim_risk": "medium",
+                "commercial_depth": {
+                    "fallback_strategy": "if any selected asset is missing, render formulation + dimension summary + scientific boundary only",
+                    "first_screen_strategy": "show one core claim, one evidence point, one next action",
+                    "reader_trust_strategy": "explain why this route was selected without exposing scoring internals"
+                },
+                "do_not_overread": {
+                    "en": "The route controls content selection and reading order only. It is not a permanent personality label and does not replace real-world feedback.",
+                    "zh-CN": "路线只控制内容选择和阅读顺序，不代表长期人格定型，也不能替代真实关系反馈。"
+                },
+                "formulation_id": "balanced_integrated",
+                "locales": {
+                    "en": {
+                        "evidence_snapshot_label": "Route evidence: dimension pattern, gap direction, response quality, and selected content assets.",
+                        "next_best_action": "Read the three scenes first, then practice one prescription for seven days.",
+                        "route_headline": "Your reading path: how Balanced Integrator shows up in real situations",
+                        "save_reason": "Save this route so you can compare it with real interactions later.",
+                        "why_this_feels_specific": "This path is not a label. It turns score gaps into the scenes and smallest actions most worth checking first."
+                    },
+                    "zh-CN": {
+                        "evidence_snapshot_label": "本路线依据：维度组合、差距方向、答题质量和已选内容资产。",
+                        "next_best_action": "先读 3 个场景，再只选择 1 条行动处方练 7 天。",
+                        "route_headline": "你的阅读路径：先看「均衡整合型」如何出现在真实场景里",
+                        "save_reason": "保存这条路线，之后可以对照真实互动验证它是否准确。",
+                        "why_this_feels_specific": "这条路径不是把你归类，而是把分数差距转译为最容易复现的场景和最小行动。"
+                    }
+                },
+                "priority": 10,
+                "route_id": "route.eq.001.balanced.high_quality",
+                "why_this_route_exists": {
+                    "en": "This route turns the Balanced Integrator pattern (SA:high, ER:high, EM:high, RM:high) into a focused reading path: the most relevant scenes (feedback / team_collaboration / pressure_recovery) and the relationship energy management prescription. It decides what to read and practice first; it does not rescore the result.",
+                    "zh-CN": "这条路线用于把「均衡整合型」的 SA:high、ER:high、EM:high、RM:high 转译成最需要优先阅读的场景（feedback / team_collaboration / pressure_recovery）和「关系能量管理」行动处方。它解决的是“先看什么、先练什么”，不是重新判分。"
+                }
+            },
             "primary_mechanism_ids": [
                 "SA_ER_high_high",
                 "EM_RM_high_high"
@@ -876,14 +1015,18 @@
             "primary_scene_ids": [
                 "feedback",
                 "team_collaboration",
-                "career_environment"
+                "pressure_recovery"
             ],
-            "route_id": "balanced_integrated",
+            "primary_scene_variant_ids": [
+                "eq.scene.feedback.balanced_integrated.primary",
+                "eq.scene.team_collaboration.balanced_integrated.primary",
+                "eq.scene.pressure_recovery.balanced_integrated.primary"
+            ],
+            "route_id": "route.eq.001.balanced.high_quality",
             "selected_asset_ids": {
-                "action_prescription_id": "emotion_labeling",
+                "action_prescription_id": "relationship_energy_management",
                 "career_environment_ids": [
-                    "interpersonal_density_medium",
-                    "feedback_intensity_medium",
+                    "emotional_labor_medium",
                     "autonomy_recovery_medium"
                 ],
                 "core_formulation_id": "balanced_integrated",
@@ -894,7 +1037,12 @@
                 "scene_ids": [
                     "feedback",
                     "team_collaboration",
-                    "career_environment"
+                    "pressure_recovery"
+                ],
+                "scene_variant_ids": [
+                    "eq.scene.feedback.balanced_integrated.primary",
+                    "eq.scene.team_collaboration.balanced_integrated.primary",
+                    "eq.scene.pressure_recovery.balanced_integrated.primary"
                 ]
             },
             "signal_signature": {
@@ -907,9 +1055,11 @@
                     "SA": "high"
                 },
                 "formulation_id": "balanced_integrated",
-                "match_pattern": "all_high_or_default_balanced",
+                "match_pattern": "EM_high_ER_high_RM_high_SA_high",
                 "quality_level": "A",
-                "route_id": "balanced_integrated",
+                "route_claim_risk": "medium",
+                "route_id": "route.eq.001.balanced.high_quality",
+                "route_priority": 10,
                 "schema": "eq60.signal_signature.v1",
                 "strongest_dimension": "SA"
             },
