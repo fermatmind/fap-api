@@ -22944,9 +22944,13 @@
       "local:scope_validation": {
         "status": "pass",
         "command": "Changed-file allowlist validation for PR-EQ-V19-06 files including untracked additions"
+      },
+      "github_pr": {
+        "status": "created",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/2459"
       }
     },
-    "commit_sha": null,
+    "commit_sha": "8042568a3bb0520bb45ab4a6370895e59e08d8fa",
     "depends_on": [
       "PR-EQ-V19-05"
     ],
@@ -22965,15 +22969,20 @@
         "at": "2026-06-26T17:25:20Z",
         "status": "local_checks_passed",
         "notes": "Regenerated canonical fixtures, added production smoke template, and passed required local validation."
+      },
+      {
+        "at": "2026-06-26T17:27:05Z",
+        "status": "pr_open",
+        "notes": "Opened GitHub PR #2459 for PR-EQ-V19-06."
       }
     ],
     "failure_reason": null,
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2459",
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "title": "PR-EQ-V19-06 EQ v1.9 canonical fixtures and smoke template",
     "train_scope": "eq_v19_commercial_content_depth"
   },
