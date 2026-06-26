@@ -411,6 +411,20 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_personality_post_promotion_search_gate_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/PersonalityAgentPostPromotionSearchGateCommand.php',
+            'backend/app/Console/Kernel.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\PersonalityAgentPostPromotionSearchGateCommand;',
+            '+        PersonalityAgentPostPromotionSearchGateCommand::class,',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
+    }
+
     public function test_runtime_freeze_classifier_ignores_enneagram_cms_draft_writer_files(): void
     {
         $changed = [
@@ -4680,6 +4694,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isPersonalityPostPromotionSearchGateFile($file)) {
+                continue;
+            }
+
             if ($this->isEnneagramCmsDraftFile($file)) {
                 continue;
             }
@@ -5847,6 +5865,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                     || $this->kernelDiffIsMbti64GscReadonlyExportOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsPersonalityAgentApprovalQueueOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsPersonalityTdkNextBatchGateOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+                    || $this->kernelDiffIsPersonalityPostPromotionSearchGateOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsEnneagramCmsDraftOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsEnneagramCmsPromotionOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
                     || $this->kernelDiffIsBigFivePublicProfileAgentDraftOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
@@ -6086,6 +6105,13 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return in_array($file, [
             'backend/app/Console/Commands/PersonalityTdkNextBatchApprovalDraftGateCommand.php',
             'backend/app/Console/Commands/PersonalityTdkRuntimePromotionSearchGateReadinessCommand.php',
+        ], true);
+    }
+
+    private function isPersonalityPostPromotionSearchGateFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/PersonalityAgentPostPromotionSearchGateCommand.php',
         ], true);
     }
 
@@ -10087,6 +10113,25 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         foreach ($changedLines as $line) {
             $normalized = ltrim($line, '+-');
             if (preg_match('/\bPersonalityTdk(?:NextBatchApprovalDraftGate|RuntimePromotionSearchGateReadiness)Command\b/u', $normalized) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsPersonalityPostPromotionSearchGateOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            $normalized = ltrim($line, '+-');
+            if (preg_match('/\bPersonalityAgentPostPromotionSearchGateCommand\b/u', $normalized) !== 1) {
                 return false;
             }
         }

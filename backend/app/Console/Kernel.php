@@ -176,6 +176,7 @@ use App\Console\Commands\PacksRollback;
 use App\Console\Commands\PaymentsPruneEvents;
 use App\Console\Commands\PersonalityAgentApprovalQueueCommand;
 use App\Console\Commands\PersonalityAgentApprovalQueueReviewCommand;
+use App\Console\Commands\PersonalityAgentPostPromotionSearchGateCommand;
 use App\Console\Commands\PersonalityBigFivePublicProfileAgentDraft;
 use App\Console\Commands\PersonalityEnneagramCmsDraft;
 use App\Console\Commands\PersonalityImportDesktopCloneBaseline;
@@ -262,6 +263,7 @@ class Kernel extends ConsoleKernel
         FapWeeklyReport::class,
         PersonalityAgentApprovalQueueCommand::class,
         PersonalityAgentApprovalQueueReviewCommand::class,
+        PersonalityAgentPostPromotionSearchGateCommand::class,
         PersonalityBigFivePublicProfileAgentDraft::class,
         PersonalityEnneagramCmsPromote::class,
         PersonalityEnneagramCmsDraft::class,
