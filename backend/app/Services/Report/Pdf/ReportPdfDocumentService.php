@@ -7,6 +7,7 @@ namespace App\Services\Report\Pdf;
 use App\Models\Attempt;
 use App\Models\ReportSnapshot;
 use App\Models\Result;
+use App\Services\Report\Pdf\Mbti\MbtiPdfPayloadBuilder;
 use Mpdf\Mpdf;
 use Mpdf\Output\Destination;
 
@@ -14,6 +15,7 @@ final class ReportPdfDocumentService
 {
     public function __construct(
         private readonly ReportPdfArtifactStore $artifactStore,
+        private readonly MbtiPdfPayloadBuilder $mbtiPdfPayloadBuilder,
     ) {}
 
     public function normalizeVariant(string $variant): string
@@ -437,168 +439,85 @@ final class ReportPdfDocumentService
     {
         $locale = strtolower(trim((string) ($attempt->locale ?? '')));
         $isChinese = str_starts_with($locale, 'zh');
-        $typeCode = strtoupper(trim((string) (
-            $result?->type_code
-            ?? data_get($result?->result_json, 'type_code')
-            ?? data_get($result?->result_json, 'result.type_code')
-            ?? ''
-        )));
-        $typeCode = $typeCode !== '' ? $typeCode : ($isChinese ? '待确认' : 'Pending');
-        $axisScores = $this->mbtiAxisScores($result);
+        $payload = $this->mbtiPdfPayload($attempt, $result);
+        $document = is_array($payload['document'] ?? null) ? $payload['document'] : [];
+        $type = is_array($payload['type'] ?? null) ? $payload['type'] : [];
+        $axisScores = is_array($payload['axis_scores'] ?? null) ? $payload['axis_scores'] : [];
+        $typeCode = strtoupper(trim((string) ($type['type_code'] ?? '')));
+        $typeCode = $typeCode !== '' && $typeCode !== 'UNKNOWN' ? $typeCode : ($isChinese ? '待确认' : 'Pending');
+        $typeName = trim((string) ($type['type_name'] ?? ''));
+        $tagline = trim((string) ($type['tagline'] ?? ''));
+        $displayType = trim(implode(' · ', array_filter([$typeCode, $typeName, $tagline])));
         $date = $attempt->submitted_at?->format('Y-m-d')
             ?? $attempt->created_at?->format('Y-m-d')
             ?? now()->format('Y-m-d');
-
-        if ($isChinese) {
-            return $this->buildMpdfHtmlDocument(
-                '费马测试 MBTI 完整报告',
-                [
-                    '人格类型' => $typeCode,
-                    '报告日期' => $date,
-                    '报告范围' => '核心画像、维度分布、职业、成长与关系摘要',
-                ],
-                [
-                    [
-                        'heading' => '核心画像',
-                        'body' => [
-                            sprintf('你的人格类型是 %s. 这份报告基于本次 MBTI 作答结果，帮助你理解能量来源、信息处理、决策方式、生活节奏和压力反应。', $typeCode),
-                        ],
-                    ],
-                    [
-                        'heading' => '维度分布',
-                        'body' => $this->mbtiAxisLines($axisScores, true),
-                    ],
-                    [
-                        'heading' => '职业方向摘要',
-                        'body' => [
-                            '适合先从问题类型、协作节奏和决策环境三个角度筛选方向。优先寻找能让你持续积累专业判断、清晰表达方案并看到长期进展的任务。',
-                        ],
-                    ],
-                    [
-                        'heading' => '成长建议摘要',
-                        'body' => [
-                            '把复杂目标拆成可验证的小步骤，定期复盘证据和反馈。遇到压力时，先确认事实边界，再决定是否调整计划或沟通方式。',
-                        ],
-                    ],
-                    [
-                        'heading' => '关系相处摘要',
-                        'body' => [
-                            '表达观点时先说明判断依据和不确定性，给对方留下补充信息的空间。协作中把期待、时间线和交付标准写清楚，会减少误解。',
-                        ],
-                    ],
-                ],
-                'FermatMind · 费马测试',
-                true
-            );
+        $title = trim((string) ($document['title'] ?? ''));
+        if ($title === '') {
+            $title = $isChinese ? 'MBTI 完整人格报告' : 'MBTI Full Personality Report';
         }
-
-        return $this->buildFormalPdfDocument(
-            'FermatMind MBTI Full Report',
-            [
-                'Personality type' => $typeCode,
+        $subtitle = trim((string) ($document['subtitle'] ?? ''));
+        $summary = $isChinese
+            ? [
+                '人格类型' => $displayType !== '' ? $displayType : $typeCode,
+                '报告日期' => $date,
+                '报告范围' => '类型画像、维度解释、职业、成长、关系与使用边界',
+            ]
+            : [
+                'Personality type' => $displayType !== '' ? $displayType : $typeCode,
                 'Report date' => $date,
-                'Report scope' => 'Core portrait, dimensions, career, growth, and relationship summaries',
-            ],
-            [
-                [
-                    'heading' => 'Core portrait',
-                    'body' => [
-                        sprintf('Your personality type is %s. This report summarizes your MBTI result across energy, information processing, decision making, structure, and stress response.', $typeCode),
-                    ],
-                ],
-                [
-                    'heading' => 'Dimension profile',
-                    'body' => $this->mbtiAxisLines($axisScores, false),
-                ],
-                [
-                    'heading' => 'Career direction summary',
-                    'body' => [
-                        'Start by comparing role fit through problem type, collaboration rhythm, and decision environment. Look for work that lets you build durable judgment, explain tradeoffs clearly, and track progress over time.',
-                    ],
-                ],
-                [
-                    'heading' => 'Growth focus summary',
-                    'body' => [
-                        'Break complex goals into smaller evidence-backed steps and review feedback on a predictable cadence. Under pressure, clarify the facts first, then decide whether to adjust the plan or the communication style.',
-                    ],
-                ],
-                [
-                    'heading' => 'Relationship style summary',
-                    'body' => [
-                        'When sharing a view, explain the evidence and the uncertainty behind it. In collaboration, explicit expectations, timelines, and quality bars reduce avoidable friction.',
-                    ],
-                ],
-            ],
-            'FermatMind',
-            false
+                'Report scope' => 'Type portrait, dimensions, career, growth, relationships, and use boundaries',
+            ];
+        $chapters = $this->mbtiDocumentChapters($document);
+
+        return $this->buildMpdfHtmlDocument(
+            $title,
+            $subtitle,
+            $summary,
+            $chapters,
+            $axisScores,
+            $isChinese ? 'FermatMind · 费马测试' : 'FermatMind',
+            $isChinese
         );
     }
 
     /**
-     * @return array<string,int>
+     * @return array<string,mixed>
      */
-    private function mbtiAxisScores(?Result $result): array
+    private function mbtiPdfPayload(Attempt $attempt, ?Result $result): array
     {
-        $payload = is_array($result?->result_json ?? null) ? $result?->result_json : [];
-        $scores = is_array($result?->scores_pct ?? null) ? $result?->scores_pct : [];
-        if ($scores === []) {
-            $scores = is_array(data_get($payload, 'axis_scores_json.scores_pct'))
-                ? data_get($payload, 'axis_scores_json.scores_pct')
-                : [];
-        }
+        $payload = $this->mbtiPdfPayloadBuilder->build($attempt, $result);
+        $mbtiPayload = $payload[MbtiPdfPayloadBuilder::PAYLOAD_KEY] ?? [];
 
-        $normalized = [];
-        foreach (['EI', 'SN', 'TF', 'JP', 'AT'] as $axis) {
-            $value = $scores[$axis] ?? null;
-            if (is_numeric($value)) {
-                $normalized[$axis] = max(0, min(100, (int) round((float) $value)));
-            }
-        }
-
-        return $normalized;
+        return is_array($mbtiPayload) ? $mbtiPayload : [];
     }
 
     /**
-     * @param  array<string,int>  $axisScores
-     * @return list<string>
+     * @param  array<string,mixed>  $document
+     * @return list<array{heading:string,body:list<string>,bullets:list<string>,chapter_key:string}>
      */
-    private function mbtiAxisLines(array $axisScores, bool $isChinese): array
+    private function mbtiDocumentChapters(array $document): array
     {
-        $labels = $isChinese
-            ? [
-                'EI' => '外向 / 内向',
-                'SN' => '实感 / 直觉',
-                'TF' => '思考 / 情感',
-                'JP' => '判断 / 知觉',
-                'AT' => '坚定 / 起伏',
-            ]
-            : [
-                'EI' => 'Extraversion / Introversion',
-                'SN' => 'Sensing / Intuition',
-                'TF' => 'Thinking / Feeling',
-                'JP' => 'Judging / Prospecting',
-                'AT' => 'Assertive / Turbulent',
-            ];
-
-        $lines = [];
-        foreach ($labels as $axis => $label) {
-            if (! array_key_exists($axis, $axisScores)) {
+        $chapters = [];
+        $sourceChapters = is_array($document['chapters'] ?? null) ? $document['chapters'] : [];
+        foreach ($sourceChapters as $chapter) {
+            if (! is_array($chapter)) {
                 continue;
             }
 
-            $lines[] = sprintf('%s: [%s] %d%% %s', $axis, $this->mbtiAxisBar($axisScores[$axis]), $axisScores[$axis], $label);
+            $heading = trim((string) ($chapter['title'] ?? ''));
+            if ($heading === '') {
+                continue;
+            }
+
+            $chapters[] = [
+                'chapter_key' => trim((string) ($chapter['chapter_key'] ?? 'chapter')),
+                'heading' => $heading,
+                'body' => $this->stringList($chapter['body'] ?? []),
+                'bullets' => $this->stringList($chapter['bullets'] ?? []),
+            ];
         }
 
-        return $lines !== []
-            ? $lines
-            : [$isChinese ? '维度数据已记录在完整结果中。' : 'Dimension data is recorded in the full result.'];
-    }
-
-    private function mbtiAxisBar(int $score): string
-    {
-        $filled = (int) round(max(0, min(100, $score)) / 10);
-
-        return str_repeat('#', $filled).str_repeat('-', 10 - $filled);
+        return $chapters;
     }
 
     /**
@@ -751,12 +670,15 @@ final class ReportPdfDocumentService
 
     /**
      * @param  array<string,string>  $summary
-     * @param  list<array{heading:string,body:list<string>}>  $sections
+     * @param  list<array{heading:string,body:list<string>,bullets:list<string>,chapter_key:string}>  $sections
+     * @param  list<array<string,mixed>>  $axisScores
      */
     private function buildMpdfHtmlDocument(
         string $title,
+        string $subtitle,
         array $summary,
         array $sections,
+        array $axisScores,
         string $footer,
         bool $isChinese
     ): string {
@@ -777,57 +699,140 @@ final class ReportPdfDocumentService
             'margin_bottom' => 16,
             'margin_footer' => 8,
         ]);
+        $mpdf->SetCompression(false);
         $mpdf->SetTitle($title);
         $mpdf->SetAuthor('FermatMind');
         $mpdf->SetCreator('FermatMind Report PDF');
+        $mpdf->SetHTMLHeader(
+            '<table width="100%" style="color:#64748b;font-size:8.5pt;">'
+            .'<tr><td width="50%" align="left">FermatMind MBTI</td>'
+            .'<td width="50%" align="right">'.$this->escapeHtml($title).'</td></tr></table>'
+        );
         $mpdf->SetHTMLFooter(
             '<table width="100%" style="border-top:1px solid #d9eadf;color:#64748b;font-size:9pt;padding-top:6px;">'
             .'<tr><td width="50%" align="left">'.$this->escapeHtml($footer).'</td>'
-            .'<td width="50%" align="right">{PAGENO}</td></tr></table>'
+            .'<td width="50%" align="right">{PAGENO} / {nbpg}</td></tr></table>'
         );
-        $mpdf->WriteHTML($this->mbtiReportHtml($title, $summary, $sections, $isChinese));
+        $mpdf->WriteHTML($this->mbtiReportHtml($title, $subtitle, $summary, $sections, $axisScores, $isChinese));
 
         return $mpdf->Output('', Destination::STRING_RETURN);
     }
 
     /**
      * @param  array<string,string>  $summary
-     * @param  list<array{heading:string,body:list<string>}>  $sections
+     * @param  list<array{heading:string,body:list<string>,bullets:list<string>,chapter_key:string}>  $sections
+     * @param  list<array<string,mixed>>  $axisScores
      */
-    private function mbtiReportHtml(string $title, array $summary, array $sections, bool $isChinese): string
-    {
+    private function mbtiReportHtml(
+        string $title,
+        string $subtitle,
+        array $summary,
+        array $sections,
+        array $axisScores,
+        bool $isChinese
+    ): string {
         $fontStack = $isChinese
             ? 'sans-serif'
             : 'DejaVu Sans, Arial, sans-serif';
         $html = '<html><head><meta charset="utf-8"><style>'
-            .'body{font-family:'.$fontStack.';color:#172033;font-size:12pt;line-height:1.55;}'
-            .'.cover{border-top:5px solid #1b7f5c;padding-top:18px;margin-bottom:22px;}'
-            .'h1{font-size:26pt;margin:0 0 14px 0;color:#0f172a;}'
-            .'h2{font-size:15pt;margin:20px 0 8px 0;color:#123d34;border-bottom:1px solid #d9eadf;padding-bottom:5px;}'
-            .'.summary{background:#edf8f2;border:1px solid #bfe9d0;border-radius:8px;padding:12px 14px;margin:12px 0 18px 0;}'
-            .'.summary-row{margin:4px 0;}'
+            .'@page{margin:18mm 18mm 18mm 18mm;}'
+            .'body{font-family:'.$fontStack.';color:#172033;font-size:11.5pt;line-height:1.58;}'
+            .'.cover{height:230mm;border-top:7px solid #14946f;padding-top:28mm;background:#f3fbf7;}'
+            .'.brand{font-size:10pt;letter-spacing:.08em;text-transform:uppercase;color:#14946f;font-weight:bold;margin-bottom:18mm;}'
+            .'h1{font-size:30pt;line-height:1.12;margin:0 0 10mm 0;color:#0f172a;}'
+            .'.subtitle{font-size:13pt;color:#475569;width:82%;margin-bottom:16mm;}'
+            .'.summary{background:#ffffff;border:1px solid #bfe9d0;border-radius:8px;padding:12px 15px;margin:12px 0 18px 0;}'
+            .'.summary-row{margin:5px 0;}'
             .'.label{font-weight:bold;color:#315047;}'
-            .'p{margin:0 0 8px 0;}'
+            .'.toc-title{font-size:12pt;color:#14946f;font-weight:bold;margin:20mm 0 5mm;}'
+            .'.toc-item{border-bottom:1px solid #e2e8f0;padding:5px 0;color:#334155;}'
+            .'.chapter{page-break-before:always;}'
+            .'.chapter:first-of-type{page-break-before:always;}'
+            .'.chapter-kicker{font-size:9pt;letter-spacing:.08em;text-transform:uppercase;color:#14946f;font-weight:bold;margin-bottom:6px;}'
+            .'h2{font-size:20pt;margin:0 0 10px 0;color:#123d34;border-bottom:2px solid #d9eadf;padding-bottom:7px;}'
+            .'p{margin:0 0 9px 0;}'
             .'ul{margin:0 0 0 18px;padding:0;}'
-            .'li{margin:4px 0;}'
+            .'li{margin:5px 0;}'
+            .'.axis-grid{margin:12px 0 18px 0;}'
+            .'.axis{margin:0 0 10px 0;}'
+            .'.axis-label{font-size:9.5pt;color:#475569;margin-bottom:3px;}'
+            .'.axis-track{height:8px;background:#e2e8f0;border-radius:4px;}'
+            .'.axis-fill{height:8px;background:#14946f;border-radius:4px;}'
+            .'.boundary{margin-top:14px;padding:10px 12px;background:#f8fafc;border-left:4px solid #14946f;color:#475569;}'
             .'</style></head><body>';
-        $html .= '<div class="cover"><h1>'.$this->escapeHtml($title).'</h1></div>';
+        $html .= '<div class="cover">';
+        $html .= '<div class="brand">FermatMind</div>';
+        $html .= '<h1>'.$this->escapeHtml($title).'</h1>';
+        if ($subtitle !== '') {
+            $html .= '<p class="subtitle">'.$this->escapeHtml($subtitle).'</p>';
+        }
         $html .= '<div class="summary">';
         foreach ($summary as $label => $value) {
             $html .= '<div class="summary-row"><span class="label">'.$this->escapeHtml($label).':</span> '.$this->escapeHtml($value).'</div>';
         }
         $html .= '</div>';
+        $html .= '<div class="toc-title">'.$this->escapeHtml($isChinese ? '报告章节' : 'Report sections').'</div>';
+        foreach ($sections as $index => $section) {
+            $html .= '<div class="toc-item">'.($index + 1).'. '.$this->escapeHtml((string) $section['heading']).'</div>';
+        }
+        $html .= '</div>';
 
-        foreach ($sections as $section) {
+        foreach ($sections as $index => $section) {
+            $chapterKey = (string) ($section['chapter_key'] ?? '');
+            $html .= '<div class="chapter">';
+            $html .= '<div class="chapter-kicker">'.$this->escapeHtml($isChinese ? '第 '.($index + 1).' 章' : 'Chapter '.($index + 1)).'</div>';
             $html .= '<h2>'.$this->escapeHtml((string) $section['heading']).'</h2>';
+            if ($chapterKey === 'dimension_explanation' && $axisScores !== []) {
+                $html .= '<div class="axis-grid">';
+                foreach ($axisScores as $axis) {
+                    $axisCode = $this->escapeHtml((string) ($axis['axis'] ?? ''));
+                    $state = trim((string) ($axis['state'] ?? ''));
+                    $percent = max(0, min(100, (int) round((float) ($axis['percent'] ?? 0))));
+                    $label = trim($axisCode.($state !== '' ? ' · '.$state : ''));
+                    $html .= '<div class="axis">';
+                    $html .= '<div class="axis-label">'.$this->escapeHtml($label).' · '.$percent.'%</div>';
+                    $html .= '<div class="axis-track"><div class="axis-fill" style="width:'.$percent.'%;"></div></div>';
+                    $html .= '</div>';
+                }
+                $html .= '</div>';
+            }
             $html .= '<ul>';
             foreach ($section['body'] as $paragraph) {
                 $html .= '<li>'.$this->escapeHtml($paragraph).'</li>';
             }
+            foreach ($section['bullets'] as $bullet) {
+                $html .= '<li>'.$this->escapeHtml($bullet).'</li>';
+            }
             $html .= '</ul>';
+            if ($index === count($sections) - 1) {
+                $html .= '<div class="boundary">'.$this->escapeHtml($isChinese
+                    ? '本报告用于自我理解和讨论，不用于诊断、录用筛选、升学录取或结果保证。'
+                    : 'This report supports reflection and discussion. It is not a diagnosis, hiring screen, admission predictor, or outcome guarantee.').'</div>';
+            }
+            $html .= '</div>';
         }
 
         return $html.'</body></html>';
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function stringList(mixed $value): array
+    {
+        if (! is_array($value)) {
+            return [];
+        }
+
+        $out = [];
+        foreach ($value as $item) {
+            $line = trim((string) $item);
+            if ($line !== '') {
+                $out[] = $line;
+            }
+        }
+
+        return $out;
     }
 
     /**
