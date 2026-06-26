@@ -136,6 +136,49 @@ final class IqTestDriverTest extends TestCase
         $this->assertStringNotContainsString('correct_answer', json_encode($result->toArray(), JSON_THROW_ON_ERROR));
     }
 
+    public function test_owner_original_runtime_binds_active_norm_when_bank_id_is_top_level(): void
+    {
+        $this->migrateIqNormAuthority();
+        $this->insertIqNormAuthority([
+            'norm_table_version' => 'iq_owner30_norm_fixture_v1',
+            'mean' => 2.0,
+            'standard_deviation' => 1.0,
+            'min_raw_score' => 0.0,
+            'max_raw_score' => 3.0,
+        ]);
+
+        $spec = $this->ownerOriginalScoringSpec();
+        $spec['bank_id'] = 'IQ_OWNER_ORIGINAL_30';
+        unset($spec['item_bank']['bank_id']);
+
+        $driver = new IqTestDriver;
+        $result = $driver->score(
+            [
+                ['question_id' => 'IQ001', 'code' => 'A'],
+                ['question_id' => 'IQ002', 'code' => 'C'],
+                ['question_id' => 'IQ003', 'code' => 'D'],
+            ],
+            $spec,
+            [
+                'org_id' => 0,
+                'locale' => 'zh-CN',
+                'population_key' => 'general_adult_online',
+                'duration_ms' => 45000,
+                'pack_id' => 'default',
+                'content_package_version' => 'iq_owner_original_30_v1',
+                'scoring_spec_version' => 'iq_owner_original_30_runtime_scoring_v1',
+            ]
+        );
+
+        $this->assertSame(2.0, $result->rawScore);
+        $this->assertSame('IQ_OWNER_ORIGINAL_30', data_get($result->normedJson, 'bank_id'));
+        $this->assertSame('iq_estimate', data_get($result->normedJson, 'score_claim_level'));
+        $this->assertSame('iq_owner30_norm_fixture_v1', data_get($result->normedJson, 'norm_table_version'));
+        $this->assertTrue((bool) data_get($result->normedJson, 'norms.claim_policy.claim_eligible'));
+        $this->assertSame(100.0, data_get($result->normedJson, 'norms.iq_estimate'));
+        $this->assertStringNotContainsString('correct_answer', json_encode($result->toArray(), JSON_THROW_ON_ERROR));
+    }
+
     public function test_owner_original_runtime_without_claim_eligible_authority_stays_raw_score_only(): void
     {
         $this->migrateIqNormAuthority();
