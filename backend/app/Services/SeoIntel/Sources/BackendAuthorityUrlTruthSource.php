@@ -188,13 +188,14 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
                 ->with(['variants' => static function ($query): void {
                     $query
                         ->withoutGlobalScopes()
+                        ->with(['seoMeta', 'sections'])
                         ->where('is_published', true)
                         ->where(static function ($builder): void {
                             $builder->whereNull('published_at')
                                 ->orWhere('published_at', '<=', now());
                         })
                         ->orderBy('variant_code');
-                }])
+                }, 'seoMeta', 'sections'])
                 ->where('org_id', 0)
                 ->where('scale_code', PersonalityProfile::SCALE_CODE_MBTI)
                 ->whereIn('type_code', PersonalityProfile::BASE_TYPE_CODES)
@@ -230,6 +231,7 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
                 if ($path === null) {
                     continue;
                 }
+                $freshness = $this->personalityVariantFreshness($profile, $variant, $path);
 
                 $records[] = $this->personalityRecord(
                     canonicalPath: $path,
@@ -237,43 +239,49 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
                     pageEntityType: 'personality_profile_variant',
                     entityIdOrSlug: (string) $variant->id,
                     entitySource: 'personality_profile_variants',
-                    lastmodSource: 'personality_profile_variants.updated_at',
-                    sourceUpdatedAt: $variant->updated_at instanceof Carbon ? $variant->updated_at : null,
-                    lastmodAt: $variant->updated_at instanceof Carbon ? $variant->updated_at : null,
+                    lastmodSource: (string) $freshness['lastmod_source'],
+                    sourceUpdatedAt: $freshness['source_updated_at'],
+                    lastmodAt: $freshness['lastmod_at'],
                     extraMetadata: [
                         'profile_id_hash' => hash('sha256', (string) $profile->id),
                         'variant_id_hash' => hash('sha256', (string) $variant->id),
                         'runtime_type_code_hash' => hash('sha256', (string) $variant->runtime_type_code),
                         'canonical_type_code_hash' => hash('sha256', (string) $variant->canonical_type_code),
+                        'content_hash' => (string) $freshness['content_hash'],
+                        'content_hash_source' => (string) $freshness['content_hash_source'],
                     ],
                     extraAttributes: [
                         'profile_id_hash' => hash('sha256', (string) $profile->id),
                         'variant_id_hash' => hash('sha256', (string) $variant->id),
                         'runtime_type_code_hash' => hash('sha256', (string) $variant->runtime_type_code),
+                        'content_hash' => (string) $freshness['content_hash'],
                     ],
                 );
             }
 
             $comparisonPath = $this->personalityComparisonCanonicalPath($profile, $variants);
             if ($comparisonPath !== null) {
-                $updatedAt = $profile->updated_at instanceof Carbon ? $profile->updated_at : null;
+                $freshness = $this->personalityComparisonFreshness($profile, $comparisonPath);
                 $records[] = $this->personalityRecord(
                     canonicalPath: $comparisonPath,
                     locale: (string) $profile->locale,
                     pageEntityType: 'personality_profile_comparison',
                     entityIdOrSlug: (string) $profile->id,
                     entitySource: 'personality_profiles',
-                    lastmodSource: 'personality_profiles.updated_at',
-                    sourceUpdatedAt: $updatedAt,
-                    lastmodAt: $updatedAt,
+                    lastmodSource: (string) $freshness['lastmod_source'],
+                    sourceUpdatedAt: $freshness['source_updated_at'],
+                    lastmodAt: $freshness['lastmod_at'],
                     extraMetadata: [
                         'profile_id_hash' => hash('sha256', (string) $profile->id),
                         'canonical_type_code_hash' => hash('sha256', (string) $profile->canonical_type_code),
                         'comparison_kind' => 'a_vs_t',
+                        'content_hash' => (string) $freshness['content_hash'],
+                        'content_hash_source' => (string) $freshness['content_hash_source'],
                     ],
                     extraAttributes: [
                         'profile_id_hash' => hash('sha256', (string) $profile->id),
                         'canonical_type_code_hash' => hash('sha256', (string) $profile->canonical_type_code),
+                        'content_hash' => (string) $freshness['content_hash'],
                     ],
                 );
             }
@@ -719,6 +727,164 @@ final class BackendAuthorityUrlTruthSource implements UrlTruthInventorySource
             && (string) $profile->status === 'published'
             && (bool) $profile->is_public
             && (bool) $profile->is_indexable;
+    }
+
+    /**
+     * @return array{lastmod_at:?Carbon,source_updated_at:?Carbon,lastmod_source:string,content_hash:string,content_hash_source:string}
+     */
+    private function personalityVariantFreshness(PersonalityProfile $profile, PersonalityProfileVariant $variant, string $canonicalPath): array
+    {
+        $seoMeta = $variant->seoMeta;
+        $sections = $variant->sections;
+
+        $lastmodAt = $this->latestCarbon([
+            $variant->updated_at instanceof Carbon ? $variant->updated_at : null,
+            $seoMeta?->updated_at instanceof Carbon ? $seoMeta->updated_at : null,
+            ...$sections
+                ->filter(static fn ($section): bool => (bool) ($section->is_enabled ?? false))
+                ->map(static fn ($section): ?Carbon => $section->updated_at instanceof Carbon ? $section->updated_at : null)
+                ->all(),
+        ]);
+
+        return [
+            'lastmod_at' => $lastmodAt,
+            'source_updated_at' => $lastmodAt,
+            'lastmod_source' => $seoMeta !== null || $sections->isNotEmpty()
+                ? 'personality_profile_variant_live_content.updated_at'
+                : 'personality_profile_variants.updated_at',
+            'content_hash' => $this->stableContentHash([
+                'canonical_path' => $canonicalPath,
+                'profile' => [
+                    'locale' => (string) $profile->locale,
+                    'canonical_type_code' => (string) $profile->canonical_type_code,
+                    'title' => (string) $profile->title,
+                    'subtitle' => (string) ($profile->subtitle ?? ''),
+                    'excerpt' => (string) ($profile->excerpt ?? ''),
+                ],
+                'variant' => [
+                    'runtime_type_code' => (string) $variant->runtime_type_code,
+                    'type_name' => (string) $variant->type_name,
+                    'nickname' => (string) ($variant->nickname ?? ''),
+                    'hero_summary_md' => (string) ($variant->hero_summary_md ?? ''),
+                    'hero_summary_html' => (string) ($variant->hero_summary_html ?? ''),
+                ],
+                'seo' => $seoMeta === null ? null : [
+                    'seo_title' => (string) ($seoMeta->seo_title ?? ''),
+                    'seo_description' => (string) ($seoMeta->seo_description ?? ''),
+                    'canonical_url' => (string) ($seoMeta->canonical_url ?? ''),
+                    'robots' => (string) ($seoMeta->robots ?? ''),
+                ],
+                'sections' => $sections
+                    ->filter(static fn ($section): bool => (bool) ($section->is_enabled ?? false))
+                    ->map(static fn ($section): array => [
+                        'section_key' => (string) ($section->section_key ?? ''),
+                        'render_variant' => (string) ($section->render_variant ?? ''),
+                        'body_md' => (string) ($section->body_md ?? ''),
+                        'body_html' => (string) ($section->body_html ?? ''),
+                        'payload_json' => $section->payload_json ?? null,
+                        'sort_order' => (int) ($section->sort_order ?? 0),
+                    ])
+                    ->values()
+                    ->all(),
+            ]),
+            'content_hash_source' => 'personality_profile_variant_live_content_v1',
+        ];
+    }
+
+    /**
+     * @return array{lastmod_at:?Carbon,source_updated_at:?Carbon,lastmod_source:string,content_hash:string,content_hash_source:string}
+     */
+    private function personalityComparisonFreshness(PersonalityProfile $profile, string $canonicalPath): array
+    {
+        $seoMeta = $profile->seoMeta;
+        $comparisonSection = $profile->sections
+            ->first(static fn ($section): bool => (string) ($section->section_key ?? '') === 'mbti64_comparison_a_vs_t'
+                && (bool) ($section->is_enabled ?? false));
+
+        $lastmodAt = $this->latestCarbon([
+            $profile->updated_at instanceof Carbon ? $profile->updated_at : null,
+            $seoMeta?->updated_at instanceof Carbon ? $seoMeta->updated_at : null,
+            $comparisonSection?->updated_at instanceof Carbon ? $comparisonSection->updated_at : null,
+        ]);
+
+        return [
+            'lastmod_at' => $lastmodAt,
+            'source_updated_at' => $lastmodAt,
+            'lastmod_source' => $comparisonSection !== null
+                ? 'personality_profile_sections.mbti64_comparison_a_vs_t.updated_at'
+                : 'personality_profiles.updated_at',
+            'content_hash' => $this->stableContentHash([
+                'canonical_path' => $canonicalPath,
+                'profile' => [
+                    'locale' => (string) $profile->locale,
+                    'canonical_type_code' => (string) $profile->canonical_type_code,
+                    'title' => (string) $profile->title,
+                    'subtitle' => (string) ($profile->subtitle ?? ''),
+                    'excerpt' => (string) ($profile->excerpt ?? ''),
+                ],
+                'seo' => $seoMeta === null ? null : [
+                    'seo_title' => (string) ($seoMeta->seo_title ?? ''),
+                    'seo_description' => (string) ($seoMeta->seo_description ?? ''),
+                    'canonical_url' => (string) ($seoMeta->canonical_url ?? ''),
+                    'robots' => (string) ($seoMeta->robots ?? ''),
+                ],
+                'comparison_section' => $comparisonSection === null ? null : [
+                    'title' => (string) ($comparisonSection->title ?? ''),
+                    'render_variant' => (string) ($comparisonSection->render_variant ?? ''),
+                    'body_md' => (string) ($comparisonSection->body_md ?? ''),
+                    'body_html' => (string) ($comparisonSection->body_html ?? ''),
+                    'payload_json' => $comparisonSection->payload_json ?? null,
+                    'sort_order' => (int) ($comparisonSection->sort_order ?? 0),
+                ],
+            ]),
+            'content_hash_source' => 'personality_profile_comparison_live_content_v1',
+        ];
+    }
+
+    /**
+     * @param  list<?Carbon>  $values
+     */
+    private function latestCarbon(array $values): ?Carbon
+    {
+        $latest = null;
+        foreach ($values as $value) {
+            if (! $value instanceof Carbon) {
+                continue;
+            }
+
+            if (! $latest instanceof Carbon || $value->greaterThan($latest)) {
+                $latest = $value;
+            }
+        }
+
+        return $latest;
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     */
+    private function stableContentHash(array $payload): string
+    {
+        $normalized = $this->sortForStableHash($payload);
+
+        return hash('sha256', json_encode($normalized, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR));
+    }
+
+    private function sortForStableHash(mixed $value): mixed
+    {
+        if (! is_array($value)) {
+            return $value;
+        }
+
+        if (! array_is_list($value)) {
+            ksort($value);
+        }
+
+        foreach ($value as $key => $item) {
+            $value[$key] = $this->sortForStableHash($item);
+        }
+
+        return $value;
     }
 
     private function personalityVariantCanonicalPath(

@@ -5,7 +5,11 @@ declare(strict_types=1);
 namespace Tests\Feature\SeoIntel;
 
 use App\Models\PersonalityProfile;
+use App\Models\PersonalityProfileSection;
+use App\Models\PersonalityProfileSeoMeta;
 use App\Models\PersonalityProfileVariant;
+use App\Models\PersonalityProfileVariantSection;
+use App\Models\PersonalityProfileVariantSeoMeta;
 use App\Services\SeoIntel\Sources\BackendAuthorityUrlTruthSource;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\Test;
@@ -65,6 +69,8 @@ final class SeoIntelMbti64PersonalityUrlTruthInventoryTest extends TestCase
         $this->assertFalse($sampleVariant->isPrivateFlow);
         $this->assertSame('published', $sampleVariant->metadata['publication_state'] ?? null);
         $this->assertTrue((bool) ($sampleVariant->metadata['claim_safe'] ?? false));
+        $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/', (string) ($sampleVariant->metadata['content_hash'] ?? ''));
+        $this->assertSame('personality_profile_variant_live_content_v1', $sampleVariant->metadata['content_hash_source'] ?? null);
         $this->assertFalse((bool) ($sampleVariant->metadata['frontend_fallback'] ?? true));
         $this->assertFalse((bool) ($sampleVariant->metadata['static_sitemap_fallback'] ?? true));
         $this->assertFalse((bool) ($sampleVariant->metadata['static_llms_fallback'] ?? true));
@@ -74,6 +80,8 @@ final class SeoIntelMbti64PersonalityUrlTruthInventoryTest extends TestCase
         $this->assertSame('backend_cms', $sampleComparison->sourceAuthority);
         $this->assertSame('indexable', $sampleComparison->indexabilityState);
         $this->assertSame('a_vs_t', $sampleComparison->metadata['comparison_kind'] ?? null);
+        $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/', (string) ($sampleComparison->metadata['content_hash'] ?? ''));
+        $this->assertSame('personality_profile_comparison_live_content_v1', $sampleComparison->metadata['content_hash_source'] ?? null);
 
         $metadata = $source->metadata();
         $this->assertTrue((bool) ($metadata['personality_profiles_attempted'] ?? false));
@@ -123,6 +131,99 @@ final class SeoIntelMbti64PersonalityUrlTruthInventoryTest extends TestCase
         $this->assertNotContains('https://fermatmind.com/en/personality/entj-a-vs-entj-t', $canonicalUrls);
     }
 
+    #[Test]
+    public function backend_authority_source_uses_variant_live_content_for_url_truth_freshness(): void
+    {
+        config(['seo_intel.public_canonical_host' => 'https://fermatmind.com']);
+
+        $now = now()->startOfSecond();
+        $profile = $this->createProfile('ENFJ', 'en');
+        PersonalityProfile::withoutTimestamps(fn () => $profile->forceFill(['updated_at' => $now->copy()->subDays(12)])->save());
+        $variant = $this->createVariant($profile, 'A');
+        PersonalityProfileVariant::withoutTimestamps(fn () => $variant->forceFill(['updated_at' => $now->copy()->subDays(11)])->save());
+        $this->createVariant($profile, 'T', ['is_published' => true]);
+
+        $seoMeta = PersonalityProfileVariantSeoMeta::query()->create([
+            'personality_profile_variant_id' => (int) $variant->id,
+            'seo_title' => 'ENFJ-A old title',
+            'seo_description' => 'Old description',
+            'canonical_url' => 'https://fermatmind.com/en/personality/enfj-a',
+            'robots' => 'index,follow',
+        ]);
+        PersonalityProfileVariantSeoMeta::withoutTimestamps(fn () => $seoMeta->forceFill(['updated_at' => $now->copy()->subDays(3)])->save());
+        $section = PersonalityProfileVariantSection::query()->create([
+            'personality_profile_variant_id' => (int) $variant->id,
+            'section_key' => 'quick_answer',
+            'render_variant' => 'callout',
+            'body_md' => 'Old quick answer.',
+            'payload_json' => ['summary' => 'old'],
+            'sort_order' => 10,
+            'is_enabled' => true,
+        ]);
+        PersonalityProfileVariantSection::withoutTimestamps(fn () => $section->forceFill(['updated_at' => $now->copy()->subDays(2)])->save());
+
+        $before = $this->recordFor('https://fermatmind.com/en/personality/enfj-a');
+        $this->assertSame('personality_profile_variant_live_content.updated_at', $before->lastmodSource);
+        $this->assertSame($now->copy()->subDays(2)->toDateTimeString(), $before->lastmodAt?->toDateTimeString());
+        $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/', (string) ($before->metadata['content_hash'] ?? ''));
+
+        PersonalityProfileVariantSection::withoutTimestamps(fn () => $section->forceFill([
+            'body_md' => 'Promoted quick answer.',
+            'payload_json' => ['summary' => 'promoted'],
+            'updated_at' => $now,
+        ])->save());
+
+        $after = $this->recordFor('https://fermatmind.com/en/personality/enfj-a');
+        $this->assertNotSame($before->metadata['content_hash'], $after->metadata['content_hash']);
+        $this->assertSame($now->toDateTimeString(), $after->lastmodAt?->toDateTimeString());
+    }
+
+    #[Test]
+    public function backend_authority_source_uses_comparison_live_overlay_for_url_truth_freshness(): void
+    {
+        config(['seo_intel.public_canonical_host' => 'https://fermatmind.com']);
+
+        $now = now()->startOfSecond();
+        $profile = $this->createProfile('INTP', 'zh-CN');
+        PersonalityProfile::withoutTimestamps(fn () => $profile->forceFill(['updated_at' => $now->copy()->subDays(8)])->save());
+        $this->createVariant($profile, 'A', ['is_published' => true]);
+        $this->createVariant($profile, 'T', ['is_published' => true]);
+        $seoMeta = PersonalityProfileSeoMeta::query()->create([
+            'profile_id' => (int) $profile->id,
+            'seo_title' => 'INTP A/T old comparison',
+            'seo_description' => 'Old comparison description',
+            'canonical_url' => 'https://fermatmind.com/zh/personality/intp-a-vs-intp-t',
+            'robots' => 'index,follow',
+        ]);
+        PersonalityProfileSeoMeta::withoutTimestamps(fn () => $seoMeta->forceFill(['updated_at' => $now->copy()->subDays(4)])->save());
+        $section = PersonalityProfileSection::query()->create([
+            'profile_id' => (int) $profile->id,
+            'section_key' => 'mbti64_comparison_a_vs_t',
+            'title' => 'Old comparison',
+            'render_variant' => 'rich_text',
+            'body_md' => 'Old comparison quick answer.',
+            'payload_json' => ['content' => ['quick_answer' => 'old']],
+            'sort_order' => 920,
+            'is_enabled' => true,
+        ]);
+        PersonalityProfileSection::withoutTimestamps(fn () => $section->forceFill(['updated_at' => $now->copy()->subDay()])->save());
+
+        $before = $this->recordFor('https://fermatmind.com/zh/personality/intp-a-vs-intp-t');
+        $this->assertSame('personality_profile_sections.mbti64_comparison_a_vs_t.updated_at', $before->lastmodSource);
+        $this->assertSame($now->copy()->subDay()->toDateTimeString(), $before->lastmodAt?->toDateTimeString());
+        $this->assertMatchesRegularExpression('/^[a-f0-9]{64}$/', (string) ($before->metadata['content_hash'] ?? ''));
+
+        PersonalityProfileSection::withoutTimestamps(fn () => $section->forceFill([
+            'body_md' => 'Promoted comparison quick answer.',
+            'payload_json' => ['content' => ['quick_answer' => 'promoted']],
+            'updated_at' => $now,
+        ])->save());
+
+        $after = $this->recordFor('https://fermatmind.com/zh/personality/intp-a-vs-intp-t');
+        $this->assertNotSame($before->metadata['content_hash'], $after->metadata['content_hash']);
+        $this->assertSame($now->toDateTimeString(), $after->lastmodAt?->toDateTimeString());
+    }
+
     private function seedPublishedMbti64Profiles(): void
     {
         foreach (PersonalityProfile::SUPPORTED_LOCALES as $locale) {
@@ -136,6 +237,16 @@ final class SeoIntelMbti64PersonalityUrlTruthInventoryTest extends TestCase
                 $this->createVariant($profile, 'T', ['is_published' => true]);
             }
         }
+    }
+
+    private function recordFor(string $canonicalUrl): object
+    {
+        $record = collect((new BackendAuthorityUrlTruthSource)->candidates())
+            ->firstWhere('canonicalUrl', $canonicalUrl);
+
+        $this->assertNotNull($record);
+
+        return $record;
     }
 
     /**
