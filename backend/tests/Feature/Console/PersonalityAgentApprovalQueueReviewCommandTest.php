@@ -138,6 +138,56 @@ final class PersonalityAgentApprovalQueueReviewCommandTest extends TestCase
         );
     }
 
+    public function test_review_aggregate_queries_do_not_select_detail_columns_for_mysql_strict_group_by(): void
+    {
+        $batchId = $this->createBatch('mbti64');
+        $this->createItem($batchId, [
+            'framework' => 'mbti64',
+            'target_url' => 'https://fermatmind.com/zh/personality/intp-a',
+            'path' => '/zh/personality/intp-a',
+            'locale' => 'zh-CN',
+            'page_type' => 'personality_profile_variant',
+            'recommendation_id' => 'mbti64-next:/zh/personality/intp-a',
+            'qa_decision' => 'PASS_READY_FOR_APPROVAL_REVIEW',
+            'approval_state' => 'pending',
+            'recommendation_json' => $this->recommendation('https://fermatmind.com/zh/personality/intp-a'),
+            'qa_json' => [
+                'decision' => 'PASS_READY_FOR_APPROVAL_REVIEW',
+                'eligible_for_approval_queue' => true,
+                'eligible_for_cms_draft_path' => false,
+            ],
+        ]);
+
+        $queries = [];
+        DB::listen(static function ($query) use (&$queries): void {
+            $sql = (string) $query->sql;
+            if (str_contains(strtolower($sql), 'group by')) {
+                $queries[] = $sql;
+            }
+        });
+
+        $exitCode = Artisan::call('personality:agent-approval-queue-review', [
+            '--framework' => 'mbti64',
+            '--approval-state' => 'pending',
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertSame(1, $payload['summary']['matched_item_count']);
+        $this->assertGreaterThanOrEqual(4, count($queries));
+
+        foreach ($queries as $sql) {
+            $normalized = strtolower(str_replace(['`', '"'], '', $sql));
+            $this->assertStringContainsString('count(*) as aggregate', $normalized);
+            $this->assertStringNotContainsString('select items.id', $normalized);
+            $this->assertStringNotContainsString(' items.id,', $normalized);
+            $this->assertStringNotContainsString('items.recommendation_json', $normalized);
+            $this->assertStringNotContainsString('items.qa_json', $normalized);
+        }
+    }
+
     public function test_review_fails_closed_for_unsupported_filters_without_mutating_queue(): void
     {
         $beforeItems = DB::table('personality_agent_approval_items')->count();

@@ -58,10 +58,10 @@ final class PersonalityAgentApprovalQueueReadModel
             'summary' => [
                 'matched_item_count' => (int) (clone $baseQuery)->count(),
                 'returned_item_count' => count($items),
-                'by_framework' => $this->countsBy($baseQuery, 'items.framework'),
-                'by_approval_state' => $this->countsBy($baseQuery, 'items.approval_state'),
-                'by_qa_decision' => $this->countsBy($baseQuery, 'items.qa_decision'),
-                'by_blocked_reason' => $this->countsBy($baseQuery, 'items.blocked_reason'),
+                'by_framework' => $this->countsBy($framework, $approvalState, 'items.framework'),
+                'by_approval_state' => $this->countsBy($framework, $approvalState, 'items.approval_state'),
+                'by_qa_decision' => $this->countsBy($framework, $approvalState, 'items.qa_decision'),
+                'by_blocked_reason' => $this->countsBy($framework, $approvalState, 'items.blocked_reason'),
             ],
             'items' => $items,
             'safety_boundary' => $this->safetyBoundary(),
@@ -116,10 +116,24 @@ final class PersonalityAgentApprovalQueueReadModel
     /**
      * @return array<string,int>
      */
-    private function countsBy(Builder $baseQuery, string $column): array
+    private function countsBy(?string $framework, string $approvalState, string $column): array
     {
-        return (clone $baseQuery)
-            ->selectRaw($column.' as bucket, count(*) as aggregate')
+        $query = DB::table('personality_agent_approval_items as items')
+            ->join('personality_agent_approval_batches as batches', 'batches.id', '=', 'items.batch_id');
+
+        if ($framework !== null && $framework !== '') {
+            $query->where('items.framework', $framework);
+        }
+
+        if ($approvalState !== 'all') {
+            $query->where('items.approval_state', $approvalState);
+        }
+
+        return $query
+            ->select([
+                DB::raw($column.' as bucket'),
+                DB::raw('count(*) as aggregate'),
+            ])
             ->groupBy($column)
             ->orderBy($column)
             ->get()
