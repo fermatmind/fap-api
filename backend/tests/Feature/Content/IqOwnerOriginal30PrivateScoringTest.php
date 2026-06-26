@@ -99,6 +99,7 @@ final class IqOwnerOriginal30PrivateScoringTest extends TestCase
         $redacted = IqResultPayloadRedactor::redactAnswerKeys([
             'scale_code' => 'IQ_INTELLIGENCE_QUOTIENT',
             'bank_id' => 'IQ_OWNER_ORIGINAL_30',
+            'answer_key_version' => 'owner_original_30_answer_key_2026_06_23',
             'items' => [$items[0]],
             'answer_key' => $this->readJson('answer_key.json'),
             'scoring_spec' => $this->readJson('scoring_spec.json'),
@@ -108,11 +109,13 @@ final class IqOwnerOriginal30PrivateScoringTest extends TestCase
         $this->assertPayloadHasNoPrivateIqFields($redacted);
     }
 
-    private function assertPayloadHasNoPrivateIqFields(array $payload): void
+    private function assertPayloadHasNoPrivateIqFields(array $payload, string $path = '$'): void
     {
         $forbidden = [
             'answer_key',
             'answerKey',
+            'answer_key_version',
+            'answerKeyVersion',
             'correct_answer',
             'correctAnswer',
             'solution_rule',
@@ -124,10 +127,10 @@ final class IqOwnerOriginal30PrivateScoringTest extends TestCase
         ];
 
         foreach ($payload as $key => $value) {
-            $this->assertNotContains($key, $forbidden);
+            $this->assertNotContains($key, $forbidden, 'Forbidden IQ private field leaked at '.$path.'.'.$key);
 
             if (is_array($value)) {
-                $this->assertPayloadHasNoPrivateIqFields($value);
+                $this->assertPayloadHasNoPrivateIqFields($value, $path.'.'.$key);
             }
         }
     }

@@ -253,6 +253,7 @@ final class IqReportContractTest extends TestCase
         $this->assertIsArray(data_get($payload, 'report.quality'));
         $this->assertIsArray(data_get($payload, 'report.scoring'));
         $this->assertIsArray(data_get($payload, 'report.iq_pro'));
+        $this->assertNull(data_get($payload, 'report.scoring.answer_key_version'));
         $this->assertEquals(21.0, data_get($payload, 'report.summary.raw_score'));
         $this->assertSame('A', data_get($payload, 'report.quality.level'));
         $this->assertSame('contract_defined_not_implemented', data_get($payload, 'report.iq_pro.pdf_payload.status'));
@@ -277,6 +278,9 @@ final class IqReportContractTest extends TestCase
 
         $response->assertStatus(200);
         $this->assertPayloadHasNoAnswerKeyFields($response->json());
+        $this->assertNull(data_get($response->json(), 'result.normed_json.answer_key_version'));
+        $this->assertNull(data_get($response->json(), 'result.breakdown_json.score_result.answer_key_version'));
+        $this->assertNull(data_get($response->json(), 'result.axis_scores_json.score_result.answer_key_version'));
         $this->assertSame('B', data_get($response->json(), 'result.normed_json.items.0.selected_code'));
         $this->assertFalse((bool) data_get($response->json(), 'result.normed_json.items.0.is_correct'));
     }
@@ -354,13 +358,20 @@ final class IqReportContractTest extends TestCase
     /**
      * @param  array<string,mixed>  $payload
      */
-    private function assertPayloadHasNoAnswerKeyFields(array $payload): void
+    private function assertPayloadHasNoAnswerKeyFields(array $payload, string $path = '$'): void
     {
         foreach ($payload as $key => $value) {
-            $this->assertNotContains($key, ['answer_key', 'answerKey', 'correct_answer', 'correctAnswer']);
+            $this->assertNotContains($key, [
+                'answer_key',
+                'answerKey',
+                'answer_key_version',
+                'answerKeyVersion',
+                'correct_answer',
+                'correctAnswer',
+            ], 'Forbidden IQ answer key field leaked at '.$path.'.'.$key);
 
             if (is_array($value)) {
-                $this->assertPayloadHasNoAnswerKeyFields($value);
+                $this->assertPayloadHasNoAnswerKeyFields($value, $path.'.'.$key);
             }
         }
     }

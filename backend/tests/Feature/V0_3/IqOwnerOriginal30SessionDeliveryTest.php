@@ -435,11 +435,13 @@ final class IqOwnerOriginal30SessionDeliveryTest extends TestCase
         return $answers;
     }
 
-    private function assertPayloadHasNoPrivateIqFields(array $payload): void
+    private function assertPayloadHasNoPrivateIqFields(array $payload, string $path = '$'): void
     {
         $forbidden = [
             'answer_key',
             'answerKey',
+            'answer_key_version',
+            'answerKeyVersion',
             'correct_answer',
             'correctAnswer',
             'solution_rule',
@@ -453,10 +455,10 @@ final class IqOwnerOriginal30SessionDeliveryTest extends TestCase
         ];
 
         foreach ($payload as $key => $value) {
-            $this->assertNotContains($key, $forbidden);
+            $this->assertNotContains($key, $forbidden, 'Forbidden IQ private field leaked at '.$path.'.'.$key);
 
             if (is_array($value)) {
-                $this->assertPayloadHasNoPrivateIqFields($value);
+                $this->assertPayloadHasNoPrivateIqFields($value, $path.'.'.$key);
             }
         }
     }

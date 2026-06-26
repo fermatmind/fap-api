@@ -284,6 +284,7 @@ class AttemptReadController extends Controller
         if (IqResultPayloadRedactor::isIqScale($responseCodes['scale_code_legacy'], $responseCodes['scale_code_v2'])) {
             $payload = IqResultPayloadRedactor::redactAnswerKeys($payload);
             $compatScores = IqResultPayloadRedactor::redactAnswerKeys($compatScores);
+            $compatScoresPct = IqResultPayloadRedactor::redactAnswerKeys($compatScoresPct);
         }
 
         $hasBigFiveProjectionFullAccess = $scaleCode === 'BIG5_OCEAN'
@@ -419,6 +420,10 @@ class AttemptReadController extends Controller
         }
         if (is_array($riasecFormSummary)) {
             $responsePayload['riasec_form_v1'] = $riasecFormSummary;
+        }
+
+        if (IqResultPayloadRedactor::isIqScale($responseCodes['scale_code_legacy'], $responseCodes['scale_code_v2'])) {
+            $responsePayload = IqResultPayloadRedactor::redactAnswerKeys($responsePayload);
         }
 
         return response()->json($responsePayload);
@@ -709,6 +714,10 @@ class AttemptReadController extends Controller
                 $result,
                 is_array($responsePayload['enneagram_public_projection_v2'] ?? null) ? $responsePayload['enneagram_public_projection_v2'] : null,
             ));
+        }
+
+        if (IqResultPayloadRedactor::isIqScale($responseCodes['scale_code_legacy'], $responseCodes['scale_code_v2'])) {
+            $responsePayload = IqResultPayloadRedactor::redactAnswerKeys($responsePayload);
         }
 
         return response()->json($responsePayload);
