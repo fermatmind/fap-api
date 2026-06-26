@@ -94,6 +94,43 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: MBTI-PDF-PRODUCT-02
+    repo: fap-api
+    depends_on: [MBTI-PDF-PRODUCT-01]
+    branch: codex/mbti-pdf-product-02-content-depth
+    title: "MBTI-PDF-PRODUCT-02: expand MBTI PDF content depth"
+    train_scope: mbti_pdf_product
+    status: user_authorized
+    scope:
+      - Use the MBTI PDF payload authority from MBTI-PDF-PRODUCT-01 to expose formal reader-facing PDF chapters.
+      - Cover type portrait, core traits, dimension explanation, career direction, growth plan, relationships and communication, and report use boundaries.
+      - Keep Chinese and English chapter copy intentionally authored for each locale without mixing user-facing languages.
+      - Keep the work backend-only and do not change public routes, frontend behavior, PDF pagination/brand styling, cache surface version, CMS, search, sitemap, llms, or deployment.
+    allowed_paths:
+      - backend/app/Services/Report/Pdf/Mbti/**
+      - backend/tests/Unit/Services/Report/Pdf/Mbti/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web.
+      - Change public API route paths, frontend download behavior, CMS, sitemap, llms, canonical, noindex, JSON-LD, search submission, scheduler, queue, secrets, staging deploy, or production deploy.
+      - Change PDF surface version, artifact cache key, renderer pagination, mPDF styling, page headers/footers, or public filename behavior; those belong to later MBTI-PDF-PRODUCT PRs.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Report/Pdf/Mbti/MbtiPdfPayloadBuilderTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/Report/Pdf/Mbti tests/Unit/Services/Report/Pdf/Mbti
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: PR-EQ-ASSET-02
     repo: fap-api
     depends_on: [PR-EQ-ASSET-01]
