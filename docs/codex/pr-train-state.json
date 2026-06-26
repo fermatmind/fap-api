@@ -62837,7 +62837,7 @@
     "repo": "fap-api",
     "branch": "codex/mbti-pdf-product-01-payload-authority",
     "base": "main",
-    "status": "committed",
+    "status": "github_checks_pending",
     "train_scope": "mbti_pdf_product",
     "title": "MBTI-PDF-PRODUCT-01: add MBTI PDF payload authority",
     "depends_on": [],
@@ -62869,8 +62869,8 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": "550506b535e1c2c4f4a02694e8f391ba0d4969d3",
-    "pr_url": null,
+    "commit_sha": "6eeb4bb97f0b8b928fff9dceda75c31eabd7afdb",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2448",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -62889,6 +62889,11 @@
         "at": "2026-06-26T20:17:06+08:00",
         "status": "committed",
         "note": "Prepared scoped commit 550506b535e1c2c4f4a02694e8f391ba0d4969d3 for MBTI PDF payload authority. No frontend, CMS, SEO runtime, search, queue, scheduler, staging deploy, or production deploy included."
+      },
+      {
+        "at": "2026-06-26T20:17:06+08:00",
+        "status": "github_checks_pending",
+        "note": "Opened PR #2448 at https://github.com/fermatmind/fap-api/pull/2448. Waiting for required GitHub checks; no staging deploy wait, server verification, manual deploy, or production deploy included."
       }
     ]
   }
