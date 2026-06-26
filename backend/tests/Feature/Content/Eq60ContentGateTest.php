@@ -82,10 +82,16 @@ final class Eq60ContentGateTest extends TestCase
         ], array_keys((array) data_get($assets, 'assets', [])));
 
         $routes = (array) data_get($assets, 'assets.personalization_routes.routes', []);
-        foreach (['balanced_integrated', 'high_empathy_low_recovery', 'aware_but_unregulated', 'low_confidence_result'] as $routeId) {
-            $this->assertSame($routeId, (string) data_get($routes, $routeId.'.route_id'));
-            $this->assertSame($routeId, (string) data_get($routes, $routeId.'.selected_asset_ids.core_formulation_id'));
-            $this->assertNotSame('', (string) data_get($routes, $routeId.'.selected_asset_ids.action_prescription_id'));
+        $this->assertGreaterThanOrEqual(30, count($routes));
+        foreach (['balanced_integrated', 'high_empathy_low_recovery', 'aware_but_unregulated', 'low_confidence_result'] as $formulationId) {
+            $matched = array_values(array_filter($routes, static fn ($route): bool => is_array($route) && (string) ($route['formulation_id'] ?? '') === $formulationId));
+            $this->assertNotEmpty($matched, 'Missing v2 route for '.$formulationId);
+            $route = (array) $matched[0];
+            $this->assertNotSame('', (string) ($route['route_id'] ?? ''));
+            $this->assertNotSame('', (string) data_get($route, 'selected_asset_ids.core_formulation'));
+            $this->assertNotSame('', (string) data_get($route, 'selected_asset_ids.action_prescription'));
+            $this->assertNotSame('', (string) data_get($route, 'locales.zh-CN.route_headline'));
+            $this->assertNotSame('', (string) data_get($route, 'locales.en.route_headline'));
         }
 
         foreach ([

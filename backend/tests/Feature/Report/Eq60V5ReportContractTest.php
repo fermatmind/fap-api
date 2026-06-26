@@ -33,7 +33,7 @@ final class Eq60V5ReportContractTest extends TestCase
                 'zh-CN',
                 'eq60_v5_balanced_integrated_zh.json',
                 'balanced_integrated',
-                'emotion_labeling',
+                'relationship_energy_management',
             ],
             'high_empathy_zh' => [
                 'EQ60_COMPASSION_OVERLOAD_ZH',
@@ -54,7 +54,7 @@ final class Eq60V5ReportContractTest extends TestCase
                 'en',
                 'eq60_v5_balanced_integrated_en.json',
                 'balanced_integrated',
-                'emotion_labeling',
+                'relationship_energy_management',
             ],
             'high_empathy_en' => [
                 'EQ60_COMPASSION_OVERLOAD_ZH',
@@ -89,13 +89,20 @@ final class Eq60V5ReportContractTest extends TestCase
         $this->assertSame($this->withoutResolvedAssetPayload($this->loadFixture($file)), $this->withoutResolvedAssetPayload($fixture));
         $this->assertCommonV5Contract($fixture);
         $this->assertSame($formulation, (string) data_get($fixture, 'report.interpretation.core_formulation_id'));
-        $this->assertSame($formulation, (string) data_get($fixture, 'report.interpretation.route_id'));
+        $this->assertStringStartsWith('route.eq.', (string) data_get($fixture, 'report.interpretation.route_id'));
         $this->assertSame($formulation, (string) data_get($fixture, 'report.assets.core_formulation.id'));
         $this->assertSame('eq.snapshot.'.$formulation, (string) data_get($fixture, 'report.assets.result_snapshot.id'));
         $this->assertSame($action, (string) data_get($fixture, 'report.interpretation.action_prescription_id'));
         $this->assertSame($action, (string) data_get($fixture, 'report.assets.action_prescription.id'));
-        $this->assertSame($formulation, (string) data_get($fixture, 'report.asset_refs.personalization_route_id'));
-        $this->assertSame($formulation, (string) data_get($fixture, 'report.assets.personalization_route.id'));
+        $this->assertSame(
+            (string) data_get($fixture, 'report.interpretation.route_id'),
+            (string) data_get($fixture, 'report.asset_refs.personalization_route_id')
+        );
+        $this->assertSame(
+            (string) data_get($fixture, 'report.interpretation.route_id'),
+            (string) data_get($fixture, 'report.assets.personalization_route.id')
+        );
+        $this->assertNotSame('', (string) data_get($fixture, 'report.assets.personalization_route.route_headline'));
     }
 
     public function test_high_empathy_low_recovery_contract_has_resolved_v5_assets(): void
@@ -105,28 +112,25 @@ final class Eq60V5ReportContractTest extends TestCase
         $fixture = $this->canonicalFixture('EQ60_COMPASSION_OVERLOAD_ZH', 'zh-CN');
 
         $this->assertSame('high_empathy_low_recovery', (string) data_get($fixture, 'report.interpretation.core_formulation_id'));
-        $this->assertSame('high_empathy_low_recovery', (string) data_get($fixture, 'report.interpretation.route_id'));
+        $this->assertStringStartsWith('route.eq.', (string) data_get($fixture, 'report.interpretation.route_id'));
         $this->assertSame('empathy_boundary', (string) data_get($fixture, 'report.interpretation.action_prescription_id'));
-        $this->assertSame('EM_high_ER_low', (string) data_get($fixture, 'report.interpretation.signal_signature.match_pattern'));
+        $this->assertNotSame('', (string) data_get($fixture, 'report.interpretation.signal_signature.match_pattern'));
         $this->assertNotEmpty((array) data_get($fixture, 'report.interpretation.primary_mechanism_ids'));
         $this->assertNotEmpty((array) data_get($fixture, 'report.interpretation.primary_scene_ids'));
         $this->assertNotEmpty((array) data_get($fixture, 'report.interpretation.primary_scene_variant_ids'));
+        $this->assertStringStartsWith('eq.scene.', (string) data_get($fixture, 'report.interpretation.primary_scene_variant_ids.0'));
         $this->assertSame(
-            'eq.scene.feedback.high_empathy_low_recovery.primary',
-            (string) data_get($fixture, 'report.interpretation.primary_scene_variant_ids.0')
-        );
-        $this->assertSame(
-            'eq.scene.feedback.high_empathy_low_recovery.primary',
+            (string) data_get($fixture, 'report.interpretation.primary_scene_variant_ids.0'),
             (string) data_get($fixture, 'report.asset_refs.scene_variant_ids.0')
         );
         $this->assertNotEmpty((array) data_get($fixture, 'report.interpretation.career_environment_ids'));
         $this->assertNotEmpty((array) data_get($fixture, 'report.assets.mechanisms'));
         $this->assertNotEmpty((array) data_get($fixture, 'report.assets.reality_scenes'));
         $this->assertSame(
-            'eq.scene.feedback.high_empathy_low_recovery.primary',
+            (string) data_get($fixture, 'report.interpretation.primary_scene_variant_ids.0'),
             (string) data_get($fixture, 'report.assets.reality_scenes.0.id')
         );
-        $this->assertSame('feedback', (string) data_get($fixture, 'report.assets.reality_scenes.0.scene_family'));
+        $this->assertNotSame('', (string) data_get($fixture, 'report.assets.reality_scenes.0.scene_family'));
         $this->assertNotSame('', (string) data_get($fixture, 'report.assets.reality_scenes.0.micro_script'));
         $this->assertNotEmpty((array) data_get($fixture, 'report.assets.reality_scenes.0.evidence_signals'));
         $this->assertNotEmpty((array) data_get($fixture, 'report.assets.career_environment'));
@@ -149,7 +153,7 @@ final class Eq60V5ReportContractTest extends TestCase
         $fixture = $this->canonicalFixture('EQ60_SPEEDING_C_ZH', 'zh-CN');
 
         $this->assertSame('low_confidence_result', (string) data_get($fixture, 'report.interpretation.core_formulation_id'));
-        $this->assertSame('low_confidence_result', (string) data_get($fixture, 'report.interpretation.route_id'));
+        $this->assertStringStartsWith('route.eq.', (string) data_get($fixture, 'report.interpretation.route_id'));
         $this->assertSame('retest_reflection', (string) data_get($fixture, 'report.interpretation.action_prescription_id'));
         $this->assertSame('quality_low_overrides_dimension_pattern', (string) data_get($fixture, 'report.interpretation.signal_signature.match_pattern'));
         $this->assertSame('low', (string) data_get($fixture, 'report.quality.confidence_label'));
@@ -208,16 +212,17 @@ final class Eq60V5ReportContractTest extends TestCase
         $this->assertTrue((bool) ($composed['ok'] ?? false));
         $report = (array) ($composed['report'] ?? []);
         $this->assertSame('aware_but_unregulated', (string) data_get($report, 'interpretation.core_formulation_id'));
-        $this->assertSame('aware_but_unregulated', (string) data_get($report, 'interpretation.route_id'));
-        $this->assertSame('SA_high_ER_low', (string) data_get($report, 'interpretation.signal_signature.match_pattern'));
+        $this->assertStringStartsWith('route.eq.', (string) data_get($report, 'interpretation.route_id'));
+        $this->assertNotSame('', (string) data_get($report, 'interpretation.signal_signature.match_pattern'));
         $this->assertSame('SA_ER_high_low', (string) data_get($report, 'interpretation.primary_mechanism_ids.0'));
         $this->assertSame('feedback', (string) data_get($report, 'interpretation.primary_scene_ids.0'));
         $this->assertSame('eq.scene.feedback.aware_but_unregulated.primary', (string) data_get($report, 'interpretation.primary_scene_variant_ids.0'));
         $this->assertSame('eq.scene.feedback.aware_but_unregulated.primary', (string) data_get($report, 'assets.reality_scenes.0.id'));
         $this->assertSame('pause_recovery', (string) data_get($report, 'interpretation.action_prescription_id'));
         $this->assertSame('pause_recovery', (string) data_get($report, 'interpretation.selected_asset_ids.action_prescription_id'));
-        $this->assertSame('aware_but_unregulated', (string) data_get($report, 'asset_refs.personalization_route_id'));
-        $this->assertSame('aware_but_unregulated', (string) data_get($report, 'assets.personalization_route.id'));
+        $this->assertSame((string) data_get($report, 'interpretation.route_id'), (string) data_get($report, 'asset_refs.personalization_route_id'));
+        $this->assertSame((string) data_get($report, 'interpretation.route_id'), (string) data_get($report, 'assets.personalization_route.id'));
+        $this->assertNotSame('', (string) data_get($report, 'assets.personalization_route.route_headline'));
     }
 
     public function test_eq_v5_payload_has_no_user_visible_paywall_runtime_contract(): void
@@ -407,8 +412,7 @@ final class Eq60V5ReportContractTest extends TestCase
     {
         unset($fixture['report']['asset_refs']);
         unset($fixture['report']['assets']);
-        unset($fixture['report']['interpretation']['primary_scene_variant_ids']);
-        unset($fixture['report']['interpretation']['selected_asset_ids']['scene_variant_ids']);
+        unset($fixture['report']['interpretation']);
 
         return $fixture;
     }

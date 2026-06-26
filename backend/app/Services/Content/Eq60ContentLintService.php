@@ -1271,14 +1271,82 @@ final class Eq60ContentLintService
             return;
         }
 
-        if ((string) ($doc['schema'] ?? '') !== 'eq60.personalization_routes.route_matrix.v1') {
-            $errors[] = $this->error($file, 1, 'schema must be eq60.personalization_routes.route_matrix.v1.');
+        $schema = (string) ($doc['schema'] ?? '');
+        if (! in_array($schema, ['eq60.personalization_routes.route_matrix.v1', 'eq60.personalization_routes.route_matrix.v2'], true)) {
+            $errors[] = $this->error($file, 1, 'schema must be eq60.personalization_routes.route_matrix.v1 or v2.');
         }
         if ((string) ($doc['pack_id'] ?? '') !== Eq60PackLoader::PACK_ID) {
             $errors[] = $this->error($file, 1, 'pack_id must be EQ_60.');
         }
 
         $routes = is_array($doc['routes'] ?? null) ? $doc['routes'] : [];
+        if ($schema === 'eq60.personalization_routes.route_matrix.v2') {
+            if (! array_is_list($routes) || count($routes) < 30) {
+                $errors[] = $this->error($file, 1, 'v2 routes must be a list with expanded personalization routes.');
+            }
+            $seenFormulations = [];
+            foreach ($routes as $idx => $route) {
+                if (! is_array($route)) {
+                    $errors[] = $this->error($file, 1, 'v2 route must be an object at index: '.$idx);
+
+                    continue;
+                }
+                $routeId = trim((string) ($route['route_id'] ?? ''));
+                $formulationId = trim((string) ($route['formulation_id'] ?? ''));
+                $selected = is_array($route['selected_asset_ids'] ?? null) ? $route['selected_asset_ids'] : [];
+                $match = is_array($route['match'] ?? null) ? $route['match'] : [];
+                if ($routeId === '') {
+                    $errors[] = $this->error($file, 1, 'v2 route_id is required at index: '.$idx);
+                }
+                if ($formulationId === '') {
+                    $errors[] = $this->error($file, 1, 'v2 formulation_id is required for route: '.$routeId);
+                } else {
+                    $seenFormulations[$formulationId] = true;
+                }
+                if ((array) ($match['quality_levels'] ?? []) === []) {
+                    $errors[] = $this->error($file, 1, 'v2 match.quality_levels is required for route: '.$routeId);
+                }
+                if (! is_array($match['dimension_pattern'] ?? null)) {
+                    $errors[] = $this->error($file, 1, 'v2 match.dimension_pattern must be an object for route: '.$routeId);
+                }
+                foreach (['core_formulation', 'action_prescription'] as $key) {
+                    if (trim((string) ($selected[$key] ?? '')) === '') {
+                        $errors[] = $this->error($file, 1, 'v2 selected_asset_ids.'.$key.' is required for route: '.$routeId);
+                    }
+                }
+                foreach (['mechanisms', 'scenes', 'career_environment'] as $listKey) {
+                    if ($listKey === 'mechanisms' && $formulationId === 'low_confidence_result') {
+                        continue;
+                    }
+                    if (! is_array($selected[$listKey] ?? null) || (array) $selected[$listKey] === []) {
+                        $errors[] = $this->error($file, 1, 'v2 selected_asset_ids.'.$listKey.' must be a non-empty list for route: '.$routeId);
+                    }
+                }
+                $this->lintLocalizedAssetFields($file, [
+                    'zh-CN' => (array) data_get($route, 'locales.zh-CN', []),
+                    'en' => (array) data_get($route, 'locales.en', []),
+                ], [
+                    'route_headline',
+                    'why_this_feels_specific',
+                    'evidence_snapshot_label',
+                    'next_best_action',
+                    'save_reason',
+                ], $errors);
+            }
+            foreach ([
+                'balanced_integrated',
+                'high_empathy_low_recovery',
+                'aware_but_unregulated',
+                'low_confidence_result',
+            ] as $requiredFormulation) {
+                if (! isset($seenFormulations[$requiredFormulation])) {
+                    $errors[] = $this->error($file, 1, 'v2 route formulation missing: '.$requiredFormulation);
+                }
+            }
+
+            return;
+        }
+
         foreach ([
             'balanced_integrated',
             'high_empathy_low_recovery',
