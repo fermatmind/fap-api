@@ -148,6 +148,8 @@ final class SeoIntelSearchChannelQueueCommand extends Command
             'eligible_count' => $plan['eligible_count'],
             'blocked_count' => $plan['blocked_count'],
             'planned_queue_count' => $plan['planned_queue_count'],
+            'stale_submitted_queue_item_count' => $plan['stale_submitted_queue_item_count'] ?? 0,
+            'stale_submitted_queue_items' => $plan['stale_submitted_queue_items'] ?? [],
             'channel_breakdown' => $plan['channel_breakdown'],
             'page_type_breakdown' => $plan['page_type_breakdown'],
             'reason_code_breakdown' => $plan['reason_code_breakdown'],
