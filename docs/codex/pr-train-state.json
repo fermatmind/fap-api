@@ -63065,7 +63065,7 @@
     "repo": "fap-api",
     "branch": "codex/mbti-pdf-product-04-version-cache-qa",
     "base": "main",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "train_scope": "mbti_pdf_product",
     "title": "MBTI-PDF-PRODUCT-04: version MBTI PDF surface and cache QA",
     "depends_on": [
@@ -63096,10 +63096,14 @@
       "scope_validation": {
         "status": "pass",
         "evidence": "Changed files are limited to MBTI-PDF-PRODUCT-04 scope: backend/app/Services/Report/Pdf/ReportPdfDocumentService.php, backend/tests/Feature/V0_3/AttemptPublicReportPdfParityTest.php, and authorized docs/codex train metadata. No fap-web, public route, CMS, DB migration, sitemap, llms, canonical, noindex, JSON-LD, search, scheduler, queue, staging deploy, production deploy, or report-access URL shape change."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "GitHub checks passed for PR #2453 head f4c358c9a210091f5602be848c2c924049002169: hygiene, supply-chain, content-pack-build-validate, Semgrep, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 all succeeded. mergeStateStatus was CLEAN."
       }
     },
     "failure_reason": null,
-    "commit_sha": "d9069723888658f8b6fb63b568b66a9a2ea96d0f",
+    "commit_sha": "f4c358c9a210091f5602be848c2c924049002169",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2453",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -63119,6 +63123,11 @@
         "at": "2026-06-26T22:24:00+08:00",
         "status": "pr_open",
         "note": "Opened PR #2453 at https://github.com/fermatmind/fap-api/pull/2453. Waiting for required GitHub checks; no staging deploy wait, server verification, manual deploy, or production deploy included."
+      },
+      {
+        "at": "2026-06-26T22:31:00+08:00",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed for PR #2453 head f4c358c9a210091f5602be848c2c924049002169 and mergeStateStatus was CLEAN. Ready for squash merge; no staging deploy wait, production deploy, CMS write, search, sitemap, llms, canonical, noindex, JSON-LD, queue, or public route change included."
       }
     ]
   }
