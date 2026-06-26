@@ -192,13 +192,21 @@ class IqTestDriver implements DriverInterface
             $scaleCode = 'IQ_INTELLIGENCE_QUOTIENT';
         }
 
+        $bankId = trim((string) ($spec['bank_id'] ?? data_get($spec, 'item_bank.bank_id', '')));
+        $normTableVersion = $this->nullableTrimmedString(
+            $spec['norm_table_version']
+                ?? data_get($spec, 'runtime_binding.norm_table_version')
+                ?? data_get($spec, 'norm_policy.norm_table_version')
+                ?? null
+        );
+
         $contract = [
             'status' => 'blocked_unscored',
             'reason_code' => 'ANSWER_KEY_MISSING',
             'scale_code' => $scaleCode,
-            'bank_id' => trim((string) data_get($spec, 'item_bank.bank_id', '')),
+            'bank_id' => $bankId,
             'answer_key_version' => trim((string) ($spec['answer_key_version'] ?? '')),
-            'norm_table_version' => $this->nullableTrimmedString($spec['norm_table_version'] ?? null),
+            'norm_table_version' => $normTableVersion,
             'scoring_engine_version' => trim((string) ($spec['scoring_engine_version'] ?? ($spec['engine_version'] ?? ''))),
             'expected_item_count' => (int) data_get($spec, 'item_bank.item_count', 0),
             'quality_rules' => $qualityRules,
