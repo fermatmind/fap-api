@@ -47,6 +47,29 @@ final class ReportPdfDocumentService
             return $this->riasecMetadata($attempt, $gate);
         }
 
+        if ($scaleCode === 'MBTI') {
+            $date = $attempt->submitted_at?->format('Y-m-d')
+                ?? $attempt->created_at?->format('Y-m-d')
+                ?? now()->format('Y-m-d');
+
+            return [
+                'pdf_surface_version' => 'mbti.pdf_surface.v1',
+                'scale_code' => 'MBTI',
+                'form_code' => null,
+                'form_label' => null,
+                'filename_hint' => sprintf('fermatmind-mbti-report-%s.pdf', $date),
+                'report_schema_version' => null,
+                'projection_version' => null,
+                'report_engine_version' => null,
+                'interpretation_context_id' => null,
+                'content_release_hash' => null,
+                'content_snapshot_status' => null,
+                'snapshot_binding_v1' => [],
+                'compare_compatibility_group' => null,
+                'cross_form_comparable' => null,
+            ];
+        }
+
         if ($scaleCode !== 'ENNEAGRAM') {
             return [
                 'pdf_surface_version' => 'report_pdf.surface.v1',
@@ -271,15 +294,17 @@ final class ReportPdfDocumentService
             ?? data_get($result?->result_json, 'normed_json.quality.level', '')
         )));
 
-        $pdfBinary = $this->buildDocument(
-            (string) $attempt->id,
-            (string) ($attempt->scale_code ?? ''),
-            $locked,
-            $variant,
-            $normsStatus,
-            $qualityLevel,
-            $sections
-        );
+        $pdfBinary = strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'MBTI'
+            ? $this->buildMbtiDocument($attempt, $result)
+            : $this->buildDocument(
+                (string) $attempt->id,
+                (string) ($attempt->scale_code ?? ''),
+                $locked,
+                $variant,
+                $normsStatus,
+                $qualityLevel,
+                $sections
+            );
         $this->artifactStore->put($path, $pdfBinary);
 
         return [
@@ -406,6 +431,174 @@ final class ReportPdfDocumentService
         return sprintf('fermatmind-enneagram-%s-%s.pdf', $slug, $date);
     }
 
+    private function buildMbtiDocument(Attempt $attempt, ?Result $result): string
+    {
+        $locale = strtolower(trim((string) ($attempt->locale ?? '')));
+        $isChinese = str_starts_with($locale, 'zh');
+        $typeCode = strtoupper(trim((string) (
+            $result?->type_code
+            ?? data_get($result?->result_json, 'type_code')
+            ?? data_get($result?->result_json, 'result.type_code')
+            ?? ''
+        )));
+        $typeCode = $typeCode !== '' ? $typeCode : ($isChinese ? '待确认' : 'Pending');
+        $axisScores = $this->mbtiAxisScores($result);
+        $date = $attempt->submitted_at?->format('Y-m-d')
+            ?? $attempt->created_at?->format('Y-m-d')
+            ?? now()->format('Y-m-d');
+
+        if ($isChinese) {
+            return $this->buildFormalPdfDocument(
+                '费马测试 MBTI 完整报告',
+                [
+                    '人格类型' => $typeCode,
+                    '报告日期' => $date,
+                    '报告范围' => '核心画像、维度分布、职业、成长与关系摘要',
+                ],
+                [
+                    [
+                        'heading' => '核心画像',
+                        'body' => [
+                            sprintf('你的人格类型是 %s。报告基于本次 MBTI 作答结果，帮助你理解能量来源、信息处理、决策方式、生活节奏和压力反应。', $typeCode),
+                        ],
+                    ],
+                    [
+                        'heading' => '维度分布',
+                        'body' => $this->mbtiAxisLines($axisScores, true),
+                    ],
+                    [
+                        'heading' => '职业方向摘要',
+                        'body' => [
+                            '适合先从问题类型、协作节奏和决策环境三个角度筛选方向。优先寻找能让你持续积累专业判断、清晰表达方案并看到长期进展的任务。',
+                        ],
+                    ],
+                    [
+                        'heading' => '成长建议摘要',
+                        'body' => [
+                            '把复杂目标拆成可验证的小步骤，定期复盘证据和反馈。遇到压力时，先确认事实边界，再决定是否调整计划或沟通方式。',
+                        ],
+                    ],
+                    [
+                        'heading' => '关系相处摘要',
+                        'body' => [
+                            '表达观点时先说明判断依据和不确定性，给对方留下补充信息的空间。协作中把期待、时间线和交付标准写清楚，会减少误解。',
+                        ],
+                    ],
+                ],
+                'FermatMind · 费马测试',
+                true
+            );
+        }
+
+        return $this->buildFormalPdfDocument(
+            'FermatMind MBTI Full Report',
+            [
+                'Personality type' => $typeCode,
+                'Report date' => $date,
+                'Report scope' => 'Core portrait, dimensions, career, growth, and relationship summaries',
+            ],
+            [
+                [
+                    'heading' => 'Core portrait',
+                    'body' => [
+                        sprintf('Your personality type is %s. This report summarizes your MBTI result across energy, information processing, decision making, structure, and stress response.', $typeCode),
+                    ],
+                ],
+                [
+                    'heading' => 'Dimension profile',
+                    'body' => $this->mbtiAxisLines($axisScores, false),
+                ],
+                [
+                    'heading' => 'Career direction summary',
+                    'body' => [
+                        'Start by comparing role fit through problem type, collaboration rhythm, and decision environment. Look for work that lets you build durable judgment, explain tradeoffs clearly, and track progress over time.',
+                    ],
+                ],
+                [
+                    'heading' => 'Growth focus summary',
+                    'body' => [
+                        'Break complex goals into smaller evidence-backed steps and review feedback on a predictable cadence. Under pressure, clarify the facts first, then decide whether to adjust the plan or the communication style.',
+                    ],
+                ],
+                [
+                    'heading' => 'Relationship style summary',
+                    'body' => [
+                        'When sharing a view, explain the evidence and the uncertainty behind it. In collaboration, explicit expectations, timelines, and quality bars reduce avoidable friction.',
+                    ],
+                ],
+            ],
+            'FermatMind',
+            false
+        );
+    }
+
+    /**
+     * @return array<string,int>
+     */
+    private function mbtiAxisScores(?Result $result): array
+    {
+        $payload = is_array($result?->result_json ?? null) ? $result?->result_json : [];
+        $scores = is_array($result?->scores_pct ?? null) ? $result?->scores_pct : [];
+        if ($scores === []) {
+            $scores = is_array(data_get($payload, 'axis_scores_json.scores_pct'))
+                ? data_get($payload, 'axis_scores_json.scores_pct')
+                : [];
+        }
+
+        $normalized = [];
+        foreach (['EI', 'SN', 'TF', 'JP', 'AT'] as $axis) {
+            $value = $scores[$axis] ?? null;
+            if (is_numeric($value)) {
+                $normalized[$axis] = max(0, min(100, (int) round((float) $value)));
+            }
+        }
+
+        return $normalized;
+    }
+
+    /**
+     * @param  array<string,int>  $axisScores
+     * @return list<string>
+     */
+    private function mbtiAxisLines(array $axisScores, bool $isChinese): array
+    {
+        $labels = $isChinese
+            ? [
+                'EI' => '外向 / 内向',
+                'SN' => '实感 / 直觉',
+                'TF' => '思考 / 情感',
+                'JP' => '判断 / 知觉',
+                'AT' => '坚定 / 起伏',
+            ]
+            : [
+                'EI' => 'Extraversion / Introversion',
+                'SN' => 'Sensing / Intuition',
+                'TF' => 'Thinking / Feeling',
+                'JP' => 'Judging / Prospecting',
+                'AT' => 'Assertive / Turbulent',
+            ];
+
+        $lines = [];
+        foreach ($labels as $axis => $label) {
+            if (! array_key_exists($axis, $axisScores)) {
+                continue;
+            }
+
+            $lines[] = sprintf('%s: [%s] %d%% %s', $axis, $this->mbtiAxisBar($axisScores[$axis]), $axisScores[$axis], $label);
+        }
+
+        return $lines !== []
+            ? $lines
+            : [$isChinese ? '维度数据已记录在完整结果中。' : 'Dimension data is recorded in the full result.'];
+    }
+
+    private function mbtiAxisBar(int $score): string
+    {
+        $filled = (int) round(max(0, min(100, $score)) / 10);
+
+        return str_repeat('#', $filled).str_repeat('-', 10 - $filled);
+    }
+
     /**
      * @param  list<string>  $sections
      */
@@ -488,6 +681,191 @@ final class ReportPdfDocumentService
         $pdf .= "startxref\n".$startXref."\n%%EOF\n";
 
         return $pdf;
+    }
+
+    /**
+     * @param  array<string,string>  $summary
+     * @param  list<array{heading:string,body:list<string>}>  $sections
+     */
+    private function buildFormalPdfDocument(
+        string $title,
+        array $summary,
+        array $sections,
+        string $footer,
+        bool $useCjkFont
+    ): string {
+        $pages = [];
+        $operations = [];
+        $pageNumber = 1;
+        $y = 792;
+
+        $addPage = function () use (&$pages, &$operations, &$pageNumber, &$y, $footer, $useCjkFont): void {
+            if ($operations !== []) {
+                $this->appendPdfText($operations, 48, 34, $footer.' · '.$pageNumber, 8, $useCjkFont);
+                $pages[] = implode('', $operations);
+                $pageNumber++;
+            }
+
+            $operations = [];
+            $y = 792;
+        };
+
+        $writeLine = function (string $text, int $size = 10, int $indent = 0, int $gap = 15) use (&$operations, &$y, $addPage, $useCjkFont): void {
+            if ($y < 72) {
+                $addPage();
+            }
+
+            $this->appendPdfText($operations, 48 + $indent, $y, $text, $size, $useCjkFont);
+            $y -= $gap;
+        };
+
+        $writeLine($title, 20, 0, 28);
+        foreach ($summary as $label => $value) {
+            $writeLine($label.': '.$value, 10, 0, 15);
+        }
+
+        $y -= 10;
+        foreach ($sections as $section) {
+            $heading = trim($section['heading']);
+            if ($heading !== '') {
+                $writeLine($heading, 13, 0, 20);
+            }
+
+            foreach ($section['body'] as $paragraph) {
+                foreach ($this->wrapPdfText($paragraph, $useCjkFont ? 34 : 88) as $line) {
+                    $writeLine($line, 10, 10, 15);
+                }
+
+                $y -= 3;
+            }
+
+            $y -= 8;
+        }
+
+        $addPage();
+
+        return $this->buildPdfFromPageStreams($pages, $useCjkFont);
+    }
+
+    /**
+     * @param  list<string>  $operations
+     */
+    private function appendPdfText(array &$operations, int $x, int $y, string $text, int $size, bool $useCjkFont): void
+    {
+        if ($useCjkFont) {
+            $operations[] = sprintf("BT /F2 %d Tf 1 0 0 1 %d %d Tm <%s> Tj ET\n", $size, $x, $y, $this->utf16Hex($text));
+
+            return;
+        }
+
+        $operations[] = sprintf("BT /F1 %d Tf 1 0 0 1 %d %d Tm (%s) Tj ET\n", $size, $x, $y, $this->sanitizePdfText($text));
+    }
+
+    /**
+     * @param  list<string>  $pages
+     */
+    private function buildPdfFromPageStreams(array $pages, bool $includeCjkFont): string
+    {
+        $objects = [
+            1 => "1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n",
+        ];
+        $objects[3] = "3 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>\nendobj\n";
+        if ($includeCjkFont) {
+            $objects[4] = "4 0 obj\n<< /Type /Font /Subtype /Type0 /BaseFont /STSong-Light /Encoding /UniGB-UCS2-H /DescendantFonts [5 0 R] >>\nendobj\n";
+            $objects[5] = "5 0 obj\n<< /Type /Font /Subtype /CIDFontType0 /BaseFont /STSong-Light /CIDSystemInfo << /Registry (Adobe) /Ordering (GB1) /Supplement 2 >> /FontDescriptor 6 0 R >>\nendobj\n";
+            $objects[6] = "6 0 obj\n<< /Type /FontDescriptor /FontName /STSong-Light /Flags 6 /FontBBox [0 -200 1000 900] /ItalicAngle 0 /Ascent 880 /Descent -120 /CapHeight 700 /StemV 80 >>\nendobj\n";
+        }
+
+        $nextObjectId = $includeCjkFont ? 7 : 4;
+        $pageObjectIds = [];
+        foreach ($pages as $stream) {
+            $pageObjectId = $nextObjectId++;
+            $contentObjectId = $nextObjectId++;
+            $pageObjectIds[] = $pageObjectId;
+
+            $fontResources = '/F1 3 0 R';
+            if ($includeCjkFont) {
+                $fontResources .= ' /F2 4 0 R';
+            }
+
+            $objects[$pageObjectId] = sprintf(
+                "%d 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << %s >> >> /Contents %d 0 R >>\nendobj\n",
+                $pageObjectId,
+                $fontResources,
+                $contentObjectId
+            );
+            $objects[$contentObjectId] = sprintf(
+                "%d 0 obj\n<< /Length %d >>\nstream\n%sendstream\nendobj\n",
+                $contentObjectId,
+                strlen($stream),
+                $stream
+            );
+        }
+
+        $objects[2] = sprintf(
+            "2 0 obj\n<< /Type /Pages /Kids [%s] /Count %d >>\nendobj\n",
+            implode(' ', array_map(static fn (int $id): string => $id.' 0 R', $pageObjectIds)),
+            count($pageObjectIds)
+        );
+        ksort($objects);
+
+        $offsets = [0];
+        $pdf = "%PDF-1.4\n";
+        foreach ($objects as $index => $object) {
+            $offsets[$index] = strlen($pdf);
+            $pdf .= $object;
+        }
+
+        $maxObjectId = max(array_keys($objects));
+        $startXref = strlen($pdf);
+        $pdf .= "xref\n0 ".($maxObjectId + 1)."\n";
+        $pdf .= "0000000000 65535 f \n";
+        for ($i = 1; $i <= $maxObjectId; $i++) {
+            $pdf .= sprintf('%010d 00000 n ', $offsets[$i] ?? 0)."\n";
+        }
+        $pdf .= "trailer\n<< /Size ".($maxObjectId + 1)." /Root 1 0 R >>\n";
+        $pdf .= "startxref\n".$startXref."\n%%EOF\n";
+
+        return $pdf;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function wrapPdfText(string $text, int $limit): array
+    {
+        $text = trim($text);
+        if ($text === '') {
+            return [];
+        }
+
+        $lines = [];
+        while ($this->textLength($text) > $limit) {
+            $lines[] = $this->textSlice($text, 0, $limit);
+            $text = trim($this->textSlice($text, $limit));
+        }
+        if ($text !== '') {
+            $lines[] = $text;
+        }
+
+        return $lines;
+    }
+
+    private function utf16Hex(string $value): string
+    {
+        $encoded = mb_convert_encoding($value, 'UTF-16BE', 'UTF-8');
+
+        return strtoupper(bin2hex($encoded));
+    }
+
+    private function textLength(string $value): int
+    {
+        return mb_strlen($value, 'UTF-8');
+    }
+
+    private function textSlice(string $value, int $start, ?int $length = null): string
+    {
+        return mb_substr($value, $start, $length, 'UTF-8');
     }
 
     private function sanitizePdfText(string $value): string
