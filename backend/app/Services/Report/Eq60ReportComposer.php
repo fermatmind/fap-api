@@ -350,9 +350,11 @@ final class Eq60ReportComposer
         $developmentLever = $this->rankDimension($dimensionScores, false);
         $qualityLevel = strtoupper(trim((string) ($quality['level'] ?? '')));
         $formulationId = $this->selectCoreFormulation($dimensionScores, $qualityLevel);
-        $route = $this->selectPersonalizationRoute($routeMatrix, $formulationId);
+        $route = $this->selectPersonalizationRoute($routeMatrix, $formulationId, $dimensionScores, $quality);
         $selectedAssetIds = $this->selectedAssetIds($route, $formulationId, $dimensionScores, $developmentLever);
-        $selectedAssetIds['scene_variant_ids'] = $this->selectSceneVariantIds($formulationId, $selectedAssetIds['scene_ids']);
+        if ((array) ($selectedAssetIds['scene_variant_ids'] ?? []) === []) {
+            $selectedAssetIds['scene_variant_ids'] = $this->selectSceneVariantIds($formulationId, $selectedAssetIds['scene_ids']);
+        }
         $routeId = trim((string) ($route['route_id'] ?? $formulationId)) ?: $formulationId;
         $signalSignature = $this->buildSignalSignature(
             $routeId,
@@ -376,18 +378,162 @@ final class Eq60ReportComposer
             'career_environment_ids' => $selectedAssetIds['career_environment_ids'],
             'action_prescription_id' => $selectedAssetIds['action_prescription_id'],
             'selected_asset_ids' => $selectedAssetIds,
+            'personalization_route' => $this->publicPersonalizationRoute($route),
         ];
     }
 
     /**
      * @return array<string,mixed>
      */
-    private function selectPersonalizationRoute(array $routeMatrix, string $formulationId): array
+    private function selectPersonalizationRoute(array $routeMatrix, string $formulationId, array $dimensionScores, array $quality): array
     {
         $routes = is_array($routeMatrix['routes'] ?? null) ? $routeMatrix['routes'] : [];
+        if ($this->isList($routes)) {
+            $qualityLevel = strtoupper(trim((string) ($quality['level'] ?? '')));
+            $candidates = [];
+            foreach ($routes as $route) {
+                if (! is_array($route) || ! $this->matchesV2Route($route, $formulationId, $dimensionScores, $qualityLevel)) {
+                    continue;
+                }
+                $candidates[] = $route;
+            }
+            if ($candidates !== []) {
+                usort($candidates, static function (array $a, array $b): int {
+                    $priority = ((int) ($b['priority'] ?? 0)) <=> ((int) ($a['priority'] ?? 0));
+                    if ($priority !== 0) {
+                        return $priority;
+                    }
+
+                    return strcmp((string) ($a['route_id'] ?? ''), (string) ($b['route_id'] ?? ''));
+                });
+
+                return $candidates[0];
+            }
+
+            $fallback = array_values(array_filter($routes, static fn ($route): bool => is_array($route) && (string) ($route['formulation_id'] ?? '') === $formulationId));
+
+            return is_array($fallback[0] ?? null) ? $fallback[0] : [];
+        }
+
         $route = $routes[$formulationId] ?? null;
 
         return is_array($route) ? $route : [];
+    }
+
+    /**
+     * @param  array<string,mixed>  $route
+     * @param  array<string,array<string,mixed>>  $dimensionScores
+     */
+    private function matchesV2Route(array $route, string $formulationId, array $dimensionScores, string $qualityLevel): bool
+    {
+        $match = is_array($route['match'] ?? null) ? $route['match'] : [];
+        $qualityLevels = array_values(array_map(
+            static fn ($level): string => strtoupper(trim((string) $level)),
+            (array) ($match['quality_levels'] ?? [])
+        ));
+        if ($qualityLevels !== [] && ! in_array($qualityLevel, $qualityLevels, true)) {
+            return false;
+        }
+
+        $confidence = strtolower(trim((string) ($match['confidence'] ?? '')));
+        if ($confidence === 'low' && ! in_array($qualityLevel, ['C', 'D'], true)) {
+            return false;
+        }
+        if ($confidence === 'normal' && in_array($qualityLevel, ['C', 'D'], true)) {
+            return false;
+        }
+
+        $pattern = is_array($match['dimension_pattern'] ?? null) ? $match['dimension_pattern'] : [];
+        foreach ($pattern as $code => $expected) {
+            if (! $this->matchesDimensionPattern($dimensionScores, strtoupper((string) $code), (string) $expected)) {
+                return false;
+            }
+        }
+
+        $gapPattern = is_array($match['score_gap_pattern'] ?? null) ? $match['score_gap_pattern'] : [];
+        foreach ($gapPattern as $gapKey => $expected) {
+            if (! $this->matchesScoreGapPattern($dimensionScores, (string) $gapKey, (string) $expected)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param  array<string,array<string,mixed>>  $dimensionScores
+     */
+    private function matchesDimensionPattern(array $dimensionScores, string $code, string $expected): bool
+    {
+        $bucket = $this->dimensionBucket($dimensionScores, $code);
+
+        return match (strtolower(trim($expected))) {
+            'high' => $bucket === 'high',
+            'mid_high' => $bucket === 'mid_high',
+            'mid' => in_array($bucket, ['mid_low', 'mid_high'], true),
+            'mid_low' => $bucket === 'mid_low',
+            'low' => $bucket === 'low',
+            'low_or_mid_low' => in_array($bucket, ['low', 'mid_low'], true),
+            'low_or_mid' => in_array($bucket, ['low', 'mid_low', 'mid_high'], true),
+            'mid_or_high' => in_array($bucket, ['mid_low', 'mid_high', 'high'], true),
+            default => false,
+        };
+    }
+
+    /**
+     * @param  array<string,array<string,mixed>>  $dimensionScores
+     */
+    private function matchesScoreGapPattern(array $dimensionScores, string $gapKey, string $expected): bool
+    {
+        if ($expected !== '>=1_band' || ! str_contains($gapKey, '_minus_')) {
+            return true;
+        }
+        [$left, $right] = array_map('strtoupper', explode('_minus_', $gapKey, 2));
+
+        return $this->dimensionBucketRank($dimensionScores, $left) - $this->dimensionBucketRank($dimensionScores, $right) >= 1;
+    }
+
+    /**
+     * @param  array<string,array<string,mixed>>  $dimensionScores
+     */
+    private function dimensionBucket(array $dimensionScores, string $code): string
+    {
+        $node = is_array($dimensionScores[$code] ?? null) ? $dimensionScores[$code] : [];
+        $percentile = $this->nullableNumber($node['percentile'] ?? null);
+        if (is_numeric($percentile)) {
+            $value = (float) $percentile;
+            if ($value >= 65.0) {
+                return 'high';
+            }
+            if ($value >= 50.0) {
+                return 'mid_high';
+            }
+            if ($value > 25.0) {
+                return 'mid_low';
+            }
+
+            return 'low';
+        }
+
+        return match (strtolower(trim((string) ($node['band'] ?? '')))) {
+            'integrated', 'proficient' => 'high',
+            'stable' => 'mid_high',
+            'developing' => 'mid_low',
+            default => 'low',
+        };
+    }
+
+    /**
+     * @param  array<string,array<string,mixed>>  $dimensionScores
+     */
+    private function dimensionBucketRank(array $dimensionScores, string $code): int
+    {
+        return match ($this->dimensionBucket($dimensionScores, $code)) {
+            'high' => 3,
+            'mid_high' => 2,
+            'mid_low' => 1,
+            default => 0,
+        };
     }
 
     /**
@@ -398,13 +544,150 @@ final class Eq60ReportComposer
     private function selectedAssetIds(array $route, string $formulationId, array $dimensionScores, ?string $developmentLever): array
     {
         $selected = is_array($route['selected_asset_ids'] ?? null) ? $route['selected_asset_ids'] : [];
+        $selectedCore = trim((string) ($selected['core_formulation_id'] ?? $this->stripAssetPrefix((string) ($selected['core_formulation'] ?? ''), 'eq.formulation.')));
+        $selectedMechanisms = $selected['mechanism_ids'] ?? $selected['mechanisms'] ?? null;
+        $selectedScenes = $selected['scene_ids'] ?? $selected['scenes'] ?? null;
+        $selectedCareer = $selected['career_environment_ids'] ?? $selected['career_environment'] ?? null;
+        $selectedAction = trim((string) ($selected['action_prescription_id'] ?? $this->stripAssetPrefix((string) ($selected['action_prescription'] ?? ''), 'eq.action.')));
+
+        if (! in_array($selectedCore, $this->coreFormulationIds(), true)) {
+            $selectedCore = $formulationId;
+        }
+
+        if (! in_array($selectedAction, $this->actionPrescriptionIds(), true)) {
+            $selectedAction = $this->selectActionPrescriptionId($formulationId, $developmentLever);
+        }
+
+        $sceneSelection = $this->normalizeSceneSelection(is_array($selectedScenes) ? $selectedScenes : []);
 
         return [
-            'core_formulation_id' => trim((string) ($selected['core_formulation_id'] ?? $formulationId)) ?: $formulationId,
-            'mechanism_ids' => $this->nonEmptyStringList((array) ($selected['mechanism_ids'] ?? $this->selectMechanismIds($formulationId, $dimensionScores))),
-            'scene_ids' => $this->nonEmptyStringList((array) ($selected['scene_ids'] ?? $this->selectSceneIds($formulationId))),
-            'career_environment_ids' => $this->nonEmptyStringList((array) ($selected['career_environment_ids'] ?? $this->selectCareerEnvironmentIds($formulationId))),
-            'action_prescription_id' => trim((string) ($selected['action_prescription_id'] ?? $this->selectActionPrescriptionId($formulationId, $developmentLever))) ?: $this->selectActionPrescriptionId($formulationId, $developmentLever),
+            'core_formulation_id' => $selectedCore ?: $formulationId,
+            'mechanism_ids' => $this->normalizeMechanismIds(is_array($selectedMechanisms) ? $selectedMechanisms : $this->selectMechanismIds($formulationId, $dimensionScores)),
+            'scene_ids' => $sceneSelection['scene_ids'] !== [] ? $sceneSelection['scene_ids'] : $this->selectSceneIds($formulationId),
+            'scene_variant_ids' => $sceneSelection['scene_variant_ids'],
+            'career_environment_ids' => $this->normalizeCareerEnvironmentIds(is_array($selectedCareer) ? $selectedCareer : $this->selectCareerEnvironmentIds($formulationId)),
+            'action_prescription_id' => $selectedAction ?: $this->selectActionPrescriptionId($formulationId, $developmentLever),
+        ];
+    }
+
+    /**
+     * @param  list<mixed>  $values
+     * @return array{scene_ids:list<string>,scene_variant_ids:list<string>}
+     */
+    private function normalizeSceneSelection(array $values): array
+    {
+        $families = [];
+        $variants = [];
+        foreach ($values as $value) {
+            $id = trim((string) $value);
+            if ($id === '') {
+                continue;
+            }
+            if (str_starts_with($id, 'eq.scene.')) {
+                $variants[] = $id;
+                $parts = explode('.', $id);
+                if (isset($parts[2]) && trim($parts[2]) !== '') {
+                    $families[] = trim($parts[2]);
+                }
+
+                continue;
+            }
+            $families[] = $id;
+        }
+
+        return [
+            'scene_ids' => $this->nonEmptyStringList($families),
+            'scene_variant_ids' => $this->nonEmptyStringList($variants),
+        ];
+    }
+
+    /**
+     * @param  list<mixed>  $values
+     * @return list<string>
+     */
+    private function normalizeMechanismIds(array $values): array
+    {
+        return $this->nonEmptyStringList(array_map(function (mixed $value): string {
+            $id = trim((string) $value);
+            if (str_starts_with($id, 'eq.mechanism.')) {
+                $id = substr($id, strlen('eq.mechanism.'));
+                $parts = explode('.', $id);
+                if (count($parts) === 2) {
+                    return $parts[0].'_'.$parts[1];
+                }
+            }
+
+            return $id;
+        }, $values));
+    }
+
+    /**
+     * @param  list<mixed>  $values
+     * @return list<string>
+     */
+    private function normalizeCareerEnvironmentIds(array $values): array
+    {
+        return $this->nonEmptyStringList(array_map(function (mixed $value): string {
+            $id = trim((string) $value);
+            if (str_starts_with($id, 'eq.career_environment.')) {
+                $id = substr($id, strlen('eq.career_environment.'));
+                $parts = explode('.', $id);
+                if (count($parts) === 2) {
+                    return $parts[0].'_'.$parts[1];
+                }
+            }
+
+            return $id;
+        }, $values));
+    }
+
+    private function stripAssetPrefix(string $id, string $prefix): string
+    {
+        $id = trim($id);
+        if (str_starts_with($id, $prefix)) {
+            return substr($id, strlen($prefix));
+        }
+
+        return $id;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function coreFormulationIds(): array
+    {
+        return [
+            'balanced_integrated',
+            'high_empathy_low_recovery',
+            'aware_but_unregulated',
+            'calm_but_distant',
+            'relationship_first_self_later',
+            'self_clear_repair_weak',
+            'steady_collaborator',
+            'sensitive_absorber',
+            'developing_foundation',
+            'low_confidence_result',
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function actionPrescriptionIds(): array
+    {
+        return [
+            'emotion_labeling',
+            'pause_recovery',
+            'feedback_decompression',
+            'empathy_boundary',
+            'repair_after_conflict',
+            'express_without_escalation',
+            'support_without_rescuing',
+            'cold_to_warm_response',
+            'relationship_energy_management',
+            'conflict_deescalation',
+            'self_connection',
+            'retest_reflection',
         ];
     }
 
@@ -428,6 +711,11 @@ final class Eq60ReportComposer
             $dimensionStates[$code] = $this->dimensionState($dimensionScores, $code);
         }
 
+        $matchPattern = $this->routeMatchPatternLabel(data_get($route, 'match.dimension_pattern', ''));
+        if ($matchPattern === '' && $formulationId === 'low_confidence_result') {
+            $matchPattern = 'quality_low_overrides_dimension_pattern';
+        }
+
         return [
             'schema' => 'eq60.signal_signature.v1',
             'route_id' => $routeId,
@@ -437,7 +725,9 @@ final class Eq60ReportComposer
             'dimension_states' => $dimensionStates,
             'strongest_dimension' => $strongest,
             'development_lever' => $developmentLever,
-            'match_pattern' => (string) data_get($route, 'match.dimension_pattern', ''),
+            'match_pattern' => $matchPattern,
+            'route_priority' => (int) ($route['priority'] ?? 0),
+            'route_claim_risk' => (string) ($route['claim_risk'] ?? ''),
         ];
     }
 
@@ -906,6 +1196,7 @@ final class Eq60ReportComposer
                 'id' => (string) ($interpretation['route_id'] ?? ''),
                 'signal_signature' => is_array($interpretation['signal_signature'] ?? null) ? $interpretation['signal_signature'] : [],
                 'selected_asset_ids' => is_array($interpretation['selected_asset_ids'] ?? null) ? $interpretation['selected_asset_ids'] : [],
+                ...$this->localizedPersonalizationRoute((array) ($interpretation['personalization_route'] ?? []), $locale),
             ],
         ];
     }
@@ -1002,6 +1293,73 @@ final class Eq60ReportComposer
         }
 
         return null;
+    }
+
+    /**
+     * @param  array<string,mixed>  $route
+     * @return array<string,mixed>
+     */
+    private function publicPersonalizationRoute(array $route): array
+    {
+        return [
+            'route_id' => (string) ($route['route_id'] ?? ''),
+            'formulation_id' => (string) ($route['formulation_id'] ?? ''),
+            'priority' => (int) ($route['priority'] ?? 0),
+            'claim_risk' => (string) ($route['claim_risk'] ?? ''),
+            'why_this_route_exists' => is_array($route['why_this_route_exists'] ?? null) ? $route['why_this_route_exists'] : [],
+            'do_not_overread' => is_array($route['do_not_overread'] ?? null) ? $route['do_not_overread'] : [],
+            'commercial_depth' => is_array($route['commercial_depth'] ?? null) ? $route['commercial_depth'] : [],
+            'locales' => is_array($route['locales'] ?? null) ? $route['locales'] : [],
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $route
+     * @return array<string,mixed>
+     */
+    private function localizedPersonalizationRoute(array $route, string $locale): array
+    {
+        $primary = $this->packLoader->normalizeLocale($locale);
+        $localized = data_get($route, 'locales.'.$primary);
+        if (! is_array($localized)) {
+            $localized = data_get($route, 'locales.'.($primary === 'zh-CN' ? 'en' : 'zh-CN'), []);
+        }
+
+        return [
+            'formulation_id' => (string) ($route['formulation_id'] ?? ''),
+            'priority' => (int) ($route['priority'] ?? 0),
+            'claim_risk' => (string) ($route['claim_risk'] ?? ''),
+            'why_this_route_exists' => (string) data_get($route, 'why_this_route_exists.'.$primary, ''),
+            'do_not_overread' => (string) data_get($route, 'do_not_overread.'.$primary, ''),
+            'commercial_depth' => is_array($route['commercial_depth'] ?? null) ? $route['commercial_depth'] : [],
+            ...(is_array($localized) ? $localized : []),
+        ];
+    }
+
+    private function routeMatchPatternLabel(mixed $pattern): string
+    {
+        if (is_string($pattern)) {
+            return $pattern;
+        }
+        if (! is_array($pattern)) {
+            return '';
+        }
+        if ($pattern === []) {
+            return '';
+        }
+
+        ksort($pattern);
+
+        return implode('_', array_map(
+            static fn (string $code, mixed $state): string => strtoupper($code).'_'.strtolower(trim((string) $state)),
+            array_keys($pattern),
+            array_values($pattern)
+        ));
+    }
+
+    private function isList(array $values): bool
+    {
+        return array_is_list($values);
     }
 
     /**

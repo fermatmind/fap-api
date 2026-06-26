@@ -22730,9 +22730,13 @@
           "git diff --check"
         ],
         "notes": "Tests passed with existing file_get_contents warnings in EQ report/content tests."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "GitHub PR #2457 merged and origin/main contains merge commit bb67d5163da18420d6a1eedc450546c102a899f6."
       }
     },
-    "commit_sha": null,
+    "commit_sha": "e6eba0ba3c2708cc328c2b6421652c51a9f5125a",
     "depends_on": [
       "PR-EQ-V19-02"
     ],
@@ -22746,18 +22750,24 @@
         "at": "2026-06-26T16:01:47.525Z",
         "status": "local_checks_passed",
         "notes": "Implemented PR-EQ-V19-03 in clean worktree and passed local validations."
+      },
+      {
+        "at": "2026-06-26T16:27:55.837Z",
+        "status": "merged_reconciled",
+        "notes": "Verified PR #2457 merged; origin/main contains merge commit; local and remote task branches cleaned before PR-EQ-V19-04."
       }
     ],
     "failure_reason": null,
-    "local_cleanup_executed": false,
-    "merged_at": null,
-    "pr_url": null,
-    "remote_branch_deleted": false,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-06-26T16:09:02Z",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2457",
+    "remote_branch_deleted": true,
     "repo": "fap-api",
-    "status": "local_checks_passed",
+    "status": "merged",
     "title": "PR-EQ-V19-03 Reality scene variants and composer selection",
     "train_scope": "eq_v19_commercial_content_depth",
-    "notes": "Adds reality_scene_variants asset pack and composer selection with generic scene fallback. Keeps primary_scene_ids compatible and adds primary_scene_variant_ids for v1.9 frontend consumption."
+    "notes": "Adds reality_scene_variants asset pack and composer selection with generic scene fallback. Keeps primary_scene_ids compatible and adds primary_scene_variant_ids for v1.9 frontend consumption.",
+    "merge_commit_sha": "bb67d5163da18420d6a1eedc450546c102a899f6"
   },
   "PR-EQ-V19-04": {
     "base": "main",
@@ -22768,11 +22778,30 @@
         "status": "pass"
       },
       "dependency": {
-        "evidence": "Waiting for dependency merge.",
-        "status": "pending"
+        "status": "pass",
+        "evidence": "PR-EQ-V19-03 merged as #2457; origin/main contains merge commit bb67d5163da18420d6a1eedc450546c102a899f6."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:lint --pack=EQ_60 --pack-version=v1",
+          "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:compile --pack=EQ_60 --pack-version=v1",
+          "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ContentGateTest",
+          "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest",
+          "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60GoldenCasesTest",
+          "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60SubmitQualityContractTest",
+          "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ReportPaywallTest",
+          "ruby -e 'require \"yaml\"; YAML.load_file(\"docs/codex/pr-train.yaml\"); puts \"yaml-ok\"'",
+          "node -e 'JSON.parse(require(\"fs\").readFileSync(\"docs/codex/pr-train-state.json\",\"utf8\")); console.log(\"json-ok\")'",
+          "git diff --check"
+        ],
+        "evidence": "All PR-EQ-V19-04 local validation commands passed; Laravel reported warnings for fixture file_get_contents paths but no test failures."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "GitHub PR #2458 checks passed: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, and Semgrep OSS."
       }
     },
-    "commit_sha": null,
     "depends_on": [
       "PR-EQ-V19-03"
     ],
@@ -22781,17 +22810,43 @@
         "at": "2026-06-26T15:21:54.232288+00:00",
         "notes": "Initialized from explicit /goal authorization.",
         "status": "initialized"
+      },
+      {
+        "at": "2026-06-26T16:27:55.837Z",
+        "status": "local_checks_passed",
+        "notes": "Route matrix v2 implementation passed content lint/compile, EQ report/content/paywall contract tests, JSON/YAML parse, and git diff --check."
+      },
+      {
+        "at": "2026-06-26T16:28:43.077Z",
+        "status": "committed",
+        "notes": "Committed scoped implementation at undefined."
+      },
+      {
+        "at": "2026-06-26T16:29:09.942Z",
+        "status": "commit_sha_recorded",
+        "notes": "Recorded scoped implementation commit 11ae8cd43bc82a4955fd4f4760984e467fdb77a4."
+      },
+      {
+        "at": "2026-06-26T16:30:30.830Z",
+        "status": "pr_opened",
+        "notes": "Opened GitHub PR #2458 for PR-EQ-V19-04."
+      },
+      {
+        "at": "2026-06-26T16:35:55.572Z",
+        "status": "ready_to_merge",
+        "notes": "GitHub checks passed for PR #2458; marked ready to merge."
       }
     ],
     "failure_reason": null,
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2458",
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "initialized",
+    "status": "ready_to_merge",
     "title": "PR-EQ-V19-04 Personalization route matrix v2",
-    "train_scope": "eq_v19_commercial_content_depth"
+    "train_scope": "eq_v19_commercial_content_depth",
+    "commit_sha": "208a2b9a12eea2e0b3bcb3a9bc36a39c793063aa"
   },
   "PR-EQ-V19-05": {
     "base": "main",
