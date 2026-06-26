@@ -1,0 +1,54 @@
+{
+  "schema_version": "seo-ops-gaokao-v5-url-truth-eligibility-gate.v1",
+  "command": "php artisan seo-ops:gaokao-v5-url-truth-eligibility-gate",
+  "purpose": "Enable the minimum article discoverability eligibility required for article 55 to enter the article URL Truth handoff candidate pool.",
+  "supported_target": {
+    "article_id": 55,
+    "canonical_path": "/zh/articles/gaokao-major-choice-parent-conflict-riasec-course-checklist",
+    "page_entity_type": "article"
+  },
+  "inputs": {
+    "article": "Exact article id. Only 55 is supported.",
+    "expected_canonical_path": "Must equal /zh/articles/gaokao-major-choice-parent-conflict-riasec-course-checklist.",
+    "artifact_dir": "Directory for dry-run or execute evidence.",
+    "execute": "Optional. Defaults to dry-run.",
+    "confirm_eligibility": "Exact phrase required only with --execute.",
+    "json": "Emit machine-readable JSON."
+  },
+  "write_scope": [
+    "articles.sitemap_eligible",
+    "articles.llms_eligible"
+  ],
+  "preflight_requires": [
+    "article id is exactly 55",
+    "canonical path is exact",
+    "article is published",
+    "article is public",
+    "article is indexable",
+    "published revision exists and is published",
+    "article SEO meta exists",
+    "SEO meta is indexable",
+    "robots is index,follow"
+  ],
+  "negative_guarantees": {
+    "content_write": false,
+    "cms_publish": false,
+    "url_truth_write": false,
+    "schema_hreflang_write": false,
+    "search_channel_enqueue": false,
+    "indexnow_submit": false,
+    "baidu_submit": false,
+    "gsc_request_indexing": false,
+    "scheduler_activation": false,
+    "queue_worker_start": false,
+    "deploy": false,
+    "revalidation": false
+  },
+  "post_execute_expected_next_step": "Rerun seo-intel:url-truth-handoff export/import dry-run for page-type=article and the exact article 55 canonical path; expected planned_url_count=1.",
+  "separate_gates_required_after_this_command": [
+    "URL Truth bounded import write",
+    "Search Channel enqueue",
+    "queue approval",
+    "IndexNow live submit"
+  ]
+}

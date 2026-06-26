@@ -228,6 +228,7 @@ use App\Console\Commands\SeoOpsP0CtrArticleCmsUpdateWriterCommand;
 use App\Console\Commands\SeoOpsGaokaoV5CmsDraftGateCommand;
 use App\Console\Commands\SeoOpsGaokaoV5PropagationGateReadinessCommand;
 use App\Console\Commands\SeoOpsGaokaoV5PublishGateRepairCommand;
+use App\Console\Commands\SeoOpsGaokaoV5UrlTruthEligibilityGateCommand;
 use App\Console\Commands\SeoOpsZhArticleQualityControlledWriterCommand;
 use App\Console\Commands\SeoOpsZhArticleQualityRepairDryRunCommand;
 use App\Console\Commands\SeoOpsZhArticleQualityReadbackCommand;
@@ -481,6 +482,7 @@ class Kernel extends ConsoleKernel
         SeoOpsP0CtrArticleCmsUpdateWriterCommand::class,
         SeoOpsGaokaoV5CmsDraftGateCommand::class,
         SeoOpsGaokaoV5PublishGateRepairCommand::class,
+        SeoOpsGaokaoV5UrlTruthEligibilityGateCommand::class,
         SeoOpsGaokaoV5PropagationGateReadinessCommand::class,
         SeoOpsZhArticleQualityControlledWriterCommand::class,
         SeoOpsZhArticleQualityRepairDryRunCommand::class,
