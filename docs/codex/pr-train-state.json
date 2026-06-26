@@ -22578,6 +22578,9 @@
           "reason": "canonical fixture exact-match drift is intentionally handled by PR-EQ-V19-06; PR-EQ-V19-01 only imports directly mapped assets and does not regenerate fixtures"
         }
       ],
+      "github": {
+        "status": "pending"
+      },
       "local": [
         {
           "cmd": "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
@@ -22609,7 +22612,7 @@
         }
       ]
     },
-    "commit_sha": "660bcc27ce75020c03c0f3c83296ec1b1c91ed9a",
+    "commit_sha": "2523eb2b4abb0c7c9aa6a26ab359fbfb6e659a4b",
     "depends_on": [],
     "events": [
       {
@@ -22622,10 +22625,10 @@
     "local_cleanup_executed": false,
     "merged_at": null,
     "notes": "PR-EQ-V19-01 imports directly mapped v1.9 assets only; composer selection and canonical fixtures remain deferred to later declared PRs.",
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2455",
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "committed",
+    "status": "pr_open",
     "title": "PR-EQ-V19-01 Direct EQ v1.9 asset import",
     "train_scope": "eq_v19_commercial_content_depth"
   },
