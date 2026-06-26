@@ -271,17 +271,43 @@ final class MbtiReadPathParityContractTest extends TestCase
         );
 
         $this->assertStringStartsWith('%PDF-1.4', $pdf['binary']);
-        $this->assertStringContainsString('FermatMind MBTI Full Report', $pdf['binary']);
-        $this->assertStringContainsString('Personality type: INTJ-A', $pdf['binary']);
-        $this->assertStringContainsString('Dimension profile', $pdf['binary']);
-        $this->assertStringContainsString('Career direction summary', $pdf['binary']);
-        $this->assertStringContainsString('Growth focus summary', $pdf['binary']);
-        $this->assertStringContainsString('Relationship style summary', $pdf['binary']);
+        $this->assertStringContainsString('MPDFAA+', $pdf['binary']);
+        $this->assertGreaterThan(2, $this->pdfPageObjectCount($pdf['binary']));
+        $this->assertPdfContainsText($pdf['binary'], 'MBTI Full Personality Report');
+        $this->assertPdfContainsText($pdf['binary'], 'Personality type');
+        $this->assertPdfContainsText($pdf['binary'], 'INTJ-A');
+        $this->assertPdfContainsText($pdf['binary'], 'Dimension explanation');
+        $this->assertPdfContainsText($pdf['binary'], 'Career direction');
+        $this->assertPdfContainsText($pdf['binary'], 'Growth plan');
+        $this->assertPdfContainsText($pdf['binary'], 'Relationships and communication');
+        $this->assertPdfContainsText($pdf['binary'], 'How to use this report');
         $this->assertStringNotContainsString('Attempt ID:', $pdf['binary']);
         $this->assertStringNotContainsString('Locked:', $pdf['binary']);
         $this->assertStringNotContainsString('Variant:', $pdf['binary']);
+        $this->assertPdfDoesNotContainText($pdf['binary'], 'Attempt ID');
+        $this->assertPdfDoesNotContainText($pdf['binary'], 'Locked');
+        $this->assertPdfDoesNotContainText($pdf['binary'], 'Variant');
+        $this->assertPdfDoesNotContainText($pdf['binary'], 'Quality Level');
         $this->assertStringNotContainsString($attemptId, $pdf['binary']);
         $this->assertStringNotContainsString($attemptId, $pdfService->fileNameForAttempt($attempt, [], $result));
+    }
+
+    private function assertPdfContainsText(string $pdfBinary, string $text): void
+    {
+        $this->assertStringContainsString(mb_convert_encoding($text, 'UTF-16BE', 'UTF-8'), $pdfBinary);
+    }
+
+    private function assertPdfDoesNotContainText(string $pdfBinary, string $text): void
+    {
+        $this->assertStringNotContainsString($text, $pdfBinary);
+        $this->assertStringNotContainsString(mb_convert_encoding($text, 'UTF-16BE', 'UTF-8'), $pdfBinary);
+    }
+
+    private function pdfPageObjectCount(string $pdfBinary): int
+    {
+        preg_match_all('/\/Type\s*\/Page\b/', $pdfBinary, $matches);
+
+        return count($matches[0]);
     }
 
     private function seedScales(): void

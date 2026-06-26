@@ -131,6 +131,50 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: MBTI-PDF-PRODUCT-03
+    repo: fap-api
+    depends_on: [MBTI-PDF-PRODUCT-02]
+    branch: codex/mbti-pdf-product-03-pagination-brand
+    title: "MBTI-PDF-PRODUCT-03: add MBTI PDF pagination and brand styling"
+    train_scope: mbti_pdf_product
+    status: user_authorized
+    scope:
+      - Use the MBTI PDF payload authority and document chapters to render both Chinese and English reports through mPDF HTML.
+      - Add formal cover, page headers and footers, page numbers, chapter pagination, dimension bars, brand color, and A4-readable layout.
+      - Add focused PHPUnit coverage proving the PDF is multi-page, contains user-readable chapter content, and omits internal attempt, lock, variant, quality, raw-score, debug, and path fields.
+      - Keep cache surface version, artifact cache keys, public route paths, frontend behavior, CMS, search, sitemap, llms, and deployment unchanged for later PRs.
+    allowed_paths:
+      - backend/app/Services/Report/Pdf/ReportPdfDocumentService.php
+      - backend/app/Services/Report/Pdf/Mbti/**
+      - backend/tests/Feature/V0_3/MbtiReadPathParityContractTest.php
+      - backend/tests/Feature/V0_3/AttemptPublicReportPdfParityTest.php
+      - backend/tests/Unit/Services/Report/Pdf/Mbti/**
+      - backend/tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web.
+      - Change public API route paths, frontend download behavior, CMS, sitemap, llms, canonical, noindex, JSON-LD, search submission, scheduler, queue, secrets, staging deploy, or production deploy.
+      - Change PDF surface version, artifact cache key, filename behavior, report-access contract, or cache invalidation; those belong to MBTI-PDF-PRODUCT-04.
+      - Write CMS, run production import, run production smoke, or widen PDF content authority beyond the backend MBTI PDF payload.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=MbtiReadPathParityContractTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=AttemptPublicReportPdfParityTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Report/Pdf/Mbti/MbtiPdfPayloadBuilderTest.php --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/Report/Pdf/ReportPdfDocumentService.php app/Services/Report/Pdf/Mbti tests/Feature/V0_3/MbtiReadPathParityContractTest.php tests/Feature/V0_3/AttemptPublicReportPdfParityTest.php tests/Unit/Services/Report/Pdf/Mbti
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: PR-EQ-ASSET-02
     repo: fap-api
     depends_on: [PR-EQ-ASSET-01]
