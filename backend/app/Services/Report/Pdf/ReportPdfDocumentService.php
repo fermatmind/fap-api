@@ -7,6 +7,8 @@ namespace App\Services\Report\Pdf;
 use App\Models\Attempt;
 use App\Models\ReportSnapshot;
 use App\Models\Result;
+use Mpdf\Mpdf;
+use Mpdf\Output\Destination;
 
 final class ReportPdfDocumentService
 {
@@ -448,7 +450,7 @@ final class ReportPdfDocumentService
             ?? now()->format('Y-m-d');
 
         if ($isChinese) {
-            return $this->buildFormalPdfDocument(
+            return $this->buildMpdfHtmlDocument(
                 '费马测试 MBTI 完整报告',
                 [
                     '人格类型' => $typeCode,
@@ -459,7 +461,7 @@ final class ReportPdfDocumentService
                     [
                         'heading' => '核心画像',
                         'body' => [
-                            sprintf('你的人格类型是 %s。报告基于本次 MBTI 作答结果，帮助你理解能量来源、信息处理、决策方式、生活节奏和压力反应。', $typeCode),
+                            sprintf('你的人格类型是 %s. 这份报告基于本次 MBTI 作答结果，帮助你理解能量来源、信息处理、决策方式、生活节奏和压力反应。', $typeCode),
                         ],
                     ],
                     [
@@ -748,6 +750,87 @@ final class ReportPdfDocumentService
     }
 
     /**
+     * @param  array<string,string>  $summary
+     * @param  list<array{heading:string,body:list<string>}>  $sections
+     */
+    private function buildMpdfHtmlDocument(
+        string $title,
+        array $summary,
+        array $sections,
+        string $footer,
+        bool $isChinese
+    ): string {
+        $tempDir = storage_path('framework/cache/mpdf');
+        if (! is_dir($tempDir)) {
+            mkdir($tempDir, 0775, true);
+        }
+
+        $mpdf = new Mpdf([
+            'mode' => 'utf-8',
+            'format' => 'A4',
+            'autoScriptToLang' => true,
+            'autoLangToFont' => true,
+            'tempDir' => $tempDir,
+            'margin_left' => 18,
+            'margin_right' => 18,
+            'margin_top' => 18,
+            'margin_bottom' => 16,
+            'margin_footer' => 8,
+        ]);
+        $mpdf->SetTitle($title);
+        $mpdf->SetAuthor('FermatMind');
+        $mpdf->SetCreator('FermatMind Report PDF');
+        $mpdf->SetHTMLFooter(
+            '<table width="100%" style="border-top:1px solid #d9eadf;color:#64748b;font-size:9pt;padding-top:6px;">'
+            .'<tr><td width="50%" align="left">'.$this->escapeHtml($footer).'</td>'
+            .'<td width="50%" align="right">{PAGENO}</td></tr></table>'
+        );
+        $mpdf->WriteHTML($this->mbtiReportHtml($title, $summary, $sections, $isChinese));
+
+        return $mpdf->Output('', Destination::STRING_RETURN);
+    }
+
+    /**
+     * @param  array<string,string>  $summary
+     * @param  list<array{heading:string,body:list<string>}>  $sections
+     */
+    private function mbtiReportHtml(string $title, array $summary, array $sections, bool $isChinese): string
+    {
+        $fontStack = $isChinese
+            ? 'sans-serif'
+            : 'DejaVu Sans, Arial, sans-serif';
+        $html = '<html><head><meta charset="utf-8"><style>'
+            .'body{font-family:'.$fontStack.';color:#172033;font-size:12pt;line-height:1.55;}'
+            .'.cover{border-top:5px solid #1b7f5c;padding-top:18px;margin-bottom:22px;}'
+            .'h1{font-size:26pt;margin:0 0 14px 0;color:#0f172a;}'
+            .'h2{font-size:15pt;margin:20px 0 8px 0;color:#123d34;border-bottom:1px solid #d9eadf;padding-bottom:5px;}'
+            .'.summary{background:#edf8f2;border:1px solid #bfe9d0;border-radius:8px;padding:12px 14px;margin:12px 0 18px 0;}'
+            .'.summary-row{margin:4px 0;}'
+            .'.label{font-weight:bold;color:#315047;}'
+            .'p{margin:0 0 8px 0;}'
+            .'ul{margin:0 0 0 18px;padding:0;}'
+            .'li{margin:4px 0;}'
+            .'</style></head><body>';
+        $html .= '<div class="cover"><h1>'.$this->escapeHtml($title).'</h1></div>';
+        $html .= '<div class="summary">';
+        foreach ($summary as $label => $value) {
+            $html .= '<div class="summary-row"><span class="label">'.$this->escapeHtml($label).':</span> '.$this->escapeHtml($value).'</div>';
+        }
+        $html .= '</div>';
+
+        foreach ($sections as $section) {
+            $html .= '<h2>'.$this->escapeHtml((string) $section['heading']).'</h2>';
+            $html .= '<ul>';
+            foreach ($section['body'] as $paragraph) {
+                $html .= '<li>'.$this->escapeHtml($paragraph).'</li>';
+            }
+            $html .= '</ul>';
+        }
+
+        return $html.'</body></html>';
+    }
+
+    /**
      * @param  list<string>  $operations
      */
     private function appendPdfText(array &$operations, int $x, int $y, string $text, int $size, bool $useCjkFont): void
@@ -866,6 +949,11 @@ final class ReportPdfDocumentService
     private function textSlice(string $value, int $start, ?int $length = null): string
     {
         return mb_substr($value, $start, $length, 'UTF-8');
+    }
+
+    private function escapeHtml(string $value): string
+    {
+        return htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
     }
 
     private function sanitizePdfText(string $value): string

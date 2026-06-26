@@ -224,8 +224,10 @@ final class MbtiReadPathParityContractTest extends TestCase
             $result
         );
 
-        $this->assertStringContainsString($this->utf16Hex('INTJ-A'), $pdf['binary']);
-        $this->assertStringContainsString($this->utf16Hex('费马测试 MBTI 完整报告'), $pdf['binary']);
+        $this->assertStringStartsWith('%PDF-1.4', $pdf['binary']);
+        $this->assertStringContainsString('MPDFAA+', $pdf['binary']);
+        $this->assertStringNotContainsString('STSong-Light', $pdf['binary']);
+        $this->assertStringNotContainsString('UniGB-UCS2-H', $pdf['binary']);
         $this->assertStringNotContainsString('Attempt ID:', $pdf['binary']);
         $this->assertStringNotContainsString('Quality Level:', $pdf['binary']);
         $this->assertStringNotContainsString('Scale:', $pdf['binary']);
@@ -509,10 +511,5 @@ final class MbtiReadPathParityContractTest extends TestCase
                 'updated_at' => now(),
             ],
         ]);
-    }
-
-    private function utf16Hex(string $value): string
-    {
-        return strtoupper(bin2hex(mb_convert_encoding($value, 'UTF-16BE', 'UTF-8')));
     }
 }
