@@ -224,7 +224,62 @@ final class MbtiReadPathParityContractTest extends TestCase
             $result
         );
 
-        $this->assertStringContainsString('Quality Level: B', $pdf['binary']);
+        $this->assertStringContainsString($this->utf16Hex('INTJ-A'), $pdf['binary']);
+        $this->assertStringContainsString($this->utf16Hex('费马测试 MBTI 完整报告'), $pdf['binary']);
+        $this->assertStringNotContainsString('Attempt ID:', $pdf['binary']);
+        $this->assertStringNotContainsString('Quality Level:', $pdf['binary']);
+        $this->assertStringNotContainsString('Scale:', $pdf['binary']);
+        $this->assertStringNotContainsString('Variant:', $pdf['binary']);
+        $this->assertStringNotContainsString($attemptId, $pdfService->fileNameForAttempt(Attempt::query()->findOrFail($attemptId), [], $result));
+    }
+
+    public function test_mbti_pdf_uses_english_reader_facing_content_without_internal_fields(): void
+    {
+        $this->seedScales();
+        Config::set('fap_experiments.experiments', []);
+
+        $anonId = 'mbti_pdf_en_anon';
+        $attemptId = $this->createMbtiAttemptWithResult($anonId);
+        Attempt::query()->whereKey($attemptId)->update([
+            'locale' => 'en-US',
+            'region' => 'US',
+            'dir_version' => 'MBTI-EN-v0.3',
+        ]);
+
+        $attempt = Attempt::query()->findOrFail($attemptId);
+        $result = Result::query()->where('attempt_id', $attemptId)->firstOrFail();
+
+        /** @var ReportPdfDocumentService $pdfService */
+        $pdfService = app(ReportPdfDocumentService::class);
+        $pdf = $pdfService->getOrGenerate(
+            $attempt,
+            [
+                'variant' => 'full',
+                'locked' => false,
+                'report' => [
+                    'sections' => [
+                        ['key' => 'traits'],
+                        ['key' => 'career'],
+                        ['key' => 'growth'],
+                        ['key' => 'relationships'],
+                    ],
+                ],
+            ],
+            $result
+        );
+
+        $this->assertStringStartsWith('%PDF-1.4', $pdf['binary']);
+        $this->assertStringContainsString('FermatMind MBTI Full Report', $pdf['binary']);
+        $this->assertStringContainsString('Personality type: INTJ-A', $pdf['binary']);
+        $this->assertStringContainsString('Dimension profile', $pdf['binary']);
+        $this->assertStringContainsString('Career direction summary', $pdf['binary']);
+        $this->assertStringContainsString('Growth focus summary', $pdf['binary']);
+        $this->assertStringContainsString('Relationship style summary', $pdf['binary']);
+        $this->assertStringNotContainsString('Attempt ID:', $pdf['binary']);
+        $this->assertStringNotContainsString('Locked:', $pdf['binary']);
+        $this->assertStringNotContainsString('Variant:', $pdf['binary']);
+        $this->assertStringNotContainsString($attemptId, $pdf['binary']);
+        $this->assertStringNotContainsString($attemptId, $pdfService->fileNameForAttempt($attempt, [], $result));
     }
 
     private function seedScales(): void
@@ -454,5 +509,10 @@ final class MbtiReadPathParityContractTest extends TestCase
                 'updated_at' => now(),
             ],
         ]);
+    }
+
+    private function utf16Hex(string $value): string
+    {
+        return strtoupper(bin2hex(mb_convert_encoding($value, 'UTF-16BE', 'UTF-8')));
     }
 }
