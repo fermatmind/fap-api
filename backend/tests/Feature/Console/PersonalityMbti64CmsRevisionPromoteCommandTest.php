@@ -31,6 +31,15 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         '/zh/personality/intj-t',
     ];
 
+    private const NEXT_BATCH_6_URLS = [
+        'https://fermatmind.com/zh/personality/intp-a',
+        'https://fermatmind.com/en/personality/intp-a',
+        'https://fermatmind.com/zh/personality/esfp-a',
+        'https://fermatmind.com/en/personality/esfp-a',
+        'https://fermatmind.com/en/personality/enfj-a',
+        'https://fermatmind.com/zh/personality/enfj-a',
+    ];
+
     public function test_dry_run_lists_eight_latest_revisions_without_live_writes(): void
     {
         $this->seedTargets();
@@ -337,6 +346,38 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         $this->assertSame(0, PersonalityProfileSection::query()->count());
     }
 
+    public function test_dry_run_supports_fixed_next_batch_six_handoff_subset_without_live_writes(): void
+    {
+        $this->seedProjectionTargets();
+        $packagePath = $this->writePackage($this->nextBatchSixPackage());
+        $this->createNextBatchSixDraftRevisions($packagePath);
+
+        $exitCode = Artisan::call('personality:mbti64-cms-revision-promote', [
+            '--package' => $packagePath,
+            '--dry-run' => true,
+            '--next-batch-6' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertTrue($payload['ok']);
+        $this->assertTrue($payload['dry_run']);
+        $this->assertFalse($payload['write']);
+        $this->assertSame('next_batch_6', $payload['contract']['subset']['mode']);
+        $this->assertFalse($payload['contract']['subset']['arbitrary_url_subset_allowed']);
+        $this->assertSame(self::NEXT_BATCH_6_URLS, $payload['contract']['subset']['allowed_urls']);
+        $this->assertSame(6, $payload['row_count']);
+        $this->assertSame(6, $payload['variant_row_count']);
+        $this->assertSame(0, $payload['comparison_row_count']);
+        $this->assertSame(6, $payload['would_promote_count']);
+        $this->assertSame(self::NEXT_BATCH_6_URLS, array_column($payload['rows'], 'url'));
+        $this->assertFalse($payload['writes_committed']);
+        $this->assertSame(0, PersonalityProfileVariantSeoMeta::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantSection::query()->count());
+        $this->assertSame(0, PersonalityProfileSection::query()->count());
+    }
+
     public function test_write_promotes_eighty_eight_agent_projection_revisions_without_index_search_side_effects(): void
     {
         $targets = $this->seedProjectionTargets();
@@ -433,6 +474,42 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         $this->assertSame(0, PersonalityProfileSection::query()->where('section_key', 'mbti64_comparison_a_vs_t')->count());
 
         foreach (['en|ENFP-A', 'zh-CN|ISTP-A', 'en|ESFJ-A', 'zh-CN|ESFJ-A', 'en|INTP-A'] as $targetKey) {
+            PersonalityProfileVariantSeoMeta::query()
+                ->where('personality_profile_variant_id', (int) $targets[$targetKey]->id)
+                ->firstOrFail();
+        }
+
+        $this->assertNull(PersonalityProfileVariantSeoMeta::query()
+            ->where('personality_profile_variant_id', (int) $targets['en|ENTJ-A']->id)
+            ->first());
+        $this->assertNull(PersonalityProfileVariantSeoMeta::query()
+            ->where('personality_profile_variant_id', (int) $targets['zh-CN|ENFP-A']->id)
+            ->first());
+    }
+
+    public function test_write_promotes_only_fixed_next_batch_six_handoff_subset(): void
+    {
+        $targets = $this->seedProjectionTargets();
+        $packagePath = $this->writePackage($this->nextBatchSixPackage());
+        $this->createNextBatchSixDraftRevisions($packagePath);
+        $options = $this->promoteWriteOptions($packagePath);
+        $options['--next-batch-6'] = true;
+
+        $exitCode = Artisan::call('personality:mbti64-cms-revision-promote', $options);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertTrue($payload['ok']);
+        $this->assertTrue($payload['write']);
+        $this->assertSame('next_batch_6', $payload['contract']['subset']['mode']);
+        $this->assertSame(6, $payload['row_count']);
+        $this->assertSame(6, $payload['variant_row_count']);
+        $this->assertSame(0, $payload['comparison_row_count']);
+        $this->assertSame(6, $payload['promoted_count']);
+        $this->assertSame(6, PersonalityProfileVariantSeoMeta::query()->count());
+        $this->assertSame(0, PersonalityProfileSection::query()->where('section_key', 'mbti64_comparison_a_vs_t')->count());
+
+        foreach (['zh-CN|INTP-A', 'en|INTP-A', 'zh-CN|ESFP-A', 'en|ESFP-A', 'en|ENFJ-A', 'zh-CN|ENFJ-A'] as $targetKey) {
             PersonalityProfileVariantSeoMeta::query()
                 ->where('personality_profile_variant_id', (int) $targets[$targetKey]->id)
                 ->firstOrFail();
@@ -550,6 +627,38 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         $this->assertSame(0, PersonalityProfileSection::query()->count());
     }
 
+    public function test_next_batch_six_subset_fails_closed_when_fixed_url_is_missing_or_extra_url_is_present(): void
+    {
+        $this->seedProjectionTargets();
+        $package = $this->nextBatchSixPackage();
+        $package['recommendations'][0]['target_url'] = 'https://fermatmind.com/en/personality/entj-a';
+        $package['summary']['recommendation_count'] = 6;
+
+        $packagePath = $this->writePackage($package);
+
+        $exitCode = Artisan::call('personality:mbti64-cms-revision-promote', [
+            '--package' => $packagePath,
+            '--dry-run' => true,
+            '--next-batch-6' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode, Artisan::output());
+        $this->assertFalse($payload['ok']);
+        $this->assertContains('next_batch_6_url_set_mismatch', array_map(
+            static fn (array $error): string => (string) ($error['code'] ?? ''),
+            $payload['errors'] ?? []
+        ));
+        $this->assertContains('next_batch_6_subset_incomplete', array_map(
+            static fn (array $error): string => (string) ($error['code'] ?? ''),
+            $payload['errors'] ?? []
+        ));
+        $this->assertSame(0, PersonalityProfileVariantSeoMeta::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantSection::query()->count());
+        $this->assertSame(0, PersonalityProfileSection::query()->count());
+    }
+
     public function test_agent_projection_subset_modes_are_mutually_exclusive(): void
     {
         $this->seedProjectionTargets();
@@ -561,6 +670,7 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
             '--dry-run' => true,
             '--visible-query-backed-3' => true,
             '--fresh-query-backed-5' => true,
+            '--next-batch-6' => true,
             '--json' => true,
         ]);
 
@@ -852,6 +962,83 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         $this->assertSame(0, $exitCode, Artisan::output());
     }
 
+    private function createNextBatchSixDraftRevisions(string $packagePath): void
+    {
+        $sourceSha256 = hash_file('sha256', $packagePath);
+        $package = json_decode((string) File::get($packagePath), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertIsArray($package);
+
+        foreach ((array) ($package['recommendations'] ?? []) as $recommendation) {
+            $this->assertIsArray($recommendation);
+            $url = (string) ($recommendation['target_url'] ?? '');
+            $path = (string) (parse_url($url, PHP_URL_PATH) ?: '');
+            $this->assertMatchesRegularExpression('#^/(?<prefix>en|zh)/personality/(?<type>[a-z]{4})-(?<variant>a|t)$#i', $path);
+            preg_match('#^/(?<prefix>en|zh)/personality/(?<type>[a-z]{4})-(?<variant>a|t)$#i', $path, $matches);
+            $locale = $matches['prefix'] === 'zh' ? 'zh-CN' : 'en';
+            $canonicalTypeCode = strtoupper((string) $matches['type']);
+            $variantCode = strtoupper((string) $matches['variant']);
+            $runtimeTypeCode = $canonicalTypeCode.'-'.$variantCode;
+
+            $profile = PersonalityProfile::query()
+                ->where('locale', $locale)
+                ->where('canonical_type_code', $canonicalTypeCode)
+                ->firstOrFail();
+            $variant = PersonalityProfileVariant::query()
+                ->where('personality_profile_id', (int) $profile->id)
+                ->where('runtime_type_code', $runtimeTypeCode)
+                ->firstOrFail();
+            $fields = $this->firstClassFieldsForRecommendation($recommendation, $locale);
+            $latestRevisionNo = (int) PersonalityProfileVariantRevision::query()
+                ->where('personality_profile_variant_id', (int) $variant->id)
+                ->max('revision_no');
+
+            PersonalityProfileVariantRevision::query()->create([
+                'personality_profile_variant_id' => (int) $variant->id,
+                'revision_no' => $latestRevisionNo + 1,
+                'snapshot_json' => [
+                    'mbti64_agent_projection_draft_v1' => [
+                        'source' => [
+                            'artifact' => 'PERSONALITY-AGENT-OPERATIONS-NEXT-BATCH-6-HANDOFF-01',
+                            'status' => 'pass',
+                            'source_sha256' => $sourceSha256,
+                            'qa_artifact' => 'PERSONALITY-AGENT-OPERATIONS-NEXT-BATCH-6-HANDOFF-QA-01',
+                            'qa_source_sha256' => str_repeat('a', 64),
+                            'qa_final_decision' => 'PASS_READY_FOR_APPROVAL_REVIEW',
+                        ],
+                        'identity' => [
+                            'url' => $url,
+                            'path' => $path,
+                            'locale' => $locale,
+                            'page_type' => 'variant',
+                            'canonical_type_code' => $canonicalTypeCode,
+                            'variant_code' => $variantCode,
+                            'runtime_type_code' => $runtimeTypeCode,
+                        ],
+                        'first_class_draft_fields' => $fields,
+                        'structured_metadata' => [
+                            'qa_result' => [
+                                'decision' => 'PASS_READY_FOR_APPROVAL_REVIEW',
+                                'blockers' => [],
+                            ],
+                        ],
+                        'safety_holds' => [
+                            'draft_only' => true,
+                            'publish_attempted' => false,
+                            'index_attempted' => false,
+                            'sitemap_llms_release_attempted' => false,
+                            'search_release_attempted' => false,
+                            'runtime_content_updated' => false,
+                        ],
+                        'raw_recommendation' => $recommendation,
+                    ],
+                ],
+                'note' => 'next-batch-6 fixture draft: '.$path,
+                'created_by_admin_user_id' => null,
+                'created_at' => now(),
+            ]);
+        }
+    }
+
     private function reorderOnePromotedVisibleThreeJsonPayload(): void
     {
         $seo = PersonalityProfileVariantSeoMeta::query()->firstOrFail();
@@ -902,6 +1089,35 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
             'recommendations' => $recommendations,
             'blockers' => [],
             'warnings' => ['GSC_EVIDENCE_PENDING'],
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function nextBatchSixPackage(): array
+    {
+        $recommendations = [];
+        foreach (self::NEXT_BATCH_6_URLS as $url) {
+            $path = (string) (parse_url($url, PHP_URL_PATH) ?: '');
+            $recommendations[] = $this->projectionRecommendation($path);
+        }
+
+        return [
+            'artifact' => 'PERSONALITY-AGENT-OPERATIONS-NEXT-BATCH-6-HANDOFF-01',
+            'generated_at' => '2026-06-25T00:00:00Z',
+            'status' => 'pass',
+            'summary' => [
+                'recommendation_count' => 6,
+                'query_backed_count' => 3,
+                'bilingual_paired_counterpart_count' => 3,
+                'variant_pages' => 6,
+                'comparison_pages' => 0,
+            ],
+            'recommendations' => $recommendations,
+            'blockers' => [],
+            'warnings' => [],
+            'recommended_next_task' => 'PERSONALITY-AGENT-CMS-DRAFT-NEXT-BATCH-6-WRITE-01',
         ];
     }
 
@@ -1044,6 +1260,34 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
                 'bilingual_consistency_gate',
             ],
             'blocked_reason' => null,
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $recommendation
+     * @return array<string,mixed>
+     */
+    private function firstClassFieldsForRecommendation(array $recommendation, string $locale): array
+    {
+        $recommendations = is_array($recommendation['recommendations'] ?? null)
+            ? $recommendation['recommendations']
+            : [];
+
+        return [
+            'url' => (string) ($recommendation['target_url'] ?? ''),
+            'locale' => $locale,
+            'page_type' => 'variant',
+            'seo' => [
+                'title' => (string) ($recommendations['title']['recommended'] ?? ''),
+                'description' => (string) ($recommendations['description']['recommended'] ?? ''),
+                'h1' => (string) ($recommendations['h1']['recommended'] ?? ''),
+            ],
+            'content' => [
+                'quick_answer' => (string) ($recommendations['quick_answer']['recommended'] ?? ''),
+            ],
+            'faq' => array_values((array) ($recommendations['faq'] ?? [])),
+            'internal_links' => array_values((array) ($recommendations['internal_links'] ?? [])),
+            'differentiation_notes' => array_values((array) ($recommendations['differentiation_notes'] ?? [])),
         ];
     }
 
