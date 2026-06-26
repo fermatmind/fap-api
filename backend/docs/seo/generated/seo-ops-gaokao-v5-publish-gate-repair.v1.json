@@ -1,0 +1,49 @@
+{
+  "schema_version": "seo-ops-gaokao-v5-publish-gate-repair.v1",
+  "command": "php artisan seo-ops:gaokao-v5-publish-gate-repair",
+  "purpose": "Repair publish-gate metadata for one Gaokao v5 draft article so the standard controlled article publish dry-run can evaluate the draft without bypassing publish preflight.",
+  "default_mode": "dry_run",
+  "inputs": {
+    "package": "Required repaired Gaokao v5 SEO content package directory.",
+    "confirm-package-sha256": "Required SHA-256 of the package directory.",
+    "article": "Required exact draft article id.",
+    "revision-id": "Required exact working ArticleTranslationRevision id.",
+    "translation-group-id": "Required expected translation_group_id.",
+    "expected-zh-slug": "Required expected zh-CN slug.",
+    "reviewed-by": "Required for execute; admin user id recorded as editorial reviewer.",
+    "artifact-dir": "Required evidence output directory.",
+    "execute": "Optional. Without this flag, the command writes evidence only.",
+    "confirm-repair": "Required exact confirmation phrase when --execute is used.",
+    "json": "Optional JSON summary output."
+  },
+  "writes_when_execute": {
+    "article_translation_revisions": "Marks the locked working revision as approved and records reviewed_by, reviewed_at, and approved_at.",
+    "article_editorial_package_imports": "Updates the latest import gate row with complete references, graph, and answer surface metadata.",
+    "article_seo_meta": "Adds editorial_package_v1 CTA slots and visible FAQ metadata while preserving schema/hreflang/search holds.",
+    "article_tags": "Creates missing reader-facing tags from package tag suggestions.",
+    "article_tag_map": "Attaches package tags to the locked article."
+  },
+  "never_writes": [
+    "article publish state",
+    "article public/indexable flags",
+    "sitemap or llms eligibility",
+    "URL Truth",
+    "Search Channel queue",
+    "IndexNow/Baidu/GSC submissions",
+    "schema or hreflang enablement",
+    "frontend deploy or revalidation"
+  ],
+  "success_acceptance": {
+    "dry_run": {
+      "ok": true,
+      "status": "planned",
+      "evidence": "contains path, size, sha256, authority snapshot, planned metadata repair counts, required confirmation phrase"
+    },
+    "execute": {
+      "ok": true,
+      "status": "success",
+      "article_remains": "draft, non-public, non-indexable, no sitemap, no llms, no published_revision_id",
+      "next_gate": "php artisan articles:publish-controlled --article=<id> --dry-run --make-indexable --json"
+    }
+  }
+}
