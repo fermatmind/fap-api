@@ -4817,6 +4817,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isSeoOpsGaokaoV5UrlTruthEligibilityGateFile($file)) {
+                continue;
+            }
+
             if ($this->isArticleReleaseCloseoutFile($file)) {
                 continue;
             }
@@ -6347,6 +6351,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isArticleDiscoverabilityReleaseFile(string $file): bool
     {
         return $file === 'backend/app/Console/Commands/ArticleDiscoverabilityRelease.php';
+    }
+
+    private function isSeoOpsGaokaoV5UrlTruthEligibilityGateFile(string $file): bool
+    {
+        return $file === 'backend/app/Console/Commands/SeoOpsGaokaoV5UrlTruthEligibilityGateCommand.php';
     }
 
     private function isArticleReleaseCloseoutFile(string $file): bool
@@ -8737,7 +8746,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 return false;
             }
 
-            if (preg_match('/\b(ArticleDiscoverabilityRelease|ArticleEnsureSeoMetaBaseline|ArticleTaxonomyHygiene|ArticleUpdateExistingSeoContentPackage|ArticleSeoGateRollout|ContentReleaseRevalidate|SeoIntelSearchChannelQueueCommand|SeoIntelUrlTruthHandoffCommand)\b/u', $line) !== 1) {
+            if (preg_match('/\b(ArticleDiscoverabilityRelease|ArticleEnsureSeoMetaBaseline|ArticleTaxonomyHygiene|ArticleUpdateExistingSeoContentPackage|ArticleSeoGateRollout|ContentReleaseRevalidate|SeoIntelSearchChannelQueueCommand|SeoIntelUrlTruthHandoffCommand|SeoOpsGaokaoV5UrlTruthEligibilityGateCommand)\b/u', $line) !== 1) {
                 return false;
             }
         }
