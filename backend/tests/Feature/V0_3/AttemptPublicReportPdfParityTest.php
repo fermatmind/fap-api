@@ -147,11 +147,29 @@ final class AttemptPublicReportPdfParityTest extends TestCase
         $json->assertJsonPath('ok', true);
         $json->assertJsonPath('locked', true);
 
+        Storage::disk('local')->put(
+            "artifacts/pdf/MBTI/{$attemptId}/nohash/report_free.pdf",
+            'OLD_ONE_PAGE_MBTI_PDF_CACHE'
+        );
+
         $pdf = $this->withHeaders($headers)->get("/api/v0.3/attempts/{$attemptId}/report.pdf");
         $pdf->assertStatus(200);
         $pdf->assertHeader('Content-Type', 'application/pdf');
         $pdf->assertHeader('X-Report-Scale', 'MBTI');
         $pdf->assertHeader('X-Report-Locked', 'true');
+        $pdf->assertHeader('X-Pdf-Surface-Version', 'mbti.pdf_surface.v2');
+
+        $pdfBinary = (string) $pdf->getContent();
+        $this->assertStringStartsWith('%PDF-1.4', $pdfBinary);
+        $this->assertStringNotContainsString('OLD_ONE_PAGE_MBTI_PDF_CACHE', $pdfBinary);
+        $this->assertStringStartsWith(
+            'attachment; filename="fermatmind-mbti-report-',
+            (string) $pdf->headers->get('Content-Disposition')
+        );
+        $this->assertStringEndsWith('.pdf"', (string) $pdf->headers->get('Content-Disposition'));
+        Storage::disk('local')->assertExists(
+            "artifacts/pdf/MBTI/{$attemptId}/nohash-mbti.pdf_surface.v2/report_free.pdf"
+        );
     }
 
     public function test_public_mbti_report_pdf_still_requires_matching_attempt_subject(): void
