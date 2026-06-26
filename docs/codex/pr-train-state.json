@@ -62917,7 +62917,7 @@
     "repo": "fap-api",
     "branch": "codex/mbti-pdf-product-02-content-depth",
     "base": "main",
-    "status": "in_progress",
+    "status": "github_checks_pending",
     "train_scope": "mbti_pdf_product",
     "title": "MBTI-PDF-PRODUCT-02: expand MBTI PDF content depth",
     "depends_on": [
@@ -62953,8 +62953,8 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "681f04121e44777e8df379d622038e3c87f5585e",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2451",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -62968,6 +62968,11 @@
         "at": "2026-06-26T21:02:28+08:00",
         "status": "local_validated",
         "note": "Added formal MBTI PDF document chapters to the backend payload authority and focused tests for required chapters, English/Chinese language boundaries, and internal-field filtering. Local scoped checks and changed-file scope validation passed."
+      },
+      {
+        "at": "2026-06-26T21:04:49+08:00",
+        "status": "github_checks_pending",
+        "note": "Opened PR #2451 at https://github.com/fermatmind/fap-api/pull/2451. Waiting for required GitHub checks; no staging deploy wait, server verification, manual deploy, or production deploy included."
       }
     ]
   }
