@@ -294,7 +294,6 @@ class AttemptSubmitService
         if (IqResultPayloadRedactor::isIqScale($responseCodes['scale_code_legacy'], $responseCodes['scale_code_v2'])) {
             $payload = IqResultPayloadRedactor::redactAnswerKeys($payload);
             $compatScores = IqResultPayloadRedactor::redactAnswerKeys($compatScores);
-            $compatScoresPct = IqResultPayloadRedactor::redactAnswerKeys($compatScoresPct);
         }
 
         return [
