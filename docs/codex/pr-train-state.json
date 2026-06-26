@@ -62917,7 +62917,7 @@
     "repo": "fap-api",
     "branch": "codex/mbti-pdf-product-02-content-depth",
     "base": "main",
-    "status": "github_checks_pending",
+    "status": "ready_to_merge",
     "train_scope": "mbti_pdf_product",
     "title": "MBTI-PDF-PRODUCT-02: expand MBTI PDF content depth",
     "depends_on": [
@@ -62948,12 +62948,12 @@
         "evidence": "Changed files are limited to MBTI-PDF-PRODUCT-02 scope: backend/app/Services/Report/Pdf/Mbti/MbtiPdfPayloadBuilder.php, backend/tests/Unit/Services/Report/Pdf/Mbti/MbtiPdfPayloadBuilderTest.php, and authorized docs/codex train metadata. No fap-web, public route, CMS, DB migration, sitemap, llms, canonical, noindex, JSON-LD, search, scheduler, queue, cache-version, PDF renderer pagination/style, staging deploy, or production deploy change."
       },
       "github": {
-        "status": "pending",
-        "evidence": null
+        "status": "pass",
+        "evidence": "GitHub checks passed for PR #2451 head 0ec6c619d05539a19ff159f844e0b737db82290e: hygiene, supply-chain, content-pack-build-validate, Semgrep, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 all succeeded. mergeStateStatus was CLEAN."
       }
     },
     "failure_reason": null,
-    "commit_sha": "681f04121e44777e8df379d622038e3c87f5585e",
+    "commit_sha": "0ec6c619d05539a19ff159f844e0b737db82290e",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2451",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -62973,6 +62973,11 @@
         "at": "2026-06-26T21:04:49+08:00",
         "status": "github_checks_pending",
         "note": "Opened PR #2451 at https://github.com/fermatmind/fap-api/pull/2451. Waiting for required GitHub checks; no staging deploy wait, server verification, manual deploy, or production deploy included."
+      },
+      {
+        "at": "2026-06-26T21:11:58+08:00",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed for PR #2451 head 0ec6c619d05539a19ff159f844e0b737db82290e and mergeStateStatus was CLEAN. Ready for squash merge; no staging deploy wait, production deploy, CMS write, search, sitemap, llms, canonical, noindex, JSON-LD, queue, cache-version, or PDF renderer styling change included."
       }
     ]
   }
