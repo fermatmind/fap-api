@@ -22670,9 +22670,13 @@
           "cmd": "git diff --check",
           "status": "passed"
         }
-      ]
+      ],
+      "github_checks": {
+        "status": "pass",
+        "evidence": "All GitHub checks passed before squash merge."
+      }
     },
-    "commit_sha": null,
+    "commit_sha": "de14a41d0bfc0fecf184d224c7a10504c72780ff",
     "depends_on": [
       "PR-EQ-V19-01"
     ],
@@ -22681,18 +22685,24 @@
         "at": "2026-06-26T15:21:54.232288+00:00",
         "notes": "Initialized from explicit /goal authorization.",
         "status": "initialized"
+      },
+      {
+        "at": "2026-06-26T16:01:47.525Z",
+        "status": "reconciled_merged",
+        "notes": "Verified PR #2456 merged, origin/main contains merge commit, branch cleanup completed before PR-EQ-V19-03."
       }
     ],
     "failure_reason": null,
-    "local_cleanup_executed": false,
-    "merged_at": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-06-26T15:52:28Z",
     "notes": "Adds result_page_depth_modules to compile/lint/composer payload. Canonical fixture full asset refresh remains scoped to PR-EQ-V19-06; contract test compares non-asset structure and asserts resolved depth modules directly.",
-    "pr_url": null,
-    "remote_branch_deleted": false,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2456",
+    "remote_branch_deleted": true,
     "repo": "fap-api",
-    "status": "local_checks_passed",
+    "status": "merged",
     "title": "PR-EQ-V19-02 Result page depth asset pack",
-    "train_scope": "eq_v19_commercial_content_depth"
+    "train_scope": "eq_v19_commercial_content_depth",
+    "merge_commit_sha": "2842c2be843b29b137528ae091f6c302ba24e2c3"
   },
   "PR-EQ-V19-03": {
     "base": "main",
@@ -22703,8 +22713,23 @@
         "status": "pass"
       },
       "dependency": {
-        "evidence": "Waiting for dependency merge.",
-        "status": "pending"
+        "status": "pass",
+        "evidence": "PR-EQ-V19-02 merged as #2456; origin/main contains merge commit 2842c2be843b29b137528ae091f6c302ba24e2c3."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:lint --pack=EQ_60 --pack-version=v1",
+          "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:compile --pack=EQ_60 --pack-version=v1",
+          "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ContentGateTest",
+          "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest",
+          "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60GoldenCasesTest",
+          "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ReportPaywallTest",
+          "ruby YAML parse for docs/codex/pr-train.yaml",
+          "node JSON parse for state and changed report asset files",
+          "git diff --check"
+        ],
+        "notes": "Tests passed with existing file_get_contents warnings in EQ report/content tests."
       }
     },
     "commit_sha": null,
@@ -22716,6 +22741,11 @@
         "at": "2026-06-26T15:21:54.232288+00:00",
         "notes": "Initialized from explicit /goal authorization.",
         "status": "initialized"
+      },
+      {
+        "at": "2026-06-26T16:01:47.525Z",
+        "status": "local_checks_passed",
+        "notes": "Implemented PR-EQ-V19-03 in clean worktree and passed local validations."
       }
     ],
     "failure_reason": null,
@@ -22724,9 +22754,10 @@
     "pr_url": null,
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "initialized",
+    "status": "local_checks_passed",
     "title": "PR-EQ-V19-03 Reality scene variants and composer selection",
-    "train_scope": "eq_v19_commercial_content_depth"
+    "train_scope": "eq_v19_commercial_content_depth",
+    "notes": "Adds reality_scene_variants asset pack and composer selection with generic scene fallback. Keeps primary_scene_ids compatible and adds primary_scene_variant_ids for v1.9 frontend consumption."
   },
   "PR-EQ-V19-04": {
     "base": "main",

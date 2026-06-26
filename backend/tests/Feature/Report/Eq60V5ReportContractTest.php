@@ -110,9 +110,25 @@ final class Eq60V5ReportContractTest extends TestCase
         $this->assertSame('EM_high_ER_low', (string) data_get($fixture, 'report.interpretation.signal_signature.match_pattern'));
         $this->assertNotEmpty((array) data_get($fixture, 'report.interpretation.primary_mechanism_ids'));
         $this->assertNotEmpty((array) data_get($fixture, 'report.interpretation.primary_scene_ids'));
+        $this->assertNotEmpty((array) data_get($fixture, 'report.interpretation.primary_scene_variant_ids'));
+        $this->assertSame(
+            'eq.scene.feedback.high_empathy_low_recovery.primary',
+            (string) data_get($fixture, 'report.interpretation.primary_scene_variant_ids.0')
+        );
+        $this->assertSame(
+            'eq.scene.feedback.high_empathy_low_recovery.primary',
+            (string) data_get($fixture, 'report.asset_refs.scene_variant_ids.0')
+        );
         $this->assertNotEmpty((array) data_get($fixture, 'report.interpretation.career_environment_ids'));
         $this->assertNotEmpty((array) data_get($fixture, 'report.assets.mechanisms'));
         $this->assertNotEmpty((array) data_get($fixture, 'report.assets.reality_scenes'));
+        $this->assertSame(
+            'eq.scene.feedback.high_empathy_low_recovery.primary',
+            (string) data_get($fixture, 'report.assets.reality_scenes.0.id')
+        );
+        $this->assertSame('feedback', (string) data_get($fixture, 'report.assets.reality_scenes.0.scene_family'));
+        $this->assertNotSame('', (string) data_get($fixture, 'report.assets.reality_scenes.0.micro_script'));
+        $this->assertNotEmpty((array) data_get($fixture, 'report.assets.reality_scenes.0.evidence_signals'));
         $this->assertNotEmpty((array) data_get($fixture, 'report.assets.career_environment'));
         $this->assertSame('eq.snapshot.high_empathy_low_recovery', (string) data_get($fixture, 'report.asset_refs.result_snapshot_id'));
         $this->assertNotSame('', (string) data_get($fixture, 'report.assets.result_snapshot.core_judgment'));
@@ -195,6 +211,9 @@ final class Eq60V5ReportContractTest extends TestCase
         $this->assertSame('aware_but_unregulated', (string) data_get($report, 'interpretation.route_id'));
         $this->assertSame('SA_high_ER_low', (string) data_get($report, 'interpretation.signal_signature.match_pattern'));
         $this->assertSame('SA_ER_high_low', (string) data_get($report, 'interpretation.primary_mechanism_ids.0'));
+        $this->assertSame('feedback', (string) data_get($report, 'interpretation.primary_scene_ids.0'));
+        $this->assertSame('eq.scene.feedback.aware_but_unregulated.primary', (string) data_get($report, 'interpretation.primary_scene_variant_ids.0'));
+        $this->assertSame('eq.scene.feedback.aware_but_unregulated.primary', (string) data_get($report, 'assets.reality_scenes.0.id'));
         $this->assertSame('pause_recovery', (string) data_get($report, 'interpretation.action_prescription_id'));
         $this->assertSame('pause_recovery', (string) data_get($report, 'interpretation.selected_asset_ids.action_prescription_id'));
         $this->assertSame('aware_but_unregulated', (string) data_get($report, 'asset_refs.personalization_route_id'));
@@ -388,6 +407,8 @@ final class Eq60V5ReportContractTest extends TestCase
     {
         unset($fixture['report']['asset_refs']);
         unset($fixture['report']['assets']);
+        unset($fixture['report']['interpretation']['primary_scene_variant_ids']);
+        unset($fixture['report']['interpretation']['selected_asset_ids']['scene_variant_ids']);
 
         return $fixture;
     }

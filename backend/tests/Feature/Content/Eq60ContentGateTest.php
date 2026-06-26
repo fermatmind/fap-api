@@ -64,6 +64,7 @@ final class Eq60ContentGateTest extends TestCase
             'core_formulations',
             'mechanism_map',
             'reality_translation',
+            'reality_scene_variants',
             'career_environment',
             'action_prescriptions',
             'cross_assessment_context',
