@@ -1,0 +1,1007 @@
+{
+  "artifact": "PERSONALITY-AGENT-OPERATIONS-NEXT-BATCH-6-HANDOFF-01",
+  "generated_at": "2026-06-25T15:02:24.263Z",
+  "status": "pass",
+  "final_decision": "PASS_NEXT_BATCH_6_HANDOFF_READY_FOR_APPROVAL_QUEUE_DRY_RUN",
+  "input_artifacts": {
+    "source_recommendations": "docs/seo/personality/mbti64-agent-expansion-88-recommendations-2026-06-21.json",
+    "source_recommendations_sha256": "c938f8ff04fe985fc14b52a6b049560673c6bcc9a26e6faac3a0fccdd78b0bf3",
+    "source_qa": "docs/seo/personality/mbti64-agent-expansion-88-qa-2026-06-21.json",
+    "source_qa_sha256": "b2912a8c586ab5acb8933456ee0c4537b7d69ea55112e4a5733ac9516073079c",
+    "selection": "docs/seo/personality/personality-agent-operations-next-batch-selection-2026-06-25.json"
+  },
+  "handoff_policy": {
+    "mode": "subset_existing_agent_recommendations_no_new_body_generation",
+    "framework": "mbti64",
+    "page_count": 6,
+    "query_backed_rule": "Use the 3 selected query-backed next-batch pages.",
+    "bilingual_pair_rule": "Add the opposite-locale counterpart for each selected MBTI type.",
+    "cms_write_policy": "not_allowed_from_this_artifact",
+    "approval_queue_policy": "dry_run_next; write_requires_separate_authorization"
+  },
+  "summary": {
+    "recommendation_count": 6,
+    "query_backed_count": 3,
+    "bilingual_paired_counterpart_count": 3,
+    "variant_pages": 6,
+    "comparison_pages": 0,
+    "source_qa_pass_count": 6
+  },
+  "recommendations": [
+    {
+      "recommendation_id": "personality-agent-next-batch-6:/zh/personality/intp-a",
+      "source_recommendation_id": "mbti64-agent-expansion-88:/zh/personality/intp-a",
+      "source_recommendation_sha256": "c3c778ee39ae47ea320d5100dcf5a2d89133da6f9fb128897ae7a325781df392",
+      "target_url": "https://fermatmind.com/zh/personality/intp-a",
+      "path": "/zh/personality/intp-a",
+      "framework": "mbti64",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "mbti_type": "INTP",
+      "handoff_class": "query_backed",
+      "paired_source_path": null,
+      "selection_evidence": {
+        "handoff_class": "query_backed",
+        "paired_source_path": null,
+        "evidence_quality": "query_backed_low_volume",
+        "query_rows_captured": 1,
+        "priority_rank": 1,
+        "priority_score": 67.45,
+        "page_metrics": {
+          "impressions": 9,
+          "clicks": 0,
+          "ctr": 0,
+          "average_position": 12.7
+        },
+        "selection_reason": "query_backed_low_risk_priority_ranker_selected"
+      },
+      "current_surface": {
+        "title": "INTP-A 逻辑学家人格：特点、爱情、职业与适合工作 | FermatMind",
+        "description": "了解 INTP-A 逻辑学家人格的核心特点、优势盲点、爱情关系、职业倾向与适合工作，并通过 MBTI 测试确认自己的类型。",
+        "h1": "INTP-A 逻辑学家人格",
+        "quick_answer": "",
+        "faq_count": 17,
+        "internal_link_count": 51
+      },
+      "observed_signal": {
+        "evidence_state": "gsc_pending",
+        "impressions": null,
+        "clicks": null,
+        "ctr": null,
+        "average_position": null,
+        "notes": [
+          "GSC page/query evidence was not available in repo artifacts for the 88-page expansion at generation time."
+        ],
+        "handoff_evidence_quality": "query_backed_low_volume",
+        "handoff_query_rows_captured": 1
+      },
+      "reference_patterns_used": [
+        {
+          "pattern_id": "variant_profile_structure",
+          "source_url": "https://fermatmind.com/zh/personality/istj-a",
+          "how_used": "Used for section purpose, QA boundary and internal-link pattern only; wording must not be copied verbatim."
+        }
+      ],
+      "recommendations": {
+        "title": {
+          "current": "INTP-A 逻辑学家人格：特点、爱情、职业与适合工作 | FermatMind",
+          "recommended": "INTP-A 人格特点：分析、好奇心和独立解题 | FermatMind",
+          "reason": "Align title with type, A/T intent and single-brand suffix pattern from the optimized pilot."
+        },
+        "description": {
+          "current": "了解 INTP-A 逻辑学家人格的核心特点、优势盲点、爱情关系、职业倾向与适合工作，并通过 MBTI 测试确认自己的类型。",
+          "recommended": "系统了解 INTP-A 的分析、好奇心和独立解题、更偏向稳定自信、决策后持续推进和较少反复确认、优势盲点、工作风格和关系沟通。",
+          "reason": "Make the SERP description answer the page intent while preserving method boundaries."
+        },
+        "h1": {
+          "current": "INTP-A 逻辑学家人格",
+          "recommended": "INTP-A 人格特点",
+          "reason": "Keep H1 concise and aligned with the canonical page query."
+        },
+        "quick_answer": {
+          "current": "",
+          "recommended": "INTP-A 是 INTP 核心加上 A 型身份风格的公开人格画像，通常会围绕分析、好奇心和独立解题展开，并呈现更偏向稳定自信、决策后持续推进和较少反复确认。它适合用于自我理解和沟通校准，不适合作为职业或关系结论。",
+          "reason": "Add an answer-first summary that distinguishes this page without deterministic claims."
+        },
+        "faq": [
+          {
+            "question": "INTP-A 人格特点是什么？",
+            "answer": "INTP-A 通常把 INTP 核心与 A 型身份风格结合起来，重点体现在分析、好奇心和独立解题和更偏向稳定自信、决策后持续推进和较少反复确认。",
+            "reason": "Covers variant meaning, work-style reflection and boundary."
+          },
+          {
+            "question": "INTP-A 适合什么工作环境？",
+            "answer": "更适合讨论分析、好奇心和独立解题相关的工作节奏、沟通方式和环境偏好，不能直接推出职业结论或招聘判断。",
+            "reason": "Covers variant meaning, work-style reflection and boundary."
+          },
+          {
+            "question": "INTP-A 的优势和盲点是什么？",
+            "answer": "优势和盲点需要结合更偏向稳定自信、决策后持续推进和较少反复确认看待；同一种风格在不同团队、压力和任务结构中会有不同表现。",
+            "reason": "Covers variant meaning, work-style reflection and boundary."
+          },
+          {
+            "question": "INTP-A 和另一种 A/T 有什么不同？",
+            "answer": "主要看更偏向稳定自信、决策后持续推进和较少反复确认如何影响压力反应、自信稳定度、反馈处理和复盘强度，而不是人格核心是否完全不同。",
+            "reason": "Covers variant meaning, work-style reflection and boundary."
+          },
+          {
+            "question": "这个页面可以替代测试结果吗？",
+            "answer": "不能。它是公共解释页，适合先理解概念；个人结果仍应以正式测试和完整报告为准。",
+            "reason": "Covers variant meaning, work-style reflection and boundary."
+          }
+        ],
+        "internal_links": [
+          {
+            "href": "/zh/personality/intp-t",
+            "anchor_text": "INTP-T",
+            "reason": "Connect A/T sibling pages so readers can compare confidence-style variants without leaving the type cluster.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/zh/personality/intp-a-vs-intp-t",
+            "anchor_text": "INTP-A 与 INTP-T 对比",
+            "reason": "Connect variant pages to the dedicated A-vs-T comparison page for the same MBTI code.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "anchor_text": "MBTI 人格测试",
+            "reason": "Connect organic readers to the safe public MBTI test route.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/zh/tests/big-five-personality-test-ocean-model",
+            "anchor_text": "大五人格测试",
+            "reason": "Offer a dimensional-model cross-check without private result routes.",
+            "safe_public_route": true
+          }
+        ],
+        "differentiation_notes": [
+          "Differentiate /zh/personality/intp-a with 分析、好奇心和独立解题 rather than generic MBTI copy.",
+          "Variant copy must describe this A/T pole and link to the sibling variant plus comparison page.",
+          "Keep A/T as a public identity-style layer; do not state that it is official MBTI."
+        ]
+      },
+      "qa_required": [
+        "schema_validation",
+        "trademark_claim_gate",
+        "claim_risk_gate",
+        "duplicate_template_gate",
+        "private_route_gate",
+        "result_page_leakage_gate",
+        "seo_projection_gate",
+        "bilingual_consistency_gate"
+      ],
+      "source_qa": {
+        "artifact_decision": "PASS_READY_FOR_CMS_DRAFT",
+        "gates": {
+          "schema_validation": "pass",
+          "trademark_claim_gate": "pass",
+          "claim_risk_gate": "pass",
+          "duplicate_template_gate": "pass",
+          "private_route_gate": "pass",
+          "result_page_leakage_gate": "pass",
+          "seo_projection_gate": "pass",
+          "bilingual_consistency_gate": "pass"
+        },
+        "blocker_count": 0,
+        "warning_count": 1
+      },
+      "blocked_reason": null,
+      "allowed_next_action": "approval_queue_dry_run_before_any_cms_draft_handoff"
+    },
+    {
+      "recommendation_id": "personality-agent-next-batch-6:/en/personality/intp-a",
+      "source_recommendation_id": "mbti64-agent-expansion-88:/en/personality/intp-a",
+      "source_recommendation_sha256": "819d53c5d569dd5e3641edb852845567d9a939a6f22ce7fe1150b84b9d0bf96d",
+      "target_url": "https://fermatmind.com/en/personality/intp-a",
+      "path": "/en/personality/intp-a",
+      "framework": "mbti64",
+      "locale": "en",
+      "page_type": "variant",
+      "mbti_type": "INTP",
+      "handoff_class": "bilingual_paired_counterpart",
+      "paired_source_path": "/zh/personality/intp-a",
+      "selection_evidence": {
+        "handoff_class": "bilingual_paired_counterpart",
+        "paired_source_path": "/zh/personality/intp-a",
+        "evidence_quality": "bilingual_counterpart_of_query_backed_page",
+        "query_rows_captured": 0,
+        "priority_rank": 1,
+        "priority_score": 67.45,
+        "page_metrics": null,
+        "selection_reason": "paired_with_query_backed_counterpart:/zh/personality/intp-a"
+      },
+      "current_surface": {
+        "title": "INTP-A Logician Personality: Traits, Careers & Relationships | FermatMind",
+        "description": "Explore the INTP-A Logician personality type, including traits, strengths, blind spots, relationships, career fit, and how to confirm your type with an MBTI test.",
+        "h1": "INTP-A Logician Personality",
+        "quick_answer": "",
+        "faq_count": 16,
+        "internal_link_count": 51
+      },
+      "observed_signal": {
+        "evidence_state": "gsc_pending",
+        "impressions": null,
+        "clicks": null,
+        "ctr": null,
+        "average_position": null,
+        "notes": [
+          "GSC page/query evidence was not available in repo artifacts for the 88-page expansion at generation time."
+        ],
+        "handoff_evidence_quality": "bilingual_counterpart_of_query_backed_page",
+        "handoff_query_rows_captured": 0
+      },
+      "reference_patterns_used": [
+        {
+          "pattern_id": "variant_profile_structure",
+          "source_url": "https://fermatmind.com/en/personality/intj-a",
+          "how_used": "Used for section purpose, QA boundary and internal-link pattern only; wording must not be copied verbatim."
+        }
+      ],
+      "recommendations": {
+        "title": {
+          "current": "INTP-A Logician Personality: Traits, Careers & Relationships | FermatMind",
+          "recommended": "INTP-A Meaning: Assertive Logician Traits | FermatMind",
+          "reason": "Align title with type, A/T intent and single-brand suffix pattern from the optimized pilot."
+        },
+        "description": {
+          "current": "Explore the INTP-A Logician personality type, including traits, strengths, blind spots, relationships, career fit, and how to confirm your type with an MBTI test.",
+          "recommended": "Explore INTP-A through analysis, curiosity and independent problem solving, steady self-trust and follow-through, strengths, blind spots and relationships.",
+          "reason": "Make the SERP description answer the page intent while preserving method boundaries."
+        },
+        "h1": {
+          "current": "INTP-A Logician Personality",
+          "recommended": "INTP-A Meaning",
+          "reason": "Keep H1 concise and aligned with the canonical page query."
+        },
+        "quick_answer": {
+          "current": "",
+          "recommended": "INTP-A combines the INTP core pattern with an Assertive identity style. In practice, this points to steadier self-trust, post-decision follow-through and less repeated reassurance around analysis, curiosity and independent problem solving. Read it as a public profile, not as a career or relationship verdict.",
+          "reason": "Add an answer-first summary that distinguishes this page without deterministic claims."
+        },
+        "faq": [
+          {
+            "question": "What does INTP-A mean?",
+            "answer": "INTP-A combines the INTP core pattern with an Assertive identity style, especially around analysis, curiosity and independent problem solving and steadier self-trust, post-decision follow-through and less repeated reassurance.",
+            "reason": "Covers variant meaning, work-style reflection and boundary."
+          },
+          {
+            "question": "What work environment fits INTP-A?",
+            "answer": "Use the profile to reflect on analysis, curiosity and independent problem solving-related work rhythm, communication and environment fit, not to make a deterministic career decision.",
+            "reason": "Covers variant meaning, work-style reflection and boundary."
+          },
+          {
+            "question": "What are common INTP-A strengths and blind spots?",
+            "answer": "Strengths and blind spots depend on context and steadier self-trust, post-decision follow-through and less repeated reassurance; the same style can help or hinder depending on team, pressure and task structure.",
+            "reason": "Covers variant meaning, work-style reflection and boundary."
+          },
+          {
+            "question": "How is INTP-A different from the other A/T variant?",
+            "answer": "The practical difference is how steadier self-trust, post-decision follow-through and less repeated reassurance changes stress response, confidence stability, feedback processing and revision intensity.",
+            "reason": "Covers variant meaning, work-style reflection and boundary."
+          },
+          {
+            "question": "Can this page replace a test result?",
+            "answer": "No. This is a public explanation page. Personal interpretation should come from a completed test and full report context.",
+            "reason": "Covers variant meaning, work-style reflection and boundary."
+          }
+        ],
+        "internal_links": [
+          {
+            "href": "/en/personality/intp-t",
+            "anchor_text": "INTP-T",
+            "reason": "Connect A/T sibling pages so readers can compare confidence-style variants without leaving the type cluster.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/en/personality/intp-a-vs-intp-t",
+            "anchor_text": "INTP-A vs INTP-T",
+            "reason": "Connect variant pages to the dedicated A-vs-T comparison page for the same MBTI code.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/en/tests/mbti-personality-test-16-personality-types",
+            "anchor_text": "MBTI personality test",
+            "reason": "Connect organic readers to the safe public MBTI test route.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/en/tests/big-five-personality-test-ocean-model",
+            "anchor_text": "Big Five personality test",
+            "reason": "Offer a dimensional-model cross-check without private result routes.",
+            "safe_public_route": true
+          }
+        ],
+        "differentiation_notes": [
+          "Differentiate /en/personality/intp-a with analysis, curiosity and independent problem solving rather than generic MBTI copy.",
+          "Variant copy must describe this A/T pole and link to the sibling variant plus comparison page.",
+          "Keep A/T as a public identity-style layer; do not state that it is official MBTI."
+        ]
+      },
+      "qa_required": [
+        "schema_validation",
+        "trademark_claim_gate",
+        "claim_risk_gate",
+        "duplicate_template_gate",
+        "private_route_gate",
+        "result_page_leakage_gate",
+        "seo_projection_gate",
+        "bilingual_consistency_gate"
+      ],
+      "source_qa": {
+        "artifact_decision": "PASS_READY_FOR_CMS_DRAFT",
+        "gates": {
+          "schema_validation": "pass",
+          "trademark_claim_gate": "pass",
+          "claim_risk_gate": "pass",
+          "duplicate_template_gate": "pass",
+          "private_route_gate": "pass",
+          "result_page_leakage_gate": "pass",
+          "seo_projection_gate": "pass",
+          "bilingual_consistency_gate": "pass"
+        },
+        "blocker_count": 0,
+        "warning_count": 1
+      },
+      "blocked_reason": null,
+      "allowed_next_action": "approval_queue_dry_run_before_any_cms_draft_handoff"
+    },
+    {
+      "recommendation_id": "personality-agent-next-batch-6:/zh/personality/esfp-a",
+      "source_recommendation_id": "mbti64-agent-expansion-88:/zh/personality/esfp-a",
+      "source_recommendation_sha256": "ad0666b4f3a68f7633219c4cc54e35f3e790b29f90e8ae92d40956cb174c40ee",
+      "target_url": "https://fermatmind.com/zh/personality/esfp-a",
+      "path": "/zh/personality/esfp-a",
+      "framework": "mbti64",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "mbti_type": "ESFP",
+      "handoff_class": "query_backed",
+      "paired_source_path": null,
+      "selection_evidence": {
+        "handoff_class": "query_backed",
+        "paired_source_path": null,
+        "evidence_quality": "query_backed_low_volume",
+        "query_rows_captured": 1,
+        "priority_rank": 2,
+        "priority_score": 62.021,
+        "page_metrics": {
+          "impressions": 1,
+          "clicks": 0,
+          "ctr": 0,
+          "average_position": 7
+        },
+        "selection_reason": "query_backed_low_risk_priority_ranker_selected"
+      },
+      "current_surface": {
+        "title": "ESFP-A 表演者人格：特点、爱情、职业与适合工作 | FermatMind",
+        "description": "了解 ESFP-A 表演者人格的核心特点、优势盲点、爱情关系、职业倾向与适合工作，并通过 MBTI 测试确认自己的类型。",
+        "h1": "ESFP-A 表演者人格",
+        "quick_answer": "",
+        "faq_count": 16,
+        "internal_link_count": 51
+      },
+      "observed_signal": {
+        "evidence_state": "gsc_pending",
+        "impressions": null,
+        "clicks": null,
+        "ctr": null,
+        "average_position": null,
+        "notes": [
+          "GSC page/query evidence was not available in repo artifacts for the 88-page expansion at generation time."
+        ],
+        "handoff_evidence_quality": "query_backed_low_volume",
+        "handoff_query_rows_captured": 1
+      },
+      "reference_patterns_used": [
+        {
+          "pattern_id": "variant_profile_structure",
+          "source_url": "https://fermatmind.com/zh/personality/istj-a",
+          "how_used": "Used for section purpose, QA boundary and internal-link pattern only; wording must not be copied verbatim."
+        }
+      ],
+      "recommendations": {
+        "title": {
+          "current": "ESFP-A 表演者人格：特点、爱情、职业与适合工作 | FermatMind",
+          "recommended": "ESFP-A 人格特点：活力、现场感和共同体验 | FermatMind",
+          "reason": "Align title with type, A/T intent and single-brand suffix pattern from the optimized pilot."
+        },
+        "description": {
+          "current": "了解 ESFP-A 表演者人格的核心特点、优势盲点、爱情关系、职业倾向与适合工作，并通过 MBTI 测试确认自己的类型。",
+          "recommended": "系统了解 ESFP-A 的活力、现场感和共同体验、更偏向稳定自信、决策后持续推进和较少反复确认、优势盲点、工作风格和关系沟通。",
+          "reason": "Make the SERP description answer the page intent while preserving method boundaries."
+        },
+        "h1": {
+          "current": "ESFP-A 表演者人格",
+          "recommended": "ESFP-A 人格特点",
+          "reason": "Keep H1 concise and aligned with the canonical page query."
+        },
+        "quick_answer": {
+          "current": "",
+          "recommended": "ESFP-A 是 ESFP 核心加上 A 型身份风格的公开人格画像，通常会围绕活力、现场感和共同体验展开，并呈现更偏向稳定自信、决策后持续推进和较少反复确认。它适合用于自我理解和沟通校准，不适合作为职业或关系结论。",
+          "reason": "Add an answer-first summary that distinguishes this page without deterministic claims."
+        },
+        "faq": [
+          {
+            "question": "ESFP-A 人格特点是什么？",
+            "answer": "ESFP-A 通常把 ESFP 核心与 A 型身份风格结合起来，重点体现在活力、现场感和共同体验和更偏向稳定自信、决策后持续推进和较少反复确认。",
+            "reason": "Covers variant meaning, work-style reflection and boundary."
+          },
+          {
+            "question": "ESFP-A 适合什么工作环境？",
+            "answer": "更适合讨论活力、现场感和共同体验相关的工作节奏、沟通方式和环境偏好，不能直接推出职业结论或招聘判断。",
+            "reason": "Covers variant meaning, work-style reflection and boundary."
+          },
+          {
+            "question": "ESFP-A 的优势和盲点是什么？",
+            "answer": "优势和盲点需要结合更偏向稳定自信、决策后持续推进和较少反复确认看待；同一种风格在不同团队、压力和任务结构中会有不同表现。",
+            "reason": "Covers variant meaning, work-style reflection and boundary."
+          },
+          {
+            "question": "ESFP-A 和另一种 A/T 有什么不同？",
+            "answer": "主要看更偏向稳定自信、决策后持续推进和较少反复确认如何影响压力反应、自信稳定度、反馈处理和复盘强度，而不是人格核心是否完全不同。",
+            "reason": "Covers variant meaning, work-style reflection and boundary."
+          },
+          {
+            "question": "这个页面可以替代测试结果吗？",
+            "answer": "不能。它是公共解释页，适合先理解概念；个人结果仍应以正式测试和完整报告为准。",
+            "reason": "Covers variant meaning, work-style reflection and boundary."
+          }
+        ],
+        "internal_links": [
+          {
+            "href": "/zh/personality/esfp-t",
+            "anchor_text": "ESFP-T",
+            "reason": "Connect A/T sibling pages so readers can compare confidence-style variants without leaving the type cluster.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/zh/personality/esfp-a-vs-esfp-t",
+            "anchor_text": "ESFP-A 与 ESFP-T 对比",
+            "reason": "Connect variant pages to the dedicated A-vs-T comparison page for the same MBTI code.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "anchor_text": "MBTI 人格测试",
+            "reason": "Connect organic readers to the safe public MBTI test route.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/zh/tests/big-five-personality-test-ocean-model",
+            "anchor_text": "大五人格测试",
+            "reason": "Offer a dimensional-model cross-check without private result routes.",
+            "safe_public_route": true
+          }
+        ],
+        "differentiation_notes": [
+          "Differentiate /zh/personality/esfp-a with 活力、现场感和共同体验 rather than generic MBTI copy.",
+          "Variant copy must describe this A/T pole and link to the sibling variant plus comparison page.",
+          "Keep A/T as a public identity-style layer; do not state that it is official MBTI."
+        ]
+      },
+      "qa_required": [
+        "schema_validation",
+        "trademark_claim_gate",
+        "claim_risk_gate",
+        "duplicate_template_gate",
+        "private_route_gate",
+        "result_page_leakage_gate",
+        "seo_projection_gate",
+        "bilingual_consistency_gate"
+      ],
+      "source_qa": {
+        "artifact_decision": "PASS_READY_FOR_CMS_DRAFT",
+        "gates": {
+          "schema_validation": "pass",
+          "trademark_claim_gate": "pass",
+          "claim_risk_gate": "pass",
+          "duplicate_template_gate": "pass",
+          "private_route_gate": "pass",
+          "result_page_leakage_gate": "pass",
+          "seo_projection_gate": "pass",
+          "bilingual_consistency_gate": "pass"
+        },
+        "blocker_count": 0,
+        "warning_count": 1
+      },
+      "blocked_reason": null,
+      "allowed_next_action": "approval_queue_dry_run_before_any_cms_draft_handoff"
+    },
+    {
+      "recommendation_id": "personality-agent-next-batch-6:/en/personality/esfp-a",
+      "source_recommendation_id": "mbti64-agent-expansion-88:/en/personality/esfp-a",
+      "source_recommendation_sha256": "efe0a4be153f8be0fe91e3c6fec303453c1f89414a93de0e5b45b64d57eeb048",
+      "target_url": "https://fermatmind.com/en/personality/esfp-a",
+      "path": "/en/personality/esfp-a",
+      "framework": "mbti64",
+      "locale": "en",
+      "page_type": "variant",
+      "mbti_type": "ESFP",
+      "handoff_class": "bilingual_paired_counterpart",
+      "paired_source_path": "/zh/personality/esfp-a",
+      "selection_evidence": {
+        "handoff_class": "bilingual_paired_counterpart",
+        "paired_source_path": "/zh/personality/esfp-a",
+        "evidence_quality": "bilingual_counterpart_of_query_backed_page",
+        "query_rows_captured": 0,
+        "priority_rank": 2,
+        "priority_score": 62.021,
+        "page_metrics": null,
+        "selection_reason": "paired_with_query_backed_counterpart:/zh/personality/esfp-a"
+      },
+      "current_surface": {
+        "title": "ESFP-A Entertainer Personality: Traits, Careers & Relationships | FermatMind",
+        "description": "Explore the ESFP-A Entertainer personality type, including traits, strengths, blind spots, relationships, career fit, and how to confirm your type with an MBTI test.",
+        "h1": "ESFP-A Entertainer Personality",
+        "quick_answer": "",
+        "faq_count": 16,
+        "internal_link_count": 51
+      },
+      "observed_signal": {
+        "evidence_state": "gsc_pending",
+        "impressions": null,
+        "clicks": null,
+        "ctr": null,
+        "average_position": null,
+        "notes": [
+          "GSC page/query evidence was not available in repo artifacts for the 88-page expansion at generation time."
+        ],
+        "handoff_evidence_quality": "bilingual_counterpart_of_query_backed_page",
+        "handoff_query_rows_captured": 0
+      },
+      "reference_patterns_used": [
+        {
+          "pattern_id": "variant_profile_structure",
+          "source_url": "https://fermatmind.com/en/personality/intj-a",
+          "how_used": "Used for section purpose, QA boundary and internal-link pattern only; wording must not be copied verbatim."
+        }
+      ],
+      "recommendations": {
+        "title": {
+          "current": "ESFP-A Entertainer Personality: Traits, Careers & Relationships | FermatMind",
+          "recommended": "ESFP-A Meaning: Assertive Entertainer Traits | FermatMind",
+          "reason": "Align title with type, A/T intent and single-brand suffix pattern from the optimized pilot."
+        },
+        "description": {
+          "current": "Explore the ESFP-A Entertainer personality type, including traits, strengths, blind spots, relationships, career fit, and how to confirm your type with an MBTI test.",
+          "recommended": "Explore ESFP-A through energy, presence and shared experience, steady self-trust and follow-through, strengths, blind spots and relationships.",
+          "reason": "Make the SERP description answer the page intent while preserving method boundaries."
+        },
+        "h1": {
+          "current": "ESFP-A Entertainer Personality",
+          "recommended": "ESFP-A Meaning",
+          "reason": "Keep H1 concise and aligned with the canonical page query."
+        },
+        "quick_answer": {
+          "current": "",
+          "recommended": "ESFP-A combines the ESFP core pattern with an Assertive identity style. In practice, this points to steadier self-trust, post-decision follow-through and less repeated reassurance around energy, presence and shared experience. Read it as a public profile, not as a career or relationship verdict.",
+          "reason": "Add an answer-first summary that distinguishes this page without deterministic claims."
+        },
+        "faq": [
+          {
+            "question": "What does ESFP-A mean?",
+            "answer": "ESFP-A combines the ESFP core pattern with an Assertive identity style, especially around energy, presence and shared experience and steadier self-trust, post-decision follow-through and less repeated reassurance.",
+            "reason": "Covers variant meaning, work-style reflection and boundary."
+          },
+          {
+            "question": "What work environment fits ESFP-A?",
+            "answer": "Use the profile to reflect on energy, presence and shared experience-related work rhythm, communication and environment fit, not to make a deterministic career decision.",
+            "reason": "Covers variant meaning, work-style reflection and boundary."
+          },
+          {
+            "question": "What are common ESFP-A strengths and blind spots?",
+            "answer": "Strengths and blind spots depend on context and steadier self-trust, post-decision follow-through and less repeated reassurance; the same style can help or hinder depending on team, pressure and task structure.",
+            "reason": "Covers variant meaning, work-style reflection and boundary."
+          },
+          {
+            "question": "How is ESFP-A different from the other A/T variant?",
+            "answer": "The practical difference is how steadier self-trust, post-decision follow-through and less repeated reassurance changes stress response, confidence stability, feedback processing and revision intensity.",
+            "reason": "Covers variant meaning, work-style reflection and boundary."
+          },
+          {
+            "question": "Can this page replace a test result?",
+            "answer": "No. This is a public explanation page. Personal interpretation should come from a completed test and full report context.",
+            "reason": "Covers variant meaning, work-style reflection and boundary."
+          }
+        ],
+        "internal_links": [
+          {
+            "href": "/en/personality/esfp-t",
+            "anchor_text": "ESFP-T",
+            "reason": "Connect A/T sibling pages so readers can compare confidence-style variants without leaving the type cluster.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/en/personality/esfp-a-vs-esfp-t",
+            "anchor_text": "ESFP-A vs ESFP-T",
+            "reason": "Connect variant pages to the dedicated A-vs-T comparison page for the same MBTI code.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/en/tests/mbti-personality-test-16-personality-types",
+            "anchor_text": "MBTI personality test",
+            "reason": "Connect organic readers to the safe public MBTI test route.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/en/tests/big-five-personality-test-ocean-model",
+            "anchor_text": "Big Five personality test",
+            "reason": "Offer a dimensional-model cross-check without private result routes.",
+            "safe_public_route": true
+          }
+        ],
+        "differentiation_notes": [
+          "Differentiate /en/personality/esfp-a with energy, presence and shared experience rather than generic MBTI copy.",
+          "Variant copy must describe this A/T pole and link to the sibling variant plus comparison page.",
+          "Keep A/T as a public identity-style layer; do not state that it is official MBTI."
+        ]
+      },
+      "qa_required": [
+        "schema_validation",
+        "trademark_claim_gate",
+        "claim_risk_gate",
+        "duplicate_template_gate",
+        "private_route_gate",
+        "result_page_leakage_gate",
+        "seo_projection_gate",
+        "bilingual_consistency_gate"
+      ],
+      "source_qa": {
+        "artifact_decision": "PASS_READY_FOR_CMS_DRAFT",
+        "gates": {
+          "schema_validation": "pass",
+          "trademark_claim_gate": "pass",
+          "claim_risk_gate": "pass",
+          "duplicate_template_gate": "pass",
+          "private_route_gate": "pass",
+          "result_page_leakage_gate": "pass",
+          "seo_projection_gate": "pass",
+          "bilingual_consistency_gate": "pass"
+        },
+        "blocker_count": 0,
+        "warning_count": 1
+      },
+      "blocked_reason": null,
+      "allowed_next_action": "approval_queue_dry_run_before_any_cms_draft_handoff"
+    },
+    {
+      "recommendation_id": "personality-agent-next-batch-6:/en/personality/enfj-a",
+      "source_recommendation_id": "mbti64-agent-expansion-88:/en/personality/enfj-a",
+      "source_recommendation_sha256": "fe95f500789fc2e6387df05b40181bc1776e599ad3a2023c661f9a4d1df8e13d",
+      "target_url": "https://fermatmind.com/en/personality/enfj-a",
+      "path": "/en/personality/enfj-a",
+      "framework": "mbti64",
+      "locale": "en",
+      "page_type": "variant",
+      "mbti_type": "ENFJ",
+      "handoff_class": "query_backed",
+      "paired_source_path": null,
+      "selection_evidence": {
+        "handoff_class": "query_backed",
+        "paired_source_path": null,
+        "evidence_quality": "query_backed_low_volume",
+        "query_rows_captured": 1,
+        "priority_rank": 3,
+        "priority_score": 61.848,
+        "page_metrics": {
+          "impressions": 21,
+          "clicks": 0,
+          "ctr": 0,
+          "average_position": 26.9
+        },
+        "selection_reason": "query_backed_low_risk_priority_ranker_selected"
+      },
+      "current_surface": {
+        "title": "ENFJ-A Protagonist Personality: Traits, Careers & Relationships | FermatMind",
+        "description": "Explore the ENFJ-A Protagonist personality type, including traits, strengths, blind spots, relationships, career fit, and how to confirm your type with an MBTI test.",
+        "h1": "ENFJ-A Protagonist Personality",
+        "quick_answer": "",
+        "faq_count": 16,
+        "internal_link_count": 51
+      },
+      "observed_signal": {
+        "evidence_state": "gsc_pending",
+        "impressions": null,
+        "clicks": null,
+        "ctr": null,
+        "average_position": null,
+        "notes": [
+          "GSC page/query evidence was not available in repo artifacts for the 88-page expansion at generation time."
+        ],
+        "handoff_evidence_quality": "query_backed_low_volume",
+        "handoff_query_rows_captured": 1
+      },
+      "reference_patterns_used": [
+        {
+          "pattern_id": "variant_profile_structure",
+          "source_url": "https://fermatmind.com/en/personality/intj-a",
+          "how_used": "Used for section purpose, QA boundary and internal-link pattern only; wording must not be copied verbatim."
+        }
+      ],
+      "recommendations": {
+        "title": {
+          "current": "ENFJ-A Protagonist Personality: Traits, Careers & Relationships | FermatMind",
+          "recommended": "ENFJ-A Meaning: Assertive Protagonist Traits | FermatMind",
+          "reason": "Align title with type, A/T intent and single-brand suffix pattern from the optimized pilot."
+        },
+        "description": {
+          "current": "Explore the ENFJ-A Protagonist personality type, including traits, strengths, blind spots, relationships, career fit, and how to confirm your type with an MBTI test.",
+          "recommended": "Explore ENFJ-A through people leadership, encouragement and shared direction, steady self-trust and follow-through, strengths, blind spots and relationships.",
+          "reason": "Make the SERP description answer the page intent while preserving method boundaries."
+        },
+        "h1": {
+          "current": "ENFJ-A Protagonist Personality",
+          "recommended": "ENFJ-A Meaning",
+          "reason": "Keep H1 concise and aligned with the canonical page query."
+        },
+        "quick_answer": {
+          "current": "",
+          "recommended": "ENFJ-A combines the ENFJ core pattern with an Assertive identity style. In practice, this points to steadier self-trust, post-decision follow-through and less repeated reassurance around people leadership, encouragement and shared direction. Read it as a public profile, not as a career or relationship verdict.",
+          "reason": "Add an answer-first summary that distinguishes this page without deterministic claims."
+        },
+        "faq": [
+          {
+            "question": "What does ENFJ-A mean?",
+            "answer": "ENFJ-A combines the ENFJ core pattern with an Assertive identity style, especially around people leadership, encouragement and shared direction and steadier self-trust, post-decision follow-through and less repeated reassurance.",
+            "reason": "Covers variant meaning, work-style reflection and boundary."
+          },
+          {
+            "question": "What work environment fits ENFJ-A?",
+            "answer": "Use the profile to reflect on people leadership, encouragement and shared direction-related work rhythm, communication and environment fit, not to make a deterministic career decision.",
+            "reason": "Covers variant meaning, work-style reflection and boundary."
+          },
+          {
+            "question": "What are common ENFJ-A strengths and blind spots?",
+            "answer": "Strengths and blind spots depend on context and steadier self-trust, post-decision follow-through and less repeated reassurance; the same style can help or hinder depending on team, pressure and task structure.",
+            "reason": "Covers variant meaning, work-style reflection and boundary."
+          },
+          {
+            "question": "How is ENFJ-A different from the other A/T variant?",
+            "answer": "The practical difference is how steadier self-trust, post-decision follow-through and less repeated reassurance changes stress response, confidence stability, feedback processing and revision intensity.",
+            "reason": "Covers variant meaning, work-style reflection and boundary."
+          },
+          {
+            "question": "Can this page replace a test result?",
+            "answer": "No. This is a public explanation page. Personal interpretation should come from a completed test and full report context.",
+            "reason": "Covers variant meaning, work-style reflection and boundary."
+          }
+        ],
+        "internal_links": [
+          {
+            "href": "/en/personality/enfj-t",
+            "anchor_text": "ENFJ-T",
+            "reason": "Connect A/T sibling pages so readers can compare confidence-style variants without leaving the type cluster.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/en/personality/enfj-a-vs-enfj-t",
+            "anchor_text": "ENFJ-A vs ENFJ-T",
+            "reason": "Connect variant pages to the dedicated A-vs-T comparison page for the same MBTI code.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/en/tests/mbti-personality-test-16-personality-types",
+            "anchor_text": "MBTI personality test",
+            "reason": "Connect organic readers to the safe public MBTI test route.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/en/tests/big-five-personality-test-ocean-model",
+            "anchor_text": "Big Five personality test",
+            "reason": "Offer a dimensional-model cross-check without private result routes.",
+            "safe_public_route": true
+          }
+        ],
+        "differentiation_notes": [
+          "Differentiate /en/personality/enfj-a with people leadership, encouragement and shared direction rather than generic MBTI copy.",
+          "Variant copy must describe this A/T pole and link to the sibling variant plus comparison page.",
+          "Keep A/T as a public identity-style layer; do not state that it is official MBTI."
+        ]
+      },
+      "qa_required": [
+        "schema_validation",
+        "trademark_claim_gate",
+        "claim_risk_gate",
+        "duplicate_template_gate",
+        "private_route_gate",
+        "result_page_leakage_gate",
+        "seo_projection_gate",
+        "bilingual_consistency_gate"
+      ],
+      "source_qa": {
+        "artifact_decision": "PASS_READY_FOR_CMS_DRAFT",
+        "gates": {
+          "schema_validation": "pass",
+          "trademark_claim_gate": "pass",
+          "claim_risk_gate": "pass",
+          "duplicate_template_gate": "pass",
+          "private_route_gate": "pass",
+          "result_page_leakage_gate": "pass",
+          "seo_projection_gate": "pass",
+          "bilingual_consistency_gate": "pass"
+        },
+        "blocker_count": 0,
+        "warning_count": 1
+      },
+      "blocked_reason": null,
+      "allowed_next_action": "approval_queue_dry_run_before_any_cms_draft_handoff"
+    },
+    {
+      "recommendation_id": "personality-agent-next-batch-6:/zh/personality/enfj-a",
+      "source_recommendation_id": "mbti64-agent-expansion-88:/zh/personality/enfj-a",
+      "source_recommendation_sha256": "08d2065607372691fb3019590cf326672a9d0c629b97a640ff2319bdfef822cb",
+      "target_url": "https://fermatmind.com/zh/personality/enfj-a",
+      "path": "/zh/personality/enfj-a",
+      "framework": "mbti64",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "mbti_type": "ENFJ",
+      "handoff_class": "bilingual_paired_counterpart",
+      "paired_source_path": "/en/personality/enfj-a",
+      "selection_evidence": {
+        "handoff_class": "bilingual_paired_counterpart",
+        "paired_source_path": "/en/personality/enfj-a",
+        "evidence_quality": "bilingual_counterpart_of_query_backed_page",
+        "query_rows_captured": 0,
+        "priority_rank": 3,
+        "priority_score": 61.848,
+        "page_metrics": null,
+        "selection_reason": "paired_with_query_backed_counterpart:/en/personality/enfj-a"
+      },
+      "current_surface": {
+        "title": "ENFJ-A 主人公人格：特点、爱情、职业与适合工作 | FermatMind",
+        "description": "了解 ENFJ-A 主人公人格的核心特点、优势盲点、爱情关系、职业倾向与适合工作，并通过 MBTI 测试确认自己的类型。",
+        "h1": "ENFJ-A 主人公人格",
+        "quick_answer": "",
+        "faq_count": 16,
+        "internal_link_count": 51
+      },
+      "observed_signal": {
+        "evidence_state": "gsc_pending",
+        "impressions": null,
+        "clicks": null,
+        "ctr": null,
+        "average_position": null,
+        "notes": [
+          "GSC page/query evidence was not available in repo artifacts for the 88-page expansion at generation time."
+        ],
+        "handoff_evidence_quality": "bilingual_counterpart_of_query_backed_page",
+        "handoff_query_rows_captured": 0
+      },
+      "reference_patterns_used": [
+        {
+          "pattern_id": "variant_profile_structure",
+          "source_url": "https://fermatmind.com/zh/personality/istj-a",
+          "how_used": "Used for section purpose, QA boundary and internal-link pattern only; wording must not be copied verbatim."
+        }
+      ],
+      "recommendations": {
+        "title": {
+          "current": "ENFJ-A 主人公人格：特点、爱情、职业与适合工作 | FermatMind",
+          "recommended": "ENFJ-A 人格特点：人际带动、鼓励和共同方向 | FermatMind",
+          "reason": "Align title with type, A/T intent and single-brand suffix pattern from the optimized pilot."
+        },
+        "description": {
+          "current": "了解 ENFJ-A 主人公人格的核心特点、优势盲点、爱情关系、职业倾向与适合工作，并通过 MBTI 测试确认自己的类型。",
+          "recommended": "系统了解 ENFJ-A 的人际带动、鼓励和共同方向、更偏向稳定自信、决策后持续推进和较少反复确认、优势盲点、工作风格和关系沟通。",
+          "reason": "Make the SERP description answer the page intent while preserving method boundaries."
+        },
+        "h1": {
+          "current": "ENFJ-A 主人公人格",
+          "recommended": "ENFJ-A 人格特点",
+          "reason": "Keep H1 concise and aligned with the canonical page query."
+        },
+        "quick_answer": {
+          "current": "",
+          "recommended": "ENFJ-A 是 ENFJ 核心加上 A 型身份风格的公开人格画像，通常会围绕人际带动、鼓励和共同方向展开，并呈现更偏向稳定自信、决策后持续推进和较少反复确认。它适合用于自我理解和沟通校准，不适合作为职业或关系结论。",
+          "reason": "Add an answer-first summary that distinguishes this page without deterministic claims."
+        },
+        "faq": [
+          {
+            "question": "ENFJ-A 人格特点是什么？",
+            "answer": "ENFJ-A 通常把 ENFJ 核心与 A 型身份风格结合起来，重点体现在人际带动、鼓励和共同方向和更偏向稳定自信、决策后持续推进和较少反复确认。",
+            "reason": "Covers variant meaning, work-style reflection and boundary."
+          },
+          {
+            "question": "ENFJ-A 适合什么工作环境？",
+            "answer": "更适合讨论人际带动、鼓励和共同方向相关的工作节奏、沟通方式和环境偏好，不能直接推出职业结论或招聘判断。",
+            "reason": "Covers variant meaning, work-style reflection and boundary."
+          },
+          {
+            "question": "ENFJ-A 的优势和盲点是什么？",
+            "answer": "优势和盲点需要结合更偏向稳定自信、决策后持续推进和较少反复确认看待；同一种风格在不同团队、压力和任务结构中会有不同表现。",
+            "reason": "Covers variant meaning, work-style reflection and boundary."
+          },
+          {
+            "question": "ENFJ-A 和另一种 A/T 有什么不同？",
+            "answer": "主要看更偏向稳定自信、决策后持续推进和较少反复确认如何影响压力反应、自信稳定度、反馈处理和复盘强度，而不是人格核心是否完全不同。",
+            "reason": "Covers variant meaning, work-style reflection and boundary."
+          },
+          {
+            "question": "这个页面可以替代测试结果吗？",
+            "answer": "不能。它是公共解释页，适合先理解概念；个人结果仍应以正式测试和完整报告为准。",
+            "reason": "Covers variant meaning, work-style reflection and boundary."
+          }
+        ],
+        "internal_links": [
+          {
+            "href": "/zh/personality/enfj-t",
+            "anchor_text": "ENFJ-T",
+            "reason": "Connect A/T sibling pages so readers can compare confidence-style variants without leaving the type cluster.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/zh/personality/enfj-a-vs-enfj-t",
+            "anchor_text": "ENFJ-A 与 ENFJ-T 对比",
+            "reason": "Connect variant pages to the dedicated A-vs-T comparison page for the same MBTI code.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "anchor_text": "MBTI 人格测试",
+            "reason": "Connect organic readers to the safe public MBTI test route.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/zh/tests/big-five-personality-test-ocean-model",
+            "anchor_text": "大五人格测试",
+            "reason": "Offer a dimensional-model cross-check without private result routes.",
+            "safe_public_route": true
+          }
+        ],
+        "differentiation_notes": [
+          "Differentiate /zh/personality/enfj-a with 人际带动、鼓励和共同方向 rather than generic MBTI copy.",
+          "Variant copy must describe this A/T pole and link to the sibling variant plus comparison page.",
+          "Keep A/T as a public identity-style layer; do not state that it is official MBTI."
+        ]
+      },
+      "qa_required": [
+        "schema_validation",
+        "trademark_claim_gate",
+        "claim_risk_gate",
+        "duplicate_template_gate",
+        "private_route_gate",
+        "result_page_leakage_gate",
+        "seo_projection_gate",
+        "bilingual_consistency_gate"
+      ],
+      "source_qa": {
+        "artifact_decision": "PASS_READY_FOR_CMS_DRAFT",
+        "gates": {
+          "schema_validation": "pass",
+          "trademark_claim_gate": "pass",
+          "claim_risk_gate": "pass",
+          "duplicate_template_gate": "pass",
+          "private_route_gate": "pass",
+          "result_page_leakage_gate": "pass",
+          "seo_projection_gate": "pass",
+          "bilingual_consistency_gate": "pass"
+        },
+        "blocker_count": 0,
+        "warning_count": 1
+      },
+      "blocked_reason": null,
+      "allowed_next_action": "approval_queue_dry_run_before_any_cms_draft_handoff"
+    }
+  ],
+  "safety_boundary": {
+    "artifact_only": true,
+    "new_body_copy_generated": false,
+    "gpt_or_external_model_called": false,
+    "approval_queue_write_attempted": false,
+    "cms_write_attempted": false,
+    "cms_live_promotion_attempted": false,
+    "frontend_runtime_change_attempted": false,
+    "search_queue_mutation_attempted": false,
+    "live_search_submit_attempted": false,
+    "sitemap_llms_mutation_attempted": false,
+    "gsc_api_call_attempted": false,
+    "gsc_request_indexing_attempted": false,
+    "production_deploy_attempted": false
+  },
+  "blockers": [],
+  "warnings": [],
+  "recommended_next_task": "PERSONALITY-AGENT-APPROVAL-QUEUE-NEXT-BATCH-6-DRY-RUN-01"
+}
