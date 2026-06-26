@@ -18,6 +18,10 @@ final class Mbti64CmsProjectionDraftWriter
 
     private const QA_ARTIFACT = 'MBTI64-PUBLIC-PROFILE-AGENT-EXPANSION-88-QA-01';
 
+    private const NEXT_BATCH_6_PACKAGE_ARTIFACT = 'PERSONALITY-AGENT-OPERATIONS-NEXT-BATCH-6-HANDOFF-01';
+
+    private const NEXT_BATCH_6_QA_ARTIFACT = 'PERSONALITY-AGENT-OPERATIONS-NEXT-BATCH-6-HANDOFF-QA-01';
+
     private const VISIBLE_QUERY_BACKED_3_URLS = [
         'https://fermatmind.com/en/personality/enfj-a',
         'https://fermatmind.com/zh/personality/intp-a',
@@ -36,6 +40,15 @@ final class Mbti64CmsProjectionDraftWriter
         'https://fermatmind.com/en/personality/esfj-a',
         'https://fermatmind.com/zh/personality/esfj-a',
         'https://fermatmind.com/en/personality/intp-a',
+    ];
+
+    private const NEXT_BATCH_6_URLS = [
+        'https://fermatmind.com/zh/personality/intp-a',
+        'https://fermatmind.com/en/personality/intp-a',
+        'https://fermatmind.com/zh/personality/esfp-a',
+        'https://fermatmind.com/en/personality/esfp-a',
+        'https://fermatmind.com/en/personality/enfj-a',
+        'https://fermatmind.com/zh/personality/enfj-a',
     ];
 
     private const AGENT_BATCH_ALLOWED_SIZES = [5, 10];
@@ -88,7 +101,7 @@ final class Mbti64CmsProjectionDraftWriter
         bool $write,
         array $options,
     ): array {
-        $errors = $this->validatePackageAndQa($package, $qa);
+        $errors = $this->validatePackageAndQa($package, $qa, $options);
         $warnings = array_values(array_filter((array) ($qa['warnings'] ?? []), static fn (mixed $warning): bool => is_string($warning)));
         $qaResultsByUrl = $this->qaResultsByUrl($qa);
         $recommendations = $this->recommendationsForOptions($package, $options, $write, $errors);
@@ -265,8 +278,12 @@ final class Mbti64CmsProjectionDraftWriter
      * @param  array<string,mixed>  $qa
      * @return list<array<string,string>>
      */
-    private function validatePackageAndQa(array $package, array $qa): array
+    private function validatePackageAndQa(array $package, array $qa, array $options): array
     {
+        if ($this->nextBatch6Requested($options)) {
+            return $this->validateNextBatch6PackageAndQa($package, $qa);
+        }
+
         $errors = [];
         $summary = is_array($package['summary'] ?? null) ? $package['summary'] : [];
         $qaSummary = is_array($qa['summary'] ?? null) ? $qa['summary'] : [];
@@ -326,6 +343,76 @@ final class Mbti64CmsProjectionDraftWriter
 
     /**
      * @param  array<string,mixed>  $package
+     * @param  array<string,mixed>  $qa
+     * @return list<array<string,string>>
+     */
+    private function validateNextBatch6PackageAndQa(array $package, array $qa): array
+    {
+        $errors = [];
+        $summary = is_array($package['summary'] ?? null) ? $package['summary'] : [];
+        $qaSummary = is_array($qa['summary'] ?? null) ? $qa['summary'] : [];
+        $recommendationUrls = array_map(
+            static fn (array $item): string => (string) ($item['target_url'] ?? ''),
+            $this->recommendations($package)
+        );
+        $expectedUrls = self::NEXT_BATCH_6_URLS;
+        sort($recommendationUrls);
+        sort($expectedUrls);
+
+        if ((string) ($package['artifact'] ?? '') !== self::NEXT_BATCH_6_PACKAGE_ARTIFACT) {
+            $errors[] = ['field' => 'artifact', 'code' => 'unsupported_package_artifact', 'message' => 'Unexpected next-batch-6 package artifact.'];
+        }
+        if ((string) ($package['status'] ?? '') !== 'pass') {
+            $errors[] = ['field' => 'status', 'code' => 'package_status_not_ready_for_approval_handoff', 'message' => 'Next-batch-6 package must have pass status.'];
+        }
+        if (count($this->recommendations($package)) !== 6 || (int) ($summary['recommendation_count'] ?? -1) !== 6) {
+            $errors[] = ['field' => 'recommendations', 'code' => 'unexpected_recommendation_count', 'message' => 'Expected exactly 6 next-batch recommendations.'];
+        }
+        if ((int) ($summary['variant_pages'] ?? -1) !== 6 || (int) ($summary['comparison_pages'] ?? -1) !== 0) {
+            $errors[] = ['field' => 'summary', 'code' => 'unexpected_page_type_counts', 'message' => 'Expected 6 variant and 0 comparison recommendations.'];
+        }
+        if ($recommendationUrls !== $expectedUrls) {
+            $errors[] = ['field' => 'recommendations', 'code' => 'next_batch_6_url_set_mismatch', 'message' => 'Next-batch-6 package must contain exactly the fixed approved URL set.'];
+        }
+
+        if ((string) ($qa['artifact'] ?? '') !== self::NEXT_BATCH_6_QA_ARTIFACT) {
+            $errors[] = ['field' => 'qa.artifact', 'code' => 'unsupported_qa_artifact', 'message' => 'Unexpected next-batch-6 QA artifact.'];
+        }
+        if ((string) ($qa['final_decision'] ?? '') !== 'PASS_READY_FOR_APPROVAL_REVIEW') {
+            $errors[] = ['field' => 'qa.final_decision', 'code' => 'qa_not_ready_for_approval_review', 'message' => 'Next-batch-6 QA must be ready for approval review.'];
+        }
+        if ((int) ($qaSummary['checked_recommendation_count'] ?? -1) !== 6
+            || (int) ($qaSummary['pass_ready_for_approval_review_count'] ?? -1) !== 6
+            || (int) ($qaSummary['blocked_count'] ?? -1) !== 0) {
+            $errors[] = ['field' => 'qa.summary', 'code' => 'qa_summary_not_all_pass', 'message' => 'Next-batch-6 QA summary must show 6 pass and 0 blocked.'];
+        }
+        if ((array) ($qa['blockers'] ?? []) !== []) {
+            $errors[] = ['field' => 'qa.blockers', 'code' => 'qa_blockers_present', 'message' => 'QA blockers must be empty.'];
+        }
+
+        $qaUrls = array_map(
+            static fn (array $item): string => (string) ($item['target_url'] ?? ''),
+            array_values(array_filter(
+                is_array($qa['page_results'] ?? null) ? $qa['page_results'] : [],
+                static fn (mixed $item): bool => is_array($item)
+            ))
+        );
+        sort($qaUrls);
+        if ($recommendationUrls !== $qaUrls) {
+            $errors[] = ['field' => 'qa.page_results', 'code' => 'qa_url_set_mismatch', 'message' => 'QA page result URLs must match recommendation URLs.'];
+        }
+
+        foreach ($this->qaResultsByUrl($qa) as $url => $result) {
+            if ((string) ($result['decision'] ?? '') !== 'PASS_READY_FOR_APPROVAL_REVIEW' || (array) ($result['blockers'] ?? []) !== []) {
+                $errors[] = ['field' => 'qa.page_results.'.$url, 'code' => 'qa_page_not_pass', 'message' => 'Every next-batch-6 QA page result must pass approval review with no blockers.'];
+            }
+        }
+
+        return $errors;
+    }
+
+    /**
+     * @param  array<string,mixed>  $package
      * @return list<array<string,mixed>>
      */
     private function recommendations(array $package): array
@@ -348,22 +435,24 @@ final class Mbti64CmsProjectionDraftWriter
         $visibleQueryBacked3 = (bool) ($options['visible_query_backed_3'] ?? false);
         $freshQueryBacked3 = (bool) ($options['fresh_query_backed_3'] ?? false);
         $freshQueryBacked5 = (bool) ($options['fresh_query_backed_5'] ?? false);
+        $nextBatch6 = $this->nextBatch6Requested($options);
         $agentBatchRequested = $this->agentBatchRequested($options);
 
         if (($visibleQueryBacked3 ? 1 : 0)
             + ($freshQueryBacked3 ? 1 : 0)
             + ($freshQueryBacked5 ? 1 : 0)
+            + ($nextBatch6 ? 1 : 0)
             + ($agentBatchRequested ? 1 : 0) > 1) {
             $errors[] = [
                 'field' => 'options',
                 'code' => 'exclusive_subset_modes_required',
-                'message' => 'Only one subset mode can be used: --visible-query-backed-3, --fresh-query-backed-3, --fresh-query-backed-5, or agent batch options.',
+                'message' => 'Only one subset mode can be used: --visible-query-backed-3, --fresh-query-backed-3, --fresh-query-backed-5, --next-batch-6, or agent batch options.',
             ];
 
             return [];
         }
 
-        if (! $visibleQueryBacked3 && ! $freshQueryBacked3 && ! $freshQueryBacked5 && ! $agentBatchRequested) {
+        if (! $visibleQueryBacked3 && ! $freshQueryBacked3 && ! $freshQueryBacked5 && ! $nextBatch6 && ! $agentBatchRequested) {
             return $recommendations;
         }
 
@@ -377,6 +466,11 @@ final class Mbti64CmsProjectionDraftWriter
         }
 
         [$expectedUrls, $subsetCode, $subsetLabel] = match (true) {
+            $nextBatch6 => [
+                self::NEXT_BATCH_6_URLS,
+                'next_batch_6_subset_required_urls_missing',
+                'next batch 6',
+            ],
             $freshQueryBacked5 => [
                 self::FRESH_QUERY_BACKED_5_URLS,
                 'fresh_query_backed_5_subset_required_urls_missing',
@@ -420,6 +514,14 @@ final class Mbti64CmsProjectionDraftWriter
     {
         return trim((string) ($options['agent_batch_size'] ?? '')) !== ''
             || trim((string) ($options['agent_batch_offset'] ?? '')) !== '';
+    }
+
+    /**
+     * @param  array<string,mixed>  $options
+     */
+    private function nextBatch6Requested(array $options): bool
+    {
+        return (bool) ($options['next_batch_6'] ?? false);
     }
 
     /**
@@ -621,7 +723,7 @@ final class Mbti64CmsProjectionDraftWriter
      */
     private function agentBatchApprovalGate(array $preparedRows, string $sourceSha256, string $qaSha256, array $options): array
     {
-        if (! $this->agentBatchRequested($options)) {
+        if (! $this->agentBatchRequested($options) && ! $this->nextBatch6Requested($options)) {
             return [
                 'required_for_write' => false,
                 'ready_for_write' => true,
@@ -737,6 +839,7 @@ final class Mbti64CmsProjectionDraftWriter
             'pass',
             'PASS',
             'PASS_READY_FOR_CMS_DRAFT',
+            'PASS_READY_FOR_APPROVAL_REVIEW',
             'READY_QUERY_BACKED_LOW_RISK_DRAFT_REVIEW',
         ], true);
     }
@@ -896,6 +999,7 @@ final class Mbti64CmsProjectionDraftWriter
         $visibleQueryBacked3 = (bool) ($options['visible_query_backed_3'] ?? false);
         $freshQueryBacked3 = (bool) ($options['fresh_query_backed_3'] ?? false);
         $freshQueryBacked5 = (bool) ($options['fresh_query_backed_5'] ?? false);
+        $nextBatch6 = $this->nextBatch6Requested($options);
         $agentBatchRequested = $this->agentBatchRequested($options);
         $selectedUrls = array_values(array_map(
             static fn (array $row): string => (string) ($row['url'] ?? ''),
@@ -937,6 +1041,19 @@ final class Mbti64CmsProjectionDraftWriter
                 'write_allowed_with_strict_approval' => true,
                 'allowed_urls' => self::FRESH_QUERY_BACKED_5_URLS,
                 'selected_urls' => $selectedUrls,
+            ];
+        }
+
+        if ($nextBatch6) {
+            return [
+                'mode' => 'next_batch_6',
+                'enabled' => true,
+                'dry_run_only' => false,
+                'write_allowed_with_strict_approval' => true,
+                'approval_queue_required' => true,
+                'allowed_urls' => self::NEXT_BATCH_6_URLS,
+                'selected_urls' => $selectedUrls,
+                'arbitrary_url_subset_allowed' => false,
             ];
         }
 

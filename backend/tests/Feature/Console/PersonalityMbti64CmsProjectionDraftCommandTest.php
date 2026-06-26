@@ -53,6 +53,15 @@ final class PersonalityMbti64CmsProjectionDraftCommandTest extends TestCase
         'https://fermatmind.com/en/personality/intp-a',
     ];
 
+    private const NEXT_BATCH_6_URLS = [
+        'https://fermatmind.com/zh/personality/intp-a',
+        'https://fermatmind.com/en/personality/intp-a',
+        'https://fermatmind.com/zh/personality/esfp-a',
+        'https://fermatmind.com/en/personality/esfp-a',
+        'https://fermatmind.com/en/personality/enfj-a',
+        'https://fermatmind.com/zh/personality/enfj-a',
+    ];
+
     public function test_dry_run_plans_eighty_eight_projection_drafts_without_writes(): void
     {
         $this->seedAllTargets();
@@ -517,6 +526,228 @@ final class PersonalityMbti64CmsProjectionDraftCommandTest extends TestCase
         $this->assertSame(1, $exitCode);
         $this->assertFalse($payload['ok']);
         $this->assertContains('fresh_query_backed_5_subset_required_urls_missing', array_map(
+            static fn (array $error): string => (string) ($error['code'] ?? ''),
+            $payload['errors'] ?? []
+        ));
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_next_batch_six_dry_run_accepts_handoff_artifact_and_requires_approval_queue_without_writes(): void
+    {
+        $this->seedAllTargets();
+        [$packagePath, $qaPath] = $this->writeArtifacts($this->nextBatchSixPackage(), $this->nextBatchSixQa());
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', [
+            '--package' => $packagePath,
+            '--qa' => $qaPath,
+            '--dry-run' => true,
+            '--next-batch-6' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertTrue($payload['dry_run']);
+        $this->assertFalse($payload['write']);
+        $this->assertFalse($payload['writes_committed']);
+        $this->assertFalse($payload['publish_attempted']);
+        $this->assertFalse($payload['index_attempted']);
+        $this->assertFalse($payload['sitemap_llms_release_attempted']);
+        $this->assertFalse($payload['search_release_attempted']);
+        $this->assertSame(6, $payload['row_count']);
+        $this->assertSame(6, $payload['variant_row_count']);
+        $this->assertSame(0, $payload['comparison_row_count']);
+        $this->assertSame(6, $payload['would_create_revision_count']);
+        $this->assertSame('next_batch_6', $payload['subset']['mode']);
+        $this->assertTrue($payload['subset']['approval_queue_required']);
+        $this->assertFalse($payload['subset']['arbitrary_url_subset_allowed']);
+        $this->assertTrue($payload['approval_queue']['required_for_write']);
+        $this->assertFalse($payload['approval_queue']['ready_for_write']);
+        $this->assertSame(0, $payload['approval_queue']['approved_count']);
+        $this->assertSame(6, $payload['approval_queue']['missing_count']);
+
+        $plannedUrls = array_map(
+            static fn (array $row): string => (string) ($row['url'] ?? ''),
+            $payload['rows'] ?? []
+        );
+        sort($plannedUrls);
+        $expectedUrls = self::NEXT_BATCH_6_URLS;
+        sort($expectedUrls);
+        $this->assertSame($expectedUrls, $plannedUrls);
+        $this->assertSame($expectedUrls, array_values($this->sortedStrings((array) $payload['subset']['allowed_urls'])));
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_next_batch_six_handoff_artifact_is_rejected_without_explicit_subset_flag(): void
+    {
+        $this->seedAllTargets();
+        [$packagePath, $qaPath] = $this->writeArtifacts($this->nextBatchSixPackage(), $this->nextBatchSixQa());
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', [
+            '--package' => $packagePath,
+            '--qa' => $qaPath,
+            '--dry-run' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertContains('unsupported_package_artifact', array_map(
+            static fn (array $error): string => (string) ($error['code'] ?? ''),
+            $payload['errors'] ?? []
+        ));
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_next_batch_six_write_requires_next_batch_approval_token(): void
+    {
+        $this->seedAllTargets();
+        [$packagePath, $qaPath] = $this->writeArtifacts($this->nextBatchSixPackage(), $this->nextBatchSixQa());
+        $options = $this->writeOptions($packagePath, $qaPath);
+        $options['--next-batch-6'] = true;
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', $options);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertFalse($payload['writes_committed']);
+        $this->assertStringContainsString(
+            '--operator-approved=PERSONALITY-AGENT-CMS-DRAFT-NEXT-BATCH-6-WRITE-01 is required',
+            (string) ($payload['errors'][0]['message'] ?? '')
+        );
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_next_batch_six_write_without_approved_queue_rows_fails_closed_without_revisions(): void
+    {
+        $this->seedAllTargets();
+        [$packagePath, $qaPath] = $this->writeArtifacts($this->nextBatchSixPackage(), $this->nextBatchSixQa());
+        $options = $this->writeOptions($packagePath, $qaPath);
+        $options['--next-batch-6'] = true;
+        $options['--operator-approved'] = 'PERSONALITY-AGENT-CMS-DRAFT-NEXT-BATCH-6-WRITE-01';
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', $options);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertFalse($payload['writes_committed']);
+        $this->assertSame(6, $payload['row_count']);
+        $this->assertSame(0, $payload['created_revision_count']);
+        $this->assertSame(0, $payload['approval_queue']['approved_count']);
+        $this->assertSame(6, $payload['approval_queue']['missing_count']);
+        $this->assertContains('agent_batch_approval_required', array_map(
+            static fn (array $error): string => (string) ($error['code'] ?? ''),
+            $payload['errors'] ?? []
+        ));
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_next_batch_six_write_creates_only_approved_variant_draft_revisions(): void
+    {
+        $targets = $this->seedAllTargets();
+        $package = $this->nextBatchSixPackage();
+        $qa = $this->nextBatchSixQa();
+        [$packagePath, $qaPath] = $this->writeArtifacts($package, $qa);
+        $this->seedApprovedAgentApprovalRows($package, $qa, $packagePath, $qaPath, 6, 0);
+        $profileBefore = $this->profileLiveState($targets['zh-CN|INTP']);
+        $variantBefore = $this->variantLiveState($targets['zh-CN|INTP-A']);
+        $surfaceCountsBefore = $this->liveSurfaceCounts();
+        $options = $this->writeOptions($packagePath, $qaPath);
+        $options['--next-batch-6'] = true;
+        $options['--operator-approved'] = 'PERSONALITY-AGENT-CMS-DRAFT-NEXT-BATCH-6-WRITE-01';
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', $options);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertFalse($payload['dry_run']);
+        $this->assertTrue($payload['write']);
+        $this->assertTrue($payload['writes_committed']);
+        $this->assertSame(6, $payload['row_count']);
+        $this->assertSame(6, $payload['variant_row_count']);
+        $this->assertSame(0, $payload['comparison_row_count']);
+        $this->assertSame(6, $payload['created_revision_count']);
+        $this->assertSame(0, $payload['skipped_existing_count']);
+        $this->assertSame('next_batch_6', $payload['subset']['mode']);
+        $this->assertTrue($payload['approval_queue']['ready_for_write']);
+        $this->assertSame(6, $payload['approval_queue']['approved_count']);
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(6, PersonalityProfileVariantRevision::query()->count());
+        $this->assertSame($profileBefore, $this->profileLiveState($targets['zh-CN|INTP']));
+        $this->assertSame($variantBefore, $this->variantLiveState($targets['zh-CN|INTP-A']));
+        $this->assertSame($surfaceCountsBefore, $this->liveSurfaceCounts());
+
+        $createdUrls = array_map(
+            static fn (array $row): string => (string) ($row['url'] ?? ''),
+            $payload['rows'] ?? []
+        );
+        sort($createdUrls);
+        $expectedUrls = self::NEXT_BATCH_6_URLS;
+        sort($expectedUrls);
+        $this->assertSame($expectedUrls, $createdUrls);
+
+        foreach (PersonalityProfileVariantRevision::query()->get() as $revision) {
+            $this->assertProjectionSnapshot($revision->snapshot_json, 'PERSONALITY-AGENT-OPERATIONS-NEXT-BATCH-6-HANDOFF-01', 'PASS_READY_FOR_APPROVAL_REVIEW');
+        }
+    }
+
+    public function test_next_batch_six_write_with_partial_approval_fails_closed_without_revisions(): void
+    {
+        $this->seedAllTargets();
+        $package = $this->nextBatchSixPackage();
+        $qa = $this->nextBatchSixQa();
+        [$packagePath, $qaPath] = $this->writeArtifacts($package, $qa);
+        $this->seedApprovedAgentApprovalRows($package, $qa, $packagePath, $qaPath, 5, 0);
+        $options = $this->writeOptions($packagePath, $qaPath);
+        $options['--next-batch-6'] = true;
+        $options['--operator-approved'] = 'PERSONALITY-AGENT-CMS-DRAFT-NEXT-BATCH-6-WRITE-01';
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', $options);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertFalse($payload['writes_committed']);
+        $this->assertSame(5, $payload['approval_queue']['approved_count']);
+        $this->assertSame(1, $payload['approval_queue']['missing_count']);
+        $this->assertSame(0, PersonalityProfileRevision::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
+    }
+
+    public function test_next_batch_six_fails_closed_when_handoff_contains_arbitrary_url(): void
+    {
+        $this->seedAllTargets();
+        $package = $this->nextBatchSixPackage();
+        $package['recommendations'][0] = $this->recommendation('/en/personality/entp-a');
+        $qa = $this->nextBatchSixQa($package);
+        [$packagePath, $qaPath] = $this->writeArtifacts($package, $qa);
+
+        $exitCode = Artisan::call('personality:mbti64-cms-projection-draft', [
+            '--package' => $packagePath,
+            '--qa' => $qaPath,
+            '--dry-run' => true,
+            '--next-batch-6' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertContains('next_batch_6_url_set_mismatch', array_map(
+            static fn (array $error): string => (string) ($error['code'] ?? ''),
+            $payload['errors'] ?? []
+        ));
+        $this->assertContains('next_batch_6_subset_required_urls_missing', array_map(
             static fn (array $error): string => (string) ($error['code'] ?? ''),
             $payload['errors'] ?? []
         ));
@@ -1188,12 +1419,15 @@ final class PersonalityMbti64CmsProjectionDraftCommandTest extends TestCase
     /**
      * @param  array<string,mixed>  $snapshot
      */
-    private function assertProjectionSnapshot(array $snapshot): void
-    {
+    private function assertProjectionSnapshot(
+        array $snapshot,
+        string $expectedArtifact = 'MBTI64-PUBLIC-PROFILE-AGENT-EXPANSION-88-01',
+        string $expectedQaDecision = 'PASS_READY_FOR_CMS_DRAFT',
+    ): void {
         $this->assertArrayHasKey('mbti64_agent_projection_draft_v1', $snapshot);
         $payload = $snapshot['mbti64_agent_projection_draft_v1'];
-        $this->assertSame('MBTI64-PUBLIC-PROFILE-AGENT-EXPANSION-88-01', $payload['source']['artifact']);
-        $this->assertSame('PASS_READY_FOR_CMS_DRAFT', $payload['source']['qa_final_decision']);
+        $this->assertSame($expectedArtifact, $payload['source']['artifact']);
+        $this->assertSame($expectedQaDecision, $payload['source']['qa_final_decision']);
         $this->assertNotSame('', $payload['first_class_draft_fields']['seo']['title']);
         $this->assertNotSame('', $payload['first_class_draft_fields']['seo']['description']);
         $this->assertNotSame('', $payload['first_class_draft_fields']['seo']['h1']);
@@ -1280,6 +1514,89 @@ final class PersonalityMbti64CmsProjectionDraftCommandTest extends TestCase
             'warnings' => ['GSC_EVIDENCE_PENDING'],
             'final_decision' => 'PASS_READY_FOR_CMS_DRAFT',
             'recommended_next_task' => 'MBTI64-CMS-PROJECTION-DRAFT-88-01',
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function nextBatchSixPackage(): array
+    {
+        $recommendations = [];
+        foreach (self::NEXT_BATCH_6_URLS as $url) {
+            $path = (string) (parse_url($url, PHP_URL_PATH) ?: '');
+            $recommendations[] = $this->recommendation($path);
+        }
+
+        return [
+            'artifact' => 'PERSONALITY-AGENT-OPERATIONS-NEXT-BATCH-6-HANDOFF-01',
+            'generated_at' => '2026-06-25T00:00:00Z',
+            'status' => 'pass',
+            'summary' => [
+                'recommendation_count' => 6,
+                'query_backed_count' => 3,
+                'bilingual_paired_counterpart_count' => 3,
+                'variant_pages' => 6,
+                'comparison_pages' => 0,
+                'source_qa_pass_count' => 6,
+            ],
+            'recommendations' => $recommendations,
+            'blockers' => [],
+            'warnings' => [],
+            'recommended_next_task' => 'PERSONALITY-AGENT-APPROVAL-QUEUE-NEXT-BATCH-6-DRY-RUN-01',
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>|null  $package
+     * @return array<string,mixed>
+     */
+    private function nextBatchSixQa(?array $package = null): array
+    {
+        $package ??= $this->nextBatchSixPackage();
+        $pageResults = [];
+        foreach ((array) ($package['recommendations'] ?? []) as $recommendation) {
+            if (! is_array($recommendation)) {
+                continue;
+            }
+            $targetUrl = (string) ($recommendation['target_url'] ?? '');
+            $path = (string) (parse_url($targetUrl, PHP_URL_PATH) ?: '');
+            $pageResults[] = [
+                'target_url' => $targetUrl,
+                'locale' => str_starts_with($path, '/zh/') ? 'zh-CN' : 'en',
+                'page_type' => 'variant',
+                'gates' => [
+                    'schema_validation' => 'pass',
+                    'trademark_claim_gate' => 'pass',
+                    'claim_risk_gate' => 'pass',
+                    'duplicate_template_gate' => 'pass',
+                    'private_route_gate' => 'pass',
+                    'result_page_leakage_gate' => 'pass',
+                    'seo_projection_gate' => 'pass',
+                    'bilingual_consistency_gate' => 'pass',
+                ],
+                'blockers' => [],
+                'warnings' => [],
+                'decision' => 'PASS_READY_FOR_APPROVAL_REVIEW',
+            ];
+        }
+
+        return [
+            'artifact' => 'PERSONALITY-AGENT-OPERATIONS-NEXT-BATCH-6-HANDOFF-QA-01',
+            'generated_at' => '2026-06-25T00:00:00Z',
+            'status' => 'pass',
+            'summary' => [
+                'checked_recommendation_count' => 6,
+                'pass_ready_for_approval_review_count' => 6,
+                'query_backed_count' => 3,
+                'bilingual_paired_counterpart_count' => 3,
+                'blocked_count' => 0,
+            ],
+            'page_results' => $pageResults,
+            'blockers' => [],
+            'warnings' => [],
+            'final_decision' => 'PASS_READY_FOR_APPROVAL_REVIEW',
+            'recommended_next_task' => 'PERSONALITY-AGENT-APPROVAL-QUEUE-NEXT-BATCH-6-WRITE-01',
         ];
     }
 
@@ -1515,7 +1832,7 @@ final class PersonalityMbti64CmsProjectionDraftCommandTest extends TestCase
                 'page_type' => str_contains($path, '-a-vs-') ? 'personality_profile_comparison' : 'personality_profile_variant',
                 'recommendation_id' => (string) ($recommendation['recommendation_id'] ?? ''),
                 'recommendation_sha256' => hash('sha256', $this->jsonString($recommendation)),
-                'qa_decision' => 'PASS_READY_FOR_CMS_DRAFT',
+                'qa_decision' => (string) ($qaResult['decision'] ?? 'PASS_READY_FOR_CMS_DRAFT'),
                 'approval_state' => 'approved',
                 'approved_at' => now(),
                 'rejected_at' => null,
