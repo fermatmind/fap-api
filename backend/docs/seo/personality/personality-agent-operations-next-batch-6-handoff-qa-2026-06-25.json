@@ -1,0 +1,196 @@
+{
+  "artifact": "PERSONALITY-AGENT-OPERATIONS-NEXT-BATCH-6-HANDOFF-QA-01",
+  "generated_at": "2026-06-25T15:02:24.263Z",
+  "status": "pass",
+  "final_decision": "PASS_READY_FOR_APPROVAL_REVIEW",
+  "input_artifacts": {
+    "source_recommendations": "docs/seo/personality/mbti64-agent-expansion-88-recommendations-2026-06-21.json",
+    "source_recommendations_sha256": "c938f8ff04fe985fc14b52a6b049560673c6bcc9a26e6faac3a0fccdd78b0bf3",
+    "source_qa": "docs/seo/personality/mbti64-agent-expansion-88-qa-2026-06-21.json",
+    "source_qa_sha256": "b2912a8c586ab5acb8933456ee0c4537b7d69ea55112e4a5733ac9516073079c",
+    "selection": "docs/seo/personality/personality-agent-operations-next-batch-selection-2026-06-25.json"
+  },
+  "summary": {
+    "checked_recommendation_count": 6,
+    "pass_ready_for_approval_review_count": 6,
+    "query_backed_count": 3,
+    "bilingual_paired_counterpart_count": 3,
+    "blocked_count": 0
+  },
+  "page_results": [
+    {
+      "target_url": "https://fermatmind.com/zh/personality/intp-a",
+      "path": "/zh/personality/intp-a",
+      "framework": "mbti64",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "handoff_class": "query_backed",
+      "paired_source_path": null,
+      "decision": "PASS_READY_FOR_APPROVAL_REVIEW",
+      "source_qa_decision": "PASS_READY_FOR_CMS_DRAFT",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [],
+      "blocked_reason": null,
+      "allowed_next_action": "approval_queue_dry_run"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/intp-a",
+      "path": "/en/personality/intp-a",
+      "framework": "mbti64",
+      "locale": "en",
+      "page_type": "variant",
+      "handoff_class": "bilingual_paired_counterpart",
+      "paired_source_path": "/zh/personality/intp-a",
+      "decision": "PASS_READY_FOR_APPROVAL_REVIEW",
+      "source_qa_decision": "PASS_READY_FOR_CMS_DRAFT",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "paired_counterpart_no_direct_query_row"
+      ],
+      "blocked_reason": null,
+      "allowed_next_action": "approval_queue_dry_run"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/esfp-a",
+      "path": "/zh/personality/esfp-a",
+      "framework": "mbti64",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "handoff_class": "query_backed",
+      "paired_source_path": null,
+      "decision": "PASS_READY_FOR_APPROVAL_REVIEW",
+      "source_qa_decision": "PASS_READY_FOR_CMS_DRAFT",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [],
+      "blocked_reason": null,
+      "allowed_next_action": "approval_queue_dry_run"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/esfp-a",
+      "path": "/en/personality/esfp-a",
+      "framework": "mbti64",
+      "locale": "en",
+      "page_type": "variant",
+      "handoff_class": "bilingual_paired_counterpart",
+      "paired_source_path": "/zh/personality/esfp-a",
+      "decision": "PASS_READY_FOR_APPROVAL_REVIEW",
+      "source_qa_decision": "PASS_READY_FOR_CMS_DRAFT",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "paired_counterpart_no_direct_query_row"
+      ],
+      "blocked_reason": null,
+      "allowed_next_action": "approval_queue_dry_run"
+    },
+    {
+      "target_url": "https://fermatmind.com/en/personality/enfj-a",
+      "path": "/en/personality/enfj-a",
+      "framework": "mbti64",
+      "locale": "en",
+      "page_type": "variant",
+      "handoff_class": "query_backed",
+      "paired_source_path": null,
+      "decision": "PASS_READY_FOR_APPROVAL_REVIEW",
+      "source_qa_decision": "PASS_READY_FOR_CMS_DRAFT",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [],
+      "blocked_reason": null,
+      "allowed_next_action": "approval_queue_dry_run"
+    },
+    {
+      "target_url": "https://fermatmind.com/zh/personality/enfj-a",
+      "path": "/zh/personality/enfj-a",
+      "framework": "mbti64",
+      "locale": "zh-CN",
+      "page_type": "variant",
+      "handoff_class": "bilingual_paired_counterpart",
+      "paired_source_path": "/en/personality/enfj-a",
+      "decision": "PASS_READY_FOR_APPROVAL_REVIEW",
+      "source_qa_decision": "PASS_READY_FOR_CMS_DRAFT",
+      "gates": {
+        "schema_validation": "pass",
+        "trademark_claim_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      },
+      "blockers": [],
+      "warnings": [
+        "paired_counterpart_no_direct_query_row"
+      ],
+      "blocked_reason": null,
+      "allowed_next_action": "approval_queue_dry_run"
+    }
+  ],
+  "safety_boundary": {
+    "artifact_only": true,
+    "new_body_copy_generated": false,
+    "gpt_or_external_model_called": false,
+    "approval_queue_write_attempted": false,
+    "cms_write_attempted": false,
+    "cms_live_promotion_attempted": false,
+    "frontend_runtime_change_attempted": false,
+    "search_queue_mutation_attempted": false,
+    "live_search_submit_attempted": false,
+    "sitemap_llms_mutation_attempted": false,
+    "gsc_api_call_attempted": false,
+    "gsc_request_indexing_attempted": false,
+    "production_deploy_attempted": false
+  },
+  "blockers": [],
+  "warnings": [],
+  "recommended_next_task": "PERSONALITY-AGENT-APPROVAL-QUEUE-NEXT-BATCH-6-DRY-RUN-01"
+}
