@@ -352,6 +352,7 @@ final class Eq60ReportComposer
         $formulationId = $this->selectCoreFormulation($dimensionScores, $qualityLevel);
         $route = $this->selectPersonalizationRoute($routeMatrix, $formulationId);
         $selectedAssetIds = $this->selectedAssetIds($route, $formulationId, $dimensionScores, $developmentLever);
+        $selectedAssetIds['scene_variant_ids'] = $this->selectSceneVariantIds($formulationId, $selectedAssetIds['scene_ids']);
         $routeId = trim((string) ($route['route_id'] ?? $formulationId)) ?: $formulationId;
         $signalSignature = $this->buildSignalSignature(
             $routeId,
@@ -371,6 +372,7 @@ final class Eq60ReportComposer
             'development_lever' => $developmentLever,
             'primary_mechanism_ids' => $selectedAssetIds['mechanism_ids'],
             'primary_scene_ids' => $selectedAssetIds['scene_ids'],
+            'primary_scene_variant_ids' => $selectedAssetIds['scene_variant_ids'],
             'career_environment_ids' => $selectedAssetIds['career_environment_ids'],
             'action_prescription_id' => $selectedAssetIds['action_prescription_id'],
             'selected_asset_ids' => $selectedAssetIds,
@@ -544,6 +546,20 @@ final class Eq60ReportComposer
     }
 
     /**
+     * @param  list<string>  $sceneIds
+     * @return list<string>
+     */
+    private function selectSceneVariantIds(string $formulationId, array $sceneIds): array
+    {
+        $safeFormulationId = trim($formulationId) !== '' ? trim($formulationId) : 'balanced_integrated';
+
+        return array_values(array_map(
+            static fn (string $sceneId): string => 'eq.scene.'.trim($sceneId).'.'.$safeFormulationId.'.primary',
+            array_values(array_filter($sceneIds, static fn (string $sceneId): bool => trim($sceneId) !== ''))
+        ));
+    }
+
+    /**
      * @return list<string>
      */
     private function selectCareerEnvironmentIds(string $formulationId): array
@@ -644,6 +660,7 @@ final class Eq60ReportComposer
             'quality_explanation_asset_id' => (string) ($quality['explanation_asset_id'] ?? ''),
             'mechanism_ids' => array_values(array_map('strval', (array) ($interpretation['primary_mechanism_ids'] ?? []))),
             'scene_ids' => array_values(array_map('strval', (array) ($interpretation['primary_scene_ids'] ?? []))),
+            'scene_variant_ids' => array_values(array_map('strval', (array) ($interpretation['primary_scene_variant_ids'] ?? []))),
             'career_environment_ids' => array_values(array_map('strval', (array) ($interpretation['career_environment_ids'] ?? []))),
             'action_prescription_id' => (string) ($interpretation['action_prescription_id'] ?? ''),
             'cross_assessment_context_ids' => array_values(array_map('strval', (array) ($crossAssessmentContext['context_asset_ids'] ?? []))),
@@ -713,6 +730,7 @@ final class Eq60ReportComposer
         $qualityConfidenceAssets = (array) data_get($docs, 'quality_confidence.assets', []);
         $evidenceAssets = (array) data_get($docs, 'psychometric_evidence_status.assets', []);
         $depthAssets = (array) data_get($docs, 'result_page_depth_modules.assets', []);
+        $sceneVariantAssets = (array) data_get($docs, 'reality_scene_variants.assets', []);
         $agentAssets = (array) data_get($docs, 'agent_dialogue_playbooks.assets', []);
         $backendContractAssets = (array) data_get($docs, 'backend_integration_contract.assets', []);
         $formulationId = (string) ($interpretation['core_formulation_id'] ?? '');
@@ -736,11 +754,32 @@ final class Eq60ReportComposer
         }
 
         $scenes = [];
-        foreach ((array) ($interpretation['primary_scene_ids'] ?? []) as $idRaw) {
-            $id = trim((string) $idRaw);
-            $node = data_get($docs, 'reality_translation.scenes.'.$id);
+        $sceneIds = array_values(array_map('strval', (array) ($interpretation['primary_scene_ids'] ?? [])));
+        $sceneVariantIds = array_values(array_map('strval', (array) ($interpretation['primary_scene_variant_ids'] ?? [])));
+        foreach ($sceneIds as $idx => $familyRaw) {
+            $family = trim((string) $familyRaw);
+            if ($family === '') {
+                continue;
+            }
+            $variantId = trim((string) ($sceneVariantIds[$idx] ?? ''));
+            $variantNode = $variantId !== '' ? ($sceneVariantAssets[$variantId] ?? null) : null;
+            if (is_array($variantNode)) {
+                $scenes[] = array_merge(
+                    [
+                        'id' => $variantId,
+                        'scene_family' => (string) ($variantNode['scene_family'] ?? $family),
+                        'variant' => (string) ($variantNode['variant'] ?? 'primary'),
+                        'fallback_scene_id' => $family,
+                    ],
+                    $this->localizedAsset($variantNode, $locale)
+                );
+
+                continue;
+            }
+
+            $node = data_get($docs, 'reality_translation.scenes.'.$family);
             if (is_array($node)) {
-                $scenes[] = array_merge(['id' => $id], $this->localizedAsset($node, $locale));
+                $scenes[] = array_merge(['id' => $family, 'scene_family' => $family, 'variant' => 'generic'], $this->localizedAsset($node, $locale));
             }
         }
 

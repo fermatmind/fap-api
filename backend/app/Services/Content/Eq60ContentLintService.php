@@ -806,6 +806,7 @@ final class Eq60ContentLintService
             'core_formulations',
             'mechanism_map',
             'reality_translation',
+            'reality_scene_variants',
             'career_environment',
             'action_prescriptions',
             'cross_assessment_context',
@@ -909,6 +910,36 @@ final class Eq60ContentLintService
                 'cost',
                 'better_move',
             ], $errors);
+        }
+
+        $sceneVariantFile = $this->loader->rawPath('report_assets/reality_scene_variants.json', $version);
+        $sceneVariants = (array) data_get($docs, 'reality_scene_variants.assets', []);
+        if (count($sceneVariants) < 60) {
+            $errors[] = $this->error($sceneVariantFile, 1, 'reality_scene_variants.assets must contain formulation-aware scene variants.');
+        }
+        foreach ([
+            'eq.scene.feedback.high_empathy_low_recovery.primary',
+            'eq.scene.conflict.high_empathy_low_recovery.primary',
+            'eq.scene.relationship_boundary.high_empathy_low_recovery.primary',
+            'eq.scene.feedback.low_confidence_result.primary',
+            'eq.scene.pressure_recovery.low_confidence_result.primary',
+        ] as $assetId) {
+            $asset = (array) ($sceneVariants[$assetId] ?? []);
+            $this->lintLocalizedAssetFields($sceneVariantFile, $asset, [
+                'title',
+                'typical_response',
+                'strength',
+                'cost',
+                'better_move',
+                'micro_script',
+                'do_not_overread',
+                'why_this_matters',
+            ], $errors);
+            foreach (['zh-CN', 'en'] as $locale) {
+                if ((array) data_get($asset, $locale.'.evidence_signals', []) === []) {
+                    $errors[] = $this->error($sceneVariantFile, 1, $assetId.'.'.$locale.'.evidence_signals cannot be empty.');
+                }
+            }
         }
 
         foreach (['interpersonal_density', 'emotional_labor', 'conflict_frequency', 'feedback_intensity', 'autonomy_recovery', 'collaboration_complexity'] as $variable) {
