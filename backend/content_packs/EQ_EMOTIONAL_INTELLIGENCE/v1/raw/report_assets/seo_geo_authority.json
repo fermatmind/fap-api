@@ -499,6 +499,446 @@
         "answer": "Ask about one real scene: feedback, conflict, boundaries, or recovery. The Agent explains your report assets; it does not change your scores.",
         "do_not_overread": "FAQ is navigation and education, not a personal diagnosis."
       }
+    },
+    {
+      "zh-CN": {
+        "question": "询问 EQ Agent在这份报告里是什么意思？",
+        "answer": "在费马 EQ 中，这个主题会结合自我觉察、情绪调节、共情理解和关系管理来解释。它适合用于自我理解、关系反思和职业环境探索，不适合作为高风险决定依据。",
+        "do_not_overread": "解释范围应限制在自我反思、关系学习和工作环境观察。"
+      },
+      "en": {
+        "question": "What does ask EQ agent mean in this report?",
+        "answer": "In FermatMind EQ, this topic is explained through self-perceived patterns in self-awareness, emotion regulation, empathy, and relationship management. Use it to reflect on situations, not to make high-stakes decisions.",
+        "do_not_overread": "Keep interpretation inside self-reflection, relationship learning, and work-environment exploration."
+      },
+      "meta": {
+        "topic": "agent_eq",
+        "v19_source_ids": [
+          "eq.seo.zh.agent_eq",
+          "eq.seo.en.agent_eq"
+        ],
+        "asset_type": "seo_geo_faq"
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "EQ 与职业环境在这份报告里是什么意思？",
+        "answer": "在费马 EQ 中，这个主题会结合自我觉察、情绪调节、共情理解和关系管理来解释。它适合用于自我理解、关系反思和职业环境探索，不适合作为高风险决定依据。",
+        "do_not_overread": "解释范围应限制在自我反思、关系学习和工作环境观察。"
+      },
+      "en": {
+        "question": "What does EQ and career environment mean in this report?",
+        "answer": "In FermatMind EQ, this topic is explained through self-perceived patterns in self-awareness, emotion regulation, empathy, and relationship management. Use it to reflect on situations, not to make high-stakes decisions.",
+        "do_not_overread": "Keep interpretation inside self-reflection, relationship learning, and work-environment exploration."
+      },
+      "meta": {
+        "topic": "career_environment",
+        "v19_source_ids": [
+          "eq.seo.zh.career_environment",
+          "eq.seo.en.career_environment"
+        ],
+        "asset_type": "seo_geo_faq"
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "情绪调节在这份报告里是什么意思？",
+        "answer": "在费马 EQ 中，这个主题会结合自我觉察、情绪调节、共情理解和关系管理来解释。它适合用于自我理解、关系反思和职业环境探索，不适合作为高风险决定依据。",
+        "do_not_overread": "解释范围应限制在自我反思、关系学习和工作环境观察。"
+      },
+      "en": {
+        "question": "What does emotion regulation mean in this report?",
+        "answer": "In FermatMind EQ, this topic is explained through self-perceived patterns in self-awareness, emotion regulation, empathy, and relationship management. Use it to reflect on situations, not to make high-stakes decisions.",
+        "do_not_overread": "Keep interpretation inside self-reflection, relationship learning, and work-environment exploration."
+      },
+      "meta": {
+        "topic": "emotion_regulation",
+        "v19_source_ids": [
+          "eq.seo.zh.emotion_regulation",
+          "eq.seo.en.emotion_regulation"
+        ],
+        "asset_type": "seo_geo_faq"
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "情商测试在这份报告里是什么意思？",
+        "answer": "在费马 EQ 中，这个主题会结合自我觉察、情绪调节、共情理解和关系管理来解释。它适合用于自我理解、关系反思和职业环境探索，不适合作为高风险决定依据。",
+        "do_not_overread": "解释范围应限制在自我反思、关系学习和工作环境观察。"
+      },
+      "en": {
+        "question": "What does emotional intelligence test mean in this report?",
+        "answer": "In FermatMind EQ, this topic is explained through self-perceived patterns in self-awareness, emotion regulation, empathy, and relationship management. Use it to reflect on situations, not to make high-stakes decisions.",
+        "do_not_overread": "Keep interpretation inside self-reflection, relationship learning, and work-environment exploration."
+      },
+      "meta": {
+        "topic": "emotional_intelligence_test",
+        "v19_source_ids": [
+          "eq.seo.zh.emotional_intelligence_test",
+          "eq.seo.en.emotional_intelligence_test"
+        ],
+        "asset_type": "seo_geo_faq"
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "共情与边界在这份报告里是什么意思？",
+        "answer": "在费马 EQ 中，这个主题会结合自我觉察、情绪调节、共情理解和关系管理来解释。它适合用于自我理解、关系反思和职业环境探索，不适合作为高风险决定依据。",
+        "do_not_overread": "解释范围应限制在自我反思、关系学习和工作环境观察。"
+      },
+      "en": {
+        "question": "What does empathy and boundaries mean in this report?",
+        "answer": "In FermatMind EQ, this topic is explained through self-perceived patterns in self-awareness, emotion regulation, empathy, and relationship management. Use it to reflect on situations, not to make high-stakes decisions.",
+        "do_not_overread": "Keep interpretation inside self-reflection, relationship learning, and work-environment exploration."
+      },
+      "meta": {
+        "topic": "empathy_boundaries",
+        "v19_source_ids": [
+          "eq.seo.zh.empathy_boundaries",
+          "eq.seo.en.empathy_boundaries"
+        ],
+        "asset_type": "seo_geo_faq"
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "情商测试局限在这份报告里是什么意思？",
+        "answer": "在费马 EQ 中，这个主题会结合自我觉察、情绪调节、共情理解和关系管理来解释。它适合用于自我理解、关系反思和职业环境探索，不适合作为高风险决定依据。",
+        "do_not_overread": "解释范围应限制在自我反思、关系学习和工作环境观察。"
+      },
+      "en": {
+        "question": "What does EQ test limitations mean in this report?",
+        "answer": "In FermatMind EQ, this topic is explained through self-perceived patterns in self-awareness, emotion regulation, empathy, and relationship management. Use it to reflect on situations, not to make high-stakes decisions.",
+        "do_not_overread": "Keep interpretation inside self-reflection, relationship learning, and work-environment exploration."
+      },
+      "meta": {
+        "topic": "eq_limitations",
+        "v19_source_ids": [
+          "eq.seo.zh.eq_limitations",
+          "eq.seo.en.eq_limitations"
+        ],
+        "asset_type": "seo_geo_faq"
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "情商测试可靠吗在这份报告里是什么意思？",
+        "answer": "在费马 EQ 中，这个主题会结合自我觉察、情绪调节、共情理解和关系管理来解释。它适合用于自我理解、关系反思和职业环境探索，不适合作为高风险决定依据。",
+        "do_not_overread": "解释范围应限制在自我反思、关系学习和工作环境观察。"
+      },
+      "en": {
+        "question": "What does is an EQ test reliable? mean in this report?",
+        "answer": "In FermatMind EQ, this topic is explained through self-perceived patterns in self-awareness, emotion regulation, empathy, and relationship management. Use it to reflect on situations, not to make high-stakes decisions.",
+        "do_not_overread": "Keep interpretation inside self-reflection, relationship learning, and work-environment exploration."
+      },
+      "meta": {
+        "topic": "eq_reliability",
+        "v19_source_ids": [
+          "eq.seo.zh.eq_reliability",
+          "eq.seo.en.eq_reliability"
+        ],
+        "asset_type": "seo_geo_faq"
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "EQ 分数含义在这份报告里是什么意思？",
+        "answer": "在费马 EQ 中，这个主题会结合自我觉察、情绪调节、共情理解和关系管理来解释。它适合用于自我理解、关系反思和职业环境探索，不适合作为高风险决定依据。",
+        "do_not_overread": "解释范围应限制在自我反思、关系学习和工作环境观察。"
+      },
+      "en": {
+        "question": "What does EQ score meaning mean in this report?",
+        "answer": "In FermatMind EQ, this topic is explained through self-perceived patterns in self-awareness, emotion regulation, empathy, and relationship management. Use it to reflect on situations, not to make high-stakes decisions.",
+        "do_not_overread": "Keep interpretation inside self-reflection, relationship learning, and work-environment exploration."
+      },
+      "meta": {
+        "topic": "eq_score_meaning",
+        "v19_source_ids": [
+          "eq.seo.zh.eq_score_meaning",
+          "eq.seo.en.eq_score_meaning"
+        ],
+        "asset_type": "seo_geo_faq"
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "EQ 和大五人格的区别在这份报告里是什么意思？",
+        "answer": "在费马 EQ 中，这个主题会结合自我觉察、情绪调节、共情理解和关系管理来解释。它适合用于自我理解、关系反思和职业环境探索，不适合作为高风险决定依据。",
+        "do_not_overread": "解释范围应限制在自我反思、关系学习和工作环境观察。"
+      },
+      "en": {
+        "question": "What does EQ vs big five mean in this report?",
+        "answer": "In FermatMind EQ, this topic is explained through self-perceived patterns in self-awareness, emotion regulation, empathy, and relationship management. Use it to reflect on situations, not to make high-stakes decisions.",
+        "do_not_overread": "Keep interpretation inside self-reflection, relationship learning, and work-environment exploration."
+      },
+      "meta": {
+        "topic": "eq_vs_big_five",
+        "v19_source_ids": [
+          "eq.seo.zh.eq_vs_big_five",
+          "eq.seo.en.eq_vs_big_five"
+        ],
+        "asset_type": "seo_geo_faq"
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "EQ 和九型人格的区别在这份报告里是什么意思？",
+        "answer": "在费马 EQ 中，这个主题会结合自我觉察、情绪调节、共情理解和关系管理来解释。它适合用于自我理解、关系反思和职业环境探索，不适合作为高风险决定依据。",
+        "do_not_overread": "解释范围应限制在自我反思、关系学习和工作环境观察。"
+      },
+      "en": {
+        "question": "What does EQ vs enneagram mean in this report?",
+        "answer": "In FermatMind EQ, this topic is explained through self-perceived patterns in self-awareness, emotion regulation, empathy, and relationship management. Use it to reflect on situations, not to make high-stakes decisions.",
+        "do_not_overread": "Keep interpretation inside self-reflection, relationship learning, and work-environment exploration."
+      },
+      "meta": {
+        "topic": "eq_vs_enneagram",
+        "v19_source_ids": [
+          "eq.seo.zh.eq_vs_enneagram",
+          "eq.seo.en.eq_vs_enneagram"
+        ],
+        "asset_type": "seo_geo_faq"
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "EQ 和 IQ 的区别在这份报告里是什么意思？",
+        "answer": "在费马 EQ 中，这个主题会结合自我觉察、情绪调节、共情理解和关系管理来解释。它适合用于自我理解、关系反思和职业环境探索，不适合作为高风险决定依据。",
+        "do_not_overread": "解释范围应限制在自我反思、关系学习和工作环境观察。"
+      },
+      "en": {
+        "question": "What does EQ vs iq mean in this report?",
+        "answer": "In FermatMind EQ, this topic is explained through self-perceived patterns in self-awareness, emotion regulation, empathy, and relationship management. Use it to reflect on situations, not to make high-stakes decisions.",
+        "do_not_overread": "Keep interpretation inside self-reflection, relationship learning, and work-environment exploration."
+      },
+      "meta": {
+        "topic": "eq_vs_iq",
+        "v19_source_ids": [
+          "eq.seo.zh.eq_vs_iq",
+          "eq.seo.en.eq_vs_iq"
+        ],
+        "asset_type": "seo_geo_faq"
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "EQ 和 MBTI 的区别在这份报告里是什么意思？",
+        "answer": "在费马 EQ 中，这个主题会结合自我觉察、情绪调节、共情理解和关系管理来解释。它适合用于自我理解、关系反思和职业环境探索，不适合作为高风险决定依据。",
+        "do_not_overread": "解释范围应限制在自我反思、关系学习和工作环境观察。"
+      },
+      "en": {
+        "question": "What does EQ vs mbti mean in this report?",
+        "answer": "In FermatMind EQ, this topic is explained through self-perceived patterns in self-awareness, emotion regulation, empathy, and relationship management. Use it to reflect on situations, not to make high-stakes decisions.",
+        "do_not_overread": "Keep interpretation inside self-reflection, relationship learning, and work-environment exploration."
+      },
+      "meta": {
+        "topic": "eq_vs_mbti",
+        "v19_source_ids": [
+          "eq.seo.zh.eq_vs_mbti",
+          "eq.seo.en.eq_vs_mbti"
+        ],
+        "asset_type": "seo_geo_faq"
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "免费 EQ 测试在这份报告里是什么意思？",
+        "answer": "在费马 EQ 中，这个主题会结合自我觉察、情绪调节、共情理解和关系管理来解释。它适合用于自我理解、关系反思和职业环境探索，不适合作为高风险决定依据。",
+        "do_not_overread": "解释范围应限制在自我反思、关系学习和工作环境观察。"
+      },
+      "en": {
+        "question": "What does free EQ test mean in this report?",
+        "answer": "In FermatMind EQ, this topic is explained through self-perceived patterns in self-awareness, emotion regulation, empathy, and relationship management. Use it to reflect on situations, not to make high-stakes decisions.",
+        "do_not_overread": "Keep interpretation inside self-reflection, relationship learning, and work-environment exploration."
+      },
+      "meta": {
+        "topic": "free_eq_test",
+        "v19_source_ids": [
+          "eq.seo.zh.free_eq_test",
+          "eq.seo.en.free_eq_test"
+        ],
+        "asset_type": "seo_geo_faq"
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "需要付费才能看完整 EQ 结果吗？",
+        "answer": "当前策略是 EQ-60 基础报告免费。未来情境判断模块如果开放，也应作为数据完整度升级，而不是把当前结果锁起来。",
+        "do_not_overread": "不得暗示访问门槛或分层结果承诺。"
+      },
+      "en": {
+        "question": "Do I need to pay to see my full EQ result?",
+        "answer": "The current strategy is a free EQ-60 base report. If the future scenario module opens, it should deepen the data rather than lock the current result.",
+        "do_not_overread": "Do not imply access gates or tiered-result promises."
+      },
+      "meta": {
+        "topic": "free_full_report",
+        "v19_source_ids": [
+          "eq.seo.zh.free_full_report",
+          "eq.seo.en.free_full_report"
+        ],
+        "asset_type": "seo_geo_faq"
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "如何提升情绪与关系能力在这份报告里是什么意思？",
+        "answer": "在费马 EQ 中，这个主题会结合自我觉察、情绪调节、共情理解和关系管理来解释。它适合用于自我理解、关系反思和职业环境探索，不适合作为高风险决定依据。",
+        "do_not_overread": "解释范围应限制在自我反思、关系学习和工作环境观察。"
+      },
+      "en": {
+        "question": "What does how to improve EQ mean in this report?",
+        "answer": "In FermatMind EQ, this topic is explained through self-perceived patterns in self-awareness, emotion regulation, empathy, and relationship management. Use it to reflect on situations, not to make high-stakes decisions.",
+        "do_not_overread": "Keep interpretation inside self-reflection, relationship learning, and work-environment exploration."
+      },
+      "meta": {
+        "topic": "improve_eq",
+        "v19_source_ids": [
+          "eq.seo.zh.improve_eq",
+          "eq.seo.en.improve_eq"
+        ],
+        "asset_type": "seo_geo_faq"
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "结果置信度在这份报告里是什么意思？",
+        "answer": "在费马 EQ 中，这个主题会结合自我觉察、情绪调节、共情理解和关系管理来解释。它适合用于自我理解、关系反思和职业环境探索，不适合作为高风险决定依据。",
+        "do_not_overread": "解释范围应限制在自我反思、关系学习和工作环境观察。"
+      },
+      "en": {
+        "question": "What does quality confidence mean in this report?",
+        "answer": "In FermatMind EQ, this topic is explained through self-perceived patterns in self-awareness, emotion regulation, empathy, and relationship management. Use it to reflect on situations, not to make high-stakes decisions.",
+        "do_not_overread": "Keep interpretation inside self-reflection, relationship learning, and work-environment exploration."
+      },
+      "meta": {
+        "topic": "quality_confidence",
+        "v19_source_ids": [
+          "eq.seo.zh.quality_confidence",
+          "eq.seo.en.quality_confidence"
+        ],
+        "asset_type": "seo_geo_faq"
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "关系中的情商在这份报告里是什么意思？",
+        "answer": "在费马 EQ 中，这个主题会结合自我觉察、情绪调节、共情理解和关系管理来解释。它适合用于自我理解、关系反思和职业环境探索，不适合作为高风险决定依据。",
+        "do_not_overread": "解释范围应限制在自我反思、关系学习和工作环境观察。"
+      },
+      "en": {
+        "question": "What does EQ in relationships mean in this report?",
+        "answer": "In FermatMind EQ, this topic is explained through self-perceived patterns in self-awareness, emotion regulation, empathy, and relationship management. Use it to reflect on situations, not to make high-stakes decisions.",
+        "do_not_overread": "Keep interpretation inside self-reflection, relationship learning, and work-environment exploration."
+      },
+      "meta": {
+        "topic": "relationship_eq",
+        "v19_source_ids": [
+          "eq.seo.zh.relationship_eq",
+          "eq.seo.en.relationship_eq"
+        ],
+        "asset_type": "seo_geo_faq"
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "复测情商测试在这份报告里是什么意思？",
+        "answer": "在费马 EQ 中，这个主题会结合自我觉察、情绪调节、共情理解和关系管理来解释。它适合用于自我理解、关系反思和职业环境探索，不适合作为高风险决定依据。",
+        "do_not_overread": "解释范围应限制在自我反思、关系学习和工作环境观察。"
+      },
+      "en": {
+        "question": "What does retake EQ test mean in this report?",
+        "answer": "In FermatMind EQ, this topic is explained through self-perceived patterns in self-awareness, emotion regulation, empathy, and relationship management. Use it to reflect on situations, not to make high-stakes decisions.",
+        "do_not_overread": "Keep interpretation inside self-reflection, relationship learning, and work-environment exploration."
+      },
+      "meta": {
+        "topic": "retest_eq",
+        "v19_source_ids": [
+          "eq.seo.zh.retest_eq",
+          "eq.seo.en.retest_eq"
+        ],
+        "asset_type": "seo_geo_faq"
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "情境判断情商模块在这份报告里是什么意思？",
+        "answer": "在费马 EQ 中，这个主题会结合自我觉察、情绪调节、共情理解和关系管理来解释。它适合用于自我理解、关系反思和职业环境探索，不适合作为高风险决定依据。",
+        "do_not_overread": "解释范围应限制在自我反思、关系学习和工作环境观察。"
+      },
+      "en": {
+        "question": "What does scenario-based EQ mean in this report?",
+        "answer": "In FermatMind EQ, this topic is explained through self-perceived patterns in self-awareness, emotion regulation, empathy, and relationship management. Use it to reflect on situations, not to make high-stakes decisions.",
+        "do_not_overread": "Keep interpretation inside self-reflection, relationship learning, and work-environment exploration."
+      },
+      "meta": {
+        "topic": "scenario_based_eq",
+        "v19_source_ids": [
+          "eq.seo.zh.scenario_based_eq",
+          "eq.seo.en.scenario_based_eq"
+        ],
+        "asset_type": "seo_geo_faq"
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "自我报告情商测试在这份报告里是什么意思？",
+        "answer": "在费马 EQ 中，这个主题会结合自我觉察、情绪调节、共情理解和关系管理来解释。它适合用于自我理解、关系反思和职业环境探索，不适合作为高风险决定依据。",
+        "do_not_overread": "解释范围应限制在自我反思、关系学习和工作环境观察。"
+      },
+      "en": {
+        "question": "What does self-report EQ mean in this report?",
+        "answer": "In FermatMind EQ, this topic is explained through self-perceived patterns in self-awareness, emotion regulation, empathy, and relationship management. Use it to reflect on situations, not to make high-stakes decisions.",
+        "do_not_overread": "Keep interpretation inside self-reflection, relationship learning, and work-environment exploration."
+      },
+      "meta": {
+        "topic": "self_report_eq",
+        "v19_source_ids": [
+          "eq.seo.zh.self_report_eq",
+          "eq.seo.en.self_report_eq"
+        ],
+        "asset_type": "seo_geo_faq"
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "为什么结果页不只显示分数？",
+        "answer": "分数能提供方向，但场景、证据和行动处方能帮助你验证结果是否符合真实生活。",
+        "do_not_overread": "只解释自我报告结果的使用方式。"
+      },
+      "en": {
+        "question": "Why does the result page show more than scores?",
+        "answer": "Scores provide direction, but scenes, evidence, and prescriptions help you test whether the result matches real life.",
+        "do_not_overread": "Explain use of self-report results only."
+      },
+      "meta": {
+        "topic": "why_result_feels_specific",
+        "v19_source_ids": [
+          "eq.seo.zh.why_result_feels_specific",
+          "eq.seo.en.why_result_feels_specific"
+        ],
+        "asset_type": "seo_geo_faq"
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "职场中的情商在这份报告里是什么意思？",
+        "answer": "在费马 EQ 中，这个主题会结合自我觉察、情绪调节、共情理解和关系管理来解释。它适合用于自我理解、关系反思和职业环境探索，不适合作为高风险决定依据。",
+        "do_not_overread": "解释范围应限制在自我反思、关系学习和工作环境观察。"
+      },
+      "en": {
+        "question": "What does EQ at work mean in this report?",
+        "answer": "In FermatMind EQ, this topic is explained through self-perceived patterns in self-awareness, emotion regulation, empathy, and relationship management. Use it to reflect on situations, not to make high-stakes decisions.",
+        "do_not_overread": "Keep interpretation inside self-reflection, relationship learning, and work-environment exploration."
+      },
+      "meta": {
+        "topic": "workplace_eq",
+        "v19_source_ids": [
+          "eq.seo.zh.workplace_eq",
+          "eq.seo.en.workplace_eq"
+        ],
+        "asset_type": "seo_geo_faq"
+      }
     }
   ],
   "seo_geo_assets": {
@@ -520,21 +960,18 @@
         "safe_claim_boundary": "用于自我理解和成长规划，不用于临床、招聘或认证判断。"
       },
       "en": {
-        "title": "Emotional Intelligence Test",
-        "meta_description": "Take a free emotional intelligence test focused on self-awareness, emotion regulation, empathy, and relationship management.",
-        "short_answer": "Understand your emotional and relational pattern, not a live-performance credential.",
+        "title": "Emotional intelligence test",
+        "meta_description": "Understand emotional intelligence test in a self-report emotional and relational pattern report.",
+        "short_answer": "Emotional intelligence test is best understood as a reflection tool for emotional and relational patterns, not a credential or personnel decision tool.",
         "long_answer_outline": [
-          "definition",
-          "what it measures",
-          "what it does not decide",
-          "next useful action"
+          "What does emotional intelligence test mean in this report?"
         ],
         "related_questions": [
-          "What does the score mean?",
-          "How should I use the result?"
+          "What does emotional intelligence test mean in this report?"
         ],
-        "safe_claim_boundary": "Use for self-understanding, reflection, and growth planning; do not use for clinical, hiring, or credentialing decisions.",
-        "search_intent_answer": "Understand your emotional and relational pattern, not a live-performance credential."
+        "safe_claim_boundary": "Keep interpretation inside self-reflection, relationship learning, and work-environment exploration.",
+        "search_intent_answer": "Emotional intelligence test is best understood as a reflection tool for emotional and relational patterns, not a credential or personnel decision tool.",
+        "search_intent": "Users want to know what an EQ test measures."
       }
     },
     "eq.seo.en.free_eq_test": {
@@ -555,21 +992,18 @@
         "safe_claim_boundary": "用于自我理解和成长规划，不用于临床、招聘或认证判断。"
       },
       "en": {
-        "title": "Free EQ Test",
-        "meta_description": "A free EQ test with a complete self-report result, confidence note, and action prescription.",
-        "short_answer": "Designed for reflection, workstyle insight, and relationship growth.",
+        "title": "Free EQ test",
+        "meta_description": "Understand free EQ test in a self-report emotional and relational pattern report.",
+        "short_answer": "Free EQ test is best understood as a reflection tool for emotional and relational patterns, not a credential or personnel decision tool.",
         "long_answer_outline": [
-          "definition",
-          "what it measures",
-          "what it does not decide",
-          "next useful action"
+          "What does free EQ test mean in this report?"
         ],
         "related_questions": [
-          "What does the score mean?",
-          "How should I use the result?"
+          "What does free EQ test mean in this report?"
         ],
-        "safe_claim_boundary": "Use for self-understanding, reflection, and growth planning; do not use for clinical, hiring, or credentialing decisions.",
-        "search_intent_answer": "Designed for reflection, workstyle insight, and relationship growth."
+        "safe_claim_boundary": "Keep interpretation inside self-reflection, relationship learning, and work-environment exploration.",
+        "search_intent_answer": "Free EQ test is best understood as a reflection tool for emotional and relational patterns, not a credential or personnel decision tool.",
+        "search_intent": "Users want a free emotional intelligence test with immediate results."
       }
     },
     "eq.seo.en.eq_score_meaning": {
@@ -590,21 +1024,18 @@
         "safe_claim_boundary": "用于自我理解和成长规划，不用于临床、招聘或认证判断。"
       },
       "en": {
-        "title": "EQ Score Meaning",
-        "meta_description": "Learn how EQ scores, bands, percentiles, and confidence notes should be read.",
-        "short_answer": "A score is a starting point; dimensions and context carry the real interpretation.",
+        "title": "EQ score meaning",
+        "meta_description": "Understand EQ score meaning in a self-report emotional and relational pattern report.",
+        "short_answer": "EQ score meaning is best understood as a reflection tool for emotional and relational patterns, not a credential or personnel decision tool.",
         "long_answer_outline": [
-          "definition",
-          "what it measures",
-          "what it does not decide",
-          "next useful action"
+          "What does EQ score meaning mean in this report?"
         ],
         "related_questions": [
-          "What does the score mean?",
-          "How should I use the result?"
+          "What does EQ score meaning mean in this report?"
         ],
-        "safe_claim_boundary": "Use for self-understanding, reflection, and growth planning; do not use for clinical, hiring, or credentialing decisions.",
-        "search_intent_answer": "A score is a starting point; dimensions and context carry the real interpretation."
+        "safe_claim_boundary": "Keep interpretation inside self-reflection, relationship learning, and work-environment exploration.",
+        "search_intent_answer": "EQ score meaning is best understood as a reflection tool for emotional and relational patterns, not a credential or personnel decision tool.",
+        "search_intent": "Users want to interpret score bands and percentiles."
       }
     },
     "eq.seo.en.self_report_vs_ability_ei": {
@@ -661,20 +1092,17 @@
       },
       "en": {
         "title": "EQ vs IQ",
-        "meta_description": "EQ and IQ describe different domains: emotional-relational patterns and cognitive problem solving.",
-        "short_answer": "The two are complementary and should not be collapsed into one score.",
+        "meta_description": "Understand EQ vs iq in a self-report emotional and relational pattern report.",
+        "short_answer": "EQ vs IQ is best understood as a reflection tool for emotional and relational patterns, not a credential or personnel decision tool.",
         "long_answer_outline": [
-          "definition",
-          "what it measures",
-          "what it does not decide",
-          "next useful action"
+          "What does EQ vs iq mean in this report?"
         ],
         "related_questions": [
-          "What does the score mean?",
-          "How should I use the result?"
+          "What does EQ vs iq mean in this report?"
         ],
-        "safe_claim_boundary": "Use for self-understanding, reflection, and growth planning; do not use for clinical, hiring, or credentialing decisions.",
-        "search_intent_answer": "The two are complementary and should not be collapsed into one score."
+        "safe_claim_boundary": "Keep interpretation inside self-reflection, relationship learning, and work-environment exploration.",
+        "search_intent_answer": "EQ vs IQ is best understood as a reflection tool for emotional and relational patterns, not a credential or personnel decision tool.",
+        "search_intent": "Users compare emotional-relational patterns with reasoning ability."
       }
     },
     "eq.seo.en.eq_in_workplace": {
@@ -800,21 +1228,18 @@
         "safe_claim_boundary": "用于自我理解和成长规划，不用于临床、招聘或认证判断。"
       },
       "en": {
-        "title": "Emotion Regulation",
-        "meta_description": "Understand recovery and response choice after emotional activation.",
-        "short_answer": "Regulation is not suppression; it keeps enough choice to respond well.",
+        "title": "Emotion regulation",
+        "meta_description": "Understand emotion regulation in a self-report emotional and relational pattern report.",
+        "short_answer": "Emotion regulation is best understood as a reflection tool for emotional and relational patterns, not a credential or personnel decision tool.",
         "long_answer_outline": [
-          "definition",
-          "what it measures",
-          "what it does not decide",
-          "next useful action"
+          "What does emotion regulation mean in this report?"
         ],
         "related_questions": [
-          "What does the score mean?",
-          "How should I use the result?"
+          "What does emotion regulation mean in this report?"
         ],
-        "safe_claim_boundary": "Use for self-understanding, reflection, and growth planning; do not use for clinical, hiring, or credentialing decisions.",
-        "search_intent_answer": "Regulation is not suppression; it keeps enough choice to respond well."
+        "safe_claim_boundary": "Keep interpretation inside self-reflection, relationship learning, and work-environment exploration.",
+        "search_intent_answer": "Emotion regulation is best understood as a reflection tool for emotional and relational patterns, not a credential or personnel decision tool.",
+        "search_intent": "Users want to understand low or high ER results."
       }
     },
     "eq.seo.en.empathy_context": {
@@ -1059,20 +1484,18 @@
     },
     "eq.seo.zh.eq_vs_iq": {
       "zh-CN": {
-        "title": "EQ和IQ区别",
-        "meta_description": "IQ偏认知问题解决，EQ-60偏情绪与关系模式。",
-        "short_answer": "两者互补，不能互相替代。",
+        "title": "EQ 和 IQ 的区别",
+        "meta_description": "了解EQ 和 IQ 的区别在自我报告型情绪与关系模式报告中的含义。",
+        "short_answer": "EQ 和 IQ 的区别更适合作为理解情绪与关系模式的反思工具，而不是能力凭证或人事判断工具。",
         "long_answer_outline": [
-          "definition",
-          "what it measures",
-          "what it does not decide",
-          "next useful action"
+          "EQ 和 IQ 的区别在这份报告里是什么意思？"
         ],
         "related_questions": [
-          "What does the score mean?",
-          "How should I use the result?"
+          "EQ 和 IQ 的区别在这份报告里是什么意思？"
         ],
-        "safe_claim_boundary": "Use for reflection and growth planning; avoid high-stakes conclusions."
+        "safe_claim_boundary": "解释范围应限制在自我反思、关系学习和工作环境观察。",
+        "search_intent_answer": "EQ 和 IQ 的区别更适合作为理解情绪与关系模式的反思工具，而不是能力凭证或人事判断工具。",
+        "search_intent": "用户比较情绪关系模式和认知推理能力。"
       },
       "en": {
         "title": "",
@@ -1113,20 +1536,18 @@
     },
     "eq.seo.zh.eq_score_meaning": {
       "zh-CN": {
-        "title": "EQ分数怎么理解",
-        "meta_description": "分数要和四维、百分位、置信度和行动建议一起读。",
-        "short_answer": "不要只看一个总分。",
+        "title": "EQ 分数含义",
+        "meta_description": "了解EQ 分数含义在自我报告型情绪与关系模式报告中的含义。",
+        "short_answer": "EQ 分数含义更适合作为理解情绪与关系模式的反思工具，而不是能力凭证或人事判断工具。",
         "long_answer_outline": [
-          "definition",
-          "what it measures",
-          "what it does not decide",
-          "next useful action"
+          "EQ 分数含义在这份报告里是什么意思？"
         ],
         "related_questions": [
-          "What does the score mean?",
-          "How should I use the result?"
+          "EQ 分数含义在这份报告里是什么意思？"
         ],
-        "safe_claim_boundary": "Use for reflection and growth planning; avoid high-stakes conclusions."
+        "safe_claim_boundary": "解释范围应限制在自我反思、关系学习和工作环境观察。",
+        "search_intent_answer": "EQ 分数含义更适合作为理解情绪与关系模式的反思工具，而不是能力凭证或人事判断工具。",
+        "search_intent": "用户想理解分数、等级和百分位。"
       },
       "en": {
         "title": "",
@@ -1167,20 +1588,18 @@
     },
     "eq.seo.zh.improve_eq": {
       "zh-CN": {
-        "title": "如何提高情商",
-        "meta_description": "从情绪命名、暂停、共情回应、边界表达和修复脚本开始。",
-        "short_answer": "选择一个场景练习，比泛泛努力更有效。",
+        "title": "如何提升情绪与关系能力",
+        "meta_description": "了解如何提升情绪与关系能力在自我报告型情绪与关系模式报告中的含义。",
+        "short_answer": "如何提升情绪与关系能力更适合作为理解情绪与关系模式的反思工具，而不是能力凭证或人事判断工具。",
         "long_answer_outline": [
-          "definition",
-          "what it measures",
-          "what it does not decide",
-          "next useful action"
+          "如何提升情绪与关系能力在这份报告里是什么意思？"
         ],
         "related_questions": [
-          "What does the score mean?",
-          "How should I use the result?"
+          "如何提升情绪与关系能力在这份报告里是什么意思？"
         ],
-        "safe_claim_boundary": "Use for reflection and growth planning; avoid high-stakes conclusions."
+        "safe_claim_boundary": "解释范围应限制在自我反思、关系学习和工作环境观察。",
+        "search_intent_answer": "如何提升情绪与关系能力更适合作为理解情绪与关系模式的反思工具，而不是能力凭证或人事判断工具。",
+        "search_intent": "用户想要可执行练习。"
       },
       "en": {
         "title": "",
@@ -1244,6 +1663,582 @@
         "related_questions": [],
         "safe_claim_boundary": "Use for self-understanding, reflection, and growth planning; do not use for clinical, hiring, or credentialing decisions.",
         "search_intent_answer": ""
+      }
+    },
+    "eq.seo.zh.free_eq_test": {
+      "zh-CN": {
+        "title": "免费 EQ 测试",
+        "meta_description": "了解免费 EQ 测试在自我报告型情绪与关系模式报告中的含义。",
+        "short_answer": "免费 EQ 测试更适合作为理解情绪与关系模式的反思工具，而不是能力凭证或人事判断工具。",
+        "long_answer_outline": [
+          "免费 EQ 测试在这份报告里是什么意思？"
+        ],
+        "related_questions": [
+          "免费 EQ 测试在这份报告里是什么意思？"
+        ],
+        "safe_claim_boundary": "解释范围应限制在自我反思、关系学习和工作环境观察。",
+        "search_intent_answer": "免费 EQ 测试更适合作为理解情绪与关系模式的反思工具，而不是能力凭证或人事判断工具。",
+        "search_intent": "用户想快速完成免费的情商测试并看到结果。"
+      }
+    },
+    "eq.seo.zh.emotional_intelligence_test": {
+      "zh-CN": {
+        "title": "情商测试",
+        "meta_description": "了解情商测试在自我报告型情绪与关系模式报告中的含义。",
+        "short_answer": "情商测试更适合作为理解情绪与关系模式的反思工具，而不是能力凭证或人事判断工具。",
+        "long_answer_outline": [
+          "情商测试在这份报告里是什么意思？"
+        ],
+        "related_questions": [
+          "情商测试在这份报告里是什么意思？"
+        ],
+        "safe_claim_boundary": "解释范围应限制在自我反思、关系学习和工作环境观察。",
+        "search_intent_answer": "情商测试更适合作为理解情绪与关系模式的反思工具，而不是能力凭证或人事判断工具。",
+        "search_intent": "用户想知道情商测试到底测什么。"
+      }
+    },
+    "eq.seo.en.eq_vs_mbti": {
+      "en": {
+        "title": "EQ vs MBTI",
+        "meta_description": "Understand EQ vs mbti in a self-report emotional and relational pattern report.",
+        "short_answer": "EQ vs MBTI is best understood as a reflection tool for emotional and relational patterns, not a credential or personnel decision tool.",
+        "long_answer_outline": [
+          "What does EQ vs mbti mean in this report?"
+        ],
+        "related_questions": [
+          "What does EQ vs mbti mean in this report?"
+        ],
+        "safe_claim_boundary": "Keep interpretation inside self-reflection, relationship learning, and work-environment exploration.",
+        "search_intent_answer": "EQ vs MBTI is best understood as a reflection tool for emotional and relational patterns, not a credential or personnel decision tool.",
+        "search_intent": "Users compare emotional functioning with personality-style categories."
+      }
+    },
+    "eq.seo.zh.eq_vs_mbti": {
+      "zh-CN": {
+        "title": "EQ 和 MBTI 的区别",
+        "meta_description": "了解EQ 和 MBTI 的区别在自我报告型情绪与关系模式报告中的含义。",
+        "short_answer": "EQ 和 MBTI 的区别更适合作为理解情绪与关系模式的反思工具，而不是能力凭证或人事判断工具。",
+        "long_answer_outline": [
+          "EQ 和 MBTI 的区别在这份报告里是什么意思？"
+        ],
+        "related_questions": [
+          "EQ 和 MBTI 的区别在这份报告里是什么意思？"
+        ],
+        "safe_claim_boundary": "解释范围应限制在自我反思、关系学习和工作环境观察。",
+        "search_intent_answer": "EQ 和 MBTI 的区别更适合作为理解情绪与关系模式的反思工具，而不是能力凭证或人事判断工具。",
+        "search_intent": "用户比较情绪功能和人格类型偏好。"
+      }
+    },
+    "eq.seo.en.eq_vs_big_five": {
+      "en": {
+        "title": "EQ vs Big Five",
+        "meta_description": "Understand EQ vs big five in a self-report emotional and relational pattern report.",
+        "short_answer": "EQ vs Big Five is best understood as a reflection tool for emotional and relational patterns, not a credential or personnel decision tool.",
+        "long_answer_outline": [
+          "What does EQ vs big five mean in this report?"
+        ],
+        "related_questions": [
+          "What does EQ vs big five mean in this report?"
+        ],
+        "safe_claim_boundary": "Keep interpretation inside self-reflection, relationship learning, and work-environment exploration.",
+        "search_intent_answer": "EQ vs Big Five is best understood as a reflection tool for emotional and relational patterns, not a credential or personnel decision tool.",
+        "search_intent": "Users compare EQ dimensions with trait signals."
+      }
+    },
+    "eq.seo.zh.eq_vs_big_five": {
+      "zh-CN": {
+        "title": "EQ 和大五人格的区别",
+        "meta_description": "了解EQ 和大五人格的区别在自我报告型情绪与关系模式报告中的含义。",
+        "short_answer": "EQ 和大五人格的区别更适合作为理解情绪与关系模式的反思工具，而不是能力凭证或人事判断工具。",
+        "long_answer_outline": [
+          "EQ 和大五人格的区别在这份报告里是什么意思？"
+        ],
+        "related_questions": [
+          "EQ 和大五人格的区别在这份报告里是什么意思？"
+        ],
+        "safe_claim_boundary": "解释范围应限制在自我反思、关系学习和工作环境观察。",
+        "search_intent_answer": "EQ 和大五人格的区别更适合作为理解情绪与关系模式的反思工具，而不是能力凭证或人事判断工具。",
+        "search_intent": "用户比较 EQ 维度和人格特质信号。"
+      }
+    },
+    "eq.seo.en.eq_vs_enneagram": {
+      "en": {
+        "title": "EQ vs Enneagram",
+        "meta_description": "Understand EQ vs enneagram in a self-report emotional and relational pattern report.",
+        "short_answer": "EQ vs Enneagram is best understood as a reflection tool for emotional and relational patterns, not a credential or personnel decision tool.",
+        "long_answer_outline": [
+          "What does EQ vs enneagram mean in this report?"
+        ],
+        "related_questions": [
+          "What does EQ vs enneagram mean in this report?"
+        ],
+        "safe_claim_boundary": "Keep interpretation inside self-reflection, relationship learning, and work-environment exploration.",
+        "search_intent_answer": "EQ vs Enneagram is best understood as a reflection tool for emotional and relational patterns, not a credential or personnel decision tool.",
+        "search_intent": "Users compare emotional habits with motivational themes."
+      }
+    },
+    "eq.seo.zh.eq_vs_enneagram": {
+      "zh-CN": {
+        "title": "EQ 和九型人格的区别",
+        "meta_description": "了解EQ 和九型人格的区别在自我报告型情绪与关系模式报告中的含义。",
+        "short_answer": "EQ 和九型人格的区别更适合作为理解情绪与关系模式的反思工具，而不是能力凭证或人事判断工具。",
+        "long_answer_outline": [
+          "EQ 和九型人格的区别在这份报告里是什么意思？"
+        ],
+        "related_questions": [
+          "EQ 和九型人格的区别在这份报告里是什么意思？"
+        ],
+        "safe_claim_boundary": "解释范围应限制在自我反思、关系学习和工作环境观察。",
+        "search_intent_answer": "EQ 和九型人格的区别更适合作为理解情绪与关系模式的反思工具，而不是能力凭证或人事判断工具。",
+        "search_intent": "用户比较情绪习惯和动机主题。"
+      }
+    },
+    "eq.seo.en.self_report_eq": {
+      "en": {
+        "title": "Self-report EQ",
+        "meta_description": "Understand self-report EQ in a self-report emotional and relational pattern report.",
+        "short_answer": "Self-report EQ is best understood as a reflection tool for emotional and relational patterns, not a credential or personnel decision tool.",
+        "long_answer_outline": [
+          "What does self-report EQ mean in this report?"
+        ],
+        "related_questions": [
+          "What does self-report EQ mean in this report?"
+        ],
+        "safe_claim_boundary": "Keep interpretation inside self-reflection, relationship learning, and work-environment exploration.",
+        "search_intent_answer": "Self-report EQ is best understood as a reflection tool for emotional and relational patterns, not a credential or personnel decision tool.",
+        "search_intent": "Users ask why the test is based on self-report."
+      }
+    },
+    "eq.seo.zh.self_report_eq": {
+      "zh-CN": {
+        "title": "自我报告情商测试",
+        "meta_description": "了解自我报告情商测试在自我报告型情绪与关系模式报告中的含义。",
+        "short_answer": "自我报告情商测试更适合作为理解情绪与关系模式的反思工具，而不是能力凭证或人事判断工具。",
+        "long_answer_outline": [
+          "自我报告情商测试在这份报告里是什么意思？"
+        ],
+        "related_questions": [
+          "自我报告情商测试在这份报告里是什么意思？"
+        ],
+        "safe_claim_boundary": "解释范围应限制在自我反思、关系学习和工作环境观察。",
+        "search_intent_answer": "自我报告情商测试更适合作为理解情绪与关系模式的反思工具，而不是能力凭证或人事判断工具。",
+        "search_intent": "用户想知道为什么这份测试是自我报告。"
+      }
+    },
+    "eq.seo.en.scenario_based_eq": {
+      "en": {
+        "title": "Scenario-based EQ",
+        "meta_description": "Understand scenario-based EQ in a self-report emotional and relational pattern report.",
+        "short_answer": "Scenario-based EQ is best understood as a reflection tool for emotional and relational patterns, not a credential or personnel decision tool.",
+        "long_answer_outline": [
+          "What does scenario-based EQ mean in this report?"
+        ],
+        "related_questions": [
+          "What does scenario-based EQ mean in this report?"
+        ],
+        "safe_claim_boundary": "Keep interpretation inside self-reflection, relationship learning, and work-environment exploration.",
+        "search_intent_answer": "Scenario-based EQ is best understood as a reflection tool for emotional and relational patterns, not a credential or personnel decision tool.",
+        "search_intent": "Users ask what the future scenario module will add."
+      }
+    },
+    "eq.seo.zh.scenario_based_eq": {
+      "zh-CN": {
+        "title": "情境判断情商模块",
+        "meta_description": "了解情境判断情商模块在自我报告型情绪与关系模式报告中的含义。",
+        "short_answer": "情境判断情商模块更适合作为理解情绪与关系模式的反思工具，而不是能力凭证或人事判断工具。",
+        "long_answer_outline": [
+          "情境判断情商模块在这份报告里是什么意思？"
+        ],
+        "related_questions": [
+          "情境判断情商模块在这份报告里是什么意思？"
+        ],
+        "safe_claim_boundary": "解释范围应限制在自我反思、关系学习和工作环境观察。",
+        "search_intent_answer": "情境判断情商模块更适合作为理解情绪与关系模式的反思工具，而不是能力凭证或人事判断工具。",
+        "search_intent": "用户想知道未来情境判断模块补充什么。"
+      }
+    },
+    "eq.seo.zh.emotion_regulation": {
+      "zh-CN": {
+        "title": "情绪调节",
+        "meta_description": "了解情绪调节在自我报告型情绪与关系模式报告中的含义。",
+        "short_answer": "情绪调节更适合作为理解情绪与关系模式的反思工具，而不是能力凭证或人事判断工具。",
+        "long_answer_outline": [
+          "情绪调节在这份报告里是什么意思？"
+        ],
+        "related_questions": [
+          "情绪调节在这份报告里是什么意思？"
+        ],
+        "safe_claim_boundary": "解释范围应限制在自我反思、关系学习和工作环境观察。",
+        "search_intent_answer": "情绪调节更适合作为理解情绪与关系模式的反思工具，而不是能力凭证或人事判断工具。",
+        "search_intent": "用户想理解情绪调节高低代表什么。"
+      }
+    },
+    "eq.seo.en.empathy_boundaries": {
+      "en": {
+        "title": "Empathy and boundaries",
+        "meta_description": "Understand empathy and boundaries in a self-report emotional and relational pattern report.",
+        "short_answer": "Empathy and boundaries is best understood as a reflection tool for emotional and relational patterns, not a credential or personnel decision tool.",
+        "long_answer_outline": [
+          "What does empathy and boundaries mean in this report?"
+        ],
+        "related_questions": [
+          "What does empathy and boundaries mean in this report?"
+        ],
+        "safe_claim_boundary": "Keep interpretation inside self-reflection, relationship learning, and work-environment exploration.",
+        "search_intent_answer": "Empathy and boundaries is best understood as a reflection tool for emotional and relational patterns, not a credential or personnel decision tool.",
+        "search_intent": "Users ask whether high empathy is always good."
+      }
+    },
+    "eq.seo.zh.empathy_boundaries": {
+      "zh-CN": {
+        "title": "共情与边界",
+        "meta_description": "了解共情与边界在自我报告型情绪与关系模式报告中的含义。",
+        "short_answer": "共情与边界更适合作为理解情绪与关系模式的反思工具，而不是能力凭证或人事判断工具。",
+        "long_answer_outline": [
+          "共情与边界在这份报告里是什么意思？"
+        ],
+        "related_questions": [
+          "共情与边界在这份报告里是什么意思？"
+        ],
+        "safe_claim_boundary": "解释范围应限制在自我反思、关系学习和工作环境观察。",
+        "search_intent_answer": "共情与边界更适合作为理解情绪与关系模式的反思工具，而不是能力凭证或人事判断工具。",
+        "search_intent": "用户想知道高共情是否总是好事。"
+      }
+    },
+    "eq.seo.en.workplace_eq": {
+      "en": {
+        "title": "EQ at work",
+        "meta_description": "Understand EQ at work in a self-report emotional and relational pattern report.",
+        "short_answer": "EQ at work is best understood as a reflection tool for emotional and relational patterns, not a credential or personnel decision tool.",
+        "long_answer_outline": [
+          "What does EQ at work mean in this report?"
+        ],
+        "related_questions": [
+          "What does EQ at work mean in this report?"
+        ],
+        "safe_claim_boundary": "Keep interpretation inside self-reflection, relationship learning, and work-environment exploration.",
+        "search_intent_answer": "EQ at work is best understood as a reflection tool for emotional and relational patterns, not a credential or personnel decision tool.",
+        "search_intent": "Users want workplace application without employment-use claims."
+      }
+    },
+    "eq.seo.zh.workplace_eq": {
+      "zh-CN": {
+        "title": "职场中的情商",
+        "meta_description": "了解职场中的情商在自我报告型情绪与关系模式报告中的含义。",
+        "short_answer": "职场中的情商更适合作为理解情绪与关系模式的反思工具，而不是能力凭证或人事判断工具。",
+        "long_answer_outline": [
+          "职场中的情商在这份报告里是什么意思？"
+        ],
+        "related_questions": [
+          "职场中的情商在这份报告里是什么意思？"
+        ],
+        "safe_claim_boundary": "解释范围应限制在自我反思、关系学习和工作环境观察。",
+        "search_intent_answer": "职场中的情商更适合作为理解情绪与关系模式的反思工具，而不是能力凭证或人事判断工具。",
+        "search_intent": "用户想把 EQ 用于工作反思而非筛选。"
+      }
+    },
+    "eq.seo.en.relationship_eq": {
+      "en": {
+        "title": "EQ in relationships",
+        "meta_description": "Understand EQ in relationships in a self-report emotional and relational pattern report.",
+        "short_answer": "EQ in relationships is best understood as a reflection tool for emotional and relational patterns, not a credential or personnel decision tool.",
+        "long_answer_outline": [
+          "What does EQ in relationships mean in this report?"
+        ],
+        "related_questions": [
+          "What does EQ in relationships mean in this report?"
+        ],
+        "safe_claim_boundary": "Keep interpretation inside self-reflection, relationship learning, and work-environment exploration.",
+        "search_intent_answer": "EQ in relationships is best understood as a reflection tool for emotional and relational patterns, not a credential or personnel decision tool.",
+        "search_intent": "Users want to understand conflict, support, and repair."
+      }
+    },
+    "eq.seo.zh.relationship_eq": {
+      "zh-CN": {
+        "title": "关系中的情商",
+        "meta_description": "了解关系中的情商在自我报告型情绪与关系模式报告中的含义。",
+        "short_answer": "关系中的情商更适合作为理解情绪与关系模式的反思工具，而不是能力凭证或人事判断工具。",
+        "long_answer_outline": [
+          "关系中的情商在这份报告里是什么意思？"
+        ],
+        "related_questions": [
+          "关系中的情商在这份报告里是什么意思？"
+        ],
+        "safe_claim_boundary": "解释范围应限制在自我反思、关系学习和工作环境观察。",
+        "search_intent_answer": "关系中的情商更适合作为理解情绪与关系模式的反思工具，而不是能力凭证或人事判断工具。",
+        "search_intent": "用户想理解冲突、支持和修复。"
+      }
+    },
+    "eq.seo.en.improve_eq": {
+      "en": {
+        "title": "How to improve EQ",
+        "meta_description": "Understand how to improve EQ in a self-report emotional and relational pattern report.",
+        "short_answer": "How to improve EQ is best understood as a reflection tool for emotional and relational patterns, not a credential or personnel decision tool.",
+        "long_answer_outline": [
+          "What does how to improve EQ mean in this report?"
+        ],
+        "related_questions": [
+          "What does how to improve EQ mean in this report?"
+        ],
+        "safe_claim_boundary": "Keep interpretation inside self-reflection, relationship learning, and work-environment exploration.",
+        "search_intent_answer": "How to improve EQ is best understood as a reflection tool for emotional and relational patterns, not a credential or personnel decision tool.",
+        "search_intent": "Users want practical next steps."
+      }
+    },
+    "eq.seo.en.eq_reliability": {
+      "en": {
+        "title": "Is an EQ test reliable?",
+        "meta_description": "Understand is an EQ test reliable? in a self-report emotional and relational pattern report.",
+        "short_answer": "Is an EQ test reliable? is best understood as a reflection tool for emotional and relational patterns, not a credential or personnel decision tool.",
+        "long_answer_outline": [
+          "What does is an EQ test reliable? mean in this report?"
+        ],
+        "related_questions": [
+          "What does is an EQ test reliable? mean in this report?"
+        ],
+        "safe_claim_boundary": "Keep interpretation inside self-reflection, relationship learning, and work-environment exploration.",
+        "search_intent_answer": "Is an EQ test reliable? is best understood as a reflection tool for emotional and relational patterns, not a credential or personnel decision tool.",
+        "search_intent": "Users ask how much confidence to place in the result."
+      }
+    },
+    "eq.seo.zh.eq_reliability": {
+      "zh-CN": {
+        "title": "情商测试可靠吗",
+        "meta_description": "了解情商测试可靠吗在自我报告型情绪与关系模式报告中的含义。",
+        "short_answer": "情商测试可靠吗更适合作为理解情绪与关系模式的反思工具，而不是能力凭证或人事判断工具。",
+        "long_answer_outline": [
+          "情商测试可靠吗在这份报告里是什么意思？"
+        ],
+        "related_questions": [
+          "情商测试可靠吗在这份报告里是什么意思？"
+        ],
+        "safe_claim_boundary": "解释范围应限制在自我反思、关系学习和工作环境观察。",
+        "search_intent_answer": "情商测试可靠吗更适合作为理解情绪与关系模式的反思工具，而不是能力凭证或人事判断工具。",
+        "search_intent": "用户想知道结果可信度。"
+      }
+    },
+    "eq.seo.en.eq_limitations": {
+      "en": {
+        "title": "EQ test limitations",
+        "meta_description": "Understand EQ test limitations in a self-report emotional and relational pattern report.",
+        "short_answer": "EQ test limitations is best understood as a reflection tool for emotional and relational patterns, not a credential or personnel decision tool.",
+        "long_answer_outline": [
+          "What does EQ test limitations mean in this report?"
+        ],
+        "related_questions": [
+          "What does EQ test limitations mean in this report?"
+        ],
+        "safe_claim_boundary": "Keep interpretation inside self-reflection, relationship learning, and work-environment exploration.",
+        "search_intent_answer": "EQ test limitations is best understood as a reflection tool for emotional and relational patterns, not a credential or personnel decision tool.",
+        "search_intent": "Users want the boundaries of interpretation."
+      }
+    },
+    "eq.seo.zh.eq_limitations": {
+      "zh-CN": {
+        "title": "情商测试局限",
+        "meta_description": "了解情商测试局限在自我报告型情绪与关系模式报告中的含义。",
+        "short_answer": "情商测试局限更适合作为理解情绪与关系模式的反思工具，而不是能力凭证或人事判断工具。",
+        "long_answer_outline": [
+          "情商测试局限在这份报告里是什么意思？"
+        ],
+        "related_questions": [
+          "情商测试局限在这份报告里是什么意思？"
+        ],
+        "safe_claim_boundary": "解释范围应限制在自我反思、关系学习和工作环境观察。",
+        "search_intent_answer": "情商测试局限更适合作为理解情绪与关系模式的反思工具，而不是能力凭证或人事判断工具。",
+        "search_intent": "用户想知道测试不能说明什么。"
+      }
+    },
+    "eq.seo.en.quality_confidence": {
+      "en": {
+        "title": "Quality confidence",
+        "meta_description": "Understand quality confidence in a self-report emotional and relational pattern report.",
+        "short_answer": "Quality confidence is best understood as a reflection tool for emotional and relational patterns, not a credential or personnel decision tool.",
+        "long_answer_outline": [
+          "What does quality confidence mean in this report?"
+        ],
+        "related_questions": [
+          "What does quality confidence mean in this report?"
+        ],
+        "safe_claim_boundary": "Keep interpretation inside self-reflection, relationship learning, and work-environment exploration.",
+        "search_intent_answer": "Quality confidence is best understood as a reflection tool for emotional and relational patterns, not a credential or personnel decision tool.",
+        "search_intent": "Users ask why a report is cautious."
+      }
+    },
+    "eq.seo.zh.quality_confidence": {
+      "zh-CN": {
+        "title": "结果置信度",
+        "meta_description": "了解结果置信度在自我报告型情绪与关系模式报告中的含义。",
+        "short_answer": "结果置信度更适合作为理解情绪与关系模式的反思工具，而不是能力凭证或人事判断工具。",
+        "long_answer_outline": [
+          "结果置信度在这份报告里是什么意思？"
+        ],
+        "related_questions": [
+          "结果置信度在这份报告里是什么意思？"
+        ],
+        "safe_claim_boundary": "解释范围应限制在自我反思、关系学习和工作环境观察。",
+        "search_intent_answer": "结果置信度更适合作为理解情绪与关系模式的反思工具，而不是能力凭证或人事判断工具。",
+        "search_intent": "用户想理解低置信提示。"
+      }
+    },
+    "eq.seo.en.retest_eq": {
+      "en": {
+        "title": "Retake EQ test",
+        "meta_description": "Understand retake EQ test in a self-report emotional and relational pattern report.",
+        "short_answer": "Retake EQ test is best understood as a reflection tool for emotional and relational patterns, not a credential or personnel decision tool.",
+        "long_answer_outline": [
+          "What does retake EQ test mean in this report?"
+        ],
+        "related_questions": [
+          "What does retake EQ test mean in this report?"
+        ],
+        "safe_claim_boundary": "Keep interpretation inside self-reflection, relationship learning, and work-environment exploration.",
+        "search_intent_answer": "Retake EQ test is best understood as a reflection tool for emotional and relational patterns, not a credential or personnel decision tool.",
+        "search_intent": "Users ask when to retake the test."
+      }
+    },
+    "eq.seo.zh.retest_eq": {
+      "zh-CN": {
+        "title": "复测情商测试",
+        "meta_description": "了解复测情商测试在自我报告型情绪与关系模式报告中的含义。",
+        "short_answer": "复测情商测试更适合作为理解情绪与关系模式的反思工具，而不是能力凭证或人事判断工具。",
+        "long_answer_outline": [
+          "复测情商测试在这份报告里是什么意思？"
+        ],
+        "related_questions": [
+          "复测情商测试在这份报告里是什么意思？"
+        ],
+        "safe_claim_boundary": "解释范围应限制在自我反思、关系学习和工作环境观察。",
+        "search_intent_answer": "复测情商测试更适合作为理解情绪与关系模式的反思工具，而不是能力凭证或人事判断工具。",
+        "search_intent": "用户想知道何时复测。"
+      }
+    },
+    "eq.seo.en.career_environment": {
+      "en": {
+        "title": "EQ and career environment",
+        "meta_description": "Understand EQ and career environment in a self-report emotional and relational pattern report.",
+        "short_answer": "EQ and career environment is best understood as a reflection tool for emotional and relational patterns, not a credential or personnel decision tool.",
+        "long_answer_outline": [
+          "What does EQ and career environment mean in this report?"
+        ],
+        "related_questions": [
+          "What does EQ and career environment mean in this report?"
+        ],
+        "safe_claim_boundary": "Keep interpretation inside self-reflection, relationship learning, and work-environment exploration.",
+        "search_intent_answer": "EQ and career environment is best understood as a reflection tool for emotional and relational patterns, not a credential or personnel decision tool.",
+        "search_intent": "Users want career reflection without job prescription."
+      }
+    },
+    "eq.seo.zh.career_environment": {
+      "zh-CN": {
+        "title": "EQ 与职业环境",
+        "meta_description": "了解EQ 与职业环境在自我报告型情绪与关系模式报告中的含义。",
+        "short_answer": "EQ 与职业环境更适合作为理解情绪与关系模式的反思工具，而不是能力凭证或人事判断工具。",
+        "long_answer_outline": [
+          "EQ 与职业环境在这份报告里是什么意思？"
+        ],
+        "related_questions": [
+          "EQ 与职业环境在这份报告里是什么意思？"
+        ],
+        "safe_claim_boundary": "解释范围应限制在自我反思、关系学习和工作环境观察。",
+        "search_intent_answer": "EQ 与职业环境更适合作为理解情绪与关系模式的反思工具，而不是能力凭证或人事判断工具。",
+        "search_intent": "用户想做职业环境探索而非具体职业判断。"
+      }
+    },
+    "eq.seo.en.agent_eq": {
+      "en": {
+        "title": "Ask EQ Agent",
+        "meta_description": "Understand ask EQ agent in a self-report emotional and relational pattern report.",
+        "short_answer": "Ask EQ Agent is best understood as a reflection tool for emotional and relational patterns, not a credential or personnel decision tool.",
+        "long_answer_outline": [
+          "What does ask EQ agent mean in this report?"
+        ],
+        "related_questions": [
+          "What does ask EQ agent mean in this report?"
+        ],
+        "safe_claim_boundary": "Keep interpretation inside self-reflection, relationship learning, and work-environment exploration.",
+        "search_intent_answer": "Ask EQ Agent is best understood as a reflection tool for emotional and relational patterns, not a credential or personnel decision tool.",
+        "search_intent": "Users want help understanding their report."
+      }
+    },
+    "eq.seo.zh.agent_eq": {
+      "zh-CN": {
+        "title": "询问 EQ Agent",
+        "meta_description": "了解询问 EQ Agent在自我报告型情绪与关系模式报告中的含义。",
+        "short_answer": "询问 EQ Agent更适合作为理解情绪与关系模式的反思工具，而不是能力凭证或人事判断工具。",
+        "long_answer_outline": [
+          "询问 EQ Agent在这份报告里是什么意思？"
+        ],
+        "related_questions": [
+          "询问 EQ Agent在这份报告里是什么意思？"
+        ],
+        "safe_claim_boundary": "解释范围应限制在自我反思、关系学习和工作环境观察。",
+        "search_intent_answer": "询问 EQ Agent更适合作为理解情绪与关系模式的反思工具，而不是能力凭证或人事判断工具。",
+        "search_intent": "用户想让 Agent 帮助理解报告。"
+      }
+    },
+    "eq.seo.en.why_result_feels_specific": {
+      "en": {
+        "title": "Why does this EQ report include specific scenes?",
+        "meta_description": "Learn how the EQ report turns dimension gaps into feedback, conflict, boundary, and collaboration scenes.",
+        "short_answer": "Because users need more than a score: they need to know where the pattern shows up and what to practice next.",
+        "long_answer_outline": [
+          "Why does the result page show more than scores?"
+        ],
+        "related_questions": [
+          "Why does the result page show more than scores?"
+        ],
+        "safe_claim_boundary": "Explain use of self-report results only.",
+        "search_intent_answer": "Because users need more than a score: they need to know where the pattern shows up and what to practice next.",
+        "search_intent": "Users want to know why the result feels specific."
+      }
+    },
+    "eq.seo.en.free_full_report": {
+      "en": {
+        "title": "What is included in the free EQ report?",
+        "meta_description": "See what the free EQ report includes: insight, evidence, scenes, work-environment lens, and action prescription.",
+        "short_answer": "The current EQ-60 base report is free; report depth is based on completed data, not a payment gate.",
+        "long_answer_outline": [
+          "Do I need to pay to see my full EQ result?"
+        ],
+        "related_questions": [
+          "Do I need to pay to see my full EQ result?"
+        ],
+        "safe_claim_boundary": "Do not imply access gates or tiered-result promises.",
+        "search_intent_answer": "The current EQ-60 base report is free; report depth is based on completed data, not a payment gate.",
+        "search_intent": "Users want to know whether the free report is complete."
+      }
+    },
+    "eq.seo.zh.why_result_feels_specific": {
+      "zh-CN": {
+        "title": "为什么这份 EQ 报告会有具体场景？",
+        "meta_description": "了解 EQ 报告如何把维度差距转译成反馈、冲突、边界和协作场景。",
+        "short_answer": "因为用户真正需要的不是一个分数，而是知道这个模式会在哪里出现、下一步怎么练。",
+        "long_answer_outline": [
+          "为什么结果页不只显示分数？"
+        ],
+        "related_questions": [
+          "为什么结果页不只显示分数？"
+        ],
+        "safe_claim_boundary": "只解释自我报告结果的使用方式。",
+        "search_intent_answer": "因为用户真正需要的不是一个分数，而是知道这个模式会在哪里出现、下一步怎么练。",
+        "search_intent": "用户想知道为什么结果不像模板。"
+      }
+    },
+    "eq.seo.zh.free_full_report": {
+      "zh-CN": {
+        "title": "免费 EQ 报告包含什么？",
+        "meta_description": "了解免费 EQ 报告中的核心洞察、证据、场景、职业环境和行动处方。",
+        "short_answer": "当前 EQ-60 基础报告免费开放；报告深度由完成的数据决定，不由付费门槛决定。",
+        "long_answer_outline": [
+          "需要付费才能看完整 EQ 结果吗？"
+        ],
+        "related_questions": [
+          "需要付费才能看完整 EQ 结果吗？"
+        ],
+        "safe_claim_boundary": "不得暗示访问门槛或分层结果承诺。",
+        "search_intent_answer": "当前 EQ-60 基础报告免费开放；报告深度由完成的数据决定，不由付费门槛决定。",
+        "search_intent": "用户想知道免费报告是否完整。"
       }
     }
   }

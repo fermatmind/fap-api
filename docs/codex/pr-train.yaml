@@ -29216,3 +29216,276 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: PR-EQ-V19-01
+    repo: fap-api
+    branch: codex/pr-eq-v19-01-direct-asset-import
+    title: "PR-EQ-V19-01 Direct EQ v1.9 asset import"
+    train_scope: eq_v19_commercial_content_depth
+    scope:
+      - Import and map direct EQ v1.9 commercial-depth assets into existing EQ_60 report asset packs.
+      - Mirror mapped assets into EQ_EMOTIONAL_INTELLIGENCE.
+      - Keep composer selection, questions, scoring, norms, SJT, and frontend unchanged.
+    allowed_paths:
+      - backend/content_packs/EQ_60/v1/raw/report_assets/core_formulations.json
+      - backend/content_packs/EQ_60/v1/raw/report_assets/career_environment.json
+      - backend/content_packs/EQ_60/v1/raw/report_assets/action_prescriptions.json
+      - backend/content_packs/EQ_60/v1/raw/report_assets/commercial_conversion_assets.json
+      - backend/content_packs/EQ_60/v1/raw/report_assets/seo_geo_authority.json
+      - backend/content_packs/EQ_60/v1/raw/report_assets/cross_assessment_context.json
+      - backend/content_packs/EQ_60/v1/compiled/**
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/core_formulations.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/career_environment.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/action_prescriptions.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/commercial_conversion_assets.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/seo_geo_authority.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/cross_assessment_context.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/**
+      - backend/tests/Feature/Content/Eq60ContentGateTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Change Eq60ReportComposer selection logic.
+      - Change EQ questions, options, reverse keys, scoring semantics, or norm algorithms.
+      - Modify fap-web.
+      - Enable SJT or add clickable SJT entry.
+      - Add paid, unlock, SKU, premium, purchase, clinical, hiring, MSCEIT, or ability-test claims.
+    validation:
+      - cd backend && php artisan content:lint --pack=EQ_60 --pack-version=v1
+      - cd backend && php artisan content:compile --pack=EQ_60 --pack-version=v1
+      - cd backend && php artisan test --filter=Eq60ContentGateTest
+        - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: PR-EQ-V19-02
+    repo: fap-api
+    depends_on: [PR-EQ-V19-01]
+    branch: codex/pr-eq-v19-02-result-page-depth-assets
+    title: "PR-EQ-V19-02 Result page depth asset pack"
+    train_scope: eq_v19_commercial_content_depth
+    scope:
+      - Add result_page_depth_modules report asset pack from EQ v1.9.
+      - Extend compile, lint, and report payload with resolved depth modules.
+      - Keep frontend rendering unchanged.
+    allowed_paths:
+      - backend/app/Services/Content/Eq60ContentCompileService.php
+      - backend/app/Services/Content/Eq60ContentLintService.php
+      - backend/app/Services/Report/Eq60ReportComposer.php
+      - backend/content_packs/EQ_60/v1/raw/report_assets/result_page_depth_modules.json
+      - backend/content_packs/EQ_60/v1/compiled/**
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/result_page_depth_modules.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/**
+      - backend/tests/Feature/Content/Eq60ContentGateTest.php
+      - backend/tests/Feature/Report/Eq60V5ReportContractTest.php
+      - backend/tests/Feature/Report/Eq60ReportPaywallTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web.
+      - Change EQ questions, scoring, norms, SJT availability, or commerce semantics.
+    validation:
+      - cd backend && php artisan content:lint --pack=EQ_60 --pack-version=v1
+      - cd backend && php artisan content:compile --pack=EQ_60 --pack-version=v1
+      - cd backend && php artisan test --filter=Eq60ContentGateTest
+      - cd backend && php artisan test --filter=Eq60V5ReportContractTest
+      - cd backend && php artisan test --filter=Eq60ReportPaywallTest
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: PR-EQ-V19-03
+    repo: fap-api
+    depends_on: [PR-EQ-V19-02]
+    branch: codex/pr-eq-v19-03-scene-variants-selection
+    title: "PR-EQ-V19-03 Reality scene variants and composer selection"
+    train_scope: eq_v19_commercial_content_depth
+    scope:
+      - Add formulation-aware reality scene variants from EQ v1.9.
+      - Resolve scene variants in Eq60ReportComposer while preserving generic scene fallback.
+    allowed_paths:
+      - backend/app/Services/Content/Eq60ContentCompileService.php
+      - backend/app/Services/Content/Eq60ContentLintService.php
+      - backend/app/Services/Report/Eq60ReportComposer.php
+      - backend/content_packs/EQ_60/v1/raw/report_assets/reality_scene_variants.json
+      - backend/content_packs/EQ_60/v1/raw/report_assets/reality_translation.json
+      - backend/content_packs/EQ_60/v1/compiled/**
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/reality_scene_variants.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/reality_translation.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/**
+      - backend/tests/Feature/Content/Eq60ContentGateTest.php
+      - backend/tests/Feature/Report/Eq60V5ReportContractTest.php
+      - backend/tests/Feature/Content/Eq60GoldenCasesTest.php
+      - backend/tests/Feature/Report/Eq60ReportPaywallTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify route matrix v2, fap-web, questions, scoring, norms, SJT, or commerce.
+    validation:
+      - cd backend && php artisan content:lint --pack=EQ_60 --pack-version=v1
+      - cd backend && php artisan content:compile --pack=EQ_60 --pack-version=v1
+      - cd backend && php artisan test --filter=Eq60ContentGateTest
+      - cd backend && php artisan test --filter=Eq60V5ReportContractTest
+      - cd backend && php artisan test --filter=Eq60GoldenCasesTest
+      - cd backend && php artisan test --filter=Eq60ReportPaywallTest
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: PR-EQ-V19-04
+    repo: fap-api
+    depends_on: [PR-EQ-V19-03]
+    branch: codex/pr-eq-v19-04-route-matrix-v2
+    title: "PR-EQ-V19-04 Personalization route matrix v2"
+    train_scope: eq_v19_commercial_content_depth
+    scope:
+      - Adapt EQ v1.9 36-route matrix into backend personalization route matrix.
+      - Support deterministic route selection without changing scores.
+    allowed_paths:
+      - backend/app/Services/Content/Eq60ContentLintService.php
+      - backend/app/Services/Report/Eq60ReportComposer.php
+      - backend/content_packs/EQ_60/v1/raw/personalization_routes/route_matrix.json
+      - backend/content_packs/EQ_60/v1/compiled/**
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/personalization_routes/route_matrix.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/**
+      - backend/tests/Feature/Content/Eq60ContentGateTest.php
+      - backend/tests/Feature/Report/Eq60V5ReportContractTest.php
+      - backend/tests/Feature/Content/Eq60GoldenCasesTest.php
+      - backend/tests/Feature/V0_3/Eq60SubmitQualityContractTest.php
+      - backend/tests/Feature/Report/Eq60ReportPaywallTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Change scorer, questions, norms, fap-web, SJT, or commerce semantics.
+    validation:
+      - cd backend && php artisan content:lint --pack=EQ_60 --pack-version=v1
+      - cd backend && php artisan content:compile --pack=EQ_60 --pack-version=v1
+      - cd backend && php artisan test --filter=Eq60ContentGateTest
+      - cd backend && php artisan test --filter=Eq60V5ReportContractTest
+      - cd backend && php artisan test --filter=Eq60GoldenCasesTest
+      - cd backend && php artisan test --filter=Eq60SubmitQualityContractTest
+      - cd backend && php artisan test --filter=Eq60ReportPaywallTest
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: PR-EQ-V19-05
+    repo: fap-web
+    depends_on: [PR-EQ-V19-04]
+    branch: codex/pr-eq-v19-05-frontend-depth-consumption
+    title: "PR-EQ-V19-05 Frontend EQ v1.9 depth consumption"
+    train_scope: eq_v19_commercial_content_depth
+    scope:
+      - Render backend-provided EQ v1.9 depth modules, route labels, and scene variants in EQResultV5.
+      - Update API types and contract fixtures without hardcoding official report prose.
+    allowed_paths:
+      - components/result/eq/**
+      - components/result/RichResultReport.tsx
+      - app/(localized)/[locale]/(app)/result/[id]/ResultClient.tsx
+      - lib/api/v0_3.ts
+      - tests/contracts/**
+      - tests/e2e/iq-eq-result-regression.spec.ts
+      - tests/fixtures/eq/v5/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-api.
+      - Hardcode official EQ report prose.
+      - Add paid, unlock, SKU, raw technical tag, or clickable SJT entry.
+    validation:
+      - pnpm typecheck
+      - pnpm test:contract
+      - pnpm exec playwright test tests/e2e/iq-eq-result-regression.spec.ts
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
+  - id: PR-EQ-V19-06
+    repo: fap-api
+    depends_on: [PR-EQ-V19-05]
+    branch: codex/pr-eq-v19-06-fixtures-smoke-report
+    title: "PR-EQ-V19-06 EQ v1.9 canonical fixtures and smoke template"
+    train_scope: eq_v19_commercial_content_depth
+    scope:
+      - Regenerate EQ v1.9 canonical fixtures for balanced, high-empathy-low-recovery, and low-confidence cases in zh-CN and en.
+      - Add a docs-only production smoke acceptance template without executing production smoke.
+    allowed_paths:
+      - backend/tests/Fixtures/eq/v5/**
+      - backend/tests/Feature/Report/Eq60V5ReportContractTest.php
+      - backend/tests/Feature/Content/Eq60GoldenCasesTest.php
+      - backend/tests/Feature/Report/Eq60ReportPaywallTest.php
+      - backend/tests/Feature/V0_3/Eq60SubmitQualityContractTest.php
+      - backend/docs/audits/eq/**
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Execute production smoke without explicit user authorization.
+      - Trigger deploy, CMS write, SEO runtime mutation, SJT, or commerce changes.
+    validation:
+      - cd backend && php artisan test --filter=Eq60V5ReportContractTest
+      - cd backend && php artisan test --filter=Eq60GoldenCasesTest
+      - cd backend && php artisan test --filter=Eq60ReportPaywallTest
+      - cd backend && php artisan test --filter=Eq60SubmitQualityContractTest
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
