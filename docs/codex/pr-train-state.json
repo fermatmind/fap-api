@@ -85,7 +85,7 @@
     "repo": "fap-api",
     "branch": "codex/pr-eq-asset-02-report-payload-fixtures-v16",
     "base": "main",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "train_scope": "eq_v16_content_asset_productization",
     "title": "PR-EQ-ASSET-02 Backend EQ v1.6 report payload and canonical fixtures",
     "depends_on": [
@@ -63021,10 +63021,14 @@
       "scope_validation": {
         "status": "pass",
         "evidence": "Changed files are limited to MBTI-PDF-PRODUCT-03 scope: backend/app/Services/Report/Pdf/ReportPdfDocumentService.php, backend/tests/Feature/V0_3/MbtiReadPathParityContractTest.php, and authorized docs/codex train metadata. No fap-web, public route, CMS, DB migration, sitemap, llms, canonical, noindex, JSON-LD, search, scheduler, queue, cache-version, artifact key, filename behavior, staging deploy, or production deploy change."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "GitHub checks passed for PR #2452 head 20f8db92c3f8d0e5ea1729b25e0f31999dedd987: hygiene, supply-chain, content-pack-build-validate, Semgrep, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 all succeeded. mergeStateStatus was CLEAN."
       }
     },
     "failure_reason": null,
-    "commit_sha": "a3e5564f818a975acd0ee5b883127a3df6083356",
+    "commit_sha": "20f8db92c3f8d0e5ea1729b25e0f31999dedd987",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2452",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -63044,6 +63048,11 @@
         "at": "2026-06-26T21:58:00+08:00",
         "status": "pr_open",
         "note": "Opened PR #2452 at https://github.com/fermatmind/fap-api/pull/2452. Waiting for required GitHub checks; no staging deploy wait, server verification, manual deploy, or production deploy included."
+      },
+      {
+        "at": "2026-06-26T22:00:00+08:00",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed for PR #2452 head 20f8db92c3f8d0e5ea1729b25e0f31999dedd987 and mergeStateStatus was CLEAN. Ready for squash merge; no staging deploy wait, production deploy, CMS write, search, sitemap, llms, canonical, noindex, JSON-LD, queue, cache-version, artifact key, or public route change included."
       }
     ]
   }
