@@ -18,44 +18,56 @@
     },
     "eq.cross_context.mbti.available": {
       "zh-CN": {
-        "title": "MBTI 可作为偏好语境",
-        "summary": "你已有 MBTI 结果时，EQ 报告可以把情绪与关系信号放进偏好、信息处理和决策风格的语境中阅读。",
-        "how_to_use": "只把它当作“沟通与决策偏好”的背景，不把类型直接解释成情绪能力或关系表现。",
+        "title": "EQ 和 MBTI 怎么一起看",
+        "summary": "MBTI 更像偏好和信息处理风格；EQ 报告更关注你在情绪、反馈、冲突和关系修复中的自我感知。两者可以互相补充，但不要混成一个总分。",
+        "how_to_use": "MBTI 更像偏好和信息处理风格；EQ 报告更关注你在情绪、反馈、冲突和关系修复中的自我感知。两者可以互相补充，但不要混成一个总分。",
         "claim_boundary": "不根据 MBTI 类型推断情商高低、工作表现、职业适配或关系成败。"
       },
       "en": {
-        "title": "MBTI can provide preference context",
-        "summary": "When an MBTI result exists, the EQ report can be read alongside preference, information-processing, and decision-style context.",
-        "how_to_use": "Use it only as communication and decision-preference background, not as an explanation of emotional ability or relationship performance.",
+        "title": "How EQ and MBTI work together",
+        "summary": "MBTI is closer to preference and information-processing style. This EQ report focuses on self-perceived patterns in emotion, feedback, conflict, and repair. They can complement each other, but should not be merged into one score.",
+        "how_to_use": "MBTI is closer to preference and information-processing style. This EQ report focuses on self-perceived patterns in emotion, feedback, conflict, and repair. They can complement each other, but should not be merged into one score.",
         "claim_boundary": "Do not infer EQ level, job performance, career fit, or relationship outcomes from MBTI type."
+      },
+      "meta": {
+        "v19_source_id": "eq.compare.mbti",
+        "claim_risk": "medium"
       }
     },
     "eq.cross_context.big_five.available": {
       "zh-CN": {
-        "title": "大五人格可作为特质语境",
-        "summary": "你已有大五人格结果时，EQ 报告可以把情绪与关系信号放进稳定特质、压力反应和互动节奏的语境中阅读。",
-        "how_to_use": "只把它当作“长期行为倾向”的背景，不用它替代 EQ 的四维分数和行动建议。",
+        "title": "EQ 和大五人格怎么一起看",
+        "summary": "大五更稳定地描述人格倾向；EQ 报告更关注情绪与关系场景中的可练习策略。大五解释“倾向”，EQ 提供“下一步怎么做”。",
+        "how_to_use": "大五更稳定地描述人格倾向；EQ 报告更关注情绪与关系场景中的可练习策略。大五解释“倾向”，EQ 提供“下一步怎么做”。",
         "claim_boundary": "不把大五特质转写为临床结论、招聘结论或固定人格优劣判断。"
       },
       "en": {
-        "title": "Big Five can provide trait context",
-        "summary": "When a Big Five result exists, the EQ report can be read alongside broader trait, stress-response, and interaction-rhythm context.",
-        "how_to_use": "Use it only as long-term behavioral tendency background. It does not replace EQ dimension scores or action guidance.",
+        "title": "How EQ and Big Five work together",
+        "summary": "Big Five describes broader personality tendencies. This EQ report focuses on trainable strategies in emotional and relational situations. Big Five explains tendencies; EQ helps choose the next practice.",
+        "how_to_use": "Big Five describes broader personality tendencies. This EQ report focuses on trainable strategies in emotional and relational situations. Big Five explains tendencies; EQ helps choose the next practice.",
         "claim_boundary": "Do not turn Big Five traits into clinical conclusions, hiring decisions, or fixed judgments of personality quality."
+      },
+      "meta": {
+        "v19_source_id": "eq.compare.big_five",
+        "claim_risk": "medium"
       }
     },
     "eq.cross_context.enneagram.available": {
       "zh-CN": {
-        "title": "九型人格可作为动机语境",
-        "summary": "你已有九型人格结果时，EQ 报告可以把情绪与关系信号放进动机、保护策略和压力下反应模式的语境中阅读。",
-        "how_to_use": "只把它当作“动机叙事”的背景，不把类型当作情绪反应的单一原因。",
+        "title": "EQ 和九型人格怎么一起看",
+        "summary": "九型更关注动机和防御模式；EQ 报告更关注你如何识别、调节、回应和修复情绪关系。一个解释内在驱动，一个帮助处理具体场景。",
+        "how_to_use": "九型更关注动机和防御模式；EQ 报告更关注你如何识别、调节、回应和修复情绪关系。一个解释内在驱动，一个帮助处理具体场景。",
         "claim_boundary": "不根据九型类型推断治疗需要、招聘适配、职业成功或关系结局。"
       },
       "en": {
-        "title": "Enneagram can provide motivation context",
-        "summary": "When an Enneagram result exists, the EQ report can be read alongside motivation, protective strategy, and pressure-pattern context.",
-        "how_to_use": "Use it only as motivation narrative background, not as the single cause of emotional responses.",
+        "title": "How EQ and Enneagram work together",
+        "summary": "Enneagram focuses more on motivation and defensive patterns. This EQ report focuses on how you identify, regulate, respond, and repair in emotional-relational situations. One explains inner drivers; the other helps with specific moments.",
+        "how_to_use": "Enneagram focuses more on motivation and defensive patterns. This EQ report focuses on how you identify, regulate, respond, and repair in emotional-relational situations. One explains inner drivers; the other helps with specific moments.",
         "claim_boundary": "Do not infer treatment needs, hiring fit, career success, or relationship outcomes from Enneagram type."
+      },
+      "meta": {
+        "v19_source_id": "eq.compare.enneagram",
+        "claim_risk": "medium"
       }
     }
   }

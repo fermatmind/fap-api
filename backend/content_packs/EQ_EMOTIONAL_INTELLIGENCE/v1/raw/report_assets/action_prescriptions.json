@@ -4,962 +4,1430 @@
   "prescriptions": {
     "emotion_labeling": {
       "zh-CN": {
-        "title": "情绪命名",
-        "why_this_matters": "当感受模糊、容易事后才明白时使用。",
-        "do_today": "今天只做一件事：把一次情绪从“烦”改写成三个更具体的词。",
-        "script": "我现在不是单纯不舒服，我可能是失望、紧张和需要确认。",
+        "title": "情绪命名处方",
+        "why_this_matters": "当你说不清自己的状态时，很容易直接进入解释、回避或自责。命名情绪能把混乱变成可处理的信息。",
+        "do_today": "今天选一个小情绪，用“事实 / 感受 / 需要”三列写下来。",
+        "script": "“我先说清楚我的状态：我不是反对这件事，我是有点紧张，需要先确认下一步。”",
         "seven_day_plan": [
           {
             "day": 1,
-            "practice": "记录一次情绪触发点。"
+            "practice": "记录一次情绪触发点"
           },
           {
             "day": 2,
-            "practice": "写下事实、感受、需要三栏。"
+            "practice": "给情绪选一个具体词"
           },
           {
             "day": 3,
-            "practice": "把“还好”改成三个具体情绪词。"
+            "practice": "区分事实和解释"
           },
           {
             "day": 4,
-            "practice": "找一个低风险场景说出一个感受。"
+            "practice": "写下身体信号"
           },
           {
             "day": 5,
-            "practice": "复盘一次没说出口的需要。"
+            "practice": "问自己需要什么"
           },
           {
             "day": 6,
-            "practice": "把一个情绪和身体感觉连接起来。"
+            "practice": "用一句话表达状态"
           },
           {
             "day": 7,
-            "practice": "选择一个下周继续练的情绪词。"
+            "practice": "回顾哪一步最有帮助"
           }
         ],
-        "watch_out": "不要把练习做成自我批评；只观察一个小动作是否变得更清楚。",
-        "when_to_use": "当感受模糊、容易事后才明白时使用。",
-        "do_not_overread": "行动处方是练习建议，不承诺改变结果或替代专业支持。"
+        "watch_out": "不要把一次练习当成马上改变关系的保证。",
+        "when_to_use": "当你已经看懂问题，但下一步不知道怎么说、怎么停、怎么修复时使用。",
+        "do_not_overread": "这是自我练习建议，不是治疗方案。",
+        "when_not_to_use": "如果涉及安全、创伤、持续伤害或医疗/法律问题，不要用报告建议替代专业支持。",
+        "save_prompt": "把这条处方保存下来，未来一周只练这一件事。",
+        "share_prompt": "如果要分享，可以只分享这条行动，不需要分享分数。",
+        "retest_prompt": "练习一段时间后再复测，观察你的自我感知是否变稳定。",
+        "agent_followup_prompt": "如果你之后问 Agent，可以直接说：帮我练这条处方。",
+        "progress_markers": [
+          "你能更快说出自己的状态。",
+          "你能把支持范围说得更具体。",
+          "冲突后反刍时间变短。"
+        ],
+        "one_minute_version": "先做一次 60 秒暂停，再用一句话说清事实、感受和下一步。",
+        "agent_prompt_seed": "帮我把这条处方应用到我最近的一个真实场景里。"
       },
       "en": {
-        "title": "Emotion labeling",
-        "why_this_matters": "Use when feelings are vague or only become clear afterward.",
-        "do_today": "Today, turn one vague feeling into three more precise words.",
-        "script": "I am not simply upset; I may be disappointed, tense, and needing clarity.",
+        "title": "Name the Feeling",
+        "why_this_matters": "When you cannot name your state, it is easy to jump into explaining, avoiding, or blaming yourself. Naming the feeling turns noise into usable information.",
+        "do_today": "Today, pick one small emotional moment and write three columns: fact, feeling, need.",
+        "script": "“Let me name my state first: I’m not against this; I’m tense and need to clarify the next step.”",
         "seven_day_plan": [
           {
             "day": 1,
-            "practice": "Notice one relevant real situation."
+            "practice": "Record one emotional trigger."
           },
           {
             "day": 2,
-            "practice": "Write the fact, feeling, and need separately."
+            "practice": "Choose a precise feeling word."
           },
           {
             "day": 3,
-            "practice": "Practice the key sentence once out loud."
+            "practice": "Separate facts from interpretations."
           },
           {
             "day": 4,
-            "practice": "Use the practice in a low-risk interaction."
+            "practice": "Note the body signal."
           },
           {
             "day": 5,
-            "practice": "Record what changed before and after."
+            "practice": "Ask what you need."
           },
           {
             "day": 6,
-            "practice": "Adjust the wording to sound natural."
+            "practice": "State your condition in one sentence."
           },
           {
             "day": 7,
-            "practice": "Choose one version to keep using next week."
+            "practice": "Review what helped most."
           }
         ],
-        "watch_out": "Do not turn the practice into self-criticism; observe one small behavior becoming clearer.",
-        "when_to_use": "Use when feelings are vague or only become clear afterward.",
-        "do_not_overread": "An action prescription is a practice suggestion, not a promised outcome or substitute for qualified support."
+        "watch_out": "Do not treat one exercise as a promise that a relationship will change immediately.",
+        "when_to_use": "Use this when you understand the pattern but need help with what to say, where to pause, or how to repair.",
+        "do_not_overread": "This is a self-development practice, not a treatment plan.",
+        "when_not_to_use": "If safety, trauma, ongoing harm, medical, or legal issues are involved, do not use report guidance as a substitute for professional support.",
+        "save_prompt": "Save this prescription and practice only this one move for the week.",
+        "share_prompt": "If you share anything, share the action rather than your score.",
+        "retest_prompt": "After practicing, retake the assessment to see whether your self-view has become steadier.",
+        "agent_followup_prompt": "Later, you can ask the Agent to help you practice this prescription.",
+        "progress_markers": [
+          "You can name your state sooner.",
+          "You can state the scope of support more clearly.",
+          "You spend less time replaying conflict afterward."
+        ],
+        "one_minute_version": "Take a 60-second pause, then name the fact, feeling, and next step in one sentence.",
+        "agent_prompt_seed": "Help me apply this prescription to a recent real situation."
+      },
+      "meta": {
+        "v19_source_id": "eq.action.emotion_labeling",
+        "claim_risk": "low",
+        "related_dimensions": [
+          "SA",
+          "ER",
+          "EM",
+          "RM"
+        ],
+        "retention_hooks": [
+          "save_report",
+          "retest_reminder",
+          "ask_agent"
+        ]
       }
     },
     "pause_recovery": {
       "zh-CN": {
-        "title": "暂停与恢复",
-        "why_this_matters": "当你知道自己被触发，但很难立刻稳定时使用。",
-        "do_today": "今天给自己设一个十秒暂停规则。",
-        "script": "我需要先停十秒，等我能更清楚地回应。",
+        "title": "暂停恢复处方",
+        "why_this_matters": "你可能很快意识到自己被触发，但需要一个更早的身体暂停，才能把觉察转成选择。",
+        "do_today": "下一次想马上回复时，先做一次完整呼气，再决定是否说话。",
+        "script": "“我想先停十秒，免得我现在说得太快。”",
         "seven_day_plan": [
           {
             "day": 1,
-            "practice": "选一个暂停信号。"
+            "practice": "找到一个常见触发词"
           },
           {
             "day": 2,
-            "practice": "在一次小触发中练十秒呼吸。"
+            "practice": "练一次完整呼气"
           },
           {
             "day": 3,
-            "practice": "写下暂停前后的不同。"
+            "practice": "把手机放下30秒"
           },
           {
             "day": 4,
-            "practice": "给自己设一个延迟回复模板。"
+            "practice": "用慢一点的语速复述问题"
           },
           {
             "day": 5,
-            "practice": "练习离开屏幕两分钟。"
+            "practice": "给自己一个延迟回应句"
           },
           {
             "day": 6,
-            "practice": "复盘一次因为暂停而避免升级的场景。"
+            "practice": "记录暂停后的差异"
           },
           {
             "day": 7,
-            "practice": "确定下周继续使用的暂停句。"
+            "practice": "设置一个下周继续练的场景"
           }
         ],
-        "watch_out": "不要把练习做成自我批评；只观察一个小动作是否变得更清楚。",
-        "when_to_use": "当你知道自己被触发，但很难立刻稳定时使用。",
-        "do_not_overread": "行动处方是练习建议，不承诺改变结果或替代专业支持。"
+        "watch_out": "不要把一次练习当成马上改变关系的保证。",
+        "when_to_use": "当你已经看懂问题，但下一步不知道怎么说、怎么停、怎么修复时使用。",
+        "do_not_overread": "这是自我练习建议，不是治疗方案。",
+        "when_not_to_use": "如果涉及安全、创伤、持续伤害或医疗/法律问题，不要用报告建议替代专业支持。",
+        "save_prompt": "把这条处方保存下来，未来一周只练这一件事。",
+        "share_prompt": "如果要分享，可以只分享这条行动，不需要分享分数。",
+        "retest_prompt": "练习一段时间后再复测，观察你的自我感知是否变稳定。",
+        "agent_followup_prompt": "如果你之后问 Agent，可以直接说：帮我练这条处方。",
+        "progress_markers": [
+          "你能更快说出自己的状态。",
+          "你能把支持范围说得更具体。",
+          "冲突后反刍时间变短。"
+        ],
+        "one_minute_version": "先做一次 60 秒暂停，再用一句话说清事实、感受和下一步。",
+        "agent_prompt_seed": "帮我把这条处方应用到我最近的一个真实场景里。"
       },
       "en": {
-        "title": "Pause and recovery",
-        "why_this_matters": "Use when you know you are triggered but cannot steady yourself immediately.",
-        "do_today": "Set a ten-second pause rule today.",
-        "script": "I need ten seconds so I can respond more clearly.",
+        "title": "Pause Before the Pattern Takes Over",
+        "why_this_matters": "You may notice activation quickly, but you need an earlier body-level pause to turn awareness into choice.",
+        "do_today": "The next time you want to respond immediately, take one full exhale before speaking.",
+        "script": "“I want to take ten seconds so I don’t answer too quickly.”",
         "seven_day_plan": [
           {
             "day": 1,
-            "practice": "Notice one relevant real situation."
+            "practice": "Identify one common trigger phrase."
           },
           {
             "day": 2,
-            "practice": "Write the fact, feeling, and need separately."
+            "practice": "Practice one full exhale."
           },
           {
             "day": 3,
-            "practice": "Practice the key sentence once out loud."
+            "practice": "Put the phone down for 30 seconds."
           },
           {
             "day": 4,
-            "practice": "Use the practice in a low-risk interaction."
+            "practice": "Restate the issue more slowly."
           },
           {
             "day": 5,
-            "practice": "Record what changed before and after."
+            "practice": "Use one delay sentence."
           },
           {
             "day": 6,
-            "practice": "Adjust the wording to sound natural."
+            "practice": "Record what changed after the pause."
           },
           {
             "day": 7,
-            "practice": "Choose one version to keep using next week."
+            "practice": "Choose one scene to keep practicing next week."
           }
         ],
-        "watch_out": "Do not turn the practice into self-criticism; observe one small behavior becoming clearer.",
-        "when_to_use": "Use when you know you are triggered but cannot steady yourself immediately.",
-        "do_not_overread": "An action prescription is a practice suggestion, not a promised outcome or substitute for qualified support."
+        "watch_out": "Do not treat one exercise as a promise that a relationship will change immediately.",
+        "when_to_use": "Use this when you understand the pattern but need help with what to say, where to pause, or how to repair.",
+        "do_not_overread": "This is a self-development practice, not a treatment plan.",
+        "when_not_to_use": "If safety, trauma, ongoing harm, medical, or legal issues are involved, do not use report guidance as a substitute for professional support.",
+        "save_prompt": "Save this prescription and practice only this one move for the week.",
+        "share_prompt": "If you share anything, share the action rather than your score.",
+        "retest_prompt": "After practicing, retake the assessment to see whether your self-view has become steadier.",
+        "agent_followup_prompt": "Later, you can ask the Agent to help you practice this prescription.",
+        "progress_markers": [
+          "You can name your state sooner.",
+          "You can state the scope of support more clearly.",
+          "You spend less time replaying conflict afterward."
+        ],
+        "one_minute_version": "Take a 60-second pause, then name the fact, feeling, and next step in one sentence.",
+        "agent_prompt_seed": "Help me apply this prescription to a recent real situation."
+      },
+      "meta": {
+        "v19_source_id": "eq.action.pause_recovery",
+        "claim_risk": "low",
+        "related_dimensions": [
+          "SA",
+          "ER",
+          "EM",
+          "RM"
+        ],
+        "retention_hooks": [
+          "save_report",
+          "retest_reminder",
+          "ask_agent"
+        ]
       }
     },
     "feedback_decompression": {
       "zh-CN": {
-        "title": "反馈去压缩",
-        "why_this_matters": "当反馈让你立刻紧张、防御或自我怀疑时使用。",
-        "do_today": "今天把一次反馈拆成事实、评价和下一步。",
-        "script": "我先确认一下，你希望我具体调整哪一部分？",
+        "title": "反馈拆压处方",
+        "why_this_matters": "反馈容易被身体听成否定。拆开事实、影响和请求，可以降低防御反应。",
+        "do_today": "把一条反馈拆成：对方看到什么、担心什么、希望我改什么。",
+        "script": "“我先确认一下，你希望我改的是结果、流程，还是沟通方式？”",
         "seven_day_plan": [
           {
             "day": 1,
-            "practice": "找一次近期反馈。"
+            "practice": "回忆最近一条反馈"
           },
           {
             "day": 2,
-            "practice": "写出反馈里的事实。"
+            "practice": "写下原话而非感受"
           },
           {
             "day": 3,
-            "practice": "写出你脑中自动冒出的解释。"
+            "practice": "圈出具体可改部分"
           },
           {
             "day": 4,
-            "practice": "问一个澄清问题。"
+            "practice": "写出不可控部分"
           },
           {
             "day": 5,
-            "practice": "把反馈转成一个行动。"
+            "practice": "问一个澄清问题"
           },
           {
             "day": 6,
-            "practice": "记录反馈后的身体反应。"
+            "practice": "做一个小修改"
           },
           {
             "day": 7,
-            "practice": "总结一个下次先问的问题。"
+            "practice": "复盘自己是否少防御了一点"
           }
         ],
-        "watch_out": "不要把练习做成自我批评；只观察一个小动作是否变得更清楚。",
-        "when_to_use": "当反馈让你立刻紧张、防御或自我怀疑时使用。",
-        "do_not_overread": "行动处方是练习建议，不承诺改变结果或替代专业支持。"
+        "watch_out": "不要把一次练习当成马上改变关系的保证。",
+        "when_to_use": "当你已经看懂问题，但下一步不知道怎么说、怎么停、怎么修复时使用。",
+        "do_not_overread": "这是自我练习建议，不是治疗方案。",
+        "when_not_to_use": "如果涉及安全、创伤、持续伤害或医疗/法律问题，不要用报告建议替代专业支持。",
+        "save_prompt": "把这条处方保存下来，未来一周只练这一件事。",
+        "share_prompt": "如果要分享，可以只分享这条行动，不需要分享分数。",
+        "retest_prompt": "练习一段时间后再复测，观察你的自我感知是否变稳定。",
+        "agent_followup_prompt": "如果你之后问 Agent，可以直接说：帮我练这条处方。",
+        "progress_markers": [
+          "你能更快说出自己的状态。",
+          "你能把支持范围说得更具体。",
+          "冲突后反刍时间变短。"
+        ],
+        "one_minute_version": "先做一次 60 秒暂停，再用一句话说清事实、感受和下一步。",
+        "agent_prompt_seed": "帮我把这条处方应用到我最近的一个真实场景里。"
       },
       "en": {
-        "title": "Feedback decompression",
-        "why_this_matters": "Use when feedback quickly creates tension, defensiveness, or self-doubt.",
-        "do_today": "Today, split one piece of feedback into facts, evaluation, and next step.",
-        "script": "Can I clarify which part you want me to adjust?",
+        "title": "Separate Feedback From Threat",
+        "why_this_matters": "Feedback can land in the body as rejection. Separating fact, impact, and request lowers defensiveness.",
+        "do_today": "Break one piece of feedback into: what they saw, what they worry about, what they want changed.",
+        "script": "“Let me check: do you want me to change the outcome, the process, or the communication?”",
         "seven_day_plan": [
           {
             "day": 1,
-            "practice": "Notice one relevant real situation."
+            "practice": "Recall one recent feedback moment."
           },
           {
             "day": 2,
-            "practice": "Write the fact, feeling, and need separately."
+            "practice": "Write the exact words, not the feeling."
           },
           {
             "day": 3,
-            "practice": "Practice the key sentence once out loud."
+            "practice": "Circle what can be changed."
           },
           {
             "day": 4,
-            "practice": "Use the practice in a low-risk interaction."
+            "practice": "Name what is not controllable."
           },
           {
             "day": 5,
-            "practice": "Record what changed before and after."
+            "practice": "Ask one clarifying question."
           },
           {
             "day": 6,
-            "practice": "Adjust the wording to sound natural."
+            "practice": "Make one small adjustment."
           },
           {
             "day": 7,
-            "practice": "Choose one version to keep using next week."
+            "practice": "Review whether defensiveness dropped even slightly."
           }
         ],
-        "watch_out": "Do not turn the practice into self-criticism; observe one small behavior becoming clearer.",
-        "when_to_use": "Use when feedback quickly creates tension, defensiveness, or self-doubt.",
-        "do_not_overread": "An action prescription is a practice suggestion, not a promised outcome or substitute for qualified support."
+        "watch_out": "Do not treat one exercise as a promise that a relationship will change immediately.",
+        "when_to_use": "Use this when you understand the pattern but need help with what to say, where to pause, or how to repair.",
+        "do_not_overread": "This is a self-development practice, not a treatment plan.",
+        "when_not_to_use": "If safety, trauma, ongoing harm, medical, or legal issues are involved, do not use report guidance as a substitute for professional support.",
+        "save_prompt": "Save this prescription and practice only this one move for the week.",
+        "share_prompt": "If you share anything, share the action rather than your score.",
+        "retest_prompt": "After practicing, retake the assessment to see whether your self-view has become steadier.",
+        "agent_followup_prompt": "Later, you can ask the Agent to help you practice this prescription.",
+        "progress_markers": [
+          "You can name your state sooner.",
+          "You can state the scope of support more clearly.",
+          "You spend less time replaying conflict afterward."
+        ],
+        "one_minute_version": "Take a 60-second pause, then name the fact, feeling, and next step in one sentence.",
+        "agent_prompt_seed": "Help me apply this prescription to a recent real situation."
+      },
+      "meta": {
+        "v19_source_id": "eq.action.feedback_decompression",
+        "claim_risk": "low",
+        "related_dimensions": [
+          "SA",
+          "ER",
+          "EM",
+          "RM"
+        ],
+        "retention_hooks": [
+          "save_report",
+          "retest_reminder",
+          "ask_agent"
+        ]
       }
     },
     "empathy_boundary": {
       "zh-CN": {
-        "title": "共情边界",
-        "why_this_matters": "当你理解别人后容易承担过多时使用。",
-        "do_today": "今天练习一句“理解但不接管”的话。",
-        "script": "我理解这件事很难，我能帮你一起理清下一步，但不能替你承担全部。",
+        "title": "共情边界处方",
+        "why_this_matters": "共情不是问题，问题是把理解别人变成替别人承担。边界让共情可持续。",
+        "do_today": "今天在一次倾听里，只提供一个具体下一步，不接下整个问题。",
+        "script": "“我理解这对你很难。我能帮你一起理下一步，但我不能替你承担全部。”",
         "seven_day_plan": [
           {
             "day": 1,
-            "practice": "识别一个你容易接管的场景。"
+            "practice": "识别一次想立刻帮忙的冲动"
           },
           {
             "day": 2,
-            "practice": "写下对方责任和你责任的边界。"
+            "practice": "先问对方需要什么"
           },
           {
             "day": 3,
-            "practice": "练习一句支持但不接管的话。"
+            "practice": "只提供一个可完成动作"
           },
           {
             "day": 4,
-            "practice": "在一次对话中只提供一个具体帮助。"
+            "practice": "说清不能承担的范围"
           },
           {
             "day": 5,
-            "practice": "对一个请求说出可承担范围。"
+            "practice": "观察自己的内疚感"
           },
           {
             "day": 6,
-            "practice": "复盘说边界后的真实后果。"
+            "practice": "记录对方是否真的需要更多"
           },
           {
             "day": 7,
-            "practice": "写下你的恢复动作。"
+            "practice": "总结哪种边界句最自然"
           }
         ],
-        "watch_out": "不要把练习做成自我批评；只观察一个小动作是否变得更清楚。",
-        "when_to_use": "当你理解别人后容易承担过多时使用。",
-        "do_not_overread": "行动处方是练习建议，不承诺改变结果或替代专业支持。"
+        "watch_out": "不要把一次练习当成马上改变关系的保证。",
+        "when_to_use": "当你已经看懂问题，但下一步不知道怎么说、怎么停、怎么修复时使用。",
+        "do_not_overread": "这是自我练习建议，不是治疗方案。",
+        "when_not_to_use": "如果涉及安全、创伤、持续伤害或医疗/法律问题，不要用报告建议替代专业支持。",
+        "save_prompt": "把这条处方保存下来，未来一周只练这一件事。",
+        "share_prompt": "如果要分享，可以只分享这条行动，不需要分享分数。",
+        "retest_prompt": "练习一段时间后再复测，观察你的自我感知是否变稳定。",
+        "agent_followup_prompt": "如果你之后问 Agent，可以直接说：帮我练这条处方。",
+        "progress_markers": [
+          "你能更快说出自己的状态。",
+          "你能把支持范围说得更具体。",
+          "冲突后反刍时间变短。"
+        ],
+        "one_minute_version": "先做一次 60 秒暂停，再用一句话说清事实、感受和下一步。",
+        "agent_prompt_seed": "帮我把这条处方应用到我最近的一个真实场景里。"
       },
       "en": {
-        "title": "Empathy with boundary",
-        "why_this_matters": "Use when understanding others turns into carrying too much.",
-        "do_today": "Practice one sentence that understands without taking over.",
-        "script": "I understand this is difficult. I can help you sort the next step, but I cannot carry all of it for you.",
+        "title": "Care Without Carrying",
+        "why_this_matters": "Empathy is not the problem. The problem is turning understanding into ownership. Boundaries make empathy sustainable.",
+        "do_today": "In one listening moment today, offer one concrete next step without taking over the whole issue.",
+        "script": "“I can see this is hard. I can help sort the next step, but I can’t carry the whole thing for you.”",
         "seven_day_plan": [
           {
             "day": 1,
-            "practice": "Notice one relevant real situation."
+            "practice": "Notice one impulse to jump in and help."
           },
           {
             "day": 2,
-            "practice": "Write the fact, feeling, and need separately."
+            "practice": "Ask what the person actually needs."
           },
           {
             "day": 3,
-            "practice": "Practice the key sentence once out loud."
+            "practice": "Offer one doable action."
           },
           {
             "day": 4,
-            "practice": "Use the practice in a low-risk interaction."
+            "practice": "State what you cannot take on."
           },
           {
             "day": 5,
-            "practice": "Record what changed before and after."
+            "practice": "Notice any guilt that appears."
           },
           {
             "day": 6,
-            "practice": "Adjust the wording to sound natural."
+            "practice": "Observe whether more help was truly needed."
           },
           {
             "day": 7,
-            "practice": "Choose one version to keep using next week."
+            "practice": "Keep the boundary line that felt most natural."
           }
         ],
-        "watch_out": "Do not turn the practice into self-criticism; observe one small behavior becoming clearer.",
-        "when_to_use": "Use when understanding others turns into carrying too much.",
-        "do_not_overread": "An action prescription is a practice suggestion, not a promised outcome or substitute for qualified support."
+        "watch_out": "Do not treat one exercise as a promise that a relationship will change immediately.",
+        "when_to_use": "Use this when you understand the pattern but need help with what to say, where to pause, or how to repair.",
+        "do_not_overread": "This is a self-development practice, not a treatment plan.",
+        "when_not_to_use": "If safety, trauma, ongoing harm, medical, or legal issues are involved, do not use report guidance as a substitute for professional support.",
+        "save_prompt": "Save this prescription and practice only this one move for the week.",
+        "share_prompt": "If you share anything, share the action rather than your score.",
+        "retest_prompt": "After practicing, retake the assessment to see whether your self-view has become steadier.",
+        "agent_followup_prompt": "Later, you can ask the Agent to help you practice this prescription.",
+        "progress_markers": [
+          "You can name your state sooner.",
+          "You can state the scope of support more clearly.",
+          "You spend less time replaying conflict afterward."
+        ],
+        "one_minute_version": "Take a 60-second pause, then name the fact, feeling, and next step in one sentence.",
+        "agent_prompt_seed": "Help me apply this prescription to a recent real situation."
+      },
+      "meta": {
+        "v19_source_id": "eq.action.empathy_boundary",
+        "claim_risk": "low",
+        "related_dimensions": [
+          "SA",
+          "ER",
+          "EM",
+          "RM"
+        ],
+        "retention_hooks": [
+          "save_report",
+          "retest_reminder",
+          "ask_agent"
+        ]
       }
     },
     "repair_after_conflict": {
       "zh-CN": {
-        "title": "冲突后修复",
-        "why_this_matters": "当冲突后不知道如何重新开始时使用。",
-        "do_today": "今天准备一句影响确认。",
-        "script": "刚才我的表达可能让你感觉被否定了，我想重新说一次。",
+        "title": "冲突后修复处方",
+        "why_this_matters": "表达立场只是沟通的一半。修复能把对话从态度问题带回合作问题。",
+        "do_today": "回想一次小摩擦，补一句承认影响和下一步。",
+        "script": "“刚才我的语气可能让你感觉被否定了。我的重点是这个问题本身，我们重新对一下下一步。”",
         "seven_day_plan": [
           {
             "day": 1,
-            "practice": "回忆一个小误解。"
+            "practice": "选一个低风险修复对象"
           },
           {
             "day": 2,
-            "practice": "写下你的意图和对方可能感受到的影响。"
+            "practice": "写下你想修复的影响"
           },
           {
             "day": 3,
-            "practice": "练一句影响确认。"
+            "practice": "区分意图和影响"
           },
           {
             "day": 4,
-            "practice": "补一句你的真实意图。"
+            "practice": "说一句承认影响"
           },
           {
             "day": 5,
-            "practice": "提出一个具体修复动作。"
+            "practice": "补一句下一步"
           },
           {
             "day": 6,
-            "practice": "在安全关系中尝试一次。"
+            "practice": "观察对话是否软化"
           },
           {
             "day": 7,
-            "practice": "复盘对方是否更愿意继续对话。"
+            "practice": "复盘哪句话最有效"
           }
         ],
-        "watch_out": "不要把练习做成自我批评；只观察一个小动作是否变得更清楚。",
-        "when_to_use": "当冲突后不知道如何重新开始时使用。",
-        "do_not_overread": "行动处方是练习建议，不承诺改变结果或替代专业支持。"
+        "watch_out": "不要把一次练习当成马上改变关系的保证。",
+        "when_to_use": "当你已经看懂问题，但下一步不知道怎么说、怎么停、怎么修复时使用。",
+        "do_not_overread": "这是自我练习建议，不是治疗方案。",
+        "when_not_to_use": "如果涉及安全、创伤、持续伤害或医疗/法律问题，不要用报告建议替代专业支持。",
+        "save_prompt": "把这条处方保存下来，未来一周只练这一件事。",
+        "share_prompt": "如果要分享，可以只分享这条行动，不需要分享分数。",
+        "retest_prompt": "练习一段时间后再复测，观察你的自我感知是否变稳定。",
+        "agent_followup_prompt": "如果你之后问 Agent，可以直接说：帮我练这条处方。",
+        "progress_markers": [
+          "你能更快说出自己的状态。",
+          "你能把支持范围说得更具体。",
+          "冲突后反刍时间变短。"
+        ],
+        "one_minute_version": "先做一次 60 秒暂停，再用一句话说清事实、感受和下一步。",
+        "agent_prompt_seed": "帮我把这条处方应用到我最近的一个真实场景里。"
       },
       "en": {
-        "title": "Repair after conflict",
-        "why_this_matters": "Use when you do not know how to restart after conflict.",
-        "do_today": "Prepare one impact-checking sentence today.",
-        "script": "My wording may have felt dismissive. I want to try saying it again.",
+        "title": "Repair After Tension",
+        "why_this_matters": "Stating your position is only half the conversation. Repair brings the moment back from tone to collaboration.",
+        "do_today": "Think of one small friction point and add one acknowledgment plus one next step.",
+        "script": "“My tone may have made you feel dismissed. My point is the issue itself—can we reset and decide the next step?”",
         "seven_day_plan": [
           {
             "day": 1,
-            "practice": "Notice one relevant real situation."
+            "practice": "Choose a low-risk repair moment."
           },
           {
             "day": 2,
-            "practice": "Write the fact, feeling, and need separately."
+            "practice": "Write the impact you want to repair."
           },
           {
             "day": 3,
-            "practice": "Practice the key sentence once out loud."
+            "practice": "Separate intent from impact."
           },
           {
             "day": 4,
-            "practice": "Use the practice in a low-risk interaction."
+            "practice": "Say one impact acknowledgment."
           },
           {
             "day": 5,
-            "practice": "Record what changed before and after."
+            "practice": "Add one next step."
           },
           {
             "day": 6,
-            "practice": "Adjust the wording to sound natural."
+            "practice": "Notice whether the tone softens."
           },
           {
             "day": 7,
-            "practice": "Choose one version to keep using next week."
+            "practice": "Review which line worked best."
           }
         ],
-        "watch_out": "Do not turn the practice into self-criticism; observe one small behavior becoming clearer.",
-        "when_to_use": "Use when you do not know how to restart after conflict.",
-        "do_not_overread": "An action prescription is a practice suggestion, not a promised outcome or substitute for qualified support."
+        "watch_out": "Do not treat one exercise as a promise that a relationship will change immediately.",
+        "when_to_use": "Use this when you understand the pattern but need help with what to say, where to pause, or how to repair.",
+        "do_not_overread": "This is a self-development practice, not a treatment plan.",
+        "when_not_to_use": "If safety, trauma, ongoing harm, medical, or legal issues are involved, do not use report guidance as a substitute for professional support.",
+        "save_prompt": "Save this prescription and practice only this one move for the week.",
+        "share_prompt": "If you share anything, share the action rather than your score.",
+        "retest_prompt": "After practicing, retake the assessment to see whether your self-view has become steadier.",
+        "agent_followup_prompt": "Later, you can ask the Agent to help you practice this prescription.",
+        "progress_markers": [
+          "You can name your state sooner.",
+          "You can state the scope of support more clearly.",
+          "You spend less time replaying conflict afterward."
+        ],
+        "one_minute_version": "Take a 60-second pause, then name the fact, feeling, and next step in one sentence.",
+        "agent_prompt_seed": "Help me apply this prescription to a recent real situation."
+      },
+      "meta": {
+        "v19_source_id": "eq.action.repair_after_conflict",
+        "claim_risk": "low",
+        "related_dimensions": [
+          "SA",
+          "ER",
+          "EM",
+          "RM"
+        ],
+        "retention_hooks": [
+          "save_report",
+          "retest_reminder",
+          "ask_agent"
+        ]
       }
     },
     "express_without_escalation": {
       "zh-CN": {
-        "title": "表达但不升级",
-        "why_this_matters": "当你很清楚自己的立场，但容易说得太硬时使用。",
-        "do_today": "今天把一个强表达改成“事实 + 感受 + 请求”。",
-        "script": "当这个决定突然改变时，我有点措手不及。我想先确认接下来怎么协作。",
+        "title": "不升级的表达处方",
+        "why_this_matters": "真实表达不需要更大声。清楚的句式可以减少误解，也保护关系。",
+        "do_today": "把一个不满改写成“我观察到 / 我感到 / 我希望”。",
+        "script": "“我注意到这件事临时改变了。我有点被打乱。下次能不能提前告诉我？”",
         "seven_day_plan": [
           {
             "day": 1,
-            "practice": "写出一句原本想直接说的话。"
+            "practice": "写下一句原始不满"
           },
           {
             "day": 2,
-            "practice": "删掉评价词，只留事实。"
+            "practice": "删掉指责词"
           },
           {
             "day": 3,
-            "practice": "加上一个真实感受。"
+            "practice": "补上具体事实"
           },
           {
             "day": 4,
-            "practice": "加上一个可回应请求。"
+            "practice": "补上你的感受"
           },
           {
             "day": 5,
-            "practice": "读出来，检查语气。"
+            "practice": "提出一个可执行请求"
           },
           {
             "day": 6,
-            "practice": "找一个低风险场景使用。"
+            "practice": "用平静语速读一遍"
           },
           {
             "day": 7,
-            "practice": "复盘它是否降低了防御。"
+            "practice": "在小场景里试一次"
           }
         ],
-        "watch_out": "不要把练习做成自我批评；只观察一个小动作是否变得更清楚。",
-        "when_to_use": "当你很清楚自己的立场，但容易说得太硬时使用。",
-        "do_not_overread": "行动处方是练习建议，不承诺改变结果或替代专业支持。"
+        "watch_out": "不要把一次练习当成马上改变关系的保证。",
+        "when_to_use": "当你已经看懂问题，但下一步不知道怎么说、怎么停、怎么修复时使用。",
+        "do_not_overread": "这是自我练习建议，不是治疗方案。",
+        "when_not_to_use": "如果涉及安全、创伤、持续伤害或医疗/法律问题，不要用报告建议替代专业支持。",
+        "save_prompt": "把这条处方保存下来，未来一周只练这一件事。",
+        "share_prompt": "如果要分享，可以只分享这条行动，不需要分享分数。",
+        "retest_prompt": "练习一段时间后再复测，观察你的自我感知是否变稳定。",
+        "agent_followup_prompt": "如果你之后问 Agent，可以直接说：帮我练这条处方。",
+        "progress_markers": [
+          "你能更快说出自己的状态。",
+          "你能把支持范围说得更具体。",
+          "冲突后反刍时间变短。"
+        ],
+        "one_minute_version": "先做一次 60 秒暂停，再用一句话说清事实、感受和下一步。",
+        "agent_prompt_seed": "帮我把这条处方应用到我最近的一个真实场景里。"
       },
       "en": {
-        "title": "Express without escalation",
-        "why_this_matters": "Use when your position is clear but may land too sharply.",
-        "do_today": "Turn one strong statement into fact + feeling + request.",
-        "script": "When this decision changed suddenly, I felt caught off guard. I want to clarify how we work together next.",
+        "title": "Say It Without Turning Up the Heat",
+        "why_this_matters": "Honest expression does not need to be louder. Clear wording can reduce misunderstanding and protect the relationship.",
+        "do_today": "Rewrite one frustration as: I noticed / I felt / I would prefer.",
+        "script": "“I noticed the plan changed last minute. I felt thrown off. Could you tell me earlier next time?”",
         "seven_day_plan": [
           {
             "day": 1,
-            "practice": "Notice one relevant real situation."
+            "practice": "Write the raw complaint."
           },
           {
             "day": 2,
-            "practice": "Write the fact, feeling, and need separately."
+            "practice": "Remove blaming words."
           },
           {
             "day": 3,
-            "practice": "Practice the key sentence once out loud."
+            "practice": "Add the concrete fact."
           },
           {
             "day": 4,
-            "practice": "Use the practice in a low-risk interaction."
+            "practice": "Add your feeling."
           },
           {
             "day": 5,
-            "practice": "Record what changed before and after."
+            "practice": "Make one doable request."
           },
           {
             "day": 6,
-            "practice": "Adjust the wording to sound natural."
+            "practice": "Read it in a steady tone."
           },
           {
             "day": 7,
-            "practice": "Choose one version to keep using next week."
+            "practice": "Try it in one small situation."
           }
         ],
-        "watch_out": "Do not turn the practice into self-criticism; observe one small behavior becoming clearer.",
-        "when_to_use": "Use when your position is clear but may land too sharply.",
-        "do_not_overread": "An action prescription is a practice suggestion, not a promised outcome or substitute for qualified support."
+        "watch_out": "Do not treat one exercise as a promise that a relationship will change immediately.",
+        "when_to_use": "Use this when you understand the pattern but need help with what to say, where to pause, or how to repair.",
+        "do_not_overread": "This is a self-development practice, not a treatment plan.",
+        "when_not_to_use": "If safety, trauma, ongoing harm, medical, or legal issues are involved, do not use report guidance as a substitute for professional support.",
+        "save_prompt": "Save this prescription and practice only this one move for the week.",
+        "share_prompt": "If you share anything, share the action rather than your score.",
+        "retest_prompt": "After practicing, retake the assessment to see whether your self-view has become steadier.",
+        "agent_followup_prompt": "Later, you can ask the Agent to help you practice this prescription.",
+        "progress_markers": [
+          "You can name your state sooner.",
+          "You can state the scope of support more clearly.",
+          "You spend less time replaying conflict afterward."
+        ],
+        "one_minute_version": "Take a 60-second pause, then name the fact, feeling, and next step in one sentence.",
+        "agent_prompt_seed": "Help me apply this prescription to a recent real situation."
+      },
+      "meta": {
+        "v19_source_id": "eq.action.express_without_escalation",
+        "claim_risk": "low",
+        "related_dimensions": [
+          "SA",
+          "ER",
+          "EM",
+          "RM"
+        ],
+        "retention_hooks": [
+          "save_report",
+          "retest_reminder",
+          "ask_agent"
+        ]
       }
     },
     "support_without_rescuing": {
       "zh-CN": {
-        "title": "支持但不拯救",
-        "why_this_matters": "当你想帮人解决一切时使用。",
-        "do_today": "今天先问对方需要倾听、建议还是行动帮助。",
-        "script": "你现在更需要我听你说，还是一起想一个下一步？",
+        "title": "支持但不拯救处方",
+        "why_this_matters": "好的支持不是替对方生活，而是帮助对方看见下一步。",
+        "do_today": "当别人求助时，先问“你希望我听你说，还是一起想下一步？”",
+        "script": "“我愿意陪你理清楚，但这个决定还是需要你自己做。”",
         "seven_day_plan": [
           {
             "day": 1,
-            "practice": "识别一次想立刻解决的冲动。"
+            "practice": "识别一次想替对方解决的冲动"
           },
           {
             "day": 2,
-            "practice": "暂停并问支持方式。"
+            "practice": "先问对方要倾听还是建议"
           },
           {
             "day": 3,
-            "practice": "只给一个帮助选项。"
+            "practice": "只给一个选择"
           },
           {
             "day": 4,
-            "practice": "避免替对方做决定。"
+            "practice": "不替对方做决定"
           },
           {
             "day": 5,
-            "practice": "结束前确认对方自己的下一步。"
+            "practice": "结束时确认下一步由谁做"
           },
           {
             "day": 6,
-            "practice": "记录你的承担感变化。"
+            "practice": "观察你是否更轻松"
           },
           {
             "day": 7,
-            "practice": "复盘支持和接管的差别。"
+            "practice": "总结最有效的提问句"
           }
         ],
-        "watch_out": "不要把练习做成自我批评；只观察一个小动作是否变得更清楚。",
-        "when_to_use": "当你想帮人解决一切时使用。",
-        "do_not_overread": "行动处方是练习建议，不承诺改变结果或替代专业支持。"
+        "watch_out": "不要把一次练习当成马上改变关系的保证。",
+        "when_to_use": "当你已经看懂问题，但下一步不知道怎么说、怎么停、怎么修复时使用。",
+        "do_not_overread": "这是自我练习建议，不是治疗方案。",
+        "when_not_to_use": "如果涉及安全、创伤、持续伤害或医疗/法律问题，不要用报告建议替代专业支持。",
+        "save_prompt": "把这条处方保存下来，未来一周只练这一件事。",
+        "share_prompt": "如果要分享，可以只分享这条行动，不需要分享分数。",
+        "retest_prompt": "练习一段时间后再复测，观察你的自我感知是否变稳定。",
+        "agent_followup_prompt": "如果你之后问 Agent，可以直接说：帮我练这条处方。",
+        "progress_markers": [
+          "你能更快说出自己的状态。",
+          "你能把支持范围说得更具体。",
+          "冲突后反刍时间变短。"
+        ],
+        "one_minute_version": "先做一次 60 秒暂停，再用一句话说清事实、感受和下一步。",
+        "agent_prompt_seed": "帮我把这条处方应用到我最近的一个真实场景里。"
       },
       "en": {
-        "title": "Support without rescuing",
-        "why_this_matters": "Use when you feel pulled to solve everything for someone.",
-        "do_today": "Ask whether the person wants listening, advice, or practical help.",
-        "script": "Do you want me to listen, or would it help to think through one next step?",
+        "title": "Support Without Rescuing",
+        "why_this_matters": "Good support does not live someone else’s life for them; it helps them see the next step.",
+        "do_today": "When someone asks for support, first ask, “Do you want me to listen, or help think through the next step?”",
+        "script": "“I’m willing to help you think it through, and the decision still needs to be yours.”",
         "seven_day_plan": [
           {
             "day": 1,
-            "practice": "Notice one relevant real situation."
+            "practice": "Notice one urge to solve it for them."
           },
           {
             "day": 2,
-            "practice": "Write the fact, feeling, and need separately."
+            "practice": "Ask whether they want listening or advice."
           },
           {
             "day": 3,
-            "practice": "Practice the key sentence once out loud."
+            "practice": "Offer one option only."
           },
           {
             "day": 4,
-            "practice": "Use the practice in a low-risk interaction."
+            "practice": "Do not make the decision for them."
           },
           {
             "day": 5,
-            "practice": "Record what changed before and after."
+            "practice": "Clarify who owns the next step."
           },
           {
             "day": 6,
-            "practice": "Adjust the wording to sound natural."
+            "practice": "Notice whether you feel lighter."
           },
           {
             "day": 7,
-            "practice": "Choose one version to keep using next week."
+            "practice": "Keep the question that worked best."
           }
         ],
-        "watch_out": "Do not turn the practice into self-criticism; observe one small behavior becoming clearer.",
-        "when_to_use": "Use when you feel pulled to solve everything for someone.",
-        "do_not_overread": "An action prescription is a practice suggestion, not a promised outcome or substitute for qualified support."
+        "watch_out": "Do not treat one exercise as a promise that a relationship will change immediately.",
+        "when_to_use": "Use this when you understand the pattern but need help with what to say, where to pause, or how to repair.",
+        "do_not_overread": "This is a self-development practice, not a treatment plan.",
+        "when_not_to_use": "If safety, trauma, ongoing harm, medical, or legal issues are involved, do not use report guidance as a substitute for professional support.",
+        "save_prompt": "Save this prescription and practice only this one move for the week.",
+        "share_prompt": "If you share anything, share the action rather than your score.",
+        "retest_prompt": "After practicing, retake the assessment to see whether your self-view has become steadier.",
+        "agent_followup_prompt": "Later, you can ask the Agent to help you practice this prescription.",
+        "progress_markers": [
+          "You can name your state sooner.",
+          "You can state the scope of support more clearly.",
+          "You spend less time replaying conflict afterward."
+        ],
+        "one_minute_version": "Take a 60-second pause, then name the fact, feeling, and next step in one sentence.",
+        "agent_prompt_seed": "Help me apply this prescription to a recent real situation."
+      },
+      "meta": {
+        "v19_source_id": "eq.action.support_without_rescuing",
+        "claim_risk": "low",
+        "related_dimensions": [
+          "SA",
+          "ER",
+          "EM",
+          "RM"
+        ],
+        "retention_hooks": [
+          "save_report",
+          "retest_reminder",
+          "ask_agent"
+        ]
       }
     },
     "cold_to_warm_response": {
       "zh-CN": {
-        "title": "从冷静到有温度",
-        "why_this_matters": "当你能解决问题但别人感觉没被回应时使用。",
-        "do_today": "今天在给方案前先回应一句感受。",
-        "script": "我能理解这让你很挫败。我们可以一起看下一步怎么处理。",
+        "title": "从冷静到有温度处方",
+        "why_this_matters": "稳定是优势，但对方需要先知道你听见了情绪，才更容易听见你的方案。",
+        "do_today": "下一次给方案前，先说一句“我听出来这让你很不舒服”。",
+        "script": "“我先不急着给建议。我听出来这件事让你很受影响。”",
         "seven_day_plan": [
           {
             "day": 1,
-            "practice": "听到问题后先不急着给方案。"
+            "practice": "选一个你容易直接给方案的场景"
           },
           {
             "day": 2,
-            "practice": "说出你听见的情绪。"
+            "practice": "先复述对方感受"
           },
           {
             "day": 3,
-            "practice": "确认对方是否认可。"
+            "practice": "停两秒"
           },
           {
             "day": 4,
-            "practice": "再提出一个具体下一步。"
+            "practice": "再问是否需要建议"
           },
           {
             "day": 5,
-            "practice": "观察对方反应是否软化。"
+            "practice": "给一个方案而不是三个"
           },
           {
             "day": 6,
-            "practice": "复盘你是否少讲了道理。"
+            "practice": "观察对方反应"
           },
           {
             "day": 7,
-            "practice": "保留一个适合你的温度句。"
+            "practice": "复盘温度有没有改变对话"
           }
         ],
-        "watch_out": "不要把练习做成自我批评；只观察一个小动作是否变得更清楚。",
-        "when_to_use": "当你能解决问题但别人感觉没被回应时使用。",
-        "do_not_overread": "行动处方是练习建议，不承诺改变结果或替代专业支持。"
+        "watch_out": "不要把一次练习当成马上改变关系的保证。",
+        "when_to_use": "当你已经看懂问题，但下一步不知道怎么说、怎么停、怎么修复时使用。",
+        "do_not_overread": "这是自我练习建议，不是治疗方案。",
+        "when_not_to_use": "如果涉及安全、创伤、持续伤害或医疗/法律问题，不要用报告建议替代专业支持。",
+        "save_prompt": "把这条处方保存下来，未来一周只练这一件事。",
+        "share_prompt": "如果要分享，可以只分享这条行动，不需要分享分数。",
+        "retest_prompt": "练习一段时间后再复测，观察你的自我感知是否变稳定。",
+        "agent_followup_prompt": "如果你之后问 Agent，可以直接说：帮我练这条处方。",
+        "progress_markers": [
+          "你能更快说出自己的状态。",
+          "你能把支持范围说得更具体。",
+          "冲突后反刍时间变短。"
+        ],
+        "one_minute_version": "先做一次 60 秒暂停，再用一句话说清事实、感受和下一步。",
+        "agent_prompt_seed": "帮我把这条处方应用到我最近的一个真实场景里。"
       },
       "en": {
-        "title": "From calm to warm response",
-        "why_this_matters": "Use when you can solve the issue but others do not feel emotionally met.",
-        "do_today": "Before offering a solution, acknowledge one feeling.",
-        "script": "I can see how frustrating this is. We can look at the next step together.",
+        "title": "Add Warmth Before the Fix",
+        "why_this_matters": "Steadiness is a strength, but people often need to feel emotionally heard before they can hear the solution.",
+        "do_today": "Before offering a solution, say one line such as, “I can tell this has been frustrating.”",
+        "script": "“I don’t want to jump straight to advice. I can tell this has affected you.”",
         "seven_day_plan": [
           {
             "day": 1,
-            "practice": "Notice one relevant real situation."
+            "practice": "Choose one scene where you tend to give advice fast."
           },
           {
             "day": 2,
-            "practice": "Write the fact, feeling, and need separately."
+            "practice": "Reflect the feeling first."
           },
           {
             "day": 3,
-            "practice": "Practice the key sentence once out loud."
+            "practice": "Pause for two seconds."
           },
           {
             "day": 4,
-            "practice": "Use the practice in a low-risk interaction."
+            "practice": "Ask whether advice is wanted."
           },
           {
             "day": 5,
-            "practice": "Record what changed before and after."
+            "practice": "Offer one option, not three."
           },
           {
             "day": 6,
-            "practice": "Adjust the wording to sound natural."
+            "practice": "Notice the other person’s response."
           },
           {
             "day": 7,
-            "practice": "Choose one version to keep using next week."
+            "practice": "Review whether warmth changed the conversation."
           }
         ],
-        "watch_out": "Do not turn the practice into self-criticism; observe one small behavior becoming clearer.",
-        "when_to_use": "Use when you can solve the issue but others do not feel emotionally met.",
-        "do_not_overread": "An action prescription is a practice suggestion, not a promised outcome or substitute for qualified support."
+        "watch_out": "Do not treat one exercise as a promise that a relationship will change immediately.",
+        "when_to_use": "Use this when you understand the pattern but need help with what to say, where to pause, or how to repair.",
+        "do_not_overread": "This is a self-development practice, not a treatment plan.",
+        "when_not_to_use": "If safety, trauma, ongoing harm, medical, or legal issues are involved, do not use report guidance as a substitute for professional support.",
+        "save_prompt": "Save this prescription and practice only this one move for the week.",
+        "share_prompt": "If you share anything, share the action rather than your score.",
+        "retest_prompt": "After practicing, retake the assessment to see whether your self-view has become steadier.",
+        "agent_followup_prompt": "Later, you can ask the Agent to help you practice this prescription.",
+        "progress_markers": [
+          "You can name your state sooner.",
+          "You can state the scope of support more clearly.",
+          "You spend less time replaying conflict afterward."
+        ],
+        "one_minute_version": "Take a 60-second pause, then name the fact, feeling, and next step in one sentence.",
+        "agent_prompt_seed": "Help me apply this prescription to a recent real situation."
+      },
+      "meta": {
+        "v19_source_id": "eq.action.cold_to_warm_response",
+        "claim_risk": "low",
+        "related_dimensions": [
+          "SA",
+          "ER",
+          "EM",
+          "RM"
+        ],
+        "retention_hooks": [
+          "save_report",
+          "retest_reminder",
+          "ask_agent"
+        ]
       }
     },
     "relationship_energy_management": {
       "zh-CN": {
-        "title": "关系能量管理",
-        "why_this_matters": "当你在多人关系或强情绪场景后感到累时使用。",
-        "do_today": "今天给一段高互动之后安排十分钟低输入时间。",
-        "script": "我需要一点时间整理刚才的信息，之后我会回来回应。",
+        "title": "关系能量管理处方",
+        "why_this_matters": "你能处理很多互动，但能处理不代表都该由你处理。",
+        "do_today": "今天结束前写下：哪些情绪是我的，哪些只是我接触到的。",
+        "script": "“这件事我会跟进我负责的部分，其他部分我们需要分开处理。”",
         "seven_day_plan": [
           {
             "day": 1,
-            "practice": "标记今天最耗能的一次互动。"
+            "practice": "列出今天三个高互动时刻"
           },
           {
             "day": 2,
-            "practice": "记录耗能来自人、情绪还是切换。"
+            "practice": "标记哪一个最耗能"
           },
           {
             "day": 3,
-            "practice": "安排十分钟低输入恢复。"
+            "practice": "写下你实际负责的部分"
           },
           {
             "day": 4,
-            "practice": "减少一个不必要回应。"
+            "practice": "写下你不负责的部分"
           },
           {
             "day": 5,
-            "practice": "练习结束对话的句子。"
+            "practice": "安排10分钟恢复"
           },
           {
             "day": 6,
-            "practice": "观察恢复前后差异。"
+            "practice": "下一次提前设边界"
           },
           {
             "day": 7,
-            "practice": "设定下周一个关系能量边界。"
+            "practice": "复盘哪类互动最需要限制"
           }
         ],
-        "watch_out": "不要把练习做成自我批评；只观察一个小动作是否变得更清楚。",
-        "when_to_use": "当你在多人关系或强情绪场景后感到累时使用。",
-        "do_not_overread": "行动处方是练习建议，不承诺改变结果或替代专业支持。"
+        "watch_out": "不要把一次练习当成马上改变关系的保证。",
+        "when_to_use": "当你已经看懂问题，但下一步不知道怎么说、怎么停、怎么修复时使用。",
+        "do_not_overread": "这是自我练习建议，不是治疗方案。",
+        "when_not_to_use": "如果涉及安全、创伤、持续伤害或医疗/法律问题，不要用报告建议替代专业支持。",
+        "save_prompt": "把这条处方保存下来，未来一周只练这一件事。",
+        "share_prompt": "如果要分享，可以只分享这条行动，不需要分享分数。",
+        "retest_prompt": "练习一段时间后再复测，观察你的自我感知是否变稳定。",
+        "agent_followup_prompt": "如果你之后问 Agent，可以直接说：帮我练这条处方。",
+        "progress_markers": [
+          "你能更快说出自己的状态。",
+          "你能把支持范围说得更具体。",
+          "冲突后反刍时间变短。"
+        ],
+        "one_minute_version": "先做一次 60 秒暂停，再用一句话说清事实、感受和下一步。",
+        "agent_prompt_seed": "帮我把这条处方应用到我最近的一个真实场景里。"
       },
       "en": {
-        "title": "Relationship energy management",
-        "why_this_matters": "Use when you feel drained after relationally intense situations.",
-        "do_today": "Schedule ten minutes of low input after one high-interaction moment.",
-        "script": "I need a little time to process what just happened, and I will come back to it.",
+        "title": "Manage Relational Energy",
+        "why_this_matters": "You may be able to handle many interactions, but ability does not mean every interaction belongs to you.",
+        "do_today": "At the end of today, list which emotions were yours and which ones you merely encountered.",
+        "script": "“I’ll follow up on the part I own; the rest needs to be handled separately.”",
         "seven_day_plan": [
           {
             "day": 1,
-            "practice": "Notice one relevant real situation."
+            "practice": "List three high-interaction moments."
           },
           {
             "day": 2,
-            "practice": "Write the fact, feeling, and need separately."
+            "practice": "Mark the one that drained you most."
           },
           {
             "day": 3,
-            "practice": "Practice the key sentence once out loud."
+            "practice": "Name the part you truly owned."
           },
           {
             "day": 4,
-            "practice": "Use the practice in a low-risk interaction."
+            "practice": "Name the part you did not own."
           },
           {
             "day": 5,
-            "practice": "Record what changed before and after."
+            "practice": "Schedule ten minutes of recovery."
           },
           {
             "day": 6,
-            "practice": "Adjust the wording to sound natural."
+            "practice": "Set a boundary earlier next time."
           },
           {
             "day": 7,
-            "practice": "Choose one version to keep using next week."
+            "practice": "Review which interactions need limits."
           }
         ],
-        "watch_out": "Do not turn the practice into self-criticism; observe one small behavior becoming clearer.",
-        "when_to_use": "Use when you feel drained after relationally intense situations.",
-        "do_not_overread": "An action prescription is a practice suggestion, not a promised outcome or substitute for qualified support."
+        "watch_out": "Do not treat one exercise as a promise that a relationship will change immediately.",
+        "when_to_use": "Use this when you understand the pattern but need help with what to say, where to pause, or how to repair.",
+        "do_not_overread": "This is a self-development practice, not a treatment plan.",
+        "when_not_to_use": "If safety, trauma, ongoing harm, medical, or legal issues are involved, do not use report guidance as a substitute for professional support.",
+        "save_prompt": "Save this prescription and practice only this one move for the week.",
+        "share_prompt": "If you share anything, share the action rather than your score.",
+        "retest_prompt": "After practicing, retake the assessment to see whether your self-view has become steadier.",
+        "agent_followup_prompt": "Later, you can ask the Agent to help you practice this prescription.",
+        "progress_markers": [
+          "You can name your state sooner.",
+          "You can state the scope of support more clearly.",
+          "You spend less time replaying conflict afterward."
+        ],
+        "one_minute_version": "Take a 60-second pause, then name the fact, feeling, and next step in one sentence.",
+        "agent_prompt_seed": "Help me apply this prescription to a recent real situation."
+      },
+      "meta": {
+        "v19_source_id": "eq.action.relationship_energy_management",
+        "claim_risk": "low",
+        "related_dimensions": [
+          "SA",
+          "ER",
+          "EM",
+          "RM"
+        ],
+        "retention_hooks": [
+          "save_report",
+          "retest_reminder",
+          "ask_agent"
+        ]
       }
     },
     "conflict_deescalation": {
       "zh-CN": {
-        "title": "冲突降温",
-        "why_this_matters": "当对话开始升级时使用。",
-        "do_today": "今天练习把争执缩小到一个具体问题。",
-        "script": "我们先只谈一个点：现在最需要决定的是什么？",
+        "title": "冲突降温处方",
+        "why_this_matters": "冲突里最先需要的常常不是答案，而是把对话从证明谁对拉回要解决什么。",
+        "do_today": "下一次分歧出现时，只问一个问题：“我们现在最不同意的是哪一点？”",
+        "script": "“我感觉我们在争两个不同的问题。先把分歧点拆开。”",
         "seven_day_plan": [
           {
             "day": 1,
-            "practice": "识别一个容易升级的话题。"
+            "practice": "识别一个低风险分歧"
           },
           {
             "day": 2,
-            "practice": "写出双方各自想保护什么。"
+            "practice": "不急着解释立场"
           },
           {
             "day": 3,
-            "practice": "准备一句缩小问题的话。"
+            "practice": "先命名分歧点"
           },
           {
             "day": 4,
-            "practice": "练习放慢语速。"
+            "practice": "复述对方一句话"
           },
           {
             "day": 5,
-            "practice": "在对话中只问一个澄清问题。"
+            "practice": "只处理一个议题"
           },
           {
             "day": 6,
-            "practice": "结束后复盘是否降温。"
+            "practice": "用下一步收尾"
           },
           {
             "day": 7,
-            "practice": "保存一个下次可用的降温句。"
+            "practice": "复盘是否少升级了一点"
           }
         ],
-        "watch_out": "不要把练习做成自我批评；只观察一个小动作是否变得更清楚。",
-        "when_to_use": "当对话开始升级时使用。",
-        "do_not_overread": "行动处方是练习建议，不承诺改变结果或替代专业支持。"
+        "watch_out": "不要把一次练习当成马上改变关系的保证。",
+        "when_to_use": "当你已经看懂问题，但下一步不知道怎么说、怎么停、怎么修复时使用。",
+        "do_not_overread": "这是自我练习建议，不是治疗方案。",
+        "when_not_to_use": "如果涉及安全、创伤、持续伤害或医疗/法律问题，不要用报告建议替代专业支持。",
+        "save_prompt": "把这条处方保存下来，未来一周只练这一件事。",
+        "share_prompt": "如果要分享，可以只分享这条行动，不需要分享分数。",
+        "retest_prompt": "练习一段时间后再复测，观察你的自我感知是否变稳定。",
+        "agent_followup_prompt": "如果你之后问 Agent，可以直接说：帮我练这条处方。",
+        "progress_markers": [
+          "你能更快说出自己的状态。",
+          "你能把支持范围说得更具体。",
+          "冲突后反刍时间变短。"
+        ],
+        "one_minute_version": "先做一次 60 秒暂停，再用一句话说清事实、感受和下一步。",
+        "agent_prompt_seed": "帮我把这条处方应用到我最近的一个真实场景里。"
       },
       "en": {
-        "title": "Conflict de-escalation",
-        "why_this_matters": "Use when a conversation starts escalating.",
-        "do_today": "Practice narrowing a disagreement to one concrete issue.",
-        "script": "Let’s focus on one point: what needs to be decided right now?",
+        "title": "Lower the Temperature",
+        "why_this_matters": "In conflict, the first useful move is often not the answer; it is moving the conversation from proving who is right to naming what needs to be solved.",
+        "do_today": "The next time disagreement appears, ask one question: “What exactly are we disagreeing about?”",
+        "script": "“I think we’re arguing about two different things. Let’s separate the points.”",
         "seven_day_plan": [
           {
             "day": 1,
-            "practice": "Notice one relevant real situation."
+            "practice": "Choose a low-risk disagreement."
           },
           {
             "day": 2,
-            "practice": "Write the fact, feeling, and need separately."
+            "practice": "Do not explain your position first."
           },
           {
             "day": 3,
-            "practice": "Practice the key sentence once out loud."
+            "practice": "Name the disagreement."
           },
           {
             "day": 4,
-            "practice": "Use the practice in a low-risk interaction."
+            "practice": "Reflect one sentence from the other person."
           },
           {
             "day": 5,
-            "practice": "Record what changed before and after."
+            "practice": "Handle one issue only."
           },
           {
             "day": 6,
-            "practice": "Adjust the wording to sound natural."
+            "practice": "End with a next step."
           },
           {
             "day": 7,
-            "practice": "Choose one version to keep using next week."
+            "practice": "Review whether escalation decreased."
           }
         ],
-        "watch_out": "Do not turn the practice into self-criticism; observe one small behavior becoming clearer.",
-        "when_to_use": "Use when a conversation starts escalating.",
-        "do_not_overread": "An action prescription is a practice suggestion, not a promised outcome or substitute for qualified support."
+        "watch_out": "Do not treat one exercise as a promise that a relationship will change immediately.",
+        "when_to_use": "Use this when you understand the pattern but need help with what to say, where to pause, or how to repair.",
+        "do_not_overread": "This is a self-development practice, not a treatment plan.",
+        "when_not_to_use": "If safety, trauma, ongoing harm, medical, or legal issues are involved, do not use report guidance as a substitute for professional support.",
+        "save_prompt": "Save this prescription and practice only this one move for the week.",
+        "share_prompt": "If you share anything, share the action rather than your score.",
+        "retest_prompt": "After practicing, retake the assessment to see whether your self-view has become steadier.",
+        "agent_followup_prompt": "Later, you can ask the Agent to help you practice this prescription.",
+        "progress_markers": [
+          "You can name your state sooner.",
+          "You can state the scope of support more clearly.",
+          "You spend less time replaying conflict afterward."
+        ],
+        "one_minute_version": "Take a 60-second pause, then name the fact, feeling, and next step in one sentence.",
+        "agent_prompt_seed": "Help me apply this prescription to a recent real situation."
+      },
+      "meta": {
+        "v19_source_id": "eq.action.conflict_deescalation",
+        "claim_risk": "low",
+        "related_dimensions": [
+          "SA",
+          "ER",
+          "EM",
+          "RM"
+        ],
+        "retention_hooks": [
+          "save_report",
+          "retest_reminder",
+          "ask_agent"
+        ]
       }
     },
     "self_connection": {
       "zh-CN": {
-        "title": "重新连接自己",
-        "why_this_matters": "当你总先照顾关系而忽略自己时使用。",
-        "do_today": "今天在答应前先问自己：我是真愿意，还是怕关系变差？",
-        "script": "我想先想一下我真实能承担到哪里，再回复你。",
+        "title": "自我连接处方",
+        "why_this_matters": "如果你长期先处理关系，自己的感受会变得很晚才出现。自我连接是让边界提前出现。",
+        "do_today": "今天问自己一次：如果不考虑气氛，我真实想要什么？",
+        "script": "“我需要先确认一下自己的想法，不能马上答应。”",
         "seven_day_plan": [
           {
             "day": 1,
-            "practice": "记录一次你想立刻答应的场景。"
+            "practice": "记录一次自动答应"
           },
           {
             "day": 2,
-            "practice": "写下真实愿意和勉强愿意的差别。"
+            "practice": "写下真实感受"
           },
           {
             "day": 3,
-            "practice": "练习延迟回应。"
+            "practice": "写下你担心破坏什么"
           },
           {
             "day": 4,
-            "practice": "说出一个较小的可承担范围。"
+            "practice": "改成一个延迟回应"
           },
           {
             "day": 5,
-            "practice": "观察关系是否真的受损。"
+            "practice": "表达一个小需求"
           },
           {
             "day": 6,
-            "practice": "记录一个被你忽略的感受。"
+            "practice": "观察关系是否真的变差"
           },
           {
             "day": 7,
-            "practice": "设定一个下周的自我连接问题。"
+            "practice": "保留一个可复用句式"
           }
         ],
-        "watch_out": "不要把练习做成自我批评；只观察一个小动作是否变得更清楚。",
-        "when_to_use": "当你总先照顾关系而忽略自己时使用。",
-        "do_not_overread": "行动处方是练习建议，不承诺改变结果或替代专业支持。"
+        "watch_out": "不要把一次练习当成马上改变关系的保证。",
+        "when_to_use": "当你已经看懂问题，但下一步不知道怎么说、怎么停、怎么修复时使用。",
+        "do_not_overread": "这是自我练习建议，不是治疗方案。",
+        "when_not_to_use": "如果涉及安全、创伤、持续伤害或医疗/法律问题，不要用报告建议替代专业支持。",
+        "save_prompt": "把这条处方保存下来，未来一周只练这一件事。",
+        "share_prompt": "如果要分享，可以只分享这条行动，不需要分享分数。",
+        "retest_prompt": "练习一段时间后再复测，观察你的自我感知是否变稳定。",
+        "agent_followup_prompt": "如果你之后问 Agent，可以直接说：帮我练这条处方。",
+        "progress_markers": [
+          "你能更快说出自己的状态。",
+          "你能把支持范围说得更具体。",
+          "冲突后反刍时间变短。"
+        ],
+        "one_minute_version": "先做一次 60 秒暂停，再用一句话说清事实、感受和下一步。",
+        "agent_prompt_seed": "帮我把这条处方应用到我最近的一个真实场景里。"
       },
       "en": {
-        "title": "Reconnect with self",
-        "why_this_matters": "Use when you care for the relationship before checking yourself.",
-        "do_today": "Before agreeing today, ask: am I willing, or am I afraid the relationship will change?",
-        "script": "I want to check what I can realistically take on before I answer.",
+        "title": "Return to Your Own Signal",
+        "why_this_matters": "If you habitually handle the relationship first, your own signal may arrive late. Self-connection brings boundaries earlier.",
+        "do_today": "Ask yourself once today: if I were not managing the atmosphere, what would I actually want?",
+        "script": "“I need to check in with myself before I say yes.”",
         "seven_day_plan": [
           {
             "day": 1,
-            "practice": "Notice one relevant real situation."
+            "practice": "Notice one automatic yes."
           },
           {
             "day": 2,
-            "practice": "Write the fact, feeling, and need separately."
+            "practice": "Write the real feeling."
           },
           {
             "day": 3,
-            "practice": "Practice the key sentence once out loud."
+            "practice": "Name what you were afraid of disrupting."
           },
           {
             "day": 4,
-            "practice": "Use the practice in a low-risk interaction."
+            "practice": "Use a delay response."
           },
           {
             "day": 5,
-            "practice": "Record what changed before and after."
+            "practice": "Express one small need."
           },
           {
             "day": 6,
-            "practice": "Adjust the wording to sound natural."
+            "practice": "Observe whether the relationship actually worsened."
           },
           {
             "day": 7,
-            "practice": "Choose one version to keep using next week."
+            "practice": "Keep one reusable sentence."
           }
         ],
-        "watch_out": "Do not turn the practice into self-criticism; observe one small behavior becoming clearer.",
-        "when_to_use": "Use when you care for the relationship before checking yourself.",
-        "do_not_overread": "An action prescription is a practice suggestion, not a promised outcome or substitute for qualified support."
+        "watch_out": "Do not treat one exercise as a promise that a relationship will change immediately.",
+        "when_to_use": "Use this when you understand the pattern but need help with what to say, where to pause, or how to repair.",
+        "do_not_overread": "This is a self-development practice, not a treatment plan.",
+        "when_not_to_use": "If safety, trauma, ongoing harm, medical, or legal issues are involved, do not use report guidance as a substitute for professional support.",
+        "save_prompt": "Save this prescription and practice only this one move for the week.",
+        "share_prompt": "If you share anything, share the action rather than your score.",
+        "retest_prompt": "After practicing, retake the assessment to see whether your self-view has become steadier.",
+        "agent_followup_prompt": "Later, you can ask the Agent to help you practice this prescription.",
+        "progress_markers": [
+          "You can name your state sooner.",
+          "You can state the scope of support more clearly.",
+          "You spend less time replaying conflict afterward."
+        ],
+        "one_minute_version": "Take a 60-second pause, then name the fact, feeling, and next step in one sentence.",
+        "agent_prompt_seed": "Help me apply this prescription to a recent real situation."
+      },
+      "meta": {
+        "v19_source_id": "eq.action.self_connection",
+        "claim_risk": "low",
+        "related_dimensions": [
+          "SA",
+          "ER",
+          "EM",
+          "RM"
+        ],
+        "retention_hooks": [
+          "save_report",
+          "retest_reminder",
+          "ask_agent"
+        ]
       }
     },
     "retest_reflection": {
       "zh-CN": {
-        "title": "复测前观察",
-        "why_this_matters": "当本次结果置信度较低时使用。",
-        "do_today": "今天不要急着定性，先记录作答时的状态。",
-        "script": "这次结果我先轻一点看，等状态更稳定时再复测。",
+        "title": "复测与观察处方",
+        "why_this_matters": "低置信结果更适合作为观察线索。复测前先改善作答状态，会让报告更有参考价值。",
+        "do_today": "记录本次作答时的状态：时间、注意力、情绪、是否匆忙。",
+        "script": "“我先不急着给这次结果下结论，等状态稳定时再测一次。”",
         "seven_day_plan": [
           {
             "day": 1,
-            "practice": "记录作答时间和状态。"
+            "practice": "写下本次作答状态"
           },
           {
             "day": 2,
-            "practice": "写下是否太快、太累或太分心。"
+            "practice": "标记可能影响答案的因素"
           },
           {
             "day": 3,
-            "practice": "挑三个最不确定的题目类型。"
+            "practice": "观察三天真实互动"
           },
           {
             "day": 4,
-            "practice": "观察一天真实情绪场景。"
+            "practice": "记录一个反馈场景"
           },
           {
             "day": 5,
-            "practice": "不要做重大解释。"
+            "practice": "记录一个边界场景"
           },
           {
             "day": 6,
-            "practice": "选择一个更稳定的复测时间。"
+            "practice": "安排一次更安静的复测"
           },
           {
             "day": 7,
-            "practice": "复测后比较哪些部分稳定。"
+            "practice": "对比两次结果是否一致"
           }
         ],
-        "watch_out": "不要把练习做成自我批评；只观察一个小动作是否变得更清楚。",
-        "when_to_use": "当本次结果置信度较低时使用。",
-        "do_not_overread": "行动处方是练习建议，不承诺改变结果或替代专业支持。"
+        "watch_out": "不要把一次练习当成马上改变关系的保证。",
+        "when_to_use": "当你已经看懂问题，但下一步不知道怎么说、怎么停、怎么修复时使用。",
+        "do_not_overread": "这是自我练习建议，不是治疗方案。",
+        "when_not_to_use": "如果涉及安全、创伤、持续伤害或医疗/法律问题，不要用报告建议替代专业支持。",
+        "save_prompt": "把这条处方保存下来，未来一周只练这一件事。",
+        "share_prompt": "如果要分享，可以只分享这条行动，不需要分享分数。",
+        "retest_prompt": "练习一段时间后再复测，观察你的自我感知是否变稳定。",
+        "agent_followup_prompt": "如果你之后问 Agent，可以直接说：帮我练这条处方。",
+        "progress_markers": [
+          "你能更快说出自己的状态。",
+          "你能把支持范围说得更具体。",
+          "冲突后反刍时间变短。"
+        ],
+        "one_minute_version": "先做一次 60 秒暂停，再用一句话说清事实、感受和下一步。",
+        "agent_prompt_seed": "帮我把这条处方应用到我最近的一个真实场景里。"
       },
       "en": {
-        "title": "Reflection before retest",
-        "why_this_matters": "Use when this result has lower interpretation confidence.",
-        "do_today": "Do not label yourself today; first record the response context.",
-        "script": "I will read this result lightly and retest when my context is steadier.",
+        "title": "Retest With Better Conditions",
+        "why_this_matters": "A low-confidence result is better treated as a set of clues. Improving the response conditions before retesting makes the next report more useful.",
+        "do_today": "Record the conditions of this session: time, attention, mood, and whether you felt rushed.",
+        "script": "“I’m not going to over-read this result; I’ll retake it when I can answer more steadily.”",
         "seven_day_plan": [
           {
             "day": 1,
-            "practice": "Notice one relevant real situation."
+            "practice": "Write down the test conditions."
           },
           {
             "day": 2,
-            "practice": "Write the fact, feeling, and need separately."
+            "practice": "Mark what may have affected answers."
           },
           {
             "day": 3,
-            "practice": "Practice the key sentence once out loud."
+            "practice": "Observe real interactions for three days."
           },
           {
             "day": 4,
-            "practice": "Use the practice in a low-risk interaction."
+            "practice": "Record one feedback moment."
           },
           {
             "day": 5,
-            "practice": "Record what changed before and after."
+            "practice": "Record one boundary moment."
           },
           {
             "day": 6,
-            "practice": "Adjust the wording to sound natural."
+            "practice": "Schedule a calmer retest."
           },
           {
             "day": 7,
-            "practice": "Choose one version to keep using next week."
+            "practice": "Compare whether the two results align."
           }
         ],
-        "watch_out": "Do not turn the practice into self-criticism; observe one small behavior becoming clearer.",
-        "when_to_use": "Use when this result has lower interpretation confidence.",
-        "do_not_overread": "An action prescription is a practice suggestion, not a promised outcome or substitute for qualified support."
+        "watch_out": "Do not treat one exercise as a promise that a relationship will change immediately.",
+        "when_to_use": "Use this when you understand the pattern but need help with what to say, where to pause, or how to repair.",
+        "do_not_overread": "This is a self-development practice, not a treatment plan.",
+        "when_not_to_use": "If safety, trauma, ongoing harm, medical, or legal issues are involved, do not use report guidance as a substitute for professional support.",
+        "save_prompt": "Save this prescription and practice only this one move for the week.",
+        "share_prompt": "If you share anything, share the action rather than your score.",
+        "retest_prompt": "After practicing, retake the assessment to see whether your self-view has become steadier.",
+        "agent_followup_prompt": "Later, you can ask the Agent to help you practice this prescription.",
+        "progress_markers": [
+          "You can name your state sooner.",
+          "You can state the scope of support more clearly.",
+          "You spend less time replaying conflict afterward."
+        ],
+        "one_minute_version": "Take a 60-second pause, then name the fact, feeling, and next step in one sentence.",
+        "agent_prompt_seed": "Help me apply this prescription to a recent real situation."
+      },
+      "meta": {
+        "v19_source_id": "eq.action.retest_reflection",
+        "claim_risk": "medium",
+        "related_dimensions": [
+          "SA",
+          "ER",
+          "EM",
+          "RM"
+        ],
+        "retention_hooks": [
+          "save_report",
+          "retest_reminder",
+          "ask_agent"
+        ]
       }
     }
   }
