@@ -62990,7 +62990,7 @@
     "repo": "fap-api",
     "branch": "codex/mbti-pdf-product-03-pagination-brand",
     "base": "main",
-    "status": "in_progress",
+    "status": "pr_open",
     "train_scope": "mbti_pdf_product",
     "title": "MBTI-PDF-PRODUCT-03: add MBTI PDF pagination and brand styling",
     "depends_on": [
@@ -63024,8 +63024,8 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "a3e5564f818a975acd0ee5b883127a3df6083356",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2452",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -63039,6 +63039,11 @@
         "at": "2026-06-26T21:52:00+08:00",
         "status": "local_validated",
         "note": "Added mPDF HTML rendering for MBTI in both zh/en, with formal cover, page headers/footers, page numbers, chapter pagination, dimension bars, brand styling, and focused PDF assertions. Local scoped checks and changed-file scope validation passed."
+      },
+      {
+        "at": "2026-06-26T21:58:00+08:00",
+        "status": "pr_open",
+        "note": "Opened PR #2452 at https://github.com/fermatmind/fap-api/pull/2452. Waiting for required GitHub checks; no staging deploy wait, server verification, manual deploy, or production deploy included."
       }
     ]
   }
