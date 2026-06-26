@@ -14,6 +14,8 @@ final class IqResultPayloadRedactor
     private const ANSWER_KEY_FIELDS = [
         'answer_key',
         'answerKey',
+        'answer_key_version',
+        'answerKeyVersion',
         'correct_answer',
         'correctAnswer',
         'solution_rule',
@@ -28,8 +30,18 @@ final class IqResultPayloadRedactor
 
     public static function isIqScale(?string $scaleCode, ?string $scaleCodeV2 = null): bool
     {
-        return in_array(strtoupper(trim((string) $scaleCode)), self::IQ_SCALE_CODES, true)
-            || in_array(strtoupper(trim((string) $scaleCodeV2)), self::IQ_SCALE_CODES, true);
+        foreach ([$scaleCode, $scaleCodeV2] as $candidate) {
+            $normalized = strtoupper(trim((string) $candidate));
+            if ($normalized === '') {
+                continue;
+            }
+
+            if (in_array($normalized, self::IQ_SCALE_CODES, true) || str_starts_with($normalized, 'IQ_')) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**

@@ -144,7 +144,6 @@ final class IqReportBuilder
                 'reason_code' => $reasonCode,
                 'scoring_mode' => $this->stringOrNull($score['scoring_mode'] ?? null),
                 'bank_id' => $this->stringOrNull($score['bank_id'] ?? null),
-                'answer_key_version' => $this->stringOrNull($score['answer_key_version'] ?? null),
                 'norm_table_version' => $this->stringOrNull($summary['norm_table_version'] ?? null),
                 'score_claim_level' => $this->stringOrNull($summary['score_claim_level'] ?? null) ?? 'raw_score_only',
                 'claim_policy' => is_array($summary['claim_policy'] ?? null) ? $summary['claim_policy'] : [],
