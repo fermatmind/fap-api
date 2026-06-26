@@ -63065,7 +63065,7 @@
     "repo": "fap-api",
     "branch": "codex/mbti-pdf-product-04-version-cache-qa",
     "base": "main",
-    "status": "in_progress",
+    "status": "pr_open",
     "train_scope": "mbti_pdf_product",
     "title": "MBTI-PDF-PRODUCT-04: version MBTI PDF surface and cache QA",
     "depends_on": [
@@ -63099,8 +63099,8 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "d9069723888658f8b6fb63b568b66a9a2ea96d0f",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2453",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -63114,6 +63114,11 @@
         "at": "2026-06-26T22:18:00+08:00",
         "status": "local_validated",
         "note": "Bumped MBTI PDF surface to v2, included the surface version in the MBTI PDF artifact cache key, and added regression coverage proving /report.pdf does not reuse the old one-page nohash cache. Local scoped checks and changed-file scope validation passed."
+      },
+      {
+        "at": "2026-06-26T22:24:00+08:00",
+        "status": "pr_open",
+        "note": "Opened PR #2453 at https://github.com/fermatmind/fap-api/pull/2453. Waiting for required GitHub checks; no staging deploy wait, server verification, manual deploy, or production deploy included."
       }
     ]
   }
