@@ -62852,20 +62852,21 @@
           "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Report/Pdf/Mbti/MbtiPdfPayloadBuilderTest.php --no-ansi",
           "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=MbtiReadPathParityContractTest --no-ansi",
           "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=AttemptPublicReportPdfParityTest --no-ansi",
-          "cd backend && vendor/bin/pint --test app/Services/Report/Pdf/Mbti tests/Unit/Services/Report/Pdf/Mbti",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter='BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_freeze_classifier_ignores_mbti_pdf_payload_authority_files|BigFiveResultPageV2CoreBodyPreviewTest::test_runtime_paths_have_no_uncommitted_diff' --no-ansi",
+          "cd backend && vendor/bin/pint --test app/Services/Report/Pdf/Mbti tests/Unit/Services/Report/Pdf/Mbti tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
           "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
           "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
           "git diff --check"
         ],
-        "evidence": "PASS: syntax check for MbtiPdfPayloadBuilder.php and MbtiPdfPayloadBuilderTest.php; focused payload test passed (2 tests, 17 assertions); MbtiReadPathParityContractTest passed after composer install restored locked mpdf/mpdf local dependency (3 tests, 174 assertions); AttemptPublicReportPdfParityTest passed (2 tests, 14 assertions); scoped Pint --test passed; docs/codex state JSON parse passed; pr-train YAML parse passed; git diff --check passed."
+        "evidence": "PASS: syntax check for MbtiPdfPayloadBuilder.php and MbtiPdfPayloadBuilderTest.php; focused payload test passed (2 tests, 17 assertions); MbtiReadPathParityContractTest passed after composer install restored locked mpdf/mpdf local dependency (3 tests, 174 assertions); AttemptPublicReportPdfParityTest passed (2 tests, 14 assertions); focused BigFive runtime freeze retry passed for MBTI PDF payload authority and runtime path diff guard (2 tests, 4 assertions); scoped Pint --test passed; docs/codex state JSON parse passed; pr-train YAML parse passed; git diff --check passed."
       },
       "scope_validation": {
         "status": "pass",
-        "evidence": "Changed files are limited to MBTI-PDF-PRODUCT-01 scope: backend/app/Services/Report/Pdf/Mbti/MbtiPdfPayloadBuilder.php, backend/tests/Unit/Services/Report/Pdf/Mbti/MbtiPdfPayloadBuilderTest.php, and authorized docs/codex train metadata. No fap-web, public route, CMS, DB migration, sitemap, llms, canonical, noindex, JSON-LD, search, scheduler, queue, staging deploy, production deploy, PDF layout, or expanded PDF prose change."
+        "evidence": "Changed files are limited to MBTI-PDF-PRODUCT-01 scope: backend/app/Services/Report/Pdf/Mbti/MbtiPdfPayloadBuilder.php, backend/tests/Unit/Services/Report/Pdf/Mbti/MbtiPdfPayloadBuilderTest.php, the required BigFive runtime freeze harness allowance for this backend-only MBTI PDF payload authority file, and authorized docs/codex train metadata. No fap-web, public route, CMS, DB migration, sitemap, llms, canonical, noindex, JSON-LD, search, scheduler, queue, staging deploy, production deploy, PDF layout, or expanded PDF prose change."
       },
       "github": {
         "status": "pending",
-        "evidence": null
+        "evidence": "GitHub verify-bigfive initially failed because BigFiveResultPageV2CoreBodyPreviewTest runtime path guard treated backend/app/Services/Report/Pdf/Mbti/MbtiPdfPayloadBuilder.php as Big Five runtime drift. A narrow classifier allowance and focused test were added in current PR scope; retry pending after push."
       }
     },
     "failure_reason": null,
@@ -62894,6 +62895,11 @@
         "at": "2026-06-26T20:17:06+08:00",
         "status": "github_checks_pending",
         "note": "Opened PR #2448 at https://github.com/fermatmind/fap-api/pull/2448. Waiting for required GitHub checks; no staging deploy wait, server verification, manual deploy, or production deploy included."
+      },
+      {
+        "at": "2026-06-26T20:37:28+08:00",
+        "status": "github_checks_failed_fix_prepared",
+        "note": "Required verify-bigfive failed because the Big Five runtime freeze guard did not yet allow the backend-only MBTI PDF payload authority file. Added a narrow classifier allowance and focused test, updated PR manifest validation, and re-ran focused BigFive freeze, MBTI PDF payload, MBTI read-path parity, public report PDF parity, scoped Pint, YAML/JSON parse, and git diff checks successfully."
       }
     ]
   }

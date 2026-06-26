@@ -501,6 +501,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_mbti_pdf_payload_authority_files(): void
+    {
+        $changed = [
+            'backend/app/Services/Report/Pdf/Mbti/MbtiPdfPayloadBuilder.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_eq_cross_assessment_context_guard_changes(): void
     {
         $changed = [
@@ -4695,6 +4704,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isMbtiPdfPayloadAuthorityFile($file)) {
+                continue;
+            }
+
             if ($this->isPublicContentReleaseGuardCommandFile($file)) {
                 continue;
             }
@@ -6122,6 +6135,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Console/Commands/PersonalityEnrichMbtiEnglishVariantSections.php',
             'backend/app/Services/Cms/MbtiEnglishVariantSectionEnrichmentService.php',
         ], true);
+    }
+
+    private function isMbtiPdfPayloadAuthorityFile(string $file): bool
+    {
+        return $file === 'backend/app/Services/Report/Pdf/Mbti/MbtiPdfPayloadBuilder.php';
     }
 
     private function isPublicContentReleaseGuardCommandFile(string $file): bool
