@@ -19,6 +19,8 @@ final class SeoAgentPostPublishSearchSubmitCommand extends Command
 
     private const ARTICLE_PUBLISH_SCHEMA_VERSION = 'seo-agent-article-cms-publish-canary.v1';
 
+    private const ARTICLES_PUBLISH_CONTROLLED_EVIDENCE_KIND = 'articles_publish_controlled';
+
     private const FORBIDDEN_STRINGS = [
         'raw_url',
         'raw_query',
@@ -71,17 +73,18 @@ final class SeoAgentPostPublishSearchSubmitCommand extends Command
             return $this->finish($this->failureSummary('publish_evidence_json_invalid'));
         }
 
-        $evidenceIssue = $this->validatePublishEvidence($evidence);
+        $evidenceKind = $this->publishEvidenceKind($evidence);
+        $evidenceIssue = $this->validatePublishEvidence($evidence, $evidenceKind);
         if ($evidenceIssue !== null) {
             return $this->finish($this->failureSummary($evidenceIssue));
         }
 
-        $affected = $this->firstAffectedRef($evidence);
+        $affected = $this->firstAffectedRef($evidence, $evidenceKind);
         if ($affected === null) {
             return $this->finish($this->failureSummary('published_ref_missing'));
         }
 
-        $target = $this->publishedTarget($affected, (string) ($evidence['schema_version'] ?? ''));
+        $target = $this->publishedTarget($affected, $evidenceKind);
         if ($target['issue'] !== null) {
             return $this->finish($this->failureSummary((string) $target['issue']));
         }
@@ -200,14 +203,35 @@ final class SeoAgentPostPublishSearchSubmitCommand extends Command
     /**
      * @param  array<string, mixed>  $evidence
      */
-    private function validatePublishEvidence(array $evidence): ?string
+    private function publishEvidenceKind(array $evidence): string
     {
-        if (! in_array(($evidence['schema_version'] ?? null), [
+        $schemaVersion = (string) ($evidence['schema_version'] ?? '');
+        if (in_array($schemaVersion, [
             self::PUBLISH_SCHEMA_VERSION,
             self::ARTICLE_PUBLISH_SCHEMA_VERSION,
         ], true)) {
+            return $schemaVersion;
+        }
+
+        if ($this->isArticlesPublishControlledEvidence($evidence)) {
+            return self::ARTICLES_PUBLISH_CONTROLLED_EVIDENCE_KIND;
+        }
+
+        return '';
+    }
+
+    /**
+     * @param  array<string, mixed>  $evidence
+     */
+    private function validatePublishEvidence(array $evidence, string $evidenceKind): ?string
+    {
+        if ($evidenceKind === '') {
             return 'publish_evidence_schema_invalid';
         }
+        if ($evidenceKind === self::ARTICLES_PUBLISH_CONTROLLED_EVIDENCE_KIND) {
+            return $this->validateArticlesPublishControlledEvidence($evidence);
+        }
+
         if (($evidence['status'] ?? null) !== 'success' || (bool) ($evidence['execute'] ?? false) !== true) {
             return 'publish_evidence_not_success_execute';
         }
@@ -230,8 +254,26 @@ final class SeoAgentPostPublishSearchSubmitCommand extends Command
      * @param  array<string, mixed>  $evidence
      * @return array<string, mixed>|null
      */
-    private function firstAffectedRef(array $evidence): ?array
+    private function firstAffectedRef(array $evidence, string $evidenceKind): ?array
     {
+        if ($evidenceKind === self::ARTICLES_PUBLISH_CONTROLLED_EVIDENCE_KIND) {
+            $article = $this->firstArticlesPublishControlledArticle($evidence);
+            if ($article === null) {
+                return null;
+            }
+
+            $articleId = (int) ($article['article_id'] ?? 0);
+            $locale = (string) ($article['locale'] ?? '');
+
+            return [
+                'status' => 'published',
+                'target_model' => 'article',
+                'subject_ref' => 'article:'.$articleId.':'.$locale,
+                'revision_id' => (int) ($article['working_revision_id'] ?? 0),
+                'article_translation_revision_id' => (int) ($article['working_revision_id'] ?? 0),
+            ];
+        }
+
         foreach ((array) ($evidence['affected_refs'] ?? []) as $ref) {
             if (is_array($ref) && ($ref['status'] ?? null) === 'published') {
                 return $ref;
@@ -245,13 +287,16 @@ final class SeoAgentPostPublishSearchSubmitCommand extends Command
      * @param  array<string, mixed>  $affected
      * @return array{issue: string|null, target_model?: string, page_entity_type?: string, safe_path?: string}
      */
-    private function publishedTarget(array $affected, string $schemaVersion): array
+    private function publishedTarget(array $affected, string $evidenceKind): array
     {
         return match ((string) ($affected['target_model'] ?? '')) {
-            'content_page' => $schemaVersion === self::PUBLISH_SCHEMA_VERSION
+            'content_page' => $evidenceKind === self::PUBLISH_SCHEMA_VERSION
                 ? $this->publishedContentPageTarget($affected)
                 : ['issue' => 'publish_evidence_schema_target_mismatch'],
-            'article' => $schemaVersion === self::ARTICLE_PUBLISH_SCHEMA_VERSION
+            'article' => in_array($evidenceKind, [
+                self::ARTICLE_PUBLISH_SCHEMA_VERSION,
+                self::ARTICLES_PUBLISH_CONTROLLED_EVIDENCE_KIND,
+            ], true)
                 ? $this->publishedArticleTarget($affected)
                 : ['issue' => 'publish_evidence_schema_target_mismatch'],
             default => ['issue' => 'target_model_not_supported'],
@@ -330,6 +375,72 @@ final class SeoAgentPostPublishSearchSubmitCommand extends Command
         }
 
         return (int) $parts[1];
+    }
+
+    /**
+     * @param  array<string, mixed>  $evidence
+     */
+    private function isArticlesPublishControlledEvidence(array $evidence): bool
+    {
+        return array_key_exists('article_ids', $evidence)
+            && array_key_exists('articles', $evidence)
+            && array_key_exists('make_indexable', $evidence)
+            && ! array_key_exists('affected_refs', $evidence);
+    }
+
+    /**
+     * @param  array<string, mixed>  $evidence
+     */
+    private function validateArticlesPublishControlledEvidence(array $evidence): ?string
+    {
+        if (($evidence['ok'] ?? null) !== true || (bool) ($evidence['dry_run'] ?? true) !== false) {
+            return 'publish_evidence_not_success_execute';
+        }
+
+        $articleIds = array_values(array_filter(
+            array_map(static fn (mixed $id): int => is_numeric($id) ? (int) $id : 0, (array) ($evidence['article_ids'] ?? [])),
+            static fn (int $id): bool => $id > 0,
+        ));
+        if (count($articleIds) !== 1) {
+            return 'publish_evidence_missing_one_committed_publish';
+        }
+
+        $article = $this->firstArticlesPublishControlledArticle($evidence);
+        if ($article === null || (int) ($article['article_id'] ?? 0) !== $articleIds[0]) {
+            return 'published_ref_missing';
+        }
+        if (($article['ok'] ?? null) !== true || (array) ($article['errors'] ?? []) !== []) {
+            return 'publish_evidence_not_success_execute';
+        }
+        if ((bool) ($article['make_indexable'] ?? false) !== true || (int) ($article['working_revision_id'] ?? 0) < 1) {
+            return 'publish_evidence_missing_one_committed_publish';
+        }
+        if ((string) ($article['locale'] ?? '') === '' || (string) ($article['slug'] ?? '') === '') {
+            return 'published_ref_missing';
+        }
+        if ((array) ($evidence['errors'] ?? []) !== []) {
+            return 'publish_evidence_not_success_execute';
+        }
+
+        return null;
+    }
+
+    /**
+     * @param  array<string, mixed>  $evidence
+     * @return array<string, mixed>|null
+     */
+    private function firstArticlesPublishControlledArticle(array $evidence): ?array
+    {
+        $articles = array_values(array_filter(
+            (array) ($evidence['articles'] ?? []),
+            static fn (mixed $article): bool => is_array($article),
+        ));
+
+        if (count($articles) !== 1) {
+            return null;
+        }
+
+        return $articles[0];
     }
 
     private function canonicalUrl(string $safePath): ?string

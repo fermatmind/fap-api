@@ -140,6 +140,38 @@ final class SeoAgentPostPublishSearchSubmitTest extends TestCase
     }
 
     #[Test]
+    public function dry_run_plans_articles_publish_controlled_gaokao_evidence_without_writing(): void
+    {
+        $article = $this->createPublishedArticle([
+            'slug' => 'gaokao-major-choice-parent-conflict-riasec-course-checklist',
+            'locale' => 'zh-CN',
+        ]);
+        $canonicalUrl = 'https://www.fermatmind.com/zh/articles/gaokao-major-choice-parent-conflict-riasec-course-checklist';
+        $this->seedSeoUrl($canonicalUrl, (string) $article->id, 'article', 'zh-CN');
+        $evidencePath = $this->writeArticlesPublishControlledEvidence($article);
+
+        $exitCode = Artisan::call('seo-agent:post-publish-search-submit', [
+            '--publish-evidence' => $evidencePath,
+            '--channels' => 'indexnow',
+            '--limit' => 1,
+            '--base-url' => 'https://www.fermatmind.com',
+            '--json' => true,
+        ]);
+        $summary = json_decode(trim(Artisan::output()), true);
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertSame('planned', $summary['status'] ?? null);
+        $this->assertSame('/zh/articles/gaokao-major-choice-parent-conflict-riasec-course-checklist', $summary['safe_path'] ?? null);
+        $this->assertSame('article', $summary['target_model'] ?? null);
+        $this->assertSame('article', $summary['page_entity_type'] ?? null);
+        $this->assertSame(1, $summary['planned_queue_count'] ?? null);
+        $this->assertSame(1, data_get($summary, 'plans.indexnow.planned_queue_count'));
+        $this->assertFalse((bool) ($summary['search_channel_enqueue_attempted'] ?? true));
+        $this->assertFalse((bool) data_get($summary, 'boundaries.search_channel_enqueue', true));
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_search_channel_queue_items')->count());
+    }
+
+    #[Test]
     public function execute_enqueues_article_publish_evidence_without_live_submission(): void
     {
         $article = $this->createPublishedArticle();
@@ -219,6 +251,22 @@ final class SeoAgentPostPublishSearchSubmitTest extends TestCase
         $summary = json_decode(trim(Artisan::output()), true);
         $this->assertSame(1, $exitCode);
         $this->assertContains('publish_evidence_schema_target_mismatch', $summary['issues'] ?? []);
+
+        $gaokaoArticle = $this->createPublishedArticle([
+            'slug' => 'gaokao-major-choice-parent-conflict-riasec-course-checklist',
+            'locale' => 'zh-CN',
+        ]);
+        $multiArticlePath = $this->writeArticlesPublishControlledEvidence($gaokaoArticle, [
+            'article_ids' => [(int) $gaokaoArticle->id, 999],
+        ]);
+        $exitCode = Artisan::call('seo-agent:post-publish-search-submit', [
+            '--publish-evidence' => $multiArticlePath,
+            '--limit' => 1,
+            '--json' => true,
+        ]);
+        $summary = json_decode(trim(Artisan::output()), true);
+        $this->assertSame(1, $exitCode);
+        $this->assertContains('publish_evidence_missing_one_committed_publish', $summary['issues'] ?? []);
     }
 
     #[Test]
@@ -265,9 +313,9 @@ final class SeoAgentPostPublishSearchSubmitTest extends TestCase
         ]);
     }
 
-    private function createPublishedArticle(): Article
+    private function createPublishedArticle(array $overrides = []): Article
     {
-        $article = Article::query()->create([
+        $attributes = array_replace([
             'org_id' => 0,
             'slug' => 'article-candidate',
             'locale' => 'en',
@@ -283,7 +331,9 @@ final class SeoAgentPostPublishSearchSubmitTest extends TestCase
             'sitemap_eligible' => true,
             'llms_eligible' => true,
             'published_at' => now()->subDay(),
-        ]);
+        ], $overrides);
+
+        $article = Article::query()->create($attributes);
         $publishedRevision = ArticleTranslationRevision::query()->create([
             'org_id' => 0,
             'article_id' => (int) $article->id,
@@ -369,6 +419,38 @@ final class SeoAgentPostPublishSearchSubmitTest extends TestCase
                 'scheduler_activation' => false,
                 'queue_worker_start' => false,
             ],
+        ], $overrides));
+    }
+
+    private function writeArticlesPublishControlledEvidence(Article $article, array $overrides = []): string
+    {
+        return $this->writeJson('articles-publish-controlled-', array_replace_recursive([
+            'ok' => true,
+            'dry_run' => false,
+            'expected_confirmation' => 'I explicitly approve Codex to publish article id '.(int) $article->id.' after preflight passes.',
+            'make_indexable' => true,
+            'article_ids' => [(int) $article->id],
+            'articles' => [[
+                'article_id' => (int) $article->id,
+                'slug' => (string) $article->slug,
+                'locale' => (string) $article->locale,
+                'title' => (string) $article->title,
+                'status' => 'draft',
+                'working_revision_id' => (int) $article->published_revision_id,
+                'working_revision_status' => 'approved',
+                'import_status' => 'imported',
+                'claim_status' => 'passed',
+                'body_hash' => hash('sha256', (string) $article->content_md),
+                'references_count' => 3,
+                'media_status' => 'complete',
+                'graph_status' => 'complete',
+                'cta_count' => 2,
+                'faq_count' => 8,
+                'make_indexable' => true,
+                'ok' => true,
+                'errors' => [],
+            ]],
+            'errors' => [],
         ], $overrides));
     }
 

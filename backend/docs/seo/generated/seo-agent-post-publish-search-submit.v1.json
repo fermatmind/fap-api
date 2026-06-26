@@ -5,7 +5,8 @@
   "command": "php artisan seo-agent:post-publish-search-submit",
   "input_schema": [
     "seo-agent-cms-publish-canary.v1",
-    "seo-agent-article-cms-publish-canary.v1"
+    "seo-agent-article-cms-publish-canary.v1",
+    "articles:publish-controlled evidence for one article"
   ],
   "output_schema": "seo-agent-post-publish-search-submit.v1",
   "default_mode": "dry_run_plan",
@@ -34,6 +35,7 @@
   },
   "article_support": {
     "input_schema": "seo-agent-article-cms-publish-canary.v1",
+    "compatible_input_schema": "articles:publish-controlled one-article evidence",
     "safe_path_source": "article slug and locale",
     "requires_article_public_indexable_published": true,
     "live_submit": false
