@@ -13,6 +13,8 @@ use Mpdf\Output\Destination;
 
 final class ReportPdfDocumentService
 {
+    private const MBTI_PDF_SURFACE_VERSION = 'mbti.pdf_surface.v2';
+
     public function __construct(
         private readonly ReportPdfArtifactStore $artifactStore,
         private readonly MbtiPdfPayloadBuilder $mbtiPdfPayloadBuilder,
@@ -57,7 +59,7 @@ final class ReportPdfDocumentService
                 ?? now()->format('Y-m-d');
 
             return [
-                'pdf_surface_version' => 'mbti.pdf_surface.v1',
+                'pdf_surface_version' => self::MBTI_PDF_SURFACE_VERSION,
                 'scale_code' => 'MBTI',
                 'form_code' => null,
                 'form_label' => null,
@@ -338,7 +340,13 @@ final class ReportPdfDocumentService
             ?? ''
         ));
 
-        return $hash !== '' ? $hash : 'nohash';
+        $hash = $hash !== '' ? $hash : 'nohash';
+
+        if (strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'MBTI') {
+            return $hash.'-'.self::MBTI_PDF_SURFACE_VERSION;
+        }
+
+        return $hash;
     }
 
     /**

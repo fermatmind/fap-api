@@ -85,7 +85,7 @@
     "repo": "fap-api",
     "branch": "codex/pr-eq-asset-02-report-payload-fixtures-v16",
     "base": "main",
-    "status": "ready_to_merge",
+    "status": "merged",
     "train_scope": "eq_v16_content_asset_productization",
     "title": "PR-EQ-ASSET-02 Backend EQ v1.6 report payload and canonical fixtures",
     "depends_on": [
@@ -63028,11 +63028,11 @@
       }
     },
     "failure_reason": null,
-    "commit_sha": "20f8db92c3f8d0e5ea1729b25e0f31999dedd987",
+    "commit_sha": "aa213ad5eb3ec0f815e098bcd3b5bbf2f59e8084",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2452",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-26T13:54:57Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "transitions": [
       {
         "at": "2026-06-26T21:35:00+08:00",
@@ -63053,6 +63053,81 @@
         "at": "2026-06-26T22:00:00+08:00",
         "status": "ready_to_merge",
         "note": "GitHub checks passed for PR #2452 head 20f8db92c3f8d0e5ea1729b25e0f31999dedd987 and mergeStateStatus was CLEAN. Ready for squash merge; no staging deploy wait, production deploy, CMS write, search, sitemap, llms, canonical, noindex, JSON-LD, queue, cache-version, artifact key, or public route change included."
+      },
+      {
+        "at": "2026-06-26T22:08:00+08:00",
+        "status": "merged",
+        "note": "Reconciled during MBTI-PDF-PRODUCT-04 start: PR #2452 is merged with merge commit aa213ad5eb3ec0f815e098bcd3b5bbf2f59e8084, origin/main contains the merge commit, local main equals origin/main, and the task branch was cleaned locally/remotely."
+      }
+    ]
+  },
+  "MBTI-PDF-PRODUCT-04": {
+    "repo": "fap-api",
+    "branch": "codex/mbti-pdf-product-04-version-cache-qa",
+    "base": "main",
+    "status": "ready_to_merge",
+    "train_scope": "mbti_pdf_product",
+    "title": "MBTI-PDF-PRODUCT-04: version MBTI PDF surface and cache QA",
+    "depends_on": [
+      "MBTI-PDF-PRODUCT-03"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly provided /goal MBTI-PDF-PRODUCT-PR-TRAIN-01 with MBTI-PDF-PRODUCT-04 scope and requested continuous backend-only PR train execution."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "MBTI-PDF-PRODUCT-03 is merged in PR #2452 with merge commit aa213ad5eb3ec0f815e098bcd3b5bbf2f59e8084, and origin/main contains that merge commit."
+      },
+      "local": {
+        "status": "pass",
+        "commands": [
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=AttemptPublicReportPdfParityTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=AttemptReportAccessReadTest --no-ansi",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=MbtiReadPathParityContractTest --no-ansi",
+          "cd backend && vendor/bin/pint --test app/Services/Report/Pdf/ReportPdfDocumentService.php tests/Feature/V0_3/AttemptPublicReportPdfParityTest.php tests/Feature/V0_3/AttemptReportAccessReadTest.php tests/Feature/V0_3/MbtiReadPathParityContractTest.php",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "git diff --check"
+        ],
+        "evidence": "PASS: AttemptPublicReportPdfParityTest passed (2 tests, 21 assertions); AttemptReportAccessReadTest passed (13 tests, 162 assertions); MbtiReadPathParityContractTest passed (3 tests, 186 assertions); scoped Pint --test passed for ReportPdfDocumentService and report PDF/access tests; docs/codex state JSON parse passed; pr-train YAML parse passed; git diff --check passed."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to MBTI-PDF-PRODUCT-04 scope: backend/app/Services/Report/Pdf/ReportPdfDocumentService.php, backend/tests/Feature/V0_3/AttemptPublicReportPdfParityTest.php, and authorized docs/codex train metadata. No fap-web, public route, CMS, DB migration, sitemap, llms, canonical, noindex, JSON-LD, search, scheduler, queue, staging deploy, production deploy, or report-access URL shape change."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "GitHub checks passed for PR #2453 head f4c358c9a210091f5602be848c2c924049002169: hygiene, supply-chain, content-pack-build-validate, Semgrep, verify-bigfive, verify-mbti-legacy, and verify-mbti-v2 all succeeded. mergeStateStatus was CLEAN."
+      }
+    },
+    "failure_reason": null,
+    "commit_sha": "f4c358c9a210091f5602be848c2c924049002169",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2453",
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "transitions": [
+      {
+        "at": "2026-06-26T22:08:00+08:00",
+        "status": "in_progress",
+        "note": "Started MBTI PDF version/cache QA PR from latest origin/main after MBTI-PDF-PRODUCT-03 merge cleanup. Scope is backend-only MBTI PDF surface version, artifact cache key, and focused /report.pdf regression QA. No frontend, public route, CMS write, sitemap, llms, search, staging deploy, or production deploy."
+      },
+      {
+        "at": "2026-06-26T22:18:00+08:00",
+        "status": "local_validated",
+        "note": "Bumped MBTI PDF surface to v2, included the surface version in the MBTI PDF artifact cache key, and added regression coverage proving /report.pdf does not reuse the old one-page nohash cache. Local scoped checks and changed-file scope validation passed."
+      },
+      {
+        "at": "2026-06-26T22:24:00+08:00",
+        "status": "pr_open",
+        "note": "Opened PR #2453 at https://github.com/fermatmind/fap-api/pull/2453. Waiting for required GitHub checks; no staging deploy wait, server verification, manual deploy, or production deploy included."
+      },
+      {
+        "at": "2026-06-26T22:31:00+08:00",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed for PR #2453 head f4c358c9a210091f5602be848c2c924049002169 and mergeStateStatus was CLEAN. Ready for squash merge; no staging deploy wait, production deploy, CMS write, search, sitemap, llms, canonical, noindex, JSON-LD, queue, or public route change included."
       }
     ]
   }

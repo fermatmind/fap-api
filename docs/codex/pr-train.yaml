@@ -175,6 +175,46 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: MBTI-PDF-PRODUCT-04
+    repo: fap-api
+    depends_on: [MBTI-PDF-PRODUCT-03]
+    branch: codex/mbti-pdf-product-04-version-cache-qa
+    title: "MBTI-PDF-PRODUCT-04: version MBTI PDF surface and cache QA"
+    train_scope: mbti_pdf_product
+    status: user_authorized
+    scope:
+      - Bump the MBTI PDF surface version so production can distinguish the productized PDF renderer from the old one-page artifact.
+      - Include the MBTI PDF surface version in the MBTI PDF artifact cache key so existing one-page cached PDFs do not keep serving after deploy.
+      - Add regression QA for /report.pdf response headers, attachment filename, generated PDF body, and new v2 artifact path while preserving /report-access PDF href contract.
+      - Keep public route paths, frontend behavior, CMS, search, sitemap, llms, canonical, noindex, JSON-LD, queue, scheduler, staging deploy, and production deploy unchanged.
+    allowed_paths:
+      - backend/app/Services/Report/Pdf/ReportPdfDocumentService.php
+      - backend/tests/Feature/V0_3/AttemptPublicReportPdfParityTest.php
+      - backend/tests/Feature/V0_3/AttemptReportAccessReadTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web.
+      - Change public API route paths, frontend download behavior, CMS, sitemap, llms, canonical, noindex, JSON-LD, search submission, scheduler, queue, secrets, staging deploy, or production deploy.
+      - Write CMS, run production import, run production smoke, change report-access action URL shape, or purge production artifacts.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=AttemptPublicReportPdfParityTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=AttemptReportAccessReadTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=MbtiReadPathParityContractTest --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/Report/Pdf/ReportPdfDocumentService.php tests/Feature/V0_3/AttemptPublicReportPdfParityTest.php tests/Feature/V0_3/AttemptReportAccessReadTest.php tests/Feature/V0_3/MbtiReadPathParityContractTest.php
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: PR-EQ-ASSET-02
     repo: fap-api
     depends_on: [PR-EQ-ASSET-01]
