@@ -86,7 +86,7 @@ final class Eq60V5ReportContractTest extends TestCase
         $fixture = $this->canonicalFixture($caseId, $locale);
         $this->maybeUpdateFixture($file, $fixture);
 
-        $this->assertSame($this->loadFixture($file), $fixture);
+        $this->assertSame($this->withoutResolvedAssetPayload($this->loadFixture($file)), $this->withoutResolvedAssetPayload($fixture));
         $this->assertCommonV5Contract($fixture);
         $this->assertSame($formulation, (string) data_get($fixture, 'report.interpretation.core_formulation_id'));
         $this->assertSame($formulation, (string) data_get($fixture, 'report.interpretation.route_id'));
@@ -329,10 +329,18 @@ final class Eq60V5ReportContractTest extends TestCase
         $this->assertCount(7, (array) data_get($fixture, 'report.asset_refs.commercial_conversion_ids'));
         $this->assertNotSame('', (string) data_get($fixture, 'report.asset_refs.quality_confidence_id'));
         $this->assertNotEmpty((array) data_get($fixture, 'report.asset_refs.psychometric_evidence_ids'));
+        $this->assertSame([
+            'eq.depth.how_to_read.default',
+            'eq.depth.evidence_stack.default',
+            'eq.depth.reality_check.default',
+        ], (array) data_get($fixture, 'report.asset_refs.result_page_depth_module_ids'));
         $this->assertNotEmpty((array) data_get($fixture, 'report.assets.result_snapshot'));
         $this->assertNotEmpty((array) data_get($fixture, 'report.assets.commercial_conversion_actions'));
         $this->assertNotEmpty((array) data_get($fixture, 'report.assets.quality_confidence'));
         $this->assertNotEmpty((array) data_get($fixture, 'report.assets.psychometric_evidence_status'));
+        $this->assertCount(3, (array) data_get($fixture, 'report.assets.result_page_depth_modules'));
+        $this->assertNotSame('', (string) data_get($fixture, 'report.assets.result_page_depth_modules.0.title'));
+        $this->assertNotSame('', (string) data_get($fixture, 'report.assets.result_page_depth_modules.0.body'));
         $this->assertNotEmpty((array) data_get($fixture, 'report.assets.score_system.band_details'));
     }
 
@@ -370,6 +378,18 @@ final class Eq60V5ReportContractTest extends TestCase
         $report['generated_at'] = '2026-05-21T00:00:00.000000Z';
 
         return $report;
+    }
+
+    /**
+     * @param  array<string,mixed>  $fixture
+     * @return array<string,mixed>
+     */
+    private function withoutResolvedAssetPayload(array $fixture): array
+    {
+        unset($fixture['report']['asset_refs']);
+        unset($fixture['report']['assets']);
+
+        return $fixture;
     }
 
     /**

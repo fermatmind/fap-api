@@ -815,6 +815,7 @@ final class Eq60ContentLintService
             'commercial_conversion_assets',
             'quality_confidence',
             'psychometric_evidence_status',
+            'result_page_depth_modules',
             'agent_knowledge_base_schema',
             'agent_dialogue_playbooks',
             'backend_integration_contract',
@@ -1045,6 +1046,24 @@ final class Eq60ContentLintService
             'what_this_means_for_user',
             'next_validation_step',
         ], $errors);
+
+        $depthAssets = (array) data_get($docs, 'result_page_depth_modules.assets', []);
+        foreach ([
+            'eq.depth.evidence_stack.default',
+            'eq.depth.how_to_read.default',
+            'eq.depth.reality_check.default',
+        ] as $assetId) {
+            $asset = (array) ($depthAssets[$assetId] ?? []);
+            $this->lintLocalizedAssetFields($this->loader->rawPath('report_assets/result_page_depth_modules.json', $version), $asset, [
+                'title',
+                'body',
+            ], $errors);
+
+            $claimRisk = strtolower(trim((string) data_get($asset, 'meta.claim_risk', '')));
+            if (! in_array($claimRisk, ['low', 'medium', 'high'], true)) {
+                $errors[] = $this->error($this->loader->rawPath('report_assets/result_page_depth_modules.json', $version), 1, $assetId.'.meta.claim_risk must be low, medium, or high.');
+            }
+        }
 
         $agentKnowledgeFile = $this->loader->rawPath('report_assets/agent_knowledge_base_schema.json', $version);
         if ((string) data_get($docs, 'agent_knowledge_base_schema.schema') !== 'eq60.report_assets.agent_knowledge_base_schema.v1') {

@@ -22622,13 +22622,14 @@
       }
     ],
     "failure_reason": null,
-    "local_cleanup_executed": false,
-    "merged_at": null,
+    "local_cleanup_executed": true,
+    "merge_commit_sha": "4bd8795e15ad6a5b9dbe2383846abbfc5db0d379",
+    "merged_at": "2026-06-26T15:36:52Z",
     "notes": "PR-EQ-V19-01 imports directly mapped v1.9 assets only; composer selection and canonical fixtures remain deferred to later declared PRs.",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2455",
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
-    "status": "pr_open",
+    "status": "merged",
     "title": "PR-EQ-V19-01 Direct EQ v1.9 asset import",
     "train_scope": "eq_v19_commercial_content_depth"
   },
@@ -22636,14 +22637,40 @@
     "base": "main",
     "branch": "codex/pr-eq-v19-02-result-page-depth-assets",
     "checks": {
-      "authorization": {
-        "evidence": "User provided /goal authorizing PR-EQ-V19-01 through PR-EQ-V19-06 manifest/state entries and sequential execution.",
-        "status": "pass"
-      },
-      "dependency": {
-        "evidence": "Waiting for dependency merge.",
-        "status": "pending"
-      }
+      "local": [
+        {
+          "cmd": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:lint --pack=EQ_60 --pack-version=v1",
+          "status": "passed"
+        },
+        {
+          "cmd": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:compile --pack=EQ_60 --pack-version=v1",
+          "status": "passed"
+        },
+        {
+          "cmd": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ContentGateTest",
+          "status": "passed_with_warning"
+        },
+        {
+          "cmd": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest",
+          "status": "passed_with_warning"
+        },
+        {
+          "cmd": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ReportPaywallTest",
+          "status": "passed_with_warning"
+        },
+        {
+          "cmd": "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "status": "passed"
+        },
+        {
+          "cmd": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "status": "passed"
+        },
+        {
+          "cmd": "git diff --check",
+          "status": "passed"
+        }
+      ]
     },
     "commit_sha": null,
     "depends_on": [
@@ -22659,10 +22686,11 @@
     "failure_reason": null,
     "local_cleanup_executed": false,
     "merged_at": null,
+    "notes": "Adds result_page_depth_modules to compile/lint/composer payload. Canonical fixture full asset refresh remains scoped to PR-EQ-V19-06; contract test compares non-asset structure and asserts resolved depth modules directly.",
     "pr_url": null,
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "initialized",
+    "status": "local_checks_passed",
     "title": "PR-EQ-V19-02 Result page depth asset pack",
     "train_scope": "eq_v19_commercial_content_depth"
   },

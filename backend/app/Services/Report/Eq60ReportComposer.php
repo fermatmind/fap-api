@@ -669,6 +669,11 @@ final class Eq60ReportComposer
                 'eq.evidence.measurement_invariance',
                 'eq.evidence.criterion_validity',
             ],
+            'result_page_depth_module_ids' => [
+                'eq.depth.how_to_read.default',
+                'eq.depth.evidence_stack.default',
+                'eq.depth.reality_check.default',
+            ],
             'agent_playbook_ids' => [
                 'eq.agent.playbook.understand_result',
                 'eq.agent.playbook.scene_advice',
@@ -707,6 +712,7 @@ final class Eq60ReportComposer
         $conversionAssets = (array) data_get($docs, 'commercial_conversion_assets.assets', []);
         $qualityConfidenceAssets = (array) data_get($docs, 'quality_confidence.assets', []);
         $evidenceAssets = (array) data_get($docs, 'psychometric_evidence_status.assets', []);
+        $depthAssets = (array) data_get($docs, 'result_page_depth_modules.assets', []);
         $agentAssets = (array) data_get($docs, 'agent_dialogue_playbooks.assets', []);
         $backendContractAssets = (array) data_get($docs, 'backend_integration_contract.assets', []);
         $formulationId = (string) ($interpretation['core_formulation_id'] ?? '');
@@ -778,6 +784,24 @@ final class Eq60ReportComposer
             }
         }
 
+        $resultPageDepthModules = [];
+        foreach ([
+            'eq.depth.how_to_read.default',
+            'eq.depth.evidence_stack.default',
+            'eq.depth.reality_check.default',
+        ] as $id) {
+            $asset = $this->localizedAsset((array) ($depthAssets[$id] ?? []), $locale);
+            if ($asset !== []) {
+                $resultPageDepthModules[] = array_merge(
+                    [
+                        'id' => $id,
+                        'placement' => (string) data_get($depthAssets, $id.'.meta.placement', ''),
+                    ],
+                    $asset
+                );
+            }
+        }
+
         $agentPlaybooks = [];
         foreach ([
             'eq.agent.playbook.understand_result',
@@ -836,6 +860,7 @@ final class Eq60ReportComposer
                 $this->localizedAsset((array) ($qualityConfidenceAssets[(string) ($quality['explanation_asset_id'] ?? '')] ?? []), $locale)
             ),
             'psychometric_evidence_status' => $psychometricEvidence,
+            'result_page_depth_modules' => $resultPageDepthModules,
             'agent_dialogue_playbooks' => $agentPlaybooks,
             'backend_integration_contract' => $backendIntegrationContract,
             'personalization_route' => [
