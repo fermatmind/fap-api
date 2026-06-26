@@ -61,6 +61,7 @@ final class SearchChannelQueuePlanner
         $selectedChannels = $this->channels->channels($channel);
         $matchedCandidates = [];
         $duplicateDetected = false;
+        $staleSubmittedQueueItems = [];
 
         if ($selectedChannels === [] && $channel !== null && $channel !== '') {
             $reasonCodeBreakdown['channel_not_allowed'] = 1;
@@ -91,13 +92,29 @@ final class SearchChannelQueuePlanner
             $eligibleUrlCount++;
 
             foreach ($selectedChannels as $selectedChannel) {
-                $duplicate = $this->idempotency->existingQueueItem(
+                $duplicateStatus = $this->idempotency->duplicateStatus(
                     canonicalUrl: (string) ($row['canonical_url'] ?? ''),
                     locale: (string) ($row['locale'] ?? ''),
                     channel: $selectedChannel,
                     sourceLastmod: $row['lastmod_at'] ?? null,
                     sourceContentHash: $this->contentHash($row),
                 );
+                $duplicate = $duplicateStatus['blocking_item'];
+
+                foreach ($duplicateStatus['stale_submitted_items'] as $staleItem) {
+                    $staleReason = (string) $staleItem['stale_reason'];
+                    $staleSubmittedQueueItems[] = [
+                        'canonical_url_hash' => hash('sha256', (string) ($row['canonical_url'] ?? '')),
+                        'locale' => (string) ($row['locale'] ?? ''),
+                        'page_entity_type' => $pageEntityType,
+                        'channel' => $selectedChannel,
+                        'stale_reason' => $staleReason,
+                        'stale_queue_item_id' => $staleItem['id'],
+                        'stale_approval_state' => $staleItem['approval_state'],
+                        'stale_execution_state' => $staleItem['execution_state'],
+                    ];
+                    $reasonCodeBreakdown[$staleReason] = ($reasonCodeBreakdown[$staleReason] ?? 0) + 1;
+                }
 
                 if ($duplicate !== null) {
                     $duplicateDetected = true;
@@ -134,6 +151,8 @@ final class SearchChannelQueuePlanner
             'planned_queue_count' => count($planned),
             'planned_items' => $planned,
             'blocked_items' => $blocked,
+            'stale_submitted_queue_item_count' => count($staleSubmittedQueueItems),
+            'stale_submitted_queue_items' => $staleSubmittedQueueItems,
             'channel_breakdown' => $channelBreakdown,
             'page_type_breakdown' => $pageTypeBreakdown,
             'reason_code_breakdown' => $reasonCodeBreakdown,

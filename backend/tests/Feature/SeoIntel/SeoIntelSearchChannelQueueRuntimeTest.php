@@ -563,6 +563,9 @@ final class SeoIntelSearchChannelQueueRuntimeTest extends TestCase
         $this->assertSame(1, $dryRun['planned_queue_count'] ?? null);
         $this->assertSame(0, $dryRun['blocked_count'] ?? null);
         $this->assertFalse((bool) ($dryRun['duplicate_detected'] ?? true));
+        $this->assertSame(1, $dryRun['stale_submitted_queue_item_count'] ?? null);
+        $this->assertSame(1, data_get($dryRun, 'reason_code_breakdown.existing_submitted_item_stale_by_lastmod'));
+        $this->assertSame('existing_submitted_item_stale_by_lastmod', data_get($dryRun, 'stale_submitted_queue_items.0.stale_reason'));
 
         $write = $this->runQueueCommand([
             '--enqueue' => true,
@@ -587,6 +590,62 @@ final class SeoIntelSearchChannelQueueRuntimeTest extends TestCase
         $this->assertSame('pending', $newItem->approval_state);
         $this->assertSame('dry_run_ready', $newItem->execution_state);
         $this->assertSame($newLastmod->toDateTimeString(), $newItem->lastmod);
+    }
+
+    #[Test]
+    public function submitted_queue_item_with_changed_content_hash_allows_personality_requeue(): void
+    {
+        $canonicalUrl = 'https://fermatmind.com/en/personality/enfj-a';
+        $lastmod = now()->subHour();
+        $oldHash = hash('sha256', 'old-live-personality-content');
+        $newHash = hash('sha256', 'new-live-personality-content');
+
+        $this->seedSeoUrl([
+            'canonical_url' => $canonicalUrl,
+            'locale' => 'en',
+            'page_entity_type' => 'personality_profile_variant',
+            'entity_id_or_slug' => '301',
+            'cluster' => 'personality',
+            'source_authority' => 'backend_cms',
+            'lastmod_at' => $lastmod,
+            'lastmod_source' => 'personality_profile_variants.live_content_updated_at',
+            'metadata_json' => [
+                'claim_safe' => true,
+                'claim_boundary_state' => 'approved',
+                'publication_state' => 'published',
+                'source_table' => 'personality_profile_variants',
+                'content_hash' => $newHash,
+            ],
+        ]);
+        $this->seedQueueItem($canonicalUrl, [
+            'locale' => 'en',
+            'page_entity_type' => 'personality_profile_variant',
+            'entity_id' => '301',
+            'source_table' => 'personality_profile_variants',
+            'approval_state' => 'approved',
+            'execution_state' => 'submitted',
+            'lastmod' => $lastmod,
+            'content_hash' => $oldHash,
+            'updated_at' => $lastmod,
+        ]);
+
+        $output = $this->runQueueCommand([
+            '--dry-run' => true,
+            '--no-write' => true,
+            '--json' => true,
+            '--canonical-url' => $canonicalUrl,
+            '--channel' => 'indexnow',
+            '--page-type' => 'personality_profile_variant',
+            '--limit' => 1,
+        ]);
+
+        $this->assertSame('success', $output['status'] ?? null);
+        $this->assertSame(1, $output['planned_queue_count'] ?? null);
+        $this->assertSame(0, $output['blocked_count'] ?? null);
+        $this->assertFalse((bool) ($output['duplicate_detected'] ?? true));
+        $this->assertSame(1, $output['stale_submitted_queue_item_count'] ?? null);
+        $this->assertSame(1, data_get($output, 'reason_code_breakdown.existing_submitted_item_stale_by_content_hash'));
+        $this->assertSame('existing_submitted_item_stale_by_content_hash', data_get($output, 'stale_submitted_queue_items.0.stale_reason'));
     }
 
     #[Test]
@@ -634,6 +693,54 @@ final class SeoIntelSearchChannelQueueRuntimeTest extends TestCase
             $this->assertTrue((bool) ($output['duplicate_detected'] ?? false));
             $this->assertSame(1, data_get($output, 'reason_code_breakdown.existing_active_queue_item'));
         }
+    }
+
+    #[Test]
+    public function submitted_queue_item_without_source_hash_or_lastmod_still_dedupes(): void
+    {
+        $canonicalUrl = 'https://fermatmind.com/zh/articles/requeue-no-source-freshness';
+
+        $this->seedSeoUrl([
+            'canonical_url' => $canonicalUrl,
+            'locale' => 'zh-CN',
+            'page_entity_type' => 'article',
+            'entity_id_or_slug' => 'no-source-freshness',
+            'cluster' => 'article',
+            'source_authority' => 'backend_cms',
+            'lastmod_at' => null,
+            'lastmod_source' => null,
+            'metadata_json' => [
+                'claim_safe' => true,
+                'claim_boundary_state' => 'approved',
+                'publication_state' => 'published',
+                'source_table' => 'articles',
+            ],
+        ]);
+        $this->seedQueueItem($canonicalUrl, [
+            'locale' => 'zh-CN',
+            'page_entity_type' => 'article',
+            'entity_id' => 'no-source-freshness',
+            'approval_state' => 'approved',
+            'execution_state' => 'submitted',
+            'lastmod' => now()->subDays(9),
+            'updated_at' => now()->subDays(9),
+        ]);
+
+        $output = $this->runQueueCommand([
+            '--dry-run' => true,
+            '--no-write' => true,
+            '--json' => true,
+            '--canonical-url' => $canonicalUrl,
+            '--channel' => 'indexnow',
+            '--page-type' => 'article',
+            '--limit' => 1,
+        ], expectSuccess: false);
+
+        $this->assertSame('blocked', $output['status'] ?? null);
+        $this->assertSame(0, $output['planned_queue_count'] ?? null);
+        $this->assertTrue((bool) ($output['duplicate_detected'] ?? false));
+        $this->assertSame(0, $output['stale_submitted_queue_item_count'] ?? null);
+        $this->assertSame(1, data_get($output, 'reason_code_breakdown.existing_active_queue_item'));
     }
 
     #[Test]
@@ -785,8 +892,8 @@ final class SeoIntelSearchChannelQueueRuntimeTest extends TestCase
             'cluster' => $overrides['cluster'] ?? 'research',
             'source_authority' => $overrides['source_authority'] ?? 'backend_cms',
             'indexability_state' => $overrides['indexability_state'] ?? 'indexable',
-            'lastmod_at' => $overrides['lastmod_at'] ?? now()->subHour(),
-            'lastmod_source' => $overrides['lastmod_source'] ?? 'research_reports.updated_at',
+            'lastmod_at' => array_key_exists('lastmod_at', $overrides) ? $overrides['lastmod_at'] : now()->subHour(),
+            'lastmod_source' => array_key_exists('lastmod_source', $overrides) ? $overrides['lastmod_source'] : 'research_reports.updated_at',
             'is_private_flow' => (bool) ($overrides['is_private_flow'] ?? false),
             'first_seen_at' => now()->subDay(),
             'last_seen_at' => now(),
