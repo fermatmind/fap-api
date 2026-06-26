@@ -22835,18 +22835,23 @@
         "at": "2026-06-26T16:35:55.572Z",
         "status": "ready_to_merge",
         "notes": "GitHub checks passed for PR #2458; marked ready to merge."
+      },
+      {
+        "at": "2026-06-26T17:22:48Z",
+        "status": "merged",
+        "notes": "Reconciled before PR-EQ-V19-06: GitHub PR #2458 merged and origin/main contains ffcf5081971a0358d28520e272e27938b0dde2ea."
       }
     ],
     "failure_reason": null,
-    "local_cleanup_executed": false,
-    "merged_at": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-06-26T15:05:28Z",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2458",
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
-    "status": "ready_to_merge",
+    "status": "merged",
     "title": "PR-EQ-V19-04 Personalization route matrix v2",
     "train_scope": "eq_v19_commercial_content_depth",
-    "commit_sha": "208a2b9a12eea2e0b3bcb3a9bc36a39c793063aa"
+    "commit_sha": "ffcf5081971a0358d28520e272e27938b0dde2ea"
   },
   "PR-EQ-V19-05": {
     "base": "main",
@@ -22859,9 +22864,13 @@
       "dependency": {
         "evidence": "Waiting for dependency merge.",
         "status": "pending"
+      },
+      "dependency_for_pr06": {
+        "status": "pass",
+        "evidence": "fap-web PR #1458 merged with merge commit b189b0ed7f57c240e9ad57ff3c0b1fd36463c3f8."
       }
     },
-    "commit_sha": null,
+    "commit_sha": "b189b0ed7f57c240e9ad57ff3c0b1fd36463c3f8",
     "depends_on": [
       "PR-EQ-V19-04"
     ],
@@ -22870,15 +22879,20 @@
         "at": "2026-06-26T15:21:54.232288+00:00",
         "notes": "Initialized from explicit /goal authorization.",
         "status": "initialized"
+      },
+      {
+        "at": "2026-06-26T17:22:48Z",
+        "status": "merged",
+        "notes": "Reconciled cross-repo dependency before PR-EQ-V19-06: fap-web PR #1458 merged."
       }
     ],
     "failure_reason": null,
-    "local_cleanup_executed": false,
-    "merged_at": null,
-    "pr_url": null,
-    "remote_branch_deleted": false,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-06-26T17:16:44Z",
+    "pr_url": "https://github.com/fermatmind/fap-web/pull/1458",
+    "remote_branch_deleted": true,
     "repo": "fap-web",
-    "status": "initialized",
+    "status": "merged",
     "title": "PR-EQ-V19-05 Frontend EQ v1.9 depth consumption",
     "train_scope": "eq_v19_commercial_content_depth"
   },
@@ -22891,11 +22905,56 @@
         "status": "pass"
       },
       "dependency": {
-        "evidence": "Waiting for dependency merge.",
-        "status": "pending"
+        "status": "pass",
+        "evidence": "PR-EQ-V19-05 merged in fap-web as #1458 with merge commit b189b0ed7f57c240e9ad57ff3c0b1fd36463c3f8."
+      },
+      "local:Eq60V5ReportContractTest": {
+        "status": "pass",
+        "command": "cd backend && UPDATE_EQ60_V5_FIXTURES=true APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest",
+        "notes": "Fixture refresh run passed with Laravel warnings and regenerated canonical EQ v1.9 fixture payloads."
+      },
+      "local:Eq60V5ReportContractTest_verify": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest",
+        "notes": "Verification run passed with Laravel warnings, 445 assertions."
+      },
+      "local:Eq60GoldenCasesTest": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60GoldenCasesTest",
+        "notes": "Passed with Laravel warnings, 208 assertions."
+      },
+      "local:Eq60ReportPaywallTest": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ReportPaywallTest",
+        "notes": "Passed with Laravel warnings, 118 assertions."
+      },
+      "local:Eq60SubmitQualityContractTest": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60SubmitQualityContractTest",
+        "notes": "Passed with Laravel warnings, 16 assertions."
+      },
+      "local:yaml_json_parse": {
+        "status": "pass",
+        "command": "ruby YAML parse and python3 json.tool docs/codex/pr-train-state.json"
+      },
+      "local:diff_check": {
+        "status": "pass",
+        "command": "git diff --check"
+      },
+      "local:scope_validation": {
+        "status": "pass",
+        "command": "Changed-file allowlist validation for PR-EQ-V19-06 files including untracked additions"
+      },
+      "github_pr": {
+        "status": "created",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/2459"
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "gh pr checks 2459 all pass: hygiene, supply-chain, content-pack-build-validate, Semgrep, verify-bigfive, verify-mbti-legacy, verify-mbti-v2."
       }
     },
-    "commit_sha": null,
+    "commit_sha": "d92572f5aa184cfebc53c4ffdfd4a6f3e759dd08",
     "depends_on": [
       "PR-EQ-V19-05"
     ],
@@ -22904,15 +22963,35 @@
         "at": "2026-06-26T15:21:54.232288+00:00",
         "notes": "Initialized from explicit /goal authorization.",
         "status": "initialized"
+      },
+      {
+        "at": "2026-06-26T17:22:48Z",
+        "status": "in_progress",
+        "notes": "Started PR-EQ-V19-06 after cross-repo PR-EQ-V19-05 merge reconciliation."
+      },
+      {
+        "at": "2026-06-26T17:25:20Z",
+        "status": "local_checks_passed",
+        "notes": "Regenerated canonical fixtures, added production smoke template, and passed required local validation."
+      },
+      {
+        "at": "2026-06-26T17:27:05Z",
+        "status": "pr_open",
+        "notes": "Opened GitHub PR #2459 for PR-EQ-V19-06."
+      },
+      {
+        "at": "2026-06-26T17:32:18Z",
+        "status": "ready_to_merge",
+        "notes": "GitHub checks passed and PR-EQ-V19-06 is ready to merge."
       }
     ],
     "failure_reason": null,
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2459",
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "initialized",
+    "status": "ready_to_merge",
     "title": "PR-EQ-V19-06 EQ v1.9 canonical fixtures and smoke template",
     "train_scope": "eq_v19_commercial_content_depth"
   },
