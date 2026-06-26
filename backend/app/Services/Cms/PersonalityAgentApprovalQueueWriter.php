@@ -45,6 +45,18 @@ final class PersonalityAgentApprovalQueueWriter
     }
 
     /**
+     * @param  list<int>  $itemIds
+     * @param  array<string,mixed>  $metadata
+     * @return array<string,mixed>
+     */
+    public function approveItems(array $itemIds, string $framework, string $sourceSha256, string $qaSha256, array $metadata = []): array
+    {
+        return DB::transaction(function () use ($itemIds, $framework, $sourceSha256, $qaSha256, $metadata): array {
+            return $this->approveItemsInTransaction($itemIds, $framework, $sourceSha256, $qaSha256, $metadata);
+        });
+    }
+
+    /**
      * @param  array<string,mixed>  $package
      * @param  array<string,mixed>  $qa
      * @param  array<string,mixed>  $metadata
@@ -143,6 +155,168 @@ final class PersonalityAgentApprovalQueueWriter
     }
 
     /**
+     * @param  list<int>  $itemIds
+     * @param  array<string,mixed>  $metadata
+     * @return array<string,mixed>
+     */
+    private function approveItemsInTransaction(array $itemIds, string $framework, string $sourceSha256, string $qaSha256, array $metadata): array
+    {
+        $summary = $this->approvalBaseSummary($itemIds, $framework, $sourceSha256, $qaSha256, $metadata);
+        $errors = $this->approvalValidationErrors($itemIds, $framework, $sourceSha256, $qaSha256);
+
+        if ($errors !== []) {
+            return array_merge($summary, [
+                'ok' => false,
+                'status' => 'fail',
+                'matched_item_count' => 0,
+                'approved_item_count' => 0,
+                'skipped_existing_approved_item_count' => 0,
+                'items' => [],
+                'errors' => $errors,
+                'warnings' => [],
+            ]);
+        }
+
+        $rows = DB::table('personality_agent_approval_items as items')
+            ->join('personality_agent_approval_batches as batches', 'batches.id', '=', 'items.batch_id')
+            ->whereIn('items.id', $itemIds)
+            ->lockForUpdate()
+            ->orderBy('items.id')
+            ->get([
+                'items.id',
+                'items.batch_id',
+                'items.framework',
+                'items.target_url',
+                'items.approval_state',
+                'items.approved_at',
+                'items.rejected_at',
+                'items.blocked_reason',
+                'items.qa_decision',
+                'items.recommendation_sha256',
+                'batches.source_package_sha256',
+                'batches.qa_sha256',
+            ]);
+
+        $foundIds = $rows->pluck('id')->map(static fn (mixed $id): int => (int) $id)->all();
+        sort($foundIds);
+        if ($foundIds !== $itemIds) {
+            return array_merge($summary, [
+                'ok' => false,
+                'status' => 'fail',
+                'matched_item_count' => count($foundIds),
+                'approved_item_count' => 0,
+                'skipped_existing_approved_item_count' => 0,
+                'items' => $this->approvalRows($rows),
+                'errors' => [[
+                    'field' => 'item_ids',
+                    'code' => 'approval_item_ids_missing',
+                    'message' => 'Every explicitly requested approval item ID must exist.',
+                ]],
+                'warnings' => [],
+            ]);
+        }
+
+        $rowErrors = [];
+        foreach ($rows as $row) {
+            $rowErrors = array_merge($rowErrors, $this->approvalRowErrors($row, $framework, $sourceSha256, $qaSha256));
+        }
+
+        if ($rowErrors !== []) {
+            return array_merge($summary, [
+                'ok' => false,
+                'status' => 'fail',
+                'matched_item_count' => $rows->count(),
+                'approved_item_count' => 0,
+                'skipped_existing_approved_item_count' => 0,
+                'items' => $this->approvalRows($rows),
+                'errors' => $rowErrors,
+                'warnings' => [],
+            ]);
+        }
+
+        $states = array_values(array_unique($rows->map(static fn (object $row): string => (string) $row->approval_state)->all()));
+        sort($states);
+
+        if ($states === ['approved']) {
+            return array_merge($summary, [
+                'ok' => true,
+                'status' => 'pass',
+                'matched_item_count' => $rows->count(),
+                'approved_item_count' => 0,
+                'skipped_existing_approved_item_count' => $rows->count(),
+                'writes_committed' => false,
+                'items' => $this->approvalRows($rows),
+                'errors' => [],
+                'warnings' => [],
+            ]);
+        }
+
+        if ($states !== ['pending']) {
+            return array_merge($summary, [
+                'ok' => false,
+                'status' => 'fail',
+                'matched_item_count' => $rows->count(),
+                'approved_item_count' => 0,
+                'skipped_existing_approved_item_count' => 0,
+                'items' => $this->approvalRows($rows),
+                'errors' => [[
+                    'field' => 'approval_state',
+                    'code' => 'approval_items_must_be_all_pending_or_all_approved',
+                    'message' => 'Approval requests must not mix pending, approved, rejected, or blocked states.',
+                ]],
+                'warnings' => [],
+            ]);
+        }
+
+        $now = now();
+        $updated = DB::table('personality_agent_approval_items')
+            ->whereIn('id', $itemIds)
+            ->where('approval_state', 'pending')
+            ->whereNull('approved_at')
+            ->whereNull('rejected_at')
+            ->update([
+                'approval_state' => 'approved',
+                'approved_at' => $now,
+                'updated_at' => $now,
+            ]);
+
+        $approvedRows = DB::table('personality_agent_approval_items as items')
+            ->join('personality_agent_approval_batches as batches', 'batches.id', '=', 'items.batch_id')
+            ->whereIn('items.id', $itemIds)
+            ->orderBy('items.id')
+            ->get([
+                'items.id',
+                'items.batch_id',
+                'items.framework',
+                'items.target_url',
+                'items.approval_state',
+                'items.approved_at',
+                'items.rejected_at',
+                'items.blocked_reason',
+                'items.qa_decision',
+                'items.recommendation_sha256',
+                'batches.source_package_sha256',
+                'batches.qa_sha256',
+            ]);
+
+        return array_merge($summary, [
+            'ok' => $updated === count($itemIds),
+            'status' => $updated === count($itemIds) ? 'pass' : 'fail',
+            'matched_item_count' => $approvedRows->count(),
+            'approved_item_count' => $updated,
+            'skipped_existing_approved_item_count' => 0,
+            'writes_committed' => $updated > 0,
+            'items' => $this->approvalRows($approvedRows),
+            'errors' => $updated === count($itemIds) ? [] : [[
+                'field' => 'approval_items',
+                'code' => 'approval_update_count_mismatch',
+                'message' => 'Approval update count did not match the requested item count.',
+            ]],
+            'warnings' => [],
+        ]);
+    }
+
+    /**
      * @param  array<string,mixed>  $package
      * @return list<array<string,mixed>>
      */
@@ -152,6 +326,186 @@ final class PersonalityAgentApprovalQueueWriter
             is_array($package['recommendations'] ?? null) ? $package['recommendations'] : [],
             static fn (mixed $item): bool => is_array($item)
         ));
+    }
+
+    /**
+     * @param  list<int>  $itemIds
+     * @param  array<string,mixed>  $metadata
+     * @return array<string,mixed>
+     */
+    private function approvalBaseSummary(array $itemIds, string $framework, string $sourceSha256, string $qaSha256, array $metadata): array
+    {
+        return [
+            'artifact' => 'PERSONALITY-AGENT-APPROVAL-QUEUE-APPROVE-CONTRACT-01',
+            'status' => 'fail',
+            'ok' => false,
+            'framework' => $framework,
+            'item_ids' => $itemIds,
+            'source_package_sha256' => $sourceSha256,
+            'qa_sha256' => $qaSha256,
+            'metadata' => $metadata,
+            'dry_run' => false,
+            'write' => false,
+            'approve' => true,
+            'writes_attempted' => true,
+            'writes_committed' => false,
+            'approval_state_mutation_attempted' => true,
+            'cms_write_attempted' => false,
+            'cms_mutation_attempted' => false,
+            'cms_live_promotion_attempted' => false,
+            'publish_attempted' => false,
+            'index_attempted' => false,
+            'sitemap_llms_release_attempted' => false,
+            'search_release_attempted' => false,
+            'enqueue_attempted' => false,
+            'external_calls_attempted' => false,
+            'live_content_updated' => false,
+            'approval_state_written_only' => true,
+            'safety_holds' => $this->safetyHolds(),
+        ];
+    }
+
+    /**
+     * @param  list<int>  $itemIds
+     * @return list<array<string,string>>
+     */
+    private function approvalValidationErrors(array $itemIds, string $framework, string $sourceSha256, string $qaSha256): array
+    {
+        $errors = [];
+        if ($itemIds === []) {
+            $errors[] = [
+                'field' => 'item_ids',
+                'code' => 'approval_item_ids_required',
+                'message' => 'Explicit approval item IDs are required.',
+            ];
+        }
+        if (! in_array($framework, self::ALLOWED_FRAMEWORKS, true)) {
+            $errors[] = [
+                'field' => 'framework',
+                'code' => 'unsupported_framework',
+                'message' => 'A supported framework lock is required.',
+            ];
+        }
+        if (! $this->isSha256($sourceSha256)) {
+            $errors[] = [
+                'field' => 'source_package_sha256',
+                'code' => 'source_package_sha256_required',
+                'message' => 'A valid source package SHA256 lock is required.',
+            ];
+        }
+        if (! $this->isSha256($qaSha256)) {
+            $errors[] = [
+                'field' => 'qa_sha256',
+                'code' => 'qa_sha256_required',
+                'message' => 'A valid QA SHA256 lock is required.',
+            ];
+        }
+
+        return $errors;
+    }
+
+    /**
+     * @return list<array<string,string>>
+     */
+    private function approvalRowErrors(object $row, string $framework, string $sourceSha256, string $qaSha256): array
+    {
+        $errors = [];
+        $id = (string) $row->id;
+        if ((string) $row->framework !== $framework) {
+            $errors[] = [
+                'field' => 'framework',
+                'code' => 'approval_item_framework_mismatch',
+                'message' => 'Approval item '.$id.' framework does not match the requested framework lock.',
+            ];
+        }
+        if ((string) $row->source_package_sha256 !== $sourceSha256) {
+            $errors[] = [
+                'field' => 'source_package_sha256',
+                'code' => 'approval_item_source_sha256_mismatch',
+                'message' => 'Approval item '.$id.' source package hash does not match.',
+            ];
+        }
+        if ((string) $row->qa_sha256 !== $qaSha256) {
+            $errors[] = [
+                'field' => 'qa_sha256',
+                'code' => 'approval_item_qa_sha256_mismatch',
+                'message' => 'Approval item '.$id.' QA hash does not match.',
+            ];
+        }
+        if ((string) $row->blocked_reason !== '') {
+            $errors[] = [
+                'field' => 'blocked_reason',
+                'code' => 'approval_item_blocked',
+                'message' => 'Approval item '.$id.' has a blocked reason and cannot be approved.',
+            ];
+        }
+        if (! $this->qaDecisionPasses((string) $row->qa_decision)) {
+            $errors[] = [
+                'field' => 'qa_decision',
+                'code' => 'approval_item_qa_not_pass',
+                'message' => 'Approval item '.$id.' QA decision is not pass-ready.',
+            ];
+        }
+        if ((string) $row->recommendation_sha256 === '') {
+            $errors[] = [
+                'field' => 'recommendation_sha256',
+                'code' => 'approval_item_recommendation_sha_missing',
+                'message' => 'Approval item '.$id.' recommendation hash is missing.',
+            ];
+        }
+        if ((string) $row->approval_state === 'rejected' || $row->rejected_at !== null) {
+            $errors[] = [
+                'field' => 'approval_state',
+                'code' => 'approval_item_rejected',
+                'message' => 'Approval item '.$id.' is rejected and cannot be approved.',
+            ];
+        }
+        if ((string) $row->approval_state === 'approved' && $row->approved_at === null) {
+            $errors[] = [
+                'field' => 'approved_at',
+                'code' => 'approval_item_approved_timestamp_missing',
+                'message' => 'Approval item '.$id.' is approved but approved_at is missing.',
+            ];
+        }
+        if (! in_array((string) $row->approval_state, ['pending', 'approved'], true)) {
+            $errors[] = [
+                'field' => 'approval_state',
+                'code' => 'approval_item_state_not_approvable',
+                'message' => 'Approval item '.$id.' must be pending or already approved.',
+            ];
+        }
+
+        return $errors;
+    }
+
+    /**
+     * @param  \Illuminate\Support\Collection<int,object>  $rows
+     * @return list<array<string,mixed>>
+     */
+    private function approvalRows($rows): array
+    {
+        return $rows
+            ->map(static fn (object $row): array => [
+                'id' => (int) $row->id,
+                'batch_id' => (int) $row->batch_id,
+                'framework' => (string) $row->framework,
+                'target_url' => (string) $row->target_url,
+                'approval_state' => (string) $row->approval_state,
+                'approved_at' => $row->approved_at === null ? null : (string) $row->approved_at,
+                'rejected_at' => $row->rejected_at === null ? null : (string) $row->rejected_at,
+                'blocked_reason' => $row->blocked_reason === null ? null : (string) $row->blocked_reason,
+                'qa_decision' => (string) $row->qa_decision,
+                'recommendation_sha256' => (string) $row->recommendation_sha256,
+                'source_package_sha256' => (string) $row->source_package_sha256,
+                'qa_sha256' => (string) $row->qa_sha256,
+            ])
+            ->values()
+            ->all();
+    }
+
+    private function isSha256(string $value): bool
+    {
+        return preg_match('/^[a-f0-9]{64}$/', $value) === 1;
     }
 
     /**
