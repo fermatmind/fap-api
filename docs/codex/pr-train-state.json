@@ -22948,9 +22948,13 @@
       "github_pr": {
         "status": "created",
         "pr_url": "https://github.com/fermatmind/fap-api/pull/2459"
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "gh pr checks 2459 all pass: hygiene, supply-chain, content-pack-build-validate, Semgrep, verify-bigfive, verify-mbti-legacy, verify-mbti-v2."
       }
     },
-    "commit_sha": "8042568a3bb0520bb45ab4a6370895e59e08d8fa",
+    "commit_sha": "d92572f5aa184cfebc53c4ffdfd4a6f3e759dd08",
     "depends_on": [
       "PR-EQ-V19-05"
     ],
@@ -22974,6 +22978,11 @@
         "at": "2026-06-26T17:27:05Z",
         "status": "pr_open",
         "notes": "Opened GitHub PR #2459 for PR-EQ-V19-06."
+      },
+      {
+        "at": "2026-06-26T17:32:18Z",
+        "status": "ready_to_merge",
+        "notes": "GitHub checks passed and PR-EQ-V19-06 is ready to merge."
       }
     ],
     "failure_reason": null,
@@ -22982,7 +22991,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2459",
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "title": "PR-EQ-V19-06 EQ v1.9 canonical fixtures and smoke template",
     "train_scope": "eq_v19_commercial_content_depth"
   },
