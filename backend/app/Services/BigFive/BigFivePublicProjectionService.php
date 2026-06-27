@@ -508,14 +508,9 @@ final class BigFivePublicProjectionService
     {
         $variantKeys = [];
         foreach ($tags as $tag) {
-            if (str_starts_with($tag, 'profile:') || str_starts_with($tag, 'big5:')) {
+            if (str_starts_with($tag, 'profile:')) {
                 $variantKeys[$tag] = true;
             }
-        }
-
-        foreach (self::DOMAIN_ORDER as $trait) {
-            $band = strtolower((string) ($traitBands[$trait] ?? 'mid'));
-            $variantKeys['band:'.strtolower($trait).'.'.$band] = true;
         }
 
         return array_keys($variantKeys);

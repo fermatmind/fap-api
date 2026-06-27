@@ -4265,6 +4265,24 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_bigfive_v2_rendered_asset_hygiene_changes(): void
+    {
+        $changed = [
+            'backend/content_packs/BIG5_OCEAN/v2/registry/shared/methodology.json',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+        $this->assertTrue($this->bigFivePublicProjectionDiffIsRenderedAssetHygieneOnly([
+            "-            if (str_starts_with(\$tag, 'profile:') || str_starts_with(\$tag, 'big5:')) {",
+            "+            if (str_starts_with(\$tag, 'profile:')) {",
+            '-        foreach (self::DOMAIN_ORDER as $trait) {',
+            "-            \$band = strtolower((string) (\$traitBands[\$trait] ?? 'mid'));",
+            "-            \$variantKeys['band:'.strtolower(\$trait).'.'.\$band] = true;",
+            '-        }',
+            '-',
+        ]));
+    }
+
     public function test_runtime_freeze_classifier_ignores_bigfive_v2_asset_agent_audit_files(): void
     {
         $changed = [
@@ -5463,6 +5481,21 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             }
 
             if ($this->isBigFiveV2CmsEditorialGovernanceFile($file)) {
+                continue;
+            }
+
+            if (
+                $file === 'backend/app/Services/BigFive/BigFivePublicProjectionService.php'
+                && $repoRoot !== ''
+                && $baseRef !== ''
+                && $this->bigFivePublicProjectionDiffIsRenderedAssetHygieneOnly(
+                    $this->changedLinesForFile($repoRoot, $baseRef, $file)
+                )
+            ) {
+                continue;
+            }
+
+            if ($this->isBigFiveV2RenderedAssetHygieneFile($file)) {
                 continue;
             }
 
@@ -8288,6 +8321,34 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             '#^backend/database/migrations/\d{4}_\d{2}_\d{2}_\d{6}_create_big_five_v2_editorial_[a-z0-9_]+_table\.php$#',
             $file
         ) === 1;
+    }
+
+    private function isBigFiveV2RenderedAssetHygieneFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/content_packs/BIG5_OCEAN/v2/registry/shared/methodology.json',
+        ], true);
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function bigFivePublicProjectionDiffIsRenderedAssetHygieneOnly(array $changedLines): bool
+    {
+        $allowedLines = [
+            "-            if (str_starts_with(\$tag, 'profile:') || str_starts_with(\$tag, 'big5:')) {",
+            "+            if (str_starts_with(\$tag, 'profile:')) {",
+            '-        foreach (self::DOMAIN_ORDER as $trait) {',
+            "-            \$band = strtolower((string) (\$traitBands[\$trait] ?? 'mid'));",
+            "-            \$variantKeys['band:'.strtolower(\$trait).'.'.\$band] = true;",
+            '-        }',
+            '-',
+        ];
+
+        sort($changedLines);
+        sort($allowedLines);
+
+        return $changedLines === $allowedLines;
     }
 
     private function isAttemptEmailBindingFoundationFile(string $file): bool

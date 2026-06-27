@@ -39,4 +39,29 @@ final class RegistryValidatorTest extends TestCase
 
         $this->assertContains('Missing shared asset trait_labels.labels.O.report_anchor', $errors);
     }
+
+    public function test_shared_methodology_copy_is_render_safe(): void
+    {
+        $registry = app(RegistryLoader::class)->load();
+        $methodology = data_get($registry, 'shared.methodology', []);
+
+        $this->assertIsArray($methodology);
+        $this->assertNotSame('', trim((string) ($methodology['title'] ?? '')));
+        $this->assertNotSame('', trim((string) ($methodology['body'] ?? '')));
+        $this->assertNotSame('', trim((string) ($methodology['access_note'] ?? '')));
+
+        $renderedCopy = json_encode($methodology, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        $this->assertIsString($renderedCopy);
+
+        foreach ([
+            'Big Five Report Engine',
+            'PR3B',
+            'AttemptReadController',
+            'payload',
+            'registry',
+            '[object Object]',
+        ] as $forbidden) {
+            $this->assertStringNotContainsString($forbidden, $renderedCopy);
+        }
+    }
 }
