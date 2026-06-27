@@ -13,7 +13,7 @@ final class MbtiPdfPayloadBuilder
 {
     public const PAYLOAD_KEY = 'mbti_pdf_payload';
 
-    public const SCHEMA_VERSION = 'fap.mbti.report_pdf.payload.v0_1';
+    public const SCHEMA_VERSION = 'fap.mbti.report_pdf.payload.v0_2';
 
     /**
      * These fields are either internal, raw scoring material, or unsafe to carry into
@@ -89,9 +89,14 @@ final class MbtiPdfPayloadBuilder
                 'region' => $region !== '' ? $region : 'CN_MAINLAND',
                 'dir_version' => $dirVersion,
                 'type' => $this->publicTypeProfile($typeCode, $typeProfile, $legacyPayload),
-                'axis_scores' => $this->publicAxisScores($scoresPct, $axisStates),
+                'axis_scores' => $this->publicAxisScores($scoresPct, $axisStates, $locale !== '' ? $locale : 'zh-CN'),
                 'highlights' => $this->publicHighlights((array) ($legacyPayload['highlights'] ?? [])),
                 'sections' => $this->publicSections((array) ($legacyPayload['cards'] ?? [])),
+                'result_page_sections' => $this->publicResultPageSections(
+                    (array) ($legacyPayload['cards'] ?? []),
+                    (array) ($legacyPayload['recommended_reads'] ?? []),
+                    $locale !== '' ? $locale : 'zh-CN'
+                ),
                 'document' => $this->publicDocument(
                     $locale !== '' ? $locale : 'zh-CN',
                     $typeCode,
@@ -214,9 +219,10 @@ final class MbtiPdfPayloadBuilder
      * @param  array<string,string>  $axisStates
      * @return list<array<string,mixed>>
      */
-    private function publicAxisScores(array $scoresPct, array $axisStates): array
+    private function publicAxisScores(array $scoresPct, array $axisStates, string $locale): array
     {
         $out = [];
+        $labels = $this->axisLabels($locale);
         foreach (['EI', 'SN', 'TF', 'JP', 'AT'] as $axis) {
             if (! array_key_exists($axis, $scoresPct)) {
                 continue;
@@ -224,6 +230,9 @@ final class MbtiPdfPayloadBuilder
 
             $out[] = $this->dropNulls([
                 'axis' => $axis,
+                'label' => $labels[$axis]['label'] ?? $axis,
+                'left_label' => $labels[$axis]['left_label'] ?? null,
+                'right_label' => $labels[$axis]['right_label'] ?? null,
                 'percent' => $scoresPct[$axis],
                 'state' => $axisStates[$axis] ?? null,
             ]);
@@ -284,6 +293,53 @@ final class MbtiPdfPayloadBuilder
             if ($publicCards !== []) {
                 $sections[] = [
                     'section_key' => $sectionKey,
+                    'cards' => $publicCards,
+                ];
+            }
+        }
+
+        return $sections;
+    }
+
+    /**
+     * @param  array<string,mixed>  $cardsBySection
+     * @param  array<int|string,mixed>  $recommendedReads
+     * @return list<array<string,mixed>>
+     */
+    private function publicResultPageSections(array $cardsBySection, array $recommendedReads, string $locale): array
+    {
+        $isChinese = str_starts_with(strtolower($locale), 'zh');
+        $sections = [];
+        foreach (['traits', 'career', 'growth', 'relationships'] as $sectionKey) {
+            $cards = is_array($cardsBySection[$sectionKey] ?? null) ? $cardsBySection[$sectionKey] : [];
+            $publicCards = [];
+            foreach ($cards as $card) {
+                if (! is_array($card)) {
+                    continue;
+                }
+
+                $publicCard = $this->filterPublicContent([
+                    'card_key' => $card['id'] ?? $card['key'] ?? null,
+                    'title' => $card['title'] ?? null,
+                    'description' => $card['desc'] ?? $card['description'] ?? null,
+                    'bullets' => $card['bullets'] ?? [],
+                    'tips' => $card['tips'] ?? [],
+                    'tags' => $card['tags'] ?? [],
+                ]);
+                $publicCard = $isChinese ? $publicCard : $this->englishResultPageCard($publicCard, $sectionKey);
+                if ($publicCard !== []) {
+                    $publicCards[] = $publicCard;
+                }
+            }
+
+            if ($sectionKey === 'career') {
+                $publicCards[] = $this->careerNextStepCard($recommendedReads, $isChinese);
+            }
+
+            if ($publicCards !== []) {
+                $sections[] = [
+                    'section_key' => $sectionKey,
+                    'title' => $this->resultPageSectionTitle($sectionKey),
                     'cards' => $publicCards,
                 ];
             }
@@ -423,14 +479,14 @@ final class MbtiPdfPayloadBuilder
         return $this->dropNulls([
             'chapter_key' => $key,
             'title' => $title,
-            'body' => array_values(array_slice(array_filter(
+            'body' => array_values(array_filter(
                 array_map(static fn (mixed $line): string => trim((string) $line), $body),
                 static fn (string $line): bool => $line !== ''
-            ), 0, 6)),
-            'bullets' => array_values(array_slice(array_filter(
+            )),
+            'bullets' => array_values(array_filter(
                 array_map(static fn (mixed $line): string => trim((string) $line), $bullets),
                 static fn (string $line): bool => $line !== ''
-            ), 0, 8)),
+            )),
             'source_section_keys' => $sourceKeys,
         ]);
     }
@@ -453,7 +509,7 @@ final class MbtiPdfPayloadBuilder
         }
 
         return $lines !== []
-            ? array_slice($lines, 0, 4)
+            ? $lines
             : ($isChinese
                 ? ['这部分汇总你在本次作答中最稳定、最容易被他人观察到的行为倾向。']
                 : ['This section summarizes the most stable and observable patterns in your current response profile.']);
@@ -487,7 +543,7 @@ final class MbtiPdfPayloadBuilder
             }
         }
 
-        return $lines !== [] ? array_slice($lines, 0, 5) : ($isChinese ? $zhFallback : $enFallback);
+        return $lines !== [] ? $lines : ($isChinese ? $zhFallback : $enFallback);
     }
 
     /**
@@ -553,6 +609,162 @@ final class MbtiPdfPayloadBuilder
     }
 
     /**
+     * @return array<string,array{label:string,left_label:string,right_label:string}>
+     */
+    private function axisLabels(string $locale): array
+    {
+        if (str_starts_with(strtolower($locale), 'zh')) {
+            return [
+                'EI' => ['label' => '能量来源', 'left_label' => '外倾', 'right_label' => '内倾'],
+                'SN' => ['label' => '信息处理', 'left_label' => '实感', 'right_label' => '直觉'],
+                'TF' => ['label' => '决策依据', 'left_label' => '思考', 'right_label' => '情感'],
+                'JP' => ['label' => '生活节奏', 'left_label' => '判断', 'right_label' => '感知'],
+                'AT' => ['label' => '压力姿态', 'left_label' => '果断', 'right_label' => '敏感'],
+            ];
+        }
+
+        return [
+            'EI' => ['label' => 'Energy orientation', 'left_label' => 'Extraversion', 'right_label' => 'Introversion'],
+            'SN' => ['label' => 'Information style', 'left_label' => 'Sensing', 'right_label' => 'Intuition'],
+            'TF' => ['label' => 'Decision lens', 'left_label' => 'Thinking', 'right_label' => 'Feeling'],
+            'JP' => ['label' => 'Operating rhythm', 'left_label' => 'Judging', 'right_label' => 'Perceiving'],
+            'AT' => ['label' => 'Pressure posture', 'left_label' => 'Assertive', 'right_label' => 'Turbulent'],
+        ];
+    }
+
+    private function resultPageSectionTitle(string $sectionKey): string
+    {
+        return match ($sectionKey) {
+            'traits' => 'Personality Traits',
+            'career' => 'Your Career Path',
+            'growth' => 'Your Personal Growth',
+            'relationships' => 'Your Relationships',
+            default => $sectionKey,
+        };
+    }
+
+    /**
+     * @param  array<int|string,mixed>  $recommendedReads
+     * @return array<string,mixed>
+     */
+    private function careerNextStepCard(array $recommendedReads, bool $isChinese): array
+    {
+        $readTitles = [];
+        foreach ($this->publicRecommendedReads($recommendedReads) as $read) {
+            $title = trim((string) ($read['title'] ?? ''));
+            if ($title !== '') {
+                $readTitles[] = $title;
+            }
+        }
+
+        return $this->filterPublicContent([
+            'card_key' => 'career_next_step',
+            'title' => $isChinese ? '继续探索职业方向' : 'Continue exploring career direction',
+            'description' => $isChinese
+                ? 'PDF 保留当前结果页的职业下一步说明；回到网页结果页可以继续查看职业推荐、历史结果和后续行动入口。'
+                : 'The PDF preserves the career next-step guidance from the result page. Return to the web result page to continue with career recommendations, history, and next actions.',
+            'bullets' => $readTitles !== [] ? array_slice($readTitles, 0, 4) : [],
+            'tags' => $isChinese ? ['职业下一步', '结果页入口'] : ['career next step', 'result page'],
+        ]);
+    }
+
+    /**
+     * The current legacy MBTI card fallback is Chinese-first. Keep the payload
+     * locale-safe by mapping known public card ids to operator-authored English
+     * copy instead of carrying mixed-language card text into English PDFs.
+     *
+     * @param  array<string,mixed>  $card
+     * @return array<string,mixed>
+     */
+    private function englishResultPageCard(array $card, string $sectionKey): array
+    {
+        $cardKey = trim((string) ($card['card_key'] ?? ''));
+        $axis = null;
+        if (preg_match('/_(strength|blindspot)_([A-Z]{2})_/', $cardKey, $matches) === 1) {
+            $axis = $matches[2];
+        }
+
+        if (str_contains($cardKey, '_strength_') && $axis !== null) {
+            return $this->filterPublicContent([
+                'card_key' => $cardKey,
+                'title' => "Your clearest strength centers on {$axis}",
+                'description' => "Your current score pattern shows a clearer preference on the {$axis} axis. Use it as a working clue for this section, not as a fixed label.",
+                'bullets' => [
+                    'A strength creates speed when it is used deliberately.',
+                    'When it is overused, it can become habit rather than judgment.',
+                ],
+                'tags' => $card['tags'] ?? [],
+            ]);
+        }
+
+        if (str_contains($cardKey, '_blindspot_') && $axis !== null) {
+            return $this->filterPublicContent([
+                'card_key' => $cardKey,
+                'title' => "A point to watch: {$axis}",
+                'description' => "Your {$axis} preference is less fixed and may depend more on context. That flexibility can help, but it can also cost energy under pressure.",
+                'bullets' => [
+                    "Before important decisions, name which side of {$axis} the situation really needs.",
+                    'Use checklists, templates, or written agreements to reduce avoidable friction.',
+                ],
+                'tags' => $card['tags'] ?? [],
+            ]);
+        }
+
+        $specific = match ($cardKey) {
+            'traits_core_01' => [
+                'title' => 'Your core temperament pattern',
+                'description' => 'You tend to move from observation to action when the goal, constraints, and next step are clear.',
+                'bullets' => [
+                    'You work better with explicit expectations.',
+                    'Vague or inefficient processes may drain your attention.',
+                    'You are more likely to take responsibility when the path is concrete.',
+                ],
+                'tags' => ['topic:traits'],
+            ],
+            'career_style_01' => [
+                'title' => 'A work style that tends to fit you',
+                'description' => 'This profile often works better in environments with clear goals, defined boundaries, and room to move useful work forward.',
+                'bullets' => [
+                    'Clarify goals and authority before execution.',
+                    'Pair judgment with reusable process or templates.',
+                    'Use milestones to keep collaboration concrete.',
+                ],
+                'tags' => ['topic:career'],
+            ],
+            'growth_nextstep_01' => [
+                'title' => 'One next step you can take now',
+                'description' => 'Turn your strongest pattern into a system and support weaker patterns with simple tools.',
+                'bullets' => [
+                    'Convert strengths into reusable routines.',
+                    'Use reminders or rituals to lower effort where you tire faster.',
+                    'Review once a week: keep what works and remove what does not.',
+                ],
+                'tags' => ['topic:growth'],
+            ],
+            'relationships_script_01' => [
+                'title' => 'A smoother communication script',
+                'description' => 'Bring disagreement back to shared goals, observable facts, and specific requests.',
+                'bullets' => [
+                    'Goal: what we both want is...',
+                    'Fact: what is happening now is...',
+                    'Request: what I would like us to try is...',
+                ],
+                'tags' => ['topic:relationships'],
+            ],
+            default => null,
+        };
+
+        if ($specific !== null) {
+            return $this->filterPublicContent([
+                'card_key' => $cardKey,
+                ...$specific,
+            ]);
+        }
+
+        return $card;
+    }
+
+    /**
      * @param  array<int|string,mixed>  $content
      * @return array<int|string,mixed>
      */
@@ -588,7 +800,7 @@ final class MbtiPdfPayloadBuilder
         }
 
         return array_values(array_filter(
-            array_map(static fn (mixed $item): string => trim((string) $item), $value),
+            array_map(static fn (mixed $item): string => is_scalar($item) ? trim((string) $item) : '', $value),
             static fn (string $item): bool => $item !== '',
         ));
     }

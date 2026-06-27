@@ -13,7 +13,7 @@ use Mpdf\Output\Destination;
 
 final class ReportPdfDocumentService
 {
-    private const MBTI_PDF_SURFACE_VERSION = 'mbti.pdf_surface.v2';
+    private const MBTI_PDF_SURFACE_VERSION = 'mbti.pdf_surface.v3';
 
     public function __construct(
         private readonly ReportPdfArtifactStore $artifactStore,
@@ -451,6 +451,7 @@ final class ReportPdfDocumentService
         $document = is_array($payload['document'] ?? null) ? $payload['document'] : [];
         $type = is_array($payload['type'] ?? null) ? $payload['type'] : [];
         $axisScores = is_array($payload['axis_scores'] ?? null) ? $payload['axis_scores'] : [];
+        $resultPageSections = is_array($payload['result_page_sections'] ?? null) ? $payload['result_page_sections'] : [];
         $typeCode = strtoupper(trim((string) ($type['type_code'] ?? '')));
         $typeCode = $typeCode !== '' && $typeCode !== 'UNKNOWN' ? $typeCode : ($isChinese ? '待确认' : 'Pending');
         $typeName = trim((string) ($type['type_name'] ?? ''));
@@ -468,12 +469,12 @@ final class ReportPdfDocumentService
             ? [
                 '人格类型' => $displayType !== '' ? $displayType : $typeCode,
                 '报告日期' => $date,
-                '报告范围' => '类型画像、维度解释、职业、成长、关系与使用边界',
+                '报告范围' => '类型画像、维度解释、结果页核心模块、职业、成长、关系与使用边界',
             ]
             : [
                 'Personality type' => $displayType !== '' ? $displayType : $typeCode,
                 'Report date' => $date,
-                'Report scope' => 'Type portrait, dimensions, career, growth, relationships, and use boundaries',
+                'Report scope' => 'Type portrait, dimensions, result-page sections, career, growth, relationships, and use boundaries',
             ];
         $chapters = $this->mbtiDocumentChapters($document);
 
@@ -483,6 +484,7 @@ final class ReportPdfDocumentService
             $summary,
             $chapters,
             $axisScores,
+            $resultPageSections,
             $isChinese ? 'FermatMind · 费马测试' : 'FermatMind',
             $isChinese
         );
@@ -680,6 +682,7 @@ final class ReportPdfDocumentService
      * @param  array<string,string>  $summary
      * @param  list<array{heading:string,body:list<string>,bullets:list<string>,chapter_key:string}>  $sections
      * @param  list<array<string,mixed>>  $axisScores
+     * @param  list<array<string,mixed>>  $resultPageSections
      */
     private function buildMpdfHtmlDocument(
         string $title,
@@ -687,6 +690,7 @@ final class ReportPdfDocumentService
         array $summary,
         array $sections,
         array $axisScores,
+        array $resultPageSections,
         string $footer,
         bool $isChinese
     ): string {
@@ -721,7 +725,7 @@ final class ReportPdfDocumentService
             .'<tr><td width="50%" align="left">'.$this->escapeHtml($footer).'</td>'
             .'<td width="50%" align="right">{PAGENO} / {nbpg}</td></tr></table>'
         );
-        $mpdf->WriteHTML($this->mbtiReportHtml($title, $subtitle, $summary, $sections, $axisScores, $isChinese));
+        $mpdf->WriteHTML($this->mbtiReportHtml($title, $subtitle, $summary, $sections, $axisScores, $resultPageSections, $isChinese));
 
         return $mpdf->Output('', Destination::STRING_RETURN);
     }
@@ -730,6 +734,7 @@ final class ReportPdfDocumentService
      * @param  array<string,string>  $summary
      * @param  list<array{heading:string,body:list<string>,bullets:list<string>,chapter_key:string}>  $sections
      * @param  list<array<string,mixed>>  $axisScores
+     * @param  list<array<string,mixed>>  $resultPageSections
      */
     private function mbtiReportHtml(
         string $title,
@@ -737,6 +742,7 @@ final class ReportPdfDocumentService
         array $summary,
         array $sections,
         array $axisScores,
+        array $resultPageSections,
         bool $isChinese
     ): string {
         $fontStack = $isChinese
@@ -761,11 +767,16 @@ final class ReportPdfDocumentService
             .'p{margin:0 0 9px 0;}'
             .'ul{margin:0 0 0 18px;padding:0;}'
             .'li{margin:5px 0;}'
+            .'h3{font-size:13.5pt;margin:0 0 5px 0;color:#123d34;}'
+            .'.card{border:1px solid #d9eadf;border-radius:8px;padding:10px 12px;margin:0 0 10px 0;background:#ffffff;page-break-inside:avoid;}'
+            .'.card-desc{color:#334155;margin-bottom:6px;}'
+            .'.tag{display:inline-block;margin:3px 4px 0 0;padding:2px 7px;border-radius:10px;background:#eef8f2;color:#15745b;font-size:8.5pt;}'
             .'.axis-grid{margin:12px 0 18px 0;}'
             .'.axis{margin:0 0 10px 0;}'
             .'.axis-label{font-size:9.5pt;color:#475569;margin-bottom:3px;}'
             .'.axis-track{height:8px;background:#e2e8f0;border-radius:4px;}'
             .'.axis-fill{height:8px;background:#14946f;border-radius:4px;}'
+            .'.axis-poles{width:100%;font-size:8.5pt;color:#64748b;margin-top:2px;}'
             .'.boundary{margin-top:14px;padding:10px 12px;background:#f8fafc;border-left:4px solid #14946f;color:#475569;}'
             .'</style></head><body>';
         $html .= '<div class="cover">';
@@ -783,6 +794,12 @@ final class ReportPdfDocumentService
         foreach ($sections as $index => $section) {
             $html .= '<div class="toc-item">'.($index + 1).'. '.$this->escapeHtml((string) $section['heading']).'</div>';
         }
+        foreach ($resultPageSections as $index => $section) {
+            $title = trim((string) ($section['title'] ?? ''));
+            if ($title !== '') {
+                $html .= '<div class="toc-item">'.(count($sections) + $index + 1).'. '.$this->escapeHtml($title).'</div>';
+            }
+        }
         $html .= '</div>';
 
         foreach ($sections as $index => $section) {
@@ -794,12 +811,19 @@ final class ReportPdfDocumentService
                 $html .= '<div class="axis-grid">';
                 foreach ($axisScores as $axis) {
                     $axisCode = $this->escapeHtml((string) ($axis['axis'] ?? ''));
+                    $axisName = trim((string) ($axis['label'] ?? ''));
+                    $leftLabel = trim((string) ($axis['left_label'] ?? ''));
+                    $rightLabel = trim((string) ($axis['right_label'] ?? ''));
                     $state = trim((string) ($axis['state'] ?? ''));
                     $percent = max(0, min(100, (int) round((float) ($axis['percent'] ?? 0))));
-                    $label = trim($axisCode.($state !== '' ? ' · '.$state : ''));
+                    $labelParts = array_filter([$axisName !== '' ? $axisName : $axisCode, $axisCode, $state]);
+                    $label = implode(' · ', $labelParts);
                     $html .= '<div class="axis">';
                     $html .= '<div class="axis-label">'.$this->escapeHtml($label).' · '.$percent.'%</div>';
                     $html .= '<div class="axis-track"><div class="axis-fill" style="width:'.$percent.'%;"></div></div>';
+                    if ($leftLabel !== '' || $rightLabel !== '') {
+                        $html .= '<table class="axis-poles"><tr><td align="left">'.$this->escapeHtml($leftLabel).'</td><td align="right">'.$this->escapeHtml($rightLabel).'</td></tr></table>';
+                    }
                     $html .= '</div>';
                 }
                 $html .= '</div>';
@@ -812,13 +836,58 @@ final class ReportPdfDocumentService
                 $html .= '<li>'.$this->escapeHtml($bullet).'</li>';
             }
             $html .= '</ul>';
-            if ($index === count($sections) - 1) {
-                $html .= '<div class="boundary">'.$this->escapeHtml($isChinese
-                    ? '本报告用于自我理解和讨论，不用于诊断、录用筛选、升学录取或结果保证。'
-                    : 'This report supports reflection and discussion. It is not a diagnosis, hiring screen, admission predictor, or outcome guarantee.').'</div>';
+            $html .= '</div>';
+        }
+
+        foreach ($resultPageSections as $index => $section) {
+            $title = trim((string) ($section['title'] ?? ''));
+            $cards = is_array($section['cards'] ?? null) ? $section['cards'] : [];
+            if ($title === '' || $cards === []) {
+                continue;
+            }
+
+            $html .= '<div class="chapter">';
+            $html .= '<div class="chapter-kicker">'.$this->escapeHtml($isChinese ? '结果页模块 '.($index + 1) : 'Result page section '.($index + 1)).'</div>';
+            $html .= '<h2>'.$this->escapeHtml($title).'</h2>';
+            foreach ($cards as $card) {
+                if (! is_array($card)) {
+                    continue;
+                }
+
+                $cardTitle = trim((string) ($card['title'] ?? ''));
+                $description = trim((string) ($card['description'] ?? ''));
+                $bullets = $this->stringList($card['bullets'] ?? []);
+                $tips = $this->stringList($card['tips'] ?? []);
+                $tags = $this->stringList($card['tags'] ?? []);
+                if ($cardTitle === '' && $description === '' && $bullets === [] && $tips === []) {
+                    continue;
+                }
+
+                $html .= '<div class="card">';
+                if ($cardTitle !== '') {
+                    $html .= '<h3>'.$this->escapeHtml($cardTitle).'</h3>';
+                }
+                if ($description !== '') {
+                    $html .= '<p class="card-desc">'.$this->escapeHtml($description).'</p>';
+                }
+                if ($bullets !== [] || $tips !== []) {
+                    $html .= '<ul>';
+                    foreach (array_merge($bullets, $tips) as $line) {
+                        $html .= '<li>'.$this->escapeHtml($line).'</li>';
+                    }
+                    $html .= '</ul>';
+                }
+                foreach ($tags as $tag) {
+                    $html .= '<span class="tag">'.$this->escapeHtml($tag).'</span>';
+                }
+                $html .= '</div>';
             }
             $html .= '</div>';
         }
+
+        $html .= '<div class="boundary">'.$this->escapeHtml($isChinese
+            ? '本报告用于自我理解和讨论，不用于诊断、录用筛选、升学录取或结果保证。'
+            : 'This report supports reflection and discussion. It is not a diagnosis, hiring screen, admission predictor, or outcome guarantee.').'</div>';
 
         return $html.'</body></html>';
     }
@@ -834,7 +903,7 @@ final class ReportPdfDocumentService
 
         $out = [];
         foreach ($value as $item) {
-            $line = trim((string) $item);
+            $line = is_scalar($item) ? trim((string) $item) : '';
             if ($line !== '') {
                 $out[] = $line;
             }

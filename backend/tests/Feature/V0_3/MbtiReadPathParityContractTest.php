@@ -9,6 +9,7 @@ use App\Models\Attempt;
 use App\Models\Result;
 use App\Services\Report\Composer\ReportComposeContext;
 use App\Services\Report\Composer\ReportPayloadAssembler;
+use App\Services\Report\Pdf\Mbti\MbtiPdfPayloadBuilder;
 use App\Services\Report\Pdf\ReportPdfDocumentService;
 use App\Services\Report\ReportGatekeeper;
 use App\Support\OrgContext;
@@ -251,6 +252,14 @@ final class MbtiReadPathParityContractTest extends TestCase
         $attempt = Attempt::query()->findOrFail($attemptId);
         $result = Result::query()->where('attempt_id', $attemptId)->firstOrFail();
 
+        /** @var MbtiPdfPayloadBuilder $payloadBuilder */
+        $payloadBuilder = app(MbtiPdfPayloadBuilder::class);
+        $pdfPayload = $payloadBuilder->build($attempt, $result)[MbtiPdfPayloadBuilder::PAYLOAD_KEY] ?? [];
+        $this->assertStringContainsString(
+            'A work style that tends to fit you',
+            json_encode(data_get($pdfPayload, 'result_page_sections'), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
+        );
+
         /** @var ReportPdfDocumentService $pdfService */
         $pdfService = app(ReportPdfDocumentService::class);
         $pdf = $pdfService->getOrGenerate(
@@ -272,15 +281,25 @@ final class MbtiReadPathParityContractTest extends TestCase
 
         $this->assertStringStartsWith('%PDF-1.4', $pdf['binary']);
         $this->assertStringContainsString('MPDFAA+', $pdf['binary']);
-        $this->assertGreaterThan(2, $this->pdfPageObjectCount($pdf['binary']));
+        $this->assertGreaterThan(8, $this->pdfPageObjectCount($pdf['binary']));
         $this->assertPdfContainsText($pdf['binary'], 'MBTI Full Personality Report');
         $this->assertPdfContainsText($pdf['binary'], 'Personality type');
         $this->assertPdfContainsText($pdf['binary'], 'INTJ-A');
+        $this->assertPdfContainsText($pdf['binary'], 'Extraversion');
+        $this->assertPdfContainsText($pdf['binary'], 'Introversion');
         $this->assertPdfContainsText($pdf['binary'], 'Dimension explanation');
         $this->assertPdfContainsText($pdf['binary'], 'Career direction');
         $this->assertPdfContainsText($pdf['binary'], 'Growth plan');
         $this->assertPdfContainsText($pdf['binary'], 'Relationships and communication');
         $this->assertPdfContainsText($pdf['binary'], 'How to use this report');
+        $this->assertPdfContainsText($pdf['binary'], 'Personality Traits');
+        $this->assertPdfContainsText($pdf['binary'], 'Your Career Path');
+        $this->assertPdfContainsText($pdf['binary'], 'Your Personal Growth');
+        $this->assertPdfContainsText($pdf['binary'], 'Your Relationships');
+        $this->assertPdfContainsText($pdf['binary'], 'Your core temperament pattern');
+        $this->assertPdfContainsText($pdf['binary'], 'One next step you can take now');
+        $this->assertPdfContainsText($pdf['binary'], 'A smoother communication script');
+        $this->assertPdfContainsText($pdf['binary'], 'Continue exploring career direction');
         $this->assertStringNotContainsString('Attempt ID:', $pdf['binary']);
         $this->assertStringNotContainsString('Locked:', $pdf['binary']);
         $this->assertStringNotContainsString('Variant:', $pdf['binary']);
@@ -294,7 +313,11 @@ final class MbtiReadPathParityContractTest extends TestCase
 
     private function assertPdfContainsText(string $pdfBinary, string $text): void
     {
-        $this->assertStringContainsString(mb_convert_encoding($text, 'UTF-16BE', 'UTF-8'), $pdfBinary);
+        $this->assertTrue(
+            str_contains($pdfBinary, $text)
+                || str_contains($pdfBinary, mb_convert_encoding($text, 'UTF-16BE', 'UTF-8')),
+            "PDF text missing: {$text}"
+        );
     }
 
     private function assertPdfDoesNotContainText(string $pdfBinary, string $text): void

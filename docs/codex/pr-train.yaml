@@ -215,6 +215,53 @@ prs:
     deploy_allowed: false
     content_authority: backend
 
+  - id: MBTI-PDF-PRODUCT-05
+    repo: fap-api
+    depends_on: [MBTI-PDF-PRODUCT-04]
+    branch: codex/mbti-pdf-product-05-result-page-coverage
+    title: "MBTI-PDF-PRODUCT-05: expand PDF coverage to result-page sections"
+    train_scope: mbti_pdf_product
+    status: user_authorized
+    scope:
+      - Add an MBTI PDF payload result_page_sections projection from backend MBTI result/content authority, not frontend DOM.
+      - Render traits, career, growth, and relationships result-page cards in the MBTI PDF with card titles, descriptions, bullets, tips, and tags.
+      - Replace hard-truncated chapter summaries with pagination-friendly structured card rendering.
+      - Show readable MBTI axis labels and left/right pole labels instead of only EI/SN/TF/JP/AT.
+      - Convert career recommendation entry points into non-interactive next-step guidance and bump the MBTI PDF surface version to v3 so old v2 cached artifacts are not reused.
+      - Keep /report.pdf, /report-access pdf_href shape, attachment filename contract, public routes, frontend, CMS, DB migrations, search, sitemap, llms, canonical, noindex, JSON-LD, queue, scheduler, staging deploy, and production deploy unchanged.
+    allowed_paths:
+      - backend/app/Services/Report/Pdf/Mbti/MbtiPdfPayloadBuilder.php
+      - backend/app/Services/Report/Pdf/ReportPdfDocumentService.php
+      - backend/tests/Unit/Services/Report/Pdf/Mbti/MbtiPdfPayloadBuilderTest.php
+      - backend/tests/Feature/V0_3/MbtiReadPathParityContractTest.php
+      - backend/tests/Feature/V0_3/AttemptPublicReportPdfParityTest.php
+      - backend/tests/Feature/V0_3/AttemptReportAccessReadTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Modify fap-web.
+      - Scrape or snapshot frontend DOM for PDF content.
+      - Change public API route paths, report-access pdf_href shape, frontend download behavior, CMS, DB migration, sitemap, llms, canonical, noindex, JSON-LD, search submission, scheduler, queue, secrets, staging deploy, or production deploy.
+      - Write CMS, run production import, run production smoke, or purge production PDF artifacts.
+    validation:
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/Report/Pdf/Mbti/MbtiPdfPayloadBuilderTest.php --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=MbtiReadPathParityContractTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=AttemptPublicReportPdfParityTest --no-ansi
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=AttemptReportAccessReadTest --no-ansi
+      - cd backend && vendor/bin/pint --test app/Services/Report/Pdf/Mbti/MbtiPdfPayloadBuilder.php app/Services/Report/Pdf/ReportPdfDocumentService.php tests/Unit/Services/Report/Pdf/Mbti/MbtiPdfPayloadBuilderTest.php tests/Feature/V0_3/MbtiReadPathParityContractTest.php tests/Feature/V0_3/AttemptPublicReportPdfParityTest.php tests/Feature/V0_3/AttemptReportAccessReadTest.php
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
+
   - id: PR-EQ-ASSET-02
     repo: fap-api
     depends_on: [PR-EQ-ASSET-01]

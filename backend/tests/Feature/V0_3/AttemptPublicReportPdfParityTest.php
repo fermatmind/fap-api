@@ -157,7 +157,7 @@ final class AttemptPublicReportPdfParityTest extends TestCase
         $pdf->assertHeader('Content-Type', 'application/pdf');
         $pdf->assertHeader('X-Report-Scale', 'MBTI');
         $pdf->assertHeader('X-Report-Locked', 'true');
-        $pdf->assertHeader('X-Pdf-Surface-Version', 'mbti.pdf_surface.v2');
+        $pdf->assertHeader('X-Pdf-Surface-Version', 'mbti.pdf_surface.v3');
 
         $pdfBinary = (string) $pdf->getContent();
         $this->assertStringStartsWith('%PDF-1.4', $pdfBinary);
@@ -168,7 +168,7 @@ final class AttemptPublicReportPdfParityTest extends TestCase
         );
         $this->assertStringEndsWith('.pdf"', (string) $pdf->headers->get('Content-Disposition'));
         Storage::disk('local')->assertExists(
-            "artifacts/pdf/MBTI/{$attemptId}/nohash-mbti.pdf_surface.v2/report_free.pdf"
+            "artifacts/pdf/MBTI/{$attemptId}/nohash-mbti.pdf_surface.v3/report_free.pdf"
         );
     }
 
