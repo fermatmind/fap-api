@@ -45,7 +45,17 @@ final class Eq60ReportPaywallTest extends TestCase
         $this->assertSame(ReportAccess::eq60FreeSectionKeys(), array_values((array) data_get($gate, 'view_policy.free_sections', [])));
         $this->assertFalse((bool) data_get($gate, 'view_policy.blur_others', true));
 
-        $sections = (array) data_get($gate, 'report.sections', []);
+        $this->assertNull(data_get($gate, 'report.sections'));
+        $this->assertNull(data_get($gate, 'report.compat'));
+        $this->assertNull(data_get($gate, 'report.report_tags'));
+        $this->assertNull(data_get($gate, 'report.report'));
+        $this->assertNull(data_get($gate, 'report.legacy_scores'));
+        $this->assertSame('v5_resolved_assets', (string) data_get($gate, 'report.display_contract.authority'));
+        $this->assertFalse((bool) data_get($gate, 'report.display_contract.legacy_compat_user_visible', true));
+        $this->assertFalse((bool) data_get($gate, 'report.legacy_compat.user_visible', true));
+        $this->assertSame('legacy_renderer_compatibility_only', (string) data_get($gate, 'report.legacy_compat.purpose'));
+
+        $sections = (array) data_get($gate, 'report.legacy_compat.sections', []);
         $this->assertNotEmpty($sections);
         $keys = array_map(
             static fn (array $section): string => (string) ($section['key'] ?? ''),
@@ -58,8 +68,8 @@ final class Eq60ReportPaywallTest extends TestCase
         foreach ($sections as $section) {
             $this->assertSame('free', (string) ($section['access_level'] ?? ''));
         }
-        $this->assertNotEmpty((array) data_get($gate, 'report.compat.free_blocks', []));
-        $this->assertSame([], (array) data_get($gate, 'report.compat.paid_blocks', []));
+        $this->assertNotEmpty((array) data_get($gate, 'report.legacy_compat.compat.free_blocks', []));
+        $this->assertSame([], (array) data_get($gate, 'report.legacy_compat.compat.paid_blocks', []));
 
         $this->assertSame('self_report', (string) data_get($gate, 'report.eq_report_mode'));
         $this->assertSame('self_report_trait_mixed_ei', (string) data_get($gate, 'report.measurement_type'));
@@ -135,11 +145,14 @@ final class Eq60ReportPaywallTest extends TestCase
         $this->assertSame([], (array) ($gate['offers'] ?? []));
         $this->assertSame([], (array) ($gate['modules_preview'] ?? []));
 
-        $sections = (array) data_get($gate, 'report.sections', []);
+        $sections = (array) data_get($gate, 'report.legacy_compat.sections', []);
         foreach ($sections as $section) {
             $this->assertSame('free', (string) ($section['access_level'] ?? ''));
         }
-        $this->assertSame([], (array) data_get($gate, 'report.compat.paid_blocks', []));
+        $this->assertSame([], (array) data_get($gate, 'report.legacy_compat.compat.paid_blocks', []));
+        $this->assertFalse((bool) data_get($gate, 'report.legacy_compat.user_visible', true));
+        $this->assertNull(data_get($gate, 'report.sections'));
+        $this->assertNull(data_get($gate, 'report.compat'));
     }
 
     public function test_eq60_report_access_fallback_is_ready_full_all_free(): void

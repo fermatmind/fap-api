@@ -148,6 +148,7 @@ final class Eq60ReportComposer
         $crossAssessmentContext = $this->crossAssessmentContextGuard->build($attempt, $result);
         $assetRefs = $this->buildV5AssetRefs($interpretation, $quality, $crossAssessmentContext);
         $resolvedAssets = $this->resolveV5Assets($reportAssets, $locale, $interpretation, $quality, $crossAssessmentContext);
+        $legacyCompat = $this->buildLegacyCompat($sections, $compatFree, $compatPaid, $score);
 
         return [
             'ok' => true,
@@ -164,24 +165,20 @@ final class Eq60ReportComposer
                     'blur' => false,
                     'paywall' => false,
                 ],
-                'sections' => $sections,
-                'compat' => [
-                    'free_blocks' => $compatFree,
-                    'paid_blocks' => $compatPaid,
+                'display_contract' => [
+                    'schema_version' => 'eq_60.display_contract.v1',
+                    'authority' => 'v5_resolved_assets',
+                    'user_visible_roots' => ['scores', 'dimension_summary', 'quality', 'interpretation', 'asset_refs', 'assets', 'next_module', 'methodology'],
+                    'legacy_compat_user_visible' => false,
                 ],
                 'quality' => $quality,
                 'scores' => $v5Scores,
                 'dimension_summary' => $dimensionSummary,
-                'legacy_scores' => is_array($score['scores'] ?? null) ? $score['scores'] : [],
-                'report' => is_array($score['report'] ?? null) ? $score['report'] : [],
-                'report_tags' => array_values(array_filter(
-                    array_map('strval', (array) ($score['report_tags'] ?? [])),
-                    static fn (string $tag): bool => $tag !== ''
-                )),
                 'interpretation' => $interpretation,
                 'cross_assessment_context' => $crossAssessmentContext,
                 'asset_refs' => $assetRefs,
                 'assets' => $resolvedAssets,
+                'legacy_compat' => $legacyCompat,
                 'next_module' => [
                     'available' => false,
                     'module_code' => 'EQ_SJT_16',
@@ -207,6 +204,33 @@ final class Eq60ReportComposer
                 ],
                 'generated_at' => now()->toISOString(),
             ],
+        ];
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $sections
+     * @param  list<array<string,mixed>>  $compatFree
+     * @param  list<array<string,mixed>>  $compatPaid
+     * @param  array<string,mixed>  $score
+     * @return array<string,mixed>
+     */
+    private function buildLegacyCompat(array $sections, array $compatFree, array $compatPaid, array $score): array
+    {
+        return [
+            'schema_version' => 'eq_60.legacy_compat.v1',
+            'user_visible' => false,
+            'purpose' => 'legacy_renderer_compatibility_only',
+            'sections' => $sections,
+            'compat' => [
+                'free_blocks' => $compatFree,
+                'paid_blocks' => $compatPaid,
+            ],
+            'legacy_scores' => is_array($score['scores'] ?? null) ? $score['scores'] : [],
+            'scorer_report' => is_array($score['report'] ?? null) ? $score['report'] : [],
+            'report_tags' => array_values(array_filter(
+                array_map('strval', (array) ($score['report_tags'] ?? [])),
+                static fn (string $tag): bool => $tag !== ''
+            )),
         ];
     }
 

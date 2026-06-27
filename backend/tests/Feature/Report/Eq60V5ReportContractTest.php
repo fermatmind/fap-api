@@ -334,6 +334,30 @@ final class Eq60V5ReportContractTest extends TestCase
         $this->assertFalse((bool) data_get($fixture, 'report.access.locked', true));
         $this->assertFalse((bool) data_get($fixture, 'report.access.blur', true));
         $this->assertFalse((bool) data_get($fixture, 'report.access.paywall', true));
+        $this->assertSame('eq_60.display_contract.v1', (string) data_get($fixture, 'report.display_contract.schema_version'));
+        $this->assertSame('v5_resolved_assets', (string) data_get($fixture, 'report.display_contract.authority'));
+        $this->assertFalse((bool) data_get($fixture, 'report.display_contract.legacy_compat_user_visible', true));
+        $this->assertSame([
+            'scores',
+            'dimension_summary',
+            'quality',
+            'interpretation',
+            'asset_refs',
+            'assets',
+            'next_module',
+            'methodology',
+        ], (array) data_get($fixture, 'report.display_contract.user_visible_roots'));
+        $this->assertNull(data_get($fixture, 'report.sections'));
+        $this->assertNull(data_get($fixture, 'report.compat'));
+        $this->assertNull(data_get($fixture, 'report.report_tags'));
+        $this->assertNull(data_get($fixture, 'report.report'));
+        $this->assertNull(data_get($fixture, 'report.legacy_scores'));
+        $this->assertSame('eq_60.legacy_compat.v1', (string) data_get($fixture, 'report.legacy_compat.schema_version'));
+        $this->assertFalse((bool) data_get($fixture, 'report.legacy_compat.user_visible', true));
+        $this->assertSame('legacy_renderer_compatibility_only', (string) data_get($fixture, 'report.legacy_compat.purpose'));
+        $this->assertNotEmpty((array) data_get($fixture, 'report.legacy_compat.sections'));
+        $this->assertNotEmpty((array) data_get($fixture, 'report.legacy_compat.compat.free_blocks'));
+        $this->assertSame([], (array) data_get($fixture, 'report.legacy_compat.compat.paid_blocks'));
         $this->assertIsArray(data_get($fixture, 'report.scores.global'));
         foreach (['SA', 'ER', 'EM', 'RM'] as $code) {
             $this->assertIsArray(data_get($fixture, 'report.scores.dimensions.'.$code));
@@ -439,7 +463,7 @@ final class Eq60V5ReportContractTest extends TestCase
             }
         };
 
-        foreach (['sections', 'assets'] as $key) {
+        foreach (['assets'] as $key) {
             $walk($payload[$key] ?? []);
         }
 
