@@ -22,19 +22,23 @@ final class PersonalityAgentPostPromotionSearchGateCommand extends Command
         'llms_full' => '/llms-full.txt',
     ];
 
-    private const PRIVATE_PATTERNS = [
-        '/results',
-        '/orders',
-        '/pay',
-        '/payment',
-        '/history',
-        '/private',
-        '/account',
-        'token=',
-        'session=',
-        'result_id=',
-        'report_id=',
-        'order_no=',
+    private const PRIVATE_ROUTE_FAMILIES = [
+        'result',
+        'results',
+        'orders',
+        'pay',
+        'payment',
+        'history',
+        'private',
+        'account',
+    ];
+
+    private const SENSITIVE_QUERY_KEYS = [
+        'token',
+        'session',
+        'result_id',
+        'report_id',
+        'order_no',
     ];
 
     protected $signature = 'personality:agent-post-promotion-search-gate
@@ -453,15 +457,80 @@ final class PersonalityAgentPostPromotionSearchGateCommand extends Command
      */
     private function privateMatches(string $text): array
     {
-        return array_values(array_filter(
-            self::PRIVATE_PATTERNS,
-            fn (string $pattern): bool => str_contains(strtolower($text), strtolower($pattern)),
-        ));
+        $matches = [];
+        $lower = strtolower($text);
+        foreach (self::SENSITIVE_QUERY_KEYS as $key) {
+            if (preg_match('/(?:[?&]|&amp;)'.preg_quote($key, '/').'=|(?:^|[\s"\'])'.preg_quote($key, '/').'=/i', $text) === 1) {
+                $matches[] = $key.'=';
+            }
+        }
+
+        if (preg_match_all('/https?:\/\/[^\s<>"\')]+/i', $text, $urlMatches) > 0) {
+            foreach ($urlMatches[0] as $url) {
+                $parts = parse_url($url);
+                if (! is_array($parts)) {
+                    continue;
+                }
+
+                $host = strtolower((string) ($parts['host'] ?? ''));
+                if (! in_array($host, ['fermatmind.com', 'www.fermatmind.com'], true)) {
+                    continue;
+                }
+
+                $path = $this->stripLocalePrefix($this->normalizePath((string) ($parts['path'] ?? '/')));
+                if ($this->isPrivateRoutePath($path)) {
+                    $matches[] = $url;
+                }
+
+                $query = (string) ($parts['query'] ?? '');
+                if ($query !== '') {
+                    parse_str($query, $queryParams);
+                    foreach (self::SENSITIVE_QUERY_KEYS as $key) {
+                        if (array_key_exists($key, $queryParams)) {
+                            $matches[] = $key.'=';
+                        }
+                    }
+                }
+            }
+        }
+
+        if (preg_match_all('/(?<![A-Za-z0-9_-])\/(?:(?:en|zh)\/)?(?:result|results|orders|pay|payment|history|private|account)(?:[\/?#\s<>"\')]|$)/i', $lower, $pathMatches) > 0) {
+            foreach ($pathMatches[0] as $match) {
+                $matches[] = trim($match);
+            }
+        }
+
+        return array_values(array_unique(array_filter($matches)));
     }
 
     private function containsPrivatePattern(string $text): bool
     {
         return $this->privateMatches($text) !== [];
+    }
+
+    private function normalizePath(string $path): string
+    {
+        $path = trim($path);
+        if ($path === '') {
+            return '/';
+        }
+        $path = str_starts_with($path, '/') ? $path : '/'.$path;
+
+        return rtrim(preg_replace('/\/+/', '/', $path) ?: '/', '/') ?: '/';
+    }
+
+    private function stripLocalePrefix(string $path): string
+    {
+        $stripped = preg_replace('/^\/(?:en|zh)(?=\/|$)/i', '', $path) ?: $path;
+
+        return $stripped === '' ? '/' : $stripped;
+    }
+
+    private function isPrivateRoutePath(string $path): bool
+    {
+        $firstSegment = strtolower(explode('/', trim($path, '/'))[0] ?? '');
+
+        return in_array($firstSegment, self::PRIVATE_ROUTE_FAMILIES, true);
     }
 
     private function baseUrl(): string

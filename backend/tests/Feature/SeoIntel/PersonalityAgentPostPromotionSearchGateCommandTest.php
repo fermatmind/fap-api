@@ -67,6 +67,52 @@ final class PersonalityAgentPostPromotionSearchGateCommandTest extends TestCase
     }
 
     #[Test]
+    public function dry_run_does_not_treat_public_results_article_slugs_as_private_surface_leakage(): void
+    {
+        $canonicalUrl = 'https://fermatmind.com/en/personality/enfj-a';
+        $this->seedSeoUrl($canonicalUrl);
+        $this->fakeHttp(
+            [$canonicalUrl],
+            surfaceExtra: "\nhttps://fermatmind.com/en/articles/results-interpretation-guide\nResults summary text for public reading."
+        );
+
+        $output = $this->runGate([
+            '--dry-run' => true,
+            '--json' => true,
+            '--urls' => $canonicalUrl,
+        ]);
+
+        $this->assertSame('GO_FOR_INDEXNOW_DRY_RUN', $output['final_decision'] ?? null);
+        $this->assertSame([], data_get($output, 'targets.0.sitemap_llms_membership.issues'));
+        $this->assertNotContains('sitemap_private_pattern_present', $output['issues'] ?? []);
+        $this->assertNotContains('llms_private_pattern_present', $output['issues'] ?? []);
+        $this->assertNotContains('llms_full_private_pattern_present', $output['issues'] ?? []);
+    }
+
+    #[Test]
+    public function dry_run_blocks_same_origin_private_routes_and_sensitive_query_keys_in_discoverability_surfaces(): void
+    {
+        $canonicalUrl = 'https://fermatmind.com/en/personality/enfj-a';
+        $this->seedSeoUrl($canonicalUrl);
+        $this->fakeHttp(
+            [$canonicalUrl],
+            surfaceExtra: "\nhttps://fermatmind.com/en/results/lookup\nhttps://fermatmind.com/en/personality/enfj-a?token=private"
+        );
+
+        $output = $this->runGate([
+            '--dry-run' => true,
+            '--json' => true,
+            '--urls' => $canonicalUrl,
+        ]);
+
+        $this->assertSame('NO_GO_SURFACE_OR_SAFETY', $output['final_decision'] ?? null);
+        $this->assertContains('sitemap_private_pattern_present', $output['issues'] ?? []);
+        $this->assertContains('llms_private_pattern_present', $output['issues'] ?? []);
+        $this->assertContains('llms_full_private_pattern_present', $output['issues'] ?? []);
+        $this->assertSame(0, DB::connection('seo_intel')->table('seo_search_channel_queue_items')->count());
+    }
+
+    #[Test]
     public function dry_run_reports_url_truth_refresh_required_when_hash_or_lastmod_is_missing(): void
     {
         $canonicalUrl = 'https://fermatmind.com/zh/personality/intp-a';
@@ -171,9 +217,9 @@ final class PersonalityAgentPostPromotionSearchGateCommandTest extends TestCase
     /**
      * @param  list<string>  $canonicalUrls
      */
-    private function fakeHttp(array $canonicalUrls, ?string $targetHtml = null): void
+    private function fakeHttp(array $canonicalUrls, ?string $targetHtml = null, string $surfaceExtra = ''): void
     {
-        $surfaceBody = implode("\n", $canonicalUrls);
+        $surfaceBody = implode("\n", $canonicalUrls).$surfaceExtra;
         $fakes = [
             'https://fermatmind.com/sitemap.xml' => Http::response($surfaceBody, 200),
             'https://fermatmind.com/llms.txt' => Http::response($surfaceBody, 200),
