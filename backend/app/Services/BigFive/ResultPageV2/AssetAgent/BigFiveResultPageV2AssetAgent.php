@@ -52,6 +52,8 @@ final class BigFiveResultPageV2AssetAgent
 
     private const PRODUCTION_OPS_RELATIVE_PATH = 'content_assets/big5/result_page_v2/qa/production_ops/v0_1';
 
+    private const BIG5_REGISTRY_RELATIVE_PATH = 'content_packs/BIG5_OCEAN/v2/registry';
+
     private const GITHUB_MUTATION_ALLOWED_PLAN_TASKS = [
         'auto_pr_orchestrator_plan',
         'auto_merge_cleanup_plan',
@@ -95,6 +97,61 @@ final class BigFiveResultPageV2AssetAgent
         'success prediction',
     ];
 
+    private const RENDERED_VISIBLE_TEXT_KEYS = [
+        'title',
+        'title_zh',
+        'title_en',
+        'summary',
+        'summary_zh',
+        'summary_en',
+        'body',
+        'body_zh',
+        'body_en',
+        'short_body',
+        'short_body_zh',
+        'short_body_en',
+        'action',
+        'action_zh',
+        'action_en',
+        'cta',
+        'cta_zh',
+        'cta_en',
+        'description',
+        'description_zh',
+        'description_en',
+        'copy',
+        'copy_zh',
+        'copy_en',
+        'text',
+        'text_zh',
+        'text_en',
+    ];
+
+    private const RENDERED_TEXT_SOURCE_PATH_PATTERNS = [
+        '#/canonical_profiles/#',
+        '#/trait_band_assets/#',
+        '#/facet_assets/#',
+        '#/coupling_assets/#',
+        '#/core_body/#',
+        '#/agent_runs/#',
+        '#/staging_candidate_imports/#',
+        '#/selector_ready_assets/#',
+    ];
+
+    private const FORBIDDEN_RENDERED_TEXT_PATTERNS = [
+        'selector_token_big5' => '/\bbig5:[A-Za-z0-9_.-]+/u',
+        'selector_token_band' => '/\bband:[A-Za-z0-9_.-]+/u',
+        'internal_payload_term' => '/\bpayload\b/iu',
+        'internal_registry_term' => '/\bregistry\b/iu',
+        'internal_pr3b_term' => '/\bPR3B\b/u',
+        'internal_report_engine_term' => '/\bBig Five Report Engine\b/u',
+        'internal_attempt_read_controller_term' => '/\bAttemptReadController\b/u',
+        'object_object_term' => '/\[object Object\]/u',
+        'broken_template_generated_by' => '/本\s*由\s*生成/u',
+        'broken_template_facet_coverage' => '/已覆盖.{0,40}facet/iu',
+        'broken_template_production_connected' => '/不代表生产\s*已接入/u',
+    ];
+
     public function __construct(
         private readonly BigFiveV2AssetPackageLoader $packageLoader = new BigFiveV2AssetPackageLoader,
         private readonly BigFiveResultPageV2SelectorAssetValidator $selectorValidator = new BigFiveResultPageV2SelectorAssetValidator,
@@ -128,7 +185,7 @@ final class BigFiveResultPageV2AssetAgent
         $inventory = $this->buildInventory($contentAssetRoot, $sourceLedgerDir);
         $assets = $this->collectSelectorAssets($contentAssetRoot);
         $validationReport = $this->buildValidationReport($assets);
-        $safetyReport = $this->buildSafetyReport($assets);
+        $safetyReport = $this->buildSafetyReport($assets, $contentAssetRoot);
         $opsReport = $this->buildOpsReport($inventory, $validationReport, $safetyReport, $assets, $artifactDir, $runId);
         $safetyReport = $this->withOpsReport($safetyReport, $opsReport);
         $qaSummary = $this->buildQaSummary($validationReport, $safetyReport, $opsReport);
@@ -1119,17 +1176,26 @@ final class BigFiveResultPageV2AssetAgent
      * @param  list<array<string,mixed>>  $assets
      * @return array<string,mixed>
      */
-    private function buildSafetyReport(array $assets): array
+    private function buildSafetyReport(array $assets, string $contentAssetRoot): array
     {
         $hits = [];
         foreach ($assets as $asset) {
             $sourceFile = (string) ($asset['_source_file'] ?? 'unknown');
             if (is_array($asset['public_payload'] ?? null)) {
                 $hits = array_merge($hits, $this->scanPayload((array) $asset['public_payload'], $sourceFile, 'public_payload'));
+                $hits = array_merge($hits, $this->scanRenderedVisibleText((array) $asset['public_payload'], $sourceFile, 'public_payload'));
             }
             if (($asset['shareable'] ?? false) === true && is_array($asset['public_payload'] ?? null)) {
                 $hits = array_merge($hits, $this->scanPayload((array) $asset['public_payload'], $sourceFile, 'shareable_public_payload'));
+                $hits = array_merge($hits, $this->scanRenderedVisibleText((array) $asset['public_payload'], $sourceFile, 'shareable_public_payload'));
             }
+        }
+        foreach ($this->renderedVisibleTextPayloads($contentAssetRoot) as $visiblePayload) {
+            $hits = array_merge($hits, $this->scanRenderedVisibleText(
+                (array) ($visiblePayload['payload'] ?? []),
+                (string) ($visiblePayload['source_file'] ?? 'unknown'),
+                (string) ($visiblePayload['surface'] ?? 'rendered_visible_text')
+            ));
         }
 
         return [
@@ -1139,6 +1205,7 @@ final class BigFiveResultPageV2AssetAgent
             'production_use_allowed' => false,
             'forbidden_public_fields' => self::FORBIDDEN_PUBLIC_FIELDS,
             'forbidden_public_terms' => self::FORBIDDEN_PUBLIC_TERMS,
+            'forbidden_rendered_text_rules' => array_keys(self::FORBIDDEN_RENDERED_TEXT_PATTERNS),
             'leak_scan' => [
                 'status' => $hits === [] ? 'pass' : 'blocked',
                 'hit_count' => count($hits),
@@ -2062,12 +2129,20 @@ final class BigFiveResultPageV2AssetAgent
                 $hits,
                 $this->scanPayload((array) ($candidate['public_payload'] ?? []), "selector_asset_candidate:{$index}", 'selector_public_payload')
             );
+            $hits = array_merge(
+                $hits,
+                $this->scanRenderedVisibleText((array) ($candidate['public_payload'] ?? []), "selector_asset_candidate:{$index}", 'selector_public_payload')
+            );
         }
         foreach ($contentCandidates as $index => $candidate) {
             $publicFields = array_intersect_key($candidate, array_flip(['title_zh', 'body_zh', 'short_body_zh', 'cta_zh']));
             $hits = array_merge(
                 $hits,
                 $this->scanPayload($publicFields, "content_asset_candidate:{$index}", 'content_public_fields')
+            );
+            $hits = array_merge(
+                $hits,
+                $this->scanRenderedVisibleText($publicFields, "content_asset_candidate:{$index}", 'content_public_fields')
             );
         }
 
@@ -2205,6 +2280,179 @@ final class BigFiveResultPageV2AssetAgent
         }
 
         return $hits;
+    }
+
+    /**
+     * @return list<array{source_file:string,surface:string,payload:array<string,mixed>}>
+     */
+    private function renderedVisibleTextPayloads(string $contentAssetRoot): array
+    {
+        $roots = [
+            $contentAssetRoot => 'content_asset_visible_text',
+            base_path(self::BIG5_REGISTRY_RELATIVE_PATH) => 'registry_visible_text',
+        ];
+        $payloads = [];
+
+        foreach ($roots as $root => $surface) {
+            if (! is_dir($root)) {
+                continue;
+            }
+
+            $iterator = new RecursiveIteratorIterator(
+                new RecursiveDirectoryIterator($root, RecursiveDirectoryIterator::SKIP_DOTS)
+            );
+
+            foreach ($iterator as $file) {
+                if (! $file instanceof SplFileInfo || ! $file->isFile()) {
+                    continue;
+                }
+
+                $path = $file->getPathname();
+                if (! $this->isRenderedVisibleTextSourceFile($path, $root)) {
+                    continue;
+                }
+
+                foreach ($this->readVisibleTextJsonPayloads($path) as $index => $payload) {
+                    $payloads[] = [
+                        'source_file' => $path.($index === 0 ? '' : '#'.$index),
+                        'surface' => $surface,
+                        'payload' => $payload,
+                    ];
+                }
+            }
+        }
+
+        return $payloads;
+    }
+
+    private function isRenderedVisibleTextSourceFile(string $path, string $root): bool
+    {
+        if (! in_array(pathinfo($path, PATHINFO_EXTENSION), ['json', 'jsonl'], true)) {
+            return false;
+        }
+
+        if ($root === base_path(self::BIG5_REGISTRY_RELATIVE_PATH)) {
+            return true;
+        }
+
+        $normalized = str_replace('\\', '/', $path);
+        foreach (self::RENDERED_TEXT_SOURCE_PATH_PATTERNS as $pattern) {
+            if (preg_match($pattern, $normalized) === 1) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @return list<array<string,mixed>>
+     */
+    private function readVisibleTextJsonPayloads(string $path): array
+    {
+        $extension = pathinfo($path, PATHINFO_EXTENSION);
+        if ($extension === 'jsonl') {
+            $payloads = [];
+            foreach ($this->readJsonl($path) as $row) {
+                $visible = $this->visibleTextFields($row);
+                if ($visible !== []) {
+                    $payloads[] = $visible;
+                }
+            }
+
+            return $payloads;
+        }
+
+        $decoded = $this->readOptionalJson($path);
+        if ($decoded === null) {
+            return [];
+        }
+
+        $visible = $this->visibleTextFields($decoded);
+
+        return $visible === [] ? [] : [$visible];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function visibleTextFields(array $payload): array
+    {
+        $visible = [];
+        $this->collectVisibleTextFields($payload, 'root', $visible);
+
+        return $visible;
+    }
+
+    /**
+     * @param  array<string,mixed>  $visible
+     */
+    private function collectVisibleTextFields(array $payload, string $path, array &$visible): void
+    {
+        foreach ($payload as $key => $value) {
+            $keyString = (string) $key;
+            $nextPath = $path.'.'.$keyString;
+
+            if (in_array($keyString, self::RENDERED_VISIBLE_TEXT_KEYS, true) && is_string($value) && trim($value) !== '') {
+                $visible[$nextPath] = $value;
+            }
+
+            if (is_array($value)) {
+                $this->collectVisibleTextFields($value, $nextPath, $visible);
+            }
+        }
+    }
+
+    /**
+     * @return list<array<string,string>>
+     */
+    private function scanRenderedVisibleText(array $payload, string $sourceFile, string $surface): array
+    {
+        $hits = [];
+        $visible = $this->visibleTextFields($payload);
+        if ($visible === [] && $this->isVisibleTextFieldMap($payload)) {
+            $visible = array_filter(
+                $payload,
+                static fn (mixed $value): bool => is_string($value) && trim($value) !== ''
+            );
+        }
+
+        foreach ($visible as $path => $value) {
+            foreach (self::FORBIDDEN_RENDERED_TEXT_PATTERNS as $label => $pattern) {
+                if (preg_match($pattern, $value) === 1) {
+                    $hits[] = [
+                        'surface' => $surface,
+                        'source_file' => $this->redactPath($sourceFile),
+                        'kind' => 'rendered_hygiene',
+                        'value' => $label,
+                        'field' => $path,
+                    ];
+                }
+            }
+        }
+
+        return $hits;
+    }
+
+    private function isVisibleTextFieldMap(array $payload): bool
+    {
+        if ($payload === []) {
+            return false;
+        }
+
+        foreach ($payload as $key => $value) {
+            if (! is_string($value)) {
+                return false;
+            }
+
+            $segments = explode('.', (string) $key);
+            $lastSegment = end($segments);
+            if (! is_string($lastSegment) || ! in_array($lastSegment, self::RENDERED_VISIBLE_TEXT_KEYS, true)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**

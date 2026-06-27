@@ -62,6 +62,8 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
 
             $safety = $this->readJson($runDir.'/safety_report.json');
             $this->assertSame('pass', data_get($safety, 'leak_scan.status'));
+            $this->assertContains('selector_token_big5', (array) ($safety['forbidden_rendered_text_rules'] ?? []));
+            $this->assertContains('broken_template_generated_by', (array) ($safety['forbidden_rendered_text_rules'] ?? []));
 
             $goNoGo = (string) file_get_contents($runDir.'/go_no_go.md');
             $this->assertStringContainsString('ready_for_runtime: false', $goNoGo);
@@ -1286,6 +1288,101 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
             $safety = $this->readJson($root.'/artifacts/strict-leak/safety_report.json');
             $this->assertSame('blocked', data_get($safety, 'leak_scan.status'));
             $this->assertGreaterThanOrEqual(3, (int) data_get($safety, 'leak_scan.hit_count'));
+        } finally {
+            $this->deleteDirectory($root);
+        }
+    }
+
+    public function test_strict_mode_rejects_rendered_hygiene_leaks_without_raw_evidence(): void
+    {
+        $root = $this->tempDir('big5-v2-agent-rendered-hygiene');
+        $contentRoot = $root.'/content_assets/big5/result_page_v2';
+        mkdir($contentRoot.'/selector_ready_assets/v0_3_p0_full', 0777, true);
+        mkdir($contentRoot.'/trait_band_assets/v0_1', 0777, true);
+
+        file_put_contents($contentRoot.'/selector_ready_assets/v0_3_p0_full/assets.jsonl', json_encode([
+            'version' => 'fap.big5.result_page_v2.selector_asset.v0.1',
+            'asset_key' => 'rendered_hygiene_leaky_asset',
+            'registry_key' => 'share_safety_registry',
+            'module_key' => 'module_08_share_save',
+            'block_key' => 'module_08_share_save.share_safety.rendered_hygiene_leak',
+            'block_kind' => 'share_save',
+            'slot_key' => 'share_save.safety_transform',
+            'trigger' => [
+                'score_bands' => [],
+                'interpretation_scopes' => ['share_safe_summary_only'],
+                'reading_mode' => ['quick'],
+                'scenario' => ['share'],
+            ],
+            'priority' => 10,
+            'mutual_exclusion_group' => 'share_safety.rendered_hygiene_leak',
+            'can_stack_with' => [],
+            'reading_modes' => ['quick'],
+            'scenario' => 'share',
+            'scope' => 'share_safe_summary_only',
+            'required_evidence_level' => 'descriptive',
+            'evidence_level' => 'descriptive',
+            'safety_level' => 'share_safe',
+            'shareable' => true,
+            'shareable_policy' => 'required_for_every_shareable_true_block',
+            'fallback_policy' => 'share_safe_summary_only',
+            'content_source' => 'fixture',
+            'provenance' => 'unit-test',
+            'replacement_policy' => 'unit-test',
+            'forbidden_public_fields' => [],
+            'review_status' => 'fixture_only',
+            'public_payload' => [
+                'title_zh' => 'Visible selector tokens big5:o_mid and band:o.mid must not render.',
+                'summary_zh' => 'Visible internals mention payload registry PR3B AttemptReadController Big Five Report Engine [object Object].',
+            ],
+            'internal_metadata' => [],
+        ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE).PHP_EOL);
+
+        file_put_contents($contentRoot.'/trait_band_assets/v0_1/rendered_hygiene_fixture.json', json_encode([
+            'asset_id' => 'rendered_hygiene_fixture',
+            'body_zh' => '本 由 生成； 已覆盖 30 条 与 22 条 facet，不代表生产 已接入。',
+        ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+
+        try {
+            $summary = app(BigFiveResultPageV2AssetAgent::class)->audit([
+                'run_id' => 'strict-rendered-hygiene',
+                'artifact_dir' => $root.'/artifacts',
+                'content_asset_root' => $contentRoot,
+                'source_ledger_dir' => $root.'/missing-source-ledger',
+                'strict' => true,
+            ]);
+
+            $this->assertFalse((bool) ($summary['ok'] ?? true));
+            $this->assertContains('forbidden_leak_hits', $summary['strict_failures']);
+
+            $safety = $this->readJson($root.'/artifacts/strict-rendered-hygiene/safety_report.json');
+            $this->assertSame('blocked', data_get($safety, 'leak_scan.status'));
+            $hitValues = array_column((array) data_get($safety, 'leak_scan.hits', []), 'value');
+            foreach ([
+                'selector_token_big5',
+                'selector_token_band',
+                'internal_payload_term',
+                'internal_registry_term',
+                'internal_pr3b_term',
+                'internal_attempt_read_controller_term',
+                'internal_report_engine_term',
+                'object_object_term',
+                'broken_template_generated_by',
+                'broken_template_facet_coverage',
+                'broken_template_production_connected',
+            ] as $expectedRule) {
+                $this->assertContains($expectedRule, $hitValues);
+            }
+
+            $safetyText = (string) file_get_contents($root.'/artifacts/strict-rendered-hygiene/safety_report.json');
+            foreach ([
+                'big5:o_mid',
+                'band:o.mid',
+                'Visible internals mention',
+                '本 由 生成',
+            ] as $forbiddenEvidenceText) {
+                $this->assertStringNotContainsString($forbiddenEvidenceText, $safetyText, $forbiddenEvidenceText);
+            }
         } finally {
             $this->deleteDirectory($root);
         }
