@@ -1230,6 +1230,96 @@ final class BigFiveResultPageV2AssetAgentTest extends TestCase
         }
     }
 
+    public function test_committed_method_boundary_v0_5_normalized_candidates_are_reviewed_and_staging_only(): void
+    {
+        $artifactRoot = $this->tempDir('big5-v2-agent-method-boundary-v0-5-normalized');
+        $agentRunDir = base_path('content_assets/big5/result_page_v2/agent_runs/method_boundary_v0_5_normalized');
+
+        try {
+            foreach ([
+                'README.md',
+                'SHA256SUMS.txt',
+                'selector_asset_candidates.jsonl',
+                'content_asset_candidates.jsonl',
+                'normalization_manifest.json',
+                'normalization_validation_summary.json',
+                'review_manifest.json',
+            ] as $filename) {
+                $this->assertFileExists($agentRunDir.'/'.$filename);
+            }
+
+            $manifest = $this->readJson($agentRunDir.'/normalization_manifest.json');
+            $validation = $this->readJson($agentRunDir.'/normalization_validation_summary.json');
+            $review = $this->readJson($agentRunDir.'/review_manifest.json');
+
+            $this->assertSame('staging_only', $manifest['runtime_use'] ?? null);
+            $this->assertFalse((bool) ($manifest['production_use_allowed'] ?? true));
+            $this->assertFalse((bool) ($manifest['ready_for_pilot'] ?? true));
+            $this->assertFalse((bool) ($manifest['ready_for_runtime'] ?? true));
+            $this->assertFalse((bool) ($manifest['ready_for_production'] ?? true));
+            $this->assertSame(14, data_get($manifest, 'counts.selector_asset_candidates'));
+            $this->assertSame(14, data_get($manifest, 'counts.content_asset_candidates'));
+            $this->assertSame(0, data_get($manifest, 'source_qa_scan_summary.hit_count'));
+
+            $this->assertTrue((bool) ($review['human_reviewed'] ?? false));
+            $this->assertSame('approved_for_staging', $review['review_status'] ?? null);
+            $this->assertSame('staging_only', $review['runtime_use'] ?? null);
+            $this->assertFalse((bool) ($review['production_use_allowed'] ?? true));
+            $this->assertFalse((bool) ($review['ready_for_pilot'] ?? true));
+            $this->assertTrue((bool) data_get($review, 'review_scope.normalization_only'));
+            $this->assertTrue((bool) data_get($review, 'review_scope.staging_import_deferred'));
+            $this->assertFalse((bool) data_get($review, 'review_checks.staging_import_performed'));
+
+            $this->assertTrue((bool) ($validation['ok'] ?? false));
+            $this->assertFalse((bool) ($validation['staging_write_performed'] ?? true));
+            $this->assertSame('pass', data_get($validation, 'candidate_validation.status'));
+            $this->assertSame(0, data_get($validation, 'candidate_validation.error_count'));
+            $this->assertSame('pass', data_get($validation, 'leak_scan.status'));
+            $this->assertSame(0, data_get($validation, 'leak_scan.hit_count'));
+
+            $summary = app(BigFiveResultPageV2AssetAgent::class)->stageCandidates([
+                'run_id' => 'method-boundary-v0-5-normalized-test',
+                'artifact_dir' => $artifactRoot,
+                'candidate_dir' => $agentRunDir,
+                'allow_staging_write' => false,
+            ]);
+
+            $this->assertTrue((bool) ($summary['ok'] ?? false));
+            $this->assertSame(14, data_get($summary, 'summary.selector_candidate_count'));
+            $this->assertSame(14, data_get($summary, 'summary.content_candidate_count'));
+            $this->assertSame(0, data_get($summary, 'summary.validation_error_count'));
+            $this->assertSame(0, data_get($summary, 'summary.review_error_count'));
+            $this->assertSame(0, data_get($summary, 'summary.leak_hit_count'));
+            $this->assertFalse((bool) data_get($summary, 'summary.staging_write_performed'));
+            $this->assertSame([], $summary['staging_artifacts'] ?? ['unexpected']);
+
+            $allArtifacts = implode("\n", array_map(
+                static fn (string $path): string => (string) file_get_contents($path),
+                glob($agentRunDir.'/*') ?: []
+            ));
+
+            foreach ([
+                'private_url',
+                'attempt_id',
+                'raw_score',
+                'percentile',
+                'fixed_type',
+                'user_confirmed_type',
+                'type_code',
+                'big5:',
+                'band:',
+                'PR3B',
+                'AttemptReadController',
+                'Big Five Report Engine',
+                '[object Object]',
+            ] as $forbiddenToken) {
+                $this->assertStringNotContainsString($forbiddenToken, $allArtifacts, $forbiddenToken);
+            }
+        } finally {
+            $this->deleteDirectory($artifactRoot);
+        }
+    }
+
     public function test_strict_mode_rejects_public_payload_and_shareable_score_leaks(): void
     {
         $root = $this->tempDir('big5-v2-agent-leak');
