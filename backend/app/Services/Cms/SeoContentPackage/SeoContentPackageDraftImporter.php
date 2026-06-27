@@ -774,8 +774,8 @@ final class SeoContentPackageDraftImporter
      */
     private function readMarkdownPage(string $path): array
     {
-        $contents = (string) file_get_contents($path);
-        if (preg_match('/\A---\R(.*?)\R---\R(.*)\z/s', $contents, $matches) !== 1) {
+        $contents = $this->normalizeLineEndings((string) file_get_contents($path));
+        if (preg_match('/\A---\n(.*?)\n---\n(.*)\z/s', $contents, $matches) !== 1) {
             return ['frontmatter' => [], 'body' => trim($contents)];
         }
 
@@ -791,10 +791,10 @@ final class SeoContentPackageDraftImporter
     private function parseSimpleFrontmatter(string $yaml): array
     {
         $data = [];
-        $lines = preg_split('/\R/', $yaml) ?: [];
+        $lines = explode("\n", $this->normalizeLineEndings($yaml));
         $currentKey = null;
         foreach ($lines as $line) {
-            if (preg_match('/^([A-Za-z0-9_-]+):\s*(.*)$/', $line, $matches) === 1) {
+            if (preg_match('/^([A-Za-z0-9_-]+):\s*(.*)$/u', $line, $matches) === 1) {
                 $currentKey = (string) $matches[1];
                 $value = trim((string) $matches[2]);
                 $data[$currentKey] = $value === '' ? [] : $this->parseScalar($value);
@@ -802,7 +802,7 @@ final class SeoContentPackageDraftImporter
                 continue;
             }
 
-            if ($currentKey !== null && preg_match('/^\s*-\s*(.+)$/', $line, $matches) === 1) {
+            if ($currentKey !== null && preg_match('/^\s*-\s*(.+)$/u', $line, $matches) === 1) {
                 if (! is_array($data[$currentKey] ?? null)) {
                     $data[$currentKey] = [];
                 }
@@ -811,6 +811,11 @@ final class SeoContentPackageDraftImporter
         }
 
         return $data;
+    }
+
+    private function normalizeLineEndings(string $value): string
+    {
+        return str_replace(["\r\n", "\r"], "\n", $value);
     }
 
     private function parseScalar(string $value): mixed
@@ -921,6 +926,7 @@ final class SeoContentPackageDraftImporter
                 $errors[] = $this->issue($locale.'.'.$field, 'missing_required_field', $field.' is required.');
             }
         }
+        $this->validateUtf8ScalarFields($item, $errors);
 
         if (! is_string($item['primary_keyword'] ?? null)) {
             $errors[] = $this->issue($locale.'.primary_keyword', 'primary_keyword_not_string', 'primary_keyword must be a string.');
@@ -967,6 +973,25 @@ final class SeoContentPackageDraftImporter
 
         if (trim((string) $item['twitter_image_url']) === '') {
             $warnings[] = $this->issue($locale.'.twitter_image_url', 'twitter_image_reuses_og', 'Twitter image is missing and should reuse OG if needed.');
+        }
+    }
+
+    /**
+     * @param  array<string,mixed>  $item
+     * @param  list<array<string,mixed>>  $errors
+     */
+    private function validateUtf8ScalarFields(array $item, array &$errors): void
+    {
+        $locale = (string) ($item['locale'] ?? 'unknown');
+        foreach (['title', 'meta_title', 'meta_description', 'excerpt', 'body_markdown'] as $field) {
+            $value = $item[$field] ?? null;
+            if (is_string($value) && ! mb_check_encoding($value, 'UTF-8')) {
+                $errors[] = $this->issue(
+                    $locale.'.'.$field,
+                    'invalid_utf8_scalar',
+                    $field.' must be valid UTF-8 before it can be written to article draft fields.'
+                );
+            }
         }
     }
 

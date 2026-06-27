@@ -450,6 +450,52 @@ final class ArticleImportSeoContentPackageDraftCommandTest extends TestCase
         Http::assertNothingSent();
     }
 
+    public function test_import_preserves_zh_utf8_frontmatter_meta_draft_fallback_without_corruption(): void
+    {
+        $metaTitle = '高考志愿要不要服从调剂？先看不能接受专业 | FermatMind';
+        $metaDescription = '填院校专业组前，别先争服从调剂。先把全部专业分成不能接受、待验证、可接受。';
+        $package = $this->writeModeCPackage(static function (array &$files) use ($metaTitle, $metaDescription): void {
+            foreach ([
+                'manifest.json',
+                'cms/CMS_FIELDS_zh-CN_career-interest-vs-personality-test-differences.json',
+                'cms/CMS_IMPORT_DRAFT_zh-CN_career-interest-vs-personality-test-differences.json',
+            ] as $path) {
+                unset(
+                    $files[$path]['meta_title'],
+                    $files[$path]['meta_title_draft'],
+                    $files[$path]['meta_description'],
+                    $files[$path]['meta_description_draft']
+                );
+            }
+
+            $files['pages/zh-CN-career-interest-vs-personality-test-differences.md'] = str_replace(
+                "canonical_url_draft: /zh/articles/career-interest-vs-personality-test-differences\n",
+                "canonical_url_draft: /zh/articles/career-interest-vs-personality-test-differences\nmeta_title_draft: {$metaTitle}\nmeta_description_draft: {$metaDescription}\n",
+                $files['pages/zh-CN-career-interest-vs-personality-test-differences.md']
+            );
+        });
+
+        $exitCode = Artisan::call('articles:import-seo-content-package-draft', $this->commandOptions($package, [
+            '--locales' => 'zh-CN',
+            '--expected-en-slug' => '',
+            '--json' => true,
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+
+        $revision = ArticleTranslationRevision::query()
+            ->withoutGlobalScopes()
+            ->where('locale', 'zh-CN')
+            ->firstOrFail();
+
+        $this->assertSame($metaTitle, (string) $revision->seo_title);
+        $this->assertSame($metaDescription, (string) $revision->seo_description);
+        $this->assertTrue(mb_check_encoding((string) $revision->seo_title, 'UTF-8'));
+        $this->assertTrue(mb_check_encoding((string) $revision->seo_description, 'UTF-8'));
+    }
+
     public function test_import_serializes_multilingual_heading_sequence_with_smart_and_fullwidth_punctuation(): void
     {
         $package = $this->writeModeCPackage(static function (array &$files): void {
@@ -479,7 +525,7 @@ final class ArticleImportSeoContentPackageDraftCommandTest extends TestCase
         );
     }
 
-    public function test_import_normalizes_malformed_utf8_heading_sequence_with_sanitized_warning(): void
+    public function test_dry_run_rejects_malformed_utf8_body_scalar_before_database_write(): void
     {
         $malformed = (string) hex2bin('c328');
         $package = $this->writeModeCPackage(static function (array &$files) use ($malformed): void {
@@ -491,20 +537,16 @@ final class ArticleImportSeoContentPackageDraftCommandTest extends TestCase
         });
 
         $exitCode = Artisan::call('articles:import-seo-content-package-draft', $this->commandOptions($package, [
+            '--dry-run' => true,
             '--json' => true,
         ]));
 
         $payload = $this->jsonOutput();
-        $this->assertSame(0, $exitCode);
-        $this->assertTrue($payload['ok']);
-        $this->assertWarningCode($payload, 'json_string_utf8_normalized');
-
-        $importLog = ArticleEditorialPackageImport::query()
-            ->withoutGlobalScopes()
-            ->where('locale', 'en')
-            ->firstOrFail();
-
-        $this->assertContains('2:Broken �( heading', $importLog->heading_sequence_json);
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertErrorCode($payload, 'invalid_utf8_scalar');
+        $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
+        $this->assertSame(0, ArticleEditorialPackageImport::query()->withoutGlobalScopes()->count());
     }
 
     public function test_malformed_utf8_in_review_context_does_not_crash_import_audit_json(): void
