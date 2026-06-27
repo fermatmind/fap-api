@@ -112,6 +112,73 @@ final class ArticleUpdateExistingSeoContentPackageCommandTest extends TestCase
         $this->assertSame(0, (int) $import->references_count);
     }
 
+    public function test_execute_preserves_zh_utf8_frontmatter_meta_draft_fallback_without_corruption(): void
+    {
+        $this->createExistingPublishedArticle40();
+        $metaTitle = '高考志愿要不要服从调剂？先看不能接受专业 | FermatMind';
+        $metaDescription = '填院校专业组前，别先争服从调剂。先把全部专业分成不能接受、待验证、可接受。';
+        $package = $this->writeExistingUpdatePackage(static function (array &$files) use ($metaTitle, $metaDescription): void {
+            foreach ([
+                'cms/CMS_IMPORT_UPDATE_DRAFT_zh-CN_article-40_riasec-holland-career-interest-test-explained.json',
+                'cms/CMS_FIELDS_UPDATE_zh-CN_article-40_riasec-holland-career-interest-test-explained.json',
+            ] as $path) {
+                unset(
+                    $files[$path]['meta_title'],
+                    $files[$path]['meta_description']
+                );
+            }
+
+            $files['pages/zh-CN-riasec-holland-career-interest-test-explained.md'] = str_replace(
+                "canonical_url_draft: {self::CANONICAL}\n",
+                "canonical_url_draft: {self::CANONICAL}\nmeta_title_draft: {$metaTitle}\nmeta_description_draft: {$metaDescription}\n",
+                $files['pages/zh-CN-riasec-holland-career-interest-test-explained.md']
+            );
+        });
+
+        $exitCode = Artisan::call('articles:update-existing-seo-content-package', $this->commandOptions($package, [
+            '--execute' => true,
+            '--json' => true,
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+
+        $article = Article::query()
+            ->withoutGlobalScopes()
+            ->with('workingRevision')
+            ->findOrFail(self::ARTICLE_ID);
+
+        $this->assertSame($metaTitle, (string) $article->workingRevision?->seo_title);
+        $this->assertSame($metaDescription, (string) $article->workingRevision?->seo_description);
+        $this->assertTrue(mb_check_encoding((string) $article->workingRevision?->seo_title, 'UTF-8'));
+        $this->assertTrue(mb_check_encoding((string) $article->workingRevision?->seo_description, 'UTF-8'));
+    }
+
+    public function test_dry_run_rejects_malformed_utf8_update_body_scalar_before_database_write(): void
+    {
+        $this->createExistingPublishedArticle40();
+        $malformed = (string) hex2bin('c328');
+        $package = $this->writeExistingUpdatePackage(static function (array &$files) use ($malformed): void {
+            $files['pages/zh-CN-riasec-holland-career-interest-test-explained.md'] = str_replace(
+                "## 霍兰德职业兴趣测试是什么\n",
+                "## Broken {$malformed} heading\n\n## 霍兰德职业兴趣测试是什么\n",
+                $files['pages/zh-CN-riasec-holland-career-interest-test-explained.md']
+            );
+        });
+
+        $exitCode = Artisan::call('articles:update-existing-seo-content-package', $this->commandOptions($package, [
+            '--dry-run' => true,
+            '--json' => true,
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertErrorCode($payload, 'invalid_utf8_scalar');
+        $this->assertSame(0, ArticleEditorialPackageImport::query()->withoutGlobalScopes()->count());
+    }
+
     public function test_dry_run_rejects_identity_lock_article_id_mismatch(): void
     {
         $this->createExistingPublishedArticle40();

@@ -618,8 +618,8 @@ final class SeoContentPackageExistingArticleUpdater
      */
     private function readMarkdownPage(string $path): array
     {
-        $contents = (string) file_get_contents($path);
-        if (preg_match('/\A---\R(.*?)\R---\R(.*)\z/s', $contents, $matches) !== 1) {
+        $contents = $this->normalizeLineEndings((string) file_get_contents($path));
+        if (preg_match('/\A---\n(.*?)\n---\n(.*)\z/s', $contents, $matches) !== 1) {
             return ['frontmatter' => [], 'body' => trim($contents)];
         }
 
@@ -635,10 +635,10 @@ final class SeoContentPackageExistingArticleUpdater
     private function parseSimpleFrontmatter(string $yaml): array
     {
         $data = [];
-        $lines = preg_split('/\R/', $yaml) ?: [];
+        $lines = explode("\n", $this->normalizeLineEndings($yaml));
         $currentKey = null;
         foreach ($lines as $line) {
-            if (preg_match('/^([A-Za-z0-9_-]+):\s*(.*)$/', $line, $matches) === 1) {
+            if (preg_match('/^([A-Za-z0-9_-]+):\s*(.*)$/u', $line, $matches) === 1) {
                 $currentKey = (string) $matches[1];
                 $value = trim((string) $matches[2]);
                 $data[$currentKey] = $value === '' ? [] : $this->parseScalar($value);
@@ -646,7 +646,7 @@ final class SeoContentPackageExistingArticleUpdater
                 continue;
             }
 
-            if ($currentKey !== null && preg_match('/^\s*-\s*(.+)$/', $line, $matches) === 1) {
+            if ($currentKey !== null && preg_match('/^\s*-\s*(.+)$/u', $line, $matches) === 1) {
                 if (! is_array($data[$currentKey] ?? null)) {
                     $data[$currentKey] = [];
                 }
@@ -655,6 +655,11 @@ final class SeoContentPackageExistingArticleUpdater
         }
 
         return $data;
+    }
+
+    private function normalizeLineEndings(string $value): string
+    {
+        return str_replace(["\r\n", "\r"], "\n", $value);
     }
 
     private function parseScalar(string $value): mixed
@@ -695,6 +700,7 @@ final class SeoContentPackageExistingArticleUpdater
                 $errors[] = $this->issue($locale.'.'.$field, 'missing_required_field', $field.' is required.');
             }
         }
+        $this->validateUtf8ScalarFields($item, $errors);
 
         if ((bool) $item['schema_hold'] !== true) {
             $errors[] = $this->issue($locale.'.schema_hold', 'schema_hold_not_satisfied', 'schema_hold must remain true.');
@@ -719,6 +725,25 @@ final class SeoContentPackageExistingArticleUpdater
         }
 
         $this->articleBodyHeadingGuard->assertNoBodyH1((string) $item['body_markdown']);
+    }
+
+    /**
+     * @param  array<string,mixed>  $item
+     * @param  list<array<string,mixed>>  $errors
+     */
+    private function validateUtf8ScalarFields(array $item, array &$errors): void
+    {
+        $locale = (string) ($item['locale'] ?? 'unknown');
+        foreach (['title', 'meta_title', 'meta_description', 'excerpt', 'body_markdown'] as $field) {
+            $value = $item[$field] ?? null;
+            if (is_string($value) && ! mb_check_encoding($value, 'UTF-8')) {
+                $errors[] = $this->issue(
+                    $locale.'.'.$field,
+                    'invalid_utf8_scalar',
+                    $field.' must be valid UTF-8 before it can be written to article draft fields.'
+                );
+            }
+        }
     }
 
     /**
