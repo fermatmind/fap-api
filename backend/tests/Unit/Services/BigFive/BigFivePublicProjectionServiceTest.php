@@ -54,6 +54,8 @@ final class BigFivePublicProjectionServiceTest extends TestCase
         $this->assertSame('O1', data_get($projection, 'facet_vector.2.key'));
         $this->assertSame(93, data_get($projection, 'facet_vector.2.percentile'));
         $this->assertContains('profile:explorer', (array) ($projection['variant_keys'] ?? []));
+        $this->assertFalse($this->containsStringRecursive($projection, 'big5:'));
+        $this->assertFalse($this->containsStringRecursive($projection, 'band:'));
         $this->assertSame('exploratory', data_get($projection, 'scene_fingerprint.novelty'));
         $this->assertSame('traits.overview', data_get($projection, 'ordered_section_keys.0'));
         $this->assertSame('career.work_style', data_get($projection, 'ordered_section_keys.3'));
@@ -159,6 +161,23 @@ final class BigFivePublicProjectionServiceTest extends TestCase
                 return true;
             }
             if (is_array($value) && $this->containsKeyRecursive($value, $key)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param  array<string,mixed>|list<mixed>  $payload
+     */
+    private function containsStringRecursive(array $payload, string $needle): bool
+    {
+        foreach ($payload as $value) {
+            if (is_string($value) && str_contains($value, $needle)) {
+                return true;
+            }
+            if (is_array($value) && $this->containsStringRecursive($value, $needle)) {
                 return true;
             }
         }
