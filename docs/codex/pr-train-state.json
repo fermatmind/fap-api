@@ -3835,7 +3835,7 @@
         "status": "pass"
       }
     },
-    "commit_sha": null,
+    "commit_sha": "595811fa6f8aa2047b5f057aa4d8a96176871e609",
     "depends_on": [],
     "failure_reason": null,
     "local_cleanup_executed": false,
@@ -18838,10 +18838,10 @@
     "failure_reason": null,
     "local_cleanup_executed": false,
     "merged_at": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2467",
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "local_validated",
+    "status": "pr_open",
     "title": "MBTI-PDF-PRODUCT-05: expand PDF coverage to result-page sections",
     "train_scope": "mbti_pdf_product",
     "transitions": [
@@ -18854,6 +18854,11 @@
         "at": "2026-06-27T00:00:00+08:00",
         "note": "Expanded MBTI PDF payload to schema v0_2 with result_page_sections, rendered result-page sections in the mPDF HTML renderer, bumped the MBTI PDF surface to v3, added readable axis pole labels, and validated focused PHPUnit/Pint/JSON/YAML/diff checks. No frontend, public route, CMS, DB migration, search, queue, scheduler, staging deploy, or production deploy change.",
         "status": "local_validated"
+      },
+      {
+        "at": "2026-06-27T00:00:00+08:00",
+        "note": "Opened PR #2467 at https://github.com/fermatmind/fap-api/pull/2467. Waiting for required GitHub checks; no staging deploy wait, manual deploy, server verification, or production deploy included.",
+        "status": "pr_open"
       }
     ]
   },
