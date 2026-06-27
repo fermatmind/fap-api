@@ -59,8 +59,10 @@ final class IqNormsImportDryRunTest extends TestCase
 
     public function test_iq_norm_import_activates_claim_ready_owner30_authority(): void
     {
-        $this->artisan('norms:iq:import --file=tests/Fixtures/iq/norms/iq_owner30_claim_ready_valid.json --dry-run=0 --activate=1 --require-claim-ready=1')
-            ->expectsOutputToContain('validated scale=IQ_INTELLIGENCE_QUOTIENT bank=IQ_OWNER_ORIGINAL_30 version=iq_owner30_norm_fixture_v1 rows=3 claim_eligible=true')
+        $fixture = $this->productionClaimReadyFixture();
+
+        $this->artisan('norms:iq:import --file='.$fixture.' --dry-run=0 --activate=1 --require-claim-ready=1')
+            ->expectsOutputToContain('validated scale=IQ_INTELLIGENCE_QUOTIENT bank=IQ_OWNER_ORIGINAL_30 version=iq_owner30_norm_authority_activation_test_v1 rows=3 claim_eligible=true')
             ->expectsOutputToContain('activated owner IQ 30 norm authority.')
             ->expectsOutputToContain('imported_authority_id=')
             ->expectsOutputToContain('version_lock=new_authority_candidate')
@@ -70,7 +72,7 @@ final class IqNormsImportDryRunTest extends TestCase
 
         $this->assertNotNull($authority);
         $this->assertSame('IQ_OWNER_ORIGINAL_30', $authority->bank_id);
-        $this->assertSame('iq_owner30_norm_fixture_v1', $authority->norm_table_version);
+        $this->assertSame('iq_owner30_norm_authority_activation_test_v1', $authority->norm_table_version);
         $this->assertSame('production_normed', $authority->status);
         $this->assertSame(1200, (int) $authority->sample_size);
         $this->assertSame(1, (int) $authority->license_verified);
@@ -80,6 +82,22 @@ final class IqNormsImportDryRunTest extends TestCase
         $this->assertSame('IQ-OWNER-30-NORM-AUTHORITY-04A', $metadata['import_scope'] ?? null);
         $this->assertSame(3, $metadata['rows_count'] ?? null);
         $this->assertTrue((bool) data_get($metadata, 'claim_gate.claim_eligible'));
+    }
+
+    public function test_iq_norm_import_rejects_simulation_fixture_activation(): void
+    {
+        $command = 'norms:iq:import --file=tests/Fixtures/iq/norms/iq_owner30_claim_ready_valid.json';
+
+        $this->artisan($command.' --dry-run=1 --require-claim-ready=1')
+            ->expectsOutputToContain('dry-run=1, no write performed.')
+            ->expectsOutputToContain('validated scale=IQ_INTELLIGENCE_QUOTIENT bank=IQ_OWNER_ORIGINAL_30 version=iq_owner30_norm_fixture_v1 rows=3 claim_eligible=true')
+            ->assertExitCode(0);
+
+        $this->artisan($command.' --dry-run=0 --activate=1 --require-claim-ready=1')
+            ->expectsOutputToContain('simulation_or_fixture_authority_requires_dry_run_only')
+            ->assertExitCode(1);
+
+        $this->assertSame(0, DB::table('iq_norm_authorities')->count());
     }
 
     public function test_iq_norm_import_rejects_non_owner30_activation(): void
@@ -97,7 +115,8 @@ final class IqNormsImportDryRunTest extends TestCase
 
     public function test_iq_norm_import_rejects_duplicate_locked_authority_version(): void
     {
-        $command = 'norms:iq:import --file=tests/Fixtures/iq/norms/iq_owner30_claim_ready_valid.json --dry-run=0 --activate=1 --require-claim-ready=1';
+        $fixture = $this->productionClaimReadyFixture();
+        $command = 'norms:iq:import --file='.$fixture.' --dry-run=0 --activate=1 --require-claim-ready=1';
 
         $this->artisan($command)
             ->expectsOutputToContain('activated owner IQ 30 norm authority.')
@@ -122,5 +141,21 @@ final class IqNormsImportDryRunTest extends TestCase
         file_put_contents($path, json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
 
         return $path;
+    }
+
+    private function productionClaimReadyFixture(): string
+    {
+        return $this->temporaryFixture([
+            'norm_table_version' => 'iq_owner30_norm_authority_activation_test_v1',
+            'source_kind' => 'reviewed_calibration_authority',
+            'source_ref' => 'internal-calibration://iq_owner30_norm_authority_activation_test_v1',
+            'evidence' => [
+                'authority_kind' => 'reviewed_owner_original_30_calibration',
+                'claim_basis' => 'test-local reviewed source URI for guarded activation path validation',
+                'standardization_population' => 'general_adult_online',
+                'administration_mode' => 'online',
+                'score_interpretation' => 'norm-referenced IQ estimate allowed only after claim gate passes',
+            ],
+        ]);
     }
 }
