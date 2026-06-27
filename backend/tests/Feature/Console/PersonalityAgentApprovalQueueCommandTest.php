@@ -96,6 +96,68 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
         $this->assertSame(0, DB::table('personality_agent_approval_items')->count());
     }
 
+    public function test_competitor_gap_content_expansion_pass_can_enter_human_approval_queue_dry_run_only(): void
+    {
+        [$packagePath, $qaPath] = $this->writeArtifacts(
+            $this->competitorGapExpansionPackage(),
+            $this->competitorGapExpansionQa()
+        );
+
+        $exitCode = Artisan::call('personality:agent-approval-queue', [
+            '--package' => $packagePath,
+            '--qa' => $qaPath,
+            '--dry-run' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertSame('pass', $payload['status']);
+        $this->assertSame('mbti64', $payload['framework']);
+        $this->assertSame('PASS_READY_FOR_EDITORIAL_REVIEW_AND_APPROVAL_QUEUE_REPAIR', $payload['qa_final_decision']);
+        $this->assertTrue($payload['dry_run']);
+        $this->assertFalse($payload['write']);
+        $this->assertFalse($payload['writes_attempted']);
+        $this->assertFalse($payload['writes_committed']);
+        $this->assertFalse($payload['cms_write_attempted']);
+        $this->assertFalse($payload['cms_mutation_attempted']);
+        $this->assertFalse($payload['publish_attempted']);
+        $this->assertFalse($payload['index_attempted']);
+        $this->assertFalse($payload['sitemap_llms_release_attempted']);
+        $this->assertFalse($payload['search_release_attempted']);
+        $this->assertFalse($payload['enqueue_attempted']);
+        $this->assertFalse($payload['external_calls_attempted']);
+        $this->assertFalse($payload['live_content_updated']);
+        $this->assertSame(6, $payload['planned_item_count']);
+        $this->assertSame(0, $payload['blocked_item_count']);
+        $this->assertSame(0, $payload['created_item_count']);
+        $this->assertSame([], $payload['errors']);
+        $this->assertSame(
+            [
+                'https://fermatmind.com/zh/personality/intp-a',
+                'https://fermatmind.com/zh/personality/esfp-a',
+                'https://fermatmind.com/en/personality/enfj-a',
+                'https://fermatmind.com/en/personality/intp-a',
+                'https://fermatmind.com/en/personality/esfp-a',
+                'https://fermatmind.com/zh/personality/enfj-a',
+            ],
+            array_map(
+                static fn (array $item): string => (string) $item['target_url'],
+                $payload['items']
+            )
+        );
+        $this->assertSame(
+            ['PASS_READY_FOR_CONTENT_EXPANSION_REVIEW'],
+            array_values(array_unique(array_map(
+                static fn (array $item): string => (string) $item['qa_decision'],
+                $payload['items']
+            )))
+        );
+        $this->assertSame(0, DB::table('personality_agent_approval_batches')->count());
+        $this->assertSame(0, DB::table('personality_agent_approval_items')->count());
+    }
+
     public function test_auto_qa_approval_handoff_pass_can_enter_human_approval_queue_dry_run_only(): void
     {
         [$packagePath, $qaPath] = $this->writeArtifacts($this->autoApprovalHandoffPackage(), $this->autoApprovalHandoffQa());
@@ -876,6 +938,68 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
                 $this->qaRow('https://fermatmind.com/zh/personality/intp-a', 'PASS_READY_FOR_APPROVAL_REVIEW'),
                 $this->qaRow('https://fermatmind.com/zh/personality/esfp-a', 'PASS_READY_FOR_APPROVAL_REVIEW'),
                 $this->qaRow('https://fermatmind.com/en/personality/enfj-a', 'PASS_READY_FOR_APPROVAL_REVIEW'),
+            ],
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function competitorGapExpansionPackage(): array
+    {
+        return [
+            'artifact' => 'MBTI64-NEXT-BATCH-6-COMPETITOR-GAP-CONTENT-EXPANSION-01',
+            'status' => 'pass',
+            'recommendations' => [
+                $this->recommendation(
+                    'mbti64-next-batch-6-competitor-gap:/zh/personality/intp-a',
+                    'https://fermatmind.com/zh/personality/intp-a',
+                    'zh-CN'
+                ),
+                $this->recommendation(
+                    'mbti64-next-batch-6-competitor-gap:/zh/personality/esfp-a',
+                    'https://fermatmind.com/zh/personality/esfp-a',
+                    'zh-CN'
+                ),
+                $this->recommendation(
+                    'mbti64-next-batch-6-competitor-gap:/en/personality/enfj-a',
+                    'https://fermatmind.com/en/personality/enfj-a',
+                    'en'
+                ),
+                $this->recommendation(
+                    'mbti64-next-batch-6-competitor-gap:/en/personality/intp-a',
+                    'https://fermatmind.com/en/personality/intp-a',
+                    'en'
+                ),
+                $this->recommendation(
+                    'mbti64-next-batch-6-competitor-gap:/en/personality/esfp-a',
+                    'https://fermatmind.com/en/personality/esfp-a',
+                    'en'
+                ),
+                $this->recommendation(
+                    'mbti64-next-batch-6-competitor-gap:/zh/personality/enfj-a',
+                    'https://fermatmind.com/zh/personality/enfj-a',
+                    'zh-CN'
+                ),
+            ],
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function competitorGapExpansionQa(): array
+    {
+        return [
+            'artifact' => 'MBTI64-NEXT-BATCH-6-COMPETITOR-GAP-CONTENT-EXPANSION-QA-01',
+            'final_decision' => 'PASS_READY_FOR_EDITORIAL_REVIEW_AND_APPROVAL_QUEUE_REPAIR',
+            'page_results' => [
+                $this->qaRow('https://fermatmind.com/zh/personality/intp-a', 'PASS_READY_FOR_CONTENT_EXPANSION_REVIEW'),
+                $this->qaRow('https://fermatmind.com/zh/personality/esfp-a', 'PASS_READY_FOR_CONTENT_EXPANSION_REVIEW'),
+                $this->qaRow('https://fermatmind.com/en/personality/enfj-a', 'PASS_READY_FOR_CONTENT_EXPANSION_REVIEW'),
+                $this->qaRow('https://fermatmind.com/en/personality/intp-a', 'PASS_READY_FOR_CONTENT_EXPANSION_REVIEW'),
+                $this->qaRow('https://fermatmind.com/en/personality/esfp-a', 'PASS_READY_FOR_CONTENT_EXPANSION_REVIEW'),
+                $this->qaRow('https://fermatmind.com/zh/personality/enfj-a', 'PASS_READY_FOR_CONTENT_EXPANSION_REVIEW'),
             ],
         ];
     }

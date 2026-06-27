@@ -719,6 +719,7 @@ final class PersonalityAgentApprovalQueueWriter
             'PASS_READY_FOR_APPROVAL_QUEUE',
             'PASS_READY_FOR_APPROVAL_REVIEW',
             'PASS_READY_FOR_APPROVAL_HANDOFF',
+            'PASS_READY_FOR_CONTENT_EXPANSION_REVIEW',
             'READY_QUERY_BACKED_LOW_RISK_DRAFT_REVIEW',
         ], true);
     }
