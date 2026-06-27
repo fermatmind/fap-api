@@ -524,6 +524,16 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_disabled_gotenberg_pdf_engine_spike_files(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/PdfGotenbergSpikeCommand.php',
+            'backend/app/Services/Report/Pdf/GotenbergChromiumPdfClient.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_eq_cross_assessment_context_guard_changes(): void
     {
         $changed = [
@@ -4744,6 +4754,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isGotenbergPdfEngineSpikeFile($file)) {
+                continue;
+            }
+
             if ($this->isPublicContentReleaseGuardCommandFile($file)) {
                 continue;
             }
@@ -6199,6 +6213,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isMbtiPdfPayloadAuthorityFile(string $file): bool
     {
         return $file === 'backend/app/Services/Report/Pdf/Mbti/MbtiPdfPayloadBuilder.php';
+    }
+
+    private function isGotenbergPdfEngineSpikeFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Console/Commands/PdfGotenbergSpikeCommand.php',
+            'backend/app/Services/Report/Pdf/GotenbergChromiumPdfClient.php',
+        ], true);
     }
 
     private function isPublicContentReleaseGuardCommandFile(string $file): bool
