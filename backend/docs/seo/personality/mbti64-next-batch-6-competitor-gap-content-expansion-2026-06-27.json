@@ -1,0 +1,757 @@
+{
+  "artifact": "MBTI64-NEXT-BATCH-6-COMPETITOR-GAP-CONTENT-EXPANSION-01",
+  "generated_at": "2026-06-27T00:00:00.000Z",
+  "status": "pass",
+  "final_decision": "PASS_READY_FOR_CONTENT_EXPANSION_QA_AND_EDITORIAL_REVIEW",
+  "input_artifacts": {
+    "prior_handoff_package": "docs/seo/personality/personality-agent-operations-next-batch-6-handoff-package-2026-06-25.json",
+    "prior_handoff_qa": "docs/seo/personality/personality-agent-operations-next-batch-6-handoff-qa-2026-06-25.json"
+  },
+  "source_ledger": [
+    {
+      "source_id": "fermatmind_next_batch_6_handoff",
+      "source_type": "internal_artifact",
+      "path": "docs/seo/personality/personality-agent-operations-next-batch-6-handoff-package-2026-06-25.json",
+      "how_used": "Defines the six already processed MBTI64 next-batch target URLs and existing agent handoff rows."
+    },
+    {
+      "source_id": "fermatmind_next_batch_6_qa",
+      "source_type": "internal_artifact",
+      "path": "docs/seo/personality/personality-agent-operations-next-batch-6-handoff-qa-2026-06-25.json",
+      "how_used": "Confirms prior QA pass state for the six target URLs before this competitor-gap expansion."
+    },
+    {
+      "source_id": "competitor_16personalities",
+      "source_type": "competitor_scan",
+      "url": "https://www.16personalities.com/",
+      "how_used": "Used only for high-level SERP positioning and A/T intent awareness; no text copied."
+    },
+    {
+      "source_id": "competitor_truity",
+      "source_type": "competitor_scan",
+      "url": "https://www.truity.com/personality-type/",
+      "how_used": "Identified durable content modules such as values, motivations, rarity, public questions, and hobbies; no text copied."
+    },
+    {
+      "source_id": "competitor_crystal",
+      "source_type": "competitor_scan",
+      "url": "https://www.crystalknows.com/personality-type/",
+      "how_used": "Identified practical content modules such as blind spots, communication, relationships, motivations, stressors, and growth opportunities; no text copied."
+    },
+    {
+      "source_id": "competitor_personality_junkie",
+      "source_type": "competitor_scan",
+      "url": "https://personalityjunkie.com/",
+      "how_used": "Identified cognitive-function and type-development depth as an English SERP differentiator; no text copied."
+    }
+  ],
+  "target_count": 6,
+  "recommendations": [
+    {
+      "recommendation_id": "mbti64-next-batch-6-competitor-gap:/zh/personality/intp-a",
+      "target_url": "https://fermatmind.com/zh/personality/intp-a",
+      "path": "/zh/personality/intp-a",
+      "framework": "mbti64",
+      "locale": "zh",
+      "type_code": "INTP-A",
+      "evidence_class": "query_backed",
+      "paired_path": "/en/personality/intp-a",
+      "competitor_gap_basis": [
+        "SERP competitors emphasize richer A/T intent, type-development depth, practical scenarios, communication guidance, motivations, stressors, and public question-answer blocks.",
+        "Current live pages are indexable and long-form, but their first content modules are still template-like and include duplicate headings.",
+        "This package adds differentiated modules without copying competitor text or changing production CMS directly."
+      ],
+      "recommendations": {
+        "title": "INTP-A 人格特点：理性建模、独立判断与稳定推进",
+        "description": "深入了解 INTP-A 如何分析问题、建立模型、处理不确定性，并区分 INTP-A 与 INTP-T 在自信、复盘和行动推进上的差异。",
+        "h1": "INTP-A 人格特点",
+        "quick_answer": "INTP-A 通常把世界看成可以拆解和重组的系统。他们更信任自己的逻辑判断，能在信息不完整时先形成假设并推进验证；需要注意的是，过早相信模型也可能低估沟通、情绪和执行同步的成本。",
+        "sections": [
+          {
+            "key": "at_difference",
+            "title": "INTP-A 与 INTP-T 的关键差异",
+            "body": "INTP-A 更容易在完成分析后相信自己的结论，并把注意力放在下一步验证或实现上。INTP-T 往往更容易回看漏洞、反复校准标准，也更在意外界反馈是否暴露了盲区。两者都可以很理性，差别主要在压力下的自我确认速度、复盘强度和对不确定性的容忍方式。"
+          },
+          {
+            "key": "cognitive_behavior_mechanism",
+            "title": "行为机制：先建模型，再测试世界",
+            "body": "INTP-A 的常见路径是先抽象出规则，再用案例、数据或反例测试规则是否成立。这个过程像是在脑中搭建一个小型系统：哪些变量重要，哪些假设可以暂时忽略，哪里存在结构性矛盾。优势是能快速抓住问题骨架；风险是如果模型太早闭合，就可能错过人的动机、团队节奏和现实限制。"
+          },
+          {
+            "key": "work_scenario_example",
+            "title": "工作场景案例：技术评审里的 INTP-A",
+            "body": "在一次产品故障复盘中，INTP-A 可能先追问系统如何失效、日志里哪些信号相互矛盾、当前解释是否能覆盖所有边界情况。他们的价值在于把混乱问题拆成可验证假设。更好的做法是同时说明自己的推理路径，让同事知道结论不是否定他人，而是在压缩问题空间。"
+          },
+          {
+            "key": "common_misreads",
+            "title": "常见误读",
+            "bullets": [
+              "看起来冷静，不代表没有感受；他们可能只是先处理结构问题。",
+              "看起来不爱跟进，不代表不负责；他们可能需要把任务变成清晰问题才会稳定推进。",
+              "自信不等于固执；健康的 INTP-A 会保留反证入口，而不是把第一版模型当成最终答案。"
+            ]
+          }
+        ],
+        "faq": [
+          {
+            "question": "INTP-A 和 INTP-T 最大差别是什么？",
+            "answer": "INTP-A 通常更快相信自己的判断，INTP-T 更容易反复校准和寻求确认。差别不是能力高低，而是压力、反馈和不确定性下的自我调节方式。"
+          },
+          {
+            "question": "INTP-A 是否更适合技术或研究工作？",
+            "answer": "这类工作常能发挥分析和建模优势，但是否适合还取决于兴趣、训练、执行习惯和环境支持，不能只靠类型决定。"
+          },
+          {
+            "question": "INTP-A 会不会显得冷漠？",
+            "answer": "有时会。原因通常不是不在乎，而是先处理逻辑和问题结构。主动补充背景、意图和情绪确认能减少误解。"
+          },
+          {
+            "question": "INTP-A 的主要盲点是什么？",
+            "answer": "常见盲点是低估沟通成本、执行细节和他人接受信息的节奏。"
+          },
+          {
+            "question": "INTP-A 如何成长？",
+            "answer": "保留模型优势，同时练习把推理过程说出来，定期邀请反例，并把抽象想法拆成可交付步骤。"
+          },
+          {
+            "question": "这页能替代正式测评吗？",
+            "answer": "不能。它是公开解释页，适合自我理解和沟通反思，不用于诊断、招聘筛选或决定人生选择。"
+          }
+        ],
+        "internal_links": [
+          {
+            "href": "/zh/personality/intp-t",
+            "anchor_text": "INTP-T",
+            "safe_public_route": true,
+            "reason": "Supports A/T comparison, paired next-batch navigation, or public test intent without private-result routes."
+          },
+          {
+            "href": "/zh/personality/intp-a-vs-intp-t",
+            "anchor_text": "INTP-A 与 INTP-T 对比",
+            "safe_public_route": true,
+            "reason": "Supports A/T comparison, paired next-batch navigation, or public test intent without private-result routes."
+          },
+          {
+            "href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "anchor_text": "MBTI 人格测试",
+            "safe_public_route": true,
+            "reason": "Supports A/T comparison, paired next-batch navigation, or public test intent without private-result routes."
+          },
+          {
+            "href": "/zh/personality/enfj-a",
+            "anchor_text": "ENFJ-A",
+            "safe_public_route": true,
+            "reason": "Supports A/T comparison, paired next-batch navigation, or public test intent without private-result routes."
+          },
+          {
+            "href": "/zh/personality/esfp-a",
+            "anchor_text": "ESFP-A",
+            "safe_public_route": true,
+            "reason": "Supports A/T comparison, paired next-batch navigation, or public test intent without private-result routes."
+          }
+        ],
+        "bilingual_parity_notes": [
+          "Paired counterpart: /en/personality/intp-a",
+          "The paired page preserves the same A/T, mechanism, work scenario, misread, question-answer, and internal-link intent while using native-language wording.",
+          "Chinese headings are localized and must not render English question labels or raw relation-key labels."
+        ],
+        "claim_boundary_notes": [
+          "No claim of trademark-owner affiliation, certification, or formal test authority.",
+          "No diagnosis, hiring screen, ability ranking, relationship destiny, or deterministic career promise.",
+          "A/T is framed as self-regulation and feedback-response pattern, not superiority."
+        ]
+      },
+      "recommended_next_task": "MBTI64-NEXT-BATCH-6-COMPETITOR-GAP-CONTENT-EXPANSION-QA-01"
+    },
+    {
+      "recommendation_id": "mbti64-next-batch-6-competitor-gap:/en/personality/intp-a",
+      "target_url": "https://fermatmind.com/en/personality/intp-a",
+      "path": "/en/personality/intp-a",
+      "framework": "mbti64",
+      "locale": "en",
+      "type_code": "INTP-A",
+      "evidence_class": "bilingual_paired_counterpart",
+      "paired_path": "/zh/personality/intp-a",
+      "competitor_gap_basis": [
+        "SERP competitors emphasize richer A/T intent, type-development depth, practical scenarios, communication guidance, motivations, stressors, and public question-answer blocks.",
+        "Current live pages are indexable and long-form, but their first content modules are still template-like and include duplicate headings.",
+        "This package adds differentiated modules without copying competitor text or changing production CMS directly."
+      ],
+      "recommendations": {
+        "title": "INTP-A Meaning: Independent Analysis, Model Building and Steady Follow-Through",
+        "description": "Understand how INTP-A profiles analyze problems, build internal models, handle uncertainty and differ from INTP-T in self-trust and review intensity.",
+        "h1": "INTP-A Meaning",
+        "quick_answer": "INTP-A usually approaches the world as a system that can be analyzed, tested and improved. Compared with a more turbulence-sensitive INTP pattern, the assertive variant tends to trust its reasoning sooner and move into validation, while still needing safeguards against over-closing a model too early.",
+        "sections": [
+          {
+            "key": "at_difference",
+            "title": "INTP-A vs INTP-T: the practical difference",
+            "body": "INTP-A is more likely to treat a working conclusion as usable once the logic holds. INTP-T is more likely to keep rechecking assumptions, seeking correction and scanning for possible blind spots. The difference is not ability; it is how quickly the person stabilizes after uncertainty, criticism or incomplete information."
+          },
+          {
+            "key": "cognitive_behavior_mechanism",
+            "title": "Behavior mechanism: build the model, then test reality",
+            "body": "A common INTP-A sequence is to abstract the rule, test it against examples and then refine the model. This can make them strong at diagnosis, architecture, research and problem decomposition. The risk is that a clean model can feel more complete than the messy social or operational context around it."
+          },
+          {
+            "key": "work_scenario_example",
+            "title": "Work scenario: INTP-A in a technical review",
+            "body": "In a product incident review, an INTP-A may focus on which assumption failed, which logs contradict the first explanation and whether the current theory covers edge cases. This is useful when a team needs a sharper problem frame. It works best when the person also explains the reasoning path, so direct questions are understood as model testing rather than personal criticism."
+          },
+          {
+            "key": "common_misreads",
+            "title": "Common misreads",
+            "bullets": [
+              "Detached does not mean indifferent; the person may be prioritizing structure before expression.",
+              "Independent does not mean uncooperative; the person may need a clearer problem frame before joining execution.",
+              "Confident does not mean closed-minded; the healthy version keeps a live channel for counterexamples."
+            ]
+          }
+        ],
+        "faq": [
+          {
+            "question": "What is the main difference between INTP-A and INTP-T?",
+            "answer": "INTP-A usually stabilizes around its own reasoning faster, while INTP-T tends to review, recheck and monitor feedback more intensely. It is a regulation difference, not a rank."
+          },
+          {
+            "question": "Is INTP-A better for technical work?",
+            "answer": "Technical and research settings can fit the analysis pattern, but fit still depends on interest, training, collaboration and execution habits."
+          },
+          {
+            "question": "Can INTP-A seem emotionally distant?",
+            "answer": "Yes, especially when the person focuses on logic first. Naming the intent behind questions and checking the social context can reduce that impression."
+          },
+          {
+            "question": "What is a common INTP-A blind spot?",
+            "answer": "A common blind spot is underestimating communication cost, follow-through detail or how much context others need before a conclusion feels usable."
+          },
+          {
+            "question": "How can INTP-A grow?",
+            "answer": "Keep the modeling strength, but practice exposing assumptions, inviting counterexamples and turning abstract conclusions into concrete next steps."
+          },
+          {
+            "question": "Is this page a diagnosis?",
+            "answer": "No. It is a public personality explanation for reflection and communication, not a clinical, hiring or deterministic decision tool."
+          }
+        ],
+        "internal_links": [
+          {
+            "href": "/en/personality/intp-t",
+            "anchor_text": "INTP-T",
+            "safe_public_route": true,
+            "reason": "Supports A/T comparison, paired next-batch navigation, or public test intent without private-result routes."
+          },
+          {
+            "href": "/en/personality/intp-a-vs-intp-t",
+            "anchor_text": "INTP-A vs INTP-T",
+            "safe_public_route": true,
+            "reason": "Supports A/T comparison, paired next-batch navigation, or public test intent without private-result routes."
+          },
+          {
+            "href": "/en/tests/mbti-personality-test-16-personality-types",
+            "anchor_text": "MBTI personality test",
+            "safe_public_route": true,
+            "reason": "Supports A/T comparison, paired next-batch navigation, or public test intent without private-result routes."
+          },
+          {
+            "href": "/en/personality/enfj-a",
+            "anchor_text": "ENFJ-A",
+            "safe_public_route": true,
+            "reason": "Supports A/T comparison, paired next-batch navigation, or public test intent without private-result routes."
+          },
+          {
+            "href": "/en/personality/esfp-a",
+            "anchor_text": "ESFP-A",
+            "safe_public_route": true,
+            "reason": "Supports A/T comparison, paired next-batch navigation, or public test intent without private-result routes."
+          }
+        ],
+        "bilingual_parity_notes": [
+          "Paired counterpart: /zh/personality/intp-a",
+          "The paired page preserves the same A/T, mechanism, work scenario, misread, question-answer, and internal-link intent while using native-language wording.",
+          "Chinese headings are localized and must not render English question labels or raw relation-key labels."
+        ],
+        "claim_boundary_notes": [
+          "No claim of trademark-owner affiliation, certification, or formal test authority.",
+          "No diagnosis, hiring screen, ability ranking, relationship destiny, or deterministic career promise.",
+          "A/T is framed as self-regulation and feedback-response pattern, not superiority."
+        ]
+      },
+      "recommended_next_task": "MBTI64-NEXT-BATCH-6-COMPETITOR-GAP-CONTENT-EXPANSION-QA-01"
+    },
+    {
+      "recommendation_id": "mbti64-next-batch-6-competitor-gap:/zh/personality/esfp-a",
+      "target_url": "https://fermatmind.com/zh/personality/esfp-a",
+      "path": "/zh/personality/esfp-a",
+      "framework": "mbti64",
+      "locale": "zh",
+      "type_code": "ESFP-A",
+      "evidence_class": "query_backed",
+      "paired_path": "/en/personality/esfp-a",
+      "competitor_gap_basis": [
+        "SERP competitors emphasize richer A/T intent, type-development depth, practical scenarios, communication guidance, motivations, stressors, and public question-answer blocks.",
+        "Current live pages are indexable and long-form, but their first content modules are still template-like and include duplicate headings.",
+        "This package adds differentiated modules without copying competitor text or changing production CMS directly."
+      ],
+      "recommendations": {
+        "title": "ESFP-A 人格特点：现场感、行动能量与稳定自信",
+        "description": "了解 ESFP-A 如何通过现场体验、社交能量和即时反馈行动，并区分 ESFP-A 与 ESFP-T 在自信、恢复和长期规划上的差异。",
+        "h1": "ESFP-A 人格特点",
+        "quick_answer": "ESFP-A 往往通过真实场景、具体反馈和人与人的互动来判断下一步。他们更容易带动气氛、快速回应机会，并在反馈后较快恢复；需要注意的是，强现场感也可能让长期规划、深度复盘和困难对话被推迟。",
+        "sections": [
+          {
+            "key": "at_difference",
+            "title": "ESFP-A 与 ESFP-T 的关键差异",
+            "body": "ESFP-A 通常更能从负面反馈中恢复，继续用行动试探机会。ESFP-T 更可能反复琢磨自己是否表现得足够好，也更容易受评价影响。两者都可以热情、有表现力，差别主要在外部反馈之后的恢复速度和自我怀疑强度。"
+          },
+          {
+            "key": "cognitive_behavior_mechanism",
+            "title": "行为机制：用现场信息校准行动",
+            "body": "ESFP-A 常通过人的反应、气氛变化、身体感受和可见结果来判断事情是否可行。优势是能快速读懂场景并让事情动起来；风险是如果只依赖现场反馈，可能低估长期后果、系统约束或未表达出来的反对意见。"
+          },
+          {
+            "key": "work_scenario_example",
+            "title": "工作场景案例：活动现场里的 ESFP-A",
+            "body": "在一场客户活动出现流程延误时，ESFP-A 可能先稳定现场情绪、调动参与感、用临场沟通争取时间。他们能把僵硬流程变成可继续推进的体验。更好的做法是在活动后补一轮复盘，把临场解决方案转成下次可以复用的流程。"
+          },
+          {
+            "key": "common_misreads",
+            "title": "常见误读",
+            "bullets": [
+              "活跃不等于肤浅；他们可能是通过体验和反馈理解世界。",
+              "不爱长篇计划不等于没有责任感；他们往往需要把计划连接到具体场景。",
+              "自信不等于不会受伤；只是恢复方式更偏行动和重新参与。"
+            ]
+          }
+        ],
+        "faq": [
+          {
+            "question": "ESFP-A 和 ESFP-T 最大差别是什么？",
+            "answer": "ESFP-A 通常更快从反馈中恢复并继续行动，ESFP-T 更容易反复确认自己是否被认可或是否做得足够好。"
+          },
+          {
+            "question": "ESFP-A 是否总是外向？",
+            "answer": "不一定。ESFP-A 更常被具体体验和人际互动激活，但也需要恢复空间和有质量的关系。"
+          },
+          {
+            "question": "ESFP-A 是否不擅长规划？",
+            "answer": "不是。挑战通常在于把长期目标转成具体、可感知、能马上推进的步骤。"
+          },
+          {
+            "question": "ESFP-A 适合什么工作？",
+            "answer": "适合度取决于能力和兴趣。需要现场判断、服务体验、展示沟通或快速响应的环境可能更容易发挥其优势。"
+          },
+          {
+            "question": "ESFP-A 如何处理冲突？",
+            "answer": "健康的 ESFP-A 可以用直接、温暖和现实感化解紧张；需要避免只求气氛变好而跳过真正的问题。"
+          },
+          {
+            "question": "这页能替代正式测评吗？",
+            "answer": "不能。它适合自我理解和沟通反思，不用于诊断、招聘筛选或决定人生选择。"
+          }
+        ],
+        "internal_links": [
+          {
+            "href": "/zh/personality/esfp-t",
+            "anchor_text": "ESFP-T",
+            "safe_public_route": true,
+            "reason": "Supports A/T comparison, paired next-batch navigation, or public test intent without private-result routes."
+          },
+          {
+            "href": "/zh/personality/esfp-a-vs-esfp-t",
+            "anchor_text": "ESFP-A 与 ESFP-T 对比",
+            "safe_public_route": true,
+            "reason": "Supports A/T comparison, paired next-batch navigation, or public test intent without private-result routes."
+          },
+          {
+            "href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "anchor_text": "MBTI 人格测试",
+            "safe_public_route": true,
+            "reason": "Supports A/T comparison, paired next-batch navigation, or public test intent without private-result routes."
+          },
+          {
+            "href": "/zh/personality/intp-a",
+            "anchor_text": "INTP-A",
+            "safe_public_route": true,
+            "reason": "Supports A/T comparison, paired next-batch navigation, or public test intent without private-result routes."
+          },
+          {
+            "href": "/zh/personality/enfj-a",
+            "anchor_text": "ENFJ-A",
+            "safe_public_route": true,
+            "reason": "Supports A/T comparison, paired next-batch navigation, or public test intent without private-result routes."
+          }
+        ],
+        "bilingual_parity_notes": [
+          "Paired counterpart: /en/personality/esfp-a",
+          "The paired page preserves the same A/T, mechanism, work scenario, misread, question-answer, and internal-link intent while using native-language wording.",
+          "Chinese headings are localized and must not render English question labels or raw relation-key labels."
+        ],
+        "claim_boundary_notes": [
+          "No claim of trademark-owner affiliation, certification, or formal test authority.",
+          "No diagnosis, hiring screen, ability ranking, relationship destiny, or deterministic career promise.",
+          "A/T is framed as self-regulation and feedback-response pattern, not superiority."
+        ]
+      },
+      "recommended_next_task": "MBTI64-NEXT-BATCH-6-COMPETITOR-GAP-CONTENT-EXPANSION-QA-01"
+    },
+    {
+      "recommendation_id": "mbti64-next-batch-6-competitor-gap:/en/personality/esfp-a",
+      "target_url": "https://fermatmind.com/en/personality/esfp-a",
+      "path": "/en/personality/esfp-a",
+      "framework": "mbti64",
+      "locale": "en",
+      "type_code": "ESFP-A",
+      "evidence_class": "bilingual_paired_counterpart",
+      "paired_path": "/zh/personality/esfp-a",
+      "competitor_gap_basis": [
+        "SERP competitors emphasize richer A/T intent, type-development depth, practical scenarios, communication guidance, motivations, stressors, and public question-answer blocks.",
+        "Current live pages are indexable and long-form, but their first content modules are still template-like and include duplicate headings.",
+        "This package adds differentiated modules without copying competitor text or changing production CMS directly."
+      ],
+      "recommendations": {
+        "title": "ESFP-A Meaning: Presence, Social Energy and Confident Action",
+        "description": "Explore ESFP-A through presence, shared experience, social energy and the difference between assertive and turbulence-sensitive ESFP patterns.",
+        "h1": "ESFP-A Meaning",
+        "quick_answer": "ESFP-A often reads the room through concrete signals: energy, facial reactions, pace, movement and immediate feedback. The assertive variant tends to recover from feedback quickly and re-enter action, while still needing structures that keep long-range planning and difficult conversations from being postponed.",
+        "sections": [
+          {
+            "key": "at_difference",
+            "title": "ESFP-A vs ESFP-T: the practical difference",
+            "body": "ESFP-A usually returns to action faster after criticism or uncertainty. ESFP-T may replay the interaction longer and monitor whether others still approve. The difference is not warmth or talent; it is how feedback affects confidence, recovery and the next move."
+          },
+          {
+            "key": "cognitive_behavior_mechanism",
+            "title": "Behavior mechanism: calibrate through live experience",
+            "body": "ESFP-A often learns by entering the situation, sensing the response and adjusting in real time. This can be powerful in service, presentation, performance, customer recovery and event settings. The risk is that visible feedback can crowd out quieter constraints, future tradeoffs or people who do not speak up immediately."
+          },
+          {
+            "key": "work_scenario_example",
+            "title": "Work scenario: ESFP-A during a live event",
+            "body": "If a customer event starts falling behind schedule, an ESFP-A may first stabilize the room, keep people engaged and improvise a workable path forward. The strength is restoring momentum. The upgrade is to capture the lesson afterward, so the improvised fix becomes a repeatable process rather than a one-time rescue."
+          },
+          {
+            "key": "common_misreads",
+            "title": "Common misreads",
+            "bullets": [
+              "Energetic does not mean shallow; the person may understand the world through concrete experience.",
+              "Spontaneous does not mean careless; the person may need a plan that connects to visible action.",
+              "Confident does not mean unaffected; recovery may happen through re-engagement rather than long verbal processing."
+            ]
+          }
+        ],
+        "faq": [
+          {
+            "question": "What is the main difference between ESFP-A and ESFP-T?",
+            "answer": "ESFP-A usually recovers and re-engages faster after feedback, while ESFP-T is more likely to review whether the interaction went well or whether approval was lost."
+          },
+          {
+            "question": "Is ESFP-A always outgoing?",
+            "answer": "No. ESFP-A often draws energy from direct experience and people, but the person still needs rest, privacy and meaningful relationships."
+          },
+          {
+            "question": "Is ESFP-A bad at planning?",
+            "answer": "Not necessarily. The challenge is often making long-range planning concrete, visible and connected to immediate action."
+          },
+          {
+            "question": "What work can fit ESFP-A?",
+            "answer": "Work involving live feedback, service, facilitation, customer experience, performance or rapid response may fit, but career choice still depends on skill, values and opportunity."
+          },
+          {
+            "question": "How does ESFP-A handle conflict?",
+            "answer": "Healthy ESFP-A directness can reduce tension quickly, but it should not skip the actual issue just to restore a better mood."
+          },
+          {
+            "question": "Is this page a diagnosis?",
+            "answer": "No. It is a public personality explanation for reflection and communication, not a clinical, hiring or deterministic decision tool."
+          }
+        ],
+        "internal_links": [
+          {
+            "href": "/en/personality/esfp-t",
+            "anchor_text": "ESFP-T",
+            "safe_public_route": true,
+            "reason": "Supports A/T comparison, paired next-batch navigation, or public test intent without private-result routes."
+          },
+          {
+            "href": "/en/personality/esfp-a-vs-esfp-t",
+            "anchor_text": "ESFP-A vs ESFP-T",
+            "safe_public_route": true,
+            "reason": "Supports A/T comparison, paired next-batch navigation, or public test intent without private-result routes."
+          },
+          {
+            "href": "/en/tests/mbti-personality-test-16-personality-types",
+            "anchor_text": "MBTI personality test",
+            "safe_public_route": true,
+            "reason": "Supports A/T comparison, paired next-batch navigation, or public test intent without private-result routes."
+          },
+          {
+            "href": "/en/personality/intp-a",
+            "anchor_text": "INTP-A",
+            "safe_public_route": true,
+            "reason": "Supports A/T comparison, paired next-batch navigation, or public test intent without private-result routes."
+          },
+          {
+            "href": "/en/personality/enfj-a",
+            "anchor_text": "ENFJ-A",
+            "safe_public_route": true,
+            "reason": "Supports A/T comparison, paired next-batch navigation, or public test intent without private-result routes."
+          }
+        ],
+        "bilingual_parity_notes": [
+          "Paired counterpart: /zh/personality/esfp-a",
+          "The paired page preserves the same A/T, mechanism, work scenario, misread, question-answer, and internal-link intent while using native-language wording.",
+          "Chinese headings are localized and must not render English question labels or raw relation-key labels."
+        ],
+        "claim_boundary_notes": [
+          "No claim of trademark-owner affiliation, certification, or formal test authority.",
+          "No diagnosis, hiring screen, ability ranking, relationship destiny, or deterministic career promise.",
+          "A/T is framed as self-regulation and feedback-response pattern, not superiority."
+        ]
+      },
+      "recommended_next_task": "MBTI64-NEXT-BATCH-6-COMPETITOR-GAP-CONTENT-EXPANSION-QA-01"
+    },
+    {
+      "recommendation_id": "mbti64-next-batch-6-competitor-gap:/en/personality/enfj-a",
+      "target_url": "https://fermatmind.com/en/personality/enfj-a",
+      "path": "/en/personality/enfj-a",
+      "framework": "mbti64",
+      "locale": "en",
+      "type_code": "ENFJ-A",
+      "evidence_class": "query_backed",
+      "paired_path": "/zh/personality/enfj-a",
+      "competitor_gap_basis": [
+        "SERP competitors emphasize richer A/T intent, type-development depth, practical scenarios, communication guidance, motivations, stressors, and public question-answer blocks.",
+        "Current live pages are indexable and long-form, but their first content modules are still template-like and include duplicate headings.",
+        "This package adds differentiated modules without copying competitor text or changing production CMS directly."
+      ],
+      "recommendations": {
+        "title": "ENFJ-A Meaning: People Leadership, Shared Direction and Steady Confidence",
+        "description": "Understand ENFJ-A through people leadership, shared direction, feedback recovery, boundaries and the difference between assertive and turbulence-sensitive ENFJ patterns.",
+        "h1": "ENFJ-A Meaning",
+        "quick_answer": "ENFJ-A often organizes people around a shared direction and tends to keep moving even when feedback is mixed. The assertive pattern can make encouragement and coordination feel steady, but the growth task is to help without taking over responsibility for everyone else.",
+        "sections": [
+          {
+            "key": "at_difference",
+            "title": "ENFJ-A vs ENFJ-T: the practical difference",
+            "body": "ENFJ-A usually recovers from criticism with more steadiness and returns to the group objective. ENFJ-T is more likely to replay whether people felt supported, disappointed or misunderstood. The difference is not empathy; it is how strongly feedback affects confidence and self-correction."
+          },
+          {
+            "key": "cognitive_behavior_mechanism",
+            "title": "Behavior mechanism: read the group, then shape direction",
+            "body": "ENFJ-A often tracks morale, alignment and unspoken tension while also pushing toward a shared goal. This can be valuable in mentoring, facilitation and cross-functional work. The risk is carrying the emotional load for the room and assuming that helping more is always the answer."
+          },
+          {
+            "key": "work_scenario_example",
+            "title": "Work scenario: ENFJ-A in a team reset",
+            "body": "When a team loses direction after a difficult quarter, an ENFJ-A may name the shared purpose, encourage discouraged members and translate scattered concerns into a path forward. This can rebuild momentum. The upgrade is to set boundaries: clarify what the group owns, what each person owns and what the ENFJ-A should not personally absorb."
+          },
+          {
+            "key": "common_misreads",
+            "title": "Common misreads",
+            "bullets": [
+              "Supportive does not mean people-pleasing; the person may be actively shaping group direction.",
+              "Confident leadership does not mean control; the healthy version invites consent and shared ownership.",
+              "Empathy does not require self-erasure; boundaries make the support more sustainable."
+            ]
+          }
+        ],
+        "faq": [
+          {
+            "question": "What is the main difference between ENFJ-A and ENFJ-T?",
+            "answer": "ENFJ-A usually stabilizes faster after feedback and keeps focus on shared direction, while ENFJ-T may recheck whether people felt supported or disappointed."
+          },
+          {
+            "question": "Is ENFJ-A a natural leader?",
+            "answer": "ENFJ-A may be comfortable coordinating people, but leadership still depends on skill, context, ethics and the willingness of others to participate."
+          },
+          {
+            "question": "Can ENFJ-A become controlling?",
+            "answer": "It can happen when helping turns into over-directing. A healthier pattern asks for consent, shares ownership and respects boundaries."
+          },
+          {
+            "question": "What work can fit ENFJ-A?",
+            "answer": "Work involving mentoring, facilitation, teaching, community building or people operations may fit, but career choice should not be decided by type alone."
+          },
+          {
+            "question": "How does ENFJ-A handle criticism?",
+            "answer": "The assertive pattern may recover quickly, but growth requires separating useful feedback from the impulse to fix everyone’s reaction."
+          },
+          {
+            "question": "Is this page a diagnosis?",
+            "answer": "No. It is a public personality explanation for reflection and communication, not a clinical, hiring or deterministic decision tool."
+          }
+        ],
+        "internal_links": [
+          {
+            "href": "/en/personality/enfj-t",
+            "anchor_text": "ENFJ-T",
+            "safe_public_route": true,
+            "reason": "Supports A/T comparison, paired next-batch navigation, or public test intent without private-result routes."
+          },
+          {
+            "href": "/en/personality/enfj-a-vs-enfj-t",
+            "anchor_text": "ENFJ-A vs ENFJ-T",
+            "safe_public_route": true,
+            "reason": "Supports A/T comparison, paired next-batch navigation, or public test intent without private-result routes."
+          },
+          {
+            "href": "/en/tests/mbti-personality-test-16-personality-types",
+            "anchor_text": "MBTI personality test",
+            "safe_public_route": true,
+            "reason": "Supports A/T comparison, paired next-batch navigation, or public test intent without private-result routes."
+          },
+          {
+            "href": "/en/personality/intp-a",
+            "anchor_text": "INTP-A",
+            "safe_public_route": true,
+            "reason": "Supports A/T comparison, paired next-batch navigation, or public test intent without private-result routes."
+          },
+          {
+            "href": "/en/personality/esfp-a",
+            "anchor_text": "ESFP-A",
+            "safe_public_route": true,
+            "reason": "Supports A/T comparison, paired next-batch navigation, or public test intent without private-result routes."
+          }
+        ],
+        "bilingual_parity_notes": [
+          "Paired counterpart: /zh/personality/enfj-a",
+          "The paired page preserves the same A/T, mechanism, work scenario, misread, question-answer, and internal-link intent while using native-language wording.",
+          "Chinese headings are localized and must not render English question labels or raw relation-key labels."
+        ],
+        "claim_boundary_notes": [
+          "No claim of trademark-owner affiliation, certification, or formal test authority.",
+          "No diagnosis, hiring screen, ability ranking, relationship destiny, or deterministic career promise.",
+          "A/T is framed as self-regulation and feedback-response pattern, not superiority."
+        ]
+      },
+      "recommended_next_task": "MBTI64-NEXT-BATCH-6-COMPETITOR-GAP-CONTENT-EXPANSION-QA-01"
+    },
+    {
+      "recommendation_id": "mbti64-next-batch-6-competitor-gap:/zh/personality/enfj-a",
+      "target_url": "https://fermatmind.com/zh/personality/enfj-a",
+      "path": "/zh/personality/enfj-a",
+      "framework": "mbti64",
+      "locale": "zh",
+      "type_code": "ENFJ-A",
+      "evidence_class": "bilingual_paired_counterpart",
+      "paired_path": "/en/personality/enfj-a",
+      "competitor_gap_basis": [
+        "SERP competitors emphasize richer A/T intent, type-development depth, practical scenarios, communication guidance, motivations, stressors, and public question-answer blocks.",
+        "Current live pages are indexable and long-form, but their first content modules are still template-like and include duplicate headings.",
+        "This package adds differentiated modules without copying competitor text or changing production CMS directly."
+      ],
+      "recommendations": {
+        "title": "ENFJ-A 人格特点：人际带动、共同方向与稳定自信",
+        "description": "了解 ENFJ-A 如何组织人际能量、推动共同目标、处理反馈和边界，并区分 ENFJ-A 与 ENFJ-T 在自信和复盘上的差异。",
+        "h1": "ENFJ-A 人格特点",
+        "quick_answer": "ENFJ-A 往往能把人拉回共同方向，并在反馈不一致时继续推进。他们的鼓励、协调和带动感更稳定；成长重点是帮助别人时不替所有人承担责任，避免把支持变成过度负责。",
+        "sections": [
+          {
+            "key": "at_difference",
+            "title": "ENFJ-A 与 ENFJ-T 的关键差异",
+            "body": "ENFJ-A 通常能更快从批评或误解中恢复，并继续关注共同目标。ENFJ-T 更容易反复回看别人是否被照顾到、是否失望、是否误解了自己。差别不是同理心强弱，而是反馈对自信和自我修正的影响程度。"
+          },
+          {
+            "key": "cognitive_behavior_mechanism",
+            "title": "行为机制：读懂群体状态，再塑造方向",
+            "body": "ENFJ-A 常同时关注士气、关系张力和目标一致性。他们能把分散的担忧转成共同语言，也能在低能量团队中重新建立参与感。风险是承担过多情绪劳动，把别人的成长、反应和结果都揽到自己身上。"
+          },
+          {
+            "key": "work_scenario_example",
+            "title": "工作场景案例：团队重启里的 ENFJ-A",
+            "body": "当团队经历失败后失去方向，ENFJ-A 可能先承认大家的挫败，再把讨论拉回共同目标，并把混乱情绪整理成下一步行动。这能恢复动力。更成熟的做法是明确边界：哪些由团队共同承担，哪些由个人负责，哪些不应该由 ENFJ-A 一个人消化。"
+          },
+          {
+            "key": "common_misreads",
+            "title": "常见误读",
+            "bullets": [
+              "支持别人不等于讨好；他们可能是在主动塑造群体方向。",
+              "稳定带领不等于控制；健康的 ENFJ-A 会邀请参与，而不是替别人决定。",
+              "有同理心不等于必须牺牲自己；边界会让帮助更可持续。"
+            ]
+          }
+        ],
+        "faq": [
+          {
+            "question": "ENFJ-A 和 ENFJ-T 最大差别是什么？",
+            "answer": "ENFJ-A 通常更快从反馈中恢复并继续推动共同方向，ENFJ-T 更容易反复确认别人是否被支持、是否失望或是否误解自己。"
+          },
+          {
+            "question": "ENFJ-A 是否天生适合领导？",
+            "answer": "ENFJ-A 可能更习惯协调人和目标，但领导仍取决于能力、伦理、环境和他人的参与意愿。"
+          },
+          {
+            "question": "ENFJ-A 会不会控制欲强？",
+            "answer": "可能会，尤其当帮助变成替别人安排。更健康的方式是确认同意、分享责任并尊重边界。"
+          },
+          {
+            "question": "ENFJ-A 适合什么工作？",
+            "answer": "辅导、教育、协调、社群和人际推动相关工作可能更容易发挥优势，但职业选择不能只由类型决定。"
+          },
+          {
+            "question": "ENFJ-A 如何处理批评？",
+            "answer": "A 型通常恢复更快，但仍需要区分有价值的反馈和过度修复别人反应的冲动。"
+          },
+          {
+            "question": "这页能替代正式测评吗？",
+            "answer": "不能。它适合自我理解和沟通反思，不用于诊断、招聘筛选或决定人生选择。"
+          }
+        ],
+        "internal_links": [
+          {
+            "href": "/zh/personality/enfj-t",
+            "anchor_text": "ENFJ-T",
+            "safe_public_route": true,
+            "reason": "Supports A/T comparison, paired next-batch navigation, or public test intent without private-result routes."
+          },
+          {
+            "href": "/zh/personality/enfj-a-vs-enfj-t",
+            "anchor_text": "ENFJ-A 与 ENFJ-T 对比",
+            "safe_public_route": true,
+            "reason": "Supports A/T comparison, paired next-batch navigation, or public test intent without private-result routes."
+          },
+          {
+            "href": "/zh/tests/mbti-personality-test-16-personality-types",
+            "anchor_text": "MBTI 人格测试",
+            "safe_public_route": true,
+            "reason": "Supports A/T comparison, paired next-batch navigation, or public test intent without private-result routes."
+          },
+          {
+            "href": "/zh/personality/intp-a",
+            "anchor_text": "INTP-A",
+            "safe_public_route": true,
+            "reason": "Supports A/T comparison, paired next-batch navigation, or public test intent without private-result routes."
+          },
+          {
+            "href": "/zh/personality/esfp-a",
+            "anchor_text": "ESFP-A",
+            "safe_public_route": true,
+            "reason": "Supports A/T comparison, paired next-batch navigation, or public test intent without private-result routes."
+          }
+        ],
+        "bilingual_parity_notes": [
+          "Paired counterpart: /en/personality/enfj-a",
+          "The paired page preserves the same A/T, mechanism, work scenario, misread, question-answer, and internal-link intent while using native-language wording.",
+          "Chinese headings are localized and must not render English question labels or raw relation-key labels."
+        ],
+        "claim_boundary_notes": [
+          "No claim of trademark-owner affiliation, certification, or formal test authority.",
+          "No diagnosis, hiring screen, ability ranking, relationship destiny, or deterministic career promise.",
+          "A/T is framed as self-regulation and feedback-response pattern, not superiority."
+        ]
+      },
+      "recommended_next_task": "MBTI64-NEXT-BATCH-6-COMPETITOR-GAP-CONTENT-EXPANSION-QA-01"
+    }
+  ],
+  "safety_boundary": {
+    "cms_write": false,
+    "approval_queue_write": false,
+    "live_promotion": false,
+    "publish_index_search": false,
+    "sitemap_llms_mutation": false,
+    "competitor_text_copied": false
+  },
+  "recommended_next_task": "MBTI64-NEXT-BATCH-6-COMPETITOR-GAP-CONTENT-EXPANSION-QA-01",
+  "package_sha256": "c9c3fe3c72a4292f10339d82d18636989aade3153b76fcdf41e75f9fe19f72ae"
+}
