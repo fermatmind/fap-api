@@ -125,11 +125,25 @@ final class MediaAssetStorageSyncService
                 return false;
             }
 
-            Storage::disk($targetDisk)->put(
-                $this->targetPath($sourcePath),
+            $targetPath = $this->targetPath($sourcePath);
+            $target = Storage::disk($targetDisk);
+            $putResult = $target->put(
+                $targetPath,
                 Storage::disk($sourceDisk)->get($sourcePath),
                 'public'
             );
+
+            if ($putResult !== true) {
+                $failures[] = 'target write failed: '.$targetDisk.':'.$targetPath;
+
+                return false;
+            }
+
+            if (! $target->exists($targetPath)) {
+                $failures[] = 'target missing after write: '.$targetDisk.':'.$targetPath;
+
+                return false;
+            }
 
             return true;
         } catch (\Throwable $throwable) {
