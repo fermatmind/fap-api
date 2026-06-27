@@ -12,11 +12,11 @@ This document consolidates the previous EQ scan, productization, acceptance, Age
 - The active dimensions are `SA`, `ER`, `EM`, and `RM`: self-awareness, emotion regulation, empathy, and relationship management.
 - The 50/60 question-count mismatch was fixed; registry and runtime now expect 60 items.
 - EQ report access is all-free: no user-facing locked sections, blur, paywall, paid offers, or SKU path.
-- The active report payload version is `eq_report_v5_assets_commercial_ready_v1_6`.
+- The active report payload version is `eq_report_v5_assets_commercial_ready_v1_9`.
 - EQ v1.6 is frozen as the first commercial-ready EQ-60 content baseline.
 - Backend content pack and `Eq60ReportComposer` are the authority layer for report interpretation.
 - Frontend uses the EQ-specific `EQResultV5` renderer instead of generic `RichResultReport` fallback.
-- Production smoke verified 60 questions, report delivery, v1.6 resolved assets, localized `en` and `zh-CN` assets, and no paywall/SKU leakage.
+- Production smoke verified 60 questions, report delivery, v1.9 resolved assets, localized `en` and `zh-CN` assets, and no paywall/SKU leakage.
 - Agent-ready context is production accepted: the Agent may read EQ report context and assets, but cannot mutate scores, formulations, report sections, SJT state, or commerce state.
 - Deterministic read-only Agent runtime shell exists and is the accepted runtime direction for now.
 - LLM/provider work is deferred. `EQ_AGENT_LLM_ENABLED` should remain `false`; do not pursue live LLM smoke until a separate future decision reopens that lane.
@@ -219,13 +219,13 @@ Renderer rules:
 
 ## 9. Production Acceptance Summary
 
-Production EQ v1.6 acceptance confirmed:
+Production EQ v1.9 acceptance confirmed:
 
 - `/api/v0.3/scales/EQ_60/questions?locale=en` returns 60 items.
 - `/api/v0.3/scales/EQ_60/questions?locale=zh-CN` returns 60 items.
 - Anonymous EQ submit works.
 - `/report-access` converges to ready/full/all-free.
-- `/report` returns `eq_report_v5_assets_commercial_ready_v1_6`.
+- `/report` returns `eq_report_v5_assets_commercial_ready_v1_9`.
 - `/report?locale=en` returns English resolved assets.
 - `/report?locale=zh-CN` returns Chinese resolved assets.
 - Frontend result pages use `EQResultV5`.
