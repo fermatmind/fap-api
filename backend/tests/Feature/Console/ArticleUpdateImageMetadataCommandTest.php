@@ -87,6 +87,14 @@ final class ArticleUpdateImageMetadataCommandTest extends TestCase
             ->assertOk()
             ->json('article');
         $this->assertSame(
+            'https://assets.fermatmind.com/articles/career-map/hero_1600x900.jpg',
+            data_get($publicPayload, 'cover_image_url')
+        );
+        $this->assertSame(
+            'https://assets.fermatmind.com/articles/career-map/hero_1600x900.jpg',
+            data_get($publicPayload, 'cover_image_variants.hero.url')
+        );
+        $this->assertSame(
             'https://assets.fermatmind.com/articles/career-map/body_1600x900.jpg',
             data_get($publicPayload, 'body_visual.image_url')
         );

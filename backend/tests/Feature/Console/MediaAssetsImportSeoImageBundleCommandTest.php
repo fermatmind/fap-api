@@ -9,6 +9,7 @@ use App\Models\MediaAsset;
 use App\Models\MediaVariant;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Tests\TestCase;
@@ -177,14 +178,16 @@ final class MediaAssetsImportSeoImageBundleCommandTest extends TestCase
         $this->assertSame(MediaAsset::STATUS_PUBLISHED, (string) $asset->status);
         $this->assertTrue((bool) $asset->is_public);
         $this->assertSame(MediaAsset::CDN_SKIPPED, (string) $asset->cdn_status);
-        $this->assertArrayHasKey('hero', $payload['resolved_metadata']['cover_image_variants']);
-        $this->assertSame($payload['resolved_metadata']['og_image_url'], $payload['resolved_metadata']['twitter_image_url']);
+        $this->assertNull($payload['resolved_metadata']['cover_image_url']);
+        $this->assertNull($payload['resolved_metadata']['cover_image_variants']['hero']['url']);
+        $this->assertNull($payload['resolved_metadata']['og_image_url']);
+        $this->assertNull($payload['resolved_metadata']['twitter_image_url']);
         Storage::disk('public')->assertExists((string) $asset->path);
     }
 
-    public function test_non_dry_run_uses_public_api_storage_urls_when_cdn_sync_is_skipped(): void
+    public function test_non_dry_run_does_not_emit_app_storage_urls_when_cdn_sync_is_skipped(): void
     {
-        config(['app.url' => 'https://api.fermatmind.com']);
+        config(['app.url' => 'https://ops.fermatmind.com']);
         Storage::fake('public');
         $package = $this->writeImageBundlePackage();
 
@@ -194,9 +197,67 @@ final class MediaAssetsImportSeoImageBundleCommandTest extends TestCase
 
         $payload = $this->jsonOutput();
         $this->assertSame(0, $exitCode);
-        $this->assertStringStartsWith('https://api.fermatmind.com/storage/media-library/variants/', $payload['resolved_metadata']['cover_image_url']);
-        $this->assertStringStartsWith('https://api.fermatmind.com/storage/media-library/variants/', $payload['resolved_metadata']['og_image_url']);
-        $this->assertStringStartsWith('https://api.fermatmind.com/storage/media-library/variants/', $payload['resolved_metadata']['cover_image_variants']['hero']['url']);
+        $this->assertNull($payload['resolved_metadata']['cover_image_url']);
+        $this->assertNull($payload['resolved_metadata']['og_image_url']);
+        $this->assertNull($payload['resolved_metadata']['cover_image_variants']['hero']['url']);
+    }
+
+    public function test_write_resolved_package_fails_when_media_asset_is_not_cdn_ready(): void
+    {
+        config(['app.url' => 'https://ops.fermatmind.com']);
+        Storage::fake('public');
+        $package = $this->writeImageBundlePackage();
+        $output = sys_get_temp_dir().'/fm-image-bundle-not-ready-'.Str::random(12);
+
+        $exitCode = Artisan::call('media-assets:import-seo-image-bundle', $this->commandOptions($package, [
+            '--json' => true,
+            '--write-resolved-package' => true,
+            '--resolved-output-dir' => $output,
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode);
+        $this->assertFalse($payload['ok']);
+        $this->assertSame('media_asset_cdn_not_ready', $payload['action']);
+        $this->assertErrorCode($payload, 'media_asset_cdn_not_ready');
+        $this->assertDirectoryDoesNotExist($output);
+        $this->assertNull($payload['resolved_metadata']['cover_image_url']);
+    }
+
+    public function test_write_resolved_package_requires_and_outputs_canonical_assets_origin_urls(): void
+    {
+        Storage::fake('public');
+        Storage::fake('s3');
+        Http::fake([
+            'assets.fermatmind.com/*' => Http::response('', 200, ['Content-Type' => 'image/jpeg']),
+        ]);
+        config([
+            'app.url' => 'https://ops.fermatmind.com',
+            'fap.media.oss_sync_enabled' => true,
+            'fap.media.oss_disk' => 's3',
+            'fap.media.oss_key_prefix' => 'storage',
+            'fap.media.cdn_verify_enabled' => true,
+        ]);
+        $package = $this->writeImageBundlePackage();
+        $output = sys_get_temp_dir().'/fm-image-bundle-canonical-'.Str::random(12);
+
+        $exitCode = Artisan::call('media-assets:import-seo-image-bundle', $this->commandOptions($package, [
+            '--json' => true,
+            '--write-resolved-package' => true,
+            '--resolved-output-dir' => $output,
+        ]));
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertStringStartsWith('https://assets.fermatmind.com/storage/media-library/variants/', $payload['resolved_metadata']['cover_image_url']);
+        $this->assertStringStartsWith('https://assets.fermatmind.com/storage/media-library/variants/', $payload['resolved_metadata']['og_image_url']);
+        $this->assertStringStartsWith('https://assets.fermatmind.com/storage/media-library/variants/', $payload['resolved_metadata']['cover_image_variants']['hero']['url']);
+        $this->assertStringNotContainsString('ops.fermatmind.com', json_encode($payload['resolved_metadata'], JSON_THROW_ON_ERROR));
+
+        $draft = json_decode((string) file_get_contents($output.'/cms/CMS_IMPORT_DRAFT_en_demo.json'), true);
+        $this->assertStringStartsWith('https://assets.fermatmind.com/storage/media-library/variants/', $draft['cover_image_url']);
+        $this->assertStringNotContainsString('ops.fermatmind.com', json_encode($draft, JSON_THROW_ON_ERROR));
     }
 
     public function test_dry_run_does_not_write_existing_asset_or_storage(): void
@@ -271,6 +332,16 @@ final class MediaAssetsImportSeoImageBundleCommandTest extends TestCase
     public function test_write_resolved_package_outputs_safe_copy_with_cms_metadata(): void
     {
         Storage::fake('public');
+        Storage::fake('s3');
+        Http::fake([
+            'assets.fermatmind.com/*' => Http::response('', 200, ['Content-Type' => 'image/jpeg']),
+        ]);
+        config([
+            'fap.media.oss_sync_enabled' => true,
+            'fap.media.oss_disk' => 's3',
+            'fap.media.oss_key_prefix' => 'storage',
+            'fap.media.cdn_verify_enabled' => true,
+        ]);
         $package = $this->writeImageBundlePackage();
         $output = sys_get_temp_dir().'/fm-image-bundle-resolved-'.Str::random(12);
 

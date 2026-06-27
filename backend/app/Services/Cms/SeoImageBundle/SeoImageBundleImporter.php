@@ -106,6 +106,11 @@ final class SeoImageBundleImporter
         $resolved = $this->resolvedMetadataFromPlans($writtenPlans, $locales, false);
         $resolvedPackage = null;
         if ($writeResolvedPackage) {
+            $this->validateResolvedMetadataReadyForCms($resolved, $errors);
+            if ($errors !== []) {
+                return $this->summary(false, false, 'media_asset_cdn_not_ready', $package, $translationGroupId, $writtenPlans, $resolved, $errors, $warnings);
+            }
+
             $resolvedPackage = $this->writeResolvedPackageCopy($package, $resolved, $resolvedOutputDir, $warnings);
         }
 
@@ -617,14 +622,49 @@ final class SeoImageBundleImporter
 
     private function publicMediaUrlForImportedRecord(string $disk, mixed $path, mixed $url, string $syncStatus, string $cdnStatus): ?string
     {
-        if ($syncStatus === MediaAsset::SYNC_SKIPPED || $cdnStatus === MediaAsset::CDN_SKIPPED) {
-            $appStorageUrl = PublicMediaUrlGuard::publicAppStorageUrlForPath($disk, $path);
-            if ($appStorageUrl !== null) {
-                return $appStorageUrl;
-            }
+        if ($syncStatus !== MediaAsset::SYNC_SYNCED || $cdnStatus !== MediaAsset::CDN_VERIFIED) {
+            return null;
         }
 
         return PublicMediaUrlGuard::canonicalMediaUrl($disk, $path, $url);
+    }
+
+    /**
+     * @param  array<string,mixed>  $resolved
+     * @param  list<array<string,mixed>>  $errors
+     */
+    private function validateResolvedMetadataReadyForCms(array $resolved, array &$errors): void
+    {
+        foreach (['cover_image_url', 'og_image_url', 'twitter_image_url'] as $field) {
+            $this->assertCanonicalAssetUrl($resolved[$field] ?? null, $field, $errors);
+        }
+
+        if (filled($resolved['body_visual_asset_key'] ?? null)) {
+            $this->assertCanonicalAssetUrl($resolved['body_visual_image_url'] ?? null, 'body_visual_image_url', $errors);
+        }
+
+        foreach ((array) ($resolved['cover_image_variants'] ?? []) as $variantKey => $variant) {
+            if (! is_array($variant)) {
+                $errors[] = $this->issue('cover_image_variants.'.$variantKey, 'media_asset_cdn_not_ready', 'Cover image variant metadata is not ready for CMS package use.');
+
+                continue;
+            }
+
+            $this->assertCanonicalAssetUrl($variant['url'] ?? null, 'cover_image_variants.'.$variantKey.'.url', $errors);
+        }
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $errors
+     */
+    private function assertCanonicalAssetUrl(mixed $url, string $field, array &$errors): void
+    {
+        $candidate = PublicMediaUrlGuard::sanitizeNullableUrl($url);
+        $canonicalOrigin = PublicMediaUrlGuard::canonicalAssetOrigin();
+
+        if ($candidate === null || ! str_starts_with($candidate, $canonicalOrigin.'/')) {
+            $errors[] = $this->issue($field, 'media_asset_cdn_not_ready', 'Media asset must be synced and CDN-verified on the canonical public asset origin before writing a CMS-ready resolved package.');
+        }
     }
 
     /**
