@@ -66,8 +66,32 @@ final class MbtiPdfPayloadBuilderTest extends TestCase
         $this->assertSame('ISFP-T', data_get($payload, 'type.type_code'));
         $this->assertNotEmpty(data_get($payload, 'type.short_summary'));
         $this->assertCount(5, $payload['axis_scores'] ?? []);
+        $this->assertSame('能量来源', data_get($payload, 'axis_scores.0.label'));
+        $this->assertSame('外倾', data_get($payload, 'axis_scores.0.left_label'));
+        $this->assertSame('内倾', data_get($payload, 'axis_scores.0.right_label'));
         $this->assertNotEmpty($payload['highlights'] ?? []);
         $this->assertNotEmpty($payload['sections'] ?? []);
+        $this->assertSame(
+            ['traits', 'career', 'growth', 'relationships'],
+            array_column((array) data_get($payload, 'result_page_sections', []), 'section_key')
+        );
+        foreach ((array) data_get($payload, 'result_page_sections', []) as $section) {
+            $this->assertIsArray($section);
+            $this->assertNotEmpty($section['title'] ?? null);
+            $this->assertNotEmpty($section['cards'] ?? null);
+            foreach ((array) ($section['cards'] ?? []) as $card) {
+                $this->assertIsArray($card);
+                $this->assertNotEmpty($card['title'] ?? null);
+            }
+        }
+        $this->assertStringContainsString(
+            'S 偏好较强：以事实和细节稳住判断',
+            json_encode(data_get($payload, 'result_page_sections'), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
+        );
+        $this->assertStringContainsString(
+            '继续探索职业方向',
+            json_encode(data_get($payload, 'result_page_sections'), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
+        );
         $this->assertSame('zh-CN', data_get($payload, 'document.language'));
         $this->assertSame([
             'type_portrait',
@@ -114,16 +138,36 @@ final class MbtiPdfPayloadBuilderTest extends TestCase
         $builder = app(MbtiPdfPayloadBuilder::class);
         $payload = $builder->build($attempt, $result)[MbtiPdfPayloadBuilder::PAYLOAD_KEY] ?? [];
         $document = is_array($payload) ? (array) ($payload['document'] ?? []) : [];
+        $resultPageSections = is_array($payload) ? (array) ($payload['result_page_sections'] ?? []) : [];
         $encoded = json_encode($document, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        $resultPageEncoded = json_encode($resultPageSections, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
         $this->assertSame('en', $document['language'] ?? null);
         $this->assertSame('MBTI Full Personality Report', $document['title'] ?? null);
+        $this->assertSame('Energy orientation', data_get($payload, 'axis_scores.0.label'));
+        $this->assertSame('Extraversion', data_get($payload, 'axis_scores.0.left_label'));
+        $this->assertSame('Introversion', data_get($payload, 'axis_scores.0.right_label'));
+        $this->assertSame(
+            ['traits', 'career', 'growth', 'relationships'],
+            array_column($resultPageSections, 'section_key')
+        );
         $this->assertStringContainsString('Career direction', $encoded);
         $this->assertStringContainsString('Growth plan', $encoded);
         $this->assertStringContainsString('Relationships and communication', $encoded);
         $this->assertStringContainsString('not a medical diagnosis', $encoded);
+        $this->assertStringContainsString('Personality Traits', $resultPageEncoded);
+        $this->assertStringContainsString('Your Career Path', $resultPageEncoded);
+        $this->assertStringContainsString('Your Personal Growth', $resultPageEncoded);
+        $this->assertStringContainsString('Your Relationships', $resultPageEncoded);
+        $this->assertStringContainsString('Your core temperament pattern', $resultPageEncoded);
+        $this->assertStringContainsString('A work style that tends to fit you', $resultPageEncoded);
+        $this->assertStringContainsString('One next step you can take now', $resultPageEncoded);
+        $this->assertStringContainsString('A smoother communication script', $resultPageEncoded);
+        $this->assertStringContainsString('Continue exploring career direction', $resultPageEncoded);
         $this->assertStringNotContainsString('职业方向', $encoded);
         $this->assertStringNotContainsString('医疗诊断', $encoded);
+        $this->assertStringNotContainsString('你的核心气质画像', $resultPageEncoded);
+        $this->assertStringNotContainsString('你更适合的工作方式', $resultPageEncoded);
     }
 
     public function test_payload_filters_internal_and_raw_fields_recursively(): void
