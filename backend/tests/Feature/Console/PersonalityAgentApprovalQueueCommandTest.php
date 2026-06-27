@@ -96,6 +96,61 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
         $this->assertSame(0, DB::table('personality_agent_approval_items')->count());
     }
 
+    public function test_auto_qa_approval_handoff_pass_can_enter_human_approval_queue_dry_run_only(): void
+    {
+        [$packagePath, $qaPath] = $this->writeArtifacts($this->autoApprovalHandoffPackage(), $this->autoApprovalHandoffQa());
+
+        $exitCode = Artisan::call('personality:agent-approval-queue', [
+            '--package' => $packagePath,
+            '--qa' => $qaPath,
+            '--dry-run' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode);
+        $this->assertTrue($payload['ok']);
+        $this->assertSame('pass', $payload['status']);
+        $this->assertSame('big_five', $payload['framework']);
+        $this->assertSame('PASS_READY_FOR_APPROVAL_HANDOFF_DRY_RUN', $payload['qa_final_decision']);
+        $this->assertTrue($payload['dry_run']);
+        $this->assertFalse($payload['write']);
+        $this->assertFalse($payload['writes_attempted']);
+        $this->assertFalse($payload['writes_committed']);
+        $this->assertFalse($payload['cms_write_attempted']);
+        $this->assertFalse($payload['cms_mutation_attempted']);
+        $this->assertFalse($payload['publish_attempted']);
+        $this->assertFalse($payload['index_attempted']);
+        $this->assertFalse($payload['sitemap_llms_release_attempted']);
+        $this->assertFalse($payload['search_release_attempted']);
+        $this->assertFalse($payload['enqueue_attempted']);
+        $this->assertFalse($payload['external_calls_attempted']);
+        $this->assertFalse($payload['live_content_updated']);
+        $this->assertSame(2, $payload['planned_item_count']);
+        $this->assertSame(0, $payload['blocked_item_count']);
+        $this->assertSame(0, $payload['created_item_count']);
+        $this->assertSame([], $payload['errors']);
+        $this->assertSame(
+            [
+                'https://fermatmind.com/en/personality/big-five/agreeableness',
+                'https://fermatmind.com/en/personality/big-five/facets',
+            ],
+            array_map(
+                static fn (array $item): string => (string) $item['target_url'],
+                $payload['items']
+            )
+        );
+        $this->assertSame(
+            ['PASS_READY_FOR_APPROVAL_HANDOFF'],
+            array_values(array_unique(array_map(
+                static fn (array $item): string => (string) $item['qa_decision'],
+                $payload['items']
+            )))
+        );
+        $this->assertSame(0, DB::table('personality_agent_approval_batches')->count());
+        $this->assertSame(0, DB::table('personality_agent_approval_items')->count());
+    }
+
     public function test_write_creates_pending_human_approval_queue_items_only(): void
     {
         [$packagePath, $qaPath] = $this->writeArtifacts($this->validPackage(), $this->validQa());
@@ -821,6 +876,46 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
                 $this->qaRow('https://fermatmind.com/zh/personality/intp-a', 'PASS_READY_FOR_APPROVAL_REVIEW'),
                 $this->qaRow('https://fermatmind.com/zh/personality/esfp-a', 'PASS_READY_FOR_APPROVAL_REVIEW'),
                 $this->qaRow('https://fermatmind.com/en/personality/enfj-a', 'PASS_READY_FOR_APPROVAL_REVIEW'),
+            ],
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function autoApprovalHandoffPackage(): array
+    {
+        return [
+            'artifact' => 'PERSONALITY-AGENT-AUTO-APPROVAL-HANDOFF-PACKAGE-01',
+            'final_decision' => 'PASS_APPROVAL_HANDOFF_PACKAGE_READY_FOR_DRY_RUN',
+            'recommendations' => [
+                $this->bigFiveRecommendation(
+                    'personality-agent-auto-runner:/en/personality/big-five/agreeableness',
+                    'https://fermatmind.com/en/personality/big-five/agreeableness',
+                    'en',
+                    'domain'
+                ),
+                $this->bigFiveRecommendation(
+                    'personality-agent-auto-runner:/en/personality/big-five/facets',
+                    'https://fermatmind.com/en/personality/big-five/facets',
+                    'en',
+                    'facet_hub'
+                ),
+            ],
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function autoApprovalHandoffQa(): array
+    {
+        return [
+            'artifact' => 'PERSONALITY-AGENT-AUTO-QA-AND-APPROVAL-HANDOFF-01',
+            'final_decision' => 'PASS_READY_FOR_APPROVAL_HANDOFF_DRY_RUN',
+            'results' => [
+                $this->qaRow('https://fermatmind.com/en/personality/big-five/agreeableness', 'PASS_READY_FOR_APPROVAL_HANDOFF'),
+                $this->qaRow('https://fermatmind.com/en/personality/big-five/facets', 'PASS_READY_FOR_APPROVAL_HANDOFF'),
             ],
         ];
     }

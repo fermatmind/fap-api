@@ -1,0 +1,1051 @@
+{
+  "artifact": "PERSONALITY-AGENT-AUTO-APPROVAL-HANDOFF-PACKAGE-01",
+  "generated_at": "2026-06-27T06:39:12.633Z",
+  "status": "pass_ready_for_approval_queue_dry_run",
+  "final_decision": "PASS_APPROVAL_HANDOFF_PACKAGE_READY_FOR_DRY_RUN",
+  "input_artifacts": {
+    "recommendation_auto_runner": "docs/seo/personality/personality-agent-recommendation-auto-runner-2026-06-27.json",
+    "auto_qa_report": "docs/seo/personality/personality-agent-auto-qa-and-approval-handoff-2026-06-27.json"
+  },
+  "handoff_policy": {
+    "pass_only": true,
+    "production_queue_write_policy": "not_allowed_from_this_pr",
+    "cms_write_policy": "blocked_until_human_approval_and_backend_draft_gate",
+    "search_release_policy": "blocked_until_live_promotion_and_post_promotion_search_gate"
+  },
+  "summary": {
+    "recommendation_count": 6,
+    "framework_counts": {
+      "big_five": 6
+    },
+    "blocked_source_count": 0
+  },
+  "recommendations": [
+    {
+      "recommendation_id": "personality-agent-auto-runner:/en/personality/big-five/agreeableness",
+      "source_recommendation_id": "big-five-public-profile-agent-pilot:/en/personality/big-five/agreeableness",
+      "source_recommendation_sha256": "155232568cac6dbab7620af570268ccd4435d8553b1bc35c115b04325fda5f46",
+      "target_url": "https://fermatmind.com/en/personality/big-five/agreeableness",
+      "path": "/en/personality/big-five/agreeableness",
+      "framework": "big_five",
+      "locale": "en",
+      "page_type": null,
+      "entity_key": null,
+      "priority_rank": 1,
+      "priority_score": 35,
+      "priority_bucket": "P1_QA_PASS_RECOMMENDATION_REFRESH_READY",
+      "evidence_quality": "GSC_EVIDENCE_PENDING",
+      "query_rows_captured": 0,
+      "current_surface": {
+        "title": "Agreeableness | Big Five guide",
+        "description": "Agreeableness describes stable tendencies around trust, cooperation, empathy, boundaries, conflict, and directness, helping explain learning, communication, and adaptation patterns.",
+        "h1": "Agreeableness",
+        "quick_answer": "Agreeableness concerns trust, cooperation, empathy, boundaries, conflict, and directness. It is not a type label and does not rank ability.",
+        "faq_count": 5,
+        "internal_link_count": 5
+      },
+      "observed_signal": {
+        "evidence_state": "gsc_pending",
+        "impressions": null,
+        "clicks": null,
+        "ctr": null,
+        "average_position": null,
+        "notes": [
+          "GSC URL/query evidence is pending for this artifact-only Big Five public profile pilot."
+        ],
+        "ranker_evidence_quality": "GSC_EVIDENCE_PENDING",
+        "ranker_query_rows_captured": 0
+      },
+      "reference_patterns_used": [
+        {
+          "pattern_id": "big_five_reviewed_package_projection",
+          "source_url": "https://fermatmind.com/en/personality/big-five/agreeableness",
+          "how_used": "Used the reviewed noindex Big Five package as the current surface and projected draft-only recommendation fields."
+        },
+        {
+          "pattern_id": "public_profile_agent_runner_contract",
+          "source_url": ".agents/skills/public-profile-seo-asset-factory/schemas/public-profile-agent-recommendation.schema.json",
+          "how_used": "Kept output compatible with the shared public profile agent recommendation schema."
+        }
+      ],
+      "recommendations": {
+        "title": {
+          "current": "Agreeableness | Big Five guide",
+          "recommended": "Agreeableness | FermatMind",
+          "reason": "Normalize the title as a public Big Five profile recommendation while preserving noindex draft status."
+        },
+        "description": {
+          "current": "Agreeableness describes stable tendencies around trust, cooperation, empathy, boundaries, conflict, and directness, helping explain learning, communication, and adaptation patterns.",
+          "recommended": "Agreeableness describes stable tendencies around trust, cooperation, empathy, boundaries, conflict, and directness, helping explain learning, communicatio. Use it for self-understanding and communication reflection, not diagnosis, hiring or deterministic decisions.",
+          "reason": "Keep SERP-oriented summary bounded by public education and method-safety language."
+        },
+        "h1": {
+          "current": "Agreeableness",
+          "recommended": "Agreeableness",
+          "reason": "The reviewed package already provides a concise public H1 candidate."
+        },
+        "quick_answer": {
+          "current": "Agreeableness concerns trust, cooperation, empathy, boundaries, conflict, and directness. It is not a type label and does not rank ability.",
+          "recommended": "Agreeableness concerns trust, cooperation, empathy, boundaries, conflict, and directness. It is not a type label and does not rank ability.",
+          "reason": "Use the reviewed public quick-answer section as the draft recommendation source."
+        },
+        "faq": [
+          {
+            "question": "What does Agreeableness mainly describe?",
+            "answer": "Agreeableness describes tendencies around trust, cooperation, empathy, boundaries, conflict, and directness in choices and communication.",
+            "reason": "Reuses reviewed public package FAQ intent while preserving Big Five method boundaries."
+          },
+          {
+            "question": "Is higher or lower better?",
+            "answer": "No. Higher and lower are tendencies; usefulness depends on context.",
+            "reason": "Reuses reviewed public package FAQ intent while preserving Big Five method boundaries."
+          },
+          {
+            "question": "How can I observe this domain?",
+            "answer": "Watch responses to stress, feedback, change, and collaboration rather than one behavior.",
+            "reason": "Reuses reviewed public package FAQ intent while preserving Big Five method boundaries."
+          },
+          {
+            "question": "Can it decide work choices?",
+            "answer": "No. It can provide preference clues, but cannot replace ability, experience, and opportunity.",
+            "reason": "Reuses reviewed public package FAQ intent while preserving Big Five method boundaries."
+          },
+          {
+            "question": "How does it relate to facets?",
+            "answer": "Facets are narrower layers inside the broad domain.",
+            "reason": "Reuses reviewed public package FAQ intent while preserving Big Five method boundaries."
+          }
+        ],
+        "internal_links": [
+          {
+            "href": "/en/personality/big-five",
+            "anchor_text": "Big Five Personality",
+            "reason": "Reviewed package relationship: hub.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/en/tests/big-five-personality-test-ocean-model",
+            "anchor_text": "Big Five test",
+            "reason": "Reviewed package relationship: test_landing.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/en/personality/big-five/facets",
+            "anchor_text": "30 facets overview",
+            "reason": "Reviewed package relationship: facet_overview.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/en/personality/big-five/high-agreeableness",
+            "anchor_text": "High Agreeableness",
+            "reason": "Reviewed package relationship: high_pole.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/en/personality/big-five/low-agreeableness",
+            "anchor_text": "Low Agreeableness",
+            "reason": "Reviewed package relationship: low_pole.",
+            "safe_public_route": true
+          }
+        ],
+        "differentiation_notes": [
+          "Entity type domain is treated as a dimensional Big Five public profile, not an official type page.",
+          "High/low wording must remain descriptive and context-dependent, never good/bad ranking.",
+          "Draft recommendation is blocked from CMS write, publish, indexability, sitemap, llms and search release until later gates."
+        ]
+      },
+      "qa_required": [
+        "schema_validation",
+        "trademark_claim_gate",
+        "claim_risk_gate",
+        "duplicate_template_gate",
+        "private_route_gate",
+        "result_page_leakage_gate",
+        "seo_projection_gate",
+        "bilingual_consistency_gate"
+      ],
+      "source_qa": {
+        "decision": "PASS_READY_FOR_APPROVAL_QUEUE",
+        "pass_count": 34,
+        "fail_count": 0
+      },
+      "blocked_reason": null,
+      "allowed_next_action": "approval_queue_dry_run_only_before_any_write",
+      "recommended_next_task": "PERSONALITY-AGENT-AUTO-QA-AND-APPROVAL-HANDOFF-01",
+      "recommendation_sha256": "f968f2082fbb44795f03f5fb3e7a871b00e1087e66a2086dead521e1d5ea4d02",
+      "auto_qa_decision": "PASS_READY_FOR_APPROVAL_HANDOFF",
+      "auto_qa_gates": {
+        "schema_validation": "pass",
+        "dimensional_model_gate": "pass",
+        "no_official_big_five_32_ocean_type_gate": "pass",
+        "no_high_low_good_bad_framing_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      }
+    },
+    {
+      "recommendation_id": "personality-agent-auto-runner:/en/personality/big-five",
+      "source_recommendation_id": "big-five-public-profile-agent-pilot:/en/personality/big-five",
+      "source_recommendation_sha256": "173d179e7bc92052b61321db48b0588fe65bd6a679225e861eba1c9ab416d0ab",
+      "target_url": "https://fermatmind.com/en/personality/big-five",
+      "path": "/en/personality/big-five",
+      "framework": "big_five",
+      "locale": "en",
+      "page_type": null,
+      "entity_key": null,
+      "priority_rank": 2,
+      "priority_score": 35,
+      "priority_bucket": "P1_QA_PASS_RECOMMENDATION_REFRESH_READY",
+      "evidence_quality": "GSC_EVIDENCE_PENDING",
+      "query_rows_captured": 0,
+      "current_surface": {
+        "title": "Big Five Personality | Big Five guide",
+        "description": "The Big Five describes personality differences through five continuous dimensions: openness, conscientiousness, extraversion, agreeableness, and neuroticism.",
+        "h1": "Big Five Personality",
+        "quick_answer": "The Big Five is not a fixed personality type table. It describes stable tendencies through five continuous dimensions and supports self-understanding, communication, and learning reflection.",
+        "faq_count": 5,
+        "internal_link_count": 7
+      },
+      "observed_signal": {
+        "evidence_state": "gsc_pending",
+        "impressions": null,
+        "clicks": null,
+        "ctr": null,
+        "average_position": null,
+        "notes": [
+          "GSC URL/query evidence is pending for this artifact-only Big Five public profile pilot."
+        ],
+        "ranker_evidence_quality": "GSC_EVIDENCE_PENDING",
+        "ranker_query_rows_captured": 0
+      },
+      "reference_patterns_used": [
+        {
+          "pattern_id": "big_five_reviewed_package_projection",
+          "source_url": "https://fermatmind.com/en/personality/big-five",
+          "how_used": "Used the reviewed noindex Big Five package as the current surface and projected draft-only recommendation fields."
+        },
+        {
+          "pattern_id": "public_profile_agent_runner_contract",
+          "source_url": ".agents/skills/public-profile-seo-asset-factory/schemas/public-profile-agent-recommendation.schema.json",
+          "how_used": "Kept output compatible with the shared public profile agent recommendation schema."
+        }
+      ],
+      "recommendations": {
+        "title": {
+          "current": "Big Five Personality | Big Five guide",
+          "recommended": "Big Five Personality | FermatMind",
+          "reason": "Normalize the title as a public Big Five profile recommendation while preserving noindex draft status."
+        },
+        "description": {
+          "current": "The Big Five describes personality differences through five continuous dimensions: openness, conscientiousness, extraversion, agreeableness, and neuroticism.",
+          "recommended": "The Big Five describes personality differences through five continuous dimensions: openness, conscientiousness, extraversion, agreeableness, and neurotici. Use it for self-understanding and communication reflection, not diagnosis, hiring or deterministic decisions.",
+          "reason": "Keep SERP-oriented summary bounded by public education and method-safety language."
+        },
+        "h1": {
+          "current": "Big Five Personality",
+          "recommended": "Big Five Personality",
+          "reason": "The reviewed package already provides a concise public H1 candidate."
+        },
+        "quick_answer": {
+          "current": "The Big Five is not a fixed personality type table. It describes stable tendencies through five continuous dimensions and supports self-understanding, communication, and learning reflection.",
+          "recommended": "The Big Five is not a fixed personality type table. It describes stable tendencies through five continuous dimensions and supports self-understanding, communication, and learning reflection.",
+          "reason": "Use the reviewed public quick-answer section as the draft recommendation source."
+        },
+        "faq": [
+          {
+            "question": "Is Big Five a personality type system?",
+            "answer": "No. Big Five is a dimensional model; it does not sort people into fixed types.",
+            "reason": "Reuses reviewed public package FAQ intent while preserving Big Five method boundaries."
+          },
+          {
+            "question": "What does OCEAN mean?",
+            "answer": "OCEAN is a common abbreviation for the five domains.",
+            "reason": "Reuses reviewed public package FAQ intent while preserving Big Five method boundaries."
+          },
+          {
+            "question": "Are higher or lower traits better?",
+            "answer": "No. High and low describe tendency strength, and usefulness depends on task, relationship, and environment.",
+            "reason": "Reuses reviewed public package FAQ intent while preserving Big Five method boundaries."
+          },
+          {
+            "question": "Can Big Five decide a career?",
+            "answer": "No. It can describe preferences, but career choice also needs skills, experience, opportunity, and constraints.",
+            "reason": "Reuses reviewed public package FAQ intent while preserving Big Five method boundaries."
+          },
+          {
+            "question": "What are the 30 facets?",
+            "answer": "Facets are narrower explanations inside the five broad domains. This version provides an overview only.",
+            "reason": "Reuses reviewed public package FAQ intent while preserving Big Five method boundaries."
+          }
+        ],
+        "internal_links": [
+          {
+            "href": "/en/personality/big-five",
+            "anchor_text": "Big Five Personality",
+            "reason": "Reviewed package relationship: hub.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/en/tests/big-five-personality-test-ocean-model",
+            "anchor_text": "Big Five test",
+            "reason": "Reviewed package relationship: test_landing.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/en/personality/big-five/facets",
+            "anchor_text": "30 facets overview",
+            "reason": "Reviewed package relationship: facet_overview.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/en/personality/big-five/openness",
+            "anchor_text": "Openness",
+            "reason": "Reviewed package relationship: domain.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/en/personality/big-five/conscientiousness",
+            "anchor_text": "Conscientiousness",
+            "reason": "Reviewed package relationship: domain.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/en/personality/big-five/extraversion",
+            "anchor_text": "Extraversion",
+            "reason": "Reviewed package relationship: domain.",
+            "safe_public_route": true
+          }
+        ],
+        "differentiation_notes": [
+          "Entity type hub is treated as a dimensional Big Five public profile, not an official type page.",
+          "High/low wording must remain descriptive and context-dependent, never good/bad ranking.",
+          "Draft recommendation is blocked from CMS write, publish, indexability, sitemap, llms and search release until later gates."
+        ]
+      },
+      "qa_required": [
+        "schema_validation",
+        "trademark_claim_gate",
+        "claim_risk_gate",
+        "duplicate_template_gate",
+        "private_route_gate",
+        "result_page_leakage_gate",
+        "seo_projection_gate",
+        "bilingual_consistency_gate"
+      ],
+      "source_qa": {
+        "decision": "PASS_READY_FOR_APPROVAL_QUEUE",
+        "pass_count": 34,
+        "fail_count": 0
+      },
+      "blocked_reason": null,
+      "allowed_next_action": "approval_queue_dry_run_only_before_any_write",
+      "recommended_next_task": "PERSONALITY-AGENT-AUTO-QA-AND-APPROVAL-HANDOFF-01",
+      "recommendation_sha256": "93be134ec46b0c42190a37af961c5fbfebba331808126df4f583eeb04dda410d",
+      "auto_qa_decision": "PASS_READY_FOR_APPROVAL_HANDOFF",
+      "auto_qa_gates": {
+        "schema_validation": "pass",
+        "dimensional_model_gate": "pass",
+        "no_official_big_five_32_ocean_type_gate": "pass",
+        "no_high_low_good_bad_framing_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      }
+    },
+    {
+      "recommendation_id": "personality-agent-auto-runner:/en/personality/big-five/conscientiousness",
+      "source_recommendation_id": "big-five-public-profile-agent-pilot:/en/personality/big-five/conscientiousness",
+      "source_recommendation_sha256": "d921e6b11d7ba93265422ca27f327417bd550824f6a6fe8caa62427f2dfa7934",
+      "target_url": "https://fermatmind.com/en/personality/big-five/conscientiousness",
+      "path": "/en/personality/big-five/conscientiousness",
+      "framework": "big_five",
+      "locale": "en",
+      "page_type": null,
+      "entity_key": null,
+      "priority_rank": 3,
+      "priority_score": 35,
+      "priority_bucket": "P1_QA_PASS_RECOMMENDATION_REFRESH_READY",
+      "evidence_quality": "GSC_EVIDENCE_PENDING",
+      "query_rows_captured": 0,
+      "current_surface": {
+        "title": "Conscientiousness | Big Five guide",
+        "description": "Conscientiousness describes stable tendencies around order, self-discipline, responsibility, planning, execution, and deliberation, helping explain learning, communication, and adaptation patterns.",
+        "h1": "Conscientiousness",
+        "quick_answer": "Conscientiousness concerns order, self-discipline, responsibility, planning, execution, and deliberation. It is not a type label and does not rank ability.",
+        "faq_count": 5,
+        "internal_link_count": 5
+      },
+      "observed_signal": {
+        "evidence_state": "gsc_pending",
+        "impressions": null,
+        "clicks": null,
+        "ctr": null,
+        "average_position": null,
+        "notes": [
+          "GSC URL/query evidence is pending for this artifact-only Big Five public profile pilot."
+        ],
+        "ranker_evidence_quality": "GSC_EVIDENCE_PENDING",
+        "ranker_query_rows_captured": 0
+      },
+      "reference_patterns_used": [
+        {
+          "pattern_id": "big_five_reviewed_package_projection",
+          "source_url": "https://fermatmind.com/en/personality/big-five/conscientiousness",
+          "how_used": "Used the reviewed noindex Big Five package as the current surface and projected draft-only recommendation fields."
+        },
+        {
+          "pattern_id": "public_profile_agent_runner_contract",
+          "source_url": ".agents/skills/public-profile-seo-asset-factory/schemas/public-profile-agent-recommendation.schema.json",
+          "how_used": "Kept output compatible with the shared public profile agent recommendation schema."
+        }
+      ],
+      "recommendations": {
+        "title": {
+          "current": "Conscientiousness | Big Five guide",
+          "recommended": "Conscientiousness | FermatMind",
+          "reason": "Normalize the title as a public Big Five profile recommendation while preserving noindex draft status."
+        },
+        "description": {
+          "current": "Conscientiousness describes stable tendencies around order, self-discipline, responsibility, planning, execution, and deliberation, helping explain learning, communication, and adaptation patterns.",
+          "recommended": "Conscientiousness describes stable tendencies around order, self-discipline, responsibility, planning, execution, and deliberation, helping explain learni. Use it for self-understanding and communication reflection, not diagnosis, hiring or deterministic decisions.",
+          "reason": "Keep SERP-oriented summary bounded by public education and method-safety language."
+        },
+        "h1": {
+          "current": "Conscientiousness",
+          "recommended": "Conscientiousness",
+          "reason": "The reviewed package already provides a concise public H1 candidate."
+        },
+        "quick_answer": {
+          "current": "Conscientiousness concerns order, self-discipline, responsibility, planning, execution, and deliberation. It is not a type label and does not rank ability.",
+          "recommended": "Conscientiousness concerns order, self-discipline, responsibility, planning, execution, and deliberation. It is not a type label and does not rank ability.",
+          "reason": "Use the reviewed public quick-answer section as the draft recommendation source."
+        },
+        "faq": [
+          {
+            "question": "What does Conscientiousness mainly describe?",
+            "answer": "Conscientiousness describes tendencies around order, self-discipline, responsibility, planning, execution, and deliberation in choices and communication.",
+            "reason": "Reuses reviewed public package FAQ intent while preserving Big Five method boundaries."
+          },
+          {
+            "question": "Is higher or lower better?",
+            "answer": "No. Higher and lower are tendencies; usefulness depends on context.",
+            "reason": "Reuses reviewed public package FAQ intent while preserving Big Five method boundaries."
+          },
+          {
+            "question": "How can I observe this domain?",
+            "answer": "Watch responses to stress, feedback, change, and collaboration rather than one behavior.",
+            "reason": "Reuses reviewed public package FAQ intent while preserving Big Five method boundaries."
+          },
+          {
+            "question": "Can it decide work choices?",
+            "answer": "No. It can provide preference clues, but cannot replace ability, experience, and opportunity.",
+            "reason": "Reuses reviewed public package FAQ intent while preserving Big Five method boundaries."
+          },
+          {
+            "question": "How does it relate to facets?",
+            "answer": "Facets are narrower layers inside the broad domain.",
+            "reason": "Reuses reviewed public package FAQ intent while preserving Big Five method boundaries."
+          }
+        ],
+        "internal_links": [
+          {
+            "href": "/en/personality/big-five",
+            "anchor_text": "Big Five Personality",
+            "reason": "Reviewed package relationship: hub.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/en/tests/big-five-personality-test-ocean-model",
+            "anchor_text": "Big Five test",
+            "reason": "Reviewed package relationship: test_landing.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/en/personality/big-five/facets",
+            "anchor_text": "30 facets overview",
+            "reason": "Reviewed package relationship: facet_overview.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/en/personality/big-five/high-conscientiousness",
+            "anchor_text": "High Conscientiousness",
+            "reason": "Reviewed package relationship: high_pole.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/en/personality/big-five/low-conscientiousness",
+            "anchor_text": "Low Conscientiousness",
+            "reason": "Reviewed package relationship: low_pole.",
+            "safe_public_route": true
+          }
+        ],
+        "differentiation_notes": [
+          "Entity type domain is treated as a dimensional Big Five public profile, not an official type page.",
+          "High/low wording must remain descriptive and context-dependent, never good/bad ranking.",
+          "Draft recommendation is blocked from CMS write, publish, indexability, sitemap, llms and search release until later gates."
+        ]
+      },
+      "qa_required": [
+        "schema_validation",
+        "trademark_claim_gate",
+        "claim_risk_gate",
+        "duplicate_template_gate",
+        "private_route_gate",
+        "result_page_leakage_gate",
+        "seo_projection_gate",
+        "bilingual_consistency_gate"
+      ],
+      "source_qa": {
+        "decision": "PASS_READY_FOR_APPROVAL_QUEUE",
+        "pass_count": 34,
+        "fail_count": 0
+      },
+      "blocked_reason": null,
+      "allowed_next_action": "approval_queue_dry_run_only_before_any_write",
+      "recommended_next_task": "PERSONALITY-AGENT-AUTO-QA-AND-APPROVAL-HANDOFF-01",
+      "recommendation_sha256": "6b72ffff8957b202436144856530eacad4f70005bbe35bf8932820ba83e52f48",
+      "auto_qa_decision": "PASS_READY_FOR_APPROVAL_HANDOFF",
+      "auto_qa_gates": {
+        "schema_validation": "pass",
+        "dimensional_model_gate": "pass",
+        "no_official_big_five_32_ocean_type_gate": "pass",
+        "no_high_low_good_bad_framing_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      }
+    },
+    {
+      "recommendation_id": "personality-agent-auto-runner:/en/personality/big-five/emotional-stability",
+      "source_recommendation_id": "big-five-public-profile-agent-pilot:/en/personality/big-five/emotional-stability",
+      "source_recommendation_sha256": "37ffc8aad39f6efcb42228fd3985800a3b6ef1b2ff8de19d57e1f3758724fda7",
+      "target_url": "https://fermatmind.com/en/personality/big-five/emotional-stability",
+      "path": "/en/personality/big-five/emotional-stability",
+      "framework": "big_five",
+      "locale": "en",
+      "page_type": null,
+      "entity_key": null,
+      "priority_rank": 4,
+      "priority_score": 35,
+      "priority_bucket": "P1_QA_PASS_RECOMMENDATION_REFRESH_READY",
+      "evidence_quality": "GSC_EVIDENCE_PENDING",
+      "query_rows_captured": 0,
+      "current_surface": {
+        "title": "Emotional Stability | Big Five guide",
+        "description": "Emotional Stability describes tendencies around lower relative stress response, faster recovery, less sustained high arousal; it is not a rank, but a way to understand fit and communication strategy.",
+        "h1": "Emotional Stability",
+        "quick_answer": "Emotional Stability describes tendencies around lower relative stress response, faster recovery, less sustained high arousal; it is not a rank, but a way to understand fit and communication strategy.",
+        "faq_count": 5,
+        "internal_link_count": 5
+      },
+      "observed_signal": {
+        "evidence_state": "gsc_pending",
+        "impressions": null,
+        "clicks": null,
+        "ctr": null,
+        "average_position": null,
+        "notes": [
+          "GSC URL/query evidence is pending for this artifact-only Big Five public profile pilot."
+        ],
+        "ranker_evidence_quality": "GSC_EVIDENCE_PENDING",
+        "ranker_query_rows_captured": 0
+      },
+      "reference_patterns_used": [
+        {
+          "pattern_id": "big_five_reviewed_package_projection",
+          "source_url": "https://fermatmind.com/en/personality/big-five/emotional-stability",
+          "how_used": "Used the reviewed noindex Big Five package as the current surface and projected draft-only recommendation fields."
+        },
+        {
+          "pattern_id": "public_profile_agent_runner_contract",
+          "source_url": ".agents/skills/public-profile-seo-asset-factory/schemas/public-profile-agent-recommendation.schema.json",
+          "how_used": "Kept output compatible with the shared public profile agent recommendation schema."
+        }
+      ],
+      "recommendations": {
+        "title": {
+          "current": "Emotional Stability | Big Five guide",
+          "recommended": "Emotional Stability | FermatMind",
+          "reason": "Normalize the title as a public Big Five profile recommendation while preserving noindex draft status."
+        },
+        "description": {
+          "current": "Emotional Stability describes tendencies around lower relative stress response, faster recovery, less sustained high arousal; it is not a rank, but a way to understand fit and communication strategy.",
+          "recommended": "Emotional Stability describes tendencies around lower relative stress response, faster recovery, less sustained high arousal; it is not a rank, but a way. Use it for self-understanding and communication reflection, not diagnosis, hiring or deterministic decisions.",
+          "reason": "Keep SERP-oriented summary bounded by public education and method-safety language."
+        },
+        "h1": {
+          "current": "Emotional Stability",
+          "recommended": "Emotional Stability",
+          "reason": "The reviewed package already provides a concise public H1 candidate."
+        },
+        "quick_answer": {
+          "current": "Emotional Stability describes tendencies around lower relative stress response, faster recovery, less sustained high arousal; it is not a rank, but a way to understand fit and communication strategy.",
+          "recommended": "Emotional Stability describes tendencies around lower relative stress response, faster recovery, less sustained high arousal; it is not a rank, but a way to understand fit and communication strategy.",
+          "reason": "Use the reviewed public quick-answer section as the draft recommendation source."
+        },
+        "faq": [
+          {
+            "question": "What does Emotional Stability mean?",
+            "answer": "Emotional Stability means tendencies around lower relative stress response, faster recovery, less sustained high arousal are more likely to appear in daily choices.",
+            "reason": "Reuses reviewed public package FAQ intent while preserving Big Five method boundaries."
+          },
+          {
+            "question": "Is this better?",
+            "answer": "No. It is a tendency pattern; usefulness depends on context and regulation.",
+            "reason": "Reuses reviewed public package FAQ intent while preserving Big Five method boundaries."
+          },
+          {
+            "question": "Why read the other pole?",
+            "answer": "The other pole shows needs you may miss, such as stability, exploration, boundaries, or recovery.",
+            "reason": "Reuses reviewed public package FAQ intent while preserving Big Five method boundaries."
+          },
+          {
+            "question": "Can it decide what work fits me?",
+            "answer": "No. It can describe work-style preferences, but it cannot decide a career by itself.",
+            "reason": "Reuses reviewed public package FAQ intent while preserving Big Five method boundaries."
+          },
+          {
+            "question": "How can I use this practically?",
+            "answer": "Choose one situation, keep the strength of this pole, and add one small move from the other pole.",
+            "reason": "Reuses reviewed public package FAQ intent while preserving Big Five method boundaries."
+          }
+        ],
+        "internal_links": [
+          {
+            "href": "/en/personality/big-five",
+            "anchor_text": "Big Five Personality",
+            "reason": "Reviewed package relationship: hub.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/en/tests/big-five-personality-test-ocean-model",
+            "anchor_text": "Big Five test",
+            "reason": "Reviewed package relationship: test_landing.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/en/personality/big-five/facets",
+            "anchor_text": "30 facets overview",
+            "reason": "Reviewed package relationship: facet_overview.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/en/personality/big-five/neuroticism",
+            "anchor_text": "Neuroticism / Emotional Sensitivity",
+            "reason": "Reviewed package relationship: domain.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/en/personality/big-five/high-neuroticism",
+            "anchor_text": "High Neuroticism / High Emotional Sensitivity",
+            "reason": "Reviewed package relationship: paired_pole.",
+            "safe_public_route": true
+          }
+        ],
+        "differentiation_notes": [
+          "Entity type polarity is treated as a dimensional Big Five public profile, not an official type page.",
+          "High/low wording must remain descriptive and context-dependent, never good/bad ranking.",
+          "Draft recommendation is blocked from CMS write, publish, indexability, sitemap, llms and search release until later gates."
+        ]
+      },
+      "qa_required": [
+        "schema_validation",
+        "trademark_claim_gate",
+        "claim_risk_gate",
+        "duplicate_template_gate",
+        "private_route_gate",
+        "result_page_leakage_gate",
+        "seo_projection_gate",
+        "bilingual_consistency_gate"
+      ],
+      "source_qa": {
+        "decision": "PASS_READY_FOR_APPROVAL_QUEUE",
+        "pass_count": 34,
+        "fail_count": 0
+      },
+      "blocked_reason": null,
+      "allowed_next_action": "approval_queue_dry_run_only_before_any_write",
+      "recommended_next_task": "PERSONALITY-AGENT-AUTO-QA-AND-APPROVAL-HANDOFF-01",
+      "recommendation_sha256": "48a73842d2768e1c04bdf82583240e94fb7b75d79cd1e6d744b9488600000821",
+      "auto_qa_decision": "PASS_READY_FOR_APPROVAL_HANDOFF",
+      "auto_qa_gates": {
+        "schema_validation": "pass",
+        "dimensional_model_gate": "pass",
+        "no_official_big_five_32_ocean_type_gate": "pass",
+        "no_high_low_good_bad_framing_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      }
+    },
+    {
+      "recommendation_id": "personality-agent-auto-runner:/en/personality/big-five/extraversion",
+      "source_recommendation_id": "big-five-public-profile-agent-pilot:/en/personality/big-five/extraversion",
+      "source_recommendation_sha256": "9e12defc698403f55d01b2864879da3dc734101343c676f2f68f949716fcd496",
+      "target_url": "https://fermatmind.com/en/personality/big-five/extraversion",
+      "path": "/en/personality/big-five/extraversion",
+      "framework": "big_five",
+      "locale": "en",
+      "page_type": null,
+      "entity_key": null,
+      "priority_rank": 5,
+      "priority_score": 35,
+      "priority_bucket": "P1_QA_PASS_RECOMMENDATION_REFRESH_READY",
+      "evidence_quality": "GSC_EVIDENCE_PENDING",
+      "query_rows_captured": 0,
+      "current_surface": {
+        "title": "Extraversion | Big Five guide",
+        "description": "Extraversion describes stable tendencies around social energy, expression, activity pace, stimulation, and external feedback, helping explain learning, communication, and adaptation patterns.",
+        "h1": "Extraversion",
+        "quick_answer": "Extraversion concerns social energy, expression, activity pace, stimulation, and external feedback. It is not a type label and does not rank ability.",
+        "faq_count": 5,
+        "internal_link_count": 5
+      },
+      "observed_signal": {
+        "evidence_state": "gsc_pending",
+        "impressions": null,
+        "clicks": null,
+        "ctr": null,
+        "average_position": null,
+        "notes": [
+          "GSC URL/query evidence is pending for this artifact-only Big Five public profile pilot."
+        ],
+        "ranker_evidence_quality": "GSC_EVIDENCE_PENDING",
+        "ranker_query_rows_captured": 0
+      },
+      "reference_patterns_used": [
+        {
+          "pattern_id": "big_five_reviewed_package_projection",
+          "source_url": "https://fermatmind.com/en/personality/big-five/extraversion",
+          "how_used": "Used the reviewed noindex Big Five package as the current surface and projected draft-only recommendation fields."
+        },
+        {
+          "pattern_id": "public_profile_agent_runner_contract",
+          "source_url": ".agents/skills/public-profile-seo-asset-factory/schemas/public-profile-agent-recommendation.schema.json",
+          "how_used": "Kept output compatible with the shared public profile agent recommendation schema."
+        }
+      ],
+      "recommendations": {
+        "title": {
+          "current": "Extraversion | Big Five guide",
+          "recommended": "Extraversion | FermatMind",
+          "reason": "Normalize the title as a public Big Five profile recommendation while preserving noindex draft status."
+        },
+        "description": {
+          "current": "Extraversion describes stable tendencies around social energy, expression, activity pace, stimulation, and external feedback, helping explain learning, communication, and adaptation patterns.",
+          "recommended": "Extraversion describes stable tendencies around social energy, expression, activity pace, stimulation, and external feedback, helping explain learning, co. Use it for self-understanding and communication reflection, not diagnosis, hiring or deterministic decisions.",
+          "reason": "Keep SERP-oriented summary bounded by public education and method-safety language."
+        },
+        "h1": {
+          "current": "Extraversion",
+          "recommended": "Extraversion",
+          "reason": "The reviewed package already provides a concise public H1 candidate."
+        },
+        "quick_answer": {
+          "current": "Extraversion concerns social energy, expression, activity pace, stimulation, and external feedback. It is not a type label and does not rank ability.",
+          "recommended": "Extraversion concerns social energy, expression, activity pace, stimulation, and external feedback. It is not a type label and does not rank ability.",
+          "reason": "Use the reviewed public quick-answer section as the draft recommendation source."
+        },
+        "faq": [
+          {
+            "question": "What does Extraversion mainly describe?",
+            "answer": "Extraversion describes tendencies around social energy, expression, activity pace, stimulation, and external feedback in choices and communication.",
+            "reason": "Reuses reviewed public package FAQ intent while preserving Big Five method boundaries."
+          },
+          {
+            "question": "Is higher or lower better?",
+            "answer": "No. Higher and lower are tendencies; usefulness depends on context.",
+            "reason": "Reuses reviewed public package FAQ intent while preserving Big Five method boundaries."
+          },
+          {
+            "question": "How can I observe this domain?",
+            "answer": "Watch responses to stress, feedback, change, and collaboration rather than one behavior.",
+            "reason": "Reuses reviewed public package FAQ intent while preserving Big Five method boundaries."
+          },
+          {
+            "question": "Can it decide work choices?",
+            "answer": "No. It can provide preference clues, but cannot replace ability, experience, and opportunity.",
+            "reason": "Reuses reviewed public package FAQ intent while preserving Big Five method boundaries."
+          },
+          {
+            "question": "How does it relate to facets?",
+            "answer": "Facets are narrower layers inside the broad domain.",
+            "reason": "Reuses reviewed public package FAQ intent while preserving Big Five method boundaries."
+          }
+        ],
+        "internal_links": [
+          {
+            "href": "/en/personality/big-five",
+            "anchor_text": "Big Five Personality",
+            "reason": "Reviewed package relationship: hub.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/en/tests/big-five-personality-test-ocean-model",
+            "anchor_text": "Big Five test",
+            "reason": "Reviewed package relationship: test_landing.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/en/personality/big-five/facets",
+            "anchor_text": "30 facets overview",
+            "reason": "Reviewed package relationship: facet_overview.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/en/personality/big-five/high-extraversion",
+            "anchor_text": "High Extraversion",
+            "reason": "Reviewed package relationship: high_pole.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/en/personality/big-five/low-extraversion",
+            "anchor_text": "Low Extraversion",
+            "reason": "Reviewed package relationship: low_pole.",
+            "safe_public_route": true
+          }
+        ],
+        "differentiation_notes": [
+          "Entity type domain is treated as a dimensional Big Five public profile, not an official type page.",
+          "High/low wording must remain descriptive and context-dependent, never good/bad ranking.",
+          "Draft recommendation is blocked from CMS write, publish, indexability, sitemap, llms and search release until later gates."
+        ]
+      },
+      "qa_required": [
+        "schema_validation",
+        "trademark_claim_gate",
+        "claim_risk_gate",
+        "duplicate_template_gate",
+        "private_route_gate",
+        "result_page_leakage_gate",
+        "seo_projection_gate",
+        "bilingual_consistency_gate"
+      ],
+      "source_qa": {
+        "decision": "PASS_READY_FOR_APPROVAL_QUEUE",
+        "pass_count": 34,
+        "fail_count": 0
+      },
+      "blocked_reason": null,
+      "allowed_next_action": "approval_queue_dry_run_only_before_any_write",
+      "recommended_next_task": "PERSONALITY-AGENT-AUTO-QA-AND-APPROVAL-HANDOFF-01",
+      "recommendation_sha256": "c7b9b0982fc612202195eb4aaecf9c7f913ee8586733053e946f4ad3f5fdc2c4",
+      "auto_qa_decision": "PASS_READY_FOR_APPROVAL_HANDOFF",
+      "auto_qa_gates": {
+        "schema_validation": "pass",
+        "dimensional_model_gate": "pass",
+        "no_official_big_five_32_ocean_type_gate": "pass",
+        "no_high_low_good_bad_framing_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      }
+    },
+    {
+      "recommendation_id": "personality-agent-auto-runner:/en/personality/big-five/facets",
+      "source_recommendation_id": "big-five-public-profile-agent-pilot:/en/personality/big-five/facets",
+      "source_recommendation_sha256": "6e4512961653edea7b7fb19debf7934f7b9f5e6b30572722714a5d08b79c8a3d",
+      "target_url": "https://fermatmind.com/en/personality/big-five/facets",
+      "path": "/en/personality/big-five/facets",
+      "framework": "big_five",
+      "locale": "en",
+      "page_type": null,
+      "entity_key": null,
+      "priority_rank": 6,
+      "priority_score": 35,
+      "priority_bucket": "P1_QA_PASS_RECOMMENDATION_REFRESH_READY",
+      "evidence_quality": "GSC_EVIDENCE_PENDING",
+      "query_rows_captured": 0,
+      "current_surface": {
+        "title": "Big Five 30 Facets | Big Five guide",
+        "description": "The 30 facets are narrower explanations beneath the five Big Five domains, showing why people can differ inside the same broad trait.",
+        "h1": "Big Five 30 Facets",
+        "quick_answer": "The 30 facets are narrower explanations beneath the five Big Five domains, showing why people can differ inside the same broad trait. This page is an overview and glossary map only; it does not open facet detail pages.",
+        "faq_count": 5,
+        "internal_link_count": 7
+      },
+      "observed_signal": {
+        "evidence_state": "gsc_pending",
+        "impressions": null,
+        "clicks": null,
+        "ctr": null,
+        "average_position": null,
+        "notes": [
+          "GSC URL/query evidence is pending for this artifact-only Big Five public profile pilot."
+        ],
+        "ranker_evidence_quality": "GSC_EVIDENCE_PENDING",
+        "ranker_query_rows_captured": 0
+      },
+      "reference_patterns_used": [
+        {
+          "pattern_id": "big_five_reviewed_package_projection",
+          "source_url": "https://fermatmind.com/en/personality/big-five/facets",
+          "how_used": "Used the reviewed noindex Big Five package as the current surface and projected draft-only recommendation fields."
+        },
+        {
+          "pattern_id": "public_profile_agent_runner_contract",
+          "source_url": ".agents/skills/public-profile-seo-asset-factory/schemas/public-profile-agent-recommendation.schema.json",
+          "how_used": "Kept output compatible with the shared public profile agent recommendation schema."
+        }
+      ],
+      "recommendations": {
+        "title": {
+          "current": "Big Five 30 Facets | Big Five guide",
+          "recommended": "Big Five 30 Facets | FermatMind",
+          "reason": "Normalize the title as a public Big Five profile recommendation while preserving noindex draft status."
+        },
+        "description": {
+          "current": "The 30 facets are narrower explanations beneath the five Big Five domains, showing why people can differ inside the same broad trait.",
+          "recommended": "The 30 facets are narrower explanations beneath the five Big Five domains, showing why people can differ inside the same broad trait. Use it for self-understanding and communication reflection, not diagnosis, hiring or deterministic decisions.",
+          "reason": "Keep SERP-oriented summary bounded by public education and method-safety language."
+        },
+        "h1": {
+          "current": "Big Five 30 Facets",
+          "recommended": "Big Five 30 Facets",
+          "reason": "The reviewed package already provides a concise public H1 candidate."
+        },
+        "quick_answer": {
+          "current": "The 30 facets are narrower explanations beneath the five Big Five domains, showing why people can differ inside the same broad trait. This page is an overview and glossary map only; it does not open facet detail pages.",
+          "recommended": "The 30 facets are narrower explanations beneath the five Big Five domains, showing why people can differ inside the same broad trait. This page is an overview and glossary map only; it does not open facet detail pages.",
+          "reason": "Use the reviewed public quick-answer section as the draft recommendation source."
+        },
+        "faq": [
+          {
+            "question": "Why are there 30 facets?",
+            "answer": "Common Big Five explanations can divide each broad domain into narrower facets; this page uses a 5 x 6 overview structure.",
+            "reason": "Reuses reviewed public package FAQ intent while preserving Big Five method boundaries."
+          },
+          {
+            "question": "Does this open facet detail pages?",
+            "answer": "No. This stage is overview-only and does not generate 30 facet detail pages.",
+            "reason": "Reuses reviewed public package FAQ intent while preserving Big Five method boundaries."
+          },
+          {
+            "question": "Are facets 30 personality types?",
+            "answer": "No. They are narrower explanations inside dimensions, not personality types.",
+            "reason": "Reuses reviewed public package FAQ intent while preserving Big Five method boundaries."
+          },
+          {
+            "question": "How should I use facets?",
+            "answer": "Use them to make the five broad domains more precise, not to replace a full assessment.",
+            "reason": "Reuses reviewed public package FAQ intent while preserving Big Five method boundaries."
+          },
+          {
+            "question": "Do facets have research support?",
+            "answer": "BFI-2 and other five-factor materials use hierarchical or facet language, although labels differ by instrument.",
+            "reason": "Reuses reviewed public package FAQ intent while preserving Big Five method boundaries."
+          }
+        ],
+        "internal_links": [
+          {
+            "href": "/en/personality/big-five",
+            "anchor_text": "Big Five Personality",
+            "reason": "Reviewed package relationship: hub.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/en/tests/big-five-personality-test-ocean-model",
+            "anchor_text": "Big Five test",
+            "reason": "Reviewed package relationship: test_landing.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/en/personality/big-five/facets",
+            "anchor_text": "30 facets overview",
+            "reason": "Reviewed package relationship: facet_overview.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/en/personality/big-five/openness",
+            "anchor_text": "Openness",
+            "reason": "Reviewed package relationship: domain.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/en/personality/big-five/conscientiousness",
+            "anchor_text": "Conscientiousness",
+            "reason": "Reviewed package relationship: domain.",
+            "safe_public_route": true
+          },
+          {
+            "href": "/en/personality/big-five/extraversion",
+            "anchor_text": "Extraversion",
+            "reason": "Reviewed package relationship: domain.",
+            "safe_public_route": true
+          }
+        ],
+        "differentiation_notes": [
+          "Entity type facet_hub is treated as a dimensional Big Five public profile, not an official type page.",
+          "High/low wording must remain descriptive and context-dependent, never good/bad ranking.",
+          "Draft recommendation is blocked from CMS write, publish, indexability, sitemap, llms and search release until later gates."
+        ]
+      },
+      "qa_required": [
+        "schema_validation",
+        "trademark_claim_gate",
+        "claim_risk_gate",
+        "duplicate_template_gate",
+        "private_route_gate",
+        "result_page_leakage_gate",
+        "seo_projection_gate",
+        "bilingual_consistency_gate"
+      ],
+      "source_qa": {
+        "decision": "PASS_READY_FOR_APPROVAL_QUEUE",
+        "pass_count": 34,
+        "fail_count": 0
+      },
+      "blocked_reason": null,
+      "allowed_next_action": "approval_queue_dry_run_only_before_any_write",
+      "recommended_next_task": "PERSONALITY-AGENT-AUTO-QA-AND-APPROVAL-HANDOFF-01",
+      "recommendation_sha256": "129b99e95d4544c09a3eb0c09e44825e36012cf2dd4e7cec04c2079e450326ca",
+      "auto_qa_decision": "PASS_READY_FOR_APPROVAL_HANDOFF",
+      "auto_qa_gates": {
+        "schema_validation": "pass",
+        "dimensional_model_gate": "pass",
+        "no_official_big_five_32_ocean_type_gate": "pass",
+        "no_high_low_good_bad_framing_gate": "pass",
+        "claim_risk_gate": "pass",
+        "duplicate_template_gate": "pass",
+        "private_route_gate": "pass",
+        "result_page_leakage_gate": "pass",
+        "seo_projection_gate": "pass",
+        "bilingual_consistency_gate": "pass"
+      }
+    }
+  ],
+  "safety_boundary": {
+    "artifact_only": true,
+    "approval_queue_write_attempted": false,
+    "cms_write_attempted": false,
+    "cms_live_promotion_attempted": false,
+    "frontend_runtime_change_attempted": false,
+    "search_queue_mutation_attempted": false,
+    "live_search_submit_attempted": false,
+    "sitemap_llms_mutation_attempted": false,
+    "gsc_api_call_attempted": false,
+    "gsc_request_indexing_attempted": false,
+    "production_deploy_attempted": false
+  },
+  "blockers": [],
+  "warnings": [
+    "Selected rows may use pending GSC evidence when the ranker chooses QA-passed refresh candidates after no P0 query-backed MBTI rows remain."
+  ],
+  "recommended_next_task": "PERSONALITY-AGENT-APPROVAL-QUEUE-AUTO-HANDOFF-DRY_RUN-01"
+}
