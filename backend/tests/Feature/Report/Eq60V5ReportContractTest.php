@@ -348,7 +348,7 @@ final class Eq60V5ReportContractTest extends TestCase
         $this->assertNotEmpty((array) data_get($fixture, 'report.assets'));
         $this->assertFalse((bool) data_get($fixture, 'report.next_module.available', true));
         $this->assertSame('planned', (string) data_get($fixture, 'report.next_module.status'));
-        $this->assertSame('eq_report_v5_assets_commercial_ready_v1_6', (string) data_get($fixture, 'report.methodology.report_version'));
+        $this->assertSame('eq_report_v5_assets_commercial_ready_v1_9', (string) data_get($fixture, 'report.methodology.report_version'));
         $this->assertNotSame('', (string) data_get($fixture, 'report.asset_refs.result_snapshot_id'));
         $this->assertCount(7, (array) data_get($fixture, 'report.asset_refs.commercial_conversion_ids'));
         $this->assertNotSame('', (string) data_get($fixture, 'report.asset_refs.quality_confidence_id'));
