@@ -552,7 +552,7 @@ final class PersonalityAgentApprovalQueueWriter
     {
         $identity = $this->identityForRecommendation($recommendation);
         $recommendationJson = $this->jsonString($recommendation);
-        $qaDecision = (string) ($qaResult['decision'] ?? $qaResult['status'] ?? $qaResult['qa_status'] ?? '');
+        $qaDecision = (string) ($qaResult['decision'] ?? $qaResult['qa_decision'] ?? $qaResult['status'] ?? $qaResult['qa_status'] ?? '');
         $blockedReason = $this->blockedReason($recommendation, $qaResult, $identity, $recommendationJson);
 
         return [
@@ -599,7 +599,7 @@ final class PersonalityAgentApprovalQueueWriter
             return 'qa_result_missing';
         }
 
-        $decision = (string) ($qaResult['decision'] ?? $qaResult['status'] ?? $qaResult['qa_status'] ?? '');
+        $decision = (string) ($qaResult['decision'] ?? $qaResult['qa_decision'] ?? $qaResult['status'] ?? $qaResult['qa_status'] ?? '');
         if (! $this->qaDecisionPasses($decision)) {
             return 'qa_not_pass';
         }
@@ -719,6 +719,7 @@ final class PersonalityAgentApprovalQueueWriter
             'PASS_READY_FOR_APPROVAL_QUEUE',
             'PASS_READY_FOR_APPROVAL_REVIEW',
             'PASS_READY_FOR_APPROVAL_HANDOFF',
+            'PASS_READY_FOR_EDITORIAL_REVIEW_AND_APPROVAL_QUEUE_REPAIR',
             'PASS_READY_FOR_CONTENT_EXPANSION_REVIEW',
             'READY_QUERY_BACKED_LOW_RISK_DRAFT_REVIEW',
         ], true);

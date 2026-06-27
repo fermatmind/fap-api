@@ -994,12 +994,12 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
             'artifact' => 'MBTI64-NEXT-BATCH-6-COMPETITOR-GAP-CONTENT-EXPANSION-QA-01',
             'final_decision' => 'PASS_READY_FOR_EDITORIAL_REVIEW_AND_APPROVAL_QUEUE_REPAIR',
             'page_results' => [
-                $this->qaRow('https://fermatmind.com/zh/personality/intp-a', 'PASS_READY_FOR_CONTENT_EXPANSION_REVIEW'),
-                $this->qaRow('https://fermatmind.com/zh/personality/esfp-a', 'PASS_READY_FOR_CONTENT_EXPANSION_REVIEW'),
-                $this->qaRow('https://fermatmind.com/en/personality/enfj-a', 'PASS_READY_FOR_CONTENT_EXPANSION_REVIEW'),
-                $this->qaRow('https://fermatmind.com/en/personality/intp-a', 'PASS_READY_FOR_CONTENT_EXPANSION_REVIEW'),
-                $this->qaRow('https://fermatmind.com/en/personality/esfp-a', 'PASS_READY_FOR_CONTENT_EXPANSION_REVIEW'),
-                $this->qaRow('https://fermatmind.com/zh/personality/enfj-a', 'PASS_READY_FOR_CONTENT_EXPANSION_REVIEW'),
+                $this->qaDecisionRow('https://fermatmind.com/zh/personality/intp-a', 'PASS_READY_FOR_CONTENT_EXPANSION_REVIEW'),
+                $this->qaDecisionRow('https://fermatmind.com/zh/personality/esfp-a', 'PASS_READY_FOR_CONTENT_EXPANSION_REVIEW'),
+                $this->qaDecisionRow('https://fermatmind.com/en/personality/enfj-a', 'PASS_READY_FOR_CONTENT_EXPANSION_REVIEW'),
+                $this->qaDecisionRow('https://fermatmind.com/en/personality/intp-a', 'PASS_READY_FOR_CONTENT_EXPANSION_REVIEW'),
+                $this->qaDecisionRow('https://fermatmind.com/en/personality/esfp-a', 'PASS_READY_FOR_CONTENT_EXPANSION_REVIEW'),
+                $this->qaDecisionRow('https://fermatmind.com/zh/personality/enfj-a', 'PASS_READY_FOR_CONTENT_EXPANSION_REVIEW'),
             ],
         ];
     }
@@ -1126,6 +1126,19 @@ final class PersonalityAgentApprovalQueueCommandTest extends TestCase
         return [
             'target_url' => $targetUrl,
             'decision' => $decision,
+            'blockers' => $blockers,
+        ];
+    }
+
+    /**
+     * @param  list<string>  $blockers
+     * @return array<string,mixed>
+     */
+    private function qaDecisionRow(string $targetUrl, string $decision, array $blockers = []): array
+    {
+        return [
+            'target_url' => $targetUrl,
+            'qa_decision' => $decision,
             'blockers' => $blockers,
         ];
     }
