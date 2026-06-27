@@ -63,6 +63,51 @@ final class ArticleReleaseCloseoutCommandTest extends TestCase
         $this->assertFalse($payload['sitemap_llms_mutation_attempted']);
     }
 
+    public function test_closeout_accepts_ops_media_library_origin_and_explicit_schema_hreflang_holds(): void
+    {
+        $article = $this->createReleasedArticle([
+            'content_md' => '# 高考出分后专业太多怎么筛？'."\n\n![流程图](https://ops.fermatmind.com/storage/media-library/body.png)\n\n正文。",
+            'content_html' => '<h1>高考出分后专业太多怎么筛？</h1><img src="https://ops.fermatmind.com/storage/media-library/body.png">',
+            'cover_image_url' => 'https://ops.fermatmind.com/storage/media-library/cover.jpg',
+        ]);
+        $article->seoMeta?->forceFill([
+            'og_image_url' => 'https://ops.fermatmind.com/storage/media-library/og.jpg',
+            'schema_json' => [
+                'editorial_package_v1' => [
+                    'schema_hold' => true,
+                    'hreflang_hold' => true,
+                    'article_schema_enabled' => false,
+                    'breadcrumb_schema_enabled' => false,
+                    'faq_schema_enabled' => false,
+                ],
+            ],
+        ])->save();
+
+        $canonicalUrl = 'https://fermatmind.com/zh/articles/gaokao-score-major-shortlist-riasec-checklist';
+        $this->insertUrlTruth($canonicalUrl, (string) $article->locale, (string) $article->slug);
+        $this->insertSearchQueue($canonicalUrl, (string) $article->locale, 'indexnow', 58);
+        $this->insertSearchQueue($canonicalUrl, (string) $article->locale, 'baidu_push', 59);
+
+        $exitCode = Artisan::call('articles:release-closeout', [
+            '--article-id' => '53',
+            '--expected-slug' => 'gaokao-score-major-shortlist-riasec-checklist',
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode, json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $this->assertTrue($payload['ok']);
+        $this->assertTrue(data_get($payload, 'checks.media.ok'));
+        $this->assertSame('held', data_get($payload, 'checks.schema_hreflang.schema_state'));
+        $this->assertSame('held', data_get($payload, 'checks.schema_hreflang.hreflang_state'));
+        $this->assertTrue(data_get($payload, 'checks.schema_hreflang.schema_hold'));
+        $this->assertTrue(data_get($payload, 'checks.schema_hreflang.hreflang_hold'));
+        $this->assertErrorCodeMissing($payload, 'media_url_not_public_origin');
+        $this->assertErrorCodeMissing($payload, 'article_schema_not_enabled');
+        $this->assertErrorCodeMissing($payload, 'breadcrumb_schema_not_enabled');
+        $this->assertErrorCodeMissing($payload, 'hreflang_policy_missing');
+    }
+
     public function test_missing_search_queue_blocks_search_closeout(): void
     {
         $article = $this->createReleasedArticle();
@@ -358,6 +403,17 @@ final class ArticleReleaseCloseoutCommandTest extends TestCase
     private function assertErrorCode(array $payload, string $code): void
     {
         $this->assertContains($code, array_map(
+            static fn (array $error): string => (string) ($error['code'] ?? ''),
+            (array) ($payload['issues'] ?? [])
+        ));
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     */
+    private function assertErrorCodeMissing(array $payload, string $code): void
+    {
+        $this->assertNotContains($code, array_map(
             static fn (array $error): string => (string) ($error['code'] ?? ''),
             (array) ($payload['issues'] ?? [])
         ));

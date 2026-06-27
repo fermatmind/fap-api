@@ -9,11 +9,26 @@ use App\Models\ArticleCategory;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTag;
 use App\Models\ArticleTranslationRevision;
+use App\Support\PublicMediaUrlGuard;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 final class ArticleReleaseCloseoutService
 {
+    /**
+     * Closeout audits historical Media Library article references that are already
+     * public-rendered. Keep this narrower than the general API media sanitizer.
+     *
+     * @var list<string>
+     */
+    private const CLOSEOUT_PUBLIC_MEDIA_HOSTS = [
+        'api.fermatmind.com',
+        'assets.fermatmind.com',
+        'fermatmind.com',
+        'www.fermatmind.com',
+        'ops.fermatmind.com',
+    ];
+
     public const COMPLETE_SEARCH_OBSERVATION_PENDING = 'ARTICLE_RELEASE_COMPLETE_SEARCH_OBSERVATION_PENDING';
 
     public const BLOCKED_DISCOVERABILITY_GAP = 'BLOCKED_DISCOVERABILITY_GAP';
@@ -452,28 +467,38 @@ final class ArticleReleaseCloseoutService
         $package = is_array($schema['editorial_package_v1'] ?? null) ? $schema['editorial_package_v1'] : [];
         $hreflang = is_array($package['hreflang_gate_v1'] ?? null) ? $package['hreflang_gate_v1'] : null;
 
+        $schemaHold = (bool) ($package['schema_hold'] ?? false);
+        $hreflangHold = (bool) ($package['hreflang_hold'] ?? false);
         $articleSchemaEnabled = (bool) ($package['article_schema_enabled'] ?? false);
         $breadcrumbSchemaEnabled = (bool) ($package['breadcrumb_schema_enabled'] ?? false);
         $faqSchemaEnabled = (bool) ($package['faq_schema_enabled'] ?? false);
+        $hasNoHreflangPolicy = is_array($hreflang)
+            && ($hreflang['enabled'] ?? null) === false
+            && ($hreflang['policy'] ?? null) === 'no_hreflang';
 
-        if (! $articleSchemaEnabled) {
+        if (! $schemaHold && ! $articleSchemaEnabled) {
             $issues[] = $this->issue('schema.article_schema_enabled', 'article_schema_not_enabled', 'Article schema gate is not enabled.');
         }
-        if (! $breadcrumbSchemaEnabled) {
+        if (! $schemaHold && ! $breadcrumbSchemaEnabled) {
             $issues[] = $this->issue('schema.breadcrumb_schema_enabled', 'breadcrumb_schema_not_enabled', 'Breadcrumb schema gate is not enabled.');
         }
         if ($faqSchemaEnabled) {
             $issues[] = $this->issue('schema.faq_schema_enabled', 'faq_schema_not_held', 'FAQ schema should remain held unless explicitly reviewed.');
         }
-        if (! is_array($hreflang) || ($hreflang['enabled'] ?? null) !== false || ($hreflang['policy'] ?? null) !== 'no_hreflang') {
+        if (! $hreflangHold && ! $hasNoHreflangPolicy) {
             $issues[] = $this->issue('hreflang_gate_v1', 'hreflang_policy_missing', 'Hreflang gate must be enabled reciprocally or record no_hreflang policy.');
         }
 
         return [
             'ok' => $issues === [],
+            'schema_state' => $schemaHold ? 'held' : 'enabled_required',
+            'hreflang_state' => $hreflangHold ? 'held' : 'policy_required',
+            'schema_hold' => $schemaHold,
+            'hreflang_hold' => $hreflangHold,
             'article_schema_enabled' => $articleSchemaEnabled,
             'breadcrumb_schema_enabled' => $breadcrumbSchemaEnabled,
             'faq_schema_enabled' => $faqSchemaEnabled,
+            'hreflang_no_hreflang_policy_recorded' => $hasNoHreflangPolicy,
             'hreflang_gate_v1' => $hreflang,
             'issues' => $issues,
         ];
@@ -657,14 +682,23 @@ final class ArticleReleaseCloseoutService
 
     private function isPublicMediaUrl(string $url): bool
     {
-        $host = parse_url($url, PHP_URL_HOST);
+        if (PublicMediaUrlGuard::isAllowedPublicMediaUrl($url)) {
+            return true;
+        }
 
-        return in_array($host, [
-            'api.fermatmind.com',
-            'assets.fermatmind.com',
-            'fermatmind.com',
-            'www.fermatmind.com',
-        ], true);
+        $scheme = strtolower((string) parse_url($url, PHP_URL_SCHEME));
+        $host = parse_url($url, PHP_URL_HOST);
+        $port = (int) (parse_url($url, PHP_URL_PORT) ?? 443);
+
+        if ($scheme !== 'https' || ! is_string($host) || $port !== 443) {
+            return false;
+        }
+
+        if (parse_url($url, PHP_URL_USER) !== null || parse_url($url, PHP_URL_PASS) !== null) {
+            return false;
+        }
+
+        return in_array(strtolower(trim($host, "[] \t\n\r\0\x0B.")), self::CLOSEOUT_PUBLIC_MEDIA_HOSTS, true);
     }
 
     /**
