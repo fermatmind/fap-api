@@ -94,6 +94,88 @@ final class AttemptReportAccessReadTest extends TestCase
         ]);
     }
 
+    private function createBigFiveAttempt(string $attemptId, string $anonId): void
+    {
+        Attempt::create([
+            'id' => $attemptId,
+            'org_id' => 0,
+            'anon_id' => $anonId,
+            'scale_code' => 'BIG5_OCEAN',
+            'scale_version' => 'v0.3',
+            'region' => 'CN_MAINLAND',
+            'locale' => 'zh-CN',
+            'question_count' => 120,
+            'client_platform' => 'test',
+            'answers_summary_json' => ['stage' => 'seed', 'meta' => ['form_code' => 'big5_120']],
+            'started_at' => now(),
+            'submitted_at' => now(),
+            'pack_id' => 'BIG5_OCEAN',
+            'dir_version' => 'v1',
+            'content_package_version' => 'attempt-v1',
+            'scoring_spec_version' => 'attempt-score-v1',
+        ]);
+    }
+
+    private function createBigFiveResult(string $attemptId): void
+    {
+        $facetCodes = [
+            'N1', 'N2', 'N3', 'N4', 'N5', 'N6',
+            'E1', 'E2', 'E3', 'E4', 'E5', 'E6',
+            'O1', 'O2', 'O3', 'O4', 'O5', 'O6',
+            'A1', 'A2', 'A3', 'A4', 'A5', 'A6',
+            'C1', 'C2', 'C3', 'C4', 'C5', 'C6',
+        ];
+        $facetsMean = [];
+        $facetsPercentile = [];
+        $facetBuckets = [];
+        foreach ($facetCodes as $index => $facetCode) {
+            $facetsMean[$facetCode] = round(2.4 + (($index % 6) * 0.3), 2);
+            $facetsPercentile[$facetCode] = 35 + (($index * 7) % 55);
+            $facetBuckets[$facetCode] = $facetsPercentile[$facetCode] >= 67
+                ? 'high'
+                : ($facetsPercentile[$facetCode] <= 33 ? 'low' : 'mid');
+        }
+
+        Result::create([
+            'id' => (string) Str::uuid(),
+            'org_id' => 0,
+            'attempt_id' => $attemptId,
+            'scale_code' => 'BIG5_OCEAN',
+            'scale_version' => 'v0.3',
+            'type_code' => '',
+            'scores_json' => [],
+            'scores_pct' => [],
+            'axis_states' => [],
+            'content_package_version' => 'result-v1',
+            'result_json' => [
+                'normed_json' => [
+                    'engine_version' => 'big5_ipipneo120_v3.0.0',
+                    'raw_scores' => [
+                        'domains_mean' => ['O' => 4.2, 'C' => 3.8, 'E' => 3.2, 'A' => 3.9, 'N' => 2.3],
+                        'facets_mean' => $facetsMean,
+                    ],
+                    'scores_0_100' => [
+                        'domains_percentile' => ['O' => 81, 'C' => 73, 'E' => 48, 'A' => 76, 'N' => 22],
+                        'facets_percentile' => $facetsPercentile,
+                    ],
+                    'facts' => [
+                        'domain_buckets' => ['O' => 'high', 'C' => 'high', 'E' => 'mid', 'A' => 'high', 'N' => 'low'],
+                        'facet_buckets' => $facetBuckets,
+                        'top_strength_facets' => ['O5', 'A3', 'C4'],
+                        'top_growth_facets' => ['E3', 'E2', 'C5'],
+                    ],
+                    'tags' => ['profile:explorer'],
+                ],
+            ],
+            'pack_id' => 'BIG5_OCEAN',
+            'dir_version' => 'v1',
+            'scoring_spec_version' => 'result-score-v1',
+            'report_engine_version' => 'v1.2',
+            'is_valid' => true,
+            'computed_at' => now(),
+        ]);
+    }
+
     private function createActiveGrant(
         string $attemptId,
         string $anonId,
@@ -309,6 +391,83 @@ final class AttemptReportAccessReadTest extends TestCase
             ->assertJsonPath('payload.upgrade_sku_effective', null)
             ->assertJsonPath('payload.offers', [])
             ->assertJsonPath('payload.modules_preview', []);
+    }
+
+    public function test_big5_report_access_promotes_to_full_ready_when_free_full_report_mode_is_enabled(): void
+    {
+        config()->set('fap.features.free_full_report_mode', true);
+        config()->set('fap.free_full_report_assessments', ['BIG5_OCEAN']);
+
+        $this->seedScales();
+
+        $attemptId = (string) Str::uuid();
+        $anonId = 'anon_big5_access_free_full_report_mode';
+        $token = $this->issueAnonToken($anonId);
+        $this->createBigFiveAttempt($attemptId, $anonId);
+        $this->createBigFiveResult($attemptId);
+
+        $response = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/report-access");
+
+        $response->assertOk()
+            ->assertJsonPath('attempt_id', $attemptId)
+            ->assertJsonPath('access_state', 'ready')
+            ->assertJsonPath('report_state', 'ready')
+            ->assertJsonPath('pdf_state', 'ready')
+            ->assertJsonPath('actions.page_href', "/result/{$attemptId}")
+            ->assertJsonPath('actions.pdf_href', "/api/v0.3/attempts/{$attemptId}/report.pdf")
+            ->assertJsonPath('unlock_stage', 'full')
+            ->assertJsonPath('unlock_source', 'none')
+            ->assertJsonPath('access_source', 'free_full_report_mode')
+            ->assertJsonPath('free_full_report_mode', true)
+            ->assertJsonPath('paywall_suppressed', true)
+            ->assertJsonPath('payload.locked', false)
+            ->assertJsonPath('payload.access_level', 'full')
+            ->assertJsonPath('payload.variant', 'full')
+            ->assertJsonPath('payload.unlock_stage', 'full')
+            ->assertJsonPath('payload.unlock_source', 'none')
+            ->assertJsonPath('payload.access_source', 'free_full_report_mode')
+            ->assertJsonPath('payload.free_full_report_mode', true)
+            ->assertJsonPath('payload.paywall_suppressed', true)
+            ->assertJsonPath('payload.upgrade_sku', null)
+            ->assertJsonPath('payload.upgrade_sku_effective', null)
+            ->assertJsonPath('payload.offers', [])
+            ->assertJsonPath('payload.modules_preview', [])
+            ->assertJsonPath('big5_form_v1.form_code', 'big5_120')
+            ->assertJsonPath('big5_form_v1.scale_code', 'BIG5_OCEAN');
+    }
+
+    public function test_big5_report_endpoint_uses_full_projection_when_full_access_is_available(): void
+    {
+        $this->seedScales();
+
+        $attemptId = (string) Str::uuid();
+        $anonId = 'anon_big5_report_full_access';
+        $token = $this->issueAnonToken($anonId);
+        $this->createBigFiveAttempt($attemptId, $anonId);
+        $this->createBigFiveResult($attemptId);
+        $this->createActiveGrant($attemptId, $anonId, 'BIG5_FULL_REPORT');
+
+        $response = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/report");
+
+        $response->assertOk()
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('locked', false)
+            ->assertJsonPath('access_level', 'full')
+            ->assertJsonPath('variant', 'full')
+            ->assertJsonPath('unlock_stage', 'full')
+            ->assertJsonPath('big5_form_v1.form_code', 'big5_120')
+            ->assertJsonPath('big5_public_projection_v1.schema_version', 'big5.public_projection.v1')
+            ->assertJsonPath('big5_public_projection_v1._meta.locked', false);
+
+        $this->assertNotSame(true, $response->json('big5_public_projection_v1._meta.redacted'));
+        $this->assertNotEmpty((array) $response->json('big5_public_projection_v1.facet_vector'));
+        $this->assertNotEmpty((array) $response->json('big5_public_projection_v1.action_plan_summary'));
     }
 
     public function test_it_keeps_projection_missing_pending_when_active_grant_exists_but_result_does_not_exist(): void
