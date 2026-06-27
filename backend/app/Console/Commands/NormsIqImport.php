@@ -66,6 +66,9 @@ final class NormsIqImport extends Command
         if (! $dryRun && (string) ($payload['bank_id'] ?? '') !== self::OWNER_BANK_ID) {
             $errors[] = 'owner30_authority_import_requires_bank_iq_owner_original_30';
         }
+        if (! $dryRun && $requireClaimReady && $this->hasSimulationOrFixtureSource($payload)) {
+            $errors[] = 'simulation_or_fixture_authority_requires_dry_run_only';
+        }
         if ($requireClaimReady && ! (bool) ($gate['claim_eligible'] ?? false)) {
             $errors[] = 'authority_not_public_claim_ready:'.(string) ($gate['reason_code'] ?? 'unknown');
         }
@@ -333,6 +336,30 @@ final class NormsIqImport extends Command
         }
 
         return null;
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     */
+    private function hasSimulationOrFixtureSource(array $payload): bool
+    {
+        $sourceKind = strtolower(trim((string) ($payload['source_kind'] ?? '')));
+        $sourceRef = strtolower(trim((string) ($payload['source_ref'] ?? '')));
+        $evidence = strtolower(json_encode($payload['evidence'] ?? [], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?: '');
+
+        foreach (['fixture', 'simulation', 'synthetic'] as $marker) {
+            if (str_contains($sourceKind, $marker) || str_contains($evidence, $marker)) {
+                return true;
+            }
+        }
+
+        foreach (['fixture://', 'test-fixture://', 'simulation://', 'synthetic://'] as $scheme) {
+            if (str_starts_with($sourceRef, $scheme)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private function isTruthy(mixed $value): bool
