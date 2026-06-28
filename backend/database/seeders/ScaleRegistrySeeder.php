@@ -89,8 +89,8 @@ final class ScaleRegistrySeeder extends Seeder
                     'og_image_url' => 'https://api.fermatmind.com/static/share/mbti_square_600x600.png',
                 ],
                 'zh' => [
-                    'title' => 'MBTI 性格测试（16型人格测试）',
-                    'description' => '通过结构化测评了解你的 MBTI 类型、偏好强度与沟通协作方式。',
+                    'title' => '免费 MBTI 测试：16 型人格完整结果',
+                    'description' => '免费完成 MBTI 人格测试，查看 16 型人格结果、偏好维度与后续探索建议。结果用于自我了解，不作诊断或职业保证。',
                     'og_image_url' => 'https://api.fermatmind.com/static/share/mbti_square_600x600.png',
                 ],
             ],

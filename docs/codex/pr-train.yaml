@@ -30078,3 +30078,39 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: MBTI-MAIN-FREE-SERP-TDK-01
+    repo: fap-api
+    depends_on: []
+    branch: codex/mbti-main-free-serp-tdk-01
+    title: "MBTI-MAIN-FREE-SERP-TDK-01: seo(mbti): align main free-test TDK authority"
+    train_scope: mbti_main_lookup_metadata_authority
+    status: user_authorized
+    scope:
+      - Align the MBTI main zh lookup SEO title and description with conservative free-test metadata authority.
+      - Preserve the existing /api/v0.3/scales/lookup response shape; only seo_title and seo_description values change.
+      - Add focused lookup coverage for the canonical MBTI zh slug.
+    allowed_paths:
+      - backend/database/seeders/ScaleRegistrySeeder.php
+      - backend/tests/Feature/V0_3/ScalesLookupSeoMetadataTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+    do_not:
+      - Modify FAQ, content_i18n_json, body copy, schema policy, search submission, sitemap, llms, CMS production data, deployment, or fap-web.
+      - Use risky SERP copy such as 真全免, 无付费墙, 拒绝强制收费, or 2026专业版.
+      - Add new API fields or frontend fallback metadata.
+    validation:
+      - cd backend && php artisan route:list
+      - cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_3/ScalesLookupSeoMetadataTest.php --no-ansi
+      - bash backend/scripts/ci_verify_mbti.sh
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml')"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: false }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: true
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend
