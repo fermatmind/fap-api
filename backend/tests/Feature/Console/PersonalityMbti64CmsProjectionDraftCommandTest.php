@@ -622,7 +622,14 @@ final class PersonalityMbti64CmsProjectionDraftCommandTest extends TestCase
         $this->assertNotSame('', $firstPayload['first_class_draft_fields']['seo']['title']);
         $this->assertNotSame('', $firstPayload['first_class_draft_fields']['seo']['description']);
         $this->assertNotSame('', $firstPayload['first_class_draft_fields']['seo']['h1']);
-        $this->assertNotSame('', $firstPayload['first_class_draft_fields']['content']['quick_answer']);
+        $content = $firstPayload['first_class_draft_fields']['content'];
+        $this->assertNotSame('', $content['quick_answer']);
+        foreach ($this->expectedV2FirstClassSectionKeys() as $sectionKey) {
+            $this->assertArrayHasKey($sectionKey, $content);
+            $this->assertNotSame('', $content[$sectionKey]['body'] ?? '');
+            $this->assertSame('mbti64_competitor_gap_v2_first_class_section', $content[$sectionKey]['source'] ?? null);
+        }
+        $this->assertStringContainsString('| Dimension | Assertive side | Turbulent side |', (string) ($content['a_t_difference']['body'] ?? ''));
         $this->assertCount(9, $firstPayload['first_class_draft_fields']['faq']);
         $this->assertNotEmpty($firstPayload['first_class_draft_fields']['internal_links']);
         $this->assertSame(0, PersonalityProfileRevision::query()->count());
@@ -838,6 +845,10 @@ final class PersonalityMbti64CmsProjectionDraftCommandTest extends TestCase
         sort($expectedUrls);
         $this->assertSame($expectedUrls, $plannedUrls);
         $this->assertSame($expectedUrls, array_values($this->sortedStrings((array) $payload['subset']['allowed_urls'])));
+        $firstContent = $payload['rows'][0]['snapshot_preview']['mbti64_agent_projection_draft_v1']['first_class_draft_fields']['content'];
+        foreach ($this->expectedV2FirstClassSectionKeys() as $sectionKey) {
+            $this->assertArrayHasKey($sectionKey, $firstContent);
+        }
         $this->assertSame(0, PersonalityProfileRevision::query()->count());
         $this->assertSame(0, PersonalityProfileVariantRevision::query()->count());
     }
@@ -927,6 +938,14 @@ final class PersonalityMbti64CmsProjectionDraftCommandTest extends TestCase
         $this->assertSame($profileBefore, $this->profileLiveState($targets['en|ENFJ']));
         $this->assertSame($variantBefore, $this->variantLiveState($targets['en|ENFJ-T']));
         $this->assertSame($surfaceCountsBefore, $this->liveSurfaceCounts());
+
+        $firstRevision = PersonalityProfileVariantRevision::query()->firstOrFail();
+        $firstSnapshot = $firstRevision->snapshot_json['mbti64_agent_projection_draft_v1'] ?? [];
+        $firstContent = $firstSnapshot['first_class_draft_fields']['content'] ?? [];
+        foreach ($this->expectedV2FirstClassSectionKeys() as $sectionKey) {
+            $this->assertArrayHasKey($sectionKey, $firstContent);
+        }
+        $this->assertStringContainsString('| Dimension | Assertive side | Turbulent side |', (string) ($firstContent['a_t_difference']['body'] ?? ''));
 
         foreach (PersonalityProfileVariantRevision::query()->get() as $revision) {
             $this->assertProjectionSnapshot(
@@ -1895,14 +1914,7 @@ final class PersonalityMbti64CmsProjectionDraftCommandTest extends TestCase
                 'description' => (string) ($recommended['description']['recommended'] ?? ''),
                 'h1' => (string) ($recommended['h1']['recommended'] ?? ''),
                 'quick_answer' => (string) ($recommended['quick_answer']['recommended'] ?? ''),
-                'sections' => array_map(
-                    static fn (int $index): array => [
-                        'key' => 'section_'.$index,
-                        'title' => 'Fixture section '.$index,
-                        'body' => 'Fixture expanded section body '.$index.'.',
-                    ],
-                    range(1, 8)
-                ),
+                'sections' => $this->v2SectionsForFixture($path, 'Fixture'),
                 'faq' => array_map(
                     static fn (int $index): array => [
                         'question' => 'Fixture expanded question '.$index.'?',
@@ -1997,6 +2009,79 @@ final class PersonalityMbti64CmsProjectionDraftCommandTest extends TestCase
     }
 
     /**
+     * @return list<string>
+     */
+    private function expectedV2FirstClassSectionKeys(): array
+    {
+        return [
+            'meaning',
+            'a_t_difference',
+            'core_traits',
+            'careers_work_style',
+            'relationships_communication',
+            'strengths_blind_spots',
+            'common_misreads',
+            'similar_types',
+        ];
+    }
+
+    /**
+     * @return list<array<string,mixed>>
+     */
+    private function v2SectionsForFixture(string $path, string $prefix): array
+    {
+        return [
+            [
+                'key' => 'how_to_read',
+                'title' => $prefix.' how to read '.basename($path),
+                'body' => $prefix.' how-to-read body for '.$path.'.',
+            ],
+            [
+                'key' => 'at_difference_table',
+                'title' => $prefix.' A/T difference table for '.basename($path),
+                'body' => $prefix.' A/T difference body for '.$path.'.',
+                'comparison_rows' => [
+                    [
+                        'dimension' => 'Feedback rhythm',
+                        'assertive' => 'Uses feedback as a calibration input',
+                        'turbulent' => 'Reviews feedback with more self-monitoring',
+                    ],
+                ],
+            ],
+            [
+                'key' => 'cognitive_function_mechanism',
+                'title' => $prefix.' cognitive mechanism for '.basename($path),
+                'body' => $prefix.' cognitive-function body for '.$path.'.',
+            ],
+            [
+                'key' => 'work_scenario',
+                'title' => $prefix.' work scenario for '.basename($path),
+                'body' => $prefix.' work scenario body for '.$path.'.',
+            ],
+            [
+                'key' => 'relationship_communication',
+                'title' => $prefix.' relationship communication for '.basename($path),
+                'body' => $prefix.' communication body for '.$path.'.',
+            ],
+            [
+                'key' => 'stress_growth',
+                'title' => $prefix.' stress and growth for '.basename($path),
+                'body' => $prefix.' stress-growth body for '.$path.'.',
+            ],
+            [
+                'key' => 'common_misreads',
+                'title' => $prefix.' common misreads for '.basename($path),
+                'body' => $prefix.' common misreads body for '.$path.'.',
+            ],
+            [
+                'key' => 'how_to_use_not_use',
+                'title' => $prefix.' how to use this page for '.basename($path),
+                'body' => $prefix.' safe-use body for '.$path.'.',
+            ],
+        ];
+    }
+
+    /**
      * @return array<string,mixed>
      */
     private function remainingFiftyEightV2Package(): array
@@ -2017,14 +2102,7 @@ final class PersonalityMbti64CmsProjectionDraftCommandTest extends TestCase
                 'description' => (string) ($recommended['description']['recommended'] ?? ''),
                 'h1' => (string) ($recommended['h1']['recommended'] ?? ''),
                 'quick_answer' => (string) ($recommended['quick_answer']['recommended'] ?? ''),
-                'sections' => array_map(
-                    static fn (int $index): array => [
-                        'key' => 'section_'.$index,
-                        'title' => 'Fixture remaining section '.$index,
-                        'body' => 'Fixture remaining expanded section body '.$index.'.',
-                    ],
-                    range(1, 8)
-                ),
+                'sections' => $this->v2SectionsForFixture($path, 'Fixture remaining'),
                 'faq' => array_map(
                     static fn (int $index): array => [
                         'question' => 'Fixture remaining question '.$index.'?',

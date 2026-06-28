@@ -643,6 +643,13 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         $this->assertSame(6, $payload['promoted_count']);
         $this->assertSame(6, PersonalityProfileVariantSeoMeta::query()->count());
         $this->assertSame(0, PersonalityProfileSection::query()->where('section_key', 'mbti64_comparison_a_vs_t')->count());
+        foreach ($this->expectedV2FirstClassSectionKeys() as $sectionKey) {
+            $this->assertSame(6, PersonalityProfileVariantSection::query()->where('section_key', $sectionKey)->count());
+        }
+        $atSection = PersonalityProfileVariantSection::query()
+            ->where('section_key', 'a_t_difference')
+            ->firstOrFail();
+        $this->assertStringContainsString('| Dimension | Assertive side | Turbulent side |', (string) $atSection->body_md);
 
         foreach (['zh-CN|INTP-A', 'en|INTP-A', 'zh-CN|ESFP-A', 'en|ESFP-A', 'en|ENFJ-A', 'zh-CN|ENFJ-A'] as $targetKey) {
             PersonalityProfileVariantSeoMeta::query()
@@ -679,6 +686,14 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         $this->assertSame(58, $payload['promoted_count']);
         $this->assertSame(58, PersonalityProfileVariantSeoMeta::query()->count());
         $this->assertSame(0, PersonalityProfileSection::query()->where('section_key', 'mbti64_comparison_a_vs_t')->count());
+        foreach ($this->expectedV2FirstClassSectionKeys() as $sectionKey) {
+            $this->assertSame(58, PersonalityProfileVariantSection::query()->where('section_key', $sectionKey)->count());
+        }
+        $atSection = PersonalityProfileVariantSection::query()
+            ->where('section_key', 'a_t_difference')
+            ->firstOrFail();
+        $this->assertStringContainsString('| Dimension | Assertive side | Turbulent side |', (string) $atSection->body_md);
+        $this->assertSame('mbti64_competitor_gap_v2_first_class_section', $atSection->payload_json['source'] ?? null);
 
         foreach ($this->remainingFiftyEightUrls() as $url) {
             $key = $this->targetKeyForUrl($url);
@@ -1373,13 +1388,7 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
                 'description' => (string) ($nested['description']['recommended'] ?? ''),
                 'h1' => (string) ($nested['h1']['recommended'] ?? ''),
                 'quick_answer' => (string) ($nested['quick_answer']['recommended'] ?? ''),
-                'sections' => array_map(
-                    static fn (int $index): array => [
-                        'h2' => 'V2 section '.$index.' for '.basename($path),
-                        'body' => 'Expanded V2 evidence-aware copy '.$index.' for '.$path.'.',
-                    ],
-                    range(1, 8)
-                ),
+                'sections' => $this->v2SectionsForFixture($path, 'V2'),
                 'faq' => array_map(
                     static fn (int $index): array => [
                         'question' => 'V2 question '.$index.' for '.basename($path).'?',
@@ -1435,13 +1444,7 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
                 'description' => (string) ($nested['description']['recommended'] ?? ''),
                 'h1' => (string) ($nested['h1']['recommended'] ?? ''),
                 'quick_answer' => (string) ($nested['quick_answer']['recommended'] ?? ''),
-                'sections' => array_map(
-                    static fn (int $index): array => [
-                        'h2' => 'Remaining 58 section '.$index.' for '.basename($path),
-                        'body' => 'Expanded remaining-58 evidence-aware copy '.$index.' for '.$path.'.',
-                    ],
-                    range(1, 8)
-                ),
+                'sections' => $this->v2SectionsForFixture($path, 'Remaining 58'),
                 'faq' => array_map(
                     static fn (int $index): array => [
                         'question' => 'Remaining 58 question '.$index.' for '.basename($path).'?',
@@ -1712,10 +1715,116 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
                 continue;
             }
 
-            $sections['v2_section_'.((string) ($index + 1))] = $section;
+            $sectionKey = $this->firstClassSectionKey((string) ($section['key'] ?? ''), $index);
+            if ($sectionKey === '') {
+                continue;
+            }
+
+            $sections[$sectionKey] = $section;
         }
 
         return $sections;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function expectedV2FirstClassSectionKeys(): array
+    {
+        return [
+            'meaning',
+            'a_t_difference',
+            'core_traits',
+            'careers_work_style',
+            'relationships_communication',
+            'strengths_blind_spots',
+            'common_misreads',
+            'similar_types',
+        ];
+    }
+
+    private function firstClassSectionKey(string $sourceKey, int $position): string
+    {
+        $map = [
+            'how_to_read' => 'meaning',
+            'at_difference_table' => 'a_t_difference',
+            'cognitive_function_mechanism' => 'core_traits',
+            'work_scenario' => 'careers_work_style',
+            'relationship_communication' => 'relationships_communication',
+            'stress_growth' => 'strengths_blind_spots',
+            'common_misreads' => 'common_misreads',
+            'how_to_use_not_use' => 'similar_types',
+        ];
+        $normalized = strtolower(trim(preg_replace('/[^a-zA-Z0-9_]+/', '_', $sourceKey) ?? '', '_'));
+        if (isset($map[$normalized])) {
+            return $map[$normalized];
+        }
+
+        return $this->expectedV2FirstClassSectionKeys()[$position] ?? '';
+    }
+
+    /**
+     * @return list<array<string,mixed>>
+     */
+    private function v2SectionsForFixture(string $path, string $prefix): array
+    {
+        return [
+            [
+                'key' => 'how_to_read',
+                'h2' => $prefix.' how to read '.basename($path),
+                'body' => $prefix.' how-to-read body for '.$path.'.',
+                'source' => 'mbti64_competitor_gap_v2_first_class_section',
+            ],
+            [
+                'key' => 'at_difference_table',
+                'h2' => $prefix.' A/T difference table for '.basename($path),
+                'body' => $prefix.' A/T difference body for '.$path.'.',
+                'source' => 'mbti64_competitor_gap_v2_first_class_section',
+                'comparison_rows' => [
+                    [
+                        'dimension' => 'Feedback rhythm',
+                        'assertive' => 'Uses feedback as a calibration input',
+                        'turbulent' => 'Reviews feedback with more self-monitoring',
+                    ],
+                ],
+            ],
+            [
+                'key' => 'cognitive_function_mechanism',
+                'h2' => $prefix.' cognitive mechanism for '.basename($path),
+                'body' => $prefix.' cognitive-function body for '.$path.'.',
+                'source' => 'mbti64_competitor_gap_v2_first_class_section',
+            ],
+            [
+                'key' => 'work_scenario',
+                'h2' => $prefix.' work scenario for '.basename($path),
+                'body' => $prefix.' work scenario body for '.$path.'.',
+                'source' => 'mbti64_competitor_gap_v2_first_class_section',
+            ],
+            [
+                'key' => 'relationship_communication',
+                'h2' => $prefix.' relationship communication for '.basename($path),
+                'body' => $prefix.' communication body for '.$path.'.',
+                'source' => 'mbti64_competitor_gap_v2_first_class_section',
+            ],
+            [
+                'key' => 'stress_growth',
+                'h2' => $prefix.' stress and growth for '.basename($path),
+                'body' => $prefix.' stress-growth body for '.$path.'.',
+                'source' => 'mbti64_competitor_gap_v2_first_class_section',
+            ],
+            [
+                'key' => 'common_misreads',
+                'h2' => $prefix.' common misreads for '.basename($path),
+                'body' => $prefix.' common misreads body for '.$path.'.',
+                'source' => 'mbti64_competitor_gap_v2_first_class_section',
+            ],
+            [
+                'key' => 'how_to_use_not_use',
+                'h2' => $prefix.' how to use this page for '.basename($path),
+                'body' => $prefix.' safe-use body for '.$path.'.',
+                'source' => 'mbti64_competitor_gap_v2_first_class_section',
+            ],
+        ];
     }
 
     /**
