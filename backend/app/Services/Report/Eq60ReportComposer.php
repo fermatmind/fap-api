@@ -199,7 +199,7 @@ final class Eq60ReportComposer
                 'methodology' => [
                     'norm_status' => strtolower(trim((string) data_get($score, 'norms.status', 'provisional'))) ?: 'provisional',
                     'scoring_version' => (string) data_get($score, 'version_snapshot.engine_version', 'v1.0_normed_validity'),
-                    'report_version' => 'eq_report_v5_assets_commercial_ready_v1_9',
+                    'report_version' => 'eq_report_v5_assets_commercial_ready_v2_3',
                     'content_version' => Eq60PackLoader::PACK_ID.'/'.$version,
                 ],
                 'generated_at' => now()->toISOString(),

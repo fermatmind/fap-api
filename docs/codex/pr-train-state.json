@@ -64988,12 +64988,12 @@
     "branch": "codex/pr-eq-v20-06-fixtures-smoke-readiness",
     "title": "PR-EQ-V20-06 EQ v2.3 canonical fixtures and smoke readiness",
     "train_scope": "eq_v20_content_asset_expansion",
-    "status": "initialized",
+    "status": "ready_to_merge",
     "depends_on": [
       "PR-EQ-V20-05"
     ],
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "7084d583ea3f0c75a3ff46debe1cb27fa7d5a88d",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2531",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -65002,6 +65002,50 @@
       "authorization": {
         "status": "pass",
         "evidence": "User provided explicit implementation plan for PR-EQ-V20-02 through PR-EQ-V20-06 and requested implementation."
+      },
+      "dependency_PR-EQ-V20-05": {
+        "status": "pass",
+        "evidence": "fap-web PR #1476 merged; merge commit 3a0fcee874c4fc1de62a9c4e8856c791b335db03 verified on origin/main before starting V20-06."
+      },
+      "worktree_isolation": {
+        "status": "pass",
+        "evidence": "Implemented in clean fap-api worktree /private/tmp/fap-api-eq-v20-06-fixtures-smoke-readiness from origin/main addcdfd1215cf653ea6c9729b414b869e80a993c."
+      },
+      "local_tests": {
+        "status": "pass",
+        "commands": [
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60GoldenCasesTest",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ReportPaywallTest",
+          "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60SubmitQualityContractTest"
+        ],
+        "evidence": "All required test filters passed locally; Laravel emitted existing file_get_contents warnings only."
+      },
+      "json_yaml_parse": {
+        "status": "pass",
+        "commands": [
+          "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "python3 JSON parse over backend/tests/Fixtures/eq/v5/*.json"
+        ]
+      },
+      "diff_check": {
+        "status": "pass",
+        "commands": [
+          "git diff --check"
+        ]
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed paths are limited to V20-06 allowed scope: Eq60ReportComposer, EQ v5 report/paywall tests, backend/tests/Fixtures/eq/v5 canonical fixtures, docs/audits/eq smoke template, docs/codex/pr-train-state.json."
+      },
+      "pull_request": {
+        "status": "opened",
+        "url": "https://github.com/fermatmind/fap-api/pull/2531"
+      },
+      "github_checks": {
+        "status": "pass",
+        "evidence": "GitHub PR #2531 checks all successful; mergeStateStatus=CLEAN before ready_to_merge ledger update."
       }
     },
     "events": [
@@ -65009,6 +65053,31 @@
         "at": "2026-06-28T13:19:31Z",
         "status": "initialized",
         "notes": "Initialized from user-provided V20 productization plan."
+      },
+      {
+        "at": "2026-06-28T15:47:50Z",
+        "status": "local_checks_passed",
+        "notes": "V20-06 fixtures regenerated, report version updated to v2.3, production smoke template added, and required local checks passed."
+      },
+      {
+        "at": "2026-06-28T15:49:03Z",
+        "status": "scope_validated",
+        "notes": "Manual path validation passed before path-limited staging."
+      },
+      {
+        "at": "2026-06-28T15:49:45Z",
+        "status": "committed",
+        "notes": "Created local commit 3d5f30b533304418e7c2fa1b10c4f0a32ff15347 for V20-06."
+      },
+      {
+        "at": "2026-06-28T15:51:27Z",
+        "status": "pr_open",
+        "notes": "Opened GitHub PR #2531 for V20-06."
+      },
+      {
+        "at": "2026-06-28T15:57:40Z",
+        "status": "ready_to_merge",
+        "notes": "GitHub checks passed and PR was clean to merge before final ready_to_merge state update."
       }
     ],
     "notes": "Part of EQ v2.3 productization train; production deploy/smoke remain separately authorized."

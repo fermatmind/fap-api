@@ -26,7 +26,7 @@
                 "eq.backend_contract.agent_readiness"
             ],
             "career_environment_ids": [
-                "emotional_labor_medium",
+                "emotional_labor_high",
                 "autonomy_recovery_medium"
             ],
             "commercial_conversion_ids": [
@@ -45,7 +45,7 @@
                 "EM_ER_high_low",
                 "EM_RM_high_low"
             ],
-            "personalization_route_id": "route.eq.033.mixed_em_er",
+            "personalization_route_id": "route.eq.high_empathy_low_recovery.primary.quality_ab",
             "psychometric_evidence_ids": [
                 "eq.evidence.norm_status",
                 "eq.evidence.content_validity",
@@ -64,21 +64,21 @@
             ],
             "result_snapshot_id": "eq.snapshot.high_empathy_low_recovery",
             "scene_ids": [
-                "relationship_boundary",
+                "feedback",
                 "conflict",
-                "pressure_recovery"
+                "relationship_boundary"
             ],
             "scene_variant_ids": [
-                "eq.scene.relationship_boundary.high_empathy_low_recovery.primary",
+                "eq.scene.feedback.high_empathy_low_recovery.primary",
                 "eq.scene.conflict.high_empathy_low_recovery.primary",
-                "eq.scene.pressure_recovery.high_empathy_low_recovery.primary"
+                "eq.scene.relationship_boundary.high_empathy_low_recovery.primary"
             ],
             "scientific_contract_id": "eq.scientific_contract.default",
             "score_system_id": "eq.score_system.default",
             "selected_asset_ids": {
                 "action_prescription_id": "empathy_boundary",
                 "career_environment_ids": [
-                    "emotional_labor_medium",
+                    "emotional_labor_high",
                     "autonomy_recovery_medium"
                 ],
                 "core_formulation_id": "high_empathy_low_recovery",
@@ -87,14 +87,14 @@
                     "EM_RM_high_low"
                 ],
                 "scene_ids": [
-                    "relationship_boundary",
+                    "feedback",
                     "conflict",
-                    "pressure_recovery"
+                    "relationship_boundary"
                 ],
                 "scene_variant_ids": [
-                    "eq.scene.relationship_boundary.high_empathy_low_recovery.primary",
+                    "eq.scene.feedback.high_empathy_low_recovery.primary",
                     "eq.scene.conflict.high_empathy_low_recovery.primary",
-                    "eq.scene.pressure_recovery.high_empathy_low_recovery.primary"
+                    "eq.scene.relationship_boundary.high_empathy_low_recovery.primary"
                 ]
             },
             "signal_signature": {
@@ -107,11 +107,11 @@
                     "SA": "middle"
                 },
                 "formulation_id": "high_empathy_low_recovery",
-                "match_pattern": "EM_high_ER_low_RM_mid_SA_mid",
+                "match_pattern": "EM_any_ER_any_RM_any_SA_any",
                 "quality_level": "A",
                 "route_claim_risk": "medium",
-                "route_id": "route.eq.033.mixed_em_er",
-                "route_priority": 40,
+                "route_id": "route.eq.high_empathy_low_recovery.primary.quality_ab",
+                "route_priority": 101,
                 "schema": "eq60.signal_signature.v1",
                 "strongest_dimension": "EM"
             },
@@ -119,56 +119,44 @@
         },
         "assets": {
             "action_prescription": {
-                "agent_followup_prompt": "如果你之后问 Agent，可以直接说：帮我练这条处方。",
-                "agent_prompt_seed": "帮我把这条处方应用到我最近的一个真实场景里。",
-                "do_not_overread": "这是自我练习建议，不是治疗方案。",
-                "do_today": "今天在一次倾听里，只提供一个具体下一步，不接下整个问题。",
+                "common_failure": "最常见失败不是不会做，而是等到情绪已经很满才想起来做。",
+                "do_today": "今天只做一个动作：在一个低风险场景里使用“我理解这件事对你很重。我可以陪你理清下一步，但不能替你承接全部压力。”这句话。",
                 "id": "empathy_boundary",
-                "one_minute_version": "先做一次 60 秒暂停，再用一句话说清事实、感受和下一步。",
-                "progress_markers": [
-                    "你能更快说出自己的状态。",
-                    "你能把支持范围说得更具体。",
-                    "冲突后反刍时间变短。"
-                ],
-                "retest_prompt": "练习一段时间后再复测，观察你的自我感知是否变稳定。",
-                "save_prompt": "把这条处方保存下来，未来一周只练这一件事。",
-                "script": "“我理解这对你很难。我能帮你一起理下一步，但我不能替你承担全部。”",
+                "repair_move": "如果没做到，不要重开整套计划；只复盘一个触发点和下一次第一句话。",
+                "script": "我理解这件事对你很重。我可以陪你理清下一步，但不能替你承接全部压力。",
                 "seven_day_plan": [
                     {
                         "day": 1,
-                        "practice": "识别一次想立刻帮忙的冲动"
+                        "practice": "列出一次你替别人承担的事。"
                     },
                     {
                         "day": 2,
-                        "practice": "先问对方需要什么"
+                        "practice": "区分陪伴、建议和负责。"
                     },
                     {
                         "day": 3,
-                        "practice": "只提供一个可完成动作"
+                        "practice": "练习一句边界脚本。"
                     },
                     {
                         "day": 4,
-                        "practice": "说清不能承担的范围"
+                        "practice": "只承诺一个具体支持动作。"
                     },
                     {
                         "day": 5,
-                        "practice": "观察自己的内疚感"
+                        "practice": "观察说边界后的身体反应。"
                     },
                     {
                         "day": 6,
-                        "practice": "记录对方是否真的需要更多"
+                        "practice": "复盘边界是否真的伤害关系。"
                     },
                     {
                         "day": 7,
-                        "practice": "总结哪种边界句最自然"
+                        "practice": "选出下周不再自动接管的场景。"
                     }
                 ],
-                "share_prompt": "如果要分享，可以只分享这条行动，不需要分享分数。",
-                "title": "共情边界处方",
-                "watch_out": "不要把一次练习当成马上改变关系的保证。",
-                "when_not_to_use": "如果涉及安全、创伤、持续伤害或医疗/法律问题，不要用报告建议替代专业支持。",
-                "when_to_use": "当你已经看懂问题，但下一步不知道怎么说、怎么停、怎么修复时使用。",
-                "why_this_matters": "共情不是问题，问题是把理解别人变成替别人承担。边界让共情可持续。"
+                "title": "共情后的边界",
+                "watch_out": "不要把练习变成要求自己完美稳定。先追求多一次停顿、多一句清楚表达。",
+                "why_this_matters": "理解别人之后，明确你能支持什么、不能替对方承担什么。"
             },
             "agent_dialogue_playbooks": [
                 {
@@ -256,140 +244,115 @@
             ],
             "career_environment": [
                 {
-                    "do_not_overread": "这不是具体职业推荐，只是帮助你观察环境变量。",
-                    "fit_signal": "情绪承接中时：这种环境有足够互动来使用你的关系优势，也保留一定独立节奏。 对 EQ 报告来说，重点是观察它是否让你的优势自然发挥，而不是逼你长期扮演协调者。",
-                    "id": "emotional_labor_medium",
-                    "interview_question": "这个岗位里的情绪承接通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？",
-                    "label": "情绪劳动：中",
-                    "level": "medium",
-                    "manager_note": "和管理者确认情绪承接边界：投诉、冲突或他人压力是否有制度化分流。",
-                    "meaning": "偶尔需要安抚、解释或处理不满",
+                    "do_not_overread": "This describes an environment variable, not a role recommendation.",
+                    "fit_signal": "适合能把情绪信息转成沟通和决策的人，但需要明确边界。",
+                    "id": "emotional_labor_high",
+                    "interview_question": "长期看，这个环境是否允许暂停、交接和情绪复位？",
+                    "label": "情绪劳动：高",
+                    "level": "high",
+                    "meaning": "需要承接、安抚或整理他人情绪的程度",
+                    "recovery_condition": "需要可预期的暂停、复盘和交接空间。",
                     "role_observation_checklist": [
-                        "观察情绪承接是稳定可预期，还是经常突然升高。",
-                        "观察情绪性沟通是否有明确负责人，而不是默认落到最愿意回应的人身上。",
-                        "观察你在一天结束后是更清楚、更有能量，还是持续反刍和耗竭。"
+                        "看会议是否有明确目的和结束条件。",
+                        "看反馈是否具体到行为，而不是停留在人身感受。",
+                        "看团队是否允许人暂时退出高情绪对话。"
                     ],
-                    "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。",
-                    "strain_signal": "情绪承接中的主要消耗点：风险在于边界模糊：有些沟通值得投入，有些只是消耗。 如果你的发展杠杆正好落在 ER/RM，这个变量要优先验证。",
-                    "team_risk": "如果情绪承接被低估，团队可能把隐形沟通成本当成“性格好的人自然会做”。",
+                    "strain_signal": "风险是持续承接他人情绪，导致判断和恢复被消耗。",
+                    "team_risk": "如果这个变量被长期忽视，团队会把情绪成本转嫁给最愿意承担的人。",
                     "variable": "emotional_labor",
-                    "what_to_verify": "这个岗位里的情绪承接通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？"
+                    "what_to_verify": "长期看，这个环境是否允许暂停、交接和情绪复位？"
                 },
                 {
-                    "do_not_overread": "这不是具体职业推荐，只是帮助你观察环境变量。",
-                    "fit_signal": "自主恢复空间中时：这种环境有足够互动来使用你的关系优势，也保留一定独立节奏。 对 EQ 报告来说，重点是观察它是否让你的优势自然发挥，而不是逼你长期扮演协调者。",
+                    "do_not_overread": "This describes an environment variable, not a role recommendation.",
+                    "fit_signal": "适合在互动和独立之间切换，并用复盘保持稳定。",
                     "id": "autonomy_recovery_medium",
-                    "interview_question": "这个岗位里的自主恢复空间通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？",
+                    "interview_question": "团队是否有清楚的会议节奏、反馈方式和恢复窗口？",
                     "label": "自主恢复空间：中",
                     "level": "medium",
-                    "manager_note": "和管理者确认恢复空间：高压任务后是否允许安静复盘、调节节奏或切换任务。",
-                    "meaning": "有部分自主管理时间",
+                    "meaning": "你能否安排独处、复盘和情绪恢复的空间",
+                    "recovery_condition": "需要可预期的暂停、复盘和交接空间。",
                     "role_observation_checklist": [
-                        "观察自主恢复空间是稳定可预期，还是经常突然升高。",
-                        "观察情绪性沟通是否有明确负责人，而不是默认落到最愿意回应的人身上。",
-                        "观察你在一天结束后是更清楚、更有能量，还是持续反刍和耗竭。"
+                        "看会议是否有明确目的和结束条件。",
+                        "看反馈是否具体到行为，而不是停留在人身感受。",
+                        "看团队是否允许人暂时退出高情绪对话。"
                     ],
-                    "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。",
-                    "strain_signal": "自主恢复空间中的主要消耗点：风险在于边界模糊：有些沟通值得投入，有些只是消耗。 如果你的发展杠杆正好落在 ER/RM，这个变量要优先验证。",
-                    "team_risk": "如果自主恢复空间被低估，团队可能把隐形沟通成本当成“性格好的人自然会做”。",
+                    "strain_signal": "风险是模糊边界让互动慢慢侵入恢复时间。",
+                    "team_risk": "如果这个变量被长期忽视，团队会把情绪成本转嫁给最愿意承担的人。",
                     "variable": "autonomy_recovery",
-                    "what_to_verify": "这个岗位里的自主恢复空间通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？"
+                    "what_to_verify": "团队是否有清楚的会议节奏、反馈方式和恢复窗口？"
                 }
             ],
             "commercial_conversion_actions": [
                 {
-                    "body": "保存这次结果，几周后对照你的真实互动变化。",
+                    "body": "把这份结果保存下来，方便你以后对比复测变化。",
                     "cta_label": "保存报告",
-                    "do_not_overread": "这只是结果使用方式，不改变报告结论。",
+                    "do_not_overread": "这是免费留存动作，不改变报告结论。",
                     "id": "eq.conversion.save_report",
-                    "placement": "结果页底部、首屏次级动作或报告保存区域。",
-                    "retention_reason": "用户离开页面后仍能回到同一条路线、同一条处方和同一组场景。",
-                    "title": "保存报告，方便以后复盘。",
-                    "trust_note": "这个动作只帮助你使用报告，不改变分数或结论。"
+                    "microcopy": "这是免费留存动作，不改变报告结论。",
+                    "title": "保存报告"
                 },
                 {
-                    "body": "如果你想之后再看，不必一直保留页面。",
-                    "cta_label": "把报告链接发给自己。",
-                    "do_not_overread": "这只是结果使用方式，不改变报告结论。",
+                    "body": "把结果发送到你的邮箱，方便之后回来继续阅读。",
+                    "cta_label": "邮件找回",
+                    "do_not_overread": "这是免费留存动作，不改变报告结论。",
                     "id": "eq.conversion.email_revisit",
-                    "placement": "结果页底部、首屏次级动作或报告保存区域。",
-                    "retention_reason": "用户离开页面后仍能回到同一条路线、同一条处方和同一组场景。",
-                    "title": "把报告链接发给自己。",
-                    "trust_note": "这个动作只帮助你使用报告，不改变分数或结论。"
+                    "microcopy": "这是免费留存动作，不改变报告结论。",
+                    "title": "邮件找回"
                 },
                 {
-                    "body": "用于个人记录或适合的教练式讨论，不要作为筛选依据。",
-                    "cta_label": "导出一份干净报告。",
-                    "do_not_overread": "这只是结果使用方式，不改变报告结论。",
+                    "body": "保存一份静态报告，用于个人复盘。",
+                    "cta_label": "导出 PDF",
+                    "do_not_overread": "这是免费留存动作，不改变报告结论。",
                     "id": "eq.conversion.pdf_export",
-                    "placement": "结果页底部、首屏次级动作或报告保存区域。",
-                    "retention_reason": "用户离开页面后仍能回到同一条路线、同一条处方和同一组场景。",
-                    "title": "导出一份干净报告。",
-                    "trust_note": "这个动作只帮助你使用报告，不改变分数或结论。"
+                    "microcopy": "这是免费留存动作，不改变报告结论。",
+                    "title": "导出 PDF"
                 },
                 {
-                    "body": "只分享模式句，不分享分数和敏感质量信息。",
-                    "cta_label": "生成安全分享卡。",
-                    "do_not_overread": "这只是结果使用方式，不改变报告结论。",
+                    "body": "分享你的情绪与关系模式，不展示敏感分数。",
+                    "cta_label": "生成分享卡",
+                    "do_not_overread": "这是免费留存动作，不改变报告结论。",
                     "id": "eq.conversion.share_card",
-                    "placement": "结果页底部、首屏次级动作或报告保存区域。",
-                    "retention_reason": "用户离开页面后仍能回到同一条路线、同一条处方和同一组场景。",
-                    "title": "生成安全分享卡。",
-                    "trust_note": "这个动作只帮助你使用报告，不改变分数或结论。"
+                    "microcopy": "这是免费留存动作，不改变报告结论。",
+                    "title": "生成分享卡"
                 },
                 {
-                    "body": "适合你正在练一个行动处方时使用。",
-                    "cta_label": "设置30天复测提醒。",
-                    "do_not_overread": "这只是结果使用方式，不改变报告结论。",
+                    "body": "在一段时间后重新测试，观察自我感知是否变化。",
+                    "cta_label": "设置复测提醒",
+                    "do_not_overread": "这是免费留存动作，不改变报告结论。",
                     "id": "eq.conversion.retest_reminder",
-                    "placement": "结果页底部、首屏次级动作或报告保存区域。",
-                    "retention_reason": "用户离开页面后仍能回到同一条路线、同一条处方和同一组场景。",
-                    "title": "设置30天复测提醒。",
-                    "trust_note": "这个动作只帮助你使用报告，不改变分数或结论。"
+                    "microcopy": "这是免费留存动作，不改变报告结论。",
+                    "title": "设置复测提醒"
                 },
                 {
-                    "body": "把这份报告与人格或兴趣信号放在一起看。",
-                    "cta_label": "继续探索相关测试。",
-                    "do_not_overread": "这只是结果使用方式，不改变报告结论。",
+                    "body": "用其他测评补充工作方式、兴趣和人格背景。",
+                    "cta_label": "继续相关测试",
+                    "do_not_overread": "这是免费留存动作，不改变报告结论。",
                     "id": "eq.conversion.related_tests",
-                    "placement": "结果页底部、首屏次级动作或报告保存区域。",
-                    "retention_reason": "用户离开页面后仍能回到同一条路线、同一条处方和同一组场景。",
-                    "title": "继续探索相关测试。",
-                    "trust_note": "这个动作只帮助你使用报告，不改变分数或结论。"
+                    "microcopy": "这是免费留存动作，不改变报告结论。",
+                    "title": "继续相关测试"
                 },
                 {
-                    "body": "让 Agent 基于这份报告解释一个场景或行动，但不改分数、不改结论。",
-                    "cta_label": "询问报告 Agent",
-                    "do_not_overread": "这只是结果使用方式，不改变报告结论。",
+                    "body": "让助手基于已完成报告解释一个具体问题。",
+                    "cta_label": "询问结果助手",
+                    "do_not_overread": "这是免费留存动作，不改变报告结论。",
                     "id": "eq.conversion.agent_entry",
-                    "placement": "结果页底部、首屏次级动作或报告保存区域。",
-                    "retention_reason": "用户离开页面后仍能回到同一条路线、同一条处方和同一组场景。",
-                    "title": "询问 EQ Agent。",
-                    "trust_note": "这个动作只帮助你使用报告，不改变分数或结论。"
+                    "microcopy": "这是免费留存动作，不改变报告结论。",
+                    "title": "询问结果助手"
                 }
             ],
             "core_formulation": {
-                "conversion_hook": "保存报告后，可在复测时比较这个模式是否稳定。",
-                "core_claim": "你的共情让你能看见别人没有说出口的压力、委屈或需要；真正需要训练的是共情之后如何不把别人的情绪全部背到自己身上。",
-                "development_lever": "建立“我理解你，但我不替你承担全部”的边界句式。",
-                "do_not_overread": "不要把少承担误读为少关心。",
+                "core_claim": "你的共情不是问题；真正的杠杆是共情之后如何区分陪伴、责任和恢复。",
+                "development_lever": "练习共情后的边界句和恢复动作。",
+                "do_not_overread": "这是结果解释的组织方式，不是固定人格标签，也不是能力凭证。",
                 "evidence_basis": [
-                    "四维组合指向「高共情，低恢复」：你对他人情绪很快有感，但恢复和边界需要跟上。",
-                    "这不是单一总分判断，而是 SA / ER / EM / RM 的相对关系。",
-                    "如果质量提示偏低，优先把这条结论当作观察假设。"
+                    "EM high; ER low or medium-low."
                 ],
-                "hero_summary": "你的共情让你能看见别人没有说出口的压力、委屈或需要；真正需要训练的是共情之后如何不把别人的情绪全部背到自己身上。 这份报告建议你把练习重点放在：建立“我理解你，但我不替你承担全部”的边界句式。",
                 "id": "high_empathy_low_recovery",
-                "likely_cost": "长期这样会让你在冲突、求助和抱怨场景中消耗过多，事后还在反复回想。",
-                "most_likely_real_life_signal": "你会在反馈、冲突、边界或团队协作中反复遇到相似的情绪处理方式。",
-                "one_liner": "你很容易接收到别人的情绪，但自己的恢复速度未必跟得上。",
-                "primary_strength": "你能让别人感到被理解，也常能在关系中发现细微信号。",
-                "share_safe_sentence": "我的问题不是不懂别人，而是懂了之后容易把别人的情绪也背到自己身上。",
-                "skeptic_note": "如果这句话不像你，请先看质量提示和维度差距，不要强行认同。",
-                "title": "高共情，低恢复",
-                "user_memory_sentence": "我的问题不是不懂别人，而是懂了之后容易把别人的情绪也背到自己身上。",
-                "what_to_try_first": "先选一个最近真实场景，只练一条脚本或一个暂停动作。",
-                "what_user_should_remember": "你对他人情绪很快有感，但恢复和边界需要跟上。"
+                "likely_cost": "你可能把“我理解你”滑向“我必须替你扛住”。",
+                "one_liner": "你很容易接住别人的感受，但不一定能很快把自己从对方情绪里带回来。",
+                "primary_strength": "你能让别人感到被理解，尤其在对方情绪明显但没有说清楚时。",
+                "share_line": "你很容易接住别人的感受，但不一定能很快把自己从对方情绪里带回来。",
+                "title": "高共情，低恢复"
             },
             "cross_assessment_context": {
                 "boundary": {
@@ -406,53 +369,51 @@
             },
             "mechanisms": [
                 {
-                    "cost": "强项可能因为后续动作不足而变成消耗。",
-                    "development_lever": "把机制放回一个具体场景，只练一个最小动作。",
-                    "do_not_overread": "机制解释不是人格标签，也不是对每段关系的固定判断。",
+                    "cost": "风险是把洞察变成压力，或者让理解停留在脑内。",
+                    "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+                    "do_not_overread": "这是互动机制解释，不是固定人格判断。",
                     "id": "EM_ER_high_low",
-                    "mechanism": "这个机制解释理解别人之后，能不能保留自己的节奏和恢复空间。强项会让你更早发现问题，但弱项决定你能否把它落地。",
-                    "micro_action": "下次类似场景出现时，先说一句准备好的降温或澄清句。",
+                    "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
                     "pair": "EM_ER",
                     "state": "high_low",
-                    "strength": "强项能成为练习入口。",
-                    "title": "共情理解 × 情绪调节｜前者强，后者需要补位",
-                    "what_it_feels_like": "你知道很多或感到很多，但后一步不够稳。",
-                    "why_it_matters": "单个维度告诉你哪里强弱，组合机制解释为什么同一个分数会在现实关系里变成优势、代价或练习入口。"
+                    "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+                    "title": "共情理解 × 情绪调节：看见多，承接少",
+                    "what_it_feels_like": "接住别人较强，但恢复自己较弱时，用户容易“看见很多”，却在下一步卡住。",
+                    "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。"
                 },
                 {
-                    "cost": "强项可能因为后续动作不足而变成消耗。",
-                    "development_lever": "把机制放回一个具体场景，只练一个最小动作。",
-                    "do_not_overread": "机制解释不是人格标签，也不是对每段关系的固定判断。",
+                    "cost": "风险是把洞察变成压力，或者让理解停留在脑内。",
+                    "development_lever": "选择一个最近的对话，找出是觉察、调节、共情还是关系行动先断开。",
+                    "do_not_overread": "这是互动机制解释，不是固定人格判断。",
                     "id": "EM_RM_high_low",
-                    "mechanism": "这个机制解释读懂别人之后，能不能把关系推进到清楚和可修复。强项会让你更早发现问题，但弱项决定你能否把它落地。",
-                    "micro_action": "下次类似场景出现时，先说一句准备好的降温或澄清句。",
+                    "micro_action": "下次类似场景中，只多做一步：先命名，再回应。",
                     "pair": "EM_RM",
                     "state": "high_low",
-                    "strength": "强项能成为练习入口。",
-                    "title": "共情理解 × 关系管理｜前者强，后者需要补位",
-                    "what_it_feels_like": "你知道很多或感到很多，但后一步不够稳。",
-                    "why_it_matters": "单个维度告诉你哪里强弱，组合机制解释为什么同一个分数会在现实关系里变成优势、代价或练习入口。"
+                    "strength": "它帮助你找到一个最小可练的连接点，而不是笼统地要求自己“提升”。",
+                    "title": "共情理解 × 关系管理：看见多，承接少",
+                    "what_it_feels_like": "理解别人较强，但推动关系向前较弱时，用户容易“看见很多”，却在下一步卡住。",
+                    "why_it_matters": "这个机制解释的不是单个分数，而是两个情绪系统如何在真实场景中接上或断开。"
                 }
             ],
             "personalization_route": {
                 "claim_risk": "medium",
                 "commercial_depth": {
-                    "fallback_strategy": "if any selected asset is missing, render formulation + dimension summary + scientific boundary only",
-                    "first_screen_strategy": "show one core claim, one evidence point, one next action",
+                    "fallback_strategy": "if selected assets are missing, render formulation + dimension summary + scientific boundary only",
+                    "first_screen_strategy": "route_headline + evidence label + next best action",
                     "reader_trust_strategy": "explain why this route was selected without exposing scoring internals"
                 },
-                "do_not_overread": "路线只控制内容选择和阅读顺序，不代表长期人格定型，也不能替代真实关系反馈。",
-                "evidence_snapshot_label": "本路线依据：维度组合、差距方向、答题质量和已选内容资产。",
+                "do_not_overread": "这是一条内容路由，不是评分规则，也不是固定人格标签。",
+                "evidence_snapshot_label": "本路线依据：核心 formulation、维度组合、质量信号和已选内容资产。",
                 "formulation_id": "high_empathy_low_recovery",
-                "id": "route.eq.033.mixed_em_er",
-                "next_best_action": "先读 3 个场景，再只选择 1 条行动处方练 7 天。",
-                "priority": 40,
-                "route_headline": "你的阅读路径：先看「高共情，低恢复」如何出现在真实场景里",
-                "save_reason": "保存这条路线，之后可以对照真实互动验证它是否准确。",
+                "id": "route.eq.high_empathy_low_recovery.primary.quality_ab",
+                "next_best_action": "先读路线中的场景卡，再选择一个行动处方练 7 天。",
+                "priority": 101,
+                "route_headline": "高共情，低恢复",
+                "save_reason": "保存这条路线，之后可对照真实互动验证它是否准确。",
                 "selected_asset_ids": {
                     "action_prescription_id": "empathy_boundary",
                     "career_environment_ids": [
-                        "emotional_labor_medium",
+                        "emotional_labor_high",
                         "autonomy_recovery_medium"
                     ],
                     "core_formulation_id": "high_empathy_low_recovery",
@@ -461,14 +422,14 @@
                         "EM_RM_high_low"
                     ],
                     "scene_ids": [
-                        "relationship_boundary",
+                        "feedback",
                         "conflict",
-                        "pressure_recovery"
+                        "relationship_boundary"
                     ],
                     "scene_variant_ids": [
-                        "eq.scene.relationship_boundary.high_empathy_low_recovery.primary",
+                        "eq.scene.feedback.high_empathy_low_recovery.primary",
                         "eq.scene.conflict.high_empathy_low_recovery.primary",
-                        "eq.scene.pressure_recovery.high_empathy_low_recovery.primary"
+                        "eq.scene.relationship_boundary.high_empathy_low_recovery.primary"
                     ]
                 },
                 "signal_signature": {
@@ -481,16 +442,16 @@
                         "SA": "middle"
                     },
                     "formulation_id": "high_empathy_low_recovery",
-                    "match_pattern": "EM_high_ER_low_RM_mid_SA_mid",
+                    "match_pattern": "EM_any_ER_any_RM_any_SA_any",
                     "quality_level": "A",
                     "route_claim_risk": "medium",
-                    "route_id": "route.eq.033.mixed_em_er",
-                    "route_priority": 40,
+                    "route_id": "route.eq.high_empathy_low_recovery.primary.quality_ab",
+                    "route_priority": 101,
                     "schema": "eq60.signal_signature.v1",
                     "strongest_dimension": "EM"
                 },
-                "why_this_feels_specific": "这条路径不是把你归类，而是把分数差距转译为最容易复现的场景和最小行动。",
-                "why_this_route_exists": "这条路线用于把「高共情，低恢复」的 EM:high、ER:low、SA:mid、RM:mid 转译成最需要优先阅读的场景（relationship_boundary / conflict / pressure_recovery）和「共情边界」行动处方。它解决的是“先看什么、先练什么”，不是重新判分。"
+                "why_this_feels_specific": "这个路线把你的主要信号组织为“高共情，低恢复”，并优先展示最相关的机制、场景和行动。",
+                "why_this_route_exists": "这个路线把你的主要信号组织为“高共情，低恢复”，并优先展示最相关的机制、场景和行动。"
             },
             "psychometric_evidence_status": [
                 {
@@ -562,81 +523,85 @@
                 "explanation_asset_id": "eq.quality.level.A"
             },
             "quality_confidence": {
-                "body": "本次作答节奏和一致性支持较稳定解释。",
-                "commercial_display": "建议在结果页用质量 Banner 明示，不隐藏在页脚。",
-                "how_to_read": "置信度决定阅读力度：高置信可看模式与行动，低置信先看作答状态和复测建议。",
+                "body": "你的作答节奏和一致性支持正常解读。",
+                "how_to_read": "可以重点阅读核心模式、维度分布和行动处方。",
                 "id": "eq.quality.level.A",
-                "label": "高置信",
-                "retest_note": "可在未来复测观察稳定变化。",
-                "user_guidance": "根据置信度调整阅读力度，不要用它评价自己。",
-                "why_this_level": "根据作答完整度、节奏、一致性、极端/中立倾向和反应模式综合判断。"
+                "label": "高置信度",
+                "retest_note": "按当前建议练习即可，复测可用于观察变化。",
+                "user_guidance": "具体分数仍应作为区间参考。 具体分数仍应作为区间参考。",
+                "what_to_hold_lightly": "具体分数仍应作为区间参考。",
+                "what_to_trust": "具体分数仍应作为区间参考。",
+                "why_this_level": "你的作答节奏和一致性支持正常解读。"
             },
             "reality_scenes": [
                 {
-                    "better_move": "先承认对方处境，再说清你能提供的具体范围。",
-                    "cost": "容易付出的代价：长期这样会让你在冲突、求助和抱怨场景中消耗过多，事后还在反复回想。",
-                    "do_not_overread": "这是一个常见场景假设，不代表你每次都会这样反应。",
+                    "better_move": "先把反馈拆成三层：事实、情绪、下一步。只先确认一个最具体的调整点。",
+                    "cost": "你可能把“我理解你”滑向“我必须替你扛住”。",
+                    "do_not_overread": "Use this as a scene lens, not a prediction of behavior.",
                     "evidence_signals": [
-                        "你在这个场景里最先注意到谁的情绪。",
-                        "你是否能区分事实、感受和责任。",
-                        "事后你是更清楚，还是持续反刍。"
+                        "high_empathy_low_recovery",
+                        "feedback",
+                        "EM_ER_high_low"
                     ],
-                    "fallback_scene_id": "relationship_boundary",
-                    "id": "eq.scene.relationship_boundary.high_empathy_low_recovery.primary",
-                    "micro_script": "“我理解这对你很重要。我现在能做的是 A 和 B，C 需要我们另找方式。”",
-                    "reflection_prompt": "回想最近一次类似场景：你最先想保护的是关系、效率、自己，还是对方？",
+                    "fallback_scene_id": "feedback",
+                    "id": "eq.scene.feedback.high_empathy_low_recovery.primary",
+                    "micro_script": "“我先确认一个点：你最希望我具体调整什么？”",
+                    "reflection_prompt": "这次场景里，你最想保护的是事实、关系、还是自己的恢复空间？",
+                    "reflection_question": "这次场景里，你最想保护的是事实、关系、还是自己的恢复空间？",
                     "result_page_depth": "Use in Reality Translation cards and Agent follow-up prompts.",
-                    "scene_family": "relationship_boundary",
-                    "strength": "这个模式的优势：你能让别人感到被理解，也常能在关系中发现细微信号。",
-                    "tiny_experiment": "下一次只改变一个动作：先暂停、先复述、先设边界，或先说清需要。",
-                    "title": "关系边界被拉扯时：高共情，低恢复的关键动作",
-                    "typical_response": "别人需要支持，但你的时间、精力或责任范围也被拉扯时，你容易先读到别人的压力；本场景的重点是理解之后保留恢复和边界。",
+                    "scene_family": "feedback",
+                    "strength": "你能让别人感到被理解，尤其在对方情绪明显但没有说清楚时。",
+                    "tiny_experiment": "先把反馈拆成三层：事实、情绪、下一步。只先确认一个最具体的调整点。",
+                    "title": "反馈中的高共情，低恢复",
+                    "typical_response": "当别人指出问题、要求修改，或评价你的表现时，你的第一反应可能会被“你很容易接住别人的感受，但不一定能很快把自己从对方情绪里带回来。”影响。你可能先注意到语气、期待或失望，再去处理具体信息。",
                     "variant": "primary",
-                    "why_this_matters": "这个场景能验证「高共情，低恢复」是否只是分数解释，还是会在真实互动里反复出现。"
+                    "why_this_matters": "这个场景把你的 EQ 模式转译到一个具体日常片段。"
                 },
                 {
-                    "better_move": "先把速度降下来，说明你要处理问题，不是赢过对方。",
-                    "cost": "容易付出的代价：长期这样会让你在冲突、求助和抱怨场景中消耗过多，事后还在反复回想。",
-                    "do_not_overread": "这是一个常见场景假设，不代表你每次都会这样反应。",
+                    "better_move": "先说出分歧点，而不是先处理输赢。把“你怎么这样”改成“我们卡在这一点”。",
+                    "cost": "你可能把“我理解你”滑向“我必须替你扛住”。",
+                    "do_not_overread": "Use this as a scene lens, not a prediction of behavior.",
                     "evidence_signals": [
-                        "你在这个场景里最先注意到谁的情绪。",
-                        "你是否能区分事实、感受和责任。",
-                        "事后你是更清楚，还是持续反刍。"
+                        "high_empathy_low_recovery",
+                        "conflict",
+                        "EM_ER_high_low"
                     ],
                     "fallback_scene_id": "conflict",
                     "id": "eq.scene.conflict.high_empathy_low_recovery.primary",
-                    "micro_script": "“我不想把这件事吵大。我们先把一个分歧点说清楚。”",
-                    "reflection_prompt": "回想最近一次类似场景：你最先想保护的是关系、效率、自己，还是对方？",
+                    "micro_script": "“我们先别扩大问题。现在真正卡住的是哪一点？”",
+                    "reflection_prompt": "这次场景里，你最想保护的是事实、关系、还是自己的恢复空间？",
+                    "reflection_question": "这次场景里，你最想保护的是事实、关系、还是自己的恢复空间？",
                     "result_page_depth": "Use in Reality Translation cards and Agent follow-up prompts.",
                     "scene_family": "conflict",
-                    "strength": "这个模式的优势：你能让别人感到被理解，也常能在关系中发现细微信号。",
-                    "tiny_experiment": "下一次只改变一个动作：先暂停、先复述、先设边界，或先说清需要。",
-                    "title": "冲突升温时：高共情，低恢复的关键动作",
-                    "typical_response": "分歧开始带上情绪、语速变快或立场变硬时，你容易先读到别人的压力；本场景的重点是理解之后保留恢复和边界。",
+                    "strength": "你能让别人感到被理解，尤其在对方情绪明显但没有说清楚时。",
+                    "tiny_experiment": "先说出分歧点，而不是先处理输赢。把“你怎么这样”改成“我们卡在这一点”。",
+                    "title": "冲突中的高共情，低恢复",
+                    "typical_response": "当分歧开始变得紧张，双方都想证明自己有道理时，你可能会用自己的惯性模式保护关系或保护自己。这个模式的优势是你能让别人感到被理解，尤其在对方情绪明显但没有说清楚时。，但代价可能是你可能把“我理解你”滑向“我必须替你扛住”。",
                     "variant": "primary",
-                    "why_this_matters": "这个场景能验证「高共情，低恢复」是否只是分数解释，还是会在真实互动里反复出现。"
+                    "why_this_matters": "这个场景把你的 EQ 模式转译到一个具体日常片段。"
                 },
                 {
-                    "better_move": "先做恢复动作，再做意义解释；不要在神经系统还热的时候下结论。",
-                    "cost": "容易付出的代价：长期这样会让你在冲突、求助和抱怨场景中消耗过多，事后还在反复回想。",
-                    "do_not_overread": "这是一个常见场景假设，不代表你每次都会这样反应。",
+                    "better_move": "先承认对方感受，再说明自己能给出的支持范围。",
+                    "cost": "你可能把“我理解你”滑向“我必须替你扛住”。",
+                    "do_not_overread": "Use this as a scene lens, not a prediction of behavior.",
                     "evidence_signals": [
-                        "你在这个场景里最先注意到谁的情绪。",
-                        "你是否能区分事实、感受和责任。",
-                        "事后你是更清楚，还是持续反刍。"
+                        "high_empathy_low_recovery",
+                        "relationship_boundary",
+                        "EM_ER_high_low"
                     ],
-                    "fallback_scene_id": "pressure_recovery",
-                    "id": "eq.scene.pressure_recovery.high_empathy_low_recovery.primary",
-                    "micro_script": "“我先暂停十分钟，等状态下来后再处理下一步。”",
-                    "reflection_prompt": "回想最近一次类似场景：你最先想保护的是关系、效率、自己，还是对方？",
+                    "fallback_scene_id": "relationship_boundary",
+                    "id": "eq.scene.relationship_boundary.high_empathy_low_recovery.primary",
+                    "micro_script": "“我理解这件事很重。我现在能做的是……，但我不能替你承担全部。”",
+                    "reflection_prompt": "这次场景里，你最想保护的是事实、关系、还是自己的恢复空间？",
+                    "reflection_question": "这次场景里，你最想保护的是事实、关系、还是自己的恢复空间？",
                     "result_page_depth": "Use in Reality Translation cards and Agent follow-up prompts.",
-                    "scene_family": "pressure_recovery",
-                    "strength": "这个模式的优势：你能让别人感到被理解，也常能在关系中发现细微信号。",
-                    "tiny_experiment": "下一次只改变一个动作：先暂停、先复述、先设边界，或先说清需要。",
-                    "title": "压力后恢复时：高共情，低恢复的关键动作",
-                    "typical_response": "高压沟通结束后，身体还紧、脑子还在复盘时，你容易先读到别人的压力；本场景的重点是理解之后保留恢复和边界。",
+                    "scene_family": "relationship_boundary",
+                    "strength": "你能让别人感到被理解，尤其在对方情绪明显但没有说清楚时。",
+                    "tiny_experiment": "先承认对方感受，再说明自己能给出的支持范围。",
+                    "title": "关系边界中的高共情，低恢复",
+                    "typical_response": "当别人带着情绪找你，希望你给时间、安慰或解决方案时，你容易把情绪回应和责任承担混在一起，尤其当你的模式接近“高共情，低恢复”时。",
                     "variant": "primary",
-                    "why_this_matters": "这个场景能验证「高共情，低恢复」是否只是分数解释，还是会在真实互动里反复出现。"
+                    "why_this_matters": "这个场景把你的 EQ 模式转译到一个具体日常片段。"
                 }
             ],
             "result_page_depth_modules": [
@@ -912,7 +877,7 @@
         "interpretation": {
             "action_prescription_id": "empathy_boundary",
             "career_environment_ids": [
-                "emotional_labor_medium",
+                "emotional_labor_high",
                 "autonomy_recovery_medium"
             ],
             "core_formulation_id": "high_empathy_low_recovery",
@@ -920,36 +885,36 @@
             "personalization_route": {
                 "claim_risk": "medium",
                 "commercial_depth": {
-                    "fallback_strategy": "if any selected asset is missing, render formulation + dimension summary + scientific boundary only",
-                    "first_screen_strategy": "show one core claim, one evidence point, one next action",
+                    "fallback_strategy": "if selected assets are missing, render formulation + dimension summary + scientific boundary only",
+                    "first_screen_strategy": "route_headline + evidence label + next best action",
                     "reader_trust_strategy": "explain why this route was selected without exposing scoring internals"
                 },
                 "do_not_overread": {
-                    "en": "The route controls content selection and reading order only. It is not a permanent personality label and does not replace real-world feedback.",
-                    "zh-CN": "路线只控制内容选择和阅读顺序，不代表长期人格定型，也不能替代真实关系反馈。"
+                    "en": "This is a content route, not a scoring rule or fixed identity label.",
+                    "zh-CN": "这是一条内容路由，不是评分规则，也不是固定人格标签。"
                 },
                 "formulation_id": "high_empathy_low_recovery",
                 "locales": {
                     "en": {
-                        "evidence_snapshot_label": "Route evidence: dimension pattern, gap direction, response quality, and selected content assets.",
-                        "next_best_action": "Read the three scenes first, then practice one prescription for seven days.",
-                        "route_headline": "Your reading path: how High Empathy, Low Recovery shows up in real situations",
+                        "evidence_snapshot_label": "Route evidence: core formulation, dimension pattern, response-quality signals, and selected assets.",
+                        "next_best_action": "Read the selected scenes first, then practice one prescription for seven days.",
+                        "route_headline": "High Empathy, Low Recovery",
                         "save_reason": "Save this route so you can compare it with real interactions later.",
-                        "why_this_feels_specific": "This path is not a label. It turns score gaps into the scenes and smallest actions most worth checking first."
+                        "why_this_feels_specific": "This route organizes your strongest signals as High Empathy, Low Recovery and prioritizes the most relevant mechanisms, scenes, and practices."
                     },
                     "zh-CN": {
-                        "evidence_snapshot_label": "本路线依据：维度组合、差距方向、答题质量和已选内容资产。",
-                        "next_best_action": "先读 3 个场景，再只选择 1 条行动处方练 7 天。",
-                        "route_headline": "你的阅读路径：先看「高共情，低恢复」如何出现在真实场景里",
-                        "save_reason": "保存这条路线，之后可以对照真实互动验证它是否准确。",
-                        "why_this_feels_specific": "这条路径不是把你归类，而是把分数差距转译为最容易复现的场景和最小行动。"
+                        "evidence_snapshot_label": "本路线依据：核心 formulation、维度组合、质量信号和已选内容资产。",
+                        "next_best_action": "先读路线中的场景卡，再选择一个行动处方练 7 天。",
+                        "route_headline": "高共情，低恢复",
+                        "save_reason": "保存这条路线，之后可对照真实互动验证它是否准确。",
+                        "why_this_feels_specific": "这个路线把你的主要信号组织为“高共情，低恢复”，并优先展示最相关的机制、场景和行动。"
                     }
                 },
-                "priority": 40,
-                "route_id": "route.eq.033.mixed_em_er",
+                "priority": 101,
+                "route_id": "route.eq.high_empathy_low_recovery.primary.quality_ab",
                 "why_this_route_exists": {
-                    "en": "This route turns the High Empathy, Low Recovery pattern (EM:high, ER:low, SA:mid, RM:mid) into a focused reading path: the most relevant scenes (relationship_boundary / conflict / pressure_recovery) and the empathy with boundaries prescription. It decides what to read and practice first; it does not rescore the result.",
-                    "zh-CN": "这条路线用于把「高共情，低恢复」的 EM:high、ER:low、SA:mid、RM:mid 转译成最需要优先阅读的场景（relationship_boundary / conflict / pressure_recovery）和「共情边界」行动处方。它解决的是“先看什么、先练什么”，不是重新判分。"
+                    "en": "This route organizes your strongest signals as High Empathy, Low Recovery and prioritizes the most relevant mechanisms, scenes, and practices.",
+                    "zh-CN": "这个路线把你的主要信号组织为“高共情，低恢复”，并优先展示最相关的机制、场景和行动。"
                 }
             },
             "primary_mechanism_ids": [
@@ -957,20 +922,20 @@
                 "EM_RM_high_low"
             ],
             "primary_scene_ids": [
-                "relationship_boundary",
+                "feedback",
                 "conflict",
-                "pressure_recovery"
+                "relationship_boundary"
             ],
             "primary_scene_variant_ids": [
-                "eq.scene.relationship_boundary.high_empathy_low_recovery.primary",
+                "eq.scene.feedback.high_empathy_low_recovery.primary",
                 "eq.scene.conflict.high_empathy_low_recovery.primary",
-                "eq.scene.pressure_recovery.high_empathy_low_recovery.primary"
+                "eq.scene.relationship_boundary.high_empathy_low_recovery.primary"
             ],
-            "route_id": "route.eq.033.mixed_em_er",
+            "route_id": "route.eq.high_empathy_low_recovery.primary.quality_ab",
             "selected_asset_ids": {
                 "action_prescription_id": "empathy_boundary",
                 "career_environment_ids": [
-                    "emotional_labor_medium",
+                    "emotional_labor_high",
                     "autonomy_recovery_medium"
                 ],
                 "core_formulation_id": "high_empathy_low_recovery",
@@ -979,14 +944,14 @@
                     "EM_RM_high_low"
                 ],
                 "scene_ids": [
-                    "relationship_boundary",
+                    "feedback",
                     "conflict",
-                    "pressure_recovery"
+                    "relationship_boundary"
                 ],
                 "scene_variant_ids": [
-                    "eq.scene.relationship_boundary.high_empathy_low_recovery.primary",
+                    "eq.scene.feedback.high_empathy_low_recovery.primary",
                     "eq.scene.conflict.high_empathy_low_recovery.primary",
-                    "eq.scene.pressure_recovery.high_empathy_low_recovery.primary"
+                    "eq.scene.relationship_boundary.high_empathy_low_recovery.primary"
                 ]
             },
             "signal_signature": {
@@ -999,11 +964,11 @@
                     "SA": "middle"
                 },
                 "formulation_id": "high_empathy_low_recovery",
-                "match_pattern": "EM_high_ER_low_RM_mid_SA_mid",
+                "match_pattern": "EM_any_ER_any_RM_any_SA_any",
                 "quality_level": "A",
                 "route_claim_risk": "medium",
-                "route_id": "route.eq.033.mixed_em_er",
-                "route_priority": 40,
+                "route_id": "route.eq.high_empathy_low_recovery.primary.quality_ab",
+                "route_priority": 101,
                 "schema": "eq60.signal_signature.v1",
                 "strongest_dimension": "EM"
             },
@@ -1358,7 +1323,7 @@
         "methodology": {
             "content_version": "EQ_60/v1",
             "norm_status": "provisional",
-            "report_version": "eq_report_v5_assets_commercial_ready_v1_9",
+            "report_version": "eq_report_v5_assets_commercial_ready_v2_3",
             "scoring_version": "v1.0_normed_validity"
         },
         "next_module": {

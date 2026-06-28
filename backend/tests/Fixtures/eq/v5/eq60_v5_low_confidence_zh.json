@@ -26,7 +26,6 @@
                 "eq.backend_contract.agent_readiness"
             ],
             "career_environment_ids": [
-                "emotional_labor_medium",
                 "autonomy_recovery_medium"
             ],
             "commercial_conversion_ids": [
@@ -42,7 +41,7 @@
             "cross_assessment_boundary_id": "eq.cross_context.boundary.default",
             "cross_assessment_context_ids": [],
             "mechanism_ids": [],
-            "personalization_route_id": "route.eq.024.low_confidence.c",
+            "personalization_route_id": "route.eq.low_confidence_result.speeding",
             "psychometric_evidence_ids": [
                 "eq.evidence.norm_status",
                 "eq.evidence.content_validity",
@@ -61,34 +60,29 @@
             ],
             "result_snapshot_id": "eq.snapshot.low_confidence_result",
             "scene_ids": [
-                "pressure_recovery",
                 "feedback",
-                "career_environment"
+                "pressure_recovery"
             ],
             "scene_variant_ids": [
-                "eq.scene.pressure_recovery.low_confidence_result.primary",
                 "eq.scene.feedback.low_confidence_result.primary",
-                "eq.scene.career_environment.low_confidence_result.primary"
+                "eq.scene.pressure_recovery.low_confidence_result.primary"
             ],
             "scientific_contract_id": "eq.scientific_contract.default",
             "score_system_id": "eq.score_system.default",
             "selected_asset_ids": {
                 "action_prescription_id": "retest_reflection",
                 "career_environment_ids": [
-                    "emotional_labor_medium",
                     "autonomy_recovery_medium"
                 ],
                 "core_formulation_id": "low_confidence_result",
                 "mechanism_ids": [],
                 "scene_ids": [
-                    "pressure_recovery",
                     "feedback",
-                    "career_environment"
+                    "pressure_recovery"
                 ],
                 "scene_variant_ids": [
-                    "eq.scene.pressure_recovery.low_confidence_result.primary",
                     "eq.scene.feedback.low_confidence_result.primary",
-                    "eq.scene.career_environment.low_confidence_result.primary"
+                    "eq.scene.pressure_recovery.low_confidence_result.primary"
                 ]
             },
             "signal_signature": {
@@ -104,8 +98,8 @@
                 "match_pattern": "quality_low_overrides_dimension_pattern",
                 "quality_level": "C",
                 "route_claim_risk": "high",
-                "route_id": "route.eq.024.low_confidence.c",
-                "route_priority": 1,
+                "route_id": "route.eq.low_confidence_result.speeding",
+                "route_priority": 10,
                 "schema": "eq60.signal_signature.v1",
                 "strongest_dimension": "SA"
             },
@@ -113,56 +107,44 @@
         },
         "assets": {
             "action_prescription": {
-                "agent_followup_prompt": "如果你之后问 Agent，可以直接说：帮我练这条处方。",
-                "agent_prompt_seed": "帮我把这条处方应用到我最近的一个真实场景里。",
-                "do_not_overread": "这是自我练习建议，不是治疗方案。",
-                "do_today": "记录本次作答时的状态：时间、注意力、情绪、是否匆忙。",
+                "common_failure": "最常见失败不是不会做，而是等到情绪已经很满才想起来做。",
+                "do_today": "今天只做一个动作：在一个低风险场景里使用“这次结果我先轻一点看，下一次我会在状态更稳定时作答。”这句话。",
                 "id": "retest_reflection",
-                "one_minute_version": "先做一次 60 秒暂停，再用一句话说清事实、感受和下一步。",
-                "progress_markers": [
-                    "你能更快说出自己的状态。",
-                    "你能把支持范围说得更具体。",
-                    "冲突后反刍时间变短。"
-                ],
-                "retest_prompt": "练习一段时间后再复测，观察你的自我感知是否变稳定。",
-                "save_prompt": "把这条处方保存下来，未来一周只练这一件事。",
-                "script": "“我先不急着给这次结果下结论，等状态稳定时再测一次。”",
+                "repair_move": "如果没做到，不要重开整套计划；只复盘一个触发点和下一次第一句话。",
+                "script": "这次结果我先轻一点看，下一次我会在状态更稳定时作答。",
                 "seven_day_plan": [
                     {
                         "day": 1,
-                        "practice": "写下本次作答状态"
+                        "practice": "围绕“复测前的自我回顾”做一次真实场景观察。"
                     },
                     {
                         "day": 2,
-                        "practice": "标记可能影响答案的因素"
+                        "practice": "写下这个练习最容易出现的触发点。"
                     },
                     {
                         "day": 3,
-                        "practice": "观察三天真实互动"
+                        "practice": "试用脚本中的第一句话。"
                     },
                     {
                         "day": 4,
-                        "practice": "记录一个反馈场景"
+                        "practice": "把一次对话拆成事实、情绪和下一步。"
                     },
                     {
                         "day": 5,
-                        "practice": "记录一个边界场景"
+                        "practice": "做一个小边界或小修复动作。"
                     },
                     {
                         "day": 6,
-                        "practice": "安排一次更安静的复测"
+                        "practice": "复盘做得不完美但有进步的地方。"
                     },
                     {
                         "day": 7,
-                        "practice": "对比两次结果是否一致"
+                        "practice": "选出下周继续练的一句话。"
                     }
                 ],
-                "share_prompt": "如果要分享，可以只分享这条行动，不需要分享分数。",
-                "title": "复测与观察处方",
-                "watch_out": "不要把一次练习当成马上改变关系的保证。",
-                "when_not_to_use": "如果涉及安全、创伤、持续伤害或医疗/法律问题，不要用报告建议替代专业支持。",
-                "when_to_use": "当你已经看懂问题，但下一步不知道怎么说、怎么停、怎么修复时使用。",
-                "why_this_matters": "低置信结果更适合作为观察线索。复测前先改善作答状态，会让报告更有参考价值。"
+                "title": "复测前的自我回顾",
+                "watch_out": "不要把练习变成要求自己完美稳定。先追求多一次停顿、多一句清楚表达。",
+                "why_this_matters": "在重新测之前，回顾这次作答速度、犹豫点和选择集中处。"
             },
             "agent_dialogue_playbooks": [
                 {
@@ -250,140 +232,96 @@
             ],
             "career_environment": [
                 {
-                    "do_not_overread": "这不是具体职业推荐，只是帮助你观察环境变量。",
-                    "fit_signal": "情绪承接中时：这种环境有足够互动来使用你的关系优势，也保留一定独立节奏。 对 EQ 报告来说，重点是观察它是否让你的优势自然发挥，而不是逼你长期扮演协调者。",
-                    "id": "emotional_labor_medium",
-                    "interview_question": "这个岗位里的情绪承接通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？",
-                    "label": "情绪劳动：中",
-                    "level": "medium",
-                    "manager_note": "和管理者确认情绪承接边界：投诉、冲突或他人压力是否有制度化分流。",
-                    "meaning": "偶尔需要安抚、解释或处理不满",
-                    "role_observation_checklist": [
-                        "观察情绪承接是稳定可预期，还是经常突然升高。",
-                        "观察情绪性沟通是否有明确负责人，而不是默认落到最愿意回应的人身上。",
-                        "观察你在一天结束后是更清楚、更有能量，还是持续反刍和耗竭。"
-                    ],
-                    "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。",
-                    "strain_signal": "情绪承接中的主要消耗点：风险在于边界模糊：有些沟通值得投入，有些只是消耗。 如果你的发展杠杆正好落在 ER/RM，这个变量要优先验证。",
-                    "team_risk": "如果情绪承接被低估，团队可能把隐形沟通成本当成“性格好的人自然会做”。",
-                    "variable": "emotional_labor",
-                    "what_to_verify": "这个岗位里的情绪承接通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？"
-                },
-                {
-                    "do_not_overread": "这不是具体职业推荐，只是帮助你观察环境变量。",
-                    "fit_signal": "自主恢复空间中时：这种环境有足够互动来使用你的关系优势，也保留一定独立节奏。 对 EQ 报告来说，重点是观察它是否让你的优势自然发挥，而不是逼你长期扮演协调者。",
+                    "do_not_overread": "This describes an environment variable, not a role recommendation.",
+                    "fit_signal": "适合在互动和独立之间切换，并用复盘保持稳定。",
                     "id": "autonomy_recovery_medium",
-                    "interview_question": "这个岗位里的自主恢复空间通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？",
+                    "interview_question": "团队是否有清楚的会议节奏、反馈方式和恢复窗口？",
                     "label": "自主恢复空间：中",
                     "level": "medium",
-                    "manager_note": "和管理者确认恢复空间：高压任务后是否允许安静复盘、调节节奏或切换任务。",
-                    "meaning": "有部分自主管理时间",
+                    "meaning": "你能否安排独处、复盘和情绪恢复的空间",
+                    "recovery_condition": "需要可预期的暂停、复盘和交接空间。",
                     "role_observation_checklist": [
-                        "观察自主恢复空间是稳定可预期，还是经常突然升高。",
-                        "观察情绪性沟通是否有明确负责人，而不是默认落到最愿意回应的人身上。",
-                        "观察你在一天结束后是更清楚、更有能量，还是持续反刍和耗竭。"
+                        "看会议是否有明确目的和结束条件。",
+                        "看反馈是否具体到行为，而不是停留在人身感受。",
+                        "看团队是否允许人暂时退出高情绪对话。"
                     ],
-                    "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。",
-                    "strain_signal": "自主恢复空间中的主要消耗点：风险在于边界模糊：有些沟通值得投入，有些只是消耗。 如果你的发展杠杆正好落在 ER/RM，这个变量要优先验证。",
-                    "team_risk": "如果自主恢复空间被低估，团队可能把隐形沟通成本当成“性格好的人自然会做”。",
+                    "strain_signal": "风险是模糊边界让互动慢慢侵入恢复时间。",
+                    "team_risk": "如果这个变量被长期忽视，团队会把情绪成本转嫁给最愿意承担的人。",
                     "variable": "autonomy_recovery",
-                    "what_to_verify": "这个岗位里的自主恢复空间通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？"
+                    "what_to_verify": "团队是否有清楚的会议节奏、反馈方式和恢复窗口？"
                 }
             ],
             "commercial_conversion_actions": [
                 {
-                    "body": "保存这次结果，几周后对照你的真实互动变化。",
+                    "body": "把这份结果保存下来，方便你以后对比复测变化。",
                     "cta_label": "保存报告",
-                    "do_not_overread": "这只是结果使用方式，不改变报告结论。",
+                    "do_not_overread": "这是免费留存动作，不改变报告结论。",
                     "id": "eq.conversion.save_report",
-                    "placement": "结果页底部、首屏次级动作或报告保存区域。",
-                    "retention_reason": "用户离开页面后仍能回到同一条路线、同一条处方和同一组场景。",
-                    "title": "保存报告，方便以后复盘。",
-                    "trust_note": "这个动作只帮助你使用报告，不改变分数或结论。"
+                    "microcopy": "这是免费留存动作，不改变报告结论。",
+                    "title": "保存报告"
                 },
                 {
-                    "body": "如果你想之后再看，不必一直保留页面。",
-                    "cta_label": "把报告链接发给自己。",
-                    "do_not_overread": "这只是结果使用方式，不改变报告结论。",
+                    "body": "把结果发送到你的邮箱，方便之后回来继续阅读。",
+                    "cta_label": "邮件找回",
+                    "do_not_overread": "这是免费留存动作，不改变报告结论。",
                     "id": "eq.conversion.email_revisit",
-                    "placement": "结果页底部、首屏次级动作或报告保存区域。",
-                    "retention_reason": "用户离开页面后仍能回到同一条路线、同一条处方和同一组场景。",
-                    "title": "把报告链接发给自己。",
-                    "trust_note": "这个动作只帮助你使用报告，不改变分数或结论。"
+                    "microcopy": "这是免费留存动作，不改变报告结论。",
+                    "title": "邮件找回"
                 },
                 {
-                    "body": "用于个人记录或适合的教练式讨论，不要作为筛选依据。",
-                    "cta_label": "导出一份干净报告。",
-                    "do_not_overread": "这只是结果使用方式，不改变报告结论。",
+                    "body": "保存一份静态报告，用于个人复盘。",
+                    "cta_label": "导出 PDF",
+                    "do_not_overread": "这是免费留存动作，不改变报告结论。",
                     "id": "eq.conversion.pdf_export",
-                    "placement": "结果页底部、首屏次级动作或报告保存区域。",
-                    "retention_reason": "用户离开页面后仍能回到同一条路线、同一条处方和同一组场景。",
-                    "title": "导出一份干净报告。",
-                    "trust_note": "这个动作只帮助你使用报告，不改变分数或结论。"
+                    "microcopy": "这是免费留存动作，不改变报告结论。",
+                    "title": "导出 PDF"
                 },
                 {
-                    "body": "只分享模式句，不分享分数和敏感质量信息。",
-                    "cta_label": "生成安全分享卡。",
-                    "do_not_overread": "这只是结果使用方式，不改变报告结论。",
+                    "body": "分享你的情绪与关系模式，不展示敏感分数。",
+                    "cta_label": "生成分享卡",
+                    "do_not_overread": "这是免费留存动作，不改变报告结论。",
                     "id": "eq.conversion.share_card",
-                    "placement": "结果页底部、首屏次级动作或报告保存区域。",
-                    "retention_reason": "用户离开页面后仍能回到同一条路线、同一条处方和同一组场景。",
-                    "title": "生成安全分享卡。",
-                    "trust_note": "这个动作只帮助你使用报告，不改变分数或结论。"
+                    "microcopy": "这是免费留存动作，不改变报告结论。",
+                    "title": "生成分享卡"
                 },
                 {
-                    "body": "适合你正在练一个行动处方时使用。",
-                    "cta_label": "设置30天复测提醒。",
-                    "do_not_overread": "这只是结果使用方式，不改变报告结论。",
+                    "body": "在一段时间后重新测试，观察自我感知是否变化。",
+                    "cta_label": "设置复测提醒",
+                    "do_not_overread": "这是免费留存动作，不改变报告结论。",
                     "id": "eq.conversion.retest_reminder",
-                    "placement": "结果页底部、首屏次级动作或报告保存区域。",
-                    "retention_reason": "用户离开页面后仍能回到同一条路线、同一条处方和同一组场景。",
-                    "title": "设置30天复测提醒。",
-                    "trust_note": "这个动作只帮助你使用报告，不改变分数或结论。"
+                    "microcopy": "这是免费留存动作，不改变报告结论。",
+                    "title": "设置复测提醒"
                 },
                 {
-                    "body": "把这份报告与人格或兴趣信号放在一起看。",
-                    "cta_label": "继续探索相关测试。",
-                    "do_not_overread": "这只是结果使用方式，不改变报告结论。",
+                    "body": "用其他测评补充工作方式、兴趣和人格背景。",
+                    "cta_label": "继续相关测试",
+                    "do_not_overread": "这是免费留存动作，不改变报告结论。",
                     "id": "eq.conversion.related_tests",
-                    "placement": "结果页底部、首屏次级动作或报告保存区域。",
-                    "retention_reason": "用户离开页面后仍能回到同一条路线、同一条处方和同一组场景。",
-                    "title": "继续探索相关测试。",
-                    "trust_note": "这个动作只帮助你使用报告，不改变分数或结论。"
+                    "microcopy": "这是免费留存动作，不改变报告结论。",
+                    "title": "继续相关测试"
                 },
                 {
-                    "body": "让 Agent 基于这份报告解释一个场景或行动，但不改分数、不改结论。",
-                    "cta_label": "询问报告 Agent",
-                    "do_not_overread": "这只是结果使用方式，不改变报告结论。",
+                    "body": "让助手基于已完成报告解释一个具体问题。",
+                    "cta_label": "询问结果助手",
+                    "do_not_overread": "这是免费留存动作，不改变报告结论。",
                     "id": "eq.conversion.agent_entry",
-                    "placement": "结果页底部、首屏次级动作或报告保存区域。",
-                    "retention_reason": "用户离开页面后仍能回到同一条路线、同一条处方和同一组场景。",
-                    "title": "询问 EQ Agent。",
-                    "trust_note": "这个动作只帮助你使用报告，不改变分数或结论。"
+                    "microcopy": "这是免费留存动作，不改变报告结论。",
+                    "title": "询问结果助手"
                 }
             ],
             "core_formulation": {
-                "conversion_hook": "保存报告后，可在复测时比较这个模式是否稳定。",
-                "core_claim": "本次报告仍可以帮助你看到一些可能方向，但不适合直接形成强结论。更稳妥的做法是回顾作答状态，并在状态更稳定时复测。",
-                "development_lever": "先复测或记录三天真实互动，再回来看结果是否吻合。",
-                "do_not_overread": "不要把低置信结果当成稳定画像。",
+                "core_claim": "你的作答状态可能影响了解释稳定性；报告可以帮助你回顾作答方式，但不宜用它做重大判断。",
+                "development_lever": "在状态更稳定时复测，并优先回顾自己为何选择集中或过快。",
+                "do_not_overread": "这是结果解释的组织方式，不是固定人格标签，也不是能力凭证。",
                 "evidence_basis": [
-                    "四维组合指向「本次结果需要谨慎参考」：这次结果更适合做观察提示，不适合做强结论。",
-                    "这不是单一总分判断，而是 SA / ER / EM / RM 的相对关系。",
-                    "如果质量提示偏低，优先把这条结论当作观察假设。"
+                    "Quality C/D or severe response-quality flags."
                 ],
-                "hero_summary": "本次报告仍可以帮助你看到一些可能方向，但不适合直接形成强结论。更稳妥的做法是回顾作答状态，并在状态更稳定时复测。 这份报告建议你把练习重点放在：先复测或记录三天真实互动，再回来看结果是否吻合。",
                 "id": "low_confidence_result",
-                "likely_cost": "如果直接相信强解释，可能会把一次不稳定作答误读成长期模式。",
-                "most_likely_real_life_signal": "你会在反馈、冲突、边界或团队协作中反复遇到相似的情绪处理方式。",
-                "one_liner": "本次作答质量提示结果不够稳定，适合先当作观察线索。",
-                "primary_strength": "你仍然可以使用行动处方中的基础练习作为观察工具。",
-                "share_safe_sentence": "这次结果像草图，不是定稿。",
-                "skeptic_note": "如果这句话不像你，请先看质量提示和维度差距，不要强行认同。",
-                "title": "本次结果需要谨慎参考",
-                "user_memory_sentence": "这次结果像草图，不是定稿。",
-                "what_to_try_first": "先选一个最近真实场景，只练一条脚本或一个暂停动作。",
-                "what_user_should_remember": "这次结果更适合做观察提示，不适合做强结论。"
+                "likely_cost": "如果把它当成完整画像，容易误读自己。",
+                "one_liner": "这次结果更适合作为初步参考，而不是强结论。",
+                "primary_strength": "即使置信度不高，也能用来发现哪些题型或场景让你犹豫。",
+                "share_line": "这次结果更适合作为初步参考，而不是强结论。",
+                "title": "本次结果需要谨慎阅读"
             },
             "cross_assessment_context": {
                 "boundary": {
@@ -402,35 +340,32 @@
             "personalization_route": {
                 "claim_risk": "high",
                 "commercial_depth": {
-                    "fallback_strategy": "if any selected asset is missing, render formulation + dimension summary + scientific boundary only",
-                    "first_screen_strategy": "show one core claim, one evidence point, one next action",
+                    "fallback_strategy": "if selected assets are missing, render formulation + dimension summary + scientific boundary only",
+                    "first_screen_strategy": "route_headline + evidence label + next best action",
                     "reader_trust_strategy": "explain why this route was selected without exposing scoring internals"
                 },
-                "do_not_overread": "路线只控制内容选择和阅读顺序，不代表长期人格定型，也不能替代真实关系反馈。",
-                "evidence_snapshot_label": "本路线依据：维度组合、差距方向、答题质量和已选内容资产。",
+                "do_not_overread": "不要根据本次结果做重大判断。",
+                "evidence_snapshot_label": "本路线依据：核心 formulation、维度组合、质量信号和已选内容资产。",
                 "formulation_id": "low_confidence_result",
-                "id": "route.eq.024.low_confidence.c",
-                "next_best_action": "先读 3 个场景，再只选择 1 条行动处方练 7 天。",
-                "priority": 1,
-                "route_headline": "你的阅读路径：先看「本次结果需要谨慎参考」如何出现在真实场景里",
-                "save_reason": "保存这条路线，之后可以对照真实互动验证它是否准确。",
+                "id": "route.eq.low_confidence_result.speeding",
+                "next_best_action": "先读路线中的场景卡，再选择一个行动处方练 7 天。",
+                "priority": 10,
+                "route_headline": "本次结果谨慎阅读",
+                "save_reason": "保存这条路线，之后可对照真实互动验证它是否准确。",
                 "selected_asset_ids": {
                     "action_prescription_id": "retest_reflection",
                     "career_environment_ids": [
-                        "emotional_labor_medium",
                         "autonomy_recovery_medium"
                     ],
                     "core_formulation_id": "low_confidence_result",
                     "mechanism_ids": [],
                     "scene_ids": [
-                        "pressure_recovery",
                         "feedback",
-                        "career_environment"
+                        "pressure_recovery"
                     ],
                     "scene_variant_ids": [
-                        "eq.scene.pressure_recovery.low_confidence_result.primary",
                         "eq.scene.feedback.low_confidence_result.primary",
-                        "eq.scene.career_environment.low_confidence_result.primary"
+                        "eq.scene.pressure_recovery.low_confidence_result.primary"
                     ]
                 },
                 "signal_signature": {
@@ -446,13 +381,13 @@
                     "match_pattern": "quality_low_overrides_dimension_pattern",
                     "quality_level": "C",
                     "route_claim_risk": "high",
-                    "route_id": "route.eq.024.low_confidence.c",
-                    "route_priority": 1,
+                    "route_id": "route.eq.low_confidence_result.speeding",
+                    "route_priority": 10,
                     "schema": "eq60.signal_signature.v1",
                     "strongest_dimension": "SA"
                 },
-                "why_this_feels_specific": "这条路径不是把你归类，而是把分数差距转译为最容易复现的场景和最小行动。",
-                "why_this_route_exists": "这条路线用于把「本次结果需要谨慎参考」的 四维关系模式 转译成最需要优先阅读的场景（pressure_recovery / feedback / career_environment）和「复测与观察」行动处方。它解决的是“先看什么、先练什么”，不是重新判分。"
+                "why_this_feels_specific": "这条路线在作答质量提示出现时启用，优先解释置信度，而不是输出强个人判断。",
+                "why_this_route_exists": "这条路线在作答质量提示出现时启用，优先解释置信度，而不是输出强个人判断。"
             },
             "psychometric_evidence_status": [
                 {
@@ -524,81 +459,62 @@
                 "explanation_asset_id": "eq.quality.level.C"
             },
             "quality_confidence": {
-                "body": "本次结果适合作为初步参考，强结论需要减少。",
-                "commercial_display": "建议在结果页用质量 Banner 明示，不隐藏在页脚。",
-                "how_to_read": "置信度决定阅读力度：高置信可看模式与行动，低置信先看作答状态和复测建议。",
+                "body": "作答模式提示解释稳定性下降。",
+                "how_to_read": "可参考质量提示、复测建议和最基础的行动。",
                 "id": "eq.quality.level.C",
-                "label": "中等置信",
-                "retest_note": "如果你作答很快、很累或分心，建议稍后复测。",
-                "user_guidance": "根据置信度调整阅读力度，不要用它评价自己。",
-                "why_this_level": "根据作答完整度、节奏、一致性、极端/中立倾向和反应模式综合判断。"
+                "label": "谨慎阅读",
+                "retest_note": "建议复测或先回顾作答状态。",
+                "user_guidance": "不要把本次 formulation 当成强结论。 不要把本次 formulation 当成强结论。",
+                "what_to_hold_lightly": "不要把本次 formulation 当成强结论。",
+                "what_to_trust": "不要把本次 formulation 当成强结论。",
+                "why_this_level": "作答模式提示解释稳定性下降。"
             },
             "reality_scenes": [
                 {
-                    "better_move": "先做恢复动作，再做意义解释；不要在神经系统还热的时候下结论。",
-                    "cost": "容易付出的代价：如果直接相信强解释，可能会把一次不稳定作答误读成长期模式。",
-                    "do_not_overread": "这是一个常见场景假设，不代表你每次都会这样反应。",
+                    "better_move": "先把反馈拆成三层：事实、情绪、下一步。只先确认一个最具体的调整点。",
+                    "cost": "如果把它当成完整画像，容易误读自己。",
+                    "do_not_overread": "Use this as a scene lens, not a prediction of behavior.",
                     "evidence_signals": [
-                        "你在这个场景里最先注意到谁的情绪。",
-                        "你是否能区分事实、感受和责任。",
-                        "事后你是更清楚，还是持续反刍。"
-                    ],
-                    "fallback_scene_id": "pressure_recovery",
-                    "id": "eq.scene.pressure_recovery.low_confidence_result.primary",
-                    "micro_script": "“我先暂停十分钟，等状态下来后再处理下一步。”",
-                    "reflection_prompt": "回想最近一次类似场景：你最先想保护的是关系、效率、自己，还是对方？",
-                    "result_page_depth": "Use in Reality Translation cards and Agent follow-up prompts.",
-                    "scene_family": "pressure_recovery",
-                    "strength": "这个模式的优势：你仍然可以使用行动处方中的基础练习作为观察工具。",
-                    "tiny_experiment": "下一次只改变一个动作：先暂停、先复述、先设边界，或先说清需要。",
-                    "title": "压力后恢复时：本次结果需要谨慎参考的关键动作",
-                    "typical_response": "高压沟通结束后，身体还紧、脑子还在复盘时，本次结果置信度有限；本场景只适合作为观察提示，不适合做强判断。",
-                    "variant": "primary",
-                    "why_this_matters": "这个场景能验证「本次结果需要谨慎参考」是否只是分数解释，还是会在真实互动里反复出现。"
-                },
-                {
-                    "better_move": "先抓住对方最具体的担心，再决定解释、承认还是继续确认。",
-                    "cost": "容易付出的代价：如果直接相信强解释，可能会把一次不稳定作答误读成长期模式。",
-                    "do_not_overread": "这是一个常见场景假设，不代表你每次都会这样反应。",
-                    "evidence_signals": [
-                        "你在这个场景里最先注意到谁的情绪。",
-                        "你是否能区分事实、感受和责任。",
-                        "事后你是更清楚，还是持续反刍。"
+                        "low_confidence_result",
+                        "feedback",
+                        "SA_ER_mixed"
                     ],
                     "fallback_scene_id": "feedback",
                     "id": "eq.scene.feedback.low_confidence_result.primary",
-                    "micro_script": "“我先确认重点：你最担心的是结果、过程，还是接下来怎么补救？”",
-                    "reflection_prompt": "回想最近一次类似场景：你最先想保护的是关系、效率、自己，还是对方？",
+                    "micro_script": "“我先确认一个点：你最希望我具体调整什么？”",
+                    "reflection_prompt": "这次场景里，你最想保护的是事实、关系、还是自己的恢复空间？",
+                    "reflection_question": "这次场景里，你最想保护的是事实、关系、还是自己的恢复空间？",
                     "result_page_depth": "Use in Reality Translation cards and Agent follow-up prompts.",
                     "scene_family": "feedback",
-                    "strength": "这个模式的优势：你仍然可以使用行动处方中的基础练习作为观察工具。",
-                    "tiny_experiment": "下一次只改变一个动作：先暂停、先复述、先设边界，或先说清需要。",
-                    "title": "反馈时：本次结果需要谨慎参考的关键动作",
-                    "typical_response": "别人指出问题、要求修改或质疑判断时，本次结果置信度有限；本场景只适合作为观察提示，不适合做强判断。",
+                    "strength": "即使置信度不高，也能用来发现哪些题型或场景让你犹豫。",
+                    "tiny_experiment": "先把反馈拆成三层：事实、情绪、下一步。只先确认一个最具体的调整点。",
+                    "title": "反馈中的本次结果需要谨慎阅读",
+                    "typical_response": "当别人指出问题、要求修改，或评价你的表现时，你的第一反应可能会被“这次结果更适合作为初步参考，而不是强结论。”影响。你可能先注意到语气、期待或失望，再去处理具体信息。",
                     "variant": "primary",
-                    "why_this_matters": "这个场景能验证「本次结果需要谨慎参考」是否只是分数解释，还是会在真实互动里反复出现。"
+                    "why_this_matters": "这个场景把你的 EQ 模式转译到一个具体日常片段。"
                 },
                 {
-                    "better_move": "看环境变量，不急着给自己贴“适合/不适合”的职业标签。",
-                    "cost": "容易付出的代价：如果直接相信强解释，可能会把一次不稳定作答误读成长期模式。",
-                    "do_not_overread": "这是一个常见场景假设，不代表你每次都会这样反应。",
+                    "better_move": "结束后给自己一个固定收尾：身体放松、情绪命名、一个未完成事项。",
+                    "cost": "如果把它当成完整画像，容易误读自己。",
+                    "do_not_overread": "Use this as a scene lens, not a prediction of behavior.",
                     "evidence_signals": [
-                        "你在这个场景里最先注意到谁的情绪。",
-                        "你是否能区分事实、感受和责任。",
-                        "事后你是更清楚，还是持续反刍。"
+                        "low_confidence_result",
+                        "pressure_recovery",
+                        "SA_ER_mixed"
                     ],
-                    "fallback_scene_id": "career_environment",
-                    "id": "eq.scene.career_environment.low_confidence_result.primary",
-                    "micro_script": "“我先验证这个环境的人际密度、反馈强度和恢复空间，再判断是否适合长期投入。”",
-                    "reflection_prompt": "回想最近一次类似场景：你最先想保护的是关系、效率、自己，还是对方？",
+                    "fallback_scene_id": "pressure_recovery",
+                    "id": "eq.scene.pressure_recovery.low_confidence_result.primary",
+                    "micro_script": "“这件事先到这里。我需要整理一下，再决定下一步。”",
+                    "reflection_prompt": "这次场景里，你最想保护的是事实、关系、还是自己的恢复空间？",
+                    "reflection_question": "这次场景里，你最想保护的是事实、关系、还是自己的恢复空间？",
                     "result_page_depth": "Use in Reality Translation cards and Agent follow-up prompts.",
-                    "scene_family": "career_environment",
-                    "strength": "这个模式的优势：你仍然可以使用行动处方中的基础练习作为观察工具。",
-                    "tiny_experiment": "下一次只改变一个动作：先暂停、先复述、先设边界，或先说清需要。",
-                    "title": "判断工作环境时：本次结果需要谨慎参考的关键动作",
-                    "typical_response": "你在评估岗位、团队节奏或长期协作方式时，本次结果置信度有限；本场景只适合作为观察提示，不适合做强判断。",
+                    "scene_family": "pressure_recovery",
+                    "strength": "即使置信度不高，也能用来发现哪些题型或场景让你犹豫。",
+                    "tiny_experiment": "结束后给自己一个固定收尾：身体放松、情绪命名、一个未完成事项。",
+                    "title": "压力恢复中的本次结果需要谨慎阅读",
+                    "typical_response": "当一段高压沟通或高互动工作结束后，本次结果需要谨慎阅读 的成本会更明显：情绪不一定在当场爆发，但可能事后拖长。",
                     "variant": "primary",
-                    "why_this_matters": "这个场景能验证「本次结果需要谨慎参考」是否只是分数解释，还是会在真实互动里反复出现。"
+                    "why_this_matters": "这个场景把你的 EQ 模式转译到一个具体日常片段。"
                 }
             ],
             "result_page_depth_modules": [
@@ -872,7 +788,6 @@
         "interpretation": {
             "action_prescription_id": "retest_reflection",
             "career_environment_ids": [
-                "emotional_labor_medium",
                 "autonomy_recovery_medium"
             ],
             "core_formulation_id": "low_confidence_result",
@@ -880,67 +795,62 @@
             "personalization_route": {
                 "claim_risk": "high",
                 "commercial_depth": {
-                    "fallback_strategy": "if any selected asset is missing, render formulation + dimension summary + scientific boundary only",
-                    "first_screen_strategy": "show one core claim, one evidence point, one next action",
+                    "fallback_strategy": "if selected assets are missing, render formulation + dimension summary + scientific boundary only",
+                    "first_screen_strategy": "route_headline + evidence label + next best action",
                     "reader_trust_strategy": "explain why this route was selected without exposing scoring internals"
                 },
                 "do_not_overread": {
-                    "en": "The route controls content selection and reading order only. It is not a permanent personality label and does not replace real-world feedback.",
-                    "zh-CN": "路线只控制内容选择和阅读顺序，不代表长期人格定型，也不能替代真实关系反馈。"
+                    "en": "Do not use this result as a basis for major decisions.",
+                    "zh-CN": "不要根据本次结果做重大判断。"
                 },
                 "formulation_id": "low_confidence_result",
                 "locales": {
                     "en": {
-                        "evidence_snapshot_label": "Route evidence: dimension pattern, gap direction, response quality, and selected content assets.",
-                        "next_best_action": "Read the three scenes first, then practice one prescription for seven days.",
-                        "route_headline": "Your reading path: how Use This Result as a Cautious First Read shows up in real situations",
+                        "evidence_snapshot_label": "Route evidence: core formulation, dimension pattern, response-quality signals, and selected assets.",
+                        "next_best_action": "Read the selected scenes first, then practice one prescription for seven days.",
+                        "route_headline": "Read this result lightly",
                         "save_reason": "Save this route so you can compare it with real interactions later.",
-                        "why_this_feels_specific": "This path is not a label. It turns score gaps into the scenes and smallest actions most worth checking first."
+                        "why_this_feels_specific": "This route is used when response-quality signals suggest caution. It prioritizes confidence explanation over strong personal interpretation."
                     },
                     "zh-CN": {
-                        "evidence_snapshot_label": "本路线依据：维度组合、差距方向、答题质量和已选内容资产。",
-                        "next_best_action": "先读 3 个场景，再只选择 1 条行动处方练 7 天。",
-                        "route_headline": "你的阅读路径：先看「本次结果需要谨慎参考」如何出现在真实场景里",
-                        "save_reason": "保存这条路线，之后可以对照真实互动验证它是否准确。",
-                        "why_this_feels_specific": "这条路径不是把你归类，而是把分数差距转译为最容易复现的场景和最小行动。"
+                        "evidence_snapshot_label": "本路线依据：核心 formulation、维度组合、质量信号和已选内容资产。",
+                        "next_best_action": "先读路线中的场景卡，再选择一个行动处方练 7 天。",
+                        "route_headline": "本次结果谨慎阅读",
+                        "save_reason": "保存这条路线，之后可对照真实互动验证它是否准确。",
+                        "why_this_feels_specific": "这条路线在作答质量提示出现时启用，优先解释置信度，而不是输出强个人判断。"
                     }
                 },
-                "priority": 1,
-                "route_id": "route.eq.024.low_confidence.c",
+                "priority": 10,
+                "route_id": "route.eq.low_confidence_result.speeding",
                 "why_this_route_exists": {
-                    "en": "This route turns the Use This Result as a Cautious First Read pattern (the four-dimension pattern) into a focused reading path: the most relevant scenes (pressure_recovery / feedback / career_environment) and the retest reflection prescription. It decides what to read and practice first; it does not rescore the result.",
-                    "zh-CN": "这条路线用于把「本次结果需要谨慎参考」的 四维关系模式 转译成最需要优先阅读的场景（pressure_recovery / feedback / career_environment）和「复测与观察」行动处方。它解决的是“先看什么、先练什么”，不是重新判分。"
+                    "en": "This route is used when response-quality signals suggest caution. It prioritizes confidence explanation over strong personal interpretation.",
+                    "zh-CN": "这条路线在作答质量提示出现时启用，优先解释置信度，而不是输出强个人判断。"
                 }
             },
             "primary_mechanism_ids": [],
             "primary_scene_ids": [
-                "pressure_recovery",
                 "feedback",
-                "career_environment"
+                "pressure_recovery"
             ],
             "primary_scene_variant_ids": [
-                "eq.scene.pressure_recovery.low_confidence_result.primary",
                 "eq.scene.feedback.low_confidence_result.primary",
-                "eq.scene.career_environment.low_confidence_result.primary"
+                "eq.scene.pressure_recovery.low_confidence_result.primary"
             ],
-            "route_id": "route.eq.024.low_confidence.c",
+            "route_id": "route.eq.low_confidence_result.speeding",
             "selected_asset_ids": {
                 "action_prescription_id": "retest_reflection",
                 "career_environment_ids": [
-                    "emotional_labor_medium",
                     "autonomy_recovery_medium"
                 ],
                 "core_formulation_id": "low_confidence_result",
                 "mechanism_ids": [],
                 "scene_ids": [
-                    "pressure_recovery",
                     "feedback",
-                    "career_environment"
+                    "pressure_recovery"
                 ],
                 "scene_variant_ids": [
-                    "eq.scene.pressure_recovery.low_confidence_result.primary",
                     "eq.scene.feedback.low_confidence_result.primary",
-                    "eq.scene.career_environment.low_confidence_result.primary"
+                    "eq.scene.pressure_recovery.low_confidence_result.primary"
                 ]
             },
             "signal_signature": {
@@ -956,8 +866,8 @@
                 "match_pattern": "quality_low_overrides_dimension_pattern",
                 "quality_level": "C",
                 "route_claim_risk": "high",
-                "route_id": "route.eq.024.low_confidence.c",
-                "route_priority": 1,
+                "route_id": "route.eq.low_confidence_result.speeding",
+                "route_priority": 10,
                 "schema": "eq60.signal_signature.v1",
                 "strongest_dimension": "SA"
             },
@@ -1324,7 +1234,7 @@
         "methodology": {
             "content_version": "EQ_60/v1",
             "norm_status": "provisional",
-            "report_version": "eq_report_v5_assets_commercial_ready_v1_9",
+            "report_version": "eq_report_v5_assets_commercial_ready_v2_3",
             "scoring_version": "v1.0_normed_validity"
         },
         "next_module": {
