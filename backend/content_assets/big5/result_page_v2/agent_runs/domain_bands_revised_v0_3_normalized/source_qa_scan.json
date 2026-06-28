@@ -1,0 +1,21 @@
+{
+  "scan_scope": "user_visible_fields_only",
+  "visible_fields_scanned": [
+    "title_zh",
+    "summary_zh",
+    "short_body_zh",
+    "body_zh",
+    "cta_zh"
+  ],
+  "forbidden_terms_checked": true,
+  "forbidden_hit_count": 0,
+  "forbidden_hits": [],
+  "runtime_use_all_staging_only": true,
+  "production_use_allowed_true_count": 0,
+  "ready_for_runtime_true_count": 0,
+  "ready_for_production_true_count": 0,
+  "body_length_min": 261,
+  "body_length_max": 282,
+  "body_length_outside_260_420": [],
+  "note": "Only user-visible copy fields were revised; body_quality metadata remains from source and should be recalculated by Codex if importer requires exact values."
+}

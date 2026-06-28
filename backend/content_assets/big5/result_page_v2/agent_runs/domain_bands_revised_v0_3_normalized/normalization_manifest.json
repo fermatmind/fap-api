@@ -1,0 +1,29 @@
+{
+  "candidate_dir": "content_assets/big5/result_page_v2/agent_runs/domain_bands_revised_v0_3_normalized",
+  "counts": {
+    "content_asset_candidates": 25,
+    "selector_asset_candidates": 25
+  },
+  "normalization_steps": [
+    "converted_gpt_zip_jsonl_to_backend_candidate_jsonl",
+    "softened_ambiguous_risk_wording",
+    "recalculated_body_quality",
+    "refreshed_selector_public_titles_and_summaries",
+    "generated_human_review_manifest",
+    "deferred_staging_import"
+  ],
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_production": false,
+  "ready_for_runtime": false,
+  "runtime_use": "staging_only",
+  "schema_version": "fap.big5.result_page_v2.domain_bands_candidate_normalize.manifest.v0_3",
+  "source_qa_scan_summary": {
+    "forbidden_hit_count": 0,
+    "production_use_allowed_true_count": 0,
+    "runtime_use_all_staging_only": true
+  },
+  "source_zip_filename": "大五人格-第二板块.zip",
+  "source_zip_sha256": "bf1ae61cf803c43ec9229efff6c2aa3ed12ebe43ff5547c3f49d28e06e102df4",
+  "task": "BIG5-DOMAIN-BANDS-CANDIDATE-NORMALIZE-01"
+}

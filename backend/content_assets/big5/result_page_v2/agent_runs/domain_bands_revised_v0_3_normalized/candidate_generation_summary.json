@@ -1,0 +1,100 @@
+{
+  "body_quality": {
+    "avg_body_chars": 268.8,
+    "max_body_chars": 282,
+    "min_body_chars": 261,
+    "recalculated": true
+  },
+  "candidate_counts": {
+    "content_asset": 25,
+    "selector_asset": 25
+  },
+  "coverage": {
+    "bands": [
+      "very_low",
+      "low",
+      "mid",
+      "high",
+      "very_high"
+    ],
+    "covered_domain_band_combinations": 25,
+    "domains": [
+      "O",
+      "C",
+      "E",
+      "A",
+      "N"
+    ],
+    "expected_domain_band_combinations": 25,
+    "missing_domain_band_combinations": []
+  },
+  "leak_scan": {
+    "hit_count": 0,
+    "hits": [],
+    "status": "pass"
+  },
+  "negative_guarantees": {
+    "cms_or_search_changed": false,
+    "final_result_contract_generated": false,
+    "frontend_copy_added": false,
+    "production_gate_changed": false,
+    "runtime_changed": false,
+    "staging_import_performed": false
+  },
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_production": false,
+  "ready_for_runtime": false,
+  "rendered_hygiene_scan": {
+    "hit_count": 0,
+    "rules": [
+      "no_selector_tokens",
+      "no_internal_rendered_terms",
+      "no_broken_template_fragments"
+    ],
+    "status": "pass"
+  },
+  "repair": {
+    "repair_entry_count": 6,
+    "repair_required_after_normalization": false,
+    "risk_wording_hit_count_after": 0,
+    "risk_wording_hit_count_before": 7
+  },
+  "review_validation": {
+    "errors": [],
+    "present": true,
+    "valid": true
+  },
+  "runtime_use": "staging_only",
+  "schema_version": "fap.big5.result_page_v2.domain_bands_candidate_normalize.v0_3",
+  "source_package": {
+    "filename": "大五人格-第二板块.zip",
+    "sha256": "bf1ae61cf803c43ec9229efff6c2aa3ed12ebe43ff5547c3f49d28e06e102df4",
+    "source_body_length_max": 282,
+    "source_body_length_min": 261,
+    "source_forbidden_hit_count": 0,
+    "source_rows": 25
+  },
+  "stage_candidates_dry_run": {
+    "leak_hit_count": 0,
+    "ok": true,
+    "review_error_count": 0,
+    "staging_write_performed": false,
+    "validation_error_count": 0
+  },
+  "staging_import": {
+    "repair_entry_count": 0,
+    "repair_required": false,
+    "staging_import_dir": null,
+    "staging_write_performed": false,
+    "status": "deferred"
+  },
+  "status": "pass",
+  "task": "BIG5-DOMAIN-BANDS-CANDIDATE-NORMALIZE-01",
+  "validation": {
+    "content_asset_candidate_count": 25,
+    "error_count": 0,
+    "selector_asset_candidate_count": 25,
+    "status": "pass"
+  }
+}
