@@ -1,0 +1,132 @@
+{
+    "schema": "fap.big5.result_page_v2.rendered_surface_qa.revised_v0_3.rendered_preview_qa.v0_1",
+    "package_key": "big5_result_page_v2.rendered_surface_qa_revised_v0_3.rendered_preview_qa.v0_1",
+    "status": "pass",
+    "mode": "backend_fixture_rendered_preview_qa",
+    "runtime_use": "not_runtime",
+    "production_use_allowed": false,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false,
+    "source": {
+        "candidate_dir": "content_assets/big5/result_page_v2/agent_runs/rendered_surface_qa_revised_v0_3_normalized",
+        "staging_import_dir": "content_assets/big5/result_page_v2/staging_candidate_imports/rendered_surface_qa_revised_v0_3_staging_import",
+        "staging_import_validation_status": "pass",
+        "live_result_verified": false
+    },
+    "counts": {
+        "selector_asset_candidates": 24,
+        "content_asset_candidates": 24,
+        "surface_count": 6,
+        "surface_role_count": 4
+    },
+    "coverage": {
+        "surface_counts": {
+            "compare": 4,
+            "history": 4,
+            "pdf": 4,
+            "print_saved": 4,
+            "result_page": 4,
+            "share": 4
+        },
+        "surface_role_counts": {
+            "display_expectation": 6,
+            "issue_triage": 6,
+            "privacy_boundary": 6,
+            "summary_scope": 6
+        },
+        "missing_surfaces": [],
+        "missing_surface_roles": []
+    },
+    "surface_matrix": {
+        "result_page": {
+            "status": "pass",
+            "candidate_count": 4,
+            "render_policy": "full_reading_with_boundary",
+            "visible_text_quality": "pass",
+            "sensitive_boundary": "pass"
+        },
+        "pdf": {
+            "status": "pass",
+            "candidate_count": 4,
+            "render_policy": "archive_safe_no_sensitive_link",
+            "visible_text_quality": "pass",
+            "sensitive_boundary": "pass"
+        },
+        "share": {
+            "status": "pass",
+            "candidate_count": 4,
+            "render_policy": "share_safe_only",
+            "visible_text_quality": "pass",
+            "sensitive_boundary": "pass"
+        },
+        "history": {
+            "status": "pass",
+            "candidate_count": 4,
+            "render_policy": "summary_only",
+            "visible_text_quality": "pass",
+            "sensitive_boundary": "pass"
+        },
+        "compare": {
+            "status": "pass",
+            "candidate_count": 4,
+            "render_policy": "summary_only",
+            "visible_text_quality": "pass",
+            "sensitive_boundary": "pass"
+        },
+        "print_saved": {
+            "status": "pass",
+            "candidate_count": 4,
+            "render_policy": "archive_safe_no_sensitive_link",
+            "visible_text_quality": "pass",
+            "sensitive_boundary": "pass"
+        }
+    },
+    "visible_text_quality": {
+        "status": "pass",
+        "min_body_chars": 181,
+        "max_body_chars": 214,
+        "duplicate_title_count": 0,
+        "duplicate_body_count": 0,
+        "thin_copy_count": 0,
+        "sentence_flow_status": "pass"
+    },
+    "rendered_hygiene_scan": {
+        "status": "pass",
+        "hit_count": 0,
+        "hits": [],
+        "rule_labels": [
+            "no_selector_token_text",
+            "no_engine_or_controller_text",
+            "no_broken_template_text",
+            "no_sensitive_comparison_labels",
+            "no_object_string_text"
+        ]
+    },
+    "redaction": {
+        "status": "pass",
+        "stored_live_identifier": false,
+        "stored_live_link": false,
+        "stored_document_file": false,
+        "stored_unprocessed_score_text": false,
+        "stored_sensitive_comparison_text": false
+    },
+    "negative_guarantees": {
+        "runtime_flag_change": false,
+        "release_snapshot_change": false,
+        "production_import_gate_change": false,
+        "rollout_gate_change": false,
+        "frontend_copy_write": false,
+        "cms_write": false,
+        "seo_or_search_write": false,
+        "final_result_contract_generation": false
+    },
+    "remaining_holds": [
+        "runtime_activation_deferred",
+        "production_import_deferred",
+        "rollout_deferred",
+        "frontend_copy_deferred",
+        "cms_search_deferred",
+        "live_result_pdf_text_extraction_deferred"
+    ]
+}
