@@ -64031,7 +64031,7 @@
     "branch": "codex/big5-coupling-content-thickening-01",
     "title": "BIG5-COUPLING-CONTENT-THICKENING-01: Thicken Big Five coupling content assets",
     "train_scope": "big5_result_page_content_asset_thickening",
-    "status": "pr_open",
+    "status": "merged",
     "depends_on": [
       "BIG5-FACET-CONTENT-THICKENING-01"
     ],
@@ -64080,12 +64080,141 @@
         "evidence": "Changed files are limited to coupling content thickening artifacts, staging import artifacts, QA packet, AssetAgent test, and PR train state reconciliation."
       },
       "github": {
-        "status": "pending",
-        "evidence": "PR #2492 opened; GitHub checks pending."
+        "status": "pass",
+        "evidence": "PR #2492 checks all completed successfully; mergeStateStatus CLEAN before squash merge."
+      },
+      "post_merge_cleanup": {
+        "status": "pass",
+        "evidence": "Merge commit 7d7427d86b41b36a31172c5b1194e2d52051bd16 is in origin/main; local main synced; branch/worktree cleaned."
       }
     },
     "commit_sha": "387ad1dda3b18526cf988bd16f94d7f52f09f075",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2492",
+    "failure_reason": null,
+    "merged_at": "2026-06-28T02:15:25Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": false,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "content_authority": "backend",
+    "authorized_by_user": "2026-06-28 explicit authorization to add 8 Big Five content asset thickening PR train entries.",
+    "events": [
+      {
+        "at": "2026-06-28T00:00:00Z",
+        "status": "pending",
+        "note": "Initialized under user-authorized Big Five result-page content asset thickening train."
+      }
+    ],
+    "scope_validation": {
+      "allowed_paths_only": true,
+      "github_checks_green": true,
+      "local_validation_passed": true,
+      "post_merge_revalidated": true
+    },
+    "transitions": [
+      {
+        "at": "2026-06-28T02:05:00Z",
+        "from": "authorized",
+        "to": "implementation_in_progress",
+        "note": "Started coupling content thickening implementation from latest origin/main after facet dependency cleanup."
+      },
+      {
+        "at": "2026-06-28T02:08:00Z",
+        "from": "implementation_in_progress",
+        "to": "local_checks_passed",
+        "note": "Generated coupling content thickening staging artifacts and passed strict audit, focused PHPUnit, artifact parse/hash, diff, and scope validations."
+      },
+      {
+        "at": "2026-06-28T02:10:00Z",
+        "from": "local_checks_passed",
+        "to": "commit_created",
+        "note": "Created scoped implementation commit 387ad1dda3b18526cf988bd16f94d7f52f09f075 after local validation passed; follow-up ledger commit records the SHA."
+      },
+      {
+        "at": "2026-06-28T02:13:00Z",
+        "from": "local_checks_passed",
+        "to": "pr_open",
+        "note": "Opened PR #2492 after local validation and initial push."
+      },
+      {
+        "at": "2026-06-28T02:18:00Z",
+        "from": "pr_open",
+        "to": "merged",
+        "note": "PR #2492 merged and post-merge cleanup completed; unblocks canonical profile content thickening."
+      }
+    ],
+    "merge_commit_sha": "7d7427d86b41b36a31172c5b1194e2d52051bd16"
+  },
+  "BIG5-CANONICAL-PROFILE-CONTENT-THICKENING-01": {
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/big5-canonical-profile-content-thickening-01",
+    "title": "BIG5-CANONICAL-PROFILE-CONTENT-THICKENING-01: Thicken Big Five canonical profile content assets",
+    "train_scope": "big5_result_page_content_asset_thickening",
+    "status": "pr_open",
+    "depends_on": [
+      "BIG5-COUPLING-CONTENT-THICKENING-01"
+    ],
+    "checks": {
+      "dependency_verification": {
+        "status": "pass",
+        "evidence": "BIG5-COUPLING-CONTENT-THICKENING-01 is merged into origin/main."
+      },
+      "audit_strict": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent audit --strict --json --no-ansi",
+        "evidence": "PASS; ok=true, strict_failures=[], validation_error_count=0, leak_hit_count=0, ready flags remain false."
+      },
+      "stage_candidates": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing php artisan big5:result-page-v2-agent stage-candidates --run-id=canonical-profile-content-thickening-stage --candidate-dir=content_assets/big5/result_page_v2/agent_runs/canonical_profile_content_thickening --staging-output-dir=content_assets/big5/result_page_v2/staging_candidate_imports/canonical_profile_content_thickening --allow-staging-write --json --no-ansi",
+        "evidence": "PASS; 64 selector and 64 content candidates, validation_error_count=0, review_error_count=0, leak_hit_count=0."
+      },
+      "asset_agent_test": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test --filter=BigFiveResultPageV2AssetAgentTest --no-ansi",
+        "evidence": "PASS with warnings; 26 tests, 3994 assertions."
+      },
+      "selector_asset_validator_test": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test --filter=BigFiveResultPageV2SelectorAssetValidatorTest --no-ansi",
+        "evidence": "PASS with warnings; 20 tests, 87 assertions."
+      },
+      "content_asset_lookup_test": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan test --filter=BigFiveResultPageV2ContentAssetLookupTest --no-ansi",
+        "evidence": "PASS with warnings; 4 tests, 44 assertions."
+      },
+      "artifact_parse": {
+        "status": "pass",
+        "command": "YAML parse, state JSON parse, canonical profile artifact JSON/JSONL parse",
+        "evidence": "All YAML, JSON, and JSONL files parsed successfully; candidate/staging JSONL count is 64 each."
+      },
+      "sha256sums": {
+        "status": "pass",
+        "command": "shasum -a 256 -c SHA256SUMS.txt from agent run dir and shasum -a 256 -c SHA256SUMS from QA dir",
+        "evidence": "All committed canonical profile candidate and QA artifact hashes verified."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check",
+        "evidence": "No whitespace errors."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to canonical profile content thickening artifacts, staging import artifacts, QA packet, AssetAgent test, and PR train state reconciliation."
+      },
+      "github": {
+        "status": "pending",
+        "evidence": "PR #2493 opened; GitHub checks pending."
+      }
+    },
+    "commit_sha": "443855ebff36330e816879b5f4c153bc1047b4c1",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2493",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -64113,61 +64242,28 @@
     },
     "transitions": [
       {
-        "at": "2026-06-28T02:05:00Z",
+        "at": "2026-06-28T02:24:00Z",
         "from": "authorized",
         "to": "implementation_in_progress",
-        "note": "Started coupling content thickening implementation from latest origin/main after facet dependency cleanup."
+        "note": "Started canonical profile content thickening implementation from latest origin/main after coupling dependency cleanup."
       },
       {
-        "at": "2026-06-28T02:08:00Z",
+        "at": "2026-06-28T02:31:00Z",
         "from": "implementation_in_progress",
         "to": "local_checks_passed",
-        "note": "Generated coupling content thickening staging artifacts and passed strict audit, focused PHPUnit, artifact parse/hash, diff, and scope validations."
+        "note": "Generated canonical profile content thickening staging artifacts and passed strict audit, stage-candidates, focused PHPUnit, artifact parse/hash, diff, and scope validations."
       },
       {
-        "at": "2026-06-28T02:10:00Z",
+        "at": "2026-06-28T02:32:00Z",
         "from": "local_checks_passed",
         "to": "commit_created",
-        "note": "Created scoped implementation commit 387ad1dda3b18526cf988bd16f94d7f52f09f075 after local validation passed; follow-up ledger commit records the SHA."
+        "note": "Created scoped implementation commit 443855ebff36330e816879b5f4c153bc1047b4c1 after local validation passed; follow-up ledger commit records the SHA."
       },
       {
-        "at": "2026-06-28T02:13:00Z",
+        "at": "2026-06-28T02:34:00Z",
         "from": "local_checks_passed",
         "to": "pr_open",
-        "note": "Opened PR #2492 after local validation and initial push."
-      }
-    ]
-  },
-  "BIG5-CANONICAL-PROFILE-CONTENT-THICKENING-01": {
-    "repo": "fap-api",
-    "base": "main",
-    "branch": "codex/big5-canonical-profile-content-thickening-01",
-    "title": "BIG5-CANONICAL-PROFILE-CONTENT-THICKENING-01: Thicken Big Five canonical profile content assets",
-    "train_scope": "big5_result_page_content_asset_thickening",
-    "status": "pending",
-    "depends_on": [
-      "BIG5-COUPLING-CONTENT-THICKENING-01"
-    ],
-    "checks": {},
-    "commit_sha": null,
-    "pr_url": null,
-    "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
-    "production_write_execution": false,
-    "database_mutation": false,
-    "cms_mutation": false,
-    "api_runtime_change": false,
-    "publish_allowed": false,
-    "deploy_allowed": false,
-    "content_authority": "backend",
-    "authorized_by_user": "2026-06-28 explicit authorization to add 8 Big Five content asset thickening PR train entries.",
-    "events": [
-      {
-        "at": "2026-06-28T00:00:00Z",
-        "status": "pending",
-        "note": "Initialized under user-authorized Big Five result-page content asset thickening train."
+        "note": "Opened PR #2493 after local validation and initial push."
       }
     ]
   },
