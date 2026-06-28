@@ -63638,11 +63638,11 @@
     "branch": "codex/pr-eq-v20-01-direct-mapped-assets",
     "title": "PR-EQ-V20-01 Backend EQ v2.3 direct-mapped assets",
     "train_scope": "eq_v20_content_asset_expansion",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "depends_on": [
       "PR-EQ-V19-06"
     ],
-    "commit_sha": "17e1e691aff0a49a511c6341b53636531f88c6e4",
+    "commit_sha": "6815cebbc3a427019d8ff15c76835fc7a846f836",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2486",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -63702,6 +63702,10 @@
       "diff_check": {
         "status": "passed",
         "evidence": "git diff --check and git diff --cached --check passed before commit."
+      },
+      "github": {
+        "status": "passed",
+        "evidence": "All GitHub checks passed on PR #2486 before ready_to_merge ledger update."
       }
     },
     "events": [
@@ -63719,6 +63723,11 @@
         "at": "2026-06-28T00:28:34Z",
         "status": "pr_open",
         "notes": "Opened GitHub PR #2486 after local checks, staged scope validation, and push."
+      },
+      {
+        "at": "2026-06-28T00:33:57Z",
+        "status": "ready_to_merge",
+        "notes": "GitHub checks passed; scope revalidation completed before merge."
       }
     ],
     "notes": "PR-EQ-V20-01 imports direct-mapped v2.3 assets only; career overlays, route matrix activation, dynamic depth modules, canonical fixtures, and frontend consumption remain deferred."
