@@ -1,0 +1,68 @@
+{
+  "candidate_counts": {
+    "content_asset": 30,
+    "selector_asset": 30
+  },
+  "coverage": {
+    "covered_facets": 30,
+    "domains": {
+      "A": 6,
+      "C": 6,
+      "E": 6,
+      "N": 6,
+      "O": 6
+    },
+    "expected_facets": 30,
+    "missing_facets": []
+  },
+  "editorial_components": [
+    "high_interpretation",
+    "low_interpretation",
+    "facet_domain_mismatch",
+    "practical_example",
+    "common_misread",
+    "action_guidance",
+    "boundary_language"
+  ],
+  "leak_scan": {
+    "hit_count": 0,
+    "status": "pass"
+  },
+  "negative_guarantees": {
+    "cms_or_search_changed": false,
+    "final_result_contract_generated": false,
+    "frontend_copy_added": false,
+    "production_gate_changed": false,
+    "runtime_changed": false
+  },
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_production": false,
+  "ready_for_runtime": false,
+  "runtime_use": "staging_only",
+  "schema_version": "fap.big5.result_page_v2.content_asset_thickening.v0_1",
+  "source_policy": {
+    "bfi_2_copy_used": false,
+    "external_copy_used": false,
+    "external_sources_used_as_structure_reference_only": [
+      "123test",
+      "Truity"
+    ],
+    "internal_existing_assets_used": true
+  },
+  "staging_import": {
+    "repair_entry_count": 0,
+    "repair_required": false,
+    "staging_import_dir": "content_assets/big5/result_page_v2/staging_candidate_imports/facet_content_thickening",
+    "staging_write_performed": true,
+    "status": "pass"
+  },
+  "status": "pass",
+  "task": "facet_content_thickening_candidate_generation",
+  "validation": {
+    "content_asset_candidate_count": 30,
+    "error_count": 0,
+    "selector_asset_candidate_count": 30,
+    "status": "pass"
+  }
+}
