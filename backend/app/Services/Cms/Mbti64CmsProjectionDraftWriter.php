@@ -22,6 +22,10 @@ final class Mbti64CmsProjectionDraftWriter
 
     private const NEXT_BATCH_6_QA_ARTIFACT = 'PERSONALITY-AGENT-OPERATIONS-NEXT-BATCH-6-HANDOFF-QA-01';
 
+    private const NEXT_BATCH_6_V2_PACKAGE_ARTIFACT = 'MBTI64-NEXT-BATCH-6-COMPETITOR-GAP-CONTENT-EXPANSION-V2-01';
+
+    private const NEXT_BATCH_6_V2_QA_ARTIFACT = 'MBTI64-NEXT-BATCH-6-COMPETITOR-GAP-CONTENT-EXPANSION-V2-QA-01';
+
     private const VISIBLE_QUERY_BACKED_3_URLS = [
         'https://fermatmind.com/en/personality/enfj-a',
         'https://fermatmind.com/zh/personality/intp-a',
@@ -359,31 +363,42 @@ final class Mbti64CmsProjectionDraftWriter
         sort($recommendationUrls);
         sort($expectedUrls);
 
-        if ((string) ($package['artifact'] ?? '') !== self::NEXT_BATCH_6_PACKAGE_ARTIFACT) {
+        $packageArtifact = (string) ($package['artifact'] ?? '');
+        $qaArtifact = (string) ($qa['artifact'] ?? '');
+        $v2Package = $packageArtifact === self::NEXT_BATCH_6_V2_PACKAGE_ARTIFACT;
+        $v2Qa = $qaArtifact === self::NEXT_BATCH_6_V2_QA_ARTIFACT;
+
+        if (! in_array($packageArtifact, [self::NEXT_BATCH_6_PACKAGE_ARTIFACT, self::NEXT_BATCH_6_V2_PACKAGE_ARTIFACT], true)) {
             $errors[] = ['field' => 'artifact', 'code' => 'unsupported_package_artifact', 'message' => 'Unexpected next-batch-6 package artifact.'];
         }
         if ((string) ($package['status'] ?? '') !== 'pass') {
             $errors[] = ['field' => 'status', 'code' => 'package_status_not_ready_for_approval_handoff', 'message' => 'Next-batch-6 package must have pass status.'];
         }
-        if (count($this->recommendations($package)) !== 6 || (int) ($summary['recommendation_count'] ?? -1) !== 6) {
+        $packageRecommendationCount = $v2Package
+            ? (int) ($package['target_count'] ?? -1)
+            : (int) ($summary['recommendation_count'] ?? -1);
+        if (count($this->recommendations($package)) !== 6 || $packageRecommendationCount !== 6) {
             $errors[] = ['field' => 'recommendations', 'code' => 'unexpected_recommendation_count', 'message' => 'Expected exactly 6 next-batch recommendations.'];
         }
-        if ((int) ($summary['variant_pages'] ?? -1) !== 6 || (int) ($summary['comparison_pages'] ?? -1) !== 0) {
+        $variantCount = $v2Package ? $this->countUrlsByPageType($recommendationUrls, 'variant') : (int) ($summary['variant_pages'] ?? -1);
+        $comparisonCount = $v2Package ? $this->countUrlsByPageType($recommendationUrls, 'comparison') : (int) ($summary['comparison_pages'] ?? -1);
+        if ($variantCount !== 6 || $comparisonCount !== 0) {
             $errors[] = ['field' => 'summary', 'code' => 'unexpected_page_type_counts', 'message' => 'Expected 6 variant and 0 comparison recommendations.'];
         }
         if ($recommendationUrls !== $expectedUrls) {
             $errors[] = ['field' => 'recommendations', 'code' => 'next_batch_6_url_set_mismatch', 'message' => 'Next-batch-6 package must contain exactly the fixed approved URL set.'];
         }
 
-        if ((string) ($qa['artifact'] ?? '') !== self::NEXT_BATCH_6_QA_ARTIFACT) {
+        if (! in_array($qaArtifact, [self::NEXT_BATCH_6_QA_ARTIFACT, self::NEXT_BATCH_6_V2_QA_ARTIFACT], true)) {
             $errors[] = ['field' => 'qa.artifact', 'code' => 'unsupported_qa_artifact', 'message' => 'Unexpected next-batch-6 QA artifact.'];
         }
-        if ((string) ($qa['final_decision'] ?? '') !== 'PASS_READY_FOR_APPROVAL_REVIEW') {
+        if (! $this->nextBatch6QaFinalDecisionPasses((string) ($qa['final_decision'] ?? ''))) {
             $errors[] = ['field' => 'qa.final_decision', 'code' => 'qa_not_ready_for_approval_review', 'message' => 'Next-batch-6 QA must be ready for approval review.'];
         }
-        if ((int) ($qaSummary['checked_recommendation_count'] ?? -1) !== 6
-            || (int) ($qaSummary['pass_ready_for_approval_review_count'] ?? -1) !== 6
-            || (int) ($qaSummary['blocked_count'] ?? -1) !== 0) {
+        $qaCheckedCount = $v2Qa ? (int) ($qaSummary['target_count'] ?? -1) : (int) ($qaSummary['checked_recommendation_count'] ?? -1);
+        $qaPassCount = $v2Qa ? (int) ($qaSummary['pass_count'] ?? -1) : (int) ($qaSummary['pass_ready_for_approval_review_count'] ?? -1);
+        $qaBlockedCount = $v2Qa ? (int) ($qaSummary['no_go_count'] ?? -1) : (int) ($qaSummary['blocked_count'] ?? -1);
+        if ($qaCheckedCount !== 6 || $qaPassCount !== 6 || $qaBlockedCount !== 0) {
             $errors[] = ['field' => 'qa.summary', 'code' => 'qa_summary_not_all_pass', 'message' => 'Next-batch-6 QA summary must show 6 pass and 0 blocked.'];
         }
         if ((array) ($qa['blockers'] ?? []) !== []) {
@@ -403,12 +418,42 @@ final class Mbti64CmsProjectionDraftWriter
         }
 
         foreach ($this->qaResultsByUrl($qa) as $url => $result) {
-            if ((string) ($result['decision'] ?? '') !== 'PASS_READY_FOR_APPROVAL_REVIEW' || (array) ($result['blockers'] ?? []) !== []) {
+            $pageDecision = (string) ($result['decision'] ?? ($result['qa_decision'] ?? ''));
+            $blockedReason = trim((string) ($result['blocked_reason'] ?? ''));
+            if (! $this->nextBatch6QaPageDecisionPasses($pageDecision) || (array) ($result['blockers'] ?? []) !== [] || $blockedReason !== '') {
                 $errors[] = ['field' => 'qa.page_results.'.$url, 'code' => 'qa_page_not_pass', 'message' => 'Every next-batch-6 QA page result must pass approval review with no blockers.'];
             }
         }
 
         return $errors;
+    }
+
+    /**
+     * @param  list<string>  $urls
+     */
+    private function countUrlsByPageType(array $urls, string $pageType): int
+    {
+        return count(array_filter($urls, function (string $url) use ($pageType): bool {
+            $identity = $this->identityForRecommendation(['target_url' => $url]);
+
+            return $identity !== null && ($identity['page_type'] ?? null) === $pageType;
+        }));
+    }
+
+    private function nextBatch6QaFinalDecisionPasses(string $decision): bool
+    {
+        return in_array($decision, [
+            'PASS_READY_FOR_APPROVAL_REVIEW',
+            'PASS_READY_FOR_EDITORIAL_REVIEW_AND_APPROVAL_QUEUE_REPAIR',
+        ], true);
+    }
+
+    private function nextBatch6QaPageDecisionPasses(string $decision): bool
+    {
+        return in_array($decision, [
+            'PASS_READY_FOR_APPROVAL_REVIEW',
+            'PASS_READY_FOR_CONTENT_EXPANSION_REVIEW',
+        ], true);
     }
 
     /**
@@ -840,6 +885,7 @@ final class Mbti64CmsProjectionDraftWriter
             'PASS',
             'PASS_READY_FOR_CMS_DRAFT',
             'PASS_READY_FOR_APPROVAL_REVIEW',
+            'PASS_READY_FOR_CONTENT_EXPANSION_REVIEW',
             'READY_QUERY_BACKED_LOW_RISK_DRAFT_REVIEW',
         ], true);
     }
@@ -926,12 +972,12 @@ final class Mbti64CmsProjectionDraftWriter
                     'locale' => (string) ($recommendation['locale'] ?? ''),
                     'page_type' => (string) $identity['page_type'],
                     'seo' => [
-                        'title' => (string) ($recommended['title']['recommended'] ?? ''),
-                        'description' => (string) ($recommended['description']['recommended'] ?? ''),
-                        'h1' => (string) ($recommended['h1']['recommended'] ?? ''),
+                        'title' => $this->recommendedFieldText($recommended, 'title'),
+                        'description' => $this->recommendedFieldText($recommended, 'description'),
+                        'h1' => $this->recommendedFieldText($recommended, 'h1'),
                     ],
                     'content' => [
-                        'quick_answer' => (string) ($recommended['quick_answer']['recommended'] ?? ''),
+                        'quick_answer' => $this->recommendedFieldText($recommended, 'quick_answer'),
                     ],
                     'faq' => is_array($recommended['faq'] ?? null) ? array_values((array) $recommended['faq']) : [],
                     'internal_links' => is_array($recommended['internal_links'] ?? null) ? array_values((array) $recommended['internal_links']) : [],
@@ -960,6 +1006,19 @@ final class Mbti64CmsProjectionDraftWriter
                 'raw_recommendation' => $recommendation,
             ],
         ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $recommended
+     */
+    private function recommendedFieldText(array $recommended, string $field): string
+    {
+        $value = $recommended[$field] ?? '';
+        if (is_array($value)) {
+            return (string) ($value['recommended'] ?? '');
+        }
+
+        return is_string($value) ? $value : '';
     }
 
     /**
