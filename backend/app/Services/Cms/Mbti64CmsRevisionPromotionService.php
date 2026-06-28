@@ -896,7 +896,7 @@ final class Mbti64CmsRevisionPromotionService
                 'payload_json' => [
                     'title' => $this->nullableString($payload['h2'] ?? ($payload['title'] ?? null)),
                     'body' => $body,
-                    'source' => 'mbti64_v2_1_revision_promotion',
+                    'source' => $this->nullableString($payload['source'] ?? null) ?? 'mbti64_v2_1_revision_promotion',
                     'raw' => $payload,
                 ],
                 'sort_order' => $sort,
@@ -1197,13 +1197,68 @@ final class Mbti64CmsRevisionPromotionService
             return null;
         }
 
+        $parts = [];
         foreach (['body', 'summary', 'text', 'answer'] as $key) {
             if (isset($value[$key]) && is_string($value[$key]) && trim($value[$key]) !== '') {
-                return trim($value[$key]);
+                $parts[] = trim($value[$key]);
+                break;
             }
         }
 
-        return null;
+        $comparisonRows = is_array($value['comparison_rows'] ?? null) ? array_values((array) $value['comparison_rows']) : [];
+        if ($comparisonRows !== []) {
+            $parts[] = $this->comparisonRowsMarkdown($comparisonRows);
+        }
+
+        $bullets = is_array($value['bullets'] ?? null) ? array_values((array) $value['bullets']) : [];
+        if ($bullets !== []) {
+            $bulletLines = [];
+            foreach ($bullets as $bullet) {
+                if (is_string($bullet) && trim($bullet) !== '') {
+                    $bulletLines[] = '- '.trim($bullet);
+                }
+            }
+            if ($bulletLines !== []) {
+                $parts[] = implode("\n", $bulletLines);
+            }
+        }
+
+        $body = trim(implode("\n\n", array_filter($parts, static fn (string $part): bool => trim($part) !== '')));
+
+        return $body !== '' ? $body : null;
+    }
+
+    /**
+     * @param  list<mixed>  $rows
+     */
+    private function comparisonRowsMarkdown(array $rows): string
+    {
+        $lines = [
+            '| Dimension | Assertive side | Turbulent side |',
+            '| --- | --- | --- |',
+        ];
+
+        foreach ($rows as $row) {
+            if (! is_array($row)) {
+                continue;
+            }
+
+            $dimension = $this->markdownTableCell((string) ($row['dimension'] ?? ''));
+            $assertive = $this->markdownTableCell((string) ($row['assertive'] ?? ($row['a_side'] ?? '')));
+            $turbulent = $this->markdownTableCell((string) ($row['turbulent'] ?? ($row['t_side'] ?? '')));
+            if ($dimension === '' && $assertive === '' && $turbulent === '') {
+                continue;
+            }
+
+            $lines[] = '| '.$dimension.' | '.$assertive.' | '.$turbulent.' |';
+        }
+
+        return count($lines) > 2 ? implode("\n", $lines) : '';
+    }
+
+    private function markdownTableCell(string $value): string
+    {
+        return str_replace('|', '\\|', trim(preg_replace('/\s+/', ' ', $value) ?? ''));
     }
 
     private function nullableString(mixed $value): ?string

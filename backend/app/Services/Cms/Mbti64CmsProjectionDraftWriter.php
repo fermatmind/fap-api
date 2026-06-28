@@ -1099,9 +1099,7 @@ final class Mbti64CmsProjectionDraftWriter
                         'description' => $this->recommendedFieldText($recommended, 'description'),
                         'h1' => $this->recommendedFieldText($recommended, 'h1'),
                     ],
-                    'content' => [
-                        'quick_answer' => $this->recommendedFieldText($recommended, 'quick_answer'),
-                    ],
+                    'content' => $this->contentFieldsForRecommendation($recommended),
                     'faq' => is_array($recommended['faq'] ?? null) ? array_values((array) $recommended['faq']) : [],
                     'internal_links' => is_array($recommended['internal_links'] ?? null) ? array_values((array) $recommended['internal_links']) : [],
                     'differentiation_notes' => is_array($recommended['differentiation_notes'] ?? null)
@@ -1142,6 +1140,172 @@ final class Mbti64CmsProjectionDraftWriter
         }
 
         return is_string($value) ? $value : '';
+    }
+
+    /**
+     * @param  array<string,mixed>  $recommended
+     * @return array<string,mixed>
+     */
+    private function contentFieldsForRecommendation(array $recommended): array
+    {
+        $content = [
+            'quick_answer' => $this->recommendedFieldText($recommended, 'quick_answer'),
+        ];
+
+        foreach ($this->sectionFieldsForRecommendation($recommended) as $key => $section) {
+            $content[$key] = $section;
+        }
+
+        return $content;
+    }
+
+    /**
+     * @param  array<string,mixed>  $recommended
+     * @return array<string,array<string,mixed>>
+     */
+    private function sectionFieldsForRecommendation(array $recommended): array
+    {
+        $sections = [];
+        foreach (array_values((array) ($recommended['sections'] ?? [])) as $index => $section) {
+            if (! is_array($section)) {
+                continue;
+            }
+
+            $sectionKey = $this->firstClassSectionKey((string) ($section['key'] ?? ''), $index);
+            if ($sectionKey === '' || array_key_exists($sectionKey, $sections)) {
+                continue;
+            }
+
+            $body = $this->sectionBody($section);
+            if ($body === null) {
+                continue;
+            }
+
+            $sections[$sectionKey] = [
+                'title' => $this->sectionTitle($section),
+                'body' => $body,
+                'source_key' => (string) ($section['key'] ?? ''),
+                'source' => 'mbti64_competitor_gap_v2_first_class_section',
+                'raw' => $section,
+            ];
+        }
+
+        return $sections;
+    }
+
+    private function firstClassSectionKey(string $sourceKey, int $position): string
+    {
+        $normalized = strtolower(trim(preg_replace('/[^a-zA-Z0-9_]+/', '_', $sourceKey) ?? '', '_'));
+        $map = [
+            'how_to_read' => 'meaning',
+            'at_difference_table' => 'a_t_difference',
+            'cognitive_function_mechanism' => 'core_traits',
+            'work_scenario' => 'careers_work_style',
+            'relationship_communication' => 'relationships_communication',
+            'stress_growth' => 'strengths_blind_spots',
+            'common_misreads' => 'common_misreads',
+            'how_to_use_not_use' => 'similar_types',
+        ];
+
+        if (isset($map[$normalized])) {
+            return $map[$normalized];
+        }
+
+        $fallback = [
+            'meaning',
+            'a_t_difference',
+            'core_traits',
+            'careers_work_style',
+            'relationships_communication',
+            'strengths_blind_spots',
+            'common_misreads',
+            'similar_types',
+        ];
+
+        return $fallback[$position] ?? '';
+    }
+
+    /**
+     * @param  array<string,mixed>  $section
+     */
+    private function sectionTitle(array $section): ?string
+    {
+        foreach (['title', 'h2', 'heading'] as $key) {
+            if (isset($section[$key]) && is_string($section[$key]) && trim($section[$key]) !== '') {
+                return trim($section[$key]);
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @param  array<string,mixed>  $section
+     */
+    private function sectionBody(array $section): ?string
+    {
+        $parts = [];
+        foreach (['body', 'summary', 'text'] as $key) {
+            if (isset($section[$key]) && is_string($section[$key]) && trim($section[$key]) !== '') {
+                $parts[] = trim($section[$key]);
+                break;
+            }
+        }
+
+        $comparisonRows = is_array($section['comparison_rows'] ?? null) ? array_values((array) $section['comparison_rows']) : [];
+        if ($comparisonRows !== []) {
+            $parts[] = $this->comparisonRowsMarkdown($comparisonRows);
+        }
+
+        $bullets = is_array($section['bullets'] ?? null) ? array_values((array) $section['bullets']) : [];
+        if ($bullets !== []) {
+            $bulletLines = [];
+            foreach ($bullets as $bullet) {
+                if (is_string($bullet) && trim($bullet) !== '') {
+                    $bulletLines[] = '- '.trim($bullet);
+                }
+            }
+            if ($bulletLines !== []) {
+                $parts[] = implode("\n", $bulletLines);
+            }
+        }
+
+        $body = trim(implode("\n\n", array_filter($parts, static fn (string $part): bool => trim($part) !== '')));
+
+        return $body !== '' ? $body : null;
+    }
+
+    /**
+     * @param  list<mixed>  $rows
+     */
+    private function comparisonRowsMarkdown(array $rows): string
+    {
+        $lines = [
+            '| Dimension | Assertive side | Turbulent side |',
+            '| --- | --- | --- |',
+        ];
+
+        foreach ($rows as $row) {
+            if (! is_array($row)) {
+                continue;
+            }
+
+            $dimension = $this->markdownTableCell((string) ($row['dimension'] ?? ''));
+            $assertive = $this->markdownTableCell((string) ($row['assertive'] ?? ($row['a_side'] ?? '')));
+            $turbulent = $this->markdownTableCell((string) ($row['turbulent'] ?? ($row['t_side'] ?? '')));
+            if ($dimension === '' && $assertive === '' && $turbulent === '') {
+                continue;
+            }
+
+            $lines[] = '| '.$dimension.' | '.$assertive.' | '.$turbulent.' |';
+        }
+
+        return count($lines) > 2 ? implode("\n", $lines) : '';
+    }
+
+    private function markdownTableCell(string $value): string
+    {
+        return str_replace('|', '\\|', trim(preg_replace('/\s+/', ' ', $value) ?? ''));
     }
 
     /**
