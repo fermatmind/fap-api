@@ -65113,7 +65113,7 @@
     "branch": "codex/mbti-main-free-faq-content-01",
     "title": "MBTI-MAIN-FREE-FAQ-CONTENT-01: seo(mbti): strengthen main free-test visible FAQ authority",
     "train_scope": "mbti_main_visible_faq_content_authority",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "depends_on": [
       "MBTI-MAIN-FREE-SERP-TDK-01"
     ],
@@ -65164,6 +65164,10 @@
       "scope_validation": {
         "status": "pass",
         "evidence": "Changed files are limited to MBTI visible FAQ authority in ScaleRegistrySeeder, focused V0.3 lookup FAQ coverage, and authorized docs/codex train metadata. No TDK, schema policy/runtime, search, sitemap, llms, CMS production write, deploy, or fap-web files changed."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #2525 checks succeeded on head 335d487e5225f1624f26bf5fcd44d89723c9e510: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and semgrep sarif non-blocking upload."
       }
     },
     "commit_sha": "5e849fc355fba45fa22830be54d17a320da5912c",
@@ -65195,6 +65199,11 @@
         "at": "2026-06-28T22:16:20+08:00",
         "status": "pr_open",
         "note": "Opened PR #2525 for MBTI main visible FAQ authority."
+      },
+      {
+        "at": "2026-06-28T22:25:05+08:00",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed for PR #2525 and changed files remain within the MBTI main visible FAQ authority scope."
       }
     ]
   }
