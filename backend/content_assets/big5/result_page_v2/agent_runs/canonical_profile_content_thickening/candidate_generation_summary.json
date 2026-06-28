@@ -1,0 +1,124 @@
+{
+  "schema_version": "fap.big5.result_page_v2.content_asset_thickening.v0_1",
+  "task": "canonical_profile_content_thickening_candidate_generation",
+  "status": "pass",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "candidate_counts": {
+    "selector_asset": 64,
+    "content_asset": 64
+  },
+  "coverage": {
+    "profile_count": 8,
+    "section_count": 8,
+    "expected_profile_section_assets": 64,
+    "covered_profile_section_assets": 64,
+    "coverage_by_profile": {
+      "complex_explorer_low_structure": 8,
+      "connective_coordinator": 8,
+      "orderly_supporter": 8,
+      "overloaded_internalizer": 8,
+      "quiet_deep_worker": 8,
+      "sensitive_independent_thinker": 8,
+      "sharp_exploratory_driver": 8,
+      "vigilant_perfectionist": 8
+    },
+    "coverage_by_section": {
+      "hero_summary": 8,
+      "domains_overview": 8,
+      "domain_deep_dive": 8,
+      "facet_details": 8,
+      "core_portrait": 8,
+      "norms_comparison": 8,
+      "action_plan": 8,
+      "methodology_and_access": 8
+    },
+    "missing_profile_sections": []
+  },
+  "editorial_components": [
+    "assistive_profile_label",
+    "narrative_map",
+    "strength_and_risk",
+    "application_prompt",
+    "reflection_prompt",
+    "boundary_language"
+  ],
+  "source_policy": {
+    "internal_existing_assets_used": true,
+    "external_copy_used": false,
+    "bfi_2_copy_used": false,
+    "external_sources_used_as_structure_reference_only": [
+      "123test",
+      "Truity"
+    ]
+  },
+  "validation": {
+    "status": "pass",
+    "selector_asset_candidate_count": 64,
+    "content_asset_candidate_count": 64,
+    "error_count": 0
+  },
+  "leak_scan": {
+    "status": "pass",
+    "hit_count": 0,
+    "hits": []
+  },
+  "staging_import": {
+    "status": "pass",
+    "staging_write_performed": true,
+    "staging_import_dir": "content_assets/big5/result_page_v2/staging_candidate_imports/canonical_profile_content_thickening",
+    "repair_required": false,
+    "repair_entry_count": 0
+  },
+  "negative_guarantees": {
+    "runtime_changed": false,
+    "production_gate_changed": false,
+    "frontend_copy_added": false,
+    "cms_or_search_changed": false,
+    "final_result_contract_generated": false
+  },
+  "review_manifest": {
+    "status": "present",
+    "review_status": "approved_for_staging",
+    "reviewed_by": "codex_content_asset_agent"
+  },
+  "content_type_mapping": {
+    "hero_summary": {
+      "asset_type": "hero_summary",
+      "asset_layer": "L1_core_body"
+    },
+    "domains_overview": {
+      "asset_type": "quick_understanding",
+      "asset_layer": "L1_core_body"
+    },
+    "domain_deep_dive": {
+      "asset_type": "domain_core",
+      "asset_layer": "L1_core_body"
+    },
+    "facet_details": {
+      "asset_type": "facet_reframe",
+      "asset_layer": "L5_facet_precision"
+    },
+    "core_portrait": {
+      "asset_type": "coupling",
+      "asset_layer": "L4_coupling"
+    },
+    "norms_comparison": {
+      "asset_type": "norms_explanation",
+      "asset_layer": "L0_governance"
+    },
+    "action_plan": {
+      "asset_type": "action_plan",
+      "asset_layer": "L6_scenario_action"
+    },
+    "methodology_and_access": {
+      "asset_type": "method_boundary",
+      "asset_layer": "L0_governance"
+    }
+  },
+  "editorial_min_body_chars": 220,
+  "editorial_short_body_repairs": 59
+}

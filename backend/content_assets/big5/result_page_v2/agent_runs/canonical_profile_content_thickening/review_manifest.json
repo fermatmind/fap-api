@@ -1,0 +1,40 @@
+{
+  "schema_version": "fap.big5.result_page_v2.staging_review_manifest.v0.1",
+  "task": "canonical_profile_content_thickening_review",
+  "human_reviewed": true,
+  "review_status": "approved_for_staging",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "review_scope": {
+    "candidate_artifacts_only": true,
+    "staging_import_allowed": true,
+    "runtime_enablement_allowed": false,
+    "production_import_allowed": false,
+    "frontend_copy_allowed": false,
+    "cms_or_search_allowed": false
+  },
+  "review_notes": [
+    "64 canonical profile section candidates are approved for staging artifact validation only.",
+    "Profile labels remain assistive and non-fixed; no runtime, production, CMS, SEO, or fap-web copy changes are authorized."
+  ],
+  "reviewed_by": "codex_content_asset_agent",
+  "reviewed_at": "2026-06-28T02:24:00Z",
+  "approved_candidate_files": [
+    "selector_asset_candidates.jsonl",
+    "content_asset_candidates.jsonl"
+  ],
+  "review_checks": {
+    "canonical_profile_section_coverage": {
+      "status": "pass",
+      "expected": 64,
+      "actual": 64
+    },
+    "schema_validation": "deferred_to_stage_candidates",
+    "selector_contract_validation": "deferred_to_stage_candidates",
+    "leak_scan": "deferred_to_stage_candidates",
+    "external_copy_scan": "pass"
+  }
+}
