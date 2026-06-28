@@ -29536,3 +29536,62 @@ prs:
     publish_allowed: false
     deploy_allowed: false
     content_authority: backend
+
+  - id: PR-EQ-V20-01
+    repo: fap-api
+    depends_on: [PR-EQ-V19-06]
+    branch: codex/pr-eq-v20-01-direct-mapped-assets
+    title: "PR-EQ-V20-01 Backend EQ v2.3 direct-mapped assets"
+    train_scope: eq_v20_content_asset_expansion
+    scope:
+      - Adapt directly mappable EQ v2.3 proposal assets into existing EQ_60/v1 raw report asset structures.
+      - Import core formulations, mechanism map, base career environment assets, action prescriptions, commercial conversion assets, cross-assessment context, quality confidence, and SEO/GEO authority assets without changing composer selection.
+      - Normalize localized action prescription seven-day plans so zh-CN and en payloads do not leak nested alternate-locale fields.
+      - Mirror mapped assets into EQ_EMOTIONAL_INTELLIGENCE/v1 and refresh compiled report assets for both aliases.
+      - Keep career overlays, v2.3 route matrix activation, dynamic depth module selection, frontend rendering, SJT runtime, scoring, and norms deferred to later PRs.
+    allowed_paths:
+      - backend/content_packs/EQ_60/v1/raw/report_assets/core_formulations.json
+      - backend/content_packs/EQ_60/v1/raw/report_assets/mechanism_map.json
+      - backend/content_packs/EQ_60/v1/raw/report_assets/career_environment.json
+      - backend/content_packs/EQ_60/v1/raw/report_assets/action_prescriptions.json
+      - backend/content_packs/EQ_60/v1/raw/report_assets/commercial_conversion_assets.json
+      - backend/content_packs/EQ_60/v1/raw/report_assets/cross_assessment_context.json
+      - backend/content_packs/EQ_60/v1/raw/report_assets/quality_confidence.json
+      - backend/content_packs/EQ_60/v1/raw/report_assets/seo_geo_authority.json
+      - backend/content_packs/EQ_60/v1/compiled/**
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/core_formulations.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/mechanism_map.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/career_environment.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/action_prescriptions.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/commercial_conversion_assets.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/cross_assessment_context.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/quality_confidence.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets/seo_geo_authority.json
+      - backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/**
+      - backend/tests/Feature/Content/Eq60ContentGateTest.php
+      - docs/codex/pr-train.yaml
+      - docs/codex/pr-train-state.json
+      - generated/pr-train-sidecar-issues/**
+    do_not:
+      - Change Eq60ReportComposer selection logic.
+      - Change EQ questions, options, reverse keys, scoring semantics, or norm algorithms.
+      - Modify fap-web.
+      - Enable SJT or add clickable SJT entry.
+      - Add paid, unlock, SKU, premium, purchase, clinical, hiring, MSCEIT, or ability-test claims.
+      - Import v2.3 career overlays, route matrix activation, result-page depth module selection, or Agent runtime behavior.
+    validation:
+      - cd backend && php artisan content:lint --pack=EQ_60 --pack-version=v1
+      - cd backend && php artisan content:compile --pack=EQ_60 --pack-version=v1
+      - cd backend && php artisan test --filter=Eq60ContentGateTest
+      - ruby -e "require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'"
+      - python3 -m json.tool docs/codex/pr-train-state.json >/dev/null
+      - git diff --check
+      - git diff --cached --check
+    merge_policy: { github_checks_required: true, squash: true, auto_merge: true }
+    production_write_execution: false
+    database_mutation: false
+    cms_mutation: false
+    api_runtime_change: false
+    publish_allowed: false
+    deploy_allowed: false
+    content_authority: backend

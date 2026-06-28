@@ -23018,9 +23018,13 @@
       "github": {
         "status": "pass",
         "evidence": "gh pr checks 2459 all pass: hygiene, supply-chain, content-pack-build-validate, Semgrep, verify-bigfive, verify-mbti-legacy, verify-mbti-v2."
+      },
+      "reconciled_for_pr_eq_v20_01": {
+        "status": "pass",
+        "evidence": "Verified GitHub PR #2459 is MERGED and merge commit 17c91a9bf2e5dbd3b2ec96691d8f953899981dc1 is on origin/main before starting PR-EQ-V20-01."
       }
     },
-    "commit_sha": "d92572f5aa184cfebc53c4ffdfd4a6f3e759dd08",
+    "commit_sha": "17c91a9bf2e5dbd3b2ec96691d8f953899981dc1",
     "depends_on": [
       "PR-EQ-V19-05"
     ],
@@ -23049,15 +23053,20 @@
         "at": "2026-06-26T17:32:18Z",
         "status": "ready_to_merge",
         "notes": "GitHub checks passed and PR-EQ-V19-06 is ready to merge."
+      },
+      {
+        "at": "2026-06-28T00:10:51.582394Z",
+        "status": "merged_reconciled",
+        "notes": "Reconciled stale PR-EQ-V19-06 state while initializing PR-EQ-V20-01."
       }
     ],
     "failure_reason": null,
-    "local_cleanup_executed": false,
-    "merged_at": null,
+    "local_cleanup_executed": true,
+    "merged_at": "2026-06-26T17:38:50Z",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2459",
-    "remote_branch_deleted": false,
+    "remote_branch_deleted": true,
     "repo": "fap-api",
-    "status": "ready_to_merge",
+    "status": "merged",
     "title": "PR-EQ-V19-06 EQ v1.9 canonical fixtures and smoke template",
     "train_scope": "eq_v19_commercial_content_depth"
   },
@@ -63622,5 +63631,83 @@
     }
   },
   "train_id": "email-first-result-access",
-  "updated_at": "2026-06-26T15:21:54.232288+00:00"
+  "updated_at": "2026-06-26T15:21:54.232288+00:00",
+  "PR-EQ-V20-01": {
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/pr-eq-v20-01-direct-mapped-assets",
+    "title": "PR-EQ-V20-01 Backend EQ v2.3 direct-mapped assets",
+    "train_scope": "eq_v20_content_asset_expansion",
+    "status": "local_checks_passed",
+    "depends_on": [
+      "PR-EQ-V19-06"
+    ],
+    "commit_sha": null,
+    "pr_url": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "failure_reason": null,
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User explicitly authorized adding PR-EQ-V20-01 to fap-api docs/codex/pr-train.yaml and docs/codex/pr-train-state.json and executing Backend Adapter for Direct-Mapped Assets."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "PR-EQ-V19-06 merged as GitHub PR #2459 with merge commit 17c91a9bf2e5dbd3b2ec96691d8f953899981dc1 and is included in origin/main."
+      },
+      "local": [
+        {
+          "cmd": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:lint --pack=EQ_60 --pack-version=v1",
+          "status": "passed"
+        },
+        {
+          "cmd": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:compile --pack=EQ_60 --pack-version=v1",
+          "status": "passed"
+        },
+        {
+          "cmd": "rsync -a --delete backend/content_packs/EQ_60/v1/compiled/ backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/",
+          "status": "passed"
+        },
+        {
+          "cmd": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ContentGateTest",
+          "status": "passed"
+        },
+        {
+          "cmd": "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml'); puts 'yaml ok'\"",
+          "status": "passed"
+        },
+        {
+          "cmd": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "status": "passed"
+        },
+        {
+          "cmd": "find backend/content_packs/EQ_60/v1/raw/report_assets backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/raw/report_assets -name '*.json' -print0 | xargs -0 -n1 python3 -m json.tool >/dev/null",
+          "status": "passed"
+        },
+        {
+          "cmd": "nested locale scan for action_prescriptions seven_day_plan practice objects",
+          "status": "passed"
+        },
+        {
+          "cmd": "raw EQ_60/EQ_EMOTIONAL_INTELLIGENCE mirror check for imported assets",
+          "status": "passed"
+        }
+      ]
+    },
+    "events": [
+      {
+        "at": "2026-06-28T00:10:51.582394Z",
+        "status": "initialized",
+        "notes": "Initialized from explicit user authorization; scope is backend v2.3 direct-mapped asset adapter/import without composer or frontend changes."
+      },
+      {
+        "at": "2026-06-28T00:23:02.528144Z",
+        "status": "local_checks_passed",
+        "notes": "Mapped direct v2.3 assets, normalized action seven-day plans, compiled EQ_60, mirrored compiled alias, and passed content lint/content gate."
+      }
+    ],
+    "notes": "PR-EQ-V20-01 imports direct-mapped v2.3 assets only; career overlays, route matrix activation, dynamic depth modules, canonical fixtures, and frontend consumption remain deferred."
+  }
 }

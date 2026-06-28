@@ -762,7 +762,7 @@
     },
     {
       "zh-CN": {
-        "question": "需要付费才能看完整 EQ 结果吗？",
+        "question": "完整 EQ 结果是否免费？",
         "answer": "当前策略是 EQ-60 基础报告免费。未来情境判断模块如果开放，也应作为数据完整度升级，而不是把当前结果锁起来。",
         "do_not_overread": "不得暗示访问门槛或分层结果承诺。"
       },
@@ -938,6 +938,606 @@
           "eq.seo.en.workplace_eq"
         ],
         "asset_type": "seo_geo_faq"
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "什么是 EQ 测试？",
+        "answer": "EQ 测试帮助你反思自己如何觉察、调节和回应自己与关系中的情绪。费马 EQ-60 是自我报告测评，重点是你的自我感知模式，而不是外部观察到的表现。",
+        "do_not_overread": "FAQ 是教育性说明，不是个人结论。"
+      },
+      "en": {
+        "question": "What is an EQ test?",
+        "answer": "An EQ test helps you reflect on how you notice, regulate, and respond to emotions in yourself and in relationships. Fermat EQ-60 is a self-report assessment, so it focuses on your perceived patterns rather than observed performance.",
+        "do_not_overread": "FAQ answers are educational, not personal conclusions."
+      },
+      "meta": {
+        "id": "eq.faq.what_is_eq_test",
+        "asset_type": "faq_item",
+        "v23_source_id": "eq.faq.what_is_eq_test",
+        "claim_risk": "medium",
+        "risk_notes": "FAQ answer; keep concise and boundary-safe.",
+        "search_intent": "test_intent",
+        "surface": "faq",
+        "claim_boundary": [
+          "not_ability_claim",
+          "not_employment_selection"
+        ]
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "费马 EQ-60 测什么？",
+        "answer": "它测四个情绪与关系维度：自我觉察、情绪调节、共情理解和关系管理。结果会把这些信号转成模式、场景和行动建议。",
+        "do_not_overread": "FAQ 是教育性说明，不是个人结论。"
+      },
+      "en": {
+        "question": "What does Fermat EQ-60 measure?",
+        "answer": "It measures four emotional-relational dimensions: self-awareness, emotion regulation, empathy, and relationship management. The result translates those signals into patterns, scenes, and development practices.",
+        "do_not_overread": "FAQ answers are educational, not personal conclusions."
+      },
+      "meta": {
+        "id": "eq.faq.what_does_fermat_eq_measure",
+        "asset_type": "faq_item",
+        "v23_source_id": "eq.faq.what_does_fermat_eq_measure",
+        "claim_risk": "medium",
+        "risk_notes": "FAQ answer; keep concise and boundary-safe.",
+        "search_intent": "test_intent",
+        "surface": "faq",
+        "claim_boundary": [
+          "not_ability_claim",
+          "not_employment_selection"
+        ]
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "为什么这是自我报告？",
+        "answer": "自我报告适合理解你如何看待自己的情绪与关系模式。它不能替代真实行为观察或情境判断，所以未来模块会补充另一个视角。",
+        "do_not_overread": "FAQ 是教育性说明，不是个人结论。"
+      },
+      "en": {
+        "question": "Why is this self-report?",
+        "answer": "Self-report is useful for understanding how you see your emotional and relational patterns. It cannot replace observed behavior or scenario judgment, which is why future modules may add another lens.",
+        "do_not_overread": "FAQ answers are educational, not personal conclusions."
+      },
+      "meta": {
+        "id": "eq.faq.self_report_meaning",
+        "asset_type": "faq_item",
+        "v23_source_id": "eq.faq.self_report_meaning",
+        "claim_risk": "medium",
+        "risk_notes": "FAQ answer; keep concise and boundary-safe.",
+        "search_intent": "science_intent",
+        "surface": "faq",
+        "claim_boundary": [
+          "not_ability_claim",
+          "not_employment_selection"
+        ]
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "这是情绪能力测验吗？",
+        "answer": "不是。它是自我报告型情绪与关系模式测评。它可以帮助反思和练习，但不应被理解为能力凭据或客观表现分。",
+        "do_not_overread": "FAQ 是教育性说明，不是个人结论。"
+      },
+      "en": {
+        "question": "Is this an emotional ability test?",
+        "answer": "No. It is a self-report emotional-relational pattern assessment. It can support reflection and practice, but it should not be read as a credential or objective performance score.",
+        "do_not_overread": "FAQ answers are educational, not personal conclusions."
+      },
+      "meta": {
+        "id": "eq.faq.not_ability_test",
+        "asset_type": "faq_item",
+        "v23_source_id": "eq.faq.not_ability_test",
+        "claim_risk": "medium",
+        "risk_notes": "FAQ answer; keep concise and boundary-safe.",
+        "search_intent": "safety_intent",
+        "surface": "faq",
+        "claim_boundary": [
+          "not_ability_claim",
+          "not_employment_selection"
+        ]
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "费马 EQ 和 MSCEIT 一样吗？",
+        "answer": "不一样。MSCEIT 属于另一类测评。费马 EQ-60 是自我报告产品，未来情境模块也只会定位为应用情境判断，而不是 MSCEIT。",
+        "do_not_overread": "FAQ 是教育性说明，不是个人结论。"
+      },
+      "en": {
+        "question": "Is Fermat EQ the same as MSCEIT?",
+        "answer": "No. MSCEIT belongs to a different assessment family. Fermat EQ-60 is a self-report product, and the future scenario module is planned as applied judgment, not as MSCEIT.",
+        "do_not_overread": "FAQ answers are educational, not personal conclusions."
+      },
+      "meta": {
+        "id": "eq.faq.not_msceit",
+        "asset_type": "faq_item",
+        "v23_source_id": "eq.faq.not_msceit",
+        "claim_risk": "medium",
+        "risk_notes": "FAQ answer; keep concise and boundary-safe.",
+        "search_intent": "comparison_intent",
+        "surface": "faq",
+        "claim_boundary": [
+          "not_ability_claim",
+          "not_employment_selection"
+        ]
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "EQ 和 IQ 有什么区别？",
+        "answer": "IQ 通常关注认知问题解决。这里的 EQ 关注情绪自我感知、调节、共情和关系行为模式。它们回答的问题不同。",
+        "do_not_overread": "FAQ 是教育性说明，不是个人结论。"
+      },
+      "en": {
+        "question": "EQ vs IQ: what is the difference?",
+        "answer": "IQ is usually about cognitive problem solving. EQ, in this product, is about emotional self-perception, regulation, empathy, and relationship behavior patterns. They answer different questions.",
+        "do_not_overread": "FAQ answers are educational, not personal conclusions."
+      },
+      "meta": {
+        "id": "eq.faq.eq_vs_iq",
+        "asset_type": "faq_item",
+        "v23_source_id": "eq.faq.eq_vs_iq",
+        "claim_risk": "medium",
+        "risk_notes": "FAQ answer; keep concise and boundary-safe.",
+        "search_intent": "comparison_intent",
+        "surface": "faq",
+        "claim_boundary": [
+          "not_ability_claim",
+          "not_employment_selection"
+        ]
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "EQ 和 MBTI 有什么关系？",
+        "answer": "MBTI 可以描述偏好和风格语言；EQ 描述情绪与关系信号。两者可以一起用于反思，但不要合成一个固定身份。",
+        "do_not_overread": "FAQ 是教育性说明，不是个人结论。"
+      },
+      "en": {
+        "question": "EQ vs MBTI: how do they relate?",
+        "answer": "MBTI can describe preference and style language; EQ describes emotional and relational signals. Use them together as reflection tools, not as a single merged identity.",
+        "do_not_overread": "FAQ answers are educational, not personal conclusions."
+      },
+      "meta": {
+        "id": "eq.faq.eq_vs_mbti",
+        "asset_type": "faq_item",
+        "v23_source_id": "eq.faq.eq_vs_mbti",
+        "claim_risk": "medium",
+        "risk_notes": "FAQ answer; keep concise and boundary-safe.",
+        "search_intent": "comparison_intent",
+        "surface": "faq",
+        "claim_boundary": [
+          "not_ability_claim",
+          "not_employment_selection"
+        ]
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "EQ 和大五人格有什么关系？",
+        "answer": "一些 EQ 自我报告模式可能与情绪稳定性、宜人性或尽责性等人格特质有重叠。更有用的问题是这些信号在现实场景中如何出现。",
+        "do_not_overread": "FAQ 是教育性说明，不是个人结论。"
+      },
+      "en": {
+        "question": "EQ vs Big Five: what is the relationship?",
+        "answer": "Some EQ self-report patterns may overlap with traits such as emotional stability, agreeableness, or conscientiousness. The useful question is how those signals appear in real situations.",
+        "do_not_overread": "FAQ answers are educational, not personal conclusions."
+      },
+      "meta": {
+        "id": "eq.faq.eq_vs_big_five",
+        "asset_type": "faq_item",
+        "v23_source_id": "eq.faq.eq_vs_big_five",
+        "claim_risk": "medium",
+        "risk_notes": "FAQ answer; keep concise and boundary-safe.",
+        "search_intent": "comparison_intent",
+        "surface": "faq",
+        "claim_boundary": [
+          "not_ability_claim",
+          "not_employment_selection"
+        ]
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "EQ 和九型人格怎么对照？",
+        "answer": "九型人格类内容常关注动机模式；EQ 关注情绪觉察、调节、共情和关系行动。对照的价值是提出更好的问题，而不是强行贴标签。",
+        "do_not_overread": "FAQ 是教育性说明，不是个人结论。"
+      },
+      "en": {
+        "question": "EQ vs Enneagram: how should I compare them?",
+        "answer": "Enneagram-style work often focuses on motivation patterns. EQ focuses on emotional noticing, regulation, empathy, and relational action. Use comparison to ask better questions, not to force a label.",
+        "do_not_overread": "FAQ answers are educational, not personal conclusions."
+      },
+      "meta": {
+        "id": "eq.faq.eq_vs_enneagram",
+        "asset_type": "faq_item",
+        "v23_source_id": "eq.faq.eq_vs_enneagram",
+        "claim_risk": "medium",
+        "risk_notes": "FAQ answer; keep concise and boundary-safe.",
+        "search_intent": "comparison_intent",
+        "surface": "faq",
+        "claim_boundary": [
+          "not_ability_claim",
+          "not_employment_selection"
+        ]
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "情商可以提升吗？",
+        "answer": "这份报告里的模式可以练习。先从一个行为开始：命名情绪、暂停、设边界、修复对话，或让共情被看见。",
+        "do_not_overread": "FAQ 是教育性说明，不是个人结论。"
+      },
+      "en": {
+        "question": "Can EQ improve?",
+        "answer": "The patterns in this report are practiceable. Start with one behavior: naming emotion, pausing, setting a boundary, repairing a conversation, or making empathy visible.",
+        "do_not_overread": "FAQ answers are educational, not personal conclusions."
+      },
+      "meta": {
+        "id": "eq.faq.can_eq_improve",
+        "asset_type": "faq_item",
+        "v23_source_id": "eq.faq.can_eq_improve",
+        "claim_risk": "medium",
+        "risk_notes": "FAQ answer; keep concise and boundary-safe.",
+        "search_intent": "growth_intent",
+        "surface": "faq",
+        "claim_boundary": [
+          "not_ability_claim",
+          "not_employment_selection"
+        ]
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "情绪调节低是什么意思？",
+        "answer": "它不代表你没有控制力。它可能说明你的情绪系统启动较快，或恢复时间较长。报告应指向具体恢复练习。",
+        "do_not_overread": "FAQ 是教育性说明，不是个人结论。"
+      },
+      "en": {
+        "question": "What does low emotion regulation mean?",
+        "answer": "It does not mean you have no control. It may mean your emotional system activates quickly or takes longer to settle. The report should point to specific recovery practices.",
+        "do_not_overread": "FAQ answers are educational, not personal conclusions."
+      },
+      "meta": {
+        "id": "eq.faq.low_er_meaning",
+        "asset_type": "faq_item",
+        "v23_source_id": "eq.faq.low_er_meaning",
+        "claim_risk": "medium",
+        "risk_notes": "FAQ answer; keep concise and boundary-safe.",
+        "search_intent": "score_intent",
+        "surface": "faq",
+        "claim_boundary": [
+          "not_ability_claim",
+          "not_employment_selection"
+        ]
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "共情高一定好吗？",
+        "answer": "高共情很有价值，但需要恢复和边界。没有这些，共情容易变成过度承接。",
+        "do_not_overread": "FAQ 是教育性说明，不是个人结论。"
+      },
+      "en": {
+        "question": "Is high empathy always good?",
+        "answer": "High empathy can be valuable, but it needs recovery and boundaries. Without them, understanding others can become emotional over-carrying.",
+        "do_not_overread": "FAQ answers are educational, not personal conclusions."
+      },
+      "meta": {
+        "id": "eq.faq.high_empathy_good",
+        "asset_type": "faq_item",
+        "v23_source_id": "eq.faq.high_empathy_good",
+        "claim_risk": "medium",
+        "risk_notes": "FAQ answer; keep concise and boundary-safe.",
+        "search_intent": "score_intent",
+        "surface": "faq",
+        "claim_boundary": [
+          "not_ability_claim",
+          "not_employment_selection"
+        ]
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "这个结果准吗？",
+        "answer": "它最适合被当作自我感知的结构化反思。质量提示、一致性和未来复测能帮助你判断该给它多大权重。",
+        "do_not_overread": "FAQ 是教育性说明，不是个人结论。"
+      },
+      "en": {
+        "question": "How accurate is this EQ result?",
+        "answer": "It is most useful as a structured reflection of your self-perception. Quality flags, consistency, and future retests help you judge how much weight to give it.",
+        "do_not_overread": "FAQ answers are educational, not personal conclusions."
+      },
+      "meta": {
+        "id": "eq.faq.result_accuracy",
+        "asset_type": "faq_item",
+        "v23_source_id": "eq.faq.result_accuracy",
+        "claim_risk": "medium",
+        "risk_notes": "FAQ answer; keep concise and boundary-safe.",
+        "search_intent": "science_intent",
+        "surface": "faq",
+        "claim_boundary": [
+          "not_ability_claim",
+          "not_employment_selection"
+        ]
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "低置信结果是什么意思？",
+        "answer": "它说明作答模式让解释稳定性下降。你仍可参考质量提示和复测建议，但不要得出强结论。",
+        "do_not_overread": "FAQ 是教育性说明，不是个人结论。"
+      },
+      "en": {
+        "question": "What does a low-confidence result mean?",
+        "answer": "It means the response pattern makes interpretation less stable. You can still use the quality note and retest guidance, but avoid strong conclusions.",
+        "do_not_overread": "FAQ answers are educational, not personal conclusions."
+      },
+      "meta": {
+        "id": "eq.faq.low_confidence",
+        "asset_type": "faq_item",
+        "v23_source_id": "eq.faq.low_confidence",
+        "claim_risk": "medium",
+        "risk_notes": "FAQ answer; keep concise and boundary-safe.",
+        "search_intent": "safety_intent",
+        "surface": "faq",
+        "claim_boundary": [
+          "not_ability_claim",
+          "not_employment_selection"
+        ]
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "可以复测吗？",
+        "answer": "可以。经过一段时间或练习一个具体行动后复测更有意义。复测时尽量在稳定、不被打断的状态下作答。",
+        "do_not_overread": "FAQ 是教育性说明，不是个人结论。"
+      },
+      "en": {
+        "question": "Can I retake the EQ test?",
+        "answer": "Yes. A retest is most useful after enough time has passed or after you have practiced one specific action. Try to answer in a steady, uninterrupted state.",
+        "do_not_overread": "FAQ answers are educational, not personal conclusions."
+      },
+      "meta": {
+        "id": "eq.faq.retest",
+        "asset_type": "faq_item",
+        "v23_source_id": "eq.faq.retest",
+        "claim_risk": "medium",
+        "risk_notes": "FAQ answer; keep concise and boundary-safe.",
+        "search_intent": "growth_intent",
+        "surface": "faq",
+        "claim_boundary": [
+          "not_ability_claim",
+          "not_employment_selection"
+        ]
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "EQ 能帮助职业探索吗？",
+        "answer": "它可以帮助你观察情绪负荷、反馈节奏、冲突频率和恢复空间等环境变量。不应被用来决定具体职业。",
+        "do_not_overread": "FAQ 是教育性说明，不是个人结论。"
+      },
+      "en": {
+        "question": "Can EQ help with career exploration?",
+        "answer": "It can help you examine environment variables such as emotional load, feedback rhythm, conflict frequency, and recovery space. It should not be used to decide a specific occupation.",
+        "do_not_overread": "FAQ answers are educational, not personal conclusions."
+      },
+      "meta": {
+        "id": "eq.faq.career_use",
+        "asset_type": "faq_item",
+        "v23_source_id": "eq.faq.career_use",
+        "claim_risk": "medium",
+        "risk_notes": "FAQ answer; keep concise and boundary-safe.",
+        "search_intent": "work_intent",
+        "surface": "faq",
+        "claim_boundary": [
+          "not_ability_claim",
+          "not_employment_selection"
+        ]
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "EQ 在工作中有什么用？",
+        "answer": "在工作中，EQ 常出现在反馈、冲突、协作和压力后的恢复里。有用的报告会把这些模式转成可观察的工作问题。",
+        "do_not_overread": "FAQ 是教育性说明，不是个人结论。"
+      },
+      "en": {
+        "question": "How does EQ matter at work?",
+        "answer": "At work, EQ often shows up in feedback, conflict, collaboration, and recovery after pressure. A useful report turns these patterns into observable workplace questions.",
+        "do_not_overread": "FAQ answers are educational, not personal conclusions."
+      },
+      "meta": {
+        "id": "eq.faq.workplace_eq",
+        "asset_type": "faq_item",
+        "v23_source_id": "eq.faq.workplace_eq",
+        "claim_risk": "medium",
+        "risk_notes": "FAQ answer; keep concise and boundary-safe.",
+        "search_intent": "work_intent",
+        "surface": "faq",
+        "claim_boundary": [
+          "not_ability_claim",
+          "not_employment_selection"
+        ]
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "EQ 在关系中怎么体现？",
+        "answer": "它会体现在你如何表达感受、听见别人、设边界和在紧张后修复关系。目标不是完美，而是更早看见模式。",
+        "do_not_overread": "FAQ 是教育性说明，不是个人结论。"
+      },
+      "en": {
+        "question": "How does EQ show up in relationships?",
+        "answer": "It can show up in how you express feelings, hear another person, set boundaries, and repair after tension. The goal is not to be perfect, but to notice the pattern earlier.",
+        "do_not_overread": "FAQ answers are educational, not personal conclusions."
+      },
+      "meta": {
+        "id": "eq.faq.relationship_eq",
+        "asset_type": "faq_item",
+        "v23_source_id": "eq.faq.relationship_eq",
+        "claim_risk": "medium",
+        "risk_notes": "FAQ answer; keep concise and boundary-safe.",
+        "search_intent": "relationship_intent",
+        "surface": "faq",
+        "claim_boundary": [
+          "not_ability_claim",
+          "not_employment_selection"
+        ]
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "为什么情境模块暂未开放？",
+        "answer": "情境内容需要谨慎审校，因为文化、层级和措辞都会影响回应含义。它是未来计划模块，但现在不可用。",
+        "do_not_overread": "FAQ 是教育性说明，不是个人结论。"
+      },
+      "en": {
+        "question": "Why is the scenario module unavailable?",
+        "answer": "Scenario content needs careful review because culture, hierarchy, and wording can change what a response means. It is planned for the future, but not available now.",
+        "do_not_overread": "FAQ answers are educational, not personal conclusions."
+      },
+      "meta": {
+        "id": "eq.faq.sjt_future",
+        "asset_type": "faq_item",
+        "v23_source_id": "eq.faq.sjt_future",
+        "claim_risk": "medium",
+        "risk_notes": "FAQ answer; keep concise and boundary-safe.",
+        "search_intent": "sjt_intent",
+        "surface": "faq",
+        "claim_boundary": [
+          "not_ability_claim",
+          "not_employment_selection"
+        ]
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "EQ 分数是什么意思？",
+        "answer": "分数是你自我报告的情绪与关系模式摘要。它应和维度分布、置信度提示一起读，而不是单独解读。",
+        "do_not_overread": "FAQ 是教育性说明，不是个人结论。"
+      },
+      "en": {
+        "question": "What does my EQ score mean?",
+        "answer": "The score gives a structured summary of your self-reported emotional-relational pattern. It should be read with the dimension profile and confidence note, not by itself.",
+        "do_not_overread": "FAQ answers are educational, not personal conclusions."
+      },
+      "meta": {
+        "id": "eq.faq.score_meaning",
+        "asset_type": "faq_item",
+        "v23_source_id": "eq.faq.score_meaning",
+        "claim_risk": "medium",
+        "risk_notes": "FAQ answer; keep concise and boundary-safe.",
+        "search_intent": "score_intent",
+        "surface": "faq",
+        "claim_boundary": [
+          "not_ability_claim",
+          "not_employment_selection"
+        ]
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "报告里的情绪劳动是什么意思？",
+        "answer": "情绪劳动指一个环境要求你承接、安抚、解释或润滑关系的程度。",
+        "do_not_overread": "FAQ 是教育性说明，不是个人结论。"
+      },
+      "en": {
+        "question": "What is emotional labor in this report?",
+        "answer": "Emotional labor means the amount of emotional receiving, calming, interpreting, or relational smoothing an environment asks from you.",
+        "do_not_overread": "FAQ answers are educational, not personal conclusions."
+      },
+      "meta": {
+        "id": "eq.faq.emotional_labor",
+        "asset_type": "faq_item",
+        "v23_source_id": "eq.faq.emotional_labor",
+        "claim_risk": "medium",
+        "risk_notes": "FAQ answer; keep concise and boundary-safe.",
+        "search_intent": "work_intent",
+        "surface": "faq",
+        "claim_boundary": [
+          "not_ability_claim",
+          "not_employment_selection"
+        ]
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "为什么共情和边界要一起看？",
+        "answer": "共情帮助你理解别人，边界帮助你区分什么是你能支持的，什么属于情境或对方本人。",
+        "do_not_overread": "FAQ 是教育性说明，不是个人结论。"
+      },
+      "en": {
+        "question": "Why do empathy and boundaries appear together?",
+        "answer": "Empathy helps you understand another person. Boundaries help you decide what is yours to carry and what belongs to the situation or the other person.",
+        "do_not_overread": "FAQ answers are educational, not personal conclusions."
+      },
+      "meta": {
+        "id": "eq.faq.boundaries",
+        "asset_type": "faq_item",
+        "v23_source_id": "eq.faq.boundaries",
+        "claim_risk": "medium",
+        "risk_notes": "FAQ answer; keep concise and boundary-safe.",
+        "search_intent": "relationship_intent",
+        "surface": "faq",
+        "claim_boundary": [
+          "not_ability_claim",
+          "not_employment_selection"
+        ]
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "为什么我容易把反馈听成否定？",
+        "answer": "有些人会先接收到反馈里的情绪语气，再处理实际要求。练习重点是分开语气、事实和下一步。",
+        "do_not_overread": "FAQ 是教育性说明，不是个人结论。"
+      },
+      "en": {
+        "question": "Why do I take feedback personally?",
+        "answer": "Some people register the emotional tone of feedback before the practical request. The practice is to separate tone, fact, and next action.",
+        "do_not_overread": "FAQ answers are educational, not personal conclusions."
+      },
+      "meta": {
+        "id": "eq.faq.feedback_absorption",
+        "asset_type": "faq_item",
+        "v23_source_id": "eq.faq.feedback_absorption",
+        "claim_risk": "medium",
+        "risk_notes": "FAQ answer; keep concise and boundary-safe.",
+        "search_intent": "feedback_intent",
+        "surface": "faq",
+        "claim_boundary": [
+          "not_ability_claim",
+          "not_employment_selection"
+        ]
+      }
+    },
+    {
+      "zh-CN": {
+        "question": "为什么我会回避冲突？",
+        "answer": "回避冲突可能是在保护关系或保护自己；当问题长期没被处理时，它才会变成成本。",
+        "do_not_overread": "FAQ 是教育性说明，不是个人结论。"
+      },
+      "en": {
+        "question": "Why do I avoid conflict?",
+        "answer": "Avoiding conflict can be an attempt to protect the relationship or yourself. It becomes costly when the issue remains unresolved.",
+        "do_not_overread": "FAQ answers are educational, not personal conclusions."
+      },
+      "meta": {
+        "id": "eq.faq.conflict_avoidance",
+        "asset_type": "faq_item",
+        "v23_source_id": "eq.faq.conflict_avoidance",
+        "claim_risk": "medium",
+        "risk_notes": "FAQ answer; keep concise and boundary-safe.",
+        "search_intent": "conflict_intent",
+        "surface": "faq",
+        "claim_boundary": [
+          "not_ability_claim",
+          "not_employment_selection"
+        ]
       }
     }
   ],
@@ -2229,16 +2829,1432 @@
       "zh-CN": {
         "title": "免费 EQ 报告包含什么？",
         "meta_description": "了解免费 EQ 报告中的核心洞察、证据、场景、职业环境和行动处方。",
-        "short_answer": "当前 EQ-60 基础报告免费开放；报告深度由完成的数据决定，不由付费门槛决定。",
+        "short_answer": "当前 EQ-60 基础报告免费开放；报告深度由完成的数据决定，不由额外门槛决定。",
         "long_answer_outline": [
-          "需要付费才能看完整 EQ 结果吗？"
+          "完整 EQ 结果是否免费？"
         ],
         "related_questions": [
-          "需要付费才能看完整 EQ 结果吗？"
+          "完整 EQ 结果是否免费？"
         ],
         "safe_claim_boundary": "不得暗示访问门槛或分层结果承诺。",
-        "search_intent_answer": "当前 EQ-60 基础报告免费开放；报告深度由完成的数据决定，不由付费门槛决定。",
+        "search_intent_answer": "当前 EQ-60 基础报告免费开放；报告深度由完成的数据决定，不由额外门槛决定。",
         "search_intent": "用户想知道免费报告是否完整。"
+      }
+    },
+    "eq.seo.emotional_intelligence_test": {
+      "zh-CN": {
+        "title": "情商测试",
+        "meta_description": "情商测试：了解费马 EQ-60 如何从自我报告角度解释情绪与关系模式。",
+        "short_answer": "本页以非高风险用途说明 EQ 结果如何帮助自我理解、关系反思和工作环境探索。",
+        "long_answer_outline": [
+          "定义",
+          "测量边界",
+          "如何阅读结果",
+          "下一步行动"
+        ],
+        "related_questions": [
+          "这个结果能说明什么？",
+          "它不能说明什么？"
+        ],
+        "safe_claim_boundary": "not_ability_claim"
+      },
+      "en": {
+        "title": "Emotional Intelligence Test",
+        "meta_description": "Emotional Intelligence Test: learn how Fermat EQ-60 explains emotional and relational patterns from a self-report perspective.",
+        "short_answer": "This page explains how an EQ result can support self-understanding, relationship reflection, and work-environment exploration without overclaiming.",
+        "long_answer_outline": [
+          "Definition",
+          "Measurement boundary",
+          "How to read the result",
+          "Next action"
+        ],
+        "related_questions": [
+          "What does this result explain?",
+          "What should it not be used for?"
+        ],
+        "safe_claim_boundary": "not_ability_claim"
+      },
+      "meta": {
+        "id": "eq.seo.emotional_intelligence_test",
+        "asset_type": "seo_snippet",
+        "v23_source_id": "eq.seo.emotional_intelligence_test",
+        "claim_risk": "medium",
+        "risk_notes": "SEO candidate, not result-page core copy.",
+        "search_intent": "emotional_intelligence_test",
+        "surface": "seo",
+        "claim_boundary": [
+          "not_ability_claim"
+        ]
+      }
+    },
+    "eq.seo.free_eq_test": {
+      "zh-CN": {
+        "title": "免费 EQ 测试",
+        "meta_description": "免费 EQ 测试：了解费马 EQ-60 如何从自我报告角度解释情绪与关系模式。",
+        "short_answer": "本页以非高风险用途说明 EQ 结果如何帮助自我理解、关系反思和工作环境探索。",
+        "long_answer_outline": [
+          "定义",
+          "测量边界",
+          "如何阅读结果",
+          "下一步行动"
+        ],
+        "related_questions": [
+          "这个结果能说明什么？",
+          "它不能说明什么？"
+        ],
+        "safe_claim_boundary": "not_ability_claim"
+      },
+      "en": {
+        "title": "Free Eq Test",
+        "meta_description": "Free Eq Test: learn how Fermat EQ-60 explains emotional and relational patterns from a self-report perspective.",
+        "short_answer": "This page explains how an EQ result can support self-understanding, relationship reflection, and work-environment exploration without overclaiming.",
+        "long_answer_outline": [
+          "Definition",
+          "Measurement boundary",
+          "How to read the result",
+          "Next action"
+        ],
+        "related_questions": [
+          "What does this result explain?",
+          "What should it not be used for?"
+        ],
+        "safe_claim_boundary": "not_ability_claim"
+      },
+      "meta": {
+        "id": "eq.seo.free_eq_test",
+        "asset_type": "seo_snippet",
+        "v23_source_id": "eq.seo.free_eq_test",
+        "claim_risk": "medium",
+        "risk_notes": "SEO candidate, not result-page core copy.",
+        "search_intent": "free_eq_test",
+        "surface": "seo",
+        "claim_boundary": [
+          "not_ability_claim"
+        ]
+      }
+    },
+    "eq.seo.eq_score_meaning": {
+      "zh-CN": {
+        "title": "EQ 分数解释",
+        "meta_description": "EQ 分数解释：了解费马 EQ-60 如何从自我报告角度解释情绪与关系模式。",
+        "short_answer": "本页以非高风险用途说明 EQ 结果如何帮助自我理解、关系反思和工作环境探索。",
+        "long_answer_outline": [
+          "定义",
+          "测量边界",
+          "如何阅读结果",
+          "下一步行动"
+        ],
+        "related_questions": [
+          "这个结果能说明什么？",
+          "它不能说明什么？"
+        ],
+        "safe_claim_boundary": "not_ability_claim"
+      },
+      "en": {
+        "title": "Eq Score Meaning",
+        "meta_description": "Eq Score Meaning: learn how Fermat EQ-60 explains emotional and relational patterns from a self-report perspective.",
+        "short_answer": "This page explains how an EQ result can support self-understanding, relationship reflection, and work-environment exploration without overclaiming.",
+        "long_answer_outline": [
+          "Definition",
+          "Measurement boundary",
+          "How to read the result",
+          "Next action"
+        ],
+        "related_questions": [
+          "What does this result explain?",
+          "What should it not be used for?"
+        ],
+        "safe_claim_boundary": "not_ability_claim"
+      },
+      "meta": {
+        "id": "eq.seo.eq_score_meaning",
+        "asset_type": "seo_snippet",
+        "v23_source_id": "eq.seo.eq_score_meaning",
+        "claim_risk": "medium",
+        "risk_notes": "SEO candidate, not result-page core copy.",
+        "search_intent": "eq_score_meaning",
+        "surface": "seo",
+        "claim_boundary": [
+          "not_ability_claim"
+        ]
+      }
+    },
+    "eq.seo.self_report_eq_test": {
+      "zh-CN": {
+        "title": "自我报告 EQ 测试",
+        "meta_description": "自我报告 EQ 测试：了解费马 EQ-60 如何从自我报告角度解释情绪与关系模式。",
+        "short_answer": "本页以非高风险用途说明 EQ 结果如何帮助自我理解、关系反思和工作环境探索。",
+        "long_answer_outline": [
+          "定义",
+          "测量边界",
+          "如何阅读结果",
+          "下一步行动"
+        ],
+        "related_questions": [
+          "这个结果能说明什么？",
+          "它不能说明什么？"
+        ],
+        "safe_claim_boundary": "not_ability_claim"
+      },
+      "en": {
+        "title": "Self Report Eq Test",
+        "meta_description": "Self Report Eq Test: learn how Fermat EQ-60 explains emotional and relational patterns from a self-report perspective.",
+        "short_answer": "This page explains how an EQ result can support self-understanding, relationship reflection, and work-environment exploration without overclaiming.",
+        "long_answer_outline": [
+          "Definition",
+          "Measurement boundary",
+          "How to read the result",
+          "Next action"
+        ],
+        "related_questions": [
+          "What does this result explain?",
+          "What should it not be used for?"
+        ],
+        "safe_claim_boundary": "not_ability_claim"
+      },
+      "meta": {
+        "id": "eq.seo.self_report_eq_test",
+        "asset_type": "seo_snippet",
+        "v23_source_id": "eq.seo.self_report_eq_test",
+        "claim_risk": "medium",
+        "risk_notes": "SEO candidate, not result-page core copy.",
+        "search_intent": "self_report_eq_test",
+        "surface": "seo",
+        "claim_boundary": [
+          "not_ability_claim"
+        ]
+      }
+    },
+    "eq.seo.eq_vs_iq": {
+      "zh-CN": {
+        "title": "EQ 与 IQ",
+        "meta_description": "EQ 与 IQ：了解费马 EQ-60 如何从自我报告角度解释情绪与关系模式。",
+        "short_answer": "本页以非高风险用途说明 EQ 结果如何帮助自我理解、关系反思和工作环境探索。",
+        "long_answer_outline": [
+          "定义",
+          "测量边界",
+          "如何阅读结果",
+          "下一步行动"
+        ],
+        "related_questions": [
+          "这个结果能说明什么？",
+          "它不能说明什么？"
+        ],
+        "safe_claim_boundary": "not_ability_claim"
+      },
+      "en": {
+        "title": "Eq Vs Iq",
+        "meta_description": "Eq Vs Iq: learn how Fermat EQ-60 explains emotional and relational patterns from a self-report perspective.",
+        "short_answer": "This page explains how an EQ result can support self-understanding, relationship reflection, and work-environment exploration without overclaiming.",
+        "long_answer_outline": [
+          "Definition",
+          "Measurement boundary",
+          "How to read the result",
+          "Next action"
+        ],
+        "related_questions": [
+          "What does this result explain?",
+          "What should it not be used for?"
+        ],
+        "safe_claim_boundary": "not_ability_claim"
+      },
+      "meta": {
+        "id": "eq.seo.eq_vs_iq",
+        "asset_type": "seo_snippet",
+        "v23_source_id": "eq.seo.eq_vs_iq",
+        "claim_risk": "medium",
+        "risk_notes": "SEO candidate, not result-page core copy.",
+        "search_intent": "eq_vs_iq",
+        "surface": "seo",
+        "claim_boundary": [
+          "not_ability_claim"
+        ]
+      }
+    },
+    "eq.seo.eq_vs_mbti": {
+      "zh-CN": {
+        "title": "EQ 与 MBTI",
+        "meta_description": "EQ 与 MBTI：了解费马 EQ-60 如何从自我报告角度解释情绪与关系模式。",
+        "short_answer": "本页以非高风险用途说明 EQ 结果如何帮助自我理解、关系反思和工作环境探索。",
+        "long_answer_outline": [
+          "定义",
+          "测量边界",
+          "如何阅读结果",
+          "下一步行动"
+        ],
+        "related_questions": [
+          "这个结果能说明什么？",
+          "它不能说明什么？"
+        ],
+        "safe_claim_boundary": "not_ability_claim"
+      },
+      "en": {
+        "title": "Eq Vs Mbti",
+        "meta_description": "Eq Vs Mbti: learn how Fermat EQ-60 explains emotional and relational patterns from a self-report perspective.",
+        "short_answer": "This page explains how an EQ result can support self-understanding, relationship reflection, and work-environment exploration without overclaiming.",
+        "long_answer_outline": [
+          "Definition",
+          "Measurement boundary",
+          "How to read the result",
+          "Next action"
+        ],
+        "related_questions": [
+          "What does this result explain?",
+          "What should it not be used for?"
+        ],
+        "safe_claim_boundary": "not_ability_claim"
+      },
+      "meta": {
+        "id": "eq.seo.eq_vs_mbti",
+        "asset_type": "seo_snippet",
+        "v23_source_id": "eq.seo.eq_vs_mbti",
+        "claim_risk": "medium",
+        "risk_notes": "SEO candidate, not result-page core copy.",
+        "search_intent": "eq_vs_mbti",
+        "surface": "seo",
+        "claim_boundary": [
+          "not_ability_claim"
+        ]
+      }
+    },
+    "eq.seo.eq_vs_big_five": {
+      "zh-CN": {
+        "title": "EQ 与大五人格",
+        "meta_description": "EQ 与大五人格：了解费马 EQ-60 如何从自我报告角度解释情绪与关系模式。",
+        "short_answer": "本页以非高风险用途说明 EQ 结果如何帮助自我理解、关系反思和工作环境探索。",
+        "long_answer_outline": [
+          "定义",
+          "测量边界",
+          "如何阅读结果",
+          "下一步行动"
+        ],
+        "related_questions": [
+          "这个结果能说明什么？",
+          "它不能说明什么？"
+        ],
+        "safe_claim_boundary": "not_ability_claim"
+      },
+      "en": {
+        "title": "Eq Vs Big Five",
+        "meta_description": "Eq Vs Big Five: learn how Fermat EQ-60 explains emotional and relational patterns from a self-report perspective.",
+        "short_answer": "This page explains how an EQ result can support self-understanding, relationship reflection, and work-environment exploration without overclaiming.",
+        "long_answer_outline": [
+          "Definition",
+          "Measurement boundary",
+          "How to read the result",
+          "Next action"
+        ],
+        "related_questions": [
+          "What does this result explain?",
+          "What should it not be used for?"
+        ],
+        "safe_claim_boundary": "not_ability_claim"
+      },
+      "meta": {
+        "id": "eq.seo.eq_vs_big_five",
+        "asset_type": "seo_snippet",
+        "v23_source_id": "eq.seo.eq_vs_big_five",
+        "claim_risk": "medium",
+        "risk_notes": "SEO candidate, not result-page core copy.",
+        "search_intent": "eq_vs_big_five",
+        "surface": "seo",
+        "claim_boundary": [
+          "not_ability_claim"
+        ]
+      }
+    },
+    "eq.seo.eq_vs_enneagram": {
+      "zh-CN": {
+        "title": "EQ 与九型人格",
+        "meta_description": "EQ 与九型人格：了解费马 EQ-60 如何从自我报告角度解释情绪与关系模式。",
+        "short_answer": "本页以非高风险用途说明 EQ 结果如何帮助自我理解、关系反思和工作环境探索。",
+        "long_answer_outline": [
+          "定义",
+          "测量边界",
+          "如何阅读结果",
+          "下一步行动"
+        ],
+        "related_questions": [
+          "这个结果能说明什么？",
+          "它不能说明什么？"
+        ],
+        "safe_claim_boundary": "not_ability_claim"
+      },
+      "en": {
+        "title": "Eq Vs Enneagram",
+        "meta_description": "Eq Vs Enneagram: learn how Fermat EQ-60 explains emotional and relational patterns from a self-report perspective.",
+        "short_answer": "This page explains how an EQ result can support self-understanding, relationship reflection, and work-environment exploration without overclaiming.",
+        "long_answer_outline": [
+          "Definition",
+          "Measurement boundary",
+          "How to read the result",
+          "Next action"
+        ],
+        "related_questions": [
+          "What does this result explain?",
+          "What should it not be used for?"
+        ],
+        "safe_claim_boundary": "not_ability_claim"
+      },
+      "meta": {
+        "id": "eq.seo.eq_vs_enneagram",
+        "asset_type": "seo_snippet",
+        "v23_source_id": "eq.seo.eq_vs_enneagram",
+        "claim_risk": "medium",
+        "risk_notes": "SEO candidate, not result-page core copy.",
+        "search_intent": "eq_vs_enneagram",
+        "surface": "seo",
+        "claim_boundary": [
+          "not_ability_claim"
+        ]
+      }
+    },
+    "eq.seo.emotional_regulation": {
+      "zh-CN": {
+        "title": "情绪调节",
+        "meta_description": "情绪调节：了解费马 EQ-60 如何从自我报告角度解释情绪与关系模式。",
+        "short_answer": "本页以非高风险用途说明 EQ 结果如何帮助自我理解、关系反思和工作环境探索。",
+        "long_answer_outline": [
+          "定义",
+          "测量边界",
+          "如何阅读结果",
+          "下一步行动"
+        ],
+        "related_questions": [
+          "这个结果能说明什么？",
+          "它不能说明什么？"
+        ],
+        "safe_claim_boundary": "not_ability_claim"
+      },
+      "en": {
+        "title": "Emotional Regulation",
+        "meta_description": "Emotional Regulation: learn how Fermat EQ-60 explains emotional and relational patterns from a self-report perspective.",
+        "short_answer": "This page explains how an EQ result can support self-understanding, relationship reflection, and work-environment exploration without overclaiming.",
+        "long_answer_outline": [
+          "Definition",
+          "Measurement boundary",
+          "How to read the result",
+          "Next action"
+        ],
+        "related_questions": [
+          "What does this result explain?",
+          "What should it not be used for?"
+        ],
+        "safe_claim_boundary": "not_ability_claim"
+      },
+      "meta": {
+        "id": "eq.seo.emotional_regulation",
+        "asset_type": "seo_snippet",
+        "v23_source_id": "eq.seo.emotional_regulation",
+        "claim_risk": "medium",
+        "risk_notes": "SEO candidate, not result-page core copy.",
+        "search_intent": "emotional_regulation",
+        "surface": "seo",
+        "claim_boundary": [
+          "not_ability_claim"
+        ]
+      }
+    },
+    "eq.seo.empathy_boundaries": {
+      "zh-CN": {
+        "title": "共情与边界",
+        "meta_description": "共情与边界：了解费马 EQ-60 如何从自我报告角度解释情绪与关系模式。",
+        "short_answer": "本页以非高风险用途说明 EQ 结果如何帮助自我理解、关系反思和工作环境探索。",
+        "long_answer_outline": [
+          "定义",
+          "测量边界",
+          "如何阅读结果",
+          "下一步行动"
+        ],
+        "related_questions": [
+          "这个结果能说明什么？",
+          "它不能说明什么？"
+        ],
+        "safe_claim_boundary": "not_ability_claim"
+      },
+      "en": {
+        "title": "Empathy Boundaries",
+        "meta_description": "Empathy Boundaries: learn how Fermat EQ-60 explains emotional and relational patterns from a self-report perspective.",
+        "short_answer": "This page explains how an EQ result can support self-understanding, relationship reflection, and work-environment exploration without overclaiming.",
+        "long_answer_outline": [
+          "Definition",
+          "Measurement boundary",
+          "How to read the result",
+          "Next action"
+        ],
+        "related_questions": [
+          "What does this result explain?",
+          "What should it not be used for?"
+        ],
+        "safe_claim_boundary": "not_ability_claim"
+      },
+      "meta": {
+        "id": "eq.seo.empathy_boundaries",
+        "asset_type": "seo_snippet",
+        "v23_source_id": "eq.seo.empathy_boundaries",
+        "claim_risk": "medium",
+        "risk_notes": "SEO candidate, not result-page core copy.",
+        "search_intent": "empathy_boundaries",
+        "surface": "seo",
+        "claim_boundary": [
+          "not_ability_claim"
+        ]
+      }
+    },
+    "eq.seo.workplace_eq": {
+      "zh-CN": {
+        "title": "职场 EQ",
+        "meta_description": "职场 EQ：了解费马 EQ-60 如何从自我报告角度解释情绪与关系模式。",
+        "short_answer": "本页以非高风险用途说明 EQ 结果如何帮助自我理解、关系反思和工作环境探索。",
+        "long_answer_outline": [
+          "定义",
+          "测量边界",
+          "如何阅读结果",
+          "下一步行动"
+        ],
+        "related_questions": [
+          "这个结果能说明什么？",
+          "它不能说明什么？"
+        ],
+        "safe_claim_boundary": "not_ability_claim"
+      },
+      "en": {
+        "title": "Workplace Eq",
+        "meta_description": "Workplace Eq: learn how Fermat EQ-60 explains emotional and relational patterns from a self-report perspective.",
+        "short_answer": "This page explains how an EQ result can support self-understanding, relationship reflection, and work-environment exploration without overclaiming.",
+        "long_answer_outline": [
+          "Definition",
+          "Measurement boundary",
+          "How to read the result",
+          "Next action"
+        ],
+        "related_questions": [
+          "What does this result explain?",
+          "What should it not be used for?"
+        ],
+        "safe_claim_boundary": "not_ability_claim"
+      },
+      "meta": {
+        "id": "eq.seo.workplace_eq",
+        "asset_type": "seo_snippet",
+        "v23_source_id": "eq.seo.workplace_eq",
+        "claim_risk": "medium",
+        "risk_notes": "SEO candidate, not result-page core copy.",
+        "search_intent": "workplace_eq",
+        "surface": "seo",
+        "claim_boundary": [
+          "not_ability_claim"
+        ]
+      }
+    },
+    "eq.seo.relationship_eq": {
+      "zh-CN": {
+        "title": "关系中的 EQ",
+        "meta_description": "关系中的 EQ：了解费马 EQ-60 如何从自我报告角度解释情绪与关系模式。",
+        "short_answer": "本页以非高风险用途说明 EQ 结果如何帮助自我理解、关系反思和工作环境探索。",
+        "long_answer_outline": [
+          "定义",
+          "测量边界",
+          "如何阅读结果",
+          "下一步行动"
+        ],
+        "related_questions": [
+          "这个结果能说明什么？",
+          "它不能说明什么？"
+        ],
+        "safe_claim_boundary": "not_ability_claim"
+      },
+      "en": {
+        "title": "Relationship Eq",
+        "meta_description": "Relationship Eq: learn how Fermat EQ-60 explains emotional and relational patterns from a self-report perspective.",
+        "short_answer": "This page explains how an EQ result can support self-understanding, relationship reflection, and work-environment exploration without overclaiming.",
+        "long_answer_outline": [
+          "Definition",
+          "Measurement boundary",
+          "How to read the result",
+          "Next action"
+        ],
+        "related_questions": [
+          "What does this result explain?",
+          "What should it not be used for?"
+        ],
+        "safe_claim_boundary": "not_ability_claim"
+      },
+      "meta": {
+        "id": "eq.seo.relationship_eq",
+        "asset_type": "seo_snippet",
+        "v23_source_id": "eq.seo.relationship_eq",
+        "claim_risk": "medium",
+        "risk_notes": "SEO candidate, not result-page core copy.",
+        "search_intent": "relationship_eq",
+        "surface": "seo",
+        "claim_boundary": [
+          "not_ability_claim"
+        ]
+      }
+    },
+    "eq.seo.improve_eq": {
+      "zh-CN": {
+        "title": "如何提升 EQ",
+        "meta_description": "如何提升 EQ：了解费马 EQ-60 如何从自我报告角度解释情绪与关系模式。",
+        "short_answer": "本页以非高风险用途说明 EQ 结果如何帮助自我理解、关系反思和工作环境探索。",
+        "long_answer_outline": [
+          "定义",
+          "测量边界",
+          "如何阅读结果",
+          "下一步行动"
+        ],
+        "related_questions": [
+          "这个结果能说明什么？",
+          "它不能说明什么？"
+        ],
+        "safe_claim_boundary": "not_ability_claim"
+      },
+      "en": {
+        "title": "Improve Eq",
+        "meta_description": "Improve Eq: learn how Fermat EQ-60 explains emotional and relational patterns from a self-report perspective.",
+        "short_answer": "This page explains how an EQ result can support self-understanding, relationship reflection, and work-environment exploration without overclaiming.",
+        "long_answer_outline": [
+          "Definition",
+          "Measurement boundary",
+          "How to read the result",
+          "Next action"
+        ],
+        "related_questions": [
+          "What does this result explain?",
+          "What should it not be used for?"
+        ],
+        "safe_claim_boundary": "not_ability_claim"
+      },
+      "meta": {
+        "id": "eq.seo.improve_eq",
+        "asset_type": "seo_snippet",
+        "v23_source_id": "eq.seo.improve_eq",
+        "claim_risk": "medium",
+        "risk_notes": "SEO candidate, not result-page core copy.",
+        "search_intent": "improve_eq",
+        "surface": "seo",
+        "claim_boundary": [
+          "not_ability_claim"
+        ]
+      }
+    },
+    "eq.seo.eq_limitations": {
+      "zh-CN": {
+        "title": "EQ 测试局限",
+        "meta_description": "EQ 测试局限：了解费马 EQ-60 如何从自我报告角度解释情绪与关系模式。",
+        "short_answer": "本页以非高风险用途说明 EQ 结果如何帮助自我理解、关系反思和工作环境探索。",
+        "long_answer_outline": [
+          "定义",
+          "测量边界",
+          "如何阅读结果",
+          "下一步行动"
+        ],
+        "related_questions": [
+          "这个结果能说明什么？",
+          "它不能说明什么？"
+        ],
+        "safe_claim_boundary": "not_ability_claim"
+      },
+      "en": {
+        "title": "Eq Limitations",
+        "meta_description": "Eq Limitations: learn how Fermat EQ-60 explains emotional and relational patterns from a self-report perspective.",
+        "short_answer": "This page explains how an EQ result can support self-understanding, relationship reflection, and work-environment exploration without overclaiming.",
+        "long_answer_outline": [
+          "Definition",
+          "Measurement boundary",
+          "How to read the result",
+          "Next action"
+        ],
+        "related_questions": [
+          "What does this result explain?",
+          "What should it not be used for?"
+        ],
+        "safe_claim_boundary": "not_ability_claim"
+      },
+      "meta": {
+        "id": "eq.seo.eq_limitations",
+        "asset_type": "seo_snippet",
+        "v23_source_id": "eq.seo.eq_limitations",
+        "claim_risk": "medium",
+        "risk_notes": "SEO candidate, not result-page core copy.",
+        "search_intent": "eq_limitations",
+        "surface": "seo",
+        "claim_boundary": [
+          "not_ability_claim"
+        ]
+      }
+    },
+    "eq.seo.eq_methodology": {
+      "zh-CN": {
+        "title": "EQ 方法说明",
+        "meta_description": "EQ 方法说明：了解费马 EQ-60 如何从自我报告角度解释情绪与关系模式。",
+        "short_answer": "本页以非高风险用途说明 EQ 结果如何帮助自我理解、关系反思和工作环境探索。",
+        "long_answer_outline": [
+          "定义",
+          "测量边界",
+          "如何阅读结果",
+          "下一步行动"
+        ],
+        "related_questions": [
+          "这个结果能说明什么？",
+          "它不能说明什么？"
+        ],
+        "safe_claim_boundary": "not_ability_claim"
+      },
+      "en": {
+        "title": "Eq Methodology",
+        "meta_description": "Eq Methodology: learn how Fermat EQ-60 explains emotional and relational patterns from a self-report perspective.",
+        "short_answer": "This page explains how an EQ result can support self-understanding, relationship reflection, and work-environment exploration without overclaiming.",
+        "long_answer_outline": [
+          "Definition",
+          "Measurement boundary",
+          "How to read the result",
+          "Next action"
+        ],
+        "related_questions": [
+          "What does this result explain?",
+          "What should it not be used for?"
+        ],
+        "safe_claim_boundary": "not_ability_claim"
+      },
+      "meta": {
+        "id": "eq.seo.eq_methodology",
+        "asset_type": "seo_snippet",
+        "v23_source_id": "eq.seo.eq_methodology",
+        "claim_risk": "medium",
+        "risk_notes": "SEO candidate, not result-page core copy.",
+        "search_intent": "eq_methodology",
+        "surface": "seo",
+        "claim_boundary": [
+          "not_ability_claim"
+        ]
+      }
+    },
+    "eq.seo.eq_quality_confidence": {
+      "zh-CN": {
+        "title": "结果置信度",
+        "meta_description": "结果置信度：了解费马 EQ-60 如何从自我报告角度解释情绪与关系模式。",
+        "short_answer": "本页以非高风险用途说明 EQ 结果如何帮助自我理解、关系反思和工作环境探索。",
+        "long_answer_outline": [
+          "定义",
+          "测量边界",
+          "如何阅读结果",
+          "下一步行动"
+        ],
+        "related_questions": [
+          "这个结果能说明什么？",
+          "它不能说明什么？"
+        ],
+        "safe_claim_boundary": "not_ability_claim"
+      },
+      "en": {
+        "title": "Eq Quality Confidence",
+        "meta_description": "Eq Quality Confidence: learn how Fermat EQ-60 explains emotional and relational patterns from a self-report perspective.",
+        "short_answer": "This page explains how an EQ result can support self-understanding, relationship reflection, and work-environment exploration without overclaiming.",
+        "long_answer_outline": [
+          "Definition",
+          "Measurement boundary",
+          "How to read the result",
+          "Next action"
+        ],
+        "related_questions": [
+          "What does this result explain?",
+          "What should it not be used for?"
+        ],
+        "safe_claim_boundary": "not_ability_claim"
+      },
+      "meta": {
+        "id": "eq.seo.eq_quality_confidence",
+        "asset_type": "seo_snippet",
+        "v23_source_id": "eq.seo.eq_quality_confidence",
+        "claim_risk": "medium",
+        "risk_notes": "SEO candidate, not result-page core copy.",
+        "search_intent": "eq_quality_confidence",
+        "surface": "seo",
+        "claim_boundary": [
+          "not_ability_claim"
+        ]
+      }
+    },
+    "eq.seo.eq_career_environment": {
+      "zh-CN": {
+        "title": "职业环境变量",
+        "meta_description": "职业环境变量：了解费马 EQ-60 如何从自我报告角度解释情绪与关系模式。",
+        "short_answer": "本页以非高风险用途说明 EQ 结果如何帮助自我理解、关系反思和工作环境探索。",
+        "long_answer_outline": [
+          "定义",
+          "测量边界",
+          "如何阅读结果",
+          "下一步行动"
+        ],
+        "related_questions": [
+          "这个结果能说明什么？",
+          "它不能说明什么？"
+        ],
+        "safe_claim_boundary": "not_ability_claim"
+      },
+      "en": {
+        "title": "Eq Career Environment",
+        "meta_description": "Eq Career Environment: learn how Fermat EQ-60 explains emotional and relational patterns from a self-report perspective.",
+        "short_answer": "This page explains how an EQ result can support self-understanding, relationship reflection, and work-environment exploration without overclaiming.",
+        "long_answer_outline": [
+          "Definition",
+          "Measurement boundary",
+          "How to read the result",
+          "Next action"
+        ],
+        "related_questions": [
+          "What does this result explain?",
+          "What should it not be used for?"
+        ],
+        "safe_claim_boundary": "not_ability_claim"
+      },
+      "meta": {
+        "id": "eq.seo.eq_career_environment",
+        "asset_type": "seo_snippet",
+        "v23_source_id": "eq.seo.eq_career_environment",
+        "claim_risk": "medium",
+        "risk_notes": "SEO candidate, not result-page core copy.",
+        "search_intent": "eq_career_environment",
+        "surface": "seo",
+        "claim_boundary": [
+          "not_ability_claim"
+        ]
+      }
+    },
+    "eq.seo.eq_result_interpretation": {
+      "zh-CN": {
+        "title": "EQ 结果解读",
+        "meta_description": "EQ 结果解读：了解费马 EQ-60 如何从自我报告角度解释情绪与关系模式。",
+        "short_answer": "本页以非高风险用途说明 EQ 结果如何帮助自我理解、关系反思和工作环境探索。",
+        "long_answer_outline": [
+          "定义",
+          "测量边界",
+          "如何阅读结果",
+          "下一步行动"
+        ],
+        "related_questions": [
+          "这个结果能说明什么？",
+          "它不能说明什么？"
+        ],
+        "safe_claim_boundary": "not_ability_claim"
+      },
+      "en": {
+        "title": "Eq Result Interpretation",
+        "meta_description": "Eq Result Interpretation: learn how Fermat EQ-60 explains emotional and relational patterns from a self-report perspective.",
+        "short_answer": "This page explains how an EQ result can support self-understanding, relationship reflection, and work-environment exploration without overclaiming.",
+        "long_answer_outline": [
+          "Definition",
+          "Measurement boundary",
+          "How to read the result",
+          "Next action"
+        ],
+        "related_questions": [
+          "What does this result explain?",
+          "What should it not be used for?"
+        ],
+        "safe_claim_boundary": "not_ability_claim"
+      },
+      "meta": {
+        "id": "eq.seo.eq_result_interpretation",
+        "asset_type": "seo_snippet",
+        "v23_source_id": "eq.seo.eq_result_interpretation",
+        "claim_risk": "medium",
+        "risk_notes": "SEO candidate, not result-page core copy.",
+        "search_intent": "eq_result_interpretation",
+        "surface": "seo",
+        "claim_boundary": [
+          "not_ability_claim"
+        ]
+      }
+    },
+    "eq.seo.eq_retest": {
+      "zh-CN": {
+        "title": "EQ 复测",
+        "meta_description": "EQ 复测：了解费马 EQ-60 如何从自我报告角度解释情绪与关系模式。",
+        "short_answer": "本页以非高风险用途说明 EQ 结果如何帮助自我理解、关系反思和工作环境探索。",
+        "long_answer_outline": [
+          "定义",
+          "测量边界",
+          "如何阅读结果",
+          "下一步行动"
+        ],
+        "related_questions": [
+          "这个结果能说明什么？",
+          "它不能说明什么？"
+        ],
+        "safe_claim_boundary": "not_ability_claim"
+      },
+      "en": {
+        "title": "Eq Retest",
+        "meta_description": "Eq Retest: learn how Fermat EQ-60 explains emotional and relational patterns from a self-report perspective.",
+        "short_answer": "This page explains how an EQ result can support self-understanding, relationship reflection, and work-environment exploration without overclaiming.",
+        "long_answer_outline": [
+          "Definition",
+          "Measurement boundary",
+          "How to read the result",
+          "Next action"
+        ],
+        "related_questions": [
+          "What does this result explain?",
+          "What should it not be used for?"
+        ],
+        "safe_claim_boundary": "not_ability_claim"
+      },
+      "meta": {
+        "id": "eq.seo.eq_retest",
+        "asset_type": "seo_snippet",
+        "v23_source_id": "eq.seo.eq_retest",
+        "claim_risk": "medium",
+        "risk_notes": "SEO candidate, not result-page core copy.",
+        "search_intent": "eq_retest",
+        "surface": "seo",
+        "claim_boundary": [
+          "not_ability_claim"
+        ]
+      }
+    },
+    "eq.seo.eq_sjt_future": {
+      "zh-CN": {
+        "title": "未来情境模块",
+        "meta_description": "未来情境模块：了解费马 EQ-60 如何从自我报告角度解释情绪与关系模式。",
+        "short_answer": "本页以非高风险用途说明 EQ 结果如何帮助自我理解、关系反思和工作环境探索。",
+        "long_answer_outline": [
+          "定义",
+          "测量边界",
+          "如何阅读结果",
+          "下一步行动"
+        ],
+        "related_questions": [
+          "这个结果能说明什么？",
+          "它不能说明什么？"
+        ],
+        "safe_claim_boundary": "not_ability_claim"
+      },
+      "en": {
+        "title": "Eq Sjt Future",
+        "meta_description": "Eq Sjt Future: learn how Fermat EQ-60 explains emotional and relational patterns from a self-report perspective.",
+        "short_answer": "This page explains how an EQ result can support self-understanding, relationship reflection, and work-environment exploration without overclaiming.",
+        "long_answer_outline": [
+          "Definition",
+          "Measurement boundary",
+          "How to read the result",
+          "Next action"
+        ],
+        "related_questions": [
+          "What does this result explain?",
+          "What should it not be used for?"
+        ],
+        "safe_claim_boundary": "not_ability_claim"
+      },
+      "meta": {
+        "id": "eq.seo.eq_sjt_future",
+        "asset_type": "seo_snippet",
+        "v23_source_id": "eq.seo.eq_sjt_future",
+        "claim_risk": "medium",
+        "risk_notes": "SEO candidate, not result-page core copy.",
+        "search_intent": "eq_sjt_future",
+        "surface": "seo",
+        "claim_boundary": [
+          "not_ability_claim"
+        ]
+      }
+    },
+    "eq.geo.what_is_eq": {
+      "zh-CN": {
+        "title": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "meta_description": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "short_answer": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "long_answer_outline": [],
+        "related_questions": [],
+        "safe_claim_boundary": "not_ability_claim, not_clinical_use"
+      },
+      "en": {
+        "title": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. I",
+        "meta_description": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. It is best used for self-understanding and practical reflection, read together with dimensions, confi",
+        "short_answer": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. It is best used for self-understanding and practical reflection, read together with dimensions, confidence, and scene-based assets.",
+        "long_answer_outline": [],
+        "related_questions": [],
+        "safe_claim_boundary": "not_ability_claim, not_clinical_use"
+      },
+      "meta": {
+        "id": "eq.geo.what_is_eq",
+        "asset_type": "geo_answer_snippet",
+        "v23_source_id": "eq.geo.what_is_eq",
+        "claim_risk": "medium",
+        "risk_notes": "AI answer snippet; keep modest.",
+        "search_intent": "what_is_eq",
+        "surface": "geo",
+        "claim_boundary": [
+          "not_ability_claim",
+          "not_clinical_use"
+        ]
+      }
+    },
+    "eq.geo.eq_score": {
+      "zh-CN": {
+        "title": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "meta_description": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "short_answer": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "long_answer_outline": [],
+        "related_questions": [],
+        "safe_claim_boundary": "not_ability_claim, not_clinical_use"
+      },
+      "en": {
+        "title": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. I",
+        "meta_description": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. It is best used for self-understanding and practical reflection, read together with dimensions, confi",
+        "short_answer": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. It is best used for self-understanding and practical reflection, read together with dimensions, confidence, and scene-based assets.",
+        "long_answer_outline": [],
+        "related_questions": [],
+        "safe_claim_boundary": "not_ability_claim, not_clinical_use"
+      },
+      "meta": {
+        "id": "eq.geo.eq_score",
+        "asset_type": "geo_answer_snippet",
+        "v23_source_id": "eq.geo.eq_score",
+        "claim_risk": "medium",
+        "risk_notes": "AI answer snippet; keep modest.",
+        "search_intent": "eq_score",
+        "surface": "geo",
+        "claim_boundary": [
+          "not_ability_claim",
+          "not_clinical_use"
+        ]
+      }
+    },
+    "eq.geo.self_report_vs_scenario": {
+      "zh-CN": {
+        "title": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "meta_description": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "short_answer": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "long_answer_outline": [],
+        "related_questions": [],
+        "safe_claim_boundary": "not_ability_claim, not_clinical_use"
+      },
+      "en": {
+        "title": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. I",
+        "meta_description": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. It is best used for self-understanding and practical reflection, read together with dimensions, confi",
+        "short_answer": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. It is best used for self-understanding and practical reflection, read together with dimensions, confidence, and scene-based assets.",
+        "long_answer_outline": [],
+        "related_questions": [],
+        "safe_claim_boundary": "not_ability_claim, not_clinical_use"
+      },
+      "meta": {
+        "id": "eq.geo.self_report_vs_scenario",
+        "asset_type": "geo_answer_snippet",
+        "v23_source_id": "eq.geo.self_report_vs_scenario",
+        "claim_risk": "medium",
+        "risk_notes": "AI answer snippet; keep modest.",
+        "search_intent": "self_report_vs_scenario",
+        "surface": "geo",
+        "claim_boundary": [
+          "not_ability_claim",
+          "not_clinical_use"
+        ]
+      }
+    },
+    "eq.geo.eq_sjt_planned": {
+      "zh-CN": {
+        "title": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "meta_description": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "short_answer": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "long_answer_outline": [],
+        "related_questions": [],
+        "safe_claim_boundary": "not_ability_claim, not_clinical_use"
+      },
+      "en": {
+        "title": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. I",
+        "meta_description": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. It is best used for self-understanding and practical reflection, read together with dimensions, confi",
+        "short_answer": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. It is best used for self-understanding and practical reflection, read together with dimensions, confidence, and scene-based assets.",
+        "long_answer_outline": [],
+        "related_questions": [],
+        "safe_claim_boundary": "not_ability_claim, not_clinical_use"
+      },
+      "meta": {
+        "id": "eq.geo.eq_sjt_planned",
+        "asset_type": "geo_answer_snippet",
+        "v23_source_id": "eq.geo.eq_sjt_planned",
+        "claim_risk": "medium",
+        "risk_notes": "AI answer snippet; keep modest.",
+        "search_intent": "eq_sjt_planned",
+        "surface": "geo",
+        "claim_boundary": [
+          "not_ability_claim",
+          "not_clinical_use"
+        ]
+      }
+    },
+    "eq.geo.eq_workplace": {
+      "zh-CN": {
+        "title": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "meta_description": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "short_answer": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "long_answer_outline": [],
+        "related_questions": [],
+        "safe_claim_boundary": "not_ability_claim, not_clinical_use"
+      },
+      "en": {
+        "title": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. I",
+        "meta_description": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. It is best used for self-understanding and practical reflection, read together with dimensions, confi",
+        "short_answer": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. It is best used for self-understanding and practical reflection, read together with dimensions, confidence, and scene-based assets.",
+        "long_answer_outline": [],
+        "related_questions": [],
+        "safe_claim_boundary": "not_ability_claim, not_clinical_use"
+      },
+      "meta": {
+        "id": "eq.geo.eq_workplace",
+        "asset_type": "geo_answer_snippet",
+        "v23_source_id": "eq.geo.eq_workplace",
+        "claim_risk": "medium",
+        "risk_notes": "AI answer snippet; keep modest.",
+        "search_intent": "eq_workplace",
+        "surface": "geo",
+        "claim_boundary": [
+          "not_ability_claim",
+          "not_clinical_use"
+        ]
+      }
+    },
+    "eq.geo.eq_relationship": {
+      "zh-CN": {
+        "title": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "meta_description": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "short_answer": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "long_answer_outline": [],
+        "related_questions": [],
+        "safe_claim_boundary": "not_ability_claim, not_clinical_use"
+      },
+      "en": {
+        "title": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. I",
+        "meta_description": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. It is best used for self-understanding and practical reflection, read together with dimensions, confi",
+        "short_answer": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. It is best used for self-understanding and practical reflection, read together with dimensions, confidence, and scene-based assets.",
+        "long_answer_outline": [],
+        "related_questions": [],
+        "safe_claim_boundary": "not_ability_claim, not_clinical_use"
+      },
+      "meta": {
+        "id": "eq.geo.eq_relationship",
+        "asset_type": "geo_answer_snippet",
+        "v23_source_id": "eq.geo.eq_relationship",
+        "claim_risk": "medium",
+        "risk_notes": "AI answer snippet; keep modest.",
+        "search_intent": "eq_relationship",
+        "surface": "geo",
+        "claim_boundary": [
+          "not_ability_claim",
+          "not_clinical_use"
+        ]
+      }
+    },
+    "eq.geo.eq_boundaries": {
+      "zh-CN": {
+        "title": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "meta_description": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "short_answer": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "long_answer_outline": [],
+        "related_questions": [],
+        "safe_claim_boundary": "not_ability_claim, not_clinical_use"
+      },
+      "en": {
+        "title": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. I",
+        "meta_description": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. It is best used for self-understanding and practical reflection, read together with dimensions, confi",
+        "short_answer": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. It is best used for self-understanding and practical reflection, read together with dimensions, confidence, and scene-based assets.",
+        "long_answer_outline": [],
+        "related_questions": [],
+        "safe_claim_boundary": "not_ability_claim, not_clinical_use"
+      },
+      "meta": {
+        "id": "eq.geo.eq_boundaries",
+        "asset_type": "geo_answer_snippet",
+        "v23_source_id": "eq.geo.eq_boundaries",
+        "claim_risk": "medium",
+        "risk_notes": "AI answer snippet; keep modest.",
+        "search_intent": "eq_boundaries",
+        "surface": "geo",
+        "claim_boundary": [
+          "not_ability_claim",
+          "not_clinical_use"
+        ]
+      }
+    },
+    "eq.geo.eq_retest": {
+      "zh-CN": {
+        "title": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "meta_description": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "short_answer": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "long_answer_outline": [],
+        "related_questions": [],
+        "safe_claim_boundary": "not_ability_claim, not_clinical_use"
+      },
+      "en": {
+        "title": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. I",
+        "meta_description": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. It is best used for self-understanding and practical reflection, read together with dimensions, confi",
+        "short_answer": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. It is best used for self-understanding and practical reflection, read together with dimensions, confidence, and scene-based assets.",
+        "long_answer_outline": [],
+        "related_questions": [],
+        "safe_claim_boundary": "not_ability_claim, not_clinical_use"
+      },
+      "meta": {
+        "id": "eq.geo.eq_retest",
+        "asset_type": "geo_answer_snippet",
+        "v23_source_id": "eq.geo.eq_retest",
+        "claim_risk": "medium",
+        "risk_notes": "AI answer snippet; keep modest.",
+        "search_intent": "eq_retest",
+        "surface": "geo",
+        "claim_boundary": [
+          "not_ability_claim",
+          "not_clinical_use"
+        ]
+      }
+    },
+    "eq.geo.eq_confidence": {
+      "zh-CN": {
+        "title": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "meta_description": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "short_answer": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "long_answer_outline": [],
+        "related_questions": [],
+        "safe_claim_boundary": "not_ability_claim, not_clinical_use"
+      },
+      "en": {
+        "title": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. I",
+        "meta_description": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. It is best used for self-understanding and practical reflection, read together with dimensions, confi",
+        "short_answer": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. It is best used for self-understanding and practical reflection, read together with dimensions, confidence, and scene-based assets.",
+        "long_answer_outline": [],
+        "related_questions": [],
+        "safe_claim_boundary": "not_ability_claim, not_clinical_use"
+      },
+      "meta": {
+        "id": "eq.geo.eq_confidence",
+        "asset_type": "geo_answer_snippet",
+        "v23_source_id": "eq.geo.eq_confidence",
+        "claim_risk": "medium",
+        "risk_notes": "AI answer snippet; keep modest.",
+        "search_intent": "eq_confidence",
+        "surface": "geo",
+        "claim_boundary": [
+          "not_ability_claim",
+          "not_clinical_use"
+        ]
+      }
+    },
+    "eq.geo.eq_dimensions": {
+      "zh-CN": {
+        "title": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "meta_description": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "short_answer": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "long_answer_outline": [],
+        "related_questions": [],
+        "safe_claim_boundary": "not_ability_claim, not_clinical_use"
+      },
+      "en": {
+        "title": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. I",
+        "meta_description": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. It is best used for self-understanding and practical reflection, read together with dimensions, confi",
+        "short_answer": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. It is best used for self-understanding and practical reflection, read together with dimensions, confidence, and scene-based assets.",
+        "long_answer_outline": [],
+        "related_questions": [],
+        "safe_claim_boundary": "not_ability_claim, not_clinical_use"
+      },
+      "meta": {
+        "id": "eq.geo.eq_dimensions",
+        "asset_type": "geo_answer_snippet",
+        "v23_source_id": "eq.geo.eq_dimensions",
+        "claim_risk": "medium",
+        "risk_notes": "AI answer snippet; keep modest.",
+        "search_intent": "eq_dimensions",
+        "surface": "geo",
+        "claim_boundary": [
+          "not_ability_claim",
+          "not_clinical_use"
+        ]
+      }
+    },
+    "eq.geo.eq_career_environment": {
+      "zh-CN": {
+        "title": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "meta_description": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "short_answer": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "long_answer_outline": [],
+        "related_questions": [],
+        "safe_claim_boundary": "not_ability_claim, not_clinical_use"
+      },
+      "en": {
+        "title": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. I",
+        "meta_description": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. It is best used for self-understanding and practical reflection, read together with dimensions, confi",
+        "short_answer": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. It is best used for self-understanding and practical reflection, read together with dimensions, confidence, and scene-based assets.",
+        "long_answer_outline": [],
+        "related_questions": [],
+        "safe_claim_boundary": "not_ability_claim, not_clinical_use"
+      },
+      "meta": {
+        "id": "eq.geo.eq_career_environment",
+        "asset_type": "geo_answer_snippet",
+        "v23_source_id": "eq.geo.eq_career_environment",
+        "claim_risk": "medium",
+        "risk_notes": "AI answer snippet; keep modest.",
+        "search_intent": "eq_career_environment",
+        "surface": "geo",
+        "claim_boundary": [
+          "not_ability_claim",
+          "not_clinical_use"
+        ]
+      }
+    },
+    "eq.geo.eq_action_plan": {
+      "zh-CN": {
+        "title": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "meta_description": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "short_answer": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "long_answer_outline": [],
+        "related_questions": [],
+        "safe_claim_boundary": "not_ability_claim, not_clinical_use"
+      },
+      "en": {
+        "title": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. I",
+        "meta_description": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. It is best used for self-understanding and practical reflection, read together with dimensions, confi",
+        "short_answer": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. It is best used for self-understanding and practical reflection, read together with dimensions, confidence, and scene-based assets.",
+        "long_answer_outline": [],
+        "related_questions": [],
+        "safe_claim_boundary": "not_ability_claim, not_clinical_use"
+      },
+      "meta": {
+        "id": "eq.geo.eq_action_plan",
+        "asset_type": "geo_answer_snippet",
+        "v23_source_id": "eq.geo.eq_action_plan",
+        "claim_risk": "medium",
+        "risk_notes": "AI answer snippet; keep modest.",
+        "search_intent": "eq_action_plan",
+        "surface": "geo",
+        "claim_boundary": [
+          "not_ability_claim",
+          "not_clinical_use"
+        ]
+      }
+    },
+    "eq.geo.eq_vs_iq": {
+      "zh-CN": {
+        "title": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "meta_description": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "short_answer": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "long_answer_outline": [],
+        "related_questions": [],
+        "safe_claim_boundary": "not_ability_claim, not_clinical_use"
+      },
+      "en": {
+        "title": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. I",
+        "meta_description": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. It is best used for self-understanding and practical reflection, read together with dimensions, confi",
+        "short_answer": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. It is best used for self-understanding and practical reflection, read together with dimensions, confidence, and scene-based assets.",
+        "long_answer_outline": [],
+        "related_questions": [],
+        "safe_claim_boundary": "not_ability_claim, not_clinical_use"
+      },
+      "meta": {
+        "id": "eq.geo.eq_vs_iq",
+        "asset_type": "geo_answer_snippet",
+        "v23_source_id": "eq.geo.eq_vs_iq",
+        "claim_risk": "medium",
+        "risk_notes": "AI answer snippet; keep modest.",
+        "search_intent": "eq_vs_iq",
+        "surface": "geo",
+        "claim_boundary": [
+          "not_ability_claim",
+          "not_clinical_use"
+        ]
+      }
+    },
+    "eq.geo.eq_vs_mbti": {
+      "zh-CN": {
+        "title": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "meta_description": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "short_answer": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "long_answer_outline": [],
+        "related_questions": [],
+        "safe_claim_boundary": "not_ability_claim, not_clinical_use"
+      },
+      "en": {
+        "title": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. I",
+        "meta_description": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. It is best used for self-understanding and practical reflection, read together with dimensions, confi",
+        "short_answer": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. It is best used for self-understanding and practical reflection, read together with dimensions, confidence, and scene-based assets.",
+        "long_answer_outline": [],
+        "related_questions": [],
+        "safe_claim_boundary": "not_ability_claim, not_clinical_use"
+      },
+      "meta": {
+        "id": "eq.geo.eq_vs_mbti",
+        "asset_type": "geo_answer_snippet",
+        "v23_source_id": "eq.geo.eq_vs_mbti",
+        "claim_risk": "medium",
+        "risk_notes": "AI answer snippet; keep modest.",
+        "search_intent": "eq_vs_mbti",
+        "surface": "geo",
+        "claim_boundary": [
+          "not_ability_claim",
+          "not_clinical_use"
+        ]
+      }
+    },
+    "eq.geo.eq_vs_big_five": {
+      "zh-CN": {
+        "title": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "meta_description": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "short_answer": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "long_answer_outline": [],
+        "related_questions": [],
+        "safe_claim_boundary": "not_ability_claim, not_clinical_use"
+      },
+      "en": {
+        "title": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. I",
+        "meta_description": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. It is best used for self-understanding and practical reflection, read together with dimensions, confi",
+        "short_answer": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. It is best used for self-understanding and practical reflection, read together with dimensions, confidence, and scene-based assets.",
+        "long_answer_outline": [],
+        "related_questions": [],
+        "safe_claim_boundary": "not_ability_claim, not_clinical_use"
+      },
+      "meta": {
+        "id": "eq.geo.eq_vs_big_five",
+        "asset_type": "geo_answer_snippet",
+        "v23_source_id": "eq.geo.eq_vs_big_five",
+        "claim_risk": "medium",
+        "risk_notes": "AI answer snippet; keep modest.",
+        "search_intent": "eq_vs_big_five",
+        "surface": "geo",
+        "claim_boundary": [
+          "not_ability_claim",
+          "not_clinical_use"
+        ]
+      }
+    },
+    "eq.geo.eq_limitations": {
+      "zh-CN": {
+        "title": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "meta_description": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "short_answer": "费马 EQ-60 是自我报告型情绪与关系模式测评，适合用于自我理解和行动反思。具体解释应结合维度分数、置信度和场景资产阅读。",
+        "long_answer_outline": [],
+        "related_questions": [],
+        "safe_claim_boundary": "not_ability_claim, not_clinical_use"
+      },
+      "en": {
+        "title": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. I",
+        "meta_description": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. It is best used for self-understanding and practical reflection, read together with dimensions, confi",
+        "short_answer": "Fermat EQ-60 is a self-report assessment of emotional and relational patterns. It is best used for self-understanding and practical reflection, read together with dimensions, confidence, and scene-based assets.",
+        "long_answer_outline": [],
+        "related_questions": [],
+        "safe_claim_boundary": "not_ability_claim, not_clinical_use"
+      },
+      "meta": {
+        "id": "eq.geo.eq_limitations",
+        "asset_type": "geo_answer_snippet",
+        "v23_source_id": "eq.geo.eq_limitations",
+        "claim_risk": "medium",
+        "risk_notes": "AI answer snippet; keep modest.",
+        "search_intent": "eq_limitations",
+        "surface": "geo",
+        "claim_boundary": [
+          "not_ability_claim",
+          "not_clinical_use"
+        ]
       }
     }
   }

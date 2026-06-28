@@ -6,121 +6,133 @@
       "low": {
         "zh-CN": {
           "label": "人际密度：低",
-          "meaning": "互动少，独立推进为主",
-          "fit_signal": "互动频率低时：这种环境通常给你更多安静推进和独立消化的空间。 对 EQ 报告来说，重点是观察它是否让你的优势自然发挥，而不是逼你长期扮演协调者。",
-          "strain_signal": "互动频率低的主要消耗点：风险不是人太多，而是情绪线索太少，可能让关系修复和反馈节奏变得迟钝。 如果你的发展杠杆正好落在 ER/RM，这个变量要优先验证。",
-          "what_to_verify": "这个岗位里的互动频率通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？",
-          "do_not_overread": "这不是具体职业推荐，只是帮助你观察环境变量。",
-          "interview_question": "这个岗位里的互动频率通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？",
+          "meaning": "互动频率、会议密度和需要读人的程度",
+          "fit_signal": "适合需要先把任务做深、减少连续情绪切换的阶段。",
+          "strain_signal": "风险是关系信号不足时，你可能难以及时校准他人预期。",
+          "interview_question": "这个环境是否真的安静，还是只是把沟通延后到危机时？",
           "role_observation_checklist": [
-            "观察互动频率是稳定可预期，还是经常突然升高。",
-            "观察情绪性沟通是否有明确负责人，而不是默认落到最愿意回应的人身上。",
-            "观察你在一天结束后是更清楚、更有能量，还是持续反刍和耗竭。"
+            "看会议是否有明确目的和结束条件。",
+            "看反馈是否具体到行为，而不是停留在人身感受。",
+            "看团队是否允许人暂时退出高情绪对话。"
           ],
-          "team_risk": "如果互动频率被低估，团队可能把隐形沟通成本当成“性格好的人自然会做”。",
-          "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。",
-          "manager_note": "和管理者确认互动节奏：哪些沟通必须即时回应，哪些可以异步处理。"
+          "team_risk": "如果这个变量被长期忽视，团队会把情绪成本转嫁给最愿意承担的人。",
+          "recovery_condition": "需要可预期的暂停、复盘和交接空间。",
+          "what_to_verify": "这个环境是否真的安静，还是只是把沟通延后到危机时？",
+          "do_not_overread": "This describes an environment variable, not a role recommendation."
         },
         "en": {
           "label": "Interpersonal density: low",
-          "meaning": "fewer live interactions and more independent work",
-          "fit_signal": "When interaction load is low: This setting usually gives you more quiet execution time and room to process alone. For this EQ report, the question is whether the setting lets your strengths operate naturally instead of making you the default emotional coordinator.",
-          "strain_signal": "The strain point at low interaction load: The risk is not too much people-contact; it is too little emotional signal, which can make repair and feedback rhythms slower. If your development lever sits in ER or RM, verify this variable early.",
-          "what_to_verify": "What level of interaction load does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?",
-          "do_not_overread": "This is not an occupation recommendation. It is a lens for reading the work environment.",
-          "interview_question": "What level of interaction load does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?",
+          "meaning": "the amount of interaction, meeting load, and people-reading required",
+          "fit_signal": "Helpful when the work requires depth, fewer social switches, and more continuity.",
+          "strain_signal": "The strain is that fewer relational cues can make expectation-setting slower.",
+          "interview_question": "Is the environment genuinely quiet, or does it only postpone communication until there is a problem?",
           "role_observation_checklist": [
-            "Notice whether interaction load is predictable or spikes without warning.",
-            "Notice whether emotional coordination has a clear owner or falls to the most responsive person.",
-            "Notice whether you end the day clearer and steadier, or still replaying conversations."
+            "Notice whether meetings have a clear purpose and ending point.",
+            "Notice whether feedback targets behavior rather than personal character.",
+            "Notice whether people can step out of emotionally loaded conversations when needed."
           ],
-          "team_risk": "If interaction load is underestimated, the team may treat invisible coordination as something emotionally capable people will simply absorb.",
-          "safe_experiment": "Observe rhythm and recovery space for one week before judging fit from a job title.",
-          "manager_note": "Ask the manager which conversations need immediate response and which can be handled asynchronously."
+          "team_risk": "If this variable is ignored, teams often shift emotional cost onto the person most willing to carry it.",
+          "recovery_condition": "Requires predictable space for pause, review, and handoff.",
+          "what_to_verify": "Is the environment genuinely quiet, or does it only postpone communication until there is a problem?",
+          "do_not_overread": "This describes an environment variable, not a role recommendation."
         },
         "meta": {
-          "v19_source_id": "eq.career_environment.interpersonal_density.low",
-          "claim_risk": "medium"
+          "id": "interpersonal_density_low",
+          "asset_type": "career_environment_base",
+          "v23_source_id": "interpersonal_density_low",
+          "claim_risk": "medium",
+          "risk_notes": "Do not map to specific occupations.",
+          "variable": "interpersonal_density",
+          "level": "low",
+          "overlay_imported": false
         }
       },
       "medium": {
         "zh-CN": {
           "label": "人际密度：中",
-          "meaning": "有固定协作节奏，也有独立空间",
-          "fit_signal": "互动频率中时：这种环境有足够互动来使用你的关系优势，也保留一定独立节奏。 对 EQ 报告来说，重点是观察它是否让你的优势自然发挥，而不是逼你长期扮演协调者。",
-          "strain_signal": "互动频率中的主要消耗点：风险在于边界模糊：有些沟通值得投入，有些只是消耗。 如果你的发展杠杆正好落在 ER/RM，这个变量要优先验证。",
-          "what_to_verify": "这个岗位里的互动频率通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？",
-          "do_not_overread": "这不是具体职业推荐，只是帮助你观察环境变量。",
-          "interview_question": "这个岗位里的互动频率通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？",
+          "meaning": "互动频率、会议密度和需要读人的程度",
+          "fit_signal": "适合在互动和独立之间切换，并用复盘保持稳定。",
+          "strain_signal": "风险是模糊边界让互动慢慢侵入恢复时间。",
+          "interview_question": "团队是否有清楚的会议节奏、反馈方式和恢复窗口？",
           "role_observation_checklist": [
-            "观察互动频率是稳定可预期，还是经常突然升高。",
-            "观察情绪性沟通是否有明确负责人，而不是默认落到最愿意回应的人身上。",
-            "观察你在一天结束后是更清楚、更有能量，还是持续反刍和耗竭。"
+            "看会议是否有明确目的和结束条件。",
+            "看反馈是否具体到行为，而不是停留在人身感受。",
+            "看团队是否允许人暂时退出高情绪对话。"
           ],
-          "team_risk": "如果互动频率被低估，团队可能把隐形沟通成本当成“性格好的人自然会做”。",
-          "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。",
-          "manager_note": "和管理者确认互动节奏：哪些沟通必须即时回应，哪些可以异步处理。"
+          "team_risk": "如果这个变量被长期忽视，团队会把情绪成本转嫁给最愿意承担的人。",
+          "recovery_condition": "需要可预期的暂停、复盘和交接空间。",
+          "what_to_verify": "团队是否有清楚的会议节奏、反馈方式和恢复窗口？",
+          "do_not_overread": "This describes an environment variable, not a role recommendation."
         },
         "en": {
           "label": "Interpersonal density: medium",
-          "meaning": "a mix of scheduled collaboration and independent focus",
-          "fit_signal": "When interaction load is medium: This setting gives you enough interaction to use relational strengths while still leaving some independent rhythm. For this EQ report, the question is whether the setting lets your strengths operate naturally instead of making you the default emotional coordinator.",
-          "strain_signal": "The strain point at medium interaction load: The risk is blurred boundaries: some conversations deserve investment, while others only drain attention. If your development lever sits in ER or RM, verify this variable early.",
-          "what_to_verify": "What level of interaction load does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?",
-          "do_not_overread": "This is not an occupation recommendation. It is a lens for reading the work environment.",
-          "interview_question": "What level of interaction load does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?",
+          "meaning": "the amount of interaction, meeting load, and people-reading required",
+          "fit_signal": "Useful when you can move between interaction and solo work with enough review time.",
+          "strain_signal": "The strain is that unclear boundaries can slowly eat into recovery time.",
+          "interview_question": "Does the team have clear meeting rhythm, feedback norms, and recovery windows?",
           "role_observation_checklist": [
-            "Notice whether interaction load is predictable or spikes without warning.",
-            "Notice whether emotional coordination has a clear owner or falls to the most responsive person.",
-            "Notice whether you end the day clearer and steadier, or still replaying conversations."
+            "Notice whether meetings have a clear purpose and ending point.",
+            "Notice whether feedback targets behavior rather than personal character.",
+            "Notice whether people can step out of emotionally loaded conversations when needed."
           ],
-          "team_risk": "If interaction load is underestimated, the team may treat invisible coordination as something emotionally capable people will simply absorb.",
-          "safe_experiment": "Observe rhythm and recovery space for one week before judging fit from a job title.",
-          "manager_note": "Ask the manager which conversations need immediate response and which can be handled asynchronously."
+          "team_risk": "If this variable is ignored, teams often shift emotional cost onto the person most willing to carry it.",
+          "recovery_condition": "Requires predictable space for pause, review, and handoff.",
+          "what_to_verify": "Does the team have clear meeting rhythm, feedback norms, and recovery windows?",
+          "do_not_overread": "This describes an environment variable, not a role recommendation."
         },
         "meta": {
-          "v19_source_id": "eq.career_environment.interpersonal_density.medium",
-          "claim_risk": "medium"
+          "id": "interpersonal_density_medium",
+          "asset_type": "career_environment_base",
+          "v23_source_id": "interpersonal_density_medium",
+          "claim_risk": "medium",
+          "risk_notes": "Do not map to specific occupations.",
+          "variable": "interpersonal_density",
+          "level": "medium",
+          "overlay_imported": false
         }
       },
       "high": {
         "zh-CN": {
           "label": "人际密度：高",
-          "meaning": "频繁沟通、同步和临场回应",
-          "fit_signal": "互动频率高时：这种环境会频繁调用你的共情、调节和关系判断。 对 EQ 报告来说，重点是观察它是否让你的优势自然发挥，而不是逼你长期扮演协调者。",
-          "strain_signal": "互动频率高的主要消耗点：如果恢复机制不足，你可能很快从“能回应”变成“被持续拉扯”。 如果你的发展杠杆正好落在 ER/RM，这个变量要优先验证。",
-          "what_to_verify": "这个岗位里的互动频率通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？",
-          "do_not_overread": "这不是具体职业推荐，只是帮助你观察环境变量。",
-          "interview_question": "这个岗位里的互动频率通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？",
+          "meaning": "互动频率、会议密度和需要读人的程度",
+          "fit_signal": "适合能把情绪信息转成沟通和决策的人，但需要明确边界。",
+          "strain_signal": "风险是持续承接他人情绪，导致判断和恢复被消耗。",
+          "interview_question": "长期看，这个环境是否允许暂停、交接和情绪复位？",
           "role_observation_checklist": [
-            "观察互动频率是稳定可预期，还是经常突然升高。",
-            "观察情绪性沟通是否有明确负责人，而不是默认落到最愿意回应的人身上。",
-            "观察你在一天结束后是更清楚、更有能量，还是持续反刍和耗竭。"
+            "看会议是否有明确目的和结束条件。",
+            "看反馈是否具体到行为，而不是停留在人身感受。",
+            "看团队是否允许人暂时退出高情绪对话。"
           ],
-          "team_risk": "如果互动频率被低估，团队可能把隐形沟通成本当成“性格好的人自然会做”。",
-          "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。",
-          "manager_note": "和管理者确认互动节奏：哪些沟通必须即时回应，哪些可以异步处理。"
+          "team_risk": "如果这个变量被长期忽视，团队会把情绪成本转嫁给最愿意承担的人。",
+          "recovery_condition": "需要可预期的暂停、复盘和交接空间。",
+          "what_to_verify": "长期看，这个环境是否允许暂停、交接和情绪复位？",
+          "do_not_overread": "This describes an environment variable, not a role recommendation."
         },
         "en": {
           "label": "Interpersonal density: high",
-          "meaning": "frequent communication, coordination, and real-time response",
-          "fit_signal": "When interaction load is high: This setting will call on empathy, regulation, and relationship judgment often. For this EQ report, the question is whether the setting lets your strengths operate naturally instead of making you the default emotional coordinator.",
-          "strain_signal": "The strain point at high interaction load: If recovery is weak, you may shift quickly from being responsive to feeling continuously pulled in. If your development lever sits in ER or RM, verify this variable early.",
-          "what_to_verify": "What level of interaction load does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?",
-          "do_not_overread": "This is not an occupation recommendation. It is a lens for reading the work environment.",
-          "interview_question": "What level of interaction load does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?",
+          "meaning": "the amount of interaction, meeting load, and people-reading required",
+          "fit_signal": "Can work well for people who turn emotional information into communication and decisions, if boundaries are explicit.",
+          "strain_signal": "The strain is sustained emotional load, which can drain judgment and recovery.",
+          "interview_question": "Over time, does the environment allow pause, handoff, and emotional reset?",
           "role_observation_checklist": [
-            "Notice whether interaction load is predictable or spikes without warning.",
-            "Notice whether emotional coordination has a clear owner or falls to the most responsive person.",
-            "Notice whether you end the day clearer and steadier, or still replaying conversations."
+            "Notice whether meetings have a clear purpose and ending point.",
+            "Notice whether feedback targets behavior rather than personal character.",
+            "Notice whether people can step out of emotionally loaded conversations when needed."
           ],
-          "team_risk": "If interaction load is underestimated, the team may treat invisible coordination as something emotionally capable people will simply absorb.",
-          "safe_experiment": "Observe rhythm and recovery space for one week before judging fit from a job title.",
-          "manager_note": "Ask the manager which conversations need immediate response and which can be handled asynchronously."
+          "team_risk": "If this variable is ignored, teams often shift emotional cost onto the person most willing to carry it.",
+          "recovery_condition": "Requires predictable space for pause, review, and handoff.",
+          "what_to_verify": "Over time, does the environment allow pause, handoff, and emotional reset?",
+          "do_not_overread": "This describes an environment variable, not a role recommendation."
         },
         "meta": {
-          "v19_source_id": "eq.career_environment.interpersonal_density.high",
-          "claim_risk": "medium"
+          "id": "interpersonal_density_high",
+          "asset_type": "career_environment_base",
+          "v23_source_id": "interpersonal_density_high",
+          "claim_risk": "medium",
+          "risk_notes": "Do not map to specific occupations.",
+          "variable": "interpersonal_density",
+          "level": "high",
+          "overlay_imported": false
         }
       }
     },
@@ -128,121 +140,133 @@
       "low": {
         "zh-CN": {
           "label": "情绪劳动：低",
-          "meaning": "主要处理任务，不常承接他人情绪",
-          "fit_signal": "情绪承接低时：这种环境通常给你更多安静推进和独立消化的空间。 对 EQ 报告来说，重点是观察它是否让你的优势自然发挥，而不是逼你长期扮演协调者。",
-          "strain_signal": "情绪承接低的主要消耗点：风险不是人太多，而是情绪线索太少，可能让关系修复和反馈节奏变得迟钝。 如果你的发展杠杆正好落在 ER/RM，这个变量要优先验证。",
-          "what_to_verify": "这个岗位里的情绪承接通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？",
-          "do_not_overread": "这不是具体职业推荐，只是帮助你观察环境变量。",
-          "interview_question": "这个岗位里的情绪承接通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？",
+          "meaning": "需要承接、安抚或整理他人情绪的程度",
+          "fit_signal": "适合需要先把任务做深、减少连续情绪切换的阶段。",
+          "strain_signal": "风险是关系信号不足时，你可能难以及时校准他人预期。",
+          "interview_question": "这个环境是否真的安静，还是只是把沟通延后到危机时？",
           "role_observation_checklist": [
-            "观察情绪承接是稳定可预期，还是经常突然升高。",
-            "观察情绪性沟通是否有明确负责人，而不是默认落到最愿意回应的人身上。",
-            "观察你在一天结束后是更清楚、更有能量，还是持续反刍和耗竭。"
+            "看会议是否有明确目的和结束条件。",
+            "看反馈是否具体到行为，而不是停留在人身感受。",
+            "看团队是否允许人暂时退出高情绪对话。"
           ],
-          "team_risk": "如果情绪承接被低估，团队可能把隐形沟通成本当成“性格好的人自然会做”。",
-          "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。",
-          "manager_note": "和管理者确认情绪承接边界：投诉、冲突或他人压力是否有制度化分流。"
+          "team_risk": "如果这个变量被长期忽视，团队会把情绪成本转嫁给最愿意承担的人。",
+          "recovery_condition": "需要可预期的暂停、复盘和交接空间。",
+          "what_to_verify": "这个环境是否真的安静，还是只是把沟通延后到危机时？",
+          "do_not_overread": "This describes an environment variable, not a role recommendation."
         },
         "en": {
           "label": "Emotional labor: low",
-          "meaning": "mostly task-focused with limited emotional load from others",
-          "fit_signal": "When emotional labor is low: This setting usually gives you more quiet execution time and room to process alone. For this EQ report, the question is whether the setting lets your strengths operate naturally instead of making you the default emotional coordinator.",
-          "strain_signal": "The strain point at low emotional labor: The risk is not too much people-contact; it is too little emotional signal, which can make repair and feedback rhythms slower. If your development lever sits in ER or RM, verify this variable early.",
-          "what_to_verify": "What level of emotional labor does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?",
-          "do_not_overread": "This is not an occupation recommendation. It is a lens for reading the work environment.",
-          "interview_question": "What level of emotional labor does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?",
+          "meaning": "how often the role asks you to receive, soothe, or organize other people’s emotion",
+          "fit_signal": "Helpful when the work requires depth, fewer social switches, and more continuity.",
+          "strain_signal": "The strain is that fewer relational cues can make expectation-setting slower.",
+          "interview_question": "Is the environment genuinely quiet, or does it only postpone communication until there is a problem?",
           "role_observation_checklist": [
-            "Notice whether emotional labor is predictable or spikes without warning.",
-            "Notice whether emotional coordination has a clear owner or falls to the most responsive person.",
-            "Notice whether you end the day clearer and steadier, or still replaying conversations."
+            "Notice whether meetings have a clear purpose and ending point.",
+            "Notice whether feedback targets behavior rather than personal character.",
+            "Notice whether people can step out of emotionally loaded conversations when needed."
           ],
-          "team_risk": "If emotional labor is underestimated, the team may treat invisible coordination as something emotionally capable people will simply absorb.",
-          "safe_experiment": "Observe rhythm and recovery space for one week before judging fit from a job title.",
-          "manager_note": "Ask how the team routes complaints, conflict, or other people’s stress instead of letting one responsive person absorb it."
+          "team_risk": "If this variable is ignored, teams often shift emotional cost onto the person most willing to carry it.",
+          "recovery_condition": "Requires predictable space for pause, review, and handoff.",
+          "what_to_verify": "Is the environment genuinely quiet, or does it only postpone communication until there is a problem?",
+          "do_not_overread": "This describes an environment variable, not a role recommendation."
         },
         "meta": {
-          "v19_source_id": "eq.career_environment.emotional_labor.low",
-          "claim_risk": "medium"
+          "id": "emotional_labor_low",
+          "asset_type": "career_environment_base",
+          "v23_source_id": "emotional_labor_low",
+          "claim_risk": "medium",
+          "risk_notes": "Do not map to specific occupations.",
+          "variable": "emotional_labor",
+          "level": "low",
+          "overlay_imported": false
         }
       },
       "medium": {
         "zh-CN": {
           "label": "情绪劳动：中",
-          "meaning": "偶尔需要安抚、解释或处理不满",
-          "fit_signal": "情绪承接中时：这种环境有足够互动来使用你的关系优势，也保留一定独立节奏。 对 EQ 报告来说，重点是观察它是否让你的优势自然发挥，而不是逼你长期扮演协调者。",
-          "strain_signal": "情绪承接中的主要消耗点：风险在于边界模糊：有些沟通值得投入，有些只是消耗。 如果你的发展杠杆正好落在 ER/RM，这个变量要优先验证。",
-          "what_to_verify": "这个岗位里的情绪承接通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？",
-          "do_not_overread": "这不是具体职业推荐，只是帮助你观察环境变量。",
-          "interview_question": "这个岗位里的情绪承接通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？",
+          "meaning": "需要承接、安抚或整理他人情绪的程度",
+          "fit_signal": "适合在互动和独立之间切换，并用复盘保持稳定。",
+          "strain_signal": "风险是模糊边界让互动慢慢侵入恢复时间。",
+          "interview_question": "团队是否有清楚的会议节奏、反馈方式和恢复窗口？",
           "role_observation_checklist": [
-            "观察情绪承接是稳定可预期，还是经常突然升高。",
-            "观察情绪性沟通是否有明确负责人，而不是默认落到最愿意回应的人身上。",
-            "观察你在一天结束后是更清楚、更有能量，还是持续反刍和耗竭。"
+            "看会议是否有明确目的和结束条件。",
+            "看反馈是否具体到行为，而不是停留在人身感受。",
+            "看团队是否允许人暂时退出高情绪对话。"
           ],
-          "team_risk": "如果情绪承接被低估，团队可能把隐形沟通成本当成“性格好的人自然会做”。",
-          "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。",
-          "manager_note": "和管理者确认情绪承接边界：投诉、冲突或他人压力是否有制度化分流。"
+          "team_risk": "如果这个变量被长期忽视，团队会把情绪成本转嫁给最愿意承担的人。",
+          "recovery_condition": "需要可预期的暂停、复盘和交接空间。",
+          "what_to_verify": "团队是否有清楚的会议节奏、反馈方式和恢复窗口？",
+          "do_not_overread": "This describes an environment variable, not a role recommendation."
         },
         "en": {
           "label": "Emotional labor: medium",
-          "meaning": "occasional need to reassure, explain, or handle frustration",
-          "fit_signal": "When emotional labor is medium: This setting gives you enough interaction to use relational strengths while still leaving some independent rhythm. For this EQ report, the question is whether the setting lets your strengths operate naturally instead of making you the default emotional coordinator.",
-          "strain_signal": "The strain point at medium emotional labor: The risk is blurred boundaries: some conversations deserve investment, while others only drain attention. If your development lever sits in ER or RM, verify this variable early.",
-          "what_to_verify": "What level of emotional labor does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?",
-          "do_not_overread": "This is not an occupation recommendation. It is a lens for reading the work environment.",
-          "interview_question": "What level of emotional labor does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?",
+          "meaning": "how often the role asks you to receive, soothe, or organize other people’s emotion",
+          "fit_signal": "Useful when you can move between interaction and solo work with enough review time.",
+          "strain_signal": "The strain is that unclear boundaries can slowly eat into recovery time.",
+          "interview_question": "Does the team have clear meeting rhythm, feedback norms, and recovery windows?",
           "role_observation_checklist": [
-            "Notice whether emotional labor is predictable or spikes without warning.",
-            "Notice whether emotional coordination has a clear owner or falls to the most responsive person.",
-            "Notice whether you end the day clearer and steadier, or still replaying conversations."
+            "Notice whether meetings have a clear purpose and ending point.",
+            "Notice whether feedback targets behavior rather than personal character.",
+            "Notice whether people can step out of emotionally loaded conversations when needed."
           ],
-          "team_risk": "If emotional labor is underestimated, the team may treat invisible coordination as something emotionally capable people will simply absorb.",
-          "safe_experiment": "Observe rhythm and recovery space for one week before judging fit from a job title.",
-          "manager_note": "Ask how the team routes complaints, conflict, or other people’s stress instead of letting one responsive person absorb it."
+          "team_risk": "If this variable is ignored, teams often shift emotional cost onto the person most willing to carry it.",
+          "recovery_condition": "Requires predictable space for pause, review, and handoff.",
+          "what_to_verify": "Does the team have clear meeting rhythm, feedback norms, and recovery windows?",
+          "do_not_overread": "This describes an environment variable, not a role recommendation."
         },
         "meta": {
-          "v19_source_id": "eq.career_environment.emotional_labor.medium",
-          "claim_risk": "medium"
+          "id": "emotional_labor_medium",
+          "asset_type": "career_environment_base",
+          "v23_source_id": "emotional_labor_medium",
+          "claim_risk": "medium",
+          "risk_notes": "Do not map to specific occupations.",
+          "variable": "emotional_labor",
+          "level": "medium",
+          "overlay_imported": false
         }
       },
       "high": {
         "zh-CN": {
           "label": "情绪劳动：高",
-          "meaning": "经常面对焦虑、抱怨、压力或强烈期待",
-          "fit_signal": "情绪承接高时：这种环境会频繁调用你的共情、调节和关系判断。 对 EQ 报告来说，重点是观察它是否让你的优势自然发挥，而不是逼你长期扮演协调者。",
-          "strain_signal": "情绪承接高的主要消耗点：如果恢复机制不足，你可能很快从“能回应”变成“被持续拉扯”。 如果你的发展杠杆正好落在 ER/RM，这个变量要优先验证。",
-          "what_to_verify": "这个岗位里的情绪承接通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？",
-          "do_not_overread": "这不是具体职业推荐，只是帮助你观察环境变量。",
-          "interview_question": "这个岗位里的情绪承接通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？",
+          "meaning": "需要承接、安抚或整理他人情绪的程度",
+          "fit_signal": "适合能把情绪信息转成沟通和决策的人，但需要明确边界。",
+          "strain_signal": "风险是持续承接他人情绪，导致判断和恢复被消耗。",
+          "interview_question": "长期看，这个环境是否允许暂停、交接和情绪复位？",
           "role_observation_checklist": [
-            "观察情绪承接是稳定可预期，还是经常突然升高。",
-            "观察情绪性沟通是否有明确负责人，而不是默认落到最愿意回应的人身上。",
-            "观察你在一天结束后是更清楚、更有能量，还是持续反刍和耗竭。"
+            "看会议是否有明确目的和结束条件。",
+            "看反馈是否具体到行为，而不是停留在人身感受。",
+            "看团队是否允许人暂时退出高情绪对话。"
           ],
-          "team_risk": "如果情绪承接被低估，团队可能把隐形沟通成本当成“性格好的人自然会做”。",
-          "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。",
-          "manager_note": "和管理者确认情绪承接边界：投诉、冲突或他人压力是否有制度化分流。"
+          "team_risk": "如果这个变量被长期忽视，团队会把情绪成本转嫁给最愿意承担的人。",
+          "recovery_condition": "需要可预期的暂停、复盘和交接空间。",
+          "what_to_verify": "长期看，这个环境是否允许暂停、交接和情绪复位？",
+          "do_not_overread": "This describes an environment variable, not a role recommendation."
         },
         "en": {
           "label": "Emotional labor: high",
-          "meaning": "frequent exposure to anxiety, complaints, pressure, or intense expectations",
-          "fit_signal": "When emotional labor is high: This setting will call on empathy, regulation, and relationship judgment often. For this EQ report, the question is whether the setting lets your strengths operate naturally instead of making you the default emotional coordinator.",
-          "strain_signal": "The strain point at high emotional labor: If recovery is weak, you may shift quickly from being responsive to feeling continuously pulled in. If your development lever sits in ER or RM, verify this variable early.",
-          "what_to_verify": "What level of emotional labor does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?",
-          "do_not_overread": "This is not an occupation recommendation. It is a lens for reading the work environment.",
-          "interview_question": "What level of emotional labor does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?",
+          "meaning": "how often the role asks you to receive, soothe, or organize other people’s emotion",
+          "fit_signal": "Can work well for people who turn emotional information into communication and decisions, if boundaries are explicit.",
+          "strain_signal": "The strain is sustained emotional load, which can drain judgment and recovery.",
+          "interview_question": "Over time, does the environment allow pause, handoff, and emotional reset?",
           "role_observation_checklist": [
-            "Notice whether emotional labor is predictable or spikes without warning.",
-            "Notice whether emotional coordination has a clear owner or falls to the most responsive person.",
-            "Notice whether you end the day clearer and steadier, or still replaying conversations."
+            "Notice whether meetings have a clear purpose and ending point.",
+            "Notice whether feedback targets behavior rather than personal character.",
+            "Notice whether people can step out of emotionally loaded conversations when needed."
           ],
-          "team_risk": "If emotional labor is underestimated, the team may treat invisible coordination as something emotionally capable people will simply absorb.",
-          "safe_experiment": "Observe rhythm and recovery space for one week before judging fit from a job title.",
-          "manager_note": "Ask how the team routes complaints, conflict, or other people’s stress instead of letting one responsive person absorb it."
+          "team_risk": "If this variable is ignored, teams often shift emotional cost onto the person most willing to carry it.",
+          "recovery_condition": "Requires predictable space for pause, review, and handoff.",
+          "what_to_verify": "Over time, does the environment allow pause, handoff, and emotional reset?",
+          "do_not_overread": "This describes an environment variable, not a role recommendation."
         },
         "meta": {
-          "v19_source_id": "eq.career_environment.emotional_labor.high",
-          "claim_risk": "medium"
+          "id": "emotional_labor_high",
+          "asset_type": "career_environment_base",
+          "v23_source_id": "emotional_labor_high",
+          "claim_risk": "medium",
+          "risk_notes": "Do not map to specific occupations.",
+          "variable": "emotional_labor",
+          "level": "high",
+          "overlay_imported": false
         }
       }
     },
@@ -250,121 +274,133 @@
       "low": {
         "zh-CN": {
           "label": "冲突频率：低",
-          "meaning": "规则明确，分歧较少",
-          "fit_signal": "分歧频率低时：这种环境通常给你更多安静推进和独立消化的空间。 对 EQ 报告来说，重点是观察它是否让你的优势自然发挥，而不是逼你长期扮演协调者。",
-          "strain_signal": "分歧频率低的主要消耗点：风险不是人太多，而是情绪线索太少，可能让关系修复和反馈节奏变得迟钝。 如果你的发展杠杆正好落在 ER/RM，这个变量要优先验证。",
-          "what_to_verify": "这个岗位里的分歧频率通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？",
-          "do_not_overread": "这不是具体职业推荐，只是帮助你观察环境变量。",
-          "interview_question": "这个岗位里的分歧频率通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？",
+          "meaning": "分歧、投诉、谈判或资源博弈出现的频率",
+          "fit_signal": "适合需要先把任务做深、减少连续情绪切换的阶段。",
+          "strain_signal": "风险是关系信号不足时，你可能难以及时校准他人预期。",
+          "interview_question": "这个环境是否真的安静，还是只是把沟通延后到危机时？",
           "role_observation_checklist": [
-            "观察分歧频率是稳定可预期，还是经常突然升高。",
-            "观察情绪性沟通是否有明确负责人，而不是默认落到最愿意回应的人身上。",
-            "观察你在一天结束后是更清楚、更有能量，还是持续反刍和耗竭。"
+            "看会议是否有明确目的和结束条件。",
+            "看反馈是否具体到行为，而不是停留在人身感受。",
+            "看团队是否允许人暂时退出高情绪对话。"
           ],
-          "team_risk": "如果分歧频率被低估，团队可能把隐形沟通成本当成“性格好的人自然会做”。",
-          "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。",
-          "manager_note": "和管理者确认分歧处理方式：争议是靠流程、角色权限，还是靠个人关系缓冲。"
+          "team_risk": "如果这个变量被长期忽视，团队会把情绪成本转嫁给最愿意承担的人。",
+          "recovery_condition": "需要可预期的暂停、复盘和交接空间。",
+          "what_to_verify": "这个环境是否真的安静，还是只是把沟通延后到危机时？",
+          "do_not_overread": "This describes an environment variable, not a role recommendation."
         },
         "en": {
           "label": "Conflict frequency: low",
-          "meaning": "clear norms and relatively few disagreements",
-          "fit_signal": "When conflict exposure is low: This setting usually gives you more quiet execution time and room to process alone. For this EQ report, the question is whether the setting lets your strengths operate naturally instead of making you the default emotional coordinator.",
-          "strain_signal": "The strain point at low conflict exposure: The risk is not too much people-contact; it is too little emotional signal, which can make repair and feedback rhythms slower. If your development lever sits in ER or RM, verify this variable early.",
-          "what_to_verify": "What level of conflict exposure does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?",
-          "do_not_overread": "This is not an occupation recommendation. It is a lens for reading the work environment.",
-          "interview_question": "What level of conflict exposure does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?",
+          "meaning": "how often disagreements, complaints, negotiations, or resource tensions appear",
+          "fit_signal": "Helpful when the work requires depth, fewer social switches, and more continuity.",
+          "strain_signal": "The strain is that fewer relational cues can make expectation-setting slower.",
+          "interview_question": "Is the environment genuinely quiet, or does it only postpone communication until there is a problem?",
           "role_observation_checklist": [
-            "Notice whether conflict exposure is predictable or spikes without warning.",
-            "Notice whether emotional coordination has a clear owner or falls to the most responsive person.",
-            "Notice whether you end the day clearer and steadier, or still replaying conversations."
+            "Notice whether meetings have a clear purpose and ending point.",
+            "Notice whether feedback targets behavior rather than personal character.",
+            "Notice whether people can step out of emotionally loaded conversations when needed."
           ],
-          "team_risk": "If conflict exposure is underestimated, the team may treat invisible coordination as something emotionally capable people will simply absorb.",
-          "safe_experiment": "Observe rhythm and recovery space for one week before judging fit from a job title.",
-          "manager_note": "Ask whether disagreement is handled through process, role authority, or informal relationship repair."
+          "team_risk": "If this variable is ignored, teams often shift emotional cost onto the person most willing to carry it.",
+          "recovery_condition": "Requires predictable space for pause, review, and handoff.",
+          "what_to_verify": "Is the environment genuinely quiet, or does it only postpone communication until there is a problem?",
+          "do_not_overread": "This describes an environment variable, not a role recommendation."
         },
         "meta": {
-          "v19_source_id": "eq.career_environment.conflict_frequency.low",
-          "claim_risk": "medium"
+          "id": "conflict_frequency_low",
+          "asset_type": "career_environment_base",
+          "v23_source_id": "conflict_frequency_low",
+          "claim_risk": "medium",
+          "risk_notes": "Do not map to specific occupations.",
+          "variable": "conflict_frequency",
+          "level": "low",
+          "overlay_imported": false
         }
       },
       "medium": {
         "zh-CN": {
           "label": "冲突频率：中",
-          "meaning": "周期性分歧，需要协商和复盘",
-          "fit_signal": "分歧频率中时：这种环境有足够互动来使用你的关系优势，也保留一定独立节奏。 对 EQ 报告来说，重点是观察它是否让你的优势自然发挥，而不是逼你长期扮演协调者。",
-          "strain_signal": "分歧频率中的主要消耗点：风险在于边界模糊：有些沟通值得投入，有些只是消耗。 如果你的发展杠杆正好落在 ER/RM，这个变量要优先验证。",
-          "what_to_verify": "这个岗位里的分歧频率通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？",
-          "do_not_overread": "这不是具体职业推荐，只是帮助你观察环境变量。",
-          "interview_question": "这个岗位里的分歧频率通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？",
+          "meaning": "分歧、投诉、谈判或资源博弈出现的频率",
+          "fit_signal": "适合在互动和独立之间切换，并用复盘保持稳定。",
+          "strain_signal": "风险是模糊边界让互动慢慢侵入恢复时间。",
+          "interview_question": "团队是否有清楚的会议节奏、反馈方式和恢复窗口？",
           "role_observation_checklist": [
-            "观察分歧频率是稳定可预期，还是经常突然升高。",
-            "观察情绪性沟通是否有明确负责人，而不是默认落到最愿意回应的人身上。",
-            "观察你在一天结束后是更清楚、更有能量，还是持续反刍和耗竭。"
+            "看会议是否有明确目的和结束条件。",
+            "看反馈是否具体到行为，而不是停留在人身感受。",
+            "看团队是否允许人暂时退出高情绪对话。"
           ],
-          "team_risk": "如果分歧频率被低估，团队可能把隐形沟通成本当成“性格好的人自然会做”。",
-          "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。",
-          "manager_note": "和管理者确认分歧处理方式：争议是靠流程、角色权限，还是靠个人关系缓冲。"
+          "team_risk": "如果这个变量被长期忽视，团队会把情绪成本转嫁给最愿意承担的人。",
+          "recovery_condition": "需要可预期的暂停、复盘和交接空间。",
+          "what_to_verify": "团队是否有清楚的会议节奏、反馈方式和恢复窗口？",
+          "do_not_overread": "This describes an environment variable, not a role recommendation."
         },
         "en": {
           "label": "Conflict frequency: medium",
-          "meaning": "periodic disagreement requiring negotiation and review",
-          "fit_signal": "When conflict exposure is medium: This setting gives you enough interaction to use relational strengths while still leaving some independent rhythm. For this EQ report, the question is whether the setting lets your strengths operate naturally instead of making you the default emotional coordinator.",
-          "strain_signal": "The strain point at medium conflict exposure: The risk is blurred boundaries: some conversations deserve investment, while others only drain attention. If your development lever sits in ER or RM, verify this variable early.",
-          "what_to_verify": "What level of conflict exposure does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?",
-          "do_not_overread": "This is not an occupation recommendation. It is a lens for reading the work environment.",
-          "interview_question": "What level of conflict exposure does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?",
+          "meaning": "how often disagreements, complaints, negotiations, or resource tensions appear",
+          "fit_signal": "Useful when you can move between interaction and solo work with enough review time.",
+          "strain_signal": "The strain is that unclear boundaries can slowly eat into recovery time.",
+          "interview_question": "Does the team have clear meeting rhythm, feedback norms, and recovery windows?",
           "role_observation_checklist": [
-            "Notice whether conflict exposure is predictable or spikes without warning.",
-            "Notice whether emotional coordination has a clear owner or falls to the most responsive person.",
-            "Notice whether you end the day clearer and steadier, or still replaying conversations."
+            "Notice whether meetings have a clear purpose and ending point.",
+            "Notice whether feedback targets behavior rather than personal character.",
+            "Notice whether people can step out of emotionally loaded conversations when needed."
           ],
-          "team_risk": "If conflict exposure is underestimated, the team may treat invisible coordination as something emotionally capable people will simply absorb.",
-          "safe_experiment": "Observe rhythm and recovery space for one week before judging fit from a job title.",
-          "manager_note": "Ask whether disagreement is handled through process, role authority, or informal relationship repair."
+          "team_risk": "If this variable is ignored, teams often shift emotional cost onto the person most willing to carry it.",
+          "recovery_condition": "Requires predictable space for pause, review, and handoff.",
+          "what_to_verify": "Does the team have clear meeting rhythm, feedback norms, and recovery windows?",
+          "do_not_overread": "This describes an environment variable, not a role recommendation."
         },
         "meta": {
-          "v19_source_id": "eq.career_environment.conflict_frequency.medium",
-          "claim_risk": "medium"
+          "id": "conflict_frequency_medium",
+          "asset_type": "career_environment_base",
+          "v23_source_id": "conflict_frequency_medium",
+          "claim_risk": "medium",
+          "risk_notes": "Do not map to specific occupations.",
+          "variable": "conflict_frequency",
+          "level": "medium",
+          "overlay_imported": false
         }
       },
       "high": {
         "zh-CN": {
           "label": "冲突频率：高",
-          "meaning": "经常有投诉、博弈、优先级冲突或强反馈",
-          "fit_signal": "分歧频率高时：这种环境会频繁调用你的共情、调节和关系判断。 对 EQ 报告来说，重点是观察它是否让你的优势自然发挥，而不是逼你长期扮演协调者。",
-          "strain_signal": "分歧频率高的主要消耗点：如果恢复机制不足，你可能很快从“能回应”变成“被持续拉扯”。 如果你的发展杠杆正好落在 ER/RM，这个变量要优先验证。",
-          "what_to_verify": "这个岗位里的分歧频率通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？",
-          "do_not_overread": "这不是具体职业推荐，只是帮助你观察环境变量。",
-          "interview_question": "这个岗位里的分歧频率通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？",
+          "meaning": "分歧、投诉、谈判或资源博弈出现的频率",
+          "fit_signal": "适合能把情绪信息转成沟通和决策的人，但需要明确边界。",
+          "strain_signal": "风险是持续承接他人情绪，导致判断和恢复被消耗。",
+          "interview_question": "长期看，这个环境是否允许暂停、交接和情绪复位？",
           "role_observation_checklist": [
-            "观察分歧频率是稳定可预期，还是经常突然升高。",
-            "观察情绪性沟通是否有明确负责人，而不是默认落到最愿意回应的人身上。",
-            "观察你在一天结束后是更清楚、更有能量，还是持续反刍和耗竭。"
+            "看会议是否有明确目的和结束条件。",
+            "看反馈是否具体到行为，而不是停留在人身感受。",
+            "看团队是否允许人暂时退出高情绪对话。"
           ],
-          "team_risk": "如果分歧频率被低估，团队可能把隐形沟通成本当成“性格好的人自然会做”。",
-          "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。",
-          "manager_note": "和管理者确认分歧处理方式：争议是靠流程、角色权限，还是靠个人关系缓冲。"
+          "team_risk": "如果这个变量被长期忽视，团队会把情绪成本转嫁给最愿意承担的人。",
+          "recovery_condition": "需要可预期的暂停、复盘和交接空间。",
+          "what_to_verify": "长期看，这个环境是否允许暂停、交接和情绪复位？",
+          "do_not_overread": "This describes an environment variable, not a role recommendation."
         },
         "en": {
           "label": "Conflict frequency: high",
-          "meaning": "frequent complaints, tradeoffs, priority conflicts, or strong feedback",
-          "fit_signal": "When conflict exposure is high: This setting will call on empathy, regulation, and relationship judgment often. For this EQ report, the question is whether the setting lets your strengths operate naturally instead of making you the default emotional coordinator.",
-          "strain_signal": "The strain point at high conflict exposure: If recovery is weak, you may shift quickly from being responsive to feeling continuously pulled in. If your development lever sits in ER or RM, verify this variable early.",
-          "what_to_verify": "What level of conflict exposure does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?",
-          "do_not_overread": "This is not an occupation recommendation. It is a lens for reading the work environment.",
-          "interview_question": "What level of conflict exposure does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?",
+          "meaning": "how often disagreements, complaints, negotiations, or resource tensions appear",
+          "fit_signal": "Can work well for people who turn emotional information into communication and decisions, if boundaries are explicit.",
+          "strain_signal": "The strain is sustained emotional load, which can drain judgment and recovery.",
+          "interview_question": "Over time, does the environment allow pause, handoff, and emotional reset?",
           "role_observation_checklist": [
-            "Notice whether conflict exposure is predictable or spikes without warning.",
-            "Notice whether emotional coordination has a clear owner or falls to the most responsive person.",
-            "Notice whether you end the day clearer and steadier, or still replaying conversations."
+            "Notice whether meetings have a clear purpose and ending point.",
+            "Notice whether feedback targets behavior rather than personal character.",
+            "Notice whether people can step out of emotionally loaded conversations when needed."
           ],
-          "team_risk": "If conflict exposure is underestimated, the team may treat invisible coordination as something emotionally capable people will simply absorb.",
-          "safe_experiment": "Observe rhythm and recovery space for one week before judging fit from a job title.",
-          "manager_note": "Ask whether disagreement is handled through process, role authority, or informal relationship repair."
+          "team_risk": "If this variable is ignored, teams often shift emotional cost onto the person most willing to carry it.",
+          "recovery_condition": "Requires predictable space for pause, review, and handoff.",
+          "what_to_verify": "Over time, does the environment allow pause, handoff, and emotional reset?",
+          "do_not_overread": "This describes an environment variable, not a role recommendation."
         },
         "meta": {
-          "v19_source_id": "eq.career_environment.conflict_frequency.high",
-          "claim_risk": "medium"
+          "id": "conflict_frequency_high",
+          "asset_type": "career_environment_base",
+          "v23_source_id": "conflict_frequency_high",
+          "claim_risk": "medium",
+          "risk_notes": "Do not map to specific occupations.",
+          "variable": "conflict_frequency",
+          "level": "high",
+          "overlay_imported": false
         }
       }
     },
@@ -372,121 +408,133 @@
       "low": {
         "zh-CN": {
           "label": "反馈强度：低",
-          "meaning": "反馈周期长，评价少且较私下",
-          "fit_signal": "反馈强度低时：这种环境通常给你更多安静推进和独立消化的空间。 对 EQ 报告来说，重点是观察它是否让你的优势自然发挥，而不是逼你长期扮演协调者。",
-          "strain_signal": "反馈强度低的主要消耗点：风险不是人太多，而是情绪线索太少，可能让关系修复和反馈节奏变得迟钝。 如果你的发展杠杆正好落在 ER/RM，这个变量要优先验证。",
-          "what_to_verify": "这个岗位里的反馈强度通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？",
-          "do_not_overread": "这不是具体职业推荐，只是帮助你观察环境变量。",
-          "interview_question": "这个岗位里的反馈强度通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？",
+          "meaning": "被评价、修改、复盘和公开讨论的频率",
+          "fit_signal": "适合需要先把任务做深、减少连续情绪切换的阶段。",
+          "strain_signal": "风险是关系信号不足时，你可能难以及时校准他人预期。",
+          "interview_question": "这个环境是否真的安静，还是只是把沟通延后到危机时？",
           "role_observation_checklist": [
-            "观察反馈强度是稳定可预期，还是经常突然升高。",
-            "观察情绪性沟通是否有明确负责人，而不是默认落到最愿意回应的人身上。",
-            "观察你在一天结束后是更清楚、更有能量，还是持续反刍和耗竭。"
+            "看会议是否有明确目的和结束条件。",
+            "看反馈是否具体到行为，而不是停留在人身感受。",
+            "看团队是否允许人暂时退出高情绪对话。"
           ],
-          "team_risk": "如果反馈强度被低估，团队可能把隐形沟通成本当成“性格好的人自然会做”。",
-          "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。",
-          "manager_note": "和管理者确认反馈规则：频率、公开程度、修改轮次和最终拍板人。"
+          "team_risk": "如果这个变量被长期忽视，团队会把情绪成本转嫁给最愿意承担的人。",
+          "recovery_condition": "需要可预期的暂停、复盘和交接空间。",
+          "what_to_verify": "这个环境是否真的安静，还是只是把沟通延后到危机时？",
+          "do_not_overread": "This describes an environment variable, not a role recommendation."
         },
         "en": {
           "label": "Feedback intensity: low",
-          "meaning": "infrequent feedback, usually private and spaced out",
-          "fit_signal": "When feedback load is low: This setting usually gives you more quiet execution time and room to process alone. For this EQ report, the question is whether the setting lets your strengths operate naturally instead of making you the default emotional coordinator.",
-          "strain_signal": "The strain point at low feedback load: The risk is not too much people-contact; it is too little emotional signal, which can make repair and feedback rhythms slower. If your development lever sits in ER or RM, verify this variable early.",
-          "what_to_verify": "What level of feedback load does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?",
-          "do_not_overread": "This is not an occupation recommendation. It is a lens for reading the work environment.",
-          "interview_question": "What level of feedback load does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?",
+          "meaning": "how often your work is reviewed, revised, discussed, or evaluated",
+          "fit_signal": "Helpful when the work requires depth, fewer social switches, and more continuity.",
+          "strain_signal": "The strain is that fewer relational cues can make expectation-setting slower.",
+          "interview_question": "Is the environment genuinely quiet, or does it only postpone communication until there is a problem?",
           "role_observation_checklist": [
-            "Notice whether feedback load is predictable or spikes without warning.",
-            "Notice whether emotional coordination has a clear owner or falls to the most responsive person.",
-            "Notice whether you end the day clearer and steadier, or still replaying conversations."
+            "Notice whether meetings have a clear purpose and ending point.",
+            "Notice whether feedback targets behavior rather than personal character.",
+            "Notice whether people can step out of emotionally loaded conversations when needed."
           ],
-          "team_risk": "If feedback load is underestimated, the team may treat invisible coordination as something emotionally capable people will simply absorb.",
-          "safe_experiment": "Observe rhythm and recovery space for one week before judging fit from a job title.",
-          "manager_note": "Ask about feedback frequency, public visibility, revision loops, and who makes the final call."
+          "team_risk": "If this variable is ignored, teams often shift emotional cost onto the person most willing to carry it.",
+          "recovery_condition": "Requires predictable space for pause, review, and handoff.",
+          "what_to_verify": "Is the environment genuinely quiet, or does it only postpone communication until there is a problem?",
+          "do_not_overread": "This describes an environment variable, not a role recommendation."
         },
         "meta": {
-          "v19_source_id": "eq.career_environment.feedback_intensity.low",
-          "claim_risk": "medium"
+          "id": "feedback_intensity_low",
+          "asset_type": "career_environment_base",
+          "v23_source_id": "feedback_intensity_low",
+          "claim_risk": "medium",
+          "risk_notes": "Do not map to specific occupations.",
+          "variable": "feedback_intensity",
+          "level": "low",
+          "overlay_imported": false
         }
       },
       "medium": {
         "zh-CN": {
           "label": "反馈强度：中",
-          "meaning": "有固定复盘和修改节奏",
-          "fit_signal": "反馈强度中时：这种环境有足够互动来使用你的关系优势，也保留一定独立节奏。 对 EQ 报告来说，重点是观察它是否让你的优势自然发挥，而不是逼你长期扮演协调者。",
-          "strain_signal": "反馈强度中的主要消耗点：风险在于边界模糊：有些沟通值得投入，有些只是消耗。 如果你的发展杠杆正好落在 ER/RM，这个变量要优先验证。",
-          "what_to_verify": "这个岗位里的反馈强度通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？",
-          "do_not_overread": "这不是具体职业推荐，只是帮助你观察环境变量。",
-          "interview_question": "这个岗位里的反馈强度通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？",
+          "meaning": "被评价、修改、复盘和公开讨论的频率",
+          "fit_signal": "适合在互动和独立之间切换，并用复盘保持稳定。",
+          "strain_signal": "风险是模糊边界让互动慢慢侵入恢复时间。",
+          "interview_question": "团队是否有清楚的会议节奏、反馈方式和恢复窗口？",
           "role_observation_checklist": [
-            "观察反馈强度是稳定可预期，还是经常突然升高。",
-            "观察情绪性沟通是否有明确负责人，而不是默认落到最愿意回应的人身上。",
-            "观察你在一天结束后是更清楚、更有能量，还是持续反刍和耗竭。"
+            "看会议是否有明确目的和结束条件。",
+            "看反馈是否具体到行为，而不是停留在人身感受。",
+            "看团队是否允许人暂时退出高情绪对话。"
           ],
-          "team_risk": "如果反馈强度被低估，团队可能把隐形沟通成本当成“性格好的人自然会做”。",
-          "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。",
-          "manager_note": "和管理者确认反馈规则：频率、公开程度、修改轮次和最终拍板人。"
+          "team_risk": "如果这个变量被长期忽视，团队会把情绪成本转嫁给最愿意承担的人。",
+          "recovery_condition": "需要可预期的暂停、复盘和交接空间。",
+          "what_to_verify": "团队是否有清楚的会议节奏、反馈方式和恢复窗口？",
+          "do_not_overread": "This describes an environment variable, not a role recommendation."
         },
         "en": {
           "label": "Feedback intensity: medium",
-          "meaning": "regular review and revision cycles",
-          "fit_signal": "When feedback load is medium: This setting gives you enough interaction to use relational strengths while still leaving some independent rhythm. For this EQ report, the question is whether the setting lets your strengths operate naturally instead of making you the default emotional coordinator.",
-          "strain_signal": "The strain point at medium feedback load: The risk is blurred boundaries: some conversations deserve investment, while others only drain attention. If your development lever sits in ER or RM, verify this variable early.",
-          "what_to_verify": "What level of feedback load does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?",
-          "do_not_overread": "This is not an occupation recommendation. It is a lens for reading the work environment.",
-          "interview_question": "What level of feedback load does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?",
+          "meaning": "how often your work is reviewed, revised, discussed, or evaluated",
+          "fit_signal": "Useful when you can move between interaction and solo work with enough review time.",
+          "strain_signal": "The strain is that unclear boundaries can slowly eat into recovery time.",
+          "interview_question": "Does the team have clear meeting rhythm, feedback norms, and recovery windows?",
           "role_observation_checklist": [
-            "Notice whether feedback load is predictable or spikes without warning.",
-            "Notice whether emotional coordination has a clear owner or falls to the most responsive person.",
-            "Notice whether you end the day clearer and steadier, or still replaying conversations."
+            "Notice whether meetings have a clear purpose and ending point.",
+            "Notice whether feedback targets behavior rather than personal character.",
+            "Notice whether people can step out of emotionally loaded conversations when needed."
           ],
-          "team_risk": "If feedback load is underestimated, the team may treat invisible coordination as something emotionally capable people will simply absorb.",
-          "safe_experiment": "Observe rhythm and recovery space for one week before judging fit from a job title.",
-          "manager_note": "Ask about feedback frequency, public visibility, revision loops, and who makes the final call."
+          "team_risk": "If this variable is ignored, teams often shift emotional cost onto the person most willing to carry it.",
+          "recovery_condition": "Requires predictable space for pause, review, and handoff.",
+          "what_to_verify": "Does the team have clear meeting rhythm, feedback norms, and recovery windows?",
+          "do_not_overread": "This describes an environment variable, not a role recommendation."
         },
         "meta": {
-          "v19_source_id": "eq.career_environment.feedback_intensity.medium",
-          "claim_risk": "medium"
+          "id": "feedback_intensity_medium",
+          "asset_type": "career_environment_base",
+          "v23_source_id": "feedback_intensity_medium",
+          "claim_risk": "medium",
+          "risk_notes": "Do not map to specific occupations.",
+          "variable": "feedback_intensity",
+          "level": "medium",
+          "overlay_imported": false
         }
       },
       "high": {
         "zh-CN": {
           "label": "反馈强度：高",
-          "meaning": "频繁被评价、公开修正或快速迭代",
-          "fit_signal": "反馈强度高时：这种环境会频繁调用你的共情、调节和关系判断。 对 EQ 报告来说，重点是观察它是否让你的优势自然发挥，而不是逼你长期扮演协调者。",
-          "strain_signal": "反馈强度高的主要消耗点：如果恢复机制不足，你可能很快从“能回应”变成“被持续拉扯”。 如果你的发展杠杆正好落在 ER/RM，这个变量要优先验证。",
-          "what_to_verify": "这个岗位里的反馈强度通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？",
-          "do_not_overread": "这不是具体职业推荐，只是帮助你观察环境变量。",
-          "interview_question": "这个岗位里的反馈强度通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？",
+          "meaning": "被评价、修改、复盘和公开讨论的频率",
+          "fit_signal": "适合能把情绪信息转成沟通和决策的人，但需要明确边界。",
+          "strain_signal": "风险是持续承接他人情绪，导致判断和恢复被消耗。",
+          "interview_question": "长期看，这个环境是否允许暂停、交接和情绪复位？",
           "role_observation_checklist": [
-            "观察反馈强度是稳定可预期，还是经常突然升高。",
-            "观察情绪性沟通是否有明确负责人，而不是默认落到最愿意回应的人身上。",
-            "观察你在一天结束后是更清楚、更有能量，还是持续反刍和耗竭。"
+            "看会议是否有明确目的和结束条件。",
+            "看反馈是否具体到行为，而不是停留在人身感受。",
+            "看团队是否允许人暂时退出高情绪对话。"
           ],
-          "team_risk": "如果反馈强度被低估，团队可能把隐形沟通成本当成“性格好的人自然会做”。",
-          "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。",
-          "manager_note": "和管理者确认反馈规则：频率、公开程度、修改轮次和最终拍板人。"
+          "team_risk": "如果这个变量被长期忽视，团队会把情绪成本转嫁给最愿意承担的人。",
+          "recovery_condition": "需要可预期的暂停、复盘和交接空间。",
+          "what_to_verify": "长期看，这个环境是否允许暂停、交接和情绪复位？",
+          "do_not_overread": "This describes an environment variable, not a role recommendation."
         },
         "en": {
           "label": "Feedback intensity: high",
-          "meaning": "frequent evaluation, visible correction, or rapid iteration",
-          "fit_signal": "When feedback load is high: This setting will call on empathy, regulation, and relationship judgment often. For this EQ report, the question is whether the setting lets your strengths operate naturally instead of making you the default emotional coordinator.",
-          "strain_signal": "The strain point at high feedback load: If recovery is weak, you may shift quickly from being responsive to feeling continuously pulled in. If your development lever sits in ER or RM, verify this variable early.",
-          "what_to_verify": "What level of feedback load does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?",
-          "do_not_overread": "This is not an occupation recommendation. It is a lens for reading the work environment.",
-          "interview_question": "What level of feedback load does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?",
+          "meaning": "how often your work is reviewed, revised, discussed, or evaluated",
+          "fit_signal": "Can work well for people who turn emotional information into communication and decisions, if boundaries are explicit.",
+          "strain_signal": "The strain is sustained emotional load, which can drain judgment and recovery.",
+          "interview_question": "Over time, does the environment allow pause, handoff, and emotional reset?",
           "role_observation_checklist": [
-            "Notice whether feedback load is predictable or spikes without warning.",
-            "Notice whether emotional coordination has a clear owner or falls to the most responsive person.",
-            "Notice whether you end the day clearer and steadier, or still replaying conversations."
+            "Notice whether meetings have a clear purpose and ending point.",
+            "Notice whether feedback targets behavior rather than personal character.",
+            "Notice whether people can step out of emotionally loaded conversations when needed."
           ],
-          "team_risk": "If feedback load is underestimated, the team may treat invisible coordination as something emotionally capable people will simply absorb.",
-          "safe_experiment": "Observe rhythm and recovery space for one week before judging fit from a job title.",
-          "manager_note": "Ask about feedback frequency, public visibility, revision loops, and who makes the final call."
+          "team_risk": "If this variable is ignored, teams often shift emotional cost onto the person most willing to carry it.",
+          "recovery_condition": "Requires predictable space for pause, review, and handoff.",
+          "what_to_verify": "Over time, does the environment allow pause, handoff, and emotional reset?",
+          "do_not_overread": "This describes an environment variable, not a role recommendation."
         },
         "meta": {
-          "v19_source_id": "eq.career_environment.feedback_intensity.high",
-          "claim_risk": "medium"
+          "id": "feedback_intensity_high",
+          "asset_type": "career_environment_base",
+          "v23_source_id": "feedback_intensity_high",
+          "claim_risk": "medium",
+          "risk_notes": "Do not map to specific occupations.",
+          "variable": "feedback_intensity",
+          "level": "high",
+          "overlay_imported": false
         }
       }
     },
@@ -494,121 +542,133 @@
       "low": {
         "zh-CN": {
           "label": "自主恢复空间：低",
-          "meaning": "节奏被外部持续推动，独处恢复少",
-          "fit_signal": "自主恢复空间低时：这种环境通常给你更多安静推进和独立消化的空间。 对 EQ 报告来说，重点是观察它是否让你的优势自然发挥，而不是逼你长期扮演协调者。",
-          "strain_signal": "自主恢复空间低的主要消耗点：风险不是人太多，而是情绪线索太少，可能让关系修复和反馈节奏变得迟钝。 如果你的发展杠杆正好落在 ER/RM，这个变量要优先验证。",
-          "what_to_verify": "这个岗位里的自主恢复空间通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？",
-          "do_not_overread": "这不是具体职业推荐，只是帮助你观察环境变量。",
-          "interview_question": "这个岗位里的自主恢复空间通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？",
+          "meaning": "你能否安排独处、复盘和情绪恢复的空间",
+          "fit_signal": "适合需要先把任务做深、减少连续情绪切换的阶段。",
+          "strain_signal": "风险是关系信号不足时，你可能难以及时校准他人预期。",
+          "interview_question": "这个环境是否真的安静，还是只是把沟通延后到危机时？",
           "role_observation_checklist": [
-            "观察自主恢复空间是稳定可预期，还是经常突然升高。",
-            "观察情绪性沟通是否有明确负责人，而不是默认落到最愿意回应的人身上。",
-            "观察你在一天结束后是更清楚、更有能量，还是持续反刍和耗竭。"
+            "看会议是否有明确目的和结束条件。",
+            "看反馈是否具体到行为，而不是停留在人身感受。",
+            "看团队是否允许人暂时退出高情绪对话。"
           ],
-          "team_risk": "如果自主恢复空间被低估，团队可能把隐形沟通成本当成“性格好的人自然会做”。",
-          "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。",
-          "manager_note": "和管理者确认恢复空间：高压任务后是否允许安静复盘、调节节奏或切换任务。"
+          "team_risk": "如果这个变量被长期忽视，团队会把情绪成本转嫁给最愿意承担的人。",
+          "recovery_condition": "需要可预期的暂停、复盘和交接空间。",
+          "what_to_verify": "这个环境是否真的安静，还是只是把沟通延后到危机时？",
+          "do_not_overread": "This describes an environment variable, not a role recommendation."
         },
         "en": {
           "label": "Autonomy and recovery space: low",
-          "meaning": "pace is externally driven with little private recovery time",
-          "fit_signal": "When recovery autonomy is low: This setting usually gives you more quiet execution time and room to process alone. For this EQ report, the question is whether the setting lets your strengths operate naturally instead of making you the default emotional coordinator.",
-          "strain_signal": "The strain point at low recovery autonomy: The risk is not too much people-contact; it is too little emotional signal, which can make repair and feedback rhythms slower. If your development lever sits in ER or RM, verify this variable early.",
-          "what_to_verify": "What level of recovery autonomy does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?",
-          "do_not_overread": "This is not an occupation recommendation. It is a lens for reading the work environment.",
-          "interview_question": "What level of recovery autonomy does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?",
+          "meaning": "whether you can create space for solitude, reflection, and emotional reset",
+          "fit_signal": "Helpful when the work requires depth, fewer social switches, and more continuity.",
+          "strain_signal": "The strain is that fewer relational cues can make expectation-setting slower.",
+          "interview_question": "Is the environment genuinely quiet, or does it only postpone communication until there is a problem?",
           "role_observation_checklist": [
-            "Notice whether recovery autonomy is predictable or spikes without warning.",
-            "Notice whether emotional coordination has a clear owner or falls to the most responsive person.",
-            "Notice whether you end the day clearer and steadier, or still replaying conversations."
+            "Notice whether meetings have a clear purpose and ending point.",
+            "Notice whether feedback targets behavior rather than personal character.",
+            "Notice whether people can step out of emotionally loaded conversations when needed."
           ],
-          "team_risk": "If recovery autonomy is underestimated, the team may treat invisible coordination as something emotionally capable people will simply absorb.",
-          "safe_experiment": "Observe rhythm and recovery space for one week before judging fit from a job title.",
-          "manager_note": "Ask whether high-pressure work is followed by quiet review time, pace control, or task switching."
+          "team_risk": "If this variable is ignored, teams often shift emotional cost onto the person most willing to carry it.",
+          "recovery_condition": "Requires predictable space for pause, review, and handoff.",
+          "what_to_verify": "Is the environment genuinely quiet, or does it only postpone communication until there is a problem?",
+          "do_not_overread": "This describes an environment variable, not a role recommendation."
         },
         "meta": {
-          "v19_source_id": "eq.career_environment.autonomy_recovery.low",
-          "claim_risk": "medium"
+          "id": "autonomy_recovery_low",
+          "asset_type": "career_environment_base",
+          "v23_source_id": "autonomy_recovery_low",
+          "claim_risk": "medium",
+          "risk_notes": "Do not map to specific occupations.",
+          "variable": "autonomy_recovery",
+          "level": "low",
+          "overlay_imported": false
         }
       },
       "medium": {
         "zh-CN": {
           "label": "自主恢复空间：中",
-          "meaning": "有部分自主管理时间",
-          "fit_signal": "自主恢复空间中时：这种环境有足够互动来使用你的关系优势，也保留一定独立节奏。 对 EQ 报告来说，重点是观察它是否让你的优势自然发挥，而不是逼你长期扮演协调者。",
-          "strain_signal": "自主恢复空间中的主要消耗点：风险在于边界模糊：有些沟通值得投入，有些只是消耗。 如果你的发展杠杆正好落在 ER/RM，这个变量要优先验证。",
-          "what_to_verify": "这个岗位里的自主恢复空间通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？",
-          "do_not_overread": "这不是具体职业推荐，只是帮助你观察环境变量。",
-          "interview_question": "这个岗位里的自主恢复空间通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？",
+          "meaning": "你能否安排独处、复盘和情绪恢复的空间",
+          "fit_signal": "适合在互动和独立之间切换，并用复盘保持稳定。",
+          "strain_signal": "风险是模糊边界让互动慢慢侵入恢复时间。",
+          "interview_question": "团队是否有清楚的会议节奏、反馈方式和恢复窗口？",
           "role_observation_checklist": [
-            "观察自主恢复空间是稳定可预期，还是经常突然升高。",
-            "观察情绪性沟通是否有明确负责人，而不是默认落到最愿意回应的人身上。",
-            "观察你在一天结束后是更清楚、更有能量，还是持续反刍和耗竭。"
+            "看会议是否有明确目的和结束条件。",
+            "看反馈是否具体到行为，而不是停留在人身感受。",
+            "看团队是否允许人暂时退出高情绪对话。"
           ],
-          "team_risk": "如果自主恢复空间被低估，团队可能把隐形沟通成本当成“性格好的人自然会做”。",
-          "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。",
-          "manager_note": "和管理者确认恢复空间：高压任务后是否允许安静复盘、调节节奏或切换任务。"
+          "team_risk": "如果这个变量被长期忽视，团队会把情绪成本转嫁给最愿意承担的人。",
+          "recovery_condition": "需要可预期的暂停、复盘和交接空间。",
+          "what_to_verify": "团队是否有清楚的会议节奏、反馈方式和恢复窗口？",
+          "do_not_overread": "This describes an environment variable, not a role recommendation."
         },
         "en": {
           "label": "Autonomy and recovery space: medium",
-          "meaning": "some control over pacing and recovery",
-          "fit_signal": "When recovery autonomy is medium: This setting gives you enough interaction to use relational strengths while still leaving some independent rhythm. For this EQ report, the question is whether the setting lets your strengths operate naturally instead of making you the default emotional coordinator.",
-          "strain_signal": "The strain point at medium recovery autonomy: The risk is blurred boundaries: some conversations deserve investment, while others only drain attention. If your development lever sits in ER or RM, verify this variable early.",
-          "what_to_verify": "What level of recovery autonomy does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?",
-          "do_not_overread": "This is not an occupation recommendation. It is a lens for reading the work environment.",
-          "interview_question": "What level of recovery autonomy does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?",
+          "meaning": "whether you can create space for solitude, reflection, and emotional reset",
+          "fit_signal": "Useful when you can move between interaction and solo work with enough review time.",
+          "strain_signal": "The strain is that unclear boundaries can slowly eat into recovery time.",
+          "interview_question": "Does the team have clear meeting rhythm, feedback norms, and recovery windows?",
           "role_observation_checklist": [
-            "Notice whether recovery autonomy is predictable or spikes without warning.",
-            "Notice whether emotional coordination has a clear owner or falls to the most responsive person.",
-            "Notice whether you end the day clearer and steadier, or still replaying conversations."
+            "Notice whether meetings have a clear purpose and ending point.",
+            "Notice whether feedback targets behavior rather than personal character.",
+            "Notice whether people can step out of emotionally loaded conversations when needed."
           ],
-          "team_risk": "If recovery autonomy is underestimated, the team may treat invisible coordination as something emotionally capable people will simply absorb.",
-          "safe_experiment": "Observe rhythm and recovery space for one week before judging fit from a job title.",
-          "manager_note": "Ask whether high-pressure work is followed by quiet review time, pace control, or task switching."
+          "team_risk": "If this variable is ignored, teams often shift emotional cost onto the person most willing to carry it.",
+          "recovery_condition": "Requires predictable space for pause, review, and handoff.",
+          "what_to_verify": "Does the team have clear meeting rhythm, feedback norms, and recovery windows?",
+          "do_not_overread": "This describes an environment variable, not a role recommendation."
         },
         "meta": {
-          "v19_source_id": "eq.career_environment.autonomy_recovery.medium",
-          "claim_risk": "medium"
+          "id": "autonomy_recovery_medium",
+          "asset_type": "career_environment_base",
+          "v23_source_id": "autonomy_recovery_medium",
+          "claim_risk": "medium",
+          "risk_notes": "Do not map to specific occupations.",
+          "variable": "autonomy_recovery",
+          "level": "medium",
+          "overlay_imported": false
         }
       },
       "high": {
         "zh-CN": {
           "label": "自主恢复空间：高",
-          "meaning": "能安排独处、复盘和恢复节奏",
-          "fit_signal": "自主恢复空间高时：这种环境会频繁调用你的共情、调节和关系判断。 对 EQ 报告来说，重点是观察它是否让你的优势自然发挥，而不是逼你长期扮演协调者。",
-          "strain_signal": "自主恢复空间高的主要消耗点：如果恢复机制不足，你可能很快从“能回应”变成“被持续拉扯”。 如果你的发展杠杆正好落在 ER/RM，这个变量要优先验证。",
-          "what_to_verify": "这个岗位里的自主恢复空间通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？",
-          "do_not_overread": "这不是具体职业推荐，只是帮助你观察环境变量。",
-          "interview_question": "这个岗位里的自主恢复空间通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？",
+          "meaning": "你能否安排独处、复盘和情绪恢复的空间",
+          "fit_signal": "适合能把情绪信息转成沟通和决策的人，但需要明确边界。",
+          "strain_signal": "风险是持续承接他人情绪，导致判断和恢复被消耗。",
+          "interview_question": "长期看，这个环境是否允许暂停、交接和情绪复位？",
           "role_observation_checklist": [
-            "观察自主恢复空间是稳定可预期，还是经常突然升高。",
-            "观察情绪性沟通是否有明确负责人，而不是默认落到最愿意回应的人身上。",
-            "观察你在一天结束后是更清楚、更有能量，还是持续反刍和耗竭。"
+            "看会议是否有明确目的和结束条件。",
+            "看反馈是否具体到行为，而不是停留在人身感受。",
+            "看团队是否允许人暂时退出高情绪对话。"
           ],
-          "team_risk": "如果自主恢复空间被低估，团队可能把隐形沟通成本当成“性格好的人自然会做”。",
-          "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。",
-          "manager_note": "和管理者确认恢复空间：高压任务后是否允许安静复盘、调节节奏或切换任务。"
+          "team_risk": "如果这个变量被长期忽视，团队会把情绪成本转嫁给最愿意承担的人。",
+          "recovery_condition": "需要可预期的暂停、复盘和交接空间。",
+          "what_to_verify": "长期看，这个环境是否允许暂停、交接和情绪复位？",
+          "do_not_overread": "This describes an environment variable, not a role recommendation."
         },
         "en": {
           "label": "Autonomy and recovery space: high",
-          "meaning": "meaningful control over focus, review, and recovery rhythm",
-          "fit_signal": "When recovery autonomy is high: This setting will call on empathy, regulation, and relationship judgment often. For this EQ report, the question is whether the setting lets your strengths operate naturally instead of making you the default emotional coordinator.",
-          "strain_signal": "The strain point at high recovery autonomy: If recovery is weak, you may shift quickly from being responsive to feeling continuously pulled in. If your development lever sits in ER or RM, verify this variable early.",
-          "what_to_verify": "What level of recovery autonomy does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?",
-          "do_not_overread": "This is not an occupation recommendation. It is a lens for reading the work environment.",
-          "interview_question": "What level of recovery autonomy does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?",
+          "meaning": "whether you can create space for solitude, reflection, and emotional reset",
+          "fit_signal": "Can work well for people who turn emotional information into communication and decisions, if boundaries are explicit.",
+          "strain_signal": "The strain is sustained emotional load, which can drain judgment and recovery.",
+          "interview_question": "Over time, does the environment allow pause, handoff, and emotional reset?",
           "role_observation_checklist": [
-            "Notice whether recovery autonomy is predictable or spikes without warning.",
-            "Notice whether emotional coordination has a clear owner or falls to the most responsive person.",
-            "Notice whether you end the day clearer and steadier, or still replaying conversations."
+            "Notice whether meetings have a clear purpose and ending point.",
+            "Notice whether feedback targets behavior rather than personal character.",
+            "Notice whether people can step out of emotionally loaded conversations when needed."
           ],
-          "team_risk": "If recovery autonomy is underestimated, the team may treat invisible coordination as something emotionally capable people will simply absorb.",
-          "safe_experiment": "Observe rhythm and recovery space for one week before judging fit from a job title.",
-          "manager_note": "Ask whether high-pressure work is followed by quiet review time, pace control, or task switching."
+          "team_risk": "If this variable is ignored, teams often shift emotional cost onto the person most willing to carry it.",
+          "recovery_condition": "Requires predictable space for pause, review, and handoff.",
+          "what_to_verify": "Over time, does the environment allow pause, handoff, and emotional reset?",
+          "do_not_overread": "This describes an environment variable, not a role recommendation."
         },
         "meta": {
-          "v19_source_id": "eq.career_environment.autonomy_recovery.high",
-          "claim_risk": "medium"
+          "id": "autonomy_recovery_high",
+          "asset_type": "career_environment_base",
+          "v23_source_id": "autonomy_recovery_high",
+          "claim_risk": "medium",
+          "risk_notes": "Do not map to specific occupations.",
+          "variable": "autonomy_recovery",
+          "level": "high",
+          "overlay_imported": false
         }
       }
     },
@@ -616,123 +676,140 @@
       "low": {
         "zh-CN": {
           "label": "协作复杂度：低",
-          "meaning": "少数人协作，责任边界清楚",
-          "fit_signal": "协作复杂度低时：这种环境通常给你更多安静推进和独立消化的空间。 对 EQ 报告来说，重点是观察它是否让你的优势自然发挥，而不是逼你长期扮演协调者。",
-          "strain_signal": "协作复杂度低的主要消耗点：风险不是人太多，而是情绪线索太少，可能让关系修复和反馈节奏变得迟钝。 如果你的发展杠杆正好落在 ER/RM，这个变量要优先验证。",
-          "what_to_verify": "这个岗位里的协作复杂度通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？",
-          "do_not_overread": "这不是具体职业推荐，只是帮助你观察环境变量。",
-          "interview_question": "这个岗位里的协作复杂度通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？",
+          "meaning": "需要协调多少角色、目标和隐性关系压力",
+          "fit_signal": "适合需要先把任务做深、减少连续情绪切换的阶段。",
+          "strain_signal": "风险是关系信号不足时，你可能难以及时校准他人预期。",
+          "interview_question": "这个环境是否真的安静，还是只是把沟通延后到危机时？",
           "role_observation_checklist": [
-            "观察协作复杂度是稳定可预期，还是经常突然升高。",
-            "观察情绪性沟通是否有明确负责人，而不是默认落到最愿意回应的人身上。",
-            "观察你在一天结束后是更清楚、更有能量，还是持续反刍和耗竭。"
+            "看会议是否有明确目的和结束条件。",
+            "看反馈是否具体到行为，而不是停留在人身感受。",
+            "看团队是否允许人暂时退出高情绪对话。"
           ],
-          "team_risk": "如果协作复杂度被低估，团队可能把隐形沟通成本当成“性格好的人自然会做”。",
-          "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。",
-          "manager_note": "和管理者确认协作复杂度：你需要同时维护多少利益相关方、隐性期待和跨团队关系。"
+          "team_risk": "如果这个变量被长期忽视，团队会把情绪成本转嫁给最愿意承担的人。",
+          "recovery_condition": "需要可预期的暂停、复盘和交接空间。",
+          "what_to_verify": "这个环境是否真的安静，还是只是把沟通延后到危机时？",
+          "do_not_overread": "This describes an environment variable, not a role recommendation."
         },
         "en": {
           "label": "Collaboration complexity: low",
-          "meaning": "small group coordination with clear responsibility lines",
-          "fit_signal": "When coordination complexity is low: This setting usually gives you more quiet execution time and room to process alone. For this EQ report, the question is whether the setting lets your strengths operate naturally instead of making you the default emotional coordinator.",
-          "strain_signal": "The strain point at low coordination complexity: The risk is not too much people-contact; it is too little emotional signal, which can make repair and feedback rhythms slower. If your development lever sits in ER or RM, verify this variable early.",
-          "what_to_verify": "What level of coordination complexity does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?",
-          "do_not_overread": "This is not an occupation recommendation. It is a lens for reading the work environment.",
-          "interview_question": "What level of coordination complexity does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?",
+          "meaning": "how many roles, goals, and hidden relational pressures must be coordinated",
+          "fit_signal": "Helpful when the work requires depth, fewer social switches, and more continuity.",
+          "strain_signal": "The strain is that fewer relational cues can make expectation-setting slower.",
+          "interview_question": "Is the environment genuinely quiet, or does it only postpone communication until there is a problem?",
           "role_observation_checklist": [
-            "Notice whether coordination complexity is predictable or spikes without warning.",
-            "Notice whether emotional coordination has a clear owner or falls to the most responsive person.",
-            "Notice whether you end the day clearer and steadier, or still replaying conversations."
+            "Notice whether meetings have a clear purpose and ending point.",
+            "Notice whether feedback targets behavior rather than personal character.",
+            "Notice whether people can step out of emotionally loaded conversations when needed."
           ],
-          "team_risk": "If coordination complexity is underestimated, the team may treat invisible coordination as something emotionally capable people will simply absorb.",
-          "safe_experiment": "Observe rhythm and recovery space for one week before judging fit from a job title.",
-          "manager_note": "Ask how many stakeholders, hidden expectations, and cross-team relationships the role must hold at once."
+          "team_risk": "If this variable is ignored, teams often shift emotional cost onto the person most willing to carry it.",
+          "recovery_condition": "Requires predictable space for pause, review, and handoff.",
+          "what_to_verify": "Is the environment genuinely quiet, or does it only postpone communication until there is a problem?",
+          "do_not_overread": "This describes an environment variable, not a role recommendation."
         },
         "meta": {
-          "v19_source_id": "eq.career_environment.collaboration_complexity.low",
-          "claim_risk": "medium"
+          "id": "collaboration_complexity_low",
+          "asset_type": "career_environment_base",
+          "v23_source_id": "collaboration_complexity_low",
+          "claim_risk": "medium",
+          "risk_notes": "Do not map to specific occupations.",
+          "variable": "collaboration_complexity",
+          "level": "low",
+          "overlay_imported": false
         }
       },
       "medium": {
         "zh-CN": {
           "label": "协作复杂度：中",
-          "meaning": "跨角色协作，需要持续对齐",
-          "fit_signal": "协作复杂度中时：这种环境有足够互动来使用你的关系优势，也保留一定独立节奏。 对 EQ 报告来说，重点是观察它是否让你的优势自然发挥，而不是逼你长期扮演协调者。",
-          "strain_signal": "协作复杂度中的主要消耗点：风险在于边界模糊：有些沟通值得投入，有些只是消耗。 如果你的发展杠杆正好落在 ER/RM，这个变量要优先验证。",
-          "what_to_verify": "这个岗位里的协作复杂度通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？",
-          "do_not_overread": "这不是具体职业推荐，只是帮助你观察环境变量。",
-          "interview_question": "这个岗位里的协作复杂度通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？",
+          "meaning": "需要协调多少角色、目标和隐性关系压力",
+          "fit_signal": "适合在互动和独立之间切换，并用复盘保持稳定。",
+          "strain_signal": "风险是模糊边界让互动慢慢侵入恢复时间。",
+          "interview_question": "团队是否有清楚的会议节奏、反馈方式和恢复窗口？",
           "role_observation_checklist": [
-            "观察协作复杂度是稳定可预期，还是经常突然升高。",
-            "观察情绪性沟通是否有明确负责人，而不是默认落到最愿意回应的人身上。",
-            "观察你在一天结束后是更清楚、更有能量，还是持续反刍和耗竭。"
+            "看会议是否有明确目的和结束条件。",
+            "看反馈是否具体到行为，而不是停留在人身感受。",
+            "看团队是否允许人暂时退出高情绪对话。"
           ],
-          "team_risk": "如果协作复杂度被低估，团队可能把隐形沟通成本当成“性格好的人自然会做”。",
-          "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。",
-          "manager_note": "和管理者确认协作复杂度：你需要同时维护多少利益相关方、隐性期待和跨团队关系。"
+          "team_risk": "如果这个变量被长期忽视，团队会把情绪成本转嫁给最愿意承担的人。",
+          "recovery_condition": "需要可预期的暂停、复盘和交接空间。",
+          "what_to_verify": "团队是否有清楚的会议节奏、反馈方式和恢复窗口？",
+          "do_not_overread": "This describes an environment variable, not a role recommendation."
         },
         "en": {
           "label": "Collaboration complexity: medium",
-          "meaning": "cross-role work that needs steady alignment",
-          "fit_signal": "When coordination complexity is medium: This setting gives you enough interaction to use relational strengths while still leaving some independent rhythm. For this EQ report, the question is whether the setting lets your strengths operate naturally instead of making you the default emotional coordinator.",
-          "strain_signal": "The strain point at medium coordination complexity: The risk is blurred boundaries: some conversations deserve investment, while others only drain attention. If your development lever sits in ER or RM, verify this variable early.",
-          "what_to_verify": "What level of coordination complexity does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?",
-          "do_not_overread": "This is not an occupation recommendation. It is a lens for reading the work environment.",
-          "interview_question": "What level of coordination complexity does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?",
+          "meaning": "how many roles, goals, and hidden relational pressures must be coordinated",
+          "fit_signal": "Useful when you can move between interaction and solo work with enough review time.",
+          "strain_signal": "The strain is that unclear boundaries can slowly eat into recovery time.",
+          "interview_question": "Does the team have clear meeting rhythm, feedback norms, and recovery windows?",
           "role_observation_checklist": [
-            "Notice whether coordination complexity is predictable or spikes without warning.",
-            "Notice whether emotional coordination has a clear owner or falls to the most responsive person.",
-            "Notice whether you end the day clearer and steadier, or still replaying conversations."
+            "Notice whether meetings have a clear purpose and ending point.",
+            "Notice whether feedback targets behavior rather than personal character.",
+            "Notice whether people can step out of emotionally loaded conversations when needed."
           ],
-          "team_risk": "If coordination complexity is underestimated, the team may treat invisible coordination as something emotionally capable people will simply absorb.",
-          "safe_experiment": "Observe rhythm and recovery space for one week before judging fit from a job title.",
-          "manager_note": "Ask how many stakeholders, hidden expectations, and cross-team relationships the role must hold at once."
+          "team_risk": "If this variable is ignored, teams often shift emotional cost onto the person most willing to carry it.",
+          "recovery_condition": "Requires predictable space for pause, review, and handoff.",
+          "what_to_verify": "Does the team have clear meeting rhythm, feedback norms, and recovery windows?",
+          "do_not_overread": "This describes an environment variable, not a role recommendation."
         },
         "meta": {
-          "v19_source_id": "eq.career_environment.collaboration_complexity.medium",
-          "claim_risk": "medium"
+          "id": "collaboration_complexity_medium",
+          "asset_type": "career_environment_base",
+          "v23_source_id": "collaboration_complexity_medium",
+          "claim_risk": "medium",
+          "risk_notes": "Do not map to specific occupations.",
+          "variable": "collaboration_complexity",
+          "level": "medium",
+          "overlay_imported": false
         }
       },
       "high": {
         "zh-CN": {
           "label": "协作复杂度：高",
-          "meaning": "多方利益、模糊责任和频繁协调同时存在",
-          "fit_signal": "协作复杂度高时：这种环境会频繁调用你的共情、调节和关系判断。 对 EQ 报告来说，重点是观察它是否让你的优势自然发挥，而不是逼你长期扮演协调者。",
-          "strain_signal": "协作复杂度高的主要消耗点：如果恢复机制不足，你可能很快从“能回应”变成“被持续拉扯”。 如果你的发展杠杆正好落在 ER/RM，这个变量要优先验证。",
-          "what_to_verify": "这个岗位里的协作复杂度通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？",
-          "do_not_overread": "这不是具体职业推荐，只是帮助你观察环境变量。",
-          "interview_question": "这个岗位里的协作复杂度通常处在什么水平？遇到压力、反馈或分歧时，团队默认由谁来承接和收尾？",
+          "meaning": "需要协调多少角色、目标和隐性关系压力",
+          "fit_signal": "适合能把情绪信息转成沟通和决策的人，但需要明确边界。",
+          "strain_signal": "风险是持续承接他人情绪，导致判断和恢复被消耗。",
+          "interview_question": "长期看，这个环境是否允许暂停、交接和情绪复位？",
           "role_observation_checklist": [
-            "观察协作复杂度是稳定可预期，还是经常突然升高。",
-            "观察情绪性沟通是否有明确负责人，而不是默认落到最愿意回应的人身上。",
-            "观察你在一天结束后是更清楚、更有能量，还是持续反刍和耗竭。"
+            "看会议是否有明确目的和结束条件。",
+            "看反馈是否具体到行为，而不是停留在人身感受。",
+            "看团队是否允许人暂时退出高情绪对话。"
           ],
-          "team_risk": "如果协作复杂度被低估，团队可能把隐形沟通成本当成“性格好的人自然会做”。",
-          "safe_experiment": "先用一周观察互动节奏和恢复空间，不要仅凭岗位名称判断适配。",
-          "manager_note": "和管理者确认协作复杂度：你需要同时维护多少利益相关方、隐性期待和跨团队关系。"
+          "team_risk": "如果这个变量被长期忽视，团队会把情绪成本转嫁给最愿意承担的人。",
+          "recovery_condition": "需要可预期的暂停、复盘和交接空间。",
+          "what_to_verify": "长期看，这个环境是否允许暂停、交接和情绪复位？",
+          "do_not_overread": "This describes an environment variable, not a role recommendation."
         },
         "en": {
           "label": "Collaboration complexity: high",
-          "meaning": "multiple stakeholders, fuzzy ownership, and frequent coordination at once",
-          "fit_signal": "When coordination complexity is high: This setting will call on empathy, regulation, and relationship judgment often. For this EQ report, the question is whether the setting lets your strengths operate naturally instead of making you the default emotional coordinator.",
-          "strain_signal": "The strain point at high coordination complexity: If recovery is weak, you may shift quickly from being responsive to feeling continuously pulled in. If your development lever sits in ER or RM, verify this variable early.",
-          "what_to_verify": "What level of coordination complexity does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?",
-          "do_not_overread": "This is not an occupation recommendation. It is a lens for reading the work environment.",
-          "interview_question": "What level of coordination complexity does this role actually carry, and who owns the follow-through after pressure, feedback, or disagreement?",
+          "meaning": "how many roles, goals, and hidden relational pressures must be coordinated",
+          "fit_signal": "Can work well for people who turn emotional information into communication and decisions, if boundaries are explicit.",
+          "strain_signal": "The strain is sustained emotional load, which can drain judgment and recovery.",
+          "interview_question": "Over time, does the environment allow pause, handoff, and emotional reset?",
           "role_observation_checklist": [
-            "Notice whether coordination complexity is predictable or spikes without warning.",
-            "Notice whether emotional coordination has a clear owner or falls to the most responsive person.",
-            "Notice whether you end the day clearer and steadier, or still replaying conversations."
+            "Notice whether meetings have a clear purpose and ending point.",
+            "Notice whether feedback targets behavior rather than personal character.",
+            "Notice whether people can step out of emotionally loaded conversations when needed."
           ],
-          "team_risk": "If coordination complexity is underestimated, the team may treat invisible coordination as something emotionally capable people will simply absorb.",
-          "safe_experiment": "Observe rhythm and recovery space for one week before judging fit from a job title.",
-          "manager_note": "Ask how many stakeholders, hidden expectations, and cross-team relationships the role must hold at once."
+          "team_risk": "If this variable is ignored, teams often shift emotional cost onto the person most willing to carry it.",
+          "recovery_condition": "Requires predictable space for pause, review, and handoff.",
+          "what_to_verify": "Over time, does the environment allow pause, handoff, and emotional reset?",
+          "do_not_overread": "This describes an environment variable, not a role recommendation."
         },
         "meta": {
-          "v19_source_id": "eq.career_environment.collaboration_complexity.high",
-          "claim_risk": "medium"
+          "id": "collaboration_complexity_high",
+          "asset_type": "career_environment_base",
+          "v23_source_id": "collaboration_complexity_high",
+          "claim_risk": "medium",
+          "risk_notes": "Do not map to specific occupations.",
+          "variable": "collaboration_complexity",
+          "level": "high",
+          "overlay_imported": false
         }
       }
     }
+  },
+  "meta": {
+    "v23_source": "career_environment_v2.json",
+    "import_scope": "base_assets_only",
+    "deferred": "formulation_overlays require resolver support and are intentionally left to a later PR."
   }
 }
