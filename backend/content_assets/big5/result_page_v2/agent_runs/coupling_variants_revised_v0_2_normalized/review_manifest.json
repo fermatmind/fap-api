@@ -1,0 +1,52 @@
+{
+  "approved_candidate_files": [
+    "selector_asset_candidates.jsonl",
+    "content_asset_candidates.jsonl"
+  ],
+  "human_reviewed": true,
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_production": false,
+  "ready_for_runtime": false,
+  "review_checks": {
+    "body_quality_recalculated": true,
+    "coupling_pair_coverage": {
+      "actual": 10,
+      "expected": 10,
+      "status": "pass"
+    },
+    "leak_scan": "pass",
+    "rendered_hygiene_scan": "pass",
+    "risk_wording_repair": {
+      "after": 0,
+      "before": 1,
+      "status": "pass"
+    },
+    "schema_validation": "pass",
+    "selector_contract_validation": "pass",
+    "source_forbidden_scan": "pass",
+    "stage_candidates_dry_run": {
+      "leak_hit_count": 0,
+      "review_error_count": 0,
+      "staging_write_performed": false,
+      "status": "pass",
+      "validation_error_count": 0
+    },
+    "staging_import_performed": false
+  },
+  "review_scope": {
+    "candidate_artifacts_only": true,
+    "cms_or_search_allowed": false,
+    "frontend_copy_allowed": false,
+    "normalization_only": true,
+    "production_import_allowed": false,
+    "runtime_enablement_allowed": false,
+    "staging_import_deferred": true
+  },
+  "review_status": "approved_for_staging",
+  "reviewed_at": "2026-06-28T15:30:00+08:00",
+  "reviewed_by": "codex_content_asset_agent",
+  "runtime_use": "staging_only",
+  "schema_version": "fap.big5.result_page_v2.human_review_manifest.v0_2",
+  "task": "BIG5-COUPLING-VARIANTS-CANDIDATE-NORMALIZE-01"
+}

@@ -1,0 +1,29 @@
+{
+  "candidate_dir": "content_assets/big5/result_page_v2/agent_runs/coupling_variants_revised_v0_2_normalized",
+  "counts": {
+    "content_asset_candidates": 50,
+    "selector_asset_candidates": 50
+  },
+  "normalization_steps": [
+    "converted_gpt_zip_jsonl_to_backend_candidate_jsonl",
+    "softened_one_coupling_risk_wording_hit",
+    "recalculated_body_quality",
+    "refreshed_selector_public_titles_and_summaries",
+    "generated_human_review_manifest",
+    "deferred_staging_import"
+  ],
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_production": false,
+  "ready_for_runtime": false,
+  "runtime_use": "staging_only",
+  "schema_version": "fap.big5.result_page_v2.coupling_variants_candidate_normalize.manifest.v0_2",
+  "source_qa_scan_summary": {
+    "forbidden_hit_count": 0,
+    "production_use_allowed_true_count": 0,
+    "runtime_use_all_staging_only": true
+  },
+  "source_zip_filename": "大五人格-第四板块.zip",
+  "source_zip_sha256": "0c3c2cda6fc7834f116e1f8e6d104781eb274b834b7f214c58f0ef674eba9475",
+  "task": "BIG5-COUPLING-VARIANTS-CANDIDATE-NORMALIZE-01"
+}
