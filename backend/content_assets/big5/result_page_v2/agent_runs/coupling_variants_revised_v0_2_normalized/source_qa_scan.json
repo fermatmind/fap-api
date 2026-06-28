@@ -1,0 +1,43 @@
+{
+  "body_length_max": 299,
+  "body_length_min": 240,
+  "body_length_outside_240_420": [],
+  "covered_pairs": [
+    "A_C",
+    "A_E",
+    "A_N",
+    "A_O",
+    "C_E",
+    "C_N",
+    "C_O",
+    "E_N",
+    "E_O",
+    "N_O"
+  ],
+  "duplicate_body_count": 0,
+  "duplicate_title_count": 0,
+  "forbidden_hit_count": 0,
+  "missing_pairs": [],
+  "production_use_allowed_true_count": 0,
+  "ready_for_pilot_true_count": 0,
+  "ready_for_production_true_count": 0,
+  "ready_for_runtime_true_count": 0,
+  "risk_wording_hit_count_after": 0,
+  "risk_wording_hit_count_before": 1,
+  "risk_wording_hits_after": [],
+  "risk_wording_hits_before": [
+    {
+      "asset_id": "candidate_content_coupling_content_thickening_a_high_x_n_low_v0_1",
+      "field": "body_zh",
+      "token": "一定"
+    }
+  ],
+  "runtime_use_all_staging_only": true,
+  "schema_version": "fap.big5.result_page_v2.coupling_variants_candidate_normalize.source_qa.v0_2",
+  "source_content_asset_count": 50,
+  "source_coupling_pair_count": 10,
+  "source_forbidden_hits": [],
+  "source_zip_filename": "大五人格-第四板块.zip",
+  "source_zip_sha256": "0c3c2cda6fc7834f116e1f8e6d104781eb274b834b7f214c58f0ef674eba9475",
+  "task": "BIG5-COUPLING-VARIANTS-CANDIDATE-NORMALIZE-01"
+}

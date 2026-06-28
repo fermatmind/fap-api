@@ -1,0 +1,23 @@
+{
+  "entries": [
+    {
+      "asset_id": "candidate_content_coupling_content_thickening_a_high_x_n_low_v0_1",
+      "reason": "Remove deterministic risk wording before schema, leak, and rendered hygiene validation.",
+      "repairs": [
+        {
+          "after": "关系会自然顺利",
+          "before": "关系一定顺利",
+          "field": "body_zh",
+          "repair": "risk_wording_softened"
+        }
+      ]
+    }
+  ],
+  "production_use_allowed": false,
+  "repair_required": false,
+  "risk_wording_hit_count_after": 0,
+  "risk_wording_hit_count_before": 1,
+  "runtime_use": "staging_only",
+  "schema_version": "fap.big5.result_page_v2.coupling_variants_candidate_normalize.repair_log.v0_2",
+  "task": "BIG5-COUPLING-VARIANTS-CANDIDATE-NORMALIZE-01"
+}

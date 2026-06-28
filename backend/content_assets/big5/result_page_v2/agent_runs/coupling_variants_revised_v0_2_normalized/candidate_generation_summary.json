@@ -1,0 +1,111 @@
+{
+  "body_quality": {
+    "avg_body_chars": 259.6,
+    "max_body_chars": 300,
+    "max_cta_chars": 37,
+    "max_short_body_chars": 57,
+    "max_summary_chars": 31,
+    "max_title_chars": 31,
+    "min_body_chars": 240,
+    "min_cta_chars": 23,
+    "min_short_body_chars": 40,
+    "min_summary_chars": 18,
+    "min_title_chars": 19,
+    "recalculated": true
+  },
+  "candidate_counts": {
+    "content_asset": 50,
+    "selector_asset": 50
+  },
+  "coverage": {
+    "content_variant_count": 50,
+    "covered_trait_pairs": 10,
+    "expected_trait_pairs": 10,
+    "expected_variants_per_pair": 5,
+    "missing_trait_pairs": [],
+    "pair_variant_counts": {
+      "AC": 5,
+      "AE": 5,
+      "AN": 5,
+      "AO": 5,
+      "CE": 5,
+      "CN": 5,
+      "CO": 5,
+      "EN": 5,
+      "EO": 5,
+      "NO": 5
+    }
+  },
+  "leak_scan": {
+    "hit_count": 0,
+    "hits": [],
+    "status": "pass"
+  },
+  "negative_guarantees": {
+    "cms_or_search_changed": false,
+    "final_result_contract_generated": false,
+    "frontend_copy_added": false,
+    "production_gate_changed": false,
+    "runtime_changed": false,
+    "staging_import_performed": false
+  },
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_production": false,
+  "ready_for_runtime": false,
+  "rendered_hygiene_scan": {
+    "hit_count": 0,
+    "rules": [
+      "no_selector_tokens",
+      "no_internal_rendered_terms",
+      "no_broken_template_fragments",
+      "no_deterministic_risk_wording"
+    ],
+    "status": "pass"
+  },
+  "repair": {
+    "repair_entry_count": 1,
+    "repair_required_after_normalization": false,
+    "risk_wording_hit_count_after": 0,
+    "risk_wording_hit_count_before": 1
+  },
+  "review_validation": {
+    "errors": [],
+    "present": true,
+    "valid": true
+  },
+  "runtime_use": "staging_only",
+  "schema_version": "fap.big5.result_page_v2.coupling_variants_candidate_normalize.v0_2",
+  "source_package": {
+    "filename": "大五人格-第四板块.zip",
+    "sha256": "0c3c2cda6fc7834f116e1f8e6d104781eb274b834b7f214c58f0ef674eba9475",
+    "source_body_length_max": 299,
+    "source_body_length_min": 240,
+    "source_forbidden_hit_count": 0,
+    "source_rows": 50
+  },
+  "stage_candidates_dry_run": {
+    "content_candidate_count": 50,
+    "leak_hit_count": 0,
+    "ok": true,
+    "review_error_count": 0,
+    "selector_candidate_count": 50,
+    "staging_write_performed": false,
+    "validation_error_count": 0
+  },
+  "staging_import": {
+    "repair_entry_count": 0,
+    "repair_required": false,
+    "staging_import_dir": null,
+    "staging_write_performed": false,
+    "status": "deferred"
+  },
+  "status": "pass",
+  "task": "BIG5-COUPLING-VARIANTS-CANDIDATE-NORMALIZE-01",
+  "validation": {
+    "content_asset_candidate_count": 50,
+    "error_count": 0,
+    "selector_asset_candidate_count": 50,
+    "status": "pass"
+  }
+}
