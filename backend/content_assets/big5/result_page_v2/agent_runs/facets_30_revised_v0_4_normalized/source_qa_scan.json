@@ -1,0 +1,47 @@
+{
+  "all_30_facets_covered": true,
+  "body_length_max": 274,
+  "body_length_min": 243,
+  "body_length_outside_240_420": [],
+  "content_asset_count": 30,
+  "created_at": "2026-06-28T07:06:07.607970",
+  "duplicate_bodies": {},
+  "duplicate_body_count": 0,
+  "duplicate_title_count": 0,
+  "duplicate_titles": {},
+  "facet_count": 30,
+  "forbidden_hit_count": 0,
+  "forbidden_hits": [],
+  "normalized_by": "BIG5-FACETS-30-CANDIDATE-NORMALIZE-01",
+  "production_use_allowed_true_count": 0,
+  "ready_for_production_true_count": 0,
+  "ready_for_runtime_true_count": 0,
+  "risk_wording_hit_count_after": 0,
+  "risk_wording_hit_count_before": 2,
+  "risk_wording_hits_after": [],
+  "risk_wording_hits_before": [
+    {
+      "asset_id": "candidate_content_facet_content_thickening_e3_v0_1",
+      "field": "body_zh",
+      "rule": "hiring_screening_wording"
+    },
+    {
+      "asset_id": "candidate_content_facet_content_thickening_e3_v0_1",
+      "field": "body_zh",
+      "rule": "certainty_wording"
+    }
+  ],
+  "runtime_use_all_staging_only": true,
+  "scan_scope": "user_visible_fields_only",
+  "schema_version": "big5_facets_30_revised_qa_scan.v0_4",
+  "source_zip_filename": "大五人格第三板块.zip",
+  "source_zip_sha256": "b1c0d4dc9cda9837ce73edffe945df5739b9d3e7335e1cce12bff8207b4fe574",
+  "unchanged_structure_note": "Only visible text fields were changed; asset identity, selector intent, runtime flags and safety metadata were preserved. body_quality metadata was not recalculated.",
+  "visible_fields_scanned": [
+    "title_zh",
+    "summary_zh",
+    "short_body_zh",
+    "body_zh",
+    "cta_zh"
+  ]
+}
