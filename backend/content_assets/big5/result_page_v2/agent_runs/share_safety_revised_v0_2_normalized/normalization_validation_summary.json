@@ -1,0 +1,55 @@
+{
+    "schema_version": "fap.big5.result_page_v2.share_safety_candidate_normalize.validation.v0_2",
+    "task": "BIG5-SHARE-SAFETY-CANDIDATE-NORMALIZE-01",
+    "status": "pass",
+    "runtime_use": "staging_only",
+    "production_use_allowed": false,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false,
+    "candidate_validation": {
+        "status": "pass",
+        "selector_asset_candidate_count": 36,
+        "content_asset_candidate_count": 36,
+        "error_count": 0,
+        "errors": []
+    },
+    "review_manifest_validation": {
+        "present": true,
+        "valid": true,
+        "errors": []
+    },
+    "leak_scan": {
+        "status": "pass",
+        "hit_count": 0,
+        "hits": []
+    },
+    "stage_candidates_dry_run": {
+        "selector_candidate_count": 36,
+        "content_candidate_count": 36,
+        "validation_error_count": 0,
+        "review_error_count": 0,
+        "leak_hit_count": 0,
+        "staging_write_performed": false,
+        "ok": true
+    },
+    "dry_run_repair_log": {
+        "schema_version": "fap.big5.result_page_v2.asset_agent.audit.v0.1",
+        "task": "staging_import_repair_log",
+        "runtime_use": "staging_only",
+        "production_use_allowed": false,
+        "repair_required": false,
+        "entries": []
+    },
+    "negative_guarantees": {
+        "runtime_flag_change": false,
+        "rollout_gate_change": false,
+        "release_snapshot_change": false,
+        "production_import_gate_change": false,
+        "database_write": false,
+        "content_assets_write": false,
+        "frontend_copy_write": false,
+        "cms_write": false,
+        "final_result_payload_generation": false
+    }
+}

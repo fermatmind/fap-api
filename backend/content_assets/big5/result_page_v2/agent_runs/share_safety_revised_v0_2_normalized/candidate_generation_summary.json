@@ -1,0 +1,103 @@
+{
+    "schema_version": "fap.big5.result_page_v2.share_safety_candidate_normalize.v0_2",
+    "task": "BIG5-SHARE-SAFETY-CANDIDATE-NORMALIZE-01",
+    "status": "pass",
+    "runtime_use": "staging_only",
+    "production_use_allowed": false,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false,
+    "candidate_counts": {
+        "content_asset": 36,
+        "selector_asset": 36
+    },
+    "coverage": {
+        "category_counts": {
+            "public_summary_card": 6,
+            "collaboration_friendly_excerpt": 6,
+            "what_i_am_working_on": 6,
+            "how_to_work_with_me": 6,
+            "safe_quote_pool": 8,
+            "surface_boundary_notice": 4
+        },
+        "expected_categories": 6,
+        "covered_categories": 6,
+        "missing_categories": []
+    },
+    "source_package": {
+        "filename": "大五人格-第五板块.zip",
+        "sha256": "33278581a58c339ea08fed955efa29e7024395d27a37674310fb27c84f18edc4",
+        "source_rows": 36,
+        "source_forbidden_hit_count": 0
+    },
+    "body_quality": {
+        "recalculated": true,
+        "min_body_chars": 85,
+        "max_body_chars": 139,
+        "avg_body_chars": 109.22222222222223,
+        "min_title_chars": 12,
+        "max_title_chars": 16,
+        "min_summary_chars": 15,
+        "max_summary_chars": 30,
+        "min_short_body_chars": 17,
+        "max_short_body_chars": 32,
+        "min_cta_chars": 15,
+        "max_cta_chars": 29
+    },
+    "repair": {
+        "risk_wording_hit_count_before": 15,
+        "risk_wording_hit_count_after": 0,
+        "repair_entry_count": 15,
+        "repair_required_after_normalization": false
+    },
+    "leak_scan": {
+        "status": "pass",
+        "hit_count": 0,
+        "hits": []
+    },
+    "rendered_hygiene_scan": {
+        "status": "pass",
+        "hit_count": 0,
+        "rules": [
+            "no_selector_tokens",
+            "no_internal_rendered_terms",
+            "no_broken_template_fragments",
+            "no_template_tail_fragments"
+        ]
+    },
+    "validation": {
+        "status": "pass",
+        "selector_asset_candidate_count": 36,
+        "content_asset_candidate_count": 36,
+        "error_count": 0
+    },
+    "review_validation": {
+        "present": true,
+        "valid": true,
+        "errors": []
+    },
+    "stage_candidates_dry_run": {
+        "selector_candidate_count": 36,
+        "content_candidate_count": 36,
+        "validation_error_count": 0,
+        "review_error_count": 0,
+        "leak_hit_count": 0,
+        "staging_write_performed": false,
+        "ok": true
+    },
+    "staging_import": {
+        "status": "deferred",
+        "staging_write_performed": false,
+        "staging_import_dir": null,
+        "repair_required": false,
+        "repair_entry_count": 0
+    },
+    "negative_guarantees": {
+        "runtime_changed": false,
+        "production_gate_changed": false,
+        "frontend_copy_added": false,
+        "cms_or_search_changed": false,
+        "final_result_contract_generated": false,
+        "staging_import_performed": false
+    }
+}
