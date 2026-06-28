@@ -444,6 +444,39 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         $this->assertSame(0, PersonalityProfileSection::query()->count());
     }
 
+    public function test_remaining_fifty_eight_v2_subset_derives_page_type_counts_when_summary_is_absent(): void
+    {
+        $this->seedProjectionTargets();
+        $package = $this->remainingFiftyEightV2Package();
+        unset($package['summary']);
+        $packagePath = $this->writePackage($package);
+        $this->createNextBatchSixDraftRevisions($packagePath);
+
+        $exitCode = Artisan::call('personality:mbti64-cms-revision-promote', [
+            '--package' => $packagePath,
+            '--dry-run' => true,
+            '--remaining-58' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertTrue($payload['ok']);
+        $this->assertSame('remaining_58', $payload['contract']['subset']['mode']);
+        $this->assertSame(58, $payload['contract']['row_count']);
+        $this->assertSame(58, $payload['contract']['variant_row_count']);
+        $this->assertSame(0, $payload['contract']['comparison_row_count']);
+        $this->assertSame(58, $payload['row_count']);
+        $this->assertSame(58, $payload['variant_row_count']);
+        $this->assertSame(0, $payload['comparison_row_count']);
+        $this->assertSame(58, $payload['would_promote_count']);
+        $this->assertFalse($payload['writes_committed']);
+        $this->assertSame([], $payload['errors']);
+        $this->assertSame(0, PersonalityProfileVariantSeoMeta::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantSection::query()->count());
+        $this->assertSame(0, PersonalityProfileSection::query()->count());
+    }
+
     public function test_write_promotes_eighty_eight_agent_projection_revisions_without_index_search_side_effects(): void
     {
         $targets = $this->seedProjectionTargets();
