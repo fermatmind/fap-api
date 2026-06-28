@@ -94,6 +94,20 @@ final class Eq60ContentGateTest extends TestCase
             $this->assertNotSame('', (string) data_get($route, 'locales.en.route_headline'));
         }
 
+        $depthAssets = (array) data_get($assets, 'assets.result_page_depth_modules.assets', []);
+        $this->assertGreaterThanOrEqual(60, count($depthAssets));
+        foreach (['balanced_integrated', 'high_empathy_low_recovery', 'aware_but_unregulated', 'low_confidence_result'] as $formulationId) {
+            foreach (['evidence_stack', 'development_path'] as $moduleType) {
+                $assetId = 'eq.depth.'.$moduleType.'.'.$formulationId;
+                $this->assertArrayHasKey($assetId, $depthAssets);
+                $depthAsset = (array) $depthAssets[$assetId];
+                $this->assertSame($moduleType, (string) data_get($depthAsset, 'meta.module_type'));
+                $this->assertContains($formulationId, (array) data_get($depthAsset, 'meta.applies_to'));
+                $this->assertNotSame('', (string) data_get($depthAsset, 'zh-CN.title'));
+                $this->assertNotSame('', (string) data_get($depthAsset, 'en.title'));
+            }
+        }
+
         foreach ([
             'balanced_integrated',
             'high_empathy_low_recovery',
