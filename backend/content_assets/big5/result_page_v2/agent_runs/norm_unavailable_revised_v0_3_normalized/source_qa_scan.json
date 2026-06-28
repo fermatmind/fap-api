@@ -1,0 +1,53 @@
+{
+  "body_length_max": 200,
+  "body_length_max_after_normalization": 200,
+  "body_length_min": 180,
+  "body_length_min_after_normalization": 180,
+  "body_length_outside_180_320": [],
+  "candidate_stage": "norm_unavailable_revised_v0_3_normalized",
+  "content_asset_count": 18,
+  "content_candidate_count": 18,
+  "covered_contexts": [
+    "agreeableness",
+    "conscientiousness",
+    "extraversion",
+    "global",
+    "neuroticism",
+    "openness"
+  ],
+  "covered_surface_roles": [
+    "hide_sensitive",
+    "show_boundary",
+    "soften_claim"
+  ],
+  "duplicate_body_count": 0,
+  "duplicate_title_count": 0,
+  "forbidden_hit_count": 0,
+  "forbidden_hit_count_after_normalization": 0,
+  "forbidden_hits": [],
+  "forbidden_hits_after_normalization": [],
+  "notes": [
+    "This is a candidate artifact only.",
+    "No final big5_result_page_v2 payload generated.",
+    "No frontend copy, CMS, SEO, runtime, rollout, or production change.",
+    "Codex recalculated body_quality and generated selector candidates; staging import remains deferred."
+  ],
+  "production_use_allowed_true_count": 0,
+  "public_payload_fields_checked": [
+    "title_zh",
+    "summary_zh",
+    "body_zh",
+    "short_body_zh",
+    "cta_zh",
+    "public_payload.title_zh",
+    "public_payload.summary_zh"
+  ],
+  "ready_for_pilot_true_count": 0,
+  "ready_for_production_true_count": 0,
+  "ready_for_runtime_true_count": 0,
+  "runtime_use_all_staging_only": true,
+  "scan_scope": "public_visible_fields_only",
+  "schema": "fap.big5.result_page_v2.norm_unavailable.revised_v0_3.normalized.source_qa_scan.v0_1",
+  "schema_version": "big5.norm_unavailable.revised.qa.v0_3",
+  "selector_candidate_count": 18
+}
