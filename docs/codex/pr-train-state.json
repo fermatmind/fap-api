@@ -64875,12 +64875,12 @@
     "branch": "codex/pr-eq-v20-04-route-matrix-v23",
     "title": "PR-EQ-V20-04 Backend EQ v2.3 personalization route matrix",
     "train_scope": "eq_v20_content_asset_expansion",
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "depends_on": [
       "PR-EQ-V20-03"
     ],
-    "commit_sha": "471c5d7ab0ad9be3026636f3909dc0a73c6a30d8",
-    "pr_url": null,
+    "commit_sha": "da6095982e8f7cc693fc8355cf8d3d675697289ff",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2526",
     "merged_at": null,
     "remote_branch_deleted": false,
     "local_cleanup_executed": false,
@@ -64964,6 +64964,11 @@
         "at": "2026-06-28T14:18:49Z",
         "status": "committed",
         "notes": "Committed implementation as 471c5d7ab0ad9be3026636f3909dc0a73c6a30d8."
+      },
+      {
+        "at": "2026-06-28T14:20:16Z",
+        "status": "pr_open",
+        "notes": "Opened GitHub PR #2526."
       }
     ],
     "notes": "Part of EQ v2.3 productization train; production deploy/smoke remain separately authorized."
