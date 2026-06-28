@@ -64843,7 +64843,7 @@
     "branch": "codex/mbti-main-free-serp-tdk-01",
     "title": "MBTI-MAIN-FREE-SERP-TDK-01: seo(mbti): align main free-test TDK authority",
     "train_scope": "mbti_main_lookup_metadata_authority",
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "depends_on": [],
     "checks": {
       "dependency_verification": {
@@ -64885,8 +64885,8 @@
         "evidence": "Changed files are limited to MBTI lookup metadata authority in ScaleRegistrySeeder, focused V0.3 lookup metadata coverage, and authorized docs/codex train metadata. No FAQ, body, schema, search, sitemap, llms, CMS production write, deploy, or fap-web files changed."
       }
     },
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "44f569449afa97e5a2e39c6dbf21ebdb87ba2c78",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2520",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -64909,6 +64909,11 @@
         "at": "2026-06-28T21:34:33+08:00",
         "status": "local_checks_passed",
         "note": "Route list, focused lookup metadata test, full MBTI CI, YAML/JSON parsing, diff check, and scope validation passed."
+      },
+      {
+        "at": "2026-06-28T21:35:00+08:00",
+        "status": "pr_open",
+        "note": "Opened PR #2520 for MBTI main free-test TDK authority."
       }
     ]
   }
