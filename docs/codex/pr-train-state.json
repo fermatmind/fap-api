@@ -10273,7 +10273,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2309",
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "title": "FA30-API-03: Add Batch 2 readback and review ledger authority",
     "train_scope": "fa30_batch2_backend_readback_review_ledger",
     "transitions": [
@@ -64883,6 +64883,10 @@
       "scope_validation": {
         "status": "pass",
         "evidence": "Changed files are limited to MBTI lookup metadata authority in ScaleRegistrySeeder, focused V0.3 lookup metadata coverage, and authorized docs/codex train metadata. No FAQ, body, schema, search, sitemap, llms, CMS production write, deploy, or fap-web files changed."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #2520 checks succeeded on head c669c7f9e7242a37df00ac84f6a76fa440185359: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and semgrep sarif non-blocking upload."
       }
     },
     "commit_sha": "44f569449afa97e5a2e39c6dbf21ebdb87ba2c78",
@@ -64914,6 +64918,11 @@
         "at": "2026-06-28T21:35:00+08:00",
         "status": "pr_open",
         "note": "Opened PR #2520 for MBTI main free-test TDK authority."
+      },
+      {
+        "at": "2026-06-28T21:50:02+08:00",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed for PR #2520 and changed files remain within the MBTI main TDK authority scope."
       }
     ]
   }
