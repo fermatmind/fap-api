@@ -64654,11 +64654,11 @@
     "branch": "codex/pr-eq-v20-02-depth-modules-v23",
     "title": "PR-EQ-V20-02 Backend EQ v2.3 result page depth modules",
     "train_scope": "eq_v20_content_asset_expansion",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "depends_on": [
       "PR-EQ-V20-01"
     ],
-    "commit_sha": "2a90055e4c202f98bd568c65fc0615049b373a2f",
+    "commit_sha": "70da2707849a954fcbcd9cc3b947f2922a7afb91",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2519",
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -64714,6 +64714,10 @@
       "diff_check": {
         "status": "passed",
         "evidence": "git diff --check and git diff --cached --check passed before commit."
+      },
+      "github": {
+        "status": "passed",
+        "evidence": "All GitHub checks passed on PR #2519; mergeStateStatus=CLEAN."
       }
     },
     "events": [
@@ -64731,6 +64735,11 @@
         "at": "2026-06-28T13:23:11Z",
         "status": "pr_open",
         "notes": "Opened GitHub PR #2519 after local checks and scoped push."
+      },
+      {
+        "at": "2026-06-28T13:29:37Z",
+        "status": "ready_to_merge",
+        "notes": "GitHub checks passed; scope and merge state clean before merge."
       }
     ],
     "notes": "Part of EQ v2.3 productization train; production deploy/smoke remain separately authorized."
