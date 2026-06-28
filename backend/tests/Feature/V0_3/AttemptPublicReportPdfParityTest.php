@@ -261,4 +261,184 @@ final class AttemptPublicReportPdfParityTest extends TestCase
         $pdf = $this->withHeaders($headers)->get("/api/v0.3/attempts/{$attemptId}/report.pdf");
         $pdf->assertStatus(404);
     }
+
+    public function test_public_mbti_result_page_pdf_uses_strict_gotenberg_surface(): void
+    {
+        $this->seedScales();
+        config()->set('fap.features.report_snapshot_strict_v2', false);
+        config()->set('gotenberg.enabled', true);
+        config()->set('gotenberg.base_url', 'http://gotenberg:3000');
+        config()->set('gotenberg.result_print_base_url', 'http://frontend:3000');
+        config()->set('gotenberg.result_print_token_secret', 'test-result-print-secret');
+        Storage::fake('local');
+
+        $attemptId = (string) Str::uuid();
+        $anonId = 'anon_mbti_result_page_pdf';
+        $token = $this->issueAnonToken($anonId);
+        $this->createAttempt($attemptId, 'MBTI', $anonId);
+        $this->createResult($attemptId);
+
+        $gotenbergPdf = implode("\n", [
+            '%PDF-1.4',
+            '<< /Producer (Chromium) >>',
+            'Personality Traits',
+            'Your Career Path',
+            'Your Personal Growth',
+            'Your Relationships',
+            '%%EOF',
+        ]);
+
+        Http::fake([
+            'gotenberg:3000/forms/chromium/convert/url' => Http::response($gotenbergPdf, 200, [
+                'Content-Type' => 'application/pdf',
+            ]),
+        ]);
+
+        $headers = [
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ];
+
+        $pdf = $this->withHeaders($headers)->get("/api/v0.3/attempts/{$attemptId}/result-page.pdf");
+
+        $pdf->assertStatus(200);
+        $pdf->assertHeader('Content-Type', 'application/pdf');
+        $pdf->assertHeader('X-Report-Pdf-Engine', 'gotenberg_chromium');
+        $pdf->assertHeader('X-Pdf-Surface', 'mbti_result_page_export');
+        $pdf->assertHeader('X-Pdf-Surface-Version', 'mbti.result_page_export.v1');
+        $pdf->assertHeader('X-Pdf-Artifact-Cache', 'MISS');
+        $pdf->assertHeader('X-Legacy-Mpdf-Fallback', 'false');
+        $this->assertNotSame('', (string) $pdf->headers->get('X-Gotenberg-Trace'));
+
+        $pdfBinary = (string) $pdf->getContent();
+        $this->assertStringStartsWith('%PDF-1.4', $pdfBinary);
+        $this->assertStringContainsString('/Producer (Chromium)', $pdfBinary);
+        $this->assertStringNotContainsString('mPDF', $pdfBinary);
+        $this->assertStringContainsString('Personality Traits', $pdfBinary);
+        $this->assertStringContainsString('Your Career Path', $pdfBinary);
+        $this->assertStringContainsString('Your Personal Growth', $pdfBinary);
+        $this->assertStringContainsString('Your Relationships', $pdfBinary);
+
+        Http::assertSent(function ($request) use ($attemptId): bool {
+            $body = $request->body();
+
+            return $request->method() === 'POST'
+                && $request->url() === 'http://gotenberg:3000/forms/chromium/convert/url'
+                && str_contains($body, "/zh/result/{$attemptId}")
+                && str_contains($body, 'pdf=1')
+                && str_contains($body, 'surface=mbti.result_page_export.v1')
+                && str_contains($body, 'pdf_token=')
+                && str_contains($body, 'waitForExpression')
+                && str_contains($body, 'window.__FERMAT_PDF_READY__ === true')
+                && str_contains($body, 'failOnHttpStatusCodes');
+        });
+
+        Storage::disk('local')->assertExists(
+            "artifacts/pdf/MBTI/{$attemptId}/nohash-mbti.result_page_export.v1-gotenberg_chromium-zh-locked-free/report_free.pdf"
+        );
+    }
+
+    public function test_public_mbti_result_page_pdf_does_not_fallback_to_mpdf_when_gotenberg_fails(): void
+    {
+        $this->seedScales();
+        config()->set('fap.features.report_snapshot_strict_v2', false);
+        config()->set('gotenberg.enabled', true);
+        config()->set('gotenberg.base_url', 'http://gotenberg:3000');
+        config()->set('gotenberg.result_print_base_url', 'http://frontend:3000');
+        Storage::fake('local');
+
+        $attemptId = (string) Str::uuid();
+        $anonId = 'anon_mbti_result_page_pdf_fail';
+        $token = $this->issueAnonToken($anonId);
+        $this->createAttempt($attemptId, 'MBTI', $anonId);
+        $this->createResult($attemptId);
+
+        Http::fake([
+            'gotenberg:3000/forms/chromium/convert/url' => Http::response('upstream unavailable', 503),
+        ]);
+
+        $pdf = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->get("/api/v0.3/attempts/{$attemptId}/result-page.pdf");
+
+        $pdf->assertStatus(503);
+        Storage::disk('local')->assertMissing(
+            "artifacts/pdf/MBTI/{$attemptId}/nohash-mbti.result_page_export.v1-gotenberg_chromium-zh-locked-free/report_free.pdf"
+        );
+    }
+
+    public function test_public_mbti_result_page_pdf_does_not_hit_legacy_mpdf_surface_cache(): void
+    {
+        $this->seedScales();
+        config()->set('fap.features.report_snapshot_strict_v2', false);
+        config()->set('gotenberg.enabled', true);
+        config()->set('gotenberg.base_url', 'http://gotenberg:3000');
+        config()->set('gotenberg.result_print_base_url', 'http://frontend:3000');
+        Storage::fake('local');
+
+        $attemptId = (string) Str::uuid();
+        $anonId = 'anon_mbti_result_page_pdf_cache';
+        $token = $this->issueAnonToken($anonId);
+        $this->createAttempt($attemptId, 'MBTI', $anonId);
+        $this->createResult($attemptId);
+
+        Storage::disk('local')->put(
+            "artifacts/pdf/MBTI/{$attemptId}/nohash-mbti.pdf_surface.v4/report_free.pdf",
+            '%PDF-1.4 old mPDF artifact'
+        );
+
+        Http::fake([
+            'gotenberg:3000/forms/chromium/convert/url' => Http::response('%PDF-1.4 new chromium export', 200, [
+                'Content-Type' => 'application/pdf',
+            ]),
+        ]);
+
+        $pdf = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->get("/api/v0.3/attempts/{$attemptId}/result-page.pdf");
+
+        $pdf->assertStatus(200);
+        $pdf->assertHeader('X-Pdf-Artifact-Cache', 'MISS');
+        $this->assertStringContainsString('new chromium export', (string) $pdf->getContent());
+        $this->assertStringNotContainsString('old mPDF artifact', (string) $pdf->getContent());
+    }
+
+    public function test_public_mbti_result_page_pdf_cache_hit_preserves_engine_headers(): void
+    {
+        $this->seedScales();
+        config()->set('fap.features.report_snapshot_strict_v2', false);
+        config()->set('gotenberg.enabled', true);
+        config()->set('gotenberg.base_url', 'http://gotenberg:3000');
+        config()->set('gotenberg.result_print_base_url', 'http://frontend:3000');
+        Storage::fake('local');
+
+        $attemptId = (string) Str::uuid();
+        $anonId = 'anon_mbti_result_page_pdf_hit';
+        $token = $this->issueAnonToken($anonId);
+        $this->createAttempt($attemptId, 'MBTI', $anonId);
+        $this->createResult($attemptId);
+
+        Storage::disk('local')->put(
+            "artifacts/pdf/MBTI/{$attemptId}/nohash-mbti.result_page_export.v1-gotenberg_chromium-zh-locked-free/report_free.pdf",
+            '%PDF-1.4 cached chromium export'
+        );
+
+        Http::fake();
+
+        $pdf = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->get("/api/v0.3/attempts/{$attemptId}/result-page.pdf");
+
+        $pdf->assertStatus(200);
+        $pdf->assertHeader('X-Report-Pdf-Engine', 'gotenberg_chromium');
+        $pdf->assertHeader('X-Pdf-Surface', 'mbti_result_page_export');
+        $pdf->assertHeader('X-Pdf-Surface-Version', 'mbti.result_page_export.v1');
+        $pdf->assertHeader('X-Pdf-Artifact-Cache', 'HIT');
+        $pdf->assertHeader('X-Legacy-Mpdf-Fallback', 'false');
+        $this->assertStringContainsString('cached chromium export', (string) $pdf->getContent());
+        Http::assertNothingSent();
+    }
 }

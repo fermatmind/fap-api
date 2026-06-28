@@ -2884,6 +2884,109 @@ class AttemptReadController extends Controller
     }
 
     /**
+     * GET /api/v0.3/attempts/{id}/result-page.pdf
+     */
+    public function resultPagePdf(Request $request, string $id): Response
+    {
+        $orgId = $this->currentOrgContext()->orgId();
+        $userId = $this->resolveUserId($request);
+        $anonId = $this->resolveAnonId($request);
+        $result = Result::where('org_id', $orgId)->where('attempt_id', $id)->firstOrFail();
+        $responseCodes = $this->resolveResponseScaleCodes($result);
+        $scaleCode = $this->resolveNormalizedScaleCode($responseCodes);
+        $attempt = $this->resolveAttemptForReportRead($request, $id, $scaleCode);
+
+        if (strtoupper(trim((string) ($attempt->scale_code ?? ''))) !== 'MBTI') {
+            abort(400, 'result-page PDF export is only available for MBTI attempts.');
+        }
+
+        $gate = $this->reportGatekeeper->resolve(
+            $orgId,
+            $id,
+            $userId !== null ? (string) $userId : null,
+            $anonId,
+            $this->currentOrgContext()->role(),
+            false,
+            false,
+        );
+
+        if (! ($gate['ok'] ?? false)) {
+            $status = (int) ($gate['status'] ?? 0);
+            if ($status <= 0) {
+                $error = strtoupper((string) data_get($gate, 'error_code', data_get($gate, 'error', 'REPORT_FAILED')));
+                $status = match ($error) {
+                    'ATTEMPT_REQUIRED', 'SCALE_REQUIRED' => 400,
+                    'ATTEMPT_NOT_FOUND', 'RESULT_NOT_FOUND', 'SCALE_NOT_FOUND' => 404,
+                    default => 500,
+                };
+            }
+
+            abort($status, (string) ($gate['message'] ?? 'report generation failed.'));
+        }
+
+        $variant = $this->reportPdfDocumentService->normalizeVariant((string) ($gate['variant'] ?? 'free'));
+        $locked = (bool) ($gate['locked'] ?? false);
+        $date = $attempt->submitted_at?->format('Y-m-d')
+            ?? $attempt->created_at?->format('Y-m-d')
+            ?? now()->format('Y-m-d');
+        $fileName = sprintf('fermatmind-mbti-result-page-%s.pdf', $date);
+        $inline = in_array(strtolower(trim((string) $request->query('inline', '0'))), ['1', 'true', 'yes', 'on'], true);
+        $disposition = $inline ? 'inline' : 'attachment';
+
+        $request->merge(['attempt_id' => (string) $attempt->id]);
+        $this->eventRecorder->recordFromRequest($request, 'result_page_pdf_export_view', $this->resolveUserId($request), [
+            'scale_code' => 'MBTI',
+            'pack_id' => (string) ($attempt->pack_id ?? ''),
+            'dir_version' => (string) ($attempt->dir_version ?? ''),
+            'type_code' => (string) ($result->type_code ?? ''),
+            'attempt_id' => (string) $attempt->id,
+            'locked' => $locked,
+            'variant' => $variant,
+            'surface' => ReportPdfDocumentService::MBTI_RESULT_PAGE_EXPORT_SURFACE_VERSION,
+            'engine' => ReportPdfDocumentService::RESULT_PAGE_EXPORT_ENGINE,
+        ]);
+
+        try {
+            $generated = $this->reportPdfDocumentService->getOrGenerateMbtiResultPageExport($attempt, $gate, $result);
+        } catch (\Throwable $e) {
+            $traceId = (string) \Illuminate\Support\Str::uuid();
+            $printBaseHost = parse_url((string) config('gotenberg.result_print_base_url', ''), PHP_URL_HOST);
+            Log::error('MBTI_RESULT_PAGE_PDF_EXPORT_FAILED', [
+                'attempt_id' => (string) $attempt->id,
+                'user_id' => $userId !== null ? (string) $userId : null,
+                'surface' => ReportPdfDocumentService::MBTI_RESULT_PAGE_EXPORT_SURFACE_VERSION,
+                'engine' => ReportPdfDocumentService::RESULT_PAGE_EXPORT_ENGINE,
+                'gotenberg_url_host' => is_string($printBaseHost) ? $printBaseHost : null,
+                'trace_id' => $traceId,
+                'exception_class' => $e::class,
+                'message' => SensitiveDiagnosticRedactor::redactString($e->getMessage()),
+            ]);
+
+            abort(503, 'result-page PDF export failed.');
+        }
+
+        $pdfBinary = (string) ($generated['binary'] ?? '');
+        $variant = (string) ($generated['variant'] ?? $variant);
+        $locked = (bool) ($generated['locked'] ?? $locked);
+
+        return response($pdfBinary, 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => $disposition.'; filename="'.$fileName.'"',
+            'Cache-Control' => 'private, no-store',
+            'X-Report-Scale' => 'MBTI',
+            'X-Report-Variant' => $variant,
+            'X-Report-Locked' => $locked ? 'true' : 'false',
+            'X-Report-Filename-Hint' => $fileName,
+            'X-Report-Pdf-Engine' => (string) ($generated['engine'] ?? ReportPdfDocumentService::RESULT_PAGE_EXPORT_ENGINE),
+            'X-Pdf-Surface' => (string) ($generated['surface'] ?? 'mbti_result_page_export'),
+            'X-Pdf-Surface-Version' => (string) ($generated['surface_version'] ?? ReportPdfDocumentService::MBTI_RESULT_PAGE_EXPORT_SURFACE_VERSION),
+            'X-Pdf-Artifact-Cache' => ((bool) ($generated['cached'] ?? false)) ? 'HIT' : 'MISS',
+            'X-Legacy-Mpdf-Fallback' => 'false',
+            'X-Gotenberg-Trace' => (string) ($generated['trace_id'] ?? ''),
+        ]);
+    }
+
+    /**
      * GET /api/v0.3/attempts/{id}/enneagram/observation
      */
     public function enneagramObservation(Request $request, string $id): JsonResponse

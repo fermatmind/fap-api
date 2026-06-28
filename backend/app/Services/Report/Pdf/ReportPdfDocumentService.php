@@ -8,6 +8,7 @@ use App\Models\Attempt;
 use App\Models\ReportSnapshot;
 use App\Models\Result;
 use App\Services\Report\Pdf\Mbti\MbtiPdfPayloadBuilder;
+use Illuminate\Support\Str;
 use Mpdf\Mpdf;
 use Mpdf\Output\Destination;
 use Throwable;
@@ -15,6 +16,10 @@ use Throwable;
 final class ReportPdfDocumentService
 {
     private const MBTI_PDF_SURFACE_VERSION = 'mbti.pdf_surface.v4';
+
+    public const MBTI_RESULT_PAGE_EXPORT_SURFACE_VERSION = 'mbti.result_page_export.v1';
+
+    public const RESULT_PAGE_EXPORT_ENGINE = 'gotenberg_chromium';
 
     public function __construct(
         private readonly ReportPdfArtifactStore $artifactStore,
@@ -352,6 +357,108 @@ final class ReportPdfDocumentService
     }
 
     /**
+     * @param  array<string,mixed>  $gate
+     * @return array{
+     *   binary:string,
+     *   storage_path:string,
+     *   variant:string,
+     *   locked:bool,
+     *   manifest_hash:string,
+     *   cached:bool,
+     *   engine:string,
+     *   surface:string,
+     *   surface_version:string,
+     *   trace_id:string
+     * }
+     */
+    public function getOrGenerateMbtiResultPageExport(Attempt $attempt, array $gate, ?Result $result = null): array
+    {
+        $scaleCode = strtoupper(trim((string) ($attempt->scale_code ?? '')));
+        if ($scaleCode !== 'MBTI') {
+            throw new \RuntimeException('Result-page PDF export is only available for MBTI attempts.');
+        }
+
+        $variant = $this->normalizeVariant((string) ($gate['variant'] ?? 'free'));
+        $locked = (bool) ($gate['locked'] ?? true);
+        $traceId = (string) Str::uuid();
+        $manifestHash = $this->resolveResultPageExportManifestHash($attempt, $gate, $result);
+        $path = $this->artifactStore->path('MBTI', (string) $attempt->id, $manifestHash, $variant);
+
+        $cached = $this->artifactStore->get($path);
+        if (is_string($cached) && $cached !== '') {
+            return [
+                'binary' => $cached,
+                'storage_path' => $path,
+                'variant' => $variant,
+                'locked' => $locked,
+                'manifest_hash' => $manifestHash,
+                'cached' => true,
+                'engine' => self::RESULT_PAGE_EXPORT_ENGINE,
+                'surface' => 'mbti_result_page_export',
+                'surface_version' => self::MBTI_RESULT_PAGE_EXPORT_SURFACE_VERSION,
+                'trace_id' => $traceId,
+            ];
+        }
+
+        $pdfBinary = $this->buildMbtiResultPageExportDocument($attempt, $gate, $traceId);
+        $this->artifactStore->put($path, $pdfBinary);
+
+        return [
+            'binary' => $pdfBinary,
+            'storage_path' => $path,
+            'variant' => $variant,
+            'locked' => $locked,
+            'manifest_hash' => $manifestHash,
+            'cached' => false,
+            'engine' => self::RESULT_PAGE_EXPORT_ENGINE,
+            'surface' => 'mbti_result_page_export',
+            'surface_version' => self::MBTI_RESULT_PAGE_EXPORT_SURFACE_VERSION,
+            'trace_id' => $traceId,
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $gate
+     */
+    private function resolveResultPageExportManifestHash(Attempt $attempt, array $gate, ?Result $result = null): string
+    {
+        $baseHash = $this->baseContentManifestHash($attempt, $result);
+        $rawLocale = strtolower(trim((string) ($attempt->locale ?? '')));
+        $locale = str_starts_with($rawLocale, 'zh') ? 'zh' : 'en';
+        $variant = $this->normalizeVariant((string) ($gate['variant'] ?? 'free'));
+        $entitlement = ((bool) ($gate['locked'] ?? true)) ? 'locked' : 'unlocked';
+
+        return implode('-', [
+            $baseHash,
+            self::MBTI_RESULT_PAGE_EXPORT_SURFACE_VERSION,
+            self::RESULT_PAGE_EXPORT_ENGINE,
+            preg_replace('/[^a-z0-9_.-]+/i', '_', $locale) ?: 'locale',
+            $entitlement,
+            $variant,
+        ]);
+    }
+
+    private function baseContentManifestHash(Attempt $attempt, ?Result $result = null): string
+    {
+        $summary = is_array($attempt->answers_summary_json ?? null) ? $attempt->answers_summary_json : [];
+        $meta = is_array($summary['meta'] ?? null) ? $summary['meta'] : [];
+        $hash = trim((string) ($meta['pack_release_manifest_hash'] ?? ''));
+        if ($hash !== '') {
+            return $hash;
+        }
+
+        $resultPayload = is_array($result?->result_json ?? null) ? $result?->result_json : [];
+        $hash = trim((string) (
+            data_get($resultPayload, 'version_snapshot.content_manifest_hash')
+            ?? data_get($resultPayload, 'normed_json.version_snapshot.content_manifest_hash')
+            ?? data_get($resultPayload, 'content_manifest_hash')
+            ?? ''
+        ));
+
+        return $hash !== '' ? $hash : 'nohash';
+    }
+
+    /**
      * @param  array<string,mixed>  $report
      * @return array<string,mixed>
      */
@@ -515,28 +622,108 @@ final class ReportPdfDocumentService
         }
     }
 
-    private function mbtiResultPrintUrl(Attempt $attempt): ?string
+    /**
+     * @param  array<string,mixed>  $gate
+     */
+    private function buildMbtiResultPageExportDocument(Attempt $attempt, array $gate, string $traceId): string
+    {
+        if (! $this->gotenbergChromiumPdfClient->enabled()) {
+            throw new \RuntimeException('Gotenberg result-page PDF engine is disabled.');
+        }
+
+        $printUrl = $this->mbtiResultPrintUrl($attempt, $gate);
+        if ($printUrl === null) {
+            throw new \RuntimeException('Gotenberg result-page print URL is not configured.');
+        }
+
+        return $this->gotenbergChromiumPdfClient->convertUrl($printUrl, [
+            'printBackground' => true,
+            'preferCssPageSize' => true,
+            'emulatedMediaType' => 'print',
+            'waitForExpression' => 'window.__FERMAT_PDF_READY__ === true',
+            'failOnHttpStatusCodes' => '400,401,403,404,500,502,503',
+            'extraHttpHeaders' => json_encode([
+                'X-Fermat-Pdf-Trace' => $traceId,
+            ], JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR),
+        ]);
+    }
+
+    /**
+     * @param  array<string,mixed>  $gate
+     */
+    private function mbtiResultPrintUrl(Attempt $attempt, array $gate = []): ?string
     {
         $baseUrl = rtrim(trim((string) config('gotenberg.result_print_base_url', '')), '/');
         if ($baseUrl === '') {
             return null;
         }
 
-        $locale = trim((string) ($attempt->locale ?? ''));
-        $locale = $locale !== '' ? $locale : 'en';
+        $rawLocale = strtolower(trim((string) ($attempt->locale ?? '')));
+        $locale = str_starts_with($rawLocale, 'zh') ? 'zh' : 'en';
         $attemptId = trim((string) $attempt->id);
         if ($attemptId === '') {
             return null;
         }
 
-        $pathTemplate = trim((string) config('gotenberg.result_print_path_template', '/{locale}/attempts/{attempt_id}/report'));
-        $pathTemplate = $pathTemplate !== '' ? $pathTemplate : '/{locale}/attempts/{attempt_id}/report';
+        $pathTemplate = trim((string) config('gotenberg.result_print_path_template', '/{locale}/result/{attempt_id}'));
+        $pathTemplate = $pathTemplate !== '' ? $pathTemplate : '/{locale}/result/{attempt_id}';
         $path = strtr($pathTemplate, [
             '{locale}' => rawurlencode($locale),
             '{attempt_id}' => rawurlencode($attemptId),
         ]);
 
-        return $baseUrl.'/'.ltrim($path, '/');
+        $url = $baseUrl.'/'.ltrim($path, '/');
+        if (self::MBTI_RESULT_PAGE_EXPORT_SURFACE_VERSION !== '') {
+            $separator = str_contains($url, '?') ? '&' : '?';
+            $url .= $separator.http_build_query([
+                'pdf' => '1',
+                'surface' => self::MBTI_RESULT_PAGE_EXPORT_SURFACE_VERSION,
+                'pdf_token' => $this->resultPageExportToken($attempt, $gate, $locale),
+            ], '', '&', PHP_QUERY_RFC3986);
+        }
+
+        return $url;
+    }
+
+    /**
+     * @param  array<string,mixed>  $gate
+     */
+    private function resultPageExportToken(Attempt $attempt, array $gate, string $locale): string
+    {
+        $expiresAt = now()->addMinutes(10)->getTimestamp();
+        $payload = [
+            'v' => 1,
+            'typ' => 'mbti_result_page_pdf',
+            'attempt_id' => (string) $attempt->id,
+            'user_id' => (string) ($attempt->user_id ?? ''),
+            'owner_id' => (string) (($attempt->user_id ?? null) ?: ($attempt->anon_id ?? '')),
+            'locale' => $locale,
+            'surface' => self::MBTI_RESULT_PAGE_EXPORT_SURFACE_VERSION,
+            'engine' => self::RESULT_PAGE_EXPORT_ENGINE,
+            'entitlement' => ((bool) ($gate['locked'] ?? true)) ? 'locked' : 'unlocked',
+            'variant' => $this->normalizeVariant((string) ($gate['variant'] ?? 'free')),
+            'exp' => $expiresAt,
+        ];
+
+        $encodedPayload = $this->base64UrlEncode(json_encode($payload, JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR));
+        $signature = hash_hmac('sha256', $encodedPayload, $this->resultPageExportTokenSecret());
+
+        return $encodedPayload.'.'.$signature;
+    }
+
+    private function resultPageExportTokenSecret(): string
+    {
+        $secret = trim((string) config('gotenberg.result_print_token_secret', ''));
+        if ($secret !== '') {
+            return $secret;
+        }
+
+        return 'fap-result-page-pdf-local-key';
+    }
+
+    private function base64UrlEncode(string $value): string
+    {
+        return rtrim(strtr(base64_encode($value), '+/', '-_'), '=');
     }
 
     /**
