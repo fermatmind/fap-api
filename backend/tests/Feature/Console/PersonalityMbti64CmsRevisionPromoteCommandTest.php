@@ -378,6 +378,38 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         $this->assertSame(0, PersonalityProfileSection::query()->count());
     }
 
+    public function test_dry_run_supports_fixed_next_batch_six_v2_expansion_subset_without_live_writes(): void
+    {
+        $this->seedProjectionTargets();
+        $packagePath = $this->writePackage($this->nextBatchSixV2Package());
+        $this->createNextBatchSixDraftRevisions($packagePath);
+
+        $exitCode = Artisan::call('personality:mbti64-cms-revision-promote', [
+            '--package' => $packagePath,
+            '--dry-run' => true,
+            '--next-batch-6' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertTrue($payload['ok']);
+        $this->assertTrue($payload['dry_run']);
+        $this->assertFalse($payload['write']);
+        $this->assertSame('next_batch_6', $payload['contract']['subset']['mode']);
+        $this->assertFalse($payload['contract']['subset']['arbitrary_url_subset_allowed']);
+        $this->assertSame(self::NEXT_BATCH_6_URLS, $payload['contract']['subset']['allowed_urls']);
+        $this->assertSame(6, $payload['row_count']);
+        $this->assertSame(6, $payload['variant_row_count']);
+        $this->assertSame(0, $payload['comparison_row_count']);
+        $this->assertSame(6, $payload['would_promote_count']);
+        $this->assertSame(self::NEXT_BATCH_6_URLS, array_column($payload['rows'], 'url'));
+        $this->assertFalse($payload['writes_committed']);
+        $this->assertSame(0, PersonalityProfileVariantSeoMeta::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantSection::query()->count());
+        $this->assertSame(0, PersonalityProfileSection::query()->count());
+    }
+
     public function test_write_promotes_eighty_eight_agent_projection_revisions_without_index_search_side_effects(): void
     {
         $targets = $this->seedProjectionTargets();
@@ -523,6 +555,42 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
             ->first());
     }
 
+    public function test_write_promotes_only_fixed_next_batch_six_v2_expansion_subset(): void
+    {
+        $targets = $this->seedProjectionTargets();
+        $packagePath = $this->writePackage($this->nextBatchSixV2Package());
+        $this->createNextBatchSixDraftRevisions($packagePath);
+        $options = $this->promoteWriteOptions($packagePath);
+        $options['--next-batch-6'] = true;
+
+        $exitCode = Artisan::call('personality:mbti64-cms-revision-promote', $options);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(0, $exitCode, Artisan::output());
+        $this->assertTrue($payload['ok']);
+        $this->assertTrue($payload['write']);
+        $this->assertSame('next_batch_6', $payload['contract']['subset']['mode']);
+        $this->assertSame(6, $payload['row_count']);
+        $this->assertSame(6, $payload['variant_row_count']);
+        $this->assertSame(0, $payload['comparison_row_count']);
+        $this->assertSame(6, $payload['promoted_count']);
+        $this->assertSame(6, PersonalityProfileVariantSeoMeta::query()->count());
+        $this->assertSame(0, PersonalityProfileSection::query()->where('section_key', 'mbti64_comparison_a_vs_t')->count());
+
+        foreach (['zh-CN|INTP-A', 'en|INTP-A', 'zh-CN|ESFP-A', 'en|ESFP-A', 'en|ENFJ-A', 'zh-CN|ENFJ-A'] as $targetKey) {
+            PersonalityProfileVariantSeoMeta::query()
+                ->where('personality_profile_variant_id', (int) $targets[$targetKey]->id)
+                ->firstOrFail();
+        }
+
+        $this->assertNull(PersonalityProfileVariantSeoMeta::query()
+            ->where('personality_profile_variant_id', (int) $targets['en|ENTJ-A']->id)
+            ->first());
+        $this->assertNull(PersonalityProfileVariantSeoMeta::query()
+            ->where('personality_profile_variant_id', (int) $targets['zh-CN|ENFP-A']->id)
+            ->first());
+    }
+
     public function test_visible_query_backed_three_subset_is_idempotent_after_write(): void
     {
         $this->seedProjectionTargets();
@@ -633,6 +701,38 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
         $package = $this->nextBatchSixPackage();
         $package['recommendations'][0]['target_url'] = 'https://fermatmind.com/en/personality/entj-a';
         $package['summary']['recommendation_count'] = 6;
+
+        $packagePath = $this->writePackage($package);
+
+        $exitCode = Artisan::call('personality:mbti64-cms-revision-promote', [
+            '--package' => $packagePath,
+            '--dry-run' => true,
+            '--next-batch-6' => true,
+            '--json' => true,
+        ]);
+
+        $payload = $this->jsonOutput();
+        $this->assertSame(1, $exitCode, Artisan::output());
+        $this->assertFalse($payload['ok']);
+        $this->assertContains('next_batch_6_url_set_mismatch', array_map(
+            static fn (array $error): string => (string) ($error['code'] ?? ''),
+            $payload['errors'] ?? []
+        ));
+        $this->assertContains('next_batch_6_subset_incomplete', array_map(
+            static fn (array $error): string => (string) ($error['code'] ?? ''),
+            $payload['errors'] ?? []
+        ));
+        $this->assertSame(0, PersonalityProfileVariantSeoMeta::query()->count());
+        $this->assertSame(0, PersonalityProfileVariantSection::query()->count());
+        $this->assertSame(0, PersonalityProfileSection::query()->count());
+    }
+
+    public function test_next_batch_six_v2_subset_fails_closed_when_fixed_url_is_missing_or_extra_url_is_present(): void
+    {
+        $this->seedProjectionTargets();
+        $package = $this->nextBatchSixV2Package();
+        $package['recommendations'][0]['target_url'] = 'https://fermatmind.com/en/personality/entj-a';
+        $package['target_count'] = 6;
 
         $packagePath = $this->writePackage($package);
 
@@ -998,8 +1098,8 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
                 'snapshot_json' => [
                     'mbti64_agent_projection_draft_v1' => [
                         'source' => [
-                            'artifact' => 'PERSONALITY-AGENT-OPERATIONS-NEXT-BATCH-6-HANDOFF-01',
-                            'status' => 'pass',
+                            'artifact' => (string) ($package['artifact'] ?? 'PERSONALITY-AGENT-OPERATIONS-NEXT-BATCH-6-HANDOFF-01'),
+                            'status' => (string) ($package['status'] ?? 'pass'),
                             'source_sha256' => $sourceSha256,
                             'qa_artifact' => 'PERSONALITY-AGENT-OPERATIONS-NEXT-BATCH-6-HANDOFF-QA-01',
                             'qa_source_sha256' => str_repeat('a', 64),
@@ -1118,6 +1218,68 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
             'blockers' => [],
             'warnings' => [],
             'recommended_next_task' => 'PERSONALITY-AGENT-CMS-DRAFT-NEXT-BATCH-6-WRITE-01',
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function nextBatchSixV2Package(): array
+    {
+        $recommendations = [];
+        foreach (self::NEXT_BATCH_6_URLS as $url) {
+            $path = (string) (parse_url($url, PHP_URL_PATH) ?: '');
+            $recommendation = $this->projectionRecommendation($path);
+            $nested = is_array($recommendation['recommendations'] ?? null) ? $recommendation['recommendations'] : [];
+            $recommendation['recommendations'] = [
+                'title' => (string) ($nested['title']['recommended'] ?? ''),
+                'description' => (string) ($nested['description']['recommended'] ?? ''),
+                'h1' => (string) ($nested['h1']['recommended'] ?? ''),
+                'quick_answer' => (string) ($nested['quick_answer']['recommended'] ?? ''),
+                'sections' => array_map(
+                    static fn (int $index): array => [
+                        'h2' => 'V2 section '.$index.' for '.basename($path),
+                        'body' => 'Expanded V2 evidence-aware copy '.$index.' for '.$path.'.',
+                    ],
+                    range(1, 8)
+                ),
+                'faq' => array_map(
+                    static fn (int $index): array => [
+                        'question' => 'V2 question '.$index.' for '.basename($path).'?',
+                        'answer' => 'V2 safe answer '.$index.' for '.$path.'.',
+                    ],
+                    range(1, 9)
+                ),
+                'internal_links' => $nested['internal_links'] ?? [],
+                'differentiation_notes' => ['V2 competitor-gap differentiation note for '.$path.'.'],
+                'a_t_difference_module' => [
+                    'summary' => 'A/T difference module for '.$path.'.',
+                    'rows' => [
+                        ['dimension' => 'stress response', 'a_side' => 'steadier recovery', 't_side' => 'more self-monitoring'],
+                    ],
+                ],
+                'cognitive_function_mechanism' => 'Mechanism copy for '.$path.'.',
+                'common_misreads' => ['Do not read this profile as a deterministic career or IQ label.'],
+            ];
+            $recommendation['qa_status'] = 'PASS_READY_FOR_CONTENT_EXPANSION_REVIEW';
+            $recommendations[] = $recommendation;
+        }
+
+        return [
+            'artifact' => 'MBTI64-NEXT-BATCH-6-COMPETITOR-GAP-CONTENT-EXPANSION-V2-01',
+            'generated_at' => '2026-06-27T00:00:00Z',
+            'status' => 'pass_ready_for_editorial_review_and_approval_queue_repair',
+            'target_count' => 6,
+            'summary' => [
+                'query_backed_count' => 3,
+                'bilingual_paired_counterpart_count' => 3,
+                'minimum_sections_per_page' => 8,
+                'minimum_faq_per_page' => 9,
+            ],
+            'recommendations' => $recommendations,
+            'blockers' => [],
+            'warnings' => [],
+            'recommended_next_task' => 'MBTI64-NEXT-BATCH-6-COMPETITOR-GAP-CONTENT-EXPANSION-V2-CMS-DRAFT-WRITE-01',
         ];
     }
 
@@ -1278,17 +1440,44 @@ final class PersonalityMbti64CmsRevisionPromoteCommandTest extends TestCase
             'locale' => $locale,
             'page_type' => 'variant',
             'seo' => [
-                'title' => (string) ($recommendations['title']['recommended'] ?? ''),
-                'description' => (string) ($recommendations['description']['recommended'] ?? ''),
-                'h1' => (string) ($recommendations['h1']['recommended'] ?? ''),
+                'title' => $this->recommendationText($recommendations['title'] ?? null),
+                'description' => $this->recommendationText($recommendations['description'] ?? null),
+                'h1' => $this->recommendationText($recommendations['h1'] ?? null),
             ],
             'content' => [
-                'quick_answer' => (string) ($recommendations['quick_answer']['recommended'] ?? ''),
-            ],
+                'quick_answer' => $this->recommendationText($recommendations['quick_answer'] ?? null),
+            ] + $this->sectionFieldsForRecommendation($recommendations),
             'faq' => array_values((array) ($recommendations['faq'] ?? [])),
             'internal_links' => array_values((array) ($recommendations['internal_links'] ?? [])),
             'differentiation_notes' => array_values((array) ($recommendations['differentiation_notes'] ?? [])),
         ];
+    }
+
+    private function recommendationText(mixed $value): string
+    {
+        if (is_array($value)) {
+            return (string) ($value['recommended'] ?? '');
+        }
+
+        return is_string($value) ? $value : '';
+    }
+
+    /**
+     * @param  array<string,mixed>  $recommendations
+     * @return array<string,mixed>
+     */
+    private function sectionFieldsForRecommendation(array $recommendations): array
+    {
+        $sections = [];
+        foreach (array_values((array) ($recommendations['sections'] ?? [])) as $index => $section) {
+            if (! is_array($section)) {
+                continue;
+            }
+
+            $sections['v2_section_'.((string) ($index + 1))] = $section;
+        }
+
+        return $sections;
     }
 
     /**
