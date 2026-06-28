@@ -4132,7 +4132,7 @@
         "status": "pass"
       }
     },
-    "commit_sha": null,
+    "commit_sha": "493ec08e582dfb124b8573eddad77cc31d383219",
     "depends_on": [
       "BIG5-CONTROLLED-PILOT-RUNTIME-ACTIVATION-01"
     ],
@@ -10574,7 +10574,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2350",
     "remote_branch_deleted": true,
     "repo": "fap-api",
-    "status": "pr_open",
+    "status": "merged",
     "title": "FA30-API-09: Add RIASEC major graph backend authority contract",
     "train_scope": "fa30_riasec_major_graph_backend_authority",
     "transitions": [
@@ -10656,7 +10656,7 @@
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2353",
     "remote_branch_deleted": false,
     "repo": "fap-api",
-    "status": "pr_open",
+    "status": "ready_to_merge",
     "title": "FA30-API-10: Add competitor alternatives source-ledger contract",
     "train_scope": "fa30_competitor_alternatives_source_ledger",
     "transitions": [
@@ -64604,9 +64604,9 @@
     "commit_sha": "4d03f73a7c67ad386a28cacfc1f6a45897f3d18e",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2496",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-28T13:56:32Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -65019,7 +65019,7 @@
     "branch": "codex/mbti-main-free-serp-tdk-01",
     "title": "MBTI-MAIN-FREE-SERP-TDK-01: seo(mbti): align main free-test TDK authority",
     "train_scope": "mbti_main_lookup_metadata_authority",
-    "status": "pr_open",
+    "status": "merged",
     "depends_on": [],
     "checks": {
       "dependency_verification": {
@@ -65068,9 +65068,9 @@
     "commit_sha": "44f569449afa97e5a2e39c6dbf21ebdb87ba2c78",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2520",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-28T13:56:32Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -65099,6 +65099,121 @@
         "at": "2026-06-28T21:50:02+08:00",
         "status": "ready_to_merge",
         "note": "GitHub checks passed for PR #2520 and changed files remain within the MBTI main TDK authority scope."
+      },
+      {
+        "at": "2026-06-28T22:03:50+08:00",
+        "status": "merged",
+        "note": "Reconciled during the dependent FAQ content PR: GitHub reports PR #2520 merged, origin/main contains merge commit e4480b9521d6e872dd52a9cc4c6743e4ea232194, remote branch is deleted, and local cleanup was completed manually because scripts/post_merge_cleanup.sh is not present."
+      }
+    ]
+  },
+  "MBTI-MAIN-FREE-FAQ-CONTENT-01": {
+    "repo": "fap-api",
+    "base": "main",
+    "branch": "codex/mbti-main-free-faq-content-01",
+    "title": "MBTI-MAIN-FREE-FAQ-CONTENT-01: seo(mbti): strengthen main free-test visible FAQ authority",
+    "train_scope": "mbti_main_visible_faq_content_authority",
+    "status": "pr_open",
+    "depends_on": [
+      "MBTI-MAIN-FREE-SERP-TDK-01"
+    ],
+    "checks": {
+      "authorization": {
+        "status": "pass",
+        "evidence": "User provided explicit implementation plan for the MBTI main TDK/FAQ/Schema three PR sequence and requested continuation to the next PR."
+      },
+      "dependency_verification": {
+        "status": "pass",
+        "evidence": "PR #2520 is merged and origin/main contains merge commit e4480b9521d6e872dd52a9cc4c6743e4ea232194."
+      },
+      "route_list": {
+        "status": "pass",
+        "command": "cd backend && php artisan route:list",
+        "evidence": "PASS; route table renders successfully and GET api/v0.3/scales/lookup remains registered."
+      },
+      "focused_lookup_faq_test": {
+        "status": "pass",
+        "command": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Feature/V0_3/ScalesLookupSeoMetadataTest.php --filter mbti_zh_lookup_uses_free_test_visible_faq_authority --no-ansi",
+        "evidence": "PASS with existing file_get_contents warning; 1 test, 13 assertions. Asserted MBTI zh lookup content_i18n_json.zh.faq covers MBTI免费测试, 16型人格完整结果/报告, fee intent, non-diagnostic boundary, and excludes high-risk copy."
+      },
+      "curl_lookup_faq_readback": {
+        "status": "pass",
+        "command": "local sqlite seed + php artisan serve on 127.0.0.1:18317 + curl /api/v0.3/scales/lookup?slug=mbti-personality-test-16-personality-types&locale=zh",
+        "evidence": "PASS; readback returned 4 FAQ questions including MBTI免费测试 fee intent, 16型人格完整结果/报告, and职业或心理诊断 boundary; forbidden phrases were absent."
+      },
+      "mbti_ci": {
+        "status": "pass",
+        "command": "bash backend/scripts/ci_verify_mbti.sh",
+        "evidence": "PASS; full MBTI CI chain exited 0, including verify_mbti, event acceptance, personality authority gate, auth/order/security, migration/static/schema gates, OpenAPI, and dependency security gates."
+      },
+      "manifest_yaml_parse": {
+        "status": "pass",
+        "command": "ruby -e \"require 'yaml'; YAML.load_file('docs/codex/pr-train.yaml')\"",
+        "evidence": "PASS; pr-train.yaml parsed successfully."
+      },
+      "state_json_parse": {
+        "status": "pass",
+        "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+        "evidence": "PASS; pr-train-state.json parsed successfully."
+      },
+      "diff_check": {
+        "status": "pass",
+        "command": "git diff --check",
+        "evidence": "PASS; no whitespace errors."
+      },
+      "scope_validation": {
+        "status": "pass",
+        "evidence": "Changed files are limited to MBTI visible FAQ authority in ScaleRegistrySeeder, focused V0.3 lookup FAQ coverage, and authorized docs/codex train metadata. No TDK, schema policy/runtime, search, sitemap, llms, CMS production write, deploy, or fap-web files changed."
+      },
+      "github": {
+        "status": "pass",
+        "evidence": "PR #2525 checks succeeded after rebase on head 86e2b196cf2121393ca00be73ce382148e859ebd: hygiene, supply-chain, content-pack-build-validate, verify-bigfive, verify-mbti-legacy, verify-mbti-v2, Semgrep blocking secrets, Semgrep OSS, and semgrep sarif non-blocking upload."
+      }
+    },
+    "commit_sha": "ccf256a8523e713e6ef671eea93e5490d8b30eca",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2525",
+    "failure_reason": null,
+    "merged_at": null,
+    "remote_branch_deleted": false,
+    "local_cleanup_executed": false,
+    "production_write_execution": false,
+    "database_mutation": false,
+    "cms_mutation": false,
+    "api_runtime_change": true,
+    "publish_allowed": false,
+    "deploy_allowed": false,
+    "content_authority": "backend",
+    "authorized_by_user": "2026-06-28 explicit implementation request for MBTI main TDK/FAQ/Schema three PR plan; continuing PR2 after PR1 merged.",
+    "events": [
+      {
+        "at": "2026-06-28T22:04:10+08:00",
+        "status": "implementation_in_progress",
+        "note": "Started MBTI main visible FAQ authority PR from a clean origin/main worktree. Scope excludes TDK changes, schema policy/runtime, search, sitemap, llms, CMS production writes, deploy, and fap-web."
+      },
+      {
+        "at": "2026-06-28T22:14:20+08:00",
+        "status": "local_checks_passed",
+        "note": "Route list, focused lookup FAQ test, curl/readback, full MBTI CI, YAML/JSON parsing, diff check, and scope validation passed."
+      },
+      {
+        "at": "2026-06-28T22:16:20+08:00",
+        "status": "pr_open",
+        "note": "Opened PR #2525 for MBTI main visible FAQ authority."
+      },
+      {
+        "at": "2026-06-28T22:25:05+08:00",
+        "status": "ready_to_merge",
+        "note": "GitHub checks passed for PR #2525 and changed files remain within the MBTI main visible FAQ authority scope."
+      },
+      {
+        "at": "2026-06-28T22:34:20+08:00",
+        "status": "pr_open",
+        "note": "Merge was blocked because base branch changed. Rebased the PR branch onto origin/main 8e427030f; fresh GitHub checks are pending."
+      },
+      {
+        "at": "2026-06-28T22:40:05+08:00",
+        "status": "ready_to_merge",
+        "note": "Fresh GitHub checks passed after rebase and PR #2525 returned to CLEAN merge state."
       }
     ]
   }
