@@ -6,6 +6,7 @@ namespace Tests\Feature\V0_3;
 
 use App\Models\Attempt;
 use App\Models\Result;
+use App\Services\Report\Pdf\ResultPagePdfTokenService;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
@@ -328,6 +329,7 @@ final class AttemptPublicReportPdfParityTest extends TestCase
                 && str_contains($body, 'pdf=1')
                 && str_contains($body, 'surface=mbti.result_page_export.v1')
                 && str_contains($body, 'pdf_token=')
+                && str_contains($body, 'result_access_token=')
                 && str_contains($body, 'waitForExpression')
                 && str_contains($body, 'window.__FERMAT_PDF_READY__ === true')
                 && str_contains($body, 'failOnHttpStatusCodes')
@@ -338,6 +340,39 @@ final class AttemptPublicReportPdfParityTest extends TestCase
         Storage::disk('local')->assertExists(
             "artifacts/pdf/MBTI/{$attemptId}/nohash-mbti.result_page_export.v1-gotenberg_chromium-zh-locked-free/report_free.pdf"
         );
+    }
+
+    public function test_mbti_result_page_pdf_token_grants_only_matching_private_print_result_read(): void
+    {
+        $this->seedScales();
+        config()->set('fap.features.report_snapshot_strict_v2', false);
+        config()->set('gotenberg.result_print_token_secret', 'test-result-print-secret');
+
+        $attemptId = (string) Str::uuid();
+        $otherAttemptId = (string) Str::uuid();
+        $this->createAttempt($attemptId, 'MBTI', 'anon_pdf_print_token');
+        $this->createResult($attemptId);
+        $this->createAttempt($otherAttemptId, 'MBTI', 'anon_pdf_print_token_other');
+        $this->createResult($otherAttemptId);
+
+        $attempt = Attempt::query()->where('id', $attemptId)->firstOrFail();
+        $token = app(ResultPagePdfTokenService::class)->issueForMbtiResultPageExport($attempt, [
+            'locked' => false,
+            'variant' => 'full',
+        ], 'zh');
+
+        $result = $this->withHeaders([
+            'X-Result-Access-Token' => $token,
+        ])->get("/api/v0.3/attempts/{$attemptId}/result?locale=zh-CN");
+
+        $result->assertStatus(200);
+        $this->assertSame('INTJ-A', $result->json('type_code'));
+
+        $wrongAttempt = $this->withHeaders([
+            'X-Result-Access-Token' => $token,
+        ])->get("/api/v0.3/attempts/{$otherAttemptId}/result?locale=zh-CN");
+
+        $wrongAttempt->assertStatus(404);
     }
 
     public function test_public_mbti_result_page_pdf_does_not_fallback_to_mpdf_when_gotenberg_fails(): void
