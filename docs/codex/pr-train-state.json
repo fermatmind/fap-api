@@ -65019,7 +65019,7 @@
     "branch": "codex/mbti-main-free-serp-tdk-01",
     "title": "MBTI-MAIN-FREE-SERP-TDK-01: seo(mbti): align main free-test TDK authority",
     "train_scope": "mbti_main_lookup_metadata_authority",
-    "status": "pr_open",
+    "status": "merged",
     "depends_on": [],
     "checks": {
       "dependency_verification": {
@@ -65068,9 +65068,9 @@
     "commit_sha": "44f569449afa97e5a2e39c6dbf21ebdb87ba2c78",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2520",
     "failure_reason": null,
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-28T13:56:32Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "production_write_execution": false,
     "database_mutation": false,
     "cms_mutation": false,
@@ -65113,7 +65113,7 @@
     "branch": "codex/mbti-main-free-faq-content-01",
     "title": "MBTI-MAIN-FREE-FAQ-CONTENT-01: seo(mbti): strengthen main free-test visible FAQ authority",
     "train_scope": "mbti_main_visible_faq_content_authority",
-    "status": "local_checks_passed",
+    "status": "pr_open",
     "depends_on": [
       "MBTI-MAIN-FREE-SERP-TDK-01"
     ],
@@ -65166,8 +65166,8 @@
         "evidence": "Changed files are limited to MBTI visible FAQ authority in ScaleRegistrySeeder, focused V0.3 lookup FAQ coverage, and authorized docs/codex train metadata. No TDK, schema policy/runtime, search, sitemap, llms, CMS production write, deploy, or fap-web files changed."
       }
     },
-    "commit_sha": null,
-    "pr_url": null,
+    "commit_sha": "5e849fc355fba45fa22830be54d17a320da5912c",
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2525",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -65190,6 +65190,11 @@
         "at": "2026-06-28T22:14:20+08:00",
         "status": "local_checks_passed",
         "note": "Route list, focused lookup FAQ test, curl/readback, full MBTI CI, YAML/JSON parsing, diff check, and scope validation passed."
+      },
+      {
+        "at": "2026-06-28T22:16:20+08:00",
+        "status": "pr_open",
+        "note": "Opened PR #2525 for MBTI main visible FAQ authority."
       }
     ]
   }
