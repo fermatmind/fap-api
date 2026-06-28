@@ -468,6 +468,19 @@ final class Mbti64CmsRevisionPromotionService
 
         $variantPages = (int) ($summary['variant_pages'] ?? -1);
         $comparisonPages = (int) ($summary['comparison_pages'] ?? -1);
+        if (! array_key_exists('variant_pages', $summary) || ! array_key_exists('comparison_pages', $summary)) {
+            $variantPages = 0;
+            $comparisonPages = 0;
+            foreach ($recommendations as $recommendation) {
+                $identity = $this->identityForRecommendation($recommendation);
+                if (($identity['page_type'] ?? null) === 'variant') {
+                    $variantPages++;
+                }
+                if (($identity['page_type'] ?? null) === 'comparison') {
+                    $comparisonPages++;
+                }
+            }
+        }
         if ($variantPages !== 58 || $comparisonPages !== 0) {
             $errors[] = [
                 'field' => 'summary',
