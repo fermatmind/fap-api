@@ -1,0 +1,90 @@
+{
+  "schema_version": "fap.big5.result_page_v2.asset_agent.audit.v0.1",
+  "task": "staging_import_gate",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "ok": true,
+  "staging_write_performed": true,
+  "staging_artifacts": {
+    "selector_asset_candidates.staging.jsonl": {
+      "relative_path": "content_assets/big5/result_page_v2/staging_candidate_imports/share_pdf_history_compare_safe_content/selector_asset_candidates.staging.jsonl",
+      "sha256": "eeebfec2e139dc577f11d7ba88e2e2ae944ff041caa6d8082ea01a6a5454e506",
+      "size": 247428
+    },
+    "content_asset_candidates.staging.jsonl": {
+      "relative_path": "content_assets/big5/result_page_v2/staging_candidate_imports/share_pdf_history_compare_safe_content/content_asset_candidates.staging.jsonl",
+      "sha256": "f98a5248df0d5568277945c028430df3b105b3d4b93e462fc4d1f497fa15b23a",
+      "size": 391365
+    },
+    "staging_import_manifest.json": {
+      "relative_path": "content_assets/big5/result_page_v2/staging_candidate_imports/share_pdf_history_compare_safe_content/staging_import_manifest.json",
+      "sha256": "72c91772e931294a7c3e0d7aaffa790e0d40494bb12e6887e0a93787d2dc6405",
+      "size": 952
+    },
+    "staging_import_validation_report.json": {
+      "relative_path": "content_assets/big5/result_page_v2/staging_candidate_imports/share_pdf_history_compare_safe_content/staging_import_validation_report.json",
+      "sha256": "d41ffa711dbf6599b44d078b98d9d6b65b9e2bd90cf4f5df6be3cf8b53af1f3c",
+      "size": 1431
+    },
+    "repair_log.json": {
+      "relative_path": "content_assets/big5/result_page_v2/staging_candidate_imports/share_pdf_history_compare_safe_content/repair_log.json",
+      "sha256": "f65ef8a77a51a2b665c33ab11cad32c0adcd0f14dc9e0368381bdf0728b31c4b",
+      "size": 237
+    }
+  },
+  "validation_report": {
+    "schema_version": "fap.big5.result_page_v2.asset_agent.audit.v0.1",
+    "task": "staging_import_validation",
+    "runtime_use": "staging_only",
+    "production_use_allowed": false,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false,
+    "candidate_dir": "content_assets/big5/result_page_v2/agent_runs/share_pdf_history_compare_safe_content",
+    "staging_output_dir": "content_assets/big5/result_page_v2/staging_candidate_imports/share_pdf_history_compare_safe_content",
+    "allow_staging_write": true,
+    "staging_write_performed": true,
+    "review_manifest": {
+      "present": true,
+      "valid": true,
+      "errors": []
+    },
+    "candidate_counts": {
+      "selector_asset": 96,
+      "content_asset": 96
+    },
+    "candidate_validation": {
+      "status": "pass",
+      "selector_asset_candidate_count": 96,
+      "content_asset_candidate_count": 96,
+      "error_count": 0,
+      "errors": []
+    },
+    "leak_scan": {
+      "status": "pass",
+      "hit_count": 0,
+      "hits": []
+    },
+    "negative_guarantees": {
+      "database_write": false,
+      "cms_write": false,
+      "frontend_copy_write": false,
+      "final_result_payload_generation": false,
+      "runtime_flag_change": false,
+      "release_snapshot_change": false,
+      "production_import_gate_change": false,
+      "rollout_gate_change": false
+    }
+  },
+  "repair_log": {
+    "schema_version": "fap.big5.result_page_v2.asset_agent.audit.v0.1",
+    "task": "staging_import_repair_log",
+    "runtime_use": "staging_only",
+    "production_use_allowed": false,
+    "repair_required": false,
+    "entries": []
+  }
+}

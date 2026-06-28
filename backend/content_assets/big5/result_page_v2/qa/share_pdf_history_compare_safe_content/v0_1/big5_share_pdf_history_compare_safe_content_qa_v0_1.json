@@ -1,0 +1,56 @@
+{
+  "schema": "fap.big5.result_page_v2.share_pdf_history_compare_safe_content_qa.v0_1",
+  "status": "pass",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "counts": {
+    "selector_asset": 96,
+    "content_asset": 96,
+    "profile_count": 8,
+    "surface_count": 4,
+    "role_count": 3
+  },
+  "surface_qa": {
+    "share_summary_only": true,
+    "pdf_private_boundary": true,
+    "history_identity_lock_avoided": true,
+    "compare_rank_or_winner_language_avoided": true
+  },
+  "editorial_qa": {
+    "status": "pass",
+    "non_diagnostic": true,
+    "non_hiring": true,
+    "non_deterministic": true,
+    "bounded_surface_language": true,
+    "min_body_chars": 220,
+    "short_body_repairs": 69
+  },
+  "rendered_hygiene_scan": {
+    "status": "pass",
+    "hit_count": 0,
+    "hits": []
+  },
+  "remaining_holds": [
+    "rendered_preview_deferred_to_later_pr",
+    "runtime_disabled",
+    "production_disabled"
+  ],
+  "staging_import_qa": {
+    "status": "pass",
+    "selector_asset_candidates": 96,
+    "content_asset_candidates": 96,
+    "validation_error_count": 0,
+    "review_error_count": 0,
+    "leak_hit_count": 0
+  },
+  "staging_manifest": {
+    "runtime_use": "staging_only",
+    "production_use_allowed": false,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false
+  }
+}

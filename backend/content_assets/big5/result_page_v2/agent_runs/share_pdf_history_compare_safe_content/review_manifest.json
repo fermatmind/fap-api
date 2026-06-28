@@ -1,0 +1,36 @@
+{
+  "schema": "fap.big5.result_page_v2.share_pdf_history_compare_safe_content.review_manifest.v0_1",
+  "human_reviewed": true,
+  "review_status": "approved_for_staging",
+  "reviewed_by": "codex_agent_content_asset_train",
+  "reviewed_at": "2026-06-28T02:58:00Z",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "approved_candidate_files": [
+    "selector_asset_candidates.jsonl",
+    "content_asset_candidates.jsonl"
+  ],
+  "review_scope": {
+    "candidate_artifacts_only": true,
+    "staging_import_allowed": true,
+    "runtime_enablement_allowed": false,
+    "production_import_allowed": false,
+    "frontend_copy_allowed": false,
+    "cms_or_seo_allowed": false
+  },
+  "surface_policy": {
+    "share": "summary_only_public_safe",
+    "pdf": "personal_archive_boundary",
+    "history": "revisit_without_identity_lock",
+    "compare": "delta_without_rank_or_winner_language"
+  },
+  "redaction": {
+    "private_url": false,
+    "attempt_id": false,
+    "raw_scores": false,
+    "internal_metadata": false
+  }
+}
