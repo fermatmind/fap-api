@@ -63738,7 +63738,7 @@
     "branch": "codex/big5-content-asset-benchmark-rubric-01",
     "title": "BIG5-CONTENT-ASSET-BENCHMARK-RUBRIC-01: Add Big Five content asset benchmark rubric",
     "train_scope": "big5_result_page_content_asset_thickening",
-    "status": "committed_pending_push",
+    "status": "pr_open",
     "depends_on": [],
     "checks": {
       "authorization": {
@@ -63771,11 +63771,11 @@
       },
       "github": {
         "status": "pending",
-        "evidence": null
+        "evidence": "PR #2489 opened; GitHub checks pending."
       }
     },
     "commit_sha": null,
-    "pr_url": null,
+    "pr_url": "https://github.com/fermatmind/fap-api/pull/2489",
     "failure_reason": null,
     "merged_at": null,
     "remote_branch_deleted": false,
@@ -63808,6 +63808,11 @@
         "at": "2026-06-28T01:24:00Z",
         "status": "committed_pending_push",
         "note": "Commit SHA will be recorded from GitHub PR head/merge evidence to avoid self-referential stale SHA inside the same commit."
+      },
+      {
+        "at": "2026-06-28T01:28:00Z",
+        "status": "pr_open",
+        "note": "Opened PR #2489 for benchmark rubric scope."
       }
     ]
   },
