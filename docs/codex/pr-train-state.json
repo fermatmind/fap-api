@@ -64654,15 +64654,15 @@
     "branch": "codex/pr-eq-v20-02-depth-modules-v23",
     "title": "PR-EQ-V20-02 Backend EQ v2.3 result page depth modules",
     "train_scope": "eq_v20_content_asset_expansion",
-    "status": "ready_to_merge",
+    "status": "merged",
     "depends_on": [
       "PR-EQ-V20-01"
     ],
-    "commit_sha": "70da2707849a954fcbcd9cc3b947f2922a7afb91",
+    "commit_sha": "12a72d83949cb0d7f071a2d3cec72bf9506db9b8",
     "pr_url": "https://github.com/fermatmind/fap-api/pull/2519",
-    "merged_at": null,
-    "remote_branch_deleted": false,
-    "local_cleanup_executed": false,
+    "merged_at": "2026-06-28T13:36:25Z",
+    "remote_branch_deleted": true,
+    "local_cleanup_executed": true,
     "failure_reason": null,
     "checks": {
       "authorization": {
@@ -64740,9 +64740,15 @@
         "at": "2026-06-28T13:29:37Z",
         "status": "ready_to_merge",
         "notes": "GitHub checks passed; scope and merge state clean before merge."
+      },
+      {
+        "at": "2026-06-28T13:48:27Z",
+        "status": "merged_reconciled",
+        "notes": "Verified PR #2519 merged, origin/main contains merge commit, main worktree synced, local task branch deleted, and remote branch removed before starting PR-EQ-V20-03."
       }
     ],
-    "notes": "Part of EQ v2.3 productization train; production deploy/smoke remain separately authorized."
+    "notes": "Part of EQ v2.3 productization train; production deploy/smoke remain separately authorized.",
+    "merge_commit_sha": "12a72d83949cb0d7f071a2d3cec72bf9506db9b8"
   },
   "PR-EQ-V20-03": {
     "repo": "fap-api",
@@ -64750,7 +64756,7 @@
     "branch": "codex/pr-eq-v20-03-scene-variants-v23",
     "title": "PR-EQ-V20-03 Backend EQ v2.3 scene variants",
     "train_scope": "eq_v20_content_asset_expansion",
-    "status": "initialized",
+    "status": "local_checks_passed",
     "depends_on": [
       "PR-EQ-V20-02"
     ],
@@ -64764,6 +64770,64 @@
       "authorization": {
         "status": "pass",
         "evidence": "User provided explicit implementation plan for PR-EQ-V20-02 through PR-EQ-V20-06 and requested implementation."
+      },
+      "dependency": {
+        "status": "pass",
+        "evidence": "PR-EQ-V20-02 merged as #2519 with merge commit 12a72d83949cb0d7f071a2d3cec72bf9506db9b8 and is included in origin/main."
+      },
+      "local": [
+        {
+          "cmd": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:lint --pack=EQ_60 --pack-version=v1",
+          "status": "passed"
+        },
+        {
+          "cmd": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan content:compile --pack=EQ_60 --pack-version=v1",
+          "status": "passed"
+        },
+        {
+          "cmd": "rsync -a --delete backend/content_packs/EQ_60/v1/compiled/ backend/content_packs/EQ_EMOTIONAL_INTELLIGENCE/v1/compiled/",
+          "status": "passed"
+        },
+        {
+          "cmd": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ContentGateTest",
+          "status": "passed"
+        },
+        {
+          "cmd": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60V5ReportContractTest",
+          "status": "passed"
+        },
+        {
+          "cmd": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60GoldenCasesTest",
+          "status": "passed"
+        },
+        {
+          "cmd": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test --filter=Eq60ReportPaywallTest",
+          "status": "passed"
+        },
+        {
+          "cmd": "ruby YAML parse for docs/codex/pr-train.yaml",
+          "status": "passed"
+        },
+        {
+          "cmd": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+          "status": "passed"
+        },
+        {
+          "cmd": "reality_scene_variants JSON parse and EQ_60/EQ_EMOTIONAL_INTELLIGENCE mirror check",
+          "status": "passed"
+        },
+        {
+          "cmd": "git diff --check",
+          "status": "passed"
+        }
+      ],
+      "scope_validation": {
+        "status": "passed",
+        "evidence": "Staged files matched PR-EQ-V20-03 allowed paths before commit."
+      },
+      "diff_check": {
+        "status": "passed",
+        "evidence": "git diff --check and git diff --cached --check passed before commit."
       }
     },
     "events": [
@@ -64771,6 +64835,16 @@
         "at": "2026-06-28T13:19:31Z",
         "status": "initialized",
         "notes": "Initialized from user-provided V20 productization plan."
+      },
+      {
+        "at": "2026-06-28T13:48:27Z",
+        "status": "local_checks_passed",
+        "notes": "Mapped v2.3 180 scene variants into existing asset pack, refreshed compiled assets, preserved composer fallback contract, and passed V20-03 local validation."
+      },
+      {
+        "at": "2026-06-28T13:49:10Z",
+        "status": "scope_validation_passed",
+        "notes": "Path-limited staged file list matched V20-03 scope."
       }
     ],
     "notes": "Part of EQ v2.3 productization train; production deploy/smoke remain separately authorized."

@@ -145,10 +145,7 @@ final class Eq60GoldenCasesTest extends TestCase
             );
             $this->assertTrue((bool) ($freeReport['ok'] ?? false), 'golden case free report compose failed: '.$caseId);
 
-            $freeKeys = array_values(array_map(
-                static fn (array $section): string => (string) ($section['key'] ?? ''),
-                array_filter((array) data_get($freeReport, 'report.sections', []), 'is_array')
-            ));
+            $freeKeys = $this->legacySectionKeys((array) ($freeReport['report'] ?? []));
 
             $this->assertSame(
                 array_values(array_map('strval', (array) ($case['expected_free_sections'] ?? []))),
@@ -170,10 +167,7 @@ final class Eq60GoldenCasesTest extends TestCase
             );
             $this->assertTrue((bool) ($fullReport['ok'] ?? false), 'golden case full report compose failed: '.$caseId);
 
-            $fullKeys = array_values(array_map(
-                static fn (array $section): string => (string) ($section['key'] ?? ''),
-                array_filter((array) data_get($fullReport, 'report.sections', []), 'is_array')
-            ));
+            $fullKeys = $this->legacySectionKeys((array) ($fullReport['report'] ?? []));
 
             $this->assertSame(
                 array_values(array_map('strval', (array) ($case['expected_full_sections'] ?? []))),
@@ -213,6 +207,23 @@ final class Eq60GoldenCasesTest extends TestCase
             'EQ60_INCONSISTENT_D_ZH' => 'low_confidence_result',
             default => null,
         };
+    }
+
+    /**
+     * @param  array<string,mixed>  $report
+     * @return list<string>
+     */
+    private function legacySectionKeys(array $report): array
+    {
+        $sections = (array) data_get($report, 'sections', []);
+        if ($sections === []) {
+            $sections = (array) data_get($report, 'legacy_compat.sections', []);
+        }
+
+        return array_values(array_map(
+            static fn (array $section): string => (string) ($section['key'] ?? ''),
+            array_filter($sections, 'is_array')
+        ));
     }
 
     /**

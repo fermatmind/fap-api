@@ -138,6 +138,24 @@ final class Eq60ContentGateTest extends TestCase
             $this->assertNotSame('', (string) data_get($assets, 'assets.reality_translation.scenes.'.$scene.'.en.better_move'));
         }
 
+        $sceneVariants = (array) data_get($assets, 'assets.reality_scene_variants.assets', []);
+        $this->assertGreaterThanOrEqual(180, count($sceneVariants));
+        foreach ([
+            'eq.scene.feedback.high_empathy_low_recovery.primary',
+            'eq.scene.conflict.aware_but_unregulated.primary',
+            'eq.scene.relationship_boundary.low_confidence_result.primary',
+            'eq.scene.team_collaboration.team_stabilizer.primary',
+        ] as $assetId) {
+            $this->assertArrayHasKey($assetId, $sceneVariants);
+            $asset = (array) $sceneVariants[$assetId];
+            $this->assertNotSame('', (string) data_get($asset, 'zh-CN.typical_response'));
+            $this->assertNotSame('', (string) data_get($asset, 'en.typical_response'));
+            $this->assertNotSame('', (string) data_get($asset, 'zh-CN.micro_script'));
+            $this->assertNotSame('', (string) data_get($asset, 'en.micro_script'));
+            $this->assertNotEmpty((array) data_get($asset, 'zh-CN.evidence_signals'));
+            $this->assertNotEmpty((array) data_get($asset, 'en.evidence_signals'));
+        }
+
         foreach (['interpersonal_density', 'emotional_labor', 'conflict_frequency', 'feedback_intensity', 'autonomy_recovery', 'collaboration_complexity'] as $variable) {
             foreach (['low', 'medium', 'high'] as $level) {
                 $this->assertNotSame('', (string) data_get($assets, 'assets.career_environment.variables.'.$variable.'.'.$level.'.zh-CN.what_to_verify'));
