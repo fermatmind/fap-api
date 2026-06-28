@@ -1,0 +1,73 @@
+{
+  "schema": "fap.big5.result_page_v2.share_pdf_history_compare_safe_content.generation_summary.v0_1",
+  "status": "pass",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "candidate_stage": "share_pdf_history_compare_safe_content",
+  "candidate_counts": {
+    "selector_asset": 96,
+    "content_asset": 96,
+    "profile_count": 8,
+    "surface_count": 4,
+    "role_count": 3
+  },
+  "coverage": {
+    "expected_profile_surface_role_assets": 96,
+    "covered_profile_surface_role_assets": 96,
+    "profiles": [
+      "sensitive_independent_thinker",
+      "vigilant_perfectionist",
+      "complex_explorer_low_structure",
+      "quiet_deep_worker",
+      "connective_coordinator",
+      "sharp_exploratory_driver",
+      "orderly_supporter",
+      "overloaded_internalizer"
+    ],
+    "surfaces": [
+      "share",
+      "pdf",
+      "history",
+      "compare"
+    ],
+    "roles": [
+      "public_summary",
+      "boundary_guardrail",
+      "next_step"
+    ],
+    "missing_profile_surface_roles": []
+  },
+  "validation": {
+    "status": "pass",
+    "error_count": 0
+  },
+  "leak_scan": {
+    "status": "pass",
+    "hit_count": 0,
+    "hits": []
+  },
+  "staging_import": {
+    "status": "pass",
+    "selector_candidate_count": 96,
+    "content_candidate_count": 96,
+    "validation_error_count": 0,
+    "review_error_count": 0,
+    "leak_hit_count": 0,
+    "staging_write_performed": true
+  },
+  "negative_guarantees": {
+    "runtime_change": false,
+    "production_import": false,
+    "rollout_change": false,
+    "cms_write": false,
+    "frontend_copy": false,
+    "seo_or_search_change": false
+  },
+  "body_quality": {
+    "min_body_chars": 220,
+    "short_body_repairs": 69
+  }
+}
