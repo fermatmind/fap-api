@@ -1,0 +1,25 @@
+{
+    "schema_version": "fap.big5.result_page_v2.share_safety_candidate_normalize.review_manifest.v0_2",
+    "task": "BIG5-SHARE-SAFETY-CANDIDATE-NORMALIZE-01",
+    "human_reviewed": true,
+    "review_status": "approved_for_staging",
+    "reviewed_by": "codex_normalization_guard",
+    "reviewed_at": "2026-06-28T00:00:00Z",
+    "runtime_use": "staging_only",
+    "production_use_allowed": false,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false,
+    "approved_candidate_files": [
+        "selector_asset_candidates.jsonl",
+        "content_asset_candidates.jsonl"
+    ],
+    "review_scope": {
+        "normalization_only": true,
+        "candidate_artifacts_only": true,
+        "staging_import_deferred": true,
+        "runtime_enablement_allowed": false,
+        "frontend_copy_allowed": false,
+        "cms_or_search_allowed": false
+    }
+}

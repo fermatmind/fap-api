@@ -1,0 +1,63 @@
+{
+    "asset_batch_version": "big5_share_safety_candidates_v0_2",
+    "content_asset_count": 36,
+    "category_counts": {
+        "public_summary_card": 6,
+        "collaboration_friendly_excerpt": 6,
+        "what_i_am_working_on": 6,
+        "how_to_work_with_me": 6,
+        "safe_quote_pool": 8,
+        "surface_boundary_notice": 4
+    },
+    "forbidden_hit_count": 0,
+    "forbidden_hits": [],
+    "forbidden_scan_scope": "public_payload_only",
+    "runtime_use_all_staging_only": true,
+    "production_use_allowed_true_count": 0,
+    "ready_for_pilot_true_count": 0,
+    "ready_for_runtime_true_count": 0,
+    "ready_for_production_true_count": 0,
+    "shareable_all_true": true,
+    "reading_modes_all_share_safe": true,
+    "duplicate_title_count": 0,
+    "duplicate_body_count": 0,
+    "public_field_length_issues": [],
+    "length_stats": {
+        "title_zh": {
+            "min": 12,
+            "max": 16,
+            "expected_range": [
+                12,
+                28
+            ]
+        },
+        "share_summary_zh": {
+            "min": 24,
+            "max": 33,
+            "expected_range": [
+                24,
+                60
+            ]
+        },
+        "safe_quote_zh": {
+            "min": 24,
+            "max": 33,
+            "expected_range": [
+                24,
+                60
+            ]
+        },
+        "boundary_zh": {
+            "min": 35,
+            "max": 57,
+            "expected_range": [
+                35,
+                90
+            ]
+        }
+    },
+    "risk_wording_hit_count_before": 15,
+    "risk_wording_hit_count_after": 0,
+    "normalization_required": true,
+    "normalized_forbidden_hit_count": 0
+}

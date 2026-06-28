@@ -1,0 +1,29 @@
+{
+    "schema_version": "fap.big5.result_page_v2.share_safety_candidate_normalize.manifest.v0_2",
+    "task": "BIG5-SHARE-SAFETY-CANDIDATE-NORMALIZE-01",
+    "candidate_dir": "content_assets/big5/result_page_v2/agent_runs/share_safety_revised_v0_2_normalized",
+    "source_zip_filename": "大五人格-第五板块.zip",
+    "source_zip_sha256": "33278581a58c339ea08fed955efa29e7024395d27a37674310fb27c84f18edc4",
+    "runtime_use": "staging_only",
+    "production_use_allowed": false,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false,
+    "counts": {
+        "content_asset_candidates": 36,
+        "selector_asset_candidates": 36
+    },
+    "normalization_steps": [
+        "converted_gpt_zip_jsonl_to_backend_candidate_jsonl",
+        "removed_malformed_punctuation_and_template_tails",
+        "recalculated_body_quality",
+        "generated_share_safe_selector_assets",
+        "generated_human_review_manifest",
+        "deferred_staging_import"
+    ],
+    "source_qa_scan_summary": {
+        "forbidden_hit_count": 0,
+        "runtime_use_all_staging_only": true,
+        "production_use_allowed_true_count": 0
+    }
+}
