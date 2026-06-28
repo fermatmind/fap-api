@@ -1,0 +1,69 @@
+{
+  "counts": {
+    "content_asset_candidates": 30,
+    "domain_count": 5,
+    "domain_counts": {
+      "A": 6,
+      "C": 6,
+      "E": 6,
+      "N": 6,
+      "O": 6
+    },
+    "facet_count": 30,
+    "module_counts": {
+      "module_05_facet_reframe": 30
+    },
+    "selector_asset_candidates": 30
+  },
+  "coverage": {
+    "existing_facet_assets": 90,
+    "missing": [],
+    "new_candidate_thickening_added": true
+  },
+  "editorial_qa": {
+    "components": [
+      "high_interpretation",
+      "low_interpretation",
+      "domain_mismatch",
+      "misread",
+      "action_guidance",
+      "boundary_language"
+    ],
+    "duplicate_body_count": 0,
+    "duplicate_title_count": 0,
+    "external_copy_used": false,
+    "max_body_chars": 355,
+    "status": "pass"
+  },
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_production": false,
+  "ready_for_runtime": false,
+  "remaining_holds": [
+    "no_runtime_enablement",
+    "no_production_import",
+    "no_frontend_copy",
+    "no_cms_or_search",
+    "rendered_preview_deferred_to_later_pr"
+  ],
+  "rendered_hygiene_scan": {
+    "hit_count": 0,
+    "hits": [],
+    "status": "pass"
+  },
+  "runtime_use": "not_runtime",
+  "schema": "fap.big5.result_page_v2.facet_content_thickening_qa.v0_1",
+  "source": {
+    "agent_run_dir": "content_assets/big5/result_page_v2/agent_runs/facet_content_thickening",
+    "benchmark_rubric": "content_assets/big5/result_page_v2/qa/content_asset_benchmark_rubric/v0_1/big5_content_asset_benchmark_rubric_v0_1.json",
+    "staging_import_dir": "content_assets/big5/result_page_v2/staging_candidate_imports/facet_content_thickening"
+  },
+  "status": "pass",
+  "surface_safety": {
+    "compare": "not_targeted_in_this_pr",
+    "history": "not_targeted_in_this_pr",
+    "pdf": "candidate_only_pending_rendered_preview",
+    "result_page": "candidate_only_pending_rendered_preview",
+    "share": "not_shareable_until_rewritten_by_share_safety"
+  }
+}

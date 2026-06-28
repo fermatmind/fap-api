@@ -1,0 +1,90 @@
+{
+  "ok": true,
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_production": false,
+  "ready_for_runtime": false,
+  "repair_log": {
+    "entries": [],
+    "production_use_allowed": false,
+    "repair_required": false,
+    "runtime_use": "staging_only",
+    "schema_version": "fap.big5.result_page_v2.asset_agent.audit.v0.1",
+    "task": "staging_import_repair_log"
+  },
+  "runtime_use": "staging_only",
+  "schema_version": "fap.big5.result_page_v2.asset_agent.audit.v0.1",
+  "staging_artifacts": {
+    "content_asset_candidates.staging.jsonl": {
+      "relative_path": "content_assets/big5/result_page_v2/staging_candidate_imports/facet_content_thickening/content_asset_candidates.staging.jsonl",
+      "sha256": "f23e4c3bf9070929ba428bc61feb73cb6efd5d0af24aa4fa6d4a446b748b2aa7",
+      "size": 117824
+    },
+    "repair_log.json": {
+      "relative_path": "content_assets/big5/result_page_v2/staging_candidate_imports/facet_content_thickening/repair_log.json",
+      "sha256": "f65ef8a77a51a2b665c33ab11cad32c0adcd0f14dc9e0368381bdf0728b31c4b",
+      "size": 237
+    },
+    "selector_asset_candidates.staging.jsonl": {
+      "relative_path": "content_assets/big5/result_page_v2/staging_candidate_imports/facet_content_thickening/selector_asset_candidates.staging.jsonl",
+      "sha256": "355ee052b020e016604ed12aeb5ee6b9b556d77b3cafccbc60804995fd05ed27",
+      "size": 69516
+    },
+    "staging_import_manifest.json": {
+      "relative_path": "content_assets/big5/result_page_v2/staging_candidate_imports/facet_content_thickening/staging_import_manifest.json",
+      "sha256": "d3da8f371ed31507412e2fa9ec0a95a0dbd5d84fffccf8a8c64a28a5b4fc124a",
+      "size": 938
+    },
+    "staging_import_validation_report.json": {
+      "relative_path": "content_assets/big5/result_page_v2/staging_candidate_imports/facet_content_thickening/staging_import_validation_report.json",
+      "sha256": "9ab77c9c9342fd5bec0baebc7765d1ccb63b8dac045e1f6b52d9830ae93ed363",
+      "size": 1403
+    }
+  },
+  "staging_write_performed": true,
+  "task": "staging_import_gate",
+  "validation_report": {
+    "allow_staging_write": true,
+    "candidate_counts": {
+      "content_asset": 30,
+      "selector_asset": 30
+    },
+    "candidate_dir": "content_assets/big5/result_page_v2/agent_runs/facet_content_thickening",
+    "candidate_validation": {
+      "content_asset_candidate_count": 30,
+      "error_count": 0,
+      "errors": [],
+      "selector_asset_candidate_count": 30,
+      "status": "pass"
+    },
+    "leak_scan": {
+      "hit_count": 0,
+      "hits": [],
+      "status": "pass"
+    },
+    "negative_guarantees": {
+      "cms_write": false,
+      "database_write": false,
+      "final_result_payload_generation": false,
+      "frontend_copy_write": false,
+      "production_import_gate_change": false,
+      "release_snapshot_change": false,
+      "rollout_gate_change": false,
+      "runtime_flag_change": false
+    },
+    "production_use_allowed": false,
+    "ready_for_pilot": false,
+    "ready_for_production": false,
+    "ready_for_runtime": false,
+    "review_manifest": {
+      "errors": [],
+      "present": true,
+      "valid": true
+    },
+    "runtime_use": "staging_only",
+    "schema_version": "fap.big5.result_page_v2.asset_agent.audit.v0.1",
+    "staging_output_dir": "content_assets/big5/result_page_v2/staging_candidate_imports/facet_content_thickening",
+    "staging_write_performed": true,
+    "task": "staging_import_validation"
+  }
+}
